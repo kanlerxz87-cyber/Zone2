@@ -228,9 +228,37 @@ def check_requirements(doc: dict) -> None:
 # ---------------------------------------------------------------- site checks
 
 INTERNAL_HREF = re.compile(r'(?:href|src)="([^"#?]+)"')
+# Currency with a symbol...
 CURRENCY = re.compile(r"\$\s?\d[\d,]*\.\d{2}")
+# ...and any bare money-like figure taken from the dataset's volatile snapshot,
+# which is captured for audit but must never be rendered. The earlier check only
+# caught $-prefixed amounts, so a bare "69.97" reached the live site once.
+PRICE_KEYS = ("price_usd", "list_price_usd")
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 TRADEMARK = "trademarks of Amazon.com, Inc. or its affiliates"
+
+
+def forbidden_price_tokens() -> set[str]:
+    """Every price value in the dataset, in the forms a template might print."""
+    tokens: set[str] = set()
+    products_doc = ROOT / "data" / "products.json"
+    if not products_doc.exists():
+        return tokens
+    doc = json.loads(products_doc.read_text(encoding="utf-8"))
+    for product in doc.get("products", []):
+        snap = product.get("volatile_snapshot") or {}
+        for key in PRICE_KEYS:
+            value = snap.get(key)
+            if value is None:
+                continue
+            text = f"{value}"
+            tokens.add(text)
+            # also the integer and 2dp renderings
+            try:
+                tokens.add(f"{float(value):.2f}")
+            except (TypeError, ValueError):
+                pass
+    return {t for t in tokens if t}
 
 
 def check_site() -> None:
@@ -248,6 +276,7 @@ def check_site() -> None:
         fail("site-manifest.json lists no generated files")
         return
 
+    price_tokens = forbidden_price_tokens()
     html_files = sorted(ROOT / f for f in owned if f.endswith(".html"))
     if len(html_files) < 8:
         fail(f"only {len(html_files)} generated pages — expected at least 8")
@@ -269,12 +298,20 @@ def check_site() -> None:
         if TRADEMARK not in text:
             fail(f"{rel}: missing the Amazon trademark attribution")
 
-        # 11 — no printed prices
+        # 11a — no $-prefixed currency
         for match in CURRENCY.finditer(text):
             fail(
                 f"{rel}: prints a currency amount ({match.group(0)!r}) — this "
                 "project does not publish prices"
             )
+        # 11b — no bare price figure from the dataset's snapshot
+        for token in sorted(price_tokens):
+            if re.search(rf"(?<![\d.]){re.escape(token)}(?![\d])", text):
+                fail(
+                    f"{rel}: renders the price value {token!r} from the dataset "
+                    "snapshot — prices are captured for audit only and must not "
+                    "be published"
+                )
 
         # 12 — external Amazon links must be https; product links must be canonical /dp/
         for url in re.findall(r'href="(https://[^"]*amazon[^"]*)"', text):
