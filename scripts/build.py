@@ -1097,7 +1097,7 @@ LANDING = """<!DOCTYPE html>
   <header>
     <p class="eyebrow">Zone2</p>
     <h1>Amazon affiliate research</h1>
-    <p class="lede">The same three products, presented two ways. Pick the view you need.</p>
+    <p class="lede">The same three products, presented three ways. Pick the view you need.</p>
   </header>
 
   <div class="choices">
@@ -1118,6 +1118,15 @@ LANDING = """<!DOCTYPE html>
       research, content studio, optimization, compliance and flagged review. Product facts are
       held blank there until verified.</span>
       <span class="choice__cta">Open the dashboard &rarr;</span>
+    </a>
+
+    <a class="choice" href="zone2/index.html">
+      <span class="choice__tag">Platform build</span>
+      <span class="choice__title">Zone2 dashboard</span>
+      <span class="choice__body">The AI-powered affiliate platform build: a multi-page dashboard
+      with product research, analysis, content, compliance, executive summary, flagged review and
+      sources. Every table row carries an official source link; unverified values are left blank.</span>
+      <span class="choice__cta">Open the Zone2 dashboard &rarr;</span>
     </a>
   </div>
 
