@@ -21,12 +21,12 @@ the owning session ID, and the files each task touches.
 
 | # | Task | Status | Session | Files (scope) | Notes |
 | --- | --- | --- | --- | --- | --- |
-| T1 | Research & verify the 3 Amazon affiliate products line by line from official sources | done | ec67c431-zone2 | `data/products.json`, `data/sources.json` | Products resolved from `link.amazon` redirects; fields verified against amazon.com listings. See verification log below. |
-| T2 | Executive summary | done | ec67c431-zone2 | `content/executive-summary.md`, `site` summary page | Important details, sources, flagged items. |
-| T3 | Build static GitHub Pages site (landing + category subpages, dashboard UI, tables) | done | ec67c431-zone2 | `site/**`, `data/**`, `scripts/**` | Clean dashboard, all entries/findings in tables with source links. |
-| T4 | Verification pass — every table row has an official source link; unverifiable values blank + flagged | done | ec67c431-zone2 | `data/products.json`, `site/flagged.html` | See "Verification" section. |
-| T5 | Integration — re-verify combined data, confirm build + no broken links | in progress | ec67c431-zone2 | `site/**`, `data/**` | Running link checker and final review before deploy. |
-| T6 | Deploy to GitHub Pages + PR to main + merge + confirm deploy | unclaimed | ec67c431-zone2 | `.github/workflows/*`, `gh` | Final step. |
+| T1 | Research & verify the 3 Amazon affiliate products line by line from official sources | done | ec67c431-zone2 | `js/data.js` | Products resolved from `link.amazon` redirects; fields verified against amazon.com listings. See verification log below. |
+| T2 | Executive summary | done | ec67c431-zone2 | `content/executive-summary.md`, `executive-summary.html` | Important details, sources, flagged items. |
+| T3 | Build static GitHub Pages site (landing + category subpages, dashboard UI, tables) | done | ec67c431-zone2 | `*.html`, `css/**`, `js/**`, `scripts/**` | Clean dashboard, all entries/findings in tables with source links. |
+| T4 | Verification pass — every table row has an official source link; unverifiable values blank + flagged | done | ec67c431-zone2 | `js/data.js`, `flagged.html` | See "Verification" section. |
+| T5 | Integration — re-verify combined data, confirm build + no broken links | in progress | ec67c431-zone2 | `*.html`, `css/**`, `js/**` | Running link checker and final review before deploy. |
+| T6 | Deploy to GitHub Pages + PR to main + merge + confirm deploy | in progress | ec67c431-zone2 | `.github/workflows/*`, `gh` | Final step. Pages configured to publish repo root from `main`. |
 
 ## Verification performed (T1 / T4)
 

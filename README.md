@@ -21,13 +21,14 @@ Three Amazon affiliate products in the **Home & Kitchen — Air Fryers** niche:
 
 ## What's here
 
-- `site/` — static dashboard site (GitHub Pages). Landing page + category subpages,
-  all entries/findings in source-linked tables, plus **Flagged for Review**,
-  **Compliance**, **Sources & Verification** and **Executive Summary** pages.
-- `site/js/data.js` — the verified dataset (inline, so the site works with no backend).
-- `site/js/app.js` — renders the tables from the data.
+- `*.html`, `css/`, `js/` — the static dashboard site (GitHub Pages, served from the repo root).
+  Landing page + category subpages, all entries/findings in source-linked tables, plus
+  **Flagged for Review**, **Compliance**, **Sources & Verification** and **Executive Summary** pages.
+- `js/data.js` — the verified dataset (inline, so the site works with no backend).
+- `js/app.js` — renders the tables from the data.
 - `scripts/check_links.py` — verifies no internal link is broken (runs in CI and locally).
-- `.github/workflows/deploy.yml` — deploys `site/` to GitHub Pages on push to `main`.
+- `.github/workflows/deploy.yml` — CI gate that runs the link checker on push/PR to `main`
+  (GitHub Pages is configured in repo Settings to publish the repo root from `main`).
 - `COORDINATION.md` — shared task board, verification log and sources.
 - `content/executive-summary.md` — executive summary source.
 
@@ -39,7 +40,7 @@ flagged as unverified — never inferred. Third-party sites are not used as a va
 source. Run the link checker with:
 
 ```
-python3 scripts/check_links.py site
+python3 scripts/check_links.py .
 ```
 
 ## Build & deploy
