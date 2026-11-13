@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zone2 — AI Amazon Affiliate Marketing Platform</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <span class="brand"><span class="dot"></span> Zone2</span>
+      <nav class="nav">
+        <a href="index.html">Dashboard</a>
+        <a href="products.html">Products</a>
+        <a href="analysis.html">Analysis</a>
+        <a href="executive-summary.html">Executive Summary</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="flagged.html">Flagged for Review</a>
+        <a href="sources.html">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>AI-Powered Amazon Affiliate Marketing Platform</h1>
+      <p>Automated product research, trending &amp; high-converting product identification, pricing /
+        reviews / competition / commission analysis, and SEO-optimized content — built for the
+        <strong>Home &amp; Kitchen · Air Fryers</strong> niche. All entries are verified line by line
+        against official Amazon listings, with a source link on every row.</p>
+    </section>
+
+    <div class="disclosure">As an Amazon Associate I earn from qualifying purchases.</div>
+
+    <section class="grid cols-3" id="productCards">
+      <!-- rendered from data by app.js -->
+    </section>
+
+    <section class="card" style="margin-top:22px">
+      <h2>Product catalog — at a glance</h2>
+      <p class="muted">Every row links to the official Amazon listing it was verified against.
+        Values that could not be confirmed from an official source are shown as <em>— unverified</em>
+        and are listed on the <a href="flagged.html">Flagged for Review</a> page.</p>
+      <div class="table-wrap" id="productTable"></div>
+    </section>
+
+    <section class="grid cols-2" style="margin-top:22px">
+      <div class="card">
+        <h2>How this platform works</h2>
+        <ol>
+          <li><strong>Research</strong> — resolve affiliate links and pull product data from official Amazon listings.</li>
+          <li><strong>Analyze</strong> — assess pricing, reviews, competition and commission potential per product.</li>
+          <li><strong>Compose</strong> — generate SEO-optimized product articles, comparisons and buying guides.</li>
+          <li><strong>Publish &amp; track</strong> — manage affiliate links and monitor clicks / conversions.</li>
+          <li><strong>Optimize</strong> — continuously refine campaigns for revenue, under Amazon Associates policies.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h2>Key findings (verified)</h2>
+        <ul>
+          <li>All three products are <strong>air fryers</strong> in the Home &amp; Kitchen / Kitchen &amp; Dining category.</li>
+          <li>Each <code>link.amazon</code> short link redirects to a distinct official Amazon listing; the redirect-target ASIN is the real identifier.</li>
+          <li>The Emeril 26QT is the premium, high-review-volume option (4.3★, 18,014 ratings, $199.99).</li>
+          <li>Both Chefman units are value-oriented; the 8Qt TurboFry is a top-10 Air Fryers best-seller (#8).</li>
+          <li>Commission reference: US standard <strong>Kitchen = 4.5%</strong> (see <a href="analysis.html">Analysis</a>).</li>
+          <li>1 field set is unverified (Chefman 6Qt price/rating) — see <a href="flagged.html">Flagged for Review</a>.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>Zone2 · Amazon Affiliate Marketing Platform · Data captured 2026-11-13</div>
+    <div class="muted">As an Amazon Associate I earn from qualifying purchases. Prices and ratings are
+      snapshot values; the linked Amazon listing is the authoritative source.</div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
