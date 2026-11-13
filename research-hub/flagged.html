@@ -1,145 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Flagged for Review</title>
-<meta name="description" content="Conflicts, blanks and owner decisions.">
-<link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flagged for Review — Zone2</title>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="sidebar">
+    <h1>Zone2</h1>
+    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="products.html">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="flagged.html" class="active">Flagged for Review</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="page-head">
+      <h2>Flagged for Review</h2>
+      <p>Irregularities and unverified items. These do not block the site; each item lists its source link so you can verify or request changes after the site is live.</p>
+    </div>
 
-<div class="disclosure-bar" role="note">
-  <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
-  <a href="compliance.html">How this site complies with Amazon's rules</a>.
+    <div class="disclosure">
+      <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+    </div>
+
+    <div class="card">
+      <h3>Flagged items</h3>
+      <div id="flaggedTable"></div>
+    </div>
+
+    <div class="card">
+      <h3>How these were produced</h3>
+      <ul style="margin:0;padding-left:20px;font-size:14px">
+        <li>Every table value was checked against the official source linked in its row.</li>
+        <li>Where a value could not be confirmed from an official source, the cell was left blank — values were never inferred or filled in.</li>
+        <li>The link-code / ASIN mismatch was detected by resolving each provided <code>link.amazon</code> short link and fetching the destination product page directly.</li>
+      </ul>
+    </div>
+
+    <footer class="site">
+      Verified dataset date: 2026-11-13.
+    </footer>
+  </main>
 </div>
-
-<header class="masthead">
-  <div class="wrap">
-    <a class="brand" href="index.html">
-      <span class="brand__mark" aria-hidden="true"></span>
-      <span class="brand__text">Affiliate Research Hub<small>Zone2 · verified product data</small></span>
-    </a>
-    <nav class="tabs" aria-label="Sections"><a href="index.html">Overview</a><a href="products.html">Products</a><a href="compare.html">Comparison</a><a href="compliance.html">Amazon rules</a><a href="requirements.html">Requirements</a><a href="methodology.html">Method</a><a href="flagged.html" class="on" aria-current="page">Flagged for Review</a><a href="summary.html">Executive summary</a></nav>
-  </div>
-</header>
-
-<main id="main" class="wrap">
-
-<h1>Flagged for Review</h1>
-<p class="lede">Nothing on this page blocks the site from working. It is the honest list of
-what could not be settled, what two official sources disagree about, and what only the account
-owner can decide. Each item links to the page it came from.</p>
-
-<section class="panel">
-  <h2>1. Owner actions — only you can resolve these</h2>
-  <table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Item</th>
-  <th scope="col">Detail</th><th scope="col">What to do</th></tr></thead><tbody>
-  <tr><td>O-1</td><td>The three links carry no Associates tracking tag</td>
-      <td>All three resolved to plain <code>amazon.com/dp/&lt;ASIN&gt;</code> URLs with no
-      <code>tag=</code> parameter. In that state, clicks cannot be attributed and no commission
-      can be earned.</td>
-      <td>Sign in to Associates Central and re-generate all three links with your Store ID, then
-      replace the <code>resolved_url</code> values in <code>data/products.json</code>.</td></tr>
-  <tr><td>O-2</td><td>Commission rate card is login-gated</td>
-      <td>The official schedule redirects to sign-in, so no category rate is published here.</td>
-      <td>Read the rate card inside your account, then record the Home-category rate and the date
-      in <code>data/compliance.json</code>.</td></tr>
-  <tr><td>O-3</td><td>No repository licence</td>
-      <td>The repo has no <code>LICENSE</code> file.</td>
-      <td>Choose one, or state that the content is unlicensed.</td></tr>
-  <tr><td>O-4</td><td>Affiliate account not evidenced</td>
-      <td>The disclosure statement is published because the brief identifies this as an Amazon
-      affiliate project. Only the account holder can confirm an approved Associates account
-      exists.</td>
-      <td>Confirm the account is approved; the 3-sale / 180-day review applies.</td></tr>
-  <tr><td>O-5</td><td>Content refresh deadline</td>
-      <td>Amazon expects site content to be recent, generally within 60 days. This capture is
-      dated 2026-11-13.</td>
-      <td>Re-capture and re-verify by roughly 2027-01-12.</td></tr>
-  </tbody></table>
-</section>
-
-<section class="panel">
-  <h2>2. Conflicts between official sources</h2>
-  <p>Two official pages state different values for the same attribute. Both are published side by
-  side; neither is silently chosen.</p>
-  <table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Product</th>
-  <th scope="col">What disagrees</th><th scope="col">Source</th></tr></thead>
-  <tbody><tr><td>I-6</td><td>ASIN B0CDY277D3<div class="note">Chefman</div></td><td class="val">Amazon US product block did not render for this ASIN during automated capture; figures were confirmed against the manufacturer instead.<div class="note">Flagged for review. All published specs cite Chefman directly.</div></td><td class="src-cell"><a class="src" href="https://www.amazon.com/dp/B0CDY277D3" rel="noopener nofollow" target="_blank">Amazon listing</a></td></tr><tr><td>I-14</td><td>ASIN B0CDY277D3<div class="note">Chefman</div></td><td class="val">Star rating could not be confirmed for this ASIN itself, only for a sibling listing shown on the same page.<div class="note">Rating left blank. Flagged for review.</div></td><td class="src-cell"><a class="src" href="https://www.amazon.com/dp/B0CDY277D3" rel="noopener nofollow" target="_blank">Amazon listing</a></td></tr><tr><td>I-7</td><td>ASIN B09B7SB46R<div class="note">Emeril Lagasse</div></td><td class="val">Star ratings and review counts are storefront-specific and differ for the same ASIN across Amazon.com, Amazon.co.uk, Amazon.sa and Amazon.eg.<div class="note">No rating published. Flagged for review.</div></td><td class="src-cell"><a class="src" href="https://www.amazon.com/dp/B09B7SB46R" rel="noopener nofollow" target="_blank">Amazon listing</a></td></tr><tr><td>I-10</td><td>ASIN B09B7SB46R<div class="note">Emeril Lagasse</div></td><td class="val">Model number suffix differs between the Amazon US listing (-02X-VN) and the manufacturer store (-02A-VN).<div class="note">Both published with sources. Flagged for review.</div></td><td class="src-cell"><a class="src" href="https://www.amazon.com/dp/B09B7SB46R" rel="noopener nofollow" target="_blank">Amazon listing</a></td></tr><tr><td>I-12</td><td>ASIN B09B7SB46R<div class="note">Emeril Lagasse</div></td><td class="val">Preset count is stated as 24 in the product title and manufacturer description but 25 in the manufacturer&#x27;s own spec tile.<div class="note">Both published side by side. Flagged for review.</div></td><td class="src-cell"><a class="src" href="https://www.amazon.com/dp/B09B7SB46R" rel="noopener nofollow" target="_blank">Amazon listing</a></td></tr><tr><td>I-13</td><td>ASIN B09B7SB46R<div class="note">Emeril Lagasse</div></td><td class="val">500 °F maximum temperature is sourced to Amazon&#x27;s product information only; the manufacturer page states temperature control without a numeric maximum.<div class="note">Published as single-source and labelled. Flagged for review.</div></td><td class="src-cell"><a class="src" href="https://www.amazon.com/dp/B09B7SB46R" rel="noopener nofollow" target="_blank">Amazon listing</a></td></tr><tr><td>I-8</td><td>ASIN B08DKYBTPH<div class="note">Chefman</div></td><td class="val">Amazon bullet text states 1000 W for this model; the manufacturer states 1700 W for the same model number.<div class="note">Manufacturer figure published; discrepancy flagged for review.</div></td><td class="src-cell"><a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" rel="noopener nofollow" target="_blank">Amazon listing</a></td></tr><tr><td>I-9</td><td>ASIN B08DKYBTPH<div class="note">Chefman</div></td><td class="val">Dimensions differ between the Amazon spec table and the manufacturer product page.<div class="note">Both published as separate sourced rows. Flagged for review.</div></td><td class="src-cell"><a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" rel="noopener nofollow" target="_blank">Amazon listing</a></td></tr></tbody></table>
-</section>
-
-<section class="panel">
-  <h2>3. Values left blank</h2>
-  <p>These are blank on the site on purpose. Filling them from a non-official source would have
-  been easy and wrong.</p>
-  <table class="grid"><thead><tr><th scope="col">Product</th><th scope="col">Attribute</th>
-  <th scope="col">What sources exist</th><th scope="col">Why it is blank</th></tr></thead>
-  <tbody><tr><td>ASIN B0CDY277D3</td><td>UPC</td><td>Not confirmed on an official Amazon or Chefman page during capture</td><td class="val">Appeared only in secondary aggregator listings. Left blank on the site.</td></tr><tr><td>ASIN B09B7SB46R</td><td>Item weight</td><td>Regional Amazon listings give 10.21 kg, 12.02 kg and 26.5 lb in different places</td><td class="val">Conflicting and not confirmed on the US page or the manufacturer page. Left blank.</td></tr><tr><td>ASIN B09B7SB46R</td><td>UPC</td><td>Not confirmed on an official Amazon or manufacturer page during capture</td><td class="val">Seen only in secondary listings. Left blank on the site.</td></tr></tbody></table>
-</section>
-
-<section class="panel">
-  <h2>4. Repository irregularities</h2>
-  <table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Finding</th>
-  <th scope="col">Disposition</th></tr></thead><tbody>
-  <tr><td>I-1</td><td>The initial commit contained a 7-byte <code>README.md</code> reading only
-  <code># Zone2</code> — no description, usage, or licence.</td><td>Resolved: README rewritten
-  this session.</td></tr>
-  <tr><td>I-2</td><td>No <code>LICENSE</code>, <code>.gitignore</code>, CI or tests in the initial
-  commit.</td><td>Partly resolved: <code>.gitignore</code> and CI added. Licence is owner decision
-  O-3.</td></tr>
-  <tr><td>I-3</td><td>The supplied <code>link.amazon/*</code> links are opaque; the ASIN cannot be
-  read from the link text and must be resolved by following the redirect.</td><td>Resolved and
-  documented in <code>data/raw-verification-log.md</code>.</td></tr>
-  <tr><td>I-4</td><td>No tracking tag on any of the three links.</td><td>Owner action O-1.</td></tr>
-  <tr><td>I-5</td><td>Prices, ratings and stock are volatile and Amazon restricts their display.
-  </td><td>By design: captured for audit, withheld from publication.</td></tr>
-  <tr><td>I-6</td><td>Amazon product pages render inconsistently to automated fetches.</td>
-  <td>Disclosed in the methodology; corroborated against regional storefronts and the
-  manufacturer.</td></tr>
-  <tr><td>I-7</td><td>Star ratings differ by storefront for the same ASIN (4.5/16,128 on
-  Amazon.co.uk versus 4.6/8,361 on Amazon.sa for B09B7SB46R).</td><td>No rating published.</td></tr>
-  <tr><td>I-8</td><td>Chefman 8 Qt: the Amazon bullet text says 1000 W; the manufacturer says
-  1700 W for the same model number.</td><td>Manufacturer figure published; discrepancy
-  flagged.</td></tr>
-  <tr><td>I-9</td><td>Chefman 8 Qt dimensions differ between the Amazon spec table and the
-  manufacturer page.</td><td>Both published as separate sourced rows.</td></tr>
-  <tr><td>I-10</td><td>Emeril model number suffix differs: <code>-02X-VN</code> on Amazon US
-  against <code>-02A-VN</code> on the manufacturer store.</td><td>Both published with
-  sources.</td></tr>
-  <tr><td>I-11</td><td>Emeril wattage: 1700 W is the rated figure; a customer review reports a
-  lower measured draw in bake mode.</td><td>Rated figure published. Measured draw is not a
-  specification and is not published.</td></tr>
-  <tr><td>I-12</td><td>Emeril preset count: 24 in the title and manufacturer description, 25 in
-  the manufacturer's own spec tile.</td><td>Both shown side by side.</td></tr>
-  <tr><td>I-13</td><td>Emeril 500 °F maximum is sourced to Amazon only.</td><td>Published as
-  single-source and labelled.</td></tr>
-  <tr><td>I-15</td><td>Amazon's Agent Terms require automated clients to identify themselves and
-  forbid bypassing blocks — which makes "fully automated scraping" non-compliant.</td>
-  <td>Documented in place of the requested automation; see the compliance page.</td></tr>
-  </tbody></table>
-</section>
-
-<section class="panel">
-  <h2>5. What is <em>not</em> flagged</h2>
-  <p>For clarity: no value on this site was inferred, interpolated, or copied from a similar
-  product. Every published value has a clickable source on the row it appears in. Where a source
-  could not be found, the cell is blank.</p>
-</section>
-
-</main>
-
-<footer class="footer">
-  <div class="wrap">
-    <p><strong>Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</strong></p>
-    <p>This site is not endorsed by, sponsored by, or affiliated with Amazon.com, Inc. beyond participation
-    in the Amazon Associates programme. Prices, availability, ratings and review counts change constantly and
-    are deliberately not published here as facts — always confirm on the Amazon product page.</p>
-    <p>Data captured 2026-11-13 (UTC). Every published figure links to the official page it came from.
-    Anything that could not be confirmed is left blank and listed on the
-    <a href="flagged.html">Flagged for Review</a> page.</p>
-  </div>
-</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

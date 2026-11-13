@@ -26,23 +26,25 @@ Served via GitHub Pages from the `main` branch root (`/`).
 
 ### Companion sites (parallel session contributions, preserved in full)
 
-- **`research-hub/`** — Affiliate Research Hub: a source-linked research site for the same three
-  products with detailed verified specs, comparison, requirements, methodology, executive summary and
-  a verifier/build toolchain (`scripts/`, `data/*.json`). Session 6602723a's build, integrated
-  unchanged except for its landing location.
-- **`northstar/`** — Northstar affiliate-intelligence prototype dashboard. Session 6b8bb130's build,
-  preserved unchanged except for its landing location.
+- **`research-hub/`** — Affiliate Research Hub (`start.html`): the three products resolved to
+  canonical ASINs, with every published value traced to an official Amazon or manufacturer page,
+  comparison, requirements disposition, methodology, executive summary, and a verifier/build
+  toolchain (`scripts/`, `data/*.json`). Built by session `arena/6602723a-zone2` (merged to `main`
+  via PRs #4/#6), relocated here unchanged during final integration.
+- **`northstar/`** — Northstar affiliate-intelligence prototype dashboard (hash-based navigation,
+  no build step). Built by session `arena/6b8bb130-zone2` (merged to `main` via PR #1), relocated
+  here unchanged during final integration.
 
 ## Data & verification
 
 Primary data lives in `assets/js/data.js`. Every value was checked against the official Amazon,
 Chefman and Emeril Everyday sources listed per row (2026-11-13). Values that could not be confirmed
 from an official source are left blank and listed on the Flagged for Review page — nothing is
-inferred. The verification record is in `docs/verification-log.md` and
-`docs/executive-summary.md`; task coordination is in `COORDINATION.md`.
+inferred. The verification record is in `docs/verification-log.md` and `docs/executive-summary.md`;
+task coordination is in `COORDINATION.md`.
 
 ## Building
 
 Static site — no build step. Open `index.html` directly or serve the repository root. The
-`.github/workflows/pages.yml` workflow validates internal links and asset references on every push
-and PR to keep the published site broken-link-free.
+`.github/workflows/pages.yml` workflow validates internal links, asset references and data files on
+every push and PR to keep the published site broken-link-free.

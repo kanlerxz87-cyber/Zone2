@@ -131,7 +131,7 @@ def identifier_table(product: dict) -> str:
 
 def page(title: str, active: str, body: str, description: str = "") -> str:
     nav_items = [
-        ("index.html", "Overview", "overview"),
+        ("overview.html", "Overview", "overview"),
         ("products.html", "Products", "products"),
         ("compare.html", "Comparison", "compare"),
         ("compliance.html", "Amazon rules", "compliance"),
@@ -164,7 +164,7 @@ def page(title: str, active: str, body: str, description: str = "") -> str:
 
 <header class="masthead">
   <div class="wrap">
-    <a class="brand" href="index.html">
+    <a class="brand" href="start.html">
       <span class="brand__mark" aria-hidden="true"></span>
       <span class="brand__text">Affiliate Research Hub<small>Zone2 · verified product data</small></span>
     </a>
@@ -318,8 +318,6 @@ def build_product_page(product: dict) -> str:
     for key, label in (
         ("rating", "Star rating"),
         ("rating_count", "Rating count"),
-        ("price_usd", "Price (USD)"),
-        ("list_price_usd", "List price (USD)"),
         ("badge", "Badge"),
     ):
         snapshot_rows.append(
@@ -413,6 +411,10 @@ show them and require conditions this static site cannot meet.</p>
     <summary>Point-in-time snapshot captured {e(CAPTURED_UTC)} — retained for audit, not published as fact</summary>
     <table class="grid"><tbody>{"".join(snapshot_rows)}</tbody></table>
     <p class="note">{e(snapshot["snapshot_note"])}</p>
+    <p class="note"><strong>Prices are never rendered on this page.</strong> Amazon permits
+    price display only where Amazon serves it or it comes from the official API, with a timestamp
+    and a disclaimer. The observed figure is retained in <code>data/products.json</code> for the
+    audit trail; it is deliberately not shown here.</p>
   </details>
 </section>
 
@@ -472,8 +474,6 @@ def build_products() -> str:
         for key, label in (
             ("rating", "Star rating"),
             ("rating_count", "Rating count"),
-            ("price_usd", "Price (USD)"),
-            ("list_price_usd", "List price (USD)"),
             ("badge", "Badge"),
         ):
             snapshot_rows.append(
@@ -506,6 +506,10 @@ def build_products() -> str:
     <summary>Point-in-time snapshot captured {e(CAPTURED_UTC)} — not published as fact</summary>
     <table class="grid"><tbody>{"".join(snapshot_rows)}</tbody></table>
     <p class="note">{e(snapshot["snapshot_note"])}</p>
+    <p class="note"><strong>Prices are never rendered on this page.</strong> Amazon permits
+    price display only where Amazon serves it or it comes from the official API, with a timestamp
+    and a disclaimer. The observed figure is retained in <code>data/products.json</code> for the
+    audit trail; it is deliberately not shown here.</p>
   </details>
   <h3>Official sources for this product</h3>
   <ul class="srclist">
@@ -1075,6 +1079,112 @@ def markdown_to_html(text: str) -> str:
     return "\n".join(out)
 
 
+LANDING = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zone2 — Amazon affiliate research</title>
+<meta name="description" content="Two views of the same three Amazon affiliate products: a verified, source-linked dataset, and a research dashboard.">
+<link rel="stylesheet" href="assets/landing.css">
+</head>
+<body>
+<div class="disclosure-bar" role="note">
+  <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+  <a href="compliance.html">How this site complies with Amazon's rules</a>.
+</div>
+<main>
+  <header>
+    <p class="eyebrow">Zone2</p>
+    <h1>Amazon affiliate research</h1>
+    <p class="lede">The same three products, presented two ways. Pick the view you need.</p>
+  </header>
+
+  <div class="choices">
+    <a class="choice choice--primary" href="overview.html">
+      <span class="choice__tag">Verified dataset</span>
+      <span class="choice__title">Affiliate Research Hub</span>
+      <span class="choice__body">Three products resolved to canonical Amazon ASINs. Three products,
+      every published value traced to an official Amazon or manufacturer page. Values that could
+      not be confirmed are left blank and listed for review. Includes the full Amazon compliance
+      position, a line-by-line disposition of the brief, and a flag list.</span>
+      <span class="choice__cta">Open the verified hub &rarr;</span>
+    </a>
+
+    <a class="choice" href="index.html">
+      <span class="choice__tag">Workspace</span>
+      <span class="choice__title">Northstar dashboard</span>
+      <span class="choice__body">The research workspace built in parallel: overview, product
+      research, content studio, optimization, compliance and flagged review. Product facts are
+      held blank there until verified.</span>
+      <span class="choice__cta">Open the dashboard &rarr;</span>
+    </a>
+  </div>
+
+  <section class="note-panel">
+    <h2>Where the two views differ</h2>
+    <p>The dataset resolved all three submitted short links to their canonical Amazon product
+    pages and verified specifications against the manufacturer. The dashboard treats product
+    identity as unconfirmed and leaves it blank.</p>
+    <p><strong>Both apply the same rule:</strong> nothing is asserted without an official source.
+    Where the sources disagree, the disagreement is published rather than smoothed over.</p>
+    <p class="fineprint">Start with the
+      <a href="overview.html">verified hub</a>,
+      read the <a href="summary.html">executive summary</a>, or go straight to
+      <a href="flagged.html">what is flagged for review</a>.</p>
+  </section>
+</main>
+<footer>
+  <p><strong>Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</strong></p>
+  <p>Prices, availability, ratings and review counts change constantly and are deliberately not
+  published here as facts. Always confirm on the Amazon product page.</p>
+</footer>
+</body>
+</html>
+"""
+
+LANDING_CSS = """:root{
+  --ink:#0f172a; --ink-2:#3f4b5f; --ink-3:#6b7787;
+  --line:#e3e8ef; --accent:#0b5fff; --accent-ink:#0847c4;
+  --bg:#f7f9fc; --card:#fff; --radius:14px;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}
+.disclosure-bar{background:#0f172a;color:#e8edf5;font-size:14px;padding:9px 20px;text-align:center}
+.disclosure-bar strong{color:#fff}
+.disclosure-bar a{color:#9cc0ff}
+main{max-width:1000px;margin:0 auto;padding:56px 20px 40px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-ink);
+  font-weight:700;margin:0 0 10px}
+h1{font-size:40px;line-height:1.15;letter-spacing:-.025em;margin:0 0 14px}
+.lede{font-size:18px;color:var(--ink-2);margin:0 0 40px;max-width:60ch}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:34px}
+@media(max-width:780px){.choices{grid-template-columns:1fr}h1{font-size:31px}}
+.choice{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);color:var(--ink);
+  transition:border-color .15s,box-shadow .15s,transform .15s}
+.choice:hover{border-color:var(--accent);box-shadow:0 8px 24px rgba(11,95,255,.12);
+  transform:translateY(-2px);text-decoration:none}
+.choice--primary{border-color:#c9d9ff;background:linear-gradient(180deg,#fbfdff,#fff)}
+.choice__tag{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;
+  color:var(--accent-ink)}
+.choice__title{font-size:21px;font-weight:650;letter-spacing:-.01em}
+.choice__body{font-size:14.5px;color:var(--ink-2);flex:1}
+.choice__cta{font-size:14px;font-weight:620;color:var(--accent);margin-top:6px}
+.note-panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--shadow)}
+.note-panel h2{font-size:18px;margin:0 0 12px}
+.note-panel p{color:var(--ink-2);max-width:80ch;margin:0 0 12px}
+.fineprint{font-size:13.5px;color:var(--ink-3)}
+footer{max-width:1000px;margin:0 auto;padding:0 20px 50px;font-size:13px;color:var(--ink-3)}
+footer p{max-width:90ch}
+"""
+
+
+
 # ---------------------------------------------------------------- css
 
 CSS = """:root{
@@ -1313,7 +1423,7 @@ def main() -> None:
     (SITE / "assets").mkdir(parents=True, exist_ok=True)
 
     pages = {
-        "index.html": (
+        "overview.html": (
             "Affiliate Research Hub — three Amazon products, verified",
             "overview",
             build_index(),
@@ -1381,6 +1491,10 @@ def main() -> None:
         )
 
     (SITE / "assets" / "style.css").write_text(CSS, encoding="utf-8")
+    (SITE / "assets" / "landing.css").write_text(LANDING_CSS, encoding="utf-8")
+    # Root index.html is owned by the dashboard session's plain-HTML site.
+    # This generator must not write it. The landing page is start.html.
+    (SITE / "start.html").write_text(LANDING, encoding="utf-8")
 
     # a 404 that keeps people on the site
     (SITE / "404.html").write_text(
@@ -1392,7 +1506,7 @@ def main() -> None:
   <h1>Page not found</h1>
   <p class="hero__lede">That address does not exist on this site.</p>
   <div class="hero__actions">
-    <a class="btn btn--primary" href="index.html">Back to the overview</a>
+    <a class="btn btn--primary" href="index.html">Back to the start</a>
     <a class="btn" href="products.html">Browse products</a>
   </div>
 </div>
@@ -1409,7 +1523,8 @@ def main() -> None:
     # up without ever touching hand-written files such as README.md or data/.
     owned = sorted(
         [*pages.keys(), *[slug(p) for p in PRODUCTS["products"]],
-         "404.html", ".nojekyll", "assets/style.css"]
+         "404.html", ".nojekyll", "start.html",
+         "assets/style.css", "assets/landing.css"]
     )
     MANIFEST.write_text(
         json.dumps(
