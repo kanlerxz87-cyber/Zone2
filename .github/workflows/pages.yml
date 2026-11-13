@@ -1,9 +1,13 @@
-name: Build and verify
+name: Build, verify and deploy
 
+# Final integration workflow (session 78c94859).
+#
 # GitHub Pages for this repository is configured as a legacy build from branch
 # `main`, path `/`. This workflow guarantees that nothing broken reaches `main`:
-# it validates the primary Zone2 site, its internal navigation and asset
-# references, and the preserved companion sites (research-hub/, northstar/).
+#   - the primary Zone2 platform (repo root) is complete and its internal links resolve
+#   - the companion sites (research-hub/, northstar/, zone2/) are complete
+#   - no page prints a price, and every page carries the static affiliate disclosure
+#   - all data files parse
 
 on:
   push:
@@ -13,13 +17,23 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  verify:
-    name: Verify site files, links and data
+  build:
+    name: Build and verify
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
       - name: Primary site files exist
         run: |
@@ -29,7 +43,7 @@ jobs:
           done
           echo "Primary site files present"
 
-      - name: Internal links and asset references resolve
+      - name: Internal links and asset references resolve (all sites)
         run: |
           python3 - <<'PY'
           from html.parser import HTMLParser
@@ -40,8 +54,7 @@ jobs:
               problems = []
               class P(HTMLParser):
                   def __init__(self):
-                      super().__init__()
-                      self.refs = []
+                      super().__init__(); self.refs = []
                   def handle_starttag(self, tag, attrs):
                       a = dict(attrs)
                       if tag == "script" and "src" in a:
@@ -54,15 +67,15 @@ jobs:
                   p = P()
                   p.feed((root / page).read_text(encoding="utf-8"))
                   for ref in p.refs:
-                      target = (root / ref).resolve()
-                      if not target.is_file():
+                      if not (root / ref).resolve().is_file():
                           problems.append(f"{root_dir}/{page}: missing {ref}")
               return problems
 
           problems = []
           problems += check(".", ["index.html","products.html","analysis.html","content.html","compliance.html","tracking.html","flagged.html","404.html"])
-          problems += check("research-hub", [f.name for f in Path("research-hub").glob("*.html")])
+          problems += check("research-hub", sorted(f.name for f in Path("research-hub").glob("*.html")))
           problems += check("northstar", ["index.html"])
+          problems += check("zone2", sorted(f.name for f in Path("zone2").glob("*.html")))
           if problems:
               print("\n".join(problems))
               raise SystemExit(1)
@@ -73,15 +86,56 @@ jobs:
         run: |
           node --check assets/js/data.js && node --check assets/js/app.js && echo "JS syntax OK"
 
-      - name: Companion data files parse
+      - name: Data files parse
         run: |
           python3 - <<'PY'
           import glob, json
-          for f in sorted(glob.glob('research-hub/data/*.json')):
+          for f in sorted(glob.glob('research-hub/data/*.json')) + \
+                   sorted(glob.glob('zone2/data/*.json')) + \
+                   ['research-hub/site-manifest.json']:
               json.load(open(f, encoding='utf-8'))
               print(f'ok   {f}')
-          for f in ['research-hub/site-manifest.json']:
-              json.load(open(f, encoding='utf-8'))
-              print(f'ok   {f}')
-          print("Companion data files parse")
           PY
+
+      - name: No page prints a price and every page discloses
+        run: |
+          python3 - <<'PY'
+          import glob, re, sys
+          DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+          bad = []
+          pages = sorted(glob.glob('*.html')) + \
+                  sorted(glob.glob('research-hub/*.html')) + \
+                  sorted(glob.glob('northstar/*.html')) + \
+                  sorted(glob.glob('zone2/*.html'))
+          for f in pages:
+              t = open(f, encoding='utf-8').read()
+              if DISCLOSURE not in t:
+                  bad.append(f'{f}: missing disclosure')
+              if re.search(r'\$\s?\d[\d,]*\.\d{2}', t):
+                  bad.append(f'{f}: prints a price')
+          if bad:
+              print('\n'.join(bad))
+              sys.exit(1)
+          print(f'{len(pages)} pages: disclosure present, no prices printed')
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

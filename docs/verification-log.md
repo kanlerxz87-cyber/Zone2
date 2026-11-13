@@ -59,17 +59,17 @@ The codes act as opaque short-link tokens, not ASINs. Flagged for review.
 | B0CDY277D3 | Temperature range | 200–450 °F (95–235 °C, as stated by Chefman) | same |
 | B0CDY277D3 | Dimensions / weight | 13.38 × 11.81 × 10.63 in · 13.3 lb / 6.03 kg | same |
 | B0CDY277D3 | Control / certification / warranty | Digital touchscreen · cETL · 1 year | same |
-| B0CDY277D3 | Manufacturer-site price | $108.00 USD (Chefman.com — manufacturer site, not an Amazon price) | same |
+| B0CDY277D3 | Manufacturer-site price | $108.00 USD (Chefman.com) — verified, deliberately not published on the site (no-price rule) | same |
 | B09B7SB46R (Emeril Lagasse 26QT) | Model | 4-00675-02A-VN | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 |
 | B09B7SB46R | Capacity | 26 qt / 24.6 L | same |
 | B09B7SB46R | Dimensions / warranty | 16.9"D × 15.8"W × 14.8"H · 1 year | same |
 | B09B7SB46R | Cooking functions | **Conflict:** Amazon title 24 vs manufacturer spec tile 25 — both published | Amazon title + Emeril Everyday spec tile |
-| B09B7SB46R | Manufacturer-site price | $199.99 USD (Emeril Everyday — manufacturer site, not an Amazon price) | Emeril Everyday |
+| B09B7SB46R | Manufacturer-site price | $199.99 USD (Emeril Everyday) — verified, deliberately not published on the site (no-price rule) | Emeril Everyday |
 | B08DKYBTPH (Chefman 8 Qt TurboFry) | Model / capacity | RJ38-SQSS-8T · 8 qt / 7.57 L | https://chefman.com/products/turbofry-touch-air-fryer-1 |
 | B08DKYBTPH | Temperature range / presets | 200–400 °F · 4 presets (fries, chicken, fish, meat) | same |
 | B08DKYBTPH | Power | **Conflict:** Chefman 1700 W/120 V vs Amazon bullet 1000 W/120 V — both published | Chefman + Amazon |
 | B08DKYBTPH | Dimensions | **Conflict:** Chefman 15.4 × 12.6 × 13.5 in vs Amazon 12.75"D × 13.5"W × 10"H — both published | Chefman + Amazon |
-| B08DKYBTPH | Manufacturer-site price | $108.00 USD (Chefman.com — manufacturer site, not an Amazon price) | Chefman |
+| B08DKYBTPH | Manufacturer-site price | $108.00 USD (Chefman.com) — verified, deliberately not published on the site (no-price rule) | Chefman |
 
 All three manufacturer pages were re-fetched and confirmed during final integration. Manufacturer prices
 are labelled as manufacturer-site prices on the site and are not presented as Amazon prices.

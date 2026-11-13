@@ -141,14 +141,6 @@ const SPECS = [
     source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
     sourceLabel: "Chefman official product page",
   },
-  {
-    pid: "p1",
-    attribute: "Manufacturer-site price",
-    value: "$108.00 USD (Chefman.com; manufacturer site, not an Amazon price)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
   // Product 2 — Emeril Lagasse 26QT French Door (B09B7SB46R)
   {
     pid: "p2",
@@ -223,14 +215,6 @@ const SPECS = [
     source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
     sourceLabel: "Emeril Everyday official store",
   },
-  {
-    pid: "p2",
-    attribute: "Manufacturer-site price",
-    value: "$199.99 USD (Emeril Everyday; manufacturer site, not an Amazon price)",
-    status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
-  },
   // Product 3 — Chefman 8 Qt TurboFry (B08DKYBTPH)
   {
     pid: "p3",
@@ -301,14 +285,6 @@ const SPECS = [
     pid: "p3",
     attribute: "Warranty",
     value: "1 year (Chefman assurance)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p3",
-    attribute: "Manufacturer-site price",
-    value: "$108.00 USD (Chefman.com; manufacturer site, not an Amazon price)",
     status: "verified",
     source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
     sourceLabel: "Chefman official product page",
@@ -642,9 +618,9 @@ const FLAGGED_ROWS = [
     source: "https://www.amazon.com/dp/B08DKYBTPH",
   },
   {
-    item: "Price — all three products (UNVERIFIED)",
+    item: "Price — all three products (UNVERIFIED / not published)",
     detail:
-      "List price could not be confirmed from an official source via automated verification (Amazon bot protection; policy restricts price display to served links or Creators API / PA API). Left blank in all tables.",
+      "Amazon list prices could not be confirmed from an official source via automated verification (Amazon bot protection; policy restricts Amazon price display to served links or Creators API / PA API). Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but are deliberately not published on this site, in line with the program's price-display restrictions. Left blank in all tables.",
     source: "https://www.amazon.com/dp/B0CDY277D3",
   },
   {
