@@ -1,0 +1,567 @@
+{
+  "snapshot_date_utc": "2026-11-13",
+  "audit_session": "5ba0cb60",
+  "policy_note": "Prices and availability are intentionally withheld (see associates-compliance.md C-05). Commission rates are unverified (C-14).",
+  "products": [
+    {
+      "asin": "B0CDY277D3",
+      "supplied_link": "https://link.amazon/B04G1MEwY",
+      "canonical_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "fields": {
+        "title": {
+          "value": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+          "status": "verified",
+          "section": "Page title",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "brand": {
+          "value": "Chefman",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "manufacturer": {
+          "value": "Chefman",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "model_name": {
+          "value": "Turbo Fry® Touch",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "model_number": {
+          "value": "RJ38-SQPF-3TDB-2W",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "part_number": {
+          "value": "RJ38-SQPF-3TDB-2W",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "upc": {
+          "value": "810087845025",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "item_type": {
+          "value": "Dual-Basket Air-Fryer",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "capacity": {
+          "value": "6 liters",
+          "status": "conflict",
+          "conflict_with": "Size: 6 Quart",
+          "section": "Product information > Measurements",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "dimensions_dwh": {
+          "value": "13.38\"D x 11.81\"W x 10.63\"H",
+          "status": "verified",
+          "section": "Product information > Measurements",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "weight": {
+          "value": "13.3 pounds",
+          "status": "verified",
+          "section": "Product information > Measurements",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "max_temp": {
+          "value": "450 °F",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "min_temp": {
+          "value": "93 °C",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "wattage": {
+          "value": "1700 watts",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "voltage": {
+          "value": "120 volts",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "special_features": {
+          "value": "+ 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "material": {
+          "value": "Metal, Plastic",
+          "status": "verified",
+          "section": "Product information > Materials & Care",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "color": {
+          "value": "Black, Gray",
+          "status": "conflict",
+          "conflict_with": "Title: Black",
+          "section": "Product information > Additional details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "warranty": {
+          "value": "1-year assurance provided by Chefman",
+          "status": "verified",
+          "section": "About this item",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "rating": {
+          "value": "4.2",
+          "scale": "out of 5",
+          "status": "verified",
+          "section": "Product information > Customer Reviews",
+          "review_flag": "C-09",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "rating_count": {
+          "value": 4859,
+          "status": "verified",
+          "section": "Product information > Customer Reviews",
+          "review_flag": "C-09",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "bsr": {
+          "value": [
+            "#5,644 in Kitchen & Dining",
+            "#35 in Air Fryers"
+          ],
+          "status": "verified",
+          "section": "Product information > Best Sellers Rank",
+          "note": "snapshot only; no trend",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "recommended_uses": {
+          "value": "Air Fry, Cook, Defrost, Reheat, Roast",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        "price": {
+          "value": null,
+          "status": "withheld",
+          "policy": "Associates Participation Requirements section 2(b)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        "availability": {
+          "value": null,
+          "status": "withheld",
+          "policy": "Associates Participation Requirements section 2(b)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        "commission_rate": {
+          "value": null,
+          "status": "unverified",
+          "note": "Official rate card not accessible (C-14)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/schedule"
+        }
+      }
+    },
+    {
+      "asin": "B08DKYBTPH",
+      "supplied_link": "https://link.amazon/B00hJ57DV",
+      "canonical_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "fields": {
+        "title": {
+          "value": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+          "status": "verified",
+          "section": "Page title",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "brand": {
+          "value": "Chefman",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "manufacturer": {
+          "value": "Chefman",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "model_name": {
+          "value": "Square Air Fryer",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "model_number": {
+          "value": "Large Air Fryer",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "note": "descriptive text, not a model code",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "part_number": {
+          "value": "RJ38-SQSS-8T",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "upc": {
+          "value": "816458024518",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "item_type": {
+          "value": "Air fryers",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "capacity": {
+          "value": "8 quarts",
+          "status": "verified",
+          "section": "Product information > Measurements",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "dimensions_dwh": {
+          "value": "12.75\"D x 13.5\"W x 10\"H",
+          "status": "verified",
+          "section": "Product information > Measurements",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "weight": {
+          "value": "12.8 pounds",
+          "status": "verified",
+          "section": "Product information > Measurements",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "max_temp": {
+          "value": "400 °F",
+          "status": "conflict",
+          "conflict_with": "Title: 450°F Hi-Fry Option",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "min_temp": {
+          "value": "94 °C",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "wattage": {
+          "value": "1700 watts",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "voltage": {
+          "value": "120 volts",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "air_frying_technology": {
+          "value": "Rapid-air technology",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "special_features": {
+          "value": "Automatic Shut-Off, LED Shake Reminder, Programmable",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "material": {
+          "value": "Plastic, Stainless Steel",
+          "status": "verified",
+          "section": "Product information > Materials & Care",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "dishwasher_safe": {
+          "value": "Dishwasher Safe",
+          "status": "verified",
+          "section": "Product information > Materials & Care",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "color": {
+          "value": "Stainless steel",
+          "status": "verified",
+          "section": "Product information > Additional details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "warranty": {
+          "value": "1-Year Limited Warranty",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "recommended_uses": {
+          "value": "Air Fry, Bake, Dehydrate, Reheat, Roast",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "rating": {
+          "value": "4.4",
+          "scale": "out of 5",
+          "status": "verified",
+          "section": "Product information > Customer Reviews",
+          "review_flag": "C-09",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "rating_count": {
+          "value": 16861,
+          "status": "verified",
+          "section": "Product information > Customer Reviews",
+          "review_flag": "C-09",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "bsr": {
+          "value": [
+            "#537 in Kitchen & Dining",
+            "#8 in Air Fryers"
+          ],
+          "status": "verified",
+          "section": "Product information > Best Sellers Rank",
+          "note": "snapshot only; no trend",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        "price": {
+          "value": null,
+          "status": "withheld",
+          "policy": "Associates Participation Requirements section 2(b)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        "availability": {
+          "value": null,
+          "status": "withheld",
+          "policy": "Associates Participation Requirements section 2(b)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        "commission_rate": {
+          "value": null,
+          "status": "unverified",
+          "note": "Official rate card not accessible (C-14)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/schedule"
+        }
+      }
+    },
+    {
+      "asin": "B09B7SB46R",
+      "supplied_link": "https://link.amazon/B02NbDxp3",
+      "canonical_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "fields": {
+        "title": {
+          "value": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven",
+          "status": "verified",
+          "section": "Page title",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "brand": {
+          "value": "Emeril",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "manufacturer": {
+          "value": "Emeril Lagasse",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "model_name": {
+          "value": "Extra Large 26 QT French Door Air Fryer Oven",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "model_number": {
+          "value": "4-00675-02X-VN",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "part_number": {
+          "value": "4-00675-02X-VN",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "upc": {
+          "value": "752356835682",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "item_type": {
+          "value": "Air Fryer",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "configuration": {
+          "value": "Air Fryer Toaster Oven Combo with 24 Functions and 7 Accessories",
+          "status": "conflict",
+          "conflict_with": "Included Components lists 6 items",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "included_components": {
+          "value": [
+            "Rack",
+            "Bake Pan",
+            "Drip Tray",
+            "Crisper Basket",
+            "Rotisserie Spit",
+            "Fetch Tool"
+          ],
+          "status": "conflict",
+          "conflict_with": "Description says 7 premium accessories",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "capacity": {
+          "value": "24.6 liters",
+          "status": "verified",
+          "section": "Product information > Measurements",
+          "note": "about 26 US quarts; matches the 26QT name",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "size": {
+          "value": "Extra Large",
+          "status": "verified",
+          "section": "Product information > Measurements",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "dimensions_dwh": {
+          "value": "16.9\"D x 15.8\"W x 14.8\"H",
+          "status": "verified",
+          "section": "Product information > Measurements",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "weight": {
+          "value": null,
+          "status": "unverified",
+          "note": "not listed on the page",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "max_temp": {
+          "value": "500 °F",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "min_temp": {
+          "value": "75 °F",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "wattage": {
+          "value": "1700 watts",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "voltage": {
+          "value": "120 volts",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "special_features": {
+          "value": "Automatic Shut-Off, Programmable, Temperature Control, Timer",
+          "status": "verified",
+          "section": "Product information > Features & Specs",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "air_frying_technology": {
+          "value": "True",
+          "status": "unverified",
+          "note": "placeholder-like value; not usable",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "material": {
+          "value": "Stainless Steel",
+          "status": "verified",
+          "section": "Product information > Materials & Care",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "color": {
+          "value": "Stainless Steel",
+          "status": "verified",
+          "section": "Product information > Additional details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "warranty": {
+          "value": null,
+          "status": "unverified",
+          "note": "page links a warranty PDF but states no duration",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "recommended_uses": {
+          "value": "Air Fry, Bake, Broil, Dehydrate, Roast",
+          "status": "verified",
+          "section": "Product information > Item details",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "rating": {
+          "value": "4.3",
+          "scale": "out of 5",
+          "status": "verified",
+          "section": "Product information > Customer Reviews",
+          "review_flag": "C-09",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "rating_count": {
+          "value": 18317,
+          "status": "verified",
+          "section": "Product information > Customer Reviews",
+          "review_flag": "C-09",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "bsr": {
+          "value": [
+            "#1,078 in Kitchen & Dining",
+            "#15 in Air Fryers"
+          ],
+          "status": "verified",
+          "section": "Product information > Best Sellers Rank",
+          "note": "snapshot only; no trend",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        "price": {
+          "value": null,
+          "status": "withheld",
+          "policy": "Associates Participation Requirements section 2(b)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        "availability": {
+          "value": null,
+          "status": "withheld",
+          "policy": "Associates Participation Requirements section 2(b)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        "commission_rate": {
+          "value": null,
+          "status": "unverified",
+          "note": "Official rate card not accessible (C-14)",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/schedule"
+        }
+      }
+    }
+  ]
+}
