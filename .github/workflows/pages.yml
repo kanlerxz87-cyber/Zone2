@@ -139,7 +139,8 @@ jobs:
           import glob, re, sys
           DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
           bad = []
-          for f in sorted(glob.glob('*.html')):
+          pages = sorted(glob.glob('*.html')) + sorted(glob.glob('zone2/*.html'))
+          for f in pages:
               t = open(f, encoding='utf-8').read()
               if DISCLOSURE not in t:
                   bad.append(f'{f}: missing disclosure')
@@ -148,7 +149,7 @@ jobs:
           if bad:
               print('\n'.join(bad))
               sys.exit(1)
-          print(f'{len(glob.glob("*.html"))} pages: disclosure present, no prices printed')
+          print(f'{len(pages)} pages: disclosure present, no prices printed')
           PY
 
       # Stage only what should be public. Uploading `path: .` would publish
@@ -172,8 +173,12 @@ jobs:
               dest = out / rel
               dest.parent.mkdir(parents=True, exist_ok=True)
               shutil.copy2(src, dest)
+          # Zone2 platform dashboard (preserves a third session's build in a subfolder)
+          zone2 = root / 'zone2'
+          if zone2.is_dir():
+              shutil.copytree(zone2, out / 'zone2', dirs_exist_ok=True)
           # Pages serves _site/ as the site root
-          print('staged:', sorted(p.name for p in out.rglob('*') if p.is_file()))
+          print('staged:', sorted(str(p.relative_to(out)) for p in out.rglob('*') if p.is_file()))
           PY
 
       - name: Assert the staged bundle is complete
@@ -189,6 +194,7 @@ jobs:
               'product-B0CDY277D3.html', 'product-B09B7SB46R.html',
               'product-B08DKYBTPH.html',
               'assets/style.css', 'assets/landing.css', '.nojekyll',
+              'zone2/index.html', 'zone2/assets/styles.css', 'zone2/assets/main.js',
           ]
           missing = [r for r in required if not (out / r).is_file()]
           if missing:
