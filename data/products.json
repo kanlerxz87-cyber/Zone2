@@ -1,0 +1,114 @@
+{
+  "$comment": "Product research data. Rule: any field that cannot be confirmed from an official source is null and flagged unverified. Never inferred.",
+  "verified_on": "2026-11-13",
+  "session": "181863ad",
+  "products": [
+    {
+      "id": "P1",
+      "supplied_link": "https://link.amazon/B04G1MEwY",
+      "code": "B04G1MEwY",
+      "code_length": 9,
+      "asin_format_valid": false,
+      "name": null,
+      "price": null,
+      "currency": null,
+      "rating": null,
+      "review_count": null,
+      "category": null,
+      "best_seller_rank": null,
+      "availability": null,
+      "commission_rate": null,
+      "status": "unverified",
+      "flag_ids": ["F-01", "F-04", "F-05", "F-06", "F-07", "F-08"],
+      "checks": [
+        {"url": "https://www.amazon.com/dp/B04G1MEwY", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.co.uk/dp/B04G1MEwY", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.de/dp/B04G1MEwY", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.in/dp/B04G1MEwY", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.ca/dp/B04G1MEwY", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.co.jp/dp/B04G1MEwY", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.com/s?k=B04G1MEwY", "result": "No results for your search query"},
+        {"url": "https://link.amazon/B04G1MEwY", "result": "Redirected to unrelated page (plpRedirect=mhFallback), not a product page for this code"}
+      ]
+    },
+    {
+      "id": "P2",
+      "supplied_link": "https://link.amazon/B02NbDxp3",
+      "code": "B02NbDxp3",
+      "code_length": 9,
+      "asin_format_valid": false,
+      "name": null,
+      "price": null,
+      "currency": null,
+      "rating": null,
+      "review_count": null,
+      "category": null,
+      "best_seller_rank": null,
+      "availability": null,
+      "commission_rate": null,
+      "status": "unverified",
+      "flag_ids": ["F-02", "F-04", "F-05", "F-06", "F-07", "F-08"],
+      "checks": [
+        {"url": "https://www.amazon.com/dp/B02NbDxp3", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.co.uk/dp/B02NbDxp3", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.de/dp/B02NbDxp3", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.in/dp/B02NbDxp3", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.ca/dp/B02NbDxp3", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.co.jp/dp/B02NbDxp3", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.com/s?k=B02NbDxp3", "result": "No results for your search query"},
+        {"url": "https://link.amazon/B02NbDxp3", "result": "Redirected to unrelated page (plpRedirect=mhFallback), not a product page for this code"}
+      ]
+    },
+    {
+      "id": "P3",
+      "supplied_link": "https://link.amazon/B00hJ57DV",
+      "code": "B00hJ57DV",
+      "code_length": 9,
+      "asin_format_valid": false,
+      "name": null,
+      "price": null,
+      "currency": null,
+      "rating": null,
+      "review_count": null,
+      "category": null,
+      "best_seller_rank": null,
+      "availability": null,
+      "commission_rate": null,
+      "status": "unverified",
+      "flag_ids": ["F-03", "F-04", "F-05", "F-06", "F-07", "F-08"],
+      "checks": [
+        {"url": "https://www.amazon.com/dp/B00hJ57DV", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.co.uk/dp/B00hJ57DV", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.de/dp/B00hJ57DV", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.in/dp/B00hJ57DV", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.ca/dp/B00hJ57DV", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.co.jp/dp/B00hJ57DV", "result": "HTTP 404 Page Not Found"},
+        {"url": "https://www.amazon.com/s?k=B00hJ57DV", "result": "No results for your search query"},
+        {"url": "https://link.amazon/B00hJ57DV", "result": "Redirected to unrelated page (plpRedirect=mhFallback), not a product page for this code"}
+      ]
+    }
+  ],
+  "program_facts": {
+    "commission_rate_card": {
+      "source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "rates": [
+        {"category": "Luxury Beauty, Luxury Stores Beauty, Amazon Explore", "rate": "10.00%"},
+        {"category": "Digital Music, Physical Music, Handmade, Digital Videos", "rate": "5.00%"},
+        {"category": "Physical Books, Kitchen, Automotive", "rate": "4.50%"},
+        {"category": "Amazon Fire Tablet Devices, Amazon Kindle Devices, Luxury Stores Fashion, Apparel, Amazon Cloud Cam Devices, Fire TV Edition Smart TVs, Amazon Fire TV Devices, Amazon Echo Devices, Ring Devices, Watches, Jewelry, Luggage, Shoes, and Handbags & Accessories", "rate": "4.00%"},
+        {"category": "Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins", "rate": "3.00%"},
+        {"category": "PC, PC Components, DVD & Blu-Ray", "rate": "2.50%"},
+        {"category": "Televisions, Digital Video Games", "rate": "2.00%"},
+        {"category": "Amazon Fresh, Physical Video Games & Video Game Consoles, Grocery, Health & Personal Care", "rate": "1.00%"},
+        {"category": "Gift Cards; Wireless Service Plans; Alcoholic Beverages; Digital Kindle Products purchased as a subscription; Vehicles – Leasing and Sales; Pet Prescription Medications; Food prepared and delivered from a restaurant; Amazon Appstore, Prime Now, or Amazon Pay Places", "rate": "0.00%"},
+        {"category": "Coach", "rate": "0.00%"},
+        {"category": "All Other Categories", "rate": "4.00%"}
+      ]
+    },
+    "payment_timing": {"value": "Approximately 60 days after the end of the month in which the commission income was earned", "source": "https://affiliate-program.amazon.com/"},
+    "session_window": {"value": "24 hours from the click; cart completion allowed up to 89 days after initial click-through (Program Policies)", "source": "https://affiliate-program.amazon.com/help/operating/policies"},
+    "cart_window_help": {"value": "Items added to cart within 24 hours; cart usually expires after 90 days", "source": "https://affiliate-program.amazon.com/help/node/topic/G9SMD8TQHFJ7728F"},
+    "commission_basis": {"value": "Calculated on the sale price, not the list price, of each qualifying item", "source": "https://affiliate-program.amazon.com/help/node/topic/GWJ4AHCH7U5LCL86"},
+    "max_advertised_rate": {"value": "Up to 10% in associate commissions from qualifying purchases and programs", "source": "https://affiliate-program.amazon.com/"}
+  }
+}

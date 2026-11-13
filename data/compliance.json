@@ -1,0 +1,103 @@
+{
+  "$comment": "Amazon Associates compliance requirements. Every row cites an official source URL fetched on 2026-11-13.",
+  "verified_on": "2026-11-13",
+  "session": "181863ad",
+  "requirements": [
+    {
+      "id": "C-01",
+      "requirement": "Site-level disclosure statement",
+      "detail": "You must clearly and prominently state, on your Site: \"As an Amazon Associate I earn from qualifying purchases.\"",
+      "source_title": "Associates Program Operating Agreement, Section 5",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "status_on_this_site": "Implemented — shown in the footer of every page"
+    },
+    {
+      "id": "C-02",
+      "requirement": "Link-level disclosure must be clear and conspicuous",
+      "detail": "Link-level disclosure must be Clear (e.g. \"(paid link)\", \"#ad\", \"#CommissionsEarned\") and Conspicuous (near the link/review, easy to notice).",
+      "source_title": "Associates Help — Why do I have to identify myself as an Associate?",
+      "source": "https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98",
+      "status_on_this_site": "Implemented — affiliate links (when published) will carry a clear label"
+    },
+    {
+      "id": "C-03",
+      "requirement": "Use official Special Link formats only",
+      "detail": "Links must properly use the special \"tagged\" link formats Amazon provides. Documented simple format: http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID",
+      "source_title": "Associates Help — How do I build a simple text link to a specific item on Amazon?",
+      "source": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+      "status_on_this_site": "Blocked pending Tracking ID — see flag F-12"
+    },
+    {
+      "id": "C-04",
+      "requirement": "Session / cookie rules",
+      "detail": "Session begins at the click and ends at the first of: 24 hours elapsed, an order placed, or a click through another Associate's Special Link. Cart purchases must complete no later than 89 days after the initial click-through (Program Policies).",
+      "source_title": "Associates Program Policies — Commission Income Statement",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "status_on_this_site": "Documented on the Analysis page"
+    },
+    {
+      "id": "C-05",
+      "requirement": "Commission basis",
+      "detail": "Commission income is calculated on the sale price, not the list price, of each qualifying item.",
+      "source_title": "Associates Help — What items qualify for commission income, and how are the commissions calculated?",
+      "source": "https://affiliate-program.amazon.com/help/node/topic/GWJ4AHCH7U5LCL86",
+      "status_on_this_site": "Documented on the Analysis page"
+    },
+    {
+      "id": "C-06",
+      "requirement": "Payment timing",
+      "detail": "Commission income is paid approximately 60 days after the end of the month in which it was earned.",
+      "source_title": "Amazon Associates — FAQ (How do I earn in this program?)",
+      "source": "https://affiliate-program.amazon.com/",
+      "status_on_this_site": "Documented on the Analysis page"
+    },
+    {
+      "id": "C-07",
+      "requirement": "FTC endorsement disclosure (U.S.)",
+      "detail": "Disclosures must be placed so they are hard to miss, use simple and clear language (e.g. \"advertisement\", \"ad\", \"sponsored\"), and be in the same language as the endorsement.",
+      "source_title": "FTC — Disclosures 101 for Social Media Influencers",
+      "source": "https://www.ftc.gov/tips-advice/business-center/guidance/disclosures-101-social-media-influencers",
+      "status_on_this_site": "Implemented — disclosure in footer + per-link labels"
+    },
+    {
+      "id": "C-08",
+      "requirement": "FTC Endorsement Guides — material connection",
+      "detail": "If there is a connection between the endorser and the marketer that a significant minority of consumers would not expect, that connection should be disclosed clearly and conspicuously. Guides revised in 2023.",
+      "source_title": "FTC — The FTC's Endorsement Guides: What People Are Asking",
+      "source": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "status_on_this_site": "Implemented — disclosure policy documented"
+    },
+    {
+      "id": "C-09",
+      "requirement": "Program participation / site quality bar",
+      "detail": "Sites must have robust original content (rule of thumb: at least 10 posts), be publicly available, and website content should be recent (generally within the last 60 days). At least 3 qualified sales are required within the first 180 days of sign-up.",
+      "source_title": "Associates Help — Application Review Process",
+      "source": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "status_on_this_site": "Content plan published (Buying Guides); product-specific posts pending verified products"
+    },
+    {
+      "id": "C-10",
+      "requirement": "API access prerequisites (for automation)",
+      "detail": "Creators API requires: Associates enrollment, at least 10 qualifying sales within the past 30 days, registration through Associates Central, and generated API credentials. Only the primary account owner can sign up.",
+      "source_title": "Creators API — Introduction / Register for Creators API",
+      "source": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "status_on_this_site": "Blocked until Associates account qualifies — see flag F-10"
+    },
+    {
+      "id": "C-11",
+      "requirement": "PA-API 5 deprecation",
+      "detail": "PA-API 5 is deprecated and replaced by the Creators API; legacy calls receive HTTP 403 AccessDeniedException.",
+      "source_title": "Creators API — PA-API 5 Deprecation Notice",
+      "source": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
+      "status_on_this_site": "Architecture uses Creators API only"
+    },
+    {
+      "id": "C-12",
+      "requirement": "Disclosure must match the medium",
+      "detail": "The disclosure must be made in the medium in which the recommendation was provided (text, voice, or both).",
+      "source_title": "Associates Help — Why do I have to identify myself as an Associate?",
+      "source": "https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98",
+      "status_on_this_site": "Implemented for web text"
+    }
+  ]
+}

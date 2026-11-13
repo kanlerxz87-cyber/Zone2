@@ -44,12 +44,53 @@ source. Values that could not be confirmed from an official source are left **bl
 and flagged on the **Flagged for Review** page — never inferred.
 
 - T1: repo content at baseline = `README.md` only (7 bytes, `# Zone2`). No code, no data,
-  no config, no license. Irregularity: `https://link.amazon/<ASIN>` URLs supplied in the
-  brief are NOT valid Amazon domains (official short link host is `amzn.to`; product pages
-  are `amazon.com/dp/<ASIN>`). Flagged for review; ASINs extracted and verified individually.
-- T2/T3/T4–T8: sources recorded per-row in `data/*.json` and rendered on the site with
+  no config, no license. Irregularities: (a) supplied `https://link.amazon/<code>` URLs do
+  not resolve to product pages for the codes (they fall back to unrelated Amazon pages via
+  `plpRedirect=mhFallback`; root returns 403); (b) all three supplied codes are 9 characters
+  while an official ASIN is 10 characters. All flagged. Review record: `docs/repo-review.md`.
+- T2: all three products **unverified** — 18/18 official `/dp/` URLs return 404 across
+  amazon.com/.co.uk/.de/.in/.ca/.co.jp; official site search returns "No results" for each
+  code; exact-match public web searches find no listings. Product attributes left null in
+  `data/products.json` and blank+flagged in `products.html`.
+- T3: compliance matrix (`data/compliance.json`, `compliance.html`) — 12 requirements, each
+  with an official source URL (OA §5, Program Policies, disclosure help, FTC guides,
+  Creators API docs, application-review help).
+- T4–T8: site pages built (10 HTML pages + `assets/`); sources recorded per-row with
   clickable official links; consolidated in `executive-summary.html` and
-  `flagged-for-review.html`.
+  `flagged-for-review.html` (flags F-01 … F-13, all non-blocking).
+- T9: automated verification `scripts/verify_site.py` — PASS: 10 pages, 205 table rows,
+  498 links, 0 failures (every data row has an external official source link; disclosure
+  present on every page; internal links resolve; JSON valid; unverified fields null).
+- T10: integration — local HTTP smoke test: all 14 site assets return 200; internal link
+  check green; no broken links.
+
+### Key official sources (fetched live 2026-11-13)
+
+| Topic | URL |
+|---|---|
+| Commission rate card | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| Operating Agreement (§5 disclosure) | https://affiliate-program.amazon.com/help/operating/agreement |
+| Program Policies (24h session / 89-day cart) | https://affiliate-program.amazon.com/help/operating/policies |
+| Disclosure help (clear & conspicuous) | https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98 |
+| Link format + ASIN = 10-digit code | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| ASIN = 10-character code (2nd source) | https://sell.amazon.com/blog/fba-new-selection-program |
+| SiteStripe | https://affiliate-program.amazon.com/help/node/topic/GJMMT7G4C8K4Y3AY |
+| Earnings report metrics | https://affiliate-program.amazon.com/help/node/topic/GCDWWRFEMW3Q2TE2 |
+| Application review (≥3 sales/180d, ≥10 posts) | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
+| Creators API intro (≥10 sales/30d) | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction |
+| PA-API 5 deprecation | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation |
+| FTC Disclosures 101 | https://www.ftc.gov/tips-advice/business-center/guidance/disclosures-101-social-media-influencers |
+| FTC Endorsement Guides FAQ | https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking |
+| Google SEO starter guide | https://developers.google.com/search/docs/fundamentals/seo-starter-guide |
+| GitHub repo / Pages config | https://api.github.com/repos/kanlerxz87-cyber/Zone2/pages |
+
+### Irregularities flagged (all non-blocking, published at `flagged-for-review.html`)
+
+F-01…F-03 invalid code length (9 vs 10) · F-04 18×404 · F-05 site search no results ·
+F-06 supplied short links fall back to unrelated pages · F-07 product attributes blank ·
+F-08 per-product commission unknown · F-09 rate schedule requires sign-in · F-10 Creators API
+prerequisites unmet · F-11 PA-API 5 deprecated · F-12 no Tracking ID · F-13 baseline repo
+had no product data.
 
 ## Request log (cross-session file requests)
 
