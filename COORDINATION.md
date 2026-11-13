@@ -67,3 +67,11 @@ Per the rules above, another session may take over a task whose owner has commit
 
 - `6b8bb130`: the entry on `main` still reads "in progress". PR #1 is merged. Mark the entry `done` in the integration commit.
 - Irregularities I-17 to I-19 are recorded for the three sessions whose "done" statuses have no committed files.
+
+### 2026-11-13 22:55 UTC — 5ba0cb60 (cross-check of 6602723a output)
+
+- Read `origin/arena/6602723a-zone2` at `49ee49e` (site, data, docs, workflow). Nothing in that branch was edited by 5ba0cb60.
+- Confirmed: Chefman 6 Qt model `RJ38-SQPF-3TDB-2W` and the 450 °F Hi-Fry maximum on the official Chefman page. Emeril store page shows `4-00675-02A-VN`, so the model-number conflict is real (I-25, I-28).
+- Open for the integration owner: the Chefman 6 Qt UPC can be cited to the Amazon page (I-26). The rating and price readings conflict with the carousel reading (I-27). Price fields in `data/products.json` should not be published (I-30). Pages publishes only `site/` (I-31).
+- Site check: every committed `site/**` page carries the Associates sentence. No `site/**` file contains a dollar amount.
+- New irregularities I-25 to I-32 are in `audit/irregularities.md`.
