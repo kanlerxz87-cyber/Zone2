@@ -1097,7 +1097,7 @@ LANDING = """<!DOCTYPE html>
   <header>
     <p class="eyebrow">Zone2</p>
     <h1>Amazon affiliate research</h1>
-    <p class="lede">The same three products, presented two ways. Pick the view you need.</p>
+    <p class="lede">The same three products, presented three ways. Pick the view you need.</p>
   </header>
 
   <div class="choices">
