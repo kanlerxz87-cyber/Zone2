@@ -141,5 +141,22 @@ written by different sessions).
 | PR #4 (verified hub + integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/4> — merged |
 | PR #6 (price-leak fix) | <https://github.com/kanlerxz87-cyber/Zone2/pull/6> — merged |
 | PR #5 (Zone2 platform build + final integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/5> — merged |
+| PR #7 (session `arena/ec67c431-zone2` integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/7> — merged |
+| PR #8 (Zone2 workspace in landing generator + verifier) | <https://github.com/kanlerxz87-cyber/Zone2/pull/8> — merged |
+| PR #9 (scope Pages leak check to top-level data/ and scripts/) | <https://github.com/kanlerxz87-cyber/Zone2/pull/9> — merged |
 | Final integration session | `arena/34836ddd-zone2` |
-| Pages deploy | `.github/workflows/pages.yml` deploys `_site/` (dashboard + verified hub + `zone2/`) from `main` via GitHub Actions. |
+
+## Deploy record
+
+- The "Build, verify and deploy" workflow now passes on `main` (build, verify, bundle assertion and
+  deploy steps all green) and deploys the curated `_site/` bundle (Northstar dashboard + verified
+  hub + `zone2/`).
+- GitHub Pages is **live** at **<https://kanlerxz87-cyber.github.io/Zone2/>**. The live landing
+  (`start.html`) presents all three deliverables; `zone2/index.html` serves the AI-powered
+  platform dashboard.
+- **Deploy source note:** the Pages source is the legacy `main /` root deploy (the repository's
+  existing configuration). Switching it to the GitHub Actions source requires repository-settings
+  permissions the automation token does not have (HTTP 403), so the legacy root deploy remains the
+  live source. It deploys the full repo root (including `zone2/`), which serves the complete site
+  correctly. The Actions workflow still builds and validates the curated bundle on every push to
+  `main`. CDN caching can delay the appearance of an updated page by a short period.
