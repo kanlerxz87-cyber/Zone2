@@ -1,90 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zone2 — AI-Powered Amazon Affiliate Marketing Platform</title>
-<meta name="description" content="Automated Amazon affiliate marketing research, analysis, content, and compliance dashboard.">
-<link rel="stylesheet" href="assets/styles.css">
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f7fb"><meta name="description" content="A transparent, policy-aware affiliate research dashboard."><title>Northstar · Affiliate Intelligence</title><link rel="stylesheet" href="styles.css"></head>
 <body>
-
-<header class="site-header">
-  <div class="bar">
-    <div class="brand"><span class="logo">Z2</span> Zone2 Affiliate Platform</div>
-    <nav class="main">
-      <a href="index.html">Dashboard</a>
-      <a href="products.html">Products</a>
-      <a href="analysis.html">Analysis</a>
-      <a href="content.html">Content</a>
-      <a href="compliance.html">Compliance</a>
-      <a href="executive-summary.html">Executive Summary</a>
-      <a href="flagged.html">Flagged for Review</a>
-      <a href="sources.html">Sources</a>
-      <a href="northstar/index.html">Northstar workspace</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <h1 class="page-title">AI-Powered Amazon Affiliate Marketing Platform</h1>
-  <p class="page-sub">Automates product research, trending and high-converting product identification, pricing / reviews / competition / commission analysis, SEO-optimized product articles, comparisons and buying guides, affiliate link management, click &amp; conversion tracking, and continuous campaign optimization — built around Amazon Associates compliance and disclosure requirements.</p>
-
-  <div class="notice">
-    <strong>⚠ Verification status: products supplied are UNVERIFIED</strong>
-    The three supplied product codes (<code>B04G1MEwY</code>, <code>B02NbDxp3</code>, <code>B00hJ57DV</code>) do not meet Amazon's official 10-character ASIN format and have no record in any official source checked. All product data is left blank and flagged — nothing was inferred. See the <a href="flagged.html">Flagged for Review</a> page.
-  </div>
-
-  <div class="grid cols-3" style="margin-bottom:16px;">
-    <div class="card"><div class="kpi">3<small>Products supplied</small></div></div>
-    <div class="card"><div class="kpi">0<small>Confirmed from official sources</small></div></div>
-    <div class="card"><div class="kpi">5<small>Irregularities flagged</small></div></div>
-  </div>
-
-  <h2 style="margin-top:30px;">Platform capabilities</h2>
-  <div class="grid cols-2">
-    <div class="card feature"><div class="ico">🔍</div><div><h3>Automated product research</h3><p>Continuously scans the Amazon catalog for trending and high-converting products, organized into a reviewable pipeline with per-row source links.</p></div></div>
-    <div class="card feature"><div class="ico">📊</div><div><h3>Data-driven analysis</h3><p>Analyzes pricing, reviews, competition and commission potential for each candidate product — only from official, verified data sources.</p></div></div>
-    <div class="card feature"><div class="ico">✍️</div><div><h3>SEO content generation</h3><p>Generates SEO-optimized product articles, comparisons and buying guides. Content is produced only for verified products.</p></div></div>
-    <div class="card feature"><div class="ico">🔗</div><div><h3>Link &amp; conversion tracking</h3><p>Publishes and manages affiliate links, tracks clicks and conversions, and continuously optimizes campaigns to maximize revenue.</p></div></div>
-    <div class="card feature"><div class="ico">🛡️</div><div><h3>Compliance-first design</h3><p>Built to the Amazon Associates Operating Agreement, Program Policies and FTC disclosure requirements. See the <a href="compliance.html">Compliance</a> page.</p></div></div>
-    <div class="card feature"><div class="ico">📋</div><div><h3>Verification-first data</h3><p>Every table row carries an official source link. Unconfirmed values are left blank and flagged as unverified — never inferred.</p></div></div>
-  </div>
-
-  <h2 style="margin-top:30px;">Current products — status at a glance</h2>
-  <div id="overview-table"></div>
-  <p style="color:var(--muted);font-size:.88rem;margin-top:10px;">Full details on the <a href="products.html">Products</a> page. All product-specific fields are blank until verified from an official source.</p>
-
-  <h2 style="margin-top:30px;">Where to look</h2>
-  <ul class="clean">
-    <li><a href="executive-summary.html">Executive Summary</a> — important details of the project and findings.</li>
-    <li><a href="flagged.html">Flagged for Review</a> — irregularities and unverified items with source links.</li>
-    <li><a href="sources.html">Sources</a> — every source used, for manual review.</li>
-    <li><a href="northstar/index.html">Northstar workspace</a> — alternate research dashboard (preserved from session arena/6b8bb130-zone2).</li>
-  </ul>
-</main>
-
-<footer class="site-footer">
-  <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. Some links on this site may be affiliate links; this site earns commissions on qualifying purchases made through them.</div>
-  <div class="inner">Zone2 — Amazon Affiliate Marketing Platform. Built with verification-first methodology. © <span id="year">2026</span>.</div>
-</footer>
-
-<script src="assets/main.js"></script>
-<script>
-Zone2.renderTable("overview-table", {
-  columns: ["#", "Supplied code", "Code length (official ASIN = 10)", "Status", "Source"],
-  rows: [
-    { "#": "1", "Supplied code": "<code>B04G1MEwY</code>", "Code length (official ASIN = 10)": "9 <span class='badge flag'>invalid format</span>",
-      "Status": "<span class='badge flag'>Unverified</span>",
-      "Source": "<a class='ext' href='https://www.amazon.com/dp/B04G1MEwY'>amazon.com/dp/B04G1MEwY</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format reference</a></span>" },
-    { "#": "2", "Supplied code": "<code>B02NbDxp3</code>", "Code length (official ASIN = 10)": "9 <span class='badge flag'>invalid format</span>",
-      "Status": "<span class='badge flag'>Unverified</span>",
-      "Source": "<a class='ext' href='https://www.amazon.com/dp/B02NbDxp3'>amazon.com/dp/B02NbDxp3</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format reference</a></span>" },
-    { "#": "3", "Supplied code": "<code>B00hJ57DV</code>", "Code length (official ASIN = 10)": "9 <span class='badge flag'>invalid format</span>",
-      "Status": "<span class='badge flag'>Unverified</span>",
-      "Source": "<a class='ext' href='https://www.amazon.com/dp/B00hJ57DV'>amazon.com/dp/B00hJ57DV</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format reference</a></span>" }
-  ]
-});
-</script>
-</body>
-</html>
+<div class="disclosure-strip" role="note"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. <a href="compliance.html">Compliance details</a> &middot; <a href="zone2/index.html">Zone2 platform dashboard</a> &middot; <a href="start.html">Switch site</a></div>
+<div class="shell">
+<aside class="sidebar"><a class="brand" href="#overview"><span class="brand-mark">N</span><span>northstar<small>Affiliate intelligence</small></span></a><div class="side-label">WORKSPACE</div><nav id="nav"><a class="nav-link active" href="#overview" data-page="overview"><span>◫</span> Overview</a><a class="nav-link" href="#products" data-page="products"><span>▦</span> Product research <b>03</b></a><a class="nav-link" href="#content" data-page="content"><span>✧</span> Content studio</a><a class="nav-link" href="#optimization" data-page="optimization"><span>⌁</span> Optimization</a><a class="nav-link" href="#compliance" data-page="compliance"><span>✓</span> Compliance</a><a class="nav-link" href="#flagged" data-page="flagged"><span>⚑</span> Flagged for review <b class="warn-count">03</b></a></nav><div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Research mode</strong><small>Source-first · no invented metrics</small></div></div></aside>
+<main class="main"><header class="topbar"><div class="crumb">Workspace <span>/</span> <strong id="crumb">Overview</strong></div><div class="top-right"><span class="live-tag"><i></i> Static preview</span><div class="avatar">N</div></div></header>
+<div class="content" id="app"></div><footer>Independent research workspace <span>·</span> Product facts intentionally left blank until verified against official listings.</footer></main></div>
+<script src="data.js"></script><script src="app.js"></script>
+</body></html>

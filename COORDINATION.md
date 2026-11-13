@@ -1,68 +1,141 @@
 # COORDINATION.md — Shared Task Board
 
 Repository: `kanlerxz87-cyber/Zone2`
-Sessions: `arena/34836ddd-zone2`, `arena/6b8bb130-zone2`
-Date: 2026-11-13
+Sessions: `arena/34836ddd-zone2`, `arena/6b8bb130-zone2`, `arena/6602723a-zone2` (S-6602723A)
+**Last updated:** 2026-11-13 (UTC)
 
-## Protocol notes
+This is the shared task board for all agent sessions working on this repository. Read it before
+starting work. Claim a task by writing your session ID and file scope here, then commit and push
+the claim immediately. Never start a task another session has claimed.
 
-- This is the shared task board. Each task lists status, owning session, and file scope.
-- Statuses: `unclaimed`, `in progress`, `done`, `needs review`.
-- `needs review` = item is published on the "Flagged for Review" page and does not block anything.
-- Shared outputs (site index/navigation, combined table data) are changed only by the final integration session once all other tasks are done.
+---
 
-## Tasks
+## Session registry
 
-| # | Task | Status | Session | File scope | Notes |
-|---|------|--------|---------|------------|-------|
-| 1 | Repo review | done | arena/34836ddd-zone2 | none | Repo contained only `README.md` (# Zone2) and an initial commit `f577167`. No existing site, data, or code to preserve. |
-| 2 | Product verification (3 ASINs) | done | arena/34836ddd-zone2 | `data/verification.json` | **Irregularity flagged:** codes B04G1MEwY, B02NbDxp3, B00hJ57DV are each 9 characters; Amazon officially requires a unique 10-character ASIN. No official source could confirm any product identity. All product-specific values left blank + unverified. Sources below. |
-| 3 | Executive summary | done | arena/34836ddd-zone2 | `docs/EXECUTIVE_SUMMARY.md`, `executive-summary.html` | Platform scope, products, verification findings, compliance posture, flagged irregularities. |
-| 4 | Site build — primary multi-page dashboard | done | arena/34836ddd-zone2 | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `executive-summary.html`, `flagged.html`, `sources.html`, `assets/styles.css`, `assets/main.js` | Clean dashboard-style static site. Tables carry per-row source links; unverified cells blank + flagged. Root landing page. |
-| 5 | Site build — source-first research dashboard (Northstar workspace) | done | arena/6b8bb130-zone2 | `northstar/index.html`, `northstar/styles.css`, `northstar/app.js`, `northstar/data.js` | Hash-based single-page dashboard (Overview, Product research, Content studio, Optimization, Compliance, Flagged for review). Same no-inference policy. Preserved verbatim under `northstar/` by the integration session. |
-| 6 | GitHub Pages workflow | done | arena/6b8bb130-zone2 | `.github/workflows/pages.yml` | Validates static assets and internal navigation, then publishes repo root to GitHub Pages on pushes to `main`. Updated by integration session to validate the combined site. |
-| 7 | Final integration & verification | done | arena/34836ddd-zone2 (integration) | all site files | Merged both sessions' work; re-verified combined data line by line; confirmed site builds with no broken links. Conflict resolution logged below. |
-| 8 | PR, merge, GitHub Pages deploy | done | arena/34836ddd-zone2 | none | PR #5 created and merged into `main`; GitHub Pages deploys via the workflow. See record below. |
+| Session ID | Branch | Role | Status |
+|---|---|---|---|
+| `arena/6b8bb130-zone2` | merged to `main` via PR #1 | Dashboard prototype (Northstar) | merged |
+| `arena/6602723a-zone2` (S-6602723A) | merged to `main` via PR #4 | Verified dataset, generated hub, first integration | merged |
+| `arena/34836ddd-zone2` | PR #5 | AI-powered platform build (multi-page dashboard) + final integration | merged |
 
-## Merge conflict log (task 7)
+## Task board
 
-- `git merge origin/main` into `arena/34836ddd-zone2` produced add/add conflicts in `COORDINATION.md` and `index.html` (both sessions created these files at the same paths).
-- **Resolution (without discarding either session's work):**
-  - The other session's dashboard (`index.html`, `styles.css`, `app.js`, `data.js`) was moved intact into the `northstar/` subfolder; its relative asset references still resolve, and it is linked from the primary dashboard navigation.
-  - The root `index.html` is the primary multi-page dashboard (session `arena/34836ddd-zone2`), now with a nav link to the preserved Northstar workspace.
-  - `COORDINATION.md` was rewritten as the single shared board above, recording both claims.
-  - `README.md` and `.github/workflows/pages.yml` were updated by the integration session to describe/validate the combined site.
+Legend: `unclaimed` · `in progress` · `done` · `needs review`.
+A status of `needs review` means the item is published on the *Flagged for Review* page and does
+not block anything.
 
-## Verification log (task 2 — line by line)
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T1 | Task board + session registry | done | S-6602723A | `COORDINATION.md` |
+| T2 | Resolve the three affiliate short links to canonical ASINs | done | S-6602723A | `data/raw-verification-log.md` |
+| T3 | Verify product facts against official sources | done | S-6602723A | `data/products.json`, `data/sources.json` |
+| T4 | Amazon Associates compliance requirements | done | S-6602723A | `data/compliance.json` |
+| T5 | Executive summary | done | S-6602723A | `docs/executive-summary.md` |
+| T6 | Automated platform requirements matrix | done | S-6602723A | `data/requirements.json` |
+| T7 | Verified hub site (landing + category subpages) | done | S-6602723A | generated `*.html`, `assets/**` |
+| T8 | Link + data integrity check in CI | done | S-6602723A | `scripts/verify.py`, `.github/workflows/**` |
+| T9 | Dashboard prototype (Northstar) | done | `arena/6b8bb130-zone2` | `index.html`, `app.js`, `data.js`, `styles.css` |
+| T10 | Final integration: merge, re-verify, PR, deploy | done | `arena/34836ddd-zone2` | `COORDINATION.md`, `README.md`, `.github/workflows/**`, `start.html`, `index.html` |
+| T11 | AI-powered platform build (multi-page dashboard) | done | `arena/34836ddd-zone2` | `zone2/**` |
 
-Sources checked for each identifier `B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV`:
+## File ownership (non-overlapping scopes)
 
-1. **Amazon product page** — `https://www.amazon.com/dp/<code>` returns Amazon's "Page Not Found" (Dogs of Amazon) for all three. Links: [https://www.amazon.com/dp/B04G1MEwY](https://www.amazon.com/dp/B04G1MEwY), [https://www.amazon.com/dp/B02NbDxp3](https://www.amazon.com/dp/B02NbDxp3), [https://www.amazon.com/dp/B00hJ57DV](https://www.amazon.com/dp/B00hJ57DV)
-2. **Google exact-match search** for `"B04G1MEwY"` — approx. **0 results**; Google states the string matches no known result. [https://www.google.com/search?q=%22B04G1MEwY%22](https://www.google.com/search?q=%22B04G1MEwY%22)
-3. **Bing exact-match search** for each code — no results referencing the codes (only unrelated pages returned). [https://www.bing.com/search?q=%22B04G1MEwY%22](https://www.bing.com/search?q=%22B04G1MEwY%22)
-4. **Wayback Machine CDX index** — no captures of `amazon.com/dp/B04G1MEwY` (or `www.` form). [http://web.archive.org/cdx/search/cdx?url=amazon.com/dp/B04G1MEwY&output=json](http://web.archive.org/cdx/search/cdx?url=amazon.com/dp/B04G1MEwY&output=json)
-5. **CamelCamelCamel (Amazon US price tracker)** — all three "not yet in our database" / invalid identifier. [B04G1MEwY](https://camelcamelcamel.com/product/B04G1MEwY), [B02NbDxp3](https://camelcamelcamel.com/product/B02NbDxp3), [B00hJ57DV](https://camelcamelcamel.com/product/B00hJ57DV)
-6. **ASIN format (official)** — Amazon: ASIN is a "unique 10-character alphanumeric code" assigned to every product; examples `B07FZ8S74R`, `0451524934`. [https://sell.amazon.com/blog/what-is-an-asin](https://sell.amazon.com/blog/what-is-an-asin)
-7. **Character-count check** — all three provided codes measure **9 characters**; valid ASIN examples measure 10.
+| Scope | Owner | Notes |
+|---|---|---|
+| `index.html`, `app.js`, `data.js`, `styles.css` | `arena/6b8bb130-zone2` | Northstar dashboard, preserved at repo root. |
+| `overview.html`, `products.html`, `compare.html`, `compliance.html`, `requirements.html`, `methodology.html`, `flagged.html`, `summary.html`, `product-*.html`, `404.html`, `start.html`, `assets/**` | S-6602723A | generated; listed in `site-manifest.json`. |
+| `data/**`, `docs/**`, `scripts/**` | S-6602723A | verified dataset and tooling. |
+| `zone2/**` | `arena/34836ddd-zone2` | multi-page platform dashboard, preserved in a subfolder. |
+| `COORDINATION.md`, `README.md`, `.github/workflows/**` | final integration session | task board, combined docs, merged CI. |
 
-### Irregularities flagged for review
+`site-manifest.json` records exactly which files `scripts/build.py` owns. The generator cleans up
+only files on that list, so it can never delete the dashboard's hand-written files, `zone2/**`, or
+anything in `data/`, `docs/` or `scripts/`.
 
-- **I-1:** `B04G1MEwY` is 9 characters — not a valid 10-character ASIN. Product identity unverified.
-- **I-2:** `B02NbDxp3` is 9 characters — not a valid 10-character ASIN. Product identity unverified.
-- **I-3:** `B00hJ57DV` is 9 characters — not a valid 10-character ASIN. Product identity unverified.
-- **I-4:** `https://link.amazon/B04G1MEwY` did not resolve to a stable product page when fetched; it redirected to an unrelated product listing (ASIN `B0CDY277D3`, a CHEFMAN air fryer) via Amazon's fallback behavior — the short link is not a reliable identifier for the intended product.
-- **I-5:** No official source (Amazon, Google, Bing, Wayback Machine, CamelCamelCamel) has any record of the three codes; all product-specific fields (title, brand, category, price, rating, reviews, BSR, commission) are therefore **blank and marked unverified** in the site tables.
+## Change log
 
-## Compliance sources (tasks 4, 5)
+### `arena/6b8bb130-zone2` (merged via PR #1)
+Built Northstar, a static source-first dashboard. Product fields left blank/Unverified because
+the three short links could not be resolved to product pages. Added an Actions-based Pages
+workflow with asset and navigation validation.
 
-- Associates Program Operating Agreement (updated Oct 15, 2025): [https://affiliate-program.amazon.com/help/operating/agreement](https://affiliate-program.amazon.com/help/operating/agreement)
-- Associates Program Policies (updated Apr 14, 2026, incl. Commission Income Statement): [https://affiliate-program.amazon.com/help/operating/policies](https://affiliate-program.amazon.com/help/operating/policies)
-- Participation Requirements: [https://affiliate-program.amazon.com/help/operating/participation/](https://affiliate-program.amazon.com/help/operating/participation/)
-- Disclosure requirements ("As an Amazon Associate I earn from qualifying purchases." + FTC clear & conspicuous): [https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98](https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98)
-- FTC Endorsement Guides (referenced by Amazon): [https://www.ftc.gov/tips-advice/business-center/guidance/ftcs-endorsement-guides-what-people-are-asking#affiliate](https://www.ftc.gov/tips-advice/business-center/guidance/ftcs-endorsement-guides-what-people-are-asking#affiliate)
+### S-6602723A (`arena/6602723a-zone2`, merged via PR #4)
+Resolved all three short links to canonical ASINs by following Amazon's redirects
+(B0CDY277D3, B09B7SB46R, B08DKYBTPH) and verified specifications against Amazon product pages and
+the manufacturers' own pages. Built the verified hub, the verifier guard, and integrated the
+Northstar dashboard (kept at `index.html`, hub at `overview.html`, `start.html` as landing).
+Encountered and resolved a merge conflict with PR #1 without discarding either site; fixed the
+dashboard workflow to stage only publishable files into `_site/`.
 
-## PR / merge record (task 8)
+### `arena/34836ddd-zone2` (PR #5)
+Built an independent AI-powered platform dashboard (multi-page: dashboard, products, analysis,
+content, compliance, executive summary, flagged review, sources). Discovered the three supplied
+codes are each **9 characters** and do not meet Amazon's official 10-character ASIN format; left
+all product-specific fields blank and flagged. Merged into `main` as the final integration,
+preserving all three sessions' work.
 
-- PR: [https://github.com/kanlerxz87-cyber/Zone2/pull/5](https://github.com/kanlerxz87-cyber/Zone2/pull/5)
-- Merge result: merged into `main` via `gh pr merge 5 --merge` on 2026-11-13 (after integration conflict resolution; first attempt failed with a non-clean merge commit, resolved via the merge in task 7).
-- GitHub Pages: deployed from `main` via `.github/workflows/pages.yml` (GitHub Actions source). Site URL recorded in the Actions run once the workflow completes.
+## Merge conflict and resolution (final integration, `arena/34836ddd-zone2`)
+
+**What happened.** While PR #5 was open, sessions merged PR #1 and PR #4 into `main`, each adding
+a full site at the repo root. Merging `origin/main` into `arena/34836ddd-zone2` produced conflicts
+in `index.html`, `products.html`, `compliance.html`, `flagged.html`, `README.md`,
+`COORDINATION.md` and `.github/workflows/pages.yml` (same paths written by different sessions).
+
+**Resolution — nothing either session built was discarded:**
+
+| File | Resolution |
+|---|---|
+| `index.html` | Kept the Northstar dashboard (main's version, with its disclosure fix); added a link to the Zone2 dashboard. |
+| `products.html`, `compliance.html`, `flagged.html` | Kept the verified hub's versions (main). The Zone2 equivalents moved to `zone2/`. |
+| `zone2/**` | The whole Zone2 platform build moved intact into the `zone2/` subfolder; its relative links still resolve. |
+| `start.html` | Landing page extended with a third choice card linking to the Zone2 dashboard. |
+| `README.md` | Rewritten to document all three deliverables with per-session attribution. |
+| `COORDINATION.md` | This file — all three sessions' records retained, plus this resolution log. |
+| `.github/workflows/pages.yml` | Kept the merged workflow; added staging of `zone2/**` into `_site/zone2/` and extended the disclosure/no-price check and bundle assertion to cover `zone2/*.html`. |
+
+## Verification protocol used
+
+1. Every table row carries a `source` link to an official page (Amazon product page, the Amazon
+   Associates Operating Agreement, or the manufacturer's own site).
+2. A value that could not be confirmed from an official source is left **blank** and marked
+   `unverified`; it appears on the *Flagged for Review* page.
+3. No value is inferred, interpolated, or carried over from a similar product.
+4. `scripts/verify.py` re-checks every row at build time and fails the build on an unsourced row,
+   a non-`https` source, a published unverified value, a broken internal link, a missing
+   disclosure, or a printed price.
+5. Capture timestamps are recorded in UTC in `data/products.json`.
+
+## Irregularities log
+
+| # | Irregularity | Where | Disposition |
+|---|---|---|---|
+| I-1 | Initial `README.md` contains only `# Zone2` (7 bytes). | `README.md` @ `f577167` | Resolved. |
+| I-2 | No `LICENSE`, `.gitignore`, CI or tests in the initial commit. | repo root @ `f577167` | `.gitignore` and CI added; licence is owner decision. |
+| I-3 | The three `link.amazon/*` short links are opaque redirects; target ASINs not readable from the link text. | affiliate inputs | Resolved by following the redirect; recorded in `data/raw-verification-log.md`. |
+| I-4 | No Amazon Associates tracking tag (`tag=`) on any of the three links, so commission attribution is impossible. | affiliate inputs | **Flagged for review — owner action.** |
+| I-5 | Prices, ratings, review counts and stock status are volatile and Amazon restricts their display. | product data | Captured for the audit trail, withheld from publication. |
+| I-6 | Amazon.com product pages are bot-gated and render inconsistently to automated fetches. | product data | Disclosed in methodology; corroborated against regional storefronts and the manufacturer. |
+| I-7 | Star ratings differ by storefront for the same ASIN (`B09B7SB46R`). | product data | No rating published. |
+| I-8 | Chefman 8 Qt: Amazon bullet text says 1000 W; Chefman says 1700 W for the same model `RJ38-SQSS-8T`. | `B08DKYBTPH` | Manufacturer figure published; discrepancy flagged. |
+| I-9 | Chefman 8 Qt dimensions differ between the Amazon spec table and the manufacturer page. | `B08DKYBTPH` | Both published as separate sourced rows. |
+| I-10 | Emeril model suffix `-02X-VN` (Amazon US) vs `-02A-VN` (manufacturer store). | `B09B7SB46R` | Both published with sources. |
+| I-11 | Emeril wattage: 1700 W rated; a customer review reports a lower measured draw. | `B09B7SB46R` | Rated figure published; measured draw not published. |
+| I-12 | Emeril preset count: 24 (title/description) vs 25 (manufacturer spec tile). | `B09B7SB46R` | Both shown side by side. |
+| I-13 | Emeril 500 °F maximum is single-sourced to Amazon's product-information block. | `B09B7SB46R` | Published as single-source and labelled. |
+| I-14 | The Chefman 6 Qt listing's rating block did not render; the visible figure belongs to a sibling ASIN (`B0B7C327LK`). | `B0CDY277D3` | Rating left blank; not attributed. |
+| I-15 | Amazon's Agent Terms require automated clients to self-identify and forbid bypassing blocks. | brief vs policy | Documented on the compliance page; compliant automation built. |
+| I-16 | Two sessions built overlapping front pages. | `index.html` | Resolved without discarding either: dashboard at `index.html`, hub at `overview.html`, `start.html` as landing. |
+| I-17 | The dashboard's workflow published `path: .`, exposing `data/`, `docs/`, `scripts/`. | `.github/workflows/pages.yml` | Fixed: only `_site/` is uploaded, with a leak assertion. |
+| I-18 | The dashboard's `index.html` had no affiliate disclosure in its static HTML (only JS-rendered). | `index.html` | Fixed: disclosure now in the HTML itself. Caught by CI. |
+| I-19 | **Three sessions built overlapping full sites at the repo root.** Each session's `index.html`, `products.html`, `compliance.html`, `flagged.html` collided. | root HTML | Resolved without discarding any: Northstar dashboard kept at root, verified hub at root, Zone2 platform build preserved in `zone2/`, `start.html` landing links to all three. |
+| I-20 | The three supplied codes are each **9 characters**; Amazon officially defines an ASIN as a unique **10-character** alphanumeric code. No official source (Amazon, Google, Bing, Wayback Machine, CamelCamelCamel) has any record of the 9-char codes. | affiliate inputs | Recorded here. The short links were resolved to canonical 10-char ASINs by following Amazon's redirects (I-3); the Zone2 build treats the raw 9-char codes as invalid and leaves product fields blank, while the verified hub publishes the redirect-resolved products with full sourcing. Both interpretations are documented for owner review. |
+
+## PR and merge record
+
+| Item | Value |
+|---|---|
+| PR #1 (Northstar dashboard) | <https://github.com/kanlerxz87-cyber/Zone2/pull/1> — merged |
+| PR #4 (verified hub + integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/4> — merged |
+| PR #5 (Zone2 platform build + final integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/5> — merged |
+| Final integration session | `arena/34836ddd-zone2` |
+| Pages deploy | `.github/workflows/pages.yml` deploys `_site/` (dashboard + verified hub + `zone2/`) from `main` via GitHub Actions. |
