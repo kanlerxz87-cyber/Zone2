@@ -4,17 +4,19 @@
   "files": [
     ".nojekyll",
     "404.html",
+    "assets/landing.css",
     "assets/style.css",
     "compare.html",
     "compliance.html",
     "flagged.html",
-    "index.html",
     "methodology.html",
+    "overview.html",
     "product-B08DKYBTPH.html",
     "product-B09B7SB46R.html",
     "product-B0CDY277D3.html",
     "products.html",
     "requirements.html",
+    "start.html",
     "summary.html"
   ]
 }
