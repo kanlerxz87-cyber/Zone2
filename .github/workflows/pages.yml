@@ -200,10 +200,12 @@ jobs:
           if missing:
               print('missing from staged bundle:', missing)
               sys.exit(1)
-          # nothing private should leak
+          # nothing private should leak — only the top-level data/ and scripts/
+          # directories are private source; zone2/data is published site content.
           leaked = [str(p) for p in out.rglob('*')
                     if p.is_file() and p.suffix in ('.json', '.py')
-                    and p.parent.name in ('data', 'scripts')]
+                    and p.relative_to(out).parts
+                    and p.relative_to(out).parts[0] in ('data', 'scripts')]
           if leaked:
               print('data/ or scripts/ leaked into the bundle:', leaked)
               sys.exit(1)
