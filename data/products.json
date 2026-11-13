@@ -1,0 +1,459 @@
+{
+  "$schema_version": "1.0",
+  "captured_utc": "2026-11-13T22:40:00Z",
+  "capture_note": "All volatile values (price, rating, review count, stock, sales rank) are point-in-time snapshots and are NOT republished as facts on the site. They are retained here only for the audit trail.",
+  "status_values": {
+    "verified": "Confirmed on an official source and linked below.",
+    "conflict": "Two official sources disagree. Both values are shown; neither is presented as definitive.",
+    "unverified": "Could not be confirmed on an official source. Left blank on the site."
+  },
+  "products": [
+    {
+      "id": "P1",
+      "supplied_link": "https://link.amazon/B04G1MEwY",
+      "resolved_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "asin": "B0CDY277D3",
+      "link_status": "verified",
+      "link_note": "Short link resolves to the ASIN above. No Associates tag parameter present on the resolved URL (see irregularity I-4).",
+      "title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer — Black",
+      "brand": "Chefman",
+      "category": "Air Fryers",
+      "category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "identifiers": [
+        {
+          "label": "Model number",
+          "value": "RJ38-SQPF-3TDB-2W",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "UPC",
+          "value": "810087845025",
+          "status": "unverified",
+          "source_name": "Not confirmed on an official Amazon or Chefman page during capture",
+          "source_url": null,
+          "note": "Appeared only in secondary aggregator listings. Left blank on the site."
+        }
+      ],
+      "specs": [
+        {
+          "label": "Capacity",
+          "value": "6 qt total (two independent 3-qt baskets)",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Power",
+          "value": "1700 W / 120 V",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Temperature range",
+          "value": "200–450 °F (93–235 °C)",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Dimensions",
+          "value": "13.38 × 11.81 × 10.63 in (33.98 × 30 × 27 cm)",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Weight",
+          "value": "13.3 lb / 6.03 kg",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Colour / finish",
+          "value": "Matte black, dual viewing windows, interior light",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Control type",
+          "value": "Digital touchscreen",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Certification",
+          "value": "cETL approved",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Warranty",
+          "value": "1 year (Chefman assurance)",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+        },
+        {
+          "label": "Inner material",
+          "value": "Stainless steel, nonstick baskets",
+          "status": "verified",
+          "source_name": "Amazon product information block",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        }
+      ],
+      "features": [
+        "Two independent 3-qt baskets, 6 qt combined",
+        "Sync Finish so both baskets complete together",
+        "Hi-Fry option to 450 °F for extra crisp",
+        "Dual viewing windows and interior light",
+        "Nonstick, dishwasher-safe baskets",
+        "Automatic shut-off"
+      ],
+      "features_source": {
+        "source_name": "Chefman official product page",
+        "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+      },
+      "volatile_snapshot": {
+        "rating": null,
+        "rating_count": null,
+        "price_usd": 69.97,
+        "list_price_usd": null,
+        "badge": null,
+        "snapshot_note": "The Amazon page for this ASIN did not render its own rating or buy-box block during capture. The 4.4/1,392 figure visible on the page belongs to sibling listing B0B7C327LK in the 'customers who viewed' carousel and is NOT attributed to this ASIN. Price seen in that carousel only. Rating left blank.",
+        "snapshot_utc": "2026-11-13T22:38:00Z"
+      },
+      "official_sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+        "https://chefman.com/pages/document-library-air-fryers"
+      ],
+      "flags": [
+        {
+          "id": "I-6",
+          "issue": "Amazon US product block did not render for this ASIN during automated capture; figures were confirmed against the manufacturer instead.",
+          "disposition": "Flagged for review. All published specs cite Chefman directly."
+        },
+        {
+          "id": "I-14",
+          "issue": "Star rating could not be confirmed for this ASIN itself, only for a sibling listing shown on the same page.",
+          "disposition": "Rating left blank. Flagged for review."
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "supplied_link": "https://link.amazon/B02NbDxp3",
+      "resolved_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "asin": "B09B7SB46R",
+      "link_status": "verified",
+      "link_note": "Short link resolves to the ASIN above. No Associates tag parameter present on the resolved URL (see irregularity I-4).",
+      "title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven",
+      "brand": "Emeril Lagasse",
+      "category": "Air Fryers / Toaster Ovens",
+      "category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "identifiers": [
+        {
+          "label": "Model number (Amazon US listing)",
+          "value": "4-00675-02X-VN",
+          "status": "conflict",
+          "source_name": "Amazon product information block",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "note": "The manufacturer's own store lists the same appliance as 4-00675-02A-VN. Both shown; see I-10."
+        },
+        {
+          "label": "Model number (manufacturer store)",
+          "value": "4-00675-02A-VN",
+          "status": "conflict",
+          "source_name": "Emeril Everyday official store",
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+          "note": "Suffix differs from the Amazon US listing. See I-10."
+        },
+        {
+          "label": "UPC",
+          "value": "752356835682",
+          "status": "unverified",
+          "source_name": "Not confirmed on an official Amazon or manufacturer page during capture",
+          "source_url": null,
+          "note": "Seen only in secondary listings. Left blank on the site."
+        }
+      ],
+      "specs": [
+        {
+          "label": "Capacity",
+          "value": "26 qt / 24.6 L",
+          "status": "verified",
+          "source_name": "Emeril Everyday official store",
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+        },
+        {
+          "label": "Power",
+          "value": "1700 W / 120 V",
+          "status": "verified",
+          "source_name": "Amazon product information block",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        {
+          "label": "Temperature range",
+          "value": "75–500 °F",
+          "status": "verified",
+          "source_name": "Amazon product information block",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "note": "Single-source. The manufacturer spec block states temperature control but not a numeric maximum. See I-13."
+        },
+        {
+          "label": "Cooking presets",
+          "value": "24",
+          "status": "conflict",
+          "source_name": "Amazon product title and manufacturer description",
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+          "note": "The manufacturer's own spec tile on the same page says '25 Cooking Pre-sets'. Both shown; see I-12."
+        },
+        {
+          "label": "Dimensions",
+          "value": "16.9\"D × 15.8\"W × 14.8\"H",
+          "status": "verified",
+          "source_name": "Emeril Everyday official store (identical on Amazon)",
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+        },
+        {
+          "label": "Colour / material",
+          "value": "Silver, stainless steel",
+          "status": "verified",
+          "source_name": "Emeril Everyday official store",
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+        },
+        {
+          "label": "Door style",
+          "value": "Dual French doors, single-hand opening",
+          "status": "verified",
+          "source_name": "Emeril Everyday official store",
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+        },
+        {
+          "label": "Special features",
+          "value": "Automatic shut-off, programmable, temperature control, timer",
+          "status": "verified",
+          "source_name": "Amazon product information block",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        {
+          "label": "Included accessories",
+          "value": "Air fry basket, rotisserie spit, bake pan, drip tray, rack, fetch tool (7 accessories per manufacturer copy)",
+          "status": "verified",
+          "source_name": "Emeril Everyday official store",
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+        },
+        {
+          "label": "Warranty",
+          "value": "1 year",
+          "status": "verified",
+          "source_name": "Emeril Everyday official store",
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+        },
+        {
+          "label": "Item weight",
+          "value": "26.5 lb",
+          "status": "unverified",
+          "source_name": "Regional Amazon listings give 10.21 kg, 12.02 kg and 26.5 lb in different places",
+          "source_url": null,
+          "note": "Conflicting and not confirmed on the US page or the manufacturer page. Left blank."
+        }
+      ],
+      "features": [
+        "26 qt extra-large capacity, sized for 4–6 people",
+        "24 one-touch cooking presets including air fry, bake, broil, dehydrate, roast, slow cook",
+        "360° dual-speed fan air circulation",
+        "Single-hand French doors with interior light",
+        "Rotisserie function",
+        "7 premium accessories included"
+      ],
+      "features_source": {
+        "source_name": "Emeril Everyday official store",
+        "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+      },
+      "volatile_snapshot": {
+        "rating": null,
+        "rating_count": null,
+        "price_usd": null,
+        "list_price_usd": null,
+        "badge": null,
+        "snapshot_note": "Rating differs by storefront: Amazon.co.uk 4.5/16,128; Amazon.sa 4.6/8,361; Amazon.eg 4.5/16,023. Ratings are storefront-specific so no single figure is published. US buy box did not render during capture.",
+        "snapshot_utc": "2026-11-13T22:38:00Z"
+      },
+      "official_sources": [
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+      ],
+      "flags": [
+        {
+          "id": "I-7",
+          "issue": "Star ratings and review counts are storefront-specific and differ for the same ASIN across Amazon.com, Amazon.co.uk, Amazon.sa and Amazon.eg.",
+          "disposition": "No rating published. Flagged for review."
+        },
+        {
+          "id": "I-10",
+          "issue": "Model number suffix differs between the Amazon US listing (-02X-VN) and the manufacturer store (-02A-VN).",
+          "disposition": "Both published with sources. Flagged for review."
+        },
+        {
+          "id": "I-12",
+          "issue": "Preset count is stated as 24 in the product title and manufacturer description but 25 in the manufacturer's own spec tile.",
+          "disposition": "Both published side by side. Flagged for review."
+        },
+        {
+          "id": "I-13",
+          "issue": "500 °F maximum temperature is sourced to Amazon's product information only; the manufacturer page states temperature control without a numeric maximum.",
+          "disposition": "Published as single-source and labelled. Flagged for review."
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "supplied_link": "https://link.amazon/B00hJ57DV",
+      "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "asin": "B08DKYBTPH",
+      "link_status": "verified",
+      "link_note": "Short link resolves to the ASIN above. No Associates tag parameter present on the resolved URL (see irregularity I-4).",
+      "title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "brand": "Chefman",
+      "category": "Air Fryers",
+      "category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "identifiers": [
+        {
+          "label": "Model number",
+          "value": "RJ38-SQSS-8T",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+        }
+      ],
+      "specs": [
+        {
+          "label": "Capacity",
+          "value": "8 qt / 7.57 L",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+        },
+        {
+          "label": "Power",
+          "value": "1700 W / 120 V",
+          "status": "conflict",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+          "note": "The Amazon bullet text for this ASIN states '1000 Watts/120 Volts – RJ38-SQSS-8T'. The manufacturer states 1700 W/120 V for the same model number. Manufacturer figure published; see I-8."
+        },
+        {
+          "label": "Temperature range",
+          "value": "200–400 °F (93–204 °C)",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+        },
+        {
+          "label": "Presets",
+          "value": "4 (fries, chicken, fish, meat)",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+        },
+        {
+          "label": "Dimensions (manufacturer)",
+          "value": "15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm)",
+          "status": "conflict",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+          "note": "The Amazon spec table states 12.75\"D × 13.5\"W × 10\"H. Both published as separate rows; see I-9."
+        },
+        {
+          "label": "Dimensions (Amazon listing)",
+          "value": "12.75\"D × 13.5\"W × 10\"H",
+          "status": "conflict",
+          "source_name": "Amazon product information block",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "note": "Differs from the manufacturer's own figure. See I-9."
+        },
+        {
+          "label": "Weight",
+          "value": "12.8 lb / 5.8 kg",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+        },
+        {
+          "label": "Material",
+          "value": "Plastic, stainless steel",
+          "status": "verified",
+          "source_name": "Amazon product information block",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        {
+          "label": "Special features",
+          "value": "Automatic shut-off, LED shake reminder, programmable",
+          "status": "verified",
+          "source_name": "Amazon product information block",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        {
+          "label": "Certification",
+          "value": "cETL approved",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+        },
+        {
+          "label": "Warranty",
+          "value": "1 year (Chefman assurance)",
+          "status": "verified",
+          "source_name": "Chefman official product page",
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+        }
+      ],
+      "features": [
+        "8 qt family-size capacity, sized for 4–6 people",
+        "4 one-touch presets: fries, chicken, fish, meat",
+        "200–400 °F adjustable range",
+        "LED shake reminder for even cooking",
+        "Top-rack dishwasher-safe nonstick basket and flat frying tray",
+        "Automatic shut-off"
+      ],
+      "features_source": {
+        "source_name": "Chefman official product page",
+        "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+      },
+      "volatile_snapshot": {
+        "rating": 4.4,
+        "rating_count": 16861,
+        "price_usd": 79.91,
+        "list_price_usd": 119.99,
+        "badge": "Amazon's Choice",
+        "snapshot_note": "Confirmed on the Amazon US page during capture. Point-in-time only; not republished as a fact.",
+        "snapshot_utc": "2026-11-13T22:39:00Z"
+      },
+      "official_sources": [
+        "https://www.amazon.com/dp/B08DKYBTPH",
+        "https://chefman.com/products/turbofry-touch-air-fryer-1",
+        "https://chefman.com/pages/document-library-air-fryers"
+      ],
+      "flags": [
+        {
+          "id": "I-8",
+          "issue": "Amazon bullet text states 1000 W for this model; the manufacturer states 1700 W for the same model number.",
+          "disposition": "Manufacturer figure published; discrepancy flagged for review."
+        },
+        {
+          "id": "I-9",
+          "issue": "Dimensions differ between the Amazon spec table and the manufacturer product page.",
+          "disposition": "Both published as separate sourced rows. Flagged for review."
+        }
+      ]
+    }
+  ]
+}

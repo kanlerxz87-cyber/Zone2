@@ -1,0 +1,363 @@
+{
+  "$schema_version": "1.0",
+  "captured_utc": "2026-11-13T22:45:00Z",
+  "authority_note": "Every requirement below is quoted or paraphrased from an official Amazon page, linked in `source_url`. Requirements marked `unverified` could not be read because the official page requires an Associates login.",
+  "documents": [
+    {
+      "name": "Associates Program Operating Agreement",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "version_seen": "Updated 15 October 2025",
+      "status": "verified"
+    },
+    {
+      "name": "Associates Program Policies (incl. Commission Income Statement, Participation Requirements, IP Licence, Trademark Guidelines, Mobile Application Policy, Agent Terms)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "version_seen": "Updated 14 April 2026",
+      "status": "verified"
+    },
+    {
+      "name": "Commission rate card (Standard / Special Commission Income schedule)",
+      "url": "https://affiliate-program.amazon.com/help/operating/schedule",
+      "version_seen": null,
+      "status": "unverified",
+      "note": "This URL redirects to an Amazon sign-in. Category rates are only readable from inside an Associates account. No rate is published as a fact on the site."
+    },
+    {
+      "name": "Application review process (help topic)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "version_seen": null,
+      "status": "verified"
+    },
+    {
+      "name": "Creator University — Operating Agreement dos and don'ts",
+      "url": "https://www.amazon.com/b?node=53643932011",
+      "version_seen": null,
+      "status": "verified"
+    }
+  ],
+  "disclosure": [
+    {
+      "id": "D1",
+      "requirement": "State the affiliate relationship clearly and prominently on the site.",
+      "exact_wording_amazon_supplies": "As an Amazon Associate I earn from qualifying purchases.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "section": "§5 Identifying Yourself as an Associate",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "D2",
+      "requirement": "The disclosure must be next to the affiliate link, clear and conspicuous, not buried.",
+      "source_url": "https://www.amazon.com/b?node=53643932011",
+      "status": "verified",
+      "implemented_on_site": true,
+      "note": "Amazon's own guidance lists approved language including '#paidlink', '#ad', 'CommissionsEarned', or the Associates sentence."
+    },
+    {
+      "id": "D3",
+      "requirement": "Do not imply Amazon sponsors or endorses the site.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "section": "§5",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "D4",
+      "requirement": "Include the trademark attribution Amazon's own guidance asks for: 'Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.'",
+      "source_url": "https://www.amazon.com/b?node=53643932011",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "D5",
+      "requirement": "Comply with the US FTC Guides Concerning the Use of Endorsement and Testimonials in Advertising where applicable.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §3(b)",
+      "status": "verified",
+      "implemented_on_site": true
+    }
+  ],
+  "linking_rules": [
+    {
+      "id": "L1",
+      "requirement": "Every Amazon link must carry the Associate's tracking ID as a URL parameter.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §2(b)",
+      "status": "verified",
+      "implemented_on_site": false,
+      "note": "No Store ID was supplied. The site therefore does not fabricate a tag. See I-4."
+    },
+    {
+      "id": "L2",
+      "requirement": "Links must be accessed directly from the site; no intermediate redirect pages that auto-forward the user.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §2(b); Commission Income Statement §2(e)",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "L3",
+      "requirement": "No cloaking via link shorteners on the site; the supplied link.amazon/* short links are therefore not embedded — the canonical ASIN URL is.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §2(e) Redirecting Link",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "L4",
+      "requirement": "Never bid on 'amazon', 'kindle' or any Amazon mark, including misspellings, in paid search.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §2(c)",
+      "status": "verified",
+      "implemented_on_site": true,
+      "note": "Applies to any future paid acquisition. The site runs no ads."
+    },
+    {
+      "id": "L5",
+      "requirement": "Do not place affiliate links on pages reached from a search engine in a way that disqualifies the purchase; organic search to your own site is fine.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §2(d)",
+      "status": "verified"
+    },
+    {
+      "id": "L6",
+      "requirement": "No Amazon mark in a domain name, subdomain, Store ID, username or handle.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §1(g); Trademark Guidelines §8",
+      "status": "verified",
+      "implemented_on_site": true,
+      "note": "This site is hosted at kanlerxz87-cyber.github.io/Zone2 — no Amazon mark in the host or path."
+    },
+    {
+      "id": "L7",
+      "requirement": "Do not post affiliate links on Amazon itself, or link from Amazon to the site to promote links.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §2(b)",
+      "status": "verified"
+    }
+  ],
+  "pricing_rules": [
+    {
+      "id": "PR1",
+      "requirement": "Show price and availability only if Amazon serves the link that displays them, or if the data comes from Creators API / PA API.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §2(b)",
+      "status": "verified",
+      "implemented_on_site": true,
+      "note": "No price is printed on the site. The site links out and says prices change."
+    },
+    {
+      "id": "PR2",
+      "requirement": "Any displayed price needs a date/time stamp and the standard 'prices are accurate as of' disclaimer.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "IP Licence §2(i)",
+      "status": "verified",
+      "implemented_on_site": false,
+      "note": "Not applicable while no price is displayed; the rule is recorded so that it is applied if prices are ever added."
+    },
+    {
+      "id": "PR3",
+      "requirement": "In a price-comparison format, show both the lowest new price and the lowest used price.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §2(b)",
+      "status": "verified",
+      "implemented_on_site": false,
+      "note": "No comparison pricing is displayed. Recorded as a constraint for future work."
+    }
+  ],
+  "content_rules": [
+    {
+      "id": "C1",
+      "requirement": "Do not add to, delete from or alter Program Content; do not misstate product attributes.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §6(a)",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "C2",
+      "requirement": "Do not cache Product Advertising Content beyond 24 hours; images may not be stored at all. ASINs may be stored indefinitely.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "IP Licence §2(h)",
+      "status": "verified",
+      "implemented_on_site": true,
+      "note": "The site stores ASINs and links only. It hosts no Amazon product images and no Amazon-hosted copy."
+    },
+    {
+      "id": "C3",
+      "requirement": "Remove Program Content promptly when it is no longer on an Amazon site.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §6(c)",
+      "status": "verified"
+    },
+    {
+      "id": "C4",
+      "requirement": "Site must contain original content — significant commentary, analysis or transformation — not just reproduced listings.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §1",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "C5",
+      "requirement": "No incentivised or compensated reviews; no reviews written in exchange for payment, discounts or free product.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "section": "Preamble and Community Guidelines reference",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "C6",
+      "requirement": "Do not make inaccurate, overbroad, deceptive or misleading claims about any product, price or promotion.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §2(b)",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "C7",
+      "requirement": "Remove references to limited-time promotions as soon as the promotion ends.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §2(b)",
+      "status": "verified",
+      "implemented_on_site": true,
+      "note": "The site never states a discount or a deal."
+    }
+  ],
+  "automation_rules": [
+    {
+      "id": "A1",
+      "requirement": "An 'Agent' — any software taking autonomous or semi-autonomous action — must identify itself in the HTTP user agent as 'Agent/[agent name]'.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "IP Licence, section 4 Agents (a)–(c)",
+      "status": "verified",
+      "implemented_on_site": true,
+      "note": "This is the binding constraint on full automation of Amazon data collection."
+    },
+    {
+      "id": "A2",
+      "requirement": "An Agent must not conceal that its access is automated, must not mimic human interaction patterns, must not solve or bypass CAPTCHAs, and must not circumvent blocking measures.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "IP Licence, section 4(c)",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "A3",
+      "requirement": "Do not use Special Links or Program Content to develop machine learning models without prior written approval.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Participation Requirements §5",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "A4",
+      "requirement": "Do not use data mining, robots or similar data-gathering and extraction tools on Program Content beyond what the licence allows; use Creators API / PA API instead.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "IP Licence §1",
+      "status": "verified",
+      "implemented_on_site": true
+    },
+    {
+      "id": "A5",
+      "requirement": "Respect Creators API / PA API rate limits (calls per second) and the 40 KB request limit.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "IP Licence §2(j)",
+      "status": "verified"
+    }
+  ],
+  "account_rules": [
+    {
+      "id": "AC1",
+      "requirement": "At least three qualifying sales within the first 180 days, after which Amazon reviews the application. Personal orders do not qualify.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "status": "verified"
+    },
+    {
+      "id": "AC2",
+      "requirement": "Sites need robust original content — Amazon's rule of thumb is at least 10 posts — and must be public and owned by the applicant.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "status": "verified"
+    },
+    {
+      "id": "AC3",
+      "requirement": "Website content must be recent, generally within the last 60 days.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "status": "verified",
+      "note": "Implies a refresh cadence is a compliance requirement, not just an SEO nicety."
+    },
+    {
+      "id": "AC4",
+      "requirement": "Commission is paid approximately 60 days after the end of the month earned.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §6",
+      "status": "verified"
+    },
+    {
+      "id": "AC5",
+      "requirement": "US payment minimums: direct deposit 10 USD; gift card 10 USD (max 2,000 USD); cheque 100 USD with a 15 USD processing fee.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §6, Payment Minimum Chart",
+      "status": "verified"
+    },
+    {
+      "id": "AC6",
+      "requirement": "Either party may terminate on 7 days' notice; Amazon may terminate immediately for material breach.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "section": "§6 Term and Termination",
+      "status": "verified"
+    },
+    {
+      "id": "AC7",
+      "requirement": "Do not claim commission from both Amazon Associates and another programme on the same traffic.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §5",
+      "status": "verified"
+    },
+    {
+      "id": "AC8",
+      "requirement": "After 3 years of no substantial activity, accrued commission may be withheld with 7 days' notice.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §6",
+      "status": "verified"
+    }
+  ],
+  "commission_rates": {
+    "status": "unverified",
+    "reason": "The official rate card at https://affiliate-program.amazon.com/help/operating/schedule requires an Associates login and could not be read. Amazon's public marketing page states only 'Earn up to 10% in associate commissions'.",
+    "public_headline": "Earn up to 10% in associate commissions from qualifying purchases and programs.",
+    "public_headline_source": "https://affiliate-program.amazon.com/",
+    "published_on_site": false,
+    "note": "Secondary sources widely report 3% for Home categories in the US, but a secondary source is not an official source, so no category rate is published. Flagged for review."
+  },
+  "session_and_attribution": [
+    {
+      "id": "S1",
+      "rule": "A session lasts until the first of: 24 hours from the click, the customer places a non-digital order, or the customer clicks someone else's Special Link.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §1(b)",
+      "status": "verified"
+    },
+    {
+      "id": "S2",
+      "rule": "A product added to cart can still qualify if ordered within 89 days of the original click.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §1(c)(i)",
+      "status": "verified"
+    },
+    {
+      "id": "S3",
+      "rule": "Qualifying revenue excludes shipping, gift wrap, handling, taxes, service charges, credits, rebates, card fees and bad debt.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §1",
+      "status": "verified"
+    },
+    {
+      "id": "S4",
+      "rule": "Cancelled, returned or refunded orders are disqualified; so are subscription purchases unless the agreement says otherwise, and pre-order products that are not yet listed.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "section": "Commission Income Statement §2",
+      "status": "verified"
+    }
+  ]
+}
