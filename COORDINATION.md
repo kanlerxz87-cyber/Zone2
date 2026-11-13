@@ -189,7 +189,7 @@ forward only the additive `scripts/check_links.py`. No prior session's work was 
 | PR #4 (verified hub + integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/4> — merged |
 | PR #6 (price-leak fix) | <https://github.com/kanlerxz87-cyber/Zone2/pull/6> — merged |
 | PR #5 (Zone2 platform build + integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/5> — merged |
-| PR #7 (ec67c431-zone2 integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/7> — merged via `gh pr merge 7 --merge` |
+| PR #7 (ec67c431-zone2 integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/7> — merged via `gh pr merge 7 --merge` on 2026-11-13T23:02:50Z, merge commit `5741e01` |
 | Final integration sessions | `arena/34836ddd-zone2` (PR #5), `arena/ec67c431-zone2` (PR #7) |
 | Re-verification (PR #7) | `build.py` regenerates committed output cleanly; `verify.py` = 0 errors; `check_links.py` = no broken internal links |
-| Pages deploy | `.github/workflows/pages.yml` deploys `_site/` (dashboard + verified hub + `zone2/`) from `main` via GitHub Actions. Confirmed live at <https://kanlerxz87-cyber.github.io/Zone2/> |
+| Pages deploy | `.github/workflows/pages.yml` ("Build, verify and deploy") ran on the PR #7 merge push to `main` and completed with **success**. Site confirmed live at <https://kanlerxz87-cyber.github.io/Zone2/> (root = Northstar workspace, `/products.html` = verified source-linked hub, `/zone2/` = platform dashboard). All pages carry the required disclosure; no prices are published. |
