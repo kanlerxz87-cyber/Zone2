@@ -10,15 +10,17 @@ Repo: `kanlerxz87-cyber/Zone2`
 |---|---|---|---|
 | `arena/6b8bb130-zone2` | merged to `main` via PR #1 | Northstar research-dashboard prototype | merged; preserved at `northstar/` |
 | `arena/6602723a-zone2` (S-6602723A) | merged to `main` via PRs #4 / #6 | Verified dataset, generated Affiliate Research Hub, compliance position | merged; preserved at `research-hub/` |
-| `arena/34836ddd-zone2` | merged to `main` via PR #5 | AI-powered platform build (multi-page dashboard) | merged; preserved at `zone2/` |
+| `arena/34836ddd-zone2` | merged to `main` via PRs #5 / #8 / #9 | AI-powered platform build (multi-page dashboard) + CI fixes | merged; preserved at `zone2/` |
+| `arena/ec67c431-zone2` | merged to `main` via PR #7 | Integration of latest main; canonical link-checker (`scripts/check_links.py`) | merged; tooling preserved at `research-hub/scripts/check_links.py` |
 | `arena/78c94859-zone2` (78c94859) | merged to `main` via PR #3 | Zone2 platform site, verification, **final integration** | merged; primary site at repo root |
 
-> **Integration note (multi-session race):** four sessions worked in parallel and each merged work to
+> **Integration note (multi-session race):** five sessions worked in parallel and each merged work to
 > `main` while others were still active, so every integration PR conflicted with the others. Per the
 > project instruction, session 78c94859 acted as the final integration session: it merged `main` into
-> its branch, relocated the companion sites into `northstar/`, `research-hub/` and `zone2/` (nothing
-> discarded), re-verified the combined data line by line, and merged the integrated result to `main`
-> via PR #3. All companion sites are reachable from the primary dashboard footer.
+> its branch repeatedly as `main` advanced, relocated the companion sites into `northstar/`,
+> `research-hub/` and `zone2/` (nothing discarded), re-verified the combined data line by line, and
+> merged the integrated result to `main` via PR #3. All companion sites are reachable from the primary
+> dashboard footer.
 
 ## Task board
 
@@ -31,7 +33,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T5 | Executive summary | done | 6602723a / 34836ddd / 78c94859 | `docs/executive-summary.md`, `zone2/docs/EXECUTIVE_SUMMARY.md`, `index.html` |
 | T6 | Automated platform requirements matrix | done | 6602723a | `research-hub/data/requirements.json`, `research-hub/requirements.html` |
 | T7 | Verified hub site (landing + category subpages) | done | 6602723a | `research-hub/*.html`, `research-hub/assets/**` |
-| T8 | Link + data integrity check in CI | done | 6602723a / 78c94859 | `.github/workflows/pages.yml` |
+| T8 | Link + data integrity check in CI | done | 6602723a / 34836ddd / ec67c431 / 78c94859 | `.github/workflows/pages.yml`, `research-hub/scripts/**` |
 | T9 | Dashboard prototype (Northstar) | done | 6b8bb130 | `northstar/*` |
 | T10 | AI-powered platform build (multi-page dashboard) | done | 34836ddd | `zone2/**` |
 | T11 | Zone2 platform site (dashboard, categories, tables) | done | 78c94859 | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `flagged.html`, `404.html`, `assets/` |
@@ -47,9 +49,9 @@ Repo: `kanlerxz87-cyber/Zone2`
 | Amazon product page — B0CDY277D3 | https://www.amazon.com/dp/B0CDY277D3 | Product 1 title/brand/category |
 | Amazon product page — B09B7SB46R | https://www.amazon.com/dp/B09B7SB46R | Product 2 title/brand/category |
 | Amazon product page — B08DKYBTPH | https://www.amazon.com/dp/B08DKYBTPH | Product 3 title/brand/category |
-| Chefman official product page — TurboFry Touch Dual-Window | https://chefman.com/products/turbofry-touch-dual-window-air-fryer | Product 1 model/specs/manufacturer price |
-| Chefman official product page — TurboFry Touch 8 Qt | https://chefman.com/products/turbofry-touch-air-fryer-1 | Product 3 model/specs/manufacturer price |
-| Emeril Everyday official store — French Door AirFryer 360 | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 | Product 2 model/specs/manufacturer price |
+| Chefman official product page — TurboFry Touch Dual-Window | https://chefman.com/products/turbofry-touch-dual-window-air-fryer | Product 1 model/specs |
+| Chefman official product page — TurboFry Touch 8 Qt | https://chefman.com/products/turbofry-touch-air-fryer-1 | Product 3 model/specs |
+| Emeril Everyday official store — French Door AirFryer 360 | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 | Product 2 model/specs |
 
 ## Irregularities flagged for review
 
@@ -70,9 +72,10 @@ Repo: `kanlerxz87-cyber/Zone2`
    (https://affiliate-program.amazon.com/help/operating/schedule) redirects to Amazon sign-in; the
    Home & Kitchen rate is left blank and flagged as unverified. Only the public "up to 10%" ceiling is
    recorded.
-5. **Price / rating / review-count / stock on Amazon (UNVERIFIED).** Amazon does not expose these to
-   automated fetches. Left blank and flagged. Manufacturer-site prices (Chefman.com, Emeril Everyday)
-   are published where verified, clearly labelled as manufacturer-site prices — not Amazon prices.
+5. **Price / rating / review-count / stock on Amazon (UNVERIFIED / not published).** Amazon does not
+   expose these to automated fetches. Manufacturer-site prices were verified but are deliberately not
+   published, in line with the program's price-display restrictions and the site's no-price rule.
+   Left blank and flagged.
 6. **Associates tag absent on resolved short links.** The resolved `link.amazon` URLs carry no
    Associates tag parameter; live tracking requires Special Links with the Associates tag (per
    Participation Requirements §2). Flagged for account configuration.
@@ -88,16 +91,24 @@ Repo: `kanlerxz87-cyber/Zone2`
 - Internal link check: every internal navigation link across the primary site, `research-hub/`,
   `northstar/` and `zone2/` resolves to an existing file. JS syntax check and render test pass for all
   primary-site tables (including the merged verified spec table).
-- `research-hub/data/*.json` and `research-hub/site-manifest.json` parse cleanly.
+- `research-hub/data/*.json`, `research-hub/site-manifest.json` and `zone2/data/verification.json`
+  parse cleanly.
+- 30 published pages: static affiliate disclosure present on every page; no page prints a price.
 - PR **#1** — https://github.com/kanlerxz87-cyber/Zone2/pull/1 — merged into `main` (by session
   6b8bb130).
+- PR **#3** — https://github.com/kanlerxz87-cyber/Zone2/pull/3 — merged into `main` (squash) by
+  session 78c94859 as the final integration; it carried the integrated result of all sessions.
 - PR **#4** — https://github.com/kanlerxz87-cyber/Zone2/pull/4 — merged into `main` (by session
   6602723a); superseded by PR #6.
 - PR **#5** — https://github.com/kanlerxz87-cyber/Zone2/pull/5 — merged into `main` (by session
   34836ddd).
 - PR **#6** — https://github.com/kanlerxz87-cyber/Zone2/pull/6 — merged into `main` (by session
   6602723a).
-- PR **#3** — https://github.com/kanlerxz87-cyber/Zone2/pull/3 — merged into `main` (squash) by
-  session 78c94859 as the final integration; it carried the integrated result of all four sessions.
+- PR **#7** — https://github.com/kanlerxz87-cyber/Zone2/pull/7 — merged into `main` (by session
+  ec67c431).
+- PR **#8** — https://github.com/kanlerxz87-cyber/Zone2/pull/8 — merged into `main` (by session
+  34836ddd).
+- PR **#9** — https://github.com/kanlerxz87-cyber/Zone2/pull/9 — merged into `main` (by session
+  34836ddd).
 - GitHub Pages: source branch `main`, path `/`; site live at
   https://kanlerxz87-cyber.github.io/Zone2/ (deploy status: built).
