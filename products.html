@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Zone2</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <h1>Zone2</h1>
+    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="flagged.html">Flagged for Review</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="page-head">
+      <h2>Affiliate Products</h2>
+      <p>Every row links to the official Amazon product page. Cells that could not be confirmed from an official source are left blank and flagged — never inferred.</p>
+    </div>
+
+    <div class="disclosure">
+      <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+    </div>
+
+    <div class="card">
+      <h3>Product Catalog — verified from official Amazon pages</h3>
+      <div id="productsTable"></div>
+    </div>
+
+    <div id="productOverview"></div>
+
+    <footer class="site">
+      Verified dataset date: 2026-11-13. Titles, brands, categories and ASINs verified against the official
+      Amazon product pages listed per row. Price, rating, review count and availability are
+      <em>unverified</em> and flagged on the <a href="flagged.html">Flagged for Review</a> page.
+    </footer>
+  </main>
+</div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

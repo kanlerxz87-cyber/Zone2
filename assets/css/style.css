@@ -1,0 +1,116 @@
+/* Zone2 — Amazon Affiliate Marketing Platform dashboard */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --ink: #16202a;
+  --muted: #5b6b7a;
+  --line: #e2e8ee;
+  --accent: #0f62fe;
+  --accent-ink: #ffffff;
+  --ok-bg: #e7f6ec;
+  --ok-ink: #14663a;
+  --warn-bg: #fff4e0;
+  --warn-ink: #8a5a00;
+  --flag-bg: #fdecea;
+  --flag-ink: #9b2c2c;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+}
+.shell { display: flex; min-height: 100vh; }
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: #101a24;
+  color: #d7e2ec;
+  padding: 22px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.sidebar h1 { font-size: 17px; margin: 0 0 4px; color: #fff; }
+.sidebar .sub { font-size: 12px; color: #8fa3b5; margin-bottom: 22px; }
+.sidebar nav a {
+  display: block;
+  color: #c9d6e2;
+  text-decoration: none;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.sidebar nav a:hover { background: #1c2a38; color: #fff; }
+.sidebar nav a.active { background: var(--accent); color: #fff; }
+/* Main */
+.main { flex: 1; min-width: 0; padding: 28px 34px 60px; }
+.page-head { margin-bottom: 22px; }
+.page-head h2 { margin: 0 0 6px; font-size: 24px; }
+.page-head p { margin: 0; color: var(--muted); font-size: 14px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+.card h3 { margin: 0 0 12px; font-size: 17px; }
+/* KPI grid */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 22px; }
+.kpi {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.kpi .num { font-size: 26px; font-weight: 700; color: var(--accent); }
+.kpi .lbl { font-size: 13px; color: var(--muted); }
+/* Feature grid */
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+.feature {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.feature h4 { margin: 0 0 6px; font-size: 15px; }
+.feature p { margin: 0; font-size: 13px; color: var(--muted); }
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--surface); }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: #eef2f6; font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; color: #33475b; }
+tbody tr:hover { background: #f8fafc; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+td a { color: var(--accent); word-break: break-all; }
+/* Badges */
+.badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.badge.ok { background: var(--ok-bg); color: var(--ok-ink); }
+.badge.warn { background: var(--warn-bg); color: var(--warn-ink); }
+.badge.flag { background: var(--flag-bg); color: var(--flag-ink); }
+.blank { color: #98a6b3; font-style: italic; }
+/* Disclosure bar */
+.disclosure {
+  background: #eef4ff;
+  border: 1px solid #cfe0ff;
+  color: #1c3d7a;
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  font-size: 13.5px;
+  margin-bottom: 22px;
+}
+footer.site { margin-top: 34px; font-size: 12.5px; color: var(--muted); }
+footer.site a { color: var(--accent); }
+@media (max-width: 860px) {
+  .shell { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: static; }
+  .sidebar nav { display: flex; flex-wrap: wrap; gap: 4px; }
+  .sidebar nav a { display: inline-block; }
+  .main { padding: 20px 16px 40px; }
+}
