@@ -318,8 +318,6 @@ def build_product_page(product: dict) -> str:
     for key, label in (
         ("rating", "Star rating"),
         ("rating_count", "Rating count"),
-        ("price_usd", "Price (USD)"),
-        ("list_price_usd", "List price (USD)"),
         ("badge", "Badge"),
     ):
         snapshot_rows.append(
@@ -413,6 +411,10 @@ show them and require conditions this static site cannot meet.</p>
     <summary>Point-in-time snapshot captured {e(CAPTURED_UTC)} — retained for audit, not published as fact</summary>
     <table class="grid"><tbody>{"".join(snapshot_rows)}</tbody></table>
     <p class="note">{e(snapshot["snapshot_note"])}</p>
+    <p class="note"><strong>Prices are never rendered on this page.</strong> Amazon permits
+    price display only where Amazon serves it or it comes from the official API, with a timestamp
+    and a disclaimer. The observed figure is retained in <code>data/products.json</code> for the
+    audit trail; it is deliberately not shown here.</p>
   </details>
 </section>
 
@@ -472,8 +474,6 @@ def build_products() -> str:
         for key, label in (
             ("rating", "Star rating"),
             ("rating_count", "Rating count"),
-            ("price_usd", "Price (USD)"),
-            ("list_price_usd", "List price (USD)"),
             ("badge", "Badge"),
         ):
             snapshot_rows.append(
@@ -506,6 +506,10 @@ def build_products() -> str:
     <summary>Point-in-time snapshot captured {e(CAPTURED_UTC)} — not published as fact</summary>
     <table class="grid"><tbody>{"".join(snapshot_rows)}</tbody></table>
     <p class="note">{e(snapshot["snapshot_note"])}</p>
+    <p class="note"><strong>Prices are never rendered on this page.</strong> Amazon permits
+    price display only where Amazon serves it or it comes from the official API, with a timestamp
+    and a disclaimer. The observed figure is retained in <code>data/products.json</code> for the
+    audit trail; it is deliberately not shown here.</p>
   </details>
   <h3>Official sources for this product</h3>
   <ul class="srclist">
