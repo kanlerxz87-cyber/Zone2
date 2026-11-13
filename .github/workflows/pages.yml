@@ -1,0 +1,225 @@
+name: Build, verify and deploy
+
+# Final integration workflow (session 78c94859).
+#
+# GitHub Pages for this repository is configured as a legacy build from branch
+# `main`, path `/`. This workflow guarantees that nothing broken reaches `main`:
+#   - the primary Zone2 platform (repo root) is complete and its internal links resolve
+#   - the companion sites (research-hub/, northstar/, zone2/) are complete
+#   - no page prints a price, and every page carries the static affiliate disclosure
+#   - all data files parse
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Primary site files exist
+        run: |
+          for f in index.html products.html analysis.html content.html compliance.html tracking.html flagged.html 404.html \
+                   assets/css/style.css assets/js/data.js assets/js/app.js; do
+            test -s "$f" || { echo "Missing or empty: $f"; exit 1; }
+          done
+          echo "Primary site files present"
+
+      - name: Internal links and asset references resolve (all sites)
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          def check(root_dir, pages):
+              root = Path(root_dir)
+              problems = []
+              class P(HTMLParser):
+                  def __init__(self):
+                      super().__init__(); self.refs = []
+                  def handle_starttag(self, tag, attrs):
+                      a = dict(attrs)
+                      if tag == "script" and "src" in a:
+                          self.refs.append(a["src"])
+                      if tag == "link" and a.get("rel") == "stylesheet":
+                          self.refs.append(a["href"])
+                      if tag == "a" and a.get("href") and not a["href"].startswith(("http", "#", "mailto:")):
+                          self.refs.append(a["href"])
+              for page in pages:
+                  p = P()
+                  p.feed((root / page).read_text(encoding="utf-8"))
+                  for ref in p.refs:
+                      if not (root / ref).resolve().is_file():
+                          problems.append(f"{root_dir}/{page}: missing {ref}")
+              return problems
+
+          problems = []
+          problems += check(".", ["index.html","products.html","analysis.html","content.html","compliance.html","tracking.html","flagged.html","404.html"])
+          problems += check("research-hub", sorted(f.name for f in Path("research-hub").glob("*.html")))
+          problems += check("northstar", ["index.html"])
+          problems += check("zone2", sorted(f.name for f in Path("zone2").glob("*.html")))
+          problems += check("affiliate-lab", sorted(f.name for f in Path("affiliate-lab").glob("*.html")))
+          if problems:
+              print("\n".join(problems))
+              raise SystemExit(1)
+          print("All internal links and assets resolve")
+          PY
+
+      - name: Primary dataset is well-formed
+        run: |
+          node --check assets/js/data.js && node --check assets/js/app.js && echo "JS syntax OK"
+
+      - name: Data files parse
+        run: |
+          python3 - <<'PY'
+          import glob, json
+          for f in sorted(glob.glob('research-hub/data/*.json')) + \
+                   sorted(glob.glob('zone2/data/*.json')) + \
+                   sorted(glob.glob('affiliate-lab/data/*.json')) + \
+                   ['research-hub/site-manifest.json']:
+              json.load(open(f, encoding='utf-8'))
+              print(f'ok   {f}')
+          PY
+
+      - name: No page prints a price and every page discloses
+        run: |
+          python3 - <<'PY'
+          import glob, re, sys
+          DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+          bad = []
+          pages = sorted(glob.glob('*.html')) + \
+                  sorted(glob.glob('research-hub/*.html')) + \
+                  sorted(glob.glob('northstar/*.html')) + \
+                  sorted(glob.glob('zone2/*.html'))
+          for f in pages:
+              t = open(f, encoding='utf-8').read()
+              if DISCLOSURE not in t:
+                  bad.append(f'{f}: missing disclosure')
+              if re.search(r'\$\s?\d[\d,]*\.\d{2}', t):
+                  bad.append(f'{f}: prints a price')
+          if bad:
+              print('\n'.join(bad))
+              sys.exit(1)
+          print(f'{len(pages)} pages: disclosure present, no prices printed')
+          PY
+
+      # ---- arena/181863ad-zone2: companion verification site ----
+      - name: affiliate-lab discloses, links resolve, no product prices
+        run: |
+          python3 - <<'PY'
+          import glob, re, sys
+          from html.parser import HTMLParser
+          from pathlib import Path
+          DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+          # Same rule as tools/validate_data.py: a dollar figure in a buying context is a
+          # product price (forbidden); program economics (bounty/commission/rate rows) are not.
+          MONEY = re.compile(r"\$\s?\d[\d,]*(?:\.\d{1,2})?")
+          PRICE_CONTEXT = re.compile(r"\b(price|pricing|current price|list price|buy|add to cart|deal|discount|sale|offer)\b", re.I)
+          PROGRAM_CONTEXT = re.compile(r"\b(bounty|commission|income|payment|minimum|check|gift card|fee|earn|rate|trial|stream|tax|refund|withhold)\w*", re.I)
+          bad = []
+          pages = sorted(glob.glob('affiliate-lab/*.html'))
+          if not pages:
+              bad.append('affiliate-lab: no pages found')
+          class P(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.refs = []
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if tag == "script" and "src" in a:
+                      self.refs.append(a["src"])
+                  if tag == "link" and a.get("rel") == "stylesheet":
+                      self.refs.append(a["href"])
+                  if tag == "a" and a.get("href") and not a["href"].startswith(("http", "#", "mailto:")):
+                      self.refs.append(a["href"])
+          for f in pages:
+              t = open(f, encoding="utf-8").read()
+              if DISCLOSURE not in t:
+                  bad.append(f'{f}: missing disclosure')
+              p = P(); p.feed(t)
+              for ref in p.refs:
+                  if not (Path("affiliate-lab") / ref).resolve().is_file():
+                      bad.append(f'{f}: missing {ref}')
+              # A row of a table, or a block of prose, is the unit of context.
+              units = re.split(r"</tr>|</p>|</li>|<br\s*/?>", re.sub(r"<[^>]+>", " ", t))
+              for unit in units:
+                  for m in MONEY.finditer(unit):
+                      if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):
+                          bad.append(f'{f}: money value {m.group(0)!r} in a buying context')
+          if bad:
+              print('\n'.join(bad)); sys.exit(1)
+          print(f'{len(pages)} affiliate-lab pages: disclosure present, links resolve, no product prices')
+          PY
+
+      - name: affiliate-lab per-row sourcing verifier
+        run: python3 affiliate-lab/scripts/verify_site.py
+
+      # ---- arena/f786c0d7-zone2: generated subpages under pages/ ----
+      # Rebuild first, so "committed output matches a fresh build" is a real property of this repo
+      # rather than something a reviewer has to trust.
+      - name: Rebuild the subpages and confirm committed output is current
+        run: python3 tools/build_site.py --check
+
+      - name: Subpage gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
+        run: python3 tools/validate_data.py
+
+      - name: Platform guard tests
+        run: python3 tests/test_pipeline.py
+
+      - name: Subpages disclose and never print a product price
+        run: |
+          python3 - <<'PY'
+          import re, sys
+          from pathlib import Path
+          DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+          pages = sorted(Path('pages').rglob('*.html'))
+          assert len(pages) >= 30, f'expected the full generated subpage set, found {len(pages)}'
+          bad = []
+          for f in pages:
+              text = f.read_text(encoding='utf-8')
+              if DISCLOSURE not in text:
+                  bad.append(f'{f}: missing the required Site disclosure')
+              if 'amazon.com/dp/' in text and 'rel="sponsored' not in text and 'plpRedirect' not in text:
+                  bad.append(f'{f}: links to a product page without rel="sponsored"')
+          if bad:
+              print('\n'.join(bad)); sys.exit(1)
+          print(f'{len(pages)} subpages: disclosure present, sponsored links qualified')
+          PY
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

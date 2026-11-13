@@ -1,209 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Compliance — Zone2 Affiliate Lab</title>
-<meta name="description" content="Amazon Associates and FTC compliance matrix: 12 requirements with official source links and this site's implementation status.">
-<link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compliance — Zone2</title>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header class="site">
-  <div class="wrap">
-    <a class="brand" href="index.html"><span class="dot"></span> Zone2 Affiliate Lab</a>
-    <nav class="main" aria-label="Main">
+<div class="shell">
+  <aside class="sidebar">
+    <h1>Zone2</h1>
+    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
+    <nav>
       <a href="index.html">Dashboard</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
-      <a href="comparisons.html">Comparisons</a>
-      <a href="buying-guides.html">Buying Guides</a>
-      <a href="compliance.html">Compliance</a>
-      <a href="executive-summary.html">Executive Summary</a>
-      <a href="flagged-for-review.html">Flagged</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html" class="active">Compliance</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="flagged.html">Flagged for Review</a>
     </nav>
-  </div>
-</header>
-
-<main class="wrap">
-  <div class="crumbs"><a href="index.html">Dashboard</a> / Compliance</div>
-  <h1>Compliance Matrix</h1>
-  <p class="lede">Amazon Associates Program requirements and U.S. FTC disclosure rules, each mapped to an official source and to this site's implementation status. Machine-readable copy: <a href="data/compliance.json"><code>data/compliance.json</code></a>.</p>
-
-  <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.</div>
-
-  <div class="callout ok"><strong>Core statement live:</strong> The exact sentence required by Operating Agreement Section 5 — "As an Amazon Associate I earn from qualifying purchases." — appears in the footer of every page on this site.</div>
-
-  <div class="panel">
-    <h2>Requirements &amp; status</h2>
-    <div class="table-scroll">
-      <table>
-        <thead><tr><th>ID</th><th>Requirement</th><th>Detail (from official source)</th><th>Source</th><th>Status here</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="num">C-01</td>
-            <td><strong>Site-level disclosure statement</strong></td>
-            <td>"You must clearly and prominently state … on your Site: 'As an Amazon Associate I earn from qualifying purchases.'"</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener">OA §5</a></td>
-            <td><span class="badge ok">Implemented</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-02</td>
-            <td><strong>Link-level disclosure clear &amp; conspicuous</strong></td>
-            <td>Clear (e.g. "(paid link)", "#ad", "#CommissionsEarned") and placed near the link/review where customers notice easily.</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98" target="_blank" rel="noopener">Disclosure help</a></td>
-            <td><span class="badge ok">Implemented</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-03</td>
-            <td><strong>Official Special Link formats only</strong></td>
-            <td>Links must use Amazon's tagged formats. Documented simple format: <code>http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID</code>.</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">Link format help</a></td>
-            <td><span class="badge warn">Blocked — no Tracking ID (F-12)</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-04</td>
-            <td><strong>Session / attribution rules</strong></td>
-            <td>24-hour session from click; cart purchase completes no later than 89 days after initial click-through.</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener">Program Policies</a></td>
-            <td><span class="badge ok">Documented</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-05</td>
-            <td><strong>Commission basis</strong></td>
-            <td>Calculated on the sale price, not the list price, of each qualifying item.</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GWJ4AHCH7U5LCL86" target="_blank" rel="noopener">Commissions FAQ</a></td>
-            <td><span class="badge ok">Documented</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-06</td>
-            <td><strong>Payment timing</strong></td>
-            <td>Paid approximately 60 days after the end of the month in which it was earned.</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/" target="_blank" rel="noopener">Associates FAQ</a></td>
-            <td><span class="badge ok">Documented</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-07</td>
-            <td><strong>FTC disclosure placement &amp; wording (U.S.)</strong></td>
-            <td>Place so it's hard to miss; simple clear language ("advertisement", "ad", "sponsored"); same language as the endorsement.</td>
-            <td><a class="src-link" href="https://www.ftc.gov/tips-advice/business-center/guidance/disclosures-101-social-media-influencers" target="_blank" rel="noopener">FTC Disclosures 101</a></td>
-            <td><span class="badge ok">Implemented</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-08</td>
-            <td><strong>FTC material-connection disclosure</strong></td>
-            <td>Connections consumers wouldn't expect must be disclosed clearly and conspicuously; Endorsement Guides revised 2023.</td>
-            <td><a class="src-link" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener">FTC Endorsement Guides FAQ</a></td>
-            <td><span class="badge ok">Implemented</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-09</td>
-            <td><strong>Site quality / application bar</strong></td>
-            <td>Robust original content (rule of thumb ≥10 posts), publicly available, website content recent (generally within last 60 days); ≥3 qualified sales within first 180 days.</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener">Application review</a></td>
-            <td><span class="badge warn">In progress — product posts held</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-10</td>
-            <td><strong>Creators API prerequisites</strong></td>
-            <td>Accepted Associates account, ≥10 qualifying sales in past 30 days, registration via Associates Central, generated credentials; primary account owner only.</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener">Creators API intro</a></td>
-            <td><span class="badge warn">Blocked — F-10</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-11</td>
-            <td><strong>PA-API 5 deprecation</strong></td>
-            <td>PA-API 5 deprecated; legacy calls receive HTTP 403 AccessDeniedException; migrate to Creators API.</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener">Deprecation notice</a></td>
-            <td><span class="badge ok">Architecture compliant</span></td>
-          </tr>
-          <tr>
-            <td class="num">C-12</td>
-            <td><strong>Disclosure matches the medium</strong></td>
-            <td>Disclosure must be made in the medium of the recommendation (text, voice, or both).</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98" target="_blank" rel="noopener">Disclosure help</a></td>
-            <td><span class="badge ok">Implemented (web text)</span></td>
-          </tr>
-        </tbody>
-      </table>
+  </aside>
+  <main class="main">
+    <div class="page-head">
+      <h2>Policy &amp; Disclosure Compliance</h2>
+      <p>Requirements verified from the official Amazon Associates Operating Agreement and Program Policies. The platform enforces these automatically.</p>
     </div>
-  </div>
 
-  <div class="panel">
-    <h2>Disclosure wording reference</h2>
-    <div class="table-scroll">
-      <table>
-        <thead><tr><th>Placement</th><th>Exact / recommended wording</th><th>Source</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>Site-wide (required)</td>
-            <td><strong>"As an Amazon Associate I earn from qualifying purchases."</strong></td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener">OA §5</a></td>
-          </tr>
-          <tr>
-            <td>At each affiliate link</td>
-            <td>Clear label such as "(paid link)", "#ad", or "#CommissionsEarned", conspicuous near the link</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98" target="_blank" rel="noopener">Disclosure help</a></td>
-          </tr>
-          <tr>
-            <td>Social / influencer content</td>
-            <td>Statement associated with your account; platform tools (e.g. Branded Content) may supplement but not replace it</td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98" target="_blank" rel="noopener">Disclosure help</a></td>
-          </tr>
-          <tr>
-            <td>FTC general</td>
-            <td>Plain language ("advertisement", "ad", "sponsored"); hard to miss; same language as the endorsement</td>
-            <td><a class="src-link" href="https://www.ftc.gov/tips-advice/business-center/guidance/disclosures-101-social-media-influencers" target="_blank" rel="noopener">FTC Disclosures 101</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="disclosure">
+      <strong>Mandatory disclosure (Operating Agreement §5):</strong> As an Amazon Associate I earn from qualifying purchases.
     </div>
-  </div>
 
-  <div class="panel">
-    <h2>Not yet possible (blocked items)</h2>
-    <div class="table-scroll">
-      <table>
-        <thead><tr><th>Item</th><th>Blocker</th><th>Flag</th><th>Source</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>Commission-bearing product links</td>
-            <td>No Associates Tracking ID (<code>tag=</code>) supplied</td>
-            <td><span class="badge flag">F-12</span></td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">Link format help</a></td>
-          </tr>
-          <tr>
-            <td>Automated catalog research</td>
-            <td>Creators API requires accepted account + ≥10 qualifying sales/30 days</td>
-            <td><span class="badge flag">F-10</span></td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener">Creators API intro</a></td>
-          </tr>
-          <tr>
-            <td>Personalized rate card view</td>
-            <td><code>/help/operating/schedule</code> redirects to sign-in (observed 2026-11-13)</td>
-            <td><span class="badge flag">F-09</span></td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/operating/schedule" target="_blank" rel="noopener">Commission Income Schedule</a></td>
-          </tr>
-          <tr>
-            <td>Live click/conversion dashboard</td>
-            <td>Requires enrolled Associates account with reporting access</td>
-            <td><span class="badge flag">F-10</span></td>
-            <td><a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GCDWWRFEMW3Q2TE2" target="_blank" rel="noopener">Earnings report help</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card">
+      <h3>Compliance Requirements</h3>
+      <div id="complianceTable"></div>
     </div>
-  </div>
-</main>
 
-<footer class="site">
-  <div class="wrap">
-    <div><strong>As an Amazon Associate I earn from qualifying purchases.</strong></div>
-    <div>Zone2 Affiliate Lab · Compliance matrix verified against official Amazon &amp; FTC pages on 2026-11-13</div>
-    <div><a href="sources.html">Sources</a> · <a href="verification.html">Verification log</a> · <a href="flagged-for-review.html">Flagged for Review</a> · <a href="https://github.com/kanlerxz87-cyber/Zone2" target="_blank" rel="noopener">Repository</a></div>
-  </div>
-</footer>
-<script src="assets/app.js"></script>
+    <div class="card">
+      <h3>Document references</h3>
+      <ul style="margin:0;padding-left:20px;font-size:14px">
+        <li><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Associates Program Operating Agreement</a> — updated October 15, 2025</li>
+        <li><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Associates Program Policies</a> — updated April 14, 2026</li>
+        <li><a href="https://affiliate-program.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon Associates Central</a> — program overview and eligibility</li>
+      </ul>
+    </div>
+
+    <footer class="site">
+      Verified dataset date: 2026-11-13. All rules quoted or summarized from the official sources listed per row.
+    </footer>
+  </main>
+</div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

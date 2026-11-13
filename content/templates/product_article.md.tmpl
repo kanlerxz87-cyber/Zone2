@@ -1,0 +1,102 @@
+---
+kind: product-article
+entry: {{entry_id}}
+asin: {{asin}}
+title: {{title}}
+brand: {{brand}}
+category: {{category}}
+generated_utc: {{generated_utc}}
+offer_as_of: {{as_of}}
+disclosure: true
+expires_utc: null          # set only for a real limited-time promo; the builder drops expired promo copy (R-06)
+analysis: {{analysis}}      # required: the enrollment rules demand original content with significant commentary
+sources: [catalog_lookup, commission_table]
+---
+
+# {{title}}: an evidence-led look
+
+<!-- As an Amazon Associate I earn from qualifying purchases. (Operating Agreement Sec. 5, R-01) -->
+(paid link) — the link below is an affiliate link. <!-- R-02: link-level disclosure sits next to the recommendation -->
+
+## Who this is for
+
+{{audience_need}}
+
+## What the listing actually states
+
+| Attribute | Value | Source |
+| --- | --- | --- |
+| Product name | {{title}} | dated catalog record, {{as_of}} |
+| Brand | {{brand}} | dated catalog record, {{as_of}} |
+| Category | {{category}} | dated catalog record, {{as_of}} |
+| Price | {{price_or_blank}} | shown only from a dated offer record (R-04); blank means "not displayed" |
+| Availability | {{availability_or_blank}} | same rule as price |
+
+Specifications are reproduced from the retrieved record verbatim. Nothing is added to, deleted from, or
+reworded out of retrieved content (R-10), and no figure below is estimated.
+
+## Where it falls short
+
+{{limitations}}
+
+<!-- Every critical sentence in this section needs an inline evidence reference or the linter fails the draft. -->
+
+## Editorial analysis
+
+{{analysis}}
+
+## Frequently asked questions
+
+{{faq_block}}
+
+## How we would verify a claim here
+
+Identity and attributes come from a catalog lookup for ASIN {{asin}} recorded on {{as_of}}. Commission band
+comes from the published rate table for {{category}}. Performance claims are not made: no click or earnings
+history exists at generation time.
+
+<aside class="cta">
+  <a class="sponsored-link" rel="sponsored nofollow" href="{{special_link}}">View the {{title}} listing on Amazon</a>
+  <p class="disclosure disclosure--link">(paid link)</p>
+</aside>
+
+As an Amazon Associate I earn from qualifying purchases.
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{title}}",
+  "sku": "{{asin}}",
+  "brand": { "@type": "Brand", "name": "{{brand}}" },
+  "review": {
+    "@type": "Review",
+    "name": "{{title}} review",
+    "author": { "@type": "Organization", "name": "{{publisher_name}}" },
+    "reviewBody": "{{analysis_summary}}",
+    "positiveNotes": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "{{pro_1}}" },
+        { "@type": "ListItem", "position": 2, "name": "{{pro_2}}" }
+      ]
+    },
+    "negativeNotes": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "{{con_1}}" },
+        { "@type": "ListItem", "position": 2, "name": "{{con_2}}" }
+      ]
+    }
+  }
+}
+</script>
+
+<!--
+Structured-data notes, enforced by the linter:
+  * positiveNotes / negativeNotes text must match what is visible on the page (Google, R-18).
+  * at least two statements in any mix of positive and negative notes.
+  * author must be a real Person or Team/Organization name - not a promo string.
+  * no promotional text (e.g. a discount teaser) inside review markup.
+  * an aggregateRating is emitted ONLY from a sourced rating; it is omitted rather than guessed.
+-->

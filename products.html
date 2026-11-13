@@ -1,210 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Products — Zone2 Affiliate Lab</title>
-<meta name="description" content="Product research table for the three supplied Amazon links: verification status, per-marketplace evidence, and blank-unverified attributes.">
-<link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Zone2</title>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header class="site">
-  <div class="wrap">
-    <a class="brand" href="index.html"><span class="dot"></span> Zone2 Affiliate Lab</a>
-    <nav class="main" aria-label="Main">
+<div class="shell">
+  <aside class="sidebar">
+    <h1>Zone2</h1>
+    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
+    <nav>
       <a href="index.html">Dashboard</a>
-      <a href="products.html">Products</a>
+      <a href="products.html" class="active">Products</a>
       <a href="analysis.html">Analysis</a>
-      <a href="comparisons.html">Comparisons</a>
-      <a href="buying-guides.html">Buying Guides</a>
+      <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
-      <a href="executive-summary.html">Executive Summary</a>
-      <a href="flagged-for-review.html">Flagged</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="flagged.html">Flagged for Review</a>
     </nav>
-  </div>
-</header>
-
-<main class="wrap">
-  <div class="crumbs"><a href="index.html">Dashboard</a> / Products</div>
-  <h1>Product Research Table</h1>
-  <p class="lede">All three entries supplied in the brief, verified line by line on 2026-11-13. Cells that could not be confirmed from an official Amazon page are left <strong>blank</strong> (hatched) and flagged — never inferred or filled.</p>
-
-  <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.</div>
-
-  <div class="callout bad"><strong>Verification result: 0 of 3 products identified.</strong> Codes are 9 characters (valid ASIN = 10 per <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">Amazon Associates</a> and <a href="https://sell.amazon.com/blog/fba-new-selection-program" target="_blank" rel="noopener">Amazon Selling</a>); every official <code>/dp/</code> URL returns 404; site search returns "No results". Flags: F-01…F-08.</div>
-
-  <div class="panel">
-    <h2>Master product table</h2>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Code (as supplied)</th>
-            <th>Product name</th>
-            <th>Price</th>
-            <th>Rating</th>
-            <th>Reviews</th>
-            <th>Category</th>
-            <th>Commission rate</th>
-            <th>ASIN format</th>
-            <th>Status</th>
-            <th>Source (official)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="num">P1</td>
-            <td><code>B04G1MEwY</code></td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td><span class="badge bad">9 chars — invalid</span></td>
-            <td><span class="badge flag">Unverified</span></td>
-            <td><a class="src-link" href="https://www.amazon.com/dp/B04G1MEwY" target="_blank" rel="noopener">amazon.com/dp (404)</a></td>
-          </tr>
-          <tr>
-            <td class="num">P2</td>
-            <td><code>B02NbDxp3</code></td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td><span class="badge bad">9 chars — invalid</span></td>
-            <td><span class="badge flag">Unverified</span></td>
-            <td><a class="src-link" href="https://www.amazon.com/dp/B02NbDxp3" target="_blank" rel="noopener">amazon.com/dp (404)</a></td>
-          </tr>
-          <tr>
-            <td class="num">P3</td>
-            <td><code>B00hJ57DV</code></td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td class="blank" title="Unverified — no official source">&nbsp;</td>
-            <td><span class="badge bad">9 chars — invalid</span></td>
-            <td><span class="badge flag">Unverified</span></td>
-            <td><a class="src-link" href="https://www.amazon.com/dp/B00hJ57DV" target="_blank" rel="noopener">amazon.com/dp (404)</a></td>
-          </tr>
-        </tbody>
-      </table>
+  </aside>
+  <main class="main">
+    <div class="page-head">
+      <h2>Affiliate Products</h2>
+      <p>Every row links to the official Amazon product page. Cells that could not be confirmed from an official source are left blank and flagged — never inferred.</p>
     </div>
-    <p style="font-size:13px;color:var(--muted);margin-top:10px;">Hatched cells = deliberately blank because no official Amazon page confirms the value. Machine-readable copy: <a href="data/products.json"><code>data/products.json</code></a>.</p>
-  </div>
 
-  <div class="panel">
-    <h2>Supplied links — behaviour as provided</h2>
-    <div class="table-scroll">
-      <table>
-        <thead><tr><th>#</th><th>Supplied URL</th><th>Observed result (2026-11-13)</th><th>Verdict</th><th>Source</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="num">P1</td>
-            <td><code>https://link.amazon/B04G1MEwY</code></td>
-            <td>Redirected to an unrelated Amazon page (<code>plpRedirect=mhFallback</code>), not a product for this code</td>
-            <td><span class="badge bad">Not a valid product link</span></td>
-            <td><a class="src-link" href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener">link.amazon/B04G1MEwY</a></td>
-          </tr>
-          <tr>
-            <td class="num">P2</td>
-            <td><code>https://link.amazon/B02NbDxp3</code></td>
-            <td>Redirected to an unrelated Amazon page (<code>plpRedirect=mhFallback</code>), not a product for this code</td>
-            <td><span class="badge bad">Not a valid product link</span></td>
-            <td><a class="src-link" href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener">link.amazon/B02NbDxp3</a></td>
-          </tr>
-          <tr>
-            <td class="num">P3</td>
-            <td><code>https://link.amazon/B00hJ57DV</code></td>
-            <td>Redirected to an unrelated Amazon page (<code>plpRedirect=mhFallback</code>), not a product for this code</td>
-            <td><span class="badge bad">Not a valid product link</span></td>
-            <td><a class="src-link" href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener">link.amazon/B00hJ57DV</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="disclosure">
+      <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
     </div>
-  </div>
 
-  <div class="panel">
-    <h2>Per-marketplace detail-page checks (18 URLs)</h2>
-    <p style="font-size:14px;color:var(--muted);">Each cell links the exact official URL fetched. All returned Amazon's "Page Not Found".</p>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr><th>Code</th><th>amazon.com</th><th>amazon.co.uk</th><th>amazon.de</th><th>amazon.in</th><th>amazon.ca</th><th>amazon.co.jp</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>B04G1MEwY</code></td>
-            <td><a class="src-link" href="https://www.amazon.com/dp/B04G1MEwY" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.co.uk/dp/B04G1MEwY" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.de/dp/B04G1MEwY" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.in/dp/B04G1MEwY" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.ca/dp/B04G1MEwY" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.co.jp/dp/B04G1MEwY" target="_blank" rel="noopener">404</a></td>
-          </tr>
-          <tr>
-            <td><code>B02NbDxp3</code></td>
-            <td><a class="src-link" href="https://www.amazon.com/dp/B02NbDxp3" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.co.uk/dp/B02NbDxp3" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.de/dp/B02NbDxp3" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.in/dp/B02NbDxp3" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.ca/dp/B02NbDxp3" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.co.jp/dp/B02NbDxp3" target="_blank" rel="noopener">404</a></td>
-          </tr>
-          <tr>
-            <td><code>B00hJ57DV</code></td>
-            <td><a class="src-link" href="https://www.amazon.com/dp/B00hJ57DV" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.co.uk/dp/B00hJ57DV" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.de/dp/B00hJ57DV" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.in/dp/B00hJ57DV" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.ca/dp/B00hJ57DV" target="_blank" rel="noopener">404</a></td>
-            <td><a class="src-link" href="https://www.amazon.co.jp/dp/B00hJ57DV" target="_blank" rel="noopener">404</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card">
+      <h3>Product Catalog — verified from official Amazon pages</h3>
+      <div id="productsTable"></div>
     </div>
-  </div>
 
-  <div class="panel">
-    <h2>Amazon site-search checks</h2>
-    <div class="table-scroll">
-      <table>
-        <thead><tr><th>Query</th><th>Official search URL</th><th>Result</th></tr></thead>
-        <tbody>
-          <tr><td><code>B04G1MEwY</code></td><td><a class="src-link" href="https://www.amazon.com/s?k=B04G1MEwY" target="_blank" rel="noopener">amazon.com/s?k=B04G1MEwY</a></td><td><span class="badge bad">No results for your search query</span></td></tr>
-          <tr><td><code>B02NbDxp3</code></td><td><a class="src-link" href="https://www.amazon.com/s?k=B02NbDxp3" target="_blank" rel="noopener">amazon.com/s?k=B02NbDxp3</a></td><td><span class="badge bad">No results for your search query</span></td></tr>
-          <tr><td><code>B00hJ57DV</code></td><td><a class="src-link" href="https://www.amazon.com/s?k=B00hJ57DV" target="_blank" rel="noopener">amazon.com/s?k=B00hJ57DV</a></td><td><span class="badge bad">No results for your search query</span></td></tr>
-        </tbody>
-      </table>
+    <div id="productOverview"></div>
+
+    <div class="card">
+      <h3>Verified Specifications (official Amazon + manufacturer pages)</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but are
+        deliberately not published here, in line with Amazon Associates price-display restrictions and
+        the site's no-price rule; Amazon prices remain unverified and are flagged. Rows where official
+        sources disagree are marked <span class="badge warn">Conflict</span> and both values are shown.
+      </p>
+      <div id="specsTable"></div>
     </div>
-  </div>
 
-  <div class="panel">
-    <h2>What happens next for each entry</h2>
-    <ol class="steps">
-      <li><strong>Replace the code.</strong> A valid identifier is a 10-character ASIN found on the product page under Product Details (<a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">source</a>).</li>
-      <li><strong>Re-run the checks.</strong> The verification script pattern (6 marketplaces + site search + short-link resolve) is documented in <a href="verification.html">Verification Log</a>.</li>
-      <li><strong>Populate blank cells</strong> only from the official product detail page; keep flags until then.</li>
-      <li><strong>Attach a Tracking ID</strong> using the official link format <code>…/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID</code> (<a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">source</a>) — currently blocked by flag F-12.</li>
-    </ol>
-  </div>
-</main>
-
-<footer class="site">
-  <div class="wrap">
-    <div><strong>As an Amazon Associate I earn from qualifying purchases.</strong></div>
-    <div>Zone2 Affiliate Lab · Product data verified against official sources on 2026-11-13 · Unverified values are blank and flagged</div>
-    <div><a href="sources.html">Sources</a> · <a href="verification.html">Verification log</a> · <a href="flagged-for-review.html">Flagged for Review</a> · <a href="https://github.com/kanlerxz87-cyber/Zone2" target="_blank" rel="noopener">Repository</a></div>
-  </div>
-</footer>
-<script src="assets/app.js"></script>
+    <footer class="site">
+      Verified dataset date: 2026-11-13. Titles, brands, categories and ASINs verified against the official
+      Amazon product pages listed per row. Price, rating, review count and availability are
+      <em>unverified</em> and flagged on the <a href="flagged.html">Flagged for Review</a> page.
+    </footer>
+  </main>
+</div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

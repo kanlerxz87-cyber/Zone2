@@ -1,0 +1,122 @@
+{
+  "note": "Ledger of the three products named in the project brief. Field values are only populated when an official source states them. Blank + status=UNVERIFIED means no official source could be found; the value was NOT inferred.",
+  "verified_utc": "2026-11-13",
+  "lookup_path": "Creators API GetItems (S07, S08) with an authenticated Associates account - not available in this workspace",
+  "entries": [
+    {
+      "id": "P-01",
+      "label": "Submitted item 1",
+      "submitted_url": "https://link.amazon/B04G1MEwY",
+      "token_as_given": "B04G1MEwY",
+      "asin_format_valid": false,
+      "asin_length_observed": 9,
+      "canonical_dp_url": "https://www.amazon.com/dp/B04G1MEwY",
+      "canonical_dp_result": "Page Not Found (Amazon error page)",
+      "title": "",
+      "brand": "",
+      "category": "",
+      "price": "",
+      "availability": "",
+      "rating": "",
+      "review_count": "",
+      "bsr": "",
+      "commission_rate": "",
+      "competition_level": "",
+      "conversion": "",
+      "clicks": "",
+      "status": "UNVERIFIED",
+      "source_ids": ["S16", "S19"],
+      "why_blank": "Token is 9 characters, so it is not a valid ASIN; the canonical /dp/ URL returns Amazon's Page Not Found page; the submitted short link redirected to an unrelated ASIN via plpRedirect=mhFallback. No official record identifies the intended product, so no attribute may be stated.",
+      "flag_ids": ["F-01", "F-02", "F-04", "F-06"]
+    },
+    {
+      "id": "P-02",
+      "label": "Submitted item 2",
+      "submitted_url": "https://link.amazon/B02NbDxp3",
+      "token_as_given": "B02NbDxp3",
+      "asin_format_valid": false,
+      "asin_length_observed": 9,
+      "canonical_dp_url": "https://www.amazon.com/dp/B02NbDxp3",
+      "canonical_dp_result": "Page Not Found (Amazon error page)",
+      "title": "",
+      "brand": "",
+      "category": "",
+      "price": "",
+      "availability": "",
+      "rating": "",
+      "review_count": "",
+      "bsr": "",
+      "commission_rate": "",
+      "competition_level": "",
+      "conversion": "",
+      "clicks": "",
+      "status": "UNVERIFIED",
+      "source_ids": ["S17", "S20"],
+      "why_blank": "Token is 9 characters; canonical /dp/ URL returns Page Not Found; short link resolved to a different, unrelated ASIN through mhFallback.",
+      "flag_ids": ["F-01", "F-02", "F-04", "F-06"]
+    },
+    {
+      "id": "P-03",
+      "label": "Submitted item 3",
+      "submitted_url": "https://link.amazon/B00hJ57DV",
+      "token_as_given": "B00hJ57DV",
+      "asin_format_valid": false,
+      "asin_length_observed": 9,
+      "canonical_dp_url": "https://www.amazon.com/dp/B00hJ57DV",
+      "canonical_dp_result": "Page Not Found (Amazon error page)",
+      "title": "",
+      "brand": "",
+      "category": "",
+      "price": "",
+      "availability": "",
+      "rating": "",
+      "review_count": "",
+      "bsr": "",
+      "commission_rate": "",
+      "competition_level": "",
+      "conversion": "",
+      "clicks": "",
+      "status": "UNVERIFIED",
+      "source_ids": ["S18", "S21"],
+      "why_blank": "Token is 9 characters; canonical /dp/ URL returns Page Not Found; short link resolved to a different, unrelated ASIN through mhFallback. All three short links landed on three DIFFERENT products, which is the signature of a fallback rather than a token-to-product mapping.",
+      "flag_ids": ["F-01", "F-02", "F-04", "F-06"]
+    }
+  ],
+  "evidence_observations": [
+    {
+      "id": "E-01",
+      "observation": "GET https://link.amazon/B04G1MEwY ended at https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-...&channelId=704&plpRedirect=mhFallback (page title observed: CHEFMAN 6 Quart Dual Basket Air Fryer Oven ...)",
+      "interpretation": "Fallback destination, not a mapping of the submitted token. Recorded for reproducibility only.",
+      "status": "OBSERVED",
+      "source_ids": ["S19"]
+    },
+    {
+      "id": "E-02",
+      "observation": "GET https://link.amazon/B02NbDxp3 ended at https://www.amazon.com/dp/B09B7SB46R?...plpRedirect=mhFallback (page title observed: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven ...)",
+      "interpretation": "Different fallback destination from E-01, i.e. the token did not select the product.",
+      "status": "OBSERVED",
+      "source_ids": ["S20"]
+    },
+    {
+      "id": "E-03",
+      "observation": "GET https://link.amazon/B00hJ57DV ended at https://www.amazon.com/dp/B08DKYBTPH?...plpRedirect=mhFallback (page title observed: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 ...)",
+      "interpretation": "Third distinct fallback destination. No submitted token survived the redirect.",
+      "status": "OBSERVED",
+      "source_ids": ["S21"]
+    },
+    {
+      "id": "E-04",
+      "observation": "https://www.amazon.com/dp/B04G1MEwY , https://www.amazon.com/dp/B02NbDxp3 and https://www.amazon.com/dp/B00hJ57DV each returned Amazon's \"Sorry! We couldn't find that page\" error page on 2026-11-13.",
+      "interpretation": "No catalog record exists for any of the three tokens as given.",
+      "status": "OBSERVED",
+      "source_ids": ["S16", "S17", "S18"]
+    },
+    {
+      "id": "E-05",
+      "observation": "Each token was measured against the ASIN identifier definition (10 characters): B04G1MEwY=9, B02NbDxp3=9, B00hJ57DV=9. Each is alphanumeric, so only the length fails.",
+      "interpretation": "Pattern is consistent with a one-character truncation, but the missing character is not recoverable and was NOT guessed.",
+      "status": "OBSERVED",
+      "source_ids": ["S16", "S17", "S18"]
+    }
+  ]
+}

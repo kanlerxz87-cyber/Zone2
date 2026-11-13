@@ -9,7 +9,7 @@
 
 | # | Path | Lines | Content | Status |
 |---|------|-------|---------|--------|
-| 1 | `README.md` | 1 | `# Zone2` | Present but empty of project information — flagged (see F-13) |
+| 1 | `README.md` | 1 | `# Zone2` | Present but empty of project information — flagged (see AF-13) |
 | 2 | `.git/` | — | Git metadata, single commit `f577167 Initial commit` | OK |
 
 **Total tracked files at baseline: 1.** No source code, no data files, no license, no CI configuration, no GitHub Pages configuration existed before this session.
@@ -77,25 +77,25 @@ Exact-phrase searches for `"B04G1MEwY"`, `"B02NbDxp3"`, and `"B00hJ57DV"` return
 
 ### 3.5 Conclusion for the three products
 
-**0 of 3 products could be identified from any official source.** Product name, price, rating, review count, category, best-seller rank, availability, and product-specific commission rate are therefore **left blank and flagged as unverified** on every page of the site. See `flagged-for-review.html` items F-01 … F-08.
+**0 of 3 products could be identified from any official source.** Product name, price, rating, review count, category, best-seller rank, availability, and product-specific commission rate are therefore **left blank and flagged as unverified** on every page of the site. See `flagged-for-review.html` items AF-01 … AF-08.
 
 ## 4. Irregularities flagged for review
 
 | ID | Irregularity | Evidence | Blocking? |
 |----|--------------|----------|-----------|
-| F-01 | Code `B04G1MEwY` is 9 characters; not a valid 10-character ASIN | §3; official ASIN definition links in §3 | No — flagged |
-| F-02 | Code `B02NbDxp3` is 9 characters; not a valid 10-character ASIN | §3 | No — flagged |
-| F-03 | Code `B00hJ57DV` is 9 characters; not a valid 10-character ASIN | §3 | No — flagged |
-| F-04 | All 18 official `/dp/<code>` URLs return HTTP 404 | §3.1 | No — flagged |
-| F-05 | Official Amazon search returns "No results" for all three codes | §3.2 | No — flagged |
-| F-06 | Supplied `link.amazon/<code>` URLs fall back to unrelated pages, not the supplied products | §3.3 | No — flagged |
-| F-07 | No product attributes (name/price/rating/reviews/category) confirmable → all product data cells blank | §3.4–§3.5 | No — flagged |
-| F-08 | Per-product commission rate unknown (product category unknown) | Rate card is category-based only: https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ | No — flagged |
-| F-09 | Associates Commission Income Schedule requires an Associates sign-in (observed redirect to sign-in) | https://affiliate-program.amazon.com/help/operating/schedule | No — flagged |
-| F-10 | Product-research automation (Creators API) requires an accepted Associates account + ≥10 qualifying sales in prior 30 days | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction | No — flagged |
-| F-11 | Legacy PA-API 5 is deprecated (HTTP 403 `AccessDeniedException` if called) | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation | No — flagged |
-| F-12 | No Amazon Associates Tracking ID (`tag`) was supplied → no commissioned affiliate links can be generated yet | Official link format requires `tag=YOURASSOCIATEID`: https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC | No — flagged |
-| F-13 | Baseline repo contained only a one-line README; no pre-existing product list, data, or code referenced by the brief | §1 | No — flagged |
+| AF-01 | Code `B04G1MEwY` is 9 characters; not a valid 10-character ASIN | §3; official ASIN definition links in §3 | No — flagged |
+| AF-02 | Code `B02NbDxp3` is 9 characters; not a valid 10-character ASIN | §3 | No — flagged |
+| AF-03 | Code `B00hJ57DV` is 9 characters; not a valid 10-character ASIN | §3 | No — flagged |
+| AF-04 | All 18 official `/dp/<code>` URLs return HTTP 404 | §3.1 | No — flagged |
+| AF-05 | Official Amazon search returns "No results" for all three codes | §3.2 | No — flagged |
+| AF-06 | Supplied `link.amazon/<code>` URLs fall back to unrelated pages, not the supplied products | §3.3 | No — flagged |
+| AF-07 | No product attributes (name/price/rating/reviews/category) confirmable → all product data cells blank | §3.4–§3.5 | No — flagged |
+| AF-08 | Per-product commission rate unknown (product category unknown) | Rate card is category-based only: https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ | No — flagged |
+| AF-09 | Associates Commission Income Schedule requires an Associates sign-in (observed redirect to sign-in) | https://affiliate-program.amazon.com/help/operating/schedule | No — flagged |
+| AF-10 | Product-research automation (Creators API) requires an accepted Associates account + ≥10 qualifying sales in prior 30 days | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction | No — flagged |
+| AF-11 | Legacy PA-API 5 is deprecated (HTTP 403 `AccessDeniedException` if called) | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation | No — flagged |
+| AF-12 | No Amazon Associates Tracking ID (`tag`) was supplied → no commissioned affiliate links can be generated yet | Official link format requires `tag=YOURASSOCIATEID`: https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC | No — flagged |
+| AF-13 | Baseline repo contained only a one-line README; no pre-existing product list, data, or code referenced by the brief | §1 | No — flagged |
 
 None of the flagged items block publication. All are listed with source links on the site's **Flagged for Review** page.
 

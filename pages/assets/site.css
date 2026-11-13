@@ -1,0 +1,57 @@
+/* Subpage styling. Extends the landing page's design system (styles.css) rather than restyling it,
+   so the dashboard and the generated subpages stay visually identical. */
+
+.disclosure{margin:0 0 10px;font-size:12px;line-height:1.55;color:#5b6678;background:#f4f7ff;border:1px solid #dde5ff;border-radius:8px;padding:11px 13px}
+.disclosure strong{display:block;color:#31458a;font-size:11px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:3px}
+.foot-meta{color:#98a3b2;font-size:11px;line-height:1.6}
+.foot-meta span{padding:0 5px}
+.foot-meta a{color:#526be1;text-decoration:none}
+.topbar .crumb a{color:#8a95a4;text-decoration:none}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 11px;font-size:11px;font-weight:600;color:#41506a;background:#fff;text-decoration:none;white-space:nowrap}
+.chip:hover{border-color:#b9c5ff;color:#3f57c9}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav .nav-link{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;color:#5d6a7e;text-decoration:none;font-size:12px;font-weight:600}
+.nav .nav-link:hover{background:#f2f5fb;color:#26334a}
+.nav .nav-link.active{background:#eef1ff;color:#3a51c4}
+.lede{font-size:13px;line-height:1.75;color:#4d5b6f;margin:0}
+.page-head{gap:16px}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px}
+.data-table{min-width:900px;font-size:11.5px}
+.data-table caption{caption-side:top;text-align:left;font-size:11px;color:#7d8798;padding:0 0 8px}
+.data-table th{background:#fafbfe;position:sticky;top:0;z-index:1}
+.data-table td{line-height:1.55}
+.data-table tbody tr:hover{background:#fbfcff}
+.cell-num{font-variant-numeric:tabular-nums;font-weight:700;color:#2f3d55;text-align:right;white-space:nowrap}
+.cell-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:#3d4a60;word-break:break-word}
+.cell-blank{color:#c2c9d3}
+.blank-note{display:block;font-size:9.5px;color:#aeb6c2;letter-spacing:.2px;margin-top:2px}
+.cell-unverified{background:#fffaf1}
+.cell-src{white-space:nowrap}
+.src{display:inline-flex;flex-direction:column;line-height:1.25;color:#4560d8;text-decoration:none;font-weight:700;font-size:10.5px;margin:1px 8px 1px 0;vertical-align:top}
+.src:hover{text-decoration:underline}
+.src-host{display:block;font-weight:500;color:#93a0b1;font-size:9px;letter-spacing:.1px}
+.pill-ok{background:#e6f6ef;color:#1c7d57}
+.pill-neg{background:#eef1f6;color:#4a5a72}
+.pill-info{background:#eef4ff;color:#3f5ec4}
+.empty-row{color:#8b95a4;font-style:italic;text-align:center;padding:22px 10px}
+.stats{margin-bottom:18px}
+.why{padding:12px 0;border-bottom:1px solid #f0f2f5}
+.why:last-child{border-bottom:0}
+.why dt{font-weight:700;font-size:12px;color:#2d3a52;margin-bottom:4px}
+.why dd{margin:0;font-size:11.5px;color:#61708a;line-height:1.6}
+.flags-inline{margin-top:6px!important}
+.flags-inline a{color:#a76512;font-weight:700;text-decoration:none;font-size:10.5px;margin-right:8px}
+.flags-inline a:hover{text-decoration:underline}
+.findings{margin:0;padding-left:20px}
+.findings li{font-size:12.5px;line-height:1.7;color:#4e5c71;margin-bottom:11px}
+.findings li:last-child{margin-bottom:0}
+.code{background:#f7f8fc;border:1px solid #eceff5;border-radius:8px;padding:13px 15px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;line-height:1.7;color:#41506a;margin:0}
+.pagelink{color:#3f57c9;text-decoration:none;font-weight:600}
+.pagelink:hover{text-decoration:underline}
+.grid-2{display:grid;grid-template-columns:1fr;gap:15px}
+@media(min-width:1100px){.grid-2{grid-template-columns:1.35fr 1fr}}
+.notice{margin-bottom:17px}
+.panel{margin-bottom:15px}
+@media(max-width:650px){.data-table{font-size:11px}.nav{flex-direction:row;overflow:auto}.nav .nav-link{white-space:nowrap}}
+/* print: the tables are the deliverable, so keep them legible on paper */
+@media print{.sidebar,.topbar,.chip{display:none}.main{margin:0}.data-table{min-width:0;font-size:9.5px}.table-wrap{overflow:visible}}
