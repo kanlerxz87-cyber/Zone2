@@ -1,92 +1,107 @@
-# Northstar — AI-powered Amazon affiliate research platform
+# Zone2 — Amazon affiliate research platform
 
-A source-verified affiliate intelligence workspace: a live dashboard, category subpages, a compliance engine,
-and the automation that connects them. **Every table row links to an official source, or the value is left
-blank and flagged. Nothing is inferred.**
+Three views of the same assignment, built by three sessions working in parallel and integrated here.
+**One rule across all of them:** nothing is asserted without an official source, and where a value cannot be
+confirmed it is left blank and flagged rather than filled in.
 
-**Live site:** https://kanlerxz87-cyber.github.io/Zone2/ ·
-**Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md) ·
-**Coordination & verification log:** [`COORDINATION.md`](COORDINATION.md)
+**Live site:** <https://kanlerxz87-cyber.github.io/Zone2/>
 
-## Start here
+> As an Amazon Associate I earn from qualifying purchases.
 
-| Page | What it answers |
-|---|---|
-| [Landing dashboard](index.html) | Research snapshot, product queue, content pipeline, compliance, flags |
-| [Findings hub](pages/index.html) | Every table, every flag, and the evidence behind each row |
-| [Executive summary](pages/executive-summary.html) | What was verified, what was built, what is blocking the rest |
-| [Requested products](pages/products.html) | The three items named in the brief, with each blank field explained |
-| [Categories](pages/categories/index.html) | One subpage per published Amazon commission band (11) |
-| [Niche discovery](pages/niches.html) | The sourced eligibility filter and why the ranking queue is empty |
-| [Platform modules](pages/modules/index.html) | The 12 capabilities and the honest state of each |
-| [Commissions](pages/commissions.html) | Published rates, bounties, attribution windows, payment terms |
-| [Compliance](pages/compliance.html) | 20 program rules mapped 1:1 to the control that enforces them |
-| [Verification log](pages/verification.html) | 30 checks: claim → method → official source → verdict |
-| [Official sources](pages/sources.html) | Every document relied on, with access dates |
-| [Flagged for review](pages/flags.html) | Unverified items and irregularities, with source links |
+---
+
+## The three views
+
+| Path | What it is | Built by |
+|---|---|---|
+| `/index.html` | **Northstar dashboard** — overview, product research, content studio, optimization, compliance, flagged review. Hash navigation, no build step, no dependencies. | `arena/6b8bb130-zone2` |
+| `/start.html` → `/overview.html` | **Affiliate Research Hub** — generated hub with per-product attribute rows traced to official Amazon or manufacturer pages, plus the full brief-disposition matrix. | `arena/6602723a-zone2` |
+| `/pages/index.html` | **Findings & platform subpages** — 37 generated pages: executive summary, per-product ledger, one subpage per published Amazon commission band, 12 platform-module pages, compliance control ledger, verification log, source register, tracking/content/architecture pages, and the Flagged-for-Review queue. | `arena/f786c0d7-zone2` |
 
 ## The three requested products
 
-`https://link.amazon/B04G1MEwY`, `https://link.amazon/B02NbDxp3`, `https://link.amazon/B00hJ57DV`
+`link.amazon/B04G1MEwY` · `link.amazon/B02NbDxp3` · `link.amazon/B00hJ57DV`
 
-Each token is **9 characters** (an ASIN is 10), each `amazon.com/dp/<token>` returns **Page Not Found**, and
-each short link redirected to a *different, unrelated* product through `plpRedirect=mhFallback`. Product
-identity therefore cannot be established, so title, brand, category, price, availability, rating, review
-count, competition and commission band are **blank and flagged** — never guessed. See
-[Flagged for review](pages/flags.html) (F-01…F-06).
+| Check | Result |
+|---|---|
+| Token length | **9 characters each** — an ASIN is 10, so none can address a catalog record |
+| `amazon.com/dp/<token>` | **Page Not Found** for all three (verified 2026-11-13) |
+| Short-link behaviour | each token landed on a **different, unrelated** `dp/` ASIN carrying `plpRedirect=mhFallback` |
+| Reproducibility test | re-fetching one link returned the same `dp/` path but a **"Best Sellers in Kitchen & Dining" carousel** instead of a product page, with a different `btn_ref` shuffle token |
+
+**Conclusion:** the destination is a shuffled fallback, not a token→product mapping, so the identity of the three
+requested items is unresolved. The `product-B0*.html` pages in the hub document those ASINs accurately (each row
+is sourced to the manufacturer's own page) but they are **not established as the items named in the brief** — see
+flag **F-12** on `/pages/flags.html`. Fields that no official source states are blank on every view.
 
 ## Repository layout
 
 ```
-index.html · app.js · data.js · styles.css   landing dashboard (hash-routed, no build step)
-pages/                                       generated subpages: categories, modules, findings, flags
-data/                                        source of truth: products, rates, rules, flags, sources, niches
-tools/                                       guards, collector, scoring, generator, tracker, optimizer, build, validate
-content/templates/                           article / comparison / buying-guide templates
-tests/test_pipeline.py                       executable checks for every guard
-.github/workflows/pages.yml                  validate -> publish to GitHub Pages
-COORDINATION.md                              session board, verification log, conflict notes
+index.html, app.js, data.js, styles.css   Northstar dashboard
+*.html, assets/, site-manifest.json       generated verified hub (root-level pages)
+pages/, pages/assets/site.css             generated subpages (37) - findings, categories, modules, flags
+
+data/                                     the hub's dataset (products, compliance, requirements, sources)
+ledger/                                   the subpages' dataset (products, commission table, rules, flags,
+                                          verification log, niches, campaigns, sources)
+docs/                                     hub executive summary and methodology
+scripts/build.py, scripts/verify.py       hub generator + its guard
+tools/                                    guard, Creators API client, scoring, content engine, link builder,
+                                          click tracker, optimizer, cache, build_site.py, validate_data.py
+tests/test_pipeline.py                    executable checks for every guard in tools/
+content/templates/                         article / comparison / buying-guide templates
+COORDINATION.md                           shared board, merge records, irregularities, verification log
 ```
 
-## Tooling
+Two data namespaces exist because two sessions built in parallel and their schemas differ; `ledger/` rows cite
+`ledger/sources.json`, `data/` rows cite `data/sources.json`. Both are enforced by their own gate.
+
+## Build and check locally
+
+Python 3.9+ for the hub; 3.10+ for `tools/` (type-hint syntax). No third-party dependencies.
 
 ```bash
-python3 tools/build_site.py            # regenerate pages/ from data/*.json (deterministic, network-free)
-python3 tools/build_site.py --check     # fail if committed pages/ are stale
-python3 tools/validate_data.py          # deploy gate: per-row sourcing, blank-or-flagged, links, disclosure
-python3 tests/test_pipeline.py          # 11 guard checks
-PYTHONPATH=tools python3 tools/scoring.py
-PYTHONPATH=tools python3 tools/amazon_creators_api.py   # prints BLOCKED until credentials exist
-PYTHONPATH=tools python3 tools/generate_articles.py     # refuses unverified entries by design
+python3 scripts/build.py            # regenerate the verified hub (root pages)
+python3 scripts/verify.py           # hub guard: unsourced rows, links, prices, disclosure
+python3 tools/build_site.py         # regenerate pages/ from ledger/*.json (deterministic)
+python3 tools/build_site.py --check # fail if committed pages/ are stale
+python3 tools/validate_data.py      # subpage gate: per-row sourcing, blank-or-flagged, links, disclosure
+python3 tests/test_pipeline.py      # 11 executable checks for the guards
+python3 -m http.server 8080         # preview every view at http://localhost:8080
 ```
 
-`tools/amazon_creators_api.py` targets the **Creators API** (PA-API 5.0 is deprecated and returns
-`403 AccessDenied`). Prerequisites per Amazon's docs: an Associates account for the target marketplace and at
-least 10 qualifying sales in the past 30 days. With no credentials it exits `BLOCKED` — it does not scrape and
-it does not substitute a value.
+## What the verification enforces
 
-## Data and verification contract
+**Hub (`scripts/verify.py`)** — a `verified`/`conflict` row without a source URL; a non-`https` or non-official
+source; an `unverified` row carrying a published value; a broken internal link; a missing disclosure or trademark
+attribution; any printed price (including bare figures from the audit snapshot).
 
-Rows live in `data/*.json`. A row may only carry a value if it names a `source_ids` entry from
-`data/sources.json`, whose host is allowlisted to
-`affiliate-program.amazon.com`, `amazon.com`, `webservices.amazon.com`, `ftc.gov`,
-`developers.google.com`, `support.google.com`, `docs.github.com`. `tools/validate_data.py` enforces this, plus:
-no invented performance metrics, no Amazon mark in our own naming, disclosure wherever a sponsored link
-exists, no divergence from the landing page's product rows, and no broken internal links.
+**Subpages (`tools/validate_data.py`)** — every row must cite an allowlisted official host
+(`affiliate-program.amazon.com`, `amazon.com`, `webservices.amazon.com`, `ftc.gov`, `developers.google.com`,
+`support.google.com`, `docs.github.com`) or be blank **and** linked to a flag; no invented performance metrics;
+no Amazon mark in the identifiers this project controls; the §5 disclosure sentence wherever a sponsored link
+exists; no divergence from the dashboard's product rows; no broken internal links (1,164 checked).
 
-All policy and rate data was read from the cited page on **2026-11-13**. Both governing pages carry update
-dates (Agreement: Oct 15 2025; Program Policies: Apr 14 2026) and change without notice — re-verify per cycle.
+## Economics, from Amazon's published statement
 
-## Affiliate disclosure
+`ledger/commission_table.json` transcribes Table 1 row by row
+([source](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ)): 10.00% Luxury Beauty /
+Luxury Stores Beauty / Amazon Explore; 5.00% music, Handmade, digital video; 4.50% Physical Books, Kitchen,
+Automotive; 4.00% devices/fashion/accessories; 3.00% the large home/toys/outdoors/pets cluster; 2.50% PC;
+2.00% TVs; 1.00% grocery/health/console; 0.00% nine excluded groups; 4.00% All Other Categories. Attribution
+mechanics wired into the model: 24-hour Session, 89-day cart path, 180-day ship-and-pay, ~60-day payment lag,
+US minimums 10 / 10 (2,000 cap) / 100 USD (+15 USD check fee)
+([Program Policies](https://affiliate-program.amazon.com/help/operating/policies)).
 
-> As an Amazon Associate I earn from qualifying purchases.
+## Automation notes
 
-This sentence is required by the Amazon Associates Program Operating Agreement (§5) and appears in the footer
-of every page. Outbound links are qualified with `rel="sponsored"` per Google's guidance, and this project's
-own name deliberately contains no Amazon mark, as the Participation Requirements require.
+`tools/amazon_creators_api.py` targets the **Creators API** — PA-API 5.0 is deprecated and returns
+`403 AccessDenied` — and exits `BLOCKED` (never scraping) until an eligible Associates account exists
+(prerequisite per Amazon: ≥10 qualifying sales in the past 30 days). `tools/scoring.py` returns
+`INSUFFICIENT_DATA` rather than a default when an input is missing; `tools/generate_articles.py` refuses to
+draft copy for an entry without a resolved identity; `tools/optimize.py` takes no action without ≥30 clicks
+**and** a dated report; `tools/redirect_server.py` counts static campaign keys and stores no visitor
+identifier, because associating a sub-tag with an end user is prohibited.
 
-## Notes
-
-The site is a static build (GitHub Pages) with no backend, no cookies, and no visitor identifiers; the click
-tracker that ships with it counts static campaign keys only, because associating a sub-tag with a specific end
-user is prohibited by the program. Prices and availability are intentionally never displayed as static text.
+Policy pages cited here carry their own update dates (Agreement: 15 Oct 2025; Program Policies: 14 Apr 2026)
+and change without notice — re-verify each cycle.

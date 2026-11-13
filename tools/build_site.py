@@ -22,7 +22,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 PAGES = REPO / "pages"
-DATA = REPO / "data"
+DATA = REPO / "ledger"
 SITE_CSS_SRC = PAGES / "assets" / "site.css"
 
 SITE_NAME = "Northstar"  # never an Amazon mark - Participation Requirements rule R-11
@@ -160,6 +160,7 @@ NAV = [
     ("tracking.html", "Tracking"),
     ("content-engine.html", "Content engine"),
     ("architecture.html", "Architecture"),
+    ("__hub__", "Verified hub (other session)"),
 ]
 
 
@@ -168,6 +169,14 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
     root = "../" * (depth + 1)
     items = []
     for href, label in NAV:
+        if href == "__hub__":
+            items.append(
+                f'<div class="nav-sep">ALSO IN THIS REPO</div>'
+                f'<a class="nav-link" href="{root}start.html">Start page</a>'
+                f'<a class="nav-link" href="{root}overview.html">Verified hub overview</a>'
+                f'<a class="nav-link" href="{root}flagged.html">Hub review flags</a>'
+            )
+            continue
         active = " active" if href == rel else ""
         items.append(f'<a class="nav-link{active}" href="{up}{esc(href)}">{esc(label)}</a>')
     flag_count = len(FLAGS["flags"])
@@ -824,12 +833,12 @@ def page_architecture() -> str:
         ("Cost per page", "one catalog lookup plus a render and a lint, so growth is bounded by API throughput rather than manual effort", []),
         ("Multi-session safety", "COORDINATION.md claims with non-overlapping file scopes; shared outputs touched only by the integration session", []),
         ("Deploy gate", "the validator runs in CI: broken links, unsourced rows or disclosure errors stop publication", []),
-        ("Single source of truth", "the site renders from data/*.json; no page holds a hand-typed figure", []),
+        ("Single source of truth", "the site renders from ledger/*.json; no page holds a hand-typed figure", []),
     ]
     layout = (
         "index.html / app.js / data.js / styles.css   landing dashboard (merged first, preserved)\n"
         "pages/                                        generated subpages: categories, modules, findings\n"
-        "data/                                         source of truth: products, rates, rules, flags, sources\n"
+        "ledger/                                       source of truth: products, rates, rules, flags, sources\n"
         "tools/                                        guard, collector, scoring, generator, tracker, optimizer, build, validate\n"
         "content/templates/                            article / comparison / buying-guide templates\n"
         ".github/workflows/pages.yml                   validate + publish to GitHub Pages\n"
@@ -840,7 +849,7 @@ def page_architecture() -> str:
         + panel("Automation and scalability properties", table(["Property", "How it is achieved", "Source"], [[text_cell(a), text_cell(b), source_cell(c)] for a, b, c in scale]))
         + notice(
             "Data-driven, with an explicit unknown state",
-            "Every table renders from data/*.json, and every row either carries a source id or is flagged. The unknown state is "
+            "Every table renders from ledger/*.json, and every row either carries a source id or is flagged. The unknown state is "
             "first-class (blank plus UNVERIFIED) rather than a zero, which is what stops the scoring and optimizer from amplifying a "
             "guess into a published claim.",
         )

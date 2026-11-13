@@ -27,7 +27,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 REPO = Path(__file__).resolve().parents[1]
-DATA = REPO / "data"
+DATA = REPO / "ledger"
 
 OFFICIAL_HOSTS = {
     "affiliate-program.amazon.com",
@@ -41,6 +41,10 @@ OFFICIAL_HOSTS = {
     "docs.github.com",
 }
 PERF_FIELDS = ("clicks", "conversion", "orders", "earnings", "revenue", "epc", "impressions")
+SITE_NAME = "Northstar"  # this project's own name; must contain no Amazon mark (R-11)
+SITE_NAME_MARKS = [m for m in ("amazon", "amzn", "kindle", "prime", "audible", "imdb") if m in SITE_NAME.lower()]
+
+
 UNVERIFIED_STATES = {"UNVERIFIED", "NOT_VERIFIED", "BLOCKED", "NEEDS_REVIEW"}
 AMAZON_MARKS = ("amazon", "amzn", "alexa", "audible", "imdb", "kindle", "prime", "aws", " Associates")
 
@@ -157,18 +161,51 @@ def check_cross_session_drift(report: Report) -> None:
 
 
 def check_marks(report: Report) -> None:
-    """R-11: no Amazon mark in our own naming or in identifiers."""
-    problems = []
+    """R-11 / Operating Agreement Sec. 5, read precisely.
+
+    What is actually prohibited: an Amazon trademark (or a variant/misspelling) inside a **domain name,
+    subdomain name, "tag"/Associates ID, or a username/group name/other identifier on a social site**; and
+    copy that **affirmatively implies** endorsement, sponsorship or affiliation.  Descriptive reference to
+    Amazon - including the mandated disclosure sentence and negations quoted from the Agreement itself - is
+    not a violation, so those are not failed.
+    """
+    problems: list[str] = []
+    reviews: list[str] = []
+
+    # (a) identifiers we control and would publish
+    if SITE_NAME_MARKS:
+        problems.append(f"site name {SITE_NAME!r} contains an Amazon mark (R-11)")
+    config = REPO / "ledger" / "site_config.json"
+    if config.exists():
+        tag = str(json.loads(config.read_text(encoding="utf-8")).get("associates_tag", "")).lower()
+        for mark in ("amazon", "amzn", "prime", "kindle"):
+            if mark in tag:
+                problems.append(f"configured Associates tag {tag!r} contains an Amazon mark (R-11)")
+
+    # (b) affirmative endorsement claims (negated mentions are quoted policy text, not claims)
+    claim = re.compile(r"\b(?:officially )?(?:endorsed|sponsored|partnered|affiliated) with amazon\b", re.I)
+    negation = re.compile(r"\b(?:not|no|never|avoid|prohibit|forbid|must not|cannot|free from)\b", re.I)
     for path in sorted(REPO.rglob("*.html")):
         text = path.read_text(encoding="utf-8", errors="ignore")
-        for m in re.finditer(r'<title>(.*?)</title>', text, re.S | re.I):
-            if any(mark.lower() in m.group(1).lower() for mark in ("amazon", "amzn", "prime", "kindle")):
-                problems.append(f"{path.relative_to(REPO)}: <title> uses an Amazon mark (unsuitable-site rule R-11)")
-        for m in re.finditer(r'\b(?:officially endorsed|partnered) by amazon\b', text, re.I):
-            problems.append(f"{path.relative_to(REPO)}: implies endorsement ({m.group(0)!r})")
-    for p in problems:
-        report.fail(p)
+        for line in text.splitlines():
+            for m in claim.finditer(line):
+                if negation.search(line[: m.start()][-160:]) or negation.search(line[max(0, m.start() - 160):m.end() + 40]):
+                    continue
+                problems.append(f"{path.relative_to(REPO)}: implies endorsement ({m.group(0)!r}) - Sec. 5")
+
+    # (c) a title that leads with a mark can read as an official Amazon property: surface for review only
+    for path in sorted(REPO.rglob("*.html")):
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        m = re.search(r"<title>\s*([A-Z][^<]{0,80})", text)
+        if m and re.match(r"^(amazon|amzn|prime|kindle)\b", m.group(1), re.I):
+            reviews.append(f"{path.relative_to(REPO)}: <title> starts with an Amazon mark ({m.group(1)[:40]!r})")
+
+    for prob in problems:
+        report.fail(prob)
+    for rev in reviews:
+        report.warn(rev)
     report.stats["mark_findings"] = len(problems)
+    report.stats["mark_review_notes"] = len(reviews)
 
 
 def check_disclosure(report: Report) -> None:

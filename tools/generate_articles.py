@@ -55,7 +55,7 @@ class Draft:
 
 
 def _load_ledger() -> dict:
-    return json.loads((REPO / "data" / "products.json").read_text(encoding="utf-8"))
+    return json.loads((REPO / "ledger" / "products.json").read_text(encoding="utf-8"))
 
 
 def resolve_entry(entry_id: str) -> dict:
@@ -64,7 +64,7 @@ def resolve_entry(entry_id: str) -> dict:
     Only data/catalog_verified.json (written by the collector from an API response) can supply facts.  If it
     is absent, the entry has no verified facts - full stop.
     """
-    verified_path = REPO / "data" / "catalog_verified.json"
+    verified_path = REPO / "ledger" / "catalog_verified.json"
     verified = {}
     if verified_path.exists():
         doc = json.loads(verified_path.read_text(encoding="utf-8"))

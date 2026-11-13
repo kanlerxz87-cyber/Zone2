@@ -24,7 +24,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 REPO = Path(__file__).resolve().parents[1]
-CAMPAIGN_REGISTRY = REPO / "data" / "campaigns.json"
+CAMPAIGN_REGISTRY = REPO / "ledger" / "campaigns.json"
 EVENT_LOG = Path(os.environ.get("ZONE2_EVENT_LOG", REPO / ".local" / "clicks.jsonl"))
 
 SUBTAG_STATIC_RULE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,47}$")

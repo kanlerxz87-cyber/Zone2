@@ -32,7 +32,7 @@ class Action:
 
 def load_state() -> dict[str, Any]:
     clicks_path = REPO / ".local" / "clicks.agg.json"
-    earnings_path = REPO / "data" / "associates_report.json"
+    earnings_path = REPO / "ledger" / "associates_report.json"
     return {
         "clicks": json.loads(clicks_path.read_text()) if clicks_path.exists() else {},
         "earnings": json.loads(earnings_path.read_text()) if earnings_path.exists() else None,

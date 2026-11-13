@@ -1,10 +1,17 @@
-# Build/runtime artefacts that must not be published
-.cache/
-.local/
+# Python
 __pycache__/
 *.pyc
-content/published/
+.venv/
 .pytest_cache/
 
-# Generated locally only - committed output lives in pages/
-.manifest.json
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Build scratch
+/tmp/
+*.log

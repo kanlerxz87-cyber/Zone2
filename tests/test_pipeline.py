@@ -86,7 +86,7 @@ def test_disclosure_wording_policy():
 def test_rate_table_matches_the_official_transcription():
     table = scoring.load_rate_table()
     # spot-check the bands this project would cite, straight from data/commission_table.json
-    doc = json.loads((REPO / "data" / "commission_table.json").read_text(encoding="utf-8"))
+    doc = json.loads((REPO / "ledger" / "commission_table.json").read_text(encoding="utf-8"))
     by_rate: dict[str, list[str]] = {}
     for group in doc["groups"]:
         by_rate.setdefault(group["rate_pct"], []).extend(group["categories"])
@@ -131,7 +131,7 @@ def test_site_css_and_disclosure_present_on_every_generated_page():
 def test_no_invented_performance_numbers_in_data():
     """No clicks/conversion/earnings values may exist while no report is connected."""
     for name in ("products.json", "niches.json", "campaigns.json"):
-        doc = json.loads((REPO / "data" / name).read_text(encoding="utf-8"))
+        doc = json.loads((REPO / "ledger" / name).read_text(encoding="utf-8"))
         blob = json.dumps(doc).lower()
         for key in ("clicks", "conversion", "earnings", "epc"):
             for m in re.finditer(rf'"{key}"\s*:\s*"?([\w.\-]+)', blob):
