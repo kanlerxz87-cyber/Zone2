@@ -24,6 +24,7 @@
 
   function badge(status) {
     if (status === "verified") return '<span class="badge ok">Verified</span>';
+    if (status === "conflict") return '<span class="badge warn">Conflict</span>';
     if (status === "unverified") return '<span class="badge flag">Unverified</span>';
     return "";
   }
@@ -65,6 +66,24 @@
         { key: "source", label: "Source", link: true, linkLabels: {} },
       ],
       PRODUCTS
+    );
+  }
+
+  function renderSpecs() {
+    const el = document.getElementById("specsTable");
+    if (!el) return;
+    const prodName = {};
+    PRODUCTS.forEach(function (p) { prodName[p.id] = p.brand + " · " + p.asin; });
+    renderTable(
+      "specsTable",
+      [
+        { key: "pid", label: "Product", render: function (r) { return esc(prodName[r.pid] || r.pid); } },
+        { key: "attribute", label: "Attribute" },
+        { key: "value", label: "Value" },
+        { key: "status", label: "Status", render: function (r) { return badge(r.status); } },
+        { key: "source", label: "Official source", link: true, linkLabels: {} },
+      ],
+      SPECS
     );
   }
 
@@ -184,6 +203,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     renderProducts();
+    renderSpecs();
     renderExecFacts();
     renderNiche();
     renderCommission();

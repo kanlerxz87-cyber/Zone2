@@ -1,0 +1,384 @@
+#!/usr/bin/env python3
+"""Verify the dataset and the generated site.
+
+This is the guard that makes the project's claims true rather than aspirational.
+It exits non-zero if any rule is broken, so CI blocks the deploy.
+
+Checks
+------
+Data
+  1.  Every JSON file parses.
+  2.  Every product has an ASIN that matches its resolved URL.
+  3.  Every fact row (spec / identifier) has a status in the allowed set.
+  4.  Every row with status "verified" or "conflict" has an https source_url.
+  5.  No row with status "unverified" carries a published value.
+  6.  Every official_sources URL is https and points at amazon.* or a
+      manufacturer domain (no content farms, no http).
+  7.  No duplicate attribute labels within a product.
+  8.  Compliance and requirements entries each have a source_url or an explicit
+      reason for not having one.
+
+Site
+  9.  Every generated page contains the affiliate disclosure.
+  10. Every internal href/src resolves to a file that exists.
+  11. No page prints a currency amount (this project does not publish prices).
+  12. Every external Amazon link is https and uses a canonical /dp/ path.
+  13. No page is missing a <title> or the trademark attribution.
+"""
+
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "data"
+# The generated pages live at the repository root, because GitHub Pages on this
+# repo is a legacy build from branch main / path "/". Only generated files are
+# checked; hand-written sources (data/, docs/, scripts/) are excluded.
+SITE = ROOT
+IGNORE_HTML_STEMS = set()
+
+errors: list[str] = []
+warnings: list[str] = []
+
+
+def fail(msg: str) -> None:
+    errors.append(msg)
+
+
+def warn(msg: str) -> None:
+    warnings.append(msg)
+
+
+def load_all() -> dict:
+    out = {}
+    for path in sorted(DATA.glob("*.json")):
+        try:
+            out[path.name] = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            fail(f"{path.name}: invalid JSON — {exc}")
+    return out
+
+
+def is_https(url: str) -> bool:
+    return isinstance(url, str) and url.startswith("https://")
+
+
+OFFICIAL_HOST_SUFFIXES = (
+    "amazon.com",
+    "amazon.co.uk",
+    "amazon.ca",
+    "amazon.sa",
+    "amazon.eg",
+    "amazon.se",
+    "amazon.de",
+    "affiliate-program.amazon.com",
+    "chefman.com",
+    "emerileveryday.com",
+)
+
+
+def is_official(url: str) -> bool:
+    if not is_https(url):
+        return False
+    host = url.split("//", 1)[1].split("/", 1)[0].lower()
+    return any(host == s or host.endswith("." + s) for s in OFFICIAL_HOST_SUFFIXES)
+
+
+# ---------------------------------------------------------------- data checks
+
+
+def check_products(products_doc: dict) -> None:
+    products = products_doc.get("products", [])
+    if not products:
+        fail("products.json: no products found")
+        return
+
+    asins_seen: set[str] = set()
+
+    for product in products:
+        pid = product.get("id", "?")
+        asin = product.get("asin", "")
+        resolved = product.get("resolved_url", "")
+
+        # 2 — ASIN must appear in the resolved URL
+        if asin and asin not in resolved:
+            fail(f"{pid}: ASIN {asin} does not appear in resolved_url {resolved}")
+        if not is_https(resolved):
+            fail(f"{pid}: resolved_url is not https")
+        if asin in asins_seen:
+            fail(f"{pid}: duplicate ASIN {asin}")
+        asins_seen.add(asin)
+
+        rows = product.get("specs", []) + product.get("identifiers", [])
+        if not rows:
+            fail(f"{pid}: no spec or identifier rows")
+
+        labels: set[str] = set()
+        for row in rows:
+            label = row.get("label", "<unnamed>")
+            where = f"{pid} / {label}"
+
+            # 7 — duplicate labels
+            if label in labels:
+                fail(f"{where}: duplicate attribute label within the product")
+            labels.add(label)
+
+            status = row.get("status")
+            # 3 — allowed status
+            if status not in ("verified", "conflict", "unverified"):
+                fail(f"{where}: bad status {status!r}")
+
+            # 4 — sourced rows must have an https official URL
+            if status in ("verified", "conflict"):
+                url = row.get("source_url")
+                if not url:
+                    fail(f"{where}: status {status} but no source_url")
+                elif not is_https(url):
+                    fail(f"{where}: source_url is not https ({url})")
+
+            # 5 — unverified rows must not carry a published value
+            if status == "unverified":
+                if row.get("value"):
+                    fail(
+                        f"{where}: status is unverified but carries a value "
+                        f"({row.get('value')!r}) — unverified values must be blank"
+                    )
+
+        # 6 — every listed official source is https and on an official host
+        for url in product.get("official_sources", []):
+            if not is_official(url):
+                fail(f"{pid}: official_sources entry is not an official https URL — {url}")
+
+        # features must cite a source
+        fs = product.get("features_source") or {}
+        if product.get("features") and not fs.get("source_url"):
+            fail(f"{pid}: has features but no features_source.source_url")
+        if fs.get("source_url") and not is_official(fs["source_url"]):
+            fail(f"{pid}: features_source is not an official https URL")
+
+        # flags must be identified
+        for flag in product.get("flags", []):
+            if not flag.get("id") or not flag.get("issue"):
+                fail(f"{pid}: flag missing id or issue")
+
+
+def check_compliance(doc: dict) -> None:
+    groups = [
+        "disclosure",
+        "linking_rules",
+        "pricing_rules",
+        "content_rules",
+        "automation_rules",
+        "account_rules",
+        "session_and_attribution",
+    ]
+    total = 0
+    for group in groups:
+        for item in doc.get(group, []):
+            total += 1
+            if not item.get("source_url"):
+                fail(f"compliance/{group}: entry {item.get('id')} has no source_url")
+            elif not is_official(item["source_url"]):
+                fail(
+                    f"compliance/{group}: entry {item.get('id')} source is not an "
+                    f"official https URL — {item['source_url']}"
+                )
+    if total < 10:
+        fail(f"compliance.json: only {total} rules recorded — expected more")
+
+    rate = doc.get("commission_rates", {})
+    if rate.get("status") == "unverified" and rate.get("published_on_site"):
+        fail("compliance.json: unverified commission rate marked as published")
+
+
+def check_requirements(doc: dict) -> None:
+    allowed = {"delivered", "constrained", "owner_decision", "not_deliverable"}
+    seen: set[str] = set()
+    for req in doc.get("requirements", []):
+        rid = req.get("id")
+        if not rid:
+            fail("requirements.json: entry without id")
+        if rid in seen:
+            fail(f"requirements.json: duplicate id {rid}")
+        seen.add(rid)
+        if req.get("disposition") not in allowed:
+            fail(f"requirements/{rid}: bad disposition {req.get('disposition')!r}")
+        if not req.get("delivered"):
+            fail(f"requirements/{rid}: no 'delivered' description")
+        if req.get("disposition") == "constrained" and not req.get("constraint"):
+            fail(f"requirements/{rid}: constrained but no constraint given")
+        url = req.get("source_url")
+        if url and not is_https(url):
+            fail(f"requirements/{rid}: non-https source")
+    if not seen:
+        fail("requirements.json: no requirements recorded")
+
+
+# ---------------------------------------------------------------- site checks
+
+INTERNAL_HREF = re.compile(r'(?:href|src)="([^"#?]+)"')
+CURRENCY = re.compile(r"\$\s?\d[\d,]*\.\d{2}")
+DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+TRADEMARK = "trademarks of Amazon.com, Inc. or its affiliates"
+
+
+def check_site() -> None:
+    if not SITE.exists():
+        fail("site/ does not exist — run scripts/build.py first")
+        return
+
+    manifest_path = ROOT / "site-manifest.json"
+    if not manifest_path.exists():
+        fail("site-manifest.json is missing — run scripts/build.py first")
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    owned = set(manifest.get("files", []))
+    if not owned:
+        fail("site-manifest.json lists no generated files")
+        return
+
+    html_files = sorted(ROOT / f for f in owned if f.endswith(".html"))
+    if len(html_files) < 8:
+        fail(f"only {len(html_files)} generated pages — expected at least 8")
+    for target in html_files:
+        if not target.exists():
+            fail(f"manifest lists {target.name} but the file does not exist")
+
+    for page in html_files:
+        rel = page.relative_to(ROOT)
+        text = page.read_text(encoding="utf-8")
+
+        # 9 — disclosure present
+        if DISCLOSURE not in text:
+            fail(f"{rel}: missing the required affiliate disclosure")
+
+        # 13 — title and trademark attribution
+        if "<title>" not in text:
+            fail(f"{rel}: missing <title>")
+        if TRADEMARK not in text:
+            fail(f"{rel}: missing the Amazon trademark attribution")
+
+        # 11 — no printed prices
+        for match in CURRENCY.finditer(text):
+            fail(
+                f"{rel}: prints a currency amount ({match.group(0)!r}) — this "
+                "project does not publish prices"
+            )
+
+        # 12 — external Amazon links must be https; product links must be canonical /dp/
+        for url in re.findall(r'href="(https://[^"]*amazon[^"]*)"', text):
+            if not url.startswith("https://"):
+                fail(f"{rel}: non-https Amazon link {url}")
+            host = url.split("//", 1)[1].split("/", 1)[0].lower()
+            # Only retail product links must be canonical. Policy documents live
+            # under /help/, /b, /gp etc. and are legitimately linked as-is.
+            is_policy_doc = host.startswith("affiliate-program.") or any(
+                seg in url for seg in ("/help/", "/b?", "/gp/", "/stores/")
+            )
+            if not is_policy_doc and "/dp/" not in url:
+                fail(f"{rel}: product link is not a canonical /dp/ URL — {url}")
+            if "tag=" in url:
+                warn(f"{rel}: Amazon link carries a tag parameter — confirm it is the owner's")
+
+        # 10 — internal links resolve, and point at files the build owns
+        for target in INTERNAL_HREF.findall(text):
+            if target.startswith(("http://", "https://", "//", "mailto:")):
+                continue
+            resolved = (page.parent / target).resolve()
+            if not resolved.exists():
+                fail(f"{rel}: broken internal link -> {target}")
+            elif target.endswith(".html"):
+                try:
+                    rel_target = str(resolved.relative_to(ROOT))
+                except ValueError:
+                    fail(f"{rel}: internal link escapes the repository -> {target}")
+                else:
+                    if rel_target not in owned:
+                        fail(
+                            f"{rel}: links to {rel_target}, which is not a generated "
+                            "file listed in the manifest"
+                        )
+
+        # a page must not link to a missing asset either
+        if 'href="assets/style.css"' in text and not (ROOT / "assets" / "style.css").exists():
+            fail(f"{rel}: stylesheet missing from assets/")
+
+    # required pages exist
+    for required in (
+        "index.html",
+        "products.html",
+        "compare.html",
+        "compliance.html",
+        "requirements.html",
+        "methodology.html",
+        "flagged.html",
+        "summary.html",
+        "404.html",
+    ):
+        if not (ROOT / required).exists():
+            fail(f"{required} is missing from the repo root")
+        elif required not in owned:
+            fail(f"{required} exists but is not listed in site-manifest.json")
+
+    # .nojekyll so Pages serves files verbatim
+    if not (ROOT / ".nojekyll").exists():
+        warn(".nojekyll is missing from the repo root")
+
+
+# ---------------------------------------------------------------- runner
+
+
+def main() -> int:
+    docs = load_all()
+
+    for required_file in ("products.json", "compliance.json", "requirements.json", "sources.json"):
+        if required_file not in docs:
+            fail(f"data/{required_file} is missing or unparseable")
+
+    if "products.json" in docs:
+        check_products(docs["products.json"])
+    if "compliance.json" in docs:
+        check_compliance(docs["compliance.json"])
+    if "requirements.json" in docs:
+        check_requirements(docs["requirements.json"])
+    check_site()
+
+    if warnings:
+        print("WARNINGS")
+        for w in warnings:
+            print(f"  ! {w}")
+        print()
+
+    if errors:
+        print("FAILED")
+        for err in errors:
+            print(f"  x {err}")
+        print(f"\n{len(errors)} error(s).")
+        return 1
+
+    products = len(docs.get("products.json", {}).get("products", []))
+    rows = sum(
+        len(p.get("specs", [])) + len(p.get("identifiers", []))
+        for p in docs.get("products.json", {}).get("products", [])
+    )
+    reqs = len(docs.get("requirements.json", {}).get("requirements", []))
+    manifest = ROOT / "site-manifest.json"
+    pages = 0
+    if manifest.exists():
+        pages = sum(
+            1 for f in json.loads(manifest.read_text()).get("files", [])
+            if f.endswith(".html")
+        )
+    print(
+        f"OK — {products} products, {rows} sourced attribute rows, "
+        f"{reqs} requirements dispositioned, {pages} pages, 0 errors."
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

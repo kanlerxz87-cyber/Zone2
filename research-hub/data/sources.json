@@ -1,0 +1,157 @@
+{
+  "$schema_version": "1.0",
+  "captured_utc": "2026-11-13T22:50:00Z",
+  "note": "Registry of every external source used, with what it is authority for. Tier 1 is official and citable as a fact. Tier 2 is official but storefront-specific or login-gated. Tier 3 is non-official and is never cited as a fact.",
+  "tiers": {
+    "1": "Official primary source — citable as fact.",
+    "2": "Official but conditional — storefront-specific, point-in-time, or login-gated. Must be labelled.",
+    "3": "Not official — used only to discover tier-1 sources, never cited as fact."
+  },
+  "sources": [
+    {
+      "id": "S-AMZ-AGREEMENT",
+      "tier": "1",
+      "name": "Amazon Associates Program Operating Agreement",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "version_seen": "Updated 15 October 2025",
+      "authority_for": "Disclosure wording, no-endorsement rule, termination, warranties",
+      "accessed_utc": "2026-11-13T22:20:00Z"
+    },
+    {
+      "id": "S-AMZ-POLICIES",
+      "tier": "1",
+      "name": "Amazon Associates Program Policies",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "version_seen": "Updated 14 April 2026",
+      "authority_for": "Commission Income Statement, Participation Requirements, IP Licence, Trademark Guidelines, Mobile Application Policy, Agent Terms",
+      "accessed_utc": "2026-11-13T22:22:00Z"
+    },
+    {
+      "id": "S-AMZ-HOME",
+      "tier": "1",
+      "name": "Amazon Associates Central home page",
+      "url": "https://affiliate-program.amazon.com/",
+      "authority_for": "Public 'earn up to 10%' headline and the ~60-day payment statement",
+      "accessed_utc": "2026-11-13T22:21:00Z"
+    },
+    {
+      "id": "S-AMZ-REVIEW",
+      "tier": "1",
+      "name": "Amazon help — What is the application review process?",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "authority_for": "Three qualifying sales in 180 days, 10-post rule of thumb, 60-day content recency",
+      "accessed_utc": "2026-11-13T22:30:00Z"
+    },
+    {
+      "id": "S-AMZ-DOSDONTS",
+      "tier": "1",
+      "name": "Creator University — Operating Agreement dos and don'ts",
+      "url": "https://www.amazon.com/b?node=53643932011",
+      "authority_for": "Approved disclosure phrasing, tracking-ID hygiene, trademark attribution sentence",
+      "accessed_utc": "2026-11-13T22:31:00Z"
+    },
+    {
+      "id": "S-AMZ-SCHEDULE",
+      "tier": "2",
+      "name": "Amazon Associates commission rate card",
+      "url": "https://affiliate-program.amazon.com/help/operating/schedule",
+      "authority_for": "Category commission rates — NOT READ, login required",
+      "status": "unverified",
+      "accessed_utc": "2026-11-13T22:28:00Z"
+    },
+    {
+      "id": "S-AMZ-B0CDY277D3",
+      "tier": "2",
+      "name": "Amazon product page — CHEFMAN 6 Quart Dual Basket Air Fryer",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "authority_for": "Title, category path, inner material, listing claims. Point-in-time; pages render inconsistently to automated fetch.",
+      "accessed_utc": "2026-11-13T22:38:00Z"
+    },
+    {
+      "id": "S-AMZ-B09B7SB46R",
+      "tier": "2",
+      "name": "Amazon product page — Emeril Lagasse 26QT French Door Air Fryer Toaster Oven",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "authority_for": "Title, model number, wattage, temperature range, special features, manufacturer, country of origin, category path",
+      "accessed_utc": "2026-11-13T22:39:00Z"
+    },
+    {
+      "id": "S-AMZ-B08DKYBTPH",
+      "tier": "2",
+      "name": "Amazon product page — Chefman Air Fryer 8 Qt TurboFry",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "authority_for": "Title, material, special features, Amazon-listing dimensions, badges and snapshot figures",
+      "accessed_utc": "2026-11-13T22:39:00Z"
+    },
+    {
+      "id": "S-CHEF-DUAL",
+      "tier": "1",
+      "name": "Chefman official — TurboFry Touch 6 Qt Dual-Window Air Fryer",
+      "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "authority_for": "RJ38-SQPF-3TDB-2W capacity, 1700 W, 200–450 °F, dimensions, weight, certification, warranty",
+      "accessed_utc": "2026-11-13T22:42:00Z"
+    },
+    {
+      "id": "S-CHEF-8QT",
+      "tier": "1",
+      "name": "Chefman official — 8 Qt TurboFry Touch Stainless-Steel Air Fryer",
+      "url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "authority_for": "RJ38-SQSS-8T capacity, 1700 W, 200–400 °F, presets, dimensions, weight, certification, warranty",
+      "accessed_utc": "2026-11-13T22:43:00Z"
+    },
+    {
+      "id": "S-CHEF-DOCS",
+      "tier": "1",
+      "name": "Chefman document library — Air Fryers",
+      "url": "https://chefman.com/pages/document-library-air-fryers",
+      "authority_for": "Model-series confirmation and official user guides",
+      "accessed_utc": "2026-11-13T22:43:00Z"
+    },
+    {
+      "id": "S-EMERIL",
+      "tier": "1",
+      "name": "Emeril Everyday official — French Door Airfryer 360, 26 QT",
+      "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+      "authority_for": "Model number 4-00675-02A-VN, 26 qt / 24.6 L, dimensions, accessories, warranty, preset-count claim",
+      "accessed_utc": "2026-11-13T22:44:00Z"
+    },
+    {
+      "id": "S-AMZ-CA-B0CDY277D3",
+      "tier": "2",
+      "name": "Amazon.ca — same ASIN B0CDY277D3",
+      "url": "https://www.amazon.ca/CHEFMAN-Windows-Independent-Nonstick-Dishwasher/dp/B0CDY277D3",
+      "authority_for": "Corroboration of the product-information block while the US page body did not render",
+      "accessed_utc": "2026-11-13T22:36:00Z"
+    },
+    {
+      "id": "S-AMZ-CA-B09B7SB46R",
+      "tier": "2",
+      "name": "Amazon.ca — same ASIN B09B7SB46R",
+      "url": "https://www.amazon.ca/Emeril-Lagasse-French-Multi-Function-Toaster/dp/B09B7SB46R",
+      "authority_for": "Corroboration of model number, wattage, dimensions, country of origin",
+      "accessed_utc": "2026-11-13T22:37:00Z"
+    },
+    {
+      "id": "S-AMZ-UK-B09B7SB46R",
+      "tier": "2",
+      "name": "Amazon.co.uk — same ASIN B09B7SB46R",
+      "url": "https://www.amazon.co.uk/Emeril-Lagasse-Convection-Toaster-Stainless/dp/B09B7SB46R",
+      "authority_for": "Corroboration, and evidence that ratings differ by storefront",
+      "accessed_utc": "2026-11-13T22:37:00Z"
+    }
+  ],
+  "rejected_sources": [
+    { "name": "homeproductcatalog.com", "reason": "Affiliate content farm; no editorial standards" },
+    { "name": "kitchenwink.com", "reason": "Review blog; not official; contains figures that conflict with the manufacturer" },
+    { "name": "kitchendyno.com", "reason": "Review blog; not official" },
+    { "name": "ontheroadeats.com", "reason": "Review blog; not official" },
+    { "name": "airfryerguidance.com", "reason": "Review blog; not official" },
+    { "name": "wpmanageninja.com", "reason": "Marketing blog quoting commission rates it cannot authoritatively confirm" },
+    { "name": "helpingmerchants.com", "reason": "Marketing blog; rate table presented as 'sourced from' Amazon but not linked" },
+    { "name": "sozee.ai", "reason": "Vendor blog; commission rate table not linked to the official schedule" },
+    { "name": "manualsfile.com, manua.ls", "reason": "Third-party manual indexes; corroboration only" },
+    { "name": "kohls.com, macys.com", "reason": "Retailer listings for near-identical but not identical SKUs" },
+    { "name": "modernspacegallery.com, shoppurilite.ca", "reason": "Reseller storefronts republishing Amazon copy" },
+    { "name": "emerillagassestore.com", "reason": "Unclear relationship to the brand; content is largely scraped and internally inconsistent. The brand's own store emerileveryday.com was used instead." }
+  ]
+}
