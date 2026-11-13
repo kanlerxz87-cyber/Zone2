@@ -1,0 +1,85 @@
+name: Build, verify and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify data and site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Parse-check every JSON file
+        run: |
+          python3 - <<'PY'
+          import json, glob, sys
+          bad = []
+          for f in sorted(glob.glob('data/*.json')):
+              try:
+                  json.load(open(f, encoding='utf-8'))
+                  print(f'ok   {f}')
+              except Exception as exc:
+                  bad.append(f'{f}: {exc}')
+          if bad:
+              print('\n'.join(bad)); sys.exit(1)
+          PY
+
+      - name: Build the site
+        run: python3 scripts/build.py
+
+      - name: Verify sources, links, disclosure and no-price rule
+        run: python3 scripts/verify.py
+
+      - name: Show what was generated
+        run: |
+          echo "Pages:"
+          ls -1 site/*.html
+          echo
+          echo "Total size:"
+          du -sh site
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: verify
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

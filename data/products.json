@@ -29,11 +29,11 @@
         },
         {
           "label": "UPC",
-          "value": "810087845025",
           "status": "unverified",
           "source_name": "Not confirmed on an official Amazon or Chefman page during capture",
           "source_url": null,
-          "note": "Appeared only in secondary aggregator listings. Left blank on the site."
+          "note": "Appeared only in secondary aggregator listings. Left blank on the site.",
+          "observed_value_not_published": "810087845025"
         }
       ],
       "specs": [
@@ -177,11 +177,11 @@
         },
         {
           "label": "UPC",
-          "value": "752356835682",
           "status": "unverified",
           "source_name": "Not confirmed on an official Amazon or manufacturer page during capture",
           "source_url": null,
-          "note": "Seen only in secondary listings. Left blank on the site."
+          "note": "Seen only in secondary listings. Left blank on the site.",
+          "observed_value_not_published": "752356835682"
         }
       ],
       "specs": [
@@ -259,11 +259,11 @@
         },
         {
           "label": "Item weight",
-          "value": "26.5 lb",
           "status": "unverified",
           "source_name": "Regional Amazon listings give 10.21 kg, 12.02 kg and 26.5 lb in different places",
           "source_url": null,
-          "note": "Conflicting and not confirmed on the US page or the manufacturer page. Left blank."
+          "note": "Conflicting and not confirmed on the US page or the manufacturer page. Left blank.",
+          "observed_value_not_published": "26.5 lb"
         }
       ],
       "features": [
