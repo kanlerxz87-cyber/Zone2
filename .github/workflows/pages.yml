@@ -1,0 +1,75 @@
+name: Deploy static site to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate site files and internal navigation
+        run: |
+          # Primary site
+          for f in index.html products.html analysis.html content.html compliance.html executive-summary.html flagged.html sources.html assets/styles.css assets/main.js data/verification.json docs/EXECUTIVE_SUMMARY.md COORDINATION.md; do
+            test -s "$f" || { echo "Missing/empty: $f"; exit 1; }
+          done
+          # Preserved Northstar workspace
+          for f in northstar/index.html northstar/styles.css northstar/app.js northstar/data.js; do
+            test -s "$f" || { echo "Missing/empty: $f"; exit 1; }
+          done
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          def check_internal_links(html: str, base: Path):
+              missing = []
+              for m in re.finditer(r'(?:href|src)="([^"#][^"]*)"', html):
+                  target = m.group(1)
+                  if target.startswith(("http://", "https://", "mailto:", "data:")):
+                      continue
+                  # strip anchors and query strings
+                  path = target.split("#", 1)[0].split("?", 1)[0]
+                  if not path:
+                      continue
+                  if not (base / path).is_file():
+                      missing.append(target)
+              return missing
+
+          problems = []
+          for page in Path(".").glob("*.html"):
+              missing = check_internal_links(page.read_text(), Path("."))
+              if missing:
+                  problems.append(f"{page}: missing {missing}")
+          north = Path("northstar")
+          for page in north.glob("*.html"):
+              missing = check_internal_links(page.read_text(), north)
+              if missing:
+                  problems.append(f"{page}: missing {missing}")
+
+          assert not problems, "\n".join(problems)
+          print("Static site assets and internal navigation validated (primary site + northstar workspace)")
+          PY
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
