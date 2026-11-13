@@ -85,7 +85,7 @@ def test_disclosure_wording_policy():
 
 def test_rate_table_matches_the_official_transcription():
     table = scoring.load_rate_table()
-    # spot-check the bands this project would cite, straight from data/commission_table.json
+    # spot-check the bands this project would cite, straight from ledger/commission_table.json
     doc = json.loads((REPO / "ledger" / "commission_table.json").read_text(encoding="utf-8"))
     by_rate: dict[str, list[str]] = {}
     for group in doc["groups"]:

@@ -180,10 +180,22 @@
     {
       "id": "F-14",
       "severity": "low",
-      "title": "Stale duplicate of the dashboard exists at northstar/ and is not deployed",
-      "detail": "Commit 4bea98e added northstar/index.html, app.js, data.js and styles.css - a near-copy of the root Northstar dashboard that predates the c600e6f fix: `grep -c 'As an Amazon Associate' northstar/index.html` returns 0, so the served HTML carries no disclosure sentence (the copy's app.js does render one client-side, count 1). That is the same gap c600e6f closed at the repo root, left un-closed in this copy. The Pages workflow stages index.html, the hub pages, zone2/ and pages/, but not northstar/, so the copy is never published and no crawler sees it. It stays unreferenced dead weight that will drift from the root version.",
-      "impact": "No live-site impact (not in the deployed bundle). Risk is future confusion or a link pointing at the older copy.",
-      "action_required": "Owner decision: either delete northstar/ or make it a deliberate redirect to ../index.html. Recorded as a change request rather than an edit, since another session owns those paths.",
+      "title": "Duplicate of the prototype dashboard at northstar/ (disclosure gap since closed)",
+      "detail": "Commit 4bea98e added northstar/index.html, app.js, data.js and styles.css - a near-copy of the original Northstar dashboard - and the root files it was copied from were later removed, so the copy is now the only instance of that view. When measured against 9b8830d its served HTML carried no disclosure sentence (grep -c 'As an Amazon Associate' northstar/index.html -> 0). Re-measured on the merged tree after PR #3: the copy now carries the disclosure strip (count 1), so that gap is closed. Remaining point is structural: the primary site's footer links to northstar/index.html, so the duplicate is a live companion view rather than dead weight, and its content now drifts from the primary site's.",
+      "impact": "No compliance issue at measurement time on the merged tree. Two dashboard implementations now evolve independently; a reader following the footer link sees the older prototype with blank product rows.",
+      "action_required": "Optional: fold the prototype into the primary site, or label it explicitly as the earlier prototype in its own page heading so the difference is obvious to a reader.",
+      "source_ids": [
+        "S22"
+      ],
+      "owner": "user"
+    },
+    {
+      "id": "F-15",
+      "severity": "medium",
+      "title": "The hub's own verifier is stale after the namespace move, so its per-row sourcing guard is not running",
+      "detail": "`python3 research-hub/scripts/verify.py` prints 7 failures on the current tree: it computes its repository root as the script's parent directory (research-hub/), so it looks for research-hub/index.html, app.js, data.js and styles.css - files that now live elsewhere or not at all - and it flags research-hub/start.html's own ../zone2/index.html link as 'escaping the repository'. Its expected-file list also still names the pre-move root layout. The workflow does not invoke this script any more (it runs its own link/asset/data checks), so nothing is blocked and CI is green; but the hub's rows are no longer policed by the guard that was written for them.",
+      "impact": "No published error. Risk: a future edit to research-hub/data/products.json could add an unsourced 'verified' row and no check would catch it, because the only guard for that namespace is currently mis-pointed.",
+      "action_required": "Owner/reviewer: re-point the verifier's ROOT at the repo root (parents[2]) and update its required-file list to the post-move layout, or fold its per-row rules into the workflow's data checks. Not done here: research-hub/** is another session's scope, so this is recorded as a change request.",
       "source_ids": [
         "S22"
       ],

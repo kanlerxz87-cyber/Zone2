@@ -7,13 +7,13 @@ The contract, from the project brief:
 This turns that sentence into an executable check, so the rule survives whoever edits the data next.
 
 Checks
-  1. referential integrity   - every source_ids entry resolves to data/sources.json
+  1. referential integrity   - every source_ids entry resolves to ledger/sources.json
   2. official-host policy    - sources are limited to Amazon / FTC / Google / GitHub official domains
   3. blank-or-sourced        - a populated field needs a source; a blank field needs a flag or why-blank note
   4. no invented metrics     - performance fields must be blank everywhere (clicks/conversion/earnings)
   5. no Amazon marks         - site naming/copy may not include Amazon marks (R-11)
   6. disclosure present      - the required Site sentence is present where a sponsored link exists (R-01/R-02)
-  7. cross-session drift     - the published data.js product rows still match data/products.json
+  7. cross-session drift     - the published data.js product rows still match ledger/products.json
   8. internal links resolve  - every href in the built site maps to a real file (no broken pages)
 """
 
@@ -133,7 +133,7 @@ def check_products(report: Report) -> None:
                 if not e.get("why_blank"):
                     report.fail(f"{eid}.{key}: blank with no why_blank explanation")
                 if not (set(e.get("flag_ids", [])) & flags):
-                    report.fail(f"{eid}: blank fields must be linked to a flag in data/flags.json")
+                    report.fail(f"{eid}: blank fields must be linked to a flag in ledger/flags.json")
             else:
                 if not e.get("source_ids"):
                     report.fail(f"{eid}.{key}: populated value {val!r} without a source - inferred data")
@@ -239,6 +239,56 @@ def owned_pages():
             yield path
 
 
+PRICE_CONTEXT = re.compile(r"\b(price|pricing|current price|list price|buy|add to cart|deal|discount|sale|offer)\b", re.I)
+MONEY = re.compile(r"\$\s?\d[\d,]*(?:\.\d{1,2})?")
+# Commission/bounty/payment figures are program economics published in the rate statement, not product
+# prices, so they are permitted; a dollar amount in a buying context is not.
+PROGRAM_CONTEXT = re.compile(
+    r"\b(bounty|commission|income|payment|minimum|check|gift card|fee|earn|rate|trial|stream|tax|refund|withhold)\w*", re.I
+)
+
+
+def check_landing_links_here(report: Report) -> None:
+    """Discoverability: the primary landing page must link into the generated subpages.
+
+    These pages are reachable by URL, but a namespace nobody can click into is effectively unpublished,
+    and this repository has already restructured its root files twice. The check keeps the route intact.
+    """
+    index = REPO / "index.html"
+    if not index.exists():
+        report.warn("index.html missing - cannot verify the route into pages/")
+        return
+    text = index.read_text(encoding="utf-8", errors="ignore")
+    linked = 'href="pages/index.html"' in text or 'href="pages/' in text
+    if not linked:
+        report.fail("index.html: no link into pages/ - the generated subpages would be unreachable from the site")
+    else:
+        report.stats["landing_links_to_pages"] = 1
+
+
+def check_no_product_prices(report: Report) -> None:
+    """No generated page may display a product price.
+
+    Amazon restricts price display to links it serves and to licensed API data, and a price pasted into a
+    static page goes stale immediately (see the rules ledger, R-04/R-05). Dollar figures that describe
+    program economics - bounty amounts, payment minimums - are allowed, because they are commission data
+    quoted from the published statement rather than a product's price.
+    """
+    hits = []
+    for path in owned_pages():
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        # A row of a table, or a block of prose, is the unit of context: a bounty figure sits in a row
+        # whose header says "Published rate", not in a product's price slot.
+        units = re.split(r"</tr>|</p>|</li>|<br\s*/?>", re.sub(r"<[^>]+>", " ", text))
+        for unit in units:
+            for m in MONEY.finditer(unit):
+                if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):
+                    hits.append(f"{path.relative_to(REPO)}: money value {m.group(0)!r} in a buying context")
+    for h in hits:
+        report.fail(h)
+    report.stats["price_findings"] = len(hits)
+
+
 def check_links(report: Report) -> int:
     """Every internal href must resolve to a real file (no broken pages on deploy)."""
     checked = 0
@@ -264,6 +314,8 @@ def main(strict: bool = True) -> Report:
         check_cross_session_drift(report)
         check_marks(report)
         check_disclosure(report)
+        check_landing_links_here(report)
+        check_no_product_prices(report)
         check_links(report)
     except FileNotFoundError as exc:
         report.fail(f"required data file missing: {exc}")

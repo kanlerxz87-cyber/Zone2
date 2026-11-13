@@ -3,7 +3,7 @@
 Two deliberate design constraints:
 
 1.  Commission rates come only from Amazon's published Standard Commission Income Statement, transcribed in
-    data/commission_table.json (source S04).  This module contains no hard-coded rate of its own, so a rate
+    ledger/commission_table.json (source S04).  This module contains no hard-coded rate of its own, so a rate
     can never silently drift out of date inside the code.
 2.  Every sub-score returns ``None`` (insufficient data) rather than a default.  A missing input must never
     become a 0 or a 5 - that is how fabricated "analysis" gets produced.
@@ -21,7 +21,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-COMMISSION_FILE = REPO / "data" / "commission_table.json"
+COMMISSION_FILE = REPO / "ledger" / "commission_table.json"
 
 SESSION_HOURS = 24  # S02 - R-13
 CART_TAIL_DAYS = 89  # S02 - R-13 ("no later than 89 days after their initial click-through")

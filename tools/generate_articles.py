@@ -5,7 +5,7 @@ resolved product identity (from the catalog API), and every interpolated value t
 Otherwise it emits a refusal record explaining what is missing - which is the state all three
 brief-supplied items are in (Flagged for Review F-06).
 
-Linters enforce the compliance rules recorded in data/compliance.json.  A draft that fails any lint is not
+Linters enforce the compliance rules recorded in ledger/compliance.json.  A draft that fails any lint is not
 written to the publish directory, so "auto-publish" can never publish a policy violation.
 """
 
@@ -61,7 +61,7 @@ def _load_ledger() -> dict:
 def resolve_entry(entry_id: str) -> dict:
     """Fetch the verified record for an entry.
 
-    Only data/catalog_verified.json (written by the collector from an API response) can supply facts.  If it
+    Only ledger/catalog_verified.json (written by the collector from an API response) can supply facts.  If it
     is absent, the entry has no verified facts - full stop.
     """
     verified_path = REPO / "ledger" / "catalog_verified.json"
@@ -143,7 +143,7 @@ def generate(entry_id: str, kinds=("product_article", "comparison", "buying_guid
                         "product identity is not established by an official catalog record, so no article, "
                         "comparison, or buying guide may be written (see Flagged for Review F-01/F-06)"
                     ),
-                    "would_enable": "store a Creators API GetItems response in data/catalog_verified.json",
+                    "would_enable": "store a Creators API GetItems response in ledger/catalog_verified.json",
                 }
             )
             continue

@@ -1,6 +1,6 @@
 """Affiliate link + disclosure emitter with policy guards baked in.
 
-Every rule enforced here is traced in data/compliance.json:
+Every rule enforced here is traced in ledger/compliance.json:
   R-01 disclosure sentence (Operating Agreement Sec. 5, source S01)
   R-02 link-level disclosure wording Amazon accepts (S05)
   R-03 FTC accepted/rejected wording (S10)

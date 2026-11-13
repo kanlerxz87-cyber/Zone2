@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the GitHub Pages site from data/*.json.
+"""Render the GitHub Pages site from ledger/*.json.
 
 Deterministic and network-free: same inputs -> same bytes.  Every table row is emitted through helpers that
 attach the official source link (or an explicit UNVERIFIED marker plus a flag link), so "every row is sourced
@@ -23,7 +23,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 PAGES = REPO / "pages"
 DATA = REPO / "ledger"
-SITE_CSS_SRC = PAGES / "assets" / "site.css"
+SITE_CSS_SRC = REPO / "tools" / "pages-site.css"  # source of the subpage stylesheet
 
 SITE_NAME = "Northstar"  # never an Amazon mark - Participation Requirements rule R-11
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
@@ -160,7 +160,14 @@ NAV = [
     ("tracking.html", "Tracking"),
     ("content-engine.html", "Content engine"),
     ("architecture.html", "Architecture"),
-    ("__hub__", "Verified hub (other session)"),
+]
+
+# Companion views, by current repository topology (they have moved twice already).
+SIBLINGS = [
+    ("index.html", "Primary Zone2 dashboard"),
+    ("research-hub/overview.html", "Verified research hub"),
+    ("zone2/index.html", "Zone2 platform (34836ddd)"),
+    ("northstar/index.html", "Northstar dashboard"),
 ]
 
 
@@ -169,17 +176,17 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
     root = "../" * (depth + 1)
     items = []
     for href, label in NAV:
-        if href == "__hub__":
-            items.append(
-                f'<div class="nav-sep">ALSO IN THIS REPO</div>'
-                f'<a class="nav-link" href="{root}start.html">Start page</a>'
-                f'<a class="nav-link" href="{root}overview.html">Verified hub overview</a>'
-                f'<a class="nav-link" href="{root}flagged.html">Hub review flags</a>'
-            )
+        if href.startswith("__"):  # never emitted as a link
             continue
         active = " active" if href == rel else ""
         items.append(f'<a class="nav-link{active}" href="{up}{esc(href)}">{esc(label)}</a>')
     flag_count = len(FLAGS["flags"])
+    links = []
+    for rel, label in SIBLINGS:
+        target = REPO / rel
+        if target.exists():
+            links.append(f'<a href="{root}{esc(rel)}">{esc(label)}</a>')  # repo-root view: prefix is `root`, not `up`
+    siblings = " <span>&middot;</span> ".join(links or [f'<a href="{root}README.md">repository</a>'])
     default_badge = f'<a class="chip" href="{up}flags.html">{flag_count} items flagged for review</a>'
     return f"""<!doctype html>
 <html lang="en">
@@ -189,7 +196,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
 <meta name="description" content="Source-verified Amazon affiliate research platform: category data, compliance controls, verification log and open flags. Every table row links to an official source or is left blank.">
 <meta name="robots" content="index,follow">
 <title>{esc(title)} &middot; {esc(SITE_NAME)}</title>
-<link rel="stylesheet" href="{root}styles.css">
+<link rel="stylesheet" href="{up}assets/dashboard.css">
 <link rel="stylesheet" href="{up}assets/site.css">
 </head>
 <body>
@@ -218,7 +225,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
   </div>
   <footer>
     <div class="disclosure"><strong>Disclosure</strong> {esc(DISCLOSURE)} Outbound links on this site are qualified with <code>rel="sponsored"</code>.</div>
-    <div class="foot-meta">Research workspace <span>&middot;</span> no product, price, rating or performance figure is stated unless an official source confirms it <span>&middot;</span> <a href="{root}index.html">dashboard</a> <span>&middot;</span> <a href="{root}README.md">repository</a></div>
+    <div class="foot-meta">Research workspace <span>&middot;</span> no product, price, rating or performance figure is stated unless an official source confirms it <span>&middot;</span> {siblings}</div>
   </footer>
 </main>
 </div>
@@ -323,7 +330,7 @@ def page_exec() -> str:
         ("A1", "Replace the three tokens with valid 10-character ASINs, or full amazon.<tld>/dp/ URLs", "user", "unblocks identity for P-01..P-03, and with it every dependent field", ["S16", "S17", "S18"]),
         ("A2", "Create or confirm an Associates account, marketplace and Associates ID/tag", "user", "turns the inert link preview into a compliant tagged Special Link and enables earnings reporting", ["S01", "S02"]),
         ("A3", "Register for the Creators API (requires >=10 qualifying sales in the past 30 days)", "user", "activates real product research, offer and browse-node data", ["S07"]),
-        ("A4", "Store one dated Associates report export at data/associates_report.json", "user", "unlocks conversion, EPC and the optimizer's revenue-side actions", ["S02"]),
+        ("A4", "Store one dated Associates report export at ledger/associates_report.json", "user", "unlocks conversion, EPC and the optimizer's revenue-side actions", ["S02"]),
         ("A5", "Run the build with policy/rate re-reads before each publishing cycle", "operator", "both governing pages carry update dates and change without notice", ["S01", "S02"]),
     ]
     body = (
@@ -749,7 +756,7 @@ def page_tracking() -> str:
     ]
     cols = [
         ("clicks", "integer", "measured here", "count of redirects served for a static campaign key"),
-        ("campaign_key", "static label", "data/campaigns.json", "must never vary per visitor (R-08)"),
+        ("campaign_key", "static label", "ledger/campaigns.json", "must never vary per visitor (R-08)"),
         ("orders / shipped revenue / earned commission", "from report", "Associates export", "only permitted source for conversion and earnings (R-13, R-15)"),
         ("visitor id, cookie, IP, user-agent", "not stored", "\u2014", "excluded by design: no per-user association, minimal data"),
     ]
@@ -817,7 +824,7 @@ def page_content() -> str:
 def page_architecture() -> str:
     steps = [
         ("1. Ingest", "validate the identifier (10-character ASIN) &rarr; catalog lookup &rarr; cache the response with a hash and timestamp", "tools/asin_guard.py, tools/amazon_creators_api.py", "BLOCKED without credentials; never scraped", ["S06", "S07"]),
-        ("2. Enrich", "attach the published commission band, browse nodes and a dated offer record", "tools/scoring.py, data/commission_table.json", "blank where no official value exists", ["S04"]),
+        ("2. Enrich", "attach the published commission band, browse nodes and a dated offer record", "tools/scoring.py, ledger/commission_table.json", "blank where no official value exists", ["S04"]),
         ("3. Score", "weighted opportunity score: commission 0.30, demand 0.25, competition 0.25, review 0.20", "tools/scoring.py::niche_score", "returns INSUFFICIENT_DATA instead of a default", ["S07"]),
         ("4. Draft", "render article, comparison or guide from templates only if identity resolved", "tools/generate_articles.py", "refusal record otherwise", ["S14", "S15"]),
         ("5. Lint", "disclosure proximity and wording, claims, structured data, rel attributes, mark usage", "tools/generate_articles.py, tools/validate_data.py", "blocks publish on any failure", ["S01", "S02", "S10", "S12"]),
@@ -858,6 +865,46 @@ def page_architecture() -> str:
     return render("architecture.html", "Architecture", "How the loop runs, and where it refuses to guess.", body)
 
 
+DESIGN_SOURCE_CANDIDATES = (
+    "assets/css/style.css",  # primary site's design system (current main)
+    "styles.css",  # the dashboard's original sheet (earlier layout)
+    "northstar/styles.css",  # the dashboard, after the namespace move
+)
+
+
+def design_source() -> Path | None:
+    for rel in DESIGN_SOURCE_CANDIDATES:
+        cand = REPO / rel
+        if cand.is_file():
+            return cand
+    return None
+
+
+def vendor_design_system(out_root: Path) -> None:
+    """Copy the shared design system into pages/assets/ with a provenance header.
+
+    The generated pages are published from the repository root by GitHub Pages, and root-level
+    asset paths have already moved twice in this repository's history. Vendoring the sheet the
+    pages depend on keeps them rendering identically no matter where the other views live, and the
+    header states which file it came from so the copy is auditable rather than mysterious.
+    """
+    src = design_source()
+    dest = out_root / "assets" / "dashboard.css"
+    if src is None:
+        if dest.exists():
+            dest.unlink()
+        return
+    rel = src.relative_to(REPO).as_posix()
+    body = src.read_text(encoding="utf-8")
+    header = (
+        f"/* Vendored from {rel} by tools/build_site.py - do not edit here.\n"
+        "   Re-run the builder after changing the source. Kept as a copy so these pages do not\n"
+        "   depend on root-level paths another session may move. */\n"
+    )
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(header + body, encoding="utf-8")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="build to a temp dir and compare with committed output")
@@ -865,8 +912,8 @@ def main() -> int:
     out_root = Path(tempfile.mkdtemp(prefix="z2site-")) if args.check else PAGES
     for sub in ("assets", "categories", "modules"):
         (out_root / sub).mkdir(parents=True, exist_ok=True)
-    if args.check and SITE_CSS_SRC.exists():
-        shutil.copy2(SITE_CSS_SRC, out_root / "assets" / "site.css")
+    vendor_design_system(out_root)
+    shutil.copy2(REPO / "tools" / "pages-site.css", out_root / "assets" / "site.css")
 
     written: list[str] = []
 
@@ -899,16 +946,28 @@ def main() -> int:
         "generated": sorted(written),
         "count": len(written),
         "as_of": AS_OF,
-        "note": "Generated by tools/build_site.py from data/*.json - edit the data, not the HTML.",
+        "note": "Generated by tools/build_site.py from ledger/*.json - edit the data, not the HTML.",
     }
     (out_root / "manifest.json").write_text(json.dumps(nav, indent=2, sort_keys=True), encoding="utf-8")
     (REPO / ".nojekyll").write_text("", encoding="utf-8")
 
     if args.check:
-        missing = [p for p in written if not (PAGES / p).exists()]
+        import hashlib
+
+        def digest(root: Path) -> dict[str, str]:
+            out = {}
+            for f in sorted(root.rglob("*")):
+                if f.is_file():
+                    out[str(f.relative_to(root))] = hashlib.sha256(f.read_bytes()).hexdigest()[:16]
+            return out
+
+        fresh, committed = digest(out_root), digest(PAGES)
+        drift = sorted(k for k in set(fresh) | set(committed) if fresh.get(k) != committed.get(k))
         shutil.rmtree(out_root, ignore_errors=True)
-        print(json.dumps({"built": len(written), "uncommitted_pages": missing}, indent=2))
-        return 1 if missing else 0
+        print(json.dumps({"built": len(written), "drifted_or_uncommitted": drift}, indent=2))
+        if drift:
+            print("pages/ is out of date - run python3 tools/build_site.py and commit", file=sys.stderr)
+        return 1 if drift else 0
     print(json.dumps({"pages": len(written), "as_of": AS_OF, "out": f"{PAGES.relative_to(REPO)}"}, indent=2))
     return 0
 

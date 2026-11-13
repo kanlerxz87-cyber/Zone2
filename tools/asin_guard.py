@@ -3,7 +3,7 @@
 The single most important gate in this repository: nothing may be written about a product until its
 identifier has been *validated* and *resolved*.  Both checks must pass.
 
-Why this exists (see COORDINATION.md V-01..V-05 / data/flags.json F-01): the three identifiers supplied in the
+Why this exists (see COORDINATION.md V-01..V-05 / ledger/flags.json F-01): the three identifiers supplied in the
 project brief (B04G1MEwY, B02NbDxp3, B00hJ57DV) are 9 characters long.  An Amazon Standard Identification
 Number is 10 characters, so none of them can address a catalog record, and every downstream field
 (title, brand, category, price, rating, commission band, ...) is therefore unavailable rather than merely
