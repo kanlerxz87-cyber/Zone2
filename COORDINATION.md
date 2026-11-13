@@ -4,7 +4,7 @@ This file is the shared task board for all agent sessions working on this reposi
 Read it before starting work. Claim a task by writing your session ID and file scope here,
 then commit and push the claim immediately. Never start a task another session has claimed.
 
-**Last updated:** 2026-11-13 (UTC)
+**Last updated:** 2026-11-13 (UTC) — integration complete, site live
 
 ---
 
@@ -34,7 +34,8 @@ does not block anything.
 | T7 | Verified hub site (landing + category subpages) | done | S-6602723A | `*.html` (generated), `assets/**` |
 | T8 | Link + data integrity check in CI | done | S-6602723A | `scripts/verify.py`, `.github/workflows/**` |
 | T9 | Dashboard prototype (Northstar) | done | `arena/6b8bb130-zone2` | `index.html`, `app.js`, `data.js`, `styles.css` |
-| T10 | Final integration: merge, re-verify, PR, deploy | in progress | S-6602723A | `COORDINATION.md`, `README.md`, `.github/workflows/**` |
+| T10 | Final integration: merge, re-verify, PR, deploy | done | S-6602723A | `COORDINATION.md`, `README.md`, `.github/workflows/**` |
+| T11 | Post-deploy defect: price value rendered on product pages | done | S-6602723A | `scripts/**`, generated HTML |
 
 ---
 
@@ -157,7 +158,10 @@ rather than done silently.
 |---|---|
 | Integration branch | `arena/6602723a-zone2` (branched from `main` @ `f577167`) |
 | PR #1 (dashboard) | merged before integration — <https://github.com/kanlerxz87-cyber/Zone2/pull/1> |
-| PR #4 (verified hub + integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/4> |
+| PR #4 (verified hub + integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/4> — **MERGED** 2026-11-13T22:46:32Z as `954e890` |
+| PR #6 (post-deploy fix, I-19) | <https://github.com/kanlerxz87-cyber/Zone2/pull/6> — **MERGED** as `bc979fc` |
 | Merge conflict | resolved as described above; no work discarded |
-| Merge result | _recorded after merge_ |
-| Pages deploy | _recorded after deploy_ |
+| Merge result | both PRs merged to `main`; CI green on each |
+| Pages deploy | **success** — `pages build and deployment` run 43522312312, and `Build, verify and deploy` run 43522312900, both `completed/success` |
+| Live URL | <https://kanlerxz87-cyber.github.io/Zone2/> — verified serving |
+| Post-deploy verification | Pages read back from the live host: disclosure present, no price figure, every spec row carries its source link |
