@@ -132,6 +132,7 @@ rather than done silently.
 | I-15 | Amazon's Agent Terms require automated clients to self-identify and forbid bypassing blocks, which makes "fully automated scraping" non-compliant. | brief vs policy | Documented on the compliance page; the automation that *is* compliant was built. |
 | I-16 | **Two sessions built overlapping front pages.** PR #1 merged a dashboard at `index.html` while PR #4 was in progress. | `index.html` | Resolved without discarding either: dashboard kept at `index.html`, hub at `overview.html`, `start.html` as landing. See the merge section. |
 | I-17 | The dashboard's workflow published `path: .`, exposing `data/`, `docs/` and `scripts/` as static files. | `.github/workflows/pages.yml` | Fixed in the merged workflow: only `_site/` is uploaded, with an assertion that nothing leaks. |
+| I-18 | The dashboard's `index.html` contained **no affiliate disclosure in its static HTML** — the sentence existed only inside JS-rendered content and in `data.js`, so the served page had none before JavaScript ran and none at all for a crawler. | `index.html` | Fixed: the disclosure is now in the HTML itself plus a `Switch site` link. Caught by CI, not by review. |
 
 ---
 
