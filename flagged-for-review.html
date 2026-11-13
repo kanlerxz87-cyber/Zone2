@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review — Zone2 Affiliate Lab</title>
+<meta name="description" content="13 flagged irregularities (F-01…F-13) from the Zone2 Amazon affiliate project, each with evidence and official source links. Non-blocking.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="dot"></span> Zone2 Affiliate Lab</a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">Dashboard</a>
+      <a href="products.html">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="comparisons.html">Comparisons</a>
+      <a href="buying-guides.html">Buying Guides</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged-for-review.html">Flagged</a>
+      <a href="verification.html">Verification</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumbs"><a href="index.html">Dashboard</a> / Flagged for Review</div>
+  <h1>Flagged for Review</h1>
+  <p class="lede">Every irregularity found during the line-by-line review, with evidence and links to the official source checked. <strong>None of these block publication</strong> — they are listed here so they can be reviewed after the site is live.</p>
+
+  <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.</div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">Total flags</div><div class="value flag">13</div><div class="sub">F-01 … F-13</div></div>
+    <div class="kpi"><div class="label">Blocking</div><div class="value ok">0</div><div class="sub">All non-blocking</div></div>
+    <div class="kpi"><div class="label">Product-data flags</div><div class="value bad">8</div><div class="sub">F-01 … F-08</div></div>
+    <div class="kpi"><div class="label">Operational flags</div><div class="value">5</div><div class="sub">F-09 … F-13</div></div>
+  </div>
+
+  <div class="flag-item" id="F-01">
+    <h3>F-01 · Code <code>B04G1MEwY</code> is not a valid ASIN format</h3>
+    <div class="meta">Severity: high (product cannot exist under this identifier) · Status: <span class="badge flag">open</span></div>
+    <p>The code is 9 characters. Amazon defines ASIN as a 10-character/10-digit code.</p>
+    <p class="src">Sources: <a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">Associates help — "ASIN is the 10-digit code"</a> · <a class="src-link" href="https://sell.amazon.com/blog/fba-new-selection-program" target="_blank" rel="noopener">Amazon Selling — "unique 10-character alphanumeric code"</a></p>
+  </div>
+
+  <div class="flag-item" id="F-02">
+    <h3>F-02 · Code <code>B02NbDxp3</code> is not a valid ASIN format</h3>
+    <div class="meta">Severity: high · Status: <span class="badge flag">open</span></div>
+    <p>9 characters vs. the required 10.</p>
+    <p class="src">Sources: <a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">Associates help</a> · <a class="src-link" href="https://sell.amazon.com/blog/fba-new-selection-program" target="_blank" rel="noopener">Amazon Selling</a></p>
+  </div>
+
+  <div class="flag-item" id="F-03">
+    <h3>F-03 · Code <code>B00hJ57DV</code> is not a valid ASIN format</h3>
+    <div class="meta">Severity: high · Status: <span class="badge flag">open</span></div>
+    <p>9 characters vs. the required 10.</p>
+    <p class="src">Sources: <a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">Associates help</a> · <a class="src-link" href="https://sell.amazon.com/blog/fba-new-selection-program" target="_blank" rel="noopener">Amazon Selling</a></p>
+  </div>
+
+  <div class="flag-item" id="F-04">
+    <h3>F-04 · All 18 official product-page URLs return HTTP 404</h3>
+    <div class="meta">Severity: high · Status: <span class="badge flag">open</span></div>
+    <p>Each code was checked on six marketplaces (amazon.com, .co.uk, .de, .in, .ca, .co.jp). Every response was Amazon's "Page Not Found". Full matrix: <a href="products.html">Products → per-marketplace checks</a>.</p>
+    <p class="src">Examples: <a class="src-link" href="https://www.amazon.com/dp/B04G1MEwY" target="_blank" rel="noopener">amazon.com/dp/B04G1MEwY</a> · <a class="src-link" href="https://www.amazon.co.uk/dp/B02NbDxp3" target="_blank" rel="noopener">amazon.co.uk/dp/B02NbDxp3</a> · <a class="src-link" href="https://www.amazon.co.jp/dp/B00hJ57DV" target="_blank" rel="noopener">amazon.co.jp/dp/B00hJ57DV</a></p>
+  </div>
+
+  <div class="flag-item" id="F-05">
+    <h3>F-05 · Official Amazon search returns "No results" for all three codes</h3>
+    <div class="meta">Severity: high · Status: <span class="badge flag">open</span></div>
+    <p>Site search on amazon.com found no listing matching any of the three codes.</p>
+    <p class="src">Sources: <a class="src-link" href="https://www.amazon.com/s?k=B04G1MEwY" target="_blank" rel="noopener">search B04G1MEwY</a> · <a class="src-link" href="https://www.amazon.com/s?k=B02NbDxp3" target="_blank" rel="noopener">search B02NbDxp3</a> · <a class="src-link" href="https://www.amazon.com/s?k=B00hJ57DV" target="_blank" rel="noopener">search B00hJ57DV</a></p>
+  </div>
+
+  <div class="flag-item" id="F-06">
+    <h3>F-06 · Supplied <code>link.amazon/&lt;code&gt;</code> URLs fall back to unrelated pages</h3>
+    <div class="meta">Severity: high · Status: <span class="badge flag">open</span></div>
+    <p>Each supplied short link redirected into an unrelated Amazon page with <code>plpRedirect=mhFallback</code> instead of opening a product for the code. <code>link.amazon/</code> root and <code>/robots.txt</code> returned HTTP 403.</p>
+    <p class="src">Sources: <a class="src-link" href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener">link.amazon/B04G1MEwY</a> · <a class="src-link" href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener">link.amazon/B02NbDxp3</a> · <a class="src-link" href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener">link.amazon/B00hJ57DV</a></p>
+  </div>
+
+  <div class="flag-item" id="F-07">
+    <h3>F-07 · No product attributes confirmable → all product data cells blank</h3>
+    <div class="meta">Severity: high (blocks marketing copy) · Status: <span class="badge flag">open</span></div>
+    <p>Name, price, rating, review count, category, BSR, availability, and per-product commission rate are left blank on every page because no official source confirms them. This is intentional: the project rule forbids inference.</p>
+    <p class="src">Basis: <a class="src-link" href="https://www.amazon.com/s?k=B04G1MEwY" target="_blank" rel="noopener">search returns no results</a> · <a class="src-link" href="https://www.amazon.com/dp/B02NbDxp3" target="_blank" rel="noopener">product page 404</a></p>
+  </div>
+
+  <div class="flag-item" id="F-08">
+    <h3>F-08 · Per-product commission rate unknown (category unknown)</h3>
+    <div class="meta">Severity: medium · Status: <span class="badge flag">open</span></div>
+    <p>Amazon's rate card assigns fixed rates by product category. Because P1–P3 categories are unknown, their rates cannot be determined. Program-level rates are published on the <a href="analysis.html">Analysis</a> page.</p>
+    <p class="src">Source: <a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener">Standard Commission Income rate card</a></p>
+  </div>
+
+  <div class="flag-item" id="F-09">
+    <h3>F-09 · Commission Income Schedule requires Associates sign-in</h3>
+    <div class="meta">Severity: low · Status: <span class="badge flag">open</span></div>
+    <p>Fetching <code>https://affiliate-program.amazon.com/help/operating/schedule</code> redirected to an Amazon sign-in page (observed 2026-11-13), so the personalized schedule could not be captured. The public category rate card was used instead.</p>
+    <p class="src">Source: <a class="src-link" href="https://affiliate-program.amazon.com/help/operating/schedule" target="_blank" rel="noopener">Commission Income Schedule (sign-in)</a></p>
+  </div>
+
+  <div class="flag-item" id="F-10">
+    <h3>F-10 · Creators API access blocked until Associates account qualifies</h3>
+    <div class="meta">Severity: medium (blocks automation) · Status: <span class="badge flag">open</span></div>
+    <p>Automated product research requires an accepted Associates account, at least 10 qualifying sales in the past 30 days, registration through Associates Central, and generated credentials. None exist for this project yet.</p>
+    <p class="src">Source: <a class="src-link" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener">Creators API — Introduction</a> · <a class="src-link" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/register-for-creators-api" target="_blank" rel="noopener">Register for Creators API</a></p>
+  </div>
+
+  <div class="flag-item" id="F-11">
+    <h3>F-11 · PA-API 5 is deprecated (legacy integrations fail)</h3>
+    <div class="meta">Severity: medium · Status: <span class="badge flag">open</span></div>
+    <p>Any remaining Product Advertising API 5.0 integration receives HTTP 403 <code>AccessDeniedException</code>. This project's architecture targets the Creators API only.</p>
+    <p class="src">Source: <a class="src-link" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener">PA-API 5 Deprecation Notice</a></p>
+  </div>
+
+  <div class="flag-item" id="F-12">
+    <h3>F-12 · No Associates Tracking ID supplied → no commission-bearing links</h3>
+    <div class="meta">Severity: medium (blocks monetization) · Status: <span class="badge flag">open</span></div>
+    <p>The official link format requires <code>tag=YOURASSOCIATEID</code>. No Tracking ID was provided in the brief, so links cannot be tagged and clicks cannot be attributed.</p>
+    <p class="src">Source: <a class="src-link" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener">How do I build a simple text link</a></p>
+  </div>
+
+  <div class="flag-item" id="F-13">
+    <h3>F-13 · Repository baseline contained no product data or code</h3>
+    <div class="meta">Severity: low · Status: <span class="badge flag">open</span></div>
+    <p>At baseline (<code>f577167</code>) the repository held a single file: <code>README.md</code> with the text <code># Zone2</code>. The brief referenced a "full list of requirements" and product links, but no product list, data, or code existed in the repo to reconcile against.</p>
+    <p class="src">Source: <a class="src-link" href="https://github.com/kanlerxz87-cyber/Zone2" target="_blank" rel="noopener">github.com/kanlerxz87-cyber/Zone2</a> · review: <code>docs/repo-review.md</code></p>
+  </div>
+
+  <div class="panel">
+    <h2>How to clear these flags</h2>
+    <ol class="steps">
+      <li>Provide valid 10-character ASINs or corrected product URLs → clears F-01…F-07 (and F-08 once category is visible).</li>
+      <li>Enroll in Amazon Associates and obtain a Tracking ID → clears F-12 and enables tagged links.</li>
+      <li>Reach ≥10 qualifying sales in 30 days and register the Creators API → clears F-10.</li>
+      <li>Drop any legacy PA-API 5 integration → addresses F-11.</li>
+      <li>Sign in to Associates Central to capture the personalized schedule → clears F-09.</li>
+      <li>Add the original requirements document to the repo → clears F-13.</li>
+    </ol>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div><strong>As an Amazon Associate I earn from qualifying purchases.</strong></div>
+    <div>Zone2 Affiliate Lab · 13 flags, 0 blocking · Each with official source · 2026-11-13</div>
+    <div><a href="sources.html">Sources</a> · <a href="verification.html">Verification log</a> · <a href="flagged-for-review.html">Flagged for Review</a> · <a href="https://github.com/kanlerxz87-cyber/Zone2" target="_blank" rel="noopener">Repository</a></div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>
