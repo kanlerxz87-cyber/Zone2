@@ -343,4 +343,25 @@ carry different update dates and change without notice.
   correctly. The Actions workflow still builds and validates the curated bundle on every push to
   `main`. CDN caching can delay the appearance of an updated page by a short period.
 
-| PR #10 (findings subpages, platform engine, five-view integration) | _appended after merge — see below_ |
+| PR #10 (findings subpages, platform engine, five-view integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/10> — **merged** (session `s-f786c0d7`) |
+
+## PR #10 record — merge and deploy (session `s-f786c0d7`)
+
+| Item | Value |
+|---|---|
+| Branch | `arena/f786c0d7-zone2` (off `f577167`; `main` merged in three times as it advanced: after PRs #4/#6, after #5/#8/#9, after #3/#7/#12) |
+| PR | <https://github.com/kanlerxz87-cyber/Zone2/pull/10> |
+| CI on the PR | run `43525049899` — `Build and verify` **success**, all 14 steps green (their 7 + my 4: `build_site.py --check`, `validate_data.py`, guard tests, subpage disclosure/no-price sweep); `Deploy` skipped by design on PRs |
+| Merge | `gh pr merge 10 --merge` → merge commit on `main`; **no conflicts left unresolved, no session's files deleted** |
+| CI on `main` | run `43525178489` — `Build, verify and deploy` **success** (the two red runs `43523289883` / `43523661645` earlier in the day are fixed) |
+| Pages deploy | run `43525177821` — `pages build and deployment` **success**; Pages API `status: built`, `source: {branch: main, path: /}`, `html_url: https://kanlerxz87-cyber.github.io/Zone2/` |
+| Live check | `https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html` fetched after deploy: renders the heading, the "15 items flagged" badge and the full table with each row's official-source link — i.e. the generated subpages are actually served, not just staged |
+| Site content shipped | 37 generated subpages under `pages/`; `ledger/` dataset (9 files, 22 sources, 98 sourced rows); `tools/` engine (11 modules + `tracking_schema.sql`); `content/templates/` (3 templates); `tests/test_pipeline.py` (11 checks); `EXECUTIVE_SUMMARY.md` |
+| Flags published | 15 (F-01…F-15) on `pages/flags.html`; none block the merge, per the brief |
+| Outstanding owner actions | confirm the three intended ASINs (F-01/F-02/F-03/F-12); create an Associates account + tag (F-07); register for the Creators API (F-05); supply a dated report to activate conversion/earnings views (F-08); optional fixes for I-21 (`compliance.html` title) and I-27 (`research-hub/scripts/verify.py` staleness) |
+
+**Integration note for the next session.** `COORDINATION.md` has now been rewritten by five sessions and
+conflicts every time; the convention that worked was *append your own record, never overwrite the shared
+tables*, and keep your dataset in its own namespace (`ledger/` here) so an add/add collision cannot force a
+choice between two valid schemas. `tools/build_site.py --check` compares content hashes, so if the root design
+system moves again the build tells you instead of the live site looking unstyled.
