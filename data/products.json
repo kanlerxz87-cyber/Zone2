@@ -53,10 +53,11 @@
         },
         {
           "label": "Temperature range",
-          "value": "200–450 °F (93–235 °C)",
+          "value": "200–450 °F (95–235 °C, as stated by Chefman)",
           "status": "verified",
           "source_name": "Chefman official product page",
-          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+          "note": "Both figures are Chefman's own. No conversion was performed by this project."
         },
         {
           "label": "Dimensions",
@@ -197,7 +198,8 @@
           "value": "1700 W / 120 V",
           "status": "verified",
           "source_name": "Amazon product information block",
-          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "note": "Single-source: Amazon's product-information block. The manufacturer page states 120 V but does not publish a wattage figure."
         },
         {
           "label": "Temperature range",
@@ -245,10 +247,11 @@
         },
         {
           "label": "Included accessories",
-          "value": "Air fry basket, rotisserie spit, bake pan, drip tray, rack, fetch tool (7 accessories per manufacturer copy)",
+          "value": "Manufacturer states 7 premium accessories and names an air fry basket, rotisserie spit and bake pan; Amazon's \"included components\" lists rack, bake pan, drip tray, crisper basket, rotisserie spit and fetch tool",
           "status": "verified",
           "source_name": "Emeril Everyday official store",
-          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+          "source_url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+          "note": "The two sources describe the same bundle but neither publishes an itemised list of exactly 7. Count is not asserted."
         },
         {
           "label": "Warranty",
@@ -352,10 +355,11 @@
         },
         {
           "label": "Temperature range",
-          "value": "200–400 °F (93–204 °C)",
+          "value": "200–400 °F (95–205 °C, as stated by Chefman)",
           "status": "verified",
           "source_name": "Chefman official product page",
-          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+          "source_url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+          "note": "Both figures are Chefman's own. No conversion was performed by this project."
         },
         {
           "label": "Presets",
