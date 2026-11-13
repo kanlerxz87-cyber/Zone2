@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary — Zone2 Affiliate Platform</title>
+<meta name="description" content="Executive summary of the AI-powered Amazon affiliate marketing platform, verification findings and flagged irregularities.">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <div class="brand"><span class="logo">Z2</span> Zone2 Affiliate Platform</div>
+    <nav class="main">
+      <a href="index.html">Dashboard</a>
+      <a href="products.html">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+      <a href="../northstar/index.html">Northstar workspace</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1 class="page-title">Executive Summary</h1>
+  <p class="page-sub">Important details of the project, the supplied products, the verification outcome, and the flagged irregularities. Also available as <a class="ext" href="docs/EXECUTIVE_SUMMARY.md">docs/EXECUTIVE_SUMMARY.md</a> in the repository.</p>
+
+  <div class="card" style="margin-bottom:16px;">
+    <p style="margin:0;"><strong>Project:</strong> Zone2 — AI-powered Amazon affiliate marketing platform · <strong>Session:</strong> arena/34836ddd-zone2 · <strong>Date:</strong> 2026-11-13 · <strong>Status:</strong> platform scaffold complete; <span class="badge flag">product verification UNVERIFIED (flagged)</span></p>
+  </div>
+
+  <h2>1 · Purpose</h2>
+  <p>Build an AI-powered Amazon affiliate marketing platform that automates product research, identifies trending and high-converting products, analyzes pricing, reviews, competition, and commission potential, and generates SEO-optimized product articles, comparisons, and buying guides. The platform identifies profitable niches, creates engaging marketing content, publishes and manages affiliate links, tracks clicks and conversions, and continuously optimizes campaigns to maximize affiliate revenue — prioritizing automation, scalability, data-driven decisions, and compliance with Amazon Associates policies and disclosure requirements.</p>
+
+  <h2>2 · Products supplied for marketing</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Provided link</th><th>Code</th><th>Official status</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><a class="ext" href="https://link.amazon/B04G1MEwY">link.amazon/B04G1MEwY</a></td><td><code>B04G1MEwY</code></td><td><span class="badge flag">Unverified — flagged</span></td><td><a class="ext" href="https://www.amazon.com/dp/B04G1MEwY">amazon.com/dp/B04G1MEwY</a></td></tr>
+      <tr><td>2</td><td><a class="ext" href="https://link.amazon/B02NbDxp3">link.amazon/B02NbDxp3</a></td><td><code>B02NbDxp3</code></td><td><span class="badge flag">Unverified — flagged</span></td><td><a class="ext" href="https://www.amazon.com/dp/B02NbDxp3">amazon.com/dp/B02NbDxp3</a></td></tr>
+      <tr><td>3</td><td><a class="ext" href="https://link.amazon/B00hJ57DV">link.amazon/B00hJ57DV</a></td><td><code>B00hJ57DV</code></td><td><span class="badge flag">Unverified — flagged</span></td><td><a class="ext" href="https://www.amazon.com/dp/B00hJ57DV">amazon.com/dp/B00hJ57DV</a></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>3 · Critical finding — identifier irregularity</h2>
+  <div class="notice">
+    <strong>⚠ The supplied identifiers do not meet the official ASIN format</strong>
+    <ul class="clean" style="margin-bottom:0;">
+      <li>Amazon officially defines an ASIN as <strong>"a unique 10-character alphanumeric code assigned to every product listed in the Amazon store"</strong> — real examples: <code>B07FZ8S74R</code>, <code>0451524934</code>. <a class="ext" href="https://sell.amazon.com/blog/what-is-an-asin">Source: Understanding ASINs — Amazon Selling</a></li>
+      <li>All three supplied codes measure <strong>9 characters</strong> — one short of the required 10.</li>
+      <li>No official source has any record of the codes: Amazon product pages return "Page Not Found"; Google exact-match search for <code>"B04G1MEwY"</code> returns approx. <strong>0 results</strong>; the Wayback Machine has <strong>no captures</strong>; CamelCamelCamel reports <strong>not in database</strong>.</li>
+      <li><code>link.amazon/B04G1MEwY</code> redirected to an unrelated product page when fetched (Amazon fallback behavior) — the short link is not a reliable identifier.</li>
+    </ul>
+  </div>
+  <p><strong>Decision (no-inference rule):</strong> every product-specific field — title, brand, category, price, rating, review count, BSR, commission rate — is left <strong>blank and marked unverified</strong> in all site tables. Nothing was inferred, estimated, or filled in. Full detail on the <a href="flagged.html">Flagged for Review</a> page.</p>
+
+  <h2>4 · What was built</h2>
+  <ul class="clean">
+    <li><a href="index.html">Landing / Dashboard</a> — platform overview, capability cards, KPI summary.</li>
+    <li><a href="products.html">Products</a> — research table with per-row source links; unverified cells blank and flagged.</li>
+    <li><a href="analysis.html">Analysis</a> — pricing / reviews / competition / commission framework; commission mechanics verified from the official Commission Income Statement.</li>
+    <li><a href="content.html">Content</a> — SEO content status; generation paused for unverified products.</li>
+    <li><a href="compliance.html">Compliance</a> — Operating Agreement, Program Policies, Participation Requirements, FTC disclosures with official links.</li>
+    <li><a href="flagged.html">Flagged for Review</a> — irregularities and unverified items with source links.</li>
+    <li><a href="sources.html">Sources</a> — every source used, for manual review.</li>
+    <li><a href="../northstar/index.html">Northstar workspace</a> — alternate research dashboard (preserved from session arena/6b8bb130-zone2).</li>
+  </ul>
+
+  <h2>5 · Compliance posture</h2>
+  <ul class="clean">
+    <li>The platform design follows the Amazon Associates Operating Agreement and Program Policies (official links on the <a href="compliance.html">Compliance</a> page).</li>
+    <li>Mandatory disclosures applied site-wide: <strong>"As an Amazon Associate I earn from qualifying purchases."</strong> plus clear, conspicuous, link-level FTC disclosure.</li>
+    <li>No commission income can be earned or tracked until the underlying products are verified with valid, official ASINs and the user's own Associates account is enrolled.</li>
+  </ul>
+
+  <h2>6 · Recommended next action</h2>
+  <p>Re-supply the product identifiers in <strong>exactly 10-character ASIN format</strong> (e.g., <code>B0XXXXXXXX</code>), taken directly from the product page URL after <code>/dp/</code>, or as shown in the product's Product Information section. Once valid ASINs are provided, product data can be verified line by line from Amazon's official product pages, and the analysis, content, and link-management modules activated.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. Some links on this site may be affiliate links; this site earns commissions on qualifying purchases made through them.</div>
+  <div class="inner">Zone2 — Amazon Affiliate Marketing Platform. Built with verification-first methodology. © <span id="year">2026</span>.</div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

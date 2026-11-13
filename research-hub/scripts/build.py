@@ -1111,7 +1111,7 @@ LANDING = """<!DOCTYPE html>
       <span class="choice__cta">Open the verified hub &rarr;</span>
     </a>
 
-    <a class="choice" href="start.html">
+    <a class="choice" href="index.html">
       <span class="choice__tag">Workspace</span>
       <span class="choice__title">Northstar dashboard</span>
       <span class="choice__body">The research workspace built in parallel: overview, product
@@ -1506,7 +1506,7 @@ def main() -> None:
   <h1>Page not found</h1>
   <p class="hero__lede">That address does not exist on this site.</p>
   <div class="hero__actions">
-    <a class="btn btn--primary" href="start.html">Back to the start</a>
+    <a class="btn btn--primary" href="index.html">Back to the start</a>
     <a class="btn" href="products.html">Browse products</a>
   </div>
 </div>

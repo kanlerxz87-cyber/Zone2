@@ -10,31 +10,32 @@ Repo: `kanlerxz87-cyber/Zone2`
 |---|---|---|---|
 | `arena/6b8bb130-zone2` | merged to `main` via PR #1 | Northstar research-dashboard prototype | merged; preserved at `northstar/` |
 | `arena/6602723a-zone2` (S-6602723A) | merged to `main` via PRs #4 / #6 | Verified dataset, generated Affiliate Research Hub, compliance position | merged; preserved at `research-hub/` |
+| `arena/34836ddd-zone2` | merged to `main` via PR #5 | AI-powered platform build (multi-page dashboard) | merged; preserved at `zone2/` |
 | `arena/78c94859-zone2` (78c94859) | merged to `main` via PR #3 | Zone2 platform site, verification, **final integration** | merged; primary site at repo root |
 
-> **Integration note (multi-session race):** sessions 6b8bb130 and 6602723a both merged their work to
-> `main` while session 78c94859 was building the platform site, so all three PRs conflicted with one
-> another. Per the project instruction, session 78c94859 acted as the final integration session: it
-> merged `main` into its branch, relocated the two companion sites into `northstar/` and
-> `research-hub/` (nothing discarded), re-verified the combined data line by line, and merged the
-> integrated result to `main` via PR #3. No session's work was discarded; the two companion sites are
-> reachable from the primary dashboard footer.
+> **Integration note (multi-session race):** four sessions worked in parallel and each merged work to
+> `main` while others were still active, so every integration PR conflicted with the others. Per the
+> project instruction, session 78c94859 acted as the final integration session: it merged `main` into
+> its branch, relocated the companion sites into `northstar/`, `research-hub/` and `zone2/` (nothing
+> discarded), re-verified the combined data line by line, and merged the integrated result to `main`
+> via PR #3. All companion sites are reachable from the primary dashboard footer.
 
 ## Task board
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| T1 | Task board + session registry | done | 6b8bb130 / 6602723a / 78c94859 | `COORDINATION.md` |
+| T1 | Task board + session registry | done | all sessions | `COORDINATION.md` |
 | T2 | Resolve the three affiliate short links to canonical ASINs | done | 6602723a / 78c94859 | `docs/verification-log.md`, `research-hub/data/raw-verification-log.md` |
 | T3 | Verify product facts against official sources | done | 6602723a / 78c94859 | `research-hub/data/products.json`, `assets/js/data.js` |
 | T4 | Amazon Associates compliance requirements | done | 6602723a / 78c94859 | `research-hub/data/compliance.json`, `compliance.html` |
-| T5 | Executive summary | done | 6602723a / 78c94859 | `docs/executive-summary.md`, `index.html` |
+| T5 | Executive summary | done | 6602723a / 34836ddd / 78c94859 | `docs/executive-summary.md`, `zone2/docs/EXECUTIVE_SUMMARY.md`, `index.html` |
 | T6 | Automated platform requirements matrix | done | 6602723a | `research-hub/data/requirements.json`, `research-hub/requirements.html` |
 | T7 | Verified hub site (landing + category subpages) | done | 6602723a | `research-hub/*.html`, `research-hub/assets/**` |
 | T8 | Link + data integrity check in CI | done | 6602723a / 78c94859 | `.github/workflows/pages.yml` |
 | T9 | Dashboard prototype (Northstar) | done | 6b8bb130 | `northstar/*` |
-| T10 | Zone2 platform site (dashboard, categories, tables) | done | 78c94859 | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `flagged.html`, `404.html`, `assets/` |
-| T11 | Final integration: merge, re-verify, PR, deploy | done | 78c94859 | see "Integration & verification" |
+| T10 | AI-powered platform build (multi-page dashboard) | done | 34836ddd | `zone2/**` |
+| T11 | Zone2 platform site (dashboard, categories, tables) | done | 78c94859 | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `flagged.html`, `404.html`, `assets/` |
+| T12 | Final integration: merge, re-verify, PR, deploy | done | 78c94859 | see "Integration & verification" |
 
 ## Sources used (all official / verified)
 
@@ -75,9 +76,8 @@ Repo: `kanlerxz87-cyber/Zone2`
 6. **Associates tag absent on resolved short links.** The resolved `link.amazon` URLs carry no
    Associates tag parameter; live tracking requires Special Links with the Associates tag (per
    Participation Requirements §2). Flagged for account configuration.
-7. **Static affiliate disclosure.** The primary dashboard and companion pages carry the static
-   disclosure "As an Amazon Associate I earn from qualifying purchases." on every page (fix applied by
-   session 6602723a in commit c600e6f and retained here).
+7. **Static affiliate disclosure.** Every page of the primary site and the companion sites carries the
+   static disclosure "As an Amazon Associate I earn from qualifying purchases."
 
 ## Integration & verification
 
@@ -85,17 +85,19 @@ Repo: `kanlerxz87-cyber/Zone2`
   Manufacturer spec pages (Chefman ×2, Emeril Everyday ×1) re-fetched and confirmed during final
   integration.
 - Site is static (HTML/CSS/JS) served from the repo root; no build step.
-- Internal link check: every internal navigation link across the primary site, `research-hub/` and
-  `northstar/` resolves to an existing file. JS syntax check and render test pass for all primary-site
-  tables (including the merged verified spec table).
+- Internal link check: every internal navigation link across the primary site, `research-hub/`,
+  `northstar/` and `zone2/` resolves to an existing file. JS syntax check and render test pass for all
+  primary-site tables (including the merged verified spec table).
 - `research-hub/data/*.json` and `research-hub/site-manifest.json` parse cleanly.
 - PR **#1** — https://github.com/kanlerxz87-cyber/Zone2/pull/1 — merged into `main` (by session
   6b8bb130).
 - PR **#4** — https://github.com/kanlerxz87-cyber/Zone2/pull/4 — merged into `main` (by session
   6602723a); superseded by PR #6.
+- PR **#5** — https://github.com/kanlerxz87-cyber/Zone2/pull/5 — merged into `main` (by session
+  34836ddd).
 - PR **#6** — https://github.com/kanlerxz87-cyber/Zone2/pull/6 — merged into `main` (by session
   6602723a).
 - PR **#3** — https://github.com/kanlerxz87-cyber/Zone2/pull/3 — merged into `main` (squash) by
-  session 78c94859 as the final integration; it carried the integrated result of all three sessions.
+  session 78c94859 as the final integration; it carried the integrated result of all four sessions.
 - GitHub Pages: source branch `main`, path `/`; site live at
   https://kanlerxz87-cyber.github.io/Zone2/ (deploy status: built).

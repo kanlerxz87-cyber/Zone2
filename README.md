@@ -34,6 +34,9 @@ Served via GitHub Pages from the `main` branch root (`/`).
 - **`northstar/`** — Northstar affiliate-intelligence prototype dashboard (hash-based navigation,
   no build step). Built by session `arena/6b8bb130-zone2` (merged to `main` via PR #1), relocated
   here unchanged during final integration.
+- **`zone2/`** — a second AI-powered platform build (multi-page dashboard with executive summary,
+  sources and verification data) by session `arena/34836ddd-zone2` (merged to `main` via PR #5),
+  preserved unchanged under its original directory name during final integration.
 
 ## Data & verification
 
