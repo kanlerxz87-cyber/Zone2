@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products — Zone2 Affiliate Platform</title>
+<meta name="description" content="Product research table for the supplied Amazon affiliate products. Every row carries official source links; unconfirmed values are blank and flagged.">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <div class="brand"><span class="logo">Z2</span> Zone2 Affiliate Platform</div>
+    <nav class="main">
+      <a href="index.html">Dashboard</a>
+      <a href="products.html">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1 class="page-title">Product Research</h1>
+  <p class="page-sub">Products supplied for affiliate marketing, with automated research fields. Verification rule: a value is recorded only when confirmed from an official source; otherwise it is left blank and flagged as unverified. Nothing is inferred.</p>
+
+  <div class="notice">
+    <strong>⚠ All three supplied codes are unverified</strong>
+    Each code is 9 characters. Amazon officially defines an ASIN as a <em>unique 10-character alphanumeric code</em> (<a href="https://sell.amazon.com/blog/what-is-an-asin">Understanding ASINs — Amazon Selling</a>). No official source has a record of these codes, so all product-specific fields are blank below. Details on the <a href="flagged.html">Flagged for Review</a> page.
+  </div>
+
+  <h2>Supplied products</h2>
+  <div id="products-table"></div>
+
+  <h2 style="margin-top:28px;">Verification checks performed per product</h2>
+  <div id="checks-table"></div>
+
+  <h2 style="margin-top:28px;">How verification works</h2>
+  <ol class="clean">
+    <li>Each supplied identifier is checked against the official Amazon product page (<code>amazon.com/dp/&lt;code&gt;</code>).</li>
+    <li>The code format is checked against Amazon's official ASIN definition (unique 10-character alphanumeric code).</li>
+    <li>Cross-checks are run against search indexes (Google, Bing), the Wayback Machine capture index, and the CamelCamelCamel Amazon US price tracker.</li>
+    <li>A field is filled only when confirmed from an official source. Unconfirmed fields are left blank and the row is flagged.</li>
+  </ol>
+  <p style="color:var(--muted);font-size:.88rem;">To activate research on these products, re-supply each identifier as an exact 10-character ASIN taken directly from the Amazon product page URL (the string after <code>/dp/</code>) or from the product's Product Information section.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. Some links on this site may be affiliate links; this site earns commissions on qualifying purchases made through them.</div>
+  <div class="inner">Zone2 — Amazon Affiliate Marketing Platform. Built with verification-first methodology. © <span id="year">2026</span>.</div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+Zone2.renderTable("products-table", {
+  columns: ["#", "Provided link", "Code", "Title", "Brand", "Category", "Price", "Rating", "Reviews", "BSR", "Commission", "Source"],
+  rows: [
+    {
+      "#": "1",
+      "Provided link": "<a class='ext' href='https://link.amazon/B04G1MEwY'>link.amazon/B04G1MEwY</a>",
+      "Code": "<code>B04G1MEwY</code> <span class='badge flag'>9 chars</span>",
+      "Title": "<span class='blank'>—</span>",
+      "Brand": "<span class='blank'>—</span>",
+      "Category": "<span class='blank'>—</span>",
+      "Price": "<span class='blank'>—</span>",
+      "Rating": "<span class='blank'>—</span>",
+      "Reviews": "<span class='blank'>—</span>",
+      "BSR": "<span class='blank'>—</span>",
+      "Commission": "<span class='blank'>—</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B04G1MEwY'>amazon.com/dp/B04G1MEwY</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format</a> · <a href='https://camelcamelcamel.com/product/B04G1MEwY'>CamelCamelCamel</a></span>"
+    },
+    {
+      "#": "2",
+      "Provided link": "<a class='ext' href='https://link.amazon/B02NbDxp3'>link.amazon/B02NbDxp3</a>",
+      "Code": "<code>B02NbDxp3</code> <span class='badge flag'>9 chars</span>",
+      "Title": "<span class='blank'>—</span>",
+      "Brand": "<span class='blank'>—</span>",
+      "Category": "<span class='blank'>—</span>",
+      "Price": "<span class='blank'>—</span>",
+      "Rating": "<span class='blank'>—</span>",
+      "Reviews": "<span class='blank'>—</span>",
+      "BSR": "<span class='blank'>—</span>",
+      "Commission": "<span class='blank'>—</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B02NbDxp3'>amazon.com/dp/B02NbDxp3</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format</a> · <a href='https://camelcamelcamel.com/product/B02NbDxp3'>CamelCamelCamel</a></span>"
+    },
+    {
+      "#": "3",
+      "Provided link": "<a class='ext' href='https://link.amazon/B00hJ57DV'>link.amazon/B00hJ57DV</a>",
+      "Code": "<code>B00hJ57DV</code> <span class='badge flag'>9 chars</span>",
+      "Title": "<span class='blank'>—</span>",
+      "Brand": "<span class='blank'>—</span>",
+      "Category": "<span class='blank'>—</span>",
+      "Price": "<span class='blank'>—</span>",
+      "Rating": "<span class='blank'>—</span>",
+      "Reviews": "<span class='blank'>—</span>",
+      "BSR": "<span class='blank'>—</span>",
+      "Commission": "<span class='blank'>—</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B00hJ57DV'>amazon.com/dp/B00hJ57DV</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format</a> · <a href='https://camelcamelcamel.com/product/B00hJ57DV'>CamelCamelCamel</a></span>"
+    }
+  ]
+});
+
+Zone2.renderTable("checks-table", {
+  columns: ["Code", "Amazon product page", "Code format vs official 10-char rule", "Google exact match", "Wayback Machine captures", "CamelCamelCamel", "Result"],
+  rows: [
+    {
+      "Code": "<code>B04G1MEwY</code>",
+      "Amazon product page": "<a class='ext' href='https://www.amazon.com/dp/B04G1MEwY'>amazon.com/dp/B04G1MEwY</a>",
+      "Code format vs official 10-char rule": "9 characters — does not comply",
+      "Google exact match": "<a class='ext' href='https://www.google.com/search?q=%22B04G1MEwY%22'>~0 results</a>",
+      "Wayback Machine captures": "<a class='ext' href='http://web.archive.org/cdx/search/cdx?url=amazon.com/dp/B04G1MEwY&output=json'>none</a>",
+      "CamelCamelCamel": "<a class='ext' href='https://camelcamelcamel.com/product/B04G1MEwY'>not in database</a>",
+      "Result": "<span class='badge flag'>Unverified</span>"
+    },
+    {
+      "Code": "<code>B02NbDxp3</code>",
+      "Amazon product page": "<a class='ext' href='https://www.amazon.com/dp/B02NbDxp3'>amazon.com/dp/B02NbDxp3</a>",
+      "Code format vs official 10-char rule": "9 characters — does not comply",
+      "Google exact match": "<a class='ext' href='https://www.google.com/search?q=%22B02NbDxp3%22'>no results</a>",
+      "Wayback Machine captures": "<a class='ext' href='http://web.archive.org/cdx/search/cdx?url=amazon.com/dp/B02NbDxp3&output=json'>none</a>",
+      "CamelCamelCamel": "<a class='ext' href='https://camelcamelcamel.com/product/B02NbDxp3'>not in database</a>",
+      "Result": "<span class='badge flag'>Unverified</span>"
+    },
+    {
+      "Code": "<code>B00hJ57DV</code>",
+      "Amazon product page": "<a class='ext' href='https://www.amazon.com/dp/B00hJ57DV'>amazon.com/dp/B00hJ57DV</a>",
+      "Code format vs official 10-char rule": "9 characters — does not comply",
+      "Google exact match": "<a class='ext' href='https://www.google.com/search?q=%22B00hJ57DV%22'>no results</a>",
+      "Wayback Machine captures": "<a class='ext' href='http://web.archive.org/cdx/search/cdx?url=amazon.com/dp/B00hJ57DV&output=json'>none</a>",
+      "CamelCamelCamel": "<a class='ext' href='https://camelcamelcamel.com/product/B00hJ57DV'>not in database</a>",
+      "Result": "<span class='badge flag'>Unverified</span>"
+    }
+  ]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{
+  "generated": "2026-11-13",
+  "session": "arena/34836ddd-zone2",
+  "rule": "Every value must be confirmed from an official source. Values that cannot be confirmed are left blank and flagged as unverified. Nothing is inferred.",
+  "products": [
+    {
+      "provided_link": "https://link.amazon/B04G1MEwY",
+      "code": "B04G1MEwY",
+      "code_length": 9,
+      "valid_asin_length": 10,
+      "asin_format_valid": false,
+      "title": "",
+      "brand": "",
+      "category": "",
+      "price": "",
+      "rating": "",
+      "review_count": "",
+      "best_seller_rank": "",
+      "commission_rate": "",
+      "verification_status": "UNVERIFIED — code does not meet the official 10-character ASIN format; no official source has a record of this code",
+      "sources": [
+        "https://www.amazon.com/dp/B04G1MEwY",
+        "https://sell.amazon.com/blog/what-is-an-asin",
+        "https://web.archive.org/cdx/search/cdx?url=amazon.com/dp/B04G1MEwY&output=json",
+        "https://camelcamelcamel.com/product/B04G1MEwY",
+        "https://www.google.com/search?q=%22B04G1MEwY%22"
+      ]
+    },
+    {
+      "provided_link": "https://link.amazon/B02NbDxp3",
+      "code": "B02NbDxp3",
+      "code_length": 9,
+      "valid_asin_length": 10,
+      "asin_format_valid": false,
+      "title": "",
+      "brand": "",
+      "category": "",
+      "price": "",
+      "rating": "",
+      "review_count": "",
+      "best_seller_rank": "",
+      "commission_rate": "",
+      "verification_status": "UNVERIFIED — code does not meet the official 10-character ASIN format; no official source has a record of this code",
+      "sources": [
+        "https://www.amazon.com/dp/B02NbDxp3",
+        "https://sell.amazon.com/blog/what-is-an-asin",
+        "https://web.archive.org/cdx/search/cdx?url=amazon.com/dp/B02NbDxp3&output=json",
+        "https://camelcamelcamel.com/product/B02NbDxp3",
+        "https://www.google.com/search?q=%22B02NbDxp3%22"
+      ]
+    },
+    {
+      "provided_link": "https://link.amazon/B00hJ57DV",
+      "code": "B00hJ57DV",
+      "code_length": 9,
+      "valid_asin_length": 10,
+      "asin_format_valid": false,
+      "title": "",
+      "brand": "",
+      "category": "",
+      "price": "",
+      "rating": "",
+      "review_count": "",
+      "best_seller_rank": "",
+      "commission_rate": "",
+      "verification_status": "UNVERIFIED — code does not meet the official 10-character ASIN format; no official source has a record of this code",
+      "sources": [
+        "https://www.amazon.com/dp/B00hJ57DV",
+        "https://sell.amazon.com/blog/what-is-an-asin",
+        "https://web.archive.org/cdx/search/cdx?url=amazon.com/dp/B00hJ57DV&output=json",
+        "https://camelcamelcamel.com/product/B00hJ57DV",
+        "https://www.google.com/search?q=%22B00hJ57DV%22"
+      ]
+    }
+  ],
+  "compliance_sources": [
+    {
+      "name": "Associates Program Operating Agreement (updated Oct 15, 2025)",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement"
+    },
+    {
+      "name": "Associates Program Policies (updated Apr 14, 2026) — includes Commission Income Statement",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies"
+    },
+    {
+      "name": "Associates Program Participation Requirements",
+      "url": "https://affiliate-program.amazon.com/help/operating/participation/"
+    },
+    {
+      "name": "Associate identification & disclosure requirements",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98"
+    },
+    {
+      "name": "FTC Endorsement Guides (referenced by Amazon)",
+      "url": "https://www.ftc.gov/tips-advice/business-center/guidance/ftcs-endorsement-guides-what-people-are-asking#affiliate"
+    }
+  ]
+}

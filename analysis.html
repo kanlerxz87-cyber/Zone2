@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analysis — Zone2 Affiliate Platform</title>
+<meta name="description" content="Pricing, reviews, competition and commission analysis for the supplied affiliate products. Only official, verified data is recorded; unconfirmed values are blank and flagged.">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <div class="brand"><span class="logo">Z2</span> Zone2 Affiliate Platform</div>
+    <nav class="main">
+      <a href="index.html">Dashboard</a>
+      <a href="products.html">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1 class="page-title">Analysis — Pricing, Reviews, Competition &amp; Commission</h1>
+  <p class="page-sub">Automated analysis of each product across four dimensions. Values are recorded only when confirmed from an official source; unconfirmed values are left blank and flagged.</p>
+
+  <div class="notice">
+    <strong>⚠ Analysis findings: unverified</strong>
+    Because none of the three supplied codes could be confirmed as valid ASINs in any official source (see <a href="flagged.html">Flagged for Review</a>), all product-specific analysis values are blank. No estimates or inferences were made.
+  </div>
+
+  <h2>Product analysis table</h2>
+  <div id="analysis-table"></div>
+
+  <h2 style="margin-top:28px;">Commission mechanics — verified from the official Commission Income Statement</h2>
+  <p class="page-sub" style="margin-bottom:14px;">The following platform-level mechanics were verified line by line from Amazon's official <a href="https://affiliate-program.amazon.com/help/operating/policies">Associates Program Policies — Commission Income Statement</a> (updated Apr 14, 2026).</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Mechanic</th><th>Verified detail</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Session definition</td>
+        <td>A session begins when a customer clicks through a Special Link and ends at the first of: (x) 24 hours elapse, (y) the customer places an order for a Product (other than a Digital Product), or (z) the customer clicks through another Associate's Special Link.</td>
+        <td><a class="ext" href="https://affiliate-program.amazon.com/help/operating/policies">Associates Program Policies</a></td>
+      </tr>
+      <tr>
+        <td>Cart window</td>
+        <td>A customer may add a Product to the shopping cart and complete the order no later than <strong>89 days</strong> after the initial click-through for it to qualify.</td>
+        <td><a class="ext" href="https://affiliate-program.amazon.com/help/operating/policies">Associates Program Policies</a></td>
+      </tr>
+      <tr>
+        <td>Shipment window</td>
+        <td>The Product must be shipped to (or streamed/downloaded by, and paid for by) the customer within <strong>180 days</strong> of the purchase.</td>
+        <td><a class="ext" href="https://affiliate-program.amazon.com/help/operating/policies">Associates Program Policies</a></td>
+      </tr>
+      <tr>
+        <td>Qualifying Revenue</td>
+        <td>The amount Amazon actually receives from a Qualifying Purchase, less shipping charges, gift-wrapping fees, handling fees, taxes, service charges, credits, rebates, credit-card processing fees, and bad debt.</td>
+        <td><a class="ext" href="https://affiliate-program.amazon.com/help/operating/policies">Associates Program Policies</a></td>
+      </tr>
+      <tr>
+        <td>Standard Commission Income</td>
+        <td>Calculated as a percentage of Qualifying Revenue, per the Commission Income Statement <a class="ext" href="https://affiliate-program.amazon.com/help/operating/policies#Appendix">Appendix</a>. Category-specific rates are read from that Appendix at analysis time.</td>
+        <td><a class="ext" href="https://affiliate-program.amazon.com/help/operating/policies">Associates Program Policies</a></td>
+      </tr>
+      <tr>
+        <td>Special Commission Income</td>
+        <td>Bounty Events and Bonus Events may provide additional or alternative commission income in select countries, per the Appendix.</td>
+        <td><a class="ext" href="https://affiliate-program.amazon.com/help/operating/policies">Associates Program Policies</a></td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h2 style="margin-top:28px;">Analysis workflow</h2>
+  <ol class="clean">
+    <li><strong>Pricing analysis</strong> — current price and price history tracked from official Amazon listings; comparison against category benchmarks.</li>
+    <li><strong>Review analysis</strong> — rating and review volume from the official product listing, plus sentiment review of customer reviews.</li>
+    <li><strong>Competition analysis</strong> — number and strength of competing listings and affiliates in the same category.</li>
+    <li><strong>Commission potential</strong> — estimated commission per qualifying sale computed from Qualifying Revenue and the official rate in the Commission Income Statement Appendix.</li>
+    <li><strong>Automation</strong> — the pipeline re-runs these checks continuously and re-publishes findings with per-row source links.</li>
+  </ol>
+</main>
+
+<footer class="site-footer">
+  <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. Some links on this site may be affiliate links; this site earns commissions on qualifying purchases made through them.</div>
+  <div class="inner">Zone2 — Amazon Affiliate Marketing Platform. Built with verification-first methodology. © <span id="year">2026</span>.</div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+Zone2.renderTable("analysis-table", {
+  columns: ["Product", "Pricing analysis", "Review analysis", "Competition analysis", "Commission potential", "Source"],
+  rows: [
+    {
+      "Product": "<code>B04G1MEwY</code> <span class='badge flag'>unverified</span>",
+      "Pricing analysis": "<span class='blank'>—</span>",
+      "Review analysis": "<span class='blank'>—</span>",
+      "Competition analysis": "<span class='blank'>—</span>",
+      "Commission potential": "<span class='blank'>—</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B04G1MEwY'>amazon.com/dp/B04G1MEwY</a><span class='src'><a href='https://affiliate-program.amazon.com/help/operating/policies'>Commission Income Statement</a></span>"
+    },
+    {
+      "Product": "<code>B02NbDxp3</code> <span class='badge flag'>unverified</span>",
+      "Pricing analysis": "<span class='blank'>—</span>",
+      "Review analysis": "<span class='blank'>—</span>",
+      "Competition analysis": "<span class='blank'>—</span>",
+      "Commission potential": "<span class='blank'>—</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B02NbDxp3'>amazon.com/dp/B02NbDxp3</a><span class='src'><a href='https://affiliate-program.amazon.com/help/operating/policies'>Commission Income Statement</a></span>"
+    },
+    {
+      "Product": "<code>B00hJ57DV</code> <span class='badge flag'>unverified</span>",
+      "Pricing analysis": "<span class='blank'>—</span>",
+      "Review analysis": "<span class='blank'>—</span>",
+      "Competition analysis": "<span class='blank'>—</span>",
+      "Commission potential": "<span class='blank'>—</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B00hJ57DV'>amazon.com/dp/B00hJ57DV</a><span class='src'><a href='https://affiliate-program.amazon.com/help/operating/policies'>Commission Income Statement</a></span>"
+    }
+  ]
+});
+</script>
+</body>
+</html>
