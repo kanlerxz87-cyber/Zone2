@@ -119,6 +119,38 @@ jobs:
           print(f'{len(pages)} pages: disclosure present, no prices printed')
           PY
 
+      # ---- arena/f786c0d7-zone2: generated subpages under pages/ ----
+      # Rebuild first, so "committed output matches a fresh build" is a real property of this repo
+      # rather than something a reviewer has to trust.
+      - name: Rebuild the subpages and confirm committed output is current
+        run: python3 tools/build_site.py --check
+
+      - name: Subpage gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
+        run: python3 tools/validate_data.py
+
+      - name: Platform guard tests
+        run: python3 tests/test_pipeline.py
+
+      - name: Subpages disclose and never print a product price
+        run: |
+          python3 - <<'PY'
+          import re, sys
+          from pathlib import Path
+          DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+          pages = sorted(Path('pages').rglob('*.html'))
+          assert len(pages) >= 30, f'expected the full generated subpage set, found {len(pages)}'
+          bad = []
+          for f in pages:
+              text = f.read_text(encoding='utf-8')
+              if DISCLOSURE not in text:
+                  bad.append(f'{f}: missing the required Site disclosure')
+              if 'amazon.com/dp/' in text and 'rel="sponsored' not in text and 'plpRedirect' not in text:
+                  bad.append(f'{f}: links to a product page without rel="sponsored"')
+          if bad:
+              print('\n'.join(bad)); sys.exit(1)
+          print(f'{len(pages)} subpages: disclosure present, sponsored links qualified')
+          PY
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

@@ -1,0 +1,46 @@
+---
+kind: comparison
+entry: {{entry_id}}
+generated_utc: {{generated_utc}}
+disclosure: true
+items: [{{asin_a}}, {{asin_b}}]
+analysis: {{analysis}}
+---
+
+# {{title_a}} vs {{title_b}}: which suits the use case
+
+(paid link) — both links below are affiliate links. <!-- R-02 -->
+
+## Verdict first
+
+{{verdict_summary}}
+
+## Side by side
+
+| Criterion | {{title_a}} | {{title_b}} | Basis |
+| --- | --- | --- | --- |
+| Category / commission band | {{category_a}} · {{rate_a}}% | {{category_b}} · {{rate_b}}% | published rate table, re-read {{as_of}} |
+| Price (lowest new) | {{price_new_a}} | {{price_new_b}} | dated offer record only; blank = not displayed (R-04) |
+| Price (lowest used) | {{price_used_a}} | {{price_used_b}} | required on comparison pages when provided (R-05) |
+| Availability | {{availability_a}} | {{availability_b}} | dated offer record |
+| Documented limitations | {{limits_a}} | {{limits_b}} | retrieved listing content, unaltered (R-10) |
+
+Where a comparison format shows prices alongside non-Amazon prices, the lowest new price must be shown and
+the lowest used price shown if it is provided; both columns above exist so that rule can be satisfied rather
+than quietly ignored, and they stay blank until a dated offer record supplies them.
+
+## Choose A if / Choose B if
+
+{{choose_a_if}}
+
+{{choose_b_if}}
+
+## What we did not measure
+
+{{not_measured}}
+
+<!-- Refusals are intentional. A comparison never asserts a winner on price, durability, safety or
+     "value" without an evidence reference on the same line, and it never compares products whose identity
+     is unresolved. -->
+
+As an Amazon Associate I earn from qualifying purchases.

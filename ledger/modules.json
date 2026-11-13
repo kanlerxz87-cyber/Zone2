@@ -1,0 +1,150 @@
+{
+  "note": "Capability register for the platform. `state` describes what exists in THIS repository today, not what a hosted deployment could add. automated=code present, scaffolded=interface present without live data source, blocked=needs an external credential/authority before any value can be produced.",
+  "as_of": "2026-11-13",
+  "modules": [
+    {
+      "id": "M-01",
+      "name": "Product research",
+      "state": "scaffolded",
+      "purpose": "Find candidate ASINs and resolve each to an authoritative catalog record before anything is written about it.",
+      "official_inputs": ["Creators API SearchItems / GetItems / GetBrowseNodes (S07, S08)"],
+      "implemented_in": ["tools/amazon_creators_api.py", "tools/asin_guard.py"],
+      "verification": "An ASIN must pass the 10-character identifier check AND return a catalog record keyed to the same ASIN; otherwise the candidate is dropped to the flag queue with no attributes recorded.",
+      "hard_rule": "Identity is never inferred from a slug, short link, filename, or human description. This is the exact failure mode observed in the three submitted links (see Flagged for Review).",
+      "blockers": ["No Associates account or API credentials in this workspace"],
+      "source_ids": ["S06", "S07", "S08"]
+    },
+    {
+      "id": "M-02",
+      "name": "Trend & demand detection",
+      "state": "blocked",
+      "purpose": "Rank niches by demand trajectory instead of intuition.",
+      "official_inputs": ["Browse node / best-seller movement and sales-rank deltas returned by the catalog API (S07)", "Associates Reports for revenue-side signal (S02)"],
+      "implemented_in": ["tools/scoring.py", "data/niches.json (empty queue by design)"],
+      "verification": "A trend row may only exist if two dated, sourced observations of the same metric exist; a single snapshot cannot create a trend.",
+      "hard_rule": "No \"trending product\", search-volume, or popularity figure is stated anywhere on this site, because no authorized data source was reachable to verify one.",
+      "blockers": ["Requires an authenticated catalog feed with >=2 dated snapshots"],
+      "source_ids": ["S07"]
+    },
+    {
+      "id": "M-03",
+      "name": "Pricing analysis",
+      "state": "blocked",
+      "purpose": "Track price point, discount depth and offer shape per ASIN for editorial context and comparison integrity.",
+      "official_inputs": ["Creators API offer/price data only, displayed with the fetch timestamp (S02, S07)"],
+      "implemented_in": ["tools/amazon_creators_api.py (stores price with as_of + response hash)", "tools/build_site.py (renders price cells only when as_of exists)"],
+      "verification": "Rendered prices must trace to a stored API response file whose hash matches; a stale or hand-typed price fails the build.",
+      "hard_rule": "Displaying prices outside Amazon-served links or API data violates the Participation Requirements (R-04), so every price cell on this site is intentionally blank.",
+      "blockers": ["No API credentials; no cached offer records"],
+      "source_ids": ["S02", "S07"]
+    },
+    {
+      "id": "M-04",
+      "name": "Review analysis",
+      "state": "blocked",
+      "purpose": "Summarise recurring praise/complaint themes to write an honest review, and to surface objections a buying guide must answer.",
+      "official_inputs": ["Only review data the API License permits to be used and displayed (S02, S03)"],
+      "implemented_in": ["tools/scoring.py::review_signal", "content/templates/buying_guide.md.tmpl (objection blocks stay empty until sourced)"],
+      "verification": "Theme claims require a cited, dated dataset; sentiment numbers without a sample size are rejected by the linter.",
+      "hard_rule": "Customer review text may not be altered or inserted into (R-10); star ratings may not be shown outside the API licence; and this project has neither, so no rating appears.",
+      "blockers": ["No permitted review dataset in this workspace"],
+      "source_ids": ["S02", "S03"]
+    },
+    {
+      "id": "M-05",
+      "name": "Competition assessment",
+      "state": "scaffolded",
+      "purpose": "Estimate how contested a keyword/niche is, so effort goes where a new page can actually rank.",
+      "official_inputs": ["Search result and result-count mechanics are not an official program source; only SERP-level analysis (indexed pages, review depth of ranking documents) is used, recorded with its own source per row"],
+      "implemented_in": ["tools/scoring.py::competition_term (needs `results_observed` + `observed_utc`; returns None otherwise)"],
+      "verification": "Competition rows are only populated by an operator-observed SERP sample stored in data/; each row must carry observation date and the query used.",
+      "hard_rule": "The scoring model returns an explicit \"insufficient data\" result rather than a default score; a missing input never silently becomes 0 or 5.",
+      "blockers": ["No SERP dataset was collected for this build"],
+      "source_ids": ["S07"]
+    },
+    {
+      "id": "M-06",
+      "name": "Commission & revenue modelling",
+      "state": "automated",
+      "purpose": "Attach the correct published rate to a verified category and compute expected value with the real attribution mechanics.",
+      "official_inputs": ["Standard Commission Income Statement Table 1 (S04)", "Session / 24h, 89-day cart, 180-day ship rules (S02)", "payment timing and minimums (S02)"],
+      "implemented_in": ["ledger/commission_table.json", "tools/scoring.py::expected_value", "pages/commissions.html"],
+      "verification": "The rate table is transcribed row-by-row from the official page and re-read each cycle; any category absent from the official table falls to \"All Other Categories\" and is labelled as such.",
+      "hard_rule": "Rate figures are only ever Amazon's published figures. Conversion/traffic inputs are operator assumptions and are printed as assumptions, never as results.",
+      "blockers": [],
+      "source_ids": ["S02", "S04"]
+    },
+    {
+      "id": "M-07",
+      "name": "SEO content generation",
+      "state": "automated",
+      "purpose": "Produce product articles, comparisons, and buying guides that are policy-clean by construction.",
+      "official_inputs": ["Google structured-data requirements for Product/Review/Offer and pros & cons (S14, S15)", "rel=\"sponsored\" for affiliate links (S12, S13)", "Amazon Content/claims rules (R-06, R-10)"],
+      "implemented_in": ["content/templates/product_article.md.tmpl", "content/templates/comparison.md.tmpl", "content/templates/buying_guide.md.tmpl", "tools/generate_articles.py"],
+      "verification": "Generator refuses to emit a draft for any entry whose identity is unverified; lint suite checks disclosure proximity, banned strings, claim evidence, JSON-LD validity, rel attributes, and empty-placeholder leakage.",
+      "hard_rule": "Unresolved fields render as an explicit UNVERIFIED placeholder that the linter then fails on - so a half-verified article cannot reach the publish directory.",
+      "blockers": ["Awaiting verified product records"],
+      "source_ids": ["S10", "S12", "S13", "S14", "S15"]
+    },
+    {
+      "id": "M-08",
+      "name": "Publishing & link management",
+      "state": "scaffolded",
+      "purpose": "Own the link surface: canonical URL, tag, disclosure placement, and a per-page campaign identifier.",
+      "official_inputs": ["Special Link/tag rules and SiteStripe or API-based link creation (S02, S03, S09)", "sub-tag rules incl. the no-per-user-association prohibition (R-08)"],
+      "implemented_in": ["tools/link_builder.py", "pages/links.html"],
+      "verification": "Every emitted link is re-parsed and asserted to carry the tag, the Amazon host, and rel=\"sponsored nofollow\"; sub-tag values come from a static registry, never from request data.",
+      "hard_rule": "No live affiliate link is published from this repository: without an approved Associates ID, the builder emits only an inert preview marked `NO_TAG - NOT FOR PUBLICATION`.",
+      "blockers": ["No Associates ID / tracking ID supplied"],
+      "source_ids": ["S02", "S03", "S09"]
+    },
+    {
+      "id": "M-09",
+      "name": "Click & conversion tracking",
+      "state": "scaffolded",
+      "purpose": "Measure what a page does, while keeping Amazon's earnings truth in Associates Central.",
+      "official_inputs": ["Associates reporting is the only source of earnings and conversion figures (S02, R-15)", "Amazon may record information about users clicking through Special Links (S01 Sec. 12)"],
+      "implemented_in": ["tools/redirect_server.py", "data/tracking_schema.sql", "pages/tracking.html"],
+      "verification": "Site-side metrics are first-party click counts only, keyed to page+campaign; conversion/earnings columns stay blank until a dated Associates report is ingested.",
+      "hard_rule": "Zero clicks, CTR, conversion rate, EPC, or revenue number is displayed anywhere in this build - none exists to verify. The tracker also stores no user identifier, to respect R-08 and privacy law.",
+      "blockers": ["No hosted endpoint; no Associates earnings/report export"],
+      "source_ids": ["S01", "S02"]
+    },
+    {
+      "id": "M-10",
+      "name": "Campaign optimization loop",
+      "state": "scaffolded",
+      "purpose": "Reallocate effort: retire losing pages, duplicate winning angles, re-test placement.",
+      "official_inputs": ["Minimum observability requirements are the operator's own statistics plan; no external rule is invented here"],
+      "implemented_in": ["tools/optimize.py (rule engine: no-action until n>=30 clicks AND a dated earnings report exists; decisions recorded with the evidence they used)"],
+      "verification": "Each proposed action must name the input rows behind it; actions without evidence are not emitted.",
+      "hard_rule": "The optimizer cannot conclude \"this niche converts\" from thin data, and cannot rewrite product facts - it only changes placement, internal linking, and coverage.",
+      "blockers": ["No click or earnings history"],
+      "source_ids": ["S02"]
+    },
+    {
+      "id": "M-11",
+      "name": "Niche discovery",
+      "state": "scaffolded",
+      "purpose": "Score a category before committing content budget to it.",
+      "official_inputs": ["Published commission bands and 0.00% exclusions (S04) as a hard eligibility filter; catalog-side demand signals as the ranking input"],
+      "implemented_in": ["tools/scoring.py::niche_score", "data/niches.json"],
+      "verification": "Eligibility filter is deterministic and sourced (a 0.00% band disqualifies a niche regardless of demand); the ranking term is empty until demand data exists, so no niche is declared profitable here.",
+      "hard_rule": "The site lists the method and the exclusion rule, not a shortlist of \"best niches\", because that would be an unverifiable claim.",
+      "blockers": ["Demand-side data source not connected"],
+      "source_ids": ["S04"]
+    },
+    {
+      "id": "M-12",
+      "name": "Scalability & automation substrate",
+      "state": "automated",
+      "purpose": "Run the loop continuously and cheaply: schedule, cache, backoff, idempotent build, deploy gate.",
+      "official_inputs": ["GitHub Pages as the static host (this repository's own workflow)", "API operation quotas/limits as published by the API docs (S07)"],
+      "implemented_in": [".github/workflows/pages.yml", "tools/build_site.py", "tools/validate_data.py", "tools/cache.py"],
+      "verification": "Build is deterministic (same inputs -> same bytes), network-free, and each deploy re-runs the data/verification lints; a failed lint stops publication.",
+      "hard_rule": "No crawler/scrape path exists as a fallback - the only accepted ingestion is the official API, because scraping is both brittle and outside the program rules.",
+      "blockers": ["Scheduled execution needs a runner/secret configuration"],
+      "source_ids": ["S07", "S22"]
+    }
+  ]
+}
