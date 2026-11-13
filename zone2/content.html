@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content — Zone2 Affiliate Platform</title>
+<meta name="description" content="SEO-optimized product articles, comparisons and buying guides. Content is generated only for verified products.">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="bar">
+    <div class="brand"><span class="logo">Z2</span> Zone2 Affiliate Platform</div>
+    <nav class="main">
+      <a href="index.html">Dashboard</a>
+      <a href="products.html">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+      <a href="../northstar/index.html">Northstar workspace</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1 class="page-title">Content — SEO Articles, Comparisons &amp; Buying Guides</h1>
+  <p class="page-sub">The platform generates SEO-optimized product articles, comparisons and buying guides automatically — but only for products verified against official sources. No content is generated for unverified products.</p>
+
+  <div class="notice blue">
+    <strong>Content generation: paused for unverified products</strong>
+    All three supplied codes are unverified (invalid 10-character ASIN format — see <a href="flagged.html">Flagged for Review</a>). Generating articles, comparisons or buying guides for products that cannot be confirmed from an official source would risk publishing unverified claims, so <strong>no content has been generated</strong> and every content field below is blank.
+  </div>
+
+  <h2>Content pipeline per product</h2>
+  <div id="content-table"></div>
+
+  <h2 style="margin-top:28px;">What the content module produces</h2>
+  <div class="grid cols-3">
+    <div class="card feature"><div class="ico">📄</div><div><h3>Product articles</h3><p>SEO-optimized articles per verified product, built only from official product data, with per-claim source links.</p></div></div>
+    <div class="card feature"><div class="ico">⚖️</div><div><h3>Comparisons</h3><p>Side-by-side comparison tables between verified products, with source links on every row.</p></div></div>
+    <div class="card feature"><div class="ico">🛒</div><div><h3>Buying guides</h3><p>Niche buying guides that identify profitable, trending, high-converting verified products and their commission potential.</p></div></div>
+  </div>
+
+  <h2 style="margin-top:28px;">SEO &amp; compliance rules for generated content</h2>
+  <ol class="clean">
+    <li>Every factual claim in generated content links back to an official source.</li>
+    <li>No claim is stated for a product whose identifier cannot be confirmed from an official source.</li>
+    <li>Affiliate links are used only on Special Links generated through the user's own Associates account.</li>
+    <li>Clear, conspicuous disclosure is placed near every affiliate link and product recommendation, per the <a href="compliance.html">Compliance</a> page.</li>
+  </ol>
+</main>
+
+<footer class="site-footer">
+  <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. Some links on this site may be affiliate links; this site earns commissions on qualifying purchases made through them.</div>
+  <div class="inner">Zone2 — Amazon Affiliate Marketing Platform. Built with verification-first methodology. © <span id="year">2026</span>.</div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+Zone2.renderTable("content-table", {
+  columns: ["Product", "Product article", "Comparison", "Buying guide", "SEO status", "Source"],
+  rows: [
+    {
+      "Product": "<code>B04G1MEwY</code> <span class='badge flag'>unverified</span>",
+      "Product article": "<span class='blank'>not generated</span>",
+      "Comparison": "<span class='blank'>not generated</span>",
+      "Buying guide": "<span class='blank'>not generated</span>",
+      "SEO status": "<span class='badge muted'>blocked</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B04G1MEwY'>amazon.com/dp/B04G1MEwY</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format</a></span>"
+    },
+    {
+      "Product": "<code>B02NbDxp3</code> <span class='badge flag'>unverified</span>",
+      "Product article": "<span class='blank'>not generated</span>",
+      "Comparison": "<span class='blank'>not generated</span>",
+      "Buying guide": "<span class='blank'>not generated</span>",
+      "SEO status": "<span class='badge muted'>blocked</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B02NbDxp3'>amazon.com/dp/B02NbDxp3</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format</a></span>"
+    },
+    {
+      "Product": "<code>B00hJ57DV</code> <span class='badge flag'>unverified</span>",
+      "Product article": "<span class='blank'>not generated</span>",
+      "Comparison": "<span class='blank'>not generated</span>",
+      "Buying guide": "<span class='blank'>not generated</span>",
+      "SEO status": "<span class='badge muted'>blocked</span>",
+      "Source": "<a class='ext' href='https://www.amazon.com/dp/B00hJ57DV'>amazon.com/dp/B00hJ57DV</a><span class='src'><a href='https://sell.amazon.com/blog/what-is-an-asin'>ASIN format</a></span>"
+    }
+  ]
+});
+</script>
+</body>
+</html>

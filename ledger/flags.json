@@ -176,6 +176,18 @@
         "S02"
       ],
       "owner": "user"
+    },
+    {
+      "id": "F-14",
+      "severity": "low",
+      "title": "Stale duplicate of the dashboard exists at northstar/ and is not deployed",
+      "detail": "Commit 4bea98e added northstar/index.html, app.js, data.js and styles.css - a near-copy of the root Northstar dashboard that predates the c600e6f fix: `grep -c 'As an Amazon Associate' northstar/index.html` returns 0, so the served HTML carries no disclosure sentence (the copy's app.js does render one client-side, count 1). That is the same gap c600e6f closed at the repo root, left un-closed in this copy. The Pages workflow stages index.html, the hub pages, zone2/ and pages/, but not northstar/, so the copy is never published and no crawler sees it. It stays unreferenced dead weight that will drift from the root version.",
+      "impact": "No live-site impact (not in the deployed bundle). Risk is future confusion or a link pointing at the older copy.",
+      "action_required": "Owner decision: either delete northstar/ or make it a deliberate redirect to ../index.html. Recorded as a change request rather than an edit, since another session owns those paths.",
+      "source_ids": [
+        "S22"
+      ],
+      "owner": "user"
     }
   ]
 }

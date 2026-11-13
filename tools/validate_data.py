@@ -210,7 +210,7 @@ def check_marks(report: Report) -> None:
 
 def check_disclosure(report: Report) -> None:
     required = "As an Amazon Associate I earn from qualifying purchases."
-    pages = list(REPO.rglob("*.html"))
+    pages = list(owned_pages())
     for path in pages:
         text = path.read_text(encoding="utf-8", errors="ignore")
         if re.search(r'rel="sponsored', text) and required not in text:
@@ -219,13 +219,30 @@ def check_disclosure(report: Report) -> None:
             report.fail(f"{path.relative_to(REPO)}: sponsored link without a link-level disclosure (R-02)")
 
 
-def check_links(report: Report, start_dirs=(REPO,)) -> int:
-    """Every internal href/#anchor must resolve to a real file (no broken pages on deploy)."""
-    checked = 0
-    for root in start_dirs:
+SKIP_DIRS = {".git", "_site", ".cache", ".local", "node_modules", "__pycache__"}
+
+
+def owned_pages():
+    """Files this namespace polices: the generated subpages plus the shared landing page.
+
+    The hub's root-level pages are generated and checked by scripts/verify.py, so re-checking them
+    here would duplicate a sibling session's gate and fail on their internal conventions instead of ours.
+    """
+    roots = [REPO / "pages", REPO / "index.html"]
+    for root in roots:
+        if root.is_file():
+            yield root
+            continue
         for path in sorted(root.rglob("*.html")):
-            if ".git" in path.parts:
+            if SKIP_DIRS.intersection(path.parts):
                 continue
+            yield path
+
+
+def check_links(report: Report) -> int:
+    """Every internal href must resolve to a real file (no broken pages on deploy)."""
+    checked = 0
+    for path in owned_pages():
             text = path.read_text(encoding="utf-8", errors="ignore")
             for href in re.findall(r'href="([^"#]+)(?:#[^"]*)?"', text):
                 if href.startswith(("http://", "https://", "mailto:", "javascript:", "//")):

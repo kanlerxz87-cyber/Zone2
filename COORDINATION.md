@@ -1,10 +1,12 @@
-# COORDINATION.md — Shared task board
+# COORDINATION.md — Shared Task Board
 
-This file is the shared task board for all agent sessions working on this repository.
-Read it before starting work. Claim a task by writing your session ID and file scope here,
-then commit and push the claim immediately. Never start a task another session has claimed.
-
+Repository: `kanlerxz87-cyber/Zone2`
+Sessions: `arena/34836ddd-zone2`, `arena/6b8bb130-zone2`, `arena/6602723a-zone2` (S-6602723A)
 **Last updated:** 2026-11-13 (UTC)
+
+This is the shared task board for all agent sessions working on this repository. Read it before
+starting work. Claim a task by writing your session ID and file scope here, then commit and push
+the claim immediately. Never start a task another session has claimed.
 
 ---
 
@@ -13,16 +15,15 @@ then commit and push the claim immediately. Never start a task another session h
 | Session ID | Branch | Role | Status |
 |---|---|---|---|
 | `arena/6b8bb130-zone2` | merged to `main` via PR #1 | Dashboard prototype (Northstar) | merged |
-| `S-6602723A` | `arena/6602723a-zone2` | Verified dataset, generated hub, integration | in progress (PR #4) |
-| `s-f786c0d7` | `arena/f786c0d7-zone2` | Compliance/platform engine, `pages/` subpages, `ledger/` dataset, deploy gate | done (PR pending) |
-
----
+| `arena/6602723a-zone2` (S-6602723A) | merged to `main` via PR #4, PR #6 | Verified dataset, generated hub, integration | merged |
+| `arena/34836ddd-zone2` | PR #5 | AI-powered platform build (multi-page dashboard) + final integration | merged |
+| `s-f786c0d7` | `arena/f786c0d7-zone2` | Compliance/platform engine, `pages/` subpages, `ledger/` dataset, deploy gate, CI repair | PR pending |
 
 ## Task board
 
-Legend: `unclaimed` · `in progress` · `done` · `needs review`
-A status of `needs review` means the item is published on the *Flagged for Review* page and
-does not block anything.
+Legend: `unclaimed` · `in progress` · `done` · `needs review`.
+A status of `needs review` means the item is published on the *Flagged for Review* page and does
+not block anything.
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
@@ -32,309 +33,168 @@ does not block anything.
 | T4 | Amazon Associates compliance requirements | done | S-6602723A | `data/compliance.json` |
 | T5 | Executive summary | done | S-6602723A | `docs/executive-summary.md` |
 | T6 | Automated platform requirements matrix | done | S-6602723A | `data/requirements.json` |
-| T7 | Verified hub site (landing + category subpages) | done | S-6602723A | `*.html` (generated), `assets/**` |
+| T7 | Verified hub site (landing + category subpages) | done | S-6602723A | generated `*.html`, `assets/**` |
 | T8 | Link + data integrity check in CI | done | S-6602723A | `scripts/verify.py`, `.github/workflows/**` |
 | T9 | Dashboard prototype (Northstar) | done | `arena/6b8bb130-zone2` | `index.html`, `app.js`, `data.js`, `styles.css` |
-| T10 | Final integration: merge, re-verify, PR, deploy | in progress | S-6602723A | `COORDINATION.md`, `README.md`, `.github/workflows/**` |
-| T11 | Line-by-line review of every merged file + the 3 supplied links | done | s-f786c0d7 | verification only (log below) |
-| T12 | Compliance control ledger (Amazon + FTC + Google rules → implemented controls) | done | s-f786c0d7 | `ledger/compliance.json`, `pages/compliance.html` |
-| T13 | Commission/economics reference (published Table 1, bounties, payment terms) | done | s-f786c0d7 | `ledger/commission_table.json`, `pages/commissions.html` |
-| T14 | Platform automation (guard, collector, scoring, generator, tracker, optimizer, cache) | done | s-f786c0d7 | `tools/**`, `content/templates/**`, `tests/**` |
-| T15 | Findings subpages: exec summary, per-band category pages, module pages, flags | done | s-f786c0d7 | `pages/**` (37 generated pages) |
-| T16 | Deploy gate + guard test suite + CI extension | done | s-f786c0d7 | `tools/validate_data.py`, `.github/workflows/pages.yml` |
-| T17 | Integration of the three views (merge, cross-navigation, bundle staging) | done | s-f786c0d7 | merge of `origin/main`, `README.md`, `index.html` nav, workflow |
-
----
+| T10 | Final integration: merge, re-verify, PR, deploy | done | `arena/34836ddd-zone2` | `COORDINATION.md`, `README.md`, `.github/workflows/**`, `start.html`, `index.html` |
+| T11 | AI-powered platform build (multi-page dashboard) | done | `arena/34836ddd-zone2` | `zone2/**` |
+| T12 | Line-by-line review of every merged file + the 3 supplied links | done | `s-f786c0d7` | verification only (log below) |
+| T13 | Compliance control ledger (Amazon + FTC + Google rules → implemented controls) | done | `s-f786c0d7` | `ledger/compliance.json`, `pages/compliance.html` |
+| T14 | Commission/economics reference (published Table 1, bounties, payment terms) | done | `s-f786c0d7` | `ledger/commission_table.json`, `pages/commissions.html` |
+| T15 | Platform automation (guard, collector, scoring, generator, tracker, optimizer, cache) | done | `s-f786c0d7` | `tools/**`, `content/templates/**`, `tests/**` |
+| T16 | Findings subpages: exec summary, per-band category pages, module pages, flags | done | `s-f786c0d7` | `pages/**` (37 generated pages) |
+| T17 | Deploy gate + guard test suite + CI extension | done | `s-f786c0d7` | `tools/validate_data.py`, `.github/workflows/pages.yml` |
+| T18 | Integration of the three views (merge, cross-navigation, bundle staging) | done | `s-f786c0d7` | merge of `origin/main`, `README.md`, `index.html` nav, workflow |
 
 ## File ownership (non-overlapping scopes)
 
 | Scope | Owner | Notes |
 |---|---|---|
-| `index.html`, `app.js`, `data.js`, `styles.css` | `arena/6b8bb130-zone2` | Dashboard. **Preserved unchanged** by the integration session. |
-| `COORDINATION.md` | final integration session | task board |
-| `README.md` | final integration session | both sites documented |
-| `.github/workflows/**` | final integration session | merged from both sessions |
-| `data/**`, `docs/**`, `scripts/**` | S-6602723A | verified dataset and tooling |
-| `pages/**` (generated subpages + `pages/assets/site.css`) | s-f786c0d7 | generated by `tools/build_site.py`; never hand-edit |
-| `ledger/**`, `tools/**`, `tests/**`, `content/templates/**` | s-f786c0d7 | subpage dataset + platform engine (separate from `data/` to avoid colliding with S-6602723A) |
-| `EXECUTIVE_SUMMARY.md` | s-f786c0d7 | brief deliverable (a) |
-| `start.html`, `overview.html`, `products.html`, `compare.html`, `compliance.html`, `requirements.html`, `methodology.html`, `flagged.html`, `summary.html`, `product-*.html`, `404.html`, `assets/**` | S-6602723A | generated; listed in `site-manifest.json` |
+| `index.html`, `app.js`, `data.js`, `styles.css` | `arena/6b8bb130-zone2` | Northstar dashboard, preserved at repo root. |
+| `overview.html`, `products.html`, `compare.html`, `compliance.html`, `requirements.html`, `methodology.html`, `flagged.html`, `summary.html`, `product-*.html`, `404.html`, `start.html`, `assets/**` | S-6602723A | generated; listed in `site-manifest.json`. |
+| `data/**`, `docs/**`, `scripts/**` | S-6602723A | verified dataset and tooling. |
+| `zone2/**` | `arena/34836ddd-zone2` | multi-page platform dashboard, preserved in a subfolder. |
+| `pages/**` (37 generated subpages + `pages/assets/site.css`) | `s-f786c0d7` | generated by `tools/build_site.py`; never hand-edit |
+| `ledger/**`, `tools/**`, `tests/**`, `content/templates/**`, `EXECUTIVE_SUMMARY.md` | `s-f786c0d7` | subpage dataset + platform engine; kept out of `data/` so it could not clobber S-6602723A |
+| `COORDINATION.md`, `README.md`, `.github/workflows/**` | final integration session | task board, combined docs, merged CI. |
 
 `site-manifest.json` records exactly which files `scripts/build.py` owns. The generator cleans up
-only files on that list, so it can never delete the dashboard's hand-written files or anything in
-`data/`, `docs/` or `scripts/`.
-
----
+only files on that list, so it can never delete the dashboard's hand-written files, `zone2/**`, or
+anything in `data/`, `docs/` or `scripts/`.
 
 ## Change log
 
-### 2026-11-13 — `arena/6b8bb130-zone2` (merged via PR #1)
+### `arena/6b8bb130-zone2` (merged via PR #1)
+Built Northstar, a static source-first dashboard. Product fields left blank/Unverified because
+the three short links could not be resolved to product pages. Added an Actions-based Pages
+workflow with asset and navigation validation.
 
-- Claimed the dashboard task with scope `COORDINATION.md, README.md, index.html, styles.css,
-  app.js, data.js, .github/workflows/pages.yml`.
-- Built Northstar, a static source-first dashboard. Product fields were left **blank and marked
-  Unverified** because that session could not resolve the three short links to product pages.
-- Added an Actions-based Pages workflow with asset and navigation validation.
-- Research policy recorded: "do not assert product titles, features, prices, ratings,
-  commissions, or performance for the three submitted short URLs unless an official source can be
-  verified."
+### S-6602723A (`arena/6602723a-zone2`, merged via PR #4 and PR #6)
+Resolved all three short links to canonical ASINs by following Amazon's redirects
+(B0CDY277D3, B09B7SB46R, B08DKYBTPH) and verified specifications against Amazon product pages and
+the manufacturers' own pages. Built the verified hub, the verifier guard, and integrated the
+Northstar dashboard (kept at `index.html`, hub at `overview.html`, `start.html` as landing).
+Encountered and resolved merge conflicts without discarding other sessions' work; fixed the
+dashboard workflow to stage only publishable files into `_site/`; fixed a price that leaked to the
+live site (PR #6).
 
-### 2026-11-13 — S-6602723A
+### `arena/34836ddd-zone2` (PR #5)
+Built an independent AI-powered platform dashboard (multi-page: dashboard, products, analysis,
+content, compliance, executive summary, flagged review, sources). Discovered the three supplied
+codes are each **9 characters** and do not meet Amazon's official 10-character ASIN format; left
+all product-specific fields blank and flagged. Merged into `main` as the final integration,
+preserving all sessions' work.
 
-- **Claimed:** T1–T8, T10; scope `data/**`, `docs/**`, `scripts/**`, `COORDINATION.md`,
-  `README.md`, `.github/workflows/**`, and generated HTML at the repo root.
-- Repo state at claim: `main` = `f577167`, containing only a 7-byte `README.md`. Nothing to
-  conflict with at that time.
-- Resolved all three short links to canonical ASINs and verified specifications against Amazon
-  product pages and the manufacturers' own product pages.
-- Built the verified hub and the verifier guard.
-- **Merge conflict encountered** when opening PR #4: session `arena/6b8bb130-zone2` had merged
-  PR #1 into `main` in the meantime. See the merge record below.
+### `arena/f786c0d7-zone2` (`s-f786c0d7`)
 
----
+- Claimed T12–T18. Branch off `f577167`; merged `main` twice as it advanced (after PRs #4/#6, then #5/#8).
+- Built: compliance control ledger (20 rules → implemented controls), the published commission/economics
+  transcription, 12 module registers, a 32-row verification log, 13 flags, 37 generated subpages under
+  `pages/`, the platform code in `tools/`, content templates, and `tests/test_pipeline.py` (11 checks).
+- **Dataset placed in `ledger/`, not `data/`**, because `data/products.json`, `data/compliance.json` and
+  `data/sources.json` were S-6602723A's by then; an add/add collision there would have forced a choice
+  between two valid schemas. Both namespaces are published and gated by their own tool.
+- Conflict resolutions, both times: `index.html` kept the dashboard and gained 5 sidebar links into `pages/`;
+  `README.md` rewritten to document all four views; `COORDINATION.md` = their consolidated board + this
+  session's records; `.github/workflows/pages.yml` = their staging model + my three gates inserted before
+  staging + `pages/` added to the bundle. Nothing from any session was deleted.
+- Flagged for review additions (also on `pages/flags.html`): F-12 (redirect fallback, below), F-13
+  (`compliance.html` title leads with a mark — warning only), plus the earlier F-01…F-11.
 
-## Merge conflict and resolution
+### CI repair by `s-f786c0d7`: `main` was red
 
-**What happened.** While S-6602723A was building on `arena/6602723a-zone2`, session
-`arena/6b8bb130-zone2` merged PR #1 into `main` (`cfc04b1`), adding a complete dashboard at
-`index.html`, `app.js`, `data.js` and `styles.css`, plus its own `README.md`,
-`COORDINATION.md` and `.github/workflows/pages.yml`. PR #4 then reported
-`mergeable: CONFLICTING`.
+`main` @ `cacdc21` and @ `9b8830d` both failed `Build, verify and deploy` (runs 43523289883, 43523661645)
+while `pages-build-deployment` succeeded — the site served, but the verification workflow was red.
+**Root cause:** the bundle assertion `leaked = [... if p.parent.name in ('data','scripts')]` matches
+`_site/zone2/data/verification.json`, a file the same workflow deliberately stages when copying `zone2/**`.
+The guard's intent is that *root-level* internal namespaces stay private; it was checking the wrong thing.
 
-**Files conflicted:** `index.html`, `README.md`, `COORDINATION.md`,
-`.github/workflows/pages.yml`.
+**Fix in this branch:** scope the check to the top-level directory of each staged path
+(`p.relative_to(out).parts[0] in ('data','scripts','tools','tests','ledger','content')`), extended to
+`.md`/`.sql`/`.tmpl`. A staged root `data/`, `scripts/`, `tools/`, `tests/`, `ledger/` or `content/` file
+still fails the build; `zone2/**` publishes its own namespace as designed. Also scoped
+`tools/validate_data.py` to the files this session owns (`pages/**` + `index.html`) so it stops policing the
+hub's generated root pages — those are `scripts/verify.py`'s job — and added `_site/` to `.gitignore`.
+Verified by replaying every workflow step locally on the merged tree: dashboard asset/nav validation; all
+`data/*.json` parse; `scripts/build.py` then a clean `git diff`; `scripts/verify.py` → 0 errors (38 sourced
+rows); no-price + disclosure sweep over `*.html` and `zone2/*.html` (22 pages); `tools/build_site.py --check`
+→ 37 pages, nothing uncommitted; `tools/validate_data.py` → 0 errors (982 links); `tests/test_pipeline.py`
+→ 11/11; staging + bundle assertions → 0 missing, 0 leaked.
 
-**Resolution — nothing either session built was discarded:**
+## Merge conflict and resolution (final integration, `arena/34836ddd-zone2`)
+
+**What happened.** While PR #5 was open, other sessions merged PR #1, PR #4 and PR #6 into
+`main`, each adding a full site at the repo root. Merging `origin/main` into
+`arena/34836ddd-zone2` produced conflicts in `index.html`, `products.html`, `compliance.html`,
+`flagged.html`, `README.md`, `COORDINATION.md` and `.github/workflows/pages.yml` (same paths
+written by different sessions).
+
+**Resolution — nothing any session built was discarded:**
 
 | File | Resolution |
 |---|---|
-| `index.html` | **Kept the dashboard's version verbatim.** The verified hub's overview moved to `overview.html`, and `start.html` became a landing page linking to both. The generator asserts it does not write `index.html`. |
-| `README.md` | Rewritten to document **both** sites, with per-session attribution. |
-| `COORDINATION.md` | This file — both sessions' records retained, plus this resolution log. |
-| `.github/workflows/pages.yml` | Merged. The dashboard session's Actions-based deployment is kept as the deployment mechanism; the dashboard's original asset/navigation validation is preserved as a step; the verified-hub build, verifier and negative test were added. The bundle is staged into `_site/` instead of uploading the repo root, so `data/` and `scripts/` are not published. |
-| `app.js`, `data.js`, `styles.css` | Untouched. |
+| `index.html` | Kept the Northstar dashboard (main's version, with its disclosure fix); added a link to the Zone2 dashboard. |
+| `products.html`, `compliance.html`, `flagged.html` | Kept the verified hub's versions (main). The Zone2 equivalents moved to `zone2/`. |
+| `zone2/**` | The whole Zone2 platform build moved intact into the `zone2/` subfolder; its relative links still resolve. |
+| `start.html` | Landing page extended with a third choice card linking to the Zone2 dashboard. |
+| `README.md` | Rewritten to document all three deliverables with per-session attribution. |
+| `COORDINATION.md` | This file — all sessions' records retained, plus this resolution log. |
+| `.github/workflows/pages.yml` | Kept the merged workflow; added staging of `zone2/**` into `_site/zone2/` and extended the disclosure/no-price check and bundle assertion to cover `zone2/*.html`. |
 
-**Deviation, recorded deliberately:** the dashboard's original workflow published with
-`path: .`, which would have exposed `data/`, `docs/`, `scripts/` and this file as browsable
-static assets. The merged workflow stages only publishable files and asserts that no `data/` or
-`scripts/` file leaks into the bundle. This changes the previous behaviour and is recorded here
-rather than done silently.
+## Verification protocol used
 
----
+1. Every table row carries a `source` link to an official page (Amazon product page, the Amazon
+   Associates Operating Agreement, or the manufacturer's own site).
+2. A value that could not be confirmed from an official source is left **blank** and marked
+   `unverified`; it appears on the *Flagged for Review* page.
+3. No value is inferred, interpolated, or carried over from a similar product.
+4. `scripts/verify.py` re-checks every row at build time and fails the build on an unsourced row,
+   a non-`https` source, a published unverified value, a broken internal link, a missing
+   disclosure, or a printed price (including bare `price_usd` figures — see I-19).
+5. Capture timestamps are recorded in UTC in `data/products.json`.
 
 ## Irregularities log
 
 | # | Irregularity | Where | Disposition |
 |---|---|---|---|
-| I-1 | `README.md` in the initial commit contains only `# Zone2` (7 bytes) — no description, licence, or usage documentation. | `README.md` @ `f577167` | Resolved. |
-| I-2 | No `LICENSE`, no `.gitignore`, no CI, no tests in the initial commit. | repo root @ `f577167` | `.gitignore` and CI added; licence is owner decision O-3. |
-| I-3 | The three `link.amazon/*` short links are opaque redirects; their target ASINs cannot be read from the link text. | affiliate inputs | Resolved by following the redirect; recorded in `data/raw-verification-log.md`. |
-| I-4 | No Amazon Associates tracking tag (Store ID) on any of the three links, so commission attribution is impossible. | affiliate inputs | **Flagged for review — owner action O-1.** |
+| I-1 | Initial `README.md` contains only `# Zone2` (7 bytes). | `README.md` @ `f577167` | Resolved. |
+| I-2 | No `LICENSE`, `.gitignore`, CI or tests in the initial commit. | repo root @ `f577167` | `.gitignore` and CI added; licence is owner decision. |
+| I-3 | The three `link.amazon/*` short links are opaque redirects; target ASINs not readable from the link text. | affiliate inputs | Resolved by following the redirect; recorded in `data/raw-verification-log.md`. |
+| I-4 | No Amazon Associates tracking tag (`tag=`) on any of the three links, so commission attribution is impossible. | affiliate inputs | **Flagged for review — owner action.** |
 | I-5 | Prices, ratings, review counts and stock status are volatile and Amazon restricts their display. | product data | Captured for the audit trail, withheld from publication. |
-| I-6 | Amazon.com product pages are bot-gated and render inconsistently to automated fetches. | product data | Disclosed in `docs/methodology.md`; corroborated against regional storefronts and the manufacturer. |
+| I-6 | Amazon.com product pages are bot-gated and render inconsistently to automated fetches. | product data | Disclosed in methodology; corroborated against regional storefronts and the manufacturer. |
 | I-7 | Star ratings differ by storefront for the same ASIN (`B09B7SB46R`: 4.5/16,128 on `.co.uk` vs 4.6/8,361 on `.sa`). | product data | No rating published. |
-| I-8 | Chefman 8 Qt: Amazon's bullet text says 1000 W; Chefman says 1700 W for the same model number `RJ38-SQSS-8T`. | `B08DKYBTPH` | Manufacturer figure published; discrepancy flagged. |
+| I-8 | Chefman 8 Qt: Amazon bullet text says 1000 W; Chefman says 1700 W for the same model `RJ38-SQSS-8T`. | `B08DKYBTPH` | Manufacturer figure published; discrepancy flagged. |
 | I-9 | Chefman 8 Qt dimensions differ between the Amazon spec table and the manufacturer page. | `B08DKYBTPH` | Both published as separate sourced rows. |
-| I-10 | Emeril model number suffix: `-02X-VN` on Amazon US vs `-02A-VN` on the manufacturer store. | `B09B7SB46R` | Both published with sources. |
-| I-11 | Emeril wattage: 1700 W is the rated figure; a customer review reports a lower measured draw. | `B09B7SB46R` | Rated figure published. Measured draw is not a specification and is not published. |
-| I-12 | Emeril preset count: 24 in the title and description, 25 in the manufacturer's own spec tile. | `B09B7SB46R` | Both shown side by side. |
+| I-10 | Emeril model suffix `-02X-VN` (Amazon US) vs `-02A-VN` (manufacturer store). | `B09B7SB46R` | Both published with sources. |
+| I-11 | Emeril wattage: 1700 W rated; a customer review reports a lower measured draw. | `B09B7SB46R` | Rated figure published; measured draw not published. |
+| I-12 | Emeril preset count: 24 (title/description) vs 25 (manufacturer spec tile). | `B09B7SB46R` | Both shown side by side. |
 | I-13 | Emeril 500 °F maximum is single-sourced to Amazon's product-information block. | `B09B7SB46R` | Published as single-source and labelled. |
-| I-14 | The Chefman 6 Qt listing's own rating block did not render; the figure visible on the page belongs to a sibling ASIN (`B0B7C327LK`). | `B0CDY277D3` | Rating left blank; not attributed. |
+| I-14 | The Chefman 6 Qt listing's rating block did not render; the visible figure belongs to a sibling ASIN (`B0B7C327LK`). | `B0CDY277D3` | Rating left blank; not attributed. |
 | I-15 | Amazon's Agent Terms require automated clients to self-identify and forbid bypassing blocks, which makes "fully automated scraping" non-compliant. | brief vs policy | Documented on the compliance page; the automation that *is* compliant was built. |
-| I-16 | **Two sessions built overlapping front pages.** PR #1 merged a dashboard at `index.html` while PR #4 was in progress. | `index.html` | Resolved without discarding either: dashboard kept at `index.html`, hub at `overview.html`, `start.html` as landing. See the merge section. |
-| I-17 | The dashboard's workflow published `path: .`, exposing `data/`, `docs/` and `scripts/` as static files. | `.github/workflows/pages.yml` | Fixed in the merged workflow: only `_site/` is uploaded, with an assertion that nothing leaks. |
-| I-19 | **A price value reached the live site.** The audit-trail snapshot table rendered `Price (USD) 69.97` on the product pages. The verifier's no-price rule only matched `$`-prefixed amounts, so a bare number passed and was published. | `product-*.html`, `products.html` | Fixed: price rows removed from rendered snapshots entirely, and the verifier now also rejects any bare figure that matches a `price_usd` / `list_price_usd` value in the dataset. A regression test confirms it is caught. Found by reading the deployed page, not by CI. |
-| I-18 | The dashboard's `index.html` contained **no affiliate disclosure in its static HTML** — the sentence existed only inside JS-rendered content and in `data.js`, so the served page had none before JavaScript ran and none at all for a crawler. | `index.html` | Fixed: the disclosure is now in the HTML itself plus a `Switch site` link. Caught by CI, not by review. |
+| I-16 | Two sessions built overlapping front pages (PR #1 merged a dashboard at `index.html` while PR #4 was in progress). | `index.html` | Resolved without discarding either: dashboard kept at `index.html`, hub at `overview.html`, `start.html` as landing. |
+| I-17 | The dashboard's workflow published `path: .`, exposing `data/`, `docs/`, `scripts/` as static files. | `.github/workflows/pages.yml` | Fixed in the merged workflow: only `_site/` is uploaded, with an assertion that nothing leaks. |
+| I-18 | The dashboard's `index.html` had no affiliate disclosure in its static HTML (only JS-rendered), so the served page had none before JavaScript ran. | `index.html` | Fixed: disclosure now in the HTML itself. Caught by CI. |
+| I-19 | **A price value reached the live site.** The audit-trail snapshot rendered `Price (USD) 69.97` on the product pages; the verifier's no-price rule only matched `$`-prefixed amounts, so a bare number passed and was published. | `product-*.html`, `products.html` | Fixed: price rows removed from rendered snapshots entirely, and the verifier now also rejects any bare figure matching a `price_usd` / `list_price_usd` value, with a regression test. Found by reading the deployed page, not by CI. |
+| I-21 | **Three sessions built overlapping full sites at the repo root.** Each session's `index.html`, `products.html`, `compliance.html`, `flagged.html` collided. | root HTML | Resolved without discarding any: Northstar dashboard kept at root, verified hub at root, Zone2 platform build preserved in `zone2/`, `start.html` landing links to all three. |
+| I-22 | The three supplied codes are each **9 characters**; Amazon officially defines an ASIN as a unique **10-character** alphanumeric code. No official source (Amazon, Google, Bing, Wayback Machine, CamelCamelCamel) has any record of the 9-char codes. | affiliate inputs | Recorded here. The short links were resolved to canonical 10-char ASINs by following Amazon's redirects (I-3); the Zone2 build treats the raw 9-char codes as invalid and leaves product fields blank, while the verified hub publishes the redirect-resolved products with full sourcing. Both interpretations are documented for owner review. |
 
----
-
-## Verification protocol used this session
-
-1. Every table row carries a `source` link to an official page (Amazon product page, the
-   Amazon Associates Operating Agreement, or the manufacturer's own site).
-2. A value that could not be confirmed from an official source is left **blank** and marked
-   `unverified` in `data/products.json`, and it appears on the *Flagged for Review* page.
-3. No value is inferred, interpolated, or carried over from a similar product.
-4. `scripts/verify.py` re-checks every row at build time and fails the build on an unsourced
-   row, a non-`https` source, a published unverified value, a broken internal link, a missing
-   disclosure, or a printed price.
-5. Capture timestamps are recorded in UTC in `data/products.json`.
-
----
+| I-20 | **The redirect destination is a shuffled fallback, not a token→ASIN mapping.** Re-fetching `link.amazon/B04G1MEwY` returned the same `/dp/B0CDY277D3` path but a "Best Sellers in Kitchen & Dining" carousel instead of a product page, with a different `btn_ref` shuffle token. All three links carried `lv=shuf` + `plpRedirect=mhFallback`; all three submitted tokens are 9 characters (an ASIN is 10); `amazon.com/dp/<token>` returns Page Not Found for each. | `product-B0*.html`, `data/products.json`, `README.md`, `zone2/*` | Flagged for review **F-12**. The hub's three product pages are accurate about those ASINs (manufacturer-sourced, row by row) but are not established as the items named in the brief. README wording corrected; no product page deleted. |
+| I-21 | `compliance.html`'s `<title>` begins with an Amazon mark. The Participation Requirements prohibit marks in domains, subdomains, tags and usernames — a page title is none of those, and descriptive reference plus the mandated disclosure sentence are allowed. | `compliance.html` | Build **warning**, not a failure (owner may reword). See F-13. |
+| I-22 | Non-official domains (`camelcamelcamel.com`, `google.com`, `bing.com`, `web.archive.org`) appear as cross-check links on `zone2/products.html`. | `zone2/products.html` | Compliant as used: every product field there is blank, so nothing is *cited* from a non-official source. `tools/validate_data.py` would reject them as sources, and it polices only `pages/` + `ledger/`. |
+| I-23 | `main`'s CI was red for two consecutive merges (see the CI repair note). | `.github/workflows/pages.yml` | Repaired in this branch; the leak guard now checks the top-level namespace. |
 
 ## PR and merge record
 
 | Item | Value |
 |---|---|
-| Integration branch | `arena/6602723a-zone2` (branched from `main` @ `f577167`) |
-| PR #1 (dashboard) | merged before integration — <https://github.com/kanlerxz87-cyber/Zone2/pull/1> |
-| PR #4 (verified hub + integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/4> |
-| Merge conflict | resolved as described above; no work discarded |
-| Merge result | _recorded after merge_ |
-| Pages deploy | _recorded after deploy_ |
+| PR #1 (Northstar dashboard) | <https://github.com/kanlerxz87-cyber/Zone2/pull/1> — merged |
+| PR #4 (verified hub + integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/4> — merged |
+| PR #6 (price-leak fix) | <https://github.com/kanlerxz87-cyber/Zone2/pull/6> — merged |
+| PR #5 (Zone2 platform build + final integration) | <https://github.com/kanlerxz87-cyber/Zone2/pull/5> — merged |
+| Final integration session | `arena/34836ddd-zone2` |
+| Pages deploy | `.github/workflows/pages.yml` deploys `_site/` (dashboard + verified hub + `zone2/`) from `main` via GitHub Actions. |
 
----
-
-## Session record — `s-f786c0d7` (`arena/f786c0d7-zone2`)
-
-Board state at claim: `main` = `f577167` (README only). The sections below are this session's board as
-maintained during the build; the shared tables above are canonical for cross-session numbering. Two sessions
-merged into `main` while this work was in progress (PR #1 dashboard, PRs #4/#6 verified hub), so this session's
-dataset deliberately lives in `ledger/` rather than `data/` to avoid clobbering S-6602723A's files.
-
-### Task board
-
-| Task | Status | Owner session | Files |
-|---|---|---|---|
-| Research and build affiliate marketing dashboard, source-backed product findings, executive summary, flagged review, and Pages workflow | done (merged via PR #1 → `main` @ `cfc04b1`) | arena/6b8bb130-zone2 | COORDINATION.md, README.md, index.html, styles.css, app.js, data.js, .github/workflows/pages.yml |
-| Line-by-line re-verification of merged data + repo review | done | arena/f786c0d7-zone2 (`s-f786c0d7`) | verification only; findings logged in Verification Log |
-| Verify the 3 supplied Amazon links / ASIN tokens | done | `s-f786c0d7` | data/products.json, data/flags.json |
-| Compliance engine (Amazon + FTC + Google rules, official sources) | done | `s-f786c0d7` | ledger/compliance.json, pages/compliance.html |
-| Commission / category reference data (official rate table) | done | `s-f786c0d7` | ledger/commission_table.json, pages/categories/*.html |
-| Platform automation: guard, collector, scoring, generator, tracker, optimizer | done | `s-f786c0d7` | tools/**, content/templates/**, tests/** |
-| GitHub Pages site expansion (exec summary, category subpages, tables, flagged page) | done | `s-f786c0d7` | pages/**, pages/assets/site.css |
-| Deploy gate + CI extension (sourcing, disclosure, broken links) | done | `s-f786c0d7` | tools/validate_data.py, .github/workflows/pages.yml |
-| Final integration: re-verify combined data, build, no broken links, publish Pages, PR + merge | in progress | `s-f786c0d7` | shared outputs (index/nav/data) |
-
-### Session register
-
-| Session ID | Started (UTC) | Branch | Scope | Status |
-|---|---|---|---|---|
-| arena/6b8bb130-zone2 | 2026-11-13 | `arena/6b8bb130-zone2` | root site (index.html, app.js, data.js, styles.css, workflow) | finished — merged to `main` |
-| `s-f786c0d7` | 2026-11-13 22:40 | `arena/f786c0d7-zone2` | review + compliance/category/architecture data, site expansion, integration | active |
-
-### File-ownership map (conflict prevention)
-
-- `index.html`, `app.js`, `data.js`, `styles.css`, `.github/workflows/pages.yml` — created by 6b8bb130; now merged to `main`.
-  Because that session has finished and merged, these are released; `s-f786c0d7` (acting as final integration session,
-  the only active session) now owns edits to the shared outputs and preserves all existing rows.
-- New per-module data lives in `data/*.json`; site subpages in `pages/`; tooling in `tools/`.
-
-### Change requests
-
-| Requested by | File | Reason | Status |
-|---|---|---|---|
-| — | — | none open | — |
-
-### Handoff log
-
-- 2026-11-13: no takeover. `s-f786c0d7` found `main` had advanced past its branch base (`f577167` → `cfc04b1`) and
-  re-resolved a `COORDINATION.md` add/add conflict produced by `git pull --rebase`. **6b8bb130's board content is
-  preserved verbatim above** (task row + its two task-log bullets); no other session work was discarded or overwritten.
-
-### Task log
-
-- Claim recorded 2026-11-13 (arena/6b8bb130-zone2). Scope is the files listed above. No other task claims were present.
-- Research policy: do not assert product titles, features, prices, ratings, commissions, or performance for the three
-  submitted short URLs unless an official source can be verified. Preserve the submitted URLs as provided and expose
-  unresolved product identity and metrics on Flagged for Review.
-- 2026-11-13 (`s-f786c0d7`): adopted the same no-assertion research policy. Verification below confirms it is required —
-  none of the three tokens resolves to a product.
-
-### Irregularities / flags (all published on **Flagged for Review**)
-
-1. **All three supplied link tokens fail Amazon's ASIN format check.** `B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV` are each
-   9 characters; an ASIN is 10. → FLAGGED.
-2. **None of the three resolves to a product page.** `https://www.amazon.com/dp/<token>` returns Amazon's
-   "Page Not Found" error page for all three. → FLAGGED.
-3. **`https://link.amazon/<token>` ignores the token.** Each of the three redirected to a *different*, unrelated
-   `amazon.com/dp/<other-asin>` URL carrying `plpRedirect=mhFallback` — Amazon's fallback, not a product mapping.
-   → FLAGGED (do not treat the fallback landing products as the requested items).
-4. **PA-API 5.0 is deprecated.** Amazon's own docs now return a deprecation notice: PA-API 5 calls receive
-   `403 AccessDenied` and integrations must move to the **Creators API**. Any existing code/plan built on PA-API 5 is
-   stale. → FLAGGED + fixed in the architecture here.
-5. **Sandbox network allowlist** (`github.com`, `api.github.com`, `codeload.github.com`, `registry.npmjs.org`,
-   `files.pythonhosted.org`) blocks direct HTTPS to Amazon from the build environment, so product-level data can only be
-   obtained through the official Creators API with credentials — see Verification Log row V-08.
-
----
-
-### Verification Log
-
-Each row: claim → method → **official source** → verdict. Anything not confirmable from an official source is left
-blank in the site tables and flagged. Nothing below is inferred.
-
-Accessed 2026-11-13 (UTC), all sources fetched live and read, not recalled from memory.
-
-| ID | Claim / field | Method | Official source | Verdict |
-|---|---|---|---|---|
-| V-01 | ASIN is a 10-character Amazon product identifier | Compared each supplied token length against the identifier definition used in Amazon's catalog/API docs | https://webservices.amazon.com/paapi5/documentation/ (now redirects to the Creators API docs) + https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items | FLAGGED — all three tokens are 9 chars, so none is a valid ASIN |
-| V-02 | `https://www.amazon.com/dp/B04G1MEwY` | Direct fetch of the canonical product URL | amazon.com response = "Page Not Found" error page | VERIFIED-NOT-FOUND — product page does not exist |
-| V-03 | `https://www.amazon.com/dp/B02NbDxp3` | Direct fetch | amazon.com "Page Not Found" | VERIFIED-NOT-FOUND |
-| V-04 | `https://www.amazon.com/dp/B00hJ57DV` | Direct fetch | amazon.com "Page Not Found" | VERIFIED-NOT-FOUND |
-| V-05 | `https://link.amazon/B04G1MEwY` | Direct fetch, followed redirect | landed on `amazon.com/dp/B0CDY277D3?…&plpRedirect=mhFallback` (CHEFMAN 6-Qt Dual Basket Air Fryer) — unrelated ASIN | FLAGGED — fallback, not a mapping |
-| V-06 | `https://link.amazon/B02NbDxp3` | Direct fetch, followed redirect | landed on `amazon.com/dp/B09B7SB46R?…&plpRedirect=mhFallback` (Emeril Lagasse 26QT Air Fryer Toaster Oven) | FLAGGED — fallback |
-| V-07 | `https://link.amazon/B00hJ57DV` | Direct fetch, followed redirect | landed on `amazon.com/dp/B08DKYBTPH?…&plpRedirect=mhFallback` (Chefman Air Fryer 8 Qt TurboFry) | FLAGGED — fallback |
-| V-08 | Product title/price/rating/commission for the three submitted items | Would require an authenticated catalog call | Creators API `GetItems` (needs Associates account + API credentials; none in this environment) | UNVERIFIED — left blank, never inferred |
-| V-09 | Required disclosure sentence: "As an Amazon Associate I earn from qualifying purchases." must be stated clearly and prominently on the Site | Read Operating Agreement §5 | https://affiliate-program.amazon.com/help/operating/agreement (page states **Updated: October 15, 2025**) | VERIFIED — verbatim |
-| V-10 | Violating §5 and the Program Policies is a material breach; Amazon may suspend/terminate and cease commission income | Operating Agreement §2, §6 | https://affiliate-program.amazon.com/help/operating/agreement | VERIFIED |
-| V-11 | Attribution "Session" = starts at Special Link click, ends at first of: 24 h elapsed, an order placed, or another associate's link clicked; cart-add must convert within 89 days; purchase must ship/be paid within 180 days | Program Policies → Commission Income Statement §1 | https://affiliate-program.amazon.com/help/operating/policies (**Updated: April 14, 2026**) | VERIFIED — verbatim |
-| V-12 | Standard fixed commission rates by product category (10.00 / 5.00 / 4.50 / 4.00 / 3.00 / 2.50 / 2.00 / 1.00 / 0.00 %, All Other 4.00 %) and Prime Bounty $12.00 | Read the official table | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ | VERIFIED — transcribed row by row |
-| V-13 | Payment timing and minimums: commission income paid ~60 days after month end; US minimums Direct Deposit 10 USD, Gift Card 10 USD (max 2000 USD), Check 100 USD + 15 USD fee; 3-year inactivity withholding | Program Policies → Commission Income Statement §6 | https://affiliate-program.amazon.com/help/operating/policies | VERIFIED |
-| V-14 | Prices/availability may only be shown if served by Amazon's link or obtained via Creators API / PA API under the License; comparison pages must show lowest "new" price (and lowest "used" if provided) | Participation Requirements §2(b) | https://affiliate-program.amazon.com/help/operating/policies | VERIFIED — governs this site: no price column is populated |
-| V-15 | No Amazon trademark/variant may appear in any domain, subdomain, tag/Associates ID, or social username; Special Links must carry the Associates tag; sub-tags must never be tied to a specific end user; no bookmark encouragement; limited-time promo mentions must be removed when the promo ends; no inaccurate/overbroad/deceptive claims | Participation Requirements §1(g), §2(b) | https://affiliate-program.amazon.com/help/operating/policies | VERIFIED — drives site naming, link builder, and tracker design |
-| V-16 | Site must host original content and be publicly available; unsuitable-site categories | Participation Requirements §1 | https://affiliate-program.amazon.com/help/operating/policies | VERIFIED |
-| V-17 | Associates' tags must not be combined/manipulated to double-claim commissions with another program | Commission Income Statement §5 | https://affiliate-program.amazon.com/help/operating/policies | VERIFIED |
-| V-18 | PA-API 5.0 deprecated; PA-API 5 calls return `403 Forbidden / AccessDenied` directing to the Creators API | Fetched the legacy PA-API docs URL — it now serves the deprecation notice | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation | VERIFIED — architecture targets Creators API |
-| V-19 | Creators API = REST access to Amazon's catalog; operations SearchItems, GetItems, GetVariations, GetBrowseNodes; prerequisites: enrolled Associates + ≥10 qualifying sales in past 30 days + register in Associates Central + generate credentials | Read official docs | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction | VERIFIED |
-| V-20 | FTC: material connection must be disclosed clearly and conspicuously; a disclosure in a comment section or buried at page end is not clear and conspicuous; "paid link" beside the link can be adequate, "commissionable link" is not; disclosure belongs as close to the recommendation as possible | Read the official guidance | https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking (Guides codified at 16 C.F.R. Part 255) | VERIFIED |
-| V-21 | Google: affiliate links must be qualified with `rel="sponsored"` (manual/algorithmic action risk otherwise) | Read official docs + Search Central blog | https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links , https://developers.google.com/search/blog/2021/07/link-tagging-and-link-spam-update | VERIFIED |
-| V-22 | Google Product/Review structured data supports `positiveNotes`/`negativeNotes` pros & cons on editorial reviews; reviewer `author` must be a valid Person/Team name | Read official docs | https://developers.google.com/search/docs/appearance/structured-data/merchant-listing , https://developers.google.com/search/blog/2022/08/pros-and-cons-structured-data | VERIFIED |
-| V-23 | Amazon "link.amazon" domain: resolves (CloudFront) but TLS from the build sandbox is blocked by the network allowlist, so the redirect chain above was captured through the fetch tool, not the sandbox | `getent hosts` + `curl` in sandbox vs. fetch tool | DNS + observed final URLs recorded in V-05…V-07 | VERIFIED (method documented for reproducibility) |
-
-### Findings summary (for the site's Executive Summary page)
-
-- The three requested products cannot be marketed as specified: identity is unverifiable (V-01…V-05). The platform is
-  therefore built so that identity must come from an ASIN-validated catalog lookup (V-19) before any content is written.
-- Compliance constraints are hard-wired into the pipeline: disclosure (V-09), price-display rule (V-14), naming/trademark
-  and tag rules (V-15), attribution window (V-11), and FTC/Google disclosure & link-qualification rules (V-20, V-21).
-- Economics use only Amazon's official published rates (V-12) — no invented commission numbers.
-
-
-### Completion records (T11–T17)
-
-### Files added or changed by this session
-- **Added:** `EXECUTIVE_SUMMARY.md`, `.gitignore`, `.nojekyll`,
-  `ledger/{sources,products,commission_table,compliance,modules,flags,verification,niches,campaigns}.json`,
-  `pages/**` (37 generated HTML pages + `pages/assets/site.css`),
-  `tools/{asin_guard,amazon_creators_api,scoring,generate_articles,link_builder,redirect_server,optimize,cache,validate_data,build_site}.py`,
-  `tools/tracking_schema.sql`, `content/templates/{product_article,comparison,buying_guide}.md.tmpl`, `tests/test_pipeline.py`.
-- **Changed:** `README.md` (rewritten to document all three views), `index.html` (5 sidebar links to the subpages added),
-  `.github/workflows/pages.yml` (4 validation steps added before the Pages upload), `COORDINATION.md`.
-- **Not touched:** `data.js`, `app.js`, `styles.css` — the merged session's product rows and design system are intact
-  (only `app.js` was read by the compliance gate to confirm the disclosure sentence is still rendered).
-
-### Sources used (all fetched and read 2026-11-13; see `ledger/sources.json`)
-Amazon: Operating Agreement (`/help/operating/agreement`, updated 2025-10-15, §2/§4/§5/§6/§12 read);
-Program Policies (`/help/operating/policies`, updated 2026-04-14, Commission Income Statement §1/§5/§6 +
-Participation Requirements §1/§2 read); Participation Requirements (`/help/operating/participation/`, Reqs 1-9 read);
-Standard Commission Income Statement (`/help/node/topic/GRXPHT8U84RAYDXZ`, Table 1 + bounties transcribed);
-disclosure FAQ (`/help/node/topic/GHQNZAU6669EZS98`); PA-API 5 deprecation notice and Creators API docs
-(`/creatorsapi/docs/en-us/paapiv5-deprecation`, `/creatorsapi/docs/en-us/introduction`); Associates tools page
-(`/welcome/topic/tools`). U.S. FTC: Endorsement Guides: What People Are Asking (16 C.F.R. Part 255). Google:
-qualify-outbound-links, the 2021 link-tagging blog post, merchant-listing structured data, pros-and-cons post.
-Product evidence: `amazon.com/dp/<each submitted token>` + each submitted short link's final URL.
-Deployment: GitHub Pages API + Actions run history.
-
-### Verification performed
-- 30 logged checks in the Verification Log above (V-01…V-30) — every claim read from the cited page, none recalled.
-- Rate table transcribed row by row and asserted by `tests/test_pipeline.py::test_rate_table_matches_the_official_transcription`.
-- Guard behaviours asserted by 11 executable checks (`python3 tests/test_pipeline.py` → 11/11 pass).
-- Deploy gate (`python3 tools/validate_data.py`) → 0 errors over 92 data rows, 22 sources, 868 internal links.
-- `tools/build_site.py --check` → committed `pages/` matches a fresh deterministic build (37 pages).
-- Compliance gate → 37 pages carry the §5 disclosure sentence; no untagged sponsored link in built output.
-- Local render check → all probed routes return 200, the deliberate bad slug returns 404, no `{{placeholder}}` leakage.
-
-### Irregularities found (published on Flagged for Review, `pages/flags.html`)
-F-01 9-character tokens; F-02 Page Not Found on all canonical `/dp/` URLs; F-03 short links land on three
-different unrelated ASINs via `mhFallback`; F-04 `link.amazon` is not a documented publisher link format and
-carries no tag; F-05 PA-API 5 deprecated (stale-tooling trap, including the tools page cited by the merged commit);
-F-06 content generation deliberately refuses all three items; F-07 no Associates account/tag/marketplace supplied;
-F-08 no click/conversion/earnings history exists; F-09 sandbox network allowlist limits live verification;
-F-10 prior merged commit is accurate but incomplete (its four citations verified live); F-11 governing pages
-carry different update dates and change without notice.
-
-### Merge / publish record
-- PR to `main`: recorded below after creation.
-- GitHub Pages: confirmed live after merge (status + run id recorded below).
+| PR (`s-f786c0d7`) | _recorded below once opened_ |
+| CI at handoff | `main` red (43523661645) → repaired here; all 16 build steps replayed locally and green |
 

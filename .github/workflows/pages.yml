@@ -139,7 +139,8 @@ jobs:
           import glob, re, sys
           DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
           bad = []
-          for f in sorted(glob.glob('*.html')):
+          pages = sorted(glob.glob('*.html')) + sorted(glob.glob('zone2/*.html'))
+          for f in pages:
               t = open(f, encoding='utf-8').read()
               if DISCLOSURE not in t:
                   bad.append(f'{f}: missing disclosure')
@@ -148,7 +149,7 @@ jobs:
           if bad:
               print('\n'.join(bad))
               sys.exit(1)
-          print(f'{len(glob.glob("*.html"))} pages: disclosure present, no prices printed')
+          print(f'{len(pages)} pages: disclosure present, no prices printed')
           PY
 
       # ---- subpage ledger session (arena/f786c0d7-zone2): generated pages/ ----
@@ -184,8 +185,12 @@ jobs:
               dest = out / rel
               dest.parent.mkdir(parents=True, exist_ok=True)
               shutil.copy2(src, dest)
+          # Zone2 platform dashboard (preserves a third session's build in a subfolder)
+          zone2 = root / 'zone2'
+          if zone2.is_dir():
+              shutil.copytree(zone2, out / 'zone2', dirs_exist_ok=True)
           # Pages serves _site/ as the site root
-          print('staged:', sorted(p.name for p in out.rglob('*') if p.is_file()))
+          print('staged:', sorted(str(p.relative_to(out)) for p in out.rglob('*') if p.is_file()))
           PY
 
       - name: Assert the staged bundle is complete
@@ -207,17 +212,23 @@ jobs:
               'pages/sources.html', 'pages/flags.html', 'pages/tracking.html',
               'pages/content-engine.html', 'pages/architecture.html', 'pages/niches.html',
               'pages/assets/site.css', 'pages/manifest.json',
+              'zone2/index.html', 'zone2/assets/styles.css', 'zone2/assets/main.js',
           ]
           missing = [r for r in required if not (out / r).is_file()]
           if missing:
               print('missing from staged bundle:', missing)
               sys.exit(1)
-          # nothing private should leak
-          leaked = [str(p) for p in out.rglob('*')
-                    if p.is_file() and p.suffix in ('.json', '.py', '.sql', '.tmpl')
-                    and p.parent.name in ('data', 'scripts', 'tools', 'tests')]
+          # Nothing private should leak. Scope is the TOP-LEVEL namespace, not any ancestor
+          # named 'data': the root data/, scripts/, tools/, tests/, ledger/ and content/ trees
+          # are internal, whereas zone2/** is a sub-site that stages its own files by design.
+          # (The previous rule matched '_site/zone2/data/verification.json' and failed every
+          # run on main even though that copy is intentional - see COORDINATION.md.)
+          internal = ('data', 'scripts', 'tools', 'tests', 'ledger', 'content')
+          leaked = [str(p.relative_to(out)) for p in out.rglob('*')
+                    if p.is_file() and p.suffix in ('.json', '.py', '.sql', '.tmpl', '.md')
+                    and p.relative_to(out).parts[0] in internal]
           if leaked:
-              print('data/ or scripts/ leaked into the bundle:', leaked)
+              print('internal namespaces leaked into the bundle:', leaked)
               sys.exit(1)
           print(f'staged bundle complete: {len(list(out.rglob("*")))} entries')
           PY

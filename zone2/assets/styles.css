@@ -1,0 +1,191 @@
+/* Zone2 — Amazon Affiliate Marketing Platform
+   Clean dashboard style. No external dependencies (GitHub Pages safe). */
+
+:root {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --ink: #1c2733;
+  --muted: #5d6b7a;
+  --line: #e2e8f0;
+  --brand: #1a4fd6;
+  --brand-dark: #123fa8;
+  --flag: #b45309;
+  --flag-bg: #fef3c7;
+  --ok: #15803d;
+  --ok-bg: #dcfce7;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(16, 32, 54, .08), 0 4px 14px rgba(16, 32, 54, .05);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+/* ---------- header / nav ---------- */
+.site-header {
+  background: linear-gradient(120deg, #123fa8 0%, #1a4fd6 60%, #2f6bff 100%);
+  color: #fff;
+  padding: 0 0 0 0;
+  box-shadow: var(--shadow);
+}
+.site-header .bar {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+.brand .logo {
+  width: 30px; height: 30px;
+  background: rgba(255,255,255,.16);
+  border: 2px solid rgba(255,255,255,.55);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  font-weight: 800;
+}
+nav.main { display: flex; gap: 4px; flex-wrap: wrap; }
+nav.main a {
+  color: #e8efff;
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: .94rem;
+  font-weight: 500;
+}
+nav.main a:hover { background: rgba(255,255,255,.14); color: #fff; }
+nav.main a.active { background: rgba(255,255,255,.22); color: #fff; font-weight: 600; }
+
+/* ---------- layout ---------- */
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 26px 22px 48px;
+}
+.page-title { margin: 4px 0 6px; font-size: 1.6rem; }
+.page-sub { color: var(--muted); margin: 0 0 22px; max-width: 760px; }
+
+/* ---------- cards ---------- */
+.grid { display: grid; gap: 16px; }
+.grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.card h2, .card h3 { margin-top: 0; }
+.card .kpi { font-size: 2rem; font-weight: 800; color: var(--brand-dark); }
+.card .kpi small { display: block; font-size: .85rem; font-weight: 500; color: var(--muted); }
+
+.feature { display: flex; gap: 12px; }
+.feature .ico {
+  flex: 0 0 42px; height: 42px;
+  border-radius: 10px;
+  background: #eef3ff;
+  color: var(--brand-dark);
+  display: grid; place-items: center;
+  font-size: 1.3rem; font-weight: 800;
+}
+.feature h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.feature p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+/* ---------- tables ---------- */
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+table { width: 100%; border-collapse: collapse; font-size: .93rem; min-width: 640px; }
+thead th {
+  text-align: left;
+  background: #f8fafc;
+  color: var(--muted);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+tbody td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #f9fbff; }
+td .src { display: block; margin-top: 6px; }
+td .src a { font-size: .82rem; color: var(--brand); }
+td a.ext { color: var(--brand); }
+.blank { color: #aab4c0; }
+
+/* ---------- badges ---------- */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge.flag { background: var(--flag-bg); color: var(--flag); border: 1px solid #f3d98e; }
+.badge.ok { background: var(--ok-bg); color: var(--ok); border: 1px solid #bbf0cd; }
+.badge.muted { background: #eef1f6; color: var(--muted); border: 1px solid var(--line); }
+
+/* ---------- notices ---------- */
+.notice {
+  border-left: 4px solid var(--flag);
+  background: var(--flag-bg);
+  color: #6b4a06;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+}
+.notice.blue { border-left-color: var(--brand); background: #eef3ff; color: #1e3a8a; }
+.notice strong { display: block; margin-bottom: 2px; }
+
+/* ---------- lists ---------- */
+ul.clean, ol.clean { padding-left: 20px; margin: 8px 0; }
+ul.clean li, ol.clean li { margin: 6px 0; }
+
+/* ---------- footer / disclosure ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: #fff;
+  margin-top: 40px;
+}
+.site-footer .inner {
+  max-width: 1080px; margin: 0 auto; padding: 18px 22px 26px;
+  color: var(--muted); font-size: .85rem;
+}
+.disclosure {
+  max-width: 1080px; margin: 18px auto 0; padding: 0 22px;
+  font-size: .85rem; color: var(--muted);
+}
+.disclosure strong { color: var(--ink); }
+
+code {
+  background: #eef1f6;
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: .88em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (max-width: 640px) {
+  .site-header .bar { gap: 10px; }
+  .page-title { font-size: 1.35rem; }
+}
