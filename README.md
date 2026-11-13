@@ -1,108 +1,77 @@
-# Zone2 — Amazon affiliate research
+# Zone2 — Amazon Affiliate Research & AI Marketing Platform
 
-Two views of the same three Amazon affiliate products, built by two sessions working in
-parallel and merged here.
+This repository holds three complementary, source-first deliverables for the same Amazon
+affiliate marketing brief. **Nothing is asserted without an official source.** Values that could
+not be confirmed are left blank and published on the *Flagged for Review* page.
 
-**Live site:** <https://kanlerxz87-cyber.github.io/Zone2/>
+## The three deliverables
 
-> As an Amazon Associate I earn from qualifying purchases.
+1. **Verified Research Hub** (repo root: `overview.html`, `products.html`, `summary.html`, …)
+   The three supplied short links were resolved to canonical Amazon ASINs by following Amazon's
+   redirects, and specifications were verified against Amazon product pages and the
+   manufacturers' own pages. Every published value traces to an official source.
+2. **Northstar dashboard** (`index.html`, `app.js`, `data.js`, `styles.css`)
+   A source-first research workspace: overview, product research, content studio, optimization,
+   compliance and flagged review. Product facts are held blank until verified.
+3. **Zone2 platform dashboard** (`zone2/`)
+   The AI-powered affiliate platform build: a multi-page dashboard with product research,
+   analysis, content, compliance, executive summary, flagged review and sources. Every table row
+   carries an official source link.
 
----
+Start at **`start.html`** to pick a view.
 
-## The two sites
+## The three supplied products
 
-| Path | What it is | Built by |
+| # | Supplied short link | Resolved canonical ASIN |
 |---|---|---|
-| `/index.html` | **Northstar** — a research workspace dashboard: overview, product research, content studio, optimization, compliance, flagged review. Hash-based navigation, no build step, no dependencies. Product facts are held blank because that session did not resolve the short links. | session `arena/6b8bb130-zone2` |
-| `/start.html` → `/overview.html` | **Affiliate Research Hub** — the three products resolved to canonical ASINs, with every published value traced to an official Amazon or manufacturer page, plus the full compliance position and a line-by-line disposition of the brief. | session `arena/6602723a-zone2` |
+| 1 | `https://link.amazon/B04G1MEwY` | `B0CDY277D3` |
+| 2 | `https://link.amazon/B02NbDxp3` | `B09B7SB46R` |
+| 3 | `https://link.amazon/B00hJ57DV` | `B08DKYBTPH` |
 
-**Both apply the same rule:** nothing is asserted without an official source, and where sources
-disagree the disagreement is published rather than smoothed over.
+**Irregularity to note:** the codes embedded in the three short links (`B04G1MEwY`, `B02NbDxp3`,
+`B00hJ57DV`) are each **9 characters**; Amazon officially defines an ASIN as a unique
+**10-character** alphanumeric code, and no official source has any record of the 9-char codes.
+The short links resolve (via Amazon's redirect) to the 10-char ASINs above. The verified hub
+publishes the redirect-resolved products with full sourcing; the Zone2 build documents the
+9-char-code irregularity and leaves product fields blank. Both interpretations are recorded in
+`COORDINATION.md` (irregularities I-3, I-20) for owner review.
 
-`/start.html` is the landing page that links to both. It is generated, not hand-written.
+## Verification & compliance
 
-## The three products
-
-All three supplied `link.amazon/*` short links were resolved by following the redirect; the ASIN
-is not readable from the short link itself.
-
-| Supplied link | ASIN | Product | Brand |
-|---|---|---|---|
-| `link.amazon/B04G1MEwY` | B0CDY277D3 | 6 Qt Dual Basket Air Fryer, dual windows, Sync Finish | Chefman |
-| `link.amazon/B02NbDxp3` | B09B7SB46R | 26QT French Door Multi-Function Air Fryer Toaster Oven | Emeril Lagasse |
-| `link.amazon/B00hJ57DV` | B08DKYBTPH | 8 Qt TurboFry Touch air fryer, stainless steel | Chefman |
-
-One coherent niche: countertop air frying, compact → mid → large.
+- **Verification-first:** every table row carries a source link to an official page. Unconfirmed
+  values are left blank and flagged — never inferred. `scripts/verify.py` fails the build on an
+  unsourced row, a broken link, a missing disclosure, a printed price, or a published unverified
+  value.
+- **Compliance:** the site applies Amazon Associates disclosure requirements site-wide — *"As an
+  Amazon Associate I earn from qualifying purchases."* — plus clear, conspicuous, link-level FTC
+  disclosure. Official references are linked on the compliance pages of each deliverable.
+- Amazon's policies restrict how product prices, availability, reviews/ratings and API content may
+  be obtained and displayed; the site uses only official/authorised sources and withholds volatile
+  figures from publication.
 
 ## Repository layout
 
-```
-index.html, app.js, data.js, styles.css   Northstar dashboard (session 6b8bb130)
-*.html, assets/, start.html               generated verified hub (session 6602723a)
-site-manifest.json                        the exact list of files the generator owns
-
-data/                                     the dataset — the single source of truth
-  products.json            per-product specs; every row has a status and a source URL
-  compliance.json          Amazon's rules, quoted with section references
-  requirements.json        every requirement in the brief and its honest disposition
-  sources.json             source registry, 3-tier trust model, rejected sources
-  raw-verification-log.md  raw capture log: what each page actually said
-docs/
-  executive-summary.md     the short version
-scripts/
-  build.py                 generates the verified hub from data/
-  verify.py                the guard: fails on unsourced rows, broken links, printed prices
-COORDINATION.md            shared task board, merge record, irregularities log
-```
-
-## Build and check locally
-
-Requires Python 3.9+. No third-party dependencies.
-
-```bash
-python3 scripts/build.py     # regenerate the verified hub
-python3 scripts/verify.py    # exits non-zero on any broken rule
-python3 -m http.server 8080  # preview both sites at http://localhost:8080
-```
-
-The dashboard needs no build step: open `index.html`.
-
-## What the verification enforces
-
-`scripts/verify.py` fails the build when:
-
-- a fact row claimed as `verified` or `conflict` has no source URL;
-- a source URL is not `https` or is not an official host;
-- a row marked `unverified` still carries a published value;
-- an internal link points at a file that is neither generated nor owned by the dashboard;
-- a page is missing the affiliate disclosure or the trademark attribution;
-- a page prints a currency amount — this project does not publish prices.
-
-CI additionally runs a **negative test**: it injects an unsourced row and asserts the verifier
-rejects it, so the guard is proven to guard.
-
-## What is deliberately *not* published
-
-| Data | Why |
+| Path | Contents |
 |---|---|
-| Price | Amazon permits price display only where Amazon serves it or it comes from the official API, and requires a timestamp plus a disclaimer. |
-| Star rating / review count | Storefront-specific for the same ASIN; a single figure would mislead. |
-| Stock status | Changes by the minute. |
-| Commission rate | The official rate card requires an Associates login. |
-| Conversion rate, sales volume, "trending" score | Not published by Amazon; no official source exists. |
+| `start.html` | Landing page linking to all three deliverables. |
+| `overview.html`, `products.html`, `compare.html`, `summary.html`, `methodology.html`, `requirements.html`, `compliance.html`, `flagged.html`, `product-*.html`, `404.html` | Verified Research Hub (generated). |
+| `index.html`, `app.js`, `data.js`, `styles.css` | Northstar dashboard. |
+| `zone2/` | Zone2 platform dashboard (multi-page). |
+| `assets/` | Shared stylesheets for the hub and landing. |
+| `data/` | Verified dataset: `products.json`, `sources.json`, `compliance.json`, `requirements.json`, `raw-verification-log.md`. |
+| `docs/` | `executive-summary.md`. |
+| `scripts/` | `build.py` (generates the hub) and `verify.py` (verification guard). |
+| `.github/workflows/pages.yml` | CI: validates, rebuilds, verifies, then deploys `_site/` to GitHub Pages. |
+| `COORDINATION.md` | Shared task board and integration record for parallel sessions. |
 
-## Known issues
+## Run locally
 
-The one thing blocking commercial value: **the three supplied links carry no Amazon Associates
-tracking tag**, so clicks cannot be attributed. See `/flagged.html`, or `COORDINATION.md` item O-1.
+Open `start.html` in a browser, or serve the repository root with any static file server. The
+verified hub is generated by `python3 scripts/build.py`; verification runs with
+`python3 scripts/verify.py`.
 
 ## GitHub Pages
 
-`.github/workflows/pages.yml` validates both sites, rebuilds the hub, confirms the committed
-output matches a fresh build, runs the verifier, runs the negative test, stages only publishable
-files into `_site/`, asserts the bundle is complete and that `data/` and `scripts/` have not
-leaked, and deploys from `main` on push.
-
-## Licence
-
-Not yet chosen — see `COORDINATION.md` item O-3.
+`.github/workflows/pages.yml` builds, validates and deploys a curated static bundle (`_site/`,
+containing the dashboard, the verified hub and `zone2/`) to GitHub Pages on pushes to `main`.
+Enable GitHub Pages with **GitHub Actions** as the source in repository settings.
