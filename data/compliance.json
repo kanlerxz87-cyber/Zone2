@@ -1,0 +1,192 @@
+{
+  "note": "Compliance control ledger. Every rule is quoted or paraphrased from a source in data/sources.json and mapped to the concrete control implemented in this repository, so the automation cannot drift out of policy. Status VERIFIED means the wording was read from the official page on 2026-11-13.",
+  "as_of": "2026-11-13",
+  "rules": [
+    {
+      "id": "R-01",
+      "domain": "Disclosure",
+      "requirement": "The Site must clearly and prominently state: \"As an Amazon Associate I earn from qualifying purchases.\" (or a substantially similar statement previously allowed), on the Site or any other location where Amazon authorizes display or use of Program Content.",
+      "source_id": "S01",
+      "citation": "Associates Program Operating Agreement, Section 5 - Identifying Yourself as an Associate",
+      "implemented_control": "site/compliance-inject.js renders the exact sentence into every content page footer; tools/link_builder.py refuses to emit an article whose front matter has disclosure: false",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-02",
+      "domain": "Disclosure",
+      "requirement": "Link-level disclosure must be (1) clear - examples given include \"(paid link)\", \"#ad\", \"#CommissionsEarned\" - and (2) conspicuous, placed near the affiliate link or product review so customers do not have to hunt for it. The disclosure must be made in the same medium as the recommendation (voice, text, or both).",
+      "source_id": "S05",
+      "citation": "Associates Central help: \"Why do I have to identify myself as an Associate?\"",
+      "implemented_control": "content templates place the disclosure block immediately above the first affiliate link on the page; linter tools/generate_articles.py::lint_disclosure_proximity fails a draft when the first SponsoredLink appears before the disclosure block",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-03",
+      "domain": "Disclosure",
+      "requirement": "A material connection must be disclosed clearly and conspicuously; FTC guidance treats \"paid link\" adjacent to the link as adequate, states \"commissionable link\" is probably not a clear disclosure, and treats a disclosure buried in a comment section or at the very end of a long post as not clear and conspicuous.",
+      "source_id": "S10",
+      "citation": "FTC's Endorsement Guides: What People Are Asking (codified at 16 C.F.R. Part 255)",
+      "implemented_control": "approved disclosure strings are whitelisted in tools/link_builder.py (DISCLOSURE_OK); the banned string \"commissionable link\" is on DISCLOSURE_BANNED and fails the lint",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-04",
+      "domain": "Pricing",
+      "requirement": "Because prices and availability may change, the Site may only show prices and availability if (a) Amazon serves the link in which that price and availability data are displayed, or (b) the data is obtained via Creators API or PA API under the License.",
+      "source_id": "S02",
+      "citation": "Participation Requirements, Section 2(b) - General Requirements Applicable to All Special Links",
+      "implemented_control": "no price cell is populated anywhere on this site; data/products.json keeps price/availability blank until a Creators API response is stored with its fetch timestamp (tools/amazon_creators_api.py writes `as_of` and refuses to render without it)",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-05",
+      "domain": "Pricing",
+      "requirement": "If prices for a Product are displayed in any comparison format alongside prices from non-Amazon sources, the lowest \"new\" price on the Amazon Site must be displayed and, if provided, the lowest \"used\" price.",
+      "source_id": "S02",
+      "citation": "Participation Requirements, Section 2(b)",
+      "implemented_control": "comparison template (content/templates/comparison.md.tmpl) reserves a lowest-new and lowest-used column that only renders when a stored Creators API offer record supplies them; otherwise the comparison renders qualitative fields only",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-06",
+      "domain": "Claims",
+      "requirement": "No inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or Amazon's policies, promotions or prices. Limited-time promotion mentions must be removed from the Site as soon as the promotion ends on the Amazon Site.",
+      "source_id": "S02",
+      "citation": "Participation Requirements, Section 2(b)",
+      "implemented_control": "tools/generate_articles.py::lint_claims blocks superlatives and unverifiable claim verbs unless the sentence carries an inline evidence reference; promo copy carries an `expires_utc` front-matter field and the builder refuses to render expired promos",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-07",
+      "domain": "Links",
+      "requirement": "Special Links must use the assigned Associates ID, must be accessed directly from the Site, must include the tag as a URL parameter, and customers must not be encouraged to bookmark Special Links. Content may only be linked to the related Product detail page (or other relevant Amazon page) and not to third-party pages.",
+      "source_id": "S02",
+      "citation": "Participation Requirements, Section 2(a)-(b)",
+      "source_id_alt": "S03",
+      "citation_alt": "Participation Requirements, Requirement 5",
+      "implemented_control": "tools/link_builder.py builds links only from amazon.<tld>/dp/<ASIN>?...&tag=< Associates ID >, validates the tag parameter exists, and rejects any href whose host is not an Amazon marketplace host",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-08",
+      "domain": "Links",
+      "requirement": "Additional \"sub-tag\" IDs may be used to monitor and optimize Special Links, but under no circumstances may a sub-tag or any Associates reporting be associated with a specific end user (e.g. dynamically assigning sub-tags to visitors to monitor their behaviour).",
+      "source_id": "S02",
+      "citation": "Participation Requirements, Section 2(b)",
+      "implemented_control": "the click model keys campaigns to content page + sub-tag only; tools/redirect_server.py stores no user identifier, no cookie identity, and rejects any sub-tag value that varies per request (SUBTAG_STATIC_RULE)",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-09",
+      "domain": "Links",
+      "requirement": "No offline or non-permitted use of Content, Amazon marks or Special Links - explicitly including printed material, mailing, SMS, MMS, email or an attachment to an email, or oral solicitation. Amazon may require written certification of compliance; failure to certify is a material breach.",
+      "source_id": "S03",
+      "citation": "Participation Requirements, Requirement 6",
+      "implemented_control": "distribution channels in the campaign config are limited to `web` and `approved_mobile_application`; email/SMS channel enum values are absent from the schema so a scheduler cannot target them",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-10",
+      "domain": "Content",
+      "requirement": "Content may not be altered - no adding information, no inserting words into a customer review; images may be resized keeping proportions and text may be truncated only where meaning is not materially altered or made misleading. Content may not be sold, resold, redistributed, sublicensed or transferred.",
+      "source_id": "S03",
+      "citation": "Participation Requirements, Requirements 8 and 9",
+      "implemented_control": "API-fetched fields are stored in an immutable `raw` block keyed by response hash; templates interpolate them verbatim and the render step fails if a whitelisted field is edited (tools/amazon_creators_api.py::FIELD_IMMUTABILITY)",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-11",
+      "domain": "Naming",
+      "requirement": "The Site must not include any Amazon trademark, or a variant or misspelling of one, in any domain name, subdomain, in any \"tag\" or Associates ID, or in any username, group name or other identifier on a social networking site. Sites that promote or contain certain content categories are unsuitable for the Program.",
+      "source_id": "S02",
+      "citation": "Participation Requirements, Section 1 (unsuitable Sites list, item (g))",
+      "implemented_control": "this site is named \"Northstar\"; tools/validate_data.py::assert_no_amazon_marks scans site copy, page titles, file names and the configured tag value for amazon/amazn/prime now/awin-like marks before deploy",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-12",
+      "domain": "Site eligibility",
+      "requirement": "The Site must contain original content and be publicly available at the address supplied in the application; original content that uses third-party materials must add significant commentary, analysis, or transformation.",
+      "source_id": "S02",
+      "citation": "Participation Requirements, Section 1 - Enrollment and Eligibility",
+      "implemented_control": "every generated article requires `analysis` front matter (non-empty editorial reasoning) before it can publish; pure API-field dumps are rejected by the linter",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-13",
+      "domain": "Attribution",
+      "requirement": "A Qualifying Purchase accrues within a Session that begins when a customer clicks a Special Link and ends at the first of: 24 hours elapsing, the customer placing an order for a non-digital Product, or the customer clicking another Associate's Special Link. Cart-adds must complete no later than 89 days after the click-through; Digital Products are counted when streamed/downloaded; and within 180 days of purchase the Product must be shipped/streamed/downloaded and paid for.",
+      "source_id": "S02",
+      "citation": "Commission Income Statement, Section 1 - Qualifying Purchases and Qualifying Revenue",
+      "implemented_control": "the revenue model's expected-value function only claims credit inside the 24h window, uses a 89-day cart tail for the delayed-conversion term, and discounts by an assumed-not-observed ship-complete factor of 1.0 until Associates reports exist (no fabricated refund rate)",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-14",
+      "domain": "Attribution",
+      "requirement": "Associates' tags should only be used to benefit from Amazon Associates commissions; claiming commissions from both Amazon Associates and another program using the same traffic (e.g. by manipulating or combining attribution links) can lead to withheld commissions and termination.",
+      "source_id": "S02",
+      "citation": "Commission Income Statement, Section 5 - Commission Income Limitations",
+      "implemented_control": "tools/link_builder.py rejects a URL that already contains a competing network attribution parameter, and the redirect endpoint refuses chained third-party attribution params",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-15",
+      "domain": "Payments",
+      "requirement": "Commission Income is calculated per Qualifying Purchase and paid approximately 60 days after the end of the calendar month in which it was earned; US payment minimums are 10 USD (direct deposit), 10 USD with a 2000 USD maximum (gift card), and 100 USD with a 15 USD fee (check).",
+      "source_id": "S02",
+      "citation": "Commission Income Statement, Section 6 - Commission Income Reporting and Payment",
+      "implemented_control": "cash-flow model in tools/optimize.py uses a 60-day lag and shows the pay-period gate; no earnings figure is displayed on the site without a report row",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-16",
+      "domain": "Enforcement",
+      "requirement": "Violation of the Agreement (and any violation of Section 5 or the Program Policies, which is deemed a material breach) can lead Amazon to permanently cease payment of commission income, suspend the account, or terminate on 7 days' notice.",
+      "source_id": "S01",
+      "citation": "Operating Agreement, Sections 2, 5 and 6",
+      "implemented_control": "the deploy gate (tools/validate_data.py) is a hard pre-publish check: a page that fails the disclosure, naming, or sourcing lint blocks the Pages workflow rather than shipping",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-17",
+      "domain": "SEO",
+      "requirement": "Google asks sites participating in affiliate programs to qualify affiliate links with rel=\"sponsored\", whether created manually or dynamically; failing to qualify affiliate links appropriately can lead to manual actions and algorithmic action affecting how the site is seen in Search.",
+      "source_id": "S12",
+      "citation": "Google Search Central - Qualify your outbound links to Google; and the Search Central blog on qualifying links",
+      "source_id_alt": "S13",
+      "implemented_control": "tools/link_builder.py always emits rel=\"sponsored nofollow\" on SponsoredLinks; validate_data.py fails the build if an href to an Amazon host lacks it",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-18",
+      "domain": "SEO",
+      "requirement": "Editorial product reviews can expose pros and cons to Google through Product/Review structured data (positiveNotes / negativeNotes as ItemLists whose text matches the visible page), the review author must be a valid Person or Team name, and Google warns against putting promotional text such as \"50% off on Black Friday\" in review markup.",
+      "source_id": "S14",
+      "citation": "Google Search Central - Merchant listing (Product, Offer) structured data",
+      "source_id_alt": "S15",
+      "implemented_control": "content/templates/*.tmpl emit Product+Review JSON-LD only from verified fields, keep the author name a real Person/Team value, and the linter rejects promotional strings and markup text that is not present visibly",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-19",
+      "domain": "Expectation setting",
+      "requirement": "Amazon makes no representation or warranty regarding the amount of traffic or commission income an Associate can expect, and will not be liable for actions taken based on expectations.",
+      "source_id": "S01",
+      "citation": "Operating Agreement, Section 4 - Warranties",
+      "implemented_control": "every projection in this repository is labelled ILLUSTRATIVE and is computed by the documented formula from the operator's own assumptions; no revenue forecast is presented as an Amazon figure",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-20",
+      "domain": "API access",
+      "requirement": "Product catalog data is obtained through the Creators API (PA-API 5.0 is deprecated and returns 403 AccessDenied). Prerequisites per Amazon's docs: enrolment in the Associates program for the target marketplace, at least 10 qualifying sales within the past 30 days, API registration through Associates Central, and generated credentials.",
+      "source_id": "S06",
+      "citation": "Associates Program - PA-API 5 Deprecation Notice",
+      "source_id_alt": "S07",
+      "citation_alt": "Welcome to Creators API - Prerequisites",
+      "implemented_control": "tools/amazon_creators_api.py targets the Creators API operations (SearchItems, GetItems, GetVariations, GetBrowseNodes) and exits with a machine-readable BLOCKED reason when credentials or the qualifying-sales gate are absent, instead of falling back to scraping",
+      "status": "VERIFIED"
+    }
+  ]
+}

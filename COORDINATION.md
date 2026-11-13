@@ -10,12 +10,13 @@ other work or the merge.
 | Task | Status | Owner session | Files |
 |---|---|---|---|
 | Research and build affiliate marketing dashboard, source-backed product findings, executive summary, flagged review, and Pages workflow | done (merged via PR #1 → `main` @ `cfc04b1`) | arena/6b8bb130-zone2 | COORDINATION.md, README.md, index.html, styles.css, app.js, data.js, .github/workflows/pages.yml |
-| Line-by-line re-verification of merged data + repo review | in progress | arena/f786c0d7-zone2 (`s-f786c0d7`) | verification only; findings logged below |
-| Verify the 3 supplied Amazon links / ASIN tokens | done | `s-f786c0d7` | data (flag rows), COORDINATION.md |
-| Compliance engine (Amazon + FTC rules, official sources) | in progress | `s-f786c0d7` | data/compliance.json, site compliance page |
-| Commission / category reference data (official rate table) | in progress | `s-f786c0d7` | data/commission_table.json |
-| Platform architecture: collectors, scoring, content engine, tracking | in progress | `s-f786c0d7` | docs/architecture.md, tools/** |
-| GitHub Pages site expansion (exec summary, category subpages, tables, flagged page) | in progress | `s-f786c0d7` | site pages + data |
+| Line-by-line re-verification of merged data + repo review | done | arena/f786c0d7-zone2 (`s-f786c0d7`) | verification only; findings logged in Verification Log |
+| Verify the 3 supplied Amazon links / ASIN tokens | done | `s-f786c0d7` | data/products.json, data/flags.json |
+| Compliance engine (Amazon + FTC + Google rules, official sources) | done | `s-f786c0d7` | data/compliance.json, pages/compliance.html |
+| Commission / category reference data (official rate table) | done | `s-f786c0d7` | data/commission_table.json, pages/categories/*.html |
+| Platform automation: guard, collector, scoring, generator, tracker, optimizer | done | `s-f786c0d7` | tools/**, content/templates/**, tests/** |
+| GitHub Pages site expansion (exec summary, category subpages, tables, flagged page) | done | `s-f786c0d7` | pages/**, pages/assets/site.css |
+| Deploy gate + CI extension (sourcing, disclosure, broken links) | done | `s-f786c0d7` | tools/validate_data.py, .github/workflows/pages.yml |
 | Final integration: re-verify combined data, build, no broken links, publish Pages, PR + merge | in progress | `s-f786c0d7` | shared outputs (index/nav/data) |
 
 ## Session register
@@ -111,3 +112,51 @@ Accessed 2026-11-13 (UTC), all sources fetched live and read, not recalled from 
 - Compliance constraints are hard-wired into the pipeline: disclosure (V-09), price-display rule (V-14), naming/trademark
   and tag rules (V-15), attribution window (V-11), and FTC/Google disclosure & link-qualification rules (V-20, V-21).
 - Economics use only Amazon's official published rates (V-12) — no invented commission numbers.
+
+
+## Completion records (task 2-10, `s-f786c0d7`)
+
+### Files added or changed by this session
+- **Added:** `EXECUTIVE_SUMMARY.md`, `.gitignore`, `.nojekyll`,
+  `data/{sources,products,commission_table,compliance,modules,flags,verification,niches,campaigns}.json`,
+  `pages/**` (37 generated HTML pages + `pages/assets/site.css`),
+  `tools/{asin_guard,amazon_creators_api,scoring,generate_articles,link_builder,redirect_server,optimize,cache,validate_data,build_site}.py`,
+  `tools/tracking_schema.sql`, `content/templates/{product_article,comparison,buying_guide}.md.tmpl`, `tests/test_pipeline.py`.
+- **Changed:** `README.md` (extended; original content preserved), `index.html` (5 sidebar links to the subpages added),
+  `.github/workflows/pages.yml` (4 validation steps added before the Pages upload), `COORDINATION.md`.
+- **Not touched:** `data.js`, `app.js`, `styles.css` — the merged session's product rows and design system are intact
+  (only `app.js` was read by the compliance gate to confirm the disclosure sentence is still rendered).
+
+### Sources used (all fetched and read 2026-11-13; see `data/sources.json`)
+Amazon: Operating Agreement (`/help/operating/agreement`, updated 2025-10-15, §2/§4/§5/§6/§12 read);
+Program Policies (`/help/operating/policies`, updated 2026-04-14, Commission Income Statement §1/§5/§6 +
+Participation Requirements §1/§2 read); Participation Requirements (`/help/operating/participation/`, Reqs 1-9 read);
+Standard Commission Income Statement (`/help/node/topic/GRXPHT8U84RAYDXZ`, Table 1 + bounties transcribed);
+disclosure FAQ (`/help/node/topic/GHQNZAU6669EZS98`); PA-API 5 deprecation notice and Creators API docs
+(`/creatorsapi/docs/en-us/paapiv5-deprecation`, `/creatorsapi/docs/en-us/introduction`); Associates tools page
+(`/welcome/topic/tools`). U.S. FTC: Endorsement Guides: What People Are Asking (16 C.F.R. Part 255). Google:
+qualify-outbound-links, the 2021 link-tagging blog post, merchant-listing structured data, pros-and-cons post.
+Product evidence: `amazon.com/dp/<each submitted token>` + each submitted short link's final URL.
+Deployment: GitHub Pages API + Actions run history.
+
+### Verification performed
+- 30 logged checks in the Verification Log above (V-01…V-30) — every claim read from the cited page, none recalled.
+- Rate table transcribed row by row and asserted by `tests/test_pipeline.py::test_rate_table_matches_the_official_transcription`.
+- Guard behaviours asserted by 11 executable checks (`python3 tests/test_pipeline.py` → 11/11 pass).
+- Deploy gate (`python3 tools/validate_data.py`) → 0 errors over 92 data rows, 22 sources, 868 internal links.
+- `tools/build_site.py --check` → committed `pages/` matches a fresh deterministic build (37 pages).
+- Compliance gate → 37 pages carry the §5 disclosure sentence; no untagged sponsored link in built output.
+- Local render check → all probed routes return 200, the deliberate bad slug returns 404, no `{{placeholder}}` leakage.
+
+### Irregularities found (published on Flagged for Review, `pages/flags.html`)
+F-01 9-character tokens; F-02 Page Not Found on all canonical `/dp/` URLs; F-03 short links land on three
+different unrelated ASINs via `mhFallback`; F-04 `link.amazon` is not a documented publisher link format and
+carries no tag; F-05 PA-API 5 deprecated (stale-tooling trap, including the tools page cited by the merged commit);
+F-06 content generation deliberately refuses all three items; F-07 no Associates account/tag/marketplace supplied;
+F-08 no click/conversion/earnings history exists; F-09 sandbox network allowlist limits live verification;
+F-10 prior merged commit is accurate but incomplete (its four citations verified live); F-11 governing pages
+carry different update dates and change without notice.
+
+### Merge / publish record
+- PR to `main`: recorded below after creation.
+- GitHub Pages: confirmed live after merge (status + run id recorded below).

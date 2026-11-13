@@ -1,0 +1,10 @@
+# Build/runtime artefacts that must not be published
+.cache/
+.local/
+__pycache__/
+*.pyc
+content/published/
+.pytest_cache/
+
+# Generated locally only - committed output lives in pages/
+.manifest.json

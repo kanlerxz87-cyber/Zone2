@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Source-verified Amazon affiliate research platform: category data, compliance controls, verification log and open flags. Every table row links to an official source or is left blank.">
+<meta name="robots" content="index,follow">
+<title>Scalability &amp; automation substrate &middot; Northstar</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="../../index.html"><span class="brand-mark">N</span><span>Northstar<small>Affiliate intelligence</small></span></a>
+  <div class="side-label">FINDINGS &amp; SUBPAGES</div>
+  <nav class="nav"><a class="nav-link" href="../index.html">Findings hub</a><a class="nav-link" href="../executive-summary.html">Executive summary</a><a class="nav-link" href="../products.html">Requested products</a><a class="nav-link" href="../categories/index.html">Categories</a><a class="nav-link" href="../niches.html">Niche discovery</a><a class="nav-link" href="../modules/index.html">Platform modules</a><a class="nav-link" href="../commissions.html">Commissions</a><a class="nav-link" href="../compliance.html">Compliance</a><a class="nav-link" href="../verification.html">Verification log</a><a class="nav-link" href="../sources.html">Official sources</a><a class="nav-link" href="../flags.html">Flagged for review</a><a class="nav-link" href="../tracking.html">Tracking</a><a class="nav-link" href="../content-engine.html">Content engine</a><a class="nav-link" href="../architecture.html">Architecture</a></nav>
+  <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Verified data only</strong><small>2026-11-13 &middot; blank = unconfirmed</small></div></div>
+</aside>
+<main class="main">
+  <header class="topbar">
+    <div class="crumb"><a href="../../index.html">Northstar</a> <span>/</span> <strong>Scalability &amp; automation substrate</strong></div>
+    <div class="top-right"><span class="live-tag"><i></i> Live on GitHub Pages</span><a class="chip" href="../../index.html">Dashboard</a></div>
+  </header>
+  <div class="content">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">verified 2026-11-13 &middot; official sources only</div>
+        <h1>Scalability &amp; automation substrate</h1>
+        <p>Run the loop continuously and cheaply: schedule, cache, backoff, idempotent build, deploy gate.</p>
+      </div>
+      <span class="pill pill-ok">AUTOMATED</span>
+    </div>
+    <section class="panel"><div class="panel-head"><h3>Module detail</h3></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Field</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>Purpose</td><td>Run the loop continuously and cheaply: schedule, cache, backoff, idempotent build, deploy gate.</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>State</td><td>automated</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Verification method</td><td>Build is deterministic (same inputs -&gt; same bytes), network-free, and each deploy re-runs the data/verification lints; a failed lint stops publication.</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Hard rule</td><td>No crawler/scrape path exists as a fallback - the only accepted ingestion is the official API, because scraping is both brittle and outside the program rules.</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Implemented in</td><td>.github/workflows/pages.yml, tools/build_site.py, tools/validate_data.py, tools/cache.py</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Official inputs</td><td>GitHub Pages as the static host (this repository&#x27;s own workflow); API operation quotas/limits as published by the API docs (S07)</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Blockers</td><td>Scheduled execution needs a runner/secret configuration</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr></tbody></table></div></section><section class="panel"><div class="panel-head"><h3>Rules that constrain this module</h3></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Rule</th><th>Domain</th><th>Requirement as stated by the source</th><th>Citation</th><th>Implemented control</th><th>Source</th></tr></thead><tbody><tr><td>R-16</td><td>Enforcement</td><td>Violation of the Agreement (and any violation of Section 5 or the Program Policies, which is deemed a material breach) can lead Amazon to permanently cease payment of commission income, suspend the account, or terminate on 7 days&#x27; notice.</td><td class="cell-code">Operating Agreement, Sections 2, 5 and 6</td><td>the deploy gate (tools/validate_data.py) is a hard pre-publish check: a page that fails the disclosure, naming, or sourcing lint blocks the Pages workflow rather than shipping</td><td class="cell-src"><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">S01<span class="src-host">affiliate-program.amazon.com</span></a></td></tr><tr><td>R-20</td><td>API access</td><td>Product catalog data is obtained through the Creators API (PA-API 5.0 is deprecated and returns 403 AccessDenied). Prerequisites per Amazon&#x27;s docs: enrolment in the Associates program for the target marketplace, at least 10 qualifying sales within the past 30 days, API registration through Associates Central, and generated credentials.</td><td class="cell-code">Associates Program - PA-API 5 Deprecation Notice</td><td>tools/amazon_creators_api.py targets the Creators API operations (SearchItems, GetItems, GetVariations, GetBrowseNodes) and exits with a machine-readable BLOCKED reason when credentials or the qualifying-sales gate are absent, instead of falling back to scraping</td><td class="cell-src"><a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener noreferrer nofollow">S06<span class="src-host">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer nofollow">S07<span class="src-host">affiliate-program.amazon.com</span></a></td></tr></tbody></table></div></section>
+  </div>
+  <footer>
+    <div class="disclosure"><strong>Disclosure</strong> As an Amazon Associate I earn from qualifying purchases. Outbound links on this site are qualified with <code>rel="sponsored"</code>.</div>
+    <div class="foot-meta">Research workspace <span>&middot;</span> no product, price, rating or performance figure is stated unless an official source confirms it <span>&middot;</span> <a href="../../index.html">dashboard</a> <span>&middot;</span> <a href="../../README.md">repository</a></div>
+  </footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Source-verified Amazon affiliate research platform: category data, compliance controls, verification log and open flags. Every table row links to an official source or is left blank.">
+<meta name="robots" content="index,follow">
+<title>Click &amp; conversion tracking &middot; Northstar</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="../../index.html"><span class="brand-mark">N</span><span>Northstar<small>Affiliate intelligence</small></span></a>
+  <div class="side-label">FINDINGS &amp; SUBPAGES</div>
+  <nav class="nav"><a class="nav-link" href="../index.html">Findings hub</a><a class="nav-link" href="../executive-summary.html">Executive summary</a><a class="nav-link" href="../products.html">Requested products</a><a class="nav-link" href="../categories/index.html">Categories</a><a class="nav-link" href="../niches.html">Niche discovery</a><a class="nav-link" href="../modules/index.html">Platform modules</a><a class="nav-link" href="../commissions.html">Commissions</a><a class="nav-link" href="../compliance.html">Compliance</a><a class="nav-link" href="../verification.html">Verification log</a><a class="nav-link" href="../sources.html">Official sources</a><a class="nav-link" href="../flags.html">Flagged for review</a><a class="nav-link" href="../tracking.html">Tracking</a><a class="nav-link" href="../content-engine.html">Content engine</a><a class="nav-link" href="../architecture.html">Architecture</a></nav>
+  <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Verified data only</strong><small>2026-11-13 &middot; blank = unconfirmed</small></div></div>
+</aside>
+<main class="main">
+  <header class="topbar">
+    <div class="crumb"><a href="../../index.html">Northstar</a> <span>/</span> <strong>Click &amp; conversion tracking</strong></div>
+    <div class="top-right"><span class="live-tag"><i></i> Live on GitHub Pages</span><a class="chip" href="../../index.html">Dashboard</a></div>
+  </header>
+  <div class="content">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">verified 2026-11-13 &middot; official sources only</div>
+        <h1>Click &amp; conversion tracking</h1>
+        <p>Measure what a page does, while keeping Amazon&#x27;s earnings truth in Associates Central.</p>
+      </div>
+      <span class="pill pill-warn">SCAFFOLDED</span>
+    </div>
+    <section class="panel"><div class="panel-head"><h3>Module detail</h3></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Field</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>Purpose</td><td>Measure what a page does, while keeping Amazon&#x27;s earnings truth in Associates Central.</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>State</td><td>scaffolded</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Verification method</td><td>Site-side metrics are first-party click counts only, keyed to page+campaign; conversion/earnings columns stay blank until a dated Associates report is ingested.</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Hard rule</td><td>Zero clicks, CTR, conversion rate, EPC, or revenue number is displayed anywhere in this build - none exists to verify. The tracker also stores no user identifier, to respect R-08 and privacy law.</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Implemented in</td><td>tools/redirect_server.py, data/tracking_schema.sql, pages/tracking.html</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Official inputs</td><td>Associates reporting is the only source of earnings and conversion figures (S02, R-15); Amazon may record information about users clicking through Special Links (S01 Sec. 12)</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr><tr><td>Blockers</td><td>No hosted endpoint; no Associates earnings/report export</td><td class="cell-unverified"><span class="pill pill-warn">UNVERIFIED</span><div class="row-note">no official source states this value</div></td></tr></tbody></table></div></section><section class="panel"><div class="panel-head"><h3>Rules that constrain this module</h3></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Rule</th><th>Domain</th><th>Requirement as stated by the source</th><th>Citation</th><th>Implemented control</th><th>Source</th></tr></thead><tbody><tr><td>R-08</td><td>Links</td><td>Additional &quot;sub-tag&quot; IDs may be used to monitor and optimize Special Links, but under no circumstances may a sub-tag or any Associates reporting be associated with a specific end user (e.g. dynamically assigning sub-tags to visitors to monitor their behaviour).</td><td class="cell-code">Participation Requirements, Section 2(b)</td><td>the click model keys campaigns to content page + sub-tag only; tools/redirect_server.py stores no user identifier, no cookie identity, and rejects any sub-tag value that varies per request (SUBTAG_STATIC_RULE)</td><td class="cell-src"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a></td></tr><tr><td>R-13</td><td>Attribution</td><td>A Qualifying Purchase accrues within a Session that begins when a customer clicks a Special Link and ends at the first of: 24 hours elapsing, the customer placing an order for a non-digital Product, or the customer clicking another Associate&#x27;s Special Link. Cart-adds must complete no later than 89 days after the click-through; Digital Products are counted when streamed/downloaded; and within 180 days of purchase the Product must be shipped/streamed/downloaded and paid for.</td><td class="cell-code">Commission Income Statement, Section 1 - Qualifying Purchases and Qualifying Revenue</td><td>the revenue model&#x27;s expected-value function only claims credit inside the 24h window, uses a 89-day cart tail for the delayed-conversion term, and discounts by an assumed-not-observed ship-complete factor of 1.0 until Associates reports exist (no fabricated refund rate)</td><td class="cell-src"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a></td></tr><tr><td>R-15</td><td>Payments</td><td>Commission Income is calculated per Qualifying Purchase and paid approximately 60 days after the end of the calendar month in which it was earned; US payment minimums are 10 USD (direct deposit), 10 USD with a 2000 USD maximum (gift card), and 100 USD with a 15 USD fee (check).</td><td class="cell-code">Commission Income Statement, Section 6 - Commission Income Reporting and Payment</td><td>cash-flow model in tools/optimize.py uses a 60-day lag and shows the pay-period gate; no earnings figure is displayed on the site without a report row</td><td class="cell-src"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a></td></tr></tbody></table></div></section>
+  </div>
+  <footer>
+    <div class="disclosure"><strong>Disclosure</strong> As an Amazon Associate I earn from qualifying purchases. Outbound links on this site are qualified with <code>rel="sponsored"</code>.</div>
+    <div class="foot-meta">Research workspace <span>&middot;</span> no product, price, rating or performance figure is stated unless an official source confirms it <span>&middot;</span> <a href="../../index.html">dashboard</a> <span>&middot;</span> <a href="../../README.md">repository</a></div>
+  </footer>
+</main>
+</div>
+</body>
+</html>
