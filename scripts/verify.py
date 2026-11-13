@@ -35,7 +35,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-SITE = ROOT / "site"
+# The generated pages live at the repository root, because GitHub Pages on this
+# repo is a legacy build from branch main / path "/". Only generated files are
+# checked; hand-written sources (data/, docs/, scripts/) are excluded.
+SITE = ROOT
+IGNORE_HTML_STEMS = set()
 
 errors: list[str] = []
 warnings: list[str] = []
@@ -227,12 +231,25 @@ def check_site() -> None:
         fail("site/ does not exist — run scripts/build.py first")
         return
 
-    html_files = sorted(SITE.rglob("*.html"))
+    manifest_path = ROOT / "site-manifest.json"
+    if not manifest_path.exists():
+        fail("site-manifest.json is missing — run scripts/build.py first")
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    owned = set(manifest.get("files", []))
+    if not owned:
+        fail("site-manifest.json lists no generated files")
+        return
+
+    html_files = sorted(ROOT / f for f in owned if f.endswith(".html"))
     if len(html_files) < 8:
-        fail(f"site/ has only {len(html_files)} pages — expected at least 8")
+        fail(f"only {len(html_files)} generated pages — expected at least 8")
+    for target in html_files:
+        if not target.exists():
+            fail(f"manifest lists {target.name} but the file does not exist")
 
     for page in html_files:
-        rel = page.relative_to(SITE)
+        rel = page.relative_to(ROOT)
         text = page.read_text(encoding="utf-8")
 
         # 9 — disclosure present
@@ -267,17 +284,28 @@ def check_site() -> None:
             if "tag=" in url:
                 warn(f"{rel}: Amazon link carries a tag parameter — confirm it is the owner's")
 
-        # 10 — internal links resolve
+        # 10 — internal links resolve, and point at files the build owns
         for target in INTERNAL_HREF.findall(text):
             if target.startswith(("http://", "https://", "//", "mailto:")):
                 continue
             resolved = (page.parent / target).resolve()
             if not resolved.exists():
                 fail(f"{rel}: broken internal link -> {target}")
+            elif target.endswith(".html"):
+                try:
+                    rel_target = str(resolved.relative_to(ROOT))
+                except ValueError:
+                    fail(f"{rel}: internal link escapes the repository -> {target}")
+                else:
+                    if rel_target not in owned:
+                        fail(
+                            f"{rel}: links to {rel_target}, which is not a generated "
+                            "file listed in the manifest"
+                        )
 
         # a page must not link to a missing asset either
-        if 'href="assets/style.css"' in text and not (SITE / "assets" / "style.css").exists():
-            fail(f"{rel}: stylesheet missing from site/assets/")
+        if 'href="assets/style.css"' in text and not (ROOT / "assets" / "style.css").exists():
+            fail(f"{rel}: stylesheet missing from assets/")
 
     # required pages exist
     for required in (
@@ -291,12 +319,14 @@ def check_site() -> None:
         "summary.html",
         "404.html",
     ):
-        if not (SITE / required).exists():
-            fail(f"site/{required} is missing")
+        if not (ROOT / required).exists():
+            fail(f"{required} is missing from the repo root")
+        elif required not in owned:
+            fail(f"{required} exists but is not listed in site-manifest.json")
 
     # .nojekyll so Pages serves files verbatim
-    if not (SITE / ".nojekyll").exists():
-        warn("site/.nojekyll is missing")
+    if not (ROOT / ".nojekyll").exists():
+        warn(".nojekyll is missing from the repo root")
 
 
 # ---------------------------------------------------------------- runner
@@ -336,7 +366,13 @@ def main() -> int:
         for p in docs.get("products.json", {}).get("products", [])
     )
     reqs = len(docs.get("requirements.json", {}).get("requirements", []))
-    pages = len(list(SITE.rglob("*.html"))) if SITE.exists() else 0
+    manifest = ROOT / "site-manifest.json"
+    pages = 0
+    if manifest.exists():
+        pages = sum(
+            1 for f in json.loads(manifest.read_text()).get("files", [])
+            if f.endswith(".html")
+        )
     print(
         f"OK — {products} products, {rows} sourced attribute rows, "
         f"{reqs} requirements dispositioned, {pages} pages, 0 errors."

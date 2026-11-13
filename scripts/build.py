@@ -6,7 +6,7 @@ data/products.json. Everything in the output HTML comes from JSON or from the
 literal strings in TEMPLATES below.
 
 Run:  python3 scripts/build.py
-Out:  site/
+Out:  *.html and assets/ at the repository root (see site-manifest.json)
 """
 
 from __future__ import annotations
@@ -19,7 +19,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-SITE = ROOT / "site"
+# GitHub Pages on this repository is configured as a *legacy* build from
+# branch `main`, path `/`. That means the published files must sit at the
+# repository root. Changing the Pages source requires repository-admin rights
+# that this session does not have, so the generator writes to the root and
+# keeps an explicit manifest of what it owns.
+SITE = ROOT
+MANIFEST = ROOT / "site-manifest.json"
 
 CAPTURED_UTC = "2026-11-13"
 
@@ -1277,10 +1283,34 @@ a.prodlink{font-weight:560}
 # ---------------------------------------------------------------- write
 
 
+GENERATED_DIRS = ("assets",)
+
+
+def clean_previous_output() -> list[str]:
+    """Remove only files this generator previously created, per the manifest."""
+    removed: list[str] = []
+    if MANIFEST.exists():
+        previous = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        for rel in previous.get("files", []):
+            target = ROOT / rel
+            if target.is_file():
+                target.unlink()
+                removed.append(rel)
+    for directory in GENERATED_DIRS:
+        path = ROOT / directory
+        if path.is_dir():
+            for child in sorted(path.rglob("*"), reverse=True):
+                if child.is_file():
+                    child.unlink()
+                elif child.is_dir():
+                    child.rmdir()
+            path.rmdir()
+    return removed
+
+
 def main() -> None:
-    if SITE.exists():
-        shutil.rmtree(SITE)
-    (SITE / "assets").mkdir(parents=True)
+    removed = clean_previous_output()
+    (SITE / "assets").mkdir(parents=True, exist_ok=True)
 
     pages = {
         "index.html": (
@@ -1375,8 +1405,29 @@ def main() -> None:
     # .nojekyll so GitHub Pages serves the files verbatim, no Jekyll processing
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
 
+    # Record exactly which files this generator owns, so the next run can clean
+    # up without ever touching hand-written files such as README.md or data/.
+    owned = sorted(
+        [*pages.keys(), *[slug(p) for p in PRODUCTS["products"]],
+         "404.html", ".nojekyll", "assets/style.css"]
+    )
+    MANIFEST.write_text(
+        json.dumps(
+            {
+                "generated_by": "scripts/build.py",
+                "note": "Files listed here are generated. Do not edit them by hand; "
+                        "edit data/ or scripts/build.py and re-run the build.",
+                "files": owned,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
     print(
-        f"built {len(pages) + len(PRODUCTS['products']) + 1} pages into {SITE}"
+        f"built {len(pages) + len(PRODUCTS['products']) + 1} pages at repo root; "
+        f"{len(owned)} generated files recorded in {MANIFEST.name}"
     )
 
 

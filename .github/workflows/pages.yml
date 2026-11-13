@@ -1,24 +1,25 @@
-name: Build, verify and deploy
+name: Build and verify
+
+# This repository's GitHub Pages site is configured as a *legacy* build from
+# branch `main`, path `/`. Changing that to the Actions build type requires
+# repository-admin rights, so the workflow's job is to guarantee that nothing
+# unverified can reach `main` in the first place. Pages then publishes the
+# merge commit automatically.
+#
+# The generated pages are committed at the repo root, per site-manifest.json.
 
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   verify:
-    name: Verify data and site
+    name: Verify data and generated site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,10 +28,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Parse-check every JSON file
+      - name: Every JSON file parses
         run: |
           python3 - <<'PY'
-          import json, glob, sys
+          import glob, json, sys
           bad = []
           for f in sorted(glob.glob('data/*.json')):
               try:
@@ -39,47 +40,49 @@ jobs:
               except Exception as exc:
                   bad.append(f'{f}: {exc}')
           if bad:
-              print('\n'.join(bad)); sys.exit(1)
+              print('\n'.join(bad))
+              sys.exit(1)
           PY
 
-      - name: Build the site
+      - name: Rebuild the site
         run: python3 scripts/build.py
 
-      - name: Verify sources, links, disclosure and no-price rule
+      - name: Committed output must match a fresh build
+        run: |
+          if ! git diff --quiet; then
+            echo "::error::Generated files are out of date. Run 'python3 scripts/build.py' and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
+          echo "Committed output matches a fresh build."
+
+      - name: Verify sources, links, disclosure and the no-price rule
         run: python3 scripts/verify.py
 
-      - name: Show what was generated
+      - name: Verify the checker itself fails on bad input
         run: |
-          echo "Pages:"
-          ls -1 site/*.html
-          echo
-          echo "Total size:"
-          du -sh site
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: site
-          path: site
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: verify
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: site
-          path: site
-
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-      - id: deploy
-        uses: actions/deploy-pages@v4
+          # Prove the guard actually guards: introduce an unsourced row and
+          # confirm the verifier rejects it.
+          cp data/products.json /tmp/products.json.bak
+          python3 - <<'PY'
+          import json
+          doc = json.load(open('data/products.json'))
+          doc['products'][0]['specs'].append({
+              'label': 'Deliberately broken row',
+              'value': 'x',
+              'status': 'verified',
+              'source_name': 'none',
+              'source_url': None,
+          })
+          json.dump(doc, open('data/products.json', 'w'))
+          PY
+          python3 scripts/build.py > /dev/null
+          if python3 scripts/verify.py > /tmp/out.txt 2>&1; then
+            echo "::error::verify.py passed an unsourced verified row — the guard is broken"
+            exit 1
+          fi
+          echo "Guard correctly rejected the unsourced row:"
+          cat /tmp/out.txt
+          cp /tmp/products.json.bak data/products.json
+          python3 scripts/build.py > /dev/null
+          python3 scripts/verify.py

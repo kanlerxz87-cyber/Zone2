@@ -29,9 +29,10 @@ data/          the verified dataset (the source of truth)
 docs/
   executive-summary.md     the short version
 scripts/
-  build.py                 generates site/ from data/
+  build.py                 generates the site from data/, at the repo root
   verify.py                the guard: fails on unsourced rows, broken links, printed prices
-site/          generated output, served by GitHub Pages
+*.html, assets/           GENERATED at the repo root — see site-manifest.json
+site-manifest.json       the explicit list of files the generator owns
 COORDINATION.md  shared task board, irregularities log, PR record
 ```
 
@@ -48,13 +49,21 @@ COORDINATION.md  shared task board, irregularities log, PR record
 Requires Python 3.9+. No third-party dependencies.
 
 ```bash
-python3 scripts/build.py     # writes site/
+python3 scripts/build.py     # regenerates the root-level pages
 python3 scripts/verify.py    # exits non-zero on any broken rule
-python3 -m http.server 8080 --directory site   # preview at http://localhost:8080
+python3 -m http.server 8080  # preview at http://localhost:8080
 ```
 
-CI (`.github/workflows/pages.yml`) runs the same two commands on every push and pull
-request, and deploys to GitHub Pages only from `main` after verification passes.
+The generated pages sit at the repository root because GitHub Pages on this
+repository is a **legacy build from branch `main`, path `/`**. Switching it to
+an Actions-based build needs repository-admin rights. The generator therefore
+writes to the root, and `site-manifest.json` records exactly which files it
+owns so it never touches hand-written files.
+
+CI (`.github/workflows/pages.yml`) runs on every push and pull request: it rebuilds,
+fails if the committed output does not match a fresh build, runs the verifier, and then
+**runs a negative test** — it injects an unsourced row and confirms the verifier rejects
+it. GitHub Pages publishes `main` automatically once a verified change is merged.
 
 ## What the verification enforces
 
