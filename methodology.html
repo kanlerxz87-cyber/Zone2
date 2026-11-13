@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method</title>
+<meta name="description" content="How data was captured, verified and decided upon.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="disclosure-bar" role="note">
+  <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+  <a href="compliance.html">How this site complies with Amazon's rules</a>.
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="start.html">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__text">Affiliate Research Hub<small>Zone2 · verified product data</small></span>
+    </a>
+    <nav class="tabs" aria-label="Sections"><a href="overview.html">Overview</a><a href="products.html">Products</a><a href="compare.html">Comparison</a><a href="compliance.html">Amazon rules</a><a href="requirements.html">Requirements</a><a href="methodology.html" class="on" aria-current="page">Method</a><a href="flagged.html">Flagged for Review</a><a href="summary.html">Executive summary</a></nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+<h1>Method</h1>
+<p class="lede">How the data on this site was obtained, and the rules that decide what gets
+published.</p>
+
+<section class="panel">
+  <h2>1. Resolve the links</h2>
+  <p>The three supplied links are opaque short links. Each was followed and the redirect target
+  recorded, which yields the ASIN. The ASIN is what identifies the product; the short link does
+  not contain it.</p>
+  <p class="callout callout--warn"><strong>Finding.</strong> None of the three resolved URLs
+  carried an Amazon Associates <code>tag=</code> parameter. Without a tracking ID, clicks cannot
+  be attributed to an account. The site therefore links to the canonical product pages and does
+  <em>not</em> invent a tag. See the <a href="flagged.html">Flagged for Review</a> page.</p>
+</section>
+
+<section class="panel">
+  <h2>2. Capture from official pages only</h2>
+  <p>A value is captured only from an official page: the Amazon product page for that exact ASIN,
+  or the manufacturer's own product page for the model number printed on that listing.</p>
+  <ul class="ticks">
+    <li>Every value is stored with its own source name and URL. A value without a URL is not
+        stored as a fact.</li>
+    <li>Where the manufacturer and Amazon disagree, both values are stored as separate rows, each
+        with its own source, and marked <span class="chip chip--conflict">Conflict</span>.</li>
+    <li>Where only a non-official source has a value, the row is marked
+        <span class="chip chip--unverified">Unverified</span> and the value is left blank.</li>
+  </ul>
+</section>
+
+<section class="panel">
+  <h2>3. Decide what may be published</h2>
+  <p>Capture and publication are separate decisions. Several things were captured for the audit
+  trail but are deliberately not published:</p>
+  <table class="grid"><thead><tr><th scope="col">Captured</th><th scope="col">Published?</th>
+  <th scope="col">Why</th></tr></thead><tbody>
+  <tr><th scope="row">Price</th><td>No</td><td>Amazon permits price display only where Amazon
+  serves the pricing or it comes from the official API, and requires a timestamp plus a
+  disclaimer.</td></tr>
+  <tr><th scope="row">Star rating</th><td>No</td><td>Ratings are storefront-specific for the same
+  ASIN, so a single figure would mislead.</td></tr>
+  <tr><th scope="row">Review count</th><td>No</td><td>Same reason; counts also drift
+  continuously.</td></tr>
+  <tr><th scope="row">Stock status</th><td>No</td><td>Changes by the minute.</td></tr>
+  <tr><th scope="row">Commission rate</th><td>No</td><td>The official rate card requires an
+  Associates login and was not readable.</td></tr>
+  <tr><th scope="row">Wattage, capacity, dimensions, model number, certification, warranty</th>
+  <td>Yes</td><td>Stable manufacturer specifications, each with a named official source.</td></tr>
+  </tbody></table>
+</section>
+
+<section class="panel">
+  <h2>4. Verify mechanically, not by eye</h2>
+  <p><code>scripts/verify.py</code> runs on every change and fails the build when:</p>
+  <ul class="ticks">
+    <li>a fact row has no source URL;</li>
+    <li>a source URL is not <code>https</code>;</li>
+    <li>a row claimed as verified has no source;</li>
+    <li>an internal link in the generated site points at a file that does not exist;</li>
+    <li>a page is missing the affiliate disclosure;</li>
+    <li>a page prints a price, which this project does not permit.</li>
+  </ul>
+  <p>The rule is simple: if the checker cannot confirm it, the site does not claim it.</p>
+</section>
+
+<section class="panel">
+  <h2>5. Known limitations, stated plainly</h2>
+  <ul class="crosses">
+    <li><strong>Amazon pages render inconsistently to automated fetches.</strong> Some captures
+        returned only page chrome. Where the US page body did not render, the same ASIN's page on
+        another Amazon storefront was used to read the product-information block, and the
+        manufacturer was used for specifications. This is disclosed per product.</li>
+    <li><strong>No product was tested.</strong> This project has not handled any of the three
+        appliances. Nothing here is a performance claim.</li>
+    <li><strong>Capture is a single point in time.</strong> The dataset records
+        2026-11-13. Amazon requires site content to be recent — generally within 60
+        days — so a re-capture is due by roughly 2027-01-12.</li>
+    <li><strong>Non-official sources were used only to find official ones.</strong> They are
+        listed, with the reason for rejection, in <code>data/sources.json</code>.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><strong>Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</strong></p>
+    <p>This site is not endorsed by, sponsored by, or affiliated with Amazon.com, Inc. beyond participation
+    in the Amazon Associates programme. Prices, availability, ratings and review counts change constantly and
+    are deliberately not published here as facts — always confirm on the Amazon product page.</p>
+    <p>Data captured 2026-11-13 (UTC). Every published figure links to the official page it came from.
+    Anything that could not be confirmed is left blank and listed on the
+    <a href="flagged.html">Flagged for Review</a> page.</p>
+  </div>
+</footer>
+</body>
+</html>

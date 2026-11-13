@@ -1,0 +1,225 @@
+name: Build, verify and deploy
+
+# Resolved merge of two sessions' workflows.
+#
+# The dashboard session (arena/6b8bb130-zone2) established an Actions-based
+# Pages deployment. That is the correct source of truth for this repository and
+# is preserved here. This session (arena/6602723a-zone2) adds the data
+# verification, a reproducibility check, and a negative test that proves the
+# verifier rejects unsourced rows.
+#
+# The published site is a single static bundle: the dashboard (index.html,
+# app.js, data.js, styles.css) plus the generated verified hub.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # ---- dashboard session's original validation, kept intact ----
+      - name: Validate dashboard assets and navigation
+        run: |
+          test -s index.html
+          test -s styles.css
+          test -s app.js
+          test -s data.js
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class Check(HTMLParser):
+              ids = set()
+              refs = []
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if 'id' in a:
+                      self.ids.add(a['id'])
+                  if tag == 'script' and 'src' in a:
+                      self.refs.append(a['src'])
+                  if tag == 'link' and a.get('rel') == 'stylesheet':
+                      self.refs.append(a['href'])
+
+          html = Path('index.html').read_text()
+          p = Check()
+          p.feed(html)
+          missing = [x for x in p.refs if not Path(x).is_file()]
+          assert not missing, f'Missing asset files: {missing}'
+          assert {'app', 'nav', 'crumb'} <= p.ids
+          assert all(
+              f'data-page="{x}"' in html
+              for x in ('overview', 'products', 'content', 'optimization',
+                        'compliance', 'flagged')
+          )
+          assert 'window.ZONE2_DATA' in Path('data.js').read_text()
+          print('Dashboard assets and navigation validated')
+          PY
+
+      # ---- verified hub ----
+      - name: Every data file parses
+        run: |
+          python3 - <<'PY'
+          import glob, json, sys
+          bad = []
+          for f in sorted(glob.glob('data/*.json')):
+              try:
+                  json.load(open(f, encoding='utf-8'))
+                  print(f'ok   {f}')
+              except Exception as exc:
+                  bad.append(f'{f}: {exc}')
+          if bad:
+              print('\n'.join(bad))
+              sys.exit(1)
+          PY
+
+      - name: Rebuild the verified hub
+        run: python3 scripts/build.py
+
+      - name: Committed output must match a fresh build
+        run: |
+          if ! git diff --quiet; then
+            echo "::error::Generated files are out of date. Run 'python3 scripts/build.py' and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
+          echo "Committed output matches a fresh build."
+
+      - name: Verify sources, links, disclosure and the no-price rule
+        run: python3 scripts/verify.py
+
+      - name: Prove the verifier rejects unsourced rows
+        run: |
+          cp data/products.json /tmp/products.json.bak
+          python3 - <<'PY'
+          import json
+          doc = json.load(open('data/products.json'))
+          doc['products'][0]['specs'].append({
+              'label': 'Deliberately broken row',
+              'value': 'x',
+              'status': 'verified',
+              'source_name': 'none',
+              'source_url': None,
+          })
+          json.dump(doc, open('data/products.json', 'w'))
+          PY
+          python3 scripts/build.py > /dev/null
+          if python3 scripts/verify.py > /tmp/out.txt 2>&1; then
+            echo "::error::verify.py passed an unsourced verified row — the guard is broken"
+            exit 1
+          fi
+          echo "Guard correctly rejected the unsourced row:"
+          cat /tmp/out.txt
+          cp /tmp/products.json.bak data/products.json
+          python3 scripts/build.py > /dev/null
+          python3 scripts/verify.py
+
+      - name: No page prints a price and every page discloses
+        run: |
+          python3 - <<'PY'
+          import glob, re, sys
+          DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+          bad = []
+          for f in sorted(glob.glob('*.html')):
+              t = open(f, encoding='utf-8').read()
+              if DISCLOSURE not in t:
+                  bad.append(f'{f}: missing disclosure')
+              if re.search(r'\$\s?\d[\d,]*\.\d{2}', t):
+                  bad.append(f'{f}: prints a price')
+          if bad:
+              print('\n'.join(bad))
+              sys.exit(1)
+          print(f'{len(glob.glob("*.html"))} pages: disclosure present, no prices printed')
+          PY
+
+      # Stage only what should be public. Uploading `path: .` would publish
+      # data/, scripts/, docs/ and COORDINATION.md as browsable files.
+      - name: Stage the publishable bundle
+        run: |
+          rm -rf _site
+          mkdir -p _site/assets
+          # dashboard
+          cp index.html app.js data.js styles.css _site/
+          # generated verified hub
+          python3 - <<'PY'
+          import json, shutil, pathlib
+          root = pathlib.Path('.')
+          out = root / '_site'
+          manifest = json.loads((root / 'site-manifest.json').read_text())
+          for rel in manifest['files']:
+              src = root / rel
+              if not src.is_file():
+                  continue
+              dest = out / rel
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(src, dest)
+          # Pages serves _site/ as the site root
+          print('staged:', sorted(p.name for p in out.rglob('*') if p.is_file()))
+          PY
+
+      - name: Assert the staged bundle is complete
+        run: |
+          python3 - <<'PY'
+          import sys, pathlib
+          out = pathlib.Path('_site')
+          required = [
+              'index.html', 'app.js', 'data.js', 'styles.css',
+              'start.html', 'overview.html', 'products.html', 'compare.html',
+              'compliance.html', 'requirements.html', 'methodology.html',
+              'flagged.html', 'summary.html', '404.html',
+              'product-B0CDY277D3.html', 'product-B09B7SB46R.html',
+              'product-B08DKYBTPH.html',
+              'assets/style.css', 'assets/landing.css', '.nojekyll',
+          ]
+          missing = [r for r in required if not (out / r).is_file()]
+          if missing:
+              print('missing from staged bundle:', missing)
+              sys.exit(1)
+          # nothing private should leak
+          leaked = [str(p) for p in out.rglob('*')
+                    if p.is_file() and p.suffix in ('.json', '.py')
+                    and p.parent.name in ('data', 'scripts')]
+          if leaked:
+              print('data/ or scripts/ leaked into the bundle:', leaked)
+              sys.exit(1)
+          print(f'staged bundle complete: {len(list(out.rglob("*")))} entries')
+          PY
+
+      - uses: actions/configure-pages@v5
+
+      - name: Upload the static bundle
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

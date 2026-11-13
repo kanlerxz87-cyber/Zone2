@@ -1,66 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Compliance — Zone2</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amazon rules this site complies with</title>
+<meta name="description" content="Disclosure, linking, pricing and automation requirements from Amazon&#x27;s official policies.">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <span class="brand"><span class="dot"></span> Zone2</span>
-      <nav class="nav">
-        <a href="index.html">Dashboard</a>
-        <a href="products.html">Products</a>
-        <a href="analysis.html">Analysis</a>
-        <a href="executive-summary.html">Executive Summary</a>
-        <a href="compliance.html">Compliance</a>
-        <a href="flagged.html">Flagged for Review</a>
-        <a href="sources.html">Sources</a>
-      </nav>
-    </div>
-  </header>
+<a class="skip" href="#main">Skip to content</a>
 
-  <main class="wrap prose">
-    <h1>Amazon Associates Compliance</h1>
-    <p class="muted">This platform is designed to comply with the Amazon Associates Operating Agreement,
-      Program Policies, and FTC disclosure requirements. Sources are official Amazon Associates documents.</p>
-    <div class="disclosure">As an Amazon Associate I earn from qualifying purchases.</div>
+<div class="disclosure-bar" role="note">
+  <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+  <a href="compliance.html">How this site complies with Amazon's rules</a>.
+</div>
 
-    <div class="callout">
-      <strong>Required site-wide disclosure (Operating Agreement §5):</strong>
-      "As an Amazon Associate I earn from qualifying purchases." — displayed clearly and conspicuously
-      on every page of this site wherever Amazon links are used.
-    </div>
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="start.html">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__text">Affiliate Research Hub<small>Zone2 · verified product data</small></span>
+    </a>
+    <nav class="tabs" aria-label="Sections"><a href="overview.html">Overview</a><a href="products.html">Products</a><a href="compare.html">Comparison</a><a href="compliance.html" class="on" aria-current="page">Amazon rules</a><a href="requirements.html">Requirements</a><a href="methodology.html">Method</a><a href="flagged.html">Flagged for Review</a><a href="summary.html">Executive summary</a></nav>
+  </div>
+</header>
 
-    <div class="card">
-      <h2>Rules applied by this platform</h2>
-      <div id="complianceList"></div>
-    </div>
+<main id="main" class="wrap">
 
-    <h2>Official policy documents</h2>
-    <ul>
-      <li><strong>Operating Agreement</strong> — <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">affiliate-program.amazon.com/help/operating/agreement</a></li>
-      <li><strong>Program Policies</strong> — <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">affiliate-program.amazon.com/help/operating/policies</a></li>
-      <li><strong>Disclosure guidance (official Amazon page)</strong> — <a href="https://www.amazon.com/b?ie=UTF8&node=51812349011" target="_blank" rel="noopener noreferrer">amazon.com/b?node=51812349011</a></li>
-    </ul>
+<h1>Amazon rules this site complies with</h1>
+<p class="lede">Every rule below is taken from an official Amazon page and linked. The project
+brief asked for an automated affiliate platform, so the rules that constrain automation are
+listed explicitly rather than buried.</p>
 
-    <div class="callout warn">
-      <strong>Pricing rule:</strong> Amazon Associates prohibits displaying stale or manually typed prices.
-      Prices on this site are snapshot values captured from the linked Amazon listing for research purposes;
-      for a live, compliant storefront, prices must be pulled from the approved Product Advertising /
-      Creators API or omitted. Where a price could not be confirmed from an official source, it is left blank
-      rather than estimated.
-    </div>
-  </main>
+<section class="panel">
+  <h2>The documents consulted</h2>
+  <ul class="srclist"><li><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener nofollow" target="_blank">Associates Program Operating Agreement</a> — seen Updated 15 October 2025 <span class="chip chip--verified">Verified</span></li><li><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Associates Program Policies (incl. Commission Income Statement, Participation Requirements, IP Licence, Trademark Guidelines, Mobile Application Policy, Agent Terms)</a> — seen Updated 14 April 2026 <span class="chip chip--verified">Verified</span></li><li><a href="https://affiliate-program.amazon.com/help/operating/schedule" rel="noopener nofollow" target="_blank">Commission rate card (Standard / Special Commission Income schedule)</a> — seen version not stated <span class="chip chip--unverified">Unverified</span><div class="note">This URL redirects to an Amazon sign-in. Category rates are only readable from inside an Associates account. No rate is published as a fact on the site.</div></li><li><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" rel="noopener nofollow" target="_blank">Application review process (help topic)</a> — seen version not stated <span class="chip chip--verified">Verified</span></li><li><a href="https://www.amazon.com/b?node=53643932011" rel="noopener nofollow" target="_blank">Creator University — Operating Agreement dos and don&#x27;ts</a> — seen version not stated <span class="chip chip--verified">Verified</span></li></ul>
+</section>
 
-  <footer>
-    <div>Zone2 · Compliance</div>
-    <div class="muted">As an Amazon Associate I earn from qualifying purchases.</div>
-  </footer>
+<section class="panel">
+  <h2>Disclosure requirements</h2>
+  <p class="callout callout--ok">Amazon supplies the exact sentence and this site uses it,
+  unmodified, in the bar at the top of every page:
+  <em>“As an Amazon Associate I earn from qualifying purchases.”</em></p>
+  <table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Requirement</th>
+  <th scope="col">Section</th><th scope="col">Source</th></tr></thead><tbody>
+  <tr><td>D1</td><td>State the affiliate relationship clearly and prominently on the site.</td><td>§5 Identifying Yourself as an Associate</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>D2</td><td>The disclosure must be next to the affiliate link, clear and conspicuous, not buried.</td><td>—</td><td class="src-cell"><a class="src" href="https://www.amazon.com/b?node=53643932011" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>D3</td><td>Do not imply Amazon sponsors or endorses the site.</td><td>§5</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>D4</td><td>Include the trademark attribution Amazon&#x27;s own guidance asks for: &#x27;Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.&#x27;</td><td>—</td><td class="src-cell"><a class="src" href="https://www.amazon.com/b?node=53643932011" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>D5</td><td>Comply with the US FTC Guides Concerning the Use of Endorsement and Testimonials in Advertising where applicable.</td><td>Participation Requirements §3(b)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr>
+  </tbody></table>
+</section>
 
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+<section class="panel">
+<h2>Linking rules</h2>
+<table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Requirement</th>
+<th scope="col">Section</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td>L1</td><td>Every Amazon link must carry the Associate&#x27;s tracking ID as a URL parameter.<div class="note">No Store ID was supplied. The site therefore does not fabricate a tag. See I-4.</div></td><td>Participation Requirements §2(b)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>L2</td><td>Links must be accessed directly from the site; no intermediate redirect pages that auto-forward the user.</td><td>Participation Requirements §2(b); Commission Income Statement §2(e)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>L3</td><td>No cloaking via link shorteners on the site; the supplied link.amazon/* short links are therefore not embedded — the canonical ASIN URL is.</td><td>Commission Income Statement §2(e) Redirecting Link</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>L4</td><td>Never bid on &#x27;amazon&#x27;, &#x27;kindle&#x27; or any Amazon mark, including misspellings, in paid search.<div class="note">Applies to any future paid acquisition. The site runs no ads.</div></td><td>Commission Income Statement §2(c)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>L5</td><td>Do not place affiliate links on pages reached from a search engine in a way that disqualifies the purchase; organic search to your own site is fine.</td><td>Commission Income Statement §2(d)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>L6</td><td>No Amazon mark in a domain name, subdomain, Store ID, username or handle.<div class="note">This site is hosted at kanlerxz87-cyber.github.io/Zone2 — no Amazon mark in the host or path.</div></td><td>Participation Requirements §1(g); Trademark Guidelines §8</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>L7</td><td>Do not post affiliate links on Amazon itself, or link from Amazon to the site to promote links.</td><td>Participation Requirements §2(b)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr></tbody></table></section>
+
+<section class="panel">
+  
+<h2>Pricing rules — why no price appears on this site</h2>
+<table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Requirement</th>
+<th scope="col">Section</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td>PR1</td><td>Show price and availability only if Amazon serves the link that displays them, or if the data comes from Creators API / PA API.<div class="note">No price is printed on the site. The site links out and says prices change.</div></td><td>Participation Requirements §2(b)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>PR2</td><td>Any displayed price needs a date/time stamp and the standard &#x27;prices are accurate as of&#x27; disclaimer.<div class="note">Not applicable while no price is displayed; the rule is recorded so that it is applied if prices are ever added.</div></td><td>IP Licence §2(i)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>PR3</td><td>In a price-comparison format, show both the lowest new price and the lowest used price.<div class="note">No comparison pricing is displayed. Recorded as a constraint for future work.</div></td><td>Participation Requirements §2(b)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr></tbody></table>
+  <p class="callout callout--warn"><strong>This is the single biggest constraint on affiliate
+  product pages.</strong> A site may show prices only where Amazon itself serves the pricing, or
+  where the figures come from the official API, and any displayed price needs a timestamp and a
+  disclaimer. This site therefore links out to Amazon and states plainly that the price on
+  Amazon is the price that applies.</p>
+</section>
+
+<section class="panel">
+<h2>Content rules</h2>
+<table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Requirement</th>
+<th scope="col">Section</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td>C1</td><td>Do not add to, delete from or alter Program Content; do not misstate product attributes.</td><td>Participation Requirements §6(a)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>C2</td><td>Do not cache Product Advertising Content beyond 24 hours; images may not be stored at all. ASINs may be stored indefinitely.<div class="note">The site stores ASINs and links only. It hosts no Amazon product images and no Amazon-hosted copy.</div></td><td>IP Licence §2(h)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>C3</td><td>Remove Program Content promptly when it is no longer on an Amazon site.</td><td>Participation Requirements §6(c)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>C4</td><td>Site must contain original content — significant commentary, analysis or transformation — not just reproduced listings.</td><td>Participation Requirements §1</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>C5</td><td>No incentivised or compensated reviews; no reviews written in exchange for payment, discounts or free product.</td><td>Preamble and Community Guidelines reference</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>C6</td><td>Do not make inaccurate, overbroad, deceptive or misleading claims about any product, price or promotion.</td><td>Participation Requirements §2(b)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>C7</td><td>Remove references to limited-time promotions as soon as the promotion ends.<div class="note">The site never states a discount or a deal.</div></td><td>Participation Requirements §2(b)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr></tbody></table></section>
+
+<section class="panel">
+  
+<h2>Automation limits — the Agent Terms</h2>
+<table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Requirement</th>
+<th scope="col">Section</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td>A1</td><td>An &#x27;Agent&#x27; — any software taking autonomous or semi-autonomous action — must identify itself in the HTTP user agent as &#x27;Agent/[agent name]&#x27;.<div class="note">This is the binding constraint on full automation of Amazon data collection.</div></td><td>IP Licence, section 4 Agents (a)–(c)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>A2</td><td>An Agent must not conceal that its access is automated, must not mimic human interaction patterns, must not solve or bypass CAPTCHAs, and must not circumvent blocking measures.</td><td>IP Licence, section 4(c)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>A3</td><td>Do not use Special Links or Program Content to develop machine learning models without prior written approval.</td><td>Participation Requirements §5</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>A4</td><td>Do not use data mining, robots or similar data-gathering and extraction tools on Program Content beyond what the licence allows; use Creators API / PA API instead.</td><td>IP Licence §1</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>A5</td><td>Respect Creators API / PA API rate limits (calls per second) and the 40 KB request limit.</td><td>IP Licence §2(j)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr></tbody></table>
+  <p class="callout callout--warn"><strong>Why this project does not "fully automate" data
+  collection.</strong> Amazon's Agent Terms define an Agent as any software taking autonomous or
+  semi-autonomous action, require it to identify itself in the user agent as
+  <code>Agent/[agent name]</code>, forbid disguising automated access, and forbid solving or
+  circumventing CAPTCHAs. A platform that silently scrapes the storefront at scale would breach
+  those terms. The honest build is: automate generation, verification and publishing; take data
+  from official pages under the licence; and move to the official API for anything
+  volume-based.</p>
+</section>
+
+<section class="panel">
+<h2>Account rules</h2>
+<table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Requirement</th>
+<th scope="col">Section</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td>AC1</td><td>At least three qualifying sales within the first 180 days, after which Amazon reviews the application. Personal orders do not qualify.</td><td>—</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>AC2</td><td>Sites need robust original content — Amazon&#x27;s rule of thumb is at least 10 posts — and must be public and owned by the applicant.</td><td>—</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>AC3</td><td>Website content must be recent, generally within the last 60 days.<div class="note">Implies a refresh cadence is a compliance requirement, not just an SEO nicety.</div></td><td>—</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>AC4</td><td>Commission is paid approximately 60 days after the end of the month earned.</td><td>Commission Income Statement §6</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>AC5</td><td>US payment minimums: direct deposit 10 USD; gift card 10 USD (max 2,000 USD); cheque 100 USD with a 15 USD processing fee.</td><td>Commission Income Statement §6, Payment Minimum Chart</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>AC6</td><td>Either party may terminate on 7 days&#x27; notice; Amazon may terminate immediately for material breach.</td><td>§6 Term and Termination</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>AC7</td><td>Do not claim commission from both Amazon Associates and another programme on the same traffic.</td><td>Commission Income Statement §5</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>AC8</td><td>After 3 years of no substantial activity, accrued commission may be withheld with 7 days&#x27; notice.</td><td>Commission Income Statement §6</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr></tbody></table></section>
+
+<section class="panel">
+  <h2>Commission rates</h2>
+  <p class="callout callout--warn"><strong>Not verified, therefore not published.</strong>
+  The official rate card at https://affiliate-program.amazon.com/help/operating/schedule requires an Associates login and could not be read. Amazon&#x27;s public marketing page states only &#x27;Earn up to 10% in associate commissions&#x27;.</p>
+  <p>The only commission claim this site will repeat is Amazon's own public marketing sentence:
+  <em>“Earn up to 10% in associate commissions from qualifying purchases and programs.”</em>
+  (<a href="https://affiliate-program.amazon.com/" rel="noopener nofollow" target="_blank">Associates Central</a>).</p>
+  <p class="fineprint">Anything more specific — for example a category-by-category percentage —
+  must be read from the rate card inside an Associates account and recorded here with its date.
+  Reporting a number from a blog would not meet this project's own standard.</p>
+</section>
+
+<section class="panel">
+  <h2>Attribution windows</h2>
+  <table class="grid"><thead><tr><th scope="col">ID</th><th scope="col">Rule</th>
+  <th scope="col">Section</th><th scope="col">Source</th></tr></thead><tbody>
+  <tr><td>S1</td><td>A session lasts until the first of: 24 hours from the click, the customer places a non-digital order, or the customer clicks someone else&#x27;s Special Link.</td><td>Commission Income Statement §1(b)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>S2</td><td>A product added to cart can still qualify if ordered within 89 days of the original click.</td><td>Commission Income Statement §1(c)(i)</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>S3</td><td>Qualifying revenue excludes shipping, gift wrap, handling, taxes, service charges, credits, rebates, card fees and bad debt.</td><td>Commission Income Statement §1</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr><tr><td>S4</td><td>Cancelled, returned or refunded orders are disqualified; so are subscription purchases unless the agreement says otherwise, and pre-order products that are not yet listed.</td><td>Commission Income Statement §2</td><td class="src-cell"><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener nofollow" target="_blank">Official text</a></td></tr>
+  </tbody></table>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><strong>Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</strong></p>
+    <p>This site is not endorsed by, sponsored by, or affiliated with Amazon.com, Inc. beyond participation
+    in the Amazon Associates programme. Prices, availability, ratings and review counts change constantly and
+    are deliberately not published here as facts — always confirm on the Amazon product page.</p>
+    <p>Data captured 2026-11-13 (UTC). Every published figure links to the official page it came from.
+    Anything that could not be confirmed is left blank and listed on the
+    <a href="flagged.html">Flagged for Review</a> page.</p>
+  </div>
+</footer>
 </body>
 </html>
