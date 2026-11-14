@@ -356,7 +356,7 @@ def check_published_counts(report: Report, canonical_flags: int) -> None:
 
     Three times now a hand-typed count has gone stale against the register it described:
     F-17 (a "11 items flagged" KPI), F-26 (a KPI derived from the reader-facing subset), and finally
-    — found by session d3ce1c29 while adding F-28…F-30 — `flagged.html` still reading "26 flags
+    — found by session d3ce1c29 while adding F-29…F-31 — `flagged.html` still reading "26 flags
     (F-01 … F-26)" and `README.md` still advertising "(14 items)", "(22 sources)" and "(32 checks)"
     when the ledgers held 29 / 36 / 62. Every one of them was invisible to the gates.
 

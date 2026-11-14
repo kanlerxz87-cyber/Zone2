@@ -2280,25 +2280,25 @@ while the destinations hold. `https://link.amazon/B00TEST12` still returns
 
 | Flag | Defect | Action |
 |---|---|---|
-| **F-28** (medium) | `pages/commissions.html` published **9** bounty rows under a "transcribed row-by-row" notice; S04 publishes **46** bounty rows + **2** bonus rows. The nine were correct — the defect was omission, and it hid the two largest published bounty rates (Audible $20.00, Amazon Business $15.00). | Full 46 + 2 transcribed into `ledger/commission_table.json` (new `bonus_events` block) and rendered with an explicit count. `tools/apply_bounty_completion_2026_11_14.py`. |
-| **F-29** (low) | The zero-rate caption said "Nine category groups publish a 0.00 % Standard Commission rate" — Table 1 publishes **two** 0.00 % bands and "nine" matches no grouping in the source. | Caption rewritten to name the two bands and list the exclusion block. |
-| **F-30** (low) | `tools/validate_data.py::_walk_rows` yielded a row only when it had `source_ids` or `id`, so every commission-table row (which uses singular `source_id`) escaped both the row count and the "a value needs a source" rule. The 48 new bounty rows would have been unchecked. | `_walk_rows` now yields on `source_id`; gate row count 173 → 244, negative-tested. |
-| **F-31** (low) | The Flagged for Review panel headed the register "N open items" for **every** flag, when 5 carry `status: closed` and 12 more have `owner: done` — only **12** are genuinely open. Same drift class as F-17/F-26, in the opposite direction. | Panel now reads "N flagged items · X open · Y resolved", derived by `tools/build_site.py::_open_flag_count`. |
+| **F-29** (medium) | `pages/commissions.html` published **9** bounty rows under a "transcribed row-by-row" notice; S04 publishes **46** bounty rows + **2** bonus rows. The nine were correct — the defect was omission, and it hid the two largest published bounty rates (Audible $20.00, Amazon Business $15.00). | Full 46 + 2 transcribed into `ledger/commission_table.json` (new `bonus_events` block) and rendered with an explicit count. `tools/apply_bounty_completion_2026_11_14.py`. |
+| **F-30** (low) | The zero-rate caption said "Nine category groups publish a 0.00 % Standard Commission rate" — Table 1 publishes **two** 0.00 % bands and "nine" matches no grouping in the source. | Caption rewritten to name the two bands and list the exclusion block. |
+| **F-31** (low) | `tools/validate_data.py::_walk_rows` yielded a row only when it had `source_ids` or `id`, so every commission-table row (which uses singular `source_id`) escaped both the row count and the "a value needs a source" rule. The 48 new bounty rows would have been unchecked. | `_walk_rows` now yields on `source_id`; gate row count 173 → 244, negative-tested. |
+| **F-32** (low) | The Flagged for Review panel headed the register "N open items" for **every** flag, when 5 carry `status: closed` and 12 more have `owner: done` — only **12** are genuinely open. Same drift class as F-17/F-26, in the opposite direction. | Panel now reads "N flagged items · X open · Y resolved", derived by `tools/build_site.py::_open_flag_count`. |
 | **F-16** (high, inherited) | Four compliance rows cited controls that did not exist. | **Closed** after independent re-verification: `check_marks` (tools/validate_data.py:190) ✔, `lint()` (tools/generate_articles.py:164) ✔, `expires_utc` enforcement + `test_expired_promotion_copy_is_removed_and_linted` (tests/test_pipeline.py:177) ✔, R-09 states the solicited-email/SMS permission accurately ✔. R-01's remaining `site/compliance-inject.js` mention is an in-line record of the correction, not a live citation. |
 
-**Systemic fix behind F-28/F-29/F-30/F-31:** three separate published counts had drifted from the ledgers they
+**Systemic fix behind F-29/F-30/F-31/F-32:** three separate published counts had drifted from the ledgers they
 describe — `flagged.html` "26 flags (F-01 … F-26)", `README.md` "(14 items) / (22 sources) / (32 checks)".
 `tools/validate_data.py::check_published_counts` now holds **every** published statement of the flag,
 source and verification-log count — in HTML *and* Markdown — to its ledger. Negative-tested: reverting
 `README.md` to "(14 items)" turns the gate red.
 
-**Register:** 31 flags (F-01 … F-31) once merged with `main` — see the ID-collision note below. `CANONICAL_FLAG_COUNT` is derived by
+**Register:** 31 flags (F-01 … F-32) once merged with `main` — see the ID-collision note below. `CANONICAL_FLAG_COUNT` is derived by
 `tools/build_root_data.py` and gated, so it cannot be typed wrong again.
 
 #### 5. Files touched
 
 `ledger/commission_table.json` (46 bounty + 2 bonus rows, new `bonus_events` key), `ledger/flags.json`
-(+F-28…F-31, F-16 closed), `ledger/verification.json` (+V-51…V-62), `ledger/sources.json` (+S36),
+(+F-29…F-32, F-16 closed), `ledger/verification.json` (+V-51…V-62), `ledger/sources.json` (+S36),
 `tools/build_site.py` (bonus-events panel, corrected zero-rate caption, derived open/resolved split),
 `tools/validate_data.py` (row-walk fix, `check_published_counts`), `tools/apply_bounty_completion_2026_11_14.py`
 (new), `tools/apply_t26_2026_11_14.py` (new), `pages/**` (regenerated), `assets/js/data.js` (regenerated),
@@ -2306,7 +2306,7 @@ source and verification-log count — in HTML *and* Markdown — to its ledger. 
 `docs/repo-review.md` (dated footnote), `COORDINATION.md`.
 
 Nothing published by another session was deleted; `docs/repo-review.md`'s "9 published bounty rates" row is
-left verbatim as a record of what that review checked, with a dated footnote pointing at F-28.
+left verbatim as a record of what that review checked, with a dated footnote pointing at F-29.
 
 ---
 
@@ -2320,8 +2320,8 @@ aborted; the work was reconciled with a single additive merge commit instead.
 **ID collision — third in this project.** Session `808a6840` had registered its own **F-27**
 (`research-hub/scripts/build.py` deletes its own output before every input is present) while this session was
 writing a different F-27 (the incomplete bounty transcription). **Both findings are kept**: this session's
-flags were renumbered to **F-28 … F-31** and `main`'s F-27 was left untouched. The merged register holds
-**31 flags, F-01 … F-31, no duplicate ids**.
+flags were renumbered to **F-29 … F-32** and `main`'s F-27 was left untouched. The merged register holds
+**31 flags, F-01 … F-32, no duplicate ids**.
 
 **Conflict resolution, file by file** (nothing from any session was discarded):
 
@@ -2331,7 +2331,7 @@ flags were renumbered to **F-28 … F-31** and `main`'s F-27 was left untouched.
 | `assets/js/data.js` | generated — taken from this branch, then **regenerated** by `tools/build_root_data.py` |
 | `summary.html` | generated — **regenerated** by `tools/build_summary.py` (it had drifted after the flag-register merge) |
 | `COORDINATION.md` | append-only log — `main`'s log kept in full, this session's two blocks re-appended verbatim at the tail |
-| `ledger/flags.json` | **union**: `main`'s F-27 + this session's F-28…F-31, sorted by id; the two `note` addenda concatenated; this session's F-16 closure carried across |
+| `ledger/flags.json` | **union**: `main`'s F-27 + this session's F-29…F-32, sorted by id; the two `note` addenda concatenated; this session's F-16 closure carried across |
 | `flagged.html` | took `main`'s version — it renders the count from JS placeholders (`flagRegisterCount` / `flagRegisterMax`) instead of typing it, which is strictly better than the number this session had just typed |
 | `EXECUTIVE_SUMMARY.md` | both addenda kept: `main`'s "Addendum 3 — T27 publication-scope reconciliation", then this session's, renamed **Addendum 4** |
 | `README.md` | link labels merged into `main`'s richer "(N, range)" form with the merged counts: 62 checks / 36 sources / 31 items |
