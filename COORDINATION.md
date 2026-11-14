@@ -888,3 +888,70 @@ round (brief, "PULL REQUEST AND MERGE"), so it is the only writer of the shared 
 | BT-4 | Close CI gaps (`pages/` links, all-namespace disclosure/price) | **done** | `bbe4ca47` | F-18 |
 | BT-5 | Correct the dashboard KPI identity claim | **done** | `bbe4ca47` | F-17 |
 | BT-6 | Integration: PR → merge → confirm Pages deploy → record | in progress | `bbe4ca47` | PR logged below |
+
+---
+
+## Session record — `82a2d436` (`arena/82a2d436-zone2`)
+
+**Branch note:** Arena pins this session to `arena/82a2d436-zone2` (not `session-<id>/<task>` naming);
+documented here as the deviation, consistent with prior sessions.
+
+### Claim (recorded 2026-11-14, before any work)
+
+> **ID note:** first recorded as T21. T21 was taken on `main` by session `dc15ce5a` (PR #26) before this claim was pushed, so this session's task is re-numbered **T22**. No other row or record was changed.
+
+Board state at claim: `main` = `76c996d` (PR #24). Open, unmerged PRs at claim: **#11** (`ec67c431`, a
+2-line COORDINATION.md edit) and **#22** (`bbe4ca47`, a second verification pass touching `.github/workflows/pages.yml`,
+root views, `ledger/`, `docs/`, `pages/`). PR #22's owning session is not on this board; its files are **not** claimed here
+and are not edited by this session.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T22 | Independent, control-based re-test of the three supplied `link.amazon` short links and their `/dp/` destinations. Resolves the open conflict between the "fallback / unrelated page" reading (F-03, F-12, AF-06, PR #22) and the "stable per-link tracked destination" reading (T20 / `c6e94e8d`, C-1…C-3). Verdict per link; no product attributes copied. | done | `82a2d436` | `docs/verification-82a2d436.md` (new), this record only |
+
+Scope excludes: `ledger/**`, `pages/**`, `revalidation/**`, root `*.html`, `research-hub/**`, `affiliate-lab/**`,
+`tools/**`, `.github/workflows/**`, `README.md`, `EXECUTIVE_SUMMARY.md`. Cross-scope corrections will be logged
+below as change requests, not edited.
+
+### T22 result — `82a2d436` (done)
+
+**Deliverable:** [`docs/verification-82a2d436.md`](docs/verification-82a2d436.md) (new file, this session's scope only).
+Method: live page fetches with the page-fetch tool on 2026-11-14 UTC (the build sandbox cannot reach `amazon.com` / `link.amazon` over `curl`: TLS `SSL_ERROR_SYSCALL`, exit 35, reproduced today).
+
+| Question | Verdict | Evidence (row in the document) |
+|---|---|---|
+| Are the three codes ASINs? | **No** — 9 chars; the official ASIN definition is 10 digits. Confirmed. | R1–R3; [GP38PJ6EUR6PFBEC](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) |
+| Does each short link resolve to one product page? | **Yes**, the same `/dp/` on both fetches this session and on the 2026-11-13 records: `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`. | R4–R6 |
+| Does the code matter? | **Yes.** A random 9-char code → 403 Forbidden (C-d); one character changed → leaves Amazon's domain for `amzlinks.in` 404 (C-e). The token is not ignored. | C-d, C-e |
+| Is `plpRedirect=mhFallback` a fallback signal? | **No.** It is appended to bare, untagged, valid `/dp/` loads (C-a…C-c). | C-a…C-c |
+| Is the `btn_ref` per-link and permanent? | **Partly.** Identical within this window (R4–R6), but **different** from the values recorded in `c6e94e8d` C-3, so it rotates between windows. "Permanent per-link token" is too strong. | §3 comparison table |
+| Is the owner's intended product confirmed? | **Unverified.** No official Amazon document found for the `link.amazon` format or code→product mapping. | §4 point 4 |
+
+**Irregularities (for review; non-blocking):**
+1. The "arbitrary fallback / token ignored" wording (F-03, F-12, AF-06, PR #22 body, T20 note) is contradicted by controls C-a…C-e. It should be reworded (CR-5).
+2. The `btn_ref` values recorded in `c6e94e8d` C-3 are not stable across windows (CR-6).
+3. `amzlinks.in` (observed for the one-character control) is a third-party host. Recorded as an observation only; not used as a source.
+4. No `tag=` appears in any resolved URL in this session (F-07 unchanged).
+5. Sandbox limit (`curl` blocked to Amazon) means the check is reproducible by a browser, not by CI.
+
+**Cross-scope change requests (not edited — owned by other sessions):**
+
+| # | File / PR | Requested change | Why |
+|---|---|---|---|
+| CR-5 | `ledger/flags.json` F-03, F-12; `affiliate-lab/` AF-06; `pages/flags.html`; open **PR #22** body and `ledger/` wording it introduces | Replace "token ignored / arbitrary fallback" with: "Each supplied code resolves to one stable product page; the `mhFallback` marker is also added to ordinary product loads; the code→product mapping is not documented by Amazon; owner to confirm intended product and Associates tag." | C-a…C-e (`docs/verification-82a2d436.md` §2.3, §4). |
+| CR-6 | `docs/revalidation-2026-11-14.md` / `revalidation/` (`c6e94e8d`) and `ledger/flags.json` F-05 | Replace "per-link permanent token" with "token stable within a window; differs between 2026-11-13 and 2026-11-14 records". | §3. |
+
+**Note on PR #22 (state per `dc15ce5a`'s record: `CONFLICTING` with `main`, last CI run failed):** this session did not edit PR #22's files. this session did not edit PR #22's files. If PR #22 merges as-is, its "fallback" wording will conflict with `docs/verification-82a2d436.md` §4; the CR-5 request above should be applied in that PR or a follow-up.
+
+### Gates run on this branch (before PR)
+
+| Gate | Result |
+|---|---|
+| `tools/validate_data.py` | exit 0 (existing I-21 title warning only) |
+| `tests/test_pipeline.py` | 11/11 |
+| `affiliate-lab/scripts/verify_site.py` | 498 links · 0 failures |
+| `tools/build_site.py --check` | no drift |
+| `research-hub/scripts/check_links.py research-hub` | 184 internal links/assets · none broken |
+| Price-like strings in `docs/verification-82a2d436.md` | none |
+
+Status: **T22 done.** Next: PR from `arena/82a2d436-zone2` → `main`, merge, Pages deploy check, record PR link here.
