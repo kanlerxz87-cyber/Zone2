@@ -71,7 +71,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
 | T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
 | T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | in progress | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
-| T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR pending — see record) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
+| T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR #42, merged 2026-11-14T18:32:45Z `6f2f92c`) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -1882,4 +1882,14 @@ Scope of this claim: the files listed in the T26 row only. The primary-site ledg
 
 ### PR and merge
 
-Recorded below after the PR is merged (see the follow-up record commit).
+| Item | Value |
+|---|---|
+| PR | #42 — https://github.com/kanlerxz87-cyber/Zone2/pull/42 — `arena/a6f70a13-zone2` → `main` |
+| Merge | `gh pr merge 42 --merge` · 2026-11-14T18:32:45Z · merge commit `6f2f92c87d6de67158cff2d0e9375d9c8f424ace` |
+| PR check (`Build and verify`) | success (run 43627138927) |
+| Post-merge `main` | `Build, verify and deploy` success (run 43627195226) · `pages build and deployment` success (run 43627194217) |
+| Pages API | `status: built`, source `main` `/`, `https://kanlerxz87-cyber.github.io/Zone2/` |
+| Live read (fetched 2026-11-14, `?v=6f2f92c`) | `research-hub/overview.html` title "three resolved Amazon listings" and the F-03 scope note; `research-hub/summary.html` carries the superseded-mapping correction block; root `index.html` KPI reads "Shared category … — not a validated niche" |
+| T26 | **done** |
+
+**Left open, on purpose, and published for owner review:** AUD-05 (affiliate-lab row check does not test source support); the brief-to-product mapping (F-03, owner action O-1: confirm intended ASINs and Associates tag). Also noted but not changed: the docs executive-summary header still reads "Data captured: 2026-11-13" and "Branch: arena/6602723a-zone2" (it is a historical capture header).
