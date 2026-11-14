@@ -1144,6 +1144,39 @@ closes — using the manufacturer-verified facts that already exist, with zero n
 except this board (append-only).
 
 
+## Session record — `a133aa61` (`arena/a133aa61-zone2`) — final integration
+
+**Branch note:** Arena pins this session to `arena/a133aa61-zone2` (not `session-<id>/<task>` naming);
+recorded here as the deviation, consistent with every prior session.
+
+### Claim (recorded 2026-11-14T10:10Z)
+
+Board state at claim: `main` = `76c996d` (merge of PR #24). Tasks T1–T20 are `done`. One PR was still
+**open** — **#22** (`arena/bbe4ca47-zone2`, head `048469c`) — with its last CI run red on the
+*Internal links* step. No other session had an unexpired claim.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T21 | Final integration + independent live re-verification: adopt and repair open PR #22, re-verify the three supplied links and the program facts **with live network access** (which earlier sessions did not have), correct the remaining stale "unrelated/fallback" statements in the companion views, add dated verification rows, publish, PR, merge, confirm the deploy | in progress | `a133aa61` | `COORDINATION.md`, `docs/`, `ledger/**`, root `*.html`, `pages/**`, `research-hub/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**`, `.github/workflows/pages.yml` |
+
+**Why this session takes the shared scope.** Every prior owning session (`6b8bb130`, `6602723a`,
+`34836ddd`, `78c94859`, `f786c0d7`, `181863ad`, `c6e94e8d`, `bbe4ca47`) has merged or is being adopted
+here, and the brief reserves shared outputs — the table data, `index`, navigation and the final publish —
+to the integration session. PR #22's author session `bbe4ca47` is still the owner of its own branch; this
+session **does not close it silently** — it merges it into the integration branch, keeps every commit and
+records the merge (see the handoff log below).
+
+### Handoff / adoption log
+
+- **2026-11-14T10:08Z — PR #22 adopted, not discarded.** `git merge pr22` into `arena/a133aa61-zone2`.
+  One conflict, `EXECUTIVE_SUMMARY.md` (content conflict only; both sides had rewritten the correction
+  note). Resolved in favour of PR #22's text, which is the newer and more complete wording; the
+  `main`-side sentence it replaced was duplicated elsewhere in the same file and is preserved in §1.
+  No other session's file, row or conclusion was removed.
+- **2026-11-14T10:06Z — PR #22's red CI is a *stale-sha* artefact, not a defect.** Run
+  `43583286275` failed the link step on commit `2073807`. Commit `048469c` (its own follow-up,
+  "replace list-minus-set with a filter") fixes exactly that `TypeError`. Replaying the committed
+  workflow step locally on `048469c` returns **LINKS OK**. No CI run exists for `048469c` yet.
 
 ## Session `arena/bbe4ca47-zone2` — PR #22 **merged** and Pages deploy confirmed (2026-11-14, UTC)
 
@@ -1280,3 +1313,112 @@ That session has since merged its own work (PR #28) independently; the two chang
 except this board.
 
 **Live entry point:** https://kanlerxz87-cyber.github.io/Zone2/marketing/
+
+---
+
+## Session record — `arena/4338f55e-zone2` (T23 — final integration, continued)
+
+**Branch:** `arena/4338f55e-zone2`. **Claimed scope (board row T23):** `COORDINATION.md`, `ledger/**`,
+`assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`,
+`affiliate-lab/**`, `.github/workflows/pages.yml`, plus the generated namespaces (`pages/**`,
+`research-hub/**`) to the extent the final reconciliation required.
+
+### The reading this session published
+
+> **3 of 3 observed short-link destinations identified through official Amazon redirects; submitted
+> tokens are not ASINs; intended-product identity remains unconfirmed; destination specifications are
+> attributed to observed destinations.**
+
+The decisive evidence is the **unknown-code control** (`ledger/sources.json` S32,
+`https://link.amazon/B00TEST12`): a 9-character code that was never published returns Amazon's
+"You've clicked on an invalid URL" 404 instead of a product, so the service *looks the code up* — the
+three supplied codes are honoured lookups, not ignored tokens. What is **not** established is the
+*contract*: no public Amazon document binds a `link.amazon` code to a product, so every page now says
+"the product this link resolves to" and never "the product the brief named" (flag F-03).
+
+### Identifier collision between two concurrent final-integration sessions
+
+Session `a133aa61` (PR #32) and this session both extended the same ledger and **reused the same
+ids** for different findings. Both sets of work is preserved; the ids already published in this
+repository were kept and the incoming ones were renumbered. The reconciliation is reproducible via
+`tools/merge_ledger_2026_11_14.py`.
+
+| Collision | `a133aa61`'s id | This session's id | Resolution |
+|---|---|---|---|
+| Flag — `btn_ref` rotates between days | F-20 | F-21 | **Merged into F-21**, with `a133aa61`'s live-observed `srctok` values added to the detail, impact and action. One finding, one id. |
+| Flag — R-09 compliance correction (solicited email/SMS is permitted) | F-21 | — | Published as **F-25**. |
+| Flag — decisive unknown-code control | — | F-20 | Kept as **F-20**. |
+| Sources — four Associates program pages re-read live | S28–S31 | — | Kept as **S28–S31** (verification rows V-33…V-50 already cite them). |
+| Sources — unknown-code control + the three supplied short links | — | S28–S31 | Renumbered to **S32–S35**; every reference rewritten. |
+
+Register after reconciliation: **35 sources**, **25 flags**, **50 verification rows**, **20 compliance
+rules**, **3 products**, **10 evidence observations**, **37 sourced specification rows**.
+
+### Root dataset is now generated from the ledger (not hand-maintained)
+
+The root dashboard and the generated `pages/` namespace were two hand-maintained copies of the same
+data — which is how the repository came to publish two contradictory readings of the same evidence.
+`tools/build_root_data.py` now projects `ledger/*.json` into the generated blocks of
+`assets/js/data.js` (`PRODUCTS`, `SPECS`, `RESOLUTION_EVIDENCE`, `FLAGGED_ROWS`), and
+`assets/js/app.js` renders the canonical model:
+
+1. the token **as supplied** (9 chars, `/dp/` → Page Not Found) — no attribute may be stated;
+2. what the link **resolves to** (the observed destination listing);
+3. the **37 sourced specification rows**, with conflicts shown as conflicts and blanks shown as blanks;
+4. the **10 resolution observations**, including the control;
+5. the **25 flags**, each linked to its full finding and its sources.
+
+`python3 tools/build_root_data.py --check` fails if the committed file drifts from the ledger.
+
+### Per-surface reconciliation
+
+| Surface | What changed |
+|---|---|
+| `index.html` | Rewritten dashboard: "3 of 3" destinations observed **and** "0 of 3" brief mappings confirmed (F-03), so the two facts cannot be confused. Both facts stated side by side. |
+| `products.html` | Split into four sourced tables: the codes as supplied, the resolved destinations, the 37 specifications, the resolution evidence. The supplied short link is now **cited, not embedded** as a purchase link (Program Policies treat an intermediate redirect as a disqualifying link — new compliance row added). |
+| `content.html` | The generator is marked **Blocked** for the three entries, with the reason (destinations verified, mapping not documented) instead of "Ready". |
+| `tracking.html` | Records that the three supplied links carry no Associates `tag` (F-24), so as supplied they cannot attribute a sale. |
+| `flagged.html` | Generated from the ledger, so it cannot drift from `pages/flags.html`. Now lists **25** flags. |
+| `analysis.html`, `compliance.html`, `404.html` | Navigation aligned; compliance rows extended with the redirecting-link rule. |
+| `pages/**` (37 pages) | Rebuilt from the merged ledger; brand reconciled from "Northstar" (the name of the *preserved prototype* at `northstar/`) to **Zone2**, the name of the published site. |
+| `research-hub/` | `summary.html` and `start.html` now carry the scope note: the three ASINs are the destinations the supplied links resolve to; the brief mapping is not confirmed (F-03). |
+| `affiliate-lab/` | Row B9 of the verification table corrected (it still read "No — mhFallback"); the unknown-code control added as row B9c; the executive-summary bullet corrected. |
+| `revalidation/` | The `btn_ref` finding's canonical flag reference updated from F-20 to **F-21**; pages rebuilt. |
+| `marketing/` | Carried in unchanged from PR #30; its verifier passes. |
+| `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/repo-review.md` | Flag references corrected to the merged numbering; the withdrawn "fallback" reading is stated as history, not as a finding. |
+
+### Merge-conflict record (required by the instruction)
+
+| Conflict | Resolution |
+|---|---|
+| `COORDINATION.md` (merge of `origin/main`) | **Append-only.** `main`'s board and every session record kept verbatim; this session's record appended. No session id was dropped. |
+| `COORDINATION.md`, `ledger/*.json`, `pages/**`, `assets/js/data.js`, `index.html`, `flagged.html`, `sources.html` (merge of PR #32) | `COORDINATION.md` resolved **append-only**. The ledger was reconciled field by field by `tools/merge_ledger_2026_11_14.py` (see the collision table above). `pages/**`, `sources.html`, `verification.html` and the generated blocks of `assets/js/data.js` were **rebuilt from the ledger**, never hand-merged. `index.html` and `flagged.html` were taken from this session and then reconciled with `a133aa61`'s verified corrections, which are preserved (live re-read of every official page, V-33…V-50, the R-09 correction). |
+| `pages/verification.html` | Regenerated from `ledger/verification.json` (the auto-merge conflicted only because both sides had rebuilt it). |
+
+### Gates run on the merged tree
+
+| Gate | Result |
+|---|---|
+| `tools/build_site.py --check` | 37 built, 0 drifted |
+| `tools/build_root_views.py --check` | 0 drifted |
+| `tools/build_root_data.py --check` | `assets/js/data.js` up to date |
+| `tools/validate_data.py` | exit 0 — 0 errors, 171 rows, 35 sources; 1 pre-existing warning (F-13 `research-hub/compliance.html` title) |
+| `tests/test_pipeline.py` | 11/11 |
+| `revalidation/scripts/build.py --check` / `verify.py` | 6 pages, 73 rows, 168 refs, 0 failures |
+| `affiliate-lab/scripts/verify_site.py` | 10 pages, 206 rows, 502 links, 0 failures |
+| `tools/build_marketing.py --check` / `marketing/scripts/verify_marketing.py` | 9 pages · 48 spec rows · 0 failures |
+| Internal link + asset resolution (all 6 namespaces, root, `pages/`, `marketing/`) | all resolve |
+| Disclosure + no-product-price sweep | 94 pages, 0 problems |
+| `pages/` sponsored-link qualification | 37 subpages, 0 problems |
+| `node --check assets/js/data.js assets/js/app.js` | syntax OK |
+
+### Owner actions that remain (flagged, not blocking)
+
+1. **F-03 — confirm the brief mapping.** The three destinations are verified; the mapping from the
+   brief to them is not documented by Amazon. Owner confirmation in Associates Central closes it.
+2. **F-24 — supply tagged links.** No Associates ID exists anywhere in the repository, so as supplied
+   the three links cannot attribute a sale. Every product link emitted by the platform is therefore a
+   labelled, non-earning preview link.
+3. **F-25 — optional.** Document an opt-in process before enabling any email/SMS channel.
+
+None of these block the site; all three are published on the Flagged for Review page with sources.

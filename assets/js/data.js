@@ -218,9 +218,9 @@ const SPECS = [
     attribute: "UPC",
     value: "",
     status: "unverified",
-    source: "",
-    sourceLabel: "The Amazon Item details block for this ASIN was not captured in this verification pass; no UPC is stated, so none is published.",
-    sourceIds: [],
+    source: "https://www.amazon.com/dp/B0CDY277D3",
+    sourceLabel: "Amazon product page (Item details block) and the Chefman official product page — neither states a UPC for this model",
+    sourceIds: ["S19", "S25"],
   },
   // p02 — Emeril Lagasse B09B7SB46R (resolved from B02NbDxp3)
   {
@@ -336,9 +336,9 @@ const SPECS = [
     attribute: "Item weight",
     value: "",
     status: "unverified",
-    source: "",
-    sourceLabel: "Neither the Amazon product-information block nor the Emeril Everyday page states an item weight for this product; none is published.",
-    sourceIds: [],
+    source: "https://www.amazon.com/dp/B09B7SB46R",
+    sourceLabel: "Amazon product-information block and the Emeril Everyday official store page — neither states an item weight for this model",
+    sourceIds: ["S20", "S27"],
   },
   // p03 — Chefman B08DKYBTPH (resolved from B00hJ57DV)
   {
@@ -458,7 +458,7 @@ const RESOLUTION_EVIDENCE = [
   {
     id: "E-01",
     observation: "GET https://link.amazon/B04G1MEwY ended at https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-...&channelId=704&plpRedirect=mhFallback (page title observed: CHEFMAN 6 Quart Dual Basket Air Fryer Oven ...)",
-    interpretation: "The destination is a specific product and it is stable for this token — but three different tokens landing on three different products is NOT by itself evidence of a mapping. The decisive control is E-06.",
+    interpretation: "Destination of the supplied link: one live CHEFMAN 6 Qt Dual Basket listing. Stable across re-fetches; not bound to the code by any public Amazon document (F-03, F-20).",
     status: "OBSERVED",
     source: "https://www.amazon.com/dp/B0CDY277D3",
     sourceIds: ["S19"],
@@ -466,7 +466,7 @@ const RESOLUTION_EVIDENCE = [
   {
     id: "E-02",
     observation: "GET https://link.amazon/B02NbDxp3 ended at https://www.amazon.com/dp/B09B7SB46R?...plpRedirect=mhFallback (page title observed: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven ...)",
-    interpretation: "Second distinct destination, second distinct per-link btn_ref token (srctok-534f5e7952f396b2 at the time of that fetch). Distinctness across tokens, not randomness within a token.",
+    interpretation: "Destination of the supplied link: one live Emeril Lagasse 26QT French Door listing (same ASIN on every re-fetch).",
     status: "OBSERVED",
     source: "https://www.amazon.com/dp/B09B7SB46R",
     sourceIds: ["S20"],
@@ -474,7 +474,7 @@ const RESOLUTION_EVIDENCE = [
   {
     id: "E-03",
     observation: "GET https://link.amazon/B00hJ57DV ended at https://www.amazon.com/dp/B08DKYBTPH?...plpRedirect=mhFallback (page title observed: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 ...)",
-    interpretation: "Third distinct destination, third distinct per-link btn_ref token (srctok-76c3adaeb8708b44 at the time of that fetch).",
+    interpretation: "Destination of the supplied link: one live Chefman 8 Qt TurboFry listing (same ASIN on every re-fetch).",
     status: "OBSERVED",
     source: "https://www.amazon.com/dp/B08DKYBTPH",
     sourceIds: ["S21"],
@@ -501,7 +501,7 @@ const RESOLUTION_EVIDENCE = [
     interpretation: "DECISIVE. The service looks the code up: an unknown code returns a 404 instead of an arbitrary product. The three supplied codes therefore ARE honoured lookups, and the earlier reading that the token was ignored and the destination arbitrary (flag F-03) is falsified. What is still unconfirmed is the *contract* — Amazon publishes no document binding a link.amazon code to a product — not the behaviour.",
     status: "OBSERVED",
     source: "https://link.amazon/B00TEST12",
-    sourceIds: ["S28", "S19", "S20", "S21"],
+    sourceIds: ["S32", "S19", "S20", "S21"],
   },
   {
     id: "E-07",
@@ -771,6 +771,13 @@ const COMPLIANCE_ROWS = [
     ref: "Commission Income Statement §2(c); Participation §6(f)",
   },
   {
+    requirement: "No redirecting (shortener) links to the Amazon Site",
+    detail:
+      "A link that takes the customer to another page before the Amazon page is a Redirecting Link, and the purchase may not qualify. The three supplied link.amazon short links are therefore cited as evidence but are never embedded as a purchase link; only the canonical /dp/ destination is linked.",
+    source: ASIN_SOURCE.policies,
+    ref: "Commission Income Statement §2(e); Participation Requirements §2(b)",
+  },
+  {
     requirement: "No artificial traffic",
     detail:
       "Must not artificially generate clicks or impressions, or create Sessions via robots or software",
@@ -931,7 +938,7 @@ const FLAGGED_ROWS = [
     ledgerFlag: "F-03",
     ledgerUrl: "pages/flags.html#F-03",
     source: "https://link.amazon/B00TEST12",
-    sourceIds: ["S28", "S19", "S20", "S21", "S24"],
+    sourceIds: ["S32", "S19", "S20", "S21", "S24"],
   },
   {
     item: "F-04 — link.amazon is not the documented public Associates short-link domain",
@@ -964,7 +971,7 @@ const FLAGGED_ROWS = [
     ledgerFlag: "F-06",
     ledgerUrl: "pages/flags.html#F-06",
     source: "https://link.amazon/B00TEST12",
-    sourceIds: ["S28", "S19", "S20", "S21"],
+    sourceIds: ["S32", "S19", "S20", "S21"],
   },
   {
     item: "F-07 — No Associates account, marketplace, tracking ID, or tag supplied",
@@ -1118,18 +1125,18 @@ const FLAGGED_ROWS = [
     ledgerFlag: "F-20",
     ledgerUrl: "pages/flags.html#F-20",
     source: "https://link.amazon/B00TEST12",
-    sourceIds: ["S28", "S19", "S20", "S21"],
+    sourceIds: ["S32", "S19", "S20", "S21"],
   },
   {
-    item: "F-21 — The btn_ref source token rotates over time; the destination does not",
-    detail: "Measured 2026-11-14 by session 4338f55e. link.amazon/B04G1MEwY carried btn_ref=srctok-1e229870efde5acf earlier the same day (recorded by session c6e94e8d) and btn_ref=srctok-1f979f303a4b5691 at about 10:04 UTC, while the destination stayed /dp/B0CDY277D3 on every fetch. A direct, untagged load of /dp/B08DKYBTPH carries no btn_ref at all. The three supplied links' tokens are distinct from one another (1f979f303a4b5691 / 0cd8be3c7e2e0de3 / 7c59360cbbbd59b7) and all three carry channelId=704.",
+    item: "F-21 — The link-rewrite token (btn_ref) rotates between days while the destination ASIN does not — so the token is not a usable identity marker",
+    detail: "Measured 2026-11-14 by session 4338f55e. link.amazon/B04G1MEwY carried btn_ref=srctok-1e229870efde5acf earlier the same day (recorded by session c6e94e8d) and btn_ref=srctok-1f979f303a4b5691 at about 10:04 UTC, while the destination stayed /dp/B0CDY277D3 on every fetch. A direct, untagged load of /dp/B08DKYBTPH carries no btn_ref at all. The three supplied links' tokens are distinct from one another (1f979f303a4b5691 / 0cd8be3c7e2e0de3 / 7c59360cbbbd59b7) and all three carry channelId=704. Independent live re-fetch on 2026-11-14 by session a133aa61 recorded the same three destinations with different per-link tokens: link.amazon/B04G1MEwY carried btn_ref=srctok-1f979f303a4b5691 (earlier sessions recorded srctok-1e229870efde5acf), B02NbDxp3 carried srctok-0cd8be3c7e2e0de3 (earlier srctok-534f5e7952f396b2), and B00hJ57DV carried srctok-7c59360cbbbd59b7 (earlier srctok-76c3adaeb8708b44). Within a single day the token is stable; across days it is not.",
     severity: "low",
-    impact: "Two published statements were each half-wrong: 'a different btn_ref on re-fetch proves the destination shuffles' (F-05, F-12 — withdrawn) and 'an identical btn_ref proves the token is permanent' (revalidation C-2 — overstated). The correct statement is that the source token is per-link and time-scoped, and the destination is stable. Anyone auditing this repository by re-fetching a link tomorrow should expect a different srctok and the same product.",
-    actionRequired: "None — published so the wording is not misread as a guarantee of permanence in either direction.",
+    impact: "Two published statements were each half-wrong: 'a different btn_ref on re-fetch proves the destination shuffles' (F-05, F-12 — withdrawn) and 'an identical btn_ref proves the token is permanent' (revalidation C-2 — overstated). The correct statement is that the source token is per-link and time-scoped, and the destination is stable. Anyone auditing this repository by re-fetching a link tomorrow should expect a different srctok and the same product. The ASIN, the page body and the channelId=704 parameter all reproduce across sessions and across days, so the destination findings stand; only the token's stability claim does not. Read btn_ref as evidence of a live redirect, never as an identifier.",
+    actionRequired: "None — published so the wording is not misread as a guarantee of permanence in either direction. Do not use the btn_ref value as a stable identifier for anything. Confirm the three destinations in Associates Central and regenerate the links with the Associates tag.",
     ledgerFlag: "F-21",
     ledgerUrl: "pages/flags.html#F-21",
-    source: "https://www.amazon.com/dp/B0CDY277D3",
-    sourceIds: ["S19", "S20", "S21"],
+    source: "https://www.amazon.com/dp/B04G1MEwY",
+    sourceIds: ["S16", "S19", "S20", "S21"],
   },
   {
     item: "F-22 — The Amazon title for B08DKYBTPH says '450°F Hi-Fry', but that same page's bullet list and specification block — and the manufacturer — say 200–400 °F",
@@ -1163,6 +1170,17 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-24",
     source: "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
     sourceIds: ["S24", "S19", "S20", "S21"],
+  },
+  {
+    item: "F-25 — Compliance row R-09 corrected: solicited email/SMS is permitted by the Program Policies, so the repo's web-only default is now labelled self-imposed",
+    detail: "Re-read live on 2026-11-14. Participation Requirements (legacy page) Requirement 6 lists offline, email, SMS, MMS and print as examples of promotional activity that is not expressly permitted. Program Policies, Participation Requirements §4, states the same restriction and then expressly permits Special Links in emails, SMS and direct messaging from your social media Sites provided the communications are solicited (opted into by the recipient). An earlier revision of R-09 restated that permission as a flat prohibition.",
+    severity: "low",
+    impact: "No published claim depended on it, and the repository's control was already stricter than the policy. The row now states the requirement accurately and labels the web-only restriction as this project's own default.",
+    actionRequired: "None. Optionally document an opt-in process before enabling an email/SMS channel.",
+    ledgerFlag: "F-25",
+    ledgerUrl: "pages/flags.html#F-25",
+    source: "https://affiliate-program.amazon.com/help/operating/participation/",
+    sourceIds: ["S03", "S29"],
   },
 ];
 /* END GENERATED: flags */

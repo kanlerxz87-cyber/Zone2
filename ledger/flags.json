@@ -1,5 +1,5 @@
 {
-  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links.",
+  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings.",
   "as_of": "2026-11-14",
   "flags": [
     {
@@ -38,7 +38,7 @@
       "impact": "The three products can be named and marketed as the destinations the supplied links resolve to, which is what this site now publishes. They cannot be claimed as 'the products named in the brief' until the owner confirms the mapping in Associates Central.",
       "action_required": "Owner: confirm in Associates Central that these three destinations are the items to market, and supply links carrying the Associates tag (F-24).",
       "source_ids": [
-        "S28",
+        "S32",
         "S19",
         "S20",
         "S21",
@@ -81,7 +81,7 @@
       "impact": "No published article, comparison or buying guide names these three products yet. Every other part of the platform (policy engine, rate data, scoring, tracking schema, templates, deploy) is delivered and gated.",
       "action_required": "Confirm the mapping and supply tagged links; the pipeline then publishes verified-only copy without any other change.",
       "source_ids": [
-        "S28",
+        "S32",
         "S19",
         "S20",
         "S21"
@@ -264,7 +264,7 @@
       "impact": "This is the single finding that decides the disagreement between five earlier sessions. It moves the three products from 'evidence only' to 'the observed, reproducible destination of each supplied link' — while leaving the documentation gap (F-04, F-03) exactly as it was.",
       "action_required": "None for the owner to unblock. Recorded so the reviewer can see the control and repeat it: open https://link.amazon/B00TEST12 in a browser.",
       "source_ids": [
-        "S28",
+        "S32",
         "S19",
         "S20",
         "S21"
@@ -274,11 +274,12 @@
     {
       "id": "F-21",
       "severity": "low",
-      "title": "The btn_ref source token rotates over time; the destination does not",
-      "detail": "Measured 2026-11-14 by session 4338f55e. link.amazon/B04G1MEwY carried btn_ref=srctok-1e229870efde5acf earlier the same day (recorded by session c6e94e8d) and btn_ref=srctok-1f979f303a4b5691 at about 10:04 UTC, while the destination stayed /dp/B0CDY277D3 on every fetch. A direct, untagged load of /dp/B08DKYBTPH carries no btn_ref at all. The three supplied links' tokens are distinct from one another (1f979f303a4b5691 / 0cd8be3c7e2e0de3 / 7c59360cbbbd59b7) and all three carry channelId=704.",
-      "impact": "Two published statements were each half-wrong: 'a different btn_ref on re-fetch proves the destination shuffles' (F-05, F-12 — withdrawn) and 'an identical btn_ref proves the token is permanent' (revalidation C-2 — overstated). The correct statement is that the source token is per-link and time-scoped, and the destination is stable. Anyone auditing this repository by re-fetching a link tomorrow should expect a different srctok and the same product.",
-      "action_required": "None — published so the wording is not misread as a guarantee of permanence in either direction.",
+      "title": "The link-rewrite token (btn_ref) rotates between days while the destination ASIN does not — so the token is not a usable identity marker",
+      "detail": "Measured 2026-11-14 by session 4338f55e. link.amazon/B04G1MEwY carried btn_ref=srctok-1e229870efde5acf earlier the same day (recorded by session c6e94e8d) and btn_ref=srctok-1f979f303a4b5691 at about 10:04 UTC, while the destination stayed /dp/B0CDY277D3 on every fetch. A direct, untagged load of /dp/B08DKYBTPH carries no btn_ref at all. The three supplied links' tokens are distinct from one another (1f979f303a4b5691 / 0cd8be3c7e2e0de3 / 7c59360cbbbd59b7) and all three carry channelId=704. Independent live re-fetch on 2026-11-14 by session a133aa61 recorded the same three destinations with different per-link tokens: link.amazon/B04G1MEwY carried btn_ref=srctok-1f979f303a4b5691 (earlier sessions recorded srctok-1e229870efde5acf), B02NbDxp3 carried srctok-0cd8be3c7e2e0de3 (earlier srctok-534f5e7952f396b2), and B00hJ57DV carried srctok-7c59360cbbbd59b7 (earlier srctok-76c3adaeb8708b44). Within a single day the token is stable; across days it is not.",
+      "impact": "Two published statements were each half-wrong: 'a different btn_ref on re-fetch proves the destination shuffles' (F-05, F-12 — withdrawn) and 'an identical btn_ref proves the token is permanent' (revalidation C-2 — overstated). The correct statement is that the source token is per-link and time-scoped, and the destination is stable. Anyone auditing this repository by re-fetching a link tomorrow should expect a different srctok and the same product. The ASIN, the page body and the channelId=704 parameter all reproduce across sessions and across days, so the destination findings stand; only the token's stability claim does not. Read btn_ref as evidence of a live redirect, never as an identifier.",
+      "action_required": "None — published so the wording is not misread as a guarantee of permanence in either direction. Do not use the btn_ref value as a stable identifier for anything. Confirm the three destinations in Associates Central and regenerate the links with the Associates tag.",
       "source_ids": [
+        "S16",
         "S19",
         "S20",
         "S21"
@@ -326,6 +327,21 @@
         "S21"
       ],
       "owner": "user"
+    },
+    {
+      "id": "F-25",
+      "severity": "low",
+      "owner": "done",
+      "title": "Compliance row R-09 corrected: solicited email/SMS is permitted by the Program Policies, so the repo's web-only default is now labelled self-imposed",
+      "detail": "Re-read live on 2026-11-14. Participation Requirements (legacy page) Requirement 6 lists offline, email, SMS, MMS and print as examples of promotional activity that is not expressly permitted. Program Policies, Participation Requirements §4, states the same restriction and then expressly permits Special Links in emails, SMS and direct messaging from your social media Sites provided the communications are solicited (opted into by the recipient). An earlier revision of R-09 restated that permission as a flat prohibition.",
+      "impact": "No published claim depended on it, and the repository's control was already stricter than the policy. The row now states the requirement accurately and labels the web-only restriction as this project's own default.",
+      "action_required": "None. Optionally document an opt-in process before enabling an email/SMS channel.",
+      "status": "closed",
+      "source_ids": [
+        "S03",
+        "S29"
+      ],
+      "published_on": "pages/compliance.html + pages/flags.html"
     }
   ]
 }

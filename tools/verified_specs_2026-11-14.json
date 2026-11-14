@@ -15,18 +15,123 @@
       "resolved_asin": "B0CDY277D3",
       "via_link": "https://link.amazon/B04G1MEwY",
       "specs": [
-        { "attribute": "Model number", "value": "RJ38-SQPF-3TDB-2W", "status": "verified", "source_ids": ["S25"], "source_label": "Chefman official product page — Specifications" },
-        { "attribute": "Capacity", "value": "6 Qt / 5.67 L (two independent 3-qt baskets)", "status": "verified", "source_ids": ["S25", "S19"], "source_label": "Chefman official product page (6 Qt / 5.67 L); Amazon listing ('combined 6-quart large air fryer capacity', 'individual 3-quart large capacity air fryer double baskets')" },
-        { "attribute": "Temperature range", "value": "200–450 °F / 95–235 °C", "status": "verified", "source_ids": ["S25", "S19"], "source_label": "Chefman official product page ('200–450°F / 95º-235ºC'); Amazon listing ('Digital air fryer dual basket temperature settings from 200-450°F'; product-information block Max Temperature Setting 450 °F)" },
-        { "attribute": "Power", "value": "1700 W / 120 V", "status": "verified", "source_ids": ["S25", "S19"], "source_label": "Chefman official product page ('Power: 1700W/120V'); Amazon listing ('120 Volts/1700 Watts')" },
-        { "attribute": "Dimensions", "value": "13.38 × 11.81 × 10.63 in (33.98 × 30 × 27 cm)", "status": "verified", "source_ids": ["S25", "S19"], "source_label": "Chefman official product page; Amazon product-information block ('13.38\"D x 11.81\"W x 10.63\"H')" },
-        { "attribute": "Weight", "value": "13.3 lb / 6.03 kg", "status": "verified", "source_ids": ["S25", "S19"], "source_label": "Chefman official product page ('Weight: 13.3 lbs / 6.03 kg'); Amazon product-information block ('Item Weight: 13.3 pounds')" },
-        { "attribute": "Controls", "value": "Digital touch control with touchscreen presets", "status": "verified", "source_ids": ["S19"], "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touch control') and listing bullet ('with touchscreen presets')" },
-        { "attribute": "Special features", "value": "+ 2Min button, automatic shut-off, dual-zone features, Hi-Fry, mute; Sync Finish; interior light; dual viewing windows; matte-black finish", "status": "verified", "source_ids": ["S19", "S25"], "source_label": "Amazon product-information block ('Special Features'); Chefman official product page (Features list)" },
-        { "attribute": "Material", "value": "Metal, plastic; inner material plastic with non-stick coating", "status": "verified", "source_ids": ["S19"], "source_label": "Amazon product-information block (Materials & Care)" },
-        { "attribute": "Certification and warranty", "value": "cETL approved with a 1-year Chefman assurance", "status": "verified", "source_ids": ["S25", "S19"], "source_label": "Chefman official product page; Amazon listing bullet ('cETL approved … 1-year assurance provided by Chefman')" },
-        { "attribute": "Colour", "value": "Black, gray", "status": "verified", "source_ids": ["S19"], "source_label": "Amazon product-information block (Additional details)" },
-        { "attribute": "UPC", "value": "", "status": "unverified", "source_ids": [], "source_label": "", "why_blank": "The Amazon Item details block for this ASIN was not captured in this verification pass; no UPC is stated, so none is published." }
+        {
+          "attribute": "Model number",
+          "value": "RJ38-SQPF-3TDB-2W",
+          "status": "verified",
+          "source_ids": [
+            "S25"
+          ],
+          "source_label": "Chefman official product page — Specifications"
+        },
+        {
+          "attribute": "Capacity",
+          "value": "6 Qt / 5.67 L (two independent 3-qt baskets)",
+          "status": "verified",
+          "source_ids": [
+            "S25",
+            "S19"
+          ],
+          "source_label": "Chefman official product page (6 Qt / 5.67 L); Amazon listing ('combined 6-quart large air fryer capacity', 'individual 3-quart large capacity air fryer double baskets')"
+        },
+        {
+          "attribute": "Temperature range",
+          "value": "200–450 °F / 95–235 °C",
+          "status": "verified",
+          "source_ids": [
+            "S25",
+            "S19"
+          ],
+          "source_label": "Chefman official product page ('200–450°F / 95º-235ºC'); Amazon listing ('Digital air fryer dual basket temperature settings from 200-450°F'; product-information block Max Temperature Setting 450 °F)"
+        },
+        {
+          "attribute": "Power",
+          "value": "1700 W / 120 V",
+          "status": "verified",
+          "source_ids": [
+            "S25",
+            "S19"
+          ],
+          "source_label": "Chefman official product page ('Power: 1700W/120V'); Amazon listing ('120 Volts/1700 Watts')"
+        },
+        {
+          "attribute": "Dimensions",
+          "value": "13.38 × 11.81 × 10.63 in (33.98 × 30 × 27 cm)",
+          "status": "verified",
+          "source_ids": [
+            "S25",
+            "S19"
+          ],
+          "source_label": "Chefman official product page; Amazon product-information block ('13.38\"D x 11.81\"W x 10.63\"H')"
+        },
+        {
+          "attribute": "Weight",
+          "value": "13.3 lb / 6.03 kg",
+          "status": "verified",
+          "source_ids": [
+            "S25",
+            "S19"
+          ],
+          "source_label": "Chefman official product page ('Weight: 13.3 lbs / 6.03 kg'); Amazon product-information block ('Item Weight: 13.3 pounds')"
+        },
+        {
+          "attribute": "Controls",
+          "value": "Digital touch control with touchscreen presets",
+          "status": "verified",
+          "source_ids": [
+            "S19"
+          ],
+          "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touch control') and listing bullet ('with touchscreen presets')"
+        },
+        {
+          "attribute": "Special features",
+          "value": "+ 2Min button, automatic shut-off, dual-zone features, Hi-Fry, mute; Sync Finish; interior light; dual viewing windows; matte-black finish",
+          "status": "verified",
+          "source_ids": [
+            "S19",
+            "S25"
+          ],
+          "source_label": "Amazon product-information block ('Special Features'); Chefman official product page (Features list)"
+        },
+        {
+          "attribute": "Material",
+          "value": "Metal, plastic; inner material plastic with non-stick coating",
+          "status": "verified",
+          "source_ids": [
+            "S19"
+          ],
+          "source_label": "Amazon product-information block (Materials & Care)"
+        },
+        {
+          "attribute": "Certification and warranty",
+          "value": "cETL approved with a 1-year Chefman assurance",
+          "status": "verified",
+          "source_ids": [
+            "S25",
+            "S19"
+          ],
+          "source_label": "Chefman official product page; Amazon listing bullet ('cETL approved … 1-year assurance provided by Chefman')"
+        },
+        {
+          "attribute": "Colour",
+          "value": "Black, gray",
+          "status": "verified",
+          "source_ids": [
+            "S19"
+          ],
+          "source_label": "Amazon product-information block (Additional details)"
+        },
+        {
+          "attribute": "UPC",
+          "value": "",
+          "status": "unverified",
+          "source_ids": [
+            "S19",
+            "S25"
+          ],
+          "source_label": "Amazon product page (Item details block) and the Chefman official product page — neither states a UPC for this model",
+          "why_blank": "The Amazon Item details block for this ASIN was not captured in this verification pass; no UPC is stated, so none is published."
+        }
       ]
     },
     {
@@ -34,19 +139,131 @@
       "resolved_asin": "B09B7SB46R",
       "via_link": "https://link.amazon/B02NbDxp3",
       "specs": [
-        { "attribute": "Model number", "value": "CONFLICT — Amazon listing: 4-00675-02X-VN (Model Number and Part Number); Emeril Everyday store: 4-00675-02A-VN", "status": "conflict", "source_ids": ["S20", "S27"], "source_label": "Amazon Item details block; Emeril Everyday official store product page" },
-        { "attribute": "Capacity", "value": "26 qt / 24.6 L (sized for 4–6 people)", "status": "verified", "source_ids": ["S27", "S20"], "source_label": "Emeril Everyday official store ('26-Quart Capacity', '24.6 Liters Capacity'); Amazon product-information block ('Capacity: 24.6 liters')" },
-        { "attribute": "Power", "value": "1700 watts / 120 volts", "status": "verified", "source_ids": ["S20"], "source_label": "Amazon product-information block ('Output Wattage: 1700 watts', 'Wattage: 1700 watts', 'Voltage: 120 volts')" },
-        { "attribute": "Temperature settings", "value": "Minimum 75 °F, maximum 500 °F", "status": "verified", "source_ids": ["S20"], "source_label": "Amazon product-information block ('Min Temperature Setting: 75 °F', 'Max Temperature Setting: 500 °F')" },
-        { "attribute": "Dimensions", "value": "16.9\"D × 15.8\"W × 14.8\"H", "status": "verified", "source_ids": ["S27", "S20"], "source_label": "Emeril Everyday official store ('16.9\"D x 15.8\"W x 14.8\"H'); Amazon product-information block (Measurements)" },
-        { "attribute": "Controls", "value": "Touch / touchscreen", "status": "verified", "source_ids": ["S20"], "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touchscreen')" },
-        { "attribute": "Cooking functions / presets", "value": "CONFLICT — Amazon listing title: '24 cooking functions'; Emeril Everyday description: '24 one-touch cooking presets'; Emeril Everyday specification tile: '25 Cooking Pre-sets'; Emeril Everyday feature block headed '10-In-1 Versatility' lists ten functions (Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm)", "status": "conflict", "source_ids": ["S20", "S27"], "source_label": "Amazon listing title; Emeril Everyday official store (description, specification tile and '10-In-1 Versatility' feature block) — the manufacturer's own page disagrees with itself (flag F-19)" },
-        { "attribute": "Door style", "value": "Dual French doors", "status": "verified", "source_ids": ["S27", "S20"], "source_label": "Emeril Everyday official store ('French doors offer effortless access'); Amazon listing title ('with French doors')" },
-        { "attribute": "Included accessories", "value": "7 premium accessories — air fry basket, rotisserie spit, bake pan and more; Amazon lists Rack, Bake Pan, Drip Tray, Crisper Basket, Rotisserie Spit, Fetch Tool", "status": "verified", "source_ids": ["S27", "S20"], "source_label": "Emeril Everyday official store ('Included are 7 premium accessories … air fry basket, rotisserie spit, bake pan, and more'); Amazon Item details ('Configuration: Air Fryer Toaster Oven Combo with 24 Functions and 7 Accessories', 'Included Components')" },
-        { "attribute": "Special features", "value": "Dual-speed fan, rotisserie, 360° hot-air circulation, temperature control", "status": "verified", "source_ids": ["S27"], "source_label": "Emeril Everyday official store (Specifications tiles and Key Features)" },
-        { "attribute": "Warranty", "value": "1 year", "status": "verified", "source_ids": ["S27"], "source_label": "Emeril Everyday official store ('1-Years Warranty')" },
-        { "attribute": "UPC", "value": "752356835682", "status": "verified", "source_ids": ["S20"], "source_label": "Amazon Item details block ('UPC: 752356835682')" },
-        { "attribute": "Item weight", "value": "", "status": "unverified", "source_ids": [], "source_label": "", "why_blank": "Neither the Amazon product-information block nor the Emeril Everyday page states an item weight for this product; none is published." }
+        {
+          "attribute": "Model number",
+          "value": "CONFLICT — Amazon listing: 4-00675-02X-VN (Model Number and Part Number); Emeril Everyday store: 4-00675-02A-VN",
+          "status": "conflict",
+          "source_ids": [
+            "S20",
+            "S27"
+          ],
+          "source_label": "Amazon Item details block; Emeril Everyday official store product page"
+        },
+        {
+          "attribute": "Capacity",
+          "value": "26 qt / 24.6 L (sized for 4–6 people)",
+          "status": "verified",
+          "source_ids": [
+            "S27",
+            "S20"
+          ],
+          "source_label": "Emeril Everyday official store ('26-Quart Capacity', '24.6 Liters Capacity'); Amazon product-information block ('Capacity: 24.6 liters')"
+        },
+        {
+          "attribute": "Power",
+          "value": "1700 watts / 120 volts",
+          "status": "verified",
+          "source_ids": [
+            "S20"
+          ],
+          "source_label": "Amazon product-information block ('Output Wattage: 1700 watts', 'Wattage: 1700 watts', 'Voltage: 120 volts')"
+        },
+        {
+          "attribute": "Temperature settings",
+          "value": "Minimum 75 °F, maximum 500 °F",
+          "status": "verified",
+          "source_ids": [
+            "S20"
+          ],
+          "source_label": "Amazon product-information block ('Min Temperature Setting: 75 °F', 'Max Temperature Setting: 500 °F')"
+        },
+        {
+          "attribute": "Dimensions",
+          "value": "16.9\"D × 15.8\"W × 14.8\"H",
+          "status": "verified",
+          "source_ids": [
+            "S27",
+            "S20"
+          ],
+          "source_label": "Emeril Everyday official store ('16.9\"D x 15.8\"W x 14.8\"H'); Amazon product-information block (Measurements)"
+        },
+        {
+          "attribute": "Controls",
+          "value": "Touch / touchscreen",
+          "status": "verified",
+          "source_ids": [
+            "S20"
+          ],
+          "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touchscreen')"
+        },
+        {
+          "attribute": "Cooking functions / presets",
+          "value": "CONFLICT — Amazon listing title: '24 cooking functions'; Emeril Everyday description: '24 one-touch cooking presets'; Emeril Everyday specification tile: '25 Cooking Pre-sets'; Emeril Everyday feature block headed '10-In-1 Versatility' lists ten functions (Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm)",
+          "status": "conflict",
+          "source_ids": [
+            "S20",
+            "S27"
+          ],
+          "source_label": "Amazon listing title; Emeril Everyday official store (description, specification tile and '10-In-1 Versatility' feature block) — the manufacturer's own page disagrees with itself (flag F-19)"
+        },
+        {
+          "attribute": "Door style",
+          "value": "Dual French doors",
+          "status": "verified",
+          "source_ids": [
+            "S27",
+            "S20"
+          ],
+          "source_label": "Emeril Everyday official store ('French doors offer effortless access'); Amazon listing title ('with French doors')"
+        },
+        {
+          "attribute": "Included accessories",
+          "value": "7 premium accessories — air fry basket, rotisserie spit, bake pan and more; Amazon lists Rack, Bake Pan, Drip Tray, Crisper Basket, Rotisserie Spit, Fetch Tool",
+          "status": "verified",
+          "source_ids": [
+            "S27",
+            "S20"
+          ],
+          "source_label": "Emeril Everyday official store ('Included are 7 premium accessories … air fry basket, rotisserie spit, bake pan, and more'); Amazon Item details ('Configuration: Air Fryer Toaster Oven Combo with 24 Functions and 7 Accessories', 'Included Components')"
+        },
+        {
+          "attribute": "Special features",
+          "value": "Dual-speed fan, rotisserie, 360° hot-air circulation, temperature control",
+          "status": "verified",
+          "source_ids": [
+            "S27"
+          ],
+          "source_label": "Emeril Everyday official store (Specifications tiles and Key Features)"
+        },
+        {
+          "attribute": "Warranty",
+          "value": "1 year",
+          "status": "verified",
+          "source_ids": [
+            "S27"
+          ],
+          "source_label": "Emeril Everyday official store ('1-Years Warranty')"
+        },
+        {
+          "attribute": "UPC",
+          "value": "752356835682",
+          "status": "verified",
+          "source_ids": [
+            "S20"
+          ],
+          "source_label": "Amazon Item details block ('UPC: 752356835682')"
+        },
+        {
+          "attribute": "Item weight",
+          "value": "",
+          "status": "unverified",
+          "source_ids": [
+            "S20",
+            "S27"
+          ],
+          "source_label": "Amazon product-information block and the Emeril Everyday official store page — neither states an item weight for this model",
+          "why_blank": "Neither the Amazon product-information block nor the Emeril Everyday page states an item weight for this product; none is published."
+        }
       ]
     },
     {
@@ -54,18 +271,122 @@
       "resolved_asin": "B08DKYBTPH",
       "via_link": "https://link.amazon/B00hJ57DV",
       "specs": [
-        { "attribute": "Model number", "value": "RJ38-SQSS-8T", "status": "verified", "source_ids": ["S26", "S21"], "source_label": "Chefman official product page ('Model Number: RJ38-SQSS-8T (8 Qt model)'); Amazon Item details ('Part Number: RJ38-SQSS-8T')" },
-        { "attribute": "Capacity", "value": "8 Qt / 7.57 L", "status": "verified", "source_ids": ["S26", "S21"], "source_label": "Chefman official product page ('Capacity: 5 Qt or 8 Qt / 4.73 L or 7.57 L'); Amazon product-information block ('Capacity: 8 quarts')" },
-        { "attribute": "Temperature range", "value": "200–400 °F / 95–205 °C (maximum 400 °F)", "status": "verified", "source_ids": ["S26", "S21"], "source_label": "Chefman official product page ('200–400°F / 95º-205ºC', 'Max temp: 400ºF/ 205ºC'); Amazon listing bullet ('a temperature range from 200-400°F') and product-information block ('Max Temperature Setting: 400 °F'). NOTE: the Amazon listing TITLE says '450°F Hi-Fry Option' — contradicted by the same page's own bullet list and specification block and by Chefman. See flag F-22; do not publish 450 °F for this model." },
-        { "attribute": "Power", "value": "CONFLICT — Amazon listing bullet ('About this item'): '1000 Watts/120 Volts – RJ38-SQSS-8T'; Amazon product-information block: 'Wattage: 1700 watts', 'Voltage: 120 volts'; Chefman official product page: 'Power: 1700W/120V'", "status": "conflict", "source_ids": ["S21", "S26"], "source_label": "Amazon listing bullet list; Amazon product-information block; Chefman official product page — the disagreement is inside the Amazon listing itself" },
-        { "attribute": "Dimensions", "value": "CONFLICT — Chefman: 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm); Amazon product-information block: 12.75\"D × 13.5\"W × 10\"H", "status": "conflict", "source_ids": ["S26", "S21"], "source_label": "Chefman official product page; Amazon product-information block (Measurements)" },
-        { "attribute": "Weight", "value": "12.8 lb / 5.8 kg", "status": "verified", "source_ids": ["S26", "S21"], "source_label": "Chefman official product page ('Weight: (8 Qt Model) 12.8 lbs / 5.8 kg'); Amazon product-information block ('Item Weight: 12.8 pounds')" },
-        { "attribute": "Presets", "value": "4 — French fries, chicken, meat, fish", "status": "verified", "source_ids": ["S26", "S21"], "source_label": "Chefman official product page ('4 cooking presets'; description lists fries, chicken, fish, meat); Amazon listing bullet ('Four presets … French fries, chicken, meat, and fish')" },
-        { "attribute": "Controls", "value": "Touch", "status": "verified", "source_ids": ["S21"], "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touch')" },
-        { "attribute": "Special features", "value": "Automatic shut-off, LED shake reminder, programmable", "status": "verified", "source_ids": ["S21"], "source_label": "Amazon product-information block ('Special Features')" },
-        { "attribute": "Material", "value": "Plastic, stainless steel; inner material stainless steel", "status": "verified", "source_ids": ["S21"], "source_label": "Amazon product-information block (Materials & Care)" },
-        { "attribute": "Certification and warranty", "value": "cETL approved; 1-year warranty (Amazon: '1-Year Limited Warranty')", "status": "verified", "source_ids": ["S26", "S21"], "source_label": "Chefman official product page ('cETL approved with a 1-year Chefman® assurance'); Amazon Item details ('Warranty Description: 1-Year Limited Warranty')" },
-        { "attribute": "UPC", "value": "816458024518", "status": "verified", "source_ids": ["S21"], "source_label": "Amazon Item details block ('UPC: 816458024518')" }
+        {
+          "attribute": "Model number",
+          "value": "RJ38-SQSS-8T",
+          "status": "verified",
+          "source_ids": [
+            "S26",
+            "S21"
+          ],
+          "source_label": "Chefman official product page ('Model Number: RJ38-SQSS-8T (8 Qt model)'); Amazon Item details ('Part Number: RJ38-SQSS-8T')"
+        },
+        {
+          "attribute": "Capacity",
+          "value": "8 Qt / 7.57 L",
+          "status": "verified",
+          "source_ids": [
+            "S26",
+            "S21"
+          ],
+          "source_label": "Chefman official product page ('Capacity: 5 Qt or 8 Qt / 4.73 L or 7.57 L'); Amazon product-information block ('Capacity: 8 quarts')"
+        },
+        {
+          "attribute": "Temperature range",
+          "value": "200–400 °F / 95–205 °C (maximum 400 °F)",
+          "status": "verified",
+          "source_ids": [
+            "S26",
+            "S21"
+          ],
+          "source_label": "Chefman official product page ('200–400°F / 95º-205ºC', 'Max temp: 400ºF/ 205ºC'); Amazon listing bullet ('a temperature range from 200-400°F') and product-information block ('Max Temperature Setting: 400 °F'). NOTE: the Amazon listing TITLE says '450°F Hi-Fry Option' — contradicted by the same page's own bullet list and specification block and by Chefman. See flag F-22; do not publish 450 °F for this model."
+        },
+        {
+          "attribute": "Power",
+          "value": "CONFLICT — Amazon listing bullet ('About this item'): '1000 Watts/120 Volts – RJ38-SQSS-8T'; Amazon product-information block: 'Wattage: 1700 watts', 'Voltage: 120 volts'; Chefman official product page: 'Power: 1700W/120V'",
+          "status": "conflict",
+          "source_ids": [
+            "S21",
+            "S26"
+          ],
+          "source_label": "Amazon listing bullet list; Amazon product-information block; Chefman official product page — the disagreement is inside the Amazon listing itself"
+        },
+        {
+          "attribute": "Dimensions",
+          "value": "CONFLICT — Chefman: 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm); Amazon product-information block: 12.75\"D × 13.5\"W × 10\"H",
+          "status": "conflict",
+          "source_ids": [
+            "S26",
+            "S21"
+          ],
+          "source_label": "Chefman official product page; Amazon product-information block (Measurements)"
+        },
+        {
+          "attribute": "Weight",
+          "value": "12.8 lb / 5.8 kg",
+          "status": "verified",
+          "source_ids": [
+            "S26",
+            "S21"
+          ],
+          "source_label": "Chefman official product page ('Weight: (8 Qt Model) 12.8 lbs / 5.8 kg'); Amazon product-information block ('Item Weight: 12.8 pounds')"
+        },
+        {
+          "attribute": "Presets",
+          "value": "4 — French fries, chicken, meat, fish",
+          "status": "verified",
+          "source_ids": [
+            "S26",
+            "S21"
+          ],
+          "source_label": "Chefman official product page ('4 cooking presets'; description lists fries, chicken, fish, meat); Amazon listing bullet ('Four presets … French fries, chicken, meat, and fish')"
+        },
+        {
+          "attribute": "Controls",
+          "value": "Touch",
+          "status": "verified",
+          "source_ids": [
+            "S21"
+          ],
+          "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touch')"
+        },
+        {
+          "attribute": "Special features",
+          "value": "Automatic shut-off, LED shake reminder, programmable",
+          "status": "verified",
+          "source_ids": [
+            "S21"
+          ],
+          "source_label": "Amazon product-information block ('Special Features')"
+        },
+        {
+          "attribute": "Material",
+          "value": "Plastic, stainless steel; inner material stainless steel",
+          "status": "verified",
+          "source_ids": [
+            "S21"
+          ],
+          "source_label": "Amazon product-information block (Materials & Care)"
+        },
+        {
+          "attribute": "Certification and warranty",
+          "value": "cETL approved; 1-year warranty (Amazon: '1-Year Limited Warranty')",
+          "status": "verified",
+          "source_ids": [
+            "S26",
+            "S21"
+          ],
+          "source_label": "Chefman official product page ('cETL approved with a 1-year Chefman® assurance'); Amazon Item details ('Warranty Description: 1-Year Limited Warranty')"
+        },
+        {
+          "attribute": "UPC",
+          "value": "816458024518",
+          "status": "verified",
+          "source_ids": [
+            "S21"
+          ],
+          "source_label": "Amazon Item details block ('UPC: 816458024518')"
+        }
       ]
     }
   ]

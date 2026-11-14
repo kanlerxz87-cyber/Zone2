@@ -79,11 +79,12 @@
     {
       "id": "R-09",
       "domain": "Links",
-      "requirement": "No offline or non-permitted use of Content, Amazon marks or Special Links - explicitly including printed material, mailing, SMS, MMS, email or an attachment to an email, or oral solicitation. Amazon may require written certification of compliance; failure to certify is a material breach.",
+      "requirement": "Requirement 6 lists offline, email, SMS, MMS and printed material as examples of promotional activity that is NOT expressly permitted, and requires written certification of compliance on request. The same restriction is stated in the Program Policies (Participation Requirements §4), which then expressly permits Special Links in emails, SMS and direct messaging from your social media Sites PROVIDED the communications are solicited (opted into by the recipient) and otherwise compliant.",
       "source_id": "S03",
       "citation": "Participation Requirements, Requirement 6",
-      "implemented_control": "distribution channels in the campaign config are limited to `web` and `approved_mobile_application`; email/SMS channel enum values are absent from the schema so a scheduler cannot target them",
-      "status": "VERIFIED"
+      "implemented_control": "distribution channels in the campaign config are limited to `web` and `approved_mobile_application`; email/SMS channel enum values are absent from the schema. This is deliberately STRICTER than the policy: solicited email/SMS is permitted by Program Policies §4, but this repository's default is web-only and it has no opt-in list, so an unsolicited send could not be shown compliant. The stricter default is a project choice, not an Amazon requirement (F-25).",
+      "status": "VERIFIED",
+      "note": "Corrected 2026-11-14 (session a133aa61) after re-reading both pages live. An earlier revision had restated the policy's permission as a prohibition; that is now separated into the requirement text above and labelled as a self-imposed default in the control."
     },
     {
       "id": "R-10",

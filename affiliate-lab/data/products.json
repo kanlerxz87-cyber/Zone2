@@ -28,7 +28,7 @@
         {"url": "https://www.amazon.ca/dp/B04G1MEwY", "result": "HTTP 404 Page Not Found"},
         {"url": "https://www.amazon.co.jp/dp/B04G1MEwY", "result": "HTTP 404 Page Not Found"},
         {"url": "https://www.amazon.com/s?k=B04G1MEwY", "result": "No results for your search query"},
-        {"url": "https://link.amazon/B04G1MEwY", "result": "Redirected to unrelated page (plpRedirect=mhFallback), not a product page for this code"}
+        {"url": "https://link.amazon/B04G1MEwY", "result": "Opened ONE stable Amazon listing (same ASIN on re-fetch); the code is not a catalog identifier. The plpRedirect=mhFallback marker is also present on a bare valid-ASIN load, so it is not evidence of a fallback (corrected 2026-11-14)"}
       ]
     },
     {
@@ -56,7 +56,7 @@
         {"url": "https://www.amazon.ca/dp/B02NbDxp3", "result": "HTTP 404 Page Not Found"},
         {"url": "https://www.amazon.co.jp/dp/B02NbDxp3", "result": "HTTP 404 Page Not Found"},
         {"url": "https://www.amazon.com/s?k=B02NbDxp3", "result": "No results for your search query"},
-        {"url": "https://link.amazon/B02NbDxp3", "result": "Redirected to unrelated page (plpRedirect=mhFallback), not a product page for this code"}
+        {"url": "https://link.amazon/B02NbDxp3", "result": "Opened ONE stable Amazon listing (same ASIN on re-fetch); the code is not a catalog identifier. The plpRedirect=mhFallback marker is also present on a bare valid-ASIN load, so it is not evidence of a fallback (corrected 2026-11-14)"}
       ]
     },
     {
@@ -84,7 +84,7 @@
         {"url": "https://www.amazon.ca/dp/B00hJ57DV", "result": "HTTP 404 Page Not Found"},
         {"url": "https://www.amazon.co.jp/dp/B00hJ57DV", "result": "HTTP 404 Page Not Found"},
         {"url": "https://www.amazon.com/s?k=B00hJ57DV", "result": "No results for your search query"},
-        {"url": "https://link.amazon/B00hJ57DV", "result": "Redirected to unrelated page (plpRedirect=mhFallback), not a product page for this code"}
+        {"url": "https://link.amazon/B00hJ57DV", "result": "Opened ONE stable Amazon listing (same ASIN on re-fetch); the code is not a catalog identifier. The plpRedirect=mhFallback marker is also present on a bare valid-ASIN load, so it is not evidence of a fallback (corrected 2026-11-14)"}
       ]
     }
   ],

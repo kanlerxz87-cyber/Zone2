@@ -276,7 +276,8 @@
         '<div class="card"><h3>' + esc(p.brand) + " — " + esc(p.resolvesToAsin) + "</h3>" +
         "<p><strong>The product this link resolves to:</strong> " + esc(p.title) + "</p>" +
         "<p><strong>Provided code:</strong> " + esc(p.shortCode) + " (" + esc(p.codeLength) + " chars; an ASIN is 10, and <code>amazon.com/dp/&lt;code&gt;</code> returns " + esc(p.canonicalDpResult) + ") — " + badge("unverified") + " as a brief item, " + badge(p.identityStatus) + " as a link destination.</p>" +
-        "<p>" + link(p.resolvesToUrl, "Amazon product page") + " · " + link(p.shortLink, "Provided short link") + " · " + link(p.canonicalDpUrl, "Canonical /dp/ lookup") + "</p></div>"
+        "<p><strong>Supplied short link:</strong> <code>" + esc(p.shortLink) + "</code> — cited, not embedded as a purchase link: Amazon's Program Policies treat an intermediate redirect that forwards the customer as a disqualifying link (research-hub compliance L3), so only the canonical destination is linked.</p>" +
+        "<p>" + link(p.resolvesToUrl, "Amazon product page (canonical destination)") + " · " + link(p.canonicalDpUrl, "Canonical /dp/ lookup for the supplied code") + "</p></div>"
       );
     }).join("");
   }

@@ -25,7 +25,11 @@ PAGES = REPO / "pages"
 DATA = REPO / "ledger"
 SITE_CSS_SRC = REPO / "tools" / "pages-site.css"  # source of the subpage stylesheet
 
-SITE_NAME = "Northstar"  # never an Amazon mark - Participation Requirements rule R-11
+SITE_NAME = "Zone2"  # never an Amazon mark - Participation Requirements rule R-11
+# Final integration 2026-11-14 (session 4338f55e): the generated pages/ namespace was branded
+# "Northstar", which is the name of the *preserved earlier prototype* kept at northstar/. The
+# published site is one product, so the findings namespace now carries the same brand as the
+# primary dashboard; the prototype stays reachable at ../northstar/index.html under its own name.
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 LIVE_URL = "https://kanlerxz87-cyber.github.io/Zone2/"
 
@@ -202,7 +206,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
 <body>
 <div class="shell">
 <aside class="sidebar">
-  <a class="brand" href="{root}index.html"><span class="brand-mark">N</span><span>{esc(SITE_NAME)}<small>Affiliate intelligence</small></span></a>
+  <a class="brand" href="{root}index.html"><span class="brand-mark">Z</span><span>{esc(SITE_NAME)}<small>Affiliate intelligence</small></span></a>
   <div class="side-label">FINDINGS &amp; SUBPAGES</div>
   <nav class="nav">{"".join(items)}</nav>
   <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Verified data only</strong><small>{esc(AS_OF)} &middot; blank = unconfirmed</small></div></div>

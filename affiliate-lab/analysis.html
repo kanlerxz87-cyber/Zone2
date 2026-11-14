@@ -122,8 +122,8 @@
           </tr>
           <tr>
             <td class="num">4</td>
-            <td>Supplied <code>link.amazon/&lt;code&gt;</code> URLs fall back to unrelated Amazon pages</td>
-            <td><code>plpRedirect=mhFallback</code> observed for all three</td>
+            <td>Each supplied <code>link.amazon/&lt;code&gt;</code> URL opens one stable Amazon listing; the code does not address it directly</td>
+            <td>Same ASIN and page body on every re-fetch; <code>plpRedirect=mhFallback</code> also appears on a bare valid-ASIN load, so it is not evidence of a fallback (corrected 2026-11-14)</td>
             <td><a class="src-link" href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener">link.amazon/B04G1MEwY</a></td>
           </tr>
           <tr>

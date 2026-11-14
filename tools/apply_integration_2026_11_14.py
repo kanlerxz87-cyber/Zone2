@@ -144,7 +144,7 @@ products["evidence_observations"] = list(obs.values()) + [
             "product — not the behaviour."
         ),
         "status": "OBSERVED",
-        "source_ids": ["S28", "S19", "S20", "S21"],
+        "source_ids": ["S32", "S19", "S20", "S21"],
     },
     {
         "id": "E-07",
@@ -246,7 +246,7 @@ by_id["F-03"].update(
             "Owner: confirm in Associates Central that these three destinations are the items to market, and "
             "supply links carrying the Associates tag (F-24)."
         ),
-        "source_ids": ["S28", "S19", "S20", "S21", "S24"],
+        "source_ids": ["S32", "S19", "S20", "S21", "S24"],
         "owner": "user",
     }
 )
@@ -271,7 +271,7 @@ by_id["F-06"].update(
             "Confirm the mapping and supply tagged links; the pipeline then publishes verified-only copy "
             "without any other change."
         ),
-        "source_ids": ["S28", "S19", "S20", "S21"],
+        "source_ids": ["S32", "S19", "S20", "S21"],
         "owner": "user",
     }
 )
@@ -308,7 +308,7 @@ flags["flags"] = list(by_id.values()) + [
             "None for the owner to unblock. Recorded so the reviewer can see the control and repeat it: open "
             "https://link.amazon/B00TEST12 in a browser."
         ),
-        "source_ids": ["S28", "S19", "S20", "S21"],
+        "source_ids": ["S32", "S19", "S20", "S21"],
         "owner": "done",
     },
     {
@@ -415,7 +415,7 @@ sources["note"] += (
 existing = {s["id"] for s in sources["sources"]}
 new_sources = [
     {
-        "id": "S28",
+        "id": "S32",
         "name": "Amazon short-link service — unknown code control (9 characters, never supplied)",
         "url": "https://link.amazon/B00TEST12",
         "kind": "control",
@@ -428,7 +428,7 @@ new_sources = [
         ],
     },
     {
-        "id": "S29",
+        "id": "S33",
         "name": "Supplied affiliate short link 1 (as provided in the brief)",
         "url": "https://link.amazon/B04G1MEwY",
         "kind": "supplied",
@@ -437,7 +437,7 @@ new_sources = [
         "used_for": ["resolution of P-01 to https://www.amazon.com/dp/B0CDY277D3", "evidence E-01, E-08, E-09, E-10"],
     },
     {
-        "id": "S30",
+        "id": "S34",
         "name": "Supplied affiliate short link 2 (as provided in the brief)",
         "url": "https://link.amazon/B02NbDxp3",
         "kind": "supplied",
@@ -446,7 +446,7 @@ new_sources = [
         "used_for": ["resolution of P-02 to https://www.amazon.com/dp/B09B7SB46R", "evidence E-02, E-08, E-10"],
     },
     {
-        "id": "S31",
+        "id": "S35",
         "name": "Supplied affiliate short link 3 (as provided in the brief)",
         "url": "https://link.amazon/B00hJ57DV",
         "kind": "supplied",

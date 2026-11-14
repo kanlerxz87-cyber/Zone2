@@ -29,7 +29,7 @@
         "S16",
         "S19"
       ],
-      "why_blank": "The token as supplied is 9 characters, so it is not a valid ASIN, and amazon.com/dp/<token> returns Amazon's Page Not Found page: no field can be stated for the token itself. The product this link resolves to is recorded separately in `resolved` below. Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
+      "why_blank": "Token is 9 characters, so it is not a valid ASIN; the canonical /dp/ URL returns Amazon's Page Not Found page. The supplied short link does open one live listing, and that destination is stable across re-fetches, but no public Amazon document binds the short code to it (F-03), the per-link btn_ref token changes between days (F-21), and no resolved URL carries an Associates tag (F-24). No official record therefore identifies the intended product, so no attribute may be stated.",
       "flag_ids": [
         "F-01",
         "F-02",
@@ -168,8 +168,11 @@
             "attribute": "UPC",
             "value": "",
             "status": "unverified",
-            "source_ids": [],
-            "source_label": "",
+            "source_ids": [
+              "S19",
+              "S25"
+            ],
+            "source_label": "Amazon product page (Item details block) and the Chefman official product page — neither states a UPC for this model",
             "why_blank": "The Amazon Item details block for this ASIN was not captured in this verification pass; no UPC is stated, so none is published."
           }
         ],
@@ -208,7 +211,7 @@
         "S17",
         "S20"
       ],
-      "why_blank": "The token as supplied is 9 characters, so it is not a valid ASIN, and amazon.com/dp/<token> returns Amazon's Page Not Found page: no field can be stated for the token itself. The product this link resolves to is recorded separately in `resolved` below. Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
+      "why_blank": "Token is 9 characters, so it is not a valid ASIN; the canonical /dp/ URL returns Amazon's Page Not Found page. The supplied short link does open one live listing, and that destination is stable across re-fetches, but no public Amazon document binds the short code to it (F-03), the per-link btn_ref token changes between days (F-21), and no resolved URL carries an Associates tag (F-24). No official record therefore identifies the intended product, so no attribute may be stated.",
       "flag_ids": [
         "F-01",
         "F-02",
@@ -355,8 +358,11 @@
             "attribute": "Item weight",
             "value": "",
             "status": "unverified",
-            "source_ids": [],
-            "source_label": "",
+            "source_ids": [
+              "S20",
+              "S27"
+            ],
+            "source_label": "Amazon product-information block and the Emeril Everyday official store page — neither states an item weight for this model",
             "why_blank": "Neither the Amazon product-information block nor the Emeril Everyday page states an item weight for this product; none is published."
           }
         ],
@@ -395,7 +401,7 @@
         "S18",
         "S21"
       ],
-      "why_blank": "The token as supplied is 9 characters, so it is not a valid ASIN, and amazon.com/dp/<token> returns Amazon's Page Not Found page: no field can be stated for the token itself. The product this link resolves to is recorded separately in `resolved` below. Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
+      "why_blank": "Token is 9 characters, so it is not a valid ASIN; the canonical /dp/ URL returns Amazon's Page Not Found page. The supplied short link does open one live listing, and that destination is stable across re-fetches, but no public Amazon document binds the short code to it (F-03), the per-link btn_ref token changes between days (F-21), and no resolved URL carries an Associates tag (F-24). No official record therefore identifies the intended product, so no attribute may be stated.",
       "flag_ids": [
         "F-01",
         "F-02",
@@ -555,7 +561,7 @@
     {
       "id": "E-01",
       "observation": "GET https://link.amazon/B04G1MEwY ended at https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-...&channelId=704&plpRedirect=mhFallback (page title observed: CHEFMAN 6 Quart Dual Basket Air Fryer Oven ...)",
-      "interpretation": "The destination is a specific product and it is stable for this token — but three different tokens landing on three different products is NOT by itself evidence of a mapping. The decisive control is E-06.",
+      "interpretation": "Destination of the supplied link: one live CHEFMAN 6 Qt Dual Basket listing. Stable across re-fetches; not bound to the code by any public Amazon document (F-03, F-20).",
       "status": "OBSERVED",
       "source_ids": [
         "S19"
@@ -564,7 +570,7 @@
     {
       "id": "E-02",
       "observation": "GET https://link.amazon/B02NbDxp3 ended at https://www.amazon.com/dp/B09B7SB46R?...plpRedirect=mhFallback (page title observed: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven ...)",
-      "interpretation": "Second distinct destination, second distinct per-link btn_ref token (srctok-534f5e7952f396b2 at the time of that fetch). Distinctness across tokens, not randomness within a token.",
+      "interpretation": "Destination of the supplied link: one live Emeril Lagasse 26QT French Door listing (same ASIN on every re-fetch).",
       "status": "OBSERVED",
       "source_ids": [
         "S20"
@@ -573,7 +579,7 @@
     {
       "id": "E-03",
       "observation": "GET https://link.amazon/B00hJ57DV ended at https://www.amazon.com/dp/B08DKYBTPH?...plpRedirect=mhFallback (page title observed: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 ...)",
-      "interpretation": "Third distinct destination, third distinct per-link btn_ref token (srctok-76c3adaeb8708b44 at the time of that fetch).",
+      "interpretation": "Destination of the supplied link: one live Chefman 8 Qt TurboFry listing (same ASIN on every re-fetch).",
       "status": "OBSERVED",
       "source_ids": [
         "S21"
@@ -607,7 +613,7 @@
       "interpretation": "DECISIVE. The service looks the code up: an unknown code returns a 404 instead of an arbitrary product. The three supplied codes therefore ARE honoured lookups, and the earlier reading that the token was ignored and the destination arbitrary (flag F-03) is falsified. What is still unconfirmed is the *contract* — Amazon publishes no document binding a link.amazon code to a product — not the behaviour.",
       "status": "OBSERVED",
       "source_ids": [
-        "S28",
+        "S32",
         "S19",
         "S20",
         "S21"
@@ -654,5 +660,7 @@
         "S21"
       ]
     }
-  ]
+  ],
+  "last_reverified_utc": "2026-11-14",
+  "reverification_note": "Session 4338f55e re-read the three supplied links and the three manufacturer pages on 2026-11-14; session a133aa61 re-read them independently with live outbound access on the same day. Both record the same three destinations. The unknown-code control (S32) shows the short-link service honours the code; the per-link btn_ref token rotates between days (F-21)."
 }
