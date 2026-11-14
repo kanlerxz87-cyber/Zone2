@@ -8,6 +8,13 @@
 
 ---
 
+> **Current integration note (2026-11-14).** This companion summary began as the `research-hub/` session's
+> report and retains that historical provenance. The currently integrated executive summary is
+> [`../EXECUTIVE_SUMMARY.md`](../EXECUTIVE_SUMMARY.md). The three links' observed destinations have source-linked
+> specifications and destination-only marketing copy, but the short-code-to-brief mapping remains unverified;
+> no Associates tag, performance report, or product-specific revenue estimate is available. Sections 9–10 below
+> were updated to the publicly readable Amazon rate table and the current evidence posture.
+
 ## 1. What was asked for
 
 The brief asked for an AI-powered Amazon affiliate platform that would automate product
@@ -20,8 +27,7 @@ blank and flagged, and that everything be verified without hallucination.
 
 ## 2. What this project actually is
 
-A **verified, source-linked research site** for the three supplied products, plus an honest map of
-which parts of the brief Amazon's own policies permit.
+A **source-linked research site** for the three observed destinations of the supplied links, plus an honest map of which parts of the brief Amazon's own policies permit. The destinations are not confirmed as the products intended in the brief.
 
 This is a deliberate narrowing. Several requested capabilities cannot be built lawfully as
 specified, and building a convincing-looking version of them would have meant inventing data.
@@ -46,11 +52,11 @@ product page. Full short-link text was resolved by following the redirect, becau
 readable from the short link itself. The destinations observed are listed below as **resolved
 destinations (flagged for confirmation)**; each code is not itself a valid ASIN.
 
-| # | Supplied link | Resolved ASIN (flagged) | Resolved product | Brand |
-|---|---|---|---|---|
-| 1 | `link.amazon/B04G1MEwY` | B0CDY277D3 | 6 Quart Dual Basket Air Fryer, dual viewing windows, Sync Finish | Chefman |
-| 2 | `link.amazon/B02NbDxp3` | B09B7SB46R | 26QT French Door Multi-Function Air Fryer Toaster Oven | Emeril Lagasse |
-| 3 | `link.amazon/B00hJ57DV` | B08DKYBTPH | 8 Qt TurboFry Touch air fryer, stainless steel | Chefman |
+| # | Supplied link | Resolved ASIN (observed; mapping flagged) | Resolved product | Brand | Official product source |
+|---|---|---|---|---|---|
+| 1 | `link.amazon/B04G1MEwY` | B0CDY277D3 | 6 Quart Dual Basket Air Fryer, dual viewing windows, Sync Finish | Chefman | [Chefman product page](https://chefman.com/products/turbofry-touch-dual-window-air-fryer) · [Amazon listing](https://www.amazon.com/dp/B0CDY277D3) |
+| 2 | `link.amazon/B02NbDxp3` | B09B7SB46R | 26QT French Door Multi-Function Air Fryer Toaster Oven | Emeril Lagasse | [Emeril manufacturer page](https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360) · [Amazon listing](https://www.amazon.com/dp/B09B7SB46R) |
+| 3 | `link.amazon/B00hJ57DV` | B08DKYBTPH | 8 Qt TurboFry Touch air fryer, stainless steel | Chefman | [Chefman product page](https://chefman.com/products/turbofry-touch-air-fryer-1) · [Amazon listing](https://www.amazon.com/dp/B08DKYBTPH) |
 
 The resolved destinations all sit in the air-fryer space, but a "coherent niche: countertop air
 frying" reading is an **inference drawn from the resolved destinations**, not a verified finding about
@@ -176,37 +182,23 @@ line-by-line table is at `requirements.html`.
 | `site/` | The GitHub Pages site: overview, products, comparison, compliance, requirements, method, flagged, executive summary. |
 | `COORDINATION.md` | Shared task board and irregularity log, as the brief required. |
 
-## 9. Commercial reality, stated plainly
+## 9. Commercial reality, stated plainly (re-verified 2026-11-14)
 
-The plausible revenue here is small in absolute terms and the brief's framing of "maximise
-affiliate revenue" through automation overstates what is available.
+No product-specific revenue estimate is supportable from the available evidence: the supplied codes do not establish which products the brief intended; no product prices or earnings reports were supplied; the links carry no Associates tag; and no clicks or conversions are recorded. The platform therefore publishes no predicted sales, earnings, conversion, or trend figures.
 
-- The category is **home and kitchen appliances**, one of the lower-paying Amazon categories. The
-  exact rate is behind the login gate, but no source this project could verify suggests a
-  high-value category rate.
-- A single-digit-percent category rate applied to the low-to-mid hundreds in order value these
-  appliances typically carry produces a commission per sale measured in single-digit currency
-  units, not tens of them. That arithmetic is illustrative and is **not** a projection — no rate
-  is verified, and no currency figure is published on the site, by design.
-- The **24-hour session** with an **89-day cart window** is the real leverage: a click that adds
-  something to a cart can pay for weeks. Content that converts on "which air fryer should I buy"
-  is therefore worth more than content optimised per-product.
-- **Three products is not a business.** Amazon's own review bar is a rule of thumb of at least ten
-  posts, and content must be recent — generally within 60 days. This is a seed dataset and a
-  working pipeline, not a finished channel.
+- Amazon's public [Standard Commission Income Statement, Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) states fixed category bands, including **Kitchen 4.50%**, **Home 3.00%**, and **All Other Categories 4.00%**. These are official program rates, not an estimate of what a given listing earns. Which rate applies to any intended brief product remains unverified until the product identity/category is confirmed.
+- The same official [Program Policies](https://affiliate-program.amazon.com/help/operating/policies) state the attribution conditions: a 24-hour session (subject to the earlier-ending events), cart orders within 89 days, and fulfilment/payment within 180 days. Those terms bound qualifying purchases; they do not establish traffic or revenue.
+- The three observed destinations are all air-fryer products, but that observation does not prove the brief's intended products or establish niche demand, conversion, trend direction, or competition. Those analysis cells remain blank or `INSUFFICIENT_DATA` until a documented identity and eligible data exist.
+- Amazon's public [Application Review Process](https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM) should be consulted for current publishing/account requirements. The site is a source-governed research and content prototype, not a demonstrated earning channel.
 
 ## 10. Recommended next steps, in order
 
-1. **Fix the links first (O-1).** Nothing else matters commercially until a tracking tag exists.
-2. **Read the rate card from inside the account (O-2)** and record the Home-category rate with its
-   date. Only then can any revenue model be honest.
-3. **Re-capture before 2027-01-12 (O-5)** and diff against this dataset; the CI guard will show
-   exactly which rows changed.
-4. **Pick a licence (O-3).**
-5. **Scale content only after the three above.** Adding a fourth product is one JSON object; the
-   navigation and tables rebuild themselves.
-6. **If automation is scaled, use the official Creators API / PA API,** not scraping. The Agent
-   Terms make that the only durable path.
+1. **Confirm product identity first (F-03).** Confirm in Associates Central that the observed destinations are intended, or provide the intended ASINs; do not infer the mapping from the short codes.
+2. **Create or confirm an Associates account and tagged links (F-24).** The existing preview links do not carry an Associates tag and are not monetized.
+3. **Use the public official rate table, but do not assign a product rate until its category is confirmed.** Table 1 is publicly readable at the linked official source above.
+4. **Re-capture source pages on the documented refresh cadence** and update the data with source links; the automated gates detect stale generated output and broken local references.
+5. **Pick a repository licence (O-3).**
+6. **Use the official Creators API for account-authorized research; do not scrape.** Follow Amazon's current Agent Terms and API requirements.
 
 ## 11. Honest limitations
 

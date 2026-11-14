@@ -969,14 +969,14 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-06 — Published copy must be labelled 'the product this link resolves to' until the owner confirms the mapping",
-    detail: "Because no public Amazon document binds a link.amazon code to a product, the three products this site publishes are the destinations the supplied links resolve to — verified by live fetch and by the unknown-code control (F-20) — not a confirmed brief mapping. The article, comparison and buying-guide generator therefore stays in preview for the three submitted tokens: draft copy exists in content/templates/** but is not published, so that no article asserts a mapping Amazon does not document.",
+    detail: "No public Amazon document binds a link.amazon code to a product, so the observed destinations are not confirmed as the products intended in the brief. The root article/comparison/guide generator remains blocked for brief-mapped copy. Separately, the public /marketing set contains three destination-only articles, a comparison and a buying guide based on official manufacturer specifications; every page now labels the unresolved mapping and links to this finding. This destination-only content is not evidence of the intended brief mapping.",
     severity: "high",
-    impact: "No published article, comparison or buying guide names these three products yet. Every other part of the platform (policy engine, rate data, scoring, tracking schema, templates, deploy) is delivered and gated.",
-    actionRequired: "Confirm the mapping and supply tagged links; the pipeline then publishes verified-only copy without any other change.",
+    impact: "Destination-only marketing copy is published under /marketing; content claiming the supplied codes identify the brief's intended products remains blocked pending owner confirmation. Specs are source-linked; identity mapping remains unverified.",
+    actionRequired: "Confirm in Associates Central that these destinations are the intended products and supply correctly tagged links before treating the content as brief-matched or monetized.",
     ledgerFlag: "F-06",
     ledgerUrl: "pages/flags.html#F-06",
     source: "https://link.amazon/B00TEST12",
-    sourceIds: ["S32", "S19", "S20", "S21"],
+    sourceIds: ["S32", "S33", "S34", "S35", "S19", "S20", "S21", "S25", "S26", "S27"],
   },
   {
     item: "F-07 — No Associates account, marketplace, tracking ID, or tag supplied",

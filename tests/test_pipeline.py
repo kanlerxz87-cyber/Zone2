@@ -11,6 +11,7 @@ import json
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -19,6 +20,25 @@ sys.path.insert(0, str(REPO / "tools"))
 import asin_guard  # noqa: E402
 import link_builder  # noqa: E402
 import scoring  # noqa: E402
+import build_marketing  # noqa: E402
+
+
+def test_marketing_pages_label_unconfirmed_brief_mapping():
+    """Destination-only marketing must not imply the short-code mapping is confirmed."""
+    with tempfile.TemporaryDirectory() as tmp:
+        rendered = build_marketing.build(Path(tmp))
+    assert len(rendered) == 9
+    for page, document in rendered.items():
+        assert "Product identity is not confirmed." in document, page
+        assert "they do not establish that those destinations are the products intended in the brief" in document, page
+        assert "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" in document, page
+        assert "pages/flags.html#F-03" in document, page
+    import build_site
+
+    exec_html = build_site.page_exec()
+    assert "not yet monetized" in exec_html
+    assert "destination-only articles" in exec_html
+    assert "no published product claim" not in exec_html
 
 
 def test_submitted_tokens_are_rejected_and_not_repaired():
