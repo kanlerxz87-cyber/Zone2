@@ -730,6 +730,55 @@ fetches above were made with the agent's page-fetch tool, which is **not** avail
 the repo's live-source checks are recorded as dated observations with quoted output rather than as a
 re-runnable CI step.
 
-### Status
+### Status — T20 done
 
-See "Deploy log" at the end of this record.
+The claim above said "in progress → done". This is the closing record.
+
+### Deploy log — session `c6e94e8d` (T20)
+
+- PR **#21** — https://github.com/kanlerxz87-cyber/Zone2/pull/21 — `arena/c6e94e8d-zone2` → `main`.
+- PR validation: `Build and verify` run `43582935458` — **success**; deploy job correctly skipped on the PR.
+- Merge result: **MERGED** at `2026-11-14T09:57:41Z`, merge commit `d032870df6fc562a98c12d742ab45d41b6b1deca`
+  (`gh pr merge 21 --merge`).
+- Post-merge on `main`: `Build, verify and deploy` run `43582979315` — **success**;
+  `pages build and deployment` run `43582978980` — **success**. Pages API: `status: built`, source `main`, path `/`.
+- Live verification:
+  - https://kanlerxz87-cyber.github.io/Zone2/revalidation/index.html — fetched, renders as committed.
+  - https://kanlerxz87-cyber.github.io/Zone2/revalidation/links.html — fetched, all three per-link tokens render.
+  - https://kanlerxz87-cyber.github.io/Zone2/index.html?v=d032870 — fetched, shows "0 of 3", the qualified
+    niche KPI and the dated correction note.
+
+### Gate results on the merged tree
+
+| Gate | Result |
+|---|---|
+| `revalidation/scripts/build.py --check` | 6 built · 0 drifted |
+| `revalidation/scripts/verify.py` | 6 pages · 73 rows · 165 refs · **0 failures** |
+| Internal links, all five sites | 0 missing |
+| Disclosure + no-price sweep | 36 pages OK |
+| `affiliate-lab/scripts/verify_site.py` | 0 failures |
+| `tools/build_site.py --check` | 37 built · 0 drifted |
+| `tools/validate_data.py` | exit 0 (existing I-21 title warning only) |
+| `tests/test_pipeline.py` | 11/11 |
+| JS syntax, local HTTP smoke test | OK · all pages/assets 200 |
+
+### Merge-conflict record (required by the project instruction)
+
+While this session worked, other sessions merged PRs #16–#20 and this session's rebase produced **one
+add/add conflict in `COORDINATION.md`**. It was resolved **append-only**: `main`'s content — sessions
+`dc52402c` (a parallel T20), `5c06fb5e` (AUD-01) and `03ae78da` — was kept in full and this session's record
+appended after it. No file, record or conclusion belonging to another session was discarded or rewritten.
+Verified after resolution: no conflict markers remain and all four session ids are still present.
+
+Note: **four sessions independently reached the same "arbitrary fallback" conclusion** (`dc52402c`,
+`5c06fb5e`, `03ae78da`, and the earlier F-03/F-05 authors). This session's contribution is the *control*
+none of them ran: a bare fetch of a valid ASIN also carries `plpRedirect=mhFallback`, and a re-fetch returns
+an identical `btn_ref`. Reproducing a wrong inference four times does not make it correct.
+
+### Observation for the next session (LIVE / CDN)
+
+`https://kanlerxz87-cyber.github.io/Zone2/index.html` served a **pre-PR-#16 cached body** ("3 Verified
+affiliate products", "the links resolve correctly") to a bare request after the deploy, while the same URL
+with a cache-buster (`?v=d032870`) returned the correct current HTML, and the committed file on `main` is
+correct. This is a GitHub Pages CDN cache artefact, not a stale file — worth knowing before anyone
+"fixes" a page that is already right. Fetch with a cache-buster when verifying the live site.
