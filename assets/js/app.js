@@ -287,7 +287,22 @@
     // FLAGGED_ROWS is the reader-facing subset; the canonical register in ledger/flags.json is larger.
     // Show the canonical total so the dashboard cannot understate what pages/flags.html publishes.
     var fc = document.getElementById("flagCount");
-    if (fc) fc.textContent = String(CANONICAL_FLAG_COUNT || FLAGGED_ROWS.length);
+    var canonical = CANONICAL_FLAG_COUNT || FLAGGED_ROWS.length;
+    if (fc) fc.textContent = String(canonical);
+
+    // T26 (F-17 / F-26 class): these three captions used to hard-code "26 items" in the
+    // HTML, so they drifted the moment a flag was added — the exact defect F-26 closed for
+    // the KPI. Derive them from the same generated constant so the prose cannot disagree
+    // with the register it describes.
+    var reg = document.getElementById("flagRegisterCount");
+    if (reg) reg.textContent = String(canonical);
+    var regMax = document.getElementById("flagRegisterMax");
+    if (regMax) regMax.textContent = String(canonical);
+    var heading = document.getElementById("flagCountHeading");
+    if (heading) heading.textContent = String(canonical);
+    Array.prototype.forEach.call(document.querySelectorAll(".flag-count-inline"), function (el) {
+      el.textContent = String(canonical);
+    });
 
     renderProducts();
     renderResolved();

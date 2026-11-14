@@ -908,7 +908,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 26;
+const CANONICAL_FLAG_COUNT = 27;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1197,6 +1197,17 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-26",
     source: "https://affiliate-program.amazon.com/help/operating/policies",
     sourceIds: ["S02"],
+  },
+  {
+    item: "F-27 — research-hub/scripts/build.py deletes its own output before every input is present, and cannot rebuild the hub from this tree",
+    detail: "Running `python3 research-hub/scripts/build.py` (the hub's generator, not the root generators) deleted all 13 committed pages under research-hub/ and then aborted with FileNotFoundError on 'research-hub/docs/executive-summary.md'. Two faults combine: (a) it resolves its paths against the repository root instead of the hub directory, the same relocation defect repaired in research-hub/scripts/verify.py (I-27); and (b) it removes its previous output before it has read every input, so one missing input leaves the site with no pages. The pages were restored from git within the same session and every gate re-ran green, so nothing was published broken. The reference to 'docs/executive-summary.md' shows the hub's source document now lives outside the hub, so the generator cannot reproduce the published hub here even with correct paths.",
+    severity: "high",
+    impact: "A reader or a future automated session that runs this generator loses the entire research-hub/ site from the working tree. CI does not run it (0 references in .github/workflows/pages.yml), so the deployed site is unaffected, but the hazard is real and one command away.",
+    actionRequired: "Do not run research-hub/scripts/build.py in this tree. The owning session should repoint it at the hub directory and make it verify its inputs before deleting output, or archive it beside the generated pages. Recorded rather than patched because research-hub/** is another session's namespace and its input layout has moved.",
+    ledgerFlag: "F-27",
+    ledgerUrl: "pages/flags.html#F-27",
+    source: "https://docs.github.com/en/rest/pages/pages",
+    sourceIds: ["S22"],
   },
 ];
 /* END GENERATED: flags */
