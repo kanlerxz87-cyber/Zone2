@@ -51,6 +51,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T20 | Re-verify supplied links + correct landing-page overclaim (root `index.html` said the 3 products were "identified and verified"; re-check shows `mhFallback` redirects, 9-char codes) | done | `arena/dc52402c-zone2` | `index.html` (text + KPI only), `COORDINATION.md` |
 | T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
 | T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
+| T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | in progress | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -1453,3 +1454,31 @@ deploy, fetch the live page and read it. Do not treat a green `--check` as evide
 **Three merges, not one, and that is the honest record:** the first merge published the main body of work; the
 second and third fixed statements that were only visible **on the deployed pages**. That is the lesson this
 session leaves in the log — a green `--check` proves the HTML matches the ledger, not that the sentence is true.
+
+---
+
+---
+
+---
+
+## Session record — `cdfaeefe` (`arena/cdfaeefe-zone2`, current branch, 2026-11-14 UTC)
+
+**Branch note:** Arena pins this session to `arena/cdfaeefe-zone2` (not `session-<id>/<task>` naming);
+documented as the deviation, consistent with prior sessions.
+
+### Claim (recorded 2026-11-14T10:12Z)
+
+Board state at claim: `main` = `d31008e` (merge of PR #29). Open work owned by other sessions at that
+moment: PR #25 (`83194da0`, CONFLICTING), PR #28 (`bbe4ca47`, CONFLICTING), PR #30 (`a3faf404`,
+marketing set), PR #11 (`ec67c431`, stale docs-only since 2026-11-13T23:05Z). This session claims
+**T23 — final integration** and edits **only** this record and the T23 board row, plus the integration
+duties on its own branch (merging `main` in, opening and merging the integration PR, deploy record).
+No file owned by an active session is edited. Change requests are logged here, not implemented in
+others' files.
+
+### Why a final-integration task is needed
+
+The brief requires: *"the final integration session has verified the combined data and confirmed the
+site builds with no broken links … create a pull request … merge … confirm GitHub Pages deploys
+successfully, and record the PR link and merge result."* Six sessions have merged PRs #1–#29 in a race;
+this session performs the closing verification pass once the remaining open PRs settle.
