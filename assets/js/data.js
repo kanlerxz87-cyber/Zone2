@@ -10,6 +10,17 @@ const ASIN_SOURCE = {
   associatesHome: "https://affiliate-program.amazon.com/",
   policies: "https://affiliate-program.amazon.com/help/operating/policies",
   agreement: "https://affiliate-program.amazon.com/help/operating/agreement",
+  // Publicly readable rate card (Table 1 + bounty tables + commission income limitations).
+  rateCard: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+  // Creators API reference: the sanctioned lookup path for ASIN -> catalog record.
+  creatorsGetItems: "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items",
+  // Public help pages re-read on 2026-11-14.
+  linkFormat: "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+  disclosureHelp: "https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98",
+  applicationReview: "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+  ftcDisclosures101:
+    "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+  googleOutboundLinks: "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
 };
 
 /* ---- Product catalog (verified from official Amazon product pages) ---- */
@@ -177,10 +188,11 @@ const SPECS = [
   {
     pid: "p2",
     attribute: "Cooking functions / presets",
-    value: "24 per Amazon listing title; 25 per the manufacturer's spec tile",
+    value:
+      "Unresolved - the manufacturer page disagrees with itself: Amazon listing title 24; Emeril description text 24; Emeril spec tile 25; Emeril feature block headed '10-In-1 Versatility' lists 10",
     status: "conflict",
     source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Amazon title + Emeril Everyday spec tile (conflict)",
+    sourceLabel: "Amazon listing title + three blocks of the Emeril Everyday page (flag F-19)",
   },
   {
     pid: "p2",
@@ -387,8 +399,8 @@ const NICHE_ANALYSIS = [
     item: "Commission potential",
     finding: "Program-level ceiling: up to 10%",
     detail:
-      "Official public statement: associates can earn up to 10% in commissions from qualifying purchases and programs. The category-specific rate card requires Associates sign-in and could not be publicly verified — left blank on the rate table.",
-    source: ASIN_SOURCE.associatesHome,
+      "Official public statement: associates can earn up to 10% in commissions from qualifying purchases and programs. The fixed rate table (Standard Commission Income Statement, Table 1) is publicly readable and is transcribed on the Commissions view; which band a specific ASIN falls into still requires a catalog lookup, so the per-product rate stays unverified.",
+    source: ASIN_SOURCE.rateCard,
     status: "verified",
   },
 ];
@@ -403,10 +415,24 @@ const COMMISSION_ROWS = [
     status: "verified",
   },
   {
-    item: "Home & Kitchen category rate",
+    item: "Published fixed rate — “Kitchen” band",
+    value: "4.50%",
+    note: "Table 1 verbatim: “Physical Books, Kitchen, Automotive — 4.50%”. Amazon publishes both “Kitchen” (4.50%) and “Home” (3.00%) as separate bands.",
+    source: ASIN_SOURCE.rateCard,
+    status: "verified",
+  },
+  {
+    item: "Published fixed rate — “Home” band",
+    value: "3.00%",
+    note: "Table 1 verbatim: “Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins — 3.00%”",
+    source: ASIN_SOURCE.rateCard,
+    status: "verified",
+  },
+  {
+    item: "Applicable rate for the three candidate ASINs",
     value: "",
-    note: "Rate schedule (https://affiliate-program.amazon.com/help/operating/schedule) requires Associates sign-in; not publicly verifiable — left blank",
-    source: "https://affiliate-program.amazon.com/help/operating/schedule",
+    note: "Unresolved: neither the listing's browse path (Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers) nor the public rate table states which of the Kitchen / Home / All Other bands Amazon applies to a specific ASIN. A catalog lookup via Creators API GetItems is required, and it is not available in this workspace. Left blank — not inferred.",
+    source: ASIN_SOURCE.creatorsGetItems,
     status: "unverified",
   },
   {
@@ -566,71 +592,90 @@ const CONTENT_ROWS = [
 ];
 
 /* ---- Campaign & link tracking plan ---- */
+/* Status semantics: a campaign is only "Published" when ledger/campaigns.json holds an enabled entry whose
+   ASIN came from a verified catalog record. That file is EMPTY_BY_DESIGN (F-06/F-07), so every row below is
+   correctly reported as not live. Editing these strings to "Configured" would assert links that do not exist. */
 const TRACKING_ROWS = [
   {
     campaign: "Launch — air fryer niche",
     product: "All three linked products",
     linkType: "Special Link with Associates tag (tracking required)",
-    status: "Configured",
+    status: "Not live — blocked",
     source: ASIN_SOURCE.policies,
   },
   {
     campaign: "Content — review articles",
     product: "B0CDY277D3, B09B7SB46R, B08DKYBTPH",
     linkType: "Special Link with Associates tag + sub-tag for A/B testing",
-    status: "Configured",
+    status: "Not live — blocked",
     source: ASIN_SOURCE.policies,
   },
   {
     campaign: "Comparison guides",
     product: "Paired ASINs",
     linkType: "Special Link with Associates tag",
-    status: "Configured",
+    status: "Not live — blocked",
     source: ASIN_SOURCE.policies,
   },
   {
     campaign: "Conversion reporting",
     product: "All linked products",
     linkType: "Associates Central reports (clicks, sessions, commission income)",
-    status: "Monthly reconciliation",
+    status: "Not live — no reports connected",
     source: ASIN_SOURCE.policies,
   },
 ];
 
-/* ---- Flagged for review ---- */
+/* ---- Flagged for review ----
+ * These are the dashboard's reader-facing flags. The canonical register is ledger/flags.json (F-01..F-19);
+ * every row below that has a canonical counterpart names it in `ledger_flag` and links to its entry on the
+ * Flagged for Review page in the findings namespace, so a reader can always reach the full text + sources.
+ * Rows without a canonical counterpart are dashboard-specific (e.g. a per-product UNVERIFIED cell).
+ */
+const LEDGER_FLAGS_URL = "pages/flags.html";
 const FLAGGED_ROWS = [
   {
     item: "Link-code / ASIN mismatch — Product 1",
     detail:
       "Provided link https://link.amazon/B04G1MEwY redirects to amazon.com/dp/B0CDY277D3. The code B04G1MEwY is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Treated as an opaque short-link token; the destination ASIN B0CDY277D3 is the verified product.",
+    ledger_flag: "F-01",
+    ledger_url: LEDGER_FLAGS_URL + "#F-01",
     source: "https://www.amazon.com/dp/B0CDY277D3",
   },
   {
     item: "Link-code / ASIN mismatch — Product 2",
     detail:
       "Provided link https://link.amazon/B02NbDxp3 redirects to amazon.com/dp/B09B7SB46R. The code B02NbDxp3 is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Destination ASIN B09B7SB46R is the verified product.",
+    ledger_flag: "F-01",
+    ledger_url: LEDGER_FLAGS_URL + "#F-01",
     source: "https://www.amazon.com/dp/B09B7SB46R",
   },
   {
     item: "Link-code / ASIN mismatch — Product 3",
     detail:
       "Provided link https://link.amazon/B00hJ57DV redirects to amazon.com/dp/B08DKYBTPH. The code B00hJ57DV is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Destination ASIN B08DKYBTPH is the verified product.",
+    ledger_flag: "F-01",
+    ledger_url: LEDGER_FLAGS_URL + "#F-01",
     source: "https://www.amazon.com/dp/B08DKYBTPH",
   },
   {
     item: "Price — all three products (UNVERIFIED / not published)",
     detail:
       "Amazon list prices could not be confirmed from an official source via automated verification (Amazon bot protection; policy restricts Amazon price display to served links or Creators API / PA API). Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but are deliberately not published on this site, in line with the program's price-display restrictions. Left blank in all tables.",
+    ledger_flag: "F-04",
+    ledger_url: LEDGER_FLAGS_URL + "#F-04",
     source: "https://www.amazon.com/dp/B0CDY277D3",
   },
   {
     item: "Star rating & review count — all three products (UNVERIFIED)",
     detail:
       "Rating and review-count could not be confirmed from an official source; Program Policy §6(t) also restricts displaying Amazon ratings/reviews outside Creators API / PA API. Left blank in all tables.",
+    ledger_flag: "F-06",
+    ledger_url: LEDGER_FLAGS_URL + "#F-06",
     source: ASIN_SOURCE.policies,
   },
   {
-    item: "Home & Kitchen category commission rate (UNVERIFIED)",
+    item: "Applicable commission band per ASIN (UNVERIFIED)",
     detail:
       "The official rate schedule requires Associates sign-in. Only the program-level public ceiling “up to 10%” is verified; the category-specific rate is left blank.",
     source: "https://affiliate-program.amazon.com/help/operating/schedule",
@@ -645,12 +690,16 @@ const FLAGGED_ROWS = [
     item: "Conflict — Emeril Lagasse cooking functions / presets",
     detail:
       "The Amazon listing title states 24 cooking functions; the manufacturer's spec tile states 25 cooking pre-sets. Both values are published; neither is presented as definitive.",
+    ledger_flag: "F-19",
+    ledger_url: LEDGER_FLAGS_URL + "#F-19",
     source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
   },
   {
     item: "Conflict — Chefman 8 Qt power rating",
     detail:
       "Amazon bullet text for B08DKYBTPH states 1000 Watts/120 Volts; Chefman's official product page states 1700 W / 120 V for the same model number. Manufacturer figure published; conflict flagged.",
+    ledger_flag: "F-19",
+    ledger_url: LEDGER_FLAGS_URL + "#F-19",
     source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
   },
   {
@@ -663,6 +712,8 @@ const FLAGGED_ROWS = [
     item: "Associates tag absent on resolved short links",
     detail:
       "The resolved link.amazon URLs carry no Associates tag parameter. Live click/conversion tracking requires Special Links that include the assigned Associates ID / tag (Participation Requirements §2). Flagged for account configuration before launch.",
+    ledger_flag: "F-07",
+    ledger_url: LEDGER_FLAGS_URL + "#F-07",
     source: "https://affiliate-program.amazon.com/help/operating/policies",
   },
 ];

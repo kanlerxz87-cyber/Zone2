@@ -174,6 +174,15 @@
       [
         { key: "item", label: "Flagged item" },
         { key: "detail", label: "Details" },
+        {
+          // Canonical flag id from ledger/flags.json, linked to its full text + sources.
+          key: "ledger_flag",
+          label: "Ledger flag",
+          render: function (r) {
+            if (!r.ledger_flag) return cell(null);
+            return '<a href="' + esc(r.ledger_url) + '">' + esc(r.ledger_flag) + "</a>";
+          },
+        },
         { key: "source", label: "Source", link: true },
       ],
       FLAGGED_ROWS
@@ -202,6 +211,10 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    // KPI strip: the flag count is derived, never typed, so it cannot drift from the data (F-17).
+    var fc = document.getElementById("flagCount");
+    if (fc) fc.textContent = String(FLAGGED_ROWS.length);
+
     renderProducts();
     renderSpecs();
     renderExecFacts();
