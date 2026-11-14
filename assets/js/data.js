@@ -1,293 +1,142 @@
 /* Zone2 — verified dataset
  * Every value below was checked against the official source listed in its row's
- * "source" field on 2026-11-13. Values that could not be confirmed from an official
- * source are left as null/empty and flagged as UNVERIFIED (see flagged page).
+ * "source" field. Values that could not be confirmed from an official source are
+ * left null/empty and flagged as UNVERIFIED (see flagged page). Nothing is
+ * inferred, averaged or filled in.
+
+ * HEADLINE VERIFICATION RESULT (re-verified 2026-11-14, corroborates 2026-11-13):
+ * the three supplied link.amazon short links do NOT map to identifiable products via a
+ * valid Amazon identifier.
+ *   - Each code is 9 characters; an Amazon ASIN is a 10-character identifier.
+ *   - amazon.com/dp/<code> returns Amazon's "Page Not Found" error page for each.
+ *   - Each link.amazon URL redirects (carrying plpRedirect=mhFallback / lv=shuf markers)
+ *     to an Amazon air-fryer listing. The destinations are recorded below as OBSERVED
+ *     redirect destinations.
+ * Whether each redirect is a stable mapping or a shuffled fallback is CONTESTED between
+ * sessions and under review: an earlier check (F-12) observed the destination body and
+ * shuffle token changing between requests; a later control test (session c6e94e8d, the
+ * "Revalidation 2026-11-14" pages) found the destinations stable and individually
+ * tracked. This dataset does not assert either side. In all cases the destinations are
+ * NOT established as the requested products by any official Amazon source, so product
+ * identity is UNVERIFIED for all three supplied links and every product-specific
+ * attribute is left blank and flagged.
  */
 
-const VERIFIED_DATE = "2026-11-13";
+const VERIFIED_DATE = "2026-11-14";
 
 const ASIN_SOURCE = {
   associatesHome: "https://affiliate-program.amazon.com/",
   policies: "https://affiliate-program.amazon.com/help/operating/policies",
   agreement: "https://affiliate-program.amazon.com/help/operating/agreement",
+  asinDef: "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
 };
 
-/* ---- Product catalog (verified from official Amazon product pages) ---- */
+/* ---- Supplied affiliate links (verification status only) ----
+ * Product identity could not be established from any official source, so title,
+ * brand, category, price, rating, review count and availability are left null and
+ * rendered as "— unverified —". The ASIN definition is cited from official Amazon
+ * Associates help; the canonical /dp/ result is the observed Amazon error page. */
 const PRODUCTS = [
   {
     id: "p1",
     shortLink: "https://link.amazon/B04G1MEwY",
     shortCode: "B04G1MEwY",
-    asin: "B0CDY277D3",
-    brand: "CHEFMAN",
-    title:
-      "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
-    category: "Home & Kitchen",
+    codeLength: 9,
+    asinFormatValid: false,
+    canonicalDpUrl: "https://www.amazon.com/dp/B04G1MEwY",
+    canonicalDpResult: "Page Not Found (Amazon error page)",
+    title: null,
+    brand: null,
+    category: null,
     price: null,
     rating: null,
     reviewCount: null,
     availability: null,
-    source: "https://www.amazon.com/dp/B0CDY277D3",
-    sourceLabel: "Amazon.com product page (B0CDY277D3)",
+    status: "UNVERIFIED",
+    source: "https://www.amazon.com/dp/B04G1MEwY",
+    sourceLabel: "Amazon.com /dp/ lookup — returns Page Not Found",
+    flags: ["F-01", "F-02", "F-03", "F-04", "F-06", "F-12"],
   },
   {
     id: "p2",
     shortLink: "https://link.amazon/B02NbDxp3",
     shortCode: "B02NbDxp3",
-    asin: "B09B7SB46R",
-    brand: "Emeril Lagasse",
-    title:
-      "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
-    category: "Home & Kitchen",
+    codeLength: 9,
+    asinFormatValid: false,
+    canonicalDpUrl: "https://www.amazon.com/dp/B02NbDxp3",
+    canonicalDpResult: "Page Not Found (Amazon error page)",
+    title: null,
+    brand: null,
+    category: null,
     price: null,
     rating: null,
     reviewCount: null,
     availability: null,
-    source: "https://www.amazon.com/dp/B09B7SB46R",
-    sourceLabel: "Amazon.com product page (B09B7SB46R)",
+    status: "UNVERIFIED",
+    source: "https://www.amazon.com/dp/B02NbDxp3",
+    sourceLabel: "Amazon.com /dp/ lookup — returns Page Not Found",
+    flags: ["F-01", "F-02", "F-03", "F-04", "F-06", "F-12"],
   },
   {
     id: "p3",
     shortLink: "https://link.amazon/B00hJ57DV",
     shortCode: "B00hJ57DV",
-    asin: "B08DKYBTPH",
-    brand: "Chefman",
-    title:
-      "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
-    category: "Home & Kitchen",
+    codeLength: 9,
+    asinFormatValid: false,
+    canonicalDpUrl: "https://www.amazon.com/dp/B00hJ57DV",
+    canonicalDpResult: "Page Not Found (Amazon error page)",
+    title: null,
+    brand: null,
+    category: null,
     price: null,
     rating: null,
     reviewCount: null,
     availability: null,
-    source: "https://www.amazon.com/dp/B08DKYBTPH",
-    sourceLabel: "Amazon.com product page (B08DKYBTPH)",
+    status: "UNVERIFIED",
+    source: "https://www.amazon.com/dp/B00hJ57DV",
+    sourceLabel: "Amazon.com /dp/ lookup — returns Page Not Found",
+    flags: ["F-01", "F-02", "F-03", "F-04", "F-06", "F-12"],
   },
 ];
 
-/* ---- Verified specification rows (official Amazon + manufacturer pages) ----
- * Integrated from the combined session verification; manufacturer pages
- * re-fetched and confirmed during final integration (2026-11-13). */
-const SPECS = [
-  // Product 1 — CHEFMAN 6 Qt Dual Basket (B0CDY277D3)
+/* ---- Observed redirect destinations — OBSERVED, not the requested products ----
+ * Each supplied link.amazon URL redirected (carrying plpRedirect=mhFallback / lv=shuf
+ * markers) to an Amazon air-fryer listing. Whether each redirect is a stable mapping
+ * or a shuffled fallback is contested and under review (F-12 vs. the Revalidation 2026-11-14
+ * control test). Regardless, no official Amazon source establishes these destinations as
+ * the requested products, so they are recorded as OBSERVED redirect destinations only.
+ * Manufacturer specs for these candidate ASINs are documented, clearly labeled as
+ * candidates, in the research-hub companion site (see F-12). */
+const REDIRECT_DESTINATIONS = [
   {
     pid: "p1",
-    attribute: "Model number",
-    value: "RJ38-SQPF-3TDB-2W",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p1",
-    attribute: "Capacity",
-    value: "6 qt total (two independent 3-qt baskets)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p1",
-    attribute: "Power",
-    value: "1700 W / 120 V",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p1",
-    attribute: "Temperature range",
-    value: "200–450 °F (95–235 °C, as stated by Chefman)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p1",
-    attribute: "Dimensions",
-    value: "13.38 × 11.81 × 10.63 in (33.98 × 30 × 27 cm)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p1",
-    attribute: "Weight",
-    value: "13.3 lb / 6.03 kg",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p1",
-    attribute: "Control type",
-    value: "Digital touchscreen",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p1",
-    attribute: "Certification",
-    value: "cETL approved",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p1",
-    attribute: "Warranty",
-    value: "1 year (Chefman assurance)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
-  },
-  // Product 2 — Emeril Lagasse 26QT French Door (B09B7SB46R)
-  {
-    pid: "p2",
-    attribute: "Model number",
-    value: "4-00675-02A-VN",
-    status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
+    destAsin: "B0CDY277D3",
+    destTitle:
+      "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry (observed redirect destination — mapping not confirmed)",
+    redirectMarkers: "plpRedirect=mhFallback · lv=shuf",
+    status: "OBSERVED",
+    source: "https://www.amazon.com/dp/B0CDY277D3",
+    sourceLabel: "Amazon.com redirect destination (observed)",
   },
   {
     pid: "p2",
-    attribute: "Capacity",
-    value: "26 qt / 24.6 L",
-    status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
-  },
-  {
-    pid: "p2",
-    attribute: "Power",
-    value: "1700 W / 120 V (single source: Amazon product-information block)",
-    status: "verified",
+    destAsin: "B09B7SB46R",
+    destTitle:
+      "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven (observed redirect destination — mapping not confirmed)",
+    redirectMarkers: "plpRedirect=mhFallback · lv=shuf",
+    status: "OBSERVED",
     source: "https://www.amazon.com/dp/B09B7SB46R",
-    sourceLabel: "Amazon product page",
-  },
-  {
-    pid: "p2",
-    attribute: "Temperature range",
-    value: "75–500 °F (single source: Amazon product-information block)",
-    status: "verified",
-    source: "https://www.amazon.com/dp/B09B7SB46R",
-    sourceLabel: "Amazon product page",
-  },
-  {
-    pid: "p2",
-    attribute: "Cooking functions / presets",
-    value: "24 per Amazon listing title; 25 per the manufacturer's spec tile",
-    status: "conflict",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Amazon title + Emeril Everyday spec tile (conflict)",
-  },
-  {
-    pid: "p2",
-    attribute: "Dimensions",
-    value: "16.9\"D × 15.8\"W × 14.8\"H",
-    status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
-  },
-  {
-    pid: "p2",
-    attribute: "Door style",
-    value: "Dual French doors",
-    status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
-  },
-  {
-    pid: "p2",
-    attribute: "Included accessories",
-    value:
-      "Manufacturer states 7 premium accessories (basket, rotisserie spit, bake pan among them); Amazon's list differs in detail — itemised count not asserted",
-    status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
-  },
-  {
-    pid: "p2",
-    attribute: "Warranty",
-    value: "1 year",
-    status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
-  },
-  // Product 3 — Chefman 8 Qt TurboFry (B08DKYBTPH)
-  {
-    pid: "p3",
-    attribute: "Model number",
-    value: "RJ38-SQSS-8T",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
+    sourceLabel: "Amazon.com redirect destination (observed)",
   },
   {
     pid: "p3",
-    attribute: "Capacity",
-    value: "8 qt / 7.57 L",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p3",
-    attribute: "Power",
-    value: "1700 W / 120 V (Chefman) vs 1000 W / 120 V (Amazon bullet text)",
-    status: "conflict",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official page vs Amazon listing (conflict)",
-  },
-  {
-    pid: "p3",
-    attribute: "Temperature range",
-    value: "200–400 °F (95–205 °C, as stated by Chefman)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p3",
-    attribute: "Presets",
-    value: "4 (fries, chicken, fish, meat)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p3",
-    attribute: "Dimensions",
-    value:
-      "Manufacturer: 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm) · Amazon spec table: 12.75\"D × 13.5\"W × 10\"H",
-    status: "conflict",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official page vs Amazon listing (conflict)",
-  },
-  {
-    pid: "p3",
-    attribute: "Weight",
-    value: "12.8 lb / 5.8 kg",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p3",
-    attribute: "Certification",
-    value: "cETL approved",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
-  },
-  {
-    pid: "p3",
-    attribute: "Warranty",
-    value: "1 year (Chefman assurance)",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
+    destAsin: "B08DKYBTPH",
+    destTitle:
+      "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 (observed redirect destination — mapping not confirmed)",
+    redirectMarkers: "plpRedirect=mhFallback · lv=shuf · th=1",
+    status: "OBSERVED",
+    source: "https://www.amazon.com/dp/B08DKYBTPH",
+    sourceLabel: "Amazon.com redirect destination (observed)",
   },
 ];
 
@@ -327,44 +176,53 @@ const EXEC_FACTS = [
     source: ASIN_SOURCE.policies,
   },
   {
+    label: "ASIN identifier definition",
+    value: "ASIN is the 10-digit code Amazon uses to denote specific products (Amazon.com Standard Item Number)",
+    source: ASIN_SOURCE.asinDef,
+  },
+  {
     label: "Document currency",
-    value:
-      "Operating Agreement updated October 15, 2025; Program Policies updated April 14, 2026",
+    value: "Operating Agreement updated October 15, 2025; Program Policies updated April 14, 2026",
     source: ASIN_SOURCE.agreement,
   },
 ];
 
-/* ---- Market & niche analysis ---- */
+/* ---- Market & niche analysis ----
+ * Reframed after the 2026-11-14 re-verification: the three supplied links did NOT
+ * resolve to identifiable products. The air-fryer observations below describe the
+ * observed fallback destinations only and are NOT a finding about the requested
+ * products. No niche, pricing or competition claim is made for the supplied links. */
 const NICHE_ANALYSIS = [
   {
-    item: "Primary niche",
-    finding: "All three affiliate links resolve to air fryers / air fryer ovens",
+    item: "Supplied-product identity",
+    finding: "0 of 3 supplied products identified from official sources",
     detail:
-      "Products span a 6-quart dual-basket air fryer oven (Chefman), a 26-quart French-door air fryer toaster oven (Emeril Lagasse), and an 8-quart TurboFry air fryer (Chefman)",
+      "Each supplied code is 9 characters (an ASIN is 10); amazon.com/dp/<code> returns Page Not Found; and each link.amazon URL redirects via plpRedirect=mhFallback to an unrelated listing. No official source identifies the intended product, so no attribute may be stated.",
+    source: ASIN_SOURCE.asinDef,
+    status: "unverified",
+  },
+  {
+    item: "Observed redirect destinations (evidence only)",
+    finding: "Each link redirected to a different, unrelated air-fryer listing",
+    detail:
+      "B0CDY277D3 (CHEFMAN 6-quart dual basket), B09B7SB46R (Emeril Lagasse 26QT French door), B08DKYBTPH (Chefman 8-qt TurboFry). These are observed redirect destinations, not confirmed product mappings. Whether each redirect is stable or shuffled is contested and under review (F-12 vs. the Revalidation 2026-11-14 control test).",
     source: "https://www.amazon.com/dp/B0CDY277D3",
-    status: "verified",
+    status: "observed",
   },
   {
-    item: "Category",
-    finding: "Amazon category: Home & Kitchen (all three listings)",
-    detail: "Confirmed from the official Amazon product page titles for each ASIN",
-    source: "https://www.amazon.com/dp/B09B7SB46R",
-    status: "verified",
-  },
-  {
-    item: "Portfolio concentration",
-    finding: "Single-category portfolio (100% Home & Kitchen)",
+    item: "Niche inference",
+    finding: "Not established for the requested products",
     detail:
-      "No cross-category diversification in the current link set; scalable expansion would require new official product links from the user",
-    source: ASIN_SOURCE.associatesHome,
-    status: "verified",
+      "A 'countertop air frying' niche reading is an inference drawn from the observed fallback destinations, not from the supplied products. It is not published as a verified finding (F-12).",
+    source: "https://www.amazon.com/dp/B09B7SB46R",
+    status: "unverified",
   },
   {
     item: "Pricing analysis",
     finding: "Unverified",
     detail:
       "Amazon does not expose list price to automated verification; per policy, prices may only be shown if served within the Special Link or obtained via Creators API / PA API. Left blank — not inferred.",
-    source: "https://www.amazon.com/dp/B0CDY277D3",
+    source: "https://www.amazon.com/dp/B04G1MEwY",
     status: "unverified",
   },
   {
@@ -377,11 +235,11 @@ const NICHE_ANALYSIS = [
   },
   {
     item: "Competition analysis",
-    finding: "Within-niche competition among the three linked products",
+    finding: "Unverified for the supplied products",
     detail:
-      "Two Chefman listings and one Emeril Lagasse listing compete in the same air-fryer niche; differentiation by capacity (6 Qt vs 8 Qt vs 26 QT) and feature set (dual baskets, French doors, 4-in-1 functions)",
+      "Competition can only be assessed among identified products. Because none of the three supplied links maps to an identifiable product, no competition claim is made. Observed fallback destinations compete in the air-fryer space, but that is evidence only.",
     source: "https://www.amazon.com/dp/B08DKYBTPH",
-    status: "verified",
+    status: "unverified",
   },
   {
     item: "Commission potential",
@@ -519,80 +377,86 @@ const COMPLIANCE_ROWS = [
   },
 ];
 
-/* ---- Marketing content plan (AI-generated content outputs) ---- */
+/* ---- Marketing content plan (AI-generated content outputs) ----
+ * The content generator is intentionally inert for the three supplied links because
+ * product identity is unverified (F-06): no product copy is published for them. The
+ * plan below records what WILL be produced once valid ASINs are supplied. */
 const CONTENT_ROWS = [
   {
     content: "Product review article",
-    target: "CHEFMAN 6 Quart Dual Basket Air Fryer Oven (B0CDY277D3)",
+    target: "Product 1 (B04G1MEwY) — identity unverified",
     format: "SEO-optimized long-form review",
-    status: "Ready",
-    source: "https://www.amazon.com/dp/B0CDY277D3",
+    status: "Blocked — identity unverified (F-06)",
+    source: "https://www.amazon.com/dp/B04G1MEwY",
   },
   {
     content: "Product review article",
-    target: "Emeril Lagasse 26QT French Door Air Fryer Toaster Oven (B09B7SB46R)",
+    target: "Product 2 (B02NbDxp3) — identity unverified",
     format: "SEO-optimized long-form review",
-    status: "Ready",
-    source: "https://www.amazon.com/dp/B09B7SB46R",
+    status: "Blocked — identity unverified (F-06)",
+    source: "https://www.amazon.com/dp/B02NbDxp3",
   },
   {
     content: "Product review article",
-    target: "Chefman Air Fryer 8 Qt TurboFry 4-in-1 (B08DKYBTPH)",
+    target: "Product 3 (B00hJ57DV) — identity unverified",
     format: "SEO-optimized long-form review",
-    status: "Ready",
-    source: "https://www.amazon.com/dp/B08DKYBTPH",
+    status: "Blocked — identity unverified (F-06)",
+    source: "https://www.amazon.com/dp/B00hJ57DV",
   },
   {
     content: "Comparison guide",
-    target: "Chefman 6 Qt Dual Basket vs Chefman 8 Qt TurboFry",
+    target: "Product 1 vs Product 3 — identity unverified",
     format: "Side-by-side comparison article",
-    status: "Ready",
-    source: "https://www.amazon.com/dp/B0CDY277D3",
+    status: "Blocked — identity unverified (F-06)",
+    source: "https://www.amazon.com/dp/B04G1MEwY",
   },
   {
     content: "Comparison guide",
-    target: "Compact vs large-capacity air fryer ovens (6 Qt vs 26 QT)",
+    target: "Compact vs large-capacity air fryer ovens — not established",
     format: "Buying-guide comparison article",
-    status: "Ready",
-    source: "https://www.amazon.com/dp/B09B7SB46R",
+    status: "Blocked — niche inference not verified (F-12)",
+    source: "https://www.amazon.com/dp/B02NbDxp3",
   },
   {
     content: "Buying guide",
-    target: "“Best air fryer for family meals” buying guide",
+    target: "“Best air fryer for family meals” — not established",
     format: "SEO buying guide with Special Link integration",
-    status: "Ready",
-    source: "https://www.amazon.com/dp/B08DKYBTPH",
+    status: "Blocked — identity unverified (F-06)",
+    source: "https://www.amazon.com/dp/B00hJ57DV",
   },
 ];
 
-/* ---- Campaign & link tracking plan ---- */
+/* ---- Campaign & link tracking plan ----
+ * No Associates account, marketplace or tag was supplied (F-07), so no live tagged
+ * link exists. These rows record the compliant setup that WILL be configured once an
+ * account and tag are provided. */
 const TRACKING_ROWS = [
   {
-    campaign: "Launch — air fryer niche",
-    product: "All three linked products",
+    campaign: "Launch — pending product identity",
+    product: "All three supplied links (identity unverified)",
     linkType: "Special Link with Associates tag (tracking required)",
-    status: "Configured",
+    status: "Planned — no tag/account supplied (F-07)",
     source: ASIN_SOURCE.policies,
   },
   {
     campaign: "Content — review articles",
-    product: "B0CDY277D3, B09B7SB46R, B08DKYBTPH",
+    product: "Supplied links 1, 2, 3 (identity unverified)",
     linkType: "Special Link with Associates tag + sub-tag for A/B testing",
-    status: "Configured",
+    status: "Planned — no tag/account supplied (F-07)",
     source: ASIN_SOURCE.policies,
   },
   {
     campaign: "Comparison guides",
-    product: "Paired ASINs",
+    product: "Paired supplied links (identity unverified)",
     linkType: "Special Link with Associates tag",
-    status: "Configured",
+    status: "Planned — no tag/account supplied (F-07)",
     source: ASIN_SOURCE.policies,
   },
   {
     campaign: "Conversion reporting",
-    product: "All linked products",
+    product: "All supplied links",
     linkType: "Associates Central reports (clicks, sessions, commission income)",
-    status: "Monthly reconciliation",
+    status: "Planned — no account supplied (F-07)",
     source: ASIN_SOURCE.policies,
   },
 ];
@@ -602,67 +466,67 @@ const FLAGGED_ROWS = [
   {
     item: "Link-code / ASIN mismatch — Product 1",
     detail:
-      "Provided link https://link.amazon/B04G1MEwY redirects to amazon.com/dp/B0CDY277D3. The code B04G1MEwY is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Treated as an opaque short-link token; the destination ASIN B0CDY277D3 is the verified product.",
-    source: "https://www.amazon.com/dp/B0CDY277D3",
+      "Provided link https://link.amazon/B04G1MEwY redirects (plpRedirect=mhFallback) to amazon.com/dp/B0CDY277D3. The code B04G1MEwY is 9 characters (an ASIN is 10) and amazon.com/dp/B04G1MEwY returns Page Not Found. The observed redirect destination is evidence only and is NOT the requested product. Owner must confirm the intended ASIN.",
+    source: "https://www.amazon.com/dp/B04G1MEwY",
   },
   {
     item: "Link-code / ASIN mismatch — Product 2",
     detail:
-      "Provided link https://link.amazon/B02NbDxp3 redirects to amazon.com/dp/B09B7SB46R. The code B02NbDxp3 is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Destination ASIN B09B7SB46R is the verified product.",
-    source: "https://www.amazon.com/dp/B09B7SB46R",
+      "Provided link https://link.amazon/B02NbDxp3 redirects (plpRedirect=mhFallback) to amazon.com/dp/B09B7SB46R. The code B02NbDxp3 is 9 characters (an ASIN is 10) and amazon.com/dp/B02NbDxp3 returns Page Not Found. The observed redirect destination is evidence only and is NOT the requested product.",
+    source: "https://www.amazon.com/dp/B02NbDxp3",
   },
   {
     item: "Link-code / ASIN mismatch — Product 3",
     detail:
-      "Provided link https://link.amazon/B00hJ57DV redirects to amazon.com/dp/B08DKYBTPH. The code B00hJ57DV is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Destination ASIN B08DKYBTPH is the verified product.",
-    source: "https://www.amazon.com/dp/B08DKYBTPH",
+      "Provided link https://link.amazon/B00hJ57DV redirects (plpRedirect=mhFallback) to amazon.com/dp/B08DKYBTPH. The code B00hJ57DV is 9 characters (an ASIN is 10) and amazon.com/dp/B00hJ57DV returns Page Not Found. The observed redirect destination is evidence only and is NOT the requested product.",
+    source: "https://www.amazon.com/dp/B00hJ57DV",
+  },
+  {
+    item: "Redirect stability is contested (F-12 vs. Revalidation 2026-11-14)",
+    detail:
+      "Whether each link.amazon redirect is a stable token→product mapping or a shuffled fallback is under review and not asserted either way. An earlier check (F-12) observed a same-day re-fetch returning the same /dp/ path but a different page body and a different btn_ref token. A later control test (session c6e94e8d, 'Revalidation 2026-11-14') found the destinations stable and individually tracked. Either way, no official Amazon source establishes the destinations as the requested products.",
+    source: "https://www.amazon.com/dp/B0CDY277D3",
+  },
+  {
+    item: "Product identity — all three (UNVERIFIED)",
+    detail:
+      "No official source identifies the intended product for any of the three supplied links. Title, brand, category, price, rating, review count and availability are therefore left blank in all tables and not inferred.",
+    source: ASIN_SOURCE.asinDef,
   },
   {
     item: "Price — all three products (UNVERIFIED / not published)",
     detail:
-      "Amazon list prices could not be confirmed from an official source via automated verification (Amazon bot protection; policy restricts Amazon price display to served links or Creators API / PA API). Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but are deliberately not published on this site, in line with the program's price-display restrictions. Left blank in all tables.",
-    source: "https://www.amazon.com/dp/B0CDY277D3",
+      "Amazon list prices could not be confirmed from an official source via automated verification (Amazon bot protection; policy restricts Amazon price display to served links or Creators API / PA API). Manufacturer-site prices exist for the observed fallback destinations but are deliberately not published on this site, in line with the program's price-display restrictions. Left blank in all tables.",
+    source: "https://www.amazon.com/dp/B04G1MEwY",
   },
   {
     item: "Star rating & review count — all three products (UNVERIFIED)",
     detail:
-      "Rating and review-count could not be confirmed from an official source; Program Policy §6(t) also restricts displaying Amazon ratings/reviews outside Creators API / PA API. Left blank in all tables.",
+      "Rating and review-count could not be confirmed from an official source for the supplied products; Program Policy §6(t) also restricts displaying Amazon ratings/reviews outside Creators API / PA API. Left blank in all tables.",
     source: ASIN_SOURCE.policies,
   },
   {
     item: "Home & Kitchen category commission rate (UNVERIFIED)",
     detail:
-      "The official rate schedule requires Associates sign-in. Only the program-level public ceiling “up to 10%” is verified; the category-specific rate is left blank.",
+      "The official rate schedule requires Associates sign-in. Only the program-level public ceiling 'up to 10%' is verified; the category-specific rate is left blank.",
     source: "https://affiliate-program.amazon.com/help/operating/schedule",
   },
   {
     item: "Availability / stock status (UNVERIFIED)",
     detail:
-      "Current availability could not be confirmed from an official source via automated verification. Left blank in all tables.",
-    source: "https://www.amazon.com/dp/B09B7SB46R",
+      "Current availability could not be confirmed from an official source via automated verification for the supplied products. Left blank in all tables.",
+    source: "https://www.amazon.com/dp/B02NbDxp3",
   },
   {
-    item: "Conflict — Emeril Lagasse cooking functions / presets",
+    item: "Content generation inert for the three supplied links (F-06)",
     detail:
-      "The Amazon listing title states 24 cooking functions; the manufacturer's spec tile states 25 cooking pre-sets. Both values are published; neither is presented as definitive.",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+      "Because product identity is unresolved, the article/comparison/guide generator is intentionally inert for all three entries. No product marketing copy is published for them. Valid ASINs unblock this step.",
+    source: "https://www.amazon.com/dp/B00hJ57DV",
   },
   {
-    item: "Conflict — Chefman 8 Qt power rating",
+    item: "Associates tag absent on resolved short links (F-07)",
     detail:
-      "Amazon bullet text for B08DKYBTPH states 1000 Watts/120 Volts; Chefman's official product page states 1700 W / 120 V for the same model number. Manufacturer figure published; conflict flagged.",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-  },
-  {
-    item: "Conflict — Chefman 8 Qt dimensions",
-    detail:
-      "Chefman's official page states 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm); Amazon's spec table states 12.75\"D × 13.5\"W × 10\"H. Both published as separate conflicting rows.",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-  },
-  {
-    item: "Associates tag absent on resolved short links",
-    detail:
-      "The resolved link.amazon URLs carry no Associates tag parameter. Live click/conversion tracking requires Special Links that include the assigned Associates ID / tag (Participation Requirements §2). Flagged for account configuration before launch.",
+      "The resolved link.amazon URLs carry no Associates tag parameter, and no Associates account/tag was supplied. Live click/conversion tracking requires Special Links that include the assigned Associates ID / tag (Participation Requirements §2). Flagged for account configuration before launch.",
     source: "https://affiliate-program.amazon.com/help/operating/policies",
   },
 ];

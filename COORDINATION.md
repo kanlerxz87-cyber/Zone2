@@ -736,3 +736,87 @@ re-runnable CI step.
 ### Status
 
 See "Deploy log" at the end of this record.
+
+---
+
+## Session `arena/83194da0-zone2` — T21 final consistency integration
+
+**Claim:** T21 (task board above). Scope: root primary-site dataset + captions + the shared
+`docs/executive-summary.md`. No companion namespace (`research-hub/`, `zone2/`, `northstar/`,
+`affiliate-lab/`, `pages/`, `ledger/`, `tools/`) was edited.
+
+### Problem found on re-review (line-by-line)
+
+PR #16 (T20) corrected the **landing page text + KPI** in `index.html`, but the **root
+`assets/js/data.js` dataset and the pages it renders still carried the overclaim**, contradicting the
+rigorous `ledger/products.json` + `ledger/flags.json` (F-01/F-02/F-03/F-06/F-07/F-12) and the now-honest
+landing page:
+
+| File / data | Overclaim (before) | Fix (this session) |
+|---|---|---|
+| `assets/js/data.js` `PRODUCTS` | Populated `brand`/`title`/`category`/`asin` from the fallback destinations and rendered them as "verified from official Amazon pages" | All product attributes set to `null`; `status:"UNVERIFIED"`; new `codeLength`/`asinFormatValid`/`canonicalDpResult`/`flags` columns; every row cites the official `/dp/` lookup that returned Page Not Found |
+| `assets/js/data.js` `SPECS` | Manufacturer specs of the fallback products presented as "Verified Specifications" of the requested products | Removed from the primary site (describes unidentified products); replaced with `FALLBACK_EVIDENCE` (evidence only) + a pointer to the `research-hub/` candidate pages (F-12) |
+| `assets/js/data.js` `NICHE_ANALYSIS` | "All three affiliate links resolve to air fryers" (verified) | Reframed: identity "0 of 3 identified"; air-fryer observations = evidence only; niche inference flagged unverified |
+| `assets/js/data.js` `CONTENT_ROWS` | status "Ready" | status "Blocked — identity unverified (F-06)" |
+| `assets/js/data.js` `TRACKING_ROWS` | status "Configured" | status "Planned — no tag/account supplied (F-07)" |
+| `assets/js/data.js` `FLAGGED_ROWS` | "the destination ASIN … is the verified product" | Corrected to "fallback destination is evidence only and is NOT the requested product" |
+| `products.html` | "Product Catalog — verified from official Amazon pages" + Verified Specifications card | "Supplied Affiliate Links — verification status" + Observed redirect destinations (evidence only) card |
+| `content.html` / `tracking.html` captions | "generated from the verified product data" / "configured per the official program rules" | "generator is intentionally inert … (F-06)" / "planned, not yet live" |
+| `docs/executive-summary.md` §3 | "resolved successfully to canonical ASINs" + "coherent niche" | Superseded correction banner; table relabeled "Observed fallback ASIN (evidence only)"; niche reading flagged as inference (F-12); §4 scope note added |
+| All root footers | dataset date 2026-11-13 | updated to 2026-11-14 (re-verified; corroborates 2026-11-13) |
+
+`index.html`, `README.md` and `EXECUTIVE_SUMMARY.md` were already honest (0 of 3 identified) and were
+left essentially untouched (only the dataset-date label on the landing page).
+
+### Independent re-verification (2026-11-14, official sources only)
+
+- Re-fetched all three `https://www.amazon.com/dp/<code>` → **Page Not Found** for `B04G1MEwY`,
+  `B02NbDxp3`, `B00hJ57DV` (corroborates F-02).
+- Re-fetched all three `link.amazon/<code>` → each redirects via `plpRedirect=mhFallback` to an
+  unrelated air-fryer listing (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`) (corroborates F-03/F-12).
+- ASIN = 10-character identifier confirmed from the official Amazon Associates help page
+  ([GP38PJ6EUR6PFBEC](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC)); each
+  supplied code is 9 chars (corroborates F-01).
+- Re-fetched manufacturer pages cited by the `research-hub/` candidate specs — **both live**:
+  Chefman TurboFry Touch Dual-Window (model `RJ38-SQPF-3TDB-2W`, 6 Qt, 450 °F Hi-Fry) and
+  Emeril Lagasse French Door AirFryer 360 (26 Qt, 25 presets, 16.9"D×15.8"W×14.8"H, model
+  `4-00675-02A-VN`). These describe the **candidate/fallback** ASINs, not the supplied products.
+
+### Gates run green on the edited tree (before merge)
+
+- `node --check assets/js/data.js` + `assets/js/app.js` — syntax OK.
+- `python3 tools/build_site.py --check` — 37 built, no drift.
+- `python3 tools/validate_data.py` — exit 0 (one pre-existing warning F-13 on `research-hub/compliance.html` title, unchanged).
+- `python3 tests/test_pipeline.py` — 11/11 passed.
+- `python3 affiliate-lab/scripts/verify_site.py` — 10 pages · 205 rows · 498 links · 0 failures.
+- Root internal-link + disclosure + no-price check (workflow steps) — 8 pages, links resolve, disclosure present, no prices.
+- Node data sanity — PRODUCTS 3 (all UNVERIFIED, attrs null, sourced); FALLBACK_EVIDENCE 3 (all EVIDENCE_ONLY, sourced); CONTENT 6 (all Blocked); TRACKING 4 (all Planned); FLAGGED 11.
+
+### Irregularities (carried forward, not blocking)
+
+F-01 (9-char codes), F-02 (/dp/ 404), F-03 (mhFallback redirects), F-06 (content inert), F-07 (no
+tag/account), F-12 (redirect stability contested — F-12 observed instability vs. the Revalidation
+2026-11-14 control test observing stability; this session presents it as contested, not asserted),
+F-13 (research-hub title mark), F-14 (northstar prototype), F-15/I-27 (research-hub verifier stale).
+**New flag this session:** **F-16** — the root `data.js` dataset still overclaimed after PR #16
+corrected only the landing-page text; resolved here. Published on the site's Flagged for Review page
+and in this log. **Reconciliation with PR #21:** after the rebase pulled in session `c6e94e8d`'s
+Revalidation control test (which challenges the "shuffled fallback" wording), this session's
+`data.js` / `products.html` / `docs/executive-summary.md` wording was made neutral — the redirect
+destinations are "observed / evidence only," and whether each redirect is stable or shuffled is
+presented as contested and under review, not asserted. Both sessions agree the destinations are not
+established as the requested products.
+
+### Sources added/confirmed by this session
+
+| Source | URL | Used for |
+|---|---|---|
+| Amazon Associates — ASIN definition / simple text link | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC | ASIN = 10-digit code; canonical /dp/ link format |
+| Amazon product page — B04G1MEwY (canonical lookup) | https://www.amazon.com/dp/B04G1MEwY | Page Not Found evidence (F-02) |
+| Amazon product page — B02NbDxp3 (canonical lookup) | https://www.amazon.com/dp/B02NbDxp3 | Page Not Found evidence (F-02) |
+| Amazon product page — B00hJ57DV (canonical lookup) | https://www.amazon.com/dp/B00hJ57DV | Page Not Found evidence (F-02) |
+| Amazon fallback destination B0CDY277D3 | https://www.amazon.com/dp/B0CDY277D3 | observed fallback (evidence only) |
+| Amazon fallback destination B09B7SB46R | https://www.amazon.com/dp/B09B7SB46R | observed fallback (evidence only) |
+| Amazon fallback destination B08DKYBTPH | https://www.amazon.com/dp/B08DKYBTPH | observed fallback (evidence only) |
+| Chefman official product page — TurboFry Touch Dual-Window | https://chefman.com/products/turbofry-touch-dual-window-air-fryer | candidate spec re-verification (F-12) |
+| Emeril Everyday official store — French Door AirFryer 360 | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 | candidate spec re-verification (F-12) |
