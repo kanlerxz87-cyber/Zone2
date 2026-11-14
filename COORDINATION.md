@@ -523,3 +523,14 @@ Codes are 9 characters, an Amazon ASIN is 10 (definition: https://affiliate-prog
 - GitHub Pages: `built` on `a71520d`; `Build, verify and deploy` and `pages build and deployment` both success on `main`.
 - Live check: https://kanlerxz87-cyber.github.io/Zone2/index.html now shows "0 of 3 — Supplied products identified from official sources" (earlier cached copy replaced).
 - PR #17 (this record) is the only further change on this branch.
+---
+
+## Session record — `arena/5c06fb5e-zone2` (current session, 2026-11-14)
+
+### Task claim
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| AUD-01 | Independent post-integration site/repository verification; record mismatches and request corrections without editing another session's files | in progress | `arena/5c06fb5e-zone2` | `docs/review-2026-11-14.md`, append-only section in `COORDINATION.md` |
+
+Claimed on current Arena-pinned branch `arena/5c06fb5e-zone2` (base `c0a109b305d998371677a2d476ca71568373b0be`). Existing completed task scopes are not being edited; cross-scope corrections are logged below.
