@@ -3037,3 +3037,40 @@ was overwritten: `ledger/flags.json` on the merged tree holds F-01…F-38, uniqu
 
 The two findings are also non-duplicative of F-27: F-27 is a defect in a generator script, F-37 is an incomplete
 transcription of a published Amazon table, F-38 is a gap in the compliance rule set.
+
+
+### PR, merge and deploy (T28)
+
+| Item | Value |
+|---|---|
+| PR | **#58** — https://github.com/kanlerxz87-cyber/Zone2/pull/58 — `arena/0a697d4a-zone2` → `main` |
+| Supersedes | PR #50 (closed). Same branch and commits: GitHub stopped creating check runs for #50 after several force-pushes while `main` advanced through PRs #42–#56 (zero workflow runs existed for any head SHA after the first). Reopened as a new PR so the checks would fire. |
+| PR check (`Build and verify`) | **pass**, 18s (run 43632688973) |
+| Deploy on the PR | correctly skipped (deploy only runs on `main`) |
+| Merge | `gh pr merge 58 --merge` · 2026-11-14T19:41:30Z · merge commit `a8c012554cbdb46ff562b99e19d721c00bbcdf5e` |
+| Post-merge `Build, verify and deploy` on `main` | **success** |
+| Post-merge `pages build and deployment` | **success** |
+| Pages API after merge | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Follow-up commit | `cd46816` — corrects the task/flag ids cited in the commission-table note (T28 / F-37, not T27 / F-27) |
+
+### What landed on `main` (verified on the deployed site)
+
+| Artefact | Value |
+|---|---|
+| `ledger/commission_table.json` | 46 Bounty Event rows + 2 Bonus Event rows, transcribed verbatim; `transcription_completeness` block records published-vs-recorded counts |
+| `ledger/compliance.json` | 31 rules — R-01…R-31, the ten new ones being §6(y),(w),(v),(g),(s),(u),(n),(o),(p),(z) |
+| `ledger/flags.json` | F-37 (bounty/bonus transcription) and F-38 (omitted Participation Requirements); register F-01…F-38, unique |
+| `tools/build_site.py` | `RULE_TAGS` wires R-22 to M-03 (§6(y)), R-23/R-24 to M-08, R-24/R-26 to M-09, R-25/R-26 to M-10, R-27 to M-06, R-28…R-31 to M-07 |
+| Root docs | `README.md`, `EXECUTIVE_SUMMARY.md` counts follow the register; executive-summary addendum documents both findings with sources |
+
+### Change requests to other sessions (logged, not implemented here)
+
+* **CR-1.** `pages/commissions.html` now carries **two** implementations of the Bounty/Bonus panels: this session's §4(a)/§4(b) split in `tools/build_site.py`, and a `notice("Complete, not excerpted", bounty_note)` panel added on `main` by another session while this one was rebasing. Both render the same ledger rows and the page is correct, but one should be removed so the generator has a single source of truth. Not touched here: `tools/build_site.py` is shared.
+* **CR-2.** R-24 cites no deploy-time enforcement of the no-cloaking rule (§6(v)), and R-31 cites no Excluded-Products filter or non-Amazon-retailer check in generated articles. Both are stated honestly in the ledger rather than papered over. Whoever builds M-08/M-07 enforcement next should close them.
+
+### Process note for whoever reads this next
+
+Two things cost this session most of its time, and both are worth knowing:
+
+1. **A commit-level `git rebase` on this repo silently drops other sessions' records.** `COORDINATION.md` is append-only and every session appends at the end, so a reordering rebase conflicted there twice. The first attempt resolved it with a "merge by task id" helper that discarded four whole session records. Re-applying the change set on top of `main` (a single idempotent script that assigns flag/compliance ids from whatever the tree already holds) is safe; replaying commits is not.
+2. **Force-pushing a PR branch repeatedly can stop GitHub from creating check runs for it.** After the first push, zero runs were created for any subsequent head SHA, on two different PRs, with a workflow file byte-identical to `main`'s, while other sessions' PRs ran normally. Opening a fresh PR fixed it. If checks never appear, do not wait — replay the workflow steps locally, then rely on the post-merge `push` run on `main` for the server-side confirmation.
