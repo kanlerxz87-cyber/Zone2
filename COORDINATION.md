@@ -1774,4 +1774,3 @@ Reading the **live** page after the first follow-up found two more survivors of 
 **Why the gates kept passing.** `build_site.py --check` and `build_root_views.py --check` compare generated HTML
 against the ledger. A false statement *in* the ledger regenerates byte-identically and passes. Only reading the
 deployed page catches it. That is a genuine limitation of a drift gate and is now recorded, not glossed over.
->>>>>>> c470776 (fix(verification): withdraw the last two survivors of the retracted claim (V-31, V-32))
