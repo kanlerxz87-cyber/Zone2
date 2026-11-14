@@ -2759,3 +2759,58 @@ import it. Both surfaces now read **34 flagged items · 13 open · 21 resolved**
 ids · 0 price findings · **0 warnings** · `build_site.py --check` 37/0 drifted · root views / root data /
 summary `--check` clean · `audit_site.py` 95 pages, 5/5 PASS · **14/14** tests · affiliate-lab 0 failures ·
 revalidation 0 failures · marketing 0 failures · research-hub rebuild clean + 0 errors · `node --check` OK.
+
+---
+
+## T26 — closing record (session `d3ce1c29`, 2026-11-14)
+
+| Item | Value |
+|---|---|
+| PR | **[#52](https://github.com/kanlerxz87-cyber/Zone2/pull/52)** `T26 final integration (d3ce1c29)` |
+| Merge commit | `d0958a38b4c1dcb6573e8a20875a5f1fecd6ea9b` |
+| Merged | 2026-11-14T19:13:24Z |
+| CI on the PR | `Build and verify and deploy` → **success** (33 s) |
+| CI on `main` after merge | `Build, verify and deploy` → **success**; `pages build and deployment` → **success** |
+| Pages API | `status: built`, `build_type: legacy`, source `main` `/`, built 2026-11-14T19:13:45Z, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live read after deploy | `pages/commissions.html` serves the **complete 46-row bounty table** and the 2-row Bonus Events panel, with the 34-item flag register linked from the header |
+| T26 | **done** |
+
+### What shipped
+
+- **Bounty/bonus transcription completed** — 46 bounty rows + 2 bonus rows from S04 (was 9). Audible $20.00 and
+  Amazon Business $15.00, the two largest published bounty rates on the program, are now on the page. (**F-30**)
+- **Zero-rate caption corrected** — Table 1 publishes two 0.00 % bands, not "nine category groups". (**F-31**)
+- **`validate_data.py` row-walk fixed** — commission-table rows (which use singular `source_id`) were never
+  source-checked; 270 rows are now walked. (**F-32**)
+- **One definition of "open"** — `tools/flag_state.py`, imported by both `build_site.py` and `build_summary.py`;
+  `pages/flags.html` and `summary.html` now both read **34 flagged items · 13 open · 21 resolved**. (**F-33**
+  covers the two surfaces that used to disagree; **F-34** records the board truncation.)
+- **Two gates that make the drift class impossible to repeat** — `check_published_counts` holds every published
+  flag/source/check count to its ledger (HTML + Markdown, with documented exclusions for the two append-only
+  logs), and `check_ledger_ids_unique` fails the build on a duplicate ledger id. Both negative-tested.
+- **F-16 closed** after independent re-verification of the four compliance controls it named.
+- **The shared task board restored** from `2577b70`, with 0 lines of `main` dropped.
+
+### Verification rows added by this session
+
+**V-71 … V-82** (renumbered from V-51 … V-62 on merge): the §5 disclosure sentence, the October 15 2025
+currency, Table 1's eleven bands, the 10-character ASIN definition, the "up to 10 %" ceiling and ~60-day
+payment wording, the Trade-In / fine-art / free-Kindle limits, the unknown-code 404 control, the three
+`plpRedirect=mhFallback` controls, the live re-resolution of all three supplied links, and the row count of
+S04's bounty and bonus tables. Source **S37** (Associates home page) entered the register via session
+`ba8b2d38`; this session's duplicate of it was dropped, not the finding.
+
+### What is still open for the owner
+
+Unchanged from every prior pass, and the only things standing between this platform and live revenue:
+**F-01/F-03** (confirm the three ASINs in Associates Central), **F-07/F-24** (add the Associates tag — the
+supplied links carry none, so as supplied they cannot earn), **F-05** (register for the Creators API; PA-API 5
+is deprecated and returns 403), **F-27** (`research-hub/scripts/build.py` deletes its own output before it has
+read its inputs — do not run it outside the repo root).
+
+### Process note for whoever comes next
+
+Four sessions merged nine pull requests to `main` during this one task. Ledger ids collided **five** times in
+one day (F-20/F-21, F-22, F-27, F-28, F-29, plus S36 and V-51…V-62). `check_ledger_ids_unique` now fails the
+build rather than letting a collision ship. And the lesson three sessions have now recorded: **a drift gate
+proves the data matches the ledger, not that the sentence is true — read the deployed page.**
