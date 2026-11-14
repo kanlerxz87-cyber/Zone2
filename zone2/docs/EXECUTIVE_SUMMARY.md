@@ -27,7 +27,10 @@ The user supplied three Amazon links:
   - Google exact-match search for `"B04G1MEwY"` → **approx. 0 results**.
   - Wayback Machine CDX index → **no captures**.
   - CamelCamelCamel (Amazon US price tracker) → **not in database / invalid identifier**.
-  - `https://link.amazon/B04G1MEwY` redirected to an unrelated product page when fetched (Amazon fallback behavior), so the short link is not a reliable identifier.
+  - `https://link.amazon/B04G1MEwY` opens one **stable** product listing on every fetch. **Corrected 2026-11-14:** the earlier
+    reading ("redirected to an unrelated product page — fallback behavior") does not hold, because a bare request for a valid
+    ASIN also carries `plpRedirect=mhFallback`. Still true: the code is not a catalog identifier, no public Amazon document binds
+    it to the destination, and the per-link token changes between days.
 - **Decision (per the no-inference rule):** every product-specific field — title, brand, category, price, rating, review count, BSR, commission rate — is **left blank and marked unverified** in all site tables. Nothing was inferred, estimated, or filled in.
 
 ## 4. What was built

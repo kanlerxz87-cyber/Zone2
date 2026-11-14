@@ -85,9 +85,9 @@ Earlier sessions concluded from the redirect alone that the destinations were *a
 
 | Observation | Result |
 |---|---|
-| Redirect target | three **different, unrelated** ASINs (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`) |
+| Redirect target | three **different** ASINs (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`), each a live product page |
 | Redirect markers | every target carries `plpRedirect=mhFallback` and `lv=shuf` |
-| Same-day re-fetch | **Corrected 2026-11-14:** re-fetched twice, the link returned the same `/dp/` path, the same page body and the **same** `btn_ref` token — the "shuffle" is not reproducible. See `revalidation/`. |
+| Same-day re-fetch | **Corrected 2026-11-14:** re-fetched twice, the link returned the same `/dp/` path and the same page body — the "shuffle" is not reproducible. **Cross-day re-fetch (2026-11-14, session a133aa61):** same ASIN and body again, but the `btn_ref` token **differs** for all three links, so the token is per-day, not per-link-stable (flag **F-20**). See `revalidation/`. |
 | Control (added 2026-11-14) | A **bare, untagged** request to a *valid* ASIN (`/dp/B08DKYBTPH`) is also answered with `plpRedirect=mhFallback&lv=shuf` appended. The marker is therefore not evidence of a fallback. |
 | Associates tag | absent from all three resolved URLs — under OA §1 a Special Link must use Amazon's tagged format, so as supplied these links cannot be relied on to attribute commission. |
 

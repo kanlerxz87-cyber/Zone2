@@ -1,5 +1,5 @@
 {
-  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources.",
+  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing pages were re-read live (this session had working outbound access to the official sites, which the build sandbox did not).",
   "accessed_utc": "2026-11-13",
   "sources": [
     {
@@ -350,6 +350,61 @@
       "accessed_utc": "2026-11-14",
       "used_for": [
         "specifications re-read on the spec tiles: 26-Quart capacity / 24.6 Liters, 16.9\"D x 15.8\"W x 14.8\"H, 120 volts, Dual-Speed Fan, '25 Cooking Pre-sets'; the product description text on the same page says '10-in-1'; model number shown as 4-00675-02A-VN - see flag F-19"
+      ]
+    },
+    {
+      "id": "S28",
+      "publisher": "Amazon (Associates Central help — Associates Program Standard Commission Income Statement)",
+      "kind": "official",
+      "title": "Standard Commission Income Statement (Table 1 fixed rates + Bounty Events)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "re-read Table 1 row by row on 2026-11-14; all eleven published rate bands re-confirmed verbatim",
+        "re-read the Bounty Events table (Prime 12.00, Prime Video 2.00 trial / 5.00 first stream / 0.25 stream)"
+      ]
+    },
+    {
+      "id": "S29",
+      "publisher": "Amazon (Associates Central help — Participation Requirements)",
+      "kind": "official",
+      "title": "Associates Program Participation Requirements — 'Links on Your Site' section (policies#Associates Program Participation Requirements)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements",
+      "page_stated_update": "2026-04-14",
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "Special Links must use the Associates ID we assigned (Req. 2(a))",
+        "Associates ID/tag XXXXX-## must be a URL parameter (Req. 2(b))",
+        "sub-tags may never be associated with a specific end user (Req. 2(b))",
+        "price/availability may only be shown when served by Amazon's link or obtained via Creators API/PA API (Req. 2(b))",
+        "comparison pages must show lowest new and, if provided, lowest used price (Req. 2(b))"
+      ]
+    },
+    {
+      "id": "S30",
+      "publisher": "Amazon (Associates Central help — IP License)",
+      "kind": "official",
+      "title": "Associates Program IP License and Usage Requirements",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20IP%20License",
+      "page_stated_update": "2026-04-14",
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "price/availability must carry a date-time stamp when refreshed less than hourly (License 2(i))",
+        "required Amazon-content disclaimer for text Product Advertising Content (License 2(k))",
+        "Agent Terms: an Agent must identify itself in the user agent string as Agent/[agent name] and must not circumvent human-check measures (License 4)"
+      ]
+    },
+    {
+      "id": "S31",
+      "publisher": "Amazon (Associates Central — Creators API documentation)",
+      "kind": "official",
+      "title": "Creators API — PA-API 5 Deprecation Notice",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "re-read on 2026-11-14: PA-API 5 calls return HTTP 403 AccessDeniedException directing to the Creators API"
       ]
     }
   ]
