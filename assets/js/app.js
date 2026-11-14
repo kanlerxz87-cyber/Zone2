@@ -55,9 +55,18 @@
       "productsTable",
       [
         { key: "shortCode", label: "Provided link code" },
-        { key: "asin", label: "Destination ASIN" },
+        {
+          key: "codeValid",
+          label: "Code is valid ASIN?",
+          render: function (r) {
+            return r.codeValid
+              ? '<span class="badge ok">Yes</span>'
+              : '<span class="badge flag">No — 9 chars, ASIN is 10</span>';
+          },
+        },
+        { key: "asin", label: "Resolved ASIN" },
         { key: "brand", label: "Brand" },
-        { key: "title", label: "Product title (verified on Amazon)" },
+        { key: "title", label: "Product title (resolved destination)" },
         { key: "category", label: "Category" },
         { key: "price", label: "Price", render: function (r) { return cell(r.price); } },
         { key: "rating", label: "Rating", render: function (r) { return cell(r.rating); } },

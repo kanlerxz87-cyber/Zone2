@@ -1396,3 +1396,31 @@ F-20/F-21"). Cross-references so records don't double-claim:
   `lint()`), and the `expires_utc` expired-promo enforcement has no implementation. F-16's action text
   still overstates its remediation. See the dd87f326 record above for the exact evidence and the two
   fix options.
+
+---
+
+## Session `arena/83194da0-zone2` — T23: root-site framing consistency fix (2026-11-14)
+
+**Task T23 — status: in progress → ready to merge. Owner: `arena/83194da0-zone2`.**
+**Scope:** root site only — `assets/js/data.js`, `assets/js/app.js`, `products.html`, subpage date footers (`index/analysis/content/compliance/tracking/flagged`), `docs/executive-summary.md`, this record. **No other session's files touched.**
+
+**Purpose.** A line-by-line re-review of the **root** site found the same overclaim T20 corrected on the landing page, but still present deeper in the root site: `products.html` / `analysis.html` / `content.html` labelled the three supplied codes as **verified** / a **"resolved ASIN"** / content **"Ready"** — none of which is true. This session corrects the **framing** without discarding the destination data the other sessions verified.
+
+**Verified facts (official sources):**
+- All three supplied codes — `B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV` — are **9 characters**. A valid ASIN is **10** (Amazon Associates help `.../topic/GP38PJ6EUR6PFBEC`).
+- `amazon.com/dp/<code>` for all three → **"Page Not Found"** (no catalog record for the codes as supplied).
+- `link.amazon/<code>` for all three → **unrelated ASINs** via `plpRedirect=mhFallback`: `B0CDY277D3` (CHEFMAN 6 Qt Dual Basket), `B09B7SB46R` (Emeril Lagasse 26 QT), `B08DKYBTPH` (CHEFMAN 8 Qt TurboFry).
+- **0 of 3 products identified as valid-ASIN matches.** The destination titles/brands/specs **are** confirmable (official Amazon + manufacturer pages) — but they describe the **fallback destination**, not the requested product.
+
+**Fix applied (framing correction, keeps verified destination data):**
+- `assets/js/data.js`: header framing note (9-char codes ≠ valid ASIN; mapping = "resolved destinations, flagged for confirmation"); `VERIFIED_DATE="2026-11-14"`; each `PRODUCTS` entry gains `codeValid:false` + `mappingNote`; `sourceLabel` suffixed **"— resolved destination"**.
+- `assets/js/data.js`: `CONTENT_ROWS` `status:"Ready"` → **`"Blocked — identity not established via a valid ASIN (F-06)"`** (6 rows); new `FLAGGED_ROWS` entry for F-06.
+- `assets/js/app.js`: `renderProducts()` gains a **"Code is valid ASIN?"** column (No — 9 chars, ASIN is 10); "Destination ASIN" → "Resolved ASIN".
+- `products.html`: captions/card titles → "resolved destinations, flagged for confirmation".
+- Subpage footers: `2026-11-13` → `2026-11-14 (re-verified)`.
+- `docs/executive-summary.md`: §3/§4 correction banners; "coherent niche" assertion dropped; attributes re-scoped to the resolved-destination ASINs.
+
+**Gates (all green locally, run 2026-11-14):** `node --check data.js/app.js`; `build_site.py --check` (no drift); `validate_data.py` exit 0 (949 links); `tests/test_pipeline.py` 11/11; `affiliate-lab/scripts/verify_site.py` (10p/205r/498l/0f); `revalidation/scripts/verify.py` (6p/73r/165ref/0f); CI price+disclosure check (85 pages, context-aware) and CI top-level link check both pass.
+
+**Note.** Supersedes the earlier T21-adjacent "blank-everything" `data.js` rewrite (head `fa21d4b`, PR #25) — that approach was reset away as over-conservative. This fix keeps each destination's verified data but flags it honestly, per "if a value can be confirmed from an official source, present it; if not, flag it."
+
