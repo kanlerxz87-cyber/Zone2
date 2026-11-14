@@ -1824,3 +1824,41 @@ then added a *different* F-22 (flag-count KPI) on `main` after `4338f55e`'s last
 `4338f55e`'s ids and renumbered the incoming KPI flag to **F-26**, recorded in `ledger/flags.json`'s note.
 `assets/js/data.js`'s `CANONICAL_FLAG_COUNT` and the `Flagged` page counts were set to 26 and are now
 derived by `tools/build_root_data.py`, so they cannot drift again.
+
+---
+
+## Session claim — `arena/808a6840-zone2` (session `808a6840`, 2026-11-14 UTC)
+
+**Board state at claim.** `main` = `6a90dfc` (merge of PR #41, T23 by `cdfaeefe`). Every T-row above is
+`done`; no row is `in progress` and no open PR claims any file. `README.md`'s / a stale T23 row's `in progress`
+labels describe work that was merged in PR #38/#41 — this session re-ran every gate against `6a90dfc` and all
+are green, so nothing here is a takeover of unfinished work.
+
+**Branch note:** Arena pins this session to `arena/808a6840-zone2` (not `session-<id>/<task>` naming);
+documented as a deviation, consistent with every prior session.
+
+### Claimed task — T26: independent line-by-line audit of the *live* site + repair of findings
+
+| Field | Value |
+|---|---|
+| Task | T26 — independent verification of the published site (not just the ledger), plus repair of every defect the audit finds; re-verify, PR, merge, confirm deploy |
+| Status | **in progress** |
+| Owner | `arena/808a6840-zone2` (`808a6840`) |
+| File scope | `COORDINATION.md` (append-only), `README.md`, `EXECUTIVE_SUMMARY.md`, `index.html`, `products.html`, `flagged.html`, the root `*.html` nav/footer block, `assets/js/data.js` + `assets/js/app.js` (only if a rendering bug is proven), `tools/build_root_views.py`, `tools/validate_data.py`, `.github/workflows/pages.yml`, and **one new lightweight stylesheet/asset** if required. |
+| Not in scope | `ledger/**` (single source of truth — change requests logged, not edited), `pages/**` (generator-owned: regenerate only via `tools/build_site.py`), `northstar/**` (frozen prototype, see change request CR-1), `research-hub/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**` (other sessions' namespaces) |
+
+**Why a T26 is needed.** T25 (`dd87f326`) audited the *live* site, but eleven sessions have since merged
+into `main`. Re-auditing the deployed pages — not the ledger — is what caught the V-31/V-32 survivors in
+T23, so it is the check with a track record. This session re-runs it on `6a90dfc` and repairs what it finds.
+
+### Change requests logged (not implemented in another session's files)
+
+| ID | File | Request | Status |
+|---|---|---|---|
+| CR-1 | `northstar/index.html` | The "Flagged for review" nav badge says **03** while the canonical register holds **26** flags (F-26 was raised for exactly this class of drift on the root dashboard). `northstar/` is a frozen prototype in session `6b8bb130`'s namespace, so this session has **not** edited it. | open — logged for the owning session or a future integration |
+| CR-2 | `media/**` | No change requested; recorded to confirm the namespace was reviewed and found in scope of no other session. | n/a |
+
+### Verification performed before this claim was pushed
+
+Every gate was run against `6a90dfc` in this session; all exit 0. Details are added to this record when
+the task closes (per the board's rule that a task records its sources and checks).
