@@ -188,6 +188,15 @@
       "citation_alt": "Welcome to Creators API - Prerequisites",
       "implemented_control": "tools/amazon_creators_api.py targets the Creators API operations (SearchItems, GetItems, GetVariations, GetBrowseNodes) and exits with a machine-readable BLOCKED reason when credentials or the qualifying-sales gate are absent, instead of falling back to scraping",
       "status": "VERIFIED"
+    },
+    {
+      "id": "R-21",
+      "domain": "Disclosure accuracy",
+      "requirement": "The Site must not make inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or any of Amazon's policies, promotions, or prices. A headline count that disagrees with the register it summarises is such a claim.",
+      "source_id": "S02",
+      "citation": "Participation Requirements §2(b) (no inaccurate, overbroad, deceptive or misleading claims)",
+      "implemented_control": "tools/validate_data.py::check_flag_count compares CANONICAL_FLAG_COUNT in assets/js/data.js against ledger/flags.json and fails the build on any disagreement; the count is rendered from the constant, never typed into markup.",
+      "status": "VERIFIED"
     }
   ]
 }

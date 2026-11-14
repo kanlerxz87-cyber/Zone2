@@ -78,9 +78,10 @@
         arbitrary “fallback” pages on the strength of the <code>plpRedirect=mhFallback</code> and
         <code>lv=shuf</code> markers. That reasoning was tested and does not hold: a bare, untagged request to
         a <em>valid</em> ASIN (<code>/dp/B08DKYBTPH</code>) is answered with the real product page and the same
-        markers appended, and re-fetching a short link returns the same ASIN, body and per-link
-        <code>btn_ref</code> token rather than a shuffle. The destinations are therefore stable and
-        individually tracked, not arbitrary. Evidence, sources and open flags:
+        markers appended. The destinations are therefore stable and individually tracked, not arbitrary.
+        What does <strong>not</strong> hold is the token: re-fetched a day later, every link returned the same
+        ASIN and the same body but a <em>different</em> <code>btn_ref</code>, so the token is per-day, not a
+        stable per-link identifier (<strong>flag F-20</strong>). Evidence, sources and open flags:
         <a href="revalidation/index.html">Revalidation</a>.
       </p>
       <p>
@@ -127,7 +128,7 @@
     </div>
 
     <div class="card">
-      <h3>Flagged for Review — 21 items</h3>
+      <h3>Flagged for Review — 22 items</h3>
       <p style="font-size:13.5px">
         Nothing on this site is a product claim. These are the items that could not be confirmed from an official source, plus
         the irregularities found while checking. None of them block the publish; each carries its source link so it can be
@@ -143,7 +144,8 @@
             <tr><td><code>F-05</code></td><td>PA-API 5 is deprecated; catalog access requires the Creators API, which requires ≥10 qualifying sales in 30 days</td><td>Open — owner must register for Creators API access</td></tr>
             <tr><td><code>F-08</code></td><td>No click, conversion or earnings report exists, so no performance figure can be published</td><td>Open — owner must connect a dated Associates report</td></tr>
             <tr><td><code>F-19</code></td><td>The Emeril manufacturer page contradicts itself on cooking presets: 24 (description), 25 (spec tile), “10-in-1” (feature block)</td><td>Open — published as a conflict, no value chosen</td></tr>
-            <tr><td><code>F-21</code> <em>(new)</em></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
+            <tr><td><code>F-22</code> <em>(new)</em></td><td>The dashboard flag count was derived from the reader-facing subset, not the register: it showed 14 while <code>pages/flags.html</code> published 21</td><td>Closed — count now pinned to the ledger by a gate (negative-tested)</td></tr>
+            <tr><td><code>F-21</code></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
           </tbody>
         </table>
       </div>

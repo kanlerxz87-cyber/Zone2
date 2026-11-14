@@ -221,8 +221,10 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     // KPI strip: the flag count is derived, never typed, so it cannot drift from the data (F-17).
+    // FLAGGED_ROWS is the reader-facing subset; the canonical register in ledger/flags.json is larger.
+    // Show the canonical total so the dashboard cannot understate what pages/flags.html publishes.
     var fc = document.getElementById("flagCount");
-    if (fc) fc.textContent = String(FLAGGED_ROWS.length);
+    if (fc) fc.textContent = String(CANONICAL_FLAG_COUNT || FLAGGED_ROWS.length);
 
     renderProducts();
     renderSpecs();

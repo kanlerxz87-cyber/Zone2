@@ -139,6 +139,42 @@ def test_no_invented_performance_numbers_in_data():
                 assert value in ("", "null", "none", "0", "0.0"), f"{name}: fabricated {key} value {value!r}"
 
 
+
+def test_dashboard_flag_count_cannot_drift_from_the_ledger():
+    """F-22 regression: the dashboard KPI must equal the canonical register, and the gate must catch drift.
+
+    The check is exercised in both directions - matching the ledger passes, a deliberately wrong value fails -
+    because a guard nobody has seen fail is not evidence that it works.
+    """
+    import validate_data
+
+    ledger = json.loads((REPO / "ledger" / "flags.json").read_text(encoding="utf-8"))
+    canonical = len(ledger["flags"])
+    js = (REPO / "assets" / "js" / "data.js").read_text(encoding="utf-8")
+
+    m = re.search(r"CANONICAL_FLAG_COUNT\s*=\s*(\d+)", js)
+    assert m, "CANONICAL_FLAG_COUNT is missing from assets/js/data.js"
+    assert int(m.group(1)) == canonical, (
+        f"dashboard says {m.group(1)} flags, ledger holds {canonical}"
+    )
+
+    # Negative direction: the gate must actually reject a wrong count.
+    report = validate_data.Report()
+    original = js
+    wrong = re.sub(r"(CANONICAL_FLAG_COUNT\s*=\s*)\d+", r"\g<1>999", original)
+    js_path = REPO / "assets" / "js" / "data.js"
+    js_path.write_text(wrong, encoding="utf-8")
+    try:
+        validate_data.check_flag_count(report)
+        assert report.errors, "check_flag_count accepted a count that disagrees with the ledger"
+    finally:
+        js_path.write_text(original, encoding="utf-8")
+
+    report_ok = validate_data.Report()
+    validate_data.check_flag_count(report_ok)
+    assert not report_ok.errors, report_ok.errors
+
+
 def test_validation_gate_passes():
     out = subprocess.run(
         [sys.executable, "tools/validate_data.py"], cwd=REPO, capture_output=True, text=True

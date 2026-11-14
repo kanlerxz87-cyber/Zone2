@@ -283,6 +283,34 @@ def check_landing_links_here(report: Report) -> None:
         report.stats["landing_links_to_pages"] = 1
 
 
+def check_flag_count(report: Report) -> None:
+    """The dashboard renders a flag count. It must equal the canonical register, never be typed.
+
+    F-17 fixed a typed KPI that read "11 items flagged" while the ledger held 19. The fix derived the
+    number from FLAGGED_ROWS, which is the *reader-facing subset*, not the register — so the dashboard
+    still understated the site (14 vs 21) after flags were added. This check pins the constant to the
+    ledger so the two cannot diverge again.
+    """
+    doc = _load("flags.json")
+    canonical = len(doc.get("flags", []))
+    js_path = REPO / "assets" / "js" / "data.js"
+    if not js_path.exists():
+        report.warn("assets/js/data.js missing - cannot verify the dashboard flag count")
+        return
+    js = js_path.read_text(encoding="utf-8", errors="ignore")
+    m = re.search(r"CANONICAL_FLAG_COUNT\s*=\s*(\d+)", js)
+    if not m:
+        report.fail("assets/js/data.js: CANONICAL_FLAG_COUNT is missing - the dashboard flag count is not derived from the ledger")
+        return
+    stated = int(m.group(1))
+    if stated != canonical:
+        report.fail(
+            f"assets/js/data.js: CANONICAL_FLAG_COUNT={stated} but ledger/flags.json holds {canonical} flags "
+            "- the dashboard would publish a flag count that disagrees with the register"
+        )
+    report.stats["canonical_flags"] = canonical
+
+
 def check_no_product_prices(report: Report) -> None:
     """No generated page may display a product price.
 
@@ -332,6 +360,7 @@ def main(strict: bool = True) -> Report:
         check_marks(report)
         check_disclosure(report)
         check_landing_links_here(report)
+        check_flag_count(report)
         check_no_product_prices(report)
         check_links(report)
     except FileNotFoundError as exc:
