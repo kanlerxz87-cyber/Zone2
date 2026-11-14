@@ -20,9 +20,14 @@ compliance) **for three specific products**:
 | 2 | `https://link.amazon/B02NbDxp3` | `B02NbDxp3` | 9 | **No** | Page Not Found |
 | 3 | `https://link.amazon/B00hJ57DV` | `B00hJ57DV` | 9 | **No** | Page Not Found |
 
-Each submitted short link resolved to a **different** Amazon air-fryer listing. Resolving them produces
-three distinct, *stable*, per-link source tokens — so the links are individually tracked and deterministic,
-not random.
+Each submitted short link opened a **different** live Amazon air-fryer listing, and each destination is
+*stable*: the same ASIN and page body on every re-fetch. **Correction (2026-11-14): the
+`plpRedirect=mhFallback` marker is not evidence of a fallback** — a bare request to a valid ASIN carries the
+same marker (control test in `docs/revalidation-2026-11-14.md`, reproduced live this session). What remains
+true is narrower: no resolved URL carries an Associates `tag`, no public Amazon document binds the code to
+the destination, and the per-link `btn_ref` token changes between days (flag F-20). The three destinations
+are therefore recorded as the product each link resolves to, and are **not** established as the requested
+products.
 
 > **Corrected 2026-11-14 (session `c6e94e8d`).** This section previously called those three destinations
 > "unrelated fallback pages", reasoning from the `plpRedirect=mhFallback` and `lv=shuf` markers and from a
