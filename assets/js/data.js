@@ -908,7 +908,11 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 28;
+<<<<<<< HEAD
+const CANONICAL_FLAG_COUNT = 29;
+=======
+const CANONICAL_FLAG_COUNT = 27;
+>>>>>>> origin/main
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -969,14 +973,14 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-06 — Published copy must be labelled 'the product this link resolves to' until the owner confirms the mapping",
-    detail: "Because no public Amazon document binds a link.amazon code to a product, the three products this site publishes are the destinations the supplied links resolve to — verified by live fetch and by the unknown-code control (F-20) — not a confirmed brief mapping. The article, comparison and buying-guide generator therefore stays in preview for the three submitted tokens: draft copy exists in content/templates/** but is not published, so that no article asserts a mapping Amazon does not document.",
+    detail: "No public Amazon document binds a link.amazon code to a product, so the observed destinations are not confirmed as the products intended in the brief. The root article/comparison/guide generator remains blocked for brief-mapped copy. Separately, the public /marketing set contains three destination-only articles, a comparison and a buying guide based on official manufacturer specifications; every page now labels the unresolved mapping and links to this finding. This destination-only content is not evidence of the intended brief mapping.",
     severity: "high",
-    impact: "No published article, comparison or buying guide names these three products yet. Every other part of the platform (policy engine, rate data, scoring, tracking schema, templates, deploy) is delivered and gated.",
-    actionRequired: "Confirm the mapping and supply tagged links; the pipeline then publishes verified-only copy without any other change.",
+    impact: "Destination-only marketing copy is published under /marketing; content claiming the supplied codes identify the brief's intended products remains blocked pending owner confirmation. Specs are source-linked; identity mapping remains unverified.",
+    actionRequired: "Confirm in Associates Central that these destinations are the intended products and supply correctly tagged links before treating the content as brief-matched or monetized.",
     ledgerFlag: "F-06",
     ledgerUrl: "pages/flags.html#F-06",
     source: "https://link.amazon/B00TEST12",
-    sourceIds: ["S32", "S19", "S20", "S21"],
+    sourceIds: ["S32", "S33", "S34", "S35", "S19", "S20", "S21", "S25", "S26", "S27"],
   },
   {
     item: "F-07 — No Associates account, marketplace, tracking ID, or tag supplied",
@@ -1199,26 +1203,37 @@ const FLAGGED_ROWS = [
     sourceIds: ["S02"],
   },
   {
-    item: "F-27 — Typed count labels outside the generated dataset had drifted from the registers (README said 14 items / 32 checks / 22 sources; the registers hold 26 / 50 / 35)",
-    detail: "Found in the T26 line-by-line pass (session e9c8362c, 2026-11-14). README.md's subpage links typed three counts - 'flagged for review (14 items)', 'verification log (32 checks)', 'source register (22 sources)' - while ledger/flags.json held 26 flags, ledger/verification.json 50 rows and ledger/sources.json 35 sources; the README also said '11 executable guard checks' while tests/test_pipeline.py ran 13 (14 after this fix). index.html and flagged.html typed the flag count in static HTML too. Same defect class as F-17 and F-26: a typed number with no gate behind it. Evidence is the repository state itself (README.md at commit 6a90dfc, lines 45-50); no external source can state internal counts, so this row carries none.",
-    severity: "medium",
-    impact: "A reader comparing README.md against pages/flags.html saw 14 items against 26 - the register understated by 12 in the one document a reviewer reads first.",
-    actionRequired: "None open. The README, index.html and flagged.html labels now state the ledger values, and tools/validate_data.py::check_typed_counts fails the build whenever any of them disagrees with the ledgers (negative-tested in tests/test_pipeline.py::test_typed_count_labels_cannot_drift_from_the_ledger).",
+    item: "F-27 — research-hub/scripts/build.py deletes its own output before every input is present, and cannot rebuild the hub from this tree",
+    detail: "Running `python3 research-hub/scripts/build.py` (the hub's generator, not the root generators) deleted all 13 committed pages under research-hub/ and then aborted with FileNotFoundError on 'research-hub/docs/executive-summary.md'. Two faults combine: (a) it resolves its paths against the repository root instead of the hub directory, the same relocation defect repaired in research-hub/scripts/verify.py (I-27); and (b) it removes its previous output before it has read every input, so one missing input leaves the site with no pages. The pages were restored from git within the same session and every gate re-ran green, so nothing was published broken. The reference to 'docs/executive-summary.md' shows the hub's source document now lives outside the hub, so the generator cannot reproduce the published hub here even with correct paths.",
+    severity: "high",
+    impact: "A reader or a future automated session that runs this generator loses the entire research-hub/ site from the working tree. CI does not run it (0 references in .github/workflows/pages.yml), so the deployed site is unaffected, but the hazard is real and one command away.",
+    actionRequired: "Do not run research-hub/scripts/build.py in this tree. The owning session should repoint it at the hub directory and make it verify its inputs before deleting output, or archive it beside the generated pages. Recorded rather than patched because research-hub/** is another session's namespace and its input layout has moved.",
     ledgerFlag: "F-27",
     ledgerUrl: "pages/flags.html#F-27",
+    source: "https://docs.github.com/en/rest/pages/pages",
+    sourceIds: ["S22"],
+  },
+  {
+    item: "F-28 — README.md prose counts drifted from the registers twice (14/32/22 at 6a90dfc; again 26-items and 13-checks labels after F-27 and a new test landed)",
+    detail: "Found in the T26 line-by-line pass (session e9c8362c, 2026-11-14). At 6a90dfc README.md typed 'flagged for review (14 items)', 'verification log (32 checks)', 'source register (22 sources)' and '11 executable guard checks' while the ledgers held 26 flags / 50 verification rows / 35 sources / 13 tests. Parallel session b38cc982 (PR #44) then derived the index.html and flagged.html captions from CANONICAL_FLAG_COUNT and gated that class inside tools/validate_data.py::check_flag_count - but README.md prose stayed typed and outside the gate, and drifted again on main: it read '(26 items, F-01…F-26)' while the register held 27 flags, and '13 executable guard checks' while the suite ran 14. Same defect class as F-17 and F-26: a typed number with no gate behind it, one layer the F-26 gate does not reach.",
+    severity: "medium",
+    impact: "README.md is the first document a reviewer reads; each drift understated the register or the guard suite. A caption derived at runtime cannot drift, but prose counts can - and did, twice in one day.",
+    actionRequired: "None open. README.md now states the ledger values, and tools/validate_data.py::check_typed_counts (session e9c8362c) pins every typed count label in README.md - flags, verification checks, sources and executable guard checks - to ledger/flags.json, ledger/verification.json, ledger/sources.json and the actual test count; negative-tested in tests/test_pipeline.py::test_typed_count_labels_cannot_drift_from_the_ledger (a wrong README count turns the gate red; the file is restored afterwards). The check also asserts the index.html and flagged.html captions still render from the derived markers (flagCountHeading / flagRegisterCount), never typed prose.",
+    ledgerFlag: "F-28",
+    ledgerUrl: "pages/flags.html#F-28",
     source: "",
     sourceIds: [],
   },
   {
-    item: "F-28 — research-hub/summary.html rollup tables carry values with no per-row source links (the sources exist one level down)",
-    detail: "Found in the T26 per-row sourcing audit (session e9c8362c, 2026-11-14): across 94 published pages and 1,124 data rows, every table row either ends in an official-source link or is an explicit blank-or-flagged cell - except the rollup tables in research-hub/summary.html. Its three product-mapping rows state ASIN, title and brand (B0CDY277D3, B09B7SB46R, B08DKYBTPH) with no link inside the row, and its policy-verdict rows (price, star rating, review count, stock) state conclusions with no row-level citation. The values themselves are sourced - the hub's per-product pages and research-hub/data/products.json carry per-row Amazon and manufacturer links (S19-S21 and the manufacturer pages) - so this is a presentation gap, not an unsourced claim. research-hub/** is a preserved companion namespace owned by session 6602723a, so T26 logged change request CR-7 in COORDINATION.md instead of editing it.",
+    item: "F-29 — research-hub/summary.html policy-verdict and conflict rows are still block-sourced (product rows were fixed on main; the rollup gap is now partial)",
+    detail: "The T26 per-row sourcing audit (session e9c8362c, 2026-11-14) found the research-hub summary rollup tables carrying values with no per-row source links. Parallel session a6f70a13 then added an 'Official product source' column to the three product-mapping rows (verified on the merged tree: each row now ends in manufacturer + Amazon links). The residual, measured on the merged tree: the four policy-verdict rows (price, star rating, review count, stock) and the four conflict rows (I-9, I-10, I-12, I-13) still state values and verdicts with no link inside the row - their sources exist in the hub's per-product pages, data/products.json and the conflict flags. The remaining rollup rows are file inventories and disposition tallies (repo-internal). research-hub/** is a preserved companion namespace, so this is change request CR-7 (partial) in COORDINATION.md, not an edit.",
     severity: "low",
-    impact: "The brief's verification rule is per row: every table row must have a source link to an official site. A reader of the rollup table cannot trace a value without knowing to continue to the per-product pages.",
-    actionRequired: "Needs review. Owner of research-hub/: add a per-row source column (or per-row footnote link) to the summary rollup tables via research-hub/scripts/build.py and its data files, or label the tables as block-sourced to the per-product pages. T26 did not edit research-hub/** because it belongs to another session's namespace.",
-    ledgerFlag: "F-28",
-    ledgerUrl: "pages/flags.html#F-28",
-    source: "https://www.amazon.com/dp/B0CDY277D3",
-    sourceIds: ["S19", "S20", "S21"],
+    impact: "The brief's verification rule is per row: every table row must have a source link to an official site. A reader of those eight rows cannot trace the verdict or the conflicting figures without knowing to continue to the per-product pages.",
+    actionRequired: "Needs review. Owner of research-hub/: extend the 'Official product source' treatment to the policy-verdict and conflict tables via research-hub/scripts/build.py and its data files, or label those tables as block-sourced to the per-product pages. Session e9c8362c did not edit research-hub/** because it belongs to another session's namespace.",
+    ledgerFlag: "F-29",
+    ledgerUrl: "pages/flags.html#F-29",
+    source: "https://affiliate-program.amazon.com/help/operating/policies",
+    sourceIds: ["S02", "S19", "S20", "S21"],
   },
 ];
 /* END GENERATED: flags */

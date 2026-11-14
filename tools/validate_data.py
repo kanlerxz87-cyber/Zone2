@@ -317,47 +317,81 @@ def check_flag_count(report: Report) -> None:
         )
     report.stats["canonical_flags"] = canonical
 
+    # T26: the same defect appears one layer up. `index.html` and `flagged.html` used to
+    # hard-code "26 items" / "26 flags" in their HTML, so they kept publishing the old
+    # number after F-27 was added. A typed count in a template is the same bug as a typed
+    # KPI, so refuse it: the caption must render from CANONICAL_FLAG_COUNT instead.
+    typed = re.compile(r"(?<![-\w.])(\d{1,4})\s+(?:items?|flags)\b", re.I)
+    for name in ("index.html", "flagged.html"):
+        path = REPO / name
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        # Only the reader-facing caption prose matters here, not code samples or data rows.
+        for line_no, line in enumerate(text.splitlines(), 1):
+            if "<script" in line or "CANONICAL_FLAG_COUNT" in line:
+                continue
+            for m in typed.finditer(re.sub(r"<[^>]+>", " ", line)):
+                stated_line = int(m.group(1))
+                if stated_line != canonical:
+                    report.fail(
+                        f"{name}:{line_no}: typed count '{m.group(0)}' but the register holds "
+                        f"{canonical} flags - derive the caption from CANONICAL_FLAG_COUNT"
+                    )
+
 
 def check_typed_counts(report: Report) -> None:
-    """Typed count labels in prose/HTML outside the generated data must equal the ledgers (F-27).
+    """Typed count prose outside the generated data must equal the ledgers (F-28, session e9c8362c).
 
-    check_flag_count pins assets/js/data.js. The root pages and README.md state the same numbers in
-    static prose, where nothing regenerates them: README.md had drifted to "14 items / 32 checks /
-    22 sources" against registers holding 26 / 50 / 35. This check pins those labels too, so the
-    published surfaces cannot disagree with each other again.
+    The class has two layers. check_flag_count pins assets/js/data.js AND refuses typed
+    \"N items/flags\" captions on index.html and flagged.html (those captions render from
+    CANONICAL_FLAG_COUNT via the flagCountHeading / flagRegisterCount markers). The layer it does
+    not reach is README.md prose: it drifted to \"14 items / 32 checks / 22 sources\" against
+    registers holding 26 / 50 / 35 at 6a90dfc, and drifted again on main (\"26 items\" against 27
+    flags, \"13 executable guard checks\" against 14 tests). This check pins every README.md count
+    label to the ledgers and asserts the root captions still render from the derived markers, so
+    no surface can disagree with the registers again.
     """
     flags_n = len(_load("flags.json").get("flags", []))
     checks_n = len(_load("verification.json").get("rows", []))
     sources_n = len(_load("sources.json").get("sources", []))
     tests_src = (REPO / "tests" / "test_pipeline.py").read_text(encoding="utf-8")
     tests_n = len(re.findall(r"^def test_", tests_src, re.M))
-    expectations = [
-        ("index.html", [
-            f"Flagged for Review \u2014 {flags_n} items",
-            f"all {flags_n} items",
-        ]),
-        ("flagged.html", [
-            f"{flags_n} flags (F-01 \u2026 F-{flags_n:02d})",
-        ]),
-        ("README.md", [
-            f"verification log ({checks_n} checks)",
-            f"source register ({sources_n} sources)",
-            f"flagged for review ({flags_n} items)",
-            f"{tests_n} executable guard checks",
-        ]),
+    readme_labels = [
+        f"verification log ({checks_n} checks",
+        f"source register ({sources_n} sources",
+        f"flagged for review ({flags_n} items",
+        f"F-01\u2026F-{flags_n:02d})",
+        f"{tests_n} executable guard checks",
     ]
-    for name, labels in expectations:
-        path = REPO / name
-        if not path.exists():
-            report.fail(f"{name}: missing - cannot verify its typed count labels")
-            continue
+    path = REPO / "README.md"
+    if not path.exists():
+        report.fail("README.md: missing - cannot verify its typed count labels")
+    else:
         text = path.read_text(encoding="utf-8")
-        for label in labels:
+        for label in readme_labels:
             if label not in text:
                 report.fail(
-                    f"{name}: typed count label {label!r} not found - the page disagrees with the "
-                    "ledgers (flags.json / verification.json / sources.json / tests). "
-                    "Update the label or the register; never leave them inconsistent (F-27)."
+                    f"README.md: typed count label {label!r} not found - the prose disagrees with "
+                    "the ledgers (flags.json / verification.json / sources.json / tests). "
+                    "Update the label or the register; never leave them inconsistent (F-28)."
+                )
+    markers = [
+        ("index.html", ("flagCountHeading", "flagCount")),
+        ("flagged.html", ("flagRegisterCount", "flagRegisterMax")),
+    ]
+    for name, ids in markers:
+        p = REPO / name
+        if not p.exists():
+            report.fail(f"{name}: missing - cannot verify its derived count captions")
+            continue
+        text = p.read_text(encoding="utf-8")
+        for marker in ids:
+            if f'id="{marker}"' not in text:
+                report.fail(
+                    f"{name}: derived caption marker id=\"{marker}\" is gone - the page would have "
+                    "to type its flag count again (F-26/F-28 class). Restore the marker; the "
+                    "caption renders from CANONICAL_FLAG_COUNT, never from prose."
                 )
 
 

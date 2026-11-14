@@ -1,8 +1,8 @@
 # Executive Summary — AI-Powered Amazon Affiliate Platform (Zone2)
 
-**Status:** platform built, site live, three requested products **unmarketable as supplied** (details below).
-**Verified:** 2026-11-13 (UTC). Every figure in this file is transcribed from a source listed in
-[`data/sources.json`](data/sources.json); nothing is estimated, averaged, or inferred.
+**Status:** platform built and live; three observed destination products have source-linked marketing copy, but their mapping to the products intended in the brief is unverified and the preview links are not monetized.
+**Verified:** 2026-11-14 (UTC). Published product specifications are linked to official sources in the site and registered in
+[`ledger/sources.json`](ledger/sources.json); unverified values remain blank and flagged.
 **Live site:** https://kanlerxz87-cyber.github.io/Zone2/
 
 ---
@@ -14,70 +14,71 @@ pricing/review/competition/commission analysis, SEO article + comparison + buyin
 discovery, link publishing, click/conversion tracking, continuous optimisation, under Amazon Associates
 compliance) **for three specific products**:
 
-| # | Link as supplied | Token | Token length | Valid ASIN? | Canonical `/dp/` result |
-|---|---|---|---|---|---|
-| 1 | `https://link.amazon/B04G1MEwY` | `B04G1MEwY` | 9 | **No** (ASIN is 10 chars) | Page Not Found |
-| 2 | `https://link.amazon/B02NbDxp3` | `B02NbDxp3` | 9 | **No** | Page Not Found |
-| 3 | `https://link.amazon/B00hJ57DV` | `B00hJ57DV` | 9 | **No** | Page Not Found |
+| # | Link as supplied | Token | Token length | Valid ASIN? | Canonical `/dp/` result | Official evidence |
+|---|---|---|---|---|---|---|
+| 1 | `https://link.amazon/B04G1MEwY` | `B04G1MEwY` | 9 | **No** — supplied token is not a 10-character ASIN | Page Not Found | [Amazon lookup](https://www.amazon.com/dp/B04G1MEwY) · [Amazon ASIN/link help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) |
+| 2 | `https://link.amazon/B02NbDxp3` | `B02NbDxp3` | 9 | **No** — supplied token is not a 10-character ASIN | Page Not Found | [Amazon lookup](https://www.amazon.com/dp/B02NbDxp3) · [Amazon ASIN/link help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) |
+| 3 | `https://link.amazon/B00hJ57DV` | `B00hJ57DV` | 9 | **No** — supplied token is not a 10-character ASIN | Page Not Found | [Amazon lookup](https://www.amazon.com/dp/B00hJ57DV) · [Amazon ASIN/link help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) |
 
-Each submitted short link opened a **different** live Amazon air-fryer listing, and each destination is
-*stable*: the same ASIN and page body on every re-fetch. **Correction (2026-11-14): the
-`plpRedirect=mhFallback` marker is not evidence of a fallback** — a bare request to a valid ASIN carries the
-same marker (control test in `docs/revalidation-2026-11-14.md`, reproduced live this session). What remains
-true is narrower: no resolved URL carries an Associates `tag`, no public Amazon document binds the code to
-the destination, and the per-link `btn_ref` token changes between days (flag F-21). The three destinations
-are therefore recorded as the product each link resolves to, and are **not** established as the requested
-products.
+Each submitted short link opened a **different** live Amazon air-fryer listing. Across the checks recorded
+in `revalidation/` and the 2026-11-14 verification log, each destination ASIN and page body reproduced; the
+`btn_ref` token rotated across days (flag F-21). **Correction (2026-11-14): the `plpRedirect=mhFallback`
+marker is not evidence of a fallback** — a bare request to a valid ASIN carries the same marker (control
+recorded in `docs/revalidation-2026-11-14.md`). What remains true is narrower: no resolved URL carries an
+Associates `tag`, and no public Amazon document binds the short code to the destination. The three
+observations are recorded as the products those links resolve to, not established as the products intended
+in the brief.
 
-> **Corrected 2026-11-14 (session `c6e94e8d`).** This section previously called those three destinations
-> "unrelated fallback pages", reasoning from the `plpRedirect=mhFallback` and `lv=shuf` markers and from a
-> reported change of page body / `btn_ref` on re-fetch. **That reasoning was tested and does not hold:** a
-> bare, untagged request to a *valid* ASIN (`/dp/B08DKYBTPH`) is answered with the real product page and the
-> same markers appended; and re-fetching a short link returns the same ASIN, body and `btn_ref` token. The
-> destinations are stable and individually tracked — not arbitrary. Evidence and sources:
-> [`revalidation/`](revalidation/index.html).
+> **Reconciliation (2026-11-14).** Earlier sessions read `plpRedirect=mhFallback` / `lv=shuf` as evidence
+> of fallback destinations. A control request for a valid ASIN also carried those markers, so that inference
+> was withdrawn. Repeated checks found the destination ASIN and page body stable; a later cross-day check
+> found the `btn_ref` token rotated. This demonstrates observed redirect behaviour, not a documented
+> short-code-to-product contract. See [`revalidation/`](revalidation/index.html) and flag F-03.
 
 **Consequence — narrower than first reported.** The supplied *codes* are still not ASINs (9 characters;
 `/dp/<code>` → Page Not Found), and **no public Amazon document binds a `link.amazon` code to a destination
 ASIN**, so the mapping is observed behaviour rather than documented intent. None of the three resolved URLs
-carries an Associates `tag` either. Product identity is therefore **not established**, so price, category,
-rating, review, competition and commission-band values for these items are **left blank and flagged**,
-exactly as the verification rule requires. Writing marketing copy about them *as the requested products*
-would have meant inventing an identity — but the three ASINs themselves are real, verified products, and
-the attribute tables record them as *the product each link resolves to*.
+carries an Associates `tag` either. Identity as the products intended in the brief is therefore **not established**.
+The published destination tables contain manufacturer-verified specifications for the observed ASINs, while price,
+rating, review, competition and commission-band values that cannot be confirmed remain blank and flagged.
+Writing marketing copy that claimed these were *the requested products* would invent an identity; the `/marketing/`
+copy instead labels them as observed destinations and links each specification to its official source.
 
 ## 2. Decisions taken
 
-1. **Build the platform, not the prose.** The brief's contradiction (build an automated, verified content
-   machine; supply links that resolve to nothing) is resolved in favour of the rule that governs the project:
-   *never infer a value*. Every module was built and is runnable; the three product records stay blank.
+1. **Build the platform and source-governed destination content, without inventing identity.** The three
+   short links resolve reproducibly to product pages, but their 9-character codes are not ASINs and no
+   public Amazon document binds those codes to the products intended in the brief. The `/marketing/` site
+   publishes destination-only articles, comparison and buying guide from manufacturer-sourced facts; every
+   marketing page labels that the brief mapping is unresolved. The root brief-mapped generator remains blocked
+   until the owner confirms the mapping. Unverified fields stay blank; confirmed destination specifications
+   remain published with their official sources.
 2. **Identity gate before anything else.** `tools/asin_guard.py` validates the 10-character identifier and
    refuses to repair a short token. This is the boundary the supplied links failed.
 3. **Only official ingestion.** The catalog client targets the **Creators API** (PA-API 5.0 is deprecated;
    calls return `403 AccessDenied` per Amazon's own notice) and exits with a machine-readable `BLOCKED` reason
    instead of falling back to scraping.
-4. **Compliance as code, not as a disclaimer.** 20 rules read from the Operating Agreement, Program Policies and
+4. **Compliance as code, not as a disclaimer.** 21 rules read from the Operating Agreement, Program Policies and
    Participation Requirements (plus FTC and Google guidance) are each mapped to an implemented control, and
    `tools/validate_data.py` fails the build when one is violated.
-5. **The landing page from the first merged commit is preserved** — its dashboard, honest blank product rows and
-   Pages workflow all remain; the subpages, sourced data and tooling are additive.
+5. **The original dashboard and Pages workflow are preserved** — the integrated site now distinguishes the observed destination data from the still-unverified brief mapping; sourced ledgers, content views and tooling are additive.
 
 ## 3. Verified economics (Amazon's published figures, not model output)
 
-**Fixed Standard Commission bands** ([source S04](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ)), transcribed into `data/commission_table.json`:
+**Fixed Standard Commission bands** from Amazon's public Table 1 ([official source](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ)), transcribed into `ledger/commission_table.json`:
 
-| Rate | Categories (as published) |
-|---|---|
-| 10.00% | Luxury Beauty, Luxury Stores Beauty, Amazon Explore |
-| 5.00% | Digital Music, Physical Music, Handmade, Digital Videos |
-| 4.50% | Physical Books, Kitchen, Automotive |
-| 4.00% | Amazon Fire Tablet / Kindle Devices, Luxury Stores Fashion, Apparel, Cloud Cam, Fire TV Edition Smart TVs, Fire TV, Echo, Ring, Watches, Jewelry, Luggage, Shoes, Handbags & Accessories |
-| 3.00% | Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins |
-| 2.50% | PC, PC Components, DVD & Blu-Ray |
-| 2.00% | Televisions, Digital Video Games |
-| 1.00% | Amazon Fresh, Physical Video Games & Consoles, Grocery, Health & Personal Care |
-| 0.00% | Gift Cards; Wireless Service Plans; Alcoholic Beverages; Digital Kindle subscriptions; Vehicles – Leasing and Sales; Pet Prescription Medications; restaurant-prepared food; Amazon Appstore / Prime Now / Amazon Pay Places; Coach |
-| 4.00% | All Other Categories (default band) |
+| Rate | Categories (as published) | Official source |
+|---|---|---|
+| 10.00% | Luxury Beauty, Luxury Stores Beauty, Amazon Explore | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 5.00% | Digital Music, Physical Music, Handmade, Digital Videos | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 4.50% | Physical Books, Kitchen, Automotive | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 4.00% | Amazon Fire Tablet / Kindle Devices, Luxury Stores Fashion, Apparel, Cloud Cam, Fire TV Edition Smart TVs, Fire TV, Echo, Ring, Watches, Jewelry, Luggage, Shoes, Handbags & Accessories | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 3.00% | Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 2.50% | PC, PC Components, DVD & Blu-Ray | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 2.00% | Televisions, Digital Video Games | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 1.00% | Amazon Fresh, Physical Video Games & Consoles, Grocery, Health & Personal Care | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 0.00% | Gift Cards; Wireless Service Plans; Alcoholic Beverages; Digital Kindle subscriptions; Vehicles – Leasing and Sales; Pet Prescription Medications; restaurant-prepared food; Amazon Appstore / Prime Now / Amazon Pay Places; Coach | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| 4.00% | All Other Categories (default band) | [Amazon Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
 
 **Attribution mechanics** ([source S02](https://affiliate-program.amazon.com/help/operating/policies)) that bound every revenue claim:
 
@@ -101,7 +102,7 @@ actionable economics finding in the brief.
 | Pricing | Prices/availability only from an Amazon-served link or API data under the License | **no price cell is populated anywhere on the site**; comparison template keeps lowest-new / lowest-used slots sourced-only |
 | Content | Content may not be altered, resold or redistributed; no misleading claims; expired promos must be removed | immutable raw API block + response hash; claim-evidence lint; promo expiry gate |
 | Linking | Tag required; no offline/email/SMS distribution; sub-tags must never be tied to a specific end user; no double-claiming with another network | static campaign registry only; email/SMS channels absent from the schema; competing attribution params rejected |
-| Naming | No Amazon mark (or variant) in any domain, subdomain, tag, or social identifier | site is named *Northstar*; `assert_no_amazon_marks` scans titles, copy and paths |
+| Naming | No Amazon mark (or variant) in any domain, subdomain, tag, or social identifier | primary site is named *Zone2*; the older *Northstar* prototype is isolated under `northstar/`; the validator scans controlled titles and paths |
 | SEO | Affiliate links qualified with `rel="sponsored"`; Product/Review structured data rules | builder always emits `rel="sponsored nofollow"`; template JSON-LD constrained |
 
 ## 5. What is built (and provably so)
@@ -119,14 +120,11 @@ actionable economics finding in the brief.
 * `tools/build_site.py` — deterministic, network-free generation of 37 pages from the data ledger.
 * `tools/validate_data.py` — the deploy gate: per-row sourcing, blank-or-flagged, no-invented-metrics,
   mark scan, disclosure audit, cross-session drift check, broken-link check (868 internal links).
-* `tests/test_pipeline.py` — 11 executable checks; **all pass**.
+* `tests/test_pipeline.py` — 14 executable checks, including a regression test for the marketing identity-scope notice.
 
 ## 6. What is intentionally *not* claimed
 
-No live affiliate link, no published product claim, no traffic/conversion/earnings figure, no "trending
-product" or "best niche" ranking, and no automated publishing to a third-party CMS. Each needs an account, a
-credential, or a verified product record. The machinery for all of them is present; the inputs are not, and
-that distinction is recorded on the site rather than papered over.
+No monetized, Associates-tagged product link, no claim that the observed destinations are the products intended in the brief, no traffic/conversion/earnings figure, no "trending product" or "best niche" ranking, and no automated publishing to a third-party CMS. The `/marketing/` pages use untagged preview links and publish only sourced specifications for the observed destinations. An Associates ID, owner confirmation of the mapping, Creators API access, and dated performance reports have not been supplied; those values and claims remain blocked or blank rather than invented.
 
 ## 7. Next actions, in order of leverage
 
@@ -256,3 +254,16 @@ traffic or earnings figure is published, because none can be sourced from an off
 Creators API and an Associates account — and this repository publishes nothing it cannot source. The owner
 actions from §7 above (confirm the three ASINs in Associates Central, add the Associates tag, register for the
 Creators API, connect a dated report) remain the only things standing between this platform and live revenue.
+
+---
+
+## Addendum 3 — T27 publication-scope reconciliation (2026-11-14)
+
+A final surface audit found that an earlier addendum's statement “no product copy … is published” was too broad. It described the root **brief-mapped** generator, but a companion set already publishes destination-only marketing. This correction is now reflected in the root dashboard, the generated findings executive summary, F-06, and the primary content page.
+
+- The public [`/marketing/` set](https://kanlerxz87-cyber.github.io/Zone2/marketing/) contains three product articles, a comparison, and a buying guide. Its 48 specification rows are source-linked or explicitly blank; the marketing verifier reports 0 failures. Product attributes link to the official [Chefman 6 Qt](https://chefman.com/products/turbofry-touch-dual-window-air-fryer), [Emeril 26 Qt](https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360), and [Chefman 8 Qt](https://chefman.com/products/turbofry-touch-air-fryer-1) pages. Every marketing page now says the short-link-to-brief mapping is unconfirmed and links to [Flag F-03](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html#F-03).
+- This copy describes only the observed destinations. It does **not** establish that they are the products intended by the brief; no public Amazon document in the reviewed record binds the supplied `link.amazon` codes to those ASINs. The official [Amazon ASIN/link help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) describes ASINs as catalog identifiers and the tagged-link format.
+- The displayed Amazon links are untagged preview links. The [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) requires properly tagged Special Links and the site disclosure; this repository has no Associates ID, so the pages are not monetized. No clicks, conversions, or earnings are claimed.
+- **Destination stability vs. token:** observed requests reproduced the destination ASIN and page body, while the per-link `btn_ref` token rotated across days. This is observed redirect behavior, not a documented or stable attribution identifier; the statement in Addendum 2 that the links were “individually tracked” is withdrawn as an unsupported interpretation (see F-21).
+
+The distinction is now explicit: destination-only product marketing is published; the root generator remains blocked from copy asserting that the destinations match the brief. Neither the unresolved mapping nor the missing Associates ID is filled in by inference.

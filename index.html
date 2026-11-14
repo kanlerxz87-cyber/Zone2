@@ -37,7 +37,7 @@
     <div class="kpis">
       <div class="kpi"><div class="num">3 of 3</div><div class="lbl">Supplied links that resolve to one specific Amazon listing (observed 2026-11-14)</div></div>
       <div class="kpi"><div class="num">0 of 3</div><div class="lbl">Brief product mappings confirmed by an official Amazon document (F-03)</div></div>
-      <div class="kpi"><div class="num">1</div><div class="lbl">Niche of the resolved destinations — Home &amp; Kitchen air fryers</div></div>
+      <div class="kpi"><div class="num">1</div><div class="lbl">Shared category of the 3 resolved destinations (Air Fryers) — not a validated niche</div></div>
       <div class="kpi"><div class="num">Up to 10%</div><div class="lbl">Official program commission ceiling</div></div>
       <div class="kpi"><div class="num" id="flagCount">—</div><div class="lbl">Items flagged for review</div></div>
     </div>
@@ -63,7 +63,7 @@
         <em>unknown</em> code on the same service returns a 404 instead of a product. That control is
         what settles the question the evidence raises: the supplied codes are honoured lookups, not
         ignored tokens. The full trail is in
-        <a href="products.html#">Products → Resolution evidence</a>.
+        <a href="products.html">Products → Resolution evidence</a>.
       </p>
       <p>
         Three things remain genuinely unverified, and they are the only things standing between this
@@ -120,7 +120,7 @@
     </div>
 
     <div class="card">
-      <h3>Flagged for Review — 28 items</h3>
+      <h3>Flagged for Review — <span id="flagCountHeading">—</span> items</h3>
       <p style="font-size:13.5px">
         Nothing on this site is a product claim. These are the items that could not be confirmed from an official source, plus
         the irregularities found while checking. None of them block the publish; each carries its source link so it can be
@@ -137,14 +137,15 @@
             <tr><td><code>F-08</code></td><td>No click, conversion or earnings report exists, so no performance figure can be published</td><td>Open — owner must connect a dated Associates report</td></tr>
             <tr><td><code>F-19</code></td><td>The Emeril manufacturer page contradicts itself on cooking presets: 24 (description), 25 (spec tile), “10-in-1” (feature block)</td><td>Open — published as a conflict, no value chosen</td></tr>
             <tr><td><code>F-26</code> <em>(new)</em></td><td>The dashboard flag count was derived from the reader-facing subset, not the register: it showed 14 while <code>pages/flags.html</code> published 21</td><td>Closed — count now pinned to the ledger by a gate (negative-tested)</td></tr>
-            <tr><td><code>F-27</code> <em>(new)</em></td><td>README's typed counts had drifted from the registers (14 items / 32 checks / 22 sources against 26 / 50 / 35) — the F-26 defect class, in prose</td><td>Closed — labels corrected and pinned by <code>check_typed_counts</code> (negative-tested)</td></tr>
-            <tr><td><code>F-28</code> <em>(new)</em></td><td><code>research-hub/summary.html</code> rollup tables carry product and policy values with no per-row source link (the sources exist on the per-product pages)</td><td>Open — change request CR-7 logged; namespace owned by another session</td></tr>
+            <tr><td><code>F-28</code> <em>(new)</em></td><td>README's typed counts had drifted from the registers twice in one day — the F-26 defect class, in prose, one layer the gate did not reach</td><td>Closed — every README count label now pinned to the ledgers by <code>check_typed_counts</code> (negative-tested)</td></tr>
+            <tr><td><code>F-29</code> <em>(new)</em></td><td><code>research-hub</code> rollup policy and conflict rows are still block-sourced — its product rows were fixed on main; the rest await the namespace owner (CR-7, partial)</td><td>Open — extend the per-row source treatment or label those tables block-sourced</td></tr>
+            <tr><td><code>F-27</code></td><td><code>research-hub</code>'s own generator deletes its output before it has read its inputs — one run with a missing input wipes the hub pages (restored; never run it in this tree)</td><td>Open — owner should repoint or archive <code>research-hub/scripts/build.py</code></td></tr>
             <tr><td><code>F-25</code></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
           </tbody>
         </table>
       </div>
       <p style="margin:12px 0 0;font-size:13px">
-        The full text of all 28 items, each with its official-source link, is on the
+        The full text of all <span class="flag-count-inline">—</span> items, each with its official-source link, is on the
         <a href="flagged.html">Flagged for Review</a> page; the generated detail lives on
         <a href="pages/flags.html">pages/flags.html</a>.
       </p>
@@ -175,6 +176,7 @@
       <a href="pages/categories/index.html">Categories</a> · Companion sites:
       <a href="research-hub/start.html">Affiliate Research Hub</a> ·
       <a href="revalidation/index.html">Revalidation 2026-11-14</a> ·
+      <a href="marketing/index.html">Field Notes — verified articles</a> ·
       <a href="affiliate-lab/index.html">Affiliate Lab</a> ·
       <a href="northstar/index.html">Northstar prototype</a> ·
       <a href="zone2/index.html">Zone2 platform build</a>

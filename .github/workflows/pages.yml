@@ -215,6 +215,12 @@ jobs:
       - name: Rebuild revalidation pages and confirm committed output is current
         run: python3 revalidation/scripts/build.py --check
 
+      - name: Research hub — committed output matches its generator, and the hub verifier passes
+        run: |
+          python3 research-hub/scripts/build.py
+          git diff --exit-code -- research-hub/ || { echo "research-hub output drifted from scripts/build.py"; exit 1; }
+          python3 research-hub/scripts/verify.py
+
       - name: Revalidation gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
         run: python3 revalidation/scripts/verify.py
 
@@ -239,6 +245,20 @@ jobs:
 
       - name: Platform guard tests
         run: python3 tests/test_pipeline.py
+
+      # T26 (session 808a6840): the drift gates above prove HTML matches the ledger; they
+      # cannot see a dead fragment, a specification sourced to a Page-Not-Found URL, a prose
+      # count that disagrees with the register, or a published namespace with no inbound link.
+      # This runs after the rebuild steps so it audits the freshly generated output.
+      - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure)
+        run: python3 tools/audit_site.py
+
+      # T26: this guard was excluded from CI because it reported seven false failures — it
+      # resolved the repository root to research-hub/ and then looked for the root site's
+      # files inside the hub. It now resolves both roots correctly and checks 13 pages, so it
+      # runs here and its per-row sourcing rule protects the hub's 38 attribute rows.
+      - name: Research-hub per-row sourcing guard
+        run: python3 research-hub/scripts/verify.py
 
       - name: Subpages disclose and never print a product price
         run: |

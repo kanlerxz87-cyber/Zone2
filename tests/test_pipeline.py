@@ -11,6 +11,7 @@ import json
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -19,6 +20,25 @@ sys.path.insert(0, str(REPO / "tools"))
 import asin_guard  # noqa: E402
 import link_builder  # noqa: E402
 import scoring  # noqa: E402
+import build_marketing  # noqa: E402
+
+
+def test_marketing_pages_label_unconfirmed_brief_mapping():
+    """Destination-only marketing must not imply the short-code mapping is confirmed."""
+    with tempfile.TemporaryDirectory() as tmp:
+        rendered = build_marketing.build(Path(tmp))
+    assert len(rendered) == 9
+    for page, document in rendered.items():
+        assert "Product identity is not confirmed." in document, page
+        assert "they do not establish that those destinations are the products intended in the brief" in document, page
+        assert "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" in document, page
+        assert "pages/flags.html#F-03" in document, page
+    import build_site
+
+    exec_html = build_site.page_exec()
+    assert "not yet monetized" in exec_html
+    assert "destination-only articles" in exec_html
+    assert "no published product claim" not in exec_html
 
 
 def test_submitted_tokens_are_rejected_and_not_repaired():
@@ -176,7 +196,8 @@ def test_dashboard_flag_count_cannot_drift_from_the_ledger():
 
 
 def test_typed_count_labels_cannot_drift_from_the_ledger():
-    """F-27 regression: prose counts (README.md, index.html, flagged.html) must equal the ledgers.
+    """F-28 regression: README.md prose counts must equal the ledgers, and the root captions
+    must keep their derived markers.
 
     Same two-direction proof as the F-26 gate: matching labels pass, a deliberately wrong
     README count fails, and the file is restored afterwards.
@@ -189,11 +210,11 @@ def test_typed_count_labels_cannot_drift_from_the_ledger():
 
     ledger = json.loads((REPO / "ledger" / "verification.json").read_text(encoding="utf-8"))
     checks_n = len(ledger["rows"])
-    label = f"({checks_n} checks)"
+    label = f"({checks_n} checks"
     readme = REPO / "README.md"
     original = readme.read_text(encoding="utf-8")
     assert label in original, f"README.md no longer contains the fixture label {label!r}"
-    wrong = original.replace(label, f"({checks_n + 1} checks)", 1)
+    wrong = original.replace(label, f"({checks_n + 1} checks", 1)
     readme.write_text(wrong, encoding="utf-8")
     try:
         report_bad = validate_data.Report()
