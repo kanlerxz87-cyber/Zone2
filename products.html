@@ -24,7 +24,7 @@
   <main class="main">
     <div class="page-head">
       <h2>Affiliate Products</h2>
-      <p>Every row links to the official Amazon product page. Cells that could not be confirmed from an official source are left blank and flagged — never inferred.</p>
+      <p>Verification status of the three supplied links. No official source identified the intended product for any link, so every product-specific cell is left blank and flagged — never inferred. Each row links to the official Amazon <code>/dp/</code> lookup that returned Page Not Found.</p>
     </div>
 
     <div class="disclosure">
@@ -32,27 +32,33 @@
     </div>
 
     <div class="card">
-      <h3>Product Catalog — verified from official Amazon pages</h3>
+      <h3>Supplied Affiliate Links — verification status</h3>
       <div id="productsTable"></div>
     </div>
 
     <div id="productOverview"></div>
 
     <div class="card">
-      <h3>Verified Specifications (official Amazon + manufacturer pages)</h3>
+      <h3>Observed redirect destinations — evidence only, NOT the requested products</h3>
       <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but are
-        deliberately not published here, in line with Amazon Associates price-display restrictions and
-        the site's no-price rule; Amazon prices remain unverified and are flagged. Rows where official
-        sources disagree are marked <span class="badge warn">Conflict</span> and both values are shown.
+        Each supplied <code>link.amazon</code> URL redirected (carrying <code>plpRedirect=mhFallback</code>
+        / <code>lv=shuf</code> markers) to an Amazon air-fryer listing. Whether each redirect is a stable
+        token→product mapping or a shuffled fallback is <strong>contested and under review</strong> (F-12
+        observed instability; the <a href="revalidation/index.html">Revalidation 2026-11-14</a> control
+        test observed stability) — this page does not assert either side. Regardless, no official Amazon
+        source establishes these destinations as the requested products, so they are recorded as observed
+        evidence only and are <strong>not</strong> treated as the requested products. Manufacturer
+        specifications for these candidate ASINs are documented, clearly labeled as candidates, in the
+        <a href="research-hub/start.html">Affiliate Research Hub</a> companion site (see flag F-12).
       </p>
-      <div id="specsTable"></div>
+      <div id="fallbackTable"></div>
     </div>
 
     <footer class="site">
-      Verified dataset date: 2026-11-13. Titles, brands, categories and ASINs verified against the official
-      Amazon product pages listed per row. Price, rating, review count and availability are
-      <em>unverified</em> and flagged on the <a href="flagged.html">Flagged for Review</a> page.
+      Verified dataset date: 2026-11-14 (re-verified; corroborates the 2026-11-13 capture). Product
+      identity could not be established from any official source for the three supplied links, so title,
+      brand, category, price, rating, review count and availability are <em>unverified</em> and left
+      blank — never inferred. See the <a href="flagged.html">Flagged for Review</a> page.
     </footer>
   </main>
 </div>

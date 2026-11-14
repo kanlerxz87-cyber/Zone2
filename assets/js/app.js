@@ -25,8 +25,11 @@
   function badge(status) {
     if (status === "verified") return '<span class="badge ok">Verified</span>';
     if (status === "conflict") return '<span class="badge warn">Conflict</span>';
+    if (status === "observed" || status === "OBSERVED" || status === "evidence" || status === "EVIDENCE_ONLY") return '<span class="badge warn">Observed / evidence only</span>';
     if (status === "unverified") return '<span class="badge flag">Unverified</span>';
-    return "";
+    if (status === "blocked") return '<span class="badge flag">Blocked</span>';
+    if (status === "planned") return '<span class="badge warn">Planned</span>';
+    return esc(status || "");
   }
 
   function renderTable(id, columns, rows, opts) {
@@ -55,35 +58,39 @@
       "productsTable",
       [
         { key: "shortCode", label: "Provided link code" },
-        { key: "asin", label: "Destination ASIN" },
-        { key: "brand", label: "Brand" },
-        { key: "title", label: "Product title (verified on Amazon)" },
-        { key: "category", label: "Category" },
+        { key: "codeLength", label: "Code length", render: function (r) { return r.codeLength + " chars"; } },
+        { key: "asinFormatValid", label: "Valid ASIN?", render: function (r) { return r.asinFormatValid ? "Yes" : "No (ASIN is 10)"; } },
+        { key: "canonicalDpResult", label: "amazon.com/dp/<code> result" },
+        { key: "brand", label: "Brand", render: function (r) { return cell(r.brand); } },
+        { key: "title", label: "Product title", render: function (r) { return cell(r.title); } },
+        { key: "category", label: "Category", render: function (r) { return cell(r.category); } },
         { key: "price", label: "Price", render: function (r) { return cell(r.price); } },
         { key: "rating", label: "Rating", render: function (r) { return cell(r.rating); } },
         { key: "reviewCount", label: "Reviews", render: function (r) { return cell(r.reviewCount); } },
         { key: "availability", label: "Availability", render: function (r) { return cell(r.availability); } },
+        { key: "status", label: "Status", render: function (r) { return badge("unverified"); } },
         { key: "source", label: "Source", link: true, linkLabels: {} },
       ],
       PRODUCTS
     );
   }
 
-  function renderSpecs() {
-    const el = document.getElementById("specsTable");
+  function renderFallback() {
+    const el = document.getElementById("fallbackTable");
     if (!el) return;
     const prodName = {};
-    PRODUCTS.forEach(function (p) { prodName[p.id] = p.brand + " · " + p.asin; });
+    PRODUCTS.forEach(function (p) { prodName[p.id] = p.shortCode; });
     renderTable(
-      "specsTable",
+      "fallbackTable",
       [
-        { key: "pid", label: "Product", render: function (r) { return esc(prodName[r.pid] || r.pid); } },
-        { key: "attribute", label: "Attribute" },
-        { key: "value", label: "Value" },
+        { key: "pid", label: "Supplied link", render: function (r) { return esc(prodName[r.pid] || r.pid); } },
+        { key: "destAsin", label: "Observed redirect ASIN" },
+        { key: "destTitle", label: "Observed redirect page" },
+        { key: "redirectMarkers", label: "Redirect markers" },
         { key: "status", label: "Status", render: function (r) { return badge(r.status); } },
-        { key: "source", label: "Official source", link: true, linkLabels: {} },
+        { key: "source", label: "Source", link: true, linkLabels: {} },
       ],
-      SPECS
+      REDIRECT_DESTINATIONS
     );
   }
 
@@ -202,10 +209,11 @@
     if (!el) return;
     el.innerHTML = PRODUCTS.map(function (p) {
       return (
-        '<div class="card"><h3>' + esc(p.brand) + "</h3>" +
-        "<p><strong>ASIN:</strong> " + esc(p.asin) + " · <strong>Category:</strong> " + esc(p.category) + "</p>" +
-        "<p>" + esc(p.title) + "</p>" +
-        '<p>' + link(p.source, "View on Amazon") + " · " + link(p.shortLink, "Provided short link") + "</p></div>"
+        '<div class="card"><h3>Supplied link ' + esc(p.shortCode) + "</h3>" +
+        "<p><strong>Code length:</strong> " + esc(p.codeLength) + " chars · <strong>Valid ASIN?</strong> No (ASIN is 10) · <strong>Status:</strong> " + badge("unverified") + "</p>" +
+        "<p><strong>amazon.com/dp/&lt;code&gt;:</strong> " + esc(p.canonicalDpResult) + "</p>" +
+        "<p>No official source identifies the intended product, so title, brand, category, price, rating, review count and availability are left blank and flagged. Not inferred.</p>" +
+        '<p>' + link(p.canonicalDpUrl, "Canonical /dp/ lookup") + " · " + link(p.shortLink, "Provided short link") + "</p></div>"
       );
     }).join("");
   }
@@ -216,7 +224,7 @@
     if (fc) fc.textContent = String(FLAGGED_ROWS.length);
 
     renderProducts();
-    renderSpecs();
+    renderFallback();
     renderExecFacts();
     renderNiche();
     renderCommission();
