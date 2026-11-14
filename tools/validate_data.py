@@ -40,6 +40,17 @@ OFFICIAL_HOSTS = {
     "support.google.com",
     "docs.github.com",
 }
+
+# Primary manufacturer pages. They are NOT Amazon sources and may never be used to state an Amazon-side
+# fact (price, availability, rating, review count, BSR, category). They are allowed only for manufacturer
+# specifications, and only when the source record declares kind="manufacturer" so the distinction between
+# "Amazon said this" and "the maker said this" stays visible in the published source column.
+MANUFACTURER_HOSTS = {
+    "chefman.com",
+    "www.chefman.com",
+    "www.emerileveryday.com",
+    "emerileveryday.com",
+}
 PERF_FIELDS = ("clicks", "conversion", "orders", "earnings", "revenue", "epc", "impressions")
 SITE_NAME = "Northstar"  # this project's own name; must contain no Amazon mark (R-11)
 SITE_NAME_MARKS = [m for m in ("amazon", "amzn", "kindle", "prime", "audible", "imdb") if m in SITE_NAME.lower()]
@@ -84,7 +95,13 @@ def check_sources(report: Report) -> dict[str, dict]:
         if not url.startswith("https://"):
             report.fail(f"{src['id']}: url is not https ({url})")
         if host not in OFFICIAL_HOSTS:
-            report.fail(f"{src['id']}: host {host!r} is not an official domain allowlisted for sourcing")
+            if host in MANUFACTURER_HOSTS:
+                if src.get("kind") != "manufacturer":
+                    report.fail(
+                        f"{src['id']}: host {host!r} is a manufacturer site and must be declared kind='manufacturer'"
+                    )
+            else:
+                report.fail(f"{src['id']}: host {host!r} is not an official domain allowlisted for sourcing")
         if not src.get("accessed_utc"):
             report.warn(f"{src['id']}: no accessed_utc date recorded")
     report.stats["sources"] = len(by_id)

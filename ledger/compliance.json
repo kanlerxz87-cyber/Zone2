@@ -1,14 +1,14 @@
 {
-  "note": "Compliance control ledger. Every rule is quoted or paraphrased from a source in ledger/sources.json and mapped to the concrete control implemented in this repository, so the automation cannot drift out of policy. Status VERIFIED means the wording was read from the official page on 2026-11-13.",
-  "as_of": "2026-11-13",
+  "note": "Compliance control ledger. Every rule is quoted or paraphrased from a source in ledger/sources.json and mapped to a concrete control implemented in this repository, so the automation cannot drift out of policy. Status VERIFIED means the wording was read from the official page; every rule was re-read and every cited control re-checked against the code on 2026-11-14 (session bbe4ca47). Controls that did not exist were corrected - see R-01 and R-11.",
+  "as_of": "2026-11-14",
   "rules": [
     {
       "id": "R-01",
       "domain": "Disclosure",
       "requirement": "The Site must clearly and prominently state: \"As an Amazon Associate I earn from qualifying purchases.\" (or a substantially similar statement previously allowed), on the Site or any other location where Amazon authorizes display or use of Program Content.",
       "source_id": "S01",
-      "citation": "Associates Program Operating Agreement, Section 5 - Identifying Yourself as an Associate",
-      "implemented_control": "site/compliance-inject.js renders the exact sentence into every content page footer; tools/link_builder.py refuses to emit an article whose front matter has disclosure: false",
+      "citation": "Associates Program Operating Agreement, Section 5 - Identifying Yourself as an Associate (re-read 2026-11-14)",
+      "implemented_control": "every page under this repository's control - the primary dashboard (assets/js/app.js renderers + a static block on each root page), the generated pages/ namespace (tools/build_site.py renders DISCLOSURE into every page) and the companion sites - carries the exact sentence. The deploy gate enforces it twice: tools/validate_data.py::check_disclosure fails any page with rel=\"sponsored\" and no disclosure, and the GitHub Actions step 'No page prints a price and every page discloses' fails the build for each of the root, research-hub/, northstar/, zone2/, affiliate-lab/, pages/ and research-hub/ namespaces. Corrected 2026-11-14: this row previously cited `site/compliance-inject.js`, a file that does not exist in this repository.",
       "status": "VERIFIED"
     },
     {
@@ -99,8 +99,8 @@
       "domain": "Naming",
       "requirement": "The Site must not include any Amazon trademark, or a variant or misspelling of one, in any domain name, subdomain, in any \"tag\" or Associates ID, or in any username, group name or other identifier on a social networking site. Sites that promote or contain certain content categories are unsuitable for the Program.",
       "source_id": "S02",
-      "citation": "Participation Requirements, Section 1 (unsuitable Sites list, item (g))",
-      "implemented_control": "this site is named \"Northstar\"; tools/validate_data.py::assert_no_amazon_marks scans site copy, page titles, file names and the configured tag value for amazon/amazn/prime now/awin-like marks before deploy",
+      "citation": "Participation Requirements, Section 1 - Enrollment and Eligibility, unsuitable-Sites item (g) (re-read 2026-11-14)",
+      "implemented_control": "the site is named \"Northstar\" (tools/build_site.py and tools/validate_data.py SITE_NAME), which contains no Amazon mark. tools/validate_data.py::check_marks fails the build if the site name or the configured Associates tag contains amazon/amzn/prime/kindle, fails affirmative endorsement claims, and raises a review note when a page title leads with a mark (F-13). Corrected 2026-11-14: this row previously named a function `assert_no_amazon_marks` that does not exist; the implemented function is `check_marks`.",
       "status": "VERIFIED"
     },
     {
@@ -182,7 +182,7 @@
       "domain": "API access",
       "requirement": "Product catalog data is obtained through the Creators API (PA-API 5.0 is deprecated and returns 403 AccessDenied). Prerequisites per Amazon's docs: enrolment in the Associates program for the target marketplace, at least 10 qualifying sales within the past 30 days, API registration through Associates Central, and generated credentials.",
       "source_id": "S06",
-      "citation": "Associates Program - PA-API 5 Deprecation Notice",
+      "citation": "PA-API 5 Deprecation Notice (creatorsapi/docs/en-us/paapiv5-deprecation) + Creators API introduction, Prerequisites (re-read 2026-11-14)",
       "source_id_alt": "S07",
       "citation_alt": "Welcome to Creators API - Prerequisites",
       "implemented_control": "tools/amazon_creators_api.py targets the Creators API operations (SearchItems, GetItems, GetVariations, GetBrowseNodes) and exits with a machine-readable BLOCKED reason when credentials or the qualifying-sales gate are absent, instead of falling back to scraping",

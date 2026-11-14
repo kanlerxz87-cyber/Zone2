@@ -145,3 +145,48 @@ that distinction is recorded on the site rather than papered over.
 * Irregularities found are published on the site's **Flagged for Review** page
   (`pages/flags.html`) with source links — 11 items, including the deprecated-API trap and the
   network-allowlist limitation on live verification.
+
+---
+
+## Addendum — second verification pass, 2026-11-14 (session `bbe4ca47`)
+
+The whole repository was re-checked against the live official pages one day after the integration above.
+The substantive position is unchanged; three published claims were corrected and two new gaps were closed.
+
+**Held up under re-check (no change needed).** The 11-row commission table, all 9 published bounty rates, the
+Trade-In rates, the fine-art and free-Kindle limits, the 24-hour session / 89-day cart / 180-day fulfilment
+window, ≈60-day payment, the US payment minimums, the 3-year inactivity rule, the verbatim §5 disclosure
+sentence, the Agent Terms, the price/availability display rule, the Creators API prerequisites, the PA-API 5
+deprecation and the ASIN-is-10-characters definition all match their official pages exactly. The three supplied
+codes still return "Page Not Found" and each link still resolves stably to the same single listing. The
+earlier "arbitrary fallback" reading is **withdrawn**: `plpRedirect=mhFallback` is appended to valid ASINs too,
+and the destinations do not shuffle between requests.
+
+**Corrected.**
+
+1. **The rate card is public.** The site had said the fixed-rate table "requires Associates sign-in" and left the
+   category rate blank. Table 1 is readable without signing in, and publishes both `Kitchen 4.50%` and
+   `Home 3.00%` as separate bands. Both are now shown as verified; what remains genuinely unknown is *which*
+   band applies to a specific ASIN, which is a catalog fact requiring Creators API — that cell is still blank
+   and flagged.
+2. **Four compliance controls named files or functions that do not exist** (flag F-16). Corrected to the real
+   enforcement points. One rule (email/SMS) also mis-stated a permission as a prohibition and was rewritten to
+   the policy as published.
+3. **The dashboard's KPI contradicted the ledger** (flag F-17): "3 verified products" against a ledger that
+   records 0 of 3 submitted items identified. The KPI now states both numbers explicitly — `0 / 3` identified,
+   `3` links verified as resolving stably to one listing each — and the flag count is computed from the data
+   instead of typed.
+
+**Newly recorded.** The Emeril manufacturer page contradicts itself on the cooking-preset count (24 in the
+description, 25 on the specification tile, "10-in-1" in the feature block), so that value stays unresolved and
+is published as a conflict (flag F-19). The CI gate also never walked the 37 generated `pages/` for broken
+links and covered only 4 of 6 namespaces for the disclosure/price rule; both gaps are closed (flag F-18).
+
+**Bottom line, unchanged and now stated in one place.** 0 of 3 supplied codes are identified as Amazon
+catalog ASINs; each of the 3 links resolves stably to one live listing that is published as an observation,
+explicitly not as the requested product.
+No product copy, link, campaign or revenue claim is published for the requested items. Every table row on the
+live site links an official source or is blank and flagged — now including two new generated
+[Verification](https://kanlerxz87-cyber.github.io/Zone2/verification.html) and
+[Sources](https://kanlerxz87-cyber.github.io/Zone2/sources.html) pages, which CI rebuilds and diffs against the
+ledger so they cannot drift.

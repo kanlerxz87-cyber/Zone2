@@ -24,7 +24,13 @@ anything unconfirmed is left blank and published on a Flagged for Review page ra
 | `content.html` | SEO content plan (articles, comparisons, buying guides) |
 | `compliance.html` | Associates policy and disclosure requirements |
 | `tracking.html` | Special Link and campaign tracking setup |
+| `verification.html` | Verification log — one row per claim, with the method used and the official page (generated) |
+| `sources.html` | Complete source register, with each source's class made explicit (generated) |
 | `flagged.html` | Flagged irregularities and unverified items, with source links |
+
+`verification.html` and `sources.html` are generated from `ledger/verification.json` and `ledger/sources.json`
+by `tools/build_root_views.py` — CI fails if the committed output drifts from the ledger, so a row can never be
+published without its official source link.
 
 ### Findings & verified subpages — `pages/`
 
