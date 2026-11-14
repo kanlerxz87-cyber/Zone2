@@ -908,7 +908,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 26;
+const CANONICAL_FLAG_COUNT = 29;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1197,6 +1197,39 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-26",
     source: "https://affiliate-program.amazon.com/help/operating/policies",
     sourceIds: ["S02"],
+  },
+  {
+    item: "F-27 — The bounty table published 9 of the 46 bounty events, and none of the 2 bonus events, under a 'transcribed row-by-row' notice",
+    detail: "Found 2026-11-14 by session d3ce1c29. pages/commissions.html carried a panel headed 'Bounty events (Special Commission Income)' with nine rows, introduced by the notice 'Transcribed row-by-row from Amazon's published Associates Program Standard Commission Income Statement (S04)'. Re-reading S04 in full shows it publishes 46 rows under '(a) Bounty Events' (Prime, Prime Video, Audible, Kindle Unlimited, Amazon Music, registries, EBT, Amazon Business, Amazon Kids+, Prime Gaming, Amazon Haul and six Subscribe & Save rows) and a further 2 rows under '(b) Bonus Events'. The nine rows that were published were individually correct and correctly sourced — the defect was omission, not error, but a partial list carrying a completeness claim reads as the whole set.",
+    severity: "medium",
+    impact: "A revenue model that can see only 9 of 48 special-income events systematically under-prices the non-product revenue a site can earn. Audible ($20.00) and Amazon Business ($15.00) are the two largest published bounty rates and neither was on the page.",
+    actionRequired: "None open. ledger/commission_table.json now holds all 46 bounty rows and a new 'bonus_events' block with the 2 bonus rows; pages/commissions.html renders both and states the counts. Applied by tools/apply_bounty_completion_2026_11_14.py.",
+    ledgerFlag: "F-27",
+    ledgerUrl: "pages/flags.html#F-27",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+    sourceIds: ["S04", "S28"],
+  },
+  {
+    item: "F-28 — The zero-rate caption said 'Nine category groups publish a 0.00% Standard Commission rate', which matches no grouping in the source",
+    detail: "Found 2026-11-14 by session d3ce1c29. Table 1 of S04 publishes eleven bands, of which exactly two are 0.00%: the exclusion block and Coach, which Amazon lists on its own row. 'Nine' corresponds to no count in the source — eight semicolon-separated groups in the exclusion block plus Coach is the closest reading, but that count depends on how the final group ('Amazon Appstore, Prime Now, or Amazon Pay Places') is split.",
+    severity: "low",
+    impact: "A reader checking the claim against Table 1 cannot reconcile it, which undermines trust in the rows that are correct.",
+    actionRequired: "None open. The caption now names the two 0.00% bands and lists what is in the exclusion block.",
+    ledgerFlag: "F-28",
+    ledgerUrl: "pages/flags.html#F-28",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+    sourceIds: ["S04"],
+  },
+  {
+    item: "F-29 — tools/validate_data.py skipped any ledger row whose only source field is 'source_id' (singular)",
+    detail: "Found 2026-11-14 by session d3ce1c29. check_rows() walks the ledger and yields a dict as a row only if it contains 'source_ids' or 'id'. Every commission-table row (bands, bounty rows, bonus rows, statement terms) uses the singular 'source_id' and has no 'id', so those rows were never counted and never held to the 'a row that carries a value must carry a source' rule. Completing the bounty table would have added 48 unchecked rows.",
+    severity: "low",
+    impact: "The gate could not fail on an unsourced rate row — precisely the failure mode F-27 was.",
+    actionRequired: "None open. _walk_rows now also yields on 'source_id'; the gate's row count rose from 173 to 228 and passes. Negative check: reverting the one-line change lowers the count to 173, so the new rows are really being walked.",
+    ledgerFlag: "F-29",
+    ledgerUrl: "pages/flags.html#F-29",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+    sourceIds: ["S04"],
   },
 ];
 /* END GENERATED: flags */

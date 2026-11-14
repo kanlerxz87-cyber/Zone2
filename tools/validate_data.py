@@ -117,7 +117,10 @@ def check_sources(report: Report) -> dict[str, dict]:
 
 def _walk_rows(obj, path=""):
     if isinstance(obj, dict):
-        if "source_ids" in obj or "id" in obj:
+        # T26 (session d3ce1c29): rows that carry a single `source_id` (the commission-table
+        # bounty / bonus rows) previously escaped this walk entirely, so their source was never
+        # checked and their `rate` value was never held to the "a value needs a source" rule.
+        if "source_ids" in obj or "source_id" in obj or "id" in obj:
             yield path or "root", obj
         for k, v in obj.items():
             yield from _walk_rows(v, f"{path}.{k}" if path else k)

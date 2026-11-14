@@ -521,7 +521,15 @@ def page_commissions() -> str:
         for g in COMMISSION["groups"]
     ]
     bounties = [[text_cell(b["program"]), text_cell(b["bounty_action"]), num_cell(b["rate"]), source_cell([b["source_id"]])] for b in COMMISSION["bounties"]]
+    # T26 (session d3ce1c29, F-27): S04 publishes a second special-income block, "(b) Bonus Events",
+    # which the earlier transcription omitted along with most of the bounty rows.
+    bonuses = [[text_cell(b["program"]), text_cell(b["bonus_action"]), num_cell(b["rate"]), source_cell([b["source_id"]])] for b in COMMISSION.get("bonus_events", [])]
     terms = [[text_cell(t["term"]), text_cell(t["detail"]), source_cell([t["source_id"]])] for t in COMMISSION["other_statement_terms"]]
+    bounty_note = (
+        f'{len(bounties)} bounty events and {len(bonuses)} bonus events, published in full. '
+        "An earlier revision published only the first 9 bounty rows under a \"transcribed row-by-row\" notice "
+        "(flag F-27, corrected 2026-11-14)."
+    )
     model = [
         ("Band ceiling used for normalisation", "10.00%", "highest published fixed rate in the table", ["S04"]),
         ("Default band", "4.00%", "All Other Categories", ["S04"]),
@@ -536,13 +544,18 @@ def page_commissions() -> str:
     body = (
         notice("Transcribed, not summarised", COMMISSION["note"])
         + panel(COMMISSION["table"], table(["Band", "Fixed rate", "Categories in the band", "Commercial reading", "Source"], rows))
-        + panel("Bounty events (Special Commission Income)", table(["Program", "Bounty action", "Published rate", "Source"], bounties))
+        + panel("Bounty events (Special Commission Income)", table(["Program", "Bounty action", "Published rate", "Source"], bounties) + notice("Complete, not excerpted", bounty_note))
+        + panel("Bonus events (Special Commission Income)", table(["Program", "Bonus action", "Published rate", "Source"], bonuses))
         + panel("Other statement terms that change the maths", table(["Term", "What the statement says", "Source"], terms))
         + panel("Constants wired into tools/scoring.py", table(["Constant", "Value", "Basis", "Source"], [[text_cell(a), num_cell(b), text_cell(c), source_cell(d)] for a, b, c, d in model]))
         + notice(
             "Zero-rate bands are exclusions, not opportunities",
-            "Nine category groups publish a 0.00% Standard Commission rate. The niche filter removes them before any ranking "
-            "happens, so no content budget can be spent on a category that pays nothing.",
+            "Table 1 publishes two 0.00% bands: the exclusion block (gift cards, wireless service plans, alcoholic beverages, "
+            "Digital Kindle products purchased as a subscription, vehicle leasing and sales, pet prescription medications, food "
+            "prepared and delivered from a restaurant, and Amazon Appstore / Prime Now / Amazon Pay Places) and Coach, listed on "
+            "its own row. The niche filter removes them before any ranking happens, so no content budget can be spent on a "
+            "category that pays nothing. (An earlier revision of this caption said \"nine category groups\", which matches no "
+            "grouping in the source — flag F-28.)",
         )
     )
     return render("commissions.html", "Commissions & economics", "Amazon's published rates, bounties, attribution windows and payment terms, transcribed from the source.", body)

@@ -1,5 +1,5 @@
 {
-  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28–S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing Associates pages were re-read live; S32-S35 were added 2026-11-14 by session 4338f55e for the unknown-code control and the three supplied short links. The two sessions initially reused the same ids; tools/merge_ledger_2026_11_14.py resolved the collision so no id points at two different pages.",
+  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28–S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing Associates pages were re-read live; S32-S35 were added 2026-11-14 by session 4338f55e for the unknown-code control and the three supplied short links. The two sessions initially reused the same ids; tools/merge_ledger_2026_11_14.py resolved the collision so no id points at two different pages. S36 was added 2026-11-14 by session d3ce1c29: the Associates home page was cited directly by the dashboard for the 'up to 10%' ceiling and the 'approximately 60 days' payment statement but had no register entry, so the citation was not covered by the source register.",
   "accessed_utc": "2026-11-14",
   "sources": [
     {
@@ -459,6 +459,19 @@
       ],
       "title": "Supplied affiliate short link 3 (as provided in the brief)",
       "publisher": "Amazon.com"
+    },
+    {
+      "id": "S36",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official",
+      "title": "Amazon Associates home page (program overview and FAQ)",
+      "url": "https://affiliate-program.amazon.com/",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "public commission ceiling — 'Earn up to 10% in associate commissions from qualifying purchases and programs.'",
+        "payment timing FAQ — 'Commission income is paid approximately 60 days after the end of the month in which it was earned.'"
+      ]
     }
   ]
 }
