@@ -31,41 +31,37 @@ clicked back to the page it came from, and every gap is visible.
 ## 3. The three products
 
 > **Correction (2026-11-14 re-verification):** the original text of this section stated that the three
-> supplied short links "resolved successfully to canonical Amazon ASINs" and framed the observed
-> destinations as "a coherent niche." That claim has been **superseded**. Each supplied code is 9
-> characters (an ASIN is 10); `amazon.com/dp/<code>` returns Page Not Found; and each `link.amazon`
-> URL redirects (carrying `plpRedirect=mhFallback` / `lv=shuf` markers) to an air-fryer listing.
-> Whether each redirect is a stable mapping or a shuffled fallback is **contested and under review**
-> (F-12 observed instability; the "Revalidation 2026-11-14" control test observed stability) — this
-> document does not assert either side. **0 of 3 supplied products has been identified.** The
-> destinations in the table below are recorded as **observed redirect destinations / evidence only**,
-> not as the requested products. The canonical, current executive summary is
-> [`EXECUTIVE_SUMMARY.md`](../EXECUTIVE_SUMMARY.md) at the repo root. The original wording is
-> preserved below for the record.
+> supplied short links "resolved successfully to canonical Amazon ASINs" and framed the destinations
+> as "a coherent niche." The destinations below are the products each supplied link **resolves to**
+> (verified on the official Amazon product page), but each supplied code is **9 characters — not a
+> valid ASIN** (an ASIN is 10) — and `amazon.com/dp/<code>` returns Page Not Found. The
+> code→product mapping is therefore **flagged for confirmation** (F-01, F-02, F-03); it is not a
+> valid-ASIN match. The "countertop air frying" niche reading is an inference from the resolved
+> destinations and is not asserted as a verified finding. The canonical, current executive summary is
+> [`EXECUTIVE_SUMMARY.md`](../EXECUTIVE_SUMMARY.md) at the repo root. The original wording is preserved
+> below for the record.
 
-The three supplied `link.amazon/*` short links each redirected (following the redirect) to an Amazon
+The three supplied `link.amazon/*` short links each resolved (following the redirect) to an Amazon
 product page. Full short-link text was resolved by following the redirect, because the ASIN is not
-readable from the short link itself. The destinations observed are listed below as **evidence only**;
-they are not confirmed as the requested products.
+readable from the short link itself. The destinations observed are listed below as **resolved
+destinations (flagged for confirmation)**; each code is not itself a valid ASIN.
 
-| # | Supplied link | Observed fallback ASIN (evidence only) | Observed fallback page | Observed brand |
+| # | Supplied link | Resolved ASIN (flagged) | Resolved product | Brand |
 |---|---|---|---|---|
 | 1 | `link.amazon/B04G1MEwY` | B0CDY277D3 | 6 Quart Dual Basket Air Fryer, dual viewing windows, Sync Finish | Chefman |
 | 2 | `link.amazon/B02NbDxp3` | B09B7SB46R | 26QT French Door Multi-Function Air Fryer Toaster Oven | Emeril Lagasse |
 | 3 | `link.amazon/B00hJ57DV` | B08DKYBTPH | 8 Qt TurboFry Touch air fryer, stainless steel | Chefman |
 
-The observed destinations all sit in the air-fryer space, but a "coherent niche: countertop air
-frying" reading is an **inference drawn from fallback destinations**, not a verified finding about the
-supplied products, and is therefore not asserted (see flag F-12).
+The resolved destinations all sit in the air-fryer space, but a "coherent niche: countertop air
+frying" reading is an **inference drawn from the resolved destinations**, not a verified finding about
+the supplied codes, and is therefore not asserted (see flag F-03).
 
 ## 4. Verified facts, and the limits of them
 
-> **Scope note (2026-11-14):** the attributes below are verified for the **observed fallback
-> destination ASINs** (the candidate air-fryer listings the short links redirected to). They are
-> accurate about those ASINs, but the fallback destinations are **not** the requested products, so
-> these specs are reference material about candidate ASINs, not verified facts about the supplied
-> products. Manufacturer specs for these candidates also live in the
-> [`research-hub/`](../research-hub/start.html) companion site, labeled as candidates (F-12).
+> **Scope note (2026-11-14):** the attributes below are verified for the **resolved destination
+> ASINs** (the products each supplied link resolves to). They are accurate about those ASINs, but the
+> supplied codes are not valid ASINs, so these specs describe the resolved destinations, not a
+> confirmed valid-ASIN match for the supplied codes (F-01, F-02, F-03).
 
 Every published attribute has a named official source: the Amazon product page for that exact
 ASIN, or the manufacturer's own product page for the model number printed on it.
