@@ -251,6 +251,30 @@
         "S20"
       ],
       "owner": "user"
+    },
+    {
+      "id": "F-20",
+      "severity": "low",
+      "title": "Conflict: CHEFMAN 6 Qt capacity is stated in two different units, and one Amazon page disagrees with itself",
+      "detail": "Chefman's product page for model RJ38-SQPF-3TDB-2W states Capacity 6 Qt / 5.67 L. On Amazon's page for B0CDY277D3 the listing title says '2 Independent 3Qt' baskets and the Size field says 6 Quart, but the product-information Capacity field says 6 liters - and 6 qt is 5.67 L, so the two Amazon fields on that one page disagree with each other. Both readings are published on the primary site and in research-hub; neither is presented as definitive. Re-verified 2026-11-14 by fetching the Amazon product-information and item-details blocks directly.",
+      "impact": "No functional impact. A capacity figure is what a buyer compares, so a 6 qt vs 6 L difference matters to anyone using the spec to judge whether the appliance is big enough.",
+      "action_required": "Optional: the manufacturer figure (6 qt / 5.67 L) is the one carried first; confirm the unit on the retail carton if the owner needs one number.",
+      "source_ids": [
+        "S19"
+      ],
+      "owner": "user"
+    },
+    {
+      "id": "F-21",
+      "severity": "low",
+      "title": "Two blank fields were described as unverified when they are in fact withheld by policy",
+      "detail": "Price, star rating, review count and availability were published as blank because 'no official source confirms them'. That was inaccurate: re-fetching the three destination pages on 2026-11-14 shows list prices, star ratings, review counts and stock status plainly present on the official Amazon pages (for example 4.3/18,320 on B09B7SB46R and 4.4/16,863 on B08DKYBTPH). They are blank because Program Policies §6(a) forbids altering Program Content, §6(t) forbids displaying customer reviews or star ratings unless they are obtained through Creators API or PA API, and §6(y) bars price-tracking and price-alerting functionality on the site; under the IP License that content is obtained through the API.",
+      "impact": "No published value changed - the cells are still blank. What changed is the stated reason, on the primary site, in affiliate-lab, in revalidation and on the Flagged for Review page, so that a reviewer does not read a policy decision as a verification failure.",
+      "action_required": "None - the reason is now stated accurately and each of the two reasons is flagged separately on every surface that publishes the blank cells.",
+      "source_ids": [
+        "S02"
+      ],
+      "owner": "done"
     }
   ]
 }

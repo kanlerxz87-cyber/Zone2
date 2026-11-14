@@ -29,27 +29,33 @@
         },
         {
           "label": "UPC",
-          "status": "unverified",
-          "source_name": "Not confirmed on an official Amazon or Chefman page during capture",
-          "source_url": null,
-          "note": "Appeared only in secondary aggregator listings. Left blank on the site.",
-          "observed_value_not_published": "810087845025"
+          "value": "810087845025",
+          "status": "verified",
+          "source_name": "Amazon product page (item details)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "note": "Re-verified 2026-11-14 by session 0a3dff48. The earlier capture recorded this UPC as appearing only in secondary aggregator listings; Amazon's own item-details block for B0CDY277D3 states UPC 810087845025, so the value now has a first-party source."
         }
       ],
       "specs": [
         {
           "label": "Capacity",
-          "value": "6 qt total (two independent 3-qt baskets)",
-          "status": "verified",
+          "value": "6 qt / 5.67 L total across two baskets (Chefman); Amazon's listing title says 2 independent 3 qt baskets and its size field says 6 Quart, but its product-information Capacity field says 6 liters",
+          "status": "conflict",
           "source_name": "Chefman official product page",
-          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+          "second_source_name": "Amazon product page (listing title and product information)",
+          "second_source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "note": "6 qt is 5.67 L, so the two Amazon fields disagree with each other as well as with Chefman. Both readings published; neither is presented as definitive."
         },
         {
           "label": "Power",
           "value": "1700 W / 120 V",
           "status": "verified",
           "source_name": "Chefman official product page",
-          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+          "second_source_name": "Amazon product page (product information)",
+          "second_source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "note": "Amazon's product-information block for B0CDY277D3 states the same figure; re-verified 2026-11-14."
         },
         {
           "label": "Temperature range",
@@ -57,21 +63,29 @@
           "status": "verified",
           "source_name": "Chefman official product page",
           "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-          "note": "Both figures are Chefman's own. No conversion was performed by this project."
+          "note": "Both figures are Chefman's own. No conversion was performed by this project. Amazon's product-information block for B0CDY277D3 gives 93 °C min and 450 °F max, which agrees; re-verified 2026-11-14.",
+          "second_source_name": "Amazon product page (product information)",
+          "second_source_url": "https://www.amazon.com/dp/B0CDY277D3"
         },
         {
           "label": "Dimensions",
           "value": "13.38 × 11.81 × 10.63 in (33.98 × 30 × 27 cm)",
           "status": "verified",
           "source_name": "Chefman official product page",
-          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+          "second_source_name": "Amazon product page (product information)",
+          "second_source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "note": "Amazon's product-information block for B0CDY277D3 states the same figure; re-verified 2026-11-14."
         },
         {
           "label": "Weight",
           "value": "13.3 lb / 6.03 kg",
           "status": "verified",
           "source_name": "Chefman official product page",
-          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+          "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+          "second_source_name": "Amazon product page (product information)",
+          "second_source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "note": "Amazon's product-information block for B0CDY277D3 states the same figure; re-verified 2026-11-14."
         },
         {
           "label": "Colour / finish",
@@ -122,13 +136,15 @@
         "source_url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
       },
       "volatile_snapshot": {
-        "rating": null,
-        "rating_count": null,
+        "rating": 4.2,
+        "rating_count": 4859,
         "price_usd": 69.97,
         "list_price_usd": null,
         "badge": null,
-        "snapshot_note": "The Amazon page for this ASIN did not render its own rating or buy-box block during capture. The 4.4/1,392 figure visible on the page belongs to sibling listing B0B7C327LK in the 'customers who viewed' carousel and is NOT attributed to this ASIN. Price seen in that carousel only. Rating left blank.",
-        "snapshot_utc": "2026-11-13T22:38:00Z"
+        "snapshot_note": "The Amazon page for this ASIN did not render its own rating or buy-box block during the 2026-11-13 automated capture. The 4.4/1,392 figure visible then belonged to sibling listing B0B7C327LK in the 'customers who viewed' carousel and is NOT attributed to this ASIN. A manual re-fetch on 2026-11-14 did render the blocks — see recapture_note — so the earlier gap was a capture artefact, not a property of the page. Rating and price remain unpublished by policy.",
+        "snapshot_utc": "2026-11-13T22:38:00Z",
+        "recapture_utc": "2026-11-14",
+        "recapture_note": "Re-fetched manually on 2026-11-14 by session 0a3dff48: the Amazon page for this ASIN DID render its own buy box and its own product-information and item-details blocks. Amazon's item details state Customer Reviews 4.2 out of 5 stars from 4,859 ratings, UPC 810087845025, Model Number RJ38-SQPF-3TDB-2W and Part Number RJ38-SQPF-3TDB-2W; the product-information block states Output Wattage 1700 watts, Voltage 120 volts, Min Temperature Setting 93 °C, Max Temperature Setting 450 °F, Item Dimensions 13.38\"D x 11.81\"W x 10.63\"H, Item Weight 13.3 pounds, Size 6 Quart, and Capacity 6 liters. The 2026-11-13 capture did not render these blocks; the flag I-6 is therefore superseded, not confirmed. Still NOT published: rating and price, because Program Policies §6(a)/§6(t) require that Program Content come from Amazon-served links or the Creators API."
       },
       "official_sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
@@ -138,13 +154,13 @@
       "flags": [
         {
           "id": "I-6",
-          "issue": "Amazon US product block did not render for this ASIN during automated capture; figures were confirmed against the manufacturer instead.",
-          "disposition": "Flagged for review. All published specs cite Chefman directly."
+          "issue": "Superseded. The 2026-11-13 automated capture did not render Amazon's product-information block for this ASIN, so every published spec cited Chefman alone. A manual re-fetch on 2026-11-14 did render the block, and it agrees with Chefman on power (1700 watts), voltage (120 volts), temperature (93 °C min / 450 °F max), dimensions (13.38\"D x 11.81\"W x 10.63\"H), weight (13.3 pounds) and model number — except on capacity, where Amazon's own Capacity field says 6 liters against Chefman's 6 Qt / 5.67 L.",
+          "disposition": "Superseded by the 2026-11-14 re-capture. The specs still cite Chefman as the primary source, and the rows Amazon corroborates now cite both. The capacity disagreement is published as a conflict on the product page and on the Flagged for Review page."
         },
         {
           "id": "I-14",
-          "issue": "Star rating could not be confirmed for this ASIN itself, only for a sibling listing shown on the same page.",
-          "disposition": "Rating left blank. Flagged for review."
+          "issue": "Superseded. The 2026-11-13 capture could not read this ASIN's own rating. A manual re-fetch on 2026-11-14 did render the item-details block, which states Customer Reviews 4.2 out of 5 stars from 4,859 ratings for B0CDY277D3 itself. The 4.4/1,392 figure seen on 2026-11-13 belonged to a sibling listing in the carousel and was correctly not attributed to this ASIN.",
+          "disposition": "Rating remains unpublished — Program Policies §6(t) bars displaying Amazon star ratings and customer reviews unless obtained through Creators API or PA API. The flag is about the withholding reason, not the value."
         }
       ]
     },

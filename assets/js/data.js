@@ -134,66 +134,81 @@ const SPECS = [
   {
     pid: "p1",
     attribute: "Model number",
-    value: "RJ38-SQPF-3TDB-2W",
+    value: "RJ38-SQPF-3TDB-2W (Chefman and Amazon's item details agree)",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (item details)"],
   },
   {
     pid: "p1",
     attribute: "Capacity",
     value:
-      "6 qt / 5.67 L total across two baskets (Chefman); the Amazon listing title states 2 independent 3 qt baskets",
+      "6 qt / 5.67 L total across two baskets (Chefman); Amazon's listing title states 2 independent 3 qt baskets and its size field says 6 Quart, but its product-information Capacity field says 6 liters",
+    status: "conflict",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (listing title and product information)"],
+  },
+  {
+    pid: "p1",
+    attribute: "Power",
+    value: "1700 W / 120 V (Chefman and Amazon's product-information block agree)",
     status: "verified",
     source: [
       "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
       "https://www.amazon.com/dp/B0CDY277D3",
     ],
-    sourceLabel: ["Chefman official product page", "Amazon product page (listing title)"],
-  },
-  {
-    pid: "p1",
-    attribute: "Power",
-    value: "1700 W / 120 V",
-    status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
+    sourceLabel: ["Chefman official product page", "Amazon product page (product information)"],
   },
   {
     pid: "p1",
     attribute: "Temperature range",
-    value: "200–450 °F (95–235 °C, as stated by Chefman)",
+    value: "200–450 °F (Chefman states 95–235 °C; Amazon's product-information block gives 93 °C min and 450 °F max)",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (product information)"],
   },
   {
     pid: "p1",
     attribute: "Dimensions",
-    value: "13.38 × 11.81 × 10.63 in (33.98 × 30 × 27 cm)",
+    value: "13.38 × 11.81 × 10.63 in (33.98 × 30 × 27 cm) — Amazon's product-information block gives 13.38\"D × 11.81\"W × 10.63\"H, identical",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (product information)"],
   },
   {
     pid: "p1",
     attribute: "Weight",
-    value: "13.3 lb / 6.03 kg",
+    value: "13.3 lb / 6.03 kg (Amazon's product-information block states 13.3 pounds)",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (product information)"],
   },
   {
     pid: "p1",
     attribute: "Control type",
     value:
-      "Touch panel — Chefman names the product \u201cTurboFry\u00ae Touch Dual-Window Air Fryer\u201d; the Amazon listing title states \u201cDigital Double Air Fryer\u201d",
+      "Touch panel — Chefman names the product \u201cTurboFry\u00ae Touch Dual-Window Air Fryer\u201d, and Amazon's product information states Control Method \u201cTouch\u201d; the Amazon listing title states \u201cDigital Double Air Fryer\u201d",
     status: "verified",
     source: [
       "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
       "https://www.amazon.com/dp/B0CDY277D3",
     ],
-    sourceLabel: ["Chefman official product page (product name)", "Amazon product page (listing title)"],
+    sourceLabel: ["Chefman official product page (product name)", "Amazon product page (listing title and product information)"],
   },
   {
     pid: "p1",
@@ -206,10 +221,14 @@ const SPECS = [
   {
     pid: "p1",
     attribute: "Warranty",
-    value: "1 year (Chefman assurance)",
+    value:
+      "1 year (Chefman's assurance; Amazon's page for this ASIN states only that a manufacturer's warranty can be requested from customer service, and gives no term)",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (warranty and support)"],
   },
   // Product 2 — Emeril Lagasse 26QT French Door (B09B7SB46R)
   {
@@ -226,15 +245,18 @@ const SPECS = [
   {
     pid: "p2",
     attribute: "Capacity",
-    value: "26 qt / 24.6 L",
+    value: "26 qt / 24.6 L (Amazon's product-information block states Capacity 24.6 liters)",
     status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
+    source: [
+      "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+      "https://www.amazon.com/dp/B09B7SB46R",
+    ],
+    sourceLabel: ["Emeril Everyday official store", "Amazon product page (product information)"],
   },
   {
     pid: "p2",
     attribute: "Power",
-    value: "1700 W / 120 V (single source: Amazon product-information block)",
+    value: "1700 W / 120 V (Amazon product-information block: Output Wattage 1700 watts, Wattage 1700 watts, Voltage 120 volts)",
     status: "verified",
     source: "https://www.amazon.com/dp/B09B7SB46R",
     sourceLabel: "Amazon product page",
@@ -242,7 +264,7 @@ const SPECS = [
   {
     pid: "p2",
     attribute: "Temperature range",
-    value: "75–500 °F (single source: Amazon product-information block)",
+    value: "75–500 °F (Amazon product-information block: Min Temperature Setting 75 °F, Max Temperature Setting 500 °F)",
     status: "verified",
     source: "https://www.amazon.com/dp/B09B7SB46R",
     sourceLabel: "Amazon product page",
@@ -261,10 +283,13 @@ const SPECS = [
   {
     pid: "p2",
     attribute: "Dimensions",
-    value: "16.9\"D × 15.8\"W × 14.8\"H",
+    value: "16.9\"D × 15.8\"W × 14.8\"H (the manufacturer's spec tile and Amazon's product-information block agree)",
     status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
+    source: [
+      "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+      "https://www.amazon.com/dp/B09B7SB46R",
+    ],
+    sourceLabel: ["Emeril Everyday official store", "Amazon product page (product information)"],
   },
   {
     pid: "p2",
@@ -278,7 +303,7 @@ const SPECS = [
     pid: "p2",
     attribute: "Included accessories",
     value:
-      "Manufacturer states 7 premium accessories (basket, rotisserie spit, bake pan among them); Amazon's list differs in detail — itemised count not asserted",
+      "Both pages state 7 accessories — the manufacturer names the basket, rotisserie spit and bake pan, and Amazon's Configuration and description also say 7 — but Amazon's itemised component list names only 6, so the itemisation is not reconciled and is not asserted",
     status: "verified",
     source: [
       "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
@@ -293,6 +318,14 @@ const SPECS = [
     status: "verified",
     source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
     sourceLabel: "Emeril Everyday official store",
+  },
+  {
+    pid: "p2",
+    attribute: "Best-seller rank on the destination page",
+    value: "#1,043 in Kitchen & Dining · #15 in Air Fryers",
+    status: "verified",
+    source: "https://www.amazon.com/dp/B09B7SB46R",
+    sourceLabel: "Amazon product page (item details)",
   },
   // Product 3 — Chefman 8 Qt TurboFry (B08DKYBTPH)
   {
@@ -314,29 +347,36 @@ const SPECS = [
   {
     pid: "p3",
     attribute: "Power",
-    value: "1700 W / 120 V (Chefman) vs 1000 W / 120 V (Amazon bullet text)",
+    value:
+      "1700 W / 120 V — Chefman's page and Amazon's own product-information block both state 1700 watts; Amazon's marketing bullet text for the same ASIN states 1000 W / 120 V",
     status: "conflict",
     source: [
       "https://chefman.com/products/turbofry-touch-air-fryer-1",
       "https://www.amazon.com/dp/B08DKYBTPH",
     ],
-    sourceLabel: ["Chefman official page", "Amazon product page (bullet text)"],
+    sourceLabel: ["Chefman official page", "Amazon product page (spec table and bullet text)"],
   },
   {
     pid: "p3",
     attribute: "Temperature range",
-    value: "200–400 °F (95–205 °C, as stated by Chefman)",
+    value: "200–400 °F (Chefman states 95–205 °C; Amazon's product-information block gives 94 °C min and 400 °F max)",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (product information)"],
   },
   {
     pid: "p3",
     attribute: "Presets",
-    value: "4 (fries, chicken, fish, meat)",
+    value: "4 (fries, chicken, fish, meat); Amazon's own product description says 4 Functions",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (product description)"],
   },
   {
     pid: "p3",
@@ -353,10 +393,13 @@ const SPECS = [
   {
     pid: "p3",
     attribute: "Weight",
-    value: "12.8 lb / 5.8 kg",
+    value: "12.8 lb / 5.8 kg (Amazon's product-information block states 12.8 pounds)",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (product information)"],
   },
   {
     pid: "p3",
@@ -369,10 +412,13 @@ const SPECS = [
   {
     pid: "p3",
     attribute: "Warranty",
-    value: "1 year (Chefman assurance)",
+    value: "1 year (Chefman's assurance; Amazon's item details state a 1-Year Limited Warranty)",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (item details)"],
   },
 ];
 
@@ -838,15 +884,15 @@ const FLAGGED_ROWS = [
     source: "https://www.amazon.com/dp/B08DKYBTPH",
   },
   {
-    item: "Price — all three products (UNVERIFIED / not published)",
+    item: "Price — all three products (WITHHELD BY POLICY / not published)",
     detail:
-      "Amazon list prices could not be confirmed from an official source via automated verification (Amazon bot protection; policy restricts Amazon price display to served links or Creators API / PA API). Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but are deliberately not published on this site, in line with the program's price-display restrictions. Left blank in all tables.",
+      "Amazon list prices ARE visible on the live product pages, and the manufacturers' own stores publish their prices too, so this is not an unverified value — it is withheld by policy. Price is Program Content: under the IP License it is obtained through Creators API or PA API, and Participation Requirements §6(a) forbids altering Program Content; §6(y) additionally bars price-tracking or price-alerting functionality on the site. No price cell is populated anywhere on this site. Left blank in all tables.",
     source: "https://www.amazon.com/dp/B0CDY277D3",
   },
   {
-    item: "Star rating & review count — all three products (UNVERIFIED)",
+    item: "Star rating & review count — all three products (WITHHELD BY POLICY)",
     detail:
-      "Rating and review-count could not be confirmed from an official source; Program Policy §6(t) also restricts displaying Amazon ratings/reviews outside Creators API / PA API. Left blank in all tables.",
+      "Star ratings and review counts ARE visible on the live pages — the destination pages read 4.3 out of 5 from 18,320 ratings and 4.4 out of 5 from 16,863 ratings, and Chefman's own store publishes its own rating — so this is not an unverified value. It is withheld by policy: Participation Requirements §6(t) states 'You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API…'. Left blank in all tables.",
     source: ASIN_SOURCE.policies,
   },
   {
@@ -868,9 +914,9 @@ const FLAGGED_ROWS = [
     source: "https://www.amazon.com/dp/B08DKYBTPH",
   },
   {
-    item: "Availability / stock status (UNVERIFIED)",
+    item: "Availability / stock status (WITHHELD BY POLICY)",
     detail:
-      "Current availability could not be confirmed from an official source via automated verification. Left blank in all tables.",
+      "Stock status is visible on the live pages — the destination page reads 'Only 1 left in stock' and the manufacturers' stores read 'In stock, ready to ship' — so it is not an unverified value. It is withheld because availability is Program Content obtained through Creators API or PA API (Participation Requirements §6(a)), and because it changes hour to hour: any figure published here would be wrong within a day. Left blank in all tables.",
     source: "https://www.amazon.com/dp/B09B7SB46R",
   },
   {
@@ -886,7 +932,7 @@ const FLAGGED_ROWS = [
   {
     item: "Conflict — Chefman 8 Qt power rating",
     detail:
-      "Amazon bullet text for B08DKYBTPH states 1000 Watts/120 Volts; Chefman's official product page states 1700 W / 120 V for the same model number. Manufacturer figure published; conflict flagged.",
+      "Three official statements about one product. Chefman's page states 1700 W / 120 V for model RJ38-SQSS-8T. Amazon's own product-information block for B08DKYBTPH also states Output Wattage 1700 watts and Wattage 1700 watts at 120 volts. Amazon's marketing bullet text for the same ASIN states 1000 Watts / 120 Volts. The conflict is inside one Amazon page; both figures are published and neither is presented as definitive.",
     source: [
       "https://chefman.com/products/turbofry-touch-air-fryer-1",
       "https://www.amazon.com/dp/B08DKYBTPH",
@@ -896,7 +942,7 @@ const FLAGGED_ROWS = [
   {
     item: "Conflict — Chefman 8 Qt dimensions",
     detail:
-      "Chefman's official page states 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm); Amazon's spec table states 12.75\"D × 13.5\"W × 10\"H. Both published as separate conflicting rows.",
+      "Chefman's official page states 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm) for the 8 Qt model; Amazon's product-information block for B08DKYBTPH states 12.75\"D × 13.5\"W × 10\"H. Both published as separate conflicting rows; neither is presented as definitive.",
     source: [
       "https://chefman.com/products/turbofry-touch-air-fryer-1",
       "https://www.amazon.com/dp/B08DKYBTPH",
@@ -912,6 +958,16 @@ const FLAGGED_ROWS = [
       "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
     ],
     sourceLabel: ["Amazon product page (listing)", "Emeril Everyday official store"],
+  },
+  {
+    item: "Conflict — CHEFMAN 6 Qt capacity is stated in two different units",
+    detail:
+      "Chefman's page states Capacity 6 Qt / 5.67 L. On Amazon's page for B0CDY277D3 the listing title says 2 independent 3 qt baskets and the size field says 6 Quart, but the product-information Capacity field says 6 liters — 6 qt is 5.67 L, so the two Amazon fields on one page disagree with each other. Both readings are published; neither is presented as definitive.",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (listing title and product information)"],
   },
   {
     item: "Associates tag absent on resolved short links",

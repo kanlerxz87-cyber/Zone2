@@ -42,6 +42,7 @@
       <ul style="margin:0;padding-left:20px;font-size:14px">
         <li>Every table value was checked against the official source linked in its row.</li>
         <li>Where a value could not be confirmed from an official source, the cell was left blank — values were never inferred or filled in.</li>
+        <li>Price, star rating, review count and stock status are a separate case: they <em>are</em> visible on the official pages, and they are blank here because Amazon's program policies require them to come from Amazon-served links or the Creators API. Each is flagged separately so the reason is visible.</li>
         <li>The link-code / ASIN mismatch was detected by resolving each provided <code>link.amazon</code> short link and fetching the destination product page directly.</li>
       </ul>
     </div>

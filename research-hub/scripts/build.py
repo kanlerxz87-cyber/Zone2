@@ -73,15 +73,29 @@ def status_chip(status: str) -> str:
 
 
 def source_cell(row: dict) -> str:
-    """Every fact row renders a link to its official source, or an explicit blank."""
+    """Every fact row renders a link to its official source, or an explicit blank.
+
+    A value assembled from two official pages carries both: `source_url` is the
+    primary page and `second_source_url` the corroborating or contradicting one.
+    A reviewer must be able to open each page a value was read from.
+    """
     url = row.get("source_url")
     if not url:
         return '<span class="blank" aria-label="no official source">— unverified —</span>'
     name = row.get("source_name") or "Source"
-    return (
+    out = (
         f'<a class="src" href="{e(url)}" rel="noopener nofollow" '
         f'target="_blank">{e(name)}</a>'
     )
+    url2 = row.get("second_source_url")
+    if url2:
+        name2 = row.get("second_source_name") or "Second source"
+        out += (
+            '<br>'
+            f'<a class="src" href="{e(url2)}" rel="noopener nofollow" '
+            f'target="_blank">{e(name2)}</a>'
+        )
+    return out
 
 
 def value_cell(row: dict) -> str:
@@ -598,8 +612,9 @@ not be confirmed — the status chip says which.</p>
     <li><strong>These are not interchangeable products.</strong> Two are basket air fryers and one
         is a 26-quart French-door oven. Capacity ranges from 6 qt to 26 qt.</li>
     <li><strong>All three are 1700 W on the manufacturer's or Amazon's own figures.</strong> The
-        Chefman 8 Qt listing's bullet text claims 1000 W, which conflicts with the manufacturer —
-        that conflict is flagged rather than resolved silently.</li>
+        Chefman 8 Qt listing's bullet text claims 1000 W, which conflicts with the manufacturer — and
+        with Amazon's own product-information block for the same ASIN, which states 1700 watts. The
+        conflict is flagged rather than resolved silently.</li>
     <li><strong>Power draw is not a differentiator here.</strong> All three sit at the top of what
         a standard US 120 V / 15 A kitchen circuit handles comfortably, and none should share a
         circuit with another high-draw appliance.</li>

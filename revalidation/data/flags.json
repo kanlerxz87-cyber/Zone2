@@ -88,9 +88,9 @@
     {
       "id": "RV-09",
       "severity": "low",
-      "title": "Two programme rows are cited but were not re-read this session",
-      "detail": "PG-05 (price/availability display) and PG-06 (rating/review display) are relied on by the site's no-price rule, but their clause text was not re-opened on 2026-11-14.",
-      "disposition": "Marked not_rechecked rather than verified. The no-price rule is retained as the conservative choice.",
+      "title": "Two programme rows are cited but were not re-read this session (closed 2026-11-14)",
+      "detail": "PG-05 (price/availability display) and PG-06 (rating/review display) are relied on by the site's no-price rule, but their clause text was not re-opened on 2026-11-14. Closed the same day: both clauses were re-read verbatim from the Program Policies page and the rows now carry the clause text and a verified status.",
+      "disposition": "Closed on 2026-11-14 - both rows re-read and marked verified with the clause text.",
       "source": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ]
@@ -115,6 +115,17 @@
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
         "https://www.amazon.com/dp/B08DKYBTPH"
+      ]
+    },
+    {
+      "id": "RV-12",
+      "severity": "low",
+      "title": "Price, ratings, review counts and stock status are visible on the official pages but are withheld by policy",
+      "detail": "The no-price rule on this site was originally described as a response to values that could not be verified. That was not the real reason. Re-fetching the three destination pages on 2026-11-14 shows list prices, star ratings, review counts and stock status plainly present on the official Amazon pages. They are blank here because Program Policies §6(a), §6(t) and §6(y), and the IP License, require that kind of Program Content to come from Amazon-served links or the Creators API, and §6(t) bars customer reviews and star ratings outright unless obtained through the API.",
+      "disposition": "Stated accurately now, so a reader cannot mistake a policy decision for a verification failure. The blank cells remain blank.",
+      "source": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://www.amazon.com/dp/B09B7SB46R"
       ]
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "$comment": "Product research data. Rule: any field that cannot be confirmed from an official source is null and flagged unverified. Never inferred.",
+  "$comment": "Product research data. Rule: any field that cannot be confirmed from an official source is null and flagged unverified. Never inferred. Note (2026-11-14): price, star rating, review count and availability ARE visible on the official Amazon pages - they are null here because Program Policies §6(a), §6(t) and §6(y) and the IP License require that Program Content to come from Amazon-served links or the Creators API, and §6(t) bars customer reviews and star ratings outright unless obtained through the API. Blank-by-policy, not blank-because-unverified.",
   "verified_on": "2026-11-14",
   "session": "181863ad",
   "products": [

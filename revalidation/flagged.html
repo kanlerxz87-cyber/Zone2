@@ -69,9 +69,9 @@
       <p><strong>Disposition:</strong> Left blank. Flagged.</p>
       <p class="note">Sources: <a href="https://affiliate-program.amazon.com/help/operating/schedule" target="_blank" rel="noopener noreferrer">https://affiliate-program.amazon.com/help/operating/schedule</a></p>
     </div><div class="card" id="RV-09">
-      <h3>RV-09 · Two programme rows are cited but were not re-read this session <span class="badge info">low</span></h3>
-      <p>PG-05 (price/availability display) and PG-06 (rating/review display) are relied on by the site&#x27;s no-price rule, but their clause text was not re-opened on 2026-11-14.</p>
-      <p><strong>Disposition:</strong> Marked not_rechecked rather than verified. The no-price rule is retained as the conservative choice.</p>
+      <h3>RV-09 · Two programme rows are cited but were not re-read this session (closed 2026-11-14) <span class="badge info">low</span></h3>
+      <p>PG-05 (price/availability display) and PG-06 (rating/review display) are relied on by the site&#x27;s no-price rule, but their clause text was not re-opened on 2026-11-14. Closed the same day: both clauses were re-read verbatim from the Program Policies page and the rows now carry the clause text and a verified status.</p>
+      <p><strong>Disposition:</strong> Closed on 2026-11-14 - both rows re-read and marked verified with the clause text.</p>
       <p class="note">Sources: <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">https://affiliate-program.amazon.com/help/operating/policies</a></p>
     </div><div class="card" id="RV-10">
       <h3>RV-10 · Published pages elsewhere in the repo still carry the superseded fallback inference <span class="badge info">low</span></h3>
@@ -83,6 +83,11 @@
       <p>Each link returns a distinct per-link token of the form btn_ref=srctok-&lt;16 hex&gt;. The three tokens differ from each other and are identical on a same-day re-fetch, but they differ between 2026-11-13 and 2026-11-14 for the same link, while the destination ASIN did not change on any fetch across five sessions and two days. Measured independently by session 0a3dff48 on 2026-11-14.</p>
       <p><strong>Disposition:</strong> Recorded so that token rotation is not later mistaken for destination instability, and so that the token is not used as a stable identifier of a link. The destination ASIN is the only stable identifier.</p>
       <p class="note">Sources: <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B0CDY277D3</a> · <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B09B7SB46R</a> · <a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B08DKYBTPH</a></p>
+    </div><div class="card" id="RV-12">
+      <h3>RV-12 · Price, ratings, review counts and stock status are visible on the official pages but are withheld by policy <span class="badge info">low</span></h3>
+      <p>The no-price rule on this site was originally described as a response to values that could not be verified. That was not the real reason. Re-fetching the three destination pages on 2026-11-14 shows list prices, star ratings, review counts and stock status plainly present on the official Amazon pages. They are blank here because Program Policies §6(a), §6(t) and §6(y), and the IP License, require that kind of Program Content to come from Amazon-served links or the Creators API, and §6(t) bars customer reviews and star ratings outright unless obtained through the API.</p>
+      <p><strong>Disposition:</strong> Stated accurately now, so a reader cannot mistake a policy decision for a verification failure. The blank cells remain blank.</p>
+      <p class="note">Sources: <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">https://affiliate-program.amazon.com/help/operating/policies</a> · <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B09B7SB46R</a></p>
     </div>
 
     <footer class="site">
