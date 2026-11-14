@@ -284,6 +284,20 @@
         "S29"
       ],
       "published_on": "pages/compliance.html + pages/flags.html"
+    },
+    {
+      "id": "F-22",
+      "severity": "medium",
+      "owner": "done",
+      "title": "The dashboard's flag count was derived from the wrong list and understated the register (14 shown, 21 held)",
+      "detail": "F-17 replaced a typed '11 items flagged' KPI with a derived count, which was the right direction. But the value was derived from FLAGGED_ROWS in assets/js/data.js - the reader-facing *subset* rendered on flagged.html - not from the canonical register in ledger/flags.json. As flags F-20 and F-21 were added to the register the dashboard kept showing 14 while pages/flags.html published 21, so one site told two different numbers. Only visible on the deployed page: no gate compared the JS constant to the ledger.",
+      "impact": "A KPI that understates the number of open items is a disclosure problem, not a cosmetic one: it tells the reader the site is cleaner than it is. It is the same class of defect as F-17.",
+      "action_required": "None open. CANONICAL_FLAG_COUNT now lives in assets/js/data.js and tools/validate_data.py::check_flag_count fails the build when it disagrees with the ledger (negative-tested: setting it to 14 turns the gate red).",
+      "status": "closed",
+      "source_ids": [
+        "S02"
+      ],
+      "published_on": "pages/flags.html"
     }
   ]
 }

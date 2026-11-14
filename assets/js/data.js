@@ -654,6 +654,10 @@ const TRACKING_ROWS = [
  * Rows without a canonical counterpart are dashboard-specific (e.g. a per-product UNVERIFIED cell).
  */
 const LEDGER_FLAGS_URL = "pages/flags.html";
+// Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
+// tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22).
+const CANONICAL_FLAG_COUNT = 22;
+
 const FLAGGED_ROWS = [
   {
     item: "Link-code / ASIN mismatch — Product 1",
