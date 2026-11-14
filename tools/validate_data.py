@@ -327,7 +327,7 @@ def check_published_counts(report: Report, canonical_flags: int) -> None:
 
     Three times now a hand-typed count has gone stale against the register it described:
     F-17 (a "11 items flagged" KPI), F-26 (a KPI derived from the reader-facing subset), and finally
-    — found by session d3ce1c29 while adding F-27…F-29 — `flagged.html` still reading "26 flags
+    — found by session d3ce1c29 while adding F-28…F-30 — `flagged.html` still reading "26 flags
     (F-01 … F-26)" and `README.md` still advertising "(14 items)", "(22 sources)" and "(32 checks)"
     when the ledgers held 29 / 36 / 62. Every one of them was invisible to the gates.
 
@@ -348,6 +348,12 @@ def check_published_counts(report: Report, canonical_flags: int) -> None:
     # README.md, neither of which owned_pages() covers because other gates police the root namespace.
     scope = sorted(REPO.glob("*.html")) + sorted((REPO / "pages").rglob("*.html"))
     scope += sorted(REPO.glob("*.md")) + sorted((REPO / "docs").glob("*.md"))
+    # COORDINATION.md is excluded on purpose. It is an append-only chronological log, so it quotes
+    # counts that were correct when they were written ("the merged register holds 26 flags …").
+    # Rewriting those lines would falsify the log; they are a record of a past state, not a claim
+    # about the current register. Everywhere a reader is told what the site publishes *now* —
+    # README.md, EXECUTIVE_SUMMARY.md, flagged.html, pages/ — is in scope.
+    scope = [p for p in scope if p.name != "COORDINATION.md"]
     for path in scope:
         text = path.read_text(encoding="utf-8", errors="ignore")
         for pattern, label, expected, which in checks:

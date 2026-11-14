@@ -521,14 +521,14 @@ def page_commissions() -> str:
         for g in COMMISSION["groups"]
     ]
     bounties = [[text_cell(b["program"]), text_cell(b["bounty_action"]), num_cell(b["rate"]), source_cell([b["source_id"]])] for b in COMMISSION["bounties"]]
-    # T26 (session d3ce1c29, F-27): S04 publishes a second special-income block, "(b) Bonus Events",
+    # T26 (session d3ce1c29, F-28): S04 publishes a second special-income block, "(b) Bonus Events",
     # which the earlier transcription omitted along with most of the bounty rows.
     bonuses = [[text_cell(b["program"]), text_cell(b["bonus_action"]), num_cell(b["rate"]), source_cell([b["source_id"]])] for b in COMMISSION.get("bonus_events", [])]
     terms = [[text_cell(t["term"]), text_cell(t["detail"]), source_cell([t["source_id"]])] for t in COMMISSION["other_statement_terms"]]
     bounty_note = (
         f'{len(bounties)} bounty events and {len(bonuses)} bonus events, published in full. '
         "An earlier revision published only the first 9 bounty rows under a \"transcribed row-by-row\" notice "
-        "(flag F-27, corrected 2026-11-14)."
+        "(flag F-28, corrected 2026-11-14)."
     )
     model = [
         ("Band ceiling used for normalisation", "10.00%", "highest published fixed rate in the table", ["S04"]),
@@ -555,7 +555,7 @@ def page_commissions() -> str:
             "prepared and delivered from a restaurant, and Amazon Appstore / Prime Now / Amazon Pay Places) and Coach, listed on "
             "its own row. The niche filter removes them before any ranking happens, so no content budget can be spent on a "
             "category that pays nothing. (An earlier revision of this caption said \"nine category groups\", which matches no "
-            "grouping in the source — flag F-28.)",
+            "grouping in the source — flag F-29.)",
         )
     )
     return render("commissions.html", "Commissions & economics", "Amazon's published rates, bounties, attribution windows and payment terms, transcribed from the source.", body)

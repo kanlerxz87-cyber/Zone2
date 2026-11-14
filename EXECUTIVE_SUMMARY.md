@@ -148,7 +148,7 @@ that distinction is recorded on the site rather than papered over.
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — **30 items** (F-01 … F-30; the number is derived from
+  (`pages/flags.html`) with source links — **30 items** (F-01 … F-31; the number is derived from
   `ledger/flags.json` and gated, so it cannot be typed wrong again), including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -293,7 +293,7 @@ The three supplied links were also re-resolved in this session and each still la
 were again different from every value recorded earlier the same day, and from each other — F-21 confirmed a
 fourth time.
 
-### One substantive defect found and fixed (F-27)
+### One substantive defect found and fixed (F-28)
 
 The “Bounty events” panel published **9** rows under a notice reading *“Transcribed row-by-row from Amazon's
 published Associates Program Standard Commission Income Statement.”* S04 actually publishes **46** rows under
@@ -301,12 +301,12 @@ published Associates Program Standard Commission Income Statement.”* S04 actua
 were individually correct and correctly sourced — the defect was **omission**, not error, but a partial list
 wearing a completeness claim reads as the whole set, and it hid the two largest published bounty rates on the
 program (Audible $20.00, Amazon Business $15.00). The full 46 + 2 are now transcribed, rendered, and counted on
-`pages/commissions.html` (F-27, closed).
+`pages/commissions.html` (F-28, closed).
 
 Two smaller irregularities were closed alongside it: the zero-rate caption said “Nine category groups publish a
-0.00 % rate”, a count that matches no grouping in Table 1 (F-28, reworded); and `tools/validate_data.py` skipped
+0.00 % rate”, a count that matches no grouping in Table 1 (F-29, reworded); and `tools/validate_data.py` skipped
 any ledger row whose only source field is `source_id`, so every commission row — including the 48 new ones —
-would have escaped the source check (F-29, fixed; the gate's row count rose 173 → 243 and was negative-tested).
+would have escaped the source check (F-30, fixed; the gate's row count rose 173 → 243 and was negative-tested).
 
 **One inherited flag closed.** F-16 — four compliance rows citing controls that did not exist — was re-verified
 line by line in this pass: `check_marks` (tools/validate_data.py:190), `lint()` (tools/generate_articles.py:164)

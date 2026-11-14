@@ -692,7 +692,7 @@
         "S04",
         "S28"
       ],
-      "consequence": "S04 publishes 46 rows under '(a) Bounty Events' and 2 further rows under '(b) Bonus Events' (Amazon Fresh Products $1.00; Pet Food & Supplies $3.00). The 9 published rows were the first nine and were individually correct — the defect was omission. Recorded as F-27 and corrected by tools/apply_bounty_completion_2026_11_14.py."
+      "consequence": "S04 publishes 46 rows under '(a) Bounty Events' and 2 further rows under '(b) Bonus Events' (Amazon Fresh Products $1.00; Pet Food & Supplies $3.00). The 9 published rows were the first nine and were individually correct — the defect was omission. Recorded as F-28 and corrected by tools/apply_bounty_completion_2026_11_14.py."
     },
     {
       "id": "V-62",

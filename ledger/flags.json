@@ -1,5 +1,5 @@
 {
-  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-27 to F-29 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-29's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-30 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code.",
+  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-28 to F-30 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-30's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-31 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code.",
   "as_of": "2026-11-14",
   "flags": [
     {
@@ -359,7 +359,7 @@
       "published_on": "pages/flags.html"
     },
     {
-      "id": "F-27",
+      "id": "F-28",
       "severity": "medium",
       "owner": "done",
       "title": "The bounty table published 9 of the 46 bounty events, and none of the 2 bonus events, under a 'transcribed row-by-row' notice",
@@ -374,7 +374,7 @@
       "published_on": "pages/commissions.html + pages/flags.html"
     },
     {
-      "id": "F-28",
+      "id": "F-29",
       "severity": "low",
       "owner": "done",
       "title": "The zero-rate caption said 'Nine category groups publish a 0.00% Standard Commission rate', which matches no grouping in the source",
@@ -388,12 +388,12 @@
       "published_on": "pages/commissions.html + pages/flags.html"
     },
     {
-      "id": "F-29",
+      "id": "F-30",
       "severity": "low",
       "owner": "done",
       "title": "tools/validate_data.py skipped any ledger row whose only source field is 'source_id' (singular)",
       "detail": "Found 2026-11-14 by session d3ce1c29. check_rows() walks the ledger and yields a dict as a row only if it contains 'source_ids' or 'id'. Every commission-table row (bands, bounty rows, bonus rows, statement terms) uses the singular 'source_id' and has no 'id', so those rows were never counted and never held to the 'a row that carries a value must carry a source' rule. Completing the bounty table added 48 unchecked rows before the gap was closed.",
-      "impact": "The gate could not fail on an unsourced rate row — precisely the failure mode F-27 was.",
+      "impact": "The gate could not fail on an unsourced rate row — precisely the failure mode F-28 was.",
       "action_required": "None open. _walk_rows now also yields on 'source_id'; the gate's row count rose from 173 to 243 and passes. Negative check: reverting the one-line change lowers the count back to 173, so the new rows are really being walked.",
       "status": "closed",
       "source_ids": [
@@ -402,7 +402,7 @@
       "published_on": "pages/flags.html"
     },
     {
-      "id": "F-30",
+      "id": "F-31",
       "severity": "low",
       "owner": "done",
       "title": "The Flagged for Review panel called all 29 register items 'open items' when 17 of them are already resolved",
