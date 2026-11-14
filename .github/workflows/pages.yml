@@ -88,6 +88,23 @@ jobs:
         run: |
           node --check assets/js/data.js && node --check assets/js/app.js && echo "JS syntax OK"
 
+      # ---- arena/0a3dff48-zone2: the primary dashboard must actually RENDER ----
+      # `node --check` only proves the JavaScript parses. This harness stubs the DOM,
+      # runs assets/js/app.js and asserts every table on every root page is populated
+      # and carries at least one official source link.
+      - name: Primary site render test (tables populated, sources present)
+        run: node tests/test_render.js
+
+      # ---- arena/0a3dff48-zone2: the research-hub namespace ----
+      # Its generator was broken after the namespace move: running it deleted the
+      # hub's 16 generated files and then crashed. --check builds into a temp
+      # directory and proves the committed output is what the generator produces.
+      - name: Rebuild the research hub and confirm committed output is current
+        run: python3 research-hub/scripts/build.py --check
+
+      - name: Research hub per-row sourcing verifier
+        run: python3 research-hub/scripts/verify.py
+
       - name: Data files parse
         run: |
           python3 - <<'PY'

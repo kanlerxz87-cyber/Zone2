@@ -68,6 +68,31 @@
       <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">Amazon Associates help</a>.
     </p>
 
+    <h2>Cross-day re-test &mdash; 2026-11-14</h2>
+    <p class="note">
+      Performed independently by session <code>0a3dff48</code> on 2026-11-14, one day after the original measurement.
+      Each short link was fetched again and each destination ASIN was requested directly as a bare, untagged
+      <code>/dp/</code> URL as a control.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th>Supplied link <span class="note">(external)</span></th><th>Destination ASIN</th>
+          <th>Token on 2026-11-13</th><th>Token on 2026-11-14</th><th>Destination changed?</th><th>Evidence</th>
+        </tr></thead>
+        <tbody>
+        <tr><td><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer sponsored">https://link.amazon/B04G1MEwY</a></td><td><a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer sponsored">B0CDY277D3</a></td><td><code>srctok-1e229870efde5acf</code></td><td><code>srctok-1f979f303a4b5691</code></td><td><span class="badge ok">no</span></td><td><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer sponsored">source</a> <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer sponsored">source</a></td></tr><tr><td><a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer sponsored">https://link.amazon/B02NbDxp3</a></td><td><a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer sponsored">B09B7SB46R</a></td><td><code>srctok-534f5e7952f396b2</code></td><td><code>srctok-0cd8be3c7e2e0de3</code></td><td><span class="badge ok">no</span></td><td><a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer sponsored">source</a> <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer sponsored">source</a></td></tr><tr><td><a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer sponsored">https://link.amazon/B00hJ57DV</a></td><td><a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer sponsored">B08DKYBTPH</a></td><td><code>srctok-76c3adaeb8708b44</code></td><td><code>srctok-7c59360cbbbd59b7</code></td><td><span class="badge ok">no</span></td><td><a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer sponsored">source</a> <a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer sponsored">source</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">
+      Control: a bare, untagged <code>GET https://www.amazon.com/dp/B0CDY277D3</code> &mdash; a <em>valid</em> 10-character
+      ASIN &mdash; returned the real CHEFMAN 6 Qt product page, and Amazon rewrote its own internal links to
+      <code>?lv=shuf&amp;channelId=500&amp;plpRedirect=mhFallback&amp;th=1</code>. The marker is therefore emitted on an
+      ordinary valid load and is not evidence of a fallback. See
+      <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">the control fetch</a>.
+    </p>
+
     <h2>Observed destination URLs</h2>
     <div class="tablewrap">
       <table>

@@ -1,5 +1,5 @@
 {
-  "$note": "Controlled re-verification of the three supplied link.amazon URLs, session c6e94e8d, 2026-11-14. Every value below is either read from a live official source (URL given) or is null with a flag. Nothing inferred.",
+  "$note": "Controlled re-verification of the three supplied link.amazon URLs, session c6e94e8d, 2026-11-14, independently re-measured the same day by session 0a3dff48 (see cross_day_retest). Every value below is either read from a live official source (URL given) or is null with a flag. Nothing inferred.",
   "verified_on": "2026-11-14",
   "verifier": "arena/c6e94e8d-zone2 (session c6e94e8d)",
   "method_note": "Fetches were made with the agent's page-fetch tool. curl from the build sandbox cannot reach these hosts (HTTP 000, exit 35), so these are dated observations, not a CI-runnable step.",
@@ -23,7 +23,13 @@
       "associates_tag_present": false,
       "associates_tag_note": "No ?tag= (Associates ID) parameter appears in the observed destination URL. A Special Link must carry the Associates tag; this one does not, so it cannot be relied on to earn commission as given.",
       "status": "verified_destination_flagged_mapping",
-      "flag_ids": ["RV-01", "RV-02", "RV-03"]
+      "flag_ids": [
+        "RV-01",
+        "RV-02",
+        "RV-03"
+      ],
+      "link_token_recheck_2026_11_14": "srctok-1f979f303a4b5691",
+      "destination_stable_across_days": true
     },
     {
       "id": "L2",
@@ -44,7 +50,13 @@
       "associates_tag_present": false,
       "associates_tag_note": "No ?tag= (Associates ID) parameter appears in the observed destination URL.",
       "status": "verified_destination_flagged_mapping",
-      "flag_ids": ["RV-01", "RV-02", "RV-03"]
+      "flag_ids": [
+        "RV-01",
+        "RV-02",
+        "RV-03"
+      ],
+      "link_token_recheck_2026_11_14": "srctok-0cd8be3c7e2e0de3",
+      "destination_stable_across_days": true
     },
     {
       "id": "L3",
@@ -65,7 +77,13 @@
       "associates_tag_present": false,
       "associates_tag_note": "No ?tag= (Associates ID) parameter appears in the observed destination URL.",
       "status": "verified_destination_flagged_mapping",
-      "flag_ids": ["RV-01", "RV-02", "RV-03"]
+      "flag_ids": [
+        "RV-01",
+        "RV-02",
+        "RV-03"
+      ],
+      "link_token_recheck_2026_11_14": "srctok-7c59360cbbbd59b7",
+      "destination_stable_across_days": true
     }
   ],
   "control_test": {
@@ -87,5 +105,60 @@
     "conclusion": "The per-link token is stable, not shuffled. The previously published 'different btn_ref on re-fetch' claim is NOT reproducible.",
     "status": "verified",
     "supersedes": "ledger/flags.json F-05 and the README.md divergence table row 'Same-day re-fetch'."
+  },
+  "cross_day_retest": {
+    "id": "C-3",
+    "question": "Does the destination hold across days, and is the per-request token a stable identifier?",
+    "performed_by": "arena/0a3dff48-zone2 (session 0a3dff48)",
+    "performed_utc": "2026-11-14",
+    "procedure": "Each of the three supplied short links was fetched again, and each destination ASIN was requested directly as a bare, untagged /dp/ URL as a control.",
+    "observations": [
+      {
+        "link": "https://link.amazon/B04G1MEwY",
+        "destination_asin": "B0CDY277D3",
+        "destination_title_observed": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+        "token_2026_11_13": "srctok-1e229870efde5acf",
+        "token_2026_11_14": "srctok-1f979f303a4b5691",
+        "destination_changed_between_days": false,
+        "source": [
+          "https://link.amazon/B04G1MEwY",
+          "https://www.amazon.com/dp/B0CDY277D3"
+        ]
+      },
+      {
+        "link": "https://link.amazon/B02NbDxp3",
+        "destination_asin": "B09B7SB46R",
+        "destination_title_observed": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+        "token_2026_11_13": "srctok-534f5e7952f396b2",
+        "token_2026_11_14": "srctok-0cd8be3c7e2e0de3",
+        "destination_changed_between_days": false,
+        "source": [
+          "https://link.amazon/B02NbDxp3",
+          "https://www.amazon.com/dp/B09B7SB46R"
+        ]
+      },
+      {
+        "link": "https://link.amazon/B00hJ57DV",
+        "destination_asin": "B08DKYBTPH",
+        "destination_title_observed": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+        "token_2026_11_13": "srctok-76c3adaeb8708b44",
+        "token_2026_11_14": "srctok-7c59360cbbbd59b7",
+        "destination_changed_between_days": false,
+        "source": [
+          "https://link.amazon/B00hJ57DV",
+          "https://www.amazon.com/dp/B08DKYBTPH"
+        ]
+      }
+    ],
+    "control": {
+      "url_fetched": "https://www.amazon.com/dp/B0CDY277D3",
+      "request_was_tagged_or_shortened": false,
+      "observed": "HTTP 200 with the full CHEFMAN 6 Qt product page (buy box, About this item, User Guide). Amazon rewrote its own internal links to ?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1.",
+      "conclusion": "plpRedirect=mhFallback is emitted on an ordinary, untagged, valid product-page load. It is not evidence of a fallback.",
+      "source": [
+        "https://www.amazon.com/dp/B0CDY277D3"
+      ]
+    },
+    "conclusion": "The destination ASIN never changed on any fetch across five sessions and two days, while the per-request srctok attribution token did change between days. A rotating source-attribution token on a fixed destination is the behaviour of a tracked source link. The token must therefore not be treated as a stable identifier of the link; only the destination ASIN is stable."
   }
 }

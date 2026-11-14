@@ -78,7 +78,7 @@
   <div class="flag-item" id="AF-06">
     <h3>AF-06 · Supplied <code>link.amazon/&lt;code&gt;</code> URLs fall back to unrelated pages</h3>
     <div class="meta">Severity: high · Status: <span class="badge flag">open</span></div>
-    <p>Each supplied short link redirected into an unrelated Amazon page with <code>plpRedirect=mhFallback</code> instead of opening a product for the code. <code>link.amazon/</code> root and <code>/robots.txt</code> returned HTTP 403.</p>
+    <p>Each supplied short link resolves to exactly one Amazon product page, and to that same destination on every fetch (re-verified 2026-11-14). The earlier reading — that the <code>plpRedirect=mhFallback</code> marker proved a fallback — did not survive a control test: a bare, untagged fetch of a <em>valid</em> ASIN returns the real product page with the same marker, so the marker is not evidence of a fallback. What remains open is that no public Amazon document binds a <code>link.amazon</code> code to a destination ASIN. <code>link.amazon/</code> root and <code>/robots.txt</code> returned HTTP 403.</p>
     <p class="src">Sources: <a class="src-link" href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener">link.amazon/B04G1MEwY</a> · <a class="src-link" href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener">link.amazon/B02NbDxp3</a> · <a class="src-link" href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener">link.amazon/B00hJ57DV</a></p>
   </div>
 

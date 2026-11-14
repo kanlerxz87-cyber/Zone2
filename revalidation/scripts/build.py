@@ -208,6 +208,27 @@ both -&gt; /dp/B0CDY277D3?lv=shuf&amp;btn_type=ss&amp;<span>btn_ref=srctok-1e229
 
 def build_links(links) -> str:
     rows = []
+    retest_rows = ""
+    for o in links.get("cross_day_retest", {}).get("observations", []):
+        changed = o["destination_changed_between_days"]
+        evidence = " ".join(
+            '<a href="{0}" target="_blank" rel="noopener noreferrer sponsored">source</a>'.format(escape(u))
+            for u in o["source"]
+        )
+        retest_rows += (
+            '<tr><td><a href="{link}" target="_blank" rel="noopener noreferrer sponsored">{link}</a></td>'
+            '<td><a href="https://www.amazon.com/dp/{asin}" target="_blank" rel="noopener noreferrer sponsored">{asin}</a></td>'
+            '<td><code>{t1}</code></td><td><code>{t2}</code></td>'
+            '<td><span class="badge {cls}">{mark}</span></td><td>{evidence}</td></tr>'
+        ).format(
+            link=escape(o["link"]),
+            asin=escape(o["destination_asin"]),
+            t1=escape(o["token_2026_11_13"]),
+            t2=escape(o["token_2026_11_14"]),
+            cls="flag" if changed else "ok",
+            mark="yes" if changed else "no",
+            evidence=evidence,
+        )
     for L in links["links"]:
         rows.append(
             f"""<tr>
@@ -243,6 +264,31 @@ def build_links(links) -> str:
       <a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">B08DKYBTPH</a>, plus
       the three Page-Not-Found checks linked in column 3. The ASIN-length rule is from
       <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">Amazon Associates help</a>.
+    </p>
+
+    <h2>Cross-day re-test &mdash; 2026-11-14</h2>
+    <p class="note">
+      Performed independently by session <code>0a3dff48</code> on 2026-11-14, one day after the original measurement.
+      Each short link was fetched again and each destination ASIN was requested directly as a bare, untagged
+      <code>/dp/</code> URL as a control.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th>Supplied link <span class="note">(external)</span></th><th>Destination ASIN</th>
+          <th>Token on 2026-11-13</th><th>Token on 2026-11-14</th><th>Destination changed?</th><th>Evidence</th>
+        </tr></thead>
+        <tbody>
+        {retest_rows}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">
+      Control: a bare, untagged <code>GET https://www.amazon.com/dp/B0CDY277D3</code> &mdash; a <em>valid</em> 10-character
+      ASIN &mdash; returned the real CHEFMAN 6 Qt product page, and Amazon rewrote its own internal links to
+      <code>?lv=shuf&amp;channelId=500&amp;plpRedirect=mhFallback&amp;th=1</code>. The marker is therefore emitted on an
+      ordinary valid load and is not evidence of a fallback. See
+      <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">the control fetch</a>.
     </p>
 
     <h2>Observed destination URLs</h2>
