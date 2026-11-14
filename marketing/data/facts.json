@@ -1,0 +1,158 @@
+{
+  "$schema_version": "1.0",
+  "note": "Fact base for the marketing set. EVERY value here was read off an official page on 2026-11-14 and is quoted (or tightly paraphrased) from it. No value is inferred, averaged, or carried over from another session's ledger. Blank means 'no official source states it' - the marketing renderer refuses to print a blank as a fact and prints an explicit UNVERIFIED marker instead.",
+  "verified_utc": "2026-11-14",
+  "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+  "link_level_disclosure": "(paid link)",
+  "associates_tag_configured": false,
+  "associates_tag_note": "No Associates ID is stored anywhere in this repository and none may be invented (Operating Agreement / Participation Requirements; ledger flag F-07). Every product link in this set is therefore emitted through tools/link_builder.py:preview_link() - a clearly labelled, non-monetized placeholder - and the site says so on every page that shows a link.",
+  "products": [
+    {
+      "key": "P1",
+      "label": "Chefman TurboFry Touch 6 Qt Dual-Window",
+      "asin": "B0CDY277D3",
+      "submitted_link": "https://link.amazon/B04G1MEwY",
+      "submitted_token": "B04G1MEwY",
+      "submitted_token_length": 9,
+      "submitted_token_is_asin": false,
+      "title_official": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "title_source": "https://www.amazon.com/dp/B0CDY277D3",
+      "manufacturer": "Chefman",
+      "manufacturer_product_name": "TurboFry® Touch 6 Qt. Dual-Window Air Fryer",
+      "model": "RJ38-SQPF-3TDB-2W",
+      "category_path_amazon": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "category_source": "https://www.amazon.com/dp/B0CDY277D3",
+      "official_sources": [
+        {"id": "M1", "kind": "manufacturer", "name": "Chefman official product page", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"id": "M2", "kind": "marketplace", "name": "Amazon US product page", "url": "https://www.amazon.com/dp/B0CDY277D3"}
+      ],
+      "rows": [
+        {"attr": "Capacity", "value": "6 Qt / 5.67 L", "detail": "Two independent baskets; the page lists 6 Qt total and the Amazon title describes them as two 3Qt baskets.", "status": "verified", "src": "M1"},
+        {"attr": "Power", "value": "1700 W / 120 V", "status": "verified", "src": "M1"},
+        {"attr": "Temperature range", "value": "200–450 °F / 95–235 °C", "status": "verified", "src": "M1"},
+        {"attr": "Dimensions", "value": "13.38 × 11.81 × 10.63 in / 33.98 × 30 × 27 cm", "status": "verified", "src": "M1"},
+        {"attr": "Weight", "value": "13.3 lb / 6.03 kg", "status": "verified", "src": "M1"},
+        {"attr": "Model number", "value": "RJ38-SQPF-3TDB-2W", "status": "verified", "src": "M1"},
+        {"attr": "Certification", "value": "cETL approved with a 1-year Chefman assurance", "status": "verified", "src": "M1"},
+        {"attr": "Door / window", "value": "Dual viewing windows with interior light", "status": "verified", "src": "M1"},
+        {"attr": "Finish", "value": "Matte black", "status": "verified", "src": "M1"},
+        {"attr": "Basket care", "value": "Nonstick, dishwasher-safe baskets", "status": "verified", "src": "M1"},
+        {"attr": "Hi-Fry maximum", "value": "450 °F / 235 °C", "status": "verified", "src": "M1"},
+        {"attr": "Sync Finish", "value": "Both baskets finish cooking at the same time", "status": "verified", "src": "M1"},
+        {"attr": "Control type", "value": "Digital touchscreen", "status": "verified", "src": "M2"},
+        {"attr": "Inner material", "value": "Stainless steel with nonstick baskets", "status": "unverified", "src": null, "blank_reason": "The Amazon 'product information' block did not render in this session's fetch; the manufacturer page does not state an inner-material specification in those words. Left blank rather than inferred."},
+        {"attr": "UPC", "value": "", "status": "unverified", "src": null, "blank_reason": "Not stated on either official page."},
+        {"attr": "Price", "value": "", "status": "withheld_by_policy", "src": null, "blank_reason": "Program policy restricts displaying prices except in links Amazon serves; this project publishes no prices (compliance rule enforced by the deploy gate)."},
+        {"attr": "Star rating / review count", "value": "", "status": "withheld_by_policy", "src": null, "blank_reason": "Volatile and storefront-specific; no rating is published as a static fact."}
+      ],
+      "features_official": [
+        "Two independent 3-qt baskets, 6 qt combined",
+        "Sync Finish so both baskets complete together",
+        "Hi-Fry to 450 °F for extra crisp",
+        "Dual viewing windows and interior light",
+        "Nonstick, dishwasher-safe baskets"
+      ],
+      "features_source": "M1",
+      "tagline_facts": "Verified manufacturer spec: 6 Qt in two independent baskets, 1700 W, 200–450 °F, dual viewing windows."
+    },
+    {
+      "key": "P2",
+      "label": "Emeril Lagasse French Door AirFryer 360, 26 Qt",
+      "asin": "B09B7SB46R",
+      "submitted_link": "https://link.amazon/B02NbDxp3",
+      "submitted_token": "B02NbDxp3",
+      "submitted_token_length": 9,
+      "submitted_token_is_asin": false,
+      "title_official": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+      "title_source": "https://www.amazon.com/dp/B09B7SB46R",
+      "manufacturer": "Emeril Lagasse",
+      "manufacturer_product_name": "EMERIL LAGASSE FRENCH DOOR AIRFRYER 360™ TOASTER OVEN COMBO, 26 QT",
+      "model": "4-00675-02A-VN",
+      "model_note": "Manufacturer store states 4-00675-02A-VN; the Amazon.com product-information block states 4-00675-02X-VN. Both strings were observed; the manufacturer's own store value is the one printed here.",
+      "category_path_amazon": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "category_source": "https://www.amazon.com/dp/B09B7SB46R",
+      "official_sources": [
+        {"id": "M3", "kind": "manufacturer", "name": "Emeril Everyday official store", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"},
+        {"id": "M4", "kind": "marketplace", "name": "Amazon US product page", "url": "https://www.amazon.com/dp/B09B7SB46R"}
+      ],
+      "rows": [
+        {"attr": "Capacity", "value": "26 Qt / 24.6 L", "detail": "Manufacturer's description: sized to fit a whole chicken, 12-inch pizzas or a full tray of cookies; spec tile says food for 4–6 people.", "status": "verified", "src": "M3"},
+        {"attr": "Cooking presets", "value": "24", "detail": "CONFLICT ON THE SAME OFFICIAL PAGE: the spec tile reads '25 Cooking Pre-sets' while the manufacturer's own product description reads '24 one-touch cooking presets'. The Amazon title also reads '24 cooking functions'. The number is therefore NOT settled; both official statements are shown.", "status": "conflict", "src": "M3", "src_alt": "M4"},
+        {"attr": "Dimensions", "value": "16.9\"D × 15.8\"W × 14.8\"H", "status": "verified", "src": "M3"},
+        {"attr": "Voltage", "value": "120 V", "status": "verified", "src": "M3"},
+        {"attr": "Power (watts)", "value": "1700 W", "detail": "Stated in the Amazon.com product-information block.", "status": "verified", "src": "M4"},
+        {"attr": "Temperature range", "value": "75–500 °F", "detail": "Stated in the Amazon.com product-information block.", "status": "verified", "src": "M4"},
+        {"attr": "Model number", "value": "4-00675-02A-VN", "detail": "Amazon.com's product-information block states 4-00675-02X-VN for the same ASIN. Both printed on the comparison page; neither is presented as overriding the other.", "status": "conflict", "src": "M3", "src_alt": "M4"},
+        {"attr": "Door", "value": "Dual French doors", "detail": "Manufacturer describes 'French doors offer effortless access'.", "status": "verified", "src": "M3"},
+        {"attr": "Air circulation", "value": "360° hot air circulation with a dual-speed fan", "status": "verified", "src": "M3"},
+        {"attr": "Cooking modes", "value": "10-in-1: Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm", "status": "verified", "src": "M3"},
+        {"attr": "Included accessories", "value": "7 premium accessories", "detail": "Manufacturer names an air fry basket, rotisserie spit, bake pan 'and more'; the full seven are not itemised in the manufacturer text, so the accessories beyond those three are NOT listed here.", "status": "partial", "src": "M3"},
+        {"attr": "Warranty", "value": "1 year", "status": "verified", "src": "M3"},
+        {"attr": "UPC", "value": "", "status": "unverified", "src": null, "blank_reason": "Not stated on either official page."},
+        {"attr": "Price", "value": "", "status": "withheld_by_policy", "src": null, "blank_reason": "Program policy restricts displaying prices; no price is published."},
+        {"attr": "Star rating / review count", "value": "", "status": "withheld_by_policy", "src": null, "blank_reason": "Volatile and storefront-specific; no rating is published as a static fact."}
+      ],
+      "features_official": [
+        "26-quart capacity, sized for 4–6 people",
+        "Dual French doors with single-hand opening",
+        "24 one-touch cooking presets (manufacturer spec tile also states 25 — see conflict row)",
+        "360° dual-speed fan air circulation",
+        "7 premium accessories including an air fry basket, rotisserie spit and bake pan"
+      ],
+      "features_source": "M3",
+      "tagline_facts": "Verified manufacturer spec: 26 Qt / 24.6 L, dual French doors, 360° hot-air circulation, 10-in-1 cooking modes."
+    },
+    {
+      "key": "P3",
+      "label": "Chefman TurboFry Touch 8 Qt Stainless Steel",
+      "asin": "B08DKYBTPH",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "submitted_token": "B00hJ57DV",
+      "submitted_token_length": 9,
+      "submitted_token_is_asin": false,
+      "title_official": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "title_source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "manufacturer": "Chefman",
+      "manufacturer_product_name": "CHEFMAN® 8 Qt. TurboFry® Touch Air Fryer",
+      "model": "RJ38-SQSS-8T",
+      "category_path_amazon": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "category_source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "official_sources": [
+        {"id": "M5", "kind": "manufacturer", "name": "Chefman official product page", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"},
+        {"id": "M6", "kind": "marketplace", "name": "Amazon US product page", "url": "https://www.amazon.com/dp/B08DKYBTPH"}
+      ],
+      "rows": [
+        {"attr": "Capacity", "value": "8 Qt / 7.57 L", "detail": "The manufacturer page covers a 5 Qt and an 8 Qt model; every value on this row set is the manufacturer's stated value for the 8 Qt model, RJ38-SQSS-8T.", "status": "verified", "src": "M5"},
+        {"attr": "Power", "value": "1700 W / 120 V", "detail": "The manufacturer states 1700 W / 120 V. A 1000 W figure has circulated for this model; the manufacturer's own specification is the value published here.", "status": "verified", "src": "M5"},
+        {"attr": "Temperature range", "value": "200–400 °F / 95–205 °C", "status": "verified", "src": "M5"},
+        {"attr": "Dimensions (8 Qt)", "value": "15.4 × 12.6 × 13.5 in / 39.11 × 32 × 34.29 cm", "status": "verified", "src": "M5"},
+        {"attr": "Weight (8 Qt)", "value": "12.8 lb / 5.8 kg", "status": "verified", "src": "M5"},
+        {"attr": "Model number (8 Qt)", "value": "RJ38-SQSS-8T", "status": "verified", "src": "M5"},
+        {"attr": "Presets", "value": "4 (fries, chicken, fish, meat)", "status": "verified", "src": "M5"},
+        {"attr": "Certification", "value": "cETL approved with a 1-year Chefman assurance", "status": "verified", "src": "M5"},
+        {"attr": "Finish", "value": "Stainless steel", "status": "verified", "src": "M5"},
+        {"attr": "Basket care", "value": "Dishwasher-safe basket and rack (manufacturer: top-rack)", "status": "verified", "src": "M5"},
+        {"attr": "Shake reminder", "value": "LED shake reminder", "status": "verified", "src": "M5"},
+        {"attr": "Auto shut-off", "value": "Halts cooking when the timer runs out or the basket is opened", "status": "verified", "src": "M5"},
+        {"attr": "Hi-Fry / max temperature claim in Amazon title", "value": "450 °F", "detail": "The Amazon title says '450°F Hi-Fry Option'; the manufacturer's specification for the 8 Qt model says 200–400 °F. Both statements are official and they disagree, so the manufacturer's numeric range is shown as the specification and the Amazon title wording is shown as-is in the product title.", "status": "conflict", "src": "M5", "src_alt": "M6"},
+        {"attr": "UPC", "value": "", "status": "unverified", "src": null, "blank_reason": "Not stated on either official page."},
+        {"attr": "Price", "value": "", "status": "withheld_by_policy", "src": null, "blank_reason": "Program policy restricts displaying prices; no price is published."},
+        {"attr": "Star rating / review count", "value": "", "status": "withheld_by_policy", "src": null, "blank_reason": "Volatile and storefront-specific; no rating is published as a static fact."}
+      ],
+      "features_official": [
+        "8-quart family-size basket, sized for 4–6 people",
+        "4 one-touch presets: fries, chicken, fish, meat",
+        "200–400 °F adjustable range",
+        "LED shake reminder for even cooking",
+        "Top-rack dishwasher-safe basket and rack"
+      ],
+      "features_source": "M5",
+      "tagline_facts": "Verified manufacturer spec: 8 Qt / 7.57 L stainless-steel single-basket air fryer, 1700 W, 200–400 °F, 4 presets."
+    }
+  ],
+  "program_facts": [
+    {"fact": "Amazon Associates commission ceiling", "value": "up to 10% in associate commissions from qualifying purchases and programs", "status": "verified", "source": "https://affiliate-program.amazon.com/"},
+    {"fact": "Mandatory disclosure sentence", "value": "As an Amazon Associate I earn from qualifying purchases.", "status": "verified", "source": "https://affiliate-program.amazon.com/help/operating/agreement"},
+    {"fact": "ASIN definition", "value": "An ASIN is a 10-character alphanumeric identifier; a 9-character token is not an ASIN.", "status": "verified", "source": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC"}
+  ]
+}
