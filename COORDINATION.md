@@ -13,7 +13,8 @@ Repo: `kanlerxz87-cyber/Zone2`
 | `arena/34836ddd-zone2` | merged to `main` via PRs #5 / #8 / #9 | AI-powered platform build (multi-page dashboard) + CI fixes | merged; preserved at `zone2/` |
 | `arena/ec67c431-zone2` | merged to `main` via PR #7 | Integration of latest main; canonical link-checker (`scripts/check_links.py`) | merged; tooling preserved at `research-hub/scripts/check_links.py` |
 | `arena/78c94859-zone2` (78c94859) | merged to `main` via PR #3 | Zone2 platform site, verification, **final integration** | merged; primary site at repo root |
-| `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | open (PR #10) |
+| `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
+| `arena/dd87f326-zone2` (dd87f326) | PR opened from `arena/dd87f326-zone2` | T24 stale-PR #11 resolution + T25 independent verification-only audit | active |
 
 > **Integration note (multi-session race):** five sessions worked in parallel and each merged work to
 > `main` while others were still active, so every integration PR conflicted with the others. Per the
@@ -48,6 +49,8 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T19 | Integration of the 5th session's topology (namespaces, links, dataset relocation) | done | s-f786c0d7 | merge of `origin/main` @ `4009831`, `tools/build_site.py`, `README.md` |
 | T21 | Final gate run on `main` + record the non-existent-control irregularity (F-16) and PR #22 status; no shared data edited | done | `arena/dc15ce5a-zone2` | `COORDINATION.md` (append-only record) |
 | T20 | Re-verify supplied links + correct landing-page overclaim (root `index.html` said the 3 products were "identified and verified"; re-check shows `mhFallback` redirects, 9-char codes) | done | `arena/dc52402c-zone2` | `index.html` (text + KPI only), `COORDINATION.md` |
+| T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | in progress | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
+| T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | in progress | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -1181,3 +1184,23 @@ That session has since merged its own work (PR #28) independently; the two chang
 except this board.
 
 **Live entry point:** https://kanlerxz87-cyber.github.io/Zone2/marketing/
+## Session `arena/dd87f326-zone2` (dd87f326) — claim (2026-11-14, UTC)
+
+**Claimed:** T24 + T25 (rows above). **Branch note:** Arena pins this session to `arena/dd87f326-zone2`
+(the `session-<id>/<task>` naming cannot be used; same documented deviation as session `181863ad`).
+**File scope:** `COORDINATION.md` append-only records + the PR #11 close operation. No data, page,
+tool or workflow file is edited by this session. Registry correction made above: session `f786c0d7`'s
+status row said "open (PR #10)" but PR #10 is **MERGED** (verified via `gh pr list` 2026-11-14) — row
+updated to "merged".
+
+**Why T24 qualifies for takeover:** PR #11 was opened 2026-11-13T23:05:41Z by `ec67c431`, has exactly
+one commit, has received no updates for >11 hours, and GitHub reports it `CONFLICTING` with `main` —
+it meets the "claim more than 60 minutes old with no commits" takeover rule. It was explicitly left
+open by session `dc15ce5a` ("owner to close or merge"). No other session has claimed its resolution.
+
+**Why T25 does not collide:** session `82a2d436` claimed T22 (its own control-based link re-test, PR #27)
+and `83194da0` is reconciling root-site files (PR #25) — both are untouched by this session, whose output
+is verification-only and lands exclusively in this file.
+
+Coordinate note: task IDs T23 was skipped to avoid any collision with the in-flight numbering; this
+session uses T24/T25 only.
