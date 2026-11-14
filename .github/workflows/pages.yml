@@ -84,6 +84,21 @@ jobs:
           for page in sorted(Path("pages").rglob("*.html")):
               rel = page.relative_to("pages")
               problems += check(page.parent, [page.name])
+          # marketing/ has subdirectories (articles/), so refs must resolve relative to each page, not the root.
+          class Q(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.refs = []
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if tag == "script" and "src" in a: self.refs.append(a["src"])
+                  if tag == "link" and a.get("rel") == "stylesheet": self.refs.append(a["href"])
+                  if tag == "a" and a.get("href") and not a["href"].startswith(("http", "#", "mailto:")):
+                      self.refs.append(a["href"])
+          for page in sorted(Path("marketing").rglob("*.html")):
+              q = Q(); q.feed(page.read_text(encoding="utf-8"))
+              for ref in q.refs:
+                  if not (page.parent / ref.split("#")[0]).resolve().is_file():
+                      problems.append(f"{page}: missing {ref}")
           if problems:
               print("\n".join(problems))
               raise SystemExit(1)
@@ -202,6 +217,13 @@ jobs:
 
       - name: Revalidation gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
         run: python3 revalidation/scripts/verify.py
+
+      # ---- arena/a3faf404-zone2: marketing content set (T-A1..A4) ----
+      - name: Rebuild marketing pages and confirm committed output is current
+        run: python3 tools/build_marketing.py --check
+
+      - name: Marketing gate (per-row sourcing, disclosure, preview labels, no prices, links)
+        run: python3 marketing/scripts/verify_marketing.py
 
       # ---- arena/f786c0d7-zone2: generated subpages under pages/ ----
       # Rebuild first, so "committed output matches a fresh build" is a real property of this repo

@@ -1,4 +1,4 @@
-# T21 — Independent re-test of the three supplied `link.amazon` links
+# T22 — Independent re-test of the three supplied `link.amazon` links
 
 **Session:** `82a2d436` (`arena/82a2d436-zone2`) · **Date of observation:** 2026-11-14 (UTC) · **Method:** live page fetches with the agent's page-fetch tool. Direct `curl` from the build sandbox to `amazon.com` and `link.amazon` fails with TLS error (`SSL_ERROR_SYSCALL`, exit 35), so every observation below came from the fetch tool and is reproducible by opening the URL in a browser.
 

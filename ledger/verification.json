@@ -51,35 +51,35 @@
     {
       "id": "V-05",
       "subject": "Short link 1 behaviour",
-      "claim": "link.amazon/B04G1MEwY redirected to an unrelated ASIN carrying plpRedirect=mhFallback",
-      "method": "followed the redirect and recorded the final URL and page title",
+      "claim": "link.amazon/B04G1MEwY resolves stably to amazon.com/dp/B0CDY277D3; the mhFallback marker it carries is not evidence of a fallback",
+      "method": "followed the redirect and recorded the final URL, title and per-link btn_ref; then ran a control request to a bare, valid ASIN to test what the marker means",
       "verdict": "OBSERVED",
       "source_ids": [
         "S19"
       ],
-      "consequence": "F-03"
+      "consequence": "F-03 (downgraded); F-12 (withdrawn)"
     },
     {
       "id": "V-06",
       "subject": "Short link 2 behaviour",
-      "claim": "link.amazon/B02NbDxp3 redirected to a different unrelated ASIN, same mhFallback marker",
-      "method": "followed the redirect and recorded the final URL",
+      "claim": "link.amazon/B02NbDxp3 resolves stably to amazon.com/dp/B09B7SB46R, with its own per-link btn_ref; no Associates tag= on the resolved URL",
+      "method": "followed the redirect and recorded the final URL and per-link token",
       "verdict": "OBSERVED",
       "source_ids": [
         "S20"
       ],
-      "consequence": "F-03"
+      "consequence": "F-03 (downgraded)"
     },
     {
       "id": "V-07",
       "subject": "Short link 3 behaviour",
-      "claim": "link.amazon/B00hJ57DV redirected to a third unrelated ASIN, same mhFallback marker",
-      "method": "followed the redirect and recorded the final URL",
+      "claim": "link.amazon/B00hJ57DV resolves stably to amazon.com/dp/B08DKYBTPH, with its own per-link btn_ref; no Associates tag= on the resolved URL",
+      "method": "followed the redirect and recorded the final URL and per-link token",
       "verdict": "OBSERVED",
       "source_ids": [
         "S21"
       ],
-      "consequence": "F-03"
+      "consequence": "F-03 (downgraded)"
     },
     {
       "id": "V-08",

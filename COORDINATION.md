@@ -1087,3 +1087,196 @@ established as the requested products.
 | Amazon fallback destination B08DKYBTPH | https://www.amazon.com/dp/B08DKYBTPH | observed fallback (evidence only) |
 | Chefman official product page — TurboFry Touch Dual-Window | https://chefman.com/products/turbofry-touch-dual-window-air-fryer | candidate spec re-verification (F-12) |
 | Emeril Everyday official store — French Door AirFryer 360 | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 | candidate spec re-verification (F-12) |
+
+### T22 merge and deploy record — `82a2d436`
+
+| Item | Value |
+|---|---|
+| PR | **#27** — https://github.com/kanlerxz87-cyber/Zone2/pull/27 — `arena/82a2d436-zone2` → `main` |
+| PR validation | `Build and verify` run `43583813294` on head `282fd26` — **success**; deploy job skipped on the PR as designed |
+| Merge result | **MERGED** 2026-11-14T10:08:36Z, merge commit `3fb08a694d1e25e6ea22e824f8b63dee958d4ce8` (`gh pr merge 27 --merge`) |
+| Post-merge on `main` | `Build, verify and deploy` run `43583855466` for `3fb08a6` — **success**; `pages build and deployment` run `43583855126` — **success** |
+| Pages API | `status: built`, `html_url: https://kanlerxz87-cyber.github.io/Zone2/` |
+| Live check (cache-busted) | https://kanlerxz87-cyber.github.io/Zone2/docs/verification-82a2d436.md?v=3fb08a6 — renders the T22 verification record. https://kanlerxz87-cyber.github.io/Zone2/?v=3fb08a6 — renders the corrected landing text ("stably to one listing each"; correction note). |
+
+**Merge-conflict record (required):** this session's branch conflicted with `main` in `COORDINATION.md` three times, because other sessions appended to it while this one worked (PRs #26, #22). Each time it was resolved **append-only**: `main`'s full board was kept verbatim and this session's claim and result were added after it. Nothing from another session was removed. The task ID was changed from T21 to **T22** because `dc15ce5a` had taken T21 on `main` first (PR #26); the claim section states this. Commit messages on the branch still say "T21" for that reason.
+
+**Corrections found after merge:** the H1 of `docs/verification-82a2d436.md` still read "T21"; corrected to "T22" in this follow-up. No other content changed.
+
+**Open items carried forward (not blocking, per the brief):**
+- CR-5 and CR-6 above remain with their owners: `ledger/flags.json` F-03/F-05/F-12, `affiliate-lab/` AF-06, `pages/flags.html`, `docs/revalidation-2026-11-14.md`. The live landing text already states the corrected reading.
+- Owner action: confirm the intended products and Associates tag (unchanged).
+
+---
+
+## Session record — `a3faf404` (`arena/a3faf404-zone2`)
+
+**Branch note:** Arena pins this session to `arena/a3faf404-zone2`; the project's `session-<id>/<task>`
+naming is not available because the branch name is fixed by the harness. Same documented deviation as
+earlier sessions.
+
+### Claim (recorded 2026-11-14T10:10Z)
+
+Board state at claim time: `main` = `76c996d` (merge of PR #24). Tasks T1–T20 and `03ae78da-*` are `done`.
+**`bbe4ca47` holds an active claim** on `index.html`, `assets/js/**`, `ledger/**`, `pages/**`,
+`.github/workflows/pages.yml`, `sources.html`, `verification.html` (PR #22, last commit 10:02Z — inside the
+60-minute window, so it is **not** expired). This session therefore **does not touch any of those files**
+and will not take over BT-1…BT-6.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| `a3faf404-A1` | **Build the missing marketing content**: every requested deliverable (`affiliate-lab/`'s sibling gap) — real SEO product articles, head-to-head comparison and buying guide rendered **only** from the already-verified, per-row-sourced spec data in `research-hub/data/products.json`, with per-claim source links, disclosure, and no prices | in progress | `a3faf404` | `marketing/**` (new), `tools/build_marketing.py` (new) |
+| `a3faf404-A2` | Link the new marketing set from the shared navigation **without editing another session's file**: deliver as its own namespace + a change request for `content.html` (owned by `bbe4ca47`'s neighbourhood / prior sessions) | in progress | `a3faf404` | `marketing/**`, this file |
+| `a3faf404-A3` | Gate the new namespace in CI (per-row sourcing, disclosure, no product prices, link resolution) | in progress | `a3faf404` | `marketing/scripts/verify_marketing.py` (new), this file (CR for workflow) |
+| `a3faf404-A4` | Line-by-line re-verification of the three manufacturer/official product pages that the content quotes, dated and recorded with quoted output | in progress | `a3faf404` | `docs/marketing-verification-2026-11-14.md` |
+| `a3faf404-A5` | Integration: PR → merge → confirm Pages deploy → record | unclaimed | `a3faf404` | this file |
+
+**Why this scope.** The brief's SITE CREATION section asks for "a clean landing page and subpages organized by
+category … all entries and findings in a simple, easy to read table format", which exists. The brief's
+**Build marketing** section asks for actual marketing for the three products. Surveyed on `76c996d`:
+`content/published/` does not exist, `content.html` renders an empty `#contentTable`, `pages/content-engine.html`
+describes the capability but publishes no article, and `tools/generate_articles.py` correctly refuses because the
+*submitted codes* are unverified. **No marketing asset of any kind was published.** That is the gap this session
+closes — using the manufacturer-verified facts that already exist, with zero new inference.
+
+**Non-overlap guarantee.** `marketing/**` and `tools/build_marketing.py` and
+`docs/marketing-verification-2026-11-14.md` are new paths owned by no other session. No shared file is edited
+except this board (append-only).
+
+
+
+## Session `arena/bbe4ca47-zone2` — PR #22 **merged** and Pages deploy confirmed (2026-11-14, UTC)
+
+**PR:** [#22 — "Second verification pass: correct 4 non-existent compliance controls, fix KPI contradiction, close CI gaps"](https://github.com/kanlerxz87-cyber/Zone2/pull/22)
+**Merge commit:** `717aae2f` · merged 2026-11-14T10:07:02Z · **state MERGED** · method: merge (no review wait, as instructed).
+
+### Why it took three rebases
+
+`main` moved three times while the branch was open (`d032870` → `79aa8cb` → `4be892e6`). Each rebase conflicted in
+`COORDINATION.md`; resolved additively every time (both sessions' records kept, zero markers committed). On the
+second rebase `EXECUTIVE_SUMMARY.md` also conflicted and `main`'s side was already the fuller corrected text, so
+main's side was taken — no other session's wording discarded.
+
+### The one real defect CI found — and it was mine
+
+Run `43583286275` failed at **step 5, "Internal links and asset references resolve"**:
+
+```python
+problems += check(".", sorted(f.name for f in Path(".").glob("*.html")) - {"404.html"})
+TypeError: unsupported operand type(s) for -: 'list' and 'set'
+```
+
+`Path.glob()` returns a **list**, so `list - {'404.html'}` raised before a single link was checked. Replaced with a
+list-comprehension filter. Caught only by replaying the committed workflow steps locally; every local gate was
+green at the time, which is exactly why the workflow itself has to be executed, not read.
+
+After the fix, **all 14 executable workflow steps replayed locally: 0 failures.** CI then went green on `825e134b`.
+
+| Check | Result |
+|---|---|
+| `Build, verify and deploy` @ `825e134b` (PR) | **success** |
+| PR #22 mergeability at merge time | `MERGEABLE` / `CLEAN` |
+| `Build, verify and deploy` @ `717aae2f` (`main`) | **success** |
+| `pages build and deployment` @ `717aae2f` | **success** |
+| Pages API | `status=built`, `build_type=legacy`, commit `717aae2f` |
+| Live fetch `…/Zone2/verification.html` | HTTP 200, rendered table, 32 sourced rows, disclosure present |
+
+### Second-session cross-check
+
+Session `arena/dc15ce5a-zone2` (T21) independently reached the same F-16 finding — the four compliance rows cite
+controls (`site/compliance-inject.js`, `assert_no_amazon_marks`, `lint_disclosure_proximity`, `lint_claims`) that do
+not exist anywhere in the repo — and correctly declined to edit another session's scope, pointing at this PR
+instead. That hand-off is now satisfied: F-16 landed in `717aae2f`, and the live Compliance page can cite real
+controls (`check_disclosure`, `check_marks`, `lint()`).
+
+### Follow-up opened after the deploy check
+
+Verifying the *live* page surfaced one thing local gates could not: `verification.html` rows **V-05…V-07** still
+described the three destinations as "unrelated ASINs". That is the retracted inference surviving in
+`ledger/verification.json`, a file the `--check` gate cannot read for meaning. Corrected in this session's next
+commit, together with the same wording in `docs/repo-review.md` §R1. Recorded here rather than quietly fixed,
+because it is evidence that the withdrawal was incomplete the first time.
+
+### `a3faf404` — closing record: A1–A5 done
+
+| ID | Task | Status | Evidence |
+|---|---|---|---|
+| `a3faf404-A1` | Build the missing marketing content | **done** | 9 pages under `marketing/**`, generated by `tools/build_marketing.py` from `marketing/data/facts.json` |
+| `a3faf404-A2` | Its own namespace, no other session's file edited | **done** | Only `.github/workflows/pages.yml` (shared) and this board were touched; both add-only |
+| `a3faf404-A3` | CI gate for the namespace | **done** | `marketing/scripts/verify_marketing.py` — 10 gates; plus a build `--check` step and a directory-aware link sweep |
+| `a3faf404-A4` | Line-by-line verification log | **done** | `docs/marketing-verification-2026-11-14.md`, with the quoted page text behind every value |
+| `a3faf404-A5` | Integration: PR → merge → deploy → record | **done** | see below |
+
+**What was actually missing, and is now published.** `content/published/` did not exist, `content.html`
+rendered an empty `#contentTable`, `pages/content-engine.html` described a capability but published no
+article, and `tools/generate_articles.py` correctly refused because the *submitted short codes* are
+unverified. There was **no marketing asset of any kind** in the repository. The new set is built only from
+facts already traceable to manufacturer/official pages, so it needed no new inference.
+
+**Row accounting (recomputed by the gate, not typed by hand):** 48 spec rows — 34 verified with a source,
+3 published as CONFLICT, 1 PARTIAL, 10 blank + flagged (4 UNVERIFIED, 6 WITHHELD by policy).
+
+**New irregularities published on `marketing/flagged.html` (MK-01…MK-14), none blocking:**
+
+1. **MK-05** — Emeril's own page states both "25 Cooking Pre-sets" (spec tile) and "24 one-touch cooking
+   presets" (its description); Amazon's title says 24. Published as a conflict, both statements quoted.
+2. **MK-06** — Emeril model number differs between official pages: `4-00675-02A-VN` (manufacturer) vs
+   `4-00675-02X-VN` (Amazon product-information block).
+3. **MK-11** — Chefman 8 Qt: Amazon title advertises a 450 °F Hi-Fry option; the manufacturer's 8 Qt
+   specification states 200–400 °F.
+4. **MK-07** — Emeril says "7 premium accessories" but names only three; the other four are not invented.
+5. **MK-01/02/08/12** — no UPC and (for P1) no inner-material specification on any official page.
+6. **MK-03/04/09/10/13/14** — prices and star ratings withheld by policy / volatility, not merely absent.
+7. **No Associates ID exists in the repo**, so every product link is a labelled, non-earning preview link
+   emitted by `tools/link_builder.py`. No tag was invented.
+
+**Sources re-read live this session (all fetched 2026-11-14):** Chefman TurboFry Touch Dual-Window 6 Qt
+(`chefman.com/products/turbofry-touch-dual-window-air-fryer`), Chefman TurboFry Touch 8 Qt
+(`chefman.com/products/turbofry-touch-air-fryer-1`), Emeril Everyday French Door AirFryer 360
+(`emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360`), and the three Amazon listings
+`/dp/B0CDY277D3`, `/dp/B09B7SB46R`, `/dp/B08DKYBTPH`. Program statements from
+`affiliate-program.amazon.com/` and `/help/operating/agreement`.
+
+**Merge-conflict record (required by the instruction).** Rebasing onto `main` produced two conflicts, both
+resolved without discarding any session's work:
+
+- `COORDINATION.md` — add/add. Resolved **append-only**: `main`'s full board was kept verbatim (including
+  sessions `bbe4ca47`, `82a2d436`, `dc15ce5a` and the T22 deploy records) and this session's record appended
+  after it. Verified afterwards that no conflict marker remains and that all session ids are still present.
+- `.github/workflows/pages.yml` — both sides had independently fixed the *same* link-check bug (page-flat
+  path resolution). Resolved as a **union**: `main`'s per-directory checks for `pages/` and root, plus this
+  session's directory-aware sweep for `marketing/` and the two new marketing steps. Nothing from either side
+  was dropped; the merged step was replayed locally (exit 0) and the YAML parsed to 20 build steps.
+
+**Gate results on the rebased tree (all run before the merge):**
+
+| Gate | Result |
+|---|---|
+| `tools/build_marketing.py --check` | 9 pages, committed output current |
+| `marketing/scripts/verify_marketing.py` | 9 pages · 48 spec rows · **0 failures** |
+| `tools/build_site.py --check` | 37 built, 0 drifted |
+| `tools/build_root_views.py --check` | 0 drifted |
+| `tools/validate_data.py` | exit 0 (pre-existing I-21 title warning only) |
+| `tests/test_pipeline.py` | 11/11 |
+| `revalidation/scripts/verify.py` | 165 refs, 0 failures |
+| `affiliate-lab/scripts/verify_site.py` | 498 links, 0 failures |
+| Disclosure + no-price sweep | 36 pages + 37 subpages, 0 problems |
+
+### Deploy log — `a3faf404`
+
+| Item | Value |
+|---|---|
+| PR | **#30** — https://github.com/kanlerxz87-cyber/Zone2/pull/30 — `arena/a3faf404-zone2` → `main` |
+| PR validation | `Build, verify and deploy` run `43584155756` — **success**; all 20 build steps executed (not skipped), including both new marketing steps; deploy job correctly skipped on the PR |
+| Merge result | **MERGED** 2026-11-14T10:13:12Z, merge commit `88c8e5729b41e01490221b30489ece81de9c3fcd` (`gh pr merge 30 --merge`) |
+| Post-merge on `main` | `Build, verify and deploy` run `43584231269` — **success**; `pages build and deployment` run `43584230356` — **success** |
+| Pages API | `status: built`, source `main`, path `/` |
+| Live verification (cache-busted) | `marketing/index.html` renders the dashboard with "3 / 48 / 3 / 10" KPIs · `marketing/buying-guide.html` renders the three computed picks, each with its source pill · `marketing/comparison.html` renders all attribute rows with per-cell sources and explicit "not stated for this model" cells · `marketing/articles/p2.html` renders both CONFLICT rows and both blank rows with reasons · `marketing/flagged.html` renders MK-01…MK-14 with sources · `marketing/assets/marketing.css` serves intact |
+
+**Coordination note.** This session did **not** take over `bbe4ca47`'s claim (PR #22): its last commit was
+about two minutes old at claim time, well inside the 60-minute window. No file it owns — `index.html`,
+`assets/js/**`, `ledger/**`, `pages/**`, `sources.html`, `verification.html` — was edited by this session.
+That session has since merged its own work (PR #28) independently; the two change sets touch no common file
+except this board.
+
+**Live entry point:** https://kanlerxz87-cyber.github.io/Zone2/marketing/
