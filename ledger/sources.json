@@ -1,5 +1,5 @@
 {
-  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables.",
+  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources.",
   "accessed_utc": "2026-11-13",
   "sources": [
     {
@@ -10,7 +10,11 @@
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "page_stated_update": "2025-10-15",
       "accessed_utc": "2026-11-13",
-      "used_for": ["disclosure wording (Sec. 5)", "compliance/termination consequences (Sec. 2, 6)", "warranty that Amazon makes no representation about expected traffic or commission income (Sec. 4)"]
+      "used_for": [
+        "disclosure wording (Sec. 5)",
+        "compliance/termination consequences (Sec. 2, 6)",
+        "warranty that Amazon makes no representation about expected traffic or commission income (Sec. 4)"
+      ]
     },
     {
       "id": "S02",
@@ -20,7 +24,15 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "page_stated_update": "2026-04-14",
       "accessed_utc": "2026-11-13",
-      "used_for": ["Session/attribution window", "price and availability display limits", "comparison pricing rule", "tag and sub-tag rules", "trademark-in-domain rule", "payment timing and minimums", "commission double-claim limitation"]
+      "used_for": [
+        "Session/attribution window",
+        "price and availability display limits",
+        "comparison pricing rule",
+        "tag and sub-tag rules",
+        "trademark-in-domain rule",
+        "payment timing and minimums",
+        "commission double-claim limitation"
+      ]
     },
     {
       "id": "S03",
@@ -30,7 +42,13 @@
       "url": "https://affiliate-program.amazon.com/help/operating/participation/",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["no offline/email/SMS use of Special Links or Content (Req. 6)", "Content must link only to the related Product detail page (Req. 5)", "no altering Content (Req. 8)", "no resale/redistribution of Content (Req. 9)", "no browser plug-in / set-top-box use (Req. 7)"]
+      "used_for": [
+        "no offline/email/SMS use of Special Links or Content (Req. 6)",
+        "Content must link only to the related Product detail page (Req. 5)",
+        "no altering Content (Req. 8)",
+        "no resale/redistribution of Content (Req. 9)",
+        "no browser plug-in / set-top-box use (Req. 7)"
+      ]
     },
     {
       "id": "S04",
@@ -40,7 +58,11 @@
       "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["fixed commission rate table by product category", "Prime/Prime Video bounty amounts", "0.00% categories"]
+      "used_for": [
+        "fixed commission rate table by product category",
+        "Prime/Prime Video bounty amounts",
+        "0.00% categories"
+      ]
     },
     {
       "id": "S05",
@@ -50,7 +72,11 @@
       "url": "https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["link-level disclosure must be clear and conspicuous", "acceptable clear wording examples", "medium-matching rule for disclosures"]
+      "used_for": [
+        "link-level disclosure must be clear and conspicuous",
+        "acceptable clear wording examples",
+        "medium-matching rule for disclosures"
+      ]
     },
     {
       "id": "S06",
@@ -60,7 +86,9 @@
       "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["PA-API 5.0 deprecated; calls return 403 AccessDenied; migrate to Creators API"]
+      "used_for": [
+        "PA-API 5.0 deprecated; calls return 403 AccessDenied; migrate to Creators API"
+      ]
     },
     {
       "id": "S07",
@@ -70,7 +98,11 @@
       "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["Creators API operations", "prerequisites incl. 10 qualifying sales in past 30 days", "GetItems retrieves item detail by ASIN"]
+      "used_for": [
+        "Creators API operations",
+        "prerequisites incl. 10 qualifying sales in past 30 days",
+        "GetItems retrieves item detail by ASIN"
+      ]
     },
     {
       "id": "S08",
@@ -80,7 +112,9 @@
       "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["the only sanctioned lookup path for ASIN -> product identity/data used by this platform"]
+      "used_for": [
+        "the only sanctioned lookup path for ASIN -> product identity/data used by this platform"
+      ]
     },
     {
       "id": "S09",
@@ -90,7 +124,9 @@
       "url": "https://affiliate-program.amazon.com/welcome/topic/tools",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["link-creation tooling that does not require API credentials"]
+      "used_for": [
+        "link-creation tooling that does not require API credentials"
+      ]
     },
     {
       "id": "S10",
@@ -100,7 +136,12 @@
       "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["material connection must be clear and conspicuous", "\"paid link\" vs \"commissionable link\"", "placement near the endorsement", "comment-section disclosure is not clear and conspicuous"],
+      "used_for": [
+        "material connection must be clear and conspicuous",
+        "\"paid link\" vs \"commissionable link\"",
+        "placement near the endorsement",
+        "comment-section disclosure is not clear and conspicuous"
+      ],
       "codified": "16 C.F.R. Part 255"
     },
     {
@@ -111,7 +152,9 @@
       "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["business-education guidance referenced by Amazon's own disclosure help page (S05)"]
+      "used_for": [
+        "business-education guidance referenced by Amazon's own disclosure help page (S05)"
+      ]
     },
     {
       "id": "S12",
@@ -121,7 +164,9 @@
       "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["affiliate/ad links must carry rel=\"sponsored\""]
+      "used_for": [
+        "affiliate/ad links must carry rel=\"sponsored\""
+      ]
     },
     {
       "id": "S13",
@@ -131,7 +176,9 @@
       "url": "https://developers.google.com/search/blog/2021/07/link-tagging-and-link-spam-update",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["affiliate links: qualify with rel=\"sponsored\"; manual/algorithmic action risk if not"]
+      "used_for": [
+        "affiliate links: qualify with rel=\"sponsored\"; manual/algorithmic action risk if not"
+      ]
     },
     {
       "id": "S14",
@@ -141,7 +188,10 @@
       "url": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["Product/Review/Offer JSON-LD shape emitted by the content engine", "review author must be a valid Person/Team name"]
+      "used_for": [
+        "Product/Review/Offer JSON-LD shape emitted by the content engine",
+        "review author must be a valid Person/Team name"
+      ]
     },
     {
       "id": "S15",
@@ -151,7 +201,9 @@
       "url": "https://developers.google.com/search/blog/2022/08/pros-and-cons-structured-data",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["positiveNotes / negativeNotes ItemList markup for editorial reviews"]
+      "used_for": [
+        "positiveNotes / negativeNotes ItemList markup for editorial reviews"
+      ]
     },
     {
       "id": "S16",
@@ -161,7 +213,9 @@
       "url": "https://www.amazon.com/dp/B04G1MEwY",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["evidence: response is Amazon's Page Not Found error page; no product record exists for this token"]
+      "used_for": [
+        "evidence: response is Amazon's Page Not Found error page; no product record exists for this token"
+      ]
     },
     {
       "id": "S17",
@@ -171,7 +225,9 @@
       "url": "https://www.amazon.com/dp/B02NbDxp3",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["evidence: Page Not Found"]
+      "used_for": [
+        "evidence: Page Not Found"
+      ]
     },
     {
       "id": "S18",
@@ -181,7 +237,9 @@
       "url": "https://www.amazon.com/dp/B00hJ57DV",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["evidence: Page Not Found"]
+      "used_for": [
+        "evidence: Page Not Found"
+      ]
     },
     {
       "id": "S19",
@@ -191,7 +249,9 @@
       "url": "https://www.amazon.com/dp/B0CDY277D3",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["evidence only: link.amazon token redirected here with plpRedirect=mhFallback; NOT the requested product"]
+      "used_for": [
+        "evidence only: link.amazon token redirected here with plpRedirect=mhFallback; NOT the requested product"
+      ]
     },
     {
       "id": "S20",
@@ -201,7 +261,9 @@
       "url": "https://www.amazon.com/dp/B09B7SB46R",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["evidence only: mhFallback; NOT the requested product"]
+      "used_for": [
+        "evidence only: mhFallback; NOT the requested product"
+      ]
     },
     {
       "id": "S21",
@@ -211,7 +273,9 @@
       "url": "https://www.amazon.com/dp/B08DKYBTPH",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["evidence only: mhFallback; NOT the requested product"]
+      "used_for": [
+        "evidence only: mhFallback; NOT the requested product"
+      ]
     },
     {
       "id": "S22",
@@ -221,7 +285,72 @@
       "url": "https://docs.github.com/en/rest/pages/pages",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
-      "used_for": ["deployment status of this site (read live via gh api during integration)"]
+      "used_for": [
+        "deployment status of this site (read live via gh api during integration)"
+      ]
+    },
+    {
+      "id": "S23",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official",
+      "title": "Associates Program - Application Review Process",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "at least three qualifying sales within the first 180 days (personal orders do not qualify)",
+        "all Sites must have robust original content - at least 10 posts as a rule of thumb",
+        "website content should generally be from the last 60 days"
+      ]
+    },
+    {
+      "id": "S24",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official",
+      "title": "How do I build a simple text link to a specific item on Amazon?",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "ASIN is the 10-character code Amazon uses to denote specific products (B0CDY277D3, B09B7SB46R, B08DKYBTPH each have 10 characters; the three submitted tokens have 9)",
+        "canonical tagged link format /dp/ASIN?tag="
+      ]
+    },
+    {
+      "id": "S25",
+      "publisher": "Chefman (manufacturer)",
+      "kind": "manufacturer",
+      "title": "Chefman TurboFry Touch 6 Qt Dual-Window Air Fryer - official product page",
+      "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "specifications re-read: model RJ38-SQPF-3TDB-2W, 6 Qt/5.67 L, 200-450F/95-235C, 13.38x11.81x10.63 in, 13.3 lb/6.03 kg, 1700W/120V, cETL with 1-year Chefman assurance"
+      ]
+    },
+    {
+      "id": "S26",
+      "publisher": "Chefman (manufacturer)",
+      "kind": "manufacturer",
+      "title": "Chefman 8 Qt TurboFry Touch Air Fryer - official product page",
+      "url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "specifications re-read: 8 Qt/7.57 L, 200-400F/95-205C, 8 Qt model 15.4x12.6x13.5 in, 12.8 lb/5.8 kg, 1700W/120V, model RJ38-SQSS-8T, cETL with 1-year assurance"
+      ]
+    },
+    {
+      "id": "S27",
+      "publisher": "Emeril Everyday (manufacturer)",
+      "kind": "manufacturer",
+      "title": "Emeril Lagasse French Door AirFryer 360 Toaster Oven Combo, 26 QT - official store",
+      "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "specifications re-read on the spec tiles: 26-Quart capacity / 24.6 Liters, 16.9\"D x 15.8\"W x 14.8\"H, 120 volts, Dual-Speed Fan, '25 Cooking Pre-sets'; the product description text on the same page says '10-in-1'; model number shown as 4-00675-02A-VN - see flag F-19"
+      ]
     }
   ]
 }

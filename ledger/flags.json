@@ -1,6 +1,6 @@
 {
-  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion.",
-  "as_of": "2026-11-13",
+  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text.",
+  "as_of": "2026-11-14",
   "flags": [
     {
       "id": "F-01",
@@ -32,17 +32,17 @@
     },
     {
       "id": "F-03",
-      "severity": "high",
-      "title": "link.amazon short links ignore the token (fallback, not mapping)",
-      "detail": "The three submitted links resolved to three DIFFERENT destinations, each carrying plpRedirect=mhFallback: B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven), B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven), B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry). One destination per token would indicate a mapping; a different unrelated destination per token indicates the token was not honoured.",
-      "impact": "Any content written about the observed fallback products would be about the wrong items. These three products are recorded as evidence only and are NOT treated as the requested products.",
-      "action_required": "Do not market the fallback products as the requested ones.",
+      "severity": "medium",
+      "title": "link.amazon codes do not resolve as ASINs; per-link destinations are stable but untagged and unmapped by any public document",
+      "detail": "CORRECTED 2026-11-14 after a controlled re-test by session c6e94e8d (see revalidation/ and docs/revalidation-2026-11-14.md), which this session independently reproduced: a bare, untagged request to a VALID 10-character ASIN (/dp/B08DKYBTPH and /dp/B0CDY277D3) is answered with the real product page and Amazon's own plumbing appends the same lv=shuf&plpRedirect=mhFallback markers. So mhFallback is a normal rewrite marker, NOT evidence of a fallback. What the earlier version of this row asserted - that the token 'was not honoured' and the destinations were arbitrary - is withdrawn as unsupported. What remains true and verifiable: the three codes are 9 characters where an ASIN is 10; /dp/<code> returns Page Not Found for all three; each link.amazon URL resolves to ONE distinct listing and carries its own per-link btn_ref token (B04G1MEwY -> B0CDY277D3 / srctok-1e229870efde5acf; B02NbDxp3 -> B09B7SB46R / srctok-534f5e7952f396b2; B00hJ57DV -> B08DKYBTPH / srctok-76c3adaeb8708b44); and none of the resolved URLs carries an Associates tag=. No public Amazon document binds a link.amazon code to a destination ASIN, so the mapping stays unconfirmed - it is not shown to be absent.",
+      "impact": "The destinations are stable and individually tracked, so they are a real observation about each supplied link - but they are still not established as the three items named in the brief. Publishing product copy about them would assert a mapping the documentation does not make.",
+      "action_required": "Downgraded from high to medium. Confirm the intended ASINs, or supply links tagged with the Associates ID. Product pages stay published as 'the product each link resolves to', not as 'the requested product'.",
       "source_ids": [
         "S19",
         "S20",
         "S21"
       ],
-      "owner": "done"
+      "owner": "user"
     },
     {
       "id": "F-04",
@@ -153,16 +153,16 @@
     },
     {
       "id": "F-12",
-      "severity": "high",
-      "title": "Reproducibility test: the redirect destination is a shuffled fallback, not a product mapping",
-      "detail": "A second, independent fetch of https://link.amazon/B04G1MEwY on the same day returned the same target ASIN path but a completely different page body: an 'Amazon.com: Best Sellers in Kitchen & Dining' recommendation carousel (three unrelated consumer products) instead of a product detail page. The request also carried a different link-rewrite token (btn_ref=srctok-0b52eaeecd23186c vs srctok-2cef40d2904c29d8) with the same lv=shuf and plpRedirect=mhFallback markers. A destination that changes its content and its source token between requests cannot identify a product.",
-      "impact": "Consequence for the merged hub: product profiles published for B0CDY277D3, B09B7SB46R and B08DKYBTPH are accurate about those products (each row is traced to the manufacturer's own page) but they are NOT established as the three items named in the brief, and the 'one coherent niche: countertop air frying' reading is an inference drawn from fallback destinations. Treat those pages as unrelated reference material until the owner confirms the intended ASINs.",
-      "action_required": "Owner: confirm the intended ASINs. If the three hub product pages should stay published, relabel them as candidates rather than the requested items.",
+      "severity": "low",
+      "title": "WITHDRAWN - the 'shuffled fallback' reproducibility claim did not reproduce",
+      "detail": "This row asserted that a same-day re-fetch of link.amazon/B04G1MEwY returned a different page body (a 'Best Sellers in Kitchen & Dining' carousel) and a different btn_ref token, and concluded the destination could not identify a product. On re-test (session c6e94e8d, reproduced by this session on 2026-11-14) repeated fetches returned the SAME ASIN path, the SAME btn_ref=srctok-1e229870efde5acf and the same product detail page. The observation did not reproduce and the inference drawn from it did not hold. Kept in the register rather than deleted, because deleting a published correction would hide that the site carried an unsupported claim between 2026-11-13 and 2026-11-14.",
+      "impact": "No live harm: the value affected nothing that was published as fact. The withdrawal matters because the claim was used to justify calling the destinations 'arbitrary'.",
+      "action_required": "None - withdrawn. The stable-destination finding in F-03 replaces it.",
       "source_ids": [
         "S16",
         "S19"
       ],
-      "owner": "user"
+      "owner": "done"
     },
     {
       "id": "F-13",
@@ -200,6 +200,58 @@
         "S22"
       ],
       "owner": "user"
+    },
+    {
+      "id": "F-16",
+      "severity": "high",
+      "title": "Three compliance-control rows cited controls and files that do not exist; one misquoted current policy",
+      "detail": "Found in a line-by-line re-verification of the repository on 2026-11-14. (1) R-01 cited `site/compliance-inject.js` as the mechanism that renders the required disclosure - no such file exists anywhere in the repository; the disclosure is in fact emitted by the page renderers and enforced by tools/validate_data.py::check_disclosure plus the workflow's disclosure step. (2) R-11 cited `tools/validate_data.py::assert_no_amazon_marks` - no such function exists; the implemented function is `check_marks`. (3) R-02 cited `tools/generate_articles.py::lint_disclosure_proximity` and R-06 cited `::lint_claims` - neither function exists; both rules are enforced inside the single `lint()` function, and R-06's inline evidence marker is `<!--evidence:` (the data.js summary said 'inline evidence reference', which is right in substance but the function name was invented). (4) R-09 stated that email/SMS channels are 'absent from the schema' so a scheduler cannot target them - the current Program Policies expressly PERMIT Special Links in solicited (opt-in) email, SMS and direct messaging, so the rule text was stale against the policy page updated April 14, 2026.",
+      "impact": "The published compliance table claimed control coverage that did not exist for four rows. No fabricated product or price data was involved - this is a control-accuracy defect, not a data-invention defect - but a reader auditing 'is this enforced?' would have been given a wrong file or function name, and R-09 misstated a permission as a prohibition.",
+      "action_required": "Corrected in this session: R-01, R-02, R-06 and R-11 now cite the real functions and files; R-01 and R-11 carry an explicit 'Corrected 2026-11-14' sentence; R-09's requirement text was rewritten to the policy as published (solicited/opt-in only, certification on request) while keeping the repository's stricter no-email/no-SMS channel default as a self-imposed control, labelled as such. Reviewer may still wish to re-read each control against the code.",
+      "source_ids": [
+        "S01",
+        "S02",
+        "S05"
+      ],
+      "owner": "done"
+    },
+    {
+      "id": "F-17",
+      "severity": "medium",
+      "title": "Root dashboard stated '3 Verified affiliate products' and '11 items flagged' while the ledger states 0 identified",
+      "detail": "The primary dashboard's KPI strip said '3 / Verified affiliate products' and '11 / Items flagged for review'. The root product page's own heading was 'Product Catalog - verified from official Amazon pages', and the executive-summary paragraph said the products 'are identified and verified'. Meanwhile ledger/products.json marks all three submitted items status=UNVERIFIED with null title/brand/category, ledger/flags.json contains 15 flags (not 11), and F-03/F-12 record that the three destinations are fallback pages, not a mapping of the submitted tokens. Both readings are defensible - the dashboard describes the three *fallback destinations* it verified, the ledger describes the three *submitted tokens* it could not identify - but published side by side without that distinction, they contradict each other.",
+      "impact": "A reader could conclude the three supplied links had been identified and verified, which the project's own ledger explicitly denies. That is the exact class of overstatement the brief forbids.",
+      "action_required": "Corrected: the KPI now reads '3 / Fallback landing pages verified (0 of 3 submitted codes identified)' with the count computed from FLAGGED_ROWS, and the product page heading and summary paragraph now state the distinction in place. Reviewer action: confirm which of the two readings should be the primary framing.",
+      "source_ids": [
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "owner": "done"
+    },
+    {
+      "id": "F-18",
+      "severity": "low",
+      "title": "CI link check omitted the generated pages/ namespace (fixed in this session)",
+      "detail": "The workflow step 'Internal links and asset references resolve (all sites)' walks the root pages, research-hub/, northstar/, zone2/ and affiliate-lab/ but never pages/ - the 37 generated findings pages, which are the largest HTML surface in the repository. A broken href there would have reached main. Re-run by hand on 2026-11-14 the pages/ namespace has 0 broken file references and 0 unresolvable anchors, so no live defect was present; the gap was in the gate, not the output.",
+      "impact": "No broken link was published. The risk was that a future edit to pages/ could ship a dead link with all CI green.",
+      "action_required": "Fixed in this session: pages/ added to the link check, and pages/ + affiliate-lab/ added to the disclosure/price gate so both rules now cover every namespace.",
+      "source_ids": [
+        "S22"
+      ],
+      "owner": "done"
+    },
+    {
+      "id": "F-19",
+      "severity": "medium",
+      "title": "Emeril manufacturer page contradicts itself on functions/presets, so the published 'conflict' row named the wrong second source",
+      "detail": "The published spec row for the Emeril Lagasse 26QT (P-02, 'Cooking functions / presets') reads '24 per Amazon listing title; 25 per the manufacturer's spec tile'. Re-read on 2026-11-14, the manufacturer's own page carries THREE different numbers: the description text says '24 one-touch cooking presets', a specification tile says '25 Cooking Pre-sets', and a feature block headed '10-In-1 Versatility' lists ten functions. The Amazon listing title observed on the same day likewise says '24 cooking functions'. So the disagreement is not Amazon-vs-manufacturer - it is the manufacturer page disagreeing with itself, and no official source fixes the right number.",
+      "impact": "The row was not wrong about a conflict existing, but it attributed the conflict to the wrong party, which would mislead a reader trying to resolve it. The value is unconfirmable, so it must stay blank-or-both-values and flagged rather than resolved by inference.",
+      "action_required": "Corrected: the row now shows all four observations with their exact source wording and status=conflict; flag F-19 published. Reviewer action: treat the preset count as unresolved; do not publish a single number in any article.",
+      "source_ids": [
+        "S27"
+      ],
+      "owner": "done"
     }
   ]
 }
