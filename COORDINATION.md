@@ -1184,6 +1184,44 @@ That session has since merged its own work (PR #28) independently; the two chang
 except this board.
 
 **Live entry point:** https://kanlerxz87-cyber.github.io/Zone2/marketing/
+
+### T21 — closing record (session `a133aa61`, 2026-11-14)
+
+| Item | Value |
+|---|---|
+| PR | **#32** — https://github.com/kanlerxz87-cyber/Zone2/pull/32 — `arena/a133aa61-zone2` → `main` |
+| CI on the PR | run `43584479948` — **Build and verify: pass** (13s); Deploy skipped by design on PRs |
+| Merge | **MERGED** 2026-11-14T10:17:11Z, merge commit `e3101315440c6900115d1183c72cc92410b7f97e` (`gh pr merge 32 --merge`) |
+| Post-merge on `main` | `Build, verify and deploy` run `43584546622` — **success**; `pages build and deployment` run `43584545791` — **success** |
+| Pages API | `status: built`, `build_type: legacy`, source `main` / `/`, `html_url: https://kanlerxz87-cyber.github.io/Zone2/`; latest build `built` at 2026-11-14T10:17:36Z |
+| Live check | `verification.html` fetched with a cache-buster: renders **50 rows**, V-05…V-07 in the corrected wording, each row carrying its official-source link |
+
+**Carried in:** PR #22 and PR #28 (both `bbe4ca47`) — see the adoption log above.
+**Deliberately not merged:** PR #25 (`83194da0`) — predates #22; its diff deletes `tools/build_root_views.py`,
+`verification.html` and `sources.html`. Superseded, not conflicted. PR #11 (`ec67c431`) untouched (board-only).
+
+**Merge-conflict record (required by the brief).** `main` advanced five times while this session worked
+(PRs #28–#31). Every `COORDINATION.md` conflict was resolved **append-only** — both records kept verbatim.
+One substantive conflict occurred in `ledger/verification.json`: PR #28's rewritten V-05…V-07 (the newer,
+better wording) were kept, and this session's V-33…V-50 were re-applied on top. In `docs/repo-review.md`
+this session's version was kept because it carries PR #28's R1 correction **and** the AF-06 fix, which #28
+left as "fall back to unrelated pages". Nothing from another session was discarded.
+
+**Sources added:** S28 (Standard Commission Income Statement), S29 (Participation Requirements §2/§4),
+S30 (IP License §2(i)/(k) + Agent Terms §4), S31 (PA-API 5 deprecation notice) — all re-read live 2026-11-14.
+**Verification:** 18 new rows V-33…V-50 — 10 program facts re-confirmed verbatim, 5 short-link/control tests,
+3 manufacturer-spec re-checks. **Flags:** F-20 (btn_ref is not stable across days), F-21 (R-09 correction).
+**Irregularities for owner review when the site is live:** `pages/flags.html` and `flagged.html` (21 items).
+
+### Handoff notes for the next session
+
+1. Several sessions are still working in parallel and `main` moves fast. **Do not rebase a branch that
+   already contains a merge of another PR** — GitHub rejects the push as a non-fast-forward even though the
+   content is fine. Merge `origin/main` into your branch instead of rebasing; that is what was done here.
+2. `btn_ref` will not match what this record lists if you fetch the links tomorrow. That is F-20, not a
+   regression. The **ASINs** are the stable fact.
+3. Before adding any new "process failure" claim, check the Actions run's `head_sha` against the branch tip.
+   PR #22's red run was on `2073807`; its own next commit had already fixed it.
 ## Session `arena/dd87f326-zone2` (dd87f326) — claim (2026-11-14, UTC)
 
 **Claimed:** T24 + T25 (rows above). **Branch note:** Arena pins this session to `arena/dd87f326-zone2`
