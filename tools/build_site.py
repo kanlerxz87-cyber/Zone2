@@ -790,6 +790,16 @@ def page_sources() -> str:
     return render("sources.html", "Official sources", "Every document this repository relies on, with its access date.", body)
 
 
+def _open_flag_count() -> int:
+    """Flags still awaiting the owner, i.e. not yet recorded as resolved.
+
+    A flag is resolved when it carries `status: closed` or an `owner` of `done`; everything else is
+    genuinely open. Counting all 29 as "open" (as the panel did) tells the reader the register is
+    dirtier than it is — the same disclosure defect as F-17 and F-26, in the other direction.
+    """
+    return sum(1 for f in FLAGS["flags"] if f.get("status") != "closed" and f.get("owner") != "done")
+
+
 def page_flags() -> str:
     sev = {"high": "stop", "medium": "warn", "low": "info"}
     rows = [
@@ -823,7 +833,13 @@ def page_flags() -> str:
             "irregularities found while reviewing the repository. They do not block the site; they block assertion. Each links to the "
             "official page that documents the problem.",
         )
-        + panel(f"{len(rows)} open items", table(["ID", "Severity", "Finding", "Impact", "Action required", "Owner", "Source"], rows))
+        # T26 (session d3ce1c29): the panel used to say "N open items" for the whole register, which
+        # overstated how much work is outstanding — items whose owner is `done` (or that carry
+        # status=closed) are published for the record, not open. Say both numbers.
+        + panel(
+            f"{len(rows)} flagged items \u00b7 {_open_flag_count()} open \u00b7 {len(rows) - _open_flag_count()} resolved",
+            table(["ID", "Severity", "Finding", "Impact", "Action required", "Owner", "Source"], rows),
+        )
         + panel("Product fields left blank because of these flags", table(["Item", "Blank fields", "Blocking flags", "Source"], blank_rows))
         + notice(
             "What changes if the ASINs are corrected",

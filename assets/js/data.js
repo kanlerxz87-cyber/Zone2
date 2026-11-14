@@ -908,7 +908,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 29;
+const CANONICAL_FLAG_COUNT = 30;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1082,7 +1082,7 @@ const FLAGGED_ROWS = [
     detail: "Found in a line-by-line re-verification of the repository on 2026-11-14. (1) R-01 cited `site/compliance-inject.js` as the mechanism that renders the required disclosure - no such file exists anywhere in the repository; the disclosure is in fact emitted by the page renderers and enforced by tools/validate_data.py::check_disclosure plus the workflow's disclosure step. (2) R-11 cited `tools/validate_data.py::assert_no_amazon_marks` - no such function exists; the implemented function is `check_marks`. (3) R-02 cited `tools/generate_articles.py::lint_disclosure_proximity` and R-06 cited `::lint_claims` - neither function exists; both rules are enforced inside the single `lint()` function, and R-06's inline evidence marker is `<!--evidence:` (the data.js summary said 'inline evidence reference', which is right in substance but the function name was invented). (4) R-09 stated that email/SMS channels are 'absent from the schema' so a scheduler cannot target them - the current Program Policies expressly PERMIT Special Links in solicited (opt-in) email, SMS and direct messaging, so the rule text was stale against the policy page updated April 14, 2026.",
     severity: "high",
     impact: "The published compliance table claimed control coverage that did not exist for four rows. No fabricated product or price data was involved - this is a control-accuracy defect, not a data-invention defect - but a reader auditing 'is this enforced?' would have been given a wrong file or function name, and R-09 misstated a permission as a prohibition.",
-    actionRequired: "Corrected, in two steps. Step 1 (session bbe4ca47): R-01 and R-11 were given the real functions and files (`tools/validate_data.py::check_marks`, the page renderers) and R-01's invented `site/compliance-inject.js` reference was removed. Step 2 (final integration, session 4338f55e, after change request DD-1 items 1-3 from session dd87f326): R-02 and R-06 now name `lint()` - the function that actually performs the checks - instead of the non-existent `lint_disclosure_proximity` and `lint_claims`; R-06's `expires_utc` enforcement, which had never been implemented, is implemented now and covered by tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted; and R-09's requirement text was rewritten to the policy as published (solicited/opt-in only, certification on request) while keeping the repository's stricter web-only channel default as a self-imposed control, labelled as such (published as flag F-25). All four rows now cite mechanisms that exist in the code.",
+    actionRequired: "Corrected, in two steps. Step 1 (session bbe4ca47): R-01 and R-11 were given the real functions and files (`tools/validate_data.py::check_marks`, the page renderers) and R-01's invented `site/compliance-inject.js` reference was removed. Step 2 (final integration, session 4338f55e, after change request DD-1 items 1-3 from session dd87f326): R-02 and R-06 now name `lint()` - the function that actually performs the checks - instead of the non-existent `lint_disclosure_proximity` and `lint_claims`; R-06's `expires_utc` enforcement, which had never been implemented, is implemented now and covered by tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted; and R-09's requirement text was rewritten to the policy as published (solicited/opt-in only, certification on request) while keeping the repository's stricter web-only channel default as a self-imposed control, labelled as such (published as flag F-25). All four rows now cite mechanisms that exist in the code. INDEPENDENTLY RE-VERIFIED 2026-11-14 by session d3ce1c29: `check_marks` exists (tools/validate_data.py:190); `lint()` exists (tools/generate_articles.py:164) and is the function R-02 and R-06 now name; `expires_utc` is parsed and enforced (tools/generate_articles.py:56-113) and covered by tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted (tests/test_pipeline.py:177); R-01's remaining mention of `site/compliance-inject.js` is an in-line record of the correction, not a live citation; R-09 states the permission accurately and labels the web-only default as self-imposed. All four rows now cite mechanisms that exist. F-16 is closed.",
     ledgerFlag: "F-16",
     ledgerUrl: "pages/flags.html#F-16",
     source: "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -1230,6 +1230,17 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-29",
     source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
     sourceIds: ["S04"],
+  },
+  {
+    item: "F-30 — The Flagged for Review panel called all 29 register items 'open items' when 17 of them are already resolved",
+    detail: "Found 2026-11-14 by session d3ce1c29. pages/flags.html rendered the register under the heading 'N open items', where N was every flag in the register. At that point 5 flags carried status=closed and a further 12 had owner=done, so only 12 were genuinely awaiting the owner. The heading is the same class of defect as F-17 and F-26 — a count that does not describe the register — but in the opposite direction: it tells the reader the register is dirtier than it is.",
+    severity: "low",
+    impact: "An overstated open count is less dangerous than an understated one, but it is still wrong, and it buries the 12 items that really do need the owner's action inside a list that looks uniformly blocked.",
+    actionRequired: "None open. The panel now reads 'N flagged items · X open · Y resolved', with the open count derived from status/owner by tools/build_site.py::_open_flag_count, so it cannot be typed wrong.",
+    ledgerFlag: "F-30",
+    ledgerUrl: "pages/flags.html#F-30",
+    source: "https://affiliate-program.amazon.com/help/operating/policies",
+    sourceIds: ["S02"],
   },
 ];
 /* END GENERATED: flags */

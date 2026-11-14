@@ -148,7 +148,7 @@ that distinction is recorded on the site rather than papered over.
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — **29 items** (F-01 … F-29; the number is derived from
+  (`pages/flags.html`) with source links — **30 items** (F-01 … F-30; the number is derived from
   `ledger/flags.json` and gated, so it cannot be typed wrong again), including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -307,6 +307,11 @@ Two smaller irregularities were closed alongside it: the zero-rate caption said 
 0.00 % rate”, a count that matches no grouping in Table 1 (F-28, reworded); and `tools/validate_data.py` skipped
 any ledger row whose only source field is `source_id`, so every commission row — including the 48 new ones —
 would have escaped the source check (F-29, fixed; the gate's row count rose 173 → 243 and was negative-tested).
+
+**One inherited flag closed.** F-16 — four compliance rows citing controls that did not exist — was re-verified
+line by line in this pass: `check_marks` (tools/validate_data.py:190), `lint()` (tools/generate_articles.py:164)
+and the `expires_utc` enforcement with its test all exist and are named correctly, and R-09 now states the
+solicited-email/SMS permission accurately. F-16 is closed; its full text stays on the register page.
 
 ### Unchanged
 
