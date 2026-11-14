@@ -74,6 +74,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
 | T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | done — PR #41 merged 2026-11-14T11:27:15Z (`6a90dfc5`); CI + Pages deploy success; close-out record by `b38cc982` at the end of this file | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
 | T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR #42, merged 2026-11-14T18:32:45Z `6f2f92c`) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
+| T26b | Fresh baseline audit for current request: rerun all project gates; verify the live GitHub Pages entry points and source-controlled dataset claims against official URLs; record defects only, no overlapping edits | done | `arena/0f44536f-zone2` | `COORDINATION.md` (append-only record only; results in this session's record) |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -2146,3 +2147,14 @@ mapping unconfirmed · **F-08** no performance report.
 ### PR / deploy
 
 Branch `arena/808a6840-zone2`. Merge result and Pages deploy recorded below when the PR lands.
+## Session record — `arena/0f44536f-zone2` — T26b fresh baseline audit (2026-11-14 UTC)
+
+### Claim
+
+Claimed T26 after reading the current shared board. Scope is **coordination log only**; no product data, generated views, navigation, or files owned by another session will be edited. The repository already contains the requested dashboard, subpages, executive summaries, product/requirements ledgers, source register, and clearly labeled review pages, so this session audits that baseline rather than duplicating or overwriting those outputs. Current branch is fixed by Arena as `arena/0f44536f-zone2`; the requested `session-<id>/<task>` naming convention cannot be used here.
+
+### Planned independent checks
+
+- Run all maintained generators, data validators, unit tests, and namespace-specific site verifiers available in this checkout.
+- Inspect the live Pages URL and representative published entry points; check against source ledgers and the official Amazon Associates policy / identifier documentation URLs already recorded in the repository.
+- Log results and any deviations here. Do not mark product identity or a mapping verified unless an official source establishes it.
