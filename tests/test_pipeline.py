@@ -194,39 +194,6 @@ def test_dashboard_flag_count_cannot_drift_from_the_ledger():
     validate_data.check_flag_count(report_ok)
     assert not report_ok.errors, report_ok.errors
 
-
-def test_typed_count_labels_cannot_drift_from_the_ledger():
-    """F-30 regression: README.md prose counts must equal the ledgers, and the root captions
-    must keep their derived markers.
-
-    Same two-direction proof as the F-26 gate: matching labels pass, a deliberately wrong
-    README count fails, and the file is restored afterwards.
-    """
-    import validate_data
-
-    report = validate_data.Report()
-    validate_data.check_typed_counts(report)
-    assert not report.errors, report.errors
-
-    ledger = json.loads((REPO / "ledger" / "verification.json").read_text(encoding="utf-8"))
-    checks_n = len(ledger["rows"])
-    label = f"({checks_n} checks"
-    readme = REPO / "README.md"
-    original = readme.read_text(encoding="utf-8")
-    assert label in original, f"README.md no longer contains the fixture label {label!r}"
-    wrong = original.replace(label, f"({checks_n + 1} checks", 1)
-    readme.write_text(wrong, encoding="utf-8")
-    try:
-        report_bad = validate_data.Report()
-        validate_data.check_typed_counts(report_bad)
-        assert report_bad.errors, "check_typed_counts accepted a README count that disagrees with the ledger"
-    finally:
-        readme.write_text(original, encoding="utf-8")
-
-    report_ok = validate_data.Report()
-    validate_data.check_typed_counts(report_ok)
-    assert not report_ok.errors, report_ok.errors
-
 def test_expired_promotion_copy_is_removed_and_linted():
     """R-06: a limited-time promotion mention must not survive its expiry (DD-1 item 3).
 
@@ -295,6 +262,28 @@ def test_build_is_deterministic():
     assert second.returncode == 0, second.stderr
     digest_b = {p: p.stat().st_size for p in (REPO / "pages").rglob("*.html")}
     assert digest_a == digest_b, "build output is not deterministic"
+
+
+def test_guard_check_label_cannot_drift_from_the_test_suite():
+    """F-35 regression: README.md's executable-guard-checks label must equal the number of test
+    functions, and the root captions must keep their derived markers."""
+    import validate_data
+
+    readme = REPO / "README.md"
+    original = readme.read_text(encoding="utf-8")
+    tests_n = len(re.findall(r"^def test_", Path(__file__).read_text(encoding="utf-8"), re.M))
+    label = f"{tests_n} executable guard checks"
+    assert label in original, f"README.md must say {label!r} (it says otherwise -> F-35)"
+    try:
+        readme.write_text(original.replace(label, f"{tests_n + 1} executable guard checks"), encoding="utf-8")
+        report = validate_data.Report()
+        validate_data.check_typed_counts(report)
+        assert report.errors, "check_typed_counts must reject a stale guard-checks label"
+    finally:
+        readme.write_text(original, encoding="utf-8")
+    report_ok = validate_data.Report()
+    validate_data.check_typed_counts(report_ok)
+    assert not report_ok.errors, report_ok.errors
 
 
 def main() -> int:

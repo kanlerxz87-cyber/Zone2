@@ -117,7 +117,10 @@ def check_sources(report: Report) -> dict[str, dict]:
 
 def _walk_rows(obj, path=""):
     if isinstance(obj, dict):
-        if "source_ids" in obj or "id" in obj:
+        # T26 (session d3ce1c29): rows that carry a single `source_id` (the commission-table
+        # bounty / bonus rows) previously escaped this walk entirely, so their source was never
+        # checked and their `rate` value was never held to the "a value needs a source" rule.
+        if "source_ids" in obj or "source_id" in obj or "id" in obj:
             yield path or "root", obj
         for k, v in obj.items():
             yield from _walk_rows(v, f"{path}.{k}" if path else k)
@@ -290,6 +293,35 @@ def check_landing_links_here(report: Report) -> None:
         report.stats["landing_links_to_pages"] = 1
 
 
+def check_ledger_ids_unique(report: Report) -> None:
+    """No ledger may hold two entries under one id.
+
+    Five sessions appended to `ledger/flags.json` concurrently and reused ids three separate times
+    (F-20/F-21, then F-22, then F-27 during this session's merge with `main`). Each collision was
+    caught by a human reading the board, not by a gate — so the next one would not be. Ids are also
+    published as HTML anchors (`pages/flags.html#F-27`), so a duplicate silently makes one finding
+    unreachable by its own link. Same rule for sources and verification rows.
+    """
+    for name, key in (("flags.json", "flags"), ("sources.json", "sources"), ("verification.json", "rows")):
+        doc = _load(name)
+        entries = doc.get(key, [])
+        seen: dict[str, int] = {}
+        dupes: list[str] = []
+        for item in entries:
+            sid = item.get("id")
+            if sid is None:
+                continue
+            if sid in seen:
+                dupes.append(sid)
+            seen[sid] = seen.get(sid, 0) + 1
+        for sid in sorted(set(dupes)):
+            report.fail(
+                f"ledger/{name}: id {sid} appears {seen[sid]} times - two different findings share one id, "
+                "so at most one of them is reachable by its published anchor"
+            )
+        report.stats[f"unique_{key}_ids"] = len(seen)
+
+
 def check_flag_count(report: Report) -> None:
     """The dashboard renders a flag count. It must equal the canonical register, never be typed.
 
@@ -316,6 +348,63 @@ def check_flag_count(report: Report) -> None:
             "- the dashboard would publish a flag count that disagrees with the register"
         )
     report.stats["canonical_flags"] = canonical
+    check_published_counts(report, canonical)
+
+
+def check_published_counts(report: Report, canonical_flags: int) -> None:
+    """Catch the drift class in prose and in README link labels, not just in the JS constant.
+
+    Three times now a hand-typed count has gone stale against the register it described:
+    F-17 (a "11 items flagged" KPI), F-26 (a KPI derived from the reader-facing subset), and finally
+    — found by session d3ce1c29 while adding F-30…F-32 — `flagged.html` still reading "26 flags
+    (F-01 … F-26)" and `README.md` still advertising "(14 items)", "(22 sources)" and "(32 checks)"
+    when the ledgers held 29 / 36 / 62. Every one of them was invisible to the gates.
+
+    This check holds any published statement of the flag, source or verification-log count — in HTML
+    pages or in Markdown — to the ledger it claims to describe.
+    """
+    n_sources = len(_load("sources.json").get("sources", []))
+    n_verification = len(_load("verification.json").get("rows", []))
+
+    # `(?:,[^)]*)?` tolerates the richer label form "(62 checks, V-01…V-62)", which a companion
+    # session introduced and which is strictly better for the reader than a bare number.
+    checks = [
+        (re.compile(r"(\d+)\s+flags?\s*\(F-01\s*[^\d]{0,6}\s*F-(\d{2})\)", re.I), "flags", canonical_flags, "both groups"),
+        (re.compile(r"flagged for review\s*\((\d+)\s+items?(?:,[^)]*)?\)", re.I), "flags", canonical_flags, "group 1"),
+        (re.compile(r"source register\s*\((\d+)\s+sources?(?:,[^)]*)?\)", re.I), "sources", n_sources, "group 1"),
+        (re.compile(r"verification log\s*\((\d+)\s+checks?(?:,[^)]*)?\)", re.I), "verification rows", n_verification, "group 1"),
+    ]
+
+    # Deliberately wider than owned_pages(): the sentences that drifted live in root-level HTML and in
+    # README.md, neither of which owned_pages() covers because other gates police the root namespace.
+    scope = sorted(REPO.glob("*.html")) + sorted((REPO / "pages").rglob("*.html"))
+    scope += sorted(REPO.glob("*.md")) + sorted((REPO / "docs").glob("*.md"))
+    # Two exclusions, both for the same reason.
+    #   COORDINATION.md    — an append-only chronological log; it quotes counts that were correct when
+    #                        they were written ("the merged register holds 26 flags …").
+    #   docs/verification-*.md — a dated per-session verification log. It quotes the *defective* count it
+    #                        was written to prove ("flagged.html carried the hardcoded sentence
+    #                        '26 flags (F-01 … F-26)'"), so a count in it is evidence, not a claim.
+    # Rewriting either would falsify the record. Everywhere a reader is told what the site publishes
+    # *now* — README.md, EXECUTIVE_SUMMARY.md, flagged.html, pages/ — stays in scope.
+    scope = [
+        p for p in scope
+        if p.name != "COORDINATION.md" and not (p.parent.name == "docs" and p.name.startswith("verification-"))
+    ]
+    for path in scope:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for pattern, label, expected, which in checks:
+            for m in pattern.finditer(text):
+                stated = [int(g) for g in m.groups()]
+                if which == "both groups":
+                    bad = any(v != expected for v in stated)
+                else:
+                    bad = stated[0] != expected
+                if bad:
+                    report.fail(
+                        f"{path.relative_to(REPO)}: prose says '{m.group(0)}' but ledger holds "
+                        f"{expected} {label} - a published count that disagrees with the register"
+                    )
 
     # T26: the same defect appears one layer up. `index.html` and `flagged.html` used to
     # hard-code "26 items" / "26 flags" in their HTML, so they kept publishing the old
@@ -404,39 +493,28 @@ def check_no_typed_flag_counts(report: Report) -> None:
 
 
 def check_typed_counts(report: Report) -> None:
-    """Typed count prose outside the gated flag phrases must equal the ledgers (F-30).
+    """The one published count label check_published_counts does not pin, plus caption markers (F-35).
 
-    check_no_typed_flag_counts refuses *flag-count* phrases that disagree with the register, and
-    check_flag_count pins the KPI. The labels it does not cover are README.md's other count
-    phrases: the verification-checks label, the sources label and the executable-guard-checks
-    label. Each drifted during the 2026-11-14 parallel merges (three times in one day) because
-    nothing compared them with ledger/verification.json, ledger/sources.json or the actual test
-    count. This check pins them, and asserts the root captions still render from the derived
-    markers (flagCountHeading / flagRegisterCount / flag-count-inline) instead of typed prose.
+    check_published_counts holds the flag/source/verification counts to the ledgers everywhere they
+    are published. The executable-guard-checks label in README.md escaped that net (it describes
+    tests/test_pipeline.py, not a ledger) and drifted three times in one day - 11 against 13 tests,
+    then 13 against 14 - while every other count was already gated. This pins it to the actual count
+    of test functions and asserts the root captions still render from their derived markers
+    (flagCountHeading / flagRegisterCount / flag-count-inline) instead of typed prose.
     """
-    flags_n = len(_load("flags.json").get("flags", []))
-    checks_n = len(_load("verification.json").get("rows", []))
-    sources_n = len(_load("sources.json").get("sources", []))
     tests_src = (REPO / "tests" / "test_pipeline.py").read_text(encoding="utf-8")
     tests_n = len(re.findall(r"^def test_", tests_src, re.M))
-    readme_labels = [
-        f"verification log ({checks_n} checks",
-        f"source register ({sources_n} sources",
-        f"flagged for review ({flags_n} flags",
-        f"{tests_n} executable guard checks",
-    ]
     path = REPO / "README.md"
     if not path.exists():
-        report.fail("README.md: missing - cannot verify its typed count labels")
+        report.fail("README.md: missing - cannot verify its guard-checks label")
     else:
+        label = f"{tests_n} executable guard checks"
         text = path.read_text(encoding="utf-8")
-        for label in readme_labels:
-            if label not in text:
-                report.fail(
-                    f"README.md: typed count label {label!r} not found - the prose disagrees with "
-                    "the ledgers (flags.json / verification.json / sources.json / tests). "
-                    "Update the label or the register; never leave them inconsistent (F-30)."
-                )
+        if label not in text:
+            report.fail(
+                f"README.md: label {label!r} not found - the prose disagrees with tests/test_pipeline.py "
+                "(F-35). Update the label or the suite; never leave them inconsistent."
+            )
     markers = [
         ("index.html", ("flagCountHeading", "flagCount")),
         ("flagged.html", ("flagRegisterCount", "flagRegisterMax")),
@@ -450,9 +528,9 @@ def check_typed_counts(report: Report) -> None:
         for marker in ids:
             if f'id="{marker}"' not in text:
                 report.fail(
-                    f"{name}: derived caption marker id=\"{marker}\" is gone - the page would have "
-                    "to type its flag count again (F-26/F-28/F-30 class). Restore the marker; the "
-                    "caption renders from CANONICAL_FLAG_COUNT, never from prose."
+                    f"{name}: derived caption marker id=\"{marker}\" is gone - the page would have to "
+                    "type its flag count again (F-17/F-26 class). Restore the marker; the caption "
+                    "renders from CANONICAL_FLAG_COUNT, never from prose."
                 )
 
 
@@ -499,6 +577,7 @@ def main(strict: bool = True) -> Report:
     report = Report()
     try:
         sources = check_sources(report)
+        check_ledger_ids_unique(report)
         check_rows(report, sources)
         check_products(report)
         check_cross_session_drift(report)
