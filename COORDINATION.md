@@ -71,7 +71,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
 | T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
 | T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | in progress | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
-| T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | in progress | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
+| T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR pending — see record) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -1838,3 +1838,48 @@ Board state at claim: `main` = `6a90dfc` (merge of PR #41, T23 by `cdfaeefe`). `
 Why a claim is needed: the independent audit `docs/review-2026-11-14.md` (session `5c06fb5e`) left AUD-01 (residual), AUD-02, AUD-03, AUD-04 and AUD-05 open as cross-scope requests. Re-reading `research-hub/summary.html` on this tree shows AUD-02/AUD-03 are still true: the page states that the three short links "resolved successfully to canonical Amazon ASINs" and that the three destinations "form a coherent niche", while the primary site (`pages/flags.html` F-03, `ledger/flags.json`) says the mapping is not established. `research-hub/scripts/verify.py` still exits with 7 false errors (AUD-04). No other session holds these files.
 
 Scope of this claim: the files listed in the T26 row only. The primary-site ledger (`ledger/**`) and `pages/**` are not edited.
+
+### Work done (T26)
+
+| Finding | What was wrong on the tree | Fix |
+|---|---|---|
+| AUD-02 / AUD-03 | `research-hub/summary.html` (committed) still said the three links "resolved successfully to canonical Amazon ASINs" and formed "a coherent niche". The generator's own source, `docs/executive-summary.md`, had already been corrected, so the committed HTML was a stale copy. `start.html`, `404.html`, `overview.html` and `products.html` carried the same superseded framing ("Three products, one verified data trail", "three Amazon products, verified"). | `research-hub/scripts/build.py` could not run (it read `research-hub/docs/`, which moved to the repo-root `docs/`), so the generated pages had drifted from it. Fixed the docs path; ported the reviewed `start.html` text and the `404.html` back-link into the generator; reworded the overview and product-listing headings to "resolved destinations … mapping flagged (F-03)". Regenerated: `summary.html`, `overview.html`, `products.html` changed; all other generated pages byte-identical. |
+| AUD-03 (historic log) | `docs/verification-log.md` §1 still labels the three destinations "Resolved & verified". | Added a dated "Superseded in part" note above the table, citing the Associates ASIN definition. The table is left as the historical record. |
+| AUD-04 | `research-hub/scripts/verify.py` failed with 7 false errors (it assumed the hub was the Pages root and that the dashboard files sat in `research-hub/`). CI never ran it. | Verifier now treats `research-hub/` as one site inside the repo: targets inside it must be generated; targets outside it must be one of the two sibling sites (`index.html`, `zone2/index.html`) and exist. Required-page list updated to the hub's real files. Exit 0, 0 errors. CI gets a new step: regenerate `research-hub/` and fail on any `git diff`, then run the verifier. |
+| AUD-01 (residual) | Root `index.html` KPI read "1 Niche of the resolved destinations — Home & Kitchen air fryers". | Relabelled: "Shared category of the 3 resolved destinations (Air Fryers) — not a validated niche". |
+
+### Sources (official; fetched 2026-11-14)
+
+| Claim | Source |
+|---|---|
+| ASIN is "the 10-digit code that Amazon uses to denote specific products" | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| Supplied short link 1 → `amazon.com/dp/B0CDY277D3` with `plpRedirect=mhFallback` (breadcrumb Home & Kitchen › … › Air Fryers) | https://link.amazon/B04G1MEwY |
+| Supplied short link 2 → `amazon.com/dp/B09B7SB46R` with `plpRedirect=mhFallback` (breadcrumb ends Air Fryers) | https://link.amazon/B02NbDxp3 |
+| Supplied short link 3 → `amazon.com/dp/B08DKYBTPH` with `plpRedirect=mhFallback` (breadcrumb ends Air Fryers) | https://link.amazon/B00hJ57DV |
+| The three supplied codes are 9 characters each (B04G1MEwY, B02NbDxp3, B00hJ57DV) | counted from the submitted text |
+
+### Gates (run on the committed tree `ae6817e`, detached worktree, replaying `.github/workflows/pages.yml` steps 2–18 in order)
+
+| Step | Result |
+|---|---|
+| Primary files, internal links, `data.js`/`app.js` syntax, data files parse | PASS |
+| Disclosure + no-price sweep (85 pages) | PASS |
+| affiliate-lab (10 pages, 206 rows, 502 links, 0 failures) | PASS |
+| revalidation rebuild (`--check`) and gate (73 rows, 0 failures) | PASS |
+| **Research hub: regenerate + `git diff --exit-code`, then `verify.py`** (new step) | PASS — 0 drift, 0 errors |
+| marketing rebuild + gate (9 pages, 48 rows, 0 failures) | PASS |
+| subpages rebuild (37, 0 drifted) + gate | PASS |
+| root evidence views rebuild (0 drifted) | PASS |
+| platform guard tests | 13/13 PASS |
+| subpage disclosure / no-price (37 subpages) | PASS |
+
+### Irregularities (not blocking; carried forward)
+
+- **AUD-05 — still open.** `affiliate-lab/scripts/verify_site.py` checks that a row contains an external URL, not that the URL supports the value. A 404 `/dp/` link is accepted as a source. Not changed in this session: fixing it means changing what the affiliate-lab rows mean, which needs its owner's decision. Recorded here and in the PR body.
+- **Overclaim left in place on purpose:** the research-hub Method page says the site "links to the canonical product pages". Those are the destinations, not validated product pages for the supplied codes; the same page carries the F-03 finding.
+- **Observed, unchanged:** the subpage gate printed a title-trademark note for `research-hub/compliance.html` ("<title> starts with an Amazon mark"). The gate passed; no change was made to that title in this session.
+- **Process note.** The build and verifier were both out of date and CI ran neither. The committed HTML looked correct for this reason: the generator had not been run, so the stale text stayed. After this change the generator reproduces the committed output exactly (the only diffs were the intended ones).
+
+### PR and merge
+
+Recorded below after the PR is merged (see the follow-up record commit).
