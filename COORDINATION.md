@@ -71,6 +71,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
 | T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
 | T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | in progress | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
+| T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | in progress | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -1824,3 +1825,16 @@ then added a *different* F-22 (flag-count KPI) on `main` after `4338f55e`'s last
 `4338f55e`'s ids and renumbered the incoming KPI flag to **F-26**, recorded in `ledger/flags.json`'s note.
 `assets/js/data.js`'s `CANONICAL_FLAG_COUNT` and the `Flagged` page counts were set to 26 and are now
 derived by `tools/build_root_data.py`, so they cannot drift again.
+
+
+---
+
+## Session record — `a6f70a13` (`arena/a6f70a13-zone2`, T26)
+
+### Claim (recorded 2026-11-14T18:30Z, before any edit)
+
+Board state at claim: `main` = `6a90dfc` (merge of PR #41, T23 by `cdfaeefe`). `gh pr list --state open` returns no open PRs. No task is `in progress` other than this claim. Pages API: `status: built`, source `main` `/`; `Build, verify and deploy` and `pages build and deployment` succeeded on the `6a90dfc` push.
+
+Why a claim is needed: the independent audit `docs/review-2026-11-14.md` (session `5c06fb5e`) left AUD-01 (residual), AUD-02, AUD-03, AUD-04 and AUD-05 open as cross-scope requests. Re-reading `research-hub/summary.html` on this tree shows AUD-02/AUD-03 are still true: the page states that the three short links "resolved successfully to canonical Amazon ASINs" and that the three destinations "form a coherent niche", while the primary site (`pages/flags.html` F-03, `ledger/flags.json`) says the mapping is not established. `research-hub/scripts/verify.py` still exits with 7 false errors (AUD-04). No other session holds these files.
+
+Scope of this claim: the files listed in the T26 row only. The primary-site ledger (`ledger/**`) and `pages/**` are not edited.
