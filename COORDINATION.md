@@ -1774,3 +1774,53 @@ Reading the **live** page after the first follow-up found two more survivors of 
 **Why the gates kept passing.** `build_site.py --check` and `build_root_views.py --check` compare generated HTML
 against the ledger. A false statement *in* the ledger regenerates byte-identically and passes. Only reading the
 deployed page catches it. That is a genuine limitation of a drift gate and is now recorded, not glossed over.
+
+### Verification performed by this session (2026-11-14, fetched live with the agent's page-fetch tool)
+
+Every row below was read off the official page in this session — not carried forward from another
+session's notes.
+
+| # | Claim checked (as published on this site) | What the official page says | Verdict | Source |
+|---|---|---|---|---|
+| C-1 | Mandatory disclosure sentence (landing, every page) | OA §5: "you must clearly and prominently state … 'As an Amazon Associate I earn from qualifying purchases.'" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-2 | Document currency row | OA "Updated: October 15, 2025"; Program Policies "Updated: April 14, 2026" | **Verified** | OA + https://affiliate-program.amazon.com/help/operating/policies |
+| C-3 | 24-hour session / 89-day cart / 180-day fulfilment | Policies, Commission Income Statement §1: session ends at 24 h; cart order "no later than 89 days after their initial click-through"; ship/pay "within 180 days" | **Verified** | https://affiliate-program.amazon.com/help/operating/policies |
+| C-4 | Commission ceiling "Up to 10%" | Associates home: "Earn up to 10% in associate commissions from qualifying purchases and programs." | **Verified** | https://affiliate-program.amazon.com/ |
+| C-5 | Payment timing "approximately 60 days after the end of the month" | Associates home FAQ: "Commission income is paid approximately 60 days after the end of the month in which it was earned." | **Verified** | https://affiliate-program.amazon.com/ |
+| C-6 | Table 1 rates are public (no sign-in) — Kitchen 4.50 %, Home 3.00 % | Standard Commission Income Statement loads without authentication; Table 1 shows "Physical Books, Kitchen, Automotive — 4.50 %" and the Home band at 3.00 %, Luxury Beauty 10.00 %, All Other Categories 4.00 %, Coach 0.00 % | **Verified** (a separate `/help/operating/schedule` URL does redirect to sign-in; the Table 1 page is the public source the site cites) | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| C-7 | Agent Terms (Agent/[name] user-agent, no CAPTCHA circumvention) | IP License §4 Agent Terms, verbatim technical requirements | **Verified** | https://affiliate-program.amazon.com/help/operating/policies |
+| C-8 | ASIN is a 10-character/10-digit code (basis of F-01) | "ASIN is the 10-digit code that Amazon uses to denote specific products." | **Verified verbatim** | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| C-9 | Unknown-code control (S32): an unknown 9-char code 404s, so supplied codes are honoured lookups | `https://link.amazon/B00TEST12` → `https://amzlinks.in/B00TEST12` → "404: File Not Found … You've clicked on an invalid URL." | **Independently reproduced** | https://link.amazon/B00TEST12 |
+| C-10 | Supplied link 1 resolves to one stable listing; token rotates | Re-fetched `https://link.amazon/B04G1MEwY` at ≈10:52 UTC → `amazon.com/dp/B0CDY277D3`, page title "CHEFMAN 6 Quart Dual Basket Air Fryer…", `btn_ref=srctok-0e6ecbe28931aafd` — a **third distinct** same-day value (c6e94e8d: `…1e229870efde5acf`; a133aa61 ≈10:04: `…1f979f303a4b5691`) | **Destination stable; token not** — confirms F-21; V-31 scoped to immediate re-fetch during this merge | https://www.amazon.com/dp/B0CDY277D3 |
+| C-11 | No Associates tag is committed anywhere in the repo | Sweep for `tag=`/`assoc` patterns: only Amazon's own `YOURASSOCIATEID` documentation placeholder appears | **Verified** | repo sweep |
+
+### Gates run on the integrated tree (this session, before opening the PR)
+
+| Gate | Result |
+|---|---|
+| `tools/validate_data.py` | exit 0 · `canonical_flags: 26` · 173 rows · 35 sources · 976 links · 0 price findings · only the pre-existing F-13 title warning |
+| `tools/build_site.py --check` | 37 built · 0 drifted |
+| `tools/build_root_views.py --check` | 2 checked · 0 drifted |
+| `tools/build_root_data.py --check` | up to date (generator now derives `CANONICAL_FLAG_COUNT`) |
+| `tests/test_pipeline.py` | **13/13** (includes the F-26 flag-count gate and the expired-promo lint test) |
+| `affiliate-lab/scripts/verify_site.py` | 10 pages · 206 rows · 502 links · **0 failures** |
+| `revalidation/scripts/verify.py` | 6 pages · 73 rows · 168 refs · **0 failures** |
+| `revalidation/scripts/build.py --check` | 6 built · 0 drifted |
+| `marketing/scripts/verify_marketing.py` | 9 pages · 48 spec rows · **0 failures** |
+| Internal-link check (all 7 namespaces, incl. `marketing/`) | **0 missing refs** across 94 published pages |
+| Disclosure + no-price sweep (all namespaces) | **94 pages**: disclosure present, no product price printed |
+| `node --check` on `assets/js/data.js`, `assets/js/app.js` | OK |
+
+### Takeover record (project rule: a claim >60 minutes old with no commits may be taken over)
+
+| PR | Owner | Last commit | Taken over at | What was preserved |
+|---|---|---|---|---|
+| #33 `Withdraw the last two survivors of the retracted fallback claim (V-31, V-32)` | `bbe4ca47` | 2026-11-14T10:17:19Z | 2026-11-14T11:17:19Z+ | cherry-picked `c470776` in full (COORDINATION note + V-31/V-32 rows), then reconciled V-31's scope against F-21 and this session's C-10 observation (token rotates across hours; destination does not) |
+| #38 `Final integration: one ledger, one reading of the supplied links, every surface reconciled` | `4338f55e` | 2026-11-14T10:24:27Z | 2026-11-14T11:24:27Z+ | merged in full (`dd93fb6`); all conflict resolutions are additive — nothing discarded. PR #33 and #38 were `CONFLICTING` with `main` for the whole window and neither branch received a commit in >60 minutes. |
+
+**ID-collision reconciliation (no flag lost):** the merged register holds **26 flags, F-01…F-26, unique ids**.
+`4338f55e` had already renumbered `a133aa61`'s F-20/F-21 (→ its F-21/F-25) when it merged PR #32; PR #40
+then added a *different* F-22 (flag-count KPI) on `main` after `4338f55e`'s last merge. This session kept
+`4338f55e`'s ids and renumbered the incoming KPI flag to **F-26**, recorded in `ledger/flags.json`'s note.
+`assets/js/data.js`'s `CANONICAL_FLAG_COUNT` and the `Flagged` page counts were set to 26 and are now
+derived by `tools/build_root_data.py`, so they cannot drift again.
