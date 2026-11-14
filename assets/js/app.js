@@ -304,6 +304,13 @@
       el.textContent = String(canonical);
     });
 
+    // NOTE (session ba8b2d38, T27): this session independently made the same fix as T26 above and
+    // wired a second handler to #flagRegisterRange. The T26 block above is kept as the single
+    // implementation — it already fills #flagRegisterCount and #flagRegisterMax, which is what
+    // flagged.html now renders — so the duplicate was removed rather than left as dead code.
+    // T27's contribution here is instead the gate that stops a typed count reappearing in the
+    // generated subpages and the hand-written docs: tools/validate_data.py::check_no_typed_flag_counts.
+
     renderProducts();
     renderResolved();
     renderSpecs();

@@ -196,7 +196,7 @@ def test_dashboard_flag_count_cannot_drift_from_the_ledger():
 
 
 def test_typed_count_labels_cannot_drift_from_the_ledger():
-    """F-28 regression: README.md prose counts must equal the ledgers, and the root captions
+    """F-30 regression: README.md prose counts must equal the ledgers, and the root captions
     must keep their derived markers.
 
     Same two-direction proof as the F-26 gate: matching labels pass, a deliberately wrong

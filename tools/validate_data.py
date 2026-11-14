@@ -340,17 +340,79 @@ def check_flag_count(report: Report) -> None:
                     )
 
 
-def check_typed_counts(report: Report) -> None:
-    """Typed count prose outside the generated data must equal the ledgers (F-28, session e9c8362c).
+def _flag_prose_pages():
+    """Pages that speak for THIS namespace's register: the generated subpages plus the root dashboard.
 
-    The class has two layers. check_flag_count pins assets/js/data.js AND refuses typed
-    \"N items/flags\" captions on index.html and flagged.html (those captions render from
-    CANONICAL_FLAG_COUNT via the flagCountHeading / flagRegisterCount markers). The layer it does
-    not reach is README.md prose: it drifted to \"14 items / 32 checks / 22 sources\" against
-    registers holding 26 / 50 / 35 at 6a90dfc, and drifted again on main (\"26 items\" against 27
-    flags, \"13 executable guard checks\" against 14 tests). This check pins every README.md count
-    label to the ledgers and asserts the root captions still render from the derived markers, so
-    no surface can disagree with the registers again.
+    Deliberately narrower and wider than owned_pages(): it adds the root pages (products.html,
+    flagged.html and friends are not in owned_pages()), and it excludes the companion namespaces —
+    affiliate-lab/ publishes its OWN register and legitimately says "13 flags", and pages/flags.html
+    quotes historical counts (11, 15) while narrating how F-17 and F-26 were found.
+    """
+    skip_rel = {"pages/flags.html"}
+    seen = set()
+    for path in sorted((REPO / "pages").rglob("*.html")):
+        if SKIP_DIRS.intersection(path.parts):
+            continue
+        rel = path.relative_to(REPO).as_posix()
+        if rel in skip_rel:
+            continue
+        seen.add(path)
+        yield path
+    for path in sorted(REPO.glob("*.html")):
+        rel = path.relative_to(REPO).as_posix()
+        if rel in skip_rel or path in seen:
+            continue
+        yield path
+    # Hand-authored docs drifted the same way and nothing caught them: README.md advertised
+    # "14 items" and the executive summary "11 items" while the register held 26 and then 27.
+    for name in ("README.md", "EXECUTIVE_SUMMARY.md"):
+        path = REPO / name
+        if path.exists():
+            yield path
+
+
+def check_no_typed_flag_counts(report: Report) -> None:
+    """Prose must not hardcode the size of the flag register; it drifts the moment a flag is added.
+
+    F-26 pinned the *KPI* (CANONICAL_FLAG_COUNT) to the ledger. Root flagged.html still carried the
+    sentence "26 flags (F-01 … F-26)" in hand-written prose, which no gate compared against the
+    register — so when session ba8b2d38 added F-28 (the valid-ASIN control), the page went on telling
+    readers the register held 26 while it held 27. Same defect class as F-26, different surface: a
+    green `--check` proves the *data* matches the ledger, not that the sentence does.
+
+    The page now renders the count from data; this check keeps a typed number from creeping back in.
+    """
+    doc = _load("flags.json")
+    canonical = len(doc.get("flags", []))
+    # A typed register size in prose looks like "26 flags", "26 items flagged", "26 open flags".
+    # Deliberately narrow: an "F-01 … F-NN" range check was tried first and rejected, because pages
+    # legitimately cite a SUBSET of flags that way (index.html cites <code>F-01…F-03</code> in a table
+    # cell). Only a count phrase is unambiguous enough to fail the build on.
+    pattern = re.compile(
+        r"\b(\d+)\s+(?:flags|items flagged|open flags|flagged items)\b", re.IGNORECASE
+    )
+    for path in _flag_prose_pages():
+        rel = path.relative_to(REPO).as_posix()
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for m in pattern.finditer(text):
+            if int(m.group(1)) != canonical:
+                report.fail(
+                    f"{rel}: prose states '{m.group(0)}' but ledger/flags.json holds {canonical} - "
+                    "render this number from the data (see #flagRegisterCount) instead of typing it"
+                )
+    report.stats["typed_flag_counts_checked"] = canonical
+
+
+def check_typed_counts(report: Report) -> None:
+    """Typed count prose outside the gated flag phrases must equal the ledgers (F-30).
+
+    check_no_typed_flag_counts refuses *flag-count* phrases that disagree with the register, and
+    check_flag_count pins the KPI. The labels it does not cover are README.md's other count
+    phrases: the verification-checks label, the sources label and the executable-guard-checks
+    label. Each drifted during the 2026-11-14 parallel merges (three times in one day) because
+    nothing compared them with ledger/verification.json, ledger/sources.json or the actual test
+    count. This check pins them, and asserts the root captions still render from the derived
+    markers (flagCountHeading / flagRegisterCount / flag-count-inline) instead of typed prose.
     """
     flags_n = len(_load("flags.json").get("flags", []))
     checks_n = len(_load("verification.json").get("rows", []))
@@ -360,8 +422,7 @@ def check_typed_counts(report: Report) -> None:
     readme_labels = [
         f"verification log ({checks_n} checks",
         f"source register ({sources_n} sources",
-        f"flagged for review ({flags_n} items",
-        f"F-01\u2026F-{flags_n:02d})",
+        f"flagged for review ({flags_n} flags",
         f"{tests_n} executable guard checks",
     ]
     path = REPO / "README.md"
@@ -374,7 +435,7 @@ def check_typed_counts(report: Report) -> None:
                 report.fail(
                     f"README.md: typed count label {label!r} not found - the prose disagrees with "
                     "the ledgers (flags.json / verification.json / sources.json / tests). "
-                    "Update the label or the register; never leave them inconsistent (F-28)."
+                    "Update the label or the register; never leave them inconsistent (F-30)."
                 )
     markers = [
         ("index.html", ("flagCountHeading", "flagCount")),
@@ -390,7 +451,7 @@ def check_typed_counts(report: Report) -> None:
             if f'id="{marker}"' not in text:
                 report.fail(
                     f"{name}: derived caption marker id=\"{marker}\" is gone - the page would have "
-                    "to type its flag count again (F-26/F-28 class). Restore the marker; the "
+                    "to type its flag count again (F-26/F-28/F-30 class). Restore the marker; the "
                     "caption renders from CANONICAL_FLAG_COUNT, never from prose."
                 )
 
@@ -445,6 +506,7 @@ def main(strict: bool = True) -> Report:
         check_disclosure(report)
         check_landing_links_here(report)
         check_flag_count(report)
+        check_no_typed_flag_counts(report)
         check_typed_counts(report)
         check_no_product_prices(report)
         check_links(report)

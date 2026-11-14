@@ -13,6 +13,7 @@
     <div class="sub">AI Amazon Affiliate Marketing Platform</div>
     <nav>
       <a href="index.html" class="active">Dashboard</a>
+      <a href="summary.html">Executive Summary</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html">Content</a>
@@ -44,6 +45,10 @@
 
     <div class="card">
       <h3>Executive Summary</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        The generated one-page version of everything below — figures read from the ledger, every row
+        linked to its official source — is at <a href="summary.html">Executive Summary</a>.
+      </p>
       <p>
         Zone2 is an AI-powered Amazon affiliate marketing platform built for automation, scalability and
         data-driven decisions. It automates product research, identifies trending and high-converting
@@ -137,7 +142,7 @@
             <tr><td><code>F-08</code></td><td>No click, conversion or earnings report exists, so no performance figure can be published</td><td>Open — owner must connect a dated Associates report</td></tr>
             <tr><td><code>F-19</code></td><td>The Emeril manufacturer page contradicts itself on cooking presets: 24 (description), 25 (spec tile), “10-in-1” (feature block)</td><td>Open — published as a conflict, no value chosen</td></tr>
             <tr><td><code>F-26</code> <em>(new)</em></td><td>The dashboard flag count was derived from the reader-facing subset, not the register: it showed 14 while <code>pages/flags.html</code> published 21</td><td>Closed — count now pinned to the ledger by a gate (negative-tested)</td></tr>
-            <tr><td><code>F-28</code> <em>(new)</em></td><td>README's typed counts had drifted from the registers twice in one day — the F-26 defect class, in prose, one layer the gate did not reach</td><td>Closed — every README count label now pinned to the ledgers by <code>check_typed_counts</code> (negative-tested)</td></tr>
+            <tr><td><code>F-30</code> <em>(new)</em></td><td>README's typed counts had drifted from the registers three times in one day — the F-26 defect class, in prose, one layer the gates did not reach</td><td>Closed — every README count label now pinned to the ledgers by <code>check_typed_counts</code> (negative-tested)</td></tr>
             <tr><td><code>F-29</code> <em>(new)</em></td><td><code>research-hub</code> rollup policy and conflict rows are still block-sourced — its product rows were fixed on main; the rest await the namespace owner (CR-7, partial)</td><td>Open — extend the per-row source treatment or label those tables block-sourced</td></tr>
             <tr><td><code>F-27</code></td><td><code>research-hub</code>'s own generator deletes its output before it has read its inputs — one run with a missing input wipes the hub pages (restored; never run it in this tree)</td><td>Open — owner should repoint or archive <code>research-hub/scripts/build.py</code></td></tr>
             <tr><td><code>F-25</code></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
