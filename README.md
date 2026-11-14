@@ -119,9 +119,14 @@ flag; when a source host is outside the allowlist (`affiliate-program.amazon.com
 when any performance metric is invented rather than reported; when an Amazon mark appears in an identifier
 this project controls; when a page with a sponsored link lacks the disclosure sentence; when a page prints a
 **product** price; when the landing loses its route into `pages/`; or when an internal link breaks (976
-links checked). `scripts/verify.py` for the hub is currently **stale after the namespace move** — it resolves
-its repository root to `research-hub/` and reports seven false failures; running it is not part of CI. Logged
-as **I-27** rather than patched, since `research-hub/**` belongs to another session.
+links checked).
+
+**Resolved 2026-11-14 (T26, session `808a6840`).** The hub's own guard
+(`research-hub/scripts/verify.py`, logged as I-27) was stale after the namespace move: it resolved the
+repository root to `research-hub/` and then looked for the root site's files *inside* the hub, so it
+reported seven false failures and was excluded from CI. It now resolves the hub and the repository root
+separately, checks **13 pages** and **38 sourced attribute rows**, and **runs in CI**. It was verified to
+fail on purpose (a removed disclosure and an injected `$49.99` each produce an error) before being trusted.
 
 ## Platform code (`tools/`)
 

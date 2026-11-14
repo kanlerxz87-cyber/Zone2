@@ -247,6 +247,13 @@ jobs:
       - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure)
         run: python3 tools/audit_site.py
 
+      # T26: this guard was excluded from CI because it reported seven false failures — it
+      # resolved the repository root to research-hub/ and then looked for the root site's
+      # files inside the hub. It now resolves both roots correctly and checks 13 pages, so it
+      # runs here and its per-row sourcing rule protects the hub's 38 attribute rows.
+      - name: Research-hub per-row sourcing guard
+        run: python3 research-hub/scripts/verify.py
+
       - name: Subpages disclose and never print a product price
         run: |
           python3 - <<'PY'
