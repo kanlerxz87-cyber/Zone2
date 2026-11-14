@@ -250,6 +250,9 @@ jobs:
       # cannot see a dead fragment, a specification sourced to a Page-Not-Found URL, a prose
       # count that disagrees with the register, or a published namespace with no inbound link.
       # This runs after the rebuild steps so it audits the freshly generated output.
+      - name: Rebuild the executive summary and confirm committed output is current
+        run: python3 tools/build_summary.py --check
+
       - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure)
         run: python3 tools/audit_site.py
 
