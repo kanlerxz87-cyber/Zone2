@@ -796,16 +796,18 @@ those finished sessions explicitly left for the owner to apply, plus two new ite
 
 | ID | Task | Status | Origin | File scope |
 |---|---|---|---|---|
-| `0a3dff48-V1` | Independent re-verification of the three supplied links + control test (2026-11-14) | done | new | `revalidation/data/links.json` (+ rebuild), `docs/revalidation-2026-11-14.md` |
-| `0a3dff48-V2` | Apply CR-1 / CR-2 — correct `ledger/flags.json` F-03 and F-05 (the disproven "fallback" / "shuffle" reasoning) | done | `c6e94e8d` CR-1, CR-2 | `ledger/flags.json` (+ rebuild `pages/`) |
-| `0a3dff48-V3` | Apply CR-4 — drop "via mhFallback" from `ledger/products.json` `why_blank` | done | `c6e94e8d` CR-4 | `ledger/products.json` (+ rebuild `pages/`) |
-| `0a3dff48-V4` | AUD-02 — `research-hub/` pages that still present the three destination ASINs as "the requested products" | done | `5c06fb5e` AUD-02 | `research-hub/*.html`, `research-hub/data/*.json` |
-| `0a3dff48-V5` | AUD-04 / I-27 — repair `research-hub/scripts/verify.py` (stale repository root, 7 false failures) and wire it into CI | done | `5c06fb5e` AUD-04, `f786c0d7` I-27 | `research-hub/scripts/verify.py`, `.github/workflows/pages.yml` |
-| `0a3dff48-V6` | AUD-05 — `affiliate-lab/` rows that state the short links did **not** open a product (contradicts the control result) | done | `5c06fb5e` AUD-01/AUD-05 | `affiliate-lab/data/products.json`, `affiliate-lab/*.html` |
-| `0a3dff48-V7` | AUD-03 — `docs/verification-log.md` / `docs/repo-review.md` still assert the "fallback" reading | done | `5c06fb5e` AUD-03 | `docs/verification-log.md`, `docs/repo-review.md` |
-| `0a3dff48-V8` | I-21 / F-13 — `research-hub/compliance.html` title begins with an Amazon mark | done | `f786c0d7` F-13 | `research-hub/compliance.html` |
-| `0a3dff48-V9` | Primary dashboard IA: expose the category subpages and the link-identity status in the primary nav/tables | done | new (brief: "subpages organized by category") | `index.html`, `assets/js/data.js`, `assets/js/app.js`, `assets/css/style.css` |
-| `0a3dff48-V10` | Final integration: re-verify combined data line by line, build, no broken links, PR → merge → confirm Pages deploy | in progress | brief | shared outputs (nav/index only) + `COORDINATION.md` |
+| `0a3dff48-V1` | Independent re-verification of the three supplied links + control test (2026-11-14) | **done** — V-1…V-9 below, all executed against live official sources | new | `revalidation/data/links.json` (+ rebuild), `docs/revalidation-2026-11-14.md` |
+| `0a3dff48-V2` | Apply CR-1 / CR-2 — correct `ledger/flags.json` F-03 and F-05 (the disproven "fallback" / "shuffle" reasoning) | **done** — F-03 rewritten to "resolves to one product each, but Amazon does not document the mapping"; F-12 (the "not a shuffled fallback" reproducibility flag) carries the control test; `pages/` rebuilt | `c6e94e8d` CR-1, CR-2 | `ledger/flags.json` (+ rebuild `pages/`) |
+| `0a3dff48-V3` | Apply CR-4 — drop "via mhFallback" from `ledger/products.json` `why_blank` | **done** — `why_blank` now cites only the ASIN-format and Page-Not-Found reasons; `mhFallback` survives only in `evidence_observations`, where it is the raw captured URL plus the control that explains it | `c6e94e8d` CR-4 | `ledger/products.json` (+ rebuild `pages/`) |
+| `0a3dff48-V4` | AUD-02 — `research-hub/` pages that still present the three destination ASINs as "the requested products" | **done** — `research-hub/summary.html` landing copy now says "resolve to one verified product — the same destination on every fetch" and states that no public Amazon document binds a `link.amazon` code to a destination ASIN; `docs/executive-summary.md` updated to match and `research-hub/summary.html` regenerated | `5c06fb5e` AUD-02 | `research-hub/*.html`, `research-hub/data/*.json` |
+| `0a3dff48-V5` | AUD-04 / I-27 — repair `research-hub/scripts/verify.py` (stale repository root, 7 false failures) and wire it into CI | **done** — verifier resolves the repo root via `parents[2]`, separates hub-owned from other-session-owned pages, and reports 3 products / 38 sourced rows / 16 requirements / 13 pages / **0 errors**; it now runs as a CI step. The **generator** was broken too (it deleted the hub's 16 generated pages and then crashed on the moved `docs/executive-summary.md`) — repaired, plus a non-destructive `--check` added and gated in CI. Ledger flags F-15 and F-18 record both defects and their closure | `5c06fb5e` AUD-04, `f786c0d7` I-27 | `research-hub/scripts/verify.py`, `research-hub/scripts/build.py`, `.github/workflows/pages.yml` |
+| `0a3dff48-V6` | AUD-05 — `affiliate-lab/` rows that state the short links did **not** open a product (contradicts the control result) | **done** — `affiliate-lab/data/products.json`, `products.html`, `analysis.html`, `verification.html` and `flagged-for-review.html` now state the destination ASIN and the control test; `affiliate-lab/scripts/verify_site.py` passes (10 pages, 205 rows, 498 links, 0 failures) | `5c06fb5e` AUD-01/AUD-05 | `affiliate-lab/data/products.json`, `affiliate-lab/*.html` |
+| `0a3dff48-V7` | AUD-03 — `docs/verification-log.md` / `docs/repo-review.md` still assert the "fallback" reading | **done** — `docs/repo-review.md` §3.3 rewritten with a dated correction note naming the control test, AF-06 restated as "mapping observed, not documented", AF-08/AF-09 updated for the public rate card vs. the sign-in-gated account schedule; `docs/verification-log.md` already agreed. `README.md` divergence table and "what is still open" section updated to match | `5c06fb5e` AUD-03 | `docs/repo-review.md`, `docs/verification-log.md`, `README.md` |
+| `0a3dff48-V8` | I-21 / F-13 — `research-hub/compliance.html` title begins with an Amazon mark | **done** — generator now emits "Program rules this site complies with"; `research-hub/compliance.html` regenerated; `tools/validate_data.py` reports **0 mark findings and 0 mark review notes** (was 1 warning); F-13 closed | `f786c0d7` F-13 | `research-hub/scripts/build.py`, `research-hub/compliance.html` |
+| `0a3dff48-V9` | Primary dashboard IA: expose the category subpages and the link-identity status in the primary nav/tables | **done** — `categories.html` added (11 published commission bands with their rates and their products); link-resolution table (3 rows) and category-band table (11 rows) rendered on the dashboard and on `products.html`; `LINK_RESOLUTIONS` + `CATEGORY_BANDS` added to `assets/js/data.js`; every root page's nav updated | new (brief: "subpages organized by category") | `index.html`, `categories.html`, `products.html`, `assets/js/data.js`, `assets/js/app.js`, `assets/css/style.css` |
+| `0a3dff48-V10` | Final integration: re-verify combined data line by line, build, no broken links, PR → merge → confirm Pages deploy | **in progress** — data re-verified against the manufacturer and Amazon pages on 2026-11-14 (spec rows re-read against `chefman.com` and `emerileveryday.com`; two composite rows re-linked to both official pages; the Emeril model-number conflict recorded as F-19). All 11 gates pass. PR/deploy still open | brief | shared outputs (nav/index only) + `COORDINATION.md` |
+| `0a3dff48-V11` | **new** — a DOM render harness so "the JavaScript parses" is not mistaken for "the page renders" | **done** — `tests/test_render.js` stubs the DOM, runs `assets/js/app.js`, and asserts 13 table/card containers across 8 root pages are populated and carry at least one official source link; gated in CI | new | `tests/test_render.js`, `.github/workflows/pages.yml` |
+| `0a3dff48-V12` | **new** — record the cross-day measurement so token rotation cannot later be read as destination instability | **done** — `revalidation/data/links.json` gains `cross_day_retest` (C-3) with both days' tokens and the bare-ASIN control; flag RV-11 added; `revalidation/links.html` regenerated with the cross-day table | new | `revalidation/data/links.json`, `revalidation/data/flags.json`, `revalidation/scripts/build.py` |
 
 > Scope note: every file above was owned by a **finished, merged** session, which explicitly logged the
 > request and left it for the owner to apply. `main` was at `76c996d` when this session started; no
@@ -824,3 +826,49 @@ those finished sessions explicitly left for the owner to apply, plus two new ite
 | V-7 | **Control** — bare, untagged `https://www.amazon.com/dp/B0CDY277D3` | 200, correct CHEFMAN 6 Qt product page; Amazon's own links rewritten to `?lv=shuf&channelId=500&plpRedirect=mhFallback` | **`plpRedirect=mhFallback` is emitted on ordinary valid loads — it is not evidence of a fallback** |
 | V-8 | Category breadcrumbs on all three destination pages | Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers | single-category portfolio confirmed |
 | V-9 | **New observation** — `btn_ref` comparison | Session `c6e94e8d` recorded `srctok-1e229870efde5acf` / `srctok-534f5e7952f396b2` / `srctok-76c3adaeb8708b44`; this session recorded `srctok-1f979f303a4b5691` / `srctok-0cd8be3c7e2e0de3` / `srctok-7c59360cbbbd59b7` | The **destination ASIN never changed** across five sessions and days of fetches, while the per-request `srctok` attribution token **rotates**. This sharpens the correction: the link carries a rotating source-attribution token, and it points at one fixed destination. It is not a shuffle (a shuffle would change the destination), and the token's rotation is not evidence of a fallback either. |
+
+### Second verification pass by this session (2026-11-14, after the `ba4dc03` commit)
+
+Every value published by the primary dashboard was re-read against the official page it cites, line by line.
+Two composite spec rows turned out to cite only one of the two pages they actually used, and one
+manufacturer/Amazon conflict was not surfaced on the primary site at all.
+
+| # | Row re-checked | Official page re-fetched | Finding | Action |
+|---|---|---|---|---|
+| R-1 | `p1` capacity | `chefman.com/products/turbofry-touch-dual-window-air-fryer` | Chefman states **6 Qt / 5.67 L**; the "two independent 3 qt baskets" phrasing comes from the **Amazon listing title**, not Chefman | Row reworded and re-linked to **both** pages |
+| R-2 | `p1` control type | same | Chefman names the product "TurboFry® Touch Dual-Window Air Fryer"; the phrase "Digital Double Air Fryer" is from the **Amazon listing title** | Row reworded and re-linked to **both** pages |
+| R-3 | `p2` model number | `emerileveryday.com/.../emeril_lagasse_french_door_airfryer_360` | Manufacturer store: `4-00675-02A-VN`. Amazon listing: `4-00675-02X-VN`. **Same product, different model number** — not previously surfaced on the primary site | Row marked `conflict`, both values published, **F-19** raised and shown on Flagged for Review |
+| R-4 | `p2` cooking presets | same | Manufacturer spec tile: **25** pre-sets. Amazon title: **24** functions. Conflict already recorded — the row cited only the manufacturer | Row re-linked to **both** pages |
+| R-5 | `p3` power / dimensions | `chefman.com/products/turbofry-touch-air-fryer-1` | Chefman states 1700 W/120 V and 15.4 × 12.6 × 13.5 in; the conflicting Amazon figures (1000 W, 12.75"D × 13.5"W × 10"H) were cited only indirectly | Both conflict rows re-linked to **both** pages |
+| R-6 | `p1` all 9 rows | `chefman.com/.../dual-window-air-fryer` | Model `RJ38-SQPF-3TDB-2W`, 1700 W/120 V, 200–450 °F, 13.38 × 11.81 × 10.63 in, 13.3 lb, cETL, 1-year assurance — **all confirmed verbatim** | unchanged |
+| R-7 | `p3` all 9 rows | `chefman.com/.../turbofry-touch-air-fryer-1` | Model `RJ38-SQSS-8T`, 8 Qt / 7.57 L, 1700 W/120 V, 200–400 °F, 4 presets, 15.4 × 12.6 × 13.5 in, 12.8 lb, cETL, 1-year — **all confirmed verbatim** | unchanged |
+| R-8 | `p2` capacity / dimensions / door / accessories | `emerileveryday.com/.../french_door_airfryer_360` | 26 qt / 24.6 L, 16.9"D × 15.8"W × 14.8"H, dual French doors, 7 premium accessories incl. basket / rotisserie spit / bake pan — **all confirmed verbatim** | unchanged |
+| R-9 | `p2` power / temperature | `amazon.com/dp/B09B7SB46R` | 1700 W/120 V and 75–500 °F are **only** in the Amazon product-information block; the manufacturer page does not state them. The rows already say "single source: Amazon product-information block" | unchanged, and the single-source wording was kept deliberately |
+
+> Renderer change made for R-1…R-5: `assets/js/app.js` gained a `sourceCell()` helper that accepts one
+> official URL or several, so a value assembled from two official pages links to **both**. The spec table and
+> the Flagged for Review table now use it. `tests/test_render.js` still passes all 13 containers.
+
+### Irregularities this session raised
+
+| ID | Irregularity | Severity | Status |
+|---|---|---|---|
+| F-18 | `research-hub/scripts/build.py` deleted the hub's 16 generated pages and then crashed on the moved `docs/executive-summary.md`; it also emitted pre-move link paths | high | **closed** — repaired, plus a non-destructive `--check` now gated in CI |
+| F-19 | Emeril Lagasse model number differs between the Amazon listing (`4-00675-02X-VN`) and the manufacturer's store (`4-00675-02A-VN`) | low | **open for the owner** — both values published, neither asserted |
+
+### Gate status at the end of this pass
+
+| Gate | Command | Result |
+|---|---|---|
+| JS syntax | `node --check assets/js/data.js && node --check assets/js/app.js` | OK |
+| Primary render | `node tests/test_render.js` | 13 containers / 8 pages — pass |
+| Primary build drift | `python3 tools/build_site.py --check` | 37 pages, no drift |
+| Primary deploy gate | `python3 tools/validate_data.py` | 0 errors, 0 warnings, 958 internal links, 107 rows, 23 sources, 3 products |
+| Platform guards | `python3 tests/test_pipeline.py` | 11/11 |
+| Research hub rebuild | `python3 research-hub/scripts/build.py --check` | 16 generated files match a fresh build |
+| Research hub sourcing | `python3 research-hub/scripts/verify.py` | 3 products, 38 sourced rows, 16 requirements, 13 pages, **0 errors** |
+| Research hub links | `python3 research-hub/scripts/check_links.py research-hub` | 184 links, 0 broken |
+| affiliate-lab | `python3 affiliate-lab/scripts/verify_site.py` | 10 pages, 205 rows, 498 links, 0 failures |
+| Revalidation rebuild | `python3 revalidation/scripts/build.py --check` | 6 pages, no drift |
+| Revalidation gate | `python3 revalidation/scripts/verify.py` | 6 pages, 76 rows, 181 refs, 0 failures |
+| HTTP smoke test | local `http.server` over 32 routes | all 200 |

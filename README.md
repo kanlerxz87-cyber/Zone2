@@ -80,8 +80,8 @@ Earlier sessions concluded from the redirect alone that the destinations were *a
 
 | Observation | Result |
 |---|---|
-| Redirect target | three **different, unrelated** ASINs (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`) |
-| Redirect markers | every target carries `plpRedirect=mhFallback` and `lv=shuf` |
+| Redirect target | three **different** ASINs (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`) — one per link, fixed |
+| Redirect markers | every target carries `plpRedirect=mhFallback` and `lv=shuf` — **but so does a bare fetch of a valid ASIN**, so the markers carry no special meaning (see the control row) |
 | Same-day re-fetch | **Corrected 2026-11-14:** re-fetched twice, the link returned the same `/dp/` path, the same page body and the **same** `btn_ref` token — the "shuffle" is not reproducible. See `revalidation/`. |
 | Control (added 2026-11-14) | A **bare, untagged** request to a *valid* ASIN (`/dp/B08DKYBTPH`) is also answered with `plpRedirect=mhFallback&lv=shuf` appended. The marker is therefore not evidence of a fallback. |
 | Re-measured (2026-11-14, session `0a3dff48`) | All three links resolve to the same three ASINs again, and the control holds on a second valid ASIN. The per-request `srctok` token **rotates between days** while the destination ASIN never changes — a tracked source link, not a shuffle. Only the destination ASIN is a stable identifier. |
@@ -89,10 +89,16 @@ Earlier sessions concluded from the redirect alone that the destinations were *a
 
 **What this does and does not settle.** The supplied codes are not ASINs, so the codes alone identify
 nothing. But each `link.amazon` URL is a stable, individually tracked link resolving to one consistent
-product — three distinct per-link tokens, identical on re-fetch. The earlier claim that the destinations
-*change content and token between requests* is **not reproducible**, so the destinations are **not** shown to
-be arbitrary fallbacks. The product pages elsewhere in this repository are therefore accurate **about those
-three ASINs** (each row cites the manufacturer's own page), and they are the products these links resolve to.
+product — three distinct per-link tokens, identical on same-day re-fetch. The earlier claim that the
+destinations *change content and token between requests* is **not reproducible**, so the destinations are
+**not** shown to be arbitrary fallbacks. The product pages elsewhere in this repository are therefore
+accurate **about those three ASINs** (each row cites the manufacturer's own page), and they are the products
+these links resolve to.
+
+**What is still open.** No public Amazon document states what a `link.amazon` code maps to. The mapping
+code → ASIN is therefore **observed behaviour, not documented intent**, and it is recorded as such on the
+Flagged for Review page (F-03) and in `research-hub/summary.html`. Separately, none of the three URLs carries
+an Associates `tag`, so as supplied they cannot be relied on to attribute commission (RV-02 / F-07).
 
 Two things remain genuinely open, and are still flagged: **no public Amazon document binds a short code to a
 destination ASIN** (so the mapping is observed behaviour, not documented intent), and **no resolved URL carries
