@@ -535,3 +535,17 @@ supplied they cannot attribute a sale or earn a commission (F-24); (3) **data** 
 availability, sales rank and the per-category commission band are left blank. All three resolved products sit
 under a *Home & Kitchen › … › Air Fryers* path where Table 1 publishes **both** `Kitchen 4.50%` and
 `Home 3.00%`; which band applies is an authenticated catalog lookup, so it is **not** inferred.
+
+#### Change request (logged, NOT implemented — `tools/audit_site.py` is session `b38cc982`'s file)
+
+`tools/audit_site.py::check_counts` verifies four numbers written in prose against the registers — **flags,
+checks, sources, products** — and it is the right mechanism. It does **not** cover the **internal-link count**
+quoted in `EXECUTIVE_SUMMARY.md` ("broken-link check (979 internal links)"), and that figure is the most
+volatile of the set: it moved 977 → 979 in this session purely because another session added pages. It is
+currently correct, but nothing keeps it correct.
+
+**Request:** extend `check_counts` with an `(\d+)\s+internal links\b` pattern resolved against
+`validate_data.py`'s `internal_links_checked` stat (or drop the number from the prose and describe the check
+qualitatively). Either is fine; the point is that a hand-typed, machine-computed figure should not sit outside
+a gate. Logged here rather than implemented, per the board rule that a session does not edit another session's
+file — `ba8b2d38` is not blocked by it and the merge below does not depend on it.

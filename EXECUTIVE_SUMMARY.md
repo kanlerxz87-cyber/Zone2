@@ -119,7 +119,7 @@ actionable economics finding in the brief.
 * `tools/optimize.py` — evidence-gated optimiser (needs ≥30 clicks **and** a dated report before any action).
 * `tools/build_site.py` — deterministic, network-free generation of 37 pages from the data ledger.
 * `tools/validate_data.py` — the deploy gate: per-row sourcing, blank-or-flagged, no-invented-metrics,
-  mark scan, disclosure audit, cross-session drift check, broken-link check (977 internal links).
+  mark scan, disclosure audit, cross-session drift check, broken-link check (979 internal links).
 * `tests/test_pipeline.py` — 14 executable checks, including a regression test for the marketing identity-scope notice.
 
 ## 6. What is intentionally *not* claimed
@@ -338,7 +338,7 @@ sentence turns the build red. (Session `b38cc982` fixed the same sentence for `i
 T26; both gates now run and cover different surfaces.)
 
 The same drift was found in the hand-written docs and corrected here: `README.md` advertised stale check/source
-counts and this file carried *868 internal links* against an actual **977**, plus three `data/*.json` paths
+counts and this file carried *868 internal links* against an actual **979** at merge, plus three `data/*.json` paths
 pointing at a directory that no longer exists (the ledger moved to `ledger/`). All now resolve.
 
 ### Bottom line, unchanged
