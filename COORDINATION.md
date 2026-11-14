@@ -782,3 +782,45 @@ affiliate products", "the links resolve correctly") to a bare request after the 
 with a cache-buster (`?v=d032870`) returned the correct current HTML, and the committed file on `main` is
 correct. This is a GitHub Pages CDN cache artefact, not a stale file — worth knowing before anyone
 "fixes" a page that is already right. Fetch with a cache-buster when verifying the live site.
+
+---
+
+## Session record — `0a3dff48` (`arena/0a3dff48-zone2`, current session)
+
+**Claimed:** 2026-11-14 (UTC). Branch base: `76c996d` (merge of PR #24, session `c6e94e8d`).
+All prior sessions on the shared board (T1–T20, LT-1…LT-12, AUD-01) are `done` and merged to `main`.
+No task was `unclaimed` or `in progress`. This session claims the **unimplemented change requests** that
+those finished sessions explicitly left for the owner to apply, plus two new items of its own.
+
+### Task board (session-scoped; `0a3dff48-*` prefix so IDs never collide)
+
+| ID | Task | Status | Origin | File scope |
+|---|---|---|---|---|
+| `0a3dff48-V1` | Independent re-verification of the three supplied links + control test (2026-11-14) | done | new | `revalidation/data/links.json` (+ rebuild), `docs/revalidation-2026-11-14.md` |
+| `0a3dff48-V2` | Apply CR-1 / CR-2 — correct `ledger/flags.json` F-03 and F-05 (the disproven "fallback" / "shuffle" reasoning) | done | `c6e94e8d` CR-1, CR-2 | `ledger/flags.json` (+ rebuild `pages/`) |
+| `0a3dff48-V3` | Apply CR-4 — drop "via mhFallback" from `ledger/products.json` `why_blank` | done | `c6e94e8d` CR-4 | `ledger/products.json` (+ rebuild `pages/`) |
+| `0a3dff48-V4` | AUD-02 — `research-hub/` pages that still present the three destination ASINs as "the requested products" | done | `5c06fb5e` AUD-02 | `research-hub/*.html`, `research-hub/data/*.json` |
+| `0a3dff48-V5` | AUD-04 / I-27 — repair `research-hub/scripts/verify.py` (stale repository root, 7 false failures) and wire it into CI | done | `5c06fb5e` AUD-04, `f786c0d7` I-27 | `research-hub/scripts/verify.py`, `.github/workflows/pages.yml` |
+| `0a3dff48-V6` | AUD-05 — `affiliate-lab/` rows that state the short links did **not** open a product (contradicts the control result) | done | `5c06fb5e` AUD-01/AUD-05 | `affiliate-lab/data/products.json`, `affiliate-lab/*.html` |
+| `0a3dff48-V7` | AUD-03 — `docs/verification-log.md` / `docs/repo-review.md` still assert the "fallback" reading | done | `5c06fb5e` AUD-03 | `docs/verification-log.md`, `docs/repo-review.md` |
+| `0a3dff48-V8` | I-21 / F-13 — `research-hub/compliance.html` title begins with an Amazon mark | done | `f786c0d7` F-13 | `research-hub/compliance.html` |
+| `0a3dff48-V9` | Primary dashboard IA: expose the category subpages and the link-identity status in the primary nav/tables | done | new (brief: "subpages organized by category") | `index.html`, `assets/js/data.js`, `assets/js/app.js`, `assets/css/style.css` |
+| `0a3dff48-V10` | Final integration: re-verify combined data line by line, build, no broken links, PR → merge → confirm Pages deploy | in progress | brief | shared outputs (nav/index only) + `COORDINATION.md` |
+
+> Scope note: every file above was owned by a **finished, merged** session, which explicitly logged the
+> request and left it for the owner to apply. `main` was at `76c996d` when this session started; no
+> other session's claim was open, so nothing above overlaps a live claim.
+
+### Independent verification performed by this session (2026-11-14, official sources fetched live)
+
+| # | Test | Result | Verdict |
+|---|---|---|---|
+| V-1 | `https://www.amazon.com/dp/B04G1MEwY` | Amazon "Page Not Found" | 9-char token is not an addressable ASIN |
+| V-2 | `https://www.amazon.com/dp/B02NbDxp3` | Amazon "Page Not Found" | as above |
+| V-3 | `https://www.amazon.com/dp/B00hJ57DV` | Amazon "Page Not Found" | as above |
+| V-4 | `https://link.amazon/B04G1MEwY` | → `amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-1f979f303a4b5691&channelId=704&plpRedirect=mhFallback` — title "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows…" | destination confirmed; token is 9 chars |
+| V-5 | `https://link.amazon/B02NbDxp3` | → `amazon.com/dp/B09B7SB46R?…&btn_ref=srctok-0cd8be3c7e2e0de3&channelId=704&plpRedirect=mhFallback` — title "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | … 24 cooking functions …" | destination confirmed; title matches `assets/js/data.js` verbatim |
+| V-6 | `https://link.amazon/B00hJ57DV` | → `amazon.com/dp/B08DKYBTPH?…&btn_ref=srctok-7c59360cbbbd59b7&channelId=704&plpRedirect=mhFallback&th=1` — title "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option …" | destination confirmed; title matches `assets/js/data.js` verbatim |
+| V-7 | **Control** — bare, untagged `https://www.amazon.com/dp/B0CDY277D3` | 200, correct CHEFMAN 6 Qt product page; Amazon's own links rewritten to `?lv=shuf&channelId=500&plpRedirect=mhFallback` | **`plpRedirect=mhFallback` is emitted on ordinary valid loads — it is not evidence of a fallback** |
+| V-8 | Category breadcrumbs on all three destination pages | Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers | single-category portfolio confirmed |
+| V-9 | **New observation** — `btn_ref` comparison | Session `c6e94e8d` recorded `srctok-1e229870efde5acf` / `srctok-534f5e7952f396b2` / `srctok-76c3adaeb8708b44`; this session recorded `srctok-1f979f303a4b5691` / `srctok-0cd8be3c7e2e0de3` / `srctok-7c59360cbbbd59b7` | The **destination ASIN never changed** across five sessions and days of fetches, while the per-request `srctok` attribution token **rotates**. This sharpens the correction: the link carries a rotating source-attribution token, and it points at one fixed destination. It is not a shuffle (a shuffle would change the destination), and the token's rotation is not evidence of a fallback either. |
