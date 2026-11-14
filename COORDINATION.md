@@ -611,3 +611,54 @@ never by splicing conflict hunks.**
 **Lesson for the next session** (three sessions have now hit variants of this defect): a drift gate proves the
 *data* matches the ledger. It does not prove the *sentence* does. Reading the deployed page is the only check that
 catches a false statement which was regenerated faithfully.
+
+### T27 — PR and merge result (session `ba8b2d38`, closed 2026-11-14T19:06Z)
+
+| Item | Value |
+|---|---|
+| PR #51 — main integration | **merged** 2026-11-14T18:57:13Z · merge commit `ff1940f8f2e6569993aba2867fbb3163a3054af6` |
+| PR #54 — F-29 follow-up | **merged** 2026-11-14T19:06:22Z · merge commit `b03c722e9a00af628f43b067b312a84d34989c98` |
+| CI on both PRs | `Build and verify` **pass**; `Deploy to GitHub Pages` correctly skipped on PRs |
+| Post-merge CI on `main` | `Build, verify and deploy` + `pages build and deployment` **success** after each merge |
+| Pages deploy | `status: built` for both merge commits · https://kanlerxz87-cyber.github.io/Zone2/ |
+| Final register | **29 flags (F-01 … F-29), 25 open** · 198 ledger rows · 37 sources · 979 internal links checked |
+| T27 | **done** |
+
+**Two merges, not one.** The first published the control and the verification pass; the second fixed a published
+count that was only visible **on the deployed page**. Both are recorded rather than glossed.
+
+#### Live read of the deployed site (not the working tree) — final
+
+| Page | Reads |
+|---|---|
+| `/` dashboard | KPI **29** items flagged for review; "3 of 3" resolve; "0 of 3" brief mappings confirmed |
+| `flagged.html` | "**29 flags (F-01 … F-29)**" — rendered from data, not typed |
+| `pages/flags.html` | "29 items flagged for review", "**25 open items**" — now agrees with `summary.html` |
+| `summary.html` | "29 items flagged for review (**25 open**)" |
+| `pages/verification.html` | "70 checks, each tied to an official source and a method" |
+
+#### Irregularities this session raised, all published on the Flagged for Review page
+
+**F-28** (closed) — the "one-character truncation" reading of the supplied codes is not supported; the
+valid-10-character-ASIN control shows the short-link service does not accept ASINs at all.
+**F-29** (closed) — `pages/flags.html` and `summary.html` published different open-flag counts (28 vs 25); fixed.
+Neither blocks the site; both are on the [Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
+page with source links.
+
+#### Still open, owner action, not inferable
+
+1. **Identity (F-03, F-06)** — no public Amazon document binds a `link.amazon` code to a product. The three
+   products are published as *the product this link resolves to*, never *the product the brief named*.
+2. **Economics (F-24)** — none of the three supplied links carries an Associates `tag`, so as supplied they
+   cannot attribute a sale or earn a commission.
+3. **Data** — price, rating, review count, availability, sales rank and the per-category commission band stay
+   blank. All three resolved products sit under a *Home & Kitchen › … › Air Fryers* path where Table 1 publishes
+   **both** `Kitchen 4.50%` and `Home 3.00%`; which applies is an authenticated catalog lookup.
+
+#### Note for the next session
+
+Two defect classes recurred across four sessions and are worth checking first: (1) **a count typed into prose**
+drifts from its register — three separate surfaces (KPI, `flagged.html` caption, `pages/flags.html` heading) have
+now been caught; and (2) **resolving an append-only file by splicing conflict hunks drops everything before the
+first marker** — this session did exactly that to this file and only caught it by diffing line counts against
+`origin/main` before pushing. On an append-only file, check out the base version and append.
