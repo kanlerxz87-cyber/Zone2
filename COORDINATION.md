@@ -1824,3 +1824,30 @@ then added a *different* F-22 (flag-count KPI) on `main` after `4338f55e`'s last
 `4338f55e`'s ids and renumbered the incoming KPI flag to **F-26**, recorded in `ledger/flags.json`'s note.
 `assets/js/data.js`'s `CANONICAL_FLAG_COUNT` and the `Flagged` page counts were set to 26 and are now
 derived by `tools/build_root_data.py`, so they cannot drift again.
+
+---
+
+## Session record — `d3ce1c29` (`arena/d3ce1c29-zone2`, current branch, 2026-11-14 UTC)
+
+**Branch note:** Arena pins this session to `arena/d3ce1c29-zone2` (not `session-<id>/<task>` naming);
+documented as the deviation, consistent with every prior session.
+
+### Board state at claim (2026-11-14)
+
+`main` = `6a90dfc5a6c47265c6d120588a7cc454a5348758` (merge of PR #41). This branch starts exactly at
+that commit: **0 ahead, 0 behind**. `gh pr list --state open` → **empty**. There are therefore **no
+tasks claimed by another session** and **no unclaimed open work** on the board.
+
+### Claim (recorded at claim time)
+
+| Field | Value |
+|---|---|
+| Task ID | **T26** |
+| Title | Independent verification pass, replication of the `mhFallback` control to all three ASINs, defect sweep, final integration |
+| Owner | `arena/d3ce1c29-zone2` |
+| Status | in progress |
+| File scope | `COORDINATION.md` (append-only), `ledger/**` (append new verification/sources rows), `docs/**` (new session note), and any file that must change to correct a defect this session proves |
+| Non-overlap | No other session is active. No file owned by another session is edited. |
+
+Because the board shows no active peer, T26 is simultaneously the verification task **and** the final
+integration task the brief describes. Every gate is re-run in this session before the PR is opened.
