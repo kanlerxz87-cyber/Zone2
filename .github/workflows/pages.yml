@@ -62,12 +62,14 @@ jobs:
                       if tag == "link" and a.get("rel") == "stylesheet":
                           self.refs.append(a["href"])
                       if tag == "a" and a.get("href") and not a["href"].startswith(("http", "#", "mailto:")):
-                          self.refs.append(a["href"])
+                          # A fragment (#F-01) addresses an element inside the target page, not a file.
+                          self.refs.append(a["href"].split("#", 1)[0])
               for page in pages:
                   p = P()
                   p.feed((root / page).read_text(encoding="utf-8"))
                   for ref in p.refs:
-                      if not (root / ref).resolve().is_file():
+                      base = (root / page).parent
+                      if not (base / ref).resolve().is_file():
                           problems.append(f"{root_dir}/{page}: missing {ref}")
               return problems
 
@@ -78,6 +80,10 @@ jobs:
           problems += check("zone2", sorted(f.name for f in Path("zone2").glob("*.html")))
           problems += check("affiliate-lab", sorted(f.name for f in Path("affiliate-lab").glob("*.html")))
           problems += check("revalidation", sorted(f.name for f in Path("revalidation").glob("*.html")))
+          problems += check(".", sorted(f.name for f in Path(".").glob("*.html")) - {"404.html"})
+          for page in sorted(Path("pages").rglob("*.html")):
+              rel = page.relative_to("pages")
+              problems += check(page.parent, [page.name])
           if problems:
               print("\n".join(problems))
               raise SystemExit(1)
@@ -106,18 +112,30 @@ jobs:
           python3 - <<'PY'
           import glob, re, sys
           DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+          MONEY = re.compile(r'\$\s?\d[\d,]*(?:\.\d{1,2})?')
+          PRICE_CONTEXT = re.compile(r'\b(price|pricing|current price|list price|buy|add to cart|deal|discount|sale|offer)\b', re.I)
+          PROGRAM_CONTEXT = re.compile(r'\b(bounty|commission|income|payment|minimum|check|gift card|fee|earn|rate|trial|stream|tax|refund|withhold)\w*', re.I)
           bad = []
           pages = sorted(glob.glob('*.html')) + \
                   sorted(glob.glob('research-hub/*.html')) + \
                   sorted(glob.glob('northstar/*.html')) + \
                   sorted(glob.glob('zone2/*.html')) + \
-                  sorted(glob.glob('revalidation/*.html'))
+                  sorted(glob.glob('revalidation/*.html')) + \
+                  sorted(glob.glob('affiliate-lab/*.html')) + \
+                  sorted(glob.glob('pages/**/*.html', recursive=True))
+          assert len(pages) >= 70, f'expected every published page, found {len(pages)}'
           for f in pages:
               t = open(f, encoding='utf-8').read()
               if DISCLOSURE not in t:
                   bad.append(f'{f}: missing disclosure')
-              if re.search(r'\$\s?\d[\d,]*\.\d{2}', t):
-                  bad.append(f'{f}: prints a price')
+              # Context-aware price rule, identical to tools/validate_data.py and the affiliate-lab step:
+              # a dollar figure is a forbidden PRODUCT price only inside a buying context (price/deal/buy...);
+              # program economics (bounty, commission, payment minimum, processing fee) are permitted.
+              units = re.split(r'</tr>|</p>|</li>|<br\s*/?>', re.sub(r'<[^>]+>', ' ', t))
+              for unit in units:
+                  for m in MONEY.finditer(unit):
+                      if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):
+                          bad.append(f'{f}: money value {m.group(0)!r} in a buying context')
           if bad:
               print('\n'.join(bad))
               sys.exit(1)
@@ -143,7 +161,7 @@ jobs:
               bad.append('affiliate-lab: no pages found')
           class P(HTMLParser):
               def __init__(self):
-                  super().__init__(); self.refs = []
+                  super().__init__(); self.refs = []; self.ids = set()
               def handle_starttag(self, tag, attrs):
                   a = dict(attrs)
                   if tag == "script" and "src" in a:
@@ -151,7 +169,11 @@ jobs:
                   if tag == "link" and a.get("rel") == "stylesheet":
                       self.refs.append(a["href"])
                   if tag == "a" and a.get("href") and not a["href"].startswith(("http", "#", "mailto:")):
-                      self.refs.append(a["href"])
+                      # A fragment (#F-01) addresses an element inside the target page, not a file.
+                      self.refs.append(a["href"].split("#", 1)[0])
+                  # Any element id in this page is a valid anchor target.
+                  if "id" in a:
+                      self.ids.add(a["id"])
           for f in pages:
               t = open(f, encoding="utf-8").read()
               if DISCLOSURE not in t:
@@ -186,6 +208,9 @@ jobs:
       # rather than something a reviewer has to trust.
       - name: Rebuild the subpages and confirm committed output is current
         run: python3 tools/build_site.py --check
+
+      - name: Rebuild the root evidence views and confirm committed output is current
+        run: python3 tools/build_root_views.py --check
 
       - name: Subpage gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
         run: python3 tools/validate_data.py
