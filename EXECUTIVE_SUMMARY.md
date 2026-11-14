@@ -20,13 +20,26 @@ compliance) **for three specific products**:
 | 2 | `https://link.amazon/B02NbDxp3` | `B02NbDxp3` | 9 | **No** | Page Not Found |
 | 3 | `https://link.amazon/B00hJ57DV` | `B00hJ57DV` | 9 | **No** | Page Not Found |
 
-Each submitted short link redirected to a **different, unrelated** Amazon product carrying
-`plpRedirect=mhFallback` (a fallback experience, not a token-to-product mapping). The three observed
-fallback destinations were recorded as evidence only and are **not** treated as the requested products.
+Each submitted short link resolved to a **different** Amazon air-fryer listing. Resolving them produces
+three distinct, *stable*, per-link source tokens — so the links are individually tracked and deterministic,
+not random.
 
-**Consequence:** product identity cannot be established, so price, category, rating, review, competition and
-commission-band values for these items are **left blank and flagged**, exactly as the verification rule requires.
-Writing marketing copy about them would have meant inventing a product.
+> **Corrected 2026-11-14 (session `c6e94e8d`).** This section previously called those three destinations
+> "unrelated fallback pages", reasoning from the `plpRedirect=mhFallback` and `lv=shuf` markers and from a
+> reported change of page body / `btn_ref` on re-fetch. **That reasoning was tested and does not hold:** a
+> bare, untagged request to a *valid* ASIN (`/dp/B08DKYBTPH`) is answered with the real product page and the
+> same markers appended; and re-fetching a short link returns the same ASIN, body and `btn_ref` token. The
+> destinations are stable and individually tracked — not arbitrary. Evidence and sources:
+> [`revalidation/`](revalidation/index.html).
+
+**Consequence — narrower than first reported.** The supplied *codes* are still not ASINs (9 characters;
+`/dp/<code>` → Page Not Found), and **no public Amazon document binds a `link.amazon` code to a destination
+ASIN**, so the mapping is observed behaviour rather than documented intent. None of the three resolved URLs
+carries an Associates `tag` either. Product identity is therefore **not established**, so price, category,
+rating, review, competition and commission-band values for these items are **left blank and flagged**,
+exactly as the verification rule requires. Writing marketing copy about them *as the requested products*
+would have meant inventing an identity — but the three ASINs themselves are real, verified products, and
+the attribute tables record them as *the product each link resolves to*.
 
 ## 2. Decisions taken
 
