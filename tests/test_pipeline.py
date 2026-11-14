@@ -264,6 +264,28 @@ def test_build_is_deterministic():
     assert digest_a == digest_b, "build output is not deterministic"
 
 
+def test_guard_check_label_cannot_drift_from_the_test_suite():
+    """F-35 regression: README.md's executable-guard-checks label must equal the number of test
+    functions, and the root captions must keep their derived markers."""
+    import validate_data
+
+    readme = REPO / "README.md"
+    original = readme.read_text(encoding="utf-8")
+    tests_n = len(re.findall(r"^def test_", Path(__file__).read_text(encoding="utf-8"), re.M))
+    label = f"{tests_n} executable guard checks"
+    assert label in original, f"README.md must say {label!r} (it says otherwise -> F-35)"
+    try:
+        readme.write_text(original.replace(label, f"{tests_n + 1} executable guard checks"), encoding="utf-8")
+        report = validate_data.Report()
+        validate_data.check_typed_counts(report)
+        assert report.errors, "check_typed_counts must reject a stale guard-checks label"
+    finally:
+        readme.write_text(original, encoding="utf-8")
+    report_ok = validate_data.Report()
+    validate_data.check_typed_counts(report_ok)
+    assert not report_ok.errors, report_ok.errors
+
+
 def main() -> int:
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]
     failures = 0

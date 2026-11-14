@@ -47,7 +47,7 @@ blank + flag**: [findings hub](https://kanlerxz87-cyber.github.io/Zone2/pages/in
 [tracking](https://kanlerxz87-cyber.github.io/Zone2/pages/tracking.html) ·
 [content engine](https://kanlerxz87-cyber.github.io/Zone2/pages/content-engine.html) ·
 [architecture](https://kanlerxz87-cyber.github.io/Zone2/pages/architecture.html) ·
-[flagged for review (34 items, F-01…F-34)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
+[flagged for review (36 flags, F-01…F-36)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
 
 All three counts are derived from `ledger/*.json` and held to the register by
 `tools/validate_data.py::check_published_counts`, so they cannot be typed wrong again.
@@ -149,7 +149,7 @@ fail on purpose (a removed disclosure and an injected `$49.99` each produce an e
 python3 tools/build_site.py            # regenerate pages/ (deterministic, network-free)
 python3 tools/build_site.py --check     # fail if committed pages/ drift (content-hashed)
 python3 tools/validate_data.py          # deploy gate -> JSON report, non-zero exit on any error
-python3 tests/test_pipeline.py          # 13 executable guard checks
+python3 tests/test_pipeline.py          # 15 executable guard checks
 python3 tools/audit_site.py             # structural audit: fragments, orphaned sets, prose counts
 python3 tools/scoring.py                # published bands + scoring behaviour
 PYTHONPATH=tools python3 tools/amazon_creators_api.py   # prints the BLOCKED reason (no credentials here)

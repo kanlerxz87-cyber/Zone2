@@ -492,6 +492,48 @@ def check_no_typed_flag_counts(report: Report) -> None:
     report.stats["typed_flag_counts_checked"] = canonical
 
 
+def check_typed_counts(report: Report) -> None:
+    """The one published count label check_published_counts does not pin, plus caption markers (F-35).
+
+    check_published_counts holds the flag/source/verification counts to the ledgers everywhere they
+    are published. The executable-guard-checks label in README.md escaped that net (it describes
+    tests/test_pipeline.py, not a ledger) and drifted three times in one day - 11 against 13 tests,
+    then 13 against 14 - while every other count was already gated. This pins it to the actual count
+    of test functions and asserts the root captions still render from their derived markers
+    (flagCountHeading / flagRegisterCount / flag-count-inline) instead of typed prose.
+    """
+    tests_src = (REPO / "tests" / "test_pipeline.py").read_text(encoding="utf-8")
+    tests_n = len(re.findall(r"^def test_", tests_src, re.M))
+    path = REPO / "README.md"
+    if not path.exists():
+        report.fail("README.md: missing - cannot verify its guard-checks label")
+    else:
+        label = f"{tests_n} executable guard checks"
+        text = path.read_text(encoding="utf-8")
+        if label not in text:
+            report.fail(
+                f"README.md: label {label!r} not found - the prose disagrees with tests/test_pipeline.py "
+                "(F-35). Update the label or the suite; never leave them inconsistent."
+            )
+    markers = [
+        ("index.html", ("flagCountHeading", "flagCount")),
+        ("flagged.html", ("flagRegisterCount", "flagRegisterMax")),
+    ]
+    for name, ids in markers:
+        p = REPO / name
+        if not p.exists():
+            report.fail(f"{name}: missing - cannot verify its derived count captions")
+            continue
+        text = p.read_text(encoding="utf-8")
+        for marker in ids:
+            if f'id="{marker}"' not in text:
+                report.fail(
+                    f"{name}: derived caption marker id=\"{marker}\" is gone - the page would have to "
+                    "type its flag count again (F-17/F-26 class). Restore the marker; the caption "
+                    "renders from CANONICAL_FLAG_COUNT, never from prose."
+                )
+
+
 def check_no_product_prices(report: Report) -> None:
     """No generated page may display a product price.
 
@@ -544,6 +586,7 @@ def main(strict: bool = True) -> Report:
         check_landing_links_here(report)
         check_flag_count(report)
         check_no_typed_flag_counts(report)
+        check_typed_counts(report)
         check_no_product_prices(report)
         check_links(report)
     except FileNotFoundError as exc:

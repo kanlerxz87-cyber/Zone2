@@ -862,7 +862,7 @@ def page_niches() -> str:
     ]
     body = (
         notice("Why this queue is empty", NICHES["empty_state_message"])
-        + panel("Eligibility filter (sourced and deterministic)", f"<p class=\"lede\">{esc(NICHES['eligibility_filter']['description'])}</p>" + table(["Excluded band"], [[text_cell(c)] for c in NICHES["eligibility_filter"]["excluded_bands"]], caption="published 0.00% categories"), meta=source_cell([NICHES["eligibility_filter"]["source_id"]]).replace("<td", "<span").replace("</td>", "</span>"))
+        + panel("Eligibility filter (sourced and deterministic)", f"<p class=\"lede\">{esc(NICHES['eligibility_filter']['description'])}</p>" + table(["Excluded band", "Source"], [[text_cell(c), source_cell([NICHES["eligibility_filter"]["source_id"]])] for c in NICHES["eligibility_filter"]["excluded_bands"]], caption="published 0.00% categories"), meta=source_cell([NICHES["eligibility_filter"]["source_id"]]).replace("<td", "<span").replace("</td>", "</span>"))
         + panel("Inputs required before any niche may be ranked", table(["Required input", "State", "Where it must come from", "Source"], rows))
         + panel("Row schema the queue will use", "<pre class=\"code\">" + esc(json.dumps(NICHES["row_schema"], indent=2, sort_keys=True)) + "</pre>")
     )

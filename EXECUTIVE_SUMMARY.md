@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **34 flags (F-01 … F-34)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **36 flags (F-01 … F-36)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 

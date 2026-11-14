@@ -924,7 +924,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 34;
+const CANONICAL_FLAG_COUNT = 36;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1301,6 +1301,28 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-34",
     source: "https://docs.github.com/en/rest/pages/pages",
     sourceIds: ["S22"],
+  },
+  {
+    item: "F-35 — README.md's executable-guard-checks label drifted from the test suite repeatedly (11, then 13, then 13 again against 14-15 tests) - the one published count label no gate pinned",
+    detail: "Found in the T28 line-by-line pass (session e9c8362c, 2026-11-14) and re-observed across four parallel merge waves. At 6a90dfc README.md typed '11 executable guard checks' while tests/test_pipeline.py held 13; at 29589f3 and again at cae38d6 it typed '13' while the suite ran 14. The F-17/F-26/F-29/F-33 class gates and tools/validate_data.py::check_published_counts pin the flag/source/verification counts, but nothing pinned the guard-checks label to the actual number of test functions. Same defect class: a typed number with no gate behind it. NOTE ON NUMBERING: this finding passed through F-27, F-28 and F-30 on this branch; three separate waves of parallel sessions took those ids on main first (the hub-generator hazard, the one-character-truncation control, and d3ce1c29's bounty/caption/source_id/panel/board set), so it settled as F-35.",
+    severity: "medium",
+    impact: "README.md is the first document a reviewer reads; each drift understated the guard suite, three times in one day.",
+    actionRequired: "None open. The label now states the true count, and tools/validate_data.py::check_typed_counts (session e9c8362c) pins it to the actual count of test functions and asserts the root captions keep their derived markers (flagCountHeading / flagRegisterCount / flag-count-inline), never typed prose. Negative-tested in tests/test_pipeline.py::test_guard_check_label_cannot_drift_from_the_test_suite (a wrong label turns the gate red; the file is restored afterwards).",
+    ledgerFlag: "F-35",
+    ledgerUrl: "pages/flags.html#F-35",
+    source: "",
+    sourceIds: [],
+  },
+  {
+    item: "F-36 — research-hub/summary.html policy-verdict and conflict rows are still block-sourced (product rows were fixed on main; the rollup gap is now partial)",
+    detail: "The per-row sourcing audit (session e9c8362c, 2026-11-14) found the research-hub summary rollup tables carrying values with no per-row source links. Parallel session a6f70a13 then added an 'Official product source' column to the three product-mapping rows (verified on the merged tree: each row now ends in manufacturer + Amazon links). The residual, measured on the merged tree: the four policy-verdict rows (price, star rating, review count, stock) and the four conflict rows (I-9, I-10, I-12, I-13) still state values and verdicts with no link inside the row - their sources exist in the hub's per-product pages, research-hub/data/products.json and the conflict flags. The remaining rollup rows are file inventories and disposition tallies (repo-internal). research-hub/** is a preserved companion namespace, so this is change request CR-7 (partial) in COORDINATION.md, not an edit. NOTE ON NUMBERING: first written as F-29 by this session; renumbered twice by id collisions with parallel sessions (ba8b2d38's F-29; d3ce1c29's F-30..F-34) before settling as F-36.",
+    severity: "low",
+    impact: "The brief's verification rule is per row: every table row must have a source link to an official site. A reader of those eight rows cannot trace the verdict or the conflicting figures without knowing to continue to the per-product pages.",
+    actionRequired: "Needs review. Owner of research-hub/: extend the 'Official product source' treatment to the policy-verdict and conflict tables via research-hub/scripts/build.py and its data files, or label those tables as block-sourced to the per-product pages. Session e9c8362c did not edit research-hub/** because it belongs to another session's namespace.",
+    ledgerFlag: "F-36",
+    ledgerUrl: "pages/flags.html#F-36",
+    source: "https://affiliate-program.amazon.com/help/operating/policies",
+    sourceIds: ["S02", "S19", "S20", "S21"],
   },
 ];
 /* END GENERATED: flags */
