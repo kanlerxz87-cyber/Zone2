@@ -293,6 +293,35 @@ def check_landing_links_here(report: Report) -> None:
         report.stats["landing_links_to_pages"] = 1
 
 
+def check_ledger_ids_unique(report: Report) -> None:
+    """No ledger may hold two entries under one id.
+
+    Five sessions appended to `ledger/flags.json` concurrently and reused ids three separate times
+    (F-20/F-21, then F-22, then F-27 during this session's merge with `main`). Each collision was
+    caught by a human reading the board, not by a gate — so the next one would not be. Ids are also
+    published as HTML anchors (`pages/flags.html#F-27`), so a duplicate silently makes one finding
+    unreachable by its own link. Same rule for sources and verification rows.
+    """
+    for name, key in (("flags.json", "flags"), ("sources.json", "sources"), ("verification.json", "rows")):
+        doc = _load(name)
+        entries = doc.get(key, [])
+        seen: dict[str, int] = {}
+        dupes: list[str] = []
+        for item in entries:
+            sid = item.get("id")
+            if sid is None:
+                continue
+            if sid in seen:
+                dupes.append(sid)
+            seen[sid] = seen.get(sid, 0) + 1
+        for sid in sorted(set(dupes)):
+            report.fail(
+                f"ledger/{name}: id {sid} appears {seen[sid]} times - two different findings share one id, "
+                "so at most one of them is reachable by its published anchor"
+            )
+        report.stats[f"unique_{key}_ids"] = len(seen)
+
+
 def check_flag_count(report: Report) -> None:
     """The dashboard renders a flag count. It must equal the canonical register, never be typed.
 
@@ -337,11 +366,13 @@ def check_published_counts(report: Report, canonical_flags: int) -> None:
     n_sources = len(_load("sources.json").get("sources", []))
     n_verification = len(_load("verification.json").get("rows", []))
 
+    # `(?:,[^)]*)?` tolerates the richer label form "(62 checks, V-01…V-62)", which a companion
+    # session introduced and which is strictly better for the reader than a bare number.
     checks = [
         (re.compile(r"(\d+)\s+flags?\s*\(F-01\s*[^\d]{0,6}\s*F-(\d{2})\)", re.I), "flags", canonical_flags, "both groups"),
-        (re.compile(r"flagged for review\s*\((\d+)\s+items?\)", re.I), "flags", canonical_flags, "group 1"),
-        (re.compile(r"source register\s*\((\d+)\s+sources?\)", re.I), "sources", n_sources, "group 1"),
-        (re.compile(r"verification log\s*\((\d+)\s+checks?\)", re.I), "verification rows", n_verification, "group 1"),
+        (re.compile(r"flagged for review\s*\((\d+)\s+items?(?:,[^)]*)?\)", re.I), "flags", canonical_flags, "group 1"),
+        (re.compile(r"source register\s*\((\d+)\s+sources?(?:,[^)]*)?\)", re.I), "sources", n_sources, "group 1"),
+        (re.compile(r"verification log\s*\((\d+)\s+checks?(?:,[^)]*)?\)", re.I), "verification rows", n_verification, "group 1"),
     ]
 
     # Deliberately wider than owned_pages(): the sentences that drifted live in root-level HTML and in
@@ -367,6 +398,28 @@ def check_published_counts(report: Report, canonical_flags: int) -> None:
                     report.fail(
                         f"{path.relative_to(REPO)}: prose says '{m.group(0)}' but ledger holds "
                         f"{expected} {label} - a published count that disagrees with the register"
+                    )
+
+    # T26: the same defect appears one layer up. `index.html` and `flagged.html` used to
+    # hard-code "26 items" / "26 flags" in their HTML, so they kept publishing the old
+    # number after F-27 was added. A typed count in a template is the same bug as a typed
+    # KPI, so refuse it: the caption must render from CANONICAL_FLAG_COUNT instead.
+    typed = re.compile(r"(?<![-\w.])(\d{1,4})\s+(?:items?|flags)\b", re.I)
+    for name in ("index.html", "flagged.html"):
+        path = REPO / name
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        # Only the reader-facing caption prose matters here, not code samples or data rows.
+        for line_no, line in enumerate(text.splitlines(), 1):
+            if "<script" in line or "CANONICAL_FLAG_COUNT" in line:
+                continue
+            for m in typed.finditer(re.sub(r"<[^>]+>", " ", line)):
+                stated_line = int(m.group(1))
+                if stated_line != canonical:
+                    report.fail(
+                        f"{name}:{line_no}: typed count '{m.group(0)}' but the register holds "
+                        f"{canonical} flags - derive the caption from CANONICAL_FLAG_COUNT"
                     )
 
 
@@ -413,6 +466,7 @@ def main(strict: bool = True) -> Report:
     report = Report()
     try:
         sources = check_sources(report)
+        check_ledger_ids_unique(report)
         check_rows(report, sources)
         check_products(report)
         check_cross_session_drift(report)

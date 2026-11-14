@@ -908,7 +908,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 30;
+const CANONICAL_FLAG_COUNT = 31;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -969,14 +969,14 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-06 — Published copy must be labelled 'the product this link resolves to' until the owner confirms the mapping",
-    detail: "Because no public Amazon document binds a link.amazon code to a product, the three products this site publishes are the destinations the supplied links resolve to — verified by live fetch and by the unknown-code control (F-20) — not a confirmed brief mapping. The article, comparison and buying-guide generator therefore stays in preview for the three submitted tokens: draft copy exists in content/templates/** but is not published, so that no article asserts a mapping Amazon does not document.",
+    detail: "No public Amazon document binds a link.amazon code to a product, so the observed destinations are not confirmed as the products intended in the brief. The root article/comparison/guide generator remains blocked for brief-mapped copy. Separately, the public /marketing set contains three destination-only articles, a comparison and a buying guide based on official manufacturer specifications; every page now labels the unresolved mapping and links to this finding. This destination-only content is not evidence of the intended brief mapping.",
     severity: "high",
-    impact: "No published article, comparison or buying guide names these three products yet. Every other part of the platform (policy engine, rate data, scoring, tracking schema, templates, deploy) is delivered and gated.",
-    actionRequired: "Confirm the mapping and supply tagged links; the pipeline then publishes verified-only copy without any other change.",
+    impact: "Destination-only marketing copy is published under /marketing; content claiming the supplied codes identify the brief's intended products remains blocked pending owner confirmation. Specs are source-linked; identity mapping remains unverified.",
+    actionRequired: "Confirm in Associates Central that these destinations are the intended products and supply correctly tagged links before treating the content as brief-matched or monetized.",
     ledgerFlag: "F-06",
     ledgerUrl: "pages/flags.html#F-06",
     source: "https://link.amazon/B00TEST12",
-    sourceIds: ["S32", "S19", "S20", "S21"],
+    sourceIds: ["S32", "S33", "S34", "S35", "S19", "S20", "S21", "S25", "S26", "S27"],
   },
   {
     item: "F-07 — No Associates account, marketplace, tracking ID, or tag supplied",
@@ -1197,6 +1197,17 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-26",
     source: "https://affiliate-program.amazon.com/help/operating/policies",
     sourceIds: ["S02"],
+  },
+  {
+    item: "F-27 — research-hub/scripts/build.py deletes its own output before every input is present, and cannot rebuild the hub from this tree",
+    detail: "Running `python3 research-hub/scripts/build.py` (the hub's generator, not the root generators) deleted all 13 committed pages under research-hub/ and then aborted with FileNotFoundError on 'research-hub/docs/executive-summary.md'. Two faults combine: (a) it resolves its paths against the repository root instead of the hub directory, the same relocation defect repaired in research-hub/scripts/verify.py (I-27); and (b) it removes its previous output before it has read every input, so one missing input leaves the site with no pages. The pages were restored from git within the same session and every gate re-ran green, so nothing was published broken. The reference to 'docs/executive-summary.md' shows the hub's source document now lives outside the hub, so the generator cannot reproduce the published hub here even with correct paths.",
+    severity: "high",
+    impact: "A reader or a future automated session that runs this generator loses the entire research-hub/ site from the working tree. CI does not run it (0 references in .github/workflows/pages.yml), so the deployed site is unaffected, but the hazard is real and one command away.",
+    actionRequired: "Do not run research-hub/scripts/build.py in this tree. The owning session should repoint it at the hub directory and make it verify its inputs before deleting output, or archive it beside the generated pages. Recorded rather than patched because research-hub/** is another session's namespace and its input layout has moved.",
+    ledgerFlag: "F-27",
+    ledgerUrl: "pages/flags.html#F-27",
+    source: "https://docs.github.com/en/rest/pages/pages",
+    sourceIds: ["S22"],
   },
   {
     item: "F-28 — The bounty table published 9 of the 46 bounty events, and none of the 2 bonus events, under a 'transcribed row-by-row' notice",

@@ -306,7 +306,7 @@ def page_exec() -> str:
     key = [
         ("What each supplied link resolves to", True, "Each of the three supplied link.amazon URLs resolves to one specific Amazon product page, reproducibly, and an UNKNOWN code on the same service returns a 404 instead of a product - so the codes are honoured lookups, not ignored tokens.", ["S28", "S19", "S20", "S21"]),
         ("The brief's product identity, as a documented contract", False, "Each supplied code is 9 characters (an ASIN is 10), the canonical /dp/ URLs return Amazon's Page Not Found page, and no public Amazon document binds a link.amazon code to a product. The destination is therefore published as an observation, never as a confirmed brief mapping.", ["S16", "S17", "S18", "S24"]),
-        ("Marketing copy for those products", False, "The content engine refuses to draft published copy for an entry whose brief mapping is undocumented, so zero articles, comparisons and buying guides are published for these inputs. The verified specification tables above are published; the copy is held pending owner confirmation.", ["S02", "S28"]),
+        ("Marketing content for confirmed brief identities", False, "No copy claims the observed destinations are confirmed identities for the products intended in the brief. The separate /marketing set does publish three destination-only articles, a comparison and a buying guide from manufacturer-verified specifications; its pages label the unresolved mapping. The root generator remains blocked for brief-mapped content until the owner confirms the mapping.", ["S24", "S25", "S26", "S27", "S32", "S33", "S34", "S35"]),
         ("Platform automation built", True, "Collector, scoring, content linters, link builder, click tracker, optimizer and a deterministic site builder are present and runnable, with policy rules encoded as code.", ["S01", "S02"]),
         ("Official commission economics", True, "Amazon's published fixed-rate table transcribed row by row (11 bands, 10.00% down to 0.00%), plus bounty amounts, attribution windows and payment terms.", ["S04", "S02"]),
         ("Compliance wiring", True, f"{len(COMPLIANCE['rules'])} rules from the Operating Agreement, Program Policies and Participation Requirements, each mapped to a specific implemented control.", ["S01", "S02", "S03", "S05"]),
@@ -324,7 +324,7 @@ def page_exec() -> str:
         for q, ok, basis, srcs in key
     ]
     findings = [
-        "The highest-value action is identifier hygiene, not copywriting: a link whose code is not a valid ASIN cannot be researched, written about, tagged, or attributed, even when its destination is known. The three supplied codes are exactly that case - they resolve, but they are not ASINs, they carry no Associates tag, and no Amazon document says what they are for.",
+        "The highest-value action is identifier hygiene, not copywriting: the supplied 9-character tokens cannot be used as ASINs or treated as a documented brief-to-product mapping. The observed destination ASINs can be researched as those destinations, and that is the scope of the published source-linked marketing set. None of the supplied links carries an Associates tag, and no public Amazon document binds the short codes to the intended brief products.",
         "Amazon's published economics shape the plan. Only a few bands are high (Luxury Beauty 10.00%; music/handmade/video 5.00%; Books/Kitchen/Automotive 4.50%); the largest consumer clusters sit at 3.00% and the default band is 4.00%, while nine category groups pay 0.00% and are excluded from the niche queue before ranking even starts.",
         "Attribution is narrow and mechanical: a 24-hour Session, an 89-day cart path, and shipment/payment inside 180 days. Content is therefore worth optimising only where readers are close to a purchase decision, and the model credits nothing outside that window.",
         "Prices and ratings may not be self-hosted as static text: they may appear only from an Amazon-served link or a dated API response. That is why a product whose listing could not be fetched shows a blank price cell, and nothing on the site can look like a stale price.",
@@ -332,7 +332,7 @@ def page_exec() -> str:
         "Reviewing the previously merged commit found no false claims \u2014 its four citations are live official pages \u2014 but it predated the commission table, the attribution mechanics, per-row sourcing and the category subpages added here.",
     ]
     actions = [
-        ("A1", "Confirm in Associates Central that the three resolved destinations are the items to market, and replace the three tokens with valid 10-character ASINs or full amazon.<tld>/dp/ URLs", "user", "unblocks the brief mapping for P-01..P-03, and with it every dependent field and all published copy", ["S16", "S17", "S18", "S28"]),
+        ("A1", "Confirm in Associates Central that the three resolved destinations are the products intended in the brief, or provide the intended valid ASINs / full amazon.<tld>/dp/ URLs", "user", "unblocks content and analysis that assert a match to the brief; current destination-only specs remain separately sourced and labelled", ["S16", "S17", "S18", "S24", "S25", "S26", "S27"]),
         ("A1b", "Supply links that carry the Associates tag (…?tag=YOURASSOCIATEID)", "user", "as supplied the three links carry no tag, so they cannot attribute a sale or earn a commission", ["S24", "S19", "S20", "S21"]),
         ("A2", "Create or confirm an Associates account, marketplace and Associates ID/tag", "user", "turns the inert link preview into a compliant tagged Special Link and enables earnings reporting", ["S01", "S02"]),
         ("A3", "Register for the Creators API (requires >=10 qualifying sales in the past 30 days)", "user", "activates real product research, offer and browse-node data", ["S07"]),
@@ -342,11 +342,10 @@ def page_exec() -> str:
     body = (
         panel(
             "Bottom line",
-            '<p class="lede">Everything this platform needs in order to earn is built and wired to official data. The three supplied '
-            "links each resolve to one specific Amazon product page - reproducibly, and confirmed by an unknown-code control that "
-            "returns a 404 rather than a product - so the site publishes those three products with their manufacturer-verified "
-            "specifications and a source link on every row. What it does not publish is copy asserting a brief mapping Amazon does "
-            "not document, or any price, rating or commission figure it could not confirm.</p>",
+            '<p class="lede">The research, compliance and source-governed content platform is built and live, but it is not yet monetized. The three supplied '
+            "links reproducibly resolve to specific product pages; destination-only articles, comparison and buying guide use manufacturer-verified "
+            "specifications with source links. The site does not claim those destinations are the products intended in the brief, because the mapping "
+            "is not documented. There is no Associates tag, and unconfirmed prices, ratings, commissions and performance remain blank.</p>",
         )
         + panel("Key questions answered", table(["Question", "Verdict", "Basis", "Evidence"], rows))
         + panel("Findings", "<ol class=\"findings\">" + "".join(f"<li>{esc(f)}</li>" for f in findings) + "</ol>")
@@ -356,9 +355,10 @@ def page_exec() -> str:
         )
         + notice(
             "Not claimed by this project",
-            "no live affiliate link, no published product claim, no traffic, conversion or earnings figure, no \u201ctrending product\u201d "
-            "or \u201cbest niche\u201d ranking, and no automated publishing to a third-party CMS. Each of those needs an account, a credential, "
-            "or a verified product record; the machinery for all of them is present and documented.",
+            "no monetized, Associates-tagged product link; no claim that the observed destinations are the products intended in the brief; no traffic, "
+            "conversion or earnings figure; no \u201ctrending product\u201d or \u201cbest niche\u201d ranking; and no automated publishing to a third-party CMS. "
+            "The /marketing pages use untagged preview links and publish only sourced specifications for the observed destinations. An Associates ID, owner "
+            "confirmation of the mapping, Creators API access and dated performance reports have not been supplied; dependent claims and values remain blocked or blank.",
         )
     )
     return render("executive-summary.html", "Executive summary", "What was verified, what was built, and what is blocking the rest.", body)
