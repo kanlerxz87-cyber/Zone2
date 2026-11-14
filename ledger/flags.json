@@ -1,5 +1,5 @@
 {
-  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it.",
+  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text.",
   "as_of": "2026-11-14",
   "flags": [
     {
@@ -32,17 +32,17 @@
     },
     {
       "id": "F-03",
-      "severity": "high",
-      "title": "link.amazon short links ignore the token (fallback, not mapping)",
-      "detail": "The three submitted links resolved to three DIFFERENT destinations, each carrying plpRedirect=mhFallback: B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven), B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven), B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry). One destination per token would indicate a mapping; a different unrelated destination per token indicates the token was not honoured.",
-      "impact": "Any content written about the observed fallback products would be about the wrong items. These three products are recorded as evidence only and are NOT treated as the requested products.",
-      "action_required": "Do not market the fallback products as the requested ones.",
+      "severity": "medium",
+      "title": "link.amazon codes do not resolve as ASINs; per-link destinations are stable but untagged and unmapped by any public document",
+      "detail": "CORRECTED 2026-11-14 after a controlled re-test by session c6e94e8d (see revalidation/ and docs/revalidation-2026-11-14.md), which this session independently reproduced: a bare, untagged request to a VALID 10-character ASIN (/dp/B08DKYBTPH and /dp/B0CDY277D3) is answered with the real product page and Amazon's own plumbing appends the same lv=shuf&plpRedirect=mhFallback markers. So mhFallback is a normal rewrite marker, NOT evidence of a fallback. What the earlier version of this row asserted - that the token 'was not honoured' and the destinations were arbitrary - is withdrawn as unsupported. What remains true and verifiable: the three codes are 9 characters where an ASIN is 10; /dp/<code> returns Page Not Found for all three; each link.amazon URL resolves to ONE distinct listing and carries its own per-link btn_ref token (B04G1MEwY -> B0CDY277D3 / srctok-1e229870efde5acf; B02NbDxp3 -> B09B7SB46R / srctok-534f5e7952f396b2; B00hJ57DV -> B08DKYBTPH / srctok-76c3adaeb8708b44); and none of the resolved URLs carries an Associates tag=. No public Amazon document binds a link.amazon code to a destination ASIN, so the mapping stays unconfirmed - it is not shown to be absent.",
+      "impact": "The destinations are stable and individually tracked, so they are a real observation about each supplied link - but they are still not established as the three items named in the brief. Publishing product copy about them would assert a mapping the documentation does not make.",
+      "action_required": "Downgraded from high to medium. Confirm the intended ASINs, or supply links tagged with the Associates ID. Product pages stay published as 'the product each link resolves to', not as 'the requested product'.",
       "source_ids": [
         "S19",
         "S20",
         "S21"
       ],
-      "owner": "done"
+      "owner": "user"
     },
     {
       "id": "F-04",
@@ -153,16 +153,16 @@
     },
     {
       "id": "F-12",
-      "severity": "high",
-      "title": "Reproducibility test: the redirect destination is a shuffled fallback, not a product mapping",
-      "detail": "A second, independent fetch of https://link.amazon/B04G1MEwY on the same day returned the same target ASIN path but a completely different page body: an 'Amazon.com: Best Sellers in Kitchen & Dining' recommendation carousel (three unrelated consumer products) instead of a product detail page. The request also carried a different link-rewrite token (btn_ref=srctok-0b52eaeecd23186c vs srctok-2cef40d2904c29d8) with the same lv=shuf and plpRedirect=mhFallback markers. A destination that changes its content and its source token between requests cannot identify a product.",
-      "impact": "Consequence for the merged hub: product profiles published for B0CDY277D3, B09B7SB46R and B08DKYBTPH are accurate about those products (each row is traced to the manufacturer's own page) but they are NOT established as the three items named in the brief, and the 'one coherent niche: countertop air frying' reading is an inference drawn from fallback destinations. Treat those pages as unrelated reference material until the owner confirms the intended ASINs.",
-      "action_required": "Owner: confirm the intended ASINs. If the three hub product pages should stay published, relabel them as candidates rather than the requested items.",
+      "severity": "low",
+      "title": "WITHDRAWN - the 'shuffled fallback' reproducibility claim did not reproduce",
+      "detail": "This row asserted that a same-day re-fetch of link.amazon/B04G1MEwY returned a different page body (a 'Best Sellers in Kitchen & Dining' carousel) and a different btn_ref token, and concluded the destination could not identify a product. On re-test (session c6e94e8d, reproduced by this session on 2026-11-14) repeated fetches returned the SAME ASIN path, the SAME btn_ref=srctok-1e229870efde5acf and the same product detail page. The observation did not reproduce and the inference drawn from it did not hold. Kept in the register rather than deleted, because deleting a published correction would hide that the site carried an unsupported claim between 2026-11-13 and 2026-11-14.",
+      "impact": "No live harm: the value affected nothing that was published as fact. The withdrawal matters because the claim was used to justify calling the destinations 'arbitrary'.",
+      "action_required": "None - withdrawn. The stable-destination finding in F-03 replaces it.",
       "source_ids": [
         "S16",
         "S19"
       ],
-      "owner": "user"
+      "owner": "done"
     },
     {
       "id": "F-13",

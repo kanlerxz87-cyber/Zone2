@@ -158,7 +158,9 @@ Trade-In rates, the fine-art and free-Kindle limits, the 24-hour session / 89-da
 window, ≈60-day payment, the US payment minimums, the 3-year inactivity rule, the verbatim §5 disclosure
 sentence, the Agent Terms, the price/availability display rule, the Creators API prerequisites, the PA-API 5
 deprecation and the ASIN-is-10-characters definition all match their official pages exactly. The three supplied
-codes still return "Page Not Found" and still land on the same three fallback listings.
+codes still return "Page Not Found" and each link still resolves stably to the same single listing. The
+earlier "arbitrary fallback" reading is **withdrawn**: `plpRedirect=mhFallback` is appended to valid ASINs too,
+and the destinations do not shuffle between requests.
 
 **Corrected.**
 
@@ -172,7 +174,8 @@ codes still return "Page Not Found" and still land on the same three fallback li
    the policy as published.
 3. **The dashboard's KPI contradicted the ledger** (flag F-17): "3 verified products" against a ledger that
    records 0 of 3 submitted items identified. The KPI now states both numbers explicitly — `0 / 3` identified,
-   `3` fallback landing pages verified — and the flag count is computed from the data instead of typed.
+   `3` links verified as resolving stably to one listing each — and the flag count is computed from the data
+   instead of typed.
 
 **Newly recorded.** The Emeril manufacturer page contradicts itself on the cooking-preset count (24 in the
 description, 25 on the specification tile, "10-in-1" in the feature block), so that value stays unresolved and
@@ -180,7 +183,8 @@ is published as a conflict (flag F-19). The CI gate also never walked the 37 gen
 links and covered only 4 of 6 namespaces for the disclosure/price rule; both gaps are closed (flag F-18).
 
 **Bottom line, unchanged and now stated in one place.** 0 of 3 supplied codes are identified as Amazon
-catalog ASINs; 3 fallback landing pages are verified as live listings and are published as evidence only.
+catalog ASINs; each of the 3 links resolves stably to one live listing that is published as an observation,
+explicitly not as the requested product.
 No product copy, link, campaign or revenue claim is published for the requested items. Every table row on the
 live site links an official source or is blank and flagged — now including two new generated
 [Verification](https://kanlerxz87-cyber.github.io/Zone2/verification.html) and

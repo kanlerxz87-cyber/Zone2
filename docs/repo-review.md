@@ -141,7 +141,8 @@ ledger claims exists by grepping the code.
 | `rel="sponsored"` for affiliate links | Match | https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links |
 | FTC "you can't talk about your experience with a product you haven't tried" | Match | https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers |
 | `/dp/B04G1MEwY`, `/dp/B02NbDxp3`, `/dp/B00hJ57DV` | All three still return Amazon's "Page Not Found" | the three `amazon.com/dp/` URLs |
-| Where the three `link.amazon` links land | Unchanged from 2026-11-13: `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`, each with `plpRedirect=mhFallback` | those three product pages |
+| Where the three `link.amazon` links land | Unchanged from 2026-11-13 and stable per link: `B04G1MEwY`→`B0CDY277D3`, `B02NbDxp3`→`B09B7SB46R`, `B00hJ57DV`→`B08DKYBTPH`, each with its own `btn_ref` | those three product pages |
+| Whether `plpRedirect=mhFallback` proves a fallback | **No.** A bare request to a valid ASIN (`/dp/B08DKYBTPH`) returns the real product page with the same marker appended. See correction note below | same |
 | Chefman 6 Qt specs (8 rows) | All match the manufacturer page | https://chefman.com/products/turbofry-touch-dual-window-air-fryer |
 | Chefman 8 Qt specs | Model `RJ38-SQSS-8T`, 8 Qt/7.57 L, 200–400 °F, 15.4×12.6×13.5 in, 12.8 lb, cETL, 1 year — all match; the 1700 W vs 1000 W conflict stands unresolved | https://chefman.com/products/turbofry-touch-air-fryer-1 |
 | Emeril 26QT specs | Model `4-00675-02A-VN`, 26 qt/24.6 L, 16.9×15.8×14.8 in, 120 V, dual-speed fan, 1-year warranty match | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 |
@@ -153,7 +154,7 @@ ledger claims exists by grepping the code.
 | # | Finding | Where | Disposition |
 |---|---|---|---|
 | F-16 | Four compliance rows cited controls that do not exist: `site/compliance-inject.js` (R-01), `assert_no_amazon_marks` (R-11), `lint_disclosure_proximity` (R-02), `lint_claims` (R-06). R-09 also described email/SMS as absent from the schema, while the current policies *permit* solicited email/SMS/DM. | `ledger/compliance.json` | **Fixed** — rows now cite the real functions (`check_disclosure`, `check_marks`, `lint()`), and R-09 states the policy as published with the repo's stricter default labelled as self-imposed. |
-| F-17 | Dashboard KPI said "3 Verified affiliate products" and "11 items flagged"; the ledger says all three submitted items are `UNVERIFIED` and holds 19 flags. Both readings were defensible in isolation and contradictory on the page. | `index.html`, `assets/js/data.js` | **Fixed** — KPI now reads `0 / 3 submitted codes identified` and `3 fallback landing pages verified`; flag count is derived from the data, never typed. |
+| F-17 | Dashboard KPI said "3 Verified affiliate products" and "11 items flagged"; the ledger says all three submitted items are `UNVERIFIED` and holds 19 flags. Both readings were defensible in isolation and contradictory on the page. | `index.html`, `assets/js/data.js` | **Fixed** — KPI now reads `0 of 3 supplied products identified` and `3 links verified as resolving stably to one listing each`; flag count is derived from the data, never typed. (Wording revised again after the control test below: "fallback" is not supported.) |
 | F-18 | CI link check never walked `pages/` (37 pages), and the disclosure/price gate covered 4 of 6 namespaces. The gate would also have failed my own permitted program-economics dollar figures, because it used a bare `\$\d+\.\d{2}` regex while the repo's policy is context-aware. | `.github/workflows/pages.yml` | **Fixed** — `pages/` and the root views added to the link check (with fragment handling), all six namespaces covered by the price/disclosure gate using the same context-aware rule as `tools/validate_data.py`. |
 | F-19 | The published Emeril "conflict" row attributed the disagreement to Amazon-vs-manufacturer. The manufacturer page actually states **24** (description), **25** (spec tile) and **10-in-1** (feature block) — it contradicts itself. | `assets/js/data.js`, `ledger/flags.json` | **Fixed** — all four observations published verbatim, status stays `conflict`, per-value source named. |
 | — | The dashboard claimed "Home & Kitchen category commission rate (UNVERIFIED)" and that the rate card "requires Associates sign-in". **The fixed-rate table is publicly readable**; only the per-ASIN band is unresolved. | `assets/js/data.js` | **Fixed** — the two published bands (Kitchen 4.50%, Home 3.00%) are now shown as verified, with a separate `unverified` row explaining exactly what is missing and why. |
@@ -189,3 +190,34 @@ declares `kind="manufacturer"`, so they can never be used to state an Amazon-sid
 - `python3 tests/test_pipeline.py` — **11/11 pass**.
 - `python3 affiliate-lab/scripts/verify_site.py` — 10 pages / 205 rows / 498 links / **0 failures**.
 - Workflow steps simulated locally: link check **0 problems**; disclosure + price across **79 pages** **0 problems**.
+
+## R6. Correction issued during integration — the "fallback" inference is withdrawn
+
+While rebasing onto `main` at the end of this pass, session `c6e94e8d`'s controlled re-test landed
+(`docs/revalidation-2026-11-14.md`, `revalidation/`). It tests the inference that the earlier passes here
+leaned on, and the inference fails:
+
+- A **bare, untagged** request to a *valid* ASIN (`/dp/B08DKYBTPH`, `/dp/B0CDY277D3`) is answered with the real
+  product page **and the same `lv=shuf&plpRedirect=mhFallback` markers** appended. `mhFallback` is Amazon's own
+  link-rewrite plumbing, not evidence of a fallback.
+- Re-fetching a short link returns the **same** ASIN, body and per-link `btn_ref`. The "different token on
+  re-fetch" observation published on 2026-11-13 does **not** reproduce.
+
+This session reproduced both results independently on 2026-11-14 before accepting them. Consequences applied:
+
+| Item | Action |
+|---|---|
+| `ledger/flags.json` F-03 | **Downgraded** high → medium and retitled; detail now states what reproduced (9-char codes, `/dp/` 404s, stable per-link destinations, no `tag=`) and what did not (that the token was "not honoured"). |
+| `ledger/flags.json` F-12 | **Withdrawn**, kept in the register rather than deleted so the record shows the site carried an unsupported claim for a day. |
+| `ledger/products.json` | `why_blank` no longer cites `mhFallback`; each entry now records `resolves_to` (the listing the link lands on) as an observation, explicitly not as the requested product. |
+| `assets/js/data.js` | The three "link-code / ASIN mismatch" rows now say the destination is stable per link *and* that no public document binds code to ASIN. |
+| `verification.html` | Carries the control test as its own row. |
+| KPI wording | "3 fallback landing pages verified" → "3 links verified as resolving stably to one listing each". |
+
+Change requests CR-1 … CR-4 from that session are therefore **closed**: only one owner holds `ledger/**`, so
+they could not be applied by the requesting session, and they are applied here.
+
+**Net position, restated precisely.** The three supplied codes are not ASINs and do not resolve as ones. The
+three short links resolve stably, one product each, but carry no Associates tag and no public document binds
+the code to the destination. So the destinations remain *not established* as the requested products — on the
+narrower, documented ground rather than on the retracted "fallback" reading.

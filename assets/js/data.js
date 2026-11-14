@@ -637,7 +637,7 @@ const FLAGGED_ROWS = [
   {
     item: "Link-code / ASIN mismatch — Product 1",
     detail:
-      "Provided link https://link.amazon/B04G1MEwY redirects to amazon.com/dp/B0CDY277D3. The code B04G1MEwY is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Treated as an opaque short-link token; the destination ASIN B0CDY277D3 is the verified product.",
+      "Provided link https://link.amazon/B04G1MEwY resolves to amazon.com/dp/B0CDY277D3. The code B04G1MEwY is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”, and it is 9 characters where an ASIN is 10). The destination is stable per link, but no public Amazon document binds the code to that ASIN, so it is shown as “the product this link resolves to”, not as “the requested product”.",
     ledger_flag: "F-01",
     ledger_url: LEDGER_FLAGS_URL + "#F-01",
     source: "https://www.amazon.com/dp/B0CDY277D3",
@@ -645,7 +645,7 @@ const FLAGGED_ROWS = [
   {
     item: "Link-code / ASIN mismatch — Product 2",
     detail:
-      "Provided link https://link.amazon/B02NbDxp3 redirects to amazon.com/dp/B09B7SB46R. The code B02NbDxp3 is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Destination ASIN B09B7SB46R is the verified product.",
+      "Provided link https://link.amazon/B02NbDxp3 resolves to amazon.com/dp/B09B7SB46R. The code B02NbDxp3 is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). The destination is stable per link but the code-to-ASIN binding is undocumented, so it is not established as the requested product.",
     ledger_flag: "F-01",
     ledger_url: LEDGER_FLAGS_URL + "#F-01",
     source: "https://www.amazon.com/dp/B09B7SB46R",
@@ -653,7 +653,7 @@ const FLAGGED_ROWS = [
   {
     item: "Link-code / ASIN mismatch — Product 3",
     detail:
-      "Provided link https://link.amazon/B00hJ57DV redirects to amazon.com/dp/B08DKYBTPH. The code B00hJ57DV is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Destination ASIN B08DKYBTPH is the verified product.",
+      "Provided link https://link.amazon/B00hJ57DV resolves to amazon.com/dp/B08DKYBTPH. The code B00hJ57DV is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). The destination is stable per link but the code-to-ASIN binding is undocumented, so it is not established as the requested product.",
     ledger_flag: "F-01",
     ledger_url: LEDGER_FLAGS_URL + "#F-01",
     source: "https://www.amazon.com/dp/B08DKYBTPH",
