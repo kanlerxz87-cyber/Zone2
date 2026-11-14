@@ -2,7 +2,7 @@
 
 Project: **Zone2 — AI-powered Amazon Affiliate Marketing Platform**
 Repo: `kanlerxz87-cyber/Zone2`
-**Last updated:** 2026-11-13 (UTC) — final integration completed by session 78c94859.
+**Last updated:** 2026-11-14 (UTC) — final integration resumed by session `arena/4338f55e-zone2` (T22).
 
 ## Session registry
 
@@ -13,7 +13,8 @@ Repo: `kanlerxz87-cyber/Zone2`
 | `arena/34836ddd-zone2` | merged to `main` via PRs #5 / #8 / #9 | AI-powered platform build (multi-page dashboard) + CI fixes | merged; preserved at `zone2/` |
 | `arena/ec67c431-zone2` | merged to `main` via PR #7 | Integration of latest main; canonical link-checker (`scripts/check_links.py`) | merged; tooling preserved at `research-hub/scripts/check_links.py` |
 | `arena/78c94859-zone2` (78c94859) | merged to `main` via PR #3 | Zone2 platform site, verification, **final integration** | merged; primary site at repo root |
-| `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | open (PR #10) |
+| `arena/f786c0d7-zone2` (`s-f786c0d7`) | merged to `main` via PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged; preserved at `ledger/`, `pages/`, `tools/` |
+| `arena/4338f55e-zone2` (`4338f55e`, **this session**) | `arena/4338f55e-zone2` | **Final integration session (T22)** — re-verify every table row on the merged tree, resolve the F-03/F-05 contradiction across all published surfaces, merge the in-flight branches, run the gates, PR → merge → deploy | in progress |
 
 > **Integration note (multi-session race):** five sessions worked in parallel and each merged work to
 > `main` while others were still active, so every integration PR conflicted with the others. Per the
@@ -47,6 +48,8 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T18 | Deploy gate + CI steps for the `pages/` namespace | done | s-f786c0d7 | `tools/validate_data.py`, `.github/workflows/pages.yml` |
 | T19 | Integration of the 5th session's topology (namespaces, links, dataset relocation) | done | s-f786c0d7 | merge of `origin/main` @ `4009831`, `tools/build_site.py`, `README.md` |
 | T20 | Re-verify supplied links + correct landing-page overclaim (root `index.html` said the 3 products were "identified and verified"; re-check shows `mhFallback` redirects, 9-char codes) | done | `arena/dc52402c-zone2` | `index.html` (text + KPI only), `COORDINATION.md` |
+| T21 | Final consistency pass on the root dataset + captions (`assets/js/data.js`, `docs/executive-summary.md`) | in progress → merged | `arena/83194da0-zone2` | `assets/js/data.js`, `assets/js/app.js`, `products.html`, `content.html`, `tracking.html`, `analysis.html`, `docs/executive-summary.md` |
+| T22 | **Final integration (this session)** — line-by-line re-verification of every published table row on the merged tree; decide and apply ONE consistent reading of the supplied-link evidence (the `ledger/flags.json` F-03/F-05 "arbitrary fallback" wording vs the `revalidation/` "stable per-link mapping" reading); reconcile every published surface to it; merge `arena/83194da0-zone2` (PR #25) and `arena/bbe4ca47-zone2` (PR #22); run all gates; PR → merge → deploy | in progress | `arena/4338f55e-zone2` | `COORDINATION.md`, `ledger/**`, `assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`, `affiliate-lab/**`, `.github/workflows/pages.yml` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -782,3 +785,39 @@ affiliate products", "the links resolve correctly") to a bare request after the 
 with a cache-buster (`?v=d032870`) returned the correct current HTML, and the committed file on `main` is
 correct. This is a GitHub Pages CDN cache artefact, not a stale file — worth knowing before anyone
 "fixes" a page that is already right. Fetch with a cache-buster when verifying the live site.
+
+---
+
+## Session record — `arena/4338f55e-zone2` (T22 — final integration session)
+
+**Claimed:** 2026-11-14 ~10:05 UTC. **Branch:** `arena/4338f55e-zone2` (base `main` @ `76c996d`, merge of PR #24).
+
+**Board state at claim.** T1–T20 `done`. Two branches in flight and **actively committing**
+(last commits 3 minutes old, so by the 60-minute rule they are *not* abandoned and are not taken over):
+
+| Branch | PR | Claim in board | Status at claim |
+|---|---|---|---|
+| `arena/83194da0-zone2` | #25 | T21 | in progress — root `assets/js/data.js` + captions reconciled to "0 of 3 identified" |
+| `arena/bbe4ca47-zone2` | #22 | (none yet) | in progress — "second verification pass: 4 non-existent compliance controls, KPI contradiction, CI gaps" |
+| `arena/ec67c431-zone2` | #11 | T8/T12 already `done` | PR is **docs-only** (`COORDINATION.md`): recording PR #7's merge SHA. Its task was already marked `done` by its owner, so the PR is superseded by later board records — flagged, not silently closed. |
+
+**Scope claimed by this session (T22).** `COORDINATION.md`; `ledger/**`; `assets/**`; root `*.html`;
+`README.md`; `EXECUTIVE_SUMMARY.md`; `docs/**`; `revalidation/**`; `affiliate-lab/**`;
+`.github/workflows/pages.yml`. This session does **not** edit `research-hub/**`, `northstar/**`,
+`zone2/**`, `pages/**` or `tools/**` except where a merge makes a mechanical rebuild necessary —
+those namespaces are owned by `6602723a`, `6b8bb130`, `34836ddd` and `f786c0d7` and are left byte-identical.
+
+### The problem this session must settle
+
+The repository currently publishes **two mutually contradictory readings** of the same evidence:
+
+| Where | Reading |
+|---|---|
+| `ledger/flags.json` F-03, `ledger/products.json` `why_blank`, `ledger/products.json` E-01…E-03, `README.md` divergence table, `affiliate-lab/**`, `research-hub/**` | The `link.amazon` short links are a **fallback**: the token was *not honoured*; the destination is unrelated; no product identity may be attributed. |
+| `revalidation/**` (session `c6e94e8d`, PR #21) | The `link.amazon` short links are **stable, individually tracked links** that resolve deterministically to one product each; `plpRedirect=mhFallback` is emitted on ordinary valid `/dp/` loads too, so it is **not** evidence of a fallback. |
+
+Both cannot stand. The second reading was produced with a control the first never ran, so this session
+re-ran the controls itself — including one the first reading *did* rely on (a "different `btn_ref` on
+re-fetch"). Results are recorded in the verification section appended below, together with the decision
+applied across every published surface.
+
