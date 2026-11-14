@@ -2,7 +2,7 @@
 
 Project: **Zone2 — AI-powered Amazon Affiliate Marketing Platform**
 Repo: `kanlerxz87-cyber/Zone2`
-**Last updated:** 2026-11-13 (UTC) — final integration completed by session 78c94859.
+**Last updated:** 2026-11-14 (UTC) — final consistency integration by session `arena/83194da0-zone2` (T21).
 
 ## Session registry
 
@@ -13,7 +13,9 @@ Repo: `kanlerxz87-cyber/Zone2`
 | `arena/34836ddd-zone2` | merged to `main` via PRs #5 / #8 / #9 | AI-powered platform build (multi-page dashboard) + CI fixes | merged; preserved at `zone2/` |
 | `arena/ec67c431-zone2` | merged to `main` via PR #7 | Integration of latest main; canonical link-checker (`scripts/check_links.py`) | merged; tooling preserved at `research-hub/scripts/check_links.py` |
 | `arena/78c94859-zone2` (78c94859) | merged to `main` via PR #3 | Zone2 platform site, verification, **final integration** | merged; primary site at repo root |
-| `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | open (PR #10) |
+| `arena/f786c0d7-zone2` (`s-f786c0d7`) | merged to `main` via PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged; preserved at `ledger/`, `pages/`, `tools/` |
+| `arena/dc52402c-zone2` | merged to `main` via PRs #16 / #17 | T20 — re-verify supplied links + correct landing-page overclaim (`index.html` text + KPI) | merged |
+| `arena/83194da0-zone2` (T21) | this session | Final consistency integration: reconcile root `assets/js/data.js` + `docs/executive-summary.md` with the rigorous ledger (0 of 3 identified); PR/merge/deploy | in progress |
 
 > **Integration note (multi-session race):** five sessions worked in parallel and each merged work to
 > `main` while others were still active, so every integration PR conflicted with the others. Per the
@@ -47,6 +49,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T18 | Deploy gate + CI steps for the `pages/` namespace | done | s-f786c0d7 | `tools/validate_data.py`, `.github/workflows/pages.yml` |
 | T19 | Integration of the 5th session's topology (namespaces, links, dataset relocation) | done | s-f786c0d7 | merge of `origin/main` @ `4009831`, `tools/build_site.py`, `README.md` |
 | T20 | Re-verify supplied links + correct landing-page overclaim (root `index.html` said the 3 products were "identified and verified"; re-check shows `mhFallback` redirects, 9-char codes) | done | `arena/dc52402c-zone2` | `index.html` (text + KPI only), `COORDINATION.md` |
+| T21 | Final consistency integration: reconcile root `assets/js/data.js` + root page captions + `docs/executive-summary.md` §3 with the rigorous ledger (0 of 3 identified; fallback destinations = evidence only; content Blocked F-06; tracking Planned F-07). Root `index.html`/`README.md`/`EXECUTIVE_SUMMARY.md` were already honest; `data.js` still populated brand/title/category from fallbacks and marked content "Ready"/tracking "Configured". | in progress | `arena/83194da0-zone2` | `assets/js/data.js`, `assets/js/app.js`, `products.html`, `content.html`, `tracking.html`, `analysis.html`, `docs/executive-summary.md`, `COORDINATION.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
