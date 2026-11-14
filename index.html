@@ -33,7 +33,7 @@
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="num">3</div><div class="lbl">Verified affiliate products</div></div>
+      <div class="kpi"><div class="num">0 of 3</div><div class="lbl">Supplied products identified from official sources</div></div>
       <div class="kpi"><div class="num">1</div><div class="lbl">Niche — Home &amp; Kitchen air fryers</div></div>
       <div class="kpi"><div class="num">Up to 10%</div><div class="lbl">Official program commission ceiling</div></div>
       <div class="kpi"><div class="num">11</div><div class="lbl">Items flagged for review</div></div>
@@ -53,16 +53,18 @@
       </p>
       <p>
         Three affiliate links were supplied for this engagement. Each short link
-        (<code>link.amazon/…</code>) resolves to a live Amazon product page. All three products sit in the
-        <strong>Home &amp; Kitchen</strong> category and the same air-fryer niche: a CHEFMAN 6-quart dual
-        basket air fryer oven (destination ASIN B0CDY277D3), an Emeril Lagasse 26QT French-door air fryer
-        toaster oven (B09B7SB46R), and a Chefman 8-quart TurboFry 4-in-1 air fryer (B08DKYBTPH).
+        (<code>link.amazon/…</code>) redirects through <code>plpRedirect=mhFallback</code> to an unrelated
+        Amazon air-fryer listing: a CHEFMAN 6-quart dual basket air fryer oven (B0CDY277D3), an Emeril Lagasse
+        26QT French-door air fryer toaster oven (B09B7SB46R), and a Chefman 8-quart TurboFry air fryer
+        (B08DKYBTPH). These are fallback destinations, not confirmed mappings, so none of the three supplied
+        products has been identified.
       </p>
       <p>
-        One irregularity applies to all three links: the code in each <code>link.amazon</code> URL differs
-        from the destination ASIN and is not itself a valid Amazon <code>/dp/</code> ASIN. The links resolve
-        correctly, so the products are identified and verified — but the code/ASIN mismatch is flagged for
-        your review on the <a href="flagged.html">Flagged for Review</a> page. Pricing, ratings, review
+        Irregularity applies to all three links: each code in a <code>link.amazon</code> URL is 9 characters
+        (an Amazon ASIN is 10), and <code>amazon.com/dp/&lt;code&gt;</code> returns Page Not Found for each.
+        The fallback destinations are therefore not treated as the requested products. This is flagged for
+        your review on the <a href="flagged.html">Flagged for Review</a> page; the owner must confirm the
+        intended ASINs. Pricing, ratings, review
         counts, availability and the category commission rate could not be confirmed from official sources
         through automated verification and are therefore left blank and flagged, in line with the
         no-inference rule.
