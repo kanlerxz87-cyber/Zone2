@@ -19,7 +19,8 @@ anything unconfirmed is left blank and published on a Flagged for Review page ra
 | Page | Purpose |
 |---|---|
 | `index.html` | Dashboard — executive summary, verified platform facts, capabilities |
-| `products.html` | Product catalog + manufacturer spec tables, per-row source links |
+| `products.html` | Product catalog + manufacturer spec tables + the supplied-link resolution evidence, per-row source links |
+| `categories.html` | **Category directory** — the 11 published commission bands, their rates, and the products assigned to them from their own category paths |
 | `analysis.html` | Niche, pricing, competition and commission-potential analysis |
 | `content.html` | SEO content plan (articles, comparisons, buying guides) |
 | `compliance.html` | Associates policy and disclosure requirements |
@@ -83,6 +84,7 @@ Earlier sessions concluded from the redirect alone that the destinations were *a
 | Redirect markers | every target carries `plpRedirect=mhFallback` and `lv=shuf` |
 | Same-day re-fetch | **Corrected 2026-11-14:** re-fetched twice, the link returned the same `/dp/` path, the same page body and the **same** `btn_ref` token — the "shuffle" is not reproducible. See `revalidation/`. |
 | Control (added 2026-11-14) | A **bare, untagged** request to a *valid* ASIN (`/dp/B08DKYBTPH`) is also answered with `plpRedirect=mhFallback&lv=shuf` appended. The marker is therefore not evidence of a fallback. |
+| Re-measured (2026-11-14, session `0a3dff48`) | All three links resolve to the same three ASINs again, and the control holds on a second valid ASIN. The per-request `srctok` token **rotates between days** while the destination ASIN never changes — a tracked source link, not a shuffle. Only the destination ASIN is a stable identifier. |
 | Associates tag | absent from all three resolved URLs — under OA §1 a Special Link must use Amazon's tagged format, so as supplied these links cannot be relied on to attribute commission. |
 
 **What this does and does not settle.** The supplied codes are not ASINs, so the codes alone identify
@@ -105,7 +107,7 @@ and **RV-01…RV-03** in [`revalidation/flagged.html`](revalidation/flagged.html
 |---|---|---|---|
 | `assets/js/data.js` | primary site's dataset | workflow link/asset + data-parse steps | yes |
 | `ledger/` | `pages/` dataset: products, commission table, compliance rules, modules, flags, verification log, sources, niches, campaigns | `tools/validate_data.py` + `tests/test_pipeline.py` | yes |
-| `research-hub/data/` | hub dataset: products, compliance, requirements, sources, raw log | `research-hub/scripts/verify.py` | **no** — see below |
+| `research-hub/data/` | hub dataset: products, compliance, requirements, sources, raw log | `research-hub/scripts/verify.py` | **yes** — added 2026-11-14 |
 
 `tools/validate_data.py` fails the build when a row carries a value without a source, or a blank without a
 flag; when a source host is outside the allowlist (`affiliate-program.amazon.com`, `amazon.com`,
@@ -113,9 +115,27 @@ flag; when a source host is outside the allowlist (`affiliate-program.amazon.com
 when any performance metric is invented rather than reported; when an Amazon mark appears in an identifier
 this project controls; when a page with a sponsored link lacks the disclosure sentence; when a page prints a
 **product** price; when the landing loses its route into `pages/`; or when an internal link breaks (949
-links checked). `scripts/verify.py` for the hub is currently **stale after the namespace move** — it resolves
-its repository root to `research-hub/` and reports seven false failures; running it is not part of CI. Logged
-as **I-27** rather than patched, since `research-hub/**` belongs to another session.
+links checked).
+
+**Repaired 2026-11-14 (session `0a3dff48`).** The hub's own verifier was stale after the namespace move
+(**I-27**): it resolved its repository root to `research-hub/` and reported seven false failures, so its
+per-row sourcing guard was disconnected. It now resolves the repository root correctly and passes
+(3 products, 38 sourced attribute rows, 16 requirements, 13 pages, 0 errors). Two further defects were fixed
+in the same namespace and are now gated in CI:
+
+* `research-hub/scripts/build.py` **deleted its own 16 generated pages and then crashed** — it looked for
+  `research-hub/docs/executive-summary.md`, which had moved to the repository root, and it emitted pre-move
+  link paths (`index.html`, `zone2/index.html`) that no longer resolve from `research-hub/`. Anyone who ran
+  the build would have destroyed the hub. It now resolves the document, emits post-move links, and supports
+  `python3 research-hub/scripts/build.py --check`, which builds into a temporary directory and proves the
+  committed output is exactly what the generator produces.
+* `tests/test_render.js` (new) stubs the DOM, runs `assets/js/app.js`, and asserts that every table on every
+  root page renders with at least one official source link. `node --check` only proves the JavaScript parses.
+
+CI now runs, on every push and pull request: the internal-link check, the primary render test, the research-hub
+rebuild check and per-row verifier, the affiliate-lab verifier, the revalidation rebuild check and gate, the
+`pages/` rebuild check and deploy gate, the platform guard tests, the disclosure/no-price sweeps, and the
+JSON parse checks.
 
 ## Platform code (`tools/`)
 
@@ -137,6 +157,8 @@ python3 tools/build_site.py --check     # fail if committed pages/ drift (conten
 python3 tools/validate_data.py          # deploy gate -> JSON report, non-zero exit on any error
 python3 tests/test_pipeline.py          # 11 executable guard checks
 python3 tools/scoring.py                # published bands + scoring behaviour
+node tests/test_render.js               # every root-page table renders and carries a source link
+python3 research-hub/scripts/build.py --check   # research-hub output matches a fresh build
 PYTHONPATH=tools python3 tools/amazon_creators_api.py   # prints the BLOCKED reason (no credentials here)
 ```
 

@@ -22,6 +22,21 @@
     return '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(label || url) + "</a>";
   }
 
+  /* A source cell may name one official page or several (a value assembled from two
+     official pages must link to both). Accepts a string or an array of strings. */
+  function sourceCell(value, label) {
+    if (Array.isArray(value)) {
+      return value
+        .map(function (u, i) {
+          var text = label;
+          if (Array.isArray(label)) text = label[i];
+          return link(u, text || u.replace("https://", ""));
+        })
+        .join("<br>");
+    }
+    return link(value, label);
+  }
+
   function badge(status) {
     if (status === "verified") return '<span class="badge ok">Verified</span>';
     if (status === "conflict") return '<span class="badge warn">Conflict</span>';
@@ -133,7 +148,7 @@
         { key: "attribute", label: "Attribute" },
         { key: "value", label: "Value" },
         { key: "status", label: "Status", render: function (r) { return badge(r.status); } },
-        { key: "source", label: "Official source", link: true, linkLabels: {} },
+        { key: "source", label: "Official source", render: function (r) { return sourceCell(r.source, r.sourceLabel); } },
       ],
       SPECS
     );
@@ -226,7 +241,7 @@
       [
         { key: "item", label: "Flagged item" },
         { key: "detail", label: "Details" },
-        { key: "source", label: "Source", link: true },
+        { key: "source", label: "Source", render: function (r) { return sourceCell(r.source, r.sourceLabel); } },
       ],
       FLAGGED_ROWS
     );

@@ -7,3 +7,15 @@
 .disclosure-strip strong{color:#fff}
 .disclosure-strip a{color:#9cc0ff;text-decoration:none}
 .disclosure-strip a:hover{text-decoration:underline}
+
+/* Added 2026-11-14 (session 0a3dff48): label this copy as the earlier prototype so a
+   reader who follows the footer link can tell it apart from the primary dashboard. */
+.prototype-banner {
+  background: #fff8e6;
+  border-bottom: 1px solid #f0dcae;
+  color: #6b4c00;
+  padding: 10px 20px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.prototype-banner a { color: #8a5a00; font-weight: 600; }

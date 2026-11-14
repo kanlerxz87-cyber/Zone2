@@ -167,15 +167,15 @@
     {
       "id": "F-13",
       "severity": "low",
-      "title": "Review note: one merged page title leads with an Amazon mark",
-      "detail": "compliance.html is titled 'Amazon rules this site complies with'. The Participation Requirements prohibit an Amazon mark in a domain name, subdomain, tag/Associates ID, or social identifier - a page title is none of those, and descriptive reference plus the mandated disclosure sentence are permitted. Flagged only because a title that opens with the mark can read as an official Amazon property, and Section 5 forbids implying endorsement or affiliation. Recorded as a build warning, not a failure.",
-      "impact": "No functional impact; low-risk naming judgement call for the owner.",
-      "action_required": "Optional: reword the title (e.g. 'Program rules this site complies with').",
+      "title": "Review note (resolved): one merged page title led with an Amazon mark",
+      "detail": "compliance.html in the research-hub namespace was titled 'Amazon rules this site complies with'. The Participation Requirements prohibit an Amazon mark in a domain name, subdomain, tag/Associates ID, or social identifier - a page title is none of those, and descriptive reference plus the mandated disclosure sentence are permitted. It was flagged because a title that opens with the mark can read as an official Amazon property, and Section 5 forbids implying endorsement or affiliation. Reworded on 2026-11-14 to 'Program rules this site complies with'; the build now emits 0 mark findings and 0 mark review notes.",
+      "impact": "No functional impact. The naming judgement call has been applied and the build warning is cleared.",
+      "action_required": "None - closed on 2026-11-14 by rewording the generated title.",
       "source_ids": [
         "S01",
         "S02"
       ],
-      "owner": "user"
+      "owner": "done"
     },
     {
       "id": "F-14",
@@ -192,14 +192,14 @@
     {
       "id": "F-15",
       "severity": "medium",
-      "title": "The hub's own verifier is stale after the namespace move, so its per-row sourcing guard is not running",
-      "detail": "`python3 research-hub/scripts/verify.py` prints 7 failures on the current tree: it computes its repository root as the script's parent directory (research-hub/), so it looks for research-hub/index.html, app.js, data.js and styles.css - files that now live elsewhere or not at all - and it flags research-hub/start.html's own ../zone2/index.html link as 'escaping the repository'. Its expected-file list also still names the pre-move root layout. The workflow does not invoke this script any more (it runs its own link/asset/data checks), so nothing is blocked and CI is green; but the hub's rows are no longer policed by the guard that was written for them.",
-      "impact": "No published error. Risk: a future edit to research-hub/data/products.json could add an unsourced 'verified' row and no check would catch it, because the only guard for that namespace is currently mis-pointed.",
-      "action_required": "Owner/reviewer: re-point the verifier's ROOT at the repo root (parents[2]) and update its required-file list to the post-move layout, or fold its per-row rules into the workflow's data checks. Not done here: research-hub/** is another session's scope, so this is recorded as a change request.",
+      "title": "The hub's own verifier was stale after the namespace move (repaired 2026-11-14)",
+      "detail": "`python3 research-hub/scripts/verify.py` printed 7 failures on the tree it inherited: it computed its repository root as the script's parent directory (research-hub/), so it looked for research-hub/index.html, app.js, data.js and styles.css - files that live elsewhere or not at all - and it flagged research-hub/start.html's own ../zone2/index.html link as 'escaping the repository'. Its expected-file list also still named the pre-move root layout, and it treated the other sessions' assets as orphans. Repaired on 2026-11-14: it now resolves the repository root via parents[2], distinguishes hub-owned pages from pages owned by another session, and checks the hub's own required pages. It reports 3 products, 38 sourced attribute rows, 16 requirements, 13 pages and 0 errors, and it now runs in CI on every push and pull request.",
+      "impact": "Resolved. The hub's rows are policed again by the guard that was written for them: an unsourced 'verified' row added to research-hub/data/products.json now fails the build.",
+      "action_required": "None - closed on 2026-11-14.",
       "source_ids": [
         "S22"
       ],
-      "owner": "user"
+      "owner": "done"
     },
     {
       "id": "F-16",
@@ -227,6 +227,30 @@
         "S21"
       ],
       "owner": "done"
+    },
+    {
+      "id": "F-18",
+      "severity": "high",
+      "title": "The research-hub generator deleted its own 16 generated pages and then crashed",
+      "detail": "`research-hub/scripts/build.py` removed the hub's generated output first and only then tried to read docs/executive-summary.md from inside the research-hub namespace, where the document no longer lives (it had moved to the repository root during the namespace move). The run therefore left the hub with no pages and an error. It also emitted pre-move link paths - index.html and zone2/index.html - which do not resolve from research-hub/, so even a successful rebuild would have produced broken links. Anyone who ran the build would have destroyed the hub.",
+      "impact": "Data loss in the generated namespace and broken navigation if the generator is run. It was not run by CI at the time, so the committed pages were unaffected - the damage was latent.",
+      "action_required": "Closed on 2026-11-14: the document is resolved from the repository root, the emitted paths are post-move, and `python3 research-hub/scripts/build.py --check` builds into a temporary directory to prove the committed output matches a fresh build without touching it. The check runs in CI.",
+      "source_ids": [
+        "S22"
+      ],
+      "owner": "done"
+    },
+    {
+      "id": "F-19",
+      "severity": "low",
+      "title": "Conflict: Emeril Lagasse model number differs between the Amazon listing and the manufacturer's store",
+      "detail": "For the product the supplied link https://link.amazon/B02NbDxp3 resolves to (amazon.com/dp/B09B7SB46R), the Amazon listing gives model number 4-00675-02X-VN while the manufacturer's own store gives 4-00675-02A-VN for the French Door AirFryer 360, 26 QT. Both official pages are cited side by side; neither is presented as definitive. The manufacturer figure is the one carried in the spec table, with the Amazon figure beside it.",
+      "impact": "No functional impact. A model-number mismatch is the kind of thing that breaks warranty lookups and parts matching, so it is recorded for the owner.",
+      "action_required": "Optional: confirm which model number the sold unit carries in Associates Central / the supplier invoice. Both values are published; neither is asserted.",
+      "source_ids": [
+        "S20"
+      ],
+      "owner": "user"
     }
   ]
 }

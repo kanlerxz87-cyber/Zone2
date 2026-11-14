@@ -142,10 +142,14 @@ const SPECS = [
   {
     pid: "p1",
     attribute: "Capacity",
-    value: "6 qt total (two independent 3-qt baskets)",
+    value:
+      "6 qt / 5.67 L total across two baskets (Chefman); the Amazon listing title states 2 independent 3 qt baskets",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page", "Amazon product page (listing title)"],
   },
   {
     pid: "p1",
@@ -182,10 +186,14 @@ const SPECS = [
   {
     pid: "p1",
     attribute: "Control type",
-    value: "Digital touchscreen",
+    value:
+      "Touch panel — Chefman names the product \u201cTurboFry\u00ae Touch Dual-Window Air Fryer\u201d; the Amazon listing title states \u201cDigital Double Air Fryer\u201d",
     status: "verified",
-    source: "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-    sourceLabel: "Chefman official product page",
+    source: [
+      "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "https://www.amazon.com/dp/B0CDY277D3",
+    ],
+    sourceLabel: ["Chefman official product page (product name)", "Amazon product page (listing title)"],
   },
   {
     pid: "p1",
@@ -207,10 +215,13 @@ const SPECS = [
   {
     pid: "p2",
     attribute: "Model number",
-    value: "4-00675-02A-VN",
-    status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
+    value: "4-00675-02A-VN (manufacturer store) · 4-00675-02X-VN (Amazon listing)",
+    status: "conflict",
+    source: [
+      "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+      "https://www.amazon.com/dp/B09B7SB46R",
+    ],
+    sourceLabel: ["Emeril Everyday official store", "Amazon product page (listing)"],
   },
   {
     pid: "p2",
@@ -241,8 +252,11 @@ const SPECS = [
     attribute: "Cooking functions / presets",
     value: "24 per Amazon listing title; 25 per the manufacturer's spec tile",
     status: "conflict",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Amazon title + Emeril Everyday spec tile (conflict)",
+    source: [
+      "https://www.amazon.com/dp/B09B7SB46R",
+      "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+    ],
+    sourceLabel: ["Amazon product page (listing title)", "Emeril Everyday official store (spec tile)"],
   },
   {
     pid: "p2",
@@ -266,8 +280,11 @@ const SPECS = [
     value:
       "Manufacturer states 7 premium accessories (basket, rotisserie spit, bake pan among them); Amazon's list differs in detail — itemised count not asserted",
     status: "verified",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-    sourceLabel: "Emeril Everyday official store",
+    source: [
+      "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+      "https://www.amazon.com/dp/B09B7SB46R",
+    ],
+    sourceLabel: ["Emeril Everyday official store", "Amazon product page (listing)"],
   },
   {
     pid: "p2",
@@ -299,8 +316,11 @@ const SPECS = [
     attribute: "Power",
     value: "1700 W / 120 V (Chefman) vs 1000 W / 120 V (Amazon bullet text)",
     status: "conflict",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official page vs Amazon listing (conflict)",
+    source: [
+      "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+    ],
+    sourceLabel: ["Chefman official page", "Amazon product page (bullet text)"],
   },
   {
     pid: "p3",
@@ -324,8 +344,11 @@ const SPECS = [
     value:
       "Manufacturer: 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm) · Amazon spec table: 12.75\"D × 13.5\"W × 10\"H",
     status: "conflict",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
-    sourceLabel: "Chefman official page vs Amazon listing (conflict)",
+    source: [
+      "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+    ],
+    sourceLabel: ["Chefman official page", "Amazon product page (spec table)"],
   },
   {
     pid: "p3",
@@ -854,19 +877,41 @@ const FLAGGED_ROWS = [
     item: "Conflict — Emeril Lagasse cooking functions / presets",
     detail:
       "The Amazon listing title states 24 cooking functions; the manufacturer's spec tile states 25 cooking pre-sets. Both values are published; neither is presented as definitive.",
-    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+    source: [
+      "https://www.amazon.com/dp/B09B7SB46R",
+      "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+    ],
+    sourceLabel: ["Amazon product page (listing title)", "Emeril Everyday official store (spec tile)"],
   },
   {
     item: "Conflict — Chefman 8 Qt power rating",
     detail:
       "Amazon bullet text for B08DKYBTPH states 1000 Watts/120 Volts; Chefman's official product page states 1700 W / 120 V for the same model number. Manufacturer figure published; conflict flagged.",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
+    source: [
+      "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+    ],
+    sourceLabel: ["Chefman official page", "Amazon product page (bullet text)"],
   },
   {
     item: "Conflict — Chefman 8 Qt dimensions",
     detail:
       "Chefman's official page states 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm); Amazon's spec table states 12.75\"D × 13.5\"W × 10\"H. Both published as separate conflicting rows.",
-    source: "https://chefman.com/products/turbofry-touch-air-fryer-1",
+    source: [
+      "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+    ],
+    sourceLabel: ["Chefman official page", "Amazon product page (spec table)"],
+  },
+  {
+    item: "Conflict — Emeril Lagasse model number",
+    detail:
+      "The Amazon listing gives 4-00675-02X-VN; the manufacturer's official store gives 4-00675-02A-VN for the same French Door AirFryer 360, 26 QT. Both are published side by side and neither is presented as definitive; the manufacturer figure is the one carried in the spec table.",
+    source: [
+      "https://www.amazon.com/dp/B09B7SB46R",
+      "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+    ],
+    sourceLabel: ["Amazon product page (listing)", "Emeril Everyday official store"],
   },
   {
     item: "Associates tag absent on resolved short links",

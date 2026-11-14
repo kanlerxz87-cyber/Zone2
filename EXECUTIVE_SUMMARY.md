@@ -1,8 +1,9 @@
 # Executive Summary — AI-Powered Amazon Affiliate Platform (Zone2)
 
 **Status:** platform built, site live, three requested products **unmarketable as supplied** (details below).
-**Verified:** 2026-11-13 (UTC). Every figure in this file is transcribed from a source listed in
-[`data/sources.json`](data/sources.json); nothing is estimated, averaged, or inferred.
+**Verified:** 2026-11-13 (UTC), independently re-verified 2026-11-14 (session `0a3dff48`). Every figure in this
+file is transcribed from a source listed in [`ledger/sources.json`](ledger/sources.json); nothing is estimated,
+averaged, or inferred.
 **Live site:** https://kanlerxz87-cyber.github.io/Zone2/
 
 ---
@@ -31,6 +32,14 @@ not random.
 > same markers appended; and re-fetching a short link returns the same ASIN, body and `btn_ref` token. The
 > destinations are stable and individually tracked — not arbitrary. Evidence and sources:
 > [`revalidation/`](revalidation/index.html).
+>
+> **Re-measured 2026-11-14 (session `0a3dff48`), independently.** All three links resolve to the same three
+> destination ASINs again, and a bare untagged fetch of `/dp/B0CDY277D3` again returns the real product page
+> with the same `plpRedirect=mhFallback` marker. One further detail emerged: the per-request `srctok`
+> attribution token **rotates between days** (`B04G1MEwY`: `srctok-1e229870efde5acf` → `srctok-1f979f303a4b5691`)
+> while the destination ASIN never changed. A rotating source-attribution token on a fixed destination is the
+> behaviour of a tracked source link, and it means the token must not be used as a stable identifier — only
+> the destination ASIN is one. Evidence: [`revalidation/`](revalidation/index.html), flag RV-11.
 
 **Consequence — narrower than first reported.** The supplied *codes* are still not ASINs (9 characters;
 `/dp/<code>` → Page Not Found), and **no public Amazon document binds a `link.amazon` code to a destination
@@ -86,6 +95,15 @@ the attribute tables record them as *the product each link resolves to*.
 
 Nine category groups pay **0.00%**, so the niche filter excludes them *before* ranking — the single most
 actionable economics finding in the brief.
+
+**Which band applies to these three products.** Table 1 splits the *Home & Kitchen* department into two rows:
+`Kitchen` at **4.50%** and `Home` at **3.00%**. All three destination product pages carry the category path
+`Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers`, which names the **Kitchen**
+band, so 4.50% is the published rate for that band. What still cannot be confirmed from a public page is the
+rate Amazon applies to one *individual* ASIN: the account rate card
+(`https://affiliate-program.amazon.com/help/operating/schedule`) redirects to Amazon sign-in, so that cell is
+left blank and flagged (F-16) rather than inferred from the band. Re-verified 2026-11-14: the public Standard
+Commission Income Statement renders Table 1 **without** signing in.
 
 ## 4. Compliance posture (all four surfaces)
 
