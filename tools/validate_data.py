@@ -379,12 +379,18 @@ def check_published_counts(report: Report, canonical_flags: int) -> None:
     # README.md, neither of which owned_pages() covers because other gates police the root namespace.
     scope = sorted(REPO.glob("*.html")) + sorted((REPO / "pages").rglob("*.html"))
     scope += sorted(REPO.glob("*.md")) + sorted((REPO / "docs").glob("*.md"))
-    # COORDINATION.md is excluded on purpose. It is an append-only chronological log, so it quotes
-    # counts that were correct when they were written ("the merged register holds 26 flags …").
-    # Rewriting those lines would falsify the log; they are a record of a past state, not a claim
-    # about the current register. Everywhere a reader is told what the site publishes *now* —
-    # README.md, EXECUTIVE_SUMMARY.md, flagged.html, pages/ — is in scope.
-    scope = [p for p in scope if p.name != "COORDINATION.md"]
+    # Two exclusions, both for the same reason.
+    #   COORDINATION.md    — an append-only chronological log; it quotes counts that were correct when
+    #                        they were written ("the merged register holds 26 flags …").
+    #   docs/verification-*.md — a dated per-session verification log. It quotes the *defective* count it
+    #                        was written to prove ("flagged.html carried the hardcoded sentence
+    #                        '26 flags (F-01 … F-26)'"), so a count in it is evidence, not a claim.
+    # Rewriting either would falsify the record. Everywhere a reader is told what the site publishes
+    # *now* — README.md, EXECUTIVE_SUMMARY.md, flagged.html, pages/ — stays in scope.
+    scope = [
+        p for p in scope
+        if p.name != "COORDINATION.md" and not (p.parent.name == "docs" and p.name.startswith("verification-"))
+    ]
     for path in scope:
         text = path.read_text(encoding="utf-8", errors="ignore")
         for pattern, label, expected, which in checks:
@@ -421,6 +427,69 @@ def check_published_counts(report: Report, canonical_flags: int) -> None:
                         f"{name}:{line_no}: typed count '{m.group(0)}' but the register holds "
                         f"{canonical} flags - derive the caption from CANONICAL_FLAG_COUNT"
                     )
+
+
+def _flag_prose_pages():
+    """Pages that speak for THIS namespace's register: the generated subpages plus the root dashboard.
+
+    Deliberately narrower and wider than owned_pages(): it adds the root pages (products.html,
+    flagged.html and friends are not in owned_pages()), and it excludes the companion namespaces —
+    affiliate-lab/ publishes its OWN register and legitimately says "13 flags", and pages/flags.html
+    quotes historical counts (11, 15) while narrating how F-17 and F-26 were found.
+    """
+    skip_rel = {"pages/flags.html"}
+    seen = set()
+    for path in sorted((REPO / "pages").rglob("*.html")):
+        if SKIP_DIRS.intersection(path.parts):
+            continue
+        rel = path.relative_to(REPO).as_posix()
+        if rel in skip_rel:
+            continue
+        seen.add(path)
+        yield path
+    for path in sorted(REPO.glob("*.html")):
+        rel = path.relative_to(REPO).as_posix()
+        if rel in skip_rel or path in seen:
+            continue
+        yield path
+    # Hand-authored docs drifted the same way and nothing caught them: README.md advertised
+    # "14 items" and the executive summary "11 items" while the register held 26 and then 27.
+    for name in ("README.md", "EXECUTIVE_SUMMARY.md"):
+        path = REPO / name
+        if path.exists():
+            yield path
+
+
+def check_no_typed_flag_counts(report: Report) -> None:
+    """Prose must not hardcode the size of the flag register; it drifts the moment a flag is added.
+
+    F-26 pinned the *KPI* (CANONICAL_FLAG_COUNT) to the ledger. Root flagged.html still carried the
+    sentence "26 flags (F-01 … F-26)" in hand-written prose, which no gate compared against the
+    register — so when session ba8b2d38 added F-28 (the valid-ASIN control), the page went on telling
+    readers the register held 26 while it held 27. Same defect class as F-26, different surface: a
+    green `--check` proves the *data* matches the ledger, not that the sentence does.
+
+    The page now renders the count from data; this check keeps a typed number from creeping back in.
+    """
+    doc = _load("flags.json")
+    canonical = len(doc.get("flags", []))
+    # A typed register size in prose looks like "26 flags", "26 items flagged", "26 open flags".
+    # Deliberately narrow: an "F-01 … F-NN" range check was tried first and rejected, because pages
+    # legitimately cite a SUBSET of flags that way (index.html cites <code>F-01…F-03</code> in a table
+    # cell). Only a count phrase is unambiguous enough to fail the build on.
+    pattern = re.compile(
+        r"\b(\d+)\s+(?:flags|items flagged|open flags|flagged items)\b", re.IGNORECASE
+    )
+    for path in _flag_prose_pages():
+        rel = path.relative_to(REPO).as_posix()
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for m in pattern.finditer(text):
+            if int(m.group(1)) != canonical:
+                report.fail(
+                    f"{rel}: prose states '{m.group(0)}' but ledger/flags.json holds {canonical} - "
+                    "render this number from the data (see #flagRegisterCount) instead of typing it"
+                )
+    report.stats["typed_flag_counts_checked"] = canonical
 
 
 def check_no_product_prices(report: Report) -> None:
@@ -474,6 +543,7 @@ def main(strict: bool = True) -> Report:
         check_disclosure(report)
         check_landing_links_here(report)
         check_flag_count(report)
+        check_no_typed_flag_counts(report)
         check_no_product_prices(report)
         check_links(report)
     except FileNotFoundError as exc:

@@ -1,18 +1,20 @@
 {
-  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-29 to F-31 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-31's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-32 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code.",
+  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-29 to F-31 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-31's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-32 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code. F-33 was added 2026-11-14 by session d3ce1c29: commit d6ec452 truncated the shared task board by 1,831 lines; the board is restored from git history in the same pass.",
   "as_of": "2026-11-14",
   "flags": [
     {
       "id": "F-01",
       "severity": "high",
       "title": "Submitted tokens are not valid ASINs",
-      "detail": "B04G1MEwY, B02NbDxp3 and B00hJ57DV are each 9 characters. The ASIN identifier is 10 characters, so none of the three can address a catalog record as written. Each is alphanumeric, so only the length fails - consistent with a truncation, but the missing character is not recoverable and was not guessed.",
+      "detail": "B04G1MEwY, B02NbDxp3 and B00hJ57DV are each 9 characters. The ASIN identifier is 10 characters (Amazon defines it as 'the 10-digit code that Amazon uses to denote specific products', S24), so none of the three can address a catalog record as written. Each is alphanumeric, so only the length fails. A control run on 2026-11-14 settles what that means: passing a VALID 10-character ASIN to the same link.amazon short-link service returns the identical 404 page as an unknown code (E-11, source S36), so the service does not accept or truncate ASINs at all. The supplied codes are opaque short-link identifiers native to that service, and their resemblance to a truncated ASIN is a coincidence of appearance. No missing character was ever guessed, and none is recoverable. See F-28, which records the control and withdraws the earlier 'consistent with a truncation' wording.",
       "impact": "Product identity, and every dependent field (title, brand, category, price, rating, commission band, competition), is unavailable.",
       "action_required": "Re-supply the full 10-character ASIN or the complete amazon.<tld>/dp/<ASIN> URL for each item.",
       "source_ids": [
         "S16",
         "S17",
-        "S18"
+        "S18",
+        "S24",
+        "S36"
       ],
       "owner": "user"
     },
@@ -379,6 +381,22 @@
       "published_on": "pages/flags.html"
     },
     {
+      "id": "F-28",
+      "severity": "low",
+      "owner": "done",
+      "title": "The \"one-character truncation\" reading of the supplied 9-character codes is not supported",
+      "detail": "Evidence row E-05 recorded that each supplied code is 9 characters while an ASIN is 10, and offered the interpretation \"Pattern is consistent with a one-character truncation\". Session ba8b2d38 ran the control that tests it: passing a VALID 10-character ASIN (B0CDY277D3, which renders normally at amazon.com/dp/B0CDY277D3) to the same short-link service returns the identical 404 page as an unknown code (E-11, source S36). A service that accepted and truncated ASINs would resolve a correct one; this service does not accept ASINs at all. The 9-character codes are therefore opaque short-link identifiers, and their resemblance to a truncated ASIN is appearance only. Nothing else changes: the tokens are still not ASINs (F-01), no character was ever guessed, and the three destinations are unchanged. The interpretation in E-05 is marked corrected in place rather than deleted, so the record still shows what the site said and why. NOTE ON NUMBERING: this finding was first written up locally as F-27; when it was rebased onto main, session b38cc982 had already published a different F-27 (research-hub/scripts/build.py deletes its own output), so this one was renumbered to F-28 rather than overwrite theirs.",
+      "impact": "No published figure changes. It removes a plausible-sounding but unsupported explanation that a reader could otherwise use to assume the supplied links are simply mistyped ASINs and \"obviously\" refer to a recoverable product - which would invite exactly the guess this project refuses to make.",
+      "action_required": "None. Reproduce the control by opening https://link.amazon/B0CDY277D3 in a browser; compare with https://link.amazon/B00TEST12 (unknown code) and https://www.amazon.com/dp/B0CDY277D3 (valid product).",
+      "status": "closed",
+      "source_ids": [
+        "S36",
+        "S19",
+        "S32"
+      ],
+      "published_on": "pages/flags.html"
+    },
+    {
       "id": "F-29",
       "severity": "medium",
       "owner": "done",
@@ -432,6 +450,20 @@
       "status": "closed",
       "source_ids": [
         "S02"
+      ],
+      "published_on": "pages/flags.html"
+    },
+    {
+      "id": "F-33",
+      "severity": "high",
+      "owner": "user",
+      "title": "Commit d6ec452 deleted 1,831 lines of COORDINATION.md — the whole session registry and task board (T1…T26)",
+      "detail": "Found 2026-11-14 by session d3ce1c29 while merging `main`. Commit `d6ec452` (\"coordination: claim T27 for session ba8b2d38 (independent close-out)\") reduced COORDINATION.md from 204,283 bytes to 43,819 bytes: `1 file changed, 51 insertions(+), 1831 deletions(-)`. The deleted block is the file header, the **session registry** for every session that has worked on this repository (6b8bb130, 6602723a, 34836ddd, ec67c431, 78c94859, f786c0d7, dc52402c, dc15ce5a, bbe4ca47, 82a2d436, 83194da0, 4338f55e, dd87f326, cdfaeefe and others) and the **task board T1 … T26** with each task's status, owner and file scope. Only the trailing session records survived. The commit message records no intent to rotate or archive the board, and `git ls-tree origin/main` shows no archive file was added, so this is recorded as an accident rather than a decision. The loss is not in the published site — no page renders COORDINATION.md — but the board is the mechanism this brief specifies for keeping parallel sessions from duplicating or colliding, and 160 KB of it was gone for the whole of the T27 close-out.",
+      "impact": "Without the registry and the board, a session cannot tell which task another session owns or which files are in its scope. That is precisely why flag ids collided three times in one day (F-20/F-21, F-22, then F-27/F-28 and S36/V-51…V-62 during this session's merge).",
+      "action_required": "Restored in this session: the board is rebuilt from `2577b70` (the last commit that still carried it) and every line that `d6ec452`…`817b6bb` added on top is re-appended, verified by a line-set check that reports **0 lines unique to main not carried over**. Owner: confirm the restored board is the version you want, and archive the log to a dated file (for example `docs/coordination/`) if it grows again rather than truncating it in place. `tools/validate_data.py::check_ledger_ids_unique` now fails the build on a duplicate ledger id, which removes the worst consequence of a lost claim.",
+      "status": "closed",
+      "source_ids": [
+        "S22"
       ],
       "published_on": "pages/flags.html"
     }

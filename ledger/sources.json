@@ -1,5 +1,5 @@
 {
-  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28–S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing Associates pages were re-read live; S32-S35 were added 2026-11-14 by session 4338f55e for the unknown-code control and the three supplied short links. The two sessions initially reused the same ids; tools/merge_ledger_2026_11_14.py resolved the collision so no id points at two different pages. S36 was added 2026-11-14 by session d3ce1c29: the Associates home page was cited directly by the dashboard for the 'up to 10%' ceiling and the 'approximately 60 days' payment statement but had no register entry, so the citation was not covered by the source register.",
+  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28–S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing Associates pages were re-read live; S32-S35 were added 2026-11-14 by session 4338f55e for the unknown-code control and the three supplied short links. The two sessions initially reused the same ids; tools/merge_ledger_2026_11_14.py resolved the collision so no id points at two different pages. S36-S37 were added 2026-11-14 by session ba8b2d38 (T27) during an independent live re-fetch: S36 is a control that passes a VALID 10-character ASIN to the link.amazon short-link service, and S37 is the Associates program home page, cited for the 'up to 10%' commission ceiling the dashboard publishes.",
   "accessed_utc": "2026-11-14",
   "sources": [
     {
@@ -462,15 +462,28 @@
     },
     {
       "id": "S36",
+      "publisher": "link.amazon short-link service (control run by this project)",
+      "kind": "control",
+      "title": "CONTROL - a VALID 10-character ASIN passed to the link.amazon short-link service",
+      "url": "https://link.amazon/B0CDY277D3",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "control: the service does not resolve ASINs - a valid 10-character ASIN returns the same 404 as an unknown code",
+        "refutes the 'one-character truncation' reading of the supplied 9-character codes (E-05, F-01)"
+      ]
+    },
+    {
+      "id": "S37",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official",
-      "title": "Amazon Associates home page (program overview and FAQ)",
+      "title": "Amazon Associates program home page",
       "url": "https://affiliate-program.amazon.com/",
       "page_stated_update": null,
       "accessed_utc": "2026-11-14",
       "used_for": [
-        "public commission ceiling — 'Earn up to 10% in associate commissions from qualifying purchases and programs.'",
-        "payment timing FAQ — 'Commission income is paid approximately 60 days after the end of the month in which it was earned.'"
+        "commission ceiling wording: 'Earn up to 10% in associate commissions from qualifying purchases and programs.'",
+        "payment timing FAQ wording: 'Commission income is paid approximately 60 days after the end of the month in which it was earned.'"
       ]
     }
   ]
