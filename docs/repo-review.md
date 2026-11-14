@@ -79,7 +79,7 @@ do not resolve to matching product pages, but each supplied URL does open one li
 > re-fetches of the supplied links return the same ASIN and the same page body every time. The marker is
 > therefore **not** evidence of a fallback, and the destinations are stable. What remains open is narrower
 > and still flagged: no public Amazon document binds a short code to a destination ASIN, the per-link
-> `btn_ref` token is **not** stable across days (F-20), and no resolved URL carries an Associates `tag`. See
+> `btn_ref` token is **not** stable across days (F-21), and no resolved URL carries an Associates `tag`. See
 > [`revalidation/`](../revalidation/index.html).
 
 ### 3.4 Exact-match public web searches

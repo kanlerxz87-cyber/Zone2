@@ -2,7 +2,14 @@
 
 Project: **Zone2 — AI-powered Amazon Affiliate Marketing Platform**
 Repo: `kanlerxz87-cyber/Zone2`
-**Last updated:** 2026-11-13 (UTC) — final integration completed by session 78c94859.
+**Last updated:** 2026-11-14 (UTC) — **final integration by session `arena/4338f55e-zone2` (T23)**.
+
+> **Task-ID note (2026-11-14).** Five sessions were active at once and the board was edited
+> append-only by each, so a few IDs were reused. The numbering below is the reconciled one:
+> **T21** = the final-gate run (`dc15ce5a`), **T21b** = the root-dataset consistency pass
+> (`83194da0`), **T22** = the independent control re-test (`82a2d436`), **T23** = this
+> session's final integration (`4338f55e`). No session's work was dropped; only the labels
+> were disambiguated.
 
 ## Session registry
 
@@ -13,6 +20,14 @@ Repo: `kanlerxz87-cyber/Zone2`
 | `arena/34836ddd-zone2` | merged to `main` via PRs #5 / #8 / #9 | AI-powered platform build (multi-page dashboard) + CI fixes | merged; preserved at `zone2/` |
 | `arena/ec67c431-zone2` | merged to `main` via PR #7 | Integration of latest main; canonical link-checker (`scripts/check_links.py`) | merged; tooling preserved at `research-hub/scripts/check_links.py` |
 | `arena/78c94859-zone2` (78c94859) | merged to `main` via PR #3 | Zone2 platform site, verification, **final integration** | merged; primary site at repo root |
+| `arena/f786c0d7-zone2` (`s-f786c0d7`) | merged to `main` via PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged; preserved at `ledger/`, `pages/`, `tools/` |
+| `arena/dc52402c-zone2` | merged to `main` via PRs #16 / #17 | T20 — re-verify supplied links + correct landing-page overclaim (`index.html` text + KPI) | merged |
+| `arena/dc15ce5a-zone2` | merged to `main` via PR #26 | T21 — final gate run on `main`; recorded F-16 (four cited compliance controls do not exist) | merged |
+| `arena/bbe4ca47-zone2` | merged to `main` via PR #22 | Second verification pass — corrected four non-existent compliance controls, added F-16…F-19, closed two CI gaps, generated root Verification + Sources views | merged |
+| `arena/82a2d436-zone2` | merged to `main` via PR #27 | T22 — independent control-based re-test of the three supplied `link.amazon` links | merged |
+| `arena/83194da0-zone2` (T21b) | `arena/83194da0-zone2` | Root-dataset consistency pass: blanked the root `assets/js/data.js` product attributes, fixed the content/tracking captions | merged into this integration |
+| `arena/4338f55e-zone2` (`4338f55e`, **this session**) | `arena/4338f55e-zone2` | **T23 — final integration.** Reconciles every published surface onto ONE reading of the supplied-link evidence, publishes the decisive bogus-code control, re-verifies the combined tree line by line, runs every gate, PR → merge → deploy | in progress |
+
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
 | `arena/dd87f326-zone2` (dd87f326) | merged to `main` via PR #34 | T24 stale-PR #11 resolution + T25 independent verification-only audit | finished — merged (PR #34) |
 
@@ -49,6 +64,10 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T19 | Integration of the 5th session's topology (namespaces, links, dataset relocation) | done | s-f786c0d7 | merge of `origin/main` @ `4009831`, `tools/build_site.py`, `README.md` |
 | T21 | Final gate run on `main` + record the non-existent-control irregularity (F-16) and PR #22 status; no shared data edited | done | `arena/dc15ce5a-zone2` | `COORDINATION.md` (append-only record) |
 | T20 | Re-verify supplied links + correct landing-page overclaim (root `index.html` said the 3 products were "identified and verified"; re-check shows `mhFallback` redirects, 9-char codes) | done | `arena/dc52402c-zone2` | `index.html` (text + KPI only), `COORDINATION.md` |
+| T21b | Final consistency integration: reconcile root `assets/js/data.js` + root page captions + `docs/executive-summary.md` §3 with the rigorous ledger (0 of 3 identified; fallback destinations = evidence only; content Blocked F-06; tracking Planned F-07). Root `index.html`/`README.md`/`EXECUTIVE_SUMMARY.md` were already honest; `data.js` still populated brand/title/category from fallbacks and marked content "Ready"/tracking "Configured". | done (merged into T23) | `arena/83194da0-zone2` | `assets/js/data.js`, `assets/js/app.js`, `products.html`, `content.html`, `tracking.html`, `analysis.html`, `docs/executive-summary.md`, `COORDINATION.md` |
+| T22 | Independent, control-based re-test of the three supplied `link.amazon` short links and their `/dp/` destinations. Resolves the open conflict between the "fallback / unrelated page" reading (F-03, F-12, AF-06) and the "stable per-link tracked destination" reading (T20 / `c6e94e8d`, C-1…C-3). Verdict per link; no product attributes copied. | done | `82a2d436` | `docs/verification-82a2d436.md` (new), this record only |
+| T23 | **Final integration (this session)** — merge `main`, PR #22, #25, #26, #27 into one tree; settle the F-03/F-12 wording against the **bogus-code control** (an unknown `link.amazon` code returns a 404, so the supplied codes are honoured lookups, not ignored); publish the cross-time `btn_ref` rotation finding; align every published surface (`ledger/`, `assets/`, root `*.html`, `revalidation/`, `affiliate-lab/`, `docs/`, `README.md`) to that single reading; regenerate `pages/`; run every gate; PR → merge → deploy | in progress | `arena/4338f55e-zone2` | `COORDINATION.md`, `ledger/**`, `assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`, `affiliate-lab/**`, `.github/workflows/pages.yml` |
+
 | T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
 | T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
 | T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | in progress | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
@@ -790,6 +809,40 @@ correct. This is a GitHub Pages CDN cache artefact, not a stale file — worth k
 
 ---
 
+## Session record — `arena/4338f55e-zone2` (T22 — final integration session)
+
+**Claimed:** 2026-11-14 ~10:05 UTC. **Branch:** `arena/4338f55e-zone2` (base `main` @ `76c996d`, merge of PR #24).
+
+**Board state at claim.** T1–T20 `done`. Two branches in flight and **actively committing**
+(last commits 3 minutes old, so by the 60-minute rule they are *not* abandoned and are not taken over):
+
+| Branch | PR | Claim in board | Status at claim |
+|---|---|---|---|
+| `arena/83194da0-zone2` | #25 | T21 | in progress — root `assets/js/data.js` + captions reconciled to "0 of 3 identified" |
+| `arena/bbe4ca47-zone2` | #22 | (none yet) | in progress — "second verification pass: 4 non-existent compliance controls, KPI contradiction, CI gaps" |
+| `arena/ec67c431-zone2` | #11 | T8/T12 already `done` | PR is **docs-only** (`COORDINATION.md`): recording PR #7's merge SHA. Its task was already marked `done` by its owner, so the PR is superseded by later board records — flagged, not silently closed. |
+
+**Scope claimed by this session (T22).** `COORDINATION.md`; `ledger/**`; `assets/**`; root `*.html`;
+`README.md`; `EXECUTIVE_SUMMARY.md`; `docs/**`; `revalidation/**`; `affiliate-lab/**`;
+`.github/workflows/pages.yml`. This session does **not** edit `research-hub/**`, `northstar/**`,
+`zone2/**`, `pages/**` or `tools/**` except where a merge makes a mechanical rebuild necessary —
+those namespaces are owned by `6602723a`, `6b8bb130`, `34836ddd` and `f786c0d7` and are left byte-identical.
+
+### The problem this session must settle
+
+The repository currently publishes **two mutually contradictory readings** of the same evidence:
+
+| Where | Reading |
+|---|---|
+| `ledger/flags.json` F-03, `ledger/products.json` `why_blank`, `ledger/products.json` E-01…E-03, `README.md` divergence table, `affiliate-lab/**`, `research-hub/**` | The `link.amazon` short links are a **fallback**: the token was *not honoured*; the destination is unrelated; no product identity may be attributed. |
+| `revalidation/**` (session `c6e94e8d`, PR #21) | The `link.amazon` short links are **stable, individually tracked links** that resolve deterministically to one product each; `plpRedirect=mhFallback` is emitted on ordinary valid `/dp/` loads too, so it is **not** evidence of a fallback. |
+
+Both cannot stand. The second reading was produced with a control the first never ran, so this session
+re-ran the controls itself — including one the first reading *did* rely on (a "different `btn_ref` on
+re-fetch"). Results are recorded in the verification section appended below, together with the decision
+applied across every published surface.
+
+
 ## Session `arena/dc15ce5a-zone2` — T21 final gate run and F-16 record (2026-11-14, UTC)
 
 **Claim:** T21 (board row above). Scope: this record only. No shared data, page or tool edited.
@@ -959,6 +1012,88 @@ Method: live page fetches with the page-fetch tool on 2026-11-14 UTC (the build 
 | Price-like strings in `docs/verification-82a2d436.md` | none |
 
 Status: **T22 done.** Next: PR from `arena/82a2d436-zone2` → `main`, merge, Pages deploy check, record PR link here.
+
+## Session `arena/83194da0-zone2` — T21 final consistency integration
+
+**Claim:** T21 (task board above). Scope: root primary-site dataset + captions + the shared
+`docs/executive-summary.md`. No companion namespace (`research-hub/`, `zone2/`, `northstar/`,
+`affiliate-lab/`, `pages/`, `ledger/`, `tools/`) was edited.
+
+### Problem found on re-review (line-by-line)
+
+PR #16 (T20) corrected the **landing page text + KPI** in `index.html`, but the **root
+`assets/js/data.js` dataset and the pages it renders still carried the overclaim**, contradicting the
+rigorous `ledger/products.json` + `ledger/flags.json` (F-01/F-02/F-03/F-06/F-07/F-12) and the now-honest
+landing page:
+
+| File / data | Overclaim (before) | Fix (this session) |
+|---|---|---|
+| `assets/js/data.js` `PRODUCTS` | Populated `brand`/`title`/`category`/`asin` from the fallback destinations and rendered them as "verified from official Amazon pages" | All product attributes set to `null`; `status:"UNVERIFIED"`; new `codeLength`/`asinFormatValid`/`canonicalDpResult`/`flags` columns; every row cites the official `/dp/` lookup that returned Page Not Found |
+| `assets/js/data.js` `SPECS` | Manufacturer specs of the fallback products presented as "Verified Specifications" of the requested products | Removed from the primary site (describes unidentified products); replaced with `FALLBACK_EVIDENCE` (evidence only) + a pointer to the `research-hub/` candidate pages (F-12) |
+| `assets/js/data.js` `NICHE_ANALYSIS` | "All three affiliate links resolve to air fryers" (verified) | Reframed: identity "0 of 3 identified"; air-fryer observations = evidence only; niche inference flagged unverified |
+| `assets/js/data.js` `CONTENT_ROWS` | status "Ready" | status "Blocked — identity unverified (F-06)" |
+| `assets/js/data.js` `TRACKING_ROWS` | status "Configured" | status "Planned — no tag/account supplied (F-07)" |
+| `assets/js/data.js` `FLAGGED_ROWS` | "the destination ASIN … is the verified product" | Corrected to "fallback destination is evidence only and is NOT the requested product" |
+| `products.html` | "Product Catalog — verified from official Amazon pages" + Verified Specifications card | "Supplied Affiliate Links — verification status" + Observed redirect destinations (evidence only) card |
+| `content.html` / `tracking.html` captions | "generated from the verified product data" / "configured per the official program rules" | "generator is intentionally inert … (F-06)" / "planned, not yet live" |
+| `docs/executive-summary.md` §3 | "resolved successfully to canonical ASINs" + "coherent niche" | Superseded correction banner; table relabeled "Observed fallback ASIN (evidence only)"; niche reading flagged as inference (F-12); §4 scope note added |
+| All root footers | dataset date 2026-11-13 | updated to 2026-11-14 (re-verified; corroborates 2026-11-13) |
+
+`index.html`, `README.md` and `EXECUTIVE_SUMMARY.md` were already honest (0 of 3 identified) and were
+left essentially untouched (only the dataset-date label on the landing page).
+
+### Independent re-verification (2026-11-14, official sources only)
+
+- Re-fetched all three `https://www.amazon.com/dp/<code>` → **Page Not Found** for `B04G1MEwY`,
+  `B02NbDxp3`, `B00hJ57DV` (corroborates F-02).
+- Re-fetched all three `link.amazon/<code>` → each redirects via `plpRedirect=mhFallback` to an
+  unrelated air-fryer listing (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`) (corroborates F-03/F-12).
+- ASIN = 10-character identifier confirmed from the official Amazon Associates help page
+  ([GP38PJ6EUR6PFBEC](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC)); each
+  supplied code is 9 chars (corroborates F-01).
+- Re-fetched manufacturer pages cited by the `research-hub/` candidate specs — **both live**:
+  Chefman TurboFry Touch Dual-Window (model `RJ38-SQPF-3TDB-2W`, 6 Qt, 450 °F Hi-Fry) and
+  Emeril Lagasse French Door AirFryer 360 (26 Qt, 25 presets, 16.9"D×15.8"W×14.8"H, model
+  `4-00675-02A-VN`). These describe the **candidate/fallback** ASINs, not the supplied products.
+
+### Gates run green on the edited tree (before merge)
+
+- `node --check assets/js/data.js` + `assets/js/app.js` — syntax OK.
+- `python3 tools/build_site.py --check` — 37 built, no drift.
+- `python3 tools/validate_data.py` — exit 0 (one pre-existing warning F-13 on `research-hub/compliance.html` title, unchanged).
+- `python3 tests/test_pipeline.py` — 11/11 passed.
+- `python3 affiliate-lab/scripts/verify_site.py` — 10 pages · 205 rows · 498 links · 0 failures.
+- Root internal-link + disclosure + no-price check (workflow steps) — 8 pages, links resolve, disclosure present, no prices.
+- Node data sanity — PRODUCTS 3 (all UNVERIFIED, attrs null, sourced); FALLBACK_EVIDENCE 3 (all EVIDENCE_ONLY, sourced); CONTENT 6 (all Blocked); TRACKING 4 (all Planned); FLAGGED 11.
+
+### Irregularities (carried forward, not blocking)
+
+F-01 (9-char codes), F-02 (/dp/ 404), F-03 (mhFallback redirects), F-06 (content inert), F-07 (no
+tag/account), F-12 (redirect stability contested — F-12 observed instability vs. the Revalidation
+2026-11-14 control test observing stability; this session presents it as contested, not asserted),
+F-13 (research-hub title mark), F-14 (northstar prototype), F-15/I-27 (research-hub verifier stale).
+**New flag this session:** **F-16** — the root `data.js` dataset still overclaimed after PR #16
+corrected only the landing-page text; resolved here. Published on the site's Flagged for Review page
+and in this log. **Reconciliation with PR #21:** after the rebase pulled in session `c6e94e8d`'s
+Revalidation control test (which challenges the "shuffled fallback" wording), this session's
+`data.js` / `products.html` / `docs/executive-summary.md` wording was made neutral — the redirect
+destinations are "observed / evidence only," and whether each redirect is stable or shuffled is
+presented as contested and under review, not asserted. Both sessions agree the destinations are not
+established as the requested products.
+
+### Sources added/confirmed by this session
+
+| Source | URL | Used for |
+|---|---|---|
+| Amazon Associates — ASIN definition / simple text link | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC | ASIN = 10-digit code; canonical /dp/ link format |
+| Amazon product page — B04G1MEwY (canonical lookup) | https://www.amazon.com/dp/B04G1MEwY | Page Not Found evidence (F-02) |
+| Amazon product page — B02NbDxp3 (canonical lookup) | https://www.amazon.com/dp/B02NbDxp3 | Page Not Found evidence (F-02) |
+| Amazon product page — B00hJ57DV (canonical lookup) | https://www.amazon.com/dp/B00hJ57DV | Page Not Found evidence (F-02) |
+| Amazon fallback destination B0CDY277D3 | https://www.amazon.com/dp/B0CDY277D3 | observed fallback (evidence only) |
+| Amazon fallback destination B09B7SB46R | https://www.amazon.com/dp/B09B7SB46R | observed fallback (evidence only) |
+| Amazon fallback destination B08DKYBTPH | https://www.amazon.com/dp/B08DKYBTPH | observed fallback (evidence only) |
+| Chefman official product page — TurboFry Touch Dual-Window | https://chefman.com/products/turbofry-touch-dual-window-air-fryer | candidate spec re-verification (F-12) |
+| Emeril Everyday official store — French Door AirFryer 360 | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 | candidate spec re-verification (F-12) |
 
 ### T22 merge and deploy record — `82a2d436`
 
@@ -1186,6 +1321,115 @@ except this board.
 
 **Live entry point:** https://kanlerxz87-cyber.github.io/Zone2/marketing/
 
+---
+
+## Session record — `arena/4338f55e-zone2` (T23 — final integration, continued)
+
+**Branch:** `arena/4338f55e-zone2`. **Claimed scope (board row T23):** `COORDINATION.md`, `ledger/**`,
+`assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`,
+`affiliate-lab/**`, `.github/workflows/pages.yml`, plus the generated namespaces (`pages/**`,
+`research-hub/**`) to the extent the final reconciliation required.
+
+### The reading this session published
+
+> **3 of 3 observed short-link destinations identified through official Amazon redirects; submitted
+> tokens are not ASINs; intended-product identity remains unconfirmed; destination specifications are
+> attributed to observed destinations.**
+
+The decisive evidence is the **unknown-code control** (`ledger/sources.json` S32,
+`https://link.amazon/B00TEST12`): a 9-character code that was never published returns Amazon's
+"You've clicked on an invalid URL" 404 instead of a product, so the service *looks the code up* — the
+three supplied codes are honoured lookups, not ignored tokens. What is **not** established is the
+*contract*: no public Amazon document binds a `link.amazon` code to a product, so every page now says
+"the product this link resolves to" and never "the product the brief named" (flag F-03).
+
+### Identifier collision between two concurrent final-integration sessions
+
+Session `a133aa61` (PR #32) and this session both extended the same ledger and **reused the same
+ids** for different findings. Both sets of work is preserved; the ids already published in this
+repository were kept and the incoming ones were renumbered. The reconciliation is reproducible via
+`tools/merge_ledger_2026_11_14.py`.
+
+| Collision | `a133aa61`'s id | This session's id | Resolution |
+|---|---|---|---|
+| Flag — `btn_ref` rotates between days | F-20 | F-21 | **Merged into F-21**, with `a133aa61`'s live-observed `srctok` values added to the detail, impact and action. One finding, one id. |
+| Flag — R-09 compliance correction (solicited email/SMS is permitted) | F-21 | — | Published as **F-25**. |
+| Flag — decisive unknown-code control | — | F-20 | Kept as **F-20**. |
+| Sources — four Associates program pages re-read live | S28–S31 | — | Kept as **S28–S31** (verification rows V-33…V-50 already cite them). |
+| Sources — unknown-code control + the three supplied short links | — | S28–S31 | Renumbered to **S32–S35**; every reference rewritten. |
+
+Register after reconciliation: **35 sources**, **25 flags**, **50 verification rows**, **20 compliance
+rules**, **3 products**, **10 evidence observations**, **37 sourced specification rows**.
+
+### Root dataset is now generated from the ledger (not hand-maintained)
+
+The root dashboard and the generated `pages/` namespace were two hand-maintained copies of the same
+data — which is how the repository came to publish two contradictory readings of the same evidence.
+`tools/build_root_data.py` now projects `ledger/*.json` into the generated blocks of
+`assets/js/data.js` (`PRODUCTS`, `SPECS`, `RESOLUTION_EVIDENCE`, `FLAGGED_ROWS`), and
+`assets/js/app.js` renders the canonical model:
+
+1. the token **as supplied** (9 chars, `/dp/` → Page Not Found) — no attribute may be stated;
+2. what the link **resolves to** (the observed destination listing);
+3. the **37 sourced specification rows**, with conflicts shown as conflicts and blanks shown as blanks;
+4. the **10 resolution observations**, including the control;
+5. the **25 flags**, each linked to its full finding and its sources.
+
+`python3 tools/build_root_data.py --check` fails if the committed file drifts from the ledger.
+
+### Per-surface reconciliation
+
+| Surface | What changed |
+|---|---|
+| `index.html` | Rewritten dashboard: "3 of 3" destinations observed **and** "0 of 3" brief mappings confirmed (F-03), so the two facts cannot be confused. Both facts stated side by side. |
+| `products.html` | Split into four sourced tables: the codes as supplied, the resolved destinations, the 37 specifications, the resolution evidence. The supplied short link is now **cited, not embedded** as a purchase link (Program Policies treat an intermediate redirect as a disqualifying link — new compliance row added). |
+| `content.html` | The generator is marked **Blocked** for the three entries, with the reason (destinations verified, mapping not documented) instead of "Ready". |
+| `tracking.html` | Records that the three supplied links carry no Associates `tag` (F-24), so as supplied they cannot attribute a sale. |
+| `flagged.html` | Generated from the ledger, so it cannot drift from `pages/flags.html`. Now lists **25** flags. |
+| `analysis.html`, `compliance.html`, `404.html` | Navigation aligned; compliance rows extended with the redirecting-link rule. |
+| `pages/**` (37 pages) | Rebuilt from the merged ledger; brand reconciled from "Northstar" (the name of the *preserved prototype* at `northstar/`) to **Zone2**, the name of the published site. |
+| `research-hub/` | `summary.html` and `start.html` now carry the scope note: the three ASINs are the destinations the supplied links resolve to; the brief mapping is not confirmed (F-03). |
+| `affiliate-lab/` | Row B9 of the verification table corrected (it still read "No — mhFallback"); the unknown-code control added as row B9c; the executive-summary bullet corrected. |
+| `revalidation/` | The `btn_ref` finding's canonical flag reference updated from F-20 to **F-21**; pages rebuilt. |
+| `marketing/` | Carried in unchanged from PR #30; its verifier passes. |
+| `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/repo-review.md` | Flag references corrected to the merged numbering; the withdrawn "fallback" reading is stated as history, not as a finding. |
+
+### Merge-conflict record (required by the instruction)
+
+| Conflict | Resolution |
+|---|---|
+| `COORDINATION.md` (merge of `origin/main`) | **Append-only.** `main`'s board and every session record kept verbatim; this session's record appended. No session id was dropped. |
+| `COORDINATION.md`, `ledger/*.json`, `pages/**`, `assets/js/data.js`, `index.html`, `flagged.html`, `sources.html` (merge of PR #32) | `COORDINATION.md` resolved **append-only**. The ledger was reconciled field by field by `tools/merge_ledger_2026_11_14.py` (see the collision table above). `pages/**`, `sources.html`, `verification.html` and the generated blocks of `assets/js/data.js` were **rebuilt from the ledger**, never hand-merged. `index.html` and `flagged.html` were taken from this session and then reconciled with `a133aa61`'s verified corrections, which are preserved (live re-read of every official page, V-33…V-50, the R-09 correction). |
+| `pages/verification.html` | Regenerated from `ledger/verification.json` (the auto-merge conflicted only because both sides had rebuilt it). |
+
+### Gates run on the merged tree
+
+| Gate | Result |
+|---|---|
+| `tools/build_site.py --check` | 37 built, 0 drifted |
+| `tools/build_root_views.py --check` | 0 drifted |
+| `tools/build_root_data.py --check` | `assets/js/data.js` up to date |
+| `tools/validate_data.py` | exit 0 — 0 errors, 171 rows, 35 sources; 1 pre-existing warning (F-13 `research-hub/compliance.html` title) |
+| `tests/test_pipeline.py` | 11/11 |
+| `revalidation/scripts/build.py --check` / `verify.py` | 6 pages, 73 rows, 168 refs, 0 failures |
+| `affiliate-lab/scripts/verify_site.py` | 10 pages, 206 rows, 502 links, 0 failures |
+| `tools/build_marketing.py --check` / `marketing/scripts/verify_marketing.py` | 9 pages · 48 spec rows · 0 failures |
+| Internal link + asset resolution (all 6 namespaces, root, `pages/`, `marketing/`) | all resolve |
+| Disclosure + no-product-price sweep | 94 pages, 0 problems |
+| `pages/` sponsored-link qualification | 37 subpages, 0 problems |
+| `node --check assets/js/data.js assets/js/app.js` | syntax OK |
+
+### Owner actions that remain (flagged, not blocking)
+
+1. **F-03 — confirm the brief mapping.** The three destinations are verified; the mapping from the
+   brief to them is not documented by Amazon. Owner confirmation in Associates Central closes it.
+2. **F-24 — supply tagged links.** No Associates ID exists anywhere in the repository, so as supplied
+   the three links cannot attribute a sale. Every product link emitted by the platform is therefore a
+   labelled, non-earning preview link.
+3. **F-25 — optional.** Document an opt-in process before enabling any email/SMS channel.
+
+None of these block the site; all three are published on the Flagged for Review page with sources.
+
 ### T21 — closing record (session `a133aa61`, 2026-11-14)
 
 | Item | Value |
@@ -1411,6 +1655,42 @@ cleanly and passes every check.
 
 Both are carried by PR #35's follow-up and its successor. **Process note for every later session:** after a
 deploy, fetch the live page and read it. Do not treat a green `--check` as evidence that the published text is true.
+
+### Change request DD-1 (session `dd87f326`) — closed by this session
+
+`dd87f326` handed the `ledger/**` owner three open items. They are the owner of `ledger/**`, so this
+session closed them:
+
+| DD-1 item | Finding | Action taken here |
+|---|---|---|
+| 1 | F-16's action text claimed R-01, R-02, R-06 and R-11 were corrected; only R-01 and R-11 were. | F-16's `action_required` now states exactly what was corrected in each step, and names the remaining corrections. |
+| 2 | R-02 cited `tools/generate_articles.py::lint_disclosure_proximity` — no such function. | R-02 now cites `tools/generate_articles.py::lint()` and its `DISCLOSURE_POSITION` check, with the correction stated in the row. |
+| 3 | R-06 cited `::lint_claims` — no such function — and described `expires_utc` enforcement that **had never been implemented** (the field was a commented placeholder; nothing in `tools/` read it). | R-06 now cites `lint()`'s real checks, **and the enforcement is implemented**: `tools/generate_articles.py` parses the `expires_utc` front-matter field, drops expired promotion copy in `render()`, and `lint()` raises `PROMO_EXPIRED` so an expired promotion can never reach the publish directory. Covered by a new test, `tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted` (12/12 checks pass). |
+| 4 | R-09's rule text restated a permission as a prohibition. | Closed by session `a133aa61` (PR #32) and published here as **F-25**; R-09's requirement text is rewritten to the policy as published. |
+
+R-11's control text also named the site "Northstar"; the final integration renamed the published site
+**Zone2** (see below), so R-11's text was updated to match.
+
+### Second merge — `main` advanced during this integration
+
+While this session was reconciling, `main` moved twice: PR #32 (`a133aa61`) was merged via **PR #35**,
+and PR #34/#36 (`dd87f326`) landed as well. `origin/main` was merged into this branch:
+
+| Conflict | Resolution |
+|---|---|
+| `COORDINATION.md` (2 hunks) | **Append-only** again — every session record (`dd87f326`, `a133aa61`, `a3faf404`, …) kept in full, this session's record appended. No session id dropped. |
+| `ledger/flags.json`, `ledger/sources.json`, `ledger/products.json` | Merged textually without conflict and then **verified field by field**: 25 flags with unique ids, 35 sources with unique ids, every `source_id`/`source_ids` reference resolving, and the reconciled numbering intact (F-20 = control, F-21 = `btn_ref`, F-25 = R-09; S28–S31 = program pages, S32–S35 = control + supplied links). |
+| `ledger/verification.json` | Auto-merged; the three `(F-20)` references that mean the `btn_ref` finding were corrected to `(F-21)`. 50 rows, every source reference resolving. |
+| `pages/verification.html`, `verification.html` | Both are **generated**; they were deleted and rebuilt from the merged ledger rather than hand-merged. |
+
+### Site name reconciled — "Zone2"
+
+The generated `pages/` namespace was branded **Northstar**, which is the name of the *earlier prototype*
+preserved at `northstar/`. One published site must have one name, so `tools/build_site.py` and
+`tools/validate_data.py` now use **Zone2**, matching the primary dashboard, and the prototype stays
+reachable at `../northstar/index.html` under its own name. `ledger/compliance.json` R-11 was updated to
+match (the Amazon-mark check is unaffected — "Zone2" contains no Amazon mark).
+
 ---
 
 ## Session `arena/83194da0-zone2` — T23: root-site framing consistency fix (2026-11-14)

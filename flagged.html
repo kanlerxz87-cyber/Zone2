@@ -18,6 +18,8 @@
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html">Tracking</a>
+      <a href="verification.html">Verification</a>
+      <a href="sources.html">Sources</a>
       <a href="flagged.html" class="active">Flagged for Review</a>
     </nav>
   </aside>
@@ -34,9 +36,9 @@
     <div class="card">
       <h3>Flagged items</h3>
       <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        These are the reader-facing flags. Every item below whose <em>Ledger flag</em> column is filled links to the
-        full finding — long-form explanation, impact, required action and its official sources — in the canonical
-        register of <strong>22 flags (F-01 … F-22)</strong>:
+        These are the reader-facing flags, generated straight from the canonical register so the two can
+        never drift apart. Every row links to the full finding — long-form explanation, impact, required
+        action and its official sources — in the register of <strong>26 flags (F-01 … F-26)</strong>:
         <a href="pages/flags.html">full register with sources</a>.
       </p>
       <div id="flaggedTable"></div>
@@ -48,12 +50,16 @@
         <li>Every table value was checked against the official source linked in its row.</li>
         <li>Where a value could not be confirmed from an official source, the cell was left blank — values were never inferred or filled in.</li>
         <li>The link-code / ASIN mismatch was detected by resolving each provided <code>link.amazon</code> short link and fetching the destination product page directly.</li>
-        <li><strong>Re-verified live on 2026-11-14</strong> (final integration): all three supplied links were fetched again with working outbound access, together with a control fetch of a bare, valid ASIN. Destinations reproduce; the per-link <code>btn_ref</code> token does not (F-20). See <a href="verification.html">Verification</a>.</li>
+        <li>The reading of those links was settled by a <strong>control</strong>: an unknown 9-character code on the same short-link service returns a 404 instead of a product (F-20), which shows the supplied codes are honoured lookups. The full control trail is on the <a href="products.html">Products</a> page.</li>
+        <li>Nothing on this page blocks the site. The items marked <em>owner: user</em> are the decisions only you can make — chiefly confirming the brief mapping (F-03) and supplying tagged links (F-24).</li>
       </ul>
     </div>
 
     <footer class="site">
-      Verified dataset date: 2026-11-13 · re-verified live 2026-11-14.
+      Verified dataset date: 2026-11-14. Companion views:
+      <a href="verification.html">Verification log</a> ·
+      <a href="sources.html">Source register</a> ·
+      <a href="pages/flags.html">Canonical flag register</a>.
     </footer>
   </main>
 </div>

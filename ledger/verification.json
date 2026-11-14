@@ -462,7 +462,7 @@
         "S19",
         "S16"
       ],
-      "consequence": "both fetches landed on /dp/B0CDY277D3 with the same btn_ref=srctok-1f979f303a4b5691; the destination is stable. The btn_ref is NOT stable across days (earlier sessions recorded a different value), so identity is still not cryptographically bound to the code (F-01, F-20)."
+      "consequence": "both fetches landed on /dp/B0CDY277D3 with the same btn_ref=srctok-1f979f303a4b5691; the destination is stable. The btn_ref is NOT stable across days (earlier sessions recorded a different value), so identity is still not cryptographically bound to the code (F-01, F-21)."
     },
     {
       "id": "V-42",
@@ -473,7 +473,7 @@
       "source_ids": [
         "S20"
       ],
-      "consequence": "landed on /dp/B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven), same ASIN as every earlier observation; btn_ref=srctok-0cd8be3c7e2e0de3 differs from the value earlier sessions recorded (F-20)"
+      "consequence": "landed on /dp/B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven), same ASIN as every earlier observation; btn_ref=srctok-0cd8be3c7e2e0de3 differs from the value earlier sessions recorded (F-21)"
     },
     {
       "id": "V-43",
@@ -484,7 +484,7 @@
       "source_ids": [
         "S21"
       ],
-      "consequence": "landed on /dp/B08DKYBTPH (Chefman 8 Qt TurboFry), same ASIN as every earlier observation; btn_ref=srctok-7c59360cbbbd59b7 differs from the earlier value (F-20)"
+      "consequence": "landed on /dp/B08DKYBTPH (Chefman 8 Qt TurboFry), same ASIN as every earlier observation; btn_ref=srctok-7c59360cbbbd59b7 differs from the earlier value (F-21)"
     },
     {
       "id": "V-44",

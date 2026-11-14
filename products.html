@@ -18,13 +18,19 @@
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html">Tracking</a>
+      <a href="verification.html">Verification</a>
+      <a href="sources.html">Sources</a>
       <a href="flagged.html">Flagged for Review</a>
     </nav>
   </aside>
   <main class="main">
     <div class="page-head">
       <h2>Affiliate Products</h2>
-      <p>The three supplied links resolve to the products shown. Each link code is a 9-character value — not a valid Amazon ASIN (an ASIN is 10) — and <code>amazon.com/dp/&lt;code&gt;</code> returns Page Not Found. The destination shown is the product each link resolves to (verified on its official Amazon page); the code→product mapping is flagged for confirmation. Cells that could not be confirmed from an official source are left blank and flagged — never inferred.</p>
+      <p>The three links supplied in the brief, and the three products each of them resolves to.
+      Two separate questions are kept apart on this page: what can be stated about the code as
+      supplied, and what the link itself resolves to. Every row below carries a link to the official
+      page it was read from; every value that could not be confirmed from an official source is left
+      blank and flagged — never inferred.</p>
     </div>
 
     <div class="disclosure">
@@ -32,31 +38,58 @@
     </div>
 
     <div class="card">
-      <h3>Product Catalog — resolved destinations (flagged for confirmation)</h3>
+      <h3>1 · The supplied codes, exactly as supplied</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Each supplied code is 9 characters, an Amazon ASIN is 10, and
+        <code>amazon.com/dp/&lt;code&gt;</code> returns Amazon's Page Not Found page. No product
+        attribute can therefore be stated <em>for the token itself</em> — which is why the cells that
+        describe the code are blank and the row is marked unverified.
+      </p>
       <div id="productsTable"></div>
+    </div>
+
+    <div class="card">
+      <h3>2 · What each supplied link resolves to — observed 2026-11-14</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Each <code>link.amazon</code> URL resolves to exactly one Amazon product page, reproducibly.
+        The decisive control: an <em>unknown</em> 9-character code on the same service returns a
+        404 (“You've clicked on an invalid URL”) instead of a product, so the supplied codes are
+        honoured lookups rather than ignored tokens (flag F-20). What is still unconfirmed is the
+        <em>contract</em> — no public Amazon document binds a <code>link.amazon</code> code to a
+        product — so these are published as “the product this link resolves to”, never as “the product
+        the brief named” (flag F-03).
+      </p>
+      <div id="resolvedTable"></div>
     </div>
 
     <div id="productOverview"></div>
 
     <div class="card">
-      <h3>Specifications of the resolved destination ASINs (official Amazon + manufacturer pages)</h3>
+      <h3>3 · Verified specifications — each row sourced</h3>
       <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        These specs describe the resolved destination ASIN for each link (verified on the official Amazon
-        product page and the manufacturer's own page), not a confirmed valid-ASIN match for the supplied
-        code. Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but
-        are deliberately not published here, in line with Amazon Associates price-display restrictions and
-        the site's no-price rule; Amazon prices remain unverified and are flagged. Rows where official
-        sources disagree are marked <span class="badge warn">Conflict</span> and both values are shown.
+        Every row below was read on 2026-11-14 from the official Amazon listing (its “About this
+        item” bullets and its Product-information block) or from the manufacturer's own product page.
+        Where two official pages disagree, the row is marked <strong>Conflict</strong> and shows
+        <em>both</em> values with their sources; nothing is resolved by inference.
       </p>
       <div id="specsTable"></div>
     </div>
 
+    <div class="card">
+      <h3>4 · Resolution evidence &amp; controls — reproducible by hand</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        The full evidence trail behind the table above, including the controls that decide how the
+        redirect behaviour must be read. Open any source link in a browser to reproduce it.
+      </p>
+      <div id="resolutionTable"></div>
+    </div>
+
     <footer class="site">
-      Verified dataset date: 2026-11-14 (re-verified; corroborates the 2026-11-13 capture). Titles,
-      brands, categories and ASINs verified against the official Amazon product pages listed per row
-      (resolved destinations). Price, rating, review count and availability are <em>unverified</em> and
-      flagged on the <a href="flagged.html">Flagged for Review</a> page; the code→ASIN mapping is flagged
-      for confirmation (F-01/F-02/F-03/F-12).
+      Verified dataset date: 2026-11-14. The products named above are the destinations the supplied
+      links resolve to; the brief mapping, the per-product price, rating, review count, availability
+      and commission band remain unverified and are left blank — see the
+      <a href="flagged.html">Flagged for Review</a> page and the
+      <a href="verification.html">Verification</a> log.
     </footer>
   </main>
 </div>

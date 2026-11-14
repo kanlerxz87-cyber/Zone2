@@ -52,6 +52,11 @@ class Draft:
     body: str
     missing: list[str]
     blocked: bool
+    # R-06: a limited-time promotion must disappear from the Site the moment it ends.
+    # The front matter may declare `expires_utc`; when it is in the past the promo copy is
+    # dropped and the linter refuses any draft that still mentions the promotion.
+    expires_utc: datetime | None = None
+    promo_dropped: bool = False
 
 
 def _load_ledger() -> dict:
@@ -79,13 +84,81 @@ def resolve_entry(entry_id: str) -> dict:
     return merged
 
 
+# Front-matter fields the templates declare. `expires_utc` is the only one with a policy
+# meaning (Participation Requirements 2(b): a limited-time promotion mention must be removed
+# from the Site as soon as the promotion ends on the Amazon Site).
+FRONT_MATTER_RE = re.compile(r"\A---\n(.*?)\n---\n", re.S)
+EXPIRES_FIELD_RE = re.compile(r"^expires_utc:\s*(?P<value>[^#\n]*?)\s*(?:#.*)?$", re.M)
+PROMO_BLOCK_RE = re.compile(
+    r"<!--\s*promo:start\s*-->.*?<!--\s*promo:end\s*-->\n?", re.S
+)
+PROMO_SECTION_RE = re.compile(r"^##\s+(?:Promotion|Limited[- ]time offer)\b.*?(?=^##\s|\Z)", re.S | re.M)
+
+
+def _parse_front_matter(text: str) -> dict:
+    """Return the declared front-matter fields of a rendered draft."""
+    m = FRONT_MATTER_RE.match(text)
+    if not m:
+        return {}
+    fields = {}
+    for line in m.group(1).splitlines():
+        if ":" not in line:
+            continue
+        key, _, value = line.partition(":")
+        fields[key.strip()] = value.split("#")[0].strip()
+    return fields
+
+
+def _parse_expiry(value: str | None) -> datetime | None:
+    """Parse an `expires_utc` front-matter value. `null`/empty means no promotion."""
+    if not value:
+        return None
+    value = value.strip().strip('"').strip("'")
+    if value.lower() in ("null", "none", "~"):
+        return None
+    text = value.replace("Z", "+00:00")
+    for fmt in (None, "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S", "%Y-%m-%d"):
+        try:
+            parsed = (
+                datetime.fromisoformat(text)
+                if fmt is None
+                else datetime.strptime(text, fmt)
+            )
+        except ValueError:
+            continue
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc)
+    return None
+
+
 def render(kind: str, ctx: dict) -> Draft:
     tmpl = (TEMPLATE_DIR / f"{kind}.md.tmpl").read_text(encoding="utf-8")
     missing = sorted({m for m in PLACEHOLDER_RE.findall(tmpl) if not str(ctx.get(m, "")).strip()})
     body = PLACEHOLDER_RE.sub(lambda m: str(ctx.get(m.group(1), "")), tmpl)
     body = body.strip() + "\n"
+
+    # R-06 - drop expired promotion copy before the draft can reach the publish directory.
+    expires_utc = None
+    promo_dropped = False
+    m = EXPIRES_FIELD_RE.search(body)
+    if m:
+        expires_utc = _parse_expiry(m.group("value"))
+        if expires_utc and expires_utc <= datetime.now(timezone.utc):
+            body, n = PROMO_BLOCK_RE.subn("", body)
+            body, n2 = PROMO_SECTION_RE.subn("", body)
+            promo_dropped = bool(n or n2)
+
     slug = re.sub(r"[^a-z0-9-]", "-", str(ctx.get("slug") or ctx.get("entry_id", "draft")).lower()).strip("-")
-    return Draft(slug=slug, kind=kind, body=body, missing=missing, blocked=bool(missing))
+    return Draft(
+        slug=slug,
+        kind=kind,
+        body=body,
+        missing=missing,
+        blocked=bool(missing),
+        expires_utc=expires_utc,
+        promo_dropped=promo_dropped,
+    )
 
 
 def lint(draft: Draft, *, html: str = "") -> list[LintError]:
@@ -122,6 +195,24 @@ def lint(draft: Draft, *, html: str = "") -> list[LintError]:
     # Never leak an unresolved placeholder into published copy.
     if "UNVERIFIED" in text and "FLAGGED" not in text:
         problems.append(LintError("LEAKY_PLACEHOLDER", "UNVERIFIED marker without the flag reference"))
+
+    # R-06 - a limited-time promotion must not survive its expiry.
+    if draft.expires_utc and draft.expires_utc <= datetime.now(timezone.utc):
+        if draft.promo_dropped:
+            problems.append(
+                LintError(
+                    "PROMO_EXPIRED",
+                    f"promotion expired at {draft.expires_utc.isoformat()} and its copy was dropped (R-06); "
+                    "this draft must not be published with the promotion",
+                )
+            )
+        elif PROMO_SECTION_RE.search(text) or PROMO_BLOCK_RE.search(text):
+            problems.append(
+                LintError(
+                    "PROMO_EXPIRED",
+                    f"promotion expired at {draft.expires_utc.isoformat()} but promo copy is still present (R-06)",
+                )
+            )
 
     if html:
         problems.extend(LintError("HTML_AUDIT", p) for p in audit_html(html))

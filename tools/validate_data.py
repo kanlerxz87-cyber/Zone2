@@ -34,6 +34,11 @@ OFFICIAL_HOSTS = {
     "www.amazon.com",
     "amazon.com",
     "webservices.amazon.com",
+    # T23-INTEGRATION: `link.amazon` is Amazon's own delegated top-level domain, and the three
+    # links the client supplied are of exactly that form. They are registered as sources because
+    # the behaviour of that service is the evidence for flags F-03, F-20, F-21 and F-24. No
+    # product attribute is ever sourced to it - only to the amazon.com page it resolves to.
+    "link.amazon",
     "www.ftc.gov",
     "ftc.gov",
     "developers.google.com",
@@ -52,7 +57,9 @@ MANUFACTURER_HOSTS = {
     "emerileveryday.com",
 }
 PERF_FIELDS = ("clicks", "conversion", "orders", "earnings", "revenue", "epc", "impressions")
-SITE_NAME = "Northstar"  # this project's own name; must contain no Amazon mark (R-11)
+SITE_NAME = "Zone2"  # this project's own name; must contain no Amazon mark (R-11)
+# Changed 2026-11-14 (final integration): the published site is one product, so the name matches
+# tools/build_site.py. "Northstar" is the earlier prototype preserved at northstar/.
 SITE_NAME_MARKS = [m for m in ("amazon", "amzn", "kindle", "prime", "audible", "imdb") if m in SITE_NAME.lower()]
 
 

@@ -174,6 +174,56 @@ def test_dashboard_flag_count_cannot_drift_from_the_ledger():
     validate_data.check_flag_count(report_ok)
     assert not report_ok.errors, report_ok.errors
 
+def test_expired_promotion_copy_is_removed_and_linted():
+    """R-06: a limited-time promotion mention must not survive its expiry (DD-1 item 3).
+
+    The compliance ledger claimed the builder "refuses to render expired promos" while the
+    `expires_utc` front-matter field was a commented placeholder and nothing read it. The
+    enforcement is now implemented, and this test proves it.
+    """
+    import generate_articles as ga
+
+    expired = "2020-01-01T00:00:00Z"
+    live = "2999-01-01T00:00:00Z"
+
+    tmpl = ga.TEMPLATE_DIR / "product_article.md.tmpl"
+    body = tmpl.read_text(encoding="utf-8")
+    assert "expires_utc:" in body, "the template must declare expires_utc"
+
+    def render_with(expiry: str, promo: str) -> ga.Draft:
+        stub = ga.TEMPLATE_DIR / "_promo_test.md.tmpl"
+        stub.write_text(
+            body.replace("expires_utc: null", f"expires_utc: {expiry}").replace(
+                "{{analysis}}", "{{analysis}}\n\n" + promo
+            ),
+            encoding="utf-8",
+        )
+        try:
+            return ga.render("_promo_test", {"entry_id": "P-TEST", "analysis": "analysis text"})
+        finally:
+            stub.unlink(missing_ok=True)
+
+    promo_block = "<!-- promo:start -->\n50% off today only!\n<!-- promo:end -->"
+
+    # An expired promotion: the copy is dropped and the linter refuses the draft.
+    draft = render_with(expired, promo_block)
+    assert draft.expires_utc is not None, "expires_utc must be parsed from the front matter"
+    assert draft.promo_dropped, "expired promo copy must be dropped"
+    assert "50% off today only" not in draft.body
+    codes = [p.code for p in ga.lint(draft)]
+    assert "PROMO_EXPIRED" in codes, f"expired promo must fail the linter, got {codes}"
+
+    # A live promotion: nothing is dropped and the linter stays quiet about expiry.
+    draft = render_with(live, promo_block)
+    assert not draft.promo_dropped
+    assert "50% off today only" in draft.body
+    assert "PROMO_EXPIRED" not in [p.code for p in ga.lint(draft)]
+
+    # The default template declares no promotion, so no expiry is parsed.
+    draft = render_with("null", promo_block)
+    assert draft.expires_utc is None
+    assert not draft.promo_dropped
+
 
 def test_validation_gate_passes():
     out = subprocess.run(

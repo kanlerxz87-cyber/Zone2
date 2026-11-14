@@ -35,8 +35,9 @@
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="num">0 of 3</div><div class="lbl">Supplied products identified from official sources</div></div>
-      <div class="kpi"><div class="num">3</div><div class="lbl">Links verified as resolving stably to one listing each</div></div>
+      <div class="kpi"><div class="num">3 of 3</div><div class="lbl">Supplied links that resolve to one specific Amazon listing (observed 2026-11-14)</div></div>
+      <div class="kpi"><div class="num">0 of 3</div><div class="lbl">Brief product mappings confirmed by an official Amazon document (F-03)</div></div>
+      <div class="kpi"><div class="num">1</div><div class="lbl">Niche of the resolved destinations — Home &amp; Kitchen air fryers</div></div>
       <div class="kpi"><div class="num">Up to 10%</div><div class="lbl">Official program commission ceiling</div></div>
       <div class="kpi"><div class="num" id="flagCount">—</div><div class="lbl">Items flagged for review</div></div>
     </div>
@@ -49,41 +50,32 @@
         products, and analyzes pricing, reviews, competition and commission potential — then generates
         SEO-optimized product articles, comparisons and buying guides, manages affiliate links, tracks
         clicks and conversions, and continuously optimizes campaigns. All findings on this site are
-        verified line by line against official Amazon sources; anything that could not be confirmed from
-        an official source is left blank and published on the
-        <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a> page.
+        verified line by line against official sources; anything that could not be confirmed from an
+        official source is left blank and published on the
+        <a href="flagged.html">Flagged for Review</a> page.
       </p>
       <p>
         Three affiliate links were supplied for this engagement. Each short link
-        (<code>link.amazon/…</code>) resolves to an Amazon air-fryer listing: a CHEFMAN 6-quart dual basket
-        air fryer oven (B0CDY277D3), an Emeril Lagasse 26QT French-door air fryer toaster oven
-        (B09B7SB46R), and a Chefman 8-quart TurboFry air fryer (B08DKYBTPH).
+        (<code>link.amazon/…</code>) resolves to exactly one Amazon product page — a CHEFMAN 6-quart
+        dual-basket air fryer oven (B0CDY277D3), an Emeril Lagasse 26QT French-door air fryer toaster
+        oven (B09B7SB46R) and a Chefman 8-quart TurboFry air fryer (B08DKYBTPH). Each destination is
+        stable across repeated fetches, each carries its own per-link source token, and an
+        <em>unknown</em> code on the same service returns a 404 instead of a product. That control is
+        what settles the question the evidence raises: the supplied codes are honoured lookups, not
+        ignored tokens. The full trail is in
+        <a href="products.html#">Products → Resolution evidence</a>.
       </p>
       <p>
-        Irregularity applies to all three links: each code in a <code>link.amazon</code> URL is 9 characters
-        (an Amazon ASIN is 10), and <code>amazon.com/dp/&lt;code&gt;</code> returns Page Not Found for each.
-        Because no public Amazon document binds a <code>link.amazon</code> code to a destination ASIN, and
-        because none of the three resolved URLs carries an Associates <code>tag</code>, the destinations are
-        <strong>not established as the requested products</strong> — they are recorded as the product each
-        link resolves to, and that mapping is flagged for confirmation on the
-        <a href="flagged.html">Flagged for Review</a> page. Pricing, ratings, review
-        counts, availability and the category commission rate could not be confirmed from official sources
-        through automated verification and are therefore left blank and flagged, in line with the
-        no-inference rule.
-      </p>
-      <p class="note" style="font-size:13px;color:var(--muted)">
-        <strong>Correction (2026-11-14).</strong> An earlier version of this page described the destinations as
-        arbitrary “fallback” pages on the strength of the <code>plpRedirect=mhFallback</code> and
-        <code>lv=shuf</code> markers. That reasoning was tested and does not hold: a bare, untagged request to
-        a <em>valid</em> ASIN (<code>/dp/B08DKYBTPH</code>) is answered with the real product page and the same
-        markers appended. The destinations are therefore stable and individually tracked, not arbitrary.
-        What does <strong>not</strong> hold is the token: re-fetched a day later, every link returned the same
-        ASIN and the same body but a <em>different</em> <code>btn_ref</code>, so the token is per-day, not a
-        stable per-link identifier (<strong>flag F-20</strong>). Evidence, sources and open flags:
-        <a href="revalidation/index.html">Revalidation</a>.
-      </p>
+        Three things remain genuinely unverified, and they are the only things standing between this
+        repository and a live, earning site. <strong>First, identity:</strong> each supplied code is
+        9 characters (an Amazon ASIN is 10) and <code>amazon.com/dp/&lt;code&gt;</code> returns Page
+        Not Found, while no public Amazon document binds a <code>link.amazon</code> code to a product.
+        The destinations are therefore published as “the product this link resolves to”, never as “the
+        product the brief named” (F-01, F-02, F-03). <strong>Second, economics:</strong> the three
+        links carry no Associates <code>tag</code>, so as supplied they cannot attribute a sale or earn
+        a commission (F-24). <strong>Third, data:</strong> price, rating, review count, availability,
+        sales rank and the per-category commission band could not be confirmed from an official source
+        and are left blank, in line with the no-inference rule.      </p>
       <p>
         Compliance is enforced from the official Amazon Associates documents: the mandatory disclosure
         “As an Amazon Associate I earn from qualifying purchases,” Special Links carrying the Associates
@@ -96,7 +88,7 @@
     <div class="card">
       <h3>Verified Platform Facts</h3>
       <div id="execFactsTable"></div>
-      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-13 and re-verified live on 2026-11-14.</p>
+      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-14.</p>
     </div>
 
     <div class="card">
@@ -128,7 +120,7 @@
     </div>
 
     <div class="card">
-      <h3>Flagged for Review — 22 items</h3>
+      <h3>Flagged for Review — 26 items</h3>
       <p style="font-size:13.5px">
         Nothing on this site is a product claim. These are the items that could not be confirmed from an official source, plus
         the irregularities found while checking. None of them block the publish; each carries its source link so it can be
@@ -139,21 +131,29 @@
           <thead><tr><th align="left">Flag</th><th align="left">Irregularity</th><th align="left">Status / owner action</th></tr></thead>
           <tbody>
             <tr><td><code>F-01…F-03</code></td><td>The three supplied codes are 9 characters; an ASIN is 10. <code>amazon.com/dp/&lt;code&gt;</code> is Page Not Found for each (re-verified 2026-11-14)</td><td>Open — owner must supply the 10-character ASINs</td></tr>
-            <tr><td><code>F-20</code> <em>(new)</em></td><td>The per-link <code>btn_ref</code> token <strong>changes between days</strong> although the destination ASIN does not, so the earlier “same token on re-fetch” evidence does not survive a day boundary</td><td>Open — treat the code→ASIN mapping as observed behaviour, not documented intent</td></tr>
+            <tr><td><code>F-21</code> <em>(new)</em></td><td>The per-link <code>btn_ref</code> token <strong>changes between days</strong> although the destination ASIN does not, so the earlier “same token on re-fetch” evidence does not survive a day boundary</td><td>Open — treat the code→ASIN mapping as observed behaviour, not documented intent</td></tr>
             <tr><td><code>F-07</code></td><td>No resolved URL carries an Associates <code>tag</code>, so as supplied the links cannot be relied on to attribute commission</td><td>Open — owner must regenerate the links with the Associates ID</td></tr>
             <tr><td><code>F-05</code></td><td>PA-API 5 is deprecated; catalog access requires the Creators API, which requires ≥10 qualifying sales in 30 days</td><td>Open — owner must register for Creators API access</td></tr>
             <tr><td><code>F-08</code></td><td>No click, conversion or earnings report exists, so no performance figure can be published</td><td>Open — owner must connect a dated Associates report</td></tr>
             <tr><td><code>F-19</code></td><td>The Emeril manufacturer page contradicts itself on cooking presets: 24 (description), 25 (spec tile), “10-in-1” (feature block)</td><td>Open — published as a conflict, no value chosen</td></tr>
-            <tr><td><code>F-22</code> <em>(new)</em></td><td>The dashboard flag count was derived from the reader-facing subset, not the register: it showed 14 while <code>pages/flags.html</code> published 21</td><td>Closed — count now pinned to the ledger by a gate (negative-tested)</td></tr>
-            <tr><td><code>F-21</code></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
+            <tr><td><code>F-26</code> <em>(new)</em></td><td>The dashboard flag count was derived from the reader-facing subset, not the register: it showed 14 while <code>pages/flags.html</code> published 21</td><td>Closed — count now pinned to the ledger by a gate (negative-tested)</td></tr>
+            <tr><td><code>F-25</code></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
           </tbody>
         </table>
       </div>
       <p style="margin:12px 0 0;font-size:13px">
-        The full text of all 21 items, each with its official-source link, is on the
+        The full text of all 26 items, each with its official-source link, is on the
         <a href="flagged.html">Flagged for Review</a> page; the generated detail lives on
         <a href="pages/flags.html">pages/flags.html</a>.
       </p>
+    </div>
+
+    <div class="card">
+      <h3>How the three supplied links behave — evidence &amp; controls</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Every observation and every control, each linked to the page it was read from. This is the
+        evidence that lets the site name the three products at all.      </p>
+      <div id="resolutionTable"></div>
     </div>
 
     <div class="card">
@@ -162,15 +162,20 @@
     </div>
 
     <footer class="site">
-      Verified dataset date: 2026-11-13 · re-verified live 2026-11-14 · Sources:
+      Verified dataset date: 2026-11-14 · Sources:
       <a href="https://affiliate-program.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon Associates</a> ·
       <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies</a> ·
       <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement</a> ·
       <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">Amazon product pages</a>
-      · <a href="verification.html">Verification log</a> · <a href="sources.html">All sources</a>
-      · Companion sites: <a href="research-hub/start.html">Affiliate Research Hub</a> · <a href="pages/index.html">Findings &amp; verified subpages</a> ·
-      <a href="northstar/index.html">Northstar prototype</a> · <a href="affiliate-lab/index.html">Affiliate Lab (verification site)</a> ·
-      <a href="revalidation/index.html">Revalidation 2026-11-14 (control test)</a>
+      · Full source register: <a href="sources.html">Sources</a> · Verification log:
+      <a href="verification.html">Verification</a> · Findings &amp; category subpages:
+      <a href="pages/index.html">Findings hub</a> ·
+      <a href="pages/categories/index.html">Categories</a> · Companion sites:
+      <a href="research-hub/start.html">Affiliate Research Hub</a> ·
+      <a href="revalidation/index.html">Revalidation 2026-11-14</a> ·
+      <a href="affiliate-lab/index.html">Affiliate Lab</a> ·
+      <a href="northstar/index.html">Northstar prototype</a> ·
+      <a href="zone2/index.html">Zone2 platform build</a>
     </footer>
   </main>
 </div>

@@ -35,7 +35,7 @@ clicked back to the page it came from, and every gap is visible.
 > as "a coherent niche." The destinations below are the products each supplied link **resolves to**
 > (verified on the official Amazon product page), but each supplied code is **9 characters — not a
 > valid ASIN** (an ASIN is 10) — and `amazon.com/dp/<code>` returns Page Not Found. The
-> code→product mapping is therefore **flagged for confirmation** (F-01/F-02/F-03/F-12); it is not a
+> code→product mapping is therefore **flagged for confirmation** (F-01, F-02, F-03); it is not a
 > valid-ASIN match. The "countertop air frying" niche reading is an inference from the resolved
 > destinations and is not asserted as a verified finding. The canonical, current executive summary is
 > [`EXECUTIVE_SUMMARY.md`](../EXECUTIVE_SUMMARY.md) at the repo root. The original wording is preserved
@@ -54,14 +54,14 @@ destinations (flagged for confirmation)**; each code is not itself a valid ASIN.
 
 The resolved destinations all sit in the air-fryer space, but a "coherent niche: countertop air
 frying" reading is an **inference drawn from the resolved destinations**, not a verified finding about
-the supplied codes, and is therefore not asserted (see flag F-12).
+the supplied codes, and is therefore not asserted (see flag F-03).
 
 ## 4. Verified facts, and the limits of them
 
 > **Scope note (2026-11-14):** the attributes below are verified for the **resolved destination
 > ASINs** (the products each supplied link resolves to). They are accurate about those ASINs, but the
 > supplied codes are not valid ASINs, so these specs describe the resolved destinations, not a
-> confirmed valid-ASIN match for the supplied codes (F-01/F-02/F-12).
+> confirmed valid-ASIN match for the supplied codes (F-01, F-02, F-03).
 
 Every published attribute has a named official source: the Amazon product page for that exact
 ASIN, or the manufacturer's own product page for the model number printed on it.
