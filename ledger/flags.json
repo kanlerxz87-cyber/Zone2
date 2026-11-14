@@ -1,5 +1,5 @@
 {
-  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text.",
+  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings.",
   "as_of": "2026-11-14",
   "flags": [
     {
@@ -33,14 +33,16 @@
     {
       "id": "F-03",
       "severity": "medium",
-      "title": "link.amazon codes do not resolve as ASINs; per-link destinations are stable but untagged and unmapped by any public document",
-      "detail": "CORRECTED 2026-11-14 after a controlled re-test by session c6e94e8d (see revalidation/ and docs/revalidation-2026-11-14.md), which this session independently reproduced: a bare, untagged request to a VALID 10-character ASIN (/dp/B08DKYBTPH and /dp/B0CDY277D3) is answered with the real product page and Amazon's own plumbing appends the same lv=shuf&plpRedirect=mhFallback markers. So mhFallback is a normal rewrite marker, NOT evidence of a fallback. What the earlier version of this row asserted - that the token 'was not honoured' and the destinations were arbitrary - is withdrawn as unsupported. What remains true and verifiable: the three codes are 9 characters where an ASIN is 10; /dp/<code> returns Page Not Found for all three; each link.amazon URL resolves to ONE distinct listing and carries its own per-link btn_ref token. The SPECIFIC values quoted earlier (srctok-1e229870efde5acf / -534f5e7952f396b2 / -76c3adaeb8708b44) were re-measured on 2026-11-14 and are NOT stable across days: the same links then carried srctok-1f979f303a4b5691 / -0cd8be3c7e2e0de3 / -7c59360cbbbd59b7 while still landing on the same three ASINs. See F-20. The ASIN destination is the stable fact; the token is not; and none of the resolved URLs carries an Associates tag=. No public Amazon document binds a link.amazon code to a destination ASIN, so the mapping stays unconfirmed - it is not shown to be absent.",
-      "impact": "The destinations are stable and individually tracked, so they are a real observation about each supplied link - but they are still not established as the three items named in the brief. Publishing product copy about them would assert a mapping the documentation does not make.",
-      "action_required": "Downgraded from high to medium. Confirm the intended ASINs, or supply links tagged with the Associates ID. Product pages stay published as 'the product each link resolves to', not as 'the requested product'.",
+      "title": "The three link.amazon codes are honoured lookups, but no Amazon document binds a code to a product",
+      "detail": "FINAL READING (2026-11-14, session 4338f55e; supersedes the withdrawn 'arbitrary fallback' wording and the 'permanent per-link token' wording). What is verified: (a) each of the three supplied link.amazon URLs resolves, reproducibly, to ONE specific Amazon product page — B0CDY277D3, B09B7SB46R, B08DKYBTPH; (b) an UNKNOWN code on the same service (https://link.amazon/B00TEST12) returns a 404 page ('You've clicked on an invalid URL'), so the service looks the code up and the token IS honoured — the earlier claim that the token was ignored and the destination arbitrary is falsified; (c) plpRedirect=mhFallback is also emitted on ordinary valid /dp/ loads and so is not evidence of a fallback; (d) each link carries its own btn_ref=srctok-… token, which rotates over time while the destination does not. What is NOT verified: no public Amazon document describes the link.amazon/<code> format or binds a code to a product ASIN, so the binding is established by observed behaviour, not by documentation.",
+      "impact": "The three products can be named and marketed as the destinations the supplied links resolve to, which is what this site now publishes. They cannot be claimed as 'the products named in the brief' until the owner confirms the mapping in Associates Central.",
+      "action_required": "Owner: confirm in Associates Central that these three destinations are the items to market, and supply links carrying the Associates tag (F-24).",
       "source_ids": [
+        "S32",
         "S19",
         "S20",
-        "S21"
+        "S21",
+        "S24"
       ],
       "owner": "user"
     },
@@ -74,14 +76,15 @@
     {
       "id": "F-06",
       "severity": "high",
-      "title": "No product may be marketed for these items until identity is verified",
-      "detail": "Because identity is unresolved, the article/comparison/guide generator is intentionally inert for all three entries. This blocks the \"generate marketing content\" step of the brief for these specific inputs.",
-      "impact": "Zero product copy is published for the three submitted links. Everything else in the platform (policy engine, rate data, scoring, tracking schema, templates, deploy) is delivered.",
-      "action_required": "Provide valid ASINs; the pipeline then produces verified-only content.",
+      "title": "Published copy must be labelled 'the product this link resolves to' until the owner confirms the mapping",
+      "detail": "Because no public Amazon document binds a link.amazon code to a product, the three products this site publishes are the destinations the supplied links resolve to — verified by live fetch and by the unknown-code control (F-20) — not a confirmed brief mapping. The article, comparison and buying-guide generator therefore stays in preview for the three submitted tokens: draft copy exists in content/templates/** but is not published, so that no article asserts a mapping Amazon does not document.",
+      "impact": "No published article, comparison or buying guide names these three products yet. Every other part of the platform (policy engine, rate data, scoring, tracking schema, templates, deploy) is delivered and gated.",
+      "action_required": "Confirm the mapping and supply tagged links; the pipeline then publishes verified-only copy without any other change.",
       "source_ids": [
-        "S16",
-        "S17",
-        "S18"
+        "S32",
+        "S19",
+        "S20",
+        "S21"
       ],
       "owner": "user"
     },
@@ -207,7 +210,7 @@
       "title": "Three compliance-control rows cited controls and files that do not exist; one misquoted current policy",
       "detail": "Found in a line-by-line re-verification of the repository on 2026-11-14. (1) R-01 cited `site/compliance-inject.js` as the mechanism that renders the required disclosure - no such file exists anywhere in the repository; the disclosure is in fact emitted by the page renderers and enforced by tools/validate_data.py::check_disclosure plus the workflow's disclosure step. (2) R-11 cited `tools/validate_data.py::assert_no_amazon_marks` - no such function exists; the implemented function is `check_marks`. (3) R-02 cited `tools/generate_articles.py::lint_disclosure_proximity` and R-06 cited `::lint_claims` - neither function exists; both rules are enforced inside the single `lint()` function, and R-06's inline evidence marker is `<!--evidence:` (the data.js summary said 'inline evidence reference', which is right in substance but the function name was invented). (4) R-09 stated that email/SMS channels are 'absent from the schema' so a scheduler cannot target them - the current Program Policies expressly PERMIT Special Links in solicited (opt-in) email, SMS and direct messaging, so the rule text was stale against the policy page updated April 14, 2026.",
       "impact": "The published compliance table claimed control coverage that did not exist for four rows. No fabricated product or price data was involved - this is a control-accuracy defect, not a data-invention defect - but a reader auditing 'is this enforced?' would have been given a wrong file or function name, and R-09 misstated a permission as a prohibition.",
-      "action_required": "Corrected in this session: R-01, R-02, R-06 and R-11 now cite the real functions and files; R-01 and R-11 carry an explicit 'Corrected 2026-11-14' sentence; R-09's requirement text was rewritten to the policy as published (solicited/opt-in only, certification on request) while keeping the repository's stricter no-email/no-SMS channel default as a self-imposed control, labelled as such. Reviewer may still wish to re-read each control against the code.",
+      "action_required": "Corrected, in two steps. Step 1 (session bbe4ca47): R-01 and R-11 were given the real functions and files (`tools/validate_data.py::check_marks`, the page renderers) and R-01's invented `site/compliance-inject.js` reference was removed. Step 2 (final integration, session 4338f55e, after change request DD-1 items 1-3 from session dd87f326): R-02 and R-06 now name `lint()` - the function that actually performs the checks - instead of the non-existent `lint_disclosure_proximity` and `lint_claims`; R-06's `expires_utc` enforcement, which had never been implemented, is implemented now and covered by tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted; and R-09's requirement text was rewritten to the policy as published (solicited/opt-in only, certification on request) while keeping the repository's stricter web-only channel default as a self-imposed control, labelled as such (published as flag F-25). All four rows now cite mechanisms that exist in the code.",
       "source_ids": [
         "S01",
         "S02",
@@ -245,7 +248,7 @@
       "id": "F-19",
       "severity": "medium",
       "title": "Emeril manufacturer page contradicts itself on functions/presets, so the published 'conflict' row named the wrong second source",
-      "detail": "The published spec row for the Emeril Lagasse 26QT (P-02, 'Cooking functions / presets') reads '24 per Amazon listing title; 25 per the manufacturer's spec tile'. Re-read on 2026-11-14, the manufacturer's own page carries THREE different numbers: the description text says '24 one-touch cooking presets', a specification tile says '25 Cooking Pre-sets', and a feature block headed '10-In-1 Versatility' lists ten functions. The Amazon listing title observed on the same day likewise says '24 cooking functions'. So the disagreement is not Amazon-vs-manufacturer - it is the manufacturer page disagreeing with itself, and no official source fixes the right number.",
+      "detail": "The published spec row for the Emeril Lagasse 26QT (P-02, 'Cooking functions / presets') reads '24 per Amazon listing title; 25 per the manufacturer's spec tile'. Re-read on 2026-11-14, the manufacturer's own page carries THREE different numbers: the description text says '24 one-touch cooking presets', a specification tile says '25 Cooking Pre-sets', and a feature block headed '10-In-1 Versatility' lists ten functions. The Amazon listing title observed on the same day likewise says '24 cooking functions'. So the disagreement is not Amazon-vs-manufacturer - it is the manufacturer page disagreeing with itself, and no official source fixes the right number. Re-read again on 2026-11-14 by session 4338f55e with the same result: the Emeril Everyday page states '24 one-touch cooking presets' in its description, '25 Cooking Pre-sets' in its specification tile, and a feature block headed '10-In-1 Versatility' listing ten functions, while the Amazon listing title says '24 cooking functions'. The conflict is confirmed and remains unresolved.",
       "impact": "The row was not wrong about a conflict existing, but it attributed the conflict to the wrong party, which would mislead a reader trying to resolve it. The value is unconfirmable, so it must stay blank-or-both-values and flagged rather than resolved by inference.",
       "action_required": "Corrected: the row now shows all four observations with their exact source wording and status=conflict; flag F-19 published. Reviewer action: treat the preset count as unresolved; do not publish a single number in any article.",
       "source_ids": [
@@ -256,22 +259,77 @@
     {
       "id": "F-20",
       "severity": "medium",
-      "title": "The link-rewrite token (btn_ref) changes between days while the destination ASIN does not — so the 'stable per-link tracking token' evidence is weaker than published",
-      "detail": "Sessions c6e94e8d and bbe4ca47 published, correctly on the evidence they had, that a re-fetch of a supplied short link returns 'the same ASIN, body and btn_ref token', and used that stability to argue the links are individually tracked rather than falling back. Re-fetched on 2026-11-14 with a working outbound connection, all three links still land on the same three ASINs and the same product bodies, but the btn_ref value is DIFFERENT for every link: link.amazon/B04G1MEwY now carries btn_ref=srctok-1f979f303a4b5691 (earlier sessions recorded srctok-1e229870efde5acf), B02NbDxp3 carries srctok-0cd8be3c7e2e0de3 (earlier srctok-534f5e7952f396b2), B00hJ57DV carries srctok-7c59360cbbbd59b7 (earlier srctok-76c3adaeb8708b44). Within a single day the token is stable; across days it is not.",
-      "impact": "The conclusion that the three ASINs are the destinations stands — the ASINs, the page bodies and the channelId=704 parameter all reproduce across sessions and across days. What does NOT reproduce is the claim that the per-link token itself is stable. Anyone reading 'same btn_ref token' on the site as proof of a documented mapping is being given evidence that does not survive a day boundary. The mapping therefore remains observed behaviour with no public Amazon document binding a short code to a destination ASIN.",
-      "action_required": "Owner: confirm the three destinations in Associates Central, then regenerate the links with your Associates tag. Do not use the btn_ref value as a stable identifier for anything.",
-      "status": "open",
+      "title": "DECISIVE CONTROL — an unknown link.amazon code returns a 404, so the three supplied codes are honoured lookups",
+      "detail": "Run 2026-11-14 by session 4338f55e, the control the earlier sessions did not run. GET https://link.amazon/B00TEST12 — a 9-character code that was never supplied — resolved to https://amzlinks.in/B00TEST12 and returned the short-link service's 404 page: '404: File Not Found … You've clicked on an invalid URL.' (the page's image is hosted at amzlinks.in/post-tap/short-link-404.png). The three supplied codes do not behave that way: each resolves to one specific Amazon product page, reproducibly, across fetches on 2026-11-13 and 2026-11-14. A service that answered unknown codes with a random product would be a fallback; a service that answers unknown codes with a 404 is performing a lookup. Therefore the published reading that the token was 'ignored' and the destination 'arbitrary' is falsified.",
+      "impact": "This is the single finding that decides the disagreement between five earlier sessions. It moves the three products from 'evidence only' to 'the observed, reproducible destination of each supplied link' — while leaving the documentation gap (F-04, F-03) exactly as it was.",
+      "action_required": "None for the owner to unblock. Recorded so the reviewer can see the control and repeat it: open https://link.amazon/B00TEST12 in a browser.",
       "source_ids": [
+        "S32",
         "S19",
         "S20",
-        "S21",
-        "S16"
+        "S21"
       ],
-      "published_on": "pages/flags.html + flagged.html + revalidation/flagged.html",
-      "owner": "user"
+      "owner": "done"
     },
     {
       "id": "F-21",
+      "severity": "low",
+      "title": "The link-rewrite token (btn_ref) rotates between days while the destination ASIN does not — so the token is not a usable identity marker",
+      "detail": "Measured 2026-11-14 by session 4338f55e. link.amazon/B04G1MEwY carried btn_ref=srctok-1e229870efde5acf earlier the same day (recorded by session c6e94e8d) and btn_ref=srctok-1f979f303a4b5691 at about 10:04 UTC, while the destination stayed /dp/B0CDY277D3 on every fetch. A direct, untagged load of /dp/B08DKYBTPH carries no btn_ref at all. The three supplied links' tokens are distinct from one another (1f979f303a4b5691 / 0cd8be3c7e2e0de3 / 7c59360cbbbd59b7) and all three carry channelId=704. Independent live re-fetch on 2026-11-14 by session a133aa61 recorded the same three destinations with different per-link tokens: link.amazon/B04G1MEwY carried btn_ref=srctok-1f979f303a4b5691 (earlier sessions recorded srctok-1e229870efde5acf), B02NbDxp3 carried srctok-0cd8be3c7e2e0de3 (earlier srctok-534f5e7952f396b2), and B00hJ57DV carried srctok-7c59360cbbbd59b7 (earlier srctok-76c3adaeb8708b44). Within a single day the token is stable; across days it is not.",
+      "impact": "Two published statements were each half-wrong: 'a different btn_ref on re-fetch proves the destination shuffles' (F-05, F-12 — withdrawn) and 'an identical btn_ref proves the token is permanent' (revalidation C-2 — overstated). The correct statement is that the source token is per-link and time-scoped, and the destination is stable. Anyone auditing this repository by re-fetching a link tomorrow should expect a different srctok and the same product. The ASIN, the page body and the channelId=704 parameter all reproduce across sessions and across days, so the destination findings stand; only the token's stability claim does not. Read btn_ref as evidence of a live redirect, never as an identifier.",
+      "action_required": "None — published so the wording is not misread as a guarantee of permanence in either direction. Do not use the btn_ref value as a stable identifier for anything. Confirm the three destinations in Associates Central and regenerate the links with the Associates tag.",
+      "source_ids": [
+        "S16",
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "owner": "done"
+    },
+    {
+      "id": "F-22",
+      "severity": "medium",
+      "title": "The Amazon title for B08DKYBTPH says '450°F Hi-Fry', but that same page's bullet list and specification block — and the manufacturer — say 200–400 °F",
+      "detail": "Verified 2026-11-14. The Amazon listing title for B08DKYBTPH reads 'Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results'. On the same page the 'About this item' bullet says 'a temperature range from 200-400°F' and the Product information block gives 'Min Temperature Setting: 94 °C' and 'Max Temperature Setting: 400 °F'. Chefman's own page for model RJ38-SQSS-8T states '200–400°F / 95º-205ºC' and 'Max temp: 400ºF/ 205ºC'. The Hi-Fry name and the 450 °F figure belong to the 6-quart dual-window model RJ38-SQPF-3TDB-2W, whose Chefman page states 'Max temp: 450ºF/ 235ºC with Hi-Fry function'.",
+      "impact": "Repeating '450 °F' in an article or comparison for the 8-quart model would repeat a claim the product's own specification block contradicts. 450 °F is publishable only for the 6-quart dual-window model.",
+      "action_required": "Copy rule published: no 450 °F claim for the 8-quart model. Owner action: none required.",
+      "source_ids": [
+        "S21",
+        "S26",
+        "S25"
+      ],
+      "owner": "done"
+    },
+    {
+      "id": "F-23",
+      "severity": "medium",
+      "title": "Emeril model number differs between the Amazon listing and the manufacturer's own store",
+      "detail": "Verified 2026-11-14. Amazon's Item details for B09B7SB46R give 'Model Number: 4-00675-02X-VN' and 'Part Number: 4-00675-02X-VN'. The Emeril Everyday official store page for the same product prints '4-00675-02A-VN'. Both are official pages for the same listing, and both suffix values appear in the manufacturer's own image filenames ('..._4-00675-02X_...' and '..._4-00675-02A-VN').",
+      "impact": "A single model number cannot be published for this product. Both values are shown side by side with their sources; neither is chosen.",
+      "action_required": "None — both values published with sources.",
+      "source_ids": [
+        "S20",
+        "S27"
+      ],
+      "owner": "done"
+    },
+    {
+      "id": "F-24",
+      "severity": "medium",
+      "title": "The three supplied links carry no Associates tag, so as supplied they cannot earn a commission",
+      "detail": "Verified 2026-11-14. Every resolved URL ends …&channelId=704&plpRedirect=mhFallback (short-link arrival) or …?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1 (direct arrival); none carries a tag= parameter. Amazon's own help page gives the qualifying Special Link format as http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID and states that the tag identifies the Associates account the sale is tracked to.",
+      "impact": "As supplied, the three links would earn nothing and could not be attributed in reporting. This blocks revenue, not identification — it is the one step that turns this repository from a verified research platform into a earning affiliate site.",
+      "action_required": "Owner: supply the Associates ID (and the target marketplace) so links can be regenerated in the tagged format the program requires.",
+      "source_ids": [
+        "S24",
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "owner": "user"
+    },
+    {
+      "id": "F-25",
       "severity": "low",
       "owner": "done",
       "title": "Compliance row R-09 corrected: solicited email/SMS is permitted by the Program Policies, so the repo's web-only default is now labelled self-imposed",
@@ -286,11 +344,11 @@
       "published_on": "pages/compliance.html + pages/flags.html"
     },
     {
-      "id": "F-22",
+      "id": "F-26",
       "severity": "medium",
       "owner": "done",
       "title": "The dashboard's flag count was derived from the wrong list and understated the register (14 shown, 21 held)",
-      "detail": "F-17 replaced a typed '11 items flagged' KPI with a derived count, which was the right direction. But the value was derived from FLAGGED_ROWS in assets/js/data.js - the reader-facing *subset* rendered on flagged.html - not from the canonical register in ledger/flags.json. As flags F-20 and F-21 were added to the register the dashboard kept showing 14 while pages/flags.html published 21, so one site told two different numbers. Only visible on the deployed page: no gate compared the JS constant to the ledger.",
+      "detail": "F-17 (and the original F-22 on main, renumbered here to F-26) replaced a typed '11 items flagged' KPI with a derived count, which was the right direction. But the value was derived from FLAGGED_ROWS in assets/js/data.js - the reader-facing *subset* rendered on flagged.html - not from the canonical register in ledger/flags.json. As flags F-20 and F-21 were added to the register the dashboard kept showing 14 while pages/flags.html published 21, so one site told two different numbers. Only visible on the deployed page: no gate compared the JS constant to the ledger.",
       "impact": "A KPI that understates the number of open items is a disclosure problem, not a cosmetic one: it tells the reader the site is cleaner than it is. It is the same class of defect as F-17.",
       "action_required": "None open. CANONICAL_FLAG_COUNT now lives in assets/js/data.js and tools/validate_data.py::check_flag_count fails the build when it disagrees with the ledger (negative-tested: setting it to 14 turns the gate red).",
       "status": "closed",

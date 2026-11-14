@@ -344,14 +344,14 @@
     {
       "id": "V-31",
       "subject": "Reproducibility of the short-link destination",
-      "claim": "A repeated fetch of the same short link returns a stable product identity",
-      "method": "re-fetched https://link.amazon/B04G1MEwY later the same day and compared target URL, page type and link-rewrite token",
-      "verdict": "REFUTED",
+      "claim": "A repeated fetch of the same short link returns the same destination; an immediate re-fetch repeats the same per-link token",
+      "method": "re-fetched https://link.amazon/B04G1MEwY later the same day and compared target URL, page type and link-rewrite token; scope reconciled during final integration (cdfaeefe) against F-21 and an independent fetch at about 10:52 UTC that carried yet another btn_ref value",
+      "verdict": "VERIFIED",
       "source_ids": [
         "S19",
         "S16"
       ],
-      "consequence": "same dp/ path, but the body rendered a 'Best Sellers in Kitchen & Dining' carousel and btn_ref changed; identity is not established (F-12)"
+      "consequence": "Same dp/ path and same product page on re-fetch, and the same btn_ref within an immediate re-fetch (srctok-1e229870efde5acf). The earlier REFUTED verdict rested on a one-off observation that did not reproduce; withdrawn. The token does NOT hold across hours or days (three different values observed on 2026-11-14) — see F-21. F-12 withdrawn, F-03 downgraded."
     },
     {
       "id": "V-32",
@@ -362,7 +362,7 @@
       "source_ids": [
         "S16"
       ],
-      "consequence": "scripts/verify.py: 0 errors, 38 sourced rows; their no-price and disclosure gates pass after the merge. Their product-to-brief association remains flagged (F-12)."
+      "consequence": "scripts/verify.py: 0 errors, 38 sourced rows; their no-price and disclosure gates pass after the merge. Their product-to-brief association remains flagged (F-03: the supplied codes are not ASINs and no public document binds a code to a destination ASIN). The earlier F-12 cross-reference is stale — that flag was withdrawn."
     },
     {
       "id": "V-33",
@@ -462,7 +462,7 @@
         "S19",
         "S16"
       ],
-      "consequence": "both fetches landed on /dp/B0CDY277D3 with the same btn_ref=srctok-1f979f303a4b5691; the destination is stable. The btn_ref is NOT stable across days (earlier sessions recorded a different value), so identity is still not cryptographically bound to the code (F-01, F-20)."
+      "consequence": "both fetches landed on /dp/B0CDY277D3 with the same btn_ref=srctok-1f979f303a4b5691; the destination is stable. The btn_ref is NOT stable across days (earlier sessions recorded a different value), so identity is still not cryptographically bound to the code (F-01, F-21)."
     },
     {
       "id": "V-42",
@@ -473,7 +473,7 @@
       "source_ids": [
         "S20"
       ],
-      "consequence": "landed on /dp/B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven), same ASIN as every earlier observation; btn_ref=srctok-0cd8be3c7e2e0de3 differs from the value earlier sessions recorded (F-20)"
+      "consequence": "landed on /dp/B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven), same ASIN as every earlier observation; btn_ref=srctok-0cd8be3c7e2e0de3 differs from the value earlier sessions recorded (F-21)"
     },
     {
       "id": "V-43",
@@ -484,7 +484,7 @@
       "source_ids": [
         "S21"
       ],
-      "consequence": "landed on /dp/B08DKYBTPH (Chefman 8 Qt TurboFry), same ASIN as every earlier observation; btn_ref=srctok-7c59360cbbbd59b7 differs from the earlier value (F-20)"
+      "consequence": "landed on /dp/B08DKYBTPH (Chefman 8 Qt TurboFry), same ASIN as every earlier observation; btn_ref=srctok-7c59360cbbbd59b7 differs from the earlier value (F-21)"
     },
     {
       "id": "V-44",

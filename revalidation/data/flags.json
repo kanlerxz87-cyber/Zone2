@@ -110,7 +110,7 @@
       "severity": "medium",
       "title": "The per-link source token (btn_ref) is stable within a day but changes between days",
       "detail": "Session c6e94e8d's C-2 finding concluded the redirect was 'not a shuffle' partly because a re-fetch returned an 'identical btn_ref'. Session a133aa61 re-fetched all three supplied links on 2026-11-14, one day later, with live outbound access. Destinations reproduced exactly (B0CDY277D3, B09B7SB46R, B08DKYBTPH) and so did the page bodies and channelId=704, but every btn_ref value is different: B04G1MEwY srctok-1f979f303a4b5691 (was srctok-1e229870efde5acf), B02NbDxp3 srctok-0cd8be3c7e2e0de3 (was srctok-534f5e7952f396b2), B00hJ57DV srctok-7c59360cbbbd59b7 (was srctok-76c3adaeb8708b44).",
-      "disposition": "Published. RV-01's conclusion is unaffected (the ASIN destination is stable); only the token-stability half is narrowed. Canonical flag: F-20 in ledger/flags.json.",
+      "disposition": "Published. RV-01's conclusion is unaffected (the ASIN destination is stable); only the token-stability half is narrowed. Canonical flag: F-21 in ledger/flags.json.",
       "source": [
         "https://link.amazon/B04G1MEwY",
         "https://link.amazon/B02NbDxp3",

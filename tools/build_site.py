@@ -25,7 +25,11 @@ PAGES = REPO / "pages"
 DATA = REPO / "ledger"
 SITE_CSS_SRC = REPO / "tools" / "pages-site.css"  # source of the subpage stylesheet
 
-SITE_NAME = "Northstar"  # never an Amazon mark - Participation Requirements rule R-11
+SITE_NAME = "Zone2"  # never an Amazon mark - Participation Requirements rule R-11
+# Final integration 2026-11-14 (session 4338f55e): the generated pages/ namespace was branded
+# "Northstar", which is the name of the *preserved earlier prototype* kept at northstar/. The
+# published site is one product, so the findings namespace now carries the same brand as the
+# primary dashboard; the prototype stays reachable at ../northstar/index.html under its own name.
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 LIVE_URL = "https://kanlerxz87-cyber.github.io/Zone2/"
 
@@ -202,7 +206,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
 <body>
 <div class="shell">
 <aside class="sidebar">
-  <a class="brand" href="{root}index.html"><span class="brand-mark">N</span><span>{esc(SITE_NAME)}<small>Affiliate intelligence</small></span></a>
+  <a class="brand" href="{root}index.html"><span class="brand-mark">Z</span><span>{esc(SITE_NAME)}<small>Affiliate intelligence</small></span></a>
   <div class="side-label">FINDINGS &amp; SUBPAGES</div>
   <nav class="nav">{"".join(items)}</nav>
   <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Verified data only</strong><small>{esc(AS_OF)} &middot; blank = unconfirmed</small></div></div>
@@ -300,8 +304,9 @@ def page_hub() -> str:
 
 def page_exec() -> str:
     key = [
-        ("Requested products can be identified", False, "All three tokens are 9 characters (an ASIN is 10); the canonical /dp/ URLs return Amazon's Page Not Found page; and each submitted short link resolved to a different, unrelated ASIN through a fallback redirect.", ["S16", "S17", "S18", "S19"]),
-        ("Marketing copy for those products", False, "The content engine refuses to draft copy for an entry whose identity is unresolved, so zero articles, comparisons and buying guides exist for these inputs.", ["S02"]),
+        ("What each supplied link resolves to", True, "Each of the three supplied link.amazon URLs resolves to one specific Amazon product page, reproducibly, and an UNKNOWN code on the same service returns a 404 instead of a product - so the codes are honoured lookups, not ignored tokens.", ["S28", "S19", "S20", "S21"]),
+        ("The brief's product identity, as a documented contract", False, "Each supplied code is 9 characters (an ASIN is 10), the canonical /dp/ URLs return Amazon's Page Not Found page, and no public Amazon document binds a link.amazon code to a product. The destination is therefore published as an observation, never as a confirmed brief mapping.", ["S16", "S17", "S18", "S24"]),
+        ("Marketing copy for those products", False, "The content engine refuses to draft published copy for an entry whose brief mapping is undocumented, so zero articles, comparisons and buying guides are published for these inputs. The verified specification tables above are published; the copy is held pending owner confirmation.", ["S02", "S28"]),
         ("Platform automation built", True, "Collector, scoring, content linters, link builder, click tracker, optimizer and a deterministic site builder are present and runnable, with policy rules encoded as code.", ["S01", "S02"]),
         ("Official commission economics", True, "Amazon's published fixed-rate table transcribed row by row (11 bands, 10.00% down to 0.00%), plus bounty amounts, attribution windows and payment terms.", ["S04", "S02"]),
         ("Compliance wiring", True, f"{len(COMPLIANCE['rules'])} rules from the Operating Agreement, Program Policies and Participation Requirements, each mapped to a specific implemented control.", ["S01", "S02", "S03", "S05"]),
@@ -319,7 +324,7 @@ def page_exec() -> str:
         for q, ok, basis, srcs in key
     ]
     findings = [
-        "The highest-value action is identifier hygiene, not copywriting: a link that does not resolve to a valid ASIN cannot be researched, written about, tagged, or attributed. The pipeline now fails loudly at that boundary instead of inventing downstream facts.",
+        "The highest-value action is identifier hygiene, not copywriting: a link whose code is not a valid ASIN cannot be researched, written about, tagged, or attributed, even when its destination is known. The three supplied codes are exactly that case - they resolve, but they are not ASINs, they carry no Associates tag, and no Amazon document says what they are for.",
         "Amazon's published economics shape the plan. Only a few bands are high (Luxury Beauty 10.00%; music/handmade/video 5.00%; Books/Kitchen/Automotive 4.50%); the largest consumer clusters sit at 3.00% and the default band is 4.00%, while nine category groups pay 0.00% and are excluded from the niche queue before ranking even starts.",
         "Attribution is narrow and mechanical: a 24-hour Session, an 89-day cart path, and shipment/payment inside 180 days. Content is therefore worth optimising only where readers are close to a purchase decision, and the model credits nothing outside that window.",
         "Prices and ratings may not be self-hosted as static text: they may appear only from an Amazon-served link or a dated API response. That is why a product whose listing could not be fetched shows a blank price cell, and nothing on the site can look like a stale price.",
@@ -327,7 +332,8 @@ def page_exec() -> str:
         "Reviewing the previously merged commit found no false claims \u2014 its four citations are live official pages \u2014 but it predated the commission table, the attribution mechanics, per-row sourcing and the category subpages added here.",
     ]
     actions = [
-        ("A1", "Replace the three tokens with valid 10-character ASINs, or full amazon.<tld>/dp/ URLs", "user", "unblocks identity for P-01..P-03, and with it every dependent field", ["S16", "S17", "S18"]),
+        ("A1", "Confirm in Associates Central that the three resolved destinations are the items to market, and replace the three tokens with valid 10-character ASINs or full amazon.<tld>/dp/ URLs", "user", "unblocks the brief mapping for P-01..P-03, and with it every dependent field and all published copy", ["S16", "S17", "S18", "S28"]),
+        ("A1b", "Supply links that carry the Associates tag (…?tag=YOURASSOCIATEID)", "user", "as supplied the three links carry no tag, so they cannot attribute a sale or earn a commission", ["S24", "S19", "S20", "S21"]),
         ("A2", "Create or confirm an Associates account, marketplace and Associates ID/tag", "user", "turns the inert link preview into a compliant tagged Special Link and enables earnings reporting", ["S01", "S02"]),
         ("A3", "Register for the Creators API (requires >=10 qualifying sales in the past 30 days)", "user", "activates real product research, offer and browse-node data", ["S07"]),
         ("A4", "Store one dated Associates report export at ledger/associates_report.json", "user", "unlocks conversion, EPC and the optimizer's revenue-side actions", ["S02"]),
@@ -336,9 +342,11 @@ def page_exec() -> str:
     body = (
         panel(
             "Bottom line",
-            '<p class="lede">Everything this platform needs in order to earn is built and wired to official data. The three named '
-            "products are the one thing that cannot be marketed, because none of the supplied links identifies a product. The site "
-            "therefore publishes the mechanism, the sourced economics, and the gaps \u2014 and nothing else.</p>",
+            '<p class="lede">Everything this platform needs in order to earn is built and wired to official data. The three supplied '
+            "links each resolve to one specific Amazon product page - reproducibly, and confirmed by an unknown-code control that "
+            "returns a 404 rather than a product - so the site publishes those three products with their manufacturer-verified "
+            "specifications and a source link on every row. What it does not publish is copy asserting a brief mapping Amazon does "
+            "not document, or any price, rating or commission figure it could not confirm.</p>",
         )
         + panel("Key questions answered", table(["Question", "Verdict", "Basis", "Evidence"], rows))
         + panel("Findings", "<ol class=\"findings\">" + "".join(f"<li>{esc(f)}</li>" for f in findings) + "</ol>")
@@ -394,6 +402,62 @@ def page_products() -> str:
         + "</dd></div>"
         for e in PRODUCTS["entries"]
     )
+
+    # ---- T23-INTEGRATION: what each supplied link actually resolves to, and its sourced specs ----
+    resolved_rows = []
+    for e in PRODUCTS["entries"]:
+        r = e.get("resolved")
+        if not r:
+            continue
+        resolved_rows.append(
+            [
+                f'<td><a class="pagelink" href="{esc(e["submitted_url"])}" target="_blank" '
+                f'rel="noopener noreferrer nofollow">{esc(e["token_as_given"])}</a></td>',
+                text_cell(r["asin"], code=True),
+                text_cell(r["title"]),
+                text_cell(r["brand"]),
+                text_cell(r["category_path"]),
+                blank_cell("not republished outside an Amazon link (R-04)"),
+                blank_cell("not republished outside an Amazon link (R-04)"),
+                blank_cell("needs a licensed API response"),
+                f"<td>{status_pill('OBSERVED')}</td>",
+                source_cell(r["source_ids"] + r.get("manufacturer_source_ids", [])),
+            ]
+        )
+
+    spec_tables = ""
+    for e in PRODUCTS["entries"]:
+        r = e.get("resolved")
+        if not r:
+            continue
+        srows = []
+        for sp in r["specs"]:
+            if sp.get("status") == "unverified":
+                srows.append(
+                    [
+                        text_cell(sp["attribute"]),
+                        blank_cell(sp.get("why_blank") or "not confirmed on an official page"),
+                        f"<td>{status_pill('UNVERIFIED')}</td>",
+                        source_cell(sp.get("source_ids"), blank_hint="no official source states this value"),
+                    ]
+                )
+            else:
+                srows.append(
+                    [
+                        text_cell(sp["attribute"]),
+                        text_cell(sp["value"]),
+                        f"<td>{status_pill('CONFLICT' if sp.get('status') == 'conflict' else 'VERIFIED')}</td>",
+                        source_cell(sp.get("source_ids")),
+                    ]
+                )
+                if sp.get("source_label"):
+                    srows[-1][1] += f'<div class="row-note">{esc(sp["source_label"])}</div>'
+        spec_tables += panel(
+            f"{r['brand']} {r['asin']} \u2014 specifications",
+            table(["Attribute", "Value", "Status", "Official source"], srows),
+            meta=f'<span class="chip">resolved from {esc(e["token_as_given"])}</span>',
+        )
+
     body = (
         notice("Verification method", PRODUCTS["note"])
         + panel(
@@ -402,6 +466,36 @@ def page_products() -> str:
             meta=f'<span class="chip">{len(rows)} need review</span>',
         )
         + panel("Why each field is blank", f"<dl class=\"whys\">{whys}</dl>")
+        + panel(
+            "What each supplied link resolves to (observed 2026-11-14)",
+            table(
+                [
+                    "Supplied link",
+                    "Resolved ASIN",
+                    "Listing title as published on Amazon",
+                    "Brand",
+                    "Category path",
+                    "Price",
+                    "Rating",
+                    "Commission band",
+                    "Status",
+                    "Evidence",
+                ],
+                resolved_rows,
+            ),
+            meta=f'<span class="chip">{len(resolved_rows)} links resolved</span>',
+        )
+        + notice(
+            "How to read the two tables above",
+            "The first table is about the TOKEN as supplied: it is 9 characters, an ASIN is 10, and "
+            "amazon.com/dp/&lt;code&gt; is Amazon's Page Not Found page, so every field is left blank and "
+            "flagged. The second table is about the LINK as supplied: each one resolves to exactly one "
+            "Amazon product page, reproducibly, and an unknown code on the same service returns a 404 "
+            "instead of a product (flag F-20), so the destination is a verified observation of the link's "
+            "behaviour. They are kept apart because Amazon publishes no document that binds a "
+            "link.amazon code to a product - see flags F-03, F-04 and F-24.",
+        )
+        + spec_tables
         + panel("Evidence observations (reproducible by hand)", table(["ID", "Observation", "Interpretation", "Status", "Evidence"], ev))
         + panel(
             "Next action for these three items",

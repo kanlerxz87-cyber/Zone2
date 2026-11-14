@@ -25,7 +25,7 @@ Each submitted short link opened a **different** live Amazon air-fryer listing, 
 `plpRedirect=mhFallback` marker is not evidence of a fallback** — a bare request to a valid ASIN carries the
 same marker (control test in `docs/revalidation-2026-11-14.md`, reproduced live this session). What remains
 true is narrower: no resolved URL carries an Associates `tag`, no public Amazon document binds the code to
-the destination, and the per-link `btn_ref` token changes between days (flag F-20). The three destinations
+the destination, and the per-link `btn_ref` token changes between days (flag F-21). The three destinations
 are therefore recorded as the product each link resolves to, and are **not** established as the requested
 products.
 
@@ -230,7 +230,7 @@ from another session's note. Row IDs refer to [`verification.html`](verification
 | Control: bare `/dp/B08DKYBTPH` (valid ASIN) | real product page, its links carrying `lv=shuf&channelId=500&plpRedirect=mhFallback&th=1` → **`mhFallback` is not evidence of a fallback** |
 | `btn_ref` on each supplied link | **changed** versus the values earlier sessions recorded (`srctok-1f979f303a4b5691` / `-0cd8be3c7e2e0de3` / `-7c59360cbbbd59b7`) |
 
-**One new finding (flag F-20 / RV-11).** The earlier claim that a re-fetch returns "the same `btn_ref` token"
+**One new finding (flag F-21 / RV-11).** The earlier claim that a re-fetch returns "the same `btn_ref` token"
 does **not** survive a day boundary. The ASIN, the page body and `channelId=704` all reproduce; the token does
 not. So the published conclusion is narrowed: the destinations are stable and each link is individually tracked,
 but the token is not a stable identifier and the short-code→ASIN mapping remains **observed behaviour**, not
