@@ -76,9 +76,9 @@
   </div>
 
   <div class="flag-item" id="AF-06">
-    <h3>AF-06 · Supplied <code>link.amazon/&lt;code&gt;</code> URLs fall back to unrelated pages</h3>
+    <h3>AF-06 · Supplied <code>link.amazon/&lt;code&gt;</code> URLs open a stable listing, but no public document ties a code to it</h3>
     <div class="meta">Severity: high · Status: <span class="badge flag">open</span></div>
-    <p>Each supplied short link redirected into an unrelated Amazon page with <code>plpRedirect=mhFallback</code> instead of opening a product for the code. <code>link.amazon/</code> root and <code>/robots.txt</code> returned HTTP 403.</p>
+    <p>Each supplied short link opens one Amazon listing, and every re-fetch returns the same ASIN and the same page body. The earlier wording ("redirected into an unrelated page") rested on the <code>plpRedirect=mhFallback</code> marker; a control test on 2026-11-14 refuted that reading, because a bare, untagged request for a valid ASIN carries the same marker. Still unresolved: no public Amazon document binds a short code to a destination ASIN, the per-link <code>btn_ref</code> token changes between days, and no resolved URL carries an Associates tag.</p>
     <p class="src">Sources: <a class="src-link" href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener">link.amazon/B04G1MEwY</a> · <a class="src-link" href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener">link.amazon/B02NbDxp3</a> · <a class="src-link" href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener">link.amazon/B00hJ57DV</a></p>
   </div>
 

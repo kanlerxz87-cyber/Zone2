@@ -63,13 +63,24 @@ Example check URLs (each pattern was fetched for every marketplace):
 
 | Supplied URL | Observed behaviour on 2026-11-13 |
 |--------------|-----------------------------------|
-| `https://link.amazon/B04G1MEwY` | Did **not** open a product page for the code; redirected into `https://www.amazon.com/dp/B0CDY277D3?…&plpRedirect=mhFallback` (an unrelated product / homepage fallback). |
-| `https://link.amazon/B02NbDxp3` | Redirected into `https://www.amazon.com/dp/B09B7SB46R?…&plpRedirect=mhFallback` (unrelated product / homepage fallback). |
-| `https://link.amazon/B00hJ57DV` | Redirected into `https://www.amazon.com/dp/B08DKYBTPH?…&plpRedirect=mhFallback` (unrelated product / homepage fallback). |
+| `https://link.amazon/B04G1MEwY` | Opened `https://www.amazon.com/dp/B0CDY277D3?…&plpRedirect=mhFallback` — a real, live product page. |
+| `https://link.amazon/B02NbDxp3` | Opened `https://www.amazon.com/dp/B09B7SB46R?…&plpRedirect=mhFallback` — a real, live product page. |
+| `https://link.amazon/B00hJ57DV` | Opened `https://www.amazon.com/dp/B08DKYBTPH?…&plpRedirect=mhFallback` — a real, live product page. |
 | `https://link.amazon/` (root) | HTTP 403 Forbidden. |
 | `https://link.amazon/robots.txt` | HTTP 403 Forbidden. |
 
-DNS for `link.amazon` resolves (observed: CloudFront addresses `18.172.170.59/20/77/98`), but the supplied codes do not resolve to matching product pages.
+DNS for `link.amazon` resolves (observed: CloudFront addresses `18.172.170.59/20/77/98`). The supplied codes
+do not resolve to matching product pages, but each supplied URL does open one live listing.
+
+> **Corrected 2026-11-14 (sessions `c6e94e8d`, `bbe4ca47`, `a133aa61`).** The three destinations were
+> originally labelled "unrelated product / homepage fallback" on the strength of the `plpRedirect=mhFallback`
+> marker. A control test refutes that reading: a **bare, untagged** request to a valid ASIN
+> (`/dp/B08DKYBTPH`) also comes back with `lv=shuf&channelId=500&plpRedirect=mhFallback&th=1` appended, and
+> re-fetches of the supplied links return the same ASIN and the same page body every time. The marker is
+> therefore **not** evidence of a fallback, and the destinations are stable. What remains open is narrower
+> and still flagged: no public Amazon document binds a short code to a destination ASIN, the per-link
+> `btn_ref` token is **not** stable across days (F-20), and no resolved URL carries an Associates `tag`. See
+> [`revalidation/`](../revalidation/index.html).
 
 ### 3.4 Exact-match public web searches
 
@@ -88,7 +99,7 @@ Exact-phrase searches for `"B04G1MEwY"`, `"B02NbDxp3"`, and `"B00hJ57DV"` return
 | AF-03 | Code `B00hJ57DV` is 9 characters; not a valid 10-character ASIN | §3 | No — flagged |
 | AF-04 | All 18 official `/dp/<code>` URLs return HTTP 404 | §3.1 | No — flagged |
 | AF-05 | Official Amazon search returns "No results" for all three codes | §3.2 | No — flagged |
-| AF-06 | Supplied `link.amazon/<code>` URLs fall back to unrelated pages, not the supplied products | §3.3 | No — flagged |
+| AF-06 | Supplied `link.amazon/<code>` URLs open a stable listing each, but no public Amazon document ties a code to its destination and the `btn_ref` token changes between days | §3.3, [`revalidation/`](../revalidation/index.html) | No — flagged |
 | AF-07 | No product attributes (name/price/rating/reviews/category) confirmable → all product data cells blank | §3.4–§3.5 | No — flagged |
 | AF-08 | Per-product commission rate unknown (product category unknown) | Rate card is category-based only: https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ | No — flagged |
 | AF-09 | Associates Commission Income Schedule requires an Associates sign-in (observed redirect to sign-in) | https://affiliate-program.amazon.com/help/operating/schedule | No — flagged |

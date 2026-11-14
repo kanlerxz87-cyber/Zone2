@@ -95,7 +95,63 @@
     <div class="card">
       <h3>Verified Platform Facts</h3>
       <div id="execFactsTable"></div>
-      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-13.</p>
+      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-13 and re-verified live on 2026-11-14.</p>
+    </div>
+
+    <div class="card">
+      <h3>Live re-verification — 2026-11-14 (final integration)</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:0">
+        This pass was run with working outbound access to the official sites, which the earlier build sandboxes did not have
+        (they recorded <code>HTTP 000</code> for every non-allowlisted host). Each fact below was re-read on the page itself.
+        Full row-by-row evidence: <a href="verification.html">Verification log</a> (rows V-33…V-50) · sources:
+        <a href="sources.html">Source register</a> (S01–S31).
+      </p>
+      <div class="table-wrap" style="overflow-x:auto">
+        <table class="data-table" style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr><th align="left">Check</th><th align="left">What the official page says</th><th align="left">Verdict</th><th align="left">Source</th></tr></thead>
+          <tbody>
+            <tr><td>Disclosure sentence (V-33)</td><td>Operating Agreement §5 requires “As an Amazon Associate I earn from qualifying purchases.” clearly and prominently</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">OA §5</a></td></tr>
+            <tr><td>Attribution window (V-34)</td><td>Session ends at 24 h, an order, or a competing associate's click; cart-add ≤ 89 days; ship/pay ≤ 180 days</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Policies §1</a></td></tr>
+            <tr><td>Rate bands (V-35)</td><td>Eleven fixed bands, 10.00% down to 0.00%, plus “All Other Categories 4.00%” — re-read row by row</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">Table 1</a></td></tr>
+            <tr><td>Payment terms (V-36)</td><td>≈60 days after month end; US minimums 10 / 10 (2,000 max) / 100 + 15 fee; 3-year inactivity rule</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Policies §6</a></td></tr>
+            <tr><td>Tag + sub-tag rules (V-37)</td><td>Associates ID must be a URL parameter; a sub-tag may never be tied to a specific end user</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer">Req. §2</a></td></tr>
+            <tr><td>Price-display rule (V-38)</td><td>Prices only from an Amazon-served link or the API; comparison views show lowest new (and used)</td><td><strong>Verified</strong> — no price is published here</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer">Req. §2(b)</a></td></tr>
+            <tr><td>Agent Terms (V-39)</td><td>Agents must send <code>Agent/[name]</code>, must not conceal themselves, must not defeat CAPTCHAs</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20IP%20License" target="_blank" rel="noopener noreferrer">IP License §4</a></td></tr>
+            <tr><td>PA-API 5 status (V-40)</td><td>Deprecated; calls return <code>403 AccessDeniedException</code> and must migrate to the Creators API</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener noreferrer">Deprecation notice</a></td></tr>
+            <tr><td>Review-display rule</td><td>Customer reviews and star ratings may not be displayed unless obtained via Creators API / PA API</td><td><strong>Verified</strong> — no rating is published</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer">Req. §6(t)</a></td></tr>
+            <tr><td>FTC disclosure (V-49)</td><td>Material connection disclosed clearly and conspicuously, close to the recommendation</td><td><strong>Verified</strong></td><td><a href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer">FTC</a></td></tr>
+            <tr><td>Link qualification (V-50)</td><td>Paid/affiliate links marked <code>rel="sponsored"</code></td><td><strong>Verified</strong> — every outbound product link emits it</td><td><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer">Google</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Flagged for Review — 21 items</h3>
+      <p style="font-size:13.5px">
+        Nothing on this site is a product claim. These are the items that could not be confirmed from an official source, plus
+        the irregularities found while checking. None of them block the publish; each carries its source link so it can be
+        reviewed after the fact.
+      </p>
+      <div class="table-wrap" style="overflow-x:auto">
+        <table class="data-table" style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr><th align="left">Flag</th><th align="left">Irregularity</th><th align="left">Status / owner action</th></tr></thead>
+          <tbody>
+            <tr><td><code>F-01…F-03</code></td><td>The three supplied codes are 9 characters; an ASIN is 10. <code>amazon.com/dp/&lt;code&gt;</code> is Page Not Found for each (re-verified 2026-11-14)</td><td>Open — owner must supply the 10-character ASINs</td></tr>
+            <tr><td><code>F-20</code> <em>(new)</em></td><td>The per-link <code>btn_ref</code> token <strong>changes between days</strong> although the destination ASIN does not, so the earlier “same token on re-fetch” evidence does not survive a day boundary</td><td>Open — treat the code→ASIN mapping as observed behaviour, not documented intent</td></tr>
+            <tr><td><code>F-07</code></td><td>No resolved URL carries an Associates <code>tag</code>, so as supplied the links cannot be relied on to attribute commission</td><td>Open — owner must regenerate the links with the Associates ID</td></tr>
+            <tr><td><code>F-05</code></td><td>PA-API 5 is deprecated; catalog access requires the Creators API, which requires ≥10 qualifying sales in 30 days</td><td>Open — owner must register for Creators API access</td></tr>
+            <tr><td><code>F-08</code></td><td>No click, conversion or earnings report exists, so no performance figure can be published</td><td>Open — owner must connect a dated Associates report</td></tr>
+            <tr><td><code>F-19</code></td><td>The Emeril manufacturer page contradicts itself on cooking presets: 24 (description), 25 (spec tile), “10-in-1” (feature block)</td><td>Open — published as a conflict, no value chosen</td></tr>
+            <tr><td><code>F-21</code> <em>(new)</em></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin:12px 0 0;font-size:13px">
+        The full text of all 21 items, each with its official-source link, is on the
+        <a href="flagged.html">Flagged for Review</a> page; the generated detail lives on
+        <a href="pages/flags.html">pages/flags.html</a>.
+      </p>
     </div>
 
     <div class="card">
@@ -104,7 +160,7 @@
     </div>
 
     <footer class="site">
-      Verified dataset date: 2026-11-13 · Sources:
+      Verified dataset date: 2026-11-13 · re-verified live 2026-11-14 · Sources:
       <a href="https://affiliate-program.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon Associates</a> ·
       <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies</a> ·
       <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement</a> ·

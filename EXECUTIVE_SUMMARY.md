@@ -195,3 +195,64 @@ live site links an official source or is blank and flagged — now including two
 [Verification](https://kanlerxz87-cyber.github.io/Zone2/verification.html) and
 [Sources](https://kanlerxz87-cyber.github.io/Zone2/sources.html) pages, which CI rebuilds and diffs against the
 ledger so they cannot drift.
+---
+
+## Addendum 2 — final integration re-verification, 2026-11-14 (session `a133aa61`)
+
+This session ran the integration pass **with live outbound network access**, which the earlier build sandboxes
+did not have (they recorded HTTP `000` for `affiliate-program.amazon.com`, `www.amazon.com` and the manufacturer
+sites). Every program fact below was therefore re-read from the official page itself rather than carried forward
+from another session's note. Row IDs refer to [`verification.html`](verification.html); each row links its source.
+
+### Re-verified live and unchanged (V-33 … V-40, V-49, V-50)
+
+| Fact | Official page | Result |
+|---|---|---|
+| Disclosure sentence, verbatim | Operating Agreement §5 (page states *Updated October 15, 2025*) | **VERIFIED** — "As an Amazon Associate I earn from qualifying purchases." |
+| Session = 24 h / order / competing click; cart-add ≤ 89 days; ship-pay ≤ 180 days | Program Policies, Commission Income Statement §1 (page states *Updated April 14, 2026*) | **VERIFIED** — wording matches |
+| Eleven fixed rate bands (10.00 / 5.00 / 4.50 / 4.00 / 3.00 / 2.50 / 2.00 / 1.00 / 0.00 / 0.00 Coach / 4.00 All Other) | Standard Commission Income Statement, Table 1 | **VERIFIED** — re-read row by row |
+| Payment ≈60 days after month end; US minimums 10 / 10 (2,000 max) / 100 + 15 fee; 3-year inactivity | Commission Income Statement §6 + Payment Minimum Chart | **VERIFIED** |
+| Special Links must carry the Associates ID as a URL parameter; sub-tags never tied to one end user | Participation Requirements §2(a)–(b) | **VERIFIED** |
+| Price/availability only from an Amazon-served link or the API; comparison pages show lowest new (and used) | Participation Requirements §2(b) | **VERIFIED** — no product price is published anywhere in this repo |
+| Agent Terms: `Agent/[agent name]` user agent, no concealing, no CAPTCHA circumvention | IP License §4 | **VERIFIED** — the catalog client refuses to scrape |
+| PA-API 5 returns `403 AccessDeniedException`; migrate to the Creators API | Creators API deprecation notice | **VERIFIED** |
+| Material connection disclosed clearly and conspicuously, near the recommendation | FTC Endorsement Guides FAQ / 16 CFR 255 | **VERIFIED** |
+| Affiliate links marked `rel="sponsored"` | Google *Qualify your outbound links* (page states *Last updated 2025-12-10*) | **VERIFIED** — every outbound product link emits it |
+
+### Re-verified live — the three supplied links (V-41 … V-45)
+
+| Test | Result on 2026-11-14 |
+|---|---|
+| `link.amazon/B04G1MEwY` → | `/dp/B0CDY277D3`, CHEFMAN 6 Qt Dual Basket Air Fryer — same ASIN as every prior session |
+| `link.amazon/B02NbDxp3` → | `/dp/B09B7SB46R`, Emeril Lagasse 26QT French Door Air Fryer Toaster Oven — same ASIN |
+| `link.amazon/B00hJ57DV` → | `/dp/B08DKYBTPH`, Chefman 8 Qt TurboFry — same ASIN |
+| `amazon.com/dp/B04G1MEwY` | Amazon "Sorry! We couldn't find that page." — **Page Not Found** |
+| Control: bare `/dp/B08DKYBTPH` (valid ASIN) | real product page, its links carrying `lv=shuf&channelId=500&plpRedirect=mhFallback&th=1` → **`mhFallback` is not evidence of a fallback** |
+| `btn_ref` on each supplied link | **changed** versus the values earlier sessions recorded (`srctok-1f979f303a4b5691` / `-0cd8be3c7e2e0de3` / `-7c59360cbbbd59b7`) |
+
+**One new finding (flag F-20 / RV-11).** The earlier claim that a re-fetch returns "the same `btn_ref` token"
+does **not** survive a day boundary. The ASIN, the page body and `channelId=704` all reproduce; the token does
+not. So the published conclusion is narrowed: the destinations are stable and each link is individually tracked,
+but the token is not a stable identifier and the short-code→ASIN mapping remains **observed behaviour**, not
+documented intent. This does not change any product row — those were always published as "the product each link
+resolves to", never as "the requested items".
+
+### Manufacturer specification rows re-checked one by one (V-46 … V-48)
+
+- **Chefman TurboFry Touch 6 Qt (P1):** all eight published rows match the manufacturer's own Specifications
+  block — model `RJ38-SQPF-3TDB-2W`, 6 Qt / 5.67 L, 200–450 °F / 95–235 °C, 13.38 × 11.81 × 10.63 in
+  (33.98 × 30 × 27 cm), 13.3 lb / 6.03 kg, 1700 W / 120 V, cETL + 1-year Chefman assurance. **Verified.**
+- **Chefman TurboFry 8 Qt (P3):** model `RJ38-SQSS-8T`, 8 Qt / 7.57 L, 200–400 °F / 95–205 °C, 1700 W / 120 V,
+  15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm), 12.8 lb / 5.8 kg. **Verified** — and the Amazon-vs-manufacturer
+  power conflict (Amazon bullet text 1000 W) therefore still stands as a published conflict, not an error.
+- **Emeril 26QT (P2):** the manufacturer page really does contradict itself — "25 Cooking Pre-sets" (spec tile),
+  "24 one-touch cooking presets" (description), "10-In-1 Versatility" (feature block). The published conflict row
+  is correct and stays unresolved. **Verified as a conflict.**
+
+### What this pass did *not* change
+
+0 of 3 supplied codes are identified as ASINs. No price, rating, review count, BSR, availability, conversion,
+traffic or earnings figure is published, because none can be sourced from an official Amazon page without the
+Creators API and an Associates account — and this repository publishes nothing it cannot source. The owner
+actions from §7 above (confirm the three ASINs in Associates Central, add the Associates tag, register for the
+Creators API, connect a dated report) remain the only things standing between this platform and live revenue.

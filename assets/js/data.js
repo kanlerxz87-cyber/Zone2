@@ -677,8 +677,24 @@ const FLAGGED_ROWS = [
   {
     item: "Applicable commission band per ASIN (UNVERIFIED)",
     detail:
-      "The official rate schedule requires Associates sign-in. Only the program-level public ceiling “up to 10%” is verified; the category-specific rate is left blank.",
-    source: "https://affiliate-program.amazon.com/help/operating/schedule",
+      "The full fixed-rate table (Table 1) is publicly readable and was re-read row by row on 2026-11-14 — Kitchen 4.50% and Home 3.00% are both verified bands. What remains unverified is which band governs a specific ASIN, because Amazon publishes no per-ASIN mapping and the catalog lookup needs the Creators API. Left blank, not inferred.",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+  },
+  {
+    item: "Per-link token is not stable across days (NEW 2026-11-14)",
+    detail:
+      "Re-fetched on 2026-11-14, all three supplied links still open the same three listings (B0CDY277D3, B09B7SB46R, B08DKYBTPH) with the same page bodies, but every btn_ref token differs from the value earlier sessions recorded (e.g. B04G1MEwY now carries srctok-1f979f303a4b5691, previously srctok-1e229870efde5acf). The earlier conclusion that a re-fetch returns the “same btn_ref token” therefore does not survive a day boundary. The destination is stable; the token is not, and the code-to-ASIN mapping stays observed behaviour rather than documented intent.",
+    ledger_flag: "F-20",
+    ledger_url: LEDGER_FLAGS_URL + "#F-20",
+    source: "https://link.amazon/B04G1MEwY",
+  },
+  {
+    item: "Solicited email/SMS is permitted — our web-only default is stricter (CORRECTED 2026-11-14)",
+    detail:
+      "Compliance row R-09 had restated the Program Policies' permission as a flat prohibition. Program Policies, Participation Requirements §4, states the offline/email/SMS restriction and then expressly permits Special Links in emails, SMS and direct messaging from your social media Sites provided the communications are solicited (opted into by the recipient). The repository still restricts distribution to web only, and that restriction is now labelled as this project's own default rather than an Amazon requirement.",
+    ledger_flag: "F-21",
+    ledger_url: LEDGER_FLAGS_URL + "#F-21",
+    source: "https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements",
   },
   {
     item: "Availability / stock status (UNVERIFIED)",
@@ -689,7 +705,7 @@ const FLAGGED_ROWS = [
   {
     item: "Conflict — Emeril Lagasse cooking functions / presets",
     detail:
-      "The Amazon listing title states 24 cooking functions; the manufacturer's spec tile states 25 cooking pre-sets. Both values are published; neither is presented as definitive.",
+      "The manufacturer page contradicts itself: its description says “24 one-touch cooking presets”, its spec tile says “25 Cooking Pre-sets”, and its feature block is headed “10-In-1 Versatility”. The Amazon listing title observed 2026-11-14 says “24 cooking functions”. All observations are published; none is presented as definitive.",
     ledger_flag: "F-19",
     ledger_url: LEDGER_FLAGS_URL + "#F-19",
     source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
