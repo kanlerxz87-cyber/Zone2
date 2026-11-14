@@ -10,7 +10,7 @@ Re-reading S04 (https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84R
 2026-11-14 shows the page publishes **46** rows under "(a) Bounty Events" and a further **2** rows
 under "(b) Bonus Events". The nine published rows were the first nine and were individually correct,
 but the panel read as a complete transcription of the statement. That is the irregularity recorded as
-flag **F-29**.
+flag **F-30**.
 
 This script replaces the partial list with the full transcription and adds the Bonus Events block.
 Every row keeps `source_id` **S04**. Nothing is inferred: each program name, action and rate below was
@@ -85,7 +85,7 @@ BONUS_EVENTS: list[tuple[str, str, str]] = [
 ]
 
 NOTE_ADDENDUM = (
-    " BOUNTY COMPLETION (2026-11-14, session d3ce1c29, flag F-29): the 'Bounty events' panel originally "
+    " BOUNTY COMPLETION (2026-11-14, session d3ce1c29, flag F-30): the 'Bounty events' panel originally "
     "published 9 rows under a 'transcribed row-by-row' notice, while S04 publishes 46 rows under "
     "'(a) Bounty Events' and a further 2 under '(b) Bonus Events'. The partial list was replaced with the "
     "full transcription and the Bonus Events block was added. The 9 original rows were individually correct; "

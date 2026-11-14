@@ -8,9 +8,9 @@ What this script writes (all additive, nothing deleted):
 * `ledger/verification.json` — adds V-51 … V-62, every check this session ran itself by re-reading
                                the official page, plus the three-ASIN replication of the
                                `plpRedirect=mhFallback` control (previously run for one ASIN only, V-45).
-* `ledger/flags.json`        — adds F-29 (incomplete bounty/bonus transcription), F-30 (the
+* `ledger/flags.json`        — adds F-30 (incomplete bounty/bonus transcription), F-31 (the
                                "nine category groups" caption matched no grouping in the source) and
-                               F-31 (validate_data.py skipped rows carrying only `source_id`).
+                               F-32 (validate_data.py skipped rows carrying only `source_id`).
 
 Run:  python3 tools/apply_t26_2026_11_14.py
 """
@@ -136,7 +136,7 @@ NEW_VERIFICATION_ROWS = [
         "re-read the whole of https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ on 2026-11-14, sections (a) and (b)",
         "REFUTED",
         ["S04", "S28"],
-        "S04 publishes 46 rows under '(a) Bounty Events' and 2 further rows under '(b) Bonus Events' (Amazon Fresh Products $1.00; Pet Food & Supplies $3.00). The 9 published rows were the first nine and were individually correct — the defect was omission. Recorded as F-29 and corrected by tools/apply_bounty_completion_2026_11_14.py.",
+        "S04 publishes 46 rows under '(a) Bounty Events' and 2 further rows under '(b) Bonus Events' (Amazon Fresh Products $1.00; Pet Food & Supplies $3.00). The 9 published rows were the first nine and were individually correct — the defect was omission. Recorded as F-30 and corrected by tools/apply_bounty_completion_2026_11_14.py.",
     ),
     (
         "V-62",
@@ -151,7 +151,7 @@ NEW_VERIFICATION_ROWS = [
 
 NEW_FLAGS = [
     {
-        "id": "F-29",
+        "id": "F-30",
         "severity": "medium",
         "owner": "done",
         "title": "The bounty table published 9 of the 46 bounty events, and none of the 2 bonus events, under a 'transcribed row-by-row' notice",
@@ -181,7 +181,7 @@ NEW_FLAGS = [
         "published_on": "pages/commissions.html + pages/flags.html",
     },
     {
-        "id": "F-30",
+        "id": "F-31",
         "severity": "low",
         "owner": "done",
         "title": "The zero-rate caption said 'Nine category groups publish a 0.00% Standard Commission rate', which matches no grouping in the source",
@@ -199,7 +199,7 @@ NEW_FLAGS = [
         "published_on": "pages/commissions.html + pages/flags.html",
     },
     {
-        "id": "F-31",
+        "id": "F-32",
         "severity": "low",
         "owner": "done",
         "title": "tools/validate_data.py skipped any ledger row whose only source field is 'source_id' (singular)",
@@ -210,7 +210,7 @@ NEW_FLAGS = [
             "never held to the 'a row that carries a value must carry a source' rule. Completing the bounty table "
             "would have added 48 unchecked rows."
         ),
-        "impact": "The gate could not fail on an unsourced rate row — precisely the failure mode F-29 was.",
+        "impact": "The gate could not fail on an unsourced rate row — precisely the failure mode F-30 was.",
         "action_required": (
             "None open. _walk_rows now also yields on 'source_id'; the gate's row count rose from 173 to 228 and "
             "passes. Negative check: reverting the one-line change lowers the count to 173, so the new rows are "
@@ -279,13 +279,13 @@ def main() -> None:
             flags.append(flag)
             added += 1
     doc["note"] = doc["note"].rstrip() + (
-        " F-29 to F-31 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: "
+        " F-30 to F-32 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: "
         "an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched "
         "no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the "
         "source check."
     )
     flg_path.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"flags.json: added {added} flags (F-29..F-31)")
+    print(f"flags.json: added {added} flags (F-30..F-32)")
 
 
 if __name__ == "__main__":
