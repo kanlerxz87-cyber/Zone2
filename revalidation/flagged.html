@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review — Zone2 Revalidation</title>
+<link rel="stylesheet" href="assets.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Zone2 Revalidation<small>Controlled re-check of the three supplied Amazon links · 2026-11-14</small></a>
+    <nav aria-label="Main"><a href="index.html">Overview</a><a href="links.html">Links &amp; ASINs</a><a href="products.html">Products</a><a href="method.html">Method &amp; Limits</a><a href="flagged.html" class="active">Flagged for Review</a><a href="sources.html">Sources</a></nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="crumbs"><a href="../index.html">Zone2 dashboard</a> / <a href="index.html">Revalidation</a> / Flagged for Review</div>
+    <h1>Flagged for Review</h1>
+    <p class="lede">Every open irregularity and unverified item from this session, with its evidence and official source links.</p>
+    <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.</div>
+
+    <div class="card">
+      <p>
+        These items <strong>do not block publication</strong>. Each is listed with its evidence and source links
+        so it can be reviewed after the site is live. IDs are namespaced <code>RV-*</code> so they never collide
+        with the canonical <code>F-*</code> set in <code>ledger/</code> or the <code>AF-*</code> set in
+        <code>affiliate-lab/</code>.
+      </p>
+    </div>
+    <div class="card" id="RV-01">
+      <h3>RV-01 · The supplied codes are not ASINs, but the links are not random either <span class="badge warn">medium</span></h3>
+      <p>Each code is 9 characters and amazon.com/dp/&lt;code&gt; returns Page Not Found, so no code addresses a catalogue record. However each link.amazon URL carries a distinct, stable, per-link source token and resolves to one consistent product each time.</p>
+      <p><strong>Disposition:</strong> Both halves published. The prior &#x27;arbitrary fallback&#x27; reading is corrected.</p>
+      <p class="note">Sources: <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC</a></p>
+    </div><div class="card" id="RV-02">
+      <h3>RV-02 · No Associates tag on any resolved destination <span class="badge flag">high</span></h3>
+      <p>None of the three resolved destination URLs contains a ?tag= Associates ID. Under OA §1 the tagged link format is required for a Special Link, so as supplied these links cannot be relied on to attribute commission.</p>
+      <p><strong>Disposition:</strong> Flagged. Owner should generate tagged links from SiteStripe or the API.</p>
+      <p class="note">Sources: <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">https://affiliate-program.amazon.com/help/operating/agreement</a></p>
+    </div><div class="card" id="RV-03">
+      <h3>RV-03 · The code-to-product mapping is observed behaviour, not documented intent <span class="badge warn">medium</span></h3>
+      <p>The mapping (B04G1MEwY to B0CDY277D3, B02NbDxp3 to B09B7SB46R, B00hJ57DV to B08DKYBTPH) is reproducible but no public Amazon document binds a short code to a destination ASIN. It is therefore evidence of behaviour rather than proof of intent.</p>
+      <p><strong>Disposition:</strong> Products are presented as &#x27;the product each link resolves to&#x27;, never as &#x27;the product you selected&#x27;. Owner should confirm in Associates Central.</p>
+      <p class="note">Sources: <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">https://affiliate-program.amazon.com/help/operating/agreement</a></p>
+    </div><div class="card" id="RV-04">
+      <h3>RV-04 · Emeril function count contradicts itself on the manufacturer&#x27;s own page <span class="badge warn">medium</span></h3>
+      <p>24 in the Amazon title; 24 in the manufacturer description; 25 in the manufacturer spec tile; a separate &#x27;10-In-1&#x27; section lists 10 modes.</p>
+      <p><strong>Disposition:</strong> All four figures published with sources; none presented as definitive.</p>
+      <p class="note">Sources: <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B09B7SB46R</a> · <a href="https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360" target="_blank" rel="noopener noreferrer">https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360</a></p>
+    </div><div class="card" id="RV-05">
+      <h3>RV-05 · The Amazon listing for B08DKYBTPH contradicts itself on wattage <span class="badge warn">medium</span></h3>
+      <p>The &#x27;About this Item&#x27; bullet on the Amazon page states 1000 Watts/120 Volts; the Product Description on the SAME page states 1700W/120V; the manufacturer states 1700W/120V for model RJ38-SQSS-8T.</p>
+      <p><strong>Disposition:</strong> Published as an internal contradiction on the Amazon listing, with the manufacturer&#x27;s figure stated as the manufacturer&#x27;s. Previously reported as Amazon-versus-manufacturer; it is really Amazon-versus-Amazon.</p>
+      <p class="note">Sources: <a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B08DKYBTPH</a> · <a href="https://chefman.com/products/turbofry-touch-air-fryer-1" target="_blank" rel="noopener noreferrer">https://chefman.com/products/turbofry-touch-air-fryer-1</a></p>
+    </div><div class="card" id="RV-06">
+      <h3>RV-06 · Six product attributes previously published were not re-observable this session <span class="badge warn">medium</span></h3>
+      <p>Inner material (B0CDY277D3); wattage and maximum temperature and item weight and UPC (B09B7SB46R); Amazon &#x27;special features&#x27; wording. Attempts to locate them in the same sources did not find them.</p>
+      <p><strong>Disposition:</strong> Published as blank + unverified here. They were NOT deleted from other sessions&#x27; files because those files are outside this session&#x27;s scope (see CR-5 in COORDINATION.md).</p>
+      <p class="note">Sources: <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B0CDY277D3</a> · <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B09B7SB46R</a></p>
+    </div><div class="card" id="RV-07">
+      <h3>RV-07 · UPC values remain unverifiable from official pages <span class="badge info">low</span></h3>
+      <p>No UPC appears on the Amazon product pages or the manufacturer pages read this session.</p>
+      <p><strong>Disposition:</strong> Left blank.</p>
+      <p class="note">Sources: <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B0CDY277D3</a></p>
+    </div><div class="card" id="RV-08">
+      <h3>RV-08 · Home &amp; Kitchen commission rate not obtainable <span class="badge warn">medium</span></h3>
+      <p>The per-category rate schedule requires an Associates sign-in. The specific rate is not published here.</p>
+      <p><strong>Disposition:</strong> Left blank. Flagged.</p>
+      <p class="note">Sources: <a href="https://affiliate-program.amazon.com/help/operating/schedule" target="_blank" rel="noopener noreferrer">https://affiliate-program.amazon.com/help/operating/schedule</a></p>
+    </div><div class="card" id="RV-09">
+      <h3>RV-09 · Two programme rows are cited but were not re-read this session <span class="badge info">low</span></h3>
+      <p>PG-05 (price/availability display) and PG-06 (rating/review display) are relied on by the site&#x27;s no-price rule, but their clause text was not re-opened on 2026-11-14.</p>
+      <p><strong>Disposition:</strong> Marked not_rechecked rather than verified. The no-price rule is retained as the conservative choice.</p>
+      <p class="note">Sources: <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">https://affiliate-program.amazon.com/help/operating/policies</a></p>
+    </div><div class="card" id="RV-10">
+      <h3>RV-10 · Published pages elsewhere in the repo still carry the superseded fallback inference <span class="badge info">low</span></h3>
+      <p>ledger/flags.json (F-03, F-05), ledger/products.json, README.md&#x27;s divergence table, pages/flags.html, and affiliate-lab/ all repeat the mhFallback / shuffle reasoning that control test C-1 and repeat test C-2 do not support.</p>
+      <p><strong>Disposition:</strong> Not edited by this session (other sessions&#x27; scope). Change requests CR-1 to CR-5 logged in COORDINATION.md.</p>
+      <p class="note">Sources: <a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">https://www.amazon.com/dp/B08DKYBTPH</a></p>
+    </div>
+
+    <footer class="site">
+      Session <code>c6e94e8d</code> · branch <code>arena/c6e94e8d-zone2</code> · verified 2026-11-14 ·
+      Task T20 in the repository's <a href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">COORDINATION.md</a>.
+      As an Amazon Associate I earn from qualifying purchases.
+    </footer>
+  </div>
+</main>
+</body>
+</html>

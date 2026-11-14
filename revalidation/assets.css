@@ -1,0 +1,66 @@
+/* Zone2 — revalidation pages (session c6e94e8d). Reuses the primary site's
+   design tokens so these pages sit inside the existing dashboard design. */
+:root{
+  --bg:#f4f6f8; --surface:#fff; --ink:#16202a; --muted:#5b6b7a; --line:#e2e8ee;
+  --accent:#0f62fe; --ok-bg:#e7f6ec; --ok-ink:#14663a; --warn-bg:#fff4e0;
+  --warn-ink:#8a5a00; --flag-bg:#fdecea; --flag-ink:#9b2c2c; --info-bg:#e8f0fe; --info-ink:#1a3d8f;
+  --radius:10px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.55; font-size:15px;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+header.top{background:#101a24;color:#d7e2ec;padding:14px 0;}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;}
+header.top .brand{color:#fff;font-weight:700;text-decoration:none;font-size:16px;}
+header.top .brand small{display:block;font-weight:400;color:#8fa3b5;font-size:11.5px;letter-spacing:.03em;}
+header.top nav{display:flex;flex-wrap:wrap;gap:4px;}
+header.top nav a{color:#c9d6e2;text-decoration:none;padding:7px 11px;border-radius:7px;font-size:13.5px;}
+header.top nav a:hover{background:#1c2b3a;color:#fff;}
+header.top nav a.active{background:var(--accent);color:#fff;}
+main{padding:26px 0 60px;}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:10px;}
+.crumbs a{color:var(--accent);text-decoration:none;}
+h1{font-size:27px;margin:0 0 8px;line-height:1.25;}
+h2{font-size:20px;margin:30px 0 8px;}
+h3{font-size:16px;margin:0 0 10px;}
+.lede{font-size:15.5px;color:#31424f;max-width:92ch;margin:0 0 16px;}
+p{margin:0 0 12px;max-width:95ch;}
+a{color:var(--accent);}
+code{background:#eef2f6;padding:1px 5px;border-radius:4px;font-size:12.8px;word-break:break-all;}
+.disclosure{background:var(--info-bg);border:1px solid #c6d8fb;color:#12315f;border-radius:var(--radius);
+  padding:11px 14px;font-size:13.5px;margin:16px 0 22px;}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;margin:0 0 18px;}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:0 0 20px;}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;}
+.kpi .label{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;}
+.kpi .value{font-size:25px;font-weight:700;margin:4px 0 2px;line-height:1.1;}
+.kpi .value.ok{color:var(--ok-ink);} .kpi .value.flag{color:var(--flag-ink);} .kpi .value.warn{color:var(--warn-ink);}
+.kpi .sub{font-size:12px;color:var(--muted);}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);}
+table{width:100%;border-collapse:collapse;font-size:13.4px;}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+th{background:#eef2f6;font-size:11.8px;text-transform:uppercase;letter-spacing:.045em;color:#33475b;white-space:nowrap;}
+tbody tr:last-child td{border-bottom:none;}
+td a{word-break:break-word;}
+td.blank{background:#fafcfe;color:#8a99a8;font-style:italic;}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.6px;font-weight:600;white-space:nowrap;}
+.badge.ok{background:var(--ok-bg);color:var(--ok-ink);}
+.badge.warn{background:var(--warn-bg);color:var(--warn-ink);}
+.badge.flag{background:var(--flag-bg);color:var(--flag-ink);}
+.badge.info{background:var(--info-bg);color:var(--info-ink);}
+.note{font-size:13px;color:var(--muted);}
+ul,ol{margin:0 0 12px;padding-left:22px;}
+li{margin:0 0 7px;max-width:95ch;}
+blockquote{margin:0 0 14px;padding:11px 16px;background:#f7f9fb;border-left:3px solid var(--accent);
+  border-radius:0 var(--radius) var(--radius) 0;font-size:13.6px;color:#31424f;}
+footer.site{border-top:1px solid var(--line);margin-top:34px;padding:18px 0 0;font-size:12.8px;color:var(--muted);}
+.stack{display:grid;gap:14px;}
+.evidence{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.4px;
+  background:#0f1821;color:#dbe6f0;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:0 0 12px;}
+.evidence span{color:#7fd6a6;}
+@media (max-width:640px){ h1{font-size:22px;} .wrap{padding:0 14px;} }

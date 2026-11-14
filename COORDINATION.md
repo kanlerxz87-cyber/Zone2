@@ -644,3 +644,92 @@ Merge PR #20 (`arena/03ae78da-zone2` → `main`) with `gh pr merge 20 --merge`, 
 | Merge result | scheduled (`gh pr merge 20 --merge`) |
 | Pages URL | https://kanlerxz87-cyber.github.io/Zone2/ (live; Pages API status `built`, source `main` root per `5c06fb5e` AUD-01) |
 
+
+---
+
+## Session record — `c6e94e8d` (`arena/c6e94e8d-zone2`)
+
+**Branch note:** Arena pins this session to `arena/c6e94e8d-zone2` (not `session-<id>/<task>` naming);
+documented here as the deviation, consistent with prior sessions.
+
+### Claim (recorded 2026-11-14T09:50Z)
+
+Board state at claim: `main` = `c0a109b` (merge of PR #15). No task on the shared board was unclaimed,
+in progress, or needing review. All prior tasks T1–T19 are `done`.
+
+This session claims **one new task** and edits **only the file scope below**. It does not touch any file
+owned by another session (root `index.html`, `assets/`, `research-hub/**`, `northstar/**`, `zone2/**`,
+`affiliate-lab/**`, `ledger/**`, `pages/**`, `tools/**`).
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T20 | Line-by-line re-verification of the three supplied `link.amazon` links with a **control test**, and correction of the published "fallback" inference | in progress → done | `c6e94e8d` | `revalidation/**`, `docs/revalidation-2026-11-14.md`, this record only |
+
+### Why a re-verification task was needed
+
+T2/T3 and flags F-01–F-03 / AF-01–AF-06 rest on a chain of inference:
+
+1. the supplied codes are 9 characters, but an ASIN is 10 → the codes "cannot be" ASINs;
+2. `amazon.com/dp/<code>` returns Page Not Found;
+3. the short links land on unrelated ASINs carrying `plpRedirect=mhFallback` and `lv=shuf`;
+4. therefore the redirects are a fallback and **no** product identity may be attributed.
+
+Step 3 was never controlled. This session ran the missing control.
+
+### Finding (new, reproducible) — the `mhFallback` premise does not hold
+
+| # | Test | Command-level result | Verdict |
+|---|---|---|---|
+| C-1 | Fetch a **bare, untagged** `https://www.amazon.com/dp/B08DKYBTPH` (a *valid* 10-char ASIN). Control for the `mhFallback` marker. | Amazon answered with the **CHEFMAN 8 Qt** product page and appended `?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1` to its own internal links. | **`plpRedirect=mhFallback` is emitted on ordinary, direct, valid product-page loads.** It is not evidence of a fallback and does not distinguish a valid ASIN from a bad token. |
+| C-2 | Re-fetch `https://link.amazon/B04G1MEwY` twice. | Both responses resolved to `/dp/B0CDY277D3` with the **identical** per-link token `btn_type=ss&btn_ref=srctok-1e229870efde5acf&channelId=704`. | **Not a shuffle.** The "different `btn_ref` on re-fetch" recorded in F-05 / README is **not reproducible**. |
+| C-3 | Fetch all three short links. | `B04G1MEwY`→`B0CDY277D3` `srctok-1e229870efde5acf`; `B02NbDxp3`→`B09B7SB46R` `srctok-534f5e7952f396b2`; `B00hJ57DV`→`B08DKYBTPH` `srctok-76c3adaeb8708b44`. All `channelId=704`. | Three **distinct, stable, per-link source tokens**, one per submitted link. That is the signature of a **tracked link mapping**, the opposite of F-03's published reading. |
+| C-4 | Bare `/dp/` fetch of each **9-char code**. | All three → Amazon "Page Not Found". | The codes are **not** addressable catalog identifiers. This part of F-01/F-02 **stands**. |
+
+**Corrected conclusion.** The codes are not ASINs (C-4, unchanged), **but** the `link.amazon` URLs are
+stable, individually tracked links that resolve deterministically to one product each (C-1, C-2, C-3).
+The published statement that the destinations are *arbitrary fallback pages that cannot identify a
+product* is **not supported** and is corrected on a new page:
+[`revalidation/`](revalidation/index.html).
+
+What remains genuinely unresolved is narrower and is still flagged: the destinations are **not
+cryptographically bound** to the codes by any public Amazon documentation, so the mapping is evidence
+of behaviour rather than of intent. The owner should confirm the mapping in Associates Central.
+
+> **Not edited by this session** (owned by others): `ledger/flags.json` F-03/F-05, `assets/js/data.js`,
+> `README.md`'s divergence table, `pages/flags.html`, `affiliate-lab/**`. The correction is published in
+> `revalidation/` and the request to amend those owners' files is logged below.
+
+### Change requests logged (not edited — owned by other sessions)
+
+| # | File | Requested change | Why |
+|---|---|---|---|
+| CR-1 | `ledger/flags.json` → F-03 | Downgrade "token was not honoured / unrelated destination" to "destination stable and per-link tracked, but mapping not documented by Amazon". | C-1/C-2/C-3. |
+| CR-2 | `ledger/flags.json` → F-05, `README.md` divergence table | Remove the "different `btn_ref` on re-fetch" claim — not reproducible (C-2). The `mhFallback` marker is not evidence of fallback (C-1). | C-1, C-2. |
+| CR-3 | `README.md`'s "Where the repository diverges" table | Add the control result: a bare valid `/dp/` load also carries `plpRedirect=mhFallback`. | C-1. |
+| CR-4 | `ledger/products.json` `why_blank` strings | The ASIN-format and Page-Not-Found reasons stand; remove "redirected … via mhFallback" as a reason. | C-1. |
+
+### Sources re-read this session (official, fetched live 2026-11-14)
+
+| Source | URL | Used for |
+|---|---|---|
+| Amazon.com product page B08DKYBTPH | https://www.amazon.com/dp/B08DKYBTPH | C-1 control; also the live 8-Qt spec/bullet text |
+| Amazon.com product page B0CDY277D3 | https://www.amazon.com/dp/B0CDY277D3 | C-1 control, C-3 |
+| Amazon.com product page B09B7SB46R | https://www.amazon.com/dp/B09B7SB46R | C-3; live title "24 cooking functions" |
+| Amazon.com Page Not Found for each 9-char code | https://www.amazon.com/dp/B04G1MEwY · /B02NbDxp3 · /B00hJ57DV | C-4 |
+| Chefman TurboFry Touch Dual-Window 6 Qt | https://chefman.com/products/turbofry-touch-dual-window-air-fryer | Re-verified all P1 spec rows |
+| Chefman TurboFry Touch 8 Qt | https://chefman.com/products/turbofry-touch-air-fryer-1 | Re-verified all P3 spec rows |
+| Emeril Everyday French Door AirFryer 360 | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 | Re-verified P2 rows; 25 pre-sets vs 24 functions |
+| Associates OA §5 | https://affiliate-program.amazon.com/help/operating/agreement | Disclosure sentence verbatim (still "Updated: October 15, 2025") |
+| Associates help — simple text link | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC | "ASIN is the 10-digit code" — the exact basis of F-01 |
+
+### Environment finding (affects how this repo's verification can be reproduced)
+
+`curl` from the build sandbox cannot reach any non-allowlisted host (`affiliate-program.amazon.com`,
+`www.amazon.com`, `chefman.com`, `developers.google.com` all returned HTTP `000` with exit 35). All
+fetches above were made with the agent's page-fetch tool, which is **not** available to CI. This is why
+the repo's live-source checks are recorded as dated observations with quoted output rather than as a
+re-runnable CI step.
+
+### Status
+
+See "Deploy log" at the end of this record.

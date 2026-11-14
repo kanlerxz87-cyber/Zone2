@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method &amp;amp; Limits — Zone2 Revalidation</title>
+<link rel="stylesheet" href="assets.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Zone2 Revalidation<small>Controlled re-check of the three supplied Amazon links · 2026-11-14</small></a>
+    <nav aria-label="Main"><a href="index.html">Overview</a><a href="links.html">Links &amp; ASINs</a><a href="products.html">Products</a><a href="method.html" class="active">Method &amp; Limits</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Sources</a></nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="crumbs"><a href="../index.html">Zone2 dashboard</a> / <a href="index.html">Revalidation</a> / Method &amp;amp; Limits</div>
+    <h1>Method &amp;amp; Limits</h1>
+    <p class="lede">How each value was checked, what this environment cannot reach, and why some cells are blank on purpose.</p>
+    <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.</div>
+
+    <div class="card">
+      <h3>What this environment can verify</h3>
+      <p>
+        Page fetches were made with the agent's page-fetch tool. Direct <code>curl</code> from the build
+        sandbox cannot reach any of these hosts: <code>affiliate-program.amazon.com</code>,
+        <code>www.amazon.com</code>, <code>chefman.com</code> and <code>developers.google.com</code> all
+        returned HTTP <code>000</code> with exit code 35. <strong>Consequence:</strong> the live checks in this
+        repository are dated observations with quoted output, not a re-runnable CI step. CI can only re-check
+        internal consistency, which is what the repo's existing gates already do.
+      </p>
+      <h3 style="margin-top:18px">The three rules used on every row</h3>
+      <ol>
+        <li><strong>Cite or blank.</strong> A value appears only if an official source states it; the source is linked in the row.</li>
+        <li><strong>No inference.</strong> A figure is never derived from a sibling listing, a carousel, a search snippet, a similar model, or arithmetic performed here.</li>
+        <li><strong>Conflicts are shown, not resolved.</strong> When two official sources disagree, both are published and neither is presented as definitive.</li>
+      </ol>
+      <h3 style="margin-top:18px">Why prices, ratings and review counts are withheld</h3>
+      <p>
+        The Associates Program Policies restrict how prices/availability and ratings/reviews may be displayed
+        (they must come from Amazon-served data or the API). Rather than risk a policy breach, no page on this
+        site prints a product price, star rating or review count. Row status is marked
+        <span class="badge info">Withheld by policy</span> to distinguish a deliberate omission from an
+        unverifiable one. Note RV-09: those two clauses were relied on but not re-read this session, and the
+        conservative choice was retained.
+      </p>
+    </div>
+
+    <h2>Programme facts re-read this session</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>ID</th><th>Claim</th><th>Value as read</th><th>Status</th><th>Official source</th><th>Note</th></tr></thead>
+        <tbody><tr><td>PG-01</td><td>ASIN is a 10-character code; the documented simple link format is amazon.com/dp/ASIN?tag=YOURASSOCIATEID</td><td>Quoted: &quot;ASIN is the 10-digit code that Amazon uses to denote specific products.&quot;</td><td><span class="badge ok">Verified</span></td><td><a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">Associates help — How do I build a simple text link to a specific item on Amazon?</a></td><td class="note"></td></tr><tr><td>PG-02</td><td>The required disclosure sentence</td><td>Quoted verbatim: &quot;As an Amazon Associate I earn from qualifying purchases.&quot; Required to be stated clearly and prominently on the Site (OA §5).</td><td><span class="badge ok">Verified</span></td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Amazon Associates Programme Operating Agreement</a></td><td class="note"></td></tr><tr><td>PG-03</td><td>Violating OA §5 is a material breach</td><td>Quoted: any violation of Section 5 &quot;will be deemed a material breach of this Agreement&quot; (OA §6(a)).</td><td><span class="badge ok">Verified</span></td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Amazon Associates Programme Operating Agreement</a></td><td class="note"></td></tr><tr><td>PG-04</td><td>Special Links must use Amazon&#x27;s tagged link formats and carry the Associates ID</td><td>Quoted (OA §1): links &quot;must properly use the special &#x27;tagged&#x27; link formats we provide and comply with this Agreement (&#x27;Special Links&#x27;).&quot;</td><td><span class="badge ok">Verified</span></td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Amazon Associates Programme Operating Agreement</a></td><td class="note"></td></tr><tr><td>PG-05</td><td>Price and availability display restriction</td><td class="blank">blank</td><td><span class="badge warn">Not re-checked</span></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Amazon Associates Programme Policies</a></td><td class="note">Relied on, and re-cited, but the specific clause text was not re-opened this session. Carried forward from the earlier verified record; a fresh read is required before this row is presented as re-verified.</td></tr><tr><td>PG-06</td><td>Rating / review display restriction</td><td class="blank">blank</td><td><span class="badge warn">Not re-checked</span></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Amazon Associates Programme Policies</a></td><td class="note">As PG-05.</td></tr><tr><td>PG-07</td><td>Category commission rate card — Home &amp; Kitchen rate</td><td class="blank">blank</td><td><span class="badge flag">Unverified</span></td><td class="note">no official source &rArr; left blank</td><td class="note">The per-category schedule is behind Associates sign-in. Left blank. Only the public &#x27;up to 10%&#x27; ceiling is safe to state, and that figure was not re-read this session either.</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2>What could not be checked, and why</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Item</th><th>Reason</th><th>Handling</th></tr></thead>
+        <tbody>
+          <tr><td>Authenticated Creators API / PA-API data</td><td>Requires an enrolled Associates account and API credentials; none exist in this environment. The documented prerequisite is an enrolled account: <a href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer">Creators API introduction</a>.</td><td>Not attempted. No API-derived figure is published.</td></tr>
+          <tr><td>Home &amp; Kitchen commission rate</td><td>Rate schedule is behind Associates sign-in: <a href="https://affiliate-program.amazon.com/help/operating/schedule" target="_blank" rel="noopener noreferrer">official rate schedule</a>.</td><td>Blank, flagged RV-08.</td></tr>
+          <tr><td>Whether the code&rarr;ASIN mapping is intentional</td><td>Not documented publicly; the governing document is silent on short codes: <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement</a>.</td><td>Presented as observed behaviour; flagged RV-03.</td></tr>
+          <tr><td>UPC for all three ASINs</td><td>Not printed on any official page read — <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">B0CDY277D3</a> · <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">B09B7SB46R</a> · <a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">B08DKYBTPH</a>.</td><td>Blank, flagged RV-07.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="site">
+      Session <code>c6e94e8d</code> · branch <code>arena/c6e94e8d-zone2</code> · verified 2026-11-14 ·
+      Task T20 in the repository's <a href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">COORDINATION.md</a>.
+      As an Amazon Associate I earn from qualifying purchases.
+    </footer>
+  </div>
+</main>
+</body>
+</html>

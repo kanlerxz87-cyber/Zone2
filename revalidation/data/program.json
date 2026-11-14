@@ -1,0 +1,19 @@
+{
+  "$note": "Programme and compliance facts re-read from official Amazon Associates pages on 2026-11-14, session c6e94e8d. Only facts actually re-read in this session are marked verified here.",
+  "verified_on": "2026-11-14",
+  "sources": {
+    "P1": {"name": "Amazon Associates Programme Operating Agreement", "url": "https://affiliate-program.amazon.com/help/operating/agreement", "version_observed": "Updated: October 15, 2025"},
+    "P2": {"name": "Amazon Associates Programme Policies", "url": "https://affiliate-program.amazon.com/help/operating/policies"},
+    "P3": {"name": "Associates help — How do I build a simple text link to a specific item on Amazon?", "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC"},
+    "P4": {"name": "Amazon Associates Central (programme home)", "url": "https://affiliate-program.amazon.com/"}
+  },
+  "rows": [
+    {"id": "PG-01", "claim": "ASIN is a 10-character code; the documented simple link format is amazon.com/dp/ASIN?tag=YOURASSOCIATEID", "value": "Quoted: \"ASIN is the 10-digit code that Amazon uses to denote specific products.\"", "status": "verified", "source": "P3"},
+    {"id": "PG-02", "claim": "The required disclosure sentence", "value": "Quoted verbatim: \"As an Amazon Associate I earn from qualifying purchases.\" Required to be stated clearly and prominently on the Site (OA §5).", "status": "verified", "source": "P1"},
+    {"id": "PG-03", "claim": "Violating OA §5 is a material breach", "value": "Quoted: any violation of Section 5 \"will be deemed a material breach of this Agreement\" (OA §6(a)).", "status": "verified", "source": "P1"},
+    {"id": "PG-04", "claim": "Special Links must use Amazon's tagged link formats and carry the Associates ID", "value": "Quoted (OA §1): links \"must properly use the special 'tagged' link formats we provide and comply with this Agreement ('Special Links').\"", "status": "verified", "source": "P1"},
+    {"id": "PG-05", "claim": "Price and availability display restriction", "value": null, "status": "not_rechecked", "source": "P2", "note": "Relied on, and re-cited, but the specific clause text was not re-opened this session. Carried forward from the earlier verified record; a fresh read is required before this row is presented as re-verified."},
+    {"id": "PG-06", "claim": "Rating / review display restriction", "value": null, "status": "not_rechecked", "source": "P2", "note": "As PG-05."},
+    {"id": "PG-07", "claim": "Category commission rate card — Home & Kitchen rate", "value": null, "status": "unverified", "source": null, "flag": "RV-08", "note": "The per-category schedule is behind Associates sign-in. Left blank. Only the public 'up to 10%' ceiling is safe to state, and that figure was not re-read this session either."}
+  ]
+}
