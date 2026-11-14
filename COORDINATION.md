@@ -1424,3 +1424,22 @@ F-20/F-21"). Cross-references so records don't double-claim:
 
 **Note.** Supersedes the earlier T21-adjacent "blank-everything" `data.js` rewrite (head `fa21d4b`, PR #25) — that approach was reset away as over-conservative. This fix keeps each destination's verified data but flags it honestly, per "if a value can be confirmed from an official source, present it; if not, flag it."
 
+
+## Session `arena/83194da0-zone2` — T23 closing record (merged)
+
+| Item | Value |
+|---|---|
+| PR | **#25** — https://github.com/kanlerxz87-cyber/Zone2/pull/25 — `arena/83194da0-zone2` → `main` (title/body updated to the framing-correction approach via the REST API; `gh pr edit` was blocked by the classic-Projects `projectCards` deprecation error) |
+| Final branch head | `7316b8b` (rebased onto latest `main`; supersedes the earlier blank-everything head `fa21d4b`) |
+| Merge | **MERGED** 2026-11-14, merge commit `ce07045` on `main` (`gh pr merge 25 --merge`) |
+| Pages | `status: built`, source `main` / `/`, live at https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live check | `products.html` fetched from the deployed site: renders "Code is valid ASIN? No — 9 chars, ASIN is 10", "Resolved ASIN", "resolved destinations (flagged for confirmation)", price/rating/reviews/availability as "— unverified —", specs scoped to "resolved destination ASINs" |
+| Gates (final tree) | `node --check` OK; `build_site.py --check` no drift; `validate_data.py` exit 0; `tests/test_pipeline.py` 11/11; `affiliate-lab` verify 501 links/0 fail; `revalidation` verify 168 refs/0 fail; CI price+disclosure (85 pages) OK |
+
+**Rebase-conflict resolution (this session):** `main` advanced repeatedly while this branch worked (PRs #28–#36).
+Three rebase passes each produced conflicts, all resolved **append-only** with no other session's content discarded:
+- `index.html` / `flagged.html` date lines — kept the newer (HEAD) "re-verified live 2026-11-14" wording.
+- `COORDINATION.md` — kept both the incoming session record and this session's T23 record.
+
+**Note on push:** the remote branch `arena/83194da0-zone2` retained the superseded `fa21d4b` commits from the
+earlier blank-everything approach; the rebased branch was force-updated with `--force-with-lease` to replace them.
