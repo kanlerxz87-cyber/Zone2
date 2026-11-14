@@ -9,8 +9,8 @@
 ---
 
 > **Current integration note (2026-11-14).** This companion summary began as the `research-hub/` session's
-> report and retains that historical provenance. The currently integrated executive summary is
-> [`../EXECUTIVE_SUMMARY.md`](../EXECUTIVE_SUMMARY.md). The three links' observed destinations have source-linked
+> report and retains that historical provenance. The current integrated summary is `EXECUTIVE_SUMMARY.md`
+> at the repository root. The three links' observed destinations have source-linked
 > specifications and destination-only marketing copy, but the short-code-to-brief mapping remains unverified;
 > no Associates tag, performance report, or product-specific revenue estimate is available. Sections 9–10 below
 > were updated to the publicly readable Amazon rate table and the current evidence posture.
