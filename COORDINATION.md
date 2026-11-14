@@ -559,3 +559,88 @@ Claimed on current Arena-pinned branch `arena/5c06fb5e-zone2` (base `c0a109b305d
 - PR validation: workflow run `43582505789` — **success** (build and verify; deploy skipped as expected on a PR).
 - Main CI and deployment after merge: `Build, verify and deploy` run `43582554548` — **success**; Pages deployment run `43582554557` — **success**; authenticated Pages API status `built`, source `main` root.
 - Product identities remain unverified. `research-hub/`/historic verification-log corrections and the residual unverified niche KPI remain documented review items; the newer root homepage states 0/3 identified.
+
+
+## Session record — `03ae78da` (`arena/03ae78da-zone2`, current branch)
+
+Branch base: `c0a109b`; rebased/reset onto `origin/main` (`1aa36ab`, PRs #18/#19 merge) which already carries session
+`arena/dc52402c-zone2`'s T20 root correction ("0 of 3 identified") and session `arena/5c06fb5e-zone2`'s AUD-01
+post-integration audit. All shared tasks T1–T20 and LT-1–LT-12 are done by prior sessions and preserved in their
+namespaces; this session independently re-verified against live official sources and carries the PR → merge →
+Pages-deploy cycle. No other session's files were edited; cross-scope correction requests (root niche KPI,
+`research-hub/`, `docs/verification-log.md`) are logged by `5c06fb5e` and are not in this session's scope.
+
+### Task board (session-scoped; `03ae78da-*` prefix so IDs never collide)
+
+| ID | Task | Status | Files |
+|---|---|---|---|
+| `03ae78da-V1` | Independent re-verification of the 3 supplied affiliate links + official program facts | done | `COORDINATION.md` (this record); checked live on `affiliate-program.amazon.com`, `amazon.com/dp/`, `link.amazon/` |
+| `03ae78da-V2` | Executive summary line-by-line review against official sources | done | `EXECUTIVE_SUMMARY.md`, `index.html`, `assets/js/data.js` |
+| `03ae78da-V3` | Site integrity: landing page + category subpages, tables, source links, flagged page, internal links | done | root `*.html`, `pages/`, `assets/`, `ledger/` |
+| `03ae78da-V4` | PR → merge → confirm GitHub Pages deploy | merge scheduled | `arena/03ae78da-zone2` → `main` |
+
+### Independent verification performed (this session, 2026-11-14)
+
+All checks against live official sources; results match session `dc52402c` (T20) and audit `5c06fb5e` (AUD-01):
+
+1. **ASIN format.** Amazon assigns ASINs as 10-character alphanumeric identifiers (`/dp/<10-char>` in the product
+   URL). The three supplied codes are 9 characters: `B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV` → none is a valid ASIN.
+   - Live check: `https://www.amazon.com/dp/B04G1MEwY` → **Page Not Found** ("Sorry! We couldn't find that page.").
+   - Sources: Amazon Associates help GP38PJ6EUR6PFBEC; sell.amazon.com ASIN explainer; live fetch above.
+
+2. **Short-link resolution.** Each `link.amazon/<code>` redirects to a *different, real* Amazon product page carrying
+   `plpRedirect=mhFallback` + `lv=shuf` + a per-request `btn_ref` shuffle token (a fallback experience, not a
+   token→product mapping):
+   - `link.amazon/B04G1MEwY` → `amazon.com/dp/B0CDY277D3` — CHEFMAN 6 Quart Dual Basket Air Fryer Oven (Home & Kitchen > Air Fryers).
+   - `link.amazon/B02NbDxp3` → `amazon.com/dp/B09B7SB46R` — Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven (Home & Kitchen).
+   - `link.amazon/B00hJ57DV` → `amazon.com/dp/B08DKYBTPH` — Chefman Air Fryer 8 Qt TurboFry 4-in-1 (Home & Kitchen).
+   - Corroborates prior-session flags F-01/F-02/F-03/F-12 and AF-01…AF-06.
+
+3. **Destination product pages are real.** `amazon.com/dp/B0CDY277D3`, `/dp/B09B7SB46R`, `/dp/B08DKYBTPH` all load as
+   live product pages whose titles/brands/categories match `assets/js/data.js` (specs cross-checked against the
+   Chefman and Emeril Everyday manufacturer pages). Product identity as *the requested items* is NOT established —
+   the codes don't map to them — so price/rating/review/availability stay **blank and flagged** (no inference),
+   per the project's no-inference rule.
+
+4. **Amazon Associates program facts (official, live).** Fetched `https://affiliate-program.amazon.com/help/operating/policies`
+   (updated April 14, 2026) and the Associates homepage:
+   - "up to 10% in associate commissions from qualifying purchases and programs"
+   - Mandatory disclosure: "As an Amazon Associate I earn from qualifying purchases." (Operating Agreement §5)
+   - Session: 24 hours; cart completion within 89 days; shipped/paid within 180 days; payout ~60 days after month end.
+   - IP License Agent Terms: agents identify as `Agent/[name]`, no circumventing human checks.
+   - PA-API 5.0 deprecated → 403; Creators API requires ≥10 qualifying sales in the past 30 days.
+   - All match `EXECUTIVE_SUMMARY.md`, `assets/js/data.js` (EXEC_FACTS / COMMISSION_ROWS / COMPLIANCE_ROWS) and `index.html`.
+
+5. **Site integrity.** Root site: 8 HTML pages, 412 internal refs, 0 missing. Every page carries the disclosure;
+   no page prints a product price. `pages/` = 37 generated subpages incl. `pages/categories/`. `ledger/` dataset +
+   `tools/` engine present; CI workflow `.github/workflows/pages.yml` gates build/deploy.
+
+### Irregularities carried forward (non-blocking, published with source links)
+
+- **Link-code / ASIN mismatch (all three products).** Destination ASINs are real products but are not established as
+  the items named in the brief. Flagged F-12 / I-20; AF-01…AF-06. Owner action: confirm intended 10-char ASINs.
+- All other flags: see `pages/flags.html` and `ledger/flags.json`.
+
+### Sources used (official / verified)
+
+| Source | URL | Used for |
+|---|---|---|
+| Amazon Associates Central (homepage) | https://affiliate-program.amazon.com/ | program overview, "up to 10%" ceiling |
+| Associates Program Policies | https://affiliate-program.amazon.com/help/operating/policies | 24h/89-day/180-day attribution, ~60-day payout, disclosure, Agent Terms, PA-API deprecation |
+| Associates Program Operating Agreement | https://affiliate-program.amazon.com/help/operating/agreement | mandatory disclosure §5, updated 15 Oct 2025 |
+| Amazon product page — B0CDY277D3 | https://www.amazon.com/dp/B0CDY277D3 | product 1 title/brand/category |
+| Amazon product page — B09B7SB46R | https://www.amazon.com/dp/B09B7SB46R | product 2 title/brand/category |
+| Amazon product page — B08DKYBTPH | https://www.amazon.com/dp/B08DKYBTPH | product 3 title/brand/category |
+| Amazon /dp/ 9-char token | https://www.amazon.com/dp/B04G1MEwY | Page Not Found (invalid ASIN format) |
+| Short links | link.amazon/B04G1MEwY, B02NbDxp3, B00hJ57DV | mhFallback redirect behavior |
+
+### Next step
+
+Merge PR #20 (`arena/03ae78da-zone2` → `main`) with `gh pr merge 20 --merge`, then confirm GitHub Pages deploys.
+
+| Item | Value |
+|---|---|
+| PR | #20 — https://github.com/kanlerxz87-cyber/Zone2/pull/20 — `arena/03ae78da-zone2` → `main` (opened) |
+| Merge result | scheduled (`gh pr merge 20 --merge`) |
+| Pages URL | https://kanlerxz87-cyber.github.io/Zone2/ (live; Pages API status `built`, source `main` root per `5c06fb5e` AUD-01) |
+
