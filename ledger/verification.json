@@ -202,7 +202,7 @@
         "S03",
         "S29"
       ],
-      "consequence": "R-09 corrected 2026-11-14 (F-21): the earlier wording restated the policy's permission as a flat prohibition. This repo still restricts distribution to web only, which is now labelled a self-imposed default rather than an Amazon requirement."
+      "consequence": "R-09 corrected 2026-11-14 (F-25 — renumbered from F-21 when the register was reconciled; F-21 is now the btn_ref rotation flag): the earlier wording restated the policy's permission as a flat prohibition. This repo still restricts distribution to web only, which is now labelled a self-imposed default rather than an Amazon requirement."
     },
     {
       "id": "V-19",
