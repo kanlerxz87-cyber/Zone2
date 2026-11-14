@@ -24,7 +24,7 @@
   <main class="main">
     <div class="page-head">
       <h2>Affiliate Products</h2>
-      <p>Every row links to the official Amazon product page. Cells that could not be confirmed from an official source are left blank and flagged — never inferred.</p>
+      <p>The three supplied links resolve to the products shown. Each link code is a 9-character value — not a valid Amazon ASIN (an ASIN is 10) — and <code>amazon.com/dp/&lt;code&gt;</code> returns Page Not Found. The destination shown is the product each link resolves to (verified on its official Amazon page); the code→product mapping is flagged for confirmation. Cells that could not be confirmed from an official source are left blank and flagged — never inferred.</p>
     </div>
 
     <div class="disclosure">
@@ -32,17 +32,19 @@
     </div>
 
     <div class="card">
-      <h3>Product Catalog — verified from official Amazon pages</h3>
+      <h3>Product Catalog — resolved destinations (flagged for confirmation)</h3>
       <div id="productsTable"></div>
     </div>
 
     <div id="productOverview"></div>
 
     <div class="card">
-      <h3>Verified Specifications (official Amazon + manufacturer pages)</h3>
+      <h3>Specifications of the resolved destination ASINs (official Amazon + manufacturer pages)</h3>
       <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but are
-        deliberately not published here, in line with Amazon Associates price-display restrictions and
+        These specs describe the resolved destination ASIN for each link (verified on the official Amazon
+        product page and the manufacturer's own page), not a confirmed valid-ASIN match for the supplied
+        code. Manufacturer-site prices were verified on the official Chefman and Emeril Everyday pages but
+        are deliberately not published here, in line with Amazon Associates price-display restrictions and
         the site's no-price rule; Amazon prices remain unverified and are flagged. Rows where official
         sources disagree are marked <span class="badge warn">Conflict</span> and both values are shown.
       </p>
@@ -50,9 +52,11 @@
     </div>
 
     <footer class="site">
-      Verified dataset date: 2026-11-13. Titles, brands, categories and ASINs verified against the official
-      Amazon product pages listed per row. Price, rating, review count and availability are
-      <em>unverified</em> and flagged on the <a href="flagged.html">Flagged for Review</a> page.
+      Verified dataset date: 2026-11-14 (re-verified; corroborates the 2026-11-13 capture). Titles,
+      brands, categories and ASINs verified against the official Amazon product pages listed per row
+      (resolved destinations). Price, rating, review count and availability are <em>unverified</em> and
+      flagged on the <a href="flagged.html">Flagged for Review</a> page; the code→ASIN mapping is flagged
+      for confirmation (F-01/F-02/F-03/F-12).
     </footer>
   </main>
 </div>

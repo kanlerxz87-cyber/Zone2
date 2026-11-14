@@ -1,10 +1,22 @@
 /* Zone2 — verified dataset
  * Every value below was checked against the official source listed in its row's
- * "source" field on 2026-11-13. Values that could not be confirmed from an official
- * source are left as null/empty and flagged as UNVERIFIED (see flagged page).
+ * "source" field. Values that could not be confirmed from an official source are
+ * left as null/empty and flagged as UNVERIFIED (see flagged page). Nothing is
+ * inferred, averaged or filled in.
+ *
+ * FRAMING NOTE (re-verified 2026-11-14): each supplied link.amazon code is 9
+ * characters; an Amazon ASIN is a 10-character identifier, and amazon.com/dp/<code>
+ * returns Page Not Found for each. Each short link resolves (stably, per the
+ * Revalidation 2026-11-14 control test) to an Amazon product page carrying
+ * plpRedirect=mhFallback / lv=shuf markers. The destinations below are the products
+ * each supplied link RESOLVES TO (verified from the official Amazon product page
+ * and manufacturer pages) — they are recorded as resolved destinations and flagged
+ * for confirmation, because the supplied code itself is not a valid ASIN. Treat the
+ * destinations as the resolved products pending owner confirmation of the intended
+ * ASINs; see flags F-01/F-02/F-03/F-12.
  */
 
-const VERIFIED_DATE = "2026-11-13";
+const VERIFIED_DATE = "2026-11-14";
 
 const ASIN_SOURCE = {
   associatesHome: "https://affiliate-program.amazon.com/",
@@ -29,6 +41,9 @@ const PRODUCTS = [
     id: "p1",
     shortLink: "https://link.amazon/B04G1MEwY",
     shortCode: "B04G1MEwY",
+    codeValid: false,
+    mappingNote:
+      "Code is 9 characters (an ASIN is 10); amazon.com/dp/B04G1MEwY returns Page Not Found. The destination B0CDY277D3 is the product this link resolves to (verified on its Amazon page) — flagged for confirmation, not a valid-ASIN match.",
     asin: "B0CDY277D3",
     brand: "CHEFMAN",
     title:
@@ -39,12 +54,15 @@ const PRODUCTS = [
     reviewCount: null,
     availability: null,
     source: "https://www.amazon.com/dp/B0CDY277D3",
-    sourceLabel: "Amazon.com product page (B0CDY277D3)",
+    sourceLabel: "Amazon.com product page (B0CDY277D3) — resolved destination",
   },
   {
     id: "p2",
     shortLink: "https://link.amazon/B02NbDxp3",
     shortCode: "B02NbDxp3",
+    codeValid: false,
+    mappingNote:
+      "Code is 9 characters (an ASIN is 10); amazon.com/dp/B02NbDxp3 returns Page Not Found. The destination B09B7SB46R is the product this link resolves to (verified on its Amazon page) — flagged for confirmation, not a valid-ASIN match.",
     asin: "B09B7SB46R",
     brand: "Emeril Lagasse",
     title:
@@ -55,12 +73,15 @@ const PRODUCTS = [
     reviewCount: null,
     availability: null,
     source: "https://www.amazon.com/dp/B09B7SB46R",
-    sourceLabel: "Amazon.com product page (B09B7SB46R)",
+    sourceLabel: "Amazon.com product page (B09B7SB46R) — resolved destination",
   },
   {
     id: "p3",
     shortLink: "https://link.amazon/B00hJ57DV",
     shortCode: "B00hJ57DV",
+    codeValid: false,
+    mappingNote:
+      "Code is 9 characters (an ASIN is 10); amazon.com/dp/B00hJ57DV returns Page Not Found. The destination B08DKYBTPH is the product this link resolves to (verified on its Amazon page) — flagged for confirmation, not a valid-ASIN match.",
     asin: "B08DKYBTPH",
     brand: "Chefman",
     title:
@@ -71,7 +92,7 @@ const PRODUCTS = [
     reviewCount: null,
     availability: null,
     source: "https://www.amazon.com/dp/B08DKYBTPH",
-    sourceLabel: "Amazon.com product page (B08DKYBTPH)",
+    sourceLabel: "Amazon.com product page (B08DKYBTPH) — resolved destination",
   },
 ];
 
@@ -551,42 +572,42 @@ const CONTENT_ROWS = [
     content: "Product review article",
     target: "CHEFMAN 6 Quart Dual Basket Air Fryer Oven (B0CDY277D3)",
     format: "SEO-optimized long-form review",
-    status: "Ready",
+    status: "Blocked — identity not established via a valid ASIN (F-06)",
     source: "https://www.amazon.com/dp/B0CDY277D3",
   },
   {
     content: "Product review article",
     target: "Emeril Lagasse 26QT French Door Air Fryer Toaster Oven (B09B7SB46R)",
     format: "SEO-optimized long-form review",
-    status: "Ready",
+    status: "Blocked — identity not established via a valid ASIN (F-06)",
     source: "https://www.amazon.com/dp/B09B7SB46R",
   },
   {
     content: "Product review article",
     target: "Chefman Air Fryer 8 Qt TurboFry 4-in-1 (B08DKYBTPH)",
     format: "SEO-optimized long-form review",
-    status: "Ready",
+    status: "Blocked — identity not established via a valid ASIN (F-06)",
     source: "https://www.amazon.com/dp/B08DKYBTPH",
   },
   {
     content: "Comparison guide",
     target: "Chefman 6 Qt Dual Basket vs Chefman 8 Qt TurboFry",
     format: "Side-by-side comparison article",
-    status: "Ready",
+    status: "Blocked — identity not established via a valid ASIN (F-06)",
     source: "https://www.amazon.com/dp/B0CDY277D3",
   },
   {
     content: "Comparison guide",
     target: "Compact vs large-capacity air fryer ovens (6 Qt vs 26 QT)",
     format: "Buying-guide comparison article",
-    status: "Ready",
+    status: "Blocked — identity not established via a valid ASIN (F-06)",
     source: "https://www.amazon.com/dp/B09B7SB46R",
   },
   {
     content: "Buying guide",
     target: "“Best air fryer for family meals” buying guide",
     format: "SEO buying guide with Special Link integration",
-    status: "Ready",
+    status: "Blocked — identity not established via a valid ASIN (F-06)",
     source: "https://www.amazon.com/dp/B08DKYBTPH",
   },
 ];
@@ -730,6 +751,14 @@ const FLAGGED_ROWS = [
       "The resolved link.amazon URLs carry no Associates tag parameter. Live click/conversion tracking requires Special Links that include the assigned Associates ID / tag (Participation Requirements §2). Flagged for account configuration before launch.",
     ledger_flag: "F-07",
     ledger_url: LEDGER_FLAGS_URL + "#F-07",
+    source: "https://affiliate-program.amazon.com/help/operating/policies",
+  },
+  {
+    item: "Content generation inert until a valid ASIN is confirmed (F-06)",
+    detail:
+      "Because each supplied link code is not a valid ASIN and the destination mapping is flagged for confirmation, the article/comparison/guide generator is intentionally inert. No product marketing copy is published for the three supplied links until the intended ASINs are confirmed; the Content view records each planned output as Blocked.",
+    ledger_flag: "F-06",
+    ledger_url: LEDGER_FLAGS_URL + "#F-06",
     source: "https://affiliate-program.amazon.com/help/operating/policies",
   },
 ];
