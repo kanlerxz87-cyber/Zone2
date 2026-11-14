@@ -103,5 +103,21 @@ post-merge deploy verification is recorded in `COORDINATION.md` (closing entry).
 
 ---
 
+## §7. PR and deploy record (the brief's final step, executed)
+
+The brief's final step was executed in this session: **PR
+[#49](https://github.com/kanlerxz87-cyber/Zone2/pull/49)** (`arena/e9c8362c-zone2` → `main`) was
+**merged** (`gh pr merge 49 --merge`, 2026-11-14T19:21:02Z, merge commit
+`36151d2633086a93ed417236bc490a4d1a105a52`) after four additive reconciliation merges of parallel
+`main` waves (PRs #42–#47, #48/#51/#53, #54/#55, #52), with every gate green on the merged tree —
+per the project instruction "Do not merge a broken site". The PR's own `Build and verify` check
+passed on the merged tree (run 43631484203). Post-merge on `main`, `Build, verify and deploy`
+(run 43631618149) and `pages build and deployment` (run 43631617599) both **succeeded**; Pages API
+reports `status: built` from `main`; a live read (`?v=36151d2`) confirms the **36-flag register
+(F-01…F-36)** and the per-row S04 source cells are deployed. The PR link, merge result and deploy
+confirmation are recorded in `COORDINATION.md` (T28 closing record).
+
+---
+
 *Nothing in this report was inferred: every "Verified" verdict names the page that states the value,
 read live on 2026-11-14; every value without such a page is blank and flagged.*
