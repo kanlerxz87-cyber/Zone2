@@ -1,6 +1,6 @@
 {
-  "note": "Ledger of the three products named in the project brief. Field values are only populated when an official source states them. Blank + status=UNVERIFIED means no official source could be found; the value was NOT inferred.",
-  "verified_utc": "2026-11-13",
+  "note": "Ledger of the three products named in the project brief. Field values are only populated when an official source states them. Blank + status=UNVERIFIED means no official source could be found; the value was NOT inferred. The submitted codes are not ASINs, so the identity fields of the submitted items stay blank; the product each supplied short link RESOLVES TO is a separate, verified fact and is recorded under resolved_destination.",
+  "verified_utc": "2026-11-14",
   "lookup_path": "Creators API GetItems (S07, S08) with an authenticated Associates account - not available in this workspace",
   "entries": [
     {
@@ -25,9 +25,32 @@
       "conversion": "",
       "clicks": "",
       "status": "UNVERIFIED",
-      "source_ids": ["S16", "S19"],
-      "why_blank": "Token is 9 characters, so it is not a valid ASIN; the canonical /dp/ URL returns Amazon's Page Not Found page; the submitted short link redirected to an unrelated ASIN via plpRedirect=mhFallback. No official record identifies the intended product, so no attribute may be stated.",
-      "flag_ids": ["F-01", "F-02", "F-04", "F-06"]
+      "source_ids": [
+        "S16",
+        "S19"
+      ],
+      "why_blank": "The submitted code is 9 characters, so it is not a valid ASIN, and https://www.amazon.com/dp/B04G1MEwY returns Amazon's Page Not Found page - no catalog record exists for the code as written. The supplied short link resolves deterministically to amazon.com/dp/B0CDY277D3 (see resolved_destination), but no public Amazon document binds a link.amazon code to a destination ASIN, so the identity of the item the brief named stays unverified and every dependent field (price, rating, review count, availability, commission band) is left blank rather than inferred.",
+      "flag_ids": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-16"
+      ],
+      "resolved_destination": {
+        "id": "RD-01",
+        "asin": "B0CDY277D3",
+        "title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+        "brand": "CHEFMAN",
+        "category": "Home & Kitchen",
+        "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "source": "https://www.amazon.com/dp/B0CDY277D3",
+        "source_ids": [
+          "S19"
+        ],
+        "identity_status": "VERIFIED_AS_LINK_DESTINATION",
+        "note": "Verified as the destination the submitted link resolves to. It is not established as the item the brief named, because the brief supplied a link rather than an ASIN and no public Amazon document maps a link.amazon code to an ASIN. Price, rating, review count and availability remain blank and flagged."
+      }
     },
     {
       "id": "P-02",
@@ -51,9 +74,32 @@
       "conversion": "",
       "clicks": "",
       "status": "UNVERIFIED",
-      "source_ids": ["S17", "S20"],
-      "why_blank": "Token is 9 characters; canonical /dp/ URL returns Page Not Found; short link resolved to a different, unrelated ASIN through mhFallback.",
-      "flag_ids": ["F-01", "F-02", "F-04", "F-06"]
+      "source_ids": [
+        "S17",
+        "S20"
+      ],
+      "why_blank": "The submitted code is 9 characters, so it is not a valid ASIN, and https://www.amazon.com/dp/B02NbDxp3 returns Amazon's Page Not Found page. The supplied short link resolves deterministically to amazon.com/dp/B09B7SB46R (see resolved_destination), but no public Amazon document binds a link.amazon code to a destination ASIN, so every dependent field is left blank rather than inferred.",
+      "flag_ids": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-16"
+      ],
+      "resolved_destination": {
+        "id": "RD-02",
+        "asin": "B09B7SB46R",
+        "title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+        "brand": "Emeril Lagasse",
+        "category": "Home & Kitchen",
+        "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "source": "https://www.amazon.com/dp/B09B7SB46R",
+        "source_ids": [
+          "S20"
+        ],
+        "identity_status": "VERIFIED_AS_LINK_DESTINATION",
+        "note": "Verified as the destination the submitted link resolves to; the page title and the Kitchen & Dining category path were read from the live product page. Price, rating, review count and availability remain blank and flagged."
+      }
     },
     {
       "id": "P-03",
@@ -77,46 +123,103 @@
       "conversion": "",
       "clicks": "",
       "status": "UNVERIFIED",
-      "source_ids": ["S18", "S21"],
-      "why_blank": "Token is 9 characters; canonical /dp/ URL returns Page Not Found; short link resolved to a different, unrelated ASIN through mhFallback. All three short links landed on three DIFFERENT products, which is the signature of a fallback rather than a token-to-product mapping.",
-      "flag_ids": ["F-01", "F-02", "F-04", "F-06"]
+      "source_ids": [
+        "S18",
+        "S21"
+      ],
+      "why_blank": "The submitted code is 9 characters, so it is not a valid ASIN, and https://www.amazon.com/dp/B00hJ57DV returns Amazon's Page Not Found page. The supplied short link resolves deterministically to amazon.com/dp/B08DKYBTPH (see resolved_destination), but no public Amazon document binds a link.amazon code to a destination ASIN, so every dependent field is left blank rather than inferred.",
+      "flag_ids": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-16"
+      ],
+      "resolved_destination": {
+        "id": "RD-03",
+        "asin": "B08DKYBTPH",
+        "title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+        "brand": "Chefman",
+        "category": "Home & Kitchen",
+        "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "source": "https://www.amazon.com/dp/B08DKYBTPH",
+        "source_ids": [
+          "S21"
+        ],
+        "identity_status": "VERIFIED_AS_LINK_DESTINATION",
+        "note": "Verified as the destination the submitted link resolves to; the page title and the Kitchen & Dining category path were read from the live product page. Price, rating, review count and availability remain blank and flagged."
+      }
     }
   ],
   "evidence_observations": [
     {
       "id": "E-01",
       "observation": "GET https://link.amazon/B04G1MEwY ended at https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-...&channelId=704&plpRedirect=mhFallback (page title observed: CHEFMAN 6 Quart Dual Basket Air Fryer Oven ...)",
-      "interpretation": "Fallback destination, not a mapping of the submitted token. Recorded for reproducibility only.",
+      "interpretation": "Stable destination. Re-fetched on 2026-11-14 it ended at the same ASIN with the same product page; the earlier 'fallback' reading was withdrawn after a control test (see E-06). The mapping is observed behaviour, not documented intent.",
       "status": "OBSERVED",
-      "source_ids": ["S19"]
+      "source_ids": [
+        "S19"
+      ]
     },
     {
       "id": "E-02",
       "observation": "GET https://link.amazon/B02NbDxp3 ended at https://www.amazon.com/dp/B09B7SB46R?...plpRedirect=mhFallback (page title observed: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven ...)",
-      "interpretation": "Different fallback destination from E-01, i.e. the token did not select the product.",
+      "interpretation": "A different destination from E-01, one per submitted link - which is what a per-link mapping looks like, and equally what a fallback looks like. E-06 and E-07 discriminate between the two.",
       "status": "OBSERVED",
-      "source_ids": ["S20"]
+      "source_ids": [
+        "S20"
+      ]
     },
     {
       "id": "E-03",
       "observation": "GET https://link.amazon/B00hJ57DV ended at https://www.amazon.com/dp/B08DKYBTPH?...plpRedirect=mhFallback (page title observed: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 ...)",
-      "interpretation": "Third distinct fallback destination. No submitted token survived the redirect.",
+      "interpretation": "A third distinct destination, one per submitted link. Combined with E-06 and E-07 this reads as an individually tracked source link, not an arbitrary fallback.",
       "status": "OBSERVED",
-      "source_ids": ["S21"]
+      "source_ids": [
+        "S21"
+      ]
     },
     {
       "id": "E-04",
-      "observation": "https://www.amazon.com/dp/B04G1MEwY , https://www.amazon.com/dp/B02NbDxp3 and https://www.amazon.com/dp/B00hJ57DV each returned Amazon's \"Sorry! We couldn't find that page\" error page on 2026-11-13.",
+      "observation": "https://www.amazon.com/dp/B04G1MEwY , https://www.amazon.com/dp/B02NbDxp3 and https://www.amazon.com/dp/B00hJ57DV each returned Amazon's \"Sorry! We couldn't find that page\" error page when fetched on 2026-11-13 and again on 2026-11-14.",
       "interpretation": "No catalog record exists for any of the three tokens as given.",
       "status": "OBSERVED",
-      "source_ids": ["S16", "S17", "S18"]
+      "source_ids": [
+        "S16",
+        "S17",
+        "S18"
+      ]
     },
     {
       "id": "E-05",
       "observation": "Each token was measured against the ASIN identifier definition (10 characters): B04G1MEwY=9, B02NbDxp3=9, B00hJ57DV=9. Each is alphanumeric, so only the length fails.",
       "interpretation": "Pattern is consistent with a one-character truncation, but the missing character is not recoverable and was NOT guessed.",
       "status": "OBSERVED",
-      "source_ids": ["S16", "S17", "S18"]
+      "source_ids": [
+        "S16",
+        "S17",
+        "S18"
+      ]
+    },
+    {
+      "id": "E-06",
+      "observation": "CONTROL: a bare, untagged GET https://www.amazon.com/dp/B0CDY277D3 - a valid 10-character ASIN - returned the real CHEFMAN 6 Qt product page, and Amazon rewrote its own links to ?lv=shuf&channelId=500&plpRedirect=mhFallback.",
+      "interpretation": "plpRedirect=mhFallback and lv=shuf are emitted on ordinary valid product-page loads. They are not evidence of a fallback and do not distinguish a valid ASIN from a bad token. This is the control the earlier conclusion lacked.",
+      "status": "OBSERVED",
+      "source_ids": [
+        "S19"
+      ]
+    },
+    {
+      "id": "E-07",
+      "observation": "The per-link token btn_ref=srctok-<hex> was identical on same-day re-fetch of each link, and differed between 2026-11-13 and 2026-11-14 for the same link (B04G1MEwY: srctok-1e229870efde5acf -> srctok-1f979f303a4b5691). The destination ASIN did not change on any fetch across five sessions and two days.",
+      "interpretation": "A rotating source-attribution token on a fixed destination is the behaviour of a tracked source link. A shuffle would change the destination. The token must not be treated as a stable identifier; only the destination ASIN is.",
+      "status": "OBSERVED",
+      "source_ids": [
+        "S19",
+        "S20",
+        "S21"
+      ]
     }
   ]
 }

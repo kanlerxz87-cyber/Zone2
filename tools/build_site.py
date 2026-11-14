@@ -130,8 +130,9 @@ def notice(title: str, text: str) -> str:
     return f'<div class="notice"><strong>{esc(title)}</strong>{esc(text)}</div>'
 
 
-def panel(title: str, inner: str, *, meta: str = "") -> str:
-    return f'<section class="panel"><div class="panel-head"><h3>{esc(title)}</h3>{meta}</div>{inner}</section>'
+def panel(title: str, inner: str, *, meta: str = "", note: str = "") -> str:
+    body = f'<p class="panel-note">{note}</p>' if note else ""
+    return f'<section class="panel"><div class="panel-head"><h3>{esc(title)}</h3>{meta}</div>{body}{inner}</section>'
 
 
 def checklist(items, flag_first=False) -> str:
@@ -300,7 +301,8 @@ def page_hub() -> str:
 
 def page_exec() -> str:
     key = [
-        ("Requested products can be identified", False, "All three tokens are 9 characters (an ASIN is 10); the canonical /dp/ URLs return Amazon's Page Not Found page; and each submitted short link resolved to a different, unrelated ASIN through a fallback redirect.", ["S16", "S17", "S18", "S19"]),
+        ("Requested products can be identified", False, "The three tokens are 9 characters (an ASIN is 10) and the canonical /dp/ URLs return Amazon's Page Not Found page, so the code itself identifies nothing. Each supplied short link does resolve to one product, deterministically - but no public Amazon document binds a link.amazon code to a destination ASIN, so the items the brief named are still not established.", ["S16", "S17", "S18", "S19"]),
+        ("The product each supplied link resolves to", True, "Each link resolves to exactly one live Amazon product page, the same one on every fetch across two days and five sessions: B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven), B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven) and B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry). A control fetch of a valid ASIN carries the same plpRedirect=mhFallback marker, so that marker is not evidence of a fallback and the earlier 'arbitrary fallback' reading was withdrawn.", ["S19", "S20", "S21"]),
         ("Marketing copy for those products", False, "The content engine refuses to draft copy for an entry whose identity is unresolved, so zero articles, comparisons and buying guides exist for these inputs.", ["S02"]),
         ("Platform automation built", True, "Collector, scoring, content linters, link builder, click tracker, optimizer and a deterministic site builder are present and runnable, with policy rules encoded as code.", ["S01", "S02"]),
         ("Official commission economics", True, "Amazon's published fixed-rate table transcribed row by row (11 bands, 10.00% down to 0.00%), plus bounty amounts, attribution windows and payment terms.", ["S04", "S02"]),
@@ -337,8 +339,9 @@ def page_exec() -> str:
         panel(
             "Bottom line",
             '<p class="lede">Everything this platform needs in order to earn is built and wired to official data. The three named '
-            "products are the one thing that cannot be marketed, because none of the supplied links identifies a product. The site "
-            "therefore publishes the mechanism, the sourced economics, and the gaps \u2014 and nothing else.</p>",
+            "products are the one thing that cannot be marketed with certainty, because no public Amazon document binds a "
+            "link.amazon code to a destination ASIN. The site therefore publishes the mechanism, the sourced economics, the "
+            "verified destination each supplied link resolves to, and the gaps \u2014 and nothing else.</p>",
         )
         + panel("Key questions answered", table(["Question", "Verdict", "Basis", "Evidence"], rows))
         + panel("Findings", "<ol class=\"findings\">" + "".join(f"<li>{esc(f)}</li>" for f in findings) + "</ol>")
@@ -394,12 +397,40 @@ def page_products() -> str:
         + "</dd></div>"
         for e in PRODUCTS["entries"]
     )
+    resolved_rows = []
+    for e in PRODUCTS["entries"]:
+        rd = e.get("resolved_destination") or {}
+        resolved_rows.append(
+            [
+                text_cell(e["id"]),
+                f'<td><a class="pagelink" href="{esc(e["submitted_url"])}" target="_blank" rel="noopener noreferrer nofollow">{esc(e["token_as_given"])}</a></td>',
+                text_cell(rd.get("asin", ""), code=True),
+                text_cell(rd.get("brand", "")),
+                text_cell(rd.get("title", "")),
+                text_cell(rd.get("category_path", "")),
+                f"<td>{status_pill('VERIFIED')}</td>",
+                source_cell(rd.get("source_ids", [])),
+            ]
+        )
     body = (
         notice("Verification method", PRODUCTS["note"])
         + panel(
             "Requested items, exactly as supplied",
             table(["ID", "Token as given", "Length vs ASIN", "Format", "Title", "Category", "Price", "Rating", "Commission band", "Status", "Evidence"], rows),
             meta=f'<span class="chip">{len(rows)} need review</span>',
+        )
+        + panel(
+            "The product each supplied link resolves to",
+            table(["ID", "Submitted link", "Destination ASIN", "Brand", "Title (read from the live product page)", "Category path", "Status", "Evidence"], resolved_rows),
+            meta=f'<span class="chip">{len(resolved_rows)} destinations verified</span>',
+            note=(
+                "Each supplied short link resolves to exactly one live Amazon product page, and to the same one on every fetch "
+                "across 2026-11-13 and 2026-11-14. This is a verified observation about the links - it is NOT a confirmation that "
+                "these are the items the brief named, because no public Amazon document binds a link.amazon code to a destination "
+                "ASIN. Price, rating, review count and availability stay blank and flagged. The per-request srctok attribution "
+                "token rotates between days while the destination ASIN does not, which is the behaviour of a tracked source link "
+                "rather than a shuffle."
+            ),
         )
         + panel("Why each field is blank", f"<dl class=\"whys\">{whys}</dl>")
         + panel("Evidence observations (reproducible by hand)", table(["ID", "Observation", "Interpretation", "Status", "Evidence"], ev))
@@ -409,6 +440,7 @@ def page_products() -> str:
             "<li><span class=\"flag\">&#9873;</span>Supply the full 10-character ASIN, or the complete product URL, for each item.</li>"
             "<li><span class=\"check\">&#10003;</span>Point the collector at it: <code>python3 tools/amazon_creators_api.py</code> with credentials writes a dated, hashed record.</li>"
             "<li><span class=\"check\">&#10003;</span>Then <code>python3 tools/generate_articles.py</code> drafts the article, comparison and guide automatically \u2014 no other change needed.</li>"
+            "<li><span class=\"check\">&#10003;</span>Or confirm the mapping shown above in Associates Central and regenerate the links with your Associates tag, so they are attributable Special Links.</li>"
             "</ul>",
         )
     )
@@ -454,43 +486,117 @@ def page_commissions() -> str:
     return render("commissions.html", "Commissions & economics", "Amazon's published rates, bounties, attribution windows and payment terms, transcribed from the source.", body)
 
 
+def band_for_product(entry: dict) -> dict | None:
+    """Match a verified product to a published Table 1 band.
+
+    The match is made against the product's own official category path, and only against the
+    sub-department segment - not against the top-level department. That matters here: Table 1
+    splits the Home & Kitchen department into two rows ("Kitchen" at 4.50% and "Home" at 3.00%),
+    so matching the department alone would be ambiguous. The deeper segment on each product page
+    reads "Kitchen & Dining", which names the Kitchen row. The rate Amazon actually applies to a
+    given ASIN is confirmed in the account holder's own report - see flag F-16.
+    """
+    rd = entry.get("resolved_destination") or {}
+    path = rd.get("category_path") or ""
+    segments = [s.strip() for s in path.split(">") if s.strip()]
+    if len(segments) < 2:
+        return None
+    sub_department = segments[1].lower()
+    for g in COMMISSION["groups"]:
+        for category in g["categories"]:
+            if sub_department.startswith(category.lower()):
+                return g
+    return None
+
+
+def products_in_band(g: dict) -> list[tuple[dict, dict]]:
+    out = []
+    for e in PRODUCTS["entries"]:
+        band = band_for_product(e)
+        if band and band["id"] == g["id"]:
+            out.append((e, e.get("resolved_destination") or {}))
+    return out
+
+
 def page_categories_index() -> str:
-    rows = [
-        [
-            f'<td><a class="pagelink" href="{esc(g["slug"])}.html">{esc(g["id"])}</a></td>',
-            text_cell(", ".join(g["categories"])),
-            num_cell(f'{g["rate_pct"]}%'),
-            num_cell(len(g["categories"])),
-            text_cell(g["commercial_note"]),
-            source_cell([COMMISSION["source_id"]]),
-        ]
-        for g in COMMISSION["groups"]
-    ]
+    rows = []
+    for g in COMMISSION["groups"]:
+        members = products_in_band(g)
+        if members:
+            member_cell = "<br>".join(
+                f'<a class="pagelink" href="{esc(rd["source"])}" target="_blank" rel="noopener noreferrer nofollow">{esc(rd["asin"])}</a>'
+                f' &mdash; {esc(rd["brand"])}'
+                for _e, rd in members
+            )
+        else:
+            member_cell = '<span class="blank">&mdash; none verified &mdash;</span>'
+        rows.append(
+            [
+                f'<td><a class="pagelink" href="{esc(g["slug"])}.html">{esc(g["id"])}</a></td>',
+                text_cell(", ".join(g["categories"])),
+                num_cell(f'{g["rate_pct"]}%'),
+                num_cell(len(members)),
+                member_cell,
+                text_cell(g["commercial_note"]),
+                source_cell([COMMISSION["source_id"]]),
+            ]
+        )
     body = (
         notice(
             "Organised by Amazon's own category bands",
-            "One subpage per published rate band. The rate on each page is the figure from the official statement. Which products "
-            "belong in a band may only be established by a catalog record for that product, so no product is attached to a band here.",
+            "One subpage per published rate band. The rate on each page is the figure from the official statement. A product is "
+            "attached to a band only from its own official category path on the Amazon product page - Table 1 splits the "
+            "Home & Kitchen department into a Kitchen row (4.50%) and a Home row (3.00%), so the deeper 'Kitchen & Dining' segment "
+            "of each product's category path is what decides the band. The rate Amazon actually applies to an individual ASIN is "
+            "read from the account holder's own Associates Central report, not from this table (flag F-16).",
         )
-        + panel("Category subpages", table(["Band", "Categories", "Published fixed rate", "Count", "Commercial reading", "Source"], rows))
+        + panel("Category subpages", table(["Band", "Categories", "Published fixed rate", "Verified products", "Products in this band", "Commercial reading", "Source"], rows))
     )
     return render("categories/index.html", "Categories", "Subpages organised by Amazon's published commission categories.", body, depth=1)
 
 
 def page_category(g: dict) -> str:
+    members = products_in_band(g)
     facts = [
         ("Published fixed rate", f'{g["rate_pct"]}%', [COMMISSION["source_id"]]),
         ("Band id", g["id"], [COMMISSION["source_id"]]),
         ("Categories in this band", ", ".join(g["categories"]), [COMMISSION["source_id"]]),
         ("Commercial reading", g["commercial_note"], []),
-        ("Verified products assigned here", "0", []),
-        ("Why zero", "a category may only be attached to a product by a catalog record for that product, and none of the three requested items resolved to a record", ["S16", "S17", "S18"]),
+        ("Verified products assigned here", str(len(members)), []),
     ]
+    if members:
+        facts.append(
+            (
+                "Assignment basis",
+                "each product's own official category path on its Amazon product page, matched on the sub-department segment against the band names in Table 1",
+                ["S19", "S20", "S21"],
+            )
+        )
+    else:
+        facts.append(
+            (
+                "Why none",
+                "a category may only be attached to a product by a catalog record for that product, and no verified product in this repository falls in this band",
+                ["S16", "S17", "S18"],
+            )
+        )
     per_product = [
         ("Clicks", "not published", "no live endpoint and no click log in this build"),
         ("Conversion rate", "not published", "requires a dated Associates report row"),
         ("Shipped revenue", "not published", "requires a dated Associates report row"),
         ("Commission at this band", f'{g["rate_pct"]}% of qualifying revenue', "rate from the published table; revenue side stays blank"),
+        ("Rate applied to a specific ASIN", "not published", "the account rate card requires sign-in - flag F-16"),
+    ]
+    member_rows = [
+        [
+            text_cell(e["id"]),
+            f'<td><a class="pagelink" href="{esc(rd["source"])}" target="_blank" rel="noopener noreferrer nofollow">{esc(rd["asin"])}</a></td>',
+            text_cell(rd.get("brand", "")),
+            text_cell(rd.get("title", "")),
+            text_cell(rd.get("category_path", "")),
+            source_cell(rd.get("source_ids", [])),
+        ]
+        for e, rd in members
     ]
     steps = [
         "Eligibility filter: 0.00% bands never enter the niche queue (source: published table).",
@@ -505,6 +611,19 @@ def page_category(g: dict) -> str:
             "and it displays no price and no rating.",
         )
         + panel("Band detail", table(["Field", "Value", "Source"], [[text_cell(a), text_cell(b), source_cell(c)] for a, b, c in facts]))
+        + (
+            panel(
+                "Verified products in this band",
+                table(["ID", "ASIN", "Brand", "Title", "Official category path", "Evidence"], member_rows),
+                note=(
+                    "These are the products each supplied link resolves to, matched to this band by their own category path. No "
+                    "public Amazon document binds a link.amazon code to a destination ASIN, so treat the mapping as observed "
+                    "behaviour until it is confirmed in Associates Central."
+                ),
+            )
+            if members
+            else ""
+        )
         + panel("Per-product economics for this band", table(["Metric", "Value", "Basis"], [[text_cell(a), status_pill(b) if b == "not published" else text_cell(b), text_cell(c)] for a, b, c in per_product]))
         + panel("How the pipeline uses this band", checklist(esc(s) for s in steps))
     )

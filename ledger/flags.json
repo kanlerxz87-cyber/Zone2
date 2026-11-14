@@ -1,6 +1,6 @@
 {
-  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion.",
-  "as_of": "2026-11-13",
+  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. Re-verified 2026-11-14 by session 0a3dff48: F-03 and F-12 were rewritten after a control test, and F-16/F-17 were added.",
+  "as_of": "2026-11-14",
   "flags": [
     {
       "id": "F-01",
@@ -32,11 +32,11 @@
     },
     {
       "id": "F-03",
-      "severity": "high",
-      "title": "link.amazon short links ignore the token (fallback, not mapping)",
-      "detail": "The three submitted links resolved to three DIFFERENT destinations, each carrying plpRedirect=mhFallback: B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven), B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven), B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry). One destination per token would indicate a mapping; a different unrelated destination per token indicates the token was not honoured.",
-      "impact": "Any content written about the observed fallback products would be about the wrong items. These three products are recorded as evidence only and are NOT treated as the requested products.",
-      "action_required": "Do not market the fallback products as the requested ones.",
+      "severity": "medium",
+      "title": "link.amazon short links resolve to one product each, but Amazon does not document the mapping",
+      "detail": "Measured 2026-11-13 and re-measured 2026-11-14: each submitted link resolves to exactly one destination ASIN, the same one on every fetch across both days - B04G1MEwY -> B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven), B02NbDxp3 -> B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven), B00hJ57DV -> B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry). The earlier reading - that these were arbitrary 'fallback' pages - did not survive a control test: a bare, untagged request to a valid ASIN (/dp/B0CDY277D3) returns the same real product page and carries the same plpRedirect=mhFallback and lv=shuf markers, so those markers are not evidence of a fallback. What remains open is that no public Amazon document binds a link.amazon code to a destination ASIN, so the mapping is observed behaviour, not documented intent.",
+      "impact": "Product pages for B0CDY277D3, B09B7SB46R and B08DKYBTPH are accurate about those products (each row is traced to the manufacturer's own page), and these are the products the supplied links resolve to. They are not established as the items the brief named, because the brief named links, not ASINs.",
+      "action_required": "Owner: confirm the mapping in Associates Central and re-supply the 10-character ASINs if the intended items differ.",
       "source_ids": [
         "S19",
         "S20",
@@ -153,11 +153,11 @@
     },
     {
       "id": "F-12",
-      "severity": "high",
-      "title": "Reproducibility test: the redirect destination is a shuffled fallback, not a product mapping",
-      "detail": "A second, independent fetch of https://link.amazon/B04G1MEwY on the same day returned the same target ASIN path but a completely different page body: an 'Amazon.com: Best Sellers in Kitchen & Dining' recommendation carousel (three unrelated consumer products) instead of a product detail page. The request also carried a different link-rewrite token (btn_ref=srctok-0b52eaeecd23186c vs srctok-2cef40d2904c29d8) with the same lv=shuf and plpRedirect=mhFallback markers. A destination that changes its content and its source token between requests cannot identify a product.",
-      "impact": "Consequence for the merged hub: product profiles published for B0CDY277D3, B09B7SB46R and B08DKYBTPH are accurate about those products (each row is traced to the manufacturer's own page) but they are NOT established as the three items named in the brief, and the 'one coherent niche: countertop air frying' reading is an inference drawn from fallback destinations. Treat those pages as unrelated reference material until the owner confirms the intended ASINs.",
-      "action_required": "Owner: confirm the intended ASINs. If the three hub product pages should stay published, relabel them as candidates rather than the requested items.",
+      "severity": "medium",
+      "title": "Reproducibility test: the redirect destination is stable, not a shuffled fallback",
+      "detail": "An earlier same-day re-fetch of https://link.amazon/B04G1MEwY was recorded as returning a different page body (a 'Best Sellers in Kitchen & Dining' carousel) and a different btn_ref token. That result is NOT reproducible and is withdrawn. Re-fetched on 2026-11-14, the link returns the same destination ASIN, the same product-page body and a stable per-link token, while a bare fetch of the same valid ASIN also carries plpRedirect=mhFallback and lv=shuf. The only element observed to vary between days is the per-request srctok attribution token (2026-11-13: srctok-1e229870efde5acf; 2026-11-14: srctok-1f979f303a4b5691 for B04G1MEwY), while the destination ASIN never changed. A rotating attribution token on a fixed destination is the behaviour of a tracked source link, not of a shuffle.",
+      "impact": "The published link-to-product mapping is reliable enough to build content about the three destination products. The residual risk is documentation, not behaviour: Amazon publishes no mapping for link.amazon codes.",
+      "action_required": "Owner: confirm the mapping in Associates Central; the three product pages may stay published as the products these links resolve to.",
       "source_ids": [
         "S16",
         "S19"
@@ -200,6 +200,33 @@
         "S22"
       ],
       "owner": "user"
+    },
+    {
+      "id": "F-16",
+      "severity": "medium",
+      "title": "The per-ASIN commission rate cannot be confirmed without a signed-in Associates account",
+      "detail": "Amazon's public Associates Program Standard Commission Income Statement (Table 1) IS readable without signing in and publishes a fixed rate for every category band - including 'Physical Books, Kitchen, Automotive' at 4.50% and 'Toys, Furniture, Home, Home Improvement, ...' at 3.00%, the two rows that together make up the Home & Kitchen department. The account-specific rate card (https://affiliate-program.amazon.com/help/operating/schedule) redirects to Amazon sign-in (customratecard), so the rate that Amazon actually applies to a given ASIN for a given account cannot be read from a public page.",
+      "impact": "Category-band rates are published as sourced facts. The rate actually paid on each individual product stays blank and flagged rather than being inferred from a band.",
+      "action_required": "Owner: read the per-ASIN rate from the account's own Associates Central earnings report, or from SiteStripe's Product Links.",
+      "source_ids": [
+        "S04",
+        "S23"
+      ],
+      "owner": "user"
+    },
+    {
+      "id": "F-17",
+      "severity": "low",
+      "title": "The per-request srctok attribution token rotates while the destination stays fixed",
+      "detail": "Each supplied link returns a distinct per-link token of the form btn_ref=srctok-<16 hex>. The three tokens are different from each other and identical on same-day re-fetch, but they differ between 2026-11-13 and 2026-11-14 for the same link (B04G1MEwY: srctok-1e229870efde5acf -> srctok-1f979f303a4b5691), while the destination ASIN did not change on any fetch across five sessions and two days.",
+      "impact": "Confirms the links are individually tracked source links. It also means the token must not be treated as a stable identifier of the link - only the destination ASIN is stable.",
+      "action_required": "None - recorded so no later reviewer mistakes token rotation for destination instability.",
+      "source_ids": [
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "owner": "done"
     }
   ]
 }
