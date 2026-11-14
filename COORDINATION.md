@@ -805,7 +805,8 @@ those finished sessions explicitly left for the owner to apply, plus two new ite
 | `0a3dff48-V7` | AUD-03 — `docs/verification-log.md` / `docs/repo-review.md` still assert the "fallback" reading | **done** — `docs/repo-review.md` §3.3 rewritten with a dated correction note naming the control test, AF-06 restated as "mapping observed, not documented", AF-08/AF-09 updated for the public rate card vs. the sign-in-gated account schedule; `docs/verification-log.md` already agreed. `README.md` divergence table and "what is still open" section updated to match | `5c06fb5e` AUD-03 | `docs/repo-review.md`, `docs/verification-log.md`, `README.md` |
 | `0a3dff48-V8` | I-21 / F-13 — `research-hub/compliance.html` title begins with an Amazon mark | **done** — generator now emits "Program rules this site complies with"; `research-hub/compliance.html` regenerated; `tools/validate_data.py` reports **0 mark findings and 0 mark review notes** (was 1 warning); F-13 closed | `f786c0d7` F-13 | `research-hub/scripts/build.py`, `research-hub/compliance.html` |
 | `0a3dff48-V9` | Primary dashboard IA: expose the category subpages and the link-identity status in the primary nav/tables | **done** — `categories.html` added (11 published commission bands with their rates and their products); link-resolution table (3 rows) and category-band table (11 rows) rendered on the dashboard and on `products.html`; `LINK_RESOLUTIONS` + `CATEGORY_BANDS` added to `assets/js/data.js`; every root page's nav updated | new (brief: "subpages organized by category") | `index.html`, `categories.html`, `products.html`, `assets/js/data.js`, `assets/js/app.js`, `assets/css/style.css` |
-| `0a3dff48-V10` | Final integration: re-verify combined data line by line, build, no broken links, PR → merge → confirm Pages deploy | **in progress** — data re-verified against the manufacturer and Amazon pages on 2026-11-14 (spec rows re-read against `chefman.com` and `emerileveryday.com`; two composite rows re-linked to both official pages; the Emeril model-number conflict recorded as F-19). All 11 gates pass. PR/deploy still open | brief | shared outputs (nav/index only) + `COORDINATION.md` |
+| `0a3dff48-V10` | Final integration: re-verify combined data line by line, build, no broken links, PR → merge → confirm Pages deploy | **in progress** — three verification passes done (see below). All 11 gates pass. PR/deploy still open | brief | shared outputs (nav/index only) + `COORDINATION.md` |
+| `0a3dff48-V13` | **new** — third pass: fetch the Amazon product-information and item-details blocks of all three destination ASINs and re-read every published spec row against the page it cites | **done** — 10 findings (W-1 … W-10 in `docs/verification-log.md` §3c). Two new conflicts published (F-19 model number, F-20 capacity); every row drawn from two official pages now links both; two "blank because unverified" reasons corrected to "blank by policy" (F-21) | new | `assets/js/data.js`, `research-hub/data/products.json`, `docs/verification-log.md`, `ledger/flags.json` |
 | `0a3dff48-V11` | **new** — a DOM render harness so "the JavaScript parses" is not mistaken for "the page renders" | **done** — `tests/test_render.js` stubs the DOM, runs `assets/js/app.js`, and asserts 13 table/card containers across 8 root pages are populated and carry at least one official source link; gated in CI | new | `tests/test_render.js`, `.github/workflows/pages.yml` |
 | `0a3dff48-V12` | **new** — record the cross-day measurement so token rotation cannot later be read as destination instability | **done** — `revalidation/data/links.json` gains `cross_day_retest` (C-3) with both days' tokens and the bare-ASIN control; flag RV-11 added; `revalidation/links.html` regenerated with the cross-day table | new | `revalidation/data/links.json`, `revalidation/data/flags.json`, `revalidation/scripts/build.py` |
 
@@ -872,3 +873,25 @@ manufacturer/Amazon conflict was not surfaced on the primary site at all.
 | Revalidation rebuild | `python3 revalidation/scripts/build.py --check` | 6 pages, no drift |
 | Revalidation gate | `python3 revalidation/scripts/verify.py` | 6 pages, 76 rows, 181 refs, 0 failures |
 | HTTP smoke test | local `http.server` over 32 routes | all 200 |
+
+### Third verification pass (2026-11-14) — every published spec row re-read against its source
+
+The Amazon product-information and item-details blocks of all three destination ASINs were fetched
+directly, and both manufacturer pages were re-read. Ten findings, recorded in full in
+`docs/verification-log.md` §3c.
+
+| # | Finding | Consequence |
+|---|---|---|
+| W-1 | `B0CDY277D3` capacity — Chefman says 6 Qt / 5.67 L; Amazon's title and Size field say 6 Quart but Amazon's own product-information Capacity field says **6 liters** | **F-20** — new conflict, both values published on the primary site and in research-hub |
+| W-2 | `B0CDY277D3` UPC `810087845025` — Amazon's item details | research-hub's "secondary aggregator only" UPC blank is now filled from a first-party source |
+| W-3 | `B0CDY277D3` power, voltage, dimensions, weight, temperature, model number | Amazon's block **agrees with Chefman** on every one — those rows now cite both pages |
+| W-4 | `B0CDY277D3` rating 4.2 / 4,859 — the 2026-11-13 capture simply had not rendered the block | research-hub flag **I-6 superseded**; value still unpublished (§6(t)) |
+| W-5 | `B09B7SB46R` model number — Amazon `4-00675-02X-VN` vs manufacturer `4-00675-02A-VN` | **F-19** — new conflict, both published |
+| W-6 | `B09B7SB46R` power, temperature, capacity, dimensions | Amazon's block corroborates the manufacturer on all four — those rows now cite both pages |
+| W-7 | `B09B7SB46R` cooking functions | Amazon's title **and** its Configuration field say 24; the manufacturer's tile says 25 — conflict row now cites both pages explicitly |
+| W-8 | `B08DKYBTPH` power | Amazon's **product-information block** says 1700 watts (same as Chefman); Amazon's **marketing bullet text** says 1000 W — the conflict is inside one Amazon page, and the row now shows all three statements |
+| W-9 | `B08DKYBTPH` temperature, presets, weight, dimensions, warranty | Amazon's block corroborates or contradicts per row — every row now cites both pages |
+| W-10 | Program Policies §6(a), §6(t), §6(y) re-read verbatim ("Updated: April 14, 2026") | research-hub rows PG-05/PG-06 upgraded `not_rechecked` → `verified` with the clause text; **RV-09 closed**; the "blank because unverified" reason corrected to "blank by policy" across the primary site, affiliate-lab and revalidation (**F-21**) |
+
+**Nothing published was withdrawn.** Two conflicts were added, two mis-stated reasons were corrected,
+and every row that draws on two official pages now links both.
