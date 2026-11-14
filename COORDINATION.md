@@ -580,3 +580,34 @@ truncated ASIN is appearance only. `F-28` is `closed`, so the register stands at
 **Note on a cancelled run.** Run `43628877585` on `main` shows `cancelled` with **every step skipped** —
 including `actions/checkout` — so it never evaluated the tree. It is not a failure of this work; the fresh
 run above (same commit) passed all 24 steps. Recorded because a green/red summary alone would misread it.
+
+---
+
+### T27 — follow-up #1 (post-merge live read): a third surface with the same count defect — **F-29**
+
+After PR #51 merged and Pages deployed, this session read the **deployed** pages (not the working tree) and found
+one more instance of the F-17 / F-26 defect class, in a surface neither gate had covered:
+
+| Surface | Said (on the live site) | Correct | Why |
+|---|---|---|---|
+| `pages/flags.html` heading | **"28 open items"** | **25 open** (of 28) | `tools/build_site.py` headed the register with `len(rows)` — *every* flag — instead of counting open ones |
+| `summary.html` KPI | "25 open" ✓ | 25 open | `tools/build_summary.py` counted `status == "open"` correctly |
+
+Two pages of one site told the reader different numbers for the same register. Three flags (F-25, F-26, F-28) are
+closed, so 25 was right and 28 was wrong. **Fixed** by making `tools/build_site.py` use the same
+`status == "open"` test as `tools/build_summary.py`; both surfaces now read **25 open of 29**.
+
+Recorded as **F-29** and closed. Adding F-29 then stale-dated the hand-written docs, which said "28 flags" —
+**both** `validate_data.py` and `audit_site.py` failed the build on it, and both were corrected. That is the
+gates doing their job, not a failure.
+
+**Process note — a rebase mistake this session made and corrected.** While rebasing this branch, this session
+resolved the `COORDINATION.md` add/add conflict by concatenating only the two conflicted *regions*, which silently
+dropped everything before the first conflict marker and truncated the board from 582 lines to 55. It was caught by
+comparing line counts against `origin/main` before pushing. The board is restored from `origin/main` here and only
+the new record appended. **Lesson: on an append-only file, resolve by checking out the base version and appending,
+never by splicing conflict hunks.**
+
+**Lesson for the next session** (three sessions have now hit variants of this defect): a drift gate proves the
+*data* matches the ledger. It does not prove the *sentence* does. Reading the deployed page is the only check that
+catches a false statement which was regenerated faithfully.

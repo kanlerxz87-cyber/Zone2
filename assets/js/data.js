@@ -924,7 +924,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 28;
+const CANONICAL_FLAG_COUNT = 29;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1235,6 +1235,17 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-28",
     source: "https://link.amazon/B0CDY277D3",
     sourceIds: ["S36", "S19", "S32"],
+  },
+  {
+    item: "F-29 — Two published surfaces disagreed on how many flags are open (28 vs 25)",
+    detail: "Found by session ba8b2d38 while reading the DEPLOYED site after PR #51 merged. pages/flags.html headed its register with len(rows) — every flag in the register — so it announced \"28 open items\". summary.html counted status == \"open\" and published \"25 open\". Three flags (F-25, F-26, F-28) are closed, so 25 was right and 28 was wrong: one site told the reader two different numbers for the same register. Same defect class as F-17 and F-26, which fixed the same thing for the dashboard KPI and for the hard-coded caption — this was the third surface that still had it. Fixed by making tools/build_site.py use the same open-status test as tools/build_summary.py, so both now read 25 open of 28.",
+    severity: "low",
+    impact: "Published for one deploy cycle. Overstating the number of OPEN items misleads in the safer direction (it makes the site look worse, not better), but a site whose two pages disagree about the same number is not auditable, and the reader cannot tell which is right.",
+    actionRequired: "None. Fixed and gated by tools/audit_site.py::check_counts, which checks prose counts against the registers on every build.",
+    ledgerFlag: "F-29",
+    ledgerUrl: "pages/flags.html#F-29",
+    source: "https://affiliate-program.amazon.com/help/operating/policies",
+    sourceIds: ["S02"],
   },
 ];
 /* END GENERATED: flags */

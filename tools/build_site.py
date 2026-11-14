@@ -810,7 +810,14 @@ def page_flags() -> str:
             "irregularities found while reviewing the repository. They do not block the site; they block assertion. Each links to the "
             "official page that documents the problem.",
         )
-        + panel(f"{len(rows)} open items", table(["ID", "Severity", "Finding", "Impact", "Action required", "Owner", "Source"], rows))
+        # T27: this heading used len(rows), i.e. EVERY flag in the register, so the register page
+        # announced "28 open items" while tools/build_summary.py — which counts status == "open" —
+        # published "25 open". Two surfaces of one site told the reader different numbers, the exact
+        # defect class of F-17/F-26. Use the same open-status test as the summary so they agree.
+        + panel(
+            f"{sum(1 for f in FLAGS['flags'] if f.get('status', 'open') == 'open')} open items",
+            table(["ID", "Severity", "Finding", "Impact", "Action required", "Owner", "Source"], rows),
+        )
         + panel("Product fields left blank because of these flags", table(["Item", "Blank fields", "Blocking flags", "Source"], blank_rows))
         + notice(
             "What changes if the ASINs are corrected",
