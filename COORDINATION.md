@@ -577,7 +577,7 @@ Pages-deploy cycle. No other session's files were edited; cross-scope correction
 | `03ae78da-V1` | Independent re-verification of the 3 supplied affiliate links + official program facts | done | `COORDINATION.md` (this record); checked live on `affiliate-program.amazon.com`, `amazon.com/dp/`, `link.amazon/` |
 | `03ae78da-V2` | Executive summary line-by-line review against official sources | done | `EXECUTIVE_SUMMARY.md`, `index.html`, `assets/js/data.js` |
 | `03ae78da-V3` | Site integrity: landing page + category subpages, tables, source links, flagged page, internal links | done | root `*.html`, `pages/`, `assets/`, `ledger/` |
-| `03ae78da-V4` | PR → merge → confirm GitHub Pages deploy | merge scheduled | `arena/03ae78da-zone2` → `main` |
+| `03ae78da-V4` | PR → merge → confirm GitHub Pages deploy | done | `arena/03ae78da-zone2` → `main` |
 
 ### Independent verification performed (this session, 2026-11-14)
 
@@ -640,7 +640,7 @@ Merge PR #20 (`arena/03ae78da-zone2` → `main`) with `gh pr merge 20 --merge`, 
 
 | Item | Value |
 |---|---|
-| PR | #20 — https://github.com/kanlerxz87-cyber/Zone2/pull/20 — `arena/03ae78da-zone2` → `main` (opened) |
-| Merge result | scheduled (`gh pr merge 20 --merge`) |
-| Pages URL | https://kanlerxz87-cyber.github.io/Zone2/ (live; Pages API status `built`, source `main` root per `5c06fb5e` AUD-01) |
+| PR | #20 — https://github.com/kanlerxz87-cyber/Zone2/pull/20 — `arena/03ae78da-zone2` → `main` |
+| Merge result | merged 2026-11-14T09:55:29Z, merge commit `60f0b0e`; CI "Build and verify" success on PR (run 43582776866); Pages deploy success (build run 43582820802, Pages deployment run 43582820680) |
+| Pages URL | https://kanlerxz87-cyber.github.io/Zone2/ — live; Pages API `status: built`, source `main` path `/`, HTTPS enforced |
 
