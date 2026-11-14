@@ -1,5 +1,5 @@
 {
-  "note": "Compliance control ledger. Every rule is quoted or paraphrased from a source in ledger/sources.json and mapped to a concrete control implemented in this repository, so the automation cannot drift out of policy. Status VERIFIED means the wording was read from the official page; every rule was re-read and every cited control re-checked against the code on 2026-11-14 (session bbe4ca47). Controls that did not exist were corrected - see R-01 and R-11.",
+  "note": "Compliance control ledger. Every rule is quoted or paraphrased from a source in ledger/sources.json and mapped to a concrete control implemented in this repository, so the automation cannot drift out of policy. Status VERIFIED means the wording was read from the official page; every rule was re-read and every cited control re-checked against the code on 2026-11-14 (session bbe4ca47). Controls that did not exist were corrected - see R-01 and R-11. SCOPE NOTE ADDED 2026-11-14 (session 0a697d4a, T27, flag F-29): this ledger is a curated set of the rules that constrain THIS platform's modules - it is NOT a complete restatement of the Program Policies, and it must not be read as one. Ten Participation Requirements that directly bound this platform's own modules were missing and have been added as R-22…R-31; further administrative requirements (§6(a)-(f), (h)-(m), (q), (r), (t), (x) and the Products Statement) are still not individually transcribed. Read the source itself: https://affiliate-program.amazon.com/help/operating/policies",
   "as_of": "2026-11-14",
   "rules": [
     {
@@ -197,6 +197,97 @@
       "citation": "Participation Requirements §2(b) (no inaccurate, overbroad, deceptive or misleading claims)",
       "implemented_control": "tools/validate_data.py::check_flag_count compares CANONICAL_FLAG_COUNT in assets/js/data.js against ledger/flags.json and fails the build on any disagreement; the count is rendered from the constant, never typed into markup.",
       "status": "VERIFIED"
+    },
+    {
+      "id": "R-22",
+      "domain": "Site functionality",
+      "requirement": "Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(y) — read 2026-11-14",
+      "implemented_control": "NO CONTROL IMPLEMENTED - and none is needed yet, because module M-03 (Pricing analysis) is BLOCKED: no API credentials and no cached offer records exist, so nothing on this site tracks a price. This row exists as a DESIGN CONSTRAINT on M-03, whose stated purpose is to 'track price point, discount depth and offer shape per ASIN'. Building that as a tracked time series or an alert would breach §6(y); the permitted reading is a point-in-time offer record fetched from the Creators API and displayed with its as_of timestamp, which is exactly what tools/amazon_creators_api.py writes. The constraint is now listed on pages/modules/m-03-pricing-analysis.html alongside R-04 and R-05.",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-23",
+      "domain": "Links",
+      "requirement": "You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(w) — read 2026-11-14",
+      "implemented_control": "tools/link_builder.py::build_product_link rejects any marketplace not in MARKETPLACE_HOSTS and emits only the direct form https://<marketplace>/dp/<ASIN>?tag=... , so no published affiliate link passes through a shortener. tools/link_builder.py::audit_html walks every <a href> in built output and flags an Amazon-host link that lacks rel=\"sponsored\". RELEVANT TO THE SUPPLIED LINKS: the three brief links are themselves short links (link.amazon/<code>); this repository publishes them only as evidence rows on the Products and Verification pages, never as the affiliate link in content, and each is labelled with its resolved destination (F-04, F-24).",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-24",
+      "domain": "Links",
+      "requirement": "You will not cloak, hide, spoof, or otherwise obscure the URL of your Site containing Special Links (including by use of Redirecting Links) or the user agent of the application in which Program Content is displayed or used such that we cannot reasonably determine the site or application from which a customer clicks through such Special Link to an Amazon Site.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(v) — read 2026-11-14",
+      "implemented_control": "PARTIAL. The click tracker tools/redirect_server.py exists but is not wired into any published page; when used it resolves a static campaign key from ledger/campaigns.json and redirects, and it stores no visitor identifier (PER_VISITOR_TOKENS are rejected from sub-tags). There is no code that rewrites or hides the referring URL or the user agent. Separately, tools/amazon_creators_api.py sends an identifying 'Agent/[name]' user agent rather than masking it, which is the IP License §4 requirement (tracked as R-07 in this ledger's agent-terms row). The gap: nothing enforces this at deploy time.",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-25",
+      "domain": "Incentives",
+      "requirement": "You will not offer any person or entity any consideration, reward, or incentive (including any money, rebate, discount, points, donation to charity or other organization, or other benefit) for using Special Links. For example, you cannot implement any \"rewards\" or loyalty program that incentivizes persons or entities to visit an Amazon Site via your Special Links.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(g) — read 2026-11-14",
+      "implemented_control": "NO CONTROL IMPLEMENTED - there is no rewards, loyalty, cashback or referral-incentive code in this repository, so there is nothing to constrain. Recorded as a build-time constraint: the campaign schema in ledger/campaigns.json carries no incentive field, and adding one would be the point at which a lint rule would be required.",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-26",
+      "domain": "Traffic integrity",
+      "requirement": "You will not artificially generate clicks or impressions on your Site or create Sessions on an Amazon Site, whether by way of a robot or software program or otherwise.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(s) — read 2026-11-14",
+      "implemented_control": "PARTIAL, and the relevant control is the agent-transparency one rather than a traffic filter: tools/amazon_creators_api.py identifies itself as 'Agent/[name]' in the user agent and refuses to defeat CAPTCHAs or other human-check measures (IP License §4). No automation in this repository clicks its own Special Links or opens Amazon pages to create Sessions. There is no bot-traffic detector, and this repository does not run a live site, so no such detector is currently needed.",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-27",
+      "domain": "Self-dealing",
+      "requirement": "You will not directly or indirectly purchase any Product(s) or take a Bounty Event action through Special Links, whether for your use or for the use of any other person or entity, and you will not permit, request or encourage any other person or entity to do so. Further, you will not purchase any Product(s) through Special Links or take a Bounty Event action for resale or commercial use (of any kind) or offer any Products on your Site for resale or commercial use of any kind.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(u) — read 2026-11-14",
+      "implemented_control": "NO CONTROL IMPLEMENTED - this is an operating rule for the site owner, not something code can enforce, because no Associates account exists (F-07) and no Special Link has been published (every product link on this site is an untagged preview_link with a 'NO_TAG - NOT FOR PUBLICATION' warning). Recorded because the bounty rows on pages/commissions.html enumerate Bounty Events: the operator must not trigger them.",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-28",
+      "domain": "Placement",
+      "requirement": "You will not frame an Amazon Site, or any part of it, within your Site, including by display within an integrated web browser (e.g., WebView) within a Mobile Application. However, displaying a Special Link on your Site in accordance with Section 2 of these Participation Requirements, will not be a violation of this section.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(n) — read 2026-11-14",
+      "implemented_control": "SATISFIED BY ABSENCE AND BY STRUCTURE. Every page in this repository is static HTML with no <iframe>, no embedded WebView and no Amazon-hosted frame; product links open in a new tab (tools/link_builder.py::SponsoredLink.to_html emits target=\"_blank\" with referrerpolicy=\"no-referrer-when-downgrade\"). No lint rule is implemented specifically for this row.",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-29",
+      "domain": "Placement",
+      "requirement": "You will not post or serve any Special Links or other content promoting an Amazon Site within any pop-up or pop-under windows, transitional page ads, or layer ads, except for pop-up windows in conjunction with your Site promoting Products closely associated with the materials on your Site.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(o) — read 2026-11-14",
+      "implemented_control": "SATISFIED BY ABSENCE. No page in this repository contains a pop-up, pop-under, transitional page ad or layer ad; the generated pages are static document flow produced by tools/build_site.py. The site uses no interstitial at all. No lint rule is implemented specifically for this row.",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-30",
+      "domain": "Placement",
+      "requirement": "You will not include any Special Links in any content that you place on an Amazon Site (for example, in connection with any advertising service available through an Amazon Site or in a customer review, forum, Wish List, guide, or any other customer-generated context available on an Amazon Site).",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(p) — read 2026-11-14",
+      "implemented_control": "SATISFIED BY SCOPE. This repository publishes only to this repository's own GitHub Pages origin; nothing here posts content onto an Amazon Site. tools/link_builder.py::audit_html only inspects HTML this project builds, and tools/generate_articles.py writes drafts into content/ for publication on the operator's own site, never to an Amazon surface.",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "R-31",
+      "domain": "Content scope",
+      "requirement": "You will not display on your Site, or otherwise use, any Program Content to advertise or promote any products that are offered on any site that is not an Amazon Site (e.g., products offered by other retailers). You will not display on your Site or otherwise use any data, images, text, or other information or content you may obtain from us that relates to Excluded Products.",
+      "source_id": "S02",
+      "citation": "Associates Program Policies — Participation Requirements, Section 6(z) — read 2026-11-14",
+      "implemented_control": "PARTIAL. tools/link_builder.py::build_product_link accepts only hosts in MARKETPLACE_HOSTS, so no Special Link in generated content points at a non-Amazon retailer, and tools/validate_data.py fails the build if an Amazon-host href lacks rel=\"sponsored\". The gap: there is no enforcement that an article never mentions or links a competing retailer alongside Program Content, and no Excluded-Products filter.",
+      "status": "VERIFIED"
     }
-  ]
+  ],
+  "coverage_note": "Recorded 2026-11-14 by session 0a697d4a (T27). R-22…R-31 were added after a row-by-row re-read of Participation Requirements §6 found them absent. They were chosen because each one constrains a module this repository actually defines in ledger/modules.json - R-22 in particular reverses the expected shape of M-03 (Pricing analysis), which is described as tracking 'price point, discount depth and offer shape per ASIN' while §6(y) forbids price-tracking and price-alerting functionality. Rows still absent from this ledger (§6(a)-(f), (h)-(m), (q), (r), (x)) remain absent; they are not reproduced here because transcribing the governing document in full is not this project's purpose and Amazon's pages are the authoritative source."
 }
