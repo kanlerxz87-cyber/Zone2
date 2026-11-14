@@ -2166,7 +2166,7 @@ T26 is complete. The root and generated-site gates pass (results in the T27 clos
 
 **I-28 — content-publication scope contradiction, handed to T27.** The canonical finding F-06, generated executive summary, and root `content.html` say zero articles/comparisons/buying guides are published for the inputs. However, the public `/marketing/` namespace has a buying guide, comparison, and three product articles built from those same observed destination ASINs. Its spec/source gate passes, and the copy links to official manufacturer pages, but it does not clearly tell visitors that the destination-to-brief mapping remains unverified. This is a published-surface inconsistency, not evidence that the destinations match the brief. T27 will distinguish the blocked *brief-mapped* content pipeline from existing destination-only marketing and label the uncertainty on that marketing surface. Do not infer or claim the requested identity mapping.
 
-Known separate issue I-27 was reproduced: `research-hub/scripts/verify.py` exits 1 with seven namespace-root/path errors (the exact expected false failures already documented at line 85). It remains outside T27's claimed scope; that stale verifier is not used by CI. The data validator also reports its existing single title-mark warning for `research-hub/compliance.html`.
+At the initial T26b baseline, I-27 was reproduced: `research-hub/scripts/verify.py` exited 1 with seven namespace-root/path errors. During T27's mandatory rebase, origin/main advanced via PR #42 / session `a6f70a13`, which repaired the moved-namespace verifier and related generated views. Re-running the verifier on the rebased tree now passes: 3 products, 38 sourced attribute rows, 16 requirements dispositioned, 13 pages, 0 errors. The data validator still reports its existing single title-mark warning for `research-hub/compliance.html`.
 
 ### T27 claim
 
@@ -2188,3 +2188,7 @@ Final integration follow-up after T26's fresh audit: change only the files liste
 **Known non-blocking review items retained:** I-27 (`research-hub/scripts/verify.py`) still fails with seven false namespace/path errors when run manually and remains out of CI; not modified because it is a separate namespace. `tools/validate_data.py` still emits one title-mark warning for `research-hub/compliance.html`; no finding was suppressed.
 
 T27 work is ready for its integration PR; final status remains in progress until the PR merge and Pages deploy are confirmed.
+
+### Concurrent main advancement and additive rebase (2026-11-14 UTC)
+
+Before the first T27 push, `origin/main` advanced from `6a90dfc` to `660dc6b` while session `a6f70a13` merged PRs #42–#44, including its T26 audit close-out and the fix for I-27. The required `git pull --rebase origin main` conflicted twice in this append-only file. Both conflicts were resolved additively: preserved the incoming T23/T26 status rows and the full `a6f70a13` session/merge/verification records; retained this session's T26b and T27 rows/records; removed only duplicate stale T23-in-progress/T26 labels after retaining the up-to-date done row and disambiguated this session's audit as T26b. No other session's content was discarded. The newly repaired hub verifier was re-run and passes (details above). Re-running the entire gate suite on the rebased combined tree is required before opening the integration PR.
