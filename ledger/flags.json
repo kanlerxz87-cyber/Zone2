@@ -356,6 +356,34 @@
         "S02"
       ],
       "published_on": "pages/flags.html"
+    },
+    {
+      "id": "F-27",
+      "severity": "medium",
+      "owner": "done",
+      "title": "Typed count labels outside the generated dataset had drifted from the registers (README said 14 items / 32 checks / 22 sources; the registers hold 26 / 50 / 35)",
+      "detail": "Found in the T26 line-by-line pass (session e9c8362c, 2026-11-14). README.md's subpage links typed three counts - 'flagged for review (14 items)', 'verification log (32 checks)', 'source register (22 sources)' - while ledger/flags.json held 26 flags, ledger/verification.json 50 rows and ledger/sources.json 35 sources; the README also said '11 executable guard checks' while tests/test_pipeline.py ran 13 (14 after this fix). index.html and flagged.html typed the flag count in static HTML too. Same defect class as F-17 and F-26: a typed number with no gate behind it. Evidence is the repository state itself (README.md at commit 6a90dfc, lines 45-50); no external source can state internal counts, so this row carries none.",
+      "impact": "A reader comparing README.md against pages/flags.html saw 14 items against 26 - the register understated by 12 in the one document a reviewer reads first.",
+      "action_required": "None open. The README, index.html and flagged.html labels now state the ledger values, and tools/validate_data.py::check_typed_counts fails the build whenever any of them disagrees with the ledgers (negative-tested in tests/test_pipeline.py::test_typed_count_labels_cannot_drift_from_the_ledger).",
+      "status": "closed",
+      "source_ids": [],
+      "published_on": "pages/flags.html"
+    },
+    {
+      "id": "F-28",
+      "severity": "low",
+      "owner": "user",
+      "title": "research-hub/summary.html rollup tables carry values with no per-row source links (the sources exist one level down)",
+      "detail": "Found in the T26 per-row sourcing audit (session e9c8362c, 2026-11-14): across 94 published pages and 1,124 data rows, every table row either ends in an official-source link or is an explicit blank-or-flagged cell - except the rollup tables in research-hub/summary.html. Its three product-mapping rows state ASIN, title and brand (B0CDY277D3, B09B7SB46R, B08DKYBTPH) with no link inside the row, and its policy-verdict rows (price, star rating, review count, stock) state conclusions with no row-level citation. The values themselves are sourced - the hub's per-product pages and research-hub/data/products.json carry per-row Amazon and manufacturer links (S19-S21 and the manufacturer pages) - so this is a presentation gap, not an unsourced claim. research-hub/** is a preserved companion namespace owned by session 6602723a, so T26 logged change request CR-7 in COORDINATION.md instead of editing it.",
+      "impact": "The brief's verification rule is per row: every table row must have a source link to an official site. A reader of the rollup table cannot trace a value without knowing to continue to the per-product pages.",
+      "action_required": "Needs review. Owner of research-hub/: add a per-row source column (or per-row footnote link) to the summary rollup tables via research-hub/scripts/build.py and its data files, or label the tables as block-sourced to the per-product pages. T26 did not edit research-hub/** because it belongs to another session's namespace.",
+      "status": "open",
+      "source_ids": [
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "published_on": "pages/flags.html + COORDINATION.md (CR-7)"
     }
   ]
 }

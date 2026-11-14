@@ -120,7 +120,7 @@
     </div>
 
     <div class="card">
-      <h3>Flagged for Review — 26 items</h3>
+      <h3>Flagged for Review — 28 items</h3>
       <p style="font-size:13.5px">
         Nothing on this site is a product claim. These are the items that could not be confirmed from an official source, plus
         the irregularities found while checking. None of them block the publish; each carries its source link so it can be
@@ -137,12 +137,14 @@
             <tr><td><code>F-08</code></td><td>No click, conversion or earnings report exists, so no performance figure can be published</td><td>Open — owner must connect a dated Associates report</td></tr>
             <tr><td><code>F-19</code></td><td>The Emeril manufacturer page contradicts itself on cooking presets: 24 (description), 25 (spec tile), “10-in-1” (feature block)</td><td>Open — published as a conflict, no value chosen</td></tr>
             <tr><td><code>F-26</code> <em>(new)</em></td><td>The dashboard flag count was derived from the reader-facing subset, not the register: it showed 14 while <code>pages/flags.html</code> published 21</td><td>Closed — count now pinned to the ledger by a gate (negative-tested)</td></tr>
+            <tr><td><code>F-27</code> <em>(new)</em></td><td>README's typed counts had drifted from the registers (14 items / 32 checks / 22 sources against 26 / 50 / 35) — the F-26 defect class, in prose</td><td>Closed — labels corrected and pinned by <code>check_typed_counts</code> (negative-tested)</td></tr>
+            <tr><td><code>F-28</code> <em>(new)</em></td><td><code>research-hub/summary.html</code> rollup tables carry product and policy values with no per-row source link (the sources exist on the per-product pages)</td><td>Open — change request CR-7 logged; namespace owned by another session</td></tr>
             <tr><td><code>F-25</code></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
           </tbody>
         </table>
       </div>
       <p style="margin:12px 0 0;font-size:13px">
-        The full text of all 26 items, each with its official-source link, is on the
+        The full text of all 28 items, each with its official-source link, is on the
         <a href="flagged.html">Flagged for Review</a> page; the generated detail lives on
         <a href="pages/flags.html">pages/flags.html</a>.
       </p>

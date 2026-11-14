@@ -318,6 +318,49 @@ def check_flag_count(report: Report) -> None:
     report.stats["canonical_flags"] = canonical
 
 
+def check_typed_counts(report: Report) -> None:
+    """Typed count labels in prose/HTML outside the generated data must equal the ledgers (F-27).
+
+    check_flag_count pins assets/js/data.js. The root pages and README.md state the same numbers in
+    static prose, where nothing regenerates them: README.md had drifted to "14 items / 32 checks /
+    22 sources" against registers holding 26 / 50 / 35. This check pins those labels too, so the
+    published surfaces cannot disagree with each other again.
+    """
+    flags_n = len(_load("flags.json").get("flags", []))
+    checks_n = len(_load("verification.json").get("rows", []))
+    sources_n = len(_load("sources.json").get("sources", []))
+    tests_src = (REPO / "tests" / "test_pipeline.py").read_text(encoding="utf-8")
+    tests_n = len(re.findall(r"^def test_", tests_src, re.M))
+    expectations = [
+        ("index.html", [
+            f"Flagged for Review \u2014 {flags_n} items",
+            f"all {flags_n} items",
+        ]),
+        ("flagged.html", [
+            f"{flags_n} flags (F-01 \u2026 F-{flags_n:02d})",
+        ]),
+        ("README.md", [
+            f"verification log ({checks_n} checks)",
+            f"source register ({sources_n} sources)",
+            f"flagged for review ({flags_n} items)",
+            f"{tests_n} executable guard checks",
+        ]),
+    ]
+    for name, labels in expectations:
+        path = REPO / name
+        if not path.exists():
+            report.fail(f"{name}: missing - cannot verify its typed count labels")
+            continue
+        text = path.read_text(encoding="utf-8")
+        for label in labels:
+            if label not in text:
+                report.fail(
+                    f"{name}: typed count label {label!r} not found - the page disagrees with the "
+                    "ledgers (flags.json / verification.json / sources.json / tests). "
+                    "Update the label or the register; never leave them inconsistent (F-27)."
+                )
+
+
 def check_no_product_prices(report: Report) -> None:
     """No generated page may display a product price.
 
@@ -368,6 +411,7 @@ def main(strict: bool = True) -> Report:
         check_disclosure(report)
         check_landing_links_here(report)
         check_flag_count(report)
+        check_typed_counts(report)
         check_no_product_prices(report)
         check_links(report)
     except FileNotFoundError as exc:
