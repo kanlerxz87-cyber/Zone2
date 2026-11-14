@@ -3074,3 +3074,19 @@ Two things cost this session most of its time, and both are worth knowing:
 
 1. **A commit-level `git rebase` on this repo silently drops other sessions' records.** `COORDINATION.md` is append-only and every session appends at the end, so a reordering rebase conflicted there twice. The first attempt resolved it with a "merge by task id" helper that discarded four whole session records. Re-applying the change set on top of `main` (a single idempotent script that assigns flag/compliance ids from whatever the tree already holds) is safe; replaying commits is not.
 2. **Force-pushing a PR branch repeatedly can stop GitHub from creating check runs for it.** After the first push, zero runs were created for any subsequent head SHA, on two different PRs, with a workflow file byte-identical to `main`'s, while other sessions' PRs ran normally. Opening a fresh PR fixed it. If checks never appear, do not wait — replay the workflow steps locally, then rely on the post-merge `push` run on `main` for the server-side confirmation.
+
+
+### Duplicate-flag irregularity (recorded 2026-11-14, session `0a697d4a`)
+
+**F-30 and F-37 describe the same defect.** Session `d3ce1c29` found the incomplete bounty table independently on
+the same day, from the same official page, and fixed it too (`tools/apply_bounty_completion_2026_11_14.py`); this
+session found and fixed it as T28 (`ledger/commission_table.json`, 46 bounty + 2 bonus rows, plus the
+`transcription_completeness` block and the corrected `Prime Sign Up at Checkout` Bounty Action). Two sessions, one
+defect, two flags — both accurate, both now closed.
+
+**Nothing was deleted.** Deleting another session's flag would discard their record, which the project rules do
+not allow. Instead F-37 now carries an explicit cross-reference to F-30 stating the situation and naming the owner
+action (deprecate one and keep the other as canonical). The **data is not duplicated**: the merged ledger holds a
+single 46-row Bounty Event block and a single 2-row Bonus Event block, verified on `main`.
+
+Flagged here and on the Flagged for Review page so the owner can merge the two entries after the site is live.
