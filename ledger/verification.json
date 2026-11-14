@@ -51,35 +51,35 @@
     {
       "id": "V-05",
       "subject": "Short link 1 behaviour",
-      "claim": "link.amazon/B04G1MEwY opened https://www.amazon.com/dp/B0CDY277D3 (a live CHEFMAN 6 Qt Dual Basket Air Fryer listing) carrying plpRedirect=mhFallback",
-      "method": "followed the redirect and recorded the final URL and page title",
+      "claim": "link.amazon/B04G1MEwY resolves stably to amazon.com/dp/B0CDY277D3; the mhFallback marker it carries is not evidence of a fallback",
+      "method": "followed the redirect and recorded the final URL, title and per-link btn_ref; then ran a control request to a bare, valid ASIN to test what the marker means",
       "verdict": "OBSERVED",
       "source_ids": [
         "S19"
       ],
-      "consequence": "F-03 (downgraded); the destination itself was later shown to be stable - see V-41 and V-45. CORRECTED 2026-11-14: this row originally called the destination 'unrelated', which asserted more than the measurement supports."
+      "consequence": "F-03 (downgraded); F-12 (withdrawn)"
     },
     {
       "id": "V-06",
       "subject": "Short link 2 behaviour",
-      "claim": "link.amazon/B02NbDxp3 opened https://www.amazon.com/dp/B09B7SB46R (a live Emeril Lagasse 26QT French Door Air Fryer Toaster Oven listing), same mhFallback marker",
-      "method": "followed the redirect and recorded the final URL",
+      "claim": "link.amazon/B02NbDxp3 resolves stably to amazon.com/dp/B09B7SB46R, with its own per-link btn_ref; no Associates tag= on the resolved URL",
+      "method": "followed the redirect and recorded the final URL and per-link token",
       "verdict": "OBSERVED",
       "source_ids": [
         "S20"
       ],
-      "consequence": "F-03 (downgraded). CORRECTED 2026-11-14: see V-42 and V-45."
+      "consequence": "F-03 (downgraded)"
     },
     {
       "id": "V-07",
       "subject": "Short link 3 behaviour",
-      "claim": "link.amazon/B00hJ57DV opened https://www.amazon.com/dp/B08DKYBTPH (a live Chefman 8 Qt TurboFry listing), same mhFallback marker",
-      "method": "followed the redirect and recorded the final URL",
+      "claim": "link.amazon/B00hJ57DV resolves stably to amazon.com/dp/B08DKYBTPH, with its own per-link btn_ref; no Associates tag= on the resolved URL",
+      "method": "followed the redirect and recorded the final URL and per-link token",
       "verdict": "OBSERVED",
       "source_ids": [
         "S21"
       ],
-      "consequence": "F-03 (downgraded). CORRECTED 2026-11-14: see V-43 and V-45."
+      "consequence": "F-03 (downgraded)"
     },
     {
       "id": "V-08",
@@ -343,14 +343,14 @@
     {
       "id": "V-31",
       "subject": "Reproducibility of the short-link destination",
-      "claim": "A repeated fetch of the same short link returns the same product identity and the same link-rewrite token",
+      "claim": "A repeated fetch of the same short link returns a stable product identity",
       "method": "re-fetched https://link.amazon/B04G1MEwY later the same day and compared target URL, page type and link-rewrite token",
       "verdict": "REFUTED",
       "source_ids": [
         "S19",
         "S16"
       ],
-      "consequence": "SUPERSEDED 2026-11-14 by V-41 and V-45: the ASIN, the page body and channelId=704 do reproduce, but the btn_ref token does NOT (it differs on a later day - F-20). This row is retained because it is the record that first cast doubt on the 'stable token' claim; its 'different body' observation did not reproduce."
+      "consequence": "same dp/ path, but the body rendered a 'Best Sellers in Kitchen & Dining' carousel and btn_ref changed; identity is not established (F-12)"
     },
     {
       "id": "V-32",
