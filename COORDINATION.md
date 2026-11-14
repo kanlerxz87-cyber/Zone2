@@ -30,6 +30,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
 | `arena/dd87f326-zone2` (dd87f326) | merged to `main` via PR #34 | T24 stale-PR #11 resolution + T25 independent verification-only audit | finished — merged (PR #34) |
+| `arena/e9c8362c-zone2` (`e9c8362c`) | `arena/e9c8362c-zone2` | **T26 — release verification & closing integration**: post-PR-#41 line-by-line verification, live-site confirmation, official-source re-reads, PR → merge → Pages deploy record | in progress |
 
 > **Integration note (multi-session race):** five sessions worked in parallel and each merged work to
 > `main` while others were still active, so every integration PR conflicted with the others. Per the
@@ -66,11 +67,12 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T20 | Re-verify supplied links + correct landing-page overclaim (root `index.html` said the 3 products were "identified and verified"; re-check shows `mhFallback` redirects, 9-char codes) | done | `arena/dc52402c-zone2` | `index.html` (text + KPI only), `COORDINATION.md` |
 | T21b | Final consistency integration: reconcile root `assets/js/data.js` + root page captions + `docs/executive-summary.md` §3 with the rigorous ledger (0 of 3 identified; fallback destinations = evidence only; content Blocked F-06; tracking Planned F-07). Root `index.html`/`README.md`/`EXECUTIVE_SUMMARY.md` were already honest; `data.js` still populated brand/title/category from fallbacks and marked content "Ready"/tracking "Configured". | done (merged into T23) | `arena/83194da0-zone2` | `assets/js/data.js`, `assets/js/app.js`, `products.html`, `content.html`, `tracking.html`, `analysis.html`, `docs/executive-summary.md`, `COORDINATION.md` |
 | T22 | Independent, control-based re-test of the three supplied `link.amazon` short links and their `/dp/` destinations. Resolves the open conflict between the "fallback / unrelated page" reading (F-03, F-12, AF-06) and the "stable per-link tracked destination" reading (T20 / `c6e94e8d`, C-1…C-3). Verdict per link; no product attributes copied. | done | `82a2d436` | `docs/verification-82a2d436.md` (new), this record only |
-| T23 | **Final integration (this session)** — merge `main`, PR #22, #25, #26, #27 into one tree; settle the F-03/F-12 wording against the **bogus-code control** (an unknown `link.amazon` code returns a 404, so the supplied codes are honoured lookups, not ignored); publish the cross-time `btn_ref` rotation finding; align every published surface (`ledger/`, `assets/`, root `*.html`, `revalidation/`, `affiliate-lab/`, `docs/`, `README.md`) to that single reading; regenerate `pages/`; run every gate; PR → merge → deploy | in progress | `arena/4338f55e-zone2` | `COORDINATION.md`, `ledger/**`, `assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`, `affiliate-lab/**`, `.github/workflows/pages.yml` |
+| T23 | **Final integration (this session)** — merge `main`, PR #22, #25, #26, #27 into one tree; settle the F-03/F-12 wording against the **bogus-code control** (an unknown `link.amazon` code returns a 404, so the supplied codes are honoured lookups, not ignored); publish the cross-time `btn_ref` rotation finding; align every published surface (`ledger/`, `assets/`, root `*.html`, `revalidation/`, `affiliate-lab/`, `docs/`, `README.md`) to that single reading; regenerate `pages/`; run every gate; PR → merge → deploy | done (PR #38 merged; completed inside PR #41) | `arena/4338f55e-zone2` | `COORDINATION.md`, `ledger/**`, `assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`, `affiliate-lab/**`, `.github/workflows/pages.yml` |
 
 | T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
 | T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
-| T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | in progress | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
+| T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | done (PR #41 merged 2026-11-14T11:26Z — status closed by T26 after `gh pr view 41` verification) | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
+| T26 | **Release verification & closing integration for the 2026-11-14 brief (this session)** — post-PR-#41 line-by-line verification of the merged tree: run every repo gate; live-verify the published GitHub Pages site (cache-busters); re-read the governing official sources (OA, Program Policies, ASIN definition, Table 1 rate card) and confirm every published claim still matches; per-row source-link audit; resolve or flag any open irregularity; publish a verification report with source links for manual review; PR → merge → confirm Pages deploy → record PR link + merge result here | in progress | `arena/e9c8362c-zone2` (`e9c8362c`) | `COORDINATION.md`, `docs/**` (new report); contingency scope if a verified defect is found: `ledger/**`, `tools/**`, `pages/**` (regenerated), root `*.html`, `assets/**` — integration duties on `arena/e9c8362c-zone2` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -1824,3 +1826,42 @@ then added a *different* F-22 (flag-count KPI) on `main` after `4338f55e`'s last
 `4338f55e`'s ids and renumbered the incoming KPI flag to **F-26**, recorded in `ledger/flags.json`'s note.
 `assets/js/data.js`'s `CANONICAL_FLAG_COUNT` and the `Flagged` page counts were set to 26 and are now
 derived by `tools/build_root_data.py`, so they cannot drift again.
+
+---
+
+## Session record — `e9c8362c` (`arena/e9c8362c-zone2`, current branch, 2026-11-14 UTC)
+
+**Branch note:** Arena pins this session to `arena/e9c8362c-zone2` (not `session-<id>/<task>` naming);
+documented as the deviation, consistent with prior sessions (181863ad, bbe4ca47, cdfaeefe and others).
+
+### Claim (recorded 2026-11-14, pushed before any task work)
+
+Board state at claim: `main` = `6a90dfc` (merge of PR #41, T23 final integration by `cdfaeefe`).
+No open PRs. All earlier claims (T1–T25) marked done on the board except the two T23 rows, whose
+completion this session verified via `gh pr view` (PR #38 merged `dd93fb6`; PR #41 merged `6a90dfc`)
+and whose status rows were closed accordingly (reconciliation, nothing discarded).
+
+This session claims **T26 — release verification & closing integration** (row added to the task board
+above). Scope: `COORDINATION.md`, `docs/**` (new verification report), and integration duties on
+`arena/e9c8362c-zone2`. Contingency scope (only if a verified defect is found by the gates or the
+line-by-line pass): `ledger/**`, `tools/**`, `pages/**` (regenerated), root `*.html`, `assets/**` —
+all previously owned by sessions whose branches are merged and closed, so no active claim is
+overridden. `research-hub/**`, `northstar/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**`,
+`marketing/**` remain byte-identical unless a gate failure forces a mechanical rebuild.
+
+### Planned verification (the brief's "VERIFICATION" section)
+
+1. Run every repository gate on the merged tree (the full suite used by T23).
+2. Live-fetch the published GitHub Pages site with cache-busters (per the CDN note above) and confirm
+   the deployed pages match the committed tree.
+3. Re-read the governing official sources live (Operating Agreement, Program Policies, ASIN definition
+   page, Table 1 rate card) and confirm the published claims still match the pages as served today.
+4. Per-row source-link audit: every table row on the primary site and the generated `pages/` set must
+   end in an official-source link or an explicit blank + flag.
+5. Anything that cannot be confirmed from an official source is left blank and published on the
+   Flagged for Review page — never inferred.
+6. PR → merge → confirm Pages deploy → record the PR link and merge result in this file.
+
+**Deviation note (2026-11-14):** the brief also asks each session to work on a branch named
+`session-<id>/<task>`. Arena pins this session's branch to `arena/e9c8362c-zone2`; per the platform
+rule all work is done on that branch only. Recorded here per the precedent set by earlier sessions.
