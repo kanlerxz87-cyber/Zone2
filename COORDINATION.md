@@ -1878,7 +1878,7 @@ Scope of this claim: the files listed in the T26 row only. The primary-site ledg
 - **AUD-05 — still open.** `affiliate-lab/scripts/verify_site.py` checks that a row contains an external URL, not that the URL supports the value. A 404 `/dp/` link is accepted as a source. Not changed in this session: fixing it means changing what the affiliate-lab rows mean, which needs its owner's decision. Recorded here and in the PR body.
 - **Overclaim left in place on purpose:** the research-hub Method page says the site "links to the canonical product pages". Those are the destinations, not validated product pages for the supplied codes; the same page carries the F-03 finding.
 - **Observed, unchanged:** the subpage gate printed a title-trademark note for `research-hub/compliance.html` ("<title> starts with an Amazon mark"). The gate passed; no change was made to that title in this session.
-- **Process note.** The build and verifier were both out of date and CI ran neither. The committed HTML looked correct for this reason: the generator had not been run, so the stale text stayed. After this change the generator reproduces the committed output exactly (the only diffs were the intended ones).
+- **Process note.** The generator could not run on this tree (wrong docs path), and CI never ran it or the hub verifier, so drift between `build.py` and the committed HTML went undetected. After this change the generator runs, and the CI step fails on any drift. Before the change, the only generator-vs-committed differences were the ones this session intended to fix (`start.html`/`404.html` hand-edits newer than the generator, and a `summary.html` copy older than `docs/executive-summary.md`).
 
 ### PR and merge
 
