@@ -955,3 +955,22 @@ Method: live page fetches with the page-fetch tool on 2026-11-14 UTC (the build 
 | Price-like strings in `docs/verification-82a2d436.md` | none |
 
 Status: **T22 done.** Next: PR from `arena/82a2d436-zone2` → `main`, merge, Pages deploy check, record PR link here.
+
+### T22 merge and deploy record — `82a2d436`
+
+| Item | Value |
+|---|---|
+| PR | **#27** — https://github.com/kanlerxz87-cyber/Zone2/pull/27 — `arena/82a2d436-zone2` → `main` |
+| PR validation | `Build and verify` run `43583813294` on head `282fd26` — **success**; deploy job skipped on the PR as designed |
+| Merge result | **MERGED** 2026-11-14T10:08:36Z, merge commit `3fb08a694d1e25e6ea22e824f8b63dee958d4ce8` (`gh pr merge 27 --merge`) |
+| Post-merge on `main` | `Build, verify and deploy` run `43583855466` for `3fb08a6` — **success**; `pages build and deployment` run `43583855126` — **success** |
+| Pages API | `status: built`, `html_url: https://kanlerxz87-cyber.github.io/Zone2/` |
+| Live check (cache-busted) | https://kanlerxz87-cyber.github.io/Zone2/docs/verification-82a2d436.md?v=3fb08a6 — renders the T22 verification record. https://kanlerxz87-cyber.github.io/Zone2/?v=3fb08a6 — renders the corrected landing text ("stably to one listing each"; correction note). |
+
+**Merge-conflict record (required):** this session's branch conflicted with `main` in `COORDINATION.md` three times, because other sessions appended to it while this one worked (PRs #26, #22). Each time it was resolved **append-only**: `main`'s full board was kept verbatim and this session's claim and result were added after it. Nothing from another session was removed. The task ID was changed from T21 to **T22** because `dc15ce5a` had taken T21 on `main` first (PR #26); the claim section states this. Commit messages on the branch still say "T21" for that reason.
+
+**Corrections found after merge:** the H1 of `docs/verification-82a2d436.md` still read "T21"; corrected to "T22" in this follow-up. No other content changed.
+
+**Open items carried forward (not blocking, per the brief):**
+- CR-5 and CR-6 above remain with their owners: `ledger/flags.json` F-03/F-05/F-12, `affiliate-lab/` AF-06, `pages/flags.html`, `docs/revalidation-2026-11-14.md`. The live landing text already states the corrected reading.
+- Owner action: confirm the intended products and Associates tag (unchanged).
