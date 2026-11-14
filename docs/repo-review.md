@@ -63,9 +63,9 @@ Example check URLs (each pattern was fetched for every marketplace):
 
 | Supplied URL | Observed behaviour on 2026-11-13 |
 |--------------|-----------------------------------|
-| `https://link.amazon/B04G1MEwY` | Did **not** open a product page for the code; redirected into `https://www.amazon.com/dp/B0CDY277D3?…&plpRedirect=mhFallback` (an unrelated product / homepage fallback). |
-| `https://link.amazon/B02NbDxp3` | Redirected into `https://www.amazon.com/dp/B09B7SB46R?…&plpRedirect=mhFallback` (unrelated product / homepage fallback). |
-| `https://link.amazon/B00hJ57DV` | Redirected into `https://www.amazon.com/dp/B08DKYBTPH?…&plpRedirect=mhFallback` (unrelated product / homepage fallback). |
+| `https://link.amazon/B04G1MEwY` | Does **not** open a product page for the code. Resolves stably to `https://www.amazon.com/dp/B0CDY277D3?…&plpRedirect=mhFallback` with its own `btn_ref`. *(Corrected 2026-11-14 — "unrelated product / fallback" was an inference from the marker; see §R6.)* |
+| `https://link.amazon/B02NbDxp3` | Resolves stably to `https://www.amazon.com/dp/B09B7SB46R?…&plpRedirect=mhFallback`, own `btn_ref`, no `tag=`. *(Corrected 2026-11-14; §R6.)* |
+| `https://link.amazon/B00hJ57DV` | Resolves stably to `https://www.amazon.com/dp/B08DKYBTPH?…&plpRedirect=mhFallback`, own `btn_ref`, no `tag=`. *(Corrected 2026-11-14; §R6.)* |
 | `https://link.amazon/` (root) | HTTP 403 Forbidden. |
 | `https://link.amazon/robots.txt` | HTTP 403 Forbidden. |
 

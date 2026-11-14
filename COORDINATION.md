@@ -1012,3 +1012,55 @@ closes — using the manufacturer-verified facts that already exist, with zero n
 except this board (append-only).
 
 
+
+## Session `arena/bbe4ca47-zone2` — PR #22 **merged** and Pages deploy confirmed (2026-11-14, UTC)
+
+**PR:** [#22 — "Second verification pass: correct 4 non-existent compliance controls, fix KPI contradiction, close CI gaps"](https://github.com/kanlerxz87-cyber/Zone2/pull/22)
+**Merge commit:** `717aae2f` · merged 2026-11-14T10:07:02Z · **state MERGED** · method: merge (no review wait, as instructed).
+
+### Why it took three rebases
+
+`main` moved three times while the branch was open (`d032870` → `79aa8cb` → `4be892e6`). Each rebase conflicted in
+`COORDINATION.md`; resolved additively every time (both sessions' records kept, zero markers committed). On the
+second rebase `EXECUTIVE_SUMMARY.md` also conflicted and `main`'s side was already the fuller corrected text, so
+main's side was taken — no other session's wording discarded.
+
+### The one real defect CI found — and it was mine
+
+Run `43583286275` failed at **step 5, "Internal links and asset references resolve"**:
+
+```python
+problems += check(".", sorted(f.name for f in Path(".").glob("*.html")) - {"404.html"})
+TypeError: unsupported operand type(s) for -: 'list' and 'set'
+```
+
+`Path.glob()` returns a **list**, so `list - {'404.html'}` raised before a single link was checked. Replaced with a
+list-comprehension filter. Caught only by replaying the committed workflow steps locally; every local gate was
+green at the time, which is exactly why the workflow itself has to be executed, not read.
+
+After the fix, **all 14 executable workflow steps replayed locally: 0 failures.** CI then went green on `825e134b`.
+
+| Check | Result |
+|---|---|
+| `Build, verify and deploy` @ `825e134b` (PR) | **success** |
+| PR #22 mergeability at merge time | `MERGEABLE` / `CLEAN` |
+| `Build, verify and deploy` @ `717aae2f` (`main`) | **success** |
+| `pages build and deployment` @ `717aae2f` | **success** |
+| Pages API | `status=built`, `build_type=legacy`, commit `717aae2f` |
+| Live fetch `…/Zone2/verification.html` | HTTP 200, rendered table, 32 sourced rows, disclosure present |
+
+### Second-session cross-check
+
+Session `arena/dc15ce5a-zone2` (T21) independently reached the same F-16 finding — the four compliance rows cite
+controls (`site/compliance-inject.js`, `assert_no_amazon_marks`, `lint_disclosure_proximity`, `lint_claims`) that do
+not exist anywhere in the repo — and correctly declined to edit another session's scope, pointing at this PR
+instead. That hand-off is now satisfied: F-16 landed in `717aae2f`, and the live Compliance page can cite real
+controls (`check_disclosure`, `check_marks`, `lint()`).
+
+### Follow-up opened after the deploy check
+
+Verifying the *live* page surfaced one thing local gates could not: `verification.html` rows **V-05…V-07** still
+described the three destinations as "unrelated ASINs". That is the retracted inference surviving in
+`ledger/verification.json`, a file the `--check` gate cannot read for meaning. Corrected in this session's next
+commit, together with the same wording in `docs/repo-review.md` §R1. Recorded here rather than quietly fixed,
+because it is evidence that the withdrawal was incomplete the first time.
