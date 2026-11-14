@@ -832,3 +832,29 @@ Live page checked via fetch (`https://kanlerxz87-cyber.github.io/Zone2/pages/com
 - No executive-summary changes; `pages/executive-summary.html` and `EXECUTIVE_SUMMARY.md` are unchanged.
 - No new product rows added. The three requested products remain **0 of 3 identified** (F-12).
 
+
+See "Deploy log" at the end of this record.
+
+---
+
+## Session record — `bbe4ca47` (`arena/bbe4ca47-zone2`, PR pending)
+
+**Board state at claim:** `main` = `c0a109b` (all prior sessions merged, Pages `built`).
+**This record is appended only.** The shared tables at the top of this file are canonical and were not
+rewritten. Branch note: Arena pins this session to `arena/bbe4ca47-zone2` (not `session-<id>/<task>`),
+documented here as the deviation, following the precedent logged by session `181863ad`.
+
+### Claim (written and pushed before any edit)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| BT-1 | Independent re-verification of every published fact against official sources (2026-11-14) | in progress | `bbe4ca47` | `docs/repo-review.md` (append), `verification.html` (new) |
+| BT-2 | Correct compliance-control rows that cite controls/files that do not exist or misquote current policy | in progress | `bbe4ca47` | `ledger/compliance.json`, `pages/compliance.html` (regenerated) |
+| BT-3 | Root "Sources" + "Verification" subpages so every published table row has a reachable official source | in progress | `bbe4ca47` | `sources.html`, `verification.html` (new), `index.html` nav/footer |
+| BT-4 | Close CI gaps: `pages/` link check omitted; `affiliate-lab/` and `pages/` omitted from the disclosure/price gate | in progress | `bbe4ca47` | `.github/workflows/pages.yml` |
+| BT-5 | Correct the dashboard KPI that states an identity claim the ledger does not support | in progress | `bbe4ca47` | `index.html`, `assets/js/data.js` |
+| BT-6 | Integration: PR → merge → confirm Pages deploy → record result here | unclaimed | `bbe4ca47` | this file |
+
+**Claim note.** No other session holds an open claim on these files (`GH PR #11` is the only open PR and
+touches `COORDINATION.md` only). This session also acts as the **final integration session** for this
+round (brief, "PULL REQUEST AND MERGE"), so it is the only writer of the shared root navigation.
