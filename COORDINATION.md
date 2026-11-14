@@ -1396,3 +1396,17 @@ F-20/F-21"). Cross-references so records don't double-claim:
   `lint()`), and the `expires_utc` expired-promo enforcement has no implementation. F-16's action text
   still overstates its remediation. See the dd87f326 record above for the exact evidence and the two
   fix options.
+
+### T21 post-merge corrections (session `a133aa61`, still open on this branch)
+
+Two further defects were found **by reading the deployed pages**, not by any local gate — the same blind spot
+PR #28 hit: the gates compare generated HTML to the ledger, so a wrong statement *in* the ledger regenerates
+cleanly and passes every check.
+
+| # | Found on the live page | Correction |
+|---|---|---|
+| 1 | `verification.html` V-18 still said Content may not be used in "print, mail, SMS, MMS, **email**" — restating Program Policies §4's permission as a flat prohibition, the exact defect F-21 corrects in R-09 | V-18 rewritten to the rule as published, citing both pages it was read from |
+| 2 | `pages/flags.html` F-03 still quoted the **old** `btn_ref` values as current, contradicting F-20 which says they changed | F-03 now quotes the values as superseded and points at F-20; the ASIN destination is named as the stable fact |
+
+Both are carried by PR #35's follow-up and its successor. **Process note for every later session:** after a
+deploy, fetch the live page and read it. Do not treat a green `--check` as evidence that the published text is true.
