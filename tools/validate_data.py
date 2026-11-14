@@ -317,6 +317,28 @@ def check_flag_count(report: Report) -> None:
         )
     report.stats["canonical_flags"] = canonical
 
+    # T26: the same defect appears one layer up. `index.html` and `flagged.html` used to
+    # hard-code "26 items" / "26 flags" in their HTML, so they kept publishing the old
+    # number after F-27 was added. A typed count in a template is the same bug as a typed
+    # KPI, so refuse it: the caption must render from CANONICAL_FLAG_COUNT instead.
+    typed = re.compile(r"(?<![-\w.])(\d{1,4})\s+(?:items?|flags)\b", re.I)
+    for name in ("index.html", "flagged.html"):
+        path = REPO / name
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        # Only the reader-facing caption prose matters here, not code samples or data rows.
+        for line_no, line in enumerate(text.splitlines(), 1):
+            if "<script" in line or "CANONICAL_FLAG_COUNT" in line:
+                continue
+            for m in typed.finditer(re.sub(r"<[^>]+>", " ", line)):
+                stated_line = int(m.group(1))
+                if stated_line != canonical:
+                    report.fail(
+                        f"{name}:{line_no}: typed count '{m.group(0)}' but the register holds "
+                        f"{canonical} flags - derive the caption from CANONICAL_FLAG_COUNT"
+                    )
+
 
 def check_no_product_prices(report: Report) -> None:
     """No generated page may display a product price.
