@@ -77,6 +77,7 @@ jobs:
           problems += check("northstar", ["index.html"])
           problems += check("zone2", sorted(f.name for f in Path("zone2").glob("*.html")))
           problems += check("affiliate-lab", sorted(f.name for f in Path("affiliate-lab").glob("*.html")))
+          problems += check("revalidation", sorted(f.name for f in Path("revalidation").glob("*.html")))
           if problems:
               print("\n".join(problems))
               raise SystemExit(1)
@@ -94,6 +95,7 @@ jobs:
           for f in sorted(glob.glob('research-hub/data/*.json')) + \
                    sorted(glob.glob('zone2/data/*.json')) + \
                    sorted(glob.glob('affiliate-lab/data/*.json')) + \
+                   sorted(glob.glob('revalidation/data/*.json')) + \
                    ['research-hub/site-manifest.json']:
               json.load(open(f, encoding='utf-8'))
               print(f'ok   {f}')
@@ -108,7 +110,8 @@ jobs:
           pages = sorted(glob.glob('*.html')) + \
                   sorted(glob.glob('research-hub/*.html')) + \
                   sorted(glob.glob('northstar/*.html')) + \
-                  sorted(glob.glob('zone2/*.html'))
+                  sorted(glob.glob('zone2/*.html')) + \
+                  sorted(glob.glob('revalidation/*.html'))
           for f in pages:
               t = open(f, encoding='utf-8').read()
               if DISCLOSURE not in t:
@@ -170,6 +173,13 @@ jobs:
 
       - name: affiliate-lab per-row sourcing verifier
         run: python3 affiliate-lab/scripts/verify_site.py
+
+      # ---- arena/c6e94e8d-zone2: controlled revalidation site (T20) ----
+      - name: Rebuild revalidation pages and confirm committed output is current
+        run: python3 revalidation/scripts/build.py --check
+
+      - name: Revalidation gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
+        run: python3 revalidation/scripts/verify.py
 
       # ---- arena/f786c0d7-zone2: generated subpages under pages/ ----
       # Rebuild first, so "committed output matches a fresh build" is a real property of this repo

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview — Zone2 Revalidation</title>
+<link rel="stylesheet" href="assets.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Zone2 Revalidation<small>Controlled re-check of the three supplied Amazon links · 2026-11-14</small></a>
+    <nav aria-label="Main"><a href="index.html" class="active">Overview</a><a href="links.html">Links &amp; ASINs</a><a href="products.html">Products</a><a href="method.html">Method &amp; Limits</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Sources</a></nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="crumbs"><a href="../index.html">Zone2 dashboard</a> / <a href="index.html">Revalidation</a> / Overview</div>
+    <h1>Overview</h1>
+    <p class="lede">A controlled re-check of the three supplied Amazon links, and a correction to a published conclusion that did not survive its control test.</p>
+    <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.</div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="label">Links re-tested</div><div class="value">3</div><div class="sub">Each fetched live, twice</div></div>
+      <div class="kpi"><div class="label">Control test</div><div class="value flag">Fails</div><div class="sub">The fallback marker is not evidence</div></div>
+      <div class="kpi"><div class="label">Attribute rows</div><div class="value">38</div><div class="sub">27 verified · 8 flagged</div></div>
+      <div class="kpi"><div class="label">Open flags</div><div class="value warn">10</div><div class="sub">RV-01 … RV-10</div></div>
+    </div>
+
+    <div class="card">
+      <h3>What this session did</h3>
+      <p>
+        The repository already contained a published conclusion that the three supplied
+        <code>link.amazon</code> links land on <em>arbitrary fallback pages</em> which cannot identify a
+        product. That conclusion rested on two observations: the redirects carry
+        <code>plpRedirect=mhFallback</code>, and a re-fetch was reported to change the page body and the
+        <code>btn_ref</code> token. <strong>Neither observation had a control.</strong> This session ran the
+        control, and it does not support either.
+      </p>
+      <p>
+        The correction is narrow but material: the destination products are real, stable and individually
+        tracked — not random — while the short codes themselves remain non-ASINs. What was wrong was the
+        reasoning that joined the two facts.
+      </p>
+    </div>
+
+    <h2>The two tests that changed the conclusion</h2>
+    <div class="card">
+      <h3>C-1 · Is <code>plpRedirect=mhFallback</code> evidence of a fallback?</h3>
+      <p>
+        A bare, untagged, direct request to the product page of a <strong>valid</strong> 10-character ASIN was
+        made on <code>www.amazon.com</code>. Amazon answered with the full, correct product page and rewrote its
+        own internal links to carry <code>plpRedirect=mhFallback</code>.
+      </p>
+      <pre class="evidence">GET https://www.amazon.com/dp/B08DKYBTPH          <span>(bare request: no tag, no short link)</span>
+200 -&gt; <span>CHEFMAN 8 Qt TurboFry product page, buy box + About this Item rendered</span>
+final URL -&gt; https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&amp;channelId=500&amp;<span>plpRedirect=mhFallback</span>&amp;th=1</pre>
+      <p class="note">
+        Result: the marker appears on ordinary product pages. It does not separate a valid ASIN from an
+        unaddressable code, so it cannot support the published inference.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>C-2 · Does the destination really shuffle between requests?</h3>
+      <p>
+        The same short link was fetched twice. Both responses resolved to the same ASIN with the
+        <strong>identical</strong> per-link token.
+      </p>
+      <pre class="evidence">GET https://link.amazon/B04G1MEwY   (fetch 1)
+GET https://link.amazon/B04G1MEwY   (fetch 2)
+
+both -&gt; /dp/B0CDY277D3?lv=shuf&amp;btn_type=ss&amp;<span>btn_ref=srctok-1e229870efde5acf</span>&amp;channelId=704&amp;plpRedirect=mhFallback
+        same ASIN · same token · same page body</pre>
+      <p class="note">
+        Three different submitted links produced three different stable tokens. That is the signature of
+        per-link tracking, not of a shuffle.
+      </p>
+    </div>
+
+    <h2>What is still not established</h2>
+    <div class="card">
+      <p>
+        The links resolve deterministically, but <strong>no public Amazon document binds a
+        <code>link.amazon</code> short code to a destination ASIN</strong>. The mapping is therefore observed
+        behaviour, not documented intent, and none of the three resolved URLs carries an Associates
+        <code>tag</code>. Both points remain flagged (RV-02, RV-03) for confirmation in Associates Central.
+        The products on this site are described as <em>the product each link resolves to</em>, never as
+        <em>the product you selected</em>.
+      </p>
+      <p>
+        Read <a href="links.html">Links &amp; ASINs</a> for the per-link evidence,
+        <a href="flagged.html">Flagged for Review</a> for every open item, and
+        <a href="method.html">Method &amp; Limits</a> for what this environment can and cannot verify.
+      </p>
+    </div>
+
+    <h2>Corrections this session recommends to other sessions' files</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>ID</th><th>File (owner)</th><th>Requested change</th><th>Basis</th></tr></thead>
+        <tbody>
+          <tr><td>CR-1</td><td><code>ledger/flags.json</code> F-03</td><td>Downgrade "token was not honoured / unrelated destination" to "destination stable and per-link tracked; mapping not documented by Amazon".</td><td>C-1, C-3 — <a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">control fetch</a></td></tr>
+          <tr><td>CR-2</td><td><code>ledger/flags.json</code> F-05, <code>README.md</code></td><td>Remove the "different <code>btn_ref</code> on re-fetch" claim — not reproducible.</td><td>C-2 — <a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer sponsored">re-fetch</a></td></tr>
+          <tr><td>CR-3</td><td><code>README.md</code> divergence table</td><td>Add the control result: a bare valid <code>/dp/</code> load also carries <code>plpRedirect=mhFallback</code>.</td><td>C-1 — <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">second control</a></td></tr>
+          <tr><td>CR-4</td><td><code>ledger/products.json</code></td><td>Remove "via mhFallback" as a <code>why_blank</code> reason; keep the ASIN-format and Page-Not-Found reasons, which stand.</td><td>C-4 — <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">ASIN rule</a></td></tr>
+          <tr><td>CR-5</td><td><code>research-hub/data/products.json</code></td><td>Six attribute rows not re-observable (RV-06) — re-check before continuing to mark verified.</td><td>RV-06 — <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">source re-read</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Logged, not applied: those files belong to earlier sessions. See COORDINATION.md.</p>
+
+    <footer class="site">
+      Session <code>c6e94e8d</code> · branch <code>arena/c6e94e8d-zone2</code> · verified 2026-11-14 ·
+      Task T20 in the repository's <a href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">COORDINATION.md</a>.
+      As an Amazon Associate I earn from qualifying purchases.
+    </footer>
+  </div>
+</main>
+</body>
+</html>

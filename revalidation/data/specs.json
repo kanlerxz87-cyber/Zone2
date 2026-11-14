@@ -1,0 +1,298 @@
+{
+  "$note": "Line-by-line re-verification of product attributes, 2026-11-14. Rule: a value is listed only when an official source states it; otherwise it is null and carries a flag. No value is inferred or carried over unread.",
+  "verified_on": "2026-11-14",
+  "sources": {
+    "S1": {
+      "name": "Amazon.com product page — B0CDY277D3",
+      "url": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    "S2": {
+      "name": "Chefman official product page — TurboFry Touch 6 Qt Dual-Window",
+      "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"
+    },
+    "S3": {
+      "name": "Amazon.com product page — B09B7SB46R",
+      "url": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    "S4": {
+      "name": "Emeril Everyday official store — French Door AirFryer 360, 26 QT",
+      "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"
+    },
+    "S5": {
+      "name": "Amazon.com product page — B08DKYBTPH",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH"
+    },
+    "S6": {
+      "name": "Chefman official product page — TurboFry Touch 8 Qt",
+      "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"
+    }
+  },
+  "products": [
+    {
+      "asin": "B0CDY277D3",
+      "via_link": "https://link.amazon/B04G1MEwY",
+      "rows": [
+        {
+          "field": "Title",
+          "value": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+          "status": "verified",
+          "source": "S1"
+        },
+        {
+          "field": "Model number",
+          "value": "RJ38-SQPF-3TDB-2W",
+          "status": "verified",
+          "source": "S2"
+        },
+        {
+          "field": "Capacity",
+          "value": "6 Qt / 5.67 L",
+          "status": "verified",
+          "source": "S2"
+        },
+        {
+          "field": "Basket configuration",
+          "value": "2 independent 3-qt baskets",
+          "status": "verified",
+          "source": "S1"
+        },
+        {
+          "field": "Temperature range",
+          "value": "200–450 °F / 95–235 °C",
+          "status": "verified",
+          "source": "S2",
+          "note": "Both scales are the manufacturer's own. No conversion performed."
+        },
+        {
+          "field": "Power",
+          "value": "1700 W / 120 V",
+          "status": "verified",
+          "source": "S2"
+        },
+        {
+          "field": "Dimensions",
+          "value": "13.38 × 11.81 × 10.63 in / 33.98 × 30 × 27 cm",
+          "status": "verified",
+          "source": "S2"
+        },
+        {
+          "field": "Weight",
+          "value": "13.3 lb / 6.03 kg",
+          "status": "verified",
+          "source": "S2"
+        },
+        {
+          "field": "Certification and warranty",
+          "value": "cETL approved with a 1-year Chefman assurance",
+          "status": "verified",
+          "source": "S2"
+        },
+        {
+          "field": "Key features",
+          "value": "Sync Finish; Hi-Fry to 450 °F; nonstick dishwasher-safe baskets; interior light; dual viewing windows; matte-black finish",
+          "status": "verified",
+          "source": "S2"
+        },
+        {
+          "field": "Inner material (\"stainless steel\")",
+          "value": null,
+          "status": "unverified",
+          "source": null,
+          "note": "A previously published row attributed this to the Amazon product-information block. It was NOT re-observed in this pass, so the row is not repeated as verified. Flagged RV-07."
+        },
+        {
+          "field": "UPC",
+          "value": null,
+          "status": "unverified",
+          "source": null,
+          "flag": "RV-07"
+        },
+        {
+          "field": "Amazon price / rating / review count",
+          "value": null,
+          "status": "withheld",
+          "source": null,
+          "note": "Deliberately not published. Associates Program Policies restrict price display to Amazon-served data and ratings to Creators API / PA API (§2(b), §6(t)). See methodology."
+        }
+      ]
+    },
+    {
+      "asin": "B09B7SB46R",
+      "via_link": "https://link.amazon/B02NbDxp3",
+      "rows": [
+        {
+          "field": "Title",
+          "value": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+          "status": "verified",
+          "source": "S3"
+        },
+        {
+          "field": "Model number (manufacturer store, as printed on page)",
+          "value": "4-00675-02A-VN",
+          "status": "verified",
+          "source": "S4",
+          "note": "The same page's image filenames embed '4-00675-02X'. Recorded as an observation, not asserted as the model number."
+        },
+        {
+          "field": "Capacity",
+          "value": "26 qt / 24.6 L, sized for 4–6 people",
+          "status": "verified",
+          "source": "S4"
+        },
+        {
+          "field": "Dimensions",
+          "value": "16.9\"D × 15.8\"W × 14.8\"H",
+          "status": "verified",
+          "source": "S4"
+        },
+        {
+          "field": "Voltage",
+          "value": "120 V",
+          "status": "verified",
+          "source": "S4"
+        },
+        {
+          "field": "Rotisserie and dual-speed fan",
+          "value": "Both stated",
+          "status": "verified",
+          "source": "S4"
+        },
+        {
+          "field": "Warranty",
+          "value": "1 year",
+          "status": "verified",
+          "source": "S4"
+        },
+        {
+          "field": "Accessories",
+          "value": "7 premium accessories; manufacturer names an air fry basket, rotisserie spit, bake pan, and more",
+          "status": "verified",
+          "source": "S4",
+          "note": "No source publishes an itemised list of exactly 7, so the count is reported without an itemisation."
+        },
+        {
+          "field": "Cooking functions / presets",
+          "value": "CONFLICT — 24 (title, S3); 24 (description, S4); 25 (spec tile, S4); 10 listed (\"10-In-1\" section, S4)",
+          "status": "conflict",
+          "source": "S3, S4",
+          "flag": "RV-04",
+          "note": "The manufacturer's own page states 25 in its spec tile and 24 in its description, and separately advertises '10-In-1'. All figures shown; none presented as definitive."
+        },
+        {
+          "field": "Wattage",
+          "value": null,
+          "status": "unverified",
+          "source": null,
+          "flag": "RV-06",
+          "note": "The manufacturer page publishes voltage (120 V) but no wattage. A previously published 1700 W figure was attributed to Amazon's product-information block and was NOT re-observed in this pass."
+        },
+        {
+          "field": "Maximum temperature",
+          "value": null,
+          "status": "unverified",
+          "source": null,
+          "flag": "RV-06",
+          "note": "Manufacturer states only 'Temperature Control' with no numeric maximum. A previously published 75–500 °F figure was not re-observed."
+        },
+        {
+          "field": "Item weight",
+          "value": null,
+          "status": "unverified",
+          "source": null,
+          "flag": "RV-07"
+        },
+        {
+          "field": "UPC",
+          "value": null,
+          "status": "unverified",
+          "source": null,
+          "flag": "RV-07"
+        },
+        {
+          "field": "Amazon price / rating / review count",
+          "value": null,
+          "status": "withheld",
+          "source": null,
+          "note": "Deliberately not published (policy §2(b), §6(t))."
+        }
+      ]
+    },
+    {
+      "asin": "B08DKYBTPH",
+      "via_link": "https://link.amazon/B00hJ57DV",
+      "rows": [
+        {
+          "field": "Title",
+          "value": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+          "status": "verified",
+          "source": "S5"
+        },
+        {
+          "field": "Model number",
+          "value": "RJ38-SQSS-8T",
+          "status": "verified",
+          "source": "S6"
+        },
+        {
+          "field": "Capacity (8 Qt model)",
+          "value": "8 Qt / 7.57 L",
+          "status": "verified",
+          "source": "S6",
+          "note": "This page covers a 5 Qt and an 8 Qt model; the 8 Qt figures are used because the model number RJ38-SQSS-8T is the 8 Qt variant."
+        },
+        {
+          "field": "Temperature range",
+          "value": "200–400 °F / 95–205 °C",
+          "status": "verified",
+          "source": "S6",
+          "note": "The 450 °F figure in the listing is the Hi-Fry boost for the final two minutes, not the general range. Both statements are on S5, so they reconcile rather than conflict."
+        },
+        {
+          "field": "Power",
+          "value": "1700 W / 120 V",
+          "status": "conflict",
+          "source": "S6, S5",
+          "flag": "RV-05",
+          "note": "The SAME Amazon page states 1000 W in the 'About this Item' bullet and 1700 W in its Product Description, for the same model number. The manufacturer states 1700 W / 120 V. Recorded as an internal contradiction on the Amazon listing."
+        },
+        {
+          "field": "Dimensions (8 Qt)",
+          "value": "15.4 × 12.6 × 13.5 in / 39.11 × 32 × 34.29 cm",
+          "status": "verified",
+          "source": "S6"
+        },
+        {
+          "field": "Weight (8 Qt)",
+          "value": "12.8 lb / 5.8 kg",
+          "status": "verified",
+          "source": "S6"
+        },
+        {
+          "field": "Presets",
+          "value": "4 presets — French fries, chicken, meat, fish",
+          "status": "verified",
+          "source": "S5, S6"
+        },
+        {
+          "field": "Certification and warranty",
+          "value": "cETL approved with a 1-year Chefman assurance",
+          "status": "verified",
+          "source": "S6"
+        },
+        {
+          "field": "Other features",
+          "value": "Digital touch controls; LED shake reminder; automatic shut-off; top-rack dishwasher-safe nonstick basket and flat frying tray; stainless-steel finish",
+          "status": "verified",
+          "source": "S5, S6"
+        },
+        {
+          "field": "Amazon price / rating / review count",
+          "value": null,
+          "status": "withheld",
+          "source": null,
+          "note": "Deliberately not published (policy §2(b), §6(t))."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Links &amp;amp; ASINs — Zone2 Revalidation</title>
+<link rel="stylesheet" href="assets.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">Zone2 Revalidation<small>Controlled re-check of the three supplied Amazon links · 2026-11-14</small></a>
+    <nav aria-label="Main"><a href="index.html">Overview</a><a href="links.html" class="active">Links &amp; ASINs</a><a href="products.html">Products</a><a href="method.html">Method &amp; Limits</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Sources</a></nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="crumbs"><a href="../index.html">Zone2 dashboard</a> / <a href="index.html">Revalidation</a> / Links &amp;amp; ASINs</div>
+    <h1>Links &amp;amp; ASINs</h1>
+    <p class="lede">Per-link evidence: what each supplied short link does, what its code does on its own, and which of the two results actually identifies a product.</p>
+    <div class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.</div>
+
+    <div class="card">
+      <p>
+        Each link was fetched from its supplied form, followed to its destination, and fetched a second time.
+        The code itself was separately requested as <code>amazon.com/dp/&lt;code&gt;</code> to test whether it
+        addresses a catalogue record.
+      </p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th>Supplied link <span class="note">(external)</span></th><th>Code</th><th>Code as <code>/dp/</code> path</th>
+          <th>Resolves to</th><th>Per-link token</th><th>Stable on re-fetch</th><th>Associates <code>tag</code></th>
+        </tr></thead>
+        <tbody><tr>
+<td><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer sponsored">https://link.amazon/B04G1MEwY</a></td>
+<td><code>B04G1MEwY</code> (9 chars)<br><span class="badge flag">not an ASIN</span></td>
+<td class="blank">blank<br><span class="note">Page Not Found</span><br><a href="https://www.amazon.com/dp/B04G1MEwY" target="_blank" rel="noopener noreferrer">check</a></td>
+<td><a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer sponsored">B0CDY277D3</a></td>
+<td>srctok-1e229870efde5acf<br><span class="note">channelId 704</span></td>
+<td><span class="badge ok">yes</span></td>
+<td><span class="badge flag">absent</span></td>
+</tr><tr>
+<td><a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer sponsored">https://link.amazon/B02NbDxp3</a></td>
+<td><code>B02NbDxp3</code> (9 chars)<br><span class="badge flag">not an ASIN</span></td>
+<td class="blank">blank<br><span class="note">Page Not Found</span><br><a href="https://www.amazon.com/dp/B02NbDxp3" target="_blank" rel="noopener noreferrer">check</a></td>
+<td><a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer sponsored">B09B7SB46R</a></td>
+<td>srctok-534f5e7952f396b2<br><span class="note">channelId 704</span></td>
+<td><span class="badge ok">yes</span></td>
+<td><span class="badge flag">absent</span></td>
+</tr><tr>
+<td><a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer sponsored">https://link.amazon/B00hJ57DV</a></td>
+<td><code>B00hJ57DV</code> (9 chars)<br><span class="badge flag">not an ASIN</span></td>
+<td class="blank">blank<br><span class="note">Page Not Found</span><br><a href="https://www.amazon.com/dp/B00hJ57DV" target="_blank" rel="noopener noreferrer">check</a></td>
+<td><a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer sponsored">B08DKYBTPH</a></td>
+<td>srctok-76c3adaeb8708b44<br><span class="note">channelId 704</span></td>
+<td><span class="badge ok">yes</span></td>
+<td><span class="badge flag">absent</span></td>
+</tr></tbody>
+      </table>
+    </div>
+    <p class="note">
+      Source for every row: the Amazon.com responses themselves — <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">B0CDY277D3</a>,
+      <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">B09B7SB46R</a>,
+      <a href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">B08DKYBTPH</a>, plus
+      the three Page-Not-Found checks linked in column 3. The ASIN-length rule is from
+      <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">Amazon Associates help</a>.
+    </p>
+
+    <h2>Observed destination URLs</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Link</th><th>Destination as observed, with the tracking parameters Amazon appended</th></tr></thead>
+        <tbody>
+        <tr><td><code>B04G1MEwY</code></td><td><code>https://www.amazon.com/dp/B0CDY277D3?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-1e229870efde5acf&amp;channelId=704&amp;plpRedirect=mhFallback</code></td></tr><tr><td><code>B02NbDxp3</code></td><td><code>https://www.amazon.com/dp/B09B7SB46R?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-534f5e7952f396b2&amp;channelId=704&amp;plpRedirect=mhFallback</code></td></tr><tr><td><code>B00hJ57DV</code></td><td><code>https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-76c3adaeb8708b44&amp;channelId=704&amp;plpRedirect=mhFallback&amp;th=1</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">
+      The absence of <code>tag=</code> in each of these URLs is the basis of flag RV-02. Under Operating
+      Agreement §1 a Special Link must use Amazon's tagged link format, which includes the Associates ID.
+    </p>
+
+    <footer class="site">
+      Session <code>c6e94e8d</code> · branch <code>arena/c6e94e8d-zone2</code> · verified 2026-11-14 ·
+      Task T20 in the repository's <a href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">COORDINATION.md</a>.
+      As an Amazon Associate I earn from qualifying purchases.
+    </footer>
+  </div>
+</main>
+</body>
+</html>
