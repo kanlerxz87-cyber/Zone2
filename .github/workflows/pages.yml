@@ -80,7 +80,7 @@ jobs:
           problems += check("zone2", sorted(f.name for f in Path("zone2").glob("*.html")))
           problems += check("affiliate-lab", sorted(f.name for f in Path("affiliate-lab").glob("*.html")))
           problems += check("revalidation", sorted(f.name for f in Path("revalidation").glob("*.html")))
-          problems += check(".", sorted(f.name for f in Path(".").glob("*.html")) - {"404.html"})
+          problems += check(".", [f.name for f in sorted(Path(".").glob("*.html")) if f.name != "404.html"])
           for page in sorted(Path("pages").rglob("*.html")):
               rel = page.relative_to("pages")
               problems += check(page.parent, [page.name])
