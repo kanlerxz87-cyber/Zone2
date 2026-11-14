@@ -57,7 +57,9 @@ MANUFACTURER_HOSTS = {
     "emerileveryday.com",
 }
 PERF_FIELDS = ("clicks", "conversion", "orders", "earnings", "revenue", "epc", "impressions")
-SITE_NAME = "Northstar"  # this project's own name; must contain no Amazon mark (R-11)
+SITE_NAME = "Zone2"  # this project's own name; must contain no Amazon mark (R-11)
+# Changed 2026-11-14 (final integration): the published site is one product, so the name matches
+# tools/build_site.py. "Northstar" is the earlier prototype preserved at northstar/.
 SITE_NAME_MARKS = [m for m in ("amazon", "amzn", "kindle", "prime", "audible", "imdb") if m in SITE_NAME.lower()]
 
 

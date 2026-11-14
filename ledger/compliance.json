@@ -17,7 +17,7 @@
       "requirement": "Link-level disclosure must be (1) clear - examples given include \"(paid link)\", \"#ad\", \"#CommissionsEarned\" - and (2) conspicuous, placed near the affiliate link or product review so customers do not have to hunt for it. The disclosure must be made in the same medium as the recommendation (voice, text, or both).",
       "source_id": "S05",
       "citation": "Associates Central help: \"Why do I have to identify myself as an Associate?\"",
-      "implemented_control": "content templates place the disclosure block immediately above the first affiliate link on the page; linter tools/generate_articles.py::lint_disclosure_proximity fails a draft when the first SponsoredLink appears before the disclosure block",
+      "implemented_control": "content templates place the disclosure block immediately above the first affiliate link on the page; the linter tools/generate_articles.py::lint() raises the DISCLOSURE_POSITION error when the first Amazon affiliate link appears before the disclosure block. Corrected 2026-11-14: this row previously named a function `lint_disclosure_proximity`, which does not exist in the repository - the check lives inside `lint()`.",
       "status": "VERIFIED"
     },
     {
@@ -53,7 +53,7 @@
       "requirement": "No inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or Amazon's policies, promotions or prices. Limited-time promotion mentions must be removed from the Site as soon as the promotion ends on the Amazon Site.",
       "source_id": "S02",
       "citation": "Participation Requirements, Section 2(b)",
-      "implemented_control": "tools/generate_articles.py::lint_claims blocks superlatives and unverifiable claim verbs unless the sentence carries an inline evidence reference; promo copy carries an `expires_utc` front-matter field and the builder refuses to render expired promos",
+      "implemented_control": "tools/generate_articles.py::lint() blocks superlatives, urgency phrasing and unverifiable claim verbs unless the sentence carries an inline `<!--evidence:` reference, and refuses text that claims hands-on use of an unverified product. Limited-time promotion copy carries an `expires_utc` front-matter field: the renderer drops the promotion when that moment has passed and the linter raises PROMO_EXPIRED, so an expired promotion can never reach the publish directory (tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted). Corrected 2026-11-14: this row previously named a function `lint_claims`, which does not exist, and described an `expires_utc` enforcement that had never been implemented - it is implemented now.",
       "status": "VERIFIED"
     },
     {
@@ -101,7 +101,7 @@
       "requirement": "The Site must not include any Amazon trademark, or a variant or misspelling of one, in any domain name, subdomain, in any \"tag\" or Associates ID, or in any username, group name or other identifier on a social networking site. Sites that promote or contain certain content categories are unsuitable for the Program.",
       "source_id": "S02",
       "citation": "Participation Requirements, Section 1 - Enrollment and Eligibility, unsuitable-Sites item (g) (re-read 2026-11-14)",
-      "implemented_control": "the site is named \"Northstar\" (tools/build_site.py and tools/validate_data.py SITE_NAME), which contains no Amazon mark. tools/validate_data.py::check_marks fails the build if the site name or the configured Associates tag contains amazon/amzn/prime/kindle, fails affirmative endorsement claims, and raises a review note when a page title leads with a mark (F-13). Corrected 2026-11-14: this row previously named a function `assert_no_amazon_marks` that does not exist; the implemented function is `check_marks`.",
+      "implemented_control": "the site is named \"Zone2\" (tools/build_site.py and tools/validate_data.py SITE_NAME), which contains no Amazon mark. tools/validate_data.py::check_marks fails the build if the site name or the configured Associates tag contains amazon/amzn/prime/kindle, fails affirmative endorsement claims, and raises a review note when a page title leads with a mark (F-13). Corrected 2026-11-14: this row previously named a function `assert_no_amazon_marks` that does not exist; the implemented function is `check_marks`. The site name was changed from \"Northstar\" to \"Zone2\" on 2026-11-14 by the final integration, because \"Northstar\" is the name of the preserved earlier prototype kept at northstar/; the mark check is unaffected.",
       "status": "VERIFIED"
     },
     {

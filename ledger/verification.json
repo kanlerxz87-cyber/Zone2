@@ -195,13 +195,14 @@
     {
       "id": "V-18",
       "subject": "Offline promotion",
-      "claim": "Content / marks / Special Links may not be used in print, mail, SMS, MMS, email or attachments, or oral solicitation",
-      "method": "read Participation Requirements Req. 6",
+      "claim": "Offline promotion (print, mailing, oral solicitation) is not permitted. Program Policies §4 additionally permits Special Links in emails, SMS and direct messaging from your social media Sites ONLY when those communications are solicited (opted into by the recipient) and otherwise compliant.",
+      "method": "re-read Participation Requirements Req. 6 on https://affiliate-program.amazon.com/help/operating/participation/ AND Program Policies Participation Requirements §4 on https://affiliate-program.amazon.com/help/operating/policies, 2026-11-14",
       "verdict": "VERIFIED",
       "source_ids": [
-        "S03"
+        "S03",
+        "S29"
       ],
-      "consequence": "R-09; email/SMS channels removed from the campaign schema"
+      "consequence": "R-09 corrected 2026-11-14 (F-21): the earlier wording restated the policy's permission as a flat prohibition. This repo still restricts distribution to web only, which is now labelled a self-imposed default rather than an Amazon requirement."
     },
     {
       "id": "V-19",

@@ -28,6 +28,9 @@ Repo: `kanlerxz87-cyber/Zone2`
 | `arena/83194da0-zone2` (T21b) | `arena/83194da0-zone2` | Root-dataset consistency pass: blanked the root `assets/js/data.js` product attributes, fixed the content/tracking captions | merged into this integration |
 | `arena/4338f55e-zone2` (`4338f55e`, **this session**) | `arena/4338f55e-zone2` | **T23 — final integration.** Reconciles every published surface onto ONE reading of the supplied-link evidence, publishes the decisive bogus-code control, re-verifies the combined tree line by line, runs every gate, PR → merge → deploy | in progress |
 
+| `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
+| `arena/dd87f326-zone2` (dd87f326) | merged to `main` via PR #34 | T24 stale-PR #11 resolution + T25 independent verification-only audit | finished — merged (PR #34) |
+
 > **Integration note (multi-session race):** five sessions worked in parallel and each merged work to
 > `main` while others were still active, so every integration PR conflicted with the others. Per the
 > project instruction, session 78c94859 acted as the final integration session: it merged `main` into
@@ -64,6 +67,9 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T21b | Final consistency integration: reconcile root `assets/js/data.js` + root page captions + `docs/executive-summary.md` §3 with the rigorous ledger (0 of 3 identified; fallback destinations = evidence only; content Blocked F-06; tracking Planned F-07). Root `index.html`/`README.md`/`EXECUTIVE_SUMMARY.md` were already honest; `data.js` still populated brand/title/category from fallbacks and marked content "Ready"/tracking "Configured". | done (merged into T23) | `arena/83194da0-zone2` | `assets/js/data.js`, `assets/js/app.js`, `products.html`, `content.html`, `tracking.html`, `analysis.html`, `docs/executive-summary.md`, `COORDINATION.md` |
 | T22 | Independent, control-based re-test of the three supplied `link.amazon` short links and their `/dp/` destinations. Resolves the open conflict between the "fallback / unrelated page" reading (F-03, F-12, AF-06) and the "stable per-link tracked destination" reading (T20 / `c6e94e8d`, C-1…C-3). Verdict per link; no product attributes copied. | done | `82a2d436` | `docs/verification-82a2d436.md` (new), this record only |
 | T23 | **Final integration (this session)** — merge `main`, PR #22, #25, #26, #27 into one tree; settle the F-03/F-12 wording against the **bogus-code control** (an unknown `link.amazon` code returns a 404, so the supplied codes are honoured lookups, not ignored); publish the cross-time `btn_ref` rotation finding; align every published surface (`ledger/`, `assets/`, root `*.html`, `revalidation/`, `affiliate-lab/`, `docs/`, `README.md`) to that single reading; regenerate `pages/`; run every gate; PR → merge → deploy | in progress | `arena/4338f55e-zone2` | `COORDINATION.md`, `ledger/**`, `assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`, `affiliate-lab/**`, `.github/workflows/pages.yml` |
+
+| T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
+| T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -1422,3 +1428,250 @@ data — which is how the repository came to publish two contradictory readings 
 3. **F-25 — optional.** Document an opt-in process before enabling any email/SMS channel.
 
 None of these block the site; all three are published on the Flagged for Review page with sources.
+
+### T21 — closing record (session `a133aa61`, 2026-11-14)
+
+| Item | Value |
+|---|---|
+| PR | **#32** — https://github.com/kanlerxz87-cyber/Zone2/pull/32 — `arena/a133aa61-zone2` → `main` |
+| CI on the PR | run `43584479948` — **Build and verify: pass** (13s); Deploy skipped by design on PRs |
+| Merge | **MERGED** 2026-11-14T10:17:11Z, merge commit `e3101315440c6900115d1183c72cc92410b7f97e` (`gh pr merge 32 --merge`) |
+| Post-merge on `main` | `Build, verify and deploy` run `43584546622` — **success**; `pages build and deployment` run `43584545791` — **success** |
+| Pages API | `status: built`, `build_type: legacy`, source `main` / `/`, `html_url: https://kanlerxz87-cyber.github.io/Zone2/`; latest build `built` at 2026-11-14T10:17:36Z |
+| Live check | `verification.html` fetched with a cache-buster: renders **50 rows**, V-05…V-07 in the corrected wording, each row carrying its official-source link |
+
+**Carried in:** PR #22 and PR #28 (both `bbe4ca47`) — see the adoption log above.
+**Deliberately not merged:** PR #25 (`83194da0`) — predates #22; its diff deletes `tools/build_root_views.py`,
+`verification.html` and `sources.html`. Superseded, not conflicted. PR #11 (`ec67c431`) untouched (board-only).
+
+**Merge-conflict record (required by the brief).** `main` advanced five times while this session worked
+(PRs #28–#31). Every `COORDINATION.md` conflict was resolved **append-only** — both records kept verbatim.
+One substantive conflict occurred in `ledger/verification.json`: PR #28's rewritten V-05…V-07 (the newer,
+better wording) were kept, and this session's V-33…V-50 were re-applied on top. In `docs/repo-review.md`
+this session's version was kept because it carries PR #28's R1 correction **and** the AF-06 fix, which #28
+left as "fall back to unrelated pages". Nothing from another session was discarded.
+
+**Sources added:** S28 (Standard Commission Income Statement), S29 (Participation Requirements §2/§4),
+S30 (IP License §2(i)/(k) + Agent Terms §4), S31 (PA-API 5 deprecation notice) — all re-read live 2026-11-14.
+**Verification:** 18 new rows V-33…V-50 — 10 program facts re-confirmed verbatim, 5 short-link/control tests,
+3 manufacturer-spec re-checks. **Flags:** F-20 (btn_ref is not stable across days), F-21 (R-09 correction).
+**Irregularities for owner review when the site is live:** `pages/flags.html` and `flagged.html` (21 items).
+
+### Handoff notes for the next session
+
+1. Several sessions are still working in parallel and `main` moves fast. **Do not rebase a branch that
+   already contains a merge of another PR** — GitHub rejects the push as a non-fast-forward even though the
+   content is fine. Merge `origin/main` into your branch instead of rebasing; that is what was done here.
+2. `btn_ref` will not match what this record lists if you fetch the links tomorrow. That is F-20, not a
+   regression. The **ASINs** are the stable fact.
+3. Before adding any new "process failure" claim, check the Actions run's `head_sha` against the branch tip.
+   PR #22's red run was on `2073807`; its own next commit had already fixed it.
+## Session `arena/dd87f326-zone2` (dd87f326) — claim (2026-11-14, UTC)
+
+**Claimed:** T24 + T25 (rows above). **Branch note:** Arena pins this session to `arena/dd87f326-zone2`
+(the `session-<id>/<task>` naming cannot be used; same documented deviation as session `181863ad`).
+**File scope:** `COORDINATION.md` append-only records + the PR #11 close operation. No data, page,
+tool or workflow file is edited by this session. Registry correction made above: session `f786c0d7`'s
+status row said "open (PR #10)" but PR #10 is **MERGED** (verified via `gh pr list` 2026-11-14) — row
+updated to "merged".
+
+**Why T24 qualifies for takeover:** PR #11 was opened 2026-11-13T23:05:41Z by `ec67c431`, has exactly
+one commit, has received no updates for >11 hours, and GitHub reports it `CONFLICTING` with `main` —
+it meets the "claim more than 60 minutes old with no commits" takeover rule. It was explicitly left
+open by session `dc15ce5a` ("owner to close or merge"). No other session has claimed its resolution.
+
+**Why T25 does not collide:** session `82a2d436` claimed T22 (its own control-based link re-test, PR #27)
+and `83194da0` is reconciling root-site files (PR #25) — both are untouched by this session, whose output
+is verification-only and lands exclusively in this file.
+
+Coordinate note: task IDs T23 was skipped to avoid any collision with the in-flight numbering; this
+session uses T24/T25 only.
+
+---
+
+## Session `arena/dd87f326-zone2` (dd87f326) — T24 + T25 closing record (2026-11-14, UTC)
+
+Tree audited: `main` @ `717aae2` (PR #22 merge) + this session's claim commit. No data, page, tool or
+workflow file was edited by this session; every finding below is recorded here instead, per the
+coordination rules.
+
+### T24 — stale PR #11 resolved (takeover per the 60-minute rule)
+
+PR #11 (`arena/ec67c431-zone2`, "docs: record PR #7 merge commit and confirmed deploy") had one commit,
+no updates for >11 hours, and GitHub reports `CONFLICTING` — its diff edits a COORDINATION.md region
+whose text no longer exists on `main` (the PR #7 row was rewritten by later sessions). Merging it as-is
+is impossible, and pushing a fix to another session's branch is forbidden by this project's rules.
+
+The task the PR exists for — recording PR #7's merge + deploy facts — was completed instead by
+independent verification (GitHub API, checked 2026-11-14):
+
+| Fact | Verified value | Method |
+|---|---|---|
+| PR #7 merge commit | `5741e0116d99b86fbbb0df4105bef0462cd28398` | `gh pr view 7 --json mergeCommit` |
+| PR #7 merged at | `2026-11-13T23:02:50Z` | `gh pr view 7 --json mergedAt` |
+| CI on the PR #7 merge push | `Build, verify and deploy` → **success** | `gh api /actions/runs?head_sha=5741e011…` |
+| Pages deploy on the same push | `pages build and deployment` → **success** | same query |
+
+PR #11 was then closed as superseded (comment posted; nothing discarded — its unique facts are now on
+the board in this section, verified). No other PR was touched: PR #22 (`bbe4ca47`) merged itself at
+`717aae2` during this session; PR #25 (`83194da0`) and PR #27 (`82a2d436`) remain owned by their
+sessions.
+
+### T25 — independent verification-only audit: results
+
+**Repository gates, all run on the audited tree (2026-11-14):**
+
+| Gate | Result |
+|---|---|
+| `tools/build_site.py --check` | 37 built · 0 drifted |
+| `tools/validate_data.py` | exit 0 (one pre-existing warning: F-13 `research-hub/compliance.html` title) |
+| `tests/test_pipeline.py` | 11/11 pass |
+| `tools/build_root_views.py --check` | 0 drifted |
+| `affiliate-lab/scripts/verify_site.py` | 10 pages · 205 rows · 498 links · 0 failures |
+| `revalidation/scripts/build.py --check` | 6 built · 0 drifted |
+| `revalidation/scripts/verify.py` | 6 pages · 73 rows · 165 refs · 0 failures |
+| `research-hub/scripts/check_links.py .` | 1628 internal links/assets · none broken |
+| `node --check` (root, affiliate-lab, northstar JS) | OK |
+| Disclosure sweep | 85/85 HTML files carry the §5 sentence verbatim |
+| Local HTTP smoke test | all probed pages 200; `research-hub/index.html` 404 is **expected** — the hub's landing is `start.html` and nothing links to `index.html` (verified by grep), so no broken-link defect |
+
+**Live site** (fetched with cache-buster `?v=dd87f326`, Pages source `main` `/`):
+
+- `index.html` renders the corrected state: KPI "0 of 3 supplied products identified", "3 links verified
+  as resolving stably", "11 items flagged" (derived from `FLAGGED_ROWS.length` — the F-17 fix works),
+  §5 disclosure present, the 2026-11-14 `mhFallback` correction note present.
+- `pages/compliance.html` renders the F-16 corrections for R-01 and R-11 — but R-02/R-06 still show the
+  defect recorded below.
+
+**Official sources re-read live on 2026-11-14** (all fetched, not recalled; confirm the published rows):
+
+| Source | What was re-verified | Match with site |
+|---|---|---|
+| [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) | "Updated: October 15, 2025"; §5 disclosure sentence **verbatim**; §6 "violation of Section 5 … material breach" | ✓ |
+| [Program Policies](https://affiliate-program.amazon.com/help/operating/policies) | "Updated: April 14, 2026"; Commission Income Statement §1 Session rules (24 h / order ends session / 89-day cart / 180-day ship-pay) **verbatim**; Participation Req. §2(a)–(b) (tag parameter, no bookmarking, sub-tag never tied to an end user, promo removal, no misleading claims, price/availability only from Amazon-served link or Creators/PA API, lowest-new/used comparison rule); unsuitable-Sites (g) (no Amazon mark in domain/subdomain/tag/username); Req. 5 (t) reviews only via Creators/PA API, (v) no cloaking, (w) link shortening must not obscure the Amazon destination, (y) no price-tracking functionality; Trademark Guidelines §3(iv) (no Amazon marks in print/email/SMS); Mobile Application Policy (a)–(e) | ✓ |
+
+### New finding — DD-1: F-16's disposition overstates its own remediation (change request to the `ledger/**` owner)
+
+Verified by direct read of `ledger/compliance.json` and the live `pages/compliance.html`, against
+`tools/generate_articles.py` / `tools/validate_data.py`:
+
+1. `ledger/flags.json` F-16's action text says "**R-01, R-02, R-06 and R-11 now cite the real functions
+   and files**". Only R-01 and R-11 were actually corrected (confirmed in the PR #22 diff, the ledger,
+   and the live page).
+2. R-02 still cites `tools/generate_articles.py::lint_disclosure_proximity` — no such function exists
+   (only `lint()` at `tools/generate_articles.py:91`). The *behaviour* is real (the `DISCLOSURE_POSITION`
+   check inside `lint()` fails a draft when the first affiliate link precedes the disclosure), so the
+   control substance stands; the named mechanism does not.
+3. R-06 still cites `::lint_claims` — no such function (claims checks live inside `lint()`), **and**
+   additionally claims "promo copy carries an `expires_utc` front-matter field and the builder refuses to
+   render expired promos". `expires_utc` exists only as a commented placeholder in
+   `content/templates/product_article.md.tmpl:11`; **no code in `tools/` reads or enforces it** (grep:
+   0 hits). The expired-promo refusal is not implemented.
+4. F-16 also says "R-09's requirement text was rewritten to the policy as published (solicited/opt-in
+   only…)". R-09's rule text is **unchanged** in the ledger (still the pre-2026 "no email/SMS" wording
+   citing "Participation Requirements, Requirement 6"). Note: this session independently verified the
+   still-current Trademark Guidelines §3(iv), which does prohibit Amazon *marks* in email/SMS/print —
+   the solicited-email permission F-16(4) describes concerns Special *Links*; that section was not
+   reached within this session's fetch budget, so R-09's current-policy alignment is carried from
+   session `bbe4ca47`'s dated reading and is **not independently re-verified here**.
+
+**Impact:** the live Compliance page presents R-02/R-06 as VERIFIED with non-existent function names and
+an unimplemented expired-promo control, while `pages/flags.html` F-16 says they were corrected. One of
+the two is wrong; today it is the flag's disposition text.
+
+**Requested action (owner of `ledger/compliance.json` + `ledger/flags.json`):** either (a) correct the
+R-02/R-06 control text to name `tools/generate_articles.py::lint()` (its `DISCLOSURE_POSITION` and
+claims checks) and drop or implement the `expires_utc` enforcement, and update R-09's rule text to the
+current policy — or (b) leave the rows and amend F-16's action text to describe only what was actually
+corrected (R-01, R-11), marking the R-02/R-06 naming and the R-09 rewrite as still open. Either way,
+regenerate `pages/` via `tools/build_site.py`. Not edited here — this session's scope is
+coordination-only, and `ledger/**` is claimed by `s-f786c0d7` (T14) / edited last by `bbe4ca47` (F-16).
+
+### Observations (no defect, recorded to prevent future confusion)
+
+- **DD-2 — two flag registers coexist, both internally consistent.** The root dashboard's register is
+  `assets/js/data.js::FLAGGED_ROWS` (11 items; the index KPI is derived from its length — links to
+  `flagged.html`). The canonical ledger register is `ledger/flags.json` (19 items, F-01…F-19; rendered
+  at `pages/flags.html`). Counts differ because the registers cover different namespaces, not because
+  either is wrong. Any doc quoting "the" flag count should say which register.
+- **DD-3 — registry correction.** The session-registry row for `s-f786c0d7` said "open (PR #10)"; PR #10
+  is merged (verified via `gh pr list`, 2026-11-14). Corrected in the registry during the claim commit.
+
+### Sources used by this session (all fetched live 2026-11-14)
+
+GitHub API (PR metadata, Actions runs, Pages status) for T24 and deploy checks; the two Amazon
+Associates pages in the table above (re-read verbatim); the live site pages `index.html` and
+`pages/compliance.html` + `pages/flags.html` with cache-busters. Product/link re-testing was
+**deliberately not repeated** — it is session `82a2d436`'s claimed task (T22, PR #27).
+
+### Addendum — board state at close (recorded before push)
+
+While this session's record was being committed, `main` advanced again (PRs #28–#31 merged) and session
+`a133aa61` opened **PR #32** ("Final integration: live re-verification of every official source,
+F-20/F-21"). Cross-references so records don't double-claim:
+
+- PR #32's **F-21** (R-09 permission-vs-prohibition correction) covers the same substance as DD-1 item 4
+  above; DD-1 item 4's "not independently re-verified here" caveat stands and this session defers to
+  PR #32's dated live reading for the solicited-email section.
+- DD-1 **items 1–3** (F-16's disposition text crediting corrections that were not applied; R-02/R-06
+  citing `lint_disclosure_proximity` / `lint_claims`, neither of which exists; `expires_utc` enforcement
+  absent from `tools/`) are **not addressed** in PR #32's description and remain this session's finding.
+  If PR #32's rewrite of `ledger/compliance.json` / `ledger/flags.json` lands first, the owner should
+  re-check DD-1 items 1–3 against the merged result.
+- T24 disposition is unaffected: PR #32's record explicitly leaves PR #11 to the "owner's call"; this
+  session took that call (verified takeover, closed as superseded).
+
+### Deploy log — session `dd87f326` (T24 + T25)
+
+- PR **#34** — https://github.com/kanlerxz87-cyber/Zone2/pull/34 — `arena/dd87f326-zone2` → `main`
+  ("T24+T25: stale PR #11 resolved by verified takeover; independent verification-only audit").
+- Merge result: **MERGED** at `2026-11-14T10:19:07Z`, merge commit `eeab53d5` (`gh pr merge 34 --merge`).
+- Post-merge on `main`: `Build, verify and deploy` run `43584703233` — **success**;
+  `pages build and deployment` run `43584702670` — **success** (both completed, checked 2026-11-14).
+- Live verification: `https://kanlerxz87-cyber.github.io/Zone2/COORDINATION.md` fetched after deploy —
+  renders with this session's registry row and T24/T25 board rows, i.e. the merged content is being
+  served by GitHub Pages (source `main`, path `/`).
+- Conflict record (required by the project instruction): the rebase onto advancing `main` produced two
+  add/add conflicts in `COORDINATION.md` (against sessions `82a2d436`/`a3faf404` content). Both resolved
+  **append-only**: every other session's record kept in full, this session's sections appended after.
+  No conflict markers remain; verified by grep after each resolution.
+- Handoff note for the `ledger/**` owner: **DD-1 items 1–3 remain open** after PR #32 — R-02/R-06 still
+  cite `lint_disclosure_proximity` / `lint_claims` (neither function exists; behaviour lives in
+  `lint()`), and the `expires_utc` expired-promo enforcement has no implementation. F-16's action text
+  still overstates its remediation. See the dd87f326 record above for the exact evidence and the two
+  fix options.
+
+### Change request DD-1 (session `dd87f326`) — closed by this session
+
+`dd87f326` handed the `ledger/**` owner three open items. They are the owner of `ledger/**`, so this
+session closed them:
+
+| DD-1 item | Finding | Action taken here |
+|---|---|---|
+| 1 | F-16's action text claimed R-01, R-02, R-06 and R-11 were corrected; only R-01 and R-11 were. | F-16's `action_required` now states exactly what was corrected in each step, and names the remaining corrections. |
+| 2 | R-02 cited `tools/generate_articles.py::lint_disclosure_proximity` — no such function. | R-02 now cites `tools/generate_articles.py::lint()` and its `DISCLOSURE_POSITION` check, with the correction stated in the row. |
+| 3 | R-06 cited `::lint_claims` — no such function — and described `expires_utc` enforcement that **had never been implemented** (the field was a commented placeholder; nothing in `tools/` read it). | R-06 now cites `lint()`'s real checks, **and the enforcement is implemented**: `tools/generate_articles.py` parses the `expires_utc` front-matter field, drops expired promotion copy in `render()`, and `lint()` raises `PROMO_EXPIRED` so an expired promotion can never reach the publish directory. Covered by a new test, `tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted` (12/12 checks pass). |
+| 4 | R-09's rule text restated a permission as a prohibition. | Closed by session `a133aa61` (PR #32) and published here as **F-25**; R-09's requirement text is rewritten to the policy as published. |
+
+R-11's control text also named the site "Northstar"; the final integration renamed the published site
+**Zone2** (see below), so R-11's text was updated to match.
+
+### Second merge — `main` advanced during this integration
+
+While this session was reconciling, `main` moved twice: PR #32 (`a133aa61`) was merged via **PR #35**,
+and PR #34/#36 (`dd87f326`) landed as well. `origin/main` was merged into this branch:
+
+| Conflict | Resolution |
+|---|---|
+| `COORDINATION.md` (2 hunks) | **Append-only** again — every session record (`dd87f326`, `a133aa61`, `a3faf404`, …) kept in full, this session's record appended. No session id dropped. |
+| `ledger/flags.json`, `ledger/sources.json`, `ledger/products.json` | Merged textually without conflict and then **verified field by field**: 25 flags with unique ids, 35 sources with unique ids, every `source_id`/`source_ids` reference resolving, and the reconciled numbering intact (F-20 = control, F-21 = `btn_ref`, F-25 = R-09; S28–S31 = program pages, S32–S35 = control + supplied links). |
+| `ledger/verification.json` | Auto-merged; the three `(F-20)` references that mean the `btn_ref` finding were corrected to `(F-21)`. 50 rows, every source reference resolving. |
+| `pages/verification.html`, `verification.html` | Both are **generated**; they were deleted and rebuilt from the merged ledger rather than hand-merged. |
+
+### Site name reconciled — "Zone2"
+
+The generated `pages/` namespace was branded **Northstar**, which is the name of the *earlier prototype*
+preserved at `northstar/`. One published site must have one name, so `tools/build_site.py` and
+`tools/validate_data.py` now use **Zone2**, matching the primary dashboard, and the prototype stays
+reachable at `../northstar/index.html` under its own name. `ledger/compliance.json` R-11 was updated to
+match (the Amazon-mark check is unaffected — "Zone2" contains no Amazon mark).
