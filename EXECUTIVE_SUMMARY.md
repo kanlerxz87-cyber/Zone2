@@ -119,7 +119,7 @@ actionable economics finding in the brief.
 * `tools/optimize.py` — evidence-gated optimiser (needs ≥30 clicks **and** a dated report before any action).
 * `tools/build_site.py` — deterministic, network-free generation of 37 pages from the data ledger.
 * `tools/validate_data.py` — the deploy gate: per-row sourcing, blank-or-flagged, no-invented-metrics,
-  mark scan, disclosure audit, cross-session drift check, broken-link check (868 internal links).
+  mark scan, disclosure audit, cross-session drift check, broken-link check (977 internal links).
 * `tests/test_pipeline.py` — 14 executable checks, including a regression test for the marketing identity-scope notice.
 
 ## 6. What is intentionally *not* claimed
@@ -133,7 +133,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
 | A1 | Supply the full 10-character ASIN (or complete `amazon.<tld>/dp/` URL) for each item | user | identity → every dependent field → content |
 | A2 | Provide Associates account, marketplace and Associates ID/tag | user | compliant tagged links + earnings reporting |
 | A3 | Register for the Creators API (needs ≥10 qualifying sales in the past 30 days) | user | real research, offer and browse-node data |
-| A4 | Drop a dated Associates report export at `data/associates_report.json` | user | conversion, EPC, revenue-side optimisation |
+| A4 | Drop a dated Associates report export at `ledger/associates_report.json` | user | conversion, EPC, revenue-side optimisation |
 | A5 | Re-read policy/rate pages each cycle (both carry update dates) | operator | keeps the compliance ledger honest |
 
 ## 8. Review notes on the repository
@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — 11 items, including the deprecated-API trap and the
+  (`pages/flags.html`) with source links — 28 flags (F-01 … F-28), including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
 ---
@@ -267,3 +267,89 @@ A final surface audit found that an earlier addendum's statement “no product c
 - **Destination stability vs. token:** observed requests reproduced the destination ASIN and page body, while the per-link `btn_ref` token rotated across days. This is observed redirect behavior, not a documented or stable attribution identifier; the statement in Addendum 2 that the links were “individually tracked” is withdrawn as an unsupported interpretation (see F-21).
 
 The distinction is now explicit: destination-only product marketing is published; the root generator remains blocked from copy asserting that the destinations match the brief. Neither the unresolved mapping nor the missing Associates ID is filled in by inference.
+
+---
+
+## Addendum 4 — independent close-out, 2026-11-14 (session `ba8b2d38`, task T27)
+
+A fourth, independent pass. Every value below was read off a page **this session fetched itself**; nothing is
+carried forward from another session's notes and no blank was filled by inference. Recorded row by row in
+[`docs/verification-ba8b2d38.md`](docs/verification-ba8b2d38.md) and as verification rows **V-51 … V-70**.
+
+> **Merge note.** Three sessions appended records while this pass was running, so `main` advanced
+> `6a90dfc` → `b22c498` (PRs #42…#46) underneath it. Nothing of theirs was overwritten. One collision had to be
+> resolved by hand: this session's control finding was written up locally as **F-27**, but session `b38cc982`
+> had already published a different **F-27** (*research-hub/scripts/build.py deletes its own output*). Theirs
+> reached `main` first and is left untouched; **this finding is numbered F-28**, and both are in the register.
+> The overlapping hard-coded-count fix was reconciled the same way — T26's implementation is kept as the single
+> one, and T27's contribution is the gate that covers the generated subpages and the hand-written docs.
+
+### The three supplied links — confirmed for the third time
+
+| Supplied link | Destination | `btn_ref` observed this session |
+|---|---|---|
+| `link.amazon/B04G1MEwY` | `/dp/B0CDY277D3` — CHEFMAN 6 Qt Dual Basket Air Fryer Oven | `srctok-704dc575b940a94c` |
+| `link.amazon/B02NbDxp3` | `/dp/B09B7SB46R` — Emeril Lagasse 26QT French Door Air Fryer Toaster Oven | `srctok-76d4981d5f44181b` |
+| `link.amazon/B00hJ57DV` | `/dp/B08DKYBTPH` — Chefman 8 Qt TurboFry | `srctok-016f4a534eed3621` |
+
+Destinations unchanged — the **third independent confirmation**. All three `btn_ref` tokens are **new**, and none
+matches any previously recorded value: the tracking token rotates continuously while the destination does not
+(flag F-21). All three `/dp/<code>` canonical URLs return Amazon's *Page Not Found* page, as before.
+
+### A new control settles what the 9-character codes actually are (flag F-28)
+
+Earlier passes noted that each code is 9 characters where an ASIN is 10, and floated that the pattern looked
+"consistent with a one-character truncation". This session ran the control that tests that reading:
+
+> Passing a **valid 10-character ASIN** (`B0CDY277D3`, which renders normally at `amazon.com/dp/B0CDY277D3`) to
+> the same short-link service returns **the identical 404 page as an unknown code**.
+
+A service that accepted and truncated ASINs would resolve a correct one; this service does not accept ASINs at
+all. It performs a lookup over its **own short-code namespace**. The supplied codes are therefore **opaque
+short-link identifiers**, and their resemblance to a truncated ASIN is a coincidence of appearance.
+
+**What changes:** only the explanation. No product conclusion moves — the tokens are still not ASINs, no missing
+character was ever guessed, and all three destinations are unchanged. The earlier wording is retained in place
+and marked corrected rather than deleted, so the record still shows what the site previously said and why it
+changed (evidence row E-11, flag F-28).
+
+### Official sources re-read — including the rate table, checked mechanically
+
+All program facts re-verified: the §5 disclosure sentence verbatim; both document dates (Agreement 15 Oct 2025,
+Program Policies 14 Apr 2026); the 24-hour session / 89-day cart / 180-day fulfilment window; ≈60-day payment and
+the US minimums (10 / 10 capped at 2,000 / 100 + 15 USD fee); the 3-year inactivity rule; the double-claim
+limitation; the Agent Terms (`Agent/[name]`, no CAPTCHA circumvention, answer truthfully); the ASIN definition;
+and the official tagged-link format.
+
+The **commission rate table was compared programmatically**, not by eye: all eleven bands in
+`ledger/commission_table.json` were matched category-string by category-string against the live
+[Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ). **Every band matched.** The
+`up to 10%` ceiling was re-verified on the [Associates home page](https://affiliate-program.amazon.com/), now
+registered as source S37 — it had been cited on the dashboard without being recorded in the source register.
+
+### Irregularity found and fixed
+
+Root `flagged.html` hardcoded a stale register size — it named **twenty-seven** flags while the register held
+twenty-eight, so the published page understated the register. Same defect class as flag F-26, but surfacing in
+prose, which no gate compared against the ledger. The count and range now render from the data, and a new gate
+(`tools/validate_data.py::check_no_typed_flag_counts`) fails the build if a typed register size reappears across
+the generated subpages, the root pages, `README.md` and this file. **Negative-tested**: reintroducing the stale
+sentence turns the build red. (Session `b38cc982` fixed the same sentence for `index.html` and `flagged.html` in
+T26; both gates now run and cover different surfaces.)
+
+The same drift was found in the hand-written docs and corrected here: `README.md` advertised stale check/source
+counts and this file carried *868 internal links* against an actual **977**, plus three `data/*.json` paths
+pointing at a directory that no longer exists (the ledger moved to `ledger/`). All now resolve.
+
+### Bottom line, unchanged
+
+**0 of 3** supplied codes are identified as Amazon catalog ASINs; each of the **3** links resolves stably to one
+live listing, published as an observation and explicitly **not** as the requested product. No price, rating,
+review count, sales rank, availability, conversion, traffic or earnings figure is published, because none can be
+sourced from an official page without the Creators API and an Associates account.
+
+One nuance worth stating plainly, because it is the most common way to get this wrong: all three resolved
+products sit under a *Home & Kitchen › … › Air Fryers* path, where Table 1 publishes **both** `Kitchen 4.50%` and
+`Home 3.00%`. Which band Amazon actually applies is a catalog fact requiring an authenticated lookup, so that
+cell is **left blank and flagged** rather than inferred — picking either number would be a guess dressed as a
+fact.

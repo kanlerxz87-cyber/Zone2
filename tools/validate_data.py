@@ -363,6 +363,12 @@ def _flag_prose_pages():
         if rel in skip_rel or path in seen:
             continue
         yield path
+    # Hand-authored docs drifted the same way and nothing caught them: README.md advertised
+    # "14 items" and the executive summary "11 items" while the register held 26 and then 27.
+    for name in ("README.md", "EXECUTIVE_SUMMARY.md"):
+        path = REPO / name
+        if path.exists():
+            yield path
 
 
 def check_no_typed_flag_counts(report: Report) -> None:
