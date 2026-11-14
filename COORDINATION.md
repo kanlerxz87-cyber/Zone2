@@ -1437,3 +1437,19 @@ deploy, fetch the live page and read it. Do not treat a green `--check` as evide
 
 **Note.** Supersedes the earlier T21-adjacent "blank-everything" `data.js` rewrite (head `fa21d4b`, PR #25) — that approach was reset away as over-conservative. This fix keeps each destination's verified data but flags it honestly, per "if a value can be confirmed from an official source, present it; if not, flag it."
 
+
+### T21 — final status: done
+
+| Item | Value |
+|---|---|
+| PR #32 (main integration) | merged 2026-11-14T10:17:11Z · `e3101315440c6900115d1183c72cc92410b7f97e` |
+| PR #35 (V-18 email/SMS + closing record) | merged 2026-11-14T10:21:06Z · `646a43c668d7d08a8facc22468ad1b35c58d4e1b` |
+| PR #37 (F-03 vs F-20 contradiction) | merged 2026-11-14T10:24:59Z · `4ba78784554f9e405a488fe193842731a2adf5e6` |
+| CI on every PR | `Build and verify` **pass** each time; Deploy correctly skipped on PRs |
+| Post-merge on `main` | `Build, verify and deploy` + `pages build and deployment` **success** after each merge |
+| Pages API | `status: built`, source `main` / `/`, `https://kanlerxz87-cyber.github.io/Zone2/` |
+| T21 | **done** |
+
+**Three merges, not one, and that is the honest record:** the first merge published the main body of work; the
+second and third fixed statements that were only visible **on the deployed pages**. That is the lesson this
+session leaves in the log — a green `--check` proves the HTML matches the ledger, not that the sentence is true.
