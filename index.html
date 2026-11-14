@@ -14,6 +14,7 @@
     <nav>
       <a href="index.html" class="active">Dashboard</a>
       <a href="products.html">Products</a>
+      <a href="categories.html">Categories</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
@@ -33,10 +34,10 @@
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="num">0 of 3</div><div class="lbl">Supplied products identified from official sources</div></div>
+      <div class="kpi"><div class="num">3 of 3</div><div class="lbl">Supplied links resolved to a verified product destination <em>(mapping flagged for confirmation)</em></div></div>
       <div class="kpi"><div class="num">1</div><div class="lbl">Niche of the resolved destinations — Home &amp; Kitchen air fryers</div></div>
-      <div class="kpi"><div class="num">Up to 10%</div><div class="lbl">Official program commission ceiling</div></div>
-      <div class="kpi"><div class="num">11</div><div class="lbl">Items flagged for review</div></div>
+      <div class="kpi"><div class="num">4.50%</div><div class="lbl">Published Table 1 rate for the <strong>Kitchen</strong> category — the band these products fall in</div></div>
+      <div class="kpi"><div class="num">13</div><div class="lbl">Items flagged for review</div></div>
     </div>
 
     <div class="card">
@@ -64,19 +65,22 @@
         because none of the three resolved URLs carries an Associates <code>tag</code>, the destinations are
         <strong>not established as the requested products</strong> — they are recorded as the product each
         link resolves to, and that mapping is flagged for confirmation on the
-        <a href="flagged.html">Flagged for Review</a> page. Pricing, ratings, review
-        counts, availability and the category commission rate could not be confirmed from official sources
-        through automated verification and are therefore left blank and flagged, in line with the
-        no-inference rule.
+        <a href="flagged.html">Flagged for Review</a> page. Pricing, ratings, review counts and availability
+        could not be confirmed from official sources through automated verification and are therefore left
+        blank and flagged, in line with the no-inference rule. The commission <em>category</em> rate is
+        published and is shown on the <a href="categories.html">Categories</a> page; the rate Amazon applies to
+        one individual ASIN lives in the account rate card, which requires sign-in, so that cell stays blank.
       </p>
       <p class="note" style="font-size:13px;color:var(--muted)">
         <strong>Correction (2026-11-14).</strong> An earlier version of this page described the destinations as
         arbitrary “fallback” pages on the strength of the <code>plpRedirect=mhFallback</code> and
         <code>lv=shuf</code> markers. That reasoning was tested and does not hold: a bare, untagged request to
-        a <em>valid</em> ASIN (<code>/dp/B08DKYBTPH</code>) is answered with the real product page and the same
+        a <em>valid</em> ASIN (<code>/dp/B0CDY277D3</code>) is answered with the real product page and the same
         markers appended, and re-fetching a short link returns the same ASIN, body and per-link
         <code>btn_ref</code> token rather than a shuffle. The destinations are therefore stable and
-        individually tracked, not arbitrary. Evidence, sources and open flags:
+        individually tracked, not arbitrary. Re-measuring on 2026-11-14 added one further detail: the
+        per-request <code>srctok</code> attribution token <em>rotates between days</em> while the destination
+        ASIN never changes — the signature of a tracked source link. Evidence, sources and open flags:
         <a href="revalidation/index.html">Revalidation</a>.
       </p>
       <p>
@@ -91,7 +95,7 @@
     <div class="card">
       <h3>Verified Platform Facts</h3>
       <div id="execFactsTable"></div>
-      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-13.</p>
+      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-14.</p>
     </div>
 
     <div class="card">
@@ -100,12 +104,13 @@
     </div>
 
     <footer class="site">
-      Verified dataset date: 2026-11-13 · Sources:
+      Verified dataset date: 2026-11-14 · Sources:
       <a href="https://affiliate-program.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon Associates</a> ·
       <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies</a> ·
       <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement</a> ·
       <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">Amazon product pages</a>
       · Companion sites: <a href="research-hub/start.html">Affiliate Research Hub</a> · <a href="pages/index.html">Findings &amp; verified subpages</a> ·
+      <a href="pages/categories/index.html">Category subpages</a> ·
       <a href="northstar/index.html">Northstar prototype</a> · <a href="affiliate-lab/index.html">Affiliate Lab (verification site)</a> ·
       <a href="revalidation/index.html">Revalidation 2026-11-14 (control test)</a>
     </footer>

@@ -69,6 +69,58 @@
     );
   }
 
+  function renderLinkResolutions() {
+    renderTable(
+      "linkResolutionsTable",
+      [
+        { key: "submittedLink", label: "Supplied link", render: function (r) { return link(r.submittedLink, r.token); } },
+        { key: "tokenLength", label: "Code length vs ASIN" },
+        { key: "dpResult", label: "amazon.com/dp/&lt;code&gt;" },
+        {
+          key: "resolvedAsin",
+          label: "Resolves to (ASIN)",
+          render: function (r) { return link("https://www.amazon.com/dp/" + r.resolvedAsin, r.resolvedAsin); },
+        },
+        { key: "resolvedTitle", label: "Destination title (read from the live product page)" },
+        { key: "categoryPath", label: "Category path" },
+        { key: "identity", label: "Identity status" },
+        {
+          key: "evidence",
+          label: "Evidence",
+          render: function (r) {
+            return r.evidence
+              .map(function (u) { return link(u, u.replace("https://", "").replace("www.amazon.com", "amazon.com")); })
+              .join("<br>");
+          },
+        },
+      ],
+      LINK_RESOLUTIONS
+    );
+  }
+
+  function renderCategoryBands() {
+    renderTable(
+      "categoryBandsTable",
+      [
+        { key: "band", label: "Band" },
+        { key: "categories", label: "Categories in the published band" },
+        { key: "rate", label: "Published fixed rate" },
+        {
+          key: "products",
+          label: "Verified products in this band",
+          render: function (r) {
+            if (!r.products) return '<span class="blank">\u2014 none verified \u2014</span>';
+            return link(r.productSource, r.products);
+          },
+        },
+        { key: "note", label: "Commercial reading" },
+        { key: "subpage", label: "Detail page", render: function (r) { return link(r.subpage, "Open"); } },
+        { key: "source", label: "Official source", render: function (r) { return link(ASIN_SOURCE.rateCard, "Rate card"); } },
+      ],
+      CATEGORY_BANDS
+    );
+  }
+
   function renderSpecs() {
     const el = document.getElementById("specsTable");
     if (!el) return;
@@ -203,6 +255,8 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     renderProducts();
+    renderLinkResolutions();
+    renderCategoryBands();
     renderSpecs();
     renderExecFacts();
     renderNiche();

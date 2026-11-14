@@ -4,12 +4,14 @@
  * source are left as null/empty and flagged as UNVERIFIED (see flagged page).
  */
 
-const VERIFIED_DATE = "2026-11-13";
+const VERIFIED_DATE = "2026-11-14";
 
 const ASIN_SOURCE = {
   associatesHome: "https://affiliate-program.amazon.com/",
   policies: "https://affiliate-program.amazon.com/help/operating/policies",
   agreement: "https://affiliate-program.amazon.com/help/operating/agreement",
+  rateCard: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+  accountRateCard: "https://affiliate-program.amazon.com/help/operating/schedule",
 };
 
 /* ---- Product catalog (verified from official Amazon product pages) ---- */
@@ -64,6 +66,66 @@ const PRODUCTS = [
   },
 ];
 
+/* ---- Supplied-link resolution evidence (re-verified 2026-11-14) ----
+ * Each submitted link was fetched directly and its final URL recorded. A control fetch of a
+ * bare, valid ASIN carries the same plpRedirect=mhFallback / lv=shuf markers, so those
+ * markers are not evidence of a fallback. What is verifiable: the destination ASIN, its title
+ * and its category path. What is NOT verifiable: that these are the items the brief named,
+ * because no public Amazon document binds a link.amazon code to a destination ASIN.
+ */
+const LINK_RESOLUTIONS = [
+  {
+    submittedLink: "https://link.amazon/B04G1MEwY",
+    token: "B04G1MEwY",
+    tokenLength: "9 characters (an ASIN is 10)",
+    dpResult: "Amazon Page Not Found",
+    resolvedAsin: "B0CDY277D3",
+    resolvedTitle:
+      "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+    categoryPath: "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+    attribution: "btn_ref=srctok-<16 hex> - identical on same-day re-fetch, rotates between days",
+    identity: "Destination verified - link to ASIN mapping not documented by Amazon",
+    evidence: [
+      "https://link.amazon/B04G1MEwY",
+      "https://www.amazon.com/dp/B0CDY277D3",
+      "https://www.amazon.com/dp/B04G1MEwY",
+    ],
+  },
+  {
+    submittedLink: "https://link.amazon/B02NbDxp3",
+    token: "B02NbDxp3",
+    tokenLength: "9 characters (an ASIN is 10)",
+    dpResult: "Amazon Page Not Found",
+    resolvedAsin: "B09B7SB46R",
+    resolvedTitle:
+      "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+    categoryPath: "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+    attribution: "btn_ref=srctok-<16 hex> - identical on same-day re-fetch, rotates between days",
+    identity: "Destination verified - link to ASIN mapping not documented by Amazon",
+    evidence: [
+      "https://link.amazon/B02NbDxp3",
+      "https://www.amazon.com/dp/B09B7SB46R",
+      "https://www.amazon.com/dp/B02NbDxp3",
+    ],
+  },
+  {
+    submittedLink: "https://link.amazon/B00hJ57DV",
+    token: "B00hJ57DV",
+    tokenLength: "9 characters (an ASIN is 10)",
+    dpResult: "Amazon Page Not Found",
+    resolvedAsin: "B08DKYBTPH",
+    resolvedTitle:
+      "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+    categoryPath: "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+    attribution: "btn_ref=srctok-<16 hex> - identical on same-day re-fetch, rotates between days",
+    identity: "Destination verified - link to ASIN mapping not documented by Amazon",
+    evidence: [
+      "https://link.amazon/B00hJ57DV",
+      "https://www.amazon.com/dp/B08DKYBTPH",
+      "https://www.amazon.com/dp/B00hJ57DV",
+    ],
+  },
+];
 /* ---- Verified specification rows (official Amazon + manufacturer pages) ----
  * Integrated from the combined session verification; manufacturer pages
  * re-fetched and confirmed during final integration (2026-11-13). */
@@ -291,6 +353,116 @@ const SPECS = [
   },
 ];
 
+/* ---- Category bands (Table 1 of the published Commission Income Statement) ----
+ * Transcribed row by row from the official statement on 2026-11-14. Every band row links to
+ * the same official source. The "products in band" column is assigned only from a product's
+ * own official category path, and is left blank where no verified product falls in the band.
+ */
+const CATEGORY_BANDS = [
+  {
+    band: "C-10",
+    categories: "Luxury Beauty, Luxury Stores Beauty, Amazon Explore",
+    rate: "10.00%",
+    products: "",
+    productSource: "",
+    note: "Highest published fixed rate in Table 1.",
+    subpage: "pages/categories/luxury-beauty-exploration.html",
+  },
+  {
+    band: "C-05",
+    categories: "Digital Music, Physical Music, Handmade, Digital Videos",
+    rate: "5.00%",
+    products: "",
+    productSource: "",
+    note: "Small category set; Handmade is the only broad merchandising group at this rate.",
+    subpage: "pages/categories/music-handmade-video.html",
+  },
+  {
+    band: "C-045",
+    categories: "Physical Books, Kitchen, Automotive",
+    rate: "4.50%",
+    products: "B0CDY277D3, B09B7SB46R, B08DKYBTPH",
+    productSource: "https://www.amazon.com/dp/B0CDY277D3",
+    note: "All three products sit at Kitchen & Dining on their official category path, which names the Kitchen row of this band.",
+    subpage: "pages/categories/books-kitchen-automotive.html",
+  },
+  {
+    band: "C-04",
+    categories:
+      "Amazon Fire Tablet Devices, Amazon Kindle Devices, Luxury Stores Fashion, Apparel, Amazon Cloud Cam Devices, Fire TV Edition Smart TVs, Amazon Fire TV Devices, Amazon Echo Devices, Ring Devices, Watches, Jewelry, Luggage, Shoes, and Handbags & Accessories",
+    rate: "4.00%",
+    products: "",
+    productSource: "",
+    note: "Includes Amazon's own device lines; also the value used for All Other Categories (see C-OTH).",
+    subpage: "pages/categories/devices-fashion-accessories.html",
+  },
+  {
+    band: "C-03",
+    categories:
+      "Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins",
+    rate: "3.00%",
+    products: "",
+    productSource: "",
+    note: "Largest cluster of high-volume consumer categories in Table 1. This is the Home row of the Home & Kitchen department.",
+    subpage: "pages/categories/home-toys-outdoors-pets.html",
+  },
+  {
+    band: "C-025",
+    categories: "PC, PC Components, DVD & Blu-Ray",
+    rate: "2.50%",
+    products: "",
+    productSource: "",
+    note: "High-ASP categories with thin rates; revenue math depends on basket, not on rate.",
+    subpage: "pages/categories/pc-components-media.html",
+  },
+  {
+    band: "C-02",
+    categories: "Televisions, Digital Video Games",
+    rate: "2.00%",
+    products: "",
+    productSource: "",
+    note: "Lowest non-zero fixed rate band in Table 1 (before the 1.00% band).",
+    subpage: "pages/categories/tv-games.html",
+  },
+  {
+    band: "C-01",
+    categories: "Amazon Fresh, Physical Video Games & Video Game Consoles, Grocery, Health & Personal Care",
+    rate: "1.00%",
+    products: "",
+    productSource: "",
+    note: "High repeat-purchase categories with the lowest positive fixed rate.",
+    subpage: "pages/categories/grocery-health-console.html",
+  },
+  {
+    band: "C-00",
+    categories:
+      "Gift Cards; Wireless Service Plans; Alcoholic Beverages; Digital Kindle Products purchased as a subscription; Vehicles - Leasing and Sales; Pet Prescription Medications; Food prepared and delivered from a restaurant; Amazon Appstore, Prime Now, or Amazon Pay Places",
+    rate: "0.00%",
+    products: "",
+    productSource: "",
+    note: "Pays no Standard Commission Income - excluded from the niche queue before ranking.",
+    subpage: "pages/categories/zero-rate-exclusions.html",
+  },
+  {
+    band: "C-00b",
+    categories: "Coach",
+    rate: "0.00%",
+    products: "",
+    productSource: "",
+    note: "Named single category at 0.00%, listed separately from the exclusion block in Table 1.",
+    subpage: "pages/categories/coach-exclusion.html",
+  },
+  {
+    band: "C-OTH",
+    categories: "All Other Categories",
+    rate: "4.00%",
+    products: "",
+    productSource: "",
+    note: "Default band for a verified ASIN whose category is not in the rows above.",
+    subpage: "pages/categories/all-other-categories.html",
+  },
+];
+
 /* ---- Executive summary facts (all official Amazon Associates sources) ---- */
 const EXEC_FACTS = [
   {
@@ -385,9 +557,17 @@ const NICHE_ANALYSIS = [
   },
   {
     item: "Commission potential",
-    finding: "Program-level ceiling: up to 10%",
+    finding: "Category rate for this portfolio: 4.50% (the Kitchen row of Table 1)",
     detail:
-      "Official public statement: associates can earn up to 10% in commissions from qualifying purchases and programs. The category-specific rate card requires Associates sign-in and could not be publicly verified — left blank on the rate table.",
+      "Amazon's Standard Commission Income Statement publishes a fixed rate per category band and is readable without signing in: Physical Books, Kitchen, Automotive - 4.50%. The other row inside the same Home & Kitchen department is Home - 3.00%. The rate applied to an individual ASIN is only visible in the account holder's own Associates Central report, so that cell stays blank.",
+    source: ASIN_SOURCE.rateCard,
+    status: "verified",
+  },
+  {
+    item: "Program-level commission ceiling",
+    finding: "Up to 10%",
+    detail:
+      "Official public statement: associates can earn up to 10% in commissions from qualifying purchases and programs.",
     source: ASIN_SOURCE.associatesHome,
     status: "verified",
   },
@@ -403,10 +583,27 @@ const COMMISSION_ROWS = [
     status: "verified",
   },
   {
-    item: "Home & Kitchen category rate",
+    item: "Standard commission rate - Kitchen category (Table 1)",
+    value: "4.50%",
+    note:
+      "Published fixed rate for the Physical Books, Kitchen, Automotive row of Table 1. All three products sit at Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers on their official product pages, which names the Kitchen band.",
+    source: ASIN_SOURCE.rateCard,
+    status: "verified",
+  },
+  {
+    item: "Standard commission rate - Home category (Table 1)",
+    value: "3.00%",
+    note:
+      "Published fixed rate for the Toys, Furniture, Home, Home Improvement row of Table 1 - the other row inside the same Home & Kitchen department. Shown so the full set of applicable bands is visible, not only the one these products match.",
+    source: ASIN_SOURCE.rateCard,
+    status: "verified",
+  },
+  {
+    item: "Rate applied to one specific ASIN (account rate card)",
     value: "",
-    note: "Rate schedule (https://affiliate-program.amazon.com/help/operating/schedule) requires Associates sign-in; not publicly verifiable — left blank",
-    source: "https://affiliate-program.amazon.com/help/operating/schedule",
+    note:
+      "The account rate card redirects to Amazon sign-in (customratecard), so the rate Amazon actually applies to an individual ASIN cannot be confirmed from a public page. Left blank - not inferred from the category band.",
+    source: ASIN_SOURCE.accountRateCard,
     status: "unverified",
   },
   {
@@ -600,21 +797,21 @@ const TRACKING_ROWS = [
 /* ---- Flagged for review ---- */
 const FLAGGED_ROWS = [
   {
-    item: "Link-code / ASIN mismatch — Product 1",
+    item: "Link-code / ASIN mismatch - Product 1",
     detail:
-      "Provided link https://link.amazon/B04G1MEwY redirects to amazon.com/dp/B0CDY277D3. The code B04G1MEwY is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Treated as an opaque short-link token; the destination ASIN B0CDY277D3 is the verified product.",
+      "Provided link https://link.amazon/B04G1MEwY resolves to amazon.com/dp/B0CDY277D3, and to that same destination on every fetch across 2026-11-13 and 2026-11-14. The code B04G1MEwY is 9 characters and is not a valid Amazon /dp/ ASIN (a direct fetch of https://www.amazon.com/dp/B04G1MEwY returns Page Not Found), and no public Amazon document binds a link.amazon code to a destination ASIN - so the destination is a verified fact about the link, but is not established as the item the brief named.",
     source: "https://www.amazon.com/dp/B0CDY277D3",
   },
   {
-    item: "Link-code / ASIN mismatch — Product 2",
+    item: "Link-code / ASIN mismatch - Product 2",
     detail:
-      "Provided link https://link.amazon/B02NbDxp3 redirects to amazon.com/dp/B09B7SB46R. The code B02NbDxp3 is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Destination ASIN B09B7SB46R is the verified product.",
+      "Provided link https://link.amazon/B02NbDxp3 resolves to amazon.com/dp/B09B7SB46R, and to that same destination on every fetch across 2026-11-13 and 2026-11-14. The code B02NbDxp3 is 9 characters and is not a valid Amazon /dp/ ASIN (a direct fetch of https://www.amazon.com/dp/B02NbDxp3 returns Page Not Found), and no public Amazon document binds a link.amazon code to a destination ASIN - so the destination is a verified fact about the link, but is not established as the item the brief named.",
     source: "https://www.amazon.com/dp/B09B7SB46R",
   },
   {
-    item: "Link-code / ASIN mismatch — Product 3",
+    item: "Link-code / ASIN mismatch - Product 3",
     detail:
-      "Provided link https://link.amazon/B00hJ57DV redirects to amazon.com/dp/B08DKYBTPH. The code B00hJ57DV is not a valid Amazon /dp/ ASIN (direct fetch returns “Page Not Found”). Destination ASIN B08DKYBTPH is the verified product.",
+      "Provided link https://link.amazon/B00hJ57DV resolves to amazon.com/dp/B08DKYBTPH, and to that same destination on every fetch across 2026-11-13 and 2026-11-14. The code B00hJ57DV is 9 characters and is not a valid Amazon /dp/ ASIN (a direct fetch of https://www.amazon.com/dp/B00hJ57DV returns Page Not Found), and no public Amazon document binds a link.amazon code to a destination ASIN - so the destination is a verified fact about the link, but is not established as the item the brief named.",
     source: "https://www.amazon.com/dp/B08DKYBTPH",
   },
   {
@@ -630,10 +827,22 @@ const FLAGGED_ROWS = [
     source: ASIN_SOURCE.policies,
   },
   {
-    item: "Home & Kitchen category commission rate (UNVERIFIED)",
+    item: "Rate applied to one specific ASIN (UNVERIFIED)",
     detail:
-      "The official rate schedule requires Associates sign-in. Only the program-level public ceiling “up to 10%” is verified; the category-specific rate is left blank.",
+      "The published Table 1 category rates are public and are shown on the Analysis page (Kitchen 4.50%, Home 3.00%). The rate Amazon actually applies to an individual ASIN lives in the account rate card, which redirects to Amazon sign-in, so that cell is left blank rather than inferred from the band. Left blank in all tables.",
     source: "https://affiliate-program.amazon.com/help/operating/schedule",
+  },
+  {
+    item: "Link-to-ASIN mapping is not documented by Amazon (UNVERIFIED)",
+    detail:
+      "Each supplied link resolves to one product and the destination never changes, but no public Amazon help page or program document states what a link.amazon code maps to. The mapping is therefore observed behaviour, not documented intent. Owner action: confirm it in Associates Central.",
+    source: "https://affiliate-program.amazon.com/help/operating/policies",
+  },
+  {
+    item: "Per-request attribution token rotates between days",
+    detail:
+      "Each link returns a per-link token of the form btn_ref=srctok-<16 hex>. The token is identical on same-day re-fetch and differs between 2026-11-13 and 2026-11-14 for the same link, while the destination ASIN never changed. Recorded so token rotation is not later mistaken for destination instability; the token must not be used as a stable identifier.",
+    source: "https://www.amazon.com/dp/B08DKYBTPH",
   },
   {
     item: "Availability / stock status (UNVERIFIED)",

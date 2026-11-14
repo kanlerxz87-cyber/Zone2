@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categories — Zone2</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <h1>Zone2</h1>
+    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="products.html">Products</a>
+      <a href="categories.html" class="active">Categories</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="flagged.html">Flagged for Review</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="page-head">
+      <h2>Categories</h2>
+      <p>Subpages organised by Amazon's own published commission categories. Every rate is the figure from the official statement, and every row links to that statement.</p>
+    </div>
+
+    <div class="disclosure">
+      <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+    </div>
+
+    <div class="card">
+      <h3>Commission category bands — official rate card (Table 1)</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Transcribed row by row from Amazon's Standard Commission Income Statement. A product is attached to a band only from its own
+        official category path on the Amazon product page. Table 1 splits the Home &amp; Kitchen department into a <strong>Kitchen</strong>
+        row (4.50%) and a <strong>Home</strong> row (3.00%); all three products sit at <em>Kitchen &amp; Dining</em>, which names the
+        Kitchen row. The rate Amazon actually applies to an individual ASIN is read from the account holder's own Associates Central
+        report — it is not published on a public page and is left blank on this site.
+      </p>
+      <div id="categoryBandsTable"></div>
+    </div>
+
+    <div class="card">
+      <h3>Per-category detail pages</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Each band has its own generated page with the rate, the published categories, the per-product economics for that band and how
+        the platform pipeline uses it.
+      </p>
+      <ul style="margin:0;padding-left:20px;font-size:14px;line-height:1.9">
+        <li><a href="pages/categories/index.html">All category subpages — index</a></li>
+        <li><a href="pages/categories/books-kitchen-automotive.html">C-045 · Physical Books, Kitchen, Automotive — 4.50% (the band these products fall in)</a></li>
+        <li><a href="pages/categories/home-toys-outdoors-pets.html">C-03 · Toys, Furniture, Home, Home Improvement — 3.00%</a></li>
+        <li><a href="pages/categories/luxury-beauty-exploration.html">C-10 · Luxury Beauty, Luxury Stores Beauty, Amazon Explore — 10.00%</a></li>
+        <li><a href="pages/categories/music-handmade-video.html">C-05 · Digital Music, Physical Music, Handmade, Digital Videos — 5.00%</a></li>
+        <li><a href="pages/categories/devices-fashion-accessories.html">C-04 · Fire/Kindle devices, Apparel, Watches, Jewelry, Luggage, Shoes — 4.00%</a></li>
+        <li><a href="pages/categories/all-other-categories.html">C-OTH · All Other Categories — 4.00% (default band)</a></li>
+        <li><a href="pages/categories/pc-components-media.html">C-025 · PC, PC Components, DVD &amp; Blu-Ray — 2.50%</a></li>
+        <li><a href="pages/categories/tv-games.html">C-02 · Televisions, Digital Video Games — 2.00%</a></li>
+        <li><a href="pages/categories/grocery-health-console.html">C-01 · Amazon Fresh, Grocery, Health &amp; Personal Care — 1.00%</a></li>
+        <li><a href="pages/categories/zero-rate-exclusions.html">C-00 · Excluded (no Standard Commission Income) — 0.00%</a></li>
+        <li><a href="pages/categories/coach-exclusion.html">C-00b · Coach — 0.00%</a></li>
+      </ul>
+    </div>
+
+    <footer class="site">
+      Verified dataset date: 2026-11-14. Source for every rate on this page:
+      <a href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">Amazon Associates Program Standard Commission Income Statement (Table 1)</a>.
+      Product-to-band assignments are taken from the product's own
+      <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">Amazon product page</a> category path.
+    </footer>
+  </main>
+</div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
