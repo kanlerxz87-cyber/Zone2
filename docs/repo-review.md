@@ -113,3 +113,79 @@ None of the flagged items block publication. All are listed with source links on
 | 8 | Official Amazon marketplace product/search pages (18 × 404, 3 × no-results) | `https://www.amazon.<tld>/dp/<code>`, `https://www.amazon.com/s?k=<code>` |
 
 Verification performed: every URL above was fetched live on 2026-11-13; page titles/status codes recorded in §3 of this document and mirrored on `verification.html`.
+
+---
+
+# Second review — 2026-11-14 (session `bbe4ca47`)
+
+An independent line-by-line pass over the *live* repository, run a day after the integration above. Every
+fact was re-read from the official page rather than from the previous session's notes. Method: fetch each
+cited official page, diff it against what the site publishes, and re-check every control the compliance
+ledger claims exists by grepping the code.
+
+## R1. What was re-verified and held
+
+| Claim under test | Result 2026-11-14 | Official source |
+|---|---|---|
+| Table 1 commission rates (11 rows) | Match exactly, including `Coach 0.00%` and `All Other Categories 4.00%` | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| The 9 published bounty rates | All match (`$12/$12/$12/$12/$12/$12/$2/$5/$0.25`) | same |
+| Trade-In rates, fine-art $200 cap, free-Kindle limit | Match verbatim | same |
+| 24 h session · 89-day cart · 180-day fulfilment · ~60-day payment · US payment minimums · 3-year inactivity | Match Commission Income Statement §1 and §6 | https://affiliate-program.amazon.com/help/operating/policies |
+| Disclosure sentence | Verbatim match with §5 | https://affiliate-program.amazon.com/help/operating/agreement |
+| "Up to 10%" ceiling and ≈60-day payout | Match the program home page | https://affiliate-program.amazon.com/ |
+| Agent Terms (`Agent/[agent name]`, no CAPTCHA circumvention, answer verification prompts truthfully) | Match IP License §4 | https://affiliate-program.amazon.com/help/operating/policies |
+| Price/availability display rule and the "lowest new price" comparison rule | Match Participation Requirements §2(b) | same |
+| Creators API prerequisites (enrolled; ≥10 qualifying sales in the past 30 days; register; credentials) | Match verbatim | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction |
+| PA-API 5 deprecated, returns `403 AccessDeniedException` | Match verbatim, including the error shape | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation |
+| ASIN is a 10-character code | Match verbatim | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| `rel="sponsored"` for affiliate links | Match | https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links |
+| FTC "you can't talk about your experience with a product you haven't tried" | Match | https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers |
+| `/dp/B04G1MEwY`, `/dp/B02NbDxp3`, `/dp/B00hJ57DV` | All three still return Amazon's "Page Not Found" | the three `amazon.com/dp/` URLs |
+| Where the three `link.amazon` links land | Unchanged from 2026-11-13: `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`, each with `plpRedirect=mhFallback` | those three product pages |
+| Chefman 6 Qt specs (8 rows) | All match the manufacturer page | https://chefman.com/products/turbofry-touch-dual-window-air-fryer |
+| Chefman 8 Qt specs | Model `RJ38-SQSS-8T`, 8 Qt/7.57 L, 200–400 °F, 15.4×12.6×13.5 in, 12.8 lb, cETL, 1 year — all match; the 1700 W vs 1000 W conflict stands unresolved | https://chefman.com/products/turbofry-touch-air-fryer-1 |
+| Emeril 26QT specs | Model `4-00675-02A-VN`, 26 qt/24.6 L, 16.9×15.8×14.8 in, 120 V, dual-speed fan, 1-year warranty match | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 |
+| Internal links, all namespaces | 79 pages, 0 broken file references, 0 unresolvable anchors (checked by resolution, not by eye) | — |
+| Secret scan (`AKIA`, `ghp_`, private keys, `sk-`, hard-coded tags) | 0 findings; no Associates tag is committed | — |
+
+## R2. Irregularities found in this pass
+
+| # | Finding | Where | Disposition |
+|---|---|---|---|
+| F-16 | Four compliance rows cited controls that do not exist: `site/compliance-inject.js` (R-01), `assert_no_amazon_marks` (R-11), `lint_disclosure_proximity` (R-02), `lint_claims` (R-06). R-09 also described email/SMS as absent from the schema, while the current policies *permit* solicited email/SMS/DM. | `ledger/compliance.json` | **Fixed** — rows now cite the real functions (`check_disclosure`, `check_marks`, `lint()`), and R-09 states the policy as published with the repo's stricter default labelled as self-imposed. |
+| F-17 | Dashboard KPI said "3 Verified affiliate products" and "11 items flagged"; the ledger says all three submitted items are `UNVERIFIED` and holds 19 flags. Both readings were defensible in isolation and contradictory on the page. | `index.html`, `assets/js/data.js` | **Fixed** — KPI now reads `0 / 3 submitted codes identified` and `3 fallback landing pages verified`; flag count is derived from the data, never typed. |
+| F-18 | CI link check never walked `pages/` (37 pages), and the disclosure/price gate covered 4 of 6 namespaces. The gate would also have failed my own permitted program-economics dollar figures, because it used a bare `\$\d+\.\d{2}` regex while the repo's policy is context-aware. | `.github/workflows/pages.yml` | **Fixed** — `pages/` and the root views added to the link check (with fragment handling), all six namespaces covered by the price/disclosure gate using the same context-aware rule as `tools/validate_data.py`. |
+| F-19 | The published Emeril "conflict" row attributed the disagreement to Amazon-vs-manufacturer. The manufacturer page actually states **24** (description), **25** (spec tile) and **10-in-1** (feature block) — it contradicts itself. | `assets/js/data.js`, `ledger/flags.json` | **Fixed** — all four observations published verbatim, status stays `conflict`, per-value source named. |
+| — | The dashboard claimed "Home & Kitchen category commission rate (UNVERIFIED)" and that the rate card "requires Associates sign-in". **The fixed-rate table is publicly readable**; only the per-ASIN band is unresolved. | `assets/js/data.js` | **Fixed** — the two published bands (Kitchen 4.50%, Home 3.00%) are now shown as verified, with a separate `unverified` row explaining exactly what is missing and why. |
+| — | `TRACKING_ROWS` reported every campaign as `Configured`, `Monthly reconciliation` — while `ledger/campaigns.json` is `EMPTY_BY_DESIGN` and no tag exists. | `assets/js/data.js` | **Fixed** — statuses now read "Not live — blocked" / "Not live — no reports connected", with the rule for when a campaign may be called live written into the file. |
+| — | The dashboard's Flagged page listed 11 reader-facing items but never linked to the 19-flag canonical register. | `flagged.html`, `assets/js/app.js` | **Fixed** — each row carries its ledger flag id and a link to the full text + sources. |
+| — | A candidate finding (asserting a fabricated hands-on-testing line in `content/templates/product_article.md.tmpl`) did **not survive checking**: `grep` finds no such sentence in the template or anywhere in `content/`, `tools/` or the site. It was withdrawn before publication. | — | Recorded here for transparency; not published as a flag. |
+
+## R3. Items deliberately left alone
+
+- **`research-hub/scripts/verify.py`** still reports 7 false failures (F-15). Re-confirmed, not fixed: `research-hub/**` is another session's scope, and the workflow does not call it.
+- **`research-hub/compliance.html` `<title>` leading with an Amazon mark** (F-13) — still a build *warning*, not an error; the rule covers domains/subdomains/tags/usernames, not page titles.
+- **`.github/workflows` publishes the whole repo** including `tools/`, `ledger/` and `tests/` (I-25). Unchanged by design; no secret or personal data is present (secret scan above).
+- **Price, rating, review count, BSR and availability** for the three listings remain blank. They are observable on Amazon's pages, but republishing them requires either Amazon-served link content or Creators API data (Participation Requirements §2(b)), and this workspace has neither — so they stay blank and flagged rather than being copied in.
+
+## R4. Sources added in this pass
+
+| Source | URL | Used for |
+|---|---|---|
+| Associates — Application Review Process | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM | ≥3 qualifying sales in the first 180 days; ≥10 posts; content generally within 60 days |
+| Associates — simple text link / ASIN definition | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC | ASIN = 10 characters; canonical `/dp/ASIN?tag=` |
+| Chefman — TurboFry Touch 6 Qt dual-window | https://chefman.com/products/turbofry-touch-dual-window-air-fryer | 8 specification rows, re-read |
+| Chefman — 8 Qt TurboFry Touch | https://chefman.com/products/turbofry-touch-air-fryer-1 | specification rows, re-read |
+| Emeril Everyday — French Door AirFryer 360, 26 QT | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 | specification rows; the self-contradicting preset count (F-19) |
+
+Manufacturer hosts are now explicitly allow-listed in `tools/validate_data.py` **only** when a source record
+declares `kind="manufacturer"`, so they can never be used to state an Amazon-side fact.
+
+## R5. Verification performed on the result
+
+- `python3 tools/validate_data.py` — **0 errors**; 102 rows, 27 sources, 956 internal links, 0 price findings.
+- `python3 tools/build_site.py --check` — 37 pages, **no drift**.
+- `python3 tools/build_root_views.py --check` — 2 pages, **no drift**.
+- `python3 tests/test_pipeline.py` — **11/11 pass**.
+- `python3 affiliate-lab/scripts/verify_site.py` — 10 pages / 205 rows / 498 links / **0 failures**.
+- Workflow steps simulated locally: link check **0 problems**; disclosure + price across **79 pages** **0 problems**.
