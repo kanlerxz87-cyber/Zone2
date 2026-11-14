@@ -432,3 +432,106 @@ re-read the board before its next push.
 Every value this session publishes is read off a page **this session fetched**. No figure is
 copied from another session's notes, and no blank is filled by reasoning.
  6cf7340 (coordination: claim T27 for session ba8b2d38 (independent close-out))
+
+### T27 — CLOSING RECORD (session `ba8b2d38`, 2026-11-14T18:5x UTC)
+
+**Result: done.** Every gate green on the merged tree; PR opened, merged, Pages deploy confirmed below.
+
+#### What T27 added that no other session had (all independently fetched this session)
+
+| Item | Value | Where |
+|---|---|---|
+| **Valid-10-character-ASIN control** | `link.amazon/B0CDY277D3` (a real ASIN that renders normally at `amazon.com/dp/B0CDY277D3`) returns **the same 404 page as an unknown code** | source **S36**, evidence **E-11**, flag **F-28** |
+| Consequence | The service does **not** accept or truncate ASINs; it looks up its own short-code namespace. The "one-character truncation" reading in E-05 is **withdrawn**. No product conclusion changes; no character was ever guessed. | E-05 corrected in place, F-01 detail rewritten, flag **F-28** |
+| `btn_ref` cross-time re-measure | Three **new** tokens (`704dc575b940a94c`, `76d4981d5f44181b`, `016f4a534eed3621`); destinations unchanged | evidence **E-12**, confirms **F-21** |
+| Third independent confirmation of all three destinations | `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH` | evidence E-01…E-03, E-12 |
+| Official sources re-read | 12 checks (V-51…V-55, V-57, V-59, V-60, V-69, V-70) + the rate table | `ledger/verification.json` |
+| Rate table checked **programmatically** | All 11 bands in `ledger/commission_table.json` matched category-string by category-string against live Table 1. **Zero mismatches.** | V-58 |
+| Two new sources | **S36** (control), **S37** (Associates home — the `up to 10%` ceiling the dashboard publishes had never been registered in the source register) | `ledger/sources.json` |
+| 20 new verification rows | **V-51 … V-70** | `ledger/verification.json` |
+
+#### Irregularity found and fixed
+
+Root `flagged.html` hardcoded a stale register size while the register held more, so the published page
+understated the register — the same defect class as **F-26**, but in prose, which no gate compared against the
+ledger. Fixed by rendering the count from data, and closed with a new gate,
+`tools/validate_data.py::check_no_typed_flag_counts`, which fails the build if a typed register size reappears
+across `pages/**`, the root pages, `README.md` and `EXECUTIVE_SUMMARY.md`. **Negative-tested** on both the HTML
+and the markdown surfaces: reintroducing the stale sentence turns the build red.
+
+The same drift was found in the hand-written docs and corrected: `README.md` advertised stale check/source counts
+and `EXECUTIVE_SUMMARY.md` carried *868 internal links* against an actual **977**, plus three `data/*.json` paths
+pointing at a directory that no longer exists (the ledger moved to `ledger/`).
+
+**Scope note (deliberate).** The gate is narrow on purpose. An "F-01 … F-NN" **range** check was tried first and
+**rejected**: pages legitimately cite a *subset* of flags that way (`index.html` renders `<code>F-01…F-03</code>`
+in a table cell), which produced a false positive. Only a count phrase is unambiguous enough to fail a build on.
+The check also skips `pages/flags.html` (which quotes historical counts while narrating how F-17/F-26 were found)
+and the companion namespaces (`affiliate-lab/` publishes its own separate register).
+
+#### Reconciliation with concurrent sessions (nothing discarded)
+
+`main` advanced `6a90dfc` → `b22c498` (PRs #42…#46) while T27 was running. Two overlaps:
+
+1. **Flag-ID collision.** T27's control finding was written up locally as **F-27**; session `b38cc982` had
+   already published a **different F-27** (*research-hub/scripts/build.py deletes its own output*). Theirs
+   reached `main` first and is **left untouched**. T27's finding is **renumbered to F-28** and its internal
+   cross-references (E-05, E-11, F-01 detail, V-68, the docs) updated. **Both flags are in the register — 28
+   total, unique ids, none lost.**
+2. **Overlapping de-drift fix.** T26 had already derived the hard-coded count in `index.html` and `flagged.html`
+   and added its own typed-count gate over those two files. T27 **keeps T26's implementation as the single one**
+   (its duplicate `app.js` handler was removed rather than left as dead code) and contributes the gate covering
+   the surfaces T26's did not: the generated subpages, the remaining root pages, and both hand-written docs.
+   Both gates run; they cover different files and neither subsumes the other.
+
+`COORDINATION.md` itself conflicted during the mandatory rebase and was resolved **additively** — the records
+already on `main` appear first, T27's claim follows verbatim, with a merge note explaining the collision.
+
+#### Verification performed (this session, live fetch — nothing carried forward)
+
+| Check | Result | Source |
+|---|---|---|
+| Disclosure sentence, OA §5 | **Verified verbatim** | [S01](https://affiliate-program.amazon.com/help/operating/agreement) |
+| OA "Updated: October 15, 2025" | **Verified** | [S01](https://affiliate-program.amazon.com/help/operating/agreement) |
+| Policies "Updated: April 14, 2026" | **Verified** | [S02](https://affiliate-program.amazon.com/help/operating/policies) |
+| Session 24 h / cart 89 d / ship-pay 180 d | **Verified verbatim** | [S02](https://affiliate-program.amazon.com/help/operating/policies) |
+| Payment ≈60 d; US minimums 10 / 10 (cap 2,000) / 100 + 15 USD | **Verified** | [S02](https://affiliate-program.amazon.com/help/operating/policies) |
+| 3-year inactivity withholding, 7 days' notice | **Verified** | [S02](https://affiliate-program.amazon.com/help/operating/policies) |
+| Double-claim limitation | **Verified** | [S02](https://affiliate-program.amazon.com/help/operating/policies) |
+| Agent Terms — `Agent/[name]`, no CAPTCHA circumvention, answer truthfully | **Verified verbatim** | [S30](https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20IP%20License) |
+| Table 1, all 11 bands | **Verified — 0 mismatches** (programmatic diff) | [S28](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| `up to 10%` ceiling | **Verified** | [S37](https://affiliate-program.amazon.com/) |
+| ASIN = 10-digit code | **Verified verbatim** | [S24](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) |
+| Official tagged link format `…/dp/ASIN/ref=nosim?tag=…` | **Verified** | [S24](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) |
+| `/dp/B04G1MEwY`, `/dp/B02NbDxp3`, `/dp/B00hJ57DV` | **Page Not Found** (all three) | [S16](https://www.amazon.com/dp/B04G1MEwY) · [S17](https://www.amazon.com/dp/B02NbDxp3) · [S18](https://www.amazon.com/dp/B00hJ57DV) |
+| Unknown-code control `link.amazon/B00TEST12` | **404** — reproduced | [S32](https://link.amazon/B00TEST12) |
+| **Valid-ASIN control** `link.amazon/B0CDY277D3` | **404** — new control | [S36](https://link.amazon/B0CDY277D3) |
+| Three supplied links | destinations unchanged, tokens new | [S33](https://link.amazon/B04G1MEwY) · [S34](https://link.amazon/B02NbDxp3) · [S35](https://link.amazon/B00hJ57DV) |
+
+#### Gates on the merged tree (all run this session, after rebase)
+
+| Gate | Result |
+|---|---|
+| `tools/validate_data.py` | exit 0 — **28 flags · 197 rows · 37 sources · 977 internal links · 0 errors · 0 warnings** |
+| `tests/test_pipeline.py` | **14/14** |
+| `tools/build_site.py --check` | 37 built · 0 drifted |
+| `tools/build_root_views.py --check` | 0 drifted |
+| `tools/build_root_data.py --check` | up to date |
+| `tools/build_marketing.py --check` | 0 drifted |
+| `tools/audit_site.py` | 94 pages · **5/5** (fragments, spec_sources, prose_counts, namespaces, disclosure) |
+| `affiliate-lab/scripts/verify_site.py` | 0 failures |
+| `revalidation/scripts/verify.py` + `build.py --check` | 0 failures · 0 drifted |
+| `marketing/scripts/verify_marketing.py` | 0 failures |
+| `research-hub/scripts/verify.py` + `build.py --check` | 0 failures · 0 drifted |
+| `node --check` (`data.js`, `app.js`) | OK |
+| Global internal-link sweep (all namespaces) | **94 pages · 1,772 links · 0 broken** |
+
+#### Open items — owner action, do not block
+
+Unchanged and **not** inferable: (1) **identity** — no public Amazon document binds a `link.amazon` code to a
+product, so the three products are published as *the product this link resolves to*, never *the product the brief
+named* (F-03, F-06); (2) **economics** — none of the three supplied links carries an Associates `tag`, so as
+supplied they cannot attribute a sale or earn a commission (F-24); (3) **data** — price, rating, review count,
+availability, sales rank and the per-category commission band are left blank. All three resolved products sit
+under a *Home & Kitchen › … › Air Fryers* path where Table 1 publishes **both** `Kitchen 4.50%` and
+`Home 3.00%`; which band applies is an authenticated catalog lookup, so it is **not** inferred.
