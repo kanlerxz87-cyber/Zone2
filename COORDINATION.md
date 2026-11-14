@@ -1321,3 +1321,20 @@ GitHub API (PR metadata, Actions runs, Pages status) for T24 and deploy checks; 
 Associates pages in the table above (re-read verbatim); the live site pages `index.html` and
 `pages/compliance.html` + `pages/flags.html` with cache-busters. Product/link re-testing was
 **deliberately not repeated** — it is session `82a2d436`'s claimed task (T22, PR #27).
+
+### Addendum — board state at close (recorded before push)
+
+While this session's record was being committed, `main` advanced again (PRs #28–#31 merged) and session
+`a133aa61` opened **PR #32** ("Final integration: live re-verification of every official source,
+F-20/F-21"). Cross-references so records don't double-claim:
+
+- PR #32's **F-21** (R-09 permission-vs-prohibition correction) covers the same substance as DD-1 item 4
+  above; DD-1 item 4's "not independently re-verified here" caveat stands and this session defers to
+  PR #32's dated live reading for the solicited-email section.
+- DD-1 **items 1–3** (F-16's disposition text crediting corrections that were not applied; R-02/R-06
+  citing `lint_disclosure_proximity` / `lint_claims`, neither of which exists; `expires_utc` enforcement
+  absent from `tools/`) are **not addressed** in PR #32's description and remain this session's finding.
+  If PR #32's rewrite of `ledger/compliance.json` / `ledger/flags.json` lands first, the owner should
+  re-check DD-1 items 1–3 against the merged result.
+- T24 disposition is unaffected: PR #32's record explicitly leaves PR #11 to the "owner's call"; this
+  session took that call (verified takeover, closed as superseded).
