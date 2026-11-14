@@ -6,6 +6,15 @@ exclude price/rating markup), so title, brand and category are verified from off
 price, rating, review count, availability and the category commission rate could not be confirmed and
 were left blank + flagged.
 
+> **Superseded in part (2026-11-14, session `a6f70a13`, T26).** The "Resolved & verified" verdicts in §1 below
+> confirm only that each short link lands on an Amazon product page. They do **not** establish that a supplied
+> code is the product the brief names. Re-check on 2026-11-14: each supplied code is 9 characters, and Amazon's
+> Associates help defines an ASIN as "the 10-digit code that Amazon uses to denote specific products"
+> ([source](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC)). Each short link lands on a
+> different product page carrying `plpRedirect=mhFallback`. The mapping is flagged for confirmation (flag F-03).
+> The primary site's `ledger/flags.json` and `docs/review-2026-11-14.md` (AUD-02, AUD-03) are the current reading.
+> The table below is kept unchanged as the historical record.
+
 ## 1. Product link resolution (official source: amazon.com)
 
 | Provided link | Resolved destination | Verified title (from official Amazon page) | Brand | Category | Verdict |

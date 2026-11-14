@@ -2,7 +2,8 @@
 
 Project: **Zone2 — AI-powered Amazon Affiliate Marketing Platform**
 Repo: `kanlerxz87-cyber/Zone2`
-**Last updated:** 2026-11-14 (UTC) — **final integration by session `arena/4338f55e-zone2` (T23)**.
+**Last updated:** 2026-11-14 (UTC) — **T23 close-out by session `arena/b38cc982-zone2`**: PR #41 merged
+(`6a90dfc5`), Pages deploy confirmed, independent re-verification of every official source green, T23 marked done.
 
 > **Task-ID note (2026-11-14).** Five sessions were active at once and the board was edited
 > append-only by each, so a few IDs were reused. The numbering below is the reconciled one:
@@ -26,7 +27,8 @@ Repo: `kanlerxz87-cyber/Zone2`
 | `arena/bbe4ca47-zone2` | merged to `main` via PR #22 | Second verification pass — corrected four non-existent compliance controls, added F-16…F-19, closed two CI gaps, generated root Verification + Sources views | merged |
 | `arena/82a2d436-zone2` | merged to `main` via PR #27 | T22 — independent control-based re-test of the three supplied `link.amazon` links | merged |
 | `arena/83194da0-zone2` (T21b) | `arena/83194da0-zone2` | Root-dataset consistency pass: blanked the root `assets/js/data.js` product attributes, fixed the content/tracking captions | merged into this integration |
-| `arena/4338f55e-zone2` (`4338f55e`, **this session**) | `arena/4338f55e-zone2` | **T23 — final integration.** Reconciles every published surface onto ONE reading of the supplied-link evidence, publishes the decisive bogus-code control, re-verifies the combined tree line by line, runs every gate, PR → merge → deploy | in progress |
+| `arena/4338f55e-zone2` (`4338f55e`) | `arena/4338f55e-zone2` | **T23 — final integration.** Reconciles every published surface onto ONE reading of the supplied-link evidence, publishes the decisive bogus-code control, re-verifies the combined tree line by line, runs every gate, PR → merge → deploy | done — PR #38 merged into `main` (carried by PR #32→#41 lineage); see records below |
+| `arena/b38cc982-zone2` (`b38cc982`, **this session**) | `arena/b38cc982-zone2` | **T23 close-out.** Records the PR #41 merge + Pages deploy result, re-verifies every official source independently (B-01…B-13), re-runs all gates, confirms no open PRs/issues, marks T23 done | done — see the session record at the end of this file |
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
 | `arena/dd87f326-zone2` (dd87f326) | merged to `main` via PR #34 | T24 stale-PR #11 resolution + T25 independent verification-only audit | finished — merged (PR #34) |
@@ -66,11 +68,12 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T20 | Re-verify supplied links + correct landing-page overclaim (root `index.html` said the 3 products were "identified and verified"; re-check shows `mhFallback` redirects, 9-char codes) | done | `arena/dc52402c-zone2` | `index.html` (text + KPI only), `COORDINATION.md` |
 | T21b | Final consistency integration: reconcile root `assets/js/data.js` + root page captions + `docs/executive-summary.md` §3 with the rigorous ledger (0 of 3 identified; fallback destinations = evidence only; content Blocked F-06; tracking Planned F-07). Root `index.html`/`README.md`/`EXECUTIVE_SUMMARY.md` were already honest; `data.js` still populated brand/title/category from fallbacks and marked content "Ready"/tracking "Configured". | done (merged into T23) | `arena/83194da0-zone2` | `assets/js/data.js`, `assets/js/app.js`, `products.html`, `content.html`, `tracking.html`, `analysis.html`, `docs/executive-summary.md`, `COORDINATION.md` |
 | T22 | Independent, control-based re-test of the three supplied `link.amazon` short links and their `/dp/` destinations. Resolves the open conflict between the "fallback / unrelated page" reading (F-03, F-12, AF-06) and the "stable per-link tracked destination" reading (T20 / `c6e94e8d`, C-1…C-3). Verdict per link; no product attributes copied. | done | `82a2d436` | `docs/verification-82a2d436.md` (new), this record only |
-| T23 | **Final integration (this session)** — merge `main`, PR #22, #25, #26, #27 into one tree; settle the F-03/F-12 wording against the **bogus-code control** (an unknown `link.amazon` code returns a 404, so the supplied codes are honoured lookups, not ignored); publish the cross-time `btn_ref` rotation finding; align every published surface (`ledger/`, `assets/`, root `*.html`, `revalidation/`, `affiliate-lab/`, `docs/`, `README.md`) to that single reading; regenerate `pages/`; run every gate; PR → merge → deploy | in progress | `arena/4338f55e-zone2` | `COORDINATION.md`, `ledger/**`, `assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`, `affiliate-lab/**`, `.github/workflows/pages.yml` |
+| T23 | **Final integration** — merge `main`, PR #22, #25, #26, #27 into one tree; settle the F-03/F-12 wording against the **bogus-code control** (an unknown `link.amazon` code returns a 404, so the supplied codes are honoured lookups, not ignored); publish the cross-time `btn_ref` rotation finding; align every published surface (`ledger/`, `assets/`, root `*.html`, `revalidation/`, `affiliate-lab/`, `docs/`, `README.md`) to that single reading; regenerate `pages/`; run every gate; PR → merge → deploy | done — PR #38 merged; lineage carried through to PR #41 | `arena/4338f55e-zone2` | `COORDINATION.md`, `ledger/**`, `assets/**`, root `*.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/**`, `revalidation/**`, `affiliate-lab/**`, `.github/workflows/pages.yml` |
 
 | T24 | Resolve stale PR #11 (`arena/ec67c431-zone2`, open 2026-11-13 23:05, no commits since, `CONFLICTING`): independently verify its facts (PR #7 merge commit + deploy), record them on the board, close the PR as superseded | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record), PR #11 close operation |
 | T25 | Independent verification-only audit of `main` + the live GitHub Pages site: run every repo gate, live-fetch published pages with cache-buster, spot-verify official sources; findings recorded coordination-only | done | `arena/dd87f326-zone2` | `COORDINATION.md` (append-only record) — no data/page/tool files touched |
-| T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | in progress | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
+| T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | done — PR #41 merged 2026-11-14T11:27:15Z (`6a90dfc5`); CI + Pages deploy success; close-out record by `b38cc982` at the end of this file | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
+| T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR #42, merged 2026-11-14T18:32:45Z `6f2f92c`) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -1824,6 +1827,197 @@ then added a *different* F-22 (flag-count KPI) on `main` after `4338f55e`'s last
 `4338f55e`'s ids and renumbered the incoming KPI flag to **F-26**, recorded in `ledger/flags.json`'s note.
 `assets/js/data.js`'s `CANONICAL_FLAG_COUNT` and the `Flagged` page counts were set to 26 and are now
 derived by `tools/build_root_data.py`, so they cannot drift again.
+
+
+---
+
+## Session record — `a6f70a13` (`arena/a6f70a13-zone2`, T26) — preserved in full
+
+> **Merge note (session `808a6840`).** Both sessions appended a T26 record at the end of this file, which is the one place an append-only board can still collide. Per the board convention, **neither record is discarded**: session `a6f70a13`'s record appears first (below), then `808a6840`'s. The two sessions fixed overlapping ground and the reconciliation is recorded at the end of `808a6840`'s record.
+
+---
+
+## Session record — `a6f70a13` (`arena/a6f70a13-zone2`, T26)
+
+### Claim (recorded 2026-11-14T18:30Z, before any edit)
+
+Board state at claim: `main` = `6a90dfc` (merge of PR #41, T23 by `cdfaeefe`). `gh pr list --state open` returns no open PRs. No task is `in progress` other than this claim. Pages API: `status: built`, source `main` `/`; `Build, verify and deploy` and `pages build and deployment` succeeded on the `6a90dfc` push.
+
+Why a claim is needed: the independent audit `docs/review-2026-11-14.md` (session `5c06fb5e`) left AUD-01 (residual), AUD-02, AUD-03, AUD-04 and AUD-05 open as cross-scope requests. Re-reading `research-hub/summary.html` on this tree shows AUD-02/AUD-03 are still true: the page states that the three short links "resolved successfully to canonical Amazon ASINs" and that the three destinations "form a coherent niche", while the primary site (`pages/flags.html` F-03, `ledger/flags.json`) says the mapping is not established. `research-hub/scripts/verify.py` still exits with 7 false errors (AUD-04). No other session holds these files.
+
+Scope of this claim: the files listed in the T26 row only. The primary-site ledger (`ledger/**`) and `pages/**` are not edited.
+
+### Work done (T26)
+
+| Finding | What was wrong on the tree | Fix |
+|---|---|---|
+| AUD-02 / AUD-03 | `research-hub/summary.html` (committed) still said the three links "resolved successfully to canonical Amazon ASINs" and formed "a coherent niche". The generator's own source, `docs/executive-summary.md`, had already been corrected, so the committed HTML was a stale copy. `start.html`, `404.html`, `overview.html` and `products.html` carried the same superseded framing ("Three products, one verified data trail", "three Amazon products, verified"). | `research-hub/scripts/build.py` could not run (it read `research-hub/docs/`, which moved to the repo-root `docs/`), so the generated pages had drifted from it. Fixed the docs path; ported the reviewed `start.html` text and the `404.html` back-link into the generator; reworded the overview and product-listing headings to "resolved destinations … mapping flagged (F-03)". Regenerated: `summary.html`, `overview.html`, `products.html` changed; all other generated pages byte-identical. |
+| AUD-03 (historic log) | `docs/verification-log.md` §1 still labels the three destinations "Resolved & verified". | Added a dated "Superseded in part" note above the table, citing the Associates ASIN definition. The table is left as the historical record. |
+| AUD-04 | `research-hub/scripts/verify.py` failed with 7 false errors (it assumed the hub was the Pages root and that the dashboard files sat in `research-hub/`). CI never ran it. | Verifier now treats `research-hub/` as one site inside the repo: targets inside it must be generated; targets outside it must be one of the two sibling sites (`index.html`, `zone2/index.html`) and exist. Required-page list updated to the hub's real files. Exit 0, 0 errors. CI gets a new step: regenerate `research-hub/` and fail on any `git diff`, then run the verifier. |
+| AUD-01 (residual) | Root `index.html` KPI read "1 Niche of the resolved destinations — Home & Kitchen air fryers". | Relabelled: "Shared category of the 3 resolved destinations (Air Fryers) — not a validated niche". |
+
+### Sources (official; fetched 2026-11-14)
+
+| Claim | Source |
+|---|---|
+| ASIN is "the 10-digit code that Amazon uses to denote specific products" | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| Supplied short link 1 → `amazon.com/dp/B0CDY277D3` with `plpRedirect=mhFallback` (breadcrumb Home & Kitchen › … › Air Fryers) | https://link.amazon/B04G1MEwY |
+| Supplied short link 2 → `amazon.com/dp/B09B7SB46R` with `plpRedirect=mhFallback` (breadcrumb ends Air Fryers) | https://link.amazon/B02NbDxp3 |
+| Supplied short link 3 → `amazon.com/dp/B08DKYBTPH` with `plpRedirect=mhFallback` (breadcrumb ends Air Fryers) | https://link.amazon/B00hJ57DV |
+| The three supplied codes are 9 characters each (B04G1MEwY, B02NbDxp3, B00hJ57DV) | counted from the submitted text |
+
+### Gates (run on the committed tree `ae6817e`, detached worktree, replaying `.github/workflows/pages.yml` steps 2–18 in order)
+
+| Step | Result |
+|---|---|
+| Primary files, internal links, `data.js`/`app.js` syntax, data files parse | PASS |
+| Disclosure + no-price sweep (85 pages) | PASS |
+| affiliate-lab (10 pages, 206 rows, 502 links, 0 failures) | PASS |
+| revalidation rebuild (`--check`) and gate (73 rows, 0 failures) | PASS |
+| **Research hub: regenerate + `git diff --exit-code`, then `verify.py`** (new step) | PASS — 0 drift, 0 errors |
+| marketing rebuild + gate (9 pages, 48 rows, 0 failures) | PASS |
+| subpages rebuild (37, 0 drifted) + gate | PASS |
+| root evidence views rebuild (0 drifted) | PASS |
+| platform guard tests | 13/13 PASS |
+| subpage disclosure / no-price (37 subpages) | PASS |
+
+### Irregularities (not blocking; carried forward)
+
+- **AUD-05 — still open.** `affiliate-lab/scripts/verify_site.py` checks that a row contains an external URL, not that the URL supports the value. A 404 `/dp/` link is accepted as a source. Not changed in this session: fixing it means changing what the affiliate-lab rows mean, which needs its owner's decision. Recorded here and in the PR body.
+- **Overclaim left in place on purpose:** the research-hub Method page says the site "links to the canonical product pages". Those are the destinations, not validated product pages for the supplied codes; the same page carries the F-03 finding.
+- **Observed, unchanged:** the subpage gate printed a title-trademark note for `research-hub/compliance.html` ("<title> starts with an Amazon mark"). The gate passed; no change was made to that title in this session.
+- **Process note.** The generator could not run on this tree (wrong docs path), and CI never ran it or the hub verifier, so drift between `build.py` and the committed HTML went undetected. After this change the generator runs, and the CI step fails on any drift. Before the change, the only generator-vs-committed differences were the ones this session intended to fix (`start.html`/`404.html` hand-edits newer than the generator, and a `summary.html` copy older than `docs/executive-summary.md`).
+
+### PR and merge
+
+| Item | Value |
+|---|---|
+| PR | #42 — https://github.com/kanlerxz87-cyber/Zone2/pull/42 — `arena/a6f70a13-zone2` → `main` |
+| Merge | `gh pr merge 42 --merge` · 2026-11-14T18:32:45Z · merge commit `6f2f92c87d6de67158cff2d0e9375d9c8f424ace` |
+| PR check (`Build and verify`) | success (run 43627138927) |
+| Post-merge `main` | `Build, verify and deploy` success (run 43627195226) · `pages build and deployment` success (run 43627194217) |
+| Pages API | `status: built`, source `main` `/`, `https://kanlerxz87-cyber.github.io/Zone2/` |
+| Live read (fetched 2026-11-14, `?v=6f2f92c`) | `research-hub/overview.html` title "three resolved Amazon listings" and the F-03 scope note; `research-hub/summary.html` carries the superseded-mapping correction block; root `index.html` KPI reads "Shared category … — not a validated niche" |
+| T26 | **done** |
+
+**Left open, on purpose, and published for owner review:** AUD-05 (affiliate-lab row check does not test source support); the brief-to-product mapping (F-03, owner action O-1: confirm intended ASINs and Associates tag). Also noted but not changed: the docs executive-summary header still reads "Data captured: 2026-11-13" and "Branch: arena/6602723a-zone2" (it is a historical capture header).
+---
+
+## Session record — `b38cc982` (`arena/b38cc982-zone2`, 2026-11-14 UTC)
+
+**Branch note:** Arena pins this session to `arena/b38cc982-zone2`; per the convention every prior
+session documented, this deviates from `session-<id>/<task>` naming because the platform fixes the
+branch. All edits by this session are to `COORDINATION.md` only (board close-out); nothing else is
+touched.
+
+### Claim & scope (recorded 2026-11-14 ~18:30 UTC)
+
+Board state at claim: `main` = `6a90dfc5` (merge of PR #41); **0 open PRs, 0 open issues**; the last
+commit on `main` is the PR #41 merge itself, and the three live T23 board rows still read `in progress`.
+
+**Concurrency note (logged per the coordination rules).** While this record was being prepared, session
+`a6f70a13` merged PR #42 (T26 — audit-finding fixes; merge commit `6f2f92c87d6de67158cff2d0e9375d9c8f424ace`,
+2026-11-14T18:32:45Z) and opened PR #43 (their follow-up T26 record, `COORDINATION.md` only), which then
+merged as `358a39d` (merge of PR #43) before this session's PR was pushed. Rebasing this session's
+close-out commit onto their commits produced conflicts in `COORDINATION.md` both times (their new T26
+board row + session record vs. this session's T23 status cells + session record, and their filled-in
+"PR and merge" section vs. the placeholder line). **Each resolution kept both sides in full** — nothing
+of the other session's work was discarded: their T26 row, status cell and record stand as they last
+authored them (they record the PR #42 merge result themselves in PR #43), and this session's rows and
+record were re-applied. All gates were re-run on the final rebased tree.
+No other session holds an active claim (every session registry entry above ends in `merged` / `done`).
+This session claims **T23 close-out** and edits **only** this record plus the three T23 status cells and
+the session-registry/header lines. Historical narrative records are left untouched (append-only rule).
+
+### Post-merge state verified (2026-11-14, by this session)
+
+| Item | Result | Evidence |
+|---|---|---|
+| PR #41 (T23 final integration) | **MERGED** 2026-11-14T11:27:15Z · merge commit `6a90dfc5a6c47265c6d120588a7cc454a5348758` = current `main` HEAD | `gh pr view 41` |
+| PR #42 (T26, session `a6f70a13`, merged during this record) | **MERGED** 2026-11-14T18:32:45Z · merge commit `6f2f92c87d6de67158cff2d0e9375d9c8f424ace` | `gh pr view 42` |
+| PR #43 (T26 follow-up record, session `a6f70a13`) | **MERGED** before this session's PR was pushed · `main` = `358a39d` | `gh pr view 43` |
+| CI on `main` after merge | `Build, verify and deploy` — **success** for both the #41 push (run 43590092468) and the #42 push (run 43627195226) | Actions history |
+| GitHub Pages deploy | `pages build and deployment` — **success** for both pushes (runs 43590092096 and 43627194217); Pages API reports `status: built`, source `main` / `/`, HTTPS enforced | Actions history + `gh api repos/kanlerxz87-cyber/Zone2/pages` |
+| Live site serves the merged content | https://kanlerxz87-cyber.github.io/Zone2/ renders the current dashboard (26-flag register, corrected supplied-link framing, generated verification/sources views) | live page fetch |
+| Open work remaining | none — `gh pr list --state open` and `gh issue list` both empty | GitHub API |
+
+### Independent verification pass — every fact re-read from the official page by this session
+
+These checks were performed fresh in this session with the agent's page-fetch tool (not carried
+forward from any earlier session's notes).
+
+| # | Claim as published on the site | Verdict | Source (fetched live) |
+|---|---|---|---|
+| B-01 | Operating Agreement "Updated: October 15, 2025" | **Verified** | https://affiliate-program.amazon.com/help/operating/agreement |
+| B-02 | §5 mandatory disclosure — "you must clearly and prominently state … 'As an Amazon Associate I earn from qualifying purchases.'" | **Verified verbatim** (§5 "Identifying Yourself as an Associate") | same |
+| B-03 | Program Policies "Updated: April 14, 2026" | **Verified** | https://affiliate-program.amazon.com/help/operating/policies |
+| B-04 | Session ends at 24 h / order, cart orders ≤ 89 days after click-through, ship+pay ≤ 180 days | **Verified** (Commission Income Statement §1(b)–(c)(iii)) | same |
+| B-05 | Table 1 fixed rates — all 11 bands transcribed correctly: Luxury Beauty/Explore 10.00 %, Music/Handmade/Digital Videos 5.00 %, Books/Kitchen/Automotive 4.50 %, devices & fashion 4.00 %, Toys/Furniture/Home/… 3.00 %, PC/PC Components/DVD 2.50 %, TVs/Digital Video Games 2.00 %, Fresh/Consoles/Grocery/Health 1.00 %, zero-rate band 0.00 %, Coach 0.00 %, All Other Categories 4.00 % | **Verified band by band** against `ledger/commission_table.json` | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| B-06 | Bounty events (Prime Free Trial / Paid Membership $12.00, Prime Video trial $2.00, first stream $5.00, stream $0.25 …) | **Verified** | same |
+| B-07 | "ASIN is the 10-digit code that Amazon uses to denote specific products" (basis of F-01) | **Verified verbatim** | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| B-08 | Qualifying Special Link format `http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID` | **Verified verbatim** | same |
+| B-09 | Commission ceiling — "Earn up to 10% in associate commissions from qualifying purchases and programs" | **Verified verbatim** | https://affiliate-program.amazon.com/ |
+| B-10 | Payment timing — "Commission income is paid approximately 60 days after the end of the month in which it was earned" | **Verified verbatim** (FAQ) | same |
+| B-11 | Agent Terms (IP License §4): user agent "Agent/[agent name]"; no concealment, no CAPTCHA circumvention; respond truthfully to human/computer prompts | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/policies |
+| B-12 | Supplied link 1 re-test: `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3` (title "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows…"), markers `plpRedirect=mhFallback` + `lv=shuf`, **no Associates tag**, `btn_ref=srctok-704dc575b940a94c` | **Destination stable; token rotates** — a 4th distinct same-day token (prior: …1e229870efde5acf, …1f979f303a4b5691, …0e6ecbe28931aafd). Confirms F-21 again; tag still absent (F-24) | https://link.amazon/B04G1MEwY |
+| B-13 | Unknown-code control re-test: `https://link.amazon/B00TEST12` → `amzlinks.in` 404 "You've clicked on an invalid URL." | **Reproduced** — supplied codes are honoured lookups, not ignored tokens | https://link.amazon/B00TEST12 |
+
+**Result: no discrepancies.** Every published program fact matches the official page text, and the
+commission-ledger transcription matches Table 1 band for band.
+
+### Repo gates re-run on `main` @ `6a90dfc5` (all green)
+
+| Gate | Result |
+|---|---|
+| `tools/validate_data.py` | exit 0 · 26 canonical flags · 173 rows · 35 sources · 976 links · 0 price findings · only the pre-existing F-13 title warning |
+| `tools/build_site.py --check` | 37 built · 0 drifted |
+| `tools/build_root_views.py --check` | 0 drifted |
+| `tools/build_root_data.py --check` | up to date |
+| `tests/test_pipeline.py` | 13/13 |
+| `node --check` `assets/js/data.js` + `app.js` | OK |
+| `affiliate-lab/scripts/verify_site.py` | 10 pages · 206 rows · 502 links · 0 failures |
+| `revalidation/scripts/verify.py` | 6 pages · 73 rows · 168 refs · 0 failures |
+| `revalidation/scripts/build.py --check` | 0 drifted |
+| `marketing/scripts/verify_marketing.py` | 9 pages · 48 spec rows · 0 failures |
+| Flag register | `ledger/flags.json`: 26 entries, unique ids F-01…F-26; matches the live-site KPI |
+
+### Sources used by this session (all official)
+
+| Source | URL |
+|---|---|
+| Associates Program Operating Agreement | https://affiliate-program.amazon.com/help/operating/agreement |
+| Associates Program Policies (incl. Commission Income Statement, IP License §4 Agent Terms) | https://affiliate-program.amazon.com/help/operating/policies |
+| Standard Commission Income Statement (Table 1 + bounties) | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| "How do I build a simple text link…" (ASIN definition + tagged link format) | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| Associates Central home (10 % ceiling, ~60-day payment FAQ) | https://affiliate-program.amazon.com/ |
+| Supplied link 1 (re-test) | https://link.amazon/B04G1MEwY |
+| Unknown-code control (re-test) | https://link.amazon/B00TEST12 |
+| GitHub API (PR #41 state, Actions runs, Pages status, open PR/issue counts) | https://api.github.com/repos/kanlerxz87-cyber/Zone2 |
+
+### Irregularities
+
+- **No new irregularities.** The standing register F-01…F-26 is unchanged and published on
+  `flagged.html` / `pages/flags.html`. B-12's fresh `btn_ref` value adds a fourth same-day
+  confirmation of the already-recorded F-21 (token rotates, destination stable); it is logged here as
+  an observation, not a new flag. No other session's file was edited.
+- **Concurrent-merge conflicts (resolved, nothing discarded).** Two rebases onto `main`
+  (`6f2f92c` = PR #42, then `358a39d` = PR #43, both by `a6f70a13`) conflicted with this record in
+  `COORDINATION.md`; each was resolved by keeping both sessions' rows and records in full, as logged in
+  the concurrency note above. `a6f70a13`'s T26 status cell and "PR and merge" record are theirs and were
+  carried through as they wrote them (PR #43 records the PR #42 merge result themselves).
+- **Carried forward by reference:** T26/AUD-05 (`affiliate-lab/scripts/verify_site.py` accepts any
+  external URL as a source) remains open per `a6f70a13`'s record — it needs the affiliate-lab owner's
+  decision on what its rows mean; not touched here.
+
+### Close-out
+
+- The three live T23 board rows are marked **done** (status cells updated in this commit; narrative
+  records untouched). With this, every task on the board — T1…T26 and all session-local registers —
+  is closed, apart from T26's AUD-05 which is carried by its owner session's record.
+- Terminal state: **site live** at https://kanlerxz87-cyber.github.io/Zone2/ · all 43 PRs merged or
+  closed · 0 open PRs/issues · all gates green · flag register published.
+- This record closes the coordination loop for T23; no further integration records follow it. This
+  PR's own merge and the resulting Pages deploy are visible in the repository's git and Actions history.
 
 ---
 

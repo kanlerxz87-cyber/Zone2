@@ -215,6 +215,12 @@ jobs:
       - name: Rebuild revalidation pages and confirm committed output is current
         run: python3 revalidation/scripts/build.py --check
 
+      - name: Research hub — committed output matches its generator, and the hub verifier passes
+        run: |
+          python3 research-hub/scripts/build.py
+          git diff --exit-code -- research-hub/ || { echo "research-hub output drifted from scripts/build.py"; exit 1; }
+          python3 research-hub/scripts/verify.py
+
       - name: Revalidation gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
         run: python3 revalidation/scripts/verify.py
 

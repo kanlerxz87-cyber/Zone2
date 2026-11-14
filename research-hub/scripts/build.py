@@ -234,9 +234,11 @@ def build_index() -> str:
     return f"""
 <section class="hero">
   <p class="hero__eyebrow">Amazon Associates · research and disclosure</p>
-  <h1>Three products, one verified data trail</h1>
+  <h1>Three resolved destinations, one verified data trail</h1>
   <p class="hero__lede">
-    This site documents three Amazon affiliate products. Every published value is traced to an
+    This site documents the three Amazon listings that the three supplied short links resolve to.
+    Whether each supplied code is the product the brief names is not confirmed (flag F-03, primary
+    site). Every published value is traced to an
     official Amazon or manufacturer page. Values that could not be confirmed are left blank and
     listed for review rather than guessed. Prices, ratings and conversion figures are not
     published as facts because they change constantly and Amazon's own rules restrict how they
@@ -520,7 +522,8 @@ def build_products() -> str:
 
     return f"""
 <h1>Products</h1>
-<p class="lede">Three listings, chosen from the links supplied. Each row below counts only
+<p class="lede">Three listings that the supplied links resolve to. The code-to-product mapping is
+flagged for confirmation (F-03). Each row below counts only
 attributes with a named official source. Conflicts and gaps are counted, not hidden.</p>
 
 <table class="grid"><caption>Summary</caption>
@@ -983,7 +986,7 @@ owner can decide. Each item links to the page it came from.</p>
 
 
 def build_summary() -> str:
-    path = ROOT / "docs" / "executive-summary.md"
+    path = ROOT.parent / "docs" / "executive-summary.md"  # docs/ is at the repo root
     text = path.read_text(encoding="utf-8")
     return f"""
 <h1>Executive summary</h1>
@@ -1104,14 +1107,15 @@ LANDING = """<!DOCTYPE html>
     <a class="choice choice--primary" href="overview.html">
       <span class="choice__tag">Verified dataset</span>
       <span class="choice__title">Affiliate Research Hub</span>
-      <span class="choice__body">Three products resolved to canonical Amazon ASINs. Three products,
-      every published value traced to an official Amazon or manufacturer page. Values that could
+      <span class="choice__body">Three destinations resolved to canonical Amazon ASINs — the products each
+      supplied short link resolves to, not a confirmed brief mapping. Every published value traced to an
+      official Amazon or manufacturer page. Values that could
       not be confirmed are left blank and listed for review. Includes the full Amazon compliance
       position, a line-by-line disposition of the brief, and a flag list.</span>
       <span class="choice__cta">Open the verified hub &rarr;</span>
     </a>
 
-    <a class="choice" href="index.html">
+    <a class="choice" href="start.html">
       <span class="choice__tag">Workspace</span>
       <span class="choice__title">Northstar dashboard</span>
       <span class="choice__body">The research workspace built in parallel: overview, product
@@ -1120,7 +1124,7 @@ LANDING = """<!DOCTYPE html>
       <span class="choice__cta">Open the dashboard &rarr;</span>
     </a>
 
-    <a class="choice" href="zone2/index.html">
+    <a class="choice" href="../zone2/index.html">
       <span class="choice__tag">Platform build</span>
       <span class="choice__title">Zone2 dashboard</span>
       <span class="choice__body">The AI-powered affiliate platform build: a multi-page dashboard
@@ -1135,6 +1139,12 @@ LANDING = """<!DOCTYPE html>
     <p>The dataset resolved all three submitted short links to their canonical Amazon product
     pages and verified specifications against the manufacturer. The dashboard treats product
     identity as unconfirmed and leaves it blank.</p>
+    <p>Both views now agree on the evidence, which the final integration (2026-11-14) settled with a
+    control: an <em>unknown</em> 9-character code on the same short-link service returns a 404 instead of a
+    product, so the three supplied codes are honoured lookups. What is still unconfirmed is the
+    <em>contract</em> — no public Amazon document binds a <code>link.amazon</code> code to a product — so the
+    three ASINs are published as <em>the product each link resolves to</em>, and the brief mapping stays
+    flagged for confirmation (flag F-03).</p>
     <p><strong>Both apply the same rule:</strong> nothing is asserted without an official source.
     Where the sources disagree, the disagreement is published rather than smoothed over.</p>
     <p class="fineprint">Start with the
@@ -1433,10 +1443,10 @@ def main() -> None:
 
     pages = {
         "overview.html": (
-            "Affiliate Research Hub — three Amazon products, verified",
+            "Affiliate Research Hub — three resolved Amazon listings, verified",
             "overview",
             build_index(),
-            "Source-linked research on three Amazon affiliate products, with Amazon Associates compliance documented.",
+            "Source-linked research on the three Amazon listings the supplied links resolve to, with Amazon Associates compliance documented.",
         ),
         "products.html": (
             "Products — sourced profiles",
@@ -1515,7 +1525,7 @@ def main() -> None:
   <h1>Page not found</h1>
   <p class="hero__lede">That address does not exist on this site.</p>
   <div class="hero__actions">
-    <a class="btn btn--primary" href="index.html">Back to the start</a>
+    <a class="btn btn--primary" href="start.html">Back to the start</a>
     <a class="btn" href="products.html">Browse products</a>
   </div>
 </div>
