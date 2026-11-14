@@ -2145,9 +2145,25 @@ but no root `data/` directory exists (the files are `ledger/sources.json` and `l
 left for the file's owning session · **F-24** no Associates tag on any supplied link · **F-03** code→product
 mapping unconfirmed · **F-08** no performance report.
 
-### PR / deploy
+### PR / merge / deploy — recorded after the fact
 
-Branch `arena/808a6840-zone2`. Merge result and Pages deploy recorded below when the PR lands.
+| Item | Value |
+|---|---|
+| Branch | `arena/808a6840-zone2` |
+| PR | **#45** — <https://github.com/kanlerxz87-cyber/Zone2/pull/45> |
+| CI on the PR | `Build and verify` — **all 22 verification steps green**, including the new `Structural audit` and the repaired `Research-hub per-row sourcing guard`. The run is marked `cancelled` at `Upload site`; see the note below. |
+| Merge | **MERGED** 2026-11-14T18:40:51Z · merge commit `d13bf220c56a2bae07afff4458bb13f1a8c9964a` (`gh pr merge 45 --merge`) |
+| CI on `main` after merge | `Build, verify and deploy` run `43628103454` — **success** |
+| Pages deploy | `pages build and deployment` run `43628103200` — **success**; Pages API `status: built`, source `main` / `/` |
+| Live site | <https://kanlerxz87-cyber.github.io/Zone2/> — re-read after deploy; fixes 1–7 confirmed present in the deployed HTML |
+
+**Note on the PR run's `Upload site` / `Deploy` steps.** On a `pull_request` event these steps cannot
+succeed: Pages for this repository is configured as a **legacy build from `main` / `/`**, so the deploy
+target does not accept an artifact from a branch, and the `Deploy` job is cancelled by design. This is
+pre-existing workflow behaviour, not a defect introduced here — every verification step that runs before
+`Upload site` passed, and the post-merge runs on `main` deployed successfully. Recorded rather than
+"fixed", because changing the Pages source to GitHub Actions requires repository-settings permissions the
+automation token does not have (HTTP 403), as the PR #10 record already found.
 ## Session record — `arena/0f44536f-zone2` — T26b fresh baseline audit (2026-11-14 UTC)
 
 ### Claim
