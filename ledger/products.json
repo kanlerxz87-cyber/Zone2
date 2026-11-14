@@ -1,6 +1,6 @@
 {
-  "note": "Ledger of the three products named in the project brief. Field values are only populated when an official source states them. Blank + status=UNVERIFIED means no official source could be found; the value was NOT inferred. Each entry also records `resolves_to`: the listing the supplied link actually lands on, which is a stable per-link observation but is NOT established as the requested product (see ledger/flags.json F-03).",
-  "verified_utc": "2026-11-13",
+  "note": "Ledger of the three affiliate links named in the project brief. Two different questions are kept apart on purpose. (1) IDENTITY OF THE TOKEN AS SUPPLIED — each supplied code is 9 characters, an ASIN is 10, and amazon.com/dp/<code> returns Amazon's Page Not Found page, so no attribute can be stated for the token itself; those fields are blank and the rows are marked UNVERIFIED. (2) WHAT THE LINK RESOLVES TO — each link.amazon URL resolves to one specific Amazon product page, reproducibly, and an unknown code on the same service returns a 404 rather than a random product (flag F-20), so the destination is a verified observation of the link's behaviour. The two are recorded separately because Amazon publishes no document that binds a link.amazon code to a product, so the destination is not established as the item the brief intended. Verified 2026-11-14 by live fetch.",
+  "verified_utc": "2026-11-14",
   "lookup_path": "Creators API GetItems (S07, S08) with an authenticated Associates account - not available in this workspace",
   "entries": [
     {
@@ -29,14 +29,158 @@
         "S16",
         "S19"
       ],
-      "why_blank": "Token is 9 characters, so it is not a valid ASIN; the canonical /dp/ URL returns Amazon's Page Not Found page. No official record identifies the intended product, so no attribute may be stated.",
+      "why_blank": "The token as supplied is 9 characters, so it is not a valid ASIN, and amazon.com/dp/<token> returns Amazon's Page Not Found page: no field can be stated for the token itself. The product this link resolves to is recorded separately in `resolved` below. Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
       "flag_ids": [
         "F-01",
         "F-02",
         "F-04",
-        "F-06"
+        "F-06",
+        "F-20",
+        "F-21",
+        "F-22",
+        "F-23",
+        "F-24"
       ],
-      "resolves_to": "https://www.amazon.com/dp/B0CDY277D3"
+      "resolves_to": "https://www.amazon.com/dp/B0CDY277D3",
+      "resolved": {
+        "asin": "B0CDY277D3",
+        "title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+        "brand": "CHEFMAN",
+        "category": "Home & Kitchen",
+        "category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+        "resolves_to": "https://www.amazon.com/dp/B0CDY277D3",
+        "observation_status": "OBSERVED",
+        "observed_utc": "2026-11-14",
+        "source_ids": [
+          "S19"
+        ],
+        "manufacturer_source_ids": [
+          "S25"
+        ],
+        "specs": [
+          {
+            "attribute": "Model number",
+            "value": "RJ38-SQPF-3TDB-2W",
+            "status": "verified",
+            "source_ids": [
+              "S25"
+            ],
+            "source_label": "Chefman official product page — Specifications"
+          },
+          {
+            "attribute": "Capacity",
+            "value": "6 Qt / 5.67 L (two independent 3-qt baskets)",
+            "status": "verified",
+            "source_ids": [
+              "S25",
+              "S19"
+            ],
+            "source_label": "Chefman official product page (6 Qt / 5.67 L); Amazon listing ('combined 6-quart large air fryer capacity', 'individual 3-quart large capacity air fryer double baskets')"
+          },
+          {
+            "attribute": "Temperature range",
+            "value": "200–450 °F / 95–235 °C",
+            "status": "verified",
+            "source_ids": [
+              "S25",
+              "S19"
+            ],
+            "source_label": "Chefman official product page ('200–450°F / 95º-235ºC'); Amazon listing ('Digital air fryer dual basket temperature settings from 200-450°F'; product-information block Max Temperature Setting 450 °F)"
+          },
+          {
+            "attribute": "Power",
+            "value": "1700 W / 120 V",
+            "status": "verified",
+            "source_ids": [
+              "S25",
+              "S19"
+            ],
+            "source_label": "Chefman official product page ('Power: 1700W/120V'); Amazon listing ('120 Volts/1700 Watts')"
+          },
+          {
+            "attribute": "Dimensions",
+            "value": "13.38 × 11.81 × 10.63 in (33.98 × 30 × 27 cm)",
+            "status": "verified",
+            "source_ids": [
+              "S25",
+              "S19"
+            ],
+            "source_label": "Chefman official product page; Amazon product-information block ('13.38\"D x 11.81\"W x 10.63\"H')"
+          },
+          {
+            "attribute": "Weight",
+            "value": "13.3 lb / 6.03 kg",
+            "status": "verified",
+            "source_ids": [
+              "S25",
+              "S19"
+            ],
+            "source_label": "Chefman official product page ('Weight: 13.3 lbs / 6.03 kg'); Amazon product-information block ('Item Weight: 13.3 pounds')"
+          },
+          {
+            "attribute": "Controls",
+            "value": "Digital touch control with touchscreen presets",
+            "status": "verified",
+            "source_ids": [
+              "S19"
+            ],
+            "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touch control') and listing bullet ('with touchscreen presets')"
+          },
+          {
+            "attribute": "Special features",
+            "value": "+ 2Min button, automatic shut-off, dual-zone features, Hi-Fry, mute; Sync Finish; interior light; dual viewing windows; matte-black finish",
+            "status": "verified",
+            "source_ids": [
+              "S19",
+              "S25"
+            ],
+            "source_label": "Amazon product-information block ('Special Features'); Chefman official product page (Features list)"
+          },
+          {
+            "attribute": "Material",
+            "value": "Metal, plastic; inner material plastic with non-stick coating",
+            "status": "verified",
+            "source_ids": [
+              "S19"
+            ],
+            "source_label": "Amazon product-information block (Materials & Care)"
+          },
+          {
+            "attribute": "Certification and warranty",
+            "value": "cETL approved with a 1-year Chefman assurance",
+            "status": "verified",
+            "source_ids": [
+              "S25",
+              "S19"
+            ],
+            "source_label": "Chefman official product page; Amazon listing bullet ('cETL approved … 1-year assurance provided by Chefman')"
+          },
+          {
+            "attribute": "Colour",
+            "value": "Black, gray",
+            "status": "verified",
+            "source_ids": [
+              "S19"
+            ],
+            "source_label": "Amazon product-information block (Additional details)"
+          },
+          {
+            "attribute": "UPC",
+            "value": "",
+            "status": "unverified",
+            "source_ids": [],
+            "source_label": "",
+            "why_blank": "The Amazon Item details block for this ASIN was not captured in this verification pass; no UPC is stated, so none is published."
+          }
+        ],
+        "price": "",
+        "rating": "",
+        "review_count": "",
+        "availability": "",
+        "bsr": "",
+        "commission_rate": "",
+        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred."
+      }
     },
     {
       "id": "P-02",
@@ -64,14 +208,166 @@
         "S17",
         "S20"
       ],
-      "why_blank": "Token is 9 characters; canonical /dp/ URL returns Page Not Found.",
+      "why_blank": "The token as supplied is 9 characters, so it is not a valid ASIN, and amazon.com/dp/<token> returns Amazon's Page Not Found page: no field can be stated for the token itself. The product this link resolves to is recorded separately in `resolved` below. Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
       "flag_ids": [
         "F-01",
         "F-02",
         "F-04",
-        "F-06"
+        "F-06",
+        "F-20",
+        "F-21",
+        "F-22",
+        "F-23",
+        "F-24"
       ],
-      "resolves_to": "https://www.amazon.com/dp/B09B7SB46R"
+      "resolves_to": "https://www.amazon.com/dp/B09B7SB46R",
+      "resolved": {
+        "asin": "B09B7SB46R",
+        "title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+        "brand": "Emeril Lagasse",
+        "category": "Home & Kitchen",
+        "category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+        "resolves_to": "https://www.amazon.com/dp/B09B7SB46R",
+        "observation_status": "OBSERVED",
+        "observed_utc": "2026-11-14",
+        "source_ids": [
+          "S20"
+        ],
+        "manufacturer_source_ids": [
+          "S27"
+        ],
+        "specs": [
+          {
+            "attribute": "Model number",
+            "value": "CONFLICT — Amazon listing: 4-00675-02X-VN (Model Number and Part Number); Emeril Everyday store: 4-00675-02A-VN",
+            "status": "conflict",
+            "source_ids": [
+              "S20",
+              "S27"
+            ],
+            "source_label": "Amazon Item details block; Emeril Everyday official store product page"
+          },
+          {
+            "attribute": "Capacity",
+            "value": "26 qt / 24.6 L (sized for 4–6 people)",
+            "status": "verified",
+            "source_ids": [
+              "S27",
+              "S20"
+            ],
+            "source_label": "Emeril Everyday official store ('26-Quart Capacity', '24.6 Liters Capacity'); Amazon product-information block ('Capacity: 24.6 liters')"
+          },
+          {
+            "attribute": "Power",
+            "value": "1700 watts / 120 volts",
+            "status": "verified",
+            "source_ids": [
+              "S20"
+            ],
+            "source_label": "Amazon product-information block ('Output Wattage: 1700 watts', 'Wattage: 1700 watts', 'Voltage: 120 volts')"
+          },
+          {
+            "attribute": "Temperature settings",
+            "value": "Minimum 75 °F, maximum 500 °F",
+            "status": "verified",
+            "source_ids": [
+              "S20"
+            ],
+            "source_label": "Amazon product-information block ('Min Temperature Setting: 75 °F', 'Max Temperature Setting: 500 °F')"
+          },
+          {
+            "attribute": "Dimensions",
+            "value": "16.9\"D × 15.8\"W × 14.8\"H",
+            "status": "verified",
+            "source_ids": [
+              "S27",
+              "S20"
+            ],
+            "source_label": "Emeril Everyday official store ('16.9\"D x 15.8\"W x 14.8\"H'); Amazon product-information block (Measurements)"
+          },
+          {
+            "attribute": "Controls",
+            "value": "Touch / touchscreen",
+            "status": "verified",
+            "source_ids": [
+              "S20"
+            ],
+            "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touchscreen')"
+          },
+          {
+            "attribute": "Cooking functions / presets",
+            "value": "CONFLICT — Amazon listing title: '24 cooking functions'; Emeril Everyday description: '24 one-touch cooking presets'; Emeril Everyday specification tile: '25 Cooking Pre-sets'; Emeril Everyday feature block headed '10-In-1 Versatility' lists ten functions (Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm)",
+            "status": "conflict",
+            "source_ids": [
+              "S20",
+              "S27"
+            ],
+            "source_label": "Amazon listing title; Emeril Everyday official store (description, specification tile and '10-In-1 Versatility' feature block) — the manufacturer's own page disagrees with itself (flag F-19)"
+          },
+          {
+            "attribute": "Door style",
+            "value": "Dual French doors",
+            "status": "verified",
+            "source_ids": [
+              "S27",
+              "S20"
+            ],
+            "source_label": "Emeril Everyday official store ('French doors offer effortless access'); Amazon listing title ('with French doors')"
+          },
+          {
+            "attribute": "Included accessories",
+            "value": "7 premium accessories — air fry basket, rotisserie spit, bake pan and more; Amazon lists Rack, Bake Pan, Drip Tray, Crisper Basket, Rotisserie Spit, Fetch Tool",
+            "status": "verified",
+            "source_ids": [
+              "S27",
+              "S20"
+            ],
+            "source_label": "Emeril Everyday official store ('Included are 7 premium accessories … air fry basket, rotisserie spit, bake pan, and more'); Amazon Item details ('Configuration: Air Fryer Toaster Oven Combo with 24 Functions and 7 Accessories', 'Included Components')"
+          },
+          {
+            "attribute": "Special features",
+            "value": "Dual-speed fan, rotisserie, 360° hot-air circulation, temperature control",
+            "status": "verified",
+            "source_ids": [
+              "S27"
+            ],
+            "source_label": "Emeril Everyday official store (Specifications tiles and Key Features)"
+          },
+          {
+            "attribute": "Warranty",
+            "value": "1 year",
+            "status": "verified",
+            "source_ids": [
+              "S27"
+            ],
+            "source_label": "Emeril Everyday official store ('1-Years Warranty')"
+          },
+          {
+            "attribute": "UPC",
+            "value": "752356835682",
+            "status": "verified",
+            "source_ids": [
+              "S20"
+            ],
+            "source_label": "Amazon Item details block ('UPC: 752356835682')"
+          },
+          {
+            "attribute": "Item weight",
+            "value": "",
+            "status": "unverified",
+            "source_ids": [],
+            "source_label": "",
+            "why_blank": "Neither the Amazon product-information block nor the Emeril Everyday page states an item weight for this product; none is published."
+          }
+        ],
+        "price": "",
+        "rating": "",
+        "review_count": "",
+        "availability": "",
+        "bsr": "",
+        "commission_rate": "",
+        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred."
+      }
     },
     {
       "id": "P-03",
@@ -99,21 +395,167 @@
         "S18",
         "S21"
       ],
-      "why_blank": "Token is 9 characters; canonical /dp/ URL returns Page Not Found.",
+      "why_blank": "The token as supplied is 9 characters, so it is not a valid ASIN, and amazon.com/dp/<token> returns Amazon's Page Not Found page: no field can be stated for the token itself. The product this link resolves to is recorded separately in `resolved` below. Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
       "flag_ids": [
         "F-01",
         "F-02",
         "F-04",
-        "F-06"
+        "F-06",
+        "F-20",
+        "F-21",
+        "F-22",
+        "F-23",
+        "F-24"
       ],
-      "resolves_to": "https://www.amazon.com/dp/B08DKYBTPH"
+      "resolves_to": "https://www.amazon.com/dp/B08DKYBTPH",
+      "resolved": {
+        "asin": "B08DKYBTPH",
+        "title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+        "brand": "Chefman",
+        "category": "Home & Kitchen",
+        "category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+        "resolves_to": "https://www.amazon.com/dp/B08DKYBTPH",
+        "observation_status": "OBSERVED",
+        "observed_utc": "2026-11-14",
+        "source_ids": [
+          "S21"
+        ],
+        "manufacturer_source_ids": [
+          "S26"
+        ],
+        "specs": [
+          {
+            "attribute": "Model number",
+            "value": "RJ38-SQSS-8T",
+            "status": "verified",
+            "source_ids": [
+              "S26",
+              "S21"
+            ],
+            "source_label": "Chefman official product page ('Model Number: RJ38-SQSS-8T (8 Qt model)'); Amazon Item details ('Part Number: RJ38-SQSS-8T')"
+          },
+          {
+            "attribute": "Capacity",
+            "value": "8 Qt / 7.57 L",
+            "status": "verified",
+            "source_ids": [
+              "S26",
+              "S21"
+            ],
+            "source_label": "Chefman official product page ('Capacity: 5 Qt or 8 Qt / 4.73 L or 7.57 L'); Amazon product-information block ('Capacity: 8 quarts')"
+          },
+          {
+            "attribute": "Temperature range",
+            "value": "200–400 °F / 95–205 °C (maximum 400 °F)",
+            "status": "verified",
+            "source_ids": [
+              "S26",
+              "S21"
+            ],
+            "source_label": "Chefman official product page ('200–400°F / 95º-205ºC', 'Max temp: 400ºF/ 205ºC'); Amazon listing bullet ('a temperature range from 200-400°F') and product-information block ('Max Temperature Setting: 400 °F'). NOTE: the Amazon listing TITLE says '450°F Hi-Fry Option' — contradicted by the same page's own bullet list and specification block and by Chefman. See flag F-22; do not publish 450 °F for this model."
+          },
+          {
+            "attribute": "Power",
+            "value": "CONFLICT — Amazon listing bullet ('About this item'): '1000 Watts/120 Volts – RJ38-SQSS-8T'; Amazon product-information block: 'Wattage: 1700 watts', 'Voltage: 120 volts'; Chefman official product page: 'Power: 1700W/120V'",
+            "status": "conflict",
+            "source_ids": [
+              "S21",
+              "S26"
+            ],
+            "source_label": "Amazon listing bullet list; Amazon product-information block; Chefman official product page — the disagreement is inside the Amazon listing itself"
+          },
+          {
+            "attribute": "Dimensions",
+            "value": "CONFLICT — Chefman: 15.4 × 12.6 × 13.5 in (39.11 × 32 × 34.29 cm); Amazon product-information block: 12.75\"D × 13.5\"W × 10\"H",
+            "status": "conflict",
+            "source_ids": [
+              "S26",
+              "S21"
+            ],
+            "source_label": "Chefman official product page; Amazon product-information block (Measurements)"
+          },
+          {
+            "attribute": "Weight",
+            "value": "12.8 lb / 5.8 kg",
+            "status": "verified",
+            "source_ids": [
+              "S26",
+              "S21"
+            ],
+            "source_label": "Chefman official product page ('Weight: (8 Qt Model) 12.8 lbs / 5.8 kg'); Amazon product-information block ('Item Weight: 12.8 pounds')"
+          },
+          {
+            "attribute": "Presets",
+            "value": "4 — French fries, chicken, meat, fish",
+            "status": "verified",
+            "source_ids": [
+              "S26",
+              "S21"
+            ],
+            "source_label": "Chefman official product page ('4 cooking presets'; description lists fries, chicken, fish, meat); Amazon listing bullet ('Four presets … French fries, chicken, meat, and fish')"
+          },
+          {
+            "attribute": "Controls",
+            "value": "Touch",
+            "status": "verified",
+            "source_ids": [
+              "S21"
+            ],
+            "source_label": "Amazon product-information block ('Control Method: Touch', 'Controller Type: Touch')"
+          },
+          {
+            "attribute": "Special features",
+            "value": "Automatic shut-off, LED shake reminder, programmable",
+            "status": "verified",
+            "source_ids": [
+              "S21"
+            ],
+            "source_label": "Amazon product-information block ('Special Features')"
+          },
+          {
+            "attribute": "Material",
+            "value": "Plastic, stainless steel; inner material stainless steel",
+            "status": "verified",
+            "source_ids": [
+              "S21"
+            ],
+            "source_label": "Amazon product-information block (Materials & Care)"
+          },
+          {
+            "attribute": "Certification and warranty",
+            "value": "cETL approved; 1-year warranty (Amazon: '1-Year Limited Warranty')",
+            "status": "verified",
+            "source_ids": [
+              "S26",
+              "S21"
+            ],
+            "source_label": "Chefman official product page ('cETL approved with a 1-year Chefman® assurance'); Amazon Item details ('Warranty Description: 1-Year Limited Warranty')"
+          },
+          {
+            "attribute": "UPC",
+            "value": "816458024518",
+            "status": "verified",
+            "source_ids": [
+              "S21"
+            ],
+            "source_label": "Amazon Item details block ('UPC: 816458024518')"
+          }
+        ],
+        "price": "",
+        "rating": "",
+        "review_count": "",
+        "availability": "",
+        "bsr": "",
+        "commission_rate": "",
+        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred."
+      }
     }
   ],
   "evidence_observations": [
     {
       "id": "E-01",
       "observation": "GET https://link.amazon/B04G1MEwY ended at https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-...&channelId=704&plpRedirect=mhFallback (page title observed: CHEFMAN 6 Quart Dual Basket Air Fryer Oven ...)",
-      "interpretation": "Fallback destination, not a mapping of the submitted token. Recorded for reproducibility only.",
+      "interpretation": "The destination is a specific product and it is stable for this token — but three different tokens landing on three different products is NOT by itself evidence of a mapping. The decisive control is E-06.",
       "status": "OBSERVED",
       "source_ids": [
         "S19"
@@ -122,7 +564,7 @@
     {
       "id": "E-02",
       "observation": "GET https://link.amazon/B02NbDxp3 ended at https://www.amazon.com/dp/B09B7SB46R?...plpRedirect=mhFallback (page title observed: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven ...)",
-      "interpretation": "Different fallback destination from E-01, i.e. the token did not select the product.",
+      "interpretation": "Second distinct destination, second distinct per-link btn_ref token (srctok-534f5e7952f396b2 at the time of that fetch). Distinctness across tokens, not randomness within a token.",
       "status": "OBSERVED",
       "source_ids": [
         "S20"
@@ -131,7 +573,7 @@
     {
       "id": "E-03",
       "observation": "GET https://link.amazon/B00hJ57DV ended at https://www.amazon.com/dp/B08DKYBTPH?...plpRedirect=mhFallback (page title observed: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 ...)",
-      "interpretation": "Third distinct fallback destination. No submitted token survived the redirect.",
+      "interpretation": "Third distinct destination, third distinct per-link btn_ref token (srctok-76c3adaeb8708b44 at the time of that fetch).",
       "status": "OBSERVED",
       "source_ids": [
         "S21"
@@ -139,7 +581,7 @@
     },
     {
       "id": "E-04",
-      "observation": "https://www.amazon.com/dp/B04G1MEwY , https://www.amazon.com/dp/B02NbDxp3 and https://www.amazon.com/dp/B00hJ57DV each returned Amazon's \"Sorry! We couldn't find that page\" error page on 2026-11-13.",
+      "observation": "https://www.amazon.com/dp/B04G1MEwY , https://www.amazon.com/dp/B02NbDxp3 and https://www.amazon.com/dp/B00hJ57DV each returned Amazon's \"Sorry! We couldn't find that page\" error page on 2026-11-13 and again on 2026-11-14.",
       "interpretation": "No catalog record exists for any of the three tokens as given.",
       "status": "OBSERVED",
       "source_ids": [
@@ -157,6 +599,59 @@
         "S16",
         "S17",
         "S18"
+      ]
+    },
+    {
+      "id": "E-06",
+      "observation": "CONTROL — an unknown code on the same short-link service: GET https://link.amazon/B00TEST12 (9 characters, never supplied) resolved to https://amzlinks.in/B00TEST12 and returned the service's 404 page — \"404: File Not Found … You've clicked on an invalid URL.\" (image host: amzlinks.in/post-tap/short-link-404.png).",
+      "interpretation": "DECISIVE. The service looks the code up: an unknown code returns a 404 instead of an arbitrary product. The three supplied codes therefore ARE honoured lookups, and the earlier reading that the token was ignored and the destination arbitrary (flag F-03) is falsified. What is still unconfirmed is the *contract* — Amazon publishes no document binding a link.amazon code to a product — not the behaviour.",
+      "status": "OBSERVED",
+      "source_ids": [
+        "S28",
+        "S19",
+        "S20",
+        "S21"
+      ]
+    },
+    {
+      "id": "E-07",
+      "observation": "CONTROL — a bare, untagged GET https://www.amazon.com/dp/B08DKYBTPH (a valid 10-character ASIN) returned the CHEFMAN 8 Qt product page with ?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1 appended to Amazon's own internal links, and with no btn_ref parameter at all.",
+      "interpretation": "plpRedirect=mhFallback is emitted on ordinary, direct, valid product-page loads. It is therefore NOT evidence of a fallback and cannot distinguish a valid ASIN from an invalid token.",
+      "status": "OBSERVED",
+      "source_ids": [
+        "S21"
+      ]
+    },
+    {
+      "id": "E-08",
+      "observation": "The three supplied links each carry their own btn_ref=srctok-… source token and the same channelId=704: B04G1MEwY → srctok-1f979f303a4b5691, B02NbDxp3 → srctok-0cd8be3c7e2e0de3, B00hJ57DV → srctok-7c59360cbbbd59b7 (observed 2026-11-14 ~10:05 UTC).",
+      "interpretation": "Three distinct per-link source tokens — the signature of individually tracked links, not of a shared fallback.",
+      "status": "OBSERVED",
+      "source_ids": [
+        "S19",
+        "S20",
+        "S21"
+      ]
+    },
+    {
+      "id": "E-09",
+      "observation": "Cross-time check on one link: link.amazon/B04G1MEwY carried btn_ref=srctok-1e229870efde5acf earlier on 2026-11-14 (recorded by session c6e94e8d) and btn_ref=srctok-1f979f303a4b5691 at ~10:04 UTC on the same day, while the destination stayed /dp/B0CDY277D3 on every fetch.",
+      "interpretation": "The btn_ref source token rotates over time; the DESTINATION does not. Two earlier claims are therefore both wrong in different ways: 'a different btn_ref on re-fetch proves the destination shuffles' (F-05, F-12) and 'an identical btn_ref proves the token is permanent' (revalidation C-2). See flag F-21.",
+      "status": "OBSERVED",
+      "source_ids": [
+        "S19"
+      ]
+    },
+    {
+      "id": "E-10",
+      "observation": "None of the three resolved URLs carries a tag= parameter. Each ends …&channelId=704&plpRedirect=mhFallback (short-link arrival) or …?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1 (direct arrival).",
+      "interpretation": "The links as supplied are untagged, so they cannot attribute a sale to an Associates account. Amazon's own help page gives the qualifying Special Link format as http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID. See flag F-24.",
+      "status": "OBSERVED",
+      "source_ids": [
+        "S24",
+        "S19",
+        "S20",
+        "S21"
       ]
     }
   ]

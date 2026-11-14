@@ -34,6 +34,11 @@ OFFICIAL_HOSTS = {
     "www.amazon.com",
     "amazon.com",
     "webservices.amazon.com",
+    # T23-INTEGRATION: `link.amazon` is Amazon's own delegated top-level domain, and the three
+    # links the client supplied are of exactly that form. They are registered as sources because
+    # the behaviour of that service is the evidence for flags F-03, F-20, F-21 and F-24. No
+    # product attribute is ever sourced to it - only to the amazon.com page it resolves to.
+    "link.amazon",
     "www.ftc.gov",
     "ftc.gov",
     "developers.google.com",

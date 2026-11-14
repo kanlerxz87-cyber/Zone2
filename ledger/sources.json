@@ -1,6 +1,6 @@
 {
-  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources.",
-  "accessed_utc": "2026-11-13",
+  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28–S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service.",
+  "accessed_utc": "2026-11-14",
   "sources": [
     {
       "id": "S01",
@@ -351,6 +351,59 @@
       "used_for": [
         "specifications re-read on the spec tiles: 26-Quart capacity / 24.6 Liters, 16.9\"D x 15.8\"W x 14.8\"H, 120 volts, Dual-Speed Fan, '25 Cooking Pre-sets'; the product description text on the same page says '10-in-1'; model number shown as 4-00675-02A-VN - see flag F-19"
       ]
+    },
+    {
+      "id": "S28",
+      "url": "https://link.amazon/B00TEST12",
+      "kind": "control",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "control proving that an unknown link.amazon code returns a 404 rather than an arbitrary product",
+        "flag F-20",
+        "evidence observation E-06"
+      ],
+      "title": "Amazon short-link service — unknown code control (9 characters, never supplied)",
+      "publisher": "Amazon.com (short-link service amzlinks.in)"
+    },
+    {
+      "id": "S29",
+      "url": "https://link.amazon/B04G1MEwY",
+      "kind": "supplied",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "resolution of P-01 to https://www.amazon.com/dp/B0CDY277D3",
+        "evidence E-01, E-08, E-09, E-10"
+      ],
+      "title": "Supplied affiliate short link 1 (as provided in the brief)",
+      "publisher": "Amazon.com"
+    },
+    {
+      "id": "S30",
+      "url": "https://link.amazon/B02NbDxp3",
+      "kind": "supplied",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "resolution of P-02 to https://www.amazon.com/dp/B09B7SB46R",
+        "evidence E-02, E-08, E-10"
+      ],
+      "title": "Supplied affiliate short link 2 (as provided in the brief)",
+      "publisher": "Amazon.com"
+    },
+    {
+      "id": "S31",
+      "url": "https://link.amazon/B00hJ57DV",
+      "kind": "supplied",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-14",
+      "used_for": [
+        "resolution of P-03 to https://www.amazon.com/dp/B08DKYBTPH",
+        "evidence E-03, E-08, E-10"
+      ],
+      "title": "Supplied affiliate short link 3 (as provided in the brief)",
+      "publisher": "Amazon.com"
     }
   ]
 }
