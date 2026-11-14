@@ -531,7 +531,7 @@ Codes are 9 characters, an Amazon ASIN is 10 (definition: https://affiliate-prog
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| AUD-01 | Independent post-integration site/repository verification; record mismatches and request corrections without editing another session's files | in progress | `arena/5c06fb5e-zone2` | `docs/review-2026-11-14.md`, append-only section in `COORDINATION.md` |
+| AUD-01 | Independent post-integration site/repository verification; record mismatches and request corrections without editing another session's files | done | `arena/5c06fb5e-zone2` | `docs/review-2026-11-14.md`, append-only section in `COORDINATION.md` |
 
 Claimed on current Arena-pinned branch `arena/5c06fb5e-zone2` (base `c0a109b305d998371677a2d476ca71568373b0be`). Existing completed task scopes are not being edited; cross-scope corrections are logged below.
 
