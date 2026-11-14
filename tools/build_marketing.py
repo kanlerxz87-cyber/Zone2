@@ -221,6 +221,7 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0)
   </aside>
   <main class="main" id="main">
     <div class="disclosure" data-rule="R-01"><strong>Affiliate disclosure:</strong> {esc(REQUIRED_SITE_DISCLOSURE)}</div>
+    <aside class="scope-note" role="note"><strong>Product identity is not confirmed.</strong> This buying guide, comparison and the three articles describe the Amazon destinations observed when following the supplied short links; they do not establish that those destinations are the products intended in the brief. The supplied codes are 9 characters, and Amazon's <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer nofollow">ASIN and link-format help</a> describes ASINs as catalog identifiers. See <a href="{root}../pages/flags.html#F-03">Flag F-03</a> for the unresolved mapping evidence. Product specifications below are linked to their official manufacturer sources.</aside>
 {body}
     <footer class="site">
       <p>{esc(REQUIRED_SITE_DISCLOSURE)}</p>

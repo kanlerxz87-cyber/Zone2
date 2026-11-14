@@ -106,8 +106,18 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fo
   border-radius: 10px;
   padding: 10px 14px;
   font-size: 13px;
+  margin-bottom: 12px;
+}
+.scope-note {
+  background: var(--warn-bg);
+  border: 1px solid #f0d7a7;
+  color: var(--warn-ink);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
   margin-bottom: 22px;
 }
+.scope-note a { color: inherit; font-weight: 650; }
 
 h2 { font-size: 19px; margin: 0 0 12px; letter-spacing: -.01em; }
 h3 { font-size: 15.5px; margin: 0 0 8px; }
