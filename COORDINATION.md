@@ -963,7 +963,7 @@ Status: **T22 done.** Next: PR from `arena/82a2d436-zone2` → `main`, merge, Pa
 | PR | **#27** — https://github.com/kanlerxz87-cyber/Zone2/pull/27 — `arena/82a2d436-zone2` → `main` |
 | PR validation | `Build and verify` run `43583813294` on head `282fd26` — **success**; deploy job skipped on the PR as designed |
 | Merge result | **MERGED** 2026-11-14T10:08:36Z, merge commit `3fb08a694d1e25e6ea22e824f8b63dee958d4ce8` (`gh pr merge 27 --merge`) |
-| Post-merge on `main` | `Build, verify and deploy` run `43583731114`-series for `3fb08a6` — **success**; `pages build and deployment` — **success** |
+| Post-merge on `main` | `Build, verify and deploy` run `43583855466` for `3fb08a6` — **success**; `pages build and deployment` run `43583855126` — **success** |
 | Pages API | `status: built`, `html_url: https://kanlerxz87-cyber.github.io/Zone2/` |
 | Live check (cache-busted) | https://kanlerxz87-cyber.github.io/Zone2/docs/verification-82a2d436.md?v=3fb08a6 — renders the T22 verification record. https://kanlerxz87-cyber.github.io/Zone2/?v=3fb08a6 — renders the corrected landing text ("stably to one listing each"; correction note). |
 
