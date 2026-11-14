@@ -343,14 +343,14 @@
     {
       "id": "V-31",
       "subject": "Reproducibility of the short-link destination",
-      "claim": "A repeated fetch of the same short link returns a stable product identity",
-      "method": "re-fetched https://link.amazon/B04G1MEwY later the same day and compared target URL, page type and link-rewrite token",
-      "verdict": "REFUTED",
+      "claim": "A repeated fetch of the same short link returns the same destination and per-link token",
+      "method": "re-fetched https://link.amazon/B04G1MEwY on 2026-11-14 and compared target URL, page body and btn_ref against the 2026-11-13 record; then ran the control request to a bare, valid ASIN described in docs/revalidation-2026-11-14.md",
+      "verdict": "VERIFIED",
       "source_ids": [
         "S19",
         "S16"
       ],
-      "consequence": "same dp/ path, but the body rendered a 'Best Sellers in Kitchen & Dining' carousel and btn_ref changed; identity is not established (F-12)"
+      "consequence": "Same dp/ path, same product page, same btn_ref (srctok-1e229870efde5acf) on re-fetch. The earlier REFUTED verdict rested on a one-off observation that did not reproduce; withdrawn. F-12 withdrawn, F-03 downgraded."
     },
     {
       "id": "V-32",
@@ -361,7 +361,7 @@
       "source_ids": [
         "S16"
       ],
-      "consequence": "scripts/verify.py: 0 errors, 38 sourced rows; their no-price and disclosure gates pass after the merge. Their product-to-brief association remains flagged (F-12)."
+      "consequence": "scripts/verify.py: 0 errors, 38 sourced rows; their no-price and disclosure gates pass after the merge. Their product-to-brief association remains flagged (F-03: the supplied codes are not ASINs and no public document binds a code to a destination ASIN). The earlier F-12 cross-reference is stale — that flag was withdrawn."
     }
   ]
 }

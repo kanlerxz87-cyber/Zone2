@@ -1064,3 +1064,17 @@ described the three destinations as "unrelated ASINs". That is the retracted inf
 `ledger/verification.json`, a file the `--check` gate cannot read for meaning. Corrected in this session's next
 commit, together with the same wording in `docs/repo-review.md` §R1. Recorded here rather than quietly fixed,
 because it is evidence that the withdrawal was incomplete the first time.
+
+### Follow-up #2 — the withdrawal was incomplete twice
+
+Reading the **live** page after the first follow-up found two more survivors of the retracted claim, both in
+`ledger/verification.json`:
+
+| Row | Was serving | Now |
+|---|---|---|
+| **V-31** | verdict `REFUTED`, consequence "body rendered a 'Best Sellers in Kitchen & Dining' carousel and btn_ref changed" | verdict `VERIFIED`; same path, same body, same `btn_ref` on re-fetch; verdict withdrawn |
+| **V-32** | "their product-to-brief association remains flagged (F-12)" | points at F-03, notes F-12 is stale/withdrawn |
+
+**Why the gates kept passing.** `build_site.py --check` and `build_root_views.py --check` compare generated HTML
+against the ledger. A false statement *in* the ledger regenerates byte-identically and passes. Only reading the
+deployed page catches it. That is a genuine limitation of a drift gate and is now recorded, not glossed over.
