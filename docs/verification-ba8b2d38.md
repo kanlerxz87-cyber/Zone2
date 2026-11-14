@@ -100,6 +100,11 @@ surfacing in prose rather than in a KPI — and the existing gate only compared 
 
 Fixed by rendering the count and the range from the data (`#flagRegisterCount`,
 `#flagRegisterRange`), and closed with a new build gate,
+
+> **Note added 2026-11-14 (session `d3ce1c29`).** The sentence quoted above is the defect, not a
+> claim, so it is left verbatim. The register has grown again since this log was written — it now
+> holds **33 flags (F-01 … F-33)** after this session added F-29 … F-33 and `main` contributed
+> F-27/F-28 — and the count is rendered from the data, so the page can no longer drift.
 `tools/validate_data.py::check_no_typed_flag_counts`, which fails the build if a typed register
 size reappears. The gate is **negative-tested**: reintroducing "26 flags" turns it red.
 

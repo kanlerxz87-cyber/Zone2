@@ -924,7 +924,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 29;
+const CANONICAL_FLAG_COUNT = 34;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1098,7 +1098,7 @@ const FLAGGED_ROWS = [
     detail: "Found in a line-by-line re-verification of the repository on 2026-11-14. (1) R-01 cited `site/compliance-inject.js` as the mechanism that renders the required disclosure - no such file exists anywhere in the repository; the disclosure is in fact emitted by the page renderers and enforced by tools/validate_data.py::check_disclosure plus the workflow's disclosure step. (2) R-11 cited `tools/validate_data.py::assert_no_amazon_marks` - no such function exists; the implemented function is `check_marks`. (3) R-02 cited `tools/generate_articles.py::lint_disclosure_proximity` and R-06 cited `::lint_claims` - neither function exists; both rules are enforced inside the single `lint()` function, and R-06's inline evidence marker is `<!--evidence:` (the data.js summary said 'inline evidence reference', which is right in substance but the function name was invented). (4) R-09 stated that email/SMS channels are 'absent from the schema' so a scheduler cannot target them - the current Program Policies expressly PERMIT Special Links in solicited (opt-in) email, SMS and direct messaging, so the rule text was stale against the policy page updated April 14, 2026.",
     severity: "high",
     impact: "The published compliance table claimed control coverage that did not exist for four rows. No fabricated product or price data was involved - this is a control-accuracy defect, not a data-invention defect - but a reader auditing 'is this enforced?' would have been given a wrong file or function name, and R-09 misstated a permission as a prohibition.",
-    actionRequired: "Corrected, in two steps. Step 1 (session bbe4ca47): R-01 and R-11 were given the real functions and files (`tools/validate_data.py::check_marks`, the page renderers) and R-01's invented `site/compliance-inject.js` reference was removed. Step 2 (final integration, session 4338f55e, after change request DD-1 items 1-3 from session dd87f326): R-02 and R-06 now name `lint()` - the function that actually performs the checks - instead of the non-existent `lint_disclosure_proximity` and `lint_claims`; R-06's `expires_utc` enforcement, which had never been implemented, is implemented now and covered by tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted; and R-09's requirement text was rewritten to the policy as published (solicited/opt-in only, certification on request) while keeping the repository's stricter web-only channel default as a self-imposed control, labelled as such (published as flag F-25). All four rows now cite mechanisms that exist in the code.",
+    actionRequired: "Corrected, in two steps. Step 1 (session bbe4ca47): R-01 and R-11 were given the real functions and files (`tools/validate_data.py::check_marks`, the page renderers) and R-01's invented `site/compliance-inject.js` reference was removed. Step 2 (final integration, session 4338f55e, after change request DD-1 items 1-3 from session dd87f326): R-02 and R-06 now name `lint()` - the function that actually performs the checks - instead of the non-existent `lint_disclosure_proximity` and `lint_claims`; R-06's `expires_utc` enforcement, which had never been implemented, is implemented now and covered by tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted; and R-09's requirement text was rewritten to the policy as published (solicited/opt-in only, certification on request) while keeping the repository's stricter web-only channel default as a self-imposed control, labelled as such (published as flag F-25). All four rows now cite mechanisms that exist in the code. INDEPENDENTLY RE-VERIFIED 2026-11-14 by session d3ce1c29: `check_marks` exists (tools/validate_data.py:190); `lint()` exists (tools/generate_articles.py:164) and is the function R-02 and R-06 now name; `expires_utc` is parsed and enforced (tools/generate_articles.py:56-113) and covered by tests/test_pipeline.py::test_expired_promotion_copy_is_removed_and_linted (tests/test_pipeline.py:177); R-01's remaining mention of `site/compliance-inject.js` is an in-line record of the correction, not a live citation; R-09 states the permission accurately and labels the web-only default as self-imposed. All four rows now cite mechanisms that exist. F-16 is closed.",
     ledgerFlag: "F-16",
     ledgerUrl: "pages/flags.html#F-16",
     source: "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -1246,6 +1246,61 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-29",
     source: "https://affiliate-program.amazon.com/help/operating/policies",
     sourceIds: ["S02"],
+  },
+  {
+    item: "F-30 — The bounty table published 9 of the 46 bounty events, and none of the 2 bonus events, under a 'transcribed row-by-row' notice",
+    detail: "Found 2026-11-14 by session d3ce1c29. pages/commissions.html carried a panel headed 'Bounty events (Special Commission Income)' with nine rows, introduced by the notice 'Transcribed row-by-row from Amazon's published Associates Program Standard Commission Income Statement (S04)'. Re-reading S04 in full shows it publishes 46 rows under '(a) Bounty Events' (Prime, Prime Video, Audible, Kindle Unlimited, Amazon Music, registries, EBT, Amazon Business, Amazon Kids+, Prime Gaming, Amazon Haul and six Subscribe & Save rows) and a further 2 rows under '(b) Bonus Events'. The nine rows that were published were individually correct and correctly sourced — the defect was omission, not error, but a partial list carrying a completeness claim reads as the whole set.",
+    severity: "medium",
+    impact: "A revenue model that can see only 9 of 48 special-income events systematically under-prices the non-product revenue a site can earn. Audible ($20.00) and Amazon Business ($15.00) are the two largest published bounty rates and neither was on the page.",
+    actionRequired: "None open. ledger/commission_table.json now holds all 46 bounty rows and a new 'bonus_events' block with the 2 bonus rows; pages/commissions.html renders both and states the counts. Applied by tools/apply_bounty_completion_2026_11_14.py.",
+    ledgerFlag: "F-30",
+    ledgerUrl: "pages/flags.html#F-30",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+    sourceIds: ["S04", "S28"],
+  },
+  {
+    item: "F-31 — The zero-rate caption said 'Nine category groups publish a 0.00% Standard Commission rate', which matches no grouping in the source",
+    detail: "Found 2026-11-14 by session d3ce1c29. Table 1 of S04 publishes eleven bands, of which exactly two are 0.00%: the exclusion block and Coach, which Amazon lists on its own row. 'Nine' corresponds to no count in the source — eight semicolon-separated groups in the exclusion block plus Coach is the closest reading, but that count depends on how the final group ('Amazon Appstore, Prime Now, or Amazon Pay Places') is split.",
+    severity: "low",
+    impact: "A reader checking the claim against Table 1 cannot reconcile it, which undermines trust in the rows that are correct.",
+    actionRequired: "None open. The caption now names the two 0.00% bands and lists what is in the exclusion block.",
+    ledgerFlag: "F-31",
+    ledgerUrl: "pages/flags.html#F-31",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+    sourceIds: ["S04"],
+  },
+  {
+    item: "F-32 — tools/validate_data.py skipped any ledger row whose only source field is 'source_id' (singular)",
+    detail: "Found 2026-11-14 by session d3ce1c29. check_rows() walks the ledger and yields a dict as a row only if it contains 'source_ids' or 'id'. Every commission-table row (bands, bounty rows, bonus rows, statement terms) uses the singular 'source_id' and has no 'id', so those rows were never counted and never held to the 'a row that carries a value must carry a source' rule. Completing the bounty table added 48 unchecked rows before the gap was closed.",
+    severity: "low",
+    impact: "The gate could not fail on an unsourced rate row — precisely the failure mode F-30 was.",
+    actionRequired: "None open. _walk_rows now also yields on 'source_id'; the gate's row count rose from 173 to 243 and passes. Negative check: reverting the one-line change lowers the count back to 173, so the new rows are really being walked.",
+    ledgerFlag: "F-32",
+    ledgerUrl: "pages/flags.html#F-32",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+    sourceIds: ["S04"],
+  },
+  {
+    item: "F-33 — The Flagged for Review panel called all 29 register items 'open items' when 17 of them are already resolved",
+    detail: "Found 2026-11-14 by session d3ce1c29. pages/flags.html rendered the register under the heading 'N open items', where N was every flag in the register. At that point 5 flags carried status=closed and a further 12 had owner=done, so only 12 were genuinely awaiting the owner. The heading is the same class of defect as F-17 and F-26 — a count that does not describe the register — but in the opposite direction: it tells the reader the register is dirtier than it is.",
+    severity: "low",
+    impact: "An overstated open count is less dangerous than an understated one, but it is still wrong, and it buries the 12 items that really do need the owner's action inside a list that looks uniformly blocked.",
+    actionRequired: "None open. The panel now reads 'N flagged items · X open · Y resolved', with the open count derived from status/owner by tools/build_site.py::_open_flag_count, so it cannot be typed wrong.",
+    ledgerFlag: "F-33",
+    ledgerUrl: "pages/flags.html#F-33",
+    source: "https://affiliate-program.amazon.com/help/operating/policies",
+    sourceIds: ["S02"],
+  },
+  {
+    item: "F-34 — Commit d6ec452 deleted 1,831 lines of COORDINATION.md — the whole session registry and task board (T1…T26)",
+    detail: "Found 2026-11-14 by session d3ce1c29 while merging `main`. Commit `d6ec452` (\"coordination: claim T27 for session ba8b2d38 (independent close-out)\") reduced COORDINATION.md from 204,283 bytes to 43,819 bytes: `1 file changed, 51 insertions(+), 1831 deletions(-)`. The deleted block is the file header, the **session registry** for every session that has worked on this repository (6b8bb130, 6602723a, 34836ddd, ec67c431, 78c94859, f786c0d7, dc52402c, dc15ce5a, bbe4ca47, 82a2d436, 83194da0, 4338f55e, dd87f326, cdfaeefe and others) and the **task board T1 … T26** with each task's status, owner and file scope. Only the trailing session records survived. The commit message records no intent to rotate or archive the board, and `git ls-tree origin/main` shows no archive file was added, so this is recorded as an accident rather than a decision. The loss is not in the published site — no page renders COORDINATION.md — but the board is the mechanism this brief specifies for keeping parallel sessions from duplicating or colliding, and 160 KB of it was gone for the whole of the T27 close-out.",
+    severity: "high",
+    impact: "Without the registry and the board, a session cannot tell which task another session owns or which files are in its scope. That is precisely why flag ids collided three times in one day (F-20/F-21, F-22, then F-27/F-28 and S36/V-51…V-62 during this session's merge).",
+    actionRequired: "Restored in this session: the board is rebuilt from `2577b70` (the last commit that still carried it) and every line that `d6ec452`…`817b6bb` added on top is re-appended, verified by a line-set check that reports **0 lines unique to main not carried over**. Owner: confirm the restored board is the version you want, and archive the log to a dated file (for example `docs/coordination/`) if it grows again rather than truncating it in place. `tools/validate_data.py::check_ledger_ids_unique` now fails the build on a duplicate ledger id, which removes the worst consequence of a lost claim.",
+    ledgerFlag: "F-34",
+    ledgerUrl: "pages/flags.html#F-34",
+    source: "https://docs.github.com/en/rest/pages/pages",
+    sourceIds: ["S22"],
   },
 ];
 /* END GENERATED: flags */

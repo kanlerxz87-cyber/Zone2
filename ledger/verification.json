@@ -1,5 +1,5 @@
 {
-  "note": "Verification log. One row per claim that had to be checked to build or review this repository. Method is reproducible as described; verdicts were recorded on 2026-11-13 by reading the cited page, not from recollection. UNVERIFIED rows stay blank on the site. Rows V-33..V-50 were added 2026-11-14 by session a133aa61 during final integration: this session had live outbound access, so the governing pages, the three supplied URLs and the three manufacturer pages were re-read and compared line by line instead of being carried forward from another session's notes. Rows V-51..V-70 were added 2026-11-14 by session ba8b2d38 (T27): an independent fourth pass that re-fetched every official Amazon page cited by this repository, all three supplied links, all three /dp/<token> URLs, and ran one new control (V-68) that no earlier session had run.",
+  "note": "Verification log. One row per claim that had to be checked to build or review this repository. Method is reproducible as described; verdicts were recorded on 2026-11-13 by reading the cited page, not from recollection. UNVERIFIED rows stay blank on the site. Rows V-33..V-50 were added 2026-11-14 by session a133aa61 during final integration: this session had live outbound access, so the governing pages, the three supplied URLs and the three manufacturer pages were re-read and compared line by line instead of being carried forward from another session's notes. Rows V-51..V-70 were added 2026-11-14 by session ba8b2d38 (T27): an independent fourth pass that re-fetched every official Amazon page cited by this repository, all three supplied links, all three /dp/<token> URLs, and ran one new control (V-68) that no earlier session had run. Rows V-71..V-82 were added 2026-11-14 by session d3ce1c29 (T26): an independent re-read of the governing Amazon pages, the three-ASIN replication of the plpRedirect=mhFallback control (previously run for one ASIN only, V-45), a live re-resolution of all three supplied links, and the row count of S04's bounty and bonus tables.",
   "as_of": "2026-11-13",
   "rows": [
     {
@@ -786,6 +786,148 @@
         "S02"
       ],
       "consequence": "the compliance ledger row on commission limitations is correct"
+    },
+    {
+      "id": "V-71",
+      "subject": "OA-05 mandatory disclosure sentence (session d3ce1c29; drafted as V-51, renumbered on merge)",
+      "claim": "The Operating Agreement requires the exact sentence 'As an Amazon Associate I earn from qualifying purchases.'",
+      "method": "re-read https://affiliate-program.amazon.com/help/operating/agreement §5 on 2026-11-14",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S01"
+      ],
+      "consequence": "verbatim: 'You must clearly and prominently state the following … on your Site …: “As an Amazon Associate I earn from qualifying purchases.”' The sentence rendered at the top of every published page matches character for character."
+    },
+    {
+      "id": "V-72",
+      "subject": "OA document currency (session d3ce1c29; drafted as V-52, renumbered on merge)",
+      "claim": "The Operating Agreement states 'Updated: October 15, 2025'",
+      "method": "re-read the header of the Operating Agreement on 2026-11-14",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S01"
+      ],
+      "consequence": "the document-currency row on the dashboard is current; no change needed."
+    },
+    {
+      "id": "V-73",
+      "subject": "Table 1 fixed commission bands (session d3ce1c29; drafted as V-53, renumbered on merge)",
+      "claim": "Table 1 publishes eleven fixed bands from 10.00% down to 0.00%, plus 'All Other Categories 4.00%'",
+      "method": "re-read https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ on 2026-11-14 and compared each band with ledger/commission_table.json",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S04",
+        "S28"
+      ],
+      "consequence": "all eleven bands match the transcription exactly and in order: 10.00 / 5.00 / 4.50 / 4.00 / 3.00 / 2.50 / 2.00 / 1.00 / 0.00 (exclusions) / 0.00 (Coach) / 4.00 (All Other Categories)."
+    },
+    {
+      "id": "V-74",
+      "subject": "ASIN length and Special Link format (session d3ce1c29; drafted as V-54, renumbered on merge)",
+      "claim": "An ASIN is a 10-character code and a qualifying simple text link has the form http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID",
+      "method": "re-read https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC on 2026-11-14",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S24",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "consequence": "verbatim: 'ASIN is the 10-digit code that Amazon uses to denote specific products.' Basis of F-01 stands: the three supplied 9-character codes cannot address a catalog record."
+    },
+    {
+      "id": "V-75",
+      "subject": "Public commission ceiling and payment timing (session d3ce1c29; drafted as V-55, renumbered on merge)",
+      "claim": "Amazon publicly states 'up to 10%' commission and payment 'approximately 60 days after the end of the month'",
+      "method": "re-read https://affiliate-program.amazon.com/ on 2026-11-14",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S37"
+      ],
+      "consequence": "verbatim: 'Earn up to 10% in associate commissions from qualifying purchases and programs.' and 'Commission income is paid approximately 60 days after the end of the month in which it was earned.' S36 was added to the source register: the dashboard cited this URL without a register entry."
+    },
+    {
+      "id": "V-76",
+      "subject": "CONTROL-02 is plpRedirect=mhFallback specific to the supplied short links? (ASIN B0CDY277D3) (session d3ce1c29; drafted as V-56, renumbered on merge)",
+      "claim": "plpRedirect=mhFallback appears only when a link.amazon short link is followed, so it marks a fallback",
+      "method": "fetched a bare, untagged https://www.amazon.com/dp/B0CDY277D3 on 2026-11-14 — no short link, no parameters",
+      "verdict": "REFUTED",
+      "source_ids": [
+        "S19"
+      ],
+      "consequence": "the plain /dp/ URL returned the same product and the final URL carried ?lv=shuf&channelId=500&plpRedirect=mhFallback. Amazon's own redirector emits the marker on an ordinary product load, so it is not evidence of a fallback. Replicates V-45, which ran this control for B08DKYBTPH only."
+    },
+    {
+      "id": "V-77",
+      "subject": "CONTROL-03 same control for ASIN B09B7SB46R (session d3ce1c29; drafted as V-57, renumbered on merge)",
+      "claim": "plpRedirect=mhFallback appears only when a link.amazon short link is followed",
+      "method": "fetched a bare, untagged https://www.amazon.com/dp/B09B7SB46R on 2026-11-14",
+      "verdict": "REFUTED",
+      "source_ids": [
+        "S20"
+      ],
+      "consequence": "final URL https://www.amazon.com/dp/B09B7SB46R?lv=shuf&channelId=500&plpRedirect=mhFallback — the marker is emitted without any short link. Control now reproduced on all three destination ASINs."
+    },
+    {
+      "id": "V-78",
+      "subject": "CONTROL-04 same control for ASIN B08DKYBTPH (replication of V-45) (session d3ce1c29; drafted as V-58, renumbered on merge)",
+      "claim": "plpRedirect=mhFallback appears only when a link.amazon short link is followed",
+      "method": "fetched a bare, untagged https://www.amazon.com/dp/B08DKYBTPH on 2026-11-14",
+      "verdict": "REFUTED",
+      "source_ids": [
+        "S21"
+      ],
+      "consequence": "final URL https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1 — identical result to V-45, independently re-run in this session."
+    },
+    {
+      "id": "V-79",
+      "subject": "CONTROL-05 unknown-code control reproduced (session d3ce1c29; drafted as V-59, renumbered on merge)",
+      "claim": "An unknown 9-character link.amazon code returns a 404 rather than a random product, proving the supplied codes are looked up",
+      "method": "fetched https://link.amazon/B00TEST12 on 2026-11-14",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S32"
+      ],
+      "consequence": "redirects to https://amzlinks.in/B00TEST12 and renders '404: File Not Found … You've clicked on an invalid URL.' Independently reproduced in this session; the control behind F-03 / F-20 holds."
+    },
+    {
+      "id": "V-80",
+      "subject": "SUPPLIED-01 the three supplied links re-resolved in this session (session d3ce1c29; drafted as V-60, renumbered on merge)",
+      "claim": "Each supplied short link still resolves to the same single Amazon listing, while its per-link token changes",
+      "method": "fetched all three supplied link.amazon URLs on 2026-11-14 and recorded the final URL and page title",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S33",
+        "S34",
+        "S35",
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "consequence": "B04G1MEwY → /dp/B0CDY277D3 (btn_ref=srctok-704dc575b940a94c) 'CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows…'; B02NbDxp3 → /dp/B09B7SB46R (btn_ref=srctok-76d4981d5f44181b) 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven…'; B00hJ57DV → /dp/B08DKYBTPH (btn_ref=srctok-016f4a534eed3621) 'Chefman Air Fryer 8 Qt | TurboFry 4-in-1…'. Destinations unchanged; all three btn_ref values differ from every value recorded by earlier sessions the same day — F-21 confirmed again, and the three links carry three distinct tokens at one moment."
+    },
+    {
+      "id": "V-81",
+      "subject": "RATE-01 how many bounty and bonus rows does S04 publish? (session d3ce1c29; drafted as V-61, renumbered on merge)",
+      "claim": "The site's 'Bounty events' table (9 rows) is the full set of Special Commission Income events",
+      "method": "re-read the whole of https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ on 2026-11-14, sections (a) and (b)",
+      "verdict": "REFUTED",
+      "source_ids": [
+        "S04",
+        "S28"
+      ],
+      "consequence": "S04 publishes 46 rows under '(a) Bounty Events' and 2 further rows under '(b) Bonus Events' (Amazon Fresh Products $1.00; Pet Food & Supplies $3.00). The 9 published rows were the first nine and were individually correct — the defect was omission. Recorded as F-30 and corrected by tools/apply_bounty_completion_2026_11_14.py."
+    },
+    {
+      "id": "V-82",
+      "subject": "RATE-02 special-rate and limitation terms re-read (session d3ce1c29; drafted as V-62, renumbered on merge)",
+      "claim": "The Trade-In rates, the $200 fine-art cap and the free-Kindle-book limitation are as published on the site",
+      "method": "re-read sections (c) and 'Commission Income Limitations' of S04 on 2026-11-14",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S04"
+      ],
+      "consequence": "Trade-In: Trade Books and Textbooks 4.00%, Consumer Electronics Products 4.00%, Video Games Products 0.00%. Fine art: 'limited to a maximum of $200 per Product'. Free books: no Standard or Special Commission Income for a month with ≥20,000 free Kindle eBook orders and ≥80% free share. All three match the published rows."
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "note": "Transcribed row-by-row from Amazon's published Associates Program Standard Commission Income Statement (S04) on 2026-11-13. Rates are the published fixed rates for the US program; they change without notice, so the platform re-reads this page on each research cycle instead of caching it as truth.",
+  "note": "Transcribed row-by-row from Amazon's published Associates Program Standard Commission Income Statement (S04) on 2026-11-13. Rates are the published fixed rates for the US program; they change without notice, so the platform re-reads this page on each research cycle instead of caching it as truth. BOUNTY COMPLETION (2026-11-14, session d3ce1c29, flag F-27): the 'Bounty events' panel originally published 9 rows under a 'transcribed row-by-row' notice, while S04 publishes 46 rows under '(a) Bounty Events' and a further 2 under '(b) Bonus Events'. The partial list was replaced with the full transcription and the Bonus Events block was added. The 9 original rows were individually correct; the defect was omission, not error.",
   "source_id": "S04",
   "as_of": "2026-11-13",
   "table": "Table 1 - Fixed Standard Commission Income Rates for Specific Product Categories",
@@ -216,6 +216,228 @@
       "bounty_action": "Successful Stream",
       "rate": "$0.25",
       "source_id": "S04"
+    },
+    {
+      "program": "Prime Video Add-on Subscriptions - Free Trial",
+      "bounty_action": "Successful registration of a Free Trial",
+      "rate": "$2.50",
+      "source_id": "S04"
+    },
+    {
+      "program": "Prime Video Add-on Subscriptions - Paid",
+      "bounty_action": "Successful purchase of a Subscription",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Standard Free Trial",
+      "bounty_action": "Customer signs up for a free trial of the Audible Standard membership plan on Amazon",
+      "rate": "$20.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Premium Plus Free Trial",
+      "bounty_action": "Successful registration of a Free Trial on Amazon",
+      "rate": "$5.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Standard Monthly Membership",
+      "bounty_action": "Customer signs up for a the paid Audible Standard membership plan on Amazon",
+      "rate": "$20.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Premium Plus Annual Membership",
+      "bounty_action": "Successful purchase of a Membership on Amazon",
+      "rate": "$25.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Premium Plus Monthly Membership",
+      "bounty_action": "Successful purchase of a Membership on Amazon",
+      "rate": "$10.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Audiobook (cash purchase)",
+      "bounty_action": "Successful cash purchase of an Audible audiobook on Amazon",
+      "rate": "$0.50",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Gift Membership: 1-month plan",
+      "bounty_action": "Successful purchase of a Gift Membership on Amazon",
+      "rate": "$5.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Gift Membership: 3-month plan",
+      "bounty_action": "Successful purchase of a Gift Membership on Amazon",
+      "rate": "$8.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Gift Membership: 6-month plan",
+      "bounty_action": "Successful purchase of a Gift Membership on Amazon",
+      "rate": "$8.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Audible Gift Membership: 12-month plan",
+      "bounty_action": "Successful purchase of a Gift Membership on Amazon",
+      "rate": "$10.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Kindle Unlimited Free Trial",
+      "bounty_action": "Successful registration of a Free Trial",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Kindle Unlimited Special Promos",
+      "bounty_action": "Successful purchase of a Kindle Unlimited Special Promotion",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Kindle Unlimited Membership: 6-month plan",
+      "bounty_action": "Successful purchase of a Membership",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Kindle Unlimited Membership: 12-month plan",
+      "bounty_action": "Successful purchase of a Membership",
+      "rate": "$5.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Kindle Unlimited Membership: 24-month plan",
+      "bounty_action": "Successful purchase of a Membership",
+      "rate": "$10.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Music Unlimited Free Trial",
+      "bounty_action": "Successful registration of a Free Trial",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Music Unlimited Paid Subscription",
+      "bounty_action": "Successful purchase of a Subscription",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Music Unlimited Special Promotions",
+      "bounty_action": "Successful registration of a Free Trial",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Prime Music Free Trial",
+      "bounty_action": "Successful registration of a Free Trial",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Baby Registry Create",
+      "bounty_action": "Successful creation and addition of at least 1 item to an Amazon Baby Registry",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Wedding Registry Create",
+      "bounty_action": "Successful creation and addition of at least 1 item to an Amazon Wedding Registry",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "EBT Card Registration",
+      "bounty_action": "Successful registration of EBT Card",
+      "rate": "$2.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Snap EBT Purchase",
+      "bounty_action": "Successful purchase of SNAP/EBT eligible products on Amazon",
+      "rate": "$0.50",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Business",
+      "bounty_action": "Successful registration of an Amazon Business account",
+      "rate": "$15.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Kids+ Free Trial",
+      "bounty_action": "Successful registration of a Free Trial",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Kids+ Special Promotions",
+      "bounty_action": "Successful purchase of a Special Promotion",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Prime Exclusives",
+      "bounty_action": "Successful registration of a Free Trial",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Prime Gaming",
+      "bounty_action": "Successful registration of a Free Trial",
+      "rate": "$3.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Amazon Haul",
+      "bounty_action": "Amazon Haul First Purchase",
+      "rate": "$4.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Subscribe & Save - Beauty & Grooming",
+      "bounty_action": "Successful activation and 1st delivery of a Subscribe & Save subscription of a Beauty & Grooming product.",
+      "rate": "$0.25",
+      "source_id": "S04"
+    },
+    {
+      "program": "Subscribe & Save - Grocery",
+      "bounty_action": "Successful activation and 1st delivery of a Subscribe & Save subscription of a Grocery product.",
+      "rate": "$0.25",
+      "source_id": "S04"
+    },
+    {
+      "program": "Subscribe & Save - Health & Personal Care (HPC) excluding diapers",
+      "bounty_action": "Successful activation and 1st delivery of a Subscribe & Save subscription of an HPC excluding diapers product.",
+      "rate": "$0.25",
+      "source_id": "S04"
+    },
+    {
+      "program": "Subscribe & Save - Pet food and supplies",
+      "bounty_action": "Successful activation and 1st delivery of a Subscribe & Save subscription of a pet food and supplies product.",
+      "rate": "$0.25",
+      "source_id": "S04"
+    },
+    {
+      "program": "Subscribe & Save - Activation & Delivery",
+      "bounty_action": "Successful activation and 1st delivery of a Subscribe & Save subscription of an eligible Professional Beauty ASIN",
+      "rate": "$0.25",
+      "source_id": "S04"
+    },
+    {
+      "program": "Subscribe & Save - Diapers",
+      "bounty_action": "Successful activation and 1st delivery of a diapers product.",
+      "rate": "$0.25",
+      "source_id": "S04"
     }
   ],
   "other_statement_terms": [
@@ -248,6 +470,20 @@
       "term": "Inactive accounts",
       "detail": "With no substantial activity for at least 3 years, Amazon may withhold accrued commission income (up to the gift-card payment minimum) with 7 days' written notice",
       "source_id": "S02"
+    }
+  ],
+  "bonus_events": [
+    {
+      "program": "Amazon Fresh Products",
+      "bonus_action": "Successful first purchase from the Amazon Fresh store",
+      "rate": "$1.00",
+      "source_id": "S04"
+    },
+    {
+      "program": "Pet Food & Supplies",
+      "bonus_action": "Successful first purchase from the Amazon Pet Food & Supplies store",
+      "rate": "$3.00",
+      "source_id": "S04"
     }
   ]
 }

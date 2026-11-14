@@ -20,6 +20,11 @@ import sys
 import tempfile
 from pathlib import Path
 
+# tools/flag_state.py is the single definition of "is this flag still open"; it lives beside this
+# generator, so make the tools/ directory importable however this script is invoked.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from flag_state import open_count  # shared predicate (F-29/F-31)
+
 REPO = Path(__file__).resolve().parents[1]
 PAGES = REPO / "pages"
 DATA = REPO / "ledger"
@@ -521,7 +526,15 @@ def page_commissions() -> str:
         for g in COMMISSION["groups"]
     ]
     bounties = [[text_cell(b["program"]), text_cell(b["bounty_action"]), num_cell(b["rate"]), source_cell([b["source_id"]])] for b in COMMISSION["bounties"]]
+    # T26 (session d3ce1c29, F-30): S04 publishes a second special-income block, "(b) Bonus Events",
+    # which the earlier transcription omitted along with most of the bounty rows.
+    bonuses = [[text_cell(b["program"]), text_cell(b["bonus_action"]), num_cell(b["rate"]), source_cell([b["source_id"]])] for b in COMMISSION.get("bonus_events", [])]
     terms = [[text_cell(t["term"]), text_cell(t["detail"]), source_cell([t["source_id"]])] for t in COMMISSION["other_statement_terms"]]
+    bounty_note = (
+        f'{len(bounties)} bounty events and {len(bonuses)} bonus events, published in full. '
+        "An earlier revision published only the first 9 bounty rows under a \"transcribed row-by-row\" notice "
+        "(flag F-30, corrected 2026-11-14)."
+    )
     model = [
         ("Band ceiling used for normalisation", "10.00%", "highest published fixed rate in the table", ["S04"]),
         ("Default band", "4.00%", "All Other Categories", ["S04"]),
@@ -536,13 +549,18 @@ def page_commissions() -> str:
     body = (
         notice("Transcribed, not summarised", COMMISSION["note"])
         + panel(COMMISSION["table"], table(["Band", "Fixed rate", "Categories in the band", "Commercial reading", "Source"], rows))
-        + panel("Bounty events (Special Commission Income)", table(["Program", "Bounty action", "Published rate", "Source"], bounties))
+        + panel("Bounty events (Special Commission Income)", table(["Program", "Bounty action", "Published rate", "Source"], bounties) + notice("Complete, not excerpted", bounty_note))
+        + panel("Bonus events (Special Commission Income)", table(["Program", "Bonus action", "Published rate", "Source"], bonuses))
         + panel("Other statement terms that change the maths", table(["Term", "What the statement says", "Source"], terms))
         + panel("Constants wired into tools/scoring.py", table(["Constant", "Value", "Basis", "Source"], [[text_cell(a), num_cell(b), text_cell(c), source_cell(d)] for a, b, c, d in model]))
         + notice(
             "Zero-rate bands are exclusions, not opportunities",
-            "Nine category groups publish a 0.00% Standard Commission rate. The niche filter removes them before any ranking "
-            "happens, so no content budget can be spent on a category that pays nothing.",
+            "Table 1 publishes two 0.00% bands: the exclusion block (gift cards, wireless service plans, alcoholic beverages, "
+            "Digital Kindle products purchased as a subscription, vehicle leasing and sales, pet prescription medications, food "
+            "prepared and delivered from a restaurant, and Amazon Appstore / Prime Now / Amazon Pay Places) and Coach, listed on "
+            "its own row. The niche filter removes them before any ranking happens, so no content budget can be spent on a "
+            "category that pays nothing. (An earlier revision of this caption said \"nine category groups\", which matches no "
+            "grouping in the source — flag F-31.)",
         )
     )
     return render("commissions.html", "Commissions & economics", "Amazon's published rates, bounties, attribution windows and payment terms, transcribed from the source.", body)
@@ -777,6 +795,15 @@ def page_sources() -> str:
     return render("sources.html", "Official sources", "Every document this repository relies on, with its access date.", body)
 
 
+def _open_flag_count() -> int:
+    """Flags still awaiting the owner.
+
+    Delegates to tools/flag_state.py so summary.html and pages/flags.html count the same way —
+    see the module docstring for why that matters (F-29, F-31).
+    """
+    return open_count(FLAGS["flags"])
+
+
 def page_flags() -> str:
     sev = {"high": "stop", "medium": "warn", "low": "info"}
     rows = [
@@ -810,12 +837,12 @@ def page_flags() -> str:
             "irregularities found while reviewing the repository. They do not block the site; they block assertion. Each links to the "
             "official page that documents the problem.",
         )
-        # T27: this heading used len(rows), i.e. EVERY flag in the register, so the register page
-        # announced "28 open items" while tools/build_summary.py — which counts status == "open" —
-        # published "25 open". Two surfaces of one site told the reader different numbers, the exact
-        # defect class of F-17/F-26. Use the same open-status test as the summary so they agree.
+        # F-31 (session d3ce1c29) + F-29 (session ba8b2d38): the heading used len(rows), i.e. every
+        # flag in the register, so the page announced "28 open items" while summary.html published "25".
+        # Both surfaces now import the same predicate, so they cannot disagree again.
         + panel(
-            f"{sum(1 for f in FLAGS['flags'] if f.get('status', 'open') == 'open')} open items",
+            f"{len(rows)} flagged items \u00b7 {_open_flag_count()} open \u00b7 {len(rows) - _open_flag_count()} resolved",
+
             table(["ID", "Severity", "Finding", "Impact", "Action required", "Owner", "Source"], rows),
         )
         + panel("Product fields left blank because of these flags", table(["Item", "Blank fields", "Blocking flags", "Source"], blank_rows))
