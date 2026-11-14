@@ -76,6 +76,7 @@ jobs:
           problems += check("research-hub", sorted(f.name for f in Path("research-hub").glob("*.html")))
           problems += check("northstar", ["index.html"])
           problems += check("zone2", sorted(f.name for f in Path("zone2").glob("*.html")))
+          problems += check("affiliate-lab", sorted(f.name for f in Path("affiliate-lab").glob("*.html")))
           if problems:
               print("\n".join(problems))
               raise SystemExit(1)
@@ -92,6 +93,7 @@ jobs:
           import glob, json
           for f in sorted(glob.glob('research-hub/data/*.json')) + \
                    sorted(glob.glob('zone2/data/*.json')) + \
+                   sorted(glob.glob('affiliate-lab/data/*.json')) + \
                    ['research-hub/site-manifest.json']:
               json.load(open(f, encoding='utf-8'))
               print(f'ok   {f}')
@@ -118,6 +120,56 @@ jobs:
               sys.exit(1)
           print(f'{len(pages)} pages: disclosure present, no prices printed')
           PY
+
+      # ---- arena/181863ad-zone2: companion verification site ----
+      - name: affiliate-lab discloses, links resolve, no product prices
+        run: |
+          python3 - <<'PY'
+          import glob, re, sys
+          from html.parser import HTMLParser
+          from pathlib import Path
+          DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+          # Same rule as tools/validate_data.py: a dollar figure in a buying context is a
+          # product price (forbidden); program economics (bounty/commission/rate rows) are not.
+          MONEY = re.compile(r"\$\s?\d[\d,]*(?:\.\d{1,2})?")
+          PRICE_CONTEXT = re.compile(r"\b(price|pricing|current price|list price|buy|add to cart|deal|discount|sale|offer)\b", re.I)
+          PROGRAM_CONTEXT = re.compile(r"\b(bounty|commission|income|payment|minimum|check|gift card|fee|earn|rate|trial|stream|tax|refund|withhold)\w*", re.I)
+          bad = []
+          pages = sorted(glob.glob('affiliate-lab/*.html'))
+          if not pages:
+              bad.append('affiliate-lab: no pages found')
+          class P(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.refs = []
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if tag == "script" and "src" in a:
+                      self.refs.append(a["src"])
+                  if tag == "link" and a.get("rel") == "stylesheet":
+                      self.refs.append(a["href"])
+                  if tag == "a" and a.get("href") and not a["href"].startswith(("http", "#", "mailto:")):
+                      self.refs.append(a["href"])
+          for f in pages:
+              t = open(f, encoding="utf-8").read()
+              if DISCLOSURE not in t:
+                  bad.append(f'{f}: missing disclosure')
+              p = P(); p.feed(t)
+              for ref in p.refs:
+                  if not (Path("affiliate-lab") / ref).resolve().is_file():
+                      bad.append(f'{f}: missing {ref}')
+              # A row of a table, or a block of prose, is the unit of context.
+              units = re.split(r"</tr>|</p>|</li>|<br\s*/?>", re.sub(r"<[^>]+>", " ", t))
+              for unit in units:
+                  for m in MONEY.finditer(unit):
+                      if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):
+                          bad.append(f'{f}: money value {m.group(0)!r} in a buying context')
+          if bad:
+              print('\n'.join(bad)); sys.exit(1)
+          print(f'{len(pages)} affiliate-lab pages: disclosure present, links resolve, no product prices')
+          PY
+
+      - name: affiliate-lab per-row sourcing verifier
+        run: python3 affiliate-lab/scripts/verify_site.py
 
       # ---- arena/f786c0d7-zone2: generated subpages under pages/ ----
       # Rebuild first, so "committed output matches a fresh build" is a real property of this repo

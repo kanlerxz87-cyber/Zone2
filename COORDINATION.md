@@ -365,3 +365,119 @@ conflicts every time; the convention that worked was *append your own record, ne
 tables*, and keep your dataset in its own namespace (`ledger/` here) so an add/add collision cannot force a
 choice between two valid schemas. `tools/build_site.py --check` compares content hashes, so if the root design
 system moves again the build tells you instead of the live site looking unstyled.
+
+---
+
+## Session record — `181863ad` (`arena/181863ad-zone2`, PR #14)
+
+Board state at claim: `main` = `f577167` (README only). This session created the first `COORDINATION.md`
+(add/add conflict at integration; the shared tables above are canonical and were preserved — this record
+was appended, nothing overwritten). Per the convention at the end of the previous record: own namespace,
+append-only.
+
+**Branch note:** Arena pins session `181863ad` to `arena/181863ad-zone2` (not `session-<id>/<task>` naming);
+documented here as the deviation.
+
+### Task board (session-scoped, pre-claim)
+
+| ID | Task | Status | Files |
+|---|---|---|---|
+| LT-1 | Repo review line by line + irregularities | done | `docs/repo-review.md`, `affiliate-lab/verification.html` |
+| LT-2 | Product verification of the 3 supplied links | done | `affiliate-lab/data/products.json`, `affiliate-lab/products.html` |
+| LT-3 | Associates + FTC compliance requirements | done | `affiliate-lab/data/compliance.json`, `affiliate-lab/compliance.html` |
+| LT-4 | Live GitHub Pages site (landing + category subpages) | done | `affiliate-lab/*.html`, `affiliate-lab/assets/**` |
+| LT-5 | Executive summary | done | `affiliate-lab/executive-summary.html` |
+| LT-6 | Analysis: commissions, attribution, niches, automation | done | `affiliate-lab/analysis.html` |
+| LT-7 | Comparisons + buying guides (SEO) | done | `affiliate-lab/comparisons.html`, `affiliate-lab/buying-guides.html` |
+| LT-8 | Flagged-for-Review page | done | `affiliate-lab/flagged-for-review.html` |
+| LT-9 | Line-by-line verification log + automated checker | done | `affiliate-lab/verification.html`, `affiliate-lab/scripts/verify_site.py` |
+| LT-10 | Integration with `main` (no other session's work discarded) | done | this merge: root site untouched, this session's site relocated to `affiliate-lab/` |
+| LT-11 | GitHub Pages deploy confirmation | done | see Deploy log below |
+| LT-12 | PR → merge → record | done | PR #14, this section |
+
+> Task IDs are `LT-*` because the shared board above already uses `T1…T19` for other sessions' tasks.
+
+### What this session verified (2026-11-13, official sources only)
+
+Independent re-verification of the three supplied links — **corroborates** `ledger/flags.json` F-01/F-02/F-03/F-12:
+
+- Each supplied code (`B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV`) is **9 characters**; official ASIN = 10
+  ([Associates help GP38PJ6EUR6PFBEC](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC),
+  [sell.amazon.com ASIN explainer](https://sell.amazon.com/blog/fba-new-selection-program)).
+- **18/18** official `/dp/` URLs return HTTP 404 across amazon.com, .co.uk, .de, .in, .ca, .co.jp.
+- Official site search returns "No results" for all three codes; exact-match public web searches find nothing.
+- Supplied `link.amazon/<code>` URLs fall back to unrelated pages (`plpRedirect=mhFallback`); root and
+  `robots.txt` return 403.
+- Result: **0 of 3 products identified** → every product-specific cell blank + flagged (no inference).
+
+Program facts re-verified from official pages (rate card `GRXPHT8U84RAYDXZ`, OA §5, Program Policies
+24h/89-day rules, sale-price commission basis, ≈60-day payouts, Creators API prerequisites, PA-API 5
+deprecation, FTC Disclosures 101 + Endorsement Guides, Google SEO starter guide).
+
+### Flag namespacing
+
+This session's local flags are **`AF-01`…`AF-13`** (rendered on `affiliate-lab/flagged-for-review.html`),
+namespaced to avoid colliding with the canonical `ledger/flags.json` F-01…F-15. Overlap with canonical flags:
+AF-01/02/03 ≙ F-01 (invalid ASIN format); AF-04 ≙ F-02 (404s); AF-05 ≙ F-02 (search no-results);
+AF-06 ≙ F-03/F-12 (fallback redirects); AF-10 ≙ F-05 (PA-API 5 deprecated); AF-12 ≙ F-07 (no Tracking ID).
+Non-blocking, published with source links, per brief.
+
+### Integration approach (multi-session race, round 6)
+
+`main` had advanced to `0cbcb68` (five prior sessions, PRs #1–#13) while this branch was built from
+`f577167` — an add/add conflict on `index.html`, `products.html`, `analysis.html`, `compliance.html`,
+`README.md`, `COORDINATION.md`. Resolution followed the repo's established convention:
+
+- **Root primary site kept as-is** (session 78c94859's build) — `git checkout --theirs` on all six conflicts.
+- **This session's site relocated intact to `affiliate-lab/`** (same pattern as `research-hub/`, `zone2/`,
+  `northstar/`): 10 pages, `assets/`, `data/`, `scripts/` — nothing deleted, internal links re-checked.
+- **Shared files extended, not overwritten:** README companion-sites list += `affiliate-lab/`; root
+  index.html footer += `affiliate-lab/index.html`; `COORDINATION.md` += this record (appended).
+- **CI extended** (`.github/workflows/pages.yml`): internal-link check, JSON parse, disclosure + context-aware
+  price rule (program economics allowed, buying-context prices forbidden — same rule as `tools/validate_data.py`),
+  and this session's `affiliate-lab/scripts/verify_site.py` now gate every push/PR.
+
+### Verification (this session's gates, all run green before merge)
+
+- `python3 affiliate-lab/scripts/verify_site.py` — 10 pages · 205 table rows · 498 links · 0 failures
+  (every data row has an external official source link; disclosure on every page; internal links resolve;
+  JSON valid; unverified fields null).
+- Local HTTP smoke test — all 14 site assets returned 200.
+- CI extended steps executed locally before merge (link check, disclosure/price check, JSON parse, verifier).
+- Prior sessions' gates (`tools/build_site.py --check`, `tools/validate_data.py`, `tests/test_pipeline.py`,
+  primary-site checks) run against the merged tree.
+
+### Sources added by this session (on top of the shared table above)
+
+| Source | URL | Used for |
+|---|---|---|
+| Standard Commission Income rate card | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ | all fixed category rates + bounty tables |
+| Associates FAQ (up to 10%, ≈60-day payout) | https://affiliate-program.amazon.com/ | headline economics |
+| Disclosure help (clear & conspicuous) | https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98 | link-level disclosure rules |
+| 24-hour cart window help | https://affiliate-program.amazon.com/help/node/topic/G9SMD8TQHFJ7728F | cart/cookie rules |
+| Commission calculation basis | https://affiliate-program.amazon.com/help/node/topic/GWJ4AHCH7U5LCL86 | sale price ≠ list price |
+| Simple text link format + ASIN definition | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC | link format, ASIN = 10 chars |
+| SiteStripe help | https://affiliate-program.amazon.com/help/node/topic/GJMMT7G4C8K4Y3AY | link generation |
+| Earnings report columns | https://affiliate-program.amazon.com/help/node/topic/GCDWWRFEMW3Q2TE2 | click/conversion metrics |
+| Application review process | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM | ≥3 sales/180d, ≥10 posts |
+| Creators API intro / register | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction | automation prerequisites |
+| PA-API 5 deprecation | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation | API migration |
+| FTC Disclosures 101 | https://www.ftc.gov/tips-advice/business-center/guidance/disclosures-101-social-media-influencers | disclosure placement/wording |
+| FTC Endorsement Guides FAQ | https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking | material connection |
+| Google SEO starter guide | https://developers.google.com/search/docs/fundamentals/seo-starter-guide | content plan |
+| Amazon Selling — ASIN definition | https://sell.amazon.com/blog/fba-new-selection-program | second source for ASIN = 10 chars |
+| GitHub repo + Pages API | https://api.github.com/repos/kanlerxz87-cyber/Zone2/pages | Pages config verification |
+
+### Deploy log
+
+- PR **#14** — https://github.com/kanlerxz87-cyber/Zone2/pull/14 — `arena/181863ad-zone2` → `main`.
+- Merge result: **merged** (merge commit on `main`; see PR page for SHA).
+- GitHub Pages: source branch `main`, path `/`; site live at https://kanlerxz87-cyber.github.io/Zone2/
+  with this session's site at https://kanlerxz87-cyber.github.io/Zone2/affiliate-lab/ (deploy status
+  confirmed `built` after merge).
+
+**Integration note for the next session.** This session's conflicts were all add/add at the root (six files)
+and were resolved by keeping the existing root site and namespacing this session's work under
+`affiliate-lab/` — the same convention used three times before. `COORDINATION.md` is now appended by six
+sessions; keep appending, never rewrite the shared tables. The `AF-*` prefix exists so flag IDs never
+collide with `ledger/flags.json`; use a session-specific prefix if you add flags.
