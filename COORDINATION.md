@@ -832,3 +832,10 @@ Live page checked via fetch (`https://kanlerxz87-cyber.github.io/Zone2/pages/com
 - No executive-summary changes; `pages/executive-summary.html` and `EXECUTIVE_SUMMARY.md` are unchanged.
 - No new product rows added. The three requested products remain **0 of 3 identified** (F-12).
 
+
+### PR and deploy record — `arena/dc15ce5a-zone2` (T21)
+
+- PR **#26** — https://github.com/kanlerxz87-cyber/Zone2/pull/26 — `arena/dc15ce5a-zone2` → `main` (coordination-only).
+- Merge result: **MERGED** at `2026-11-14T10:05:05Z`, merge commit `4be892e6cdda7ca40689f20090fbfd95e6fca7c0` (`gh pr merge 26 --merge`).
+- Post-merge on `main`: `Build, verify and deploy` — **success**; `pages build and deployment` — **success** (both on `4be892e`).
+- PR #22 (F-16 fix, `arena/bbe4ca47-zone2`) was **not** merged by this session; it remains conflicting with a failing check, owned by `bbe4ca47`.
