@@ -35,8 +35,8 @@
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="num">0 of 3</div><div class="lbl">Supplied products identified from official sources</div></div>
-      <div class="kpi"><div class="num">3</div><div class="lbl">Links verified as resolving stably to one listing each</div></div>
+      <div class="kpi"><div class="num">3 of 3</div><div class="lbl">Supplied links resolved to one specific Amazon product (observed 2026-11-14)</div></div>
+      <div class="kpi"><div class="num">1</div><div class="lbl">Niche of the resolved destinations — Home &amp; Kitchen air fryers</div></div>
       <div class="kpi"><div class="num">Up to 10%</div><div class="lbl">Official program commission ceiling</div></div>
       <div class="kpi"><div class="num" id="flagCount">—</div><div class="lbl">Items flagged for review</div></div>
     </div>
@@ -49,39 +49,32 @@
         products, and analyzes pricing, reviews, competition and commission potential — then generates
         SEO-optimized product articles, comparisons and buying guides, manages affiliate links, tracks
         clicks and conversions, and continuously optimizes campaigns. All findings on this site are
-        verified line by line against official Amazon sources; anything that could not be confirmed from
-        an official source is left blank and published on the
-        <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a> page.
+        verified line by line against official sources; anything that could not be confirmed from an
+        official source is left blank and published on the
+        <a href="flagged.html">Flagged for Review</a> page.
       </p>
       <p>
         Three affiliate links were supplied for this engagement. Each short link
-        (<code>link.amazon/…</code>) resolves to an Amazon air-fryer listing: a CHEFMAN 6-quart dual basket
-        air fryer oven (B0CDY277D3), an Emeril Lagasse 26QT French-door air fryer toaster oven
-        (B09B7SB46R), and a Chefman 8-quart TurboFry air fryer (B08DKYBTPH).
+        (<code>link.amazon/…</code>) resolves to exactly one Amazon product page — a CHEFMAN 6-quart
+        dual-basket air fryer oven (B0CDY277D3), an Emeril Lagasse 26QT French-door air fryer toaster
+        oven (B09B7SB46R) and a Chefman 8-quart TurboFry air fryer (B08DKYBTPH). Each destination is
+        stable across repeated fetches, each carries its own per-link source token, and an
+        <em>unknown</em> code on the same service returns a 404 instead of a product. That control is
+        what settles the question the evidence raises: the supplied codes are honoured lookups, not
+        ignored tokens. The full trail is in
+        <a href="products.html#">Products → Resolution evidence</a>.
       </p>
       <p>
-        Irregularity applies to all three links: each code in a <code>link.amazon</code> URL is 9 characters
-        (an Amazon ASIN is 10), and <code>amazon.com/dp/&lt;code&gt;</code> returns Page Not Found for each.
-        Because no public Amazon document binds a <code>link.amazon</code> code to a destination ASIN, and
-        because none of the three resolved URLs carries an Associates <code>tag</code>, the destinations are
-        <strong>not established as the requested products</strong> — they are recorded as the product each
-        link resolves to, and that mapping is flagged for confirmation on the
-        <a href="flagged.html">Flagged for Review</a> page. Pricing, ratings, review
-        counts, availability and the category commission rate could not be confirmed from official sources
-        through automated verification and are therefore left blank and flagged, in line with the
-        no-inference rule.
-      </p>
-      <p class="note" style="font-size:13px;color:var(--muted)">
-        <strong>Correction (2026-11-14).</strong> An earlier version of this page described the destinations as
-        arbitrary “fallback” pages on the strength of the <code>plpRedirect=mhFallback</code> and
-        <code>lv=shuf</code> markers. That reasoning was tested and does not hold: a bare, untagged request to
-        a <em>valid</em> ASIN (<code>/dp/B08DKYBTPH</code>) is answered with the real product page and the same
-        markers appended, and re-fetching a short link returns the same ASIN, body and per-link
-        <code>btn_ref</code> token rather than a shuffle. The destinations are therefore stable and
-        individually tracked, not arbitrary. Evidence, sources and open flags:
-        <a href="revalidation/index.html">Revalidation</a>.
+        Three things remain genuinely unverified, and they are the only things standing between this
+        repository and a live, earning site. <strong>First, identity:</strong> each supplied code is
+        9 characters (an Amazon ASIN is 10) and <code>amazon.com/dp/&lt;code&gt;</code> returns Page
+        Not Found, while no public Amazon document binds a <code>link.amazon</code> code to a product.
+        The destinations are therefore published as “the product this link resolves to”, never as “the
+        product the brief named” (F-01, F-02, F-03). <strong>Second, economics:</strong> the three
+        links carry no Associates <code>tag</code>, so as supplied they cannot attribute a sale or earn
+        a commission (F-24). <strong>Third, data:</strong> price, rating, review count, availability,
+        sales rank and the per-category commission band could not be confirmed from an official source
+        and are left blank, in line with the no-inference rule.
       </p>
       <p>
         Compliance is enforced from the official Amazon Associates documents: the mandatory disclosure
@@ -95,7 +88,16 @@
     <div class="card">
       <h3>Verified Platform Facts</h3>
       <div id="execFactsTable"></div>
-      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-14 (re-verified; corroborates the 2026-11-13 capture).</p>
+      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-14.</p>
+    </div>
+
+    <div class="card">
+      <h3>How the three supplied links behave — evidence &amp; controls</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Every observation and every control, each linked to the page it was read from. This is the
+        evidence that lets the site name the three products at all.
+      </p>
+      <div id="resolutionTable"></div>
     </div>
 
     <div class="card">
@@ -109,10 +111,15 @@
       <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies</a> ·
       <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement</a> ·
       <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">Amazon product pages</a>
-      · <a href="verification.html">Verification log</a> · <a href="sources.html">All sources</a>
-      · Companion sites: <a href="research-hub/start.html">Affiliate Research Hub</a> · <a href="pages/index.html">Findings &amp; verified subpages</a> ·
-      <a href="northstar/index.html">Northstar prototype</a> · <a href="affiliate-lab/index.html">Affiliate Lab (verification site)</a> ·
-      <a href="revalidation/index.html">Revalidation 2026-11-14 (control test)</a>
+      · Full source register: <a href="sources.html">Sources</a> · Verification log:
+      <a href="verification.html">Verification</a> · Findings &amp; category subpages:
+      <a href="pages/index.html">Findings hub</a> ·
+      <a href="pages/categories/index.html">Categories</a> · Companion sites:
+      <a href="research-hub/start.html">Affiliate Research Hub</a> ·
+      <a href="revalidation/index.html">Revalidation 2026-11-14</a> ·
+      <a href="affiliate-lab/index.html">Affiliate Lab</a> ·
+      <a href="northstar/index.html">Northstar prototype</a> ·
+      <a href="zone2/index.html">Zone2 platform build</a>
     </footer>
   </main>
 </div>

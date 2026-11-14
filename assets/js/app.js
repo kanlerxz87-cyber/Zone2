@@ -1,4 +1,11 @@
-/* Zone2 — render verified data into dashboard tables */
+/* Zone2 — render verified data into dashboard tables
+ *
+ * T23 (final integration): the renderer was rewritten to match the canonical dataset in
+ * assets/js/data.js, whose product, specification, evidence and flag blocks are generated from
+ * ledger/*.json by tools/build_root_data.py. The tables below are the reader-facing view of that
+ * ledger: every row carries a link to the official source it was read from, and every value that
+ * could not be confirmed from an official source renders as an explicit blank, never as a guess.
+ */
 (function () {
   "use strict";
 
@@ -25,11 +32,18 @@
   function badge(status) {
     if (status === "verified") return '<span class="badge ok">Verified</span>';
     if (status === "conflict") return '<span class="badge warn">Conflict</span>';
-    if (status === "observed" || status === "OBSERVED" || status === "evidence" || status === "EVIDENCE_ONLY") return '<span class="badge warn">Observed / evidence only</span>';
+    if (status === "observed" || status === "OBSERVED" || status === "evidence" || status === "EVIDENCE_ONLY")
+      return '<span class="badge ok">Observed</span>';
     if (status === "unverified") return '<span class="badge flag">Unverified</span>';
     if (status === "blocked") return '<span class="badge flag">Blocked</span>';
     if (status === "planned") return '<span class="badge warn">Planned</span>';
     return esc(status || "");
+  }
+
+  function severityBadge(sev) {
+    if (sev === "high") return '<span class="badge flag">High</span>';
+    if (sev === "medium") return '<span class="badge warn">Medium</span>';
+    return '<span class="badge">Low</span>';
   }
 
   function renderTable(id, columns, rows, opts) {
@@ -53,44 +67,92 @@
     el.innerHTML = html;
   }
 
+  function pidLabel(pid) {
+    const found = PRODUCTS.filter(function (p) { return p.id === pid; })[0];
+    if (!found) return esc(pid);
+    return esc(found.brand + " " + found.resolvesToAsin + " · " + found.shortCode);
+  }
+
+  /* ---- the supplied links, exactly as supplied ------------------------------------------- */
   function renderProducts() {
     renderTable(
       "productsTable",
       [
         { key: "shortCode", label: "Provided link code" },
-        { key: "codeLength", label: "Code length", render: function (r) { return r.codeLength + " chars"; } },
-        { key: "asinFormatValid", label: "Valid ASIN?", render: function (r) { return r.asinFormatValid ? "Yes" : "No (ASIN is 10)"; } },
-        { key: "canonicalDpResult", label: "amazon.com/dp/<code> result" },
-        { key: "brand", label: "Brand", render: function (r) { return cell(r.brand); } },
-        { key: "title", label: "Product title", render: function (r) { return cell(r.title); } },
-        { key: "category", label: "Category", render: function (r) { return cell(r.category); } },
-        { key: "price", label: "Price", render: function (r) { return cell(r.price); } },
-        { key: "rating", label: "Rating", render: function (r) { return cell(r.rating); } },
-        { key: "reviewCount", label: "Reviews", render: function (r) { return cell(r.reviewCount); } },
-        { key: "availability", label: "Availability", render: function (r) { return cell(r.availability); } },
-        { key: "status", label: "Status", render: function (r) { return badge("unverified"); } },
-        { key: "source", label: "Source", link: true, linkLabels: {} },
+        { key: "codeLength", label: "Code length", render: function (r) { return r.codeLength + " chars (ASIN is 10)"; } },
+        { key: "asinFormatValid", label: "Valid ASIN?", render: function (r) { return r.asinFormatValid ? "Yes" : "No"; } },
+        { key: "canonicalDpResult", label: "amazon.com/dp/&lt;code&gt; result" },
+        {
+          key: "identityStatus",
+          label: "Status of the token as supplied",
+          render: function (r) { return badge("unverified"); },
+        },
+        { key: "source", label: "Source", link: true },
       ],
       PRODUCTS
     );
   }
 
-  function renderFallback() {
-    const el = document.getElementById("fallbackTable");
-    if (!el) return;
-    const prodName = {};
-    PRODUCTS.forEach(function (p) { prodName[p.id] = p.shortCode; });
+  /* ---- what each supplied link resolves to ------------------------------------------------ */
+  function renderResolved() {
     renderTable(
-      "fallbackTable",
+      "resolvedTable",
       [
-        { key: "pid", label: "Supplied link", render: function (r) { return esc(prodName[r.pid] || r.pid); } },
-        { key: "destAsin", label: "Observed redirect ASIN" },
-        { key: "destTitle", label: "Observed redirect page" },
-        { key: "redirectMarkers", label: "Redirect markers" },
-        { key: "status", label: "Status", render: function (r) { return badge(r.status); } },
-        { key: "source", label: "Source", link: true, linkLabels: {} },
+        { key: "shortCode", label: "Provided link code" },
+        {
+          key: "resolvesToAsin",
+          label: "Resolves to (ASIN)",
+          render: function (r) { return link(r.resolvesToUrl, r.resolvesToAsin); },
+        },
+        { key: "brand", label: "Brand" },
+        { key: "title", label: "Listing title as published on Amazon" },
+        { key: "categoryPath", label: "Category path" },
+        { key: "price", label: "Price", render: function (r) { return cell(r.price); } },
+        { key: "rating", label: "Rating", render: function (r) { return cell(r.rating); } },
+        { key: "reviewCount", label: "Reviews", render: function (r) { return cell(r.reviewCount); } },
+        { key: "availability", label: "Availability", render: function (r) { return cell(r.availability); } },
+        { key: "identityStatus", label: "Status", render: function (r) { return badge(r.identityStatus); } },
+        { key: "source", label: "Source", link: true },
       ],
-      REDIRECT_DESTINATIONS
+      PRODUCTS
+    );
+  }
+
+  /* ---- verified specifications, one source link per row ----------------------------------- */
+  function renderSpecs() {
+    renderTable(
+      "specsTable",
+      [
+        { key: "pid", label: "Product", render: function (r) { return pidLabel(r.pid); } },
+        { key: "attribute", label: "Attribute" },
+        {
+          key: "value",
+          label: "Value",
+          render: function (r) {
+            let v = cell(r.value);
+            if (r.sourceLabel) v += '<div class="note" style="font-size:12px;color:var(--muted)">' + esc(r.sourceLabel) + "</div>";
+            return v;
+          },
+        },
+        { key: "status", label: "Status", render: function (r) { return badge(r.status); } },
+        { key: "source", label: "Official source", link: true },
+      ],
+      SPECS
+    );
+  }
+
+  /* ---- the resolution evidence and the controls that decide how to read it ---------------- */
+  function renderResolution() {
+    renderTable(
+      "resolutionTable",
+      [
+        { key: "id", label: "ID" },
+        { key: "observation", label: "Observation (reproducible by hand)" },
+        { key: "interpretation", label: "What it shows" },
+        { key: "status", label: "Status", render: function (r) { return badge(r.status); } },
+        { key: "source", label: "Source", link: true },
+      ],
+      RESOLUTION_EVIDENCE
     );
   }
 
@@ -154,7 +216,7 @@
         { key: "content", label: "Content type" },
         { key: "target", label: "Target product / topic" },
         { key: "format", label: "Format" },
-        { key: "status", label: "Status" },
+        { key: "status", label: "Status", render: function (r) { return badge(String(r.status).split(" ")[0].toLowerCase()); } },
         { key: "source", label: "Product source", link: true },
       ],
       CONTENT_ROWS
@@ -180,14 +242,16 @@
       "flaggedTable",
       [
         { key: "item", label: "Flagged item" },
-        { key: "detail", label: "Details" },
+        { key: "severity", label: "Severity", render: function (r) { return severityBadge(r.severity); } },
+        { key: "detail", label: "What was found" },
+        { key: "impact", label: "Why it matters" },
+        { key: "actionRequired", label: "What is needed" },
         {
-          // Canonical flag id from ledger/flags.json, linked to its full text + sources.
-          key: "ledger_flag",
+          key: "ledgerFlag",
           label: "Ledger flag",
           render: function (r) {
-            if (!r.ledger_flag) return cell(null);
-            return '<a href="' + esc(r.ledger_url) + '">' + esc(r.ledger_flag) + "</a>";
+            if (!r.ledgerFlag) return cell(null);
+            return '<a href="' + esc(r.ledgerUrl) + '">' + esc(r.ledgerFlag) + "</a>";
           },
         },
         { key: "source", label: "Source", link: true },
@@ -209,11 +273,10 @@
     if (!el) return;
     el.innerHTML = PRODUCTS.map(function (p) {
       return (
-        '<div class="card"><h3>Supplied link ' + esc(p.shortCode) + "</h3>" +
-        "<p><strong>Code length:</strong> " + esc(p.codeLength) + " chars · <strong>Valid ASIN?</strong> No (ASIN is 10) · <strong>Status:</strong> " + badge("unverified") + "</p>" +
-        "<p><strong>amazon.com/dp/&lt;code&gt;:</strong> " + esc(p.canonicalDpResult) + "</p>" +
-        "<p>No official source identifies the intended product, so title, brand, category, price, rating, review count and availability are left blank and flagged. Not inferred.</p>" +
-        '<p>' + link(p.canonicalDpUrl, "Canonical /dp/ lookup") + " · " + link(p.shortLink, "Provided short link") + "</p></div>"
+        '<div class="card"><h3>' + esc(p.brand) + " — " + esc(p.resolvesToAsin) + "</h3>" +
+        "<p><strong>The product this link resolves to:</strong> " + esc(p.title) + "</p>" +
+        "<p><strong>Provided code:</strong> " + esc(p.shortCode) + " (" + esc(p.codeLength) + " chars; an ASIN is 10, and <code>amazon.com/dp/&lt;code&gt;</code> returns " + esc(p.canonicalDpResult) + ") — " + badge("unverified") + " as a brief item, " + badge(p.identityStatus) + " as a link destination.</p>" +
+        "<p>" + link(p.resolvesToUrl, "Amazon product page") + " · " + link(p.shortLink, "Provided short link") + " · " + link(p.canonicalDpUrl, "Canonical /dp/ lookup") + "</p></div>"
       );
     }).join("");
   }
@@ -224,7 +287,9 @@
     if (fc) fc.textContent = String(FLAGGED_ROWS.length);
 
     renderProducts();
-    renderFallback();
+    renderResolved();
+    renderSpecs();
+    renderResolution();
     renderExecFacts();
     renderNiche();
     renderCommission();

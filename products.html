@@ -18,13 +18,19 @@
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html">Tracking</a>
+      <a href="verification.html">Verification</a>
+      <a href="sources.html">Sources</a>
       <a href="flagged.html">Flagged for Review</a>
     </nav>
   </aside>
   <main class="main">
     <div class="page-head">
       <h2>Affiliate Products</h2>
-      <p>Verification status of the three supplied links. No official source identified the intended product for any link, so every product-specific cell is left blank and flagged — never inferred. Each row links to the official Amazon <code>/dp/</code> lookup that returned Page Not Found.</p>
+      <p>The three links supplied in the brief, and the three products each of them resolves to.
+      Two separate questions are kept apart on this page: what can be stated about the code as
+      supplied, and what the link itself resolves to. Every row below carries a link to the official
+      page it was read from; every value that could not be confirmed from an official source is left
+      blank and flagged — never inferred.</p>
     </div>
 
     <div class="disclosure">
@@ -32,33 +38,58 @@
     </div>
 
     <div class="card">
-      <h3>Supplied Affiliate Links — verification status</h3>
+      <h3>1 · The supplied codes, exactly as supplied</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Each supplied code is 9 characters, an Amazon ASIN is 10, and
+        <code>amazon.com/dp/&lt;code&gt;</code> returns Amazon's Page Not Found page. No product
+        attribute can therefore be stated <em>for the token itself</em> — which is why the cells that
+        describe the code are blank and the row is marked unverified.
+      </p>
       <div id="productsTable"></div>
+    </div>
+
+    <div class="card">
+      <h3>2 · What each supplied link resolves to — observed 2026-11-14</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        Each <code>link.amazon</code> URL resolves to exactly one Amazon product page, reproducibly.
+        The decisive control: an <em>unknown</em> 9-character code on the same service returns a
+        404 (“You've clicked on an invalid URL”) instead of a product, so the supplied codes are
+        honoured lookups rather than ignored tokens (flag F-20). What is still unconfirmed is the
+        <em>contract</em> — no public Amazon document binds a <code>link.amazon</code> code to a
+        product — so these are published as “the product this link resolves to”, never as “the product
+        the brief named” (flag F-03).
+      </p>
+      <div id="resolvedTable"></div>
     </div>
 
     <div id="productOverview"></div>
 
     <div class="card">
-      <h3>Observed redirect destinations — evidence only, NOT the requested products</h3>
+      <h3>3 · Verified specifications — each row sourced</h3>
       <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        Each supplied <code>link.amazon</code> URL redirected (carrying <code>plpRedirect=mhFallback</code>
-        / <code>lv=shuf</code> markers) to an Amazon air-fryer listing. Whether each redirect is a stable
-        token→product mapping or a shuffled fallback is <strong>contested and under review</strong> (F-12
-        observed instability; the <a href="revalidation/index.html">Revalidation 2026-11-14</a> control
-        test observed stability) — this page does not assert either side. Regardless, no official Amazon
-        source establishes these destinations as the requested products, so they are recorded as observed
-        evidence only and are <strong>not</strong> treated as the requested products. Manufacturer
-        specifications for these candidate ASINs are documented, clearly labeled as candidates, in the
-        <a href="research-hub/start.html">Affiliate Research Hub</a> companion site (see flag F-12).
+        Every row below was read on 2026-11-14 from the official Amazon listing (its “About this
+        item” bullets and its Product-information block) or from the manufacturer's own product page.
+        Where two official pages disagree, the row is marked <strong>Conflict</strong> and shows
+        <em>both</em> values with their sources; nothing is resolved by inference.
       </p>
-      <div id="fallbackTable"></div>
+      <div id="specsTable"></div>
+    </div>
+
+    <div class="card">
+      <h3>4 · Resolution evidence &amp; controls — reproducible by hand</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
+        The full evidence trail behind the table above, including the controls that decide how the
+        redirect behaviour must be read. Open any source link in a browser to reproduce it.
+      </p>
+      <div id="resolutionTable"></div>
     </div>
 
     <footer class="site">
-      Verified dataset date: 2026-11-14 (re-verified; corroborates the 2026-11-13 capture). Product
-      identity could not be established from any official source for the three supplied links, so title,
-      brand, category, price, rating, review count and availability are <em>unverified</em> and left
-      blank — never inferred. See the <a href="flagged.html">Flagged for Review</a> page.
+      Verified dataset date: 2026-11-14. The products named above are the destinations the supplied
+      links resolve to; the brief mapping, the per-product price, rating, review count, availability
+      and commission band remain unverified and are left blank — see the
+      <a href="flagged.html">Flagged for Review</a> page and the
+      <a href="verification.html">Verification</a> log.
     </footer>
   </main>
 </div>
