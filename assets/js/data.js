@@ -1222,10 +1222,10 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-29 — tools/validate_data.py skipped any ledger row whose only source field is 'source_id' (singular)",
-    detail: "Found 2026-11-14 by session d3ce1c29. check_rows() walks the ledger and yields a dict as a row only if it contains 'source_ids' or 'id'. Every commission-table row (bands, bounty rows, bonus rows, statement terms) uses the singular 'source_id' and has no 'id', so those rows were never counted and never held to the 'a row that carries a value must carry a source' rule. Completing the bounty table would have added 48 unchecked rows.",
+    detail: "Found 2026-11-14 by session d3ce1c29. check_rows() walks the ledger and yields a dict as a row only if it contains 'source_ids' or 'id'. Every commission-table row (bands, bounty rows, bonus rows, statement terms) uses the singular 'source_id' and has no 'id', so those rows were never counted and never held to the 'a row that carries a value must carry a source' rule. Completing the bounty table added 48 unchecked rows before the gap was closed.",
     severity: "low",
     impact: "The gate could not fail on an unsourced rate row — precisely the failure mode F-27 was.",
-    actionRequired: "None open. _walk_rows now also yields on 'source_id'; the gate's row count rose from 173 to 228 and passes. Negative check: reverting the one-line change lowers the count to 173, so the new rows are really being walked.",
+    actionRequired: "None open. _walk_rows now also yields on 'source_id'; the gate's row count rose from 173 to 243 and passes. Negative check: reverting the one-line change lowers the count back to 173, so the new rows are really being walked.",
     ledgerFlag: "F-29",
     ledgerUrl: "pages/flags.html#F-29",
     source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",

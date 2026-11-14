@@ -148,7 +148,8 @@ that distinction is recorded on the site rather than papered over.
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — 11 items, including the deprecated-API trap and the
+  (`pages/flags.html`) with source links — **29 items** (F-01 … F-29; the number is derived from
+  `ledger/flags.json` and gated, so it cannot be typed wrong again), including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
 ---
@@ -256,3 +257,58 @@ traffic or earnings figure is published, because none can be sourced from an off
 Creators API and an Associates account — and this repository publishes nothing it cannot source. The owner
 actions from §7 above (confirm the three ASINs in Associates Central, add the Associates tag, register for the
 Creators API, connect a dated report) remain the only things standing between this platform and live revenue.
+
+---
+
+## Addendum — third verification pass, 2026-11-14 (session `d3ce1c29`, task T26)
+
+A fourth independent pass, run against the live official pages with the board showing no other active session
+(`main` = `6a90dfc`, branch `arena/d3ce1c29-zone2`, no open pull requests). Its purpose was to re-derive every
+load-bearing claim from the source rather than from earlier sessions' notes, and to run the decisive control on
+all three destinations instead of one.
+
+### Re-derived from the official pages, in this session
+
+| Claim | What the official page says | Verdict |
+| :-- | :-- | :-- |
+| §5 disclosure | “You must clearly and prominently state the following … on your Site …: **“As an Amazon Associate I earn from qualifying purchases.”**” | **Verified verbatim** ([S01](https://affiliate-program.amazon.com/help/operating/agreement)) |
+| Document currency | Operating Agreement header: **“Updated: October 15, 2025”** | **Verified** ([S01](https://affiliate-program.amazon.com/help/operating/agreement)) |
+| Table 1 bands | Eleven bands, 10.00 % → 0.00 %, plus “All Other Categories 4.00 %” | **Verified** row by row against the ledger ([S04](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ)) |
+| ASIN definition | “ASIN is the **10-digit** code that Amazon uses to denote specific products.” | **Verified verbatim** ([S24](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC)) |
+| Public ceiling and payment timing | “Earn **up to 10 %** in associate commissions …”; “Commission income is paid **approximately 60 days** after the end of the month in which it was earned.” | **Verified verbatim** ([S36](https://affiliate-program.amazon.com/)) |
+| Trade-In rates, fine-art cap, free-Kindle limit | 4.00 % / 4.00 % / 0.00 %; “maximum of **$200** per Product”; ≥20 000 free eBooks **and** ≥80 % free share | **Verified** ([S04](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ)) |
+| Unknown short code | `https://link.amazon/B00TEST12` → `amzlinks.in/B00TEST12` → **“404: File Not Found … You've clicked on an invalid URL.”** | **Reproduced** ([S32](https://link.amazon/B00TEST12)) |
+
+### The `mhFallback` control, run on all three destinations
+
+Session `c6e94e8d` ran this control on one ASIN (V-45). It has now been run on all three, and it reproduces
+every time: a **bare, untagged** `https://www.amazon.com/dp/<ASIN>` request — no short link, no parameters —
+returns the real product page with **`?lv=shuf&channelId=500&plpRedirect=mhFallback`** appended by Amazon's own
+redirector (V-56 / V-57 / V-58). The marker is therefore a property of an ordinary `/dp/` load, not a signature
+of a short-link fallback. The “these destinations are fallback pages” reading is **refuted on all three**; the
+identity question (F-01 / F-03) is unaffected and remains open.
+
+The three supplied links were also re-resolved in this session and each still lands on the same single listing:
+`B04G1MEwY` → `B0CDY277D3`, `B02NbDxp3` → `B09B7SB46R`, `B00hJ57DV` → `B08DKYBTPH`. All three `btn_ref` tokens
+were again different from every value recorded earlier the same day, and from each other — F-21 confirmed a
+fourth time.
+
+### One substantive defect found and fixed (F-27)
+
+The “Bounty events” panel published **9** rows under a notice reading *“Transcribed row-by-row from Amazon's
+published Associates Program Standard Commission Income Statement.”* S04 actually publishes **46** rows under
+“(a) Bounty Events” and **2** more under “(b) Bonus Events”. The nine rows on the page were the first nine and
+were individually correct and correctly sourced — the defect was **omission**, not error, but a partial list
+wearing a completeness claim reads as the whole set, and it hid the two largest published bounty rates on the
+program (Audible $20.00, Amazon Business $15.00). The full 46 + 2 are now transcribed, rendered, and counted on
+`pages/commissions.html` (F-27, closed).
+
+Two smaller irregularities were closed alongside it: the zero-rate caption said “Nine category groups publish a
+0.00 % rate”, a count that matches no grouping in Table 1 (F-28, reworded); and `tools/validate_data.py` skipped
+any ledger row whose only source field is `source_id`, so every commission row — including the 48 new ones —
+would have escaped the source check (F-29, fixed; the gate's row count rose 173 → 243 and was negative-tested).
+
+### Unchanged
+
+Nothing about the product rows changed. 0 of 3 supplied codes are identified as ASINs; every unsourceable field
+stays blank; no price, rating, review count, BSR, availability or earnings figure is published.

@@ -319,6 +319,49 @@ def check_flag_count(report: Report) -> None:
             "- the dashboard would publish a flag count that disagrees with the register"
         )
     report.stats["canonical_flags"] = canonical
+    check_published_counts(report, canonical)
+
+
+def check_published_counts(report: Report, canonical_flags: int) -> None:
+    """Catch the drift class in prose and in README link labels, not just in the JS constant.
+
+    Three times now a hand-typed count has gone stale against the register it described:
+    F-17 (a "11 items flagged" KPI), F-26 (a KPI derived from the reader-facing subset), and finally
+    — found by session d3ce1c29 while adding F-27…F-29 — `flagged.html` still reading "26 flags
+    (F-01 … F-26)" and `README.md` still advertising "(14 items)", "(22 sources)" and "(32 checks)"
+    when the ledgers held 29 / 36 / 62. Every one of them was invisible to the gates.
+
+    This check holds any published statement of the flag, source or verification-log count — in HTML
+    pages or in Markdown — to the ledger it claims to describe.
+    """
+    n_sources = len(_load("sources.json").get("sources", []))
+    n_verification = len(_load("verification.json").get("rows", []))
+
+    checks = [
+        (re.compile(r"(\d+)\s+flags?\s*\(F-01\s*[^\d]{0,6}\s*F-(\d{2})\)", re.I), "flags", canonical_flags, "both groups"),
+        (re.compile(r"flagged for review\s*\((\d+)\s+items?\)", re.I), "flags", canonical_flags, "group 1"),
+        (re.compile(r"source register\s*\((\d+)\s+sources?\)", re.I), "sources", n_sources, "group 1"),
+        (re.compile(r"verification log\s*\((\d+)\s+checks?\)", re.I), "verification rows", n_verification, "group 1"),
+    ]
+
+    # Deliberately wider than owned_pages(): the sentences that drifted live in root-level HTML and in
+    # README.md, neither of which owned_pages() covers because other gates police the root namespace.
+    scope = sorted(REPO.glob("*.html")) + sorted((REPO / "pages").rglob("*.html"))
+    scope += sorted(REPO.glob("*.md")) + sorted((REPO / "docs").glob("*.md"))
+    for path in scope:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for pattern, label, expected, which in checks:
+            for m in pattern.finditer(text):
+                stated = [int(g) for g in m.groups()]
+                if which == "both groups":
+                    bad = any(v != expected for v in stated)
+                else:
+                    bad = stated[0] != expected
+                if bad:
+                    report.fail(
+                        f"{path.relative_to(REPO)}: prose says '{m.group(0)}' but ledger holds "
+                        f"{expected} {label} - a published count that disagrees with the register"
+                    )
 
 
 def check_no_product_prices(report: Report) -> None:
