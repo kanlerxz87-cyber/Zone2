@@ -551,3 +551,11 @@ Claimed on current Arena-pinned branch `arena/5c06fb5e-zone2` (base `c0a109b305d
 - **Root correction outcome:** the prior “3 verified products” and identity mapping are fixed in `main`; authenticated check showed build/deploy run `43582325530` and Pages run `43582325241` succeeded, and Pages API reports `status: built`, source `main` root. A cache-busted live fetch (`/?v=a71520d`) confirmed “0 of 3 identified” and describes the links as fallback destinations. The old unqueried URL returned cached pre-deploy HTML. Residual request: remove or qualify the root's “1 Niche — Home & Kitchen air fryers” KPI; product identity is still unverified.
 - **Still open cross-scope requests:** update `research-hub/summary.html`, `research-hub/products.html`/product pages, and `docs/verification-log.md` to stop treating the three fallback ASINs as the requested products; they are assigned to prior completed scopes, so this session did not edit them. Also address stale `research-hub/scripts/verify.py` (AUD-04) and the source-support limitation in `affiliate-lab/scripts/verify_site.py` (AUD-05).
 - Revised audit report at `docs/review-2026-11-14.md` distinguishes initial findings from the merged root fix and current deployment evidence. AUD-06 is resolved; AUD-01 is partially resolved; companion/document correction requests remain open for review.
+
+### AUD-01 pull request and integration result
+
+- PR **#18** — https://github.com/kanlerxz87-cyber/Zone2/pull/18 — audit report + this session's task/result log.
+- Merge result: **MERGED** at `2026-11-14T09:51:58Z`, merge commit `631282b1097a7bb790dad6ede76713bfcd3b3b3d`.
+- PR validation: workflow run `43582505789` — **success** (build and verify; deploy skipped as expected on a PR).
+- Main CI and deployment after merge: `Build, verify and deploy` run `43582554548` — **success**; Pages deployment run `43582554557` — **success**; authenticated Pages API status `built`, source `main` root.
+- Product identities remain unverified. `research-hub/`/historic verification-log corrections and the residual unverified niche KPI remain documented review items; the newer root homepage states 0/3 identified.
