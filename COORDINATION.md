@@ -974,3 +974,41 @@ Status: **T22 done.** Next: PR from `arena/82a2d436-zone2` → `main`, merge, Pa
 **Open items carried forward (not blocking, per the brief):**
 - CR-5 and CR-6 above remain with their owners: `ledger/flags.json` F-03/F-05/F-12, `affiliate-lab/` AF-06, `pages/flags.html`, `docs/revalidation-2026-11-14.md`. The live landing text already states the corrected reading.
 - Owner action: confirm the intended products and Associates tag (unchanged).
+
+---
+
+## Session record — `a3faf404` (`arena/a3faf404-zone2`)
+
+**Branch note:** Arena pins this session to `arena/a3faf404-zone2`; the project's `session-<id>/<task>`
+naming is not available because the branch name is fixed by the harness. Same documented deviation as
+earlier sessions.
+
+### Claim (recorded 2026-11-14T10:10Z)
+
+Board state at claim time: `main` = `76c996d` (merge of PR #24). Tasks T1–T20 and `03ae78da-*` are `done`.
+**`bbe4ca47` holds an active claim** on `index.html`, `assets/js/**`, `ledger/**`, `pages/**`,
+`.github/workflows/pages.yml`, `sources.html`, `verification.html` (PR #22, last commit 10:02Z — inside the
+60-minute window, so it is **not** expired). This session therefore **does not touch any of those files**
+and will not take over BT-1…BT-6.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| `a3faf404-A1` | **Build the missing marketing content**: every requested deliverable (`affiliate-lab/`'s sibling gap) — real SEO product articles, head-to-head comparison and buying guide rendered **only** from the already-verified, per-row-sourced spec data in `research-hub/data/products.json`, with per-claim source links, disclosure, and no prices | in progress | `a3faf404` | `marketing/**` (new), `tools/build_marketing.py` (new) |
+| `a3faf404-A2` | Link the new marketing set from the shared navigation **without editing another session's file**: deliver as its own namespace + a change request for `content.html` (owned by `bbe4ca47`'s neighbourhood / prior sessions) | in progress | `a3faf404` | `marketing/**`, this file |
+| `a3faf404-A3` | Gate the new namespace in CI (per-row sourcing, disclosure, no product prices, link resolution) | in progress | `a3faf404` | `marketing/scripts/verify_marketing.py` (new), this file (CR for workflow) |
+| `a3faf404-A4` | Line-by-line re-verification of the three manufacturer/official product pages that the content quotes, dated and recorded with quoted output | in progress | `a3faf404` | `docs/marketing-verification-2026-11-14.md` |
+| `a3faf404-A5` | Integration: PR → merge → confirm Pages deploy → record | unclaimed | `a3faf404` | this file |
+
+**Why this scope.** The brief's SITE CREATION section asks for "a clean landing page and subpages organized by
+category … all entries and findings in a simple, easy to read table format", which exists. The brief's
+**Build marketing** section asks for actual marketing for the three products. Surveyed on `76c996d`:
+`content/published/` does not exist, `content.html` renders an empty `#contentTable`, `pages/content-engine.html`
+describes the capability but publishes no article, and `tools/generate_articles.py` correctly refuses because the
+*submitted codes* are unverified. **No marketing asset of any kind was published.** That is the gap this session
+closes — using the manufacturer-verified facts that already exist, with zero new inference.
+
+**Non-overlap guarantee.** `marketing/**` and `tools/build_marketing.py` and
+`docs/marketing-verification-2026-11-14.md` are new paths owned by no other session. No shared file is edited
+except this board (append-only).
+
+
