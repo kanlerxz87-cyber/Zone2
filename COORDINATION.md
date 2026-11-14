@@ -523,3 +523,31 @@ Codes are 9 characters, an Amazon ASIN is 10 (definition: https://affiliate-prog
 - GitHub Pages: `built` on `a71520d`; `Build, verify and deploy` and `pages build and deployment` both success on `main`.
 - Live check: https://kanlerxz87-cyber.github.io/Zone2/index.html now shows "0 of 3 — Supplied products identified from official sources" (earlier cached copy replaced).
 - PR #17 (this record) is the only further change on this branch.
+---
+
+## Session record — `arena/5c06fb5e-zone2` (current session, 2026-11-14)
+
+### Task claim
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| AUD-01 | Independent post-integration site/repository verification; record mismatches and request corrections without editing another session's files | done | `arena/5c06fb5e-zone2` | `docs/review-2026-11-14.md`, append-only section in `COORDINATION.md` |
+
+Claimed on current Arena-pinned branch `arena/5c06fb5e-zone2` (base `c0a109b305d998371677a2d476ca71568373b0be`). Existing completed task scopes are not being edited; cross-scope corrections are logged below.
+
+### AUD-01 post-integration audit — completed 2026-11-14
+
+- **Status:** done for this session's independent audit/report; cross-scope remediation requests remain open for the owning scopes. No previous session's files were edited.
+- **Report:** [`docs/review-2026-11-14.md`](docs/review-2026-11-14.md).
+- **High-priority correction requests:** current live root `index.html` claims 3 verified affiliate products and an air-fryer niche, and `research-hub/summary.html` says the submitted short links resolve successfully. Both contradict current official Amazon responses and the later canonical `ledger/`/`affiliate-lab/` records. Request the T11/root-site and T7/research-hub owners update their pages; request the T2/T5 documentation owners supersede obsolete claims in `docs/verification-log.md`. See AUD-01…AUD-03 in the report.
+- **Other review items:** `research-hub/scripts/verify.py` fails with seven stale-topology errors (AUD-04); `affiliate-lab/scripts/verify_site.py` verifies the presence of external links, not whether a source supports a claim (AUD-05); Pages API fetch returned 404 through this fetch route although the live URL was fetchable (AUD-06; status not inferred).
+- **Official sources re-fetched:** [Amazon Associates ASIN/link help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC), [Amazon Selling ASIN explainer](https://sell.amazon.com/blog/fba-new-selection-program), [official commission rate card](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ), [Creators API prerequisites](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction), three submitted short links, and three literal Amazon `/dp/` URLs. Each submitted token was counted as 9 chars; all three literal `/dp/` pages returned Amazon's Page Not Found response; all three short-link fetches had `plpRedirect=mhFallback` and landed on distinct fallback ASINs. These fallback items remain evidence only, not product mappings.
+- **Verification run:** affiliate-lab verifier pass (10 pages/205 rows/498 links); `tools/build_site.py --check` pass (37 generated pages); `tools/validate_data.py` pass (98 rows/22 sources/950 internal links; existing I-21 title warning); `tests/test_pipeline.py` pass (11/11); `research-hub/scripts/check_links.py research-hub` pass (184 links/assets); `research-hub/scripts/verify.py` fails with 7 known topology errors. Report has the full result list.
+- **Deployment:** root live URL fetched successfully, but the root claims above are present. Pages API endpoint returned 404 via the fetch route; current deploy state remains unverified in this session. Historical PR/deploy records are not updated as current evidence.
+
+### AUD-01 follow-up after parallel integration/deploy
+
+- While this audit was in progress, session `arena/dc52402c-zone2` completed T20 and merged PR #16 (`c2a4965` root correction; merge `a71520d`). During our required rebase, `COORDINATION.md` conflicted; both its entire T20 record and this session's append-only claim/report records were preserved. No files were deleted or rewritten to resolve the conflict.
+- **Root correction outcome:** the prior “3 verified products” and identity mapping are fixed in `main`; authenticated check showed build/deploy run `43582325530` and Pages run `43582325241` succeeded, and Pages API reports `status: built`, source `main` root. A cache-busted live fetch (`/?v=a71520d`) confirmed “0 of 3 identified” and describes the links as fallback destinations. The old unqueried URL returned cached pre-deploy HTML. Residual request: remove or qualify the root's “1 Niche — Home & Kitchen air fryers” KPI; product identity is still unverified.
+- **Still open cross-scope requests:** update `research-hub/summary.html`, `research-hub/products.html`/product pages, and `docs/verification-log.md` to stop treating the three fallback ASINs as the requested products; they are assigned to prior completed scopes, so this session did not edit them. Also address stale `research-hub/scripts/verify.py` (AUD-04) and the source-support limitation in `affiliate-lab/scripts/verify_site.py` (AUD-05).
+- Revised audit report at `docs/review-2026-11-14.md` distinguishes initial findings from the merged root fix and current deployment evidence. AUD-06 is resolved; AUD-01 is partially resolved; companion/document correction requests remain open for review.
