@@ -583,6 +583,88 @@ run above (same commit) passed all 24 steps. Recorded because a green/red summar
 
 ---
 
+### T27 — follow-up #1 (post-merge live read): a third surface with the same count defect — **F-29**
+
+After PR #51 merged and Pages deployed, this session read the **deployed** pages (not the working tree) and found
+one more instance of the F-17 / F-26 defect class, in a surface neither gate had covered:
+
+| Surface | Said (on the live site) | Correct | Why |
+|---|---|---|---|
+| `pages/flags.html` heading | **"28 open items"** | **25 open** (of 28) | `tools/build_site.py` headed the register with `len(rows)` — *every* flag — instead of counting open ones |
+| `summary.html` KPI | "25 open" ✓ | 25 open | `tools/build_summary.py` counted `status == "open"` correctly |
+
+Two pages of one site told the reader different numbers for the same register. Three flags (F-25, F-26, F-28) are
+closed, so 25 was right and 28 was wrong. **Fixed** by making `tools/build_site.py` use the same
+`status == "open"` test as `tools/build_summary.py`; both surfaces now read **25 open of 29**.
+
+Recorded as **F-29** and closed. Adding F-29 then stale-dated the hand-written docs, which said "28 flags" —
+**both** `validate_data.py` and `audit_site.py` failed the build on it, and both were corrected. That is the
+gates doing their job, not a failure.
+
+**Process note — a rebase mistake this session made and corrected.** While rebasing this branch, this session
+resolved the `COORDINATION.md` add/add conflict by concatenating only the two conflicted *regions*, which silently
+dropped everything before the first conflict marker and truncated the board from 582 lines to 55. It was caught by
+comparing line counts against `origin/main` before pushing. The board is restored from `origin/main` here and only
+the new record appended. **Lesson: on an append-only file, resolve by checking out the base version and appending,
+never by splicing conflict hunks.**
+
+**Lesson for the next session** (three sessions have now hit variants of this defect): a drift gate proves the
+*data* matches the ledger. It does not prove the *sentence* does. Reading the deployed page is the only check that
+catches a false statement which was regenerated faithfully.
+
+### T27 — PR and merge result (session `ba8b2d38`, closed 2026-11-14T19:06Z)
+
+| Item | Value |
+|---|---|
+| PR #51 — main integration | **merged** 2026-11-14T18:57:13Z · merge commit `ff1940f8f2e6569993aba2867fbb3163a3054af6` |
+| PR #54 — F-29 follow-up | **merged** 2026-11-14T19:06:22Z · merge commit `b03c722e9a00af628f43b067b312a84d34989c98` |
+| CI on both PRs | `Build and verify` **pass**; `Deploy to GitHub Pages` correctly skipped on PRs |
+| Post-merge CI on `main` | `Build, verify and deploy` + `pages build and deployment` **success** after each merge |
+| Pages deploy | `status: built` for both merge commits · https://kanlerxz87-cyber.github.io/Zone2/ |
+| Final register | **29 flags (F-01 … F-29), 25 open** · 198 ledger rows · 37 sources · 979 internal links checked |
+| T27 | **done** |
+
+**Two merges, not one.** The first published the control and the verification pass; the second fixed a published
+count that was only visible **on the deployed page**. Both are recorded rather than glossed.
+
+#### Live read of the deployed site (not the working tree) — final
+
+| Page | Reads |
+|---|---|
+| `/` dashboard | KPI **29** items flagged for review; "3 of 3" resolve; "0 of 3" brief mappings confirmed |
+| `flagged.html` | "**29 flags (F-01 … F-29)**" — rendered from data, not typed |
+| `pages/flags.html` | "29 items flagged for review", "**25 open items**" — now agrees with `summary.html` |
+| `summary.html` | "29 items flagged for review (**25 open**)" |
+| `pages/verification.html` | "70 checks, each tied to an official source and a method" |
+
+#### Irregularities this session raised, all published on the Flagged for Review page
+
+**F-28** (closed) — the "one-character truncation" reading of the supplied codes is not supported; the
+valid-10-character-ASIN control shows the short-link service does not accept ASINs at all.
+**F-29** (closed) — `pages/flags.html` and `summary.html` published different open-flag counts (28 vs 25); fixed.
+Neither blocks the site; both are on the [Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
+page with source links.
+
+#### Still open, owner action, not inferable
+
+1. **Identity (F-03, F-06)** — no public Amazon document binds a `link.amazon` code to a product. The three
+   products are published as *the product this link resolves to*, never *the product the brief named*.
+2. **Economics (F-24)** — none of the three supplied links carries an Associates `tag`, so as supplied they
+   cannot attribute a sale or earn a commission.
+3. **Data** — price, rating, review count, availability, sales rank and the per-category commission band stay
+   blank. All three resolved products sit under a *Home & Kitchen › … › Air Fryers* path where Table 1 publishes
+   **both** `Kitchen 4.50%` and `Home 3.00%`; which applies is an authenticated catalog lookup.
+
+#### Note for the next session
+
+Two defect classes recurred across four sessions and are worth checking first: (1) **a count typed into prose**
+drifts from its register — three separate surfaces (KPI, `flagged.html` caption, `pages/flags.html` heading) have
+now been caught; and (2) **resolving an append-only file by splicing conflict hunks drops everything before the
+first marker** — this session did exactly that to this file and only caught it by diffing line counts against
+`origin/main` before pushing. On an append-only file, check out the base version and append.
+
+---
+
 ## Session record — `e9c8362c` (`arena/e9c8362c-zone2`, T28) — release verification & closing integration
 
 **Branch note:** Arena pins this session to `arena/e9c8362c-zone2` (not `session-<id>/<task>` naming);
@@ -590,40 +672,37 @@ deviation documented per the precedent every prior session recorded.
 
 ### Claim and Task-ID reconciliation
 
-Claimed on the board before any task work (claim commit `5ae7fde`, pushed immediately) as **"T26 —
-release verification & closing integration"** — at that moment the board's T23 rows were the only
-unfinished rows and were verified done via `gh pr view` (PRs #38/#41) and closed in the claim commit.
-While this session worked, two more waves of parallel sessions claimed T26/T26b/T27 (PRs #42–#48,
-#51, #53). To keep IDs unambiguous this session's task is **renumbered T28** here, per the Task-ID
-convention at the top of the earlier board. No work was dropped. Scope: `COORDINATION.md`, this
-report, `ledger/flags.json`, `tools/build_site.py`, `tools/validate_data.py`,
-`tests/test_pipeline.py`, `README.md`, `index.html`, `EXECUTIVE_SUMMARY.md`, regenerated `pages/**`
-and `assets/js/data.js`. `research-hub/**`, `northstar/**`, `zone2/**`, `affiliate-lab/**`,
-`revalidation/**`, `marketing/**` left byte-identical (verified after each merge).
+Claimed before any task work (claim commit `5ae7fde`, pushed immediately) as **"T26 — release
+verification & closing integration"**, closing the two T23 rows after verifying PRs #38/#41 via
+`gh pr view`. Two further waves of parallel sessions then claimed T26/T26b/T27 (PRs #42–#48, #51,
+#53–#55). Per the Task-ID convention this session's task is **renumbered T28**. Scope:
+`COORDINATION.md`, `docs/verification-e9c8362c.md`, `ledger/flags.json`, `tools/build_site.py`,
+`tools/validate_data.py`, `tests/test_pipeline.py`, `README.md`, `index.html`, `EXECUTIVE_SUMMARY.md`,
+regenerated `pages/**` + `assets/js/data.js`. Companion namespaces left byte-identical (verified
+after each merge).
 
-### Merge-conflict record (required by the project instruction)
+### Merge-conflict record (required) — three additive merges, nothing discarded
 
-`main` advanced twice mid-task — `6a90dfc`→`29589f3` (PRs #42–#47) and `29589f3`→`cefb53a`
-(PRs #48/#51/#53). Both merges conflicted (31 and 30 files). Resolved additively — **nothing
-discarded**:
+`main` advanced **three times** mid-task: `6a90dfc`→`29589f3` (PRs #42–#47), →`cefb53a`
+(#48/#51/#53), →`cae38d6` (#54/#55). Each merge conflicted (31 / 30 / 30 files) and was resolved
+additively:
 
 | Conflict | Resolution |
 | --- | --- |
-| `ledger/flags.json` | Main's register kept verbatim both times. This session's flags were **renumbered twice** by collisions: its count-drift finding was first written as F-27, then F-28, and finally published as **F-30** (main's F-27 = hub generator hazard; main's F-28 = the one-character-truncation control). The hub-rollup finding published as **F-29**. The F-30 entry records the renumbering history inside its detail, as F-28's entry does. |
-| `index.html`, `flagged.html`, `README.md`, `EXECUTIVE_SUMMARY.md` | Main's derived count captions (`flagCountHeading` / `flagRegisterCount` / `flag-count-inline`) superseded this session's typed literals. Its flag-summary rows re-applied and renumbered. During the second merge, main's own `check_no_typed_flag_counts` **failed the build on `EXECUTIVE_SUMMARY.md`'s "28 flags" phrase** after this session added flags — the class gate proving itself against this session's changes; the label was updated to the ledger value. README's count labels corrected twice (`26→28→30` flags; `13→15` guard checks). |
-| `tools/validate_data.py`, `tests/test_pipeline.py` | Three gate generations now run side by side: `check_flag_count` (KPI pin, main), `check_no_typed_flag_counts` (flag-count phrases, main) and this session's `check_typed_counts` (README verification-checks / sources / guard-checks labels + derived-marker assertions). Tests 15/15 (main's marketing-label test + this session's F-30 negative test). |
-| `assets/js/data.js`, `pages/**` (generated) | Never hand-merged: regenerated from the merged `ledger/` + merged generators, then `--check`-gated. The second merge left conflict markers inside `data.js` that the region-patching generator silently preserved; caught by `node --check` and fixed by regenerating from main's clean copy. Recorded as a lesson: `build_root_data.py --check` alone would not have caught it. |
-| `COORDINATION.md` | Main's compacted record file kept in full; this record appended. |
+| `ledger/flags.json` | Main's register kept verbatim each time. This session's flags were **renumbered twice by ID collisions** and publish as **F-30** (README count drift — written locally as F-27, then F-28) and **F-31** (hub rollup residual — written locally as F-29); both entries record the renumbering history in their detail, matching the precedent in main's F-28 entry. |
+| `index.html`, `flagged.html`, `README.md`, `EXECUTIVE_SUMMARY.md` | Main's derived captions and count gates superseded this session's typed literals. Its flag-summary rows re-applied and renumbered. Main's `check_no_typed_flag_counts` twice failed the build on stale count prose after flags landed (once on `EXECUTIVE_SUMMARY.md` from this session's additions) — the class gates proving themselves; labels updated to the ledger values each time. |
+| `tools/validate_data.py`, `tests/test_pipeline.py` | Four gate generations run side by side: `check_flag_count` (KPI pin), `check_no_typed_flag_counts` (flag-count phrases), `tools/audit_site.py::check_counts` (prose counts vs registers) and this session's `check_typed_counts` (README verification-checks / sources / guard-checks labels + derived-marker assertions). Tests 15/15. |
+| `assets/js/data.js`, `pages/**` | Never hand-merged: regenerated from the merged `ledger/` + merged generators, `--check`-gated. Round-2 lesson: the region-patching generator silently preserved merge markers inside `data.js`; caught by `node --check`, fixed by regenerating from main's clean copy. |
+| `COORDINATION.md` | Main's file kept in full each round (including its board restore in `274a1e0`); this record appended once, at the end. |
 
 ### Verification performed on the final merged tree (2026-11-14)
 
-**Gates — all green:** `tools/validate_data.py` exit 0 (**30 flags** F-01…F-30 · 199 rows · 37
-sources · 979 internal links · 0 errors · 0 warnings) · `tools/build_site.py --check` 37/0 ·
-`build_root_views.py --check` 0 · `build_root_data.py --check` current · `tests/test_pipeline.py`
-**15/15** · `tools/audit_site.py` **5/5 (95 pages)** · `research-hub/scripts/verify.py` 13 pages /
-38 rows / 0 errors · `research-hub/scripts/build.py` byte-identical rebuild · `affiliate-lab` 206
-rows / 502 links / 0 failures · `revalidation` 73 rows / 168 refs / 0 failures · `marketing` 48 spec
-rows / 0 failures · `node --check` ×2.
+**Gates — all green:** `tools/validate_data.py` exit 0 (**31 flags** F-01…F-31 · 200 rows · 37
+sources · 979 internal links · 0 errors · 0 warnings) · `tools/build_site.py --check` 37/0 · `build_root_views.py --check`
+0 · `build_root_data.py --check` current · `tests/test_pipeline.py` **15/15** ·
+`tools/audit_site.py` 5/5 (95 pages) · `research-hub/scripts/verify.py` 13 pages / 38 rows /
+0 errors · `affiliate-lab` 206 rows / 502 links / 0 failures · `revalidation` 73 rows / 168 refs /
+0 failures · `marketing` 48 spec rows / 0 failures · `node --check` ×2.
 
 **Official sources re-read live by this session** (own fetches; full table in
 [`docs/verification-e9c8362c.md`](docs/verification-e9c8362c.md) §2): OA §5 disclosure verbatim +
@@ -632,37 +711,30 @@ Statement §1 windows verbatim (S02); Table 1's eleven bands row by row (S04); A
 code…" + tagged link format verbatim (GP38PJ6EUR6PFBEC); `/dp/<code>` Page Not Found for all three
 supplied codes (reproduced); all three `link.amazon` URLs resolve to exactly B0CDY277D3 / B09B7SB46R
 / B08DKYBTPH with matching titles (reproduced); today's `btn_ref` tokens are three new distinct
-values (F-21 confirmed: rotates across days, destination stable); no `tag=` on any resolved URL
-(F-24 confirmed).
+values (F-21 confirmed); no `tag=` on any resolved URL (F-24 confirmed).
 
-**Per-row sourcing audit (the brief's hard rule):** every data row on all published pages classified
-(before: 94 pages; after the second merge: 95 incl. `summary.html`). Final: **872 rows end in an
-official-source link · 207 explicit blank/flagged cells · 51 repo-internal structural rows**
-(registers, schemas, tallies, lint inventories, file inventories, raw evidence URLs). Fixed here:
-`pages/niches.html`'s nine 0.00%-band rows gained per-row S04 cells. Fixed on main (verified here):
-the hub's three product-mapping rows. Residual external-value rows: eight rows in
-`research-hub/summary.html` (four policy verdicts + four conflict rows) → **F-29 / CR-7 (partial)**.
+**Per-row sourcing audit (the brief's hard rule):** every data row on all 95 published pages
+classified — rows end in an official-source link, or are explicit blank/flagged cells, or are
+repo-internal structural rows (registers, schemas, tallies, lint inventories, file inventories, raw
+evidence URLs). Fixed here: `pages/niches.html`'s nine 0.00%-band rows gained per-row S04 cells.
+Fixed on main (verified here): the hub's product-mapping rows. Residual: eight rows in
+`research-hub/summary.html` (four policy verdicts + four conflict rows) → **F-31 / CR-7 (partial)**.
 
-### Findings published (register now 30)
+### Findings published (register now 31)
 
-- **F-29 (open, owner: user)** — `research-hub/summary.html` policy-verdict and conflict rows remain
+- **F-30 (closed)** — README.md prose counts drifted from the registers three times in one day;
+  labels corrected and pinned by `tools/validate_data.py::check_typed_counts` (negative-tested).
+- **F-31 (open, owner: user)** — `research-hub/summary.html` policy-verdict and conflict rows remain
   block-sourced. **CR-7 (partial)**: extend the "Official product source" treatment to those tables
   via `research-hub/scripts/build.py`, or label them block-sourced. Not edited here (namespace owned
   by session `6602723a`).
-- **F-30 (closed)** — README.md prose counts drifted from the registers three times in one day
-  (14/32/22 at `6a90dfc`; "26 items" at `29589f3`; "13 guard checks" at `cefb53a` while the suite ran
-  14). Labels corrected; `tools/validate_data.py::check_typed_counts` pins every README count label
-  to the ledgers and asserts the derived markers stay; negative-tested
-  (`test_typed_count_labels_cannot_drift_from_the_ledger`).
 
 ### Observations
 
-- **F-27's hazard is live:** `research-hub/scripts/build.py --check` was invoked by this session and
-  rebuilt byte-identically (no damage; `git status` clean for `research-hub/`), but the flag's
-  warning stands: do not run the generator casually; the owner should still repoint/archive it.
-- **CR-1** (`northstar/` badge "03") unchanged — frozen prototype, namespace owner's call.
-- **CR-2** (dead `data/*.json` links) verified already resolved on `main`.
-- **AUD-05** (affiliate-lab row check does not test source support) unchanged — owner decision.
+- **F-27's hazard stands:** `research-hub/scripts/build.py --check` rebuilt byte-identically for
+  this session (no damage), but the owner should still repoint/archive that generator.
+- **CR-1** (`northstar/` badge "03") unchanged — frozen prototype. **CR-2** verified already
+  resolved on `main`. **AUD-05** unchanged — owner decision.
 
 ### Status
 

@@ -14,7 +14,7 @@ dated evidence is cited, it says so.
 
 | Gate | Result |
 | --- | --- |
-| `tools/validate_data.py` | **exit 0** · 199 rows · 37 sources · 30 canonical flags (F-01…F-30) · 979 internal links · 0 price findings · 0 mark findings · **0 warnings** |
+| `tools/validate_data.py` | **exit 0** · 200 rows · 37 sources · 31 canonical flags (F-01…F-31) · 979 internal links · 0 price findings · 0 mark findings · **0 warnings** |
 | `tools/build_site.py --check` | 37 built · 0 drifted |
 | `tools/build_root_views.py --check` | 2 checked · 0 drifted |
 | `tools/build_root_data.py --check` | up to date (`CANONICAL_FLAG_COUNT` derived from the ledger) |

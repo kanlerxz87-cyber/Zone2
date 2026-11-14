@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — 30 flags (F-01 … F-30), including the deprecated-API trap and the
+  (`pages/flags.html`) with source links — 31 flags (F-01 … F-31), including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
 ---
