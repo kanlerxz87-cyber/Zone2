@@ -471,10 +471,18 @@ Non-blocking, published with source links, per brief.
 ### Deploy log
 
 - PR **#14** — https://github.com/kanlerxz87-cyber/Zone2/pull/14 — `arena/181863ad-zone2` → `main`.
-- Merge result: **merged** (merge commit on `main`; see PR page for SHA).
-- GitHub Pages: source branch `main`, path `/`; site live at https://kanlerxz87-cyber.github.io/Zone2/
-  with this session's site at https://kanlerxz87-cyber.github.io/Zone2/affiliate-lab/ (deploy status
-  confirmed `built` after merge).
+- Merge result: **merged** 2026-11-14T00:01:50Z, merge commit `3fbf0a816c27170d4f6b35386613d5bfb07e206b`
+  (CI "Build and verify" green on the PR before merge; deploy job correctly skipped on the PR run).
+- GitHub Pages: source branch `main`, path `/`; deploy status **`built`** after merge. Live and
+  fetch-verified post-deploy:
+  - primary dashboard — https://kanlerxz87-cyber.github.io/Zone2/ (disclosure + footer companion link present)
+  - this session's site — https://kanlerxz87-cyber.github.io/Zone2/affiliate-lab/ (dashboard, Products,
+    Flagged for Review, Executive Summary all fetched live; AF-* namespacing, blank+flagged cells and
+    source links render as committed).
+- Post-merge gates re-run green on `main`: `affiliate-lab/scripts/verify_site.py` (10 pages / 205 rows /
+  498 links / 0 failures), all-site internal-link check, JSON parse, disclosure + context-aware price
+  rule, `tools/build_site.py --check` (37 built, no drift), `tools/validate_data.py` (exit 0),
+  `tests/test_pipeline.py` (11/11).
 
 **Integration note for the next session.** This session's conflicts were all add/add at the root (six files)
 and were resolved by keeping the existing root site and namespacing this session's work under
