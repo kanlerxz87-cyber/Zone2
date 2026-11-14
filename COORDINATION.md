@@ -14,7 +14,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | `arena/ec67c431-zone2` | merged to `main` via PR #7 | Integration of latest main; canonical link-checker (`scripts/check_links.py`) | merged; tooling preserved at `research-hub/scripts/check_links.py` |
 | `arena/78c94859-zone2` (78c94859) | merged to `main` via PR #3 | Zone2 platform site, verification, **final integration** | merged; primary site at repo root |
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
-| `arena/dd87f326-zone2` (dd87f326) | PR opened from `arena/dd87f326-zone2` | T24 stale-PR #11 resolution + T25 independent verification-only audit | active |
+| `arena/dd87f326-zone2` (dd87f326) | merged to `main` via PR #34 | T24 stale-PR #11 resolution + T25 independent verification-only audit | finished — merged (PR #34) |
 
 > **Integration note (multi-session race):** five sessions worked in parallel and each merged work to
 > `main` while others were still active, so every integration PR conflicted with the others. Per the
@@ -1376,3 +1376,23 @@ F-20/F-21"). Cross-references so records don't double-claim:
   re-check DD-1 items 1–3 against the merged result.
 - T24 disposition is unaffected: PR #32's record explicitly leaves PR #11 to the "owner's call"; this
   session took that call (verified takeover, closed as superseded).
+
+### Deploy log — session `dd87f326` (T24 + T25)
+
+- PR **#34** — https://github.com/kanlerxz87-cyber/Zone2/pull/34 — `arena/dd87f326-zone2` → `main`
+  ("T24+T25: stale PR #11 resolved by verified takeover; independent verification-only audit").
+- Merge result: **MERGED** at `2026-11-14T10:19:07Z`, merge commit `eeab53d5` (`gh pr merge 34 --merge`).
+- Post-merge on `main`: `Build, verify and deploy` run `43584703233` — **success**;
+  `pages build and deployment` run `43584702670` — **success** (both completed, checked 2026-11-14).
+- Live verification: `https://kanlerxz87-cyber.github.io/Zone2/COORDINATION.md` fetched after deploy —
+  renders with this session's registry row and T24/T25 board rows, i.e. the merged content is being
+  served by GitHub Pages (source `main`, path `/`).
+- Conflict record (required by the project instruction): the rebase onto advancing `main` produced two
+  add/add conflicts in `COORDINATION.md` (against sessions `82a2d436`/`a3faf404` content). Both resolved
+  **append-only**: every other session's record kept in full, this session's sections appended after.
+  No conflict markers remain; verified by grep after each resolution.
+- Handoff note for the `ledger/**` owner: **DD-1 items 1–3 remain open** after PR #32 — R-02/R-06 still
+  cite `lint_disclosure_proximity` / `lint_claims` (neither function exists; behaviour lives in
+  `lint()`), and the `expires_utc` expired-promo enforcement has no implementation. F-16's action text
+  still overstates its remediation. See the dd87f326 record above for the exact evidence and the two
+  fix options.
