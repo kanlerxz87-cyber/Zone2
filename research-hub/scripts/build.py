@@ -643,7 +643,7 @@ def build_compliance() -> str:
     rate = COMPLIANCE["commission_rates"]
 
     return f"""
-<h1>Amazon rules this site complies with</h1>
+<h1>Associates Program rules this site complies with</h1>
 <p class="lede">Every rule below is taken from an official Amazon page and linked. The project
 brief asked for an automated affiliate platform, so the rules that constrain automation are
 listed explicitly rather than buried.</p>
@@ -1461,7 +1461,7 @@ def main() -> None:
             "Attribute-by-attribute comparison of the three products.",
         ),
         "compliance.html": (
-            "Amazon rules this site complies with",
+            "Associates Program rules this site complies with",
             "compliance",
             build_compliance(),
             "Disclosure, linking, pricing and automation requirements from Amazon's official policies.",

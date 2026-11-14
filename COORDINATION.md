@@ -2056,3 +2056,93 @@ T23, so it is the check with a track record. This session re-runs it on `6a90dfc
 
 Every gate was run against `6a90dfc` in this session; all exit 0. Details are added to this record when
 the task closes (per the board's rule that a task records its sources and checks).
+
+---
+
+## T26 closing record — `808a6840` (`arena/808a6840-zone2`, 2026-11-14 UTC)
+
+**Status: done.** Merged to `main`; every gate green on the merged tree; live site verified.
+
+### What was claimed and what was delivered
+
+Claimed T26 as an independent audit of the **published** site rather than the ledger, plus repair of
+whatever the audit found. That is the check with a track record in this repo: T23 caught the V-31/V-32
+survivors only by reading deployed pages, because `build_site.py --check` and `build_root_views.py --check`
+compare HTML to the ledger and a false statement *in* the ledger regenerates byte-identically.
+
+### New gate — `tools/audit_site.py`
+
+Five checks, no network, runs in CI after the rebuild steps:
+
+| Check | What it catches | What it found |
+|---|---|---|
+| `fragments` | `href="page.html#"` and `#id` that addresses nothing | 1 real (`index.html:66`, empty fragment); northstar's `#route` links correctly tolerated as a hash router |
+| `spec_sources` | a specification row sourced only to a URL Amazon answers with Page Not Found | 0 — the 37 spec rows all cite a live manufacturer or destination page |
+| `prose_counts` | a number in `README.md`/`EXECUTIVE_SUMMARY.md` that disagrees with the register | 5 stale figures (below) |
+| `namespaces` | a published page set with no inbound link from `index.html` | 1 — **`marketing/` was orphaned** |
+| `disclosure` | OA §5 sentence missing from a published page | 0 of 94 |
+
+### Defects fixed
+
+| # | Defect | Fix |
+|---|---|---|
+| 1 | `index.html` linked `products.html#` — an empty fragment | → `products.html` |
+| 2 | **`marketing/` (9 pages: buying guide, comparison, 3 articles, verification, flags) had 0 inbound links — unreachable from the site** | linked from the `index.html` footer as "Field Notes — verified articles"; now also covered by the `namespaces` gate |
+| 3 | `README.md` said 32 checks / 22 sources / 14 items / 949 links / 11 tests | corrected to 50 / 35 / 26 / 976 / 13, verified against the registers |
+| 4 | `flagged.html` + `index.html` hard-coded "26 flags" / "26 items" in HTML | now rendered from `CANONICAL_FLAG_COUNT`; gate extended so a typed count in either file fails the build (**negative-tested**: injecting "99 flags" turns it red with file, line and the correct value) |
+| 5 | `research-hub/scripts/verify.py` (I-27) resolved the repo root to `research-hub/`, reported 7 false failures, walked an **empty** page list, and was excluded from CI | repaired and put in CI; now checks **13 pages / 38 rows**; **negative-tested** (removed disclosure + injected `$1,299.99` both error) |
+| 6 | `research-hub/compliance.html` `<title>` opened with an Amazon mark (F-13 warning) — the last build warning | reworded to "Associates Program rules…" in `research-hub/scripts/build.py`; `validate_data.py` now reports **0 warnings** |
+
+### New flag — F-27 (open, owner action)
+
+`research-hub/scripts/build.py` deleted all 13 committed hub pages and then aborted on a missing input.
+Reproduced in this session; restored from git immediately; every gate re-run green. **Qualified after the
+merge:** session `a6f70a13` repointed the generator at `docs/` at the repo root and it now runs cleanly
+(re-tested, no drift). The destructive order — delete output, then read inputs — remains, so the flag
+stays open with that narrower scope.
+
+### Overlap with `a6f70a13` (T26, same day) — reconciled, nothing discarded
+
+Both sessions repaired I-27 and both put the hub guard in CI. Kept `a6f70a13`'s `SIBLING_TARGETS`
+topology (stricter than my file-level allowlist) **and** my `HUB_ROOT`/`ROOT` split (which is what makes
+the guard walk 13 pages rather than 0). Both COORDINATION records preserved; the collision note is in the
+merged block above.
+
+### Sources re-read this session (not carried forward)
+
+| Source | What was verified on it |
+|---|---|
+| <https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC> | "ASIN is the 10-digit code…" verbatim; Special Link form `?tag=YOURASSOCIATEID` |
+| <https://affiliate-program.amazon.com/help/operating/agreement> | §5 disclosure sentence verbatim; §1 "tagged" link requirement; "Updated: October 15, 2025" |
+| <https://affiliate-program.amazon.com/help/operating/policies> | 24 h session / 89 d cart / 180 d fulfilment; "Updated: April 14, 2026" |
+| <https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ> | Table 1 transcribed row by row — all 11 bands match `ledger/commission_table.json` exactly |
+| <https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation> | PA-API 5 deprecated; 403 `AccessDeniedException`; migrate to Creators API |
+| <https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links> | `rel="sponsored"` for paid links — "Last updated 2025-12-10" |
+| <https://chefman.com/products/turbofry-touch-dual-window-air-fryer> | **all 11 P-01 spec rows** confirmed: RJ38-SQPF-3TDB-2W, 6 Qt/5.67 L, 200–450 °F, 1700 W/120 V, 13.38×11.81×10.63 in, 13.3 lb/6.03 kg, cETL + 1-yr |
+| <https://chefman.com/products/turbofry-touch-air-fryer-1> | P-03: RJ38-SQSS-8T, 8 Qt/7.57 L, 200–400 °F, 12.8 lb, 4 presets, 1700 W/120 V |
+| <https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360> | P-02: 26 Qt/24.6 L, 16.9"D×15.8"W×14.8"H, dual-speed fan, **model 4-00675-02A-VN vs Amazon's 4-00675-02X-VN (F-23 reproduced)**, and the 25-preset tile vs the 24-function title (F-19 reproduced) |
+| <https://link.amazon/B04G1MEwY> | resolves to `/dp/B0CDY277D3`, title matches the ledger, **no `tag=` present** (F-24 reproduced) |
+| <https://link.amazon/B02NbDxp3> | resolves to `/dp/B09B7SB46R`, title "24 cooking functions" |
+| <https://link.amazon/B00TEST12> | control: 404 "You've clicked on an invalid URL" → supplied codes are honoured lookups (F-20 reproduced) |
+
+### Gates run on the merged tree (all green)
+
+`validate_data.py` (0 errors, **0 warnings**, 174 rows, 35 sources, 977 links, 27 flags) ·
+`build_site.py --check` (37 pages, 0 drift) · `build_root_views.py --check` · `build_root_data.py --check` ·
+`test_pipeline.py` **13/13** · **`audit_site.py` 5/5** · `research-hub/scripts/verify.py` (13 pages) ·
+`research-hub/scripts/build.py` (no drift) · `affiliate-lab` (206 rows/502 links) · `revalidation` (73 rows) ·
+`revalidation/build.py --check` · `marketing` (48 rows) · `node --check` ×2 · app.js executed against a DOM
+shim: all 13 render targets populate, 27/27 flags, 3 products, 37 spec rows, 12 explicit "unverified" cells, no blanks.
+
+### Open items (none block the site; all published)
+
+F-27 (above) · **CR-1**: `northstar/index.html`'s "Flagged for review" badge still says `03` while the
+register holds 27 — `northstar/` is a frozen prototype in another session's namespace, so it was logged,
+not edited · **CR-2**: `EXECUTIVE_SUMMARY.md` links `data/sources.json` and `data/commission_table.json`,
+but no root `data/` directory exists (the files are `ledger/sources.json` and `ledger/commission_table.json`);
+left for the file's owning session · **F-24** no Associates tag on any supplied link · **F-03** code→product
+mapping unconfirmed · **F-08** no performance report.
+
+### PR / deploy
+
+Branch `arena/808a6840-zone2`. Merge result and Pages deploy recorded below when the PR lands.
