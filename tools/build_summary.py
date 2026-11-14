@@ -23,6 +23,9 @@ import json
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from flag_state import open_count  # shared "is this flag open" predicate (F-29/F-31)
+
 REPO = Path(__file__).resolve().parents[1]
 LEDGER = REPO / "ledger"
 OUT = REPO / "summary.html"
@@ -76,7 +79,10 @@ def kpis() -> str:
     specs_all = [r for p in SPECS["products"] for r in p["specs"]]
     verified = sum(1 for r in specs_all if r["status"] == "verified")
     conflicts = sum(1 for r in specs_all if r["status"] == "conflict")
-    open_flags = sum(1 for f in FLAGS if f.get("status", "open") == "open")
+    # F-29: this used f.get("status", "open") == "open", which counted the flags that carry no status
+    # field at all — including ones whose owner is already "done" — so it disagreed with
+    # pages/flags.html. Both surfaces now use tools/flag_state.py.
+    open_flags = open_count(FLAGS)
     return f"""
     <section class="kpis">
       <div class="kpi"><span class="kpi-num">{len(PRODUCTS["entries"])}</span><span class="kpi-label">products, each traced to an official page</span></div>

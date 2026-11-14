@@ -20,6 +20,11 @@ import sys
 import tempfile
 from pathlib import Path
 
+# tools/flag_state.py is the single definition of "is this flag still open"; it lives beside this
+# generator, so make the tools/ directory importable however this script is invoked.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from flag_state import open_count  # shared predicate (F-29/F-31)
+
 REPO = Path(__file__).resolve().parents[1]
 PAGES = REPO / "pages"
 DATA = REPO / "ledger"
@@ -791,13 +796,12 @@ def page_sources() -> str:
 
 
 def _open_flag_count() -> int:
-    """Flags still awaiting the owner, i.e. not yet recorded as resolved.
+    """Flags still awaiting the owner.
 
-    A flag is resolved when it carries `status: closed` or an `owner` of `done`; everything else is
-    genuinely open. Counting all 29 as "open" (as the panel did) tells the reader the register is
-    dirtier than it is — the same disclosure defect as F-17 and F-26, in the other direction.
+    Delegates to tools/flag_state.py so summary.html and pages/flags.html count the same way —
+    see the module docstring for why that matters (F-29, F-31).
     """
-    return sum(1 for f in FLAGS["flags"] if f.get("status") != "closed" and f.get("owner") != "done")
+    return open_count(FLAGS["flags"])
 
 
 def page_flags() -> str:
@@ -833,11 +837,12 @@ def page_flags() -> str:
             "irregularities found while reviewing the repository. They do not block the site; they block assertion. Each links to the "
             "official page that documents the problem.",
         )
-        # T26 (session d3ce1c29): the panel used to say "N open items" for the whole register, which
-        # overstated how much work is outstanding — items whose owner is `done` (or that carry
-        # status=closed) are published for the record, not open. Say both numbers.
+        # F-31 (session d3ce1c29) + F-29 (session ba8b2d38): the heading used len(rows), i.e. every
+        # flag in the register, so the page announced "28 open items" while summary.html published "25".
+        # Both surfaces now import the same predicate, so they cannot disagree again.
         + panel(
             f"{len(rows)} flagged items \u00b7 {_open_flag_count()} open \u00b7 {len(rows) - _open_flag_count()} resolved",
+
             table(["ID", "Severity", "Finding", "Impact", "Action required", "Owner", "Source"], rows),
         )
         + panel("Product fields left blank because of these flags", table(["Item", "Blank fields", "Blocking flags", "Source"], blank_rows))
