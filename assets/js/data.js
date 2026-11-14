@@ -490,10 +490,10 @@ const RESOLUTION_EVIDENCE = [
   {
     id: "E-05",
     observation: "Each token was measured against the ASIN identifier definition (10 characters): B04G1MEwY=9, B02NbDxp3=9, B00hJ57DV=9. Each is alphanumeric, so only the length fails.",
-    interpretation: "Pattern is consistent with a one-character truncation, but the missing character is not recoverable and was NOT guessed.",
+    interpretation: "ORIGINAL READING: 'Pattern is consistent with a one-character truncation, but the missing character is not recoverable and was NOT guessed.' — CORRECTED 2026-11-14 by session ba8b2d38 (see F-28 and E-11): the truncation reading is NOT supported. A VALID 10-character ASIN (B0CDY277D3) passed to the same short-link service returns the same 404 page as an unknown code, so the service performs a lookup over its own short-code namespace and does not accept ASINs at all. The three 9-character codes are therefore opaque short-link identifiers, and their resemblance to a truncated ASIN is appearance only. The substantive conclusions are unchanged — the tokens are still not ASINs and no character was ever guessed — only the explanation of WHY they are 9 characters is withdrawn. The original wording is retained here rather than deleted so the record shows what the site previously said.",
     status: "OBSERVED",
     source: "https://www.amazon.com/dp/B04G1MEwY",
-    sourceIds: ["S16", "S17", "S18"],
+    sourceIds: ["S16", "S17", "S18", "S36"],
   },
   {
     id: "E-06",
@@ -534,6 +534,22 @@ const RESOLUTION_EVIDENCE = [
     status: "OBSERVED",
     source: "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
     sourceIds: ["S24", "S19", "S20", "S21"],
+  },
+  {
+    id: "E-11",
+    observation: "CONTROL (new, run by session ba8b2d38 on 2026-11-14) - a VALID 10-character ASIN passed to the short-link service: GET https://link.amazon/B0CDY277D3 (an ASIN that resolves normally at https://www.amazon.com/dp/B0CDY277D3) resolved to https://amzlinks.in/B0CDY277D3 and returned the service's 404 page - '404: File Not Found ... You've clicked on an invalid URL.' - byte-for-byte the same response as the unknown-code control (E-06, S32).",
+    interpretation: "DECISIVE for the shape of the token. The service performs a lookup over its OWN short-code namespace; it does not accept, interpret or truncate ASINs. Combined with E-06, this rules out the 'truncated ASIN' reading (E-05) and confirms the three supplied codes are native short-link identifiers that were each registered to a specific destination.",
+    status: "OBSERVED",
+    source: "https://link.amazon/B0CDY277D3",
+    sourceIds: ["S36", "S19", "S32"],
+  },
+  {
+    id: "E-12",
+    observation: "CROSS-TIME btn_ref ROTATION - third independent measurement (session ba8b2d38, 2026-11-14, later the same day as E-08/E-09). link.amazon/B04G1MEwY carried btn_ref=srctok-704dc575b940a94c; B02NbDxp3 carried srctok-76d4981d5f44181b; B00hJ57DV carried srctok-016f4a534eed3621. All three values are new - distinct from every value recorded in E-08 (~10:05 UTC) and E-09 - while the destinations were unchanged: /dp/B0CDY277D3, /dp/B09B7SB46R and /dp/B08DKYBTPH respectively. channelId=704 and plpRedirect=mhFallback were present on all three, as before.",
+    interpretation: "Strengthens F-21 on a third independent sample: the source token rotates continuously while the destination ASIN is fixed. It also independently re-confirms each of the three destinations, so the destinations of all three supplied links are now attested by three separate sessions on two days.",
+    status: "OBSERVED",
+    source: "https://link.amazon/B04G1MEwY",
+    sourceIds: ["S33", "S34", "S35", "S19", "S20", "S21"],
   },
 ];
 /* END GENERATED: resolution-evidence */
@@ -908,20 +924,20 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 27;
+const CANONICAL_FLAG_COUNT = 28;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
   {
     item: "F-01 — Submitted tokens are not valid ASINs",
-    detail: "B04G1MEwY, B02NbDxp3 and B00hJ57DV are each 9 characters. The ASIN identifier is 10 characters, so none of the three can address a catalog record as written. Each is alphanumeric, so only the length fails - consistent with a truncation, but the missing character is not recoverable and was not guessed.",
+    detail: "B04G1MEwY, B02NbDxp3 and B00hJ57DV are each 9 characters. The ASIN identifier is 10 characters (Amazon defines it as 'the 10-digit code that Amazon uses to denote specific products', S24), so none of the three can address a catalog record as written. Each is alphanumeric, so only the length fails. A control run on 2026-11-14 settles what that means: passing a VALID 10-character ASIN to the same link.amazon short-link service returns the identical 404 page as an unknown code (E-11, source S36), so the service does not accept or truncate ASINs at all. The supplied codes are opaque short-link identifiers native to that service, and their resemblance to a truncated ASIN is a coincidence of appearance. No missing character was ever guessed, and none is recoverable. See F-28, which records the control and withdraws the earlier 'consistent with a truncation' wording.",
     severity: "high",
     impact: "Product identity, and every dependent field (title, brand, category, price, rating, commission band, competition), is unavailable.",
     actionRequired: "Re-supply the full 10-character ASIN or the complete amazon.<tld>/dp/<ASIN> URL for each item.",
     ledgerFlag: "F-01",
     ledgerUrl: "pages/flags.html#F-01",
     source: "https://www.amazon.com/dp/B04G1MEwY",
-    sourceIds: ["S16", "S17", "S18"],
+    sourceIds: ["S16", "S17", "S18", "S24", "S36"],
   },
   {
     item: "F-02 — Canonical product pages return Page Not Found",
@@ -1208,6 +1224,17 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-27",
     source: "https://docs.github.com/en/rest/pages/pages",
     sourceIds: ["S22"],
+  },
+  {
+    item: "F-28 — The \"one-character truncation\" reading of the supplied 9-character codes is not supported",
+    detail: "Evidence row E-05 recorded that each supplied code is 9 characters while an ASIN is 10, and offered the interpretation \"Pattern is consistent with a one-character truncation\". Session ba8b2d38 ran the control that tests it: passing a VALID 10-character ASIN (B0CDY277D3, which renders normally at amazon.com/dp/B0CDY277D3) to the same short-link service returns the identical 404 page as an unknown code (E-11, source S36). A service that accepted and truncated ASINs would resolve a correct one; this service does not accept ASINs at all. The 9-character codes are therefore opaque short-link identifiers, and their resemblance to a truncated ASIN is appearance only. Nothing else changes: the tokens are still not ASINs (F-01), no character was ever guessed, and the three destinations are unchanged. The interpretation in E-05 is marked corrected in place rather than deleted, so the record still shows what the site said and why. NOTE ON NUMBERING: this finding was first written up locally as F-27; when it was rebased onto main, session b38cc982 had already published a different F-27 (research-hub/scripts/build.py deletes its own output), so this one was renumbered to F-28 rather than overwrite theirs.",
+    severity: "low",
+    impact: "No published figure changes. It removes a plausible-sounding but unsupported explanation that a reader could otherwise use to assume the supplied links are simply mistyped ASINs and \"obviously\" refer to a recoverable product - which would invite exactly the guess this project refuses to make.",
+    actionRequired: "None. Reproduce the control by opening https://link.amazon/B0CDY277D3 in a browser; compare with https://link.amazon/B00TEST12 (unknown code) and https://www.amazon.com/dp/B0CDY277D3 (valid product).",
+    ledgerFlag: "F-28",
+    ledgerUrl: "pages/flags.html#F-28",
+    source: "https://link.amazon/B0CDY277D3",
+    sourceIds: ["S36", "S19", "S32"],
   },
 ];
 /* END GENERATED: flags */
