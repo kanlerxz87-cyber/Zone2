@@ -924,7 +924,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 34;
+const CANONICAL_FLAG_COUNT = 36;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1301,6 +1301,28 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-34",
     source: "https://docs.github.com/en/rest/pages/pages",
     sourceIds: ["S22"],
+  },
+  {
+    item: "F-35 — The Special Commission Income transcription was partial: 9 of 46 Bounty Event rows and 0 of 2 Bonus Event rows were published, and one existing row quoted the wrong column",
+    detail: "Found 2026-11-14 by session 0a697d4a (T27) re-reading the published Appendix row by row. The official Associates Program Standard Commission Income Statement publishes Special Commission Income in two tables: (a) Bounty Events, 46 rows, and (b) Bonus Events, 2 rows. ledger/commission_table.json held 9 bounty rows - the table as far as 'Prime Video Stream $0.25' - and no bonus table at all, so pages/commissions.html rendered 9 of the 48 published rows. The 39 omitted rows include the Audible bounties (up to $25.00), Kindle Unlimited, Amazon Music Unlimited, Amazon Business ($15.00), Amazon Haul ($4.00), the six Subscribe & Save bounties and both Bonus Events. Separately, one row that WAS present was mis-transcribed: for 'Prime Sign Up at Checkout' the ledger recorded the bounty action as 'Successful registration or purchase during checkout for a product or Prime exclusive offer', which is the Eligible Customer column of that row. The published Bounty Action column reads 'Successful registration of a Free Trial or purchase of a Membership'. Table 1 itself was re-read row by row in the same pass and matched the ledger exactly - 11 rows, no defect.",
+    severity: "medium",
+    impact: "The commissions page is the page that turns an ASIN into an earnings estimate, and it was working from a fifth of the bounty schedule. The Audible and Amazon Business bounties are among the largest per-action amounts in the programme ($20.00-$25.00 and $15.00), so any content plan that used this page to rank bounty opportunities would have missed the highest-value ones. The mis-transcribed row did not change a rate, but it did put words in Amazon's mouth that are not in the Bounty Action column.",
+    actionRequired: "None open. All 46 Bounty Event rows and both Bonus Event rows are now transcribed verbatim in ledger/commission_table.json (kind='bounty' / kind='bonus'), the corrected Bounty Action wording is in place, and a transcription_completeness block records published-vs-recorded counts. tools/build_site.py now renders Bonus Events in their own panel under the heading the source uses, and prints the row counts on the page so a future partial transcription is visible without re-reading the source.",
+    ledgerFlag: "F-35",
+    ledgerUrl: "pages/flags.html#F-35",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+    sourceIds: ["S04", "S28"],
+  },
+  {
+    item: "F-36 — The compliance control ledger omitted Participation Requirements that constrain this platform's own modules - notably §6(y), which forbids the price-tracking that module M-03 is described as doing",
+    detail: "Found 2026-11-14 by session 0a697d4a (T27) reading Participation Requirements §6 row by row against ledger/compliance.json, which held 21 rules. Ten requirements that bind this repository's own modules were absent, and are now added as R-22…R-31: §6(y) no price-tracking or price-alerting functionality; §6(w) no link shortening that makes the Amazon destination unclear; §6(v) no cloaking the referring URL or user agent; §6(g) no consideration, reward or incentive for using Special Links; §6(s) no artificially generated clicks or Sessions; §6(u) no purchasing Products or taking Bounty Event actions through your own Special Links; §6(n) no framing an Amazon Site; §6(o) no pop-ups, pop-unders or transitional ads; §6(p) no Special Links in content placed on an Amazon Site; §6(z) no promoting non-Amazon products with Program Content, and no Excluded Products. The material one is §6(y): pages/modules/m-03-pricing-analysis.html states the module's purpose as tracking 'price point, discount depth and offer shape per ASIN', and its constraint list named only R-04 and R-05. §6(y) does not merely limit that - it forbids the tracking-and-alerting shape of it, leaving only a point-in-time offer record fetched from the Creators API.",
+    severity: "medium",
+    impact: "Nothing published was non-compliant: M-03 is BLOCKED (no credentials, no cached offer records), so no price-tracking exists and no claim on the site is false. The defect is that the constraint register a builder would read before implementing M-03 did not contain the rule that most restricts M-03. The module page now lists it. Note also the interaction with the supplied links: §6(w) is the rule that governs link shortening, and the three brief links are short links - they are published here only as labelled evidence rows, never as the affiliate link in generated content (see F-04, F-24).",
+    actionRequired: "None open for the ledger. Two gaps are recorded honestly inside R-24 and R-31 rather than papered over: there is no deploy-time enforcement of the no-cloaking rule, and no Excluded-Products filter or non-Amazon-retailer check in generated articles. The ledger's scope note now states plainly that it is a curated set of the rules that constrain THIS platform and is not a complete restatement of the Program Policies.",
+    ledgerFlag: "F-36",
+    ledgerUrl: "pages/flags.html#F-36",
+    source: "https://affiliate-program.amazon.com/help/operating/policies",
+    sourceIds: ["S02", "S29"],
   },
 ];
 /* END GENERATED: flags */

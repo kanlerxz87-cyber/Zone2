@@ -2774,6 +2774,7 @@ revalidation 0 failures · marketing 0 failures · research-hub rebuild clean + 
 | Pages API | `status: built`, `build_type: legacy`, source `main` `/`, built 2026-11-14T19:13:45Z, https://kanlerxz87-cyber.github.io/Zone2/ |
 | Live read after deploy | `pages/commissions.html` serves the **complete 46-row bounty table** and the 2-row Bonus Events panel, with the 34-item flag register linked from the header |
 | T26 | **done** |
+| T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
 
 ### What shipped
 
@@ -2814,3 +2815,70 @@ Four sessions merged nine pull requests to `main` during this one task. Ledger i
 one day (F-20/F-21, F-22, F-27, F-28, F-29, plus S36 and V-51…V-62). `check_ledger_ids_unique` now fails the
 build rather than letting a collision ship. And the lesson three sessions have now recorded: **a drift gate
 proves the data matches the ledger, not that the sentence is true — read the deployed page.**
+
+---
+
+## Session record — `0a697d4a` (`arena/0a697d4a-zone2`, T28)
+
+### Claim (recorded 2026-11-14T18:35Z, before any edit)
+
+Board state at claim: `main` = `6f2f92c` (merge of PR #42, T26 by `a6f70a13`, merged 2026-11-14T18:32Z).
+`gh pr list --state open` returns no open PRs; `git branch -r` shows only `origin/main`, so no other
+session holds a branch. Pages API: `status: built`, source `main` `/`.
+
+**Why a new task is needed.** The project brief asks for a *full* list of requirements and for the site to
+contain *all* entries and findings. Re-reading the two official programme pages line by line (not carried
+forward from another session's notes) shows two transcriptions on this site are partial, and the partial
+set is what the published pages render.
+
+**Scope of this claim:** the files in the T28 row only. `research-hub/**`, `affiliate-lab/**`,
+`revalidation/**`, `marketing/**`, `zone2/**`, `northstar/**`, `tools/**` and `.github/**` are **not**
+edited by this session. If a change is needed in another session's file it is logged here as a change
+request, not implemented.
+
+### Verification performed by this session (2026-11-14, fetched live)
+
+| # | Claim checked | What the official page says | Verdict | Source |
+|---|---|---|---|---|
+| C-1 | Supplied link 1 destination | `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3`, title "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows…" | **Independently reproduced** | https://link.amazon/B04G1MEwY |
+| C-2 | Supplied link 2 destination | `https://link.amazon/B02NbDxp3` → `https://www.amazon.com/dp/B09B7SB46R`, title "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven…" | **Independently reproduced** | https://link.amazon/B02NbDxp3 |
+| C-3 | Supplied link 3 destination | `https://link.amazon/B00hJ57DV` → `https://www.amazon.com/dp/B08DKYBTPH`, title "Chefman Air Fryer 8 Qt \| TurboFry® 4-in-1…" | **Independently reproduced** | https://link.amazon/B00hJ57DV |
+| C-4 | Table 1 fixed rates | 11 category bands 10.00 % → 0.00 %, Coach 0.00 %, All Other 4.00 % — every ledger row matches the published table verbatim | **Verified — no defect** | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| C-5 | Bounty/bonus rows | Appendix (a) Bounty Events publishes **46** rows; (b) Bonus Events publishes **2** rows. The ledger holds 9 and 0. | **DEFECT — F-27** | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| C-6 | OA §5 disclosure sentence | "you must clearly and prominently state the following … 'As an Amazon Associate I earn from qualifying purchases.'" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-7 | OA §6 termination | Either party may terminate with written notice, effective 7 calendar days from the notice date; Amazon may terminate/suspend **immediately** on material breach, and "any violation of Section 5 … will be deemed a material breach" | **Verified verbatim** (confirms R-16) | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-8 | OA §2 enforcement | Amazon may "permanently … cease payment … without notice" on violation | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-9 | OA §4 expectation setting | "We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect" | **Verified verbatim** (confirms R-19) | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-10 | Requirement §6(y) | "Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality." — absent from `ledger/compliance.json` and from the M-03 constraint list | **DEFECT — F-35** | https://affiliate-program.amazon.com/help/operating/policies |
+| C-11 | Requirement §6(w) | "You will not use a link shortening service … in a manner that makes it unclear that you are linking to an Amazon Site." — absent from the ledger | **DEFECT — F-35** | https://affiliate-program.amazon.com/help/operating/policies |
+| C-12 | Requirement §6(t) reviews | Reviews/star ratings may not be displayed "unless you have obtained a link … through Creators API or PA API" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/policies |
+| C-13 | Requirement §4 email/SMS | "You may include Special Links in emails, SMS and direct messaging … provided that such communications are solicited" | **Verified verbatim** (confirms the F-25 correction) | https://affiliate-program.amazon.com/help/operating/policies |
+
+### Scope amendment (recorded 2026-11-14T18:45Z, before the edit)
+
+The official Appendix splits Special Commission Income into **(a) Bounty Events** and **(b) Bonus Events**.
+The site's `ledger/commission_table.json` has only a `bounties` array, so adding the two Bonus Event rows
+would render them under a heading that says "Bounty events", which is not what the source calls them.
+`tools/build_site.py` therefore needs one additive change (a second, clearly-labelled panel). No session
+owns that file: its owner (`s-f786c0d7`, T16) is finished and merged. Recorded here before the edit;
+the T28 board row now lists the file.
+
+### Third defect found while transcribing (recorded 2026-11-14T18:45Z)
+
+Re-reading the published Appendix row by row also caught a **mis-transcription** in an existing row, not
+just a missing one. For `Prime Sign Up at Checkout` the ledger records the bounty action as
+"Successful registration or purchase during checkout for a product or Prime exclusive offer". The
+official Bounty Action column says "Successful registration of a Free Trial or purchase of a Membership";
+the text the ledger carries is from the **Eligible Customer** column of the same row. Corrected to the
+published Bounty Action wording (F-36).
+
+### ID-collision note (recorded 2026-11-14T18:50Z)
+
+Session `0f44536f` claimed **T27** and published **F-27** (`research-hub/scripts/build.py` defect) on `main`
+while this session was working, via PRs #43–#46. Per the board's existing precedent (T21/T21b, and the earlier
+F-20/F-21 renumbering) this session's task is published as **T28** and its two findings as **F-35** (bounty/bonus
+transcription) and **F-36** (omitted Participation Requirements). No id was reused and no other session's flag
+was overwritten: `ledger/flags.json` on the merged tree holds F-01…F-36, unique.
+
+The two findings are also non-duplicative of F-27: F-27 is a defect in a generator script, F-35 is an incomplete
+transcription of a published Amazon table, F-36 is a gap in the compliance rule set.

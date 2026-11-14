@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **34 flags (F-01 … F-34)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **36 flags (F-01 … F-36)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -418,3 +418,44 @@ solicited-email/SMS permission accurately. F-16 is closed; its full text stays o
 Nothing about the product rows changed. 0 of 3 supplied codes are identified as ASINs; every unsourceable field
 stays blank; no price, rating, review count, BSR, availability or earnings figure is published.
 
+
+---
+
+## Addendum — completeness re-read of the official programme pages, 2026-11-14 (session `0a697d4a`, T28)
+
+A pass aimed at **completeness** rather than correctness: two official pages were re-read **row by row** and every published row compared against what this repository records. Two transcriptions turned out to be partial. Both are fixed, both are in the register as **F-35** and **F-36**, and neither changes a product conclusion.
+
+> **Numbering note.** These findings were drafted as F-27/F-28. While this session ran, other sessions published different F-27, F-28, F-29 and later findings on `main`. All reached `main` first and are left untouched; **these two findings are numbered F-35 and F-36**, and every finding is in the register.
+
+### F-35 — the Special Commission Income table was only a fifth transcribed
+
+Amazon's published Appendix sets out Special Commission Income in two tables. This repository recorded a fifth of the first and none of the second:
+
+| Published by Amazon | Previously recorded here | Now recorded |
+|---|---|---|
+| **46** Bounty Event rows (§4(a)) | 9 | 46 |
+| **2** Bonus Event rows (§4(b)) | 0 | 2 |
+| **11** Table 1 rows | 11 — matched exactly | 11 |
+
+The 39 missing rows were not trivia: they include the largest per-action amounts in the programme — Audible Standard **$20.00**, Audible Premium Plus Annual **$25.00**, Amazon Business **$15.00** — plus Kindle Unlimited, Amazon Music Unlimited, Amazon Haul and the six Subscribe & Save events. A content plan ranking bounty opportunities from this page would have missed the highest-value ones entirely.
+
+One row that *was* present was **mis-transcribed**: for `Prime Sign Up at Checkout` the ledger had recorded the *Eligible Customer* column as its *Bounty Action*. Corrected to the published wording.
+
+The page now prints its own published-vs-recorded row counts, so a future partial transcription is visible without re-reading the source.
+
+### F-36 — 10 Participation Requirements that constrain this platform were missing from the ledger
+
+The compliance ledger held 21 rules. Ten requirements in Policy §6 that bind this repository's own modules were absent and are now added as **R-22 … R-31**: §6(y) no price-tracking or price-alerting · §6(w) no link shortening that hides the destination · §6(v) no cloaking · §6(g) no incentives · §6(s) no artificial clicks · §6(u) no self-triggered Bounty Events · §6(n) no framing · §6(o) no pop-ups · §6(p) no Special Links on an Amazon Site · §6(z) no promoting non-Amazon products with Program Content.
+
+**The one that matters is §6(y).** Module M-03 (*Pricing analysis*) is described on this site as tracking "price point, discount depth and offer shape per ASIN". §6(y) **forbids** exactly the tracking-and-alerting shape of that: "Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality."
+
+Nothing published was non-compliant — M-03 is **BLOCKED** (no API credentials, no cached offer records), so no price is tracked and no claim on the site is false. The defect was that the constraint register a builder would read before implementing M-03 did not contain the rule that most restricts it. It does now, and the permitted reading (a point-in-time offer record fetched from the Creators API and shown with its `as_of` timestamp) is stated on the module page.
+
+Every control cited for the ten new rules was checked against the actual code, and two real gaps are stated honestly inside R-24 and R-31 rather than papered over. The ledger's scope note now says plainly that it is a curated set of the rules that constrain **this** platform and is **not** a restatement of the Program Policies.
+
+### Sources read for this pass
+
+* https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ — Table 1, §4(a) Bounty Events, §4(b) Bonus Events, Trade-In rates, Fine Art cap, free-book limit
+* https://affiliate-program.amazon.com/help/operating/policies — Participation Requirements §4 and §6(a)–(z); Commission Income Statement §1, §4, §6
+* https://affiliate-program.amazon.com/help/operating/agreement — §2, §4, §5, §6, re-verified verbatim
+* The three supplied links, re-resolved independently: `B04G1MEwY`→`B0CDY277D3`, `B02NbDxp3`→`B09B7SB46R`, `B00hJ57DV`→`B08DKYBTPH` — **unchanged**
