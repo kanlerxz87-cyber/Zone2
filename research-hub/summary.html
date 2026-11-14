@@ -54,11 +54,17 @@ in the browser.</p>
 <p>The value delivered is the opposite: a small dataset where every single published number can be</p>
 <p>clicked back to the page it came from, and every gap is visible.</p>
 <h2>3. The three products</h2>
-<p>All three supplied <code>link.amazon/*</code> short links resolved successfully to canonical Amazon ASINs.</p>
-<p>Full short-link text was resolved by following the redirect, because the ASIN is not readable</p>
-<p>from the short link itself.</p>
+<p>All three supplied <code>link.amazon/*</code> short links resolve to a canonical Amazon ASIN — one destination</p>
+<p>each, and the same destination on every fetch (re-verified 2026-11-13 and 2026-11-14). The ASIN is</p>
+<p>not readable from the short link itself, so it was resolved by following the redirect.</p>
+<p><strong>What this does and does not establish.</strong> The supplied codes are 9 characters; an Amazon ASIN is 10,</p>
+<p>and <code>amazon.com/dp/&lt;code&gt;</code> returns <em>Sorry! We couldn't find that page</em> for all three. So the code</p>
+<p>identifies nothing by itself. The destination is verified behaviour — but no public Amazon document</p>
+<p>binds a <code>link.amazon</code> code to a destination ASIN, so the destination is **the product each link</p>
+<p>resolves to**, not a confirmed match to the item the brief named. That mapping is published, and</p>
+<p>flagged for confirmation in Associates Central.</p>
 <div class="tablewrap"><table class="grid"><tbody>
-<tr><th>#</th><th>Supplied link</th><th>ASIN</th><th>Product</th><th>Brand</th></tr>
+<tr><th>#</th><th>Supplied link</th><th>Destination ASIN</th><th>Product</th><th>Brand</th></tr>
 <tr><td>1</td><td><code>link.amazon/B04G1MEwY</code></td><td>B0CDY277D3</td><td>6 Quart Dual Basket Air Fryer, dual viewing windows, Sync Finish</td><td>Chefman</td></tr>
 <tr><td>2</td><td><code>link.amazon/B02NbDxp3</code></td><td>B09B7SB46R</td><td>26QT French Door Multi-Function Air Fryer Toaster Oven</td><td>Emeril Lagasse</td></tr>
 <tr><td>3</td><td><code>link.amazon/B00hJ57DV</code></td><td>B08DKYBTPH</td><td>8 Qt TurboFry Touch air fryer, stainless steel</td><td>Chefman</td></tr>

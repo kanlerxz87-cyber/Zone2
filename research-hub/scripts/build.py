@@ -13,11 +13,16 @@ from __future__ import annotations
 
 import html
 import json
+import sys
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# The repository root. The hub was relocated into research-hub/ during final
+# integration, so anything that lives above this directory (docs/) has to be
+# reached from here rather than from ROOT.
+REPO = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
 # GitHub Pages on this repository is configured as a *legacy* build from
 # branch `main`, path `/`. That means the published files must sit at the
@@ -982,8 +987,25 @@ owner can decide. Each item links to the page it came from.</p>
 """
 
 
+def executive_summary_path() -> Path:
+    """Locate docs/executive-summary.md.
+
+    The document was moved to the repository root during the namespace move.
+    Before this fix the generator looked only at research-hub/docs/, raised
+    FileNotFoundError *after* it had already deleted its own output, and left
+    the hub with no generated pages at all (COORDINATION.md, I-27 / AUD-04).
+    """
+    for candidate in (ROOT / "docs" / "executive-summary.md", REPO / "docs" / "executive-summary.md"):
+        if candidate.exists():
+            return candidate
+    raise FileNotFoundError(
+        "docs/executive-summary.md not found in research-hub/docs/ or in the "
+        "repository docs/ directory"
+    )
+
+
 def build_summary() -> str:
-    path = ROOT / "docs" / "executive-summary.md"
+    path = executive_summary_path()
     text = path.read_text(encoding="utf-8")
     return f"""
 <h1>Executive summary</h1>
@@ -1104,14 +1126,15 @@ LANDING = """<!DOCTYPE html>
     <a class="choice choice--primary" href="overview.html">
       <span class="choice__tag">Verified dataset</span>
       <span class="choice__title">Affiliate Research Hub</span>
-      <span class="choice__body">Three products resolved to canonical Amazon ASINs. Three products,
-      every published value traced to an official Amazon or manufacturer page. Values that could
-      not be confirmed are left blank and listed for review. Includes the full Amazon compliance
-      position, a line-by-line disposition of the brief, and a flag list.</span>
+      <span class="choice__body">Each supplied short link resolves to one verified product -
+      the same destination on every fetch. Three products, every published value traced to an
+      official Amazon or manufacturer page. Values that could not be confirmed are left blank and
+      listed for review. Includes the full Amazon compliance position, a line-by-line disposition
+      of the brief, and a flag list.</span>
       <span class="choice__cta">Open the verified hub &rarr;</span>
     </a>
 
-    <a class="choice" href="index.html">
+    <a class="choice" href="start.html">
       <span class="choice__tag">Workspace</span>
       <span class="choice__title">Northstar dashboard</span>
       <span class="choice__body">The research workspace built in parallel: overview, product
@@ -1120,7 +1143,7 @@ LANDING = """<!DOCTYPE html>
       <span class="choice__cta">Open the dashboard &rarr;</span>
     </a>
 
-    <a class="choice" href="zone2/index.html">
+    <a class="choice" href="../zone2/index.html">
       <span class="choice__tag">Platform build</span>
       <span class="choice__title">Zone2 dashboard</span>
       <span class="choice__body">The AI-powered affiliate platform build: a multi-page dashboard
@@ -1132,9 +1155,12 @@ LANDING = """<!DOCTYPE html>
 
   <section class="note-panel">
     <h2>Where the two views differ</h2>
-    <p>The dataset resolved all three submitted short links to their canonical Amazon product
-    pages and verified specifications against the manufacturer. The dashboard treats product
-    identity as unconfirmed and leaves it blank.</p>
+    <p>Both views resolved all three submitted short links to their canonical Amazon product
+    pages - the same destination on every fetch - and verified specifications against the
+    manufacturer. Neither view treats the link-to-ASIN mapping as confirmed intent: the brief
+    supplied links, not ASINs, and no public Amazon document binds a <code>link.amazon</code> code
+    to a destination ASIN. That mapping is published here and flagged for confirmation in
+    Associates Central.</p>
     <p><strong>Both apply the same rule:</strong> nothing is asserted without an official source.
     Where the sources disagree, the disagreement is published rather than smoothed over.</p>
     <p class="fineprint">Start with the
@@ -1427,7 +1453,8 @@ def clean_previous_output() -> list[str]:
     return removed
 
 
-def main() -> None:
+def build() -> None:
+    """Generate the hub's pages into SITE (research-hub/)."""
     removed = clean_previous_output()
     (SITE / "assets").mkdir(parents=True, exist_ok=True)
 
@@ -1451,7 +1478,7 @@ def main() -> None:
             "Attribute-by-attribute comparison of the three products.",
         ),
         "compliance.html": (
-            "Amazon rules this site complies with",
+            "Program rules this site complies with",
             "compliance",
             build_compliance(),
             "Disclosure, linking, pricing and automation requirements from Amazon's official policies.",
@@ -1515,7 +1542,7 @@ def main() -> None:
   <h1>Page not found</h1>
   <p class="hero__lede">That address does not exist on this site.</p>
   <div class="hero__actions">
-    <a class="btn btn--primary" href="index.html">Back to the start</a>
+    <a class="btn btn--primary" href="start.html">Back to the start</a>
     <a class="btn" href="products.html">Browse products</a>
   </div>
 </div>
@@ -1555,5 +1582,72 @@ def main() -> None:
     )
 
 
+def check_output() -> int:
+    """Build into a temporary directory and compare with the committed output.
+
+    Makes "the committed pages/ are what the generator produces" a checkable
+    property instead of a claim, in the same spirit as tools/build_site.py --check.
+    The real research-hub/ tree is never written to.
+    """
+    import shutil
+    import tempfile
+
+    global SITE, MANIFEST
+
+    manifest_path = ROOT / "site-manifest.json"
+    if not manifest_path.exists():
+        print("research-hub/site-manifest.json is missing - run scripts/build.py first")
+        return 1
+    owned = json.loads(manifest_path.read_text(encoding="utf-8")).get("files", [])
+
+    committed: dict[str, bytes | None] = {}
+    for rel in owned:
+        target = ROOT / rel
+        committed[rel] = target.read_bytes() if target.is_file() else None
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmpdir = Path(tmp)
+        real_site, real_manifest = SITE, MANIFEST
+        real_clean = globals()["clean_previous_output"]
+        SITE, MANIFEST = tmpdir, tmpdir / "site-manifest.json"
+        globals()["clean_previous_output"] = lambda: []
+        try:
+            build()
+        finally:
+            globals()["clean_previous_output"] = real_clean
+            SITE, MANIFEST = real_site, real_manifest
+
+        produced: dict[str, bytes | None] = {}
+        for rel in owned:
+            target = tmpdir / rel
+            produced[rel] = target.read_bytes() if target.is_file() else None
+        extra = sorted(
+            str(p.relative_to(tmpdir))
+            for p in tmpdir.rglob("*")
+            if p.is_file()
+            and str(p.relative_to(tmpdir)) not in owned
+            and p.name != MANIFEST.name
+        )
+
+    drift = [rel for rel in owned if committed.get(rel) != produced.get(rel)]
+    if drift or extra:
+        for rel in drift:
+            print(f"  drifted from a fresh build: research-hub/{rel}")
+        for rel in extra:
+            print(f"  produced but not listed in the manifest: {rel}")
+        print(f"\n{len(drift)} file(s) drifted - run scripts/build.py and commit the result")
+        return 1
+    print(f"research-hub: {len(owned)} generated files match a fresh build")
+    return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if "--check" in argv:
+        return check_output()
+    build()
+    return 0
+
+
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

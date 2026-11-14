@@ -30,11 +30,18 @@ clicked back to the page it came from, and every gap is visible.
 
 ## 3. The three products
 
-All three supplied `link.amazon/*` short links resolved successfully to canonical Amazon ASINs.
-Full short-link text was resolved by following the redirect, because the ASIN is not readable
-from the short link itself.
+All three supplied `link.amazon/*` short links resolve to a canonical Amazon ASIN — one destination
+each, and the same destination on every fetch (re-verified 2026-11-13 and 2026-11-14). The ASIN is
+not readable from the short link itself, so it was resolved by following the redirect.
 
-| # | Supplied link | ASIN | Product | Brand |
+**What this does and does not establish.** The supplied codes are 9 characters; an Amazon ASIN is 10,
+and `amazon.com/dp/<code>` returns *Sorry! We couldn't find that page* for all three. So the code
+identifies nothing by itself. The destination is verified behaviour — but no public Amazon document
+binds a `link.amazon` code to a destination ASIN, so the destination is **the product each link
+resolves to**, not a confirmed match to the item the brief named. That mapping is published, and
+flagged for confirmation in Associates Central.
+
+| # | Supplied link | Destination ASIN | Product | Brand |
 |---|---|---|---|---|
 | 1 | `link.amazon/B04G1MEwY` | B0CDY277D3 | 6 Quart Dual Basket Air Fryer, dual viewing windows, Sync Finish | Chefman |
 | 2 | `link.amazon/B02NbDxp3` | B09B7SB46R | 26QT French Door Multi-Function Air Fryer Toaster Oven | Emeril Lagasse |
