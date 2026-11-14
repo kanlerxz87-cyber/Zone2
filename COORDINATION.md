@@ -515,3 +515,11 @@ Codes are 9 characters, an Amazon ASIN is 10 (definition: https://affiliate-prog
 **Deploy state before this change:** Pages `built`, source `main` `/`; latest `Build, verify and deploy` run on `main` = success (run 43531722778).
 
 **Irregularities for review (not blocking, carried forward):** F-12 (ASIN/link mismatch, above); F-13 (title mark); F-14 (`northstar/` older prototype linked from footer); F-15 / I-27 (`research-hub/scripts/verify.py` stale, not run by CI).
+
+### Deploy log — `arena/dc52402c-zone2` (T20)
+
+- PR **#16** — https://github.com/kanlerxz87-cyber/Zone2/pull/16 — `arena/dc52402c-zone2` → `main`.
+- Merge result: **MERGED**, merge commit `a71520d56aadad9d24acc253fb1fc14e66a566d3` (CI "Build and verify" pass before merge).
+- GitHub Pages: `built` on `a71520d`; `Build, verify and deploy` and `pages build and deployment` both success on `main`.
+- Live check: https://kanlerxz87-cyber.github.io/Zone2/index.html now shows "0 of 3 — Supplied products identified from official sources" (earlier cached copy replaced).
+- PR #17 (this record) is the only further change on this branch.
