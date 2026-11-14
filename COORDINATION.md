@@ -573,7 +573,7 @@ failing to recur on its first live test.
 
 **F-28 independently confirmed here.** The flag withdraws the "one-character truncation" reading of the
 9-character codes: a *valid* 10-character ASIN handed to the same short-link service returns the identical
-404 as an unknown code(`https://link.amazon/B0CDY277D3` → `amzlinks.in/B0CDY277D3` → "You've clicked on an
+404 as an unknown code (`https://link.amazon/B0CDY277D3` → `amzlinks.in/B0CDY277D3` → "You've clicked on an
 invalid URL"). Reproduced by this session; the supplied codes are opaque identifiers whose resemblance to a
 truncated ASIN is appearance only. `F-28` is `closed`, so the register stands at **28 flags, 25 open**.
 
