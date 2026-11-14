@@ -1761,4 +1761,17 @@ others' files.
 The brief requires: *"the final integration session has verified the combined data and confirmed the
 site builds with no broken links … create a pull request … merge … confirm GitHub Pages deploys
 successfully, and record the PR link and merge result."* Six sessions have merged PRs #1–#29 in a race;
-this session performs the closing verification pass once the remaining open PRs settle.
+this session performs the closing verification pass once the remaining open PRs settle.### Follow-up #2 — the withdrawal was incomplete twice
+
+Reading the **live** page after the first follow-up found two more survivors of the retracted claim, both in
+`ledger/verification.json`:
+
+| Row | Was serving | Now |
+|---|---|---|
+| **V-31** | verdict `REFUTED`, consequence "body rendered a 'Best Sellers in Kitchen & Dining' carousel and btn_ref changed" | verdict `VERIFIED`; same path, same body, same `btn_ref` on re-fetch; verdict withdrawn |
+| **V-32** | "their product-to-brief association remains flagged (F-12)" | points at F-03, notes F-12 is stale/withdrawn |
+
+**Why the gates kept passing.** `build_site.py --check` and `build_root_views.py --check` compare generated HTML
+against the ledger. A false statement *in* the ledger regenerates byte-identically and passes. Only reading the
+deployed page catches it. That is a genuine limitation of a drift gate and is now recorded, not glossed over.
+>>>>>>> c470776 (fix(verification): withdraw the last two survivors of the retracted claim (V-31, V-32))
