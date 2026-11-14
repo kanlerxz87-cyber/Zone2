@@ -34,7 +34,7 @@
 
     <div class="kpis">
       <div class="kpi"><div class="num">0 of 3</div><div class="lbl">Supplied products identified from official sources</div></div>
-      <div class="kpi"><div class="num">1</div><div class="lbl">Niche — Home &amp; Kitchen air fryers</div></div>
+      <div class="kpi"><div class="num">1</div><div class="lbl">Niche of the resolved destinations — Home &amp; Kitchen air fryers</div></div>
       <div class="kpi"><div class="num">Up to 10%</div><div class="lbl">Official program commission ceiling</div></div>
       <div class="kpi"><div class="num">11</div><div class="lbl">Items flagged for review</div></div>
     </div>
@@ -53,21 +53,31 @@
       </p>
       <p>
         Three affiliate links were supplied for this engagement. Each short link
-        (<code>link.amazon/…</code>) redirects through <code>plpRedirect=mhFallback</code> to an unrelated
-        Amazon air-fryer listing: a CHEFMAN 6-quart dual basket air fryer oven (B0CDY277D3), an Emeril Lagasse
-        26QT French-door air fryer toaster oven (B09B7SB46R), and a Chefman 8-quart TurboFry air fryer
-        (B08DKYBTPH). These are fallback destinations, not confirmed mappings, so none of the three supplied
-        products has been identified.
+        (<code>link.amazon/…</code>) resolves to an Amazon air-fryer listing: a CHEFMAN 6-quart dual basket
+        air fryer oven (B0CDY277D3), an Emeril Lagasse 26QT French-door air fryer toaster oven
+        (B09B7SB46R), and a Chefman 8-quart TurboFry air fryer (B08DKYBTPH).
       </p>
       <p>
         Irregularity applies to all three links: each code in a <code>link.amazon</code> URL is 9 characters
         (an Amazon ASIN is 10), and <code>amazon.com/dp/&lt;code&gt;</code> returns Page Not Found for each.
-        The fallback destinations are therefore not treated as the requested products. This is flagged for
-        your review on the <a href="flagged.html">Flagged for Review</a> page; the owner must confirm the
-        intended ASINs. Pricing, ratings, review
+        Because no public Amazon document binds a <code>link.amazon</code> code to a destination ASIN, and
+        because none of the three resolved URLs carries an Associates <code>tag</code>, the destinations are
+        <strong>not established as the requested products</strong> — they are recorded as the product each
+        link resolves to, and that mapping is flagged for confirmation on the
+        <a href="flagged.html">Flagged for Review</a> page. Pricing, ratings, review
         counts, availability and the category commission rate could not be confirmed from official sources
         through automated verification and are therefore left blank and flagged, in line with the
         no-inference rule.
+      </p>
+      <p class="note" style="font-size:13px;color:var(--muted)">
+        <strong>Correction (2026-11-14).</strong> An earlier version of this page described the destinations as
+        arbitrary “fallback” pages on the strength of the <code>plpRedirect=mhFallback</code> and
+        <code>lv=shuf</code> markers. That reasoning was tested and does not hold: a bare, untagged request to
+        a <em>valid</em> ASIN (<code>/dp/B08DKYBTPH</code>) is answered with the real product page and the same
+        markers appended, and re-fetching a short link returns the same ASIN, body and per-link
+        <code>btn_ref</code> token rather than a shuffle. The destinations are therefore stable and
+        individually tracked, not arbitrary. Evidence, sources and open flags:
+        <a href="revalidation/index.html">Revalidation</a>.
       </p>
       <p>
         Compliance is enforced from the official Amazon Associates documents: the mandatory disclosure
