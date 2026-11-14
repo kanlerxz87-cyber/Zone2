@@ -2948,3 +2948,24 @@ one day (F-20/F-21, F-22, F-27, F-28, F-29, plus S36 and V-51…V-62). `check_le
 build rather than letting a collision ship. And the lesson three sessions have now recorded: **a drift gate
 proves the data matches the ledger, not that the sentence is true — read the deployed page.**
 >>>>>>> origin/main
+
+---
+
+## Closing record — T28 — `e9c8362c` (2026-11-14 UTC)
+
+| Item | Value |
+| --- | --- |
+| PR | **#49** — <https://github.com/kanlerxz87-cyber/Zone2/pull/49> — `arena/e9c8362c-zone2` → `main` — **MERGED 2026-11-14T19:21:02Z** |
+| Merge command | `gh pr merge 49 --merge` (no `--auto`; merged the moment the tree was clean) |
+| Merge commit | `36151d2633086a93ed417236bc490a4d1a105a52` |
+| PR check | `Build and verify` **success** (run 43631484203 — the full CI suite, including `tools/audit_site.py`, on the merged tree) |
+| Post-merge `main` | `Build, verify and deploy` **success** (run 43631618149) · `pages build and deployment` **success** (run 43631617599) |
+| Pages API | `status: built`, source `main` `/`, <https://kanlerxz87-cyber.github.io/Zone2/> |
+| Live read (fetched 2026-11-14, `?v=36151d2`) | `flagged.html` renders **36 flags (F-01 … F-36)** straight from the register; `pages/niches.html` carries the per-row S04 source cells; F-35/F-36 published on `pages/flags.html` |
+
+**Merge waves reconciled in this session (all additive, nothing discarded):** `6a90dfc`→`29589f3`
+(PRs #42–#47), →`cefb53a` (#48/#51/#53), →`cae38d6` (#54/#55), →`d0958a3` (#52), →`2e4fe8d` (#56).
+T28 is **done**. Left open for the owners: **F-36 / CR-7 (partial)** (research-hub rollup per-row
+sources), **F-27** (hub generator repoint/archive), **CR-1** (northstar badge), **AUD-05**
+(affiliate-lab row check). The line-by-line review with official links is
+[`docs/verification-e9c8362c.md`](docs/verification-e9c8362c.md).
