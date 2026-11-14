@@ -1851,3 +1851,71 @@ tasks claimed by another session** and **no unclaimed open work** on the board.
 
 Because the board shows no active peer, T26 is simultaneously the verification task **and** the final
 integration task the brief describes. Every gate is re-run in this session before the PR is opened.
+
+### T26 — what this session did (2026-11-14, session `d3ce1c29`)
+
+Board was empty at claim, so T26 combined the independent verification pass and the final integration.
+Every fact below was re-read from the official page in this session — nothing is carried forward from
+another session's notes.
+
+#### 1. Independent re-verification of the load-bearing claims (V-51 … V-55, V-62)
+
+| Claim | Verdict | Source |
+|---|---|---|
+| §5 disclosure sentence | **Verified verbatim** | [S01](https://affiliate-program.amazon.com/help/operating/agreement) |
+| Operating Agreement "Updated: October 15, 2025" | **Verified** | [S01](https://affiliate-program.amazon.com/help/operating/agreement) |
+| Table 1 — eleven bands, 10.00 % → 0.00 %, "All Other Categories 4.00 %" | **Verified** row by row | [S04](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| "ASIN is the 10-digit code…" + `http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID` | **Verified verbatim** | [S24](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) |
+| "Earn up to 10 %…" and "…approximately 60 days after the end of the month…" | **Verified verbatim** | [S36](https://affiliate-program.amazon.com/) (new register entry) |
+| Trade-In 4.00/4.00/0.00 %, fine-art $200 cap, free-Kindle 20 000 + 80 % limit | **Verified** | [S04](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+
+**Gap closed:** the dashboard cited `https://affiliate-program.amazon.com/` for the "up to 10 %" ceiling with
+no register entry. Added as **S36**. The register now holds **36** sources.
+
+#### 2. The `mhFallback` control, replicated to all three destinations (V-56 … V-58)
+
+V-45 ran this control on one ASIN. Run here on all three: a **bare, untagged**
+`https://www.amazon.com/dp/<ASIN>` request returns the real product page with
+`?lv=shuf&channelId=500&plpRedirect=mhFallback` appended by Amazon's own redirector. The marker is a
+property of an ordinary `/dp/` load, not a short-link fallback signature — the reading is refuted on all
+three, independently of the earlier sessions.
+
+#### 3. Supplied links re-resolved + the unknown-code control re-run (V-59, V-60)
+
+`B04G1MEwY`→`B0CDY277D3`, `B02NbDxp3`→`B09B7SB46R`, `B00hJ57DV`→`B08DKYBTPH`, unchanged. New `btn_ref`
+values observed (`srctok-704dc575b940a94c` / `-76d4981d5f44181b` / `-016f4a534eed3621`) — all different
+from every value recorded earlier the same day and from each other, so **F-21 is confirmed a fourth time**
+while the destinations hold. `https://link.amazon/B00TEST12` still returns
+"404: File Not Found … You've clicked on an invalid URL."
+
+#### 4. Defects found and fixed
+
+| Flag | Defect | Action |
+|---|---|---|
+| **F-27** (medium) | `pages/commissions.html` published **9** bounty rows under a "transcribed row-by-row" notice; S04 publishes **46** bounty rows + **2** bonus rows. The nine were correct — the defect was omission, and it hid the two largest published bounty rates (Audible $20.00, Amazon Business $15.00). | Full 46 + 2 transcribed into `ledger/commission_table.json` (new `bonus_events` block) and rendered with an explicit count. `tools/apply_bounty_completion_2026_11_14.py`. |
+| **F-28** (low) | The zero-rate caption said "Nine category groups publish a 0.00 % Standard Commission rate" — Table 1 publishes **two** 0.00 % bands and "nine" matches no grouping in the source. | Caption rewritten to name the two bands and list the exclusion block. |
+| **F-29** (low) | `tools/validate_data.py::_walk_rows` yielded a row only when it had `source_ids` or `id`, so every commission-table row (which uses singular `source_id`) escaped both the row count and the "a value needs a source" rule. The 48 new bounty rows would have been unchecked. | `_walk_rows` now yields on `source_id`; gate row count 173 → 244, negative-tested. |
+| **F-30** (low) | The Flagged for Review panel headed the register "N open items" for **every** flag, when 5 carry `status: closed` and 12 more have `owner: done` — only **12** are genuinely open. Same drift class as F-17/F-26, in the opposite direction. | Panel now reads "N flagged items · X open · Y resolved", derived by `tools/build_site.py::_open_flag_count`. |
+| **F-16** (high, inherited) | Four compliance rows cited controls that did not exist. | **Closed** after independent re-verification: `check_marks` (tools/validate_data.py:190) ✔, `lint()` (tools/generate_articles.py:164) ✔, `expires_utc` enforcement + `test_expired_promotion_copy_is_removed_and_linted` (tests/test_pipeline.py:177) ✔, R-09 states the solicited-email/SMS permission accurately ✔. R-01's remaining `site/compliance-inject.js` mention is an in-line record of the correction, not a live citation. |
+
+**Systemic fix behind F-27/F-28/F-30:** three separate published counts had drifted from the ledgers they
+describe — `flagged.html` "26 flags (F-01 … F-26)", `README.md` "(14 items) / (22 sources) / (32 checks)".
+`tools/validate_data.py::check_published_counts` now holds **every** published statement of the flag,
+source and verification-log count — in HTML *and* Markdown — to its ledger. Negative-tested: reverting
+`README.md` to "(14 items)" turns the gate red.
+
+**Register:** 30 flags (F-01 … F-30), 12 open · 18 resolved. `CANONICAL_FLAG_COUNT` is derived by
+`tools/build_root_data.py` and gated, so it cannot be typed wrong again.
+
+#### 5. Files touched
+
+`ledger/commission_table.json` (46 bounty + 2 bonus rows, new `bonus_events` key), `ledger/flags.json`
+(+F-27…F-30, F-16 closed), `ledger/verification.json` (+V-51…V-62), `ledger/sources.json` (+S36),
+`tools/build_site.py` (bonus-events panel, corrected zero-rate caption, derived open/resolved split),
+`tools/validate_data.py` (row-walk fix, `check_published_counts`), `tools/apply_bounty_completion_2026_11_14.py`
+(new), `tools/apply_t26_2026_11_14.py` (new), `pages/**` (regenerated), `assets/js/data.js` (regenerated),
+`sources.html` / `verification.html` (regenerated), `flagged.html`, `README.md`, `EXECUTIVE_SUMMARY.md`,
+`docs/repo-review.md` (dated footnote), `COORDINATION.md`.
+
+Nothing published by another session was deleted; `docs/repo-review.md`'s "9 published bounty rates" row is
+left verbatim as a record of what that review checked, with a dated footnote pointing at F-27.

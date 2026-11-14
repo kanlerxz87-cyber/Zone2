@@ -140,6 +140,13 @@ ledger claims exists by grepping the code.
 |---|---|---|
 | Table 1 commission rates (11 rows) | Match exactly, including `Coach 0.00%` and `All Other Categories 4.00%` | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
 | The 9 published bounty rates | All match (`$12/$12/$12/$12/$12/$12/$2/$5/$0.25`) | same |
+
+> **Note added 2026-11-14 (session `d3ce1c29`, task T26).** The nine bounty rates checked here were
+> correct, but they were only the first nine of the set. Re-reading S04 in full shows it publishes
+> **46** rows under “(a) Bounty Events” and **2** more under “(b) Bonus Events”, so the page's
+> “transcribed row-by-row” notice overstated what had been transcribed. All 46 + 2 are now published
+> on `pages/commissions.html`; see flag **F-27** and `tools/apply_bounty_completion_2026_11_14.py`.
+> This row is left as written because it is an accurate record of what this review checked.
 | Trade-In rates, fine-art $200 cap, free-Kindle limit | Match verbatim | same |
 | 24 h session · 89-day cart · 180-day fulfilment · ~60-day payment · US payment minimums · 3-year inactivity | Match Commission Income Statement §1 and §6 | https://affiliate-program.amazon.com/help/operating/policies |
 | Disclosure sentence | Verbatim match with §5 | https://affiliate-program.amazon.com/help/operating/agreement |
