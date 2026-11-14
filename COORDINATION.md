@@ -1012,3 +1012,36 @@ closes — using the manufacturer-verified facts that already exist, with zero n
 except this board (append-only).
 
 
+## Session record — `a133aa61` (`arena/a133aa61-zone2`) — final integration
+
+**Branch note:** Arena pins this session to `arena/a133aa61-zone2` (not `session-<id>/<task>` naming);
+recorded here as the deviation, consistent with every prior session.
+
+### Claim (recorded 2026-11-14T10:10Z)
+
+Board state at claim: `main` = `76c996d` (merge of PR #24). Tasks T1–T20 are `done`. One PR was still
+**open** — **#22** (`arena/bbe4ca47-zone2`, head `048469c`) — with its last CI run red on the
+*Internal links* step. No other session had an unexpired claim.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T21 | Final integration + independent live re-verification: adopt and repair open PR #22, re-verify the three supplied links and the program facts **with live network access** (which earlier sessions did not have), correct the remaining stale "unrelated/fallback" statements in the companion views, add dated verification rows, publish, PR, merge, confirm the deploy | in progress | `a133aa61` | `COORDINATION.md`, `docs/`, `ledger/**`, root `*.html`, `pages/**`, `research-hub/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**`, `.github/workflows/pages.yml` |
+
+**Why this session takes the shared scope.** Every prior owning session (`6b8bb130`, `6602723a`,
+`34836ddd`, `78c94859`, `f786c0d7`, `181863ad`, `c6e94e8d`, `bbe4ca47`) has merged or is being adopted
+here, and the brief reserves shared outputs — the table data, `index`, navigation and the final publish —
+to the integration session. PR #22's author session `bbe4ca47` is still the owner of its own branch; this
+session **does not close it silently** — it merges it into the integration branch, keeps every commit and
+records the merge (see the handoff log below).
+
+### Handoff / adoption log
+
+- **2026-11-14T10:08Z — PR #22 adopted, not discarded.** `git merge pr22` into `arena/a133aa61-zone2`.
+  One conflict, `EXECUTIVE_SUMMARY.md` (content conflict only; both sides had rewritten the correction
+  note). Resolved in favour of PR #22's text, which is the newer and more complete wording; the
+  `main`-side sentence it replaced was duplicated elsewhere in the same file and is preserved in §1.
+  No other session's file, row or conclusion was removed.
+- **2026-11-14T10:06Z — PR #22's red CI is a *stale-sha* artefact, not a defect.** Run
+  `43583286275` failed the link step on commit `2073807`. Commit `048469c` (its own follow-up,
+  "replace list-minus-set with a filter") fixes exactly that `TypeError`. Replaying the committed
+  workflow step locally on `048469c` returns **LINKS OK**. No CI run exists for `048469c` yet.
