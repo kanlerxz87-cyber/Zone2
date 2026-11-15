@@ -1349,6 +1349,17 @@ const FLAGGED_ROWS = [
 ];
 /* END GENERATED: flags */
 
+/* BEGIN GENERATED: decision-counts */
+const DECISION_COUNTS = {
+  suggestions: 28,
+  suggestionsBlocking: 3,
+  suggestionsNeedsDecision: 3,
+  questions: 22,
+  questionsLaunch: 4,
+  editorialArticles: 6,
+};
+/* END GENERATED: decision-counts */
+
 const PLATFORM_FEATURES = [
   { name: "Automated product research", desc: "Collects and organizes the full requirement list for affiliate products with verified official sources." },
   { name: "Trend & conversion analysis", desc: "Identifies trending and high-converting products; scores competition and commission potential." },

@@ -46,6 +46,30 @@
     </div>
 
     <div class="card">
+      <h3>Decision support — what is decided, what is open</h3>
+      <p style="font-size:13.5px;margin:0 0 12px">
+        Two registers sit alongside this dashboard. The <a href="suggestions.html">Suggestions</a> register lists
+        the possible paths for each decision, with the trade-offs and a recommendation, and leaves the Decision
+        column blank for a reviewer. The <a href="questions.html">Open Questions</a> register states what is known,
+        what is not, what each unknown blocks, and what would actually settle it. Counts below are generated from
+        the registers themselves and cannot drift from them.
+      </p>
+      <div class="kpis" style="margin:0 0 14px">
+        <div class="kpi"><div class="num" id="suggestionCount">—</div><div class="lbl">Suggestions on the register, with options, trade-offs and a recommendation</div></div>
+        <div class="kpi"><div class="num" id="suggestionBlockingCount">—</div><div class="lbl">Suggestions whose impact is Blocking</div></div>
+        <div class="kpi"><div class="num" id="questionCount">—</div><div class="lbl">Open questions with known/unknown/blocking and acquisition steps</div></div>
+        <div class="kpi"><div class="num" id="questionLaunchCount">—</div><div class="lbl">Of those, launch blockers that gate publishing</div></div>
+        <div class="kpi"><div class="num" id="editorialArticleCount">—</div><div class="lbl">Consumer articles published under the sourcing rules</div></div>
+      </div>
+      <p style="margin:0;font-size:13px">
+        Reader-facing content lives in <a href="marketing/index.html">Field Notes</a>: a
+        <a href="marketing/topics.html">topic hub</a>, the <a href="marketing/buying-guide.html">buying guide</a>,
+        the <a href="marketing/comparison.html">comparison</a>, and every
+        <a href="marketing/articles/index.html">article</a> with its official sources attached.
+      </p>
+    </div>
+
+    <div class="card">
       <h3>Executive Summary</h3>
       <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
         The generated one-page version of everything below — figures read from the ledger, every row

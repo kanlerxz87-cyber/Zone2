@@ -132,6 +132,33 @@ def gen_flags() -> str:
     return "\n".join(out)
 
 
+def gen_decision_counts() -> str:
+    """Counts for the two decision registers, derived from the registers themselves.
+
+    The dashboard shows how many suggestions and open questions exist. Typing those numbers into
+    index.html is exactly the defect F-17 / F-26 / F-35 record, so they are projected from the
+    same JSON files the pages themselves are generated from.
+    """
+    suggestions = json.loads((LEDGER / "suggestions.json").read_text(encoding="utf-8"))["suggestions"]
+    questions = json.loads((LEDGER / "questions.json").read_text(encoding="utf-8"))["questions"]
+    editorial = json.loads(
+        (REPO / "marketing" / "data" / "editorial.json").read_text(encoding="utf-8")
+    )["editorial_articles"]
+    counts = {
+        "suggestions": len(suggestions),
+        "suggestionsBlocking": sum(1 for s in suggestions if s["impact"] == "Blocking"),
+        "suggestionsNeedsDecision": sum(1 for s in suggestions if s["status"] == "Needs decision"),
+        "questions": len(questions),
+        "questionsLaunch": sum(1 for q in questions if q.get("priority") == "launch"),
+        "editorialArticles": len(editorial),
+    }
+    out = ["const DECISION_COUNTS = {"]
+    for k, v in counts.items():
+        out.append(f"  {k}: {v},")
+    out.append("};")
+    return "\n".join(out)
+
+
 def replace_block(text: str, name: str, body: str) -> str:
     begin = f"/* BEGIN GENERATED: {name} */"
     end = f"/* END GENERATED: {name} */"
@@ -153,6 +180,7 @@ def main() -> int:
     new = replace_block(new, "specs", gen_specs())
     new = replace_block(new, "resolution-evidence", gen_resolution_evidence())
     new = replace_block(new, "flags", gen_flags())
+    new = replace_block(new, "decision-counts", gen_decision_counts())
 
     # Keep the dashboard's canonical flag count derived from the ledger (F-22/F-26 gate:
     # tools/validate_data.py::check_flag_count fails the build on any disagreement).

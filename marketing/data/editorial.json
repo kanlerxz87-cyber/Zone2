@@ -1,0 +1,474 @@
+{
+  "$schema_version": "1.0",
+  "note": "Editorial content for the reader-facing half of the marketing site. Every factual sentence in an article traces to a source id below, and every table row carries the source of that row. The rule is the same as for the product facts: if no source states it, it is not written. The safety articles are sourced to two United States government publishers (USDA FSIS and FoodSafety.gov) because that is where the guidance actually comes from - the product pages are cited only for the products' own specifications.",
+  "verified_utc": "2026-11-15",
+  "sources": [
+    {"id": "S41", "kind": "government", "name": "USDA Food Safety and Inspection Service — Air Fryers and Food Safety", "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers-and-food-safety"},
+    {"id": "S42", "kind": "government", "name": "FoodSafety.gov — Cook to a Safe Minimum Internal Temperature", "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures"},
+    {"id": "S38", "kind": "official", "name": "Google Search Central — Spam policies for Google web search", "url": "https://developers.google.com/search/docs/essentials/spam-policies"},
+    {"id": "S39", "kind": "official", "name": "Google Search Central — Creating helpful, reliable, people-first content", "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"}
+  ],
+  "topics": [
+    {
+      "id": "safety",
+      "name": "Using an air fryer safely",
+      "blurb": "The rules the United States Department of Agriculture publishes for air fryers, and the temperatures that decide when food is actually done.",
+      "articles": ["air-fryer-safety", "safe-internal-temperatures", "leftovers-air-fryer"]
+    },
+    {
+      "id": "choosing",
+      "name": "Choosing an air fryer",
+      "blurb": "Basket, dual-basket or full oven — what each format is actually for, and which one fits the way you cook.",
+      "articles": ["air-fryer-vs-air-fryer-oven"]
+    },
+    {
+      "id": "cooking",
+      "name": "Cooking in an air fryer",
+      "blurb": "Temperature, time and batch cooking, taken from the published guidance rather than from a timer.",
+      "articles": ["how-to-use-an-air-fryer", "air-fryer-frozen-food"]
+    }
+  ],
+  "editorial_articles": [
+    {
+      "slug": "air-fryer-safety",
+      "topic": "safety",
+      "title": "Air Fryer Safety: What the USDA Says You Should Never Put in One",
+      "dek": "Raw stuffed chicken breast is the one hard prohibition. Everything else follows from the same two rules: follow the package, and check the temperature.",
+      "meta_description": "USDA air fryer safety guidance: the one food never to air fry, why not to crowd the basket, the 5–25 minute temperature window, and the two-hour rule for leftovers.",
+      "published_utc": "2026-11-15",
+      "reading_minutes": 7,
+      "answer": "The USDA's Food Safety and Inspection Service publishes exactly one hard prohibition for air fryers: do not cook raw, stuffed, breaded chicken breast products in one. Everything else it asks for is about the thermometer and the clock rather than about a particular food.",
+      "sections": [
+        {
+          "heading": "The one thing the USDA tells you not to cook",
+          "paragraphs": [
+            "The Food Safety and Inspection Service is explicit about one category: for raw, stuffed, breaded chicken breast products, the instruction is not to cook them in the air fryer, and to follow the manufacturer's cooking instructions instead.",
+            "That is the only food the published guidance rules out by name. It is worth knowing because it is easy to assume a breaded fillet behaves like a plain chicken breast, and the guidance says it does not."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "Do not fill the basket",
+          "paragraphs": [
+            "Air fryers do not have a lot of room inside. The published guidance is that overcrowding the appliance can prevent enough air circulation to properly cook the food, and that when air frying a large amount it may be best to do so in batches rather than all at once.",
+            "This is the single most common way an air fryer goes wrong, and it is a capacity problem before it is a timing problem. A basket that is packed is a basket with cold spots in it."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "The starting numbers: 5 to 25 minutes, 350 to 400 degrees",
+          "paragraphs": [
+            "The published range is that foods generally require 5 to 25 minutes of cooking at a temperature range of 350 degrees F to 400 degrees F. That is a starting window, not a recipe.",
+            "Where a package states its own instructions, the guidance is to follow them, and to always check that food has reached a safe minimum internal temperature with a food thermometer."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "The four steps, in order",
+          "paragraphs": [
+            "The guidance is organised as four steps. Clean: wash hands with soap and water for 20 seconds before and after preparing food, and clean and sanitize surfaces. Separate: keep cooked food off the plate that held raw food, and use separate cutting boards.",
+            "Cook: do not overfill the basket, and cook every air-fried food to a safe minimum internal temperature, measured with a food thermometer. Chill: refrigerate cooked food within 2 hours, or it enters the Danger Zone."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "The two-hour window and the Danger Zone",
+          "paragraphs": [
+            "Leftover foods should be refrigerated within 2 hours. The Danger Zone is the range of temperatures between 40 degrees F and 140 degrees F where foodborne illness bacteria multiply and can reach dangerous levels.",
+            "An air fryer makes this easier than a conventional oven in one specific way: cooking is fast, so the gap between the food coming out and the food going into the fridge can be short."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "Why a thermometer beats a timer",
+          "paragraphs": [
+            "This is the part that surprises people who have only read recipes. Each air fryer has varying cooking times due to the size and power of the appliance — but the safe internal temperature is always the same.",
+            "So a timer tells you when the recipe's suggestion has elapsed. A thermometer tells you whether the food is safe. They are different questions, and only one of them is the one that matters."
+          ],
+          "source_ids": ["S41"]
+        }
+      ],
+      "table": {
+        "caption": "The safe minimum internal temperatures that apply to air-fried food, exactly as published. Rest times are part of the instruction, not a suggestion.",
+        "columns": ["Food", "Type", "Safe minimum internal temperature"],
+        "rows": [
+          {"cells": ["Beef, bison, veal, goat and lamb", "Steaks, roasts, chops", "145 °F (63 °C) — rest 3 minutes"], "source_ids": ["S42"]},
+          {"cells": ["Ground meat and sausage", "All", "160 °F (71 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Chicken, turkey and other poultry", "Whole bird, breasts, legs, thighs, wings, ground poultry, giblets, sausage, stuffing", "165 °F (74 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Casseroles", "Meat and meatless", "165 °F (74 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Pork", "Steaks, roasts, chops", "145 °F (63 °C) — rest 3 minutes"], "source_ids": ["S42"]},
+          {"cells": ["Ham", "Raw ham", "145 °F (63 °C) — rest 3 minutes"], "source_ids": ["S42"]},
+          {"cells": ["Precooked ham", "To reheat", "165 °F (74 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Leftovers", "Any type", "165 °F (74 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Seafood", "Fish (whole or filet)", "145 °F (63 °C), or until the flesh is no longer translucent and separates easily with a fork"], "source_ids": ["S42"]},
+          {"cells": ["Shrimp, lobster, crab and scallops", "All", "Cook until the flesh is pearly or white, and opaque"], "source_ids": ["S42"]},
+          {"cells": ["Clams, oysters, mussels", "All", "Cook until the shells open during cooking"], "source_ids": ["S42"]},
+          {"cells": ["Eggs", "Raw eggs", "Cook until the yolk and white are firm"], "source_ids": ["S42"]},
+          {"cells": ["Egg dishes such as a frittata or quiche", "All", "160 °F (71 °C)"], "source_ids": ["S42"]}
+        ]
+      },
+      "faq": [
+        {"q": "What temperature should I cook chicken in an air fryer?", "a": "Poultry, including ground poultry, is safe to eat once it has reached an internal temperature of 165 degrees F (74 °C).", "source_ids": ["S41", "S42"]},
+        {"q": "Can I air fry frozen chicken?", "a": "The published guidance does not publish a separate rule for frozen food. What it does publish is the rule that applies to every air-fried food: follow the manufacturer's instructions on the food package when they are available, and check the safe minimum internal temperature with a food thermometer.", "source_ids": ["S41"]},
+        {"q": "How long can cooked food sit out?", "a": "Leftover foods should be refrigerated within 2 hours. The Danger Zone is the range between 40 degrees F and 140 degrees F, where foodborne illness bacteria multiply and can reach dangerous levels.", "source_ids": ["S41"]},
+        {"q": "Do I need to preheat the air fryer?", "a": "Not addressed by the published guidance, so this site does not answer it either. The guidance it does publish is that foods generally require 5 to 25 minutes at 350–400 °F, and that the package instructions take precedence when they are available.", "source_ids": ["S41"]},
+        {"q": "Is a timer enough?", "a": "No. Each air fryer has varying cooking times due to the size and power of the appliance, but the safe internal temperature is always the same, so the thermometer is the instrument that matters.", "source_ids": ["S41"]}
+      ],
+      "product_picks": [
+        {"product": "P1", "why": "Two independent 3-qt baskets with a Sync Finish feature so both baskets finish cooking at the same time — which is what makes batching two different foods practical rather than a compromise.", "src": "M1"},
+        {"product": "P2", "why": "26-quart capacity with dual French doors, described by the manufacturer as sized to fit a whole chicken, 12-inch pizzas or a full tray of cookies.", "src": "M3"}
+      ],
+      "sources": ["S41", "S42"]
+    },
+    {
+      "slug": "safe-internal-temperatures",
+      "topic": "safety",
+      "title": "The Safe Minimum Internal Temperature Chart for Air Frying",
+      "dek": "One chart, every food, and the thermometer reading that actually decides when dinner is done.",
+      "meta_description": "The published safe minimum internal temperature chart for cooking in an air fryer: poultry, ground meat, steaks and chops, seafood, eggs, casseroles and leftovers, with rest times.",
+      "published_utc": "2026-11-15",
+      "reading_minutes": 6,
+      "answer": "Always use a food thermometer to check whether meat has reached a safe minimum internal temperature hot enough to kill harmful germs that cause food poisoning. Some meats also need rest time after cooking, because rest time allows the innermost parts and juices to become fully and safely cooked.",
+      "sections": [
+        {
+          "heading": "The instrument, not the recipe",
+          "paragraphs": [
+            "The published instruction is short: always use a food thermometer to check whether meat has reached a safe minimum internal temperature that is hot enough to kill harmful germs that cause food poisoning.",
+            "That is why an air fryer recipe written by someone else is a starting point rather than a guarantee. The machine's size and power change how long the food takes; they do not change what safe looks like."
+          ],
+          "source_ids": ["S42"]
+        },
+        {
+          "heading": "Rest time is part of the instruction",
+          "paragraphs": [
+            "Some meats need rest time after cooking. Rest time is important for certain meats because it allows the innermost parts and juices of the meats to become fully and safely cooked.",
+            "In the chart below, the rest time is printed with the temperature rather than in a footnote, because a 145 °F reading that is served immediately is not the same thing as a 145 °F reading that has rested three minutes."
+          ],
+          "source_ids": ["S42"]
+        },
+        {
+          "heading": "How the readings are grouped",
+          "paragraphs": [
+            "Whole cuts of beef, pork, veal, goat and lamb take 145 °F with a three-minute rest. Ground meat and sausage take 160 °F. Poultry takes 165 °F, whether it is a whole bird, a breast, a thigh, ground poultry or stuffing.",
+            "Seafood is 145 °F, or the point where the flesh is no longer translucent and separates easily with a fork. Shellfish are done when the flesh is pearly or white and opaque, and bivalves open during cooking."
+          ],
+          "source_ids": ["S42"]
+        },
+        {
+          "heading": "Leftovers have their own number",
+          "paragraphs": [
+            "Leftovers of any type are reheated to 165 °F (74 °C). This is a separate line in the chart because reheating is a distinct safety question, not a repeat of the original cooking.",
+            "Precooked ham that is being reheated is also 165 °F, with the note that cooked hams packaged in USDA-inspected plants should be reheated to 140 °F (60 °C)."
+          ],
+          "source_ids": ["S42"]
+        }
+      ],
+      "table": {
+        "caption": "Safe minimum internal temperatures as published. Where a rest time is shown, it is part of the instruction.",
+        "columns": ["Food", "Type", "Internal temperature (°F/°C)"],
+        "rows": [
+          {"cells": ["Beef, bison, veal, goat and lamb", "Steaks, roasts, chops", "145 °F (63 °C) — rest time: 3 minutes"], "source_ids": ["S42"]},
+          {"cells": ["Ground meat and sausage", "All", "160 °F (71 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Casseroles", "Meat and meatless", "165 °F (74 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Chicken, turkey and other poultry", "All: whole bird, breasts, legs, thighs, wings, ground poultry, giblets, sausage, stuffing", "165 °F (74 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Eggs", "Raw eggs", "Cook until yolk and white are firm"], "source_ids": ["S42"]},
+          {"cells": ["Egg dishes such as a frittata or quiche", "All", "160 °F (71 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Ham", "Raw ham", "145 °F (63 °C) — rest time: 3 minutes"], "source_ids": ["S42"]},
+          {"cells": ["Precooked ham", "To reheat", "165 °F (74 °C) — cooked hams packaged in USDA-inspected plants: 140 °F (60 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Leftovers", "Any type", "165 °F (74 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Pork", "Steaks, roasts, chops", "145 °F (63 °C) — rest time: 3 minutes"], "source_ids": ["S42"]},
+          {"cells": ["Ground meat and sausage", "All", "160 °F (71 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Rabbit and venison", "Wild or farm-raised", "160 °F (71 °C)"], "source_ids": ["S42"]},
+          {"cells": ["Seafood", "Fish (whole or filet) — salmon, tuna, tilapia, pollock, bass, cod, catfish, trout", "145 °F (63 °C) or until the flesh is no longer translucent and separates easily with a fork"], "source_ids": ["S42"]},
+          {"cells": ["Shrimp, lobster, crab and scallops", "All", "Cook until the flesh is pearly or white, and opaque"], "source_ids": ["S42"]},
+          {"cells": ["Clams, oysters, mussels", "All", "Cook until the shells open during cooking"], "source_ids": ["S42"]}
+        ]
+      },
+      "faq": [
+        {"q": "Do I really need a thermometer?", "a": "Yes. The published guidance is to always use a food thermometer to check whether meat has reached a safe minimum internal temperature that is hot enough to kill harmful germs that cause food poisoning.", "source_ids": ["S42"]},
+        {"q": "Does a rest time count towards cooking?", "a": "No — the rest is additional. Rest time matters for certain meats because it allows the innermost parts and juices to become fully and safely cooked, so it is printed with the temperature rather than left to the reader.", "source_ids": ["S42"]},
+        {"q": "What temperature do I reheat leftovers to?", "a": "165 °F (74 °C). Leftovers of any type carry that number in the chart.", "source_ids": ["S42"]}
+      ],
+      "product_picks": [],
+      "sources": ["S42", "S41"]
+    },
+    {
+      "slug": "air-fryer-vs-air-fryer-oven",
+      "topic": "choosing",
+      "title": "Air Fryer vs Air Fryer Oven: Which One Fits Your Kitchen?",
+      "dek": "The USDA describes an air fryer as a countertop convection oven. Here is what that means for the counter space, the batch size, and the food you can put in it.",
+      "meta_description": "Basket air fryer, dual-basket air fryer or air fryer oven: what each format is for, how much they hold, and how to choose between them using manufacturer specifications.",
+      "published_utc": "2026-11-15",
+      "reading_minutes": 7,
+      "answer": "An air fryer is essentially a countertop convection oven. Compared with a full-size oven it is smaller and holds less food, but it cooks faster and consumes less energy. A full air fryer oven is a different proposition again: it is an oven-sized appliance with oven-sized capacity — and it takes up the counter space of one.",
+      "sections": [
+        {
+          "heading": "What an air fryer actually is",
+          "paragraphs": [
+            "The published description is plain: air fryers are kitchen appliances used for “frying” foods without cooking the food in oils, and although ovens are larger and hold more food, air fryers — which are essentially countertop convection ovens — cook food faster and consume less energy.",
+            "That single sentence resolves most of the confusion in the category. An air fryer is not a smaller deep fryer; it is a small convection oven. The comparisons that make sense are with a countertop oven, not with a fryer."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "Three formats, three different jobs",
+          "paragraphs": [
+            "The three products on this site are three distinct formats, and each one's own manufacturer page describes what it is for.",
+            "A single basket: the TurboFry Touch 8 Qt is an 8-quart single-basket unit with four one-touch presets, described by the manufacturer as designed for 4–6 people, with a dishwasher-safe basket and rack.",
+            "Two baskets: the TurboFry Touch 6 Qt is two independent 3-quart baskets with a Sync Finish feature so both baskets finish cooking at the same time.",
+            "A full oven: the French Door AirFryer 360 is a 26-quart, 10-in-1 appliance with dual French doors, a rotisserie spit and a 360-degree dual-speed fan."
+          ],
+          "source_ids": ["M1", "M3", "M5"]
+        },
+        {
+          "heading": "When a full oven earns the counter space",
+          "paragraphs": [
+            "The 26-quart French-door oven is the only one of the three whose manufacturer describes it as sized to fit a whole chicken, 12-inch pizzas or a full tray of cookies, and the spec tile on that same page says food for 4–6 people.",
+            "Its cooking modes are the broadest of the three: air fry, bake, broil, defrost, dehydrate, grill, proof, reheat, roast and warm. If your cooking includes anything beyond fried food, that is the argument for the oven format."
+          ],
+          "source_ids": ["M3"]
+        },
+        {
+          "heading": "When two baskets earn their space",
+          "paragraphs": [
+            "The dual-basket format answers a different problem: cooking two things at once without one waiting for the other. The manufacturer's Sync Finish feature is the specific claim — both baskets finish cooking at the same time.",
+            "It is also the answer to the batch-cooking problem that the food-safety guidance raises, because a basket you can fill and a basket you can empty are not the same basket. If you cook a protein and a side at the same time, that is the format built for it."
+          ],
+          "source_ids": ["M1", "S41"]
+        },
+        {
+          "heading": "When one basket is the honest answer",
+          "paragraphs": [
+            "The single-basket 8-quart unit is described by its manufacturer as sized for 4–6 people, with four one-touch presets for fries, chicken, fish and meat, a 200–400 °F adjustable range, an LED shake reminder and a top-rack dishwasher-safe basket and rack.",
+            "For one household cooking one thing at a time, that is the format with the least wasted counter space and the fewest decisions attached to it."
+          ],
+          "source_ids": ["M5"]
+        },
+        {
+          "heading": "The one question that decides it",
+          "paragraphs": [
+            "If your cooking regularly needs two different foods ready at the same time, the dual basket is the answer. If you are cooking for a group and want to roast, dehydrate or bake as well as air fry, the oven format is the answer.",
+            "If neither is true, the single basket is the honest answer, and this site does not pretend the more expensive appliance is the better one. The comparison page puts the three side by side with every figure sourced."
+          ],
+          "source_ids": ["M1", "M3", "M5"]
+        }
+      ],
+      "table": null,
+      "faq": [
+        {"q": "Is an air fryer the same as a convection oven?", "a": "The published description is that air fryers are essentially countertop convection ovens — and that although ovens are larger and hold more food, air fryers cook food faster and consume less energy.", "source_ids": ["S41"]},
+        {"q": "Which format cooks two foods at once?", "a": "The dual-basket model: two independent 3-qt baskets with a Sync Finish feature so both baskets finish cooking at the same time.", "source_ids": ["M1"]},
+        {"q": "Which one holds the most?", "a": "The French-door oven, at 26 Qt / 24.6 L, with the manufacturer's own spec tile describing it as food for 4–6 people and its description naming a whole chicken, 12-inch pizzas or a full tray of cookies.", "source_ids": ["M3"]}
+      ],
+      "product_picks": [
+        {"product": "P2", "why": "26 Qt / 24.6 L, dual French doors, 10-in-1 cooking modes, 360° hot-air circulation with a dual-speed fan.", "src": "M3"},
+        {"product": "P1", "why": "Two independent 3-qt baskets, 6 qt combined, Sync Finish so both baskets complete together.", "src": "M1"},
+        {"product": "P3", "why": "8 Qt / 7.57 L single basket, four one-touch presets, 200–400 °F, top-rack dishwasher-safe basket and rack.", "src": "M5"}
+      ],
+      "sources": ["S41", "M1", "M3", "M5"]
+    },
+    {
+      "slug": "how-to-use-an-air-fryer",
+      "topic": "cooking",
+      "title": "How to Use an Air Fryer: Temperature, Time and Batch Cooking",
+      "dek": "The published numbers first, then the range each of these three machines actually reaches — and why the thermometer decides, not the timer.",
+      "meta_description": "How to use an air fryer: the published 5–25 minute, 350–400 °F window, why not to overcrowd the basket, the temperature range each model reaches, and how to check doneness.",
+      "published_utc": "2026-11-15",
+      "reading_minutes": 7,
+      "answer": "Foods generally require 5 to 25 minutes of cooking at 350–400 °F, the package instructions take precedence when they are available, and doneness is decided with a thermometer rather than a clock. Everything else is specific to the machine in front of you.",
+      "sections": [
+        {
+          "heading": "The starting window",
+          "paragraphs": [
+            "Foods generally require 5 to 25 minutes of cooking at a temperature range of 350 degrees F to 400 degrees F. That is the published baseline for air-fried food, and it is the right place to start when you are converting a conventional oven recipe.",
+            "The guidance also says that when available, consumers should follow manufacturer's instructions on food packages to ensure food is safely cooked. The package wins; the window is the fallback."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "Then use the range your machine actually reaches",
+          "paragraphs": [
+            "The three models here reach different ranges, and each figure comes from that model's own page.",
+            "The TurboFry Touch 6 Qt states 200–450 °F / 95–235 °C with a Hi-Fry function at the top of that range. The TurboFry Touch 8 Qt states 200–400 °F / 95–205 °C. The French Door AirFryer 360 states 75–500 °F.",
+            "So a recipe that asks for 425 °F is inside the range of two of these machines and outside the third's stated range. That is worth knowing before you start, not after."
+          ],
+          "source_ids": ["M1", "M5", "M4"]
+        },
+        {
+          "heading": "Batch cooking is a capacity decision",
+          "paragraphs": [
+            "Air fryers generally don't have a lot of room inside, and overcrowding the appliance can prevent enough air circulation to properly cook the food. When air frying a large amount of food, it may be best to do so in batches rather than all at once.",
+            "Two baskets help here in a way that a larger single basket does not: the dual-basket model's two independent 3-qt baskets can hold two different foods at once, with a Sync Finish feature so both finish cooking at the same time."
+          ],
+          "source_ids": ["S41", "M1"]
+        },
+        {
+          "heading": "Doneness is a temperature, not a duration",
+          "paragraphs": [
+            "Each air fryer will have varying cooking times due to the size and power of the appliance, but the safe internal temperature is always the same. Use a food thermometer to make sure your meat and poultry is fully cooked.",
+            "This is the single habit that separates an air fryer that works from one that is occasionally disappointing. The timer is a suggestion about the recipe; the thermometer is a statement about the food."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "Presets are a starting point too",
+          "paragraphs": [
+            "The 8 Qt model carries four one-touch presets — fries, chicken, fish and meat — and the manufacturer's page describes precise temperatures from 200–400 °F catering to each dish's desired crunch level.",
+            "The 6 Qt dual-basket model takes a different route to the same problem: a Sync Finish function so both baskets finish cooking simultaneously."
+          ],
+          "source_ids": ["M5", "M1"]
+        },
+        {
+          "heading": "And then what happens to the leftovers",
+          "paragraphs": [
+            "Reheating is a separate safety question from cooking. Leftovers of any type are reheated to 165 °F (74 °C), and refrigerated within 2 hours of cooking.",
+            "Air fryers can be used for baking, roasting and reheating food without the food becoming soggy, which is a good reason to keep the leftover in the same appliance rather than reaching for the microwave."
+          ],
+          "source_ids": ["S42", "S41"]
+        }
+      ],
+      "table": null,
+      "faq": [
+        {"q": "What temperature do I cook an air fryer at?", "a": "Foods generally require 5 to 25 minutes at 350–400 °F as a starting window, and the package instructions take precedence when they are available. The machine's own stated range decides whether the recipe's temperature is even reachable.", "source_ids": ["S41", "M1", "M5", "M4"]},
+        {"q": "Can I put a full basket in?", "a": "Overcrowding the appliance can prevent enough air circulation to properly cook the food. Batch it instead.", "source_ids": ["S41"]},
+        {"q": "How do I know when it is done?", "a": "With a food thermometer, against the safe minimum internal temperature for that food. Cooking times vary with the size and power of the appliance; the safe internal temperature does not.", "source_ids": ["S41", "S42"]}
+      ],
+      "product_picks": [
+        {"product": "P1", "why": "Two independent 3-qt baskets and a Sync Finish feature, so a batch and a side can finish together.", "src": "M1"},
+        {"product": "P3", "why": "Four one-touch presets (fries, chicken, fish, meat) across a stated 200–400 °F range, with an LED shake reminder.", "src": "M5"}
+      ],
+      "sources": ["S41", "S42", "M1", "M5", "M4"]
+    },
+    {
+      "slug": "air-fryer-frozen-food",
+      "topic": "cooking",
+      "title": "Air-Frying Frozen Food: What to Follow, and What to Measure",
+      "dek": "The package says the time. The thermometer says when it is done. Those are two different jobs, and only one of them is a safety check.",
+      "meta_description": "How to air fry frozen food: follow the package instructions when they exist, the 5–25 minute window at 350–400 °F, the one food never to air fry, and how to check doneness with a thermometer.",
+      "published_utc": "2026-11-15",
+      "reading_minutes": 5,
+      "answer": "When available, follow the manufacturer's instructions on the food package, and always check that the food has reached a safe minimum internal temperature with a food thermometer. The package gives you the time; the thermometer gives you the answer.",
+      "sections": [
+        {
+          "heading": "The package instruction wins",
+          "paragraphs": [
+            "The published guidance is unambiguous about priority: when available, consumers should follow manufacturer's instructions on food packages to ensure food is safely cooked.",
+            "Frozen food is the case where that matters most, because the package states a time for a specific appliance and a specific portion size. It is also the case where people most often ignore it, because the box says 12 minutes and the recipe says 15."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "The window when the package is silent",
+          "paragraphs": [
+            "Foods generally require 5 to 25 minutes of cooking at a temperature range of 350 degrees F to 400 degrees F. That is the fallback when the package says nothing.",
+            "Note what this is not: it is not a per-food recipe, and it is not a doneness test. It is the range within which air-fried food is cooked, and it is where you start."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "The thermometer is the finish line",
+          "paragraphs": [
+            "Always check that food has reached a safe minimum internal temperature with a food thermometer. For poultry that is 165 degrees F (74 °C); for ground meat, 160 °F (71 °C); for whole cuts of beef, pork, veal and lamb, 145 °F (63 °C) with a 3-minute rest time.",
+            "Frozen food is where this bites hardest, because the outside can be over-browned while the middle is still cold — a failure mode a timer cannot see."
+          ],
+          "source_ids": ["S41", "S42"]
+        },
+        {
+          "heading": "The one exception, and it is not about frozen at all",
+          "paragraphs": [
+            "For raw, stuffed, breaded chicken breast products, the published instruction is not to cook them in the air fryer, and to follow the manufacturer's cooking instructions instead.",
+            "This is not a frozen-food rule. It applies whether the product is frozen or fresh, and it is the single clearest prohibition in the whole published guidance."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "Give the food room to move",
+          "paragraphs": [
+            "Air fryers generally don't have a lot of room inside, and overcrowding can prevent enough air circulation to properly cook the food. When air frying a large amount, it may be best to do so in batches.",
+            "Frozen food benefits from this more than fresh food does, because a crowded basket traps steam and the food is already wetter going in."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "If it is leftovers rather than frozen food",
+          "paragraphs": [
+            "Reheating leftovers is a separate rule: leftovers of any type go to 165 °F (74 °C), and cooked food is refrigerated within 2 hours.",
+            "Air fryers can be used for baking, roasting and reheating food without the food becoming soggy."
+          ],
+          "source_ids": ["S42", "S41"]
+        }
+      ],
+      "table": null,
+      "faq": [
+        {"q": "Do I follow the box or the recipe?", "a": "The box. When available, consumers should follow manufacturer's instructions on food packages to ensure food is safely cooked.", "source_ids": ["S41"]},
+        {"q": "Do I need to defrost first?", "a": "The published guidance does not address defrosting, so this site does not answer it. It does publish that package instructions take precedence when they are available, and that doneness is confirmed with a food thermometer.", "source_ids": ["S41"]},
+        {"q": "Can I air fry frozen stuffed chicken?", "a": "No. For raw, stuffed, breaded chicken breast products, the instruction is not to cook them in the air fryer — follow the manufacturer's cooking instructions instead.", "source_ids": ["S41"]}
+      ],
+      "product_picks": [
+        {"product": "P3", "why": "An 8-quart basket is large enough to spread a frozen batch out rather than pile it, with an LED shake reminder for even cooking.", "src": "M5"}
+      ],
+      "sources": ["S41", "S42", "M5"]
+    },
+    {
+      "slug": "leftovers-air-fryer",
+      "topic": "safety",
+      "title": "Reheating Leftovers in an Air Fryer: The 165 °F Rule and the Two-Hour Window",
+      "dek": "Air fryers reheat well and the guidance is short: 165 °F, refrigerate within two hours, and watch the Danger Zone.",
+      "meta_description": "Reheating leftovers in an air fryer: the 165 °F safe minimum internal temperature, the two-hour refrigeration window, the 40–140 °F Danger Zone, and rest times for steaks and roasts.",
+      "published_utc": "2026-11-15",
+      "reading_minutes": 5,
+      "answer": "Reheat leftovers to 165 °F (74 °C) and refrigerate cooked food within 2 hours. Air fryers can be used for reheating food without the food becoming soggy, so the same appliance that cooked it can finish it.",
+      "sections": [
+        {
+          "heading": "Reheating is its own safety question",
+          "paragraphs": [
+            "Leftovers carry their own number in the published chart: any type, 165 °F (74 °C). It is a separate line rather than a repeat of the original cooking temperature, because reheating a cooled-and-stored meal is not the same act as cooking it.",
+            "Precooked ham being reheated is also 165 °F, with the note that cooked hams packaged in USDA-inspected plants should be reheated to 140 °F (60 °C)."
+          ],
+          "source_ids": ["S42"]
+        },
+        {
+          "heading": "The two-hour window starts when you take it out",
+          "paragraphs": [
+            "Leftover foods should be refrigerated within 2 hours, otherwise they can enter the Danger Zone. The Danger Zone is the range of temperatures between 40 degrees F and 140 degrees F where foodborne illness bacteria multiply and can reach dangerous levels.",
+            "Air frying makes the window easier to keep, because cooking is quick. That advantage disappears if the food sits on the counter while somebody finishes a conversation."
+          ],
+          "source_ids": ["S41"]
+        },
+        {
+          "heading": "Why an air fryer is a good reheat box",
+          "paragraphs": [
+            "Air fryers can be used for baking, roasting and reheating food without the food becoming soggy. That is the whole argument for reheating in the same appliance rather than reaching for the microwave.",
+            "The 8 Qt model in particular is described by its manufacturer as having an automatic shutoff that halts cooking when the timer runs out or the basket is opened, and a top-rack dishwasher-safe basket and rack for the cleanup afterwards."
+          ],
+          "source_ids": ["S41", "M5"]
+        },
+        {
+          "heading": "Rest time applies to some reheated foods too",
+          "paragraphs": [
+            "Some meats need rest time after cooking, because rest time allows the innermost parts and juices of the meats to become fully and safely cooked. Whole cuts of beef, pork, veal and lamb and raw ham all carry a 3-minute rest at 145 °F.",
+            "That is a note about the food, not the appliance: no air fryer setting changes it."
+          ],
+          "source_ids": ["S42"]
+        },
+        {
+          "heading": "The appliance does not change the number",
+          "paragraphs": [
+            "Each air fryer will have varying cooking times due to the size and power of the appliance, but the safe internal temperature is always the same. Use a food thermometer to make sure your meat and poultry is fully cooked.",
+            "A bigger oven does not get a bigger safety margin. That is a useful thing to remember when a specification sheet is trying to imply that a more expensive machine is the safer one."
+          ],
+          "source_ids": ["S41"]
+        }
+      ],
+      "table": null,
+      "faq": [
+        {"q": "What temperature do I reheat leftovers to?", "a": "165 °F (74 °C). Leftovers of any type carry that number in the published chart.", "source_ids": ["S42"]},
+        {"q": "How long can leftovers sit out?", "a": "They should be refrigerated within 2 hours. The Danger Zone is between 40 °F and 140 °F.", "source_ids": ["S41"]},
+        {"q": "Does reheating meat need a rest time?", "a": "Some meats do. Whole cuts of beef, pork, veal and lamb and raw ham are listed at 145 °F with a 3-minute rest time, and the published reason is that rest time allows the innermost parts and juices to become fully and safely cooked.", "source_ids": ["S42"]}
+      ],
+      "product_picks": [
+        {"product": "P3", "why": "Automatic shutoff when the timer runs out or the basket is opened, and a top-rack dishwasher-safe basket and rack for the cleanup after.", "src": "M5"}
+      ],
+      "sources": ["S41", "S42", "M5"]
+    }
+  ]
+}

@@ -304,6 +304,25 @@
       el.textContent = String(canonical);
     });
 
+    // T31 (session 6cc428f1): the decision-support panel on the dashboard states how many
+    // suggestions and open questions exist. Those numbers come from DECISION_COUNTS, which
+    // tools/build_root_data.py projects out of ledger/suggestions.json, ledger/questions.json
+    // and marketing/data/editorial.json. Typed prose there would drift the moment a row was
+    // added — the same defect class F-26 and F-35 closed for the flag count.
+    if (typeof DECISION_COUNTS !== "undefined") {
+      var dcounts = {
+        suggestionCount: DECISION_COUNTS.suggestions,
+        suggestionBlockingCount: DECISION_COUNTS.suggestionsBlocking,
+        questionCount: DECISION_COUNTS.questions,
+        questionLaunchCount: DECISION_COUNTS.questionsLaunch,
+        editorialArticleCount: DECISION_COUNTS.editorialArticles
+      };
+      Object.keys(dcounts).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = String(dcounts[id]);
+      });
+    }
+
     // NOTE (session ba8b2d38, T27): this session independently made the same fix as T26 above and
     // wired a second handler to #flagRegisterRange. The T26 block above is kept as the single
     // implementation — it already fills #flagRegisterCount and #flagRegisterMax, which is what

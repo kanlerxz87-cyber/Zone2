@@ -38,13 +38,17 @@ sys.path.insert(0, str(REPO / "tools"))
 from link_builder import REQUIRED_SITE_DISCLOSURE, LinkPolicyError, audit_html, preview_link  # noqa: E402
 
 DATA = REPO / "marketing" / "data" / "facts.json"
+EDITORIAL_DATA = REPO / "marketing" / "data" / "editorial.json"
 OUT = REPO / "marketing"
 CSS = "assets/marketing.css"
 SITE_NAME = "Zone2 Field Notes"
 LIVE = "https://kanlerxz87-cyber.github.io/Zone2/marketing/"
 
 FACTS = json.loads(DATA.read_text(encoding="utf-8"))
+EDITORIAL = json.loads(EDITORIAL_DATA.read_text(encoding="utf-8"))
 PRODUCTS = {p["key"]: p for p in FACTS["products"]}
+ARTICLES = {a["slug"]: a for a in EDITORIAL["editorial_articles"]}
+TOPICS = {t["id"]: t for t in EDITORIAL["topics"]}
 AS_OF = FACTS["verified_utc"]
 
 STATUS_LABEL = {
@@ -69,10 +73,22 @@ def source_registry() -> dict[str, dict]:
     for product in FACTS["products"]:
         for src in product["official_sources"]:
             reg[src["id"]] = src
+    for src in EDITORIAL["sources"]:
+        reg[src["id"]] = src
     return reg
 
 
 SOURCES = source_registry()
+
+# How a source is described in the published source column. The class matters to the reader:
+# a manufacturer's own specification is not the same kind of statement as a marketplace listing,
+# and neither is the same kind of statement as a government food-safety page.
+KIND_LABEL = {
+    "manufacturer": "manufacturer",
+    "marketplace": "Amazon listing",
+    "government": "US government",
+    "official": "official",
+}
 
 
 def source_link(src_id: str | None) -> str:
@@ -82,7 +98,7 @@ def source_link(src_id: str | None) -> str:
     if not src:
         raise BuildError(f"row cites unknown source id {src_id!r}; refusing to publish an unresolvable citation")
     host = src["url"].split("/")[2]
-    kind = "manufacturer" if src["kind"] == "manufacturer" else "Amazon listing"
+    kind = KIND_LABEL.get(src.get("kind", ""), src.get("kind", ""))
     # A citation pointing at an Amazon marketplace page is marked sponsored as well. It earns nothing
     # (there is no tag), but over-declaring a commercial relationship is the safe direction, and it keeps
     # the repository's existing "no amazon.com/dp/ link without rel=sponsored" rule literally true.
@@ -91,6 +107,13 @@ def source_link(src_id: str | None) -> str:
         f'<a class="src" href="{esc(src["url"])}" target="_blank" rel="{rel}">'
         f'{esc(src_id)} · {esc(host)}<span class="src-kind">{esc(kind)}</span></a>'
     )
+
+
+def cite_all(src_ids: list[str]) -> str:
+    """Several citations for one statement, with a hard requirement that there is at least one."""
+    if not src_ids:
+        raise BuildError("a statement cites no source; refusing to publish it")
+    return " ".join(source_link(s) for s in src_ids)
 
 
 def product_link(product: dict) -> str:
@@ -185,15 +208,53 @@ def feature_list(product: dict) -> str:
 
 NAV = [
     ("index.html", "Overview"),
+    ("topics.html", "Topics"),
     ("buying-guide.html", "Buying guide"),
     ("comparison.html", "Comparison"),
-    ("articles/index.html", "Product articles"),
+    ("articles/index.html", "Articles"),
     ("verification.html", "Verification"),
     ("flagged.html", "Flagged for review"),
 ]
 
 
-def shell(title: str, description: str, body: str, *, here: str, depth: int = 0) -> str:
+def default_scope_note(root: str) -> str:
+    """The standing caveat on every product-facing page: what the three products are, and are not."""
+    return (
+        "<strong>Product identity is not confirmed.</strong> This buying guide, comparison and the three "
+        "product articles describe the Amazon destinations observed when following the supplied short links; "
+        "they do not establish that those destinations are the products intended in the brief. The supplied "
+        "codes are 9 characters, and Amazon's <a href=\"https://affiliate-program.amazon.com/help/node/topic/"
+        "GP38PJ6EUR6PFBEC\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">ASIN and link-format help</a> "
+        "describes ASINs as catalog identifiers. See <a href=\"" + root + "../pages/flags.html#F-03\">Flag F-03</a> "
+        "for the unresolved mapping evidence. Product specifications below are linked to their official "
+        "manufacturer sources."
+    )
+
+
+def editorial_scope_note(root: str) -> str:
+    """The standing caveat on an editorial page: the same identity caveat as every other page,
+    plus a note on the two kinds of source an editorial article draws on.
+
+    The identity sentence is word-for-word the same one the product pages carry. That is not
+    decoration: the rule the project works to is that no published page may imply the brief's
+    product mapping is confirmed, and tests/test_pipeline.py checks every marketing page for
+    that exact sentence.
+    """
+    return (
+        "<strong>Product identity is not confirmed.</strong> The products named here are the Amazon "
+        "destinations observed when following the supplied short links; they do not establish that those "
+        "destinations are the products intended in the brief. The supplied codes are 9 characters, and "
+        "Amazon's <a href=\"https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC\" "
+        "target=\"_blank\" rel=\"noopener noreferrer nofollow\">ASIN and link-format help</a> describes "
+        "ASINs as catalog identifiers. See <a href=\"" + root + "../pages/flags.html#F-03\">Flag F-03</a> "
+        "for the unresolved mapping evidence. <strong>Two kinds of source on this page:</strong> the cooking "
+        "and food-safety guidance comes from the United States Department of Agriculture and from "
+        "FoodSafety.gov, which publish it; the product specifications come from each manufacturer's own page."
+    )
+
+
+def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
+          scope_note: str | None = None) -> str:
     root = "../" * depth
     nav_parts = []
     for href, label in NAV:
@@ -221,7 +282,7 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0)
   </aside>
   <main class="main" id="main">
     <div class="disclosure" data-rule="R-01"><strong>Affiliate disclosure:</strong> {esc(REQUIRED_SITE_DISCLOSURE)}</div>
-    <aside class="scope-note" role="note"><strong>Product identity is not confirmed.</strong> This buying guide, comparison and the three articles describe the Amazon destinations observed when following the supplied short links; they do not establish that those destinations are the products intended in the brief. The supplied codes are 9 characters, and Amazon's <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer nofollow">ASIN and link-format help</a> describes ASINs as catalog identifiers. See <a href="{root}../pages/flags.html#F-03">Flag F-03</a> for the unresolved mapping evidence. Product specifications below are linked to their official manufacturer sources.</aside>
+    <aside class="scope-note" role="note">{scope_note if scope_note else default_scope_note(root)}</aside>
 {body}
     <footer class="site">
       <p>{esc(REQUIRED_SITE_DISCLOSURE)}</p>
@@ -241,12 +302,19 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0)
 # --------------------------------------------------------------------------- pages
 
 def page_index() -> str:
-    cards = []
+    """The reader-facing front door.
+
+    It used to be a specification index with a compliance banner on top, which was honest and
+    read like an audit report. The verification record still exists and is still linked from
+    every page; this page is the one a search visitor lands on, so it leads with the questions
+    people actually arrive with and keeps the sourcing visible rather than leading with it.
+    """
+    product_cards = []
     for p in FACTS["products"]:
         slug = p["key"].lower()
-        cards.append(f"""
+        product_cards.append(f"""
       <article class="card product-card">
-        <p class="eyebrow">{esc(p['manufacturer'])} · {esc(p['category_path_amazon'].split('› ')[-1])}</p>
+        <p class="eyebrow">{esc(p['manufacturer'])} &middot; {esc(p['category_path_amazon'].split('› ')[-1])}</p>
         <h3><a href="articles/{slug}.html">{esc(p['manufacturer_product_name'])}</a></h3>
         <p class="lede">{esc(p['tagline_facts'])}</p>
         <dl class="mini">
@@ -256,37 +324,117 @@ def page_index() -> str:
         </dl>
         <p><a class="button" href="articles/{slug}.html">Read the article</a></p>
       </article>""")
+
+    topic_strip = "".join(
+        f"""        <article class="topic-card">
+          <p class="eyebrow">{esc(t['name'])}</p>
+          <h3><a href="topics.html#topic-{esc(t['id'])}">{esc(t['name'])}</a></h3>
+          <p>{esc(t['blurb'])}</p>
+          <p class="row-note">{len(t['articles'])} article{'s' if len(t['articles']) != 1 else ''}</p>
+        </article>"""
+        for t in EDITORIAL["topics"]
+    )
+
+    editorial_cards = []
+    for topic in EDITORIAL["topics"]:
+        for slug in topic["articles"]:
+            a = ARTICLES[slug]
+            editorial_cards.append(f"""
+      <article class="card editorial-card">
+        <p class="eyebrow">{esc(topic['name'])}</p>
+        <h3><a href="articles/{esc(slug)}.html">{esc(a['title'])}</a></h3>
+        <p>{esc(a['dek'])}</p>
+        <p class="row-note">{esc(a['reading_minutes'])} min read &middot; published {esc(a['published_utc'])}</p>
+      </article>""")
+
+    spec_rows = sum(len(p["rows"]) for p in FACTS["products"])
+    verified_rows = sum(1 for p in FACTS["products"] for r in p["rows"] if r["status"] == "verified")
+    conflict_rows = sum(1 for p in FACTS["products"] for r in p["rows"] if r["status"] == "conflict")
+    blank_rows = sum(1 for p in FACTS["products"] for r in p["rows"]
+                     if r["status"] in ("unverified", "withheld_by_policy"))
+
     return shell(
-        "Verified Amazon affiliate content",
-        "Source-governed buying guide, comparison and product articles for three Amazon air fryers.",
-        f"""    <div class="page-head">
-      <h1>Three air fryers, written up from official specs only</h1>
-      <p class="lede">A buying guide, a side-by-side comparison and one article per product — every
-      specification traced to the manufacturer's or Amazon's own page, and anything unconfirmed left
-      blank and flagged rather than guessed.</p>
-    </div>
+        "Air fryers, written up from official sources",
+        "Buying guides, comparisons and cooking-safety articles for three Amazon air fryers — every "
+        "specification traced to the manufacturer's own page, and every safety claim to the United "
+        "States Department of Agriculture.",
+        f"""    <section class="hero">
+      <p class="eyebrow">Zone2 Field Notes</p>
+      <h1>Three air fryers, and the guidance that actually decides when dinner is safe.</h1>
+      <p class="lede">A buying guide, a head-to-head comparison, one article per model, and a set of
+      cooking-safety articles written from the United States Department of Agriculture's own guidance
+      and FoodSafety.gov's temperature chart. Every specification traces to the manufacturer's own
+      page. Everything the sources do not say is left blank and flagged rather than guessed.</p>
+      <p class="hero-actions">
+        <a class="button button--primary" href="topics.html">Browse the topics</a>
+        <a class="button" href="buying-guide.html">Which one should I buy?</a>
+      </p>
+      <p class="row-note">Read the
+        <a href="verification.html">verification method</a> &middot; see the
+        <a href="flagged.html">open questions</a> &middot; the
+        <a href="../suggestions.html">suggestions register</a> on the platform dashboard</p>
+    </section>
 
     <section class="kpis">
       <div class="kpi"><span class="kpi-num">{len(FACTS['products'])}</span><span class="kpi-label">products covered</span></div>
-      <div class="kpi"><span class="kpi-num">{sum(len(p['rows']) for p in FACTS['products'])}</span><span class="kpi-label">spec rows, each sourced or blank</span></div>
-      <div class="kpi"><span class="kpi-num">{sum(1 for p in FACTS['products'] for r in p['rows'] if r['status'] == 'conflict')}</span><span class="kpi-label">published source conflicts</span></div>
-      <div class="kpi"><span class="kpi-num">{sum(1 for p in FACTS['products'] for r in p['rows'] if r['status'] in ('unverified', 'withheld_by_policy'))}</span><span class="kpi-label">rows left blank, with reasons</span></div>
+      <div class="kpi"><span class="kpi-num">{spec_rows}</span><span class="kpi-label">spec rows, each sourced or blank</span></div>
+      <div class="kpi"><span class="kpi-num">{len(ARTICLES)}</span><span class="kpi-label">cooking and safety articles</span></div>
+      <div class="kpi"><span class="kpi-num">{verified_rows}</span><span class="kpi-label">rows verified from a manufacturer page</span></div>
+      <div class="kpi"><span class="kpi-num">{conflict_rows}</span><span class="kpi-label">published source conflicts</span></div>
+      <div class="kpi"><span class="kpi-num">{blank_rows}</span><span class="kpi-label">rows left blank, with reasons</span></div>
     </section>
 
-    <div class="card">
-      <h2>Start here</h2>
+    <section class="card">
+      <h2>Start with the question you arrived with</h2>
+      <div class="card-grid">
+{topic_strip}
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Guides and comparisons</h2>
       <ul class="links-grid">
         <li><a href="buying-guide.html"><strong>Buying guide</strong><span>Which of the three fits which kitchen — decided by the verified numbers, not by adjectives.</span></a></li>
         <li><a href="comparison.html"><strong>Head-to-head comparison</strong><span>Every shared attribute in one table, with the source beside each value.</span></a></li>
-        <li><a href="articles/index.html"><strong>Product articles</strong><span>One SEO-structured article per model, built from that model's verified rows.</span></a></li>
+        <li><a href="articles/index.html"><strong>All articles</strong><span>The product articles and the cooking and safety guides in one list.</span></a></li>
         <li><a href="verification.html"><strong>Verification</strong><span>What was checked, when, against which page, and what could not be confirmed.</span></a></li>
         <li><a href="flagged.html"><strong>Flagged for review</strong><span>Every irregularity found while building this set, with its source links.</span></a></li>
       </ul>
+    </section>
+
+    <h2 class="section-head">The articles</h2>
+    <div class="card-grid">{''.join(editorial_cards)}
     </div>
 
-    <h2>The three products</h2>
-    <div class="card-grid">{''.join(cards)}
+    <h2 class="section-head">The three products</h2>
+    <div class="card-grid">{''.join(product_cards)}
     </div>
+
+    <section class="card trust-strip">
+      <h2>How to read this site</h2>
+      <div class="card-grid">
+        <article class="mini-card">
+          <h3>Every number has a page</h3>
+          <p>Each specification row ends in the manufacturer's own product page. Click the source under
+          any value and you land on the page it was read from.</p>
+        </article>
+        <article class="mini-card">
+          <h3>Conflicts are printed, not resolved</h3>
+          <p>Where a manufacturer's page and an Amazon listing disagree, both values are shown with both
+          sources and neither is presented as the answer.</p>
+        </article>
+        <article class="mini-card">
+          <h3>Blank means blank</h3>
+          <p>A value no official page states is left empty and flagged. Nothing here is averaged,
+          estimated or carried over from a third party.</p>
+        </article>
+        <article class="mini-card">
+          <h3>No price, no rating</h3>
+          <p>The program's operating rules restrict price display, and ratings are storefront-specific
+          and volatile. Neither appears on this site as a static fact.</p>
+        </article>
+      </div>
+    </section>
 """,
         here="index.html",
     )
@@ -380,6 +528,8 @@ def page_article(key: str) -> str:
 
 
 def page_articles_index() -> str:
+    """Every article on the site in one place: the editorial cooking and safety guides, and the
+    generated product articles. The counts are computed, so they cannot drift from the data."""
     rows = "".join(
         f'<tr><th scope="row"><a href="{p["key"].lower()}.html">{esc(p["manufacturer_product_name"])}</a></th>'
         f'<td><code>{esc(p["asin"])}</code></td>'
@@ -388,21 +538,61 @@ def page_articles_index() -> str:
         f'<td class="cell-src">{source_link(p["official_sources"][0]["id"])}{source_link(p["official_sources"][1]["id"])}</td></tr>'
         for p in FACTS["products"]
     )
-    body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <span>Product articles</span></nav>
+    editorial_rows = []
+    for topic in EDITORIAL["topics"]:
+        for slug in topic["articles"]:
+            a = ARTICLES[slug]
+            editorial_rows.append(
+                f'<tr><th scope="row"><a href="{esc(slug)}.html">{esc(a["title"])}</a></th>'
+                f'<td>{esc(topic["name"])}</td>'
+                f'<td>{esc(a["dek"])}</td>'
+                f'<td>{esc(a["reading_minutes"])} min</td>'
+                f'<td class="cell-src">{cite_all(a["sources"])}</td></tr>'
+            )
+    body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> &rsaquo; <span>Articles</span></nav>
     <div class="page-head">
-      <h1>Product articles</h1>
-      <p class="lede">One article per model. Each is generated from the product's verified rows, so the article
-      and the specification table can never disagree.</p>
+      <h1>Articles</h1>
+      <p class="lede">{len(ARTICLES)} cooking and safety articles, written from the published food-safety
+      guidance, and {len(FACTS['products'])} product articles generated from each model's verified rows.
+      Every article carries the official source of every claim it makes.</p>
     </div>
+
     <section class="card">
-      <table class="data">
-        <caption>Each row links to the manufacturer's and Amazon's own pages for that model.</caption>
-        <thead><tr><th>Product</th><th>ASIN</th><th>Brand</th><th>One-line verified summary</th><th>Official sources</th></tr></thead>
-        <tbody>{rows}</tbody>
-      </table>
+      <h2>Cooking and safety articles</h2>
+      <div class="table-scroll">
+        <table class="data">
+          <caption>These are written from the United States Department of Agriculture's air-fryer guidance and
+          from FoodSafety.gov's safe minimum internal temperature chart, with each product specification taken
+          from that manufacturer's own page.</caption>
+          <thead><tr><th>Article</th><th>Topic</th><th>What it answers</th><th>Length</th><th>Official sources</th></tr></thead>
+          <tbody>{''.join(editorial_rows)}</tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Product articles</h2>
+      <div class="table-scroll">
+        <table class="data">
+          <caption>One article per model, generated from that model's verified rows so the article and the
+          specification table can never disagree.</caption>
+          <thead><tr><th>Product</th><th>ASIN</th><th>Brand</th><th>One-line verified summary</th><th>Official sources</th></tr></thead>
+          <tbody>{rows}</tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Where to start</h2>
+      <ul class="plain">
+        <li><a href="../topics.html">The topics page</a> groups every article by the question it answers.</li>
+        <li><a href="../buying-guide.html">The buying guide</a> turns the specifications into a decision.</li>
+        <li><a href="../comparison.html">The comparison table</a> puts all three side by side.</li>
+        <li><a href="../verification.html">The verification page</a> explains exactly how each value was checked.</li>
+      </ul>
     </section>
 """
-    return shell("Product articles", "One verified article per product.", body, here="articles/index.html", depth=1)
+    return shell("Articles", "Every article on this site, in one list.", body, here="articles/index.html", depth=1)
 
 
 def page_comparison() -> str:
@@ -735,10 +925,243 @@ def page_flagged() -> str:
                  here="flagged.html")
 
 
+# --------------------------------------------------------------------------- editorial
+
+def topic_article_cards(topic: dict) -> str:
+    cards = []
+    for slug in topic["articles"]:
+        a = ARTICLES[slug]
+        cards.append(f"""        <article class="topic-card">
+          <p class="eyebrow">{esc(TOPICS[a['topic']]['name'])}</p>
+          <h3><a href="articles/{esc(slug)}.html">{esc(a['title'])}</a></h3>
+          <p>{esc(a['dek'])}</p>
+          <p class="row-note">{esc(a['reading_minutes'])} min read &middot; published {esc(a['published_utc'])}</p>
+        </article>""")
+    return "".join(cards)
+
+
+def page_topics() -> str:
+    """The topic hub. It is the navigational spine of the reader-facing half of the site:
+    every article sits under a topic, and every topic says what it covers."""
+    blocks = []
+    for topic in EDITORIAL["topics"]:
+        blocks.append(f"""      <section class="topic-block" id="topic-{esc(topic['id'])}">
+        <div class="area-head">
+          <h2>{esc(topic['name'])}</h2>
+          <p>{esc(topic['blurb'])}</p>
+        </div>
+        <div class="card-grid">
+{topic_article_cards(topic)}
+        </div>
+      </section>""")
+
+    guides = "".join(
+        f"""        <article class="topic-card">
+          <p class="eyebrow">Guides</p>
+          <h3><a href="buying-guide.html">{esc(name)}</a></h3>
+          <p>{esc(dek)}</p>
+        </article>"""
+        for name, dek in (
+            ("Which air fryer, for which kitchen", "A buying guide that only makes the recommendations the specifications support."),
+            ("Head-to-head comparison", "Every shared attribute in one table, with the source beside each value."),
+        )
+    )
+    product_cards = "".join(
+        f"""        <article class="topic-card">
+          <p class="eyebrow">{esc(p['manufacturer'])}</p>
+          <h3><a href="articles/{esc(p['key'].lower())}.html">{esc(p['manufacturer_product_name'])}</a></h3>
+          <p>{esc(p['tagline_facts'])}</p>
+        </article>"""
+        for p in FACTS["products"]
+    )
+
+    body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Overview</a> &rsaquo; <span>Topics</span></nav>
+    <div class="page-head">
+      <p class="eyebrow">What this site covers</p>
+      <h1>Topics</h1>
+      <p class="lede">Everything published here, organised by the question it answers. The cooking and
+      safety articles are sourced to the United States Department of Agriculture and to FoodSafety.gov; the
+      product specifications are sourced to each manufacturer's own page.</p>
+    </div>
+
+{''.join(blocks)}
+
+    <section class="topic-block" id="topic-guides">
+      <div class="area-head">
+        <h2>Buying guides and comparisons</h2>
+        <p>Decision pages: what to buy, and how the three products differ on the numbers that matter.</p>
+      </div>
+      <div class="card-grid">{guides}
+      </div>
+    </section>
+
+    <section class="topic-block" id="topic-products">
+      <div class="area-head">
+        <h2>Product articles</h2>
+        <p>One article per model, generated from that model's verified rows.</p>
+      </div>
+      <div class="card-grid">{product_cards}
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How these articles are written</h2>
+      <ul class="plain">
+        <li><strong>Every claim has a source.</strong> Each section ends with the official page it was read
+        from, and every row of every table carries the source of that row.</li>
+        <li><strong>Nothing is inferred.</strong> Where no official source states a value, the article says
+        so instead of filling the gap &mdash; including the questions the guidance does not answer.</li>
+        <li><strong>Conflicts stay visible.</strong> Where a manufacturer's page and an Amazon listing
+        disagree, both are shown and neither is presented as the answer.</li>
+        <li><strong>No prices, no ratings.</strong> The program's operating rules restrict how prices may be
+        displayed, and ratings are storefront-specific and volatile. Neither is printed here.</li>
+        <li><strong>Nothing here is hands-on testing.</strong> No member of this project has cooked with
+        these appliances. Performance claims are the manufacturers' and are attributed to them.</li>
+      </ul>
+      <p class="row-note">A <a href="verification.html">full description of the method</a> is on the
+      verification page, and every open question is on the
+      <a href="flagged.html">flagged-for-review page</a>.</p>
+    </section>
+"""
+    return shell("Topics", "Every article on this site, organised by the question it answers.",
+                 body, here="topics.html")
+
+
+def page_editorial(slug: str) -> str:
+    a = ARTICLES[slug]
+    topic = TOPICS[a["topic"]]
+
+    sections = []
+    for sec in a["sections"]:
+        paras = "".join(f"<p>{esc(p)}</p>" for p in sec["paragraphs"])
+        sections.append(f"""      <section class="article-section">
+        <h2>{esc(sec['heading'])}</h2>
+        {paras}
+        <p class="cite">{cite_all(sec['source_ids'])}</p>
+      </section>""")
+
+    table_html = ""
+    if a.get("table"):
+        t = a["table"]
+        rows = []
+        for i, row in enumerate(t["rows"], start=1):
+            cells = "".join(f"<td>{esc(c)}</td>" for c in row["cells"])
+            rows.append(
+                f'<tr id="ea-{esc(slug)}-r{i}">{cells}'
+                f'<td class="cell-src">{cite_all(row["source_ids"])}</td></tr>'
+            )
+        heads = "".join(f'<th scope="col">{esc(c)}</th>' for c in t["columns"])
+        table_html = f"""      <section class="card table-card">
+        <div class="table-scroll">
+          <table class="data">
+            <caption>{esc(t['caption'])}</caption>
+            <thead><tr>{heads}<th scope="col">Official source</th></tr></thead>
+            <tbody>{''.join(rows)}</tbody>
+          </table>
+        </div>
+      </section>"""
+
+    faq = "".join(
+        f'<dt>{esc(f["q"])}</dt><dd>{esc(f["a"])}<div class="cite">{cite_all(f["source_ids"])}</div></dd>'
+        for f in a["faq"]
+    )
+
+    picks = ""
+    if a.get("product_picks"):
+        items = []
+        for pick in a["product_picks"]:
+            p = PRODUCTS[pick["product"]]
+            items.append(f"""          <article class="mini-card">
+            <h3>{esc(p['manufacturer_product_name'])}</h3>
+            <p>{esc(pick['why'])}</p>
+            <p class="cite">{source_link(pick['src'])}</p>
+            <p>{product_link(p)}</p>
+          </article>""")
+        picks = f"""      <section class="card">
+        <h2>Where the product fits</h2>
+        <div class="card-grid">{''.join(items)}
+        </div>
+        <p class="row-note">Every link above is a preview link: no Associates ID is configured for this project,
+        so they earn nothing. The disclosure required by the Amazon Associates Operating Agreement sits next to
+        each one.</p>
+      </section>"""
+
+    src_items = "".join(
+        f'<li>{source_link(s)} &mdash; {esc(SOURCES[s]["name"])}</li>' for s in a["sources"]
+    )
+    related = "".join(
+        f'<li><a href="{esc(s)}.html">{esc(ARTICLES[s]["title"])}</a>'
+        f'<div class="row-note">{esc(ARTICLES[s]["dek"])}</div></li>'
+        for s in topic["articles"] if s != slug
+    )
+
+    body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> &rsaquo;
+      <a href="../topics.html">Topics</a> &rsaquo; <span>{esc(a['title'])}</span></nav>
+    <div class="page-head">
+      <p class="eyebrow">{esc(topic['name'])}</p>
+      <h1>{esc(a['title'])}</h1>
+      <p class="lede">{esc(a['dek'])}</p>
+      <p class="byline">Published {esc(a['published_utc'])} &middot; {esc(a['reading_minutes'])} min read
+        &middot; Topic: <a href="../topics.html#topic-{esc(a['topic'])}">{esc(topic['name'])}</a></p>
+    </div>
+
+    <section class="card answer-box">
+      <h2>Short answer</h2>
+      <p>{esc(a['answer'])}</p>
+    </section>
+
+{''.join(sections)}
+
+{table_html}
+
+    <section class="card">
+      <h2>Questions people actually ask</h2>
+      <dl class="faq">{faq}</dl>
+      <p class="row-note">Where the published guidance does not answer a question, the answer says so
+      rather than guessing.</p>
+    </section>
+
+{picks}
+
+    <section class="card">
+      <h2>What this article does not claim</h2>
+      <ul class="plain">
+        <li><strong>No price and no rating.</strong> The program's operating rules restrict how prices may
+        be displayed, and a star rating is storefront-specific and moves daily. Neither is printed here.</li>
+        <li><strong>No hands-on testing.</strong> Nobody on this project has cooked with these appliances.
+        Statements about how they perform are the manufacturers' own, and are attributed to them.</li>
+        <li><strong>No named author yet.</strong> That is a real gap, it is recorded as an open question on
+        the platform dashboard, and it is listed on the suggestions register with the fix.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>More in {esc(topic['name'])}</h2>
+      <ul class="source-list related">{related}</ul>
+    </section>
+
+    <section class="card">
+      <h2>Sources for this article</h2>
+      <ul class="source-list">{src_items}</ul>
+      <p class="row-note">Read {esc(EDITORIAL['verified_utc'])}. Guidance and specifications change; re-check the
+      linked page before relying on it.</p>
+    </section>
+"""
+    return shell(
+        a["title"],
+        a["meta_description"],
+        body,
+        here="articles/index.html",
+        depth=1,
+        scope_note=editorial_scope_note("../"),
+    )
+
+
 # --------------------------------------------------------------------------- build
 
 PAGES = {
     "index.html": page_index,
+    "topics.html": page_topics,
     "buying-guide.html": page_buying_guide,
     "comparison.html": page_comparison,
     "verification.html": page_verification,
@@ -748,6 +1171,10 @@ PAGES = {
     "articles/p2.html": lambda: page_article("P2"),
     "articles/p3.html": lambda: page_article("P3"),
 }
+# The editorial articles are generated from the same data file, so the count in the index and the
+# count of files on disk can never disagree.
+for _slug in ARTICLES:
+    PAGES[f"articles/{_slug}.html"] = (lambda s=_slug: page_editorial(s))
 
 
 def build(out_dir: Path) -> dict[str, str]:

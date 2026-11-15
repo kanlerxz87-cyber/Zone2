@@ -137,7 +137,8 @@ jobs:
                   sorted(glob.glob('zone2/*.html')) + \
                   sorted(glob.glob('revalidation/*.html')) + \
                   sorted(glob.glob('affiliate-lab/*.html')) + \
-                  sorted(glob.glob('pages/**/*.html', recursive=True))
+                  sorted(glob.glob('pages/**/*.html', recursive=True)) + \
+                  sorted(glob.glob('marketing/**/*.html', recursive=True))
           assert len(pages) >= 70, f'expected every published page, found {len(pages)}'
           for f in pages:
               t = open(f, encoding='utf-8').read()
@@ -245,6 +246,13 @@ jobs:
       # same drift rule applies: if either page is hand-edited, the build fails.
       - name: Rebuild the decision pages and confirm committed output is current
         run: python3 tools/build_decision_pages.py --check
+
+      # arena/6cc428f1-zone2 (T31): the dashboard's decision-support counts and the Field Notes
+      # site are both generated. The marketing pages drift-check is above; this gate covers the
+      # dashboard's data.js, which now also carries DECISION_COUNTS projected from the two
+      # decision registers and from marketing/data/editorial.json.
+      - name: Rebuild the dashboard data bundle and confirm committed output is current
+        run: python3 tools/build_root_data.py --check
 
       - name: Subpage gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
         run: python3 tools/validate_data.py

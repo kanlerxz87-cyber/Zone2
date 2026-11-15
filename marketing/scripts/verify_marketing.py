@@ -13,6 +13,8 @@ Fails (non-zero exit) if any of these stop being true, so none of them depends o
   G8  every row marked UNVERIFIED/WITHHELD prints no value at all
   G9  committed HTML matches a fresh build (nothing hand-edited)
   G10 every official source URL used is on an allow-listed official host
+  G11 every article in the data is published, linked from the topic hub, and reachable
+
 
 The row-level checks (G7/G8) re-derive the expectation from marketing/data/facts.json and then read the
 rendered HTML, so a renderer bug cannot quietly pass its own test.
@@ -34,6 +36,7 @@ from link_builder import REQUIRED_SITE_DISCLOSURE  # noqa: E402
 
 ROOT = REPO / "marketing"
 FACTS = json.loads((ROOT / "data" / "facts.json").read_text(encoding="utf-8"))
+EDITORIAL = json.loads((ROOT / "data" / "editorial.json").read_text(encoding="utf-8"))
 
 OFFICIAL_HOSTS = {
     "www.amazon.com",
@@ -42,6 +45,14 @@ OFFICIAL_HOSTS = {
     "www.chefman.com",
     "www.emerileveryday.com",
     "affiliate-program.amazon.com",
+    # Session 6cc428f1 (T31, 2026-11-15): the cooking and food-safety articles are sourced to two
+    # United States government publishers and to Google Search Central's own documentation about
+    # how a site should be written. These are primary publishers speaking about their own subject.
+    "www.fsis.usda.gov",
+    "fsis.usda.gov",
+    "www.foodsafety.gov",
+    "foodsafety.gov",
+    "developers.google.com",
 }
 MARKETPLACE_HOSTS = {"www.amazon.com", "amazon.com"}
 
@@ -117,29 +128,157 @@ def check_prices(rel: str, doc: str) -> None:
 
 
 def check_rows(rel: str, doc: str) -> None:
-    """G7/G8: for the article pages, every attribute row must carry a source pill or say why not."""
-    if not rel.startswith("articles/p"):
+    """G7/G8: every row that prints a value must carry an official source, and a row that prints
+    nothing must say so explicitly.
+
+    Two row families exist now: the product articles' specification rows (``p<N>-r<N>``) and the
+    editorial articles' chart rows (``ea-<slug>-r<N>``). Both are checked the same way.
+    """
+    if re.fullmatch(r"articles/p\d\.html", rel):
+        rows = re.findall(r'<tr id="p\d-r\d+">(.*?)</tr>', doc, flags=re.S)
+        if not rows:
+            fail(f"G7 {rel}: no specification rows found - the page lost its table")
+            return
+        for i, row in enumerate(rows, start=1):
+            has_value = bool(re.search(r"<strong>.*?</strong>", row, flags=re.S))
+            has_src = 'class="src"' in row
+            has_pill = 'class="pill' in row
+            is_blank = 'class="cell-blank"' in row
+            if has_value and not has_src:
+                fail(f"G7 {rel}: row {i} prints a value with no official source link")
+            if not has_value and not is_blank:
+                fail(f"G8 {rel}: row {i} has neither a value nor an explicit blank marker")
+            if is_blank and not has_pill:
+                fail(f"G8 {rel}: row {i} is blank but carries no UNVERIFIED/WITHHELD pill and no reason")
+        # cross-check the count against the data file
+        key = re.search(r"articles/(p\d)\.html", rel).group(1).upper()
+        expected = len(next(p for p in FACTS["products"] if p["key"] == key)["rows"])
+        if len(rows) != expected:
+            fail(f"G7 {rel}: {len(rows)} rows rendered but the data file defines {expected}")
         return
-    rows = re.findall(r'<tr id="p\d-r\d+">(.*?)</tr>', doc, flags=re.S)
-    if not rows:
-        fail(f"G7 {rel}: no specification rows found - the page lost its table")
+
+    m = re.fullmatch(r"articles/([a-z0-9-]+)\.html", rel)
+    if not m or m.group(1) == "index":
         return
+    slug = m.group(1)
+    article = next((a for a in EDITORIAL["editorial_articles"] if a["slug"] == slug), None)
+    if article is None:
+        fail(f"G7 {rel}: no editorial article with slug {slug!r} in marketing/data/editorial.json")
+        return
+    rows = re.findall(r'<tr id="ea-[a-z0-9-]+-r\d+">(.*?)</tr>', doc, flags=re.S)
+    expected_rows = len((article.get("table") or {}).get("rows", []))
+    if len(rows) != expected_rows:
+        fail(f"G7 {rel}: {len(rows)} chart rows rendered but the data file defines {expected_rows}")
     for i, row in enumerate(rows, start=1):
-        has_value = bool(re.search(r"<strong>.*?</strong>", row, flags=re.S))
-        has_src = 'class="src"' in row
-        has_pill = 'class="pill' in row
-        is_blank = 'class="cell-blank"' in row
-        if has_value and not has_src:
-            fail(f"G7 {rel}: row {i} prints a value with no official source link")
-        if not has_value and not is_blank:
-            fail(f"G8 {rel}: row {i} has neither a value nor an explicit blank marker")
-        if is_blank and not has_pill:
-            fail(f"G8 {rel}: row {i} is blank but carries no UNVERIFIED/WITHHELD pill and no reason")
-    # cross-check the count against the data file
-    key = re.search(r"articles/(p\d)\.html", rel).group(1).upper()
-    expected = len(next(p for p in FACTS["products"] if p["key"] == key)["rows"])
-    if len(rows) != expected:
-        fail(f"G7 {rel}: {len(rows)} rows rendered but the data file defines {expected}")
+        if 'class="src"' not in row:
+            fail(f"G7 {rel}: chart row {i} prints values with no official source link")
+    # Every section, FAQ answer and table row must cite at least one source.
+    sections = article["sections"]
+    if len(sections) != len(re.findall(r'<section class="article-section">', doc)):
+        fail(f"G7 {rel}: {len(sections)} sections in the data but the page rendered a different number")
+    for i, sec in enumerate(sections, start=1):
+        if not sec.get("source_ids"):
+            fail(f"G7 {rel}: section {i} has no source_ids")
+    for i, f in enumerate(article["faq"], start=1):
+        if not f.get("source_ids"):
+            fail(f"G7 {rel}: FAQ answer {i} has no source_ids")
+    for i, row in enumerate((article.get("table") or {}).get("rows", []), start=1):
+        if not row.get("source_ids"):
+            fail(f"G7 {rel}: chart row {i} has no source_ids")
+
+
+def check_editorial_sources() -> None:
+    """G10/G11: every source the editorial articles cite must resolve to a registered source on an
+    allow-listed official host.
+
+    Split out of main() so a test can call it directly: the negative test strips a citation from
+    one article and asserts this function turns red. A check that cannot be shown to fail is not
+    evidence of anything.
+    """
+    registered = {s["id"] for s in FACTS["products"][0]["official_sources"]}
+    registered |= {s["id"] for product in FACTS["products"] for s in product["official_sources"]}
+    registered |= {s["id"] for s in EDITORIAL["sources"]}
+    for src in EDITORIAL["sources"]:
+        host = src["url"].split("/")[2]
+        if host not in OFFICIAL_HOSTS:
+            fail(f"G10 data: editorial source {src['id']} host {host!r} is not allow-listed")
+    for article in EDITORIAL["editorial_articles"]:
+        cited = set(article.get("sources", []))
+        # Every individual claim carries its own citation. An article-level list is a summary of
+        # what was read, not a substitute for citing the source of each specific statement.
+        for i, sec in enumerate(article["sections"], start=1):
+            if not sec.get("source_ids"):
+                fail(f"G11 data: article {article['slug']!r} section {i} cites no source")
+            cited.update(sec.get("source_ids", []))
+        for i, f in enumerate(article["faq"], start=1):
+            if not f.get("source_ids"):
+                fail(f"G11 data: article {article['slug']!r} FAQ answer {i} cites no source")
+            cited.update(f.get("source_ids", []))
+        for i, row in enumerate((article.get("table") or {}).get("rows", []), start=1):
+            if not row.get("source_ids"):
+                fail(f"G11 data: article {article['slug']!r} chart row {i} cites no source")
+            cited.update(row.get("source_ids", []))
+        for pick in article.get("product_picks", []):
+            cited.add(pick.get("src"))
+        unknown = sorted(c for c in cited if c and c not in registered)
+        if unknown:
+            fail(f"G11 data: article {article['slug']!r} cites unregistered source ids {unknown}")
+        if not cited:
+            fail(f"G11 data: article {article['slug']!r} cites no source at all")
+
+
+def check_editorial_coverage() -> None:
+    """G11: the topic hub must exist, list every topic, and every article in the data must be
+    published, linked from the hub and from the articles index.
+
+    This is the check that stops a written article from being orphaned: an article that exists in
+    the data but is not reachable from the hub would be invisible to a reader and to a crawler.
+    """
+    hub_path = ROOT / "topics.html"
+    if not hub_path.is_file():
+        fail("G11 topics.html: the topic hub is missing")
+        return
+    hub = hub_path.read_text(encoding="utf-8")
+
+    for topic in EDITORIAL["topics"]:
+        if f'id="topic-{topic["id"]}"' not in hub:
+            fail(f"G11 topics.html: topic {topic['id']!r} has no anchor on the hub")
+        for slug in topic["articles"]:
+            article = next(
+                (a for a in EDITORIAL["editorial_articles"] if a["slug"] == slug), None
+            )
+            if article is None:
+                fail(f"G11 data: topic {topic['id']!r} lists unknown article slug {slug!r}")
+                continue
+            page = ROOT / "articles" / f"{slug}.html"
+            if not page.is_file():
+                fail(f"G11 articles/{slug}.html: article in the data has no generated page")
+                continue
+            if f'href="articles/{slug}.html"' not in hub:
+                fail(f"G11 topics.html: article {slug!r} is not linked from its topic block")
+            if f'href="{slug}.html"' not in (ROOT / "articles" / "index.html").read_text(encoding="utf-8"):
+                fail(f"G11 articles/index.html: article {slug!r} is not listed in the index")
+            # The hub must say what the topic covers, and the article must say what it answers.
+            if not topic.get("blurb"):
+                fail(f"G11 data: topic {topic['id']!r} has no blurb")
+            if not article.get("dek"):
+                fail(f"G11 data: article {slug!r} has no dek")
+            if not article.get("answer"):
+                fail(f"G11 data: article {slug!r} has no short answer")
+            # A section with no paragraphs is an empty section on the page.
+            for i, sec in enumerate(article["sections"], start=1):
+                if not sec.get("paragraphs"):
+                    fail(f"G11 data: article {slug!r} section {i} has no prose")
+            if not article.get("faq"):
+                fail(f"G11 data: article {slug!r} has no question-and-answer section")
+
+    # The topics page and every article must be reachable from the site overview.
+    overview = (ROOT / "index.html").read_text(encoding="utf-8")
+    if 'href="topics.html"' not in overview:
+        fail("G11 index.html: the topic hub is not linked from the overview")
+    nav = (ROOT / "articles" / "index.html").read_text(encoding="utf-8")
+    if 'href="../topics.html"' not in nav:
+        fail("G11 articles/index.html: the topic hub is not linked from the articles index")
 
 
 def main() -> int:
@@ -178,6 +317,9 @@ def main() -> int:
         for row in product["rows"]:
             if row["status"] not in ("unverified", "withheld_by_policy") and not row.get("src"):
                 fail(f"G7 data: {product['key']} row {row['attr']!r} has a value but no source")
+
+    check_editorial_sources()
+    check_editorial_coverage()
 
     pages = len(PAGES)
     rows = sum(len(p["rows"]) for p in FACTS["products"])

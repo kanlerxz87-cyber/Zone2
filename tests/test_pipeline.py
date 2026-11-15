@@ -27,7 +27,11 @@ def test_marketing_pages_label_unconfirmed_brief_mapping():
     """Destination-only marketing must not imply the short-code mapping is confirmed."""
     with tempfile.TemporaryDirectory() as tmp:
         rendered = build_marketing.build(Path(tmp))
-    assert len(rendered) == 9
+    # The page count is derived from the builder, never typed here: this assertion used to be
+    # `== 9`, which broke the moment the topic hub and the editorial articles were added, and
+    # a hard-coded count is exactly the drift this repository keeps recording (F-17/F-26/F-35).
+    assert len(rendered) == len(build_marketing.PAGES)
+    assert len(rendered) >= 9
     for page, document in rendered.items():
         assert "Product identity is not confirmed." in document, page
         assert "they do not establish that those destinations are the products intended in the brief" in document, page
@@ -284,6 +288,80 @@ def test_guard_check_label_cannot_drift_from_the_test_suite():
     report_ok = validate_data.Report()
     validate_data.check_typed_counts(report_ok)
     assert not report_ok.errors, report_ok.errors
+
+
+def test_editorial_articles_are_sourced_published_and_reachable():
+    """T31 regression: every editorial article must be published, sourced and reachable.
+
+    Three things have to hold at once, and each of them can break on its own:
+      1. every article in marketing/data/editorial.json has a generated page;
+      2. every section, FAQ answer and chart row cites at least one registered source;
+      3. every article is reachable from the topic hub, which is itself reachable from the
+         overview - otherwise a written article is invisible to a reader and to a crawler.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        rendered = build_marketing.build(Path(tmp))
+
+    editorial = json.loads(
+        (REPO / "marketing" / "data" / "editorial.json").read_text(encoding="utf-8")
+    )
+    registered = {s["id"] for s in editorial["sources"]}
+    for product in build_marketing.FACTS["products"]:
+        registered |= {s["id"] for s in product["official_sources"]}
+
+    slugs = {a["slug"] for a in editorial["editorial_articles"]}
+    assert slugs, "editorial.json defines no articles"
+    for slug in slugs:
+        assert f"articles/{slug}.html" in rendered, f"article {slug!r} has no generated page"
+
+    for article in editorial["editorial_articles"]:
+        cited = set(article.get("sources", []))
+        for sec in article["sections"]:
+            assert sec.get("source_ids"), f"{article['slug']}: a section cites nothing"
+            cited.update(sec["source_ids"])
+        for faq in article["faq"]:
+            assert faq.get("source_ids"), f"{article['slug']}: a FAQ answer cites nothing"
+            cited.update(faq["source_ids"])
+        for row in (article.get("table") or {}).get("rows", []):
+            assert row.get("source_ids"), f"{article['slug']}: a chart row cites nothing"
+            cited.update(row["source_ids"])
+        unknown = sorted(c for c in cited if c not in registered)
+        assert not unknown, f"{article['slug']}: cites unregistered sources {unknown}"
+
+    hub = rendered["topics.html"]
+    for topic in editorial["topics"]:
+        assert f'id="topic-{topic["id"]}"' in hub, f"topic {topic['id']!r} is not on the hub"
+        for slug in topic["articles"]:
+            assert f'href="articles/{slug}.html"' in hub, f"{slug!r} is orphaned on the hub"
+    assert 'href="topics.html"' in rendered["index.html"], "the hub is not linked from the overview"
+
+    # A negative test: strip a citation from one article and the gate must turn red.
+    # A check that cannot be shown to fail is not evidence of anything.
+    victim = editorial["editorial_articles"][0]
+    edited = json.loads(json.dumps(editorial))
+    edited_article = next(a for a in edited["editorial_articles"] if a["slug"] == victim["slug"])
+    edited_article["sections"][0]["source_ids"] = []
+    tmp_data = REPO / "marketing" / "data" / "editorial.json"
+    original = tmp_data.read_text(encoding="utf-8")
+    sys.path.insert(0, str(REPO / "marketing" / "scripts"))
+    import importlib
+
+    import verify_marketing
+
+    try:
+        tmp_data.write_text(json.dumps(edited, indent=2), encoding="utf-8")
+        importlib.reload(verify_marketing)
+        verify_marketing.failures.clear()
+        verify_marketing.check_editorial_sources()
+        assert verify_marketing.failures, (
+            "the editorial source gate must reject an article whose section cites nothing"
+        )
+    finally:
+        tmp_data.write_text(original, encoding="utf-8")
+        importlib.reload(verify_marketing)
+        verify_marketing.failures.clear()
+        verify_marketing.check_editorial_sources()
+        assert not verify_marketing.failures, verify_marketing.failures
 
 
 def main() -> int:
