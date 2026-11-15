@@ -33,6 +33,9 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 OUT = REPO / "discovery"
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import page_meta  # shared generated-<head> definition (T40); see tools/page_meta.py  # noqa: E402
+
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 SITE = "https://kanlerxz87-cyber.github.io/Zone2/"
 HERE = SITE + "discovery/"
@@ -683,8 +686,13 @@ def main(argv=None) -> int:
     stale = []
     for name, doc in rendered.items():
         path = OUT / name
+        rel = f"discovery/{name}"
+        # The canonical/OG/schema layer is owned by tools/build_meta.py. Emit it here as well so
+        # this generator's output is stable whatever order the build steps run in, and compare
+        # the authored page against the committed one so the layer never reads as drift.
+        doc = page_meta.apply(doc, rel)
         if check:
-            if not path.is_file() or path.read_text(encoding="utf-8") != doc:
+            if not path.is_file() or not page_meta.same_page(path.read_text(encoding="utf-8"), doc):
                 stale.append(name)
         else:
             path.write_text(doc, encoding="utf-8")

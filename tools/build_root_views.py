@@ -26,6 +26,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+import page_meta  # shared generated-<head> definition (T40); see tools/page_meta.py
+
 REPO = Path(__file__).resolve().parents[1]
 LEDGER = REPO / "ledger"
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
@@ -299,7 +301,10 @@ def main() -> int:
         drift = []
         for name, text in rendered.items():
             target = REPO / name
-            if not target.is_file() or target.read_text(encoding="utf-8") != text:
+            # T40: compare what this generator authored, not the generated <head> layer that
+            # tools/build_meta.py owns. Without this, adding a canonical URL to a page this
+            # generator writes would read as drift and fail the gate for the wrong reason.
+            if not target.is_file() or not page_meta.same_page(target.read_text(encoding="utf-8"), text):
                 drift.append(name)
         print(json.dumps({"checked": sorted(rendered), "drifted": drift}, indent=2))
         return 1 if drift else 0
@@ -308,7 +313,7 @@ def main() -> int:
         for name, text in rendered.items():
             staged = Path(tmp) / name
             staged.write_text(text, encoding="utf-8")
-            (REPO / name).write_text(text, encoding="utf-8")
+            (REPO / name).write_text(page_meta.apply(text, name), encoding="utf-8")
     print(json.dumps({"written": sorted(rendered), "as_of": AS_OF}, indent=2))
     return 0
 

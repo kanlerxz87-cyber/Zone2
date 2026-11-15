@@ -284,13 +284,23 @@ def check_counts(rep: Report) -> None:
 
 
 def check_current(rep: Report) -> None:
-    """`--check` on the generator is the same test; run it here so one command gates both."""
+    """`--check` on the generator is the same test; run it here so one command gates both.
+
+    The comparison is against `page_meta.apply(...)` and goes through `page_meta.same_page`,
+    because the canonical/OG/schema head layer is owned by tools/build_meta.py, not by the
+    page author. Comparing raw text would report drift whenever that layer is refreshed —
+    the failure mode that makes a gate get deleted instead of fixed.
+    """
     for name, doc in bd.build().items():
         path = OUT / name
+        expected = bd.page_meta.apply(doc, f"discovery/{name}")
         if not path.is_file():
             rep.fail(f"{name}: not generated")
-        elif path.read_text(encoding="utf-8") != doc:
+        elif not bd.page_meta.same_page(path.read_text(encoding="utf-8"), expected):
             rep.fail(f"{name}: stale - run python3 tools/build_discovery.py")
+        elif path.read_text(encoding="utf-8") != expected:
+            # Same authored page, but the generated head layer is out of date.
+            rep.fail(f"{name}: generated head layer is stale - run python3 tools/build_meta.py")
 
 
 def main() -> int:

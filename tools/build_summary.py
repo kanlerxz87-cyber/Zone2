@@ -26,6 +26,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from flag_state import open_count  # shared "is this flag open" predicate (F-29/F-31)
 
+import page_meta  # shared generated-<head> definition (T40); see tools/page_meta.py
+
 REPO = Path(__file__).resolve().parents[1]
 LEDGER = REPO / "ledger"
 OUT = REPO / "summary.html"
@@ -371,13 +373,14 @@ def main() -> int:
             print(json.dumps({"error": "summary.html missing"}))
             return 1
         current = OUT.read_text(encoding="utf-8")
-        if hashlib.sha256(current.encode()).hexdigest() != hashlib.sha256(html.encode()).hexdigest():
+        # T40: compare the authored page, not the generated <head> layer tools/build_meta.py owns.
+        if not page_meta.same_page(current, html):
             print(json.dumps({"drifted": ["summary.html"]}))
             return 1
         print(json.dumps({"checked": ["summary.html"], "drifted": []}))
         return 0
 
-    OUT.write_text(html, encoding="utf-8")
+    OUT.write_text(page_meta.apply(html, "summary.html"), encoding="utf-8")
     print(json.dumps({"out": "summary.html", "bytes": len(html),
                       "flags": len(FLAGS), "sources": len(SOURCES),
                       "products": len(PRODUCTS["entries"])}, indent=2))

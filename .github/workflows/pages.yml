@@ -283,6 +283,32 @@ jobs:
       - name: Rebuild the decision namespace and confirm committed output is current
         run: python3 tools/build_decisions.py --check
 
+      # ---- T40 (session arena/3e0b3b4e-zone2): the discovery review + the machine-readable layer ----
+      # discovery/ publishes what a line-by-line review measured, what information is missing and what
+      # could change. The gate is verified to fail on purpose against eight injected defects before
+      # being added here: an answer filled into an OPEN question, a recommendation naming an unoffered
+      # option, a dangling source citation, a source with no quoted text, a non-official host, an
+      # injected product price, a single-option "decision", and a hand-edited (stale) page.
+      - name: Rebuild the discovery review and confirm committed output is current
+        run: python3 tools/build_discovery.py --check
+
+      - name: Discovery gate (sourcing, quoted sources, unanswered questions, derived counts, links)
+        run: python3 tools/validate_discovery.py
+
+      # tools/build_meta.py owns the canonical URL, Open Graph tags and the schema.org graph on the
+      # hand-written root pages. It emits no Product/Review/AggregateRating markup: the project has
+      # tested nothing and may not display a price, so rating markup would describe content no reader
+      # can see (discovery/findings.html DG-06). The --check keeps it from drifting.
+      - name: Confirm the generated head layer is current
+        run: python3 tools/build_meta.py --check
+
+      # tools/build_sitemap.py generates the root sitemap from the published file tree (DG-04: the
+      # hand-maintained file listed 16 of 116 pages). It excludes the five preserved prototype
+      # namespaces on purpose - submitting six near-copies of one publisher's research is the
+      # duplicated-surface pattern the spam policy names - and the exclusion is stated in the file.
+      - name: Confirm the sitemap is generated from the tree, not hand-maintained
+        run: python3 tools/build_sitemap.py --check
+
       - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
         run: python3 tools/validate_decisions.py
 
