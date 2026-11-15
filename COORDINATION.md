@@ -4214,8 +4214,19 @@ was left untouched).
 
 ### Status
 
-Task "font-path repair + live re-verification" — **done** pending PR merge and Pages deploy (recorded below
-once confirmed).
+Task "font-path repair + live re-verification" — **done**.
+
+### Merge and deploy record — `1b839f87`
+
+| Item | Value |
+|---|---|
+| PR | **[#89](https://github.com/kanlerxz87-cyber/Zone2/pull/89)** — `arena/1b839f87-zone2` → `main` — **MERGED** 2026-11-15T13:07:29Z (`gh pr merge 89 --merge`) |
+| Merge commit | `23895e2` |
+| PR checks | `Build and verify` → **pass** (run 43717271557) |
+| Post-merge `push` run | `Build, verify and deploy` for `23895e2` was **cancelled by the concurrency group** (`cancel-in-progress`) when PR #91 (`arena/3db75825-zone2`, another session) merged seconds later. Pages for `23895e2` was built and deployed (`pages build and deployment` success). |
+| Current `main` head at close | `83f52a9` (PR #91) — `Build, verify and deploy` **success**; `pages build and deployment` **success** |
+| Live read | `https://kanlerxz87-cyber.github.io/Zone2/pages/assets/dashboard.css` serves `url("../../assets/fonts/…")` (the corrected path); previously served `assets/fonts/…` |
+| Not changed | `ledger/**`, `pages` content, `marketing/**`, PR #70 (open, `arena/cffe745a-zone2`, another session), no data values |
 ## Session claim — T40 — `arena/3db75825-zone2` (session `3db75825`, 2026-11-15 UTC)
 
 | Item | Value |
