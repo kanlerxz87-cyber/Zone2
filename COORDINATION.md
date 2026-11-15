@@ -3792,6 +3792,26 @@ carried forward from the ledger (not re-quoted).
 4. **CR executed under integration duty:** `tools/build_decisions.py` (owner `d0135100`, merged and finished) gained a one-line rewrite so the vendored `decisions/assets/dashboard.css` resolves the redesigned stylesheet's bundled font paths (`assets/fonts/` → `../../assets/fonts/`). Without it the redesigned root stylesheet would 404 its fonts on every decisions page. Regenerated output is `--check`-gated.
 5. **Unchanged, still owner-open:** F-01…F-03 (confirm ASINs), F-24 (tagged Associates links — as supplied the links cannot earn), F-05 (Creators API registration). No price, rating, review count, availability or per-ASIN commission band is published anywhere — none is verifiable from an official source yet.
 
+---
+
+## Session record — arena/bf8f07a7-zone2 — trendy-topics / organic-traffic marketing layer
+
+| Field | Value |
+|---|---|
+| Branch | `arena/bf8f07a7-zone2` (rebased onto `main` = `0691b2b`) |
+| PR | #65 |
+| Task | Contribute the trendy-topics / organic-traffic marketing layer (`marketing/trending-topics.html`) so the affiliate destination reads as a polished marketing site rather than AI slop. The Suggestions section (review-before-implement) and the Questions / Information / Answers decision gate are already canonically implemented by T29 (`pages/suggestions.html`, PR #61) and integrated by T30 (`pages/questions.html`, PR #64), both merged and deployed, so this session deliberately does NOT duplicate them. |
+| Files | `marketing/trending-topics.html` (new); `COORDINATION.md` (this record). `marketing/index.html` left as main's generator output (per current `tools/build_marketing.py`, which this session does not edit — `tools/` is out of scope). |
+| Status | ready for PR → merge → GitHub Pages deploy |
+
+### Scope honoured
+No edits to `ledger/**`, `pages/**` except nav links, `tools/**`, or companion sites. No verified product value, identity mapping, price, rating, or commission figure added or inferred; no blank filled. `trending-topics.html` is editorial-idea framing ("Idea" status pills), not product claims.
+
+### CI note
+`trending-topics.html` is standalone (not in `build_marketing.py`'s `PAGES`), so it is invisible to `build_marketing.py --check` and `verify_marketing.py` (both iterate only `PAGES`); its internal links resolve (it links to `index.html`, `../pages/suggestions.html`, `../pages/questions.html`, `../pages/flags.html`, `assets/marketing.css`). No price, affiliate link, or product claim appears on it.
+
+Awaiting green PR #65 mergeability → PR → merge → GitHub Pages deploy → record PR link & merge result below.
+
 ## Session claim — T33 (renumbered from T31 at integration) — `arena/fcb538fa-zone2` (session `fcb538fa`, 2026-11-15 UTC)
 
 **Claimed:** T33 (claimed originally as T31 at 2026-11-15T11:46:24Z, before this branch had opened its PR). **Id-collision note (per the board’s renumbering precedent):** while T31 was in flight on this branch, session `42fa4918` claimed T31 on a branch based on `main` and merged it first (PR #72, `20976ce`, 12:01Z), and session `8c4236ad` then renumbered its own task through T29 → T30 → T31 → T32 for the same reason. At integration this session’s task is therefore published as **T33**; nothing of `42fa4918`’s or anyone else’s record was overwritten or deleted — this claim’s original T31 label is kept visible in the board row and here. **Scope:** the files listed in the T33 row only.
