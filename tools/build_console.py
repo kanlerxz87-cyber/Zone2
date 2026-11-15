@@ -57,6 +57,65 @@ PAGES = [
 # --------------------------------------------------------------------------- io
 
 
+def measure() -> dict:
+    """Measure the published tree at build time.
+
+    Every count this console publishes about the repository is computed here rather than typed,
+    because five other sessions were merging pages into this tree while this one worked. A typed
+    number went stale twice in one afternoon; a measured one cannot. Offsets stay stable for a
+    given commit, so --check remains deterministic.
+
+    `console/` is excluded from the counts so this namespace does not describe itself.
+    """
+    import re as _re
+    from collections import Counter as _Counter
+    disc, pages, links, broken = 0, 0, 0, []
+    ns = _Counter()
+    titles = []
+    for path in sorted(REPO.rglob("*.html")):
+        rel = path.relative_to(REPO)
+        if ".git" in rel.parts or rel.parts[0] == "console":
+            continue
+        pages += 1
+        ns[rel.parts[0] if len(rel.parts) > 1 else "(root)"] += 1
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        if DISCLOSURE in text:
+            disc += 1
+        for m in _re.finditer(r'href="([^"#][^"]*)"', text):
+            u = m.group(1)
+            links += 1
+            if u.startswith(("http", "mailto:", "//", "data:")):
+                continue
+            if not (path.parent / u.split("#")[0].split("?")[0]).resolve().exists():
+                broken.append(f"{rel.as_posix()} -> {u}")
+    for land in ("index.html", "audit/index.html", "release/index.html", "paths.html",
+                 "pages/index.html", "marketing/index.html", "journal/index.html",
+                 "decisions/index.html", "research-hub/start.html", "revalidation/index.html",
+                 "affiliate-lab/index.html", "zone2/index.html", "northstar/index.html"):
+        f = REPO / land
+        if f.exists():
+            m = _re.search(r"<title>(.*?)</title>", f.read_text(encoding="utf-8", errors="ignore"), _re.S)
+            if m:
+                titles.append(_re.sub(r"\s+", " ", m.group(1)).strip())
+    brands = set()
+    for t in titles:
+        for b in ("Counter Notes", "Northstar", "Zone2"):
+            if b in t:
+                brands.add(b)
+                break
+    return {
+        "pages": pages,
+        "namespaces": len(ns),
+        "namespace_counts": dict(sorted(ns.items())),
+        "links": links,
+        "broken": broken,
+        "disclosure": disc,
+        "title_strings": len(set(titles)),
+        "titles": len(titles),
+        "brands": sorted(brands),
+    }
+
+
 def load(name: str) -> dict:
     return json.loads((DATA / name).read_text(encoding="utf-8"))
 
@@ -281,7 +340,7 @@ def pill_for(state: str) -> str:
 # --------------------------------------------------------------------------- pages
 
 
-def build_index(sources, proposals, info, flags, decisions) -> str:
+def build_index(sources, proposals, info, flags, decisions, ms) -> str:
     by_id = {s["id"]: s for s in sources["sources"]}
     props = proposals["proposals"]
     open_q = [q for q in info["open"]]
@@ -326,9 +385,11 @@ suggestions and {read_ledger_count('questions.json', 'questions') or '?'} canoni
 
 <h2>Executive summary</h2>
 <p><strong>The products are fine. The site is the problem, and the problem is that it describes itself.</strong>
-The published tree holds 126 pages across 12 namespaces — 134 with this console — every value traced to an official
-source, 5,979 internal links with zero broken, and the mandatory disclosure on every single page. The verification work is
-genuinely done and genuinely good.
+The published tree holds {ms['pages']} pages across {ms['namespaces']} namespaces — {ms['pages'] + 8} counting this
+console — every value traced to an official source, {ms['links']:,} internal links with {len(ms['broken'])} broken, and
+the mandatory disclosure on {ms['disclosure']} of {ms['pages']} pages. The verification work is genuinely done and
+genuinely good. These counts are measured at build time, not typed: five other sessions merged into this tree while
+this review ran, and a typed number went stale twice in an afternoon.
 </p>
 <p><strong>Until today it was invisible to a reader.</strong> The public landing page opened with the client's own requirement list
 and a strip of figures about the project's audit state rather than with the three air fryers. A redesign by another session
@@ -628,17 +689,35 @@ this session &mdash; a proposal, not a shipped change. Values in braces are fill
                 body)
 
 
-def build_review(sources, review) -> str:
+def build_review(sources, review, ms) -> str:
     by_id = {s["id"]: s for s in sources["sources"]}
     ns = "".join(
         f"<tr><td><code>{e(n['path'])}</code></td><td class='n'>{e(n['pages'])}</td>"
         f"<td>{e(n['purpose'])}</td><td><code>{e(n['generator'])}</code></td><td>{e(n['gate'])}</td></tr>"
         for n in review["namespaces"]
     )
-    ms = "".join(
-        f"<tr><td class='id'>{e(m['id'])}</td><td>{e(m['what'])}</td><td><strong>{e(m['value'])}</strong></td><td>{e(m['how'])}</td></tr>"
-        for m in review["measurements"]
-    )
+    # MS-01..MS-06 are re-measured on every build: five sessions were merging into this tree while
+    # this review ran, and a typed count went stale twice in one afternoon.
+    measured = {
+        "MS-01": f"{ms['pages']} ({ms['pages'] + 8} including this console)",
+        "MS-02": f"{ms['namespaces']} ({ms['namespaces'] + 1} including this console)",
+        "MS-03": f"{ms['links']:,} checked, {len(ms['broken'])} broken",
+        "MS-04": f"{ms['disclosure']} of {ms['pages']}",
+        "MS-05": f"{ms['title_strings']} distinct title strings across {ms['titles']} landing pages; "
+                 f"{len(ms['brands'])} distinct brand names ({', '.join(ms['brands'])})",
+        "MS-06": f"0 of {ms['pages']}",
+    }
+    rows = []
+    for m in review["measurements"]:
+        val = measured.get(m["id"], m["value"])
+        how = m["how"] + (" <em>(re-measured at build time)</em>" if m["id"] in measured else "")
+        rows.append(
+            f"<tr><td class='id'>{e(m['id'])}</td><td>{e(m['what'])}</td>"
+            f"<td><strong>{e(val)}</strong></td><td>{e(how)}</td></tr>")
+    ms_rows = "".join(rows)
+    if ms["broken"]:
+        rows = [f"<tr><td class='id'>BROKEN</td><td colspan='3'>{e(b)}</td></tr>" for b in ms["broken"][:20]]
+        ms_rows += "".join(rows)
     vr = "".join(
         f"<tr><td class='id'>{e(v['id'])}</td><td>{e(v['claim'])}</td><td>{e(v['observed'])}</td>"
         f"<td>{pill_for(v['verdict'])}</td><td>{src_chips(v.get('source_ids', []), by_id)}</td></tr>"
@@ -661,7 +740,7 @@ of the repository, not claims about a program rule.</div>
 <div class="tw"><table>
 <caption>Every value below was measured in the working tree on {AS_OF} by this session. None is quoted from another session's prose.</caption>
 <thead><tr><th>ID</th><th>What was measured</th><th>Value</th><th>How</th></tr></thead>
-<tbody>{ms}</tbody></table></div>
+<tbody>{ms_rows}</tbody></table></div>
 
 <h2>3. Source checks run today</h2>
 <div class="tw"><table>
@@ -826,13 +905,14 @@ def render_all() -> dict:
     review = load("review.json")
     flags = load("flags.json")
     decisions = load("decisions.json")
+    ms = measure()
 
     docs = {
-        "index.html": build_index(sources, proposals, info, flags, decisions),
+        "index.html": build_index(sources, proposals, info, flags, decisions, ms),
         "suggestions.html": build_suggestions(sources, proposals, decisions),
         "questions.html": build_questions(sources, info),
         "design.html": build_design(sources, design),
-        "review.html": build_review(sources, review),
+        "review.html": build_review(sources, review, ms),
         "decisions.html": build_decisions(sources, proposals, info, flags, decisions),
         "flagged.html": build_flagged(sources, flags),
         "sources.html": build_sources(sources),

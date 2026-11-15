@@ -291,6 +291,27 @@ def check_published_counts(rep: Report) -> None:
             rep.fail(f"index.html: rendered {label} does not match the data ({needle!r} absent)")
 
 
+def check_tree_measurements(rep: Report) -> None:
+    """Cross-namespace observations, re-measured at build time.
+
+    These are WARNINGS, not errors, on purpose. Six sessions are merging into this tree at once;
+    failing the whole deploy because a namespace this session does not own shipped a broken link
+    would block everyone for someone else's defect. The project's own CI link step is the hard
+    gate for that. What this does is make the drift visible on the console's review page.
+    """
+    sys.path.insert(0, str(Path(__file__).parent))
+    from build_console import measure  # the generator's own measurement, so the two cannot disagree
+
+    ms = measure()
+    rep.stats["tree_pages"] = ms["pages"]
+    rep.stats["tree_namespaces"] = ms["namespaces"]
+    rep.stats["tree_links"] = ms["links"]
+    if ms["broken"]:
+        rep.warn(f"{len(ms['broken'])} broken internal link(s) elsewhere in the tree, first: {ms['broken'][0]}")
+    if ms["disclosure"] != ms["pages"]:
+        rep.warn(f"disclosure coverage is {ms['disclosure']}/{ms['pages']} pages tree-wide")
+
+
 def main() -> int:
     rep = Report()
     by_id = check_sources(rep)
@@ -302,6 +323,7 @@ def main() -> int:
     check_design(rep, by_id)
     check_pages(rep)
     check_published_counts(rep)
+    check_tree_measurements(rep)
 
     print("console gate")
     for k, v in sorted(rep.stats.items()):
