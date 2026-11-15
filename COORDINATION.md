@@ -3754,3 +3754,38 @@ link-checker: all internal links and assets resolve · disclosure/no-price sweep
 **Coordination notes left for the owners of the open marketing PRs** (recorded in the T32 work record before merging): **#65** (`bf8f07a7`, `marketing/trending-topics.html`) and **#70** (`cffe745a`, two hand-written `marketing/articles/topic-*.html` pages plus a hand edit of the generated `marketing/articles/index.html`) — both must rebase onto the regenerated marketing set now on `main`. A hand edit of a generated file will fail the `build_marketing.py --check` drift gate by design; the generator (`tools/build_marketing.py`) is the single source of the articles index, comparison, guide and the three product pages. Additions of genuinely new pages are welcome and do not conflict, provided the sidebar/nav comes from the generator.
 
 **What remains for the owner** (unchanged, and now collected in one place on the decision surfaces): confirm the three ASINs in Associates Central (F-01/F-03), configure the Associates tag so links earn (F-07/F-24), register the Creators API once eligible (F-05 / SG-01's launch-order question), answer Q-01…Q-16, and record decisions on SG-01…SG-10 in `ledger/suggestions.json`. Until then every product link on the site stays a labelled, non-earning preview link — by policy, not by omission.
+
+---
+
+## Closing record — T34–T37 — `2b257b2e` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#79** — <https://github.com/kanlerxz87-cyber/Zone2/pull/79> — `arena/2b257b2e-zone2` → `main` — **MERGED 2026-11-15T12:10:43Z** |
+| Merge command | `gh pr merge 79 --merge` (no `--auto`) |
+| Merge commit | `3e3fe3f61b96a84a5bc3fc122225e403585c43bf` |
+| PR check | `Build and verify` **success** |
+| Post-merge `main` | `Build, verify and deploy` **success** · `pages build and deployment` **success** |
+| Pages API | `status: built`, `build_type: legacy`, source `main` `/`, <https://kanlerxz87-cyber.github.io/Zone2/> |
+| Live read | `index.html` serves the redesigned landing (hero, trust strip, derived flag KPI = register count, the `fb49a226` decision-board callout preserved, three product cards with blank price/rating/availability, sourced evidence tables) |
+| T34 | **done** — marketing redesign of all root pages + `design-notes.html`; zero verified values changed |
+| T35 | **done** — topic suggestion queue on `content.html`, demand column blank by design, decision-board gating |
+| T36 | **done** — `EXECUTIVE_SUMMARY.md` addendum + `README.md` structure note |
+| T37 | **done** — integration of main ×3 (PRs #61/#64, #74/#76, #77), live re-verification, all gates green, merge + deploy confirmation |
+
+### Verification performed (live fetches 2026-11-15 — `docs/verification-2b257b2e.md`)
+
+D2-01…D2-05: OA updated October 15 2025, §4 no-representation, §1 tagged-link formats, §5 disclosure
+verbatim, §6 seven-day termination; Table 1's eleven bands verbatim (Kitchen 4.50%, All Other 4.00%).
+D2-06…D2-09: all three supplied links re-resolved to B0CDY277D3 / B09B7SB46R / B08DKYBTPH, shared
+Air-Fryers category path, fresh per-day `btn_ref` tokens (F-21 consistent), no `tag` (F-24 stands).
+D2-10 Google `rel="sponsored"` guidance · D2-11 FTC endorsement guidance · D2-12 Program Policies
+carried forward from the ledger (not re-quoted).
+
+### Irregularities handled / flagged for review
+
+1. **F-42 debris (partial repair).** Five stray conflict-marker lines (`=======` ×2, `>>>>>>> origin/main` ×3) that had been committed to `COORDINATION.md` on `main` across the 2026-11-15 merge waves were removed during integration so future merges cannot mis-parse the file. The **duplicated session-record fragments** 42fa4918 logged as F-42 were left byte-identical for owner review; the duplication class survived another wave (8c4236ad's records also appear twice), so F-42's review scope is larger than at logging time.
+2. **Task-id collisions.** T29, T30 and T31 were each claimed by more than one session on 2026-11-15. This session's tasks were renumbered T30→T34, T31→T35, T32→T36, T33→T37 at integration (board rows note it). No file-scope conflicts resulted; the overlaps on `index.html` were resolved by preserving every other session's shipped content inside the redesign.
+3. **Emeril listing title variant.** The `link.amazon/B02NbDxp3` fetch on 2026-11-15 returned a different listing-title variant than the 2026-11-14 read recorded in the ledger (Amazon rotates listing copy between fetches — consistent with the cross-fetch behaviour documented in `revalidation/`). The ledger row keeps its dated source; no change made.
+4. **CR executed under integration duty:** `tools/build_decisions.py` (owner `d0135100`, merged and finished) gained a one-line rewrite so the vendored `decisions/assets/dashboard.css` resolves the redesigned stylesheet's bundled font paths (`assets/fonts/` → `../../assets/fonts/`). Without it the redesigned root stylesheet would 404 its fonts on every decisions page. Regenerated output is `--check`-gated.
+5. **Unchanged, still owner-open:** F-01…F-03 (confirm ASINs), F-24 (tagged Associates links — as supplied the links cannot earn), F-05 (Creators API registration). No price, rating, review count, availability or per-ASIN commission band is published anywhere — none is verifiable from an official source yet.
