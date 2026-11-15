@@ -1,0 +1,43 @@
+{
+  "note": "Irregularities found while reviewing this repository during task T29 (session d0135100). Published here rather than appended to ledger/flags.json, whose row count is pinned by name in README.md, EXECUTIVE_SUMMARY.md and tools/validate_data.py::check_published_counts; adding rows there from that scope would have broken three published labels mid-merge. Promote these to the flag register when it is next owned (CR-6 in COORDINATION.md).",
+  "as_of": "2026-11-15",
+  "findings": [
+    {
+      "id": "RF-01",
+      "severity": "note",
+      "finding": "The repository describes an ASIN as a \"10-character\" identifier in 75 places. Amazon's own link-format help says \"ASIN is the 10-digit code that Amazon uses to denote specific products\", and real ASINs such as B0CDY277D3 contain letters, so \"10-character\" is the functionally accurate reading but not the published wording.",
+      "impact": "No factual conclusion changes: both readings agree the supplied 9-character tokens cannot be ASINs. The risk is one of sourcing style, in a project whose claim is verbatim quotation: a reviewer checking the quote against the source will not find \"10-character\" on it.",
+      "recommendation": "Where the sentence cites S24, quote \"10-digit\" and add the observed 10-character form as this repository's own note, rather than paraphrasing inside the quotation.",
+      "owner_note": "Not fixed in this task: the 75 occurrences sit in other sessions' ledgers, pages and docs.",
+      "source_ids": [
+        "S24",
+        "S16"
+      ]
+    },
+    {
+      "id": "RF-02",
+      "severity": "note",
+      "finding": "Disclosure placement is inconsistent across the marketing namespace. Measured 2026-11-15: 7 pages carry an outbound amazon.com/dp/ affiliate anchor (27 anchors), but only the 3 product articles carry the in-context \"(paid link)\" label. The four without it are marketing/articles/index.html, comparison.html, flagged.html and verification.html.",
+      "impact": "The page-level Amazon disclosure required by the Operating Agreement is present on every page, so this is not a breach of that requirement. It diverges from US FTC placement guidance and from the repository's own article template, which renders the marker.",
+      "recommendation": "Extend the in-context marker to the four pages that lack it and assert it in the marketing gate, so the label cannot silently disappear again.",
+      "owner_note": "Logged for the owner; not implemented here because it touches another session's generator.",
+      "source_ids": [
+        "S10",
+        "S11",
+        "S05"
+      ]
+    },
+    {
+      "id": "RF-03",
+      "severity": "note",
+      "finding": "This task's own first version of its disclosure proposal asserted that no page carried the \"(paid link)\" marker. That was wrong: the grep covered marketing/*.html and missed the marketing/articles/ subdirectory.",
+      "impact": "None surviving. The claim was re-measured with a recursive count before publication and corrected in place, with the correction stated rather than silently overwritten.",
+      "recommendation": "Kept on the record on purpose. A review surface that hides its own first error gives a reader less reason to trust the rest of it, not more.",
+      "owner_note": "No action required; published so the correction stays auditable.",
+      "source_ids": [
+        "S10",
+        "S11"
+      ]
+    }
+  ]
+}

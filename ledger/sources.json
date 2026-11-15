@@ -485,6 +485,51 @@
         "commission ceiling wording: 'Earn up to 10% in associate commissions from qualifying purchases and programs.'",
         "payment timing FAQ wording: 'Commission income is paid approximately 60 days after the end of the month in which it was earned.'"
       ]
+    },
+    {
+      "id": "S38",
+      "kind": "official",
+      "publisher": "Amazon (Amazon.com Associates Central help)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "title": "Associates Program - Application Review Process",
+      "used_for": "The programme's own published content bar for a Site: at least three qualifying sales in the first 180 days; all Sites must have 'robust original content (even when advertising is removed)' with 'at least 10 posts'; website content must be recent, 'generally within the last 60 days'. Read live 2026-11-15.",
+      "accessed_utc": "2026-11-15"
+    },
+    {
+      "id": "S39",
+      "kind": "official",
+      "publisher": "Google (Google Search Central documentation)",
+      "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+      "title": "Google Search's guidance on using generative AI content on your website",
+      "used_for": "'using generative AI tools or other similar tools to generate many pages without adding value for users may violate Google's spam policy on scaled content abuse'; 'It is critical to manually factcheck and review all AI-generated content for accuracy and trustworthiness before publishing.' Read live 2026-11-15.",
+      "accessed_utc": "2026-11-15"
+    },
+    {
+      "id": "S40",
+      "kind": "official",
+      "publisher": "Google (Google Search Central documentation)",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "title": "Creating helpful, reliable, people-first content",
+      "used_for": "The Who / How / Why test, and the quality-rater vocabulary the 'AI slop' complaint maps onto: Effort ('automatically generating pages from feeds or using generative AI to produce large amounts of text without manual oversight or curation represents little to no effort'), Originality, Talent/skill, Accuracy; automation disclosure expectations; the prohibition on 'fabricating creator profiles'. Read live 2026-11-15.",
+      "accessed_utc": "2026-11-15"
+    },
+    {
+      "id": "S41",
+      "kind": "official",
+      "publisher": "Google (Google Search Central documentation)",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "title": "Spam policies for Google web search (scaled content abuse; thin affiliation)",
+      "used_for": "'Thin affiliation is the practice of publishing content with product affiliate links where the product descriptions and reviews are copied directly from the original merchant without any original content or added value'; and 'Good affiliate sites add value by offering meaningful content or features ... additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.' Read live 2026-11-15.",
+      "accessed_utc": "2026-11-15"
+    },
+    {
+      "id": "S42",
+      "kind": "official",
+      "publisher": "Google (Google Search Central documentation)",
+      "url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
+      "title": "Write high quality reviews",
+      "used_for": "The page's best-practice list for review content, quoted in the content plan: 'Provide evidence such as visuals, audio, or other links of your own experience'; 'Share quantitative measurements'; 'Discuss the benefits and drawbacks of something, based on your own original research'; 'Describe key choices in how a product has been designed and their effect on the users beyond what the manufacturer says'. Read live 2026-11-15.",
+      "accessed_utc": "2026-11-15"
     }
   ]
 }
