@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Flagged for review — the Zone2 Owner's Console. Proposals, open questions and a redesign pack for the Amazon affiliate site. Nothing here is implemented until the owner records a choice.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/console/flagged.html">
+<title>Flagged for review · Zone2 Owner's Console</title>
+<style>
+:root{
+  --ink:#12161c; --ink-2:#3b444f; --ink-3:#6b7684; --line:#e3e7ec; --line-2:#eef1f4;
+  --paper:#ffffff; --bg:#f6f7f9; --accent:#1a56db; --accent-soft:#eaf0fe;
+  --warn:#8a4b00; --warn-bg:#fff5e6; --ok:#0f6b3f; --ok-bg:#e8f6ee;
+  --stop:#8a1c1c; --stop-bg:#fdeaea; --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.86em;background:var(--line-2);padding:.1em .35em;border-radius:3px}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.sidebar{background:var(--paper);border-right:1px solid var(--line);padding:20px 16px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:10px;align-items:center;font-weight:650;font-size:15px;color:var(--ink);margin-bottom:4px}
+.brand .mark{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;flex:0 0 auto}
+.brand small{display:block;font-weight:400;color:var(--ink-3);font-size:11.5px;letter-spacing:.02em}
+.side-label{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px;padding-left:8px}
+.nav a{display:block;padding:7px 9px;border-radius:7px;color:var(--ink-2);font-size:14px}
+.nav a:hover{background:var(--bg);text-decoration:none}
+.nav a.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.side-foot{margin-top:22px;padding:12px 9px;border-top:1px solid var(--line-2);font-size:11.5px;color:var(--ink-3)}
+.main{min-width:0}
+.topbar{border-bottom:1px solid var(--line);background:var(--paper);padding:12px 30px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.crumb{font-size:13px;color:var(--ink-3)}
+.crumb strong{color:var(--ink)}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12px;color:var(--ink-2)}
+.content{padding:30px;max-width:1080px}
+h1{font-size:29px;line-height:1.2;letter-spacing:-.02em;margin:0 0 8px}
+h2{font-size:20px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15.5px;margin:0 0 6px}
+.eyebrow{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:9px}
+.lede{font-size:17px;color:var(--ink-2);max-width:70ch;margin:0 0 6px}
+p{max-width:78ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+.card>h3:first-child{margin-top:0}
+.notice{background:var(--accent-soft);border:1px solid #c9d9fb;border-radius:10px;padding:13px 16px;margin:16px 0;font-size:14px;color:#1a3a7a}
+.notice strong{color:#12305f}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.kpi .num{font-size:26px;font-weight:660;letter-spacing:-.02em}
+.kpi .lbl{font-size:12px;color:var(--ink-3);margin-top:2px;line-height:1.35}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--paper);margin:14px 0}
+table caption{text-align:left;font-size:12px;color:var(--ink-3);padding:10px 14px;border-bottom:1px solid var(--line-2)}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line-2)}
+th{background:#fafbfc;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);font-weight:600;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fcfdfe}
+th.n,td.n{white-space:nowrap}
+td.id{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:650;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.p-open{background:var(--warn-bg);color:var(--warn)}
+.p-ok{background:var(--ok-bg);color:var(--ok)}
+.p-stop{background:var(--stop-bg);color:var(--stop)}
+.p-info{background:#eef1f5;color:var(--ink-2)}
+.src{display:inline-block;margin:2px 4px 2px 0;font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:5px;padding:2px 6px;color:var(--ink-2);background:#fbfcfd}
+.src:hover{border-color:var(--accent);text-decoration:none}
+.src .h{color:var(--ink-3);margin-left:4px}
+.blank{display:inline-block;color:var(--ink-3);font-style:italic;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:5px 0;max-width:78ch}
+ol.tight{margin:8px 0;padding-left:20px}ol.tight li{margin:6px 0;max-width:78ch}
+.proposal{border:1px solid var(--line);border-radius:12px;background:var(--paper);margin:14px 0;overflow:hidden}
+.proposal>.head{padding:15px 20px;border-bottom:1px solid var(--line-2);display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.proposal .pid{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.proposal h3{font-size:17px;margin:2px 0 0}
+.proposal .body{padding:16px 20px}
+.proposal dl{margin:0}
+.proposal dt{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 4px}
+.proposal dt:first-child{margin-top:0}
+.proposal dd{margin:0;font-size:14.5px;max-width:80ch}
+.opts{list-style:none;margin:0;padding:0}
+.opts li{border:1px solid var(--line);border-radius:9px;padding:11px 14px;margin:8px 0;font-size:14px}
+.opts li.rec{border-color:#b9cdf7;background:#f7faff}
+.opts .l{font-weight:600}
+.opts .t{color:var(--ink-2);display:block;margin-top:3px;font-size:13.5px}
+.tag{display:inline-block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:650;padding:2px 7px;border-radius:5px;background:#eef1f5;color:var(--ink-2);margin-left:6px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:10px 0}
+.ba>div{padding:13px 16px;font-size:13.5px}
+.ba .b{background:#fdf7f7;border-right:1px solid var(--line)}
+.ba .a{background:#f5fbf7}
+.ba .lab{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px;font-weight:650}
+pre.prompt{white-space:pre-wrap;word-wrap:break-word;background:#0f1419;color:#e6edf3;border-radius:11px;padding:18px 20px;font-family:var(--mono);font-size:12.5px;line-height:1.62;overflow-x:auto;margin:12px 0}
+.prompt-bar{display:flex;gap:8px;align-items:center;margin:10px 0}
+button.copy{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+button.copy:hover{background:#000}
+.banned td:first-child{font-family:var(--mono);font-size:12px}
+footer.site{border-top:1px solid var(--line);background:var(--paper);padding:22px 30px;margin-top:34px;color:var(--ink-3);font-size:12.5px}
+footer.site .disc{color:var(--ink-2);font-size:13.5px;margin-bottom:8px}
+footer.site a{color:var(--ink-2)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+.meta{font-size:12px;color:var(--ink-3);margin-top:4px}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .content{padding:20px}
+  .ba{grid-template-columns:1fr}
+  .ba .b{border-right:0;border-bottom:1px solid var(--line)}
+}
+</style>
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="mark">Z</span><span>Zone2<small>Owner's Console</small></span></a>
+  <div class="side-label">Decide before building</div>
+  <nav class="nav"><a class="nav-link" href="index.html">Owner&#x27;s Console</a><a class="nav-link" href="suggestions.html">Suggestion board</a><a class="nav-link" href="questions.html">Information register</a><a class="nav-link" href="design.html">Redesign pack</a><a class="nav-link" href="review.html">Repository review</a><a class="nav-link" href="decisions.html">Decision sheet</a><a class="nav-link active" href="flagged.html">Flagged for review</a><a class="nav-link" href="sources.html">Source register</a></nav>
+  <div class="side-foot">Every row on these pages is a proposal.<br><strong>Nothing here has been implemented.</strong></div>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="crumb"><a href="../index.html">Zone2</a> / <strong>Flagged for review</strong></div>
+    <div><span class="chip">session arena/d26f42db-zone2</span> <span class="chip">2026-11-15</span> <a class="chip" href="decisions.html">Record a decision</a></div>
+  </div>
+  <div class="content" id="main">
+    <div class="eyebrow">9 irregularities · none blocking the deploy · 2026-11-15</div>
+    <h1>Flagged for review</h1>
+    <p class="lede">Everything this review could not confirm or that needs an owner decision, with the source link and the action that would close it.</p>
+    
+    
+<div class="notice"><strong>These items do not block the merge. They block assertion and decision.</strong>
+Each row states what was found, why it matters, what would close it, and who can close it. Nothing here is
+unverified data published as fact &mdash; the verification rule elsewhere in this project still holds: a value
+without an official source is left blank and flagged, never inferred. IDs are namespaced <code>IR-</code> so they
+cannot collide with the canonical <code>F-</code> register at <a href="../pages/flags.html">pages/flags.html</a>.</div>
+<div class="tw"><table>
+<caption>9 irregularities found by this session's review, 2026-11-15.</caption>
+<thead><tr><th>ID</th><th>Severity</th><th>Finding</th><th>Impact</th><th>Action required</th><th>Who</th><th>Source</th></tr></thead>
+<tbody><tr id='IR-03'><td class='id'>IR-03</td><td><span class="pill p-open">high</span></td><td><strong>The brief&#x27;s central premise needs Amazon&#x27;s written permission</strong><div style='margin-top:8px'>The brief asks for an AI-powered platform that researches products, identifies trending products and generates content. Program Policies §5 states: “You will not, without our express prior written approval, use, or allow any third party to use, any Special Links or Program Content to develop machine learning models or related technology.” No record of a request or an approval exists in the repository.</div></td><td>The automation scope as written cannot be assumed lawful. It may be permissible with permission, or out of scope without it — but the distinction is Amazon&#x27;s to grant, and the repository currently assumes neither. This also bears on P-05: advertising “AI-powered” on a public page advertises a thing that needs approval it does not have.</td><td>Owner checks whether a request was ever sent (IN-11). If not, the automation scope is re-scoped to exclude Program Content, or the request is made in writing before any such feature ships.</td><td class='n'>owner</td><td><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §5, machine learning on Program Content">C-12 <span class="h">affiliate-program.amazon.com</span></a><div class='meta' style='margin-top:6px'>Relates to: P-05, IN-11</div></td></tr><tr id='IR-01'><td class='id'>IR-01</td><td><span class="pill p-open">medium</span></td><td><strong>Two overclaims remain on the redesigned landing page</strong><div style='margin-top:8px'>Measured after the redesign merged on 2026-11-15 (PR #108, session f8e18ca8). The page still opens under the heading “AI-powered Amazon affiliate platform” — two occurrences — and its product section is headed “Three links in. Three listings identified.” The body text is careful (“never as ‘the product the brief named’”), but the heading asserts an identification that flag F-03 records as unconfirmed: no official document binds the supplied short codes to the ASINs they resolve to. This review&#x27;s original finding — that the page opened with the client&#x27;s requirement list and a strip of audit-state figures — was corrected mid-review: that block was removed by the other session the same day, and the corrected state is recorded as MS-10.</div></td><td>Program Content may not be used to develop machine-learning models without Amazon&#x27;s express prior written approval, so advertising “AI-powered” on the public landing page advertises a capability that needs permission it does not have. And a claim about a product must not be “inaccurate, overbroad, deceptive or otherwise misleading” — a heading that says the listings are “identified” is broader than what was verified.</td><td>Owner decides P-05 (drop the automation framing from public pages) and P-01 (reader-first copy). The heading wording is a one-line edit.</td><td class='n'>owner</td><td><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §5, machine learning on Program Content">C-12 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §2(b), claims about Products">C-06 <span class="h">affiliate-program.amazon.com</span></a><div class='meta' style='margin-top:6px'>Relates to: P-01, P-05, F-03</div></td></tr><tr id='IR-02'><td class='id'>IR-02</td><td><span class="pill p-open">medium</span></td><td><strong>Six different site names across eleven namespaces</strong><div style='margin-top:8px'>Measured from each namespace landing page&#x27;s &lt;title&gt; in the rebased tree on 2026-11-15: 13 distinct title strings across 13 landing pages, collapsing to 3 distinct brand names — Zone2 (root, pages, journal, decisions, research-hub, revalidation, affiliate-lab, zone2, audit, release, paths), Counter Notes (marketing/), and Northstar · Affiliate Intelligence (northstar/). 126 published pages excluding this console.</div></td><td>Three brands is better than the six this review first measured, but a reader still meets a different name depending on which link they follow, and Associates is asked to review “all of the Sites you’ve provided”. Google&#x27;s site-reputation policy lists “how the content is presented” — design, formatting, typography, UX — as the first objective factor in whether a section counts as integrated with the main site.</td><td>Owner picks one name (IN-02) and one home (IN-01).</td><td class='n'>owner</td><td><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Site reputation policy (authorship factor)">C-22 <span class="h">developers.google.com</span></a><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Scaled content abuse">C-20 <span class="h">developers.google.com</span></a><div class='meta' style='margin-top:6px'>Relates to: P-02, IN-01, IN-02</div></td></tr><tr id='IR-04'><td class='id'>IR-04</td><td><span class="pill p-open">medium</span></td><td><strong>No page names a person</strong><div style='margin-top:8px'>Measured 2026-11-15 across the rebased tree: zero of 134 published pages carry an author or responsible-editor byline in any form.</div></td><td>Google lists “Its stated or implied authorship, meaning, is there an explicit acknowledgement of ownership or responsibility for the content?” among four objective factors for deciding whether content is integrated with the host site, and its worked example of a page it would act on is an unauthored affiliate article. The FTC&#x27;s endorsement guidance turns on who is speaking.</td><td>Owner names an editor (IN-04); agent adds the byline and provenance line (P-03).</td><td class='n'>owner</td><td><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Site reputation policy (authorship factor)">C-22 <span class="h">developers.google.com</span></a><a class="src" href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Guidance on using generative AI content (human fact-check)">C-24 <span class="h">developers.google.com</span></a><a class="src" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer nofollow" title="FTC — Endorsement Guides: What People Are Asking">C-25 <span class="h">www.ftc.gov</span></a><div class='meta' style='margin-top:6px'>Relates to: P-03, P-04, IN-04, Q-16</div></td></tr><tr id='IR-05'><td class='id'>IR-05</td><td><span class="pill p-open">medium</span></td><td><strong>Four overlapping suggestion registers and two question registers</strong><div style='margin-top:8px'>Measured 2026-11-15: 10 canonical suggestions (SG-01..SG-10 at pages/suggestions.html), 16 canonical questions (Q-01..Q-16 at pages/questions.html), 14 marketing-board items (DS-01..DS-14 at marketing/improvements.html), 9 design suggestions (DP-01..DP-09 in docs/design-prompt-suggestions.md), 3 review findings (RF-01..RF-03 in ledger/decisions_findings.json) and 38 project flags — all open, all awaiting the same person. Prior sessions already recorded the collision cost: five sessions renumbered the same task IDs in one day.</div></td><td>The cost is not duplication, it is that no single page answers “what do I decide next, and in what order?”. A decision board that needs four tabs does not get used.</td><td>Owner adopts one index (P-12). This console indexes the registers without moving or re-owning any of them.</td><td class='n'>owner</td><td><span class="blank">no source cited — judgment or measurement</span><div class='meta' style='margin-top:6px'>Relates to: P-12</div></td></tr><tr id='IR-09'><td class='id'>IR-09</td><td><span class="pill p-open">medium</span></td><td><strong>Verified facts carry no verification date</strong><div style='margin-top:8px'>Every product-row and program-rule page states values with source links, but no page states when those values were last checked against the source. Both governing documents carry their own update dates — the Operating Agreement currently reads “Updated: October 15, 2025” — and change without notice.</div></td><td>A verified fact without a date has an unknown shelf life. Six sessions have now re-verified the same three links and recorded at least two different readings of what the redirect markers mean; without dates a reader cannot tell which reading is current.</td><td>Owner sets a cadence (IN-05); agent renders a date stamp on every fact-bearing page (P-13).</td><td class='n'>owner</td><td><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow" title="Associates Program Operating Agreement — Section 5, Identifying Yourself as an Associate">C-01 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow" title="Application Review Process">C-16 <span class="h">affiliate-program.amazon.com</span></a><div class='meta' style='margin-top:6px'>Relates to: P-13, IN-05, DS-13</div></td></tr><tr id='IR-06'><td class='id'>IR-06</td><td><span class="pill p-open">low</span></td><td><strong>Stale published page count in README.md</strong><div style='margin-top:8px'>README.md states “37 generated pages” for the pages/ namespace. The directory holds 39 HTML files and pages/manifest.json declares &quot;count&quot;: 39 with a 39-entry generated list; the two sets match exactly. The existing gate check_published_counts pins the flag, source and verification counts but not this one.</div></td><td>Cosmetic, but it is the drift class this project has already been bitten by three times — the same check exists precisely because hand-typed counts go stale against the register they describe.</td><td>Derive the number from the manifest rather than typing it, or extend check_published_counts to cover it. Not fixed by this session: README.md is outside the claimed scope.</td><td class='n'>owner</td><td><span class="blank">no source cited — judgment or measurement</span><div class='meta' style='margin-top:6px'>Relates to: F-17, F-26, F-35</div></td></tr><tr id='IR-07'><td class='id'>IR-07</td><td><span class="pill p-open">low</span></td><td><strong>The supplied short-link service resolves via a third-party host</strong><div style='margin-top:8px'>Both control fetches this session made — an unknown 9-character code and a valid 10-character ASIN — were finally served from https://amzlinks.in/, which returned the 404 page. The fetcher reported the resolved URLs as amzlinks.in/B00TEST12 and amzlinks.in/B0CDY277D3.</div></td><td>Recorded as an observation, not a program fact: link.amazon is Amazon&#x27;s own delegated domain, and where it hands off is an infrastructure detail. It matters for one reason — §6(w) requires that a link-shortening placement never “make it unclear that you are linking to an Amazon Site”. A hop to a differently-named host is worth knowing about when the tagged links are generated.</td><td>When the Associates ID exists, generate links in Associates Central rather than reusing the supplied short codes, and confirm the destination is evident to the reader.</td><td class='n'>owner</td><td><a class="src" href="https://link.amazon/B00TEST12" target="_blank" rel="noopener noreferrer nofollow" title="OBSERVATION — the short-link service resolves via a third-party host">C-31 <span class="h">link.amazon</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §6(v) and §6(w), cloaking and link shorteners">C-11 <span class="h">affiliate-program.amazon.com</span></a><div class='meta' style='margin-top:6px'>Relates to: P-11, F-24</div></td></tr><tr id='IR-08'><td class='id'>IR-08</td><td><span class="pill p-open">low</span></td><td><strong>Two pull requests open, one conflicting and one idle</strong><div style='margin-top:8px'>At 2026-11-15, five pull requests were open from five sessions: #104 (T46 discovery review), #113 (f8e18ca8 close-out record), #116 (CI stylesheet-url fix), #117 (T47 decision-board deep links) and #118 (R86 closing record). None is in this session&#x27;s scope. Earlier in the day #70 (marketing/articles/, hand-written files in a generated namespace) and #90 (COORDINATION.md, conflicting) were also open; both have since closed.</div></td><td>The coordination cost is now visible in the artefact: five open branches, several touching the same shared files. The lesson another session recorded earlier holds — a claim on an append-only board is not ownership you can defend.</td><td>Owner or the owning session either regenerates those pages through the generator or closes the PR. Left to the owning sessions.</td><td class='n'>owner</td><td><span class="blank">no source cited — judgment or measurement</span><div class='meta' style='margin-top:6px'>Relates to: IR-05</div></td></tr></tbody></table></div>
+
+  </div>
+  <footer class="site">
+    <div class="disc"><strong>Disclosure</strong> As an Amazon Associate I earn from qualifying purchases. Outbound links are qualified with <code>rel="sponsored"</code>.</div>
+    <div class="meta">Owner's Console · task T42 · session arena/d26f42db-zone2 · generated by <code>tools/build_console.py</code> from <code>console/data/*.json</code> · edit the data, never the HTML · <a href="../index.html">Dashboard</a> · <a href="../pages/suggestions.html">Canonical suggestion board</a> · <a href="../pages/questions.html">Canonical questions</a> · <a href="../pages/flags.html">Project flags</a></div>
+  </footer>
+</main>
+</div>
+</body>
+</html>

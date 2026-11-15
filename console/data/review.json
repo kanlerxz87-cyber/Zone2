@@ -1,0 +1,412 @@
+{
+  "note": "Line-by-line repository review (task T42, session arena/d26f42db-zone2). Every number in this file was measured in the working tree on 2026-11-15 by this session; none is quoted from another session's prose. Rows in `verification` record a check this session ran against an official page, with what it observed. Rows in `namespaces` and `measurements` are observations about the repository and carry no source link because they are measurements, not claims about a program rule. IMPORTANT: the tree grew while this review was running — three namespaces (audit/, release/, paths.html) were added and the root landing page was redesigned by session f8e18ca8, all merged to main on 2026-11-15. Every measurement below was therefore re-taken against the rebased tree after that merge, and MS-10 records the discrepancy.",
+  "as_of": "2026-11-15",
+  "method": "Read-only review. No file outside this session's declared scope was edited. Measurements were taken with a script over the working tree at commit ceaf9a79 and the merges that followed it; official-source checks were live fetches performed on 2026-11-15 UTC.",
+  "namespaces": [
+    {
+      "path": "(root)",
+      "pages": 14,
+      "purpose": "Primary platform site: landing, products, analysis, content, compliance, tracking, verification, sources, flagged, launch paths, design notes",
+      "generator": "hand-authored",
+      "gate": ".github/workflows/pages.yml (link, asset, data, disclosure, pricing)"
+    },
+    {
+      "path": "pages/",
+      "pages": 39,
+      "purpose": "Findings hub: 12 module pages, 11 commission category pages, compliance ledger, verification log, source register, suggestions, questions, flags",
+      "generator": "tools/build_site.py",
+      "gate": "tools/validate_data.py + tests/test_pipeline.py"
+    },
+    {
+      "path": "marketing/",
+      "pages": 20,
+      "purpose": "Reader-facing publication (desk name Counter Notes): buying guide, comparison, three product articles, six topic guides, improvement board",
+      "generator": "tools/build_marketing.py",
+      "gate": "marketing/scripts/verify_marketing.py (G1-G14)"
+    },
+    {
+      "path": "research-hub/",
+      "pages": 13,
+      "purpose": "Affiliate Research Hub: per-product attribute rows, comparison, requirements, methodology, executive summary",
+      "generator": "research-hub/scripts/build.py",
+      "gate": "research-hub/scripts/verify.py"
+    },
+    {
+      "path": "affiliate-lab/",
+      "pages": 10,
+      "purpose": "Amazon Affiliate Intelligence Dashboard (session 181863ad): rate-card and attribution tables, compliance matrix, 13 session-local flags AF-01..AF-13",
+      "generator": "hand-authored",
+      "gate": "affiliate-lab/scripts/verify_site.py"
+    },
+    {
+      "path": "zone2/",
+      "pages": 8,
+      "purpose": "Second platform build (session 34836ddd): multi-page dashboard, sources, verification data",
+      "generator": "hand-authored",
+      "gate": "CI link/asset steps"
+    },
+    {
+      "path": "revalidation/",
+      "pages": 6,
+      "purpose": "Controlled re-check of the three supplied links (session c6e94e8d), 10 session-local flags RV-01..RV-10",
+      "generator": "revalidation/scripts/build.py",
+      "gate": "revalidation/scripts/verify.py"
+    },
+    {
+      "path": "journal/",
+      "pages": 4,
+      "purpose": "Hand-written editorial around the observed listings (task T38)",
+      "generator": "hand-authored",
+      "gate": "CI link/disclosure steps"
+    },
+    {
+      "path": "decisions/",
+      "pages": 4,
+      "purpose": "Requirements and review layer (session d0135100): requirement status, content plan, review findings",
+      "generator": "tools/build_decisions.py",
+      "gate": "tools/validate_decisions.py"
+    },
+    {
+      "path": "audit/",
+      "pages": 6,
+      "purpose": "Independent review of the deployed site (session f8e18ca8): measured findings, suggestions, questions and traffic",
+      "generator": "tools/build_audit.py",
+      "gate": "tools/validate_audit.py + tools/test_audit.py"
+    },
+    {
+      "path": "release/",
+      "pages": 1,
+      "purpose": "Release readiness against Amazon's published application-review criteria",
+      "generator": "hand-authored",
+      "gate": "CI link/disclosure steps"
+    },
+    {
+      "path": "northstar/",
+      "pages": 1,
+      "purpose": "The original prototype dashboard (session 6b8bb130, PR #1), preserved as-is",
+      "generator": "hand-authored",
+      "gate": "CI link/asset steps"
+    },
+    {
+      "path": "console/",
+      "pages": 8,
+      "purpose": "Owner's Console (this session, T42): executive summary, suggestion board, information register, redesign pack, repo review, decision sheet, flagged page, source register",
+      "generator": "tools/build_console.py",
+      "gate": "tools/validate_console.py"
+    }
+  ],
+  "measurements": [
+    {
+      "id": "MS-01",
+      "what": "HTML pages published across all top-level namespaces, excluding console/",
+      "value": "126 (134 including this console)",
+      "how": "Recursive count of *.html in the rebased working tree on 2026-11-15, after audit/, release/ and paths.html merged"
+    },
+    {
+      "id": "MS-02",
+      "what": "Distinct top-level namespaces publishing HTML",
+      "value": "12 (13 including this console)",
+      "how": "First path component of every HTML file, excluding .git"
+    },
+    {
+      "id": "MS-03",
+      "what": "Internal links checked / broken",
+      "value": "5,979 checked, 0 broken",
+      "how": "Parsed every href in every HTML file, resolved relative to the file, tested for existence"
+    },
+    {
+      "id": "MS-04",
+      "what": "Pages carrying the mandatory Associates disclosure sentence verbatim",
+      "value": "134 of 134",
+      "how": "Substring match on the section 5 sentence across every HTML file in the rebased tree"
+    },
+    {
+      "id": "MS-05",
+      "what": "Distinct site names appearing in namespace landing-page <title> elements",
+      "value": "13 distinct title strings across 13 landing pages; 3 distinct brand names (Zone2, Counter Notes, Northstar)",
+      "how": "Extracted <title> from each namespace's landing page in the rebased tree on 2026-11-15"
+    },
+    {
+      "id": "MS-06",
+      "what": "Published pages that name a person as author or responsible editor",
+      "value": "0 of 134",
+      "how": "Searched for byline patterns and author markup across every HTML file; no page names an individual"
+    },
+    {
+      "id": "MS-07",
+      "what": "README.md states “37 generated pages” for pages/; the directory holds 39 and pages/manifest.json declares count 39",
+      "value": "stale by 2",
+      "how": "Compared README text, the file count on disk and the manifest's count field (still stale by 2 after the rebase)"
+    },
+    {
+      "id": "MS-08",
+      "what": "Open pull requests at the time of review",
+      "value": "5 open (#104, #113, #116, #117, #118)",
+      "how": "gh pr list --state open, 2026-11-15"
+    },
+    {
+      "id": "MS-09",
+      "what": "Sessions that have written to COORDINATION.md",
+      "value": "31 named in the session registry and closing records, and rising — five sessions opened pull requests during this review",
+      "how": "Counted distinct session identifiers in the registry table and closing records"
+    },
+    {
+      "id": "MS-10",
+      "what": "The root landing page was redesigned by another session while this review was running",
+      "value": "The requirement-list block and the audit-state KPI strip this review quoted are no longer on the page",
+      "how": "Re-read index.html after rebasing onto main (PR #108, session f8e18ca8). The quoted strings return zero matches; the hero reads “Affiliate content you can check, not just read.” The finding is kept, clearly marked as it stood when measured, because it is the reason proposal P-01 was written — and because another session reached the same conclusion independently on the same day."
+    }
+  ],
+  "verification": [
+    {
+      "id": "VR-01",
+      "claim": "Supplied link 1 resolves to a specific Amazon listing",
+      "observed": "https://link.amazon/B04G1MEwY → https://www.amazon.com/dp/B0CDY277D3; page title “CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows…”; query carries btn_ref=srctok-…, plpRedirect=mhFallback; no tag parameter",
+      "verdict": "Reproduced",
+      "source_ids": [
+        "C-26"
+      ]
+    },
+    {
+      "id": "VR-02",
+      "claim": "Supplied link 2 resolves to a specific Amazon listing",
+      "observed": "https://link.amazon/B02NbDxp3 → https://www.amazon.com/dp/B09B7SB46R; page title “Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven…”; no tag parameter",
+      "verdict": "Reproduced",
+      "source_ids": [
+        "C-27"
+      ]
+    },
+    {
+      "id": "VR-03",
+      "claim": "Supplied link 3 resolves to a specific Amazon listing",
+      "observed": "https://link.amazon/B00hJ57DV → https://www.amazon.com/dp/B08DKYBTPH; page title “Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option…”; no tag parameter",
+      "verdict": "Reproduced",
+      "source_ids": [
+        "C-28"
+      ]
+    },
+    {
+      "id": "VR-04",
+      "claim": "An unknown code on the short-link service is refused, not redirected to a random product",
+      "observed": "https://link.amazon/B00TEST12 returned HTTP 404, title “404: File Not Found”, body “Uh oh, it looks like something went wrong. You’ve clicked on an invalid URL.”",
+      "verdict": "Reproduced",
+      "source_ids": [
+        "C-29"
+      ]
+    },
+    {
+      "id": "VR-05",
+      "claim": "A valid 10-character ASIN is refused by the same service, so the service does not accept ASINs",
+      "observed": "https://link.amazon/B0CDY277D3 returned the identical 404 page as the unknown code",
+      "verdict": "Reproduced",
+      "source_ids": [
+        "C-30"
+      ]
+    },
+    {
+      "id": "VR-06",
+      "claim": "The short-link service finally serves from a host other than link.amazon",
+      "observed": "Both control fetches were served from https://amzlinks.in/ — the fetcher reported the resolved URLs as amzlinks.in/B00TEST12 and amzlinks.in/B0CDY277D3",
+      "verdict": "New observation",
+      "source_ids": [
+        "C-31"
+      ]
+    },
+    {
+      "id": "VR-07",
+      "claim": "Operating Agreement §5 disclosure sentence, verbatim",
+      "observed": "“You must clearly and prominently state the following … ‘As an Amazon Associate I earn from qualifying purchases.’”; page header “Updated: October 15, 2025”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-01"
+      ]
+    },
+    {
+      "id": "VR-08",
+      "claim": "Operating Agreement §4 forbids implying expected traffic or commission income",
+      "observed": "“We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect …”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-02"
+      ]
+    },
+    {
+      "id": "VR-09",
+      "claim": "Special Links must use the assigned, tagged format",
+      "observed": "§1: “The links must properly use the special ‘tagged’ link formats we provide …”; §6: “any violation of Section 5 … will be deemed a material breach”; termination notice 7 calendar days",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-03",
+        "C-04"
+      ]
+    },
+    {
+      "id": "VR-10",
+      "claim": "Prices may be shown only if Amazon serves them or they come from Creators API or PA API",
+      "observed": "§2(b): “your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API …”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-05"
+      ]
+    },
+    {
+      "id": "VR-11",
+      "claim": "Star ratings and customer reviews require Creators API or PA API",
+      "observed": "§6(t): “You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API …”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-09"
+      ]
+    },
+    {
+      "id": "VR-12",
+      "claim": "Price tracking and price alerting are prohibited by default",
+      "observed": "§6(y): “Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-10"
+      ]
+    },
+    {
+      "id": "VR-13",
+      "claim": "Program Content may not be used to develop machine-learning models without express prior written approval",
+      "observed": "§5: “You will not, without our express prior written approval, use, or allow any third party to use, any Special Links or Program Content to develop machine learning models or related technology.”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-12"
+      ]
+    },
+    {
+      "id": "VR-14",
+      "claim": "Every link must carry the Associates ID as a URL parameter",
+      "observed": "§2(b): “you must include your Associates ID or ‘tag’ (appearing as XXXXX-## …) as a parameter in the URL of each link you place on your Site to an Amazon Site.”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-14"
+      ]
+    },
+    {
+      "id": "VR-15",
+      "claim": "Table 1 commission bands, including the Kitchen band",
+      "observed": "Eleven bands read on 2026-11-15; “Physical Books, Kitchen, Automotive | 4.50%”; “All Other Categories | 4.00%”",
+      "verdict": "Verified",
+      "source_ids": [
+        "C-15"
+      ]
+    },
+    {
+      "id": "VR-16",
+      "claim": "Application review thresholds and content standard",
+      "observed": "“at least three within the first 180 days”, “personal orders do not qualify”, “at least 10 posts”, “generally within the last 60 days”, “You must own your website”, “adds value to the customer by giving them insight on a subject or product they might not get easily”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-16",
+        "C-17"
+      ]
+    },
+    {
+      "id": "VR-17",
+      "claim": "Creators API prerequisites",
+      "observed": "“Have at least 10 qualifying sales within the past 30 days to access the PA API through the Creators API”; prerequisite 1 is enrolment in the Associates program",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-18"
+      ]
+    },
+    {
+      "id": "VR-18",
+      "claim": "Amazon's published ASIN definition",
+      "observed": "“ASIN is the 10-digit code that Amazon uses to denote specific products.”, with published link format http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-19"
+      ]
+    },
+    {
+      "id": "VR-19",
+      "claim": "Google's scaled content abuse policy names AI generation explicitly",
+      "observed": "“Scaled content abuse is when many pages are generated for the primary purpose of manipulating search rankings and not helping users …” with the first listed example “Using generative AI tools or other similar tools to generate many pages without adding value for users”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-20"
+      ]
+    },
+    {
+      "id": "VR-20",
+      "claim": "Google's thin affiliation policy and what makes an affiliate page good",
+      "observed": "“Not every site that participates in an affiliate program is a thin affiliate. Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-21"
+      ]
+    },
+    {
+      "id": "VR-21",
+      "claim": "Google weighs authorship when deciding whether content belongs to a site",
+      "observed": "“Its stated or implied authorship, meaning, is there an explicit acknowledgement of ownership or responsibility for the content?” listed among four objective factors",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-22"
+      ]
+    },
+    {
+      "id": "VR-22",
+      "claim": "Generated content must be fact-checked by a person before publishing, including metadata",
+      "observed": "“It is critical to manually factcheck and review all AI-generated content for accuracy and trustworthiness before publishing.” and “This review also applies to metadata like <title> elements, meta description elements, structured data, and alternate texts for images”; page states Last updated 2026-10-01 UTC",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-24"
+      ]
+    },
+    {
+      "id": "VR-23",
+      "claim": "FTC requires the material connection to be disclosed clearly and conspicuously",
+      "observed": "“if there’s a connection between an endorser and the marketer that a significant minority of consumers wouldn’t expect and it would affect how they evaluate the endorsement, that connection should be disclosed clearly and conspicuously.”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-25"
+      ]
+    },
+    {
+      "id": "VR-24",
+      "claim": "Organic search traffic is allowed provided it lands on this site first",
+      "observed": "§6(f): “so long as you comply with the Agreement and those paid or unpaid search results send users to your site and not directly, or indirectly via a Redirecting Link, to an Amazon Site.”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-13"
+      ]
+    },
+    {
+      "id": "VR-25",
+      "claim": "Qualified affiliate links are not link spam",
+      "observed": "“It's not a violation of our policies to have such links as long as they are qualified with a rel=\"nofollow\" or rel=\"sponsored\" attribute value to the <a> tag.”",
+      "verdict": "Verified verbatim",
+      "source_ids": [
+        "C-23"
+      ]
+    },
+    {
+      "id": "VR-26",
+      "claim": "The font-path irregularity recorded by earlier sessions has been repaired",
+      "observed": "assets/css/style.css now uses url(\"../fonts/fraunces-latin-full-normal.woff2\") and the two sibling faces, resolving correctly relative to the stylesheet",
+      "verdict": "Resolved — not re-flagged",
+      "source_ids": []
+    },
+    {
+      "id": "VR-27",
+      "claim": "The landing-page copy this review quoted was still published when the review measured it",
+      "observed": "Re-measured after rebasing onto main: “The job. Build an affiliate marketing platform…” and the KPI strip both return zero matches in index.html. Session f8e18ca8's redesign (PR #108) removed them the same day. The “AI-powered Amazon affiliate platform” heading and the “Three links in. Three listings identified.” section heading are still present.",
+      "verdict": "Corrected — superseded mid-review",
+      "source_ids": []
+    },
+    {
+      "id": "VR-28",
+      "claim": "Every published page carries the section 5 disclosure after the namespaces added during this review",
+      "observed": "134 of 134 HTML pages in the rebased tree, including audit/ and release/, contain the sentence verbatim; 5,979 internal links checked, 0 broken",
+      "verdict": "Reproduced",
+      "source_ids": [
+        "C-01"
+      ]
+    }
+  ]
+}

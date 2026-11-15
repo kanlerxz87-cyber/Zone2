@@ -1,0 +1,33 @@
+{
+  "note": "The owner's decision sheet (task T42, session arena/d26f42db-zone2). This is the file the owner edits. Nothing is implemented anywhere on this project until a choice is recorded here \u2014 or until the owner tells the agent the IDs, which the agent then records here in the same form. Every other register on this project is indexed from this page so there is one place to answer \u201cwhat do I decide next?\u201d.",
+  "as_of": "2026-11-15",
+  "how_to_record": [
+    "Open console/data/decisions.json in the repository.",
+    "Find the row for the proposal you have decided on, under \"sheet\".",
+    "Set \"choice\" to the letter of the option you want (A, B or C), add a short \"note\" if you want, and set \"decided_by\" and \"decided_on\".",
+    "Commit the file. The next build re-renders the board with your choice shown on the row and the state changed from proposed to approved.",
+    "Or simply tell the agent: \"approve P-01 option A\". The agent records it here and the board updates on the next build."
+  ],
+  "rules": [
+    "An empty \"choice\" means no decision has been made. It is never read as approval and never read as rejection.",
+    "A proposal cannot move to implemented until it has an approved choice or the owner has said so explicitly in another channel and the agent has recorded it here.",
+    "Rejections are recorded too, with a note, so the same proposal is not raised again next session.",
+    "This file does not move, renumber or re-own anyone else's register. It indexes them."
+  ],
+  "sheet": {
+    "P-01": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-02": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-03": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-04": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-05": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-06": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-07": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-08": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-09": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-10": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-11": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-12": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-13": {"choice": "", "note": "", "decided_by": "", "decided_on": ""},
+    "P-14": {"choice": "", "note": "", "decided_by": "", "decided_on": ""}
+  }
+}
