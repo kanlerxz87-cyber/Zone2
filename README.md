@@ -18,15 +18,21 @@ anything unconfirmed is left blank and published on a Flagged for Review page ra
 
 | Page | Purpose |
 |---|---|
-| `index.html` | Dashboard — executive summary, verified platform facts, capabilities |
+| `index.html` | Landing — hero, verified KPIs, product cards, executive summary, evidence (marketing redesign, 2026-11-15) |
 | `products.html` | Product catalog + manufacturer spec tables, per-row source links |
 | `analysis.html` | Niche, pricing, competition and commission-potential analysis |
-| `content.html` | SEO content plan (articles, comparisons, buying guides) |
+| `content.html` | SEO content plan (articles, comparisons, buying guides) + editorial topic ideas for review |
 | `compliance.html` | Associates policy and disclosure requirements |
 | `tracking.html` | Special Link and campaign tracking setup |
 | `verification.html` | Verification log — one row per claim, with the method used and the official page (generated) |
 | `sources.html` | Complete source register, with each source's class made explicit (generated) |
 | `flagged.html` | Flagged irregularities and unverified items, with source links |
+| `design-notes.html` | Design rationale, compliance-linked design decisions, and queued suggestions for review |
+
+The root pages were redesigned on 2026-11-15 (session `2b257b2e`) into a marketing presentation of the
+same verified data — same ledger, same gates, no value changed; the reasoning lives on
+[`design-notes.html`](https://kanlerxz87-cyber.github.io/Zone2/design-notes.html). `robots.txt` and
+`sitemap.xml` were added for crawl hygiene.
 
 `verification.html` and `sources.html` are generated from `ledger/verification.json` and `ledger/sources.json`
 by `tools/build_root_views.py` — CI fails if the committed output drifts from the ledger, so a row can never be

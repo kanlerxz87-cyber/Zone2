@@ -268,6 +268,178 @@
     }).join("");
   }
 
+  /* ---- T30 redesign: rich product cards on the landing page -----------------
+   * Same PRODUCTS dataset as the tables — nothing new is stated, only presented
+   * as cards. The Amazon listing link is marked rel="sponsored" per Google's
+   * paid-link guidance (page carries the required disclosure). */
+  function shopLink(url, label) {
+    return '<a href="' + esc(url) + '" target="_blank" rel="sponsored noopener noreferrer">' + esc(label) + "</a>";
+  }
+
+  function renderProductCards() {
+    const el = document.getElementById("productCards");
+    if (!el) return;
+    el.innerHTML = PRODUCTS.map(function (p) {
+      return (
+        '<div class="product-card">' +
+        '<div class="product-brand-row"><span class="product-brand">' + esc(p.brand) + '</span><span class="asin-chip">' + esc(p.resolvesToAsin) + "</span></div>" +
+        '<div class="product-title">' + esc(p.title) + "</div>" +
+        '<div class="product-meta">' +
+        '<div class="row"><span class="k">Category path</span><span class="v">' + esc(p.categoryPath) + "</span></div>" +
+        '<div class="row"><span class="k">Price</span><span class="v">' + cell(p.price) + "</span></div>" +
+        '<div class="row"><span class="k">Rating</span><span class="v">' + cell(p.rating) + "</span></div>" +
+        '<div class="row"><span class="k">Availability</span><span class="v">' + cell(p.availability) + "</span></div>" +
+        '<div class="row"><span class="k">Code as supplied</span><span class="v"><code>' + esc(p.shortCode) + "</code> · " + esc(p.codeLength) + " chars — " + badge("unverified") + "</span></div>" +
+        '<div class="row"><span class="k">As a link destination</span><span class="v">' + badge(p.identityStatus) + "</span></div>" +
+        "</div>" +
+        '<div class="product-actions">' +
+        shopLink(p.resolvesToUrl, "Open the listing — official source") +
+        '<a class="btn btn-outline btn-sm" href="products.html">Full evidence &amp; specs</a>' +
+        "</div>" +
+        "</div>"
+      );
+    }).join("");
+  }
+
+  /* ---- T30 redesign: compact flagged preview for the landing page -----------
+   * Rendered from FLAGGED_ROWS (the reader-facing subset) so the landing can
+   * never disagree with the flagged page. */
+  function renderFlagPreview() {
+    const el = document.getElementById("flagPreview");
+    if (!el) return;
+    const rows = FLAGGED_ROWS.slice(0, 9);
+    let html = '<div class="table-wrap"><table><thead><tr><th>Flag</th><th>Severity</th><th>What was found</th><th>Owner action</th></tr></thead><tbody>';
+    rows.forEach(function (r) {
+      html += "<tr>";
+      html += "<td>" + (r.ledgerFlag ? '<a href="' + esc(r.ledgerUrl) + '">' + esc(r.ledgerFlag) + "</a>" : cell(null)) + "</td>";
+      html += "<td>" + severityBadge(r.severity) + "</td>";
+      html += "<td>" + esc(r.detail) + "</td>";
+      html += "<td>" + esc(r.actionRequired) + "</td>";
+      html += "</tr>";
+    });
+    html += "</tbody></table></div>";
+    el.innerHTML = html;
+  }
+
+  /* ---- T31: editorial topic ideas — suggestions, not published claims -------
+   * Every factual anchor in a topic is verified on the official page linked in
+   * its row (re-fetched 2026-11-15, see docs/verification-2b257b2e.md). Demand
+   * metrics (search volume, trend slope, difficulty) are NOT known from any
+   * official source, so the demand column stays blank — never estimated. A
+   * topic is drafted only for the decision board; nothing is published until
+   * the owner records a choice on pages/suggestions.html. */
+  const TOPIC_IDEAS = [
+    {
+      id: "T-01",
+      topic: "Dual-basket vs single-basket air fryers: when two baskets actually beat one big one",
+      format: "Comparison",
+      intent: "Commercial investigation",
+      demand: null,
+      anchors: "Chefman 6 Qt dual basket (B0CDY277D3) vs Chefman 8 Qt TurboFry (B08DKYBTPH)",
+      status: "suggestion",
+      source: "https://www.amazon.com/dp/B0CDY277D3",
+      sourceLabel: "Amazon listing — B0CDY277D3 (title: dual basket, 2 independent baskets)",
+    },
+    {
+      id: "T-02",
+      topic: "Sync-finish cooking explained: how two dishes finish at the same time",
+      format: "Feature explainer",
+      intent: "Informational → product",
+      demand: null,
+      anchors: "Chefman 6 Qt dual basket — 'Sync Finish' is stated in the listing title",
+      status: "suggestion",
+      source: "https://www.amazon.com/dp/B0CDY277D3",
+      sourceLabel: "Amazon listing — B0CDY277D3",
+    },
+    {
+      id: "T-03",
+      topic: "The 450°F Hi-Fry setting: what extra heat does to frozen food",
+      format: "Feature explainer",
+      intent: "Informational → product",
+      demand: null,
+      anchors: "Chefman 8 Qt TurboFry — '450°F Hi-Fry Option' is stated in the listing title",
+      status: "suggestion",
+      source: "https://www.amazon.com/dp/B08DKYBTPH",
+      sourceLabel: "Amazon listing — B08DKYBTPH",
+    },
+    {
+      id: "T-04",
+      topic: "26-quart French-door oven vs countertop air fryer: which one replaces your toaster?",
+      format: "Buying guide",
+      intent: "Commercial investigation",
+      demand: null,
+      anchors: "Emeril Lagasse 26QT French Door multi-function oven (B09B7SB46R)",
+      status: "suggestion",
+      source: "https://www.amazon.com/dp/B09B7SB46R",
+      sourceLabel: "Amazon listing — B09B7SB46R",
+    },
+    {
+      id: "T-05",
+      topic: "Preset buttons demystified: getting real results from one-touch modes",
+      format: "Evergreen educational",
+      intent: "Informational",
+      demand: null,
+      anchors: "Emeril Lagasse 26QT — '24 One-Touch Preset Options' is stated in the listing title",
+      status: "suggestion",
+      source: "https://www.amazon.com/dp/B09B7SB46R",
+      sourceLabel: "Amazon listing — B09B7SB46R",
+    },
+    {
+      id: "T-06",
+      topic: "Sizing an air fryer to your household: quarts, servings and counter space",
+      format: "Buying guide",
+      intent: "Commercial investigation",
+      demand: null,
+      anchors: "All three resolved listings (6 Qt dual basket · 8 Qt TurboFry · 26 QT oven)",
+      status: "suggestion",
+      source: "https://www.amazon.com/dp/B08DKYBTPH",
+      sourceLabel: "Amazon listing — B08DKYBTPH (8 Qt capacity in title)",
+    },
+    {
+      id: "T-07",
+      topic: "Air-fryer windows: why seeing your food changes how you cook",
+      format: "Feature explainer",
+      intent: "Informational → product",
+      demand: null,
+      anchors: "Chefman 6 Qt dual basket — 'Easy View Windows' is stated in the listing title",
+      status: "suggestion",
+      source: "https://www.amazon.com/dp/B0CDY277D3",
+      sourceLabel: "Amazon listing — B0CDY277D3",
+    },
+    {
+      id: "T-08",
+      topic: "What you may and may not say when you earn from Amazon links",
+      format: "Compliance explainer",
+      intent: "Trust-building editorial",
+      demand: null,
+      anchors: "Operating Agreement §5 disclosure; display rules in the Program Policies",
+      status: "suggestion",
+      source: "https://affiliate-program.amazon.com/help/operating/agreement",
+      sourceLabel: "Associates Program Operating Agreement",
+    },
+  ];
+
+  function renderTopics() {
+    const el = document.getElementById("topicsTable");
+    if (!el) return;
+    let html = '<div class="table-wrap"><table><thead><tr><th>ID</th><th>Topic idea</th><th>Format</th><th>Reader intent</th><th>Search demand</th><th>Factual anchor (verified)</th><th>Status</th><th>Official source</th></tr></thead><tbody>';
+    TOPIC_IDEAS.forEach(function (t) {
+      html += "<tr>";
+      html += "<td>" + esc(t.id) + "</td>";
+      html += "<td><strong>" + esc(t.topic) + "</strong></td>";
+      html += "<td>" + esc(t.format) + "</td>";
+      html += "<td>" + esc(t.intent) + "</td>";
+      html += "<td>" + cell(t.demand) + "</td>";
+      html += "<td>" + esc(t.anchors) + "</td>";
+      html += '<td><span class="badge warn">Suggestion</span></td>';
+      html += '<td><a href="' + esc(t.source) + '" target="_blank" rel="noopener noreferrer">' + esc(t.sourceLabel) + "</a></td>";
+      html += "</tr>";
+    });
+    html += "</tbody></table></div>";
+    el.innerHTML = html;
+  }
+
+
   function renderProductOverview() {
     const el = document.getElementById("productOverview");
     if (!el) return;
@@ -324,5 +496,8 @@
     renderFlagged();
     renderFeatures();
     renderProductOverview();
+    renderProductCards();
+    renderFlagPreview();
+    renderTopics();
   });
 })();

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Why Zone2 is designed the way it is — the redesign rationale, the design decisions with a compliance or SEO basis, and the suggestions queued for review.">
+<title>Design notes — Zone2</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Verified affiliate platform</span>
+      </span>
+    </a>
+    <label class="nav-toggle" for="navtoggle">Menu</label>
+    <input type="checkbox" id="navtoggle" class="nav-toggle-input">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Overview</a>
+      <a href="products.html">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="tracking.html">Tracking</a>
+      <a class="nav-quiet" href="verification.html">Verification</a>
+      <a class="nav-quiet" href="sources.html">Sources</a>
+      <a class="nav-quiet" href="flagged.html">Flagged</a>
+      <a class="nav-quiet active" href="design-notes.html">Design notes</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Design notes</div>
+      <h1 class="hero-title">Why this site is built the way it is — and what we would change next</h1>
+      <p class="hero-lede">
+        An affiliate site lives or dies on whether a reader trusts it enough to click. This page records
+        the design reasoning: what the previous layout got wrong, what the redesign does instead, which
+        design decisions have an official source behind them, and which improvements are proposed but
+        deliberately not implemented — waiting for a recorded decision on the
+        <a href="pages/suggestions.html">suggestions board</a>.
+      </p>
+    </div>
+  </section>
+
+  <div class="page-wrap">
+    <div class="disclosure">
+      <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+    </div>
+
+    <section class="section">
+      <h2 class="section-title">The diagnosis: it read like a back-office, not a storefront</h2>
+      <p class="section-sub">The previous design was an admin dashboard: a default-blue sidebar, dense
+      cards, KPI tiles, and walls of procedural prose. That presentation is right for an internal tool and
+      wrong for a marketing site — a visitor met the verification machinery before the products, and every
+      page looked like a settings screen. The substance was sound; the presentation was the problem.</p>
+      <div class="card">
+        <p><strong>What changed in the redesign (all implemented in this release):</strong></p>
+        <ul style="margin:8px 0 0;padding-left:20px;font-size:14px">
+          <li><strong>A marketing frame, not a console.</strong> A sticky dark header with a horizontal nav replaced the sidebar; pages now open with a proper hero that states the page&rsquo;s promise in one sentence, instead of a small heading and a paragraph of caveats.</li>
+          <li><strong>Products first.</strong> The landing page now leads with the three resolved products as cards — brand, listing title, category path, the honest blanks for price and rating — before any verification narrative.</li>
+          <li><strong>An editorial voice.</strong> Fraunces (display serif) over Inter, a warm paper background with an ember accent, and human sentences in place of boilerplate. The tone is the trust strategy: &ldquo;blank means unverified, never guessed&rdquo; is the brand.</li>
+          <li><strong>Honesty as design.</strong> Unverified cells render as a distinct, styled <em>unverified</em> mark — legible at a glance rather than lost in a table. Flags got a preview section on the landing page, rendered from the same ledger as the register.</li>
+          <li><strong>Decisions as a first-class section.</strong> The landing page links the suggestions board, the open-questions register and these design notes, so a reviewer can see the queue of ideas before anything ships.</li>
+          <li><strong>One system everywhere.</strong> The generated evidence views (verification, sources, summary) share the same palette and typography through their stylesheet, so the data pages feel like part of the site rather than an appendix.</li>
+          <li><strong>Practical details.</strong> Responsive layout down to phones, a skip link, keyboard-visible navigation, and no layout dependency on JavaScript for navigation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Design decisions with an official source behind them</h2>
+      <p class="section-sub">These are not taste. Each choice below exists because a governing document or
+      an official webmaster guideline says so; the source is linked per row. (Where a rule was transcribed
+      into the compliance ledger by an earlier session and re-verified 2026-11-14, this page links the
+      official document rather than re-quoting it.)</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Decision</th><th>Why it is the safe choice</th><th>Official source</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>The disclosure sentence is rendered on every page, including this one.</td>
+            <td>The Operating Agreement requires Associates to &ldquo;clearly and prominently&rdquo; state the exact sentence on their site.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement §5</a></td>
+          </tr>
+          <tr>
+            <td>Outbound Amazon product links carry <code>rel="sponsored"</code>.</td>
+            <td>Google asks that paid or affiliate placements be marked with the <code>sponsored</code> value.</td>
+            <td><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer">Google — Qualify outbound links</a></td>
+          </tr>
+          <tr>
+            <td>No price is displayed anywhere on the site.</td>
+            <td>Amazon restricts price display to links and API responses it serves itself; a static price goes stale and breaks the rule.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies — Participation Requirements §2(b)</a></td>
+          </tr>
+          <tr>
+            <td>No star ratings or review scores are displayed.</td>
+            <td>Customer reviews may be shown only when obtained through the Creators API / PA API, which this project cannot access yet (flag F-05).</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies — Participation Requirements §6(t)</a></td>
+          </tr>
+          <tr>
+            <td>Product cards link the canonical <code>/dp/</code> listing as a citation, not the untagged short link as a purchase CTA.</td>
+            <td>Special Links must properly use Amazon&rsquo;s tagged link formats; an intermediate redirect that forwards the customer is a disqualifying link, and the supplied links carry no <code>tag</code>.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement §1</a></td>
+          </tr>
+          <tr>
+            <td>The site name and branding contain no Amazon mark, and the footer states the site is independent.</td>
+            <td>Amazon marks may not be used in domains, tags or identifiers; the relationship must not be misrepresented as an endorsement.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies — IP License / Participation Requirements</a></td>
+          </tr>
+          <tr>
+            <td>Unverified values render as an explicit styled blank.</td>
+            <td>The FTC standard: a material connection and the limits of a claim must be communicated clearly and conspicuously — quiet omissions are the classic failure mode.</td>
+            <td><a href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer">FTC Endorsement Guides</a></td>
+          </tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Suggestions queued for the next iteration — not implemented</h2>
+      <p class="section-sub">Each idea below is written down so it can be chosen, amended or rejected on
+      the <a href="pages/suggestions.html">suggestions decision board</a> — the project&rsquo;s rule is
+      that a good idea ships only after someone records a decision. Nothing here is live in this release.</p>
+      <div class="suggest-grid">
+        <div class="suggest-card">
+          <div class="s-kicker">Conversion</div>
+          <h4>Product landing pages per ASIN</h4>
+          <p>Once the owner confirms the ASINs (F-01…F-03) and adds the Associates tag (F-24), give each product a dedicated conversion page — gallery, spec table, comparison table, single clear CTA — and make the root cards link there instead of straight to Amazon.</p>
+          <div class="status-note">Blocked by: F-01…F-03, F-24. Sits behind the existing Field Notes articles.</div>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">Catalog</div>
+          <h4>Real product imagery via the Creators API</h4>
+          <p>The Creators API can serve official product images once the account qualifies (ten qualifying sales in thirty days). Until then the pages run text-only, which is the compliant choice — scraping imagery is not.</p>
+          <div class="status-note">Blocked by: F-05 (Creators API registration).</div>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">SEO</div>
+          <h4>Structured data on published articles</h4>
+          <p>Add Product / FAQ / Breadcrumb structured data to the Field Notes articles after the tagging decision, so eligible rich results can appear. Needs the articles finalized first, because structured data must match visible content exactly.</p>
+          <div class="status-note">Blocked by: F-03 (identity), F-24 (tagging).</div>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">Performance</div>
+          <h4>Self-host the two fonts</h4>
+          <p>Pages originally loaded Fraunces and Inter from Google Fonts. This concern was promoted from suggestion to implementation within the same release: the two families are now bundled in <code>assets/fonts/</code> under their SIL OFL licence — no third-party request, fully self-contained.</p>
+          <div class="status-note">Done in this release — kept on the board for the record.</div>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">Analytics</div>
+          <h4>Switch on the privacy-minimal click counter</h4>
+          <p>The first-party click tracker in <code>tools/</code> (no cookies, no IPs, no visitor IDs) is built and dormant. It becomes meaningful the day tagged links exist; before that it counts nothing worth recording.</p>
+          <div class="status-note">Blocked by: F-24 (tagged links).</div>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">Audience</div>
+          <h4>An owned newsletter — built within the rules</h4>
+          <p>Email placement of Special Links is permitted only for solicited communications under the Program Policies. A double-opt-in recipe newsletter around the air-fryer niche would be a compliant owned channel — but it needs real content cadence and an owner decision about operating it.</p>
+          <div class="status-note">Owner decision required (operations, not code).</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">What we already shipped quietly</h2>
+      <p class="section-sub">Two small, standard webmaster-hygiene files now exist at the site root —
+      they require no decision because they state nothing and can never drift into a claim:</p>
+      <div class="card"><ul style="margin:0;padding-left:20px;font-size:14px">
+        <li><code>robots.txt</code> — allows crawling of everything and points at the sitemap.</li>
+        <li><code>sitemap.xml</code> — the root pages and the findings hub, so crawlers see the structure without guessing.</li>
+      </ul></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">How a suggestion becomes a change</h2>
+      <p class="section-sub">The path is deliberately short and deliberately manual:</p>
+      <div class="card">
+        <ol style="margin:0;padding-left:22px;font-size:14px">
+          <li><strong>Recorded</strong> — the idea lands on the decision board (<a href="pages/suggestions.html">pages/suggestions.html</a>) with options, trade-offs and a recommended path, or in this design-notes queue.</li>
+          <li><strong>Unblocked</strong> — the open-questions register (<a href="pages/questions.html">pages/questions.html</a>) shows which questions must be answered first; each question names how it could be closed and what it blocks.</li>
+          <li><strong>Chosen</strong> — the owner records the decision in the board&rsquo;s decision field. No decision, no implementation.</li>
+          <li><strong>Built &amp; verified</strong> — the change is implemented on its own branch, gated by the same line-by-line sourcing rules as everything else, and published through the verified pipeline.</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer class="site">
+      Written for the 2026-11-15 redesign (session 2b257b2e). The visual choices above are editorial;
+      the sourced rows are compliance decisions. Verification performed for this session:
+      <a href="verification.html">verification log</a> · session evidence:
+      <a href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-2b257b2e.md" target="_blank" rel="noopener noreferrer">docs/verification-2b257b2e.md</a>.
+    </footer>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="content.html">Content</a></li>
+            <li><a href="compliance.html">Compliance</a></li>
+            <li><a href="tracking.html">Tracking</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Evidence</h4>
+          <ul>
+            <li><a href="verification.html">Verification log</a></li>
+            <li><a href="sources.html">Source register</a></li>
+            <li><a href="flagged.html">Flagged for review</a></li>
+            <li><a href="summary.html">Executive summary</a></li>
+            <li><a href="pages/index.html">Findings hub</a></li>
+            <li><a href="pages/categories/index.html">Commission categories</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Decisions</h4>
+          <ul>
+            <li><a href="decisions/index.html">Decision hub</a></li>
+            <li><a href="pages/suggestions.html">
+            <li><a href="pages/questions.html">Open questions register</a></li>
+            <li><a href="design-notes.html">Design notes &amp; growth ideas</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Companion builds</h4>
+          <ul>
+            <li><a href="research-hub/start.html">Affiliate Research Hub</a></li>
+            <li><a href="marketing/index.html">Field Notes — verified articles</a></li>
+            <li><a href="revalidation/index.html">Revalidation 2026-11-14</a></li>
+            <li><a href="affiliate-lab/index.html">Affiliate Lab</a></li>
+            <li><a href="zone2/index.html">Zone2 platform build</a></li>
+            <li><a href="northstar/index.html">Northstar prototype</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
+        As an Amazon Associate I earn from qualifying purchases. Amazon and the Amazon mark are
+        trademarks of Amazon.com, Inc. or its affiliates; this site is independent and not affiliated
+        with Amazon. Outbound product links are marked <code>rel="sponsored"</code> per Google&rsquo;s
+        guidance on paid links. No price is displayed on any page — Amazon restricts price display to
+        links and API responses it serves itself.
+      </div>
+      <div class="footer-note">
+        Verified dataset date: 2026-11-14 · links and sources independently re-fetched 2026-11-15 ·
+        governing documents change without notice and are re-verified each cycle ·
+        <a href="https://affiliate-program.amazon.com/" style="color:#c6cdd7">Amazon Associates</a> ·
+        <a href="https://affiliate-program.amazon.com/help/operating/policies" style="color:#c6cdd7">Program Policies</a> ·
+        <a href="https://affiliate-program.amazon.com/help/operating/agreement" style="color:#c6cdd7">Operating Agreement</a> ·
+        <a href="sources.html" style="color:#c6cdd7">full source register</a>
+      </div>
+    </div>
+  </footer>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
