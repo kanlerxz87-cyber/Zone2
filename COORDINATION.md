@@ -2909,6 +2909,8 @@ and the closing record follow in the next entry.
 | T26 | **done** |
 | T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
 | T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | done (PR and merge recorded below) | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
+| T30 | Primary-dashboard integration of the canonical Suggestions decision board and Questions register; avoid duplicate data/decision systems and make the existing evidence-led review path discoverable | done — PR #64 merged; Pages deploy confirmed | `arena/fb49a226-zone2` | `index.html`, `COORDINATION.md` |
+
 | T31 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: after PR #62 merges, add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line, run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. | in progress | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
 
 ### What shipped
@@ -3158,6 +3160,41 @@ without commits is **T27** (`0f44536f`, last activity 2026-11-14). It is older t
 
 **Known display issue (not fixed in this task):** the eyebrow on every generated page reads "verified 2026-11-14" because the generator takes its date from `ledger/products.json` (`verified_utc`). The new pages were checked on 2026-11-15, but no value was changed to match that date. Board owner to decide whether the generator should show the date of the last source check instead.
 
+
+## Session claim — T30 — `arena/fb49a226-zone2` (2026-11-15 UTC)
+
+The independent T29 suggestions/questions deliverable merged via PR #61 while this branch was being developed. To avoid duplicating its source-of-truth ledgers and decision UX, this task is narrowed to integrating its canonical generated pages into the primary dashboard. Scope: `index.html` and this task-board record only. Canonical details remain in `pages/suggestions.html` and `pages/questions.html`; this session will not edit their ledgers, generator, or generated pages.
+
+
+### T30 integration and verification record — `arena/fb49a226-zone2` (2026-11-15 UTC)
+
+**Coordination reconciliation:** T29 was independently completed and merged as PR #61 while this session's first claim was on the now-stale baseline. The root-level draft page created in this branch would have duplicated the canonical `ledger/suggestions.json` / `ledger/questions.json` data and generated `pages/suggestions.html` / `pages/questions.html` UX. It was removed before integration. This session therefore keeps only the non-overlapping T30 entry-point integration in `index.html`; T29 remains the sole source of suggestion/question content and decisions.
+
+**Delivered:** the primary dashboard navigation and a prominent dashboard callout now link directly to the existing generated Suggestions board and Questions register. The T29 board remains responsible for the options/recommendation and owner decision state; the question register remains responsible for verified answers, missing information, and discovery actions. No duplicate dataset, alternate decision store, product content, affiliate links, or campaign behavior was added.
+
+**Verification:**
+- T29 generated output/gates passed on the merged PR #61 (`Build and verify` success, run 43710132422); its T29 record lists the official sources and all verification checks.
+- T30 local checks against the rebased combined tree: `tools/validate_data.py` (0 errors / 0 warnings), `tests/test_pipeline.py` (15/15), `tools/build_site.py --check`, `tools/build_root_views.py --check`, `tools/build_summary.py --check`, and `tools/audit_site.py` (96 pages, all audit classes pass).
+- `index.html` relative links to `pages/suggestions.html` and `pages/questions.html` resolve; root primary-site links were checked. `git diff --check` passes.
+- The first PR check attempt was cancelled by the workflow's shared `pages` concurrency group while PR #61's main deployment was pending. PR #61's post-merge `Build, verify and deploy` and Pages deployment both then succeeded (run 43710200460). This T30 PR check must be allowed to complete after the main deployment; it is not counted as a passing check yet.
+
+**Open boundaries:** questions in the canonical register remain unanswered by design (e.g., product intent mapping, account/marketplace, publisher ownership, API access, and commission-category mapping). Those require owner/account information or additional authoritative evidence. No changes to the T29 canonical data were made.
+
+
+### T30 closing record — PR #64 merged and Pages deploy confirmed (2026-11-15 UTC)
+
+| Item | Result |
+|---|---|
+| Final integration PR | [#64](https://github.com/kanlerxz87-cyber/Zone2/pull/64) — dashboard links to canonical Suggestions and Questions pages |
+| Superseded draft PR | [#62](https://github.com/kanlerxz87-cyber/Zone2/pull/62) closed after its check was cancelled by the workflow's shared Pages concurrency group while other sessions deployed. Its duplicate root-level draft was removed; no T29 data or work was discarded. |
+| PR check | **success**, `Build and verify` run 43710511934 |
+| Merge | `gh pr merge 64 --merge` · 2026-11-15T11:46:39Z · merge commit `f9a86bd1f7e7d48b2492ba9ef7c02af44f5b20ad` |
+| Post-merge build + deploy | **success**, run 43710552926; build and `Deploy to GitHub Pages` jobs passed |
+| Pages API | `status: built`, source `main` `/`, HTTPS enforced: <https://kanlerxz87-cyber.github.io/Zone2/> |
+| Live read | Dashboard callout links to <https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html> and <https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html>; both pages render the decision/options and open-question tables with source links. |
+| T30 | **done** |
+
+No new product, performance, demand, or revenue figures were added. The destination mapping/account/API questions remain open in the canonical Questions register, with no inferred values.
 
 ---
 
