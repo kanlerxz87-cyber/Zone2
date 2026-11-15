@@ -313,7 +313,8 @@
       ],
       "related": [
         "dual-basket-or-one-big-basket.html",
-        "will-it-fit-your-counter.html"
+        "will-it-fit-your-counter.html",
+        "air-fryer-vs-oven.html"
       ],
       "products": [
         "P1",
@@ -480,7 +481,9 @@
       ],
       "related": [
         "why-two-official-pages-disagree.html",
-        "how-many-quarts-do-you-need.html"
+        "how-many-quarts-do-you-need.html",
+        "air-fryer-vs-oven.html",
+        "are-air-fryers-worth-it.html"
       ],
       "products": [
         "P2",
@@ -757,6 +760,393 @@
         "P2",
         "P3"
       ]
+    },
+    {
+      "slug": "air-fryer-vs-oven.html",
+      "title": "Air fryer vs your oven: what three spec sheets can settle, and what they cannot",
+      "kicker": "Air fryer vs oven",
+      "meta_description": "Air fryer or your oven? The verified numbers for three real machines - capacity, power, temperature - plus the blank column this comparison needs most. Sources on every row.",
+      "target_query": "air fryer vs oven",
+      "intent": "commercial investigation",
+      "hook": "'Air fryer vs oven' is really three questions wearing one coat. The three machines on this site are two basket fryers and a 26 Qt countertop oven with French doors, and they answer it three different ways. Here is what their official pages actually settle - and the one appliance in this comparison nobody on this site has read a line about: yours.",
+      "angle": "Every version of this comparison averages an imaginary oven. We compare only machines whose official pages we have read row by row, and we leave your oven's column blank on purpose: an unpublished number is not a small number, it is an absent one.",
+      "sections": [
+        {
+          "h2": "The decision, up front",
+          "blocks": [
+            {
+              "kind": "take",
+              "html": "If weeknight dinner is fries, wings, fillets or reheated pizza for one to four people, this comparison points to a basket fryer. If the question is whether to turn on a full-size oven for a family roast, nothing on this page replaces it - the 26 Qt French-door oven comes closest, and closest is still 24.6 litres."
+            },
+            {
+              "kind": "prose",
+              "html": "All three machines state the same power draw: <strong>1700 W at 120 V</strong>. The difference between them is not watts. It is the shape and volume of the space the watts heat - two independent 3 Qt baskets, one 7.57-litre basket, or a 26 Qt / 24.6-litre cavity that its manufacturer sizes for a whole chicken or a 12-inch pizza.",
+              "src": [
+                "M1",
+                "M3",
+                "M5"
+              ]
+            }
+          ]
+        },
+        {
+          "h2": "What the three machines publish, side by side",
+          "blocks": [
+            {
+              "kind": "capacity_table"
+            },
+            {
+              "kind": "prose",
+              "html": "One number in that table deserves distrust. The Chefman 8 Qt's Amazon title advertises a <strong>450 F Hi-Fry</strong>, but the same page's specification block and Chefman's own product page both state <strong>200-400 F</strong> for this model. The 450 F maximum is real - it belongs to the 6 Qt dual-window unit. The claim is published as a conflict, not smoothed over.",
+              "src": [
+                "M1",
+                "M5"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "The Emeril's Amazon product-information block gives <strong>75-500 F</strong>, the widest published range of the three, and its manufacturer page lists ten named cooking modes - Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm.",
+              "src": [
+                "M3",
+                "M4"
+              ]
+            }
+          ]
+        },
+        {
+          "h2": "Your oven, in the column that stays blank",
+          "blocks": [
+            {
+              "kind": "table",
+              "caption": "The comparison as far as the evidence goes. The third column is yours, and no page read for this site publishes a line of it.",
+              "head": [
+                "Question",
+                "What these three pages state",
+                "Your oven at home"
+              ],
+              "rows": [
+                [
+                  "How much fits at once",
+                  "6 Qt in two 3 Qt baskets; 7.57 L in one basket; 26 Qt / 24.6 L in a cavity sized for a whole chicken or a 12-inch pizza",
+                  "Not published here",
+                  [
+                    "M1",
+                    "M3",
+                    "M5"
+                  ]
+                ],
+                [
+                  "Top temperature",
+                  "450 F (6 Qt), 500 F (26 Qt), 400 F (8 Qt) as published - with the 8 Qt's 450 F title claim recorded as a conflict",
+                  "Not published here",
+                  [
+                    "M1",
+                    "M4",
+                    "M5"
+                  ]
+                ],
+                [
+                  "Power drawn",
+                  "All three state 1700 W / 120 V",
+                  "Not published here",
+                  [
+                    "M1",
+                    "M4",
+                    "M5"
+                  ]
+                ],
+                [
+                  "Preheat time",
+                  "None of the six official pages publishes one",
+                  "Not published here",
+                  [
+                    "M1",
+                    "M2",
+                    "M3",
+                    "M4",
+                    "M5",
+                    "M6"
+                  ]
+                ],
+                [
+                  "Cost per meal",
+                  "Not published by any of the six official pages",
+                  "Not published here",
+                  [
+                    "M1",
+                    "M2",
+                    "M3",
+                    "M4",
+                    "M5",
+                    "M6"
+                  ]
+                ]
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "The blank column is the point. Your oven's capacity, calibration and insulation are printed on a plate inside its door, not on any page read for this site. Find that plate, measure the cavity, and the comparison becomes real - until then, anyone filling that column with a number is guessing on your behalf."
+            }
+          ]
+        },
+        {
+          "h2": "When the countertop oven is the middle answer",
+          "blocks": [
+            {
+              "kind": "prose",
+              "html": "The Emeril is not a basket fryer with a bigger badge. Its published shape is a countertop oven: dual French doors, 360-degree hot-air circulation with a dual-speed fan, ten named cooking modes including Bake, Roast, Proof and Warm, and seven accessories of which the manufacturer names an air fry basket, a rotisserie spit and a bake pan. The accessory count ships as partial: the page says seven and names three.",
+              "src": [
+                "M3"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "If the question behind 'air fryer vs oven' is really 'can I skip heating the big oven on a Tuesday', the 26 Qt is the only machine on this page that answers with oven geometry. If the question is 'can I crisp a plate of fries before the big oven finishes preheating', the basket machines answer with a cavity that has almost nothing to preheat. Both answers are about shape, not magic."
+            }
+          ]
+        },
+        {
+          "h2": "What no page here can settle",
+          "blocks": [
+            {
+              "kind": "list",
+              "items": [
+                "Whether an air fryer meal costs less to run than an oven meal. No official page here publishes watt-hours per cook, so the question stays open on the queue rather than answered here.",
+                "Whether food from these machines tastes better. Nobody on this site has cooked in any of them.",
+                "Whether 450 F changes what you cook. The temperature is a published row; its effect on dinner is not.",
+                "What any of this costs. Prices are withheld on every page of this site by programme rule, and star ratings are not printed because they change faster than a page."
+              ],
+              "src": [
+                "M1",
+                "M2",
+                "M3",
+                "M4",
+                "M5",
+                "M6"
+              ]
+            }
+          ]
+        },
+        {
+          "h2": "Three questions, then you are done",
+          "blocks": [
+            {
+              "kind": "list",
+              "items": [
+                "How many people does one meal feed in your house? If the answer is often four or more and the meal is a roast, none of these replaces your oven.",
+                "Is the food you would actually cook small and fast - fries, wings, fillets, pizza slices - or large and slow - whole birds, trays, bakes?",
+                "What does the counter say? The published footprints are 13.38 x 11.81 x 10.63 in for the 6 Qt, 15.4 x 12.6 x 13.5 in for the 8 Qt, and 16.9 x 15.8 x 14.8 in for the 26 Qt."
+              ],
+              "src": [
+                "M1",
+                "M3",
+                "M5"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "Answer those three and the versus question answers itself. The machine that fits the answers is the one worth it - for you, this month, in your kitchen."
+            }
+          ]
+        }
+      ],
+      "products": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "related": [
+        "basket-or-fryer-oven.html",
+        "how-many-quarts-do-you-need.html",
+        "will-it-fit-your-counter.html",
+        "are-air-fryers-worth-it.html"
+      ]
+    },
+    {
+      "slug": "are-air-fryers-worth-it.html",
+      "title": "Are air fryers worth it? What three spec sheets support - and what they never will",
+      "kicker": "Worth it?",
+      "meta_description": "Are air fryers worth it? No hype and no invented verdicts - the verified specs of three real machines, where the trend outruns its own evidence, and the questions no spec sheet answers.",
+      "target_query": "are air fryers worth it",
+      "intent": "commercial investigation",
+      "hook": "A verdict on 'worth it' is always really a price, a habit and a kitchen. This site can print none of those. What it can do is strip the trend to its checkable parts: what these three machines state on their official pages, which claims the pages themselves contradict, and who each size is actually built for.",
+      "angle": "Most 'are they worth it' articles sell a feeling next to a star rating. This one publishes the decision structure instead: every number carries its official page, conflicts stay conflicts, and the value judgement is labelled as a judgement every time it appears.",
+      "sections": [
+        {
+          "h2": "The honest answer, up front",
+          "blocks": [
+            {
+              "kind": "take",
+              "html": "An air fryer is worth it when the meal you actually cook is small, fast and repeated. It is not worth it when you are hoping it replaces an oven for large or slow cooking. Of the three machines here, two are built for the first meal and one straddles both. That is the whole verdict, and it stays conditional on your kitchen, not on the trend."
+            },
+            {
+              "kind": "prose",
+              "html": "The checkable part of the trend is on the pages: <strong>1700 W at 120 V</strong> in all three machines, cavities of 6 Qt in two baskets, 7.57 L in one basket, and 26 Qt / 24.6 L behind French doors, and published temperature ranges of 200-450 F, 200-400 F and 75-500 F. Those are the numbers the trend is standing on.",
+              "src": [
+                "M1",
+                "M3",
+                "M5"
+              ]
+            }
+          ]
+        },
+        {
+          "h2": "What the three machines actually specify",
+          "blocks": [
+            {
+              "kind": "table",
+              "caption": "Every value transcribed from the manufacturer page or the Amazon listing named in the last column. Blank means no official page states it.",
+              "head": [
+                "Model",
+                "Capacity",
+                "Power",
+                "Temperature range",
+                "Presets and modes"
+              ],
+              "rows": [
+                [
+                  "Chefman 6 Qt Dual-Window",
+                  "6 Qt / 5.67 L, two independent 3 Qt baskets",
+                  "1700 W / 120 V",
+                  "200-450 F / 95-235 C",
+                  "Digital touchscreen; Sync Finish ends both baskets together",
+                  [
+                    "M1",
+                    "M2"
+                  ]
+                ],
+                [
+                  "Chefman 8 Qt TurboFry Touch",
+                  "8 Qt / 7.57 L, one basket",
+                  "1700 W / 120 V",
+                  "200-400 F / 95-205 C",
+                  "4 presets (fries, chicken, fish, meat); LED shake reminder",
+                  [
+                    "M5"
+                  ]
+                ],
+                [
+                  "Emeril Lagasse 26 Qt French Door",
+                  "26 Qt / 24.6 L, sized for a whole chicken or 12-inch pizza",
+                  "1700 W",
+                  "75-500 F",
+                  "10 named modes; preset count published as a conflict (24 or 25)",
+                  [
+                    "M3",
+                    "M4"
+                  ]
+                ]
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "Two rows in that table are softer than they look. The Emeril's preset count appears twice on one manufacturer page - <strong>24</strong> in the description, <strong>25</strong> on the spec tile - so it ships as a conflict, not a number. And the 8 Qt's Amazon title advertises <strong>450 F</strong> while its own specification block and Chefman's page say <strong>200-400 F</strong>.",
+              "src": [
+                "M3",
+                "M5"
+              ]
+            }
+          ]
+        },
+        {
+          "h2": "Where the trend outruns the evidence",
+          "blocks": [
+            {
+              "kind": "list",
+              "items": [
+                "'450 F Hi-Fry' is a real published maximum on the 6 Qt dual-window model, and a marketing title borrowed by the 8 Qt, whose own pages stop at 400 F.",
+                "The Emeril's model number is published two ways: 4-00675-02A-VN on the manufacturer's store, 4-00675-02X-VN in the Amazon product-information block."
+              ],
+              "src": [
+                "M1",
+                "M3",
+                "M5"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "A star rating appears nowhere on this site. Ratings move hourly, they are storefront-specific, and what a static page may claim about them is governed by programme rules. The blank row is the honest row - and it is also why this page can tell you what a machine is, but never whether the crowd loves it."
+            }
+          ]
+        },
+        {
+          "h2": "Who each machine is actually for",
+          "blocks": [
+            {
+              "kind": "prose",
+              "html": "The <strong>6 Qt dual-basket</strong> is built for cooking two things at once and having them finish together - Sync Finish is the published answer to the nuggets being done before the fries. Two 3 Qt baskets, dual viewing windows with an interior light, nonstick dishwasher-safe baskets.",
+              "src": [
+                "M1",
+                "M2"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "The <strong>8 Qt TurboFry Touch</strong> is the straightforward one: one large basket, four presets, an LED shake reminder, auto shut-off when the timer ends or the basket opens, and a dishwasher-safe basket and rack that the manufacturer marks top-rack.",
+              "src": [
+                "M5"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "The <strong>26 Qt French-door oven</strong> is the four-to-six-person machine: a cavity sized for a whole chicken or a 12-inch pizza, modes that include Bake, Roast, Proof and Warm, and an accessory set that names a rotisserie spit and a bake pan among its seven pieces.",
+              "src": [
+                "M3"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "Match the machine to the meal you cook on a Tuesday, not to the meal you would cook if you cooked more. A 26 Qt oven bought for hypothetical roasts and used for frozen pizza is the most expensive way to reheat pizza."
+            }
+          ]
+        },
+        {
+          "h2": "The questions that decide 'worth it', and why none is answered here",
+          "blocks": [
+            {
+              "kind": "list",
+              "items": [
+                "What it costs to run. No official page publishes watt-hours per meal, and this site does not estimate.",
+                "What the food tastes like. Nobody here has cooked in any of these machines.",
+                "What it costs to buy. Prices are withheld on every page of this site by programme rule - the product links carry live prices only where Amazon serves them.",
+                "Whether the habit survives month three. That is a question about you, and the buying guide asks it before you spend anything.",
+                "Whether the dishwasher note on your machine's care label matches the product page. The pages say dishwasher-safe; the manual is the document that settles it, and it is not on the product pages."
+              ],
+              "src": []
+            }
+          ]
+        },
+        {
+          "h2": "If you want the decision in three minutes",
+          "blocks": [
+            {
+              "kind": "list",
+              "items": [
+                "Choosing between two baskets and one big one? The duo guide has the trade in numbers.",
+                "Measuring the counter first? The fit guide prints the footprints, in inches, with their sources.",
+                "Still translating quarts into people? The capacity guide does the arithmetic on all three pages.",
+                "Want one machine named rather than three described? That is what the buying guide is for."
+              ],
+              "src": []
+            },
+            {
+              "kind": "take",
+              "html": "'Worth it' is not a property of an air fryer. It is the gap between the meals you actually cook and the machine you would buy for them. Close that gap with the three questions above and any of these three is worth it. Buy against the trend and none of them is."
+            }
+          ]
+        }
+      ],
+      "products": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "related": [
+        "how-many-quarts-do-you-need.html",
+        "dual-basket-or-one-big-basket.html",
+        "basket-or-fryer-oven.html",
+        "air-fryer-vs-oven.html"
+      ]
     }
   ],
   "verified_today": [
@@ -868,7 +1258,7 @@
       "id": "DS-02",
       "area": "Traffic",
       "title": "Publish the question-shaped guides, not only product pages",
-      "suggestion": "Six guides now sit under topics/ and each answers one search phrasing (how many quarts, dual basket or one, will it fit, what Hi-Fry does, why spec sheets disagree, basket or oven). Product write-ups link to them and they link back. Next six candidates are listed below this board.",
+      "suggestion": "The guides now sit under topics/ and each answers one search phrasing (how many quarts, dual basket or one, will it fit, what Hi-Fry does, why spec sheets disagree, basket or oven, air fryer or your oven, are they worth it). Product write-ups link to them and they link back. Next six candidates are listed below this board.",
       "why": "A product page for one ASIN answers a query only when someone already knows the model. The traffic that a three-product site can actually win is the investigation-stage question, which is also where a recommendation still counts for something.",
       "options": [
         {
