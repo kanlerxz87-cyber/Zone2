@@ -60,7 +60,7 @@ def published_pages() -> list[Path]:
             continue
         if rel.parts[0] in EXCLUDED_DIRS:
             continue
-        if rel.as_posix() in EXCLUDED_FILES:
+        if rel.name in EXCLUDED_FILES:  # basename match, so nested error pages are excluded too
             continue
         pages.append(rel)
     return sorted(pages, key=lambda p: p.as_posix())
