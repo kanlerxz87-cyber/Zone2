@@ -1114,6 +1114,11 @@ def vendor_design_system(out_root: Path) -> None:
         "   Re-run the builder after changing the source. Kept as a copy so these pages do not\n"
         "   depend on root-level paths another session may move. */\n"
     )
+    # The shared sheet (assets/css/style.css) bundles its fonts as url("../fonts/...") relative to
+    # its own location. Vendored into pages/assets/, that resolves to pages/fonts/, which does not
+    # exist, so every page silently fell back to system fonts. Rewrite to the repository-root font
+    # files (pages/assets/ -> ../../assets/fonts/).
+    body = body.replace('url("../fonts/', 'url("../../assets/fonts/')
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(header + body, encoding="utf-8")
 
