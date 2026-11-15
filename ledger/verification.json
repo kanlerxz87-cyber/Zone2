@@ -1,6 +1,6 @@
 {
   "note": "Verification log. One row per claim that had to be checked to build or review this repository. Method is reproducible as described; verdicts were recorded on 2026-11-13 by reading the cited page, not from recollection. UNVERIFIED rows stay blank on the site. Rows V-33..V-50 were added 2026-11-14 by session a133aa61 during final integration: this session had live outbound access, so the governing pages, the three supplied URLs and the three manufacturer pages were re-read and compared line by line instead of being carried forward from another session's notes. Rows V-51..V-70 were added 2026-11-14 by session ba8b2d38 (T27): an independent fourth pass that re-fetched every official Amazon page cited by this repository, all three supplied links, all three /dp/<token> URLs, and ran one new control (V-68) that no earlier session had run. Rows V-71..V-82 were added 2026-11-14 by session d3ce1c29 (T26): an independent re-read of the governing Amazon pages, the three-ASIN replication of the plpRedirect=mhFallback control (previously run for one ASIN only, V-45), a live re-resolution of all three supplied links, and the row count of S04's bounty and bonus tables.",
-  "as_of": "2026-11-13",
+  "as_of": "2026-11-15",
   "rows": [
     {
       "id": "V-01",
@@ -928,6 +928,88 @@
         "S04"
       ],
       "consequence": "Trade-In: Trade Books and Textbooks 4.00%, Consumer Electronics Products 4.00%, Video Games Products 0.00%. Fine art: 'limited to a maximum of $200 per Product'. Free books: no Standard or Special Commission Income for a month with ≥20,000 free Kindle eBook orders and ≥80% free share. All three match the published rows."
+    },
+    {
+      "id": "V-83",
+      "subject": "P-01 destination re-observed by session bbcc741f on 2026-11-15",
+      "claim": "https://link.amazon/B04G1MEwY resolves to the amazon.com listing the ledger publishes for P-01",
+      "method": "live fetch 2026-11-15 through this session's HTTP client; the returned document's canonical URL and <title> read directly off the response",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S33",
+        "S19"
+      ],
+      "consequence": "Reproduced exactly. Final URL https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-6c31d96765b8adfb&channelId=704&plpRedirect=mhFallback ; page title 'Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen' ; breadcrumb Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers. btn_ref value differs from the 2026-11-14 value (F-21 reproduced); the resolved URL carries no Associates tag= parameter (F-24 reproduced). No product attribute copied from this fetch."
+    },
+    {
+      "id": "V-84",
+      "subject": "P-02 destination re-observed by session bbcc741f on 2026-11-15",
+      "claim": "https://link.amazon/B02NbDxp3 resolves to the amazon.com listing the ledger publishes for P-02",
+      "method": "live fetch 2026-11-15; canonical URL and <title> read off the response",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S34",
+        "S20"
+      ],
+      "consequence": "Reproduced exactly. Final URL https://www.amazon.com/dp/B09B7SB46R?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-4796bf563b804868&channelId=704&plpRedirect=mhFallback ; page title 'Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen' ; the same Air Fryers breadcrumb. No attribute copied."
+    },
+    {
+      "id": "V-85",
+      "subject": "P-03 destination re-observed by session bbcc741f on 2026-11-15",
+      "claim": "https://link.amazon/B00hJ57DV resolves to the amazon.com listing the ledger publishes for P-03",
+      "method": "live fetch 2026-11-15; canonical URL and <title> read off the response",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S35",
+        "S21"
+      ],
+      "consequence": "Reproduced exactly. Final URL https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-33a7001c2f183379&channelId=704&plpRedirect=mhFallback&th=1 ; page title 'Amazon.com: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen'. This destination carried one parameter the other two did not (th=1). No attribute copied."
+    },
+    {
+      "id": "V-86",
+      "subject": "ASIN control re-run by session bbcc741f on 2026-11-15 (S36)",
+      "claim": "link.amazon does not treat the path segment as an ASIN: a genuine, live 10-character ASIN used as a token is not resolved",
+      "method": "live fetch of https://link.amazon/B0CDY277D3 on 2026-11-15 (that ASIN is P-01's verified destination)",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S36",
+        "S19"
+      ],
+      "consequence": "Reproduced. The request left link.amazon and ended at amzlinks.in/B0CDY277D3, which returned the service's own 404 page - '404: File Not Found', 'Uh oh, it looks like something went wrong. You've clicked on an invalid URL.' The token in a link.amazon short link is therefore a service-issued identifier, not an ASIN, and it cannot be decoded to a product from the outside. The three supplied codes are 9 characters and are not ASINs (F-01), and no listing can be inferred from them - only observed by following the link."
+    },
+    {
+      "id": "V-87",
+      "subject": "Negative control re-run by session bbcc741f on 2026-11-15 (S43)",
+      "claim": "the control F-20 published - an unknown code returns a 404, proving the service performs a lookup rather than a fallback - reproduces for any unknown token",
+      "method": "live fetch of https://link.amazon/ZZ9QQ7X4LK (an unissued 10-character token) on 2026-11-15",
+      "verdict": "FLAGGED",
+      "source_ids": [
+        "S43",
+        "S32"
+      ],
+      "consequence": "NOT reproduced as published: the answer was HTTP 403 Forbidden at link.amazon itself, before any hop and before any lookup, so for this token shape the service never got to the point of returning a 404. Two causes are open and neither is resolvable from here - the edge may reject the random token, or it may reject this session's client. Either way the negative control is weaker than F-20's wording implies, so the published reading of the three supplied links rests on the POSITIVE evidence instead: three codes, three distinct live listings, identical destinations on every one of the five dates they have been fetched. Recorded as F-40; the owner can settle it in a browser in under a minute (Q-18)."
+    },
+    {
+      "id": "V-88",
+      "subject": "Associates Program Policies re-read by session bbcc741f on 2026-11-15 (S02)",
+      "claim": "the attribution rules the platform's tracking module and the revenue model depend on are as the ledger publishes them",
+      "method": "live fetch of the Program Policies page on 2026-11-15; Commission Income Statement section 1 read directly",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S02"
+      ],
+      "consequence": "Reproduced. Page header still reads 'Updated: April 14, 2026.' A Session begins when a customer clicks a Special Link and ends at the first of: 24 hours elapsing; an order for a non-digital Product; or a click through somebody else's Special Link. A cart order must complete 'no later than 89 days after their initial click-through of the Special Link', and the Product must be shipped, streamed or downloaded and paid for 'within 180 days of the purchase'. The country selector still lists United States and Japan among the marketplaces (Q-01 open)."
+    },
+    {
+      "id": "V-89",
+      "subject": "Application Review Process re-read by session bbcc741f on 2026-11-15 (S23)",
+      "claim": "the launch bar the paths page quotes - three qualifying sales, ten posts, sixty-day recency, site ownership, tagged special links, no reassessment after rejection - is what the official page states",
+      "method": "live fetch of the help page on 2026-11-15; the sentences below are transcribed from the response",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S23"
+      ],
+      "consequence": "Verbatim: \"our Associates team will check your application once you've driven qualified sales (we require at least three within the first 180 days). Please note that personal orders do not qualify.\"; \"All Sites must have robust original content (even when advertising is removed) - a good rule of thumb is at least 10 posts. They must be publicly available\"; \"Content on your website must be recent (generally within the last 60 days). You must own your website.\"; \"Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application.\"; \"Unfortunately, we aren't able to reassess an application once it's been rejected.\" Accepted social networks are listed by name (Facebook open group and fan pages, Instagram, Twitter, YouTube, TikTok, Twitch.tv) with \"in most cases, at least 500\" organic followers or likes required and the exact page URL demanded. Published on paths.html as the launch bar."
     }
   ]
 }

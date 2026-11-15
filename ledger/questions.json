@@ -55,7 +55,7 @@
     {
       "id": "Q-04",
       "question": "Will the public site run on a domain the owner controls?",
-      "known": "Associates applicants must own their website (S23). The live site is at kanlerxz87-cyber.github.io.",
+      "known": "Associates applicants must own their website (S23). The live site is at kanlerxz87-cyber.github.io. Re-read 2026-11-15: the same page also states that a rejected application cannot be reassessed (\"we aren't able to reassess an application once it's been rejected\"), so the ownership test is decided once, not on appeal.",
       "missing": "Whether a domain is owned. Whether an applicant can use a github.io address under the ownership test. The Associates pages do not settle the second point; it is not verified.",
       "how_to_find": "Owner buys or confirms a domain. Owner asks Associates support about github.io if that is the plan (contact link on S01).",
       "blocks": [
@@ -258,6 +258,23 @@
       "source_ids": [
         "S23",
         "S22"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-18",
+      "question": "Were these three link.amazon short links minted in your own Associates account, and under which Tracking ID?",
+      "known": "Each supplied link resolves, reproducibly, to one live amazon.com listing (V-83…V-85). The token in the URL is a service-issued identifier, not an ASIN: putting a real ASIN in the same position returns 'invalid URL' (V-86, S36). None of the three resolved URLs carries an Associates tag= parameter (F-24), and the click passes through amzlinks.in before reaching amazon.com (F-20).",
+      "missing": "Whether an Associates account and Tracking ID exist on the owner's side that these three tokens belong to, and therefore whether any click through them is attributed to the owner at all. Only the account that created them can see that; nothing public maps a token back to a creator.",
+      "how_to_find": "Owner: Associates Central > Tools > Links, or SiteStripe > Get Link on each product page - a link created by your account is listed there with its Tracking ID. If these three are not in that list, they belong to someone else's account and must not be published as the site's affiliate links.",
+      "blocks": [
+        "SG-01",
+        "SG-08"
+      ],
+      "source_ids": [
+        "S33",
+        "S36",
+        "S02"
       ],
       "owner": "owner"
     }

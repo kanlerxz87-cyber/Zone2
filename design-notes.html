@@ -35,9 +35,12 @@
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html">Tracking</a>
+      <a href="journal/index.html">Journal</a>
       <a class="nav-quiet" href="verification.html">Verification</a>
       <a class="nav-quiet" href="sources.html">Sources</a>
       <a class="nav-quiet" href="flagged.html">Flagged</a>
+      <a class="nav-quiet" href="pages/suggestions.html">Suggestions</a>
+      <a class="nav-quiet" href="pages/questions.html">Questions</a>
       <a class="nav-quiet active" href="design-notes.html">Design notes</a>
     </nav>
   </div>
@@ -172,6 +175,79 @@
           <h4>An owned newsletter — built within the rules</h4>
           <p>Email placement of Special Links is permitted only for solicited communications under the Program Policies. A double-opt-in recipe newsletter around the air-fryer niche would be a compliant owned channel — but it needs real content cadence and an owner decision about operating it.</p>
           <div class="status-note">Owner decision required (operations, not code).</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="t46">
+      <h2 class="section-title">T46 — the front-of-house polish pass (2026-11-15, session <code>4b6b53e7</code>)</h2>
+      <p class="section-sub">The owner brief asked for a polished marketing presentation that does not read
+      like generated filler, with the suggestion flow kept intact. What changed in this pass — same ledger,
+      same gates, no value added, nothing hidden:</p>
+      <div class="card"><ul style="margin:0;padding-left:20px;font-size:14px">
+        <li><strong>Corruption repaired.</strong> The live landing page carried merge debris — stray
+        <code>EAD</code> lines, a stray <code>in</code>, and a duplicated footer link (introduced by the
+        PR #88 merge; stray text broke no link-check, so the gates never saw it). Fixed here and recorded
+        in <code>docs/t42-redesign-2026-11-15.md</code>.</li>
+        <li><strong>One navigation, two tiers.</strong> Fourteen mixed links became seven primary
+        destinations and a quieter evidence row (Verification, Sources, Flagged, Suggestions, Questions,
+        Design notes), applied identically to every root page.</li>
+        <li><strong>Product cards now lead with the verified specs.</strong> Each card renders the
+        capacity, power and temperature rows from the same ledger the products page uses — every value
+        with its <code>source ↗</code> link to the official page. Price, rating and availability stay on
+        the card as explicit blanks; the honesty is the differentiator, not a defect to hide.</li>
+        <li><strong>The editorial got a front door.</strong> The three Journal pieces and the Counter
+        Notes publication are surfaced directly on the landing page with their own words as teasers.</li>
+        <li><strong>The commission KPI was de-ambiguated.</strong> The old card printed a single
+        &ldquo;4.00%&rdquo; that could be misread as these products&rsquo; rate (irregularity R86-02). It
+        now shows the two Table 1 bands (Kitchen 4.50%, All Other 4.00%) and states that which applies to
+        the listings is open question Q-08.</li>
+        <li><strong>Typography and rhythm tightened.</strong> Larger display scale for the hero and
+        section titles, more air between sections, quieter table headers — presentation only; no claim,
+        count, or source changed.</li>
+      </ul></div>
+
+      <h3 style="font-size:20px;margin:26px 0 10px">Queued by this pass — proposals awaiting an owner decision</h3>
+      <p class="section-sub">Same rule as every suggestion here: options, a recommendation, and a status
+      that stays &ldquo;Proposed&rdquo; until a choice is recorded on the
+      <a href="pages/suggestions.html">decision board</a> (design question SG-06).</p>
+      <div class="suggest-grid">
+        <div class="suggest-card">
+          <div class="s-kicker">Landing composition</div>
+          <h4>Hero imagery vs. typography-only</h4>
+          <p><strong>Options:</strong> (A) keep the typographic hero — no image rights questions, loads
+          instantly, unusual for the niche; (B) add manufacturer press images behind a verified licence
+          check (open question Q-10 / discovery item D-03); (C) render an inline SVG spec-comparison
+          graphic from ledger data (sourced, no rights questions).</p>
+          <div class="status-note">Proposed — awaiting owner decision. This pass shipped A, the safe
+          default; C is the recommended next step because every shape it draws traces to a ledger row.</div>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">Conversion</div>
+          <h4>Where the primary CTA points</h4>
+          <p><strong>Options:</strong> (A) &ldquo;Meet the three products&rdquo; → products.html
+          (shipped); (B) straight to the Journal for a softer editorial entry; (C) per-product landing
+          pages once ASINs are confirmed (the existing suggestion, still blocked by F-01…F-03, F-24).</p>
+          <div class="status-note">Proposed — awaiting owner decision. Evidence to decide with: Search
+          Console behaviour after first index (discovery item D-01).</div>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">Evidence UX</div>
+          <h4>A dedicated &ldquo;Flagged&rdquo; summary strip per section page</h4>
+          <p><strong>Options:</strong> (A) keep flags concentrated on flagged.html and the landing
+          preview (shipped); (B) add a compact per-page flag strip to products/analysis so the caveat
+          travels with the data.</p>
+          <div class="status-note">Proposed — awaiting owner decision. B touches generated-adjacent
+          surfaces and should follow the one-decision-store rule (DP-28).</div>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">Voice</div>
+          <h4>Apply the T46 tone pass to the generated views</h4>
+          <p>The landing&rsquo;s tighter prose style could be carried through <code>pages/</code>,
+          <code>decisions/</code> and the generated views — a generator change, owned by
+          <code>tools/</code>, and therefore a decision for the generator&rsquo;s owner, not a CSS pass.</p>
+          <div class="status-note">Proposed — awaiting owner decision. Must ship with its gate replay
+          (build_site --check, validate_data).</div>
         </div>
       </div>
     </section>
