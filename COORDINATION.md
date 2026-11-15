@@ -2894,7 +2894,6 @@ Fixed on main (verified here): the hub's product-mapping rows. Residual: eight r
 
 Verification complete; all gates green on the merged tree. PR → merge → Pages deploy confirmation
 and the closing record follow in the next entry.
-=======
 ## T26 — closing record (session `d3ce1c29`, 2026-11-14)
 
 | Item | Value |
@@ -2910,6 +2909,7 @@ and the closing record follow in the next entry.
 | T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
 | T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | done (PR and merge recorded below) | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
 | T30 | Primary-dashboard integration of the canonical Suggestions decision board and Questions register; avoid duplicate data/decision systems and make the existing evidence-led review path discoverable | done — PR #64 merged; Pages deploy confirmed | `arena/fb49a226-zone2` | `index.html`, `COORDINATION.md` |
+| T31 | **Independent verification-only re-test (no shared file edited).** Line-by-line re-verification of the merged T29 deliverable: every factual claim in `ledger/suggestions.json` (SG-01…SG-10) and `ledger/questions.json` (Q-01…Q-16) re-checked against the official source it cites; rendered `pages/suggestions.html` / `pages/questions.html` checked against the ledgers row by row; every source link resolved; all repo gates re-run on the combined tree; live GitHub Pages deployment confirmed; status audit of open PR #62 (T30). Findings published as `docs/verification-42fa4918.md`; defects logged as change requests or new flags, never silently fixed. | done (PR and merge recorded below) | `arena/42fa4918-zone2` (42fa4918) | `docs/verification-42fa4918.md` (new), `COORDINATION.md` (append-only records only) |
 
 ### What shipped
 
@@ -2950,8 +2950,6 @@ Four sessions merged nine pull requests to `main` during this one task. Ledger i
 one day (F-20/F-21, F-22, F-27, F-28, F-29, plus S36 and V-51…V-62). `check_ledger_ids_unique` now fails the
 build rather than letting a collision ship. And the lesson three sessions have now recorded: **a drift gate
 proves the data matches the ledger, not that the sentence is true — read the deployed page.**
->>>>>>> origin/main
-
 ---
 
 ## Closing record — T28 — `e9c8362c` (2026-11-14 UTC)
@@ -3288,3 +3286,51 @@ gate only scanned `flag_ids`. Reading the re-deployed live page is what caught i
 | Fix 1 | RQ-19 prose now points at **SG-05** on the canonical board. Zero `SUG-` strings remain in any ledger or generated page. |
 | Fix 2 | `check_cross_references` now scans the **whole row blob**, prose included, not just `flag_ids`. Verified against an injected `SUG-77` placed in an `evidence` field. |
 | Lesson | Recorded plainly: two consecutive fixes were needed because the first check was narrower than the defect class. A gate written to the instance you just found will miss its siblings — scope the check to the whole record. |
+
+## Session claim — `arena/42fa4918-zone2` (session `42fa4918`, 2026-11-15 UTC)
+
+**Claimed:** T31 (board row above) — independent verification-only re-test. **Scope:** `docs/verification-42fa4918.md` (new) and this file, append-only records only. No ledger, generator, generated page, root page or dataset is edited by this session; anything found is logged as a change request or a new flag for the owning/next session.
+
+**Board state at claim:** `main` = `9f1e2ff` (merge of PR #61, T29 by `2499438c`, merged 2026-11-15). One open PR: **#62** (`arena/fb49a226-zone2`, T30 — root `index.html` integration of the canonical T29 pages + this board's T30 row; check run cancelled by the shared `pages` concurrency group per its own record). That PR is fresh (created ~2026-11-15 11:42 UTC), so it is **not** taken over here. This session's branch (`arena/42fa4918-zone2`, platform-fixed) was rebased onto `main` at claim time; it edits no file that PR #62 touches.
+
+**Why this task is needed.** T29's own record honestly marks several checks as *not re-read on the day* (V-7: the §6 rules cited by the new rows; V-8: the Table 1 bands cited by SG-02/Q-11). The project brief requires line-by-line verification with an official source for every claim. T31 closes that gap with an independent pass performed after the merge, on the combined tree.
+
+**Plan:** (1) re-run every repo gate on the combined tree and reconcile the page count (T29's record says 97; PR #62's says 96); (2) re-check all 10 suggestion rows and 16 question rows against the ledgers and against the official sources they cite (S01, S02, S07, S19–S21, S23, S24, S32 and the rest of `ledger/sources.json` as referenced); (3) confirm the live Pages deployment of the two new pages; (4) audit open PR #62 for factual claims and scope; (5) publish `docs/verification-42fa4918.md` with one verdict per claim — verified / not re-verifiable today (left blank, flagged) — each with its source link.
+
+
+## Session record — `arena/42fa4918-zone2` (session `42fa4918`, 2026-11-15 UTC) — T31
+
+**Claimed:** T31 (board row above). **Scope:** `docs/verification-42fa4918.md` (new) + this file, append-only. Full detail, verdict table (V-83…V-108), and evidence live in the report; this record summarises.
+
+**Board state during work:** `main` moved twice while this session worked: `9f1e2ff` (PR #61, T29) → `f9a86bd` (PR #64, T30 dashboard integration) → `f30c7aa` (PR #66, T30 closing record). PR #62 was closed unmerged by its own session, superseded by #64 (its record on `main` documents this). `origin/main` was merged into this session's branch before every push; one COORDINATION.md conflict was resolved by keeping both sessions' records (nothing discarded).
+
+**Scope amendment (recorded before the edit).** Resolving that conflict exposed **pre-existing** conflict debris committed on `main` inside this file (present at this session's branch base `e030c40`, i.e. the PR #60 lineage — before T29/T30): a stray `=======` line, a stray `>>>>>>> origin/main` line, and a duplicated fragment (a second "## T26 — closing record" heading mixed with later-session content) between them. The **two stray marker lines were removed** so future merges cannot mis-read them as conflict boundaries; **the duplicated fragment was left byte-identical for owner review**. Logged as **F-42** on the Flagged for Review page path via this record and the report.
+
+### Verification performed (2026-11-15, fetched live; full tables in `docs/verification-42fa4918.md`)
+
+| # | Check | Verdict | Source |
+|---|---|---|---|
+| V-83…V-89, V-94…V-99 | Every §-clause and threshold cited by SG-01…SG-10 and Q-01…Q-16 (3 sales/180 d, personal orders, own-website, 10 posts, 60-day content, tax-interview link, ~60-day payment, 10-sales/30-d Creators API, ASIN length, §2(a) Associates-ID rule, §6(t)/(w)/(y)/(z), §2(b) R-04/R-06/R-08 bases) | **Verified verbatim** on the official pages today — closes the two gaps T29's own record marked "not re-read today" (its V-7/V-8) | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM · https://affiliate-program.amazon.com/help/operating/policies · https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction · https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| V-90 | Unknown-code control `link.amazon/B00TEST12` → 404 "invalid URL" | **Reproduced today** | https://link.amazon/B00TEST12 |
+| V-91…V-93 | The three supplied links resolve, today, to exactly B0CDY277D3 / B09B7SB46R / B08DKYBTPH with the S19–S21 titles, the shared Air Fryers breadcrumb, `plpRedirect=mhFallback` and rotating `btn_ref` tokens | **Reproduced today** (evidence only; not confirmed ASINs — F-01/F-03/F-28 unchanged) | https://link.amazon/B04G1MEwY · https://link.amazon/B02NbDxp3 · https://link.amazon/B00hJ57DV |
+| V-100…V-101 | Table 1 bands cited by SG-02/SG-08/Q-08 (Kitchen 4.50%, Home 3.00%, All Other 4.00%) and the decision to leave the band unconfirmed | **Verified verbatim**; the breadcrumb names neither band, so asserting no rate is correct | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| V-102…V-105, V-108 | OA §5 disclosure + "substantially similar" allowance, §4 no-income-guarantee, both document dates (Oct 15 2025 / Apr 14 2026), FTC "clearly and conspicuously", Japan in the country selector | **Verified verbatim / reproduced** | https://affiliate-program.amazon.com/help/operating/agreement · https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking |
+| V-106…V-107 | S09 tools/reports page and the GitHub Pages serving of this site | **Verified** | https://affiliate-program.amazon.com/welcome/topic/tools · Pages API (`status: built`, source `main` `/`) |
+| — | Rendered `pages/suggestions.html` / `pages/questions.html` vs the ledgers | **26/26 rows match**, options/recommendations/sources render; every one of the 24 unique external hrefs on the two pages is a registered source | repo check |
+| — | All repository gates on the combined tree | **PASS** — 5 build-drift gates, `validate_data` (0 err / 0 warn), `test_pipeline` 15/15, `audit_site` **97 pages all classes PASS**, research-hub rebuild+verify, marketing gate (502 links, 0 failures), affiliate-lab gate | repo run |
+| — | Live Pages deployment | **Confirmed** — `pages/suggestions.html` and `pages/questions.html` served live with tables and source links; root dashboard links both (T30) | https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html |
+
+**Extra evidence recorded for the owner (Q-10 path, register untouched):** the IP License section of the official policies page was read in full — License §1 (copy/display solely on your Site), §2(h) (no image caching), §2(i) (dated stamp + disclaimer for any price/availability), §2(k) ("CERTAIN CONTENT…" notice), Trademark Guidelines (marks only with a Special Link, unaltered), and **§4 Agent Terms** (any autonomous software must identify as `Agent/[name]` and must not mimic humans or bypass CAPTCHAs — relevant to this platform's automation layer). Recorded in the report, §7.
+
+### Findings (flagged for review — none blocking)
+
+1. **F-42** — pre-existing conflict debris in this file on `main` (details + scope amendment above). Markers removed; duplicated fragment left for owner review.
+   **ID-collision note:** session `d0135100` reserved **F-39…F-41** for its RF-01…RF-03 findings (its CR-6) while this session worked, so this session's finding is numbered **F-42** — the next free id. No flag id is reused and no other session's flag was overwritten; `ledger/flags.json` still holds F-01…F-38.
+2. **Page-count note** — T29's record says 97 audited pages, T30's says 96; this session measures **97** on `main` = `f30c7aa`. Bookkeeping note only; every gate passed on each session's own tree.
+3. **CR-9 (change request)** — the executive summaries are current through F-38 but do not yet mention the T29/T30 surfaces (`pages/suggestions.html`, `pages/questions.html`). Suggest a short subsection; not edited here (shared output).
+4. **Carried forward** — "verified 2026-11-14" eyebrow on pages checked 2026-11-15 (recorded by T29); stale `in progress` T27 row (flagged by `2499438c`); F-01/F-03 (ASINs), F-05 (API registration), F-07/F-24 (no Associates tag).
+
+**Open-PR audit at close:** #62 closed unmerged (superseded by #64, per its own record); #64/#66 merged; **#65** (`bf8f07a7`, open — `marketing/trending-topics.html` + nav) audited from its diff: its earlier root-level suggestions/decisions duplicates were dropped, its claims match the sources verified above, and its file scope does not overlap T31. Fresh claim from an active session — not taken over.
+
+**PR, merge and deploy:** PR opened from this branch — number, merge commit and deploy runs recorded in the closing entry that follows this record.
+
