@@ -4639,7 +4639,7 @@ once confirmed).
 | Session | `arena/3e0b3b4e-zone2` (`3e0b3b4e`) |
 | Task | **T46 — the discovery review, the machine-readable layer and the measurement design.** What a line-by-line review measured, what information is missing, what could change and at what cost — published as a decision surface, with the gates that keep it honest. |
 | Status when claimed | `in progress`; closing record appended at the end of this file |
-| Pre-state checked | `main` @ `7ac0480` at rebase time. All existing gates replayed green before and after every commit: `validate_data` 0 errors / 82 rows / 42 sources · `audit_site` 122 pages 5×PASS · every generator `--check` clean · `validate_decisions` clean · `tests/test_pipeline.py` 15/15 · the full 26-step CI job replayed locally. |
+| Pre-state checked | First rebased onto `7ac0480`, then onto `2978e21` after six more merges landed. All existing gates replayed green on the final tree: `validate_data` 0 errors / 82 rows / 42 sources · `audit_site` 5 checks × PASS · all 9 generator `--check`s · `validate_decisions` · `tests/test_pipeline.py` 15/15 · the full 29-step CI job replayed locally. |
 
 ### File scope actually touched (narrower than the original claim)
 
@@ -4647,10 +4647,11 @@ once confirmed).
 `docs/discovery-t40-sources.json` (17 sources, S43–S59, quoted) · `docs/measurement-t40.json` ·
 `docs/design-brief-t40.md` · `tools/build_discovery.py` · `tools/build_measurement.py` · `tools/build_meta.py` ·
 `tools/page_meta.py` · `tools/validate_discovery.py`
-**Modified:** `sitemap.xml` (regenerated) · `tools/build_sitemap.py` · `tools/build_root_views.py` (one
-import + two-line change, so its `--check` compares the page it authored) · `tools/build_summary.py` (same) ·
-`.github/workflows/pages.yml` (five additive gate steps) · `README.md` (structure) · `EXECUTIVE_SUMMARY.md`
-(dated addendum) · this file.
+**Modified:** `sitemap.xml` (regenerated through the *merged* generator, not a second one) ·
+`tools/build_root_views.py` (one import + a two-line change, so its `--check` compares the page it authored
+rather than the generated head layer) · `tools/build_summary.py` (the same two-line change) ·
+`.github/workflows/pages.yml` (five additive gate steps) · `README.md` (structure) ·
+`EXECUTIVE_SUMMARY.md` (dated addendum) · this file.
 
 **Deliberately not touched**, unlike the original claim: `tools/build_marketing.py`, `marketing/**`,
 `tools/build_decisions.py`, `ledger/**`, `tools/audit_site.py`, `tools/validate_decisions.py`, and every root
