@@ -78,6 +78,11 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | done — closing record by `ba8b2d38` below (PRs #48/#51/#54 merged 2026-11-14, CI + Pages deploy confirmed); status cell corrected 2026-11-15 by `8c4236ad`, see the T30 session record | `arena/0f44536f-zone2` → completed by `arena/ba8b2d38-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
 | T32 | **Renumbered three times** (id collisions of the day): claimed as T29 → T29 shipped first by `2499438c` (PRs #61/#63) → renumbered T30 → **T30 claimed and shipped by `fb49a226`** (dashboard integration, PRs #64/#66) → renumbered T31 → **T31 claimed and shipped by `42fa4918`** (verification-only re-test of T29, PRs #72/#76) → **renumbered T32**. Nothing any of them published is duplicated or overwritten; the nav-link part of this session's original scope was dropped after `fb49a226`'s T30 landed the same links (my two duplicate nav entries removed; my complementary footer links kept). T32 = the work T29/T30/T31 did not cover: (1) editorial upgrade of the destination-only marketing set — tone and structure only, zero fact changes, every row's source intact (takeover per 60-minute rule: `marketing/**` owner `a3faf404` finished; the T27 marketing scope was completed and merged by `ba8b2d38`, no active claimant); (2) additive links from the root dashboard to the two new decision-support pages (`pages/suggestions.html`, `pages/questions.html`); (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm. | done — shipped via PR #75 (merge `fc98d0c`), closing record at the end of this file; status cell corrected 2026-11-15 by session `f6af67c3` (T44, audit item I-C) | `arena/8c4236ad-zone2` (8c4236ad) | `COORDINATION.md` (records + the T27 status correction above), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), NEW `docs/verification-8c4236ad.md` |
 
+---
+
+| T32 | **Renumbered three times** (id collisions of the day): claimed as T29 → T29 shipped first by `2499438c` (PRs #61/#63) → renumbered T30 → **T30 claimed and shipped by `fb49a226`** (dashboard integration, PRs #64/#66) → renumbered T31 → **T31 claimed and shipped by `42fa4918`** (verification-only re-test of T29, PRs #72/#76) → **renumbered T32**. Nothing any of them published is duplicated or overwritten; the nav-link part of this session's original scope was dropped after `fb49a226`'s T30 landed the same links (my two duplicate nav entries removed; my complementary footer links kept). T32 = the work T29/T30/T31 did not cover: (1) editorial upgrade of the destination-only marketing set — tone and structure only, zero fact changes, every row's source intact (takeover per 60-minute rule: `marketing/**` owner `a3faf404` finished; the T27 marketing scope was completed and merged by `ba8b2d38`, no active claimant); (2) additive links from the root dashboard to the two new decision-support pages (`pages/suggestions.html`, `pages/questions.html`); (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm. | done — PR #75 merged (see closing record) | `arena/8c4236ad-zone2` (8c4236ad) | `COORDINATION.md` (records + the T27 status correction above), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), NEW `docs/verification-8c4236ad.md` |
+| T40 | **Final integration + independent verification for the 2026-11-15 request.** (1) Independent live re-verification of the three supplied `link.amazon` links and the official program/manufacturer sources they rest on; (2) re-run every repository gate on the combined tree; (3) line-by-line review of every published deliverable against the brief (polished marketing affiliate site, Suggestions decision board, Questions/Answers register, executive summary, per-row source links, blank-or-flagged rule); (4) complete the deferred **F-42** repair: remove the byte-duplicated session-record fragments in this file (the second copy of `42fa4918`'s and `8c4236ad`'s records; the unique T39 record sandwiched inside the duplicate is kept); (5) confirm the live GitHub Pages deployment serves every page with no broken links; (6) integration PR → merge → confirm deploy → record. **Non-overlap:** `marketing/**`, `assets/css/style.css`, `pages/assets/**`, `tools/build_site.py`, `tools/build_decisions.py` are owned by the open PRs #89 (`1b839f87`) and #70 (`cffe745a`) and are NOT edited; cross-scope requests are logged here instead. | in progress | `arena/0e50a68a-zone2` (0e50a68a) | `COORDINATION.md` (append-only records + the F-42 dedup repair), NEW `docs/verification-0e50a68a.md`, `EXECUTIVE_SUMMARY.md` (additive addendum only) |
+
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
 Recorded here rather than edited into other sessions' files or claims, per the coordination rules.
@@ -4599,3 +4604,41 @@ confirmation.
 
 Both were bugs this session created or found live, not hypotheticals, which is the only reason they
 were worth a gate each.
+
+---
+
+---
+
+---
+
+---
+
+---
+
+## Session claim — T40 — `arena/0e50a68a-zone2` (session `0e50a68a`, 2026-11-15 UTC)
+
+**Claimed:** T40 (board row above). **Scope:** the files listed in the T40 row only.
+**Branch note:** Arena pins this session to `arena/0e50a68a-zone2` (the project's `session-<id>/<task>`
+branch naming is not available because the branch name is fixed by the harness) — same documented
+deviation as every prior session.
+
+**Board state at claim (2026-11-15 ~13:10 UTC):** `main` = `ceaf9a79` (merge of PR #88). Two PRs open,
+both from other active sessions:
+
+| PR | Session | Files | Status |
+|---|---|---|---|
+| #89 | `arena/1b839f87-zone2` (1b839f87) | `assets/css/style.css`, `pages/assets/dashboard.css`, `tools/build_decisions.py`, `tools/build_site.py`, `COORDINATION.md` | font-path repair; fresh, NOT taken over |
+| #70 | `arena/cffe745a-zone2` (cffe745a) | `marketing/articles/index.html`, `marketing/articles/topic-air-fryer-vs-oven.html`, `marketing/articles/topic-worth-it.html`, `COORDINATION.md` | trendy marketing articles; fresh, NOT taken over |
+
+**Non-overlap guarantee.** This session does **not** edit `marketing/**`, `assets/css/style.css`,
+`pages/assets/**`, `tools/build_site.py`, `tools/build_decisions.py`, `ledger/**`, `pages/**` (generated),
+`research-hub/**`, `zone2/**`, `northstar/**`, `affiliate-lab/**`, `revalidation/**`, `decisions/**`,
+`journal/**`, `tests/**` or `.github/**`. The only shared file edited is this board: append-only records
+plus the F-42 dedup repair (removal of byte-identical duplicate fragments, no session's unique text
+discarded). Any change this session identifies in another session's files is logged as a change request
+below, not implemented.
+
+**Plan:** (1) live re-verification of the three supplied links + official program/manufacturer sources;
+(2) replay every workflow gate locally on the combined tree; (3) line-by-line review of the published
+deliverables against the brief; (4) F-42 dedup repair on this file; (5) live-deploy confirmation with a
+cache-busted fetch of the key entry points; (6) integration PR → merge → deploy → closing record.
