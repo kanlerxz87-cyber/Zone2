@@ -825,7 +825,14 @@ def vendor_assets(out_root: Path) -> None:
         # fonts via relative url(...)s. Vendored one level deeper (decisions/assets/),
         # those paths would resolve into decisions/assets/fonts/, which does not exist;
         # rewrite them to point back at the repository-root font files.
-        text = src.read_text(encoding="utf-8").replace('url("../fonts/', 'url("../../assets/fonts/')
+        # Either authoring form is normalised to the repository-root font files: this copy is
+        # published from decisions/assets/, so ../fonts/ and assets/fonts/ both resolve inside the
+        # namespace and 404. Repaired from two sides on 2026-11-15 - session 1b839f87 fixed the
+        # source sheet and the copies, session bbcc741f made the builders tolerant of both forms so
+        # a stylesheet move cannot silently cost a namespace its webfonts (F-39).
+        text = (src.read_text(encoding="utf-8")
+                .replace('url("../fonts/', 'url("../../assets/fonts/')
+                .replace('url("assets/fonts/', 'url("../../assets/fonts/'))
         dest.write_text(header + text, encoding="utf-8")
     site_css = REPO / "tools" / "pages-site.css"
     if site_css.is_file():

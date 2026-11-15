@@ -1,0 +1,171 @@
+{
+  "note": "The missing-information register the brief asks for: a clear list of what must be known before a decision can reasonably be made, what is verified today, what is missing, and how the gap can be closed — with the closing action assigned to whoever can actually do it. An answer cell is never filled with an inference: it holds the observed value with its source, or the literal word OPEN.",
+  "as_of": "2026-11-15",
+  "gaps": [
+    {
+      "id": "G-01",
+      "question": "Is there an approved Amazon Associates account, in which marketplace, and what is the Associate ID / tag?",
+      "blocks": ["R-13", "R-05", "R-06", "D-01"],
+      "status": "OPEN",
+      "known": "None of it is in this repository. No page, ledger row or configuration file contains a tag parameter; a search of all 116 published pages for a tag= parameter returns zero matches, which is consistent with the absence rather than proof of it.",
+      "missing": "Account status; marketplace (amazon.com vs amazon.co.jp, see G-14); the Associate ID (XXXXX-##); whether the account has met the review threshold.",
+      "how_to_close": "Owner signs in to Associates Central → Account Settings. The agent cannot see an owner's account and must never ask for the credentials in chat; the owner pastes the tag (public in every tagged URL) into a private place the build can read.",
+      "who": "owner",
+      "source_ids": ["SA-03", "SA-18"]
+    },
+    {
+      "id": "G-02",
+      "question": "Which three products are actually being promoted?",
+      "blocks": ["R-05", "R-08", "R-13", "D-01"],
+      "status": "PARTIALLY_ANSWERED",
+      "known": "Each supplied short link resolves, repeatedly and reproducibly, to one specific Amazon listing: link.amazon/B04G1MEwY → /dp/B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven); link.amazon/B02NbDxp3 → /dp/B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven); link.amazon/B00hJ57DV → /dp/B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry). Re-observed 2026-11-15 by this session for links 1 and 2, and carried from the ledger for link 3.",
+      "missing": "Any Amazon document that binds a link.amazon short code to a destination ASIN. The codes as supplied are nine characters and an ASIN is ten, so the codes cannot be read as ASINs. No resolved URL carries an Associates tag, so the links as supplied cannot attribute a commission.",
+      "how_to_close": "Owner opens each link while signed in to Associates Central and reads the destination product; then regenerates each link with SiteStripe so it carries the tag.",
+      "who": "owner",
+      "source_ids": ["SA-03", "SA-07"]
+    },
+    {
+      "id": "G-03",
+      "question": "Is the site meant to measure anything, and may it?",
+      "blocks": ["R-05", "D-05"],
+      "status": "OPEN",
+      "known": "No analytics, consent tool or click endpoint is deployed. The privacy-minimal click design exists in tools/redirect_server.py + tools/tracking_schema.sql and writes to a path excluded from this repository.",
+      "missing": "The owner's decision on measurement posture; the hosting for any first-party counter; the privacy statement that would accompany it; any consent requirement in the jurisdictions the audience sits in.",
+      "how_to_close": "Owner picks A/B/C in R-05. If B, the agent ships the counter and a privacy page; no visitor identifier may ever be stored (that is a programme rule, not a preference).",
+      "who": "owner",
+      "source_ids": ["SA-03"]
+    },
+    {
+      "id": "G-04",
+      "question": "Can this project obtain product data through an authorised API?",
+      "blocks": ["D-06", "R-08"],
+      "status": "OPEN",
+      "known": "PA-API 5.0 is deprecated; Creators API is the replacement, and the ledger records an eligibility threshold (carried, not re-fetched this session, SA-19). Without an approved account no approved API access exists.",
+      "missing": "Whether the Creators API application has been made and approved; the actual quota; whether the account meets the threshold.",
+      "how_to_close": "Owner checks Associates Central → Tools for Creators API availability after approval; the ledger rows S06/S07 should be re-fetched and re-dated at the same time.",
+      "who": "owner",
+      "source_ids": ["SA-19", "SA-04"]
+    },
+    {
+      "id": "G-05",
+      "question": "Who is the named author or editor, and is that a real person?",
+      "blocks": ["R-07", "D-10"],
+      "status": "OPEN",
+      "known": "No author, editor, About page or contact route exists anywhere in 116 pages (measured).",
+      "missing": "A person willing to be named as responsible for the content, and the byline/About copy.",
+      "how_to_close": "Owner supplies the name and the one-paragraph method statement. The agent must not invent a persona: a fabricated author is both a trust failure and a violation of the site's own editorial rule.",
+      "who": "owner",
+      "source_ids": ["SA-12", "SA-17"]
+    },
+    {
+      "id": "G-06",
+      "question": "Which commission band applies to each of the three ASINs?",
+      "blocks": ["D-07"],
+      "status": "OPEN",
+      "known": "The published rate card has eleven bands from 10.00% to 0.00%; the resolved listings sit in Home & Kitchen → Kitchen & Dining → Small Appliances → Fryers → Air Fryers, which reads as the 'Physical Books, Kitchen, Automotive — 4.50%' band, but reading a breadcrumb as a classification is an inference.",
+      "missing": "An official statement that maps each of these three ASINs to a fixed-rate band. Amazon publishes the rate table, not a per-ASIN classification.",
+      "how_to_close": "Owner reads the rate shown against a settled transaction in the Associates earnings report, or requests classification from Associates support in writing. Until then the site must not state a per-product rate.",
+      "who": "owner",
+      "source_ids": ["SA-04", "SA-18"]
+    },
+    {
+      "id": "G-07",
+      "question": "Does a github.io address satisfy the Associates site-ownership test?",
+      "blocks": ["D-01", "R-13"],
+      "status": "OPEN",
+      "known": "The programme asks that the Site be publicly available at the address in the application and that the applicant own the site; the live site is kanlerxz87-cyber.github.io/Zone2.",
+      "missing": "Any official statement about free subdomains. This session searched the Agreement, the Program Policies and the Participation Requirements and found no sentence that settles it. Absence of a prohibition is not permission.",
+      "how_to_close": "Owner asks Associates support in writing, or registers a domain the owner controls and moves the site there (which resolves the question without needing an answer).",
+      "who": "owner",
+      "source_ids": ["SA-08"]
+    },
+    {
+      "id": "G-08",
+      "question": "Which pages are meant to be public?",
+      "blocks": ["R-06", "R-10", "D-11"],
+      "status": "OPEN",
+      "known": "114 non-404 pages are published; the sitemap declares 16; a second sitemap in marketing/ declares 18; eight flag registers and six product pages exist.",
+      "missing": "The owner's intended public set, and whether the archive namespaces are evidence, history, or content.",
+      "how_to_close": "Owner picks R-06/B or A; the agent generates one sitemap from the declared set and marks everything else explicitly.",
+      "who": "owner",
+      "source_ids": ["SA-10"]
+    },
+    {
+      "id": "G-09",
+      "question": "May the site use Amazon customer reviews, star ratings, or manufacturer imagery?",
+      "blocks": ["R-08", "D-12"],
+      "status": "PARTIALLY_ANSWERED",
+      "known": "Customer reviews and star ratings may only be used if obtained through Creators API / PA API (SA-05). Manufacturer imagery may be used under the IP licence when it is Program Content displayed with a corresponding Special Link (SA-09).",
+      "missing": "Whether the specific manufacturer images for these three products are made available as Program Content, and whether the owner's account can reach them.",
+      "how_to_close": "Owner checks SiteStripe / Creators API for the three ASINs; anything not offered there is not covered by the licence and must not be used.",
+      "who": "owner",
+      "source_ids": ["SA-05", "SA-09"]
+    },
+    {
+      "id": "G-10",
+      "question": "What is the demand for these products, by keyword, in the target market?",
+      "blocks": ["D-13"],
+      "status": "OPEN",
+      "known": "Nothing. No keyword volume, rank or search-console data appears anywhere in the repository, and the site correctly prints no demand figure.",
+      "missing": "Authorised demand data of any kind.",
+      "how_to_close": "Owner connects Google Search Console (free, and the only source of the site's own query data) once a domain exists. Any third-party volume figure is an estimate by that vendor and must be published with its provenance or not at all.",
+      "who": "owner",
+      "source_ids": ["SA-15"]
+    },
+    {
+      "id": "G-11",
+      "question": "Which language and audience is the site for?",
+      "blocks": ["D-14"],
+      "status": "OPEN",
+      "known": "Every page is English. The Associate country selector lists Japan among supported marketplaces, and the project's own ledger records the operator's location as Osaka, Japan (carried).",
+      "missing": "Whether the audience is US, Japanese, or both; whether a Japanese-language version is required; whether the disclosure sentence in English is adequate for a Japanese-language page (the disclosure must be in the same language as the endorsement).",
+      "how_to_close": "Owner states the audience. If Japanese: the FTC-style English sentence is not the governing requirement — the Operating Agreement's English sentence is still required, and the surrounding page language must carry the disclosure too.",
+      "who": "owner",
+      "source_ids": ["SA-01", "SA-16"]
+    },
+    {
+      "id": "G-12",
+      "question": "What did the three products cost, and is there a dated record of anyone handling them?",
+      "blocks": ["D-12", "R-08"],
+      "status": "OPEN",
+      "known": "No price is stored anywhere, by design, and no test record exists. The editorial rule already forbids first-hand claims without a dated record.",
+      "missing": "Any observation of the physical products.",
+      "how_to_close": "Owner (or a named tester) handles the product and records it with a date. Until then the site must keep saying it has not tested them — which it does, and which is more trustworthy than the alternative.",
+      "who": "owner",
+      "source_ids": ["SA-14", "SA-16"]
+    },
+    {
+      "id": "G-13",
+      "question": "What will the site do about the three 'link.amazon' URLs that are already public in the brief?",
+      "blocks": ["D-02"],
+      "status": "OPEN",
+      "known": "The links are published on this site as evidence. They carry no Associates tag, so a click through them cannot attribute a commission to this project (SA-03).",
+      "missing": "A decision: replace them with tagged SiteStripe links, keep them as evidence only, or both.",
+      "how_to_close": "Owner picks. If 'both', the evidence pages keep the original URL as a citation (inside a source cell, unsponsored) and the reader-facing pages carry the tagged link.",
+      "who": "owner",
+      "source_ids": ["SA-03", "SA-07"]
+    },
+    {
+      "id": "G-14",
+      "question": "Are these products sold on the marketplace the owner's account belongs to?",
+      "blocks": ["D-01"],
+      "status": "OPEN",
+      "known": "All three resolved destinations are on amazon.com. This session did not check amazon.co.jp and must not assume the ASINs carry over.",
+      "missing": "A check of the same products on the owner's marketplace.",
+      "how_to_close": "Owner opens amazon.co.jp and searches the product names; the agent records what is observed, with the URL, or leaves it blank.",
+      "who": "owner",
+      "source_ids": ["SA-18"]
+    },
+    {
+      "id": "G-15",
+      "question": "Who reviews a change before it is published?",
+      "blocks": ["R-12", "D-15"],
+      "status": "OPEN",
+      "known": "This session runs every gate and merges without waiting for review, per the brief. The suggestions board exists so a change can be reviewed before it is implemented, which assumes an owner who looks.",
+      "missing": "The review cadence and the single decision channel.",
+      "how_to_close": "Owner states where decisions are recorded (the board, a message, an issue). Until then the board stays the single place, and no recommendation is implemented without an entry in its 'decision' field.",
+      "who": "owner",
+      "source_ids": []
+    }
+  ]
+}

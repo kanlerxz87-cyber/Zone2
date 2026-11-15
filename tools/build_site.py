@@ -1115,11 +1115,14 @@ def vendor_design_system(out_root: Path) -> None:
         "   Re-run the builder after changing the source. Kept as a copy so these pages do not\n"
         "   depend on root-level paths another session may move. */\n"
     )
-    # The shared sheet (assets/css/style.css) bundles its fonts as url("../fonts/...") relative to
-    # its own location. Vendored into pages/assets/, that resolves to pages/fonts/, which does not
-    # exist, so every page silently fell back to system fonts. Rewrite to the repository-root font
-    # files (pages/assets/ -> ../../assets/fonts/).
-    body = body.replace('url("../fonts/', 'url("../../assets/fonts/')
+    # The shared sheet (assets/css/style.css) bundles its fonts relative to its OWN location,
+    # and this copy lives one directory deeper (pages/assets/), so the URLs have to be re-pointed
+    # at the repository-root font files - otherwise every page silently falls back to system fonts
+    # (F-39). Repaired from two sides on 2026-11-15: session 1b839f87 corrected the source sheet and
+    # the vendored copies, session bbcc741f made both builders accept either authoring form so a
+    # future move of the stylesheet cannot re-break a copy that the link checker cannot even see.
+    body = body.replace('url("../fonts/', 'url("../../assets/fonts/').replace(
+        'url("assets/fonts/', 'url("../../assets/fonts/')
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(header + body, encoding="utf-8")
 

@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **38 flags (F-01 … F-38)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **40 flags (F-01 … F-40)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -696,3 +696,110 @@ anchor in the footer's Decisions column, which swallowed the link label) — log
 recoverable in git history. A second irregularity, the `@font-face` paths in `assets/css/style.css` resolving relative to the
 stylesheet (`assets/css/assets/fonts/…`, which 404s so the self-hosted fonts silently fall back), is flagged for the design
 system's owner and was not repaired from another session's file.
+
+<<<<<<< HEAD
+---
+
+## Addendum — 2026-11-15 · session `bbcc741f` (paths, the third-date re-check, and one real defect)
+
+Three things this pass adds to the picture above, and one thing it corrects.
+
+**1. A decision can now be taken in one move.** The suggestions board is ten rows of options, which is the right
+record and the wrong interface: an owner who agrees with seven of ten recommendations has not chosen a direction,
+they have filled a form. `paths.html` groups the same rows into three sequences that each make sense on their own
+terms — publish clean, earn, automate — with the letters taken straight from the board so nothing is
+re-litigated, the program's own launch bar quoted beneath them, and a "what no path authorises" table so a
+choice cannot accidentally read as permission for something the rules forbid. Path 1 is the default precisely
+because it *is* the board's recommendation set: if nobody records anything, the site is already that path.
+
+**2. The supplied links were checked again, by a new session, on a third date.** All three destinations
+reproduced exactly (`V-83`…`V-85`), as did the control that proves a `link.amazon` token is not an ASIN
+(`V-86`) — a live ASIN in the token position is refused by the hop service, so nothing outside the creating
+account can decode these links back to a product. Two consequences are unchanged and still decisive: no
+resolved URL carries an Associates `tag=`, so the links cannot pay this owner as supplied, and every product
+attribute therefore stays blank rather than being inferred from wherever a stranger's link happened to point.
+One consequence moved: the negative control `F-20` calls decisive answered **403** for an unissued token today,
+not the 404 the register recorded (`F-40`). The reading survives — the positive evidence is what carries it —
+but the site now says which leg it stands on instead of implying both are equal.
+
+**3. Amazon's review bar is now a published constraint, not folklore.** Re-reading the Application Review
+Process page (`V-89`) turned up two sentences that bear directly on every path and had not been carried into a
+decision surface: content must generally be "within the last 60 days", and — the one that should decide
+timetable — "we aren't able to reassess an application once it's been rejected". Rejection is terminal, so the
+cheap-to-fix failure mode is publishing thin content on a site the applicant does not own while holding no
+account; the expensive one is doing it once and being unable to try again. That is now the argument for the
+ordering on `paths.html`, and it is quoted rather than paraphrased so it can be checked in one click.
+
+**4. A defect in the site's own appearance, fixed.** The self-hosted typefaces had never loaded: the design
+system's `@font-face` rules resolved against the stylesheet's directory and pointed at a path that does not
+exist, so every page on the site — including the marketing surfaces built around a serif display face — had been
+rendering in fallback system fonts since the redesign. No gate could see it, because a link checker follows
+`<a href>` and not `url()`. It had been noticed and left alone for the wrong reason (the fix spans two
+namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
+class of bug — a resource a build cannot fail on — is on the record for the next time.
+
+**Numbers for the reviewer, all derived from the registers:** 40 flags, 43 sources, 89 logged checks, 17 open
+questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
+or performance figure: the site still has no authorised source for one, and an absent number beats an invented
+one.
+=======
+## Addendum — 2026-11-15 (session `f8e18ca8`): the independent review, the gaps, and the decision pack
+
+This session was asked for four things the brief keeps repeating — review the repo line by line, make
+suggestions that feed the design prompt, publish a section where a human can review and choose before
+anything is implemented, and produce the list of questions, information and answers that must exist
+before any decision is reasonable. It did no product work and changed no verified value. It reviewed
+the deployed site, published the review, and published the decisions.
+
+**The review, in one line.** The site's central claim holds — of 705 table rows across the 37
+generated findings pages, 523 end in an official-domain source link, 164 are explicit blanks, and the
+18 that are neither are internal contract rows, listed rather than waved through — and the site still
+cannot earn, for reasons that are almost all non-technical. Sixteen findings, each with the
+measurement that produced it, are published at `audit/index.html`.
+
+**The five that matter**
+
+| # | Finding | Severity |
+|---|---|---|
+| A-01 | The tables a reader comes for are not in the HTML. Eight root pages ship empty containers filled by a 102 KB script; with JavaScript off there is no product table, no findings table and no flag table. | high |
+| A-02 | The required disclosure sentence is on every page, but on 24 of the 77 pages that link to a product it appears **after** the first product link — on the landing page, 93% of the way down the file. | high |
+| A-05 | There is no measurement in production — no analytics, no click endpoint, no Associates report. Every tracking, conversion and optimization page describes a capability that has never processed a click. | high |
+| A-06 | 114 pages across eight directory namespaces describe the same three products: six pages called "products", eight flag registers. That is the shape Google's scaled-content and thin-affiliation sections describe. | high |
+| A-07 | No page names an author, an editor, or a contact route, and no page carries a date. The two questions Google's guidance asks first are unanswered on all 116 pages. | high |
+
+Also found and repaired inside this session's own scope: four lines of merge-conflict residue that
+were live in the landing page's footer (two stray `EAD` lines, two duplicated list items, one stray
+`in`), and the same stray `in` in this document. Logged as **A-16**, because the conflict markers
+themselves were gone and every gate passed — the residue was the *content* of a partially resolved
+merge. That is the failure mode the current gate suite cannot see, and it is now recorded rather than
+quietly cleaned.
+
+**The decision pack.** `audit/suggestions.html` carries 14 recommendations, each with its options, a
+recommendation, cost, risk, reversibility and the gap that blocks it — and **none of them is
+implemented**. `audit/gaps.html` carries 15 missing-information rows with what is verified, what is
+missing, how to close it and who can. `audit/decision-cost.html` adds the column most decision
+registers omit: what happens if nothing is decided. `audit/traffic.html` states, with quoted sources,
+what Google and Amazon actually document about earning organic traffic — and lists the five metrics
+every affiliate site publishes (volume, conversion rate, click-through, RPM, "trending") that no
+official source can verify, left blank.
+
+**What was built, and why it can be trusted.** `audit/` is generated from five JSON files by
+`tools/build_audit.py`; `tools/validate_audit.py` holds it to fourteen separate rules (every finding is
+verified-with-a-source or unverified-with-a-reason; every carried source is labelled carried *on the
+page*; every printed count is derived, never typed; links, fragments, disclosure and the no-price rule
+as everywhere else). `tools/test_audit.py` injects 11 defects, one per check, and all 11 fire — so the
+gate is a control, not a claim. `tools/check_css_urls.py` closes the gap session `1b839f87` logged as
+`1B-2`: nothing in CI resolved a CSS `url()`, which is how the font 404 shipped on every page for
+weeks. It is negative-tested too.
+
+**The three things worth doing first**, if the owner reads nothing else: name the author and publish
+the method (**R-07**, free), move the disclosure above the links (**R-02**, under an hour, 24 pages),
+and pre-render the tables (**R-01**, the only change that makes the landing legible to a reader who
+is not running JavaScript). Each makes existing work visible rather than adding to it.
+
+**One item blocks revenue and it is not technical:** F-07 / G-01 — no Associates account, marketplace
+or tag. Until that exists, nothing built here can be measured against a commission, and the
+optimization half of the brief stays theoretical no matter how much more code lands.
+
+Line-by-line record: `docs/audit-2026-11-15.md`. Design-prompt suggestions: `docs/design-prompt-2026-11-15.md`.
+>>>>>>> origin/main
