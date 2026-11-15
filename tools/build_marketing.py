@@ -1183,7 +1183,7 @@ def page_topics_index() -> str:
     body = f"""    <div class="page-head">
       <p class="eyebrow">Guides</p>
       <h1>The questions worth arriving on</h1>
-      <p class="standfirst">Six guides, each answering one phrasing somebody actually types. They are written
+      <p class="standfirst">{num_words(len(GUIDES))} guides, each answering one phrasing somebody actually types. They are written
       from the same fact base as the product pages, so a guide and its specification table cannot disagree - and
       each one names the number the brands never published.</p>
     </div>
@@ -1193,7 +1193,7 @@ def page_topics_index() -> str:
       <h2>Not sure which question is yours?</h2>
       <p class="more"><a href="../buying-guide.html">Answer three questions and get a model</a> ·
       <a href="../comparison.html">See every number side by side</a> ·
-      <a href="../improvements.html#DS-14">The six guides we have not written yet, and what blocks each one</a></p>
+      <a href="../improvements.html#DS-14">The {num_words(len(next(s["roadmap"] for s in SUGGESTIONS if s["id"] == "DS-14"))).lower()} guides we have not written yet, and what blocks each one</a></p>
     </section>
 """
     return shell("Guides", "Capacity, design, fit and specification-drift guides for the three air fryers, "
@@ -1338,7 +1338,7 @@ def page_trending() -> str:
       <a href="../pages/suggestions.html">Programme suggestions</a></nav>
     </article>
 """
-    return shell("Trending topics", "Six article shapes this set could grow into, each tied to a row already "
+    return shell("Trending topics", f"{num_words(len(t['queue']))} article shapes this set could grow into, each tied to a row already "
                  "published, with the gate each one has to pass before it is written.", body,
                  here="trending-topics.html", depth=0,
                  crumbs=[("index.html", "Overview"), ("trending-topics.html", "Trending topics")])
@@ -1372,7 +1372,7 @@ def page_improvements() -> str:
                 f'<tr><th scope="row">{esc(t)}</th><td>{esc(note)}</td></tr>' for t, note in s["roadmap"]
             )
             roadmap = (
-                '<table class="data"><caption>The next six articles, and the gap that blocks each one.</caption>'
+                f'<table class="data"><caption>The next {num_words(len(s["roadmap"])).lower()} articles, and the gap that blocks each one.</caption>'
                 f"<thead><tr><th>Candidate</th><th>What it needs</th></tr></thead><tbody>{rows}</tbody></table>"
             )
         board.append(
