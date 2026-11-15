@@ -2908,6 +2908,7 @@ and the closing record follow in the next entry.
 | Live read after deploy | `pages/commissions.html` serves the **complete 46-row bounty table** and the 2-row Bonus Events panel, with the 34-item flag register linked from the header |
 | T26 | **done** |
 | T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
+| T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | in progress | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
 
 ### What shipped
 
@@ -3090,3 +3091,24 @@ action (deprecate one and keep the other as canonical). The **data is not duplic
 single 46-row Bounty Event block and a single 2-row Bonus Event block, verified on `main`.
 
 Flagged here and on the Flagged for Review page so the owner can merge the two entries after the site is live.
+
+## Session claim — `arena/2499438c-zone2` (session `2499438c`, 2026-11-15 UTC)
+
+**Claimed:** T29 (board row above). **Scope:** the files listed in the T29 row only.
+**Board state at claim:** `main` = `e030c40` (PR #60 merged). `gh pr list --state open` is empty. The only `in progress` row
+without commits is **T27** (`0f44536f`, last activity 2026-11-14). It is older than 60 minutes with no commits on this branch, and it is
+**not** taken over here: T27 is a different scope. Flagged for the board owner. Branch note: this session works only on `arena/2499438c-zone2`
+(the session-branch naming in this file is not used by this session, per the session branch instruction).
+
+**Live re-verification performed 2026-11-15 (fetched with `fetch_page`):**
+
+| # | Claim | What the official page says today | Verdict | Source |
+|---|---|---|---|---|
+| C-16 | Supplied link 1 resolves to one product | `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3`, title "CHEFMAN 6 Quart Dual Basket Air Fryer Oven…" | **Reproduced** (matches S19) | https://link.amazon/B04G1MEwY |
+| C-17 | Supplied link 2 resolves to one product | `https://link.amazon/B02NbDxp3` → `https://www.amazon.com/dp/B09B7SB46R`, title "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven…" | **Reproduced** (matches S20) | https://link.amazon/B02NbDxp3 |
+| C-18 | Supplied link 3 resolves to one product | `https://link.amazon/B00hJ57DV` → `https://www.amazon.com/dp/B08DKYBTPH`, title "Chefman Air Fryer 8 Qt \| TurboFry® 4-in-1…" | **Reproduced** (matches S21) | https://link.amazon/B00hJ57DV |
+| C-19 | Breadcrumb of all three destinations | "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers" | **Observed** on the destination pages. Table 1 band for this category is **not** confirmed (see Q-11) | https://www.amazon.com/dp/B0CDY277D3 |
+| C-20 | Creators API prerequisite | "Have at least 10 qualifying sales within the past 30 days to access the PA API through the Creators API" | **Verified verbatim** | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction |
+| C-21 | Application review | "we require at least three within the first 180 days"; "personal orders do not qualify"; websites: content "generally within the last 60 days"; "You must own your website"; "at least 10 posts" | **Verified verbatim** (the "own your website" test is the basis of Q-04) | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
+| C-22 | Operating Agreement version | "Updated: October 15, 2025" | **Verified** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-23 | Associates country list | Japan appears in the Associates country selector | **Observed** (no marketplace-specific term re-read here; see Q-01) | https://affiliate-program.amazon.com/help/operating/agreement |
