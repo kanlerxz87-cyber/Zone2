@@ -543,6 +543,20 @@
     {
       "id": "F-39",
       "severity": "low",
+      "owner": "done",
+      "status": "closed",
+      "published_on": "2026-11-15",
+      "title": "Every page on the site had been silently rendering in fallback system fonts since the T34 redesign: the design system's own @font-face URLs resolved to a path that does not exist",
+      "detail": "assets/css/style.css declares Fraunces and Inter with url(\"assets/fonts/…woff2\"). A stylesheet at assets/css/style.css resolves that URL relative to itself, i.e. to assets/css/assets/fonts/, which has never existed - so all three woff2 files 404'd on every request and every page fell back to the system stack. The font files themselves were present and correctly licensed at assets/fonts/ with their OFL texts. T38 recorded the defect on 2026-11-15 but did not repair it because the fix spanned two namespaces: the sheet is vendored one level deeper into pages/assets/ and decisions/assets/ by two builders, and decisions/assets/dashboard.css carried a compensating rewrite for the old URL form only, so editing the source alone would have moved the breakage rather than removed it. Repaired on 2026-11-15 by session 1b839f87 (PR #89), which corrected the source sheet and the vendored copies; session bbcc741f then normalised BOTH authoring forms inside the two builders so the two namespaces cannot drift apart again. Recorded here because the register, not a commit message, is what the Flagged-for-Review page renders: the source sheet is now stylesheet-relative, and both builders normalise either authoring form to the repository-root font files, which removes the drift class that caused the bug rather than just this instance of it.",
+      "impact": "Cosmetic, and it was invisible to every gate: no link checker follows a CSS url(), so 22 CI steps stayed green while the typefaces the redesign was built around never loaded. The visible effect was that the serif display face the marketing surfaces were designed on - the difference between a designed page and a default one - was absent from the live site.",
+      "action_required": "None. Verify by loading any page and checking that the headings render in Fraunces. Recorded so a future stylesheet move is checked against the live font request, not just the link graph.",
+      "source_ids": [
+        "S22"
+      ]
+    },
+    {
+      "id": "F-40",
+      "severity": "low",
       "owner": "user",
       "status": "open",
       "published_on": "2026-11-15",
@@ -555,20 +569,6 @@
         "S32",
         "S36",
         "S33"
-      ]
-    },
-    {
-      "id": "F-40",
-      "severity": "low",
-      "owner": "done",
-      "status": "closed",
-      "published_on": "2026-11-15",
-      "title": "Every page on the site had been silently rendering in fallback system fonts since the T34 redesign: the design system's own @font-face URLs resolved to a path that does not exist",
-      "detail": "assets/css/style.css declares Fraunces and Inter with url(\"assets/fonts/…woff2\"). A stylesheet at assets/css/style.css resolves that URL relative to itself, i.e. to assets/css/assets/fonts/, which has never existed - so all three woff2 files 404'd on every request and every page fell back to the system stack. The font files themselves were present and correctly licensed at assets/fonts/ with their OFL texts. T38 recorded the defect on 2026-11-15 but did not repair it because the fix spanned two namespaces: the sheet is vendored one level deeper into pages/assets/ and decisions/assets/ by two builders, and decisions/assets/dashboard.css carried a compensating rewrite for the old URL form only, so editing the source alone would have moved the breakage rather than removed it. Fixed by session bbcc741f on 2026-11-15: the source sheet is now stylesheet-relative, and both builders normalise either authoring form to the repository-root font files, which removes the drift class that caused the bug rather than just this instance of it.",
-      "impact": "Cosmetic, and it was invisible to every gate: no link checker follows a CSS url(), so 22 CI steps stayed green while the typefaces the redesign was built around never loaded. The visible effect was that the serif display face the marketing surfaces were designed on - the difference between a designed page and a default one - was absent from the live site.",
-      "action_required": "None. Verify by loading any page and checking that the headings render in Fraunces. Recorded so a future stylesheet move is checked against the live font request, not just the link graph.",
-      "source_ids": [
-        "S22"
       ]
     }
   ]

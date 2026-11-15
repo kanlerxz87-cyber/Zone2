@@ -540,7 +540,7 @@
       "accessed_utc": "2026-11-15",
       "used_for": [
         "evidence only: the request was answered at the edge with HTTP 403 Forbidden and never reached a lookup",
-        "flag F-39 - the negative control that F-20 relies on is not stable across token shapes"
+        "flag F-40 - the negative control that F-20 relies on is not stable across token shapes"
       ]
     }
   ]
