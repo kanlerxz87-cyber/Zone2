@@ -256,6 +256,22 @@ jobs:
       - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure)
         run: python3 tools/audit_site.py
 
+      # ---- arena/156aae86-zone2: discoverability (T41) ----
+      # audit_site.py above proves every page is reachable BY A LINK. Nothing proved a page was
+      # reachable BY A CRAWLER, and on 2026-11-15 the root sitemap listed 16 of 115 published pages
+      # (86% absent, including marketing/index.html, playbook.html and all 38 pages/*.html). That
+      # file was hand-typed and nothing rebuilt it, so it drifted without a single red build.
+      # These two steps close that class of defect: the sitemap is now derived from the tree, and
+      # the audit fails on a missing page, a dead or duplicated <loc>, a robots.txt that blocks
+      # what the sitemap advertises, a noindex page that is listed, a marketing page the marketing
+      # sitemap misses, or a root page with a broken favicon. Both were negative-tested against
+      # nine injected defects before being added here (docs/verification-156aae86.md).
+      - name: Rebuild the sitemap and confirm committed output is current
+        run: python3 tools/build_sitemap.py --check
+
+      - name: Discoverability audit (sitemap coverage, robots, noindex, favicon, canonical)
+        run: python3 tools/seo_audit.py
+
       # ---- arena/d0135100-zone2: the decision surface (T29) ----
       # Renders decisions/ and DECISIONS.md from ledger/{requirements,questions,suggestions}.json, then holds
       # the whole namespace to the project contract: every row sourced or explicitly flagged, an OPEN question
@@ -269,6 +285,16 @@ jobs:
 
       - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
         run: python3 tools/validate_decisions.py
+
+      # ---- arena/2b07e526-zone2: the release-readiness board (T45) ----
+      # One row per named requirement on Amazon's Application Review Process page (S23), each with the
+      # official source and, where measurable, a count recomputed from this tree. The generator fails on a
+      # row with no official source, a quote that is not on S23 as captured, a BLOCKED row with no named
+      # blocker, a finding with no owner action, a count that disagrees with the tree, a missing
+      # disclosure, a printed product price, or a broken local link. Verified to fail on purpose on
+      # 2026-11-15 against 14 injected defects before being added here.
+      - name: Rebuild the release-readiness board and confirm committed output is current
+        run: python3 tools/build_readiness.py --check
 
       # T26: this guard was excluded from CI because it reported seven false failures — it
       # resolved the repository root to research-hub/ and then looked for the root site's
