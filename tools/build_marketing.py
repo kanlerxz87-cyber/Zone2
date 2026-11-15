@@ -217,6 +217,23 @@ NAV = [
 ]
 
 
+def hub_scope_note(root: str) -> str:
+    """The caveat on the topic hub. It is the same identity rule, phrased for a page that
+    describes the whole set rather than the product specifications."""
+    return (
+        "<strong>Product identity is not confirmed.</strong> The three products named across these "
+        "articles are the Amazon destinations observed when following the supplied short links; they "
+        "do not establish that those destinations are the products intended in the brief. The supplied "
+        "codes are 9 characters, and Amazon's <a href=\"https://affiliate-program.amazon.com/help/node/"
+        "topic/GP38PJ6EUR6PFBEC\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">ASIN and "
+        "link-format help</a> describes ASINs as catalog identifiers. See <a href=\"" + root +
+        "../pages/flags.html#F-03\">Flag F-03</a> for the unresolved mapping evidence. "
+        "<strong>Two kinds of source on this site:</strong> the cooking and food-safety guidance comes "
+        "from the United States Department of Agriculture and from FoodSafety.gov, which publish it; the "
+        "product specifications come from each manufacturer's own page."
+    )
+
+
 def default_scope_note(root: str) -> str:
     """The standing caveat on every product-facing page: what the three products are, and are not."""
     return (
@@ -437,6 +454,7 @@ def page_index() -> str:
     </section>
 """,
         here="index.html",
+        scope_note=hub_scope_note(""),
     )
 
 
@@ -932,7 +950,6 @@ def topic_article_cards(topic: dict) -> str:
     for slug in topic["articles"]:
         a = ARTICLES[slug]
         cards.append(f"""        <article class="topic-card">
-          <p class="eyebrow">{esc(TOPICS[a['topic']]['name'])}</p>
           <h3><a href="articles/{esc(slug)}.html">{esc(a['title'])}</a></h3>
           <p>{esc(a['dek'])}</p>
           <p class="row-note">{esc(a['reading_minutes'])} min read &middot; published {esc(a['published_utc'])}</p>
@@ -1024,7 +1041,7 @@ def page_topics() -> str:
     </section>
 """
     return shell("Topics", "Every article on this site, organised by the question it answers.",
-                 body, here="topics.html")
+                 body, here="topics.html", scope_note=hub_scope_note(""))
 
 
 def page_editorial(slug: str) -> str:
