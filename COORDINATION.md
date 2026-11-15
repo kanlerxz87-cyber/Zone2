@@ -4407,3 +4407,16 @@ question counts are unchanged from `main`'s 38/16 because the F-39/Q-note work i
 Branch: `arena/f6af67c3-zone2` (platform pins this session to one branch; the `session-<id>/<task>` branch
 naming is not available to it — same process deviation every prior session logged; scope separation is
 enforced by the file list above).
+---
+
+## Closing record — T44 — `arena/f6af67c3-zone2` (session `f6af67c3`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#103** — `arena/f6af67c3-zone2` → `main` — merge result recorded in the PR (see the post-merge comment) |
+| Delivered | I-A implemented at ledger level (S24 `used_for` verbatim "10-digit…" + tagged-link format, `accessed_utc` 2026-11-15; E-05 `observation` aligned; measurements unchanged) · **SG-11** added to the canonical decision board (options A/B/C, recommended B) · **I-C executed** (T28/T32/T38 status cells → done with closing-record pointers) · **I-F verified** (`../fonts/…` repair from PR #89 present) · builders' outputs regenerated |
+| Withdrawn (handoff) | F-39 + Q-01/Q-07 provenance notes → superseded by `bfb20351`'s in-flight **T42**; evidence for their closing record is in the T44 claim block |
+| Gates | 13 commands exit 0 on the final tree: `validate_data` 0 errors · `audit_site` 5/5 PASS · `build_site/root_views/summary/decisions --check` no drift · `build_marketing --check` 21 current · `validate_decisions` 0 warnings · `tests/test_pipeline.py` **15/15** · `node --check` ×2 · `verify_marketing` all pass · `revalidation --check` no drift · `check_links.py .` **2,847 internal links, 0 broken** |
+| Verification record | `docs/verification-f6af67c3.md` (new): S24 fetched live with the verbatim sentence; renumber chain; T42 handoff; RF-01 scope recount (39 core-surface mentions vs RF-01's 75 repo-wide) |
+| Irregularities (non-blocking) | Task-id collision T41→T43→T44 (board procedure followed); rebase conflicts with PR #96/#97/#98/#100 waves resolved preserving both sides each time; carried forward for the owner: F-42 debris, I-D board size, F-05/F-07/F-08/F-24 owner blockers |
+| Sources used | S24 (fetched live 2026-11-15) — https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC · S01/S02/S23 (unedited, previously verified) |
