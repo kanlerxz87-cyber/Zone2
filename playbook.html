@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design &amp; Content Playbook — Zone2</title>
+<meta name="description" content="Suggestions that feed the site-design prompt: design direction, article angles, organic-traffic plan, anti-AI-slop editorial rules and decision-making improvements — every constraint linked to its official source.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <h1>Zone2</h1>
+    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="summary.html">Executive Summary</a>
+      <a href="products.html">Products</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="pages/suggestions.html">Suggestions &amp; Decisions</a>
+      <a href="content.html">Content</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="verification.html">Verification</a>
+      <a href="sources.html">Sources</a>
+      <a href="flagged.html">Flagged for Review</a>
+      <a href="playbook.html" class="active">Design Playbook</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="page-head">
+      <h2>Design &amp; Content Playbook</h2>
+      <p>The suggestion set that feeds the site-design prompt: how the site should look, what to write, how to earn organic traffic, and the editorial rules that keep it from reading like generated filler. Task T31, session <code>fcb538fa</code>, compiled 2026-11-15.</p>
+    </div>
+
+    <div class="disclosure">
+      <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
+      As an Amazon Associate I earn from qualifying purchases.
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--accent)">
+      <h3>How to read this page</h3>
+      <ul style="margin:0;padding-left:20px;font-size:14px">
+        <li><strong>Nothing here is implemented.</strong> Every item is a proposal. The owner records choices on the canonical <a href="pages/suggestions.html">Suggestions decision board</a>; the questions that must be answered first live in the canonical <a href="pages/questions.html">Open Questions register</a>.</li>
+        <li><strong>Section 1 rows are verified facts</strong> — each was fetched from the linked official page on 2026-11-15 by this session.</li>
+        <li><strong>Sections 2–6 rows are suggestions</strong> (judgments). Their last column names the official rule they must respect, or says plainly that no official source applies.</li>
+        <li><strong>Section 8 rows are this session’s flagged irregularities</strong> — published here so they can be reviewed while the site is live. None of them blocks the merge.</li>
+        <li>Any value that could not be confirmed from an official source is left out or marked missing — never inferred.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>1. Verified constraints the design prompt MUST obey</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">All fetched live 2026-11-15 by this session. If a design or article idea breaks one of these rows, it must not ship.</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Verified constraint</th><th>Official source</th><th>Fetched</th></tr></thead>
+        <tbody>
+          <tr><td>C-01</td><td>Every page must state clearly and prominently, verbatim: “As an Amazon Associate I earn from qualifying purchases.”</td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">Operating Agreement §5</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-02</td><td>No promise or implication of expected traffic or commission income anywhere (“We do not make any representation … regarding the amount of traffic or commission income you can expect”).</td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">Operating Agreement §4</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-03</td><td>Prices/availability shown only if Amazon serves the link containing them or Creators API / PA API supplies them; comparison displays must show the lowest “new” (and if provided, lowest “used”) Amazon price.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — Participation Requirements §2(b)</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-04</td><td>Product claims must not be “inaccurate, overbroad, deceptive or otherwise misleading”.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §2(b)</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-05</td><td>Links to Amazon product lists (search results, events, department pages) require additional original content on this site that is relevant to the link.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §2(b)</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-06</td><td>Limited-time promotion mentions must be removed as soon as the promotion ends.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §2(b)</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-07</td><td>Customer reviews and star ratings may not be displayed unless obtained through Creators API or PA API.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §6(t)</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-08</td><td>The site must not have price-tracking or price-alerting functionality.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §6(y)</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-09</td><td>Link shorteners/buttons must never obscure that the link goes to an Amazon Site; URLs/user agents must not be cloaked.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §6(w), §6(v)</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-10</td><td>Search traffic must land on <em>this</em> site first: organic search results are allowed “so long as … those … results send users to your site and not directly, or indirectly via a Redirecting Link, to an Amazon Site”.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §6(f)</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-11</td><td>Special Links must carry the assigned Associates tag; the supplied short links resolve <strong>without</strong> a <code>tag=</code> parameter, so as supplied they cannot earn (flag F-24, re-observed this session).</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §2(a)–(b)</a> · <a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">observed link resolution</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-12</td><td>Application bar for websites: site the applicant owns, “at least 10 posts” of robust original content, content “generally within the last 60 days”, at least three qualifying sales in the first 180 days (personal orders excluded).</td><td><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">Application Review Process</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-13</td><td>What Amazon calls a good review site: content that “adds value … by giving them insight on a subject or product they might not get easily” and “a unique experience or insight that is not available anywhere else”.</td><td><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">Application Review Process</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-14</td><td>Email/SMS Special Links only when the communications are solicited (opted into).</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — §4</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-15</td><td>Affiliate/paid links qualified with <code>rel="sponsored"</code>; properly qualified links are not treated as link spam.</td><td><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer nofollow">Google — Qualify your outbound links</a> · <a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">Google spam policies</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-16</td><td>“Scaled content abuse” — many pages made mainly to manipulate rankings, “typically … large amounts of unoriginal content that provides little to no value to users, no matter how it’s created”, explicitly including generative-AI pages without added value — violates Google’s spam policies.</td><td><a href="https://developers.google.com/search/docs/essentials/spam-policies#scaled-content" target="_blank" rel="noopener noreferrer nofollow">Google spam policies — Scaled content abuse</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-17</td><td>“Thin affiliation” — affiliate pages copied from the merchant with no original content — is demoted; Google names extra information, original reviews, rigorous testing, navigation and comparisons as what makes affiliate sites good.</td><td><a href="https://developers.google.com/search/docs/essentials/spam-policies#thin-affiliate-pages" target="_blank" rel="noopener noreferrer nofollow">Google spam policies — Thin affiliation</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-18</td><td>Endorsements must be honest and not misleading; a material connection (earning commission) must be disclosed “clearly and conspicuously”.</td><td><a href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer nofollow">FTC — Endorsement Guides FAQ</a></td><td>2026-11-15</td></tr>
+          <tr><td>C-19</td><td>Program Content or Special Links may not be used to develop machine-learning models or related technology without Amazon’s “express prior written approval”.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — Participation Requirements §5</a> — <strong>gap in the compliance ledger, see IR-04</strong></td><td>2026-11-15</td></tr>
+          <tr><td>C-20</td><td>The three supplied short links resolve to <code>/dp/B0CDY277D3</code> (CHEFMAN 6 Qt Dual Basket Air Fryer Oven), <code>/dp/B09B7SB46R</code> (Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven) and <code>/dp/B08DKYBTPH</code> (Chefman Air Fryer 8 Qt TurboFry® 4-in-1), all breadcrumbed “Home &amp; Kitchen › Kitchen &amp; Dining › Small Appliances › Fryers › Air Fryers”. <strong>Destination evidence only</strong> — it does not confirm the brief’s intended products (F-03).</td><td><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">link 1</a> · <a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer nofollow">link 2</a> · <a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer nofollow">link 3</a></td><td>2026-11-15</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>2. Design-direction suggestions</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">Every row is a suggestion (a judgment), not a program fact. The last column names the official rule it must respect — or says “design judgment”.</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Suggestion</th><th>Options</th><th>Recommendation</th><th>Constraint / basis</th></tr></thead>
+        <tbody>
+          <tr><td>DP-01</td><td>Split the site into two layers: a <strong>front-of-house</strong> (reader-first marketing home: hero, featured guide, latest articles, product cards) and the existing <strong>evidence layer</strong> (dashboards, ledgers, verification pages).</td><td>A) Both layers, dashboard stays at <code>index.html</code>, marketing home is a clearly linked subpage; B) Marketing home at <code>index.html</code>, dashboard moves; C) Keep today’s single combined surface.</td><td><strong>A</strong> — lowest breakage (CI requires the root dashboard files; the landing page must keep every companion namespace linked), and it fixes the “internal tool” first impression immediately.</td><td>Design judgment; CI requirements in the repo’s <a href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/.github/workflows/pages.yml" target="_blank" rel="noopener noreferrer nofollow">Pages workflow</a></td></tr>
+          <tr><td>DP-02</td><td>Editorial homepage: one strong hero statement (“every claim links to its source”), a featured buying guide, three product cards (one per destination), a trust strip (disclosure, last-verified date, “how we verify”), one primary CTA per card.</td><td>A) Editorial hero + cards; B) Magazine grid; C) Keep KPI dashboard as the front page.</td><td><strong>A</strong> — reads as a publication, keeps verification as the differentiator, puts the disclosure where prominence is required.</td><td>C-01, C-18 (placement rules); design judgment</td></tr>
+          <tr><td>DP-03</td><td>Typography/colour: keep evidence tables legible; give the marketing layer its own warmer magazine-style layout (larger headings, real article typography, pull quotes for “what we verified”).</td><td>A) New stylesheet for the marketing layer only; B) Re-skin everything.</td><td><strong>A</strong> — evidence pages stay byte-stable for the drift gates; the marketing layer gets personality.</td><td>Design judgment</td></tr>
+          <tr><td>DP-04</td><td>Product imagery: until the image-licence question (Q-10) is answered, design with <em>no</em> retailer product photos — typographic cards and diagrams instead; check each manufacturer’s media terms before using their assets.</td><td>A) No photos until Q-10 answered; B) Use Amazon product images now; C) Manufacturer images only after reading their terms.</td><td><strong>A</strong>, then C per manufacturer. <strong>B must not be chosen before the licence is read line by line.</strong></td><td>Q-10 open on the canonical board; <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — IP License</a> (not yet read line by line — IR-07)</td></tr>
+          <tr><td>DP-05</td><td>Trust layer on every marketing page: disclosure sentence in the header area <em>and</em> beside each link block, visible “last verified” date, link to the verification methodology.</td><td>A) Header + per-article box; B) Footer only.</td><td><strong>A</strong> — “clearly and prominently” / “clearly and conspicuously” are placement rules, not footer rules.</td><td>C-01, C-18</td></tr>
+          <tr><td>DP-06</td><td>Comparison UX: side-by-side columns over one shared spec table where <em>every cell carries its source link</em>; unsourced cells render “— (unverified)”.</td><td>A) Reuse the proven renderer pattern; B) Hand-built tables.</td><td><strong>A</strong> — the repo’s gates already enforce exactly this.</td><td>Brief’s verification rule; <code>tools/validate_data.py</code></td></tr>
+          <tr><td>DP-07</td><td>Structured data from the safe subset only: <code>Article</code>, breadcrumbs, author — <strong>no</strong> <code>AggregateRating</code>, <strong>no</strong> <code>offers</code>/price unless served by Amazon or Creators API.</td><td>A) Safe subset only; B) Full Product+Review schema.</td><td><strong>A</strong> — rating/price markup would display what the policy forbids without API data.</td><td>C-03, C-07</td></tr>
+          <tr><td>DP-08</td><td>Decision visibility: marketing units that depend on an undecided suggestion carry a small “proposed — awaiting owner decision” chip linking to the canonical board.</td><td>A) Chips; B) Silent publishing.</td><td><strong>A</strong> — preserves the review-before-implement rule end to end.</td><td>Canonical <a href="pages/suggestions.html">Suggestions decision board</a> (T29)</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>3. Article &amp; topic suggestions — catchy and trendy, but compliant</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px"><strong>Proposals only.</strong> They depend on owner decisions SG-02 (products/niche width) and SG-04 (article formats) on the canonical board, and every product mention keeps the destination caveat (F-03) until Q-03 is answered. No price, no star rating, no “we tested it” claim (C-03, C-07, SG-05 open).</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Article angle (working title)</th><th>Hook / search intent</th><th>Format</th><th>Guardrails</th><th>Basis</th></tr></thead>
+        <tbody>
+          <tr><td>DP-09</td><td>“Dual-Basket Air Fryers Explained: What 6 Qt Really Means When It’s Two 3 Qt Baskets”</td><td>Informational — capacity/format questions before buying</td><td>Explainer, hub of an “air fryer formats” cluster</td><td>Manufacturer-stated specs only (two 3 qt baskets, Sync Finish, 200–450 °F, 1700 W); no prices, no ratings</td><td>Manufacturer rows verified in <code>marketing/data/facts.json</code>; C-13</td></tr>
+          <tr><td>DP-10</td><td>“Air Fryer vs. Toaster Oven vs. French-Door Oven: Which Countertop Format Fits Your Kitchen?”</td><td>Commercial comparison — the highest-intent query the three destinations naturally answer</td><td>3-way comparison article linking the comparison page</td><td>Destination caveat (F-03) in the intro; spec rows each sourced</td><td>C-05, C-13, C-17</td></tr>
+          <tr><td>DP-11</td><td>“The 450 °F Question: What a ‘Hi-Fry’-Style Finishing Heat Actually Does”</td><td>Informational / feature education</td><td>Short feature deep-dive</td><td>Temperature claims quoted from the manufacturer page only</td><td>Verified spec rows; C-04</td></tr>
+          <tr><td>DP-12</td><td>“French-Door Air Fryer Ovens: Why a 26 QT Interior Changes Weeknight Cooking”</td><td>Informational, capacity-led</td><td>Feature article around the Emeril destination</td><td>No performance claims beyond listing/manufacturer text; no rival figures we cannot source</td><td>C-04, C-13</td></tr>
+          <tr><td>DP-13</td><td>“Feeding a Crowd: What 8 Qt Actually Lets You Cook in One Basket”</td><td>Informational, capacity-led</td><td>Article around the Chefman 8 Qt destination</td><td>Same rules; link the buying guide, not only the product</td><td>C-05, C-17</td></tr>
+          <tr><td>DP-14</td><td>“How to Read an Air Fryer Spec Sheet (Watts, Basket Splits, Temperature Ranges)”</td><td>Educational hub — evergreen, linkable, genuinely useful</td><td>Pillar article; internal links to all three product articles</td><td>Every number sourced to a manufacturer row</td><td>C-13, C-17</td></tr>
+          <tr><td>DP-15</td><td>Seasonal gift/cookout guides (holiday season, summer)</td><td>Seasonal spikes</td><td>Calendar-planned articles</td><td><strong>Promotion discipline:</strong> remove any limited-time mention the day it ends; no price tables</td><td>C-03, C-06</td></tr>
+          <tr><td>DP-16</td><td>“What Amazon’s Associate Application Actually Checks (10 Posts, 60 Days, Original Content)” — this site’s own verified application knowledge</td><td>Unique/first-hand — nothing else says it better than our own transcription</td><td>Transparency article in the evidence layer</td><td>Quoted from the application page only</td><td>C-12, C-13 (verbatim source)</td></tr>
+          <tr><td>DP-17</td><td><strong>Avoid:</strong> “top 10 air fryers” lists, “best under [price]” hype, “is it worth it?” clones</td><td>— (would need prices/ratings/testing claims this site does not have)</td><td>Not proposed</td><td>Would violate C-03, C-07, C-04 or duplicate thin affiliate content</td><td>C-04, C-07, C-17; SG-05 open</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:13.5px;margin:12px 0 0"><strong>Article-quality test (paste into the writing prompt):</strong> every paragraph must contain at least one concrete, sourced detail (a specification, a quoted rule, a dated observation) or first-hand context the site actually has; delete any sentence that survives swapping in a different model name (“swap-the-model test”); state up front what could <em>not</em> be verified; end with the disclosure and the sponsored link marking.</p>
+    </div>
+
+    <div class="card">
+      <h3>4. Organic-traffic suggestions</h3>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Suggestion</th><th>Why / official basis</th></tr></thead>
+        <tbody>
+          <tr><td>DP-18</td><td>One topic cluster: pillar = DP-14 spec-sheet explainer; spokes = the three product articles, the 3-way comparison, the buying guide; every spoke links back to the pillar and to ≥2 siblings.</td><td>C-17 (good affiliate sites add navigation and comparisons); topology is a design judgment</td></tr>
+          <tr><td>DP-19</td><td>Hard rule for every SEO action: search users land on <em>our</em> pages first; never point or redirect search listings at Amazon.</td><td>C-10 — verbatim §6(f)</td></tr>
+          <tr><td>DP-20</td><td>Cadence aimed at the application bar: reach ≥10 substantial posts, keep content within ~60 days, then ≥1 fresh article/month.</td><td>C-12 — Amazon’s published thresholds (not a traffic promise)</td></tr>
+          <tr><td>DP-21</td><td>Every affiliate link carries <code>rel="sponsored"</code> (plus <code>nofollow</code>); never hide the Amazon destination behind an opaque shortener.</td><td>C-15, C-09</td></tr>
+          <tr><td>DP-22</td><td>Technical basics with the marketing layer: XML sitemap, <code>robots.txt</code>, canonical tags, unique titles/descriptions, one <code>h1</code> per page, mobile-first layout.</td><td>Design judgment (standard SEO hygiene); link hygiene per the Google outbound-link doc</td></tr>
+          <tr><td>DP-23</td><td>Google Search Console + sitemap submission as the first measurement loop; until it reports, treat all traffic forecasts as <strong>missing information</strong>.</td><td>No search-demand data exists in this repository (IR-08) — nothing may be invented</td></tr>
+          <tr><td>DP-24</td><td>Distribution channels chosen to match Amazon’s accepted-sites list (Facebook, Instagram, X, YouTube, TikTok, Twitch — public, “in most cases, at least 500” organic followers).</td><td><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">Application Review Process</a> — verbatim, 2026-11-15</td></tr>
+          <tr><td>DP-25</td><td>Earned links over bought links: the transparency article (DP-16), the spec-sheet pillar and printable checklists are the linkable assets; never buy or trade links.</td><td><a href="https://developers.google.com/search/docs/essentials/spam-policies#link-spam" target="_blank" rel="noopener noreferrer nofollow">Google spam policies — link spam</a> (“exchanging goods or services for links” is a listed violation)</td></tr>
+          <tr><td>DP-26</td><td>Add market/language splits only after Q-01 (US vs Japan marketplace) is answered; language and marketplace must match the Associates account.</td><td>Q-01 open; C-11 (the tag must be the account’s)</td></tr>
+          <tr><td>DP-27</td><td>No traffic, ranking or revenue numbers may be promised anywhere — marketing copy included.</td><td>C-02 — verbatim OA §4</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>5. Anti-“AI slop” editorial rules (paste into the content prompt)</h3>
+      <ol style="margin:0;padding-left:22px;font-size:14px;line-height:1.7">
+        <li><strong>Source gate:</strong> no sentence prints a value without a link to the official page it came from; unsourceable cells render “unverified” with the reason — never an inferred value.</li>
+        <li><strong>No invented experience:</strong> never write “we tested”, “in our kitchen” or first-person results unless the owner actually performed the test (SG-05 undecided).</li>
+        <li><strong>No banned surfaces:</strong> no prices (C-03), no star ratings/review counts (C-07), no price-drop or price-alert widgets (C-08).</li>
+        <li><strong>Specificity / swap-the-model test:</strong> if a paragraph survives swapping in a different model name, delete it — that is filler (C-13’s “insight … not available anywhere else”).</li>
+        <li><strong>Scale guard:</strong> publish no page whose main purpose is covering a keyword; every page must help a user do something (C-16 verbatim).</li>
+        <li><strong>Thin-affiliation check before publish:</strong> does the piece add at least one of Google’s named value-adds — extra information, original review, rigorous testing <em>we actually did</em>, navigation, comparison? If none: do not publish (C-17 verbatim).</li>
+        <li><strong>Named authorship &amp; editorial responsibility</strong> on marketing pages (Google’s site-reputation guidance treats stated authorship and editorial integration as review factors — observed 2026-11-15).</li>
+        <li><strong>Disclosure placement:</strong> the disclosure sentence in the first screenful <em>and</em> next to link blocks (C-01, C-18).</li>
+        <li><strong>Freshness dates visible;</strong> re-verify spec rows at least annually and after any destination change; remove expired promotion mentions the day they end (C-06).</li>
+        <li><strong>Human editorial pass:</strong> generation may draft, but a pass applying rules 1–9 is mandatory before publish — record who approved it (mirrors Google’s “editorial oversight” factor).</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>6. Decision-making improvement suggestions</h3>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Suggestion</th><th>Basis</th></tr></thead>
+        <tbody>
+          <tr><td>DP-28</td><td>Keep <strong>one</strong> decision store (canonical <a href="pages/suggestions.html">board</a> + <a href="pages/questions.html">questions register</a>); every other page links to them instead of opening a parallel register.</td><td>T30 integration note; overlapping proposals in open PRs #65/#68/#69 — IR-06</td></tr>
+          <tr><td>DP-29</td><td>Definition of done for every suggestion: options → recommendation → owner records the decision → implementation commit → verification row → deploy check. Nothing skips stages.</td><td>Existing T29 workflow, extended</td></tr>
+          <tr><td>DP-30</td><td>One in-progress claim per session on the board; stale claims (&gt;60 min, no commits) get re-claimed or closed by the next session — T27 shows why the rule must be applied.</td><td>Project coordination rules; IR-03</td></tr>
+          <tr><td>DP-31</td><td>Re-verification cadence with page dates showing the last <em>source check</em> date — the current generated “verified 2026-11-14” eyebrow can disagree with newer checks.</td><td>T29’s recorded display issue; IR-05</td></tr>
+          <tr><td>DP-32</td><td>Automated gates are the floor, not the ceiling: a gate proves HTML matches the ledger, not that a sentence is true — always read the deployed page after a merge.</td><td>Process lesson recorded by three sessions in <code>COORDINATION.md</code></td></tr>
+          <tr><td>DP-33</td><td>Launch gates before revenue mode: account approved (Q-02), tag configured (F-24), ASINs confirmed (Q-03), domain question settled (Q-04).</td><td>C-11, C-12; canonical Q register</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>7. Missing information — discovery actions (blocks decisions until answered)</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">The canonical open questions are on <a href="pages/questions.html">pages/questions.html</a> (Q-01…Q-16). This session adds only the discovery paths that were not yet written down.</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Missing information</th><th>How to discover it</th><th>Blocks</th></tr></thead>
+        <tbody>
+          <tr><td>D-01</td><td>Search demand for the candidate topics (keyword volumes, SERP competitors)</td><td>Google Search Console after first publish; Google Keyword Planner export via the owner’s account — no keyword data exists in this repository, nothing may be invented</td><td>DP-09…DP-18 prioritisation, SG-04</td></tr>
+          <tr><td>D-02</td><td>US vs Japan marketplace operation, and whether these destinations sell on amazon.co.jp</td><td>Owner checks the Associates Central country (Q-01); amazon.co.jp listing check once true ASINs are known (Q-03)</td><td>SG-01, SG-09, DP-26</td></tr>
+          <tr><td>D-03</td><td>Whether manufacturer press images may be used on this site</td><td>Read each manufacturer’s site terms / media-licence pages line by line (Q-10 covers Amazon’s IP licence)</td><td>DP-04</td></tr>
+          <tr><td>D-04</td><td>Click/conversion baseline</td><td>Requires a live Associates tag first (F-24/F-07), then the tracking module (M-09) — nothing measurable exists today</td><td>SG-09, campaign optimisation</td></tr>
+          <tr><td>D-05</td><td>Whether the Creators API is available to this account (rating/price display, product images)</td><td>Official prerequisite: <a href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer nofollow">Creators API introduction</a> — at least 10 qualifying sales in the past 30 days</td><td>DP-07 (rich schema), SG-07</td></tr>
+          <tr><td>D-06</td><td>Whether the platform’s tooling needs to train any model on Program Content</td><td>If yes: seek Amazon’s express prior written approval (C-19), or design the pipeline so it never does</td><td>Content engine M-07 — IR-04</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--flag-ink)">
+      <h3>8. Flagged for review — irregularities found by this session (non-blocking)</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">Published here, with sources, exactly as the brief requires: these do not block the merge; review them after the site is live and request changes. The canonical flag register remains <a href="pages/flags.html">pages/flags.html</a>.</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Irregularity</th><th>Status</th><th>Evidence / source</th></tr></thead>
+        <tbody>
+          <tr><td>IR-01</td><td><code>COORDINATION.md</code> on <code>main</code> carried two stray git conflict-marker lines left by an earlier merge</td><td><strong>Fixed content-preserving</strong> in the T31 claim commit (both sides of the separated text kept; only the marker lines removed)</td><td><code>COORDINATION.md</code> history (old lines 2897 / 2952)</td></tr>
+          <tr><td>IR-02</td><td>The text after that marker duplicates the <code>d3ce1c29</code> T26 closing record that already appears earlier in the file</td><td>Kept — the board is append-only, nothing deleted; owner may dedupe</td><td><code>COORDINATION.md</code> § “T26 — closing record”</td></tr>
+          <tr><td>IR-03</td><td>Task T27 still marked <code>in progress</code> with no commits since 2026-11-14 — stale beyond the 60-minute takeover rule</td><td>Open — board owner to close or re-claim</td><td><code>COORDINATION.md</code> task board</td></tr>
+          <tr><td>IR-04</td><td>The compliance ledger (31 rules) has <strong>no rule for Participation Requirements §5</strong>: Special Links / Program Content may not be used to develop machine-learning models without Amazon’s express prior written approval — directly relevant to this brief’s AI content engine</td><td>Open — <strong>candidate finding (would be F-39); not added to the ledger by this session to avoid another register-id collision</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies §5</a>, fetched 2026-11-15; <code>ledger/compliance.json</code> holds R-01…R-31 without it</td></tr>
+          <tr><td>IR-05</td><td>Generated pages’ eyebrow reads “verified 2026-11-14” although checks ran 2026-11-15 (date comes from <code>ledger/products.json.verified_utc</code>)</td><td>Open — generator-owner decision (first recorded by T29, carried here)</td><td><code>tools/build_site.py</code> date source</td></tr>
+          <tr><td>IR-06</td><td>Three open PRs propose overlapping suggestion/question surfaces: <a href="https://github.com/kanlerxz87-cyber/Zone2/pull/65" target="_blank" rel="noopener noreferrer">#65</a> (dropped its root pages; adds <code>marketing/trending-topics.html</code>), <a href="https://github.com/kanlerxz87-cyber/Zone2/pull/68" target="_blank" rel="noopener noreferrer">#68</a> (adds root <code>suggestions.html</code> + <code>questions.html</code>), <a href="https://github.com/kanlerxz87-cyber/Zone2/pull/69" target="_blank" rel="noopener noreferrer">#69</a> (adds a <code>decisions/</code> layer reading the canonical registers). Risk: two registers answering one question differently</td><td>Open — integration must consolidate: canonical board stays T29’s; newcomers link instead of duplicating</td><td>The three PRs; T30 integration record in <code>COORDINATION.md</code></td></tr>
+          <tr><td>IR-07</td><td>Image licensing for the marketing layer unverified (Q-10 open; Amazon IP Licence not yet read line by line)</td><td>Open — DP-04 designs around it</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies — IP License</a></td></tr>
+          <tr><td>IR-08</td><td>No search-demand or traffic measurement exists anywhere in the repository — “generate organic traffic” cannot yet be evidenced with data</td><td>Open — D-01 defines the discovery path</td><td>Repository inspection, 2026-11-15</td></tr>
+          <tr><td>IR-09</td><td>Resolved links still carry <strong>no Associates <code>tag=</code></strong> (F-24 re-observed today): the site cannot earn until a tagged-link strategy exists</td><td>Open — owner action</td><td><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">link.amazon/B04G1MEwY</a> resolved 2026-11-15 with <code>btn_ref</code> but no <code>tag=</code></td></tr>
+          <tr><td>IR-10</td><td>Brief-to-destination mapping still unconfirmed: supplied codes are 9 characters; Amazon documents ASINs as 10-<strong>digit</strong>; destinations are stable but may not be the intended products (F-01/F-03)</td><td>Open — owner action (Q-03)</td><td><a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer nofollow">ASIN help</a> · the three link resolutions in C-20</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>9. Verification appendix — what this session fetched itself (2026-11-15)</h3>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Checked</th><th>Result</th><th>Official source</th></tr></thead>
+        <tbody>
+          <tr><td>V-1</td><td>Disclosure sentence + agreement currency</td><td>§5 sentence verbatim; “Updated: October 15, 2025”</td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">Operating Agreement</a></td></tr>
+          <tr><td>V-2</td><td>No-income-expectation clause</td><td>§4 sentence verbatim</td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">Operating Agreement</a></td></tr>
+          <tr><td>V-3</td><td>Policies currency + price / comparison / product-list original-content / promo-removal / no-misleading-claims rules</td><td>“Updated: April 14, 2026”; §2(b) verbatim</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies</a></td></tr>
+          <tr><td>V-4</td><td>§6(f), §6(t), §6(v)/(w), §6(y), §6(z), §4, §5 (ML clause)</td><td>All verbatim</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies</a></td></tr>
+          <tr><td>V-5</td><td>Application review thresholds</td><td>“at least 10 posts”; “generally within the last 60 days”; “You must own your website”; “at least three within the first 180 days”; “personal orders do not qualify”; social list + 500-followers rule of thumb</td><td><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">Application Review Process</a></td></tr>
+          <tr><td>V-6</td><td>Google <code>rel="sponsored"</code> guidance</td><td>“Mark links that are advertisements or paid placements … with the sponsored value”; page last updated 2025-12-10</td><td><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer nofollow">Google — Qualify your outbound links</a></td></tr>
+          <tr><td>V-7</td><td>Scaled-content-abuse + thin-affiliation definitions</td><td>Verbatim (quoted in C-16 / C-17)</td><td><a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">Google spam policies</a></td></tr>
+          <tr><td>V-8</td><td>FTC endorsement-disclosure principle</td><td>“disclosed clearly and conspicuously”; Guides revised 2023</td><td><a href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer nofollow">FTC — Endorsement Guides FAQ</a></td></tr>
+          <tr><td>V-9</td><td>Supplied link 1</td><td><code>B04G1MEwY</code> → <code>/dp/B0CDY277D3</code> — “CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows…”; breadcrumb Air Fryers; <strong>no <code>tag=</code></strong></td><td><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">link.amazon/B04G1MEwY</a></td></tr>
+          <tr><td>V-10</td><td>Supplied link 2</td><td><code>B02NbDxp3</code> → <code>/dp/B09B7SB46R</code> — “Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven…”; no <code>tag=</code></td><td><a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer nofollow">link.amazon/B02NbDxp3</a></td></tr>
+          <tr><td>V-11</td><td>Supplied link 3</td><td><code>B00hJ57DV</code> → <code>/dp/B08DKYBTPH</code> — “Chefman Air Fryer 8 Qt | TurboFry® 4-in-1…”; no <code>tag=</code></td><td><a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer nofollow">link.amazon/B00hJ57DV</a></td></tr>
+          <tr><td>V-12</td><td>Repo gates on the claim tree</td><td><code>validate_data</code> 0 errors / 0 warnings (37 sources, 82 rows); <code>build_site --check</code> 39 built / 0 drifted; <code>build_root_views --check</code> clean; <code>build_summary --check</code> clean; <code>build_marketing --check</code> current; <code>tests/test_pipeline.py</code> 15/15; <code>audit_site.py</code> 97 pages, 5/5 PASS</td><td>local run, 2026-11-15</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:13.5px;margin:12px 0 0"><strong>Nothing on this page was inferred.</strong> Any value this session could not confirm from an official source is left out or marked missing — never filled in. Full source register: <a href="sources.html">Sources</a> · Verification log: <a href="verification.html">Verification</a> · Canonical decision board: <a href="pages/suggestions.html">Suggestions &amp; Decisions</a>.</p>
+    </div>
+
+    <footer class="site">
+      Compiled 2026-11-15 (T31, session <code>fcb538fa</code>). Companion views:
+      <a href="index.html">Dashboard</a> ·
+      <a href="summary.html">Executive Summary</a> ·
+      <a href="pages/suggestions.html">Suggestions decision board</a> ·
+      <a href="pages/questions.html">Open questions</a> ·
+      <a href="flagged.html">Flagged for Review</a> ·
+      <a href="verification.html">Verification log</a> ·
+      <a href="sources.html">Source register</a> ·
+      <a href="marketing/index.html">Field Notes — verified articles</a>.
+    </footer>
+  </main>
+</div>
+</body>
+</html>
