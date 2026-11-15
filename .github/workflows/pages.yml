@@ -286,7 +286,7 @@ jobs:
       - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
         run: python3 tools/validate_decisions.py
 
-      # ---- arena/2b07e526-zone2: the release-readiness board (T44) ----
+      # ---- arena/2b07e526-zone2: the release-readiness board (T45) ----
       # One row per named requirement on Amazon's Application Review Process page (S23), each with the
       # official source and, where measurable, a count recomputed from this tree. The generator fails on a
       # row with no official source, a quote that is not on S23 as captured, a BLOCKED row with no named
