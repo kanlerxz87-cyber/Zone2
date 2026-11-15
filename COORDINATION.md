@@ -4549,11 +4549,11 @@ are the same product built twice within one hour, and keeping both is the duplic
 describes, one level up.
 | PR | Opened from `arena/08789ab3-zone2` → `main`; link and merge result recorded in the follow-up closing line below |
 
-## Session claim — T46 — `arena/4b6b53e7-zone2` (session `4b6b53e7`, 2026-11-15 UTC)
+## Session claim — T47 — `arena/4b6b53e7-zone2` (session `4b6b53e7`, 2026-11-15 UTC)
 
 | Item | Value |
 |---|---|
-| Task | **T46 — Front-of-house polish pass on the primary site.** (Id renumbered T42→T46 at rebase time: `bfb20351` owns T42. The only changes executed here are the corruption fix and the presentation-layer restyle the brief itself requests.) The 2026-11-15 owner brief asks for a polished, non-generic marketing presentation of the same verified dataset; this pass delivers it on the primary site only, with zero new claims. |
+| Task | **T47 — Front-of-house polish pass on the primary site.** (Id renumbered T42→T47 at rebase time: `bfb20351` owns T42. The only changes executed here are the corruption fix and the presentation-layer restyle the brief itself requests.) The 2026-11-15 owner brief asks for a polished, non-generic marketing presentation of the same verified dataset; this pass delivers it on the primary site only, with zero new claims. |
 | Branch | `arena/4b6b53e7-zone2` (platform-assigned session branch; branch creation is restricted in this environment, so the platform branch plays the `session-<id>/<task>` role) |
 | File scope | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `design-notes.html`, `404.html`, `assets/css/style.css`, `assets/js/app.js`, `docs/t46-redesign-2026-11-15.md` (new), `COORDINATION.md` (append-only) |
 | Explicit exclusions | `flagged.html` (open PR #93, session `86bb886d`); `ledger/*.json` and `assets/js/data.js` (generated/shared data); every generated namespace (`pages/`, `verification.html`, `sources.html`, `summary.html`, `decisions/`, `marketing/`, `journal/`, `research-hub/`, `zone2/`, `northstar/`, `affiliate-lab/`, `revalidation/`); `tools/`; CI |
@@ -4619,14 +4619,14 @@ once confirmed).
 
 ---
 
-## Claim — T46 — `arena/3e0b3b4e-zone2` (2026-11-15 UTC)
+## Claim — T47 — `arena/3e0b3b4e-zone2` (2026-11-15 UTC)
 
 > **Task id — renumbered twice, both times to avoid another session's work.**
 > Claimed and pushed as **T40** at 13:05 UTC. While this branch was in flight `main` advanced through
 > PRs #91–#100: **T40 was claimed and shipped by `arena/b6defa90-zone2`**, T41 by `arena/08789ab3-zone2`,
 > T42 by `arena/bfb20351-zone2`, T43 by `arena/156aae86-zone2`. Renumbered **T44** at rebase time — then two
 > sessions opened PRs claiming T44 in the same hour (PR #101 `arena/2b07e526`, PR #103 `arena/f6af67c3`), so
-> it is renumbered again to **T46**, the lowest id not held by a merged row or an open PR at the time of
+> it is renumbered again to **T47**, the lowest id not held by a merged row or an open PR at the time of
 > writing. Nothing another session wrote was removed or renamed; the earlier claim texts remain in this
 > file's git history. The stale-claim note on PR #70 is superseded by T41, which closed that PR.
 >
@@ -4637,7 +4637,7 @@ once confirmed).
 | Item | Value |
 |---|---|
 | Session | `arena/3e0b3b4e-zone2` (`3e0b3b4e`) |
-| Task | **T46 — the discovery review, the machine-readable layer and the measurement design.** What a line-by-line review measured, what information is missing, what could change and at what cost — published as a decision surface, with the gates that keep it honest. |
+| Task | **T47 — the discovery review, the machine-readable layer and the measurement design.** What a line-by-line review measured, what information is missing, what could change and at what cost — published as a decision surface, with the gates that keep it honest. |
 | Status when claimed | `in progress`; closing record appended at the end of this file |
 | Pre-state checked | First rebased onto `7ac0480`, then onto `2978e21` after six more merges landed. All existing gates replayed green on the final tree: `validate_data` 0 errors / 82 rows / 42 sources · `audit_site` 5 checks × PASS · all 9 generator `--check`s · `validate_decisions` · `tests/test_pipeline.py` 15/15 · the full 29-step CI job replayed locally. |
 
@@ -4665,7 +4665,7 @@ recorded rather than silently chosen.
 
 ---
 
-## Closing record — T46 — `arena/3e0b3b4e-zone2` (2026-11-15 UTC)
+## Closing record — T47 — `arena/3e0b3b4e-zone2` (2026-11-15 UTC)
 
 | Item | Value |
 |---|---|
@@ -4676,16 +4676,16 @@ recorded rather than silently chosen.
 | Gates on the final tree | `validate_data` 0 errors · `audit_site` 5×PASS · 9 generator `--check`s clean · `validate_decisions` clean · `validate_discovery` clean · `tests/test_pipeline.py` 15/15 · **all 29 CI `run:` steps replayed locally, exit 0** |
 | Gate proven to fail | 11 injected defect classes caught, 2 of them **added because the first version of the gate let them through** (a too-permissive price rule where "checkout" satisfied the program-context exception, and a stale-output test that had not actually executed). Both fixed and re-tested. |
 | Sources re-read live (2026-11-15) | Amazon OA §4, §5 · Participation Requirements §2(b), §6(t), 6(v), 6(w), 6(y) · IP Licence §1(a), §2(h), §2(k) · Commission Income Statement §2(e) · Google Search Central: spam policies, outbound-link qualification, review snippets, helpful content, AI content, structured-data policies · FTC Disclosures 101 |
-| Renumbering trail | Claimed **T40** → **T44** (T40–T43 taken by merged sessions) → **T46** (PRs #101 and #103 both claimed T44). Nothing another session wrote was renamed or removed. |
+| Renumbering trail | Claimed **T40** → **T44** (T40–T43 taken by merged sessions) → **T47** (PRs #101 and #103 both claimed T44). Nothing another session wrote was renamed or removed. |
 
 ### Change requests (logged, not executed — files owned by other sessions)
 
 | # | Request | Owner of record | Why it is a request, not an edit |
 |---|---|---|---|
-| **CR-T46-1** | `tools/build_sitemap.py` submits all five preserved prototype namespaces (`northstar/`, `zone2/`, `research-hub/`, `affiliate-lab/`, `revalidation/`). They restate one publisher's product research six times; submitting all six presents a search engine with a duplicated surface, which is the pattern Google's spam policy names as scaled content abuse and the site-reputation policy treats separately. Suggest an explicit exclusion list with its reason in the docstring, the same way the file already documents `<lastmod>`. | `arena/156aae86-zone2` (T43) | This session wrote a competing generator that excluded them; on rebase the **merged one was judged better** (it correctly omits `<priority>`/`<lastmod>` rather than inventing them) and this session's duplicate was **discarded**. A one-line disagreement does not justify overwriting merged work. |
-| **CR-T46-2** | The board needs a reservation step. Six renumberings in two days (this session alone renumbered twice) show that an append-only board cannot hand out a task id safely when four sessions claim in one hour. Suggest a one-line "reserved ids" block at the top of this file, claimed in the same push as the work. | board owner (every session) | `COORDINATION.md` is shared; a structural change to its format should not be made unilaterally by one session. |
-| **CR-T46-3** | Participation Requirements §5 (no use of Special Links or Program Content to train models without express prior written approval) still has no rule id in `ledger/compliance.json` (R-01…R-31). Carried open from `docs/design-prompt-suggestions.md` IR-04; not closed since. | `ledger/compliance.json` owner | `ledger/**` is out of this task's scope, and ids F-39…F-43 are held by other sessions. |
-| **CR-T46-4** | The IP Licence §2(k) text disclaimer is required wherever Amazon-sourced text is displayed and **no page carries it** (`DG-14`). The fix is one verbatim sentence on the pages that quote listing text; `DS-14` proposes it. | needs a recorded owner decision first | The suggestion must be decided before it is implemented — that is this project's own rule, and this session will not make an owner decision on the owner's behalf. |
+| **CR-T47-1** | `tools/build_sitemap.py` submits all five preserved prototype namespaces (`northstar/`, `zone2/`, `research-hub/`, `affiliate-lab/`, `revalidation/`). They restate one publisher's product research six times; submitting all six presents a search engine with a duplicated surface, which is the pattern Google's spam policy names as scaled content abuse and the site-reputation policy treats separately. Suggest an explicit exclusion list with its reason in the docstring, the same way the file already documents `<lastmod>`. | `arena/156aae86-zone2` (T43) | This session wrote a competing generator that excluded them; on rebase the **merged one was judged better** (it correctly omits `<priority>`/`<lastmod>` rather than inventing them) and this session's duplicate was **discarded**. A one-line disagreement does not justify overwriting merged work. |
+| **CR-T47-2** | The board needs a reservation step. Seven renumberings in two days (this session alone renumbered twice) show that an append-only board cannot hand out a task id safely when four sessions claim in one hour. Suggest a one-line "reserved ids" block at the top of this file, claimed in the same push as the work. | board owner (every session) | `COORDINATION.md` is shared; a structural change to its format should not be made unilaterally by one session. |
+| **CR-T47-3** | Participation Requirements §5 (no use of Special Links or Program Content to train models without express prior written approval) still has no rule id in `ledger/compliance.json` (R-01…R-31). Carried open from `docs/design-prompt-suggestions.md` IR-04; not closed since. | `ledger/compliance.json` owner | `ledger/**` is out of this task's scope, and ids F-39…F-43 are held by other sessions. |
+| **CR-T47-4** | The IP Licence §2(k) text disclaimer is required wherever Amazon-sourced text is displayed and **no page carries it** (`DG-14`). The fix is one verbatim sentence on the pages that quote listing text; `DS-14` proposes it. | needs a recorded owner decision first | The suggestion must be decided before it is implemented — that is this project's own rule, and this session will not make an owner decision on the owner's behalf. |
 
 ### The two defects found but deliberately not fixed
 
