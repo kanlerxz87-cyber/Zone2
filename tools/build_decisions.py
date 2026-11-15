@@ -114,6 +114,21 @@ STATUS_KIND = {
 }
 
 
+def ref_badge(ref: str) -> str:
+    """Cross-references are rendered with their kind and a link, so a reader is never handed a bare code.
+    SG = canonical suggestion (pages/suggestions.html), RF = this review's finding (flagged.html),
+    F = project flag (pages/flags.html)."""
+    if ref.startswith("SG-"):
+        # pages/suggestions.html carries no per-row anchors, so a #fragment would address nothing;
+        # link the page and name the row instead (caught by tools/audit_site.py::check_fragments).
+        return f'<a href="../pages/suggestions.html">{esc(ref)} &middot; suggestion</a>'
+    if ref.startswith("RF-"):
+        return f'<a href="flagged.html#{esc(ref)}">{esc(ref)} &middot; this review</a>'
+    if ref.startswith("F-"):
+        return f'<a href="../pages/flags.html#{esc(ref)}">{esc(ref)} &middot; project flag</a>'
+    return f"<span>{esc(ref)}</span>"
+
+
 def status_pill(state: str) -> str:
     return pill(STATUS_KIND.get(state, "neg"), state)
 
@@ -435,7 +450,9 @@ def page_requirements() -> str:
                 else '<div class="row-note"><em>Where:</em> &mdash; nothing implements it</div>'
             )
             flags = (
-                f'<div class="flags-inline">{" ".join(f"<span>{esc(f)}</span>" for f in r["flag_ids"])}</div>'
+                '<div class="flags-inline">'
+                + " ".join(ref_badge(f) for f in r["flag_ids"])
+                + "</div>"
                 if r["flag_ids"]
                 else ""
             )

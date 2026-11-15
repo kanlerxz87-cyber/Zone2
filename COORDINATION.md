@@ -3253,6 +3253,27 @@ commits on top of `f30c7aa`.
 | CR-7 | Replace the "10-character" paraphrase with a verbatim "10-digit" quote wherever S24 is cited (75 occurrences). |
 | CR-8 | Six shell classes used by the pre-existing `pages/` templates (`.brand-mark`, `.eyebrow`, `.pill*`, `.panel-head`, `.row-note`, `.top-right`, `.status-dot`) still have no rule in `assets/css/style.css` or `tools/pages-site.css`, so those pages render them unstyled. Pre-existing, owned elsewhere; this namespace ships `tools/decisions.css` so it is unaffected. |
 
+### T29 follow-up — defect found on the live site and fixed (session `d0135100`, 2026-11-15)
+
+**Found by reading the deployed page, not by a gate.** After PR #69 merged, the live
+`https://kanlerxz87-cyber.github.io/Zone2/decisions/requirements.html` was fetched with the page tool (curl from
+this sandbox only reaches GitHub hosts). It rendered correctly — and showed **twelve cross-references to `SUG-xx`
+ids that no longer exist**: they were my own proposal ids, from the register deleted during deduplication against
+the canonical board. Every gate was green while they were published, because nothing compared a cross-reference
+against the registers it pointed at.
+
+This is the same lesson three earlier sessions recorded: **a drift gate proves the data matches the ledger, not
+that the sentence is true — read the deployed page.** It is now recorded a fourth time, with a gate behind it.
+
+| Item | Value |
+|---|---|
+| Defect | 12 dangling `SUG-xx` references on `decisions/requirements.html` (RQ-02, RQ-04, RQ-05, RQ-10, RQ-12 ×2, RQ-14, RQ-17 ×2, RQ-18, RQ-19, RQ-20) |
+| Fix 1 | Every reference remapped to a target that exists: `SG-xx` (canonical suggestion, `ledger/suggestions.json`) or `RF-xx` (this review's finding). Mapped by meaning, not by number: the disclosure gap became **RF-02**, article format became **SG-04**, editorial voice/authority became **SG-05**, measurement became **SG-09**, account/launch order became **SG-01**. |
+| Fix 2 | References now render as labelled, linked badges (`SG-04 · suggestion`) instead of bare codes, so a reader is told what they are looking at. |
+| Fix 3 | **New gate check** `check_cross_references`: every `FG/SG/RF/F` id cited by a requirement row must exist in one of the four registers. Proven to fail on purpose with an injected `SUG-99`, then restored. |
+| Fix 4 | Deep links to `pages/suggestions.html#SG-xx` were dropped — that page carries no per-row anchors, so the fragment addressed nothing. `tools/audit_site.py::check_fragments` caught it; the links now target the page itself. |
+| Re-verification | 13/13 gates green; `audit_site` 101 pages, all five checks PASS; `--check` drift gates current. |
+
 ## Session claim — `arena/42fa4918-zone2` (session `42fa4918`, 2026-11-15 UTC)
 
 **Claimed:** T31 (board row above) — independent verification-only re-test. **Scope:** `docs/verification-42fa4918.md` (new) and this file, append-only records only. No ledger, generator, generated page, root page or dataset is edited by this session; anything found is logged as a change request or a new flag for the owning/next session.
