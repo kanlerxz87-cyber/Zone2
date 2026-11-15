@@ -4154,3 +4154,15 @@ root glob does not reach).
    consent), DS-10 (single category), DS-12 (seven parallel sites), DS-13 (re-verification cadence), DS-14
    (the queue). Nothing in that list blocks the site; all of it blocks growth. F-07 — no Associates ID — is the
    only thing blocking revenue, and it is not technical.
+
+## Session claim — R86 — `arena/86bb886d-zone2` (session `86bb886d`, 2026-11-15 UTC)
+
+| Field | Value |
+|---|---|
+| Session | `86bb886d` |
+| Branch | `arena/86bb886d-zone2` (fixed for this session; base `ceaf9a7` = `main`) |
+| Task (R86) | Repository review dated 2026-11-15: re-verify the three supplied links, the controls and the official sources the site relies on, flag irregularities with source links, publish them on the site, record the PR and deploy |
+| Task-ID note | Labelled `R86`, not a `T##` number, so it cannot collide with the board's existing IDs. Irregularities use session-local IDs `R86-01…R86-08`; they are kept out of `ledger/flags.json` so the gated counts do not change |
+| File scope | `review-2026-11-15.html` (new), `flagged.html` (one link paragraph), `README.md` (one link line and a malformed-bracket fix), `sitemap.xml` (one entry), `COORDINATION.md` (this record) |
+| Not touched | `assets/css/style.css`, `pages/assets/dashboard.css`, `tools/**`, `ledger/**`, `index.html`, and open PRs #70 and #89 (owned by other sessions; logged below, not edited) |
+| Status | in progress |
