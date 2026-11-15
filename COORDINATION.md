@@ -3225,4 +3225,3 @@ This session initially proposed root-level `suggestions.html` and `questions.htm
 ### Why this scope
 
 The brief's suggestions/decision-log and pre-decision Q&A requests are already satisfied by the canonical T29/T30 deliverables now on `main`. The brief's remaining ask not yet covered was **catchy trendy articles and topics for organic traffic**, which this session closes with two source-governed topic articles.
-
