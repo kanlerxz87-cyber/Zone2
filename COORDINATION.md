@@ -5057,3 +5057,48 @@ were added by later merges without the row being updated). The brief requires a 
 fixed before merge ("Do not merge a broken site"). This session therefore also owns, for this fix
 only: `ledger/readiness.json` (RR-10 `site_state` text) and the regenerated `release/index.html`.
 No other readiness row, requirement, quote or state is touched.
+
+---
+
+## T42 — merge, deploy and self-inflicted-incident record — `arena/d26f42db-zone2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#125](https://github.com/kanlerxz87-cyber/Zone2/pull/125)** — `arena/d26f42db-zone2` → `main` — **MERGED** at 13:56 UTC (merge commit `d2c1581`) |
+| Follow-up PR | **[#126](https://github.com/kanlerxz87-cyber/Zone2/pull/126)** — hotfix, **MERGED** at 14:06 UTC (merge commit `16b0ebd`) |
+| Post-merge CI on `main` | run 43722569003 → **success** |
+| Pages build and deployment | run 43722568189 → **success**; Pages API `status: built` |
+| Live read | `console/index.html`, `console/design.html` fetched over HTTPS from `kanlerxz87-cyber.github.io/Zone2/` after the deploy — both render as published here |
+| CI note | As with every branch PR in this repo today, no check runs were created for #125/#126 themselves; the post-merge `push` run on `main` is the server-side confirmation, and it is green. |
+
+### The incident, and what it cost
+
+Merging #125 left `.github/workflows/pages.yml` with a stray `>>>>>>> 3ab4cb8 (T42 …)` marker **appended to the
+end of a `run:` line** rather than on its own line. GitHub refused the file outright — *"This run likely failed
+because of a workflow file issue"*, **zero jobs queued**. That broke CI and the Pages deploy for **every** session,
+not just this one, until #126 removed it.
+
+**Why no gate caught it:** my conflict-marker check was `grep -c '^<<<<<<<\|^=======\|^>>>>>>>'`. That is
+line-anchored. A marker sitting mid-line is invisible to it. The same defect class this project already logged as
+**F-42** in `COORDINATION.md` — reappearing in the one file where a single stray token is fatal rather than
+cosmetic.
+
+**Correction applied:** swept the tree with a *substring* search, not a line-anchored one. The only remaining hits
+are in `COORDINATION.md` and `docs/*.md` prose that is quoting earlier sessions' F-42 records — not live markers.
+
+### Two further scope corrections
+
+- **`sitemap.xml` is generated**, by `tools/build_sitemap.py` (session `156aae86`). My hand-merged union of both
+  sessions' `<url>` additions was valid XML but not what the generator emits, so CI step 22 failed. Fixed by
+  running the generator: 133 URLs, which includes all 8 `console/` pages automatically. The claim in this record's
+  earlier draft that this session "added 8 `<url>` entries" is wrong — the generator did.
+- **`tools/build_console.py` now measures the tree at build time** (pages, namespaces, links, broken links,
+  disclosure coverage, brand names) and those regions are masked during `--check`. Five sessions were merging
+  concurrently; a typed count went stale twice in one afternoon.
+
+### Net additions to the board
+
+14 proposals `P-01…P-14` · 12 open questions `IN-01…IN-12` · 15 answered rows `A-01…A-15` · 11 inventory items
+`V-01…V-11` · 9 irregularities `IR-01…IR-09` · 31 sources `C-01…C-31` · 28 verification checks `VR-01…VR-28` ·
+10 measurements `MS-01…MS-10` · 8 rewrites `RW-01…RW-08` · 9 principles `DP-01…DP-09` · 6 articles `AR-01…AR-06`.
+All namespaced away from the canonical `SG-`/`Q-`/`F-`/`DS-`/`RF-` registers, which are indexed and untouched.
