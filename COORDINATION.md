@@ -4349,7 +4349,6 @@ hand-typed, has no generator, and no CI step reads it — so it drifted to that 
 green. Separately `rel="icon"` is on the 4 `journal/` pages and on **0** of the 13 root pages, so the
 landing page's default `/favicon.ico` request 404s. That is the organic-traffic plumbing the brief asks
 for. Full record with reproducing commands: `docs/verification-156aae86.md`.
-<<<<<<< HEAD
 ### Addendum — `1b839f87` close-out (2026-11-15 UTC)
 
 - **PR #92** (record-only: this section's merge record) — **MERGED** 2026-11-15T13:11:06Z, merge commit `d887ae7`.
@@ -4484,7 +4483,6 @@ index, navigation or generated page was edited. Scope held to `COORDINATION.md`.
 | Sync note | `main` advanced several times during this session (PRs #89, #91, #95, #99, #102). Each sync resolved `COORDINATION.md` by keeping `main`'s content and re-appending this session's section. No other session's work was dropped. One early rebase left a conflicted local commit, which was never pushed; the branch was then reset to its pushed state and re-synced by merge, with no force-push. |
 | Irregularities | (1) PR #89 (font paths, F-39) resolved the 404 fonts on `main`. (2) PR #70 (`arena/cffe745a-zone2`) was still open at claim time with no owner record on the board; its status is not changed here. (3) The landing-page claim that “an unknown nine-character code on the same short-link service returns a 404” was not tested by this session and is not confirmed by this record. |
 | Still owner-open | Intended product for each supplied code (F-01/F-03); Associates tag and tagged links (F-07/F-24); Creators API (F-05). These need the account owner and are not blocked by this merge. |
-=======
 
 ## Closing record — T43 — `arena/156aae86-zone2` (session `156aae86`, 2026-11-15 UTC)
 
@@ -4504,4 +4502,100 @@ index, navigation or generated page was edited. Scope held to `COORDINATION.md`.
 | Self-corrected in this task | (a) IR-04 and IR-06 were both wrong on first write; corrected in place in the record. (b) **The first generated sitemap shipped `research-hub/404.html`** — the exclusion rule was an exact path, so a nested error page got through, and `seo_audit` D2 passed because that file does exist. Caught by reading the deployed file by hand, fixed by matching on basename, re-tested as N10. |
 | Left open for the owner (unchanged, blocks revenue not the build) | F-01/F-03 confirm the intended ASINs · F-24 no Associates `tag`, so the supplied links cannot earn as supplied · F-05 Creators API · F-08 no performance data exists · the suggestions board (`pages/suggestions.html`) and questions register (`pages/questions.html`) |
 | Renumbering trail | claimed T41 → **T43** (T41 shipped by `08789ab3` as PR #97, T42 by `bfb20351` as PRs #95/#99 while this branch was open). Nothing of either session's record was altered; the `COORDINATION.md` rebase conflict was resolved by taking `main`'s full text and appending this record. |
->>>>>>> 93087a0 (T43 closing record: PR #100 and #102 merged, Pages deploy confirmed, live sitemap verified (114 URLs, 0 error pages))
+
+## CLAIM + CLOSING RECORD — T45 — `arena/2b07e526-zone2` (2026-11-15 14:35 UTC; renumbered from T41→T42→T43→T44)
+
+**Renumbering trail (recorded, not hidden).** Claimed as **T41** (13:12 UTC) — taken by `08789ab3`.
+Renumbered **T42** (13:14) — taken by `bfb20351`. Renumbered **T43** (13:40) — taken by `08789ab3`
+again, PR #97. Now **T44**. At no point was another session's work overwritten: each collision was
+resolved by aborting my own history and re-applying only my own files onto current `main`.
+
+**Task.** A release-readiness board: one row per named requirement on Amazon's *Application Review
+Process* page (S23), each with its official source and, where measurable, a count recomputed from this
+tree; plus the two owner blockers that page creates, registered on the canonical question and
+suggestion registers. Also: the landing-page list defects that T40's repair stopped short of, and the
+audit check that makes them impossible to reintroduce.
+
+**Claimed file scope (all produced):**
+
+| File | Change |
+|---|---|
+| `ledger/readiness.json` | new — 12 rows, one per S23 requirement |
+| `tools/build_readiness.py` | new — generator + gate, proven to fail on 14 injected defects |
+| `release/index.html` | new — the published board, generated |
+| `docs/release-readiness-2b07e526.md` | new — the review record |
+| `ledger/questions.json` | +Q-17 (website ownership and the exact URL to declare) |
+| `ledger/suggestions.json` | +SG-11 (close Amazon's 10-post content bar before applying) |
+| `tools/audit_site.py` | new `debris` check; `release/` added to REQUIRED_NAMESPACES |
+| `index.html` | duplicate `marketing/index.html` list entry removed; link to the board added |
+| 9 root pages | stale "Field Notes" label corrected to "Counter Notes" (the published brand) |
+| `design-notes.html` | two more "Field Notes" references in prose corrected |
+| `.github/workflows/pages.yml` | one added step (`build_readiness.py --check`); no existing step changed |
+
+**Not touched:** `ledger/products.json`, `ledger/flags.json`, `ledger/sources.json`,
+`ledger/compliance.json`, `ledger/requirements.json`, `marketing/**`, `journal/**`, `pages/**` (all
+regenerated by their owners), `revalidation/**`, `affiliate-lab/**`, `research-hub/**`, `zone2/**`,
+`northstar/**`, `assets/**`, `tools/build_sitemap.py`, `tools/seo_audit.py`. No product value, flag,
+source id or requirement status is edited by this session.
+
+**Verification (2026-11-15, over the network in this session, not copied from the registers):**
+
+| # | Claim | Result | Source |
+|---|---|---|---|
+| V-01 | Supplied link 1 → destination | `link.amazon/B04G1MEwY` → `amazon.com/dp/B0CDY277D3`, CHEFMAN 6 Qt dual-basket | https://link.amazon/B04G1MEwY |
+| V-02 | Supplied link 2 → destination | `link.amazon/B02NbDxp3` → `amazon.com/dp/B09B7SB46R`, Emeril Lagasse 26QT French Door | https://link.amazon/B02NbDxp3 |
+| V-03 | Supplied link 3 → destination | `link.amazon/B00hJ57DV` → `amazon.com/dp/B08DKYBTPH`, Chefman 8 Qt TurboFry | https://link.amazon/B00hJ57DV |
+| V-04 | No Associates tag; `btn_ref` rotates per fetch | Confirmed on all three: fresh `srctok` each fetch, `plpRedirect=mhFallback`, no `tag=` | the three links |
+| V-05 | ASIN is a 10-digit code | Verbatim: "ASIN is the 10-digit code that Amazon uses to denote specific products." Supplied tokens are 9 characters. | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| V-06 | §5 disclosure sentence | Verbatim; page dated October 15, 2025 | https://affiliate-program.amazon.com/help/operating/agreement |
+| V-07 | Price display is gated on Amazon-served links or API data | Verbatim: "your Site may only show prices and availability if: (a) we serve the link … or (b) you obtain Product pricing and availability data via Creators API or PA API". Confirms the blank-price policy; narrows what "unverified" means for a price. | https://affiliate-program.amazon.com/help/operating/policies |
+| V-08 | Content bar, ownership, exact URLs, 3-sales rule | Verbatim; captured in `ledger/readiness.json` → `primary_source_quotes`, rendered on the board | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
+
+**Gate replay on the merged tree — every step exit 0:** `validate_data` · `audit_site` (6 checks:
+fragments, spec sources, prose counts, namespaces, disclosure, **debris**) · `validate_decisions` ·
+`build_readiness --check` · `build_site --check` · `build_root_views --check` · `build_summary
+--check` · `build_marketing --check` · `build_decisions --check` · `build_sitemap --check` ·
+`seo_audit` · `tests/test_pipeline.py` 15/15 · `verify_marketing` · `revalidation/verify` ·
+`revalidation/build --check` · `affiliate-lab/verify_site` · `research-hub/verify` · `research-hub`
+build no drift · `node --check` ×2. Recursive link + disclosure sweep over all published HTML
+(including `journal/` and `release/`, which CI's root glob does not reach): 0 problems.
+
+**Irregularities handled (non-blocking, published):**
+- **The landing-page corruption was fixed twice, by two sessions, independently.** `b6defa90` (T40)
+  removed the `EAD` lines and the bare `in`; this session found and removed what their repair stopped
+  short of — a duplicated `Suggestions board` link and a second entry pointing at `marketing/index.html`
+  under a label ("Field Notes") that named no published brand. Neither session's fix was discarded.
+- **Four task ids were taken under this session** (T41, T42, T43 twice). The board is a conflict
+  magnet: three merge attempts conflicted on `COORDINATION.md` alone in 60 minutes. A per-session log
+  file would end the class.
+- **RR-02 / RR-12 are not answerable by an agent.** Whether a `github.io` subdomain satisfies "You must
+  own your website" is not stated on any page read; the board marks it UNVERIFIED and does not infer.
+- **The 14 counted editorial posts are not 14 posts by Amazon's bar.** RR-03 stays GAP despite the
+  count clearing 10, because the pages are specification surfaces, not articles a reader arrives at
+  from a search. That judgement is Amazon's; the count is simply not evidence of the criterion.
+- **No product value was added or changed.** Price, rating, review count, availability and commission
+  band remain blank; the Creators API is unreachable without the account (F-05 / Q-02).
+
+### CI note for T44 (2026-11-15)
+
+No check run was created for PR #101. The one run that did start (43718323427) was **cancelled**
+by the shared `pages` concurrency group 1 second in, because another session pushed `main` at the
+same moment; an empty commit produced no new run at all. This is the T28-recorded pattern, and it is
+handled the recorded way: the **entire build job was replayed locally** — the workflow YAML parsed
+and every `run:` step executed in order, 25 of 25 exit 0, including the new
+`build_readiness.py --check` step. The post-merge `push` run on `main` is the server-side
+confirmation.
+
+### Addition to T45 — two more gates, from defects this session made itself
+
+- **Conflict markers in `COORDINATION.md`.** While merging `main` for the sixth time, a resolution was
+  committed with the markers still in the file — the exact defect recorded as F-42 on this board in an
+  earlier session. Nothing checked for it: the file is Markdown, so every HTML gate skipped it, and a
+  reader of the board sees `<<<<<<< HEAD` as content. `tools/audit_site.py` now has a **`board`** check
+  that fails on any of the three marker lines in `COORDINATION.md`. Negative-tested: injecting the
+  three lines fails the audit with the line numbers; removing them passes.
+- **The landing-page `debris` check** (already added by this session) covers the same class in HTML:
+  stray unstyled prose, and a link repeated inside one list.
+
+Both were bugs this session created or found live, not hypotheticals, which is the only reason they
+were worth a gate each.

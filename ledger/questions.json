@@ -245,6 +245,21 @@
         "S10"
       ],
       "owner": "owner"
+    },
+    {
+      "id": "Q-17",
+      "question": "Do you own the website you will declare in the Associates application, and which exact URL will you declare?",
+      "known": "Amazon states the requirement on the Application Review Process page (S23): 'Content on your website must be recent (generally within the last 60 days). You must own your website.' The same page asks for an exact URL rather than a bare host name. This repository publishes to a github.io subdomain served by GitHub Pages (S22).",
+      "missing": "Whether the owner holds a registered domain, whether a github.io address counts as ownership under Amazon's review, and which of this repository's published surfaces is the one to declare.",
+      "how_to_find": "Owner decides the domain and the surface. The agent can then point every canonical URL, sitemap entry and structured-data field at it in one build. S23 does not define the github.io case, so the agent cannot answer it.",
+      "blocks": [
+        "SG-12"
+      ],
+      "source_ids": [
+        "S23",
+        "S22"
+      ],
+      "owner": "owner"
     }
   ]
 }
