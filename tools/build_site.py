@@ -826,7 +826,8 @@ def page_suggestions() -> str:
         needs = " ".join(_q_anchor(q) for q in s["needs_answers"]) or "none"
         rows.append(
             [
-                f'<td><strong>{esc(s["id"])}</strong><div class="row-note">{esc(s["area"])}</div></td>',
+                # id anchor so other pages can deep-link a single suggestion (CR-8; mirrors page_questions' Q-xx ids)
+                f'<td><strong id="{esc(s["id"])}">{esc(s["id"])}</strong><div class="row-note">{esc(s["area"])}</div></td>',
                 f"<td><strong>{esc(s['title'])}</strong><div class=\"row-note\">{esc(s['suggestion'])}</div>"
                 f"<div class=\"row-note\"><em>Why:</em> {esc(s['why'])}</div></td>",
                 f"<td>{opts}</td>",
