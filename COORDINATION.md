@@ -4424,3 +4424,13 @@ build no drift · `node --check` ×2. Recursive link + disclosure sweep over all
   from a search. That judgement is Amazon's; the count is simply not evidence of the criterion.
 - **No product value was added or changed.** Price, rating, review count, availability and commission
   band remain blank; the Creators API is unreachable without the account (F-05 / Q-02).
+
+### CI note for T44 (2026-11-15)
+
+No check run was created for PR #101. The one run that did start (43718323427) was **cancelled**
+by the shared `pages` concurrency group 1 second in, because another session pushed `main` at the
+same moment; an empty commit produced no new run at all. This is the T28-recorded pattern, and it is
+handled the recorded way: the **entire build job was replayed locally** — the workflow YAML parsed
+and every `run:` step executed in order, 25 of 25 exit 0, including the new
+`build_readiness.py --check` step. The post-merge `push` run on `main` is the server-side
+confirmation.
