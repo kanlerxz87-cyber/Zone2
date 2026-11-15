@@ -3548,4 +3548,3 @@ appended nav link, one README source-count label, five appended source rows (S38
 | T31 | **done** |
 
 **Still open for the owner (unchanged):** F-42's duplicated-fragment review; CR-9 executive-summary subsection; F-39…F-41 promotion (d0135100's CR-6); the product/account questions Q-01…Q-16 that gate every suggestion SG-01…SG-10. Open PRs at close: #65, #70 (both marketing-layer work by other sessions, non-overlapping with T31).
->>>>>>> origin/main
