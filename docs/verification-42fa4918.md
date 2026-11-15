@@ -106,3 +106,21 @@ Source: https://affiliate-program.amazon.com/help/operating/policies#Associates%
 ## 8. Verdict
 
 The merged T29 deliverable is **verified line by line** against official sources; the combined tree passes **every repository gate**; the live site serves the decision board and questions register **with per-row source links**. Two bookkeeping items (F-39 debris, page-count note) and one completeness gap (CR-3) are flagged for review; none blocks the site.
+
+---
+
+## 9. Addendum — final combined tree at PR time (recorded 2026-11-15, after PR #69 merged)
+
+While this session worked, `main` advanced once more: **PR #69** (`arena/d0135100-zone2`, session `d0135100`, merged 11:53:17Z) added `ledger/requirements.json` (24 requirements), a `decisions/` namespace with its own gate pair (`tools/build_decisions.py --check`, `tools/validate_decisions.py`), `DECISIONS.md`, and the RF-01…RF-03 findings. That session had also claimed T29, and its record on `main` documents the deduplication: the canonical suggestions/questions ledgers written by `2499438c` were **kept untouched** — `d0135100`'s own copies were deleted, and its tooling now *reads* the canonical registers.
+
+Consequences verified on the final combined tree (`main` = `5caf097` + this session's commits merged in):
+
+| Check | Result |
+|---|---|
+| Canonical T29 ledgers unchanged by PR #69 | Confirmed — the 26 rows verified in §2 above are still the live data (`validate_decisions` re-reads them: 10 suggestions, 16 open questions) |
+| New decisions gates on the combined tree | PASS — `build_decisions --check` (8 built, no drift); `validate_decisions` (0 errors: 24 requirements, 10 suggestions awaiting, 16 questions open, 3 findings, 28 distinct sources cited) |
+| Full audit on the combined tree | `tools/audit_site.py`: **101 published pages** (97 + the 4 `decisions/` pages), all classes PASS |
+| Remaining drift gates re-run | `build_site --check`, `build_root_views --check`, `build_summary --check`, `test_pipeline.py` 15/15 — all PASS |
+| Flag-id collision avoided | `d0135100` reserved **F-39…F-41** for its RF findings (CR-6); this session's debris finding is therefore numbered **F-42**, and `ledger/flags.json` still holds F-01…F-38 until a flag-register owner lands either set |
+
+The finding numbering in §6 applies as amended: **F-42** = pre-existing `COORDINATION.md` conflict debris (markers removed this session; duplicated fragment left for owner review), **CR-9** = executive-summary completeness gap.
