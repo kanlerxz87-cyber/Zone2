@@ -4646,3 +4646,11 @@ attempt to do so. The 60-minute takeover rule applies: T29's owner merged PR #61
 PR touches `tools/build_site.py` or `pages/suggestions.html`.
 
 **Claim commit and push happen immediately after this record, before any non-coordination edit.**
+
+**Scope amendment (recorded before the edit, 2026-11-15T13:5xZ).** On the merged tree
+`origin/main` @ `debc915`, `python3 tools/build_readiness.py --check` fails **on main itself**:
+RR-10's `site_state` prints "124 of 124 published pages" while the tree measures **126** (two pages
+were added by later merges without the row being updated). The brief requires a failing check to be
+fixed before merge ("Do not merge a broken site"). This session therefore also owns, for this fix
+only: `ledger/readiness.json` (RR-10 `site_state` text) and the regenerated `release/index.html`.
+No other readiness row, requirement, quote or state is touched.
