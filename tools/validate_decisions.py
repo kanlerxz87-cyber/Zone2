@@ -193,6 +193,30 @@ def check_suggestions(rep: Report) -> None:
     rep.stats["suggestions_awaiting"] = sum(1 for s in bd.all_sugs() if bd.sug_decision(s) == "AWAITING_DECISION")
 
 
+def check_cross_references(rep: Report) -> None:
+    """Every FG-xx / SG-xx / RF-xx / F-xx a requirement row cites must exist in the tree.
+
+    This is a regression check, not a hypothetical: the first version of this namespace published twelve
+    cross-references to `SUG-xx` ids that belonged to a register deleted during deduplication against the
+    canonical board (PR #61). The pages rendered beautifully and every other gate passed, because nothing
+    compared a reference against the registers it was supposed to point at. It was only caught by reading
+    the deployed live page.
+    """
+    known = {s["id"] for s in bd.all_sugs()} | {q["id"] for q in bd.all_qs()}
+    known |= {f["id"] for f in bd.FINDINGS["findings"]}
+    known |= {f["id"] for f in json.loads((DATA / "flags.json").read_text(encoding="utf-8"))["flags"]}
+    checked = 0
+    for r in bd.all_reqs():
+        for ref in r.get("flag_ids", []):
+            checked += 1
+            if ref not in known:
+                rep.fail(
+                    f"{r['id']}: cites {ref!r}, which exists in no register "
+                    "(ledger/suggestions.json, ledger/questions.json, ledger/flags.json, ledger/decisions_findings.json)"
+                )
+    rep.stats["cross_references_checked"] = checked
+
+
 def check_findings(rep: Report) -> None:
     """This task's own review findings must stay sourced and attributable."""
     for f in bd.FINDINGS["findings"]:
@@ -303,6 +327,7 @@ def main() -> int:
         check_requirements(rep)
         check_questions(rep)
         check_suggestions(rep)
+        check_cross_references(rep)
         check_findings(rep)
         check_pages(rep)
         check_current(rep)
