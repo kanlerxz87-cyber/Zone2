@@ -4612,3 +4612,23 @@ blank. Counts typed in prose ("Six guides") are derived or reworded in the same 
 
 **Status:** claimed → in progress.
 **T46 addendum (same session, 2026-11-15, after the closing record above).** The post-merge Actions run for PR #114 failed on the (then-new) `Every stylesheet url() resolves to a file` step — main had been red on this step since PR #109's merge. Root cause: the check scans comments too, and the *illustrative* `url("../fonts/…")` placeholder written inside a `style.css` comment (carried into the two vendor copies by their builders) resolves to a literal `…` file that does not exist. Fix (this session, comment-only, no behavior change): the comment now says "the @font-face src paths are stylesheet-relative: ../fonts/… from assets/css/" without a `url(` literal; vendor copies regenerated through their builders. **Full CI step replay local: every step PASS** (including `check_css_urls` — 16 stylesheets, 9 local url() refs, 0 broken; `build_audit --check`; `validate_audit`; `test_audit`; `seo_audit`; `build_sitemap --check`). Fix merged via the PR recorded below.
+
+---
+
+### Merge and deploy record — `f8e18ca8`
+
+| Item | Value |
+|---|---|
+| PR | **[#108](https://github.com/kanlerxz87-cyber/Zone2/pull/108)** — `arena/f8e18ca8-zone2` → `main` — **MERGED** 2026-11-15T13:30:51Z (`gh pr merge 108 --merge`, no review wait per the brief) |
+| Merge commit | `84c3cb0` |
+| PR check | `Build and verify` → **pass** (run `43719281054`) |
+| Post-merge `push` run | **success** (run `43719385656`); `pages build and deployment` **success** |
+| Pages | `gh api .../pages` → `status=built`, source `main`, url `https://kanlerxz87-cyber.github.io/Zone2/` |
+| Live read | `audit/index.html` fetched over HTTPS after deploy: title, 16 finding rows, all source badges and the R-## cross-links render; KPI strip reads 16 / 5 / 14 / 2 / 116 |
+| New CI steps on `main`, all green | `Every stylesheet url() resolves to a file` · `Rebuild the audit pages and confirm committed output is current` · `Audit gate (sourcing, carried-source labels, derived counts, links, disclosure)` · `Audit gate negative tests (11 injected defects must each fire)` |
+| Delivered | `audit/` (6 generated pages + 5 data files), `tools/build_audit.py`, `tools/validate_audit.py`, `tools/test_audit.py`, `tools/check_css_urls.py`, `docs/audit-2026-11-15.md`, `docs/design-prompt-2026-11-15.md`, additive nav/footer/sitemap/workflow/README/EXECUTIVE_SUMMARY edits |
+| Not changed | `ledger/**`, `pages/**`, `marketing/**`, `journal/**`, `decisions/**`, `assets/**`; no product value, price, rating or performance figure was altered or added anywhere |
+| Irregularities (non-blocking, all published) | A-01…A-16 on `audit/index.html`; `1B-2` (gate blindness — CSS half now closed); A-16 (merge residue reached `main` and was live, repaired here); the session-overlap disclosure above |
+| Rebase conflicts resolved | `COORDINATION.md` ×4 and `sitemap.xml` ×1 during the merge waves. Every resolution was append-only: main's version verbatim, then this session's two sections appended once. No other session's text was dropped, and no midline merge was performed — the midline merges are what produced the F-42 debris the board has been cleaning since T26. |
+| Withdrawn | nothing |
+| Handed to a later session | R-01…R-14 remain **undecided proposals**; G-01…G-15 remain **open questions**. Neither list is a task queue: a row becomes work only when the owner records a `decision`, per the board's own rule. |
