@@ -323,7 +323,7 @@
     {
       "id": "IN-12",
       "question": "What does finished mean for this project?",
-      "have": "116 pages, 38 flags, 16 open questions, 10 open suggestions, 14 open marketing-board items, 30-odd sessions of work, and no monetised link.",
+      "have": "A large published tree — over 120 pages across a dozen namespaces, dozens of open flags, questions and suggestions across five separate registers, and no monetised link on any of it. The exact counts are measured at build time on the repository review page; they are deliberately not typed here because they change every time another session merges.",
       "missing": "A definition of done. Without one, every session adds another surface.",
       "how_to_find": "Owner writes one sentence: what the site should be able to do in 90 days that it cannot do today.",
       "who": "owner",
@@ -367,7 +367,7 @@
     {
       "id": "V-04",
       "item": "The mandatory disclosure sentence, verbatim",
-      "detail": "“As an Amazon Associate I earn from qualifying purchases.” Present on 116 of 116 published pages.",
+      "detail": "“As an Amazon Associate I earn from qualifying purchases.” Present on every page in the published tree — measured at build time, and shown on the repository review page.",
       "status": "Held — official and implemented",
       "source_ids": [
         "C-01"

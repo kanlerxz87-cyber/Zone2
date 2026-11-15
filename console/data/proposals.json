@@ -219,7 +219,7 @@
       "area": "Content architecture",
       "title": "Three page types, not thirty",
       "change": "Standardise on three page types — product page, comparison, question-shaped guide — and fold or retire everything that overlaps them.",
-      "why": "Measured 2026-11-15: 116 pages across 11 namespaces, including a buying guide, a head-to-head, three per-product articles, six topic guides, a journal, a playbook, a requirements table, a revalidation set and a second platform build. Google's thin-affiliation description names “cookie-cutter sites or templates with the same or similar content replicated within the same site”. Volume with overlapping purpose is the risk shape, and it also splits what little authority the site has.",
+      "why": "Measured 2026-11-15: over 120 pages across a dozen namespaces, including a buying guide, a head-to-head, three per-product articles, six topic guides, a journal, a playbook, a requirements table, a revalidation set and a second platform build. Google's thin-affiliation description names “cookie-cutter sites or templates with the same or similar content replicated within the same site”. Volume with overlapping purpose is the risk shape, and it also splits what little authority the site has.",
       "options": [
         {
           "id": "A",
@@ -302,7 +302,7 @@
       "area": "Search hygiene",
       "title": "Fix the metadata layer before writing another article",
       "change": "Audit and correct, on every public page: <title>, meta description, canonical, image alt text, and the sitemap. One title pattern, one description pattern, one canonical host.",
-      "why": "Google's guidance is explicit that review “also applies to metadata like <title> elements, meta description elements, structured data, and alternate texts for images, which can appear in Search results”. The published tree has 116 pages written by 30 sessions; their titles follow at least six patterns.",
+      "why": "Google's guidance is explicit that review “also applies to metadata like <title> elements, meta description elements, structured data, and alternate texts for images, which can appear in Search results”. The published tree runs to over 120 pages written by dozens of sessions; their titles follow at least six patterns.",
       "options": [
         {
           "id": "A",
