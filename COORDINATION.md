@@ -4154,3 +4154,64 @@ root glob does not reach).
    consent), DS-10 (single category), DS-12 (seven parallel sites), DS-13 (re-verification cadence), DS-14
    (the queue). Nothing in that list blocks the site; all of it blocks growth. F-07 — no Associates ID — is the
    only thing blocking revenue, and it is not technical.
+
+---
+
+## Session record — `1b839f87` (`arena/1b839f87-zone2`, 2026-11-15 UTC)
+
+Identity: session id `1b839f87` (no `T##` label, per the renumbering lesson above). Branch fixed by the
+session harness to `arena/1b839f87-zone2`; the `session-<id>/<task>` branch convention in the brief was
+not followed for that reason. Scope claimed and touched: **only** the font-path defect below, plus this
+record. No other session's open work was edited (PR #70 `arena/cffe745a-zone2`, `marketing/articles/*`,
+was left untouched).
+
+### Repo review performed (2026-11-15)
+
+- `main` @ `ceaf9a7`; open PRs before this session: #70 only (`arena/cffe745a-zone2`, another session).
+- Gates on the untouched tree: `tools/validate_data.py` exit 0 · `tests/test_pipeline.py` 15/15 ·
+  `tools/build_site.py --check` · `tools/build_root_views.py --check` · `marketing/scripts/verify_marketing.py`
+  · `tools/audit_site.py` — all green.
+- Live site `https://kanlerxz87-cyber.github.io/Zone2/` fetched 2026-11-15: landing renders; KPI "3 of 3
+  resolve, 0 of 3 confirmed by an official Amazon document, 38 flags" matches `ledger/flags.json` (38 rows).
+- Supplied links re-observed 2026-11-15 (fetched via `fetch_page`): `link.amazon/B04G1MEwY` →
+  `amazon.com/dp/B0CDY277D3` (Chefman 6 QT dual-basket), `link.amazon/B02NbDxp3` → `amazon.com/dp/B09B7SB46R`
+  (Emeril Lagasse 26QT), `link.amazon/B00hJ57DV` → `amazon.com/dp/B08DKYBTPH` (Chefman 8 Qt). All three
+  match the ledger. Destination pages show live prices and ratings; per policy none is copied to the site.
+
+### Defect found and repaired — session flag `1B-1` (not in the F-series; `ledger/flags.json` untouched)
+
+- **What:** the self-hosted Fraunces/Inter `@font-face` rules in `assets/css/style.css` were written
+  `url("assets/fonts/…")`. A CSS `url()` resolves relative to the stylesheet (`assets/css/`), so the browser
+  requested `assets/css/assets/fonts/…`, which does not exist. The same defect was vendored into
+  `pages/assets/dashboard.css` by `tools/build_site.py`, which copied the sheet verbatim. Every page therefore
+  silently fell back to system fonts. Earlier sessions noted the same 404 class as a cosmetic irregularity and left it unrepaired
+  (`assets/css/style.css` `@font-face` paths, recorded in the T34–T39 closing records).
+- **Fix:** `assets/css/style.css` → `url("../fonts/…")`; `tools/build_site.py` rewrites the vendored copy to
+  `url("../../assets/fonts/…")`; `tools/build_decisions.py` rewrites from the corrected source form
+  (`../fonts/` → `../../assets/fonts/`); its output is unchanged (`git status` shows no diff under `decisions/`).
+- **Verification:** a resolver over every `url()` in every tracked `*.css` file: 9 font references resolve to
+  files on disk, 0 broken. Generators re-run; `--check` modes green. Full `pages.yml` run-steps replayed
+  locally (24 run-steps, all exit 0).
+- **Not covered by CI:** the workflow's link check parses HTML only, so a broken CSS `url()` will not fail
+  the build. Logged as a recommended guard (see Suggestions below); not added here to keep this change minimal.
+
+### Sources (official / verified, fetched 2026-11-15)
+
+| Claim | Source |
+|---|---|
+| Short link → destination (3 of 3) | https://link.amazon/B04G1MEwY · https://link.amazon/B02NbDxp3 · https://link.amazon/B00hJ57DV |
+| Destination listings | https://www.amazon.com/dp/B0CDY277D3 · https://www.amazon.com/dp/B09B7SB46R · https://www.amazon.com/dp/B08DKYBTPH |
+| Disclosure sentence, program terms | https://affiliate-program.amazon.com/help/operating/agreement (as already recorded in C-18/C-19) |
+| Relative `url()` base rule | CSS Values and Units Level 4 (Editor's Draft), https://drafts.csswg.org/css-values-4/#url-value — the base-URL sentence was not located in this session; the claim is therefore backed by the on-disk resolution check above, not by the spec text |
+
+### Irregularities for review (non-blocking, published on Flagged for Review by the existing register)
+
+- `1B-1` (repaired here, owner-review): font paths were 404; fonts silently fell back to system fonts before this PR.
+- `1B-2` (open): the Pages workflow has no CSS-asset check; a regression of 1B-1 would pass CI.
+- Carried, unchanged: no Associates tag on the supplied links; no official document binds the short codes to
+  the ASINs (F-01…F-03, F-24 in `ledger/flags.json`) — unchanged by this session.
+
+### Status
+
+Task "font-path repair + live re-verification" — **done** pending PR merge and Pages deploy (recorded below
+once confirmed).
