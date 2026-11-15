@@ -3,44 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Special Link management, click/conversion tracking and monthly reconciliation designed per the official Amazon Associates rules — planned, with the attribution model verified.">
 <title>Tracking — Zone2</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Verified affiliate platform</span>
+      </span>
+    </a>
+    <label class="nav-toggle" for="navtoggle">Menu</label>
+    <input type="checkbox" id="navtoggle" class="nav-toggle-input">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Overview</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html" class="active">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a>
+      <a href="verification.html" class="nav-quiet">Verification</a>
+      <a href="sources.html" class="nav-quiet">Sources</a>
+      <a href="flagged.html" class="nav-quiet">Flagged</a>
+      <a href="design-notes.html" class="nav-quiet">Design notes</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Link &amp; Campaign Tracking</h2>
-      <p>Special Link management, click/conversion tracking and monthly reconciliation, designed per the official program rules. The three supplied links carry no Associates <code>tag</code>, so as supplied they cannot attribute a sale or earn a commission (F-24); no Associates account or tag was supplied either, so the compliant setup below is planned, not yet live.</p>
-    </div>
+  </div>
+</header>
 
+<main id="main">
+  <section class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Tracking</div>
+      <h1 class="hero-title">Links, clicks, conversions — built compliantly, switched off until it can earn</h1>
+      <p class="hero-lede">Special Link management and click/conversion tracking designed per the official program rules. Nothing here is live: the supplied links carry no Associates tag, so as supplied they cannot attribute a sale — the platform says so rather than pretending otherwise.</p>
+    </div>
+  </section>
+
+  <div class="page-wrap">
     <div class="disclosure">
       <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
     </div>
 
-    <div class="card">
-      <h3>Campaign &amp; Tracking Setup</h3>
+    <section class="section">
+      <h2 class="section-title">Campaign &amp; tracking setup</h2>
+      <p class="section-sub">The three supplied links carry no Associates <code>tag</code>, so as supplied they cannot attribute a sale or earn a commission (F-24); no Associates account or tag was supplied either, so the compliant setup below is planned — labelled as planned, not implied to be live.</p>
       <div id="trackingTable"></div>
-    </div>
+    </section>
 
-    <div class="card">
-      <h3>Attribution model (verified)</h3>
-      <ul style="margin:0;padding-left:20px;font-size:14px">
+    <section class="section">
+      <h2 class="section-title">Attribution model (verified)</h2>
+      <p class="section-sub">The program&rsquo;s own attribution mechanics, from the official Commission Income Statement:</p>
+      <div class="card"><ul style="margin:0;padding-left:20px;font-size:14px">
         <li>A <strong>Session</strong> begins when a customer clicks a Special Link and ends at the first of: 24 hours elapse, an order is placed, or the customer clicks a different Associate's Special Link.</li>
         <li>Cart purchases qualify if the product is added and the order is completed no later than <strong>89 days</strong> after the initial click-through.</li>
         <li>Commission income is paid approximately <strong>60 days</strong> after the end of the month in which it was earned.</li>
@@ -48,14 +67,78 @@
       </ul>
       <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">
         Source: <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Associates Program Policies — Commission Income Statement</a>.
-      </p>
-    </div>
+      </p></div>
+      <div class="callout callout-warn"><strong>Privacy posture:</strong> the planned click counter is first-party and privacy-minimal — no cookies, no IP addresses, no visitor identifiers — so tracking never becomes a compliance liability of its own. The schema and guard code are in <code>tools/</code>.</div>    </section>
 
     <footer class="site">
       Verified dataset date: 2026-11-14.
     </footer>
-  </main>
-</div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="content.html">Content</a></li>
+            <li><a href="compliance.html">Compliance</a></li>
+            <li><a href="tracking.html">Tracking</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Evidence</h4>
+          <ul>
+            <li><a href="verification.html">Verification log</a></li>
+            <li><a href="sources.html">Source register</a></li>
+            <li><a href="flagged.html">Flagged for review</a></li>
+            <li><a href="summary.html">Executive summary</a></li>
+            <li><a href="pages/index.html">Findings hub</a></li>
+            <li><a href="pages/categories/index.html">Commission categories</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Decisions</h4>
+          <ul>
+            <li><a href="decisions/index.html">Decision hub</a></li>
+            <li><a href="pages/suggestions.html">
+            <li><a href="pages/questions.html">Open questions register</a></li>
+            <li><a href="design-notes.html">Design notes &amp; growth ideas</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Companion builds</h4>
+          <ul>
+            <li><a href="research-hub/start.html">Affiliate Research Hub</a></li>
+            <li><a href="marketing/index.html">Field Notes — verified articles</a></li>
+            <li><a href="revalidation/index.html">Revalidation 2026-11-14</a></li>
+            <li><a href="affiliate-lab/index.html">Affiliate Lab</a></li>
+            <li><a href="zone2/index.html">Zone2 platform build</a></li>
+            <li><a href="northstar/index.html">Northstar prototype</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
+        As an Amazon Associate I earn from qualifying purchases. Amazon and the Amazon mark are
+        trademarks of Amazon.com, Inc. or its affiliates; this site is independent and not affiliated
+        with Amazon. Outbound product links are marked <code>rel="sponsored"</code> per Google&rsquo;s
+        guidance on paid links. No price is displayed on any page — Amazon restricts price display to
+        links and API responses it serves itself.
+      </div>
+      <div class="footer-note">
+        Verified dataset date: 2026-11-14 · links and sources independently re-fetched 2026-11-15 ·
+        governing documents change without notice and are re-verified each cycle ·
+        <a href="https://affiliate-program.amazon.com/" style="color:#c6cdd7">Amazon Associates</a> ·
+        <a href="https://affiliate-program.amazon.com/help/operating/policies" style="color:#c6cdd7">Program Policies</a> ·
+        <a href="https://affiliate-program.amazon.com/help/operating/agreement" style="color:#c6cdd7">Operating Agreement</a> ·
+        <a href="sources.html" style="color:#c6cdd7">full source register</a>
+      </div>
+    </div>
+  </footer>
+</main>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>

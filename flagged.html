@@ -3,67 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Irregularities and unverified items, each with its official-source link — published, not buried.">
 <title>Flagged for Review — Zone2</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Verified affiliate platform</span>
+      </span>
+    </a>
+    <label class="nav-toggle" for="navtoggle">Menu</label>
+    <input type="checkbox" id="navtoggle" class="nav-toggle-input">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Overview</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html" class="active">Flagged for Review</a>
+      <a href="verification.html" class="nav-quiet">Verification</a>
+      <a href="sources.html" class="nav-quiet">Sources</a>
+      <a href="flagged.html" class="nav-quiet active">Flagged</a>
+      <a href="design-notes.html" class="nav-quiet">Design notes</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Flagged for Review</h2>
-      <p>Irregularities and unverified items. These do not block the site; each item lists its source link so you can verify or request changes after the site is live.</p>
-    </div>
+  </div>
+</header>
 
+<main id="main">
+  <section class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Transparency</div>
+      <h1 class="hero-title">Flagged for review — nothing buried</h1>
+      <p class="hero-lede">Irregularities and unverified items found while building this platform. They do not block the site; each item lists its source link so you can verify or request changes after the site is live. A flagged value stays blank on the pages where the value would have been.</p>
+    </div>
+  </section>
+
+  <div class="page-wrap">
     <div class="disclosure">
       <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
     </div>
 
-    <div class="card">
-      <h3>Flagged items</h3>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        These are the reader-facing flags, generated straight from the canonical register so the two can
-        never drift apart. Every row links to the full finding — long-form explanation, impact, required
-        action and its official sources — in the register of
-        <strong><span id="flagRegisterCount">—</span> flags (F-01 … F-<span id="flagRegisterMax">—</span>)</strong>:
-        <a href="pages/flags.html">full register with sources</a>.
-      </p>
+    <section class="section">
+      <h2 class="section-title">Flagged items</h2>
+      <p class="section-sub">Generated straight from the canonical register so the two can never drift apart. Every row links to the full finding — long-form explanation, impact, required action and its official sources — in the register of <strong><span id="flagRegisterCount">—</span> flags (F-01 … F-<span id="flagRegisterMax">—</span>)</strong>: <a href="pages/flags.html">full register with sources</a>.</p>
       <div id="flaggedTable"></div>
-    </div>
+    </section>
 
-    <div class="card">
-      <h3>How these were produced</h3>
-      <ul style="margin:0;padding-left:20px;font-size:14px">
+    <section class="section">
+      <h2 class="section-title">How these were produced</h2>
+      <p class="section-sub">The method behind the register:</p>
+      <div class="card"><ul style="margin:0;padding-left:20px;font-size:14px">
         <li>Every table value was checked against the official source linked in its row.</li>
         <li>Where a value could not be confirmed from an official source, the cell was left blank — values were never inferred or filled in.</li>
         <li>The link-code / ASIN mismatch was detected by resolving each provided <code>link.amazon</code> short link and fetching the destination product page directly.</li>
-        <li>The reading of those links was settled by a <strong>control</strong>: an unknown 9-character code on the same short-link service returns a 404 instead of a product (F-20), which shows the supplied codes are honoured lookups. The full control trail is on the <a href="products.html">Products</a> page.</li>
+        <li>The reading of those links was settled by a <strong>control</strong>: an unknown nine-character code on the same short-link service returns a 404 instead of a product (F-20), which shows the supplied codes are honoured lookups. The full control trail is on the <a href="products.html">Products</a> page.</li>
         <li>Nothing on this page blocks the site. The items marked <em>owner: user</em> are the decisions only you can make — chiefly confirming the brief mapping (F-03) and supplying tagged links (F-24).</li>
-      </ul>
-    </div>
+      </ul></div>    </section>
 
     <footer class="site">
-      Verified dataset date: 2026-11-14. Companion views:
-      <a href="verification.html">Verification log</a> ·
-      <a href="sources.html">Source register</a> ·
-      <a href="pages/flags.html">Canonical flag register</a>.
+      Verified dataset date: 2026-11-14; the three supplied links re-observed 2026-11-15. Companion views: <a href="verification.html">Verification log</a> · <a href="sources.html">Source register</a> · <a href="pages/flags.html">Full register (generated)</a>.
     </footer>
-  </main>
-</div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="content.html">Content</a></li>
+            <li><a href="compliance.html">Compliance</a></li>
+            <li><a href="tracking.html">Tracking</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Evidence</h4>
+          <ul>
+            <li><a href="verification.html">Verification log</a></li>
+            <li><a href="sources.html">Source register</a></li>
+            <li><a href="flagged.html">Flagged for review</a></li>
+            <li><a href="summary.html">Executive summary</a></li>
+            <li><a href="pages/index.html">Findings hub</a></li>
+            <li><a href="pages/categories/index.html">Commission categories</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Decisions</h4>
+          <ul>
+            <li><a href="decisions/index.html">Decision hub</a></li>
+            <li><a href="pages/suggestions.html">
+            <li><a href="pages/questions.html">Open questions register</a></li>
+            <li><a href="design-notes.html">Design notes &amp; growth ideas</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Companion builds</h4>
+          <ul>
+            <li><a href="research-hub/start.html">Affiliate Research Hub</a></li>
+            <li><a href="marketing/index.html">Field Notes — verified articles</a></li>
+            <li><a href="revalidation/index.html">Revalidation 2026-11-14</a></li>
+            <li><a href="affiliate-lab/index.html">Affiliate Lab</a></li>
+            <li><a href="zone2/index.html">Zone2 platform build</a></li>
+            <li><a href="northstar/index.html">Northstar prototype</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
+        As an Amazon Associate I earn from qualifying purchases. Amazon and the Amazon mark are
+        trademarks of Amazon.com, Inc. or its affiliates; this site is independent and not affiliated
+        with Amazon. Outbound product links are marked <code>rel="sponsored"</code> per Google&rsquo;s
+        guidance on paid links. No price is displayed on any page — Amazon restricts price display to
+        links and API responses it serves itself.
+      </div>
+      <div class="footer-note">
+        Verified dataset date: 2026-11-14 · links and sources independently re-fetched 2026-11-15 ·
+        governing documents change without notice and are re-verified each cycle ·
+        <a href="https://affiliate-program.amazon.com/" style="color:#c6cdd7">Amazon Associates</a> ·
+        <a href="https://affiliate-program.amazon.com/help/operating/policies" style="color:#c6cdd7">Program Policies</a> ·
+        <a href="https://affiliate-program.amazon.com/help/operating/agreement" style="color:#c6cdd7">Operating Agreement</a> ·
+        <a href="sources.html" style="color:#c6cdd7">full source register</a>
+      </div>
+    </div>
+  </footer>
+</main>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
