@@ -1,0 +1,353 @@
+{
+  "note": "Source register for the Owner's Console (task T42, session arena/d26f42db-zone2). IDs are namespaced C-01.. so they cannot collide with the canonical register S01..S42 at pages/sources.html, which this namespace does not edit. Every row was fetched live on 2026-11-15 UTC by this session. `quote` is verbatim from the page; where a row has no quote the page was read but the row states no value from it.",
+  "as_of": "2026-11-15",
+  "accessed_utc": "2026-11-15",
+  "classes": {
+    "official": "An Amazon Associates program document, a Google Search Central document, or an FTC document. These are the only pages this project treats as able to settle a program rule.",
+    "observed": "The supplied affiliate short links and the pages they resolve to. Evidence about the artefact under test, never used to state a program rule and never used to state a product attribute.",
+    "control": "A request this session made on purpose, to test whether an earlier conclusion was reproducible."
+  },
+  "sources": [
+    {
+      "id": "C-01",
+      "title": "Associates Program Operating Agreement — Section 5, Identifying Yourself as an Associate",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: \u201cAs an Amazon Associate I earn from qualifying purchases.\u201d",
+      "note": "Page header states \u201cUpdated: October 15, 2025\u201d."
+    },
+    {
+      "id": "C-02",
+      "title": "Associates Program Operating Agreement — Section 4, Warranties (no income representation)",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations.",
+      "note": "This is why no page here publishes an earnings estimate."
+    },
+    {
+      "id": "C-03",
+      "title": "Associates Program Operating Agreement — Section 1, tagged link formats",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "The links must properly use the special \u201ctagged\u201d link formats we provide and comply with this Agreement (\u201cSpecial Links\u201d).",
+      "note": ""
+    },
+    {
+      "id": "C-04",
+      "title": "Associates Program Operating Agreement — Section 6, Term and Termination",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "For the avoidance of doubt and without limitation for purposes of the foregoing subsection (a) any violation of Section 5 and as specified in the Program Policies will be deemed a material breach of this Agreement.",
+      "note": "Notice period is 7 calendar days for termination without cause."
+    },
+    {
+      "id": "C-05",
+      "title": "Program Policies — Participation Requirements \u00a72(b), prices and availability",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API and you comply with the requirements regarding use of Creators API or PA API in the License.",
+      "note": "Neither condition is met today: no Creators API access (see C-08) and no Amazon-served price link. This is the rule that keeps every price cell blank."
+    },
+    {
+      "id": "C-06",
+      "title": "Program Policies — Participation Requirements \u00a72(b), claims about Products",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "You must not make inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or any of our policies, promotions, or prices.",
+      "note": ""
+    },
+    {
+      "id": "C-07",
+      "title": "Program Policies — Participation Requirements \u00a72(b), links to Product lists",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "When linking to pages with Product lists you must have additional original content on your Site that is relevant to the Special Link.",
+      "note": ""
+    },
+    {
+      "id": "C-08",
+      "title": "Program Policies — Participation Requirements \u00a72(b), limited-time promotions",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "You must remove from your Site any links and related references to limited time promotions as soon as that promotion on the relevant Amazon Site ends.",
+      "note": ""
+    },
+    {
+      "id": "C-09",
+      "title": "Program Policies — Participation Requirements \u00a76(t), customer reviews and star ratings",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API and you comply with the requirements for Creators API and PA API described in the License.",
+      "note": "This is why no star rating appears anywhere in the published tree."
+    },
+    {
+      "id": "C-10",
+      "title": "Program Policies — Participation Requirements \u00a76(y), price tracking",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.",
+      "note": "Directly constrains module M-03 (pricing analysis) as specified in the brief."
+    },
+    {
+      "id": "C-11",
+      "title": "Program Policies — Participation Requirements \u00a76(v) and \u00a76(w), cloaking and link shorteners",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site.",
+      "note": "\u00a76(v) separately prohibits cloaking the URL or the user agent."
+    },
+    {
+      "id": "C-12",
+      "title": "Program Policies — Participation Requirements \u00a75, machine learning on Program Content",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "You will not, without our express prior written approval, use, or allow any third party to use, any Special Links or Program Content to develop machine learning models or related technology.",
+      "note": "Read against the brief, which asks for an AI-powered platform that researches products and generates content from Program Content. Flagged as IR-05."
+    },
+    {
+      "id": "C-13",
+      "title": "Program Policies — Participation Requirements \u00a76(f), organic search must land on your own site",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "You may purchase paid search advertisements and submit links to Search Engines to appear in response to a general Internet search query or keyword (i.e., in natural, free, organic, or unpaid search results), so long as you comply with the Agreement and those paid or unpaid search results send users to your site and not directly, or indirectly via a Redirecting Link, to an Amazon Site.",
+      "note": "Organic search traffic is allowed. It must land on this site first."
+    },
+    {
+      "id": "C-14",
+      "title": "Program Policies — Participation Requirements \u00a72(b), Associates tag in every URL",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "you must include your Associates ID or \u201ctag\u201d (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.",
+      "note": "Measured against the three supplied links: none carries a tag. See C-16..C-18."
+    },
+    {
+      "id": "C-15",
+      "title": "Program Policies — Associates Program Standard Commission Income Statement, Table 1",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "Physical Books, Kitchen, Automotive | 4.50%",
+      "note": "Table 1 lists eleven bands. Read on 2026-11-15: 10.00% Luxury Beauty / Luxury Stores Beauty / Amazon Explore; 5.00% Digital Music, Physical Music, Handmade, Digital Videos; 4.50% Physical Books, Kitchen, Automotive; 4.00% Amazon devices, Apparel, Watches, Jewelry, Luggage, Shoes, Handbags & Accessories and others; 3.00% Toys, Furniture, Home, Pets, Outdoors, Sports and others; 2.50% PC, PC Components, DVD & Blu-Ray; 2.00% Televisions, Digital Video Games; 1.00% Amazon Fresh, Grocery, Health & Personal Care and others; 0.00% Gift Cards, Wireless, and others; 0.00% Coach; 4.00% All Other Categories."
+    },
+    {
+      "id": "C-16",
+      "title": "Application Review Process",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "After you sign up, our Associates team will check your application once you\u2019ve driven qualified sales (we require at least three within the first 180 days). Please note that personal orders do not qualify.",
+      "note": "Same page: \u201ca good rule of thumb is at least 10 posts\u201d, \u201cContent on your website must be recent (generally within the last 60 days). You must own your website.\u201d"
+    },
+    {
+      "id": "C-17",
+      "title": "Application Review Process — what Amazon says a good affiliate site is",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "When reviewing a website we look for a beneficial reason as to why a customer would seek out your site. We want an associate site to be one that adds value to the customer by giving them insight on a subject or product they might not get easily.",
+      "note": "Same page: \u201cSuccessful sites will give the customer a unique experience or insight that is not available anywhere else.\u201d This is the standard the redesign in console/design.html is written against."
+    },
+    {
+      "id": "C-18",
+      "title": "Welcome to Creators API — prerequisites (replaces PA-API 5.0)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "Have at least 10 qualifying sales within the past 30 days to access the PA API through the Creators API",
+      "note": "Prerequisite 1 is \u201cBe enrolled in the Amazon Associates program for your target marketplace\u201d. Until both hold, prices, ratings and catalog data cannot be sourced lawfully under C-05 and C-09."
+    },
+    {
+      "id": "C-19",
+      "title": "How do I build a simple text link to a specific item on Amazon? — the ASIN definition",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+      "host": "affiliate-program.amazon.com",
+      "publisher": "Amazon Associates",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "ASIN is the 10-digit code that Amazon uses to denote specific products. It is short for \"Amazon.com Standard Item Number.\" Every item in our catalog has a unique ASIN.",
+      "note": "Amazon's published wording is \u201c10-digit\u201d; the three supplied codes are 9 characters. Published link format on the same page: http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID"
+    },
+    {
+      "id": "C-20",
+      "title": "Google Search Central — Spam policies, Scaled content abuse",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "host": "developers.google.com",
+      "publisher": "Google Search Central",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "Scaled content abuse is when many pages are generated for the primary purpose of manipulating search rankings and not helping users. This abusive practice is typically focused on creating large amounts of unoriginal content that provides little to no value to users, no matter how it's created.",
+      "note": "The page's first listed example is \u201cUsing generative AI tools or other similar tools to generate many pages without adding value for users\u201d."
+    },
+    {
+      "id": "C-21",
+      "title": "Google Search Central — Spam policies, Thin affiliation",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "host": "developers.google.com",
+      "publisher": "Google Search Central",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "Not every site that participates in an affiliate program is a thin affiliate. Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.",
+      "note": "Same section: thin affiliation is \u201cpublishing content with product affiliate links where the product descriptions and reviews are copied directly from the original merchant without any original content or added value\u201d."
+    },
+    {
+      "id": "C-22",
+      "title": "Google Search Central — Spam policies, Site reputation policy (authorship factor)",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "host": "developers.google.com",
+      "publisher": "Google Search Central",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "Its stated or implied authorship, meaning, is there an explicit acknowledgement of ownership or responsibility for the content? Are there indications that contest the stated authorship of the content?",
+      "note": "One of four objective factors Google lists for deciding whether a section is integrated with the main site. No page in the published tree names a person today."
+    },
+    {
+      "id": "C-23",
+      "title": "Google Search Central — Spam policies, Link spam (affiliate links are permitted when qualified)",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "host": "developers.google.com",
+      "publisher": "Google Search Central",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "It's not a violation of our policies to have such links as long as they are qualified with a rel=\"nofollow\" or rel=\"sponsored\" attribute value to the <a> tag.",
+      "note": "Every outbound affiliate anchor in the published tree is checked for rel=\"sponsored\" by the existing gates."
+    },
+    {
+      "id": "C-24",
+      "title": "Google Search Central — Guidance on using generative AI content (human fact-check)",
+      "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+      "host": "developers.google.com",
+      "publisher": "Google Search Central",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "It is critical to manually factcheck and review all AI-generated content for accuracy and trustworthiness before publishing.",
+      "note": "Page states Last updated 2026-10-01 UTC. Same page: \u201cThis review also applies to metadata like <title> elements, meta description elements, structured data, and alternate texts for images\u201d; and \u201cSharing information about how a piece of content was created can help give your readers more context.\u201d"
+    },
+    {
+      "id": "C-25",
+      "title": "FTC — Endorsement Guides: What People Are Asking",
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "host": "www.ftc.gov",
+      "publisher": "US Federal Trade Commission",
+      "class": "official",
+      "fetched_utc": "2026-11-15",
+      "quote": "if there\u2019s a connection between an endorser and the marketer that a significant minority of consumers wouldn\u2019t expect and it would affect how they evaluate the endorsement, that connection should be disclosed clearly and conspicuously.",
+      "note": "Same page: \u201cendorsements must be honest and not misleading\u201d."
+    },
+    {
+      "id": "C-26",
+      "title": "Supplied affiliate short link 1 — observed destination",
+      "url": "https://link.amazon/B04G1MEwY",
+      "host": "link.amazon",
+      "publisher": "supplied by the owner",
+      "class": "observed",
+      "fetched_utc": "2026-11-15",
+      "quote": "",
+      "note": "Resolved to https://www.amazon.com/dp/B0CDY277D3 with query parameters lv=shuf, btn_type=ss, btn_ref=srctok-6c31d96765b8adfb, channelId=704, plpRedirect=mhFallback. Page title: \u201cAmazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen\u201d. No Associates tag parameter present. Destination evidence only."
+    },
+    {
+      "id": "C-27",
+      "title": "Supplied affiliate short link 2 — observed destination",
+      "url": "https://link.amazon/B02NbDxp3",
+      "host": "link.amazon",
+      "publisher": "supplied by the owner",
+      "class": "observed",
+      "fetched_utc": "2026-11-15",
+      "quote": "",
+      "note": "Resolved to https://www.amazon.com/dp/B09B7SB46R with query parameters lv=shuf, btn_type=ss, btn_ref=srctok-4796bf563b804868, channelId=704, plpRedirect=mhFallback. Page title: \u201cAmazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen\u201d. No Associates tag parameter present. Destination evidence only."
+    },
+    {
+      "id": "C-28",
+      "title": "Supplied affiliate short link 3 — observed destination",
+      "url": "https://link.amazon/B00hJ57DV",
+      "host": "link.amazon",
+      "publisher": "supplied by the owner",
+      "class": "observed",
+      "fetched_utc": "2026-11-15",
+      "quote": "",
+      "note": "Resolved to https://www.amazon.com/dp/B08DKYBTPH with query parameters lv=shuf, btn_type=ss, btn_ref=srctok-33a7001c2f183379, channelId=704, plpRedirect=mhFallback, th=1. Page title: \u201cAmazon.com: Chefman Air Fryer 8 Qt | TurboFry\u00ae 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen\u201d. No Associates tag parameter present. Destination evidence only."
+    },
+    {
+      "id": "C-29",
+      "title": "CONTROL — an unknown 9-character code on the same short-link service",
+      "url": "https://link.amazon/B00TEST12",
+      "host": "link.amazon",
+      "publisher": "control run by this session",
+      "class": "control",
+      "fetched_utc": "2026-11-15",
+      "quote": "Uh oh, it looks like something went wrong. You\u2019ve clicked on an invalid URL.",
+      "note": "HTTP 404, page title \u201c404: File Not Found\u201d. Reproduces the control recorded by earlier sessions: an unknown code is refused, not redirected to a random product."
+    },
+    {
+      "id": "C-30",
+      "title": "CONTROL — a valid 10-character ASIN passed to the same short-link service",
+      "url": "https://link.amazon/B0CDY277D3",
+      "host": "link.amazon",
+      "publisher": "control run by this session",
+      "class": "control",
+      "fetched_utc": "2026-11-15",
+      "quote": "Uh oh, it looks like something went wrong. You\u2019ve clicked on an invalid URL.",
+      "note": "HTTP 404, page title \u201c404: File Not Found\u201d. A real ASIN is refused by the short-link service exactly as an unknown code is, so the service does not accept ASINs at all. Reproduces the earlier control (S36)."
+    },
+    {
+      "id": "C-31",
+      "title": "OBSERVATION — the short-link service resolves via a third-party host",
+      "url": "https://link.amazon/B00TEST12",
+      "host": "link.amazon",
+      "publisher": "observed by this session",
+      "class": "control",
+      "fetched_utc": "2026-11-15",
+      "quote": "",
+      "note": "Both control requests (C-29, C-30) were finally served from https://amzlinks.in/ with the 404 page; the fetcher reported the resolved URL as amzlinks.in/B00TEST12 and amzlinks.in/B0CDY277D3. Recorded here as an observation about the link infrastructure, not as a program fact. It matters for C-11 (\u00a76(w), link shorteners must not make the destination unclear)."
+    }
+  ]
+}

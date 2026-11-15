@@ -80,6 +80,8 @@ jobs:
           problems += check("zone2", sorted(f.name for f in Path("zone2").glob("*.html")))
           problems += check("affiliate-lab", sorted(f.name for f in Path("affiliate-lab").glob("*.html")))
           problems += check("revalidation", sorted(f.name for f in Path("revalidation").glob("*.html")))
+          # T42: the Owner's Console resolves "../" links upward, so check it from the repo root too.
+          problems += check("console", sorted(f.name for f in Path("console").glob("*.html")))
           problems += check(".", [f.name for f in sorted(Path(".").glob("*.html")) if f.name != "404.html"])
           for page in sorted(Path("pages").rglob("*.html")):
               rel = page.relative_to("pages")
@@ -137,7 +139,8 @@ jobs:
                   sorted(glob.glob('zone2/*.html')) + \
                   sorted(glob.glob('revalidation/*.html')) + \
                   sorted(glob.glob('affiliate-lab/*.html')) + \
-                  sorted(glob.glob('pages/**/*.html', recursive=True))
+                  sorted(glob.glob('pages/**/*.html', recursive=True)) + \
+                  sorted(glob.glob('console/*.html'))
           assert len(pages) >= 70, f'expected every published page, found {len(pages)}'
           for f in pages:
               t = open(f, encoding='utf-8').read()
@@ -316,6 +319,17 @@ jobs:
 
       - name: Audit gate negative tests (11 injected defects must each fire)
         run: python3 tools/test_audit.py
+      # ---- arena/d26f42db-zone2: the Owner's Console (T42) ----
+      # A decision surface, not a second data store: it indexes the registers other sessions own
+      # (SG-, Q-, F-, DS-, RF-) and adds only namespaced rows (P-, IN-, IR-, C-). Same contract as
+      # every other gate — every value sourced to an official page, an open question left empty,
+      # no price, disclosure on every page, links resolving — plus board integrity: an approved
+      # proposal must carry a recorded choice that is one of its own options.
+      - name: Rebuild the Owner's Console and confirm committed output is current
+        run: python3 tools/build_console.py --check
+
+      - name: Owner's Console gate (sourcing, board integrity, decision sheet, disclosure, links, no prices)
+        run: python3 tools/validate_console.py>>>>>>> 3ab4cb8 (T42 (arena/d26f42db-zone2): Owner's Console - suggestion board, information register, redesign pack, repo review)
 
       # T26: this guard was excluded from CI because it reported seven false failures — it
       # resolved the repository root to research-hub/ and then looked for the root site's

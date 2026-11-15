@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Owner&#x27;s Console — the Zone2 Owner's Console. Proposals, open questions and a redesign pack for the Amazon affiliate site. Nothing here is implemented until the owner records a choice.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/console/index.html">
+<title>Owner&#x27;s Console · Zone2 Owner's Console</title>
+<style>
+:root{
+  --ink:#12161c; --ink-2:#3b444f; --ink-3:#6b7684; --line:#e3e7ec; --line-2:#eef1f4;
+  --paper:#ffffff; --bg:#f6f7f9; --accent:#1a56db; --accent-soft:#eaf0fe;
+  --warn:#8a4b00; --warn-bg:#fff5e6; --ok:#0f6b3f; --ok-bg:#e8f6ee;
+  --stop:#8a1c1c; --stop-bg:#fdeaea; --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.86em;background:var(--line-2);padding:.1em .35em;border-radius:3px}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.sidebar{background:var(--paper);border-right:1px solid var(--line);padding:20px 16px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:10px;align-items:center;font-weight:650;font-size:15px;color:var(--ink);margin-bottom:4px}
+.brand .mark{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;flex:0 0 auto}
+.brand small{display:block;font-weight:400;color:var(--ink-3);font-size:11.5px;letter-spacing:.02em}
+.side-label{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px;padding-left:8px}
+.nav a{display:block;padding:7px 9px;border-radius:7px;color:var(--ink-2);font-size:14px}
+.nav a:hover{background:var(--bg);text-decoration:none}
+.nav a.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.side-foot{margin-top:22px;padding:12px 9px;border-top:1px solid var(--line-2);font-size:11.5px;color:var(--ink-3)}
+.main{min-width:0}
+.topbar{border-bottom:1px solid var(--line);background:var(--paper);padding:12px 30px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.crumb{font-size:13px;color:var(--ink-3)}
+.crumb strong{color:var(--ink)}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12px;color:var(--ink-2)}
+.content{padding:30px;max-width:1080px}
+h1{font-size:29px;line-height:1.2;letter-spacing:-.02em;margin:0 0 8px}
+h2{font-size:20px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15.5px;margin:0 0 6px}
+.eyebrow{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:9px}
+.lede{font-size:17px;color:var(--ink-2);max-width:70ch;margin:0 0 6px}
+p{max-width:78ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+.card>h3:first-child{margin-top:0}
+.notice{background:var(--accent-soft);border:1px solid #c9d9fb;border-radius:10px;padding:13px 16px;margin:16px 0;font-size:14px;color:#1a3a7a}
+.notice strong{color:#12305f}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.kpi .num{font-size:26px;font-weight:660;letter-spacing:-.02em}
+.kpi .lbl{font-size:12px;color:var(--ink-3);margin-top:2px;line-height:1.35}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--paper);margin:14px 0}
+table caption{text-align:left;font-size:12px;color:var(--ink-3);padding:10px 14px;border-bottom:1px solid var(--line-2)}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line-2)}
+th{background:#fafbfc;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);font-weight:600;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fcfdfe}
+th.n,td.n{white-space:nowrap}
+td.id{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:650;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.p-open{background:var(--warn-bg);color:var(--warn)}
+.p-ok{background:var(--ok-bg);color:var(--ok)}
+.p-stop{background:var(--stop-bg);color:var(--stop)}
+.p-info{background:#eef1f5;color:var(--ink-2)}
+.src{display:inline-block;margin:2px 4px 2px 0;font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:5px;padding:2px 6px;color:var(--ink-2);background:#fbfcfd}
+.src:hover{border-color:var(--accent);text-decoration:none}
+.src .h{color:var(--ink-3);margin-left:4px}
+.blank{display:inline-block;color:var(--ink-3);font-style:italic;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:5px 0;max-width:78ch}
+ol.tight{margin:8px 0;padding-left:20px}ol.tight li{margin:6px 0;max-width:78ch}
+.proposal{border:1px solid var(--line);border-radius:12px;background:var(--paper);margin:14px 0;overflow:hidden}
+.proposal>.head{padding:15px 20px;border-bottom:1px solid var(--line-2);display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.proposal .pid{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.proposal h3{font-size:17px;margin:2px 0 0}
+.proposal .body{padding:16px 20px}
+.proposal dl{margin:0}
+.proposal dt{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 4px}
+.proposal dt:first-child{margin-top:0}
+.proposal dd{margin:0;font-size:14.5px;max-width:80ch}
+.opts{list-style:none;margin:0;padding:0}
+.opts li{border:1px solid var(--line);border-radius:9px;padding:11px 14px;margin:8px 0;font-size:14px}
+.opts li.rec{border-color:#b9cdf7;background:#f7faff}
+.opts .l{font-weight:600}
+.opts .t{color:var(--ink-2);display:block;margin-top:3px;font-size:13.5px}
+.tag{display:inline-block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:650;padding:2px 7px;border-radius:5px;background:#eef1f5;color:var(--ink-2);margin-left:6px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:10px 0}
+.ba>div{padding:13px 16px;font-size:13.5px}
+.ba .b{background:#fdf7f7;border-right:1px solid var(--line)}
+.ba .a{background:#f5fbf7}
+.ba .lab{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px;font-weight:650}
+pre.prompt{white-space:pre-wrap;word-wrap:break-word;background:#0f1419;color:#e6edf3;border-radius:11px;padding:18px 20px;font-family:var(--mono);font-size:12.5px;line-height:1.62;overflow-x:auto;margin:12px 0}
+.prompt-bar{display:flex;gap:8px;align-items:center;margin:10px 0}
+button.copy{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+button.copy:hover{background:#000}
+.banned td:first-child{font-family:var(--mono);font-size:12px}
+footer.site{border-top:1px solid var(--line);background:var(--paper);padding:22px 30px;margin-top:34px;color:var(--ink-3);font-size:12.5px}
+footer.site .disc{color:var(--ink-2);font-size:13.5px;margin-bottom:8px}
+footer.site a{color:var(--ink-2)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+.meta{font-size:12px;color:var(--ink-3);margin-top:4px}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .content{padding:20px}
+  .ba{grid-template-columns:1fr}
+  .ba .b{border-right:0;border-bottom:1px solid var(--line)}
+}
+</style>
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="mark">Z</span><span>Zone2<small>Owner's Console</small></span></a>
+  <div class="side-label">Decide before building</div>
+  <nav class="nav"><a class="nav-link active" href="index.html">Owner&#x27;s Console</a><a class="nav-link" href="suggestions.html">Suggestion board</a><a class="nav-link" href="questions.html">Information register</a><a class="nav-link" href="design.html">Redesign pack</a><a class="nav-link" href="review.html">Repository review</a><a class="nav-link" href="decisions.html">Decision sheet</a><a class="nav-link" href="flagged.html">Flagged for review</a><a class="nav-link" href="sources.html">Source register</a></nav>
+  <div class="side-foot">Every row on these pages is a proposal.<br><strong>Nothing here has been implemented.</strong></div>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="crumb"><a href="../index.html">Zone2</a> / <strong>Owner&#x27;s Console</strong></div>
+    <div><span class="chip">session arena/d26f42db-zone2</span> <span class="chip">2026-11-15</span> <a class="chip" href="decisions.html">Record a decision</a></div>
+  </div>
+  <div class="content" id="main">
+    <div class="eyebrow">executive summary · reviewed 2026-11-15 · proposals only, nothing implemented</div>
+    <h1>Owner&#x27;s Console</h1>
+    <p class="lede">Everything this project has not decided yet, in one place — with the options, the evidence, and the missing information that stands in front of each choice.</p>
+    <section class="kpis">
+      <div class="kpi"><div class="num">14</div><div class="lbl">new proposals on the board, none implemented</div></div>
+      <div class="kpi"><div class="num">12</div><div class="lbl">questions only you can answer</div></div>
+      <div class="kpi"><div class="num">1</div><div class="lbl">high-severity irregularities</div></div>
+      <div class="kpi"><div class="num">31</div><div class="lbl">sources fetched and verified today</div></div>
+    </section>
+    
+<div class="notice"><strong>What this console is.</strong> One place to review every open choice on this
+project, choose a path, and see what is still missing before the choice is safe. Nothing on these pages has been
+built. The canonical registers other sessions own are indexed, not duplicated: this console adds 14
+new proposals and 12 new questions to the 12 canonical
+suggestions and 18 canonical questions already published.</div>
+
+<h2>Executive summary</h2>
+<p><strong>The products are fine. The site is the problem, and the problem is that it describes itself.</strong>
+The published tree holds <!--MEASURED-->127 pages across 12 namespaces — 135 counting this
+console — every value traced to an official source, 5,804 internal links with 0 broken, and
+the mandatory disclosure on 127 of 127 pages<!--/MEASURED-->. The verification work is genuinely done and
+genuinely good. These counts are measured at build time, not typed: five other sessions merged into this tree while
+this review ran, and a typed number went stale twice in an afternoon.
+</p>
+<p><strong>Until today it was invisible to a reader.</strong> The public landing page opened with the client's own requirement list
+and a strip of figures about the project's audit state rather than with the three air fryers. A redesign by another session
+(PR #108) merged while this review was running and removed both, which is the same conclusion reached here independently. Two
+traces remain: the page still heads itself <em>AI-powered Amazon affiliate platform</em>, and it still says the three listings
+are <em>identified</em> when no official document binds the supplied codes to them.</p>
+<p><strong>Revenue is blocked by one missing identifier, not by a technical gap.</strong> Every Amazon link must
+carry the assigned Associates ID as a URL parameter; none of the three supplied links does, and no Associates ID
+exists in the repository. The three supplied codes are 9 characters where Amazon defines the ASIN as
+&ldquo;10-digit&rdquo;, and a control run today confirms the short-link service refuses even a valid ASIN, so the
+codes are opaque identifiers rather than truncated product numbers. What they resolve to is reproducible and
+recorded; what the brief intended them to mean is not, and no official document settles it.</p>
+<p><strong>Two things need permission before they can be built, not after.</strong> Program Content may not be used
+to develop machine-learning models without Amazon's express prior written approval &mdash; which is precisely what
+the brief asks for. And catalog data (prices, ratings) is lawful only through the Creators API, which needs
+enrolment plus ten qualifying sales in thirty days. Both are gated on the same missing account.</p>
+<p><strong>What can be decided today, with nothing else needed:</strong> the editorial items. Six question-shaped
+articles are writable right now from rows the project already holds and already sources. They need no Associates
+account, no API, and no new data. They are also the only items on this board that would move the site toward
+Amazon's own stated standard &mdash; a site that gives a reader &ldquo;insight on a subject or product they might
+not get easily&rdquo;.</p>
+
+<h2>The decisions, in the order that unblocks the most</h2>
+<p>Ordered by how many open questions stand in front of each. Questions marked <code>IN-</code> are
+<a href="questions.html">answered on the information register</a>; questions marked <code>Q-</code> belong to the
+canonical register at <a href="../pages/questions.html">pages/questions.html</a>.</p>
+<div class="tw"><table>
+<caption>Derived from the <code>blocked_by</code> edges in <code>console/data/proposals.json</code>. Re-running the generator recomputes it.</caption>
+<thead><tr><th>#</th><th>ID</th><th>Proposal</th><th>Waiting on</th><th>State</th></tr></thead>
+<tbody><tr><td class='n'>1</td><td class='id'>P-07</td><td><a href='suggestions.html#P-07'><strong>Decision-first layout on every product page</strong></a><div class='meta'>Page design · effort Medium · recommended option A</div></td><td><span class="blank">none — can start today</span></td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>2</td><td class='id'>P-09</td><td><a href='suggestions.html#P-09'><strong>Every article reaches a product page in one click</strong></a><div class='meta'>Content architecture · effort Medium · recommended option A</div></td><td><span class="blank">none — can start today</span></td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>3</td><td class='id'>P-10</td><td><a href='suggestions.html#P-10'><strong>Make “no prices, no ratings, no price alerts” a property of the design system, not a habit</strong></a><div class='meta'>Compliance · effort Low · recommended option A</div></td><td><span class="blank">none — can start today</span></td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>4</td><td class='id'>P-11</td><td><a href='suggestions.html#P-11'><strong>Label every outbound link a preview until a tagged link exists</strong></a><div class='meta'>Compliance · effort Low · recommended option A</div></td><td><span class="blank">none — can start today</span></td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>5</td><td class='id'>P-12</td><td><a href='suggestions.html#P-12'><strong>One decision sheet, owned by you</strong></a><div class='meta'>Decision process · effort Low · recommended option A</div></td><td><span class="blank">none — can start today</span></td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>6</td><td class='id'>P-14</td><td><a href='suggestions.html#P-14'><strong>Write the six articles a buyer actually searches for, before any more infrastructure</strong></a><div class='meta'>Editorial · effort Medium · recommended option A</div></td><td><span class="blank">none — can start today</span></td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>7</td><td class='id'>P-01</td><td><a href='suggestions.html#P-01'><strong>Finish the reader-first rewrite of the public home page</strong></a><div class='meta'>Public copy · effort Low · recommended option A</div></td><td>IN-01</td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>8</td><td class='id'>P-03</td><td><a href='suggestions.html#P-03'><strong>A named byline and a “how this was written” line on every article</strong></a><div class='meta'>Editorial trust · effort Low · recommended option A</div></td><td>IN-04</td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>9</td><td class='id'>P-05</td><td><a href='suggestions.html#P-05'><strong>Drop “AI-powered platform” from every public page</strong></a><div class='meta'>Public copy · effort Low · recommended option A</div></td><td>IN-03</td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>10</td><td class='id'>P-06</td><td><a href='suggestions.html#P-06'><strong>Three page types, not thirty</strong></a><div class='meta'>Content architecture · effort High · recommended option A</div></td><td>IN-01</td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>11</td><td class='id'>P-08</td><td><a href='suggestions.html#P-08'><strong>Fix the metadata layer before writing another article</strong></a><div class='meta'>Search hygiene · effort Medium · recommended option A</div></td><td>IN-01</td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>12</td><td class='id'>P-13</td><td><a href='suggestions.html#P-13'><strong>A visible “last verified” date on every page that states a fact</strong></a><div class='meta'>Verification · effort Low · recommended option A</div></td><td>IN-05</td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>13</td><td class='id'>P-02</td><td><a href='suggestions.html#P-02'><strong>One public name and one public site</strong></a><div class='meta'>Architecture · effort High · recommended option A</div></td><td>IN-01, IN-02</td><td><span class="pill p-open">proposed</span></td></tr><tr><td class='n'>14</td><td class='id'>P-04</td><td><a href='suggestions.html#P-04'><strong>Human sign-off before publish, recorded on the page</strong></a><div class='meta'>Process · effort Medium · recommended option A</div></td><td>IN-04, IN-05</td><td><span class="pill p-open">proposed</span></td></tr></tbody></table></div>
+
+<h2>What is missing, in one table</h2>
+<div class="tw"><table>
+<caption>The four items this project does not have, and what each one blocks. Full register: <a href="questions.html">information register</a>.</caption>
+<thead><tr><th>Missing</th><th>What it blocks</th><th>How it is closed</th><th>Who</th></tr></thead>
+<tbody>
+<tr><td>An Associates ID</td><td>All revenue, and the three qualifying sales that unlock the account</td><td>Owner signs in to Associates Central and generates tagged links</td><td class="n">owner</td></tr>
+<tr><td>Confirmation of the intended product identifiers</td><td>Every product-specific claim</td><td>Owner copies the product URLs from the listings; the agent checks them against the official pages</td><td class="n">owner</td></tr>
+<tr><td>A named editor</td><td>Bylines, the human sign-off step, and one of the four factors Google weighs</td><td>Owner names a person who accepts responsibility</td><td class="n">owner</td></tr>
+<tr><td>Any first-hand knowledge of the products</td><td>Original reviews and testing, which Google names as what makes an affiliate page good</td><td>Owner states whether anyone has the machines; if yes, a dated test log</td><td class="n">owner</td></tr>
+</tbody></table></div>
+
+<div class="card">
+<h3>How to use this console</h3>
+<ol class="tight">
+<li><strong><a href="suggestions.html">Read the board.</a></strong> Fourteen proposals, each with the options, the trade-off, the recommended path, the effort and the sources.</li>
+<li><strong><a href="questions.html">Check what is missing.</a></strong> Fifteen questions an official source already answers, and twelve nothing in the repository can answer, each with the action that would close it.</li>
+<li><strong><a href="design.html">Read the redesign pack.</a></strong> The diagnosis of why the site reads as machine output, with before-and-after rewrites of the actual published copy and a copy-paste brief.</li>
+<li><strong><a href="decisions.html">Record your choices.</a></strong> One file, one field per row. Nothing is built until you do.</li>
+<li><strong><a href="review.html">Audit the repository.</a></strong> Every namespace, the measurements, and the 25 source checks run today.</li>
+</ol>
+</div>
+
+  </div>
+  <footer class="site">
+    <div class="disc"><strong>Disclosure</strong> As an Amazon Associate I earn from qualifying purchases. Outbound links are qualified with <code>rel="sponsored"</code>.</div>
+    <div class="meta">Owner's Console · task T42 · session arena/d26f42db-zone2 · generated by <code>tools/build_console.py</code> from <code>console/data/*.json</code> · edit the data, never the HTML · <a href="../index.html">Dashboard</a> · <a href="../pages/suggestions.html">Canonical suggestion board</a> · <a href="../pages/questions.html">Canonical questions</a> · <a href="../pages/flags.html">Project flags</a></div>
+  </footer>
+</main>
+</div>
+</body>
+</html>
