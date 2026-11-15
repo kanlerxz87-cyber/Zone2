@@ -4349,3 +4349,10 @@ hand-typed, has no generator, and no CI step reads it — so it drifted to that 
 green. Separately `rel="icon"` is on the 4 `journal/` pages and on **0** of the 13 root pages, so the
 landing page's default `/favicon.ico` request 404s. That is the organic-traffic plumbing the brief asks
 for. Full record with reproducing commands: `docs/verification-156aae86.md`.
+### Addendum — `1b839f87` close-out (2026-11-15 UTC)
+
+- **PR #92** (record-only: this section's merge record) — **MERGED** 2026-11-15T13:11:06Z, merge commit `d887ae7`.
+  Its own push run was cancelled by the concurrency group when PR #96 merged; the Pages deploy for `d887ae7` succeeded.
+- **Current `main` head `23c7fd2`** (PR #96, another session): `Build, verify and deploy` push run was **cancelled by the concurrency group**, so it was not a completed server-side run. `pages build and deployment` for `23c7fd2`: **success**.
+  Replayed locally on that exact commit in a detached worktree: all 22 `run:` steps of `pages.yml` exit 0; CSS `url()` resolver: 9 resolved, 0 broken.
+- **Board state:** `1B-1` repaired and live (PRs #89, #92). `1B-2` (CI does not check CSS `url()` references) open, recommended to the next integration owner. No other flag changed.
