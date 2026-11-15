@@ -158,7 +158,7 @@
       "id": "RR-10",
       "requirement": "The Site must identify the author as an Amazon Associate with the required statement.",
       "quote": "",
-      "site_state": "116 of 116 published pages carry the exact sentence 'As an Amazon Associate I earn from qualifying purchases.', enforced by tools/validate_data.py and tools/audit_site.py.",
+      "site_state": "123 of 123 published pages carry the exact sentence 'As an Amazon Associate I earn from qualifying purchases.', enforced by tools/validate_data.py and tools/audit_site.py.",
       "state": "MET",
       "owner_action": "",
       "source_ids": [
@@ -171,7 +171,7 @@
       "id": "RR-11",
       "requirement": "The application must list the Site(s) whose content will be reviewed, and that list must stay current.",
       "quote": "Please also remember to keep your Site list updated so that we are reviewing the right traffic sources.",
-      "site_state": "11 published surfaces exist today: the repository root plus 10 directories that publish HTML (release/ is this board). Which one is the declared Site is recorded nowhere.",
+      "site_state": "12 published surfaces exist today: the repository root plus 10 directories that publish HTML (release/ is this board). Which one is the declared Site is recorded nowhere.",
       "state": "GAP",
       "owner_action": "Q-06 / DS-12 - decide which single surface is the declared Site before applying. Listing every published namespace would submit the internal research dashboards for review as public content.",
       "source_ids": [
