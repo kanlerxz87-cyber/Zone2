@@ -4277,7 +4277,7 @@ here rather than silently deviated, matching every prior session's practice.
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| T40 | Final integration pass for the current request: repo line-by-line review with official-source verification, irregularity fixes, design/marketing suggestions documentation, executive-summary addendum, questions + suggestions decision sections confirmed linked and prominent, gates, PR → merge → deploy, GitHub Pages deploy confirmation | in progress | `arena/b6defa90-zone2` | `COORDINATION.md` (append-only records only); root `index.html` (corruption fix only — stray `EAD` lines and the stray `in` text node); `EXECUTIVE_SUMMARY.md` (corruption fix + additive addendum); NEW `docs/executive-summary-addendum-b6defa90.md`; local gate re-runs only. No data rows, no ledger, no tool, no generated page, and no other session's namespace (`ledger/**`, `pages/**`, `tools/**`, `marketing/**`, `decisions/**`, `journal/**`, `research-hub/**`, `zone2/**`, `northstar/**`, `affiliate-lab/**`, `revalidation/**`, `assets/js/**`, `.github/**`) is touched. |
+| T40 | Final integration pass for the current request: repo line-by-line review with official-source verification, irregularity fixes, design/marketing suggestions documentation, executive-summary addendum, questions + suggestions decision sections confirmed linked and prominent, gates, PR → merge → deploy, GitHub Pages deploy confirmation | done | `arena/b6defa90-zone2` | `COORDINATION.md` (append-only records only); root `index.html` (corruption fix only — stray `EAD` lines and the stray `in` text node); `EXECUTIVE_SUMMARY.md` (corruption fix + additive addendum); NEW `docs/executive-summary-addendum-b6defa90.md`; local gate re-runs only. No data rows, no ledger, no tool, no generated page, and no other session's namespace (`ledger/**`, `pages/**`, `tools/**`, `marketing/**`, `decisions/**`, `journal/**`, `research-hub/**`, `zone2/**`, `northstar/**`, `affiliate-lab/**`, `revalidation/**`, `assets/js/**`, `.github/**`) is touched. |
 
 **Why a new task is needed.** Every shared task T1–T39 is `done` and merged (last merge PR #82 / commit `3d5eda0`; Pages `status: built`, source `main` `/`). The current request asks for work none of the closed tasks covered as a single integration: a fresh line-by-line review of the published site against official sources, repair of the corruption artifacts found in `index.html` and `EXECUTIVE_SUMMARY.md`, confirmation that the suggestions decision board (`pages/suggestions.html`, SG-01…SG-10) and the questions register (`pages/questions.html`, Q-01…Q-16) are linked from the root landing and prominent, an executive-summary addendum, the design/marketing-suggestions position stated in one place, then the full PR → merge → Pages-deploy cycle with the result recorded back on this board.
 
@@ -4285,4 +4285,19 @@ here rather than silently deviated, matching every prior session's practice.
 
 No file in this claim's scope is claimed by another session: all owning sessions (6b8bb130, 6602723a, 34836ddd, 78c94859, f786c0d7, 181863ad, c6e94e8d, bbe4ca47, 82a2d436, 83194da0, 4338f55e, dc52402c, dc15ce5a, dd87f326, cdfaeefe, b38cc982, a6f70a13, 0f44536f, ba8b2d38, 2499438c, fb49a226, 42fa4918, d0135100, 8c4236ad, 2b257b2e, e8b071cd, bfed39e0) have merged or closed. Stale row noted: T27 still reads `in progress` (owner `0f44536f`, no commits since 2026-11-14) — flagged for the board owner, not taken over here (different scope).
 
-**Handoff log:** none yet — this is the opening claim. Claim commit and push happen immediately after this record.
+### Merge and deploy record — `arena/b6defa90-zone2` (session `b6defa90`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#96](https://github.com/kanlerxz87-cyber/Zone2/pull/96)** — `arena/b6defa90-zone2` → `main` — **MERGED** 2026-11-15T13:12:05Z (`gh pr merge 96 --merge`) |
+| Merge commit | `23c7fd28e77479c670d09459f9c2f2b291b279f5` |
+| PR checks | `Build, verify and deploy` → cancelled by concurrency group on PR head (documented quirk); authoritative run is the post-merge push on `main` @ `23c7fd2` |
+| Post-merge `push` run on `main` | `Build, verify and deploy` — triggered by the merge; `pages build and deployment` run **success** |
+| `pages build and deployment` | run **success** (run 43717749467); Pages `status: built` |
+| Live site | `https://kanlerxz87-cyber.github.io/Zone2/` — deploy confirmed |
+| Corruption fix live | `index.html` EAD ×2 + stray `in` removed; unclosed suggestions anchor removed; `EXECUTIVE_SUMMARY.md` EAD ×3 + stray `in` removed; addendum at `docs/executive-summary-addendum-b6defa90.md` |
+| Decision surfaces | `pages/suggestions.html` (SG-01…SG-10) and `pages/questions.html` (Q-01…Q-16) linked from root landing navigation + footer Decisions column |
+| Gates (local replay of CI) | `validate_data` 0 errors/0 warnings · `audit_site` 116 pages 5/5 PASS · `build_site` 39 pages deterministic · `tests/test_pipeline.py` 15/15 |
+| Flags (non-blocking) | F-01…F-38 on `pages/flags.html`; none block merge |
+
+**Handoff log:** all T40 work complete — claim written and committed, corruption fixes applied, executive-summary addendum written, all gates green locally, PR #96 opened and merged without waiting, GitHub Pages deployed successfully and result recorded here. Nothing left open for this session.
