@@ -4416,3 +4416,41 @@ cache-busted fetch of the key entry points; (6) integration PR → merge → dep
 | Self-inflicted defects, and the gates they produced | (1) A merge resolution was committed **with conflict markers still in this file** — the same F-42 defect an earlier session had cleaned up. `tools/audit_site.py` now has a **`board`** check: it fails on `<<<<<<< `, `=======`, or `>>>>>>> ` in `COORDINATION.md`, with line numbers. Negative-tested. (2) The landing-page `debris` check (duplicate links in one list; stray unstyled prose) came from the two live defects found on `index.html`. |
 | Left open for the owner | **Q-17** — own the website and declare an exact URL (RR-02, RR-12). **SG-12** — close Amazon's 10-post content bar before applying (RR-03, RR-09). Plus the standing blockers: F-01/F-03 (intended ASINs), F-24 (no Associates tag — the supplied links cannot earn as supplied), F-05 (Creators API), F-08 (no performance data exists). |
 | No product value added or changed | Price, rating, review count, availability and per-product commission band remain blank. 4 of 12 Amazon review criteria are met; the 8 that are not are each listed with the single action that would clear them. |
+
+---
+
+---
+
+## T40 closing record — `arena/0e50a68a-zone2` (session `0e50a68a`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#105** — https://github.com/kanlerxz87-cyber/Zone2/pull/105 — `arena/0e50a68a-zone2` → `main` |
+| Changes | F-42 dedup repair on `COORDINATION.md` (241 duplicate lines removed; every deletion assertion-verified byte-identical to its first copy); new `docs/verification-0e50a68a.md` |
+| PR check | `Build and verify` **pass** (run 43718961680, 12 s); `Deploy to GitHub Pages` correctly skipped on the PR |
+| Early cancelled run | run 43718801636 was **cancelled** by the workflow's shared `concurrency: group: pages` at step 7 (steps 4–6 passed); not a defect — re-pushed and the clean run passed |
+| Merge | `gh pr merge 105 --merge` · **MERGED** 2026-11-15T13:26:58Z · merge commit `7762e684c72bba2084f63d20805c6fc984d7e5db` |
+| Post-merge `main` | `Build, verify and deploy` run 43719055309 — **success**; `pages build and deployment` run 43719054637 — **success** |
+| Pages API | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live read | Landing (cache-busted) renders the current dashboard, KPIs (3 of 3 / 0 of 3 / 1 category / 4.00 % / 38 flags), product cards with blank-or-unverified fields, decision-board callout; `pages/suggestions.html` renders the 12-suggestion decision board with per-row official-source links |
+
+**Verification performed (2026-11-15, live):** the three supplied `link.amazon` links re-fetched — `B04G1MEwY`→`B0CDY277D3`,
+`B02NbDxp3`→`B09B7SB46R`, `B00hJ57DV`→`B08DKYBTPH`, each carrying `plpRedirect=mhFallback`, a per-fetch `btn_ref` token and no
+Associates `tag` (F-21/F-24 stand); ASIN = "10-digit code" per the official Associates help page. Every repository gate replayed
+on the combined tree: `validate_data.py` (0 errors, 38 flags, 42 sources, 340 rows), six generator `--check` drift gates,
+`verify_marketing.py` (18 pages · 48 rows · 0 failures), `validate_decisions.py`, `audit_site.py` (**116 pages, all checks PASS**),
+`tests/test_pipeline.py` 15/15, affiliate-lab / revalidation / research-hub verifiers, `node --check`, and the workflow's
+link/disclosure/price sweeps replayed verbatim (all links resolve; 90 pages disclosed; 39 subpages qualified).
+
+**F-42 repair:** removed the byte-identical second copies of the 42fa4918 claim + T31 record body and the 8c4236ad record body
+(the unique T39 record sandwiched inside the duplicated region was kept), the four duplicated T26 sub-sections and the
+duplicated T26 table prefix (the unique consolidated task-disposition rows were kept). Post-repair: **0** duplicate sections at
+both heading levels, **0** conflict markers, all session records present.
+
+**Irregularities (carried forward, non-blocking, published with sources):** F-01/F-02/F-03 (the supplied 9-character codes are
+not ASINs; destinations are real listings but the code→product mapping is not documented by Amazon), F-24 (no Associates tag on
+the supplied links), F-05 (Creators API registration required), P2 listing-title drift (kept at its dated ledger value), and the
+owner-open questions Q-01…Q-16 / suggestions SG-01…SG-10 awaiting recorded decisions in `ledger/suggestions.json`. None blocks
+the site or the merge.
+
+**T40** — **done.**
