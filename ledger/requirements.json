@@ -334,7 +334,7 @@
           ],
           "status": "NOT_MET",
           "evidence": "No page in this repository carries a byline, an author page, or any statement of who produced it beyond the project name.",
-          "gap": "S40 states plainly that fabricating an author is deception, and S38 weighs authorship and editorial responsibility when Amazon reviews a Site. The honest options are a real named author with real credentials, or an explicit editorial statement naming the process and the reviewer — inventing an identity is the one thing that must not be done. This is a decision for the owner, so it is raised as SUG-08 rather than guessed.",
+          "gap": "S40 states plainly that fabricating an author is deception, and S38 weighs authorship and editorial responsibility when Amazon reviews a Site. The honest options are a real named author with real credentials, or an explicit editorial statement naming the process and the reviewer — inventing an identity is the one thing that must not be done. This is a decision for the owner, so it is raised as SG-05 on the canonical decision board (editorial voice and testing) rather than guessed.",
           "implementation": "",
           "flag_ids": [
             "SG-05"

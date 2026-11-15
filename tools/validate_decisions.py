@@ -206,8 +206,13 @@ def check_cross_references(rep: Report) -> None:
     known |= {f["id"] for f in bd.FINDINGS["findings"]}
     known |= {f["id"] for f in json.loads((DATA / "flags.json").read_text(encoding="utf-8"))["flags"]}
     checked = 0
+    # Scan the whole row, not just flag_ids: the first fix of this defect missed a reference that sat inside
+    # a prose field, and one dangling id still reached the deployed page. Prose is where these hide.
+    ref_pattern = re.compile(r"\b(?:SUG|SG|RF|F|Q)-\d{2}\b")
     for r in bd.all_reqs():
-        for ref in r.get("flag_ids", []):
+        blob = json.dumps(r, ensure_ascii=False)
+        for ref in sorted(set(ref_pattern.findall(blob))):
+            # `F-xx` and `Q-xx` are also cited as ordinary words in some rows; only hold to the real ids.
             checked += 1
             if ref not in known:
                 rep.fail(
