@@ -1,6 +1,6 @@
-# T47 verification record — session `e69d851b` (2026-11-15, UTC)
+# T48 verification record — session `e69d851b` (2026-11-15, UTC)
 
-**Task:** T47 (claimed as T43; renumbered at integration because session `156aae86` shipped a different T43 on `main` while this branch was in flight — the board's renumbering precedent; no other session's record was altered) — close change request **CR-8** (decision-board deep links) and run this wave's final
+**Task:** T48 (claimed as T43, briefly T47; final id **T48** because session `156aae86` shipped T43 on `main` first and open PR #104 (`3e0b3b4e`, 13:20 UTC) had already claimed T47 — the board's renumbering precedent; no other session's record was altered) — close change request **CR-8** (decision-board deep links) and run this wave's final
 integration. **Branch:** `arena/e69d851b-zone2`. **Base at claim:** `origin/main` = `23c7fd2`
 (merge of PR #96).
 
@@ -22,7 +22,7 @@ served by Amazon's link or obtained through the licensed API).
 | `playbook.html` | 18 plain-text decision ids (7 × `SG-…`, 11 × `Q-…` occurrences across 14 replacement sites — 18 exact replacements, each asserted to occur exactly once before replacement) converted into deep links to `pages/suggestions.html#SG-…` / `pages/questions.html#Q-…` | none |
 | `docs/design-prompt-suggestions.md` | 20 same (9 × `SG-…`, 11 × `Q-…`), relative targets `../pages/…` because the document lives in `docs/` | none |
 | `docs/verification-e69d851b.md` | this record (new) | — |
-| `COORDINATION.md` | append-only claim + closing records; one new T47 row in the canonical Task board table | — |
+| `COORDINATION.md` | append-only claim + closing records; one new T48 row in the canonical Task board table | — |
 
 **Not touched:** `ledger/**` (no flag, question, suggestion, product, commission or source row edited),
 `assets/**`, `marketing/**`, `decisions/**`, `journal/**`, root `index.html`, `README.md`,
