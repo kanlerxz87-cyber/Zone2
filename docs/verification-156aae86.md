@@ -327,3 +327,51 @@ discarded, and no merge attempt was stopped because of it.
 
 The job now has **24** steps; it had 22 before this change (session `08789ab3` recorded replaying 22 on its tree). The two that were added are the sitemap rebuild check and the discoverability audit, in that order, immediately after `audit_site.py`.
 
+---
+
+## 11. Post-merge follow-up — my own sitemap shipped one error page, and the gate did not catch it
+
+Found by reading the deployed file after PR #100 merged, not by any check here. Recorded because the
+failure is instructive about what these two gates can and cannot see.
+
+**The defect.** The first generated `sitemap.xml` (114 page URLs + 1) contained
+
+```
+<loc>https://kanlerxz87-cyber.github.io/Zone2/research-hub/404.html</loc>
+```
+
+`research-hub/404.html` is a "Page not found" document (`<title>Page not found</title>`). Advertising it
+invites a crawler to index a failure. The exclusion rule was written as an **exact path**:
+
+```python
+EXCLUDED_FILES = {"404.html"}
+...
+if rel.as_posix() in EXCLUDED_FILES:   # 'research-hub/404.html' never matches
+```
+
+which excludes only the root file. The correct rule matches the **basename**, so an error page is
+excluded at any depth.
+
+**Why the audit passed anyway.** `seo_audit.py` D2 checks that every `<loc>` maps to a file that *exists*
+— and `research-hub/404.html` does exist. Both gates were internally consistent and both were wrong:
+the property that was missing is "a listed URL should be a page we want indexed", which is a judgement
+the file itself cannot supply. This is the same shape as the original T43 finding — a green check that
+answers a narrower question than the one that matters — and it is why the sitemap is worth reading by
+hand once after it is built rather than only gating it.
+
+**Fix and proof.**
+
+| Step | Result |
+|---|---|
+| `rel.name in EXCLUDED_FILES` in `tools/build_sitemap.py` and `tools/seo_audit.py` (the latter imports the set, so one change covers both) | applied |
+| Regenerate | `wrote sitemap.xml — 114 URLs` (was 115) |
+| `grep -c 404 sitemap.xml` | **0** |
+| `build_sitemap.py --check` | `sitemap.xml is current (114 URLs)` |
+| `seo_audit.py` | D1–D6 PASS, D7 0 pages |
+| **N10** — a nested `marketing/404.html` added to a copy, then regenerated | **0** 404 URLs, 114 total — excluded at any depth |
+| Full CI replay, 24 steps | **24/24 green** |
+
+The exclusion is still by basename, not by content: a file named something else whose `<title>` says
+"Page not found" would still be listed. That is recorded as a limitation rather than fixed, because
+guessing intent from a title is how a build starts making editorial decisions silently.
+

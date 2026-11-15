@@ -16,9 +16,11 @@ WHAT COUNTS AS PUBLISHED
     be held to.
 
 EXCLUSIONS (each one deliberate, none silent)
-    `404.html`            GitHub Pages' own error document. It is not a destination; listing an
-                          error page invites a crawler to index a failure. `custom_404` is enabled
-                          on the Pages site (verified via the Pages API).
+    `404.html`, and any file with that basename  Error documents. They are not destinations; listing
+                          one invites a crawler to index a failure. The match is on the basename, so
+                          `research-hub/404.html` is excluded too — an exact-path rule missed it on the
+                          first run. `custom_404` is enabled on the Pages site (verified via the
+                          Pages API).
     `tools/`, `tests/`, `content/`   build scripts, fixtures and content templates. No `.html`
                           currently lives there; the exclusion keeps a future stray file from
                           being advertised.
@@ -52,7 +54,10 @@ LIVE = "https://kanlerxz87-cyber.github.io/Zone2/"
 #: Directories whose HTML is never a published destination. See the module docstring.
 EXCLUDED_DIRS = ("tools", "tests", "content")
 
-#: Files that exist in the tree but are not destinations.
+#: Files that exist in the tree but are not destinations, matched on the **basename** so that a
+#: nested error page is caught as well as the root one. `research-hub/404.html` is a "Page not found"
+#: document; an exact-path set missed it, and the first generated sitemap advertised it — listing an
+#: error page invites a crawler to index a failure.
 EXCLUDED_FILES = {"404.html"}
 
 #: `sitemap.xml` element order, per https://www.sitemaps.org/protocol.html — `<loc>` is required and
@@ -73,7 +78,7 @@ def published_pages() -> list[str]:
             continue  # .git and any dot-directory
         if rel.parts[0] in EXCLUDED_DIRS:
             continue
-        if rel.as_posix() in EXCLUDED_FILES:
+        if rel.name in EXCLUDED_FILES:
             continue
         pages.append(rel.as_posix())
     # Directory-style ordering keeps each namespace together and the root pages first, which makes
