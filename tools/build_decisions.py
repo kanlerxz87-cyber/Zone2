@@ -821,7 +821,12 @@ def vendor_assets(out_root: Path) -> None:
             f"/* Vendored from {src.relative_to(REPO).as_posix()} by tools/build_decisions.py - do not edit here.\n"
             "   Re-run the builder after changing the source. */\n"
         )
-        dest.write_text(header + src.read_text(encoding="utf-8"), encoding="utf-8")
+        # CR (session 2b257b2e, T34 integration): the shared stylesheet now bundles its
+        # fonts via relative url(...)s. Vendored one level deeper (decisions/assets/),
+        # those paths would resolve into decisions/assets/fonts/, which does not exist;
+        # rewrite them to point back at the repository-root font files.
+        text = src.read_text(encoding="utf-8").replace('url("assets/fonts/', 'url("../../assets/fonts/')
+        dest.write_text(header + text, encoding="utf-8")
     site_css = REPO / "tools" / "pages-site.css"
     if site_css.is_file():
         shutil.copy2(site_css, out_root / "assets" / "site.css")
