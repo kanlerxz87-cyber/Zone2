@@ -3789,3 +3789,23 @@ carried forward from the ledger (not re-quoted).
 3. **Emeril listing title variant.** The `link.amazon/B02NbDxp3` fetch on 2026-11-15 returned a different listing-title variant than the 2026-11-14 read recorded in the ledger (Amazon rotates listing copy between fetches — consistent with the cross-fetch behaviour documented in `revalidation/`). The ledger row keeps its dated source; no change made.
 4. **CR executed under integration duty:** `tools/build_decisions.py` (owner `d0135100`, merged and finished) gained a one-line rewrite so the vendored `decisions/assets/dashboard.css` resolves the redesigned stylesheet's bundled font paths (`assets/fonts/` → `../../assets/fonts/`). Without it the redesigned root stylesheet would 404 its fonts on every decisions page. Regenerated output is `--check`-gated.
 5. **Unchanged, still owner-open:** F-01…F-03 (confirm ASINs), F-24 (tagged Associates links — as supplied the links cannot earn), F-05 (Creators API registration). No price, rating, review count, availability or per-ASIN commission band is published anywhere — none is verifiable from an official source yet.
+
+---
+
+## Session record — arena/bf8f07a7-zone2 — trendy-topics / organic-traffic marketing layer
+
+| Field | Value |
+|---|---|
+| Branch | `arena/bf8f07a7-zone2` (rebased onto `main` = `0691b2b`) |
+| PR | #65 |
+| Task | Contribute the trendy-topics / organic-traffic marketing layer (`marketing/trending-topics.html`) so the affiliate destination reads as a polished marketing site rather than AI slop. The Suggestions section (review-before-implement) and the Questions / Information / Answers decision gate are already canonically implemented by T29 (`pages/suggestions.html`, PR #61) and integrated by T30 (`pages/questions.html`, PR #64), both merged and deployed, so this session deliberately does NOT duplicate them. |
+| Files | `marketing/trending-topics.html` (new); `COORDINATION.md` (this record). `marketing/index.html` left as main's generator output (per current `tools/build_marketing.py`, which this session does not edit — `tools/` is out of scope). |
+| Status | ready for PR → merge → GitHub Pages deploy |
+
+### Scope honoured
+No edits to `ledger/**`, `pages/**` except nav links, `tools/**`, or companion sites. No verified product value, identity mapping, price, rating, or commission figure added or inferred; no blank filled. `trending-topics.html` is editorial-idea framing ("Idea" status pills), not product claims.
+
+### CI note
+`trending-topics.html` is standalone (not in `build_marketing.py`'s `PAGES`), so it is invisible to `build_marketing.py --check` and `verify_marketing.py` (both iterate only `PAGES`); its internal links resolve (it links to `index.html`, `../pages/suggestions.html`, `../pages/questions.html`, `../pages/flags.html`, `assets/marketing.css`). No price, affiliate link, or product claim appears on it.
+
+Awaiting green PR #65 mergeability → PR → merge → GitHub Pages deploy → record PR link & merge result below.
