@@ -4265,7 +4265,11 @@ Follow-up to T40 (`3db75825`, merged PR #91). T40 was claimed in parallel by thi
 | Supplied links | Re-observed live: `B04G1MEwY`→`B0CDY277D3`, `B02NbDxp3`→`B09B7SB46R`, `B00hJ57DV`→`B08DKYBTPH`; all `plpRedirect=mhFallback`, no Associates tag — matches the site |
 | Irregularities still open (owner) | F-05 / F-07 / F-24 (no Associates tag or ID; no Creators API credentials). I-D (board size, ~401 KB) and I-C (rows reading "in progress" with closing records) — recommendations only. |
 | Flagged for Review register | Unchanged (no new product-level irregularity found on official sources; process items recorded here, not on the public register, because flags must cite official sources) |
-| PR | Opened from `arena/08789ab3-zone2` → `main`; link and merge result recorded in the follow-up closing line below |
+| PR | **[#94](https://github.com/kanlerxz87-cyber/Zone2/pull/94)** — `T41: follow-up to T40 …` · PR check `Build and verify` on head `235b8a5` = **success** (deploy job skipped on PRs by design) · merged with `gh pr merge 94 --merge` → merge commit **`d4b68ee`** at 2026-11-15 13:10:04 UTC |
+| Merge-time deploy | Post-merge `Build, verify and deploy` run for `d4b68ee` was **cancelled** by the workflow's `pages` concurrency group (`cancel-in-progress: true`) when PR #92 pushed `d887ae7` one second later. Its build job passed; its deploy job was cancelled and GitHub refuses re-runs of that run ("its workflow file may be broken"); a manual `workflow_dispatch` returned HTTP 403 to this session. |
+| Pages | `GET /repos/…/pages` → `status: built`, source `main` `/`. Legacy `pages-build-deployment` = **success** for `d4b68ee` and `d887ae7`. Live fetch of `docs/verification-08789ab3.md` served this record. |
+| Full gate replay on live `main` | Shallow clone of `origin/main` at `23c7fd2` (PR #96, after this merge): all 22 CI steps → **22/22 exit 0**. (An earlier replay from a `git archive` extract failed step 09 only because that step needs a `.git` directory; re-run in a real clone it passes.) |
+| Change request (not implemented; `.github/workflows/pages.yml` is shared) | **CR-T41-1.** Set `cancel-in-progress: false` for the `pages` concurrency group, or split the deploy job into its own group. Otherwise a deploy is cancelled whenever two merges land close together, which happened on 4 of the 6 most recent `main` runs. |
 
 ## Session record — `arena/b6defa90-zone2` (session `b6defa90`, 2026-11-15 UTC) — task T40
 
