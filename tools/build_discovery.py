@@ -366,11 +366,11 @@ reasons are about wording. They are mechanical, and they are fixable.</p>
   page is the review board: read the options, their trade-offs and the questions blocking each one, then pick.</p>
 </div>
 
-<h2>The three things that cost the most</h2>
-<p>Ordered by what they cost, not by how interesting they are.</p>
+<h2>The findings that cost the most</h2>
+<p>Revenue blockers first, then growth blockers. Ordered by what they cost, not by how interesting they are.</p>
 <div class="tablewrap">
   <table>
-    <caption>Derived from <code>docs/discovery-t40.json</code>: findings whose severity is <em>blocks revenue</em> or <em>blocks growth</em>.</caption>
+    <caption>Derived from <code>docs/discovery-t40.json</code>: every finding whose severity is <em>blocks revenue</em> or <em>blocks growth</em>.</caption>
     <thead><tr><th>ID</th><th>Severity</th><th>What was measured</th><th>Official source</th></tr></thead>
     <tbody>{rows}</tbody>
   </table>
@@ -423,38 +423,55 @@ holds, plus a measurement layer that says which page sends people where.</p>
     )
 
 
+def _finding_row(f: dict) -> str:
+    measurable = ""
+    if f.get("measurement"):
+        measurable = f'<div class="note-sm"><strong>How it was measured:</strong> {esc(f["measurement"])}</div>'
+    why = f'<div class="note-sm"><strong>Why it costs:</strong> {esc(f["why_it_matters"])}</div>'
+    rec = f'<div class="note-sm"><strong>Recommended:</strong> {esc(f["recommendation"])}</div>'
+    limit = ""
+    if f.get("what_cannot_be_done"):
+        limit = f'<div class="note-sm"><strong>What cannot be done about it:</strong> {esc(f["what_cannot_be_done"])}</div>'
+    return (
+        f'<tr id="{esc(f["id"])}">'
+        f'<td class="id">{esc(f["id"])}</td>'
+        f'<td><strong>{esc(f["area"])}</strong>{why}{rec}{limit}</td>'
+        f'<td><strong>{esc(f["finding"])}</strong>{measurable}</td>'
+        f'{source_cell(f["source_ids"])}</tr>'
+    )
+
+
+FINDING_GROUPS = [
+    ("blocks revenue", "Blocking revenue"),
+    ("blocks growth", "Blocking growth"),
+    ("blocks a claim", "Blocking a claim"),
+    ("cosmetic", "Working, and recorded so it stays that way"),
+]
+
+
 def page_findings() -> str:
-    rows = []
-    for f in FINDINGS:
-        measurable = ""
-        if f.get("measurement"):
-            measurable = f'<div class="note-sm"><strong>How it was measured:</strong> {esc(f["measurement"])}</div>'
-        why = f'<div class="note-sm"><strong>Why it costs:</strong> {esc(f["why_it_matters"])}</div>'
-        rec = f'<div class="note-sm"><strong>Recommended:</strong> {esc(f["recommendation"])}</div>'
-        limit = ""
-        if f.get("what_cannot_be_done"):
-            limit = f'<div class="note-sm"><strong>What cannot be done about it:</strong> {esc(f["what_cannot_be_done"])}</div>'
-        rows.append(
-            f'<tr id="{esc(f["id"])}">'
-            f'<td class="id">{esc(f["id"])}<div class="note-sm">{sev_pill(f["severity"])}</div></td>'
-            f'<td><strong>{esc(f["finding"])}</strong>{measurable}</td>'
-            f'<td>{esc(f["area"])}{why}{rec}{limit}</td>'
-            f'{source_cell(f["source_ids"])}</tr>'
+    sections = []
+    for sev, label in FINDING_GROUPS:
+        group = [f for f in FINDINGS if f["severity"] == sev]
+        if not group:
+            continue
+        trs = "".join(_finding_row(f) for f in group)
+        sections.append(
+            f'<h2>{esc(label)} <span class="pill">{len(group)}</span></h2>'
+            f'<div class="tablewrap"><table>'
+            "<caption>Severity is this review's judgement, not an Amazon or Google category; the official page "
+            "that makes each finding true is the last column.</caption>"
+            f'<thead><tr><th>ID</th><th>Area, cost and recommendation</th><th>Finding and measurement</th>'
+            f'<th>Official source</th></tr></thead><tbody>{trs}</tbody></table></div>'
         )
+    _sections = "".join(sections)
     body = f"""
 <h1>What we found, and how to check it</h1>
 <p class="lede">{esc(num_word(len(FINDINGS)))} findings, each measured on 2026-11-15 against the published tree.
 Every row states the measurement so you can reproduce it, what it costs, and the official page that governs it.
 Where a finding is a strength rather than a gap, it says so — a review that only lists problems cannot tell you
 what not to break.</p>
-<div class="tablewrap">
-  <table>
-    <caption>Sorted as recorded. Severity is this review's judgement, not an Amazon or Google category; the
-    official page that makes each finding true is the last column.</caption>
-    <thead><tr><th>ID</th><th>Finding and measurement</th><th>Area, cost and recommendation</th><th>Official source</th></tr></thead>
-    <tbody>{''.join(rows)}</tbody>
-  </table>
-</div>
+{_sections}
 <div class="note">
   <p><strong>Two findings are deliberately not called violations.</strong> DG-13 (compliance commentary and
   Operating Agreement §5) and DG-14 (the missing 2(k) text disclaimer) are published as a question and a
@@ -465,8 +482,8 @@ what not to break.</p>
 """
     return page(
         "What we found",
-        "Seventeen measured findings about this affiliate site — measurement, cost, recommendation and the official "
-        "page that governs each one.",
+        f"{len(FINDINGS)} measured findings about this affiliate site — measurement, cost, recommendation and the "
+        "official page that governs each one.",
         body,
         here="findings.html",
         crumbs=[("index.html", "Overview"), ("findings.html", "What we found")],
@@ -504,6 +521,7 @@ missing, and exactly how to obtain it — a question without a route to an answe
 <a href="suggestions.html#DS-02">DS-02</a>, <a href="suggestions.html#DS-01">DS-01</a>,
 <a href="suggestions.html#DS-07">DS-07</a> and <a href="suggestions.html#DS-11">DS-11</a> all wait on a single
 answer: whether an Associates account exists.</p>
+<h2>Every open question, and how to close it</h2>
 <div class="tablewrap">
   <table>
     <caption>The answer column is empty by design. A question marked ANSWERED means the owner recorded an answer,
@@ -626,6 +644,7 @@ def page_sources() -> str:
     <p class="lede">{esc(num_word(len(GD_SOURCES)))} sources, fetched live on {esc(AS_OF)}. For each one the exact
 text this review relied on is quoted beside the link, so you can check a finding against the page itself instead
 of trusting this site's paraphrase.</p>
+<h2>The register</h2>
 <div class="tablewrap">
   <table>
     <caption>Quotes are copied from the page as served; only whitespace is normalised. Where a page states its own
