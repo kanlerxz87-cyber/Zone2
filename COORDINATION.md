@@ -4308,3 +4308,40 @@ No file in this claim's scope is claimed by another session: all owning sessions
 | PR / merge / deployment | PR [#95](https://github.com/kanlerxz87-cyber/Zone2/pull/95) merged as `6eccadd57e99e8c14557125ee0b0d156f9c067f1` on 2026-11-15; post-merge workflow [43717842219](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43717842219) succeeded; Pages build/deploy [43717841570](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43717841570) succeeded. |
 | Live check | Cache-busted read of [pages/questions.html](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html?cacheBust=6eccadd57e99e8c14557125ee0b0d156f9c067f1) confirmed Q-01/Q-07 no longer state a location. The first non-cache-busted read returned the prior copy; cache-busted read matched the deployed commit. |
 | Status | **done — merged, Pages deployed, live-verified.** |
+
+---
+
+## Session claim — T43 — `arena/156aae86-zone2` (session `156aae86`, 2026-11-15 UTC)
+
+**Renumbered T41 → T43.** Claimed as T41 on a branch based on `83f52a9`. While it was in flight, `main`
+advanced through PRs #92–#99 and **T41 was claimed and shipped by session `08789ab3`** and **T42 by
+`bfb20351`**. Per the board's renumbering precedent the label moves; nothing of any other session's record
+was edited, reordered or deleted, and no other session's file was touched.
+
+**What changed under this branch — read before reviewing the diff:**
+
+| Change on `main` while this branch was open | Effect here |
+|---|---|
+| Session `b6defa90` (T40) removed the `EAD`/`in` merge residue from `index.html` and `EXECUTIVE_SUMMARY.md` (PR #96, `e943abc`) | **This session's independent repair of the same defect was dropped in the rebase.** Verified present on the final tree: `grep -c '^EAD$\\|^in$'` → 0 in both files. No duplicate fix shipped. The finding is retained in the record because it was found independently and because nothing in the gate suite would have caught it. |
+| Session `08789ab3` (T41) closed T40's I-A (ASIN rule) and I-B (PR #70) | No overlap; not re-done |
+| Session `bfb20351` (T42) removed an unsourced Osaka-location claim from `ledger/questions.json` | Not touched; `ledger/**` is outside this session's scope |
+
+**Claimed:** T43. **Board state at claim (rebase point):** `origin/main` = `bfc240d`. Open PR: **#90**
+(verification-only, `COORDINATION.md` scope). No issue open.
+
+**Non-overlap statement.** T43 owns the root `sitemap.xml`, two new tool files, two appended CI steps, a
+mechanical `<link rel="icon">` insertion on the root pages (and in the two generators that emit three of
+them), and this record. It does **not** touch `ledger/**`, `assets/js/**`, `marketing/data/**`,
+`tools/build_marketing.py`, the product/identity/price/commission registers, or any page body prose.
+
+**Why this scope.** Every surface the owner asked for was already published and green on `main` before this
+session touched anything — the suggestions board (`pages/suggestions.html`, SG-01…SG-10), the questions
+register (`pages/questions.html`, Q-01…Q-16), the playbook (`playbook.html`), the marketing publication
+(`marketing/**`, 18 pages) and the journal (`journal/**`, 4 pages). What no task had covered was the
+mechanism that tells a search engine those pages exist, and at the rebase point it is still measurably
+broken: root `sitemap.xml` holds **16** `<loc>` entries against **115** published HTML pages (**99 absent,
+86%**), including `marketing/index.html`, `playbook.html` and all 38 `pages/*.html`. The file is
+hand-typed, has no generator, and no CI step reads it — so it drifted to that state with every build
+green. Separately `rel="icon"` is on the 4 `journal/` pages and on **0** of the 13 root pages, so the
+landing page's default `/favicon.ico` request 404s. That is the organic-traffic plumbing the brief asks
+for. Full record with reproducing commands: `docs/verification-156aae86.md`.
