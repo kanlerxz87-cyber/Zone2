@@ -276,14 +276,41 @@
     return '<a href="' + esc(url) + '" target="_blank" rel="sponsored noopener noreferrer">' + esc(label) + "</a>";
   }
 
+  /* T46 front-of-house pass: the cards now lead with the *verified* specification
+   * highlights (from the same SPECS ledger rows the products page renders), each
+   * carrying the link to the official page the value was read from. The unverified
+   * fields stay on the card as explicit blanks — the honesty is the differentiator,
+   * so it is kept visible, not hidden. No value is added here: SPECS rows are the
+   * generated ledger view (assets/js/data.js), and status !== "verified" is never
+   * shown as a highlight. */
   function renderProductCards() {
     const el = document.getElementById("productCards");
     if (!el) return;
+    const SPEC_ORDER = ["Capacity", "Power", "Temperature range", "Model number", "Weight", "Dimensions"];
     el.innerHTML = PRODUCTS.map(function (p) {
+      const byAttr = {};
+      SPECS.forEach(function (s) {
+        if (s.pid === p.id && s.status === "verified" && byAttr[s.attribute] === undefined) {
+          byAttr[s.attribute] = s;
+        }
+      });
+      const picks = [];
+      SPEC_ORDER.forEach(function (name) { if (byAttr[name]) picks.push(byAttr[name]); });
+      SPECS.forEach(function (s) {
+        if (s.pid === p.id && s.status === "verified" && picks.indexOf(s) === -1 && picks.length < 3) picks.push(s);
+      });
+      const highlights = picks.slice(0, 3).map(function (s) {
+        return (
+          '<div class="spec"><span class="sk">' + esc(s.attribute) + "</span>" +
+          '<span class="sv">' + esc(s.value) +
+          '<a href="' + esc(s.source) + '" target="_blank" rel="noopener noreferrer" title="' + esc(s.sourceLabel) + '">source ↗</a></span></div>'
+        );
+      }).join("");
       return (
         '<div class="product-card">' +
         '<div class="product-brand-row"><span class="product-brand">' + esc(p.brand) + '</span><span class="asin-chip">' + esc(p.resolvesToAsin) + "</span></div>" +
         '<div class="product-title">' + esc(p.title) + "</div>" +
+        (highlights ? '<div class="spec-highlights">' + highlights + "</div>" : "") +
         '<div class="product-meta">' +
         '<div class="row"><span class="k">Category path</span><span class="v">' + esc(p.categoryPath) + "</span></div>" +
         '<div class="row"><span class="k">Price</span><span class="v">' + cell(p.price) + "</span></div>" +
