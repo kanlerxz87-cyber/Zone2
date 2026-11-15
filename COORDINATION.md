@@ -4286,3 +4286,12 @@ here rather than silently deviated, matching every prior session's practice.
 No file in this claim's scope is claimed by another session: all owning sessions (6b8bb130, 6602723a, 34836ddd, 78c94859, f786c0d7, 181863ad, c6e94e8d, bbe4ca47, 82a2d436, 83194da0, 4338f55e, dc52402c, dc15ce5a, dd87f326, cdfaeefe, b38cc982, a6f70a13, 0f44536f, ba8b2d38, 2499438c, fb49a226, 42fa4918, d0135100, 8c4236ad, 2b257b2e, e8b071cd, bfed39e0) have merged or closed. Stale row noted: T27 still reads `in progress` (owner `0f44536f`, no commits since 2026-11-14) — flagged for the board owner, not taken over here (different scope).
 
 **Handoff log:** none yet — this is the opening claim. Claim commit and push happen immediately after this record.
+
+## Session claim — T42 — `arena/bfb20351-zone2` (session `bfb20351`, 2026-11-15 UTC)
+
+| Task | **T42 — Remove unsupported operator-location claim from Q-01** after the baseline review found that the public Questions register stated the brief gave an Osaka, Japan location, which it did not. Preserve the separately sourced marketplace facts and keep the question open. |
+|---|---|
+| Status | **in progress** |
+| File scope | `ledger/questions.json`, generated `pages/questions.html`, `docs/review-bfb20351.md`, this append-only `COORDINATION.md` record |
+| Verification plan | Regenerate decision pages; validate decision dataset and all root/research/marketing gates; live-check Q-01 after Pages deploy. |
+| Non-overlap | Does not edit `marketing/**`, tools, product facts, navigation, or the scope of the open PR #90 (which is coordination-only). This append is a separate session record. |
