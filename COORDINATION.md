@@ -4255,3 +4255,75 @@ Follow-up to T40 (`3db75825`, merged PR #91). T40 was claimed in parallel by thi
 | Irregularities still open (owner) | F-05 / F-07 / F-24 (no Associates tag or ID; no Creators API credentials). I-D (board size, ~401 KB) and I-C (rows reading "in progress" with closing records) — recommendations only. |
 | Flagged for Review register | Unchanged (no new product-level irregularity found on official sources; process items recorded here, not on the public register, because flags must cite official sources) |
 | PR | Opened from `arena/08789ab3-zone2` → `main`; link and merge result recorded in the follow-up closing line below |
+
+
+## Session claim — T42 (label only; identity is the session id) — `arena/5d6d2254-zone2` (session `5d6d2254`, 2026-11-15 UTC)
+
+> **Id collision, recorded per the board precedent:** this claim was pushed as `T40` at 13:12Z against `main` = `23895e2`;
+> while it was in flight, `3db75825` shipped **T40** (PR #91) and `08789ab3` shipped **T41** onto `main`. Both records are kept
+> verbatim above; only this heading changed, and the text below now reads as T42. No other session's row was renamed.
+
+**Claimed at 13:12Z, before any edit, on `main` = `23895e2`.** Per today's lesson on this board, the
+`T40` label is decoration — if it collides, whoever integrates renumbers it; nothing in this record or any
+other session's row is to be renamed by a script.
+
+**Request this session answers.** The owner's 2026-11-15 brief repeated: a polished marketing affiliate site
+that earns organic traffic and does not read as generated; a dedicated suggestions section; a clear list of
+questions / information / answers needed before any decision; an executive summary; line-by-line verification
+with an official source per row; a GitHub Pages deploy; and a PR merged without waiting for review.
+
+**What is already true on `main` (measured, not assumed).** Root site = verified operator dashboard, 13
+public pages; `marketing/` = the reader-facing publication (18 pages, canonical + OG + sitemap + feed, ten
+writing rules gated by `verify_marketing.py`); `journal/` = hand-written editorial layer; `pages/` = 39
+generated evidence subpages incl. the canonical `suggestions.html` / `questions.html` boards; `decisions/` =
+the requirement/content-plan surface; four legacy companion namespaces. So the anti-slop editorial ask,
+the suggestion board and the question register all exist. This session therefore does **not** add a 14th
+article, a second suggestion board, or a redesign of a namespace another session owns.
+
+**The gap this session fixes (measured 2026-11-15 on `23895e2`):** the reader-facing layer is nearly
+invisible to a crawler, and the front door still leads with the operator dashboard.
+1. `sitemap.xml` is hand-maintained and covers 16 URLs while **23 published pages are missing from it** —
+   the entire `marketing/` publication (18), all of `decisions/` (4) and `playbook.html`. It is the only
+   shared output in this repo that no generator derives, which is exactly why it drifted.
+2. Root `robots.txt` advertises only that sitemap, so a crawler that obeys it never learns the publication
+   exists. (`marketing/robots.txt` points at `marketing/sitemap.xml`, but nothing points a crawler at
+   `marketing/robots.txt` from the site root.)
+3. `<link rel="canonical">` and Open Graph tags exist on **18 of 78** published pages (`marketing/` only).
+   Root (13), `journal/` (4), `pages/` (39) and `decisions/` (4) have none, so the same page is
+   addressable with and without `index.html`, and social/link previews fall back to whatever the crawler
+   guesses for `og:image`/`og:title`.
+4. `index.html`'s primary nav is 13 flat items with no route to the buying guide; the reader publication is
+   reachable only from three in-body links.
+
+**Scope (files this session may edit; everything else is out of bounds):**
+- NEW `tools/build_sitemap.py` — derives `sitemap.xml` from the published tree, `--check` supported, plus a
+  coverage assertion (every published reader/evidence page is in the sitemap; the excluded legacy namespaces
+  are excluded by an explicit, commented rule, not by omission).
+- `sitemap.xml` (now generated; superset that includes any page another session adds).
+- `.github/workflows/pages.yml` — one added step running the sitemap generator's `--check`.
+- Root static `<head>` metadata ONLY (canonical + `og:`): `index.html`, `products.html`, `analysis.html`,
+  `content.html`, `compliance.html`, `tracking.html`, `verification.html`, `sources.html`, `summary.html`,
+  `design-notes.html`, `playbook.html`, `404.html`. In `index.html` additionally: primary-nav grouping into
+  a reader path and an operator path, and the hero's primary CTA pointing at the decision page. **No table,
+  count, KPI, caption or verified value is edited by this session on any root page.**
+- `journal/*.html` — `<head>` metadata only (4 files, hand-written).
+- `tools/build_site.py` + `tools/build_decisions.py` — additive `<head>` template change only, then
+  regenerate `pages/**` and `decisions/**`. (Both generators were last edited by `1b839f87`, whose PR #89 is
+  merged, so no active claimant holds them.)
+- `ledger/suggestions.json` / `ledger/questions.json` — additive rows only, from the crawl-hygiene findings,
+  each with options/evidence/sources; no existing row edited.
+- NEW `docs/verification-5d6d2254.md` — this session's dated, line-by-line re-verification record.
+- `EXECUTIVE_SUMMARY.md` — append-only addendum (and re-run `research-hub/scripts/build.py` in the same
+  commit, per the recorded CI coupling).
+- `COORDINATION.md` — this claim, status corrections where a row says `in progress` but its session's merge
+  is on record, and the closing record.
+
+**Deliberately NOT touched** (conflict avoidance with open PRs at claim time): `README.md` and `flagged.html`
+(PR #93, `86bb886d`); `assets/css/style.css`, `pages/assets/dashboard.css`, `tools/build_decisions.py`'s
+font rewrite (PR #89, merged); `marketing/**` content (PR #82/#88 lineage, `e8b071cd`); the four legacy
+companion namespaces. Change requests for those are logged in the closing record below, not edited.
+
+**Rules this session holds itself to.** No verified value is added, inferred or filled; every row I publish
+ends in the official page it was read from; anything I cannot confirm stays blank and gets flagged; the
+owner-decision boards stay open (I implement crawl plumbing and navigation, not product claims, not new
+marketing copy, and not any of the pending SG/DS choices).
