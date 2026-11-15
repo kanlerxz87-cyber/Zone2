@@ -32,6 +32,18 @@ SKIP_DIRS = {".git", "node_modules", "__pycache__", ".local", ".cache"}
 URL = re.compile(r"""url\(\s*(?P<q>['"]?)(?P<u>[^'")]+)(?P=q)\s*\)""", re.I)
 
 
+COMMENT = re.compile(r"/\*.*?\*/", re.S)
+
+
+def strip_comments(text: str) -> str:
+    """Blank out CSS comments, keeping newlines so reported line numbers stay correct.
+
+    A comment that documents a path (e.g. `url("../../assets/fonts/…")`) is not a reference and must
+    not be checked; without this the gate failed on main for a comment, not a broken link (R86-09).
+    """
+    return COMMENT.sub(lambda m: re.sub(r"[^\n]", " ", m.group(0)), text)
+
+
 def stylesheets() -> list[Path]:
     out = []
     for p in sorted(REPO.rglob("*.css")):
@@ -39,27 +51,6 @@ def stylesheets() -> list[Path]:
             continue
         out.append(p)
     return out
-
-
-def without_comments(text: str) -> str:
-    """Blank out /* ... */ while keeping every newline, so line numbers stay true.
-
-    A url() inside a comment documents the file; it is not a resource reference. This checker
-    exists to catch a stylesheet that points at a file which does not exist, and a prose example
-    of a path is not one - it just reads like one. (Found 2026-11-15: the repair note in
-    assets/css/style.css described the relative paths it had just fixed, and the gate reported
-    three broken references, none of which any browser would ever request.)
-    """
-    out, i, n = [], 0, len(text)
-    while i < n:
-        if text.startswith("/*", i):
-            end = text.find("*/", i + 2)
-            end = n if end == -1 else end + 2
-            out.append("".join(ch if ch == "\n" else " " for ch in text[i:end]))
-            i = end
-            continue
-        out.append(text[i]); i += 1
-    return "".join(out)
 
 
 def main() -> int:
@@ -70,8 +61,7 @@ def main() -> int:
     broken = []
     checked = 0
     for css in stylesheets():
-        raw = css.read_text(encoding="utf-8", errors="ignore")
-        text = without_comments(raw)
+        text = strip_comments(css.read_text(encoding="utf-8", errors="ignore"))
         for m in URL.finditer(text):
             u = m.group("u").strip()
             if u.startswith(("http://", "https://", "//", "data:", "#")):

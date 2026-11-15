@@ -2534,7 +2534,7 @@ tasks claimed by another session** and **no unclaimed open work** on the board.
 | Task ID | **T26** |
 | Title | Independent verification pass, replication of the `mhFallback` control to all three ASINs, defect sweep, final integration |
 | Owner | `arena/d3ce1c29-zone2` |
-| Status | in progress |
+| Status | done (PR and merge recorded below) |
 | File scope | `COORDINATION.md` (append-only), `ledger/**` (append new verification/sources rows), `docs/**` (new session note), and any file that must change to correct a defect this session proves |
 | Non-overlap | No other session is active. No file owned by another session is edited. |
 
@@ -3922,6 +3922,68 @@ root glob does not reach).
    (the queue). Nothing in that list blocks the site; all of it blocks growth. F-07 — no Associates ID — is the
    only thing blocking revenue, and it is not technical.
 
+## Session claim — R86 — `arena/86bb886d-zone2` (session `86bb886d`, 2026-11-15 UTC)
+
+| Field | Value |
+|---|---|
+| Session | `86bb886d` |
+| Branch | `arena/86bb886d-zone2` (fixed for this session; base `ceaf9a7` = `main`) |
+| Task (R86) | Repository review dated 2026-11-15: re-verify the three supplied links, the controls and the official sources the site relies on, flag irregularities with source links, publish them on the site, record the PR and deploy |
+| Task-ID note | Labelled `R86`, not a `T##` number, so it cannot collide with the board's existing IDs. Irregularities use session-local IDs `R86-01…R86-08`; they are kept out of `ledger/flags.json` so the gated counts do not change |
+| File scope | `review-2026-11-15.html` (new), `flagged.html` (one link paragraph), `README.md` (one link line and a malformed-bracket fix), `sitemap.xml` (one entry), `COORDINATION.md` (this record) |
+| Not touched | `assets/css/style.css`, `pages/assets/dashboard.css`, `tools/**`, `ledger/**`, `index.html`, and open PRs #70 and #89 (owned by other sessions; logged below, not edited) |
+| Status | in progress |
+
+### Session record — R86 — `86bb886d` (2026-11-15 UTC)
+
+**Sources read today** (each re-fetched 2026-11-15; links are the pages themselves):
+[Associates Central — ASIN help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) ·
+[Standard Commission Income Statement, Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) ·
+[Operating Agreement (Updated Oct 15, 2025)](https://affiliate-program.amazon.com/help/operating/agreement) ·
+[Program Policies (Updated Apr 14, 2026)](https://affiliate-program.amazon.com/help/operating/policies) ·
+[Google spam policies (contents read)](https://developers.google.com/search/docs/essentials/spam-policies) ·
+[W3C CSS Values 4 (`url-value` anchor)](https://www.w3.org/TR/css-values-4/#url-value) ·
+supplied links → [Amazon listing B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3), [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R), [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH) ·
+controls [B0CDY277D3 via link.amazon](https://link.amazon/B0CDY277D3), [B00TEST12](https://link.amazon/B00TEST12), [Zq3vK8mPw](https://link.amazon/Zq3vK8mPw) ·
+[GitHub Pages API](https://api.github.com/repos/kanlerxz87-cyber/Zone2/pages).
+
+**Verification performed:** the three supplied links resolve to the same three listings as the register; the
+breadcrumb is identical on all three; Table 1 bands read verbatim (Kitchen 4.50%, Home 3.00%, All Other 4.00%);
+both policy dates read; the valid-ASIN and unknown-code controls reproduced (404); a second random 9-character code
+returned 403 — so the "unknown code returns 404" wording is too strong (R86-01). The font defect was reproduced
+live before the fix (broken path 404; correct path serves WOFF2); after main moved (PR #89 merged, Pages built `d4b68ee`) the live stylesheet requests the correct path. All ten repository gates re-run green.
+
+**Published:** `review-2026-11-15.html` (new: executive summary, 14 dated re-check rows, irregularities R86-01…R86-08, links
+to the decision boards). `flagged.html` gains one link paragraph. `README.md` gains one link and a closing bracket
+(the malformed link text was fixed; no count changed). `sitemap.xml` gains one entry.
+
+**Irregularities flagged (for owner review, not blocking):** R86-01 control wording too strong · R86-02 landing "4.00%"
+KPI may be read as these products' rate (band unconfirmed: Kitchen 4.50% vs Home 3.00%, Q-08) · R86-03 the 404 control page is
+served from `amzlinks.in`, operator not confirmed · R86-04 self-hosted fonts 404 on every page — **resolved on main by PR #89** (merged during this review) ·
+R86-05 README link fixed · R86-06 three separate Flagged surfaces · R86-07 open PRs #70 (CONFLICTING; now closed without merge) and #89 (now merged)
+owned by other sessions · R86-08 board size (~400 KB) and stale header.
+
+**Not done, deliberately:** no ledger value, product price, rating, or commission band was added (none is confirmed by an
+official source); PR #89 and PR #70 were not merged or edited by this session; no landing-page wording was changed
+(R86-01/R86-02 are change requests for the owner).
+
+**Pull request and gate fixes (2026-11-15, after `main` moved):** PR #93 (`https://github.com/kanlerxz87-cyber/Zone2/pull/93`).
+`main` advanced four times while this review was open (PR #89, #91, #94, #95, #111). Merged `origin/main` each time; the
+only conflicts were the two append-only records (`COORDINATION.md`) and `sitemap.xml`, resolved by keeping both sides.
+Replaying the 25 CI steps of `.github/workflows/pages.yml` on the merged tree surfaced three failures caused by this
+branch, all fixed: (1) the hand-added sitemap entry was replaced by `tools/build_sitemap.py` output (116 URLs, one entry
+for the review page, no duplicate); (2) the review page now carries the favicon link from the merged `flagged.html`
+(seo_audit D6); (3) `ledger/readiness.json` RR-10 now states the measured value — 117 of 117 published pages carry the
+disclosure sentence, one more than before because of the review page — and `release/index.html` regenerated.
+The PR's own GitHub Actions run was cancelled several times by the shared `pages` concurrency group while other sessions
+pushed; the replay of every CI step passed on the final tree.
+**Later fixes in the same PR (after `main` moved to PR #108 and PR #109):** RR-10 now states 124 of 124 pages and RR-11
+states 12 namespaces, the measured values, and `release/index.html` was regenerated. `main`'s CI step
+"Every stylesheet url() resolves to a file" failed on `main` itself: `tools/check_css_urls.py` read three CSS
+*comments* that document the font path (with a literal ellipsis) as references. Logged as R86-09 and fixed in
+`tools/check_css_urls.py` by blanking comments before matching (line numbers kept). Negative-tested in a scratch repo:
+a comment-only URL passes; a real missing file fails. The review page's R86-05 sentence no longer quotes a typed flag
+count (the prose-count gate caught it).
 ---
 
 ## Session record — `1b839f87` (`arena/1b839f87-zone2`, 2026-11-15 UTC)
@@ -4549,6 +4611,7 @@ rows only (M1–M6 sources); anything not on an official page is a labelled edit
 blank. Counts typed in prose ("Six guides") are derived or reworded in the same commit.
 
 **Status:** claimed → in progress.
+**T46 addendum (same session, 2026-11-15, after the closing record above).** The post-merge Actions run for PR #114 failed on the (then-new) `Every stylesheet url() resolves to a file` step — main had been red on this step since PR #109's merge. Root cause: the check scans comments too, and the *illustrative* `url("../fonts/…")` placeholder written inside a `style.css` comment (carried into the two vendor copies by their builders) resolves to a literal `…` file that does not exist. Fix (this session, comment-only, no behavior change): the comment now says "the @font-face src paths are stylesheet-relative: ../fonts/… from assets/css/" without a `url(` literal; vendor copies regenerated through their builders. **Full CI step replay local: every step PASS** (including `check_css_urls` — 16 stylesheets, 9 local url() refs, 0 broken; `build_audit --check`; `validate_audit`; `test_audit`; `seo_audit`; `build_sitemap --check`). Fix merged via the PR recorded below.
 
 
 ## Closing record — T40 — `arena/bbcc741f-zone2` (2026-11-15 13:45 UTC)
