@@ -648,3 +648,18 @@ on this branch as well — two sessions, one defect, both records kept, followin
 | PR → merge → deploy | See the T33 closing record in `COORDINATION.md` |
 
 **Delivered (T33, 2026-11-15 12:18:54 UTC):** PR #83 merged (merge commit `1e351e6`); GitHub Pages build and deploy both succeeded and the playbook was read back live at `https://kanlerxz87-cyber.github.io/Zone2/playbook.html`; PR check `Build and verify` pass on head `21bc8d7`; CI on the merged tree — `audit_site` 5/5 PASS (104 pages), `validate_data` 0 errors / 0 warnings, `tests` 15/15, every `--check` gate no drift. One integration fix: the Sec. 5 endorsement-phrase line break in `playbook.html` that `validate_data` flagged (negation window defeated by the wrap) — reflowed, validator green.
+## Addendum — 2026-11-15 (T38, session `arena/bfed39e0-zone2`): the journal ships, the redesign integrates
+
+Two waves answered the owner's 2026-11-15 brief in parallel. The T34–T37 wave (session `2b257b2e`) rebuilt the root
+surfaces as a polished marketing presentation and queued editorial topic ideas on the Content page; that redesign is
+merged and live, and this session's own competing root redesign was **withdrawn in its favour** rather than merged over it
+(nothing on `main` was discarded). What T38 ships additively is the layer the topic queue sketched but did not write: the
+**Journal** (`journal/`) — three hand-written pieces (dual-basket cooking, basket-vs-oven geometry, site methodology), each
+argued only from the already-verified specification rows, carrying the §5 disclosure, an identity-status banner (F-03 open),
+per-claim source links, `rel="sponsored"` product links, and no price or rating anywhere. The journal is linked from the
+landing-page navigation, the Content page's topic queue, the footer, and the sitemap; `assets/favicon.svg` ships with it.
+During integration one irregularity was found and repaired on the deployed landing page (an unclosed `pages/suggestions.html`
+anchor in the footer's Decisions column, which swallowed the link label) — logged in COORDINATION.md with the original markup
+recoverable in git history. A second irregularity, the `@font-face` paths in `assets/css/style.css` resolving relative to the
+stylesheet (`assets/css/assets/fonts/…`, which 404s so the self-hosted fonts silently fall back), is flagged for the design
+system's owner and was not repaired from another session's file.
