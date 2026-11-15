@@ -2917,6 +2917,8 @@ and the closing record follow in the next entry.
 | T37 | **Final integration, this wave** — independent re-verification of the official sources used by the redesigned pages (fetched live 2026-11-15), run every repo gate on the combined tree, integrate T29/T30 (PRs #61, #64) work already on main, PR from this session's branch → merge without waiting → confirm the GitHub Pages deploy → record results here. Coordination record only; data changes arrive via the tasks above. (renumbered from T33) | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `COORDINATION.md` (append-only records), PR + merge + deploy operations |
 | T31 | **Independent verification-only re-test (no shared file edited).** Line-by-line re-verification of the merged T29 deliverable: every factual claim in `ledger/suggestions.json` (SG-01…SG-10) and `ledger/questions.json` (Q-01…Q-16) re-checked against the official source it cites; rendered `pages/suggestions.html` / `pages/questions.html` checked against the ledgers row by row; every source link resolved; all repo gates re-run on the combined tree; live GitHub Pages deployment confirmed; status audit of open PR #62 (T30). Findings published as `docs/verification-42fa4918.md`; defects logged as change requests or new flags, never silently fixed. | done (PR and merge recorded below) | `arena/42fa4918-zone2` (42fa4918) | `docs/verification-42fa4918.md` (new), `COORDINATION.md` (append-only records only) |
 
+| T33 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line (including the new `decisions/` namespace), run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. **Renumbered T31 → T33 at integration:** `main` had carried a different task’s T31 (session `42fa4918`, verification-only re-test, PR #72) since 12:01 — see the collision note in the claim record; no other session’s row or record was altered. | in progress | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
+
 ### What shipped
 
 - **Bounty/bonus transcription completed** — 46 bounty rows + 2 bonus rows from S04 (was 9). Audible $20.00 and
@@ -3809,3 +3811,27 @@ No edits to `ledger/**`, `pages/**` except nav links, `tools/**`, or companion s
 `trending-topics.html` is standalone (not in `build_marketing.py`'s `PAGES`), so it is invisible to `build_marketing.py --check` and `verify_marketing.py` (both iterate only `PAGES`); its internal links resolve (it links to `index.html`, `../pages/suggestions.html`, `../pages/questions.html`, `../pages/flags.html`, `assets/marketing.css`). No price, affiliate link, or product claim appears on it.
 
 Awaiting green PR #65 mergeability → PR → merge → GitHub Pages deploy → record PR link & merge result below.
+
+## Session claim — T33 (renumbered from T31 at integration) — `arena/fcb538fa-zone2` (session `fcb538fa`, 2026-11-15 UTC)
+
+**Claimed:** T33 (claimed originally as T31 at 2026-11-15T11:46:24Z, before this branch had opened its PR). **Id-collision note (per the board’s renumbering precedent):** while T31 was in flight on this branch, session `42fa4918` claimed T31 on a branch based on `main` and merged it first (PR #72, `20976ce`, 12:01Z), and session `8c4236ad` then renumbered its own task through T29 → T30 → T31 → T32 for the same reason. At integration this session’s task is therefore published as **T33**; nothing of `42fa4918`’s or anyone else’s record was overwritten or deleted — this claim’s original T31 label is kept visible in the board row and here. **Scope:** the files listed in the T33 row only.
+
+**Board state at claim:** `origin/main` = `86b5350` (PR #61 + #63 merged; T29 done). One open PR:
+**#62** (`arena/fb49a226-zone2`, T30 — primary-dashboard links to the T29 board, scope `index.html` +
+this record; #62 was later closed and re-landed as PR #64/#66 — recorded on the board by its owner). T30 is **not** taken over; T29's ledgers, generator and generated pages are **not** edited
+here. Non-overlap statement: T29 owns suggestions/questions *decisions*; T30 owns the *dashboard entry
+points*; T31 owns the *design/content playbook* (what the site should look like, what to write, how to earn
+organic traffic, editorial rules), the *repo review*, and the *final integration* of #62 + T31.
+
+**Irregularity found before any edit (fixed content-preserving in this claim commit):**
+`COORDINATION.md` on `origin/main` (at claim time, commit `86b5350`) contained two stray git conflict-marker lines — `=======` at line 2897
+and `>>>>>>> origin/main` at line 2952 — left by an earlier merge. Both sides of the text they separated
+were already present (the post-marker block duplicates the `d3ce1c29` T26 closing record that also appears
+earlier in the file). Only the two marker lines were deleted; no record text was removed.
+
+**Stale claim noted (not taken over — different scope):** T27 (`arena/0f44536f-zone2`, `EXECUTIVE_SUMMARY.md`
+and content reconciliation) is still marked `in progress` with no commits since 2026-11-14. Per the 60-minute
+rule it is available for takeover; T31 takes over only the **addendum** part of `EXECUTIVE_SUMMARY.md`
+(append-only, recorded in the row scope above) because the executive summary must reflect this request's
+state; T27's content-reconciliation scope (`content.html`, `tools/build_marketing.py`, `ledger/flags.json`,
+`marketing/**`) remains untouched by this session.
