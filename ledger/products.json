@@ -690,7 +690,7 @@
     {
       "id": "E-13",
       "observation": "2026-11-15 (session bbcc741f): all three supplied links re-fetched. Destinations identical to the 2026-11-13 and 2026-11-14 observations - B04G1MEwY > B0CDY277D3, B02NbDxp3 > B09B7SB46R, B00hJ57DV > B08DKYBTPH - each carrying plpRedirect=mhFallback and a fresh btn_ref=srctok-…, and none carrying a tag= parameter.",
-      "interpretation": "Third consecutive date, fifth consecutive session, same three listings. The destination is a property of the link, not of the observer. Still not evidence that this listing is the item the brief intended: that binding exists only inside the account that minted the token (F-39, Q-17).",
+      "interpretation": "Third consecutive date, fifth consecutive session, same three listings. The destination is a property of the link, not of the observer. Still not evidence that this listing is the item the brief intended: that binding exists only inside the account that minted the token (F-40, Q-17).",
       "status": "OBSERVED",
       "source_ids": [
         "S33",

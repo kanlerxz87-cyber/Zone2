@@ -1114,11 +1114,12 @@ def vendor_design_system(out_root: Path) -> None:
         "   Re-run the builder after changing the source. Kept as a copy so these pages do not\n"
         "   depend on root-level paths another session may move. */\n"
     )
-    # T40 (session bbcc741f, 2026-11-15): the shared sheet is authored with font URLs relative
-    # to ITS OWN location (assets/css/), and vendored one level deeper (pages/assets/), so the copy
-    # has to re-point them at the repository-root font files. Both authoring forms are accepted so
-    # the copy stays correct whichever way the source is written - the gap between these two forms is
-    # exactly how every page on the site silently lost its webfonts (flag F-39's companion record).
+    # The shared sheet (assets/css/style.css) bundles its fonts relative to its OWN location,
+    # and this copy lives one directory deeper (pages/assets/), so the URLs have to be re-pointed
+    # at the repository-root font files - otherwise every page silently falls back to system fonts
+    # (F-39). Repaired from two sides on 2026-11-15: session 1b839f87 corrected the source sheet and
+    # the vendored copies, session bbcc741f made both builders accept either authoring form so a
+    # future move of the stylesheet cannot re-break a copy that the link checker cannot even see.
     body = body.replace('url("../fonts/', 'url("../../assets/fonts/').replace(
         'url("assets/fonts/', 'url("../../assets/fonts/')
     dest.parent.mkdir(parents=True, exist_ok=True)
