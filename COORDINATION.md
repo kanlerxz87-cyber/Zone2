@@ -2894,7 +2894,7 @@ Fixed on main (verified here): the hub's product-mapping rows. Residual: eight r
 
 Verification complete; all gates green on the merged tree. PR → merge → Pages deploy confirmation
 and the closing record follow in the next entry.
-=======
+
 ## T26 — closing record (session `d3ce1c29`, 2026-11-14)
 
 | Item | Value |
@@ -2909,6 +2909,7 @@ and the closing record follow in the next entry.
 | T26 | **done** |
 | T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
 | T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | done (PR and merge recorded below) | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
+| T31 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: after PR #62 merges, add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line, run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. | in progress | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
 
 ### What shipped
 
@@ -2949,7 +2950,6 @@ Four sessions merged nine pull requests to `main` during this one task. Ledger i
 one day (F-20/F-21, F-22, F-27, F-28, F-29, plus S36 and V-51…V-62). `check_ledger_ids_unique` now fails the
 build rather than letting a collision ship. And the lesson three sessions have now recorded: **a drift gate
 proves the data matches the ledger, not that the sentence is true — read the deployed page.**
->>>>>>> origin/main
 
 ---
 
@@ -3157,3 +3157,30 @@ without commits is **T27** (`0f44536f`, last activity 2026-11-14). It is older t
 | Live check (fetched 2026-11-15) | https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html and https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html render the tables and source links |
 
 **Known display issue (not fixed in this task):** the eyebrow on every generated page reads "verified 2026-11-14" because the generator takes its date from `ledger/products.json` (`verified_utc`). The new pages were checked on 2026-11-15, but no value was changed to match that date. Board owner to decide whether the generator should show the date of the last source check instead.
+
+
+---
+
+## Session claim — T31 — `arena/fcb538fa-zone2` (session `fcb538fa`, 2026-11-15 UTC)
+
+**Claimed:** T31 (board row above). **Scope:** the files listed in the T31 row only.
+
+**Board state at claim:** `origin/main` = `86b5350` (PR #61 + #63 merged; T29 done). One open PR:
+**#62** (`arena/fb49a226-zone2`, T30 — primary-dashboard links to the T29 board, scope `index.html` +
+this record). T30 is **not** taken over; T29's ledgers, generator and generated pages are **not** edited
+here. Non-overlap statement: T29 owns suggestions/questions *decisions*; T30 owns the *dashboard entry
+points*; T31 owns the *design/content playbook* (what the site should look like, what to write, how to earn
+organic traffic, editorial rules), the *repo review*, and the *final integration* of #62 + T31.
+
+**Irregularity found before any edit (fixed content-preserving in this claim commit):**
+`COORDINATION.md` on `origin/main` contained two stray git conflict-marker lines — `=======` at line 2897
+and `>>>>>>> origin/main` at line 2952 — left by an earlier merge. Both sides of the text they separated
+were already present (the post-marker block duplicates the `d3ce1c29` T26 closing record that also appears
+earlier in the file). Only the two marker lines were deleted; no record text was removed.
+
+**Stale claim noted (not taken over — different scope):** T27 (`arena/0f44536f-zone2`, `EXECUTIVE_SUMMARY.md`
+and content reconciliation) is still marked `in progress` with no commits since 2026-11-14. Per the 60-minute
+rule it is available for takeover; T31 takes over only the **addendum** part of `EXECUTIVE_SUMMARY.md`
+(append-only, recorded in the row scope above) because the executive summary must reflect this request's
+state; T27's content-reconciliation scope (`content.html`, `tools/build_marketing.py`, `ledger/flags.json`,
+`marketing/**`) remains untouched by this session.
