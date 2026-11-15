@@ -310,10 +310,10 @@
       "title": "How do I build a simple text link to a specific item on Amazon?",
       "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
       "page_stated_update": null,
-      "accessed_utc": "2026-11-14",
+      "accessed_utc": "2026-11-15",
       "used_for": [
-        "ASIN is the 10-character code Amazon uses to denote specific products (B0CDY277D3, B09B7SB46R, B08DKYBTPH each have 10 characters; the three submitted tokens have 9)",
-        "canonical tagged link format /dp/ASIN?tag="
+        "Verbatim, re-read live 2026-11-15: \"ASIN is the 10-digit code that Amazon uses to denote specific products.\" The three resolved destinations (B0CDY277D3, B09B7SB46R, B08DKYBTPH) each carry 10 characters; the three submitted tokens carry 9. The repository's earlier '10-character' phrasing is its own observation of this definition, not the published wording (see ledger/decisions_findings.json RF-01 and suggestion SG-11).",
+        "The simple text-link format published on the same page — amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID — which the page states \"qualifies for the direct link bonus\"; the tagged /dp/ form is the pattern Special Links must follow"
       ]
     },
     {
