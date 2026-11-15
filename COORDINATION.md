@@ -3379,3 +3379,19 @@ register, PR #61) and this session (requirement set, review layer, content plan,
 `ledger/requirements.json`, `ledger/decisions_findings.json`, `tools/build_decisions.py`,
 `tools/validate_decisions.py`, `tools/decisions.css`, `decisions/**`, `DECISIONS.md`, two appended CI steps, one
 appended nav link, one README source-count label, five appended source rows (S38…S42), and this record.
+
+### T31 closing record — PR #72 merged and Pages deploy confirmed (2026-11-15 UTC)
+
+| Item | Result |
+|---|---|
+| PR | **#72** — https://github.com/kanlerxz87-cyber/Zone2/pull/72 — `arena/42fa4918-zone2` → `main` |
+| Delivered | `docs/verification-42fa4918.md` (V-83…V-108 claim-by-claim re-verification with per-claim source links, gate re-run, live-deploy confirmation, open-PR audit, IP-License evidence for Q-10); T31 session record + board row `done`; finding **F-42** (pre-existing COORDINATION.md conflict debris — markers removed, duplicated fragment left for owner review); **CR-9** (executive-summary completeness gap); flag-id collision note (F-39…F-41 reserved by `d0135100`, so F-42 used) |
+| PR check (`Build and verify`) | **success**; merge state CLEAN |
+| Race handling | `main` advanced three times while this session worked (PRs #69, #71, #73). Each time `origin/main` was merged into this branch, every session's record kept, gates re-run on the combined tree before the next push. One mid-rebase conflict was aborted cleanly per the board's recorded rebase hazard, and re-done as a merge. |
+| Merge | `gh pr merge 72 --merge` · merge commit `20976ceafb465a718534af4f8bbfaecfc693b558` |
+| Post-merge `Build, verify and deploy` on `main` | **success** (run 43711648024) |
+| Post-merge `pages build and deployment` | **success**; Pages API `status: built` at `20976ce` |
+| Live read after deploy | https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html and `/pages/questions.html` render the decision board and question register with per-row source links |
+| T31 | **done** |
+
+**Still open for the owner (unchanged):** F-42's duplicated-fragment review; CR-9 executive-summary subsection; F-39…F-41 promotion (d0135100's CR-6); the product/account questions Q-01…Q-16 that gate every suggestion SG-01…SG-10. Open PRs at close: #65, #70 (both marketing-layer work by other sessions, non-overlapping with T31).
