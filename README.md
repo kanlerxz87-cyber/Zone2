@@ -52,12 +52,12 @@ blank + flag**: [findings hub](https://kanlerxz87-cyber.github.io/Zone2/pages/in
 [niche discovery](https://kanlerxz87-cyber.github.io/Zone2/pages/niches.html) ·
 [platform modules, 12 subpages](https://kanlerxz87-cyber.github.io/Zone2/pages/modules/index.html) ·
 [compliance control ledger](https://kanlerxz87-cyber.github.io/Zone2/pages/compliance.html) ·
-[verification log (82 checks, V-01…V-82)](https://kanlerxz87-cyber.github.io/Zone2/pages/verification.html) ·
-[source register (42 sources, S01…S42)](https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html) ·
+[verification log (88 checks, V-01…V-88)](https://kanlerxz87-cyber.github.io/Zone2/pages/verification.html) ·
+[source register (43 sources, S01…S43)](https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html) ·
 [tracking](https://kanlerxz87-cyber.github.io/Zone2/pages/tracking.html) ·
 [content engine](https://kanlerxz87-cyber.github.io/Zone2/pages/content-engine.html) ·
 [architecture](https://kanlerxz87-cyber.github.io/Zone2/pages/architecture.html) ·
-[flagged for review (38 flags, F-01…F-38](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
+[flagged for review (40 flags, F-01…F-40)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
 
 All three counts are derived from `ledger/*.json` and held to the register by
 `tools/validate_data.py::check_published_counts`, so they cannot be typed wrong again.

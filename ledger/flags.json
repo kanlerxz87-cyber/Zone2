@@ -1,6 +1,6 @@
 {
   "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-29 was added 2026-11-14 by session ba8b2d38 (T27) after reading the deployed site: the register page and the summary page published different open-flag counts for the same register. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-30 to F-32 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-32's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-33 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code. F-34 was added 2026-11-14 by session d3ce1c29: commit d6ec452 truncated the shared task board by 1,831 lines; the board is restored from git history in the same pass. ADDENDUM 2026-11-14 (session 0a697d4a, T28): F-37 and F-38 were added by an independent row-by-row re-read of the official programme pages (bounty/bonus transcription; omitted Participation Requirements). They were drafted as F-27/F-28 but both ids were taken by other sessions while this one was running, so they are published under the next free ids. No existing id was reused.",
-  "as_of": "2026-11-14",
+  "as_of": "2026-11-15",
   "flags": [
     {
       "id": "F-01",
@@ -539,6 +539,37 @@
         "S29"
       ],
       "published_on": "pages/compliance.html + pages/flags.html + pages/modules/m-03-pricing-analysis.html"
+    },
+    {
+      "id": "F-39",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-15",
+      "title": "The negative control F-20 calls decisive does not reproduce for every token shape: an unissued code can be refused at the edge with a 403 before any lookup happens",
+      "detail": "F-20 (session 4338f55e, 2026-11-14) is the finding that settled the site's reading of the three supplied links: because https://link.amazon/B00TEST12 answered with the short-link service's 404 page, the service must be performing a lookup rather than falling back to an arbitrary page - so the three destinations are real, and 'the token was ignored' was falsified. Re-run on 2026-11-15 (session bbcc741f), a different unissued 10-character token (https://link.amazon/ZZ9QQ7X4LK) returned HTTP 403 Forbidden at link.amazon itself: no hop, no lookup, no 404. The same run DID reproduce every other observation, including the decisive one - a live, valid ASIN placed in the token position (https://link.amazon/B0CDY277D3, P-01's own destination) walks out to amzlinks.in and returns 'You've clicked on an invalid URL', which is what proves the token is a service-issued identifier and not an ASIN.",
+      "impact": "The published reading of the three links does not change, but the evidence it rests on is narrower than F-20's wording claims: the positive evidence (three codes resolving to three distinct live listings, identically, on five separate dates across five separate sessions) carries it; the negative control does not, on its own, for every token shape. Nothing a reader can see on the site is affected - no product attribute is sourced to a link behaviour, and every product field that could not be confirmed from the listing page is still blank and flagged (F-01, F-03, F-04).",
+      "action_required": "Owner: open both controls in an ordinary browser - https://link.amazon/ZZ9QQ7X4LK (expect a refusal of some kind) and https://link.amazon/B04G1MEwY (expect the CHEFMAN 6 Qt Dual Basket listing). If the first also 404s in a browser, the 403 was this agent's client being refused and F-20 stands exactly as written; record the answer against Q-17. No code change is needed either way.",
+      "source_ids": [
+        "S43",
+        "S32",
+        "S36",
+        "S33"
+      ]
+    },
+    {
+      "id": "F-40",
+      "severity": "low",
+      "owner": "done",
+      "status": "closed",
+      "published_on": "2026-11-15",
+      "title": "Every page on the site had been silently rendering in fallback system fonts since the T34 redesign: the design system's own @font-face URLs resolved to a path that does not exist",
+      "detail": "assets/css/style.css declares Fraunces and Inter with url(\"assets/fonts/…woff2\"). A stylesheet at assets/css/style.css resolves that URL relative to itself, i.e. to assets/css/assets/fonts/, which has never existed - so all three woff2 files 404'd on every request and every page fell back to the system stack. The font files themselves were present and correctly licensed at assets/fonts/ with their OFL texts. T38 recorded the defect on 2026-11-15 but did not repair it because the fix spanned two namespaces: the sheet is vendored one level deeper into pages/assets/ and decisions/assets/ by two builders, and decisions/assets/dashboard.css carried a compensating rewrite for the old URL form only, so editing the source alone would have moved the breakage rather than removed it. Fixed by session bbcc741f on 2026-11-15: the source sheet is now stylesheet-relative, and both builders normalise either authoring form to the repository-root font files, which removes the drift class that caused the bug rather than just this instance of it.",
+      "impact": "Cosmetic, and it was invisible to every gate: no link checker follows a CSS url(), so 22 CI steps stayed green while the typefaces the redesign was built around never loaded. The visible effect was that the serif display face the marketing surfaces were designed on - the difference between a designed page and a default one - was absent from the live site.",
+      "action_required": "None. Verify by loading any page and checking that the headings render in Fraunces. Recorded so a future stylesheet move is checked against the live font request, not just the link graph.",
+      "source_ids": [
+        "S22"
+      ]
     }
   ]
 }

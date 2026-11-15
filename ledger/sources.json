@@ -530,6 +530,18 @@
       "title": "Write high quality reviews",
       "used_for": "The page's best-practice list for review content, quoted in the content plan: 'Provide evidence such as visuals, audio, or other links of your own experience'; 'Share quantitative measurements'; 'Discuss the benefits and drawbacks of something, based on your own original research'; 'Describe key choices in how a product has been designed and their effect on the users beyond what the manufacturer says'. Read live 2026-11-15.",
       "accessed_utc": "2026-11-15"
+    },
+    {
+      "id": "S43",
+      "kind": "official",
+      "publisher": "Amazon (link.amazon short-link service)",
+      "title": "link.amazon control: an unissued 10-character token, run 2026-11-15",
+      "url": "https://link.amazon/ZZ9QQ7X4LK",
+      "accessed_utc": "2026-11-15",
+      "used_for": [
+        "evidence only: the request was answered at the edge with HTTP 403 Forbidden and never reached a lookup",
+        "flag F-39 - the negative control that F-20 relies on is not stable across token shapes"
+      ]
     }
   ]
 }
