@@ -248,7 +248,7 @@ def page_index() -> str:
       <article class="card product-card">
         <p class="eyebrow">{esc(p['manufacturer'])} · {esc(p['category_path_amazon'].split('› ')[-1])}</p>
         <h3><a href="articles/{slug}.html">{esc(p['manufacturer_product_name'])}</a></h3>
-        <p class="lede">{esc(p['tagline_facts'])}</p>
+        <p class="lede">{esc(p['hook_editorial'])}</p>
         <dl class="mini">
           <div><dt>ASIN</dt><dd><code>{esc(p['asin'])}</code></dd></div>
           <div><dt>Model</dt><dd><code>{esc(p['model'])}</code></dd></div>
@@ -260,10 +260,16 @@ def page_index() -> str:
         "Verified Amazon affiliate content",
         "Source-governed buying guide, comparison and product articles for three Amazon air fryers.",
         f"""    <div class="page-head">
-      <h1>Three air fryers, written up from official specs only</h1>
-      <p class="lede">A buying guide, a side-by-side comparison and one article per product — every
-      specification traced to the manufacturer's or Amazon's own page, and anything unconfirmed left
-      blank and flagged rather than guessed.</p>
+      <h1>Three air fryers, one honest spec sheet</h1>
+      <p class="lede">A buying guide, a side-by-side comparison and one article per product — every number
+      traced to the manufacturer's or Amazon's own page.</p>
+      <p>Most product write-ups ask you to trust the adjectives. These pages do the opposite: where the
+      manufacturer's page and Amazon's listing agree, you see the number; where they disagree — and for one
+      model they do — you see both statements and decide for yourself; and where nobody official states a
+      fact, you see the blank instead of a confident guess. That discipline is unusual on an affiliate site,
+      and it is deliberate: an appliance recommendation you can check is worth more than one you can't.</p>
+      <p>Start with the <a href="buying-guide.html">buying guide</a> if you're choosing between them, or jump
+      straight to a product article below if you already know the model you're researching.</p>
     </div>
 
     <section class="kpis">
@@ -281,6 +287,7 @@ def page_index() -> str:
         <li><a href="articles/index.html"><strong>Product articles</strong><span>One SEO-structured article per model, built from that model's verified rows.</span></a></li>
         <li><a href="verification.html"><strong>Verification</strong><span>What was checked, when, against which page, and what could not be confirmed.</span></a></li>
         <li><a href="flagged.html"><strong>Flagged for review</strong><span>Every irregularity found while building this set, with its source links.</span></a></li>
+        <li><a href="../pages/suggestions.html"><strong>Suggestions &amp; decisions</strong><span>The strategic choices still open — what to launch, when to monetize, what content to commission — reviewed before anything changes.</span></a></li>
       </ul>
     </div>
 
@@ -332,18 +339,34 @@ def page_article(key: str) -> str:
     <div class="page-head">
       <p class="eyebrow">{esc(p['manufacturer'])}</p>
       <h1>{esc(p['manufacturer_product_name'])}</h1>
-      <p class="lede">{esc(p['tagline_facts'])}</p>
+      <p class="lede">{esc(p['hook_editorial'])}</p>
       <p class="byline">Official listing title: <em>{esc(p['title_official'])}</em></p>
     </div>
 
     <div class="card">
-      <h2>Quick verdict</h2>
-      <p>If you want <strong>{esc(p['tagline_facts'].split(': ', 1)[-1].rstrip('.'))}</strong>, this is the
-      model that states those numbers on its manufacturer page. That is the entire basis for recommending it
-      here — this set contains no hands-on testing, no star ratings and no price claims, because none of
-      those could be confirmed from an official source.</p>
+      <h2>The short version</h2>
+      <p>This is the model for <strong>{esc(p['tagline_facts'].split(': ', 1)[-1].rstrip('.'))}</strong>. Those
+      numbers are not ours and not a reviewer's — they are printed on the manufacturer's own page, and every
+      row in the table below ends in a link to the page they came from.</p>
+      <p>The honest fine print, because it matters more here than adjectives would: nobody on this project has
+      cooked with this machine, no star rating is published (they move daily and differ by storefront), and no
+      price is quoted (the Associates rules restrict how prices may be shown). What you get instead is the
+      specification, the manufacturer's own feature list, and every disagreement between the two official pages
+      printed as a disagreement rather than smoothed over.</p>
       <p>{product_link(p)}</p>
     </div>
+
+    <section class="card">
+      <h2>Who this fits</h2>
+      <ul class="features">
+        {''.join(f'<li>{esc(s)}</li>' for s in p['suits_editorial'])}
+      </ul>
+      <p class="row-note">Each line restates something the <a class="src" href="{esc(SOURCES[p['suits_editorial_source']]['url'])}" target="_blank" rel="noopener noreferrer nofollow">{esc(SOURCES[p['suits_editorial_source']]['name'])}</a> already states — nothing here is tested experience or a performance promise.</p>
+      <h3 style="margin-top:1.2rem">If that's not you</h3>
+      <ul class="plain">
+        {''.join(f'<li>{esc(le["why"])} — read the <a href="{esc(le["href"])}">{esc(le["label"])}</a> instead.</li>' for le in p['look_elsewhere'])}
+      </ul>
+    </section>
 
     <section class="card">
       <h2>Specification, with the source on every row</h2>
@@ -384,9 +407,14 @@ def page_articles_index() -> str:
         f'<tr><th scope="row"><a href="{p["key"].lower()}.html">{esc(p["manufacturer_product_name"])}</a></th>'
         f'<td><code>{esc(p["asin"])}</code></td>'
         f'<td>{esc(p["manufacturer"])}</td>'
-        f'<td>{esc(p["tagline_facts"])}</td>'
+        f'<td>{esc(p["hook_editorial"])}</td>'
         f'<td class="cell-src">{source_link(p["official_sources"][0]["id"])}{source_link(p["official_sources"][1]["id"])}</td></tr>'
         for p in FACTS["products"]
+    )
+    topics = FACTS["planned_topics"]
+    topic_items = "".join(
+        f'<li><strong>{esc(t["title"])}</strong><div class="row-note">{esc(t["angle"])}</div></li>'
+        for t in topics["topics"]
     )
     body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <span>Product articles</span></nav>
     <div class="page-head">
@@ -397,9 +425,17 @@ def page_articles_index() -> str:
     <section class="card">
       <table class="data">
         <caption>Each row links to the manufacturer's and Amazon's own pages for that model.</caption>
-        <thead><tr><th>Product</th><th>ASIN</th><th>Brand</th><th>One-line verified summary</th><th>Official sources</th></tr></thead>
+        <thead><tr><th>Product</th><th>ASIN</th><th>Brand</th><th>What the article covers</th><th>Official sources</th></tr></thead>
         <tbody>{rows}</tbody>
       </table>
+    </section>
+    <section class="card">
+      <h2>Planned topics — not published yet</h2>
+      <p>These are the next pieces this site could run. None is written, commissioned or published: the
+      content-engine path is <strong>SG-04</strong> on the <a href="{esc(topics["board_href"])}">suggestions
+      decision board</a>, and each format there carries its own compliance trade-off. What you see below is
+      the honest queue — and a note of which verified facts each piece would rest on.</p>
+      <ul class="plain">{topic_items}</ul>
     </section>
 """
     return shell("Product articles", "One verified article per product.", body, here="articles/index.html", depth=1)
@@ -445,8 +481,9 @@ def page_comparison() -> str:
     body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <span>Comparison</span></nav>
     <div class="page-head">
       <h1>Head-to-head comparison</h1>
-      <p class="lede">The same attributes across all three models. Where a model does not state an attribute,
-      the cell says so instead of borrowing another model's number.</p>
+      <p class="lede">The same attributes across all three models, with the official source under every value.
+      Where a model does not state an attribute, the cell says so instead of borrowing another model's number —
+      which is why some cells are empty by design, not by accident.</p>
     </div>
     <section class="card">
       <div class="table-scroll">
@@ -514,6 +551,10 @@ def page_buying_guide() -> str:
       <h1>Which air fryer, for which kitchen</h1>
       <p class="lede">A buying guide that only makes recommendations the specifications can support. Every pick
       below is decided by a number printed on a manufacturer page, and that page is linked beside it.</p>
+      <p>If you've ever bought an appliance on marketing copy and regretted it, this page is the antidote:
+      three models, the numbers each manufacturer publishes, and an explicit list of the questions those
+      numbers cannot answer. No "best overall" verdict, no invented winner — the decision framework is yours,
+      the facts are linked.</p>
     </div>
 
     <section class="card">
