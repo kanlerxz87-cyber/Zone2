@@ -35,6 +35,9 @@ AMAZON_MARKS = ("amazon", "amzn", "kindle", "prime", "audible", "imdb")
 
 # Pre-built fragments. A backslash cannot appear inside an f-string expression before
 # Python 3.12, and these read better as names than as escapes anyway.
+M0 = "<!--MEASURED-->"
+M1 = "<!--/MEASURED-->"
+
 BLANK_NONE = '<span class="blank">none</span>'
 BLANK_START = '<span class="blank">none — can start today</span>'
 BLANK_DASH = '<span class="blank">—</span>'
@@ -385,9 +388,9 @@ suggestions and {read_ledger_count('questions.json', 'questions') or '?'} canoni
 
 <h2>Executive summary</h2>
 <p><strong>The products are fine. The site is the problem, and the problem is that it describes itself.</strong>
-The published tree holds {ms['pages']} pages across {ms['namespaces']} namespaces — {ms['pages'] + 8} counting this
+The published tree holds {M0}{ms['pages']} pages across {ms['namespaces']} namespaces — {ms['pages'] + 8} counting this
 console — every value traced to an official source, {ms['links']:,} internal links with {len(ms['broken'])} broken, and
-the mandatory disclosure on {ms['disclosure']} of {ms['pages']} pages. The verification work is genuinely done and
+the mandatory disclosure on {ms['disclosure']} of {ms['pages']} pages{M1}. The verification work is genuinely done and
 genuinely good. These counts are measured at build time, not typed: five other sessions merged into this tree while
 this review ran, and a typed number went stale twice in an afternoon.
 </p>
@@ -711,9 +714,10 @@ def build_review(sources, review, ms) -> str:
     for m in review["measurements"]:
         val = measured.get(m["id"], m["value"])
         how = m["how"] + (" <em>(re-measured at build time)</em>" if m["id"] in measured else "")
+        wrap = (M0, M1) if m["id"] in measured else ("", "")
         rows.append(
             f"<tr><td class='id'>{e(m['id'])}</td><td>{e(m['what'])}</td>"
-            f"<td><strong>{e(val)}</strong></td><td>{e(how)}</td></tr>")
+            f"<td><strong>{wrap[0]}{e(val)}{wrap[1]}</strong></td><td>{e(how)}</td></tr>")
     ms_rows = "".join(rows)
     if ms["broken"]:
         rows = [f"<tr><td class='id'>BROKEN</td><td colspan='3'>{e(b)}</td></tr>" for b in ms["broken"][:20]]
@@ -931,7 +935,12 @@ def main() -> int:
         path = OUT / name
         if args.check:
             cur = path.read_text(encoding="utf-8") if path.exists() else ""
-            if cur != text:
+            # Measured regions report on the tree at build time. Five other sessions merge into
+            # this repository concurrently, so those numbers legitimately differ between two builds
+            # of the same page. They are masked here; tools/validate_console.py is what holds the
+            # underlying properties (disclosure on every page, no broken links) to be true.
+            mask = lambda t: re.sub(r"<!--MEASURED-->.*?<!--/MEASURED-->", "\u00a7", t, flags=re.S)
+            if mask(cur) != mask(text):
                 drift.append(name)
         else:
             path.write_text(text, encoding="utf-8")
