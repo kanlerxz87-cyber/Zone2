@@ -3091,4 +3091,43 @@ single 46-row Bounty Event block and a single 2-row Bonus Event block, verified 
 
 Flagged here and on the Flagged for Review page so the owner can merge the two entries after the site is live.
 
----\n\n## Session claim — `arena/cffe745a-zone2` (session `cffe745a`, 2026-11-15 UTC)\n\n**Branch note:** Arena pins this session to `arena/cffe745a-zone2` (not `session-<id>/<task>` naming);\ndocumented as the deviation, consistent with every prior session. All edits by this session are additive new\nfiles plus shared nav/doc updates logged below; no session-owned namespace is touched.\n\n### Board state at claim\n\n`main` = `e030c40` (merge of PR #60). `gh pr list --state open` → **empty**; `gh issue list` → **empty**.\nAll shared tasks T1…T28 and all session-local registers are `done`. There are **no tasks claimed by another\nsession** and **no unclaimed open work** on the shared board. This session's work is therefore **additive** to\nthe delivered platform: it addresses the brief's remaining content requests (suggestions / decision log,\npre-decision Q&A, catchy trendy marketing articles for organic traffic) that no prior session's scope covered.\n\n### Claimed tasks (session-scoped; `cffe745a-*` prefix so IDs never collide)\n\n| ID | Task | Status | Owner | File scope |\n|---|---|---|---|---|\n| `cffe745a-S1` | Suggestions & Decision Log section — a reviewable register of site-improvement suggestions with options, pros/cons, status and an owner-chosen path before any change is implemented | in progress | `arena/cffe745a-zone2` | `suggestions.html` (new), `questions.html` (new), root `index.html` nav/footer only |\n| `cffe745a-S2` | Pre-Decision Q&A checklist — questions / information / answers that must be resolved before any decision, plus suggestions to discover missing information | in progress | `arena/cffe745a-zone2` | `questions.html` (new), `index.html` nav only |\n| `cffe745a-S3` | Catchy trendy marketing articles for organic traffic — SEO-optimized topic articles for the three air-fryer products, source-governed (no hallucinated specs), with `rel="sponsored"` links and the §5 disclosure | in progress | `arena/cffe745a-zone2` | `marketing/articles/` (new articles), `marketing/index.html` nav link |\n| `cffe745a-S4` | Final line-by-line verification + PR → merge → confirm GitHub Pages deploy → record result here | unclaimed | `arena/cffe745a-zone2` | gates run on merged tree; `COORDINATION.md` append-only record |\n\n### Non-overlap guarantee\n\n`marketing/articles/` new article files are owned by no other session. `suggestions.html` and `questions.html`\nare new root pages; the only shared file touched is root `index.html` (one sidebar + one footer link each) and\n`marketing/index.html` (one nav link). No `ledger/**`, `pages/**`, `tools/**`, `research-hub/**`,\n`zone2/**`, `affiliate-lab/**`, `revalidation/**` or `northstar/**` file is edited.\n\n### Why this scope\n\nThe brief's REPO WORK and SITE CREATION sections are already delivered and live (verified dataset, category\nsubpages, dashboard tables, source-per-row, blank+flag rule, GitHub Pages deployed). The brief's remainingasks\nthat no delivered surface covers are: (a) \"create a section dedicated for suggestions so someone can review\nsuggestions and choose the best path before implementing any changes,\" (b) \"a clear list of questions,\ninformations and answers that need to be addressed before any decision can be reasonably made,\" and (c)\n\"catchy trendy articles and topics … generate organic traffic.\" This session closes those three gaps.
+---
+
+## Session claim — `arena/cffe745a-zone2` (session `cffe745a`, 2026-11-15 UTC)
+
+**Branch note:** Arena pins this session to `arena/cffe745a-zone2` (not `session-<id>/<task>` naming);
+documented as the deviation, consistent with every prior session. All edits by this session are additive new
+files plus shared nav/doc updates logged below; no session-owned namespace is touched.
+
+### Board state at claim
+
+`main` = `e030c40` (merge of PR #60). `gh pr list --state open` → **empty**; `gh issue list` → **empty**.
+All shared tasks T1…T28 and all session-local registers are `done`. There are **no tasks claimed by another
+session** and **no unclaimed open work** on the shared board. This session's work is therefore **additive** to
+the delivered platform: it addresses the brief's remaining content requests (suggestions / decision log,
+pre-decision Q&A, catchy trendy marketing articles for organic traffic) that no prior session's scope covered.
+
+### Claimed tasks (session-scoped; `cffe745a-*` prefix so IDs never collide)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| `cffe745a-S1` | Suggestions & Decision Log section — a reviewable register of site-improvement suggestions with options, pros/cons, status and an owner-chosen path before any change is implemented | done | `arena/cffe745a-zone2` | `suggestions.html` (new), `questions.html` (new), root `index.html` nav/footer only |
+| `cffe745a-S2` | Pre-Decision Q&A checklist — questions / information / answers that must be resolved before any decision, plus suggestions to discover missing information | done | `arena/cffe745a-zone2` | `questions.html` (new), `index.html` nav only |
+| `cffe745a-S3` | Catchy trendy marketing articles for organic traffic — SEO-optimized topic articles for the three air-fryer products, source-governed (no hallucinated specs), with `rel="sponsored"` links and the §5 disclosure | done | `arena/cffe745a-zone2` | `marketing/articles/` (new articles), `marketing/index.html` nav link |
+| `cffe745a-S4` | Final line-by-line verification + PR → merge → confirm GitHub Pages deploy → record result here | in progress | `arena/cffe745a-zone2` | gates run on merged tree; `COORDINATION.md` append-only record |
+
+### Non-overlap guarantee
+
+`marketing/articles/` new article files are owned by no other session. `suggestions.html` and `questions.html`
+are new root pages; the only shared file touched is root `index.html` (one sidebar + one footer link each) and
+`marketing/index.html` (one nav link). No `ledger/**`, `pages/**`, `tools/**`, `research-hub/**`,
+`zone2/**`, `affiliate-lab/**`, `revalidation/**` or `northstar/**` file is edited.
+
+### Why this scope
+
+The brief's REPO WORK and SITE CREATION sections are already delivered and live (verified dataset, category
+subpages, dashboard tables, source-per-row, blank+flag rule, GitHub Pages deployed). The brief's remainingasks
+that no delivered surface covers are: (a) "create a section dedicated for suggestions so someone can review
+suggestions and choose the best path before implementing any changes," (b) "a clear list of questions,
+informations and answers that need to be addressed before any decision can be reasonably made," and (c)
+"catchy trendy articles and topics … generate organic traffic." This session closes those three gaps.
