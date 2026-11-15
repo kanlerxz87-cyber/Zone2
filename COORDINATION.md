@@ -75,7 +75,8 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | done — PR #41 merged 2026-11-14T11:27:15Z (`6a90dfc5`); CI + Pages deploy success; close-out record by `b38cc982` at the end of this file | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
 | T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR #42, merged 2026-11-14T18:32:45Z `6f2f92c`) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 | T26b | Fresh baseline audit for current request: rerun all project gates; verify the live GitHub Pages entry points and source-controlled dataset claims against official URLs; record defects only, no overlapping edits | done | `arena/0f44536f-zone2` | `COORDINATION.md` (append-only record only; results in this session's record) |
-| T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | in progress | `arena/0f44536f-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
+| T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | done — closing record by `ba8b2d38` below (PRs #48/#51/#54 merged 2026-11-14, CI + Pages deploy confirmed); status cell corrected 2026-11-15 by `8c4236ad`, see the T30 session record | `arena/0f44536f-zone2` → completed by `arena/ba8b2d38-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
+| T30 | **Renumbered from T29 on rebase** (session `2499438c` claimed and shipped the T29 suggestions/questions surfaces first — PRs #61/#63; per the board's renumbering precedent nothing of theirs is duplicated or overwritten). T30 = the work T29 did not cover: (1) editorial upgrade of the destination-only marketing set — tone and structure only, zero fact changes, every row's source intact (takeover per 60-minute rule: `marketing/**` owner `a3faf404` finished; the T27 marketing scope was completed and merged by `ba8b2d38`, no active claimant); (2) additive links from the root dashboard to the two new decision-support pages (`pages/suggestions.html`, `pages/questions.html`); (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm. | in progress | `arena/8c4236ad-zone2` (8c4236ad) | `COORDINATION.md` (records + the T27 status correction above), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), NEW `docs/verification-8c4236ad.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -2894,6 +2895,7 @@ Fixed on main (verified here): the hub's product-mapping rows. Residual: eight r
 
 Verification complete; all gates green on the merged tree. PR → merge → Pages deploy confirmation
 and the closing record follow in the next entry.
+
 ## T26 — closing record (session `d3ce1c29`, 2026-11-14)
 
 | Item | Value |
@@ -2950,6 +2952,7 @@ Four sessions merged nine pull requests to `main` during this one task. Ledger i
 one day (F-20/F-21, F-22, F-27, F-28, F-29, plus S36 and V-51…V-62). `check_ledger_ids_unique` now fails the
 build rather than letting a collision ship. And the lesson three sessions have now recorded: **a drift gate
 proves the data matches the ledger, not that the sentence is true — read the deployed page.**
+
 ---
 
 ## Closing record — T28 — `e9c8362c` (2026-11-14 UTC)
@@ -3333,6 +3336,45 @@ gate only scanned `flag_ids`. Reading the re-deployed live page is what caught i
 **Open-PR audit at close:** #62 closed unmerged (superseded by #64, per its own record); #64/#66 merged; **#65** (`bf8f07a7`, open — `marketing/trending-topics.html` + nav) audited from its diff: its earlier root-level suggestions/decisions duplicates were dropped, its claims match the sources verified above, and its file scope does not overlap T31. Fresh claim from an active session — not taken over.
 
 **PR, merge and deploy:** PR opened from this branch — number, merge commit and deploy runs recorded in the closing entry that follows this record.
+---
+
+## Session record — `8c4236ad` (`arena/8c4236ad-zone2`, current branch, 2026-11-15 UTC)
+
+### Claim (written before any edit; renumbered T29 → **T30** during the mandatory rebase, before any non-coordination file was touched)
+
+| Field | Value |
+|---|---|
+| Board state at claim | `main` = `e030c40` (merge of PR #60, 2026-11-14); `gh pr list --state open` → none; Pages API `status: built`, source `main` `/` |
+| Task claimed | T29 (row added to the task board) — **renumbered to T30 on rebase**, see below |
+| Board state after the mandatory `git pull --rebase origin main` | `main` had advanced `e030c40` → `86b5350` (PRs #61, #63) while this claim was being written: session `2499438c` had claimed **the same T29 id** and shipped the suggestions decision board (`pages/suggestions.html`, SG-01…SG-10) and the questions register (`pages/questions.html`, Q-01…Q-16) |
+| Collision resolution | Per the board's renumbering precedent (T21/T21b, T27/T28, F-27/F-28): this session's task is renumbered **T30**; nothing `2499438c` published was overwritten, moved or duplicated. This session does **not** create another suggestions/questions surface — theirs on `main` are canonical |
+| Renumbered task | **T30** — the work T29 did not cover: (1) editorial upgrade of the destination-only marketing set (tone and structure only — zero fact changes, every row's source intact; the marketing set still reads as an engineering ledger and the brief asks for polished, engaging affiliate content); (2) additive links from the root dashboard to the two new decision-support pages; (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm |
+| Branch | `arena/8c4236ad-zone2` (Arena-pinned; the `session-<id>/<task>` naming convention cannot be used — same constraint every prior session recorded) |
+| File scope (T30) | `COORDINATION.md` (append-only records, the T27 status correction, this renumbering note), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), NEW `docs/verification-8c4236ad.md` |
+| Not touched | `ledger/**`, `pages/**` (generated), `research-hub/**`, `zone2/**`, `northstar/**`, `affiliate-lab/**`, `revalidation/**`, `content/`, `tests/`, `.github/workflows/**`, `README.md`, `content.html`, and every other root page except `index.html` |
+
+**Board status correction (hygiene only, logged here).** The T27 row still read "in progress" with owner
+`0f44536f`, but three records show it completed and merged on 2026-11-14 (the T27 closing record by
+`ba8b2d38` — PRs #48, #51, #54, CI pass, Pages deploy confirmed — plus `0f44536f`'s own T27 record and the
+T28 session's reconciliation note). The status cell was corrected to "done" with a pointer to those records.
+No row's task text, owner history or scope was altered. Session `2499438c` flagged the same stale row as a
+handoff candidate and deferred it; this session is the one that closes it.
+
+**Takeover justification for `marketing/**` + `tools/build_marketing.py`.** The marketing set's original
+owner (`a3faf404`) finished and merged; T27's scope included these files but T27 was completed and merged by
+`ba8b2d38` on 2026-11-14 (last commit touching them >15 h before this claim). No active claimant exists, so
+the 60-minute handoff rule applies. This session changes **editorial copy only** — no product value, source,
+status or row may change; `marketing/scripts/verify_marketing.py` gates G7–G9 re-derive every row from
+`marketing/data/facts.json` and would fail otherwise.
+
+**Rebase conflict record (required by the project instruction).** The mandatory `git pull --rebase origin main`
+after the claim commit conflicted in this append-only file. Resolution was strictly additive: records already
+on `main` (`2499438c`'s session claim, closing record and PR record) appear first, verbatim and complete;
+this session's record follows. Additionally, two **orphaned conflict markers** (`=======` and
+`>>>>>>> origin/main` with no opening marker) were found **already committed** in the T26 closing-record
+region of `e030c40` — leftover debris from an earlier session's conflict resolution that shipped to `main`
+inside PR #60. They were removed as a formatting repair; not one word of any session's record was dropped.
+Flagged below as an irregularity for review.
 
 
 ### T29 closing record — PR, merge, deploy (session `d0135100`, 2026-11-15)
