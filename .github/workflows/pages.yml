@@ -272,6 +272,16 @@ jobs:
       - name: Discoverability audit (sitemap coverage, robots, noindex, favicon, canonical)
         run: python3 tools/seo_audit.py
 
+      # ---- arena/5d6d2254-zone2: the head-metadata contract (T42) ----
+      # tools/seo_audit.py above reports a canonical that points at the wrong URL; this gate is what makes
+      # there be a canonical at all. It fails if any page under the reader/evidence contract (root, pages/,
+      # journal/, decisions/, marketing/) lacks a self-referencing canonical, og:type/site_name/title/url or
+      # a description. Companion prototype namespaces are reported, never failed: folding them in is the
+      # owner's open decision (MQ-08 / DS-12). Negative-tested 2026-11-15 by rewriting one canonical to a
+      # sibling URL and by deleting an og:url: both runs failed and named the page.
+      - name: Head-metadata contract (canonical + Open Graph identity on every indexed page)
+        run: python3 tools/build_head_meta.py --audit
+
       # ---- arena/d0135100-zone2: the decision surface (T29) ----
       # Renders decisions/ and DECISIONS.md from ledger/{requirements,questions,suggestions}.json, then holds
       # the whole namespace to the project contract: every row sourced or explicitly flagged, an OPEN question
