@@ -26,6 +26,9 @@ import sys
 import tempfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from head_meta import head_block  # canonical + og:* on the root evidence views (T42)
+
 REPO = Path(__file__).resolve().parents[1]
 LEDGER = REPO / "ledger"
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
@@ -93,6 +96,7 @@ def page(title: str, lead: str, active: str, body: str) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(title)} — Zone2</title>
 <meta name="description" content="{esc(lead)}">
+{head_block(active, title=f"{title} — Zone2", description=lead, site_name="Zone2")}
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
