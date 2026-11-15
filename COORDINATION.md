@@ -2909,6 +2909,7 @@ and the closing record follow in the next entry.
 | T26 | **done** |
 | T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
 | T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | done (PR and merge recorded below) | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
+| T30 | Primary-dashboard integration of the canonical Suggestions decision board and Questions register; avoid duplicate data/decision systems and make the existing evidence-led review path discoverable | in progress — integration and deploy pending | `arena/fb49a226-zone2` | `index.html`, `COORDINATION.md` |
 
 ### What shipped
 
@@ -3143,3 +3144,8 @@ without commits is **T27** (`0f44536f`, last activity 2026-11-14). It is older t
 
 **Scope notes.** No prices, ratings or performance figures were added. The three supplied short links are still not presented as confirmed ASINs; the pages say so (F-01, F-03, F-28 unchanged). No other session's file was edited except the additive changes listed above.
 
+
+
+## Session claim — T30 — `arena/fb49a226-zone2` (2026-11-15 UTC)
+
+The independent T29 suggestions/questions deliverable merged via PR #61 while this branch was being developed. To avoid duplicating its source-of-truth ledgers and decision UX, this task is narrowed to integrating its canonical generated pages into the primary dashboard. Scope: `index.html` and this task-board record only. Canonical details remain in `pages/suggestions.html` and `pages/questions.html`; this session will not edit their ledgers, generator, or generated pages.
