@@ -4825,7 +4825,6 @@ primary action (with `Read the articles` and `Meet the three products` preserved
 nav targets in the two labelled groups, and restores the playbook link in the footer. No session's link was
 dropped; `tools/audit_site.py`'s `namespaces` and `debris` checks both pass on the result.
 
-<<<<<<< HEAD
 ## Closing record — `343bc959-G1` — `arena/343bc959-zone2` (session `343bc959`, 2026-11-15 UTC)
 
 | Item | Value |
@@ -4842,7 +4841,6 @@ dropped; `tools/audit_site.py`'s `namespaces` and `debris` checks both pass on t
 | Takeover note (60-minute rule) | Stale PR #70 (`cffe745a`, last commit 11:55 UTC) delivered hand-written versions of these two angles plus root-page duplicates of T29/T30; T41 closed it as superseded before this claim. This record preserves the intent (S3, organic-traffic articles) in the generated pipeline and deliberately does **not** restore the duplicates. |
 | Irregularities carried forward (owner, non-blocking) | F-01…F-03 (short codes not bound to ASINs by any official document), F-05 (Creators API), F-07/F-24 (no Associates ID/tag — the only revenue blocker), F-08 (no performance reports), DS-04/DS-06/DS-09/DS-10/DS-12/DS-13/DS-14 (owner decisions on the improvement board). New process observations for the board owner: (a) the `pages` concurrency group cancels `pull_request` runs whenever a `main` deploy is queued — consider a separate concurrency group for PR verification; (b) `tools/build_sitemap.py` now generates root `sitemap.xml`, so any hand-edited sitemap will fail step 19 — open PRs touching it (e.g. #104/#105/#108/#109 at close time) should regenerate instead. |
 | Task status | `343bc959-G1` — **done**. |
-=======
 ### Closing record (addendum) — T42 — `arena/5d6d2254-zone2` (2026-11-15, ~14:05Z)
 
 | Item | Value |
@@ -4855,4 +4853,3 @@ dropped; `tools/audit_site.py`'s `namespaces` and `debris` checks both pass on t
 | Files this session changed | `tools/head_meta.py`, `tools/build_head_meta.py` (new), `tools/build_site.py`, `tools/build_decisions.py`, `tools/build_root_views.py`, `tools/build_summary.py` (head emission only), `index.html` (nav grouping, hero CTA, footer dedup), `assets/css/style.css` (3 additive nav rules + mobile variant), `paths.html` + the 9 hand-written root pages + 4 `journal/` pages (metadata block only), `sitemap.xml`, `decisions/**` + `pages/**` (regenerated), `EXECUTIVE_SUMMARY.md` (append-only addendum), `design-notes.html` (one footer citation), `docs/verification-5d6d2254.md` (new), `.github/workflows/pages.yml` (one step), `COORDINATION.md` |
 | Deliberately not touched | `ledger/**` (change requests CR-A…CR-D filed here instead of editing), `marketing/**` copy, `tools/audit_site.py`, `tools/build_sitemap.py`, `tools/seo_audit.py`, `tools/check_css_urls.py`, the four legacy companion namespaces |
 | Open items transferred to the owner | CR-A (F-20's control answers 403 through a non-browser client — wording), CR-B (P2 accessories: six per the listing title vs seven published, and the title itself is perishable), CR-C (P3 is a two-variant manufacturer page — say so), CR-D (never hand-edit the generated sitemap); plus the integration note that PR #104's `tools/page_meta.py` implements the same head-metadata contract and only one should survive |
->>>>>>> 3aaa2bd (COORDINATION T42: closing record — PR #119 merged as 29bc85d, CI success on main, Pages deploy confirmed by reading the live sitemap and landing page)
