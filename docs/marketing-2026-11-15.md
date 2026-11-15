@@ -142,3 +142,26 @@ orphan under G13.
 
 Task id: this session renumbered again — **T33 was taken** by session `fcb538fa` in prose while my row was being
 merged, so the work ships as **T39**.
+
+## 8. Merge and deployment
+
+| Item | Value |
+|---|---|
+| PR | **#82** — https://github.com/kanlerxz87-cyber/Zone2/pull/82 |
+| Merge commit on `main` | `3d5eda0` (2026-11-15 12:33 UTC) |
+| CI on the PR head | `Build, verify and deploy` — **success**, all 22 steps (`395a74d`) |
+| CI on `main` after merge | **success**, followed by `pages build and deployment` **success**; Pages API `status: built` |
+| Live reads after deploy | `marketing/improvements.html` (board index, DS-01…DS-14, anchors) and `marketing/trending-topics.html` (queue table, provenance note) render as published |
+
+### Post-merge polish (follow-up PR)
+
+The published trending page carried a typed count — "**Eight** article shapes" above a table of **six**
+proposals — the classic stale-number defect this repository has been chasing all day. The fix is not to retype
+the number: the caption is now rendered through `num_words(len(queue))`, so the count is derived from the data
+(spelled out to twelve, numeric past that), and the lede drops the count entirely. Recorded here because a
+reviewer comparing the deployed page with this file would otherwise see two different sentences and wonder which
+one was audited.
+
+Gate totals on the tree carrying the polish: 21 generated outputs (18 HTML + 3 machine-readable) ·
+`verify_marketing.py` `OK 18 pages · 48 spec rows · 0 failures` · `audit_site.py` 112 pages, five checks PASS ·
+`tests/test_pipeline.py` 15/15 · the whole CI job replayed locally, 22/22 steps green.

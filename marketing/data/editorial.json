@@ -1747,7 +1747,7 @@
   "trending": {
     "kicker": "Content strategy · the queue",
     "title": "Trending topics, and what would keep them honest",
-    "lede": "Eight article shapes that this set could grow into, carried over from the 2026-11-15 marketing pass (session bf8f07a7, PR #65) and kept here in the generator so the page gets the same masthead, disclosure and sourcing rules as everything else. Each is a proposal. None is commissioned, and none of them changes a single verified value.",
+    "lede": "Article shapes this set could grow into, carried over from the 2026-11-15 marketing pass (session bf8f07a7, PR #65) and kept here in the generator so the page gets the same masthead, disclosure and sourcing rules as everything else. Each is a proposal. None is commissioned, and none of them changes a single verified value.",
     "how_label": "Editorial hypothesis — how a page like this earns a reader, not a measured result",
     "how": [
       "Answer one specific question in the title and keep the promise in the first screen. A page about what 6 Qt actually holds beats a page called 'Top Air Fryers' for a reader who already knows what they are asking.",
@@ -1822,6 +1822,7 @@
       "Mark each marketplace link paid, and keep the disclosure inside the same container as the link.",
       "Date-stamp the read and re-read the page before republication, so a silent change on the source cannot pass as our mistake."
     ],
-    "provenance": "Page carried over from the 2026-11-15 marketing pass (session bf8f07a7, PR #65), which committed it as hand-written HTML under the previous shell. It is generated here instead, so it inherits the masthead, the disclosure, canonical URLs, the sitemap and the orphan check. Two sentences were softened where they asserted search-engine behaviour or a shopper ranking we cannot verify, and the trend column is now labelled a hypothesis. One row was corrected: the first draft of this merge claimed the Emeril drew 1500 W against Amazon's 1800 W, a figure no official page states — all three products publish 1700 W. No verified value was added, removed or changed."
+    "provenance": "Page carried over from the 2026-11-15 marketing pass (session bf8f07a7, PR #65), which committed it as hand-written HTML under the previous shell. It is generated here instead, so it inherits the masthead, the disclosure, canonical URLs, the sitemap and the orphan check. Two sentences were softened where they asserted search-engine behaviour or a shopper ranking we cannot verify, and the trend column is now labelled a hypothesis. One row was corrected: the first draft of this merge claimed the Emeril drew 1500 W against Amazon's 1800 W, a figure no official page states — all three products publish 1700 W. No verified value was added, removed or changed.",
+    "queue_caption": "proposals, each tied to rows this site already publishes. Nothing here is commissioned, and no number in this table is new."
   }
 }

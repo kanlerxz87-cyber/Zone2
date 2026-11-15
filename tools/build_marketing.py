@@ -1269,6 +1269,16 @@ def status_pill(status: str) -> str:
     return f'<span class="pill pill-warn">{esc(status)}</span>'
 
 
+NUM_WORDS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven",
+             8: "Eight", 9: "Nine", 10: "Ten", 11: "Eleven", 12: "Twelve"}
+
+
+def num_words(n: int) -> str:
+    """Counts in prose, spelled out up to twelve: a caption that starts "6 proposals" reads like a
+    report, and a typed "Six proposals" is a number that can go stale."""
+    return NUM_WORDS.get(n, str(n))
+
+
 def page_trending() -> str:
     """The queue of article shapes this set could grow into. Carried over from the 2026-11-15 marketing
     pass, which committed this page by hand under the old shell; regenerated here so it inherits the
@@ -1305,7 +1315,7 @@ def page_trending() -> str:
       <h2>The queue</h2>
       <p>{esc(t['queue_intro'])}</p>
       <table class="data">
-        <caption>Six proposals, each tied to rows this site already publishes. Nothing here is commissioned.</caption>
+        <caption>{num_words(len(t["queue"]))} {esc(t["queue_caption"])}</caption>
         <thead><tr><th>Working title</th><th>Angle, and where a reader would push back</th>
         <th>Relates to</th><th>Shape</th><th>Basis in the verified set</th></tr></thead>
         <tbody>{"".join(rows)}</tbody>
