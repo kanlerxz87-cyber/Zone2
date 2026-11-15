@@ -4416,3 +4416,70 @@ cache-busted fetch of the key entry points; (6) integration PR → merge → dep
 | Self-inflicted defects, and the gates they produced | (1) A merge resolution was committed **with conflict markers still in this file** — the same F-42 defect an earlier session had cleaned up. `tools/audit_site.py` now has a **`board`** check: it fails on `<<<<<<< `, `=======`, or `>>>>>>> ` in `COORDINATION.md`, with line numbers. Negative-tested. (2) The landing-page `debris` check (duplicate links in one list; stray unstyled prose) came from the two live defects found on `index.html`. |
 | Left open for the owner | **Q-17** — own the website and declare an exact URL (RR-02, RR-12). **SG-12** — close Amazon's 10-post content bar before applying (RR-03, RR-09). Plus the standing blockers: F-01/F-03 (intended ASINs), F-24 (no Associates tag — the supplied links cannot earn as supplied), F-05 (Creators API), F-08 (no performance data exists). |
 | No product value added or changed | Price, rating, review count, availability and per-product commission band remain blank. 4 of 12 Amazon review criteria are met; the 8 that are not are each listed with the single action that would clear them. |
+
+---
+
+## Session claim — `f8e18ca8` (`arena/f8e18ca8-zone2`, 2026-11-15 UTC)
+
+**Identity:** session id `f8e18ca8`. No `T##` label is claimed — per the T39 lesson, `T##` numbers are
+decoration that six sessions collided on; the session id is the identity.
+
+**Task (one row, one scope):** *Independent line-by-line review of the deployed tree + owner decision pack.*
+Three deliverables the brief asks for that the board shows nobody has delivered in this form:
+
+1. **Repo review with source links** — `audit/review.html` (+ `audit/data/findings.json`): every finding
+   with `file:line` evidence, a severity, a verification method, and either an official source link or an
+   explicit `UNVERIFIED` + how to obtain it. No finding is published without one or the other.
+2. **Organic-traffic readiness, constrained to documented rules** — `audit/traffic.html` (+
+   `audit/data/traffic.json`): what Google and Amazon actually document about content quality, spam,
+   disclosure and links, each with a quoted source; and an explicit list of what *cannot* be verified from
+   any official source (demand, volume, rank, RPM) left blank.
+3. **The owner decision pack** — `audit/suggestions.html` (the review-and-choose section the brief asks
+   for), `audit/gaps.html` (missing information and how to discover it) and `audit/decision-cost.html`
+   (cost, reversibility and sequence of each open decision), all rendered from `audit/data/*.json`.
+
+**File scope (non-overlapping, additive only):** NEW `audit/**`, NEW `tools/build_audit.py`, NEW
+`tools/validate_audit.py`, NEW `tools/check_css_urls.py`, additive step in `.github/workflows/pages.yml`,
+one additive nav link in `index.html`, additive `sitemap.xml` entries (derived from the published page
+set, not typed), additive `README.md` / `EXECUTIVE_SUMMARY.md` sections, NEW
+`docs/audit-2026-11-15.md`, and append-only records in this file.
+
+**Deliberately NOT touched:** `ledger/**`, `pages/**`, `marketing/**`, `journal/**`, `decisions/**`,
+`assets/**`, `tools/build_site.py`, `tools/build_marketing.py`, `tools/build_decisions.py`,
+`tools/validate_data.py`, `tools/audit_site.py`, and PR #70's `marketing/articles/*`. If a finding needs a
+change inside one of those, it is **logged as a recommendation with an ID** (`R-##`) on the review page,
+not implemented.
+
+**Deploys:** this session ends with PR → merge → Pages deploy confirmation, and records the result below.
+
+### Overlap disclosed (append-only, written before merge)
+
+Five sessions published overlapping review surfaces between 13:07 and 13:20 UTC while this session was
+building: **PR #104** (`arena/3e0b3b4e-zone2`, `discovery/` — 17 findings, 10 questions, 14 suggestions,
+5 measurement events), **PR #101** (`arena/2b07e526-zone2`, release-readiness board), **PR #93**
+(`arena/86bb886d-zone2`, dated repository review), **PR #90** (`arena/e4e7d4b2-zone2`, link re-verification).
+
+**This session's mistake:** it claimed its scope at 13:05 having checked only PRs #70 and #89. It did not
+re-poll open PRs before writing, so its review (`audit/`) substantially duplicates #104's. That is a
+coordination failure on this session's part and it is recorded rather than hidden.
+
+**What is genuinely unique to this session, and why it is kept:**
+
+| Item | Other open PRs | This session (`audit/`) |
+|---|---|---|
+| Disclosure **position** measured across all 116 pages — 24 of the 77 pages that carry a product link put the first disclosure after it; on the landing page the link is at line 112 and the sentence at line 285 | not measured by any open PR | **A-02**, first quantified here |
+| `rel="sponsored"` census: 78 qualified vs **150 unqualified** body-level Amazon anchors, with the 393 citation-cell anchors excluded as a distinct class | not measured | **A-04** |
+| Row-sourcing arithmetic: **705 rows → 523 sourced + 164 explicit blanks + 18 internal contract rows**, the 18 enumerated by file | #104 asserts the property; this session counts it | **A-15** |
+| Merge-conflict **residue** live in `index.html`'s footer (two `EAD` lines, two duplicate `<li>`, a bare `in`) — repaired | not found by any open PR | **A-16** |
+| `tools/check_css_urls.py` — the CSS `url()` guard session `1b839f87` logged as `1B-2` and did not ship | not shipped by any open PR | **R-12**, wired into CI |
+| `tools/test_audit.py` — 11 injected defects, each proven to fire; both data **and** output redirect to a temp root so a negative test cannot touch the working tree | #104 ships 11 injected defect classes too, independently | gate credibility |
+| Decision-**cost** axis: effort, risk, reversibility, sequence and the consequence of deciding nothing | neither #104 nor #101 carries this axis | **`audit/decision-cost.html`** |
+| A-08 corrected against IP Licence §1(a) (no storing or caching an image; a link may be kept at most 24 h) — a clause this session missed and **#104 read correctly** | #104 got this right first | credit recorded |
+
+**No shared file was contested.** This session edited `index.html` only to remove residue and add one
+nav link; #104 and #101 also edit `index.html`, so a nav-line conflict is to be resolved by keeping every
+session's link rather than dropping one.
+
+**Recommendation to the owner:** land one review surface and archive the rest. `audit/` and `discovery/`
+are the same product built twice within one hour, and keeping both is the duplication finding A-06
+describes, one level up.

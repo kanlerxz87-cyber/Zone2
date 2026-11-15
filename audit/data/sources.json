@@ -1,0 +1,301 @@
+{
+  "note": "Source register for the audit namespace. Every row was fetched on the date shown and the quoted text is copied from the page as served. A source whose 'rechecked' value is 'carried' was NOT re-fetched by this session; it is carried from ledger/sources.json and marked as such, because a verification page that hides which rows it did not re-check is the thing this project exists to avoid.",
+  "as_of": "2026-11-15",
+  "accessed_utc": "2026-11-15",
+  "sources": [
+    {
+      "id": "SA-01",
+      "title": "Associates Program Operating Agreement — Section 5 (Identifying Yourself as an Associate)",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: October 15, 2025",
+      "quote": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”",
+      "used_by": [
+        "A-02",
+        "T-01",
+        "D-03"
+      ]
+    },
+    {
+      "id": "SA-02",
+      "title": "Associates Program Operating Agreement — Section 6 (Term and Termination)",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: October 15, 2025",
+      "quote": "For the avoidance of doubt and without limitation for purposes of the foregoing subsection (a) any violation of Section 5 and as specified in the Program Policies will be deemed a material breach of this Agreement.",
+      "used_by": [
+        "T-01",
+        "D-03"
+      ]
+    },
+    {
+      "id": "SA-03",
+      "title": "Associates Program Policies → Participation Requirements §2(b) — Special Links must use your Associates ID",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "quote": "Special Links must use the Associates ID we have assigned to you. … For example, you must include your Associates ID or “tag” (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.",
+      "used_by": [
+        "A-05",
+        "T-02",
+        "D-01"
+      ]
+    },
+    {
+      "id": "SA-04",
+      "title": "Associates Program Policies → Participation Requirements §2(b) — prices and availability",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "quote": "Because prices for and availability of Products that you have listed on your Site may change, your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API and you comply with the requirements regarding use of Creators API or PA API in the License.",
+      "used_by": [
+        "A-11",
+        "T-04",
+        "D-06"
+      ]
+    },
+    {
+      "id": "SA-05",
+      "title": "Associates Program Policies → Participation Requirements §3(t) — customer reviews and star ratings",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "quote": "You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API and you comply with the requirements for Creators API and PA API described in the License.",
+      "used_by": [
+        "T-05",
+        "D-07"
+      ]
+    },
+    {
+      "id": "SA-06",
+      "title": "Associates Program Policies → Participation Requirements §3(y) — price tracking and alerting",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "quote": "Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.",
+      "used_by": [
+        "T-04",
+        "D-04"
+      ]
+    },
+    {
+      "id": "SA-07",
+      "title": "Associates Program Policies → Participation Requirements §3(w) — link shortening",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "quote": "You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site.",
+      "used_by": [
+        "T-02",
+        "D-02"
+      ]
+    },
+    {
+      "id": "SA-08",
+      "title": "Associates Program Policies → Participation Requirements §1 — original content and site suitability",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "quote": "Your Site(s) must contain original content and be publicly available via the website address provided in the application. Original content utilizing third-party materials must contain significant commentary, analysis, or transformation to any materials you include.",
+      "used_by": [
+        "A-06",
+        "T-08",
+        "D-05"
+      ]
+    },
+    {
+      "id": "SA-09",
+      "title": "Associates Program Policies → Trademark Guidelines, clauses 1, 3 and 8",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "quote": "1. YOU ARE ALLOWED TO USE THE AMAZON MARKS ONLY BY DISPLAY ON YOUR SITE WITH THE PURPOSE OF ADVERTISING AVAILABILITY OF PRODUCTS ON AN AMAZON SITE, WITH A CORRESPONDING SPECIAL LINK TO THAT SITE. … 8. You cannot use or apply to register any trademark, domain name, subdomain, username or app name that is confusingly similar to any Amazon mark in any jurisdiction.",
+      "used_by": [
+        "T-09",
+        "D-09"
+      ]
+    },
+    {
+      "id": "SA-10",
+      "title": "Google Search Central — Spam policies: scaled content abuse and thin affiliation",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "publisher": "Google for Developers",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "not printed on the page",
+      "quote": "Scaled content abuse is when many pages are generated for the primary purpose of manipulating search rankings and not helping users. … Examples of scaled content abuse include, but aren't limited to: Using generative AI tools or other similar tools to generate many pages without adding value for users. — Thin affiliation is the practice of publishing content with product affiliate links where the product descriptions and reviews are copied directly from the original merchant without any original content or added value. … Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.",
+      "used_by": [
+        "A-06",
+        "T-06",
+        "T-10"
+      ]
+    },
+    {
+      "id": "SA-11",
+      "title": "Google Search Central — Spam policies: link spam and outbound-link qualification",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "publisher": "Google for Developers",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "not printed on the page",
+      "quote": "It's not a violation of our policies to have such links as long as they are qualified with a rel=\"nofollow\" or rel=\"sponsored\" attribute value to the <a> tag.",
+      "used_by": [
+        "A-04",
+        "T-07",
+        "D-08"
+      ]
+    },
+    {
+      "id": "SA-12",
+      "title": "Google Search Central — Creating helpful, reliable, people-first content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "publisher": "Google for Developers",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "not printed on the page",
+      "quote": "Are you using extensive automation to produce content on many topics? … Does the content present information in a way that makes you want to trust it, such as clear sourcing, evidence of the expertise involved, background about the author or the site that publishes it, such as through links to an author page or a site's About page? … Google's core ranking systems look to reward content that provides a good page experience.",
+      "used_by": [
+        "A-07",
+        "A-10",
+        "T-11",
+        "T-12"
+      ]
+    },
+    {
+      "id": "SA-13",
+      "title": "Google Search Central — Understand the JavaScript SEO basics",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+      "publisher": "Google for Developers",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "not printed on the page",
+      "quote": "Keep in mind that server-side or pre-rendering is still a great idea because it makes your website faster for users and crawlers, and not all bots can run JavaScript. … Unique, descriptive <title> elements and meta descriptions help users quickly identify the best result for their goal.",
+      "used_by": [
+        "A-01",
+        "A-03",
+        "A-09",
+        "T-13",
+        "D-11"
+      ]
+    },
+    {
+      "id": "SA-14",
+      "title": "Google Search Central — How to write high quality reviews",
+      "url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
+      "publisher": "Google for Developers",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "not printed on the page",
+      "quote": "Provide evidence such as visuals, audio, or other links of your own experience with what you are reviewing, to support your expertise and reinforce the authenticity of your review. — Share quantitative measurements about how something measures up in various categories of performance. — When recommending something as the best overall or the best for a certain purpose, include why you consider it the best, with first-hand supporting evidence.",
+      "used_by": [
+        "A-11",
+        "T-10",
+        "D-12"
+      ]
+    },
+    {
+      "id": "SA-15",
+      "title": "Google Search Central — Google Search Essentials",
+      "url": "https://developers.google.com/search/docs/essentials",
+      "publisher": "Google for Developers",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "Last updated 2025-12-10 UTC",
+      "quote": "It doesn't cost any money to appear in Google Search results, no matter what anyone tries to tell you. It's important to note that just because a page meets all of these requirements and best practices, doesn't mean that Google will crawl, index, or serve its content.",
+      "used_by": [
+        "T-14",
+        "T-15"
+      ]
+    },
+    {
+      "id": "SA-16",
+      "title": "FTC — Disclosures 101 for Social Media Influencers",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "publisher": "U.S. Federal Trade Commission",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "November 2019",
+      "quote": "Place it so it's hard to miss. The disclosure should be placed with the endorsement message itself. Disclosures are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos, or anywhere that requires a person to click MORE. … You can't talk about your experience with a product you haven't tried.",
+      "used_by": [
+        "A-02",
+        "A-16",
+        "T-01"
+      ]
+    },
+    {
+      "id": "SA-17",
+      "title": "Google Search Central — Site reputation policy (within Spam policies)",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "publisher": "Google for Developers",
+      "fetched": "2026-11-15",
+      "rechecked": "yes",
+      "page_dated": "not printed on the page",
+      "quote": "Google generally applies a presumption that individual pages (including new pages) match the overall quality of other pages on the domain. … 2. Likely to take action: unauthored affiliate article not integrated in publication — A globally recognized business publication hosts an article including links to a marketplace … Neither the author of the article nor the responsible editor is identified, nor are there disclaimers about the commercial character of the content.",
+      "used_by": [
+        "A-10",
+        "T-11",
+        "D-10"
+      ]
+    },
+    {
+      "id": "SA-18",
+      "title": "Associates Program — Application Review Process (carried from ledger S23; NOT re-fetched this session)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "carried from ledger/sources.json S23",
+      "rechecked": "carried",
+      "page_dated": "not recorded in the ledger row",
+      "quote": "Carried, not re-quoted here. The ledger row S23 records the three-qualifying-sales-in-180-days review criterion; this session did not open the page, so it does not quote it.",
+      "used_by": [
+        "D-01",
+        "G-01"
+      ]
+    },
+    {
+      "id": "SA-19",
+      "title": "Creators API — introduction (carried from ledger S07; NOT re-fetched this session)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "carried from ledger/sources.json S07",
+      "rechecked": "carried",
+      "page_dated": "not recorded in the ledger row",
+      "quote": "Carried, not re-quoted here. The ledger rows S06/S07 record the PA-API 5.0 deprecation and the Creators API eligibility threshold; this session did not open them.",
+      "used_by": [
+        "G-04",
+        "D-06"
+      ]
+    },
+    {
+      "id": "SA-20",
+      "title": "Associates Program IP License and Usage Requirements — §1(a) and the image-storage restriction",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-15 (clause identified by session 3e0b3b4e's review; read in the same session for this correction)",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "quote": "we hereby grant you a limited, revocable, non-transferable, non-sublicensable, non-exclusive, royalty-free license to: (a) copy and display Program Content solely on your Site … This license does not include any downloading, copying or other use of Program Content for the benefit of any third party, or any use of data mining, robots, or similar data gathering and extraction tools.",
+      "used_by": [
+        "A-08",
+        "R-08"
+      ]
+    }
+  ]
+}

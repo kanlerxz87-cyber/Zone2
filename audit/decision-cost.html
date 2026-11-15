@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cost, risk, reversibility and sequence for the fifteen open decisions on the Zone2 affiliate site, with the consequence of deciding nothing.">
+<title>Cost, risk and sequence — Zone2 audit</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .audit-nav { display:flex; flex-wrap:wrap; gap:6px; margin: 0 0 4px; }
+  .audit-nav a { font-size:13.5px; font-weight:600; color:var(--ink-soft); text-decoration:none;
+     border:1px solid var(--line); background:var(--surface); padding:7px 12px; border-radius:8px; }
+  .audit-nav a:hover { border-color:var(--accent); color:var(--accent); }
+  .audit-nav a.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .badge { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.02em;
+     padding:2px 8px; border-radius:999px; border:1px solid transparent; white-space:nowrap; text-decoration:none; }
+  .badge.ok { background:var(--ok-bg); color:var(--ok-ink); border-color:var(--ok-line); }
+  .badge.warn { background:var(--warn-bg); color:var(--warn-ink); border-color:var(--warn-line); }
+  .badge.flag { background:var(--flag-bg); color:var(--flag-ink); border-color:var(--flag-line); }
+  .badge.neutral { background:var(--line-soft); color:var(--ink-soft); border-color:var(--line); }
+  a.src { text-decoration:none; }
+  table.audit { width:100%; border-collapse:collapse; font-size:13.5px; margin: 10px 0 0; background:var(--surface); }
+  table.audit th { text-align:left; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase;
+     color:var(--ink-soft); border-bottom:1px solid var(--line); padding:9px 10px; vertical-align:bottom; }
+  table.audit td { border-bottom:1px solid var(--line-soft); padding:10px; vertical-align:top; }
+  table.audit tr:last-child td { border-bottom:0; }
+  table.audit td.id { font-family:var(--font-body); font-weight:700; color:var(--accent); white-space:nowrap; }
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--surface); }
+  .evidence { font-size:12.5px; color:var(--ink-soft); }
+  .evidence code { font-size:11.8px; }
+  .lede-block { background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent);
+     border-radius:var(--radius-sm); padding:16px 18px; margin:0 0 22px; }
+  .lede-block p { margin:0; color:var(--ink-soft); font-size:14.5px; }
+  .count-strip { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 6px; }
+  .count-strip .c { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 14px; }
+  .count-strip .c b { display:block; font-family:var(--font-display); font-size:22px; color:var(--accent); }
+  .count-strip .c span { font-size:12px; color:var(--ink-soft); }
+  .quote { border-left:3px solid var(--gold); padding:6px 0 6px 12px; margin:8px 0; color:var(--ink);
+     font-size:13px; background:var(--accent-soft); border-radius:0 6px 6px 0; }
+  .opts { margin:6px 0 0; padding-left:0; list-style:none; }
+  .opts li { margin:0 0 6px; font-size:13px; }
+  .opts .rec { font-weight:700; color:var(--ok-ink); }
+  .foot-note { font-size:12.5px; color:var(--ink-soft); margin-top:26px; }
+  footer.site { margin-top:40px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Independent audit · 2026-11-15</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html">Main site</a>
+      <a href="../pages/suggestions.html">Decision board</a>
+      <a href="../pages/flags.html">Flag register</a>
+      <a href="../marketing/improvements.html">Marketing board</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Session f8e18ca8 · 2026-11-15</div>
+      <h1 class="hero-title">Cost, risk and sequence</h1>
+      <p class="hero-lede">For each open decision: what it takes, whether it can be undone, what it unblocks, and the price of deciding nothing.</p>
+    </div>
+  </div>
+  <div class="page-wrap">
+    <nav class="audit-nav" aria-label="Audit sections" style="margin-top:22px">
+      <a href="index.html">Review</a>
+      <a href="suggestions.html">Decide</a>
+      <a href="gaps.html">Missing information</a>
+      <a href="traffic.html">Traffic readiness</a>
+      <a href="decision-cost.html" class="active">Cost &amp; sequence</a>
+      <a href="method.html">Method</a>
+    </nav>
+<div class="lede-block"><p>Most decision registers list options and stop. This one adds the three columns that actually decide the order: what it costs, whether it can be undone, and what happens if you decide nothing. Effort and cost are coarse reviewer estimates in time, labelled as such.</p></div>
+<div class="count-strip">
+<div class="c"><b>15</b><span>decisions registered</span></div>
+<div class="c"><b>2</b><span>that must happen first</span></div>
+<div class="c"><b>14</b><span>reversible</span></div>
+</div>
+<section class="section"><div class="eyebrow">Sequence</div><h2 class="section-title">Fifteen decisions, ordered by what unblocks what</h2><div class="table-wrap"><table class="audit"><thead><tr><th>Seq</th><th>Decision</th><th>Cost / effort</th><th>Risk</th><th>Reversible</th><th>Blocks</th><th>If you decide nothing</th><th>Board row</th></tr></thead><tbody>
+<tr><td class="id">1 — it determines whether any recommendation here is ever decided</td><td><strong>Review channel and cadence</strong><div class="evidence">gap: G-15</div></td><td class="evidence">estimate: none</td><td class="evidence">estimate: none</td><td class="evidence">yes</td><td class="evidence">the whole board</td><td class="evidence">Recommendations accumulate and none is chosen; sessions keep re-deriving the same review, which is exactly what happened across the 39 sessions before this one.</td><td class="evidence">—</td></tr>
+<tr><td class="id">1 — nothing downstream can be validated without it</td><td><strong>Associates account, marketplace, tag and site ownership</strong><div class="evidence">gap: G-01</div></td><td class="evidence">estimate: none in money; one sign-in and one copy of the tag</td><td class="evidence">estimate: none — no repository change follows until the tag exists</td><td class="evidence">yes</td><td class="evidence">every revenue, tracking and optimization item in the brief</td><td class="evidence">The site remains a research desk. No click it generates can pay, and the optimization pages stay theoretical indefinitely.</td><td class="evidence"><a href="suggestions.html#R-13">R-13</a></td></tr>
+<tr><td class="id">2 — cheap, independent</td><td><strong>Link qualification (rel=&quot;sponsored&quot;)</strong><div class="evidence">gap: no blocker</div></td><td class="evidence">estimate: one mechanical pass plus a CI assertion</td><td class="evidence">estimate: none</td><td class="evidence">yes</td><td class="evidence">nothing</td><td class="evidence">150 links stay unqualified and the README keeps making a claim that is not true of the site.</td><td class="evidence"><a href="suggestions.html#R-04">R-04</a></td></tr>
+<tr><td class="id">2 — follows directly from D-01</td><td><strong>What to do with the three untagged link.amazon URLs</strong><div class="evidence">gap: G-13</div></td><td class="evidence">estimate: none</td><td class="evidence">estimate: low — the evidence pages must keep the original URL either way</td><td class="evidence">yes</td><td class="evidence">reader-facing links on every product page</td><td class="evidence">Readers click three links that cannot attribute a commission; the work of writing about the products earns nothing.</td><td class="evidence">—</td></tr>
+<tr><td class="id">2 — independent and free</td><td><strong>Named author and responsibility</strong><div class="evidence">gap: G-05</div></td><td class="evidence">estimate: none</td><td class="evidence">estimate: none technical; reputational if the name is not real</td><td class="evidence">yes</td><td class="evidence">nothing mechanically; a lot strategically</td><td class="evidence">The site asks readers to trust a page that does not say who wrote it — the exact shape Google&#x27;s site-reputation example describes as likely to draw action.</td><td class="evidence"><a href="suggestions.html#R-07">R-07</a></td></tr>
+<tr><td class="id">2 — independent of everything else, and cheap</td><td><strong>Disclosure position</strong><div class="evidence">gap: no blocker</div></td><td class="evidence">estimate: one generator change</td><td class="evidence">estimate: very low — the sentence itself is already correct</td><td class="evidence">yes</td><td class="evidence">nothing; improves compliance posture on 24 pages</td><td class="evidence">The single most load-bearing sentence in the programme stays at the bottom of the busiest pages, and the site keeps calling that adequate while its own ledger rule says otherwise.</td><td class="evidence"><a href="suggestions.html#R-02">R-02</a></td></tr>
+<tr><td class="id">2 — it changes the audience for every later decision</td><td><strong>Language and market</strong><div class="evidence">gap: G-11</div></td><td class="evidence">estimate: one session per translation batch plus a language gate</td><td class="evidence">estimate: medium — a Japanese page needs a disclosure in Japanese and a marketplace check per ASIN</td><td class="evidence">yes</td><td class="evidence">content plan, disclosure wording, marketplace choice</td><td class="evidence">The site keeps writing English for an operator in Osaka, and every content decision stays provisional.</td><td class="evidence">—</td></tr>
+<tr><td class="id">3</td><td><strong>Keep or drop the pricing module</strong><div class="evidence">gap: no blocker</div></td><td class="evidence">estimate: none (removal simplifies)</td><td class="evidence">estimate: none — price tracking is prohibited unless Amazon agrees in writing</td><td class="evidence">yes</td><td class="evidence">the architecture of the optimization module</td><td class="evidence">A module keeps being described in the platform documentation that the programme forbids by default (§3(y)); a future session could implement what a page already advertises.</td><td class="evidence">—</td></tr>
+<tr><td class="id">3 — after D-01</td><td><strong>Product-data route: API or none</strong><div class="evidence">gap: G-04</div></td><td class="evidence">estimate: one session once access exists</td><td class="evidence">estimate: low — the ledger already models freshness and BLOCKED states</td><td class="evidence">yes</td><td class="evidence">price display, ratings display, any automated refresh</td><td class="evidence">Every specification stays manual and hand-dated, and the site can never update a product page without a human re-reading a manufacturer&#x27;s page.</td><td class="evidence">—</td></tr>
+<tr><td class="id">3 — after D-01, because a click without a tag cannot be reconciled to a commission</td><td><strong>Measurement posture</strong><div class="evidence">gap: G-03</div></td><td class="evidence">estimate: A free; B hosting cost only</td><td class="evidence">estimate: A none; B low if no visitor identifier is stored</td><td class="evidence">yes</td><td class="evidence">any optimization claim, any A/B test, any campaign reporting</td><td class="evidence">The site keeps promising measurement it does not perform; the first performance figure anyone publishes will have no provenance.</td><td class="evidence"><a href="suggestions.html#R-05">R-05</a></td></tr>
+<tr><td class="id">3 — before any SEO work, because everything else depends on which pages exist</td><td><strong>Which pages are public</strong><div class="evidence">gap: G-08</div></td><td class="evidence">estimate: one session plus a sitemap rebuild</td><td class="evidence">estimate: medium — eight namespaces, each with its own gates and relative paths</td><td class="evidence">yes — nothing is deleted, only relabelled</td><td class="evidence">T-08, D-12, any canonical or sitemap work</td><td class="evidence">Canonical tags and sitemaps would be built for a page set that is about to change; the duplicate-page signal keeps compounding.</td><td class="evidence"><a href="suggestions.html#R-06">R-06</a></td></tr>
+<tr><td class="id">4</td><td><strong>First-hand evidence or none</strong><div class="evidence">gap: G-12</div></td><td class="evidence">estimate: the cost of the products, if purchased</td><td class="evidence">estimate: none</td><td class="evidence">no — you cannot un-buy a product, but the site can stay honest either way</td><td class="evidence">any review, any rating, any &#x27;best for&#x27; recommendation</td><td class="evidence">The site stays a research desk. That is a legitimate product, but it is not the review site the brief describes, and the two are not the same business.</td><td class="evidence">—</td></tr>
+<tr><td class="id">4 — after D-01, because the licence condition references a Special Link</td><td><strong>Amazon-mark and imagery policy</strong><div class="evidence">gap: G-09</div></td><td class="evidence">estimate: asset work only</td><td class="evidence">estimate: medium if an image is used without a corresponding Special Link — that is the licence condition</td><td class="evidence">yes</td><td class="evidence">any imagery, any social preview card</td><td class="evidence">The site stays text-only; every social share and every Discover impression has no image to show.</td><td class="evidence"><a href="suggestions.html#R-08">R-08</a></td></tr>
+<tr><td class="id">4 — needs a settled transaction</td><td><strong>Per-product commission band</strong><div class="evidence">gap: G-06</div></td><td class="evidence">estimate: none</td><td class="evidence">estimate: low, but a wrong rate misstates revenue to the owner</td><td class="evidence">yes</td><td class="evidence">the revenue model</td><td class="evidence">The revenue model keeps showing bands rather than the owner&#x27;s actual rate, which is honest but cannot answer &#x27;what will this earn&#x27;.</td><td class="evidence">—</td></tr>
+<tr><td class="id">5 — last, because it needs traffic before it can be read</td><td><strong>Demand data source</strong><div class="evidence">gap: G-10</div></td><td class="evidence">estimate: none</td><td class="evidence">estimate: none if provenance is stated with each figure</td><td class="evidence">yes</td><td class="evidence">any evidence-based topic choice</td><td class="evidence">Topic selection stays editorial judgement. The site is honest about that, and it is also unable to say which topic is worth writing.</td><td class="evidence">—</td></tr>
+</tbody></table></div></section>
+<section class="section"><div class="eyebrow">Reading the table</div><h2 class="section-title">The three rows that cost nothing and unblock the most</h2><div class="table-wrap"><table class="audit"><tbody><tr><td><strong>D-01</strong> Associates account and tag</td><td>Owner minutes, no repository change. It is the only item that converts everything else from theory into work that can be measured.</td></tr><tr><td><strong>D-10</strong> a named author</td><td>Free, reversible, and it closes the two trust questions Google's own guidance asks first.</td></tr><tr><td><strong>D-03</strong> disclosure position</td><td>Under an hour, no wording change, and it brings 24 pages in line with a rule the repository already states and lints elsewhere.</td></tr></tbody></table></div></section>
+    <p class="foot-note">
+      This namespace is generated by <code>tools/build_audit.py</code> from
+      <code>audit/data/*.json</code>; edit the data, never the HTML. Rows marked
+      <span class="badge warn">carried</span> name a source this session did not re-fetch. Rows marked
+      <span class="badge flag">UNVERIFIED</span> are published as unverified on purpose — the page states what
+      would settle them. Nothing here is a product price, rating, review count or demand figure:
+      no official source states one for these ASINs.
+    </p>
+    <footer class="site">
+      <p><strong>Disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+      <p>Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This is an
+      independent site: Amazon does not sponsor, endorse or support it, and no agency or partnership with
+      Amazon is claimed or implied. Product facts on this site are quoted from the manufacturer or the
+      Amazon listing; anything unverified is blank.
+      <a href="../pages/flags.html">Flag register</a> ·
+      <a href="../pages/sources.html">Source register</a> ·
+      <a href="../verification.html">Verification log</a></p>
+    </footer>
+  </div>
+</main>
+</body>
+</html>
