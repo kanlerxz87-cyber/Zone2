@@ -825,7 +825,12 @@ def vendor_assets(out_root: Path) -> None:
         # fonts via relative url(...)s. Vendored one level deeper (decisions/assets/),
         # those paths would resolve into decisions/assets/fonts/, which does not exist;
         # rewrite them to point back at the repository-root font files.
-        text = src.read_text(encoding="utf-8").replace('url("assets/fonts/', 'url("../../assets/fonts/')
+        # T40 (session bbcc741f): accept either authoring form. The source sheet is authored
+        # stylesheet-relative (url("../fonts/…")); matching only the old namespaced form left this
+        # copy pointing into decisions/assets/fonts/, which does not exist.
+        text = (src.read_text(encoding="utf-8")
+                .replace('url("../fonts/', 'url("../../assets/fonts/')
+                .replace('url("assets/fonts/', 'url("../../assets/fonts/'))
         dest.write_text(header + text, encoding="utf-8")
     site_css = REPO / "tools" / "pages-site.css"
     if site_css.is_file():

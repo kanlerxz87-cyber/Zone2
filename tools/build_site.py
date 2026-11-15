@@ -1114,6 +1114,13 @@ def vendor_design_system(out_root: Path) -> None:
         "   Re-run the builder after changing the source. Kept as a copy so these pages do not\n"
         "   depend on root-level paths another session may move. */\n"
     )
+    # T40 (session bbcc741f, 2026-11-15): the shared sheet is authored with font URLs relative
+    # to ITS OWN location (assets/css/), and vendored one level deeper (pages/assets/), so the copy
+    # has to re-point them at the repository-root font files. Both authoring forms are accepted so
+    # the copy stays correct whichever way the source is written - the gap between these two forms is
+    # exactly how every page on the site silently lost its webfonts (flag F-39's companion record).
+    body = body.replace('url("../fonts/', 'url("../../assets/fonts/').replace(
+        'url("assets/fonts/', 'url("../../assets/fonts/')
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(header + body, encoding="utf-8")
 
