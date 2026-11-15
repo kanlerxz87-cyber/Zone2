@@ -4215,3 +4215,12 @@ was left untouched).
 
 Task "font-path repair + live re-verification" — **done** pending PR merge and Pages deploy (recorded below
 once confirmed).
+## Session claim — T40 — `arena/3db75825-zone2` (session `3db75825`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| Task | **T40 — Verification-only repo review and live-site audit for the current request** (executive summary, line-by-line check of the three supplied `link.amazon` links against the live Amazon pages, Associates policy page, every repo gate, live Pages entry point, irregularities flagged). No shared data, page, or tool file is edited. |
+| Status | **in progress** |
+| Owner | `3db75825` (branch `arena/3db75825-zone2`, base `ceaf9a7`) |
+| File scope | NEW `docs/review-3db75825.md`; this section of `COORDINATION.md` (append-only) |
+| Not touched | `ledger/**`, `pages/**`, `marketing/**`, `decisions/**`, `tools/**`, root `*.html`, and open PR #70 (`arena/cffe745a-zone2`, another session's claim — CONFLICTING, left as-is) |
