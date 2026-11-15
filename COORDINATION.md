@@ -3090,3 +3090,93 @@ action (deprecate one and keep the other as canonical). The **data is not duplic
 single 46-row Bounty Event block and a single 2-row Bonus Event block, verified on `main`.
 
 Flagged here and on the Flagged for Review page so the owner can merge the two entries after the site is live.
+
+
+---
+
+## Session claim — `arena/6c88ed00-zone2` (session `6c88ed00`, 2026-11-15 UTC)
+
+**Claimed before any edit, as the board requires.** Board row: **T29**. Flag range reserved:
+**F-39 … F-49** (the merged register holds F-01…F-38, unique, verified at claim time).
+
+### Task
+
+Build the two surfaces the current tree does **not** contain, and make them the site's front door:
+
+1. **`suggestions/` — a Suggestions & Decision Board.** The brief asks for a section where the
+   owner can review candidate improvements, compare them, and choose a path *before* anything is
+   implemented. No such surface exists anywhere in the tree (`grep -ril suggestion` returns only
+   `ledger/products.json` prose and one dated doc). This session builds it as a data-driven board:
+   every suggestion carries an ID, the official or measurement evidence it depends on, cost, risk,
+   blocking dependencies, and an explicit "decision required" field. Nothing in it is implemented.
+2. **`questions.html` (root) + generated `questions/` detail — a Questions Register.** The brief
+   asks for "a clear list of questions, informations and answers that need to be addressed before
+   any decision can be reasonably made based upon the information that we already have and do not
+   have", plus suggestions for *discovering* the missing information. The tree has no question
+   register at all (`grep -ril "open question"` → nothing). This session builds Q-01…Q-nn, each with
+   status (ANSWERED / PARTLY ANSWERED / UNKNOWN / NOT APPLICABLE), the answer if the repo or an
+   official source already holds it, the blocking decision, and a concrete discovery method.
+
+3. **A repo review pass, line by line, recorded as `docs/repo-review-2026-11-15.md`** with each
+   irregularity filed as a flag (F-39…) and published on a Flagged-for-Review surface.
+
+Nothing already published is deleted. Shared generators (`tools/build_site.py`,
+`tools/build_root_views.py`, `tools/validate_data.py`, `tools/audit_site.py`,
+`.github/workflows/pages.yml`) are **shared files**, so per the board they are not edited by this
+session except in one additive, non-overlapping way — see "File scope" below.
+
+### File scope (non-overlapping; every path is new unless noted)
+
+| Path | Change |
+|---|---|
+| `ledger/questions.json` | **new** — the questions register (data) |
+| `ledger/suggestions.json` | **new** — the suggestion/decision board (data) |
+| `ledger/sources.json` | **append only** — adds S38…S46 with official URLs re-read 2026-11-15 |
+| `ledger/flags.json` | **append only** — adds F-39…F-48 from this session's review pass |
+| `ledger/products.json` | **in-place, evidence only** — adds `observed_utc` re-observation block for 2026-11-15; no attribute value changed |
+| `ledger/verification.json` | **append only** — adds V-83…V-92 for this session's live re-reads |
+| `tools/build_suggestions.py` | **new** — generator + gate for `suggestions/` and `questions.html` |
+| `suggestions/**` | **new** — generated board pages |
+| `questions/**` | **new** — generated question-detail pages |
+| `questions.html` | **new** — generated root page |
+| `assets/css/suggestions.css` | **new** |
+| `docs/repo-review-2026-11-15.md` | **new** |
+| `docs/decisions-2026-11-15.md` | **new** — the discovery methods (how to obtain each missing input) |
+| `EXECUTIVE_SUMMARY.md` | **append only** — a dated addendum section at the end |
+| `COORDINATION.md` | **append only** — this claim, then the closing record |
+| `README.md` | **one additive block** — a "Start here" table pointing at the new surfaces |
+| `tools/audit_site.py` | **additive** — appends the new namespaces to `REQUIRED_NAMESPACES` so the orphan check covers them |
+| `.github/workflows/pages.yml` | **additive** — one step running the new gate |
+
+No other session holds a claim on any of these paths: T1–T28 are all `done`/merged, and the board
+records no open scope. If another session's claim appears on these paths before this branch merges,
+this session stops and logs the conflict instead of overwriting.
+
+### Sources this session re-read live before writing anything
+
+Every one of these was fetched on **2026-11-15** and the exact wording recorded in
+`ledger/verification.json` (V-83…V-92). Links are for the reviewer's own manual check:
+
+| # | Page | What was read |
+|---|---|---|
+| 1 | [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) | §5 disclosure sentence, verbatim |
+| 2 | [Program Policies — Participation Requirements](https://affiliate-program.amazon.com/help/operating/policies) | §2(a) Special Links must use the Associates ID; §2(b) tag parameter; price/availability rule; §3(e) privacy/cookies; §4 solicited email/SMS; §5 no machine-learning use of Program Content; §6(a)(b)(c)(e)(g)(t)(u)(v)(w)(y)(z) |
+| 3 | [Standard Commission Income Statement — Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) | 11 fixed bands; §(a) Bounty Events; §(b) Bonus Events |
+| 4 | [Creators API — Introduction](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction) | prerequisites: enrolled Associates account, **≥10 qualifying sales in the past 30 days**, registration in Associates Central |
+| 5 | [Creators API — PA-API 5 deprecation](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation) | PA-API 5 deprecated; calls now return `403 AccessDeniedException` |
+| 6 | [Associates program home](https://affiliate-program.amazon.com/) | "Earn up to 10% in associate commissions"; "paid approximately 60 days after the end of the month" |
+| 7 | [Google Search spam policies](https://developers.google.com/search/docs/essentials/spam-policies) | "Thin affiliation" and "Scaled content abuse" sections, verbatim |
+| 8 | [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) | material connection must be disclosed clearly and conspicuously |
+| 9 | [link.amazon/B04G1MEwY](https://link.amazon/B04G1MEwY) → [amazon.com/dp/B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3) | still resolves to the same listing; `btn_ref` token **still `srctok-7dce8b124ae972c6`** — i.e. it has **not** rotated since 2026-11-14, contradicting F-21's "rotates between days" reading (new flag) |
+| 10 | [link.amazon/B00TEST12](https://link.amazon/B00TEST12) | still the 404 "You've clicked on an invalid URL" page; the site now reports it resolves to `amzlinks.in` (new flag) |
+
+### Something the earlier sessions could not do, and this one did
+
+`curl` from the build sandbox cannot reach non-allowlisted hosts (`HTTP 000` — exactly what the
+earlier sessions recorded), but this session's page-fetch tool **can** read these pages. That is how
+the price, rating and availability values below are now *observable* — and it is also why a new
+decision is needed rather than a new value: Amazon's policies permit showing a price only when
+"we serve the link in which that price and availability data are displayed", or via Creators API /
+PA-API. A fetched page is neither. So the observations are recorded as **evidence with a timestamp**
+(V-89…V-91, flag F-44), and the published tables keep the price blank, exactly as the contract
+requires. This distinction is the single most important thing on the new Decision Board.
