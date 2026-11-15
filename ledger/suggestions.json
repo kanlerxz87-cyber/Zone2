@@ -355,6 +355,40 @@
       "decision": "",
       "status": "awaiting owner decision",
       "owner": "owner"
+    },
+    {
+      "id": "SG-11",
+      "area": "Verification discipline",
+      "title": "How far should the verbatim-quotation rule be applied when ledger rows paraphrase an official source?",
+      "suggestion": "Quote an official source's wording verbatim wherever a row presents itself as quoting it, and label the repository's own measurements (like the 10-alphanumeric-character test) as repo observations. Implemented now on the two load-bearing rows (S24's register entry and evidence row E-05); this decision decides how far the same correction should go.",
+      "why": "Amazon's help page says \"ASIN is the 10-digit code that Amazon uses to denote specific products\" (S24, re-read live 2026-11-15), while the repo's core published surfaces carry '10-character' in 39 places (counted 2026-11-15 across ledger/, the generated pages/, the root dashboard HTML and assets/js/data.js; ledger/decisions_findings.json RF-01 counted 75 repo-wide). The substance is unchanged — the supplied 9-character tokens fail either test — but a reviewer checking a quotation against its source will not find '10-character' on the page. Audit item I-A was paper-closed by session 08789ab3 without editing the ledger; this suggestion is the implementation choice that record left to the owner.",
+      "evidence": [
+        "S24"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Rewrite every '10-character' mention repo-wide now",
+          "tradeoff": "Most consistent result; touches generated pages across several namespaces, so every generator must re-run and the diff is large."
+        },
+        {
+          "id": "B",
+          "label": "Fix the load-bearing rows now; queue the rest under this decision",
+          "tradeoff": "S24's register entry and E-05 are corrected in the T44 change; remaining rows keep their meaning and stay reviewable. Recommended."
+        },
+        {
+          "id": "C",
+          "label": "Keep the paraphrase everywhere",
+          "tradeoff": "No diff, but the site keeps presenting '10-character' where its cited source says '10-digit', which weakens the verbatim-quote claim the project rests on."
+        }
+      ],
+      "recommended": "B",
+      "needs_answers": [
+        "Q-03"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
     }
   ]
 }
