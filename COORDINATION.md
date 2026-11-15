@@ -4662,3 +4662,39 @@ recorded rather than silently chosen.
 ### Coordination note — stale claim taken over
 
 **PR #70** (`arena/cffe745a-zone2`, "trendy marketing articles for organic traffic") has been `CONFLICTING` since 2026-11-15 11:55 UTC with no commits for more than 60 minutes, which meets the board's takeover rule. Its files (`marketing/articles/topic-air-fryer-vs-oven.html`, `marketing/articles/topic-worth-it.html`, `COORDINATION.md`) are **inside this task's `marketing/**` scope**. Before writing any article I will read that branch's content and, if it holds up, carry it into `marketing/data/editorial.json` through the generator rather than merging a hand-written file into a generated namespace (precedent: the PR #65 decision recorded in the T39 closing notes). The outcome is recorded below either way. Nothing from that branch is deleted from history.
+
+---
+
+## Closing record — T46 — `arena/3e0b3b4e-zone2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#104](https://github.com/kanlerxz87-cyber/Zone2/pull/104)** — `arena/3e0b3b4e-zone2` → `main` |
+| Task | The discovery review (17 findings / 10 questions / 14 suggestions), the generated machine-readable head layer, the measurement design, and the gate that keeps all three honest |
+| Delivered | `discovery/**` (6 pages) · `docs/discovery-t40.json` · `docs/discovery-t40-sources.json` (S43–S59, each with the quoted text relied on) · `docs/measurement-t40.json` · `docs/design-brief-t40.md` · `tools/{build_discovery,build_measurement,build_meta,page_meta,validate_discovery}.py` · 5 additive CI steps · README structure · EXECUTIVE_SUMMARY addendum |
+| Explicitly NOT changed | every product value, every specification row, `ledger/**`, `marketing/**`, `decisions/**`, `journal/**`, `pages/**`, the five companion namespaces, and every existing gate's rule |
+| Gates on the final tree | `validate_data` 0 errors · `audit_site` 5×PASS · 9 generator `--check`s clean · `validate_decisions` clean · `validate_discovery` clean · `tests/test_pipeline.py` 15/15 · **all 29 CI `run:` steps replayed locally, exit 0** |
+| Gate proven to fail | 11 injected defect classes caught, 2 of them **added because the first version of the gate let them through** (a too-permissive price rule where "checkout" satisfied the program-context exception, and a stale-output test that had not actually executed). Both fixed and re-tested. |
+| Sources re-read live (2026-11-15) | Amazon OA §4, §5 · Participation Requirements §2(b), §6(t), 6(v), 6(w), 6(y) · IP Licence §1(a), §2(h), §2(k) · Commission Income Statement §2(e) · Google Search Central: spam policies, outbound-link qualification, review snippets, helpful content, AI content, structured-data policies · FTC Disclosures 101 |
+| Renumbering trail | Claimed **T40** → **T44** (T40–T43 taken by merged sessions) → **T46** (PRs #101 and #103 both claimed T44). Nothing another session wrote was renamed or removed. |
+
+### Change requests (logged, not executed — files owned by other sessions)
+
+| # | Request | Owner of record | Why it is a request, not an edit |
+|---|---|---|---|
+| **CR-T46-1** | `tools/build_sitemap.py` submits all five preserved prototype namespaces (`northstar/`, `zone2/`, `research-hub/`, `affiliate-lab/`, `revalidation/`). They restate one publisher's product research six times; submitting all six presents a search engine with a duplicated surface, which is the pattern Google's spam policy names as scaled content abuse and the site-reputation policy treats separately. Suggest an explicit exclusion list with its reason in the docstring, the same way the file already documents `<lastmod>`. | `arena/156aae86-zone2` (T43) | This session wrote a competing generator that excluded them; on rebase the **merged one was judged better** (it correctly omits `<priority>`/`<lastmod>` rather than inventing them) and this session's duplicate was **discarded**. A one-line disagreement does not justify overwriting merged work. |
+| **CR-T46-2** | The board needs a reservation step. Five renumberings in two days (this session alone renumbered twice) show that an append-only board cannot hand out a task id safely when four sessions claim in one hour. Suggest a one-line "reserved ids" block at the top of this file, claimed in the same push as the work. | board owner (every session) | `COORDINATION.md` is shared; a structural change to its format should not be made unilaterally by one session. |
+| **CR-T46-3** | Participation Requirements §5 (no use of Special Links or Program Content to train models without express prior written approval) still has no rule id in `ledger/compliance.json` (R-01…R-31). Carried open from `docs/design-prompt-suggestions.md` IR-04; not closed since. | `ledger/compliance.json` owner | `ledger/**` is out of this task's scope, and ids F-39…F-43 are held by other sessions. |
+| **CR-T46-4** | The IP Licence §2(k) text disclaimer is required wherever Amazon-sourced text is displayed and **no page carries it** (`DG-14`). The fix is one verbatim sentence on the pages that quote listing text; `DS-14` proposes it. | needs a recorded owner decision first | The suggestion must be decided before it is implemented — that is this project's own rule, and this session will not make an owner decision on the owner's behalf. |
+
+### The two defects found but deliberately not fixed
+
+1. **`DG-14` — the missing §2(k) disclaimer.** Documented with the exact required wording in the source register, published as `DS-14`, left unbuilt because a suggestion is not implemented until the owner records a choice. If the reach of that clause is wrong, the cost of having added the sentence is one line of text; the cost of not adding it is a documented licence gap on every page that quotes a listing.
+2. **`DG-13` — the Operating Agreement's restriction on public commentary.** Published as question `DQ-09`, never as a finding of breach. The site argues about the Agreement on most pages; whether that is a "public communication with respect to this Agreement" is a legal judgement this project is not entitled to make, and the honest place for it is a question for the owner.
+
+### What this session learned, for whoever picks up the board
+
+1. **A duplicate-solution conflict is the most likely merge outcome on this repository, and the merged version should usually win.** Two sessions wrote a sitemap generator within the same hour. The right move was to read both, keep the better one, discard the other, and log the one substantive disagreement — not to merge both, and not to argue for one's own.
+2. **A gate that cannot fail is worse than no gate.** Two of the eleven defects this session injected passed the first version of its own validator. Both were real: the repo-wide price rule's `\w*` suffix let `"checkout"` satisfy its `check` exception, and the stale-output check silently did not execute. Writing the gate and *then* attacking it is the only way to know it works.
+3. **A prose count is a data value.** A phrase in the executive summary — "17 sources" — collided with `audit_site`'s ledger-count rule and failed the build. The count was true (17 discovery sources) but ambiguous against a register that holds 42. Reworded rather than "fixed" by loosening the audit.
+4. **Generators that own one page and a layer that owns every page will always fight.** `tools/page_meta.py` (one definition, imported by every generator) is the same pattern `tools/flag_state.py` already established for the open-flag count. The generalisation is worth remembering: when two writers disagree, the fix is one predicate, not a merge order.
