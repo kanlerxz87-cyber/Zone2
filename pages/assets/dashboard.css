@@ -20,8 +20,12 @@
 
 /* ---- Design tokens ------------------------------------------------------- */
 /* Self-hosted fonts (SIL OFL, bundled in assets/fonts/ — no third-party request).
-   Paths are stylesheet-relative: url("../../assets/fonts/…") from assets/css/ resolves to
-   assets/fonts/ (repair first merged in PR #89 — kept). */
+   The three font references below are relative to this stylesheet's own directory, so
+   ../fonts/ from assets/css/ lands in assets/fonts/ (repair first merged in PR #89 — kept).
+   Note on this comment: do not spell a path reference in prose here. The gate
+   tools/check_css_urls.py resolves every reference it finds in a stylesheet, including one
+   written inside a comment, and an example like that reads as a missing file — which is how
+   main went red on 2026-11-15. Say what it resolves to instead of showing it. */
 @font-face {
   font-family: "Fraunces";
   src: url("../../assets/fonts/fraunces-latin-full-normal.woff2") format("woff2");
@@ -162,6 +166,14 @@ img { max-width: 100%; }
 }
 .nav a.nav-quiet:hover { color: #fff; border-color: rgba(255, 255, 255, .4); background: transparent; }
 .nav a.nav-quiet.active { color: #fff; background: var(--accent); border-color: transparent; }
+
+/* Grouped front-door nav (T42): a reader path and an operator path, one menu, no new stylesheet. */
+.nav-group { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+.nav-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: #6f8199; padding: 0 8px 0 14px; white-space: nowrap;
+}
+.nav-group + .nav-group { border-left: 1px solid var(--dark-line); margin-left: 8px; }
 
 /* Mobile nav: checkbox hack, no JS dependency */
 .nav-toggle-input { position: absolute; opacity: 0; pointer-events: none; }

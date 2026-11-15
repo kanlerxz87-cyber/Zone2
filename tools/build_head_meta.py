@@ -180,20 +180,21 @@ def fix_heads() -> tuple[int, list[str]]:
             rel_of(p), title=title, description=desc,
             site_name="Zone2 Journal" if is_journal else "Zone2",
             page_type="article" if is_journal and not rel.endswith("index.html") else "website")
-        anchor = None
-        for pat in (r'<meta name="robots"[^>]*>\n', r'<link rel="canonical"[^>]*>\n',
-                    r'<meta name="description"[^>]*>\n', r'<title>.*?</title>\n'):
-            m = re.search(pat, text, re.S)
-            if m:
-                anchor = m
-                break
+        # Insert immediately before </head>, on its own line. An earlier revision anchored on the
+        # first of several candidate tags, which let a `<link rel="icon">` line end up split in half —
+        # visible in the rendered page, and the kind of defect this repository now gates against.
+        anchor = re.search(r'</head>', text)
         if anchor is None:
-            skipped.append(f"{rel}: no <title> or description in the head to anchor on")
+            skipped.append(f"{rel}: no </head> to insert before — left alone rather than guessed")
             continue
         # Replace a stray half-block (a canonical with no og:* set) instead of stacking a second one.
         text = re.sub(r'(?:<link rel="canonical"[^>]*>\n(?:<meta property="og:[^>]*>\n?){0,5})+',
                       '', text, count=1) if h.canonical and h.canonical != url_for(rel_of(p)) else text
-        p.write_text(text[:anchor.end()] + block + "\n" + text[anchor.end():], encoding="utf-8")
+        insert = block + "\n"
+        # keep the closing tag on its own line
+        head_close = anchor.start()
+        pre = text[:head_close].rstrip(" \t")
+        p.write_text(pre + "\n" + insert + text[head_close:], encoding="utf-8")
         changed += 1
     return changed, skipped
 

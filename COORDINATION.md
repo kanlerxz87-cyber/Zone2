@@ -4625,3 +4625,52 @@ value; no `og:image` while Q-10 is open.
 | Scope extensions beyond the claim, recorded here | `assets/css/style.css` (3 additive nav rules + their mobile variant), `.github/workflows/pages.yml` (one CI step), `design-notes.html` (one footer citation), `tools/build_site.py` / `build_decisions.py` / `build_root_views.py` / `build_summary.py` (head template only) |
 | Verification | 37 dated checks in `docs/verification-5d6d2254.md`, each with the official URL; live fetches on 2026-11-15 of the three short links, the three `dp/<code>` controls, three manufacturer pages, the Operating Agreement and Table 1 |
 | Gates | full CI replay locally (all `run:` steps of `.github/workflows/pages.yml`, including the two this session's lineage added), plus `tools/seo_audit.py` and `tools/build_head_meta.py --audit`: green |
+
+### Hand-off notes from `5d6d2254` (T42) written after the merge, because they are only true of `main` after it
+
+**Red trunk, found and fixed here while merging (2026-15:40Z).** Merging `origin/main` into this branch and
+replaying the workflow showed step *"Every stylesheet url() resolves to a file"* failing 3 times:
+`tools/check_css_urls.py` (from `f8e18ca8`, PR #108) resolves **every** `url()` it finds in a stylesheet,
+including the one written as a prose example inside the `@font-face` comment that PR #89 left in
+`assets/css/style.css` — `url("../fonts/…")`, whose target is a literal ellipsis. So the gate was failing on
+a sentence, and `main` was red: the two most recent `Build, verify and deploy` runs on `main`
+(`43719991284`, `43719787656`) are `completed · failure`, while `pages build and deployment` still succeeded,
+which means a broken-checks trunk was still shipping a site. Fix here: the comment now *describes* what the
+paths resolve to instead of showing one, and the two vendored copies (`pages/assets/dashboard.css`,
+`decisions/assets/dashboard.css`) inherit it from `tools/build_site.py` / `tools/build_decisions.py`
+regeneration. `16 stylesheets · 9 local url() references · 0 broken`; every reference re-checked by hand
+against the files on disk. **Two open PRs carry the same diagnosis and should be treated as the authority on
+which fix lands**: #115 (`3e0b3b4e`) — comment-only repair of the same three stylesheets — and #116
+(`3e0b3b4e`) — making the gate skip comments. Whichever of #115/#116/this PR integrates first wins; the
+other two should reduce to no-op, and if #116 lands, this comment rephrase stays useful because a reference
+in prose is still a misleading thing to put in a stylesheet. **The recurrence rule for everyone:** do not
+write an example path inside a scanned file; and a gate added to close one defect class should be
+negative-tested against *prose*, not only against defects — #108 tested "append a `url()` to any stylesheet"
+and that passed, but nobody tested "mention a `url()` in a comment".
+
+**A third implementation of the same head-metadata idea is open.** PR #104 (`3e0b3b4e`) adds
+`tools/page_meta.py` + `tools/build_meta.py` and edits `index.html`, `products.html`, `sources.html`,
+`summary.html`, `verification.html`, `tools/build_root_views.py`, `tools/build_summary.py` and
+`.github/workflows/pages.yml` — overlapping this session's `tools/head_meta.py`,
+`tools/build_head_meta.py` and the same four generators. Recommendation to whoever integrates: keep
+**one** of the two (this branch's `--audit` gate is already wired into CI and its canonical form matches
+`tools/build_sitemap.py`'s special case for the root `index.html`, which is also what
+`tools/seo_audit.py`'s D7 expects — D7's `index.html -> …/index.html` note disappeared once canonical and
+sitemap agreed), and reduce the other to the pages it genuinely adds.
+
+**Sitemap collision, resolved by adopting theirs.** This session also wrote a `tools/build_sitemap.py`
+(77 URLs: root + `pages/` + `journal/` + `decisions/` + `marketing/`, prototypes excluded by rule).
+`156aae86`'s version, which had reached `main` first, derives **all 121** published pages with a documented
+exclusion list. Mine was withdrawn — `git checkout --theirs` on the generator and on `sitemap.xml`, then
+`python3 tools/build_sitemap.py` to regenerate — because two generators writing one file is a drift
+machine, and their rule ("present in the tree is reachable at a URL") is the defensible one. Consequence
+worth knowing: `docs/*.md` and the companion prototypes are now advertised in the sitemap. That is theirs
+to defend or narrow; this session's narrower list is recorded here in case the owner prefers it, and
+`docs/verification-5d6d2254.md` D-5 carries the measurement that started it.
+
+**Landing page, reconciled rather than overwritten.** `bbcc741f` (PR #109) re-landed a hero that leads with
+the platform and an audit link; this session's change leads the same page with the reader's decision. The
+merge keeps main's hero copy and headline, adds `Which one to buy` → `marketing/buying-guide.html` as the
+primary action (with `Read the articles` and `Meet the three products` preserved), wraps main's fourteen
+nav targets in the two labelled groups, and restores the playbook link in the footer. No session's link was
+dropped; `tools/audit_site.py`'s `namespaces` and `debris` checks both pass on the result.

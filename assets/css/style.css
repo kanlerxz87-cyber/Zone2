@@ -17,8 +17,12 @@
 
 /* ---- Design tokens ------------------------------------------------------- */
 /* Self-hosted fonts (SIL OFL, bundled in assets/fonts/ — no third-party request).
-   Paths are stylesheet-relative: url("../fonts/…") from assets/css/ resolves to
-   assets/fonts/ (repair first merged in PR #89 — kept). */
+   The three font references below are relative to this stylesheet's own directory, so
+   ../fonts/ from assets/css/ lands in assets/fonts/ (repair first merged in PR #89 — kept).
+   Note on this comment: do not spell a path reference in prose here. The gate
+   tools/check_css_urls.py resolves every reference it finds in a stylesheet, including one
+   written inside a comment, and an example like that reads as a missing file — which is how
+   main went red on 2026-11-15. Say what it resolves to instead of showing it. */
 @font-face {
   font-family: "Fraunces";
   src: url("../fonts/fraunces-latin-full-normal.woff2") format("woff2");

@@ -28,9 +28,18 @@ BASE = "https://kanlerxz87-cyber.github.io/Zone2/"
 
 
 def url_for(rel_path: str) -> str:
-    """The canonical URL of a published page, from its repository-relative path."""
+    """The canonical URL of a published page, from its repository-relative path.
+
+    One special case, shared with the sitemap generator: the repository's root `index.html` is canonical
+    at the bare site URL (`…/Zone2/`), because that is the URL `tools/build_sitemap.py` advertises and the
+    one GitHub Pages serves at the root. A canonical that disagrees with the indexed URL is the defect
+    `tools/seo_audit.py` reports as D7. Nested `index.html` files keep their file form, exactly as the
+    sitemap lists them.
+    """
     rel = rel_path.strip("/")
-    return BASE + (rel if rel else "index.html")
+    if rel in ("", "index.html"):
+        return BASE
+    return BASE + rel
 
 
 def head_block(rel_path: str, *, title: str, description: str,
