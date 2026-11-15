@@ -1,11 +1,27 @@
 # Review note — session `bfb20351`
 
-**Status:** in progress. This note tracks a narrow accuracy correction discovered during the requested repository and live-site review.
+**Task:** T41 — correct an unsupported operator-location claim in the public Questions register.
 
-**Scope:** `ledger/questions.json` (canonical question data), generated `pages/questions.html`, `COORDINATION.md` (append-only claim and audit record), and this review note. No product facts, marketing copy, navigation, or another session's files are in scope.
+## Finding and correction
 
-## Finding
+The published Q-01 entry said, “The operator location in the brief is Osaka, Japan.” Q-07 repeated that assertion. The user brief contains no operator location; neither claim had a source. Both statements were removed from the canonical dataset (`ledger/questions.json`), and the generated public page was rebuilt (`pages/questions.html`). The register still says the brief is in English and preserves the independently sourced statement that the Associates country selector lists Japan. No location was substituted or inferred. Q-01 remains open pending the owner’s marketplace/account information.
 
-The published Q-01 entry says, “The operator location in the brief is Osaka, Japan.” The user brief does not state an operator location. That sentence is unsupported and conflicts with the session context available to this agent; no personal location is needed to answer the marketplace question. Remove the sentence rather than substitute another location. Keep the independently sourced fact that the Associates country selector lists Japan, cited to S01, and keep the marketplace/account question open.
+The retained marketplace facts link to the official Associates Operating Agreement and the three Amazon destination listings in the Q-01 row:
 
-**Review state:** pending canonical-data correction, regeneration, gates, PR, and deployment verification.
+- [Amazon Associates Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) — source S01 for the observed country selector.
+- [Amazon destination for supplied link 1](https://www.amazon.com/dp/B0CDY277D3) — source S19.
+- [Amazon destination for supplied link 2](https://www.amazon.com/dp/B09B7SB46R) — source S20.
+- [Amazon destination for supplied link 3](https://www.amazon.com/dp/B08DKYBTPH) — source S21.
+
+## Verification
+
+After rebuilding, the public register and canonical data contain no Osaka/operator-location claim. The Q-01 retained source links are unchanged. All local gates passed:
+
+- `tools/validate_data.py`: 0 errors, 0 warnings; 1,154 internal links checked; 340 ledger rows, 42 sources, 38 flags.
+- `tests/test_pipeline.py`: 15/15.
+- `tools/audit_site.py`: 116 published pages; fragments, sourced rows, prose counts, namespaces and disclosure all pass.
+- `tools/build_site.py --check`: 39 built, 0 drift.
+- `tools/build_root_views.py --check`, `tools/build_summary.py --check`, `tools/build_decisions.py --check`, `tools/validate_decisions.py`: all pass; 16 questions remain open and 10 suggestions remain awaiting owner choice.
+- `tools/build_marketing.py --check`, marketing verifier, revalidation builder/verifier, research-hub builder/verifier, affiliate-lab verifier, and JavaScript syntax checks: all pass.
+
+**Status:** correction implemented and locally verified. Live deployment confirmation is recorded after the integration PR/deploy.

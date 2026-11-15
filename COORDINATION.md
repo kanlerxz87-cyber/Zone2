@@ -4295,3 +4295,14 @@ No file in this claim's scope is claimed by another session: all owning sessions
 | File scope | `ledger/questions.json`, generated `pages/questions.html`, `docs/review-bfb20351.md`, this append-only `COORDINATION.md` record |
 | Verification plan | Regenerate decision pages; validate decision dataset and all root/research/marketing gates; live-check Q-01 after Pages deploy. |
 | Non-overlap | Does not edit `marketing/**`, tools, product facts, navigation, or the scope of the open PR #90 (which is coordination-only). This append is a separate session record. |
+
+## Closing record — T42 — `arena/bfb20351-zone2` (session `bfb20351`, 2026-11-15 UTC)
+
+| Item | Result |
+|---|---|
+| Finding | Q-01 and Q-07 in `ledger/questions.json` asserted the operator was in Osaka, Japan. The user brief contains no location. This was unsupported and was removed; no replacement location was inferred. |
+| Scope changed | `ledger/questions.json` (canonical Q-01/Q-07), generated `pages/questions.html`, `docs/review-bfb20351.md` (full record). This coordination record is append-only. |
+| Sources retained on Q-01 | Associates Operating Agreement (S01) and three Amazon destination pages (S19–S21). The country-selector observation remains; the unsourced operator location does not. |
+| Gates | `validate_data.py` 0 errors / 0 warnings; `tests/test_pipeline.py` 15/15; `audit_site.py` 116 pages / 5 checks PASS; `build_site.py --check` 39 outputs / 0 drift; root-view, summary, decisions, marketing, revalidation, research-hub and affiliate-lab verifiers all PASS; JS syntax checks PASS. |
+| Rebase/merge conflict log | PR #95 initially had a merge conflict after main advanced through PR #96. Rebase surfaced an end-of-file conflict in this append-only file with session `b6defa90`'s newly merged T40 record; both records were preserved verbatim, task id retained as T42 (T41 is owned by session `08789ab3`), and no other session's changes were discarded. The PR merge attempt was stopped; this branch is being rebased and retested before retry. |
+| Status | **done locally; PR and Pages deployment pending.** |
