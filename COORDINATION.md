@@ -4576,3 +4576,38 @@ describes, one level up.
 | Conflicts survived | Two rebase rounds against fast-moving `main` (PRs #90, #94, #97–#103, #106–#108, #111 merged during the task). Board conflicts resolved keeping both sides (append-only). `index.html` conflicts resolved in favour of this task's rewrite (superset of the corruption fixes others landed), with main's favicon link, `release/` and `audit/` footer links re-applied onto the new IA. |
 | Handoff request | To `b6defa90`: drop the index.html debris subtask from your T40 claim (superseded by this task); keep `EXECUTIVE_SUMMARY.md` + docs. To the board owner: the `cancel-in-progress: true` concurrency issue (CR-T41-1) cancelled 3 more runs today — the recommendation stands. |
 | Owner-open items | Unchanged: F-01…F-03 (confirm ASINs), F-05 (Creators API), F-07/F-24 (Associates tag) — the only blockers to the earning machinery; plus the T46 design suggestions and SG-06 awaiting an owner choice. |
+
+
+| PR | Opened from `arena/08789ab3-zone2` → `main`; link and merge result recorded in the follow-up closing line below |
+
+## Session claim — `arena/343bc959-zone2` (session `343bc959`, 2026-11-15 UTC)
+
+**Claim:** `343bc959-G1` — two search-intent topic guides in the generated marketing set ("air fryer vs
+your oven" and "are air fryers worth it"), delivered the T39 way (data in `marketing/data/editorial.json`,
+rendered by `tools/build_marketing.py`, gates re-run), plus derived-count fixes for the guide-count prose
+the new rows make stale. **Takeover note (60-minute rule):** the stale PR #70 (session `cffe745a`, last
+commit 11:55 UTC, CONFLICTING) was closed as superseded by T41 before this claim; its S3 idea — trendy,
+search-intent articles for organic traffic — is what is being delivered here, through the generated
+pipeline instead of hand-written HTML, and its root `suggestions.html`/`questions.html` duplicates are
+**not** restored (canonical T29/T30 pages live at `pages/suggestions.html`, `pages/questions.html`).
+
+**Board state at claim:** `main` = `d887ae7` (PRs #89/#91/#92/#94 merged; font paths repaired; T40/T41
+verification records merged). Open PRs and their scopes: **#90** (`e4e7d4b2`, `COORDINATION.md` only),
+**#93** (`86bb886d`, `COORDINATION.md`, `README.md`, `flagged.html`, `review-2026-11-15.html`,
+`sitemap.xml`), **#95** (`bfb20351`, `COORDINATION.md`, `docs/review-bfb20351.md`, `ledger/questions.json`,
+`pages/questions.html`). None touches `marketing/**` or `tools/build_marketing.py`.
+
+**File scope (non-overlapping with all three open PRs):** `marketing/data/editorial.json`,
+`tools/build_marketing.py` (derived-count fixes only), regenerated `marketing/**` outputs, and this
+append-only record. Not touched: `ledger/**`, `pages/**`, `decisions/**`, `docs/**`, root `*.html`,
+`tools/*` other than `build_marketing.py`, `research-hub/**`, `zone2/**`, `affiliate-lab/**`,
+`revalidation/**`, `northstar/**`, `journal/**`.
+
+**Why this scope:** the brief asks for catchy, trendy articles and topics that earn organic traffic. The
+generated set covers six guide angles but not the two highest-volume phrasings in the niche — "air fryer
+vs oven" and "are air fryers worth it" — and the trending queue itself carries an unanswered "Does an air
+fryer cost less to run than an oven?" row. Both new guides are written against `marketing/data/facts.json`
+rows only (M1–M6 sources); anything not on an official page is a labelled editorial take or a published
+blank. Counts typed in prose ("Six guides") are derived or reworded in the same commit.
+
+**Status:** claimed → in progress.
