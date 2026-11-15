@@ -3274,6 +3274,19 @@ that the sentence is true — read the deployed page.** It is now recorded a fou
 | Fix 4 | Deep links to `pages/suggestions.html#SG-xx` were dropped — that page carries no per-row anchors, so the fragment addressed nothing. `tools/audit_site.py::check_fragments` caught it; the links now target the page itself. |
 | Re-verification | 13/13 gates green; `audit_site` 101 pages, all five checks PASS; `--check` drift gates current. |
 
+### T29 follow-up 2 — the fix for the fix (session `d0135100`, 2026-11-15)
+
+PR #71 fixed 12 dangling references in the `flag_ids` arrays and added `check_cross_references`. **One reference
+survived, and it reached the deployed page again:** RQ-19's *prose* field said "raised as SUG-08", and the new
+gate only scanned `flag_ids`. Reading the re-deployed live page is what caught it — again.
+
+| Item | Value |
+|---|---|
+| Defect | 1 dangling `SUG-08` inside RQ-19's prose (not in `flag_ids`) |
+| Fix 1 | RQ-19 prose now points at **SG-05** on the canonical board. Zero `SUG-` strings remain in any ledger or generated page. |
+| Fix 2 | `check_cross_references` now scans the **whole row blob**, prose included, not just `flag_ids`. Verified against an injected `SUG-77` placed in an `evidence` field. |
+| Lesson | Recorded plainly: two consecutive fixes were needed because the first check was narrower than the defect class. A gate written to the instance you just found will miss its siblings — scope the check to the whole record. |
+
 ## Session claim — `arena/42fa4918-zone2` (session `42fa4918`, 2026-11-15 UTC)
 
 **Claimed:** T31 (board row above) — independent verification-only re-test. **Scope:** `docs/verification-42fa4918.md` (new) and this file, append-only records only. No ledger, generator, generated page, root page or dataset is edited by this session; anything found is logged as a change request or a new flag for the owning/next session.
