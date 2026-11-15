@@ -1,0 +1,360 @@
+{
+  "note": "Decision board. Each suggestion lists the options, a recommendation and the evidence. NOTHING here is implemented until the owner records a choice in the `decision` field (or tells the agent the IDs). Recommendations are judgments built on the cited official sources; they are not program facts. Suggestions that depend on a missing answer name the question IDs in `needs_answers` (see ledger/questions.json).",
+  "as_of": "2026-11-15",
+  "suggestions": [
+    {
+      "id": "SG-01",
+      "area": "Eligibility and launch order",
+      "title": "Launch the public site before, or after, the Associates account is approved?",
+      "suggestion": "Publish the research pages now, but add no live affiliate links until an Associates account is approved and Special Links are generated for it.",
+      "why": "Amazon requires at least three qualifying sales within 180 days before the application is reviewed, and personal orders do not count. Special Links must use the assigned Associates ID. The supplied short links carry per-link btn_ref tokens, not an Associate tag (F-24).",
+      "evidence": [
+        "S23",
+        "S02"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Research-only launch; links added after approval",
+          "tradeoff": "Safest. No affiliate revenue at launch and no compliance exposure from untagged links."
+        },
+        {
+          "id": "B",
+          "label": "Launch with the supplied short links now",
+          "tradeoff": "Not recommended. Short links are not Special Links with the owner's Associates ID, and the owner's tag is not on them (F-24)."
+        },
+        {
+          "id": "C",
+          "label": "Launch with placeholder tagged links that switch on after approval",
+          "tradeoff": "Workable, but the placeholder must never resolve to a live affiliate link before approval."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-01",
+        "Q-02",
+        "Q-03",
+        "Q-04"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-02",
+      "area": "Product scope",
+      "title": "Which products and how wide a niche?",
+      "suggestion": "Start with the three supplied air-fryer products as one comparison set. Widen to a niche only after authorised demand data is connected.",
+      "why": "The three destination pages are all air fryers or air-fryer ovens and share the breadcrumb Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers (S19–S21). No authorised demand or sales-rank data is connected (ledger niches.json).",
+      "evidence": [
+        "S19",
+        "S20",
+        "S21",
+        "S07"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "The three supplied products only",
+          "tradeoff": "Smallest verified scope. Narrow search demand; can grow later."
+        },
+        {
+          "id": "B",
+          "label": "Countertop air fryers and air-fryer ovens",
+          "tradeoff": "Larger scope, needs search and sales data that is not yet connected. Creators API search needs 10 qualifying sales in 30 days (S07)."
+        },
+        {
+          "id": "C",
+          "label": "Broad home kitchen",
+          "tradeoff": "Not recommended now. Many unrelated categories; no evidence yet for any of them."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-05",
+        "Q-13"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-03",
+      "area": "Pricing analysis (module M-03)",
+      "title": "Keep a pricing module at all?",
+      "suggestion": "Remove price tracking and price alerts from the product scope. Show price only when Amazon serves it on the link or when a dated Creators API response supports it.",
+      "why": "Participation Requirements Section 6(y): the site must not have price tracking and/or price alerting functionality unless Amazon agrees otherwise (ledger R-22). Price and availability may only be shown under the conditions in R-04.",
+      "evidence": [
+        "S02"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Drop price tracking and alerts from scope",
+          "tradeoff": "Compliant by default. Loses a feature the original brief named."
+        },
+        {
+          "id": "B",
+          "label": "Keep static, dated price snapshots from the Creators API only",
+          "tradeoff": "Needs API eligibility (Q-02), and still must not track or alert on price."
+        },
+        {
+          "id": "C",
+          "label": "Ask Amazon for written agreement first",
+          "tradeoff": "Only route to a tracking feature. Timing and outcome unknown."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-09"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-04",
+      "area": "Article topics (content engine)",
+      "title": "Which article formats go first?",
+      "suggestion": "Lead with evergreen buying guides and a how-to format that makes no product claims. Add product comparisons only when every spec in them has an official source.",
+      "why": "Trend and demand data are not connected, so no topic can be called trending on evidence. Product claims must be accurate and not misleading (R-06, R-21).",
+      "evidence": [
+        "S02",
+        "S10"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Buying guide: air fryer vs air-fryer oven for a household",
+          "tradeoff": "Evergreen. Needs spec sources for each product."
+        },
+        {
+          "id": "B",
+          "label": "Head-to-head comparison of the three products",
+          "tradeoff": "Strongest buyer intent. Blocked until the three ASINs and specs are confirmed (Q-03)."
+        },
+        {
+          "id": "C",
+          "label": "How-to articles (cooking method, cleaning, safety) with no product claims",
+          "tradeoff": "Lowest compliance risk. Weaker direct commission link."
+        }
+      ],
+      "recommended": "A + C first, then B",
+      "needs_answers": [
+        "Q-03",
+        "Q-13"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-05",
+      "area": "Editorial voice and testing",
+      "title": "Can the site say the products were tested?",
+      "suggestion": "Use data-led wording only (\"the manufacturer lists…\", \"the destination page shows…\") until a person has used the products and kept dated test notes.",
+      "why": "Claims that a product was used or tested are only allowed when true, and the repo has no test records. Unsupported claims fall under R-06 and R-21.",
+      "evidence": [
+        "S02",
+        "S10"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Data-led wording only",
+          "tradeoff": "Honest and compliant. Reads less personal."
+        },
+        {
+          "id": "B",
+          "label": "Hands-on reviews with dated test notes",
+          "tradeoff": "Best editorial value. Requires a real tester and logged results (Q-11)."
+        },
+        {
+          "id": "C",
+          "label": "Both, labelled per article",
+          "tradeoff": "Flexible. Each article must state which kind it is."
+        }
+      ],
+      "recommended": "A now; B or C only with test records",
+      "needs_answers": [
+        "Q-11"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-06",
+      "area": "Design direction",
+      "title": "What should the public site look like?",
+      "suggestion": "Make the public site an editorial guide (long-form pages, real data tables, visible sources and an updated date). Keep the dashboard for the owner's review. Use Amazon product images only if Q-10 is cleared.",
+      "why": "The brief asks for a polished marketing site that does not read like generic AI output. Concrete signals that help: a named editor, visible sources, dated updates, and no unsourced superlatives. Image use is limited by Program Content rules (R-31).",
+      "evidence": [
+        "S02",
+        "S10"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Editorial magazine style for public pages; dashboard for owner",
+          "tradeoff": "Matches the brief. Two visual systems to maintain."
+        },
+        {
+          "id": "B",
+          "label": "One dashboard-style look everywhere",
+          "tradeoff": "Simplest. Reads more like a tool than a marketing site."
+        },
+        {
+          "id": "C",
+          "label": "Minimal product-guide look",
+          "tradeoff": "Clean and fast. Less distinctive."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-06",
+        "Q-07",
+        "Q-10",
+        "Q-16"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-07",
+      "area": "Ratings and reviews",
+      "title": "Show star ratings and review counts?",
+      "suggestion": "Show none until API-sourced data is available, then show only what the API returns, with its date.",
+      "why": "Participation Requirements Section 6(t): reviews and star ratings may not be displayed unless obtained through the Creators API or PA-API. The Creators API needs 10 qualifying sales in 30 days (S07).",
+      "evidence": [
+        "S02",
+        "S07"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "No ratings or review counts",
+          "tradeoff": "Compliant. Loses a common trust signal."
+        },
+        {
+          "id": "B",
+          "label": "API-sourced ratings with date stamp, after eligibility",
+          "tradeoff": "Best trust signal. Depends on Q-02."
+        }
+      ],
+      "recommended": "A now, B after eligibility",
+      "needs_answers": [
+        "Q-02",
+        "Q-12"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-08",
+      "area": "Commission model",
+      "title": "Which commission band should the revenue model use?",
+      "suggestion": "Model revenue with a range that covers the candidate Table 1 bands, and mark the chosen band as unconfirmed until Amazon's category for each ASIN is confirmed.",
+      "why": "Table 1 lists Kitchen at 4.50% and Home at 3.00%; the All Other default is 4.00% (S04). The destination breadcrumb reads Home & Kitchen, which does not by itself name the Table 1 band. Commission is paid only on qualifying purchases and is never guaranteed (R-19).",
+      "evidence": [
+        "S04",
+        "S19",
+        "S01"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Range from 3.00% to 4.50%, band unconfirmed",
+          "tradeoff": "Honest. Wider range; no single headline number."
+        },
+        {
+          "id": "B",
+          "label": "Use Kitchen 4.50% as the planning value",
+          "tradeoff": "Plausible but unconfirmed for these ASINs. Would overstate income if the band differs."
+        },
+        {
+          "id": "C",
+          "label": "Wait for Amazon's confirmation before modelling",
+          "tradeoff": "Most accurate. Delays the revenue model."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-08"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-09",
+      "area": "Measurement",
+      "title": "How should clicks and conversions be tracked?",
+      "suggestion": "Use static campaign keys per page (sub-tags that never identify a visitor), and rely on Amazon's Associates reports for conversions.",
+      "why": "Sub-tags may monitor and optimise Special Links but must not be tied to an individual user (R-08). Associates reports are an official tool (S09).",
+      "evidence": [
+        "S02",
+        "S09"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Per-page static sub-tags plus Associates reports",
+          "tradeoff": "Compliant and simple. Coarse, page-level data only."
+        },
+        {
+          "id": "B",
+          "label": "Associates reports only",
+          "tradeoff": "Simplest. No per-page breakdown."
+        },
+        {
+          "id": "C",
+          "label": "Site analytics on top of A",
+          "tradeoff": "More insight. Needs a privacy and consent review before it is added (not researched here)."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-01",
+        "Q-02"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-10",
+      "area": "Decision process",
+      "title": "How are approved suggestions implemented?",
+      "suggestion": "Implement only what the owner has marked in the decision field, one batch at a time, each with its own commit and a rebuilt, checked site.",
+      "why": "The brief asks for a review step before any change. Batching keeps each change traceable to a recorded decision. The source (S22) is only the publishing mechanism: the live site is served by GitHub Pages, so each approved batch goes live on the Pages build.",
+      "evidence": [
+        "S22"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Owner marks each decision; agent implements that batch",
+          "tradeoff": "Clear audit trail. Needs the owner to respond."
+        },
+        {
+          "id": "B",
+          "label": "Owner approves in one pass per week",
+          "tradeoff": "Fewer rounds. Larger batches."
+        },
+        {
+          "id": "C",
+          "label": "Agent implements low-risk items without asking",
+          "tradeoff": "Not recommended for anything that touches compliance or money."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    }
+  ]
+}

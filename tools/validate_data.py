@@ -131,7 +131,7 @@ def _walk_rows(obj, path=""):
 
 def check_rows(report: Report, sources: dict[str, dict]) -> None:
     rows = 0
-    for name in ("products.json", "commission_table.json", "compliance.json", "flags.json", "modules.json", "verification.json"):
+    for name in ("products.json", "commission_table.json", "compliance.json", "flags.json", "modules.json", "verification.json", "suggestions.json", "questions.json"):
         doc = _load(name)
         for path, row in _walk_rows(doc):
             rows += 1
