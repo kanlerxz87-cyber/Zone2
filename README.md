@@ -12,6 +12,8 @@ anything unconfirmed is left blank and published on a Flagged for Review page ra
 
 <https://kanlerxz87-cyber.github.io/Zone2/> — GitHub Pages, served from the `main` branch root (`/`).
 
+Dated repository review (2026-11-15), with live re-checks and irregularities R86-01 to R86-08: <https://kanlerxz87-cyber.github.io/Zone2/review-2026-11-15.html>.
+
 ## Site structure
 
 ### Primary platform
@@ -57,7 +59,7 @@ blank + flag**: [findings hub](https://kanlerxz87-cyber.github.io/Zone2/pages/in
 [tracking](https://kanlerxz87-cyber.github.io/Zone2/pages/tracking.html) ·
 [content engine](https://kanlerxz87-cyber.github.io/Zone2/pages/content-engine.html) ·
 [architecture](https://kanlerxz87-cyber.github.io/Zone2/pages/architecture.html) ·
-[flagged for review (38 flags, F-01…F-38](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
+[flagged for review (38 flags, F-01…F-38)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
 
 All three counts are derived from `ledger/*.json` and held to the register by
 `tools/validate_data.py::check_published_counts`, so they cannot be typed wrong again.

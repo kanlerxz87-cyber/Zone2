@@ -2528,7 +2528,7 @@ tasks claimed by another session** and **no unclaimed open work** on the board.
 | Task ID | **T26** |
 | Title | Independent verification pass, replication of the `mhFallback` control to all three ASINs, defect sweep, final integration |
 | Owner | `arena/d3ce1c29-zone2` |
-| Status | in progress |
+| Status | done (PR and merge recorded below) |
 | File scope | `COORDINATION.md` (append-only), `ledger/**` (append new verification/sources rows), `docs/**` (new session note), and any file that must change to correct a defect this session proves |
 | Non-overlap | No other session is active. No file owned by another session is edited. |
 
@@ -4166,3 +4166,36 @@ root glob does not reach).
 | File scope | `review-2026-11-15.html` (new), `flagged.html` (one link paragraph), `README.md` (one link line and a malformed-bracket fix), `sitemap.xml` (one entry), `COORDINATION.md` (this record) |
 | Not touched | `assets/css/style.css`, `pages/assets/dashboard.css`, `tools/**`, `ledger/**`, `index.html`, and open PRs #70 and #89 (owned by other sessions; logged below, not edited) |
 | Status | in progress |
+
+### Session record — R86 — `86bb886d` (2026-11-15 UTC)
+
+**Sources read today** (each re-fetched 2026-11-15; links are the pages themselves):
+[Associates Central — ASIN help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) ·
+[Standard Commission Income Statement, Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) ·
+[Operating Agreement (Updated Oct 15, 2025)](https://affiliate-program.amazon.com/help/operating/agreement) ·
+[Program Policies (Updated Apr 14, 2026)](https://affiliate-program.amazon.com/help/operating/policies) ·
+[Google spam policies (contents read)](https://developers.google.com/search/docs/essentials/spam-policies) ·
+[W3C CSS Values 4 (`url-value` anchor)](https://www.w3.org/TR/css-values-4/#url-value) ·
+supplied links → [Amazon listing B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3), [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R), [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH) ·
+controls [B0CDY277D3 via link.amazon](https://link.amazon/B0CDY277D3), [B00TEST12](https://link.amazon/B00TEST12), [Zq3vK8mPw](https://link.amazon/Zq3vK8mPw) ·
+[GitHub Pages API](https://api.github.com/repos/kanlerxz87-cyber/Zone2/pages).
+
+**Verification performed:** the three supplied links resolve to the same three listings as the register; the
+breadcrumb is identical on all three; Table 1 bands read verbatim (Kitchen 4.50%, Home 3.00%, All Other 4.00%);
+both policy dates read; the valid-ASIN and unknown-code controls reproduced (404); a second random 9-character code
+returned 403 — so the "unknown code returns 404" wording is too strong (R86-01). The font defect was reproduced
+live (broken path 404; correct path serves WOFF2). All ten repository gates re-run green.
+
+**Published:** `review-2026-11-15.html` (new: executive summary, 14 dated re-check rows, irregularities R86-01…R86-08, links
+to the decision boards). `flagged.html` gains one link paragraph. `README.md` gains one link and a closing bracket
+(the malformed link text was fixed; no count changed). `sitemap.xml` gains one entry.
+
+**Irregularities flagged (for owner review, not blocking):** R86-01 control wording too strong · R86-02 landing "4.00%"
+KPI may be read as these products' rate (band unconfirmed: Kitchen 4.50% vs Home 3.00%, Q-08) · R86-03 the 404 control page is
+served from `amzlinks.in`, operator not confirmed · R86-04 self-hosted fonts 404 on every page (fix in open PR #89) ·
+R86-05 README link fixed · R86-06 three separate Flagged surfaces · R86-07 open PRs #70 (CONFLICTING) and #89 (mergeable)
+owned by other sessions · R86-08 board size (~400 KB) and stale header.
+
+**Not done, deliberately:** no ledger value, product price, rating, or commission band was added (none is confirmed by an
+official source); PR #89 and PR #70 were not merged or edited by this session; no landing-page wording was changed
+(R86-01/R86-02 are change requests for the owner).
