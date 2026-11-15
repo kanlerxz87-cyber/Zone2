@@ -3143,3 +3143,17 @@ without commits is **T27** (`0f44536f`, last activity 2026-11-14). It is older t
 
 **Scope notes.** No prices, ratings or performance figures were added. The three supplied short links are still not presented as confirmed ASINs; the pages say so (F-01, F-03, F-28 unchanged). No other session's file was edited except the additive changes listed above.
 
+
+### T29 — PR, merge and deploy (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#61** — https://github.com/kanlerxz87-cyber/Zone2/pull/61 — `arena/2499438c-zone2` → `main` |
+| PR check (`Build and verify`) | **pass** (run 43710132422) |
+| Merge | `gh pr merge 61 --merge` · 2026-11-15T11:42:15Z · merge commit `9f1e2ff3097b46f703cbe2233dbd9c2cbaf77229` |
+| Post-merge `Build, verify and deploy` on `main` | **success** (run 43710200460) |
+| Post-merge `pages build and deployment` | **success** (run 43710199820) |
+| Pages API after merge | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live check (fetched 2026-11-15) | https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html and https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html render the tables and source links |
+
+**Known display issue (not fixed in this task):** the eyebrow on every generated page reads "verified 2026-11-14" because the generator takes its date from `ledger/products.json` (`verified_utc`). The new pages were checked on 2026-11-15, but no value was changed to match that date. Board owner to decide whether the generator should show the date of the last source check instead.
