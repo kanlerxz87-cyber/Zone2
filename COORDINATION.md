@@ -3502,3 +3502,22 @@ cross-linked from the marketing set and executive summary.
 namespaces, disclosure) · `affiliate-lab/scripts/verify_site.py` 0 failures · `revalidation` build+verify 0 ·
 `research-hub` build byte-identical + verify 0 errors · `node --check` data.js/app.js OK · workflow
 link-checker: all internal links and assets resolve · disclosure/no-price sweep: 88 pages clean.
+
+### T32 — closing record: PR, merge and deploy (session `8c4236ad`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#75** — https://github.com/kanlerxz87-cyber/Zone2/pull/75 — `arena/8c4236ad-zone2` → `main` |
+| PR checks | none created for the head SHA after force-pushes — the same GitHub quirk session `0a697d4a` documented (run 43632688973 era). Every workflow step was replayed locally on the final rebased tree instead (all green, listed in the T32 work record), and the post-merge `push` run on `main` provides the server-side confirmation |
+| Merge | `gh pr merge 75 --merge` — merge commit `fc98d0c` on `main`; merged 2026-11-15 (after three rebase rounds against advancing `main`: `e64d96f`, `20976ce`, `0a03d9e`) |
+| Post-merge `Build, verify and deploy` on `main` | **success** (run 43712155321, 39 s) |
+| Post-merge `pages build and deployment` | **success** (run 43712154658, 30 s) |
+| Pages API after merge | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live read after deploy | `marketing/articles/p1.html` fetched from the public URL and read line by line: the upgraded article is served — hook lede, "The short version" with the honest-fine-print paragraph, sourced "Who this fits", cross-article links, and the unchanged 17-row sourced spec table (14 sourced rows incl. CONFLICT/UNVERIFIED/WITHHELD, plus the three policy-withheld rows) |
+| T32 | **done** |
+
+**Lineage note for the board.** This session's task id history: claimed T29 → `2499438c` shipped T29 (PRs #61/#63) → T30 → `fb49a226` shipped T30 (PRs #64/#66) → T31 → `42fa4918` shipped T31 (PRs #72/#76) → **T32** (this record). Four tasks, four sessions, one afternoon; the renumbering precedent (T21/T21b, T27/T28) held, and no session's work was overwritten anywhere.
+
+**Coordination notes left for the owners of the open marketing PRs** (recorded in the T32 work record before merging): **#65** (`bf8f07a7`, `marketing/trending-topics.html`) and **#70** (`cffe745a`, two hand-written `marketing/articles/topic-*.html` pages plus a hand edit of the generated `marketing/articles/index.html`) — both must rebase onto the regenerated marketing set now on `main`. A hand edit of a generated file will fail the `build_marketing.py --check` drift gate by design; the generator (`tools/build_marketing.py`) is the single source of the articles index, comparison, guide and the three product pages. Additions of genuinely new pages are welcome and do not conflict, provided the sidebar/nav comes from the generator.
+
+**What remains for the owner** (unchanged, and now collected in one place on the decision surfaces): confirm the three ASINs in Associates Central (F-01/F-03), configure the Associates tag so links earn (F-07/F-24), register the Creators API once eligible (F-05 / SG-01's launch-order question), answer Q-01…Q-16, and record decisions on SG-01…SG-10 in `ledger/suggestions.json`. Until then every product link on the site stays a labelled, non-earning preview link — by policy, not by omission.
