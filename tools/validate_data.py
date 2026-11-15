@@ -131,7 +131,19 @@ def _walk_rows(obj, path=""):
 
 def check_rows(report: Report, sources: dict[str, dict]) -> None:
     rows = 0
-    for name in ("products.json", "commission_table.json", "compliance.json", "flags.json", "modules.json", "verification.json"):
+    for name in (
+        "products.json",
+        "commission_table.json",
+        "compliance.json",
+        "flags.json",
+        "modules.json",
+        "verification.json",
+        # T29: the decision registers are held to the same per-row sourcing rule as everything
+        # else. A suggestion that states a problem must cite the official pages that establish
+        # it; a question that states what is known must cite them too.
+        "suggestions.json",
+        "questions.json",
+    ):
         doc = _load(name)
         for path, row in _walk_rows(doc):
             rows += 1
@@ -144,6 +156,148 @@ def check_rows(report: Report, sources: dict[str, dict]) -> None:
                 if any(row.get(k) not in (None, "", []) for k in ("value", "rate_pct", "rate")):
                     report.fail(f"{name}:{path}: carries a value but no source_ids")
     report.stats["rows"] = rows
+
+
+SUGGESTION_STATUSES = {"PROPOSED", "ACCEPTED", "IN PROGRESS", "DONE", "DEFERRED", "REJECTED"}
+QUESTION_STATUSES = {"OPEN", "ANSWERED"}
+QUESTION_PRIORITIES = {"P1", "P2", "P3"}
+
+
+def check_decision_registers(report: Report, sources: dict[str, dict]) -> None:
+    """The suggestion and question registers must be complete, cross-linked and sourced.
+
+    T29 (session bdbe382b). A register is only useful if every row is answerable: a suggestion
+    states a problem with its evidence, offers options with their trade-offs, and names the
+    question it depends on; a question states what is known (with its source), what is missing
+    and how to obtain it. The rule that keeps the register honest is the same one the rest of
+    the repository follows - a row that says something must be able to point at the official
+    page that says it, and a blank answer must be visibly blank rather than quietly absent.
+    """
+    flags = {f["id"] for f in _load("flags.json")["flags"]}
+    rules = {r["id"] for r in _load("compliance.json")["rules"]}
+    modules = {m["id"] for m in _load("modules.json")["modules"]}
+
+    sug_doc = _load("suggestions.json")
+    q_doc = _load("questions.json")
+    sug_ids = {s["id"] for s in sug_doc["suggestions"]}
+    q_ids = {q["id"] for q in q_doc["questions"]}
+
+    def resolve_refs(where: str, refs, known: set[str], label: str) -> None:
+        for ref in refs or []:
+            if ref not in known:
+                report.fail(f"{where}: {label} {ref!r} does not exist in the register it points at")
+
+    for s in sug_doc["suggestions"]:
+        sid = s.get("id", "?")
+        for field in ("title", "problem", "recommendation", "expected_effect", "effort", "risk", "owner", "status"):
+            if not str(s.get(field, "")).strip():
+                report.fail(f"ledger/suggestions.json:{sid}: {field} is empty - every row must be answerable")
+        if s.get("status") not in SUGGESTION_STATUSES:
+            report.fail(f"ledger/suggestions.json:{sid}: status {s.get('status')!r} is not one of {sorted(SUGGESTION_STATUSES)}")
+        if not s.get("source_ids"):
+            report.fail(f"ledger/suggestions.json:{sid}: states a problem but cites no official source")
+        for src_id in s.get("source_ids", []):
+            if src_id not in sources:
+                report.fail(f"ledger/suggestions.json:{sid}: cites unknown source id {src_id!r}")
+        options = s.get("options") or []
+        if len(options) < 2:
+            report.fail(f"ledger/suggestions.json:{sid}: has {len(options)} option(s) - a proposal needs at least two to choose between")
+        for i, opt in enumerate(options, start=1):
+            for field in ("option", "pros", "cons"):
+                if not str(opt.get(field, "")).strip():
+                    report.fail(f"ledger/suggestions.json:{sid}: option {i} has no {field}")
+        resolve_refs(f"ledger/suggestions.json:{sid}", s.get("dependencies"), flags | q_ids | sug_ids, "dependency")
+        if s.get("status") == "PROPOSED" and str(s.get("decision_note", "")).strip():
+            report.fail(f"ledger/suggestions.json:{sid}: carries a decision note but is still PROPOSED")
+
+    for q in q_doc["questions"]:
+        qid = q.get("id", "?")
+        for field in ("question", "decision_blocked", "priority", "known", "missing", "how_to_obtain", "owner", "effort"):
+            if not str(q.get(field, "")).strip():
+                report.fail(f"ledger/questions.json:{qid}: {field} is empty - every row must be answerable")
+        if q.get("priority", "")[:2] not in QUESTION_PRIORITIES:
+            report.fail(f"ledger/questions.json:{qid}: priority {q.get('priority')!r} does not start with P1/P2/P3")
+        if q.get("status") not in QUESTION_STATUSES:
+            report.fail(f"ledger/questions.json:{qid}: status {q.get('status')!r} is not one of {sorted(QUESTION_STATUSES)}")
+        if not q.get("source_ids"):
+            report.fail(f"ledger/questions.json:{qid}: states what is known but cites no official source")
+        for src_id in q.get("source_ids", []):
+            if src_id not in sources:
+                report.fail(f"ledger/questions.json:{qid}: cites unknown source id {src_id!r}")
+        if q.get("status") == "OPEN":
+            if str(q.get("answer", "")).strip():
+                report.fail(f"ledger/questions.json:{qid}: is OPEN but carries an answer - an answer needs a source")
+            if q.get("answer_source_ids"):
+                report.fail(f"ledger/questions.json:{qid}: is OPEN but cites an answer source")
+        else:
+            if not str(q.get("answer", "")).strip():
+                report.fail(f"ledger/questions.json:{qid}: is ANSWERED but the answer is empty")
+            if not q.get("answer_source_ids"):
+                report.fail(f"ledger/questions.json:{qid}: is ANSWERED but cites no source for the answer")
+            for src_id in q.get("answer_source_ids", []):
+                if src_id not in sources:
+                    report.fail(f"ledger/questions.json:{qid}: answer cites unknown source id {src_id!r}")
+        resolve_refs(f"ledger/questions.json:{qid}", q.get("related_flag_ids"), flags, "flag")
+        resolve_refs(f"ledger/questions.json:{qid}", q.get("related_rule_ids"), rules, "rule")
+        resolve_refs(f"ledger/questions.json:{qid}", q.get("related_module_ids"), modules, "module")
+        resolve_refs(f"ledger/questions.json:{qid}", q.get("related_suggestion_ids"), sug_ids, "suggestion")
+
+    # Cross-register coherence: a suggestion's question dependency must exist, and a question
+    # that a suggestion depends on must exist. (resolve_refs above covers the ids; this covers
+    # the direction - a question that names no suggestion and is named by no suggestion is a
+    # row that no decision path reaches.)
+    named = {d for s in sug_doc["suggestions"] for d in s.get("dependencies", []) if d.startswith("Q-")}
+    for qid in sorted(q_ids - named):
+        report.warn(f"ledger/questions.json:{qid}: no suggestion depends on this question - it is a task without a decision path")
+
+    report.stats["suggestions"] = len(sug_doc["suggestions"])
+    report.stats["questions"] = len(q_doc["questions"])
+
+
+def check_decision_counts(report: Report) -> None:
+    """No published page may type the size of either register.
+
+    The same defect class as F-17/F-26/F-35: a hand-written count drifts the moment a row is
+    added. Every count of suggestions or questions in published prose must agree with the
+    ledger.
+    """
+    n_sug = len(_load("suggestions.json")["suggestions"])
+    n_q = len(_load("questions.json")["questions"])
+    scope = sorted(REPO.glob("*.html")) + sorted((REPO / "pages").rglob("*.html"))
+    scope += sorted((REPO / "marketing").rglob("*.html"))
+    patterns = [
+        # The lookbehind keeps "P1 questions" (a priority label) out of the count.
+        (re.compile(r"(?<![A-Za-z0-9-])(\d+)\s+suggestions\b", re.I), n_sug, "suggestions"),
+        (re.compile(r"(?<![A-Za-z0-9-])(\d+)\s+proposals\b", re.I), n_sug, "suggestions"),
+        (re.compile(r"(?<![A-Za-z0-9-])(\d+)\s+questions\b", re.I), n_q, "questions"),
+    ]
+    for path in scope:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for pattern, expected, label in patterns:
+            for m in pattern.finditer(text):
+                if int(m.group(1)) != expected:
+                    report.fail(
+                        f"{path.relative_to(REPO)}: prose says '{m.group(0)}' but the register holds "
+                        f"{expected} {label} - a published count that disagrees with the data"
+                    )
+    report.stats["decision_count_checks"] = len(scope)
+
+
+def check_decision_pages_present(report: Report) -> None:
+    """The two registers must be published, and reachable from the landing page."""
+    index = (REPO / "index.html")
+    if index.exists():
+        text = index.read_text(encoding="utf-8", errors="ignore")
+        for target in ("suggestions.html", "questions.html"):
+            if target not in text:
+                report.fail(f"index.html: no link to {target} - the decision registers would be unreachable")
+    for name in ("suggestions.html", "questions.html"):
+        if not (REPO / name).is_file():
+            report.fail(f"{name}: missing - run python3 tools/build_decisions.py")
+            continue
+        text = (REPO / name).read_text(encoding="utf-8", errors="ignore")
+        if "As an Amazon Associate I earn from qualifying purchases." not in text:
+            report.fail(f"{name}: missing the required Site disclosure")
 
 
 def check_products(report: Report) -> None:
@@ -302,7 +456,13 @@ def check_ledger_ids_unique(report: Report) -> None:
     published as HTML anchors (`pages/flags.html#F-27`), so a duplicate silently makes one finding
     unreachable by its own link. Same rule for sources and verification rows.
     """
-    for name, key in (("flags.json", "flags"), ("sources.json", "sources"), ("verification.json", "rows")):
+    for name, key in (
+        ("flags.json", "flags"),
+        ("sources.json", "sources"),
+        ("verification.json", "rows"),
+        ("suggestions.json", "suggestions"),
+        ("questions.json", "questions"),
+    ):
         doc = _load(name)
         entries = doc.get(key, [])
         seen: dict[str, int] = {}
@@ -587,6 +747,9 @@ def main(strict: bool = True) -> Report:
         check_flag_count(report)
         check_no_typed_flag_counts(report)
         check_typed_counts(report)
+        check_decision_registers(report, sources)
+        check_decision_counts(report)
+        check_decision_pages_present(report)
         check_no_product_prices(report)
         check_links(report)
     except FileNotFoundError as exc:

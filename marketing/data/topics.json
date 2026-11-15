@@ -1,0 +1,273 @@
+{
+  "note": "Editorial topics register for the marketing set. Each row is an angle the site could publish, written so that a reader (and the owner) can see what it would argue, which verified rows would support it, and whether it is published, queued, or blocked on data that no official source provides. Nothing here is a product claim: a topic that would need a rating, a price or a measured result is marked `needs-data` and cannot be written from this repository's evidence.",
+  "as_of": "2026-11-14",
+  "status_meaning": {
+    "published": "live on the site, built from verified rows",
+    "queued": "writable today from rows that already exist",
+    "needs-data": "blocked: the angle needs a figure this repository cannot verify (price, rating, measured time or energy, demand data)",
+    "blocked": "blocked on a decision the owner has to make first"
+  },
+  "topics": [
+    {
+      "id": "T-01",
+      "headline": "Dual basket or single basket? The difference actually matters",
+      "intent": "commercial investigation",
+      "angle": "Two independent baskets cook two foods at once and stop one finishing before the other; a single basket is one cavity. It is the clearest structural difference between the models here, and the one a household can feel on a Tuesday evening.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"}
+      ],
+      "status": "published",
+      "page": "articles/dual-basket-vs-single.html"
+    },
+    {
+      "id": "T-02",
+      "headline": "Air fryer or toaster oven? Pick by the job, not the hype",
+      "intent": "commercial investigation",
+      "angle": "One of these three appliances is sold as a fryer and toaster-oven combination, and its mode list is the honest way to tell the difference: the reader matches the appliance to the food and the counter space they have.",
+      "evidence": [
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"},
+        {"label": "Amazon product page B09B7SB46R", "url": "https://www.amazon.com/dp/B09B7SB46R"}
+      ],
+      "status": "published",
+      "page": "articles/air-fryer-vs-toaster-oven.html"
+    },
+    {
+      "id": "T-03",
+      "headline": "How much counter space does an air fryer actually need? Measure this first",
+      "intent": "how-to",
+      "angle": "Every one of these appliances has a published footprint and a published weight. A ten-minute measurement before you buy prevents the two failures that generate returns: it does not fit under the cabinet, and the outlet is on the wrong circuit.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"},
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"}
+      ],
+      "status": "published",
+      "page": "articles/measure-your-counter.html"
+    },
+    {
+      "id": "T-04",
+      "headline": "What 1700 W means on a 120 V outlet — the arithmetic, not the marketing",
+      "intent": "how-to",
+      "angle": "All three appliances publish 1700 W at 120 V. That divides to roughly 14 A of draw, which is the number a reader needs to compare against their circuit. The article shows the division and stops there; it does not advise on wiring.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-05",
+      "headline": "Which size air fryer fits your household? A capacity ladder",
+      "intent": "commercial investigation",
+      "angle": "6 qt in two baskets, 8 qt in one, 26 qt with French doors: three sizes for three different households. The article organises them by what the capacity actually buys you rather than by the marketing label.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"},
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-06",
+      "headline": "4-in-1 or 10-in-1? Reading an air fryer's mode list properly",
+      "intent": "commercial investigation",
+      "angle": "A mode list is the most revealing line on the box. Four presets on one model, ten named modes on another — the article explains what each mode is actually for, using the manufacturers' own words.",
+      "evidence": [
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"},
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-07",
+      "headline": "The 450 °F claim, and the model that cannot make it",
+      "intent": "informational",
+      "angle": "One listing headline advertises 450 °F while the same page's bullet list and specification block say 400 °F, and the manufacturer agrees with the lower number. An article that teaches the reader to check the specification block instead of the headline.",
+      "evidence": [
+        {"label": "Amazon product page B08DKYBTPH", "url": "https://www.amazon.com/dp/B08DKYBTPH"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-08",
+      "headline": "Dishwasher-safe baskets: what the claim actually covers",
+      "intent": "informational",
+      "angle": "One manufacturer says dishwasher-safe baskets, another qualifies it as top-rack with a basket and rack. A short article on reading care claims precisely, with both wordings side by side.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-09",
+      "headline": "Stainless steel or matte black: finish, cleaning and fingerprints",
+      "intent": "commercial investigation",
+      "angle": "The two Chefman models differ in finish as well as size. What the published finish tells you, and what it does not, in a short piece a buyer can finish in a minute.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-10",
+      "headline": "French doors on a countertop appliance: what opens first, and why it matters",
+      "intent": "informational",
+      "angle": "Dual French doors and single-hand opening are published features of the 26-quart model. The article shows what the door arrangement changes at the counter, using the published dimensions.",
+      "evidence": [
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-11",
+      "headline": "Beyond fried food: what dehydrate, proof and reheat modes are for",
+      "intent": "how-to",
+      "angle": "Ten published modes on one appliance, four presets on another. This article takes the modes that are not 'air fry' and explains what the manufacturer says each one does.",
+      "evidence": [
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-12",
+      "headline": "How long does an air fryer take? The number nobody publishes",
+      "intent": "informational",
+      "angle": "A useful article that this repository cannot write: cooking times are a measured result, and no official page states one. Marked as needing data rather than filled with an estimate.",
+      "evidence": [
+        {"label": "Amazon product page B0CDY277D3", "url": "https://www.amazon.com/dp/B0CDY277D3"}
+      ],
+      "status": "needs-data"
+    },
+    {
+      "id": "T-13",
+      "headline": "Air fryer versus conventional oven: time and energy",
+      "intent": "commercial investigation",
+      "angle": "The comparison every reader wants. It needs measured times and a running cost, and neither is verifiable from an official page, so it stays in the register as a blocked idea with its evidence listed.",
+      "evidence": [
+        {"label": "Amazon product page B08DKYBTPH", "url": "https://www.amazon.com/dp/B08DKYBTPH"}
+      ],
+      "status": "needs-data"
+    },
+    {
+      "id": "T-14",
+      "headline": "What is actually in the 7-piece accessory set?",
+      "intent": "informational",
+      "angle": "The 26-quart model ships with a listed set of accessories — air fry basket, rotisserie spit, bake pan and more. An article that names each piece, from the manufacturer's own list.",
+      "evidence": [
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-15",
+      "headline": "First apartment, first kitchen: the smallest sensible setup",
+      "intent": "informational",
+      "angle": "Counter space and a single outlet decide more than features do. A short article aimed at a renter, built from the published footprints and the published electrical figures.",
+      "evidence": [
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"},
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-16",
+      "headline": "One-touch presets and manual control: which is faster in practice",
+      "intent": "commercial investigation",
+      "angle": "Four one-touch presets on the 8-quart model, a digital touchscreen on the 6-quart model, ten named modes on the 26-quart one. A control-panel comparison built from published specifications.",
+      "evidence": [
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"},
+        {"label": "Amazon product page B0CDY277D3", "url": "https://www.amazon.com/dp/B0CDY277D3"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-17",
+      "headline": "Air fryer accessories you actually need, and the ones you do not",
+      "intent": "how-to",
+      "angle": "An article built only on published accessory lists. It must not recommend a product that is not in the source set, so it stays a comparison of the two published lists.",
+      "evidence": [
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-18",
+      "headline": "Warranty and certification: what cETL and a one-year assurance mean",
+      "intent": "informational",
+      "angle": "Two of the models publish a cETL approval and a one-year manufacturer assurance; the third publishes a one-year warranty. A plain-language explainer, sourced.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-19",
+      "headline": "Cooking for two, or cooking for six: the honest capacity maths",
+      "intent": "how-to",
+      "angle": "Basket capacity in quarts, converted to litres and to portions, with the arithmetic shown and every conversion sourced to a published figure.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-20",
+      "headline": "Air fryer versus toaster oven versus oven: the 2026 kitchen, honestly",
+      "intent": "commercial investigation",
+      "angle": "A buying-guide page built on the mode lists and capacities the three appliances publish, and it must stop before the claims this repository cannot verify — no times, no running costs.",
+      "evidence": [
+        {"label": "Emeril Everyday official store (26 Qt French Door)", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"},
+        {"label": "Amazon product page B0CDY277D3", "url": "https://www.amazon.com/dp/B0CDY277D3"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-21",
+      "headline": "Cleaning an air fryer after every use: a five-step routine",
+      "intent": "how-to",
+      "angle": "Built from the published basket-care statements — dishwasher-safe baskets, top-rack qualification — with no advice that contradicts a manufacturer's own care wording.",
+      "evidence": [
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-22",
+      "headline": "Auto shut-off and shake reminders: small features, real interruptions",
+      "intent": "informational",
+      "angle": "The 8-quart model publishes an auto shut-off and an LED shake reminder. A short piece on the two published behaviours that change how you cook.",
+      "evidence": [
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-23",
+      "headline": "Temperature ranges side by side: 200–400, 200–450 and 75–500",
+      "intent": "commercial investigation",
+      "angle": "The three published ranges are genuinely different, and the lowest setting on one appliance is below the lowest setting on the others. A comparison with every figure sourced.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"},
+        {"label": "Chefman official product page (8 Qt)", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1"},
+        {"label": "Amazon product page B09B7SB46R", "url": "https://www.amazon.com/dp/B09B7SB46R"}
+      ],
+      "status": "queued"
+    },
+    {
+      "id": "T-24",
+      "headline": "What a sync-finish basket pair changes at dinner time",
+      "intent": "commercial investigation",
+      "angle": "Sync Finish is a published feature of the 6-quart dual-basket model. The article takes it apart honestly: what the manufacturer claims, and what it does not claim.",
+      "evidence": [
+        {"label": "Chefman official product page (6 Qt dual-window)", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"}
+      ],
+      "status": "queued"
+    }
+  ]
+}

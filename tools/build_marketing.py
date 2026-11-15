@@ -44,6 +44,7 @@ SITE_NAME = "Zone2 Field Notes"
 LIVE = "https://kanlerxz87-cyber.github.io/Zone2/marketing/"
 
 FACTS = json.loads(DATA.read_text(encoding="utf-8"))
+TOPICS = json.loads((DATA.parent / "topics.json").read_text(encoding="utf-8"))
 PRODUCTS = {p["key"]: p for p in FACTS["products"]}
 AS_OF = FACTS["verified_utc"]
 
@@ -90,6 +91,22 @@ def source_link(src_id: str | None) -> str:
     return (
         f'<a class="src" href="{esc(src["url"])}" target="_blank" rel="{rel}">'
         f'{esc(src_id)} · {esc(host)}<span class="src-kind">{esc(kind)}</span></a>'
+    )
+
+
+def cite(url: str, label: str, kind: str = "source") -> str:
+    """A citation to an official page.
+
+    A citation pointing at an Amazon marketplace page is marked sponsored as well, exactly as
+    source_link() does: it earns nothing (there is no tag), but over-declaring a commercial
+    relationship is the safe direction and it keeps the namespace's "no amazon.com link without
+    rel=sponsored" rule literally true.
+    """
+    host = url.split("/")[2]
+    rel = "sponsored nofollow noopener noreferrer" if host.endswith("amazon.com") else "noopener noreferrer nofollow"
+    return (
+        f'<a class="src" href="{esc(url)}" target="_blank" rel="{rel}">'
+        f'{esc(label)}<span class="src-kind">{esc(kind)}</span></a>'
     )
 
 
@@ -187,7 +204,8 @@ NAV = [
     ("index.html", "Overview"),
     ("buying-guide.html", "Buying guide"),
     ("comparison.html", "Comparison"),
-    ("articles/index.html", "Product articles"),
+    ("articles/index.html", "Articles"),
+    ("topics.html", "Editorial topics"),
     ("verification.html", "Verification"),
     ("flagged.html", "Flagged for review"),
 ]
@@ -278,7 +296,8 @@ def page_index() -> str:
       <ul class="links-grid">
         <li><a href="buying-guide.html"><strong>Buying guide</strong><span>Which of the three fits which kitchen — decided by the verified numbers, not by adjectives.</span></a></li>
         <li><a href="comparison.html"><strong>Head-to-head comparison</strong><span>Every shared attribute in one table, with the source beside each value.</span></a></li>
-        <li><a href="articles/index.html"><strong>Product articles</strong><span>One SEO-structured article per model, built from that model's verified rows.</span></a></li>
+        <li><a href="articles/index.html"><strong>Articles</strong><span>One article per model, plus the evergreen guides that answer the questions people actually search for.</span></a></li>
+        <li><a href="topics.html"><strong>Editorial topics</strong><span>The register of every angle this site could publish, what it would argue and what is still blocking it.</span></a></li>
         <li><a href="verification.html"><strong>Verification</strong><span>What was checked, when, against which page, and what could not be confirmed.</span></a></li>
         <li><a href="flagged.html"><strong>Flagged for review</strong><span>Every irregularity found while building this set, with its source links.</span></a></li>
       </ul>
@@ -395,6 +414,17 @@ def page_articles_index() -> str:
       and the specification table can never disagree.</p>
     </div>
     <section class="card">
+      <h2>Evergreen guides</h2>
+      <p class="lede">Written to answer the questions that do not name a brand, built only from rows that are
+      already verified against a manufacturer's or Amazon's own page.</p>
+      <ul class="links-grid">
+        <li><a href="dual-basket-vs-single.html"><strong>Dual basket or single basket?</strong><span>Two cavities, one cavity, or a 26-quart French-door box &mdash; and which household each one suits.</span></a></li>
+        <li><a href="air-fryer-vs-toaster-oven.html"><strong>Air fryer or toaster oven?</strong><span>Read the mode list and the temperature range instead of the marketing.</span></a></li>
+        <li><a href="measure-your-counter.html"><strong>How much counter space do you need?</strong><span>The ten-minute measurement to run before you choose a size.</span></a></li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2>Product articles</h2>
       <table class="data">
         <caption>Each row links to the manufacturer's and Amazon's own pages for that model.</caption>
         <thead><tr><th>Product</th><th>ASIN</th><th>Brand</th><th>One-line verified summary</th><th>Official sources</th></tr></thead>
@@ -402,7 +432,7 @@ def page_articles_index() -> str:
       </table>
     </section>
 """
-    return shell("Product articles", "One verified article per product.", body, here="articles/index.html", depth=1)
+    return shell("Articles", "One verified article per product, plus the evergreen guides.", body, here="articles/index.html", depth=1)
 
 
 def page_comparison() -> str:
@@ -737,6 +767,297 @@ def page_flagged() -> str:
 
 # --------------------------------------------------------------------------- build
 
+# --------------------------------------------------------------------------- editorial topics
+def page_topics() -> str:
+    """The editorial register: every angle the site could publish, and what it would take.
+
+    A topic that would need a rating, a price or a measured result is marked `needs-data`,
+    so the queue shows what is missing instead of filling the gap with an estimate.
+    """
+    rows = []
+    for t in TOPICS["topics"]:
+        links = " ".join(cite(e["url"], e["label"]) for e in t["evidence"])
+        pill_class = "pill-ok" if t["status"] == "published" else "pill-warn"
+        read_link = ""
+        if t.get("page"):
+            read_link = '<div class="row-note"><a href="' + esc(t["page"]) + '">read it</a></div>'
+        rows.append(
+            f'<tr><th scope="row">{esc(t["id"])}</th>'
+            f'<td><strong>{esc(t["headline"])}</strong>'
+            f'<div class="row-note">{esc(t["intent"])}</div></td>'
+            f'<td>{esc(t["angle"])}</td>'
+            f'<td class="cell-src">{links}</td>'
+            f'<td><span class="pill {pill_class}">{esc(t["status"].upper())}</span>{read_link}</td>'
+            "</tr>"
+        )
+    published = sum(1 for t in TOPICS["topics"] if t["status"] == "published")
+    queued = sum(1 for t in TOPICS["topics"] if t["status"] == "queued")
+    blocked = len(TOPICS["topics"]) - published - queued
+    body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Overview</a> › <span>Editorial topics</span></nav>
+    <div class="page-head">
+      <p class="eyebrow">Editorial register</p>
+      <h1>What this site should write next, and why</h1>
+      <p class="lede">Every angle below is written so a decision can be made before the article exists: the
+      working headline, what it would argue, the official pages that would support it, and whether it can be
+      written from evidence this project already holds &mdash; or is blocked on a figure no official page states.</p>
+    </div>
+    <section class="kpis">
+      <div class="kpi"><span class="kpi-num">{published}</span><span class="kpi-label">published</span></div>
+      <div class="kpi"><span class="kpi-num">{queued}</span><span class="kpi-label">writable from rows that already exist</span></div>
+      <div class="kpi"><span class="kpi-num">{blocked}</span><span class="kpi-label">blocked on data this project cannot verify</span></div>
+    </section>
+    <section class="card">
+      <h2>The register</h2>
+      <table class="data">
+        <caption>Every topic links to the official pages that would support it.</caption>
+        <thead><tr><th>ID</th><th>Working headline</th><th>The angle</th><th>Official sources</th><th>State</th></tr></thead>
+        <tbody>{"".join(rows)}</tbody>
+      </table>
+    </section>
+    <section class="card">
+      <h2>Why the blocked rows are still here</h2>
+      <p class="lede">A topic like &ldquo;how long does an air fryer take&rdquo; is exactly the one a reader
+      searches for, and exactly the one this repository cannot answer: cooking time is a measured result and no
+      official page states it. Keeping the row, with its blocker named, is the difference between a backlog and a
+      queue of guesses. Nothing marked <span class="pill pill-warn">NEEDS-DATA</span> is published anywhere on this
+      site, and no estimate is offered in its place.</p>
+    </section>
+"""
+    return shell(
+        "Editorial topics",
+        "The editorial register for the Zone2 marketing set: every angle, its intent, its official sources and its state.",
+        body,
+        here="topics.html",
+    )
+
+
+# --------------------------------------------------------------------------- evergreen articles
+def _evergreen(
+    *,
+    slug: str,
+    title: str,
+    lede: str,
+    body: str,
+    sources: list[str],
+) -> str:
+    """Render an evergreen article from rows that are already verified."""
+    src = " ".join(cite(u, label) for label, u in sources)
+    crumbs = (
+        f'<nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › '
+        f'<a href="index.html">Articles</a> › <span>{esc(title)}</span></nav>'
+    )
+    page_body = f"""    {crumbs}
+    <div class="page-head">
+      <p class="eyebrow">Evergreen guide</p>
+      <h1>{esc(title)}</h1>
+      <p class="lede">{lede}</p>
+    </div>
+{body}
+    <section class="card">
+      <h2>Where every figure in this article comes from</h2>
+      <p class="row-note">{src}</p>
+      <p class="row-note">Read off those pages on {esc(AS_OF)}. Anything an official page does not state is not
+      claimed here; where a figure was withheld by policy, the article says so instead of estimating it.</p>
+    </section>
+"""
+    return shell(
+        title,
+        lede,
+        page_body,
+        here="articles/index.html",
+        depth=1,
+    )
+
+
+def page_dual_basket() -> str:
+    body = """    <section class="card">
+      <h2>The short answer</h2>
+      <p class="lede">A dual-basket air fryer cooks in two separate cavities at the same time; a single-basket
+      model cooks one. That single structural difference decides which of the two suits a household that eats
+      two different foods at once &mdash; and it is the clearest difference between the 6-quart and 8-quart
+      Chefman models.</p>
+    </section>
+
+    <section class="card">
+      <h2>What each model actually is</h2>
+      <table class="data">
+        <caption>Every cell is a value the manufacturer states on its own product page.</caption>
+        <thead><tr><th>Model</th><th>Cavities</th><th>Capacity</th><th>Published capacity split</th><th>Official source</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Chefman TurboFry Touch 6 Qt</th><td>Two independent baskets</td>
+            <td><strong>6 Qt / 5.67 L</strong></td>
+            <td>Two 3-quart baskets; the Amazon title describes them as two 3-quart baskets</td>
+            <td class="cell-src">{cite("https://chefman.com/products/turbofry-touch-dual-window-air-fryer", "Chefman official page", "manufacturer")}</td></tr>
+          <tr><th scope="row">Chefman TurboFry Touch 8 Qt</th><td>One basket and one rack</td>
+            <td><strong>8 Qt / 7.57 L</strong></td>
+            <td>One 8-quart basket; the manufacturer lists a dishwasher-safe basket and rack</td>
+            <td class="cell-src">{cite("https://chefman.com/products/turbofry-touch-air-fryer-1", "Chefman official page", "manufacturer")}</td></tr>
+          <tr><th scope="row">Emeril Lagasse 26 Qt French Door</th><td>One large cavity, French doors</td>
+            <td><strong>26 Qt / 24.6 L</strong></td>
+            <td>Published as sized for 4&ndash;6 people, with a listed accessory set including an air fry basket and a rotisserie spit</td>
+            <td class="cell-src">{cite("https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360", "Emeril Everyday official store", "manufacturer")}</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>What &ldquo;Sync Finish&rdquo; does &mdash; and what it does not claim</h2>
+      <p>The 6-quart model publishes a Sync Finish function: both baskets finish cooking at the same time. That is
+      the manufacturer's claim, and it is the whole claim. It does not say the two foods cook identically, that
+      they can run different programmes, or anything about taste, and this article does not extend it.</p>
+      <p>The practical consequence for a reader is narrow and useful: if the two foods genuinely need different
+      times, a dual basket does not remove the need to check the earlier one. Sync Finish synchronises the finish;
+      it does not synchronise the recipe.</p>
+    </section>
+
+    <section class="card">
+      <h2>Which one to buy, in one paragraph</h2>
+      <p>If two people regularly want different food at the same time, the dual-basket model is the one whose
+      published feature list was written for that situation. If you cook one thing at a time and want the larger
+      single cavity, the 8-quart model publishes more usable capacity for the counter space it takes. If you are
+      feeding several people at once and want more than one cooking mode, the 26-quart French-door model is the one
+      whose published capacity and mode list are built for a different job entirely.</p>
+      <p class="row-note">No price, rating or review count is quoted anywhere in this article: those are withheld
+      by the program&rsquo;s display rules, and this site publishes none. Read the full
+      <a href="../comparison.html">side-by-side comparison</a> or the
+      <a href="../buying-guide.html">buying guide</a> for the complete attribute set with every row sourced.</p>
+    </section>
+"""
+    return _evergreen(
+        slug="dual-basket-vs-single",
+        title="Dual basket or single basket? The difference actually matters",
+        lede="Two independent baskets, one basket, or a 26-quart French-door cavity: three different answers to the "
+        "same question, taken from the manufacturers' own product pages.",
+        body=body,
+        sources=[
+            ("Chefman official page &mdash; 6 Qt dual-window", "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"),
+            ("Chefman official page &mdash; 8 Qt", "https://chefman.com/products/turbofry-touch-air-fryer-1"),
+            ("Emeril Everyday official store &mdash; 26 Qt", "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"),
+        ],
+    )
+
+
+def page_fryer_vs_toaster() -> str:
+    body = """    <section class="card">
+      <h2>The short answer</h2>
+      <p class="lede">An air fryer is a fan and a heating element working against a small cavity; a toaster oven
+      does the same job with shelves and a wider box. The one product here that is sold as both at once publishes
+      its full mode list, and that list is the most honest way to choose.</p>
+    </section>
+
+    <section class="card">
+      <h2>The published mode lists</h2>
+      <table class="data">
+        <caption>Mode names as published by each manufacturer.</caption>
+        <thead><tr><th>Model</th><th>Published modes or presets</th><th>Published temperature range</th><th>Official source</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Chefman TurboFry Touch 8 Qt</th>
+            <td><strong>4 one-touch presets</strong>: fries, chicken, fish, meat</td>
+            <td><strong>200&ndash;400 &deg;F / 95&ndash;205 &deg;C</strong></td>
+            <td class="cell-src">{cite("https://chefman.com/products/turbofry-touch-air-fryer-1", "Chefman official page", "manufacturer")}</td></tr>
+          <tr><th scope="row">Chefman TurboFry Touch 6 Qt</th>
+            <td>Digital touchscreen control, with Hi-Fry to <strong>450 &deg;F / 235 &deg;C</strong> and a stated range of 200&ndash;450 &deg;F / 95&ndash;235 &deg;C</td>
+            <td><strong>200&ndash;450 &deg;F / 95&ndash;235 &deg;C</strong></td>
+            <td class="cell-src">{cite("https://chefman.com/products/turbofry-touch-dual-window-air-fryer", "Chefman official page", "manufacturer")}</td></tr>
+          <tr><th scope="row">Emeril Lagasse 26 Qt French Door</th>
+            <td><strong>10-in-1</strong>: Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm</td>
+            <td><strong>75&ndash;500 &deg;F</strong></td>
+            <td class="cell-src">{cite("https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360", "Emeril Everyday official store", "manufacturer")}</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>How to choose in practice</h2>
+      <p>Read the mode list as the answer to &ldquo;what will I actually cook?&rdquo; Four presets is a short list
+      and an easy interface. Ten named modes is a longer list that covers baking, broiling, proofing and
+      dehydrating as well as frying &mdash; the modes that make an appliance useful on a day when nobody wants
+      fried food.</p>
+      <p>The temperature range is the second honest filter, and it is not the same on every model: one of these
+      appliances publishes a lowest setting of 75 &deg;F and a highest of 500 &deg;F, another publishes
+      200&ndash;450 &deg;F, and the third publishes 200&ndash;400 &deg;F. If you need a low-and-slow setting, or a
+      very hot one, the published range decides the shortlist before any feature list does.</p>
+      <p class="row-note">One caution about this product set: the Amazon listing headline for the 8-quart model
+      advertises a 450 &deg;F Hi-Fry option, while the same listing&rsquo;s bullet list and specification block, and
+      the manufacturer&rsquo;s own page, give a maximum of 400 &deg;F. This article follows the specification block,
+      not the headline &mdash; see <a href="../flagged.html">flagged for review</a>.</p>
+    </section>
+"""
+    return _evergreen(
+        slug="air-fryer-vs-toaster-oven",
+        title="Air fryer or toaster oven? Pick by the job, not the hype",
+        lede="The mode list and the temperature range decide it. Both are published, and on this product set they "
+        "differ sharply between models.",
+        body=body,
+        sources=[
+            ("Chefman official page &mdash; 8 Qt", "https://chefman.com/products/turbofry-touch-air-fryer-1"),
+            ("Chefman official page &mdash; 6 Qt dual-window", "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"),
+            ("Emeril Everyday official store &mdash; 26 Qt", "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"),
+        ],
+    )
+
+
+def page_counter_space() -> str:
+    body = """    <section class="card">
+      <h2>The short answer</h2>
+      <p class="lede">Every model publishes a footprint and a weight. Measure the cabinet clearance, the depth of
+      the counter and the distance to the outlet before you choose a size &mdash; those three numbers decide more
+      purchases than any feature list does.</p>
+    </section>
+
+    <section class="card">
+      <h2>Published footprints</h2>
+      <table class="data">
+        <caption>Dimensions as stated on each manufacturer&rsquo;s own product page.</caption>
+        <thead><tr><th>Model</th><th>Dimensions</th><th>Weight</th><th>Official source</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Chefman TurboFry Touch 6 Qt</th>
+            <td><strong>13.38 &times; 11.81 &times; 10.63 in</strong><br><span class="row-note">33.98 &times; 30 &times; 27 cm</span></td>
+            <td><strong>13.3 lb / 6.03 kg</strong></td>
+            <td class="cell-src">{cite("https://chefman.com/products/turbofry-touch-dual-window-air-fryer", "Chefman official page", "manufacturer")}</td></tr>
+          <tr><th scope="row">Chefman TurboFry Touch 8 Qt</th>
+            <td><strong>15.4 &times; 12.6 &times; 13.5 in</strong><br><span class="row-note">39.11 &times; 32 &times; 34.29 cm</span></td>
+            <td><strong>12.8 lb / 5.8 kg</strong></td>
+            <td class="cell-src">{cite("https://chefman.com/products/turbofry-touch-air-fryer-1", "Chefman official page", "manufacturer")}</td></tr>
+          <tr><th scope="row">Emeril Lagasse 26 Qt French Door</th>
+            <td><strong>16.9&Prime;D &times; 15.8&Prime;W &times; 14.8&Prime;H</strong><br><span class="row-note">published as depth &times; width &times; height</span></td>
+            <td><span class="pill pill-warn">NOT PUBLISHED</span><div class="row-note">The manufacturer&rsquo;s page states dimensions but no weight.</div></td>
+            <td class="cell-src">{cite("https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360", "Emeril Everyday official store", "manufacturer")}</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>The ten-minute measurement</h2>
+      <ol class="steps">
+        <li class="step"><span class="step-num">1</span><div><strong>Width and depth of the free counter.</strong> Measure the space the appliance will actually occupy, not the run of counter. Add the width of whatever else stays beside it.</div></li>
+        <li class="step"><span class="step-num">2</span><div><strong>Height under the cabinet.</strong> These appliances are 10.6 in, 13.5 in and 14.8 in tall as published. If a cabinet is lower than the appliance plus its ventilation clearance, it will not go under it.</div></li>
+        <li class="step"><span class="step-num">3</span><div><strong>Distance to the outlet.</strong> All three publish 120 V operation, and two of them publish 1700 W. Keep the appliance where you can plug it in directly rather than reaching for an extension lead.</div></li>
+        <li class="step"><span class="step-num">4</span><div><strong>Room above the door.</strong> The 26-quart model opens two French doors outward; the space in front of the counter has to allow both of them to open.</div></li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>What this article deliberately does not tell you</h2>
+      <p>How long it takes to cook anything, how much it costs to run, and what it looks like in a real kitchen.
+      Those are measured or observed facts, and no official page states them, so they are not on this site. The
+      <a href="../flagged.html">Flagged for Review</a> page lists every figure this project could not confirm.</p>
+    </section>
+"""
+    return _evergreen(
+        slug="measure-your-counter",
+        title="How much counter space does an air fryer actually need? Measure this first",
+        lede="Every model publishes a footprint, a weight and an electrical figure. Here is the ten-minute "
+        "measurement to run before you choose one.",
+        body=body,
+        sources=[
+            ("Chefman official page &mdash; 6 Qt dual-window", "https://chefman.com/products/turbofry-touch-dual-window-air-fryer"),
+            ("Chefman official page &mdash; 8 Qt", "https://chefman.com/products/turbofry-touch-air-fryer-1"),
+            ("Emeril Everyday official store &mdash; 26 Qt", "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360"),
+        ],
+    )
+
+
 PAGES = {
     "index.html": page_index,
     "buying-guide.html": page_buying_guide,
@@ -747,6 +1068,10 @@ PAGES = {
     "articles/p1.html": lambda: page_article("P1"),
     "articles/p2.html": lambda: page_article("P2"),
     "articles/p3.html": lambda: page_article("P3"),
+    "topics.html": page_topics,
+    "articles/dual-basket-vs-single.html": page_dual_basket,
+    "articles/air-fryer-vs-toaster-oven.html": page_fryer_vs_toaster,
+    "articles/measure-your-counter.html": page_counter_space,
 }
 
 

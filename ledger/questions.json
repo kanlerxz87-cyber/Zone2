@@ -2,25 +2,25 @@
   "note": "Open-questions register. Every row states (1) the question, (2) the decision it blocks, (3) what is already known and the official page that says it, (4) exactly what is missing, (5) the concrete discovery step that would close it, and (6) the answer, which is BLANK until an official source or the owner supplies it. Nothing here is inferred. The `answer` field stays empty while `status` is OPEN; the generator prints an explicit 'unanswered - discovery step required' marker in place of the value. Rows whose answer must come from outside the public web (an account screen, an owner decision, a private report) say so in `answer_source_kind`, so a reader never mistakes 'not found' for 'does not exist'.",
   "as_of": "2026-11-15",
   "schema": {
-    "id": "Q-nn",
     "question": "one interrogative sentence",
     "decision_blocked": "the decision that cannot reasonably be made until this is answered",
     "priority": "P1 (blocks revenue or compliance) | P2 (blocks scale) | P3 (blocks polish)",
     "known": "what the verified ledger already establishes, each statement traceable to source_ids",
-    "source_ids": "ids in ledger/sources.json backing `known`",
     "missing": "the specific unknown",
     "how_to_obtain": "the concrete discovery step",
     "obtain_refs": "ids of official pages that describe the artifact being sought",
     "answer": "the answer, empty while status is OPEN",
-    "answer_source_ids": "ids backing the answer, empty while status is OPEN",
     "answer_source_kind": "official_public_page | owner_account | owner_decision | private_report | dated_observation",
     "status": "OPEN | ANSWERED",
-    "related_flag_ids": "ids in ledger/flags.json",
-    "related_rule_ids": "ids in ledger/compliance.json",
-    "related_module_ids": "ids in ledger/modules.json",
-    "related_suggestion_ids": "ids in ledger/suggestions.json",
     "owner": "who has to act",
-    "effort": "estimate of the work to answer, labelled as an estimate"
+    "effort": "estimate of the work to answer, labelled as an estimate",
+    "row identifier": "Q-nn",
+    "source ids": "ids in ledger/sources.json backing `known`",
+    "answer source ids": "ids backing the answer, empty while status is OPEN",
+    "related flag ids": "ids in ledger/flags.json",
+    "related rule ids": "ids in ledger/compliance.json",
+    "related module ids": "ids in ledger/modules.json",
+    "related suggestion ids": "ids in ledger/suggestions.json"
   },
   "questions": [
     {
@@ -29,18 +29,51 @@
       "decision_blocked": "Every downstream decision that depends on product identity: keyword selection, the product rows that may be written about, structured data, the category band used for revenue modelling, and the campaign registry. Nothing in the platform can be configured against an identifier that has not been confirmed.",
       "priority": "P1 (blocks revenue or compliance)",
       "known": "The three supplied codes (B04G1MEwY, B02NbDxp3, B00hJ57DV) are 9 characters; Amazon's own help page states that an ASIN is the 10-character code Amazon uses for a specific product. The three link.amazon URLs each resolve reproducibly to one specific Amazon product page (B0CDY277D3, B09B7SB46R, B08DKYBTPH), and an unknown 9-character code on the same service returns a 404, so the service honours the token. No public Amazon document binds a link.amazon code to a product ASIN, so the code-to-destination binding is observed behaviour, not documented intent.",
-      "source_ids": ["S24", "S33", "S34", "S35", "S19", "S20", "S21", "S32"],
+      "source_ids": [
+        "S24",
+        "S33",
+        "S34",
+        "S35",
+        "S19",
+        "S20",
+        "S21",
+        "S32"
+      ],
       "missing": "A confirmation from the party that issued the brief that the three destinations are the products to be marketed, or the three 10-character ASINs themselves. The repository cannot obtain this from any public page.",
       "how_to_obtain": "Owner action: ask whoever supplied the three links for the 10-character ASINs, or open the three links while signed in to the owning Associates account and confirm the product on each destination page against the brief. Until then the published position stays 'the product this link resolves to'.",
-      "obtain_refs": ["S24", "S23"],
+      "obtain_refs": [
+        "S24",
+        "S23"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_decision",
       "status": "OPEN",
-      "related_flag_ids": ["F-01", "F-02", "F-03", "F-06", "F-20", "F-21", "F-28"],
-      "related_rule_ids": ["R-06", "R-20", "R-21"],
-      "related_module_ids": ["M-01", "M-06", "M-07", "M-08"],
-      "related_suggestion_ids": ["SG-01", "SG-03", "SG-06"],
+      "related_flag_ids": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-06",
+        "F-20",
+        "F-21",
+        "F-28"
+      ],
+      "related_rule_ids": [
+        "R-06",
+        "R-20",
+        "R-21"
+      ],
+      "related_module_ids": [
+        "M-01",
+        "M-06",
+        "M-07",
+        "M-08"
+      ],
+      "related_suggestion_ids": [
+        "SG-01",
+        "SG-03",
+        "SG-06"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one message to the link provider, or one signed-in session in the owning account."
     },
@@ -50,18 +83,42 @@
       "decision_blocked": "Whether the site can earn anything at all. The link builder refuses to emit a Special Link without a tag, so the live link surface cannot be produced, and no campaign may be switched on.",
       "priority": "P1 (blocks revenue or compliance)",
       "known": "The Participation Requirements state that a Special Link must use the assigned Associates ID and be accessed directly from the Site. Amazon publishes the qualifying format as a tagged /dp/ link. Every URL that the three supplied links resolve to carries no tag parameter, so as supplied they cannot attribute a sale. No Associates ID is stored anywhere in this repository and none may be invented.",
-      "source_ids": ["S02", "S24", "S19", "S20", "S21"],
+      "source_ids": [
+        "S02",
+        "S24",
+        "S19",
+        "S20",
+        "S21"
+      ],
       "missing": "The tracking ID string and the marketplace it belongs to. These are account facts that do not appear on any public page.",
       "how_to_obtain": "Owner action: read the assigned tracking ID from the owning Associates account and write it into ledger/site_config.json (the field validate_data.py already reads). The Special Link format that carries it is published at the cited help page.",
-      "obtain_refs": ["S24", "S02", "S09"],
+      "obtain_refs": [
+        "S24",
+        "S02",
+        "S09"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_account",
       "status": "OPEN",
-      "related_flag_ids": ["F-07", "F-24"],
-      "related_rule_ids": ["R-07", "R-08", "R-14"],
-      "related_module_ids": ["M-08", "M-09", "M-10"],
-      "related_suggestion_ids": ["SG-02", "SG-03"],
+      "related_flag_ids": [
+        "F-07",
+        "F-24"
+      ],
+      "related_rule_ids": [
+        "R-07",
+        "R-08",
+        "R-14"
+      ],
+      "related_module_ids": [
+        "M-08",
+        "M-09",
+        "M-10"
+      ],
+      "related_suggestion_ids": [
+        "SG-02",
+        "SG-03"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: minutes, once the account exists."
     },
@@ -71,18 +128,42 @@
       "decision_blocked": "Whether the platform can source catalog data at all. Without it, product identity, price context, ratings and demand signals stay unavailable, so modules M-01 to M-05 remain scaffolds and the niche queue stays empty by design.",
       "priority": "P1 (blocks revenue or compliance)",
       "known": "Amazon's deprecation notice states that PA-API 5.0 calls return 403 AccessDenied and that integrators must migrate to the Creators API. The Creators API documentation lists a prerequisite of at least 10 qualifying sales in the past 30 days, and Amazon's application-review guidance asks for at least three qualifying sales within the first 180 days. The repo's API client is built against the Creators API and returns BLOCKED rather than scraping.",
-      "source_ids": ["S06", "S31", "S07", "S08", "S23"],
+      "source_ids": [
+        "S06",
+        "S31",
+        "S07",
+        "S08",
+        "S23"
+      ],
       "missing": "The account's actual access status and the qualifying-sales count. Both are private to the account.",
       "how_to_obtain": "Owner action: request Creators API access from the account's API tools area and record the approval date and the sales figure that satisfied the prerequisite. Until then the API client stays in its BLOCKED state and no catalog row may be written.",
-      "obtain_refs": ["S07", "S23", "S06"],
+      "obtain_refs": [
+        "S07",
+        "S23",
+        "S06"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_account",
       "status": "OPEN",
-      "related_flag_ids": ["F-05", "F-08"],
-      "related_rule_ids": ["R-20"],
-      "related_module_ids": ["M-01", "M-02", "M-03", "M-04", "M-11"],
-      "related_suggestion_ids": ["SG-03", "SG-11"],
+      "related_flag_ids": [
+        "F-05",
+        "F-08"
+      ],
+      "related_rule_ids": [
+        "R-20"
+      ],
+      "related_module_ids": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-11"
+      ],
+      "related_suggestion_ids": [
+        "SG-03",
+        "SG-11"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one request plus a wait for the sales threshold to be met."
     },
@@ -92,18 +173,40 @@
       "decision_blocked": "Revenue modelling (M-06) and the order in which content is produced. Without the band, no expected-value comparison between two candidate products is possible, and no priority ranking between them can be justified.",
       "priority": "P1 (blocks revenue or compliance)",
       "known": "Amazon publishes the Standard Commission Income Statement with eleven fixed rate bands plus an 'All Other Categories' rate, and a separate Special Commission Income appendix listing 46 Bounty Events and 2 Bonus Events. All three destinations are Home & Kitchen small appliances by their Amazon titles, and a category published at 0.00% is ineligible for the queue by design.",
-      "source_ids": ["S28", "S04", "S19", "S20", "S21"],
+      "source_ids": [
+        "S28",
+        "S04",
+        "S19",
+        "S20",
+        "S21"
+      ],
       "missing": "The band each product's browse node actually maps to under the published table, and whether its purchase type triggers a Bounty Event. The public statement lists the bands but does not map a product to one; that mapping comes from a catalog record.",
       "how_to_obtain": "Owner action: with Creators API access, look the confirmed ASINs up and read the browse-node/category fields from the item record, then match the node against the published band table already transcribed in ledger/commission_table.json. Until a catalog record exists the band stays blank.",
-      "obtain_refs": ["S08", "S28", "S04"],
+      "obtain_refs": [
+        "S08",
+        "S28",
+        "S04"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "official_public_page",
       "status": "OPEN",
-      "related_flag_ids": ["F-03", "F-07"],
-      "related_rule_ids": ["R-06", "R-15"],
-      "related_module_ids": ["M-06", "M-11"],
-      "related_suggestion_ids": ["SG-03", "SG-05"],
+      "related_flag_ids": [
+        "F-03",
+        "F-07"
+      ],
+      "related_rule_ids": [
+        "R-06",
+        "R-15"
+      ],
+      "related_module_ids": [
+        "M-06",
+        "M-11"
+      ],
+      "related_suggestion_ids": [
+        "SG-03",
+        "SG-05"
+      ],
       "owner": "Platform, once Q-01 and Q-03 are answered",
       "effort": "Estimate: hours, after access exists."
     },
@@ -113,18 +216,39 @@
       "decision_blocked": "Prioritisation. Which content gets written next, which pages get retired and which campaigns get budget all depend on a baseline. Without it, every prioritisation decision is a guess and the optimiser is blocked by design.",
       "priority": "P1 (blocks revenue or compliance)",
       "known": "The Operating Agreement states that Amazon makes no representation, warranty or covenant about the amount of traffic or commission income an Associate can expect. No click, conversion or earnings report exists in this repository, and the optimiser refuses to act without at least 30 clicks and a dated report. Amazon's application guidance expects content to be recent and original, which presupposes an existing audience to publish for.",
-      "source_ids": ["S01", "S02", "S23"],
+      "source_ids": [
+        "S01",
+        "S02",
+        "S23"
+      ],
       "missing": "Session counts, clicks, conversion rate and earnings - for the site as it exists and for any comparable site the owner already runs. No such figure is published here because none has been measured.",
       "how_to_obtain": "Owner action: export a dated report from the owning Associates account and attach it to the repository; site-side, first-party click counts become available once the redirect tracker in tools/redirect_server.py is deployed. Any figure quoted before that is an estimate and must be labelled as one.",
-      "obtain_refs": ["S02", "S01"],
+      "obtain_refs": [
+        "S02",
+        "S01"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "private_report",
       "status": "OPEN",
-      "related_flag_ids": ["F-08", "F-19"],
-      "related_rule_ids": ["R-13", "R-15", "R-19"],
-      "related_module_ids": ["M-09", "M-10"],
-      "related_suggestion_ids": ["SG-10", "SG-11", "SG-12"],
+      "related_flag_ids": [
+        "F-08",
+        "F-19"
+      ],
+      "related_rule_ids": [
+        "R-13",
+        "R-15",
+        "R-19"
+      ],
+      "related_module_ids": [
+        "M-09",
+        "M-10"
+      ],
+      "related_suggestion_ids": [
+        "SG-10",
+        "SG-11",
+        "SG-12"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one report export plus one deploy of the tracker."
     },
@@ -134,18 +258,37 @@
       "decision_blocked": "The editorial mix. If the site's traffic comes from how-to queries rather than product queries, the content budget should be allocated very differently, and the whole M-07 content engine is pointed at the wrong output types.",
       "priority": "P2 (blocks scale)",
       "known": "The published rate statement defines how a Qualifying Purchase accrues within a Session, so a conversion is measurable once the site has traffic. The repo's scoring code returns INSUFFICIENT_DATA rather than a default when an input is missing, and its niche ranking inputs list 'own click/earnings history' as MISSING.",
-      "source_ids": ["S02", "S04"],
+      "source_ids": [
+        "S02",
+        "S04"
+      ],
       "missing": "Per-format click and conversion counts. No page of this site has yet received measurable traffic, so no format can be ranked.",
       "how_to_obtain": "Owner action: let the site run with one campaign key per page format (static labels only - a sub-tag may never be tied to an end user), then read the format split out of a dated Associates report and a first-party click log.",
-      "obtain_refs": ["S02", "S12"],
+      "obtain_refs": [
+        "S02",
+        "S12"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "private_report",
       "status": "OPEN",
-      "related_flag_ids": ["F-08"],
-      "related_rule_ids": ["R-08", "R-13"],
-      "related_module_ids": ["M-07", "M-09", "M-10"],
-      "related_suggestion_ids": ["SG-07", "SG-10", "SG-12"],
+      "related_flag_ids": [
+        "F-08"
+      ],
+      "related_rule_ids": [
+        "R-08",
+        "R-13"
+      ],
+      "related_module_ids": [
+        "M-07",
+        "M-09",
+        "M-10"
+      ],
+      "related_suggestion_ids": [
+        "SG-07",
+        "SG-10",
+        "SG-12"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one reporting cycle after launch."
     },
@@ -155,18 +298,43 @@
       "decision_blocked": "The scope of the content engine, the structured-data strategy and the risk profile of every article. It decides whether Google product/review markup can ever be used, and it decides how much editorial voice the content may carry.",
       "priority": "P2 (blocks scale)",
       "known": "The Participation Requirements forbid inaccurate, overbroad or misleading claims about a product, and require that content not be altered and that customer reviews be displayed only when obtained through the licensed API. Google's documentation describes Product, Review and Offer structured data, and notes that editorial product reviews can expose pros and cons. The FTC requires a material connection to be disclosed clearly and conspicuously.",
-      "source_ids": ["S02", "S14", "S15", "S18", "S10"],
+      "source_ids": [
+        "S02",
+        "S14",
+        "S15",
+        "S18",
+        "S10"
+      ],
       "missing": "An editorial-policy decision from the owner, and a statement of whether any hands-on testing exists at all. This repository contains no test data: every product row is a manufacturer statement or an Amazon listing statement.",
       "how_to_obtain": "Owner decision, informed by the cited rules. The default position already published - specification-led pages, no star ratings, no hands-on claims - is compliant and may simply be confirmed. If hands-on testing is planned, a test protocol must exist before any opinion is published.",
-      "obtain_refs": ["S02", "S10", "S14"],
+      "obtain_refs": [
+        "S02",
+        "S10",
+        "S14"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_decision",
       "status": "OPEN",
-      "related_flag_ids": ["F-06", "F-22", "F-23"],
-      "related_rule_ids": ["R-06", "R-10", "R-21", "R-18"],
-      "related_module_ids": ["M-04", "M-07"],
-      "related_suggestion_ids": ["SG-04", "SG-07"],
+      "related_flag_ids": [
+        "F-06",
+        "F-22",
+        "F-23"
+      ],
+      "related_rule_ids": [
+        "R-06",
+        "R-10",
+        "R-21",
+        "R-18"
+      ],
+      "related_module_ids": [
+        "M-04",
+        "M-07"
+      ],
+      "related_suggestion_ids": [
+        "SG-04",
+        "SG-07"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one decision."
     },
@@ -176,18 +344,37 @@
       "decision_blocked": "The pricing module M-03 and the shape of every comparison table. It also decides whether the pricing analysis module can exist at all in its current form.",
       "priority": "P2 (blocks scale)",
       "known": "The Participation Requirements limit price and availability display to prices served by Amazon in the link or supplied by the licensed API, and govern how prices from other retailers must be handled in a comparison. A separate requirement states that, unless otherwise agreed by Amazon, the Site must not have price tracking or price-alerting functionality - a rule added to this repository's compliance ledger as R-22. This project currently publishes no price at all, which the deploy gate enforces.",
-      "source_ids": ["S02", "S29"],
+      "source_ids": [
+        "S02",
+        "S29"
+      ],
       "missing": "An owner decision, plus the answer to whether the Creators API response for these items carries a price field. The repository has no API credentials and therefore no observation of the response.",
       "how_to_obtain": "Owner decision, then - if prices are wanted - read the permitted price field out of a live Creators API GetItems response for the confirmed ASINs and document the response shape. No price may be typed into a page.",
-      "obtain_refs": ["S08", "S02", "S29"],
+      "obtain_refs": [
+        "S08",
+        "S02",
+        "S29"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_decision",
       "status": "OPEN",
-      "related_flag_ids": ["F-36"],
-      "related_rule_ids": ["R-04", "R-05", "R-22"],
-      "related_module_ids": ["M-03", "M-07"],
-      "related_suggestion_ids": ["SG-05", "SG-03"],
+      "related_flag_ids": [
+        "F-36"
+      ],
+      "related_rule_ids": [
+        "R-04",
+        "R-05",
+        "R-22"
+      ],
+      "related_module_ids": [
+        "M-03",
+        "M-07"
+      ],
+      "related_suggestion_ids": [
+        "SG-05",
+        "SG-03"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one decision, plus one API response once access exists."
     },
@@ -197,18 +384,37 @@
       "decision_blocked": "Domain choice, the launch channel and the realistic traffic baseline. It decides whether this is a cold-start site or a distribution into an audience that already exists - the difference between weeks and months of organic traffic.",
       "priority": "P2 (blocks scale)",
       "known": "Amazon's application-review guidance expects Sites to carry robust original content - at least ten posts as a rule of thumb - and to publish content that is generally from the last 60 days. The Program Policies permit Special Links in email, SMS and direct messaging provided the communication was solicited, with the disclosure rules still applying. Nothing in the brief names an existing channel.",
-      "source_ids": ["S23", "S02"],
+      "source_ids": [
+        "S23",
+        "S02"
+      ],
       "missing": "Whether the owner has an existing site, list or following, and the size of it. None of this is on any public page.",
       "how_to_obtain": "Owner answer. It determines the domain and whether the launch plan is a cold start or a cross-post to an existing audience.",
-      "obtain_refs": ["S23", "S02"],
+      "obtain_refs": [
+        "S23",
+        "S02"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_decision",
       "status": "OPEN",
-      "related_flag_ids": ["F-07", "F-08"],
-      "related_rule_ids": ["R-09", "R-12"],
-      "related_module_ids": ["M-09", "M-12"],
-      "related_suggestion_ids": ["SG-12", "SG-15", "SG-17"],
+      "related_flag_ids": [
+        "F-07",
+        "F-08"
+      ],
+      "related_rule_ids": [
+        "R-09",
+        "R-12"
+      ],
+      "related_module_ids": [
+        "M-09",
+        "M-12"
+      ],
+      "related_suggestion_ids": [
+        "SG-12",
+        "SG-15",
+        "SG-17"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one message."
     },
@@ -218,18 +424,43 @@
       "decision_blocked": "The angle of every article, the structure of every comparison table and the choice of keyword. Without a reader, the content engine optimises for nothing in particular and the pages read like reference material - which is exactly the 'slop' failure mode the brief calls out.",
       "priority": "P2 (blocks scale)",
       "known": "The three destinations differ in a way that matters to a reader: one is 6 qt in two independent baskets at 1700 W, one is 26 qt with French doors and a stated 10-in-1 mode set, and one is an 8 qt single-basket model whose Amazon title advertises 450 F while the same page's bullet list and specification block, and the manufacturer, state 200-400 F. Those verified differences are the raw material for reader-centred angles.",
-      "source_ids": ["S25", "S26", "S27", "S21", "S19", "S20"],
+      "source_ids": [
+        "S25",
+        "S26",
+        "S27",
+        "S21",
+        "S19",
+        "S20"
+      ],
       "missing": "The reader definition and the target household. There is no customer research in this repository, and Amazon's own review data is unavailable without the licensed API.",
       "how_to_obtain": "Owner answer plus dated operator observation: record, for a fixed query set, which Amazon listings rank and how they are positioned, and log those snapshots in ledger/serp_observations.json. That turns 'who is the reader' into an observed set rather than an assumption.",
-      "obtain_refs": ["S07", "S23"],
+      "obtain_refs": [
+        "S07",
+        "S23"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_decision",
       "status": "OPEN",
-      "related_flag_ids": ["F-19", "F-22", "F-23"],
-      "related_rule_ids": ["R-06", "R-12"],
-      "related_module_ids": ["M-02", "M-05", "M-07"],
-      "related_suggestion_ids": ["SG-06", "SG-07", "SG-11"],
+      "related_flag_ids": [
+        "F-19",
+        "F-22",
+        "F-23"
+      ],
+      "related_rule_ids": [
+        "R-06",
+        "R-12"
+      ],
+      "related_module_ids": [
+        "M-02",
+        "M-05",
+        "M-07"
+      ],
+      "related_suggestion_ids": [
+        "SG-06",
+        "SG-07",
+        "SG-11"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one conversation plus a first round of dated snapshots."
     },
@@ -239,18 +470,37 @@
       "decision_blocked": "The publishing calendar and the refresh cadence of evergreen pages - which decides whether the site publishes three articles a year or a steady weekly cadence.",
       "priority": "P3 (blocks polish)",
       "known": "Nothing in this repository measures demand. The niche ledger lists 'catalog demand / sales-rank trajectory over >=2 dated snapshots' as a MISSING ranking input and requires a dated, operator-observed search-results sample as a further input. Amazon's application guidance asks for content that is generally from the last 60 days, which is a recency expectation the site must meet to stay in good standing.",
-      "source_ids": ["S04", "S07", "S23"],
+      "source_ids": [
+        "S04",
+        "S07",
+        "S23"
+      ],
       "missing": "Two or more dated snapshots of demand for the candidate queries. One observation is not a trend; the repo's own scoring rule refuses to score on a single data point.",
       "how_to_obtain": "Dated operator observation: take the same query set at fixed intervals, log the results and the demand proxies available at the time, and keep the snapshots. The SERP observation file already exists in the repository for this purpose.",
-      "obtain_refs": ["S07", "S23"],
+      "obtain_refs": [
+        "S07",
+        "S23"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "dated_observation",
       "status": "OPEN",
-      "related_flag_ids": ["F-08", "F-11"],
-      "related_rule_ids": ["R-12"],
-      "related_module_ids": ["M-02", "M-07", "M-12"],
-      "related_suggestion_ids": ["SG-12", "SG-11"],
+      "related_flag_ids": [
+        "F-08",
+        "F-11"
+      ],
+      "related_rule_ids": [
+        "R-12"
+      ],
+      "related_module_ids": [
+        "M-02",
+        "M-07",
+        "M-12"
+      ],
+      "related_suggestion_ids": [
+        "SG-12",
+        "SG-11"
+      ],
       "owner": "Site owner with the platform",
       "effort": "Estimate: two dated observation rounds before any trend claim is possible."
     },
@@ -260,18 +510,36 @@
       "decision_blocked": "The measurement stack. It decides what can be measured at all, and whether that measurement is lawful in the audience's jurisdiction.",
       "priority": "P2 (blocks scale)",
       "known": "The FTC requires a material connection to be disclosed clearly and conspicuously and treats placement as part of the disclosure. Google asks that affiliate links carry rel=\"sponsored\". This project currently runs privacy-minimal first-party click counting with no cookies, no IP storage and no visitor identifiers, because the platform's own rules forbid associating a sub-tag with a specific end user.",
-      "source_ids": ["S10", "S12", "S02"],
+      "source_ids": [
+        "S10",
+        "S12",
+        "S02"
+      ],
       "missing": "The owner's choice of analytics and search tools, their jurisdictions and their consent requirements. No external analytics tool is used or approved in this repository today.",
       "how_to_obtain": "Owner decision, with the consent rule stated per tool. If a jurisdiction requires consent before storage or before a non-essential tag loads, that rule is written into the deploy gate rather than left to the reader.",
-      "obtain_refs": ["S10", "S12"],
+      "obtain_refs": [
+        "S10",
+        "S12"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_decision",
       "status": "OPEN",
-      "related_flag_ids": ["F-08"],
-      "related_rule_ids": ["R-03", "R-08", "R-17"],
-      "related_module_ids": ["M-09"],
-      "related_suggestion_ids": ["SG-09", "SG-15"],
+      "related_flag_ids": [
+        "F-08"
+      ],
+      "related_rule_ids": [
+        "R-03",
+        "R-08",
+        "R-17"
+      ],
+      "related_module_ids": [
+        "M-09"
+      ],
+      "related_suggestion_ids": [
+        "SG-09",
+        "SG-15"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one decision per tool."
     },
@@ -281,18 +549,32 @@
       "decision_blocked": "Everything in the Suggestions register. A proposal with no owner and no review date is a wish, not a plan; this is the question that decides whether the suggestions page is a decision tool or a reading list.",
       "priority": "P3 (blocks polish)",
       "known": "This repository is source-governed and every open item already carries an owner field in the flag register, with items recorded as closed once their action was taken. The Operating Agreement and the Program Policies both carry update dates and may change without notice, which the flag register already tracks as a standing item.",
-      "source_ids": ["S01", "S02"],
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
       "missing": "The named decision-maker for this site and a review cadence. The brief asks for suggestions that someone can review and choose from; who that someone is has never been recorded.",
       "how_to_obtain": "Owner answer, recorded in the suggestions register. Recommended default: re-review this register at every publishing cycle and re-verify the two governing policy pages on the same schedule, since both carry their own update dates.",
-      "obtain_refs": ["S01", "S02"],
+      "obtain_refs": [
+        "S01",
+        "S02"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_decision",
       "status": "OPEN",
-      "related_flag_ids": ["F-11"],
+      "related_flag_ids": [
+        "F-11"
+      ],
       "related_rule_ids": [],
-      "related_module_ids": ["M-10", "M-12"],
-      "related_suggestion_ids": ["SG-16", "SG-18"],
+      "related_module_ids": [
+        "M-10",
+        "M-12"
+      ],
+      "related_suggestion_ids": [
+        "SG-16",
+        "SG-18"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one answer."
     },
@@ -302,18 +584,34 @@
       "decision_blocked": "The information architecture of the published site - which is also what the reader experiences as polish. Six sibling surfaces today each carry their own navigation, their own flag register and their own version of the same three products.",
       "priority": "P3 (blocks polish)",
       "known": "The tree today publishes the primary dashboard, a generated findings namespace under pages/, and five companion surfaces (research-hub, zone2, northstar, affiliate-lab, revalidation) plus the marketing set. The flag register records that the northstar prototype duplicates an earlier dashboard and now drifts from the primary site, and that another companion's summary rows are still block-sourced rather than per-row sourced. Every surface links to the others, so the reader can reach six different presentations of the same facts.",
-      "source_ids": ["S22"],
+      "source_ids": [
+        "S22"
+      ],
       "missing": "A decision on the target architecture. The repository has no owner preference recorded, and the cost of consolidation - rewriting six link structures and their verifiers - is real.",
       "how_to_obtain": "Owner decision, informed by the suggestion SG-18, which lists the consolidation options with their cost. The verifiable state of each surface is already recorded in the flag register, so no further discovery is needed to make the choice.",
-      "obtain_refs": ["S22"],
+      "obtain_refs": [
+        "S22"
+      ],
       "answer": "",
       "answer_source_ids": [],
       "answer_source_kind": "owner_decision",
       "status": "OPEN",
-      "related_flag_ids": ["F-14", "F-15", "F-27", "F-36"],
-      "related_rule_ids": ["R-12"],
-      "related_module_ids": ["M-12"],
-      "related_suggestion_ids": ["SG-13", "SG-18"],
+      "related_flag_ids": [
+        "F-14",
+        "F-15",
+        "F-27",
+        "F-36"
+      ],
+      "related_rule_ids": [
+        "R-12"
+      ],
+      "related_module_ids": [
+        "M-12"
+      ],
+      "related_suggestion_ids": [
+        "SG-13",
+        "SG-18"
+      ],
       "owner": "Site owner",
       "effort": "Estimate: one decision; the work is then scoped."
     }

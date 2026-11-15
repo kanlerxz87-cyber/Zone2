@@ -27,7 +27,12 @@ def test_marketing_pages_label_unconfirmed_brief_mapping():
     """Destination-only marketing must not imply the short-code mapping is confirmed."""
     with tempfile.TemporaryDirectory() as tmp:
         rendered = build_marketing.build(Path(tmp))
-    assert len(rendered) == 9
+    # The count is derived from the builder's own page map, so adding a page cannot leave a
+    # stale literal behind - the failure mode this test exists to catch.
+    assert len(rendered) == len(build_marketing.PAGES), (
+        f"builder produced {len(rendered)} pages but its map declares {len(build_marketing.PAGES)}"
+    )
+    assert len(rendered) >= 13, "the marketing set lost pages"
     for page, document in rendered.items():
         assert "Product identity is not confirmed." in document, page
         assert "they do not establish that those destinations are the products intended in the brief" in document, page
@@ -284,6 +289,87 @@ def test_guard_check_label_cannot_drift_from_the_test_suite():
     report_ok = validate_data.Report()
     validate_data.check_typed_counts(report_ok)
     assert not report_ok.errors, report_ok.errors
+
+
+def test_decision_registers_are_complete_and_sourced():
+    """T29: the suggestion and question registers must be answerable, sourced and cross-linked.
+
+    Exercised in both directions: the real registers pass, and a deliberately broken copy of
+    each is rejected - because a guard nobody has seen fail is not evidence that it works.
+    """
+    import validate_data
+
+    sources = validate_data.check_sources(validate_data.Report())
+    report = validate_data.Report()
+    validate_data.check_decision_registers(report, sources)
+    assert not report.errors, report.errors
+
+    sug_path = REPO / "ledger" / "suggestions.json"
+    q_path = REPO / "ledger" / "questions.json"
+    sug_original = sug_path.read_text(encoding="utf-8")
+    q_original = q_path.read_text(encoding="utf-8")
+    try:
+        # A suggestion that states a problem but cites no source must be rejected.
+        broken = json.loads(sug_original)
+        broken["suggestions"][0]["source_ids"] = []
+        sug_path.write_text(json.dumps(broken, indent=2), encoding="utf-8")
+        report = validate_data.Report()
+        validate_data.check_decision_registers(report, sources)
+        assert report.errors, "check_decision_registers accepted an unsourced suggestion"
+
+        # An answered question with no answer source must be rejected.
+        broken_q = json.loads(q_original)
+        broken_q["questions"][0]["status"] = "ANSWERED"
+        broken_q["questions"][0]["answer"] = "Because."
+        broken_q["questions"][0]["answer_source_ids"] = []
+        q_path.write_text(json.dumps(broken_q, indent=2), encoding="utf-8")
+        report = validate_data.Report()
+        validate_data.check_decision_registers(report, sources)
+        assert report.errors, "check_decision_registers accepted an ANSWERED question with no source"
+    finally:
+        sug_path.write_text(sug_original, encoding="utf-8")
+        q_path.write_text(q_original, encoding="utf-8")
+
+    report_ok = validate_data.Report()
+    validate_data.check_decision_registers(report_ok, sources)
+    assert not report_ok.errors, report_ok.errors
+
+
+def test_decision_pages_are_current_and_reachable():
+    """T29: the two decision pages must match a fresh build and be linked from the landing page."""
+    out = subprocess.run(
+        [sys.executable, str(REPO / "tools" / "build_decisions.py"), "--check"],
+        capture_output=True,
+        text=True,
+    )
+    assert out.returncode == 0, f"suggestions.html / questions.html drifted from their generator:\n{out.stdout}{out.stderr}"
+
+    index = (REPO / "index.html").read_text(encoding="utf-8")
+    assert 'href="suggestions.html"' in index, "index.html does not link the suggestions register"
+    assert 'href="questions.html"' in index, "index.html does not link the questions register"
+
+    for name in ("suggestions.html", "questions.html"):
+        text = (REPO / name).read_text(encoding="utf-8")
+        assert "As an Amazon Associate I earn from qualifying purchases." in text, f"{name} lost the disclosure"
+
+
+def test_published_decision_counts_match_the_registers():
+    """T29: no published page may type the size of a register (the F-17/F-26/F-35 defect class)."""
+    import validate_data
+
+    report = validate_data.Report()
+    validate_data.check_decision_counts(report)
+    assert not report.errors, report.errors
+
+    index_path = REPO / "index.html"
+    original = index_path.read_text(encoding="utf-8")
+    try:
+        index_path.write_text(original + "\n<p>99 questions remain</p>\n", encoding="utf-8")
+        report = validate_data.Report()
+        validate_data.check_decision_counts(report)
+        assert report.errors, "check_decision_counts accepted a count that disagrees with the register"
+    finally:
+        index_path.write_text(original, encoding="utf-8")
 
 
 def main() -> int:

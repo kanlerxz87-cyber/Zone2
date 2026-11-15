@@ -45,6 +45,8 @@ def load(name: str) -> dict:
 
 SOURCES = {s["id"]: s for s in load("sources.json")["sources"]}
 PRODUCTS = load("products.json")
+SUGGESTIONS = load("suggestions.json")
+QUESTIONS = load("questions.json")
 COMMISSION = load("commission_table.json")
 COMPLIANCE = load("compliance.json")
 MODULES = load("modules.json")
@@ -174,6 +176,8 @@ NAV = [
 # Companion views, by current repository topology (they have moved twice already).
 SIBLINGS = [
     ("index.html", "Primary Zone2 dashboard"),
+    ("suggestions.html", "Suggestions & decisions"),
+    ("questions.html", "Questions & information needed"),
     ("research-hub/overview.html", "Verified research hub"),
     ("zone2/index.html", "Zone2 platform (34836ddd)"),
     ("northstar/index.html", "Northstar dashboard"),
@@ -303,6 +307,21 @@ def page_hub() -> str:
             meta=f'<a class="chip" href="categories/index.html">{len(cats)} category pages</a>',
         )
         + panel("What is built vs what is blocked", f'<ul class="checklist">{built}</ul>')
+        + panel(
+            "Decide with this evidence",
+            "<p>These pages hold the evidence. The two decision registers hold what to do about it: every open "
+            "question names the decision it blocks and the exact step that closes it, and every proposal names "
+            "the options, their trade-offs and the question it depends on.</p>"
+            f'<ul class="checklist"><li><span class="check">&#10003;</span>'
+            f'<strong><a href="../questions.html">Questions &amp; information needed</a></strong> &mdash; '
+            f'{len(QUESTIONS["questions"])} questions, each with what is known, what is missing and the discovery step.'
+            "</li>"
+            f'<li><span class="check">&#10003;</span>'
+            f'<strong><a href="../suggestions.html">Suggestions &amp; decisions</a></strong> &mdash; '
+            f'{len(SUGGESTIONS["suggestions"])} proposals, each with options, trade-offs, a recommendation and a status.'
+            "</li></ul>",
+            meta='<a class="chip" href="../suggestions.html">suggestions</a>',
+        )
     )
     return render("index.html", "Findings hub", "Every table, every flag, and the evidence behind each row.", body)
 

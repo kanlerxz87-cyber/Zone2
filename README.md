@@ -149,7 +149,7 @@ fail on purpose (a removed disclosure and an injected `$49.99` each produce an e
 python3 tools/build_site.py            # regenerate pages/ (deterministic, network-free)
 python3 tools/build_site.py --check     # fail if committed pages/ drift (content-hashed)
 python3 tools/validate_data.py          # deploy gate -> JSON report, non-zero exit on any error
-python3 tests/test_pipeline.py          # 15 executable guard checks
+python3 tests/test_pipeline.py          # 18 executable guard checks
 python3 tools/audit_site.py             # structural audit: fragments, orphaned sets, prose counts
 python3 tools/scoring.py                # published bands + scoring behaviour
 PYTHONPATH=tools python3 tools/amazon_creators_api.py   # prints the BLOCKED reason (no credentials here)
