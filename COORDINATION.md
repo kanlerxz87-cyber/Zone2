@@ -4401,3 +4401,18 @@ below, not implemented.
 (2) replay every workflow gate locally on the combined tree; (3) line-by-line review of the published
 deliverables against the brief; (4) F-42 dedup repair on this file; (5) live-deploy confirmation with a
 cache-busted fetch of the key entry points; (6) integration PR → merge → deploy → closing record.
+
+### T45 — merge and deploy record (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#101](https://github.com/kanlerxz87-cyber/Zone2/pull/101)** — `arena/2b07e526-zone2` → `main` — **MERGED** |
+| Merge commit | `952952a` (`952952aa283bf5d28871cc8e00115a3a1037c024`), 2026-11-15 13:25:17 UTC |
+| Post-merge CI on `main` | `Build, verify and deploy` → **success** (run 43718916162). Both jobs green: *Build and verify*, *Deploy to GitHub Pages*. No step reported a non-success conclusion. |
+| `pages build and deployment` | **success** (run 43718915463); Pages API `status: built` |
+| Live read after deploy | `https://kanlerxz87-cyber.github.io/Zone2/release/index.html` fetched over HTTPS: the 9 verbatim S23 quotes, all 12 board rows with their state pills, every row's source link, and the disclosure render as published. `index.html` re-read on `origin/main`: **0** occurrences of the stale "Field Notes" label, the duplicated `marketing/index.html` entry is gone, and the board is linked from the footer. |
+| PR-level checks | Cancelled **three times** by the shared `pages` concurrency group (`cancel-in-progress: true`) while other sessions merged; the interrupted step varied each time and no step ever logged a non-zero exit. This is the T28-recorded pattern, handled the recorded way: the whole build job was replayed locally from the workflow YAML, **25 of 25 `run:` steps exit 0**, including the new `build_readiness.py --check`. The post-merge run above is the server-side confirmation. |
+| Renumbering trail | claimed **T41** → **T42** → **T43** → **T44** → **T45**. Each earlier id was claimed and shipped by another session first (`08789ab3`, `bfb20351`, `08789ab3` again, `f6af67c3`). Every collision was resolved by taking `main`'s copy of this file and re-appending only this session's record. Nothing of anyone else's was edited, and the register rows this session added were renumbered too — **SG-11 → SG-12**, because `f6af67c3` claimed SG-11 for a different proposal. |
+| Self-inflicted defects, and the gates they produced | (1) A merge resolution was committed **with conflict markers still in this file** — the same F-42 defect an earlier session had cleaned up. `tools/audit_site.py` now has a **`board`** check: it fails on `<<<<<<< `, `=======`, or `>>>>>>> ` in `COORDINATION.md`, with line numbers. Negative-tested. (2) The landing-page `debris` check (duplicate links in one list; stray unstyled prose) came from the two live defects found on `index.html`. |
+| Left open for the owner | **Q-17** — own the website and declare an exact URL (RR-02, RR-12). **SG-12** — close Amazon's 10-post content bar before applying (RR-03, RR-09). Plus the standing blockers: F-01/F-03 (intended ASINs), F-24 (no Associates tag — the supplied links cannot earn as supplied), F-05 (Creators API), F-08 (no performance data exists). |
+| No product value added or changed | Price, rating, review count, availability and per-product commission band remain blank. 4 of 12 Amazon review criteria are met; the 8 that are not are each listed with the single action that would clear them. |
