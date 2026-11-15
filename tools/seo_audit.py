@@ -42,12 +42,14 @@ import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# One source of truth for "what counts as a published page". If these ever diverge, this gate
+# would pass a sitemap that the generator considers incomplete — the exact drift it exists to stop.
+from build_sitemap import EXCLUDED_DIRS, EXCLUDED_FILES  # noqa: E402
+
 REPO = Path(__file__).resolve().parents[1]
 LIVE = "https://kanlerxz87-cyber.github.io/Zone2/"
 ORIGIN = "https://kanlerxz87-cyber.github.io"
-
-EXCLUDED_DIRS = ("tools", "tests", "content")
-EXCLUDED_FILES = {"404.html"}
 
 
 def published_pages() -> list[Path]:
