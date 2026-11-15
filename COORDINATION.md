@@ -2908,7 +2908,7 @@ and the closing record follow in the next entry.
 | Live read after deploy | `pages/commissions.html` serves the **complete 46-row bounty table** and the 2-row Bonus Events panel, with the 34-item flag register linked from the header |
 | T26 | **done** |
 | T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
-| T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | in progress | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
+| T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | done (PR and merge recorded below) | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
 
 ### What shipped
 
@@ -3112,3 +3112,34 @@ without commits is **T27** (`0f44536f`, last activity 2026-11-14). It is older t
 | C-21 | Application review | "we require at least three within the first 180 days"; "personal orders do not qualify"; websites: content "generally within the last 60 days"; "You must own your website"; "at least 10 posts" | **Verified verbatim** (the "own your website" test is the basis of Q-04) | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
 | C-22 | Operating Agreement version | "Updated: October 15, 2025" | **Verified** | https://affiliate-program.amazon.com/help/operating/agreement |
 | C-23 | Associates country list | Japan appears in the Associates country selector | **Observed** (no marketplace-specific term re-read here; see Q-01) | https://affiliate-program.amazon.com/help/operating/agreement |
+
+### T29 — closing record (2026-11-15 UTC)
+
+**Delivered (new on the site):**
+- `pages/suggestions.html` — **Suggestions decision board.** 10 suggestions (SG-01…SG-10), each with options A/B/C with a trade-off, a recommendation, the questions that must be answered first, and an official-source link. Nothing is implemented until the owner records a choice in `ledger/suggestions.json` (field `decision`).
+- `pages/questions.html` — **Open questions / missing information.** 16 questions (Q-01…Q-16). For each: what is verified now, what is still missing, how to close the gap, which suggestions it blocks, and an official-source link.
+- `ledger/suggestions.json`, `ledger/questions.json` (new), `tools/build_site.py` (two page builders, navigation entries, emit calls: additive), `tools/validate_data.py` (the two new files are included in the source-id check).
+- Generated pages regenerated (`pages/**`): only the navigation changed on existing pages.
+
+**Verification performed (2026-11-15, live):**
+| # | Check | Result | Source |
+|---|---|---|---|
+| V-1 | `https://link.amazon/B04G1MEwY` resolves to `/dp/B0CDY277D3` (CHEFMAN 6 Quart Dual Basket Air Fryer Oven…) | reproduced | https://link.amazon/B04G1MEwY · https://www.amazon.com/dp/B0CDY277D3 |
+| V-2 | `https://link.amazon/B02NbDxp3` resolves to `/dp/B09B7SB46R` (Emeril Lagasse 26QT…) | reproduced | https://link.amazon/B02NbDxp3 · https://www.amazon.com/dp/B09B7SB46R |
+| V-3 | `https://link.amazon/B00hJ57DV` resolves to `/dp/B08DKYBTPH` (Chefman Air Fryer 8 Qt…) | reproduced | https://link.amazon/B00hJ57DV · https://www.amazon.com/dp/B08DKYBTPH |
+| V-4 | Creators API prerequisite: at least 10 qualifying sales in the past 30 days | verbatim | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction |
+| V-5 | Application review: three qualifying sales within 180 days; personal orders do not qualify; site must be owned; ~10 posts; content within 60 days (websites) | verbatim | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
+| V-6 | Operating Agreement updated October 15, 2025 | verbatim | https://affiliate-program.amazon.com/help/operating/agreement |
+| V-7 | Rules cited in the new rows (R-01, R-04, R-06, R-08, R-19, R-21, R-22, R-31, §6(t)) | taken from `ledger/compliance.json`, which records the sections as read on 2026-11-14 (T28). **Not re-read today**; Section 6(y), 6(t) and 6(z) were not re-fetched in this session. | https://affiliate-program.amazon.com/help/operating/policies |
+| V-8 | Table 1 bands (Kitchen 4.50%, Home 3.00%, All Other 4.00%) | taken from the ledger's full transcription (`ledger/commission_table.json`, checked on 2026-11-14). **Not re-read today.** | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| V-9 | Repo gates | `build_site --check`, `build_root_views --check`, `build_summary --check`, `build_marketing --check`, `validate_data` (ok, 0 errors), `tests/test_pipeline.py` (15/15), `audit_site` (97 pages; fragments, spec_sources, prose_counts, namespaces, disclosure: PASS) | local run |
+
+**Irregularities and open items flagged for review (not blocking, published on the new Questions page):**
+1. **Ownership of the site address (Q-04).** The Associates application review requires that the applicant own the website (S23). The live site is on `kanlerxz87-cyber.github.io`. Whether a `github.io` address meets that test is **not verified** by any Amazon page read in this session.
+2. **Marketplace (Q-01).** The supplied links resolve to amazon.com. The owner's location in the brief is Osaka, Japan. Which Associates account and marketplace applies is unknown.
+3. **Commission band (Q-08).** The destination breadcrumb (Home & Kitchen › Kitchen & Dining › … › Air Fryers) does not by itself name a Table 1 band; Kitchen (4.50%) and Home (3.00%) are both plausible. Left unconfirmed; no single rate is asserted.
+4. **Stale in-progress claim T27 (`0f44536f`).** Still `in progress` on the board with no commits since 2026-11-14. Not taken over here (different scope). Board owner to close or re-claim.
+5. **Product-image rule (Q-10).** The IP licence (S30) was not read line by line in this session; the answer is open.
+
+**Scope notes.** No prices, ratings or performance figures were added. The three supplied short links are still not presented as confirmed ASINs; the pages say so (F-01, F-03, F-28 unchanged). No other session's file was edited except the additive changes listed above.
+

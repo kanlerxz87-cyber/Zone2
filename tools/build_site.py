@@ -51,6 +51,8 @@ MODULES = load("modules.json")
 FLAGS = load("flags.json")
 VERIFICATION = load("verification.json")
 NICHES = load("niches.json")
+SUGGESTIONS = load("suggestions.json")  # decision board (T29): options, recommendation, owner decision
+QUESTIONS = load("questions.json")  # missing information (T29): known / missing / how to close
 AS_OF = PRODUCTS["verified_utc"]
 
 
@@ -157,6 +159,8 @@ def checklist(items, flag_first=False) -> str:
 NAV = [
     ("index.html", "Findings hub"),
     ("executive-summary.html", "Executive summary"),
+    ("suggestions.html", "Suggestions"),
+    ("questions.html", "Open questions"),
     ("products.html", "Requested products"),
     ("categories/index.html", "Categories"),
     ("niches.html", "Niche discovery"),
@@ -795,6 +799,87 @@ def page_sources() -> str:
     return render("sources.html", "Official sources", "Every document this repository relies on, with its access date.", body)
 
 
+def _q_anchor(qid: str) -> str:
+    return f'<a href="questions.html#{esc(qid)}">{esc(qid)}</a>'
+
+
+def page_suggestions() -> str:
+    """Decision board (T29). Recommendations only; nothing here changes the site until the owner records a choice."""
+    qs = {q["id"]: q for q in QUESTIONS["questions"]}
+    rows = []
+    for s in SUGGESTIONS["suggestions"]:
+        opts = "".join(
+            f"<div class=\"row-note\"><strong>{esc(o['id'])}</strong> {esc(o['label'])} <span class=\"blank-note\">{esc(o['tradeoff'])}</span></div>"
+            for o in s["options"]
+        )
+        ids = [o["id"] for o in s["options"]]
+        choose = " ".join(f"&#9744; {esc(i)}" for i in ids)
+        decision = esc(s["decision"]) if s.get("decision") else choose
+        needs = " ".join(_q_anchor(q) for q in s["needs_answers"]) or "none"
+        rows.append(
+            [
+                f'<td><strong>{esc(s["id"])}</strong><div class="row-note">{esc(s["area"])}</div></td>',
+                f"<td><strong>{esc(s['title'])}</strong><div class=\"row-note\">{esc(s['suggestion'])}</div>"
+                f"<div class=\"row-note\"><em>Why:</em> {esc(s['why'])}</div></td>",
+                f"<td>{opts}</td>",
+                text_cell(s["recommended"]),
+                f"<td>{needs}</td>",
+                f"<td>{decision}<div class=\"row-note\">{esc(s['status'])}</div></td>",
+                source_cell(s["evidence"]),
+            ]
+        )
+    open_q = sum(1 for q in QUESTIONS["questions"] if q.get("answer", "") == "")
+    body = (
+        notice(
+            "Nothing on this page is implemented",
+            "Read the options, pick one per row, and record the choice in ledger/suggestions.json (field decision). "
+            "The agent implements only the choices that have been recorded. Recommendations are judgements built on the cited official sources; they are not program facts.",
+        )
+        + panel(
+            f"{len(rows)} suggestions \u00b7 {open_q} open questions with no answer yet",
+            table(["ID", "Suggestion", "Options", "Recommended", "Needs answers first", "Your decision", "Source"], rows),
+        )
+        + panel(
+            "How to decide",
+            checklist(
+                [
+                    "Answer the blocking questions on the Open questions page (blank means unknown; do not guess).",
+                    "Pick one option per suggestion and record it in ledger/suggestions.json (field decision, for example \"A\").",
+                    "Ask the agent to implement the recorded batch. Each batch is one commit, rebuilt and checked before it goes live.",
+                ]
+            ),
+        )
+    )
+    return render("suggestions.html", "Suggestions", "Decision board: options, a recommendation and the evidence for each path. Choose before anything changes.", body)
+
+
+def page_questions() -> str:
+    """Missing-information register (T29). A blank answer stays blank; nothing is inferred."""
+    rows = []
+    for q in QUESTIONS["questions"]:
+        blocks = " ".join(f'<span class="pill pill-info">{esc(b)}</span>' for b in q["blocks"]) or "none"
+        rows.append(
+            [
+                f'<td><strong id="{esc(q["id"])}">{esc(q["id"])}</strong><div class="row-note">owner: {esc(q["owner"])}</div></td>',
+                f"<td><strong>{esc(q['question'])}</strong></td>",
+                text_cell(q["known"]),
+                text_cell(q["missing"]),
+                text_cell(q["how_to_find"]),
+                f"<td>{blocks}</td>",
+                source_cell(q["source_ids"], blank_hint="no official source states the missing part"),
+            ]
+        )
+    body = (
+        notice(
+            "Read this before deciding",
+            "Every question lists what is verified, what is still missing, and how to close the gap. A question with no answer stays open; "
+            "the decisions that depend on it stay blocked on the Suggestions page.",
+        )
+        + panel(f"{len(rows)} open questions", table(["ID", "Question", "Verified now", "Still missing", "How to close the gap", "Blocks", "Source"], rows))
+    )
+    return render("questions.html", "Open questions", "Questions and missing information, with the official sources that answer part of each.", body)
+
+
 def _open_flag_count() -> int:
     """Flags still awaiting the owner.
 
@@ -1065,6 +1150,8 @@ def main() -> int:
     emit("verification.html", page_verification())
     emit("sources.html", page_sources())
     emit("flags.html", page_flags())
+    emit("suggestions.html", page_suggestions())
+    emit("questions.html", page_questions())
     emit("niches.html", page_niches())
     emit("tracking.html", page_tracking())
     emit("content-engine.html", page_content())

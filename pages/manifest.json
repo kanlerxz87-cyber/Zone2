@@ -1,6 +1,6 @@
 {
   "as_of": "2026-11-14",
-  "count": 37,
+  "count": 39,
   "generated": [
     "architecture.html",
     "categories/all-other-categories.html",
@@ -36,7 +36,9 @@
     "modules/m-12-scalability-automation-substrate.html",
     "niches.html",
     "products.html",
+    "questions.html",
     "sources.html",
+    "suggestions.html",
     "tracking.html",
     "verification.html"
   ],
