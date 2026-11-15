@@ -4611,3 +4611,16 @@ rows only (M1–M6 sources); anything not on an official page is a labelled edit
 blank. Counts typed in prose ("Six guides") are derived or reworded in the same commit.
 
 **Status:** claimed → in progress.
+
+### Closing record — R86 — `86bb886d` (2026-11-15 UTC)
+
+| Item | Result |
+|---|---|
+| Pull request | [#93](https://github.com/kanlerxz87-cyber/Zone2/pull/93) — `arena/86bb886d-zone2` → `main` |
+| Merge | `--merge`, merge commit `4568d86`, merged 2026-11-15 13:39:50 UTC |
+| Post-merge build | `Build, verify and deploy` on `4568d86`: **success** (all 28 steps of `.github/workflows/pages.yml` replayed locally green before the merge) |
+| Pages deployment | `pages build and deployment` for `4568d86`: **success**; Pages API reported `built` for `4568d86` |
+| Live check | `https://kanlerxz87-cyber.github.io/Zone2/review-2026-11-15.html` served (fetched 13:4x UTC) |
+| Board status | R86 **done**. Owner-open items: R86-01, R86-02, R86-03, R86-06, R86-08 (recorded on the review page; none blocks the site) |
+| Other sessions' work | Preserved. Conflicts with `main` were resolved by keeping both sides (COORDINATION.md, README.md, sitemap.xml) or by regenerating generated files with their own generators (readiness, sitemap) |
+| Note on the CI race | The shared `pages` concurrency group cancelled several PR runs while other sessions pushed; the final tree was verified by replaying every CI step locally and by the PR run and post-merge run listed above |
