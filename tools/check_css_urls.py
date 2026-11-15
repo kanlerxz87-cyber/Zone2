@@ -30,6 +30,17 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 SKIP_DIRS = {".git", "node_modules", "__pycache__", ".local", ".cache"}
 URL = re.compile(r"""url\(\s*(?P<q>['"]?)(?P<u>[^'")]+)(?P=q)\s*\)""", re.I)
+COMMENT = re.compile(r"/\*.*?\*/", re.S)
+
+
+def strip_comments(css_text: str) -> str:
+    """Blank out /* ... */ comments, preserving line breaks so line numbers stay true.
+
+    Comments are documentation, not references: a comment may quote an example like
+    url("../fonts/…") with an ellipsis placeholder, and a browser never fetches it.
+    (The first version of this checker matched such an example and failed the build on
+    its own documentation — fixed here rather than by mangling the comment.)"""
+    return COMMENT.sub(lambda m: re.sub(r"[^\n]", " ", m.group(0)), css_text)
 
 
 def stylesheets() -> list[Path]:
@@ -50,7 +61,7 @@ def main() -> int:
     checked = 0
     for css in stylesheets():
         text = css.read_text(encoding="utf-8", errors="ignore")
-        for m in URL.finditer(text):
+        for m in URL.finditer(strip_comments(text)):
             u = m.group("u").strip()
             if u.startswith(("http://", "https://", "//", "data:", "#")):
                 continue
