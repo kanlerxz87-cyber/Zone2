@@ -1,0 +1,536 @@
+{
+  "note": "T40 discovery register - WHAT THIS REVIEW FOUND, WHAT IS MISSING, AND WHAT TO DO NEXT. Written by session arena/3e0b3b4e-zone2 on 2026-11-15 (UTC). Three registers live in one file so a finding, the question it raises and the proposal that answers it stay visibly linked: `findings` (DG-xx, measured against the tree as it stands), `questions` (DQ-xx, information that does not exist in the repository and must be obtained before a decision), and `suggestions` (DS-xx, a recommended path with options, a trade-off for each, an evidence list and the questions that block it). NOTHING in `suggestions` is implemented by being written here. Per the project contract a proposal is published for the owner to choose from; the `decision` field stays empty until the owner records a choice. Nothing in this file is asserted as an Amazon or Google fact: every rule statement points at a source id in docs/discovery-t40-sources.json, and every judgement is labelled as a judgement.",
+  "as_of": "2026-11-15",
+  "session": "arena/3e0b3b4e-zone2",
+  "severity_vocabulary": ["blocks revenue", "blocks growth", "blocks a claim", "cosmetic"],
+  "findings": [
+    {
+      "id": "DG-01",
+      "severity": "blocks growth",
+      "area": "Product presentation",
+      "finding": "No page on the site shows a product image. Measured on 2026-11-15: 0 <img> elements across all 116 published HTML pages.",
+      "measurement": "grep -c '<img' over every *.html in the repository (root 17, pages/ 25, marketing/ 18, journal/ 4, companion namespaces) returns 0 matched elements.",
+      "why_it_matters": "A shop window with no pictures is the single largest conversion cost on the site, and Google's guidance names 'additional information', 'rigorous testing and ratings' and 'original reviews' as what makes an affiliate page worth ranking (S47). A reader deciding between three air fryers wants to see the door, the basket and the footprint.",
+      "what_cannot_be_done": "Product photographs may come only from Program Content under the IP License, may not be stored or cached, and a link to one may be kept for at most 24 hours (S44). No Associates account exists (F-07), so no Program Content is available to this project today. Copying a manufacturer's or a retailer's photograph is not permitted by that licence and is not proposed anywhere in this register.",
+      "recommendation": "Keep the site image-free until Program Content is available, and close the layout gap now with original, self-drawn vector diagrams of the measured specifications (capacity, footprint, door geometry) that belong to this project and carry no product photograph. See DS-01.",
+      "source_ids": ["S44", "S47", "S43"]
+    },
+    {
+      "id": "DG-02",
+      "severity": "blocks revenue",
+      "area": "Link strategy",
+      "finding": "The three links in the brief are link.amazon short links. They cannot serve as this site's Special Links: an Associates ID must appear as a `tag` parameter on every Special Link, the supplied links carry none, and republishing a shortener whose destination is unclear is separately restricted.",
+      "measurement": "Re-observed 2026-11-15: each of the three URLs redirects to https://www.amazon.com/dp/<ASIN> with `plpRedirect=mhFallback` and a per-fetch `btn_ref` token, and no `tag=` parameter (C-17 in the existing ledger; reproduced by this session).",
+      "why_it_matters": "The brief asks the platform to 'publish and manage affiliate links' and 'track clicks and conversions'. As supplied, none of the three can attribute a commission to any account, so no tracking or optimization layer has a link to act on.",
+      "what_is_safe": "Linking directly to the full `https://www.amazon.com/dp/<ASIN>` product URL with a clear label and rel=\"sponsored nofollow\" is the compliant shape (S48). It earns nothing until a tag is added, and the site says so on every page that shows a link.",
+      "recommendation": "Publish direct, fully visible product URLs now (already the case), and replace them with tagged Special Links in one step when the owner supplies an Associates ID. Never republish the short links. See DS-02 and SG-13.",
+      "source_ids": ["S45", "S51", "S48"]
+    },
+    {
+      "id": "DG-03",
+      "severity": "blocks growth",
+      "area": "Organic traffic",
+      "finding": "The site cannot grow by publishing more pages. Its own editorial rules forbid the unsourced claims a content farm would use, and Google's spam policies demote exactly that shape of page.",
+      "measurement": "Read the current gate set: tools/validate_data.py plus marketing/scripts/verify_marketing.py reject unsourced values, filler phrasing and first-hand claims. The site's product pages are dense specification tables, which is the 'meaningful content' S47 asks for, but only four editorial pieces exist outside them (journal/, three articles).",
+      "why_it_matters": "The brief asks the platform to 'generate organic traffic so real people can click the links and buy'. More pages is the intuitive answer and the wrong one: scaled unoriginal pages are a spam-policy violation (S46) and thin affiliate pages are demoted (S47). The only durable route is pages that contain something a competitor's page does not have.",
+      "what_the_site_already_has": "Four verified cross-source disagreements between official pages, 48 specification rows each traceable to a manufacturer page, and exact published footprints. Those are original findings, not copies.",
+      "recommendation": "Grow on the assets already gathered: one page per decision question, each answering it from the published numbers, and a comparison engine built from the same ledger. See DS-03 and SG-08/SG-09.",
+      "source_ids": ["S46", "S47", "S55"]
+    },
+    {
+      "id": "DG-04",
+      "severity": "blocks growth",
+      "area": "Organic traffic",
+      "finding": "The root sitemap lists 16 URLs while the repository publishes 116 HTML pages, and the marketing sitemap is not referenced from the root sitemap or robots.txt.",
+      "measurement": "`sitemap.xml` at the repository root: 16 <loc> entries (verified by reading the file). `marketing/sitemap.xml`: 18 entries, listed in `marketing/robots.txt` only, which a crawler only reads for its own directory. Root `robots.txt` points at the root sitemap alone.",
+      "why_it_matters": "Sitemaps are how a crawler discovers pages that are not linked from the landing page. A page nobody links to and no sitemap lists is a page nobody finds, and the growth plan in DG-03 depends on new pages being discovered at all.",
+      "recommendation": "Generate the root sitemap from the published file tree so it cannot drift again, and reference it correctly. See DS-04.",
+      "source_ids": ["S55"]
+    },
+    {
+      "id": "DG-05",
+      "severity": "cosmetic",
+      "area": "Link hygiene",
+      "finding": "Affiliate-link qualification is already correct: every Amazon product link carries rel=\"sponsored nofollow\".",
+      "measurement": "tools/link_builder.py emits `rel=\"sponsored nofollow\"`; the marketing generator emits the same and tools/validate_data.py fails a build where an amazon.com/dp/ href lacks it. Spot-checked on marketing/buying-guide.html.",
+      "why_it_matters": "It is worth recording as a strength, not just a gap list: this is the part most affiliate sites get wrong, and any future change must not break it.",
+      "recommendation": "No change. Keep the existing emitted shape and keep the gate that enforces it. See DS-05.",
+      "source_ids": ["S48"]
+    },
+    {
+      "id": "DG-06",
+      "severity": "blocks a claim",
+      "area": "Structured data",
+      "finding": "No page carries Product, Review or AggregateRating structured data, and none should yet: the site has tested nothing.",
+      "measurement": "grep for application/ld+json: 18 pages in marketing/ carry Article + BreadcrumbList only; the root dashboard and pages/ carry none. No Product or AggregateRating object exists anywhere in the tree.",
+      "why_it_matters": "Star ratings in search results come from Review/AggregateRating markup, and Google's guidelines forbid aggregating ratings from other sites or marking up reviews nobody wrote (S49, S59). An air fryer comparison without star ratings looks less competitive than a competitor's, so it is worth being explicit that the gap is a compliance consequence, not laziness.",
+      "recommendation": "Do not add rating markup. Add the structured data that is honest today (Article, BreadcrumbList, WebSite) to the root dashboard and pages/, and revisit Product markup only if measured data ever exists. See DS-06.",
+      "source_ids": ["S49", "S59"]
+    },
+    {
+      "id": "DG-07",
+      "severity": "blocks revenue",
+      "area": "Pricing",
+      "finding": "The site shows no price, and cannot: Amazon only permits a price when it is served on the link or supplied through Creators API / PA API, and the site has neither. Price tracking and alerting are separately forbidden without Amazon's written agreement.",
+      "measurement": "Read from the live policy pages (S52, S53). The repository's own gate forbids printing a price in a buying context, and the only figure the site publishes is the program's 'up to 10%' commission ceiling (S37).",
+      "why_it_matters": "A price is the strongest single conversion lever on an affiliate page, and its absence is the second-largest revenue cost after the missing tag. Any plan that adds prices has to satisfy S53 first.",
+      "recommendation": "Do not add prices, price history or price alerts. Prepare a dated, API-sourced price display as a proposal blocked on the account and API access. See DS-07 and SG-10.",
+      "source_ids": ["S52", "S53"]
+    },
+    {
+      "id": "DG-08",
+      "severity": "blocks a claim",
+      "area": "Specification accuracy",
+      "finding": "Four specification rows are published as disagreements between two official pages, and the site is right to publish both numbers. But a reader is not told which number to trust when buying.",
+      "measurement": "The published conflicts: Emeril cooking functions (24 in the Amazon listing title vs 25 presets on the manufacturer tile), Chefman 8 Qt power (1000 W in an Amazon bullet vs 1700 W on the manufacturer page), and two Chefman 8 Qt dimension rows that differ between the two pages. Re-read from ledger/products.json and marketing/data/facts.json, which record both values and their sources.",
+      "why_it_matters": "The honest table is a strength; leaving the reader to arbitrate is a decision they are poorly equipped to make. Explaining the arbitration rule in one sentence is both more useful and more defensible than picking silently.",
+      "recommendation": "State a single, published arbitration rule on the verification page and link it from every conflict row: the manufacturer's current product page wins for specifications, and the listing text is shown as what the retailer says. No value changes. See DS-08.",
+      "source_ids": ["S47", "S55"]
+    },
+    {
+      "id": "DG-09",
+      "severity": "cosmetic",
+      "area": "Disclosure",
+      "finding": "Disclosure is already strong and sits in three places: the exact sentence in the footer, a link-level '(paid link)' tag beside every product link, and a per-page disclosure strip.",
+      "measurement": "Spot-checked the marketing set and the root dashboard on 2026-11-15: the exact sentence 'As an Amazon Associate I earn from qualifying purchases.' is present, and marketing pages carry the link-level tag beside the link itself.",
+      "why_it_matters": "FTC guidance asks for a disclosure that is hard to miss and placed with the endorsement rather than on a separate page (S54). The current placement satisfies that.",
+      "recommendation": "No change to wording or placement. See DS-09.",
+      "source_ids": ["S54"]
+    },
+    {
+      "id": "DG-10",
+      "severity": "blocks a claim",
+      "area": "Authorship and trust",
+      "finding": "No page states who wrote it or how. There is no byline, no author page and no statement that the content is assembled by an automated pipeline under human-set rules.",
+      "measurement": "grep across the published HTML for 'by', author and byline metadata: the marketing set's Article JSON-LD carries a publisher (the desk name) and no author; no page in the tree carries an authorship statement.",
+      "why_it_matters": "Google's people-first guidance asks who created the content and how, and explicitly warns that fabricated creator profiles are deception while background about automation is useful (S55). The site's whole method is automation with a human fact-check gate, which is a genuinely good story it currently does not tell.",
+      "recommendation": "Add an honest provenance statement and an author page that says plainly what the pipeline does, what the gates reject and what a human still decides. Do not invent a person. See DS-10 and SG-14.",
+      "source_ids": ["S55", "S56"]
+    },
+    {
+      "id": "DG-11",
+      "severity": "blocks a claim",
+      "area": "Measurement",
+      "finding": "The platform claims to 'track clicks and conversions and continuously optimize campaigns'. No click, conversion or earnings data is collected anywhere, and none could be: there is no tagged link, no analytics property and no Associates account.",
+      "measurement": "The repository's own validator forbids a populated clicks/conversion/earnings field. No analytics snippet, no Search Console verification file and no first-party event log exists in the tree.",
+      "why_it_matters": "The brief asks for automation, scalability and data-driven decisions. Without a measurement layer every future decision stays a judgement, and the site's own pages say so rather than pretending.",
+      "recommendation": "Ship a measurement layer that is policy-safe by construction: a static, cookie-free, first-party event schema with no personal data, plus a documented plan for Search Console and for Associates reporting once the account exists. Do not publish a traffic or earnings forecast (S57). See DS-11 and SG-11.",
+      "source_ids": ["S57", "S55"]
+    },
+    {
+      "id": "DG-12",
+      "severity": "cosmetic",
+      "area": "Repository",
+      "finding": "An open pull request (#70, branch arena/cffe745a-zone2) has been conflicting since 2026-11-15 11:55 UTC with no commits for over 60 minutes, and its two new articles do not survive the repository's own editorial gate.",
+      "measurement": "PR #70 checked on 2026-11-15: mergeable=CONFLICTING, no commits since 11:55 UTC. Its branch was checked out and `marketing/scripts/verify_marketing.py` run against it: 'FAIL G9 articles/index.html: committed file differs from a fresh build'. Its two articles also state unsourced behavioural claims ('worth it if you cook small, fast batches', 'saves time and energy') that the site's sourcing rule forbids.",
+      "why_it_matters": "Per the board's 60-minute takeover rule this session may take the task over. Merging the articles as written would import exactly the unsourced-claim failure the gate exists to prevent.",
+      "recommendation": "Close #70 as superseded, and carry forward only the two topics that can be answered from published specifications (air fryer vs oven; is it worth it) as properly sourced decision pages. Log the outcome on the board either way. See DS-12.",
+      "source_ids": ["S46", "S55"]
+    },
+    {
+      "id": "DG-13",
+      "severity": "blocks a claim",
+      "area": "Compliance commentary",
+      "finding": "This site publishes long, detailed commentary about the Associates Operating Agreement and the Program Policies. Section 5 of the Agreement limits public communications about the Agreement itself.",
+      "measurement": "Section 5 read in full on 2026-11-15: 'Except for this disclosure, and other than as required by applicable law, you will not make any public communication with respect to this Agreement or your participation in the Associates Program without our advance written permission.' (S58). The site's compliance and verification pages quote and analyse the Agreement at length.",
+      "why_it_matters": "This is raised as a question, not a finding of violation. Descriptive, quoted compliance analysis is plausibly not the 'public communication' the clause targets, and the clause plainly is not aimed at the mandatory disclosure. But the reach of the clause is a legal judgement this project cannot make, and an owner should be told it exists before scaling that kind of page.",
+      "recommendation": "Publish the question and do not change the pages on this project's own authority. If the owner wants certainty, ask Associates support in writing. See DQ-13.",
+      "source_ids": ["S58"]
+    },
+    {
+      "id": "DG-14",
+      "severity": "blocks a claim",
+      "area": "Program Content",
+      "finding": "The site quotes Amazon listing titles and bullets extensively. The IP License requires a plain-view disclaimer on any display of Product Advertising Content consisting of text.",
+      "measurement": "S44 Section 2(k) requires the sentence beginning 'CERTAIN CONTENT THAT APPEARS ... COMES FROM AMAZON.' to be included in plain view. grep across all published HTML for 'CERTAIN CONTENT' returns no match.",
+      "why_it_matters": "If any quoted listing text is Product Advertising Content, the required disclaimer is missing on every page that shows it. If it is not, the disclaimer is harmless. The cost of being wrong is asymmetric, and the fix is one line of text on pages that quote listing text.",
+      "recommendation": "Add the 2(k) disclaimer verbatim to pages that display Amazon-sourced text, and record it in the compliance ledger. This is a text change with no data effect. See DS-14 and RF-02.",
+      "source_ids": ["S44"]
+    },
+    {
+      "id": "DG-15",
+      "severity": "blocks growth",
+      "area": "Link architecture",
+      "finding": "The three supplied short links are the only Amazon links a visitor could follow from the brief, and the site never publishes them. That is correct on policy grounds and leaves the brief's own links unused.",
+      "measurement": "grep for 'link.amazon' in published HTML: appears only inside source citations and the flagged page, never as a clickable product call to action. The product CTAs use full amazon.com/dp/ URLs.",
+      "why_it_matters": "The brief assumed the three supplied links were the campaign. They cannot be. The owner needs to know that the site is deliberately not using them, and why, rather than discovering later that the 'campaign links' were replaced.",
+      "recommendation": "State the substitution plainly on the flagged page and on the marketing site's method page, and make replacing them a single, documented step. See DS-02.",
+      "source_ids": ["S45", "S50", "S51"]
+    },
+    {
+      "id": "DG-16",
+      "severity": "blocks growth",
+      "area": "Structured data",
+      "finding": "The root dashboard, which is the page most likely to be a site's entry point from search, carries no structured data at all, while the marketing sub-set carries Article and BreadcrumbList markup.",
+      "measurement": "grep for application/ld+json: 0 matches across the 17 root HTML pages; 18 matches under marketing/.",
+      "why_it_matters": "Structured data is how a search engine understands what a page is about and who published it. The inconsistency also means the same content is described in two different ways depending on which surface a crawler enters.",
+      "recommendation": "Emit WebSite + Organization + BreadcrumbList on the root dashboard and keep Article markup on editorial pages, limited to what each page visibly shows (S59). See DS-06.",
+      "source_ids": ["S49", "S59"]
+    },
+    {
+      "id": "DG-17",
+      "severity": "blocks growth",
+      "area": "Editorial voice",
+      "finding": "The site's prose is accurate and unsloppy, but its strongest asset (four real cross-source disagreements, each measured) is buried in tables rather than argued in prose a reader would arrive from a search for.",
+      "measurement": "Read all 18 marketing pages and the 4 journal pages on 2026-11-15. The conflicts appear as table rows and short notes; only marketing/topics/why-two-official-pages-disagree.html argues one at article length.",
+      "why_it_matters": "This is the difference between a site that reads as a database and a site that reads as a publication. The brief's complaint ('it should not read like some AI slop website') is best answered by argument backed by measurement, not by more adjectives.",
+      "recommendation": "Convert each measured disagreement into one article that takes a position and shows the work, using the existing per-row sources. Add no new facts. See DS-03.",
+      "source_ids": ["S47", "S55", "S56"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "DQ-01",
+      "question": "Does the owner hold an approved Amazon Associates account, and in which marketplace?",
+      "known": "Nothing in the repository records an account, an Associates ID or a marketplace. The brief's supplied links resolve to amazon.com (US) listings; the Associates country selector also lists Japan (S01, observed 2026-11-15). The existing register records this as Q-01/Q-02 and answers neither.",
+      "missing": "Whether an account exists, its approval state, the marketplace and the assigned tag format (XXXXX-##).",
+      "how_to_obtain": "The owner signs in to Associates Central and reports the account country and the Associate ID. This cannot be inferred from public pages and must not be guessed: an invented tag is worse than no tag, which is why tools/link_builder.py refuses one.",
+      "blocks": ["DS-01", "DS-02", "DS-07", "DS-11"],
+      "source_ids": ["S37", "S45"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-02",
+      "question": "What are the full ten-character ASINs, or full product URLs, for the three products the brief intended?",
+      "known": "The supplied tokens are nine characters each; an ASIN is ten (S24 in the existing ledger). Each supplied link resolves reproducibly to one listing (B0CDY277D3, B09B7SB46R, B08DKYBTPH), but no public Amazon document binds those destinations to the products the brief named. Published as flag F-03.",
+      "missing": "The intended ASIN or product URL for each of the three products.",
+      "how_to_obtain": "The owner copies the URL from each product's own Amazon listing (or from Associates Central's link tool) and reports it. The agent then re-verifies that page against the manufacturer's page before any product page is republished.",
+      "blocks": ["DS-01", "DS-07"],
+      "source_ids": ["S45"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-03",
+      "question": "May this project display Amazon-sourced product images, and under which arrangement?",
+      "known": "Product photographs must be Program Content; they may not be stored or cached, and a link to one may be kept at most 24 hours (S44). No Program Content is available without an account.",
+      "missing": "Whether an approved account would supply image programme access for these three ASINs at all, and whether a static GitHub Pages site can satisfy the 'do not store or cache' condition in practice, since a static page serves the same image URL to every visitor rather than re-fetching it.",
+      "how_to_obtain": "Ask Associates support in writing whether a hot-linked image URL served from Amazon's own CDN on a static page satisfies Section 2(h), and record the reply. Until an answer exists, no product photograph is published.",
+      "blocks": ["DS-01"],
+      "source_ids": ["S44", "S43"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-04",
+      "question": "Which measurement tools is the owner willing to authorise?",
+      "known": "No analytics property, no Search Console verification and no cookie banner exist in the tree. The site publishes no personal-data-collecting script today.",
+      "missing": "Whether the owner will add a Search Console property (requires account access, not a code change the agent can make), whether any third-party analytics is acceptable, and whether the owner accepts a cookie-free first-party event log.",
+      "how_to_obtain": "The owner decides; the agent supplies the trade-offs. Search Console verification requires the owner's Google account, so this is an owner action with an agent-prepared file.",
+      "blocks": ["DS-11"],
+      "source_ids": ["S55"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-05",
+      "question": "Does 'it should not read like some AI slop website' point at the dashboard's density, the marketing set's voice, or both?",
+      "known": "The root dashboard is a verification console: eighteen pages of tables, single-sentence paragraphs and KPI chips. The marketing set is a publication: 18 reader-facing pages with arguments and a stated method.",
+      "missing": "Which surface the owner means. The two are different products with different readers and the fix differs: one needs less machinery on the page, the other needs more argument.",
+      "how_to_obtain": "The owner names the page they were looking at, or picks one of the options in DS-13. This register proposes a default so the work can proceed without an answer, and labels it a default.",
+      "blocks": ["DS-13"],
+      "source_ids": ["S55"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-06",
+      "question": "Is there a domain, and does the owner consider the GitHub Pages address acceptable for an Associates application and for search?",
+      "known": "The live site is at kanlerxz87-cyber.github.io/Zone2. Associates applicants must own their site; the site's own register records that whether a github.io subdomain satisfies that test is not settled by any public Associates page (existing Q-04).",
+      "missing": "Whether a domain is owned or will be bought, and any written answer from Associates support about github.io.",
+      "how_to_obtain": "Owner decision, plus an email to Associates support if certainty matters. A custom domain also changes every canonical URL, so it must be settled before the sitemap and canonical tags are finalised.",
+      "blocks": ["DS-04"],
+      "source_ids": ["S37"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-07",
+      "question": "Which of the four measured cross-source disagreements should the site arbitrate, and by what rule?",
+      "known": "Four conflicts are published with both values and both sources (DG-08). The site currently shows both numbers and leaves the reader to choose.",
+      "missing": "The owner's arbitration rule. The proposed default (manufacturer's current product page wins for specification values; the retail listing is quoted as what the retailer says) is a judgement, not a program fact.",
+      "how_to_obtain": "Owner choice from DS-08's options. A one-line rule is enough; it is then applied uniformly by the generator and shown on every conflict row.",
+      "blocks": ["DS-08"],
+      "source_ids": ["S47"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-08",
+      "question": "Is the site willing to publish an honest statement that its copy is produced by an automated pipeline with a human fact-check gate, and under whose name?",
+      "known": "No authorship statement exists anywhere in the tree (DG-10). Google's guidance explicitly warns against fabricated author profiles and recommends explaining automation (S55, S56).",
+      "missing": "Whether the owner wants a named person accountable, a desk-level entity, or no byline at all; and the display name if one is chosen.",
+      "how_to_obtain": "Owner decision. The agent prepares the two available templates (desk-level provenance statement; named-author page) and publishes neither until a choice is recorded.",
+      "blocks": ["DS-10"],
+      "source_ids": ["S55", "S56"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-09",
+      "question": "Does the owner want the platform's own compliance commentary publicly visible before an account exists?",
+      "known": "The site quotes and analyses the Operating Agreement at length, and Section 5 restricts public communications about the Agreement (S58, DG-13).",
+      "missing": "Whether the owner wants to ask Associates support for a written view, keep the commentary as-is as descriptive analysis, or move it behind the dashboard rather than the public site.",
+      "how_to_obtain": "Owner decision; optionally an email to Associates support. This is published as a question precisely because the project must not answer it for the owner.",
+      "blocks": [],
+      "source_ids": ["S58"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-10",
+      "question": "What is the owner's monthly budget in hours and money for this project?",
+      "known": "GitHub Pages hosting is free at this scale and the repository publishes no paid service. Nothing in the tree records a budget, and none should be inferred.",
+      "missing": "Any budget at all: a domain, a Search Console account, paid search, content, or the owner's own time.",
+      "how_to_obtain": "Owner states it. Every suggestion in this register is written so it can be executed without a budget; the ones that would benefit from one say so.",
+      "blocks": [],
+      "source_ids": ["S37"],
+      "owner": "owner"
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "DS-01",
+      "area": "Product presentation",
+      "title": "How should the product pages show what the products look like, without a licence to use Amazon photography?",
+      "suggestion": "Leave every photograph out. Replace the empty visual slot with original, self-drawn SVG diagrams generated from the specification rows the site already publishes: a capacity diagram showing the 6 Qt two-basket interior against the 8 Qt single chamber, a footprint diagram drawn to scale from the published dimensions, and a door-geometry diagram for the French-door oven. Each diagram carries a caption naming the source row it was drawn from.",
+      "why": "A reader needs to see the shape of the decision, and the two hard constraints (no Program Content without an account; no storing an Amazon image) do not stop the site drawing its own accurate diagram of a measured number. A diagram drawn to scale from a sourced dimension is original work and carries no Amazon image, no Amazon mark and no third-party photograph.",
+      "evidence": ["S44", "S43", "S47"],
+      "options": [
+        {"id": "A", "label": "Original specification diagrams, no photographs", "tradeoff": "Compliant today with no account, and genuinely useful for capacity and fit. Costs drawing work, and a diagram is less persuasive than a photograph."},
+        {"id": "B", "label": "Wait for an Associates account, then use Program Content images", "tradeoff": "The most persuasive option, but blocked on DQ-01/DQ-03 and possibly on a static host satisfying the no-cache rule. Nothing ships until the account exists."},
+        {"id": "C", "label": "Nothing visual; keep tables only", "tradeoff": "Zero effort and zero risk. Leaves the largest conversion cost on the site in place."}
+      ],
+      "recommended": "A, then B",
+      "needs_answers": ["DQ-01", "DQ-02", "DQ-03"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner",
+      "implemented_by": "none - diagrams ship only after a decision is recorded"
+    },
+    {
+      "id": "DS-02",
+      "area": "Link strategy",
+      "title": "What should the site link to while there is no Associates tag?",
+      "suggestion": "Publish full, visible amazon.com/dp/<ASIN> URLs with a clear label, the '(paid link)' tag beside the link and rel=\"sponsored nofollow\", exactly as now, and add one documented switch that turns every product link into a tagged Special Link the moment an Associates ID exists. Document on the flagged page why the three supplied short links are not used.",
+      "why": "A full product URL is unambiguous and cannot be mistaken for a cloaked redirect (S45, S51). It is also the only shape that becomes a Special Link by adding a parameter, which makes the switch a one-line data change rather than a rewrite.",
+      "evidence": ["S45", "S48", "S50", "S51"],
+      "options": [
+        {"id": "A", "label": "Direct visible product URLs now, documented switch for the tag", "tradeoff": "Compliant and honest; earns nothing until the tag exists, and the site must keep saying so."},
+        {"id": "B", "label": "Publish the three supplied short links", "tradeoff": "Not recommended. They carry no tag, the shortener is a link-shortening service, and a short URL makes the destination unclear (S45)."},
+        {"id": "C", "label": "Publish placeholder tagged links that are switched on later", "tradeoff": "Workable, but a placeholder tag is easy to ship by accident and any invented tag is a compliance problem."}
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-01"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-03",
+      "area": "Organic traffic",
+      "title": "How should the site earn organic traffic without tripping the scaled-content rules?",
+      "suggestion": "Publish one page per buying question, each answering it from the specifications already gathered, and make the four measured cross-source disagreements the flagship pieces. Start with six: how many quarts a household actually needs; two baskets or one chamber; basket fryer or French-door oven; what Hi-Fry changes; will it fit the counter; and why two official pages disagree about one product. Every page states its answer in the first two sentences and cites the row it came from.",
+      "why": "These six are exactly the queries a buyer types, and the site already holds the data to answer them with numbers a competitor's page does not have. That is the 'original content or added value' S47 names, and it is the opposite of the many-thin-pages pattern S46 penalises.",
+      "evidence": ["S46", "S47", "S55", "S56"],
+      "options": [
+        {"id": "A", "label": "Six decision pages from existing data, then pause and measure", "tradeoff": "Highest value per page and no new fact-gathering. Six pages is not a traffic strategy on its own; it needs the measurement layer to know what to write next."},
+        {"id": "B", "label": "Generate 100+ pages across many niches", "tradeoff": "Not recommended. Without new data per page this is the scaled-content pattern S46 describes, and the brief's own 'no AI slop' complaint is about exactly this outcome."},
+        {"id": "C", "label": "Write nothing until traffic data exists", "tradeoff": "Perfectly safe and self-defeating: with no new pages and no analytics, there is no traffic and no data to wait for."}
+      ],
+      "recommended": "A",
+      "needs_answers": [],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-04",
+      "area": "Organic traffic",
+      "title": "How should the sitemap stop drifting from what is actually published?",
+      "suggestion": "Replace the hand-maintained root sitemap with one generated from the published file tree in the build, gate it with a --check mode like every other generator in this repository, and reference both the root and the marketing sitemap correctly from robots.txt. Exclude the internal dashboards the brief never asked to rank.",
+      "why": "The root sitemap lists 16 of 116 published pages (DG-04). A generated sitemap cannot drift, and the repository's established pattern (build, then --check in CI) is what stopped the equivalent drift in every other generator.",
+      "evidence": ["S55"],
+      "options": [
+        {"id": "A", "label": "Generate the sitemap from the file tree and gate it in CI", "tradeoff": "Cannot drift again, and costs one small generator plus one CI step. Requires an explicit exclusion list so internal dashboards are not submitted."},
+        {"id": "B", "label": "Hand-maintain it and add a CI check for missing pages", "tradeoff": "Smaller change, but the check has to decide what belongs in the sitemap anyway, so it is the same work with a worse failure mode."},
+        {"id": "C", "label": "Submit every HTML page including the internal dashboards", "tradeoff": "Simplest to generate and wrong: it asks search engines to rank a verification console as if it were reader content."}
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-06"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-05",
+      "area": "Link hygiene",
+      "title": "Should anything change about how links are qualified?",
+      "suggestion": "No change to the emitted markup. Keep rel=\"sponsored nofollow\" on every Amazon link, keep the existing gate that fails a build when a product link lacks it, and add a regression test that fails if a future change drops it.",
+      "why": "The current shape is already what Google asks for (S48) and is enforced by tools/validate_data.py. Recording it as a decision prevents a later refactor from quietly losing it.",
+      "evidence": ["S48"],
+      "options": [
+        {"id": "A", "label": "Lock the current behaviour with a regression test", "tradeoff": "Costs one test; removes the risk of a silent regression in the one place a mistake is least visible."},
+        {"id": "B", "label": "Leave as is with no new test", "tradeoff": "No work now; the guard already exists in the validator, so the marginal risk is small."}
+      ],
+      "recommended": "A",
+      "needs_answers": [],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-06",
+      "area": "Structured data",
+      "title": "What structured data should the site emit today, given it has tested nothing?",
+      "suggestion": "Emit WebSite and BreadcrumbList on the root dashboard, keep Article and BreadcrumbList on editorial pages, and emit no Product, Review or AggregateRating object anywhere. Add a gate that fails the build if Product or AggregateRating markup appears without a measured rating behind it.",
+      "why": "Structured data must describe content a reader can see, and ratings must not be aggregated from other sites (S49, S59). A gate is the only way that stays true after the next contributor.",
+      "evidence": ["S49", "S59"],
+      "options": [
+        {"id": "A", "label": "WebSite + BreadcrumbList + Article only, gated", "tradeoff": "Honest and durable. No star ratings in search results, so the listing looks plainer than a competitor's."},
+        {"id": "B", "label": "Add AggregateRating from Amazon listings to win stars", "tradeoff": "Not recommended. Google's guidelines forbid aggregating ratings from other websites (S49), and Amazon forbids displaying star ratings obtained outside the API (S43)."},
+        {"id": "C", "label": "Add nothing anywhere", "tradeoff": "No risk, no benefit; loses the disambiguation and breadcrumb treatment that costs nothing to emit."}
+      ],
+      "recommended": "A",
+      "needs_answers": [],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-07",
+      "area": "Pricing",
+      "title": "Should the site show prices at all?",
+      "suggestion": "Show no price, no price history and no price alert. Prepare a dated price display that is switched on only when Amazon serves it on the link or a Creators API response supplies it, with the required timestamp and the standard accuracy disclaimer. Ship the preparation as documented code with the switch off.",
+      "why": "S53 permits a price only from those two sources; S52 forbids tracking and alerting without written agreement. Preparing the compliant path costs nothing and makes the eventual switch a configuration change rather than a project.",
+      "evidence": ["S52", "S53", "S57"],
+      "options": [
+        {"id": "A", "label": "No prices now; compliant, switched-off path prepared", "tradeoff": "Compliant and ready. The site stays less persuasive than one showing a price, for as long as the account is missing."},
+        {"id": "B", "label": "Display manufacturer prices as a proxy", "tradeoff": "Not recommended. A manufacturer price is not the price at checkout and S53 governs the Amazon price a reader will actually pay."},
+        {"id": "C", "label": "Add price history charts and price-drop alerts", "tradeoff": "Not available without Amazon's written agreement (S52), and would be a policy violation if shipped now."}
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-01", "DQ-02"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-08",
+      "area": "Specification accuracy",
+      "title": "When two official pages disagree, which number should the reader trust?",
+      "suggestion": "Publish one arbitration rule and apply it everywhere: the manufacturer's current product page governs a specification value; the retail listing is quoted as what the retailer states, and the difference is shown rather than hidden. State the rule on the verification page and link it from every conflict row. Change no value.",
+      "why": "The site already shows both numbers, which is honest but shifts the decision to the reader (DG-08). A published rule is more useful and more defensible, and it costs no new research.",
+      "evidence": ["S47", "S55"],
+      "options": [
+        {"id": "A", "label": "Manufacturer page governs specifications; listing quoted as-is", "tradeoff": "Clear and consistent. A manufacturer can be wrong or out of date about its own product, and the Amazon listing may reflect a revision the maker's page has not caught."},
+        {"id": "B", "label": "Newest-dated page governs", "tradeoff": "Principle is sound, but neither page publishes a revision date for the specification in question, so the rule cannot be applied from the evidence the site has."},
+        {"id": "C", "label": "Show both and state no rule", "tradeoff": "Current state. Maximally cautious, and the least useful to a reader about to spend money."}
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-07"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-09",
+      "area": "Disclosure",
+      "title": "Should the disclosure wording or placement change?",
+      "suggestion": "No change. Keep the exact Agreement sentence in the footer of every page, keep the link-level '(paid link)' tag beside every product link, and keep the per-page strip. Add one thing: a gate that fails the build if any page ever shows a product link without both.",
+      "why": "The current placement is what FTC guidance asks for and what the Agreement prescribes (S54, S20). A gate makes it permanent.",
+      "evidence": ["S54", "S48"],
+      "options": [
+        {"id": "A", "label": "Keep wording and placement; add the gate", "tradeoff": "Costs one gate. Preserves the strongest part of the current site."},
+        {"id": "B", "label": "Rely on the footer disclosure alone", "tradeoff": "Not recommended. FTC guidance says a disclosure placed only where a reader must click to find it is likely to be missed (S54)."}
+      ],
+      "recommended": "A",
+      "needs_answers": [],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-10",
+      "area": "Authorship and trust",
+      "title": "Who should the site say wrote it, given that a pipeline writes and a human gates?",
+      "suggestion": "Publish a desk-level provenance statement and an author page that says exactly what the pipeline does, what the gates reject, what a human decides, and what the desk has never attempted (no hands-on testing, no ratings). Attribute the work to the desk, not to an invented person, and never to a stock photograph of a writer.",
+      "why": "Google's guidance asks who created the content and how, warns that fabricated creator profiles are deception, and recommends explaining automation (S55, S56). The honest version is also the more interesting read, which is the best answer to the 'AI slop' complaint.",
+      "evidence": ["S55", "S56"],
+      "options": [
+        {"id": "A", "label": "Desk-level provenance page, no invented person", "tradeoff": "Truthful and cheap, and satisfies the 'Who/How/Why' questions. Some readers weight a named human more heavily than a desk, so it may convert slightly worse than a real byline."},
+        {"id": "B", "label": "Name a real accountable person (the owner)", "tradeoff": "Strongest trust signal if the owner is willing, and it puts a real reputation behind every page. Creates a personal liability and maintenance burden the owner may not want."},
+        {"id": "C", "label": "Invent an author persona with a generated photograph", "tradeoff": "Not recommended in any form. Google names fabricated creator profiles, made-up names and AI-generated headshots as deception (S55)."}
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-08"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-11",
+      "area": "Measurement",
+      "title": "How should the site measure clicks, conversions and what to write next, with no account and no analytics?",
+      "suggestion": "Ship a documented measurement layer that is policy-safe by construction: a static, cookie-free, first-party event schema for outbound-link clicks (no personal data, no cross-site identifier, no user-derived sub-tag), a Search Console verification file the owner activates, and a conversion path that reads Associates reporting once the account exists. Publish the schema and the decisions it will support; publish no traffic or earnings forecast.",
+      "why": "Every growth decision in this register is currently a judgement because nothing is measured (DG-11). A cookie-free click counter is the only measurement available before an account exists, and it is enough to answer 'which page sends people to which product'. S57 forbids presenting any expectation of income, so the layer records what happened and never projects what will.",
+      "evidence": ["S57", "S55", "S45"],
+      "options": [
+        {"id": "A", "label": "Cookie-free first-party click events + Search Console + Associates reporting later", "tradeoff": "Measurable within days and privacy-preserving. GitHub Pages serves static files, so the event sink has to be an external endpoint the owner controls; that is the one real cost."},
+        {"id": "B", "label": "Third-party analytics script", "tradeoff": "Fastest to set up and answers traffic questions well. Adds a third-party cookie problem, a consent question and a script this project cannot verify."},
+        {"id": "C", "label": "Wait for Associates reporting only", "tradeoff": "No extra work and no new technology. Gives nothing until an account exists, and gives no page-level behaviour even then."}
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-01", "DQ-04"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-12",
+      "area": "Repository",
+      "title": "What should happen to the stale, conflicting pull request #70?",
+      "suggestion": "Close #70 as superseded and carry forward its two genuinely useful topics as properly sourced decision pages under DS-03. Do not merge its HTML as written: it states behavioural claims the site's sourcing rule forbids and it fails the marketing gate.",
+      "why": "The PR has been conflicting for over an hour with the author inactive, which meets the board's takeover rule (DG-12). Its two articles answer real questions but assert 'worth it if' and 'saves time and energy' without a source. The topics survive; the unsourced sentences do not.",
+      "evidence": ["S46", "S55"],
+      "options": [
+        {"id": "A", "label": "Close as superseded; re-write the two topics as sourced decision pages", "tradeoff": "Keeps the useful work and the site's standard. The original author's exact prose is not preserved on the site, only in git history."},
+        {"id": "B", "label": "Merge it as written", "tradeoff": "Not recommended. Imports unsourced behavioural claims and a failing gate into main."},
+        {"id": "C", "label": "Leave it open indefinitely", "tradeoff": "No risk of a bad merge; leaves a conflicting PR in the queue and the topics unpublished."}
+      ],
+      "recommended": "A",
+      "needs_answers": [],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-13",
+      "area": "Design direction",
+      "title": "Which surface should the 'does not read like AI slop' complaint be aimed at?",
+      "suggestion": "Treat the two surfaces as different products. The dashboard keeps its tables but gains a short, plain-language front door: what this is, what it found, what it is waiting on. The marketing set gains argument at article length and loses any remaining register-speak. Body copy on both is written to the rule that no sentence may restate a table row in words.",
+      "why": "The complaint is answered by specificity and argument, not adjectives (S55). The two surfaces fail for opposite reasons: the dashboard is too much machinery, the marketing set is occasionally too little voice.",
+      "evidence": ["S55", "S56", "S47"],
+      "options": [
+        {"id": "A", "label": "Both: a plain front door on the dashboard, longer argument on the marketing set", "tradeoff": "Addresses whichever surface the owner meant. More work than fixing one, and touches two owners' file scopes."},
+        {"id": "B", "label": "Marketing set only", "tradeoff": "Cheaper and self-contained. If the owner was looking at the dashboard, nothing they complained about changes."},
+        {"id": "C", "label": "Dashboard only", "tradeoff": "Same risk in reverse."}
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-05"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-14",
+      "area": "Program Content",
+      "title": "Should the site carry Amazon's required text disclaimer where it quotes listing text?",
+      "suggestion": "Add the Section 2(k) disclaimer verbatim to every page that displays Amazon-sourced text, and record it as a control in the compliance ledger.",
+      "why": "The Licence requires it in plain view wherever Product Advertising Content consisting of text is displayed, and no page carries it (DG-14). If the quoted listing titles are Program Content, its absence is a gap on every product page; if they are not, one line of text costs nothing.",
+      "evidence": ["S44"],
+      "options": [
+        {"id": "A", "label": "Add the verbatim disclaimer to affected pages", "tradeoff": "One line of text, no data change, closes an asymmetric risk. Adds a long capitalised sentence to pages that are otherwise carefully written."},
+        {"id": "B", "label": "Ask Associates support whether quoted titles count as Product Advertising Content first", "tradeoff": "Settles the question properly. Takes time, and leaves the pages without the disclaimer in the meantime."},
+        {"id": "C", "label": "Do nothing until the account exists", "tradeoff": "Zero effort. Leaves a documented licence requirement unmet on every page that quotes a listing."}
+      ],
+      "recommended": "A",
+      "needs_answers": [],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    }
+  ]
+}
