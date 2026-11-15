@@ -3437,3 +3437,64 @@ appended nav link, one README source-count label, five appended source rows (S38
 | T31 | **done** |
 
 **Still open for the owner (unchanged):** F-42's duplicated-fragment review; CR-9 executive-summary subsection; F-39…F-41 promotion (d0135100's CR-6); the product/account questions Q-01…Q-16 that gate every suggestion SG-01…SG-10. Open PRs at close: #65, #70 (both marketing-layer work by other sessions, non-overlapping with T31).
+### T30 — work record (2026-11-15 UTC, before the integration PR)
+
+**Delivered (additive; no fact, row, source or status changed anywhere in the fact base):**
+
+1. **Root dashboard → decision layer.** `index.html` nav + footer now link `pages/suggestions.html`
+   (Suggestions) and `pages/questions.html` (Open Questions) — the decision surfaces session `2499438c`
+   shipped are reachable from the dashboard for the first time. Additive links only.
+2. **Marketing editorial upgrade (T30 core).** `tools/build_marketing.py` + `marketing/data/facts.json`
+   (additive fields only: `hook_editorial`, `suits_editorial`, `suits_editorial_source`, `look_elsewhere`,
+   `planned_topics`, `editorial_note`), regenerated `marketing/**`:
+   - each article opens with a hook that restates verified specs, plus an explicit "honest fine print"
+     paragraph (no hands-on testing, no ratings, no prices);
+   - new **Who this fits** section per article — every line restates something the cited manufacturer page
+     already states, with the source linked inside the section (suggestion SG-05's data-led wording);
+   - new **If that's not you** block cross-linking the three articles (the set is now an internal network);
+   - overview page explains the site's editorial rule in plain language and links the suggestions board;
+   - articles index publishes a **"Planned topics — not published yet"** queue: four topic ideas, each tied
+     to the verified rows it would rest on, explicitly gated on suggestion **SG-04** — nothing commissioned
+     until the owner records a decision in `ledger/suggestions.json`.
+   Wording follows SG-05; layout follows SG-06's recommendation A. Both suggestions remain OPEN for the
+   owner; the brief's explicit instruction ("polished marketing affiliate website … not AI slop") is what
+   authorises implementing the tone upgrade itself while leaving the strategic decisions open.
+3. **`EXECUTIVE_SUMMARY.md`** — additive 2026-11-15 addendum (decision surfaces, editorial pass, fresh
+   verification day, the P2 title-drift flag).
+4. **`docs/verification-8c4236ad.md`** (new) — this session's verification record, W-01…W-11.
+
+**Independent verification performed 2026-11-15 (live fetches, full table in `docs/verification-8c4236ad.md`):**
+the three supplied links re-resolved to one destination each (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`),
+breadcrumb reproduced on all three; ASIN = "10-digit code" verbatim; official tagged format verbatim; OA
+"Updated: October 15, 2025", §5 disclosure sentence, §4 disclaimers, §6 7-day termination and
+§5-violation-is-material-breach, §2 cease-payment — all verbatim; `btn_ref` srctok tokens new again
+(consistent with F-21); live `pages/suggestions.html` and root dashboard render as recorded.
+
+**New irregularity — P2 listing-title drift (flagged, not corrected).** Amazon's `B09B7SB46R` title now
+reads "…Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking
+Accessories Included" versus the 2026-11-14 recorded "…24 cooking functions, dual-speed fan and rotisserie
+for easy family meals." Published value retained with its read date; re-read recommended next cycle. The
+"Six … Included" wording is a third accessories variant beside the manufacturer's "7 premium accessories"
+(already published as MK-07 / the P2 partial row). The 24-vs-25 preset CONFLICT is unaffected.
+
+**New irregularity — orphaned conflict markers had been committed to `main`.** `COORDINATION.md` at
+`e030c40` (inside PR #60's merge) carried a stray `=======` and `>>>>>>> origin/main` pair with no opening
+marker in the T26 closing-record region. Removed additively during the T30 rebase; not one word of any
+session's record was dropped. This file is append-only, but its conflict resolutions evidently need the same
+care its records get.
+
+**Change request CR-8 (logged, not implemented — `tools/build_site.py` + generated `pages/**` are T29 owner
+`2499438c`'s surface):** the suggestion rows on `pages/suggestions.html` carry no `id` anchors, so no other
+page can deep-link to a single suggestion (SG-01…SG-10) — this session's marketing topics section wanted to
+link `#SG-04` and the fragment gate correctly failed the build. Request: emit `id="SG-01"`…`id="SG-10"` on
+the suggestion rows (and matching ids for Q-01…Q-16 on `pages/questions.html`) so decision reasoning can be
+cross-linked from the marketing set and executive summary.
+
+**Gates on the T30 tree (all green before the PR):**
+`validate_data.py` (0 errors, 0 warnings) · `tests/test_pipeline.py` 15/15 · `build_site.py --check`
+(39 built, 0 drifted) · `build_root_views.py --check` 0 · `build_root_data.py --check` up to date ·
+`build_summary.py --check` 0 · `build_marketing.py --check` current · `verify_marketing.py` OK
+9 pages · 48 spec rows (unchanged) · `audit_site.py` 97 pages, 5/5 (fragments, spec_sources, prose_counts,
+namespaces, disclosure) · `affiliate-lab/scripts/verify_site.py` 0 failures · `revalidation` build+verify 0 ·
+`research-hub` build byte-identical + verify 0 errors · `node --check` data.js/app.js OK · workflow
+link-checker: all internal links and assets resolve · disclosure/no-price sweep: 88 pages clean.
