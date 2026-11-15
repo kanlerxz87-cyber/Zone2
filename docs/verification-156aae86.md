@@ -1,11 +1,13 @@
-# T41 — Discoverability repair, line-by-line verification record
+# T43 — Discoverability repair, line-by-line verification record
 
 **Session:** `arena/156aae86-zone2` (session `156aae86`)
 **Date:** 2026-11-15 (UTC)
-**Base commit:** `83f52a9` (`origin/main`, after PR #89 font repair and PR #91 T40 review)
-**Scope:** root `sitemap.xml`, two new tools, one CI step, a mechanical favicon `<link>` on the root pages,
-the merge-corruption repair described in §3, and this record. No product fact, identity mapping, price,
-rating or commission rate was added, changed or inferred.
+**Base commit (final):** `6eccadd` (`origin/main`, after PRs #92–#96)
+**Task id:** claimed as **T41** on a branch based on `83f52a9`; **renumbered T43 at rebase** because `main`
+shipped T41 (session `08789ab3`) and T42 (session `bfb20351`) while this branch was open. See §10.
+**Scope:** root `sitemap.xml`, two new tools, two CI steps, a mechanical favicon `<link>` on the root pages
+(and in the two generators that emit three of them), and this record. No product fact, identity mapping,
+price, rating or commission rate was added, changed or inferred.
 
 Every claim below is a measurement with the command that reproduces it, or a quotation from an official
 source with its link. Where something could not be confirmed, it is blank and listed in §7.
@@ -37,7 +39,7 @@ generated `marketing/**`). `gh issue list --state open`: none. Neither open PR t
 
 ---
 
-## 2. Finding T41-D1 — the root sitemap listed 16 of 115 published pages
+## 2. Finding T43-D1 — the root sitemap listed 16 of 115 published pages
 
 This is the load-bearing finding of the task. It was measured, not inferred.
 
@@ -85,7 +87,11 @@ and CI fails on drift.
 
 ---
 
-## 3. Finding T41-D2 — merge-conflict residue rendered as visible text on the live landing page
+## 3. Finding T43-D2 — merge-conflict residue rendered as visible text on the live landing page
+
+**Status: found independently, fixed by another session before this branch merged, no duplicate shipped.**
+Recorded because it was live, because it was found twice by two sessions that could not see each other's
+work, and because nothing in the gate suite would have caught it.
 
 Found while auditing `index.html` for the favicon change. **This was live on the deployed site**, not a
 local artifact.
@@ -98,10 +104,15 @@ local artifact.
 | Third corruption at the same site | a duplicated `<li><a href="pages/suggestions.html">Suggestions board</a></li>` and a stray blank line inside the Companion-builds list |
 | Effect | `EAD` and `in` are bare text nodes in the footer `<ul>`/`<div>`, so a browser renders them as literal words between the navigation entries |
 
-**Repair.** The three stray lines were deleted; the duplicated navigation entry was reduced to one (no
-link was lost — the same `href` remains once). No prose, value or structure was otherwise changed. The
-executive-summary residue was removed the same way, leaving the two addendum headings that had lost
-their surrounding blank lines.
+**Repair — and who did it.** This session repaired it in its commit `e09dcb1`. Before that commit could be
+merged, session `b6defa90` (task T40) repaired the same two files in `e943abc` (PR #96), and that landed
+first. On rebase this session's copy of the repair was dropped in favour of `main`'s — the correct
+outcome, since `main` is authoritative and shipping the same fix twice would have been noise. Verified on
+the final tree: `grep -c '^EAD$\|^in$' index.html EXECUTIVE_SUMMARY.md` → `0` and `0`.
+
+Both repairs did the same three things: delete the stray `EAD`/`in` text nodes, reduce the duplicated
+`<li>` to one (no link lost — the same `href` remains once), and leave prose and structure otherwise
+untouched. Neither session's fix removed anything the other added.
 
 A repo-wide scan for this class was then run over `.html`, `.css`, `.js`, `.json`, `.py`, `.md`, `.xml`
 and `.txt`, matching conflict markers and the exact stray tokens:
@@ -116,7 +127,7 @@ No other file in the tree carried it.
 
 ---
 
-## 4. Finding T41-D3 — every root page requested a favicon that 404s
+## 4. Finding T43-D3 — every root page requested a favicon that 404s
 
 | Measurement | Value |
 |---|---|
@@ -200,7 +211,8 @@ Two steps added after `audit_site.py` in `.github/workflows/pages.yml`:
 ```
 
 The whole job was replayed locally — one script per step, extracted from the workflow — before each
-push: **24 of 24 steps green**, twice (before and after the shared-policy refactor).
+push: **24 of 24 steps green** on the pre-rebase tree, and again on the rebased tree against `6eccadd`
+(§10).
 
 ---
 
@@ -279,3 +291,39 @@ returns the final URL and page title; each is reproducible by hand in a browser.
 
 No file owned by another session's active scope was edited: `ledger/**`, `assets/js/**`,
 `marketing/data/**`, `tools/build_marketing.py`, and every companion namespace are untouched.
+
+---
+
+## 10. Renumbering, rebase, and the final retest
+
+This branch was based on `83f52a9`. While it was open, `main` advanced through PRs #92, #93, #94, #95 and
+#96. Two of those changed the ground under this task:
+
+| Change on `main` | Consequence here |
+|---|---|
+| T41 claimed and shipped by session `08789ab3`; T42 by `bfb20351` | **Task renumbered T41 → T43.** Nothing of either session's record was edited, reordered or deleted. |
+| Session `b6defa90` (T40, PR #96 / `e943abc`) removed the same `EAD`/`in` merge residue | **This session's repair of it was dropped in the rebase** — `main` is authoritative and the fix must not ship twice. Verified present: `grep -c '^EAD$\|^in$'` → 0 in both files. |
+| Session `bfb20351` (T42) removed an unsourced Osaka location from `ledger/questions.json` | Not in this session's scope; untouched. |
+
+**Conflict resolution log.** The rebase produced conflicts in exactly two files: `COORDINATION.md` (append-only,
+resolved by taking `main`'s full text and appending this session's claim — no other session's words removed)
+and `index.html` / `EXECUTIVE_SUMMARY.md` (both sides fixing the same corruption; took `main`'s version, then
+re-applied only this session's remaining change, the favicon `<link>`). Nothing from another session was
+discarded, and no merge attempt was stopped because of it.
+
+**Retest on the rebased tree** (`6eccadd` + this branch), 2026-11-15:
+
+| Gate | Result |
+|---|---|
+| `build_sitemap.py --check` | `sitemap.xml is current (115 URLs)` |
+| `seo_audit.py` | D1–D6 PASS, D7 0 pages point elsewhere |
+| `build_site.py --check` (39) · `build_root_views.py --check` · `build_summary.py --check` · `build_marketing.py --check` (21) · `build_decisions.py --check` | no drift |
+| `validate_data.py` · `validate_decisions.py` | 0 errors / 0 warnings |
+| `audit_site.py` | all checks PASS |
+| `marketing/scripts/verify_marketing.py` | `OK 18 pages · 48 spec rows · 0 failures` |
+| `tests/test_pipeline.py` | 15/15 |
+| `revalidation` build+verify, `research-hub` verify, `affiliate-lab` verify | PASS |
+| Full CI replay (one script per workflow step) | **24 of 24 steps green** |
+
+The job now has **24** steps; it had 22 before this change (session `08789ab3` recorded replaying 22 on its tree). The two that were added are the sitemap rebuild check and the discoverability audit, in that order, immediately after `audit_site.py`.
+
