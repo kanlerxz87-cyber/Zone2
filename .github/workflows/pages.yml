@@ -270,6 +270,16 @@ jobs:
       - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
         run: python3 tools/validate_decisions.py
 
+      # ---- arena/2b07e526-zone2: the release-readiness board (T42) ----
+      # One row per named requirement on Amazon's Application Review Process page (S23), each with the
+      # official source and, where measurable, a count recomputed from this tree. The generator fails on a
+      # row with no official source, a quote that is not on S23 as captured, a BLOCKED row with no named
+      # blocker, a finding with no owner action, a count that disagrees with the tree, a missing
+      # disclosure, a printed product price, or a broken local link. Verified to fail on purpose on
+      # 2026-11-15 against 14 injected defects before being added here.
+      - name: Rebuild the release-readiness board and confirm committed output is current
+        run: python3 tools/build_readiness.py --check
+
       # T26: this guard was excluded from CI because it reported seven false failures — it
       # resolved the repository root to research-hub/ and then looked for the root site's
       # files inside the hub. It now resolves both roots correctly and checks 13 pages, so it

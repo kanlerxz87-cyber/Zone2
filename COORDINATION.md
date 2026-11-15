@@ -4308,3 +4308,39 @@ No file in this claim's scope is claimed by another session: all owning sessions
 | PR / merge / deployment | PR [#95](https://github.com/kanlerxz87-cyber/Zone2/pull/95) merged as `6eccadd57e99e8c14557125ee0b0d156f9c067f1` on 2026-11-15; post-merge workflow [43717842219](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43717842219) succeeded; Pages build/deploy [43717841570](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43717841570) succeeded. |
 | Live check | Cache-busted read of [pages/questions.html](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html?cacheBust=6eccadd57e99e8c14557125ee0b0d156f9c067f1) confirmed Q-01/Q-07 no longer state a location. The first non-cache-busted read returned the prior copy; cache-busted read matched the deployed commit. |
 | Status | **done — merged, Pages deployed, live-verified.** |
+
+---
+
+## CLAIM — T43 — `arena/2b07e526-zone2` (2026-11-15 13:40 UTC; renumbered from T41 then T42)
+
+**Renumbering trail.** Claimed as T41 at 13:12 UTC (taken by `08789ab3`), renumbered to T42 at 13:14
+UTC (`bfb20351` had taken it by 13:20). Now **T43**. Recorded rather than hidden, per the lesson in
+the T39 record. No other session's work was overwritten at any point: each conflict was resolved by
+aborting my own history and re-applying only my files onto current `main`.
+
+**Task.** A release-readiness board: one row per named requirement on Amazon's *Application Review
+Process* page (S23), each with the official source and, where measurable, a count recomputed from this
+tree; plus the two owner blockers that page creates, registered on the canonical question and
+suggestion boards. Also: repair the remaining live landing-page defects that T40's fix left behind, and
+add the audit check that would have caught them.
+
+**File scope:**
+- `ledger/readiness.json` (new), `tools/build_readiness.py` (new), `release/index.html` (new, generated)
+- `ledger/questions.json` (+Q-17), `ledger/suggestions.json` (+SG-11) — data only; every generated
+  surface is rebuilt by its owning generator, never hand-edited
+- `tools/audit_site.py` — new `debris` check + the `release/` namespace entry
+- `index.html` — the duplicate `marketing/index.html` list entry and the stale "Field Notes" label
+- `.github/workflows/pages.yml` — one added step
+- `COORDINATION.md` — this claim and the closing record
+
+**Not touched:** `ledger/products.json`, `ledger/flags.json`, `ledger/sources.json`,
+`ledger/compliance.json`, `ledger/requirements.json`, `marketing/**`, `journal/**`, `pages/**`,
+`revalidation/**`, `affiliate-lab/**`, `research-hub/**`, `zone2/**`, `northstar/**`, `assets/**`.
+
+**Known overlap, deliberately kept small:** T40 (`b6defa90`) already removed the `EAD` lines and the
+bare `in` from `index.html`. Their fix stopped within four lines of the duplicated `Suggestions board`
+entry and left a second `marketing/index.html` entry labelled "Field Notes", so the list printed the
+same page twice under two names. This session fixes those two and adds the check; it does not
+re-edit anything T40 touched.
+
+**Status:** in progress.

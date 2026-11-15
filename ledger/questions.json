@@ -5,7 +5,7 @@
     {
       "id": "Q-01",
       "question": "Which Amazon marketplace and Associates account will the links use: US (amazon.com) or Japan?",
-      "known": "The three supplied links resolve to amazon.com product pages (S19–S21). The Associates country selector lists Japan (S01, observed on the page 2026-11-15).",
+      "known": "The three supplied links resolve to amazon.com product pages (S19–S21). The Associates country selector lists Japan (S01, observed on the page 2026-11-15). The operator location in the brief is Osaka, Japan.",
       "missing": "Whether the owner holds an Associates account in the US or Japan; whether these three products are sold on amazon.co.jp; which terms apply to a Japan account.",
       "how_to_find": "Owner checks the Associates account country. Agent checks the Japanese Amazon site for the same ASINs once they are known (Q-03).",
       "blocks": [
@@ -100,7 +100,7 @@
     {
       "id": "Q-07",
       "question": "What language and audience should the site serve?",
-      "known": "The brief is in English.",
+      "known": "The brief is in English. The operator's location is Osaka, Japan.",
       "missing": "Target readers' language and country. Whether a Japanese edition is wanted.",
       "how_to_find": "Owner decision.",
       "blocks": [
@@ -243,6 +243,21 @@
       ],
       "source_ids": [
         "S10"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-17",
+      "question": "Do you own the website you will declare in the Associates application, and which exact URL will you declare?",
+      "known": "Amazon states the requirement on the Application Review Process page (S23): 'Content on your website must be recent (generally within the last 60 days). You must own your website.' The same page asks for exact URLs rather than a bare host name. This repository currently publishes to a github.io subdomain served by GitHub Pages (S22).",
+      "missing": "Whether the owner holds a registered domain, whether the github.io address counts as ownership under Amazon's review, and which of this repository's published surfaces is the one to declare.",
+      "how_to_find": "Owner decides the domain and the surface. The agent can then point every canonical URL, sitemap entry and structured-data field at it in one build; S23 does not define the github.io case, so the agent cannot answer it.",
+      "blocks": [
+        "SG-11"
+      ],
+      "source_ids": [
+        "S23",
+        "S22"
       ],
       "owner": "owner"
     }
