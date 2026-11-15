@@ -32,6 +32,18 @@ SKIP_DIRS = {".git", "node_modules", "__pycache__", ".local", ".cache"}
 URL = re.compile(r"""url\(\s*(?P<q>['"]?)(?P<u>[^'")]+)(?P=q)\s*\)""", re.I)
 
 
+COMMENT = re.compile(r"/\*.*?\*/", re.S)
+
+
+def strip_comments(text: str) -> str:
+    """Blank out CSS comments, keeping newlines so reported line numbers stay correct.
+
+    A comment that documents a path (e.g. `url("../../assets/fonts/…")`) is not a reference and must
+    not be checked; without this the gate failed on main for a comment, not a broken link (R86-09).
+    """
+    return COMMENT.sub(lambda m: re.sub(r"[^\n]", " ", m.group(0)), text)
+
+
 def stylesheets() -> list[Path]:
     out = []
     for p in sorted(REPO.rglob("*.css")):
@@ -49,7 +61,7 @@ def main() -> int:
     broken = []
     checked = 0
     for css in stylesheets():
-        text = css.read_text(encoding="utf-8", errors="ignore")
+        text = strip_comments(css.read_text(encoding="utf-8", errors="ignore"))
         for m in URL.finditer(text):
             u = m.group("u").strip()
             if u.startswith(("http://", "https://", "//", "data:", "#")):
