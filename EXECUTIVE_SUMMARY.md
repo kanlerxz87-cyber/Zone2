@@ -521,6 +521,48 @@ the already-published accessories discrepancy (MK-07 / P2 partial row).
 
 ---
 
+## Addendum — primary-site marketing redesign + suggestions architecture, 2026-11-15 (session `2b257b2e`, T34–T37)
+
+**The problem.** The root pages were correct but read like an internal admin tool — default-blue
+sidebar, dense KPI tiles, procedural prose — exactly the presentation the brief called out as looking
+machine-generated. The substance (ledger-governed tables, per-row sources, honest blanks) was right;
+the presentation undermined it.
+
+**What shipped.**
+
+* **Marketing redesign of every root page** — landing (`index.html`), products, analysis, content,
+  compliance, tracking, flagged, 404 — plus a new `design-notes.html`. Dark sticky header, editorial
+  typography (Fraunces/Inter), warm palette, hero-led pages, product cards rendered from the same
+  verified `PRODUCTS` dataset, flags preview rendered from the same register, decisions section.
+  **No verified value changed.** The gates were read before the redesign was written, and every
+  pinned element id (`flagCount`, `flagCountHeading`, `flagRegisterCount`, `flagRegisterMax`, all
+  table hooks), the disclosure sentence, the route into `pages/`, and all companion-namespace links
+  were preserved.
+* **Compliance-positive link changes.** Outbound Amazon listing links now carry
+  `rel="sponsored"` per Google's paid-link guidance (verified on the official page, 2026-11-15), and
+  product cards cite the canonical `/dp/` destination rather than presenting the untagged short link
+  as a purchase CTA — the Operating Agreement requires tagged link formats (§1, verified 2026-11-15).
+* **Editorial topic queue.** `content.html` now carries a source-anchored topic-idea table for the
+  air-fryer niche the three resolved destinations share. Every factual anchor cites the official
+  listing it was read from; **search demand is deliberately blank** — no official source states it,
+  and the platform does not estimate. Every topic is labelled a suggestion awaiting a recorded
+  decision on the new suggestions board.
+* **Suggestions architecture adopted, not duplicated.** The decision board
+  (`pages/suggestions.html`) and open-questions register (`pages/questions.html`) shipped this wave by
+  session `2499438c` (T29, PR #61). The redesign links them from the landing nav and footer rather
+  than building a second system.
+* **Crawl hygiene.** `robots.txt` and `sitemap.xml` added (root pages + findings hub).
+
+**Verification performed (2026-11-15, live fetches — `docs/verification-2b257b2e.md`).** The Operating
+Agreement (§1, §4, §5 verbatim, §6; updated October 15, 2025), Table 1's eleven commission bands
+(including Kitchen 4.50% and All Other 4.00%), all three supplied links re-resolved to the same three
+ASINs with fresh per-day `btn_ref` tokens (consistent with F-21), the shared Air-Fryers category path,
+Google's outbound-link guidance, and the FTC endorsement-guidance page.
+
+**What is unchanged and still open for the owner:** the brief mapping (F-01…F-03), tagged Associates
+links (F-24), Creators API registration (F-05) — and, as before, no price, rating, review count,
+availability or per-ASIN commission band is published, because no official source states them.
+
 ## Addendum — design/content playbook, repo review and integration state, 2026-11-15 (session `fcb538fa`, task T33)
 
 This addendum answers the request of 2026-11-15 directly: *what should this site look like, what should it

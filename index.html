@@ -3,17 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zone2 — AI Amazon Affiliate Marketing Platform</title>
+<meta name="description" content="Zone2 — an AI-powered Amazon affiliate marketing platform that publishes only verified facts: every product value links to the official page it was read from, and everything unverified stays blank on the record.">
+<title>Zone2 — Verified Amazon Affiliate Marketing Platform</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html" class="active">Dashboard</a>
-      <a href="summary.html">Executive Summary</a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Verified affiliate platform</span>
+      </span>
+    </a>
+    <label class="nav-toggle" for="navtoggle">Menu</label>
+    <input type="checkbox" id="navtoggle" class="nav-toggle-input">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="active">Overview</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="pages/suggestions.html">Suggestions &amp; Decisions</a>
@@ -22,183 +31,265 @@
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a>
+      <a class="nav-quiet" href="verification.html">Verification</a>
+      <a class="nav-quiet" href="sources.html">Sources</a>
+      <a class="nav-quiet" href="flagged.html">Flagged</a>
+      <a class="nav-quiet" href="design-notes.html">Design notes</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Dashboard</h2>
-      <p>Automated Amazon affiliate research, analysis, content &amp; campaign management — verified line by line against official sources.</p>
-    </div>
+  </div>
+</header>
 
-    <div class="disclosure">
-      <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
-      As an Amazon Associate I earn from qualifying purchases.
-    </div>
-
-    <div class="card" style="padding:14px 18px;border-left:4px solid var(--accent)">
-      <strong>Before choosing the next build step:</strong> review the canonical <a href="pages/suggestions.html">Suggestions decision board</a> and <a href="pages/questions.html">Open Questions register</a> for options, recommendations, missing information, evidence-discovery actions, and owner decisions. Recommendations are proposals; no changes are executed from those pages.
-    </div>
-
-    <div class="kpis">
-      <div class="kpi"><div class="num">3 of 3</div><div class="lbl">Supplied links that resolve to one specific Amazon listing (observed 2026-11-14)</div></div>
-      <div class="kpi"><div class="num">0 of 3</div><div class="lbl">Brief product mappings confirmed by an official Amazon document (F-03)</div></div>
-      <div class="kpi"><div class="num">1</div><div class="lbl">Shared category of the 3 resolved destinations (Air Fryers) — not a validated niche</div></div>
-      <div class="kpi"><div class="num">Up to 10%</div><div class="lbl">Official program commission ceiling</div></div>
-      <div class="kpi"><div class="num" id="flagCount">—</div><div class="lbl">Items flagged for review</div></div>
-    </div>
-
-    <div class="card">
-      <h3>Executive Summary</h3>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        The generated one-page version of everything below — figures read from the ledger, every row
-        linked to its official source — is at <a href="summary.html">Executive Summary</a>.
+<main id="main">
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">AI-powered Amazon affiliate platform</div>
+      <h1 class="hero-title">Every claim here is <em>linked to its source.</em></h1>
+      <p class="hero-lede">
+        Zone2 does the work an affiliate platform should do — product research, niche and competition
+        analysis, SEO articles and comparisons, link management, click tracking, campaign optimization —
+        under one rule the marketing industry usually skips: <strong>publish only what an official page
+        actually says.</strong> A value that could not be verified is left blank, on the record, with a
+        link to the page that would have settled it.
       </p>
-      <p>
-        Zone2 is an AI-powered Amazon affiliate marketing platform built for automation, scalability and
-        data-driven decisions. It automates product research, identifies trending and high-converting
-        products, and analyzes pricing, reviews, competition and commission potential — then generates
-        SEO-optimized product articles, comparisons and buying guides, manages affiliate links, tracks
-        clicks and conversions, and continuously optimizes campaigns. All findings on this site are
-        verified line by line against official sources; anything that could not be confirmed from an
-        official source is left blank and published on the
-        <a href="flagged.html">Flagged for Review</a> page.
-      </p>
-      <p>
-        Three affiliate links were supplied for this engagement. Each short link
-        (<code>link.amazon/…</code>) resolves to exactly one Amazon product page — a CHEFMAN 6-quart
-        dual-basket air fryer oven (B0CDY277D3), an Emeril Lagasse 26QT French-door air fryer toaster
-        oven (B09B7SB46R) and a Chefman 8-quart TurboFry air fryer (B08DKYBTPH). Each destination is
-        stable across repeated fetches, each carries its own per-link source token, and an
-        <em>unknown</em> code on the same service returns a 404 instead of a product. That control is
-        what settles the question the evidence raises: the supplied codes are honoured lookups, not
-        ignored tokens. The full trail is in
-        <a href="products.html">Products → Resolution evidence</a>.
-      </p>
-      <p>
-        Three things remain genuinely unverified, and they are the only things standing between this
-        repository and a live, earning site. <strong>First, identity:</strong> each supplied code is
-        9 characters (an Amazon ASIN is 10) and <code>amazon.com/dp/&lt;code&gt;</code> returns Page
-        Not Found, while no public Amazon document binds a <code>link.amazon</code> code to a product.
-        The destinations are therefore published as “the product this link resolves to”, never as “the
-        product the brief named” (F-01, F-02, F-03). <strong>Second, economics:</strong> the three
-        links carry no Associates <code>tag</code>, so as supplied they cannot attribute a sale or earn
-        a commission (F-24). <strong>Third, data:</strong> price, rating, review count, availability,
-        sales rank and the per-category commission band could not be confirmed from an official source
-        and are left blank, in line with the no-inference rule.      </p>
-      <p>
-        Compliance is enforced from the official Amazon Associates documents: the mandatory disclosure
-        “As an Amazon Associate I earn from qualifying purchases,” Special Links carrying the Associates
-        tag, the 24-hour session / 89-day cart attribution model, ~60-day payment terms, the up-to-10%
-        commission ceiling, and the Agent Terms requiring AI agents to identify themselves
-        (<code>Agent/[name]</code>) and not circumvent human-check measures.
-      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="products.html">Meet the three products</a>
+        <a class="btn btn-ghost" href="verification.html">How every row is verified</a>
+      </div>
+      <div class="hero-meta">
+        <span class="chip"><span class="dot"></span>Three supplied links traced end-to-end</span>
+        <span class="chip"><span class="dot"></span>Blank means unverified — never guessed</span>
+        <span class="chip"><span class="dot"></span>Disclosure on every page</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-wrap">
+    <div class="trust-strip">
+      <div class="trust-item">
+        <div class="t-title">Sourced or silent</div>
+        <div class="t-text">Each table row ends in a link to the official page it was read from — the Amazon listing, the manufacturer, the program policy.</div>
+      </div>
+      <div class="trust-item">
+        <div class="t-title">Nothing inferred</div>
+        <div class="t-text">Price, rating, review count, availability and the per-product commission band could not be confirmed from an official source. They are published as blanks.</div>
+      </div>
+      <div class="trust-item">
+        <div class="t-title">Compliance built in</div>
+        <div class="t-text">The Associates disclosure, tagged-link rules and display restrictions are tracked rule-by-rule against the governing documents.</div>
+      </div>
+      <div class="trust-item">
+        <div class="t-title">Decisions kept open</div>
+        <div class="t-text">Suggestions and open questions live on a review board. Nothing is implemented until a choice is recorded on it.</div>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Verified Platform Facts</h3>
+    <section class="section" aria-label="Position at a glance">
+      <div class="eyebrow">Position at a glance</div>
+      <h2 class="section-title">The honest numbers</h2>
+      <p class="section-sub">Where an affiliate site would normally put growth numbers, this dashboard puts the verification state. There are no performance figures anywhere on this site — none exist yet, and inventing them is the one thing the platform refuses to do.</p>
+      <div class="kpi-band">
+        <div class="kpi-card"><div class="num">3 <span class="unit">of 3</span></div><div class="lbl">Supplied links that resolve, reproducibly, to one specific Amazon listing (re-observed 2026-11-15)</div></div>
+        <div class="kpi-card"><div class="num">0 <span class="unit">of 3</span></div><div class="lbl">Brief product mappings confirmed by an official Amazon document (F-03)</div></div>
+        <div class="kpi-card"><div class="num">1 <span class="unit">category</span></div><div class="lbl">Shared category of the three resolved destinations — Air Fryers (not yet a validated niche)</div></div>
+        <div class="kpi-card"><div class="num">4.00%</div><div class="lbl">Official &ldquo;All Other Categories&rdquo; rate — the program ceiling is 10% in select categories</div></div>
+        <div class="kpi-card"><div class="num" id="flagCount">—</div><div class="lbl">Items on the Flagged for Review register, each with its official-source link</div></div>
+      </div>
+    </section>
+
+    <div class="callout" style="margin-top:26px">
+      <strong>Before choosing the next build step:</strong> review the canonical
+      <a href="pages/suggestions.html">Suggestions decision board</a> and the
+      <a href="pages/questions.html">Open Questions register</a> — options, recommendations, missing
+      information, evidence-discovery actions, and owner decisions. Recommendations are proposals; no
+      changes are executed from those pages.
+    </div>
+
+    <section class="section" aria-label="The three products">
+      <div class="eyebrow">The products</div>
+      <h2 class="section-title">Three links, three air fryers, one open question</h2>
+      <p class="section-sub">
+        The engagement supplied three short links (<code>link.amazon/…</code>). Each one resolves, again and
+        again, to exactly one Amazon listing — and all three land in the Air Fryers category. The open
+        question: as supplied, the codes are nine characters (an Amazon ASIN is ten) and none carries an
+        Associates <code>tag</code>, so no official document confirms what product was intended, and as
+        supplied the links cannot attribute a commission. Until the owner settles that in Associates
+        Central, these are published as <em>the product each link resolves to</em> — never as &ldquo;the
+        product the brief named.&rdquo; The full trail: <a href="products.html">Products → resolution evidence</a>.
+      </p>
+      <div class="cards-grid" id="productCards"></div>
+    </section>
+
+    <section class="section" aria-label="Executive summary">
+      <div class="eyebrow">Executive summary</div>
+      <h2 class="section-title">What this platform is, and what it is waiting on</h2>
+      <div class="card">
+        <p>
+          <strong>The job.</strong> Build an affiliate marketing platform that researches products, finds
+          trending and high-converting niches, analyzes pricing, reviews, competition and commission
+          potential, generates SEO-optimized articles, comparisons and buying guides, manages affiliate
+          links, tracks clicks and conversions, and keeps optimizing campaigns — automatically, at scale,
+          and compliantly with the Amazon Associates Operating Agreement and its disclosure requirements.
+        </p>
+        <p>
+          <strong>How it answers.</strong> Every capability is built around one discipline: a value appears
+          on this site only when an official source states it, and each row carries the link to the page it
+          was read from. The generated
+          <a href="summary.html">executive summary</a>, the <a href="verification.html">verification log</a>
+          and the <a href="sources.html">source register</a> are compiled from the same ledger the tables
+          below are rendered from, so no page can quietly disagree with the data.
+        </p>
+        <p>
+          <strong>What is already settled.</strong> The three supplied links resolve to three specific,
+          live listings — two Chefman air fryers and an Emeril Lagasse air-fryer oven — re-observed on
+          2026-11-15 from the pages themselves. An unknown nine-character code on the same short-link
+          service returns a 404 rather than a product, so the supplied codes are honoured lookups, not
+          ignored tokens. The program&rsquo;s governing facts — the mandatory disclosure sentence, the
+          eleven commission bands, the ~60-day payment terms, the 24-hour session / 89-day cart
+          attribution window — are verified verbatim from the official documents and cited row by row.
+        </p>
+        <p>
+          <strong>What is waiting on the owner.</strong> Three decisions only the account holder can make,
+          each flagged with its source: confirm the intended ASINs in Associates Central (F-01…F-03),
+          regenerate the links with the Associates tag so they can earn (F-24), and register for the
+          Creators API, which replaced the deprecated PA-API 5 for catalog access (F-05). Until then the
+          earning machinery is built and blocked, honestly labelled as such — no traffic, conversion or
+          revenue figure appears anywhere because none has been measured.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Verified platform facts">
+      <div class="eyebrow">The rulebook</div>
+      <h2 class="section-title">Verified platform facts</h2>
+      <p class="section-sub">Program facts the platform is built on, each linked to the official document it was read from. Re-verified live on 2026-11-15; the full row-by-row register is on the <a href="verification.html">verification page</a>.</p>
       <div id="execFactsTable"></div>
-      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">All facts verified from official Amazon Associates sources on 2026-11-14.</p>
-    </div>
+    </section>
 
-    <div class="card">
-      <h3>Live re-verification — 2026-11-14 (final integration)</h3>
-      <p style="font-size:13px;color:var(--muted);margin-top:0">
-        This pass was run with working outbound access to the official sites, which the earlier build sandboxes did not have
-        (they recorded <code>HTTP 000</code> for every non-allowlisted host). Each fact below was re-read on the page itself.
-        Full row-by-row evidence: <a href="verification.html">Verification log</a> (rows V-33…V-50) · sources:
-        <a href="sources.html">Source register</a> (S01–S31).
-      </p>
-      <div class="table-wrap" style="overflow-x:auto">
-        <table class="data-table" style="width:100%;border-collapse:collapse;font-size:13px">
-          <thead><tr><th align="left">Check</th><th align="left">What the official page says</th><th align="left">Verdict</th><th align="left">Source</th></tr></thead>
-          <tbody>
-            <tr><td>Disclosure sentence (V-33)</td><td>Operating Agreement §5 requires “As an Amazon Associate I earn from qualifying purchases.” clearly and prominently</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">OA §5</a></td></tr>
-            <tr><td>Attribution window (V-34)</td><td>Session ends at 24 h, an order, or a competing associate's click; cart-add ≤ 89 days; ship/pay ≤ 180 days</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Policies §1</a></td></tr>
-            <tr><td>Rate bands (V-35)</td><td>Eleven fixed bands, 10.00% down to 0.00%, plus “All Other Categories 4.00%” — re-read row by row</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">Table 1</a></td></tr>
-            <tr><td>Payment terms (V-36)</td><td>≈60 days after month end; US minimums 10 / 10 (2,000 max) / 100 + 15 fee; 3-year inactivity rule</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Policies §6</a></td></tr>
-            <tr><td>Tag + sub-tag rules (V-37)</td><td>Associates ID must be a URL parameter; a sub-tag may never be tied to a specific end user</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer">Req. §2</a></td></tr>
-            <tr><td>Price-display rule (V-38)</td><td>Prices only from an Amazon-served link or the API; comparison views show lowest new (and used)</td><td><strong>Verified</strong> — no price is published here</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer">Req. §2(b)</a></td></tr>
-            <tr><td>Agent Terms (V-39)</td><td>Agents must send <code>Agent/[name]</code>, must not conceal themselves, must not defeat CAPTCHAs</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20IP%20License" target="_blank" rel="noopener noreferrer">IP License §4</a></td></tr>
-            <tr><td>PA-API 5 status (V-40)</td><td>Deprecated; calls return <code>403 AccessDeniedException</code> and must migrate to the Creators API</td><td><strong>Verified</strong></td><td><a href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener noreferrer">Deprecation notice</a></td></tr>
-            <tr><td>Review-display rule</td><td>Customer reviews and star ratings may not be displayed unless obtained via Creators API / PA API</td><td><strong>Verified</strong> — no rating is published</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer">Req. §6(t)</a></td></tr>
-            <tr><td>FTC disclosure (V-49)</td><td>Material connection disclosed clearly and conspicuously, close to the recommendation</td><td><strong>Verified</strong></td><td><a href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer">FTC</a></td></tr>
-            <tr><td>Link qualification (V-50)</td><td>Paid/affiliate links marked <code>rel="sponsored"</code></td><td><strong>Verified</strong> — every outbound product link emits it</td><td><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer">Google</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Flagged for Review — <span id="flagCountHeading">—</span> items</h3>
-      <p style="font-size:13.5px">
-        Nothing on this site is a product claim. These are the items that could not be confirmed from an official source, plus
-        the irregularities found while checking. None of them block the publish; each carries its source link so it can be
-        reviewed after the fact.
-      </p>
-      <div class="table-wrap" style="overflow-x:auto">
-        <table class="data-table" style="width:100%;border-collapse:collapse;font-size:13px">
-          <thead><tr><th align="left">Flag</th><th align="left">Irregularity</th><th align="left">Status / owner action</th></tr></thead>
-          <tbody>
-            <tr><td><code>F-01…F-03</code></td><td>The three supplied codes are 9 characters; an ASIN is 10. <code>amazon.com/dp/&lt;code&gt;</code> is Page Not Found for each (re-verified 2026-11-14)</td><td>Open — owner must supply the 10-character ASINs</td></tr>
-            <tr><td><code>F-21</code> <em>(new)</em></td><td>The per-link <code>btn_ref</code> token <strong>changes between days</strong> although the destination ASIN does not, so the earlier “same token on re-fetch” evidence does not survive a day boundary</td><td>Open — treat the code→ASIN mapping as observed behaviour, not documented intent</td></tr>
-            <tr><td><code>F-07</code></td><td>No resolved URL carries an Associates <code>tag</code>, so as supplied the links cannot be relied on to attribute commission</td><td>Open — owner must regenerate the links with the Associates ID</td></tr>
-            <tr><td><code>F-05</code></td><td>PA-API 5 is deprecated; catalog access requires the Creators API, which requires ≥10 qualifying sales in 30 days</td><td>Open — owner must register for Creators API access</td></tr>
-            <tr><td><code>F-08</code></td><td>No click, conversion or earnings report exists, so no performance figure can be published</td><td>Open — owner must connect a dated Associates report</td></tr>
-            <tr><td><code>F-19</code></td><td>The Emeril manufacturer page contradicts itself on cooking presets: 24 (description), 25 (spec tile), “10-in-1” (feature block)</td><td>Open — published as a conflict, no value chosen</td></tr>
-            <tr><td><code>F-37</code> <em>(new)</em></td><td>The Special Commission Income transcription was partial: this site published <strong>9 of the 46</strong> Bounty Event rows and <strong>0 of the 2</strong> Bonus Event rows in Amazon’s Appendix, and one row quoted the wrong column</td><td>Closed — all 48 rows transcribed verbatim; row counts printed on the <a href="pages/commissions.html">commissions page</a></td></tr>
-            <tr><td><code>F-38</code> <em>(new)</em></td><td>The compliance ledger omitted 10 Participation Requirements that constrain this platform’s own modules — notably §6(y), which <strong>forbids price-tracking and price-alerting</strong> while module M-03 is described as tracking price per ASIN</td><td>Closed — added as R-22…R-31; §6(y) now listed on the <a href="pages/modules/m-03-pricing-analysis.html">M-03</a> page</td></tr>
-            <tr><td><code>F-26</code> <em>(new)</em></td><td>The dashboard flag count was derived from the reader-facing subset, not the register: it showed 14 while <code>pages/flags.html</code> published 21</td><td>Closed — count now pinned to the ledger by a gate (negative-tested)</td></tr>
-            <tr><td><code>F-35</code> <em>(new)</em></td><td>README's executable-guard-checks label drifted from the test suite three times in one day (11, then 13, against 13–15 tests) — the one published count label no gate pinned</td><td>Closed — the label is now pinned to the actual test count by <code>check_typed_counts</code> (negative-tested)</td></tr>
-            <tr><td><code>F-36</code> <em>(new)</em></td><td><code>research-hub</code> rollup policy and conflict rows are still block-sourced — its product rows were fixed on main; the rest await the namespace owner (CR-7, partial)</td><td>Open — extend the per-row source treatment or label those tables block-sourced</td></tr>
-            <tr><td><code>F-27</code></td><td><code>research-hub</code>'s own generator deletes its output before it has read its inputs — one run with a missing input wipes the hub pages (restored; never run it in this tree)</td><td>Open — owner should repoint or archive <code>research-hub/scripts/build.py</code></td></tr>
-            <tr><td><code>F-25</code></td><td>Compliance row R-09 corrected: solicited email/SMS is <strong>permitted</strong> by Program Policies §4; this repo's web-only default is stricter than the policy and is now labelled self-imposed</td><td>Closed — corrected in the ledger and on the compliance page</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin:12px 0 0;font-size:13px">
-        The full text of all <span class="flag-count-inline">—</span> items, each with its official-source link, is on the
-        <a href="flagged.html">Flagged for Review</a> page; the generated detail lives on
-        <a href="pages/flags.html">pages/flags.html</a>.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>How the three supplied links behave — evidence &amp; controls</h3>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        Every observation and every control, each linked to the page it was read from. This is the
-        evidence that lets the site name the three products at all.      </p>
+    <section class="section" aria-label="Link resolution evidence">
+      <div class="eyebrow">The evidence</div>
+      <h2 class="section-title">How the three supplied links behave</h2>
+      <p class="section-sub">Every observation is reproducible by hand: open the link, read the address bar, compare with the control. This is the evidence that lets the site name the three products at all — and it shows precisely where the certainty ends.</p>
       <div id="resolutionTable"></div>
-    </div>
+    </section>
 
-    <div class="card">
-      <h3>Platform Capabilities</h3>
+    <section class="section" aria-label="Flagged for review">
+      <div class="eyebrow">Nothing hidden</div>
+      <h2 class="section-title">Flagged for review</h2>
+      <p class="section-sub">The register holds <span id="flagCountHeading">—</span> findings. Each one lists what was found, why it matters, and the owner action that would close it — with the official source attached. The full register, long-form: <a href="flagged.html">Flagged for Review</a>.</p>
+      <div id="flagPreview"></div>
+    </section>
+
+    <section class="section" aria-label="Content and articles">
+      <div class="eyebrow">Content engine</div>
+      <h2 class="section-title">Articles that stay inside the lines</h2>
+      <p class="section-sub">
+        The generator drafts product articles, comparisons and buying guides only from specifications
+        verified on official pages — and refuses an entry it cannot source. A published, destination-only
+        article set lives at <a href="marketing/index.html">Field Notes</a>; the brief-mapped plan, its
+        status, and a queue of editorial topic ideas (each anchored to the listing it is based on) are on
+        the <a href="content.html">content page</a>.
+      </p>
+    </section>
+
+    <section class="section" aria-label="Decisions and suggestions">
+      <div class="eyebrow">Decisions</div>
+      <h2 class="section-title">Suggestions wait for a choice</h2>
+      <p class="section-sub">This platform is designed so that a good idea never ships by default. Ideas are written down, given options and trade-offs, and implemented only after someone records a decision on the board.</p>
+      <div class="suggest-grid">
+        <div class="suggest-card">
+          <div class="s-kicker">Decision board</div>
+          <h4>Review the suggestions</h4>
+          <p>Each open suggestion — with options A/B/C, trade-offs, a recommended path, and the questions that must be answered first. Nothing is implemented until the decision field is filled in.</p>
+          <a class="s-cta" href="pages/suggestions.html">Open the decision board →</a>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">Open questions</div>
+          <h4>See what we do not know</h4>
+          <p>The register of unanswered questions: what is verified, what is missing, how each gap could be closed, and which decisions each question blocks.</p>
+          <a class="s-cta" href="pages/questions.html">Open the question register →</a>
+        </div>
+        <div class="suggest-card">
+          <div class="s-kicker">This site</div>
+          <h4>Read the design rationale</h4>
+          <p>Why the site looks the way it does, what changed in the redesign, and the design and organic-growth suggestions queued for the next review.</p>
+          <a class="s-cta" href="design-notes.html">Open the design notes →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Platform capabilities">
+      <div class="eyebrow">Under the hood</div>
+      <h2 class="section-title">Platform capabilities</h2>
+      <p class="section-sub">Each module is data-gated: it returns an explicit <em>insufficient data</em> rather than a confident guess, and it acts only on evidence. The full requirements matrix and module pages: <a href="pages/index.html">Findings hub</a>.</p>
       <div class="features" id="featuresGrid"></div>
-    </div>
+    </section>
+  </div>
 
-    <footer class="site">
-      Verified dataset date: 2026-11-14 · Sources:
-      <a href="https://affiliate-program.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon Associates</a> ·
-      <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies</a> ·
-      <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement</a> ·
-      <a href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">Amazon product pages</a>
-      · Full source register: <a href="sources.html">Sources</a> · Verification log:
-      <a href="verification.html">Verification</a> · Findings &amp; category subpages:
-      <a href="pages/index.html">Findings hub</a> ·
-      <a href="pages/categories/index.html">Categories</a> · Decision support:
-      <a href="pages/suggestions.html">Suggestions board</a> ·
-      <a href="pages/questions.html">Open questions</a> · Companion sites:
-      <a href="research-hub/start.html">Affiliate Research Hub</a> ·
-      <a href="revalidation/index.html">Revalidation 2026-11-14</a> ·
-      <a href="marketing/index.html">Field Notes — verified articles</a> ·
-      <a href="affiliate-lab/index.html">Affiliate Lab</a> ·
-      <a href="northstar/index.html">Northstar prototype</a> ·
-      <a href="zone2/index.html">Zone2 platform build</a>
+  <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div>
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="analysis.html">Analysis</a></li>
+              <li><a href="content.html">Content</a></li>
+              <li><a href="compliance.html">Compliance</a></li>
+              <li><a href="tracking.html">Tracking</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Evidence</h4>
+            <ul>
+              <li><a href="verification.html">Verification log</a></li>
+              <li><a href="sources.html">Source register</a></li>
+              <li><a href="flagged.html">Flagged for review</a></li>
+              <li><a href="summary.html">Executive summary</a></li>
+              <li><a href="pages/index.html">Findings hub</a></li>
+              <li><a href="pages/categories/index.html">Commission categories</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Decisions</h4>
+            <ul>
+              <li><a href="decisions/index.html">Decision hub</a></li>
+            <li><a href="pages/suggestions.html">
+              <li><a href="pages/questions.html">Open questions register</a></li>
+              <li><a href="design-notes.html">Design notes &amp; growth ideas</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Companion builds</h4>
+            <ul>
+              <li><a href="research-hub/start.html">Affiliate Research Hub</a></li>
+              <li><a href="marketing/index.html">Field Notes — verified articles</a></li>
+              <li><a href="revalidation/index.html">Revalidation 2026-11-14</a></li>
+              <li><a href="affiliate-lab/index.html">Affiliate Lab</a></li>
+              <li><a href="zone2/index.html">Zone2 platform build</a></li>
+              <li><a href="northstar/index.html">Northstar prototype</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-disclosure">
+          <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
+          As an Amazon Associate I earn from qualifying purchases. Amazon and the Amazon mark are
+          trademarks of Amazon.com, Inc. or its affiliates; this site is independent and not affiliated
+          with Amazon. Outbound product links are marked <code>rel="sponsored"</code> per Google&rsquo;s
+          guidance on paid links. No price is displayed on any page — Amazon restricts price display to
+          links and API responses it serves itself.
+        </div>
+        <div class="footer-note">
+          Verified dataset date: 2026-11-14 · links and sources independently re-fetched 2026-11-15 ·
+          governing documents change without notice and are re-verified each cycle ·
+          <a href="https://affiliate-program.amazon.com/" style="color:#c6cdd7">Amazon Associates</a> ·
+          <a href="https://affiliate-program.amazon.com/help/operating/policies" style="color:#c6cdd7">Program Policies</a> ·
+          <a href="https://affiliate-program.amazon.com/help/operating/agreement" style="color:#c6cdd7">Operating Agreement</a> ·
+          <a href="sources.html" style="color:#c6cdd7">full source register</a>
+        </div>
+      </div>
     </footer>
   </main>
-</div>
+
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
