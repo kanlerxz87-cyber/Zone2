@@ -45,6 +45,8 @@ NAV = [
     ("content.html", "Content"),
     ("compliance.html", "Compliance"),
     ("tracking.html", "Tracking"),
+    ("suggestions.html", "Suggestions"),
+    ("questions.html", "Open Questions"),
     ("verification.html", "Verification"),
     ("sources.html", "Sources"),
     ("flagged.html", "Flagged for Review"),

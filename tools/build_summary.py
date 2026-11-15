@@ -216,6 +216,8 @@ def build() -> str:
     <a class="nav-link" href="analysis.html">Analysis</a>
     <a class="nav-link" href="marketing/index.html">Published copy</a>
     <a class="nav-link" href="compliance.html">Compliance</a>
+    <a class="nav-link" href="suggestions.html">Suggestions</a>
+    <a class="nav-link" href="questions.html">Open questions</a>
     <a class="nav-link" href="verification.html">Verification log</a>
     <a class="nav-link" href="sources.html">Sources</a>
     <a class="nav-link" href="flagged.html">Flagged for review</a>

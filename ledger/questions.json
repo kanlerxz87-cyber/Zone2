@@ -1,0 +1,398 @@
+{
+  "$schema_version": "1.0",
+  "note": "Open-questions register. One row per question that has to be answered before a decision can reasonably be made. Each row states the answer that exists today and the official source it came from, what is still unknown, which decision the unknown blocks, and how to obtain it. 'Known' is never a guess: if no official source states it, the cell says so. Nothing here is answered by inference.",
+  "compiled_utc": "2026-11-15",
+  "compiled_by": "session 6cc428f1 (T30)",
+  "questions": [
+    {
+      "id": "Q-01",
+      "area": "identity",
+      "question": "Which exact products is this site supposed to be selling?",
+      "known": "Each of the three supplied link.amazon codes resolves to exactly one Amazon listing, and the destinations have been stable across every check since 2026-11-13: a 6-quart Chefman dual-basket air fryer oven, a 26-quart Emeril Lagasse French-door air fryer toaster oven, and an 8-quart Chefman TurboFry single-basket air fryer. What is NOT established is that these are the products the brief named.",
+      "known_sources": [
+        "S33",
+        "S34",
+        "S35",
+        "S19",
+        "S20",
+        "S21",
+        "S24"
+      ],
+      "confidence": "High on the destinations, None on the identity",
+      "missing": "A binding statement from Amazon, or from the account owner, that names the intended ASINs.",
+      "blocks": "Every product page, every comparison, every article, the niche decision (Q-05) and the link generation in S-02.",
+      "how_to_find_out": "Paste each of the three codes into the Amazon Associates account's link checker and read the destination ASIN from the account itself. Five minutes, no new tooling.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "launch"
+    },
+    {
+      "id": "Q-02",
+      "area": "monetisation",
+      "question": "What is the Associates tag (the account ID) that outbound links must carry?",
+      "known": "The Program Policies make the Associates ID a URL parameter on the link, and this repository refuses to invent one, so every outbound link it emits is an explicitly labelled, non-earning preview link. The three supplied links carry no tag parameter at all.",
+      "known_sources": [
+        "S02",
+        "S29",
+        "S33",
+        "S34",
+        "S35"
+      ],
+      "confidence": "None",
+      "missing": "The tag itself, and confirmation of whether the account is approved and active.",
+      "blocks": "All revenue. Also blocks any click or conversion figure, because an untagged click is not attributed to the account.",
+      "how_to_find_out": "The account owner reads it from the Associates account dashboard. It must never be committed to a public repository, so it belongs in the build's configuration, not in a source file.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "launch"
+    },
+    {
+      "id": "Q-03",
+      "area": "automation",
+      "question": "Can this account use the Creators API, and when?",
+      "known": "PA-API 5 is deprecated and its calls return an access-denied response; Amazon's notice directs publishers to the Creators API. The Creators API documentation states its access model and its endpoints. What is not known is whether this account has been granted access, because that depends on a qualifying-sales track record this site does not have yet.",
+      "known_sources": [
+        "S06",
+        "S31",
+        "S07",
+        "S08"
+      ],
+      "confidence": "High on the requirement, None on the availability",
+      "missing": "The account's API status, and whether the access criteria have been met.",
+      "blocks": "Product research (M-01), trend detection (M-02), price analysis (M-03), review analysis (M-04) and the commission modelling in M-06.",
+      "how_to_find_out": "Apply in the Associates account and read the status from the account's API page. Until then, treat every automated data feature as unavailable and publish from page-sourced facts.",
+      "effort": "Medium",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-04",
+      "area": "monetisation",
+      "question": "Which Amazon country programme is the account in, and which storefront should the content target?",
+      "known": "Every fact on this site was read from the United States storefront and from the US Associates Central pages. The site's links all resolve to amazon.com.",
+      "known_sources": [
+        "S19",
+        "S20",
+        "S21",
+        "S37"
+      ],
+      "confidence": "High for the reading, None for the account",
+      "missing": "The programme the account actually belongs to, and whether the intent is US-only or multi-marketplace.",
+      "blocks": "The commission band that applies (the published schedule is per programme), the disclosure wording in some markets, the language of the content, and every link URL.",
+      "how_to_find_out": "The account owner confirms the programme and the country list. Multi-marketplace roughly multiplies the content work, so this decision should come before, not after, the content plan.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-05",
+      "area": "identity",
+      "question": "What is the niche - Air Fryers, or countertop cooking appliances?",
+      "known": "All three resolved listings sit in one Amazon category path: Home & Kitchen, Kitchen & Dining, Small Appliances, Fryers, Air Fryers. That path was read off each listing on 2026-11-15.",
+      "known_sources": [
+        "S19",
+        "S20",
+        "S21",
+        "S04"
+      ],
+      "confidence": "High on the category, None on the strategy",
+      "missing": "The intended niche, and the search-volume and competition data that would settle it objectively.",
+      "blocks": "The topic hub, the content calendar, the category page, the internal linking plan, and the commission band the site will optimise for.",
+      "how_to_find_out": "A decision from the owner (see S-04), optionally followed by a niche score once a keyword source exists (Q-13).",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "launch"
+    },
+    {
+      "id": "Q-06",
+      "area": "content",
+      "question": "What is the target audience and geography?",
+      "known": "Nothing. The content is written in American English and the products are US-marketplace listings, which implies a US reader but does not establish one.",
+      "known_sources": [],
+      "confidence": "None",
+      "missing": "Reader geography, household size, cooking confidence and budget band.",
+      "blocks": "The tone, the topics, the length, the price framing, the seasonal calendar and every product recommendation.",
+      "how_to_find_out": "The owner states the audience. The site's own traffic, once it exists, will refine it - and the first months of click data are the cheapest source of that answer.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-07",
+      "area": "measurement",
+      "question": "What numbers will be used to decide whether the site is working?",
+      "known": "Amazon's Operating Agreement states plainly that Amazon makes no representation, warranty or covenant about the traffic or commission income a participant can expect. So any target on this site is the site's own, and none has been set. No click, conversion or earnings figure exists today.",
+      "known_sources": [
+        "S01",
+        "S04"
+      ],
+      "confidence": "None",
+      "missing": "A baseline and a target for at least three metrics, and a named owner for reading them.",
+      "blocks": "Every optimisation decision, including whether any of the suggestions on the Suggestions page were worth doing.",
+      "how_to_find_out": "The owner sets the targets; the click counter has to be in place before traffic arrives or there is no baseline to compare against.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-08",
+      "area": "content",
+      "question": "Will any of the content be hands-on tested?",
+      "known": "Nothing in this repository is hands-on tested. Every product fact is a specification read from a manufacturer's page or an Amazon listing, and the site says so on every page.",
+      "known_sources": [
+        "S25",
+        "S26",
+        "S27",
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "confidence": "High on the current state, None on the future",
+      "missing": "Whether anyone will cook with these products, photograph them, or compare them in person - and whether the budget allows it.",
+      "blocks": "The strongest form of original content available to an affiliate site, and Google's own list of what makes an affiliate page good includes 'original product reviews, rigorous testing and ratings'.",
+      "how_to_find_out": "The owner answers it. If the answer is no, the editorial strategy must lean on comparison, navigation and safety content instead of testing, and the site should say so rather than imply otherwise.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-09",
+      "area": "content",
+      "question": "Who is the named author and editor, and who approves a draft?",
+      "known": "The site has no named author. Google's site reputation guidance treats authorship as one of the objective factors a human reviewer weighs, and its worked examples separate an unauthored affiliate article (likely to be actioned) from an authored one with clear editorial responsibility (not).",
+      "known_sources": [
+        "S38",
+        "S30"
+      ],
+      "confidence": "None",
+      "missing": "A name or an editorial team, and the rule that says when a draft may go live.",
+      "blocks": "S-07, S-11, S-19, S-27, and the credibility of the whole content operation.",
+      "how_to_find_out": "The owner decides. If content is agent-produced, the author line should say so plainly - the Amazon Agent Terms already require an agent to identify itself.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-10",
+      "area": "content",
+      "question": "Which source of search-interest data will drive topic selection?",
+      "known": "No trend data source is connected. The brief asks for trending topics, and this repository has no measurement that would make the word 'trending' mean anything specific.",
+      "known_sources": [
+        "S38",
+        "S39"
+      ],
+      "confidence": "None",
+      "missing": "A named tool, its cost, and a decision on whether topic selection is data-driven at all.",
+      "blocks": "S-20, S-26, the content calendar, and the honest use of the word 'trending' anywhere on the site.",
+      "how_to_find_out": "The owner chooses a tool. Until then, the calendar in S-26 is the defensible substitute: it produces topics from a real cooking calendar instead of from a guess.",
+      "effort": "Medium",
+      "status": "Open",
+      "priority": "later"
+    },
+    {
+      "id": "Q-11",
+      "area": "monetisation",
+      "question": "Should the site publish prices?",
+      "known": "The Program Policies restrict price display to links Amazon serves and to licensed API data. The site currently publishes no price at all and enforces that with a deploy gate - stricter than the policy requires.",
+      "known_sources": [
+        "S02",
+        "S29"
+      ],
+      "confidence": "High on the rule, None on the decision",
+      "missing": "A decision, and if the decision is to publish prices, the API access from Q-03 that the rule requires.",
+      "blocks": "The comparison page's usefulness, and one of the strongest click motivations a comparison page has.",
+      "how_to_find_out": "Decide, then check Q-03. A pasted price goes stale within hours, which is the reason for the current rule.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-12",
+      "area": "design",
+      "question": "Which analytics is acceptable?",
+      "known": "The site currently sets no cookies of its own and runs no client-side analytics. The Program Policies permit Special Links in emails and direct messaging provided the communication is solicited, which is a self-imposed constraint this repository follows rather than one the policy imposes.",
+      "known_sources": [
+        "S02",
+        "S10"
+      ],
+      "confidence": "High on the current state, None on the decision",
+      "missing": "A decision between no analytics, a first-party self-hosted counter, and a third-party service - and the cookie banner that the last of those requires.",
+      "blocks": "S-21, the measurement design in Q-07, and the privacy policy in S-13.",
+      "how_to_find_out": "The owner decides. A first-party counter keeps the promise that the site collects nothing it does not need, which is the cheapest privacy notice to keep true.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-13",
+      "area": "monetisation",
+      "question": "Will the site take traffic from the European Economic Area or the United Kingdom?",
+      "known": "Nothing is known about the audience geography (Q-06). The site's only privacy posture today is the absence of any policy page, which is fine for a site that nobody visits and not fine for one that does.",
+      "known_sources": [
+        "S10",
+        "S11"
+      ],
+      "confidence": "None",
+      "missing": "The geographic answer, and therefore whether a cookie notice and a fuller privacy policy are required.",
+      "blocks": "S-13, and whether the analytics choice in Q-12 is constrained.",
+      "how_to_find_out": "The owner answers Q-06 first; the answer follows from it and from where the traffic comes from.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-14",
+      "area": "content",
+      "question": "How much content, and at what cadence?",
+      "known": "Nothing. The site currently publishes a fixed set of pages with no publication schedule and no stated capacity.",
+      "known_sources": [],
+      "confidence": "None",
+      "missing": "A weekly or monthly article target, and the time or budget behind it.",
+      "blocks": "S-26, the content calendar, the effort estimate behind every automation suggestion, and the roadmap this project would otherwise have to guess at.",
+      "how_to_find_out": "The owner states the capacity. That number is also the one that tells you whether the agent in the brief is an accelerator or the whole production line.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-15",
+      "area": "design",
+      "question": "Is this a new site or a rewrite of something that already exists?",
+      "known": "The repository publishes a static site from the repository root on GitHub Pages, served from a github.io address. No custom domain is configured, and the Pages API reports the deployment source and status.",
+      "known_sources": [
+        "S22"
+      ],
+      "confidence": "High on the current deployment, None on the intent",
+      "missing": "Whether a domain will be bought, and whether any existing site or content has to be preserved or redirected.",
+      "blocks": "S-10 (a sitemap on a github.io address is of limited use), the authority that builds up over time, and any migration work.",
+      "how_to_find_out": "The owner decides. A domain is a purchase decision with an annual cost; everything about the SEO plan depends on it.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-16",
+      "area": "automation",
+      "question": "Where exactly is the human in the loop, and where is it not?",
+      "known": "The brief asks for an agent that runs with no manual input. This session's own approach was the opposite of that: every factual sentence it added to the site carries the official source it came from, and no claim was inferred - which is the pattern the suggestion register recommends (S-19, option C).",
+      "known_sources": [
+        "S38",
+        "S39",
+        "S30"
+      ],
+      "confidence": "High on this session's approach, None on the desired end state",
+      "missing": "The owner's decision about which steps the agent may take unattended.",
+      "blocks": "The entire automation plan - the pipeline design, the review gate, and the editorial brief in S-27.",
+      "how_to_find_out": "The owner draws the line. The natural line is: the agent may collect, draft, format and publish anything already in the ledger, and may not publish a new claim without a named human approving it.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-17",
+      "area": "content",
+      "question": "What are the competitors in this niche, and what do they publish?",
+      "known": "Nothing. No competitor page has been read. Every Amazon listing this site links to shows what other sellers' products look like, but that is not a content survey.",
+      "known_sources": [],
+      "confidence": "None",
+      "missing": "A survey of the top results for the category and for the topic terms, and what each one offers that this site does not.",
+      "blocks": "The topic selection, the differentiation argument, and the category page in S-09.",
+      "how_to_find_out": "Manual research of the first page of results for the chosen terms, or a search-interest tool once Q-10 is answered. The result is a document, not a number, so it can be done today.",
+      "effort": "Medium",
+      "status": "Open",
+      "priority": "later"
+    },
+    {
+      "id": "Q-18",
+      "area": "content",
+      "question": "What is the seasonal shape of demand for this product category?",
+      "known": "Nothing measured. The cooking calendar is a reasonable proxy - a whole bird at one end of the year - but it is a hypothesis, not a measurement.",
+      "known_sources": [
+        "S41",
+        "S42"
+      ],
+      "confidence": "None",
+      "missing": "Monthly search or sales data for the category.",
+      "blocks": "When to publish which article, and the order in which the content calendar is worked through.",
+      "how_to_find_out": "The Amazon Best Sellers in the category give a popularity signal today; a keyword tool gives the demand shape once Q-10 is answered.",
+      "effort": "Medium",
+      "status": "Open",
+      "priority": "later"
+    },
+    {
+      "id": "Q-19",
+      "area": "monetisation",
+      "question": "Is there a legal entity and a tax position behind the earnings?",
+      "known": "The published programme material covers how the associate is paid and on what terms; it says nothing about this project's own tax position, and nothing on the site addresses it.",
+      "known_sources": [
+        "S04",
+        "S01"
+      ],
+      "confidence": "None",
+      "missing": "The entity that receives the payments and how they are reported.",
+      "blocks": "Nothing on the site directly - but it is the question that determines whether revenue is actually keepable, which is what every other suggestion is trying to increase.",
+      "how_to_find_out": "The owner, with an accountant. This one is not a research task and it is not one this repository should attempt to answer.",
+      "effort": "Medium",
+      "status": "Open",
+      "priority": "later"
+    },
+    {
+      "id": "Q-20",
+      "area": "identity",
+      "question": "Should the three destinations be treated as the product set, or only as three examples of a category?",
+      "known": "All three are in one category and they cover three distinct formats: a 6-quart dual basket, a 26-quart French-door oven, and an 8-quart single basket. That is a usable comparison - it is the basis of the buying guide that already exists.",
+      "known_sources": [
+        "S19",
+        "S20",
+        "S21",
+        "S25",
+        "S26",
+        "S27"
+      ],
+      "confidence": "High on the formats, None on the intent",
+      "missing": "Whether the intent was to promote three products or to build a category site.",
+      "blocks": "S-09, the buying guide's framing, and how much effort the product set deserves.",
+      "how_to_find_out": "The owner answers, and the answer changes with Q-01: if the three codes were place-holders, the set changes entirely.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "before publish"
+    },
+    {
+      "id": "Q-21",
+      "area": "automation",
+      "question": "How will a manufacturer page change be noticed and corrected?",
+      "known": "Every specification was read off a manufacturer page on a single day, and two of those pages already contradict themselves or the Amazon listing. The deploy gates prove the published HTML matches the ledger; they cannot prove the ledger still matches the manufacturer.",
+      "known_sources": [
+        "S25",
+        "S26",
+        "S27",
+        "S21",
+        "S22"
+      ],
+      "confidence": "High on the gap, None on the remedy",
+      "missing": "A re-verification cadence and an owner for acting on it.",
+      "blocks": "S-18, and the long-run accuracy of every specification on the site.",
+      "how_to_find_out": "Decide a cadence, then implement the scheduled sweep. The first sweep should be run by hand so the tolerance policy is written from observed behaviour rather than assumed.",
+      "effort": "Medium",
+      "status": "Open",
+      "priority": "later"
+    },
+    {
+      "id": "Q-22",
+      "area": "measurement",
+      "question": "What would make this project a success in six months?",
+      "known": "The programme states that Amazon makes no representation about expected traffic or commission income. There is no published benchmark in any source this repository holds for a new affiliate site in this category.",
+      "known_sources": [
+        "S01",
+        "S04"
+      ],
+      "confidence": "None",
+      "missing": "The owner's definition of success - and whether it is revenue, traffic, a published content library, a working automation, or something else entirely.",
+      "blocks": "The priority order of every suggestion on this site. This is the question that decides which of them matters.",
+      "how_to_find_out": "The owner states it in one sentence. Everything else on this register is a consequence of that sentence.",
+      "effort": "Low",
+      "status": "Open",
+      "priority": "launch"
+    }
+  ]
+}

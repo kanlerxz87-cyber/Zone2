@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suggestions — Zone2</title>
+<meta name="description" content="A reviewable improvement backlog: what to change, the options and their trade-offs, a recommendation, the official source it rests on, and a blank Decision cell for the reviewer.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <h1>Zone2</h1>
+    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
+    <nav>
+      <a href="index.html">Dashboard</a><a href="summary.html">Executive Summary</a><a href="products.html">Products</a><a href="analysis.html">Analysis</a><a href="content.html">Content</a><a href="compliance.html">Compliance</a><a href="tracking.html">Tracking</a><a href="suggestions.html" class="active">Suggestions</a><a href="questions.html">Open Questions</a><a href="verification.html">Verification</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for Review</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <div class="page-head">
+      <h2>Suggestions</h2>
+      <p>A reviewable improvement backlog: what to change, the options and their trade-offs, a recommendation, the official source it rests on, and a blank Decision cell for the reviewer.</p>
+    </div>
+
+    <div class="disclosure">
+      <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
+      As an Amazon Associate I earn from qualifying purchases.
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="num">28</div><div class="lbl">Suggestions on the register</div></div>
+      <div class="kpi"><div class="num">3</div><div class="lbl">Blocking — nothing earns or launches until these are settled</div></div>
+      <div class="kpi"><div class="num">3</div><div class="lbl">Waiting on a decision from the reviewer</div></div>
+      <div class="kpi"><div class="num">4</div><div class="lbl">Already implemented or already the published behaviour</div></div>
+      <div class="kpi"><div class="num">22</div><div class="lbl"><a href="questions.html">Open questions</a> that have to be answered first</div></div>
+    </div>
+
+    <div class="card">
+      <h3>How to use this page</h3>
+      <p style="font-size:13.5px;margin:0 0 10px">
+        Every row below is a <strong>proposal</strong>, not a change that has been made. Each one states the
+        problem it solves, the options and what each costs, a recommendation, and the official source the
+        reasoning rests on. The <strong>Decision</strong> cell is deliberately blank: it is where the
+        reviewer records <em>accept</em>, <em>reject</em> or <em>defer</em>, and until it is filled the
+        suggestion has not been approved.
+      </p>
+      <ol style="font-size:13.5px;margin:0;padding-left:20px;line-height:1.7">
+        <li>Read the <strong>Decision table</strong> below and pick the rows that matter to you.</li>
+        <li>Open the detail for each one — the options and the trade-offs are where the real choice is.</li>
+        <li>Fill in the <strong>Decision</strong> cell, in the table or in the detail card.</li>
+        <li>Anything still unanswered belongs in the <a href="questions.html">open-questions register</a>,
+            which lists what is missing and how to obtain it.</li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">
+        Nothing here is a product claim. A suggestion that rests on a number carries the source of that
+        number; a suggestion that rests on a judgement says so.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Jump to an area</h3>
+      <p class="chips"><a class="chip" href="suggestions.html#area-identity">Identity &amp; data (2)</a> <a class="chip" href="suggestions.html#area-monetisation">Monetisation &amp; compliance (6)</a> <a class="chip" href="suggestions.html#area-content">Content &amp; organic traffic (5)</a> <a class="chip" href="suggestions.html#area-design">Design &amp; reader experience (7)</a> <a class="chip" href="suggestions.html#area-automation">Automation &amp; platform (6)</a> <a class="chip" href="suggestions.html#area-measurement">Measurement &amp; decisions (2)</a></p>
+    </div>
+
+    <div class="card">
+      <h3>Decision table</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 10px">
+        One row per suggestion. The Decision column is empty on purpose — fill it in, then take the
+        detail below into account. Nothing is implemented until a decision is recorded here.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>ID</th><th>Area</th><th>Suggestion</th><th>Impact</th><th>Effort</th><th>Status</th><th>Decision</th></tr></thead>
+          <tbody><tr id="row-S-01"><td><a href="suggestions.html#S-01"><code>S-01</code></a></td><td>Identity &amp; data</td><td><strong>Confirm the three target products from inside the Amazon Associates account</strong></td><td><span class="badge flag">Blocking</span></td><td><span class="badge ok">Low</span></td><td><span class="badge flag">Needs decision</span></td><td class="decision-cell"></td></tr><tr id="row-S-02"><td><a href="suggestions.html#S-02"><code>S-02</code></a></td><td>Monetisation &amp; compliance</td><td><strong>Re-issue the three links as tagged Special Links before publishing anything that links out</strong></td><td><span class="badge flag">Blocking</span></td><td><span class="badge ok">Low</span></td><td><span class="badge flag">Needs decision</span></td><td class="decision-cell"></td></tr><tr id="row-S-03"><td><a href="suggestions.html#S-03"><code>S-03</code></a></td><td>Automation &amp; platform</td><td><strong>Start the Creators API application, and plan the content so it is not a dependency</strong></td><td><span class="badge flag">High</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-04"><td><a href="suggestions.html#S-04"><code>S-04</code></a></td><td>Identity &amp; data</td><td><strong>Decide the niche: Air Fryers, or countertop cooking appliances?</strong></td><td><span class="badge flag">Blocking</span></td><td><span class="badge ok">Low</span></td><td><span class="badge flag">Needs decision</span></td><td class="decision-cell"></td></tr><tr id="row-S-05"><td><a href="suggestions.html#S-05"><code>S-05</code></a></td><td>Design &amp; reader experience</td><td><strong>Give the site a reader-facing front door and keep the evidence dashboard behind it</strong></td><td><span class="badge flag">High</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Implemented in this session</span></td><td class="decision-cell"></td></tr><tr id="row-S-06"><td><a href="suggestions.html#S-06"><code>S-06</code></a></td><td>Content &amp; organic traffic</td><td><strong>Publish original how-to and safety content that stands on its own without a product link</strong></td><td><span class="badge flag">High</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Implemented in this session</span></td><td class="decision-cell"></td></tr><tr id="row-S-07"><td><a href="suggestions.html#S-07"><code>S-07</code></a></td><td>Design &amp; reader experience</td><td><strong>Name an author and an editor, and put them on every editorial page</strong></td><td><span class="badge flag">High</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-08"><td><a href="suggestions.html#S-08"><code>S-08</code></a></td><td>Content &amp; organic traffic</td><td><strong>Build the site around a topic hub with spokes, not a list of standalone pages</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Low</span></td><td><span class="badge ok">Implemented in this session</span></td><td class="decision-cell"></td></tr><tr id="row-S-09"><td><a href="suggestions.html#S-09"><code>S-09</code></a></td><td>Content &amp; organic traffic</td><td><strong>Turn the three verified products into a category page instead of three orphaned articles</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-10"><td><a href="suggestions.html#S-10"><code>S-10</code></a></td><td>Content &amp; organic traffic</td><td><strong>Publish a sitemap and register the property in Search Console</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-11"><td><a href="suggestions.html#S-11"><code>S-11</code></a></td><td>Design &amp; reader experience</td><td><strong>Add Article structured data so the headline, author and date are machine-readable</strong></td><td><span class="badge ok">Low</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-12"><td><a href="suggestions.html#S-12"><code>S-12</code></a></td><td>Monetisation &amp; compliance</td><td><strong>Keep publishing no prices, and say plainly why</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-13"><td><a href="suggestions.html#S-13"><code>S-13</code></a></td><td>Monetisation &amp; compliance</td><td><strong>Add the privacy policy and cookie notice the program and the FTC expect</strong></td><td><span class="badge flag">High</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-14"><td><a href="suggestions.html#S-14"><code>S-14</code></a></td><td>Monetisation &amp; compliance</td><td><strong>Give every agent a name and let it identify itself in the request it makes</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-15"><td><a href="suggestions.html#S-15"><code>S-15</code></a></td><td>Monetisation &amp; compliance</td><td><strong>Set a sub-tag scheme that is per page, never per person</strong></td><td><span class="badge ok">Low</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-16"><td><a href="suggestions.html#S-16"><code>S-16</code></a></td><td>Design &amp; reader experience</td><td><strong>Give every page one job and one call to action</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-17"><td><a href="suggestions.html#S-17"><code>S-17</code></a></td><td>Design &amp; reader experience</td><td><strong>Give the reader a decision tool, not a specification dump</strong></td><td><span class="badge flag">High</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-18"><td><a href="suggestions.html#S-18"><code>S-18</code></a></td><td>Automation &amp; platform</td><td><strong>Schedule a re-verification sweep so a manufacturer page change cannot go unnoticed</strong></td><td><span class="badge flag">High</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-19"><td><a href="suggestions.html#S-19"><code>S-19</code></a></td><td>Automation &amp; platform</td><td><strong>Make the agent&#x27;s job a pipeline with a human checkpoint, not a publish button</strong></td><td><span class="badge flag">High</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-20"><td><a href="suggestions.html#S-20"><code>S-20</code></a></td><td>Automation &amp; platform</td><td><strong>Build trend detection on licensed catalog data plus a published search-interest source</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge flag">High</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-21"><td><a href="suggestions.html#S-21"><code>S-21</code></a></td><td>Automation &amp; platform</td><td><strong>Automate click and conversion tracking without violating the tracking rules</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-22"><td><a href="suggestions.html#S-22"><code>S-22</code></a></td><td>Measurement &amp; decisions</td><td><strong>Decide the three numbers that will be used to judge every change</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-23"><td><a href="suggestions.html#S-23"><code>S-23</code></a></td><td>Measurement &amp; decisions</td><td><strong>A/B test one thing at a time, and only what the data can actually resolve</strong></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-24"><td><a href="suggestions.html#S-24"><code>S-24</code></a></td><td>Design &amp; reader experience</td><td><strong>Run the whole site through a phone before it is called done</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Partly implemented in this session</span></td><td class="decision-cell"></td></tr><tr id="row-S-25"><td><a href="suggestions.html#S-25"><code>S-25</code></a></td><td>Design &amp; reader experience</td><td><strong>Give the five published namespaces one visual language</strong></td><td><span class="badge ok">Low</span></td><td><span class="badge flag">High</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-26"><td><a href="suggestions.html#S-26"><code>S-26</code></a></td><td>Content &amp; organic traffic</td><td><strong>Run a seasonal editorial calendar built from the cooking calendar, not from a trend guess</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Medium</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-27"><td><a href="suggestions.html#S-27"><code>S-27</code></a></td><td>Automation &amp; platform</td><td><strong>Let the agent pick its own topics, but from a written brief the owner has approved</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Low</span></td><td><span class="badge warn">Proposed</span></td><td class="decision-cell"></td></tr><tr id="row-S-28"><td><a href="suggestions.html#S-28"><code>S-28</code></a></td><td>Monetisation &amp; compliance</td><td><strong>Keep the ambiguity visible instead of resolving it with a plausible guess</strong></td><td><span class="badge warn">Medium</span></td><td><span class="badge ok">Low</span></td><td><span class="badge ok">Already the published behaviour</span></td><td class="decision-cell"></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Suggested order of work</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 10px">
+        The phases are a recommendation, not a schedule. Phase 1 is the set without which the site cannot
+        earn anything; the later phases assume the earlier ones are done.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Phase</th><th>Suggestions</th></tr></thead>
+          <tbody><tr><td><strong>Phase 1 — unblock launch</strong><div class="row-note">Nothing else on this list pays anything until these are done.</div></td><td><a href="suggestions.html#S-01">S-01</a>, <a href="suggestions.html#S-02">S-02</a>, <a href="suggestions.html#S-03">S-03</a>, <a href="suggestions.html#S-04">S-04</a>, <a href="suggestions.html#S-05">S-05</a></td></tr><tr><td><strong>Phase 2 — first 30 days</strong><div class="row-note">What makes the published site a site rather than a document.</div></td><td><a href="suggestions.html#S-06">S-06</a>, <a href="suggestions.html#S-07">S-07</a>, <a href="suggestions.html#S-08">S-08</a>, <a href="suggestions.html#S-09">S-09</a>, <a href="suggestions.html#S-10">S-10</a>, <a href="suggestions.html#S-11">S-11</a>, <a href="suggestions.html#S-12">S-12</a>, <a href="suggestions.html#S-13">S-13</a>, <a href="suggestions.html#S-14">S-14</a>, <a href="suggestions.html#S-15">S-15</a>, <a href="suggestions.html#S-16">S-16</a>, <a href="suggestions.html#S-17">S-17</a>, <a href="suggestions.html#S-18">S-18</a>, <a href="suggestions.html#S-22">S-22</a>, <a href="suggestions.html#S-24">S-24</a></td></tr><tr><td><strong>Phase 3 — scale</strong><div class="row-note">What turns a working site into a growing one.</div></td><td><a href="suggestions.html#S-19">S-19</a>, <a href="suggestions.html#S-20">S-20</a>, <a href="suggestions.html#S-21">S-21</a>, <a href="suggestions.html#S-23">S-23</a>, <a href="suggestions.html#S-25">S-25</a>, <a href="suggestions.html#S-26">S-26</a>, <a href="suggestions.html#S-27">S-27</a>, <a href="suggestions.html#S-28">S-28</a></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="section-head">Every suggestion in full</h3>
+      <section id="area-identity">
+        <div class="area-head">
+          <h3>Identity &amp; data</h3>
+          <p>Which products this site is actually about, and what can be proven about them.</p>
+        </div>
+        <article class="card suggestion-card" id="S-01">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-01</span>
+            <h3>Confirm the three target products from inside the Amazon Associates account</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: Blocking</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge flag">Needs decision</span>
+            <span class="badge">Phase: Phase 1 — unblock launch</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The three supplied codes are 9 characters each. Amazon&#x27;s own help page defines an ASIN as a 10-character identifier, so a supplied code is not an ASIN. Following each code does resolve to exactly one Amazon listing, and the destination has stayed the same across every check since 2026-11-13 - but no public Amazon document binds a link.amazon code to a product. The site can therefore say what each code points at, and never what the brief asked for.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Open each of the three codes in the Associates account&#x27;s own link checker and read the destination ASIN from there.</td><td class="tradeoff">Needs about five minutes of the account owner&#x27;s time. It removes the ambiguity permanently and gives the site a citable Amazon-side confirmation.</td></tr><tr><th scope="row">Option B</th><td>Publish against the three destinations that were observed, describing them as &#x27;the product this link resolves to&#x27;.</td><td class="tradeoff">Zero owner time and already true of the live site, but if the brief meant different products then every published article is about the wrong item and the content has to be rewritten.</td></tr><tr><th scope="row">Option C</th><td>Treat the codes as place-holders and rebuild the product set from a fresh niche-research pass.</td><td class="tradeoff">The cleanest end state, and the most work: it needs the licensed catalog access described in S-03, which is not available yet.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Take option A, and keep option B as the published wording until A&#x27;s answer arrives. Option A costs five minutes; option C costs a quarter.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer nofollow">S24<span class="src-host">affiliate-program.amazon.com</span></a> — Amazon&#x27;s ASIN and link-format help: an ASIN is a 10-character identifier.</li><li><a class="src" href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">S33<span class="src-host">link.amazon</span></a> — Supplied code 1 - the link this repository follows.</li><li><a class="src" href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer nofollow">S34<span class="src-host">link.amazon</span></a> — Supplied code 2.</li><li><a class="src" href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer nofollow">S35<span class="src-host">link.amazon</span></a> — Supplied code 3.</li><li><a class="src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer nofollow">S19<span class="src-host">www.amazon.com</span></a> — Destination listing observed for code 1 on 2026-11-15.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-04">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-04</span>
+            <h3>Decide the niche: Air Fryers, or countertop cooking appliances?</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: Blocking</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge flag">Needs decision</span>
+            <span class="badge">Phase: Phase 1 — unblock launch</span>
+          </p>
+          <h4>The problem</h4>
+          <p>All three resolved destinations sit in one Amazon category - Home &amp; Kitchen, Kitchen &amp; Dining, Small Appliances, Fryers, Air Fryers - and the category breadcrumb was read directly off each listing on 2026-11-15. A single-category portfolio is too narrow to support a hub-and-spoke content cluster, and the platform&#x27;s own niche-discovery module exists to answer exactly this question but has no keyword data to score with.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Keep the three products, but set the content niche one level wider - countertop cooking appliances - so there is room for a topic cluster around them.</td><td class="tradeoff">No new data needed, and the products stay relevant. Risk: the wider niche has more competition, which cannot be measured until a keyword source exists (Q-13).</td></tr><tr><th scope="row">Option B</th><td>Keep the narrow Air Fryers niche and win on depth rather than breadth.</td><td class="tradeoff">Cheapest to execute and honest about what the evidence supports, but a three-product niche has a small ceiling.</td></tr><tr><th scope="row">Option C</th><td>Run a formal niche score - search volume against competition against commission - before writing anything.</td><td class="tradeoff">The most rigorous answer, and it needs a keyword source and a commission band per category, neither of which is available yet.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. It keeps the products, gives the editorial calendar room to breathe, and needs no data the project does not have. Revisit with option C once Q-13 is answered.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer nofollow">S19<span class="src-host">www.amazon.com</span></a> — Category breadcrumb read off listing 1 on 2026-11-15.</li><li><a class="src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer nofollow">S20<span class="src-host">www.amazon.com</span></a> — Category breadcrumb read off listing 2 on 2026-11-15.</li><li><a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer nofollow">S21<span class="src-host">www.amazon.com</span></a> — Category breadcrumb read off listing 3 on 2026-11-15.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer nofollow">S04<span class="src-host">affiliate-program.amazon.com</span></a> — The published commission schedule - bands are per category, so the niche choice decides the band.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+      </section>      <section id="area-monetisation">
+        <div class="area-head">
+          <h3>Monetisation &amp; compliance</h3>
+          <p>What makes a link earn, and what the program forbids.</p>
+        </div>
+        <article class="card suggestion-card" id="S-02">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-02</span>
+            <h3>Re-issue the three links as tagged Special Links before publishing anything that links out</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: Blocking</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge flag">Needs decision</span>
+            <span class="badge">Phase: Phase 1 — unblock launch</span>
+          </p>
+          <h4>The problem</h4>
+          <p>None of the three resolved URLs carries an Associates tag parameter. The Program Policies make the tag the mechanism by which a click is attributed to an associate, so as supplied these links cannot attribute a purchase and cannot earn a commission. The repository already refuses to invent a tag and labels every outbound link as a non-earning preview link; that is the correct behaviour, but it means the site as it stands earns nothing.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Generate Special Links for the three confirmed ASINs with the account&#x27;s own link-creation tool, and paste the tag into the site configuration.</td><td class="tradeoff">The account owner has to do it once. Nothing else on this list has value without it.</td></tr><tr><th scope="row">Option B</th><td>Have the link builder append the tag to every outbound link at build time from a single configured value.</td><td class="tradeoff">One place to change, and the build can refuse to publish a link with no tag - which is the behaviour the repository already models for preview links.</td></tr><tr><th scope="row">Option C</th><td>Leave the links untagged and treat the site as a non-commercial demonstration.</td><td class="tradeoff">Nothing to decide and nothing to earn. Fine for a portfolio site; pointless for an affiliate business.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A for the three launch products, then option B as the general mechanism, with the build failing if a published link has no tag.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a> — Participation Requirements: the Associates ID must be a URL parameter on the link.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer nofollow">S29<span class="src-host">affiliate-program.amazon.com</span></a> — The same section, read directly for the tagging rule.</li><li><a class="src" href="https://affiliate-program.amazon.com/welcome/topic/tools" target="_blank" rel="noopener noreferrer nofollow">S09<span class="src-host">affiliate-program.amazon.com</span></a> — Amazon&#x27;s own tools page - where Special Links are created.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-12">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-12</span>
+            <h3>Keep publishing no prices, and say plainly why</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The Program Policies restrict displaying prices to links Amazon serves and to licensed API data. The site currently prints no product price at all and enforces that with a deploy gate, which is stricter than the policy requires. That is defensible, but a reader comparing three products is left without the one number they came for, and a competitor who publishes prices will be easier to click.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Keep the no-price rule and make the reason visible on the comparison page, with the price available on the linked Amazon page.</td><td class="tradeoff">Fully compliant and honest, but it costs some comparison-driven clicks.</td></tr><tr><th scope="row">Option B</th><td>Publish prices from the Creators API once S-03 gives access, which the policy permits.</td><td class="tradeoff">The comparison page becomes genuinely useful. It also creates a stale-data problem and a second failure mode the deploy gate would have to understand.</td></tr><tr><th scope="row">Option C</th><td>Publish prices scraped from public pages.</td><td class="tradeoff">Not permitted, and it violates the site&#x27;s own no-inference rule. Rejected.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A now, option B when the API exists. A static price pasted into a page is wrong within hours, which is why the current rule exists.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a> — Program Policies, price display rule (Participation Requirements).</li><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer nofollow">S29<span class="src-host">affiliate-program.amazon.com</span></a> — The same rule read directly.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-13">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-13</span>
+            <h3>Add the privacy policy and cookie notice the program and the FTC expect</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: High</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The site carries the mandated affiliate disclosure on every page, but it has no privacy policy, no cookie notice and no contact route. The FTC&#x27;s endorsement guidance treats a material connection that is not clearly and conspicuously disclosed as a violation, and disclosure has to sit close to the recommendation - which is what the link-level disclosure on this site does. A privacy policy is the place to say what the site collects and what it does not.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Publish a privacy policy, a cookie notice and a contact page before the site takes traffic.</td><td class="tradeoff">One page each. If the site later adds analytics, the notice has to change - so write it now to describe what is actually true, which is &#x27;no analytics, no cookies of our own&#x27;.</td></tr><tr><th scope="row">Option B</th><td>Rely on the affiliate disclosure alone.</td><td class="tradeoff">The disclosure is the program&#x27;s requirement and it is met. It is not the whole of what the FTC&#x27;s material-connection standard asks for, and it is not a substitute for a privacy policy.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. It is cheap, and the site&#x27;s current position - no tracking of its own - makes the notice short and easy to keep true.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer nofollow">S10<span class="src-host">www.ftc.gov</span></a> — FTC Endorsement Guides: material connection must be disclosed clearly and conspicuously.</li><li><a class="src" href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer nofollow">S11<span class="src-host">www.ftc.gov</span></a> — FTC Disclosures 101 - how to make a disclosure work.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-14">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-14</span>
+            <h3>Give every agent a name and let it identify itself in the request it makes</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>Amazon&#x27;s Agent Terms require an agent to identify itself with a User-Agent of the form Agent/[name], to not conceal that it is an agent, and not to attempt to defeat a human-check measure. Every automated fetch this project performs - and every automated fetch a future trend-detection module would perform - is in scope.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Set a single agent name in the link builder and the fetcher, and have it send Agent/[name] on every request.</td><td class="tradeoff">None that matters. It is a one-line configuration and it removes a compliance question from every future automation.</td></tr><tr><th scope="row">Option B</th><td>Rely on the fact that the fetches are low volume and harmless.</td><td class="tradeoff">Volume is not the test; the terms require identification.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. It belongs in the same place as the link builder, so no future module can bypass it.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20IP%20License" target="_blank" rel="noopener noreferrer nofollow">S30<span class="src-host">affiliate-program.amazon.com</span></a> — Associates Program IP License and Usage Requirements, Agent Terms.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a> — Program Policies, incorporated by reference into the Agreement.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-15">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-15</span>
+            <h3>Set a sub-tag scheme that is per page, never per person</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge ok">Impact: Low</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The Participation Requirements permit a sub-tag for tracking but forbid tying a sub-tag to a specific end user. Nothing in this repository sets a sub-tag today, so there is no violation - but a growth plan that wants to know which article earns will reach for one immediately, and the rule that constrains it is easy to get wrong.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Define the scheme now: one sub-tag per content type, never a parameter that varies per reader.</td><td class="tradeoff">Coarse attribution. It answers &#x27;which article&#x27; and not &#x27;which visitor&#x27;, which is the right line to sit on.</td></tr><tr><th scope="row">Option B</th><td>No sub-tags at all.</td><td class="tradeoff">Simplest and safest, but then the click report cannot distinguish an article that earns from one that does not.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A, written into the link builder so the rule is enforced by the build rather than remembered by whoever edits content next.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a> — Program Policies: the Associates ID must be a URL parameter; a sub-tag may never be tied to a specific end user.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-28">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-28</span>
+            <h3>Keep the ambiguity visible instead of resolving it with a plausible guess</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge ok">Already the published behaviour</span>
+            <span class="badge">Phase: Phase 3 — scale</span>
+          </p>
+          <h4>The problem</h4>
+          <p>Three official pages in this project disagree with each other: the Emeril page contradicts itself about its preset count, the Chefman 8 Qt page and the Amazon listing for the same product disagree about maximum temperature, and the three supplied codes resolve to products the brief never named. The tempting move - publish the most likely value and move on - would be a guess published with the authority of this repository. The project has instead left the conflict on the page.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Keep publishing every conflict as a conflict, with both statements and both sources, and keep the review page public.</td><td class="tradeoff">Some pages look unresolved. That is accurate, and it is the reason this site can be trusted on the rows where there is no conflict.</td></tr><tr><th scope="row">Option B</th><td>Resolve each conflict by precedence - manufacturer over marketplace - and say so once.</td><td class="tradeoff">Cleaner to read. It is also a decision this repository has no authority to make, and it would make the rows that agree look decided for the same reason.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. A conflict on the page is a small cost; a guessed value published as fact is a large one, and it is the defect this entire repository exists to prevent.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360" target="_blank" rel="noopener noreferrer nofollow">S27<span class="src-host">www.emerileveryday.com</span></a> — The Emeril page states 25 pre-sets in one place and 24 in another - both read 2026-11-15.</li><li><a class="src" href="https://chefman.com/products/turbofry-touch-air-fryer-1" target="_blank" rel="noopener noreferrer nofollow">S26<span class="src-host">chefman.com</span></a> — The Chefman 8 Qt manufacturer specification: 200-400 F.</li><li><a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer nofollow">S21<span class="src-host">www.amazon.com</span></a> — The Amazon title for the same ASIN says 450 F.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer nofollow">S24<span class="src-host">affiliate-program.amazon.com</span></a> — The ASIN rule that makes the supplied-code ambiguity unresolvable from a public page.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+      </section>      <section id="area-content">
+        <div class="area-head">
+          <h3>Content &amp; organic traffic</h3>
+          <p>How a reader finds this site and why they would come back.</p>
+        </div>
+        <article class="card suggestion-card" id="S-06">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-06</span>
+            <h3>Publish original how-to and safety content that stands on its own without a product link</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: High</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge ok">Implemented in this session</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>Google&#x27;s spam policies describe &#x27;thin affiliation&#x27; as publishing affiliate content where the product descriptions are copied from the merchant with no added value, and name &#x27;original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons&#x27; as the things that make an affiliate page good rather than thin. The United States Department of Agriculture publishes exactly the kind of material that adds value and cannot be copied from a merchant: how an air fryer works, what it must never be asked to cook, and the safe internal temperatures a thermometer has to read.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Publish a cooking-safety and technique layer sourced from the USDA pages, linked to the products only where the product genuinely answers the question.</td><td class="tradeoff">Needs a named author and an editorial standard, because the guidance is explicit that the content must be authored and integrated. The material already exists and needs no invention.</td></tr><tr><th scope="row">Option B</th><td>Keep every page product-led and rely on the comparison table as the added value.</td><td class="tradeoff">Fastest, but the comparison table is three rows wide - thin by the definition above.</td></tr><tr><th scope="row">Option C</th><td>Generate articles at volume from a template with the product name swapped in.</td><td class="tradeoff">This is the failure mode the policies name by name - &#x27;using generative AI tools or other similar tools to generate many pages without adding value for users&#x27;. Listed so it is visibly rejected.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. This session published the first two pieces of that layer, with every factual sentence carrying the government source it came from.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — &#x27;Thin affiliation&#x27; definition and the list of what makes an affiliate page good.</li><li><a class="src" href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers-and-food-safety" target="_blank" rel="noopener noreferrer nofollow">S41<span class="src-host">www.fsis.usda.gov</span></a> — USDA FSIS on how air fryers work, cooking times and temperatures, and what must not be air fried.</li><li><a class="src" href="https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures" target="_blank" rel="noopener noreferrer nofollow">S42<span class="src-host">www.foodsafety.gov</span></a> — The safe minimum internal temperature chart.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-08">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-08</span>
+            <h3>Build the site around a topic hub with spokes, not a list of standalone pages</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge ok">Implemented in this session</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The site currently publishes three product articles, a buying guide and a comparison. They link to each other, but there is no hub page that states what the site covers, and no spoke that exists to answer a question someone would actually type. A hub makes the coverage legible to both a reader and a crawler, and it is the structure Google&#x27;s own documentation assumes when it describes &#x27;navigation of products or categories&#x27; as added value.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>One hub page per topic area, each listing its spokes, with the hub and the spokes cross-linked both ways.</td><td class="tradeoff">A structural habit rather than a one-off task. It costs a page per topic and it needs the niche decision from S-04 first.</td></tr><tr><th scope="row">Option B</th><td>Keep publishing standalone articles and rely on the sitemap for discovery.</td><td class="tradeoff">Cheapest. It leaves the topical structure implicit, which is exactly what a reader (and a reviewer) cannot see.</td></tr><tr><th scope="row">Option C</th><td>Generate a hub per keyword.</td><td class="tradeoff">Scaled content abuse again - many pages with little value added. Rejected.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. This session added a topics hub to the marketing set and made it the navigational spine of the front door.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — Added value for affiliate pages includes &#x27;navigation of products or categories&#x27;.</li><li><a class="src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">S39<span class="src-host">developers.google.com</span></a> — &#x27;Does the content provide a substantial, complete, or comprehensive description of the topic?&#x27;</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-09">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-09</span>
+            <h3>Turn the three verified products into a category page instead of three orphaned articles</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>All three products sit in one Amazon category. Three separate product pages compete with each other for the same few queries; one category page that states what the category is, what distinguishes the models and how to choose between them covers the same ground with one page that can rank for the category term and pass authority to the others.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Publish a category landing page: what an air fryer oven is, the three formats in this set, and the decision points between them.</td><td class="tradeoff">Needs the comparison work to be readable, not just tabular - the current comparison table is the hard part to translate.</td></tr><tr><th scope="row">Option B</th><td>Keep three product pages and cross-link them more aggressively.</td><td class="tradeoff">Already partly done. It does not give the site a page that owns the category term.</td></tr><tr><th scope="row">Option C</th><td>Generate a page per product in the category, including products outside this set.</td><td class="tradeoff">Only possible with licensed catalog data (S-03) and dangerously close to thin affiliation at volume. Rejected for now.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A, after S-01 and S-04. It uses the structure the data already supports - one category, three formats - without inventing products that were not verified.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer nofollow">S19<span class="src-host">www.amazon.com</span></a> — Listing 1&#x27;s category path, read 2026-11-15.</li><li><a class="src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer nofollow">S20<span class="src-host">www.amazon.com</span></a> — Listing 2&#x27;s category path, read 2026-11-15.</li><li><a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer nofollow">S21<span class="src-host">www.amazon.com</span></a> — Listing 3&#x27;s category path, read 2026-11-15.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-10">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-10</span>
+            <h3>Publish a sitemap and register the property in Search Console</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The site publishes roughly ninety pages across five namespaces and ships no sitemap. Google&#x27;s sitemap documentation describes the XML format, the best practices, and the two submission routes - Search Console and a robots.txt reference. Without it, discovery depends entirely on links between pages.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Generate sitemap.xml from the same build that produces the pages, and reference it from robots.txt.</td><td class="tradeoff">Needs a domain that is not a github.io subdomain to be worth doing properly, but the sitemap itself is valid wherever it is served.</td></tr><tr><th scope="row">Option B</th><td>Submit the sitemap in Search Console as soon as the property is available.</td><td class="tradeoff">Requires ownership of the domain and an account; it is a one-off task with a real payoff because it reports coverage and query data.</td></tr><tr><th scope="row">Option C</th><td>Skip the sitemap and rely on internal linking.</td><td class="tradeoff">Works for a handful of pages. Not a plan for a site that plans to grow.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Options A and B together. The sitemap is cheap and mechanical; Search Console is what turns &#x27;we published&#x27; into &#x27;we can see what was indexed&#x27;.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank" rel="noopener noreferrer nofollow">S40<span class="src-host">developers.google.com</span></a> — Google&#x27;s sitemap documentation: formats, best practices, and submission via Search Console and robots.txt.</li><li><a class="src" href="https://docs.github.com/en/rest/pages/pages" target="_blank" rel="noopener noreferrer nofollow">S22<span class="src-host">docs.github.com</span></a> — GitHub Pages API - the source of truth for what is actually deployed.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-26">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-26</span>
+            <h3>Run a seasonal editorial calendar built from the cooking calendar, not from a trend guess</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 3 — scale</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The brief asks for catchy, trending articles. A trend that is not measured is a guess, and the site&#x27;s whole discipline is that guesses are left blank. There is a defensible version of &#x27;trending&#x27; here that needs no trend data at all: the cooking calendar. The USDA pages establish what has to be true for a piece of food to be cooked safely in an air fryer, and those foods have a calendar - a whole bird at one end of the year, frozen fries every week of it.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Build a twelve-month calendar of cooking questions, each answered from a food-safety source and linked to the product that answers it.</td><td class="tradeoff">Needs one editorial decision a month. It produces evergreen, linkable content that does not depend on a keyword tool.</td></tr><tr><th scope="row">Option B</th><td>Wait for a trend source and chase what is rising.</td><td class="tradeoff">Reactive and late - by the time a trend is visible in a trend tool, the obvious content is already published by everyone else.</td></tr><tr><th scope="row">Option C</th><td>Publish the same article template per product per month.</td><td class="tradeoff">Scaled content abuse. Rejected.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A now, option B once Q-13 has a trend source. The calendar is real and it does not require a number this repository does not have.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers-and-food-safety" target="_blank" rel="noopener noreferrer nofollow">S41<span class="src-host">www.fsis.usda.gov</span></a> — USDA FSIS: the foods air fryers are used for, and the safety rules that govern each.</li><li><a class="src" href="https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures" target="_blank" rel="noopener noreferrer nofollow">S42<span class="src-host">www.foodsafety.gov</span></a> — The safe minimum internal temperature chart - the authority for every cooking question in the calendar.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+      </section>      <section id="area-design">
+        <div class="area-head">
+          <h3>Design &amp; reader experience</h3>
+          <p>Why the site currently reads like an audit report.</p>
+        </div>
+        <article class="card suggestion-card" id="S-05">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-05</span>
+            <h3>Give the site a reader-facing front door and keep the evidence dashboard behind it</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: High</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge ok">Implemented in this session</span>
+            <span class="badge">Phase: Phase 1 — unblock launch</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The first screen a visitor meets is a strip of key figures about unverified mappings and open review items. It is honest and it is the most rigorous part of this repository - and it reads as an audit report, not as a site someone would browse. Google&#x27;s people-first guidance asks whether a page provides a substantial, complete description of the topic and whether the main heading summarises the content helpfully; an audit log answers neither.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Make the marketing set the public front door and leave the dashboard as the evidence layer behind it.</td><td class="tradeoff">Two navigations to keep in step. The evidence stays one click away and nothing is deleted.</td></tr><tr><th scope="row">Option B</th><td>Keep one page and put a marketing hero above the existing content.</td><td class="tradeoff">Cheapest. But the page then carries two audiences at once, which is how it reads today.</td></tr><tr><th scope="row">Option C</th><td>Leave the dashboard as the landing page and rely on search traffic arriving deep into the site.</td><td class="tradeoff">No work at all. It forfeits the one page that decides whether a visitor stays.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. This session implemented the front door as a redesigned marketing landing page with a topic hub and editorial articles; the dashboard remains the evidence layer and is still linked from every page.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">S39<span class="src-host">developers.google.com</span></a> — People-first content: &#x27;Does the content provide a substantial, complete, or comprehensive description of the topic?&#x27; and the instruction to avoid search-engine-first content.</li><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — Site reputation policy: an unauthored affiliate article not integrated in a publication is likely to be actioned, while integrated affiliate content with qualified links is not.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-07">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-07</span>
+            <h3>Name an author and an editor, and put them on every editorial page</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: High</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>Google&#x27;s site reputation guidance lists &#x27;its stated or implied authorship&#x27; as one of the objective factors a human reviewer weighs, and its worked example says an &#x27;unauthored affiliate article not integrated in publication&#x27; is likely to be actioned while an &#x27;authored, original, affiliate article&#x27; with &#x27;authorship, editorial responsibility, and affiliate links clearly marked&#x27; is not. This site currently has no named author anywhere.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Publish an about page naming a person or an editorial team, and show the author on every article.</td><td class="tradeoff">The site has to be honest about who does this. If the content is agent-generated, say so - the disclosure requirement already applies to the commercial relationship.</td></tr><tr><th scope="row">Option B</th><td>Publish under a brand name with no person named.</td><td class="tradeoff">Cheap, and it is the version the guidance describes as &#x27;unclear&#x27;. Not recommended.</td></tr><tr><th scope="row">Option C</th><td>Keep the site as an internal tool and do not chase search traffic at all.</td><td class="tradeoff">Perfectly legitimate, and it removes this whole class of work. It also removes the point of the brief.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A, with an honest statement of how the content is produced. The Amazon Agent Terms already require an agent to identify itself, so the author line is a disclosure either way.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — Site reputation policy: authorship, editorial responsibility and affiliate links clearly marked are what separate the two worked examples.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20IP%20License" target="_blank" rel="noopener noreferrer nofollow">S30<span class="src-host">affiliate-program.amazon.com</span></a> — The Amazon Associates IP License and Agent Terms, which require an agent to identify itself.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-11">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-11</span>
+            <h3>Add Article structured data so the headline, author and date are machine-readable</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge ok">Impact: Low</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>Google&#x27;s Article documentation states that adding Article structured data can help it understand a page and show better title text and date information in results, and it sets out a JSON-LD example with headline, image, datePublished, dateModified and author. The articles on this site carry a verification date in prose but nothing a crawler can read.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Emit JSON-LD Article markup on the editorial pages, generated from the same data that produces the page.</td><td class="tradeoff">The markup must match what the page shows, and it depends on S-07 naming an author. Marking up a page whose author is unclear would be worse than not marking it up.</td></tr><tr><th scope="row">Option B</th><td>Skip structured data and let the pages speak for themselves.</td><td class="tradeoff">Acceptable for a small site. It gives up the date and headline signals that the documentation says help.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A, after S-07. Generate it from the build so the markup cannot disagree with the page.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/appearance/structured-data/article" target="_blank" rel="noopener noreferrer nofollow">S43<span class="src-host">developers.google.com</span></a> — Google&#x27;s Article structured data documentation and JSON-LD example.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-16">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-16</span>
+            <h3>Give every page one job and one call to action</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>A comparison page that also argues methodology, shows a verification table and links six namespaces asks a reader to do the site&#x27;s work. Google&#x27;s guidance asks whether the main heading provides a descriptive, helpful summary of the content; a page that summarises five things summarises none of them.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>One question per page, one primary link, the evidence a click away.</td><td class="tradeoff">More pages for the same total content. It also makes the evidence layer look like a feature rather than a mess.</td></tr><tr><th scope="row">Option B</th><td>Keep the evidence on the page and style it so it recedes.</td><td class="tradeoff">Cheap. It does not change the fact that the page asks for three decisions at once.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. The evidence pages already exist as separate URLs; the marketing pages should point at them rather than absorb them.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">S39<span class="src-host">developers.google.com</span></a> — &#x27;Does the main heading or page title provide a descriptive, helpful summary of the content?&#x27;</li><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — Thin affiliation: affiliate pages are thin when nothing is added to the merchant&#x27;s own material.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-17">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-17</span>
+            <h3>Give the reader a decision tool, not a specification dump</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: High</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The buying guide currently answers &#x27;which of these three fits which kitchen&#x27; with a table of attributes. That is the right data and the wrong shape. A reader who arrived from search wants to leave with a decision: dual basket for two different foods at once, a large French-door oven for a family meal, or a single basket for a small kitchen.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Add a short &#x27;which one should you buy&#x27; decision block at the top of the buying guide, written from the verified capacities and formats.</td><td class="tradeoff">It editorialises, which means a human has to write it. It cannot be generated from the table without becoming the table again.</td></tr><tr><th scope="row">Option B</th><td>Add an interactive filter widget over the comparison table.</td><td class="tradeoff">Impressive and, on a three-row table, absurd. It also adds client-side JavaScript that a reader on a slow connection has to download before seeing anything.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. It is the one piece of writing on the site that only a person can do, and it is the piece a search visitor is actually asking for.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://chefman.com/products/turbofry-touch-dual-window-air-fryer" target="_blank" rel="noopener noreferrer nofollow">S25<span class="src-host">chefman.com</span></a> — Manufacturer specification for the 6 Qt dual-basket model - two independent baskets, Sync Finish.</li><li><a class="src" href="https://chefman.com/products/turbofry-touch-air-fryer-1" target="_blank" rel="noopener noreferrer nofollow">S26<span class="src-host">chefman.com</span></a> — Manufacturer specification for the 8 Qt single-basket model - four one-touch presets, 200-400 F.</li><li><a class="src" href="https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360" target="_blank" rel="noopener noreferrer nofollow">S27<span class="src-host">www.emerileveryday.com</span></a> — Manufacturer specification for the 26 Qt French-door oven - dual French doors, 10-in-1 cooking modes.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-24">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-24</span>
+            <h3>Run the whole site through a phone before it is called done</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Partly implemented in this session</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>Most of the traffic an affiliate site gets arrives on a phone. The current layout is a fixed 240-pixel sidebar beside the content, which the stylesheet collapses into a horizontal strip of links below the content on a narrow screen - which puts eight navigation links above the fold before a reader sees the first sentence.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Collapse the navigation behind a single menu control on narrow screens and check every published page at phone width.</td><td class="tradeoff">A small amount of CSS and JavaScript. It is the difference between the first sentence and the first menu.</td></tr><tr><th scope="row">Option B</th><td>Keep the sidebar.</td><td class="tradeoff">Readers on a phone scroll past the navigation before they reach the content, or they leave.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. The marketing pages this session added were built mobile-first for exactly this reason; the dashboard pages still need the same treatment.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">S39<span class="src-host">developers.google.com</span></a> — People-first content and the page-experience questions - &#x27;Is this page or site usable on mobile devices?&#x27;</li><li><a class="src" href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank" rel="noopener noreferrer nofollow">S40<span class="src-host">developers.google.com</span></a> — Sitemap best practices, which assume a site a crawler reads on any device.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-25">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-25</span>
+            <h3>Give the five published namespaces one visual language</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge ok">Impact: Low</span>
+            <span class="badge flag">Effort: High</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 3 — scale</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The repository publishes five separate sites - the dashboard, the findings hub, the research hub, the revalidation record and the marketing set - each with its own stylesheet, its own type scale and its own colour palette. They are linked from one footer and read as five different products.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Extract the shared tokens - colour, radius, type scale, spacing - into one stylesheet that all five import.</td><td class="tradeoff">Every namespace&#x27;s stylesheet changes. The build gates would catch nothing here, so it needs a visual check on each site.</td></tr><tr><th scope="row">Option B</th><td>Publish only one public namespace and move the other four under a clearly labelled internal path.</td><td class="tradeoff">Fewer surfaces to maintain and one coherent site. It also means giving up the navigable evidence that makes this repository distinctive.</td></tr><tr><th scope="row">Option C</th><td>Leave them as they are.</td><td class="tradeoff">No work. The footer on every page lists five sites that do not look related.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option B for the public surface and option A for the shared tokens. One reader-facing site with a coherent look, with the evidence reachable but clearly labelled as the evidence layer.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — Site reputation policy weighs &#x27;the graphic design, formatting, typography and UX features of the content are consistent with the host domain&#x27;.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+      </section>      <section id="area-automation">
+        <div class="area-head">
+          <h3>Automation &amp; platform</h3>
+          <p>What the agent does on its own, and where a human must decide.</p>
+        </div>
+        <article class="card suggestion-card" id="S-03">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-03</span>
+            <h3>Start the Creators API application, and plan the content so it is not a dependency</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: High</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 1 — unblock launch</span>
+          </p>
+          <h4>The problem</h4>
+          <p>PA-API 5 is deprecated and its calls return an access-denied response; Amazon&#x27;s own deprecation notice directs publishers to the Creators API. Every automated capability the brief asks for - product research, trend detection, price history, review analysis - needs catalog data that only the API can provide. The API&#x27;s own published eligibility note ties access to a track record of qualifying sales, which creates a chicken-and-egg problem for a new account.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Apply for the API now and accept that it unlocks later, once the tagged links from S-02 have produced qualifying sales.</td><td class="tradeoff">The automation story stays a promise for weeks or months. Nothing about the published site has to wait for it, because every fact on the site is sourced to a manufacturer or Amazon page that needs no API.</td></tr><tr><th scope="row">Option B</th><td>Build the whole content engine on the API and publish nothing until it is live.</td><td class="tradeoff">The cleanest architecture, and the longest time to a live earning site.</td></tr><tr><th scope="row">Option C</th><td>Scrape public pages for catalog data instead.</td><td class="tradeoff">Not permitted by the program&#x27;s terms, and it would put the account at risk. Listed only so the option is visibly rejected rather than quietly assumed.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. Apply, but publish from page-sourced facts only, so the site can launch on tagged links and light up the automated modules later without a rewrite.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener noreferrer nofollow">S06<span class="src-host">affiliate-program.amazon.com</span></a> — Amazon&#x27;s PA-API 5 deprecation notice.</li><li><a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener noreferrer nofollow">S31<span class="src-host">affiliate-program.amazon.com</span></a> — The same notice, registered separately.</li><li><a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer nofollow">S07<span class="src-host">affiliate-program.amazon.com</span></a> — Creators API introduction and access model.</li><li><a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items" target="_blank" rel="noopener noreferrer nofollow">S08<span class="src-host">affiliate-program.amazon.com</span></a> — Creators API Get Items - the operation the product-research module would call.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-18">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-18</span>
+            <h3>Schedule a re-verification sweep so a manufacturer page change cannot go unnoticed</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: High</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>Every specification on this site was read off a manufacturer&#x27;s page on a single day. Manufacturers change product pages; the Emeril page contradicts itself about its preset count and the Chefman pages and the Amazon titles disagree about maximum temperature. Nothing in the repository would notice if a page changed tomorrow - the deploy gate proves the published HTML matches the ledger, not that the ledger still matches the world.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Run a scheduled job that re-fetches every official source, diffs the result against the ledger and files an issue when anything moved.</td><td class="tradeoff">Needs a scheduler with outbound access, and a tolerance policy for the pages that change constantly.</td></tr><tr><th scope="row">Option B</th><td>Re-verify by hand on a fixed cadence.</td><td class="tradeoff">Honest and effective at this size, but it is exactly the manual step the brief asks to automate away.</td></tr><tr><th scope="row">Option C</th><td>Do nothing and re-verify when a reader complains.</td><td class="tradeoff">Free. It also means a wrong specification can be published for months.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. It is the difference between a site that is verified and a site that was verified once - and it is the single automation that protects every other claim on the site.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360" target="_blank" rel="noopener noreferrer nofollow">S27<span class="src-host">www.emerileveryday.com</span></a> — The Emeril page states 25 cooking pre-sets in its spec tile and 24 in its own description - both read 2026-11-15.</li><li><a class="src" href="https://chefman.com/products/turbofry-touch-air-fryer-1" target="_blank" rel="noopener noreferrer nofollow">S26<span class="src-host">chefman.com</span></a> — The Chefman 8 Qt page states a 200-400 F range while the Amazon title for the same ASIN says 450 F.</li><li><a class="src" href="https://docs.github.com/en/rest/pages/pages" target="_blank" rel="noopener noreferrer nofollow">S22<span class="src-host">docs.github.com</span></a> — GitHub Pages API - the deployment state this repository already reads.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-19">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-19</span>
+            <h3>Make the agent&#x27;s job a pipeline with a human checkpoint, not a publish button</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge flag">Impact: High</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 3 — scale</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The brief asks for an agent that researches, writes, publishes, tracks and optimises without manual input. The constraint that makes that safe is not the model, it is the review gate: an agent that can publish anything it generates can publish something false, and this repository&#x27;s entire value is that nothing false is published. Google&#x27;s spam policies name the failure mode directly - content generated at scale without adding value - and Amazon&#x27;s terms make a material misrepresentation an account-ending event.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Let the agent do everything up to a draft, and require a named editor to approve each article before it goes live.</td><td class="tradeoff">It reintroduces a human in the loop, which the brief pushes against. But the human reviews a finished draft in minutes, not a research brief.</td></tr><tr><th scope="row">Option B</th><td>Let the agent publish, and rely on the deploy gates to catch anything that contradicts the ledger.</td><td class="tradeoff">The gates are excellent at internal consistency and blind to a hallucinated sentence that agrees with nothing in particular.</td></tr><tr><th scope="row">Option C</th><td>Let the agent publish, but only pages whose every fact is already in the ledger, and generate no new claims.</td><td class="tradeoff">Safe and fully automated, but it caps the site at what has already been verified by hand. It is the correct first step towards the brief&#x27;s end state.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option C now, moving to A as the editorial standard matures. This session took the same approach for its own output: every factual sentence added to the site carries the official source it came from, and no claim was inferred.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — Scaled content abuse - pages generated without adding value; and the site&#x27;s own rule that generated content must serve users.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">S01<span class="src-host">affiliate-program.amazon.com</span></a> — Operating Agreement: a material breach is grounds for immediate termination.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a> — Program Policies, incorporated by reference.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-20">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-20</span>
+            <h3>Build trend detection on licensed catalog data plus a published search-interest source</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge flag">Effort: High</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 3 — scale</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The brief asks the agent to identify trending and high-converting products. The platform has a module for it and no input for it. Amazon&#x27;s catalog data gives what is selling; search-interest data gives what people are about to buy; Amazon&#x27;s published commission schedule gives what a category earns. None of the three is connected.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Use the Creators API for catalog movement and a published search-interest source for demand, and score niches against the published commission bands.</td><td class="tradeoff">Needs S-03 and a keyword source (Q-13). It is the only combination that answers the question with data instead of intuition.</td></tr><tr><th scope="row">Option B</th><td>Rank by Amazon&#x27;s own Best Sellers in the category.</td><td class="tradeoff">Available on public pages and genuinely useful. It is a popularity signal, not a trend signal, and it is published for a category rather than per ASIN.</td></tr><tr><th scope="row">Option C</th><td>Judge trends by hand from the marketplace pages.</td><td class="tradeoff">Works for three products and does not scale, which is the opposite of what the brief asks for.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A, with option B as the interim. The honest order is: tag the links, publish, earn, then qualify for the API - and build the scoring module against the API&#x27;s real shape in the meantime.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items" target="_blank" rel="noopener noreferrer nofollow">S08<span class="src-host">affiliate-program.amazon.com</span></a> — Creators API Get Items - the catalog operation a trend module would call.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer nofollow">S04<span class="src-host">affiliate-program.amazon.com</span></a> — The published commission schedule - the revenue half of a niche score.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-21">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-21</span>
+            <h3>Automate click and conversion tracking without violating the tracking rules</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 3 — scale</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The brief asks for click and conversion tracking and continuous optimisation. No report, click figure or conversion figure exists on this site today, and none can: an Associates report is the only source, and it needs an account. The Program Policies also set the boundaries - a sub-tag may not be tied to an end user, and a price-alerting or price-tracking function is forbidden unless Amazon agrees otherwise, which rules out one whole category of &#x27;optimisation&#x27; tools.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Measure with the Associates report as the source of truth and a lightweight, self-hosted, first-party analytics for clicks.</td><td class="tradeoff">The report arrives about sixty days after month end, so the optimisation loop is slow and monthly. That is the program&#x27;s shape, not a design flaw.</td></tr><tr><th scope="row">Option B</th><td>Add a price tracker that alerts readers when the three products fall in price.</td><td class="tradeoff">The Participation Requirements forbid price tracking and price alerting unless Amazon has agreed otherwise. This is the clearest example in the brief of something that must not be built.</td></tr><tr><th scope="row">Option C</th><td>Run a third-party analytics service.</td><td class="tradeoff">Works, but adds a cookie banner, a privacy-policy rewrite and a third party into the reading experience for no gain over first-party counting.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. Option B is not a trade-off - it is forbidden - and it is listed here because the brief&#x27;s wording invites it and the prohibition should be visible on the page rather than assumed.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S02<span class="src-host">affiliate-program.amazon.com</span></a> — Program Policies: participation requirements, including the price-tracking and price-alerting prohibition and the sub-tag rule.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer nofollow">S04<span class="src-host">affiliate-program.amazon.com</span></a> — The published commission and payment schedule.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-27">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-27</span>
+            <h3>Let the agent pick its own topics, but from a written brief the owner has approved</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 3 — scale</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The brief asks for an agent that identifies profitable niches and creates engaging content with no manual input. Left alone, an agent choosing topics will optimise for the cheapest thing to write, which is exactly the thin content the policies name. The fix is not to remove the automation but to constrain it with a brief the owner signs off once.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Write a one-page editorial brief - audience, topics to avoid, the source policy, the length and tone - and have the agent fill it and publish against it.</td><td class="tradeoff">One document to write and one to maintain. It converts a per-article human decision into a per-quarter one.</td></tr><tr><th scope="row">Option B</th><td>Let the agent decide from its own reading of the search results.</td><td class="tradeoff">Unbounded. It will find the topics that are easiest to write about rather than the ones worth writing about.</td></tr><tr><th scope="row">Option C</th><td>Keep writing every article by hand.</td><td class="tradeoff">Highest quality, lowest throughput, and it does not meet the brief.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. It is the same reasoning as S-07 and S-19: the human sets the standard once, the agent does the work inside it, and the deploy gates make sure the standard was met.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">S39<span class="src-host">developers.google.com</span></a> — People-first content: content is judged on whether it serves people, not on whether it was produced for a ranking signal.</li><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — Scaled content abuse: pages generated without adding value for users.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+      </section>      <section id="area-measurement">
+        <div class="area-head">
+          <h3>Measurement &amp; decisions</h3>
+          <p>How a change is judged good or bad.</p>
+        </div>
+        <article class="card suggestion-card" id="S-22">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-22</span>
+            <h3>Decide the three numbers that will be used to judge every change</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge warn">Impact: Medium</span>
+            <span class="badge ok">Effort: Low</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 2 — first 30 days</span>
+          </p>
+          <h4>The problem</h4>
+          <p>Right now nothing on this site has a performance figure, and no target exists. Without a target, &#x27;is this change good?&#x27; is answered by opinion - which is how a site ends up optimised for the wrong thing. The program&#x27;s own agreement is explicit that Amazon makes no representation about the traffic or commission income a participant can expect, so a target has to be the site&#x27;s own.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Three numbers: clicks per article per month, click-through rate from search, and earnings per click.</td><td class="tradeoff">Earnings per click needs the report; the first two need a click counter. Until both exist the numbers are zero, which is an honest but unhelpful state.</td></tr><tr><th scope="row">Option B</th><td>One number: monthly commission.</td><td class="tradeoff">Simplest, and it is the number the business cares about. It is also the slowest to move and the hardest to attribute to a single change.</td></tr><tr><th scope="row">Option C</th><td>No target until the site has traffic.</td><td class="tradeoff">Defensible - a target set with no traffic is fiction. It also means the first ninety days are spent without a way to tell what is working.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A, with the caveat written into the page that the figures are the site&#x27;s own and not a forecast of Amazon income. Start the click counter before the traffic arrives; that is the only way to have a baseline.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">S01<span class="src-host">affiliate-program.amazon.com</span></a> — Operating Agreement: Amazon makes no representation, warranty or covenant about the amount of traffic or commission income an associate can expect.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer nofollow">S04<span class="src-host">affiliate-program.amazon.com</span></a> — The published commission schedule.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+        <article class="card suggestion-card" id="S-23">
+          <div class="suggestion-head">
+            <span class="chip chip-id">S-23</span>
+            <h3>A/B test one thing at a time, and only what the data can actually resolve</h3>
+          </div>
+          <p class="suggestion-meta">
+            <span class="badge ok">Impact: Low</span>
+            <span class="badge warn">Effort: Medium</span>
+            <span class="badge warn">Proposed</span>
+            <span class="badge">Phase: Phase 3 — scale</span>
+          </p>
+          <h4>The problem</h4>
+          <p>The brief asks for continuous optimisation. Continuous optimisation on a site with no traffic is noise: a test on a page that receives a handful of clicks will &#x27;win&#x27; by chance and the winner will be published as a lesson learned. Google&#x27;s spam guidance also warns against creating many pages where the content makes little sense to a reader - a page matrix of near-identical variants is that problem in a different costume.</p>
+          <h4>The options, with their trade-offs</h4>
+          <div class="table-wrap">
+            <table class="opt-table">
+              <thead><tr><th>Option</th><th>What it means</th><th>Trade-off</th></tr></thead>
+              <tbody><tr><th scope="row">Option A</th><td>Test only after a page has enough clicks to resolve a difference, and keep a written record of each test and its outcome.</td><td class="tradeoff">Slower. It also means saying &#x27;not enough data&#x27; often, which is the correct answer and an unusual one to publish.</td></tr><tr><th scope="row">Option B</th><td>Generate variants of each article and let the optimiser pick the winner.</td><td class="tradeoff">This is scaled content abuse in a suit. Rejected.</td></tr><tr><th scope="row">Option C</th><td>Do not test; publish the best judgement and move on.</td><td class="tradeoff">Defensible for a small site and much cheaper than A. It means optimisation never really happens.</td></tr></tbody>
+            </table>
+          </div>
+          <h4>Recommendation</h4>
+          <p class="rec">Option A. The published commission rate is the same for every article in a category, so the only lever that moves earnings per click is which article a reader lands on - and that is a lever worth testing properly rather than in volume.</p>
+          <h4>What this rests on</h4>
+          <ul class="source-list"><li><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">S38<span class="src-host">developers.google.com</span></a> — Scaled content abuse, including &#x27;creating many pages where the content makes little or no sense to a reader but contains search keywords&#x27;.</li><li><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer nofollow">S04<span class="src-host">affiliate-program.amazon.com</span></a> — The published commission bands.</li></ul>
+          <p class="decision-line"><strong>Decision:</strong> <span class="decision-cell"></span></p>
+        </article>
+      </section>
+
+    <footer class="site">
+      Compiled 2026-11-15 from <code>ledger/suggestions.json</code> and <code>ledger/questions.json</code> ·
+      every row links to the official source it rests on ·
+      <a href="index.html">Dashboard</a> ·
+      <a href="questions.html">Open questions</a> ·
+      <a href="flagged.html">Flagged for review</a> ·
+      <a href="sources.html">Source register</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

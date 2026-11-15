@@ -240,6 +240,12 @@ jobs:
       - name: Rebuild the root evidence views and confirm committed output is current
         run: python3 tools/build_root_views.py --check
 
+      # arena/6cc428f1-zone2 (T29/T30): the Suggestions register and the Open-questions
+      # register are projected from ledger/suggestions.json and ledger/questions.json, so the
+      # same drift rule applies: if either page is hand-edited, the build fails.
+      - name: Rebuild the decision pages and confirm committed output is current
+        run: python3 tools/build_decision_pages.py --check
+
       - name: Subpage gate (per-row sourcing, blank-or-flagged, links, disclosure, no product prices)
         run: python3 tools/validate_data.py
 

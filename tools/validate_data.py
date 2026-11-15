@@ -44,6 +44,16 @@ OFFICIAL_HOSTS = {
     "developers.google.com",
     "support.google.com",
     "docs.github.com",
+    # T29 (session 6cc428f1, 2026-11-15): United States government food-safety authorities.
+    # The cooking-safety content added for the editorial articles is sourced from these two
+    # publishers and from no other source, so the allow-list has to name them. They are
+    # primary publishers speaking about food safety in their own domain - the same standing
+    # the FTC and Google already have here - and neither can be used to state an Amazon-side
+    # fact (price, rating, availability, commission band).
+    "www.fsis.usda.gov",
+    "fsis.usda.gov",
+    "www.foodsafety.gov",
+    "foodsafety.gov",
 }
 
 # Primary manufacturer pages. They are NOT Amazon sources and may never be used to state an Amazon-side
