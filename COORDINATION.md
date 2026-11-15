@@ -3913,3 +3913,19 @@ prose counts, namespaces, disclosure) · `tools/build_root_views.py --check` · 
 · `node --check` on `assets/js/app.js` and `assets/js/data.js` · `tests/test_pipeline.py` 15/15 ·
 recursive link+disclosure check across all published HTML including `journal/` (which CI's non-recursive
 root glob does not reach).
+
+---
+
+## Closing record — T38 — `arena/bfed39e0-zone2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#85](https://github.com/kanlerxz87-cyber/Zone2/pull/85)** — `arena/bfed39e0-zone2` → `main` — **MERGED** |
+| Merge commit | `e16ce2c` (`e16ce2c68825fbb970e40da67c109b26a37eb579`) |
+| Post-merge CI on `main` | `Build, verify and deploy` → **success** (run 43713834954) |
+| Pages build and deployment | **success**; Pages API `status: built` for commit `e16ce2c` — exactly the merge commit |
+| Live read (2026-11-15) | `https://kanlerxz87-cyber.github.io/Zone2/journal/index.html` fetched from the public URL: front page renders all three pieces with the §5 disclosure and the F-03 identity banner; links resolve into the deployed tree |
+| CI note | No check runs were ever created for this branch's PRs (#78, #80, #85 — the T28-recorded incident pattern). All workflow steps were replayed locally on each integration tree; the post-merge run on `main` above is the server-side confirmation, and it is green. |
+| Renumbering trail | Claimed T31 → T33 → T38 (each id was claimed-and-shipped by another session in between: `2499438c`/`fb49a226` took T29/T30, `8c4236ad` took T31/T32, `2b257b2e` took T34–T37, `fcb538fa` took T33). Nothing was overwritten; every renumber is recorded above. |
+| Left open for the owner | F-01/F-03 (confirm the three products), F-07/F-24 (Associates account + tagged links — the supplied links cannot earn as supplied), F-05 (Creators API), F-08 (no performance reports exist yet), plus the suggestions board (`pages/suggestions.html`) and questions register (`pages/questions.html`) — decisions only the owner can make. |
+| Irregularities published (non-blocking) | `@font-face` paths in `assets/css/style.css` resolve stylesheet-relative and 404 (silent system-font fallback; flagged for the design system's owner, not repaired cross-scope); the unclosed Suggestions footer anchor on the deployed landing page (repaired in PR #85, logged above); CI no-checks incident on this branch (above). |
