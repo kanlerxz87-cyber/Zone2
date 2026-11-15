@@ -3810,7 +3810,7 @@ No edits to `ledger/**`, `pages/**` except nav links, `tools/**`, or companion s
 ### CI note
 `trending-topics.html` is standalone (not in `build_marketing.py`'s `PAGES`), so it is invisible to `build_marketing.py --check` and `verify_marketing.py` (both iterate only `PAGES`); its internal links resolve (it links to `index.html`, `../pages/suggestions.html`, `../pages/questions.html`, `../pages/flags.html`, `assets/marketing.css`). No price, affiliate link, or product claim appears on it.
 
-Awaiting green PR #65 mergeability → PR → merge → GitHub Pages deploy → record PR link & merge result below.
+DONE — PR #65 merged (merge commit 45d0202) → GitHub Pages deployed (`Build, verify and deploy` success; `pages build and deployment` success); live at https://kanlerxz87-cyber.github.io/Zone2/marketing/trending-topics.html — session complete.
 
 ## Session claim — T33 (renumbered from T31 at integration) — `arena/fcb538fa-zone2` (session `fcb538fa`, 2026-11-15 UTC)
 
