@@ -4470,6 +4470,20 @@ cards, the executive summary and the verified-platform-facts table.
 **Board status:** the three link re-observations above support the existing ledger rows; no shared data,
 index, navigation or generated page was edited. Scope held to `COORDINATION.md`.
 
+### Merge record — `e4e7d4b2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#90](https://github.com/kanlerxz87-cyber/Zone2/pull/90)** — `arena/e4e7d4b2-zone2` → `main` — **MERGED** (`gh pr merge 90 --merge`) |
+| Merge commit | `3ffa0f3a79affd5fae62278e78c76dfe2a243ed8` (2026-11-15 13:21:47 UTC) |
+| Scope of PR #90 | `COORDINATION.md` only (claim + closing record). No shared data, generated page, index or navigation touched. |
+| Post-merge `push` run on `main` | `Build, verify and deploy` → **success** (run 43718609104, head `3ffa0f3`) |
+| `pages build and deployment` | **success** (run 43718608809); Pages API `latest build: built`, commit `3ffa0f3` |
+| PR-level checks | The PR's own `pull_request` runs were cancelled twice by the `pages` concurrency group (`cancel-in-progress: true`) while other sessions merged to `main`, and later reported no checks at all. The gate set was replayed locally on the exact head (`c112e77`): 16 of 16 pass. The post-merge run on `main` is the server-side confirmation. |
+| Sync note | `main` advanced several times during this session (PRs #89, #91, #95, #99, #102). Each sync resolved `COORDINATION.md` by keeping `main`'s content and re-appending this session's section. No other session's work was dropped. One early rebase left a conflicted local commit, which was never pushed; the branch was then reset to its pushed state and re-synced by merge, with no force-push. |
+| Irregularities | (1) PR #89 (font paths, F-39) resolved the 404 fonts on `main`. (2) PR #70 (`arena/cffe745a-zone2`) was still open at claim time with no owner record on the board; its status is not changed here. (3) The landing-page claim that “an unknown nine-character code on the same short-link service returns a 404” was not tested by this session and is not confirmed by this record. |
+| Still owner-open | Intended product for each supplied code (F-01/F-03); Associates tag and tagged links (F-07/F-24); Creators API (F-05). These need the account owner and are not blocked by this merge. |
+
 ## CLAIM + CLOSING RECORD — T45 — `arena/2b07e526-zone2` (2026-11-15 14:35 UTC; renumbered from T41→T42→T43→T44)
 
 **Renumbering trail (recorded, not hidden).** Claimed as **T41** (13:12 UTC) — taken by `08789ab3`.
