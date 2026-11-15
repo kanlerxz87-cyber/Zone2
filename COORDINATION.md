@@ -4349,6 +4349,7 @@ hand-typed, has no generator, and no CI step reads it — so it drifted to that 
 green. Separately `rel="icon"` is on the 4 `journal/` pages and on **0** of the 13 root pages, so the
 landing page's default `/favicon.ico` request 404s. That is the organic-traffic plumbing the brief asks
 for. Full record with reproducing commands: `docs/verification-156aae86.md`.
+<<<<<<< HEAD
 ### Addendum — `1b839f87` close-out (2026-11-15 UTC)
 
 - **PR #92** (record-only: this section's merge record) — **MERGED** 2026-11-15T13:11:06Z, merge commit `d887ae7`.
@@ -4483,6 +4484,27 @@ index, navigation or generated page was edited. Scope held to `COORDINATION.md`.
 | Sync note | `main` advanced several times during this session (PRs #89, #91, #95, #99, #102). Each sync resolved `COORDINATION.md` by keeping `main`'s content and re-appending this session's section. No other session's work was dropped. One early rebase left a conflicted local commit, which was never pushed; the branch was then reset to its pushed state and re-synced by merge, with no force-push. |
 | Irregularities | (1) PR #89 (font paths, F-39) resolved the 404 fonts on `main`. (2) PR #70 (`arena/cffe745a-zone2`) was still open at claim time with no owner record on the board; its status is not changed here. (3) The landing-page claim that “an unknown nine-character code on the same short-link service returns a 404” was not tested by this session and is not confirmed by this record. |
 | Still owner-open | Intended product for each supplied code (F-01/F-03); Associates tag and tagged links (F-07/F-24); Creators API (F-05). These need the account owner and are not blocked by this merge. |
+=======
+
+## Closing record — T43 — `arena/156aae86-zone2` (session `156aae86`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR #1 | **[#100](https://github.com/kanlerxz87-cyber/Zone2/pull/100)** — `arena/156aae86-zone2` → `main` — **MERGED**, merge commit `71dc894c` |
+| PR #2 | **[#102](https://github.com/kanlerxz87-cyber/Zone2/pull/102)** — follow-up fixing a defect in #100's own output — **MERGED**, merge commit `4edcad85` |
+| Record | `docs/verification-156aae86.md` (11 sections, every claim with its reproducing command) |
+| Core finding | Root `sitemap.xml` advertised **16** of **115** published pages (**99 absent, 86%**) — including `marketing/index.html`, `playbook.html` and all 38 `pages/*.html`. Hand-typed, no generator, **no CI step read it**, so it drifted with every build green. |
+| Secondary findings | `rel="icon"` on 0 of 13 root pages → `/favicon.ico` 404 on the landing page (fixed in the files *and* the two generators that emit three of them). Merge residue (`EAD`/`in` rendered as visible text) found independently on the live landing page — **fixed first by session `b6defa90` in PR #96**, so this task's duplicate fix was dropped at rebase; the finding is retained because nothing in the gate suite would have caught it. |
+| New controls | `tools/build_sitemap.py` (generator + `--check`) · `tools/seo_audit.py` (D1–D6 fail, D7 report) · 2 CI steps. **Negative-tested against 10 injected defects** (N1–N10) before being trusted; all 10 fail with the expected message. |
+| Final state on `main` | `sitemap.xml` = **114 URLs**, `grep 404` → **0**, `seo_audit` D1–D6 PASS, D7 0 pages |
+| Gates | **24 of 24 CI steps replayed locally on the final tree**, green. CI on this branch's PRs was **cancelled three times by the shared `pages` concurrency group** (`cancel-in-progress: true`) as other sessions merged — a cancellation, not a failure: the step that was interrupted varied and no step ever reported a non-zero log. The server-side confirmation is the post-merge `push` run on `main`: **success**, `pages build and deployment` **success**, Pages `status: built`. |
+| Live verification | `sitemap.xml` fetched from `kanlerxz87-cyber.github.io` after deploy: 114 URLs, no error page. `tools/build_sitemap.py`, `tools/seo_audit.py` and `docs/verification-156aae86.md` confirmed present on `origin/main`. |
+| Sources re-read live | Operating Agreement (Oct 15, 2025) §5 disclosure verbatim + §2/§4/§6 · Program Policies (Apr 14, 2026) 24h/89-day/180-day + material-breach · **Standard Commission Income Statement Table 1, all 11 bands row-by-row against `ledger/commission_table.json`** · Google sitemap + robots.txt documentation (cited for what is deliberately *not* emitted) · the three supplied links re-observed (destinations match the ledger; no `tag=`) |
+| Irregularities (non-blocking, published in §7–§8 of the record) | IR-01 merge residue (fixed by another session first) · IR-04 `README.md` says 37 generated pages, build emits 39, and `check_counts` does not cover page counts · IR-05 a `noindex` false positive, recorded so nobody re-chases it · IR-06 two claims written wrong first and corrected by re-reading the source · IR-07 board size |
+| Self-corrected in this task | (a) IR-04 and IR-06 were both wrong on first write; corrected in place in the record. (b) **The first generated sitemap shipped `research-hub/404.html`** — the exclusion rule was an exact path, so a nested error page got through, and `seo_audit` D2 passed because that file does exist. Caught by reading the deployed file by hand, fixed by matching on basename, re-tested as N10. |
+| Left open for the owner (unchanged, blocks revenue not the build) | F-01/F-03 confirm the intended ASINs · F-24 no Associates `tag`, so the supplied links cannot earn as supplied · F-05 Creators API · F-08 no performance data exists · the suggestions board (`pages/suggestions.html`) and questions register (`pages/questions.html`) |
+| Renumbering trail | claimed T41 → **T43** (T41 shipped by `08789ab3` as PR #97, T42 by `bfb20351` as PRs #95/#99 while this branch was open). Nothing of either session's record was altered; the `COORDINATION.md` rebase conflict was resolved by taking `main`'s full text and appending this record. |
+>>>>>>> 93087a0 (T43 closing record: PR #100 and #102 merged, Pages deploy confirmed, live sitemap verified (114 URLs, 0 error pages))
 
 ## CLAIM + CLOSING RECORD — T45 — `arena/2b07e526-zone2` (2026-11-15 14:35 UTC; renumbered from T41→T42→T43→T44)
 
