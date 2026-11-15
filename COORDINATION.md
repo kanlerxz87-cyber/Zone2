@@ -3715,6 +3715,23 @@ link it, or G13 fails it as an orphan. Changed copy → change the JSON, run `py
 commit the regenerated HTML in the same commit, or `--check` fails. New external citation → add the host to
 `OFFICIAL_HOSTS` in `marketing/scripts/verify_marketing.py` and to the source table in
 `docs/marketing-2026-11-15.md`; the allow-list is a list on purpose.
+
+### Merge outcome (recorded after the fact, same day)
+
+`main` had moved again while this PR waited (T34–T37, PRs #77/#79/#81 — a root-dashboard redesign with its own
+`journal/`-style editorial layer, new webfonts, and a rewritten root footer). Merged into this branch rather than
+rebased, and the three conflicts were resolved by keeping both sides:
+
+| File | Resolution |
+|---|---|
+| `index.html` | their new grid footer wins the structure; my two marketing links were re-inserted into "Companion builds", and the marketing line re-labelled (the desk is *Counter Notes*, not "Field Notes"). Their merge had also left an **unclosed `<a href="pages/suggestions.html">` with no label** in that footer, which swallowed the following list item — repaired here, one line, in a file this task already owns |
+| `EXECUTIVE_SUMMARY.md` | both addenda kept: their T34–T37 redesign addendum first, my publication-layer addendum after |
+| `COORDINATION.md` | both record blocks kept. Side effect worth stating: the merge **deduplicated one exact copy** of the paragraph beginning "**Scope amendment (recorded before the edit).**" that `main` carried twice (their own records call this the F-42 duplicate-fragment class and leave it to the owner). Substance unchanged, one instance retained |
+
+Root `robots.txt` / `sitemap.xml` are theirs and were not touched; `marketing/sitemap.xml` covers the marketing
+namespace only, and the two do not reference each other's pages. `audit_site.py` counts **109** pages on the merged
+tree and passes all five checks; every other gate is green.
+
 in` line, and a duplicated fragment (a second "## T26 — closing record" heading mixed with later-session content) between them. The **two stray marker lines were removed** so future merges cannot mis-read them as conflict boundaries; **the duplicated fragment was left byte-identical for owner review**. Logged as **F-42** on the Flagged for Review page path via this record and the report.
 
 ### Verification performed (2026-11-15, fetched live; full tables in `docs/verification-42fa4918.md`)
@@ -3922,4 +3939,3 @@ carried forward from the ledger (not re-quoted).
 3. **Emeril listing title variant.** The `link.amazon/B02NbDxp3` fetch on 2026-11-15 returned a different listing-title variant than the 2026-11-14 read recorded in the ledger (Amazon rotates listing copy between fetches — consistent with the cross-fetch behaviour documented in `revalidation/`). The ledger row keeps its dated source; no change made.
 4. **CR executed under integration duty:** `tools/build_decisions.py` (owner `d0135100`, merged and finished) gained a one-line rewrite so the vendored `decisions/assets/dashboard.css` resolves the redesigned stylesheet's bundled font paths (`assets/fonts/` → `../../assets/fonts/`). Without it the redesigned root stylesheet would 404 its fonts on every decisions page. Regenerated output is `--check`-gated.
 5. **Unchanged, still owner-open:** F-01…F-03 (confirm ASINs), F-24 (tagged Associates links — as supplied the links cannot earn), F-05 (Creators API registration). No price, rating, review count, availability or per-ASIN commission band is published anywhere — none is verifiable from an official source yet.
->>>>>>> origin/main
