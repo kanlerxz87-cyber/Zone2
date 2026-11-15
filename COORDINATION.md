@@ -2907,7 +2907,10 @@ and the closing record follow in the next entry.
 | Pages API | `status: built`, `build_type: legacy`, source `main` `/`, built 2026-11-14T19:13:45Z, https://kanlerxz87-cyber.github.io/Zone2/ |
 | Live read after deploy | `pages/commissions.html` serves the **complete 46-row bounty table** and the 2-row Bonus Events panel, with the 34-item flag register linked from the header |
 | T26 | **done** |
-| T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
+| T30 | **Primary-site redesign — polished marketing presentation of the same verified data.** The current root pages read as a generic admin dashboard (default-blue sidebar + cards). Rebuild the root surfaces (landing, products, analysis, content, compliance, tracking, flagged, 404) as a polished, marketing-forward site WITHOUT changing any verified datum: same JS-rendered tables, same element ids the gates pin (`flagCount`, `flagCountHeading`, `flagRegisterCount`, `flagRegisterMax`, all table hooks), same disclosure, same no-price/no-inference rules, same route into `pages/`, same required companion-namespace links. Adds one new root page (`design-notes.html`) publishing the design rationale + further design/growth suggestions for owner review. No ledger or `assets/js/data.js` changes. | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `flagged.html`, `404.html`, `design-notes.html` (new), `assets/css/style.css`, `assets/js/app.js` (rendering only), `docs/verification-2b257b2e.md` (new), `COORDINATION.md` |
+| T31 | **Editorial content/topic suggestion set** rendered on the root content page: catchy, SEO-structured article/comparison/buying-guide topic ideas for the kitchen air-fryer niche the three resolved destinations share — every factual anchor in a topic row linked to its official source (Amazon listing, manufacturer page via the existing source register, program policy, Google/FTC docs), every demand/trend/search-volume value left blank as unverified (no invented metrics), every topic labelled an editorial suggestion pending owner approval via the T29 decision board. Data lives in the renderer (session-scoped), not in the ledger. | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `content.html`, `assets/js/app.js` (additive renderer + topic data), `COORDINATION.md` |
+| T32 | **Executive summary & README addendum for the redesign** — append (never rewrite history) a dated addendum to `EXECUTIVE_SUMMARY.md` and a site-structure note to `README.md` covering the T30/T31 work; no gated count labels touched. | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `EXECUTIVE_SUMMARY.md` (append-only addendum), `README.md` (structure note), `COORDINATION.md` |
+| T33 | **Final integration, this wave** — independent re-verification of the official sources used by the redesigned pages (fetched live 2026-11-15), run every repo gate on the combined tree, integrate T29 (PR #61) if still open and green at integration time, PR from this session's branch → merge without waiting → confirm the GitHub Pages deploy → record results here. Coordination record only; data changes arrive via the tasks above. | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `COORDINATION.md` (append-only records), PR + merge + deploy operations |
 
 ### What shipped
 
@@ -3090,3 +3093,34 @@ action (deprecate one and keep the other as canonical). The **data is not duplic
 single 46-row Bounty Event block and a single 2-row Bonus Event block, verified on `main`.
 
 Flagged here and on the Flagged for Review page so the owner can merge the two entries after the site is live.
+
+---
+
+## Claim record — `2b257b2e` (`arena/2b257b2e-zone2`, T30–T33) — 2026-11-15T11:47Z
+
+**Session ID:** `arena/2b257b2e-zone2` (short `2b257b2e`). **Branch:** `arena/2b257b2e-zone2`
+(platform-assigned; this Arena session cannot create or switch branches, so the per-task
+`session-<id>/<task>` branch naming is replaced by strict file-scope discipline on this one branch —
+noted here rather than silently deviated).
+
+**Board state at claim:** `main` = `e030c40` (PR #60). One open PR by another session:
+**PR #61** (`arena/2499438c-zone2`, **T29** — suggestions decision board + open-questions register,
+files: `ledger/suggestions.json`, `ledger/questions.json`, `pages/**` regenerated, `tools/build_site.py`,
+`tools/validate_data.py`, `COORDINATION.md`) — created 2026-11-15T11:41Z, check `Build and verify` SUCCESS.
+**No overlap with this session's claimed files** except the shared append-only `COORDINATION.md`.
+
+**Scope claimed (T30–T33):** root `index.html`, `products.html`, `analysis.html`, `content.html`,
+`compliance.html`, `tracking.html`, `flagged.html`, `404.html`, NEW `design-notes.html`,
+`assets/css/style.css`, `assets/js/app.js` (rendering only), `EXECUTIVE_SUMMARY.md` (append-only
+addendum), `README.md` (structure note only), `docs/verification-2b257b2e.md` (new), `COORDINATION.md`.
+**Not touched:** `ledger/**`, `pages/**`, `tools/**`, `.github/**`, `assets/js/data.js`, all companion
+namespaces (`research-hub/`, `zone2/`, `northstar/`, `affiliate-lab/`, `revalidation/`, `marketing/`).
+
+**Design gate compliance plan (checked against `tools/validate_data.py` and `tools/audit_site.py` before
+any edit):** keep the pinned element ids (`flagCount`, `flagCountHeading`, `flagRegisterCount`,
+`flagRegisterMax`), keep the JS-rendered table hooks, keep the route into `pages/`, keep the disclosure
+sentence, keep every companion namespace linked from the landing (`pages/index.html`,
+`research-hub/start.html`, `northstar/index.html`, `zone2/index.html`, `affiliate-lab/index.html`,
+`revalidation/index.html`, `marketing/index.html`), keep every JS-emitted class styled
+(`.table-wrap`, `.badge ok/warn/flag`, `.blank`, `.note`, `.card`, `.feature`, `footer.site`),
+no typed flag/source/check counts in prose, no product prices, no `class="sponsored-link"`.
