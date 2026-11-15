@@ -76,6 +76,13 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR #42, merged 2026-11-14T18:32:45Z `6f2f92c`) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 | T26b | Fresh baseline audit for current request: rerun all project gates; verify the live GitHub Pages entry points and source-controlled dataset claims against official URLs; record defects only, no overlapping edits | done | `arena/0f44536f-zone2` | `COORDINATION.md` (append-only record only; results in this session's record) |
 | T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | in progress | `arena/0f44536f-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
+| **T29** | **Repo review + independent live re-verification for the current request.** Re-read the repo line by line; re-fetch the three supplied `link.amazon` links and the governing official Amazon pages live (2026-11-15); record new dated verification rows, new source-register entries, and any new irregularity as a flag. No value inferred. | **claimed** | `arena/1b022674-zone2` (1b022674) | `docs/repo-review-1b022674.md`, `docs/verification-1b022674.md`, `ledger/verification.json`, `ledger/sources.json`, `ledger/flags.json` |
+| **T30** | **Dedicated Suggestions section** — a decision-support register (suggestion → options → recommendation → evidence still needed → decision owner → status) so a reviewer can choose a path *before* anything is implemented. New ledger + generator + generated page. | **claimed** | `arena/1b022674-zone2` (1b022674) | `ledger/suggestions.json`, `tools/build_decisions.py`, `suggestions.html` (generated) |
+| **T31** | **Open Questions / information-gap section** — question → what is known (sourced) → what is missing → how to discover it → which decision it blocks → status. New ledger + generator + generated page. | **claimed** | `arena/1b022674-zone2` (1b022674) | `ledger/open_questions.json`, `tools/build_decisions.py`, `open-questions.html` (generated) |
+| **T32** | **Editorial topic plan** — the "what to publish next" engine: headline, intent, funnel stage, product, verified claims (sourced), missing inputs, blocking flag, status, publish order. New ledger + generator + generated page. | **claimed** | `arena/1b022674-zone2` (1b022674) | `ledger/content_topics.json`, `tools/build_decisions.py`, `topics.html` (generated) |
+| **T33** | **Marketing-grade front end.** Replace the audit-dump landing page with a real marketing landing page (hero, product cards, reading paths, trust strip); move the old research dashboard to `dashboard.html`; add a category index so the site is organised by category. Root-nav update on every root page. | **claimed** | `arena/1b022674-zone2` (1b022674) | `index.html`, `dashboard.html`, `ledger/site_map.json`, `tools/build_decisions.py` (`categories.html`), `assets/css/style.css`, root nav in `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `verification.html`, `sources.html`, `flagged.html`, `summary.html` |
+| **T34** | **Executive summary refresh + gate + CI wiring.** Refresh `EXECUTIVE_SUMMARY.md` / `README.md` for the new information architecture; add a deploy gate that enforces the per-row source rule on the new ledgers and pages; wire the new gates into CI. | **claimed** | `arena/1b022674-zone2` (1b022674) | `EXECUTIVE_SUMMARY.md`, `README.md`, `tools/verify_decisions.py`, `.github/workflows/pages.yml` |
+| **T35** | **Final integration.** Regenerate every generated artefact, re-run every repo gate plus the live checks, confirm no broken links, open the integration PR to `main`, merge it, confirm the GitHub Pages deploy, and record the PR link and deploy result here. | **claimed** | `arena/1b022674-zone2` (1b022674) | integration duties across the files claimed above |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -3090,3 +3097,46 @@ action (deprecate one and keep the other as canonical). The **data is not duplic
 single 46-row Bounty Event block and a single 2-row Bonus Event block, verified on `main`.
 
 Flagged here and on the Flagged for Review page so the owner can merge the two entries after the site is live.
+
+---
+
+## Session record — `1b022674` (`arena/1b022674-zone2`) — T29…T35 (2026-11-15, UTC)
+
+**Branch note.** Arena pins this session to `arena/1b022674-zone2` (not `session-<id>/<task>` naming);
+the deviation is documented here per the precedent every prior session recorded.
+
+**Claim.** Tasks T29–T35 were claimed before any task work, in the board table above, and this record
+is committed and pushed immediately (claim commit below). No other session had an open claim when this
+one started: `gh pr list --state all` showed every prior PR merged and no open PR or issue, and
+`origin/main` was at `e030c40` (PR #60).
+
+**Why this session exists.** The repository had grown into a verified research and audit workspace:
+seven companion namespaces, 38 recorded flags, an 82-row verification log and a strictly enforced
+"every row carries an official source link" contract. The brief for this session asked for four
+things that the repository did not have in any form:
+
+1. a **polished marketing affiliate website** (not an audit dump) with a clean landing page and
+   subpages organised by category;
+2. a **Suggestions section** a reviewer can read, compare and choose from *before* anything is
+   implemented;
+3. a **questions / known / unknown / how-to-discover register** — the information-gap list that has
+   to be closed before a reasonable decision can be made;
+4. an **executive summary** covering the important details.
+
+It also asked for a line-by-line repo review with no hallucinations, and for every table row to carry
+an official source link or be left blank and flagged.
+
+**Method.** Live re-verification was carried out with working outbound access to the official sites
+(`fetch_page` against `affiliate-program.amazon.com`, `www.amazon.com` and `link.amazon`), not from
+memory: the three supplied short links were re-fetched on 2026-11-15 and their destinations, titles
+and per-link `btn_ref` tokens re-read; the Operating Agreement, the Standard Commission Income
+Statement (Table 1), the PA-API 5 deprecation notice, the Creators API registration and sign-up
+pages, the Creators API FAQ and the "simple text link" help topic were re-read and quoted. Every new
+statement carries its source id in `ledger/sources.json`; new verification rows are dated and
+id-numbered V-83 onward.
+
+**Scope discipline.** Files outside the claimed scopes above were not edited, except where a gate
+forces it: the root pages' navigation is one shared list and is updated in place (T33), and
+`ledger/flags.json`, `ledger/sources.json` and `ledger/verification.json` are append-only registers
+(T29). The frozen prototypes `northstar/` and `zone2/` were left byte-identical.
+
