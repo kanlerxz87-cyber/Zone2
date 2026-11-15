@@ -1,6 +1,6 @@
 # Verification log — session `2b257b2e` (`arena/2b257b2e-zone2`) — 2026-11-15 (UTC)
 
-Independent re-verification pass for the T30–T33 redesign wave. Every row below was fetched **live on
+Independent re-verification pass for the T34–T37 redesign wave. Every row below was fetched **live on
 2026-11-15 by this session**, from the official page itself, not carried forward from a previous
 session's notes. Where the page could not be reached, the row says exactly that — nothing is inferred.
 
@@ -19,7 +19,7 @@ session's notes. Where the page could not be reached, the row says exactly that 
 | D2-11 | FTC material-connection disclosure | Endorsement Guides FAQ: "if there's a connection between an endorser and the marketer that a significant minority of consumers wouldn't expect … that connection should be disclosed clearly and conspicuously" | **Verified** | https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking |
 | D2-12 | Program Policies page (Participation Requirements §2(b), §4, §6(t)/(y)/(w)) | **Not re-fetched this session** (page is large; the requirements were transcribed into `ledger/compliance.json` and re-verified on 2026-11-14 by sessions `0a697d4a` (C-10…C-13) and `dd87f326`). This session quotes no new sentence from that page; the redesigned pages link the ledger rows instead. | **Carried forward, cited — not re-quoted** | https://affiliate-program.amazon.com/help/operating/policies |
 
-## Observations recorded for the redesign (T30/T31)
+## Observations recorded for the redesign (T34/T35)
 
 1. All three destinations share the **Air Fryers** category path (D2-09) — the editorial topic set on
    `content.html` is anchored to that niche, with each topic's factual anchor linked to the listing it

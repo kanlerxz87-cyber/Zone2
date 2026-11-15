@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Why Zone2 is designed the way it is — the redesign rationale, the design decisions with a compliance or SEO basis, and the suggestions queued for review.">
 <title>Design notes — Zone2</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -154,8 +151,8 @@
         <div class="suggest-card">
           <div class="s-kicker">Performance</div>
           <h4>Self-host the two fonts</h4>
-          <p>Pages load Fraunces and Inter from Google Fonts with system fallbacks. Self-hosting would cut a third-party request and make the site fully self-contained; cosmetic, low priority, easy to do.</p>
-          <div class="status-note">No blocker — queued as a polish item.</div>
+          <p>Pages originally loaded Fraunces and Inter from Google Fonts. This concern was promoted from suggestion to implementation within the same release: the two families are now bundled in <code>assets/fonts/</code> under their SIL OFL licence — no third-party request, fully self-contained.</p>
+          <div class="status-note">Done in this release — kept on the board for the record.</div>
         </div>
         <div class="suggest-card">
           <div class="s-kicker">Analytics</div>
@@ -230,7 +227,8 @@
         <div>
           <h4>Decisions</h4>
           <ul>
-            <li><a href="pages/suggestions.html">Suggestions decision board</a></li>
+            <li><a href="decisions/index.html">Decision hub</a></li>
+            <li><a href="pages/suggestions.html">
             <li><a href="pages/questions.html">Open questions register</a></li>
             <li><a href="design-notes.html">Design notes &amp; growth ideas</a></li>
           </ul>

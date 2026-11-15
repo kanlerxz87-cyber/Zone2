@@ -462,7 +462,7 @@ Every control cited for the ten new rules was checked against the actual code, a
 
 ---
 
-## Addendum — primary-site marketing redesign + suggestions architecture, 2026-11-15 (session `2b257b2e`, T30–T33)
+## Addendum — primary-site marketing redesign + suggestions architecture, 2026-11-15 (session `2b257b2e`, T34–T37)
 
 **The problem.** The root pages were correct but read like an internal admin tool — default-blue
 sidebar, dense KPI tiles, procedural prose — exactly the presentation the brief called out as looking
