@@ -646,9 +646,6 @@ on this branch as well — two sessions, one defect, both records kept, followin
 | GitHub Pages live site | `https://kanlerxz87-cyber.github.io/Zone2/` — deploy confirmed per closing record in `COORDINATION.md` |
 | Verification, source links per row, unverified left blank | Enforced by gates and re-verified for every claim made here |
 | PR → merge → deploy | See the T33 closing record in `COORDINATION.md` |
-EAD
-EAD
-EAD
 ## Addendum — the publication layer and the marketing improvement board, 2026-11-15 (session `e8b071cd`, T39)
 
 The brief has two halves. Before today, everything merged served the first: the platform, the registers, the
@@ -682,7 +679,6 @@ negative-tested. G4 caught this session's own example text quoting a dollar figu
 the rule was not loosened.
 
 Line-by-line record, with the official links: `docs/marketing-2026-11-15.md`.
-in
 
 **Delivered (T33, 2026-11-15 12:18:54 UTC):** PR #83 merged (merge commit `1e351e6`); GitHub Pages build and deploy both succeeded and the playbook was read back live at `https://kanlerxz87-cyber.github.io/Zone2/playbook.html`; PR check `Build and verify` pass on head `21bc8d7`; CI on the merged tree — `audit_site` 5/5 PASS (104 pages), `validate_data` 0 errors / 0 warnings, `tests` 15/15, every `--check` gate no drift. One integration fix: the Sec. 5 endorsement-phrase line break in `playbook.html` that `validate_data` flagged (negation window defeated by the wrap) — reflowed, validator green.
 ## Addendum — 2026-11-15 (T38, session `arena/bfed39e0-zone2`): the journal ships, the redesign integrates
