@@ -12,6 +12,8 @@ anything unconfirmed is left blank and published on a Flagged for Review page ra
 
 <https://kanlerxz87-cyber.github.io/Zone2/> — GitHub Pages, served from the `main` branch root (`/`).
 
+Dated repository review (2026-11-15), with live re-checks and irregularities R86-01 to R86-08: <https://kanlerxz87-cyber.github.io/Zone2/review-2026-11-15.html>.
+
 ## Site structure
 
 ### Primary platform
