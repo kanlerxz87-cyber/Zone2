@@ -3964,6 +3964,17 @@ owned by other sessions · R86-08 board size (~400 KB) and stale header.
 **Not done, deliberately:** no ledger value, product price, rating, or commission band was added (none is confirmed by an
 official source); PR #89 and PR #70 were not merged or edited by this session; no landing-page wording was changed
 (R86-01/R86-02 are change requests for the owner).
+
+**Pull request and gate fixes (2026-11-15, after `main` moved):** PR #93 (`https://github.com/kanlerxz87-cyber/Zone2/pull/93`).
+`main` advanced four times while this review was open (PR #89, #91, #94, #95, #111). Merged `origin/main` each time; the
+only conflicts were the two append-only records (`COORDINATION.md`) and `sitemap.xml`, resolved by keeping both sides.
+Replaying the 25 CI steps of `.github/workflows/pages.yml` on the merged tree surfaced three failures caused by this
+branch, all fixed: (1) the hand-added sitemap entry was replaced by `tools/build_sitemap.py` output (116 URLs, one entry
+for the review page, no duplicate); (2) the review page now carries the favicon link from the merged `flagged.html`
+(seo_audit D6); (3) `ledger/readiness.json` RR-10 now states the measured value — 117 of 117 published pages carry the
+disclosure sentence, one more than before because of the review page — and `release/index.html` regenerated.
+The PR's own GitHub Actions run was cancelled several times by the shared `pages` concurrency group while other sessions
+pushed; the replay of every CI step passed on the final tree.
 ---
 
 ## Session record — `1b839f87` (`arena/1b839f87-zone2`, 2026-11-15 UTC)
