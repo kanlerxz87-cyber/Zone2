@@ -329,7 +329,7 @@ jobs:
         run: python3 tools/build_console.py --check
 
       - name: Owner's Console gate (sourcing, board integrity, decision sheet, disclosure, links, no prices)
-        run: python3 tools/validate_console.py>>>>>>> 3ab4cb8 (T42 (arena/d26f42db-zone2): Owner's Console - suggestion board, information register, redesign pack, repo review)
+        run: python3 tools/validate_console.py
 
       # T26: this guard was excluded from CI because it reported seven false failures — it
       # resolved the repository root to research-hub/ and then looked for the root site's
