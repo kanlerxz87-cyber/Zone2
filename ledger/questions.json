@@ -55,7 +55,7 @@
     {
       "id": "Q-04",
       "question": "Will the public site run on a domain the owner controls?",
-      "known": "Associates applicants must own their website (S23). The live site is at kanlerxz87-cyber.github.io.",
+      "known": "Associates applicants must own their website (S23). The live site is at kanlerxz87-cyber.github.io. Re-read 2026-11-15: the same page also states that a rejected application cannot be reassessed (\"we aren't able to reassess an application once it's been rejected\"), so the ownership test is decided once, not on appeal.",
       "missing": "Whether a domain is owned. Whether an applicant can use a github.io address under the ownership test. The Associates pages do not settle the second point; it is not verified.",
       "how_to_find": "Owner buys or confirms a domain. Owner asks Associates support about github.io if that is the plan (contact link on S01).",
       "blocks": [

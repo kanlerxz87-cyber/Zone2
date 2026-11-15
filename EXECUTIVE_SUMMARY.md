@@ -696,3 +696,48 @@ anchor in the footer's Decisions column, which swallowed the link label) — log
 recoverable in git history. A second irregularity, the `@font-face` paths in `assets/css/style.css` resolving relative to the
 stylesheet (`assets/css/assets/fonts/…`, which 404s so the self-hosted fonts silently fall back), is flagged for the design
 system's owner and was not repaired from another session's file.
+
+---
+
+## Addendum — 2026-11-15 · session `bbcc741f` (paths, the third-date re-check, and one real defect)
+
+Three things this pass adds to the picture above, and one thing it corrects.
+
+**1. A decision can now be taken in one move.** The suggestions board is ten rows of options, which is the right
+record and the wrong interface: an owner who agrees with seven of ten recommendations has not chosen a direction,
+they have filled a form. `paths.html` groups the same rows into three sequences that each make sense on their own
+terms — publish clean, earn, automate — with the letters taken straight from the board so nothing is
+re-litigated, the program's own launch bar quoted beneath them, and a "what no path authorises" table so a
+choice cannot accidentally read as permission for something the rules forbid. Path 1 is the default precisely
+because it *is* the board's recommendation set: if nobody records anything, the site is already that path.
+
+**2. The supplied links were checked again, by a new session, on a third date.** All three destinations
+reproduced exactly (`V-83`…`V-85`), as did the control that proves a `link.amazon` token is not an ASIN
+(`V-86`) — a live ASIN in the token position is refused by the hop service, so nothing outside the creating
+account can decode these links back to a product. Two consequences are unchanged and still decisive: no
+resolved URL carries an Associates `tag=`, so the links cannot pay this owner as supplied, and every product
+attribute therefore stays blank rather than being inferred from wherever a stranger's link happened to point.
+One consequence moved: the negative control `F-20` calls decisive answered **403** for an unissued token today,
+not the 404 the register recorded (`F-40`). The reading survives — the positive evidence is what carries it —
+but the site now says which leg it stands on instead of implying both are equal.
+
+**3. Amazon's review bar is now a published constraint, not folklore.** Re-reading the Application Review
+Process page (`V-89`) turned up two sentences that bear directly on every path and had not been carried into a
+decision surface: content must generally be "within the last 60 days", and — the one that should decide
+timetable — "we aren't able to reassess an application once it's been rejected". Rejection is terminal, so the
+cheap-to-fix failure mode is publishing thin content on a site the applicant does not own while holding no
+account; the expensive one is doing it once and being unable to try again. That is now the argument for the
+ordering on `paths.html`, and it is quoted rather than paraphrased so it can be checked in one click.
+
+**4. A defect in the site's own appearance, fixed.** The self-hosted typefaces had never loaded: the design
+system's `@font-face` rules resolved against the stylesheet's directory and pointed at a path that does not
+exist, so every page on the site — including the marketing surfaces built around a serif display face — had been
+rendering in fallback system fonts since the redesign. No gate could see it, because a link checker follows
+`<a href>` and not `url()`. It had been noticed and left alone for the wrong reason (the fix spans two
+namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
+class of bug — a resource a build cannot fail on — is on the record for the next time.
+
+**Numbers for the reviewer, all derived from the registers:** 40 flags, 43 sources, 89 logged checks, 17 open
+questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
+or performance figure: the site still has no authorised source for one, and an absent number beats an invented
+one.

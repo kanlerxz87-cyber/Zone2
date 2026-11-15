@@ -52,7 +52,7 @@ blank + flag**: [findings hub](https://kanlerxz87-cyber.github.io/Zone2/pages/in
 [niche discovery](https://kanlerxz87-cyber.github.io/Zone2/pages/niches.html) ·
 [platform modules, 12 subpages](https://kanlerxz87-cyber.github.io/Zone2/pages/modules/index.html) ·
 [compliance control ledger](https://kanlerxz87-cyber.github.io/Zone2/pages/compliance.html) ·
-[verification log (88 checks, V-01…V-88)](https://kanlerxz87-cyber.github.io/Zone2/pages/verification.html) ·
+[verification log (89 checks, V-01…V-89)](https://kanlerxz87-cyber.github.io/Zone2/pages/verification.html) ·
 [source register (43 sources, S01…S43)](https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html) ·
 [tracking](https://kanlerxz87-cyber.github.io/Zone2/pages/tracking.html) ·
 [content engine](https://kanlerxz87-cyber.github.io/Zone2/pages/content-engine.html) ·

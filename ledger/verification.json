@@ -999,6 +999,17 @@
         "S02"
       ],
       "consequence": "Reproduced. Page header still reads 'Updated: April 14, 2026.' A Session begins when a customer clicks a Special Link and ends at the first of: 24 hours elapsing; an order for a non-digital Product; or a click through somebody else's Special Link. A cart order must complete 'no later than 89 days after their initial click-through of the Special Link', and the Product must be shipped, streamed or downloaded and paid for 'within 180 days of the purchase'. The country selector still lists United States and Japan among the marketplaces (Q-01 open)."
+    },
+    {
+      "id": "V-89",
+      "subject": "Application Review Process re-read by session bbcc741f on 2026-11-15 (S23)",
+      "claim": "the launch bar the paths page quotes - three qualifying sales, ten posts, sixty-day recency, site ownership, tagged special links, no reassessment after rejection - is what the official page states",
+      "method": "live fetch of the help page on 2026-11-15; the sentences below are transcribed from the response",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S23"
+      ],
+      "consequence": "Verbatim: \"our Associates team will check your application once you've driven qualified sales (we require at least three within the first 180 days). Please note that personal orders do not qualify.\"; \"All Sites must have robust original content (even when advertising is removed) - a good rule of thumb is at least 10 posts. They must be publicly available\"; \"Content on your website must be recent (generally within the last 60 days). You must own your website.\"; \"Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application.\"; \"Unfortunately, we aren't able to reassess an application once it's been rejected.\" Accepted social networks are listed by name (Facebook open group and fan pages, Instagram, Twitter, YouTube, TikTok, Twitch.tv) with \"in most cases, at least 500\" organic followers or likes required and the exact page URL demanded. Published on paths.html as the launch bar."
     }
   ]
 }
