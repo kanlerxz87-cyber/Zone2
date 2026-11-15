@@ -25,10 +25,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from flag_state import open_count  # shared "is this flag open" predicate (F-29/F-31)
+from head_meta import head_block  # canonical + og:* on the published summary (T42)
 
 REPO = Path(__file__).resolve().parents[1]
 LEDGER = REPO / "ledger"
 OUT = REPO / "summary.html"
+
+# Shared by the <meta description> and the og:description, so the two cannot drift apart.
+SUMMARY_DESCRIPTION = ("Executive summary: what this Amazon affiliate platform delivers, what the three "
+                       "supplied links resolve to, what blocks revenue, and what the owner must do. "
+                       "Every figure is read from the ledger and every row links to an official source.")
 
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 
@@ -187,9 +193,10 @@ def build() -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Executive summary: what this Amazon affiliate platform delivers, what the three supplied links resolve to, what blocks revenue, and what the owner must do. Every figure is read from the ledger and every row links to an official source.">
+<meta name="description" content="{esc(SUMMARY_DESCRIPTION)}">
 <meta name="robots" content="index,follow">
 <title>Executive summary &middot; Zone2</title>
+{head_block("summary.html", title="Executive summary · Zone2", description=SUMMARY_DESCRIPTION, site_name="Zone2")}
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="pages/assets/dashboard.css">
 <link rel="stylesheet" href="pages/assets/site.css">

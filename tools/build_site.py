@@ -24,6 +24,7 @@ from pathlib import Path
 # generator, so make the tools/ directory importable however this script is invoked.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from flag_state import open_count  # shared predicate (F-29/F-31)
+from head_meta import head_block  # canonical + og:* for every generated subpage (T42)
 
 REPO = Path(__file__).resolve().parents[1]
 PAGES = REPO / "pages"
@@ -31,6 +32,10 @@ DATA = REPO / "ledger"
 SITE_CSS_SRC = REPO / "tools" / "pages-site.css"  # source of the subpage stylesheet
 
 SITE_NAME = "Zone2"  # never an Amazon mark - Participation Requirements rule R-11
+
+# Shared by the <meta description> and the og:description, so the two cannot drift apart.
+HUB_DESCRIPTION = ("Source-verified Amazon affiliate research platform: category data, compliance controls, "
+                 "verification log and open flags. Every table row links to an official source or is left blank.")
 # Final integration 2026-11-14 (session 4338f55e): the generated pages/ namespace was branded
 # "Northstar", which is the name of the *preserved earlier prototype* kept at northstar/. The
 # published site is one product, so the findings namespace now carries the same brand as the
@@ -193,6 +198,8 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
             continue
         active = " active" if href == rel else ""
         items.append(f'<a class="nav-link{active}" href="{up}{esc(href)}">{esc(label)}</a>')
+    head_tags = head_block("pages/" + rel, title=f"{title} · {SITE_NAME}",
+                            description=HUB_DESCRIPTION, site_name=SITE_NAME)
     flag_count = len(FLAGS["flags"])
     links = []
     for rel, label in SIBLINGS:
@@ -206,9 +213,10 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Source-verified Amazon affiliate research platform: category data, compliance controls, verification log and open flags. Every table row links to an official source or is left blank.">
+<meta name="description" content="{esc(HUB_DESCRIPTION)}">
 <meta name="robots" content="index,follow">
 <title>{esc(title)} &middot; {esc(SITE_NAME)}</title>
+{head_tags}
 <link rel="stylesheet" href="{up}assets/dashboard.css">
 <link rel="stylesheet" href="{up}assets/site.css">
 </head>
