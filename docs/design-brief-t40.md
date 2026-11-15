@@ -25,10 +25,10 @@ cannot publish, however good it looks.
 
 | # | Constraint | The sentence it comes from | Source |
 |---|---|---|---|
-| H-01 | Any product photograph must be Program Content, may not be stored or cached, and a **link** to one may be kept at most 24 hours. | "You will not store or cache Product Advertising Content consisting of an image, but you may store a link to Product Advertising Content consisting of an image for up to 24 hours." | [IP License §2(h)](https://affiliate-program.amazon.com/help/operating/policies) · `S44` |
-| H-02 | Displaying Amazon-sourced **text** requires a specific disclaimer in plain view. | "CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME." | [IP License §2(k)](https://affiliate-program.amazon.com/help/operating/policies) · `S44` |
-| H-03 | A price may be shown only when Amazon serves it on the link, or it comes from Creators API / PA API. No price tracking, no alerts. | "your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain … via Creators API or PA API"; "(y) … your Site must not have price tracking and/or price alerting functionality." | [Participation Requirements §2(b), §6(y)](https://affiliate-program.amazon.com/help/operating/policies) · `S53`, `S52` |
-| H-04 | No star ratings or customer reviews may be displayed unless obtained through the API. | "You will not display or otherwise use any of our customer reviews or star ratings … unless you have obtained a link to that customer review or star rating through Creators API or PA API." | [Participation Requirements §6(t)](https://affiliate-program.amazon.com/help/operating/policies) · `S43` |
+| H-01 | Any product photograph must be Program Content, may not be stored or cached, and a **link** to one may be kept at most 24 hours. | "You will not store or cache Product Advertising Content consisting of an image, but you may store a link to Product Advertising Content consisting of an image for up to 24 hours." | [IP License §2(h)](https://affiliate-program.amazon.com/help/operating/policies) · `S45` |
+| H-02 | Displaying Amazon-sourced **text** requires a specific disclaimer in plain view. | "CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME." | [IP License §2(k)](https://affiliate-program.amazon.com/help/operating/policies) · `S45` |
+| H-03 | A price may be shown only when Amazon serves it on the link, or it comes from Creators API / PA API. No price tracking, no alerts. | "your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain … via Creators API or PA API"; "(y) … your Site must not have price tracking and/or price alerting functionality." | [Participation Requirements §2(b), §6(y)](https://affiliate-program.amazon.com/help/operating/policies) · `S54`, `S53` |
+| H-04 | No star ratings or customer reviews may be displayed unless obtained through the API. | "You will not display or otherwise use any of our customer reviews or star ratings … unless you have obtained a link to that customer review or star rating through Creators API or PA API." | [Participation Requirements §6(t)](https://affiliate-program.amazon.com/help/operating/policies) · `S44` |
 
 Two consequences that a design prompt usually gets wrong:
 
@@ -38,7 +38,7 @@ Two consequences that a design prompt usually gets wrong:
 - **Star ratings in search results are not available either**, and that is why this site will look plainer
   than a competitor's in a results page. That is a compliance outcome, not a design failure, and the design
   should not try to fake its way to it. Google's own rule forbids aggregating ratings from other sites
-  ([review-snippet guidelines](https://developers.google.com/search/docs/appearance/structured-data/review-snippet) · `S49`).
+  ([review-snippet guidelines](https://developers.google.com/search/docs/appearance/structured-data/review-snippet) · `S50`).
 
 ---
 
@@ -46,7 +46,7 @@ Two consequences that a design prompt usually gets wrong:
 
 | Standing item | Status | What changed, and the evidence |
 |---|---|---|
-| **DP-04** — "Product imagery: until the image-licence question (Q-10, open) is answered, design with no retailer product photos … with C (manufacturer images) as a per-manufacturer follow-up" | **Corrected** | Option C is not safe as written. A manufacturer's product photograph of an *Amazon-sold* product is still not Program Content, and using it to promote an Amazon listing raises the licence question rather than avoiding it. Option A (no photographs) is the only option that is compliant today; a self-drawn specification diagram is a third path that the standing brief did not consider and is now `DS-01` option A on the board. The licence text is quoted at `S44` and the finding is `DG-01`. |
+| **DP-04** — "Product imagery: until the image-licence question (Q-10, open) is answered, design with no retailer product photos … with C (manufacturer images) as a per-manufacturer follow-up" | **Corrected** | Option C is not safe as written. A manufacturer's product photograph of an *Amazon-sold* product is still not Program Content, and using it to promote an Amazon listing raises the licence question rather than avoiding it. Option A (no photographs) is the only option that is compliant today; a self-drawn specification diagram is a third path that the standing brief did not consider and is now `DS-01` option A on the board. The licence text is quoted at `S45` and the finding is `DG-01`. |
 | **DP-22** — "Ship the technical basics … XML sitemap, robots.txt, canonical tags … one h1 per page" | **Partly done, partly still open** | Canonical tags and Open Graph now exist on all 17 root/discovery pages and are generated and gated (`tools/build_meta.py`). The sitemap is now generated from the file tree (`tools/build_sitemap.py`) and covers 52 submitted URLs instead of 16 hand-listed ones. `robots.txt` already existed. One `h1` per page passes across the tree. What is **still open** is that none of this fixes the underlying problem: a sitemap is a discovery mechanism, not a reason to rank. |
 | **DP-23** — "Stand up Google Search Console … as the first measurement loop" | **Confirmed, and made concrete** | Now specified as event `EV-05` in the measurement design, with its fields, its blocker (`DQ-04`, the owner's Google account) and the decision it enables. See `discovery/measurement.html`. |
 | **DP-07** — "Structured data only from the safe subset: Article, breadcrumbs, author — no AggregateRating, no offers" | **Confirmed and extended** | Implemented for `WebSite` + `Organization` + `BreadcrumbList` + `WebPage`/`CollectionPage` on the root pages, which had none. Still no `Product`, `Review`, `AggregateRating` or `Offer` anywhere, and the discovery gate refuses it without a measured rating behind it (`DS-06`). |
@@ -72,7 +72,7 @@ has failed regardless of how it looks.
 - **Above the fold on a product page:** the product's official title (verbatim, attributed), three measured
   facts that decide the purchase (capacity, temperature range, footprint), and **one** primary action.
 - **The action is a sentence, not a button.** "See this model on Amazon — paid link" beats a green
-  "Buy Now", because the destination must never be unclear (Participation Requirements §6(w), `S45`) and
+  "Buy Now", because the destination must never be unclear (Participation Requirements §6(w), `S46`) and
   because a site that is honest about being paid converts the readers who distrust affiliate sites.
 - **Exactly one primary action per screen region.** No sticky buy bar, no exit-intent popup: pop-ups and
   layer ads are restricted (§6(o)), and a site whose whole argument is "we do not manipulate you" cannot
@@ -81,7 +81,7 @@ has failed regardless of how it looks.
   one source link per row rather than one per table.
 - **Show the loser.** A comparison that only praises is a brochure. State which of the three is wrong for
   which household, from the measured numbers — that is the "useful comparison" Google's thin-affiliation
-  guidance asks for (`S47`).
+  guidance asks for (`S48`).
 
 ### 3.3 What to do instead of photographs
 
@@ -112,7 +112,7 @@ coming from a source that publishes blanks.
 ### 3.5 Authorship and provenance (missing entirely before this brief)
 
 Google's people-first guidance asks who made the content and how, and warns that fabricated author profiles
-are deception ([creating helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) · `S55`). This site has an unusually good answer and has never told it. The prompt should
+are deception ([creating helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) · `S56`). This site has an unusually good answer and has never told it. The prompt should
 produce:
 
 - A **provenance page** that states, in plain language: what the pipeline does, what the gates reject (a
@@ -153,7 +153,7 @@ The standing brief's "swap-the-model test" is good; this makes it mechanical eno
 6. **A single primary action**, above the fold and once more at the end. Never mid-paragraph.
 7. **The disclosure**: the exact sentence in the page furniture, plus `(paid link)` beside the link itself.
    FTC guidance says a disclosure placed where a reader must click to find it is likely to be missed
-   ([Disclosures 101](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers) · `S54`).
+   ([Disclosures 101](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers) · `S55`).
 8. **A length floor that comes from the argument, not a word count.** The prompt should say "as long as the
    measurements require" and never "1500 words minimum", because the second instruction produces padding.
 
@@ -165,11 +165,11 @@ The attractive tactics and what stops each one.
 
 | Tactic | Verdict | The rule that decides it |
 |---|---|---|
-| Publish 100 AI-written pages targeting long-tail keywords | **Not available** | "Scaled content abuse … using generative AI tools or other similar tools to generate many pages without adding value" (`S46`). |
-| Rewrite competitor reviews and add a comparison table | **Not available** | "Thin affiliation … product descriptions and reviews are copied directly from the original merchant without any original content or added value" (`S47`). |
-| Buy search ads that deep-link straight to Amazon | **Not available** | Search results must send users to your site, "not directly, or indirectly via a Redirecting Link, to an Amazon Site" (`S50`, `S51`). |
-| Six pages, each answering one buying question from data already measured | **The recommended path** | It is the "original content or added value" that `S47` and `S55` name, and it needs no new fact-gathering. `DS-03`. |
-| Turn each measured cross-source disagreement into one article | **Recommended, and the differentiator** | Nobody else has done the comparison, so it cannot be copied, which is exactly what `S47` rewards. |
+| Publish 100 AI-written pages targeting long-tail keywords | **Not available** | "Scaled content abuse … using generative AI tools or other similar tools to generate many pages without adding value" (`S47`). |
+| Rewrite competitor reviews and add a comparison table | **Not available** | "Thin affiliation … product descriptions and reviews are copied directly from the original merchant without any original content or added value" (`S48`). |
+| Buy search ads that deep-link straight to Amazon | **Not available** | Search results must send users to your site, "not directly, or indirectly via a Redirecting Link, to an Amazon Site" (`S51`, `S52`). |
+| Six pages, each answering one buying question from data already measured | **The recommended path** | It is the "original content or added value" that `S48` and `S56` name, and it needs no new fact-gathering. `DS-03`. |
+| Turn each measured cross-source disagreement into one article | **Recommended, and the differentiator** | Nobody else has done the comparison, so it cannot be copied, which is exactly what `S48` rewards. |
 | Measure which page sends people where, then write the next page from that | **Recommended, and blocked on the owner** | Needs a cookie-free counter and Search Console; `DS-11` and `DQ-04`. |
 
 The honest summary: this site's traffic plan is *fewer, better pages built from measurements a competitor has
@@ -183,15 +183,15 @@ page worked.
 Four instructions that would produce a non-compliant site, listed because they are the four a generic prompt
 writes by default:
 
-1. **"Add a product carousel that updates prices"** → `S52` forbids tracking/alerting; `S53` forbids a price
+1. **"Add a product carousel that updates prices"** → `S53` forbids tracking/alerting; `S54` forbids a price
    that Amazon did not serve.
-2. **"Show star ratings and review counts to build trust"** → `S43` forbids displaying them without API
-   access; `S49` forbids aggregating them from elsewhere.
-3. **"Write a punchy author bio with a photo"** → `S55` names fabricated creator profiles and AI headshots as
+2. **"Show star ratings and review counts to build trust"** → `S44` forbids displaying them without API
+   access; `S50` forbids aggregating them from elsewhere.
+3. **"Write a punchy author bio with a photo"** → `S56` names fabricated creator profiles and AI headshots as
    deception.
 4. **"Optimise for 'best air fryer 2026' and write 2000 words"** → the superaltive requires a test the desk has
-   not run (FTC: you cannot talk about your experience with a product you have not tried, `S54`), the word
-   floor produces padding, and the aggregate of those two is the thin-affiliation pattern `S47` demotes.
+   not run (FTC: you cannot talk about your experience with a product you have not tried, `S55`), the word
+   floor produces padding, and the aggregate of those two is the thin-affiliation pattern `S48` demotes.
 
 ---
 

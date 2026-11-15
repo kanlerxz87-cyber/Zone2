@@ -8,7 +8,7 @@
       "id": "MP-01",
       "rule": "No personal data, no cookie, no cross-site identifier, and no identifier derived from a visitor.",
       "why": "Amazon's Participation Requirements forbid associating a sub-tag or reporting ID with a specific end user (R-08 in ledger/compliance.json; S02 in ledger/sources.json). A design that cannot do that even if asked is stronger than a policy that says not to.",
-      "source_ids": ["S45"]
+      "source_ids": ["S46"]
     },
     {
       "id": "MP-02",
@@ -19,8 +19,8 @@
     {
       "id": "MP-03",
       "rule": "Publish no traffic, conversion or income expectation, and no forecast.",
-      "why": "The Operating Agreement states that Amazon makes no representation or warranty regarding the amount of traffic or commission income an Associate can expect (S57). A projection on this site would present as knowledge exactly what that clause disclaims. The layer records what happened; it never prints what will.",
-      "source_ids": ["S57"]
+      "why": "The Operating Agreement states that Amazon makes no representation or warranty regarding the amount of traffic or commission income an Associate can expect (S58). A projection on this site would present as knowledge exactly what that clause disclaims. The layer records what happened; it never prints what will.",
+      "source_ids": ["S58"]
     },
     {
       "id": "MP-04",
@@ -31,8 +31,8 @@
     {
       "id": "MP-05",
       "rule": "Search measurement must not route visitors straight to Amazon.",
-      "why": "Search results, paid or unpaid, must send users to the site and not directly or indirectly to an Amazon Site (S50). Any Search Console or paid-search plan is constrained by that.",
-      "source_ids": ["S50"]
+      "why": "Search results, paid or unpaid, must send users to the site and not directly or indirectly to an Amazon Site (S51). Any Search Console or paid-search plan is constrained by that.",
+      "source_ids": ["S51"]
     }
   ],
   "events": [
@@ -63,7 +63,7 @@
       "fires_on": "The required disclosure entering the viewport above a product link.",
       "fields": ["page_path", "disclosure_position"],
       "deliberately_not_collected": ["scroll depth", "time on page", "read events"],
-      "decides": "Whether the disclosure is actually in the reader's line of sight before the first product link, which is what the FTC guidance asks for (S54). This is a compliance measurement, not a marketing one.",
+      "decides": "Whether the disclosure is actually in the reader's line of sight before the first product link, which is what the FTC guidance asks for (S55). This is a compliance measurement, not a marketing one.",
       "analogy_in_repo": "Every page already carries the sentence and the link-level tag; nothing verifies that a reader sees it before the first link."
     },
     {

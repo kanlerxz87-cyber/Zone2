@@ -782,4 +782,4 @@ follow-up that is not safe as written. And the discovery review surface (`discov
 official source link, generated from two data files and held by a gate proven to fail against eleven injected
 defect classes — two of which it initially let through, and both were fixed.
 
-Line-by-line record with the quoted text relied on: `docs/discovery-t40-sources.json` (S43–S59).
+Line-by-line record with the quoted text relied on: `docs/discovery-t40-sources.json` (S44–S60).

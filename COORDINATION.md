@@ -4644,7 +4644,7 @@ once confirmed).
 ### File scope actually touched (narrower than the original claim)
 
 **New:** `discovery/**` (6 pages) · `docs/discovery-t40.json` (17 findings, 10 questions, 14 suggestions) ·
-`docs/discovery-t40-sources.json` (17 sources, S43–S59, quoted) · `docs/measurement-t40.json` ·
+`docs/discovery-t40-sources.json` (17 sources, S44–S60, quoted) · `docs/measurement-t40.json` ·
 `docs/design-brief-t40.md` · `tools/build_discovery.py` · `tools/build_measurement.py` · `tools/build_meta.py` ·
 `tools/page_meta.py` · `tools/validate_discovery.py`
 **Modified:** `sitemap.xml` (regenerated through the *merged* generator, not a second one) ·
@@ -4671,7 +4671,7 @@ recorded rather than silently chosen.
 |---|---|
 | PR | **[#104](https://github.com/kanlerxz87-cyber/Zone2/pull/104)** — `arena/3e0b3b4e-zone2` → `main` |
 | Task | The discovery review (17 findings / 10 questions / 14 suggestions), the generated machine-readable head layer, the measurement design, and the gate that keeps all three honest |
-| Delivered | `discovery/**` (6 pages) · `docs/discovery-t40.json` · `docs/discovery-t40-sources.json` (S43–S59, each with the quoted text relied on) · `docs/measurement-t40.json` · `docs/design-brief-t40.md` · `tools/{build_discovery,build_measurement,build_meta,page_meta,validate_discovery}.py` · 5 additive CI steps · README structure · EXECUTIVE_SUMMARY addendum |
+| Delivered | `discovery/**` (6 pages) · `docs/discovery-t40.json` · `docs/discovery-t40-sources.json` (S44–S60, each with the quoted text relied on) · `docs/measurement-t40.json` · `docs/design-brief-t40.md` · `tools/{build_discovery,build_measurement,build_meta,page_meta,validate_discovery}.py` · 5 additive CI steps · README structure · EXECUTIVE_SUMMARY addendum |
 | Explicitly NOT changed | every product value, every specification row, `ledger/**`, `marketing/**`, `decisions/**`, `journal/**`, `pages/**`, the five companion namespaces, and every existing gate's rule |
 | Gates on the final tree | `validate_data` 0 errors · `audit_site` 5×PASS · 9 generator `--check`s clean · `validate_decisions` clean · `validate_discovery` clean · `tests/test_pipeline.py` 15/15 · **all 29 CI `run:` steps replayed locally, exit 0** |
 | Gate proven to fail | 11 injected defect classes caught, 2 of them **added because the first version of the gate let them through** (a too-permissive price rule where "checkout" satisfied the program-context exception, and a stale-output test that had not actually executed). Both fixed and re-tested. |

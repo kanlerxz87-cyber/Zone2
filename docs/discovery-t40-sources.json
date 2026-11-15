@@ -1,10 +1,10 @@
 {
-  "note": "T40 discovery register - SOURCES. Every entry was fetched live by session arena/3e0b3b4e-zone2 on 2026-11-15 (UTC) and the text in `quote` was copied from the page as served (whitespace normalised only). IDs continue the ledger/sources.json series (which ends at S42) without editing that file, so existing sources keep their authors. A source may be cited only for the proposition in `used_for`; the quote is stored beside it so a reader can check the claim against the page itself.",
+  "note": "T40 discovery register - SOURCES. Every entry was fetched live by session arena/3e0b3b4e-zone2 on 2026-11-15 (UTC) and the text in `quote` was copied from the page as served (whitespace normalised only). IDs begin at S44 because ledger/sources.json already holds S43 (added by another session after this register was written) without editing that file, so existing sources keep their authors. A source may be cited only for the proposition in `used_for`; the quote is stored beside it so a reader can check the claim against the page itself.",
   "accessed_utc": "2026-11-15",
   "session": "arena/3e0b3b4e-zone2",
   "sources": [
     {
-      "id": "S43",
+      "id": "S44",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program Participation Requirements, Section 6(t) - customer reviews and star ratings",
@@ -15,7 +15,7 @@
       "used_for": "The site publishes no star rating and no review count. That is a policy consequence of having no Creators API access, not an oversight, and this source is why the image/rating work cannot be finished without the account."
     },
     {
-      "id": "S44",
+      "id": "S45",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program IP License and Usage Requirements - Section 1(a), Section 2(h) and Section 2(k)",
@@ -26,7 +26,7 @@
       "used_for": "Product photographs may come only from Program Content, may not be stored or cached (a link to one may be, for up to 24 hours), and displaying Amazon-sourced text requires the plain-view 2(k) disclaimer, which no page on this site carries today. This is the licence constraint behind DG-01, DG-14 and suggestion SG-12."
     },
     {
-      "id": "S45",
+      "id": "S46",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program Participation Requirements, Sections 6(v) and 6(w) - cloaking and link shorteners",
@@ -37,7 +37,7 @@
       "used_for": "The three supplied link.amazon short links cannot be republished as this site's Special Links. Source for DG-02 and suggestion SG-13."
     },
     {
-      "id": "S46",
+      "id": "S47",
       "publisher": "Google Search Central",
       "kind": "official-search",
       "title": "Google Search Essentials - Spam policies, 'Scaled content abuse'",
@@ -48,7 +48,7 @@
       "used_for": "Caps any 'publish more pages' growth plan unless every page adds something a competitor's page does not have. Source for DG-03 and suggestion SG-08."
     },
     {
-      "id": "S47",
+      "id": "S48",
       "publisher": "Google Search Central",
       "kind": "official-search",
       "title": "Google Search Essentials - Spam policies, 'Thin affiliation'",
@@ -59,7 +59,7 @@
       "used_for": "Names the four things this site already owns (comparison tables, per-row sourcing, cross-source conflicts, navigation) as the assets a growth plan should build on. Source for DG-03 and suggestion SG-09."
     },
     {
-      "id": "S48",
+      "id": "S49",
       "publisher": "Google Search Central",
       "kind": "official-search",
       "title": "Google Search Central - Qualify your outbound links to Google",
@@ -70,7 +70,7 @@
       "used_for": "Confirms the existing rel=\"sponsored nofollow\" emission is the correct shape, and that it must survive whatever link change the owner eventually approves. Source for DG-05."
     },
     {
-      "id": "S49",
+      "id": "S50",
       "publisher": "Google Search Central",
       "kind": "official-search",
       "title": "Google Search Central - Review snippet (Review, AggregateRating) structured data, guidelines",
@@ -81,7 +81,7 @@
       "used_for": "Confirms why Product / Review / AggregateRating markup stays absent: the site has tested nothing, so any rating in markup would be either aggregated from elsewhere or invented. Source for DG-06 and DG-16."
     },
     {
-      "id": "S50",
+      "id": "S51",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program Participation Requirements, Section 6(f) - search traffic must land on your site",
@@ -92,7 +92,7 @@
       "used_for": "Search results must land on this site first. Rules out the 'link straight into Amazon from an ad or a search result' growth tactics. Source for DG-04 and DG-15."
     },
     {
-      "id": "S51",
+      "id": "S52",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program Commission Income Statement, Section 2(e) - Redirecting Links are disqualified",
@@ -103,7 +103,7 @@
       "used_for": "A purchase that arrives through a redirect the visitor never clicked does not earn. Source for DG-02, alongside S45."
     },
     {
-      "id": "S52",
+      "id": "S53",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program Participation Requirements, Section 6(y) - price tracking and alerting",
@@ -114,7 +114,7 @@
       "used_for": "Rules out a price-history chart and a price-drop alert as buildable features. Both are re-scoped as proposals that require Amazon's written agreement first. Source for DG-07 and suggestion SG-10."
     },
     {
-      "id": "S53",
+      "id": "S54",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program Participation Requirements, Section 2(b) - prices and availability",
@@ -125,7 +125,7 @@
       "used_for": "Even with an approved account, a price may only be shown when Amazon serves it on the link or the API supplies it. A copied or photographed price is not compliant. Source for DG-07 and DG-08."
     },
     {
-      "id": "S54",
+      "id": "S55",
       "publisher": "Federal Trade Commission",
       "kind": "official-legal",
       "title": "FTC - Disclosures 101 for Social Media Influencers (published November 2019)",
@@ -136,7 +136,7 @@
       "used_for": "Underpins the existing link-level '(paid link)' tag beside every product link, and is the reason a disclosure footer alone would not be enough. Source for DG-09."
     },
     {
-      "id": "S55",
+      "id": "S56",
       "publisher": "Google Search Central",
       "kind": "official-search",
       "title": "Google Search Central - Creating helpful, reliable, people-first content (Effort, Originality, Who/How/Why)",
@@ -147,7 +147,7 @@
       "used_for": "The standard the editorial rules are measured against, and the reason the site needs authorship that is honest about being automated. Source for DG-10 and DG-17."
     },
     {
-      "id": "S56",
+      "id": "S57",
       "publisher": "Google Search Central",
       "kind": "official-search",
       "title": "Google Search's guidance on using generative AI content on your website",
@@ -158,7 +158,7 @@
       "used_for": "Settles the 'should we disclose AI use' question in the direction this site already leans: the requirement is added value plus a manual fact-check gate, and the site's build gates are that fact-check made executable. Source for DG-10."
     },
     {
-      "id": "S57",
+      "id": "S58",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program Operating Agreement, Section 4 - no representation about traffic or commission income",
@@ -169,7 +169,7 @@
       "used_for": "Any 'projected earnings' or 'expected revenue' figure on this site would contradict the clause it cites. The measurement plan therefore stores a forecast as an owner assumption and never publishes it as expected income. Source for DG-11 and suggestion SG-11."
     },
     {
-      "id": "S58",
+      "id": "S59",
       "publisher": "Amazon (Amazon.com Associates Central)",
       "kind": "official-amazon",
       "title": "Associates Program Operating Agreement, Section 5 - second and third sentences (public communications about the Agreement)",
@@ -180,7 +180,7 @@
       "used_for": "Raises a question about the site's own compliance commentary, which discusses the Agreement at length in public. Published as an open question (DG-13), not as a violation finding: whether descriptive, cited compliance commentary is a 'public communication with respect to this Agreement' is a legal judgement this project cannot make and must not assert."
     },
     {
-      "id": "S59",
+      "id": "S60",
       "publisher": "Google Search Central",
       "kind": "official-search",
       "title": "Google Search Central - General structured data guidelines",
