@@ -1,0 +1,609 @@
+{
+  "note": "Suggestion register - proposals, not facts. Every row states the problem it addresses (with the official sources that establish the problem), the options with their trade-offs, a recommendation, the expected effect, the effort, the risks, the dependencies (questions and flags), and a status in a review workflow. A suggestion is never a claim about a product, a price, a market or a performance figure; its evidence is cited in `source_ids`. `status` moves PROPOSED -> ACCEPTED -> IN PROGRESS -> DONE, or to DEFERRED / REJECTED with a reason recorded in `decision_note`. Nothing here changes the published data until a decision is recorded against it.",
+  "as_of": "2026-11-15",
+  "review_model": {
+    "stages": ["PROPOSED", "ACCEPTED", "IN PROGRESS", "DONE", "DEFERRED", "REJECTED"],
+    "how_to_review": [
+      "Read the `problem` line and its sources: if the problem is not the one you are actually facing, reject the suggestion rather than editing it.",
+      "Compare the options. Each carries its own trade-off; the recommendation is this session's reading, not a decision.",
+      "Check the dependencies: a suggestion whose open question is still OPEN cannot be started, only planned.",
+      "Record the decision in `decision_note` and move `status`. A suggestion left at PROPOSED is an open item, not a plan.",
+      "Questions that block the decision live in ledger/questions.json and are published on the Questions page."
+    ],
+    "closed_by": "the site owner, recorded here"
+  },
+  "schema": {
+    "id": "SG-nn",
+    "title": "one line",
+    "category": "Identity | Monetisation | Data | Content | Design | Measurement | Compliance | Platform",
+    "problem": "the current state, stated so that it can be checked against source_ids",
+    "source_ids": "ids in ledger/sources.json backing the problem statement",
+    "options": "list of {option, pros, cons}",
+    "recommendation": "which option this session recommends, and why",
+    "expected_effect": "what changes if it is adopted - stated as behaviour, never as a performance number",
+    "effort": "estimate, labelled as an estimate",
+    "dependencies": "question ids and flag ids that must be resolved first",
+    "risk": "what could go wrong, including compliance risk",
+    "status": "PROPOSED | ACCEPTED | IN PROGRESS | DONE | DEFERRED | REJECTED",
+    "decision_note": "empty until a decision is recorded",
+    "owner": "who would carry it out"
+  },
+  "suggestions": [
+    {
+      "id": "SG-01",
+      "title": "Lock product identity before writing anything else about the products",
+      "category": "Identity",
+      "problem": "The three supplied codes are 9 characters; Amazon's own help page defines an ASIN as the 10-character code for a specific product. The three link.amazon URLs resolve reproducibly to one specific destination each, and an unknown code returns a 404 - so the tokens are honoured - but no public Amazon document binds a code to a product, and the destination token rotates between days. Every product row on the site is therefore published as 'the product this link resolves to' rather than 'the product the brief named'.",
+      "source_ids": ["S24", "S19", "S20", "S21", "S32", "S33", "S34", "S35"],
+      "options": [
+        {
+          "option": "A. Owner confirms the three destinations against the brief, or supplies the 10-character ASINs",
+          "pros": "Unblocks every identity-dependent decision at once; the mapping then rests on a stated fact rather than on observed redirect behaviour.",
+          "cons": "Depends on the brief owner responding; nothing can proceed in the meantime."
+        },
+        {
+          "option": "B. Treat the resolved destinations as the products permanently",
+          "pros": "No owner dependency; the site already publishes this position and every row is already sourced.",
+          "cons": "If the brief meant different products, every article, comparison and keyword was chosen for the wrong items - and the error is invisible until someone notices."
+        },
+        {
+          "option": "C. Keep both readings side by side and label each product page with the uncertainty",
+          "pros": "Fully transparent; a reader can judge the risk.",
+          "cons": "Weakens every page commercially and confuses search engines with duplicate intent; it is the current position and it is already published as a flag."
+        }
+      ],
+      "recommendation": "Option A, with C kept as the published position until it is answered. Option B is the worst of the three once the campaign registry and structured data are switched on, because it silently hard-codes an unverified identity into the automation.",
+      "expected_effect": "Product pages, campaigns, structured data and commission modelling stop carrying an identity caveat; the 'product identity is not confirmed' banner can be removed from every published surface.",
+      "effort": "Estimate: one message to the link provider; the rest of the work is already scaffolded (tools/asin_guard.py, tools/amazon_creators_api.py).",
+      "dependencies": ["Q-01", "F-01", "F-02", "F-03", "F-06", "F-21"],
+      "risk": "Low to implement. The risk of NOT doing it is the material one: publishing confidently about the wrong product is exactly the misleading-claim failure the Participation Requirements forbid.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    },
+    {
+      "id": "SG-02",
+      "title": "Configure the Associates ID and regenerate every outbound link as a Special Link",
+      "category": "Monetisation",
+      "problem": "Amazon's help page gives the qualifying link format as a tagged /dp/ link, and the Participation Requirements state that a Special Link must use the assigned Associates ID and be accessed directly from the Site. Every URL the three supplied links resolve to carries no tag parameter, so as supplied they cannot attribute a sale. The repository stores no ID and may not invent one; the link builder therefore runs in inert preview mode and every product link on the site is labelled as earning nothing.",
+      "source_ids": ["S02", "S24", "S19", "S20", "S21"],
+      "options": [
+        {
+          "option": "A. Store the tracking ID in ledger/site_config.json and let tools/link_builder.py emit tagged links",
+          "pros": "One file, one source of truth; the deploy gate already reads that field; sub-tag rules are enforced by the builder.",
+          "cons": "Requires the owner to supply a credential-like value; the site must not publish it."
+        },
+        {
+          "option": "B. Use Amazon's own link-creation tooling (SiteStripe / Product Links) instead of building URLs",
+          "pros": "Amazon generates the tagged link, so the format is correct by construction; no credential is stored in the repository.",
+          "cons": "Manual per-link work; campaign keys and first-party click counting then live outside the repository."
+        },
+        {
+          "option": "C. Keep the preview links and publish the site as a non-earning research project",
+          "pros": "No account needed; nothing to mis-configure.",
+          "cons": "The site cannot earn; the disclosure sentence would be shown on a site with no affiliate links at all, which reads as misleading in itself."
+        }
+      ],
+      "recommendation": "Option A as the system of record, with option B as the manual fallback while the account is being set up. Option C is only defensible if the site is explicitly labelled a research demo.",
+      "expected_effect": "Links become trackable Special Links, the 'preview link - earns nothing' labels disappear, the campaign registry can be switched on, and the earnings columns in the reporting surfaces acquire a real source.",
+      "effort": "Estimate: minutes of configuration plus a regeneration pass over the link surface.",
+      "dependencies": ["Q-02", "F-07", "F-24"],
+      "risk": "Mis-tagging sends another account's traffic somewhere else; the builder refuses to emit a link whose competing attribution parameters are present, and should be re-checked once a real tag exists.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    },
+    {
+      "id": "SG-03",
+      "title": "Request Creators API access and make it the only catalog source",
+      "category": "Data",
+      "problem": "Amazon's deprecation notice states that PA-API 5.0 calls return 403 AccessDenied and direct integrators to the Creators API, whose documentation lists at least 10 qualifying sales in the past 30 days as a prerequisite. The repository's client is built against the Creators API and returns BLOCKED rather than scraping, so product identity, price context, rating and demand inputs are all unavailable and the niche queue is empty by design.",
+      "source_ids": ["S06", "S31", "S07", "S08", "S23"],
+      "options": [
+        {
+          "option": "A. Apply for Creators API access and wire the existing client to live credentials",
+          "pros": "Opens the sanctioned data path for identity, category, price context and ratings; makes the niche queue and modules M-01 to M-05 real.",
+          "cons": "The prerequisite is sales volume, so it cannot be accelerated - the site has to earn its way in."
+        },
+        {
+          "option": "B. Stay on manually transcribed manufacturer and Amazon pages",
+          "pros": "Works today, with no account; every row already has a citable source.",
+          "cons": "Cannot scale past a handful of products, cannot produce demand or rating rows, and leaves the revenue model without its inputs."
+        },
+        {
+          "option": "C. Scrape Amazon pages instead of using the API",
+          "pros": "Would produce rows quickly.",
+          "cons": "Prohibited in spirit and in practice by the program's licensing terms, and it is the failure mode the client was written to avoid. Not a real option - recorded only so the register shows it was considered and rejected."
+        }
+      ],
+      "recommendation": "Option A, sequenced after SG-02, with option B as the documented interim. Option C is rejected outright.",
+      "expected_effect": "The catalogue-dependent rows of the platform - identity, category band, price context, rating themes, demand snapshots - stop being BLOCKED and start being sourced from the sanctioned API.",
+      "effort": "Estimate: the request is small; the waiting period depends on the sales threshold, which is outside the repository's control.",
+      "dependencies": ["Q-02", "Q-03", "Q-04", "F-05"],
+      "risk": "Low technical risk. The real constraint is time: until the threshold is met the site is a three-product site.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner, then platform"
+    },
+    {
+      "id": "SG-04",
+      "title": "Fix the editorial policy in writing before the content engine scales",
+      "category": "Content",
+      "problem": "The Participation Requirements forbid inaccurate, overbroad or misleading claims, require that customer reviews and ratings be obtained through the licensed API before display, and require that content not be altered. Google documents Product/Review/Offer structured data for editorial reviews, while the FTC requires a material connection to be disclosed conspicuously. The repository currently publishes specification-led pages with no star ratings and no hands-on claims, but that policy is implicit in the code rather than stated as a decision.",
+      "source_ids": ["S02", "S14", "S15", "S18", "S10"],
+      "options": [
+        {
+          "option": "A. Specification-led pages only: manufacturer and listing statements, each with its source; no opinions, no ratings",
+          "pros": "Fully compliant with the data available today; nothing to retract later; every row already has a source.",
+          "cons": "Less engaging than opinion-led content; the 'why should I trust this' question stays unanswered by the site itself."
+        },
+        {
+          "option": "B. Add hands-on testing with a written protocol, then publish opinions",
+          "pros": "The strongest organic play and the only route to review structured data; pros and cons are what Google says reviews expose.",
+          "cons": "Requires physical units, a protocol and a disclosure review for every claim; highest risk of an inaccurate claim and therefore of a material breach."
+        },
+        {
+          "option": "C. Add clearly-labelled analysis that reasons from verified specifications (for example, what 1700 W implies for a 15 A circuit)",
+          "pros": "Adds voice and usefulness without asserting anything about a product that the sources do not state; reasoning is shown, so a reader can check it.",
+          "cons": "Each inference must be attributable and conservative; analysis rows are the easiest place for an overreach to hide."
+        }
+      ],
+      "recommendation": "Option C now, with option A as the floor, and option B considered only once testing units exist. The analysis in option C is exactly what separates a useful site from a list of specifications.",
+      "expected_effect": "Articles gain a point of view that is defensible line by line, and the review-eligibility question (option B) is answered before, not after, content is written.",
+      "effort": "Estimate: one written policy, plus per-article review against it.",
+      "dependencies": ["Q-07", "F-06", "F-22", "F-23"],
+      "risk": "Option C can drift into an unsourced inference. Every analytical statement must show the row it reasons from, and the deploy gate should keep refusing a claim word without a source.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner, with the content engine"
+    },
+    {
+      "id": "SG-05",
+      "title": "Resolve the price question against the new no-price-tracking rule",
+      "category": "Compliance",
+      "problem": "The Program Policies limit price display to prices Amazon serves in the link or that the licensed API supplies, and a separate Participation Requirement states that, unless otherwise agreed by Amazon, the Site must not have price tracking or price-alerting functionality - recorded in this repository as R-22 and added only in the most recent pass. Module M-03 is nevertheless described as tracking the price point and discount depth per ASIN, which is the shape of functionality the requirement names.",
+      "source_ids": ["S02", "S29"],
+      "options": [
+        {
+          "option": "A. Publish no prices and no price-history features at all",
+          "pros": "Clearly compliant; the deploy gate already enforces it; the requirement about price tracking is satisfied by construction.",
+          "cons": "Comparison tables lose the dimension readers look for first, and price-sensitive traffic is harder to attract."
+        },
+        {
+          "option": "B. Publish prices only when they are served by Amazon in the link or returned by the licensed API, and never store or alert on them",
+          "pros": "Stays inside both rules at once; the value is real-time by construction.",
+          "cons": "Needs API access; and any comparison view must show the lowest new (and used) price rather than a single figure."
+        },
+        {
+          "option": "C. Build price history and alerting to match module M-03 as written",
+          "pros": "Matches the module description as originally written.",
+          "cons": "Directly contradicted by R-22 unless Amazon has agreed otherwise in writing. Not a real option - recorded so the register shows it was considered and rejected."
+        }
+      ],
+      "recommendation": "Option A until API access exists, then Option B if the owner wants price context. Option C must be removed from the module description either way, because a module that cannot be built as written should not be listed as planned work.",
+      "expected_effect": "The pricing module becomes buildable, the comparison tables get an explicit price policy, and the site stops describing a feature the rules forbid.",
+      "effort": "Estimate: one decision; a module-description edit under option A.",
+      "dependencies": ["Q-08", "Q-03", "F-36"],
+      "risk": "Under option B, a cached price becomes a stale published price - the failure mode the rule exists to prevent. The gate must keep refusing a price typed into a page.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    },
+    {
+      "id": "SG-06",
+      "title": "Rebuild the public face of the site as a marketing site with the dashboard behind it",
+      "category": "Design",
+      "problem": "The published root site is a utilitarian sidebar dashboard: a fixed 240 px navigation column, plain cards and a single 13 px body size, with no hero, no hierarchy, no editorial voice and no route from the research surfaces into the marketing surfaces. The brief asks for a polished marketing affiliate website that does not read like an auto-generated site.",
+      "source_ids": ["S22"],
+      "options": [
+        {
+          "option": "A. Keep one site, but lead with a marketing landing page and keep the research tables one click away",
+          "pros": "One domain, one navigation model, no duplicated content; the research credibility stays visible and reachable.",
+          "cons": "The landing page has to carry both audiences, which is a design discipline rather than a template."
+        },
+        {
+          "option": "B. Split into a marketing site and a separate research site",
+          "pros": "Each audience gets a clean, purpose-built experience.",
+          "cons": "Two sites to maintain, two disclosure surfaces, and the research half would read as internal - which weakens the credibility the marketing half borrows."
+        },
+        {
+          "option": "C. Keep the dashboard exactly as it is and add a static marketing page beside it",
+          "pros": "Zero risk to the existing structure.",
+          "cons": "The two halves share no navigation, so the reader experiences one site with a half-finished half - this is what the brief calls slop."
+        }
+      ],
+      "recommendation": "Option A: a marketing-grade landing page in the root namespace, with the dashboard and the generated findings pages reachable from it and from every page's navigation.",
+      "expected_effect": "The first screen explains what the site is, what it has verified and what it is asking for; the evidence stays one click away; the reader has a path from research to article and back.",
+      "effort": "Estimate: a stylesheet rewrite and a landing-page rebuild; no data changes, no new sources required.",
+      "dependencies": ["Q-10", "Q-14"],
+      "risk": "Low. The risk is cosmetic only - but the site's credibility is its product, so the redesign must not imply claims the data does not carry.",
+      "status": "IN PROGRESS",
+      "decision_note": "Implemented in this session (2026-11-15): new design system in assets/css/style.css, rebuilt landing page, navigation extended on every root page. Kept open for the owner to review the result.",
+      "owner": "Site owner, implemented by session bdbe382b"
+    },
+    {
+      "id": "SG-07",
+      "title": "Publish an editorial topics register and grow the article set from verified rows only",
+      "category": "Content",
+      "problem": "The marketing set holds a buying guide, a comparison and three product articles, all written in the same hedged register and all aimed at the same three pages. There is no topical entry point, so the site has no way to be found for the questions people actually ask, and no editorial ladder that could grow traffic over time.",
+      "source_ids": ["S25", "S26", "S27", "S19", "S20", "S21"],
+      "options": [
+        {
+          "option": "A. Publish a topics register: each angle with its intent, the verified rows that support it, and its publication state",
+          "pros": "Turns content into a plan that can be reviewed before it is written; every angle is traceable to rows that already exist.",
+          "cons": "A register alone publishes nothing; it only organises what comes next."
+        },
+        {
+          "option": "B. Write the evergreen how-to and 'which one fits' articles that the verified specs genuinely support",
+          "pros": "These are the queries with durable intent, and they can be answered from the specifications already transcribed - no new data required.",
+          "cons": "Each article is only as good as its sourcing discipline; a generalisation that outruns the spec would be an unsupported claim."
+        },
+        {
+          "option": "C. Write trend-jacking articles around seasonal events",
+          "pros": "Highest upside when it lands.",
+          "cons": "Demand has not been measured (the niche ledger lists it as MISSING), and a timely article written on unmeasured demand is a guess with a deadline attached."
+        }
+      ],
+      "recommendation": "Option A plus option B now, with option C held until demand snapshots exist. The topic register is also the answer to 'what should the site write next' that the current tree cannot give.",
+      "expected_effect": "The site acquires durable entry points, and the next content decision is made from a register instead of from a hunch.",
+      "effort": "Estimate: the register is a data file; each article is a rendering job over rows that already exist.",
+      "dependencies": ["Q-06", "Q-07", "Q-10", "Q-11"],
+      "risk": "Unmeasured demand means the topics may be the wrong ones. The register states which angles are evidence-backed and which are hypotheses, so the distinction is visible.",
+      "status": "IN PROGRESS",
+      "decision_note": "Implemented in this session (2026-11-15): marketing/topics.html register and additional evergreen articles built only from rows already verified against a manufacturer or Amazon page.",
+      "owner": "Site owner, implemented by session bdbe382b"
+    },
+    {
+      "id": "SG-08",
+      "title": "Give the unknown a first-class page: a questions and information-needed register",
+      "category": "Measurement",
+      "problem": "The repository already publishes what is verified and what is flagged, but it never states which unknown blocks which decision, nor where the missing information would come from. A reader - and the owner - therefore cannot tell whether a blank cell is a dead end or a task.",
+      "source_ids": ["S01", "S02", "S22"],
+      "options": [
+        {
+          "option": "A. A generated register: question, decision blocked, what is known with its source, what is missing, the discovery step, and a blank answer field",
+          "pros": "Every unknown becomes a task with an owner and a method; the blank answer is visibly unfilled rather than quietly absent.",
+          "cons": "The register is only as good as the owner's answers; an unanswered question row is a visible commitment."
+        },
+        {
+          "option": "B. A prose FAQ",
+          "pros": "Readable for a visitor.",
+          "cons": "Cannot carry the source links, the decision links or the discovery steps that make it useful for the owner."
+        },
+        {
+          "option": "C. Leave the blanks as they are and rely on the flag register",
+          "pros": "No new surface to maintain.",
+          "cons": "The flag register records irregularities in what was published; it does not say what has never been looked for."
+        }
+      ],
+      "recommendation": "Option A, generated from a data file so it cannot drift from the flag register, and published with the suggestions register beside it.",
+      "expected_effect": "The decision-support loop becomes explicit: a suggestion names the question it depends on, the question names the discovery step, and the answer closes both.",
+      "effort": "Estimate: one data file plus one generator.",
+      "dependencies": ["Q-13", "F-11"],
+      "risk": "Low. The risk is volume: a register nobody triages becomes noise, so priority and effort are recorded per row.",
+      "status": "IN PROGRESS",
+      "decision_note": "Implemented in this session (2026-11-15): ledger/questions.json and the generated Questions page, published beside the Suggestions register.",
+      "owner": "Site owner, implemented by session bdbe382b"
+    },
+    {
+      "id": "SG-09",
+      "title": "Stand up first-party click counting with static campaign keys",
+      "category": "Measurement",
+      "problem": "Amazon's reporting is the only source of conversion and earnings truth, and it needs a Session to have been opened by a click on the site. The repository already ships privacy-minimal first-party click counting with no cookies, no IP storage and no visitor identifiers, but it is not deployed, so no click is attributable to a page today. The Participation Requirements forbid associating a sub-tag with a specific end user, which constrains the design of the tracking identifiers.",
+      "source_ids": ["S02", "S12"],
+      "options": [
+        {
+          "option": "A. Deploy the existing redirect server with static per-page campaign keys",
+          "pros": "The code, the schema and the key validation already exist and respect the sub-tag rule; it produces the date-stamped click evidence the optimiser requires.",
+          "cons": "Needs a host and a policy on how long click rows are kept."
+        },
+        {
+          "option": "B. Rely on Amazon's reporting alone",
+          "pros": "No extra infrastructure, and it is the authoritative earnings source.",
+          "cons": "Amazon reports clicks and earnings per link, not per page or per format; the format question (Q-06) stays unanswerable."
+        },
+        {
+          "option": "C. Add a third-party analytics tool",
+          "pros": "Rich funnel reporting immediately.",
+          "cons": "Needs the consent regime resolved first (Q-12), and it cannot see outbound clicks that happen on Amazon's own pages anyway."
+        }
+      ],
+      "recommendation": "Option A, with option B as the earnings truth and option C deferred until the consent question is answered.",
+      "expected_effect": "Each page's outbound clicks become countable and dated on the site side, which is the precondition for every optimisation decision the optimiser code enforces.",
+      "effort": "Estimate: a deploy decision and a retention policy; the code is written.",
+      "dependencies": ["Q-02", "Q-05", "Q-12", "F-08"],
+      "risk": "Privacy and policy risk if the implementation drifts toward per-visitor identifiers; the existing design avoids that deliberately and should not be changed casually.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner with the platform"
+    },
+    {
+      "id": "SG-10",
+      "title": "Measure before optimising: no campaign decisions without a dated baseline",
+      "category": "Measurement",
+      "problem": "The optimiser in the repository refuses to act without at least 30 clicks and a dated report, and no report exists. The Operating Agreement states that Amazon makes no representation about the traffic or commission income an Associate can expect, so any projection printed on the site would be an invention.",
+      "source_ids": ["S01", "S02"],
+      "options": [
+        {
+          "option": "A. Publish a performance page that renders empty until a dated report is ingested, with the ingestion contract documented",
+          "pros": "The contract is visible; no number is ever invented; the page is ready when the data arrives.",
+          "cons": "An empty page converts no reader and proves nothing on its own."
+        },
+        {
+          "option": "B. Publish estimated ranges as clearly-labelled estimates",
+          "pros": "Gives the reader a sense of scale.",
+          "cons": "The Operating Agreement explicitly disclaims income expectations, and an estimate printed next to a verified figure invites the reader to treat both as the same kind of statement. This is the failure mode the whole repository is built to avoid."
+        },
+        {
+          "option": "C. Say nothing about performance until it is measured",
+          "pros": "Zero risk of a misleading figure.",
+          "cons": "The reader cannot judge whether the site is worth reading, and the owner's own decisions stay uninformed."
+        }
+      ],
+      "recommendation": "Option A, with option C as its behaviour while the report is absent. Option B is rejected: this repository publishes no estimated figure anywhere.",
+      "expected_effect": "The performance surface exists and is honest, and the moment a dated report is ingested the page fills with sourced rows rather than a rewrite.",
+      "effort": "Estimate: the ingestion contract is already documented in the repository; the work is wiring the export.",
+      "dependencies": ["Q-05", "Q-06", "F-08"],
+      "risk": "Under option B the site would break its own contract on its most persuasive page. Rejected.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    },
+    {
+      "id": "SG-11",
+      "title": "Collect dated search snapshots instead of guessing at demand",
+      "category": "Data",
+      "problem": "The niche ledger requires two or more dated demand snapshots and a dated, operator-observed search-results sample before a niche can be scored, and the scoring code returns INSUFFICIENT_DATA rather than a default. No snapshot exists, so the niche queue is empty and no product can be ranked against another on demand.",
+      "source_ids": ["S04", "S07", "S23"],
+      "options": [
+        {
+          "option": "A. Log a fixed query set at fixed intervals into the existing SERP observation file",
+          "pros": "Cheap, reproducible, and it converts 'we think this is popular' into a dated observation the scorer can use.",
+          "cons": "Manual effort; only valid for the queries actually sampled, and it does not measure Amazon-side demand."
+        },
+        {
+          "option": "B. Wait for Creators API access and use catalog demand signals",
+          "pros": "The sanctioned, scaled source.",
+          "cons": "Blocked by the sales threshold until the site earns its first sales."
+        },
+        {
+          "option": "C. Rank niches by intuition and revisit later",
+          "pros": "No work.",
+          "cons": "Exactly the inference the project's rules forbid; the scorer is built to refuse it."
+        }
+      ],
+      "recommendation": "Option A as the immediate, option B as the destination. Option C is the failure mode the entire verification contract exists to prevent.",
+      "expected_effect": "The niche queue stops being empty by design and starts being empty because the samples have not been taken yet - a distinction the reader can act on.",
+      "effort": "Estimate: minutes per snapshot round.",
+      "dependencies": ["Q-03", "Q-10", "Q-11", "F-08"],
+      "risk": "Low. The main risk is sampling bias - a query set chosen to confirm an existing belief. The snapshot set should be fixed before it is read.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner with the platform"
+    },
+    {
+      "id": "SG-12",
+      "title": "Publish on a cadence that matches the 60-day content-recency expectation",
+      "category": "Content",
+      "problem": "Amazon's application-review guidance expects Sites to carry robust original content - at least ten posts as a rule of thumb - and content that is generally from the last 60 days. The repository publishes three product articles, one comparison and one buying guide, so it is below that guidance and has no refresh schedule for the pages it does have.",
+      "source_ids": ["S23"],
+      "options": [
+        {
+          "option": "A. A fixed weekly or fortnightly slot with a refresh rule for evergreen pages",
+          "pros": "Matches the recency expectation with a predictable workload; refreshes keep verified pages alive.",
+          "cons": "A commitment the owner has to keep; a stalled cadence is worse than an honest slower one."
+        },
+        {
+          "option": "B. Publish only when there is something new to verify",
+          "pros": "Never publishes filler; every page has a reason to exist.",
+          "cons": "May fall below the volume the guidance describes, and it produces no steady traffic signal for the optimiser."
+        },
+        {
+          "option": "C. Batch-publish a large set once",
+          "pros": "One build, many pages.",
+          "cons": "A large batch of thin pages is the 'slop' failure the brief names, and it works against the originality the guidance describes."
+        }
+      ],
+      "recommendation": "Option A with option B's discipline: publish on a slot, but only when the page has a verified row or a dated observation behind it.",
+      "expected_effect": "The site's content age stays inside the guidance window, and the publishing decision is driven by evidence rather than by a calendar alone.",
+      "effort": "Estimate: a standing weekly slot plus a refresh check.",
+      "dependencies": ["Q-06", "Q-11", "F-11"],
+      "risk": "Publishing to fill a slot is how thin pages get written. The generator refuses a page that has no sourced row, and that refusal should stay.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    },
+    {
+      "id": "SG-13",
+      "title": "Turn the research surfaces into one publication instead of six",
+      "category": "Platform",
+      "problem": "The tree publishes the primary dashboard, a generated findings namespace under pages/, and five companion surfaces - research-hub, zone2, northstar, affiliate-lab and revalidation - plus the marketing set. Each has its own navigation, its own flag register and its own version of the same three products, and the flag register already records one prototype drifting from the primary site and another surface whose summary rows are still block-sourced.",
+      "source_ids": ["S22"],
+      "options": [
+        {
+          "option": "A. One publication: primary site, generated findings pages, and the marketing set; the rest archived as history",
+          "pros": "One navigation, one disclosure surface, one source of truth per fact; the reader stops meeting the same product six times in six designs.",
+          "cons": "The companion work is real and verified; archiving it loses the record unless the archive is published too."
+        },
+        {
+          "option": "B. Keep every surface and make the differences explicit in their own headings",
+          "pros": "Nothing is lost and the history stays readable.",
+          "cons": "Six presentations of the same facts still read as unfinished; the duplication that makes the site look generated stays."
+        },
+        {
+          "option": "C. Merge the surfaces' data into the ledger and rebuild one site from it",
+          "pros": "The strongest long-term position; the ledger already holds most of it.",
+          "cons": "The largest change of the register, and it would touch the verifiers of sessions that are finished."
+        }
+      ],
+      "recommendation": "Option A in the short term - publish the archive, link it from one clearly-labelled page, and stop linking the prototype from the primary footer - with option C as the target once the owner decides.",
+      "expected_effect": "The published site reads as one publication with a documented history, which is most of what 'not slop' means in practice.",
+      "effort": "Estimate: one navigation pass plus a relabel; option C is a larger project.",
+      "dependencies": ["Q-14", "F-14", "F-15", "F-27", "F-36"],
+      "risk": "Touching a finished session's files without its owner. This register records the request rather than making the edit - the project rules require a change request to be logged.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner, then final integration"
+    },
+    {
+      "id": "SG-14",
+      "title": "Treat performance, accessibility and semantic structure as ranking work, not polish",
+      "category": "Design",
+      "problem": "The published pages are small static HTML with a shared stylesheet, but several carry no meta description, no canonical link and no structured headings; the older prototype has no skip link, and tables on narrow screens scroll without a caption in the reader's view. Google documents structured data for editorial product content, and page experience is part of how a page is judged.",
+      "source_ids": ["S14", "S15", "S12"],
+      "options": [
+        {
+          "option": "A. Add per-page metadata, one heading hierarchy, a skip link and a real table caption to every published page",
+          "pros": "Small, verifiable changes; improves both accessibility and how a page is read by a crawler.",
+          "cons": "No visual change."
+        },
+        {
+          "option": "B. Add Product/Review structured data to the product pages",
+          "pros": "Google documents this markup for editorial reviews; it is how pros and cons are exposed.",
+          "cons": "Requires the rating and review data the rules only permit from the licensed API, and a review means an opinion - see SG-04. Not buildable today."
+        },
+        {
+          "option": "C. Leave the markup as it is",
+          "pros": "No work.",
+          "cons": "Leaves cheap ranking and accessibility work undone."
+        }
+      ],
+      "recommendation": "Option A now, with a gate that keeps a published page from losing its metadata; option B only after SG-04 settles the editorial policy and SG-03 delivers the licensed review data.",
+      "expected_effect": "Every page carries a description, a single heading structure and a caption; the site is usable on a phone, which is where most of this traffic arrives.",
+      "effort": "Estimate: a generator change plus a gate.",
+      "dependencies": ["Q-07", "F-13"],
+      "risk": "Structured data for a product with no verified rating is a misstatement; option B stays closed until the data exists.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner with the platform"
+    },
+    {
+      "id": "SG-15",
+      "title": "Decide whether an email list is a channel, and keep it compliant if it is",
+      "category": "Monetisation",
+      "problem": "The Program Policies permit Special Links in email, SMS and direct messaging provided the communication was solicited, and the FTC requires a material connection to be disclosed conspicuously in the message itself. Nothing in the repository collects an email address, and no consent regime has been chosen.",
+      "source_ids": ["S02", "S10", "S11"],
+      "options": [
+        {
+          "option": "A. No email capture; organic search only",
+          "pros": "No consent regime to operate, no list to keep compliant, no sending surface to get wrong.",
+          "cons": "No channel that survives an algorithm change; no way to bring readers back to new articles."
+        },
+        {
+          "option": "B. Email capture with explicit opt-in, a link-level disclosure in every message and the static disclosure on the site",
+          "pros": "The policies expressly permit solicited email with Special Links; a list is the cheapest durable traffic asset the owner can build.",
+          "cons": "Consent, unsubscribe and disclosure discipline are ongoing obligations, not one-time work."
+        },
+        {
+          "option": "C. Social-media distribution with the per-platform disclosure wording Amazon publishes",
+          "pros": "Amazon publishes acceptable disclosure wordings for social platforms, and the agent rules set out how an agent must identify itself.",
+          "cons": "Platform-dependent reach; the agent-identification rules constrain automated posting."
+        }
+      ],
+      "recommendation": "Option B, only after the consent question (Q-12) is answered and with a written disclosure template. Option C is worth adding later with the published wording, not improvised.",
+      "expected_effect": "A durable channel for the new content, built on the one distribution route the policies expressly allow and with the disclosure already settled.",
+      "effort": "Estimate: a form, a consent record, a template and a sending cadence.",
+      "dependencies": ["Q-09", "Q-12", "F-08"],
+      "risk": "An unsubscribed or undisclosed email is a compliance failure with no technical mitigation; the disclosure template must exist before the first send.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    },
+    {
+      "id": "SG-16",
+      "title": "Re-verify on a schedule, because the rules change without notice",
+      "category": "Compliance",
+      "problem": "The two governing pages carry their own update dates - the Operating Agreement states October 15, 2025 and the Program Policies state April 14, 2026 - and the Agreement requires compliance with the most up-to-date version of the policies. Rates, session mechanics and disclosure wording can all change, and this repository's compliance ledger is a snapshot.",
+      "source_ids": ["S01", "S02", "S28"],
+      "options": [
+        {
+          "option": "A. Re-read both governing pages and the rate statement at the start of every publishing cycle, and record the date of the read",
+          "pros": "The timestamps in the ledger already carry the information; only the habit is needed.",
+          "cons": "Manual; a cycle skipped is a cycle where the data silently ages."
+        },
+        {
+          "option": "B. Automate the re-read in the build, with the build failing when a page's stated update date changes",
+          "pros": "A changed policy becomes a red build rather than a silent drift.",
+          "cons": "The build must be able to reach those hosts, which this sandbox cannot do - the same limit that produced flag F-09."
+        },
+        {
+          "option": "C. Re-verify quarterly by hand and publish the date",
+          "pros": "Simple, honest, and matches how often these pages actually change.",
+          "cons": "A quarterly cadence can miss a change that matters for a week."
+        }
+      ],
+      "recommendation": "Option A, with option C as the published minimum cadence and option B as the target once the build has reliable outbound access.",
+      "expected_effect": "The compliance ledger stays a current snapshot, and the date on the site always tells a reader how fresh it is.",
+      "effort": "Estimate: minutes per cycle.",
+      "dependencies": ["F-11", "Q-13"],
+      "risk": "Low. The real risk is forgetting, which a dated checklist prevents.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    },
+    {
+      "id": "SG-17",
+      "title": "Give the site a name and a domain that can rank and cannot infringe",
+      "category": "Design",
+      "problem": "The Participation Requirements forbid an Amazon trademark, or a variant or misspelling of one, in a domain name, subdomain, tag or group name, and forbid copy that implies endorsement. The project's own name, Zone2, satisfies that rule - and is generic enough that it will not be remembered or found. The flag register also records a review note that one merged page title led with an Amazon mark.",
+      "source_ids": ["S02", "S29", "S22"],
+      "options": [
+        {
+          "option": "A. Keep Zone2 and rely on the subject matter for discovery",
+          "pros": "Zero rework; the name is already compliant and already on the repository.",
+          "cons": "A generic name is weak in search and weak as a brand; it also reads like an internal tool rather than a publication."
+        },
+        {
+          "option": "B. Adopt a distinctive, non-Amazon name and domain before the site is indexed",
+          "pros": "A memorable name compounds across every article and every link; cheaper to change now than after traffic arrives.",
+          "cons": "Rebrand work across every page, and the domain must be checked against the trademark rule before use."
+        },
+        {
+          "option": "C. Use a name containing an Amazon product or category term",
+          "pros": "Keyword-rich.",
+          "cons": "Prohibited by the trademark rule where the mark appears in the domain or identifier. Rejected - recorded so the register shows it was considered."
+        }
+      ],
+      "recommendation": "Option B, with a trademark check on the candidate name before adoption, and a rewrite of the one page title the flag register already notes.",
+      "expected_effect": "The site can be remembered and searched for by name, and the trademark rule is satisfied with margin rather than by a technicality.",
+      "effort": "Estimate: a naming decision plus a mechanical rewrite across the published pages.",
+      "dependencies": ["Q-09", "F-13"],
+      "risk": "A name that is too close to a protected mark would breach the trademark requirement; check before publishing, not after.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    },
+    {
+      "id": "SG-18",
+      "title": "Make the review of this register a scheduled step, not a memory",
+      "category": "Platform",
+      "problem": "A suggestion with no owner and no review date is a wish. The brief asks for a section where someone can review suggestions and choose a path before anything is implemented; the register created for that purpose has no schedule attached, and the questions register depends on answers only the owner can give.",
+      "source_ids": ["S01", "S22"],
+      "options": [
+        {
+          "option": "A. Tie the review to the publishing cycle: every cycle opens with the suggestions and questions registers",
+          "pros": "Uses a cadence that already has to happen; no new habit to build.",
+          "cons": "Depends on cycles happening at all."
+        },
+        {
+          "option": "B. A monthly review slot with a written decision note per suggestion",
+          "pros": "The decision trail is the artefact: a reader can see what was chosen, why, and when.",
+          "cons": "A fixed meeting is overhead for a one-person project."
+        },
+        {
+          "option": "C. Leave the registers open and review them whenever something forces the question",
+          "pros": "No overhead.",
+          "cons": "The registers rot: open questions stay open and suggestions stay proposed, and the site slowly stops matching the owner's intent."
+        }
+      ],
+      "recommendation": "Option A, with option B's written decision note applied to every suggestion that changes state.",
+      "expected_effect": "The decision-support layer stays current instead of accumulating plausible-sounding proposals nobody has chosen between.",
+      "effort": "Estimate: one line in the publishing checklist.",
+      "dependencies": ["Q-13", "F-11"],
+      "risk": "Low. The failure mode is skipping it, which is visible on the page: an open question with no answer is on the published site.",
+      "status": "PROPOSED",
+      "decision_note": "",
+      "owner": "Site owner"
+    }
+  ]
+}

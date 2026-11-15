@@ -24,6 +24,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from root_chrome import sidebar_html, topbar_html  # noqa: E402
 from flag_state import open_count  # shared "is this flag open" predicate (F-29/F-31)
 
 REPO = Path(__file__).resolve().parents[1]
@@ -190,44 +191,14 @@ def build() -> str:
 <meta name="description" content="Executive summary: what this Amazon affiliate platform delivers, what the three supplied links resolve to, what blocks revenue, and what the owner must do. Every figure is read from the ledger and every row links to an official source.">
 <meta name="robots" content="index,follow">
 <title>Executive summary &middot; Zone2</title>
-<link rel="stylesheet" href="pages/assets/dashboard.css">
-<link rel="stylesheet" href="pages/assets/site.css">
-<style>
-  .kpis {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin:18px 0 22px; }}
-  .kpi {{ background:#fff; border:1px solid #e3e8ef; border-radius:10px; padding:14px 16px; display:flex; flex-direction:column; gap:4px; }}
-  .kpi-num {{ font-size:26px; font-weight:700; line-height:1.1; color:#0f2744; }}
-  .kpi-label {{ font-size:12.5px; color:#5b6b80; line-height:1.35; }}
-  .row-note {{ font-size:11.5px; color:#6b7a8f; margin-top:3px; line-height:1.4; }}
-  .num {{ font-variant-numeric:tabular-nums; white-space:nowrap; }}
-  .blank {{ color:#9a6a00; background:#fff8e6; border:1px solid #f0dfae; border-radius:4px; padding:1px 5px; font-size:12px; white-space:nowrap; }}
-  .flag-ref {{ font-size:11px; color:#8a5a00; }}
-  .lede {{ font-size:15px; line-height:1.6; color:#33415c; }}
-</style>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
-<aside class="sidebar">
-  <a class="brand" href="index.html"><span class="brand-mark">Z</span><span>Zone2<small>Affiliate intelligence</small></span></a>
-  <div class="side-label">EXECUTIVE SUMMARY</div>
-  <nav class="nav">
-    <a class="nav-link" href="index.html">Dashboard</a>
-    <a class="nav-link active" href="summary.html">Executive summary</a>
-    <a class="nav-link" href="products.html">Products</a>
-    <a class="nav-link" href="analysis.html">Analysis</a>
-    <a class="nav-link" href="marketing/index.html">Published copy</a>
-    <a class="nav-link" href="compliance.html">Compliance</a>
-    <a class="nav-link" href="verification.html">Verification log</a>
-    <a class="nav-link" href="sources.html">Sources</a>
-    <a class="nav-link" href="flagged.html">Flagged for review</a>
-    <a class="nav-link" href="pages/index.html">Findings hub</a>
-  </nav>
-  <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Verified data only</strong><small>2026-11-14 &middot; blank = unconfirmed</small></div></div>
-</aside>
-<main class="main">
-  <header class="topbar">
-    <div class="crumb"><a href="index.html">Zone2</a> <span>/</span> <strong>Executive summary</strong></div>
-    <div class="top-right"><span class="live-tag"><i></i> Live on GitHub Pages</span></div>
-  </header>
+{sidebar_html("summary.html")}
+  <main class="main" id="main">
+  {topbar_html("Executive summary")}
   <div class="content">
     <div class="disclosure"><strong>Affiliate disclosure:</strong> {DISCLOSURE}</div>
 

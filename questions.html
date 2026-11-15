@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The open questions behind every decision on this project: what is already known and who says so, what is missing, exactly how to obtain it, and where the answer would come from.">
+<title>Questions &amp; information needed &middot; Zone2</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="index.html"><span class="brand-mark">Z</span><span>Zone2<small>Affiliate intelligence</small></span></a>
+    <nav class="nav" aria-label="Primary">
+      <div class="nav-group"><span class="nav-label">Site</span><a class="nav-link" href="index.html">Dashboard</a><a class="nav-link" href="summary.html">Executive summary</a></div>
+      <div class="nav-group"><span class="nav-label">Research</span><a class="nav-link" href="products.html">Products</a><a class="nav-link" href="analysis.html">Analysis</a><a class="nav-link" href="content.html">Content</a><a class="nav-link" href="marketing/index.html">Published copy</a></div>
+      <div class="nav-group"><span class="nav-label">Compliance</span><a class="nav-link" href="compliance.html">Compliance</a><a class="nav-link" href="tracking.html">Tracking</a></div>
+      <div class="nav-group"><span class="nav-label">Decide</span><a class="nav-link" href="suggestions.html">Suggestions</a><a class="nav-link active" href="questions.html">Questions</a></div>
+      <div class="nav-group"><span class="nav-label">Evidence</span><a class="nav-link" href="verification.html">Verification</a><a class="nav-link" href="sources.html">Sources</a><a class="nav-link" href="flagged.html">Flagged for review</a></div>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="status-dot"></div>
+      <div><strong>Verified data only</strong><small>blank = unconfirmed</small></div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="crumb"><a href="index.html">Zone2</a> <span>/</span> <strong>Questions &amp; information needed</strong></div>
+      <div class="top-right"><span class="live-tag"><i></i> Live on GitHub Pages</span><a class="chip" href="index.html">Dashboard</a></div>
+    </header>
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">register &amp;middot; as of 2026-11-15 &amp;middot; generated from ledger/questions.json</div>
+          <h1>Questions &amp; information needed</h1>
+          <p>The open questions behind every decision on this project: what is already known and who says so, what is missing, exactly how to obtain it, and where the answer would come from.</p>
+        </div>
+      </div>
+      <div class="disclosure">
+        <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement &sect;5):</strong>
+        As an Amazon Associate I earn from qualifying purchases.
+      </div>
+<section class="kpis"><div class="kpi"><div class="num">14</div><div class="lbl">questions on the register</div><div class="kpi-sub">14 still open, 0 answered</div></div><div class="kpi"><div class="num">5</div><div class="lbl">P1 questions</div><div class="kpi-sub">they block revenue or compliance</div></div><div class="kpi"><div class="num">10</div><div class="lbl">need an owner answer</div><div class="kpi-sub">the repository cannot obtain these itself</div></div><div class="kpi"><div class="num">1</div><div class="lbl">can be closed from a public page</div><div class="kpi-sub">once the identity questions are answered</div></div></section>
+    <section class="card">
+      <h2>How this register works</h2>
+      <ul class="checklist">
+        <li><span class="check">1</span>Every row states the question, the decision it blocks, what is already known and the official page that says so, what is missing, and the concrete step that closes it.</li>
+        <li><span class="check">2</span>The answer column stays empty until an official source or the owner supplies it. An empty cell is a task, not a gap in the research.</li>
+        <li><span class="check">3</span>A question marked <code>owner account</code> or <code>owner decision</code> cannot be closed from the public web at all &mdash; it needs the account holder, and this repository will not guess it.</li>
+        <li><span class="check">4</span>Each question names the suggestions that depend on it, so a suggestion cannot be started while its question is open &mdash; only planned.</li>
+        <li><span class="check">5</span>Questions are re-opened whenever the verification pass changes what is known. The register is generated from <code>ledger/questions.json</code>, so it cannot drift from the flag register.</li>
+      </ul>
+      <p class="card-note">Read with the <a href="suggestions.html">Suggestions register</a>: a suggestion names the question it
+      depends on, and a question names the discovery step that unblocks it.</p>
+    </section>
+    <section class="card">
+      <h2>Every open question, in one table</h2>
+      <p class="card-note">The answer column is empty on purpose: it is filled only when an official source or
+      the owner supplies the answer. The note under each empty cell is the discovery step that closes it.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption>Open questions register, generated from ledger/questions.json.</caption>
+          <thead><tr><th scope="col">ID</th><th scope="col">Question</th><th scope="col">Decision it blocks</th>
+          <th scope="col">Priority</th><th scope="col">Answer</th><th scope="col">Status</th></tr></thead>
+          <tbody><tr><th scope="row"><a class="row-id" href="#Q-01">Q-01</a></th><td>Which 10-character ASINs did the brief actually intend to promote?</td><td>Every downstream decision that depends on product identity: keyword selection, the product rows that may be written about, structured data, the category band used for revenue modelling, and the campaign registry. Nothing in the platform can be configured against an identifier that has not been confirmed.</td><td><span class="pill pill-flag">P1</span><div class="cell-note">(blocks revenue or compliance)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner action: ask whoever supplied the three links for the 10-character ASINs, or open the three links while signed in to the owning Associates account and confirm the product on each destination page against the brief.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-02">Q-02</a></th><td>What Associates ID (tracking tag) and target marketplace should every outbound link carry?</td><td>Whether the site can earn anything at all. The link builder refuses to emit a Special Link without a tag, so the live link surface cannot be produced, and no campaign may be switched on.</td><td><span class="pill pill-flag">P1</span><div class="cell-note">(blocks revenue or compliance)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner action: read the assigned tracking ID from the owning Associates account and write it into ledger/site_config.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-03">Q-03</a></th><td>Has the owning account been granted Creators API access, and if not, on what date does it become eligible?</td><td>Whether the platform can source catalog data at all. Without it, product identity, price context, ratings and demand signals stay unavailable, so modules M-01 to M-05 remain scaffolds and the niche queue stays empty by design.</td><td><span class="pill pill-flag">P1</span><div class="cell-note">(blocks revenue or compliance)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner action: request Creators API access from the account's API tools area and record the approval date and the sales figure that satisfied the prerequisite.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-04">Q-04</a></th><td>Which published commission band applies to each of the three products, and do any of them qualify for a Bounty Event?</td><td>Revenue modelling (M-06) and the order in which content is produced. Without the band, no expected-value comparison between two candidate products is possible, and no priority ranking between them can be justified.</td><td><span class="pill pill-flag">P1</span><div class="cell-note">(blocks revenue or compliance)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner action: with Creators API access, look the confirmed ASINs up and read the browse-node/category fields from the item record, then match the node against the published band table already transcribed in ledger/commission_table.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-05">Q-05</a></th><td>What is the measured traffic and earnings baseline for this site today?</td><td>Prioritisation. Which content gets written next, which pages get retired and which campaigns get budget all depend on a baseline. Without it, every prioritisation decision is a guess and the optimiser is blocked by design.</td><td><span class="pill pill-flag">P1</span><div class="cell-note">(blocks revenue or compliance)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner action: export a dated report from the owning Associates account and attach it to the repository; site-side, first-party click counts become available once the redirect tracker in tools/redirect_server.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-06">Q-06</a></th><td>Which page format - product article, comparison, buying guide or how-to - actually produces clicks and conversions in this niche?</td><td>The editorial mix. If the site's traffic comes from how-to queries rather than product queries, the content budget should be allocated very differently, and the whole M-07 content engine is pointed at the wrong output types.</td><td><span class="pill pill-warn">P2</span><div class="cell-note">(blocks scale)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner action: let the site run with one campaign key per page format (static labels only - a sub-tag may never be tied to an end user), then read the format split out of a dated Associates report and a first-party click log.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-07">Q-07</a></th><td>Should the site publish hands-on editorial opinions and product reviews, or stay strictly on manufacturer-stated specifications?</td><td>The scope of the content engine, the structured-data strategy and the risk profile of every article. It decides whether Google product/review markup can ever be used, and it decides how much editorial voice the content may carry.</td><td><span class="pill pill-warn">P2</span><div class="cell-note">(blocks scale)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner decision, informed by the cited rules.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-08">Q-08</a></th><td>Should product prices ever appear on the site, and if so from which permitted source?</td><td>The pricing module M-03 and the shape of every comparison table. It also decides whether the pricing analysis module can exist at all in its current form.</td><td><span class="pill pill-warn">P2</span><div class="cell-note">(blocks scale)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner decision, then - if prices are wanted - read the permitted price field out of a live Creators API GetItems response for the confirmed ASINs and document the response shape.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-09">Q-09</a></th><td>Is there an existing audience, domain, newsletter list or social account this site should be built on top of?</td><td>Domain choice, the launch channel and the realistic traffic baseline. It decides whether this is a cold-start site or a distribution into an audience that already exists - the difference between weeks and months of organic traffic.</td><td><span class="pill pill-warn">P2</span><div class="cell-note">(blocks scale)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner answer.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-10">Q-10</a></th><td>Who is the intended reader - household size, counter space, cooking habits - and what decision are they making at the moment they land?</td><td>The angle of every article, the structure of every comparison table and the choice of keyword. Without a reader, the content engine optimises for nothing in particular and the pages read like reference material - which is exactly the 'slop' failure mode the brief calls out.</td><td><span class="pill pill-warn">P2</span><div class="cell-note">(blocks scale)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner answer plus dated operator observation: record, for a fixed query set, which Amazon listings rank and how they are positioned, and log those snapshots in ledger/serp_observations.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-11">Q-11</a></th><td>What is the seasonal shape of demand for this category, and when should each article be published and refreshed?</td><td>The publishing calendar and the refresh cadence of evergreen pages - which decides whether the site publishes three articles a year or a steady weekly cadence.</td><td><span class="pill pill-muted">P3</span><div class="cell-note">(blocks polish)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Dated operator observation: take the same query set at fixed intervals, log the results and the demand proxies available at the time, and keep the snapshots.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-12">Q-12</a></th><td>Which external tools may be used for search measurement and audience analysis, and what consent regime applies to them?</td><td>The measurement stack. It decides what can be measured at all, and whether that measurement is lawful in the audience's jurisdiction.</td><td><span class="pill pill-warn">P2</span><div class="cell-note">(blocks scale)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner decision, with the consent rule stated per tool.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-13">Q-13</a></th><td>Who owns the next decision, and when is the next review of this register due?</td><td>Everything in the Suggestions register. A proposal with no owner and no review date is a wish, not a plan; this is the question that decides whether the suggestions page is a decision tool or a reading list.</td><td><span class="pill pill-muted">P3</span><div class="cell-note">(blocks polish)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner answer, recorded in the suggestions register.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr><tr><th scope="row"><a class="row-id" href="#Q-14">Q-14</a></th><td>Should the site stay a single repository of record, or should the companion research surfaces be folded into one publication?</td><td>The information architecture of the published site - which is also what the reader experiences as polish. Six sibling surfaces today each carry their own navigation, their own flag register and their own version of the same three products.</td><td><span class="pill pill-muted">P3</span><div class="cell-note">(blocks polish)</div></td><td class="cell-answer"><span class="blank">not yet answered</span><div class="cell-note">Owner decision, informed by the suggestion SG-18, which lists the consolidation options with their cost.</div></td><td><span class="pill pill-warn">OPEN</span></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <h2 class="section-h">Full detail, one card per question</h2>
+    <article class="qcard" id="Q-01">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-01 &middot; P1 (blocks revenue or compliance)</p>
+          <h2>Which 10-character ASINs did the brief actually intend to promote?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>Every downstream decision that depends on product identity: keyword selection, the product rows that may be written about, structured data, the category band used for revenue modelling, and the campaign registry. Nothing in the platform can be configured against an identifier that has not been confirmed.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The three supplied codes (B04G1MEwY, B02NbDxp3, B00hJ57DV) are 9 characters; Amazon's own help page states that an ASIN is the 10-character code Amazon uses for a specific product. The three link.amazon URLs each resolve reproducibly to one specific Amazon product page (B0CDY277D3, B09B7SB46R, B08DKYBTPH), and an unknown 9-character code on the same service returns a 404, so the service honours the token. No public Amazon document binds a link.amazon code to a product ASIN, so the code-to-destination binding is observed behaviour, not documented intent.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">S24 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer">S33 &middot; link.amazon<span class="src-kind">supplied</span></a> <a class="src" href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer">S34 &middot; link.amazon<span class="src-kind">supplied</span></a> <a class="src" href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer">S35 &middot; link.amazon<span class="src-kind">supplied</span></a> <a class="src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">S19 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">S20 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">S21 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://link.amazon/B00TEST12" target="_blank" rel="noopener noreferrer">S32 &middot; link.amazon<span class="src-kind">control</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>A confirmation from the party that issued the brief that the three destinations are the products to be marketed, or the three 10-character ASINs themselves. The repository cannot obtain this from any public page.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner action: ask whoever supplied the three links for the 10-character ASINs, or open the three links while signed in to the owning Associates account and confirm the product on each destination page against the brief. Until then the published position stays 'the product this link resolves to'.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">S24 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner decision &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one message to the link provider, or one signed-in session in the owning account.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-01">F-01</a> <a class="chip chip-sm" href="pages/flags.html#F-02">F-02</a> <a class="chip chip-sm" href="pages/flags.html#F-03">F-03</a> <a class="chip chip-sm" href="pages/flags.html#F-06">F-06</a> <a class="chip chip-sm" href="pages/flags.html#F-20">F-20</a> <a class="chip chip-sm" href="pages/flags.html#F-21">F-21</a> <a class="chip chip-sm" href="pages/flags.html#F-28">F-28</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-06</a> <a class="chip chip-sm" href="pages/compliance.html">R-20</a> <a class="chip chip-sm" href="pages/compliance.html">R-21</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-01-product-research.html">M-01</a> <a class="chip chip-sm" href="pages/modules/m-06-commission-revenue-modelling.html">M-06</a> <a class="chip chip-sm" href="pages/modules/m-07-seo-content-generation.html">M-07</a> <a class="chip chip-sm" href="pages/modules/m-08-publishing-link-management.html">M-08</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-01">SG-01</a> <a class="chip chip-sm" href="suggestions.html#SG-03">SG-03</a> <a class="chip chip-sm" href="suggestions.html#SG-06">SG-06</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-02">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-02 &middot; P1 (blocks revenue or compliance)</p>
+          <h2>What Associates ID (tracking tag) and target marketplace should every outbound link carry?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>Whether the site can earn anything at all. The link builder refuses to emit a Special Link without a tag, so the live link surface cannot be produced, and no campaign may be switched on.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The Participation Requirements state that a Special Link must use the assigned Associates ID and be accessed directly from the Site. Amazon publishes the qualifying format as a tagged /dp/ link. Every URL that the three supplied links resolve to carries no tag parameter, so as supplied they cannot attribute a sale. No Associates ID is stored anywhere in this repository and none may be invented.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">S24 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">S19 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">S20 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">S21 &middot; www.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>The tracking ID string and the marketplace it belongs to. These are account facts that do not appear on any public page.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner action: read the assigned tracking ID from the owning Associates account and write it into ledger/site_config.json (the field validate_data.py already reads). The Special Link format that carries it is published at the cited help page.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">S24 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/welcome/topic/tools" target="_blank" rel="noopener noreferrer">S09 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner account &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: minutes, once the account exists.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-07">F-07</a> <a class="chip chip-sm" href="pages/flags.html#F-24">F-24</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-07</a> <a class="chip chip-sm" href="pages/compliance.html">R-08</a> <a class="chip chip-sm" href="pages/compliance.html">R-14</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-08-publishing-link-management.html">M-08</a> <a class="chip chip-sm" href="pages/modules/m-09-click-conversion-tracking.html">M-09</a> <a class="chip chip-sm" href="pages/modules/m-10-campaign-optimization-loop.html">M-10</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-02">SG-02</a> <a class="chip chip-sm" href="suggestions.html#SG-03">SG-03</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-03">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-03 &middot; P1 (blocks revenue or compliance)</p>
+          <h2>Has the owning account been granted Creators API access, and if not, on what date does it become eligible?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>Whether the platform can source catalog data at all. Without it, product identity, price context, ratings and demand signals stay unavailable, so modules M-01 to M-05 remain scaffolds and the niche queue stays empty by design.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>Amazon's deprecation notice states that PA-API 5.0 calls return 403 AccessDenied and that integrators must migrate to the Creators API. The Creators API documentation lists a prerequisite of at least 10 qualifying sales in the past 30 days, and Amazon's application-review guidance asks for at least three qualifying sales within the first 180 days. The repo's API client is built against the Creators API and returns BLOCKED rather than scraping.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener noreferrer">S06 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener noreferrer">S31 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer">S07 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items" target="_blank" rel="noopener noreferrer">S08 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>The account's actual access status and the qualifying-sales count. Both are private to the account.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner action: request Creators API access from the account's API tools area and record the approval date and the sales figure that satisfied the prerequisite. Until then the API client stays in its BLOCKED state and no catalog row may be written.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer">S07 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" target="_blank" rel="noopener noreferrer">S06 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner account &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one request plus a wait for the sales threshold to be met.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-05">F-05</a> <a class="chip chip-sm" href="pages/flags.html#F-08">F-08</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-20</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-01-product-research.html">M-01</a> <a class="chip chip-sm" href="pages/modules/m-02-trend-demand-detection.html">M-02</a> <a class="chip chip-sm" href="pages/modules/m-03-pricing-analysis.html">M-03</a> <a class="chip chip-sm" href="pages/modules/m-04-review-analysis.html">M-04</a> <a class="chip chip-sm" href="pages/modules/m-11-niche-discovery.html">M-11</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-03">SG-03</a> <a class="chip chip-sm" href="suggestions.html#SG-11">SG-11</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-04">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-04 &middot; P1 (blocks revenue or compliance)</p>
+          <h2>Which published commission band applies to each of the three products, and do any of them qualify for a Bounty Event?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>Revenue modelling (M-06) and the order in which content is produced. Without the band, no expected-value comparison between two candidate products is possible, and no priority ranking between them can be justified.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>Amazon publishes the Standard Commission Income Statement with eleven fixed rate bands plus an 'All Other Categories' rate, and a separate Special Commission Income appendix listing 46 Bounty Events and 2 Bonus Events. All three destinations are Home &amp; Kitchen small appliances by their Amazon titles, and a category published at 0.00% is ineligible for the queue by design.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">S28 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">S04 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">S19 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">S20 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">S21 &middot; www.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>The band each product's browse node actually maps to under the published table, and whether its purchase type triggers a Bounty Event. The public statement lists the bands but does not map a product to one; that mapping comes from a catalog record.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner action: with Creators API access, look the confirmed ASINs up and read the browse-node/category fields from the item record, then match the node against the published band table already transcribed in ledger/commission_table.json. Until a catalog record exists the band stays blank.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items" target="_blank" rel="noopener noreferrer">S08 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">S28 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">S04 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: official public page &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Platform, once Q-01 and Q-03 are answered
+        <span class="foot-label">Effort:</span> Estimate: hours, after access exists.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-03">F-03</a> <a class="chip chip-sm" href="pages/flags.html#F-07">F-07</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-06</a> <a class="chip chip-sm" href="pages/compliance.html">R-15</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-06-commission-revenue-modelling.html">M-06</a> <a class="chip chip-sm" href="pages/modules/m-11-niche-discovery.html">M-11</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-03">SG-03</a> <a class="chip chip-sm" href="suggestions.html#SG-05">SG-05</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-05">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-05 &middot; P1 (blocks revenue or compliance)</p>
+          <h2>What is the measured traffic and earnings baseline for this site today?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>Prioritisation. Which content gets written next, which pages get retired and which campaigns get budget all depend on a baseline. Without it, every prioritisation decision is a guess and the optimiser is blocked by design.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The Operating Agreement states that Amazon makes no representation, warranty or covenant about the amount of traffic or commission income an Associate can expect. No click, conversion or earnings report exists in this repository, and the optimiser refuses to act without at least 30 clicks and a dated report. Amazon's application guidance expects content to be recent and original, which presupposes an existing audience to publish for.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">S01 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>Session counts, clicks, conversion rate and earnings - for the site as it exists and for any comparable site the owner already runs. No such figure is published here because none has been measured.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner action: export a dated report from the owning Associates account and attach it to the repository; site-side, first-party click counts become available once the redirect tracker in tools/redirect_server.py is deployed. Any figure quoted before that is an estimate and must be labelled as one.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">S01 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: private report &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one report export plus one deploy of the tracker.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-08">F-08</a> <a class="chip chip-sm" href="pages/flags.html#F-19">F-19</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-13</a> <a class="chip chip-sm" href="pages/compliance.html">R-15</a> <a class="chip chip-sm" href="pages/compliance.html">R-19</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-09-click-conversion-tracking.html">M-09</a> <a class="chip chip-sm" href="pages/modules/m-10-campaign-optimization-loop.html">M-10</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-10">SG-10</a> <a class="chip chip-sm" href="suggestions.html#SG-11">SG-11</a> <a class="chip chip-sm" href="suggestions.html#SG-12">SG-12</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-06">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-06 &middot; P2 (blocks scale)</p>
+          <h2>Which page format - product article, comparison, buying guide or how-to - actually produces clicks and conversions in this niche?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>The editorial mix. If the site's traffic comes from how-to queries rather than product queries, the content budget should be allocated very differently, and the whole M-07 content engine is pointed at the wrong output types.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The published rate statement defines how a Qualifying Purchase accrues within a Session, so a conversion is measurable once the site has traffic. The repo's scoring code returns INSUFFICIENT_DATA rather than a default when an input is missing, and its niche ranking inputs list 'own click/earnings history' as MISSING.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">S04 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>Per-format click and conversion counts. No page of this site has yet received measurable traffic, so no format can be ranked.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner action: let the site run with one campaign key per page format (static labels only - a sub-tag may never be tied to an end user), then read the format split out of a dated Associates report and a first-party click log.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer">S12 &middot; developers.google.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: private report &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one reporting cycle after launch.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-08">F-08</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-08</a> <a class="chip chip-sm" href="pages/compliance.html">R-13</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-07-seo-content-generation.html">M-07</a> <a class="chip chip-sm" href="pages/modules/m-09-click-conversion-tracking.html">M-09</a> <a class="chip chip-sm" href="pages/modules/m-10-campaign-optimization-loop.html">M-10</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-07">SG-07</a> <a class="chip chip-sm" href="suggestions.html#SG-10">SG-10</a> <a class="chip chip-sm" href="suggestions.html#SG-12">SG-12</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-07">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-07 &middot; P2 (blocks scale)</p>
+          <h2>Should the site publish hands-on editorial opinions and product reviews, or stay strictly on manufacturer-stated specifications?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>The scope of the content engine, the structured-data strategy and the risk profile of every article. It decides whether Google product/review markup can ever be used, and it decides how much editorial voice the content may carry.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The Participation Requirements forbid inaccurate, overbroad or misleading claims about a product, and require that content not be altered and that customer reviews be displayed only when obtained through the licensed API. Google's documentation describes Product, Review and Offer structured data, and notes that editorial product reviews can expose pros and cons. The FTC requires a material connection to be disclosed clearly and conspicuously.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing" target="_blank" rel="noopener noreferrer">S14 &middot; developers.google.com<span class="src-kind">official</span></a> <a class="src" href="https://developers.google.com/search/blog/2022/08/pros-and-cons-structured-data" target="_blank" rel="noopener noreferrer">S15 &middot; developers.google.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B00hJ57DV" target="_blank" rel="noopener noreferrer">S18 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer">S10 &middot; www.ftc.gov<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>An editorial-policy decision from the owner, and a statement of whether any hands-on testing exists at all. This repository contains no test data: every product row is a manufacturer statement or an Amazon listing statement.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner decision, informed by the cited rules. The default position already published - specification-led pages, no star ratings, no hands-on claims - is compliant and may simply be confirmed. If hands-on testing is planned, a test protocol must exist before any opinion is published.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer">S10 &middot; www.ftc.gov<span class="src-kind">official</span></a> <a class="src" href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing" target="_blank" rel="noopener noreferrer">S14 &middot; developers.google.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner decision &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one decision.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-06">F-06</a> <a class="chip chip-sm" href="pages/flags.html#F-22">F-22</a> <a class="chip chip-sm" href="pages/flags.html#F-23">F-23</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-06</a> <a class="chip chip-sm" href="pages/compliance.html">R-10</a> <a class="chip chip-sm" href="pages/compliance.html">R-21</a> <a class="chip chip-sm" href="pages/compliance.html">R-18</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-04-review-analysis.html">M-04</a> <a class="chip chip-sm" href="pages/modules/m-07-seo-content-generation.html">M-07</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-04">SG-04</a> <a class="chip chip-sm" href="suggestions.html#SG-07">SG-07</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-08">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-08 &middot; P2 (blocks scale)</p>
+          <h2>Should product prices ever appear on the site, and if so from which permitted source?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>The pricing module M-03 and the shape of every comparison table. It also decides whether the pricing analysis module can exist at all in its current form.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The Participation Requirements limit price and availability display to prices served by Amazon in the link or supplied by the licensed API, and govern how prices from other retailers must be handled in a comparison. A separate requirement states that, unless otherwise agreed by Amazon, the Site must not have price tracking or price-alerting functionality - a rule added to this repository's compliance ledger as R-22. This project currently publishes no price at all, which the deploy gate enforces.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer">S29 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>An owner decision, plus the answer to whether the Creators API response for these items carries a price field. The repository has no API credentials and therefore no observation of the response.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner decision, then - if prices are wanted - read the permitted price field out of a live Creators API GetItems response for the confirmed ASINs and document the response shape. No price may be typed into a page.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items" target="_blank" rel="noopener noreferrer">S08 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements" target="_blank" rel="noopener noreferrer">S29 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner decision &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one decision, plus one API response once access exists.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-36">F-36</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-04</a> <a class="chip chip-sm" href="pages/compliance.html">R-05</a> <a class="chip chip-sm" href="pages/compliance.html">R-22</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-03-pricing-analysis.html">M-03</a> <a class="chip chip-sm" href="pages/modules/m-07-seo-content-generation.html">M-07</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-05">SG-05</a> <a class="chip chip-sm" href="suggestions.html#SG-03">SG-03</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-09">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-09 &middot; P2 (blocks scale)</p>
+          <h2>Is there an existing audience, domain, newsletter list or social account this site should be built on top of?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>Domain choice, the launch channel and the realistic traffic baseline. It decides whether this is a cold-start site or a distribution into an audience that already exists - the difference between weeks and months of organic traffic.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>Amazon's application-review guidance expects Sites to carry robust original content - at least ten posts as a rule of thumb - and to publish content that is generally from the last 60 days. The Program Policies permit Special Links in email, SMS and direct messaging provided the communication was solicited, with the disclosure rules still applying. Nothing in the brief names an existing channel.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>Whether the owner has an existing site, list or following, and the size of it. None of this is on any public page.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner answer. It determines the domain and whether the launch plan is a cold start or a cross-post to an existing audience.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner decision &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one message.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-07">F-07</a> <a class="chip chip-sm" href="pages/flags.html#F-08">F-08</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-09</a> <a class="chip chip-sm" href="pages/compliance.html">R-12</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-09-click-conversion-tracking.html">M-09</a> <a class="chip chip-sm" href="pages/modules/m-12-scalability-automation-substrate.html">M-12</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-12">SG-12</a> <a class="chip chip-sm" href="suggestions.html#SG-15">SG-15</a> <a class="chip chip-sm" href="suggestions.html#SG-17">SG-17</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-10">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-10 &middot; P2 (blocks scale)</p>
+          <h2>Who is the intended reader - household size, counter space, cooking habits - and what decision are they making at the moment they land?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>The angle of every article, the structure of every comparison table and the choice of keyword. Without a reader, the content engine optimises for nothing in particular and the pages read like reference material - which is exactly the 'slop' failure mode the brief calls out.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The three destinations differ in a way that matters to a reader: one is 6 qt in two independent baskets at 1700 W, one is 26 qt with French doors and a stated 10-in-1 mode set, and one is an 8 qt single-basket model whose Amazon title advertises 450 F while the same page's bullet list and specification block, and the manufacturer, state 200-400 F. Those verified differences are the raw material for reader-centred angles.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://chefman.com/products/turbofry-touch-dual-window-air-fryer" target="_blank" rel="noopener noreferrer">S25 &middot; chefman.com<span class="src-kind">manufacturer</span></a> <a class="src" href="https://chefman.com/products/turbofry-touch-air-fryer-1" target="_blank" rel="noopener noreferrer">S26 &middot; chefman.com<span class="src-kind">manufacturer</span></a> <a class="src" href="https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360" target="_blank" rel="noopener noreferrer">S27 &middot; www.emerileveryday.com<span class="src-kind">manufacturer</span></a> <a class="src" href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="noopener noreferrer">S21 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="noopener noreferrer">S19 &middot; www.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="noopener noreferrer">S20 &middot; www.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>The reader definition and the target household. There is no customer research in this repository, and Amazon's own review data is unavailable without the licensed API.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner answer plus dated operator observation: record, for a fixed query set, which Amazon listings rank and how they are positioned, and log those snapshots in ledger/serp_observations.json. That turns 'who is the reader' into an observed set rather than an assumption.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer">S07 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner decision &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one conversation plus a first round of dated snapshots.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-19">F-19</a> <a class="chip chip-sm" href="pages/flags.html#F-22">F-22</a> <a class="chip chip-sm" href="pages/flags.html#F-23">F-23</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-06</a> <a class="chip chip-sm" href="pages/compliance.html">R-12</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-02-trend-demand-detection.html">M-02</a> <a class="chip chip-sm" href="pages/modules/m-05-competition-assessment.html">M-05</a> <a class="chip chip-sm" href="pages/modules/m-07-seo-content-generation.html">M-07</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-06">SG-06</a> <a class="chip chip-sm" href="suggestions.html#SG-07">SG-07</a> <a class="chip chip-sm" href="suggestions.html#SG-11">SG-11</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-11">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-11 &middot; P3 (blocks polish)</p>
+          <h2>What is the seasonal shape of demand for this category, and when should each article be published and refreshed?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>The publishing calendar and the refresh cadence of evergreen pages - which decides whether the site publishes three articles a year or a steady weekly cadence.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>Nothing in this repository measures demand. The niche ledger lists 'catalog demand / sales-rank trajectory over &gt;=2 dated snapshots' as a MISSING ranking input and requires a dated, operator-observed search-results sample as a further input. Amazon's application guidance asks for content that is generally from the last 60 days, which is a recency expectation the site must meet to stay in good standing.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">S04 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer">S07 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>Two or more dated snapshots of demand for the candidate queries. One observation is not a trend; the repo's own scoring rule refuses to score on a single data point.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Dated operator observation: take the same query set at fixed intervals, log the results and the demand proxies available at the time, and keep the snapshots. The SERP observation file already exists in the repository for this purpose.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" target="_blank" rel="noopener noreferrer">S07 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer">S23 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: dated observation &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner with the platform
+        <span class="foot-label">Effort:</span> Estimate: two dated observation rounds before any trend claim is possible.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-08">F-08</a> <a class="chip chip-sm" href="pages/flags.html#F-11">F-11</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-12</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-02-trend-demand-detection.html">M-02</a> <a class="chip chip-sm" href="pages/modules/m-07-seo-content-generation.html">M-07</a> <a class="chip chip-sm" href="pages/modules/m-12-scalability-automation-substrate.html">M-12</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-12">SG-12</a> <a class="chip chip-sm" href="suggestions.html#SG-11">SG-11</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-12">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-12 &middot; P2 (blocks scale)</p>
+          <h2>Which external tools may be used for search measurement and audience analysis, and what consent regime applies to them?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>The measurement stack. It decides what can be measured at all, and whether that measurement is lawful in the audience's jurisdiction.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The FTC requires a material connection to be disclosed clearly and conspicuously and treats placement as part of the disclosure. Google asks that affiliate links carry rel=&quot;sponsored&quot;. This project currently runs privacy-minimal first-party click counting with no cookies, no IP storage and no visitor identifiers, because the platform's own rules forbid associating a sub-tag with a specific end user.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer">S10 &middot; www.ftc.gov<span class="src-kind">official</span></a> <a class="src" href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer">S12 &middot; developers.google.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>The owner's choice of analytics and search tools, their jurisdictions and their consent requirements. No external analytics tool is used or approved in this repository today.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner decision, with the consent rule stated per tool. If a jurisdiction requires consent before storage or before a non-essential tag loads, that rule is written into the deploy gate rather than left to the reader.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer">S10 &middot; www.ftc.gov<span class="src-kind">official</span></a> <a class="src" href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer">S12 &middot; developers.google.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner decision &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one decision per tool.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-08">F-08</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-03</a> <a class="chip chip-sm" href="pages/compliance.html">R-08</a> <a class="chip chip-sm" href="pages/compliance.html">R-17</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-09-click-conversion-tracking.html">M-09</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-09">SG-09</a> <a class="chip chip-sm" href="suggestions.html#SG-15">SG-15</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-13">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-13 &middot; P3 (blocks polish)</p>
+          <h2>Who owns the next decision, and when is the next review of this register due?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>Everything in the Suggestions register. A proposal with no owner and no review date is a wish, not a plan; this is the question that decides whether the suggestions page is a decision tool or a reading list.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>This repository is source-governed and every open item already carries an owner field in the flag register, with items recorded as closed once their action was taken. The Operating Agreement and the Program Policies both carry update dates and may change without notice, which the flag register already tracks as a standing item.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">S01 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>The named decision-maker for this site and a review cadence. The brief asks for suggestions that someone can review and choose from; who that someone is has never been recorded.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner answer, recorded in the suggestions register. Recommended default: re-review this register at every publishing cycle and re-verify the two governing policy pages on the same schedule, since both carry their own update dates.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">S01 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a> <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">S02 &middot; affiliate-program.amazon.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner decision &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one answer.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-11">F-11</a>
+        <span class="foot-label">Rules:</span> <span class=blank>none</span>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-10-campaign-optimization-loop.html">M-10</a> <a class="chip chip-sm" href="pages/modules/m-12-scalability-automation-substrate.html">M-12</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-16">SG-16</a> <a class="chip chip-sm" href="suggestions.html#SG-18">SG-18</a>
+      </footer>
+    </article>
+    <article class="qcard" id="Q-14">
+      <header class="qcard-head">
+        <div>
+          <p class="eyebrow">Q-14 &middot; P3 (blocks polish)</p>
+          <h2>Should the site stay a single repository of record, or should the companion research surfaces be folded into one publication?</h2>
+        </div>
+        <span class="pill pill-warn">OPEN</span>
+      </header>
+      <div class="qcard-grid">
+        <section>
+          <h3>Decision it blocks</h3>
+          <p>The information architecture of the published site - which is also what the reader experiences as polish. Six sibling surfaces today each carry their own navigation, their own flag register and their own version of the same three products.</p>
+        </section>
+        <section>
+          <h3>What we already know</h3>
+          <p>The tree today publishes the primary dashboard, a generated findings namespace under pages/, and five companion surfaces (research-hub, zone2, northstar, affiliate-lab, revalidation) plus the marketing set. The flag register records that the northstar prototype duplicates an earlier dashboard and now drifts from the primary site, and that another companion's summary rows are still block-sourced rather than per-row sourced. Every surface links to the others, so the reader can reach six different presentations of the same facts.</p>
+          <p class="cell-note">Official sources: <a class="src" href="https://docs.github.com/en/rest/pages/pages" target="_blank" rel="noopener noreferrer">S22 &middot; docs.github.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section>
+          <h3>What is missing</h3>
+          <p>A decision on the target architecture. The repository has no owner preference recorded, and the cost of consolidation - rewriting six link structures and their verifiers - is real.</p>
+        </section>
+        <section>
+          <h3>How to obtain it</h3>
+          <p>Owner decision, informed by the suggestion SG-18, which lists the consolidation options with their cost. The verifiable state of each surface is already recorded in the flag register, so no further discovery is needed to make the choice.</p>
+          <p class="cell-note">Reference pages for the artifact sought: <a class="src" href="https://docs.github.com/en/rest/pages/pages" target="_blank" rel="noopener noreferrer">S22 &middot; docs.github.com<span class="src-kind">official</span></a></p>
+        </section>
+        <section class="span-2">
+          <h3>Answer</h3>
+          <div class="answer answer-open"><span class="blank">not yet answered</span><div class="cell-note">Answer source: owner decision &mdash; no public page states this.</div></div>
+        </section>
+      </div>
+      <footer class="qcard-foot">
+        <span class="foot-label">Owner:</span> Site owner
+        <span class="foot-label">Effort:</span> Estimate: one decision; the work is then scoped.
+        <span class="foot-label">Flags:</span> <a class="chip chip-sm" href="pages/flags.html#F-14">F-14</a> <a class="chip chip-sm" href="pages/flags.html#F-15">F-15</a> <a class="chip chip-sm" href="pages/flags.html#F-27">F-27</a> <a class="chip chip-sm" href="pages/flags.html#F-36">F-36</a>
+        <span class="foot-label">Rules:</span> <a class="chip chip-sm" href="pages/compliance.html">R-12</a>
+        <span class="foot-label">Modules:</span> <a class="chip chip-sm" href="pages/modules/m-12-scalability-automation-substrate.html">M-12</a>
+        <span class="foot-label">Suggestions:</span> <a class="chip chip-sm" href="suggestions.html#SG-13">SG-13</a> <a class="chip chip-sm" href="suggestions.html#SG-18">SG-18</a>
+      </footer>
+    </article>
+
+      <footer class="site">
+        <strong>Zone2</strong> &middot; every row on this page links to the official page it came from &middot;
+        <a href="pages/index.html">Findings hub</a> <span>&middot;</span> <a href="pages/categories/index.html">Commission categories</a> <span>&middot;</span> <a href="pages/flags.html">Flagged for review (generated)</a> <span>&middot;</span> <a href="research-hub/start.html">Affiliate Research Hub</a> <span>&middot;</span> <a href="revalidation/index.html">Revalidation 2026-11-14</a> <span>&middot;</span> <a href="affiliate-lab/index.html">Affiliate Lab</a>
+      </footer>
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -26,6 +26,9 @@ DATA_JS = REPO / "assets" / "js" / "data.js"
 PRODUCTS = json.loads((LEDGER / "products.json").read_text(encoding="utf-8"))
 FLAGS = json.loads((LEDGER / "flags.json").read_text(encoding="utf-8"))
 SOURCES = {s["id"]: s for s in json.loads((LEDGER / "sources.json").read_text(encoding="utf-8"))["sources"]}
+VERIFICATION = json.loads((LEDGER / "verification.json").read_text(encoding="utf-8"))
+SUGGESTIONS = json.loads((LEDGER / "suggestions.json").read_text(encoding="utf-8"))
+QUESTIONS = json.loads((LEDGER / "questions.json").read_text(encoding="utf-8"))
 
 
 def js(value) -> str:
@@ -165,6 +168,24 @@ def main() -> int:
     )
     if n_sub != 1:
         raise SystemExit(f"CANONICAL_FLAG_COUNT declaration missing from {DATA_JS}")
+
+    # The landing page states how many official sources and verification checks the site
+    # publishes. Those numbers are derived here from the ledgers rather than typed into the
+    # HTML, so they cannot drift the way a hand-written count did (F-17/F-26/F-35 class).
+    for name, value in (
+        ("SOURCE_COUNT", len(SOURCES)),
+        ("VERIFICATION_COUNT", len(VERIFICATION["rows"])),
+        ("SUGGESTION_COUNT", len(SUGGESTIONS["suggestions"])),
+        ("QUESTION_COUNT", len(QUESTIONS["questions"])),
+    ):
+        new, n = re.subn(
+            rf"const {name} = \d+;",
+            f"const {name} = {value};",
+            new,
+            count=1,
+        )
+        if n != 1:
+            raise SystemExit(f"{name} declaration missing from {DATA_JS}")
 
     if args.check:
         if new != text:

@@ -8,24 +8,38 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
   <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a><a href="products.html">Products</a><a href="analysis.html">Analysis</a><a href="content.html">Content</a><a href="compliance.html">Compliance</a><a href="tracking.html">Tracking</a><a href="verification.html">Verification</a><a href="sources.html" class="active">Sources</a><a href="flagged.html">Flagged for Review</a>
+    <a class="brand" href="index.html"><span class="brand-mark">Z</span><span>Zone2<small>Affiliate intelligence</small></span></a>
+    <nav class="nav" aria-label="Primary">
+      <div class="nav-group"><span class="nav-label">Site</span><a class="nav-link" href="index.html">Dashboard</a><a class="nav-link" href="summary.html">Executive summary</a></div>
+      <div class="nav-group"><span class="nav-label">Research</span><a class="nav-link" href="products.html">Products</a><a class="nav-link" href="analysis.html">Analysis</a><a class="nav-link" href="content.html">Content</a><a class="nav-link" href="marketing/index.html">Published copy</a></div>
+      <div class="nav-group"><span class="nav-label">Compliance</span><a class="nav-link" href="compliance.html">Compliance</a><a class="nav-link" href="tracking.html">Tracking</a></div>
+      <div class="nav-group"><span class="nav-label">Decide</span><a class="nav-link" href="suggestions.html">Suggestions</a><a class="nav-link" href="questions.html">Questions</a></div>
+      <div class="nav-group"><span class="nav-label">Evidence</span><a class="nav-link" href="verification.html">Verification</a><a class="nav-link active" href="sources.html">Sources</a><a class="nav-link" href="flagged.html">Flagged for review</a></div>
     </nav>
+    <div class="sidebar-bottom">
+      <div class="status-dot"></div>
+      <div><strong>Verified data only</strong><small>every row links to its source</small></div>
+    </div>
   </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Sources</h2>
-      <p>The complete register every claim on this site points at, with the class of each source made explicit.</p>
-    </div>
+  <main class="main" id="main">
+    <header class="topbar">
+      <div class="crumb"><a href="index.html">Zone2</a> <span>/</span> <strong>Sources</strong></div>
+      <div class="top-right"><span class="live-tag"><i></i> Live on GitHub Pages</span><a class="chip" href="index.html">Dashboard</a></div>
+    </header>
+    <div class="content">
+      <div class="page-head">
+        <div class="eyebrow">generated from the ledger &middot; every row linked to its official source</div>
+        <h1>Sources</h1>
+        <p>The complete register every claim on this site points at, with the class of each source made explicit.</p>
+      </div>
 
-    <div class="disclosure">
-      <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
-      As an Amazon Associate I earn from qualifying purchases.
-    </div>
+      <div class="disclosure">
+        <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement &sect;5):</strong>
+        As an Amazon Associate I earn from qualifying purchases.
+      </div>
 
     <div class="card">
       <h3>Source register — 37 sources</h3>
@@ -73,12 +87,13 @@
     </div>
 
 
-    <footer class="site">
-      Generated from <code>ledger/*.json</code> by <code>tools/build_root_views.py</code> — do not hand-edit.
-      Re-verified 2026-11-14. · <a href="index.html">Dashboard</a> ·
-      <a href="sources.html">All sources</a> ·
-      <a href="flagged.html">Flagged for Review</a>
-    </footer>
+      <footer class="site">
+        Generated from <code>ledger/*.json</code> by <code>tools/build_root_views.py</code> — do not hand-edit.
+        Re-verified 2026-11-14. &middot; <a href="index.html">Dashboard</a> &middot;
+        <a href="sources.html">All sources</a> &middot;
+        <a href="flagged.html">Flagged for Review</a>
+      </footer>
+    </div>
   </main>
 </div>
 </body>

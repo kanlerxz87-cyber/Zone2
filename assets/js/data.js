@@ -925,6 +925,10 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
 const CANONICAL_FLAG_COUNT = 38;
+const SOURCE_COUNT = 37;
+const VERIFICATION_COUNT = 82;
+const SUGGESTION_COUNT = 18;
+const QUESTION_COUNT = 14;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [

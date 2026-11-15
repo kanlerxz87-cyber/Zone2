@@ -38,17 +38,10 @@ CSS_OK = {
     "secondary": "warn",
 }
 
-NAV = [
-    ("index.html", "Dashboard"),
-    ("products.html", "Products"),
-    ("analysis.html", "Analysis"),
-    ("content.html", "Content"),
-    ("compliance.html", "Compliance"),
-    ("tracking.html", "Tracking"),
-    ("verification.html", "Verification"),
-    ("sources.html", "Sources"),
-    ("flagged.html", "Flagged for Review"),
-]
+# The root navigation is shared with every other root page (tools/root_chrome.py), so a
+# reader can reach the suggestions and questions registers from the evidence views too.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from root_chrome import NAV, sidebar_html, topbar_html  # noqa: E402
 
 
 def esc(value) -> str:
@@ -81,11 +74,6 @@ def src_cell(ids: list[str], by_id: dict[str, dict]) -> str:
 
 
 def page(title: str, lead: str, active: str, body: str) -> str:
-    nav_links = []
-    for href, label in NAV:
-        cls = ' class="active"' if href == active else ""
-        nav_links.append(f'<a href="{esc(href)}"{cls}>{esc(label)}</a>')
-    nav = "".join(nav_links)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,33 +84,32 @@ def page(title: str, lead: str, active: str, body: str) -> str:
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      {nav}
-    </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>{esc(title)}</h2>
-      <p>{esc(lead)}</p>
-    </div>
+  {sidebar_html(active)}
+  <main class="main" id="main">
+    {topbar_html(title)}
+    <div class="content">
+      <div class="page-head">
+        <div class="eyebrow">generated from the ledger &middot; every row linked to its official source</div>
+        <h1>{esc(title)}</h1>
+        <p>{esc(lead)}</p>
+      </div>
 
-    <div class="disclosure">
-      <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
-      {DISCLOSURE}
-    </div>
+      <div class="disclosure">
+        <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement &sect;5):</strong>
+        {DISCLOSURE}
+      </div>
 
 {body}
 
-    <footer class="site">
-      Generated from <code>ledger/*.json</code> by <code>tools/build_root_views.py</code> — do not hand-edit.
-      Re-verified {esc(AS_OF)}. · <a href="index.html">Dashboard</a> ·
-      <a href="sources.html">All sources</a> ·
-      <a href="flagged.html">Flagged for Review</a>
-    </footer>
+      <footer class="site">
+        Generated from <code>ledger/*.json</code> by <code>tools/build_root_views.py</code> — do not hand-edit.
+        Re-verified {esc(AS_OF)}. &middot; <a href="index.html">Dashboard</a> &middot;
+        <a href="sources.html">All sources</a> &middot;
+        <a href="flagged.html">Flagged for Review</a>
+      </footer>
+    </div>
   </main>
 </div>
 </body>

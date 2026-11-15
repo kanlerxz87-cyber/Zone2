@@ -300,8 +300,25 @@
     if (regMax) regMax.textContent = String(canonical);
     var heading = document.getElementById("flagCountHeading");
     if (heading) heading.textContent = String(canonical);
+    var heading2 = document.getElementById("flagCountHeading2");
+    if (heading2) heading2.textContent = String(canonical);
     Array.prototype.forEach.call(document.querySelectorAll(".flag-count-inline"), function (el) {
       el.textContent = String(canonical);
+    });
+
+    // T29 (session bdbe382b): the landing page now states how many official sources,
+    // verification checks, suggestions and questions the site publishes. Those numbers are
+    // derived in tools/build_root_data.py from the ledgers and carried here as constants,
+    // so the page cannot publish a count the ledger does not hold.
+    var derived = {
+      sourceCount: SOURCE_COUNT,
+      verificationCount: VERIFICATION_COUNT,
+      suggestionCount: SUGGESTION_COUNT,
+      questionCount: QUESTION_COUNT
+    };
+    Object.keys(derived).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && typeof derived[id] === "number") el.textContent = String(derived[id]);
     });
 
     // NOTE (session ba8b2d38, T27): this session independently made the same fix as T26 above and
