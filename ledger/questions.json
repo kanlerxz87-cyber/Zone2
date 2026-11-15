@@ -1,0 +1,250 @@
+{
+  "note": "Questions and missing information that must be answered before the decisions in ledger/suggestions.json can be made. Each row states what is verified, what is missing, and how the gap can be closed. An empty answer is left blank on purpose; nothing is inferred to fill it.",
+  "as_of": "2026-11-15",
+  "questions": [
+    {
+      "id": "Q-01",
+      "question": "Which Amazon marketplace and Associates account will the links use: US (amazon.com) or Japan?",
+      "known": "The three supplied links resolve to amazon.com product pages (S19–S21). The Associates country selector lists Japan (S01, observed on the page 2026-11-15). The operator location in the brief is Osaka, Japan.",
+      "missing": "Whether the owner holds an Associates account in the US or Japan; whether these three products are sold on amazon.co.jp; which terms apply to a Japan account.",
+      "how_to_find": "Owner checks the Associates account country. Agent checks the Japanese Amazon site for the same ASINs once they are known (Q-03).",
+      "blocks": [
+        "SG-01",
+        "SG-09"
+      ],
+      "source_ids": [
+        "S01",
+        "S19"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-02",
+      "question": "Is there an approved Associates account with an Associate ID?",
+      "known": "Approval requires at least three qualifying sales within 180 days, and personal orders do not count (S23). The Creators API needs at least 10 qualifying sales in the past 30 days (S07).",
+      "missing": "Account status, Associate ID and marketplace. None of these are in the repository.",
+      "how_to_find": "Owner signs in to Associates Central. The agent cannot access the owner's account.",
+      "blocks": [
+        "SG-01",
+        "SG-03",
+        "SG-07",
+        "SG-09"
+      ],
+      "source_ids": [
+        "S23",
+        "S07"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-03",
+      "question": "What are the full product identifiers (10-character ASINs or full amazon.<tld>/dp/ URLs) for the three products?",
+      "known": "The tokens as supplied (B04G1MEwY, B02NbDxp3, B00hJ57DV) are 9 characters. An ASIN is a 10-character code (S24). A valid ASIN sent to the short-link service returns the same 404 as an unknown code, so the short codes cannot be turned into ASINs (F-01, F-28).",
+      "missing": "The full ASIN for each product as the owner means it.",
+      "how_to_find": "Owner copies the product URL (amazon.com/dp/…) from the product's listing. The agent then checks it against the official page.",
+      "blocks": [
+        "SG-01",
+        "SG-04"
+      ],
+      "source_ids": [
+        "S24",
+        "S32"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-04",
+      "question": "Will the public site run on a domain the owner controls?",
+      "known": "Associates applicants must own their website (S23). The live site is at kanlerxz87-cyber.github.io.",
+      "missing": "Whether a domain is owned. Whether an applicant can use a github.io address under the ownership test. The Associates pages do not settle the second point; it is not verified.",
+      "how_to_find": "Owner buys or confirms a domain. Owner asks Associates support about github.io if that is the plan (contact link on S01).",
+      "blocks": [
+        "SG-01"
+      ],
+      "source_ids": [
+        "S23"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-05",
+      "question": "Are the three supplied products the whole scope, or the first step of a wider niche?",
+      "known": "All three destination pages are air fryers or air-fryer ovens (S19–S21).",
+      "missing": "The owner's intended scope and budget for research.",
+      "how_to_find": "Owner decision.",
+      "blocks": [
+        "SG-02",
+        "SG-04"
+      ],
+      "source_ids": [
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-06",
+      "question": "Is the public-facing site meant to be a marketing site, an internal dashboard, or both?",
+      "known": "The brief asks for a polished marketing affiliate site and also for a simple dashboard-style UI.",
+      "missing": "Which one the owner wants people outside the team to see.",
+      "how_to_find": "Owner decision.",
+      "blocks": [
+        "SG-06"
+      ],
+      "source_ids": [
+        "S02"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-07",
+      "question": "What language and audience should the site serve?",
+      "known": "The brief is in English. The operator's location is Osaka, Japan.",
+      "missing": "Target readers' language and country. Whether a Japanese edition is wanted.",
+      "how_to_find": "Owner decision.",
+      "blocks": [
+        "SG-06",
+        "SG-04"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-08",
+      "question": "Which Table 1 commission band applies to each of the three ASINs?",
+      "known": "Table 1 lists Kitchen at 4.50%, Home at 3.00%, and All Other Categories at 4.00% (S04). The destination breadcrumb is Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers (S19–S21).",
+      "missing": "Which Table 1 band Amazon applies to each ASIN. The breadcrumb alone does not say.",
+      "how_to_find": "Agent reads the Table 1 notes and the category mapping on S04 once more. Owner confirms in Associates Central if product-level category data is shown there. Until then the band stays unconfirmed.",
+      "blocks": [
+        "SG-08"
+      ],
+      "source_ids": [
+        "S04",
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "owner": "agent + owner"
+    },
+    {
+      "id": "Q-09",
+      "question": "Will Amazon agree in writing to any price-tracking or price-alert feature?",
+      "known": "Price tracking and price alerting are not allowed unless Amazon agrees otherwise (Section 6(y); ledger R-22, S02).",
+      "missing": "Whether Amazon would agree, and on what terms. No agreement is on record.",
+      "how_to_find": "Owner contacts Associates support (contact page linked from S01). Until a written answer exists, assume no.",
+      "blocks": [
+        "SG-03"
+      ],
+      "source_ids": [
+        "S02"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-10",
+      "question": "May the site use Amazon product images and descriptions?",
+      "known": "Program Content may not be used to promote products offered on any site that is not an Amazon Site (Section 6(z); ledger R-31). The IP license governs use of Associates content (S30).",
+      "missing": "The exact rule for product images under S30. S30 has not been read line by line in this repository, so the answer is unverified.",
+      "how_to_find": "Agent reads S30 in full and records the exact clause. Owner decides after that.",
+      "blocks": [
+        "SG-06"
+      ],
+      "source_ids": [
+        "S30",
+        "S02"
+      ],
+      "owner": "agent"
+    },
+    {
+      "id": "Q-11",
+      "question": "Has anyone used or tested these products, and is there a dated record of it?",
+      "known": "The repository holds no test records. Unsupported claims are not allowed (R-06, R-21; S02).",
+      "missing": "Any hands-on testing, and any test notes.",
+      "how_to_find": "Owner decision and records.",
+      "blocks": [
+        "SG-05"
+      ],
+      "source_ids": [
+        "S02"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-12",
+      "question": "Will star ratings and review counts be shown, and from which source?",
+      "known": "Reviews and star ratings may not be displayed unless obtained through the Creators API or PA-API (Section 6(t); S02). The Creators API needs eligibility (S07).",
+      "missing": "API access, and therefore any rating value.",
+      "how_to_find": "Depends on Q-02.",
+      "blocks": [
+        "SG-07"
+      ],
+      "source_ids": [
+        "S02",
+        "S07"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-13",
+      "question": "Which authorised source will provide demand and trend data?",
+      "known": "No authorised demand or sales-rank data source is connected (ledger niches.json). The Creators API SearchItems operation exists but needs eligibility (S07, S08).",
+      "missing": "Any usable trend data. Google Trends or any other tool is NOT in the official register and has not been checked.",
+      "how_to_find": "After eligibility, the agent can query SearchItems through the Creators API. Any other source needs the owner's choice and a source check first.",
+      "blocks": [
+        "SG-02",
+        "SG-04"
+      ],
+      "source_ids": [
+        "S07",
+        "S08"
+      ],
+      "owner": "owner + agent"
+    },
+    {
+      "id": "Q-14",
+      "question": "What tax forms and payment setup apply to the owner?",
+      "known": "The Associates help index lists a topic named \"How do I complete the Tax Interview?\" (linked from S23). Commission is paid about 60 days after the end of the month in which it was earned (S02).",
+      "missing": "The owner's tax residence and the forms that apply to it. Not verified in this repository.",
+      "how_to_find": "Owner completes the tax interview in Associates Central and checks the current instructions there.",
+      "blocks": [
+        "SG-01"
+      ],
+      "source_ids": [
+        "S23",
+        "S02"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-15",
+      "question": "Is an English disclosure acceptable for Japanese-language readers?",
+      "known": "The required sentence is \"As an Amazon Associate I earn from qualifying purchases.\" (Section 5; R-01). R-01 also allows \"a substantially similar statement previously allowed\".",
+      "missing": "Whether a Japanese translation counts as substantially similar. Not verified.",
+      "how_to_find": "Agent checks the Associates Japan policy if it is published. Otherwise owner asks Associates support.",
+      "blocks": [
+        "SG-06"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "owner": "agent + owner"
+    },
+    {
+      "id": "Q-16",
+      "question": "Who is the named author or editor, and is that a real person?",
+      "known": "Endorsements and material connections must be disclosed clearly (FTC guidance, S10; R-03).",
+      "missing": "The author identity. A made-up persona would be a false statement about who wrote the page.",
+      "how_to_find": "Owner decision.",
+      "blocks": [
+        "SG-06"
+      ],
+      "source_ids": [
+        "S10"
+      ],
+      "owner": "owner"
+    }
+  ]
+}
