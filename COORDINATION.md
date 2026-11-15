@@ -3334,3 +3334,48 @@ gate only scanned `flag_ids`. Reading the re-deployed live page is what caught i
 
 **PR, merge and deploy:** PR opened from this branch — number, merge commit and deploy runs recorded in the closing entry that follows this record.
 
+
+### T29 closing record — PR, merge, deploy (session `d0135100`, 2026-11-15)
+
+| Item | Value |
+|---|---|
+| PR #69 | https://github.com/kanlerxz87-cyber/Zone2/pull/69 — requirements + review layer, deduplicated against the canonical register. `Build and verify` **pass** (19s); deploy correctly skipped on the PR. Merged 2026-11-15T11:53:17Z → `5caf097` |
+| PR #71 | https://github.com/kanlerxz87-cyber/Zone2/pull/71 — fix for 12 dangling cross-references found **on the deployed page**. `Build and verify` **pass** (12s). Merged 11:55:57Z → `e64d96f` |
+| PR #73 | https://github.com/kanlerxz87-cyber/Zone2/pull/73 — fix for the one remaining reference hiding in prose, plus a gate widened from `flag_ids` to whole-row scanning. `Build and verify` **pass** (12s). Merged 11:58:27Z → `bff45a5` |
+| Post-merge runs after each | `Build, verify and deploy` **success** (31s / 38s / 31s) and `pages build and deployment` **success** each time |
+| Pages API after final merge | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live read after final deploy | `decisions/index.html` and `decisions/requirements.html` fetched from the public URL and read line by line: zero `SUG-` references, blocker table derives from the canonical `needs_answers` edges, every row ends in an official-source link |
+
+#### Two coordination incidents on the way, both recorded rather than hidden
+
+1. **Duplicate claim.** Session `2499438c` claimed T29 and merged PR #61 while this branch was in flight, shipping
+   `ledger/suggestions.json`, `ledger/questions.json`, `pages/suggestions.html` and `pages/questions.html`. Both
+   sessions had created the same two ledger paths. Theirs was kept as canonical; this session deleted its own
+   versions, now reads theirs, and dropped its overlapping proposal content rather than merging it. One decision
+   store exists. The canonical board and question register are credited to `2499438c` in the published pages and
+   in this record.
+2. **A near-miss deletion of another session's work.** The first version of this closing record was committed on a
+   branch that had been reset to a stale `main`. Diffing against `origin/main` showed it would have **deleted
+   `docs/verification-42fa4918.md`**, a file session `42fa4918` merged as PR #72 minutes earlier. That PR's check
+   was reported as `fail`/2s; the job was in fact **cancelled** by this workflow's shared `concurrency: group: pages`
+   with `cancel-in-progress: true`, not by a defect. The commit was rebased onto current `main` and re-pushed, so
+   the branch is a strict doc-only addition and touches no other session's file.
+
+**Lesson, recorded because it is the second time this has bitten this repository:** always `git fetch` and diff a
+branch against the *current* `origin/main` immediately before opening a PR — a stale base does not merely conflict,
+it silently proposes deletions.
+
+#### What is now live
+
+`decisions/index.html` · `decisions/requirements.html` (24 requirements, 9 met / 12 partial / 3 not met) ·
+`decisions/content-plan.html` · `decisions/flagged.html` (RF-01…RF-03 + the project flags bearing on them) ·
+`decisions/manifest.json` · `DECISIONS.md` (printable, generated in the same run) — reachable from the primary
+dashboard nav as **Requirements & Review**, and wired into CI as two new steps.
+
+#### Task status
+
+**T29: done, merged and live**, jointly satisfied by session `2499438c` (canonical decision board and question
+register, PR #61) and this session (requirement set, review layer, content plan, gate). Files this session owns:
+`ledger/requirements.json`, `ledger/decisions_findings.json`, `tools/build_decisions.py`,
+`tools/validate_decisions.py`, `tools/decisions.css`, `decisions/**`, `DECISIONS.md`, two appended CI steps, one
+appended nav link, one README source-count label, five appended source rows (S38…S42), and this record.
