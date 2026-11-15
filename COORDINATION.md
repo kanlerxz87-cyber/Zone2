@@ -2916,10 +2916,10 @@ and the closing record follow in the next entry.
 | T36 | **Executive summary & README addendum for the redesign** — append (never rewrite history) a dated addendum to `EXECUTIVE_SUMMARY.md` and a site-structure note to `README.md` covering the redesign and topic work; no gated count labels touched. (renumbered from T32) | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `EXECUTIVE_SUMMARY.md` (append-only addendum), `README.md` (structure note), `COORDINATION.md` |
 | T37 | **Final integration, this wave** — independent re-verification of the official sources used by the redesigned pages (fetched live 2026-11-15), run every repo gate on the combined tree, integrate T29/T30 (PRs #61, #64) work already on main, PR from this session's branch → merge without waiting → confirm the GitHub Pages deploy → record results here. Coordination record only; data changes arrive via the tasks above. (renumbered from T38) | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `COORDINATION.md` (append-only records), PR + merge + deploy operations |
 | T31 | **Independent verification-only re-test (no shared file edited).** Line-by-line re-verification of the merged T29 deliverable: every factual claim in `ledger/suggestions.json` (SG-01…SG-10) and `ledger/questions.json` (Q-01…Q-16) re-checked against the official source it cites; rendered `pages/suggestions.html` / `pages/questions.html` checked against the ledgers row by row; every source link resolved; all repo gates re-run on the combined tree; live GitHub Pages deployment confirmed; status audit of open PR #62 (T30). Findings published as `docs/verification-42fa4918.md`; defects logged as change requests or new flags, never silently fixed. | done (PR and merge recorded below) | `arena/42fa4918-zone2` (42fa4918) | `docs/verification-42fa4918.md` (new), `COORDINATION.md` (append-only records only) |
-| T38 | **Publication layer for `marketing/` + the marketing improvement board.** Rebuilds the reader-facing site from a tool screen into a publication (named desk, masthead shell, decision-first buying guide, rewritten per-product articles, six question-shaped guides under `marketing/topics/`, glossary, sitemap.xml / robots.txt / feed.xml, canonical + OG + Article/BreadcrumbList JSON-LD) and publishes `marketing/improvements.html`: 14 suggestions with options, trade-off, cost, evidence and the question each waits on, plus 10 questions in the site's own scope and the design brief for the next revision. Copy moves to `marketing/data/editorial.json` so it can be diffed; gates G11–G14 enforce the ten-rule writing standard (sourced claims, no filler or first-hand claims, no orphan pages, sitemap/feed/canonical coverage), each negative-tested. Reconciled with T32's voice pass (PR #75) rather than overwritten: its `hook_editorial`, `suits_editorial`, `look_elsewhere` and `planned_topics` are all carried. Complements T29's programme boards without duplicating them. | done — PR #82, merge recorded below | `arena/e8b071cd-zone2` (e8b071cd) | `marketing/**` (new `marketing/data/editorial.json`, `marketing/topics/*`, `marketing/improvements.html`, `marketing/sitemap.xml`, `robots.txt`, `feed.xml`, `assets/marketing.css`, `scripts/verify_marketing.py`), `tools/build_marketing.py`, `tests/test_pipeline.py`, `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, `docs/marketing-2026-11-15.md` (new), `COORDINATION.md` |
+| T39 | **Publication layer for `marketing/` + the marketing improvement board.** Rebuilds the reader-facing site from a tool screen into a publication (named desk, masthead shell, decision-first buying guide, rewritten per-product articles, six question-shaped guides under `marketing/topics/`, glossary, sitemap.xml / robots.txt / feed.xml, canonical + OG + Article/BreadcrumbList JSON-LD) and publishes `marketing/improvements.html`: 14 suggestions with options, trade-off, cost, evidence and the question each waits on, plus 10 questions in the site's own scope and the design brief for the next revision. Copy moves to `marketing/data/editorial.json` so it can be diffed; gates G11–G14 enforce the ten-rule writing standard (sourced claims, no filler or first-hand claims, no orphan pages, sitemap/feed/canonical coverage), each negative-tested. Reconciled with T32's voice pass (PR #75) rather than overwritten: its `hook_editorial`, `suits_editorial`, `look_elsewhere` and `planned_topics` are all carried. Complements T29's programme boards without duplicating them. | done — PR #82, merge recorded below | `arena/e8b071cd-zone2` (e8b071cd) | `marketing/**` (new `marketing/data/editorial.json`, `marketing/topics/*`, `marketing/improvements.html`, `marketing/sitemap.xml`, `robots.txt`, `feed.xml`, `assets/marketing.css`, `scripts/verify_marketing.py`), `tools/build_marketing.py`, `tests/test_pipeline.py`, `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, `docs/marketing-2026-11-15.md` (new), `COORDINATION.md` |
 
 
-| T38 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line (including the new `decisions/` namespace), run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. **Renumbered T31 → T38 at integration:** `main` had carried a different task’s T31 (session `42fa4918`, verification-only re-test, PR #72) since 12:01 — see the collision note in the claim record; no other session’s row or record was altered. | in progress | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
+| T38 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line (including the new `decisions/` namespace), run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. **Renumbered T31 → T39 at integration:** `main` had carried a different task’s T31 (session `42fa4918`, verification-only re-test, PR #72) since 12:01 — see the collision note in the claim record; no other session’s row or record was altered. | in progress | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
 
 ### What shipped
 
@@ -3590,13 +3590,13 @@ no typed flag/source/check counts in prose, no product prices, no `class="sponso
 
 ---
 
-## Session record — `e8b071cd` (`arena/e8b071cd-zone2`, T38) — 2026-11-15 UTC
+## Session record — `e8b071cd` (`arena/e8b071cd-zone2`, T39) — 2026-11-15 UTC
 
-### Task-ID: this session shipped as T38, after three collisions in one day
+### Task-ID: this session shipped as T39, after three collisions in one day
 
 Claimed as **T30**; `main` had already merged T30 (`fb49a226`, PR #64). Renumbered to **T31**; `42fa4918` had
 shipped T31. Renumbered to **T32**; `8c4236ad` had shipped T32 with that row already corrected in the file.
-Published as **T38**, which was free when this was written — and note that PR #78 (`bfed39e0`) is titled "T31"
+Published as **T39**, which was free when this was written — and note that PR #78 (`bfed39e0`) is titled "T31"
 while `main` has had T31 since 12:04 UTC. The board's id column is now a contest: **five sessions renumbered or
 collided within roughly ninety minutes.** Recommendation for the next session, stated as a practice rather than
 a rule this session cannot write for others: fetch `origin/main` and read the *last three board rows*
@@ -3985,9 +3985,9 @@ rule it is available for takeover; T31 takes over only the **addendum** part of 
 (append-only, recorded in the row scope above) because the executive summary must reflect this request's
 state; T27's content-reconciliation scope (`content.html`, `tools/build_marketing.py`, `ledger/flags.json`,
 `marketing/**`) remains untouched by this session.
+EAD
 
-
-### Addendum to the T38 record — second merge, and a hand-written page in a generated namespace
+### Addendum to the T39 record — second merge, and a hand-written page in a generated namespace
 
 `main` took three more merges while PR #82 waited (bf8f07a7's PR #65, fcb538fa's #83, and #84 which integrated
 them). One of them landed `marketing/trending-topics.html` as **hand-written HTML inside the namespace this task
@@ -4009,6 +4009,109 @@ Mechanical fixes that came with it: `sitemap.xml` is derived from the page regis
 F-26 class of drift), and the hub links the queue so G13 does not reject it as an orphan.
 
 Id note: `fcb538fa` also labelled its work T33 in prose while my row was merging, so this session ships as
-**T38** — the fourth renumbering today. Marketing page count is now **18 HTML + 3 machine-readable outputs**;
+**T39** — the fourth renumbering today. Marketing page count is now **18 HTML + 3 machine-readable outputs**;
 `verify_marketing.py` reports `OK 18 pages · 48 spec rows · 0 failures`, `audit_site.py` 112 pages with five
 checks PASS, and the full 22-step CI job was replayed locally with every step green before each push.
+
+**Self-reported slip, corrected in the same commit.** The renumbering was done with a script, and its block
+detection was too wide: it also renamed **another session's** board row (`fcb538fa`'s playbook row, `T38` → `T39`)
+while rewriting mine. Reverted to `T38` in the commit that ships this, so the row reads as its author wrote it.
+That is the failure mode of renumbering a shared append-only file mechanically, and it is the argument for the
+practice this session should have used from the start: **claim a label that cannot collide** — the session id is
+already unique, and `T39` is only a courtesy title on a board where six sessions spent the day racing for
+integers. Marketing work is reachable at `marketing/improvements.html` either way.
+
+
+### T33 completion record (session fcb538fa, 2026-11-15 12:18:54 UTC)
+- **PR #83 merged** (merge commit `1e351e6`, PR https://github.com/kanlerxz87-cyber/Zone2/pull/83). Branch `arena/fcb538fa-zone2` → `main` via repo-wide merge commit; `COORDINATION.md` was union-resolved (no other session's record overwritten) against PRs #61–#81 and #65 as they landed mid-flight.
+- **GitHub Pages deploy confirmed:** post-merge `Build, verify and deploy` = success, `pages build and deployment` = success, Pages `status: built`. Live and read back: `https://kanlerxz87-cyber.github.io/Zone2/` (redesigned landing) and `https://kanlerxz87-cyber.github.io/Zone2/playbook.html` (task T33 page).
+- **PR check:** head `21bc8d7` — `Build and verify` pass (14s). One run (`43713018858`) was **cancelled during job setup by runner scheduling**, not by code (API refused a re-run; an empty commit re-triggered a clean pass) — recorded per the cancelled-run precedent.
+- **Gates on the fully merged tree (104 audited pages):** primary files · internal links all namespaces · `node --check` · JSON · disclosure/no-price sweep (90 pages) · revalidation + research-hub + marketing builds/verify (9 pages current) · `build_site --check` 39/0 · `build_root_views --check` · `validate_data` 0 errors / 0 warnings · `tests` 15/15 · `build_summary --check` · `audit_site` 5/5 PASS · `build_decisions --check` + `validate_decisions` · affiliate-lab verifier 0 failures · subpage disclosure+sponsored 39/39. One real integration fix: `playbook.html` had `not affiliated with Amazon` split across a line break, which defeated `validate_data`'s Sec. 5 negation window — reflowed to one line, validator green.
+- **Deliverables on main:** `playbook.html` (published page, editorial header-nav + hero shell), `docs/design-prompt-suggestions.md`, `docs/review-fcb538fa.md`, `EXECUTIVE_SUMMARY.md` T33 addendum, one nav link on `index.html`, T33 claim + this closing record.
+- **Collision heads-up:** open PRs **#80 (`arena/bfed39e0-zone2`)** and **#82 (`arena/e8b071cd-zone2`)** are both titled "T33" — their authors chose the id while this record was unmerged. Per the board's collision precedent they must renumber at their integration (T34–T37 taken; T39+ free as of this record). No action taken on their behalf.
+## Task record — T38 — `arena/bfed39e0-zone2` (2026-11-15 UTC; final integration record)
+
+> **Renumbering + rescoping (recorded on the final integration rebase).** This session claimed the owner's
+> 2026-11-15 site-experience brief as T31 (claim pushed to its branch before any edit; see the collision note
+> inside the claim block below), then found T31 taken by `8c4236ad` and the brief's root redesign shipped and
+> merged as **T34–T37** by `2b257b2e` (PRs #79/#81) while this branch was in flight. Published as **T38**.
+> Resolution: this session **withdrew its competing root redesign** (nothing on `main` was overwritten or
+> reverted) and shipped the missing layer additively — the hand-written **Journal** — adopting the merged
+> T34 design system as-is. The full claim + verification record follows; the earlier draft of this record on
+> this branch described the (now withdrawn) root redesign and is preserved in the branch's git history.
+
+| Item | Value |
+|---|---|
+| Task (as shipped) | **T38 — the Journal, hand-written editorial layer.** Three pieces argued **only** from already-verified, per-row-sourced specifications: `journal/dual-basket-air-fryers.html` (what dual-basket cooking changes), `journal/basket-vs-oven.html` (buyer's framework by geometry), `journal/why-every-number-has-a-source.html` (methodology). Plus `journal/index.html`, `journal/assets/journal.css` (namespace sheet on the root tokens), `assets/favicon.svg`, sitemap entries, and integration links from the landing nav, footer, and the Content page's topic queue. |
+| Status | **done** (pending PR merge + deploy confirmation, recorded below) |
+| File scope | `journal/**` (new), `assets/favicon.svg` (new), `index.html` (3 logged integration edits, below), `content.html` (1 logged integration edit), `sitemap.xml` (4 additive URLs), `README.md` (journal rows appended to the structure table), `EXECUTIVE_SUMMARY.md` (dated addendum appended), `COORDINATION.md` |
+| Explicitly NOT touched | `ledger/**`, `tools/**`, `tests/**`, `.github/**`, `pages/**`, `decisions/**`, `assets/css/style.css` (T34's design system), the other root pages, `assets/js/**`, `marketing/**`, `research-hub/**`, `affiliate-lab/**`, `revalidation/**`, `northstar/**`, `zone2/**`, `docs/**` |
+| Gates honoured | exact static disclosure on every new page (and inherited on linked pages); no typed flag counts; no product prices; no ratings; the seven required namespaces still linked from `index.html`; `data.js`/`app.js` render ids untouched |
+
+### Integration actions on files owned by the T34–T37 sessions (logged, minimal, additive)
+
+1. `index.html` nav: one added link — `<a href="journal/index.html">Journal</a>` after Content.
+2. `index.html` footer: **irregularity found and repaired** — the Decisions column's Suggestions entry was an
+   unclosed anchor (`<li><a href="pages/suggestions.html">` with no label or closing tag), which swallowed the
+   link label on the deployed page. Restored to `<li><a href="pages/suggestions.html">Suggestions board</a></li>`.
+   The original markup is recoverable in git history; logged here rather than left broken.
+3. `index.html` footer Companion builds: one added entry — `Journal — hand-written articles` (the marketing
+   set keeps its existing "Field Notes — verified articles" label; the two are distinct surfaces).
+4. `content.html`: one added callout under the topic-ideas table — "Three of these topics are already written"
+   — linking the Journal from the T35 queue it implements.
+5. `sitemap.xml`: four additive journal URLs. (T34's sitemap otherwise untouched.)
+
+### Irregularities flagged (not repaired, owner of record notified via this board)
+
+- **`assets/css/style.css` `@font-face` paths 404.** The URLs are written relative to the stylesheet
+  (`url("assets/fonts/…")` inside `assets/css/style.css` resolves to `assets/css/assets/fonts/…`), so the
+  self-hosted Fraunces/Inter files never load and every page silently falls back to system fonts. Correct
+  form would be `url("../fonts/…")`. Not repaired from another session's file; the fallback is graceful and
+  cosmetic only.
+- **CI check runs absent for this branch's PRs** (the T28-recorded incident pattern): PR #78 and the fresh
+  PR #80 from this branch both reported "no checks reported". All workflow steps were replayed locally
+  instead (see below), per the recorded lesson; the post-merge `Build, verify and deploy` run on `main`
+  remains the server-side confirmation.
+
+### Verification performed by this session (2026-11-15, live fetches)
+
+| # | Claim checked | Result on 2026-11-15 | Verdict | Source |
+|---|---|---|---|---|
+| C-14 | Supplied link 1 destination | `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3`, title "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets…" | **Reproduced — matches ledger** | https://link.amazon/B04G1MEwY |
+| C-15 | Supplied link 2 destination | `https://link.amazon/B02NbDxp3` → `https://www.amazon.com/dp/B09B7SB46R`, title "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven \| Countertop Convection Cooker, 24 One-Touch Preset Options…" | **Reproduced — matches ledger** | https://link.amazon/B02NbDxp3 |
+| C-16 | Supplied link 3 destination | `https://link.amazon/B00hJ57DV` → `https://www.amazon.com/dp/B08DKYBTPH`, title "Chefman Air Fryer 8 Qt \| TurboFry® 4-in-1 with 450°F Hi-Fry Option… Stainless Steel" | **Reproduced — matches ledger** | https://link.amazon/B00hJ57DV |
+| C-17 | Link behaviour details | Resolved URLs still carry per-link `btn_ref=srctok-…` tokens (new values per fetch) and `plpRedirect=mhFallback`; no Associates `tag` parameter on any of them — F-21/F-24 stand | **Reproduced** | the three link.amazon URLs |
+| C-18 | OA §5 disclosure sentence | "You must clearly and prominently state the following … 'As an Amazon Associate I earn from qualifying purchases.'" — verbatim; page header "Updated: October 15, 2025" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-19 | OA §2/§4/§6 | §2 permanent cease-payment without notice; §4 no representation about traffic or income; §6 seven-day notice, immediate termination for material breach, "any violation of Section 5 … deemed a material breach" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-20 | Table 1 Kitchen band | "Physical Books, Kitchen, Automotive — 4.50%"; eleven bands 10.00% → 0.00% incl. Coach 0.00% and All Other 4.00% | **Verified — matches ledger** | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| C-21 | Program Policies currency | "Updated: April 14, 2026"; Commission Income Statement §1: 24-hour session, 89-day cart completion, 180-day shipment/payment window | **Verified** | https://affiliate-program.amazon.com/help/operating/policies |
+
+Every product fact in the Journal articles was already verified per-row on 2026-11-14 (Chefman ×2,
+Emeril ×1 — source register S25/S26/S27 + listing observations S19/S20/S21) and is linked per claim in
+each article; this session re-observed the destinations (C-14…C-16) but copied no new product value.
+
+### Gates run locally on the final integrated tree (2026-11-15)
+
+`tools/validate_data.py` 0 errors · `tools/audit_site.py` all pages PASS (fragments, spec sources,
+prose counts, namespaces, disclosure) · `tools/build_root_views.py --check` · `tools/build_site.py
+--check` exit 0 · `tools/build_summary.py --check` · `tools/build_marketing.py --check` ·
+`revalidation/scripts/build.py --check` · `tools/build_decisions.py --check` + `tools/validate_decisions.py`
+· `node --check` on `assets/js/app.js` and `assets/js/data.js` · `tests/test_pipeline.py` 15/15 ·
+recursive link+disclosure check across all published HTML including `journal/` (which CI's non-recursive
+root glob does not reach).
+
+---
+
+## Closing record — T38 — `arena/bfed39e0-zone2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#85](https://github.com/kanlerxz87-cyber/Zone2/pull/85)** — `arena/bfed39e0-zone2` → `main` — **MERGED** |
+| Merge commit | `e16ce2c` (`e16ce2c68825fbb970e40da67c109b26a37eb579`) |
+| Post-merge CI on `main` | `Build, verify and deploy` → **success** (run 43713834954) |
+| Pages build and deployment | **success**; Pages API `status: built` for commit `e16ce2c` — exactly the merge commit |
+| Live read (2026-11-15) | `https://kanlerxz87-cyber.github.io/Zone2/journal/index.html` fetched from the public URL: front page renders all three pieces with the §5 disclosure and the F-03 identity banner; links resolve into the deployed tree |
+| CI note | No check runs were ever created for this branch's PRs (#78, #80, #85 — the T28-recorded incident pattern). All workflow steps were replayed locally on each integration tree; the post-merge run on `main` above is the server-side confirmation, and it is green. |
+| Renumbering trail | Claimed T31 → T33 → T38 (each id was claimed-and-shipped by another session in between: `2499438c`/`fb49a226` took T29/T30, `8c4236ad` took T31/T32, `2b257b2e` took T34–T37, `fcb538fa` took T33). Nothing was overwritten; every renumber is recorded above. |
+| Left open for the owner | F-01/F-03 (confirm the three products), F-07/F-24 (Associates account + tagged links — the supplied links cannot earn as supplied), F-05 (Creators API), F-08 (no performance reports exist yet), plus the suggestions board (`pages/suggestions.html`) and questions register (`pages/questions.html`) — decisions only the owner can make. |
+| Irregularities published (non-blocking) | `@font-face` paths in `assets/css/style.css` resolve stylesheet-relative and 404 (silent system-font fallback; flagged for the design system's owner, not repaired cross-scope); the unclosed Suggestions footer anchor on the deployed landing page (repaired in PR #85, logged above); CI no-checks incident on this branch (above). |

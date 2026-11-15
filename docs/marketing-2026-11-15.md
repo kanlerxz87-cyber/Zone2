@@ -1,4 +1,4 @@
-# T38 — marketing site: verification record (2026-11-15)
+# T39 — marketing site: verification record (2026-11-15)
 
 Session `arena/e8b071cd-zone2` (`e8b071cd`). Scope: the consumer-facing publication in `marketing/`,
 the six question-shaped guides it now publishes, and the improvement board at
@@ -65,7 +65,7 @@ Recommendations are judgements, so they cite the primary documentation rather th
 | Structural audit (fragments, spec sources, prose counts, namespaces, disclosure) | `python3 tools/audit_site.py` | pass — 105 published pages audited |
 | Companion sites | `revalidation/scripts/{build,verify}.py`, `affiliate-lab/scripts/verify_site.py`, `research-hub/scripts/verify.py` | pass — untouched by this session |
 
-### Negative tests on the five new gates (T38)
+### Negative tests on the five new gates (T39)
 
 A gate that cannot fail is decoration. Each new rule was broken on purpose and confirmed to catch it:
 
@@ -141,4 +141,4 @@ Two mechanical fixes came with it: `sitemap.xml` is now derived from the page re
 orphan under G13.
 
 Task id: this session renumbered again — **T33 was taken** by session `fcb538fa` in prose while my row was being
-merged, so the work ships as **T38**.
+merged, so the work ships as **T39**.
