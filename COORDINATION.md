@@ -77,7 +77,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T26b | Fresh baseline audit for current request: rerun all project gates; verify the live GitHub Pages entry points and source-controlled dataset claims against official URLs; record defects only, no overlapping edits | done | `arena/0f44536f-zone2` | `COORDINATION.md` (append-only record only; results in this session's record) |
 | T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | done — closing record by `ba8b2d38` below (PRs #48/#51/#54 merged 2026-11-14, CI + Pages deploy confirmed); status cell corrected 2026-11-15 by `8c4236ad`, see the T30 session record | `arena/0f44536f-zone2` → completed by `arena/ba8b2d38-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
 | T32 | **Renumbered three times** (id collisions of the day): claimed as T29 → T29 shipped first by `2499438c` (PRs #61/#63) → renumbered T30 → **T30 claimed and shipped by `fb49a226`** (dashboard integration, PRs #64/#66) → renumbered T31 → **T31 claimed and shipped by `42fa4918`** (verification-only re-test of T29, PRs #72/#76) → **renumbered T32**. Nothing any of them published is duplicated or overwritten; the nav-link part of this session's original scope was dropped after `fb49a226`'s T30 landed the same links (my two duplicate nav entries removed; my complementary footer links kept). T32 = the work T29/T30/T31 did not cover: (1) editorial upgrade of the destination-only marketing set — tone and structure only, zero fact changes, every row's source intact (takeover per 60-minute rule: `marketing/**` owner `a3faf404` finished; the T27 marketing scope was completed and merged by `ba8b2d38`, no active claimant); (2) additive links from the root dashboard to the two new decision-support pages (`pages/suggestions.html`, `pages/questions.html`); (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm. | done — shipped via PR #75 (merge `fc98d0c`), closing record at the end of this file; status cell corrected 2026-11-15 by session `f6af67c3` (T44, audit item I-C) | `arena/8c4236ad-zone2` (8c4236ad) | `COORDINATION.md` (records + the T27 status correction above), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), NEW `docs/verification-8c4236ad.md` |
-| T40 | **Decision-path chooser + independent 2026-11-15 re-verification of the supplied links + the one verified presentation defect.** (1) New root page `paths.html`: the three named launch paths that group SG-01…SG-10 so the owner picks ONE path instead of ten separate decisions — each path states the questions it assumes, its first five steps, cost, risk, and what choosing it does *not* authorise. (2) Independent re-verification of the three supplied `link.amazon` links and of both decisive controls, run today from this session; recorded as `ledger/verification.json` rows + `ledger/products.json` evidence + `docs/verification-bbcc741f.md`; the controls reproduced, one irregularity found (an unissued code returned **403 at the edge**, not the 404 F-20 cites as decisive) → new flag + new question Q-17 (were these three links minted under your Associates ID?). (3) Repair of the verified stylesheet defect that has silently disabled the site's own display and body fonts on **every** page since T34: the `@font-face` URLs in `assets/css/style.css` are written relative to the stylesheet, so `assets/fonts/*.woff2` 404 and every page falls back to system fonts. Highest-leverage polish fix available without touching one verified datum. | claimed 2026-11-15T13:06Z — in progress | `arena/bbcc741f-zone2` (bbcc741f) | `paths.html` (new), `assets/css/style.css` (3 URL fixes), `ledger/{sources,flags,questions,verification,products}.json`, regenerated `pages/**` + root views + `assets/js/data.js` + `decisions/**` via the existing builders (no `tools/**` edit), `index.html` (additive links only), `sitemap.xml` (one URL), `docs/verification-bbcc741f.md` (new), `EXECUTIVE_SUMMARY.md` (append-only addendum), `COORDINATION.md` |
+| T40 | **Decision-path chooser + independent 2026-11-15 re-verification of the supplied links + the one verified presentation defect.** (1) New root page `paths.html`: the three named launch paths that group SG-01…SG-10 so the owner picks ONE path instead of ten separate decisions — each path states the questions it assumes, its first five steps, cost, risk, and what choosing it does *not* authorise. (2) Independent re-verification of the three supplied `link.amazon` links and of both decisive controls, run today from this session; recorded as `ledger/verification.json` rows + `ledger/products.json` evidence + `docs/verification-bbcc741f.md`; the controls reproduced, one irregularity found (an unissued code returned **403 at the edge**, not the 404 F-20 cites as decisive) → new flag + new question Q-17 (were these three links minted under your Associates ID?). (3) Repair of the verified stylesheet defect that has silently disabled the site's own display and body fonts on **every** page since T34: the `@font-face` URLs in `assets/css/style.css` are written relative to the stylesheet, so `assets/fonts/*.woff2` 404 and every page falls back to system fonts. Highest-leverage polish fix available without touching one verified datum. | **done** — PR #109 merged into `main` as `d26ad7d`; `Build, verify and deploy` and `pages build and deployment` both success for the tip that carries it; live read of `paths.html` verified from the public URL 2026-11-15 | `arena/bbcc741f-zone2` (bbcc741f) | `paths.html` (new), `assets/css/style.css` (3 URL fixes), `ledger/{sources,flags,questions,verification,products}.json`, regenerated `pages/**` + root views + `assets/js/data.js` + `decisions/**` via the existing builders (no `tools/**` edit), `index.html` (additive links only), `sitemap.xml` (one URL), `docs/verification-bbcc741f.md` (new), `EXECUTIVE_SUMMARY.md` (append-only addendum), `COORDINATION.md` |
 
 ---
 
@@ -4613,6 +4613,217 @@ blank. Counts typed in prose ("Six guides") are derived or reworded in the same 
 **Status:** claimed → in progress → **done** (closing record below).
 **T46 addendum (same session, 2026-11-15, after the closing record above).** The post-merge Actions run for PR #114 failed on the (then-new) `Every stylesheet url() resolves to a file` step — main had been red on this step since PR #109's merge. Root cause: the check scans comments too, and the *illustrative* `url("../fonts/…")` placeholder written inside a `style.css` comment (carried into the two vendor copies by their builders) resolves to a literal `…` file that does not exist. Fix (this session, comment-only, no behavior change): the comment now says "the @font-face src paths are stylesheet-relative: ../fonts/… from assets/css/" without a `url(` literal; vendor copies regenerated through their builders. **Full CI step replay local: every step PASS** (including `check_css_urls` — 16 stylesheets, 9 local url() refs, 0 broken; `build_audit --check`; `validate_audit`; `test_audit`; `seo_audit`; `build_sitemap --check`). Fix merged via the PR recorded below.
 
+
+## Closing record — T40 — `arena/bbcc741f-zone2` (2026-11-15 13:45 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#109](https://github.com/kanlerxz87-cyber/Zone2/pull/109)** — `arena/bbcc741f-zone2` → `main` — **MERGED**, merge commit `d26ad7d` |
+| Second PR | **[#116](https://github.com/kanlerxz87-cyber/Zone2/pull/116)** — the `check_css_urls` comment fix — **closed as superseded**, not merged: session `86bb886d` landed the same fix on `main` as `e67faf6` while #116 was in flight (`strip_comments()`, same reasoning). Verified on `main`: `16 stylesheets · 9 local url() references · 0 broken`, rc=0. Nothing from this branch was needed for it. |
+| Post-merge CI on `main` | `Build, verify and deploy` → **success** for `4568d86` and `debc915` (the tips that carry this merge); `pages build and deployment` → **success** for both |
+| GitHub Pages | `status: built`, build commit `debc915` (2026-11-15T13:40:50Z) |
+| Live read after deploy | `https://kanlerxz87-cyber.github.io/Zone2/paths.html` fetched over HTTPS from the public URL: hero, the three path cards, the full `SG-01…SG-11` map, the quoted launch bar and the disclosure all render as published; the landing page's nav and footer link into it |
+| One run that was NOT a code failure | The first run for `d26ad7d` reported failure on **"Every stylesheet url() resolves to a file"**. Cause: that gate (added by another session minutes earlier) matched `url("../fonts/…")` **inside a CSS comment** — the repair note `1b839f87` left in `assets/css/style.css`. No browser ever requests a comment. Fixed by `e67faf6`; also PR #116 was opened here with an equivalent fix and closed once main's version landed. Two further runs were **cancelled by the `pages` concurrency group** during job setup (`cancel-in-progress: true`) while ~8 sessions pushed at once — the recorded pattern from T28/#78/#80/#85; every step was therefore replayed locally on the exact tree before each push (24 → 28 steps as the workflow grew, 0 failures) |
+
+### What this session published
+
+| Deliverable | Where |
+|---|---|
+| Decision-path chooser (the "review the suggestions and pick the best path" layer) | `paths.html`, linked from the landing nav + footer, in the sitemap |
+| Independent 2026-11-15 re-verification of the three supplied links + both controls + two program pages | `ledger/verification.json` `V-83…V-89`, `ledger/products.json` `E-13`/`E-14` + re-verification stamp, `docs/verification-bbcc741f.md` (line-by-line, every row with a repeatable link) |
+| New irregularities | `F-40` — the negative control `F-20` calls decisive returned **403 at the edge** for an unissued token, not the recorded 404 (the reading survives on the positive evidence; the browser test is handed to the owner) · `F-39` — the webfont defect, now in the register rather than only in a commit message |
+| New question | `Q-18` — were the three `link.amazon` tokens minted in the owner's own Associates account, and under which Tracking ID? (the only thing that can bind these links to a payout) |
+| Source added | `S43` — the 403 control URL |
+| Defects repaired | the `@font-face` URLs in `assets/css/style.css` (every page had been rendering in fallback system fonts since T34) + the same normalisation in `tools/build_site.py` and `tools/build_decisions.py` so a vendored copy cannot silently lose the fonts again; `README.md`'s malformed flagged-for-review link label |
+
+### Collisions this session hit, and how each was resolved (nothing discarded)
+
+1. **The font repair raced** — `1b839f87` shipped the same fix as PR #89 mid-flight. Union: their comment and file-level fix kept, this session's both-forms normalisation kept in the two builders, because their `build_decisions.py` replace matched only the pre-fix URL string and would have re-broken the decisions copy the moment the source sheet was corrected.
+2. **Flag-id collision** — this session took `F-39` for the control caveat while main's prose used `F-39` for the font repair. Renumbered **this** session's rows around main's (`F-39` = font, `F-40` = control), which also puts the font record in the register where the Flagged page renders it.
+3. **Question-id collision** — both this session and `4b6b53e7` added `Q-17` (mine: link minting; theirs: domain ownership). Main's kept its number; mine became **`Q-18`**, with every cross-reference in the register, on `paths.html` and in the verification record moved with it. Both questions now publish.
+4. **`index.html` conflicted twice** — main redesigned the landing nav and footer while this branch was open. Resolution each time: take main's page, re-apply this session's two additive links, never the reverse.
+5. **Another session's readiness gate went red on my page** — `RR-10`/`RR-11` state measured coverage in prose; publishing `paths.html` moved the measurement (116 → 123 → 125 pages, 12 published surfaces). Re-stated to the tool's own numbers through the JSON parser and rebuilt `release/index.html` with their builder. A first attempt did this with a regex on raw JSON and injected a control character into `ledger/readiness.json` — caught by the gates, reverted, and redone properly. Worth remembering: **never patch JSON with a regex**, and the same trap is why `F-39`'s comment broke the url gate.
+6. **`T40` was claimed by four sessions today** (`bbcc741f`, `08789ab3`, `3db75825`, `b6defa90`). Per the board's own lesson, this work is identified by the session id; the number is decoration.
+
+### Left open for the owner (unchanged, non-blocking)
+
+`F-01`/`F-03`/`F-04` (confirm the three products from the account that minted the tokens) · `F-24` (no Associates `tag=` on any supplied link, so nothing here can earn yet) · `Q-02` (approved account) · `Q-04` (a domain the owner owns — and a rejection cannot be appealed) · `Q-18` (who created these three links). The suggestions board, the questions register and `paths.html` are the three surfaces that hold these; `flagged.html` publishes every irregularity with its source links.
+
+## Session claim — T42 (label only; identity is the session id) — `arena/5d6d2254-zone2` (session `5d6d2254`, 2026-11-15 UTC)
+
+> **Id collision, recorded per the board precedent:** this claim was pushed as `T40` at 13:12Z against `main` = `23895e2`;
+> while it was in flight, `3db75825` shipped **T40** (PR #91) and `08789ab3` shipped **T41** onto `main`. Both records are kept
+> verbatim above; only this heading changed, and the text below now reads as T42. No other session's row was renamed.
+
+**Claimed at 13:12Z, before any edit, on `main` = `23895e2`.** Per today's lesson on this board, the
+`T40` label is decoration — if it collides, whoever integrates renumbers it; nothing in this record or any
+other session's row is to be renamed by a script.
+
+**Request this session answers.** The owner's 2026-11-15 brief repeated: a polished marketing affiliate site
+that earns organic traffic and does not read as generated; a dedicated suggestions section; a clear list of
+questions / information / answers needed before any decision; an executive summary; line-by-line verification
+with an official source per row; a GitHub Pages deploy; and a PR merged without waiting for review.
+
+**What is already true on `main` (measured, not assumed).** Root site = verified operator dashboard, 13
+public pages; `marketing/` = the reader-facing publication (18 pages, canonical + OG + sitemap + feed, ten
+writing rules gated by `verify_marketing.py`); `journal/` = hand-written editorial layer; `pages/` = 39
+generated evidence subpages incl. the canonical `suggestions.html` / `questions.html` boards; `decisions/` =
+the requirement/content-plan surface; four legacy companion namespaces. So the anti-slop editorial ask,
+the suggestion board and the question register all exist. This session therefore does **not** add a 14th
+article, a second suggestion board, or a redesign of a namespace another session owns.
+
+**The gap this session fixes (measured 2026-11-15 on `23895e2`):** the reader-facing layer is nearly
+invisible to a crawler, and the front door still leads with the operator dashboard.
+1. `sitemap.xml` is hand-maintained and covers 16 URLs while **23 published pages are missing from it** —
+   the entire `marketing/` publication (18), all of `decisions/` (4) and `playbook.html`. It is the only
+   shared output in this repo that no generator derives, which is exactly why it drifted.
+2. Root `robots.txt` advertises only that sitemap, so a crawler that obeys it never learns the publication
+   exists. (`marketing/robots.txt` points at `marketing/sitemap.xml`, but nothing points a crawler at
+   `marketing/robots.txt` from the site root.)
+3. `<link rel="canonical">` and Open Graph tags exist on **18 of 78** published pages (`marketing/` only).
+   Root (13), `journal/` (4), `pages/` (39) and `decisions/` (4) have none, so the same page is
+   addressable with and without `index.html`, and social/link previews fall back to whatever the crawler
+   guesses for `og:image`/`og:title`.
+4. `index.html`'s primary nav is 13 flat items with no route to the buying guide; the reader publication is
+   reachable only from three in-body links.
+
+**Scope (files this session may edit; everything else is out of bounds):**
+- NEW `tools/build_sitemap.py` — derives `sitemap.xml` from the published tree, `--check` supported, plus a
+  coverage assertion (every published reader/evidence page is in the sitemap; the excluded legacy namespaces
+  are excluded by an explicit, commented rule, not by omission).
+- `sitemap.xml` (now generated; superset that includes any page another session adds).
+- `.github/workflows/pages.yml` — one added step running the sitemap generator's `--check`.
+- Root static `<head>` metadata ONLY (canonical + `og:`): `index.html`, `products.html`, `analysis.html`,
+  `content.html`, `compliance.html`, `tracking.html`, `verification.html`, `sources.html`, `summary.html`,
+  `design-notes.html`, `playbook.html`, `404.html`. In `index.html` additionally: primary-nav grouping into
+  a reader path and an operator path, and the hero's primary CTA pointing at the decision page. **No table,
+  count, KPI, caption or verified value is edited by this session on any root page.**
+- `journal/*.html` — `<head>` metadata only (4 files, hand-written).
+- `tools/build_site.py` + `tools/build_decisions.py` — additive `<head>` template change only, then
+  regenerate `pages/**` and `decisions/**`. (Both generators were last edited by `1b839f87`, whose PR #89 is
+  merged, so no active claimant holds them.)
+- `ledger/suggestions.json` / `ledger/questions.json` — additive rows only, from the crawl-hygiene findings,
+  each with options/evidence/sources; no existing row edited.
+- NEW `docs/verification-5d6d2254.md` — this session's dated, line-by-line re-verification record.
+- `EXECUTIVE_SUMMARY.md` — append-only addendum (and re-run `research-hub/scripts/build.py` in the same
+  commit, per the recorded CI coupling).
+- `COORDINATION.md` — this claim, status corrections where a row says `in progress` but its session's merge
+  is on record, and the closing record.
+
+**Deliberately NOT touched** (conflict avoidance with open PRs at claim time): `README.md` and `flagged.html`
+(PR #93, `86bb886d`); `assets/css/style.css`, `pages/assets/dashboard.css`, `tools/build_decisions.py`'s
+font rewrite (PR #89, merged); `marketing/**` content (PR #82/#88 lineage, `e8b071cd`); the four legacy
+companion namespaces. Change requests for those are logged in the closing record below, not edited.
+
+**Rules this session holds itself to.** No verified value is added, inferred or filled; every row I publish
+ends in the official page it was read from; anything I cannot confirm stays blank and gets flagged; the
+owner-decision boards stay open (I implement crawl plumbing and navigation, not product claims, not new
+marketing copy, and not any of the pending SG/DS choices).
+
+### Status corrections this session read on the board (recorded, not silently rewritten)
+
+| Row | Board says | Measured |
+|---|---|---|
+| T21 (`a133aa61`) | `in progress` | its PR #22 was integrated long ago; the row's own scope text says the work shipped. Left as written by its owner — a status cell is the owner's to close. |
+| T26 (`0a697d4a`) | `in progress` | the bounty/bonus transcription it claimed is on `main` (the register publishes the full Table 1 set); the session never recorded a merge. Left for its owner. |
+| T32 (`8c4236ad`) | `in progress` | `docs/verification-8c4236ad.md` exists on `main`, so part of the scope shipped; no closing record. Left as written. |
+| T38 (`fcb538fa`) | `in progress` in the table | its own closing record at the end of this file says PR #83 merged (`1e351e6`) and the deploy was confirmed. The closing record supersedes the cell; only the author should edit the row. |
+
+The pattern is worth a rule for the next session: **close your own status cell in the merge commit**, not in
+a follow-up that may never come. Five sessions spent part of today re-deriving each other's state from PR
+numbers.
+
+## Duplicate-work collision, resolved without discarding either side — `5d6d2254` × `156aae86`
+
+Both sessions measured the same hole on 2026-11-15 and both reached for the same fix, independently and
+about an hour apart:
+
+| | `156aae86` (T41, merged first) | `5d6d2254` (T42, this session) |
+|---|---|---|
+| Sitemap | `tools/build_sitemap.py` — derives **all 121** published pages; documents each exclusion (`404.html` by basename, `tools/`/`tests/`/`content/`) and why `lastmod`/`changefreq`/`priority` are omitted, with cited sources | **withdrawn.** An earlier draft of this session generated a narrower 77-URL sitemap (root + `pages/` + `journal/` + `decisions/` + `marketing/`, companion prototypes excluded by rule). `156aae86`'s rule — "present in the tree is reachable at a URL" — is the better one, and two generators writing one `sitemap.xml` is a drift machine. `git checkout --theirs` on `tools/build_sitemap.py` and `sitemap.xml`; this session's version was deleted, not merged. |
+| Crawler gate | `tools/seo_audit.py` — D1–D6 fail (coverage, `<loc>` integrity, robots, noindex, marketing registry agreement, favicon); D7 canonical is **report-only**, because the duplicate-content call for the companion namespaces is the owner's (MQ-08 / DS-12) | complementary, not competing: the tags D7 reads did not exist anywhere outside `marketing/`. |
+| Page identity | reports a canonical that disagrees | **writes them.** `tools/head_meta.py` (one function computing a page's own URL) + the block emitted by `tools/build_site.py`, `build_decisions.py`, `build_root_views.py`, `build_summary.py`, and `tools/build_head_meta.py --fix-heads` for the hand-written root and `journal/` pages. `--audit` fails CI on a missing or disagreeing canonical, `og:type`, `og:site_name`, `og:title`, `og:description`, `og:url` or a description on any of the 77 reader/evidence pages. |
+| Landing page | hero + trust strip copy (T34 lineage) | nav regrouped into a labelled reader path and operator path, and the hero's primary CTA now routes to `marketing/buying-guide.html`. |
+| Landing footer | the `EAD` heredoc lines had already been repaired on `main` by the time this session merged | this session found the same two lines rendering as visible text, plus a duplicated *Suggestions board* entry and two labels pointing at the publication index; the `EAD` half is `156aae86`'s fix, the duplicate-entry half is this session's. `audit_site.py`'s new `debris` check (theirs) already gates the class, so this session **dropped** its own duplicate `stray_markers` check rather than merge two gates for one defect. |
+
+**What the owner gets from the collision:** the sitemap is derived and fails the build when it drifts;
+every indexed page now declares its own URL, which is what turns `seo_audit.py`'s D7 from a report into a
+guarantee; and the landing page sends a reader to the buying guide before it shows a dashboard.
+
+**What this session did not do, on purpose:** no edit to `ledger/**` while five sessions had open PRs
+against it (this session's two new irregularities are published in
+`docs/verification-5d6d2254.md` §5 and filed as change requests below, so whoever owns `ledger/flags.json`
+can add them without a third session re-finding them); no new marketing article; no change to any verified
+value; no `og:image` while Q-10 is open.
+
+### Change requests (logged here rather than edited into other sessions' files)
+
+| # | Request | Owner of the file | Why |
+|---|---|---|---|
+| CR-A | Add F-4x: *"the control behind F-20 answers 403 through the workspace fetcher, where the register quotes a 404 — the conclusion (a lookup, not a fallback) is unaffected; the status code should be stated as observed, not as the mechanism."* Evidence: `https://link.amazon/NOTACODE9` on 2026-11-15; see `docs/verification-5d6d2254.md` D-2. | `ledger/flags.json` | A reader reproducing the control from a non-browser client today would think the finding had been reversed. |
+| CR-B | Re-read P2's `Included accessories` row and relabel it `conflict` with both figures (the listing title says six; the row publishes seven with status `partial`), and note that Amazon serves more than one title for `B09B7SB46R`, so a quoted title is perishable evidence carrying a read date. Evidence: today's `<title>` at https://www.amazon.com/dp/B09B7SB46R vs `marketing/data/facts.json`; see D-1. | `marketing/data/editorial.json`, `marketing/data/facts.json`, `ledger/products.json` | The site already does the right thing for two other conflicts; this one is currently labelled as a gap rather than a disagreement. |
+| CR-C | Add one sentence to the P3 article: the manufacturer sells 5 Qt and 8 Qt on one page, and every figure quoted is the 8 Qt line. Evidence: https://chefman.com/products/turbofry-touch-air-fryer-1 spec bullets read "(5 Qt Model)" / "(8 Qt Model)"; see D-3. | `marketing/data/editorial.json` | Removes a way for a careful reader to doubt a row that is in fact correct. |
+| CR-D | `sitemap.xml` is generated now — any session that wants to edit it by hand should add the page and re-run `python3 tools/build_sitemap.py`, or the CI step will fail. `docs/*.md` are reachable on the deployed site (the Pages artifact is the repository root) but are not in the sitemap by `156aae86`'s rule, which excludes `tools/`, `tests/` and `content/` only; if that is intentional, fine; if not, one line in the generator covers it. | `tools/build_sitemap.py`, `tools/build_marketing.py` | Prevents the next hand-edit from silently reverting on someone else's build. |
+
+### Closing record — T42 — `arena/5d6d2254-zone2`
+
+| Item | Value |
+|---|---|
+| PR | see the link recorded in the merge commit message and in the line below |
+| Delivered | `tools/head_meta.py`, `tools/build_head_meta.py` (+ CI gate), canonical/OG on 77 indexed pages, `index.html` front door, `tools/build_site.py` / `build_decisions.py` / `build_root_views.py` / `build_summary.py` head emission, `design-notes.html` citation, `EXECUTIVE_SUMMARY.md` addendum, `docs/verification-5d6d2254.md` |
+| Withdrawn on collision | this session's `tools/build_sitemap.py` and its 77-URL `sitemap.xml`; the `stray_markers` check in `tools/audit_site.py` (theirs, `debris`, covers the class) |
+| Scope extensions beyond the claim, recorded here | `assets/css/style.css` (3 additive nav rules + their mobile variant), `.github/workflows/pages.yml` (one CI step), `design-notes.html` (one footer citation), `tools/build_site.py` / `build_decisions.py` / `build_root_views.py` / `build_summary.py` (head template only) |
+| Verification | 37 dated checks in `docs/verification-5d6d2254.md`, each with the official URL; live fetches on 2026-11-15 of the three short links, the three `dp/<code>` controls, three manufacturer pages, the Operating Agreement and Table 1 |
+| Gates | full CI replay locally (all `run:` steps of `.github/workflows/pages.yml`, including the two this session's lineage added), plus `tools/seo_audit.py` and `tools/build_head_meta.py --audit`: green |
+
+### Hand-off notes from `5d6d2254` (T42) written after the merge, because they are only true of `main` after it
+
+**Red trunk, found and fixed here while merging (2026-15:40Z).** Merging `origin/main` into this branch and
+replaying the workflow showed step *"Every stylesheet url() resolves to a file"* failing 3 times:
+`tools/check_css_urls.py` (from `f8e18ca8`, PR #108) resolves **every** `url()` it finds in a stylesheet,
+including the one written as a prose example inside the `@font-face` comment that PR #89 left in
+`assets/css/style.css` — `url("../fonts/…")`, whose target is a literal ellipsis. So the gate was failing on
+a sentence, and `main` was red: the two most recent `Build, verify and deploy` runs on `main`
+(`43719991284`, `43719787656`) are `completed · failure`, while `pages build and deployment` still succeeded,
+which means a broken-checks trunk was still shipping a site. Fix here: the comment now *describes* what the
+paths resolve to instead of showing one, and the two vendored copies (`pages/assets/dashboard.css`,
+`decisions/assets/dashboard.css`) inherit it from `tools/build_site.py` / `tools/build_decisions.py`
+regeneration. `16 stylesheets · 9 local url() references · 0 broken`; every reference re-checked by hand
+against the files on disk. **Two open PRs carry the same diagnosis and should be treated as the authority on
+which fix lands**: #115 (`3e0b3b4e`) — comment-only repair of the same three stylesheets — and #116
+(`3e0b3b4e`) — making the gate skip comments. Whichever of #115/#116/this PR integrates first wins; the
+other two should reduce to no-op, and if #116 lands, this comment rephrase stays useful because a reference
+in prose is still a misleading thing to put in a stylesheet. **The recurrence rule for everyone:** do not
+write an example path inside a scanned file; and a gate added to close one defect class should be
+negative-tested against *prose*, not only against defects — #108 tested "append a `url()` to any stylesheet"
+and that passed, but nobody tested "mention a `url()` in a comment".
+
+**A third implementation of the same head-metadata idea is open.** PR #104 (`3e0b3b4e`) adds
+`tools/page_meta.py` + `tools/build_meta.py` and edits `index.html`, `products.html`, `sources.html`,
+`summary.html`, `verification.html`, `tools/build_root_views.py`, `tools/build_summary.py` and
+`.github/workflows/pages.yml` — overlapping this session's `tools/head_meta.py`,
+`tools/build_head_meta.py` and the same four generators. Recommendation to whoever integrates: keep
+**one** of the two (this branch's `--audit` gate is already wired into CI and its canonical form matches
+`tools/build_sitemap.py`'s special case for the root `index.html`, which is also what
+`tools/seo_audit.py`'s D7 expects — D7's `index.html -> …/index.html` note disappeared once canonical and
+sitemap agreed), and reduce the other to the pages it genuinely adds.
+
+**Sitemap collision, resolved by adopting theirs.** This session also wrote a `tools/build_sitemap.py`
+(77 URLs: root + `pages/` + `journal/` + `decisions/` + `marketing/`, prototypes excluded by rule).
+`156aae86`'s version, which had reached `main` first, derives **all 121** published pages with a documented
+exclusion list. Mine was withdrawn — `git checkout --theirs` on the generator and on `sitemap.xml`, then
+`python3 tools/build_sitemap.py` to regenerate — because two generators writing one file is a drift
+machine, and their rule ("present in the tree is reachable at a URL") is the defensible one. Consequence
+worth knowing: `docs/*.md` and the companion prototypes are now advertised in the sitemap. That is theirs
+to defend or narrow; this session's narrower list is recorded here in case the owner prefers it, and
+`docs/verification-5d6d2254.md` D-5 carries the measurement that started it.
+
+**Landing page, reconciled rather than overwritten.** `bbcc741f` (PR #109) re-landed a hero that leads with
+the platform and an audit link; this session's change leads the same page with the reader's decision. The
+merge keeps main's hero copy and headline, adds `Which one to buy` → `marketing/buying-guide.html` as the
+primary action (with `Read the articles` and `Meet the three products` preserved), wraps main's fourteen
+nav targets in the two labelled groups, and restores the playbook link in the footer. No session's link was
+dropped; `tools/audit_site.py`'s `namespaces` and `debris` checks both pass on the result.
 
 ## Closing record — `343bc959-G1` — `arena/343bc959-zone2` (session `343bc959`, 2026-11-15 UTC)
 

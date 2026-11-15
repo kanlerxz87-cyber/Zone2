@@ -38,11 +38,19 @@ import sys
 import tempfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from head_meta import head_block  # canonical + og:* for the decision surface (T42)
+
 REPO = Path(__file__).resolve().parents[1]
 DATA = REPO / "ledger"
 OUT = REPO / "decisions"
 
 SITE_NAME = "Zone2"
+
+# Shared by the <meta description> and the og:description, so the two cannot drift apart.
+HUB_DESCRIPTION = ("Decision surface for the Zone2 Amazon affiliate platform: sourced requirements, the open "
+                 "questions blocking each proposal, and suggestions awaiting an owner decision. Nothing "
+                 "here is implemented until it is chosen.")
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 AS_OF = "2026-11-15"
 
@@ -224,6 +232,8 @@ NAV = [
 def render(rel: str, title: str, lead: str, body: str, *, badge: str = "") -> str:
     """Same shell as pages/ (tools/build_site.py::render) so the two namespaces are one site."""
     c = counts()
+    head_tags = head_block("decisions/" + rel, title=f"{title} · {SITE_NAME} decisions",
+                            description=HUB_DESCRIPTION, site_name=f"{SITE_NAME} decisions")
     items = []
     for href, label in NAV:
         active = " active" if href == rel else ""
@@ -233,9 +243,10 @@ def render(rel: str, title: str, lead: str, body: str, *, badge: str = "") -> st
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Decision surface for the Zone2 Amazon affiliate platform: sourced requirements, the open questions blocking each proposal, and suggestions awaiting an owner decision. Nothing here is implemented until it is chosen.">
+<meta name="description" content="{esc(HUB_DESCRIPTION)}">
 <meta name="robots" content="index,follow">
 <title>{esc(title)} &middot; {esc(SITE_NAME)} decisions</title>
+{head_tags}
 <link rel="stylesheet" href="assets/dashboard.css">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/decisions.css">

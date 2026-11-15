@@ -697,52 +697,6 @@ recoverable in git history. A second irregularity, the `@font-face` paths in `as
 stylesheet (`assets/css/assets/fonts/…`, which 404s so the self-hosted fonts silently fall back), is flagged for the design
 system's owner and was not repaired from another session's file.
 
-<<<<<<< HEAD
----
-
-## Addendum — 2026-11-15 · session `bbcc741f` (paths, the third-date re-check, and one real defect)
-
-Three things this pass adds to the picture above, and one thing it corrects.
-
-**1. A decision can now be taken in one move.** The suggestions board is ten rows of options, which is the right
-record and the wrong interface: an owner who agrees with seven of ten recommendations has not chosen a direction,
-they have filled a form. `paths.html` groups the same rows into three sequences that each make sense on their own
-terms — publish clean, earn, automate — with the letters taken straight from the board so nothing is
-re-litigated, the program's own launch bar quoted beneath them, and a "what no path authorises" table so a
-choice cannot accidentally read as permission for something the rules forbid. Path 1 is the default precisely
-because it *is* the board's recommendation set: if nobody records anything, the site is already that path.
-
-**2. The supplied links were checked again, by a new session, on a third date.** All three destinations
-reproduced exactly (`V-83`…`V-85`), as did the control that proves a `link.amazon` token is not an ASIN
-(`V-86`) — a live ASIN in the token position is refused by the hop service, so nothing outside the creating
-account can decode these links back to a product. Two consequences are unchanged and still decisive: no
-resolved URL carries an Associates `tag=`, so the links cannot pay this owner as supplied, and every product
-attribute therefore stays blank rather than being inferred from wherever a stranger's link happened to point.
-One consequence moved: the negative control `F-20` calls decisive answered **403** for an unissued token today,
-not the 404 the register recorded (`F-40`). The reading survives — the positive evidence is what carries it —
-but the site now says which leg it stands on instead of implying both are equal.
-
-**3. Amazon's review bar is now a published constraint, not folklore.** Re-reading the Application Review
-Process page (`V-89`) turned up two sentences that bear directly on every path and had not been carried into a
-decision surface: content must generally be "within the last 60 days", and — the one that should decide
-timetable — "we aren't able to reassess an application once it's been rejected". Rejection is terminal, so the
-cheap-to-fix failure mode is publishing thin content on a site the applicant does not own while holding no
-account; the expensive one is doing it once and being unable to try again. That is now the argument for the
-ordering on `paths.html`, and it is quoted rather than paraphrased so it can be checked in one click.
-
-**4. A defect in the site's own appearance, fixed.** The self-hosted typefaces had never loaded: the design
-system's `@font-face` rules resolved against the stylesheet's directory and pointed at a path that does not
-exist, so every page on the site — including the marketing surfaces built around a serif display face — had been
-rendering in fallback system fonts since the redesign. No gate could see it, because a link checker follows
-`<a href>` and not `url()`. It had been noticed and left alone for the wrong reason (the fix spans two
-namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
-class of bug — a resource a build cannot fail on — is on the record for the next time.
-
-**Numbers for the reviewer, all derived from the registers:** 40 flags, 43 sources, 89 logged checks, 17 open
-questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
-or performance figure: the site still has no authorised source for one, and an absent number beats an invented
-one.
-=======
 ## Addendum — 2026-11-15 (session `f8e18ca8`): the independent review, the gaps, and the decision pack
 
 This session was asked for four things the brief keeps repeating — review the repo line by line, make
@@ -802,4 +756,101 @@ or tag. Until that exists, nothing built here can be measured against a commissi
 optimization half of the brief stays theoretical no matter how much more code lands.
 
 Line-by-line record: `docs/audit-2026-11-15.md`. Design-prompt suggestions: `docs/design-prompt-2026-11-15.md`.
->>>>>>> origin/main
+
+---
+
+## Addendum — 2026-11-15 · session `bbcc741f` (paths, the third-date re-check, and one real defect)
+
+Three things this pass adds to the picture above, and one thing it corrects.
+
+**1. A decision can now be taken in one move.** The suggestions board is ten rows of options, which is the right
+record and the wrong interface: an owner who agrees with seven of ten recommendations has not chosen a direction,
+they have filled a form. `paths.html` groups the same rows into three sequences that each make sense on their own
+terms — publish clean, earn, automate — with the letters taken straight from the board so nothing is
+re-litigated, the program's own launch bar quoted beneath them, and a "what no path authorises" table so a
+choice cannot accidentally read as permission for something the rules forbid. Path 1 is the default precisely
+because it *is* the board's recommendation set: if nobody records anything, the site is already that path.
+
+**2. The supplied links were checked again, by a new session, on a third date.** All three destinations
+reproduced exactly (`V-83`…`V-85`), as did the control that proves a `link.amazon` token is not an ASIN
+(`V-86`) — a live ASIN in the token position is refused by the hop service, so nothing outside the creating
+account can decode these links back to a product. Two consequences are unchanged and still decisive: no
+resolved URL carries an Associates `tag=`, so the links cannot pay this owner as supplied, and every product
+attribute therefore stays blank rather than being inferred from wherever a stranger's link happened to point.
+One consequence moved: the negative control `F-20` calls decisive answered **403** for an unissued token today,
+not the 404 the register recorded (`F-40`). The reading survives — the positive evidence is what carries it —
+but the site now says which leg it stands on instead of implying both are equal.
+
+**3. Amazon's review bar is now a published constraint, not folklore.** Re-reading the Application Review
+Process page (`V-89`) turned up two sentences that bear directly on every path and had not been carried into a
+decision surface: content must generally be "within the last 60 days", and — the one that should decide
+timetable — "we aren't able to reassess an application once it's been rejected". Rejection is terminal, so the
+cheap-to-fix failure mode is publishing thin content on a site the applicant does not own while holding no
+account; the expensive one is doing it once and being unable to try again. That is now the argument for the
+ordering on `paths.html`, and it is quoted rather than paraphrased so it can be checked in one click.
+
+**4. A defect in the site's own appearance, fixed.** The self-hosted typefaces had never loaded: the design
+system's `@font-face` rules resolved against the stylesheet's directory and pointed at a path that does not
+exist, so every page on the site — including the marketing surfaces built around a serif display face — had been
+rendering in fallback system fonts since the redesign. No gate could see it, because a link checker follows
+`<a href>` and not `url()`. It had been noticed and left alone for the wrong reason (the fix spans two
+namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
+class of bug — a resource a build cannot fail on — is on the record for the next time.
+
+**Numbers for the reviewer, all derived from the registers:** 40 flags, 43 sources, 89 logged checks, 17 open
+questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
+or performance figure: the site still has no authorised source for one, and an absent number beats an invented
+one.
+
+---
+
+## Addendum — the crawl layer and the front door, 2026-11-15 (session `5d6d2254`, T42)
+
+The brief's two halves were both published before this session: the verified platform with its registers,
+and a reader-facing publication (`marketing/`, with the hand-written `journal/`) written under a
+machine-checked editorial standard. What this session worked on was the layer between that content and the
+outside world — what a crawler is told, what a link preview reads, and which door a first-time visitor is
+put through. Nothing else: no product attribute, price, rating, commission band or register row was added,
+changed or inferred, and no fourteenth article was written, because the content queue is an owner decision
+still open on the improvement board.
+
+**Two sessions found the same hole the same day, and the site is better for it.** The root sitemap had
+become the one shared output no generator derived, and it had drifted to a fraction of the published tree,
+listing none of the reader publication. `156aae86` shipped that half — `tools/build_sitemap.py`, now the
+repository's sitemap generator, and `tools/seo_audit.py`, which fails the build on a missing page, a dead
+`<loc>`, a `robots.txt` that blocks what the sitemap advertises, or a broken favicon. This session shipped
+the other half, which is why the audit's canonical check has nothing to report on the reader and evidence
+surfaces: `<link rel="canonical">` with `og:type`, `og:site_name`, `og:title`, `og:description` and `og:url`
+now appear on every indexed page, emitted by the generator that owns each page through one shared
+`tools/head_meta.py`, and held by `tools/build_head_meta.py --audit` in CI. No `og:image` was added — the
+imagery rights question is open (Q-10 / DS-11) and a tag pointing at nothing is the sort of placeholder this
+site refuses — and no Product or Review markup, per DS-07. `404.html` is not advertised for indexing, and
+`<lastmod>` is omitted, because the repository holds no official source for a per-page modification date.
+
+**The landing page leads with the decision, not the dashboard.** The primary navigation was a flat row of
+fifteen links; it is now two labelled groups — a reader path (the publication, the buying guide, the
+head-to-head, the guides index, the Journal) and an operator path (overview, products and evidence, the
+suggestions board, the open questions, the verification log, the independent audit) — and the hero answers
+the buyer's question before it describes the platform. Every page that left the header is still reachable
+from this page: the body sections and the footer carry them, and the namespaces the structural audit
+requires from the landing page are unchanged, so "linked or lost" is a build failure rather than a hope.
+
+**Independent re-verification, published.** `docs/verification-5d6d2254.md` records what was re-read on
+2026-11-15 with the official URL beside each row: the three supplied short links and their destinations,
+the three `amazon.com/dp/<supplied code>` Page-Not-Found controls, every sourced Chefman and Emeril
+specification row (13 of 13 on the dual-window page; the 8 Qt page's per-model lines; both live conflicts —
+the 25-versus-24 preset count and the 450-versus-400 °F Hi-Fry figure), and the program facts the front
+door cites: the Operating Agreement's §5 disclosure sentence, §1's tagged-link requirement, §4's refusal to
+represent traffic or income, §6's termination terms, and Table 1's bands. Four items came out of it and were
+deliberately not papered over: the Emeril listing serves a different title today than the string this site
+quotes, and that title states a different accessories count than the row's `partial` value; the control
+behind F-20 answered `403` through this fetch path where the register quotes a `404`, so the conclusion
+stands and the status code does not; the 8 Qt manufacturer page is a two-variant page whose per-model lines
+the site reads correctly without saying so; and the official Emeril page's own carousel asset names a
+function count that disagrees with its body copy.
+
+**What still blocks the earning half is unchanged and none of it is technical:** no Associate ID, so no link
+on this site can attribute a commission (F-07 / F-24); the three intended products are still not established
+by any official document (F-01 … F-03); the Creators API account is unregistered (F-05); and there are no
+performance reports, because there is no traffic to report (F-08). Everything the owner must decide is on
+the suggestions board and the questions register, each with the action that would discover the answer.
