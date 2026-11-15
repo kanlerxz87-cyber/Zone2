@@ -3,7 +3,7 @@
    depend on root-level paths another session may move. */
 /* ============================================================================
    Zone2 — verified Amazon affiliate platform
-   Design system v3 (T42 front-of-house polish pass, session arena/4b6b53e7-zone2,
+   Design system v3 (T46 front-of-house polish pass, session arena/4b6b53e7-zone2,
    2026-11-15). Succeeds the T30 redesign (session 2b257b2e).
 
    Rules this file obeys:
@@ -310,7 +310,7 @@ img { max-width: 100%; }
 .product-actions { margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; padding-top: 6px; }
 .product-actions .btn-primary { font-size: 13.5px; }
 
-/* ---- Article teasers (T42: the published editorial, surfaced on the landing) -- */
+/* ---- Article teasers (T46: the published editorial, surfaced on the landing) -- */
 .article-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
 .article-card {
   display: flex; flex-direction: column; gap: 9px;

@@ -276,7 +276,7 @@
     return '<a href="' + esc(url) + '" target="_blank" rel="sponsored noopener noreferrer">' + esc(label) + "</a>";
   }
 
-  /* T42 front-of-house pass: the cards now lead with the *verified* specification
+  /* T46 front-of-house pass: the cards now lead with the *verified* specification
    * highlights (from the same SPECS ledger rows the products page renders), each
    * carrying the link to the official page the value was read from. The unverified
    * fields stay on the card as explicit blanks — the honesty is the differentiator,
