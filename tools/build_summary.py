@@ -190,6 +190,7 @@ def build() -> str:
 <meta name="description" content="Executive summary: what this Amazon affiliate platform delivers, what the three supplied links resolve to, what blocks revenue, and what the owner must do. Every figure is read from the ledger and every row links to an official source.">
 <meta name="robots" content="index,follow">
 <title>Executive summary &middot; Zone2</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="pages/assets/dashboard.css">
 <link rel="stylesheet" href="pages/assets/site.css">
 <style>

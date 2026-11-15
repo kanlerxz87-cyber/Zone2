@@ -24,4 +24,11 @@ After rebuilding, the public register and canonical data contain no Osaka/operat
 - `tools/build_root_views.py --check`, `tools/build_summary.py --check`, `tools/build_decisions.py --check`, `tools/validate_decisions.py`: all pass; 16 questions remain open and 10 suggestions remain awaiting owner choice.
 - `tools/build_marketing.py --check`, marketing verifier, revalidation builder/verifier, research-hub builder/verifier, affiliate-lab verifier, and JavaScript syntax checks: all pass.
 
-**Status:** correction implemented and locally verified. Live deployment confirmation is recorded after the integration PR/deploy.
+## Merge and live publication
+
+- PR [#95](https://github.com/kanlerxz87-cyber/Zone2/pull/95) merged to `main` as `6eccadd57e99e8c14557125ee0b0d156f9c067f1` on 2026-11-15.
+- Post-merge `Build, verify and deploy` run [43717842219](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43717842219): success.
+- GitHub Pages deployment [43717841570](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43717841570): success.
+- Cache-busted live read of [the public Questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html?cacheBust=6eccadd57e99e8c14557125ee0b0d156f9c067f1) shows Q-01 retains only the sourced Amazon marketplace facts and Q-07 only states that the brief is in English. A non-cache-busted read briefly returned the previous page, so the cache-busted read was used to verify the deployed commit.
+
+**Status:** correction merged, deployed, and live-verified.
