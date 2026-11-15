@@ -3,59 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tracking — Zone2</title>
+<title>Links &amp; tracking — designed, not yet live — Zone2</title>
+<meta name="description" content="The Special Link and campaign tracking plan: what the supplied links are missing (an Associates tag), how attribution works, and what turns this plan into a launch checklist.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-name">Zone2</span>
+      <span class="brand-sub">field-verified kitchen gear</span>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
+      <a href="pages/suggestions.html">Suggestions</a>
+      <a href="pages/questions.html">Questions</a>
+      <a href="journal/index.html">Field notes</a>
       <a href="tracking.html" class="active">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Link &amp; Campaign Tracking</h2>
-      <p>Special Link management, click/conversion tracking and monthly reconciliation, designed per the official program rules. The three supplied links carry no Associates <code>tag</code>, so as supplied they cannot attribute a sale or earn a commission (F-24); no Associates account or tag was supplied either, so the compliant setup below is planned, not yet live.</p>
+  </div>
+  <div class="utilitybar">
+    <div class="wrap utilitybar-inner">
+      <span class="utilitybar-label">Evidence</span>
+      <a href="summary.html">Executive summary</a>
+      <a href="verification.html">Verification log</a>
+      <a href="sources.html">Source register</a>
+      <a href="flagged.html">Flagged for review</a>
+      <a href="pages/index.html">Findings hub</a>
     </div>
+  </div>
+</header>
 
+<main class="wrap">
+
+  <div class="page-head">
+    <h1>Links &amp; tracking — designed, not yet live</h1>
+    <p>
+      Amazon pays on <strong>Special Links</strong>: properly tagged link formats carrying your
+      Associates ID. The three supplied short links carry per-link tracking tokens but no
+      Associates tag (F-24) — so as supplied, a reader could click every one of them and the
+      account would still record nothing. This page is the plan that fixes that the day the
+      account and tag exist.
+    </p>
+  </div>
+
+  <div class="disclosure">
+    <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+  </div>
+
+  <section class="section">
+    <h2>The tracking plan, row by row</h2>
+    <p class="section-sub">
+      Each planned campaign with its link setup and current state. When the Associates tag lands
+      (F-07), the "planned" rows below become the launch checklist — nothing here needs
+      redesigning, only tagging.
+    </p>
+    <div id="trackingTable"></div>
+  </section>
+
+  <section class="section">
+    <div class="grid2">
+      <div class="card">
+        <h3>How attribution actually works</h3>
+        <p>
+          A reader clicks a Special Link; a 24-hour session starts (longer for items that land in
+          the cart — 89 days to complete the order, per the published
+          <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Commission Income Statement</a>).
+          Qualifying purchases inside that session are attributed to the tag on the link. No
+          tag, no attribution — which is exactly the gap in the supplied links.
+        </p>
+      </div>
+      <div class="card">
+        <h3>What we will not build</h3>
+        <p>
+          No click-fraud tricks, no cloaked redirects, no cookie-stuffing, no unsolicited email
+          campaigns. Solicited email and SMS are permitted under Program Policies §4, but the
+          site's web-only default stays in place until the owner asks otherwise. And per §6(y),
+          the platform deliberately has no price-tracking or price-alerting feature.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
     <div class="disclosure">
       <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+      Zone2 is an independent site and is not affiliated with, sponsored or endorsed by Amazon.
     </div>
+    <p>
+      <a href="index.html">Home</a> · <a href="products.html">Products</a> ·
+      <a href="analysis.html">Analysis</a> ·
+      <a href="flagged.html">Flagged for review</a> ·
+      <a href="pages/questions.html">Questions register</a> ·
+      <a href="pages/suggestions.html">Suggestions board</a>
+    </p>
+    <p style="margin:0">Verified dataset date: 2026-11-14 · re-verified live 2026-11-15 (T33)</p>
+  </div>
+</footer>
 
-    <div class="card">
-      <h3>Campaign &amp; Tracking Setup</h3>
-      <div id="trackingTable"></div>
-    </div>
-
-    <div class="card">
-      <h3>Attribution model (verified)</h3>
-      <ul style="margin:0;padding-left:20px;font-size:14px">
-        <li>A <strong>Session</strong> begins when a customer clicks a Special Link and ends at the first of: 24 hours elapse, an order is placed, or the customer clicks a different Associate's Special Link.</li>
-        <li>Cart purchases qualify if the product is added and the order is completed no later than <strong>89 days</strong> after the initial click-through.</li>
-        <li>Commission income is paid approximately <strong>60 days</strong> after the end of the month in which it was earned.</li>
-        <li>All Special Links must carry the assigned Associates ID / tag parameter for accurate tracking, reporting and commission accrual.</li>
-      </ul>
-      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">
-        Source: <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Associates Program Policies — Commission Income Statement</a>.
-      </p>
-    </div>
-
-    <footer class="site">
-      Verified dataset date: 2026-11-14.
-    </footer>
-  </main>
-</div>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>

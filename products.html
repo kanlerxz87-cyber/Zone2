@@ -3,96 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products — Zone2</title>
+<title>The three products, verified line by line — Zone2</title>
+<meta name="description" content="What the supplied link.amazon codes literally are (9-character short-link identifiers, not ASINs), what each link resolves to when opened, and the full specification tables with one official source per row.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-name">Zone2</span>
+      <span class="brand-sub">field-verified kitchen gear</span>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">Home</a>
       <a href="products.html" class="active">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
+      <a href="pages/suggestions.html">Suggestions</a>
+      <a href="pages/questions.html">Questions</a>
+      <a href="journal/index.html">Field notes</a>
       <a href="tracking.html">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Affiliate Products</h2>
-      <p>The three links supplied in the brief, and the three products each of them resolves to.
-      Two separate questions are kept apart on this page: what can be stated about the code as
-      supplied, and what the link itself resolves to. Every row below carries a link to the official
-      page it was read from; every value that could not be confirmed from an official source is left
-      blank and flagged — never inferred.</p>
+  </div>
+  <div class="utilitybar">
+    <div class="wrap utilitybar-inner">
+      <span class="utilitybar-label">Evidence</span>
+      <a href="summary.html">Executive summary</a>
+      <a href="verification.html">Verification log</a>
+      <a href="sources.html">Source register</a>
+      <a href="flagged.html">Flagged for review</a>
+      <a href="pages/index.html">Findings hub</a>
     </div>
+  </div>
+</header>
 
+<main class="wrap">
+
+  <div class="page-head">
+    <h1>The three products, verified line by line</h1>
+    <p>
+      Two questions, kept apart on purpose: what the supplied links <em>literally say</em>
+      (nine-character short-link identifiers — an ASIN is ten), and what each link
+      <em>resolves to when you open it</em>. The first cannot be verified, so nothing is stated
+      for it. The second is a reproducible observation — run it yourself any day.
+    </p>
+  </div>
+
+  <div class="disclosure">
+    <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+  </div>
+
+  <div id="productOverview"></div>
+
+  <section class="section">
+    <h2>As supplied — what the brief literally says</h2>
+    <p class="section-sub">
+      Each code is nine characters. Amazon defines an ASIN as a ten-character identifier, so none
+      of the three can address a catalog record as written — and a control test showed a
+      <em>valid</em> ten-character ASIN fed to the same short-link service also returns a 404,
+      which is what settled how to read them (F-28). These cells stay blank where the truth is
+      simply not published anywhere.
+    </p>
+    <div id="productsTable"></div>
+  </section>
+
+  <section class="section">
+    <h2>What each link resolves to — observed destinations</h2>
+    <p class="section-sub">
+      Open any of the three short links and you land on exactly one listing, again and again.
+      Where the destination can't be pinned (price, rating, availability move constantly and are
+      restricted anyway), the cell says so instead of carrying a stale value.
+    </p>
+    <div id="resolvedTable"></div>
+  </section>
+
+  <section class="section">
+    <h2>Verified specifications — one official source per row</h2>
+    <p class="section-sub">
+      Every value below was read from the manufacturer's page or the Amazon listing. Where two
+      official pages disagree — the Emeril preset counts (F-19), the TurboFry wattage and
+      dimensions — the row says <strong>Conflict</strong> and lists both readings instead of
+      choosing one.
+    </p>
+    <div id="specsTable"></div>
+  </section>
+
+  <section class="section">
+    <h2>How we know — the evidence and the controls</h2>
+    <p class="section-sub">
+      The observations above would mean nothing without controls: an unknown code on the same
+      service returns a 404, so the supplied codes are honoured lookups; a valid ASIN fed to the
+      same service also 404s, so the codes are not truncated ASINs; and the per-link tracking
+      token changes between days even though the destination does not. Each row is reproducible
+      by hand.
+    </p>
+    <div id="resolutionTable"></div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
     <div class="disclosure">
       <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+      Zone2 is an independent site and is not affiliated with, sponsored or endorsed by Amazon.
     </div>
+    <p>
+      <a href="index.html">Home</a> · <a href="analysis.html">Analysis</a> ·
+      <a href="journal/index.html">Field notes</a> ·
+      <a href="flagged.html">Flagged for review</a> ·
+      <a href="pages/questions.html">Questions register</a> ·
+      <a href="pages/suggestions.html">Suggestions board</a>
+    </p>
+    <p style="margin:0">Verified dataset date: 2026-11-14 · re-verified live 2026-11-15 (T33)</p>
+  </div>
+</footer>
 
-    <div class="card">
-      <h3>1 · The supplied codes, exactly as supplied</h3>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        Each supplied code is 9 characters, an Amazon ASIN is 10, and
-        <code>amazon.com/dp/&lt;code&gt;</code> returns Amazon's Page Not Found page. No product
-        attribute can therefore be stated <em>for the token itself</em> — which is why the cells that
-        describe the code are blank and the row is marked unverified.
-      </p>
-      <div id="productsTable"></div>
-    </div>
-
-    <div class="card">
-      <h3>2 · What each supplied link resolves to — observed 2026-11-14</h3>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        Each <code>link.amazon</code> URL resolves to exactly one Amazon product page, reproducibly.
-        The decisive control: an <em>unknown</em> 9-character code on the same service returns a
-        404 (“You've clicked on an invalid URL”) instead of a product, so the supplied codes are
-        honoured lookups rather than ignored tokens (flag F-20). What is still unconfirmed is the
-        <em>contract</em> — no public Amazon document binds a <code>link.amazon</code> code to a
-        product — so these are published as “the product this link resolves to”, never as “the product
-        the brief named” (flag F-03).
-      </p>
-      <div id="resolvedTable"></div>
-    </div>
-
-    <div id="productOverview"></div>
-
-    <div class="card">
-      <h3>3 · Verified specifications — each row sourced</h3>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        Every row below was read on 2026-11-14 from the official Amazon listing (its “About this
-        item” bullets and its Product-information block) or from the manufacturer's own product page.
-        Where two official pages disagree, the row is marked <strong>Conflict</strong> and shows
-        <em>both</em> values with their sources; nothing is resolved by inference.
-      </p>
-      <div id="specsTable"></div>
-    </div>
-
-    <div class="card">
-      <h3>4 · Resolution evidence &amp; controls — reproducible by hand</h3>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        The full evidence trail behind the table above, including the controls that decide how the
-        redirect behaviour must be read. Open any source link in a browser to reproduce it.
-      </p>
-      <div id="resolutionTable"></div>
-    </div>
-
-    <footer class="site">
-      Verified dataset date: 2026-11-14. The products named above are the destinations the supplied
-      links resolve to; the brief mapping, the per-product price, rating, review count, availability
-      and commission band remain unverified and are left blank — see the
-      <a href="flagged.html">Flagged for Review</a> page and the
-      <a href="verification.html">Verification</a> log.
-    </footer>
-  </main>
-</div>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>

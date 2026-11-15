@@ -3,55 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compliance — Zone2</title>
+<title>Compliance — the rules this site is built around — Zone2</title>
+<meta name="description" content="The Amazon Associates rules that shape every page here: the §5 disclosure, price-display limits, the link-shortening and cloaking ban, the price-tracking prohibition, and what happens on breach.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-name">Zone2</span>
+      <span class="brand-sub">field-verified kitchen gear</span>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html">Content</a>
       <a href="compliance.html" class="active">Compliance</a>
+      <a href="pages/suggestions.html">Suggestions</a>
+      <a href="pages/questions.html">Questions</a>
+      <a href="journal/index.html">Field notes</a>
       <a href="tracking.html">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Policy &amp; Disclosure Compliance</h2>
-      <p>Requirements verified from the official Amazon Associates Operating Agreement and Program Policies. The platform enforces these automatically.</p>
+  </div>
+  <div class="utilitybar">
+    <div class="wrap utilitybar-inner">
+      <span class="utilitybar-label">Evidence</span>
+      <a href="summary.html">Executive summary</a>
+      <a href="verification.html">Verification log</a>
+      <a href="sources.html">Source register</a>
+      <a href="flagged.html">Flagged for review</a>
+      <a href="pages/index.html">Findings hub</a>
     </div>
+  </div>
+</header>
 
+<main class="wrap">
+
+  <div class="page-head">
+    <h1>Compliance: the rules this site is built around</h1>
+    <p>
+      Most affiliate sites treat the Associates rules as fine print. This one treats them as
+      constraints that shaped the build — they are the reason you see no prices here, no star
+      ratings, no shortened links, and the same plain disclosure sentence at the foot of every
+      page. The rules below are quoted from Amazon's own documents, re-read live on 2026-11-15.
+    </p>
+  </div>
+
+  <div class="disclosure">
+    <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+  </div>
+
+  <section class="section">
+    <div class="grid2">
+      <div class="card">
+        <p class="kicker">Operating Agreement §5 — read verbatim, 2026-11-15</p>
+        <h3>The disclosure</h3>
+        <p>
+          "You must clearly and prominently state the following … <em>'As an Amazon Associate I
+          earn from qualifying purchases.'</em>" Every page of this site carries that sentence.
+          A violation of §5 is deemed a material breach of the Agreement, and §2 lets Amazon
+          permanently cease payment of commission income without notice.
+        </p>
+        <p>
+          <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Read §5 on the official page</a>
+        </p>
+      </div>
+      <div class="card">
+        <p class="kicker">Participation Requirements §6 — re-verified 2026-11-14, page updated April 14, 2026</p>
+        <h3>The four rules with teeth here</h3>
+        <ul style="margin:0;padding-left:18px;font-size:14.5px">
+          <li><strong>Prices:</strong> price display is limited to what Amazon serves; a static page would go stale immediately, so this site prints none.</li>
+          <li><strong>No price tracking or alerting</strong> (§6(y)) — which is why the "pricing analysis" module is scoped to published program rates, not per-ASIN price watching.</li>
+          <li><strong>No link shortening in a way that obscures the Amazon destination</strong> (§6(w)) — an awkward fact for a brief whose links are already short-link codes.</li>
+          <li><strong>Reviews and star ratings</strong> only via Amazon's sanctioned APIs — none are published here.</li>
+        </ul>
+        <p>
+          <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Read the Program Policies</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>The full control ledger</h2>
+    <p class="section-sub">
+      Each verified requirement with the rule text and the official reference. This is the table
+      the CI gates are built from: the disclosure gate, the no-price gate and the sponsored-link
+      gate all enforce rows you can read below.
+    </p>
+    <div id="complianceTable"></div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
     <div class="disclosure">
-      <strong>Mandatory disclosure (Operating Agreement §5):</strong> As an Amazon Associate I earn from qualifying purchases.
+      <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+      Zone2 is an independent site and is not affiliated with, sponsored or endorsed by Amazon.
     </div>
+    <p>
+      <a href="index.html">Home</a> · <a href="products.html">Products</a> ·
+      <a href="analysis.html">Analysis</a> ·
+      <a href="flagged.html">Flagged for review</a> ·
+      <a href="pages/questions.html">Questions register</a> ·
+      <a href="pages/suggestions.html">Suggestions board</a>
+    </p>
+    <p style="margin:0">Verified dataset date: 2026-11-14 · re-verified live 2026-11-15 (T33)</p>
+  </div>
+</footer>
 
-    <div class="card">
-      <h3>Compliance Requirements</h3>
-      <div id="complianceTable"></div>
-    </div>
-
-    <div class="card">
-      <h3>Document references</h3>
-      <ul style="margin:0;padding-left:20px;font-size:14px">
-        <li><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Associates Program Operating Agreement</a> — updated October 15, 2025</li>
-        <li><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Associates Program Policies</a> — updated April 14, 2026</li>
-        <li><a href="https://affiliate-program.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon Associates Central</a> — program overview and eligibility</li>
-      </ul>
-    </div>
-
-    <footer class="site">
-      Verified dataset date: 2026-11-14. All rules quoted or summarized from the official sources listed per row.
-    </footer>
-  </main>
-</div>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>

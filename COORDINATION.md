@@ -3521,3 +3521,59 @@ link-checker: all internal links and assets resolve · disclosure/no-price sweep
 **Coordination notes left for the owners of the open marketing PRs** (recorded in the T32 work record before merging): **#65** (`bf8f07a7`, `marketing/trending-topics.html`) and **#70** (`cffe745a`, two hand-written `marketing/articles/topic-*.html` pages plus a hand edit of the generated `marketing/articles/index.html`) — both must rebase onto the regenerated marketing set now on `main`. A hand edit of a generated file will fail the `build_marketing.py --check` drift gate by design; the generator (`tools/build_marketing.py`) is the single source of the articles index, comparison, guide and the three product pages. Additions of genuinely new pages are welcome and do not conflict, provided the sidebar/nav comes from the generator.
 
 **What remains for the owner** (unchanged, and now collected in one place on the decision surfaces): confirm the three ASINs in Associates Central (F-01/F-03), configure the Associates tag so links earn (F-07/F-24), register the Creators API once eligible (F-05 / SG-01's launch-order question), answer Q-01…Q-16, and record decisions on SG-01…SG-10 in `ledger/suggestions.json`. Until then every product link on the site stays a labelled, non-earning preview link — by policy, not by omission.
+## Task claim — T33 — `arena/bfed39e0-zone2` (recorded 2026-11-15 UTC, before any edit)
+
+> **Second renumbering (recorded 2026-11-15, on the final integration rebase).** This task's claim was
+> first numbered T31; the board has since grown its own T31 (an independent verification-only re-test
+> of the T29 deliverable, shipped by `8c4236ad` via the PR #75/#77 lineage) and T32 (the upgraded
+> marketing set). Following the board's standing renumbering precedent (T21/T21b, T29→T32), this
+> session's redesign is published as **T33**. No id is reused; the T31/T32 records are untouched.
+
+> **Id-collision note (the F-20/F-21/F-27 class, caught before publishing).** This session first recorded
+> its claim as **T29** on its own branch, without noticing that `arena/2499438c-zone2` had claimed the same
+> id in parallel (Suggestions + Questions ledgers and generated pages, merged while this session was
+> working) and `arena/fb49a226-zone2` had added T30 (dashboard integration of those pages). The claim is
+> renumbered **T33** — no id is reused, and the T29/T30 records on `main` are preserved untouched. This
+> session ADOPTS the canonical decision system those sessions built: the root-level duplicate decision
+> pages planned in the first claim draft are dropped, and the canonical `pages/suggestions.html` /
+> `pages/questions.html` become the pages the redesigned dashboard links to.
+
+| Item | Value |
+|---|---|
+| Task | **T33 — Site experience overhaul.** Rebuild the root site (repo root `*.html` + `assets/css/style.css`) as a polished, human-sounding marketing-affiliate site — the owner's 2026-11-15 brief says the current root pages read like generated filler. Link the canonical Suggestions board and Questions register prominently from the new landing page (adopting T29/T30's system, not duplicating it). Add a hand-written editorial set (`journal/`) built only from already-verified, per-row-sourced facts, plus `robots.txt`, `sitemap.xml`, `assets/favicon.svg`. Re-verify every official source the redesign restates, record the re-verification here, run every gate, PR → merge → confirm Pages deploy → closing record. |
+| Session ID | `arena/bfed39e0-zone2` (this session) |
+| Branch note | The board's `session-<id>/<task>` branch convention cannot be followed exactly: this platform pins the session to its assigned branch `arena/bfed39e0-zone2` and forbids creating or pushing other branches. Recorded as a deviation rather than silently ignored. |
+| Status | **in progress** |
+| File scope | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `flagged.html`, `404.html`, `assets/css/style.css`, `journal/**` (new), `robots.txt` (new), `sitemap.xml` (new), `assets/favicon.svg` (new), `README.md` (structure table only), `EXECUTIVE_SUMMARY.md` (dated addendum), `COORDINATION.md` |
+| Explicitly NOT touched | `ledger/**`, `tools/**`, `tests/**`, `.github/**`, `pages/**`, the three generated root views (`verification.html`, `sources.html`, `summary.html`), `assets/js/data.js`, `assets/js/app.js`, `research-hub/**`, `marketing/**`, `affiliate-lab/**`, `revalidation/**`, `northstar/**`, `zone2/**`, `docs/**` |
+| index.html note | T30 added a decision-board callout to `index.html`. The T33 redesign rewrites that page's markup; the callout's **function and both destination links** (`pages/suggestions.html`, `pages/questions.html`) are preserved and promoted into the new decision-board section. Logged here as an integration action; nothing about the canonical pages changes. |
+| Gate contracts preserved | Exact static disclosure on every page; flag counts only ever rendered from `CANONICAL_FLAG_COUNT` (markers `flagCount` + `flagCountHeading` kept on `index.html`, `flagRegisterCount` + `flagRegisterMax` kept on `flagged.html`); no typed flag/item counts in prose; no product prices anywhere; all seven required namespaces stay linked from `index.html`; the `data.js` + `app.js` render contract is preserved by keeping every container id (`productsTable`, `resolvedTable`, `specsTable`, `resolutionTable`, `execFactsTable`, `nicheTable`, `commissionTable`, `complianceTable`, `contentTable`, `trackingTable`, `flaggedTable`, `productOverview`, `featuresGrid`) |
+
+Board state at claim (re-checked after the rebase onto `f30c7aa`): `main` carries T29 (2499438c) and T30
+(fb49a226) as `done`, PRs #61–#66 merged. Pages API: `status: built`, build_type `legacy`, source `main` `/`.
+
+Why this task is needed (owner brief, 2026-11-15): the site should look like a polished marketing-affiliate
+site with catchy, human-written articles around the promoted products; it should include a dedicated
+Suggestions section someone can review before anything is implemented; and it needs a clear list of
+questions, information and answers that must be resolved before any decision — with concrete suggestions for
+discovering the missing information. Nothing in the brief asks to weaken the verification discipline, so the
+redesign keeps every gate and adopts the canonical decision data rather than forking it.
+
+### Verification performed by this session (2026-11-15, fetched live)
+
+| # | Claim checked | Result on 2026-11-15 | Verdict | Source |
+|---|---|---|---|---|
+| C-14 | Supplied link 1 destination | `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3`, title "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets…" | **Reproduced — matches ledger (V/T28-era records)** | https://link.amazon/B04G1MEwY |
+| C-15 | Supplied link 2 destination | `https://link.amazon/B02NbDxp3` → `https://www.amazon.com/dp/B09B7SB46R`, title "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options…" | **Reproduced — matches ledger** | https://link.amazon/B02NbDxp3 |
+| C-16 | Supplied link 3 destination | `https://link.amazon/B00hJ57DV` → `https://www.amazon.com/dp/B08DKYBTPH`, title "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option… Stainless Steel" | **Reproduced — matches ledger** | https://link.amazon/B00hJ57DV |
+| C-17 | Link behaviour details | The resolved URLs still carry per-link `btn_ref=srctok-…` tokens (new values on this fetch) and `plpRedirect=mhFallback` — consistent with F-21 (token rotation) and the mhFallback control record; no Associates `tag` parameter on any of them (F-24 stands) | **Reproduced** | the three link.amazon URLs |
+| C-18 | OA §5 disclosure sentence | "You must clearly and prominently state the following … 'As an Amazon Associate I earn from qualifying purchases.'" — verbatim; page header reads "Updated: October 15, 2025" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-19 | OA §2 termination + §4 expectations | §2: Amazon may "permanently … cease payment … without notice"; §6: 7-calendar-day notice, immediate for material breach, "any violation of Section 5 … deemed a material breach"; §4: "We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-20 | Table 1 Kitchen band | "Physical Books, Kitchen, Automotive — 4.50%"; eleven bands 10.00% → 0.00% including "Coach 0.00%" and "All Other Categories 4.00%" | **Verified — matches ledger** | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| C-21 | Program Policies currency | Page header reads "Updated: April 14, 2026"; Commission Income Statement §1 confirms the 24-hour session, 89-day cart-completion and 180-day shipment windows | **Verified** | https://affiliate-program.amazon.com/help/operating/policies |
+
+Notes: §6(y)/§6(w)/§6(t) rule texts were verified verbatim on 2026-11-14 by session `0a697d4a`
+(C-10…C-13 above) and are rendered on this site from `ledger/compliance.json`, which was not
+touched by T33; the Policies page fetched 2026-11-15 confirms the same document is current
+("Updated: April 14, 2026"). No claim in the T33 pages restates a rule beyond what those records
+and the ledger hold.

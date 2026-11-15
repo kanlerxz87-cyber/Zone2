@@ -518,3 +518,43 @@ listing titles are seller-editable and change without notice. The "24 vs 25" pre
 (today's title repeats the 24 side of the published conflict). Note also the accessories wording "Six Cooking
 Accessories Included" in the new title versus the manufacturer's "7 premium accessories" — a third variant of
 the already-published accessories discrepancy (MK-07 / P2 partial row).
+## Addendum — 2026-11-15 (T33, session `arena/bfed39e0-zone2`): site experience overhaul
+
+The owner's 2026-11-15 brief asked for a polished, human-sounding marketing-affiliate site with a
+dedicated Suggestions section, an open-questions register, and hand-written articles around the
+promoted products — no generated filler. This addendum records what changed; every number and
+product fact referenced here is unchanged from the verified dataset of 2026-11-14 and re-checked
+live on 2026-11-15.
+
+### What shipped
+
+* **Root redesign** — `index.html` and the root subpages were rebuilt on a warm-paper editorial
+  design system (`assets/css/style.css`): serif display headlines, plain-spoken copy, the same
+  verified tables underneath. The dashboard markers the CI gates require (`flagCount`,
+  `flagCountHeading`, `flagRegisterCount`, `flagRegisterMax`) and every `data.js`/`app.js`
+  render target are preserved. The exact static disclosure sentence remains on every page.
+* **Decision layer adopted, not duplicated** — the canonical Suggestions board and Questions
+  register built in T29 (`pages/suggestions.html`, `pages/questions.html`, ledgers
+  `suggestions.json` / `questions.json`) are now linked prominently from the redesigned landing
+  page and every root page. The T30 callout's function and links are preserved inside the new
+  design.
+* **Field notes (hand-written editorial)** — `journal/` publishes three pieces argued only from
+  already-verified, per-row-sourced specifications: what dual-basket cooking changes
+  (`dual-basket-air-fryers.html`), how to choose between basket fryers and air-fryer ovens
+  (`basket-vs-oven.html`), and the site's methodology
+  (`why-every-number-has-a-source.html`). Each carries the disclosure, an identity-status
+  banner (F-03 is open), per-claim source links, and no prices and no ratings.
+* **SEO baseline** — `robots.txt`, `sitemap.xml` (canonical GitHub Pages URL) and an SVG favicon.
+* **Live re-verification (2026-11-15)** — all three supplied links re-resolved to the same
+  destinations the ledger recorded on 2026-11-14 (`B04G1MEwY`→`B0CDY277D3`,
+  `B02NbDxp3`→`B09B7SB46R`, `B00hJ57DV`→`B08DKYBTPH`), each still carrying `btn_ref` tokens and
+  `plpRedirect=mhFallback`; Operating Agreement §5, §2, §4 and the Commission Income Statement
+  Table 1 (Kitchen band 4.50%) re-read verbatim; Program Policies page shows "Updated: April 14,
+  2026".
+
+### What did not change
+
+No ledger value, no compliance rule, no flag status, and no gate was weakened. The three things
+still standing between this platform and a live, earning site remain exactly what prior passes
+recorded: the unconfirmed brief mapping (F-01/F-03), the missing Associates tag (F-07/F-24), and
+the absence of any click/conversion history (F-08).

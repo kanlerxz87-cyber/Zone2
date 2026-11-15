@@ -3,67 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flagged for Review — Zone2</title>
+<title>Flagged for review — Zone2</title>
+<meta name="description" content="Irregularities and unverified items found while building this site — each with its source link, so nothing blocks the publish and everything is open to review.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-name">Zone2</span>
+      <span class="brand-sub">field-verified kitchen gear</span>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
+      <a href="pages/suggestions.html">Suggestions</a>
+      <a href="pages/questions.html">Questions</a>
+      <a href="journal/index.html">Field notes</a>
       <a href="tracking.html">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html" class="active">Flagged for Review</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Flagged for Review</h2>
-      <p>Irregularities and unverified items. These do not block the site; each item lists its source link so you can verify or request changes after the site is live.</p>
+  </div>
+  <div class="utilitybar">
+    <div class="wrap utilitybar-inner">
+      <span class="utilitybar-label">Evidence</span>
+      <a href="summary.html">Executive summary</a>
+      <a href="verification.html">Verification log</a>
+      <a href="sources.html">Source register</a>
+      <a href="flagged.html" style="color:var(--accent-ink);font-weight:600">Flagged for review</a>
+      <a href="pages/index.html">Findings hub</a>
     </div>
+  </div>
+</header>
 
+<main class="wrap">
+
+  <div class="page-head">
+    <h1>Flagged for review</h1>
+    <p>
+      The irregularities and unverified items, published rather than hidden. None of them block
+      the site; each row carries its source link so you can review it after the fact and request
+      changes. This is the page a careful reader should visit first.
+    </p>
+  </div>
+
+  <div class="disclosure">
+    <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+  </div>
+
+  <div class="card">
+    <h3>The reader-facing register</h3>
+    <p style="font-size:14px;color:var(--muted);margin:0 0 14px">
+      Generated straight from the canonical register so the two can never drift apart. Every row
+      links to the full finding — long-form explanation, impact, required action and its official
+      sources — in the register of
+      <strong><span id="flagRegisterCount">—</span> flags (F-01 … F-<span id="flagRegisterMax">—</span>)</strong>:
+      <a href="pages/flags.html">full register with sources</a>.
+    </p>
+    <div id="flaggedTable"></div>
+  </div>
+
+  <div class="card">
+    <h3>How these were produced</h3>
+    <ul style="margin:0;padding-left:20px;font-size:14.5px">
+      <li>Every table value on this site was checked against the official source linked in its row.</li>
+      <li>Where a value could not be confirmed from an official source, the cell was left blank — values were never inferred or filled in.</li>
+      <li>The code/ASIN mismatch was detected by resolving each supplied <code>link.amazon</code> short link and fetching the destination product page directly — re-done live on 2026-11-15 with identical results.</li>
+      <li>The reading of those links was settled by controls: an unknown code on the same service returns a 404 (F-20), and a valid 10-character ASIN fed to the same service also returns a 404 (F-28), so the supplied codes are honoured short-link lookups, not truncated ASINs.</li>
+      <li>Nothing on this page blocks the site. The rows marked <em>owner: user</em> are the decisions only you can make — chiefly confirming the brief mapping (F-03) and supplying tagged links (F-24).</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
     <div class="disclosure">
       <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+      Zone2 is an independent site and is not affiliated with, sponsored or endorsed by Amazon.
     </div>
-
-    <div class="card">
-      <h3>Flagged items</h3>
-      <p style="font-size:13px;color:var(--muted);margin:0 0 12px">
-        These are the reader-facing flags, generated straight from the canonical register so the two can
-        never drift apart. Every row links to the full finding — long-form explanation, impact, required
-        action and its official sources — in the register of
-        <strong><span id="flagRegisterCount">—</span> flags (F-01 … F-<span id="flagRegisterMax">—</span>)</strong>:
-        <a href="pages/flags.html">full register with sources</a>.
-      </p>
-      <div id="flaggedTable"></div>
-    </div>
-
-    <div class="card">
-      <h3>How these were produced</h3>
-      <ul style="margin:0;padding-left:20px;font-size:14px">
-        <li>Every table value was checked against the official source linked in its row.</li>
-        <li>Where a value could not be confirmed from an official source, the cell was left blank — values were never inferred or filled in.</li>
-        <li>The link-code / ASIN mismatch was detected by resolving each provided <code>link.amazon</code> short link and fetching the destination product page directly.</li>
-        <li>The reading of those links was settled by a <strong>control</strong>: an unknown 9-character code on the same short-link service returns a 404 instead of a product (F-20), which shows the supplied codes are honoured lookups. The full control trail is on the <a href="products.html">Products</a> page.</li>
-        <li>Nothing on this page blocks the site. The items marked <em>owner: user</em> are the decisions only you can make — chiefly confirming the brief mapping (F-03) and supplying tagged links (F-24).</li>
-      </ul>
-    </div>
-
-    <footer class="site">
-      Verified dataset date: 2026-11-14. Companion views:
+    <p>
+      <a href="index.html">Home</a> · <a href="products.html">Products</a> ·
+      <a href="journal/index.html">Field notes</a> ·
       <a href="verification.html">Verification log</a> ·
       <a href="sources.html">Source register</a> ·
-      <a href="pages/flags.html">Canonical flag register</a>.
-    </footer>
-  </main>
-</div>
+      <a href="pages/flags.html">Canonical flag register</a>
+    </p>
+    <p style="margin:0">Verified dataset date: 2026-11-14 · re-verified live 2026-11-15 (T33)</p>
+  </div>
+</footer>
+
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>

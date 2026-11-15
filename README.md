@@ -18,7 +18,7 @@ anything unconfirmed is left blank and published on a Flagged for Review page ra
 
 | Page | Purpose |
 |---|---|
-| `index.html` | Dashboard — executive summary, verified platform facts, capabilities |
+| `index.html` | Landing page — editorial hero, the three observed destinations, decision board, verified program facts (redesigned in T33) |
 | `products.html` | Product catalog + manufacturer spec tables, per-row source links |
 | `analysis.html` | Niche, pricing, competition and commission-potential analysis |
 | `content.html` | SEO content plan (articles, comparisons, buying guides) |
@@ -27,6 +27,19 @@ anything unconfirmed is left blank and published on a Flagged for Review page ra
 | `verification.html` | Verification log — one row per claim, with the method used and the official page (generated) |
 | `sources.html` | Complete source register, with each source's class made explicit (generated) |
 | `flagged.html` | Flagged irregularities and unverified items, with source links |
+
+### Editorial & decision layer (T33, 2026-11-15)
+
+| Page | Purpose |
+|---|---|
+| `journal/index.html` | Field notes — hand-written editorial around the observed products (trend explainer, buyer's framework, methodology) |
+| `journal/dual-basket-air-fryers.html` | What dual-basket cooking actually changes; argued from verified specs, conflicts included |
+| `journal/basket-vs-oven.html` | Choosing between basket fryers and air-fryer ovens by geometry, not brand |
+| `journal/why-every-number-has-a-source.html` | The blank-until-verified methodology and the compliance rules that shaped the build |
+| `pages/suggestions.html` | Canonical Suggestions decision board (session `2499438c`, T29) — options, trade-offs, recommended path; nothing implemented until the owner chooses |
+| `pages/questions.html` | Canonical Questions / missing-information register (session `2499438c`, T29) — what is known, what is missing, how to discover it |
+| `decisions/index.html` | Requirements & review layer (session `d0135100`, T29) — the platform brief rendered as a reviewable requirements surface |
+| `robots.txt`, `sitemap.xml`, `assets/favicon.svg` | SEO baseline for the Pages site |
 
 `verification.html` and `sources.html` are generated from `ledger/verification.json` and `ledger/sources.json`
 by `tools/build_root_views.py` — CI fails if the committed output drifts from the ledger, so a row can never be

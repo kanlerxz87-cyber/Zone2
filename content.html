@@ -3,58 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Content — Zone2</title>
+<title>The content engine — planned, blocked where it must be — Zone2</title>
+<meta name="description" content="The SEO content plan: what is published, what is generated from verified specifications, and what stays blocked until the product mapping is confirmed by the owner.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-name">Zone2</span>
+      <span class="brand-sub">field-verified kitchen gear</span>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html" class="active">Content</a>
       <a href="compliance.html">Compliance</a>
+      <a href="pages/suggestions.html">Suggestions</a>
+      <a href="pages/questions.html">Questions</a>
+      <a href="journal/index.html">Field notes</a>
       <a href="tracking.html">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>AI-Generated Marketing Content</h2>
-      <p>The brief-mapped content generator is held because no public Amazon document confirms that the destinations of the supplied <code>link.amazon</code> codes are the products intended in the brief (F-03). A separate <a href="marketing/index.html">destination-only marketing set</a> is already published: it includes three product articles, a comparison and a buying guide based on source-linked manufacturer specifications. Those pages do not claim a confirmed brief mapping and carry an identity-scope warning. The rows below describe the blocked brief-mapped pipeline, not the entire site's published content.</p>
+  </div>
+  <div class="utilitybar">
+    <div class="wrap utilitybar-inner">
+      <span class="utilitybar-label">Evidence</span>
+      <a href="summary.html">Executive summary</a>
+      <a href="verification.html">Verification log</a>
+      <a href="sources.html">Source register</a>
+      <a href="flagged.html">Flagged for review</a>
+      <a href="pages/index.html">Findings hub</a>
     </div>
+  </div>
+</header>
 
+<main class="wrap">
+
+  <div class="page-head">
+    <h1>The content engine — planned, blocked where it must be</h1>
+    <p>
+      Three layers of content, each with a different job. The editorial layer is live now. The
+      generated product layer publishes only what verified specifications support. The
+      brief-mapped layer waits, because writing "our top pick" about a product nobody has
+      confirmed is how affiliate sites end up wrong and untrustworthy.
+    </p>
+  </div>
+
+  <div class="disclosure">
+    <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+  </div>
+
+  <section class="section">
+    <div class="grid3">
+      <div class="card">
+        <p class="kicker">Live now</p>
+        <h3>The field notes — hand-written editorial</h3>
+        <p>
+          Human-written pieces around the observed products: how dual-basket cooking works, how
+          to choose between a basket fryer and an air-fryer oven, and why this site publishes a
+          source next to every number. No prices, no ratings, per-claim sourcing.
+        </p>
+        <p><a href="journal/index.html">Read the field notes</a></p>
+      </div>
+      <div class="card">
+        <p class="kicker">Generated, gated</p>
+        <h3>Destination-only product articles</h3>
+        <p>
+          A separate builder renders articles, a comparison and a buying guide strictly from
+          manufacturer-verified specification rows — labelled destination-only, because the
+          mapping from the supplied codes is unconfirmed. They are honest by construction:
+          the generator refuses to publish a claim without a source row.
+        </p>
+        <p><a href="marketing/index.html">Open the verified article set</a></p>
+      </div>
+      <div class="card">
+        <p class="kicker">Blocked, on purpose</p>
+        <h3>Brief-mapped content</h3>
+        <p>
+          Articles that say "the product in the brief" stay blocked (F-06) until the owner
+          confirms which products the three supplied codes were meant to identify (F-03). The
+          moment that lands, this page's plan turns into a queue and the generator unblocks.
+        </p>
+        <p><a href="pages/questions.html">What would unblock it</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>The content plan, row by row</h2>
+    <p class="section-sub">
+      Each planned piece with its target topic, format and current state. Every row carries the
+      product source it would draw from — so you can judge the plan on evidence, not adjectives.
+    </p>
+    <div id="contentTable"></div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
     <div class="disclosure">
       <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+      Zone2 is an independent site and is not affiliated with, sponsored or endorsed by Amazon.
     </div>
+    <p>
+      <a href="index.html">Home</a> · <a href="products.html">Products</a> ·
+      <a href="analysis.html">Analysis</a> ·
+      <a href="flagged.html">Flagged for review</a> ·
+      <a href="pages/questions.html">Questions register</a> ·
+      <a href="pages/suggestions.html">Suggestions board</a>
+    </p>
+    <p style="margin:0">Verified dataset date: 2026-11-14 · re-verified live 2026-11-15 (T33)</p>
+  </div>
+</footer>
 
-    <div class="card">
-      <h3>Content Plan &amp; Status</h3>
-      <div id="contentTable"></div>
-    </div>
-
-    <div class="card">
-      <h3>Content rules enforced by the platform</h3>
-      <ul style="margin:0;padding-left:20px;font-size:14px">
-        <li>Product claims are limited to facts verified on an official Amazon or manufacturer page, with a source link beside each value — no invented features, prices or ratings.</li>
-        <li>Comparisons link each product to its official Amazon page; no cross-retailer price comparison is published without serving prices per program policy.</li>
-        <li>The mandatory Associates disclosure appears on every page and article.</li>
-        <li>Limited-time promotion mentions are removed as soon as the promotion ends on Amazon.</li>
-      </ul>
-    </div>
-
-    <footer class="site">
-      Verified dataset date: 2026-11-14. Each product claim links to the official Amazon listing or manufacturer
-      page used for that value. The root brief-mapped generator can resume after the owner confirms the link-to-product
-      mapping (F-03); earning commissions separately requires correctly tagged Associates links (F-24).
-    </footer>
-  </main>
-</div>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
