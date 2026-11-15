@@ -29,6 +29,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | `arena/83194da0-zone2` (T21b) | `arena/83194da0-zone2` | Root-dataset consistency pass: blanked the root `assets/js/data.js` product attributes, fixed the content/tracking captions | merged into this integration |
 | `arena/4338f55e-zone2` (`4338f55e`) | `arena/4338f55e-zone2` | **T23 — final integration.** Reconciles every published surface onto ONE reading of the supplied-link evidence, publishes the decisive bogus-code control, re-verifies the combined tree line by line, runs every gate, PR → merge → deploy | done — PR #38 merged into `main` (carried by PR #32→#41 lineage); see records below |
 | `arena/b38cc982-zone2` (`b38cc982`, **this session**) | `arena/b38cc982-zone2` | **T23 close-out.** Records the PR #41 merge + Pages deploy result, re-verifies every official source independently (B-01…B-13), re-runs all gates, confirms no open PRs/issues, marks T23 done | done — see the session record at the end of this file |
+| `arena/bdbe382b-zone2` (`bdbe382b`, **this session**) | `arena/bdbe382b-zone2` | **T29 — decision-support layer + marketing-site refresh.** Adds the Suggestions register, the Questions / information-needed register, the design refresh that turns the root site into a marketing site, and the marketing content expansion; then the final integration (re-verify → gates → PR → merge → Pages deploy). | in progress — claim recorded below |
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
 | `arena/dd87f326-zone2` (dd87f326) | merged to `main` via PR #34 | T24 stale-PR #11 resolution + T25 independent verification-only audit | finished — merged (PR #34) |
@@ -76,6 +77,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR #42, merged 2026-11-14T18:32:45Z `6f2f92c`) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 | T26b | Fresh baseline audit for current request: rerun all project gates; verify the live GitHub Pages entry points and source-controlled dataset claims against official URLs; record defects only, no overlapping edits | done | `arena/0f44536f-zone2` | `COORDINATION.md` (append-only record only; results in this session's record) |
 | T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | in progress | `arena/0f44536f-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
+| T29 | **Decision-support layer + marketing-site refresh.** (1) New `ledger/suggestions.json` + `ledger/questions.json` and a new generator `tools/build_decisions.py` publishing a reviewable **Suggestions** page (proposals with options, trade-offs, impact, effort, dependencies, status, decision owner) and a **Questions / information needed** register (question → what we know + source → what is missing → exactly how to obtain it → which decision it blocks). (2) Root-site design refresh so the site reads as a polished marketing affiliate site, not a raw dashboard: new `assets/css/style.css` system, hero + CTA + traffic-entry sections on `index.html`, nav entries on every root page. (3) `marketing/` content expansion: editorial topics page + additional evergreen/trend articles built only from verified rows. (4) New gates: suggestion/question rows held to the same per-row sourcing rule, unique-id check, published-count drift check; new tests. (5) Repo review line by line + executive summary update, then integration: re-verify, gates, PR → merge → Pages deploy. | in progress | `arena/bdbe382b-zone2` (bdbe382b) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_decisions.py` (new), `suggestions.html` (generated), `questions.html` (generated), `assets/css/style.css`, `index.html`, `assets/js/app.js`, `assets/js/data.js`, `marketing/**`, `docs/repo-review-2026-11-15.md` (new), `README.md`, `EXECUTIVE_SUMMARY.md`, `tools/validate_data.py` (additive), `tools/build_site.py` (additive), `tools/build_marketing.py` (additive), `tests/test_pipeline.py` (additive), `.github/workflows/pages.yml` (additive), `COORDINATION.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -3090,3 +3092,71 @@ action (deprecate one and keep the other as canonical). The **data is not duplic
 single 46-row Bounty Event block and a single 2-row Bonus Event block, verified on `main`.
 
 Flagged here and on the Flagged for Review page so the owner can merge the two entries after the site is live.
+
+---
+
+## Session record — `bdbe382b` (`arena/bdbe382b-zone2`, T29) — claim
+
+**Claimed:** 2026-11-15 (UTC), before any file edit other than this board.
+
+### Board state at claim
+
+`main` = `e030c40` (merge of PR #60, T28 by `0a697d4a`). `gh pr list --state open` → no open PRs.
+`git branch -r` → only `origin/main`. No other session holds a remote branch, so no task is owned by
+another session and no takeover is involved.
+
+### Baseline gates re-run on the claim commit (not carried forward from any other session's notes)
+
+| Gate | Command | Result |
+|---|---|---|
+| `pages/` determinism | `python3 tools/build_site.py --check` | `{"built": 37, "drifted_or_uncommitted": []}` — clean |
+| Deploy gate | `python3 tools/validate_data.py` | `ok: true`, 0 errors, 0 warnings; 285 rows, 981 internal links, 37 sources, 38 flags, 82 verification rows |
+| Marketing verifier | `python3 marketing/scripts/verify_marketing.py` | see the T29 close-out record |
+
+### Scope of this claim (T29 row above)
+
+`ledger/suggestions.json`, `ledger/questions.json`, `tools/build_decisions.py`, `suggestions.html`,
+`questions.html`, `assets/css/style.css`, `index.html`, `assets/js/app.js`, `assets/js/data.js`,
+`marketing/**`, `docs/repo-review-2026-11-15.md`, `README.md`, `EXECUTIVE_SUMMARY.md`,
+`tools/validate_data.py`, `tools/build_site.py`, `tools/build_marketing.py`, `tests/test_pipeline.py`,
+`.github/workflows/pages.yml`, `COORDINATION.md`.
+
+Not touched by this session: `research-hub/**`, `revalidation/**`, `affiliate-lab/**`, `zone2/**`,
+`northstar/**`, `ledger/products.json`, `ledger/commission_table.json`, `ledger/compliance.json`,
+`ledger/flags.json`, `ledger/sources.json`, `ledger/verification.json`, `ledger/modules.json`,
+`ledger/niches.json`, `ledger/campaigns.json`. A change needed in one of those is logged here as a
+change request, not implemented.
+
+### Why this task is needed (the four asks in the brief that the tree does not yet answer)
+
+1. **"Make suggestions … create a section dedicated for suggestions so someone can review suggestions
+   and choose the best path before implementing any changes."** The tree has a *flag* register
+   (things that could not be confirmed) and a *verification* log (what was checked). It has no
+   register of **proposals** — what should be done next, with options, trade-offs, impact, effort and a
+   decision owner. T29 adds `ledger/suggestions.json` and a generated **Suggestions** page.
+2. **"A clear list of questions, informations and answers that need to be addressed before any
+   decision can be reasonably made … suggestions need to be made to discover missing information."**
+   The tree records what is *known* and what is *unconfirmed*, but it never states **which unknown
+   blocks which decision**, nor **exactly where the missing information lives** (Associates Central
+   → which screen) nor **how to obtain it**. T29 adds `ledger/questions.json` and a generated
+   **Questions / information needed** page: question → what we know (with its official source) → what
+   is missing → the exact discovery step → the decision it blocks.
+3. **"It should not read like some AI slop website like it looks like now."** The root site is a
+   functional but plain sidebar dashboard with no hero, no hierarchy, no editorial voice and no
+   traffic-entry path from the research surface into the marketing surface. T29 replaces the stylesheet
+   with a designed system and rebuilds the landing page around a hero, a decision funnel and a link
+   into the content engine.
+4. **"Catchy trendy articles and topics … to generate organic traffic."** `marketing/` holds three
+   product write-ups, a buying guide and a comparison — all written in the same hedged register, with
+   no editorial angles and no topical entry points. T29 adds an editorial topics register and additional
+   evergreen articles built only from rows that are already verified against a manufacturer or Amazon
+   page.
+
+### Rules this session holds itself to
+
+* Every row added to the site carries an official-source link, or is explicitly blank and flagged.
+  The new ledgers are put through the same per-row sourcing rule as the existing ones (new gate).
+* No suggestion is presented as a fact about Amazon, a product, a market or a performance figure.
+  Suggestions are proposals; their *inputs* are cited.
+* No price, rating, review count, BSR or performance figure is published anywhere.
+* Nothing is invented to fill a cell: a blank stays blank and is flagged.
