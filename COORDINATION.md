@@ -4160,8 +4160,47 @@ root glob does not reach).
 | Item | Value |
 |---|---|
 | Task | **Re-verification and status record for the three supplied `link.amazon` codes + full gate run on `main`**, with a PR → merge → Pages confirmation. Identified by session ID `e4e7d4b2` (no new `T##` number is claimed, per the note in the closing record of T39). |
-| Status | **in progress** |
+| Status | **done** (closing record below) |
 | Owner | `e4e7d4b2` (`arena/e4e7d4b2-zone2`) |
 | File scope | `COORDINATION.md` only (append-only session record). No shared data, index, navigation, or generated page is edited. |
 | Base | `main` @ `ceaf9a7` (merge of PR #88) |
 | Other open PRs seen at claim | PR #89 (`arena/1b839f87-zone2`, font-path repair, open) and PR #70 (`arena/cffe745a-zone2`, open). Neither is touched by this session. |
+
+### Closing record — `e4e7d4b2` (`arena/e4e7d4b2-zone2`, 2026-11-15 UTC)
+
+**Live re-observation of the three supplied short links** (fetched 2026-11-15 from the public Amazon
+pages the short links redirect to; the sandbox has no direct Amazon network route, so these were read through the page fetcher):
+
+| Supplied link | Redirect destination observed | Page title observed | Matches ledger? |
+|---|---|---|---|
+| `https://link.amazon/B04G1MEwY` | `https://www.amazon.com/dp/B0CDY277D3?…&plpRedirect=mhFallback` | “CHEFMAN 6 Quart Dual Basket Air Fryer Oven …” (Home & Kitchen) | Yes — `B0CDY277D3` |
+| `https://link.amazon/B02NbDxp3` | `https://www.amazon.com/dp/B09B7SB46R?…&plpRedirect=mhFallback` | “Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven …” | Yes — `B09B7SB46R` |
+| `https://link.amazon/B00hJ57DV` | `https://www.amazon.com/dp/B08DKYBTPH?…&plpRedirect=mhFallback&th=1` | “Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 …” | Yes — `B08DKYBTPH` |
+
+Each supplied code is 9 characters; an Amazon ASIN is 10. The destinations are not the codes. Nothing
+in the supplied material names the intended product, so no brief-to-product mapping is claimed. The
+owner decision (confirm intended products; Associates tag) is unchanged and remains open (F-01, F-03, F-07, F-24).
+
+**Gate run on `main` @ `ceaf9a7`, from this branch's tree (all exit 0):** `build_root_views.py --check` ·
+`build_site.py --check` · `validate_data.py` · `tests/test_pipeline.py` (15/15) · `build_summary.py --check` ·
+`audit_site.py` (PASS) · `build_decisions.py --check` · `validate_decisions.py` · `build_marketing.py --check` ·
+`marketing/scripts/verify_marketing.py` · `revalidation/scripts/build.py --check` · `revalidation/scripts/verify.py`
+(0 failures) · `affiliate-lab/scripts/verify_site.py` (0 failures) · `research-hub/scripts/verify.py` (0 errors) ·
+`node --check` on `assets/js/data.js` and `assets/js/app.js`.
+
+**Live site read:** `https://kanlerxz87-cyber.github.io/Zone2/` renders the landing page, the three product
+cards, the executive summary and the verified-platform-facts table.
+
+**Irregularities (logged, not repaired here):**
+
+1. **Self-hosted fonts 404.** `assets/css/style.css` (lines 18, 26, 34) and `pages/assets/dashboard.css`
+   (lines 21, 29) declare `url("assets/fonts/…")`. Relative to the stylesheet's own directory, these resolve to
+   `assets/css/assets/fonts/…`, which does not exist. Open PR **#89** (`arena/1b839f87-zone2`, “Repair self-hosted
+   font paths”) addresses this and is owned by session `1b839f87`; it is not merged or altered here.
+2. **Open PR #70** (`arena/cffe745a-zone2`, “trendy marketing articles for organic traffic”) is still open,
+   with no owner record on the board at claim time. Left for its owner.
+3. **Landing-page wording not re-verified here.** The landing page states that “an unknown nine-character code
+   on the same short-link service returns a 404.” This session did not test that claim; it is not confirmed by this record.
+
+**Board status:** the three link re-observations above support the existing ledger rows; no shared data,
+index, navigation or generated page was edited. Scope held to `COORDINATION.md`.
