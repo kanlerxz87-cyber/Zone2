@@ -462,6 +462,65 @@ Every control cited for the ten new rules was checked against the actual code, a
 
 ---
 
+## Addendum — decision-support surfaces, reader-facing editorial pass, and a fresh verification day, 2026-11-15 (session `8c4236ad`, T32)
+
+Two things changed on this date, both additive. Nothing in the fact base moved: every specification row,
+status and source link published before 2026-11-15 is byte-identical after it (the marketing verifier
+re-derives all specification rows from `marketing/data/facts.json` and would fail otherwise).
+
+### 1. The owner's decision surfaces are now reachable from the dashboard
+
+Session `2499438c` shipped the decision layer on 2026-11-15 (`pages/suggestions.html`, SG-01…SG-10, and
+`pages/questions.html`, Q-01…Q-16). This session added the missing inbound paths: both pages are linked from
+the root dashboard's navigation and footer, and the public marketing set's overview page links the suggestions
+board as well. The principle the decision layer runs on is unchanged and is repeated on every page that
+carries it: **nothing strategic is implemented before the owner records a choice in `ledger/suggestions.json`**.
+
+### 2. The public marketing set now reads like a publication, not a lab notebook
+
+The destination-only marketing set (`marketing/` — overview, buying guide, comparison, three product
+articles) kept every fact, source and compliance label, and changed only its editorial voice:
+
+* Each article opens with a lede that states what the machine is, in the manufacturer's own verified terms,
+  followed by an explicit "honest fine print" paragraph (no hands-on testing, no star ratings, no prices).
+* A new **"Who this fits"** section per article restates, line by line, what the cited manufacturer page
+  already states about household size, basket layout, presets, windows, finishes and care — attributed, with
+  the source linked in the section itself. A **"If that's not you"** block routes the reader to the
+  neighbouring article that fits better, which also makes the three-piece set a real internal link network.
+* The overview page explains the site's unusual editorial rule in plain words: agreements are shown as one
+  number, disagreements are shown as two statements, and unknowns are shown as blanks.
+* The articles index now carries a **"Planned topics — not published yet"** queue: four topic ideas, each
+  tied to the verified rows it would rest on, and explicitly gated on suggestion **SG-04** — nothing is
+  commissioned until the owner picks a content-engine path on the decision board.
+
+Wording follows suggestion **SG-05** (data-led phrasing only — "the manufacturer lists…", never "we
+tested…"), and the layout direction follows the recommendation recorded under **SG-06** (editorial guide for
+public pages, dashboard for the owner), while both suggestions remain OPEN for the owner to confirm or
+overrule.
+
+### 3. Fresh verification pass, 2026-11-15
+
+Re-fetched this session, from the pages themselves: the three supplied short links still resolve to one
+destination each — `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH` — with the same breadcrumb
+(*Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers*); the ASIN help page still
+defines an ASIN as the **10-digit code** Amazon uses to denote specific products; the official tagged link
+format still reads `amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID`; the Operating Agreement still carries
+"Updated: October 15, 2025" and §5 still requires the disclosure sentence verbatim; §4 still disclaims any
+representation about traffic or commission income; and §6 still makes any violation of §5 a material breach.
+Full row-by-row evidence: [`docs/verification-8c4236ad.md`](docs/verification-8c4236ad.md).
+
+**New observation (flagged, not corrected):** the Amazon listing title for the Emeril destination
+(`B09B7SB46R`) **has changed since the 2026-11-14 read** — it now reads "…Countertop Convection Cooker,
+24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included" where the published row
+records "…24 cooking functions, dual-speed fan and rotisserie for easy family meals." The published value is
+correct as of its read date and stays; the drift is flagged for the next verification cycle because Amazon
+listing titles are seller-editable and change without notice. The "24 vs 25" preset CONFLICT row is unaffected
+(today's title repeats the 24 side of the published conflict). Note also the accessories wording "Six Cooking
+Accessories Included" in the new title versus the manufacturer's "7 premium accessories" — a third variant of
+the already-published accessories discrepancy (MK-07 / P2 partial row).
+
+---
+
 ## Addendum — primary-site marketing redesign + suggestions architecture, 2026-11-15 (session `2b257b2e`, T34–T37)
 
 **The problem.** The root pages were correct but read like an internal admin tool — default-blue

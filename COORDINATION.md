@@ -75,7 +75,8 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T23 | Final integration: independent line-by-line verification of the combined tree, all gates green, no broken links, integration PR → merge → confirm Pages deploy → record (stale-PR-#11 takeover superseded by T24 / `dd87f326`) | done — PR #41 merged 2026-11-14T11:27:15Z (`6a90dfc5`); CI + Pages deploy success; close-out record by `b38cc982` at the end of this file | `arena/cdfaeefe-zone2` (cdfaeefe) | `COORDINATION.md` (append-only record + this row) + integration duties on `arena/cdfaeefe-zone2` |
 | T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR #42, merged 2026-11-14T18:32:45Z `6f2f92c`) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 | T26b | Fresh baseline audit for current request: rerun all project gates; verify the live GitHub Pages entry points and source-controlled dataset claims against official URLs; record defects only, no overlapping edits | done | `arena/0f44536f-zone2` | `COORDINATION.md` (append-only record only; results in this session's record) |
-| T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | in progress | `arena/0f44536f-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
+| T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | done — closing record by `ba8b2d38` below (PRs #48/#51/#54 merged 2026-11-14, CI + Pages deploy confirmed); status cell corrected 2026-11-15 by `8c4236ad`, see the T30 session record | `arena/0f44536f-zone2` → completed by `arena/ba8b2d38-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
+| T32 | **Renumbered three times** (id collisions of the day): claimed as T29 → T29 shipped first by `2499438c` (PRs #61/#63) → renumbered T30 → **T30 claimed and shipped by `fb49a226`** (dashboard integration, PRs #64/#66) → renumbered T31 → **T31 claimed and shipped by `42fa4918`** (verification-only re-test of T29, PRs #72/#76) → **renumbered T32**. Nothing any of them published is duplicated or overwritten; the nav-link part of this session's original scope was dropped after `fb49a226`'s T30 landed the same links (my two duplicate nav entries removed; my complementary footer links kept). T32 = the work T29/T30/T31 did not cover: (1) editorial upgrade of the destination-only marketing set — tone and structure only, zero fact changes, every row's source intact (takeover per 60-minute rule: `marketing/**` owner `a3faf404` finished; the T27 marketing scope was completed and merged by `ba8b2d38`, no active claimant); (2) additive links from the root dashboard to the two new decision-support pages (`pages/suggestions.html`, `pages/questions.html`); (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm. | in progress | `arena/8c4236ad-zone2` (8c4236ad) | `COORDINATION.md` (records + the T27 status correction above), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), NEW `docs/verification-8c4236ad.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -2894,6 +2895,7 @@ Fixed on main (verified here): the hub's product-mapping rows. Residual: eight r
 
 Verification complete; all gates green on the merged tree. PR → merge → Pages deploy confirmation
 and the closing record follow in the next entry.
+
 ## T26 — closing record (session `d3ce1c29`, 2026-11-14)
 
 | Item | Value |
@@ -2954,6 +2956,7 @@ Four sessions merged nine pull requests to `main` during this one task. Ledger i
 one day (F-20/F-21, F-22, F-27, F-28, F-29, plus S36 and V-51…V-62). `check_ledger_ids_unique` now fails the
 build rather than letting a collision ship. And the lesson three sessions have now recorded: **a drift gate
 proves the data matches the ledger, not that the sentence is true — read the deployed page.**
+
 ---
 
 ## Closing record — T28 — `e9c8362c` (2026-11-14 UTC)
@@ -3337,6 +3340,47 @@ gate only scanned `flag_ids`. Reading the re-deployed live page is what caught i
 **Open-PR audit at close:** #62 closed unmerged (superseded by #64, per its own record); #64/#66 merged; **#65** (`bf8f07a7`, open — `marketing/trending-topics.html` + nav) audited from its diff: its earlier root-level suggestions/decisions duplicates were dropped, its claims match the sources verified above, and its file scope does not overlap T31. Fresh claim from an active session — not taken over.
 
 **PR, merge and deploy:** PR opened from this branch — number, merge commit and deploy runs recorded in the closing entry that follows this record.
+---
+
+## Session record — `8c4236ad` (`arena/8c4236ad-zone2`, current branch, 2026-11-15 UTC)
+
+### Claim (written before any edit; renumbered T29 → **T30** during the mandatory rebase, before any non-coordination file was touched)
+
+| Field | Value |
+|---|---|
+| Board state at claim | `main` = `e030c40` (merge of PR #60, 2026-11-14); `gh pr list --state open` → none; Pages API `status: built`, source `main` `/` |
+| Task claimed | T29 (row added to the task board) — **renumbered to T30 on rebase**, see below |
+| Board state after the mandatory `git pull --rebase origin main` | `main` had advanced `e030c40` → `86b5350` (PRs #61, #63) while this claim was being written: session `2499438c` had claimed **the same T29 id** and shipped the suggestions decision board (`pages/suggestions.html`, SG-01…SG-10) and the questions register (`pages/questions.html`, Q-01…Q-16) |
+| Collision resolution | Per the board's renumbering precedent (T21/T21b, T27/T28, F-27/F-28): this session's task is renumbered **T30**; nothing `2499438c` published was overwritten, moved or duplicated. This session does **not** create another suggestions/questions surface — theirs on `main` are canonical |
+| Second collision (same rebase, one hour later) | `main` had advanced again to `e64d96f` (PRs #64–#71): `fb49a226` had claimed and shipped **T30** (dashboard → decision-surface links + callout) and `d0135100` had shipped a requirements/review layer (`decisions/`, `ledger/requirements.json`, `DECISIONS.md`, PRs #69/#71). This session's task was renumbered again, and its duplicate `index.html` nav links were removed (kept: the footer links, which nothing else published) |
+| Third collision (pre-merge rebase, minutes later) | `main` had advanced to `20976ce` (PRs #72/#73: `42fa4918`'s **T31** verification-only re-test + `d0135100`'s follow-up fix) — so the id was renumbered once more, to **T32**. Also on the board at this point: open PRs #65 (`bf8f07a7`, `marketing/trending-topics.html`) and #70 (`cffe745a`, two hand-written `marketing/articles/topic-*.html` pages + a hand edit of the generated `marketing/articles/index.html`), both touching the `marketing/` namespace this session is upgrading. Neither had claimed on the shared board when this session's claim pushed; this session proceeds with its claimed scope (existing marketing pages + generator) and logs a coordination note for their owners: their additions must rebase onto the regenerated set, and any hand edit of a generated file will fail the `build_marketing.py --check` drift gate by design |
+| Renumbered task | **T32** — the work T29/T30/T31 did not cover: (1) editorial upgrade of the destination-only marketing set (tone and structure only — zero fact changes, every row's source intact; the marketing set still reads as an engineering ledger and the brief asks for polished, engaging affiliate content); (2) additive links from the root dashboard to the two new decision-support pages; (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm |
+| Branch | `arena/8c4236ad-zone2` (Arena-pinned; the `session-<id>/<task>` naming convention cannot be used — same constraint every prior session recorded) |
+| File scope (T32) | `COORDINATION.md` (append-only records, the T27 status correction, this renumbering note), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), NEW `docs/verification-8c4236ad.md` |
+| Not touched | `ledger/**`, `pages/**` (generated), `research-hub/**`, `zone2/**`, `northstar/**`, `affiliate-lab/**`, `revalidation/**`, `content/`, `tests/`, `.github/workflows/**`, `README.md`, `content.html`, and every other root page except `index.html` |
+
+**Board status correction (hygiene only, logged here).** The T27 row still read "in progress" with owner
+`0f44536f`, but three records show it completed and merged on 2026-11-14 (the T27 closing record by
+`ba8b2d38` — PRs #48, #51, #54, CI pass, Pages deploy confirmed — plus `0f44536f`'s own T27 record and the
+T28 session's reconciliation note). The status cell was corrected to "done" with a pointer to those records.
+No row's task text, owner history or scope was altered. Session `2499438c` flagged the same stale row as a
+handoff candidate and deferred it; this session is the one that closes it.
+
+**Takeover justification for `marketing/**` + `tools/build_marketing.py`.** The marketing set's original
+owner (`a3faf404`) finished and merged; T27's scope included these files but T27 was completed and merged by
+`ba8b2d38` on 2026-11-14 (last commit touching them >15 h before this claim). No active claimant exists, so
+the 60-minute handoff rule applies. This session changes **editorial copy only** — no product value, source,
+status or row may change; `marketing/scripts/verify_marketing.py` gates G7–G9 re-derive every row from
+`marketing/data/facts.json` and would fail otherwise.
+
+**Rebase conflict record (required by the project instruction).** The mandatory `git pull --rebase origin main`
+after the claim commit conflicted in this append-only file. Resolution was strictly additive: records already
+on `main` (`2499438c`'s session claim, closing record and PR record) appear first, verbatim and complete;
+this session's record follows. Additionally, two **orphaned conflict markers** (`=======` and
+`>>>>>>> origin/main` with no opening marker) were found **already committed** in the T26 closing-record
+region of `e030c40` — leftover debris from an earlier session's conflict resolution that shipped to `main`
+inside PR #60. They were removed as a formatting repair; not one word of any session's record was dropped.
+Flagged below as an irregularity for review.
 
 
 ### T29 closing record — PR, merge, deploy (session `d0135100`, 2026-11-15)
@@ -3399,6 +3443,88 @@ appended nav link, one README source-count label, five appended source rows (S38
 | T31 | **done** |
 
 **Still open for the owner (unchanged):** F-42's duplicated-fragment review; CR-9 executive-summary subsection; F-39…F-41 promotion (d0135100's CR-6); the product/account questions Q-01…Q-16 that gate every suggestion SG-01…SG-10. Open PRs at close: #65, #70 (both marketing-layer work by other sessions, non-overlapping with T31).
+
+### T32 — work record (2026-11-15 UTC, before the integration PR)
+
+**Delivered (additive; no fact, row, source or status changed anywhere in the fact base):**
+
+1. **Root dashboard → decision layer (footer only — nav links were dropped as duplicates).** The footer
+   now links `pages/suggestions.html` and `pages/questions.html`. Nav links for the same two pages were
+   added by this session, then **removed** after `fb49a226`'s T30 landed identical nav links plus a
+   dashboard callout (PRs #64/#66) while this session was rebasing — duplicates are not published.
+2. **Marketing editorial upgrade (T30 core).** `tools/build_marketing.py` + `marketing/data/facts.json`
+   (additive fields only: `hook_editorial`, `suits_editorial`, `suits_editorial_source`, `look_elsewhere`,
+   `planned_topics`, `editorial_note`), regenerated `marketing/**`:
+   - each article opens with a hook that restates verified specs, plus an explicit "honest fine print"
+     paragraph (no hands-on testing, no ratings, no prices);
+   - new **Who this fits** section per article — every line restates something the cited manufacturer page
+     already states, with the source linked inside the section (suggestion SG-05's data-led wording);
+   - new **If that's not you** block cross-linking the three articles (the set is now an internal network);
+   - overview page explains the site's editorial rule in plain language and links the suggestions board;
+   - articles index publishes a **"Planned topics — not published yet"** queue: four topic ideas, each tied
+     to the verified rows it would rest on, explicitly gated on suggestion **SG-04** — nothing commissioned
+     until the owner records a decision in `ledger/suggestions.json`.
+   Wording follows SG-05; layout follows SG-06's recommendation A. Both suggestions remain OPEN for the
+   owner; the brief's explicit instruction ("polished marketing affiliate website … not AI slop") is what
+   authorises implementing the tone upgrade itself while leaving the strategic decisions open.
+3. **`EXECUTIVE_SUMMARY.md`** — additive 2026-11-15 addendum (decision surfaces, editorial pass, fresh
+   verification day, the P2 title-drift flag).
+4. **`docs/verification-8c4236ad.md`** (new) — this session's verification record, W-01…W-11.
+
+**Independent verification performed 2026-11-15 (live fetches, full table in `docs/verification-8c4236ad.md`):**
+the three supplied links re-resolved to one destination each (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`),
+breadcrumb reproduced on all three; ASIN = "10-digit code" verbatim; official tagged format verbatim; OA
+"Updated: October 15, 2025", §5 disclosure sentence, §4 disclaimers, §6 7-day termination and
+§5-violation-is-material-breach, §2 cease-payment — all verbatim; `btn_ref` srctok tokens new again
+(consistent with F-21); live `pages/suggestions.html` and root dashboard render as recorded.
+
+**New irregularity — P2 listing-title drift (flagged, not corrected).** Amazon's `B09B7SB46R` title now
+reads "…Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking
+Accessories Included" versus the 2026-11-14 recorded "…24 cooking functions, dual-speed fan and rotisserie
+for easy family meals." Published value retained with its read date; re-read recommended next cycle. The
+"Six … Included" wording is a third accessories variant beside the manufacturer's "7 premium accessories"
+(already published as MK-07 / the P2 partial row). The 24-vs-25 preset CONFLICT is unaffected.
+
+**New irregularity — orphaned conflict markers had been committed to `main`.** `COORDINATION.md` at
+`e030c40` (inside PR #60's merge) carried a stray `=======` and `>>>>>>> origin/main` pair with no opening
+marker in the T26 closing-record region. Removed additively during the T30 rebase; not one word of any
+session's record was dropped. This file is append-only, but its conflict resolutions evidently need the same
+care its records get.
+
+**Change request CR-8 (logged, not implemented — `tools/build_site.py` + generated `pages/**` are T29 owner
+`2499438c`'s surface):** the suggestion rows on `pages/suggestions.html` carry no `id` anchors, so no other
+page can deep-link to a single suggestion (SG-01…SG-10) — this session's marketing topics section wanted to
+link `#SG-04` and the fragment gate correctly failed the build. Request: emit `id="SG-01"`…`id="SG-10"` on
+the suggestion rows (and matching ids for Q-01…Q-16 on `pages/questions.html`) so decision reasoning can be
+cross-linked from the marketing set and executive summary.
+
+**Gates on the T30 tree (all green before the PR):**
+`validate_data.py` (0 errors, 0 warnings) · `tests/test_pipeline.py` 15/15 · `build_site.py --check`
+(39 built, 0 drifted) · `build_root_views.py --check` 0 · `build_root_data.py --check` up to date ·
+`build_summary.py --check` 0 · `build_marketing.py --check` current · `verify_marketing.py` OK
+9 pages · 48 spec rows (unchanged) · `audit_site.py` 97 pages, 5/5 (fragments, spec_sources, prose_counts,
+namespaces, disclosure) · `affiliate-lab/scripts/verify_site.py` 0 failures · `revalidation` build+verify 0 ·
+`research-hub` build byte-identical + verify 0 errors · `node --check` data.js/app.js OK · workflow
+link-checker: all internal links and assets resolve · disclosure/no-price sweep: 88 pages clean.
+
+### T32 — closing record: PR, merge and deploy (session `8c4236ad`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#75** — https://github.com/kanlerxz87-cyber/Zone2/pull/75 — `arena/8c4236ad-zone2` → `main` |
+| PR checks | none created for the head SHA after force-pushes — the same GitHub quirk session `0a697d4a` documented (run 43632688973 era). Every workflow step was replayed locally on the final rebased tree instead (all green, listed in the T32 work record), and the post-merge `push` run on `main` provides the server-side confirmation |
+| Merge | `gh pr merge 75 --merge` — merge commit `fc98d0c` on `main`; merged 2026-11-15 (after three rebase rounds against advancing `main`: `e64d96f`, `20976ce`, `0a03d9e`) |
+| Post-merge `Build, verify and deploy` on `main` | **success** (run 43712155321, 39 s) |
+| Post-merge `pages build and deployment` | **success** (run 43712154658, 30 s) |
+| Pages API after merge | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live read after deploy | `marketing/articles/p1.html` fetched from the public URL and read line by line: the upgraded article is served — hook lede, "The short version" with the honest-fine-print paragraph, sourced "Who this fits", cross-article links, and the unchanged 17-row sourced spec table (14 sourced rows incl. CONFLICT/UNVERIFIED/WITHHELD, plus the three policy-withheld rows) |
+| T32 | **done** |
+
+**Lineage note for the board.** This session's task id history: claimed T29 → `2499438c` shipped T29 (PRs #61/#63) → T30 → `fb49a226` shipped T30 (PRs #64/#66) → T31 → `42fa4918` shipped T31 (PRs #72/#76) → **T32** (this record). Four tasks, four sessions, one afternoon; the renumbering precedent (T21/T21b, T27/T28) held, and no session's work was overwritten anywhere.
+
+**Coordination notes left for the owners of the open marketing PRs** (recorded in the T32 work record before merging): **#65** (`bf8f07a7`, `marketing/trending-topics.html`) and **#70** (`cffe745a`, two hand-written `marketing/articles/topic-*.html` pages plus a hand edit of the generated `marketing/articles/index.html`) — both must rebase onto the regenerated marketing set now on `main`. A hand edit of a generated file will fail the `build_marketing.py --check` drift gate by design; the generator (`tools/build_marketing.py`) is the single source of the articles index, comparison, guide and the three product pages. Additions of genuinely new pages are welcome and do not conflict, provided the sidebar/nav comes from the generator.
+
+**What remains for the owner** (unchanged, and now collected in one place on the decision surfaces): confirm the three ASINs in Associates Central (F-01/F-03), configure the Associates tag so links earn (F-07/F-24), register the Creators API once eligible (F-05 / SG-01's launch-order question), answer Q-01…Q-16, and record decisions on SG-01…SG-10 in `ledger/suggestions.json`. Until then every product link on the site stays a labelled, non-earning preview link — by policy, not by omission.
 
 ---
 
@@ -3547,3 +3673,84 @@ appended nav link, one README source-count label, five appended source rows (S38
 | T31 | **done** |
 
 **Still open for the owner (unchanged):** F-42's duplicated-fragment review; CR-9 executive-summary subsection; F-39…F-41 promotion (d0135100's CR-6); the product/account questions Q-01…Q-16 that gate every suggestion SG-01…SG-10. Open PRs at close: #65, #70 (both marketing-layer work by other sessions, non-overlapping with T31).
+### T32 — work record (2026-11-15 UTC, before the integration PR)
+
+**Delivered (additive; no fact, row, source or status changed anywhere in the fact base):**
+
+1. **Root dashboard → decision layer (footer only — nav links were dropped as duplicates).** The footer
+   now links `pages/suggestions.html` and `pages/questions.html`. Nav links for the same two pages were
+   added by this session, then **removed** after `fb49a226`'s T30 landed identical nav links plus a
+   dashboard callout (PRs #64/#66) while this session was rebasing — duplicates are not published.
+2. **Marketing editorial upgrade (T30 core).** `tools/build_marketing.py` + `marketing/data/facts.json`
+   (additive fields only: `hook_editorial`, `suits_editorial`, `suits_editorial_source`, `look_elsewhere`,
+   `planned_topics`, `editorial_note`), regenerated `marketing/**`:
+   - each article opens with a hook that restates verified specs, plus an explicit "honest fine print"
+     paragraph (no hands-on testing, no ratings, no prices);
+   - new **Who this fits** section per article — every line restates something the cited manufacturer page
+     already states, with the source linked inside the section (suggestion SG-05's data-led wording);
+   - new **If that's not you** block cross-linking the three articles (the set is now an internal network);
+   - overview page explains the site's editorial rule in plain language and links the suggestions board;
+   - articles index publishes a **"Planned topics — not published yet"** queue: four topic ideas, each tied
+     to the verified rows it would rest on, explicitly gated on suggestion **SG-04** — nothing commissioned
+     until the owner records a decision in `ledger/suggestions.json`.
+   Wording follows SG-05; layout follows SG-06's recommendation A. Both suggestions remain OPEN for the
+   owner; the brief's explicit instruction ("polished marketing affiliate website … not AI slop") is what
+   authorises implementing the tone upgrade itself while leaving the strategic decisions open.
+3. **`EXECUTIVE_SUMMARY.md`** — additive 2026-11-15 addendum (decision surfaces, editorial pass, fresh
+   verification day, the P2 title-drift flag).
+4. **`docs/verification-8c4236ad.md`** (new) — this session's verification record, W-01…W-11.
+
+**Independent verification performed 2026-11-15 (live fetches, full table in `docs/verification-8c4236ad.md`):**
+the three supplied links re-resolved to one destination each (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`),
+breadcrumb reproduced on all three; ASIN = "10-digit code" verbatim; official tagged format verbatim; OA
+"Updated: October 15, 2025", §5 disclosure sentence, §4 disclaimers, §6 7-day termination and
+§5-violation-is-material-breach, §2 cease-payment — all verbatim; `btn_ref` srctok tokens new again
+(consistent with F-21); live `pages/suggestions.html` and root dashboard render as recorded.
+
+**New irregularity — P2 listing-title drift (flagged, not corrected).** Amazon's `B09B7SB46R` title now
+reads "…Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking
+Accessories Included" versus the 2026-11-14 recorded "…24 cooking functions, dual-speed fan and rotisserie
+for easy family meals." Published value retained with its read date; re-read recommended next cycle. The
+"Six … Included" wording is a third accessories variant beside the manufacturer's "7 premium accessories"
+(already published as MK-07 / the P2 partial row). The 24-vs-25 preset CONFLICT is unaffected.
+
+**New irregularity — orphaned conflict markers had been committed to `main`.** `COORDINATION.md` at
+`e030c40` (inside PR #60's merge) carried a stray `=======` and `>>>>>>> origin/main` pair with no opening
+marker in the T26 closing-record region. Removed additively during the T30 rebase; not one word of any
+session's record was dropped. This file is append-only, but its conflict resolutions evidently need the same
+care its records get.
+
+**Change request CR-8 (logged, not implemented — `tools/build_site.py` + generated `pages/**` are T29 owner
+`2499438c`'s surface):** the suggestion rows on `pages/suggestions.html` carry no `id` anchors, so no other
+page can deep-link to a single suggestion (SG-01…SG-10) — this session's marketing topics section wanted to
+link `#SG-04` and the fragment gate correctly failed the build. Request: emit `id="SG-01"`…`id="SG-10"` on
+the suggestion rows (and matching ids for Q-01…Q-16 on `pages/questions.html`) so decision reasoning can be
+cross-linked from the marketing set and executive summary.
+
+**Gates on the T30 tree (all green before the PR):**
+`validate_data.py` (0 errors, 0 warnings) · `tests/test_pipeline.py` 15/15 · `build_site.py --check`
+(39 built, 0 drifted) · `build_root_views.py --check` 0 · `build_root_data.py --check` up to date ·
+`build_summary.py --check` 0 · `build_marketing.py --check` current · `verify_marketing.py` OK
+9 pages · 48 spec rows (unchanged) · `audit_site.py` 97 pages, 5/5 (fragments, spec_sources, prose_counts,
+namespaces, disclosure) · `affiliate-lab/scripts/verify_site.py` 0 failures · `revalidation` build+verify 0 ·
+`research-hub` build byte-identical + verify 0 errors · `node --check` data.js/app.js OK · workflow
+link-checker: all internal links and assets resolve · disclosure/no-price sweep: 88 pages clean.
+
+### T32 — closing record: PR, merge and deploy (session `8c4236ad`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#75** — https://github.com/kanlerxz87-cyber/Zone2/pull/75 — `arena/8c4236ad-zone2` → `main` |
+| PR checks | none created for the head SHA after force-pushes — the same GitHub quirk session `0a697d4a` documented (run 43632688973 era). Every workflow step was replayed locally on the final rebased tree instead (all green, listed in the T32 work record), and the post-merge `push` run on `main` provides the server-side confirmation |
+| Merge | `gh pr merge 75 --merge` — merge commit `fc98d0c` on `main`; merged 2026-11-15 (after three rebase rounds against advancing `main`: `e64d96f`, `20976ce`, `0a03d9e`) |
+| Post-merge `Build, verify and deploy` on `main` | **success** (run 43712155321, 39 s) |
+| Post-merge `pages build and deployment` | **success** (run 43712154658, 30 s) |
+| Pages API after merge | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live read after deploy | `marketing/articles/p1.html` fetched from the public URL and read line by line: the upgraded article is served — hook lede, "The short version" with the honest-fine-print paragraph, sourced "Who this fits", cross-article links, and the unchanged 17-row sourced spec table (14 sourced rows incl. CONFLICT/UNVERIFIED/WITHHELD, plus the three policy-withheld rows) |
+| T32 | **done** |
+
+**Lineage note for the board.** This session's task id history: claimed T29 → `2499438c` shipped T29 (PRs #61/#63) → T30 → `fb49a226` shipped T30 (PRs #64/#66) → T31 → `42fa4918` shipped T31 (PRs #72/#76) → **T32** (this record). Four tasks, four sessions, one afternoon; the renumbering precedent (T21/T21b, T27/T28) held, and no session's work was overwritten anywhere.
+
+**Coordination notes left for the owners of the open marketing PRs** (recorded in the T32 work record before merging): **#65** (`bf8f07a7`, `marketing/trending-topics.html`) and **#70** (`cffe745a`, two hand-written `marketing/articles/topic-*.html` pages plus a hand edit of the generated `marketing/articles/index.html`) — both must rebase onto the regenerated marketing set now on `main`. A hand edit of a generated file will fail the `build_marketing.py --check` drift gate by design; the generator (`tools/build_marketing.py`) is the single source of the articles index, comparison, guide and the three product pages. Additions of genuinely new pages are welcome and do not conflict, provided the sidebar/nav comes from the generator.
+
+**What remains for the owner** (unchanged, and now collected in one place on the decision surfaces): confirm the three ASINs in Associates Central (F-01/F-03), configure the Associates tag so links earn (F-07/F-24), register the Creators API once eligible (F-05 / SG-01's launch-order question), answer Q-01…Q-16, and record decisions on SG-01…SG-10 in `ledger/suggestions.json`. Until then every product link on the site stays a labelled, non-earning preview link — by policy, not by omission.
