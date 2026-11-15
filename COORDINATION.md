@@ -4155,6 +4155,90 @@ root glob does not reach).
    (the queue). Nothing in that list blocks the site; all of it blocks growth. F-07 — no Associates ID — is the
    only thing blocking revenue, and it is not technical.
 
+---
+
+## Session record — `1b839f87` (`arena/1b839f87-zone2`, 2026-11-15 UTC)
+
+Identity: session id `1b839f87` (no `T##` label, per the renumbering lesson above). Branch fixed by the
+session harness to `arena/1b839f87-zone2`; the `session-<id>/<task>` branch convention in the brief was
+not followed for that reason. Scope claimed and touched: **only** the font-path defect below, plus this
+record. No other session's open work was edited (PR #70 `arena/cffe745a-zone2`, `marketing/articles/*`,
+was left untouched).
+
+### Repo review performed (2026-11-15)
+
+- `main` @ `ceaf9a7`; open PRs before this session: #70 only (`arena/cffe745a-zone2`, another session).
+- Gates on the untouched tree: `tools/validate_data.py` exit 0 · `tests/test_pipeline.py` 15/15 ·
+  `tools/build_site.py --check` · `tools/build_root_views.py --check` · `marketing/scripts/verify_marketing.py`
+  · `tools/audit_site.py` — all green.
+- Live site `https://kanlerxz87-cyber.github.io/Zone2/` fetched 2026-11-15: landing renders; KPI "3 of 3
+  resolve, 0 of 3 confirmed by an official Amazon document, 38 flags" matches `ledger/flags.json` (38 rows).
+- Supplied links re-observed 2026-11-15 (fetched via `fetch_page`): `link.amazon/B04G1MEwY` →
+  `amazon.com/dp/B0CDY277D3` (Chefman 6 QT dual-basket), `link.amazon/B02NbDxp3` → `amazon.com/dp/B09B7SB46R`
+  (Emeril Lagasse 26QT), `link.amazon/B00hJ57DV` → `amazon.com/dp/B08DKYBTPH` (Chefman 8 Qt). All three
+  match the ledger. Destination pages show live prices and ratings; per policy none is copied to the site.
+
+### Defect found and repaired — session flag `1B-1` (not in the F-series; `ledger/flags.json` untouched)
+
+- **What:** the self-hosted Fraunces/Inter `@font-face` rules in `assets/css/style.css` were written
+  `url("assets/fonts/…")`. A CSS `url()` resolves relative to the stylesheet (`assets/css/`), so the browser
+  requested `assets/css/assets/fonts/…`, which does not exist. The same defect was vendored into
+  `pages/assets/dashboard.css` by `tools/build_site.py`, which copied the sheet verbatim. Every page therefore
+  silently fell back to system fonts. Earlier sessions noted the same 404 class as a cosmetic irregularity and left it unrepaired
+  (`assets/css/style.css` `@font-face` paths, recorded in the T34–T39 closing records).
+- **Fix:** `assets/css/style.css` → `url("../fonts/…")`; `tools/build_site.py` rewrites the vendored copy to
+  `url("../../assets/fonts/…")`; `tools/build_decisions.py` rewrites from the corrected source form
+  (`../fonts/` → `../../assets/fonts/`); its output is unchanged (`git status` shows no diff under `decisions/`).
+- **Verification:** a resolver over every `url()` in every tracked `*.css` file: 9 font references resolve to
+  files on disk, 0 broken. Generators re-run; `--check` modes green. Full `pages.yml` run-steps replayed
+  locally (24 run-steps, all exit 0).
+- **Not covered by CI:** the workflow's link check parses HTML only, so a broken CSS `url()` will not fail
+  the build. Logged as a recommended guard (see Suggestions below); not added here to keep this change minimal.
+
+### Sources (official / verified, fetched 2026-11-15)
+
+| Claim | Source |
+|---|---|
+| Short link → destination (3 of 3) | https://link.amazon/B04G1MEwY · https://link.amazon/B02NbDxp3 · https://link.amazon/B00hJ57DV |
+| Destination listings | https://www.amazon.com/dp/B0CDY277D3 · https://www.amazon.com/dp/B09B7SB46R · https://www.amazon.com/dp/B08DKYBTPH |
+| Disclosure sentence, program terms | https://affiliate-program.amazon.com/help/operating/agreement (as already recorded in C-18/C-19) |
+| Relative `url()` base rule | CSS Values and Units Level 4 (Editor's Draft), https://drafts.csswg.org/css-values-4/#url-value — the base-URL sentence was not located in this session; the claim is therefore backed by the on-disk resolution check above, not by the spec text |
+
+### Irregularities for review (non-blocking, published on Flagged for Review by the existing register)
+
+- `1B-1` (repaired here, owner-review): font paths were 404; fonts silently fell back to system fonts before this PR.
+- `1B-2` (open): the Pages workflow has no CSS-asset check; a regression of 1B-1 would pass CI.
+- Carried, unchanged: no Associates tag on the supplied links; no official document binds the short codes to
+  the ASINs (F-01…F-03, F-24 in `ledger/flags.json`) — unchanged by this session.
+
+### Status
+
+Task "font-path repair + live re-verification" — **done** pending PR merge and Pages deploy (recorded below
+once confirmed).
+## Session claim — T40 — `arena/3db75825-zone2` (session `3db75825`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| Task | **T40 — Verification-only repo review and live-site audit for the current request** (executive summary, line-by-line check of the three supplied `link.amazon` links against the live Amazon pages, Associates policy page, every repo gate, live Pages entry point, irregularities flagged). No shared data, page, or tool file is edited. |
+| Status | **in progress → done (see closing record)** |
+| Owner | `3db75825` (branch `arena/3db75825-zone2`, base `ceaf9a7`) |
+| File scope | NEW `docs/review-3db75825.md`; this section of `COORDINATION.md` (append-only) |
+| Not touched | `ledger/**`, `pages/**`, `marketing/**`, `decisions/**`, `tools/**`, root `*.html`, and open PR #70 (`arena/cffe745a-zone2`, another session's claim — CONFLICTING, left as-is) |
+
+## Closing record — T40 — `arena/3db75825-zone2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| Status | **done** (verification only; no shared data edited) |
+| Deliverable | NEW `docs/review-3db75825.md` (gate results with exit codes, the three supplied links re-observed 2026-11-15, the Associates policy page check, live-site check, irregularities I-A…I-F) |
+| Gates on this tree | `validate_data`, `audit_site`, `build_site --check`, `build_root_views --check`, `build_summary --check`, `build_marketing --check`, `build_decisions --check`, `validate_decisions`, `tests/test_pipeline.py` (15/15), `node --check` ×2 — **all exit 0** |
+| Local link check | 116 HTML files, 0 broken local references |
+| CI / Pages on `main` | push run `43714798834` success; `pages build and deployment` `43714798538` success; Pages `status: built` |
+| Live reads | `https://kanlerxz87-cyber.github.io/Zone2/`; `https://affiliate-program.amazon.com/help/operating/policies` (Updated April 14, 2026) |
+| Supplied links | B04G1MEwY → B0CDY277D3, B02NbDxp3 → B09B7SB46R, B00hJ57DV → B08DKYBTPH; titles match `ledger/products.json`; none carries an Associates `tag` |
+| Irregularities raised (non-blocking) | I-A: the 10-char ASIN rule was not re-read from an Amazon help page this session; I-B: PR #70 (`cffe745a`) CONFLICTING, no checks, another session's claim, left as-is; I-C: T28/T32/T38 rows still read "in progress" though closed; I-D: `COORDINATION.md` is 401 KB; I-E: owner blockers F-05/F-07/F-08/F-24 remain; I-F: `@font-face` and "verified 2026-11-14" eyebrow carried forward, not re-checked |
+| PR / merge | Recorded in the PR itself (see the PR comment after merge) |
+
 ## Session claim — `arena/e4e7d4b2-zone2` (session `e4e7d4b2`, 2026-11-15 UTC)
 
 | Item | Value |
@@ -4164,7 +4248,7 @@ root glob does not reach).
 | Owner | `e4e7d4b2` (`arena/e4e7d4b2-zone2`) |
 | File scope | `COORDINATION.md` only (append-only session record). No shared data, index, navigation, or generated page is edited. |
 | Base | `main` @ `ceaf9a7` (merge of PR #88) |
-| Other open PRs seen at claim | PR #89 (`arena/1b839f87-zone2`, font-path repair, open) and PR #70 (`arena/cffe745a-zone2`, open). Neither is touched by this session. |
+| Other open PRs seen at claim | PR #89 (`arena/1b839f87-zone2`, font-path repair, open at claim; **merged** as `23895e2` before this record closed) and PR #70 (`arena/cffe745a-zone2`, open). Neither is touched by this session. |
 
 ### Closing record — `e4e7d4b2` (`arena/e4e7d4b2-zone2`, 2026-11-15 UTC)
 
@@ -4193,12 +4277,11 @@ cards, the executive summary and the verified-platform-facts table.
 
 **Irregularities (logged, not repaired here):**
 
-1. **Self-hosted fonts 404.** `assets/css/style.css` (lines 18, 26, 34) and `pages/assets/dashboard.css`
-   (lines 21, 29) declare `url("assets/fonts/…")`. Relative to the stylesheet's own directory, these resolve to
-   `assets/css/assets/fonts/…`, which does not exist. Open PR **#89** (`arena/1b839f87-zone2`, “Repair self-hosted
-   font paths”) addresses this and is owned by session `1b839f87`; it is not merged or altered here.
-2. **Open PR #70** (`arena/cffe745a-zone2`, “trendy marketing articles for organic traffic”) is still open,
-   with no owner record on the board at claim time. Left for its owner.
+1. **Self-hosted fonts 404 — resolved on `main` by PR #89 (F-39, session `1b839f87`).** At this session's first read,
+   `assets/css/style.css` and `pages/assets/dashboard.css` declared `url("assets/fonts/…")`, which resolves relative to
+   the stylesheet directory and 404s. Current `main` (`23895e2`) declares `../fonts/…` and `../../assets/fonts/…`.
+   This session did not modify those files.
+2. **Open PR #70** (`arena/cffe745a-zone2`) was open at claim time with no owner record on the board. Left for its owner.
 3. **Landing-page wording not re-verified here.** The landing page states that “an unknown nine-character code
    on the same short-link service returns a 404.” This session did not test that claim; it is not confirmed by this record.
 
