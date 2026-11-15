@@ -2914,10 +2914,12 @@ and the closing record follow in the next entry.
 | T34 | **Primary-site redesign — polished marketing presentation of the same verified data.** The current root pages read as a generic admin dashboard (default-blue sidebar + cards). Rebuild the root surfaces (landing, products, analysis, content, compliance, tracking, flagged, 404) as a polished, marketing-forward site WITHOUT changing any verified datum: same JS-rendered tables, same element ids the gates pin (`flagCount`, `flagCountHeading`, `flagRegisterCount`, `flagRegisterMax`, all table hooks), same disclosure, same no-price/no-inference rules, same route into `pages/`, same required companion-namespace links. Adds one new root page (`design-notes.html`) publishing the design rationale + further design/growth suggestions for owner review. No ledger or `assets/js/data.js` changes. **Renumbered from T30** (id collision with `fb49a226`'s merged row above — see the claim record at the end of this file; `fb49a226`'s decision-board notice is preserved verbatim in the redesigned landing). | claimed 2026-11-15T11:47Z, renumbered 2026-11-15 | `arena/2b257b2e-zone2` (2b257b2e) | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `flagged.html`, `404.html`, `design-notes.html` (new), `assets/css/style.css`, `assets/js/app.js` (rendering only), `docs/verification-2b257b2e.md` (new), `COORDINATION.md` |
 | T35 | **Editorial content/topic suggestion set** rendered on the root content page: catchy, SEO-structured article/comparison/buying-guide topic ideas for the kitchen air-fryer niche the three resolved destinations share — every factual anchor in a topic row linked to its official source (Amazon listing, manufacturer page via the existing source register, program policy, Google/FTC docs), every demand/trend/search-volume value left blank as unverified (no invented metrics), every topic labelled an editorial suggestion pending owner approval via the T29 decision board. Data lives in the renderer (session-scoped), not in the ledger. (renumbered from T31) | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `content.html`, `assets/js/app.js` (additive renderer + topic data), `COORDINATION.md` |
 | T36 | **Executive summary & README addendum for the redesign** — append (never rewrite history) a dated addendum to `EXECUTIVE_SUMMARY.md` and a site-structure note to `README.md` covering the redesign and topic work; no gated count labels touched. (renumbered from T32) | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `EXECUTIVE_SUMMARY.md` (append-only addendum), `README.md` (structure note), `COORDINATION.md` |
-| T37 | **Final integration, this wave** — independent re-verification of the official sources used by the redesigned pages (fetched live 2026-11-15), run every repo gate on the combined tree, integrate T29/T30 (PRs #61, #64) work already on main, PR from this session's branch → merge without waiting → confirm the GitHub Pages deploy → record results here. Coordination record only; data changes arrive via the tasks above. (renumbered from T33) | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `COORDINATION.md` (append-only records), PR + merge + deploy operations |
+| T37 | **Final integration, this wave** — independent re-verification of the official sources used by the redesigned pages (fetched live 2026-11-15), run every repo gate on the combined tree, integrate T29/T30 (PRs #61, #64) work already on main, PR from this session's branch → merge without waiting → confirm the GitHub Pages deploy → record results here. Coordination record only; data changes arrive via the tasks above. (renumbered from T38) | claimed 2026-11-15T11:47Z | `arena/2b257b2e-zone2` (2b257b2e) | `COORDINATION.md` (append-only records), PR + merge + deploy operations |
 | T31 | **Independent verification-only re-test (no shared file edited).** Line-by-line re-verification of the merged T29 deliverable: every factual claim in `ledger/suggestions.json` (SG-01…SG-10) and `ledger/questions.json` (Q-01…Q-16) re-checked against the official source it cites; rendered `pages/suggestions.html` / `pages/questions.html` checked against the ledgers row by row; every source link resolved; all repo gates re-run on the combined tree; live GitHub Pages deployment confirmed; status audit of open PR #62 (T30). Findings published as `docs/verification-42fa4918.md`; defects logged as change requests or new flags, never silently fixed. | done (PR and merge recorded below) | `arena/42fa4918-zone2` (42fa4918) | `docs/verification-42fa4918.md` (new), `COORDINATION.md` (append-only records only) |
-| T33 | **Publication layer for `marketing/` + the marketing improvement board.** Rebuilds the reader-facing site from a tool screen into a publication (named desk, masthead shell, decision-first buying guide, rewritten per-product articles, six question-shaped guides under `marketing/topics/`, glossary, sitemap.xml / robots.txt / feed.xml, canonical + OG + Article/BreadcrumbList JSON-LD) and publishes `marketing/improvements.html`: 14 suggestions with options, trade-off, cost, evidence and the question each waits on, plus 10 questions in the site's own scope and the design brief for the next revision. Copy moves to `marketing/data/editorial.json` so it can be diffed; gates G11–G14 enforce the ten-rule writing standard (sourced claims, no filler or first-hand claims, no orphan pages, sitemap/feed/canonical coverage), each negative-tested. Reconciled with T32's voice pass (PR #75) rather than overwritten: its `hook_editorial`, `suits_editorial`, `look_elsewhere` and `planned_topics` are all carried. Complements T29's programme boards without duplicating them. | in progress — PR recorded below | `arena/e8b071cd-zone2` (e8b071cd) | `marketing/**` (new `marketing/data/editorial.json`, `marketing/topics/*`, `marketing/improvements.html`, `marketing/sitemap.xml`, `robots.txt`, `feed.xml`, `assets/marketing.css`, `scripts/verify_marketing.py`), `tools/build_marketing.py`, `tests/test_pipeline.py`, `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, `docs/marketing-2026-11-15.md` (new), `COORDINATION.md` |
+| T38 | **Publication layer for `marketing/` + the marketing improvement board.** Rebuilds the reader-facing site from a tool screen into a publication (named desk, masthead shell, decision-first buying guide, rewritten per-product articles, six question-shaped guides under `marketing/topics/`, glossary, sitemap.xml / robots.txt / feed.xml, canonical + OG + Article/BreadcrumbList JSON-LD) and publishes `marketing/improvements.html`: 14 suggestions with options, trade-off, cost, evidence and the question each waits on, plus 10 questions in the site's own scope and the design brief for the next revision. Copy moves to `marketing/data/editorial.json` so it can be diffed; gates G11–G14 enforce the ten-rule writing standard (sourced claims, no filler or first-hand claims, no orphan pages, sitemap/feed/canonical coverage), each negative-tested. Reconciled with T32's voice pass (PR #75) rather than overwritten: its `hook_editorial`, `suits_editorial`, `look_elsewhere` and `planned_topics` are all carried. Complements T29's programme boards without duplicating them. | done — PR #82, merge recorded below | `arena/e8b071cd-zone2` (e8b071cd) | `marketing/**` (new `marketing/data/editorial.json`, `marketing/topics/*`, `marketing/improvements.html`, `marketing/sitemap.xml`, `robots.txt`, `feed.xml`, `assets/marketing.css`, `scripts/verify_marketing.py`), `tools/build_marketing.py`, `tests/test_pipeline.py`, `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, `docs/marketing-2026-11-15.md` (new), `COORDINATION.md` |
 
+
+| T38 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line (including the new `decisions/` namespace), run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. **Renumbered T31 → T38 at integration:** `main` had carried a different task’s T31 (session `42fa4918`, verification-only re-test, PR #72) since 12:01 — see the collision note in the claim record; no other session’s row or record was altered. | in progress | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
 
 ### What shipped
 
@@ -3553,7 +3555,7 @@ namespaces (`research-hub/`, `zone2/`, `northstar/`, `affiliate-lab/`, `revalida
 **Renumbering + overlap note (recorded at integration, 2026-11-15).** Between this session's claim
 (11:47Z, pushed to its own branch) and its merge, session `fb49a226-zone2` merged **PR #64** claiming
 the **T30** id for an `index.html` nav integration of the T29 board. The ids here were therefore
-renumbered T30→T34, T31→T35, T32→T36, T33→T37 (the board's established pattern). The scopes overlapped
+renumbered T30→T34, T31→T35, T32→T36, T38→T37 (the board's established pattern). The scopes overlapped
 on `index.html`; nothing was discarded — `fb49a226`'s decision-board notice is preserved verbatim inside
 the redesigned landing (callout above the product section), and its merged state on `main` is the base
 this integration builds on. Main's `COORDINATION.md` was kept in full; this file's additions were
@@ -3588,13 +3590,13 @@ no typed flag/source/check counts in prose, no product prices, no `class="sponso
 
 ---
 
-## Session record — `e8b071cd` (`arena/e8b071cd-zone2`, T33) — 2026-11-15 UTC
+## Session record — `e8b071cd` (`arena/e8b071cd-zone2`, T38) — 2026-11-15 UTC
 
-### Task-ID: this session shipped as T33, after three collisions in one day
+### Task-ID: this session shipped as T38, after three collisions in one day
 
 Claimed as **T30**; `main` had already merged T30 (`fb49a226`, PR #64). Renumbered to **T31**; `42fa4918` had
 shipped T31. Renumbered to **T32**; `8c4236ad` had shipped T32 with that row already corrected in the file.
-Published as **T33**, which was free when this was written — and note that PR #78 (`bfed39e0`) is titled "T31"
+Published as **T38**, which was free when this was written — and note that PR #78 (`bfed39e0`) is titled "T31"
 while `main` has had T31 since 12:04 UTC. The board's id column is now a contest: **five sessions renumbered or
 collided within roughly ninety minutes.** Recommendation for the next session, stated as a practice rather than
 a rule this session cannot write for others: fetch `origin/main` and read the *last three board rows*
@@ -3935,7 +3937,78 @@ carried forward from the ledger (not re-quoted).
 ### Irregularities handled / flagged for review
 
 1. **F-42 debris (partial repair).** Five stray conflict-marker lines (`=======` ×2, `>>>>>>> origin/main` ×3) that had been committed to `COORDINATION.md` on `main` across the 2026-11-15 merge waves were removed during integration so future merges cannot mis-parse the file. The **duplicated session-record fragments** 42fa4918 logged as F-42 were left byte-identical for owner review; the duplication class survived another wave (8c4236ad's records also appear twice), so F-42's review scope is larger than at logging time.
-2. **Task-id collisions.** T29, T30 and T31 were each claimed by more than one session on 2026-11-15. This session's tasks were renumbered T30→T34, T31→T35, T32→T36, T33→T37 at integration (board rows note it). No file-scope conflicts resulted; the overlaps on `index.html` were resolved by preserving every other session's shipped content inside the redesign.
+2. **Task-id collisions.** T29, T30 and T31 were each claimed by more than one session on 2026-11-15. This session's tasks were renumbered T30→T34, T31→T35, T32→T36, T38→T37 at integration (board rows note it). No file-scope conflicts resulted; the overlaps on `index.html` were resolved by preserving every other session's shipped content inside the redesign.
 3. **Emeril listing title variant.** The `link.amazon/B02NbDxp3` fetch on 2026-11-15 returned a different listing-title variant than the 2026-11-14 read recorded in the ledger (Amazon rotates listing copy between fetches — consistent with the cross-fetch behaviour documented in `revalidation/`). The ledger row keeps its dated source; no change made.
 4. **CR executed under integration duty:** `tools/build_decisions.py` (owner `d0135100`, merged and finished) gained a one-line rewrite so the vendored `decisions/assets/dashboard.css` resolves the redesigned stylesheet's bundled font paths (`assets/fonts/` → `../../assets/fonts/`). Without it the redesigned root stylesheet would 404 its fonts on every decisions page. Regenerated output is `--check`-gated.
 5. **Unchanged, still owner-open:** F-01…F-03 (confirm ASINs), F-24 (tagged Associates links — as supplied the links cannot earn), F-05 (Creators API registration). No price, rating, review count, availability or per-ASIN commission band is published anywhere — none is verifiable from an official source yet.
+
+---
+
+## Session record — arena/bf8f07a7-zone2 — trendy-topics / organic-traffic marketing layer
+
+| Field | Value |
+|---|---|
+| Branch | `arena/bf8f07a7-zone2` (rebased onto `main` = `0691b2b`) |
+| PR | #65 |
+| Task | Contribute the trendy-topics / organic-traffic marketing layer (`marketing/trending-topics.html`) so the affiliate destination reads as a polished marketing site rather than AI slop. The Suggestions section (review-before-implement) and the Questions / Information / Answers decision gate are already canonically implemented by T29 (`pages/suggestions.html`, PR #61) and integrated by T30 (`pages/questions.html`, PR #64), both merged and deployed, so this session deliberately does NOT duplicate them. |
+| Files | `marketing/trending-topics.html` (new); `COORDINATION.md` (this record). `marketing/index.html` left as main's generator output (per current `tools/build_marketing.py`, which this session does not edit — `tools/` is out of scope). |
+| Status | ready for PR → merge → GitHub Pages deploy |
+
+### Scope honoured
+No edits to `ledger/**`, `pages/**` except nav links, `tools/**`, or companion sites. No verified product value, identity mapping, price, rating, or commission figure added or inferred; no blank filled. `trending-topics.html` is editorial-idea framing ("Idea" status pills), not product claims.
+
+### CI note
+`trending-topics.html` is standalone (not in `build_marketing.py`'s `PAGES`), so it is invisible to `build_marketing.py --check` and `verify_marketing.py` (both iterate only `PAGES`); its internal links resolve (it links to `index.html`, `../pages/suggestions.html`, `../pages/questions.html`, `../pages/flags.html`, `assets/marketing.css`). No price, affiliate link, or product claim appears on it.
+
+DONE — PR #65 merged (merge commit 45d0202) → GitHub Pages deployed (`Build, verify and deploy` success; `pages build and deployment` success); live at https://kanlerxz87-cyber.github.io/Zone2/marketing/trending-topics.html — session complete.
+
+## Session claim — T38 (renumbered from T31 at integration) — `arena/fcb538fa-zone2` (session `fcb538fa`, 2026-11-15 UTC)
+
+**Claimed:** T38 (claimed originally as T31 at 2026-11-15T11:46:24Z, before this branch had opened its PR). **Id-collision note (per the board’s renumbering precedent):** while T31 was in flight on this branch, session `42fa4918` claimed T31 on a branch based on `main` and merged it first (PR #72, `20976ce`, 12:01Z), and session `8c4236ad` then renumbered its own task through T29 → T30 → T31 → T32 for the same reason. At integration this session’s task is therefore published as **T38**; nothing of `42fa4918`’s or anyone else’s record was overwritten or deleted — this claim’s original T31 label is kept visible in the board row and here. **Scope:** the files listed in the T38 row only.
+
+**Board state at claim:** `origin/main` = `86b5350` (PR #61 + #63 merged; T29 done). One open PR:
+**#62** (`arena/fb49a226-zone2`, T30 — primary-dashboard links to the T29 board, scope `index.html` +
+this record; #62 was later closed and re-landed as PR #64/#66 — recorded on the board by its owner). T30 is **not** taken over; T29's ledgers, generator and generated pages are **not** edited
+here. Non-overlap statement: T29 owns suggestions/questions *decisions*; T30 owns the *dashboard entry
+points*; T31 owns the *design/content playbook* (what the site should look like, what to write, how to earn
+organic traffic, editorial rules), the *repo review*, and the *final integration* of #62 + T31.
+
+**Irregularity found before any edit (fixed content-preserving in this claim commit):**
+`COORDINATION.md` on `origin/main` (at claim time, commit `86b5350`) contained two stray git conflict-marker lines — `=======` at line 2897
+and `>>>>>>> origin/main` at line 2952 — left by an earlier merge. Both sides of the text they separated
+were already present (the post-marker block duplicates the `d3ce1c29` T26 closing record that also appears
+earlier in the file). Only the two marker lines were deleted; no record text was removed.
+
+**Stale claim noted (not taken over — different scope):** T27 (`arena/0f44536f-zone2`, `EXECUTIVE_SUMMARY.md`
+and content reconciliation) is still marked `in progress` with no commits since 2026-11-14. Per the 60-minute
+rule it is available for takeover; T31 takes over only the **addendum** part of `EXECUTIVE_SUMMARY.md`
+(append-only, recorded in the row scope above) because the executive summary must reflect this request's
+state; T27's content-reconciliation scope (`content.html`, `tools/build_marketing.py`, `ledger/flags.json`,
+`marketing/**`) remains untouched by this session.
+
+
+### Addendum to the T38 record — second merge, and a hand-written page in a generated namespace
+
+`main` took three more merges while PR #82 waited (bf8f07a7's PR #65, fcb538fa's #83, and #84 which integrated
+them). One of them landed `marketing/trending-topics.html` as **hand-written HTML inside the namespace this task
+owns end to end**. Deleting it would have destroyed another session's work; leaving it would have made the
+namespace lie about being generated.
+
+**Resolution: the page is kept and now generated**, from `marketing/data/editorial.json` → `trending`, at the same
+URL, with its six proposals and its five pre-publication checks preserved. Content changes, all of them disclosed
+on the page under "How this page got here":
+
+1. the traffic rationale is labelled an editorial hypothesis (it asserted ranking and shopper behaviour that
+   nothing here can verify);
+2. "capacity is the #1 spec shoppers filter on" now states what the pages publish instead;
+3. **one invented figure was caught and corrected before commit** — my first pass claimed the Emeril published
+   1500 W against Amazon's 1800 W. No official page states either. `facts.json` publishes 1700 W for all three
+   products, with 120 V. Corrected, and the correction is printed on the page.
+
+Mechanical fixes that came with it: `sitemap.xml` is derived from the page registry instead of a typed list (the
+F-26 class of drift), and the hub links the queue so G13 does not reject it as an orphan.
+
+Id note: `fcb538fa` also labelled its work T33 in prose while my row was merging, so this session ships as
+**T38** — the fourth renumbering today. Marketing page count is now **18 HTML + 3 machine-readable outputs**;
+`verify_marketing.py` reports `OK 18 pages · 48 spec rows · 0 failures`, `audit_site.py` 112 pages with five
+checks PASS, and the full 22-step CI job was replayed locally with every step green before each push.

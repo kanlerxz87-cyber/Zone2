@@ -1,4 +1,4 @@
-# T33 — marketing site: verification record (2026-11-15)
+# T38 — marketing site: verification record (2026-11-15)
 
 Session `arena/e8b071cd-zone2` (`e8b071cd`). Scope: the consumer-facing publication in `marketing/`,
 the six question-shaped guides it now publishes, and the improvement board at
@@ -65,7 +65,7 @@ Recommendations are judgements, so they cite the primary documentation rather th
 | Structural audit (fragments, spec sources, prose counts, namespaces, disclosure) | `python3 tools/audit_site.py` | pass — 105 published pages audited |
 | Companion sites | `revalidation/scripts/{build,verify}.py`, `affiliate-lab/scripts/verify_site.py`, `research-hub/scripts/verify.py` | pass — untouched by this session |
 
-### Negative tests on the five new gates (T33)
+### Negative tests on the five new gates (T38)
 
 A gate that cannot fail is decoration. Each new rule was broken on purpose and confirmed to catch it:
 
@@ -118,3 +118,27 @@ standard quoted a dollar figure. The example was rewritten; the gate was not wea
 | Servings figure for P1 | blank | The manufacturer page publishes capacity and basket count, not a household size |
 | Full accessory list for P2 | partial | The page names three of the seven it counts |
 | "Tested", "reviewed in our kitchen", "our team" | never | Nobody has used these products; the gate fails the build on that claim class |
+
+## 7. Second merge, and a page that was not generated (2026-11-15, later in the day)
+
+While this PR was open, `main` took three more merges. One of them put a **hand-written HTML page inside this
+namespace**: `marketing/trending-topics.html` (session `bf8f07a7`, PR #65) — a queue of six article shapes plus a
+list of reasons they would earn traffic, written under the old sidebar shell.
+
+It is kept, and it is now generated. Same URL, same proposals, rendered from `marketing/data/editorial.json` →
+`trending`, so the page inherits the masthead, the disclosure, the scope note, the canonical URL and the sitemap —
+and so a later rebuild cannot quietly undo it. Three changes were made to its content, all of them stated on the
+page itself under "How this page got here":
+
+| Change | Why |
+|---|---|
+| The traffic rationale is labelled an **editorial hypothesis** | it asserted how Google ranks pages and how shoppers behave; nothing here can verify that, and the site's own rule is that a claim either has a source or is labelled as judgement |
+| "Capacity is the #1 spec shoppers filter on" → the row now says what the pages publish | same reason; a ranking we cannot cite is not a fact |
+| The energy row's wattage | My first pass at this merge wrote "1500 W and 1800 W on the Emeril's two official blocks". **No official page states either number.** All three products publish **1700 W** (P1 · P2 · P3, `facts.json`), and 120 V. The row was corrected before commit, and the error is recorded on the page — an invention caught by re-reading the data file is exactly what the row-sourcing rule is for |
+
+Two mechanical fixes came with it: `sitemap.xml` is now derived from the page registry instead of a typed list
+(a hand-maintained list is how F-26-style drift starts), and the hub links the queue so the new page is not an
+orphan under G13.
+
+Task id: this session renumbered again — **T33 was taken** by session `fcb538fa` in prose while my row was being
+merged, so the work ships as **T38**.

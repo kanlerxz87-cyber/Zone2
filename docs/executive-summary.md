@@ -220,7 +220,7 @@ smoothed over; every gap left blank and listed; and a compliance position that w
 Amazon review. The one thing that must happen next is not technical — the affiliate links need a
 tracking tag before any of this can earn anything.
 
-## 13. The publication layer and the improvement board (added 2026-11-15, T33)
+## 13. The publication layer and the improvement board (added 2026-11-15, T38)
 
 `marketing/` is now a reader-facing publication: a named desk, a decision-first buying guide, one article per
 product, six guides that each answer one search phrasing, and the machine-readable set a search engine expects

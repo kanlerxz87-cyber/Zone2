@@ -1743,5 +1743,85 @@
   "voice_pass_merge": {
     "as_of": "2026-11-15",
     "what": "The 2026-11-15 voice pass (session 8c4236ad, PR #75) added reader-facing fields ending in `_editorial` to `marketing/data/facts.json`. They are carried, not dropped: `hook_editorial` is the one-line summary on the product-articles index; `look_elsewhere` renders as each product page's 'Elsewhere on this site' list; `planned_topics` renders on the guides index with a crosswalk to what covers each entry; and eight of the nine `suits_editorial` lines were already carried, with figures attached, by `buy_if` below - the ninth, the rotisserie spit, is now there too. Article ledes stay on `verdict`, because the same sentence cannot be written twice; where the two files frame a product differently, the spec table in `facts.json` is the tie-breaker, which is also that pass's own rule."
+  },
+  "trending": {
+    "kicker": "Content strategy · the queue",
+    "title": "Trending topics, and what would keep them honest",
+    "lede": "Eight article shapes that this set could grow into, carried over from the 2026-11-15 marketing pass (session bf8f07a7, PR #65) and kept here in the generator so the page gets the same masthead, disclosure and sourcing rules as everything else. Each is a proposal. None is commissioned, and none of them changes a single verified value.",
+    "how_label": "Editorial hypothesis — how a page like this earns a reader, not a measured result",
+    "how": [
+      "Answer one specific question in the title and keep the promise in the first screen. A page about what 6 Qt actually holds beats a page called 'Top Air Fryers' for a reader who already knows what they are asking.",
+      "Lead with numbers the manufacturer printed. Specificity is the only thing a reader can check here, so it is also the only thing worth building a headline on.",
+      "Compare rather than describe. Someone choosing between two baskets and one big basket is closer to a decision than someone browsing a list, and a decision is the moment a link gets clicked.",
+      "Put the boring parts in the same page: what the cavity measures, whether it fits the counter, what happens when two official pages disagree. That is what an article can do that a listing page will not.",
+      "Keep internal links deliberate — guide to article, article to guide — so a reader who finishes one page has an obvious next question to ask.",
+      "Disclose plainly and mark paid links, which Google's own guidance asks for on sponsored links and the Associates agreement requires regardless."
+    ],
+    "queue_intro": "Each row is a proposal, not a commission, and the queue is decided on the improvement board (DS-14 and the question register) — a list nobody prioritises is just a list.",
+    "queue": [
+      {
+        "title": "Best dual-basket air fryer for a family of four",
+        "angle": "Two independent baskets that finish together is the exact story this model's page tells; the household-size claim is where a reader would push back, and the guide would have to answer it.",
+        "relates": "P1 · Chefman 6 Qt dual-window",
+        "href": "articles/p1.html",
+        "format": "Guide, not a roundup",
+        "basis": "Capacity 6 Qt (2 × 3 Qt) · Sync Finish · dual windows",
+        "anchor": "comparison.html"
+      },
+      {
+        "title": "Does an air fryer cost less to run than an oven?",
+        "angle": "Every one of these three draws 1700 W on its own page, so the honest version of this piece is about how long a run takes and what preheating costs, not about a machine that is cheaper to run. Electricity price is regional and is not ours to state.",
+        "relates": "All three",
+        "href": "comparison.html",
+        "format": "Comparison, arithmetic shown",
+        "basis": "1700 W on all three official pages · 120 V on all three · no official page publishes an energy cost per use",
+        "anchor": "comparison.html"
+      },
+      {
+        "title": "One box, ten modes: what a large fryer-oven actually replaces",
+        "angle": "Modes are listed by the manufacturer; whether they replace a dehydrate tray or a proofing drawer is a claim about your kitchen, so the piece would describe and let the reader decide.",
+        "relates": "P2 · Emeril 26 Qt",
+        "href": "articles/p2.html",
+        "format": "Explainer",
+        "basis": "10-in-1 modes, Air Fry to Proof, 75–500 F, 24 presets",
+        "anchor": "topics/basket-or-fryer-oven.html"
+      },
+      {
+        "title": "Choosing capacity: the measurement behind the number",
+        "angle": "Quarts are a volume, not a serving count, and the three products state household size differently — the useful article is the one that shows the arithmetic.",
+        "relates": "P1, P3, P2",
+        "href": "topics/how-many-quarts-do-you-need.html",
+        "format": "Buying-guide chapter",
+        "basis": "6 Qt / 8 Qt / 26 Qt · the two '4–6 people' statements · P1 publishes none",
+        "anchor": "topics/how-many-quarts-do-you-need.html"
+      },
+      {
+        "title": "What the preset buttons are actually doing",
+        "angle": "Four buttons on one machine, twenty-four on another, and the count is itself a published disagreement. Any piece here has to lead with the conflict, not around it.",
+        "relates": "P3 (4 presets), P2 (24 vs 25)",
+        "href": "topics/why-two-official-pages-disagree.html",
+        "format": "Explainer",
+        "basis": "Verified preset rows; the 24/25 conflict printed as a conflict",
+        "anchor": "topics/why-two-official-pages-disagree.html"
+      },
+      {
+        "title": "Cleaning: what is actually dishwasher-safe",
+        "angle": "This is the most asked question with the least published answer, and for one of the three products the material behind the claim is still blank on our table.",
+        "relates": "All three",
+        "href": "flagged.html",
+        "format": "Feature comparison",
+        "basis": "Baskets (and P3's rack) stated dishwasher-safe by the manufacturers · P1 inner material blank",
+        "anchor": "flagged.html"
+      }
+    ],
+    "gate_intro": "Before any of these becomes a page, the same five checks apply that the 2026-11-15 pass wrote, kept because they are the right gates:",
+    "gate": [
+      "Propose it on the improvement board with its options and its cost, so the owner chooses a path before anything is built.",
+      "Do not let the article imply that the observed destination is the product the brief named. Identity is unconfirmed (F-03), and every page carries that sentence.",
+      "Build every specification row from a manufacturer or Amazon page. Leave blanks blank; never infer a value to fill a column.",
+      "Mark each marketplace link paid, and keep the disclosure inside the same container as the link.",
+      "Date-stamp the read and re-read the page before republication, so a silent change on the source cannot pass as our mistake."
+    ],
+    "provenance": "Page carried over from the 2026-11-15 marketing pass (session bf8f07a7, PR #65), which committed it as hand-written HTML under the previous shell. It is generated here instead, so it inherits the masthead, the disclosure, canonical URLs, the sitemap and the orphan check. Two sentences were softened where they asserted search-engine behaviour or a shopper ranking we cannot verify, and the trend column is now labelled a hypothesis. One row was corrected: the first draft of this merge claimed the Emeril drew 1500 W against Amazon's 1800 W, a figure no official page states — all three products publish 1700 W. No verified value was added, removed or changed."
   }
 }

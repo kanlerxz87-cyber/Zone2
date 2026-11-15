@@ -563,8 +563,93 @@ Google's outbound-link guidance, and the FTC endorsement-guidance page.
 links (F-24), Creators API registration (F-05) — and, as before, no price, rating, review count,
 availability or per-ASIN commission band is published, because no official source states them.
 
+## Addendum — design/content playbook, repo review and integration state, 2026-11-15 (session `fcb538fa`, task T33)
+
+This addendum answers the request of 2026-11-15 directly: *what should this site look like, what should it
+write, how does it earn real traffic, and what must be decided before anything is built.* It records where
+those answers live and what was independently re-verified while producing them. Nothing in it changes the
+fact base; every figure already published elsewhere in this summary is untouched.
+
+### 1. Where the design and content answers live
+
+* **[`docs/design-prompt-suggestions.md`](docs/design-prompt-suggestions.md)** — the suggestion set written to
+  be pasted into the site-design/content prompt: verified constraints the design must obey (20 rows, each
+  linked to the official page it was read from), design-direction options with a recommendation per row,
+  nine article angles for the three promoted destinations, an organic-traffic plan, ten anti-“AI slop”
+  editorial rules, decision-making improvements, and discovery actions for the missing information.
+* **[`playbook.html`](playbook.html)** — the same set published on the live site in table form, one source
+  link per row, with a clearly labelled *Flagged for review* section for this session’s irregularities
+  (IR-01…IR-11) so they can be reviewed while the site is up.
+* **[`docs/review-fcb538fa.md`](docs/review-fcb538fa.md)** — the line-by-line repository review for this
+  request: inventory, every CI gate reproduced locally, observations and irregularities with evidence.
+
+Decision authority is unchanged: these are proposals. The owner chooses paths on the canonical
+**[Suggestions decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html)**
+(SG-01…SG-10) after consulting the canonical **[Open Questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html)**
+(Q-01…Q-16) — both shipped by session `2499438c` (T29) and made reachable from the dashboard by sessions
+`fb49a226` (T30) and `8c4236ad` (T32). Session `8c4236ad` also executed the first editorial upgrade of the
+public marketing set (voice only, facts byte-identical) and closed change request **CR-9** by adding the
+decision-surface mentions this file previously lacked.
+
+### 2. What was re-verified by this session (all fetched live, 2026-11-15)
+
+| Claim class | Result | Official source |
+|---|---|---|
+| Disclosure requirement and agreement currency | §5 sentence verbatim; “Updated: October 15, 2025” | https://affiliate-program.amazon.com/help/operating/agreement |
+| No promise of traffic or commission income | §4 sentence verbatim | https://affiliate-program.amazon.com/help/operating/agreement |
+| Price, comparison, product-list original-content, promotion-removal and no-misleading-claims rules | “Updated: April 14, 2026”; §2(b) text verbatim | https://affiliate-program.amazon.com/help/operating/policies |
+| Search rule §6(f), ratings rule §6(t), cloaking/shortener §6(v)–(w), price-tracking §6(y), solicited-email §4, **machine-learning clause §5** | all verbatim | https://affiliate-program.amazon.com/help/operating/policies |
+| Application thresholds (10 posts, ~60-day content, own website, three sales/180 days) | verbatim | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
+| Creators API prerequisite | “at least 10 qualifying sales within the past 30 days” verbatim | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction |
+| Google link qualification + spam policies (scaled content abuse, thin affiliation, link spam) | verbatim | https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links · https://developers.google.com/search/docs/essentials/spam-policies |
+| FTC disclosure principle | “clearly and conspicuously”; Guides revised 2023 | https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking |
+| The three supplied short links | still resolve to `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH` with matching titles; **no `tag=` parameter on any of them** (re-observation of F-24) | https://link.amazon/B04G1MEwY · https://link.amazon/B02NbDxp3 · https://link.amazon/B00hJ57DV |
+
+Full row-by-row evidence: [`docs/review-fcb538fa.md`](docs/review-fcb538fa.md) §5 and
+[`playbook.html`](playbook.html) §9. Repo gates on the integration tree: `validate_data` clean,
+all generator `--check` gates current, guard tests passing, structural audit green (see the closing record
+in `COORDINATION.md` for the exact run).
+
+### 3. New irregularities this session flagged (non-blocking, published with sources)
+
+Eleven items, IR-01…IR-11, are published in [`playbook.html`](playbook.html) §8 and
+[`docs/review-fcb538fa.md`](docs/review-fcb538fa.md) §4. The ones that most affect decisions:
+
+* **IR-04 / candidate compliance gap** — Participation Requirements **§5** forbids using Special Links or
+  Program Content to develop machine-learning models without Amazon’s express prior written approval, and
+  the compliance ledger (R-01…R-31) does not carry it — directly relevant to this brief’s AI content engine.
+  Flag ids F-39…F-42 are already reserved/used by two other sessions, so the candidate finding is published
+  for the owner to add as the next free id rather than risking another register collision.
+* **IR-06** — multiple parallel sessions proposed overlapping suggestion/question surfaces during the day;
+  the integration position is that the canonical registers stay with T29’s `pages/suggestions.html` /
+  `pages/questions.html`, and newcomers link rather than duplicate.
+* **IR-09 / IR-10** — the Associates tag (F-24) and the brief-to-destination mapping (F-01/F-03) remain the
+  two owner actions without which no monetisation claim of this platform can be true.
+* **IR-11** — the source-register notes for rows S38…S42 were written char-by-char (“T; h; e; …”) by the
+  session that added them; the rows’ links and dates are correct, the notes column is garbled. Logged as a
+  change request for the register owner, not edited here (shared data, other sessions active).
+
+Earlier coordination findings are cross-referenced rather than renumbered: the conflict-marker debris in
+`COORDINATION.md` was found and logged as **F-42** by session `42fa4918` (independently found and removed
+on this branch as well — two sessions, one defect, both records kept, following the F-30/F-37 precedent).
+
+### 4. State of the ask, item by item
+
+| Requested | State |
+|---|---|
+| Suggestions that feed the site-design prompt | Delivered — `docs/design-prompt-suggestions.md` + `playbook.html` |
+| Suggestions section to review before implementing | Live at `pages/suggestions.html` (T29, PR #61) with dashboard entry points (T30/T32) |
+| Clear list of questions / information / answers before decisions | Live at `pages/questions.html` (T29) plus discovery actions D-01…D-06 in the playbook |
+| Catchy, trendy, non-“AI slop” articles | Nine compliant angles proposed (DP-09…DP-17); first execution already live in the marketing set’s voice upgrade and its SG-04-gated topic queue (T32) |
+| Organic traffic | Plan published (DP-18…DP-27); measurement remains missing information (IR-08, D-01) — no traffic data exists to claim |
+| Executive summary | This addendum; CR-9 closed via T32’s addendum |
+| GitHub Pages live site | `https://kanlerxz87-cyber.github.io/Zone2/` — deploy confirmed per closing record in `COORDINATION.md` |
+| Verification, source links per row, unverified left blank | Enforced by gates and re-verified for every claim made here |
+| PR → merge → deploy | See the T33 closing record in `COORDINATION.md` |
+
 EAD
-## Addendum — the publication layer and the marketing improvement board, 2026-11-15 (session `e8b071cd`, T33)
+EAD
+## Addendum — the publication layer and the marketing improvement board, 2026-11-15 (session `e8b071cd`, T38)
 
 The brief has two halves. Before today, everything merged served the first: the platform, the registers, the
 verification. The second half — *a polished affiliate publication that pulls organic traffic and does not read
@@ -598,3 +683,4 @@ the rule was not loosened.
 
 Line-by-line record, with the official links: `docs/marketing-2026-11-15.md`.
 in
+

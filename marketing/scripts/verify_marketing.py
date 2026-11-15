@@ -13,12 +13,12 @@ Fails (non-zero exit) if any of these stop being true, so none of them depends o
   G8  every row marked UNVERIFIED/WITHHELD prints no value at all
   G9  committed HTML matches a fresh build (nothing hand-edited)
   G10 every official source URL used is on an allow-listed official host
-  G11 every factual sentence on a guide or review page carries a source id that resolves  (T33)
+  G11 every factual sentence on a guide or review page carries a source id that resolves  (T38)
   G12 the writing standard is enforced, not recommended: a banned phrase on a reader-facing page,
-      an opinion outside a labelled take box, or an unlabelled "we tested" claim fails the build  (T33)
-  G13 every generated page is reachable from another generated page  (T33)
+      an opinion outside a labelled take box, or an unlabelled "we tested" claim fails the build  (T38)
+  G13 every generated page is reachable from another generated page  (T38)
   G14 sitemap.xml covers every HTML page, feed.xml items resolve, and each canonical URL matches
-      the file it sits in  (T33)
+      the file it sits in  (T38)
 
 The row-level checks (G7/G8) re-derive the expectation from marketing/data/facts.json and then read the
 rendered HTML, so a renderer bug cannot quietly pass its own test.
@@ -48,7 +48,7 @@ OFFICIAL_HOSTS = {
     "www.chefman.com",
     "www.emerileveryday.com",
     "affiliate-program.amazon.com",
-    # Added 2026-11-15 (T33): the improvement board's recommendations cite Google's own search
+    # Added 2026-11-15 (T38): the improvement board's recommendations cite Google's own search
     # documentation instead of an SEO blog, so Google's domain is now an official source on these
     # pages. The allow-list is deliberately still a list, not a wildcard.
     "developers.google.com",
@@ -156,7 +156,7 @@ BANNED_CACHE: dict[str, list[str]] = {}
 
 
 def editorial_checks(rendered: dict[str, str]) -> None:
-    """G11-G14, added by T33. These exist because the alternative - a style guide nobody enforces -
+    """G11-G14, added by T38. These exist because the alternative - a style guide nobody enforces -
     is exactly how the previous revision drifted back to generic copy within one regeneration."""
     editorial = json.loads((ROOT / "data" / "editorial.json").read_text(encoding="utf-8"))
     banned = [w.lower() for w in editorial["voice"]["banned_words"]]
@@ -236,7 +236,7 @@ def main() -> int:
         fail(f"G1 expected at least 9 marketing pages, builder defines {len(PAGES)}")
 
     fresh = build(ROOT / ".fresh")  # build to a scratch dir, compare, then remove
-    editorial_checks(fresh)  # G11-G14 (T33) run on the render, so a renderer bug cannot skip them
+    editorial_checks(fresh)  # G11-G14 (T38) run on the render, so a renderer bug cannot skip them
     import shutil
 
     shutil.rmtree(ROOT / ".fresh", ignore_errors=True)

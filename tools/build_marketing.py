@@ -614,7 +614,8 @@ def page_index() -> str:
     <section class="block">
       <h2>Guides, by the question they answer</h2>
       <ul class="guide-list">{guides}</ul>
-      <p class="more"><a href="topics/index.html">All guides</a> · <a href="buying-guide.html">Which one to buy</a></p>
+      <p class="more"><a href="topics/index.html">All guides</a> · <a href="buying-guide.html">Which one to buy</a> ·
+      <a href="trending-topics.html">What is queued next, and the gate it has to pass</a></p>
     </section>
 
     <section class="block block--voice">
@@ -1268,6 +1269,71 @@ def status_pill(status: str) -> str:
     return f'<span class="pill pill-warn">{esc(status)}</span>'
 
 
+def page_trending() -> str:
+    """The queue of article shapes this set could grow into. Carried over from the 2026-11-15 marketing
+    pass, which committed this page by hand under the old shell; regenerated here so it inherits the
+    masthead, the disclosure, canonical URLs, the sitemap and the orphan check, and so its assertions are
+    labelled as what they are. No value in it is new: every basis string is a row already published."""
+    t = EDITORIAL["trending"]
+    how = "".join(f"<li>{esc(x)}</li>" for x in t["how"])
+    rows = []
+    for i, q in enumerate(t["queue"], start=1):
+        rows.append(
+            f'<tr id="idea-{i}"><th scope="row">{esc(q["title"])}</th>'
+            f'<td>{esc(q["angle"])}</td>'
+            f'<td><a href="{esc(q["href"])}">{esc(q["relates"])}</a></td>'
+            f'<td>{esc(q["format"])}</td>'
+            f'<td>{esc(q["basis"])}</td></tr>'
+        )
+    gate = "".join(f"<li>{esc(x)}</li>" for x in t["gate"])
+    body = f"""    <article class="post">
+    <div class="page-head">
+      <p class="eyebrow">{esc(t['kicker'])}</p>
+      <h1>{esc(t['title'])}</h1>
+      <p class="lede">{esc(t['lede'])}</p>
+    </div>
+
+    <section class="block">
+      <h2>How a page like this earns a reader</h2>
+      <div class="take">
+        <p class="take-label">{esc(t['how_label'])}</p>
+        <ol class="points">{how}</ol>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>The queue</h2>
+      <p>{esc(t['queue_intro'])}</p>
+      <table class="data">
+        <caption>Six proposals, each tied to rows this site already publishes. Nothing here is commissioned.</caption>
+        <thead><tr><th>Working title</th><th>Angle, and where a reader would push back</th>
+        <th>Relates to</th><th>Shape</th><th>Basis in the verified set</th></tr></thead>
+        <tbody>{"".join(rows)}</tbody>
+      </table>
+    </section>
+
+    <section class="block">
+      <h2>Before any of these is published</h2>
+      <p>{esc(t['gate_intro'])}</p>
+      <ol class="points">{gate}</ol>
+    </section>
+
+    <section class="block">
+      <h2>How this page got here</h2>
+      <p class="not-tested">{esc(t['provenance'])}</p>
+    </section>
+
+    <nav class="crumbs" aria-label="Related"><a href="index.html">Overview</a> ·
+      <a href="topics/index.html">Guides</a> · <a href="improvements.html">Improvement board</a> ·
+      <a href="../pages/suggestions.html">Programme suggestions</a></nav>
+    </article>
+"""
+    return shell("Trending topics", "Six article shapes this set could grow into, each tied to a row already "
+                 "published, with the gate each one has to pass before it is written.", body,
+                 here="trending-topics.html", depth=0,
+                 crumbs=[("index.html", "Overview"), ("trending-topics.html", "Trending topics")])
+
+
 def page_improvements() -> str:
     """The review board: every open suggestion with its options, cost and blocking question, plus the
     question register, the design brief for the next revision, and the before/after standard."""
@@ -1466,10 +1532,9 @@ def page_improvements() -> str:
 
 
 def page_sitemap() -> str:
-    urls = ["index.html", "buying-guide.html", "comparison.html", "verification.html", "flagged.html",
-            "improvements.html", "articles/index.html", "topics/index.html"]
-    urls += [f"articles/p{i}.html" for i in range(1, len(FACTS["products"]) + 1)]
-    urls += [f"topics/{g['slug']}" for g in GUIDES]
+    # Derived from the page registry, never typed: a hand-maintained list is how
+    # F-26-style drift starts. One registry, one sitemap, one truth.
+    urls = list(PAGES)
     entries = "".join(
         f"<url><loc>{LIVE}{u}</loc><lastmod>{ED_AS_OF}</lastmod></url>" for u in urls
     )
@@ -1509,6 +1574,7 @@ PAGES = {
     "verification.html": page_verification,
     "flagged.html": page_flagged,
     "improvements.html": page_improvements,
+    "trending-topics.html": page_trending,
     "articles/index.html": page_articles_index,
     "articles/p1.html": lambda: page_article("P1"),
     "articles/p2.html": lambda: page_article("P2"),
