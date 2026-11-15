@@ -1,0 +1,167 @@
+{
+  "note": "Organic-traffic readiness, restricted to rules that an official document actually states. Each row quotes the governing text and names what the site does about it today, measured — not claimed. The last section is the mirror image: the numbers every affiliate site publishes that cannot be verified from any official source, left blank on purpose. This file is the answer to 'make it generate organic traffic' without inventing demand.",
+  "as_of": "2026-11-15",
+  "sections": [
+    {
+      "id": "PAGE",
+      "name": "What a page needs before it can be found",
+      "lead": "Google documents very few hard requirements, and it says so. These are the ones it states, with the site's measured state.",
+      "rows": [
+        {
+          "id": "T-01",
+          "rule": "The disclosure sentence must be clear and prominent, placed with the recommendation rather than buried at the end.",
+          "quoted": "You must clearly and prominently state the following … 'As an Amazon Associate I earn from qualifying purchases.'",
+          "source_id": "SA-01",
+          "site_state": "Sentence present on every page (verified by gate). On 24 of the 77 pages that link to a product, the first copy of it appears after the first product link; on index.html the link is at line 112 and the sentence at line 285.",
+          "verdict": "PARTIAL — see A-02 / R-02"
+        },
+        {
+          "id": "T-02",
+          "rule": "A Special Link must use the Associates ID, and must not be obscured by a shortener.",
+          "quoted": "Special Links must use the Associates ID we have assigned to you. … You will not use a link shortening service … in a manner that makes it unclear that you are linking to an Amazon Site.",
+          "source_id": "SA-03",
+          "site_state": "0 tagged links on 116 pages; 0 tag= parameters found. The three supplied short codes are published as evidence and carry no tag.",
+          "verdict": "NOT MET — blocked on G-01"
+        },
+        {
+          "id": "T-03",
+          "rule": "The Site must contain original content, publicly available, and third-party material must carry significant commentary or transformation.",
+          "quoted": "Your Site(s) must contain original content … Original content utilizing third-party materials must contain significant commentary, analysis, or transformation.",
+          "source_id": "SA-08",
+          "site_state": "Original commentary exists (journal/ and marketing/topics/ argue from verified specs rather than copying listings), but 116 pages across eight namespaces describe three products — the volume is mostly self-duplication.",
+          "verdict": "PARTIAL — see A-06 / R-06"
+        },
+        {
+          "id": "T-04",
+          "rule": "Price and availability may only be shown if Amazon serves them or they come from the API; price tracking and alerting are forbidden outright.",
+          "quoted": "…your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain … via Creators API or PA API. … your Site must not have price tracking and/or price alerting functionality.",
+          "source_id": "SA-04",
+          "site_state": "0 prices printed; the price-analysis module is documented as blocked. This is the correct state, not a gap.",
+          "verdict": "MET — control holds (A-11)"
+        },
+        {
+          "id": "T-05",
+          "rule": "Amazon customer reviews and star ratings may only be used if obtained through the API.",
+          "quoted": "You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API.",
+          "source_id": "SA-05",
+          "site_state": "No star rating or review count is displayed anywhere; the ratings recommendation is held open on the board.",
+          "verdict": "MET — control holds"
+        },
+        {
+          "id": "T-06",
+          "rule": "A good affiliate page adds value beyond the merchant's own copy.",
+          "quoted": "Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.",
+          "source_id": "SA-10",
+          "site_state": "Has: comparisons, navigation, specification tables with per-row citations. Does not have: original reviews (no product handled), testing, ratings, or price information.",
+          "verdict": "PARTIAL — the missing three all require G-12"
+        },
+        {
+          "id": "T-07",
+          "rule": "Sponsored or paid links must be qualified so they do not pass ranking credit.",
+          "quoted": "It's not a violation of our policies to have such links as long as they are qualified with a rel=\"nofollow\" or rel=\"sponsored\" attribute value to the <a> tag.",
+          "source_id": "SA-11",
+          "site_state": "78 Amazon anchors qualified, 150 body-level Amazon anchors not qualified (measured).",
+          "verdict": "PARTIAL — see A-04 / R-04"
+        },
+        {
+          "id": "T-08",
+          "rule": "Unique, descriptive titles and meta descriptions; a canonical URL per page.",
+          "quoted": "Unique, descriptive <title> elements and meta descriptions help users quickly identify the best result for their goal. … The rel=\"canonical\" link tag helps Google find the canonical version of a page.",
+          "source_id": "SA-13",
+          "site_state": "All 13 root pages: no canonical, no meta description on 404.html, 4 duplicated titles, 14 titles over 60 characters. marketing/ pages have canonical + OG.",
+          "verdict": "PARTIAL — see A-03, A-12"
+        },
+        {
+          "id": "T-09",
+          "rule": "Amazon marks may only appear to advertise availability of a product on an Amazon site, with a corresponding Special Link.",
+          "quoted": "YOU ARE ALLOWED TO USE THE AMAZON MARKS ONLY BY DISPLAY ON YOUR SITE WITH THE PURPOSE OF ADVERTISING AVAILABILITY OF PRODUCTS ON AN AMAZON SITE, WITH A CORRESPONDING SPECIAL LINK TO THAT SITE.",
+          "source_id": "SA-09",
+          "site_state": "No Amazon logo or mark is used on any page; the site's own name contains no Amazon mark (gated). This is why no mark appears next to the product cards today.",
+          "verdict": "MET — control holds"
+        }
+      ]
+    },
+    {
+      "id": "CONTRADICTION",
+      "name": "Where the brief and the official rules pull in opposite directions",
+      "lead": "The brief asks for automation, volume and trend-chasing. Four of the official documents name those exact behaviours as the ones that get a site demoted or a page ignored. This section states the conflict instead of quietly picking a side.",
+      "rows": [
+        {
+          "id": "T-10",
+          "rule": "First-hand experience is what a review must show; this project has never handled the products.",
+          "quoted": "Provide evidence such as visuals, audio, or other links of your own experience with what you are reviewing … When recommending something as the best overall or the best for a certain purpose, include why you consider it the best, with first-hand supporting evidence.",
+          "source_id": "SA-14",
+          "site_state": "The site states plainly that it has not tested the products and does not use 'we tried' language; that honesty is currently its main differentiator.",
+          "verdict": "CONFLICT — cannot be resolved by writing; resolved by buying or borrowing the product (G-12) or by staying a research desk rather than a review site."
+        },
+        {
+          "id": "T-11",
+          "rule": "Automation used to produce volume is a named spam signal.",
+          "quoted": "Are you using extensive automation to produce content on many topics? … Using generative AI tools or other similar tools to generate many pages without adding value for users.",
+          "source_id": "SA-12",
+          "site_state": "The generators are real and could produce arbitrary volume; the gate that stops them is editorial (every valued row must be sourced), not technical.",
+          "verdict": "CONFLICT — the brief's 'scalability' aim and Google's scaled-content section describe the same machine. The site survives only while each page adds something the listing does not."
+        },
+        {
+          "id": "T-12",
+          "rule": "Author and site background are trust signals; this project has neither.",
+          "quoted": "…background about the author or the site that publishes it, such as through links to an author page or a site's About page.",
+          "source_id": "SA-12",
+          "site_state": "0 author, 0 About page, 0 contact route across 116 pages.",
+          "verdict": "GAP — see A-07 / R-07 / G-05"
+        },
+        {
+          "id": "T-13",
+          "rule": "Rendering matters but is not fatal — with a caveat that hurts this site specifically.",
+          "quoted": "Keep in mind that server-side or pre-rendering is still a great idea … not all bots can run JavaScript.",
+          "source_id": "SA-13",
+          "site_state": "The 37 findings pages are static and crawlable; the root landing, products and analysis pages render their tables from a 102 KB script.",
+          "verdict": "PARTIAL — see A-01 / R-01"
+        },
+        {
+          "id": "T-14",
+          "rule": "Meeting the requirements does not entitle a page to appear.",
+          "quoted": "It's important to note that just because a page meets all of these requirements and best practices, doesn't mean that Google will crawl, index, or serve its content.",
+          "source_id": "SA-15",
+          "site_state": "Stated here so that no later session reads a green gate as a traffic forecast.",
+          "verdict": "CONTEXT"
+        },
+        {
+          "id": "T-15",
+          "rule": "There is no official page that promises traffic, and the programme says so explicitly.",
+          "quoted": "We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program.",
+          "source_id": "SA-01",
+          "site_state": "No traffic figure, growth target or revenue projection appears anywhere in the repository.",
+          "verdict": "CONTEXT — this is why the traffic page below has no forecast in it"
+        }
+      ]
+    }
+  ],
+  "cannot_verify": [
+    {
+      "metric": "Search demand / monthly volume for any keyword",
+      "why_not": "No official document publishes it. Search Console reports a site's own queries only, after the site exists and is indexed; every other figure is a vendor estimate with its own method.",
+      "what_is_published_instead": "nothing — the site prints no demand value anywhere, and the content pages label their topic ideas as suggestions rather than opportunities."
+    },
+    {
+      "metric": "Expected conversion rate, click-through rate, earnings per click or RPM",
+      "why_not": "Amazon publishes a rate card, not a performance benchmark; the Agreement disclaims any expectation of commission income (quote above).",
+      "what_is_published_instead": "the published commission bands only, with the band-to-ASIN mapping flagged as OPEN (G-06)."
+    },
+    {
+      "metric": "Keyword difficulty or ranking position",
+      "why_not": "No official source. Scraping Google to obtain it is itself a named spam practice (machine-generated traffic).",
+      "what_is_published_instead": "nothing; Search Console is the only source for this site's own positions once connected (G-10)."
+    },
+    {
+      "metric": "Traffic the current site receives",
+      "why_not": "No analytics is installed, so no figure exists — including for the owner.",
+      "what_is_published_instead": "the measurement options (R-05 / G-03), with the trade-offs stated."
+    },
+    {
+      "metric": "Whether these three products are 'trending'",
+      "why_not": "No authorised trend source is connected. Google's own guidance also asks whether you are writing about something 'simply because they seem trending and not because you'd write about them otherwise'.",
+      "what_is_published_instead": "the observation that all three resolved listings sit in the same category (Air Fryers), and nothing about demand."
+    }
+  ]
+}
