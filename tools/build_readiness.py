@@ -455,7 +455,7 @@ Nothing on this page is a product recommendation, and no product price is publis
 </header>
 
 <section class="rr-card">
-  <h2>The five things Amazon actually says</h2>
+  <h2>The {len(reg["primary_source_quotes"])} things Amazon actually says</h2>
   <p>Quoted verbatim from {esc(src)} on {esc(read)}, so every row below traces to a sentence rather than to a summary:</p>
   <ul class="rr-quotes">{quotes}</ul>
   <p class="row-note">Source: <a class="src" href="{esc(url)}" target="_blank"
