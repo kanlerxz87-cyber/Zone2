@@ -4154,3 +4154,14 @@ root glob does not reach).
    consent), DS-10 (single category), DS-12 (seven parallel sites), DS-13 (re-verification cadence), DS-14
    (the queue). Nothing in that list blocks the site; all of it blocks growth. F-07 — no Associates ID — is the
    only thing blocking revenue, and it is not technical.
+
+## Session claim — `arena/e4e7d4b2-zone2` (session `e4e7d4b2`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| Task | **Re-verification and status record for the three supplied `link.amazon` codes + full gate run on `main`**, with a PR → merge → Pages confirmation. Identified by session ID `e4e7d4b2` (no new `T##` number is claimed, per the note in the closing record of T39). |
+| Status | **in progress** |
+| Owner | `e4e7d4b2` (`arena/e4e7d4b2-zone2`) |
+| File scope | `COORDINATION.md` only (append-only session record). No shared data, index, navigation, or generated page is edited. |
+| Base | `main` @ `ceaf9a7` (merge of PR #88) |
+| Other open PRs seen at claim | PR #89 (`arena/1b839f87-zone2`, font-path repair, open) and PR #70 (`arena/cffe745a-zone2`, open). Neither is touched by this session. |
