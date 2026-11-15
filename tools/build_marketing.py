@@ -46,6 +46,28 @@ LIVE = "https://kanlerxz87-cyber.github.io/Zone2/marketing/"
 FACTS = json.loads(DATA.read_text(encoding="utf-8"))
 PRODUCTS = {p["key"]: p for p in FACTS["products"]}
 AS_OF = FACTS["verified_utc"]
+# --------------------------------------------------------------------------- editorial layer
+#
+# Everything below is driven by marketing/data/editorial.json. No marketing page is hand-written:
+# `tools/build_marketing.py --check` fails the build when committed HTML differs from a fresh render,
+# so the copy, the improvement board and the question register are data, not files.
+
+EDITORIAL_PATH = REPO / "marketing" / "data" / "editorial.json"
+EDITORIAL = json.loads(EDITORIAL_PATH.read_text(encoding="utf-8"))
+BRAND = EDITORIAL["brand"]
+VOICE = EDITORIAL["voice"]
+DESIGN = EDITORIAL["design"]
+GUIDES = EDITORIAL["guides"]
+GUIDE_BY_SLUG = {g["slug"]: g for g in GUIDES}
+SUGGESTIONS = EDITORIAL["suggestions"]
+QUESTIONS = EDITORIAL["questions"]
+PROMPT_BRIEF = EDITORIAL["prompt_brief"]
+BEFORE_AFTER = EDITORIAL["before_after"]
+VERIFIED_TODAY = EDITORIAL["verified_today"]
+PRODUCT_EDITORIAL = EDITORIAL.get("products", {})
+ED_AS_OF = EDITORIAL["as_of"]
+
+
 
 STATUS_LABEL = {
     "verified": ("OK", "pill-ok"),
@@ -183,56 +205,344 @@ def feature_list(product: dict) -> str:
 
 # --------------------------------------------------------------------------- page shell
 
-NAV = [
-    ("index.html", "Overview"),
-    ("buying-guide.html", "Buying guide"),
-    ("comparison.html", "Comparison"),
-    ("articles/index.html", "Product articles"),
-    ("verification.html", "Verification"),
-    ("flagged.html", "Flagged for review"),
-]
+# Navigation is data: marketing/data/editorial.json -> "nav". Adding a page without a nav
+# entry leaves it orphaned, which the marketing gate reports as a failure.
+NAV = [(href, label) for href, label in EDITORIAL["nav"]]
 
 
-def shell(title: str, description: str, body: str, *, here: str, depth: int = 0) -> str:
-    root = "../" * depth
-    nav_parts = []
+
+
+def nav_html(root: str, here: str) -> str:
+    parts = []
     for href, label in NAV:
-        active = ' class="active"' if href == here else ""
-        nav_parts.append(f'<a href="{root}{href}"{active}>{esc(label)}</a>')
-    nav = "".join(nav_parts)
+        cls = ' class="active"' if href == here else ""
+        parts.append(f'<a href="{root}{href}"{cls}>{esc(label)}</a>')
+    return "".join(parts)
+
+
+def cite(src_ids) -> str:
+    """Citations that each resolve to one of the official pages recorded in facts.json."""
+    if not src_ids:
+        return ""
+    return '<span class="cites">' + "".join(source_link(s) for s in src_ids) + "</span>"
+
+
+def ext_link(label: str, url: str) -> str:
+    host = url.split("/")[2]
+    rel = "sponsored nofollow noopener noreferrer" if host.endswith("amazon.com") else "noopener noreferrer nofollow"
+    return (
+        f'<a class="src" href="{esc(url)}" target="_blank" rel="{rel}">'
+        f"{esc(label)}</a>"
+    )
+
+
+def fact_value(product: dict, *candidates: str):
+    """First row whose attribute matches a candidate. Never invents a value."""
+    for cand in candidates:
+        for row in product["rows"]:
+            if row["attr"] == cand or row["attr"].startswith(cand):
+                return row
+    return None
+
+
+def serving_claim(product: dict) -> dict:
+    """The published household size, read out of the manufacturer's own feature list."""
+    for feat in product.get("features_official", []):
+        if "4" in feat and "6" in feat and "people" in feat:
+            return {
+                "attr": "Published household size",
+                "value": feat[feat.index("sized") :] if "sized" in feat else feat,
+                "status": "verified",
+                "src": product.get("features_source"),
+            }
+    return {
+        "attr": "Published household size",
+        "value": "",
+        "status": "unverified",
+        "src": None,
+        "blank_reason": "Neither official page states a servings figure for this model.",
+    }
+
+
+def value_html(row: dict) -> str:
+    """Inner HTML of a comparison cell: the value with its source, or a dash with the reason."""
+    if row["status"] in ("unverified", "withheld_by_policy"):
+        reason = esc(row.get("blank_reason", "no official source states this value"))
+        return f'<span class="dash">—</span><span class="cell-note">{reason}</span>'
+    label, klass = STATUS_LABEL[row["status"]]
+    out = f'<strong>{esc(row["value"])}</strong>'
+    if row["status"] not in ("verified",):
+        out += f'<span class="pill {klass}">{label}</span>'
+    if row.get("detail"):
+        out += f'<span class="cell-note">{esc(row["detail"])}</span>'
+    out += cite([row["src"]] if row.get("src") else [])
+    return out
+
+
+def facts_table(products, spec, *, caption: str, key: str) -> str:
+    """A comparison table sourced cell by cell, built only from facts.json rows.
+
+    Values are never typed into the guide copy, so a guide cannot drift from the product page it
+    summarises: the row either exists in the fact base (with its official source) or it prints a
+    dash and the recorded reason for the blank.
+    """
+    head = "".join(f'<th>{esc(PRODUCTS[pk]["manufacturer_product_name"])}</th>' for pk in products)
+    rows = []
+    for i, (label, candidates) in enumerate(spec, start=1):
+        cells = []
+        for pk in products:
+            p = PRODUCTS[pk]
+            row = serving_claim(p) if candidates == ["@serving"] else fact_value(p, *candidates)
+            if row is None:
+                row = {
+                    "attr": label, "value": "", "status": "unverified", "src": None,
+                    "blank_reason": "Not stated on the official pages we read.",
+                }
+            cells.append(f"<td>{value_html(row)}</td>")
+        rows.append(f'<tr id="{key}-{i}"><th scope="row">{esc(label)}</th>{"".join(cells)}</tr>')
+    return (
+        '<table class="data compare">'
+        f"<caption>{esc(caption)}</caption>"
+        f"<thead><tr><th>Attribute</th>{head}</tr></thead>"
+        f'<tbody>{"".join(rows)}</tbody></table>'
+    )
+
+
+def render_table(block: dict) -> str:
+    """A table specified in editorial.json. A row may end with a list of source ids."""
+    rows = []
+    has_src_col = False
+    for i, raw in enumerate(block["rows"], start=1):
+        srcs = next((c for c in raw if isinstance(c, list)), None)
+        cells = [c for c in raw if not isinstance(c, list)]
+        if srcs:
+            has_src_col = True
+        tds = "".join(f"<td>{esc(c)}</td>" for c in cells)
+        src_cell = f'<td class="cell-src">{"".join(source_link(s) for s in srcs)}</td>' if srcs else "<td></td>"
+        rows.append(f'<tr id="{esc(block.get("key", "t"))}-{i}">{tds}{src_cell}</tr>')
+    src_head = "<th>Official page</th>" if has_src_col else ""
+    return (
+        '<table class="data">'
+        f"<caption>{esc(block.get('caption', ''))}</caption>"
+        f"<thead><tr>{''.join(f'<th>{esc(h)}</th>' for h in block['head'])}{src_head}</tr></thead>"
+        f"<tbody>{''.join(rows)}</tbody></table>"
+    )
+
+
+def render_blocks(blocks, *, key: str) -> str:
+    out = []
+    for i, b in enumerate(blocks):
+        kind = b.get("kind")
+        bid = f"{key}-b{i + 1}"
+        if kind == "prose":
+            srcs = ",".join(b.get("src", []))
+            out.append(
+                f'<p class="claim" id="{bid}" data-src="{esc(srcs)}">{b["html"]}{cite(b.get("src"))}</p>'
+            )
+        elif kind == "take":
+            out.append(
+                f'<aside class="take" id="{bid}" role="note"><p class="take-label">Our take — '
+                'an editorial judgement, not a claim the manufacturer makes</p>'
+                f'<p class="judgement">{b["html"]}</p></aside>'
+            )
+        elif kind == "list":
+            srcs = ",".join(b.get("src", []))
+            items = "".join(f'<li class="claim" data-src="{esc(srcs)}">{esc(it)}</li>' for it in b["items"])
+            out.append(f'<ul class="points" id="{bid}">{items}{cite(b.get("src"))}</ul>')
+        elif kind == "table":
+            sub = dict(b)
+            sub.setdefault("key", bid)
+            out.append(f'<figure class="tbl" id="{bid}">{render_table(sub)}<figcaption>Transcribed from the '
+                       f"pages linked in the last column; nothing in this table is averaged or rounded.</figcaption></figure>")
+        elif kind == "capacity_table":
+            out.append(
+                f'<figure class="tbl" id="{bid}">'
+                + facts_table(
+                    ["P1", "P3", "P2"],
+                    [
+                        ("Capacity (as published)", ["Capacity"]),
+                        ("Published household size", ["@serving"]),
+                        ("Power", ["Power"]),
+                        ("Temperature range", ["Temperature"]),
+                    ],
+                    caption="Capacity, power and range exactly as each official page publishes them. The capacity "
+                    "figure is the brand's own measurement, which is why the household-size row matters more.",
+                    key=bid,
+                )
+                + "</figure>"
+            )
+        elif kind == "duo_table":
+            out.append(
+                f'<figure class="tbl" id="{bid}">'
+                + facts_table(
+                    ["P1", "P3"],
+                    [
+                        ("Capacity (as published)", ["Capacity"]),
+                        ("Power", ["Power"]),
+                        ("Temperature range", ["Temperature"]),
+                        ("Footprint", ["Dimensions"]),
+                        ("Weight", ["Weight"]),
+                        ("Presets and controls", ["Presets", "Control type"]),
+                        ("What the design adds", ["Sync Finish", "Shake reminder"]),
+                    ],
+                    caption="Twin 3 Qt baskets against a single 8 Qt chamber, on the numbers both brands publish.",
+                    key=bid,
+                )
+                + "</figure>"
+            )
+        elif kind == "footprint_table":
+            out.append(
+                f'<figure class="tbl" id="{bid}">'
+                + facts_table(
+                    ["P1", "P3", "P2"],
+                    [
+                        ("Product dimensions", ["Dimensions"]),
+                        ("Weight", ["Weight"]),
+                        ("Capacity (as published)", ["Capacity"]),
+                        ("Door or drawer", ["Door / window", "Door", "Finish"]),
+                        ("Basket care", ["Basket care"]),
+                    ],
+                    caption="The fit numbers. Where a brand publishes centimetres as well, both are transcribed; "
+                    "where it publishes nothing, the cell is blank and says so.",
+                    key=bid,
+                )
+                + "</figure>"
+            )
+        else:
+            raise BuildError(f"unknown block kind {kind!r} in {key}")
+    return "\n".join(out)
+
+
+# --------------------------------------------------------------------------- page shell
+
+
+def json_ld(title: str, description: str, url: str, crumbs) -> str:
+    """Article + BreadcrumbList only. Product / Review / AggregateRating markup is deliberately
+    absent: nobody has used these products, and Google's review-snippet guidelines require a
+    genuine, user-sourced rating behind that markup. See DS-07 and question Q-11."""
+    graph = [
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": title,
+            "description": description,
+            "datePublished": f"{ED_AS_OF}T00:00:00+00:00",
+            "dateModified": f"{AS_OF}T00:00:00+00:00",
+            "inLanguage": "en",
+            "isAccessibleForFree": True,
+            "mainEntityOfPage": {"@type": "WebPage", "@id": url},
+            "publisher": {"@type": "Organization", "name": BRAND["name"], "url": LIVE},
+        }
+    ]
+    if len(crumbs) > 1:
+        graph.append(
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": i,
+                        "name": name,
+                        "item": LIVE if i == 1 else LIVE + href,
+                    }
+                    for i, (href, name) in enumerate(crumbs, start=1)
+                ],
+            }
+        )
+    payload = json.dumps(graph, ensure_ascii=False).replace("</", "<\\/")
+    return f'<script type="application/ld+json">{payload}</script>'
+
+
+def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
+          path: str | None = None, crumbs: list | None = None, kicker: str = "",
+          lede: str = "") -> str:
+    root = "../" * depth
+    page_path = path or here
+    url = LIVE + page_path
+    crumb_html = ""
+    if crumbs:
+        parts = []
+        last = len(crumbs) - 1
+        for i, (href, name) in enumerate(crumbs):
+            parts.append(f'<a href="{root}{href}">{esc(name)}</a>' if i < last else f"<span>{esc(name)}</span>")
+        crumb_html = f'<nav class="crumbs" aria-label="Breadcrumb">{" › ".join(parts)}</nav>'
+    head_kicker = f'<p class="eyebrow">{esc(kicker)}</p>' if kicker else ""
+    head_lede = f'<p class="lede">{esc(lede)}</p>' if lede else ""
+    ld = json_ld(title, description, url, crumbs or [])
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{esc(title)} — {esc(SITE_NAME)}</title>
+<title>{esc(title)} · {esc(BRAND['name'])}</title>
 <meta name="description" content="{esc(description)}">
+<link rel="canonical" href="{esc(url)}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{esc(BRAND['name'])}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(description)}">
+<meta property="og:url" content="{esc(url)}">
+<link rel="alternate" type="application/rss+xml" title="{esc(BRAND['name'])} — new guides" href="{root}feed.xml">
 <link rel="stylesheet" href="{root}{CSS}">
+{ld}
 </head>
-<body>
+<body class="pub">
 <a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="{root}index.html"><span class="brand-name">{esc(BRAND['name'])}</span><span class="brand-sub">{esc(BRAND['sub'])}</span></a>
+    <nav class="topnav" aria-label="Sections">{nav_html(root, here)}</nav>
+  </div>
+</header>
 <div class="shell">
-  <aside class="sidebar">
-    <a class="brand" href="{root}index.html">{esc(SITE_NAME)}</a>
-    <p class="sub">Verified Amazon affiliate content</p>
-    <nav aria-label="Marketing sections">{nav}</nav>
-    <p class="side-note">Every claim on these pages links to the official page it came from. Values that no official page states are left blank and flagged.</p>
-    <p class="side-note"><a href="{root}../index.html">← Platform dashboard</a></p>
-  </aside>
-  <main class="main" id="main">
-    <div class="disclosure" data-rule="R-01"><strong>Affiliate disclosure:</strong> {esc(REQUIRED_SITE_DISCLOSURE)}</div>
-    <aside class="scope-note" role="note"><strong>Product identity is not confirmed.</strong> This buying guide, comparison and the three articles describe the Amazon destinations observed when following the supplied short links; they do not establish that those destinations are the products intended in the brief. The supplied codes are 9 characters, and Amazon's <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer nofollow">ASIN and link-format help</a> describes ASINs as catalog identifiers. See <a href="{root}../pages/flags.html#F-03">Flag F-03</a> for the unresolved mapping evidence. Product specifications below are linked to their official manufacturer sources.</aside>
+  <div class="col" id="main">
+    <p class="disclosure" data-rule="R-01"><strong>Affiliate disclosure.</strong> {esc(REQUIRED_SITE_DISCLOSURE)}
+    A commission may be earned when you buy through our links, at no extra cost to you.
+    <a href="{root}verification.html">How we verify</a>.</p>
+    <aside class="scope-note" role="note"><strong>Product identity is not confirmed.</strong> These pages describe the Amazon listings the supplied short links resolved to on {esc(ED_AS_OF)}; they do not establish that those destinations are the products intended in the brief. The supplied codes are 9 characters and an ASIN is 10, so we write about the listings we can read rather than for products we cannot name.
+    <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank"
+    rel="noopener noreferrer nofollow">Amazon on ASINs and link formats</a> ·
+    <a href="{root}../pages/flags.html#F-03">Flag F-03</a></aside>
+{crumb_html}
+{head_kicker}
+{head_lede}
 {body}
-    <footer class="site">
-      <p>{esc(REQUIRED_SITE_DISCLOSURE)}</p>
-      <p>Facts verified {esc(AS_OF)} against official manufacturer and Amazon product pages.
-      Product links are <strong>preview links</strong>: no Associates ID is configured for this project, so
-      they are not monetized and carry <code>rel="sponsored nofollow"</code>.
-      <a href="{root}verification.html">Verification method</a> ·
-      <a href="{root}flagged.html">Flagged for review</a></p>
-    </footer>
-  </main>
+  </div>
+  <aside class="rail">
+    <div class="rail-card">
+      <h2>What this site does</h2>
+      <p>{esc(BRAND['standfirst'])}</p>
+    </div>
+    <div class="rail-card">
+      <h2>Verified on</h2>
+      <p class="rail-date">{esc(ED_AS_OF)}</p>
+      <p class="rail-note">Six official pages, read row by row. Two of them disagree with each other, so the
+      tables show both numbers instead of picking one.</p>
+      <p><a href="{root}verification.html">Read the method</a></p>
+    </div>
+    <div class="rail-card">
+      <h2>Improve this site</h2>
+      <p>The open board: what to change next, what each option costs, and the answer each decision is waiting for.</p>
+      <p><a class="button button--ghost" href="{root}improvements.html">Open the board</a></p>
+    </div>
+    <div class="rail-card rail-card--dash">
+      <p class="rail-note">A dash is not a gap in the research. It means no official page states the value, and
+      we will not fill a blank with a guess.</p>
+    </div>
+  </aside>
 </div>
+<footer class="site">
+  <p class="foot-brand">{esc(BRAND['name'])}</p>
+  <p>{esc(BRAND['footer_note'])}</p>
+  <p>{esc(REQUIRED_SITE_DISCLOSURE)}</p>
+  <p>Product links are <strong>preview links</strong>: no Associates ID is configured for this project, so they
+  are not monetized and carry <code>rel="sponsored nofollow"</code>. Facts verified {esc(AS_OF)} against official
+  manufacturer and Amazon product pages.
+  <a href="{root}flagged.html">Open items</a> ·
+  <a href="{root}improvements.html">Improvement board</a> ·
+  <a href="{root}../index.html">Owner dashboard</a></p>
+</footer>
 </body>
 </html>
 """
@@ -240,165 +550,223 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0)
 
 # --------------------------------------------------------------------------- pages
 
+# --------------------------------------------------------------------------- pages
+
 def page_index() -> str:
-    cards = []
+    hub = EDITORIAL["hub"]
+    start = "".join(
+        f'<li><a href="{esc(href)}"><strong>{esc(title)}</strong><span>{esc(blurb)}</span></a></li>'
+        for href, title, blurb in hub["start"]
+    )
+    products = []
     for p in FACTS["products"]:
         slug = p["key"].lower()
-        cards.append(f"""
-      <article class="card product-card">
-        <p class="eyebrow">{esc(p['manufacturer'])} · {esc(p['category_path_amazon'].split('› ')[-1])}</p>
-        <h3><a href="articles/{slug}.html">{esc(p['manufacturer_product_name'])}</a></h3>
-        <p class="lede">{esc(p['hook_editorial'])}</p>
-        <dl class="mini">
-          <div><dt>ASIN</dt><dd><code>{esc(p['asin'])}</code></dd></div>
-          <div><dt>Model</dt><dd><code>{esc(p['model'])}</code></dd></div>
-          <div><dt>Rows verified</dt><dd>{sum(1 for r in p['rows'] if r['status'] == 'verified')} of {len(p['rows'])}</dd></div>
-        </dl>
-        <p><a class="button" href="articles/{slug}.html">Read the article</a></p>
-      </article>""")
-    return shell(
-        "Verified Amazon affiliate content",
-        "Source-governed buying guide, comparison and product articles for three Amazon air fryers.",
-        f"""    <div class="page-head">
-      <h1>Three air fryers, one honest spec sheet</h1>
-      <p class="lede">A buying guide, a side-by-side comparison and one article per product — every number
-      traced to the manufacturer's or Amazon's own page.</p>
-      <p>Most product write-ups ask you to trust the adjectives. These pages do the opposite: where the
-      manufacturer's page and Amazon's listing agree, you see the number; where they disagree — and for one
-      model they do — you see both statements and decide for yourself; and where nobody official states a
-      fact, you see the blank instead of a confident guess. That discipline is unusual on an affiliate site,
-      and it is deliberate: an appliance recommendation you can check is worth more than one you can't.</p>
-      <p>Start with the <a href="buying-guide.html">buying guide</a> if you're choosing between them, or jump
-      straight to a product article below if you already know the model you're researching.</p>
+        ed = PRODUCT_EDITORIAL.get(p["key"], {})
+        cap = fact_value(p, "Capacity")
+        rng = fact_value(p, "Temperature")
+        verified = sum(1 for r in p["rows"] if r["status"] == "verified")
+        products.append(
+            f'<article class="pcard">'
+            f'<p class="eyebrow">{esc(p["manufacturer"])} · {esc(p["category_path_amazon"].split(" › ")[-1])}</p>'
+            f'<h3><a href="articles/{slug}.html">{esc(p["manufacturer_product_name"])}</a></h3>'
+            f'<p class="bignum">{esc(cap["value"] if cap else "—")}</p>'
+            f'<p class="pcard-note">{esc(rng["value"] if rng else "range not published")} · {verified} of {len(p["rows"])} rows sourced</p>'
+            f'<p>{esc(ed.get("verdict", p["tagline_facts"]).split(". ")[0])}.</p>'
+            f'<p class="pcard-links"><a href="articles/{slug}.html">The write-up</a>'
+            f'<a href="comparison.html">Side by side</a></p>'
+            f"</article>"
+        )
+    guides = "".join(
+        f'<li><p class="eyebrow">{esc(g["kicker"])}</p>'
+        f'<h3><a href="topics/{esc(g["slug"])}">{esc(g["title"])}</a></h3>'
+        f'<p>{esc(g["hook"].split(". ")[0])}.</p></li>'
+        for g in GUIDES
+    )
+    checked = "".join(
+        f'<li><span class="pill {"pill-ok" if v["status"] == "verified" else "pill-flag"}">{esc(v["status"])}</span> '
+        f"{esc(v['claim'])} <a class=\"src\" href=\"{esc(v['url'])}\" target=\"_blank\" "
+        f'rel="{"sponsored nofollow noopener noreferrer" if v["url"].split("/")[2].endswith("amazon.com") else "noopener noreferrer nofollow"}">'
+        f"{esc(v['url'].split('/')[2])}</a></li>"
+        for v in VERIFIED_TODAY
+    )
+    rows = sum(len(p["rows"]) for p in FACTS["products"])
+    conflicts = sum(1 for p in FACTS["products"] for r in p["rows"] if r["status"] == "conflict")
+    blanks = sum(1 for p in FACTS["products"] for r in p["rows"] if r["status"] in ("unverified", "withheld_by_policy"))
+    body = f"""    <div class="page-head">
+      <p class="eyebrow">{esc(hub['kicker'])}</p>
+      <h1>{esc(hub['title'])}</h1>
+      <p class="standfirst">{esc(hub['standfirst'])}</p>
+      <p class="receipts">{len(FACTS['products'])} products · {rows} specification rows, each one sourced or left
+      blank · {conflicts} published disagreements between official pages · {blanks} blanks with a stated reason ·
+      read on {esc(ED_AS_OF)}</p>
     </div>
 
-    <section class="kpis">
-      <div class="kpi"><span class="kpi-num">{len(FACTS['products'])}</span><span class="kpi-label">products covered</span></div>
-      <div class="kpi"><span class="kpi-num">{sum(len(p['rows']) for p in FACTS['products'])}</span><span class="kpi-label">spec rows, each sourced or blank</span></div>
-      <div class="kpi"><span class="kpi-num">{sum(1 for p in FACTS['products'] for r in p['rows'] if r['status'] == 'conflict')}</span><span class="kpi-label">published source conflicts</span></div>
-      <div class="kpi"><span class="kpi-num">{sum(1 for p in FACTS['products'] for r in p['rows'] if r['status'] in ('unverified', 'withheld_by_policy'))}</span><span class="kpi-label">rows left blank, with reasons</span></div>
+    <section class="block">
+      <h2>Start where the decision is</h2>
+      <ol class="start">{start}</ol>
     </section>
 
-    <div class="card">
-      <h2>Start here</h2>
-      <ul class="links-grid">
-        <li><a href="buying-guide.html"><strong>Buying guide</strong><span>Which of the three fits which kitchen — decided by the verified numbers, not by adjectives.</span></a></li>
-        <li><a href="comparison.html"><strong>Head-to-head comparison</strong><span>Every shared attribute in one table, with the source beside each value.</span></a></li>
-        <li><a href="articles/index.html"><strong>Product articles</strong><span>One SEO-structured article per model, built from that model's verified rows.</span></a></li>
-        <li><a href="verification.html"><strong>Verification</strong><span>What was checked, when, against which page, and what could not be confirmed.</span></a></li>
-        <li><a href="flagged.html"><strong>Flagged for review</strong><span>Every irregularity found while building this set, with its source links.</span></a></li>
-        <li><a href="../pages/suggestions.html"><strong>Suggestions &amp; decisions</strong><span>The strategic choices still open — what to launch, when to monetize, what content to commission — reviewed before anything changes.</span></a></li>
-      </ul>
-    </div>
+    <section class="block">
+      <h2>The three machines</h2>
+      <div class="pgrid">{''.join(products)}</div>
+    </section>
 
-    <h2>The three products</h2>
-    <div class="card-grid">{''.join(cards)}
-    </div>
-""",
+    <section class="block">
+      <h2>Guides, by the question they answer</h2>
+      <ul class="guide-list">{guides}</ul>
+      <p class="more"><a href="topics/index.html">All guides</a> · <a href="buying-guide.html">Which one to buy</a> ·
+      <a href="trending-topics.html">What is queued next, and the gate it has to pass</a></p>
+    </section>
+
+    <section class="block block--voice">
+      <h2>How this site is written</h2>
+      <p>Ten rules, and the build fails a page that breaks one of them. No scene-setting opener; no adjective
+      where a number belongs; the opinion in a labelled box, away from the measurements; the limit stated once,
+      in plain language, instead of a disclaimer nobody reads. It is the shortest route we know to a page that
+      does not read like it was generated, because the sentences are only allowed to be as good as the sources.</p>
+      <p><a class="button" href="improvements.html">Read the rules, and the board of what to change next</a></p>
+    </section>
+
+    <section class="block">
+      <h2>What we checked on {esc(ED_AS_OF)}</h2>
+      <ul class="check-list">{checked}</ul>
+      <p class="more"><a href="verification.html">The full method</a> · <a href="flagged.html">What is still open</a></p>
+    </section>
+"""
+    return shell(
+        hub["title"],
+        "Air fryer reviews and guides built from manufacturer and Amazon listings only: sourced spec rows, "
+        "published disagreements, and the blanks labelled instead of filled in.",
+        body,
         here="index.html",
+        path="index.html",
+        crumbs=[("index.html", "Home")],
     )
 
 
 def page_article(key: str) -> str:
     p = PRODUCTS[key]
     slug = key.lower()
-    # FAQ answers are assembled only from rows that carry a verified value.
+    ed = PRODUCT_EDITORIAL.get(key, {})
     faq = [
-        ("What is the verified capacity?",
-         next((r["value"] for r in p["rows"] if r["attr"].startswith("Capacity")), None)),
-        ("What power rating does the manufacturer state?",
-         next((r["value"] for r in p["rows"] if r["attr"].startswith("Power")), None)),
-        ("What temperature range is stated?",
-         next((r["value"] for r in p["rows"] if r["attr"].startswith("Temperature")), None)),
-        ("What model number should be on the box?",
-         next((r["value"] for r in p["rows"] if r["attr"].startswith("Model number")), None)),
+        ("What is the published capacity?", fact_value(p, "Capacity")),
+        ("What power does the manufacturer state?", fact_value(p, "Power")),
+        ("What temperature range is stated?", fact_value(p, "Temperature")),
+        ("What model number should be on the box?", fact_value(p, "Model number")),
+        ("Can the baskets go in a dishwasher?", fact_value(p, "Basket care")),
     ]
     faq_html = []
-    for q, a in faq:
-        if a:
-            faq_html.append(f"<dt>{esc(q)}</dt><dd>{esc(a)}</dd>")
+    for q, row in faq:
+        if row and row["status"] in ("verified", "conflict", "partial"):
+            src = cite([row["src"]] if row.get("src") else [])
+            faq_html.append(f"<dt>{esc(q)}</dt><dd><strong>{esc(row['value'])}</strong>{src}</dd>")
         else:
+            reason = esc((row or {}).get("blank_reason", "no official page states this"))
             faq_html.append(
-                f'<dt>{esc(q)}</dt><dd><span class="pill pill-warn">UNVERIFIED</span> no official page states this, '
-                "so it is not answered here.</dd>"
+                f'<dt>{esc(q)}</dt><dd><span class="pill pill-warn">NOT STATED</span> {reason}</dd>'
             )
     conflicts = [r for r in p["rows"] if r["status"] == "conflict"]
     conflict_block = ""
     if conflicts:
-        items = "".join(
-            f'<li><strong>{esc(r["attr"])}:</strong> {esc(r["detail"])}</li>' for r in conflicts
-        )
+        items = "".join(f'<li><strong>{esc(r["attr"])}:</strong> {esc(r["detail"])}</li>' for r in conflicts)
         conflict_block = f"""
-    <section class="card callout-flag">
+    <section class="block callout-flag">
       <h2>Where the official sources disagree</h2>
-      <p>These are printed as disagreements. No value is chosen for you.</p>
-      <ul>{items}</ul>
+      <p>Printed as a disagreement, not averaged and not resolved in favour of the more flattering number.</p>
+      <ul class="points">{items}</ul>
     </section>"""
-
-    body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <a href="index.html">Product articles</a> › <span>{esc(p['manufacturer_product_name'])}</span></nav>
+    related = [g for g in GUIDES if key in g.get("products", [])]
+    related_html = "".join(
+        f'<li><a href="../topics/{esc(g["slug"])}">{esc(g["title"])}</a> <span>{esc(g["target_query"])}</span></li>'
+        for g in related
+    )
+    if related_html:
+        related_block = f"""
+    <section class="block">
+      <h2>Read this with</h2>
+      <ul class="related">{related_html}</ul>
+    </section>"""
+    else:
+        related_block = ""
+    le = p.get("look_elsewhere") or []
+    look_elsewhere = "".join(
+        f'<li><a href="{esc(x["href"])}">{esc(x["label"])}</a>'
+        + (f' <span>{esc(x["why"])}</span>' if x.get("why") else "") + "</li>"
+        for x in le
+    ) or '<li><a href="../topics/index.html">All guides</a></li>'
+    buy_if = "".join(f"<li>{esc(x)}</li>" for x in ed.get("buy_if", []))
+    skip_if = "".join(f"<li>{esc(x)}</li>" for x in ed.get("skip_if", []))
+    not_tested = (
+        f'<p class="not-tested">{esc(ed.get("gap", "Values no official page states are printed as blanks."))}</p>'
+    )
+    body = f"""    <article class="post">
     <div class="page-head">
-      <p class="eyebrow">{esc(p['manufacturer'])}</p>
+      <p class="eyebrow">{esc(p['manufacturer'])} · {esc(p['category_path_amazon'].split(' › ')[-1])}</p>
       <h1>{esc(p['manufacturer_product_name'])}</h1>
-      <p class="lede">{esc(p['hook_editorial'])}</p>
-      <p class="byline">Official listing title: <em>{esc(p['title_official'])}</em></p>
+      <p class="standfirst">{esc(ed.get('verdict', p['tagline_facts']))}</p>
+      <p class="receipts">Model <code>{esc(p['model'])}</code> · ASIN <code>{esc(p['asin'])}</code> · read off
+      {' / '.join(esc(s['url'].split('/')[2]) for s in p['official_sources'])} on {esc(AS_OF)}</p>
     </div>
 
-    <div class="card">
-      <h2>The short version</h2>
-      <p>This is the model for <strong>{esc(p['tagline_facts'].split(': ', 1)[-1].rstrip('.'))}</strong>. Those
-      numbers are not ours and not a reviewer's — they are printed on the manufacturer's own page, and every
-      row in the table below ends in a link to the page they came from.</p>
-      <p>The honest fine print, because it matters more here than adjectives would: nobody on this project has
-      cooked with this machine, no star rating is published (they move daily and differ by storefront), and no
-      price is quoted (the Associates rules restrict how prices may be shown). What you get instead is the
-      specification, the manufacturer's own feature list, and every disagreement between the two official pages
-      printed as a disagreement rather than smoothed over.</p>
-      <p>{product_link(p)}</p>
+    <div class="block block--verdict">
+      <h2>Who it is for</h2>
+      <div class="two-col">
+        <div><h3>Buy it if</h3><ul class="points points--yes">{buy_if}</ul></div>
+        <div><h3>Skip it if</h3><ul class="points points--no">{skip_if}</ul></div>
+      </div>
+      <p class="cta-row">{product_link(p)}</p>
+      {not_tested}
     </div>
 
-    <section class="card">
-      <h2>Who this fits</h2>
-      <ul class="features">
-        {''.join(f'<li>{esc(s)}</li>' for s in p['suits_editorial'])}
-      </ul>
-      <p class="row-note">Each line restates something the <a class="src" href="{esc(SOURCES[p['suits_editorial_source']]['url'])}" target="_blank" rel="noopener noreferrer nofollow">{esc(SOURCES[p['suits_editorial_source']]['name'])}</a> already states — nothing here is tested experience or a performance promise.</p>
-      <h3 style="margin-top:1.2rem">If that's not you</h3>
-      <ul class="plain">
-        {''.join(f'<li>{esc(le["why"])} — read the <a href="{esc(le["href"])}">{esc(le["label"])}</a> instead.</li>' for le in p['look_elsewhere'])}
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Specification, with the source on every row</h2>
+    <section class="block">
+      <h2>The specification, row by row</h2>
+      <p>Every value below is transcribed from the page named in its last column. Nobody on this site has cooked
+      with this machine, so there is no performance paragraph — the numbers are the review.</p>
       {spec_table(p, key_prefix=slug)}
     </section>
 
-    <section class="card">
+    <section class="block">
       <h2>What the manufacturer says it does</h2>
       {feature_list(p)}
     </section>
 {conflict_block}
-    <section class="card">
-      <h2>Questions buyers actually ask</h2>
-      <dl class="faq">{''.join(faq_html)}</dl>
-      <p class="row-note">Only questions that the verified data above can answer are answered. A question whose
-      answer is not stated on an official page is marked UNVERIFIED rather than filled in.</p>
+    <section class="block">
+      <h2>The listing title, as published</h2>
+      <p class="quote">{esc(p['title_official'])}</p>
+      <p class="row-note">Quoted in full because the title is itself a claim, and the tables above show where it
+      agrees with the specification and where it does not.</p>
     </section>
 
-    <section class="card">
-      <h2>Sources for this article</h2>
+    <section class="block">
+      <h2>Questions worth asking before you order</h2>
+      <dl class="faq">{''.join(faq_html)}</dl>
+    </section>
+{related_block}
+    <section class="block">
+      <h2>Elsewhere on this site</h2>
+      <ul class="related">{look_elsewhere}</ul>
+      <p class="row-note">Carried from the 2026-11-15 voice pass, which published these pointers in
+      <code>marketing/data/facts.json</code>. Kept, because a reader leaving one product page should land on
+      another of ours rather than on a search engine.</p>
+    </section>
+
+    <section class="block">
+      <h2>Sources for this page</h2>
       <ul class="source-list">
         {''.join(f'<li>{source_link(s["id"])} — {esc(s["name"])}</li>' for s in p['official_sources'])}
       </ul>
       <p class="row-note">Read {esc(AS_OF)}. Specifications change; re-check the manufacturer page before buying.</p>
     </section>
+    </article>
 """
     return shell(
         p["manufacturer_product_name"],
-        p["tagline_facts"],
+        ed.get("verdict", p["tagline_facts"])[:155],
         body,
         here="articles/index.html",
         depth=1,
+        path=f"articles/{slug}.html",
+        crumbs=[("index.html", "Home"), ("articles/index.html", "Reviews"), (f"articles/{slug}.html", p["manufacturer"])],
     )
 
 
@@ -407,14 +775,9 @@ def page_articles_index() -> str:
         f'<tr><th scope="row"><a href="{p["key"].lower()}.html">{esc(p["manufacturer_product_name"])}</a></th>'
         f'<td><code>{esc(p["asin"])}</code></td>'
         f'<td>{esc(p["manufacturer"])}</td>'
-        f'<td>{esc(p["hook_editorial"])}</td>'
+        f'<td>{esc(p.get("hook_editorial") or p["tagline_facts"])}</td>'
         f'<td class="cell-src">{source_link(p["official_sources"][0]["id"])}{source_link(p["official_sources"][1]["id"])}</td></tr>'
         for p in FACTS["products"]
-    )
-    topics = FACTS["planned_topics"]
-    topic_items = "".join(
-        f'<li><strong>{esc(t["title"])}</strong><div class="row-note">{esc(t["angle"])}</div></li>'
-        for t in topics["topics"]
     )
     body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <span>Product articles</span></nav>
     <div class="page-head">
@@ -429,16 +792,10 @@ def page_articles_index() -> str:
         <tbody>{rows}</tbody>
       </table>
     </section>
-    <section class="card">
-      <h2>Planned topics — not published yet</h2>
-      <p>These are the next pieces this site could run. None is written, commissioned or published: the
-      content-engine path is <strong>SG-04</strong> on the <a href="{esc(topics["board_href"])}">suggestions
-      decision board</a>, and each format there carries its own compliance trade-off. What you see below is
-      the honest queue — and a note of which verified facts each piece would rest on.</p>
-      <ul class="plain">{topic_items}</ul>
-    </section>
+    <p class="more">Looking for a decision rather than a model page? <a href="../topics/index.html">The guides answer one question each</a>, and <a href="../buying-guide.html">the buying guide routes you to one of these three</a>.
+    </p>
 """
-    return shell("Product articles", "One verified article per product.", body, here="articles/index.html", depth=1)
+    return shell("Product articles", "One verified article per product, plus the guides that answer the questions around them.", body, here="articles/index.html", depth=1)
 
 
 def page_comparison() -> str:
@@ -481,9 +838,8 @@ def page_comparison() -> str:
     body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <span>Comparison</span></nav>
     <div class="page-head">
       <h1>Head-to-head comparison</h1>
-      <p class="lede">The same attributes across all three models, with the official source under every value.
-      Where a model does not state an attribute, the cell says so instead of borrowing another model's number —
-      which is why some cells are empty by design, not by accident.</p>
+      <p class="lede">The same attributes across all three models. Where a model does not state an attribute,
+      the cell says so instead of borrowing another model's number.</p>
     </div>
     <section class="card">
       <div class="table-scroll">
@@ -551,10 +907,6 @@ def page_buying_guide() -> str:
       <h1>Which air fryer, for which kitchen</h1>
       <p class="lede">A buying guide that only makes recommendations the specifications can support. Every pick
       below is decided by a number printed on a manufacturer page, and that page is linked beside it.</p>
-      <p>If you've ever bought an appliance on marketing copy and regretted it, this page is the antidote:
-      three models, the numbers each manufacturer publishes, and an explicit list of the questions those
-      numbers cannot answer. No "best overall" verdict, no invented winner — the decision framework is yours,
-      the facts are linked.</p>
     </div>
 
     <section class="card">
@@ -671,6 +1023,10 @@ def page_verification() -> str:
     )
     body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <span>Verification</span></nav>
     <div class="page-head">
+    <p class="receipts">Re-checked {esc(ED_AS_OF)}: the three supplied short links, all three Amazon
+      listings and both manufacturer pages were fetched again; the results are on the
+      <a href="improvements.html#checked">improvement board</a>. Row-level transcription keeps the date each
+      value was copied ({esc(AS_OF)}), because a re-read of a link is not a re-read of a spec table.</p>
       <h1>How these pages were verified</h1>
       <p class="lede">The method, the exact pages used, and the counts. This page is generated from the same
       data file as the articles, so the numbers cannot drift away from them.</p>
@@ -776,6 +1132,439 @@ def page_flagged() -> str:
                  here="flagged.html")
 
 
+def planned_topics_block() -> str:
+    """The article list left by the 2026-11-15 voice pass (session 8c4236ad, PR #75), published in
+    facts.json as `planned_topics`. Nothing is deleted and nothing is silently dropped: each entry is
+    shown with the page that now covers it, or with the reason it is still unwritten. The crosswalk is a
+    statement about this site, not a programme fact, and every published_as target is link-checked."""
+    pt = FACTS.get("planned_topics") or {}
+    items = pt.get("topics") or []
+    if not items:
+        return ""
+    cross = {x["planned"]: x for x in EDITORIAL.get("planned_topics_crosswalk", [])}
+    rows = []
+    for i, t in enumerate(items, start=1):
+        c = cross.get(t["title"], {})
+        href = c.get("published_as")
+        if href:
+            # this block renders inside marketing/topics/, so rebaseline each target
+            here = href[len("topics/"):] if href.startswith("topics/") else "../" + href
+            status = f'<a href="{esc(here)}">published as {esc(href)}</a>'
+        else:
+            status = '<span class="pill pill-warn">not published</span>'
+        rows.append(
+            f'<tr id="pt-{i}"><th scope="row">{esc(t["title"])}</th><td>{esc(t["angle"])}</td>'
+            f'<td>{status}</td><td>{esc(c.get("note", ""))}</td></tr>'
+        )
+    board = pt.get("board_href") or "../../pages/suggestions.html"
+    note = esc(FACTS.get("editorial_note", ""))
+    return (
+        '<section class="block"><h2>Planned by the 2026-11-15 voice pass</h2>'
+        f'<p class="row-note">{esc(pt.get("status", ""))} <a href="{board}">the programme board</a>.</p>'
+        '<table class="data"><caption>Four topics were queued before this pass. Each is shown with what '
+        'covers it now, or with the reason it is still open.</caption>'
+        "<thead><tr><th>Planned topic</th><th>Angle as written</th><th>Status</th><th>Note</th></tr></thead>"
+        f'<tbody>{"".join(rows)}</tbody></table>'
+        f'<p class="row-note">Data-file note carried from that pass: {note}</p>'
+        "</section>"
+    )
+
+
+def page_topics_index() -> str:
+    items = []
+    for g in GUIDES:
+        items.append(
+            f'<li class="topic-row"><div><p class="eyebrow">{esc(g["kicker"])} · {esc(g["intent"])}</p>'
+            f'<h3><a href="{esc(g["slug"])}">{esc(g["title"])}</a></h3>'
+            f'<p>{esc(g["hook"])}</p></div>'
+            f'<p class="topic-meta">Answers: <em>{esc(g["target_query"])}</em><br>'
+            f"{len(g['sections'])} sections · every row sourced</p></li>"
+        )
+    body = f"""    <div class="page-head">
+      <p class="eyebrow">Guides</p>
+      <h1>The questions worth arriving on</h1>
+      <p class="standfirst">Six guides, each answering one phrasing somebody actually types. They are written
+      from the same fact base as the product pages, so a guide and its specification table cannot disagree - and
+      each one names the number the brands never published.</p>
+    </div>
+    <ul class="topics">{"".join(items)}</ul>
+{planned_topics_block()}
+    <section class="block">
+      <h2>Not sure which question is yours?</h2>
+      <p class="more"><a href="../buying-guide.html">Answer three questions and get a model</a> ·
+      <a href="../comparison.html">See every number side by side</a> ·
+      <a href="../improvements.html#DS-14">The six guides we have not written yet, and what blocks each one</a></p>
+    </section>
+"""
+    return shell("Guides", "Capacity, design, fit and specification-drift guides for the three air fryers, "
+                 "written from the official pages.", body,
+                 here="topics/index.html", depth=1, path="topics/index.html",
+                 crumbs=[("index.html", "Home"), ("topics/index.html", "Guides")])
+
+
+def page_topic(slug: str) -> str:
+    g = GUIDE_BY_SLUG[slug]
+    key = slug.replace(".html", "").replace("-", "")
+    parts = []
+    for si, s in enumerate(g["sections"], start=1):
+        inner = render_blocks(s["blocks"], key=f"{key}s{si}")
+        parts.append(f'<section class="block"><h2>{esc(s["h2"])}</h2>{inner}</section>')
+    product_links = ""
+    if g.get("products"):
+        rows = []
+        for pk in g["products"]:
+            p = PRODUCTS[pk]
+            rows.append(
+                f'<li><a href="../articles/{esc(p["key"].lower())}.html">{esc(p["manufacturer_product_name"])}</a> '
+                f'<span>{esc(PRODUCT_EDITORIAL.get(pk, {}).get("verdict", "").split(". ")[0])}.</span></li>'
+            )
+        product_links = (
+            '<section class="block block--cta"><h2>The models this guide is about</h2>'
+            f'<ul class="related">{"".join(rows)}</ul>'
+            '<p class="row-note">Links go to our own write-ups, which carry the product page link and its '
+            "preview state.</p></section>"
+        )
+    related = "".join(
+        f'<li><a href="{esc(r)}">{esc(GUIDE_BY_SLUG[r]["title"])}</a> <span>{esc(GUIDE_BY_SLUG[r]["kicker"])}</span></li>'
+        for r in g.get("related", []) if r in GUIDE_BY_SLUG
+    )
+    src_ids = sorted({s for b in [blk for sec in g["sections"] for blk in sec["blocks"]] for s in b.get("src", [])})
+    src_list = "".join(f"<li>{source_link(s)}</li>" for s in src_ids)
+    body = f"""    <article class="post">
+    <div class="page-head">
+      <p class="eyebrow">{esc(g['kicker'])} · {esc(g['intent'])} search</p>
+      <h1>{esc(g['title'])}</h1>
+      <p class="standfirst">{esc(g['hook'])}</p>
+      <p class="receipts">Why this exists: {esc(g['angle'])}</p>
+    </div>
+{"".join(parts)}
+{product_links}
+    <section class="block">
+      <h2>What we did not do</h2>
+      <p class="not-tested">Nobody on this site has cooked with these machines. Every number here was copied from a
+      manufacturer page or an Amazon listing on {esc(AS_OF)}, and where the two disagree we say so. Prices and
+      star ratings are not printed anywhere on this site: the first is restricted by the programme's content rules,
+      the second changes too often to be a fact.</p>
+    </section>
+    <section class="block">
+      <h2>Read next</h2>
+      <ul class="related">{related}</ul>
+    </section>
+    <section class="block">
+      <h2>Sources for this guide</h2>
+      <ul class="source-list">{src_list}</ul>
+    </section>
+    </article>
+"""
+    return shell(g["title"], g["meta_description"], body,
+                 here="topics/index.html", depth=1, path=f"topics/{slug}",
+                 crumbs=[("index.html", "Home"), ("topics/index.html", "Guides"), (f"topics/{slug}", g["kicker"])])
+
+
+def status_pill(status: str) -> str:
+    if status == "implemented-as-recommended":
+        return '<span class="pill pill-ok">implemented as recommended</span>'
+    if status == "awaiting-owner-decision":
+        return '<span class="pill pill-warn">awaiting your decision</span>'
+    return f'<span class="pill pill-warn">{esc(status)}</span>'
+
+
+def page_trending() -> str:
+    """The queue of article shapes this set could grow into. Carried over from the 2026-11-15 marketing
+    pass, which committed this page by hand under the old shell; regenerated here so it inherits the
+    masthead, the disclosure, canonical URLs, the sitemap and the orphan check, and so its assertions are
+    labelled as what they are. No value in it is new: every basis string is a row already published."""
+    t = EDITORIAL["trending"]
+    how = "".join(f"<li>{esc(x)}</li>" for x in t["how"])
+    rows = []
+    for i, q in enumerate(t["queue"], start=1):
+        rows.append(
+            f'<tr id="idea-{i}"><th scope="row">{esc(q["title"])}</th>'
+            f'<td>{esc(q["angle"])}</td>'
+            f'<td><a href="{esc(q["href"])}">{esc(q["relates"])}</a></td>'
+            f'<td>{esc(q["format"])}</td>'
+            f'<td>{esc(q["basis"])}</td></tr>'
+        )
+    gate = "".join(f"<li>{esc(x)}</li>" for x in t["gate"])
+    body = f"""    <article class="post">
+    <div class="page-head">
+      <p class="eyebrow">{esc(t['kicker'])}</p>
+      <h1>{esc(t['title'])}</h1>
+      <p class="lede">{esc(t['lede'])}</p>
+    </div>
+
+    <section class="block">
+      <h2>How a page like this earns a reader</h2>
+      <div class="take">
+        <p class="take-label">{esc(t['how_label'])}</p>
+        <ol class="points">{how}</ol>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>The queue</h2>
+      <p>{esc(t['queue_intro'])}</p>
+      <table class="data">
+        <caption>Six proposals, each tied to rows this site already publishes. Nothing here is commissioned.</caption>
+        <thead><tr><th>Working title</th><th>Angle, and where a reader would push back</th>
+        <th>Relates to</th><th>Shape</th><th>Basis in the verified set</th></tr></thead>
+        <tbody>{"".join(rows)}</tbody>
+      </table>
+    </section>
+
+    <section class="block">
+      <h2>Before any of these is published</h2>
+      <p>{esc(t['gate_intro'])}</p>
+      <ol class="points">{gate}</ol>
+    </section>
+
+    <section class="block">
+      <h2>How this page got here</h2>
+      <p class="not-tested">{esc(t['provenance'])}</p>
+    </section>
+
+    <nav class="crumbs" aria-label="Related"><a href="index.html">Overview</a> ·
+      <a href="topics/index.html">Guides</a> · <a href="improvements.html">Improvement board</a> ·
+      <a href="../pages/suggestions.html">Programme suggestions</a></nav>
+    </article>
+"""
+    return shell("Trending topics", "Six article shapes this set could grow into, each tied to a row already "
+                 "published, with the gate each one has to pass before it is written.", body,
+                 here="trending-topics.html", depth=0,
+                 crumbs=[("index.html", "Overview"), ("trending-topics.html", "Trending topics")])
+
+
+def page_improvements() -> str:
+    """The review board: every open suggestion with its options, cost and blocking question, plus the
+    question register, the design brief for the next revision, and the before/after standard."""
+    board = []
+    counts = {"implemented-as-recommended": 0, "awaiting-owner-decision": 0}
+    for s in SUGGESTIONS:
+        counts[s["status"]] = counts.get(s["status"], 0) + 1
+        options = "".join(
+            f'<li class="opt{" opt--rec" if o["id"] == s["recommended"] else ""}">'
+            f'<span class="opt-id">{esc(o["id"])}</span><strong>{esc(o["label"])}</strong>'
+            f'<span class="opt-cost">{esc(o["tradeoff"])}</span>'
+            + ('<span class="pill pill-ok">recommended</span>' if o["id"] == s["recommended"] else "")
+            + "</li>"
+            for o in s["options"]
+        )
+        evidence = "".join(f"<li>{ext_link(e['label'], e['url'])}</li>" for e in s.get("evidence", []))
+        needs = s.get("needs_answers", [])
+        needs_html = " ".join(
+            (f'<a href="#{esc(n)}">{esc(n)}</a>' if n.startswith("MQ-")
+             else f'<a href="../pages/questions.html#{esc(n)}">{esc(n)}</a>')
+            for n in needs
+        ) or '<span class="ok">nothing blocking</span>'
+        roadmap = ""
+        if s.get("roadmap"):
+            rows = "".join(
+                f'<tr><th scope="row">{esc(t)}</th><td>{esc(note)}</td></tr>' for t, note in s["roadmap"]
+            )
+            roadmap = (
+                '<table class="data"><caption>The next six articles, and the gap that blocks each one.</caption>'
+                f"<thead><tr><th>Candidate</th><th>What it needs</th></tr></thead><tbody>{rows}</tbody></table>"
+            )
+        board.append(
+            f'<section class="sug" id="{esc(s["id"])}">'
+            f'<p class="eyebrow">{esc(s["area"])} · impact {esc(s["impact"])} · effort {esc(s["effort"])}</p>'
+            f'<h3>{esc(s["id"])} — {esc(s["title"])}</h3>'
+            f'<p class="sug-status">{status_pill(s["status"])}</p>'
+            f'<p class="sug-do">{esc(s["suggestion"])}</p>'
+            f'<p class="sug-why"><strong>Why:</strong> {esc(s["why"])}</p>'
+            f'<h4>Options</h4><ul class="opts">{options}</ul>'
+            f'<div class="sug-foot"><p><strong>Needs answered first:</strong> {needs_html}</p>'
+            f'<h4>Evidence</h4><ul class="source-list">{evidence}</ul></div>'
+            f"{roadmap}</section>"
+        )
+    index_rows = "".join(
+        f'<tr id="{esc(s["id"])}-row"><th scope="row"><a href="#{esc(s["id"])}">{esc(s["id"])}</a></th>'
+        f'<td>{esc(s["area"])}</td><td><a href="#{esc(s["id"])}">{esc(s["title"])}</a></td>'
+        f'<td>{esc(s["impact"])}</td><td>{esc(s["effort"])}</td>'
+        f'<td><span class="opt-id">{esc(s["recommended"])}</span></td>'
+        f"<td>{status_pill(s['status'])}</td></tr>"
+        for s in SUGGESTIONS
+    )
+    qs = []
+    for q in QUESTIONS:
+        ev = "".join(f"<li>{ext_link(e['label'], e['url'])}</li>" for e in q.get("evidence", []))
+        blocks = " ".join(
+            (f'<a href="#{esc(b)}">{esc(b)}</a>' if b.startswith("DS-")
+             else f'<a href="../pages/questions.html#{esc(b)}">{esc(b)}</a>')
+            for b in q.get("blocks", [])
+        )
+        qs.append(
+            f'<section class="q" id="{esc(q["id"])}">'
+            f'<h3>{esc(q["id"])} — {esc(q["question"])}</h3>'
+            f'<p class="q-why"><strong>Why it has to be answered:</strong> {esc(q["why_it_matters"])}</p>'
+            f'<dl class="qa"><div><dt>What we already know</dt><dd>{esc(q["known"])}</dd></div>'
+            f'<div><dt>What is missing</dt><dd class="missing">{esc(q["missing"])}</dd></div>'
+            f'<div><dt>How to find out</dt><dd>{esc(q["how_to_find"])}</dd></div>'
+            f'<div><dt>Decisions waiting on it</dt><dd>{blocks}</dd></div></dl>'
+            f'<h4>Sources</h4><ul class="source-list">{ev}</ul>'
+            "</section>"
+        )
+    rules = "".join(
+        f'<tr id="{esc(r["id"])}"><th scope="row">{esc(r["id"])}</th><td>{esc(r["rule"])}</td>'
+        f'<td class="good">{esc(r["do"])}</td><td class="bad">{esc(r["dont"])}</td>'
+        f"<td>{esc(r['why'])}</td></tr>"
+        for r in VOICE["rules"]
+    )
+    before_after = "".join(
+        f'<section class="pair"><h3>{esc(x["problem"])}</h3>'
+        f'<div class="pair-cols"><p class="before"><span class="pair-tag">As generated</span>{esc(x["before"])}</p>'
+        f'<p class="after"><span class="pair-tag">As published</span>{esc(x["after"])}</p></div>'
+        f'<p class="fix"><strong>Rule that fixes it:</strong> {esc(x["fix"])} · '
+        f'{ext_link("the page the replacement is drawn from", x["src"])}</p></section>'
+        for x in BEFORE_AFTER
+    )
+    tokens = "".join(f"<tr><th scope=\"row\">{esc(a)}</th><td>{esc(b)}</td></tr>" for a, b in DESIGN["tokens"])
+    anti = "".join(f"<li>{esc(x)}</li>" for x in DESIGN["anti_patterns"])
+    banned = "".join(f"<code>{esc(w)}</code> " for w in VOICE["banned_words"])
+    brief = "".join(
+        f'<div class="brief-row"><h4>{esc(h)}</h4><p>{esc(t)}</p></div>' for h, t in PROMPT_BRIEF["blocks"]
+    )
+    checked = "".join(
+        f'<tr><th scope="row">{esc(v["id"])}</th><td>{esc(v["claim"])}</td>'
+        f'<td>{esc(v["observed"])}</td>'
+        f'<td><span class="pill {"pill-ok" if v["status"] == "verified" else "pill-flag"}">{esc(v["status"])}</span></td>'
+        f'<td class="cell-src">{ext_link(v["url"].split("/")[2], v["url"])}</td></tr>'
+        for v in VERIFIED_TODAY
+    )
+    body = f"""    <div class="page-head">
+      <p class="eyebrow">Review before anything else changes</p>
+      <h1>The improvement board</h1>
+      <p class="standfirst">Every open suggestion for this site, with the options, what each one costs, and the
+      answer it is waiting for. {counts['implemented-as-recommended']} of {len(SUGGESTIONS)} are already built the
+      recommended way and can be reversed here; the rest are not implemented, on purpose - a suggestion that ships
+      before the owner reads it is not a suggestion.</p>
+      <p class="receipts">Nothing on this page is a program fact. Recommendations are judgements built on the
+      official sources cited in each entry; the facts they rest on are on the
+      <a href="verification.html">verification page</a>.</p>
+    </div>
+
+    <section class="block" id="how-to-use">
+      <h2>How to decide</h2>
+      <ol class="points">
+        <li>Read the index below. Choose the ones worth a decision today - the rest stay open and cost nothing.</li>
+        <li>For each, either record a choice in the <code>decision</code> field of
+        <code>marketing/data/editorial.json</code>, or reply with the IDs and letters. Both are enough.</li>
+        <li>An entry whose question is unanswered stays blocked. The blocking IDs are named on the card, and
+        answering the question is usually cheaper than the decision it gates.</li>
+        <li>Programme-level decisions (account, marketplace, niche, monetisation) live on the owner dashboard's
+        <a href="../pages/suggestions.html">decision board</a> and <a href="../pages/questions.html">question
+        register</a>. This board is the site: design, copy, traffic and measurement. They cross-reference and do
+        not overlap.</li>
+      </ol>
+    </section>
+
+    <section class="block">
+      <h2>Index</h2>
+      <table class="data">
+        <caption>{len(SUGGESTIONS)} open suggestions. Impact and effort are this project's own estimates, not
+        measurements; the recommended column is the letter already implemented or the one we would pick.</caption>
+        <thead><tr><th>ID</th><th>Area</th><th>Suggestion</th><th>Impact</th><th>Effort</th><th>Rec.</th><th>Status</th></tr></thead>
+        <tbody>{index_rows}</tbody>
+      </table>
+    </section>
+
+    <div class="sug-list">{"".join(board)}</div>
+
+    <section class="block" id="questions">
+      <h2>What has to be known before a decision is reasonable</h2>
+      <p>Ten questions in the site's own domain, each with what is verified, what is missing, and the cheapest way
+      to close the gap. The register on the dashboard
+      (<a href="../pages/questions.html">Q-01 … Q-16</a>) covers the programme side; where a question here is the
+      same one, it names the ID rather than restating it.</p>
+      {"".join(qs)}
+    </section>
+
+    <section class="block" id="voice">
+      <h2>The writing standard, enforced by the build</h2>
+      <p class="row-note">{esc(VOICE['brief'])}</p>
+      <table class="data">
+        <caption>Ten rules. The marketing gate checks the banned-phrase list and requires every factual sentence
+        to carry a source, so a regeneration cannot quietly restore the house style.</caption>
+        <thead><tr><th>ID</th><th>Rule</th><th>What that looks like</th><th>What it replaces</th><th>Why</th></tr></thead>
+        <tbody>{rules}</tbody>
+      </table>
+      <p class="banned"><strong>Banned as evidence of generated copy:</strong> {banned}</p>
+    </section>
+
+    <section class="block" id="before-after">
+      <h2>The same sentences, before and after</h2>
+      {before_after}
+    </section>
+
+    <section class="block" id="design">
+      <h2>Design direction as it is currently built</h2>
+      <p class="row-note">{esc(DESIGN['summary'])}</p>
+      <table class="data"><thead><tr><th>Token</th><th>Rule</th></tr></thead><tbody>{tokens}</tbody></table>
+      <h3>Refused on sight</h3>
+      <ul class="points points--no">{anti}</ul>
+    </section>
+
+    <section class="block" id="brief">
+      <h2>{esc(PROMPT_BRIEF['title'])}</h2>
+      <p class="row-note">{esc(PROMPT_BRIEF['note'])}</p>
+      <div class="brief">{brief}</div>
+      <p><a class="button" href="../pages/suggestions.html">The programme board, which this brief must not
+      contradict</a></p>
+    </section>
+
+    <section class="block" id="checked">
+      <h2>Re-verified on {esc(ED_AS_OF)}</h2>
+      <table class="data">
+        <caption>Everything a page on this board asserts about the outside world, checked today against an
+        official page. A row marked conflict stays a conflict.</caption>
+        <thead><tr><th>ID</th><th>Claim</th><th>What was observed</th><th>Verdict</th><th>Source</th></tr></thead>
+        <tbody>{checked}</tbody>
+      </table>
+    </section>
+"""
+    return shell("The improvement board", "Every open suggestion for this site with its options, cost, evidence "
+                 "and the answer it is waiting for - plus the writing standard and the question register.", body,
+                 here="improvements.html", path="improvements.html",
+                 crumbs=[("index.html", "Home"), ("improvements.html", "Improvement board")])
+
+
+# --------------------------------------------------------------------------- text outputs
+
+
+def page_sitemap() -> str:
+    # Derived from the page registry, never typed: a hand-maintained list is how
+    # F-26-style drift starts. One registry, one sitemap, one truth.
+    urls = list(PAGES)
+    entries = "".join(
+        f"<url><loc>{LIVE}{u}</loc><lastmod>{ED_AS_OF}</lastmod></url>" for u in urls
+    )
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{entries}</urlset>\n'
+
+
+def page_robots() -> str:
+    return f"User-agent: *\nAllow: /\nSitemap: {LIVE}sitemap.xml\n"
+
+
+def page_feed() -> str:
+    items = []
+    for g in GUIDES:
+        items.append(
+            "<item>"
+            f"<title>{esc(g['title'])}</title>"
+            f"<link>{LIVE}topics/{esc(g['slug'])}</link>"
+            f"<guid isPermaLink=\"true\">{LIVE}topics/{esc(g['slug'])}</guid>"
+            f"<pubDate>{ED_AS_OF}T00:00:00Z</pubDate>"
+            f"<description>{esc(g['hook'])}</description>"
+            "</item>"
+        )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel>'
+        f"<title>{esc(BRAND['name'])}</title><link>{LIVE}</link>"
+        f"<description>{esc(BRAND['standfirst'])}</description>"
+        f"<language>en</language>{''.join(items)}</channel></rss>\n"
+    )
+
+
 # --------------------------------------------------------------------------- build
 
 PAGES = {
@@ -784,10 +1573,22 @@ PAGES = {
     "comparison.html": page_comparison,
     "verification.html": page_verification,
     "flagged.html": page_flagged,
+    "improvements.html": page_improvements,
+    "trending-topics.html": page_trending,
     "articles/index.html": page_articles_index,
     "articles/p1.html": lambda: page_article("P1"),
     "articles/p2.html": lambda: page_article("P2"),
     "articles/p3.html": lambda: page_article("P3"),
+    "topics/index.html": page_topics_index,
+    **{f"topics/{g['slug']}": (lambda s=g["slug"]: page_topic(s)) for g in GUIDES},
+}
+
+# Machine-readable outputs. Not HTML, so they skip the markup audit and the disclosure rule; they
+# carry no product data at all, only titles, URLs and dates already published on the pages.
+TEXT_PAGES = {
+    "sitemap.xml": page_sitemap,
+    "robots.txt": page_robots,
+    "feed.xml": page_feed,
 }
 
 
@@ -801,6 +1602,8 @@ def build(out_dir: Path) -> dict[str, str]:
         if REQUIRED_SITE_DISCLOSURE not in doc:
             raise BuildError(f"{rel}: missing the required Associates disclosure")
         rendered[rel] = doc
+    for rel, fn in TEXT_PAGES.items():
+        rendered[rel] = fn()
     for rel, doc in rendered.items():
         dest = out_dir / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
@@ -826,11 +1629,11 @@ def main(argv=None) -> int:
         if drift:
             print("\n".join(drift))
             return 1
-        print(f"{len(rendered)} marketing pages: committed output is current")
+        print(f"{len(rendered)} marketing outputs ({len(PAGES)} pages + {len(TEXT_PAGES)} machine-readable): committed output is current")
         return 0
 
     rendered = build(OUT)
-    print(f"built {len(rendered)} marketing pages into {OUT.relative_to(REPO)}/")
+    print(f"built {len(rendered)} marketing outputs into {OUT.relative_to(REPO)}/")
     return 0
 
 
@@ -839,4 +1642,3 @@ if __name__ == "__main__":
         raise SystemExit(main())
     except (BuildError, LinkPolicyError) as exc:
         print(f"BUILD REFUSED: {exc}", file=sys.stderr)
-        raise SystemExit(2)

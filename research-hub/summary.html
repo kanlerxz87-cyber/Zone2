@@ -236,6 +236,21 @@ in the browser.</p>
 <p>smoothed over; every gap left blank and listed; and a compliance position that will survive an</p>
 <p>Amazon review. The one thing that must happen next is not technical — the affiliate links need a</p>
 <p>tracking tag before any of this can earn anything.</p>
+<h2>13. The publication layer and the improvement board (added 2026-11-15, T39)</h2>
+<p><code>marketing/</code> is now a reader-facing publication: a named desk, a decision-first buying guide, one article per</p>
+<p>product, six guides that each answer one search phrasing, and the machine-readable set a search engine expects</p>
+<p>(sitemap, feed, canonical URLs, Article and BreadcrumbList markup — no <code>Product</code> or <code>Review</code> markup, because</p>
+<p>there is no first-hand review to describe and no rating to publish). The evidence posture is unchanged: no</p>
+<p>price, no star rating, no tested claim, every value row sourced or blank with its reason, disclosure on every</p>
+<p>page and at every affiliate link.</p>
+<p>Two surfaces exist for decisions rather than reading. <code>marketing/improvements.html</code> holds every open suggestion</p>
+<p>in the site's own scope with its options, cost, evidence and blocking question, and <code>marketing/data/editorial.json</code></p>
+<p>is the single source for both the copy and that board — which is how a reviewer diffs a suggestion instead of</p>
+<p>regenerating a page. The ten writing rules the site publishes are enforced by <code>marketing/scripts/verify_marketing.py</code></p>
+<p>(G11–G14), which failed this session's own draft. The same day's voice pass (T32) contributed fields that are</p>
+<p>carried rather than dropped; where the two files frame a product differently, the spec table in</p>
+<p><code>marketing/data/facts.json</code> wins.</p>
+<p>Record: <code>docs/marketing-2026-11-15.md</code>.</p>
 </section>
 
 </main>
