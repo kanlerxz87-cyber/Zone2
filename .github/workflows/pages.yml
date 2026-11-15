@@ -292,7 +292,10 @@ jobs:
       - name: Rebuild the discovery review and confirm committed output is current
         run: python3 tools/build_discovery.py --check
 
-      - name: Discovery gate (sourcing, quoted sources, unanswered questions, derived counts, links)
+      - name: Rebuild the measurement plan and confirm committed output is current
+        run: python3 tools/build_measurement.py --check
+
+      - name: Discovery gate (sourcing, quoted sources, unanswered questions, derived counts, links, measurement honesty)
         run: python3 tools/validate_discovery.py
 
       # tools/build_meta.py owns the canonical URL, Open Graph tags and the schema.org graph on the

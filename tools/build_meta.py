@@ -178,6 +178,14 @@ PAGES = {
         "crumbs": [("discovery/index.html", "Discovery review"), ("discovery/suggestions.html", "Suggestions")],
         "priority": "0.9",
     },
+    "discovery/measurement.html": {
+        "kind": "CollectionPage",
+        "name": "Measurement plan — what could be measured, and what it would decide",
+        "description": "Every event this site could record, the decision it supports, what it refuses to collect, "
+                       "and what blocks it — nothing implemented, every event marked DESIGNED or BLOCKED.",
+        "crumbs": [("discovery/index.html", "Discovery review"), ("discovery/measurement.html", "Measurement plan")],
+        "priority": "0.7",
+    },
     "discovery/sources.html": {
         "kind": "CollectionPage",
         "name": "Sources — every official page this review read",

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measurement plan · Zone2 discovery review</title>
+<meta name="description" content="What this site could measure, the decision each measurement supports, what it refuses to collect, and what blocks it — nothing implemented, every event marked DESIGNED or BLOCKED.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Zone2">
+<meta property="og:title" content="Measurement plan">
+<meta property="og:description" content="What this site could measure, the decision each measurement supports, what it refuses to collect, and what blocks it — nothing implemented, every event marked DESIGNED or BLOCKED.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/discovery/measurement.html">
+<meta name="robots" content="index,follow">
+<style>:root{
+  --ink:#14181f; --ink-2:#3d4757; --ink-3:#68738a; --line:#e2e6ee; --line-2:#eef1f6;
+  --bg:#ffffff; --bg-2:#f7f8fb; --accent:#8a2c19; --accent-2:#b8412a;
+  --ok:#1c6b46; --ok-bg:#e8f4ee; --warn:#8a5a10; --warn-bg:#fbf1de;
+  --bad:#8f2020; --bad-bg:#fbeaea; --code:#f2f4f8;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:var(--accent-2)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:9;border:1px solid var(--line)}
+header.mast{border-bottom:1px solid var(--line);background:var(--bg)}
+.mast-in{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;
+  justify-content:space-between;padding:14px 0 10px}
+.brand{text-decoration:none;color:var(--ink);display:flex;flex-direction:column;line-height:1.2}
+.brand b{font-size:17px;letter-spacing:-.01em}
+.brand span{font-size:12.5px;color:var(--ink-3)}
+nav.top{display:flex;flex-wrap:wrap;gap:4px}
+nav.top a{font-size:13.5px;text-decoration:none;color:var(--ink-2);padding:6px 10px;border-radius:6px}
+nav.top a:hover{background:var(--bg-2);color:var(--ink)}
+nav.top a[aria-current]{background:var(--ink);color:#fff}
+.disclosure{margin:0;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;
+  padding:10px 14px;font-size:13.5px;color:var(--ink-2)}
+.disclosure strong{color:var(--ink)}
+main{padding:26px 0 8px}
+.crumbs{font-size:13px;color:var(--ink-3);margin:0 0 8px}
+.crumbs a{color:var(--ink-3)}
+h1{font-family:var(--serif);font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.12;
+  letter-spacing:-.02em;margin:.2em 0 .3em;max-width:26ch}
+h2{font-family:var(--serif);font-size:1.4rem;line-height:1.2;letter-spacing:-.01em;
+  margin:2em 0 .5em;padding-top:.1em}
+h3{font-size:1.06rem;margin:1.4em 0 .4em;letter-spacing:-.005em}
+.lede{font-size:1.1rem;color:var(--ink-2);max-width:66ch;margin:0 0 10px}
+p,li{max-width:72ch}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 6px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--bg)}
+.kpi b{display:block;font-family:var(--serif);font-size:1.9rem;line-height:1;letter-spacing:-.02em}
+.kpi span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:6px;line-height:1.4}
+.card{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0;background:var(--bg)}
+.card h2{margin-top:0}
+.note{border-left:3px solid var(--accent);background:var(--bg-2);padding:12px 16px;
+  border-radius:0 8px 8px 0;margin:18px 0;font-size:14.5px}
+.note p{max-width:70ch;margin:.3em 0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0 8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+caption{caption-side:top;text-align:left;padding:12px 14px 10px;font-size:13px;color:var(--ink-3)}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line-2)}
+th{background:var(--bg-2);font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--ink-3);font-weight:600;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fcfcfd}
+td.id{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+td.id a{text-decoration:none;font-weight:600}
+.note-sm{font-size:12.5px;color:var(--ink-3);margin-top:5px;line-height:1.45}
+.cell-unverified{color:var(--ink-3)}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.02em;
+  padding:2px 8px;border-radius:999px;background:var(--bg-2);color:var(--ink-2);white-space:nowrap}
+.pill-bad{background:var(--bad-bg);color:var(--bad)}
+.pill-warn{background:var(--warn-bg);color:var(--warn)}
+.pill-ok{background:var(--ok-bg);color:var(--ok)}
+.src{display:block;font-size:12.5px;line-height:1.35;margin:2px 0;text-decoration:none;color:var(--accent)}
+.src-kind{display:block;color:var(--ink-3);font-size:11.5px}
+ul.opts{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}
+ul.opts li{border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:14px}
+ul.opts li.rec{border-color:var(--ok);background:var(--ok-bg)}
+ul.opts .oid{font-family:var(--mono);font-weight:700;margin-right:6px}
+ul.opts .trade{display:block;color:var(--ink-2);font-size:13px;margin-top:3px}
+.sug{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0}
+.sug h3{margin:0 0 4px;font-size:1.12rem}
+.sug .meta{font-size:12px;color:var(--ink-3);margin-bottom:8px;display:flex;gap:10px;flex-wrap:wrap}
+.rec-line{font-size:13.5px;color:var(--ink-2);margin:10px 0 0}
+.rec-line b{color:var(--ink)}
+footer.site{border-top:1px solid var(--line);margin-top:40px;padding:20px 0 40px;
+  font-size:13px;color:var(--ink-3);background:var(--bg-2)}
+footer.site p{max-width:78ch}
+footer.site a{color:var(--ink-2)}
+.qline{margin:0 0 6px}
+blockquote{margin:10px 0;padding:10px 14px;border-left:3px solid var(--line);
+  background:var(--bg-2);font-size:13.5px;color:var(--ink-2);border-radius:0 8px 8px 0}
+blockquote p{margin:0}
+code{font-family:var(--mono);font-size:.92em;background:var(--code);padding:1px 5px;border-radius:4px}
+@media (max-width:640px){
+  h1{font-size:1.55rem}
+  .mast-in{gap:8px}
+  table{font-size:13px}
+}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Measurement plan", "description": "What this site could measure, the decision each measurement supports, what it refuses to collect, and what blocks it — nothing implemented, every event marked DESIGNED or BLOCKED.", "datePublished": "2026-11-15T00:00:00+00:00", "dateModified": "2026-11-15T00:00:00+00:00", "inLanguage": "en", "isAccessibleForFree": true, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kanlerxz87-cyber.github.io/Zone2/discovery/measurement.html"}, "publisher": {"@type": "Organization", "name": "Zone2", "url": "https://kanlerxz87-cyber.github.io/Zone2/"}}</script>
+<!-- seo-meta:begin (generated by tools/build_meta.py - do not edit by hand) -->
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/discovery/measurement.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zone2">
+<meta property="og:title" content="Measurement plan — what could be measured, and what it would decide">
+<meta property="og:description" content="Every event this site could record, the decision it supports, what it refuses to collect, and what blocks it — nothing implemented, every event marked DESIGNED or BLOCKED.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/discovery/measurement.html">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://kanlerxz87-cyber.github.io/Zone2/#website", "url": "https://kanlerxz87-cyber.github.io/Zone2/", "name": "Zone2", "inLanguage": "en", "publisher": {"@id": "https://kanlerxz87-cyber.github.io/Zone2/#publisher"}}, {"@type": "Organization", "@id": "https://kanlerxz87-cyber.github.io/Zone2/#publisher", "name": "Zone2", "url": "https://kanlerxz87-cyber.github.io/Zone2/", "description": "An Amazon affiliate research desk that publishes a product value only when an official page states it, and leaves it blank on the record when none does."}, {"@type": "CollectionPage", "@id": "https://kanlerxz87-cyber.github.io/Zone2/discovery/measurement.html#webpage", "url": "https://kanlerxz87-cyber.github.io/Zone2/discovery/measurement.html", "name": "Measurement plan — what could be measured, and what it would decide", "description": "Every event this site could record, the decision it supports, what it refuses to collect, and what blocks it — nothing implemented, every event marked DESIGNED or BLOCKED.", "isPartOf": {"@id": "https://kanlerxz87-cyber.github.io/Zone2/#website"}, "inLanguage": "en"}, {"@type": "BreadcrumbList", "@id": "https://kanlerxz87-cyber.github.io/Zone2/discovery/measurement.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Zone2", "item": "https://kanlerxz87-cyber.github.io/Zone2/"}, {"@type": "ListItem", "position": 2, "name": "Discovery review", "item": "https://kanlerxz87-cyber.github.io/Zone2/discovery/"}, {"@type": "ListItem", "position": 3, "name": "Measurement plan", "item": "https://kanlerxz87-cyber.github.io/Zone2/discovery/measurement.html"}]}]}</script>
+<!-- seo-meta:end -->
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="wrap mast-in">
+    <a class="brand" href="index.html"><b>Zone2 discovery review</b><span>What was found, what is missing, what to do next</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html">Overview</a><a href="findings.html">What we found</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="measurement.html" aria-current="page">Measurement plan</a><a href="sources.html">Sources</a></nav>
+  </div>
+</header>
+<div class="wrap">
+  <main id="main">
+    <p class="disclosure" data-rule="R-01"><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p class="crumbs" aria-label="Breadcrumb"><a href="index.html">Overview</a> › <span>Measurement plan</span></p>
+
+<h1>What could be measured, and what it would let you decide</h1>
+<p class="lede">The platform claims to track clicks and conversions and optimize campaigns. It tracks nothing.
+That is not laziness: with no tagged link, no analytics and no Associates account there is nothing to track, and
+the site's own validator refuses an invented number. This page is the plan that would change it — every event,
+the decision it supports, and what blocks it.</p>
+
+<div class="note">
+  <p><strong>Nothing on this page is implemented.</strong> Every event below is marked DESIGNED or BLOCKED, never
+  LIVE. There is no script, no endpoint, no cookie and no account behind any row. The build fails if an event is
+  ever marked LIVE while the suggestion that authorises it
+  (<a href="suggestions.html#DS-11">DS-11</a>) still carries no recorded decision.</p>
+</div>
+
+<h2>The rules a measurement layer has to survive</h2>
+<p>Written first, because they rule out most of the obvious designs. Each is anchored to the official page that
+constrains it.</p>
+<div class="tablewrap">
+  <table>
+    <caption>From <code>docs/measurement-t40.json</code>. A design that violates one of these is not
+    implemented, however useful the data would be.</caption>
+    <thead><tr><th>ID</th><th>Rule</th><th>Official source</th></tr></thead>
+    <tbody><tr id="MP-01"><td class="id">MP-01</td><td><strong>No personal data, no cookie, no cross-site identifier, and no identifier derived from a visitor.</strong><div class="note-sm">Amazon&#x27;s Participation Requirements forbid associating a sub-tag or reporting ID with a specific end user (R-08 in ledger/compliance.json; S02 in ledger/sources.json). A design that cannot do that even if asked is stronger than a policy that says not to.</div></td><td><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S45 · Amazon<span class="src-kind">Associates Program Participation Requirements, Sections 6(v) and 6(w) </span></a></td></tr><tr id="MP-02"><td class="id">MP-02</td><td><strong>Measure the page and the link, never the person.</strong><div class="note-sm">The only questions this site needs answered are &#x27;which page sends people to which product&#x27; and &#x27;which page earns&#x27;. Both are aggregate counts on a page-plus-link key. Nothing about an individual changes any decision the owner can make.</div></td><td class="cell-unverified"><span class="pill pill-warn">no official source</span></td></tr><tr id="MP-03"><td class="id">MP-03</td><td><strong>Publish no traffic, conversion or income expectation, and no forecast.</strong><div class="note-sm">The Operating Agreement states that Amazon makes no representation or warranty regarding the amount of traffic or commission income an Associate can expect (S57). A projection on this site would present as knowledge exactly what that clause disclaims. The layer records what happened; it never prints what will.</div></td><td><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">S57 · Amazon<span class="src-kind">Associates Program Operating Agreement, Section 4 - no representation </span></a></td></tr><tr id="MP-04"><td class="id">MP-04</td><td><strong>Every event has a stated decision it supports, or it is not collected.</strong><div class="note-sm">Measurement without a decision is cost with no benefit. This file therefore lists the decision beside each event, and the gate refuses an event with no decision.</div></td><td class="cell-unverified"><span class="pill pill-warn">no official source</span></td></tr><tr id="MP-05"><td class="id">MP-05</td><td><strong>Search measurement must not route visitors straight to Amazon.</strong><div class="note-sm">Search results, paid or unpaid, must send users to the site and not directly or indirectly to an Amazon Site (S50). Any Search Console or paid-search plan is constrained by that.</div></td><td><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">S50 · Amazon<span class="src-kind">Associates Program Participation Requirements, Section 6(f) - search t</span></a></td></tr></tbody>
+  </table>
+</div>
+
+<h2>The events</h2>
+<div class="tablewrap">
+  <table>
+    <caption>The last column is the honest one. An event that cannot fire today says why.</caption>
+    <thead><tr><th>ID</th><th>Event and the decision it supports</th><th>Fields, and what is refused</th><th>Blocked by</th></tr></thead>
+    <tbody><tr id="EV-01"><td class="id">EV-01<div class="note-sm"><span class="pill pill-warn">DESIGNED</span></div></td><td><code>page_view</code><div class="note-sm"><strong>Fires on:</strong> A dashboard or marketing page being served.</div><div class="note-sm"><strong>Would decide:</strong> Which pages are being found at all. This is the only event that would justify writing the next page.</div></td><td><code>page_path</code><br><code>referrer_host ONLY (the hostname, never the full URL or query)</code><br><code>day_bucket (a date, never a time)</code><br><div class="note-sm"><strong>Not collected on purpose:</strong> IP address; user agent; device ID; any cookie or local identifier; full referrer URL; query string</div></td><td>—</td></tr><tr id="EV-02"><td class="id">EV-02<div class="note-sm"><span class="pill pill-warn">DESIGNED</span></div></td><td><code>product_link_click</code><div class="note-sm"><strong>Fires on:</strong> A click on a product link, before navigation.</div><div class="note-sm"><strong>Would decide:</strong> Which page and which product deserve more work. This is the single most useful measurement on an affiliate site.</div></td><td><code>page_path</code><br><code>product_key (P1/P2/P3 - a static label from the fact base, never a value derived from the visitor)</code><br><code>link_state (PREVIEW_NO_TAG or TAGGED)</code><br><div class="note-sm"><strong>Not collected on purpose:</strong> anything that persists across pages; the destination of the click; whether the visitor bought anything (the site cannot know this and must not imply it does)</div></td><td>—</td></tr><tr id="EV-03"><td class="id">EV-03<div class="note-sm"><span class="pill pill-warn">DESIGNED</span></div></td><td><code>disclosure_view</code><div class="note-sm"><strong>Fires on:</strong> The required disclosure entering the viewport above a product link.</div><div class="note-sm"><strong>Would decide:</strong> Whether the disclosure is actually in the reader&#x27;s line of sight before the first product link, which is what the FTC guidance asks for (S54). This is a compliance measurement, not a marketing one.</div></td><td><code>page_path</code><br><code>disclosure_position</code><br><div class="note-sm"><strong>Not collected on purpose:</strong> scroll depth; time on page; read events</div></td><td>—</td></tr><tr id="EV-04"><td class="id">EV-04<div class="note-sm"><span class="pill pill-bad">BLOCKED</span></div></td><td><code>conversion_import</code><div class="note-sm"><strong>Fires on:</strong> A manual or scheduled import of the Associates reporting CSV for a period.</div><div class="note-sm"><strong>Would decide:</strong> Whether any of the above converted, and therefore whether the whole content strategy is working.</div></td><td><code>period_start</code><br><code>period_end</code><br><code>clicks</code><br><code>ordered_items</code><br><code>conversion_rate</code><br><code>earnings_float</code><br><code>source = &#x27;associates_report&#x27;</code><br><div class="note-sm"><strong>Not collected on purpose:</strong> any per-customer data - Associates reporting is aggregate by design; any value this project could compute but Amazon does not publish</div></td><td>DQ-01: no Associates account exists, so no reporting exists to import. The site must not invent a placeholder figure to fill this table.</td></tr><tr id="EV-05"><td class="id">EV-05<div class="note-sm"><span class="pill pill-bad">BLOCKED</span></div></td><td><code>search_query_import</code><div class="note-sm"><strong>Fires on:</strong> A periodic export from Search Console.</div><div class="note-sm"><strong>Would decide:</strong> Which question people actually typed, which is the only reliable input to a content plan. Without it every new article topic stays a judgement.</div></td><td><code>period_start</code><br><code>period_end</code><br><code>query</code><br><code>page_path</code><br><code>impressions</code><br><code>clicks</code><br><code>average_position</code><br><div class="note-sm"><strong>Not collected on purpose:</strong> per-user search history; any query containing something that looks like a person&#x27;s name or address (filtered at import)</div></td><td>DQ-04: Search Console requires the owner&#x27;s Google account and a verified property.</td></tr></tbody>
+  </table>
+</div>
+
+<h2>What each measurement would let you decide</h2>
+<div class="tablewrap">
+  <table>
+    <caption>Every row reads "no data" today. That column is the point of this page.</caption>
+    <thead><tr><th>ID</th><th>Decision</th><th>Needs</th><th>Available today</th></tr></thead>
+    <tbody><tr id="MD-01"><td class="id">MD-01</td><td><strong>Which page to improve next</strong><div class="note-sm">A page with impressions and no clicks is a packaging problem; a page with clicks and no imports is a product-fit problem. The layer must be able to tell those apart, which is why EV-01 and EV-02 are separate events.</div></td><td>EV-01, EV-02</td><td><span class="pill pill-bad">no data</span></td></tr><tr id="MD-02"><td class="id">MD-02</td><td><strong>Which of the three products to lead with</strong><div class="note-sm">Count product_link_click by product_key. The product with the most clicks on the least content is the one to write about next.</div></td><td>EV-02</td><td><span class="pill pill-bad">no data</span></td></tr><tr id="MD-03"><td class="id">MD-03</td><td><strong>Whether the disclosure is placed well enough</strong><div class="note-sm">If disclosure_view does not precede the first product_link_click on a majority of sessions, the layout is failing the FTC&#x27;s &#x27;hard to miss&#x27; standard and should change.</div></td><td>EV-03</td><td><span class="pill pill-bad">no data</span></td></tr><tr id="MD-04"><td class="id">MD-04</td><td><strong>Whether to change the content strategy at all</strong><div class="note-sm">Nothing above can answer this. It needs actual conversions, which need an account. Until then the honest answer to &#x27;is this working&#x27; is &#x27;unknown&#x27;, and the site says so.</div></td><td>EV-04</td><td><span class="pill pill-bad">no data</span></td></tr></tbody>
+  </table>
+</div>
+
+<h2>What is still unresolved before anything could be collected</h2>
+<ul><li id="MI-01"><strong>MI-01</strong> — The event sink does not exist. GitHub Pages serves static files and cannot accept a POST, so a first-party counter needs an endpoint the owner controls (a serverless function, a log drain, or a hosted database). <span class="note-sm">Affects EV-01, EV-02, EV-03</span></li><li id="MI-02"><strong>MI-02</strong> — Retention policy is undefined. Aggregate daily counts can be kept indefinitely; anything finer should expire. The owner must choose before collection starts. <span class="note-sm">Affects EV-01, EV-02, EV-03</span></li><li id="MI-03"><strong>MI-03</strong> — A bot filter is undefined. A static counter counts crawlers and link scanners as visitors. Without a filter the numbers are inflated and the decisions built on them are wrong. <span class="note-sm">Affects EV-01</span></li><li id="MI-04"><strong>MI-04</strong> — There is no way to verify a click led to a purchase from this side, and this project must never imply there is. Attribution is Amazon&#x27;s to report, not this site&#x27;s to guess. <span class="note-sm">Affects EV-04</span></li></ul>
+
+<h2>Privacy, stated carefully</h2>
+<p>A design that stores no personal data and sets no cookie has no consent banner problem under the usual cookie rules, because there is no cookie and no identifier. That is the main reason to prefer this design over a third-party analytics script (option B in DS-11).</p>
+<p>Only the design position above, which is this project&#x27;s own engineering judgement.</p>
+<div class="note">
+  <p><strong>What this page does not claim.</strong> No claim is made about GDPR, CCPA or any specific jurisdiction&#x27;s requirements, and none should be inferred from this file. Whether a cookie-free aggregate counter falls inside or outside a particular regime is a legal question the owner must put to their own adviser. Recorded as a gap, not an answer.</p>
+</div>
+
+<h2>The honest position today</h2>
+<p>Until an Associates account exists, the answer to "is this working" is <em>unknown</em>, and the site should
+say so rather than print a number that looks like an answer. The one thing a cookie-free counter would change
+before an account exists is narrower and still worth having: it would say which page sends people to which
+product, which is the only input needed to decide what to write next.</p>
+<p>That choice is <a href="suggestions.html#DS-11">DS-11</a>. Its options are a cookie-free first-party counter,
+a third-party analytics script, or waiting for Associates reporting alone — and the trade-offs are stated on the
+row.</p>
+
+  </main>
+</div>
+<footer class="site">
+  <div class="wrap">
+    <p>As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Generated by <code>tools/build_discovery.py</code> from <code>docs/discovery-t40.json</code> and
+    <code>docs/discovery-t40-sources.json</code> on 2026-11-15. Every source link points at the official
+    page it was read from. Nothing on these pages has been implemented: each suggestion waits for a recorded
+    owner decision.</p>
+    <p><a href="../index.html">Owner dashboard</a> ·
+       <a href="../pages/suggestions.html">Earlier decision board (SG-01…SG-10)</a> ·
+       <a href="../pages/questions.html">Earlier question register (Q-01…Q-16)</a> ·
+       <a href="../pages/flags.html">Flagged for review</a> ·
+       <a href="../marketing/index.html">Reader-facing site</a></p>
+  </div>
+</footer>
+</body>
+</html>

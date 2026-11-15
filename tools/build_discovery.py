@@ -59,6 +59,7 @@ NAV = [
     ("findings.html", "What we found"),
     ("questions.html", "Open questions"),
     ("suggestions.html", "Suggestions"),
+    ("measurement.html", "Measurement plan"),
     ("sources.html", "Sources"),
 ]
 

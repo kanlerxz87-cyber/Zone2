@@ -28,6 +28,9 @@ another namespace:
   8. disclosure and links - every page carries the required sentence (R-01) and every
                             internal href resolves to a file on disk
   9. generated output current - discovery/ matches a fresh render
+ 10. measurement honesty  - an event may not be marked LIVE while the suggestion that
+                            authorises it is still undecided; a BLOCKED event names its
+                            blocker; an event with no decision is not collected
 
 Run: python3 tools/validate_discovery.py
 """
@@ -234,7 +237,8 @@ class LinkParser(HTMLParser):
 
 def check_pages(rep: Report) -> None:
     pages = sorted(OUT.glob("*.html"))
-    if len(pages) < len(bd.PAGES):
+    # bd.PAGES holds the review pages; measurement.html has its own generator but lives here too.
+    if len(pages) < len(bd.PAGES) + 1:
         rep.fail(f"discovery/: expected {len(bd.PAGES)} pages, found {len(pages)}")
     bad = []
     for page in pages:
@@ -283,6 +287,53 @@ def check_counts(rep: Report) -> None:
     rep.stats.update(expectations)
 
 
+def check_measurement(rep: Report) -> None:
+    """docs/measurement-t40.json is a design, and the page says so. This keeps it true.
+
+    The specific defect this catches: an event flips to LIVE in the design file before the
+    owner has recorded a decision to collect anything. That would put "we measure clicks"
+    on a published page while nothing measures clicks - the exact overclaim this project
+    has already corrected twice on other surfaces (F-26, F-30 class).
+    """
+    path = REPO / "docs" / "measurement-t40.json"
+    if not path.is_file():
+        rep.fail("docs/measurement-t40.json: missing - the measurement design is part of this task")
+        return
+    data = json.loads(path.read_text(encoding="utf-8"))
+    vocab = set(data["status_vocabulary"])
+    events = data["events"]
+    if len(events) < 3:
+        rep.fail(f"measurement: {len(events)} events - a design with no events is a slogan")
+    seen = set()
+    for ev in events:
+        eid = ev["id"]
+        if eid in seen:
+            rep.fail(f"measurement: duplicate event id {eid}")
+        seen.add(eid)
+        if ev.get("status") not in vocab:
+            rep.fail(f"measurement {eid}: status {ev.get('status')!r} is not in the declared vocabulary")
+        for field in ("name", "fires_on", "decides"):
+            if not (ev.get(field) or "").strip():
+                rep.fail(f"measurement {eid}: empty {field!r}")
+        if not (ev.get("fields") or []):
+            rep.fail(f"measurement {eid}: no fields - the event cannot be built from this description")
+        if not (ev.get("deliberately_not_collected") or []):
+            rep.fail(f"measurement {eid}: does not state what it refuses to collect (MP-01)")
+        if ev["status"] == "BLOCKED" and not (ev.get("blocked_by") or "").strip():
+            rep.fail(f"measurement {eid}: BLOCKED with no stated blocker - a dead end, not a plan")
+        if ev["status"] == "LIVE":
+            # Rule 10: LIVE requires the authorising decision to be recorded on the board.
+            ds11 = next((x for x in bd.SUGGESTIONS if x["id"] == "DS-11"), None)
+            if ds11 is None or not (ds11.get("decision") or "").strip():
+                rep.fail(
+                    f"measurement {eid}: marked LIVE, but DS-11 carries no recorded owner decision - "
+                    "collection may not start before the owner chooses"
+                )
+    live = sum(1 for e in events if e["status"] == "LIVE")
+    rep.stats["measurement_events"] = len(events)
+    rep.stats["measurement_live"] = live
+
+
 def check_current(rep: Report) -> None:
     """`--check` on the generator is the same test; run it here so one command gates both.
 
@@ -305,7 +356,8 @@ def check_current(rep: Report) -> None:
 
 def main() -> int:
     rep = Report()
-    for fn in (check_sources, check_quotes, check_questions, check_suggestions, check_findings, check_pages, check_counts, check_current):
+    for fn in (check_sources, check_quotes, check_questions, check_suggestions, check_findings,
+               check_measurement, check_pages, check_counts, check_current):
         try:
             fn(rep)
         except Exception as exc:  # a gate that crashes must fail, not pass
