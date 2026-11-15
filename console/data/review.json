@@ -117,7 +117,7 @@
     {
       "id": "MS-04",
       "what": "Pages carrying the mandatory Associates disclosure sentence verbatim",
-      "value": "134 of 134",
+      "value": "(measured at build time — see the rendered value on this page)",
       "how": "Substring match on the section 5 sentence across every HTML file in the rebased tree"
     },
     {

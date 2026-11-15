@@ -153,7 +153,7 @@
     {
       "id": "IN-01",
       "question": "What is the single public address and canonical home of this project?",
-      "have": "The live site is at https://kanlerxz87-cyber.github.io/Zone2/ and 116 HTML pages are published across 11 top-level namespaces, each with its own index and navigation.",
+      "have": "The live site is at https://kanlerxz87-cyber.github.io/Zone2/, and well over a hundred HTML pages are published across a dozen top-level namespaces, each with its own index and navigation. The current counts are measured at build time on the repository review page.",
       "missing": "Which one is the site. Nothing in the repository records a decision.",
       "how_to_find": "Owner picks one path as the public home. Everything else is either moved under it or labelled archive. Then one canonical host is written into every page.",
       "who": "owner",

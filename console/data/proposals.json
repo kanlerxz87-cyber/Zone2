@@ -55,7 +55,7 @@
       "area": "Architecture",
       "title": "One public name and one public site",
       "change": "The published tree carries six different site names across its namespaces (measured 2026-11-15 from each page's <title>): Zone2, Counter Notes, Zone2 decisions, Zone2 Revalidation, Zone2 — Amazon Affiliate Intelligence Dashboard, Northstar · Affiliate Intelligence. Choose one public name. Everything else either becomes an internal surface under a clearly labelled path or is preserved as a dated archive.",
-      "why": "116 HTML pages across 11 top-level namespaces. A reader cannot tell which one is the site, and neither could a reviewer at Associates reading the application. Google's site-reputation test asks whether content is “fully integrated with the main site” and lists “how the content is presented” — design, formatting, typography, UX — as the first objective factor. Six names reads as six sites.",
+      "why": "Well over a hundred HTML pages across a dozen top-level namespaces. A reader cannot tell which one is the site, and neither could a reviewer at Associates reading the application. Google's site-reputation test asks whether content is “fully integrated with the main site” and lists “how the content is presented” — design, formatting, typography, UX — as the first objective factor. Six names reads as six sites.",
       "options": [
         {
           "id": "A",
@@ -312,7 +312,7 @@
         {
           "id": "B",
           "label": "Fix new pages only",
-          "tradeoff": "Leaves the existing 116 inconsistent for as long as they exist."
+          "tradeoff": "Leaves every page already published inconsistent for as long as it exists."
         },
         {
           "id": "C",
