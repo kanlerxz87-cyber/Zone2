@@ -1,0 +1,535 @@
+{
+  "note": "The redesign pack (task T42, session arena/d26f42db-zone2). Everything here is either (a) a constraint quoted from an official source and cited, or (b) a craft judgment made by this session and labelled as one. Judgments are not program facts and are never presented as them. Nothing in this file is implemented: each item reaches the owner first as a proposal on the suggestion board (console/suggestions.html, rows P-01..P-14).",
+  "as_of": "2026-11-15",
+  "diagnosis": {
+    "headline": "The site described itself instead of answering the reader. A redesign merged mid-review has fixed the worst of it; two traces remain.",
+    "detail": "Measured 2026-11-15 from the published pages. At the start of this review the root landing page opened its executive summary with the client's own requirement list, verbatim (“The job. Build an affiliate marketing platform that researches products, finds trending and high-converting niches, analyzes pricing …”), and its headline figure strip reported the project's audit state (“3 of 3 Supplied links that resolve…”, “0 of 3 Brief product mappings confirmed by an official Amazon document (F-03)”, count of items on the Flagged register). CORRECTION, same day: session f8e18ca8's redesign (PR #108) merged while this review was running and removed both. The page now opens “Affiliate content you can check, not just read.” Two traces of the same problem remain: the “AI-powered Amazon affiliate platform” heading, and the section heading “Three links in. Three listings identified.”, which is broader than what flag F-03 confirms.",
+    "why_it_reads_as_slop": "Not because the sentences are badly written — they are not. Because every sentence was about the site rather than about the reader's problem. Machine-sounding copy is usually copy with no stake in it: it describes, it does not choose. The redesign proves the point from the other direction: the moment the page started answering a reader, it stopped sounding like machine output. What is left is the same failure in two headlines instead of a whole page.",
+    "evidence_source_ids": [
+      "C-17",
+      "C-22",
+      "C-12",
+      "C-06"
+    ],
+    "flags": [
+      "IR-01",
+      "IR-02"
+    ]
+  },
+  "principles": [
+    {
+      "id": "DP-01",
+      "principle": "Answer in the first sentence.",
+      "rule": "The opening line states the conclusion the rest of the page defends. No preamble, no “in today's market”, no description of what the article will do.",
+      "judgment": true
+    },
+    {
+      "id": "DP-02",
+      "principle": "Never write a sentence that is true of every product on the shelf.",
+      "rule": "If the same sentence could sit on a competitor's page unchanged, delete it. Test: swap the product name. If the sentence still reads fine, it is filler.",
+      "judgment": true
+    },
+    {
+      "id": "DP-03",
+      "principle": "Every claim has a row beneath it.",
+      "rule": "A specification, a comparison or a verdict is printed only if the row that justifies it is printed too, with its source link. A value with no source is a dash, not a guess.",
+      "judgment": false,
+      "source_ids": [
+        "C-24",
+        "C-06"
+      ]
+    },
+    {
+      "id": "DP-04",
+      "principle": "Say what you could not find out.",
+      "rule": "A page that names its own gaps is more useful and more credible than one that implies total knowledge. Put the open items on the page, dated.",
+      "judgment": false,
+      "source_ids": [
+        "C-24",
+        "C-17"
+      ]
+    },
+    {
+      "id": "DP-05",
+      "principle": "The page is for a reader; the provenance is for the footer.",
+      "rule": "Sourcing notes, verification counts and register sizes are working documents. They belong under the article, on one internal page, never in the hero.",
+      "judgment": true
+    },
+    {
+      "id": "DP-06",
+      "principle": "No prices, no star ratings, no price alerts — ever, until the data source exists.",
+      "rule": "Not a style preference. Prices require an Amazon-served link or Creators API; ratings require Creators API or PA API; price tracking is prohibited unless Amazon agrees.",
+      "judgment": false,
+      "source_ids": [
+        "C-05",
+        "C-09",
+        "C-10"
+      ]
+    },
+    {
+      "id": "DP-07",
+      "principle": "A person's name goes on the page.",
+      "rule": "Author or responsible editor, plus one line on how the piece was made and checked. No invented bylines — an unnamed page is better than a fake name.",
+      "judgment": false,
+      "source_ids": [
+        "C-22",
+        "C-24",
+        "C-25"
+      ]
+    },
+    {
+      "id": "DP-08",
+      "principle": "Ten good pages, not two hundred thin ones.",
+      "rule": "Volume generated to rank, without added value, is a spam-policy violation regardless of how it was made. Add a page only when it says something the others cannot.",
+      "judgment": false,
+      "source_ids": [
+        "C-20",
+        "C-21"
+      ]
+    },
+    {
+      "id": "DP-09",
+      "principle": "Disclose where the click is, not only in the footer.",
+      "rule": "The Associates sentence appears on every page; where an outbound product link sits, the commercial nature is visible next to it, and outbound links are qualified with rel=\"sponsored\".",
+      "judgment": false,
+      "source_ids": [
+        "C-01",
+        "C-23",
+        "C-25"
+      ]
+    }
+  ],
+  "voice": {
+    "note": "Craft judgments, not program rules. Each entry says what to do and what it replaces.",
+    "do": [
+      "Open with the answer, in one sentence, in plain words.",
+      "Name the trade-off out loud. “Two baskets means two things finish together and two things to wash.”",
+      "Use the number you actually have. “6 Qt, in two 3 Qt baskets” beats “generous capacity”.",
+      "Write to one reader: a household cooking for two to four people on a normal counter.",
+      "Use short sentences after long ones. Vary length; do not perform it.",
+      "Say when two official pages disagree, and say which one you used and why.",
+      "Put the limitation in the same paragraph as the claim."
+    ],
+    "banned": [
+      {
+        "phrase": "In today's fast-paced world",
+        "why": "Says nothing about the product. Delete the whole opening."
+      },
+      {
+        "phrase": "When it comes to",
+        "why": "A delay. Start with the subject."
+      },
+      {
+        "phrase": "It's important to note that",
+        "why": "If it matters, just say it."
+      },
+      {
+        "phrase": "Look no further",
+        "why": "Advertising copy from 1998. It also implies a recommendation the site cannot yet support."
+      },
+      {
+        "phrase": "Game-changer / revolutionary / cutting-edge",
+        "why": "Unverifiable, and “must not make inaccurate, overbroad, deceptive or otherwise misleading claims” applies."
+      },
+      {
+        "phrase": "Seamless / effortless / elevate / unlock / leverage",
+        "why": "Abstract verbs that hide the absence of a fact."
+      },
+      {
+        "phrase": "The ultimate guide / the comprehensive guide",
+        "why": "Promise, not content. Name what the page actually answers."
+      },
+      {
+        "phrase": "Delve into / dive into / explore the world of",
+        "why": "Machine filler."
+      },
+      {
+        "phrase": "Whether you're a busy parent or a professional chef",
+        "why": "Fake audience. Pick one reader."
+      },
+      {
+        "phrase": "Let's take a closer look",
+        "why": "Just take the closer look."
+      },
+      {
+        "phrase": "Best / cheapest / top-rated",
+        "why": "Superlatives the site has no sourced basis for, and an invitation to a misleading claim."
+      }
+    ],
+    "banned_source_ids": [
+      "C-06"
+    ]
+  },
+  "rewrites": {
+    "note": "Every 'before' line below is quoted from the published site as read on 2026-11-15. Every 'after' line is a draft by this session — a proposal, not a shipped change. RW-01 and RW-02 were quoted early in the day and were superseded by another session's redesign (PR #108) before this page shipped; they are kept, clearly marked, because they show what the problem looked like and why P-01 was written. RW-07 and RW-08 are against the page as it stands now. Values in braces are filled from ledger/products.json by the generator and are never typed by hand.",
+    "rows": [
+      {
+        "id": "RW-01",
+        "where": "index.html — executive summary, opening line (SUPERSEDED: removed by the PR #108 redesign on 2026-11-15, after this review quoted it)",
+        "before": "The job. Build an affiliate marketing platform that researches products, finds trending and high-converting niches, analyzes pricing, reviews, competition and commission potential, generates SEO-optimized articles, comparisons and buying guides, manages affiliate links, tracks clicks and conversions, and keeps optimizing campaigns — automatically, at scale, and compliantly.",
+        "after": "Three air fryers are on the counter. One has two baskets, one is an oven that air fries, one is the biggest single basket of the three. Here is what actually separates them — and one thing we still cannot tell you.",
+        "why": "The before line is the client's requirement list. The after line is the reason a reader clicked. Nothing in the before line is a fact a buyer can use."
+      },
+      {
+        "id": "RW-02",
+        "where": "index.html — the KPI strip (SUPERSEDED: removed by the PR #108 redesign on 2026-11-15, after this review quoted it)",
+        "before": "3 of 3 Supplied links that resolve, reproducibly, to one specific Amazon listing (re-observed 2026-11-15) · 0 of 3 Brief product mappings confirmed by an official Amazon document (F-03) · 1 category Shared category of the three resolved destinations — Air Fryers · 4.00% Official “All Other Categories” rate",
+        "after": "Capacity {p1_capacity} · {p2_capacity} · {p3_capacity} — and the one that splits into two baskets is the {two_basket_model}. Temperature range {p1_temp} to {p3_temp}. Footprint: check the clearance under your cabinets before you choose the oven.",
+        "why": "The before strip reports on the project's own audit state. The after strip is the comparison a buyer came for, and every value in it comes from a sourced row rather than being typed."
+      },
+      {
+        "id": "RW-03",
+        "where": "index.html — 'Every capability is built around one discipline'",
+        "before": "Every capability is built around one discipline: a value appears on this site only when an official source states it, and each row carries the link to the page it was read from.",
+        "after": "Every number here comes off a manufacturer's own specification sheet or the listing itself, on a date you can check. Where the two disagree we print both and say which we used. Where neither says anything, we print a dash.",
+        "why": "Same discipline, in the reader's terms. The before sentence describes a process; the after sentence tells the reader what they can rely on."
+      },
+      {
+        "id": "RW-04",
+        "where": "Any product page — the price and rating slots",
+        "before": "Price — blank. Rating — blank. Availability — blank. (Correctly left blank today.)",
+        "after": "We do not show prices or star ratings. Amazon only allows prices that Amazon itself serves or that come through its product API, and ratings only through that API. Neither is available to this site yet, so we print neither rather than copying a number that may be out of date by tomorrow.",
+        "why": "A blank cell is correct but baffling on its own. One sentence turns a gap into a reason to trust the page."
+      },
+      {
+        "id": "RW-05",
+        "where": "Product page — opening paragraph",
+        "before": "The Chefman TurboFry Touch is a 6-quart dual-basket air fryer that combines…",
+        "after": "Two 3-quart baskets that finish together, or one 6-quart space for a whole chicken. That is the only real question on this page, and the answer depends on what you cook on a Tuesday.",
+        "why": "The before line restates the specification table that sits directly below it. The after line tells the reader what the specification means for them."
+      },
+      {
+        "id": "RW-06",
+        "where": "Article footer — provenance",
+        "before": "Blank means unverified — never guessed.",
+        "after": "Written and checked by {editor_name} on {check_date} against the manufacturer's specification sheet and the listing. Specifications last verified {verified_date}. Affiliate disclosure: as an Amazon Associate I earn from qualifying purchases.",
+        "why": "The slogan is good; the dated, named version is evidence. It also satisfies the authorship factor Google says it weighs."
+      },
+      {
+        "id": "RW-07",
+        "where": "index.html — hero heading, as it stands now",
+        "before": "AI-powered Amazon affiliate platform",
+        "after": "Three air fryers, checked against their own spec sheets",
+        "why": "Two reasons. The reader came for a product, not a technology. And Program Content may not be used to develop machine-learning models without Amazon's express prior written approval — so the heading advertises a capability the project has not been granted. The supporting line below it can carry the method without the claim."
+      },
+      {
+        "id": "RW-08",
+        "where": "index.html — section heading above the three products, as it stands now",
+        "before": "Three links in. Three listings identified.",
+        "after": "Three links in. Three listings they resolve to.",
+        "why": "One word, and it is the difference between what is verified and what is not. The supplied codes are nine characters where an ASIN is ten, and no official document binds them to the products they land on — that is flag F-03. Amazon's own rule is that a claim about a product must not be “overbroad”. The body text already says this carefully; the heading should agree with it."
+      }
+    ]
+  },
+  "templates": [
+    {
+      "id": "TP-01",
+      "name": "Home",
+      "sections": [
+        {
+          "n": 1,
+          "section": "One sentence: what this site is and who it is for",
+          "budget": "15 words"
+        },
+        {
+          "n": 2,
+          "section": "The three machines, one line each, with the number that separates them",
+          "budget": "60 words"
+        },
+        {
+          "n": 3,
+          "section": "Start here: three routes — which should I buy / compare them / what size do I need",
+          "budget": "30 words"
+        },
+        {
+          "n": 4,
+          "section": "The newest article, linked in prose not as a card grid",
+          "budget": "40 words"
+        },
+        {
+          "n": 5,
+          "section": "What we cannot tell you yet, in one honest sentence",
+          "budget": "25 words"
+        },
+        {
+          "n": 6,
+          "section": "Affiliate disclosure, visible above the fold",
+          "budget": "required"
+        }
+      ],
+      "note": "No dashboard widgets, no counts, no register sizes. Nothing about how the site is built."
+    },
+    {
+      "id": "TP-02",
+      "name": "Product page",
+      "sections": [
+        {
+          "n": 1,
+          "section": "Verdict: one sentence",
+          "budget": "20 words"
+        },
+        {
+          "n": 2,
+          "section": "Who it suits / who it does not",
+          "budget": "60 words"
+        },
+        {
+          "n": 3,
+          "section": "The three numbers that separate it from the other two",
+          "budget": "80 words, each number linked to its row"
+        },
+        {
+          "n": 4,
+          "section": "Full specification table: one source link per row, blanks stated",
+          "budget": "table"
+        },
+        {
+          "n": 5,
+          "section": "Where the official pages disagree, if they do",
+          "budget": "60 words"
+        },
+        {
+          "n": 6,
+          "section": "What we could not verify, dated",
+          "budget": "40 words"
+        },
+        {
+          "n": 7,
+          "section": "Byline, how it was checked, disclosure",
+          "budget": "required"
+        }
+      ],
+      "note": "Price and rating slots are not part of this template. See DP-06."
+    },
+    {
+      "id": "TP-03",
+      "name": "Comparison",
+      "sections": [
+        {
+          "n": 1,
+          "section": "The decision in one sentence: which of these for which reader",
+          "budget": "25 words"
+        },
+        {
+          "n": 2,
+          "section": "Side-by-side table of only the rows that differ",
+          "budget": "table, 6-10 rows"
+        },
+        {
+          "n": 3,
+          "section": "Three scenarios: pick one product per scenario and say why",
+          "budget": "150 words"
+        },
+        {
+          "n": 4,
+          "section": "The rows that are blank, and why",
+          "budget": "40 words"
+        },
+        {
+          "n": 5,
+          "section": "Byline, how it was checked, disclosure",
+          "budget": "required"
+        }
+      ],
+      "note": "A comparison table of identical rows is not a comparison. Only the rows that differ earn a place."
+    },
+    {
+      "id": "TP-04",
+      "name": "Question-shaped guide",
+      "sections": [
+        {
+          "n": 1,
+          "section": "The question as the reader types it, as the H1",
+          "budget": "10 words"
+        },
+        {
+          "n": 2,
+          "section": "The answer, in the first two sentences",
+          "budget": "40 words"
+        },
+        {
+          "n": 3,
+          "section": "The reasoning, from sourced rows only",
+          "budget": "300-600 words"
+        },
+        {
+          "n": 4,
+          "section": "The exception — when the answer is the other one",
+          "budget": "80 words"
+        },
+        {
+          "n": 5,
+          "section": "Links to the two product pages this answer points at",
+          "budget": "2 links"
+        },
+        {
+          "n": 6,
+          "section": "Byline, how it was checked, disclosure",
+          "budget": "required"
+        }
+      ],
+      "note": "This is the template that earns organic traffic. It answers a question instead of describing a product."
+    }
+  ],
+  "articles": {
+    "note": "Six question-shaped articles, each writable today from rows this project already holds and already sources — no Associates account required. Headlines are drafts. Every one is answerable without a price, a rating, or a first-hand test.",
+    "rows": [
+      {
+        "id": "AR-01",
+        "headline": "How many quarts do you actually need?",
+        "question_it_answers": "What capacity suits a household of one, two, four, six?",
+        "sourced_from": "Capacity rows in ledger/products.json, manufacturer pages",
+        "why_it_earns_traffic": "Typed verbatim by buyers. Answerable from data the site already has.",
+        "status": "proposed"
+      },
+      {
+        "id": "AR-02",
+        "headline": "Two baskets or one big one?",
+        "question_it_answers": "When does a divided basket beat a single large chamber?",
+        "sourced_from": "Basket configuration and capacity rows",
+        "why_it_earns_traffic": "The genuine decision in this category, and the clearest difference between the three machines.",
+        "status": "proposed"
+      },
+      {
+        "id": "AR-03",
+        "headline": "Will it fit under your cabinets?",
+        "question_it_answers": "What footprint and clearance does each model need?",
+        "sourced_from": "Dimensions rows, manufacturer pages",
+        "why_it_earns_traffic": "The most common return reason for a countertop appliance, and almost never answered on a listing.",
+        "status": "proposed"
+      },
+      {
+        "id": "AR-04",
+        "headline": "What does “Hi-Fry” actually do?",
+        "question_it_answers": "What the marketing term means in degrees and in practice.",
+        "sourced_from": "Temperature-range rows, manufacturer pages",
+        "why_it_earns_traffic": "Brand-feature searches are low-competition and high-intent.",
+        "status": "proposed"
+      },
+      {
+        "id": "AR-05",
+        "headline": "Why two official pages disagree about the same machine",
+        "question_it_answers": "When the listing and the manufacturer say different things, which do you believe?",
+        "sourced_from": "The recorded disagreements between the listing and the manufacturer page",
+        "why_it_earns_traffic": "Genuinely differentiated — almost no affiliate site publishes its sources arguing with each other. Also the strongest trust signal the site has.",
+        "status": "partly published at marketing/topics/why-two-official-pages-disagree.html"
+      },
+      {
+        "id": "AR-06",
+        "headline": "What is dishwasher safe, and what is not",
+        "question_it_answers": "Which parts of each machine go in the dishwasher?",
+        "sourced_from": "Care and materials rows, manufacturer pages",
+        "why_it_earns_traffic": "Ownership question, searched after the purchase decision, and it brings the reader back.",
+        "status": "proposed"
+      }
+    ]
+  },
+  "traffic": {
+    "note": "Organic search is allowed, on one condition: the result has to send the user to this site rather than straight to an Amazon page. Everything below is built to satisfy that and to avoid the two spam policies that catch affiliate sites.",
+    "allowed": [
+      {
+        "step": "Answer the question the reader typed, in the first two sentences",
+        "source_ids": [
+          "C-13"
+        ]
+      },
+      {
+        "step": "Link from every guide to the product page it points at, and back",
+        "source_ids": [
+          "C-21",
+          "C-22"
+        ]
+      },
+      {
+        "step": "Qualify every outbound affiliate anchor with rel=\"sponsored\"",
+        "source_ids": [
+          "C-23"
+        ]
+      },
+      {
+        "step": "Publish the source beside every number so the page is checkable",
+        "source_ids": [
+          "C-24",
+          "C-17"
+        ]
+      },
+      {
+        "step": "Name the author and the check date",
+        "source_ids": [
+          "C-22",
+          "C-24"
+        ]
+      }
+    ],
+    "forbidden": [
+      {
+        "step": "Generating many pages to rank rather than to answer — the first example Google gives of scaled content abuse",
+        "source_ids": [
+          "C-20"
+        ]
+      },
+      {
+        "step": "Copying listing or manufacturer descriptions with nothing added — thin affiliation",
+        "source_ids": [
+          "C-21"
+        ]
+      },
+      {
+        "step": "Sending search traffic straight to an Amazon URL, or through a redirect",
+        "source_ids": [
+          "C-13",
+          "C-11"
+        ]
+      },
+      {
+        "step": "Any page whose purpose is to rank rather than to be read",
+        "source_ids": [
+          "C-20"
+        ]
+      },
+      {
+        "step": "Publishing before a person has checked it",
+        "source_ids": [
+          "C-24"
+        ]
+      }
+    ]
+  },
+  "design_system": {
+    "note": "Concrete tokens, chosen for a reading page rather than a dashboard. This is a craft judgment; nothing here is a program requirement.",
+    "type": {
+      "body": "System sans, 18px / 1.65, measure 62-68 characters",
+      "display": "One serif face for headlines only, 40/48/32/24px steps",
+      "mono": "Used for ASINs, source IDs and table keys only"
+    },
+    "colour": {
+      "rule": "One accent for links and verdicts. Neutral greys for everything else. No gradients, no glassmorphism, no coloured KPI tiles.",
+      "why": "The KPI-tile look is what makes the current site read as a dashboard. Text and one accent read as an article."
+    },
+    "layout": {
+      "rule": "Single reading column, 720px. Tables may break out to the full width. No card grids above the fold.",
+      "why": "Card grids are a directory pattern. A buyer comparing three things needs a table, not a gallery."
+    },
+    "components": [
+      "Verdict box — one sentence, top of a product page, before anything else",
+      "Source chip — a small link with the host name, at the end of every table row",
+      "Open-item box — what could not be verified, dated, at the foot of the page",
+      "Provenance line — author, check date, verification date, disclosure; one line, foot of the article",
+      "Comparison table — only the rows that differ"
+    ],
+    "never": [
+      "A price component of any kind",
+      "A star-rating component of any kind",
+      "A price-alert or price-drop component of any kind"
+    ],
+    "never_source_ids": [
+      "C-05",
+      "C-09",
+      "C-10"
+    ]
+  },
+  "prompt": {
+    "note": "Copy-paste block. Everything above it, condensed into one brief that can be handed to any writer, designer or model. The constraints marked [rule] are quoted from official sources and may not be relaxed; the ones marked [craft] are house style.",
+    "text": "You are writing and designing one page of an Amazon affiliate site about three countertop air fryers.\n\nTHE READER\nOne person cooking for two to four people on a normal kitchen counter, deciding which of three machines to buy. They arrived from a search. They have not heard of this site and do not care how it is built.\n\nHARD RULES [rule] — these come from Amazon's Operating Agreement and Program Policies and Google's published spam policies; they cannot be relaxed.\n1. The page must state, clearly and prominently: “As an Amazon Associate I earn from qualifying purchases.”\n2. Print no product price and no star rating. Prices are allowed only if Amazon serves the link containing them or the data comes from Creators API; ratings only through Creators API. Neither is available. Where a price or rating would go, print a dash and one sentence explaining why.\n3. Never build price tracking or price alerts.\n4. Make no inaccurate, overbroad, deceptive or misleading claim about any product. No “best”, no “cheapest”, no superlative you cannot defend from a row on the page.\n5. Make no claim about expected traffic or commission income.\n6. Do not copy the listing's or the manufacturer's description. Add something, or do not write the paragraph.\n7. Do not send the reader straight to an Amazon URL, or through a redirect. Links go to Amazon product pages from this page, one click, rel=\"sponsored\".\n8. Every outbound link must be clearly a link to Amazon — no cloaked URLs, no hidden destinations.\n9. No claim may appear without the row that justifies it and the official page that row came from. A value with no source is a dash, never a guess.\n10. Nothing may be published until a named person has fact-checked it against its sources.\n\nCRAFT RULES [craft] — house style, not policy.\n11. Open with the answer. One sentence, under 25 words, before any context.\n12. Delete any sentence that would still be true if you swapped the product name.\n13. Write to one reader in the second person. No “whether you're a busy parent or a professional chef”.\n14. Use the number you actually have. “6 Qt in two 3 Qt baskets”, not “generous capacity”.\n15. Name the trade-off in the same breath as the benefit.\n16. Never use: in today's fast-paced world; when it comes to; it's important to note that; look no further; game-changer; revolutionary; cutting-edge; seamless; effortless; elevate; unlock; leverage; delve into; the ultimate guide; the comprehensive guide; let's take a closer look.\n17. No card grids above the fold. One reading column. A table where a comparison belongs.\n18. Say what you could not find out, dated, on the page.\n\nPAGE STRUCTURE\nProduct page: verdict (1 sentence) → who it suits and who it does not → the three numbers that separate it → full specification table with a source link per row → where the official pages disagree → what we could not verify → byline, how it was checked, disclosure.\nQuestion guide: the reader's question as the headline → the answer in the first two sentences → the reasoning from sourced rows → the exception, when the answer is the other one → links to the two product pages this answer points at → byline, how it was checked, disclosure.\n\nBEFORE YOU FINISH\nRe-read the page and delete every sentence that describes the site, the process, the sources or the verification effort rather than the product. Then check every number against its row. Then sign it."
+  }
+}

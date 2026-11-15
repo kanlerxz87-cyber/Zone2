@@ -1,0 +1,574 @@
+{
+  "note": "The Owner's Console suggestion board (task T42, session arena/d26f42db-zone2). Every row is a proposal and nothing more: no row has been implemented. `recommended` is a judgment by this session, not a program fact. `decision` is empty until the owner fills it in on the decision sheet (console/data/decisions.json, published at console/decisions.html). Rows do not duplicate the canonical board SG-01..SG-10 at pages/suggestions.html — each row that touches an inherited item names it in `relates_to` and links back to it.",
+  "as_of": "2026-11-15",
+  "state_values": {
+    "proposed": "On the board, no owner choice recorded.",
+    "approved": "Owner chose an option; not yet built.",
+    "rejected": "Owner declined; kept on the board so it is not re-proposed.",
+    "implemented": "Built and shipped."
+  },
+  "proposals": [
+    {
+      "id": "P-01",
+      "area": "Public copy",
+      "title": "Finish the reader-first rewrite of the public home page",
+      "change": "When this review started, the root landing page opened its executive summary with the client's own requirement list (“The job. Build an affiliate marketing platform that researches products, finds trending and high-converting niches …”) and its headline figure strip reported the project's audit state. A redesign by session f8e18ca8 (PR #108) merged on 2026-11-15 and removed both; the page now opens “Affiliate content you can check, not just read.” What is left: the “AI-powered Amazon affiliate platform” heading, and the section heading “Three links in. Three listings identified.”, which is broader than what flag F-03 confirms. Rewrites RW-07 and RW-08 in the redesign pack cover both.",
+      "why": "A visitor arrives because they are choosing an air fryer. The redesign settled the big version of this question the same day this review raised it, which is a good sign that it was the right question. The two remaining headings are the same failure in miniature: one advertises a capability the project has not been granted permission for, and one asserts an identification that no official document supports.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Apply RW-07 and RW-08; keep the redesign",
+          "tradeoff": "Recommended. Two line edits on a page that is already much better."
+        },
+        {
+          "id": "B",
+          "label": "Leave the headings; the body text is already careful",
+          "tradeoff": "Cheapest. But headings are what a skimmer and a search snippet read."
+        },
+        {
+          "id": "C",
+          "label": "Revert to the pre-redesign page",
+          "tradeoff": "Not recommended: it restores the requirement list and the audit-state KPI strip."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Low",
+      "risk": "None to compliance. Changes published copy only; no value, link or disclosure moves.",
+      "evidence": [
+        "C-12",
+        "C-06",
+        "C-22",
+        "C-17"
+      ],
+      "blocked_by": [
+        "Q-06",
+        "IN-01"
+      ],
+      "relates_to": [
+        "SG-06"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-02",
+      "area": "Architecture",
+      "title": "One public name and one public site",
+      "change": "The published tree carries six different site names across its namespaces (measured 2026-11-15 from each page's <title>): Zone2, Counter Notes, Zone2 decisions, Zone2 Revalidation, Zone2 — Amazon Affiliate Intelligence Dashboard, Northstar · Affiliate Intelligence. Choose one public name. Everything else either becomes an internal surface under a clearly labelled path or is preserved as a dated archive.",
+      "why": "116 HTML pages across 11 top-level namespaces. A reader cannot tell which one is the site, and neither could a reviewer at Associates reading the application. Google's site-reputation test asks whether content is “fully integrated with the main site” and lists “how the content is presented” — design, formatting, typography, UX — as the first objective factor. Six names reads as six sites.",
+      "options": [
+        {
+          "id": "A",
+          "label": "One public brand; other namespaces moved under an /archive path and excluded from search",
+          "tradeoff": "Recommended. Largest cleanup, and the only option that leaves a reader with one answer to “what site am I on?”"
+        },
+        {
+          "id": "B",
+          "label": "Two surfaces: one public brand, one clearly internal console",
+          "tradeoff": "Cheaper. Works only if the internal one is honestly labelled and not indexed."
+        },
+        {
+          "id": "C",
+          "label": "Keep all six",
+          "tradeoff": "No work now; every future content decision has to be made six times."
+        }
+      ],
+      "recommended": "A",
+      "effort": "High",
+      "risk": "Archive moves change URLs. Sitemaps and internal links must be regenerated in the same commit or the site ships broken links.",
+      "evidence": [
+        "C-22",
+        "C-20"
+      ],
+      "blocked_by": [
+        "IN-01",
+        "IN-02",
+        "Q-06"
+      ],
+      "relates_to": [
+        "DS-12",
+        "SG-06"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-03",
+      "area": "Editorial trust",
+      "title": "A named byline and a “how this was written” line on every article",
+      "change": "Every article carries a named human author or responsible editor, plus one dated line stating how the piece was produced and what it was checked against.",
+      "why": "Measured 2026-11-15: no page in any namespace names a person. Google lists “Its stated or implied authorship, meaning, is there an explicit acknowledgement of ownership or responsibility for the content?” as one of four objective factors it weighs, and its guidance on generated content says sharing how a piece was made “can help give your readers more context”. The FTC requires the commercial connection to be disclosed clearly and conspicuously; an unnamed page makes that harder to judge.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Named editor plus a dated provenance line on every article",
+          "tradeoff": "Recommended. Cheap, and it is the single cheapest signal that the site is edited rather than emitted."
+        },
+        {
+          "id": "B",
+          "label": "Publication name only, no individual",
+          "tradeoff": "Better than nothing; does not satisfy the authorship factor as written."
+        },
+        {
+          "id": "C",
+          "label": "No byline",
+          "tradeoff": "Status quo."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Low",
+      "risk": "The name must be a person who accepts responsibility. A invented byline would be worse than none — see Q-16.",
+      "evidence": [
+        "C-22",
+        "C-24",
+        "C-25"
+      ],
+      "blocked_by": [
+        "Q-16",
+        "IN-04"
+      ],
+      "relates_to": [
+        "SG-06",
+        "DP-07"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-04",
+      "area": "Process",
+      "title": "Human sign-off before publish, recorded on the page",
+      "change": "Content is drafted, then held; it is published only after a named person has fact-checked it against its sources, and the date of that check is printed on the page.",
+      "why": "Google: “It is critical to manually factcheck and review all AI-generated content for accuracy and trustworthiness before publishing.” Today the same step that generates a page also publishes it. The site's own rule — blank until verified — protects values; it does not protect prose.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Two-step: draft → named sign-off → publish, with the check date on the page",
+          "tradeoff": "Recommended. Slows publication to the speed of one person."
+        },
+        {
+          "id": "B",
+          "label": "Publish, then review on a dated weekly sweep",
+          "tradeoff": "Faster; leaves unverified prose live for up to a week."
+        },
+        {
+          "id": "C",
+          "label": "No change",
+          "tradeoff": "Status quo."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Medium",
+      "risk": "Requires a named person with time. If nobody is named, this proposal cannot start — see Q-16 and IN-04.",
+      "evidence": [
+        "C-24"
+      ],
+      "blocked_by": [
+        "Q-16",
+        "IN-04",
+        "IN-05"
+      ],
+      "relates_to": [
+        "SG-10"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-05",
+      "area": "Public copy",
+      "title": "Drop “AI-powered platform” from every public page",
+      "change": "Remove capability-list framing (“AI-powered”, “automates…”, “at scale”) from pages a reader can reach. Describe what the reader gets, not how the site is built.",
+      "why": "Two reasons, one commercial and one legal. Commercially, the phrase advertises the process instead of the product. Legally, Program Content may not be used “to develop machine learning models or related technology” without Amazon's express prior written approval — and the brief asks for exactly that, so advertising it on the public site is advertising a thing that needs permission it does not have.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Strip automation framing from public pages; keep it in the internal console",
+          "tradeoff": "Recommended. The build notes stay available to the owner, off the reader's path."
+        },
+        {
+          "id": "B",
+          "label": "Keep the phrase on the landing page only",
+          "tradeoff": "Concentrates the risk on the page most likely to be read by a reviewer."
+        },
+        {
+          "id": "C",
+          "label": "No change",
+          "tradeoff": "Status quo."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Low",
+      "risk": "None if done as copy edit only. Does not by itself resolve the underlying permission question — see IR-05.",
+      "evidence": [
+        "C-12"
+      ],
+      "blocked_by": [
+        "IN-03",
+        "Q-06"
+      ],
+      "relates_to": [
+        "IR-04",
+        "SG-06"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-06",
+      "area": "Content architecture",
+      "title": "Three page types, not thirty",
+      "change": "Standardise on three page types — product page, comparison, question-shaped guide — and fold or retire everything that overlaps them.",
+      "why": "Measured 2026-11-15: 116 pages across 11 namespaces, including a buying guide, a head-to-head, three per-product articles, six topic guides, a journal, a playbook, a requirements table, a revalidation set and a second platform build. Google's thin-affiliation description names “cookie-cutter sites or templates with the same or similar content replicated within the same site”. Volume with overlapping purpose is the risk shape, and it also splits what little authority the site has.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Three types; every existing page mapped to one of them, merged or retired",
+          "tradeoff": "Recommended. Loses pages the owner may want to keep, so each retirement needs an owner decision."
+        },
+        {
+          "id": "B",
+          "label": "Five types, with the journal and the internal console kept separate",
+          "tradeoff": "Keeps the human-written journal; still leaves two internal surfaces public."
+        },
+        {
+          "id": "C",
+          "label": "No consolidation",
+          "tradeoff": "Every new article has to choose between ten templates."
+        }
+      ],
+      "recommended": "A",
+      "effort": "High",
+      "risk": "Deleting merged work is a decision, not a cleanup. Prior sessions recorded that deleting a contribution costs more later than restating it as data.",
+      "evidence": [
+        "C-21",
+        "C-20"
+      ],
+      "blocked_by": [
+        "Q-05",
+        "Q-06",
+        "IN-01"
+      ],
+      "relates_to": [
+        "DS-12",
+        "SG-02",
+        "SG-04"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-07",
+      "area": "Page design",
+      "title": "Decision-first layout on every product page",
+      "change": "Restructure each product page in this order: one-line verdict → who it suits and who it does not → the three numbers that actually separate the models → full specification table with a source link per row → an explicit “what we could not verify” block.",
+      "why": "Google names, as examples of good affiliate pages, “additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons”. The current product pages lead with a specification table, which is the part a reader needs last.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Verdict → who it suits → the numbers that differ → full table → open items",
+          "tradeoff": "Recommended. Reader gets an answer before a spreadsheet."
+        },
+        {
+          "id": "B",
+          "label": "Keep the table first, add a verdict box above it",
+          "tradeoff": "Cheaper; the page still opens with data."
+        },
+        {
+          "id": "C",
+          "label": "No change",
+          "tradeoff": "Status quo."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Medium",
+      "risk": "A verdict is an opinion about a product and must not be “inaccurate, overbroad, deceptive or otherwise misleading”. It must be arguable from the rows beneath it.",
+      "evidence": [
+        "C-21",
+        "C-06"
+      ],
+      "blocked_by": [
+        "Q-11",
+        "Q-12"
+      ],
+      "relates_to": [
+        "SG-05"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-08",
+      "area": "Search hygiene",
+      "title": "Fix the metadata layer before writing another article",
+      "change": "Audit and correct, on every public page: <title>, meta description, canonical, image alt text, and the sitemap. One title pattern, one description pattern, one canonical host.",
+      "why": "Google's guidance is explicit that review “also applies to metadata like <title> elements, meta description elements, structured data, and alternate texts for images, which can appear in Search results”. The published tree has 116 pages written by 30 sessions; their titles follow at least six patterns.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Audit and fix all public pages, then hold the pattern in a generator",
+          "tradeoff": "Recommended. Front-loaded work that stops the drift from returning."
+        },
+        {
+          "id": "B",
+          "label": "Fix new pages only",
+          "tradeoff": "Leaves the existing 116 inconsistent for as long as they exist."
+        },
+        {
+          "id": "C",
+          "label": "No change",
+          "tradeoff": "Status quo."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Medium",
+      "risk": "Low. Must be done in the generator, not by hand, or the next regeneration undoes it.",
+      "evidence": [
+        "C-24"
+      ],
+      "blocked_by": [
+        "IN-01"
+      ],
+      "relates_to": [],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-09",
+      "area": "Content architecture",
+      "title": "Every article reaches a product page in one click",
+      "change": "Add a standing internal-link rule: no article ships without at least one contextual link to a product page, and no product page ships without links to the guides that discuss it.",
+      "why": "Google's worked example of a page it would act on is an affiliate article that “isn't part of any of the thematic sections of the publication” and has “no links or menu … to reach the article from the main page”. Orphan articles are the failure mode, and a site built by 30 sessions in sequence accumulates them.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Standing rule, checked by the build gate on every commit",
+          "tradeoff": "Recommended. The check is cheap; the drift it prevents is not."
+        },
+        {
+          "id": "B",
+          "label": "Manual review each time an article ships",
+          "tradeoff": "Depends on someone remembering."
+        },
+        {
+          "id": "C",
+          "label": "No change",
+          "tradeoff": "Status quo."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Medium",
+      "risk": "Low.",
+      "evidence": [
+        "C-22",
+        "C-21"
+      ],
+      "blocked_by": [],
+      "relates_to": [],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-10",
+      "area": "Compliance",
+      "title": "Make “no prices, no ratings, no price alerts” a property of the design system, not a habit",
+      "change": "Move the current blank-until-verified rule into the design system itself: no template may render a price cell, a star rating, or a price-alert control, and the build gate fails if one appears.",
+      "why": "Three official rules converge. Prices only if Amazon serves the link or the data comes from Creators API or PA API. Star ratings only via Creators API or PA API. “Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.” Today the rule is honoured by convention across 30 sessions' work; a convention is one new template away from breaking.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Encode it: no such component exists in the design system, gate fails if one is added",
+          "tradeoff": "Recommended. Removes the decision from every future session."
+        },
+        {
+          "id": "B",
+          "label": "Keep it as a written rule in the contributor docs",
+          "tradeoff": "Works until someone adds a price widget."
+        },
+        {
+          "id": "C",
+          "label": "Revisit once Creators API access exists",
+          "tradeoff": "Premature: eligibility needs 10 qualifying sales in 30 days, which needs the links to earn first."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Low",
+      "risk": "None. It constrains the design system, not the content.",
+      "evidence": [
+        "C-05",
+        "C-09",
+        "C-10",
+        "C-18"
+      ],
+      "blocked_by": [],
+      "relates_to": [
+        "SG-03",
+        "SG-07",
+        "Q-09",
+        "Q-12"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-11",
+      "area": "Compliance",
+      "title": "Label every outbound link a preview until a tagged link exists",
+      "change": "Until the Associates ID exists, every outbound product link is visibly labelled as a non-monetised preview — in context, not only in the footer — and carries rel=\"sponsored nofollow\".",
+      "why": "Special Links “must use the Associates ID we have assigned to you” and the ID must appear “as a parameter in the URL of each link”. Measured 2026-11-15: all three supplied links resolve without a tag parameter, and no Associates ID exists in the repository. A reader who believes a link is a paid recommendation when it cannot earn is being misled in both directions.",
+      "options": [
+        {
+          "id": "A",
+          "label": "In-context preview label on every outbound link until tags exist",
+          "tradeoff": "Recommended. Honest now, removed in one pass once the ID exists."
+        },
+        {
+          "id": "B",
+          "label": "Footer disclosure only",
+          "tradeoff": "Weaker: the label is not where the click happens."
+        },
+        {
+          "id": "C",
+          "label": "Remove outbound links until tags exist",
+          "tradeoff": "Safest for compliance, but then the site cannot earn the three qualifying sales that unlock the account."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Low",
+      "risk": "Does not make the links earn. Only the Associates ID does that — see Q-02 and F-07/F-24.",
+      "evidence": [
+        "C-14",
+        "C-03",
+        "C-26",
+        "C-27",
+        "C-28"
+      ],
+      "blocked_by": [
+        "Q-02"
+      ],
+      "relates_to": [
+        "SG-01",
+        "F-24",
+        "F-07"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-12",
+      "area": "Decision process",
+      "title": "One decision sheet, owned by you",
+      "change": "Every open choice on this project — this board, SG-01..SG-10, DS-01..DS-14, the flag register — is listed on one page with one field to fill in. Choosing is a two-minute edit to a single JSON file; nothing is built until it is filled in.",
+      "why": "The board already has four overlapping suggestion registers (SG, DS, DP, plus the flag register) and two question registers. The cost of that is not duplication, it is that no single page answers “what do I decide next?”. Measured 2026-11-15: 10 canonical suggestions, 16 canonical questions, 38 flags, 14 marketing-board items, 3 review findings — all open, all awaiting the same person.",
+      "options": [
+        {
+          "id": "A",
+          "label": "One decision sheet listing every register, with a choice field per row and a link back to the owning page",
+          "tradeoff": "Recommended. Does not move or re-own anyone's register; it indexes them."
+        },
+        {
+          "id": "B",
+          "label": "Merge all registers into a single store",
+          "tradeoff": "Cleaner eventually, but it edits five namespaces owned by five sessions and renumbers published IDs."
+        },
+        {
+          "id": "C",
+          "label": "Leave the registers as they are",
+          "tradeoff": "The question “what do I decide next?” stays unanswered."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Low",
+      "risk": "An index can drift if a register grows. The gate re-computes the counts on every build.",
+      "evidence": [],
+      "blocked_by": [],
+      "relates_to": [
+        "SG-10"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-13",
+      "area": "Verification",
+      "title": "A visible “last verified” date on every page that states a fact",
+      "change": "Every page that prints a program rule or a product specification shows the date it was last checked against the source, and the page it was checked against.",
+      "why": "Both governing documents carry their own update dates and change without notice; the Operating Agreement currently reads “Updated: October 15, 2025”. A verified fact without a verification date is a fact with an unknown shelf life. Six sessions have now re-verified the same three links and reached different readings; the date is what lets a reader tell which reading is current.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Date stamp plus source link on every fact-bearing page; re-verification cadence set by the owner",
+          "tradeoff": "Recommended. Cheap to render, and it turns “verified” from a badge into a date."
+        },
+        {
+          "id": "B",
+          "label": "Date stamp only, no cadence",
+          "tradeoff": "Better than nothing; staleness still creeps in."
+        },
+        {
+          "id": "C",
+          "label": "No change",
+          "tradeoff": "Status quo."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Low",
+      "risk": "Low. Requires the cadence to be real, or the date becomes decoration.",
+      "evidence": [
+        "C-01",
+        "C-16"
+      ],
+      "blocked_by": [
+        "IN-05"
+      ],
+      "relates_to": [
+        "DS-13"
+      ],
+      "state": "proposed",
+      "decision": ""
+    },
+    {
+      "id": "P-14",
+      "area": "Editorial",
+      "title": "Write the six articles a buyer actually searches for, before any more infrastructure",
+      "change": "Six question-shaped articles, each answerable from specifications this project already holds and already sources: capacity, basket count, counter fit, temperature range, cleaning, and what the specifications disagree about.",
+      "why": "Amazon's own review standard is that a site “adds value to the customer by giving them insight on a subject or product they might not get easily”. Six question-shaped pages that a buyer types into a search box meet that; another dashboard does not. Organic search is explicitly allowed provided the result “send[s] users to your site” rather than straight to an Amazon page.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Six question articles first; infrastructure after",
+          "tradeoff": "Recommended. Every one of them is writable today from verified rows — no Associates account needed."
+        },
+        {
+          "id": "B",
+          "label": "Three product pages first, then the questions",
+          "tradeoff": "Product pages need the identity question settled (F-01..F-03) to be honest."
+        },
+        {
+          "id": "C",
+          "label": "Finish the automation platform first",
+          "tradeoff": "Builds tooling that has nothing to publish until the identity and account questions are answered."
+        }
+      ],
+      "recommended": "A",
+      "effort": "Medium",
+      "risk": "Each article must stay inside the sourcing rule — a value with no source is a blank, not a guess. The six shapes are drafted in console/design.html with the rule built in.",
+      "evidence": [
+        "C-17",
+        "C-13",
+        "C-21"
+      ],
+      "blocked_by": [
+        "Q-05",
+        "Q-11"
+      ],
+      "relates_to": [
+        "SG-04",
+        "DP-02",
+        "DS-14"
+      ],
+      "state": "proposed",
+      "decision": ""
+    }
+  ]
+}

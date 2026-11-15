@@ -4856,6 +4856,165 @@ dropped; `tools/audit_site.py`'s `namespaces` and `debris` checks both pass on t
 | Deliberately not touched | `ledger/**` (change requests CR-A…CR-D filed here instead of editing), `marketing/**` copy, `tools/audit_site.py`, `tools/build_sitemap.py`, `tools/seo_audit.py`, `tools/check_css_urls.py`, the four legacy companion namespaces |
 | Open items transferred to the owner | CR-A (F-20's control answers 403 through a non-browser client — wording), CR-B (P2 accessories: six per the listing title vs seven published, and the title itself is perishable), CR-C (P3 is a two-variant manufacturer page — say so), CR-D (never hand-edit the generated sitemap); plus the integration note that PR #104's `tools/page_meta.py` implements the same head-metadata contract and only one should survive |
 
+---
+
+## CLAIM — T42 — `arena/d26f42db-zone2` (2026-11-15 UTC)
+
+| Field | Value |
+|---|---|
+| Task ID | **T42** — renumbered on claim: `T40` was already claimed by three sessions that merged
+| | while this one was fetching sources (`b6defa90`, `08789ab3`, `3db75825`) and `T41` by `08789ab3`.
+| | No existing row was edited. Per the renumbering lesson above, the session id is the identity. |
+| Owner session | `arena/d26f42db-zone2` |
+| Branch | `arena/d26f42db-zone2` (branched from `main` @ `ceaf9a79`) |
+| Started | 2026-11-15 13:08 UTC |
+| Conflict | Claim commit hit a `COORDINATION.md` conflict against `origin/main` (`23c7fd2`, PR #96).
+| | Resolved by keeping the incoming block byte-for-byte and appending this claim at end of file. |
+| Status | in progress |
+
+### Scope (files this session owns)
+
+| Path | What it is |
+|---|---|
+| `console/**` | **Owner's Console** — new namespace: executive summary, suggestion board, information register, redesign prompt pack, repo review, flagged page, source register |
+| `console/data/*.json` | the dataset behind those pages |
+| `tools/build_console.py` | deterministic generator for `console/` (network-free) |
+| `tools/validate_console.py` | deploy gate for `console/` |
+| `COORDINATION.md` | this claim + the closing record (append-only, bottom of file) |
+
+### Explicitly NOT in scope (other sessions / already merged, not touched)
+
+`pages/**`, `ledger/**`, `decisions/**`, `marketing/**`, `journal/**`, `research-hub/**`,
+`revalidation/**`, `affiliate-lab/**`, `zone2/**`, `northstar/**`, `tools/*.py` (existing),
+`assets/**`, root `*.html` except one additive navigation link (recorded below).
+
+### Relationship to the canonical registers (no duplicate stores)
+
+- The canonical suggestion board stays `pages/suggestions.html` (`SG-01…SG-10`, session `2499438c`,
+  T29) and the canonical question register stays `pages/questions.html` (`Q-01…Q-16`). This session
+  does **not** copy, renumber or re-own them.
+- `console/` adds only **new** rows: proposals `P-01…` and information questions `IN-01…`, and each
+  row that touches an inherited item says so by ID and links back to it.
+- Two different open-PR scopes exist while this task runs: **PR #70** (`arena/cffe745a-zone2`,
+  `marketing/articles/**`) and **PR #90** (`arena/e4e7d4b2-zone2`, `COORDINATION.md` only, state
+  CONFLICTING). Neither is merged, closed or edited by this session. `COORDINATION.md` is edited
+  append-only at the end of file to keep #90 rebasable.
+
+### One shared-output edit, and why
+
+A single additive `<a>` is inserted into the root `index.html` navigation so the Owner's Console is
+reachable from the landing page (discoverability only — no text, data or layout change). It is the
+minimum that makes this namespace usable, and it is the only edit this session makes outside the
+scope table above. If it conflicts on push, it is re-applied on top of the incoming version rather
+than resolved by discarding the other side.
+
+### Verification performed (live fetches, 2026-11-15 UTC)
+
+Recorded row by row in `console/sources.html` and `console/review.html`; every row that states a
+value carries the official page it was read from, and anything not confirmed is left blank and
+flagged.
+---
+
+## Closing record — T42 — `arena/d26f42db-zone2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| Owner session | `arena/d26f42db-zone2` |
+| Branch | `arena/d26f42db-zone2` → `main` |
+| Task ID | **T42**. Claimed as T40 first; `b6defa90`, `08789ab3` and `3db75825` all claimed T40 (and `08789ab3` took T41) while this session was fetching sources. Renumbered rather than contended. No existing row was edited. |
+| Scope | `console/**`, `console/data/*.json`, `tools/build_console.py`, `tools/validate_console.py`, `docs/console-2026-11-15.md`, `COORDINATION.md` |
+| Written log | `docs/console-2026-11-15.md` |
+
+### What was built
+
+**`console/` — the Owner's Console**, 8 pages generated from 6 data files by `tools/build_console.py`, gated by
+`tools/validate_console.py`. Both run in CI (workflow steps 23–24).
+
+An **executive summary**, a **suggestion board** (14 proposals `P-01…P-14`, each with options, trade-offs, a
+recommendation, effort, risk, sources and what it waits on), an **information register** (15 questions an official
+source answers · 12 open questions `IN-01…IN-12` · an 11-item evidence inventory), a **redesign pack** (diagnosis,
+9 principles, voice rules with a banned-phrase list, 8 before/after rewrites of the actual published copy, 4 page
+templates, 6 articles, traffic rules, design tokens and a paste-ready brief), a **repository review** (13 namespaces,
+10 measurements, 28 source checks), a **decision sheet**, a **flagged page** (`IR-01…IR-09`) and a **source register**
+(`C-01…C-31`, all fetched 2026-11-15).
+
+### The central finding, and the correction this session had to make to it
+
+At the start of the review the root landing page opened with the client's own requirement list and a strip of
+audit-state KPIs. **That changed while the review was running**: session `f8e18ca8`'s redesign (PR #108) merged on
+2026-11-15 and removed both, reaching the same conclusion independently. This session re-measured after rebasing and
+**corrected its own finding rather than shipping the stale quote** — recorded as measurement MS-10, check VR-27, and
+a rewritten `IR-01`. Two traces remain and are flagged: the `AI-powered Amazon affiliate platform` heading (Program
+Content may not be used to develop ML models without express prior written approval, C-12) and the `Three links in.
+Three listings identified.` section heading, which is broader than flag F-03 confirms (C-06).
+
+### Verification performed (live fetches, 2026-11-15 UTC)
+
+31 sources, all fetched by this session and published with the verbatim sentence each supports
+(`console/sources.html`). Three classes kept strictly apart: **official** (Amazon Associates Operating Agreement,
+Program Policies incl. the Participation Requirements and Table 1, Application Review Process, Creators API, ASIN
+help; Google spam policies and generative-AI guidance; FTC Endorsement Guides), **observed** (the three supplied
+`link.amazon` links), and **control**.
+
+Controls reproduced: `link.amazon/B00TEST12` → 404; `link.amazon/B0CDY277D3` (a *valid* 10-character ASIN) → the
+identical 404, so the service does not accept ASINs at all. New observation: both control fetches were finally
+served from **amzlinks.in** (`IR-07`).
+
+No product price, no star rating and no performance estimate appears anywhere in this namespace. Every open question
+has an empty `answer` by design.
+
+### Gates run on the final rebased tree
+
+`build_console.py --check` · `validate_console.py` 0 errors · `build_site.py --check` · `build_root_views.py --check`
+· `build_summary.py --check` · `build_marketing.py --check` · `build_decisions.py --check` · `validate_data.py` ·
+`validate_decisions.py` · `audit_site.py` (5 checks PASS) · `check_css_urls.py` · `validate_audit.py` ·
+`test_audit.py` · `revalidation` build+verify · `research-hub/verify.py` · `marketing/verify_marketing.py` ·
+`affiliate-lab/verify_site.py` · `tests/test_pipeline.py` — **all PASS**. Tree-wide: 127 pages excluding the console,
+12 namespaces, 5,738 internal links, 0 broken, disclosure on 127/127.
+
+`validate_console.py` was negative-tested before being added: three injected defects (an unresolvable source id, a
+recommendation that is not one of the row's options, and an `implemented` state with no recorded choice) each fired.
+
+### Two engineering notes for whoever picks the board up next
+
+1. **Type no count that can be measured.** This session typed `116 pages / 11 namespaces` and it was wrong twice
+   before it shipped, because five sessions were merging into the tree at the same time. `tools/build_console.py`
+   now measures pages, namespaces, links, broken links, disclosure coverage and brand names at build time; the
+   review page renders those. It is still deterministic for a given commit (verified: two consecutive builds are
+   byte-identical), so `--check` keeps working.
+2. **A conflict on this file is almost always "both sides appended".** `COORDINATION.md` collided four times during
+   this session. The resolution is never to pick a side: keep the incoming text byte-for-byte and re-append yours at
+   the end. Real conflicts in shared *code* files were resolved the same way — the workflow got both sessions' CI
+   steps, `sitemap.xml` got the union of both URL sets.
+
+### Shared-file edits (all additive, all logged)
+
+| File | Edit |
+|---|---|
+| `index.html` | 3 links (one nav, one footer, one call-out). Resolved onto `f8e18ca8`'s redesigned page after a conflict; their version was taken whole and the links re-applied to it. |
+| `README.md` | One section describing `console/` |
+| `sitemap.xml` | 8 `<url>` entries; the conflict took the union of both sessions' additions |
+| `.github/workflows/pages.yml` | 2 steps for this namespace, plus `console/` added to 2 existing globs; the conflict kept the other session's steps and mine |
+
+### Left open for the owner
+
+An Associates ID (blocks all revenue) · confirmation of the intended product identifiers (`IN-01`, `Q-03`) · a named
+editor (`IN-04`, `Q-16`) · whether anyone has actually used the machines (`IN-07`, `Q-11`) · one public name and one
+public home (`IN-01`, `IN-02`) · a definition of done (`IN-12`). **Nothing on the console is implemented until those
+choices are recorded on `console/decisions.html`.**
+
+### Irregularities published (non-blocking)
+
+`IR-01` two overclaims on the redesigned landing page (medium) · `IR-02` 3 brands across 13 landing-page titles
+(medium) · `IR-03` the brief's ML premise needs Amazon's express prior written approval (high) · `IR-04` no page
+names a person (medium) · `IR-05` four overlapping suggestion registers (medium) · `IR-06` README says 37 pages where
+`pages/` holds 39 (low) · `IR-07` the short-link service hands off to `amzlinks.in` (low) · `IR-08` five open PRs
+from five sessions (low) · `IR-09` verified facts carry no verification date (medium).
+
+Checked and **not** re-flagged: the self-hosted font paths in `assets/css/style.css` resolve correctly (repaired by
+`1b839f87`); `tools/check_css_urls.py` initially reported them broken because it scanned CSS comments — `bbcc741f`'s
+fix (PR #116) is now on `main` and the gate passes.
+
 
 ---
 

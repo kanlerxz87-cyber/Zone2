@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Redesign pack — the Zone2 Owner's Console. Proposals, open questions and a redesign pack for the Amazon affiliate site. Nothing here is implemented until the owner records a choice.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/console/design.html">
+<title>Redesign pack · Zone2 Owner's Console</title>
+<style>
+:root{
+  --ink:#12161c; --ink-2:#3b444f; --ink-3:#6b7684; --line:#e3e7ec; --line-2:#eef1f4;
+  --paper:#ffffff; --bg:#f6f7f9; --accent:#1a56db; --accent-soft:#eaf0fe;
+  --warn:#8a4b00; --warn-bg:#fff5e6; --ok:#0f6b3f; --ok-bg:#e8f6ee;
+  --stop:#8a1c1c; --stop-bg:#fdeaea; --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.86em;background:var(--line-2);padding:.1em .35em;border-radius:3px}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.sidebar{background:var(--paper);border-right:1px solid var(--line);padding:20px 16px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:10px;align-items:center;font-weight:650;font-size:15px;color:var(--ink);margin-bottom:4px}
+.brand .mark{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;flex:0 0 auto}
+.brand small{display:block;font-weight:400;color:var(--ink-3);font-size:11.5px;letter-spacing:.02em}
+.side-label{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px;padding-left:8px}
+.nav a{display:block;padding:7px 9px;border-radius:7px;color:var(--ink-2);font-size:14px}
+.nav a:hover{background:var(--bg);text-decoration:none}
+.nav a.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.side-foot{margin-top:22px;padding:12px 9px;border-top:1px solid var(--line-2);font-size:11.5px;color:var(--ink-3)}
+.main{min-width:0}
+.topbar{border-bottom:1px solid var(--line);background:var(--paper);padding:12px 30px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.crumb{font-size:13px;color:var(--ink-3)}
+.crumb strong{color:var(--ink)}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12px;color:var(--ink-2)}
+.content{padding:30px;max-width:1080px}
+h1{font-size:29px;line-height:1.2;letter-spacing:-.02em;margin:0 0 8px}
+h2{font-size:20px;margin:34px 0 10px;letter-spacing:-.01em}
+h3{font-size:15.5px;margin:0 0 6px}
+.eyebrow{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:9px}
+.lede{font-size:17px;color:var(--ink-2);max-width:70ch;margin:0 0 6px}
+p{max-width:78ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+.card>h3:first-child{margin-top:0}
+.notice{background:var(--accent-soft);border:1px solid #c9d9fb;border-radius:10px;padding:13px 16px;margin:16px 0;font-size:14px;color:#1a3a7a}
+.notice strong{color:#12305f}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.kpi .num{font-size:26px;font-weight:660;letter-spacing:-.02em}
+.kpi .lbl{font-size:12px;color:var(--ink-3);margin-top:2px;line-height:1.35}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--paper);margin:14px 0}
+table caption{text-align:left;font-size:12px;color:var(--ink-3);padding:10px 14px;border-bottom:1px solid var(--line-2)}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line-2)}
+th{background:#fafbfc;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);font-weight:600;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fcfdfe}
+th.n,td.n{white-space:nowrap}
+td.id{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.pill{display:inline-block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:650;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.p-open{background:var(--warn-bg);color:var(--warn)}
+.p-ok{background:var(--ok-bg);color:var(--ok)}
+.p-stop{background:var(--stop-bg);color:var(--stop)}
+.p-info{background:#eef1f5;color:var(--ink-2)}
+.src{display:inline-block;margin:2px 4px 2px 0;font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:5px;padding:2px 6px;color:var(--ink-2);background:#fbfcfd}
+.src:hover{border-color:var(--accent);text-decoration:none}
+.src .h{color:var(--ink-3);margin-left:4px}
+.blank{display:inline-block;color:var(--ink-3);font-style:italic;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:5px 0;max-width:78ch}
+ol.tight{margin:8px 0;padding-left:20px}ol.tight li{margin:6px 0;max-width:78ch}
+.proposal{border:1px solid var(--line);border-radius:12px;background:var(--paper);margin:14px 0;overflow:hidden}
+.proposal>.head{padding:15px 20px;border-bottom:1px solid var(--line-2);display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.proposal .pid{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.proposal h3{font-size:17px;margin:2px 0 0}
+.proposal .body{padding:16px 20px}
+.proposal dl{margin:0}
+.proposal dt{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 4px}
+.proposal dt:first-child{margin-top:0}
+.proposal dd{margin:0;font-size:14.5px;max-width:80ch}
+.opts{list-style:none;margin:0;padding:0}
+.opts li{border:1px solid var(--line);border-radius:9px;padding:11px 14px;margin:8px 0;font-size:14px}
+.opts li.rec{border-color:#b9cdf7;background:#f7faff}
+.opts .l{font-weight:600}
+.opts .t{color:var(--ink-2);display:block;margin-top:3px;font-size:13.5px}
+.tag{display:inline-block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:650;padding:2px 7px;border-radius:5px;background:#eef1f5;color:var(--ink-2);margin-left:6px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:10px 0}
+.ba>div{padding:13px 16px;font-size:13.5px}
+.ba .b{background:#fdf7f7;border-right:1px solid var(--line)}
+.ba .a{background:#f5fbf7}
+.ba .lab{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px;font-weight:650}
+pre.prompt{white-space:pre-wrap;word-wrap:break-word;background:#0f1419;color:#e6edf3;border-radius:11px;padding:18px 20px;font-family:var(--mono);font-size:12.5px;line-height:1.62;overflow-x:auto;margin:12px 0}
+.prompt-bar{display:flex;gap:8px;align-items:center;margin:10px 0}
+button.copy{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+button.copy:hover{background:#000}
+.banned td:first-child{font-family:var(--mono);font-size:12px}
+footer.site{border-top:1px solid var(--line);background:var(--paper);padding:22px 30px;margin-top:34px;color:var(--ink-3);font-size:12.5px}
+footer.site .disc{color:var(--ink-2);font-size:13.5px;margin-bottom:8px}
+footer.site a{color:var(--ink-2)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+.meta{font-size:12px;color:var(--ink-3);margin-top:4px}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .content{padding:20px}
+  .ba{grid-template-columns:1fr}
+  .ba .b{border-right:0;border-bottom:1px solid var(--line)}
+}
+</style>
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="../index.html"><span class="mark">Z</span><span>Zone2<small>Owner's Console</small></span></a>
+  <div class="side-label">Decide before building</div>
+  <nav class="nav"><a class="nav-link" href="index.html">Owner&#x27;s Console</a><a class="nav-link" href="suggestions.html">Suggestion board</a><a class="nav-link" href="questions.html">Information register</a><a class="nav-link active" href="design.html">Redesign pack</a><a class="nav-link" href="review.html">Repository review</a><a class="nav-link" href="decisions.html">Decision sheet</a><a class="nav-link" href="flagged.html">Flagged for review</a><a class="nav-link" href="sources.html">Source register</a></nav>
+  <div class="side-foot">Every row on these pages is a proposal.<br><strong>Nothing here has been implemented.</strong></div>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="crumb"><a href="../index.html">Zone2</a> / <strong>Redesign pack</strong></div>
+    <div><span class="chip">session arena/d26f42db-zone2</span> <span class="chip">2026-11-15</span> <a class="chip" href="decisions.html">Record a decision</a></div>
+  </div>
+  <div class="content" id="main">
+    <div class="eyebrow">diagnosis, voice, before/after, templates, six articles, and a paste-ready brief · 2026-11-15</div>
+    <h1>Redesign pack</h1>
+    <p class="lede">Why the site reads as machine output, and the concrete rewrite that fixes it — with every hard constraint traced to the official page that imposes it.</p>
+    
+    
+<div class="notice"><strong>Read the diagnosis first.</strong> Everything in this pack follows from one finding:
+the site describes itself instead of answering the reader. Fixing the tone without fixing that produces better-sounding
+copy about a project status report.</div>
+
+<div class="card">
+  <h3>Diagnosis</h3>
+  <p><strong>The site described itself instead of answering the reader. A redesign merged mid-review has fixed the worst of it; two traces remain.</strong></p>
+  <p>Measured 2026-11-15 from the published pages. At the start of this review the root landing page opened its executive summary with the client&#x27;s own requirement list, verbatim (“The job. Build an affiliate marketing platform that researches products, finds trending and high-converting niches, analyzes pricing …”), and its headline figure strip reported the project&#x27;s audit state (“3 of 3 Supplied links that resolve…”, “0 of 3 Brief product mappings confirmed by an official Amazon document (F-03)”, count of items on the Flagged register). CORRECTION, same day: session f8e18ca8&#x27;s redesign (PR #108) merged while this review was running and removed both. The page now opens “Affiliate content you can check, not just read.” Two traces of the same problem remain: the “AI-powered Amazon affiliate platform” heading, and the section heading “Three links in. Three listings identified.”, which is broader than what flag F-03 confirms.</p>
+  <p>Not because the sentences are badly written — they are not. Because every sentence was about the site rather than about the reader&#x27;s problem. Machine-sounding copy is usually copy with no stake in it: it describes, it does not choose. The redesign proves the point from the other direction: the moment the page started answering a reader, it stopped sounding like machine output. What is left is the same failure in two headlines instead of a whole page.</p>
+  <p class="meta">Evidence: <a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow" title="Application Review Process — what Amazon says a good affiliate site is">C-17 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Site reputation policy (authorship factor)">C-22 <span class="h">developers.google.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §5, machine learning on Program Content">C-12 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §2(b), claims about Products">C-06 <span class="h">affiliate-program.amazon.com</span></a> · flagged as IR-01, IR-02</p>
+</div>
+
+<h2>1. Nine principles</h2>
+<div class="tw"><table>
+<caption>Marked <strong>rule</strong> where an official source requires it, <strong>craft</strong> where it is a house-style judgment by this session. Judgments are never presented as program facts.</caption>
+<thead><tr><th>ID</th><th>Principle</th><th>The rule</th><th>Kind</th><th>Source</th></tr></thead>
+<tbody><tr><td class='id'>DP-01</td><td><strong>Answer in the first sentence.</strong></td><td>The opening line states the conclusion the rest of the page defends. No preamble, no “in today&#x27;s market”, no description of what the article will do.</td><td><span class="pill p-open">craft</span></td><td><span class="blank">no source cited — judgment or measurement</span></td></tr><tr><td class='id'>DP-02</td><td><strong>Never write a sentence that is true of every product on the shelf.</strong></td><td>If the same sentence could sit on a competitor&#x27;s page unchanged, delete it. Test: swap the product name. If the sentence still reads fine, it is filler.</td><td><span class="pill p-open">craft</span></td><td><span class="blank">no source cited — judgment or measurement</span></td></tr><tr><td class='id'>DP-03</td><td><strong>Every claim has a row beneath it.</strong></td><td>A specification, a comparison or a verdict is printed only if the row that justifies it is printed too, with its source link. A value with no source is a dash, not a guess.</td><td><span class="pill p-info">rule</span></td><td><a class="src" href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Guidance on using generative AI content (human fact-check)">C-24 <span class="h">developers.google.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §2(b), claims about Products">C-06 <span class="h">affiliate-program.amazon.com</span></a></td></tr><tr><td class='id'>DP-04</td><td><strong>Say what you could not find out.</strong></td><td>A page that names its own gaps is more useful and more credible than one that implies total knowledge. Put the open items on the page, dated.</td><td><span class="pill p-info">rule</span></td><td><a class="src" href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Guidance on using generative AI content (human fact-check)">C-24 <span class="h">developers.google.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow" title="Application Review Process — what Amazon says a good affiliate site is">C-17 <span class="h">affiliate-program.amazon.com</span></a></td></tr><tr><td class='id'>DP-05</td><td><strong>The page is for a reader; the provenance is for the footer.</strong></td><td>Sourcing notes, verification counts and register sizes are working documents. They belong under the article, on one internal page, never in the hero.</td><td><span class="pill p-open">craft</span></td><td><span class="blank">no source cited — judgment or measurement</span></td></tr><tr><td class='id'>DP-06</td><td><strong>No prices, no star ratings, no price alerts — ever, until the data source exists.</strong></td><td>Not a style preference. Prices require an Amazon-served link or Creators API; ratings require Creators API or PA API; price tracking is prohibited unless Amazon agrees.</td><td><span class="pill p-info">rule</span></td><td><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §2(b), prices and availability">C-05 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §6(t), customer reviews and star ratings">C-09 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §6(y), price tracking">C-10 <span class="h">affiliate-program.amazon.com</span></a></td></tr><tr><td class='id'>DP-07</td><td><strong>A person&#x27;s name goes on the page.</strong></td><td>Author or responsible editor, plus one line on how the piece was made and checked. No invented bylines — an unnamed page is better than a fake name.</td><td><span class="pill p-info">rule</span></td><td><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Site reputation policy (authorship factor)">C-22 <span class="h">developers.google.com</span></a><a class="src" href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Guidance on using generative AI content (human fact-check)">C-24 <span class="h">developers.google.com</span></a><a class="src" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer nofollow" title="FTC — Endorsement Guides: What People Are Asking">C-25 <span class="h">www.ftc.gov</span></a></td></tr><tr><td class='id'>DP-08</td><td><strong>Ten good pages, not two hundred thin ones.</strong></td><td>Volume generated to rank, without added value, is a spam-policy violation regardless of how it was made. Add a page only when it says something the others cannot.</td><td><span class="pill p-info">rule</span></td><td><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Scaled content abuse">C-20 <span class="h">developers.google.com</span></a><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Thin affiliation">C-21 <span class="h">developers.google.com</span></a></td></tr><tr><td class='id'>DP-09</td><td><strong>Disclose where the click is, not only in the footer.</strong></td><td>The Associates sentence appears on every page; where an outbound product link sits, the commercial nature is visible next to it, and outbound links are qualified with rel=&quot;sponsored&quot;.</td><td><span class="pill p-info">rule</span></td><td><a class="src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow" title="Associates Program Operating Agreement — Section 5, Identifying Yourself as an Associate">C-01 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Link spam (affiliate links are permitted when qualified)">C-23 <span class="h">developers.google.com</span></a><a class="src" href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer nofollow" title="FTC — Endorsement Guides: What People Are Asking">C-25 <span class="h">www.ftc.gov</span></a></td></tr></tbody></table></div>
+
+<h2>2. Voice</h2>
+<div class="card">
+  <h3>Do</h3><ul class="tight"><li>Open with the answer, in one sentence, in plain words.</li><li>Name the trade-off out loud. “Two baskets means two things finish together and two things to wash.”</li><li>Use the number you actually have. “6 Qt, in two 3 Qt baskets” beats “generous capacity”.</li><li>Write to one reader: a household cooking for two to four people on a normal counter.</li><li>Use short sentences after long ones. Vary length; do not perform it.</li><li>Say when two official pages disagree, and say which one you used and why.</li><li>Put the limitation in the same paragraph as the claim.</li></ul>
+</div>
+<div class="tw"><table class="banned">
+<caption>Phrases to delete on sight. The reason column says why each one fails, not merely that it is clich&eacute;d.</caption>
+<thead><tr><th>Phrase</th><th>Why it goes</th></tr></thead>
+<tbody><tr><td>In today&#x27;s fast-paced world</td><td>Says nothing about the product. Delete the whole opening.</td></tr><tr><td>When it comes to</td><td>A delay. Start with the subject.</td></tr><tr><td>It&#x27;s important to note that</td><td>If it matters, just say it.</td></tr><tr><td>Look no further</td><td>Advertising copy from 1998. It also implies a recommendation the site cannot yet support.</td></tr><tr><td>Game-changer / revolutionary / cutting-edge</td><td>Unverifiable, and “must not make inaccurate, overbroad, deceptive or otherwise misleading claims” applies.</td></tr><tr><td>Seamless / effortless / elevate / unlock / leverage</td><td>Abstract verbs that hide the absence of a fact.</td></tr><tr><td>The ultimate guide / the comprehensive guide</td><td>Promise, not content. Name what the page actually answers.</td></tr><tr><td>Delve into / dive into / explore the world of</td><td>Machine filler.</td></tr><tr><td>Whether you&#x27;re a busy parent or a professional chef</td><td>Fake audience. Pick one reader.</td></tr><tr><td>Let&#x27;s take a closer look</td><td>Just take the closer look.</td></tr><tr><td>Best / cheapest / top-rated</td><td>Superlatives the site has no sourced basis for, and an invitation to a misleading claim.</td></tr></tbody></table></div>
+<p class="meta">Source for the claim-accuracy entries: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §2(b), claims about Products">C-06 <span class="h">affiliate-program.amazon.com</span></a></p>
+
+<h2>3. Before and after, on the actual published copy</h2>
+<p>Every <em>before</em> line is quoted from the live site as read on 2026-11-15. Every <em>after</em> line is a draft by
+this session &mdash; a proposal, not a shipped change. Values in braces are filled from
+<code>ledger/products.json</code> by the generator and are never typed by hand.</p>
+<div class="card" id="RW-01">
+      <h3>index.html — executive summary, opening line (SUPERSEDED: removed by the PR #108 redesign on 2026-11-15, after this review quoted it)</h3>
+      <div class="ba">
+        <div class="b"><div class="lab">Before — as published</div>The job. Build an affiliate marketing platform that researches products, finds trending and high-converting niches, analyzes pricing, reviews, competition and commission potential, generates SEO-optimized articles, comparisons and buying guides, manages affiliate links, tracks clicks and conversions, and keeps optimizing campaigns — automatically, at scale, and compliantly.</div>
+        <div class="a"><div class="lab">After — draft, not shipped</div>Three air fryers are on the counter. One has two baskets, one is an oven that air fries, one is the biggest single basket of the three. Here is what actually separates them — and one thing we still cannot tell you.</div>
+      </div>
+      <p class="meta">The before line is the client&#x27;s requirement list. The after line is the reason a reader clicked. Nothing in the before line is a fact a buyer can use.</p>
+    </div><div class="card" id="RW-02">
+      <h3>index.html — the KPI strip (SUPERSEDED: removed by the PR #108 redesign on 2026-11-15, after this review quoted it)</h3>
+      <div class="ba">
+        <div class="b"><div class="lab">Before — as published</div>3 of 3 Supplied links that resolve, reproducibly, to one specific Amazon listing (re-observed 2026-11-15) · 0 of 3 Brief product mappings confirmed by an official Amazon document (F-03) · 1 category Shared category of the three resolved destinations — Air Fryers · 4.00% Official “All Other Categories” rate</div>
+        <div class="a"><div class="lab">After — draft, not shipped</div>Capacity <code>{p1_capacity}</code> · <code>{p2_capacity}</code> · <code>{p3_capacity}</code> — and the one that splits into two baskets is the <code>{two_basket_model}</code>. Temperature range <code>{p1_temp}</code> to <code>{p3_temp}</code>. Footprint: check the clearance under your cabinets before you choose the oven.</div>
+      </div>
+      <p class="meta">The before strip reports on the project&#x27;s own audit state. The after strip is the comparison a buyer came for, and every value in it comes from a sourced row rather than being typed.</p>
+    </div><div class="card" id="RW-03">
+      <h3>index.html — &#x27;Every capability is built around one discipline&#x27;</h3>
+      <div class="ba">
+        <div class="b"><div class="lab">Before — as published</div>Every capability is built around one discipline: a value appears on this site only when an official source states it, and each row carries the link to the page it was read from.</div>
+        <div class="a"><div class="lab">After — draft, not shipped</div>Every number here comes off a manufacturer&#x27;s own specification sheet or the listing itself, on a date you can check. Where the two disagree we print both and say which we used. Where neither says anything, we print a dash.</div>
+      </div>
+      <p class="meta">Same discipline, in the reader&#x27;s terms. The before sentence describes a process; the after sentence tells the reader what they can rely on.</p>
+    </div><div class="card" id="RW-04">
+      <h3>Any product page — the price and rating slots</h3>
+      <div class="ba">
+        <div class="b"><div class="lab">Before — as published</div>Price — blank. Rating — blank. Availability — blank. (Correctly left blank today.)</div>
+        <div class="a"><div class="lab">After — draft, not shipped</div>We do not show prices or star ratings. Amazon only allows prices that Amazon itself serves or that come through its product API, and ratings only through that API. Neither is available to this site yet, so we print neither rather than copying a number that may be out of date by tomorrow.</div>
+      </div>
+      <p class="meta">A blank cell is correct but baffling on its own. One sentence turns a gap into a reason to trust the page.</p>
+    </div><div class="card" id="RW-05">
+      <h3>Product page — opening paragraph</h3>
+      <div class="ba">
+        <div class="b"><div class="lab">Before — as published</div>The Chefman TurboFry Touch is a 6-quart dual-basket air fryer that combines…</div>
+        <div class="a"><div class="lab">After — draft, not shipped</div>Two 3-quart baskets that finish together, or one 6-quart space for a whole chicken. That is the only real question on this page, and the answer depends on what you cook on a Tuesday.</div>
+      </div>
+      <p class="meta">The before line restates the specification table that sits directly below it. The after line tells the reader what the specification means for them.</p>
+    </div><div class="card" id="RW-06">
+      <h3>Article footer — provenance</h3>
+      <div class="ba">
+        <div class="b"><div class="lab">Before — as published</div>Blank means unverified — never guessed.</div>
+        <div class="a"><div class="lab">After — draft, not shipped</div>Written and checked by <code>{editor_name}</code> on <code>{check_date}</code> against the manufacturer&#x27;s specification sheet and the listing. Specifications last verified <code>{verified_date}</code>. Affiliate disclosure: as an Amazon Associate I earn from qualifying purchases.</div>
+      </div>
+      <p class="meta">The slogan is good; the dated, named version is evidence. It also satisfies the authorship factor Google says it weighs.</p>
+    </div><div class="card" id="RW-07">
+      <h3>index.html — hero heading, as it stands now</h3>
+      <div class="ba">
+        <div class="b"><div class="lab">Before — as published</div>AI-powered Amazon affiliate platform</div>
+        <div class="a"><div class="lab">After — draft, not shipped</div>Three air fryers, checked against their own spec sheets</div>
+      </div>
+      <p class="meta">Two reasons. The reader came for a product, not a technology. And Program Content may not be used to develop machine-learning models without Amazon&#x27;s express prior written approval — so the heading advertises a capability the project has not been granted. The supporting line below it can carry the method without the claim.</p>
+    </div><div class="card" id="RW-08">
+      <h3>index.html — section heading above the three products, as it stands now</h3>
+      <div class="ba">
+        <div class="b"><div class="lab">Before — as published</div>Three links in. Three listings identified.</div>
+        <div class="a"><div class="lab">After — draft, not shipped</div>Three links in. Three listings they resolve to.</div>
+      </div>
+      <p class="meta">One word, and it is the difference between what is verified and what is not. The supplied codes are nine characters where an ASIN is ten, and no official document binds them to the products they land on — that is flag F-03. Amazon&#x27;s own rule is that a claim about a product must not be “overbroad”. The body text already says this carefully; the heading should agree with it.</p>
+    </div>
+
+<h2>4. Page templates</h2>
+<div class="card"><h3>Home</h3>
+      <div class="tw"><table><thead><tr><th>#</th><th>Section</th><th>Budget</th></tr></thead><tbody><tr><td class='n'>1</td><td>One sentence: what this site is and who it is for</td><td class='n'>15 words</td></tr><tr><td class='n'>2</td><td>The three machines, one line each, with the number that separates them</td><td class='n'>60 words</td></tr><tr><td class='n'>3</td><td>Start here: three routes — which should I buy / compare them / what size do I need</td><td class='n'>30 words</td></tr><tr><td class='n'>4</td><td>The newest article, linked in prose not as a card grid</td><td class='n'>40 words</td></tr><tr><td class='n'>5</td><td>What we cannot tell you yet, in one honest sentence</td><td class='n'>25 words</td></tr><tr><td class='n'>6</td><td>Affiliate disclosure, visible above the fold</td><td class='n'>required</td></tr></tbody></table></div>
+      <p class="meta">No dashboard widgets, no counts, no register sizes. Nothing about how the site is built.</p></div><div class="card"><h3>Product page</h3>
+      <div class="tw"><table><thead><tr><th>#</th><th>Section</th><th>Budget</th></tr></thead><tbody><tr><td class='n'>1</td><td>Verdict: one sentence</td><td class='n'>20 words</td></tr><tr><td class='n'>2</td><td>Who it suits / who it does not</td><td class='n'>60 words</td></tr><tr><td class='n'>3</td><td>The three numbers that separate it from the other two</td><td class='n'>80 words, each number linked to its row</td></tr><tr><td class='n'>4</td><td>Full specification table: one source link per row, blanks stated</td><td class='n'>table</td></tr><tr><td class='n'>5</td><td>Where the official pages disagree, if they do</td><td class='n'>60 words</td></tr><tr><td class='n'>6</td><td>What we could not verify, dated</td><td class='n'>40 words</td></tr><tr><td class='n'>7</td><td>Byline, how it was checked, disclosure</td><td class='n'>required</td></tr></tbody></table></div>
+      <p class="meta">Price and rating slots are not part of this template. See DP-06.</p></div><div class="card"><h3>Comparison</h3>
+      <div class="tw"><table><thead><tr><th>#</th><th>Section</th><th>Budget</th></tr></thead><tbody><tr><td class='n'>1</td><td>The decision in one sentence: which of these for which reader</td><td class='n'>25 words</td></tr><tr><td class='n'>2</td><td>Side-by-side table of only the rows that differ</td><td class='n'>table, 6-10 rows</td></tr><tr><td class='n'>3</td><td>Three scenarios: pick one product per scenario and say why</td><td class='n'>150 words</td></tr><tr><td class='n'>4</td><td>The rows that are blank, and why</td><td class='n'>40 words</td></tr><tr><td class='n'>5</td><td>Byline, how it was checked, disclosure</td><td class='n'>required</td></tr></tbody></table></div>
+      <p class="meta">A comparison table of identical rows is not a comparison. Only the rows that differ earn a place.</p></div><div class="card"><h3>Question-shaped guide</h3>
+      <div class="tw"><table><thead><tr><th>#</th><th>Section</th><th>Budget</th></tr></thead><tbody><tr><td class='n'>1</td><td>The question as the reader types it, as the H1</td><td class='n'>10 words</td></tr><tr><td class='n'>2</td><td>The answer, in the first two sentences</td><td class='n'>40 words</td></tr><tr><td class='n'>3</td><td>The reasoning, from sourced rows only</td><td class='n'>300-600 words</td></tr><tr><td class='n'>4</td><td>The exception — when the answer is the other one</td><td class='n'>80 words</td></tr><tr><td class='n'>5</td><td>Links to the two product pages this answer points at</td><td class='n'>2 links</td></tr><tr><td class='n'>6</td><td>Byline, how it was checked, disclosure</td><td class='n'>required</td></tr></tbody></table></div>
+      <p class="meta">This is the template that earns organic traffic. It answers a question instead of describing a product.</p></div>
+
+<h2>5. The six articles to write first</h2>
+<div class="tw"><table>
+<caption>Each is answerable today from rows the project already holds and already sources. No Associates account, no API, no new data.</caption>
+<thead><tr><th>ID</th><th>Headline</th><th>Question it answers</th><th>Sourced from</th><th>Why it earns traffic</th><th>Status</th></tr></thead>
+<tbody><tr><td class='id'>AR-01</td><td><strong>How many quarts do you actually need?</strong></td><td>What capacity suits a household of one, two, four, six?</td><td>Capacity rows in ledger/products.json, manufacturer pages</td><td>Typed verbatim by buyers. Answerable from data the site already has.</td><td>proposed</td></tr><tr><td class='id'>AR-02</td><td><strong>Two baskets or one big one?</strong></td><td>When does a divided basket beat a single large chamber?</td><td>Basket configuration and capacity rows</td><td>The genuine decision in this category, and the clearest difference between the three machines.</td><td>proposed</td></tr><tr><td class='id'>AR-03</td><td><strong>Will it fit under your cabinets?</strong></td><td>What footprint and clearance does each model need?</td><td>Dimensions rows, manufacturer pages</td><td>The most common return reason for a countertop appliance, and almost never answered on a listing.</td><td>proposed</td></tr><tr><td class='id'>AR-04</td><td><strong>What does “Hi-Fry” actually do?</strong></td><td>What the marketing term means in degrees and in practice.</td><td>Temperature-range rows, manufacturer pages</td><td>Brand-feature searches are low-competition and high-intent.</td><td>proposed</td></tr><tr><td class='id'>AR-05</td><td><strong>Why two official pages disagree about the same machine</strong></td><td>When the listing and the manufacturer say different things, which do you believe?</td><td>The recorded disagreements between the listing and the manufacturer page</td><td>Genuinely differentiated — almost no affiliate site publishes its sources arguing with each other. Also the strongest trust signal the site has.</td><td>partly published at marketing/topics/why-two-official-pages-disagree.html</td></tr><tr><td class='id'>AR-06</td><td><strong>What is dishwasher safe, and what is not</strong></td><td>Which parts of each machine go in the dishwasher?</td><td>Care and materials rows, manufacturer pages</td><td>Ownership question, searched after the purchase decision, and it brings the reader back.</td><td>proposed</td></tr></tbody></table></div>
+
+<h2>6. Traffic: what is allowed and what is not</h2>
+<div class="card"><h3>Allowed</h3><ul class="tight"><li>Answer the question the reader typed, in the first two sentences <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §6(f), organic search must land on your own site">C-13 <span class="h">affiliate-program.amazon.com</span></a></li><li>Link from every guide to the product page it points at, and back <a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Thin affiliation">C-21 <span class="h">developers.google.com</span></a><a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Site reputation policy (authorship factor)">C-22 <span class="h">developers.google.com</span></a></li><li>Qualify every outbound affiliate anchor with rel=&quot;sponsored&quot; <a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Link spam (affiliate links are permitted when qualified)">C-23 <span class="h">developers.google.com</span></a></li><li>Publish the source beside every number so the page is checkable <a class="src" href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Guidance on using generative AI content (human fact-check)">C-24 <span class="h">developers.google.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow" title="Application Review Process — what Amazon says a good affiliate site is">C-17 <span class="h">affiliate-program.amazon.com</span></a></li><li>Name the author and the check date <a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Site reputation policy (authorship factor)">C-22 <span class="h">developers.google.com</span></a><a class="src" href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Guidance on using generative AI content (human fact-check)">C-24 <span class="h">developers.google.com</span></a></li></ul></div>
+<div class="card"><h3>Forbidden</h3><ul class="tight"><li>Generating many pages to rank rather than to answer — the first example Google gives of scaled content abuse <a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Scaled content abuse">C-20 <span class="h">developers.google.com</span></a></li><li>Copying listing or manufacturer descriptions with nothing added — thin affiliation <a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Thin affiliation">C-21 <span class="h">developers.google.com</span></a></li><li>Sending search traffic straight to an Amazon URL, or through a redirect <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §6(f), organic search must land on your own site">C-13 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §6(v) and §6(w), cloaking and link shorteners">C-11 <span class="h">affiliate-program.amazon.com</span></a></li><li>Any page whose purpose is to rank rather than to be read <a class="src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Spam policies, Scaled content abuse">C-20 <span class="h">developers.google.com</span></a></li><li>Publishing before a person has checked it <a class="src" href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow" title="Google Search Central — Guidance on using generative AI content (human fact-check)">C-24 <span class="h">developers.google.com</span></a></li></ul></div>
+
+<h2>7. Design system</h2>
+<div class="card">
+  <h3>Type</h3>
+  <ul class="tight">
+    <li>Body: System sans, 18px / 1.65, measure 62-68 characters</li>
+    <li>Display: One serif face for headlines only, 40/48/32/24px steps</li>
+    <li>Mono: Used for ASINs, source IDs and table keys only</li>
+  </ul>
+  <h3>Colour</h3><p>One accent for links and verdicts. Neutral greys for everything else. No gradients, no glassmorphism, no coloured KPI tiles.</p><p class="meta">The KPI-tile look is what makes the current site read as a dashboard. Text and one accent read as an article.</p>
+  <h3>Layout</h3><p>Single reading column, 720px. Tables may break out to the full width. No card grids above the fold.</p><p class="meta">Card grids are a directory pattern. A buyer comparing three things needs a table, not a gallery.</p>
+  <h3>Components</h3><ul class="tight"><li>Verdict box — one sentence, top of a product page, before anything else</li><li>Source chip — a small link with the host name, at the end of every table row</li><li>Open-item box — what could not be verified, dated, at the foot of the page</li><li>Provenance line — author, check date, verification date, disclosure; one line, foot of the article</li><li>Comparison table — only the rows that differ</li></ul>
+  <h3>Components that must not exist</h3>
+  <ul class="tight"><li>A price component of any kind</li><li>A star-rating component of any kind</li><li>A price-alert or price-drop component of any kind</li></ul>
+  <p class="meta">Source: <a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §2(b), prices and availability">C-05 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §6(t), customer reviews and star ratings">C-09 <span class="h">affiliate-program.amazon.com</span></a><a class="src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow" title="Program Policies — Participation Requirements §6(y), price tracking">C-10 <span class="h">affiliate-program.amazon.com</span></a></p>
+</div>
+
+<h2>8. The brief, ready to paste</h2>
+<p>Everything above, condensed into one brief that can be handed to any writer, designer or model. Constraints marked
+<code>[rule]</code> are quoted from official sources and may not be relaxed; <code>[craft]</code> is house style.</p>
+<div class="prompt-bar"><button class="copy" type="button" onclick="var t=document.getElementById('prompt');navigator.clipboard.writeText(t.innerText);this.innerText='Copied';setTimeout(function(){this.innerText='Copy the brief'}.bind(this),1600)">Copy the brief</button><span class="meta">590 words</span></div>
+<pre class="prompt" id="prompt">You are writing and designing one page of an Amazon affiliate site about three countertop air fryers.
+
+THE READER
+One person cooking for two to four people on a normal kitchen counter, deciding which of three machines to buy. They arrived from a search. They have not heard of this site and do not care how it is built.
+
+HARD RULES [rule] — these come from Amazon&#x27;s Operating Agreement and Program Policies and Google&#x27;s published spam policies; they cannot be relaxed.
+1. The page must state, clearly and prominently: “As an Amazon Associate I earn from qualifying purchases.”
+2. Print no product price and no star rating. Prices are allowed only if Amazon serves the link containing them or the data comes from Creators API; ratings only through Creators API. Neither is available. Where a price or rating would go, print a dash and one sentence explaining why.
+3. Never build price tracking or price alerts.
+4. Make no inaccurate, overbroad, deceptive or misleading claim about any product. No “best”, no “cheapest”, no superlative you cannot defend from a row on the page.
+5. Make no claim about expected traffic or commission income.
+6. Do not copy the listing&#x27;s or the manufacturer&#x27;s description. Add something, or do not write the paragraph.
+7. Do not send the reader straight to an Amazon URL, or through a redirect. Links go to Amazon product pages from this page, one click, rel=&quot;sponsored&quot;.
+8. Every outbound link must be clearly a link to Amazon — no cloaked URLs, no hidden destinations.
+9. No claim may appear without the row that justifies it and the official page that row came from. A value with no source is a dash, never a guess.
+10. Nothing may be published until a named person has fact-checked it against its sources.
+
+CRAFT RULES [craft] — house style, not policy.
+11. Open with the answer. One sentence, under 25 words, before any context.
+12. Delete any sentence that would still be true if you swapped the product name.
+13. Write to one reader in the second person. No “whether you&#x27;re a busy parent or a professional chef”.
+14. Use the number you actually have. “6 Qt in two 3 Qt baskets”, not “generous capacity”.
+15. Name the trade-off in the same breath as the benefit.
+16. Never use: in today&#x27;s fast-paced world; when it comes to; it&#x27;s important to note that; look no further; game-changer; revolutionary; cutting-edge; seamless; effortless; elevate; unlock; leverage; delve into; the ultimate guide; the comprehensive guide; let&#x27;s take a closer look.
+17. No card grids above the fold. One reading column. A table where a comparison belongs.
+18. Say what you could not find out, dated, on the page.
+
+PAGE STRUCTURE
+Product page: verdict (1 sentence) → who it suits and who it does not → the three numbers that separate it → full specification table with a source link per row → where the official pages disagree → what we could not verify → byline, how it was checked, disclosure.
+Question guide: the reader&#x27;s question as the headline → the answer in the first two sentences → the reasoning from sourced rows → the exception, when the answer is the other one → links to the two product pages this answer points at → byline, how it was checked, disclosure.
+
+BEFORE YOU FINISH
+Re-read the page and delete every sentence that describes the site, the process, the sources or the verification effort rather than the product. Then check every number against its row. Then sign it.</pre>
+
+  </div>
+  <footer class="site">
+    <div class="disc"><strong>Disclosure</strong> As an Amazon Associate I earn from qualifying purchases. Outbound links are qualified with <code>rel="sponsored"</code>.</div>
+    <div class="meta">Owner's Console · task T42 · session arena/d26f42db-zone2 · generated by <code>tools/build_console.py</code> from <code>console/data/*.json</code> · edit the data, never the HTML · <a href="../index.html">Dashboard</a> · <a href="../pages/suggestions.html">Canonical suggestion board</a> · <a href="../pages/questions.html">Canonical questions</a> · <a href="../pages/flags.html">Project flags</a></div>
+  </footer>
+</main>
+</div>
+</body>
+</html>
