@@ -3193,6 +3193,66 @@ The independent T29 suggestions/questions deliverable merged via PR #61 while th
 
 No new product, performance, demand, or revenue figures were added. The destination mapping/account/API questions remain open in the canonical Questions register, with no inferred values.
 
+---
+
+## T29 handover record — `arena/d0135100-zone2` (session `d0135100`, 2026-11-15)
+
+### What happened: a duplicate claim, and how it was resolved
+
+This session claimed **T29** at 2026-11-15 on baseline `e030c40` and built a suggestions register, a questions
+register, a requirements register and a decision gate. **While it worked, session `2499438c` claimed the same
+task id and merged PR #61**, shipping `ledger/suggestions.json` (10 suggestions, options A/B/C, a recommendation,
+and `needs_answers` edges), `ledger/questions.json` (16 questions with `known` / `missing` / `how_to_find`),
+`pages/suggestions.html` and `pages/questions.html`, with `tools/build_site.py` extended to render them. Session
+`fb49a226` then merged T30 (PR #64, #66) to link those pages from the primary dashboard.
+
+**Collision by path:** both sessions created `ledger/suggestions.json` and `ledger/questions.json`. The board's
+rule is that a second session must not duplicate work another has claimed.
+
+**Resolution — theirs is canonical, mine was deduplicated, nothing was deleted from `main`:**
+
+| Item | Disposition |
+|---|---|
+| `ledger/suggestions.json`, `ledger/questions.json` | **Canonical, written by `2499438c`.** This session deleted its own versions and now *reads* these files. There is exactly one decision store. |
+| `pages/suggestions.html`, `pages/questions.html` | **Canonical.** Linked from the new namespace rather than reimplemented. |
+| My proposals/options content | **Dropped, not merged.** Two Q-01s meaning different things would be worse than one register. Three of my self-review findings survive as `RF-01…RF-03`. |
+| `ledger/requirements.json` (24 rows) | **Kept — genuinely new.** No other session tracks the requirement set; every row has a closed status and a named pointer. |
+| `ledger/decisions_findings.json` (RF-01…RF-03) | **Kept — new.** |
+| `tools/validate_decisions.py` | **Kept and repurposed** to audit the *canonical* registers for reviewability (options ≥ 2, every option has a trade-off, a recommendation must name offered options, an unanswered question must have `how_to_find`, a decision must carry a status note), plus the requirements and findings checks. |
+
+### Branch rebuild (the documented rebase hazard, avoided)
+
+A plain `git rebase origin/main` conflicted in `COORDINATION.md` and, per session `0a697d4a`'s recorded warning,
+reordering that append-only file is how four session records were once destroyed. It was **aborted**. The branch
+was instead rebuilt on `origin/main` by re-applying only this session's own files (never replaying commits), so
+no other session's history was touched and no record was lost. `git log` on this branch is a clean linear set of
+commits on top of `f30c7aa`.
+
+### Verification performed on the rebuilt tree (2026-11-15)
+
+| # | Check | Result |
+|---|---|---|
+| W-1 | All 13 project gates replayed as CI runs them, on the post-merge tree | **13/13 pass** |
+| W-2 | Gate proven to fail on purpose against the canonical schema — 8 injected defects (single-option suggestion, bogus recommendation id, decision with no status note, unanswered question with no `how_to_find`, finding with an unresolvable source, `MET` with no implementation, injected product price, removed disclosure) | **8/8 detected**, clean baseline afterwards |
+| W-3 | No duplicate decision store; one `Q-01` only | **confirmed** — `grep -c '"Q-01"' ledger/questions.json` = 1 |
+| W-4 | Requirement rows naming an implementation path point at files that exist | **all resolve** (2 were wrong after the merge — `decisions/suggestions.html` and `decisions/questions.html` no longer exist — and were repointed to `pages/suggestions.html` / `pages/questions.html`) |
+| W-5 | Counts in prose derived from registers, not typed | **enforced by gate** |
+| W-6 | Every CSS class used by the 4 published pages is defined in the vendored sheet | **all styled** |
+
+### Irregularities this review adds (published at `decisions/flagged.html`)
+
+* **RF-01** — "10-character" vs Amazon's published "10-digit" wording for an ASIN; 75 occurrences, none fixed here (other sessions' files).
+* **RF-02** — disclosure placement is inconsistent: 7 marketing pages carry an affiliate anchor, only 3 carry the in-context `(paid link)` label.
+* **RF-03** — this task's own first version of that finding was wrong (non-recursive grep); corrected before publication and kept on the record.
+
+### Change requests (logged, not implemented)
+
+| # | Request |
+|---|---|
+| CR-6 | Promote **RF-01/RF-02/RF-03** into `ledger/flags.json` as **F-39…F-41** when the flag register is next owned. Not done here because its row count is pinned by name in `README.md`, `EXECUTIVE_SUMMARY.md` and `validate_data.py::check_published_counts`. |
+| CR-7 | Replace the "10-character" paraphrase with a verbatim "10-digit" quote wherever S24 is cited (75 occurrences). |
+| CR-8 | Six shell classes used by the pre-existing `pages/` templates (`.brand-mark`, `.eyebrow`, `.pill*`, `.panel-head`, `.row-note`, `.top-right`, `.status-dot`) still have no rule in `assets/css/style.css` or `tools/pages-site.css`, so those pages render them unstyled. Pre-existing, owned elsewhere; this namespace ships `tools/decisions.css` so it is unaffected. |
+
 ## Session claim — `arena/42fa4918-zone2` (session `42fa4918`, 2026-11-15 UTC)
 
 **Claimed:** T31 (board row above) — independent verification-only re-test. **Scope:** `docs/verification-42fa4918.md` (new) and this file, append-only records only. No ledger, generator, generated page, root page or dataset is edited by this session; anything found is logged as a change request or a new flag for the owning/next session.
@@ -3210,7 +3270,7 @@ No new product, performance, demand, or revenue figures were added. The destinat
 
 **Board state during work:** `main` moved twice while this session worked: `9f1e2ff` (PR #61, T29) → `f9a86bd` (PR #64, T30 dashboard integration) → `f30c7aa` (PR #66, T30 closing record). PR #62 was closed unmerged by its own session, superseded by #64 (its record on `main` documents this). `origin/main` was merged into this session's branch before every push; one COORDINATION.md conflict was resolved by keeping both sessions' records (nothing discarded).
 
-**Scope amendment (recorded before the edit).** Resolving that conflict exposed **pre-existing** conflict debris committed on `main` inside this file (present at this session's branch base `e030c40`, i.e. the PR #60 lineage — before T29/T30): a stray `=======` line, a stray `>>>>>>> origin/main` line, and a duplicated fragment (a second "## T26 — closing record" heading mixed with later-session content) between them. The **two stray marker lines were removed** so future merges cannot mis-read them as conflict boundaries; **the duplicated fragment was left byte-identical for owner review**. Logged as **F-39** on the Flagged for Review page path via this record and the report.
+**Scope amendment (recorded before the edit).** Resolving that conflict exposed **pre-existing** conflict debris committed on `main` inside this file (present at this session's branch base `e030c40`, i.e. the PR #60 lineage — before T29/T30): a stray `=======` line, a stray `>>>>>>> origin/main` line, and a duplicated fragment (a second "## T26 — closing record" heading mixed with later-session content) between them. The **two stray marker lines were removed** so future merges cannot mis-read them as conflict boundaries; **the duplicated fragment was left byte-identical for owner review**. Logged as **F-42** on the Flagged for Review page path via this record and the report.
 
 ### Verification performed (2026-11-15, fetched live; full tables in `docs/verification-42fa4918.md`)
 
@@ -3230,11 +3290,13 @@ No new product, performance, demand, or revenue figures were added. The destinat
 
 ### Findings (flagged for review — none blocking)
 
-1. **F-39** — pre-existing conflict debris in this file on `main` (details + scope amendment above). Markers removed; duplicated fragment left for owner review.
+1. **F-42** — pre-existing conflict debris in this file on `main` (details + scope amendment above). Markers removed; duplicated fragment left for owner review.
+   **ID-collision note:** session `d0135100` reserved **F-39…F-41** for its RF-01…RF-03 findings (its CR-6) while this session worked, so this session's finding is numbered **F-42** — the next free id. No flag id is reused and no other session's flag was overwritten; `ledger/flags.json` still holds F-01…F-38.
 2. **Page-count note** — T29's record says 97 audited pages, T30's says 96; this session measures **97** on `main` = `f30c7aa`. Bookkeeping note only; every gate passed on each session's own tree.
-3. **CR-3 (change request)** — the executive summaries are current through F-38 but do not yet mention the T29/T30 surfaces (`pages/suggestions.html`, `pages/questions.html`). Suggest a short subsection; not edited here (shared output).
+3. **CR-9 (change request)** — the executive summaries are current through F-38 but do not yet mention the T29/T30 surfaces (`pages/suggestions.html`, `pages/questions.html`). Suggest a short subsection; not edited here (shared output).
 4. **Carried forward** — "verified 2026-11-14" eyebrow on pages checked 2026-11-15 (recorded by T29); stale `in progress` T27 row (flagged by `2499438c`); F-01/F-03 (ASINs), F-05 (API registration), F-07/F-24 (no Associates tag).
 
 **Open-PR audit at close:** #62 closed unmerged (superseded by #64, per its own record); #64/#66 merged; **#65** (`bf8f07a7`, open — `marketing/trending-topics.html` + nav) audited from its diff: its earlier root-level suggestions/decisions duplicates were dropped, its claims match the sources verified above, and its file scope does not overlap T31. Fresh claim from an active session — not taken over.
 
 **PR, merge and deploy:** PR opened from this branch — number, merge commit and deploy runs recorded in the closing entry that follows this record.
+
