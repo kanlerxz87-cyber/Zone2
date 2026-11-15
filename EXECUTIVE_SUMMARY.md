@@ -462,7 +462,7 @@ Every control cited for the ten new rules was checked against the actual code, a
 
 ---
 
-## Addendum — decision-support surfaces, reader-facing editorial pass, and a fresh verification day, 2026-11-15 (session `8c4236ad`, T31)
+## Addendum — decision-support surfaces, reader-facing editorial pass, and a fresh verification day, 2026-11-15 (session `8c4236ad`, T32)
 
 Two things changed on this date, both additive. Nothing in the fact base moved: every specification row,
 status and source link published before 2026-11-15 is byte-identical after it (the marketing verifier
