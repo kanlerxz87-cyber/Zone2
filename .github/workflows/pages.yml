@@ -253,8 +253,19 @@ jobs:
       - name: Rebuild the executive summary and confirm committed output is current
         run: python3 tools/build_summary.py --check
 
-      - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure)
+      - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure, stray markers)
         run: python3 tools/audit_site.py
+
+      # T42 (session 5d6d2254): the sitemap was the one shared output no generator derived, and it had
+      # drifted — 16 URLs against 39 published pages outside marketing/, plus all 18 of marketing/.
+      # These two steps make "every page we ask a crawler to index is in the sitemap, and says which URL
+      # it is" a property of the build. Both were negative-tested on 2026-11-15 by deleting a <loc> and a
+      # canonical line from a copy of the tree: each step failed the build and named the page.
+      - name: Sitemap is derived from the published tree (no page can be missing)
+        run: python3 tools/build_sitemap.py --check
+
+      - name: Crawl-hygiene gate (canonical, og:url, og:type/site_name/title and a description per indexed page)
+        run: python3 tools/build_sitemap.py --audit
 
       # ---- arena/d0135100-zone2: the decision surface (T29) ----
       # Renders decisions/ and DECISIONS.md from ledger/{requirements,questions,suggestions}.json, then holds

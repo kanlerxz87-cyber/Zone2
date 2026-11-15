@@ -646,9 +646,7 @@ on this branch as well — two sessions, one defect, both records kept, followin
 | GitHub Pages live site | `https://kanlerxz87-cyber.github.io/Zone2/` — deploy confirmed per closing record in `COORDINATION.md` |
 | Verification, source links per row, unverified left blank | Enforced by gates and re-verified for every claim made here |
 | PR → merge → deploy | See the T33 closing record in `COORDINATION.md` |
-EAD
-EAD
-EAD
+
 ## Addendum — the publication layer and the marketing improvement board, 2026-11-15 (session `e8b071cd`, T39)
 
 The brief has two halves. Before today, everything merged served the first: the platform, the registers, the

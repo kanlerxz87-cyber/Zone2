@@ -19,6 +19,13 @@ four classes of defect that only a read of the *deployed* pages exposes:
 4. **An orphaned published namespace.** A whole set of pages can ship with no inbound
    link from the landing page, which is invisible to a link checker that only tests
    links that exist.
+5. **A leftover patch marker in published copy.** Found on `main` on 2026-11-15 by T42
+   (session `5d6d2254`): the landing page's footer carried two bare `EAD` lines — the tail of a
+   `HEAD`/`EOF` heredoc from a shell patch script — rendered as visible text between the footer's
+   links, plus three more in `EXECUTIVE_SUMMARY.md`. Nothing in the pipeline can see a token that is
+   valid HTML text, so the class is checked directly: a line of nothing but capitals, or a git
+   conflict marker, inside published copy is a build failure. Measured over all 116 published pages
+   plus the two prose surfaces: zero legitimate matches, so the rule has no exception list.
 
 Every check fails the build with file and line. No network access, so CI and a local run
 agree byte for byte.
@@ -216,6 +223,38 @@ def check_disclosure(pages) -> list[str]:
             for p in pages if DISCLOSURE not in p.read_text(encoding="utf-8")]
 
 
+STRAY_LINE = re.compile(r"^\s{0,4}[A-Z]{2,7}\s*$")
+CONFLICT_MARK = re.compile(r"^(<{7}|={7}|>{7})(\s|$)")
+
+
+def check_stray_markers(pages) -> list[str]:
+    """Leftover patch/heredoc markers and unresolved conflict markers in published copy.
+
+    A bare all-caps line is not something any page of this site writes on purpose: markup tags are
+    lower-case, table rows start with `|`, and inside a `<pre>`/`<code>` block the content is data, which
+    this rule cannot tell apart from a marker. So `<` and `|` lines are exempt and the rest of the corpus
+    is checked strictly — measured at 0 legitimate matches across every published page.
+    """
+    problems: list[str] = []
+    targets = list(pages) + [REPO / "README.md", REPO / "EXECUTIVE_SUMMARY.md"]
+    for f in targets:
+        if not f.is_file():
+            continue
+        inside_pre = 0
+        for i, line in enumerate(f.read_text(encoding="utf-8").split("\n"), 1):
+            if CONFLICT_MARK.match(line):
+                problems.append(f"{f.relative_to(REPO)}:{i}: git conflict marker left in a published file")
+            if "<pre" in line or "<code" in line:
+                inside_pre += 1
+            if "</pre" in line or "</code" in line:
+                inside_pre = max(0, inside_pre - 1)
+            if inside_pre:
+                continue
+            if STRAY_LINE.match(line) and "<" not in line and "|" not in line:
+                problems.append(f"{f.relative_to(REPO)}:{i}: bare all-caps line {line.strip()!r} in published copy")
+    return problems
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
@@ -235,6 +274,7 @@ def main() -> int:
         "prose_counts": check_counts(),
         "namespaces": check_namespaces(),
         "disclosure": check_disclosure(pages),
+        "stray_markers": check_stray_markers(pages),
     }
     failures = sum(len(v) for v in results.values() if isinstance(v, list))
     results["failures"] = failures
@@ -244,7 +284,8 @@ def main() -> int:
         print(json.dumps(results, indent=2))
     else:
         print(f"{results['pages']} published pages audited")
-        for key in ("fragments", "spec_sources", "prose_counts", "namespaces", "disclosure"):
+        for key in ("fragments", "spec_sources", "prose_counts", "namespaces", "disclosure",
+                    "stray_markers"):
             items = results[key]
             print(f"  {key:13s} {'PASS' if not items else f'FAIL ({len(items)})'}")
             for item in items:
