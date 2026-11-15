@@ -4220,7 +4220,21 @@ once confirmed).
 | Item | Value |
 |---|---|
 | Task | **T40 — Verification-only repo review and live-site audit for the current request** (executive summary, line-by-line check of the three supplied `link.amazon` links against the live Amazon pages, Associates policy page, every repo gate, live Pages entry point, irregularities flagged). No shared data, page, or tool file is edited. |
-| Status | **in progress** |
+| Status | **in progress → done (see closing record)** |
 | Owner | `3db75825` (branch `arena/3db75825-zone2`, base `ceaf9a7`) |
 | File scope | NEW `docs/review-3db75825.md`; this section of `COORDINATION.md` (append-only) |
 | Not touched | `ledger/**`, `pages/**`, `marketing/**`, `decisions/**`, `tools/**`, root `*.html`, and open PR #70 (`arena/cffe745a-zone2`, another session's claim — CONFLICTING, left as-is) |
+
+## Closing record — T40 — `arena/3db75825-zone2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| Status | **done** (verification only; no shared data edited) |
+| Deliverable | NEW `docs/review-3db75825.md` (gate results with exit codes, the three supplied links re-observed 2026-11-15, the Associates policy page check, live-site check, irregularities I-A…I-F) |
+| Gates on this tree | `validate_data`, `audit_site`, `build_site --check`, `build_root_views --check`, `build_summary --check`, `build_marketing --check`, `build_decisions --check`, `validate_decisions`, `tests/test_pipeline.py` (15/15), `node --check` ×2 — **all exit 0** |
+| Local link check | 116 HTML files, 0 broken local references |
+| CI / Pages on `main` | push run `43714798834` success; `pages build and deployment` `43714798538` success; Pages `status: built` |
+| Live reads | `https://kanlerxz87-cyber.github.io/Zone2/`; `https://affiliate-program.amazon.com/help/operating/policies` (Updated April 14, 2026) |
+| Supplied links | B04G1MEwY → B0CDY277D3, B02NbDxp3 → B09B7SB46R, B00hJ57DV → B08DKYBTPH; titles match `ledger/products.json`; none carries an Associates `tag` |
+| Irregularities raised (non-blocking) | I-A: the 10-char ASIN rule was not re-read from an Amazon help page this session; I-B: PR #70 (`cffe745a`) CONFLICTING, no checks, another session's claim, left as-is; I-C: T28/T32/T38 rows still read "in progress" though closed; I-D: `COORDINATION.md` is 401 KB; I-E: owner blockers F-05/F-07/F-08/F-24 remain; I-F: `@font-face` and "verified 2026-11-14" eyebrow carried forward, not re-checked |
+| PR / merge | Recorded in the PR itself (see the PR comment after merge) |
