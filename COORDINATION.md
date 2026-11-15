@@ -4350,6 +4350,7 @@ hand-typed, has no generator, and no CI step reads it — so it drifted to that 
 green. Separately `rel="icon"` is on the 4 `journal/` pages and on **0** of the 13 root pages, so the
 landing page's default `/favicon.ico` request 404s. That is the organic-traffic plumbing the brief asks
 for. Full record with reproducing commands: `docs/verification-156aae86.md`.
+<<<<<<< HEAD
 ### Addendum — `1b839f87` close-out (2026-11-15 UTC)
 
 - **PR #92** (record-only: this section's merge record) — **MERGED** 2026-11-15T13:11:06Z, merge commit `d887ae7`.
@@ -4421,3 +4422,87 @@ enforced by the file list above).
 | Verification record | `docs/verification-f6af67c3.md` (new): S24 fetched live with the verbatim sentence; renumber chain; T42 handoff; RF-01 scope recount (39 core-surface mentions vs RF-01's 75 repo-wide) |
 | Irregularities (non-blocking) | Task-id collision T41→T43→T44 (board procedure followed); rebase conflicts with PR #96/#97/#98/#100 waves resolved preserving both sides each time; carried forward for the owner: F-42 debris, I-D board size, F-05/F-07/F-08/F-24 owner blockers |
 | Sources used | S24 (fetched live 2026-11-15) — https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC · S01/S02/S23 (unedited, previously verified) |
+
+## Session claim — `arena/e4e7d4b2-zone2` (session `e4e7d4b2`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| Task | **Re-verification and status record for the three supplied `link.amazon` codes + full gate run on `main`**, with a PR → merge → Pages confirmation. Identified by session ID `e4e7d4b2` (no new `T##` number is claimed, per the note in the closing record of T39). |
+| Status | **done** (closing record below) |
+| Owner | `e4e7d4b2` (`arena/e4e7d4b2-zone2`) |
+| File scope | `COORDINATION.md` only (append-only session record). No shared data, index, navigation, or generated page is edited. |
+| Base | `main` @ `ceaf9a7` (merge of PR #88) |
+| Other open PRs seen at claim | PR #89 (`arena/1b839f87-zone2`, font-path repair, open at claim; **merged** as `23895e2` before this record closed) and PR #70 (`arena/cffe745a-zone2`, open). Neither is touched by this session. |
+
+### Closing record — `e4e7d4b2` (`arena/e4e7d4b2-zone2`, 2026-11-15 UTC)
+
+**Live re-observation of the three supplied short links** (fetched 2026-11-15 from the public Amazon
+pages the short links redirect to; the sandbox has no direct Amazon network route, so these were read through the page fetcher):
+
+| Supplied link | Redirect destination observed | Page title observed | Matches ledger? |
+|---|---|---|---|
+| `https://link.amazon/B04G1MEwY` | `https://www.amazon.com/dp/B0CDY277D3?…&plpRedirect=mhFallback` | “CHEFMAN 6 Quart Dual Basket Air Fryer Oven …” (Home & Kitchen) | Yes — `B0CDY277D3` |
+| `https://link.amazon/B02NbDxp3` | `https://www.amazon.com/dp/B09B7SB46R?…&plpRedirect=mhFallback` | “Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven …” | Yes — `B09B7SB46R` |
+| `https://link.amazon/B00hJ57DV` | `https://www.amazon.com/dp/B08DKYBTPH?…&plpRedirect=mhFallback&th=1` | “Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 …” | Yes — `B08DKYBTPH` |
+
+Each supplied code is 9 characters; an Amazon ASIN is 10. The destinations are not the codes. Nothing
+in the supplied material names the intended product, so no brief-to-product mapping is claimed. The
+owner decision (confirm intended products; Associates tag) is unchanged and remains open (F-01, F-03, F-07, F-24).
+
+**Gate run on `main` @ `ceaf9a7`, from this branch's tree (all exit 0):** `build_root_views.py --check` ·
+`build_site.py --check` · `validate_data.py` · `tests/test_pipeline.py` (15/15) · `build_summary.py --check` ·
+`audit_site.py` (PASS) · `build_decisions.py --check` · `validate_decisions.py` · `build_marketing.py --check` ·
+`marketing/scripts/verify_marketing.py` · `revalidation/scripts/build.py --check` · `revalidation/scripts/verify.py`
+(0 failures) · `affiliate-lab/scripts/verify_site.py` (0 failures) · `research-hub/scripts/verify.py` (0 errors) ·
+`node --check` on `assets/js/data.js` and `assets/js/app.js`.
+
+**Live site read:** `https://kanlerxz87-cyber.github.io/Zone2/` renders the landing page, the three product
+cards, the executive summary and the verified-platform-facts table.
+
+**Irregularities (logged, not repaired here):**
+
+1. **Self-hosted fonts 404 — resolved on `main` by PR #89 (F-39, session `1b839f87`).** At this session's first read,
+   `assets/css/style.css` and `pages/assets/dashboard.css` declared `url("assets/fonts/…")`, which resolves relative to
+   the stylesheet directory and 404s. Current `main` (`23895e2`) declares `../fonts/…` and `../../assets/fonts/…`.
+   This session did not modify those files.
+2. **Open PR #70** (`arena/cffe745a-zone2`) was open at claim time with no owner record on the board. Left for its owner.
+3. **Landing-page wording not re-verified here.** The landing page states that “an unknown nine-character code
+   on the same short-link service returns a 404.” This session did not test that claim; it is not confirmed by this record.
+
+**Board status:** the three link re-observations above support the existing ledger rows; no shared data,
+index, navigation or generated page was edited. Scope held to `COORDINATION.md`.
+
+### Merge record — `e4e7d4b2` (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **[#90](https://github.com/kanlerxz87-cyber/Zone2/pull/90)** — `arena/e4e7d4b2-zone2` → `main` — **MERGED** (`gh pr merge 90 --merge`) |
+| Merge commit | `3ffa0f3a79affd5fae62278e78c76dfe2a243ed8` (2026-11-15 13:21:47 UTC) |
+| Scope of PR #90 | `COORDINATION.md` only (claim + closing record). No shared data, generated page, index or navigation touched. |
+| Post-merge `push` run on `main` | `Build, verify and deploy` → **success** (run 43718609104, head `3ffa0f3`) |
+| `pages build and deployment` | **success** (run 43718608809); Pages API `latest build: built`, commit `3ffa0f3` |
+| PR-level checks | The PR's own `pull_request` runs were cancelled twice by the `pages` concurrency group (`cancel-in-progress: true`) while other sessions merged to `main`, and later reported no checks at all. The gate set was replayed locally on the exact head (`c112e77`): 16 of 16 pass. The post-merge run on `main` is the server-side confirmation. |
+| Sync note | `main` advanced several times during this session (PRs #89, #91, #95, #99, #102). Each sync resolved `COORDINATION.md` by keeping `main`'s content and re-appending this session's section. No other session's work was dropped. One early rebase left a conflicted local commit, which was never pushed; the branch was then reset to its pushed state and re-synced by merge, with no force-push. |
+| Irregularities | (1) PR #89 (font paths, F-39) resolved the 404 fonts on `main`. (2) PR #70 (`arena/cffe745a-zone2`) was still open at claim time with no owner record on the board; its status is not changed here. (3) The landing-page claim that “an unknown nine-character code on the same short-link service returns a 404” was not tested by this session and is not confirmed by this record. |
+| Still owner-open | Intended product for each supplied code (F-01/F-03); Associates tag and tagged links (F-07/F-24); Creators API (F-05). These need the account owner and are not blocked by this merge. |
+=======
+
+## Closing record — T43 — `arena/156aae86-zone2` (session `156aae86`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR #1 | **[#100](https://github.com/kanlerxz87-cyber/Zone2/pull/100)** — `arena/156aae86-zone2` → `main` — **MERGED**, merge commit `71dc894c` |
+| PR #2 | **[#102](https://github.com/kanlerxz87-cyber/Zone2/pull/102)** — follow-up fixing a defect in #100's own output — **MERGED**, merge commit `4edcad85` |
+| Record | `docs/verification-156aae86.md` (11 sections, every claim with its reproducing command) |
+| Core finding | Root `sitemap.xml` advertised **16** of **115** published pages (**99 absent, 86%**) — including `marketing/index.html`, `playbook.html` and all 38 `pages/*.html`. Hand-typed, no generator, **no CI step read it**, so it drifted with every build green. |
+| Secondary findings | `rel="icon"` on 0 of 13 root pages → `/favicon.ico` 404 on the landing page (fixed in the files *and* the two generators that emit three of them). Merge residue (`EAD`/`in` rendered as visible text) found independently on the live landing page — **fixed first by session `b6defa90` in PR #96**, so this task's duplicate fix was dropped at rebase; the finding is retained because nothing in the gate suite would have caught it. |
+| New controls | `tools/build_sitemap.py` (generator + `--check`) · `tools/seo_audit.py` (D1–D6 fail, D7 report) · 2 CI steps. **Negative-tested against 10 injected defects** (N1–N10) before being trusted; all 10 fail with the expected message. |
+| Final state on `main` | `sitemap.xml` = **114 URLs**, `grep 404` → **0**, `seo_audit` D1–D6 PASS, D7 0 pages |
+| Gates | **24 of 24 CI steps replayed locally on the final tree**, green. CI on this branch's PRs was **cancelled three times by the shared `pages` concurrency group** (`cancel-in-progress: true`) as other sessions merged — a cancellation, not a failure: the step that was interrupted varied and no step ever reported a non-zero log. The server-side confirmation is the post-merge `push` run on `main`: **success**, `pages build and deployment` **success**, Pages `status: built`. |
+| Live verification | `sitemap.xml` fetched from `kanlerxz87-cyber.github.io` after deploy: 114 URLs, no error page. `tools/build_sitemap.py`, `tools/seo_audit.py` and `docs/verification-156aae86.md` confirmed present on `origin/main`. |
+| Sources re-read live | Operating Agreement (Oct 15, 2025) §5 disclosure verbatim + §2/§4/§6 · Program Policies (Apr 14, 2026) 24h/89-day/180-day + material-breach · **Standard Commission Income Statement Table 1, all 11 bands row-by-row against `ledger/commission_table.json`** · Google sitemap + robots.txt documentation (cited for what is deliberately *not* emitted) · the three supplied links re-observed (destinations match the ledger; no `tag=`) |
+| Irregularities (non-blocking, published in §7–§8 of the record) | IR-01 merge residue (fixed by another session first) · IR-04 `README.md` says 37 generated pages, build emits 39, and `check_counts` does not cover page counts · IR-05 a `noindex` false positive, recorded so nobody re-chases it · IR-06 two claims written wrong first and corrected by re-reading the source · IR-07 board size |
+| Self-corrected in this task | (a) IR-04 and IR-06 were both wrong on first write; corrected in place in the record. (b) **The first generated sitemap shipped `research-hub/404.html`** — the exclusion rule was an exact path, so a nested error page got through, and `seo_audit` D2 passed because that file does exist. Caught by reading the deployed file by hand, fixed by matching on basename, re-tested as N10. |
+| Left open for the owner (unchanged, blocks revenue not the build) | F-01/F-03 confirm the intended ASINs · F-24 no Associates `tag`, so the supplied links cannot earn as supplied · F-05 Creators API · F-08 no performance data exists · the suggestions board (`pages/suggestions.html`) and questions register (`pages/questions.html`) |
+| Renumbering trail | claimed T41 → **T43** (T41 shipped by `08789ab3` as PR #97, T42 by `bfb20351` as PRs #95/#99 while this branch was open). Nothing of either session's record was altered; the `COORDINATION.md` rebase conflict was resolved by taking `main`'s full text and appending this record. |
+>>>>>>> 93087a0 (T43 closing record: PR #100 and #102 merged, Pages deploy confirmed, live sitemap verified (114 URLs, 0 error pages))
