@@ -4185,7 +4185,7 @@ controls [B0CDY277D3 via link.amazon](https://link.amazon/B0CDY277D3), [B00TEST1
 breadcrumb is identical on all three; Table 1 bands read verbatim (Kitchen 4.50%, Home 3.00%, All Other 4.00%);
 both policy dates read; the valid-ASIN and unknown-code controls reproduced (404); a second random 9-character code
 returned 403 — so the "unknown code returns 404" wording is too strong (R86-01). The font defect was reproduced
-live (broken path 404; correct path serves WOFF2). All ten repository gates re-run green.
+live before the fix (broken path 404; correct path serves WOFF2); after main moved (PR #89 merged, Pages built `d4b68ee`) the live stylesheet requests the correct path. All ten repository gates re-run green.
 
 **Published:** `review-2026-11-15.html` (new: executive summary, 14 dated re-check rows, irregularities R86-01…R86-08, links
 to the decision boards). `flagged.html` gains one link paragraph. `README.md` gains one link and a closing bracket
@@ -4193,8 +4193,8 @@ to the decision boards). `flagged.html` gains one link paragraph. `README.md` ga
 
 **Irregularities flagged (for owner review, not blocking):** R86-01 control wording too strong · R86-02 landing "4.00%"
 KPI may be read as these products' rate (band unconfirmed: Kitchen 4.50% vs Home 3.00%, Q-08) · R86-03 the 404 control page is
-served from `amzlinks.in`, operator not confirmed · R86-04 self-hosted fonts 404 on every page (fix in open PR #89) ·
-R86-05 README link fixed · R86-06 three separate Flagged surfaces · R86-07 open PRs #70 (CONFLICTING) and #89 (mergeable)
+served from `amzlinks.in`, operator not confirmed · R86-04 self-hosted fonts 404 on every page — **resolved on main by PR #89** (merged during this review) ·
+R86-05 README link fixed · R86-06 three separate Flagged surfaces · R86-07 open PRs #70 (CONFLICTING; now closed without merge) and #89 (now merged)
 owned by other sessions · R86-08 board size (~400 KB) and stale header.
 
 **Not done, deliberately:** no ledger value, product price, rating, or commission band was added (none is confirmed by an
