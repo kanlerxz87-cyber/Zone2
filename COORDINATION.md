@@ -77,6 +77,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T26b | Fresh baseline audit for current request: rerun all project gates; verify the live GitHub Pages entry points and source-controlled dataset claims against official URLs; record defects only, no overlapping edits | done | `arena/0f44536f-zone2` | `COORDINATION.md` (append-only record only; results in this session's record) |
 | T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | done — closing record by `ba8b2d38` below (PRs #48/#51/#54 merged 2026-11-14, CI + Pages deploy confirmed); status cell corrected 2026-11-15 by `8c4236ad`, see the T30 session record | `arena/0f44536f-zone2` → completed by `arena/ba8b2d38-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
 | T32 | **Renumbered three times** (id collisions of the day): claimed as T29 → T29 shipped first by `2499438c` (PRs #61/#63) → renumbered T30 → **T30 claimed and shipped by `fb49a226`** (dashboard integration, PRs #64/#66) → renumbered T31 → **T31 claimed and shipped by `42fa4918`** (verification-only re-test of T29, PRs #72/#76) → **renumbered T32**. Nothing any of them published is duplicated or overwritten; the nav-link part of this session's original scope was dropped after `fb49a226`'s T30 landed the same links (my two duplicate nav entries removed; my complementary footer links kept). T32 = the work T29/T30/T31 did not cover: (1) editorial upgrade of the destination-only marketing set — tone and structure only, zero fact changes, every row's source intact (takeover per 60-minute rule: `marketing/**` owner `a3faf404` finished; the T27 marketing scope was completed and merged by `ba8b2d38`, no active claimant); (2) additive links from the root dashboard to the two new decision-support pages (`pages/suggestions.html`, `pages/questions.html`); (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm. | in progress | `arena/8c4236ad-zone2` (8c4236ad) | `COORDINATION.md` (records + the T27 status correction above), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), NEW `docs/verification-8c4236ad.md` |
+| T43 | **Close change request CR-8 (decision-board deep links) and run this wave's final integration.** (a) add `id` anchors `SG-01`…`SG-10` to the suggestion rows of `pages/suggestions.html` — the questions register already carries `Q-01`…`Q-16` anchors, so only the suggestions half of CR-8 remains; (b) restore the deep links to those anchors where the playbook and the design-prompt doc cite a suggestion by id (CR-8's stated purpose: "so decision reasoning can be cross-linked"); (c) record the disposition of CR-9 (executive-summary coverage of the decision surfaces); (d) run every repo gate on the combined tree, re-observe the live site and the three supplied links, publish a dated line-by-line verification record; (e) PR → merge without waiting → confirm the GitHub Pages deploy → record here. Takeover basis for CR-8: its owner session (`2499438c`, T29, PR #61) finished and merged; no active claimant; open PRs #90/#93/#95 touch none of the files in this scope. | claimed 2026-11-15T13:18Z, in progress | `arena/e69d851b-zone2` (e69d851b) | `tools/build_site.py` (anchor emission only), regenerated `pages/suggestions.html` (only), `playbook.html` (SG id → deep link only), `docs/design-prompt-suggestions.md` (SG id → deep link only), NEW `docs/verification-e69d851b.md`, `COORDINATION.md` (append-only records + this row) |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -4286,3 +4287,33 @@ here rather than silently deviated, matching every prior session's practice.
 No file in this claim's scope is claimed by another session: all owning sessions (6b8bb130, 6602723a, 34836ddd, 78c94859, f786c0d7, 181863ad, c6e94e8d, bbe4ca47, 82a2d436, 83194da0, 4338f55e, dc52402c, dc15ce5a, dd87f326, cdfaeefe, b38cc982, a6f70a13, 0f44536f, ba8b2d38, 2499438c, fb49a226, 42fa4918, d0135100, 8c4236ad, 2b257b2e, e8b071cd, bfed39e0) have merged or closed. Stale row noted: T27 still reads `in progress` (owner `0f44536f`, no commits since 2026-11-14) — flagged for the board owner, not taken over here (different scope).
 
 **Handoff log:** none yet — this is the opening claim. Claim commit and push happen immediately after this record.
+
+---
+
+## Session claim — T43 — `arena/e69d851b-zone2` (session `e69d851b`, 2026-11-15 UTC)
+
+**Branch note:** Arena pins this session to `arena/e69d851b-zone2`; the project's `session-<id>/<task>`
+branch naming is not available, so strict file-scope discipline applies on this one branch — the same
+documented deviation as every prior session.
+
+| Item | Value |
+|---|---|
+| Task | **T43** (row added to the canonical Task board above) — close change request **CR-8** (decision-board deep links) + final integration for this wave |
+| Status | **in progress** |
+| Owner | `e69d851b` (branch `arena/e69d851b-zone2`, base `ceaf9a7` → merged to `origin/main` `23c7fd2` at claim time) |
+| File scope | `tools/build_site.py` (anchor emission only), regenerated `pages/suggestions.html` (only), `playbook.html` (SG-id deep links only), `docs/design-prompt-suggestions.md` (SG-id deep links only), NEW `docs/verification-e69d851b.md`, this file (append-only records + the T43 board row) |
+| Not touched | `ledger/**` (no data value changes), `assets/**`, `marketing/**`, `decisions/**`, `journal/**`, root `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `flagged.html`, `.github/**`, and every open PR's scope: **#90** (`e4e7d4b2`, coordination), **#93** (`86bb886d`, `README.md`/`flagged.html`/`review-2026-11-15.html`/`sitemap.xml`), **#95** (`bfb20351`, T42 — `ledger/questions.json` + `pages/questions.html`) |
+
+**Board state at claim:** `origin/main` = `23c7fd2` (merge of PR #96, T40 by `b6defa90`). Open PRs:
+#90 (fresh, last commit minutes old — not taken over), #93 (fresh — not taken over), #95 (fresh — not
+taken over). T40 (`3db75825` + `b6defa90`) and T41 (`08789ab3`) are closed by their own records. The
+next free id was **T43** (`grep -c T43` → 0 at claim time); ids T40–T42 are taken.
+
+**Why this task.** CR-8 (logged by session `8c4236ad`, T32) is the one open change request whose files
+have no active claimant: `pages/questions.html` already emits `id="Q-01"`…`id="Q-16"` and
+`pages/flags.html` emits `id="F-…"`, but `pages/suggestions.html` emits **no row anchors at all**, so
+nothing can deep-link to a single suggestion (`#SG-04` etc.) — the fragment gate correctly failed every
+attempt to do so. The 60-minute takeover rule applies: T29's owner merged PR #61 and finished; no open
+PR touches `tools/build_site.py` or `pages/suggestions.html`.
+
+**Claim commit and push happen immediately after this record, before any non-coordination edit.**
