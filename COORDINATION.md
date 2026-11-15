@@ -2912,6 +2912,8 @@ and the closing record follow in the next entry.
 | T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | done (PR and merge recorded below) | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
 | T30 | Primary-dashboard integration of the canonical Suggestions decision board and Questions register; avoid duplicate data/decision systems and make the existing evidence-led review path discoverable | done — PR #64 merged; Pages deploy confirmed | `arena/fb49a226-zone2` | `index.html`, `COORDINATION.md` |
 | T31 | **Independent verification-only re-test (no shared file edited).** Line-by-line re-verification of the merged T29 deliverable: every factual claim in `ledger/suggestions.json` (SG-01…SG-10) and `ledger/questions.json` (Q-01…Q-16) re-checked against the official source it cites; rendered `pages/suggestions.html` / `pages/questions.html` checked against the ledgers row by row; every source link resolved; all repo gates re-run on the combined tree; live GitHub Pages deployment confirmed; status audit of open PR #62 (T30). Findings published as `docs/verification-42fa4918.md`; defects logged as change requests or new flags, never silently fixed. | done (PR and merge recorded below) | `arena/42fa4918-zone2` (42fa4918) | `docs/verification-42fa4918.md` (new), `COORDINATION.md` (append-only records only) |
+| T33 | **Publication layer for `marketing/` + the marketing improvement board.** Rebuilds the reader-facing site from a tool screen into a publication (named desk, masthead shell, decision-first buying guide, rewritten per-product articles, six question-shaped guides under `marketing/topics/`, glossary, sitemap.xml / robots.txt / feed.xml, canonical + OG + Article/BreadcrumbList JSON-LD) and publishes `marketing/improvements.html`: 14 suggestions with options, trade-off, cost, evidence and the question each waits on, plus 10 questions in the site's own scope and the design brief for the next revision. Copy moves to `marketing/data/editorial.json` so it can be diffed; gates G11–G14 enforce the ten-rule writing standard (sourced claims, no filler or first-hand claims, no orphan pages, sitemap/feed/canonical coverage), each negative-tested. Reconciled with T32's voice pass (PR #75) rather than overwritten: its `hook_editorial`, `suits_editorial`, `look_elsewhere` and `planned_topics` are all carried. Complements T29's programme boards without duplicating them. | in progress — PR recorded below | `arena/e8b071cd-zone2` (e8b071cd) | `marketing/**` (new `marketing/data/editorial.json`, `marketing/topics/*`, `marketing/improvements.html`, `marketing/sitemap.xml`, `robots.txt`, `feed.xml`, `assets/marketing.css`, `scripts/verify_marketing.py`), `tools/build_marketing.py`, `tests/test_pipeline.py`, `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, `docs/marketing-2026-11-15.md` (new), `COORDINATION.md` |
+
 
 ### What shipped
 
@@ -3502,3 +3504,133 @@ cross-linked from the marketing set and executive summary.
 namespaces, disclosure) · `affiliate-lab/scripts/verify_site.py` 0 failures · `revalidation` build+verify 0 ·
 `research-hub` build byte-identical + verify 0 errors · `node --check` data.js/app.js OK · workflow
 link-checker: all internal links and assets resolve · disclosure/no-price sweep: 88 pages clean.
+
+---
+
+## Session record — `e8b071cd` (`arena/e8b071cd-zone2`, T33) — 2026-11-15 UTC
+
+### Task-ID: this session shipped as T33, after three collisions in one day
+
+Claimed as **T30**; `main` had already merged T30 (`fb49a226`, PR #64). Renumbered to **T31**; `42fa4918` had
+shipped T31. Renumbered to **T32**; `8c4236ad` had shipped T32 with that row already corrected in the file.
+Published as **T33**, which was free when this was written — and note that PR #78 (`bfed39e0`) is titled "T31"
+while `main` has had T31 since 12:04 UTC. The board's id column is now a contest: **five sessions renumbered or
+collided within roughly ninety minutes.** Recommendation for the next session, stated as a practice rather than
+a rule this session cannot write for others: fetch `origin/main` and read the *last three board rows*
+immediately before committing a claim, and re-read them again before the implementation commit.
+
+### Claim — recorded late, and that is this session's own defect
+
+A claim row was written and committed before any edit, but never pushed: the push collided with a `main` that had
+advanced, and the reset-onto-tip remedy this file already recommends discarded the un-pushed claim commit along
+with the conflict. The claim was therefore re-derived **after** the work, from `origin/main`. No other session's
+record was touched. The same collision recurred twice more while appending this record (T30's implementation
+commit, then this one), and both times the change set was replayed on the fetched tip with
+`git diff <merge-base> HEAD > patch; git reset --hard origin/main; git apply --3way patch` — never rebased, which
+is what dropped records for an earlier session. That sequence survived three uses and is worth copying.
+
+### What was delivered
+
+| Surface | Where |
+|---|---|
+| Publication identity: named desk (*Counter Notes*), masthead, horizontal nav, reading rail, print + narrow collapse, all scoped to `body.pub` so no other namespace moved | `marketing/assets/marketing.css`, `tools/build_marketing.py::shell` |
+| Ten-rule writing standard as data the build can check, with banned-phrase list and before/after pairs | `marketing/data/editorial.json` → `voice` |
+| Six question-shaped guides: capacity arithmetic, twin vs single basket, basket vs fryer oven, Hi-Fry 450 vs 400, counter fit, spec-sheet drift — every factual sentence carrying a resolvable `data-src` | `marketing/topics/*.html` |
+| Rewritten articles: verdict standfirst, buy-if / skip-if, quoted Amazon listing title, "what we did not do", conflict block printed as a disagreement | `marketing/articles/p1..p3.html` |
+| Improvement board: 14 suggestions × (options, trade-off, recommendation, impact, effort, evidence, blocking question, status), 10 questions in the site's own scope, design brief, re-verification table | `marketing/improvements.html` |
+| Machine-readable set | `marketing/sitemap.xml`, `marketing/robots.txt`, `marketing/feed.xml`, canonical + OG + Article/BreadcrumbList JSON-LD |
+| Gates G11–G14; `developers.google.com` added to `OFFICIAL_HOSTS` | `marketing/scripts/verify_marketing.py` |
+| Line-by-line verification record for manual review | `docs/marketing-2026-11-15.md` |
+
+The evidence posture did not move: no price, no star rating, no first-hand claim, no invented byline, disclosure
+on every page and inside every affiliate link block, links still labelled preview while no Associates ID exists,
+every valued row sourced, every blank carrying its reason. `Product`/`Review` markup was left out deliberately —
+there is no review to mark up, and Google's own guidance treats self-controlled reviews as ineligible.
+
+### Reconciliation with T32 (PR #75), merged on the same day
+
+`8c4236ad` rewrote the voice of `marketing/**` and added `_editorial` fields to `marketing/data/facts.json`; my
+work rebuilt the same pages from a different data file. Both were kept:
+
+| Their field (facts.json) | Where it lives now |
+|---|---|
+| `hook_editorial` | the one-line summary column on `marketing/articles/index.html` (the builder prefers it, falling back to `tagline_facts`) |
+| `suits_editorial` (9 lines) | eight were already carried by `buy_if` with the figure attached; the ninth — the rotisserie spit among the seven accessories — was added to P2 |
+| `look_elsewhere` | each article's "Elsewhere on this site" list, so internal link equity stays inside the publication |
+| `planned_topics` (4) | a table on `marketing/topics/index.html` with a crosswalk: three are covered by published guides, one ("preset counts in context") stays visibly **not published** because the preset number is itself a conflict |
+| their nav/footer decision links | kept; the duplicate nav links were dropped in their own commit, the footer pair remains |
+
+Article ledes stay on `verdict`, because the same sentence cannot be written twice. The reconciliation is recorded
+in `marketing/data/editorial.json` → `voice_pass_merge` so it is discoverable from the data, not only from here.
+Where the two files frame a product differently, the spec table in `facts.json` is the tie-breaker — which is
+their pass's own stated rule, kept.
+
+### Verification (fetched 2026-11-15)
+
+| # | Check | Result | Official source |
+|---|---|---|---|
+| V-201 | The three supplied short links re-resolved | Identical destinations to 2026-11-13 and 2026-11-14; each still carries `plpRedirect=mhFallback`, so owner intent remains unconfirmed | https://link.amazon/B04G1MEwY · /B02NbDxp3 · /B00hJ57DV |
+| V-202 | `btn_ref` rotation | Three distinct tokens today, all different from 2026-11-14 — third session to record it | same three URLs |
+| V-203 | Chefman dual-window: 450 F / 235 C Hi-Fry maximum, Sync Finish, `RJ38-SQPF-3TDB-2W`, 13.38 × 11.81 × 10.63 in, 13.3 lb | Verified, published | https://chefman.com/products/turbofry-touch-dual-window-air-fryer |
+| V-204 | Emeril 26 Qt: 4–6 people, 24.6 L, 16.9"D × 15.8"W × 14.8"H, 120 V, "25 Cooking Pre-sets" tile vs "10-in-1"/"24 one-touch" prose | Verified; the intra-page disagreement is published as a conflict, not resolved | https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360 |
+| V-205 | Chefman 8 Qt: four presets, 200–400 F, dishwasher-safe basket and rack, auto shut-off, 4-6 people, one URL selling 5 Qt and 8 Qt | Verified; the 450 F claim stays a conflict row | https://chefman.com/products/turbofry-touch-air-fryer-1 |
+| V-206 | The four Google documents the board's recommendations cite | Fetched and read | https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links · …/appearance/structured-data/review-snippet · …/fundamentals/creating-helpful-content · …/fundamentals/ai-optimization-guide |
+| V-207 | Table 1 bands, bounty/bonus appendix, compliance rules mentioned on the board | **Carried, not re-read** — T28's transcriptions dated 2026-11-14; the board says so rather than implying a fresh check | `ledger/compliance.json`, `ledger/commission_table.json` |
+| V-208 | Every new gate fails when its invariant is broken | Six injected defects, six caught | `docs/marketing-2026-11-15.md` §4 |
+| V-209 | Committed HTML is generated, not hand-edited | `tools/build_marketing.py --check` clean: 20 outputs | local |
+
+### Gates on this tree (all green, re-run after the merge with #75)
+
+`build_marketing --check` · `verify_marketing.py` (G1–G14, 17 pages · 48 spec rows · 0 failures) ·
+`build_site --check` · `build_root_views --check` · `build_summary --check` · `validate_data.py` ·
+`tests/test_pipeline.py` (15/15) · `audit_site.py` (109 pages; fragments, spec sources, prose counts,
+namespaces, disclosure all PASS) · `revalidation` build + verify · `affiliate-lab` verify · `research-hub`
+build + verify.
+
+### Irregularities flagged (published, none blocking)
+
+1. **PR #70 (`cffe745a`) breaks the marketing drift gate.** Verified on its head `a160442`: it hand-edits
+   `marketing/articles/index.html` and adds two hand-written `marketing/articles/topic-*.html` without touching
+   the generator, so `build_marketing --check` exits 1 and `verify_marketing.py` reports
+   `FAIL G9 … differs from a fresh build`. After this merge the same pages would additionally fail G13 (orphans).
+   The fix is to express them as `editorial.json` entries, not to weaken the gate.
+2. **PR #65 (`bf8f07a7`) adds a hand-written `marketing/trending-topics.html`** in a namespace that is now
+   generated end to end; it will not survive `--check` and would be an orphan. Same remedy.
+3. **PR #78 (`bfed39e0`, "root site experience overhaul") builds a second publication** — `journal/*` plus root
+   `robots.txt`/`sitemap.xml` and a restyled root dashboard. It does not touch `marketing/**` or
+   `tools/build_marketing.py`, so the two can coexist, but the site then has two reader-facing editorial surfaces
+   with two voices and two sitemap scopes. Somebody should decide which one the owner markets. Not edited here.
+4. **Emeril model-suffix drift (new).** The brand's own store page shows `4-00675-02A-VN` in its model line while
+   its product-image file names contain `4-00675-02X`, the suffix Amazon's specification block publishes.
+   Published as a conflict (board entry T-08), not smoothed.
+5. **Both manufacturer pages publish prices and aggregate star ratings.** Neither is transcribed anywhere in this
+   repository, including this record, so no page can pick them up by accident. Whether to allow
+   manufacturer-sourced ratings stays open (DS-06 / MQ-05).
+6. **The no-price gate caught its own authors.** The writing standard's negative example originally quoted a
+   dollar figure; G4 failed the page carrying it. The example was rewritten; the rule was not loosened.
+7. **`tools/build_marketing.py` grew from 567 to ~1590 lines.** It is one generator for 20 outputs, deliberately,
+   so `--check` has one input. If a future pass splits it, the split must keep `PAGES`/`TEXT_PAGES` as the single
+   registry that `tests/test_pipeline.py` and the verifier both read.
+
+### Change requests (logged, not implemented in files this session does not own)
+
+* **CR-10.** Fold the Emeril model-suffix drift (item 4) and the PR #70 gate break (item 1) into
+  `ledger/flags.json` so they reach `pages/flags.html` and the register count. That file belongs to T28's scope.
+* **CR-11.** `pages/suggestions.html` (T29) and `marketing/improvements.html` (this session) are two boards with
+  deliberately different scopes — programme decisions vs the site — that cross-link. One integration pass should
+  decide whether the owner wants a single queue with two filters. `pages/**` and `tools/build_site.py` are T29's;
+  not edited here.
+* **CR-12.** `marketing/data/facts.json` keeps `verified_utc: 2026-11-14` although the links and manufacturer
+  pages were re-read on 2026-11-15. Deliberate: re-reading a link is not re-transcribing 48 rows. Bump it only in
+  a pass that re-reads every row. (T32's note in that file already distinguishes "re-verified" from
+  "re-transcribed".)
+
+### Handoff notes for sessions with open PRs
+
+`marketing/` is generated from two data files: `facts.json` (values with sources, plus the `_editorial` framing
+T32 added) and `editorial.json` (everything else a reader reads, the board, the nav, the writing standard). Shell,
+JSON-LD and the machine-readable outputs come from `tools/build_marketing.py`. New page → add it to `PAGES` and
+link it, or G13 fails it as an orphan. Changed copy → change the JSON, run `python3 tools/build_marketing.py`, and
+commit the regenerated HTML in the same commit, or `--check` fails. New external citation → add the host to
+`OFFICIAL_HOSTS` in `marketing/scripts/verify_marketing.py` and to the source table in
+`docs/marketing-2026-11-15.md`; the allow-list is a list on purpose.

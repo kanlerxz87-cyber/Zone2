@@ -219,3 +219,22 @@ resolved, documented and cross-checked against official pages; every conflict su
 smoothed over; every gap left blank and listed; and a compliance position that will survive an
 Amazon review. The one thing that must happen next is not technical — the affiliate links need a
 tracking tag before any of this can earn anything.
+
+## 13. The publication layer and the improvement board (added 2026-11-15, T33)
+
+`marketing/` is now a reader-facing publication: a named desk, a decision-first buying guide, one article per
+product, six guides that each answer one search phrasing, and the machine-readable set a search engine expects
+(sitemap, feed, canonical URLs, Article and BreadcrumbList markup — no `Product` or `Review` markup, because
+there is no first-hand review to describe and no rating to publish). The evidence posture is unchanged: no
+price, no star rating, no tested claim, every value row sourced or blank with its reason, disclosure on every
+page and at every affiliate link.
+
+Two surfaces exist for decisions rather than reading. `marketing/improvements.html` holds every open suggestion
+in the site's own scope with its options, cost, evidence and blocking question, and `marketing/data/editorial.json`
+is the single source for both the copy and that board — which is how a reviewer diffs a suggestion instead of
+regenerating a page. The ten writing rules the site publishes are enforced by `marketing/scripts/verify_marketing.py`
+(G11–G14), which failed this session's own draft. The same day's voice pass (T32) contributed fields that are
+carried rather than dropped; where the two files frame a product differently, the spec table in
+`marketing/data/facts.json` wins.
+
+Record: `docs/marketing-2026-11-15.md`.

@@ -13,6 +13,12 @@ Fails (non-zero exit) if any of these stop being true, so none of them depends o
   G8  every row marked UNVERIFIED/WITHHELD prints no value at all
   G9  committed HTML matches a fresh build (nothing hand-edited)
   G10 every official source URL used is on an allow-listed official host
+  G11 every factual sentence on a guide or review page carries a source id that resolves  (T33)
+  G12 the writing standard is enforced, not recommended: a banned phrase on a reader-facing page,
+      an opinion outside a labelled take box, or an unlabelled "we tested" claim fails the build  (T33)
+  G13 every generated page is reachable from another generated page  (T33)
+  G14 sitemap.xml covers every HTML page, feed.xml items resolve, and each canonical URL matches
+      the file it sits in  (T33)
 
 The row-level checks (G7/G8) re-derive the expectation from marketing/data/facts.json and then read the
 rendered HTML, so a renderer bug cannot quietly pass its own test.
@@ -29,7 +35,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "tools"))
 
-from build_marketing import PAGES, build  # noqa: E402
+from build_marketing import LIVE, PAGES, SOURCES, build  # noqa: E402
 from link_builder import REQUIRED_SITE_DISCLOSURE  # noqa: E402
 
 ROOT = REPO / "marketing"
@@ -42,6 +48,10 @@ OFFICIAL_HOSTS = {
     "www.chefman.com",
     "www.emerileveryday.com",
     "affiliate-program.amazon.com",
+    # Added 2026-11-15 (T33): the improvement board's recommendations cite Google's own search
+    # documentation instead of an SEO blog, so Google's domain is now an official source on these
+    # pages. The allow-list is deliberately still a list, not a wildcard.
+    "developers.google.com",
 }
 MARKETPLACE_HOSTS = {"www.amazon.com", "amazon.com"}
 
@@ -142,11 +152,91 @@ def check_rows(rel: str, doc: str) -> None:
         fail(f"G7 {rel}: {len(rows)} rows rendered but the data file defines {expected}")
 
 
+BANNED_CACHE: dict[str, list[str]] = {}
+
+
+def editorial_checks(rendered: dict[str, str]) -> None:
+    """G11-G14, added by T33. These exist because the alternative - a style guide nobody enforces -
+    is exactly how the previous revision drifted back to generic copy within one regeneration."""
+    editorial = json.loads((ROOT / "data" / "editorial.json").read_text(encoding="utf-8"))
+    banned = [w.lower() for w in editorial["voice"]["banned_words"]]
+    known_srcs = set(SOURCES)
+
+    # G11 covers the guide bodies. The product pages are governed by G7 (every valued spec row
+    # carries its source), and a hub page makes no factual claim to source.
+    reader_pages = {rel: doc for rel, doc in rendered.items()
+                    if rel.startswith("topics/") and rel != "topics/index.html" and rel.endswith(".html")}
+
+    for rel, doc in reader_pages.items():
+        # G11: every claim element cites something, and the citation resolves.
+        claims = re.findall(r'<p class="claim" id="([^"]+)" data-src="([^"]*)"', doc)
+        if not claims:
+            fail(f"G11 {rel}: no sourced claims - the page was rewritten around the data layer")
+        for cid, srcs in claims:
+            ids = [x for x in srcs.split(",") if x]
+            if not ids:
+                fail(f"G11 {rel}: claim {cid} states a fact with no source id")
+            for sid in ids:
+                if sid not in known_srcs:
+                    fail(f"G11 {rel}: claim {cid} cites {sid!r}, which is not a registered official source")
+        # G12a: the banned-phrase list. The improvements board is exempt on purpose: it *shows*
+        # the phrases as negative examples, in a different namespace.
+        flat = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", doc)).lower()
+        for word in banned:
+            if word in flat:
+                fail(f"G12 {rel}: banned phrase {word!r} - generated filler, or a sentence worth rewriting")
+        # G12b: an opinion must be labelled. Every .take box carries the label; nothing else may
+        # claim first-hand experience.
+        for take in re.findall(r'<aside class="take".*?</aside>', doc, flags=re.S):
+            if "take-label" not in take:
+                fail(f"G12 {rel}: a judgement box without its label - an opinion is passing as a spec")
+        for phrase in ("we tested", "our team tested", "we tested these", "hands-on", "we used it"):
+            if phrase in flat:
+                fail(f"G12 {rel}: claims first-hand use ({phrase!r}); nobody here has cooked with these products")
+
+    # G13: an orphan page is a page nobody finds. Count only links between generated pages.
+    targets: set[str] = set()
+    for rel, doc in rendered.items():
+        if not rel.endswith(".html"):
+            continue
+        base = (ROOT / rel).parent
+        for href in re.findall(r'<a[^>]+href="([^"]+)"', doc):
+            if href.startswith(("http", "#", "mailto:")):
+                continue
+            clean = href.split("#")[0]
+            if not clean:
+                continue
+            resolved = (base / clean).resolve()
+            try:
+                targets.add(str(resolved.relative_to(ROOT.resolve())))
+            except ValueError:
+                pass
+    for rel in rendered:
+        if rel.endswith(".html") and rel != "index.html" and rel not in targets:
+            fail(f"G13 {rel}: generated but not linked from any other generated page - an orphan")
+
+    # G14: the machine-readable set agrees with the page set.
+    xml = rendered.get("sitemap.xml", "")
+    for rel in rendered:
+        if rel.endswith(".html"):
+            if f"{LIVE}{rel}" not in xml:
+                fail(f"G14 sitemap.xml: {rel} is published but not listed")
+    for rel, doc in rendered.items():
+        if rel.endswith(".html"):
+            if f'rel="canonical" href="{LIVE}{rel}"' not in doc:
+                fail(f"G14 {rel}: canonical URL does not match its own path")
+    for item in re.findall(r"<item>.*?<link>([^<]+)</link>", rendered.get("feed.xml", ""), flags=re.S):
+        target = item.replace(LIVE, "")
+        if target not in rendered:
+            fail(f"G14 feed.xml: {item} is not a generated page")
+
+
 def main() -> int:
     if len(PAGES) < 9:
         fail(f"G1 expected at least 9 marketing pages, builder defines {len(PAGES)}")
 
     fresh = build(ROOT / ".fresh")  # build to a scratch dir, compare, then remove
+    editorial_checks(fresh)  # G11-G14 (T33) run on the render, so a renderer bug cannot skip them
     import shutil
 
     shutil.rmtree(ROOT / ".fresh", ignore_errors=True)

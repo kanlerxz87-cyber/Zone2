@@ -27,8 +27,15 @@ def test_marketing_pages_label_unconfirmed_brief_mapping():
     """Destination-only marketing must not imply the short-code mapping is confirmed."""
     with tempfile.TemporaryDirectory() as tmp:
         rendered = build_marketing.build(Path(tmp))
-    assert len(rendered) == 9
+    # T30 (session e8b071cd): the marketing set is no longer 9 hand-listed pages - it is every page
+    # the builder declares plus its machine-readable outputs - so the count is taken from the builder
+    # instead of typed here. The invariant this test guards (the unconfirmed-mapping caveat on every
+    # public page) is unchanged and still asserted on each HTML page.
+    assert len(rendered) == len(build_marketing.PAGES) + len(build_marketing.TEXT_PAGES)
+    assert len(build_marketing.PAGES) >= 9
     for page, document in rendered.items():
+        if not page.endswith(".html"):
+            continue  # sitemap.xml / robots.txt / feed.xml carry no prose
         assert "Product identity is not confirmed." in document, page
         assert "they do not establish that those destinations are the products intended in the brief" in document, page
         assert "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" in document, page
