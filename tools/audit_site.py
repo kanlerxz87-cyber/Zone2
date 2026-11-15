@@ -247,6 +247,26 @@ def check_debris(pages) -> list[str]:
     return problems
 
 
+# `COORDINATION.md` is the shared task board and the most-merged file in the repository. Conflict
+# markers have reached `main` in it at least twice (recorded as F-42 debris, and again on 2026-11-15
+# when a merge was committed with the markers still in it). Nothing checked it: it is Markdown, so
+# every HTML gate skipped it, and a reader of the board sees `<<<<<<< HEAD` as content.
+BOARD = REPO / "COORDINATION.md"
+MARKER = re.compile(r"^(<<<<<<< |=======$|>>>>>>> )")
+
+
+def check_board() -> list[str]:
+    if not BOARD.is_file():
+        return []
+    problems = []
+    for n, line in enumerate(BOARD.read_text(encoding="utf-8").split("\n"), 1):
+        if MARKER.match(line):
+            problems.append(
+                f"COORDINATION.md:{n}: unresolved git conflict marker {line.strip()[:40]!r}"
+            )
+    return problems
+
+
 def check_disclosure(pages) -> list[str]:
     return [f"{p.relative_to(REPO)}: disclosure sentence absent"
             for p in pages if DISCLOSURE not in p.read_text(encoding="utf-8")]
@@ -272,6 +292,7 @@ def main() -> int:
         "namespaces": check_namespaces(),
         "disclosure": check_disclosure(pages),
         "debris": check_debris(pages),
+        "board": check_board(),
     }
     failures = sum(len(v) for v in results.values() if isinstance(v, list))
     results["failures"] = failures
@@ -281,7 +302,8 @@ def main() -> int:
         print(json.dumps(results, indent=2))
     else:
         print(f"{results['pages']} published pages audited")
-        for key in ("fragments", "spec_sources", "prose_counts", "namespaces", "disclosure", "debris"):
+        for key in ("fragments", "spec_sources", "prose_counts", "namespaces", "disclosure", "debris",
+                    "board"):
             items = results[key]
             print(f"  {key:13s} {'PASS' if not items else f'FAIL ({len(items)})'}")
             for item in items:

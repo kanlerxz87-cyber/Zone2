@@ -4349,7 +4349,6 @@ hand-typed, has no generator, and no CI step reads it — so it drifted to that 
 green. Separately `rel="icon"` is on the 4 `journal/` pages and on **0** of the 13 root pages, so the
 landing page's default `/favicon.ico` request 404s. That is the organic-traffic plumbing the brief asks
 for. Full record with reproducing commands: `docs/verification-156aae86.md`.
-<<<<<<< HEAD
 ### Addendum — `1b839f87` close-out (2026-11-15 UTC)
 
 - **PR #92** (record-only: this section's merge record) — **MERGED** 2026-11-15T13:11:06Z, merge commit `d887ae7`.
@@ -4484,7 +4483,6 @@ index, navigation or generated page was edited. Scope held to `COORDINATION.md`.
 | Sync note | `main` advanced several times during this session (PRs #89, #91, #95, #99, #102). Each sync resolved `COORDINATION.md` by keeping `main`'s content and re-appending this session's section. No other session's work was dropped. One early rebase left a conflicted local commit, which was never pushed; the branch was then reset to its pushed state and re-synced by merge, with no force-push. |
 | Irregularities | (1) PR #89 (font paths, F-39) resolved the 404 fonts on `main`. (2) PR #70 (`arena/cffe745a-zone2`) was still open at claim time with no owner record on the board; its status is not changed here. (3) The landing-page claim that “an unknown nine-character code on the same short-link service returns a 404” was not tested by this session and is not confirmed by this record. |
 | Still owner-open | Intended product for each supplied code (F-01/F-03); Associates tag and tagged links (F-07/F-24); Creators API (F-05). These need the account owner and are not blocked by this merge. |
-=======
 
 ## Closing record — T43 — `arena/156aae86-zone2` (session `156aae86`, 2026-11-15 UTC)
 
@@ -4504,7 +4502,6 @@ index, navigation or generated page was edited. Scope held to `COORDINATION.md`.
 | Self-corrected in this task | (a) IR-04 and IR-06 were both wrong on first write; corrected in place in the record. (b) **The first generated sitemap shipped `research-hub/404.html`** — the exclusion rule was an exact path, so a nested error page got through, and `seo_audit` D2 passed because that file does exist. Caught by reading the deployed file by hand, fixed by matching on basename, re-tested as N10. |
 | Left open for the owner (unchanged, blocks revenue not the build) | F-01/F-03 confirm the intended ASINs · F-24 no Associates `tag`, so the supplied links cannot earn as supplied · F-05 Creators API · F-08 no performance data exists · the suggestions board (`pages/suggestions.html`) and questions register (`pages/questions.html`) |
 | Renumbering trail | claimed T41 → **T43** (T41 shipped by `08789ab3` as PR #97, T42 by `bfb20351` as PRs #95/#99 while this branch was open). Nothing of either session's record was altered; the `COORDINATION.md` rebase conflict was resolved by taking `main`'s full text and appending this record. |
->>>>>>> 93087a0 (T43 closing record: PR #100 and #102 merged, Pages deploy confirmed, live sitemap verified (114 URLs, 0 error pages))
 
 ## CLAIM + CLOSING RECORD — T45 — `arena/2b07e526-zone2` (2026-11-15 14:35 UTC; renumbered from T41→T42→T43→T44)
 
@@ -4588,3 +4585,17 @@ handled the recorded way: the **entire build job was replayed locally** — the 
 and every `run:` step executed in order, 25 of 25 exit 0, including the new
 `build_readiness.py --check` step. The post-merge `push` run on `main` is the server-side
 confirmation.
+
+### Addition to T45 — two more gates, from defects this session made itself
+
+- **Conflict markers in `COORDINATION.md`.** While merging `main` for the sixth time, a resolution was
+  committed with the markers still in the file — the exact defect recorded as F-42 on this board in an
+  earlier session. Nothing checked for it: the file is Markdown, so every HTML gate skipped it, and a
+  reader of the board sees `<<<<<<< HEAD` as content. `tools/audit_site.py` now has a **`board`** check
+  that fails on any of the three marker lines in `COORDINATION.md`. Negative-tested: injecting the
+  three lines fails the audit with the line numbers; removing them passes.
+- **The landing-page `debris` check** (already added by this session) covers the same class in HTML:
+  stray unstyled prose, and a link repeated inside one list.
+
+Both were bugs this session created or found live, not hypotheticals, which is the only reason they
+were worth a gate each.
