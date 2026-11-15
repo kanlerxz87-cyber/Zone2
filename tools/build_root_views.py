@@ -93,6 +93,7 @@ def page(title: str, lead: str, active: str, body: str) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(title)} — Zone2</title>
 <meta name="description" content="{esc(lead)}">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>

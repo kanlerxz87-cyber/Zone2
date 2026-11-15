@@ -4265,7 +4265,11 @@ Follow-up to T40 (`3db75825`, merged PR #91). T40 was claimed in parallel by thi
 | Supplied links | Re-observed live: `B04G1MEwY`→`B0CDY277D3`, `B02NbDxp3`→`B09B7SB46R`, `B00hJ57DV`→`B08DKYBTPH`; all `plpRedirect=mhFallback`, no Associates tag — matches the site |
 | Irregularities still open (owner) | F-05 / F-07 / F-24 (no Associates tag or ID; no Creators API credentials). I-D (board size, ~401 KB) and I-C (rows reading "in progress" with closing records) — recommendations only. |
 | Flagged for Review register | Unchanged (no new product-level irregularity found on official sources; process items recorded here, not on the public register, because flags must cite official sources) |
-| PR | Opened from `arena/08789ab3-zone2` → `main`; link and merge result recorded in the follow-up closing line below |
+| PR | **[#94](https://github.com/kanlerxz87-cyber/Zone2/pull/94)** — `T41: follow-up to T40 …` · PR check `Build and verify` on head `235b8a5` = **success** (deploy job skipped on PRs by design) · merged with `gh pr merge 94 --merge` → merge commit **`d4b68ee`** at 2026-11-15 13:10:04 UTC |
+| Merge-time deploy | Post-merge `Build, verify and deploy` run for `d4b68ee` was **cancelled** by the workflow's `pages` concurrency group (`cancel-in-progress: true`) when PR #92 pushed `d887ae7` one second later. Its build job passed; its deploy job was cancelled and GitHub refuses re-runs of that run ("its workflow file may be broken"); a manual `workflow_dispatch` returned HTTP 403 to this session. |
+| Pages | `GET /repos/…/pages` → `status: built`, source `main` `/`. Legacy `pages-build-deployment` = **success** for `d4b68ee` and `d887ae7`. Live fetch of `docs/verification-08789ab3.md` served this record. |
+| Full gate replay on live `main` | Shallow clone of `origin/main` at `23c7fd2` (PR #96, after this merge): all 22 CI steps → **22/22 exit 0**. (An earlier replay from a `git archive` extract failed step 09 only because that step needs a `.git` directory; re-run in a real clone it passes.) |
+| Change request (not implemented; `.github/workflows/pages.yml` is shared) | **CR-T41-1.** Set `cancel-in-progress: false` for the `pages` concurrency group, or split the deploy job into its own group. Otherwise a deploy is cancelled whenever two merges land close together, which happened on 4 of the 6 most recent `main` runs. |
 
 ## Session record — `arena/b6defa90-zone2` (session `b6defa90`, 2026-11-15 UTC) — task T40
 
@@ -4311,36 +4315,112 @@ No file in this claim's scope is claimed by another session: all owning sessions
 
 ---
 
-## CLAIM — T43 — `arena/2b07e526-zone2` (2026-11-15 13:40 UTC; renumbered from T41 then T42)
+## Session claim — T43 — `arena/156aae86-zone2` (session `156aae86`, 2026-11-15 UTC)
 
-**Renumbering trail.** Claimed as T41 at 13:12 UTC (taken by `08789ab3`), renumbered to T42 at 13:14
-UTC (`bfb20351` had taken it by 13:20). Now **T43**. Recorded rather than hidden, per the lesson in
-the T39 record. No other session's work was overwritten at any point: each conflict was resolved by
-aborting my own history and re-applying only my files onto current `main`.
+**Renumbered T41 → T43.** Claimed as T41 on a branch based on `83f52a9`. While it was in flight, `main`
+advanced through PRs #92–#99 and **T41 was claimed and shipped by session `08789ab3`** and **T42 by
+`bfb20351`**. Per the board's renumbering precedent the label moves; nothing of any other session's record
+was edited, reordered or deleted, and no other session's file was touched.
+
+**What changed under this branch — read before reviewing the diff:**
+
+| Change on `main` while this branch was open | Effect here |
+|---|---|
+| Session `b6defa90` (T40) removed the `EAD`/`in` merge residue from `index.html` and `EXECUTIVE_SUMMARY.md` (PR #96, `e943abc`) | **This session's independent repair of the same defect was dropped in the rebase.** Verified present on the final tree: `grep -c '^EAD$\\|^in$'` → 0 in both files. No duplicate fix shipped. The finding is retained in the record because it was found independently and because nothing in the gate suite would have caught it. |
+| Session `08789ab3` (T41) closed T40's I-A (ASIN rule) and I-B (PR #70) | No overlap; not re-done |
+| Session `bfb20351` (T42) removed an unsourced Osaka-location claim from `ledger/questions.json` | Not touched; `ledger/**` is outside this session's scope |
+
+**Claimed:** T43. **Board state at claim (rebase point):** `origin/main` = `bfc240d`. Open PR: **#90**
+(verification-only, `COORDINATION.md` scope). No issue open.
+
+**Non-overlap statement.** T43 owns the root `sitemap.xml`, two new tool files, two appended CI steps, a
+mechanical `<link rel="icon">` insertion on the root pages (and in the two generators that emit three of
+them), and this record. It does **not** touch `ledger/**`, `assets/js/**`, `marketing/data/**`,
+`tools/build_marketing.py`, the product/identity/price/commission registers, or any page body prose.
+
+**Why this scope.** Every surface the owner asked for was already published and green on `main` before this
+session touched anything — the suggestions board (`pages/suggestions.html`, SG-01…SG-10), the questions
+register (`pages/questions.html`, Q-01…Q-16), the playbook (`playbook.html`), the marketing publication
+(`marketing/**`, 18 pages) and the journal (`journal/**`, 4 pages). What no task had covered was the
+mechanism that tells a search engine those pages exist, and at the rebase point it is still measurably
+broken: root `sitemap.xml` holds **16** `<loc>` entries against **115** published HTML pages (**99 absent,
+86%**), including `marketing/index.html`, `playbook.html` and all 38 `pages/*.html`. The file is
+hand-typed, has no generator, and no CI step reads it — so it drifted to that state with every build
+green. Separately `rel="icon"` is on the 4 `journal/` pages and on **0** of the 13 root pages, so the
+landing page's default `/favicon.ico` request 404s. That is the organic-traffic plumbing the brief asks
+for. Full record with reproducing commands: `docs/verification-156aae86.md`.
+
+---
+
+## CLAIM + CLOSING RECORD — T44 — `arena/2b07e526-zone2` (2026-11-15 14:05 UTC)
+
+**Renumbering trail (recorded, not hidden).** Claimed as **T41** (13:12 UTC) — taken by `08789ab3`.
+Renumbered **T42** (13:14) — taken by `bfb20351`. Renumbered **T43** (13:40) — taken by `08789ab3`
+again, PR #97. Now **T44**. At no point was another session's work overwritten: each collision was
+resolved by aborting my own history and re-applying only my own files onto current `main`.
 
 **Task.** A release-readiness board: one row per named requirement on Amazon's *Application Review
-Process* page (S23), each with the official source and, where measurable, a count recomputed from this
+Process* page (S23), each with its official source and, where measurable, a count recomputed from this
 tree; plus the two owner blockers that page creates, registered on the canonical question and
-suggestion boards. Also: repair the remaining live landing-page defects that T40's fix left behind, and
-add the audit check that would have caught them.
+suggestion registers. Also: the landing-page list defects that T40's repair stopped short of, and the
+audit check that makes them impossible to reintroduce.
 
-**File scope:**
-- `ledger/readiness.json` (new), `tools/build_readiness.py` (new), `release/index.html` (new, generated)
-- `ledger/questions.json` (+Q-17), `ledger/suggestions.json` (+SG-11) — data only; every generated
-  surface is rebuilt by its owning generator, never hand-edited
-- `tools/audit_site.py` — new `debris` check + the `release/` namespace entry
-- `index.html` — the duplicate `marketing/index.html` list entry and the stale "Field Notes" label
-- `.github/workflows/pages.yml` — one added step
-- `COORDINATION.md` — this claim and the closing record
+**Claimed file scope (all produced):**
+
+| File | Change |
+|---|---|
+| `ledger/readiness.json` | new — 12 rows, one per S23 requirement |
+| `tools/build_readiness.py` | new — generator + gate, proven to fail on 14 injected defects |
+| `release/index.html` | new — the published board, generated |
+| `docs/release-readiness-2b07e526.md` | new — the review record |
+| `ledger/questions.json` | +Q-17 (website ownership and the exact URL to declare) |
+| `ledger/suggestions.json` | +SG-11 (close Amazon's 10-post content bar before applying) |
+| `tools/audit_site.py` | new `debris` check; `release/` added to REQUIRED_NAMESPACES |
+| `index.html` | duplicate `marketing/index.html` list entry removed; link to the board added |
+| 9 root pages | stale "Field Notes" label corrected to "Counter Notes" (the published brand) |
+| `design-notes.html` | two more "Field Notes" references in prose corrected |
+| `.github/workflows/pages.yml` | one added step (`build_readiness.py --check`); no existing step changed |
 
 **Not touched:** `ledger/products.json`, `ledger/flags.json`, `ledger/sources.json`,
-`ledger/compliance.json`, `ledger/requirements.json`, `marketing/**`, `journal/**`, `pages/**`,
-`revalidation/**`, `affiliate-lab/**`, `research-hub/**`, `zone2/**`, `northstar/**`, `assets/**`.
+`ledger/compliance.json`, `ledger/requirements.json`, `marketing/**`, `journal/**`, `pages/**` (all
+regenerated by their owners), `revalidation/**`, `affiliate-lab/**`, `research-hub/**`, `zone2/**`,
+`northstar/**`, `assets/**`, `tools/build_sitemap.py`, `tools/seo_audit.py`. No product value, flag,
+source id or requirement status is edited by this session.
 
-**Known overlap, deliberately kept small:** T40 (`b6defa90`) already removed the `EAD` lines and the
-bare `in` from `index.html`. Their fix stopped within four lines of the duplicated `Suggestions board`
-entry and left a second `marketing/index.html` entry labelled "Field Notes", so the list printed the
-same page twice under two names. This session fixes those two and adds the check; it does not
-re-edit anything T40 touched.
+**Verification (2026-11-15, over the network in this session, not copied from the registers):**
 
-**Status:** in progress.
+| # | Claim | Result | Source |
+|---|---|---|---|
+| V-01 | Supplied link 1 → destination | `link.amazon/B04G1MEwY` → `amazon.com/dp/B0CDY277D3`, CHEFMAN 6 Qt dual-basket | https://link.amazon/B04G1MEwY |
+| V-02 | Supplied link 2 → destination | `link.amazon/B02NbDxp3` → `amazon.com/dp/B09B7SB46R`, Emeril Lagasse 26QT French Door | https://link.amazon/B02NbDxp3 |
+| V-03 | Supplied link 3 → destination | `link.amazon/B00hJ57DV` → `amazon.com/dp/B08DKYBTPH`, Chefman 8 Qt TurboFry | https://link.amazon/B00hJ57DV |
+| V-04 | No Associates tag; `btn_ref` rotates per fetch | Confirmed on all three: fresh `srctok` each fetch, `plpRedirect=mhFallback`, no `tag=` | the three links |
+| V-05 | ASIN is a 10-digit code | Verbatim: "ASIN is the 10-digit code that Amazon uses to denote specific products." Supplied tokens are 9 characters. | https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| V-06 | §5 disclosure sentence | Verbatim; page dated October 15, 2025 | https://affiliate-program.amazon.com/help/operating/agreement |
+| V-07 | Price display is gated on Amazon-served links or API data | Verbatim: "your Site may only show prices and availability if: (a) we serve the link … or (b) you obtain Product pricing and availability data via Creators API or PA API". Confirms the blank-price policy; narrows what "unverified" means for a price. | https://affiliate-program.amazon.com/help/operating/policies |
+| V-08 | Content bar, ownership, exact URLs, 3-sales rule | Verbatim; captured in `ledger/readiness.json` → `primary_source_quotes`, rendered on the board | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
+
+**Gate replay on the merged tree — every step exit 0:** `validate_data` · `audit_site` (6 checks:
+fragments, spec sources, prose counts, namespaces, disclosure, **debris**) · `validate_decisions` ·
+`build_readiness --check` · `build_site --check` · `build_root_views --check` · `build_summary
+--check` · `build_marketing --check` · `build_decisions --check` · `build_sitemap --check` ·
+`seo_audit` · `tests/test_pipeline.py` 15/15 · `verify_marketing` · `revalidation/verify` ·
+`revalidation/build --check` · `affiliate-lab/verify_site` · `research-hub/verify` · `research-hub`
+build no drift · `node --check` ×2. Recursive link + disclosure sweep over all published HTML
+(including `journal/` and `release/`, which CI's root glob does not reach): 0 problems.
+
+**Irregularities handled (non-blocking, published):**
+- **The landing-page corruption was fixed twice, by two sessions, independently.** `b6defa90` (T40)
+  removed the `EAD` lines and the bare `in`; this session found and removed what their repair stopped
+  short of — a duplicated `Suggestions board` link and a second entry pointing at `marketing/index.html`
+  under a label ("Field Notes") that named no published brand. Neither session's fix was discarded.
+- **Four task ids were taken under this session** (T41, T42, T43 twice). The board is a conflict
+  magnet: three merge attempts conflicted on `COORDINATION.md` alone in 60 minutes. A per-session log
+  file would end the class.
+- **RR-02 / RR-12 are not answerable by an agent.** Whether a `github.io` subdomain satisfies "You must
+  own your website" is not stated on any page read; the board marks it UNVERIFIED and does not infer.
+- **The 14 counted editorial posts are not 14 posts by Amazon's bar.** RR-03 stays GAP despite the
+  count clearing 10, because the pages are specification surfaces, not articles a reader arrives at
+  from a search. That judgement is Amazon's; the count is simply not evidence of the criterion.
+- **No product value was added or changed.** Price, rating, review count, availability and commission
+  band remain blank; the Creators API is unreachable without the account (F-05 / Q-02).
