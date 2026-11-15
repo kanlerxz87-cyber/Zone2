@@ -1,0 +1,240 @@
+{
+  "note": "Line-by-line review of the deployed tree. Every row carries the exact evidence this session ran (a file:line, or a command and its measured output), and either an official source id from audit/data/sources.json or an explicit UNVERIFIED status naming how it would be settled. Nothing here is a product fact; nothing here is inferred. 'severity' is the reviewer's judgement, not a program fact, and is labelled as such.",
+  "as_of": "2026-11-15",
+  "repo_state": {
+    "branch": "arena/f8e18ca8-zone2",
+    "base_commit": "ceaf9a79c4d3ad584f168271ce116fa096c761ed (main)",
+    "main_at_review": "23895e2 (PR #89 merged)",
+    "pages_published": 116,
+    "namespaces": 7,
+    "gates_green_on_the_untouched_tree": "tools/validate_data.py 0 errors; tests/test_pipeline.py; tools/build_site.py --check; tools/build_root_views.py --check; tools/build_marketing.py --check; tools/audit_site.py"
+  },
+  "findings": [
+    {
+      "id": "A-01",
+      "area": "Crawlability and rendering",
+      "severity": "high",
+      "finding": "The tables a reader comes for do not exist in the HTML. Eight root pages ship empty containers that a script fills at runtime; with JavaScript off, or for a crawler that does not render, the landing page has no product table, no findings table and no flag table at all.",
+      "evidence": "index.html declares five empty render containers (productCards, execFactsTable, resolutionTable, flagPreview, featuresGrid); products.html declares five (#productsTable, #resolvedTable, #productOverview, #specsTable, #resolutionTable) and loads assets/js/data.js (102.0 KB) plus assets/js/app.js (20.9 KB) at products.html:158-159. Measured with a regex over each file for an element whose id is followed immediately by its closing tag: index 5, products 5, analysis 2, content 2, compliance 1, tracking 1, flagged 1.",
+      "why_it_matters": "The pages/ namespace (37 generated pages, 705 table rows) is static HTML and is crawlable; the root landing, which is the page linked from outside, is not. A reader arriving with a blocked script sees a hero and an empty shell.",
+      "source_ids": [
+        "SA-13"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-01",
+      "recommendation_note": "Pre-render the tables into the HTML at build time (the ledger already holds the rows) or make pages/ the landing. Do not add a new data layer; reuse ledger/*.json and the existing renderers."
+    },
+    {
+      "id": "A-02",
+      "area": "Disclosure placement",
+      "severity": "high",
+      "finding": "The required sentence is present on every page, but on the busiest pages it appears once, at the very bottom, after every product link and every paragraph. The disclosure is not 'placed with the endorsement message' on the pages where the links are.",
+      "evidence": "index.html: the first Amazon product link is at line 112 and the first (only) disclosure sentence is at line 285 — 93% of the way through the file. Measured across the repo: of the 77 published pages that link to an Amazon product page, 24 show the first disclosure after the first Amazon link (index.html, all 11 pages/categories/*, pages/products.html, pages/sources.html, pages/suggestions.html, pages/executive-summary.html, pages/content-engine.html, pages/modules/m-08-*.html, decisions/index.html, decisions/flagged.html, zone2/products.html, zone2/flagged.html, zone2/sources.html, zone2/executive-summary.html).",
+      "why_it_matters": "Section 5 requires the statement to be clear and prominent; the FTC brochure says a disclosure at the end of a long page is likely to be missed and must be placed with the message itself. The project's own ledger rule R-02 states the same requirement, and tools/generate_articles.py already enforces it for generated articles — the root pages are simply outside that linter.",
+      "source_ids": [
+        "SA-01",
+        "SA-16"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-02",
+      "recommendation_note": "Render the disclosure above the first affiliate link on every page that carries one, and extend the existing DISCLOSURE_POSITION lint to the root and pages/ namespaces."
+    },
+    {
+      "id": "A-03",
+      "area": "Search metadata",
+      "severity": "medium",
+      "finding": "None of the 13 root pages declares a canonical URL, an Open Graph block or structured data. The marketing/ namespace does all three, so the same repository publishes two different standards of search hygiene.",
+      "evidence": "Measured over the 13 root *.html files: rel=\"canonical\" 0/13, og: 0/13 (playbook.html has an og: title only), application/ld+json 0/13. marketing/index.html, marketing/buying-guide.html and marketing/comparison.html each carry canonical + OG + JSON-LD.",
+      "why_it_matters": "Google documents that unique, descriptive titles and a canonical URL help it identify the page to show; with the marketing/ and pages/ namespaces describing overlapping products, the absent canonicals leave the consolidation choice to the crawler.",
+      "source_ids": [
+        "SA-13"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-03",
+      "recommendation_note": "Add canonical + OG to the 13 root pages from the same generator that writes them, and one canonical inventory for the whole site (see A-10)."
+    },
+    {
+      "id": "A-04",
+      "area": "Outbound link qualification",
+      "severity": "medium",
+      "finding": "150 body-level links to Amazon product pages carry no rel=\"sponsored\" (they carry rel=\"noopener noreferrer\" only). 78 links are correctly qualified, so the rule is known and applied unevenly.",
+      "evidence": "Parsed with html.parser over all 116 HTML files, tracking whether an anchor sits inside a table cell whose class contains 'src' (a citation cell): 393 Amazon anchors are citations inside source cells; outside those, 228 Amazon anchors exist, 78 with rel=\"sponsored\" and 150 without. Largest concentrations: pages/sources.html 11, revalidation/products.html 11, affiliate-lab/products.html 9, research-hub/products.html 9, revalidation/flagged.html 9, zone2/flagged.html 9, playbook.html 8, pages/products.html 6.",
+      "why_it_matters": "Google's spam policies say paid or sponsored links are fine when qualified with rel=\"sponsored\" or \"nofollow\". The project's README states that outbound links carry rel=\"sponsored\"; on these 150 anchors that statement is not true. Recommendation pages that link to the listing are the ones a reader is most likely to click.",
+      "source_ids": [
+        "SA-11"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-04",
+      "recommendation_note": "Apply the existing helper in assets/js/app.js (which already emits rel=\"sponsored noopener noreferrer\") to every static Amazon anchor outside a source cell, and add the check to CI for all namespaces."
+    },
+    {
+      "id": "A-05",
+      "area": "Measurement and the optimization promise",
+      "severity": "high",
+      "finding": "There is no measurement in production. No analytics script, no consent tool, no click endpoint and no Associates report exists in the deployed site; the tracker in tools/redirect_server.py is a local script with a test harness and is not deployed anywhere. Every 'optimization', 'conversion tracking' and 'campaign' page therefore describes a capability that has never processed a single click.",
+      "evidence": "Searched all 116 HTML files for any third-party script src, gtag(, googletagmanager, plausible, matomo, fathom, umami: zero matches. tools/redirect_server.py writes to .local/clicks.jsonl (a path excluded from this repository) and is not referenced by .github/workflows/pages.yml. ledger/flags.json carries F-07 (no Associates account or tag) and the performance tables on pages/categories/* are explicit 'not published' blanks (164 such rows, measured).",
+      "why_it_matters": "The brief's core ask is a platform that tracks clicks and conversions and optimizes campaigns. Today the site can say what it would measure but cannot measure it, so any revenue claim, conversion rate or A/B result published from this repository would be invented.",
+      "source_ids": [],
+      "status": "UNVERIFIED",
+      "unverified_because": "Not a source question: this is a measurement of the repository itself (zero analytics present). The related programme facts are carried, not re-fetched, in SA-18.",
+      "recommendation": "R-05",
+      "recommendation_note": "Owner decides (D-05/G-03): a privacy-minimal first-party counter on a host you control, or no measurement at all. Until then, publish no performance number anywhere."
+    },
+    {
+      "id": "A-06",
+      "area": "Content architecture and duplicate mass",
+      "severity": "high",
+      "finding": "116 pages are published across seven namespaces that describe the same three products: the root site, pages/, marketing/, journal/, decisions/, affiliate-lab/, research-hub/, revalidation/ and zone2/. Five of them are called 'products' and four of them are called 'flagged'. This is the shape Google names when it describes scaled content and thin affiliate pages.",
+      "evidence": "Counted from the working tree: 116 HTML files (114 non-404), spread over eight published directories plus the root — root 13, pages/ 39, marketing/ 18, research-hub/ 13, affiliate-lab/ 10, zone2/ 8, revalidation/ 6, decisions/ 4, journal/ 4, northstar/ 1. Six pages are named 'products' (products.html, pages/products.html, research-hub/products.html, zone2/products.html, affiliate-lab/products.html, revalidation/products.html) and eight are flag/gap registers (flagged.html, pages/flags.html, marketing/flagged.html, decisions/flagged.html, research-hub/flagged.html, revalidation/flagged.html, affiliate-lab/flagged-for-review.html, zone2/flagged.html). Shingle overlap between products.html and index.html is 0.102 (Jaccard, 5-word shingles): the landing and the catalogue carry materially the same text.",
+      "why_it_matters": "Google's spam policies describe scaled content abuse as 'many pages generated for the primary purpose of manipulating search rankings' and thin affiliation as affiliate pages without original added value; they also say a good affiliate site adds value through original reviews, testing, navigation and comparisons. Publishing seven parallel descriptions of three products invites exactly the manual action those sections describe, and dilutes every page's ranking signal.",
+      "source_ids": [
+        "SA-10",
+        "SA-08"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-06",
+      "recommendation_note": "One public site, one page per intent. Keep the companion namespaces as archive/evidence under a single clearly-labelled archive route, or noindex them. Do not delete (the brief requires the findings persist)."
+    },
+    {
+      "id": "A-07",
+      "area": "Trust surfaces",
+      "severity": "high",
+      "finding": "No page names an author, an editor, an owner, or a contact route, and no page carries a published or modified date. The site argues for transparency more thoroughly than any site in its category and still fails the two trust questions Google's own guidance asks first.",
+      "evidence": "Measured over the 13 root pages: rel=\"author\" 0, an about page 0 (no about.html exists anywhere in the published set), the word 'contact' 0, 'Written by' 0, dateModified 0. The strongest editorial pages (journal/*.html, marketing/topics/*) carry no byline either.",
+      "why_it_matters": "Google's people-first guidance asks whether the content shows 'clear sourcing, evidence of the expertise involved, background about the author or the site that publishes it, such as through links to an author page or a site's About page'. Its site-reputation examples describe an unattributed, undisclosed affiliate article as 'likely to take action'. A byline is also the one thing the FTC brochure assumes when it says the endorser must be identifiable.",
+      "source_ids": [
+        "SA-12",
+        "SA-17",
+        "SA-16"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-07",
+      "recommendation_note": "A real named author (D-10/G-05), an About page that states the method, and a visible 'last reviewed' date per article. An invented author is worse than none and is prohibited by the site's own editorial rules."
+    },
+    {
+      "id": "A-08",
+      "area": "Visual evidence",
+      "severity": "medium",
+      "finding": "The site contains zero photographs. There is one SVG favicon and no raster image anywhere in 116 pages, including the three products it is built to sell.",
+      "evidence": "Counted over the working tree: 0 files matching *.png, *.jpg, *.webp; 1 file matching *.svg (assets/favicon.svg).",
+      "why_it_matters": "Google's review guidance asks for 'visuals, audio, or other links of your own experience' as evidence; its helpful-content guidance lists page experience. An affiliate site with no imagery also has nothing to show in Discover, in social cards (no OG image on any root page) or in image search.",
+      "source_ids": [
+        "SA-14",
+        "SA-12",
+        "SA-20"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-08",
+      "recommendation_note": "This one cannot be automated away, and it is narrower than it looks. The IP Licence permits a product image only as Program Content, forbids storing or caching one, and allows a link to one for at most 24 hours (SA-20, added after session 3e0b3b4e's review read the clause this session had missed). With no Associates account there is no Program Content, so the workable route now is original vector diagrams of the measured specifications — footprint, capacity, door geometry — which this project owns outright."
+    },
+    {
+      "id": "A-09",
+      "area": "Page weight",
+      "severity": "medium",
+      "finding": "The landing page ships 472 KB before it can render, 311 KB of which is two font families that are not needed to read a table.",
+      "evidence": "index.html 17.9 KB + assets/css/style.css 19.8 KB + assets/js/data.js 102.0 KB + assets/js/app.js 20.9 KB + inter-latin-wght-normal.woff2 47.1 KB + fraunces-latin-full-normal.woff2 118.2 KB + fraunces-latin-full-italic.woff2 146.2 KB = 472.1 KB. data.js (102 KB) is loaded on every root page, including 404.html.",
+      "why_it_matters": "Google's helpful-content guidance says its core systems reward 'a good page experience' across many aspects at once. 472 KB of blocking weight to show an empty table is the combination that costs a reader on a phone.",
+      "source_ids": [
+        "SA-12"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-09",
+      "recommendation_note": "Fix A-01 first (pre-rendering removes the 102 KB script from the critical path); subset the fonts to the weights used, or drop the display face."
+    },
+    {
+      "id": "A-10",
+      "area": "Crawl inventory",
+      "severity": "medium",
+      "finding": "The sitemap lists 16 URLs while the repository publishes 114 indexable pages, and marketing/ ships a second, separate sitemap and robots file. Nothing in the repository states which URLs are meant to be public.",
+      "evidence": "sitemap.xml: 16 <loc> entries; published non-404 HTML pages: 114 — root 12 (13 files less 404.html), pages/ 39, marketing/ 18, research-hub/ 12 (13 less its 404.html), affiliate-lab/ 10, zone2/ 8, revalidation/ 6, decisions/ 4, journal/ 4, northstar/ 1. marketing/sitemap.xml holds 18 <loc>. Two sitemaps and two robots files (robots.txt, marketing/robots.txt) ship from one origin, and no page lists the canonical inventory of what is meant to be public.",
+      "why_it_matters": "A sitemap is a statement of intent to the crawler; 16 of 114 tells Google that 98 pages are accidental. Combined with A-06, the site's own inventory says it does not know which pages it wants indexed.",
+      "source_ids": [
+        "SA-13"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-10",
+      "recommendation_note": "Decide the public set once (D-11), generate one sitemap from it, and noindex or archive the rest — the same decision that resolves A-06."
+    },
+    {
+      "id": "A-11",
+      "area": "Pricing (verified compliant, not a defect)",
+      "severity": "none",
+      "finding": "No page prints a product price, and this is correct rather than an omission: the two permitted routes to display price both require infrastructure the site does not have.",
+      "evidence": "CI step 'No page prints a price and every page discloses' passes over 100+ pages; tools/validate_data.py reports price_findings 0. The permitted routes in SA-04 are (a) a link whose price Amazon serves, or (b) Creators API/PA-API data; the site uses neither, and §3(y) forbids price tracking or alerting outright.",
+      "why_it_matters": "Recorded here so the absence of price is not mistaken for missing work in a later session: adding a price that Amazon did not serve would be a compliance breach, not an improvement.",
+      "source_ids": [
+        "SA-04",
+        "SA-06"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "",
+      "recommendation_note": "No action. This row is a control, not a finding."
+    },
+    {
+      "id": "A-12",
+      "area": "Titles",
+      "severity": "low",
+      "finding": "Four page titles are duplicated across the site and 14 of 116 exceed 60 characters.",
+      "evidence": "Duplicate <title> values: 'Category band 4.00% · Zone2' x2, 'Category band 0.00% · Zone2' x2, 'Executive summary · Zone2' x2, 'Niche discovery · Zone2' x2. Titles longer than 60 characters: 14.",
+      "why_it_matters": "Google asks for unique, descriptive titles; two pages returning the same title in one result set makes the choice arbitrary for both the reader and the crawler.",
+      "source_ids": [
+        "SA-13"
+      ],
+      "status": "VERIFIED",
+      "recommendation": "R-11",
+      "recommendation_note": "Include the category or page qualifier in the generated title; the generator already knows it."
+    },
+    {
+      "id": "A-13",
+      "area": "Gate coverage (what CI cannot see)",
+      "severity": "medium",
+      "finding": "The CI suite is unusually strong on data provenance and blind to the defects above. It does not check CSS url() references, disclosure position, canonical or sitemap coverage, or rel=\"sponsored\" outside pages/.",
+      "evidence": "Read of .github/workflows/pages.yml (24 run steps): the link check parses HTML only (no url() resolution); the disclosure step asserts presence, not position; PR #89's own record logs the missing CSS check as 1B-2; the sponsored-link assertion is scoped to Path('pages').rglob. During this session the font url() defect was live on the deployed site and would have passed every gate had a session not caught it by hand.",
+      "why_it_matters": "A gate that cannot fail is a claim, not a control. Three of this audit's findings (A-01, A-04, A-10) are invisible to the current suite, so a future session could regress them silently.",
+      "source_ids": [],
+      "status": "UNVERIFIED",
+      "unverified_because": "This is a statement about the workflow file (read directly at .github/workflows/pages.yml), not about an external document.",
+      "recommendation": "R-12",
+      "recommendation_note": "This session ships tools/check_css_urls.py (fails on a broken CSS reference) and tools/validate_audit.py (fails if any audit row loses its source or flag). Disclosure position and sitemap coverage are published as recommendations because fixing them requires changing pages other sessions own."
+    },
+    {
+      "id": "A-14",
+      "area": "Prior defect, independently confirmed fixed",
+      "severity": "none",
+      "finding": "The self-hosted font 404 recorded by earlier sessions is genuinely fixed on the deployed site, and the fix is in the stylesheet the browser downloads — not only in the repository.",
+      "evidence": "GET https://kanlerxz87-cyber.github.io/Zone2/assets/css/style.css on 2026-11-15 returns a stylesheet whose @font-face rules read url(\"../fonts/fraunces-latin-full-normal.woff2\"), url(\"../fonts/fraunces-latin-full-italic.woff2\") and url(\"../fonts/inter-latin-wght-normal.woff2\"). Resolving each against assets/css/ yields assets/fonts/<file>, which exists on disk for all three. Merged in PR #89 (commit 23895e2) by session 1b839f87.",
+      "why_it_matters": "Recorded so the fix is not re-litigated, and so the review distinguishes 'same defect class, now repaired' from 'new defect'.",
+      "source_ids": [],
+      "status": "VERIFIED",
+      "unverified_because": "",
+      "recommendation": "",
+      "recommendation_note": "No action. Verified live, not inferred from the commit."
+    },
+    {
+      "id": "A-15",
+      "area": "The core provenance claim",
+      "severity": "none",
+      "finding": "The project's central claim holds: of 705 table rows on the 37 generated findings pages, every row either ends in an official-domain source link or is an explicit blank. 18 rows are neither, and all 18 are internal code-contract rows (template names, error codes) that cite a file in this repository, not an external fact.",
+      "evidence": "Parsed every <tr> under pages/ (705 body rows): 523 (74.2%) contain at least one href on an official domain (affiliate-program.amazon.com, amazon.com, chefman.com, emerileveryday.com, ftc.gov, developers.google.com, support.google.com, docs.github.com); 164 (23.3%) are explicit blanks of the form 'not published — requires a dated Associates report row'; 18 are neither, and all 18 are internal contract rows, listed by group: pages/content-engine.html 9 (template paths and linter error codes), pages/tracking.html 4 (field definitions and the campaign-key rule), pages/verification.html 5 (VERIFIED / REFUTED rows of the check register). No product value was found without a source, and no invented price or performance metric was found on any page.",
+      "why_it_matters": "This is the claim most likely to be hollow in a project of this shape, and it survives line-by-line re-measurement. It is the reason the site is worth fixing rather than replacing.",
+      "source_ids": [],
+      "status": "VERIFIED",
+      "unverified_because": "",
+      "recommendation": "",
+      "recommendation_note": "Keep the gates that produce this property. Any redesign must preserve row-level sourcing."
+    },
+    {
+      "id": "A-16",
+      "area": "Repository hygiene",
+      "severity": "medium",
+      "finding": "Merge-conflict residue was live on the deployed landing page: two stray 'EAD' lines, a duplicated footer list item, a second duplicate pointing at the wrong page, and a stray 'in'. A merge was committed and deployed without anyone reading the result.",
+      "evidence": "Read of index.html: lines 258 and 270 held a bare 'EAD' between list items, line 266 was a second 'Suggestions board' <li>, line 273 duplicated 'Field Notes — verified articles' while pointing at marketing/index.html rather than the field-notes page, and line 300 held a bare 'in'. Repaired in this session's pull request. The conflict markers themselves (<<<<<<< / ======= / >>>>>>>) were gone, which is why no gate caught it: the residue was the content of a partially resolved conflict, and tools/audit_site.py checks fragments, not prose sanity. Verified by re-reading the repaired file and by the <ul>/</ul> and <li>/</li> balance count (4/4 and 24/24).",
+      "why_it_matters": "It shows the failure mode the gates cannot catch — a resolved-looking merge that nobody read. The same mechanism could have published a paragraph that contradicts the ledger, in the footer, on every page of the site, and every gate would still have passed.",
+      "source_ids": [],
+      "status": "VERIFIED",
+      "unverified_because": "",
+      "recommendation": "R-12",
+      "recommendation_note": "Fixed here. The generalisable guard is a smoke check on rendered navigation text, which R-12 covers."
+    }
+  ]
+}

@@ -34,6 +34,12 @@ Dated repository review (2026-11-15), with live re-checks and irregularities R86
 | `journal/dual-basket-air-fryers.html` | What dual-basket cooking actually changes; argued from verified specs, conflicts included |
 | `journal/basket-vs-oven.html` | Choosing between basket fryers and air-fryer ovens by geometry, not brand |
 | `journal/why-every-number-has-a-source.html` | The blank-until-verified methodology and the compliance rules that shaped the build |
+| `audit/index.html` | **Independent audit (2026-11-15, session `f8e18ca8`)** — 16 findings from a fresh line-by-line read of the deployed tree, each with the measurement behind it and an official source or an explicit unverified flag |
+| `audit/suggestions.html` | The review-and-choose board: 14 recommendations with options, recommendation, cost, risk, reversibility and blockers. **Nothing is implemented from it** |
+| `audit/gaps.html` | Missing-information register: 15 questions, what is verified, what is missing, how to close each, and who can |
+| `audit/traffic.html` | Organic-traffic readiness restricted to documented Google/Amazon rules, quoted, plus the five metrics that no official source can verify — left blank |
+| `audit/decision-cost.html` | Cost, reversibility, sequence and the consequence of deciding nothing, per open decision |
+| `audit/method.html` | Every command run, what it cannot see, and which sources were re-fetched today versus carried |
 
 The root pages were redesigned on 2026-11-15 (session `2b257b2e`) into a marketing presentation of the
 same verified data — same ledger, same gates, no value changed; the reasoning lives on
@@ -138,6 +144,7 @@ and **RV-01…RV-03** in [`revalidation/flagged.html`](revalidation/flagged.html
 | `assets/js/data.js` | primary site's dataset | workflow link/asset + data-parse steps | yes |
 | `ledger/` | `pages/` dataset: products, commission table, compliance rules, modules, flags, verification log, sources, niches, campaigns | `tools/validate_data.py` + `tests/test_pipeline.py` | yes |
 | `research-hub/data/` | hub dataset: products, compliance, requirements, sources, raw log | `research-hub/scripts/verify.py` | **no** — see below |
+| `audit/data/` | audit namespace: findings, recommendations, gaps, decision-cost, traffic readiness, sources | `tools/validate_audit.py` + `tools/test_audit.py` (11 negative tests) | yes |
 
 `tools/validate_data.py` fails the build when a row carries a value without a source, or a blank without a
 flag; when a source host is outside the allowlist (`affiliate-program.amazon.com`, `amazon.com`,

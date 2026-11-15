@@ -286,15 +286,26 @@ jobs:
       - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
         run: python3 tools/validate_decisions.py
 
-      # ---- arena/2b07e526-zone2: the release-readiness board (T45) ----
-      # One row per named requirement on Amazon's Application Review Process page (S23), each with the
-      # official source and, where measurable, a count recomputed from this tree. The generator fails on a
-      # row with no official source, a quote that is not on S23 as captured, a BLOCKED row with no named
-      # blocker, a finding with no owner action, a count that disagrees with the tree, a missing
-      # disclosure, a printed product price, or a broken local link. Verified to fail on purpose on
-      # 2026-11-15 against 14 injected defects before being added here.
-      - name: Rebuild the release-readiness board and confirm committed output is current
-        run: python3 tools/build_readiness.py --check
+      # ---- arena/f8e18ca8-zone2: the independent audit namespace ----
+      # 1B-2 (session 1b839f87) recorded that nothing in this workflow resolves a CSS url(),
+      # which is how the font 404 shipped on every page for weeks. Negative-tested: appending a
+      # url() to any stylesheet makes this step fail.
+      - name: Every stylesheet url() resolves to a file
+        run: python3 tools/check_css_urls.py
+
+      # The audit gate holds audit/ to the same contract as the rest of the repo: every finding
+      # is VERIFIED-with-a-source or UNVERIFIED-with-a-reason, a carried source is labelled as
+      # carried on the page, every printed count is derived from the data, links and fragments
+      # resolve, the disclosure is present, and no page prints a price. Negative-tested by
+      # tools/test_audit.py (11 injected defects, each must fire).
+      - name: Rebuild the audit pages and confirm committed output is current
+        run: python3 tools/build_audit.py --check
+
+      - name: Audit gate (sourcing, carried-source labels, derived counts, links, disclosure)
+        run: python3 tools/validate_audit.py
+
+      - name: Audit gate negative tests (11 injected defects must each fire)
+        run: python3 tools/test_audit.py
 
       # T26: this guard was excluded from CI because it reported seven false failures — it
       # resolved the repository root to research-hub/ and then looked for the root site's
