@@ -2534,7 +2534,7 @@ tasks claimed by another session** and **no unclaimed open work** on the board.
 | Task ID | **T26** |
 | Title | Independent verification pass, replication of the `mhFallback` control to all three ASINs, defect sweep, final integration |
 | Owner | `arena/d3ce1c29-zone2` |
-| Status | in progress |
+| Status | done (PR and merge recorded below) |
 | File scope | `COORDINATION.md` (append-only), `ledger/**` (append new verification/sources rows), `docs/**` (new session note), and any file that must change to correct a defect this session proves |
 | Non-overlap | No other session is active. No file owned by another session is edited. |
 
@@ -2916,7 +2916,7 @@ and the closing record follow in the next entry.
 | T31 | **Independent verification-only re-test (no shared file edited).** Line-by-line re-verification of the merged T29 deliverable: every factual claim in `ledger/suggestions.json` (SG-01…SG-10) and `ledger/questions.json` (Q-01…Q-16) re-checked against the official source it cites; rendered `pages/suggestions.html` / `pages/questions.html` checked against the ledgers row by row; every source link resolved; all repo gates re-run on the combined tree; live GitHub Pages deployment confirmed; status audit of open PR #62 (T30). Findings published as `docs/verification-42fa4918.md`; defects logged as change requests or new flags, never silently fixed. | done (PR and merge recorded below) | `arena/42fa4918-zone2` (42fa4918) | `docs/verification-42fa4918.md` (new), `COORDINATION.md` (append-only records only) |
 | T39 | **Publication layer for `marketing/` + the marketing improvement board.** Rebuilds the reader-facing site from a tool screen into a publication (named desk, masthead shell, decision-first buying guide, rewritten per-product articles, six question-shaped guides under `marketing/topics/`, glossary, sitemap.xml / robots.txt / feed.xml, canonical + OG + Article/BreadcrumbList JSON-LD) and publishes `marketing/improvements.html`: 14 suggestions with options, trade-off, cost, evidence and the question each waits on, plus 10 questions in the site's own scope and the design brief for the next revision. Copy moves to `marketing/data/editorial.json` so it can be diffed; gates G11–G14 enforce the ten-rule writing standard (sourced claims, no filler or first-hand claims, no orphan pages, sitemap/feed/canonical coverage), each negative-tested. Reconciled with T32's voice pass (PR #75) rather than overwritten: its `hook_editorial`, `suits_editorial`, `look_elsewhere` and `planned_topics` are all carried. Complements T29's programme boards without duplicating them. | done — PR #82 merged `3d5eda0`; closing record below | `arena/e8b071cd-zone2` (e8b071cd) | `marketing/**` (new `marketing/data/editorial.json`, `marketing/topics/*`, `marketing/improvements.html`, `marketing/sitemap.xml`, `robots.txt`, `feed.xml`, `assets/marketing.css`, `scripts/verify_marketing.py`), `tools/build_marketing.py`, `tests/test_pipeline.py`, `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, `docs/marketing-2026-11-15.md` (new), `COORDINATION.md` |
 | T41 | **Follow-up to T40 (`3db75825`, merged PR #91) — close its open items, do not repeat its review.** (a) I-A: confirm the 10-digit ASIN rule from an Amazon help page; (b) I-B: disposition of stale, conflicting PR #70; (c) re-read the PA-API 5 deprecation notice and Table 1 on official pages; (d) replay the 22 CI gates on the rebased tree. Originally claimed as T40; renumbered to T41 at claim-time because T40 was merged first by `3db75825`. | claimed 2026-11-15 (UTC), done — see closing record | `arena/08789ab3-zone2` (08789ab3) | `COORDINATION.md` (append-only), `docs/verification-08789ab3.md` (new), PR #70 closed as superseded (no file change) |
-| T46 | **Front-of-house polish pass on the primary site — the redesign the 2026-11-15 brief asks for.** (Originally labelled T42 at claim time; renumbered T46 because session `bfb20351` had already claimed the id T42 for its questions-register task — same practice as the board's earlier renumbering note.) (a) repair the live `index.html` merge corruption (stray `EAD` / `in` lines, duplicated footer links — introduced by the PR #88 merge, live on the deployed site); (b) redesign the landing page and root section pages into a polished marketing presentation of the *same verified data* — no new claims, no ledger edits, every existing claim kept with its source; (c) upgrade the landing product cards to render per-product verified spec highlights, each with its official source link; (d) surface the published article set (journal + marketing) on the landing; (e) publish the design-suggestion decision path (options → recommendation → status "Proposed — awaiting owner decision") on `design-notes.html`, cross-referencing the canonical board SG-06 and the DP suggestion set. | **in progress — claimed 2026-11-15 (UTC)** | `arena/4b6b53e7-zone2` (4b6b53e7) | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `design-notes.html`, `404.html`, `assets/css/style.css`, `assets/js/app.js`, `docs/t46-redesign-2026-11-15.md` (new), `COORDINATION.md` (append-only rows + records). **Excluded:** `flagged.html` (open PR #93, session 86bb886d), all generated namespaces (`pages/`, `verification.html`, `sources.html`, `summary.html`, `decisions/`, `marketing/`, `journal/`, `research-hub/`, `zone2/`, `northstar/`, `affiliate-lab/`, `revalidation/`), `ledger/*.json`, `assets/js/data.js`, `tools/`, CI |
+| T46 | **Front-of-house polish pass on the primary site — the redesign the 2026-11-15 brief asks for.** (Originally labelled T42 at claim time; renumbered T46 because session `bfb20351` had already claimed the id T42 for its questions-register task — same practice as the board's earlier renumbering note.) (a) repair the live `index.html` merge corruption (stray `EAD` / `in` lines, duplicated footer links — introduced by the PR #88 merge, live on the deployed site); (b) redesign the landing page and root section pages into a polished marketing presentation of the *same verified data* — no new claims, no ledger edits, every existing claim kept with its source; (c) upgrade the landing product cards to render per-product verified spec highlights, each with its official source link; (d) surface the published article set (journal + marketing) on the landing; (e) publish the design-suggestion decision path (options → recommendation → status "Proposed — awaiting owner decision") on `design-notes.html`, cross-referencing the canonical board SG-06 and the DP suggestion set. | **done 2026-11-15 (UTC) — merged via PR #110, see closing record below** | `arena/4b6b53e7-zone2` (4b6b53e7) | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `design-notes.html`, `404.html`, `assets/css/style.css`, `assets/js/app.js`, `docs/t46-redesign-2026-11-15.md` (new), `COORDINATION.md` (append-only rows + records). **Excluded:** `flagged.html` (open PR #93, session 86bb886d), all generated namespaces (`pages/`, `verification.html`, `sources.html`, `summary.html`, `decisions/`, `marketing/`, `journal/`, `research-hub/`, `zone2/`, `northstar/`, `affiliate-lab/`, `revalidation/`), `ledger/*.json`, `assets/js/data.js`, `tools/`, CI |
 
 
 | T38 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line (including the new `decisions/` namespace), run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. **Renumbered T31 → T39 at integration:** `main` had carried a different task’s T31 (session `42fa4918`, verification-only re-test, PR #72) since 12:01 — see the collision note in the claim record; no other session’s row or record was altered. | done — shipped via PR #85 (merge `e16ce2c`), closing record at the end of this file; status cell corrected 2026-11-15 by session `f6af67c3` (T44, audit item I-C) | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
@@ -3922,6 +3922,68 @@ root glob does not reach).
    (the queue). Nothing in that list blocks the site; all of it blocks growth. F-07 — no Associates ID — is the
    only thing blocking revenue, and it is not technical.
 
+## Session claim — R86 — `arena/86bb886d-zone2` (session `86bb886d`, 2026-11-15 UTC)
+
+| Field | Value |
+|---|---|
+| Session | `86bb886d` |
+| Branch | `arena/86bb886d-zone2` (fixed for this session; base `ceaf9a7` = `main`) |
+| Task (R86) | Repository review dated 2026-11-15: re-verify the three supplied links, the controls and the official sources the site relies on, flag irregularities with source links, publish them on the site, record the PR and deploy |
+| Task-ID note | Labelled `R86`, not a `T##` number, so it cannot collide with the board's existing IDs. Irregularities use session-local IDs `R86-01…R86-08`; they are kept out of `ledger/flags.json` so the gated counts do not change |
+| File scope | `review-2026-11-15.html` (new), `flagged.html` (one link paragraph), `README.md` (one link line and a malformed-bracket fix), `sitemap.xml` (one entry), `COORDINATION.md` (this record) |
+| Not touched | `assets/css/style.css`, `pages/assets/dashboard.css`, `tools/**`, `ledger/**`, `index.html`, and open PRs #70 and #89 (owned by other sessions; logged below, not edited) |
+| Status | in progress |
+
+### Session record — R86 — `86bb886d` (2026-11-15 UTC)
+
+**Sources read today** (each re-fetched 2026-11-15; links are the pages themselves):
+[Associates Central — ASIN help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC) ·
+[Standard Commission Income Statement, Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) ·
+[Operating Agreement (Updated Oct 15, 2025)](https://affiliate-program.amazon.com/help/operating/agreement) ·
+[Program Policies (Updated Apr 14, 2026)](https://affiliate-program.amazon.com/help/operating/policies) ·
+[Google spam policies (contents read)](https://developers.google.com/search/docs/essentials/spam-policies) ·
+[W3C CSS Values 4 (`url-value` anchor)](https://www.w3.org/TR/css-values-4/#url-value) ·
+supplied links → [Amazon listing B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3), [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R), [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH) ·
+controls [B0CDY277D3 via link.amazon](https://link.amazon/B0CDY277D3), [B00TEST12](https://link.amazon/B00TEST12), [Zq3vK8mPw](https://link.amazon/Zq3vK8mPw) ·
+[GitHub Pages API](https://api.github.com/repos/kanlerxz87-cyber/Zone2/pages).
+
+**Verification performed:** the three supplied links resolve to the same three listings as the register; the
+breadcrumb is identical on all three; Table 1 bands read verbatim (Kitchen 4.50%, Home 3.00%, All Other 4.00%);
+both policy dates read; the valid-ASIN and unknown-code controls reproduced (404); a second random 9-character code
+returned 403 — so the "unknown code returns 404" wording is too strong (R86-01). The font defect was reproduced
+live before the fix (broken path 404; correct path serves WOFF2); after main moved (PR #89 merged, Pages built `d4b68ee`) the live stylesheet requests the correct path. All ten repository gates re-run green.
+
+**Published:** `review-2026-11-15.html` (new: executive summary, 14 dated re-check rows, irregularities R86-01…R86-08, links
+to the decision boards). `flagged.html` gains one link paragraph. `README.md` gains one link and a closing bracket
+(the malformed link text was fixed; no count changed). `sitemap.xml` gains one entry.
+
+**Irregularities flagged (for owner review, not blocking):** R86-01 control wording too strong · R86-02 landing "4.00%"
+KPI may be read as these products' rate (band unconfirmed: Kitchen 4.50% vs Home 3.00%, Q-08) · R86-03 the 404 control page is
+served from `amzlinks.in`, operator not confirmed · R86-04 self-hosted fonts 404 on every page — **resolved on main by PR #89** (merged during this review) ·
+R86-05 README link fixed · R86-06 three separate Flagged surfaces · R86-07 open PRs #70 (CONFLICTING; now closed without merge) and #89 (now merged)
+owned by other sessions · R86-08 board size (~400 KB) and stale header.
+
+**Not done, deliberately:** no ledger value, product price, rating, or commission band was added (none is confirmed by an
+official source); PR #89 and PR #70 were not merged or edited by this session; no landing-page wording was changed
+(R86-01/R86-02 are change requests for the owner).
+
+**Pull request and gate fixes (2026-11-15, after `main` moved):** PR #93 (`https://github.com/kanlerxz87-cyber/Zone2/pull/93`).
+`main` advanced four times while this review was open (PR #89, #91, #94, #95, #111). Merged `origin/main` each time; the
+only conflicts were the two append-only records (`COORDINATION.md`) and `sitemap.xml`, resolved by keeping both sides.
+Replaying the 25 CI steps of `.github/workflows/pages.yml` on the merged tree surfaced three failures caused by this
+branch, all fixed: (1) the hand-added sitemap entry was replaced by `tools/build_sitemap.py` output (116 URLs, one entry
+for the review page, no duplicate); (2) the review page now carries the favicon link from the merged `flagged.html`
+(seo_audit D6); (3) `ledger/readiness.json` RR-10 now states the measured value — 117 of 117 published pages carry the
+disclosure sentence, one more than before because of the review page — and `release/index.html` regenerated.
+The PR's own GitHub Actions run was cancelled several times by the shared `pages` concurrency group while other sessions
+pushed; the replay of every CI step passed on the final tree.
+**Later fixes in the same PR (after `main` moved to PR #108 and PR #109):** RR-10 now states 124 of 124 pages and RR-11
+states 12 namespaces, the measured values, and `release/index.html` was regenerated. `main`'s CI step
+"Every stylesheet url() resolves to a file" failed on `main` itself: `tools/check_css_urls.py` read three CSS
+*comments* that document the font path (with a literal ellipsis) as references. Logged as R86-09 and fixed in
+`tools/check_css_urls.py` by blanking comments before matching (line numbers kept). Negative-tested in a scratch repo:
+a comment-only URL passes; a real missing file fails. The review page's R86-05 sentence no longer quotes a typed flag
+count (the prose-count gate caught it).
 ---
 
 ## Session record — `1b839f87` (`arena/1b839f87-zone2`, 2026-11-15 UTC)
@@ -4357,7 +4419,58 @@ confirmation.
 - **Conflict markers in `COORDINATION.md`.** While merging `main` for the sixth time, a resolution was
   committed with the markers still in the file — the exact defect recorded as F-42 on this board in an
   earlier session. Nothing checked for it: the file is Markdown, so every HTML gate skipped it, and a
-  reader of the board sees `<<<<<<< HEAD` as content. `tools/audit_site.py` now has a **`board`** check
+  reader of the board sees `
+## Closing record — T46 — `arena/4b6b53e7-zone2` (session `4b6b53e7`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| Task | **T46 — Front-of-house polish pass on the primary site** (originally claimed as T42; renumbered at rebase because `bfb20351` owns T42) |
+| PR | **[#110](https://github.com/kanlerxz87-cyber/Zone2/pull/110)** — `arena/4b6b53e7-zone2` → `main` — **MERGED** with `gh pr merge 110 --merge` → merge commit **`1fd5b28`** (`1fd5b28b4fceaedbae6ede2f1642fb981e27a`-prefixed, 2026-11-15 13:32:35 UTC) |
+| Deliverable | Corrupted `index.html` repaired (IR-T46-01); marketing-first landing (hero → sourced product cards → published articles → honest numbers → evidence → summary → decisions → capabilities); two-tier nav applied to 8 root pages; product cards render verified spec highlights each with `source ↗`; commission KPI de-ambiguated (R86-02) showing Table 1's Kitchen 4.50% vs All Other 4.00% with the band question left open (Q-08); design system v3 (`assets/css/style.css`) with vendor copies regenerated through their builders; four design suggestions published on `design-notes.html#t46` as **Proposed — awaiting owner decision** |
+| Sources re-read live 2026-11-15 | OA §5 disclosure sentence + §4 no-income clause + §2 cease-payment — verbatim (Updated: October 15, 2025) <https://affiliate-program.amazon.com/help/operating/agreement>; Table 1 Kitchen 4.50% / All Other 4.00% — verbatim <https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ>. Record: `docs/t46-redesign-2026-11-15.md` (S-1…S-5) |
+| Gates | All 13 CI-equivalent gates + research-hub build/drift/verify trio + `node --check` ×2 + sitemap currency check re-run green on the exact merged content (`f36353a`, carried into `1fd5b28` unchanged) — including main's new `debris` and `board` audit checks (117 pages audited). Local link/fragment check: 0 broken refs, 0 dangling fragments. |
+| CI on the PR | No check runs appeared for this branch's PRs (the recorded T28 incident pattern); the one PR-scoped run that started (`43719534184`) was **cancelled** at 6s by the `pages` concurrency group — the documented CR-T41-1 behavior, not a content failure. The post-merge push run (`43719541603`) was also **cancelled** at 19s by a same-second PR run. `workflow_dispatch` returns HTTP 403 to this token (as recorded by T41), so no re-run was possible from here. |
+| Deploy | The **legacy `pages build and deployment` for `1fd5b28` succeeded** (run `43719540980`, 29s); Pages API `status: built` for commit `1fd5b28`; deployment record sha `1fd5b28`. **Live read verified** via the public URL with a cache-buster: new hero, disclosure bar in the first screenful, sourced spec highlights on all three product cards, articles section, blanks preserved. The site is live and correct. |
+| Conflicts survived | Two rebase rounds against fast-moving `main` (PRs #90, #94, #97–#103, #106–#108, #111 merged during the task). Board conflicts resolved keeping both sides (append-only). `index.html` conflicts resolved in favour of this task's rewrite (superset of the corruption fixes others landed), with main's favicon link, `release/` and `audit/` footer links re-applied onto the new IA. |
+| Handoff request | To `b6defa90`: drop the index.html debris subtask from your T40 claim (superseded by this task); keep `EXECUTIVE_SUMMARY.md` + docs. To the board owner: the `cancel-in-progress: true` concurrency issue (CR-T41-1) cancelled 3 more runs today — the recommendation stands. |
+| Owner-open items | Unchanged: F-01…F-03 (confirm ASINs), F-05 (Creators API), F-07/F-24 (Associates tag) — the only blockers to the earning machinery; plus the T46 design suggestions and SG-06 awaiting an owner choice. |
+
+
+| PR | Opened from `arena/08789ab3-zone2` → `main`; link and merge result recorded in the follow-up closing line below |
+
+## Session claim — `arena/343bc959-zone2` (session `343bc959`, 2026-11-15 UTC)
+
+**Claim:** `343bc959-G1` — two search-intent topic guides in the generated marketing set ("air fryer vs
+your oven" and "are air fryers worth it"), delivered the T39 way (data in `marketing/data/editorial.json`,
+rendered by `tools/build_marketing.py`, gates re-run), plus derived-count fixes for the guide-count prose
+the new rows make stale. **Takeover note (60-minute rule):** the stale PR #70 (session `cffe745a`, last
+commit 11:55 UTC, CONFLICTING) was closed as superseded by T41 before this claim; its S3 idea — trendy,
+search-intent articles for organic traffic — is what is being delivered here, through the generated
+pipeline instead of hand-written HTML, and its root `suggestions.html`/`questions.html` duplicates are
+**not** restored (canonical T29/T30 pages live at `pages/suggestions.html`, `pages/questions.html`).
+
+**Board state at claim:** `main` = `d887ae7` (PRs #89/#91/#92/#94 merged; font paths repaired; T40/T41
+verification records merged). Open PRs and their scopes: **#90** (`e4e7d4b2`, `COORDINATION.md` only),
+**#93** (`86bb886d`, `COORDINATION.md`, `README.md`, `flagged.html`, `review-2026-11-15.html`,
+`sitemap.xml`), **#95** (`bfb20351`, `COORDINATION.md`, `docs/review-bfb20351.md`, `ledger/questions.json`,
+`pages/questions.html`). None touches `marketing/**` or `tools/build_marketing.py`.
+
+**File scope (non-overlapping with all three open PRs):** `marketing/data/editorial.json`,
+`tools/build_marketing.py` (derived-count fixes only), regenerated `marketing/**` outputs, and this
+append-only record. Not touched: `ledger/**`, `pages/**`, `decisions/**`, `docs/**`, root `*.html`,
+`tools/*` other than `build_marketing.py`, `research-hub/**`, `zone2/**`, `affiliate-lab/**`,
+`revalidation/**`, `northstar/**`, `journal/**`.
+
+**Why this scope:** the brief asks for catchy, trendy articles and topics that earn organic traffic. The
+generated set covers six guide angles but not the two highest-volume phrasings in the niche — "air fryer
+vs oven" and "are air fryers worth it" — and the trending queue itself carries an unanswered "Does an air
+fryer cost less to run than an oven?" row. Both new guides are written against `marketing/data/facts.json`
+rows only (M1–M6 sources); anything not on an official page is a labelled editorial take or a published
+blank. Counts typed in prose ("Six guides") are derived or reworded in the same commit.
+
+**Status:** claimed → in progress.
+**T46 addendum (same session, 2026-11-15, after the closing record above).** The post-merge Actions run for PR #114 failed on the (then-new) `Every stylesheet url() resolves to a file` step — main had been red on this step since PR #109's merge. Root cause: the check scans comments too, and the *illustrative* `url("../fonts/…")` placeholder written inside a `style.css` comment (carried into the two vendor copies by their builders) resolves to a literal `…` file that does not exist. Fix (this session, comment-only, no behavior change): the comment now says "the @font-face src paths are stylesheet-relative: ../fonts/… from assets/css/" without a `url(` literal; vendor copies regenerated through their builders. **Full CI step replay local: every step PASS** (including `check_css_urls` — 16 stylesheets, 9 local url() refs, 0 broken; `build_audit --check`; `validate_audit`; `test_audit`; `seo_audit`; `build_sitemap --check`). Fix merged via the PR recorded below.
+
   that fails on any of the three marker lines in `COORDINATION.md`. Negative-tested: injecting the
   three lines fails the audit with the line numbers; removing them passes.
 - **The landing-page `debris` check** (already added by this session) covers the same class in HTML:

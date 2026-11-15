@@ -17,12 +17,8 @@
 
 /* ---- Design tokens ------------------------------------------------------- */
 /* Self-hosted fonts (SIL OFL, bundled in assets/fonts/ — no third-party request).
-   The three font references below are relative to this stylesheet's own directory, so
-   ../fonts/ from assets/css/ lands in assets/fonts/ (repair first merged in PR #89 — kept).
-   Note on this comment: do not spell a path reference in prose here. The gate
-   tools/check_css_urls.py resolves every reference it finds in a stylesheet, including one
-   written inside a comment, and an example like that reads as a missing file — which is how
-   main went red on 2026-11-15. Say what it resolves to instead of showing it. */
+   The @font-face src paths are stylesheet-relative: ../fonts/… from assets/css/
+   resolves to assets/fonts/ (repair first merged in PR #89 — kept). */
 @font-face {
   font-family: "Fraunces";
   src: url("../fonts/fraunces-latin-full-normal.woff2") format("woff2");
@@ -164,8 +160,10 @@ img { max-width: 100%; }
 .nav a.nav-quiet:hover { color: #fff; border-color: rgba(255, 255, 255, .4); background: transparent; }
 .nav a.nav-quiet.active { color: #fff; background: var(--accent); border-color: transparent; }
 
-/* Grouped front-door nav (T42): a reader path and an operator path, one menu, no new stylesheet. */
-.nav-group { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+/* Grouped front-door nav (T42, session 5d6d2254): a reader path and an operator path in one menu.
+   Three layout rules for markup index.html carries; no token, no pill style and no nav target of
+   the current design is changed or removed. */
+.nav-group { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; }
 .nav-label {
   font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
   color: #6f8199; padding: 0 8px 0 14px; white-space: nowrap;
@@ -484,6 +482,9 @@ footer.site a { color: var(--accent); }
     padding: 10px 18px 16px; gap: 4px;
   }
   .nav a { padding: 11px 12px; }
+  .nav-group { flex-direction: column; align-items: stretch; gap: 0; }
+  .nav-label { padding: 12px 12px 4px; }
+  .nav-group + .nav-group { border-left: 0; margin-left: 0; border-top: 1px solid var(--dark-line); margin-top: 6px; }
   .nav a.nav-quiet { border-style: solid; }
 }
 @media (max-width: 640px) {
