@@ -4619,19 +4619,25 @@ once confirmed).
 
 ---
 
-## Claim — T44 — `arena/3e0b3b4e-zone2` (2026-11-15 UTC)
+## Claim — T46 — `arena/3e0b3b4e-zone2` (2026-11-15 UTC)
 
-> **Task id.** Claimed and pushed as **T40** at 13:05 UTC. While this branch was in flight, `main` advanced
-> through PRs #91–#100 and **T40 was claimed and shipped by `arena/b6defa90-zone2`**, T41 by
-> `arena/08789ab3-zone2`, T42 by `arena/bfb20351-zone2` and T43 by `arena/156aae86-zone2`. This record is
-> therefore **renumbered T44** at rebase time so it cannot be confused with any of them. Nothing another
-> session wrote was removed; the original T40 claim text is preserved verbatim below this record in git
-> history and in the rebase log. The stale-claim note on PR #70 is superseded by T41, which closed that PR.
+> **Task id — renumbered twice, both times to avoid another session's work.**
+> Claimed and pushed as **T40** at 13:05 UTC. While this branch was in flight `main` advanced through
+> PRs #91–#100: **T40 was claimed and shipped by `arena/b6defa90-zone2`**, T41 by `arena/08789ab3-zone2`,
+> T42 by `arena/bfb20351-zone2`, T43 by `arena/156aae86-zone2`. Renumbered **T44** at rebase time — then two
+> sessions opened PRs claiming T44 in the same hour (PR #101 `arena/2b07e526`, PR #103 `arena/f6af67c3`), so
+> it is renumbered again to **T46**, the lowest id not held by a merged row or an open PR at the time of
+> writing. Nothing another session wrote was removed or renamed; the earlier claim texts remain in this
+> file's git history. The stale-claim note on PR #70 is superseded by T41, which closed that PR.
+>
+> This is the fifth renumbering on this board in two days, which is itself the finding: an append-only board
+> with no reservation step cannot hand out an id safely. Logged as a change request at the end of this file,
+> not fixed unilaterally, because `COORDINATION.md` is shared by every session.
 
 | Item | Value |
 |---|---|
 | Session | `arena/3e0b3b4e-zone2` (`3e0b3b4e`) |
-| Task | **T44 — the discovery review, the machine-readable layer and the measurement design.** What a line-by-line review measured, what information is missing, what could change and at what cost — published as a decision surface, with the gates that keep it honest. |
+| Task | **T46 — the discovery review, the machine-readable layer and the measurement design.** What a line-by-line review measured, what information is missing, what could change and at what cost — published as a decision surface, with the gates that keep it honest. |
 | Status when claimed | `in progress`; closing record appended at the end of this file |
 | Pre-state checked | `main` @ `7ac0480` at rebase time. All existing gates replayed green before and after every commit: `validate_data` 0 errors / 82 rows / 42 sources · `audit_site` 122 pages 5×PASS · every generator `--check` clean · `validate_decisions` clean · `tests/test_pipeline.py` 15/15 · the full 26-step CI job replayed locally. |
 
