@@ -1,6 +1,6 @@
 # Verification record — session `8c4236ad` (`arena/8c4236ad-zone2`), 2026-11-15 UTC
 
-Task: **T30** (decision-support integration links, marketing editorial upgrade, fresh verification pass).
+Task: **T31** (renumbered twice — see COORDINATION.md; the id T29 was shipped by session `2499438c` and T30 by `fb49a226` while this session was between pushes) (decision-layer footer links, marketing editorial upgrade, fresh verification pass).
 Every value below was read off the page named in the row, on 2026-11-15, by this session, via live page
 fetches. Nothing is carried forward from another session's notes; where another session's published claim was
 re-checked, that is stated in the row.
@@ -26,7 +26,7 @@ re-checked, that is stated in the row.
 | W-10 | Root `index.html` renders the honest dashboard | Rendered: the "0 of 3 brief product mappings confirmed" KPI, the identity/economics/data caveats, and the source-linked facts table — no overclaim found |
 | W-11 | Pages API | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ (checked via API before this session's PR) |
 
-## Repository gates run on the T30 tree
+## Repository gates run on the T31 tree
 
 | Gate | Result |
 |---|---|
@@ -39,7 +39,7 @@ re-checked, that is stated in the row.
 
 `marketing/scripts/verify_marketing.py` gates G7–G9 re-derive every specification row from
 `marketing/data/facts.json` and read the rendered HTML, so a copy change cannot silently move a value.
-The T30 changes were confined to: `tools/build_marketing.py` (page shells and editorial sections),
+The T31 changes were confined to: `tools/build_marketing.py` (page shells and editorial sections),
 `marketing/data/facts.json` (additive `*_editorial` fields + `planned_topics`; no `rows`, `status`, `src`,
 `value` or `title_official` field touched), and the regenerated HTML. The row count across the three
 products (48) is unchanged and re-checked by the gate.
@@ -52,11 +52,13 @@ products (48) is unchanged and re-checked by the gate.
 2. **Orphaned conflict markers committed on `main`** — `COORDINATION.md` at `e030c40` (PR #60 merge)
    contained a stray `=======` and `>>>>>>> origin/main` pair with no opening marker in the T26
    closing-record region — debris from an earlier session's conflict resolution. Removed additively in the
-   T30 rebase; zero words of any session's record dropped. Reviewer: check the T26 record region renders
+   T31 rebase; zero words of any session's record dropped. Reviewer: check the T26 record region renders
    correctly.
 3. **Task-id collision T29** — two sessions (this one and `2499438c`) claimed the T29 id within the same
-   hour, both from board state `e030c40`. Resolved by renumbering this session's task to **T30** (board
-   precedent: T21/T21b, T27/T28). Nothing published by either session was lost; the boards' T27 stale
+   hour, both from board state `e030c40`, and a third followed within the hour (`fb49a226` shipped T30).
+   Resolved by renumbering this session's task twice, to **T31** (board precedent: T21/T21b, T27/T28).
+   Nothing published by any session was lost; the duplicate nav links this session had added to
+   `index.html` were removed after `fb49a226`'s T30 landed the same links; the boards' T27 stale
    "in progress" status cell was corrected to done by this session, with the pointer to the `ba8b2d38`
    closing record.
 
