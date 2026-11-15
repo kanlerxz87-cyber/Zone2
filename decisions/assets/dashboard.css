@@ -19,8 +19,8 @@
 
 /* ---- Design tokens ------------------------------------------------------- */
 /* Self-hosted fonts (SIL OFL, bundled in assets/fonts/ — no third-party request).
-   Paths are stylesheet-relative: url("../../assets/fonts/…") from assets/css/ resolves to
-   assets/fonts/ (repair first merged in PR #89 — kept). */
+   The @font-face src paths are stylesheet-relative: ../fonts/… from assets/css/
+   resolves to assets/fonts/ (repair first merged in PR #89 — kept). */
 @font-face {
   font-family: "Fraunces";
   src: url("../../assets/fonts/fraunces-latin-full-normal.woff2") format("woff2");
