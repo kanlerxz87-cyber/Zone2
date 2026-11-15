@@ -2908,6 +2908,8 @@ and the closing record follow in the next entry.
 | Live read after deploy | `pages/commissions.html` serves the **complete 46-row bounty table** and the 2-row Bonus Events panel, with the 34-item flag register linked from the header |
 | T26 | **done** |
 | T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
+| T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | done (PR and merge recorded below) | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
+| T30 | Primary-dashboard integration of the canonical Suggestions decision board and Questions register; avoid duplicate data/decision systems and make the existing evidence-led review path discoverable | done — PR #64 merged; Pages deploy confirmed | `arena/fb49a226-zone2` | `index.html`, `COORDINATION.md` |
 
 ### What shipped
 
@@ -3091,43 +3093,136 @@ single 46-row Bounty Event block and a single 2-row Bonus Event block, verified 
 
 Flagged here and on the Flagged for Review page so the owner can merge the two entries after the site is live.
 
+## Session claim — `arena/2499438c-zone2` (session `2499438c`, 2026-11-15 UTC)
+
+**Claimed:** T29 (board row above). **Scope:** the files listed in the T29 row only.
+**Board state at claim:** `main` = `e030c40` (PR #60 merged). `gh pr list --state open` is empty. The only `in progress` row
+without commits is **T27** (`0f44536f`, last activity 2026-11-14). It is older than 60 minutes with no commits on this branch, and it is
+**not** taken over here: T27 is a different scope. Flagged for the board owner. Branch note: this session works only on `arena/2499438c-zone2`
+(the session-branch naming in this file is not used by this session, per the session branch instruction).
+
+**Live re-verification performed 2026-11-15 (fetched with `fetch_page`):**
+
+| # | Claim | What the official page says today | Verdict | Source |
+|---|---|---|---|---|
+| C-16 | Supplied link 1 resolves to one product | `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3`, title "CHEFMAN 6 Quart Dual Basket Air Fryer Oven…" | **Reproduced** (matches S19) | https://link.amazon/B04G1MEwY |
+| C-17 | Supplied link 2 resolves to one product | `https://link.amazon/B02NbDxp3` → `https://www.amazon.com/dp/B09B7SB46R`, title "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven…" | **Reproduced** (matches S20) | https://link.amazon/B02NbDxp3 |
+| C-18 | Supplied link 3 resolves to one product | `https://link.amazon/B00hJ57DV` → `https://www.amazon.com/dp/B08DKYBTPH`, title "Chefman Air Fryer 8 Qt \| TurboFry® 4-in-1…" | **Reproduced** (matches S21) | https://link.amazon/B00hJ57DV |
+| C-19 | Breadcrumb of all three destinations | "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers" | **Observed** on the destination pages. Table 1 band for this category is **not** confirmed (see Q-11) | https://www.amazon.com/dp/B0CDY277D3 |
+| C-20 | Creators API prerequisite | "Have at least 10 qualifying sales within the past 30 days to access the PA API through the Creators API" | **Verified verbatim** | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction |
+| C-21 | Application review | "we require at least three within the first 180 days"; "personal orders do not qualify"; websites: content "generally within the last 60 days"; "You must own your website"; "at least 10 posts" | **Verified verbatim** (the "own your website" test is the basis of Q-04) | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
+| C-22 | Operating Agreement version | "Updated: October 15, 2025" | **Verified** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-23 | Associates country list | Japan appears in the Associates country selector | **Observed** (no marketplace-specific term re-read here; see Q-01) | https://affiliate-program.amazon.com/help/operating/agreement |
+
+### T29 — closing record (2026-11-15 UTC)
+
+**Delivered (new on the site):**
+- `pages/suggestions.html` — **Suggestions decision board.** 10 suggestions (SG-01…SG-10), each with options A/B/C with a trade-off, a recommendation, the questions that must be answered first, and an official-source link. Nothing is implemented until the owner records a choice in `ledger/suggestions.json` (field `decision`).
+- `pages/questions.html` — **Open questions / missing information.** 16 questions (Q-01…Q-16). For each: what is verified now, what is still missing, how to close the gap, which suggestions it blocks, and an official-source link.
+- `ledger/suggestions.json`, `ledger/questions.json` (new), `tools/build_site.py` (two page builders, navigation entries, emit calls: additive), `tools/validate_data.py` (the two new files are included in the source-id check).
+- Generated pages regenerated (`pages/**`): only the navigation changed on existing pages.
+
+**Verification performed (2026-11-15, live):**
+| # | Check | Result | Source |
+|---|---|---|---|
+| V-1 | `https://link.amazon/B04G1MEwY` resolves to `/dp/B0CDY277D3` (CHEFMAN 6 Quart Dual Basket Air Fryer Oven…) | reproduced | https://link.amazon/B04G1MEwY · https://www.amazon.com/dp/B0CDY277D3 |
+| V-2 | `https://link.amazon/B02NbDxp3` resolves to `/dp/B09B7SB46R` (Emeril Lagasse 26QT…) | reproduced | https://link.amazon/B02NbDxp3 · https://www.amazon.com/dp/B09B7SB46R |
+| V-3 | `https://link.amazon/B00hJ57DV` resolves to `/dp/B08DKYBTPH` (Chefman Air Fryer 8 Qt…) | reproduced | https://link.amazon/B00hJ57DV · https://www.amazon.com/dp/B08DKYBTPH |
+| V-4 | Creators API prerequisite: at least 10 qualifying sales in the past 30 days | verbatim | https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction |
+| V-5 | Application review: three qualifying sales within 180 days; personal orders do not qualify; site must be owned; ~10 posts; content within 60 days (websites) | verbatim | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM |
+| V-6 | Operating Agreement updated October 15, 2025 | verbatim | https://affiliate-program.amazon.com/help/operating/agreement |
+| V-7 | Rules cited in the new rows (R-01, R-04, R-06, R-08, R-19, R-21, R-22, R-31, §6(t)) | taken from `ledger/compliance.json`, which records the sections as read on 2026-11-14 (T28). **Not re-read today**; Section 6(y), 6(t) and 6(z) were not re-fetched in this session. | https://affiliate-program.amazon.com/help/operating/policies |
+| V-8 | Table 1 bands (Kitchen 4.50%, Home 3.00%, All Other 4.00%) | taken from the ledger's full transcription (`ledger/commission_table.json`, checked on 2026-11-14). **Not re-read today.** | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| V-9 | Repo gates | `build_site --check`, `build_root_views --check`, `build_summary --check`, `build_marketing --check`, `validate_data` (ok, 0 errors), `tests/test_pipeline.py` (15/15), `audit_site` (97 pages; fragments, spec_sources, prose_counts, namespaces, disclosure: PASS) | local run |
+
+**Irregularities and open items flagged for review (not blocking, published on the new Questions page):**
+1. **Ownership of the site address (Q-04).** The Associates application review requires that the applicant own the website (S23). The live site is on `kanlerxz87-cyber.github.io`. Whether a `github.io` address meets that test is **not verified** by any Amazon page read in this session.
+2. **Marketplace (Q-01).** The supplied links resolve to amazon.com. The owner's location in the brief is Osaka, Japan. Which Associates account and marketplace applies is unknown.
+3. **Commission band (Q-08).** The destination breadcrumb (Home & Kitchen › Kitchen & Dining › … › Air Fryers) does not by itself name a Table 1 band; Kitchen (4.50%) and Home (3.00%) are both plausible. Left unconfirmed; no single rate is asserted.
+4. **Stale in-progress claim T27 (`0f44536f`).** Still `in progress` on the board with no commits since 2026-11-14. Not taken over here (different scope). Board owner to close or re-claim.
+5. **Product-image rule (Q-10).** The IP licence (S30) was not read line by line in this session; the answer is open.
+
+**Scope notes.** No prices, ratings or performance figures were added. The three supplied short links are still not presented as confirmed ASINs; the pages say so (F-01, F-03, F-28 unchanged). No other session's file was edited except the additive changes listed above.
+
+
+### T29 — PR, merge and deploy (2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#61** — https://github.com/kanlerxz87-cyber/Zone2/pull/61 — `arena/2499438c-zone2` → `main` |
+| PR check (`Build and verify`) | **pass** (run 43710132422) |
+| Merge | `gh pr merge 61 --merge` · 2026-11-15T11:42:15Z · merge commit `9f1e2ff3097b46f703cbe2233dbd9c2cbaf77229` |
+| Post-merge `Build, verify and deploy` on `main` | **success** (run 43710200460) |
+| Post-merge `pages build and deployment` | **success** (run 43710199820) |
+| Pages API after merge | `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ |
+| Live check (fetched 2026-11-15) | https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html and https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html render the tables and source links |
+
+**Known display issue (not fixed in this task):** the eyebrow on every generated page reads "verified 2026-11-14" because the generator takes its date from `ledger/products.json` (`verified_utc`). The new pages were checked on 2026-11-15, but no value was changed to match that date. Board owner to decide whether the generator should show the date of the last source check instead.
+
+
+## Session claim — T30 — `arena/fb49a226-zone2` (2026-11-15 UTC)
+
+The independent T29 suggestions/questions deliverable merged via PR #61 while this branch was being developed. To avoid duplicating its source-of-truth ledgers and decision UX, this task is narrowed to integrating its canonical generated pages into the primary dashboard. Scope: `index.html` and this task-board record only. Canonical details remain in `pages/suggestions.html` and `pages/questions.html`; this session will not edit their ledgers, generator, or generated pages.
+
+
+### T30 integration and verification record — `arena/fb49a226-zone2` (2026-11-15 UTC)
+
+**Coordination reconciliation:** T29 was independently completed and merged as PR #61 while this session's first claim was on the now-stale baseline. The root-level draft page created in this branch would have duplicated the canonical `ledger/suggestions.json` / `ledger/questions.json` data and generated `pages/suggestions.html` / `pages/questions.html` UX. It was removed before integration. This session therefore keeps only the non-overlapping T30 entry-point integration in `index.html`; T29 remains the sole source of suggestion/question content and decisions.
+
+**Delivered:** the primary dashboard navigation and a prominent dashboard callout now link directly to the existing generated Suggestions board and Questions register. The T29 board remains responsible for the options/recommendation and owner decision state; the question register remains responsible for verified answers, missing information, and discovery actions. No duplicate dataset, alternate decision store, product content, affiliate links, or campaign behavior was added.
+
+**Verification:**
+- T29 generated output/gates passed on the merged PR #61 (`Build and verify` success, run 43710132422); its T29 record lists the official sources and all verification checks.
+- T30 local checks against the rebased combined tree: `tools/validate_data.py` (0 errors / 0 warnings), `tests/test_pipeline.py` (15/15), `tools/build_site.py --check`, `tools/build_root_views.py --check`, `tools/build_summary.py --check`, and `tools/audit_site.py` (96 pages, all audit classes pass).
+- `index.html` relative links to `pages/suggestions.html` and `pages/questions.html` resolve; root primary-site links were checked. `git diff --check` passes.
+- The first PR check attempt was cancelled by the workflow's shared `pages` concurrency group while PR #61's main deployment was pending. PR #61's post-merge `Build, verify and deploy` and Pages deployment both then succeeded (run 43710200460). This T30 PR check must be allowed to complete after the main deployment; it is not counted as a passing check yet.
+
+**Open boundaries:** questions in the canonical register remain unanswered by design (e.g., product intent mapping, account/marketplace, publisher ownership, API access, and commission-category mapping). Those require owner/account information or additional authoritative evidence. No changes to the T29 canonical data were made.
+
+
+### T30 closing record — PR #64 merged and Pages deploy confirmed (2026-11-15 UTC)
+
+| Item | Result |
+|---|---|
+| Final integration PR | [#64](https://github.com/kanlerxz87-cyber/Zone2/pull/64) — dashboard links to canonical Suggestions and Questions pages |
+| Superseded draft PR | [#62](https://github.com/kanlerxz87-cyber/Zone2/pull/62) closed after its check was cancelled by the workflow's shared Pages concurrency group while other sessions deployed. Its duplicate root-level draft was removed; no T29 data or work was discarded. |
+| PR check | **success**, `Build and verify` run 43710511934 |
+| Merge | `gh pr merge 64 --merge` · 2026-11-15T11:46:39Z · merge commit `f9a86bd1f7e7d48b2492ba9ef7c02af44f5b20ad` |
+| Post-merge build + deploy | **success**, run 43710552926; build and `Deploy to GitHub Pages` jobs passed |
+| Pages API | `status: built`, source `main` `/`, HTTPS enforced: <https://kanlerxz87-cyber.github.io/Zone2/> |
+| Live read | Dashboard callout links to <https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html> and <https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html>; both pages render the decision/options and open-question tables with source links. |
+| T30 | **done** |
+
+No new product, performance, demand, or revenue figures were added. The destination mapping/account/API questions remain open in the canonical Questions register, with no inferred values.
+
 ---
 
 ## Session claim — `arena/cffe745a-zone2` (session `cffe745a`, 2026-11-15 UTC)
 
-**Branch note:** Arena pins this session to `arena/cffe745a-zone2` (not `session-<id>/<task>` naming);
-documented as the deviation, consistent with every prior session. All edits by this session are additive new
-files plus shared nav/doc updates logged below; no session-owned namespace is touched.
+**Branch note:** Arena pins this session to `arena/cffe745a-zone2` (not `session-<id>/<task>` naming); documented as the deviation, consistent with every prior session.
 
 ### Board state at claim
 
-`main` = `e030c40` (merge of PR #60). `gh pr list --state open` → **empty**; `gh issue list` → **empty**.
-All shared tasks T1…T28 and all session-local registers are `done`. There are **no tasks claimed by another
-session** and **no unclaimed open work** on the shared board. This session's work is therefore **additive** to
-the delivered platform: it addresses the brief's remaining content requests (suggestions / decision log,
-pre-decision Q&A, catchy trendy marketing articles for organic traffic) that no prior session's scope covered.
+`main` = `e030c40` (merge of PR #60) at claim; `main` has since advanced to `f30c7aa` (PRs #61–#66 merged, including T29 suggestions/questions and T30 dashboard integration). `gh pr list --state open` → **empty**; `gh issue list` → **empty**.
 
-### Claimed tasks (session-scoped; `cffe745a-*` prefix so IDs never collide)
+### Overlap reconciliation (per T30 record)
+
+This session initially proposed root-level `suggestions.html` and `questions.html`. Those duplicate the canonical `ledger/suggestions.json` / `ledger/questions.json` data and generated `pages/suggestions.html` / `pages/questions.html` delivered by T29 (PR #61) and integrated into the root dashboard by T30 (PR #64). Per the T30 record, the root-level duplicate was removed before integration. The canonical Suggestions decision board and Questions register remain the single source of suggestion/question content and decisions, linked from the root dashboard navigation.
+
+### Claimed tasks (session-scoped; `cffe745a-*` prefix)
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| `cffe745a-S1` | Suggestions & Decision Log section — a reviewable register of site-improvement suggestions with options, pros/cons, status and an owner-chosen path before any change is implemented | done | `arena/cffe745a-zone2` | `suggestions.html` (new), `questions.html` (new), root `index.html` nav/footer only |
-| `cffe745a-S2` | Pre-Decision Q&A checklist — questions / information / answers that must be resolved before any decision, plus suggestions to discover missing information | done | `arena/cffe745a-zone2` | `questions.html` (new), `index.html` nav only |
-| `cffe745a-S3` | Catchy trendy marketing articles for organic traffic — SEO-optimized topic articles for the three air-fryer products, source-governed (no hallucinated specs), with `rel="sponsored"` links and the §5 disclosure | done | `arena/cffe745a-zone2` | `marketing/articles/` (new articles), `marketing/index.html` nav link |
+| `cffe745a-S1` | Suggestions & Decision Log section | done — overlaps canonical T29/T30; root-level duplicate removed | `arena/cffe745a-zone2` | root `suggestions.html` (removed), `questions.html` (removed); canonical pages are `pages/suggestions.html`, `pages/questions.html` |
+| `cffe745a-S2` | Pre-Decision Q&A checklist | done — overlaps canonical T29/T30; root-level duplicate removed | `arena/cffe745a-zone2` | root `questions.html` (removed); canonical page is `pages/questions.html` |
+| `cffe745a-S3` | Catchy trendy marketing articles for organic traffic — SEO-optimized topic articles for the three air-fryer products, source-governed (no hallucinated specs), with `rel="sponsored"` preview links and the §5 disclosure | done | `arena/cffe745a-zone2` | `marketing/articles/topic-air-fryer-vs-oven.html` (new), `marketing/articles/topic-worth-it.html` (new), `marketing/articles/index.html` (nav + topic section) |
 | `cffe745a-S4` | Final line-by-line verification + PR → merge → confirm GitHub Pages deploy → record result here | in progress | `arena/cffe745a-zone2` | gates run on merged tree; `COORDINATION.md` append-only record |
 
 ### Non-overlap guarantee
 
-`marketing/articles/` new article files are owned by no other session. `suggestions.html` and `questions.html`
-are new root pages; the only shared file touched is root `index.html` (one sidebar + one footer link each) and
-`marketing/index.html` (one nav link). No `ledger/**`, `pages/**`, `tools/**`, `research-hub/**`,
-`zone2/**`, `affiliate-lab/**`, `revalidation/**` or `northstar/**` file is edited.
+`marketing/articles/topic-*.html` are new files owned by no other session. `marketing/articles/index.html` gained a trendy-topics section and two nav links. No `ledger/**`, `tools/**`, `research-hub/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**`, `northstar/**` file edited by this session beyond the merge of origin/main.
 
 ### Why this scope
 
-The brief's REPO WORK and SITE CREATION sections are already delivered and live (verified dataset, category
-subpages, dashboard tables, source-per-row, blank+flag rule, GitHub Pages deployed). The brief's remainingasks
-that no delivered surface covers are: (a) "create a section dedicated for suggestions so someone can review
-suggestions and choose the best path before implementing any changes," (b) "a clear list of questions,
-informations and answers that need to be addressed before any decision can be reasonably made," and (c)
-"catchy trendy articles and topics … generate organic traffic." This session closes those three gaps.
+The brief's suggestions/decision-log and pre-decision Q&A requests are already satisfied by the canonical T29/T30 deliverables now on `main`. The brief's remaining ask not yet covered was **catchy trendy articles and topics for organic traffic**, which this session closes with two source-governed topic articles.
+
