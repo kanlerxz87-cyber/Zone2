@@ -41,6 +41,27 @@ def stylesheets() -> list[Path]:
     return out
 
 
+def without_comments(text: str) -> str:
+    """Blank out /* ... */ while keeping every newline, so line numbers stay true.
+
+    A url() inside a comment documents the file; it is not a resource reference. This checker
+    exists to catch a stylesheet that points at a file which does not exist, and a prose example
+    of a path is not one - it just reads like one. (Found 2026-11-15: the repair note in
+    assets/css/style.css described the relative paths it had just fixed, and the gate reported
+    three broken references, none of which any browser would ever request.)
+    """
+    out, i, n = [], 0, len(text)
+    while i < n:
+        if text.startswith("/*", i):
+            end = text.find("*/", i + 2)
+            end = n if end == -1 else end + 2
+            out.append("".join(ch if ch == "\n" else " " for ch in text[i:end]))
+            i = end
+            continue
+        out.append(text[i]); i += 1
+    return "".join(out)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
@@ -49,7 +70,8 @@ def main() -> int:
     broken = []
     checked = 0
     for css in stylesheets():
-        text = css.read_text(encoding="utf-8", errors="ignore")
+        raw = css.read_text(encoding="utf-8", errors="ignore")
+        text = without_comments(raw)
         for m in URL.finditer(text):
             u = m.group("u").strip()
             if u.startswith(("http://", "https://", "//", "data:", "#")):
