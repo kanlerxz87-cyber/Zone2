@@ -3163,3 +3163,18 @@ without commits is **T27** (`0f44536f`, last activity 2026-11-14). It is older t
 ## Session claim — T30 — `arena/fb49a226-zone2` (2026-11-15 UTC)
 
 The independent T29 suggestions/questions deliverable merged via PR #61 while this branch was being developed. To avoid duplicating its source-of-truth ledgers and decision UX, this task is narrowed to integrating its canonical generated pages into the primary dashboard. Scope: `index.html` and this task-board record only. Canonical details remain in `pages/suggestions.html` and `pages/questions.html`; this session will not edit their ledgers, generator, or generated pages.
+
+
+### T30 integration and verification record — `arena/fb49a226-zone2` (2026-11-15 UTC)
+
+**Coordination reconciliation:** T29 was independently completed and merged as PR #61 while this session's first claim was on the now-stale baseline. The root-level draft page created in this branch would have duplicated the canonical `ledger/suggestions.json` / `ledger/questions.json` data and generated `pages/suggestions.html` / `pages/questions.html` UX. It was removed before integration. This session therefore keeps only the non-overlapping T30 entry-point integration in `index.html`; T29 remains the sole source of suggestion/question content and decisions.
+
+**Delivered:** the primary dashboard navigation and a prominent dashboard callout now link directly to the existing generated Suggestions board and Questions register. The T29 board remains responsible for the options/recommendation and owner decision state; the question register remains responsible for verified answers, missing information, and discovery actions. No duplicate dataset, alternate decision store, product content, affiliate links, or campaign behavior was added.
+
+**Verification:**
+- T29 generated output/gates passed on the merged PR #61 (`Build and verify` success, run 43710132422); its T29 record lists the official sources and all verification checks.
+- T30 local checks against the rebased combined tree: `tools/validate_data.py` (0 errors / 0 warnings), `tests/test_pipeline.py` (15/15), `tools/build_site.py --check`, `tools/build_root_views.py --check`, `tools/build_summary.py --check`, and `tools/audit_site.py` (96 pages, all audit classes pass).
+- `index.html` relative links to `pages/suggestions.html` and `pages/questions.html` resolve; root primary-site links were checked. `git diff --check` passes.
+- The first PR check attempt was cancelled by the workflow's shared `pages` concurrency group while PR #61's main deployment was pending. PR #61's post-merge `Build, verify and deploy` and Pages deployment both then succeeded (run 43710200460). This T30 PR check must be allowed to complete after the main deployment; it is not counted as a passing check yet.
+
+**Open boundaries:** questions in the canonical register remain unanswered by design (e.g., product intent mapping, account/marketplace, publisher ownership, API access, and commission-category mapping). Those require owner/account information or additional authoritative evidence. No changes to the T29 canonical data were made.
