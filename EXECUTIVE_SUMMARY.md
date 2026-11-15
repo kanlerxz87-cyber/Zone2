@@ -698,3 +698,66 @@ anchor in the footer's Decisions column, which swallowed the link label) — log
 recoverable in git history. A second irregularity, the `@font-face` paths in `assets/css/style.css` resolving relative to the
 stylesheet (`assets/css/assets/fonts/…`, which 404s so the self-hosted fonts silently fall back), is flagged for the design
 system's owner and was not repaired from another session's file.
+
+
+---
+
+## Addendum — the crawl layer and the front door, 2026-11-15 (session `5d6d2254`, T42)
+
+The brief's two halves were both published before this session: the verified platform with its registers,
+and a reader-facing publication (`marketing/`, with the hand-written `journal/`) written under a
+machine-checked editorial standard. What was missing was the layer a search engine and a link preview read,
+and the door a first-time visitor is put through. This session worked on those, and on nothing else: no
+product attribute, price, rating, commission band or flag row was added, changed or inferred, and no new
+article was written — a fourteenth piece would have cut across the content queue that the improvement board
+holds open for the owner.
+
+**Crawl coverage is now derived, not typed.** `sitemap.xml` had become the one shared output no generator
+owned, and it had drifted: it advertised the landing page and a handful of root views while the whole
+reader publication, the evidence subpages and the decision surface sat unlisted. `tools/build_sitemap.py`
+now generates it from the published tree — every page under the root plus `pages/`, `journal/`,
+`decisions/` and `marketing/` — and CI runs it with `--check`, so a page added by any session appears on the
+next build and no page can go missing again. The superseded prototype namespaces stay linked from the landing
+page footer and stay out of the sitemap, by an explicit commented rule rather than by omission; retiring or
+consolidating them remains the owner's decision (DS-12 / MQ-08). `<lastmod>` is deliberately absent: the
+repository holds no official source for a per-page modification date, and this project prints a blank rather
+than an inference.
+
+**Every indexed page now says which URL it is.** `<link rel="canonical">`, `og:type`, `og:site_name`,
+`og:title`, `og:description` and `og:url` were published on `marketing/` only; they now appear on all
+indexed pages, emitted by the generators that own them (`tools/build_site.py`, `build_decisions.py`,
+`build_root_views.py`, `build_summary.py`) or, for the hand-written pages, by `tools/build_sitemap.py
+--fix-heads`, with `tools/head_meta.py` as the single function that decides what a page's own URL is. No
+`og:image` was added, because the imagery rights question is open (Q-10 / DS-11) and a tag pointing at
+nothing is the sort of placeholder this site refuses; no Product or Review markup was added, per DS-07.
+
+**The landing page leads with the decision, not the dashboard.** The primary navigation was thirteen flat
+links; it is now two labelled groups — a reader path (the publication, the buying guide, the head-to-head,
+the Journal) and an operator path (overview, products and evidence, the suggestions board, the open
+questions) — and the hero answers the question a visitor arrived with before it describes the platform. The
+four companion namespaces the structural audit requires from this page, and every page that used to be
+reachable only from the header, are still reachable: the body sections and the footer carry them.
+
+**Two defects found while doing it, both repaired, both recorded.** The landing page's footer was rendering
+two bare `EAD` lines as visible text — the tail of a heredoc from an earlier shell patch — alongside a
+duplicated "Suggestions board" entry and two different labels pointing at the publication's index; three
+more `EAD` lines sat in this file. The defect class now has a gate (`stray_markers` in
+`tools/audit_site.py`: a bare all-caps line or a git conflict marker in published copy is a build failure;
+measured at zero legitimate matches across every published page, and negative-tested by injecting one).
+
+**Re-verification, published row by row.** `docs/verification-5d6d2254.md` records what was re-read on
+2026-11-15 and what was not: the three supplied short links and their destinations, the three
+`amazon.com/dp/<supplied code>` 404 controls, every sourced Chefman and Emeril specification row, the
+Operating Agreement's disclosure, tagged-link, no-traffic-representation and termination clauses, and the
+commission bands. It also publishes four items this pass found and deliberately did not paper over: the
+Emeril listing's title text is not the string this site quotes (Amazon serves a variant, and it states a
+different accessories count than the row's `partial` value), the unknown-code control answered `403` here
+where the register quotes a `404` — the conclusion holds, the status code does not — the 8 Qt manufacturer
+page is a two-variant page whose per-model lines the site reads correctly without saying so, and the official
+Emeril page names its own carousel asset with a function count that disagrees with its body copy.
+
+**What still blocks the earning half, unchanged and not technical:** no Associate ID exists, so no link on
+this site can attribute a commission (F-07 / F-24); the intended three products are still not established
+by any official document (F-01 … F-03); the Creators API account is unregistered (F-05); there are no
+performance reports because there is no traffic yet (F-08). Everything the owner must decide is on the
+suggestions board and the questions register, with the discovery action beside each open item.
