@@ -65,7 +65,7 @@ into a decision surface: the 60-day recency test and the fact that rejection is 
 ## 5. What this session did not verify, and why it is blank rather than filled
 
 - The three products' **identity** — that the listing each link opens is the product the brief meant. Only the
-  account that minted the token can answer that (`Q-17`), so every product attribute stays blank in
+  account that minted the token can answer that (`Q-18`), so every product attribute stays blank in
   `ledger/products.json` and the rows stay `UNVERIFIED`.
 - Which **commission band** applies (`Q-08`), whether the owner has an approved **account** (`Q-02`), whether a
   **domain** is owned (`Q-04`), and whether a **Creators API** tier is reachable (`Q-13` gate chain) — none of

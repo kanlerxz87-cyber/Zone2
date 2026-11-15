@@ -987,7 +987,7 @@
         "S43",
         "S32"
       ],
-      "consequence": "NOT reproduced as published: the answer was HTTP 403 Forbidden at link.amazon itself, before any hop and before any lookup, so for this token shape the service never got to the point of returning a 404. Two causes are open and neither is resolvable from here - the edge may reject the random token, or it may reject this session's client. Either way the negative control is weaker than F-20's wording implies, so the published reading of the three supplied links rests on the POSITIVE evidence instead: three codes, three distinct live listings, identical destinations on every one of the five dates they have been fetched. Recorded as F-40; the owner can settle it in a browser in under a minute (Q-17)."
+      "consequence": "NOT reproduced as published: the answer was HTTP 403 Forbidden at link.amazon itself, before any hop and before any lookup, so for this token shape the service never got to the point of returning a 404. Two causes are open and neither is resolvable from here - the edge may reject the random token, or it may reject this session's client. Either way the negative control is weaker than F-20's wording implies, so the published reading of the three supplied links rests on the POSITIVE evidence instead: three codes, three distinct live listings, identical destinations on every one of the five dates they have been fetched. Recorded as F-40; the owner can settle it in a browser in under a minute (Q-18)."
     },
     {
       "id": "V-88",
