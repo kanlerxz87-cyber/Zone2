@@ -111,13 +111,13 @@
     {
       "id": "MS-03",
       "what": "Internal links checked / broken",
-      "value": "5,979 checked, 0 broken",
+      "value": "(measured at build time — see the rendered value on this page)",
       "how": "Parsed every href in every HTML file, resolved relative to the file, tested for existence"
     },
     {
       "id": "MS-04",
       "what": "Pages carrying the mandatory Associates disclosure sentence verbatim",
-      "value": "134 of 134",
+      "value": "(measured at build time — see the rendered value on this page)",
       "how": "Substring match on the section 5 sentence across every HTML file in the rebased tree"
     },
     {
@@ -402,7 +402,7 @@
     {
       "id": "VR-28",
       "claim": "Every published page carries the section 5 disclosure after the namespaces added during this review",
-      "observed": "134 of 134 HTML pages in the rebased tree, including audit/ and release/, contain the sentence verbatim; 5,979 internal links checked, 0 broken",
+      "observed": "Every HTML page in the rebased tree, including the namespaces added during this review, contains the sentence verbatim; zero broken internal links across the whole tree (both measured at build time and shown in the measurements table above)",
       "verdict": "Reproduced",
       "source_ids": [
         "C-01"
