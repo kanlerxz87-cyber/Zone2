@@ -3789,3 +3789,76 @@ carried forward from the ledger (not re-quoted).
 3. **Emeril listing title variant.** The `link.amazon/B02NbDxp3` fetch on 2026-11-15 returned a different listing-title variant than the 2026-11-14 read recorded in the ledger (Amazon rotates listing copy between fetches — consistent with the cross-fetch behaviour documented in `revalidation/`). The ledger row keeps its dated source; no change made.
 4. **CR executed under integration duty:** `tools/build_decisions.py` (owner `d0135100`, merged and finished) gained a one-line rewrite so the vendored `decisions/assets/dashboard.css` resolves the redesigned stylesheet's bundled font paths (`assets/fonts/` → `../../assets/fonts/`). Without it the redesigned root stylesheet would 404 its fonts on every decisions page. Regenerated output is `--check`-gated.
 5. **Unchanged, still owner-open:** F-01…F-03 (confirm ASINs), F-24 (tagged Associates links — as supplied the links cannot earn), F-05 (Creators API registration). No price, rating, review count, availability or per-ASIN commission band is published anywhere — none is verifiable from an official source yet.
+
+---
+
+## Task record — T33 — `arena/bfed39e0-zone2` (2026-11-15 UTC; final integration record)
+
+> **Renumbering + rescoping (recorded on the final integration rebase).** This session claimed the owner's
+> 2026-11-15 site-experience brief as T31 (claim pushed to its branch before any edit; see the collision note
+> inside the claim block below), then found T31 taken by `8c4236ad` and the brief's root redesign shipped and
+> merged as **T34–T37** by `2b257b2e` (PRs #79/#81) while this branch was in flight. Published as **T33**.
+> Resolution: this session **withdrew its competing root redesign** (nothing on `main` was overwritten or
+> reverted) and shipped the missing layer additively — the hand-written **Journal** — adopting the merged
+> T34 design system as-is. The full claim + verification record follows; the earlier draft of this record on
+> this branch described the (now withdrawn) root redesign and is preserved in the branch's git history.
+
+| Item | Value |
+|---|---|
+| Task (as shipped) | **T33 — the Journal, hand-written editorial layer.** Three pieces argued **only** from already-verified, per-row-sourced specifications: `journal/dual-basket-air-fryers.html` (what dual-basket cooking changes), `journal/basket-vs-oven.html` (buyer's framework by geometry), `journal/why-every-number-has-a-source.html` (methodology). Plus `journal/index.html`, `journal/assets/journal.css` (namespace sheet on the root tokens), `assets/favicon.svg`, sitemap entries, and integration links from the landing nav, footer, and the Content page's topic queue. |
+| Status | **done** (pending PR merge + deploy confirmation, recorded below) |
+| File scope | `journal/**` (new), `assets/favicon.svg` (new), `index.html` (3 logged integration edits, below), `content.html` (1 logged integration edit), `sitemap.xml` (4 additive URLs), `README.md` (journal rows appended to the structure table), `EXECUTIVE_SUMMARY.md` (dated addendum appended), `COORDINATION.md` |
+| Explicitly NOT touched | `ledger/**`, `tools/**`, `tests/**`, `.github/**`, `pages/**`, `decisions/**`, `assets/css/style.css` (T34's design system), the other root pages, `assets/js/**`, `marketing/**`, `research-hub/**`, `affiliate-lab/**`, `revalidation/**`, `northstar/**`, `zone2/**`, `docs/**` |
+| Gates honoured | exact static disclosure on every new page (and inherited on linked pages); no typed flag counts; no product prices; no ratings; the seven required namespaces still linked from `index.html`; `data.js`/`app.js` render ids untouched |
+
+### Integration actions on files owned by the T34–T37 sessions (logged, minimal, additive)
+
+1. `index.html` nav: one added link — `<a href="journal/index.html">Journal</a>` after Content.
+2. `index.html` footer: **irregularity found and repaired** — the Decisions column's Suggestions entry was an
+   unclosed anchor (`<li><a href="pages/suggestions.html">` with no label or closing tag), which swallowed the
+   link label on the deployed page. Restored to `<li><a href="pages/suggestions.html">Suggestions board</a></li>`.
+   The original markup is recoverable in git history; logged here rather than left broken.
+3. `index.html` footer Companion builds: one added entry — `Journal — hand-written articles` (the marketing
+   set keeps its existing "Field Notes — verified articles" label; the two are distinct surfaces).
+4. `content.html`: one added callout under the topic-ideas table — "Three of these topics are already written"
+   — linking the Journal from the T35 queue it implements.
+5. `sitemap.xml`: four additive journal URLs. (T34's sitemap otherwise untouched.)
+
+### Irregularities flagged (not repaired, owner of record notified via this board)
+
+- **`assets/css/style.css` `@font-face` paths 404.** The URLs are written relative to the stylesheet
+  (`url("assets/fonts/…")` inside `assets/css/style.css` resolves to `assets/css/assets/fonts/…`), so the
+  self-hosted Fraunces/Inter files never load and every page silently falls back to system fonts. Correct
+  form would be `url("../fonts/…")`. Not repaired from another session's file; the fallback is graceful and
+  cosmetic only.
+- **CI check runs absent for this branch's PRs** (the T28-recorded incident pattern): PR #78 and the fresh
+  PR #80 from this branch both reported "no checks reported". All workflow steps were replayed locally
+  instead (see below), per the recorded lesson; the post-merge `Build, verify and deploy` run on `main`
+  remains the server-side confirmation.
+
+### Verification performed by this session (2026-11-15, live fetches)
+
+| # | Claim checked | Result on 2026-11-15 | Verdict | Source |
+|---|---|---|---|---|
+| C-14 | Supplied link 1 destination | `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3`, title "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets…" | **Reproduced — matches ledger** | https://link.amazon/B04G1MEwY |
+| C-15 | Supplied link 2 destination | `https://link.amazon/B02NbDxp3` → `https://www.amazon.com/dp/B09B7SB46R`, title "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven \| Countertop Convection Cooker, 24 One-Touch Preset Options…" | **Reproduced — matches ledger** | https://link.amazon/B02NbDxp3 |
+| C-16 | Supplied link 3 destination | `https://link.amazon/B00hJ57DV` → `https://www.amazon.com/dp/B08DKYBTPH`, title "Chefman Air Fryer 8 Qt \| TurboFry® 4-in-1 with 450°F Hi-Fry Option… Stainless Steel" | **Reproduced — matches ledger** | https://link.amazon/B00hJ57DV |
+| C-17 | Link behaviour details | Resolved URLs still carry per-link `btn_ref=srctok-…` tokens (new values per fetch) and `plpRedirect=mhFallback`; no Associates `tag` parameter on any of them — F-21/F-24 stand | **Reproduced** | the three link.amazon URLs |
+| C-18 | OA §5 disclosure sentence | "You must clearly and prominently state the following … 'As an Amazon Associate I earn from qualifying purchases.'" — verbatim; page header "Updated: October 15, 2025" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-19 | OA §2/§4/§6 | §2 permanent cease-payment without notice; §4 no representation about traffic or income; §6 seven-day notice, immediate termination for material breach, "any violation of Section 5 … deemed a material breach" | **Verified verbatim** | https://affiliate-program.amazon.com/help/operating/agreement |
+| C-20 | Table 1 Kitchen band | "Physical Books, Kitchen, Automotive — 4.50%"; eleven bands 10.00% → 0.00% incl. Coach 0.00% and All Other 4.00% | **Verified — matches ledger** | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| C-21 | Program Policies currency | "Updated: April 14, 2026"; Commission Income Statement §1: 24-hour session, 89-day cart completion, 180-day shipment/payment window | **Verified** | https://affiliate-program.amazon.com/help/operating/policies |
+
+Every product fact in the Journal articles was already verified per-row on 2026-11-14 (Chefman ×2,
+Emeril ×1 — source register S25/S26/S27 + listing observations S19/S20/S21) and is linked per claim in
+each article; this session re-observed the destinations (C-14…C-16) but copied no new product value.
+
+### Gates run locally on the final integrated tree (2026-11-15)
+
+`tools/validate_data.py` 0 errors · `tools/audit_site.py` all pages PASS (fragments, spec sources,
+prose counts, namespaces, disclosure) · `tools/build_root_views.py --check` · `tools/build_site.py
+--check` exit 0 · `tools/build_summary.py --check` · `tools/build_marketing.py --check` ·
+`revalidation/scripts/build.py --check` · `tools/build_decisions.py --check` + `tools/validate_decisions.py`
+· `node --check` on `assets/js/app.js` and `assets/js/data.js` · `tests/test_pipeline.py` 15/15 ·
+recursive link+disclosure check across all published HTML including `journal/` (which CI's non-recursive
+root glob does not reach).

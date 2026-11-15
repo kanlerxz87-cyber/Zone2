@@ -28,6 +28,10 @@ anything unconfirmed is left blank and published on a Flagged for Review page ra
 | `sources.html` | Complete source register, with each source's class made explicit (generated) |
 | `flagged.html` | Flagged irregularities and unverified items, with source links |
 | `design-notes.html` | Design rationale, compliance-linked design decisions, and queued suggestions for review |
+| `journal/index.html` | **Journal (T33)** — hand-written editorial around the observed listings: a dual-basket trend explainer, a basket-vs-oven buyer's framework, and the site methodology |
+| `journal/dual-basket-air-fryers.html` | What dual-basket cooking actually changes; argued from verified specs, conflicts included |
+| `journal/basket-vs-oven.html` | Choosing between basket fryers and air-fryer ovens by geometry, not brand |
+| `journal/why-every-number-has-a-source.html` | The blank-until-verified methodology and the compliance rules that shaped the build |
 
 The root pages were redesigned on 2026-11-15 (session `2b257b2e`) into a marketing presentation of the
 same verified data — same ledger, same gates, no value changed; the reasoning lives on

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The blank-until-verified rule behind this site: the control tests that settled how to read the supplied links, the Amazon rules that shaped what we publish, and what changes when the owner confirms the product mapping.">
+<title>Why every number here links to its source — Zone2 Journal</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="assets/journal.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Verified affiliate platform</span>
+      </span>
+    </a>
+    <label class="nav-toggle" for="navtoggle">Menu</label>
+    <input type="checkbox" id="navtoggle" class="nav-toggle-input">
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html">Overview</a>
+      <a href="../products.html">Products</a>
+      <a href="index.html" class="active">Journal</a>
+      <a href="../content.html">Content</a>
+      <a href="../compliance.html">Compliance</a>
+      <a class="nav-quiet" href="../flagged.html">Flagged</a>
+      <a class="nav-quiet" href="../verification.html">Verification</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Journal · methodology</div>
+      <h1 class="hero-title">Why every number here links to its source</h1>
+      <div class="article-meta">Zone2 Journal · 2026-11-15 · the methodology, in plain language</div>
+    </div>
+  </section>
+
+  <div class="page-wrap">
+    <div class="disclosure">
+      <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
+    </div>
+
+    <article class="article-body">
+      <p>
+        Most affiliate sites are written backwards: the headline is chosen first, the specs are arranged to
+        support it, and the reader finds out later that the "sale price" was stale a week after publishing.
+        This site was built backwards from that. The rule that produced every page you've read is simple:
+        <strong>a value appears here only when an official source states it, and anything unconfirmed is left
+        blank and published as a flag instead of being inferred.</strong>
+      </p>
+
+      <h2>What that meant in practice</h2>
+      <p>
+        The brief supplied three short links that look almost like Amazon ASINs — except each is nine
+        characters, and an ASIN is ten. A lazier site would have quietly "fixed" the codes or guessed at the
+        products. We did neither, and instead settled the question with controls: an unknown code on the same
+        short-link service returns a 404 instead of a random product, which shows the supplied codes are
+        honoured lookups; a valid ten-character ASIN fed to the same service also returns a 404, which shows
+        the codes are not truncated ASINs; and the per-link tracking token changes between days even though
+        the destination does not. The chain of evidence is on the
+        <a href="../products.html#resolutionTable">resolution table</a>, reproducible by hand.
+      </p>
+      <p>
+        The result is a site that can tell you a great deal about <em>what the links resolve to</em> — three
+        air-fryer listings, verified against their manufacturers' own pages — and nothing at all about
+        <em>which products the brief intended</em>, because no official source says so. That gap is published
+        as <a href="../flagged.html">flags F-01 and F-03</a> rather than papered over. It is the single most
+        important fact about this site, and it is the reason the product mapping is the first question in the
+        <a href="../pages/questions.html">questions register</a>.
+      </p>
+
+      <h2>The Amazon rules that shaped the build</h2>
+      <p>
+        Compliance here is not a footer paragraph; it deleted features. Four rules did most of the shaping,
+        all read directly from Amazon's own documents (re-verified live on 2026-11-15):
+      </p>
+      <ul>
+        <li>
+          <strong>The disclosure</strong> — the Operating Agreement §5 requires the sentence "As an Amazon
+          Associate I earn from qualifying purchases." clearly and prominently on the site. It is at the foot
+          of every page, and a CI gate fails the build if any page drops it
+          (<a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Operating Agreement</a>).
+        </li>
+        <li>
+          <strong>Prices</strong> — price display is restricted to links Amazon serves and licensed API data.
+          A price pasted into a static page goes stale the next discount cycle, so this site prints none.
+          You'll never see a stale figure here, because you'll never see a figure
+          (<a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Program Policies</a>).
+        </li>
+        <li>
+          <strong>No price tracking or alerting</strong> — §6(y) forbids it, so the "pricing analysis" module
+          of this platform is scoped to Amazon's published commission rates, not per-product price watching.
+        </li>
+        <li>
+          <strong>Link transparency</strong> — §6(w) forbids shortening links in a way that hides the Amazon
+          destination, and reviews may only be displayed via Amazon's sanctioned APIs. Hence: no star ratings
+          on this site, and product links go straight to the canonical listing.
+        </li>
+      </ul>
+
+      <h2>What happens next</h2>
+      <p>
+        Two decisions unlock everything else, and both are yours. Confirming the product mapping (which
+        products did those three codes mean to identify?) turns on the blocked content queue. Supplying an
+        Associates tag turns the tracking plan into a launch checklist — without it, the supplied links
+        cannot attribute a single sale, which is the honest reason this site is pre-revenue. The
+        <a href="../pages/suggestions.html">suggestions board</a> holds the options and trade-offs; nothing
+        on it gets built until you pick.
+      </p>
+      <p>
+        Until then, the site keeps its one distinctive promise: you can check any of it. Every table row
+        carries the page it was read from, the <a href="../verification.html">verification log</a> records
+        each check with its method and verdict, and the <a href="../sources.html">source register</a> lists
+        every official page this site stands on. Trust is cheaper when it comes with receipts.
+      </p>
+    </article>
+
+    <div class="sources-box">
+      <h3>The documents this site is governed by</h3>
+      <ul>
+        <li><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Associates Program Operating Agreement</a> — updated October 15, 2025; §5 disclosure, §2 termination, §4 no-income-promises verified verbatim on 2026-11-15.</li>
+        <li><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Associates Program Policies</a> — page updated April 14, 2026; participation requirements including §6(y) and §6(w) re-verified 2026-11-14.</li>
+        <li><a href="https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ" target="_blank" rel="noopener noreferrer">Standard Commission Income Statement</a> — Table 1 and the bounty tables, re-read live on 2026-11-15.</li>
+        <li><a href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener noreferrer">FTC Endorsement Guides FAQ</a> — the material-connection disclosure standard behind the paid-link labelling used across the site.</li>
+        <li>The repo-level detail: <a href="../verification.html">verification log</a>, <a href="../sources.html">source register</a>, <a href="../flagged.html">flag register</a>.</li>
+      </ul>
+    </div>
+
+    <footer class="site">
+      More: <a href="dual-basket-air-fryers.html">Two baskets beat one long timer</a> ·
+      <a href="basket-vs-oven.html">Basket fryer or air-fryer oven?</a> ·
+      <a href="../compliance.html">The full compliance ledger</a>
+    </footer>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="../index.html">Overview</a></li>
+          <li><a href="../products.html">Products</a></li>
+          <li><a href="../content.html">Content &amp; topic queue</a></li>
+          <li><a href="../compliance.html">Compliance</a></li>
+          <li><a href="../tracking.html">Tracking</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Evidence</h4>
+        <ul>
+          <li><a href="../verification.html">Verification log</a></li>
+          <li><a href="../sources.html">Source register</a></li>
+          <li><a href="../flagged.html">Flagged for review</a></li>
+          <li><a href="../summary.html">Executive summary</a></li>
+          <li><a href="../pages/index.html">Findings hub</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Decisions</h4>
+        <ul>
+          <li><a href="../pages/suggestions.html">Suggestions board</a></li>
+          <li><a href="../pages/questions.html">Open questions register</a></li>
+          <li><a href="../decisions/index.html">Decision hub</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More writing</h4>
+        <ul>
+          <li><a href="index.html">Journal — hand-written articles</a></li>
+          <li><a href="../marketing/index.html">Verified product articles</a></li>
+          <li><a href="../design-notes.html">Design notes &amp; growth ideas</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclosure">
+      <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
+      As an Amazon Associate I earn from qualifying purchases. Amazon and the Amazon mark are trademarks
+      of Amazon.com, Inc. or its affiliates; this site is independent and not affiliated with Amazon.
+      Outbound product links are marked <code>rel="sponsored"</code>. No price is displayed on any page.
+    </div>
+    <div class="footer-note">
+      Verified dataset date: 2026-11-14 · re-verified live 2026-11-15 (T33)
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
