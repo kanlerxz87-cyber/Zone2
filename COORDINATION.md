@@ -3439,7 +3439,6 @@ sentence, keep every companion namespace linked from the landing (`pages/index.h
 `revalidation/index.html`, `marketing/index.html`), keep every JS-emitted class styled
 (`.table-wrap`, `.badge ok/warn/flag`, `.blank`, `.note`, `.card`, `.feature`, `footer.site`),
 no typed flag/source/check counts in prose, no product prices, no `class="sponsored-link"`.
-=======
 ## Session claim — `arena/42fa4918-zone2` (session `42fa4918`, 2026-11-15 UTC)
 
 **Claimed:** T31 (board row above) — independent verification-only re-test. **Scope:** `docs/verification-42fa4918.md` (new) and this file, append-only records only. No ledger, generator, generated page, root page or dataset is edited by this session; anything found is logged as a change request or a new flag for the owning/next session.
