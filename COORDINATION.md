@@ -76,7 +76,7 @@ Repo: `kanlerxz87-cyber/Zone2`
 | T26 | Close the open audit findings that no later session took over: AUD-01 (residual niche KPI on the root page), AUD-02 + AUD-03 (companion `research-hub/` summary/product pages and `docs/verification-log.md` still publish the superseded "resolved to canonical ASINs / coherent niche" mapping), AUD-04 (`research-hub/scripts/verify.py` stale topology, 7 false errors). AUD-05 is recorded as open unless fixed in-scope. Owner sessions of these files (`6602723a`, `c6e94e8d`, `5c06fb5e`) are finished; the claim is a takeover per the 60-minute rule and the project's final-integration duty. | done (PR #42, merged 2026-11-14T18:32:45Z `6f2f92c`) | `arena/a6f70a13-zone2` (a6f70a13) | `research-hub/scripts/build.py`, `research-hub/scripts/verify.py`, `research-hub/*.html` (generated), `docs/verification-log.md`, `index.html` (KPI line only), `COORDINATION.md` |
 | T26b | Fresh baseline audit for current request: rerun all project gates; verify the live GitHub Pages entry points and source-controlled dataset claims against official URLs; record defects only, no overlapping edits | done | `arena/0f44536f-zone2` | `COORDINATION.md` (append-only record only; results in this session's record) |
 | T27 | Final integration correction: reconcile root content-status claims with already-published destination-only marketing set; label mapping uncertainty on marketing pages; update executive summaries, rebuild and verify all affected outputs | done — closing record by `ba8b2d38` below (PRs #48/#51/#54 merged 2026-11-14, CI + Pages deploy confirmed); status cell corrected 2026-11-15 by `8c4236ad`, see the T30 session record | `arena/0f44536f-zone2` → completed by `arena/ba8b2d38-zone2` | `COORDINATION.md`, `ledger/flags.json`, `tools/build_site.py`, `tools/build_marketing.py`, generated `pages/`, `marketing/**`, `content.html`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, generated `research-hub/summary.html`, `tests/test_pipeline.py` |
-| T32 | **Renumbered three times** (id collisions of the day): claimed as T29 → T29 shipped first by `2499438c` (PRs #61/#63) → renumbered T30 → **T30 claimed and shipped by `fb49a226`** (dashboard integration, PRs #64/#66) → renumbered T31 → **T31 claimed and shipped by `42fa4918`** (verification-only re-test of T29, PRs #72/#76) → **renumbered T32**. Nothing any of them published is duplicated or overwritten; the nav-link part of this session's original scope was dropped after `fb49a226`'s T30 landed the same links (my two duplicate nav entries removed; my complementary footer links kept). T32 = the work T29/T30/T31 did not cover: (1) editorial upgrade of the destination-only marketing set — tone and structure only, zero fact changes, every row's source intact (takeover per 60-minute rule: `marketing/**` owner `a3faf404` finished; the T27 marketing scope was completed and merged by `ba8b2d38`, no active claimant); (2) additive links from the root dashboard to the two new decision-support pages (`pages/suggestions.html`, `pages/questions.html`); (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm. | in progress | `arena/8c4236ad-zone2` (8c4236ad) | `COORDINATION.md` (records + the T27 status correction above), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), NEW `docs/verification-8c4236ad.md` |
+| T32 | **Renumbered three times** (id collisions of the day): claimed as T29 → T29 shipped first by `2499438c` (PRs #61/#63) → renumbered T30 → **T30 claimed and shipped by `fb49a226`** (dashboard integration, PRs #64/#66) → renumbered T31 → **T31 claimed and shipped by `42fa4918`** (verification-only re-test of T29, PRs #72/#76) → **renumbered T32**. Nothing any of them published is duplicated or overwritten; the nav-link part of this session's original scope was dropped after `fb49a226`'s T30 landed the same links (my two duplicate nav entries removed; my complementary footer links kept). T32 = the work T29/T30/T31 did not cover: (1) editorial upgrade of the destination-only marketing set — tone and structure only, zero fact changes, every row's source intact (takeover per 60-minute rule: `marketing/**` owner `a3faf404` finished; the T27 marketing scope was completed and merged by `ba8b2d38`, no active claimant); (2) additive links from the root dashboard to the two new decision-support pages (`pages/suggestions.html`, `pages/questions.html`); (3) additive executive-summary addendum; (4) independent re-verification of official sources, the live site, and the new decision pages' load-bearing claims; integration PR → merge → deploy confirm. | done — shipped via PR #75 (merge `fc98d0c`), closing record at the end of this file; status cell corrected 2026-11-15 by session `f6af67c3` (T44, audit item I-C) | `arena/8c4236ad-zone2` (8c4236ad) | `COORDINATION.md` (records + the T27 status correction above), `index.html` (additive nav links only), `EXECUTIVE_SUMMARY.md` (additive addendum), `tools/build_marketing.py` + regenerated `marketing/**` (editorial copy only), NEW `docs/verification-8c4236ad.md` |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -2908,7 +2908,7 @@ and the closing record follow in the next entry.
 | Pages API | `status: built`, `build_type: legacy`, source `main` `/`, built 2026-11-14T19:13:45Z, https://kanlerxz87-cyber.github.io/Zone2/ |
 | Live read after deploy | `pages/commissions.html` serves the **complete 46-row bounty table** and the 2-row Bonus Events panel, with the 34-item flag register linked from the header |
 | T26 | **done** |
-| T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | in progress | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
+| T28 | **Complete the official-programme transcriptions.** Two completeness gaps found by an independent row-by-row re-read of the official pages on 2026-11-14: (1) `ledger/commission_table.json` transcribed **9 of the 46** Bounty Event rows and **0 of the 2** Bonus Event rows published in the official Special Commission Income Appendix (S04) — 39 rows missing, and one present row quoted the wrong column; (2) `ledger/compliance.json` omitted 10 Participation Requirements that constrain this platform's own modules — notably §6(y) (no price-tracking/price-alerting), which constrains module M-03 "Pricing analysis". Publishes two new flags, adds R-22…R-31, regenerates, runs every gate, PR → merge → deploy. | done — work shipped: ledger/commission_table.json notes "COMPLETED 2026-11-14 (session 0a697d4a, T28, flag F-37)" and flags F-30/F-37/F-38 are closed on the register; last branch commit 2026-11-14 19:53Z, so per the 60-minute rule the status cell is corrected 2026-11-15 by session `f6af67c3` (T44, audit item I-C); no content edited | `arena/0a697d4a-zone2` (0a697d4a) | `ledger/commission_table.json`, `ledger/compliance.json`, `ledger/flags.json`, `tools/build_site.py` (additive), `pages/**` (regenerated), `assets/js/data.js` (regenerated), root `index.html` (flag rows), `COORDINATION.md` |
 | T29 | Suggestions decision board (`pages/suggestions.html`, options + recommendation, no change implemented until the owner chooses) and a Questions / missing-information register (`pages/questions.html`: what is known, what is missing, how to discover it, each with an official source link). Adds both pages to the site navigation. Re-verified the three supplied `link.amazon` destinations and the Associates facts used on the new pages on 2026-11-15. | done (PR and merge recorded below) | `arena/2499438c-zone2` (2499438c) | `ledger/suggestions.json` (new), `ledger/questions.json` (new), `tools/build_site.py` (additive: 2 page builders, NAV, emit), `tools/validate_data.py` (additive: new files in the source-id check), `pages/suggestions.html`, `pages/questions.html`, `pages/index.html` and other generated `pages/**` (nav only), `COORDINATION.md` |
 | T30 | Primary-dashboard integration of the canonical Suggestions decision board and Questions register; avoid duplicate data/decision systems and make the existing evidence-led review path discoverable | done — PR #64 merged; Pages deploy confirmed | `arena/fb49a226-zone2` | `index.html`, `COORDINATION.md` |
 | T34 | **Primary-site redesign — polished marketing presentation of the same verified data.** The current root pages read as a generic admin dashboard (default-blue sidebar + cards). Rebuild the root surfaces (landing, products, analysis, content, compliance, tracking, flagged, 404) as a polished, marketing-forward site WITHOUT changing any verified datum: same JS-rendered tables, same element ids the gates pin (`flagCount`, `flagCountHeading`, `flagRegisterCount`, `flagRegisterMax`, all table hooks), same disclosure, same no-price/no-inference rules, same route into `pages/`, same required companion-namespace links. Adds one new root page (`design-notes.html`) publishing the design rationale + further design/growth suggestions for owner review. No ledger or `assets/js/data.js` changes. **Renumbered from T30** (id collision with `fb49a226`'s merged row above — see the claim record at the end of this file; `fb49a226`'s decision-board notice is preserved verbatim in the redesigned landing). | claimed 2026-11-15T11:47Z, renumbered 2026-11-15 | `arena/2b257b2e-zone2` (2b257b2e) | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `flagged.html`, `404.html`, `design-notes.html` (new), `assets/css/style.css`, `assets/js/app.js` (rendering only), `docs/verification-2b257b2e.md` (new), `COORDINATION.md` |
@@ -2920,7 +2920,7 @@ and the closing record follow in the next entry.
 | T41 | **Follow-up to T40 (`3db75825`, merged PR #91) — close its open items, do not repeat its review.** (a) I-A: confirm the 10-digit ASIN rule from an Amazon help page; (b) I-B: disposition of stale, conflicting PR #70; (c) re-read the PA-API 5 deprecation notice and Table 1 on official pages; (d) replay the 22 CI gates on the rebased tree. Originally claimed as T40; renumbered to T41 at claim-time because T40 was merged first by `3db75825`. | claimed 2026-11-15 (UTC), done — see closing record | `arena/08789ab3-zone2` (08789ab3) | `COORDINATION.md` (append-only), `docs/verification-08789ab3.md` (new), PR #70 closed as superseded (no file change) |
 
 
-| T38 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line (including the new `decisions/` namespace), run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. **Renumbered T31 → T39 at integration:** `main` had carried a different task’s T31 (session `42fa4918`, verification-only re-test, PR #72) since 12:01 — see the collision note in the claim record; no other session’s row or record was altered. | in progress | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
+| T38 | **Design & content playbook + repo review + final integration.** (a) `docs/design-prompt-suggestions.md` — the suggestions that feed the site-design prompt (visual/editorial direction, trendy-but-compliant article angles for the promoted products, organic-traffic plan, anti-"AI-slop" editorial rules, decision-making improvements) — complementary to T29's owner-decision board, not a second decision store; (b) `playbook.html` — the same set published on the live site in table form with a source link per row; (c) fresh line-by-line repo review for this request in `docs/review-fcb538fa.md` with irregularities flagged; (d) `EXECUTIVE_SUMMARY.md` addendum; (e) **final integration**: add the single `playbook.html` nav link to root `index.html`, re-verify the combined tree line by line (including the new `decisions/` namespace), run every gate, PR → merge → confirm the GitHub Pages deploy, record the PR link and merge result here. **Renumbered T31 → T39 at integration:** `main` had carried a different task’s T31 (session `42fa4918`, verification-only re-test, PR #72) since 12:01 — see the collision note in the claim record; no other session’s row or record was altered. | done — shipped via PR #85 (merge `e16ce2c`), closing record at the end of this file; status cell corrected 2026-11-15 by session `f6af67c3` (T44, audit item I-C) | `arena/fcb538fa-zone2` (fcb538fa) | `docs/design-prompt-suggestions.md` (new), `docs/review-fcb538fa.md` (new), `playbook.html` (new), `EXECUTIVE_SUMMARY.md` (addendum), `index.html` (one nav link, integration only, after PR #62), `COORDINATION.md` (append-only records + removal of two stray conflict-marker lines found on `main`, content-preserving) |
 
 ### What shipped
 
@@ -4265,7 +4265,11 @@ Follow-up to T40 (`3db75825`, merged PR #91). T40 was claimed in parallel by thi
 | Supplied links | Re-observed live: `B04G1MEwY`→`B0CDY277D3`, `B02NbDxp3`→`B09B7SB46R`, `B00hJ57DV`→`B08DKYBTPH`; all `plpRedirect=mhFallback`, no Associates tag — matches the site |
 | Irregularities still open (owner) | F-05 / F-07 / F-24 (no Associates tag or ID; no Creators API credentials). I-D (board size, ~401 KB) and I-C (rows reading "in progress" with closing records) — recommendations only. |
 | Flagged for Review register | Unchanged (no new product-level irregularity found on official sources; process items recorded here, not on the public register, because flags must cite official sources) |
-| PR | Opened from `arena/08789ab3-zone2` → `main`; link and merge result recorded in the follow-up closing line below |
+| PR | **[#94](https://github.com/kanlerxz87-cyber/Zone2/pull/94)** — `T41: follow-up to T40 …` · PR check `Build and verify` on head `235b8a5` = **success** (deploy job skipped on PRs by design) · merged with `gh pr merge 94 --merge` → merge commit **`d4b68ee`** at 2026-11-15 13:10:04 UTC |
+| Merge-time deploy | Post-merge `Build, verify and deploy` run for `d4b68ee` was **cancelled** by the workflow's `pages` concurrency group (`cancel-in-progress: true`) when PR #92 pushed `d887ae7` one second later. Its build job passed; its deploy job was cancelled and GitHub refuses re-runs of that run ("its workflow file may be broken"); a manual `workflow_dispatch` returned HTTP 403 to this session. |
+| Pages | `GET /repos/…/pages` → `status: built`, source `main` `/`. Legacy `pages-build-deployment` = **success** for `d4b68ee` and `d887ae7`. Live fetch of `docs/verification-08789ab3.md` served this record. |
+| Full gate replay on live `main` | Shallow clone of `origin/main` at `23c7fd2` (PR #96, after this merge): all 22 CI steps → **22/22 exit 0**. (An earlier replay from a `git archive` extract failed step 09 only because that step needs a `.git` directory; re-run in a real clone it passes.) |
+| Change request (not implemented; `.github/workflows/pages.yml` is shared) | **CR-T41-1.** Set `cancel-in-progress: false` for the `pages` concurrency group, or split the deploy job into its own group. Otherwise a deploy is cancelled whenever two merges land close together, which happened on 4 of the 6 most recent `main` runs. |
 
 ## Session record — `arena/b6defa90-zone2` (session `b6defa90`, 2026-11-15 UTC) — task T40
 
@@ -4308,6 +4312,114 @@ No file in this claim's scope is claimed by another session: all owning sessions
 | PR / merge / deployment | PR [#95](https://github.com/kanlerxz87-cyber/Zone2/pull/95) merged as `6eccadd57e99e8c14557125ee0b0d156f9c067f1` on 2026-11-15; post-merge workflow [43717842219](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43717842219) succeeded; Pages build/deploy [43717841570](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43717841570) succeeded. |
 | Live check | Cache-busted read of [pages/questions.html](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html?cacheBust=6eccadd57e99e8c14557125ee0b0d156f9c067f1) confirmed Q-01/Q-07 no longer state a location. The first non-cache-busted read returned the prior copy; cache-busted read matched the deployed commit. |
 | Status | **done — merged, Pages deployed, live-verified.** |
+
+---
+
+## Session claim — T43 — `arena/156aae86-zone2` (session `156aae86`, 2026-11-15 UTC)
+
+**Renumbered T41 → T43.** Claimed as T41 on a branch based on `83f52a9`. While it was in flight, `main`
+advanced through PRs #92–#99 and **T41 was claimed and shipped by session `08789ab3`** and **T42 by
+`bfb20351`**. Per the board's renumbering precedent the label moves; nothing of any other session's record
+was edited, reordered or deleted, and no other session's file was touched.
+
+**What changed under this branch — read before reviewing the diff:**
+
+| Change on `main` while this branch was open | Effect here |
+|---|---|
+| Session `b6defa90` (T40) removed the `EAD`/`in` merge residue from `index.html` and `EXECUTIVE_SUMMARY.md` (PR #96, `e943abc`) | **This session's independent repair of the same defect was dropped in the rebase.** Verified present on the final tree: `grep -c '^EAD$\\|^in$'` → 0 in both files. No duplicate fix shipped. The finding is retained in the record because it was found independently and because nothing in the gate suite would have caught it. |
+| Session `08789ab3` (T41) closed T40's I-A (ASIN rule) and I-B (PR #70) | No overlap; not re-done |
+| Session `bfb20351` (T42) removed an unsourced Osaka-location claim from `ledger/questions.json` | Not touched; `ledger/**` is outside this session's scope |
+
+**Claimed:** T43. **Board state at claim (rebase point):** `origin/main` = `bfc240d`. Open PR: **#90**
+(verification-only, `COORDINATION.md` scope). No issue open.
+
+**Non-overlap statement.** T43 owns the root `sitemap.xml`, two new tool files, two appended CI steps, a
+mechanical `<link rel="icon">` insertion on the root pages (and in the two generators that emit three of
+them), and this record. It does **not** touch `ledger/**`, `assets/js/**`, `marketing/data/**`,
+`tools/build_marketing.py`, the product/identity/price/commission registers, or any page body prose.
+
+**Why this scope.** Every surface the owner asked for was already published and green on `main` before this
+session touched anything — the suggestions board (`pages/suggestions.html`, SG-01…SG-10), the questions
+register (`pages/questions.html`, Q-01…Q-16), the playbook (`playbook.html`), the marketing publication
+(`marketing/**`, 18 pages) and the journal (`journal/**`, 4 pages). What no task had covered was the
+mechanism that tells a search engine those pages exist, and at the rebase point it is still measurably
+broken: root `sitemap.xml` holds **16** `<loc>` entries against **115** published HTML pages (**99 absent,
+86%**), including `marketing/index.html`, `playbook.html` and all 38 `pages/*.html`. The file is
+hand-typed, has no generator, and no CI step reads it — so it drifted to that state with every build
+green. Separately `rel="icon"` is on the 4 `journal/` pages and on **0** of the 13 root pages, so the
+landing page's default `/favicon.ico` request 404s. That is the organic-traffic plumbing the brief asks
+for. Full record with reproducing commands: `docs/verification-156aae86.md`.
+### Addendum — `1b839f87` close-out (2026-11-15 UTC)
+
+- **PR #92** (record-only: this section's merge record) — **MERGED** 2026-11-15T13:11:06Z, merge commit `d887ae7`.
+  Its own push run was cancelled by the concurrency group when PR #96 merged; the Pages deploy for `d887ae7` succeeded.
+- **Current `main` head `23c7fd2`** (PR #96, another session): `Build, verify and deploy` push run was **cancelled by the concurrency group**, so it was not a completed server-side run. `pages build and deployment` for `23c7fd2`: **success**.
+  Replayed locally on that exact commit in a detached worktree: all 22 `run:` steps of `pages.yml` exit 0; CSS `url()` resolver: 9 resolved, 0 broken.
+- **Board state:** `1B-1` repaired and live (PRs #89, #92). `1B-2` (CI does not check CSS `url()` references) open, recommended to the next integration owner. No other flag changed.
+
+
+---
+
+## Task claim — T44 — `arena/f6af67c3-zone2` (session id `f6af67c3`) — claimed 2026-11-15T13:35Z
+
+**Renumber chain, recorded before any non-coordination edit:** first written as T41 at 13:11Z (not pushed in
+time); `08789ab3` shipped T41 (PR #97 lineage); renumbered T43 at 13:20Z while resolving a rebase conflict;
+`156aae86` shipped a T43 claim (PR #100 lineage) before this branch could push; the label moves to **T44**.
+No other session's record is edited, reordered, or deleted; nothing they published is duplicated.
+
+**Scope amendment (handoff to T42):** this claim originally included a new flag **F-39** ("operator location
+Osaka, Japan has no on-repo source; current workspace context says Los Angeles, US") plus provenance notes on
+Q-01/Q-07. While this branch was in flight, **session `bfb20351` claimed T42 — "Remove unsupported
+operator-location claim from Q-01" — and removed the Osaka sentences from `ledger/questions.json` on `main`**
+(PR #100 lineage). Their claim is fresh and their scope covers the same defect, so the F-39 flag and the
+Q-01/Q-07 notes are **withdrawn from this branch** rather than shipped as a duplicate. The contradiction
+evidence this session gathered (full-text search: "Osaka" appeared only in the two derived rows and one
+session record; workspace context says Los Angeles, CA, US) is recorded here for T42's closing record to
+reference if useful. This session's remaining scope does not touch `ledger/questions.json` or
+`ledger/flags.json`.
+
+**Claimed work (T44):**
+1. **I-A implementation (S24 verbatim wording).** `ledger/decisions_findings.json` RF-01 records that Amazon's
+   S24 page says "the **10-digit** code that Amazon uses to denote specific products" while the repo's
+   published surfaces say "10-character". This session re-fetched S24 live (2026-11-15) and confirmed the
+   verbatim wording, then fixes the two load-bearing rows: `ledger/sources.json` S24 (`used_for` verbatim +
+   access date) and `ledger/products.json` E-05 (`observation` aligned; measurements unchanged). No other row
+   is reworded — how far the correction should propagate is offered to the owner as **new suggestion SG-11**
+   (`ledger/suggestions.json`, options A/B/C, recommendation B), joining the canonical decision board.
+2. **I-C (board hygiene), executed.** Status cells of T28, T32, T38 flipped to done with pointers to their
+   closing records (PRs #85/#75; T28's ledger note says COMPLETED 2026-11-14, flags F-30/F-37/F-38 closed).
+   No other row touched.
+3. **I-F (font repair) verified.** `assets/css/style.css` `@font-face` paths are `../fonts/…` on this tree
+   (repair `a925091`, PR #89) and the three woff2 files exist; recorded, with a live-site re-read after deploy.
+4. **Verification record** `docs/verification-f6af67c3.md` (new), full gate suite, then PR → merge → Pages
+   deploy confirmation.
+
+**File scope:** `ledger/sources.json` (S24), `ledger/products.json` (E-05 wording only),
+`ledger/suggestions.json` (additive SG-11), `pages/**` + root `sources.html`/`verification.html`/
+`summary.html` + `decisions/*.html` + `assets/js/data.js` (regenerated by the owned builders — flag and
+question counts are unchanged from `main`'s 38/16 because the F-39/Q-note work is withdrawn),
+`COORDINATION.md` (this claim, I-C flips, closing record), `docs/verification-f6af67c3.md` (new).
+**Not touched:** `ledger/questions.json`, `ledger/flags.json` (T42's in-flight scope), `marketing/**`,
+`index.html`, `EXECUTIVE_SUMMARY.md`, `README.md`, `northstar/`, `research-hub/`, `affiliate-lab/`,
+`decisions/` sources, `sitemap.xml`/favicon scope (T43's, `156aae86`), `ledger/commission_table.json`,
+`ledger/compliance.json`.
+
+Branch: `arena/f6af67c3-zone2` (platform pins this session to one branch; the `session-<id>/<task>` branch
+naming is not available to it — same process deviation every prior session logged; scope separation is
+enforced by the file list above).
+---
+
+## Closing record — T44 — `arena/f6af67c3-zone2` (session `f6af67c3`, 2026-11-15 UTC)
+
+| Item | Value |
+|---|---|
+| PR | **#103** — `arena/f6af67c3-zone2` → `main` — merge result recorded in the PR (see the post-merge comment) |
+| Delivered | I-A implemented at ledger level (S24 `used_for` verbatim "10-digit…" + tagged-link format, `accessed_utc` 2026-11-15; E-05 `observation` aligned; measurements unchanged) · **SG-11** added to the canonical decision board (options A/B/C, recommended B) · **I-C executed** (T28/T32/T38 status cells → done with closing-record pointers) · **I-F verified** (`../fonts/…` repair from PR #89 present) · builders' outputs regenerated |
+| Withdrawn (handoff) | F-39 + Q-01/Q-07 provenance notes → superseded by `bfb20351`'s in-flight **T42**; evidence for their closing record is in the T44 claim block |
+| Gates | 13 commands exit 0 on the final tree: `validate_data` 0 errors · `audit_site` 5/5 PASS · `build_site/root_views/summary/decisions --check` no drift · `build_marketing --check` 21 current · `validate_decisions` 0 warnings · `tests/test_pipeline.py` **15/15** · `node --check` ×2 · `verify_marketing` all pass · `revalidation --check` no drift · `check_links.py .` **2,847 internal links, 0 broken** |
+| Verification record | `docs/verification-f6af67c3.md` (new): S24 fetched live with the verbatim sentence; renumber chain; T42 handoff; RF-01 scope recount (39 core-surface mentions vs RF-01's 75 repo-wide) |
+| Irregularities (non-blocking) | Task-id collision T41→T43→T44 (board procedure followed); rebase conflicts with PR #96/#97/#98/#100 waves resolved preserving both sides each time; carried forward for the owner: F-42 debris, I-D board size, F-05/F-07/F-08/F-24 owner blockers |
+| Sources used | S24 (fetched live 2026-11-15) — https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC · S01/S02/S23 (unedited, previously verified) |
 
 ## Session claim — `arena/e4e7d4b2-zone2` (session `e4e7d4b2`, 2026-11-15 UTC)
 
