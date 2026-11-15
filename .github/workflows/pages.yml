@@ -256,6 +256,20 @@ jobs:
       - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure)
         run: python3 tools/audit_site.py
 
+      # ---- arena/d0135100-zone2: the decision surface (T29) ----
+      # Renders decisions/ and DECISIONS.md from ledger/{requirements,questions,suggestions}.json, then holds
+      # the whole namespace to the project contract: every row sourced or explicitly flagged, an OPEN question
+      # never carrying an answer, every proposal stating its evidence/cost/risk/blockers, counts derived
+      # rather than typed, disclosure present, no price, links resolving. Verified to fail on purpose on
+      # 2026-11-15 against eight injected defects (filled-in OPEN answer, MET-with-a-gap, missing
+      # how_to_obtain, ADOPT without a decision note, unregistered source id, typed count drift, missing
+      # disclosure, injected product price) before being added here.
+      - name: Rebuild the decision namespace and confirm committed output is current
+        run: python3 tools/build_decisions.py --check
+
+      - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
+        run: python3 tools/validate_decisions.py
+
       # T26: this guard was excluded from CI because it reported seven false failures — it
       # resolved the repository root to research-hub/ and then looked for the root site's
       # files inside the hub. It now resolves both roots correctly and checks 13 pages, so it

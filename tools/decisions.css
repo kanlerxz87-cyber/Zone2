@@ -1,0 +1,78 @@
+/* Decisions namespace styling.
+   Extends the shared design system (assets/css/style.css, vendored as assets/dashboard.css) rather than
+   restyling it, exactly as tools/pages-site.css does for the findings pages. Everything here is either a
+   class the base sheet does not define, or a refinement needed because these pages are table-heavy.
+
+   Vocabulary inherited from the base sheet and used deliberately in tools/build_decisions.py:
+     .shell .sidebar .main .card .kpis .kpi .num .lbl .table-wrap .badge table th td .disclosure
+   Classes defined here because the base sheet has no rule for them:
+     .topbar .crumb .top-right .live-tag .brand .brand-mark .side-label .sidebar-bottom .status-dot
+     .nav .nav-link .notice .pagelink .pill (base + ok/info/warn/neg) .row-note .eyebrow .lede .findings */
+
+/* ---- frame ---- */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-6px 0 20px;padding-bottom:14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.crumb{font-size:12px;color:var(--muted)}
+.crumb a{color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.top-right{display:flex;align-items:center;gap:10px}
+.live-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--muted)}
+.live-tag i{width:7px;height:7px;border-radius:50%;background:#22a06b;display:inline-block}
+.chip{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:6px 12px;
+      font-size:11px;font-weight:600;color:#41506a;background:#fff;text-decoration:none;white-space:nowrap}
+.chip:hover{border-color:#b9c5ff;color:var(--accent)}
+
+/* ---- sidebar additions ---- */
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:16px;font-weight:700;margin-bottom:4px}
+.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;
+            background:var(--accent);color:#fff;font-size:13px;font-weight:800;flex-shrink:0}
+.brand small{display:block;font-size:11px;font-weight:400;color:#8fa3b5;letter-spacing:.2px}
+.side-label{font-size:10px;letter-spacing:.9px;text-transform:uppercase;color:#6b8098;margin:20px 0 8px;font-weight:700}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav-link{display:block;color:#c9d6e2;text-decoration:none;padding:9px 12px;border-radius:8px;font-size:13.5px}
+.nav-link:hover{background:#1c2a38;color:#fff}
+.nav-link.active{background:var(--accent);color:#fff}
+.sidebar-bottom{display:flex;align-items:flex-start;gap:9px;margin-top:26px;padding-top:16px;border-top:1px solid #1c2a38;font-size:11.5px;color:#9db0c3;line-height:1.45}
+.sidebar-bottom strong{color:#dbe6f0;display:block;font-size:11.5px}
+.sidebar-bottom small{color:#7f95aa}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#22a06b;margin-top:4px;flex-shrink:0}
+
+/* ---- page furniture ---- */
+/* `.content` is the wrapper the findings pages also use; the base sheet has no rule, so the vertical
+   rhythm of the whole namespace depends on this one declaration. */
+.content{display:block;min-width:0}
+.eyebrow{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:#7d8798;font-weight:700;margin-bottom:7px}
+.page-head h1{margin:0 0 8px;font-size:26px;letter-spacing:-.3px}
+.lede{font-size:13.5px;line-height:1.7;color:var(--muted);margin:0}
+.notice{background:#fffaf0;border:1px solid #f2e0bb;border-radius:var(--radius);padding:13px 16px;font-size:13px;
+        line-height:1.65;color:#6b4a11;margin-bottom:20px}
+.notice strong{display:block;color:#8a5a00;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+
+/* ---- status pills (the base sheet has .badge, not .pill) ---- */
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.pill-ok{background:var(--ok-bg);color:var(--ok-ink)}
+.pill-info{background:#e9efff;color:#2a4694}
+.pill-warn{background:var(--warn-bg);color:var(--warn-ink)}
+.pill-neg{background:var(--flag-bg);color:var(--flag-ink)}
+.cell-unverified{background:#fffaf1}
+.cell-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#3d4a60;white-space:nowrap}
+.row-note{display:block;font-size:11px;line-height:1.55;color:#6b7a8c;margin-top:5px;font-weight:400;max-width:62ch}
+.row-note em{color:#4d5b6f;font-style:normal;font-weight:700}
+.flags-inline{margin-top:6px}
+.flags-inline span{display:inline-block;background:var(--warn-bg);color:var(--warn-ink);border-radius:5px;
+                   padding:1px 6px;font-size:10px;font-weight:700;margin-right:5px}
+.pagelink{color:var(--accent);text-decoration:none;font-weight:600}
+.pagelink:hover{text-decoration:underline}
+.findings{margin:0;padding-left:20px}
+.findings li{font-size:13px;line-height:1.7;color:#4e5c71;margin-bottom:11px}
+.findings li:last-child{margin-bottom:0}
+table.data-table{min-width:920px;font-size:12px}
+table.data-table caption{caption-side:top;text-align:left;font-size:11px;color:#7d8798;padding:0 0 8px}
+table.data-table td{line-height:1.55}
+.src{display:inline-flex;flex-direction:column;line-height:1.25;color:var(--accent);text-decoration:none;
+     font-weight:700;font-size:11px;margin:1px 8px 1px 0;vertical-align:top;border-bottom:1px dotted currentColor}
+.src-host{display:block;font-weight:500;color:#93a0b1;font-size:9px}
+.empty-row{color:#8b95a4;font-style:italic;text-align:center;padding:22px 10px}
+.grid-2{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:1100px){.grid-2{grid-template-columns:1.1fr 1fr}}
+@media(max-width:860px){.nav{flex-direction:row;flex-wrap:wrap}.nav-link{white-space:nowrap}}
+@media print{.sidebar,.topbar,.chip{display:none}.main{padding:0}table.data-table{min-width:0;font-size:9.5px}.table-wrap{overflow:visible}}
