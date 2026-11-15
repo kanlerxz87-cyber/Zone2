@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The missing-information register: 15 questions blocking decisions on the Zone2 affiliate site, each with what is verified, what is missing and how to close it.">
+<title>Missing information — Zone2 audit</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .audit-nav { display:flex; flex-wrap:wrap; gap:6px; margin: 0 0 4px; }
+  .audit-nav a { font-size:13.5px; font-weight:600; color:var(--ink-soft); text-decoration:none;
+     border:1px solid var(--line); background:var(--surface); padding:7px 12px; border-radius:8px; }
+  .audit-nav a:hover { border-color:var(--accent); color:var(--accent); }
+  .audit-nav a.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .badge { display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.02em;
+     padding:2px 8px; border-radius:999px; border:1px solid transparent; white-space:nowrap; text-decoration:none; }
+  .badge.ok { background:var(--ok-bg); color:var(--ok-ink); border-color:var(--ok-line); }
+  .badge.warn { background:var(--warn-bg); color:var(--warn-ink); border-color:var(--warn-line); }
+  .badge.flag { background:var(--flag-bg); color:var(--flag-ink); border-color:var(--flag-line); }
+  .badge.neutral { background:var(--line-soft); color:var(--ink-soft); border-color:var(--line); }
+  a.src { text-decoration:none; }
+  table.audit { width:100%; border-collapse:collapse; font-size:13.5px; margin: 10px 0 0; background:var(--surface); }
+  table.audit th { text-align:left; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase;
+     color:var(--ink-soft); border-bottom:1px solid var(--line); padding:9px 10px; vertical-align:bottom; }
+  table.audit td { border-bottom:1px solid var(--line-soft); padding:10px; vertical-align:top; }
+  table.audit tr:last-child td { border-bottom:0; }
+  table.audit td.id { font-family:var(--font-body); font-weight:700; color:var(--accent); white-space:nowrap; }
+  .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--surface); }
+  .evidence { font-size:12.5px; color:var(--ink-soft); }
+  .evidence code { font-size:11.8px; }
+  .lede-block { background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent);
+     border-radius:var(--radius-sm); padding:16px 18px; margin:0 0 22px; }
+  .lede-block p { margin:0; color:var(--ink-soft); font-size:14.5px; }
+  .count-strip { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 6px; }
+  .count-strip .c { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 14px; }
+  .count-strip .c b { display:block; font-family:var(--font-display); font-size:22px; color:var(--accent); }
+  .count-strip .c span { font-size:12px; color:var(--ink-soft); }
+  .quote { border-left:3px solid var(--gold); padding:6px 0 6px 12px; margin:8px 0; color:var(--ink);
+     font-size:13px; background:var(--accent-soft); border-radius:0 6px 6px 0; }
+  .opts { margin:6px 0 0; padding-left:0; list-style:none; }
+  .opts li { margin:0 0 6px; font-size:13px; }
+  .opts .rec { font-weight:700; color:var(--ok-ink); }
+  .foot-note { font-size:12.5px; color:var(--ink-soft); margin-top:26px; }
+  footer.site { margin-top:40px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Independent audit · 2026-11-15</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html">Main site</a>
+      <a href="../pages/suggestions.html">Decision board</a>
+      <a href="../pages/flags.html">Flag register</a>
+      <a href="../marketing/improvements.html">Marketing board</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Session f8e18ca8 · 2026-11-15</div>
+      <h1 class="hero-title">Missing information</h1>
+      <p class="hero-lede">Fifteen questions that block a decision, each with what is verified, what is missing, and the action that would close it.</p>
+    </div>
+  </div>
+  <div class="page-wrap">
+    <nav class="audit-nav" aria-label="Audit sections" style="margin-top:22px">
+      <a href="index.html">Review</a>
+      <a href="suggestions.html">Decide</a>
+      <a href="gaps.html" class="active">Missing information</a>
+      <a href="traffic.html">Traffic readiness</a>
+      <a href="decision-cost.html">Cost &amp; sequence</a>
+      <a href="method.html">Method</a>
+    </nav>
+<div class="lede-block"><p>Every decision on the board waits on one of these. An answer cell holds an <em>observed</em> value with its source, or the literal word OPEN. Nothing is inferred to fill a blank, and the <code>how_to_close</code> column names the action that would actually settle it and the person who can take it.</p></div>
+<div class="count-strip">
+<div class="c"><b>15</b><span>questions</span></div>
+<div class="c"><b>13</b><span>fully open</span></div>
+<div class="c"><b>2</b><span>partly answered</span></div>
+<div class="c"><b>0</b><span>answers invented</span></div>
+</div>
+<section class="section"><div class="eyebrow">The register</div><h2 class="section-title">What must be known before a decision can be made</h2><div class="table-wrap"><table class="audit"><thead><tr><th>ID</th><th>Question</th><th>Status</th><th>What is verified today</th><th>What is missing</th><th>How to close it</th><th>Who</th><th>Blocks</th></tr></thead><tbody>
+<tr><td class="id">G-01</td><td><strong>Is there an approved Amazon Associates account, in which marketplace, and what is the Associate ID / tag?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">None of it is in this repository. No page, ledger row or configuration file contains a tag parameter; a search of all 116 published pages for a tag= parameter returns zero matches, which is consistent with the absence rather than proof of it.</td><td class="evidence">Account status; marketplace (amazon.com vs amazon.co.jp, see G-14); the Associate ID (XXXXX-##); whether the account has met the review threshold.</td><td class="evidence">Owner signs in to Associates Central → Account Settings. The agent cannot see an owner&#x27;s account and must never ask for the credentials in chat; the owner pastes the tag (public in every tagged URL) into a private place the build can read.</td><td class="evidence">owner</td><td class="evidence">R-13, R-05, R-06, D-01<br><a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §2(b) — Special Links must use your Associates ID">SA-03 ↗</a> <a class="src badge warn" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" title="Associates Program — Application Review Process (carried from ledger S23; NOT re-fetched this session)">SA-18 (carried) ↗</a></td></tr>
+<tr><td class="id">G-02</td><td><strong>Which three products are actually being promoted?</strong></td><td><span class="badge warn">PARTIALLY ANSWERED</span></td><td class="evidence">Each supplied short link resolves, repeatedly and reproducibly, to one specific Amazon listing: link.amazon/B04G1MEwY → /dp/B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven); link.amazon/B02NbDxp3 → /dp/B09B7SB46R (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven); link.amazon/B00hJ57DV → /dp/B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry). Re-observed 2026-11-15 by this session for links 1 and 2, and carried from the ledger for link 3.</td><td class="evidence">Any Amazon document that binds a link.amazon short code to a destination ASIN. The codes as supplied are nine characters and an ASIN is ten, so the codes cannot be read as ASINs. No resolved URL carries an Associates tag, so the links as supplied cannot attribute a commission.</td><td class="evidence">Owner opens each link while signed in to Associates Central and reads the destination product; then regenerates each link with SiteStripe so it carries the tag.</td><td class="evidence">owner</td><td class="evidence">R-05, R-08, R-13, D-01<br><a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §2(b) — Special Links must use your Associates ID">SA-03 ↗</a> <a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §3(w) — link shortening">SA-07 ↗</a></td></tr>
+<tr><td class="id">G-03</td><td><strong>Is the site meant to measure anything, and may it?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">No analytics, consent tool or click endpoint is deployed. The privacy-minimal click design exists in tools/redirect_server.py + tools/tracking_schema.sql and writes to a path excluded from this repository.</td><td class="evidence">The owner&#x27;s decision on measurement posture; the hosting for any first-party counter; the privacy statement that would accompany it; any consent requirement in the jurisdictions the audience sits in.</td><td class="evidence">Owner picks A/B/C in R-05. If B, the agent ships the counter and a privacy page; no visitor identifier may ever be stored (that is a programme rule, not a preference).</td><td class="evidence">owner</td><td class="evidence">R-05, D-05<br><a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §2(b) — Special Links must use your Associates ID">SA-03 ↗</a></td></tr>
+<tr><td class="id">G-04</td><td><strong>Can this project obtain product data through an authorised API?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">PA-API 5.0 is deprecated; Creators API is the replacement, and the ledger records an eligibility threshold (carried, not re-fetched this session, SA-19). Without an approved account no approved API access exists.</td><td class="evidence">Whether the Creators API application has been made and approved; the actual quota; whether the account meets the threshold.</td><td class="evidence">Owner checks Associates Central → Tools for Creators API availability after approval; the ledger rows S06/S07 should be re-fetched and re-dated at the same time.</td><td class="evidence">owner</td><td class="evidence">D-06, R-08<br><a class="src badge warn" href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction" title="Creators API — introduction (carried from ledger S07; NOT re-fetched this session)">SA-19 (carried) ↗</a> <a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §2(b) — prices and availability">SA-04 ↗</a></td></tr>
+<tr><td class="id">G-05</td><td><strong>Who is the named author or editor, and is that a real person?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">No author, editor, About page or contact route exists anywhere in 116 pages (measured).</td><td class="evidence">A person willing to be named as responsible for the content, and the byline/About copy.</td><td class="evidence">Owner supplies the name and the one-paragraph method statement. The agent must not invent a persona: a fabricated author is both a trust failure and a violation of the site&#x27;s own editorial rule.</td><td class="evidence">owner</td><td class="evidence">R-07, D-10<br><a class="src badge ok" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" title="Google Search Central — Creating helpful, reliable, people-first content">SA-12 ↗</a> <a class="src badge ok" href="https://developers.google.com/search/docs/essentials/spam-policies" title="Google Search Central — Site reputation policy (within Spam policies)">SA-17 ↗</a></td></tr>
+<tr><td class="id">G-06</td><td><strong>Which commission band applies to each of the three ASINs?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">The published rate card has eleven bands from 10.00% to 0.00%; the resolved listings sit in Home &amp; Kitchen → Kitchen &amp; Dining → Small Appliances → Fryers → Air Fryers, which reads as the &#x27;Physical Books, Kitchen, Automotive — 4.50%&#x27; band, but reading a breadcrumb as a classification is an inference.</td><td class="evidence">An official statement that maps each of these three ASINs to a fixed-rate band. Amazon publishes the rate table, not a per-ASIN classification.</td><td class="evidence">Owner reads the rate shown against a settled transaction in the Associates earnings report, or requests classification from Associates support in writing. Until then the site must not state a per-product rate.</td><td class="evidence">owner</td><td class="evidence">D-07<br><a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §2(b) — prices and availability">SA-04 ↗</a> <a class="src badge warn" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" title="Associates Program — Application Review Process (carried from ledger S23; NOT re-fetched this session)">SA-18 (carried) ↗</a></td></tr>
+<tr><td class="id">G-07</td><td><strong>Does a github.io address satisfy the Associates site-ownership test?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">The programme asks that the Site be publicly available at the address in the application and that the applicant own the site; the live site is kanlerxz87-cyber.github.io/Zone2.</td><td class="evidence">Any official statement about free subdomains. This session searched the Agreement, the Program Policies and the Participation Requirements and found no sentence that settles it. Absence of a prohibition is not permission.</td><td class="evidence">Owner asks Associates support in writing, or registers a domain the owner controls and moves the site there (which resolves the question without needing an answer).</td><td class="evidence">owner</td><td class="evidence">D-01, R-13<br><a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §1 — original content and site suitability">SA-08 ↗</a></td></tr>
+<tr><td class="id">G-08</td><td><strong>Which pages are meant to be public?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">114 non-404 pages are published; the sitemap declares 16; a second sitemap in marketing/ declares 18; eight flag registers and six product pages exist.</td><td class="evidence">The owner&#x27;s intended public set, and whether the archive namespaces are evidence, history, or content.</td><td class="evidence">Owner picks R-06/B or A; the agent generates one sitemap from the declared set and marks everything else explicitly.</td><td class="evidence">owner</td><td class="evidence">R-06, R-10, D-11<br><a class="src badge ok" href="https://developers.google.com/search/docs/essentials/spam-policies" title="Google Search Central — Spam policies: scaled content abuse and thin affiliation">SA-10 ↗</a></td></tr>
+<tr><td class="id">G-09</td><td><strong>May the site use Amazon customer reviews, star ratings, or manufacturer imagery?</strong></td><td><span class="badge warn">PARTIALLY ANSWERED</span></td><td class="evidence">Customer reviews and star ratings may only be used if obtained through Creators API / PA API (SA-05). Manufacturer imagery may be used under the IP licence when it is Program Content displayed with a corresponding Special Link (SA-09).</td><td class="evidence">Whether the specific manufacturer images for these three products are made available as Program Content, and whether the owner&#x27;s account can reach them.</td><td class="evidence">Owner checks SiteStripe / Creators API for the three ASINs; anything not offered there is not covered by the licence and must not be used.</td><td class="evidence">owner</td><td class="evidence">R-08, D-12<br><a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §3(t) — customer reviews and star ratings">SA-05 ↗</a> <a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Trademark Guidelines, clauses 1, 3 and 8">SA-09 ↗</a></td></tr>
+<tr><td class="id">G-10</td><td><strong>What is the demand for these products, by keyword, in the target market?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">Nothing. No keyword volume, rank or search-console data appears anywhere in the repository, and the site correctly prints no demand figure.</td><td class="evidence">Authorised demand data of any kind.</td><td class="evidence">Owner connects Google Search Console (free, and the only source of the site&#x27;s own query data) once a domain exists. Any third-party volume figure is an estimate by that vendor and must be published with its provenance or not at all.</td><td class="evidence">owner</td><td class="evidence">D-13<br><a class="src badge ok" href="https://developers.google.com/search/docs/essentials" title="Google Search Central — Google Search Essentials">SA-15 ↗</a></td></tr>
+<tr><td class="id">G-11</td><td><strong>Which language and audience is the site for?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">Every page is English. The Associate country selector lists Japan among supported marketplaces, and the project&#x27;s own ledger records the operator&#x27;s location as Osaka, Japan (carried).</td><td class="evidence">Whether the audience is US, Japanese, or both; whether a Japanese-language version is required; whether the disclosure sentence in English is adequate for a Japanese-language page (the disclosure must be in the same language as the endorsement).</td><td class="evidence">Owner states the audience. If Japanese: the FTC-style English sentence is not the governing requirement — the Operating Agreement&#x27;s English sentence is still required, and the surrounding page language must carry the disclosure too.</td><td class="evidence">owner</td><td class="evidence">D-14<br><a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/agreement" title="Associates Program Operating Agreement — Section 5 (Identifying Yourself as an Associate)">SA-01 ↗</a> <a class="src badge ok" href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" title="FTC — Disclosures 101 for Social Media Influencers">SA-16 ↗</a></td></tr>
+<tr><td class="id">G-12</td><td><strong>What did the three products cost, and is there a dated record of anyone handling them?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">No price is stored anywhere, by design, and no test record exists. The editorial rule already forbids first-hand claims without a dated record.</td><td class="evidence">Any observation of the physical products.</td><td class="evidence">Owner (or a named tester) handles the product and records it with a date. Until then the site must keep saying it has not tested them — which it does, and which is more trustworthy than the alternative.</td><td class="evidence">owner</td><td class="evidence">D-12, R-08<br><a class="src badge ok" href="https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews" title="Google Search Central — How to write high quality reviews">SA-14 ↗</a> <a class="src badge ok" href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" title="FTC — Disclosures 101 for Social Media Influencers">SA-16 ↗</a></td></tr>
+<tr><td class="id">G-13</td><td><strong>What will the site do about the three &#x27;link.amazon&#x27; URLs that are already public in the brief?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">The links are published on this site as evidence. They carry no Associates tag, so a click through them cannot attribute a commission to this project (SA-03).</td><td class="evidence">A decision: replace them with tagged SiteStripe links, keep them as evidence only, or both.</td><td class="evidence">Owner picks. If &#x27;both&#x27;, the evidence pages keep the original URL as a citation (inside a source cell, unsponsored) and the reader-facing pages carry the tagged link.</td><td class="evidence">owner</td><td class="evidence">D-02<br><a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §2(b) — Special Links must use your Associates ID">SA-03 ↗</a> <a class="src badge ok" href="https://affiliate-program.amazon.com/help/operating/policies" title="Associates Program Policies → Participation Requirements §3(w) — link shortening">SA-07 ↗</a></td></tr>
+<tr><td class="id">G-14</td><td><strong>Are these products sold on the marketplace the owner&#x27;s account belongs to?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">All three resolved destinations are on amazon.com. This session did not check amazon.co.jp and must not assume the ASINs carry over.</td><td class="evidence">A check of the same products on the owner&#x27;s marketplace.</td><td class="evidence">Owner opens amazon.co.jp and searches the product names; the agent records what is observed, with the URL, or leaves it blank.</td><td class="evidence">owner</td><td class="evidence">D-01<br><a class="src badge warn" href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" title="Associates Program — Application Review Process (carried from ledger S23; NOT re-fetched this session)">SA-18 (carried) ↗</a></td></tr>
+<tr><td class="id">G-15</td><td><strong>Who reviews a change before it is published?</strong></td><td><span class="badge flag">OPEN</span></td><td class="evidence">This session runs every gate and merges without waiting for review, per the brief. The suggestions board exists so a change can be reviewed before it is implemented, which assumes an owner who looks.</td><td class="evidence">The review cadence and the single decision channel.</td><td class="evidence">Owner states where decisions are recorded (the board, a message, an issue). Until then the board stays the single place, and no recommendation is implemented without an entry in its &#x27;decision&#x27; field.</td><td class="evidence">owner</td><td class="evidence">R-12, D-15</td></tr>
+</tbody></table></div></section>
+<section class="section"><div class="eyebrow">The two answers nobody can obtain</div><h2 class="section-title">Questions that have no official answer at all</h2><p class="section-sub">These are not tasks. No official document settles them, so the site must either publish them as estimates with their provenance, or publish nothing. Both are stated.</p><div class="table-wrap"><table class="audit"><tbody><tr><td><strong>Are these products selling well?</strong></td><td>No official source publishes unit sales or rank for a third party. The Creators API exposes categories and some ranking data to an approved account, and that is the only route that is documented; any figure quoted from a scraped page is both unverifiable and, if scraped from Google, a named spam practice.</td></tr><tr><td><strong>Is this a good niche?</strong></td><td>Not answerable from an official source. The honest answer is that the three supplied links all land in Air Fryers, which is an observation about the links, not evidence about demand.</td></tr></tbody></table></div></section>
+    <p class="foot-note">
+      This namespace is generated by <code>tools/build_audit.py</code> from
+      <code>audit/data/*.json</code>; edit the data, never the HTML. Rows marked
+      <span class="badge warn">carried</span> name a source this session did not re-fetch. Rows marked
+      <span class="badge flag">UNVERIFIED</span> are published as unverified on purpose — the page states what
+      would settle them. Nothing here is a product price, rating, review count or demand figure:
+      no official source states one for these ASINs.
+    </p>
+    <footer class="site">
+      <p><strong>Disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+      <p>Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This is an
+      independent site: Amazon does not sponsor, endorse or support it, and no agency or partnership with
+      Amazon is claimed or implied. Product facts on this site are quoted from the manufacturer or the
+      Amazon listing; anything unverified is blank.
+      <a href="../pages/flags.html">Flag register</a> ·
+      <a href="../pages/sources.html">Source register</a> ·
+      <a href="../verification.html">Verification log</a></p>
+    </footer>
+  </div>
+</main>
+</body>
+</html>

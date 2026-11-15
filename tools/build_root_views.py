@@ -97,6 +97,7 @@ def page(title: str, lead: str, active: str, body: str) -> str:
 <title>{esc(title)} — Zone2</title>
 <meta name="description" content="{esc(lead)}">
 {head_block(active, title=f"{title} — Zone2", description=lead, site_name="Zone2")}
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>

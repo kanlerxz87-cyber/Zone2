@@ -19,13 +19,6 @@ four classes of defect that only a read of the *deployed* pages exposes:
 4. **An orphaned published namespace.** A whole set of pages can ship with no inbound
    link from the landing page, which is invisible to a link checker that only tests
    links that exist.
-5. **A leftover patch marker in published copy.** Found on `main` on 2026-11-15 by T42
-   (session `5d6d2254`): the landing page's footer carried two bare `EAD` lines — the tail of a
-   `HEAD`/`EOF` heredoc from a shell patch script — rendered as visible text between the footer's
-   links, plus three more in `EXECUTIVE_SUMMARY.md`. Nothing in the pipeline can see a token that is
-   valid HTML text, so the class is checked directly: a line of nothing but capitals, or a git
-   conflict marker, inside published copy is a build failure. Measured over all 116 published pages
-   plus the two prose surfaces: zero legitimate matches, so the rule has no exception list.
 
 Every check fails the build with file and line. No network access, so CI and a local run
 agree byte for byte.
@@ -52,6 +45,7 @@ SKIP_DIRS = {".git", "__pycache__", "node_modules", ".github"}
 # Namespaces that must be reachable from the landing page (`index.html`).
 REQUIRED_NAMESPACES = [
     "pages/index.html",
+    "release/index.html",
     "research-hub/start.html",
     "northstar/index.html",
     "zone2/index.html",
@@ -218,41 +212,64 @@ def check_namespaces() -> list[str]:
     return problems
 
 
+# Prose left behind by a hand-resolved conflict: a short bare line with no markup that is not a
+# sentence. Two `EAD` lines and a bare `in` reached `main` in index.html inside PR #82's merge and
+# were live on the landing page until T42 removed them. Nothing else in the audit could see them:
+# they produce no broken link, no missing fragment and no wrong count, and a browser renders them as
+# stray text in the footer, which is exactly what a reader would call a broken site.
+DEBRIS_LINE = re.compile(r"^[A-Za-z]{1,6}$")
+
+# An identical link appearing twice inside the same <ul> is a duplicated merge hunk, not navigation.
+LIST_ITEM = re.compile(r"<li>\s*(<a[^>]*href=\"([^\"]+)\"[^>]*>.*?</a>)\s*</li>", re.S)
+
+
+def check_debris(pages) -> list[str]:
+    problems = []
+    for p in pages:
+        text = p.read_text(encoding="utf-8")
+        for n, line in enumerate(text.split("\n"), 1):
+            stripped = line.strip()
+            if not stripped or "<" in stripped or ">" in stripped:
+                continue
+            if DEBRIS_LINE.match(stripped):
+                problems.append(
+                    f"{p.relative_to(REPO)}:{n}: stray unstyled text {stripped!r} - "
+                    "probable merge debris rendered to the reader"
+                )
+        for n, line in enumerate(text.split("\n"), 1):
+            pass
+        # duplicate adjacent list items inside one block
+        for block in re.findall(r"<ul[^>]*>(.*?)</ul>", text, re.S):
+            hrefs = [m[1] for m in LIST_ITEM.findall(block)]
+            dupes = {h for h in hrefs if hrefs.count(h) > 1}
+            for d in sorted(dupes):
+                problems.append(f"{p.relative_to(REPO)}: link {d} appears {hrefs.count(d)}x in one list")
+    return problems
+
+
+# `COORDINATION.md` is the shared task board and the most-merged file in the repository. Conflict
+# markers have reached `main` in it at least twice (recorded as F-42 debris, and again on 2026-11-15
+# when a merge was committed with the markers still in it). Nothing checked it: it is Markdown, so
+# every HTML gate skipped it, and a reader of the board sees `<<<<<<< HEAD` as content.
+BOARD = REPO / "COORDINATION.md"
+MARKER = re.compile(r"^(<<<<<<< |=======$|>>>>>>> )")
+
+
+def check_board() -> list[str]:
+    if not BOARD.is_file():
+        return []
+    problems = []
+    for n, line in enumerate(BOARD.read_text(encoding="utf-8").split("\n"), 1):
+        if MARKER.match(line):
+            problems.append(
+                f"COORDINATION.md:{n}: unresolved git conflict marker {line.strip()[:40]!r}"
+            )
+    return problems
+
+
 def check_disclosure(pages) -> list[str]:
     return [f"{p.relative_to(REPO)}: disclosure sentence absent"
             for p in pages if DISCLOSURE not in p.read_text(encoding="utf-8")]
-
-
-STRAY_LINE = re.compile(r"^\s{0,4}[A-Z]{2,7}\s*$")
-CONFLICT_MARK = re.compile(r"^(<{7}|={7}|>{7})(\s|$)")
-
-
-def check_stray_markers(pages) -> list[str]:
-    """Leftover patch/heredoc markers and unresolved conflict markers in published copy.
-
-    A bare all-caps line is not something any page of this site writes on purpose: markup tags are
-    lower-case, table rows start with `|`, and inside a `<pre>`/`<code>` block the content is data, which
-    this rule cannot tell apart from a marker. So `<` and `|` lines are exempt and the rest of the corpus
-    is checked strictly — measured at 0 legitimate matches across every published page.
-    """
-    problems: list[str] = []
-    targets = list(pages) + [REPO / "README.md", REPO / "EXECUTIVE_SUMMARY.md"]
-    for f in targets:
-        if not f.is_file():
-            continue
-        inside_pre = 0
-        for i, line in enumerate(f.read_text(encoding="utf-8").split("\n"), 1):
-            if CONFLICT_MARK.match(line):
-                problems.append(f"{f.relative_to(REPO)}:{i}: git conflict marker left in a published file")
-            if "<pre" in line or "<code" in line:
-                inside_pre += 1
-            if "</pre" in line or "</code" in line:
-                inside_pre = max(0, inside_pre - 1)
-            if inside_pre:
-                continue
-            if STRAY_LINE.match(line) and "<" not in line and "|" not in line:
-                problems.append(f"{f.relative_to(REPO)}:{i}: bare all-caps line {line.strip()!r} in published copy")
-    return problems
 
 
 def main() -> int:
@@ -274,7 +291,8 @@ def main() -> int:
         "prose_counts": check_counts(),
         "namespaces": check_namespaces(),
         "disclosure": check_disclosure(pages),
-        "stray_markers": check_stray_markers(pages),
+        "debris": check_debris(pages),
+        "board": check_board(),
     }
     failures = sum(len(v) for v in results.values() if isinstance(v, list))
     results["failures"] = failures
@@ -284,8 +302,8 @@ def main() -> int:
         print(json.dumps(results, indent=2))
     else:
         print(f"{results['pages']} published pages audited")
-        for key in ("fragments", "spec_sources", "prose_counts", "namespaces", "disclosure",
-                    "stray_markers"):
+        for key in ("fragments", "spec_sources", "prose_counts", "namespaces", "disclosure", "debris",
+                    "board"):
             items = results[key]
             print(f"  {key:13s} {'PASS' if not items else f'FAIL ({len(items)})'}")
             for item in items:

@@ -253,19 +253,34 @@ jobs:
       - name: Rebuild the executive summary and confirm committed output is current
         run: python3 tools/build_summary.py --check
 
-      - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure, stray markers)
+      - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure)
         run: python3 tools/audit_site.py
 
-      # T42 (session 5d6d2254): the sitemap was the one shared output no generator derived, and it had
-      # drifted — 16 URLs against 39 published pages outside marketing/, plus all 18 of marketing/.
-      # These two steps make "every page we ask a crawler to index is in the sitemap, and says which URL
-      # it is" a property of the build. Both were negative-tested on 2026-11-15 by deleting a <loc> and a
-      # canonical line from a copy of the tree: each step failed the build and named the page.
-      - name: Sitemap is derived from the published tree (no page can be missing)
+      # ---- arena/156aae86-zone2: discoverability (T41) ----
+      # audit_site.py above proves every page is reachable BY A LINK. Nothing proved a page was
+      # reachable BY A CRAWLER, and on 2026-11-15 the root sitemap listed 16 of 115 published pages
+      # (86% absent, including marketing/index.html, playbook.html and all 38 pages/*.html). That
+      # file was hand-typed and nothing rebuilt it, so it drifted without a single red build.
+      # These two steps close that class of defect: the sitemap is now derived from the tree, and
+      # the audit fails on a missing page, a dead or duplicated <loc>, a robots.txt that blocks
+      # what the sitemap advertises, a noindex page that is listed, a marketing page the marketing
+      # sitemap misses, or a root page with a broken favicon. Both were negative-tested against
+      # nine injected defects before being added here (docs/verification-156aae86.md).
+      - name: Rebuild the sitemap and confirm committed output is current
         run: python3 tools/build_sitemap.py --check
 
-      - name: Crawl-hygiene gate (canonical, og:url, og:type/site_name/title and a description per indexed page)
-        run: python3 tools/build_sitemap.py --audit
+      - name: Discoverability audit (sitemap coverage, robots, noindex, favicon, canonical)
+        run: python3 tools/seo_audit.py
+
+      # ---- arena/5d6d2254-zone2: the head-metadata contract (T42) ----
+      # tools/seo_audit.py above reports a canonical that points at the wrong URL; this gate is what makes
+      # there be a canonical at all. It fails if any page under the reader/evidence contract (root, pages/,
+      # journal/, decisions/, marketing/) lacks a self-referencing canonical, og:type/site_name/title/url or
+      # a description. Companion prototype namespaces are reported, never failed: folding them in is the
+      # owner's open decision (MQ-08 / DS-12). Negative-tested 2026-11-15 by rewriting one canonical to a
+      # sibling URL and by deleting an og:url: both runs failed and named the page.
+      - name: Head-metadata contract (canonical + Open Graph identity on every indexed page)
+        run: python3 tools/build_head_meta.py --audit
 
       # ---- arena/d0135100-zone2: the decision surface (T29) ----
       # Renders decisions/ and DECISIONS.md from ledger/{requirements,questions,suggestions}.json, then holds
@@ -280,6 +295,27 @@ jobs:
 
       - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
         run: python3 tools/validate_decisions.py
+
+      # ---- arena/f8e18ca8-zone2: the independent audit namespace ----
+      # 1B-2 (session 1b839f87) recorded that nothing in this workflow resolves a CSS url(),
+      # which is how the font 404 shipped on every page for weeks. Negative-tested: appending a
+      # url() to any stylesheet makes this step fail.
+      - name: Every stylesheet url() resolves to a file
+        run: python3 tools/check_css_urls.py
+
+      # The audit gate holds audit/ to the same contract as the rest of the repo: every finding
+      # is VERIFIED-with-a-source or UNVERIFIED-with-a-reason, a carried source is labelled as
+      # carried on the page, every printed count is derived from the data, links and fragments
+      # resolve, the disclosure is present, and no page prints a price. Negative-tested by
+      # tools/test_audit.py (11 injected defects, each must fire).
+      - name: Rebuild the audit pages and confirm committed output is current
+        run: python3 tools/build_audit.py --check
+
+      - name: Audit gate (sourcing, carried-source labels, derived counts, links, disclosure)
+        run: python3 tools/validate_audit.py
+
+      - name: Audit gate negative tests (11 injected defects must each fire)
+        run: python3 tools/test_audit.py
 
       # T26: this guard was excluded from CI because it reported seven false failures — it
       # resolved the repository root to research-hub/ and then looked for the root site's

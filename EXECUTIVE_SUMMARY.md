@@ -646,7 +646,6 @@ on this branch as well — two sessions, one defect, both records kept, followin
 | GitHub Pages live site | `https://kanlerxz87-cyber.github.io/Zone2/` — deploy confirmed per closing record in `COORDINATION.md` |
 | Verification, source links per row, unverified left blank | Enforced by gates and re-verified for every claim made here |
 | PR → merge → deploy | See the T33 closing record in `COORDINATION.md` |
-
 ## Addendum — the publication layer and the marketing improvement board, 2026-11-15 (session `e8b071cd`, T39)
 
 The brief has two halves. Before today, everything merged served the first: the platform, the registers, the
@@ -680,7 +679,6 @@ negative-tested. G4 caught this session's own example text quoting a dollar figu
 the rule was not loosened.
 
 Line-by-line record, with the official links: `docs/marketing-2026-11-15.md`.
-in
 
 **Delivered (T33, 2026-11-15 12:18:54 UTC):** PR #83 merged (merge commit `1e351e6`); GitHub Pages build and deploy both succeeded and the playbook was read back live at `https://kanlerxz87-cyber.github.io/Zone2/playbook.html`; PR check `Build and verify` pass on head `21bc8d7`; CI on the merged tree — `audit_site` 5/5 PASS (104 pages), `validate_data` 0 errors / 0 warnings, `tests` 15/15, every `--check` gate no drift. One integration fix: the Sec. 5 endorsement-phrase line break in `playbook.html` that `validate_data` flagged (negation window defeated by the wrap) — reflowed, validator green.
 ## Addendum — 2026-11-15 (T38, session `arena/bfed39e0-zone2`): the journal ships, the redesign integrates
@@ -699,6 +697,66 @@ recoverable in git history. A second irregularity, the `@font-face` paths in `as
 stylesheet (`assets/css/assets/fonts/…`, which 404s so the self-hosted fonts silently fall back), is flagged for the design
 system's owner and was not repaired from another session's file.
 
+## Addendum — 2026-11-15 (session `f8e18ca8`): the independent review, the gaps, and the decision pack
+
+This session was asked for four things the brief keeps repeating — review the repo line by line, make
+suggestions that feed the design prompt, publish a section where a human can review and choose before
+anything is implemented, and produce the list of questions, information and answers that must exist
+before any decision is reasonable. It did no product work and changed no verified value. It reviewed
+the deployed site, published the review, and published the decisions.
+
+**The review, in one line.** The site's central claim holds — of 705 table rows across the 37
+generated findings pages, 523 end in an official-domain source link, 164 are explicit blanks, and the
+18 that are neither are internal contract rows, listed rather than waved through — and the site still
+cannot earn, for reasons that are almost all non-technical. Sixteen findings, each with the
+measurement that produced it, are published at `audit/index.html`.
+
+**The five that matter**
+
+| # | Finding | Severity |
+|---|---|---|
+| A-01 | The tables a reader comes for are not in the HTML. Eight root pages ship empty containers filled by a 102 KB script; with JavaScript off there is no product table, no findings table and no flag table. | high |
+| A-02 | The required disclosure sentence is on every page, but on 24 of the 77 pages that link to a product it appears **after** the first product link — on the landing page, 93% of the way down the file. | high |
+| A-05 | There is no measurement in production — no analytics, no click endpoint, no Associates report. Every tracking, conversion and optimization page describes a capability that has never processed a click. | high |
+| A-06 | 114 pages across eight directory namespaces describe the same three products: six pages called "products", eight flag registers. That is the shape Google's scaled-content and thin-affiliation sections describe. | high |
+| A-07 | No page names an author, an editor, or a contact route, and no page carries a date. The two questions Google's guidance asks first are unanswered on all 116 pages. | high |
+
+Also found and repaired inside this session's own scope: four lines of merge-conflict residue that
+were live in the landing page's footer (two stray `EAD` lines, two duplicated list items, one stray
+`in`), and the same stray `in` in this document. Logged as **A-16**, because the conflict markers
+themselves were gone and every gate passed — the residue was the *content* of a partially resolved
+merge. That is the failure mode the current gate suite cannot see, and it is now recorded rather than
+quietly cleaned.
+
+**The decision pack.** `audit/suggestions.html` carries 14 recommendations, each with its options, a
+recommendation, cost, risk, reversibility and the gap that blocks it — and **none of them is
+implemented**. `audit/gaps.html` carries 15 missing-information rows with what is verified, what is
+missing, how to close it and who can. `audit/decision-cost.html` adds the column most decision
+registers omit: what happens if nothing is decided. `audit/traffic.html` states, with quoted sources,
+what Google and Amazon actually document about earning organic traffic — and lists the five metrics
+every affiliate site publishes (volume, conversion rate, click-through, RPM, "trending") that no
+official source can verify, left blank.
+
+**What was built, and why it can be trusted.** `audit/` is generated from five JSON files by
+`tools/build_audit.py`; `tools/validate_audit.py` holds it to fourteen separate rules (every finding is
+verified-with-a-source or unverified-with-a-reason; every carried source is labelled carried *on the
+page*; every printed count is derived, never typed; links, fragments, disclosure and the no-price rule
+as everywhere else). `tools/test_audit.py` injects 11 defects, one per check, and all 11 fire — so the
+gate is a control, not a claim. `tools/check_css_urls.py` closes the gap session `1b839f87` logged as
+`1B-2`: nothing in CI resolved a CSS `url()`, which is how the font 404 shipped on every page for
+weeks. It is negative-tested too.
+
+**The three things worth doing first**, if the owner reads nothing else: name the author and publish
+the method (**R-07**, free), move the disclosure above the links (**R-02**, under an hour, 24 pages),
+and pre-render the tables (**R-01**, the only change that makes the landing legible to a reader who
+is not running JavaScript). Each makes existing work visible rather than adding to it.
+
+**One item blocks revenue and it is not technical:** F-07 / G-01 — no Associates account, marketplace
+or tag. Until that exists, nothing built here can be measured against a commission, and the
+optimization half of the brief stays theoretical no matter how much more code lands.
+
+Line-by-line record: `docs/audit-2026-11-15.md`. Design-prompt suggestions: `docs/design-prompt-2026-11-15.md`.
+
 
 ---
 
@@ -706,58 +764,49 @@ system's owner and was not repaired from another session's file.
 
 The brief's two halves were both published before this session: the verified platform with its registers,
 and a reader-facing publication (`marketing/`, with the hand-written `journal/`) written under a
-machine-checked editorial standard. What was missing was the layer a search engine and a link preview read,
-and the door a first-time visitor is put through. This session worked on those, and on nothing else: no
-product attribute, price, rating, commission band or flag row was added, changed or inferred, and no new
-article was written — a fourteenth piece would have cut across the content queue that the improvement board
-holds open for the owner.
+machine-checked editorial standard. What this session worked on was the layer between that content and the
+outside world — what a crawler is told, what a link preview reads, and which door a first-time visitor is
+put through. Nothing else: no product attribute, price, rating, commission band or register row was added,
+changed or inferred, and no fourteenth article was written, because the content queue is an owner decision
+still open on the improvement board.
 
-**Crawl coverage is now derived, not typed.** `sitemap.xml` had become the one shared output no generator
-owned, and it had drifted: it advertised the landing page and a handful of root views while the whole
-reader publication, the evidence subpages and the decision surface sat unlisted. `tools/build_sitemap.py`
-now generates it from the published tree — every page under the root plus `pages/`, `journal/`,
-`decisions/` and `marketing/` — and CI runs it with `--check`, so a page added by any session appears on the
-next build and no page can go missing again. The superseded prototype namespaces stay linked from the landing
-page footer and stay out of the sitemap, by an explicit commented rule rather than by omission; retiring or
-consolidating them remains the owner's decision (DS-12 / MQ-08). `<lastmod>` is deliberately absent: the
-repository holds no official source for a per-page modification date, and this project prints a blank rather
-than an inference.
+**Two sessions found the same hole the same day, and the site is better for it.** The root sitemap had
+become the one shared output no generator derived, and it had drifted to a fraction of the published tree,
+listing none of the reader publication. `156aae86` shipped that half — `tools/build_sitemap.py`, now the
+repository's sitemap generator, and `tools/seo_audit.py`, which fails the build on a missing page, a dead
+`<loc>`, a `robots.txt` that blocks what the sitemap advertises, or a broken favicon. This session shipped
+the other half, which is why the audit's canonical check has nothing to report on the reader and evidence
+surfaces: `<link rel="canonical">` with `og:type`, `og:site_name`, `og:title`, `og:description` and `og:url`
+now appear on every indexed page, emitted by the generator that owns each page through one shared
+`tools/head_meta.py`, and held by `tools/build_head_meta.py --audit` in CI. No `og:image` was added — the
+imagery rights question is open (Q-10 / DS-11) and a tag pointing at nothing is the sort of placeholder this
+site refuses — and no Product or Review markup, per DS-07. `404.html` is not advertised for indexing, and
+`<lastmod>` is omitted, because the repository holds no official source for a per-page modification date.
 
-**Every indexed page now says which URL it is.** `<link rel="canonical">`, `og:type`, `og:site_name`,
-`og:title`, `og:description` and `og:url` were published on `marketing/` only; they now appear on all
-indexed pages, emitted by the generators that own them (`tools/build_site.py`, `build_decisions.py`,
-`build_root_views.py`, `build_summary.py`) or, for the hand-written pages, by `tools/build_sitemap.py
---fix-heads`, with `tools/head_meta.py` as the single function that decides what a page's own URL is. No
-`og:image` was added, because the imagery rights question is open (Q-10 / DS-11) and a tag pointing at
-nothing is the sort of placeholder this site refuses; no Product or Review markup was added, per DS-07.
+**The landing page leads with the decision, not the dashboard.** The primary navigation was a flat row of
+fifteen links; it is now two labelled groups — a reader path (the publication, the buying guide, the
+head-to-head, the guides index, the Journal) and an operator path (overview, products and evidence, the
+suggestions board, the open questions, the verification log, the independent audit) — and the hero answers
+the buyer's question before it describes the platform. Every page that left the header is still reachable
+from this page: the body sections and the footer carry them, and the namespaces the structural audit
+requires from the landing page are unchanged, so "linked or lost" is a build failure rather than a hope.
 
-**The landing page leads with the decision, not the dashboard.** The primary navigation was thirteen flat
-links; it is now two labelled groups — a reader path (the publication, the buying guide, the head-to-head,
-the Journal) and an operator path (overview, products and evidence, the suggestions board, the open
-questions) — and the hero answers the question a visitor arrived with before it describes the platform. The
-four companion namespaces the structural audit requires from this page, and every page that used to be
-reachable only from the header, are still reachable: the body sections and the footer carry them.
+**Independent re-verification, published.** `docs/verification-5d6d2254.md` records what was re-read on
+2026-11-15 with the official URL beside each row: the three supplied short links and their destinations,
+the three `amazon.com/dp/<supplied code>` Page-Not-Found controls, every sourced Chefman and Emeril
+specification row (13 of 13 on the dual-window page; the 8 Qt page's per-model lines; both live conflicts —
+the 25-versus-24 preset count and the 450-versus-400 °F Hi-Fry figure), and the program facts the front
+door cites: the Operating Agreement's §5 disclosure sentence, §1's tagged-link requirement, §4's refusal to
+represent traffic or income, §6's termination terms, and Table 1's bands. Four items came out of it and were
+deliberately not papered over: the Emeril listing serves a different title today than the string this site
+quotes, and that title states a different accessories count than the row's `partial` value; the control
+behind F-20 answered `403` through this fetch path where the register quotes a `404`, so the conclusion
+stands and the status code does not; the 8 Qt manufacturer page is a two-variant page whose per-model lines
+the site reads correctly without saying so; and the official Emeril page's own carousel asset names a
+function count that disagrees with its body copy.
 
-**Two defects found while doing it, both repaired, both recorded.** The landing page's footer was rendering
-two bare `EAD` lines as visible text — the tail of a heredoc from an earlier shell patch — alongside a
-duplicated "Suggestions board" entry and two different labels pointing at the publication's index; three
-more `EAD` lines sat in this file. The defect class now has a gate (`stray_markers` in
-`tools/audit_site.py`: a bare all-caps line or a git conflict marker in published copy is a build failure;
-measured at zero legitimate matches across every published page, and negative-tested by injecting one).
-
-**Re-verification, published row by row.** `docs/verification-5d6d2254.md` records what was re-read on
-2026-11-15 and what was not: the three supplied short links and their destinations, the three
-`amazon.com/dp/<supplied code>` 404 controls, every sourced Chefman and Emeril specification row, the
-Operating Agreement's disclosure, tagged-link, no-traffic-representation and termination clauses, and the
-commission bands. It also publishes four items this pass found and deliberately did not paper over: the
-Emeril listing's title text is not the string this site quotes (Amazon serves a variant, and it states a
-different accessories count than the row's `partial` value), the unknown-code control answered `403` here
-where the register quotes a `404` — the conclusion holds, the status code does not — the 8 Qt manufacturer
-page is a two-variant page whose per-model lines the site reads correctly without saying so, and the official
-Emeril page names its own carousel asset with a function count that disagrees with its body copy.
-
-**What still blocks the earning half, unchanged and not technical:** no Associate ID exists, so no link on
-this site can attribute a commission (F-07 / F-24); the intended three products are still not established
-by any official document (F-01 … F-03); the Creators API account is unregistered (F-05); there are no
-performance reports because there is no traffic yet (F-08). Everything the owner must decide is on the
-suggestions board and the questions register, with the discovery action beside each open item.
+**What still blocks the earning half is unchanged and none of it is technical:** no Associate ID, so no link
+on this site can attribute a commission (F-07 / F-24); the three intended products are still not established
+by any official document (F-01 … F-03); the Creators API account is unregistered (F-05); and there are no
+performance reports, because there is no traffic to report (F-08). Everything the owner must decide is on
+the suggestions board and the questions register, each with the action that would discover the answer.

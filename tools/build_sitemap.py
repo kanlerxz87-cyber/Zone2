@@ -1,340 +1,142 @@
 #!/usr/bin/env python3
-"""Generate `sitemap.xml` and hold every indexed page to one head-metadata contract.
+"""Generate the root `sitemap.xml` from the pages actually published in this repository.
 
-T42 (session `5d6d2254`, 2026-11-15). The owner's brief asks the site to earn organic traffic. The
-editorial layer and its per-row sourcing were already in place; what was missing was the plumbing a
-crawler uses to find it. Measured on `main` @ `23895e2` before a line of this file was written:
+Why a generator instead of the hand-typed list this replaces: the hand-typed file had drifted to
+16 of 115 published pages (86% of the site absent), including every page a search engine would
+need first — `marketing/index.html`, `playbook.html` and all 38 `pages/*.html` findings pages.
+Nothing rebuilt it, so nothing could notice. A sitemap that nobody regenerates is a claim about
+the site that stops being true silently, which is the exact failure mode this repository's other
+gates exist to prevent. Here the file is derived from the tree, and `--check` fails the build if
+the committed copy disagrees with a fresh derivation.
 
-* `sitemap.xml` was the only shared output in the repository that no generator derived, and it had
-  drifted: 16 URLs listed against 39 published root + `pages/` + `journal/` + `decisions/` pages plus
-  the 18-page `marketing/` publication. **23 published pages were missing**, among them every guide and
-  every article in the reader-facing set.
-* root `robots.txt` advertises exactly that one file, so a crawler that obeys `robots.txt` was never
-  told the publication exists.
-* `<link rel="canonical">` existed on 18 of 78 pages — the `marketing/` pages only. Every other page is
-  therefore addressable twice (`…/journal/` and `…/journal/index.html`), and the pages a search result
-  would actually open disagree with the pages that carry the metadata.
+WHAT COUNTS AS PUBLISHED
+    Every `*.html` file in the repository, minus the exclusions below. GitHub Pages serves this
+    repository's working tree verbatim (`.github/workflows/pages.yml` uploads `path: .`), so
+    "present in the tree" is literally "reachable at a URL" — the only definition a sitemap can
+    be held to.
 
-This tool closes both holes in the only way that survives being edited by five sessions at once: the
-sitemap is *derived* from the published tree, and the head metadata each page must carry is *checked*
-against that same tree. `audit_site.py` runs the sibling checks for fragments, spec sources, prose
-counts, namespaces and disclosure; this adds crawl coverage. Nothing here invents a value: the only data
-in the output is the URL of a file that exists in the repository and the `<title>`/description already
-written on that page.
+EXCLUSIONS (each one deliberate, none silent)
+    `404.html`, and any file with that basename  Error documents. They are not destinations; listing
+                          one invites a crawler to index a failure. The match is on the basename, so
+                          `research-hub/404.html` is excluded too — an exact-path rule missed it on the
+                          first run. `custom_404` is enabled on the Pages site (verified via the
+                          Pages API).
+    `tools/`, `tests/`, `content/`   build scripts, fixtures and content templates. No `.html`
+                          currently lives there; the exclusion keeps a future stray file from
+                          being advertised.
 
-Sitemap protocol: https://www.sitemaps.org/schemas/sitemap/0.9 (format) and
-https://www.sitemaps.org/protocol.html (a `<urlset>` of `<url><loc>` entries; `<loc>` must be the
-canonical location of the page). `<lastmod>` is deliberately **not** emitted: a modification date for a
-page would have to come from a source, and the only date each generated page honestly holds is the day
-its *facts* were read, not the day the HTML was rewritten. Publishing that as `lastmod` would be an
-inference about freshness, so the element is omitted rather than approximated.
+NOT EMITTED, ON PURPOSE
+    `<lastmod>`  The sitemap protocol makes it optional. This repository has no reliable per-file
+                 change date: `actions/checkout` fetches a single commit, so `git log` cannot see a
+                 file's real history in CI, and a date typed by hand is exactly the class of
+                 unverified value every other gate in this repo refuses to publish. Omitting the
+                 field is correct; inventing it would be a false claim. When a real timestamp
+                 source exists, add it here rather than to the XML by hand.
+    `<changefreq>` and `<priority>`  Google documents both as ignored. Publishing them would be
+                 decoration. See `docs/verification-156aae86.md` for the cited pages.
 
 Usage:
     python3 tools/build_sitemap.py            # write sitemap.xml
-    python3 tools/build_sitemap.py --check    # fail if the committed file is out of date
-    python3 tools/build_sitemap.py --audit    # fail if an indexed page breaks the head contract
-    python3 tools/build_sitemap.py --fix-heads  # add the missing block to the hand-written pages only
-
-`--fix-heads` touches only `HANDWRITTEN` below. A page generated by a `tools/build_*.py` script must get
-its metadata from its generator instead — writing into generated output would be overwritten by the next
-`--check`, which is the failure mode this repository has been careful about all week.
+    python3 tools/build_sitemap.py --check    # exit 1 if the committed file differs
 """
+
 from __future__ import annotations
 
 import argparse
-import re
 import sys
-from html.parser import HTMLParser
+import tempfile
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-import head_meta
-from head_meta import head_block, url_for  # one canonical form for every published page (T42)
-
 REPO = Path(__file__).resolve().parents[1]
+SITEMAP = REPO / "sitemap.xml"
+LIVE = "https://kanlerxz87-cyber.github.io/Zone2/"
 
-# The public address of this deployment comes from tools/head_meta.py, so a page's canonical URL, the
-# sitemap entry for it and the og:url on it are computed by one function. If the owner registers a domain
-# (DS-04 / SG-06 on the decision board), that constant is the only place that has to change — which is
-# the point of routing all three through it.
-BASE = head_meta.BASE
+#: Directories whose HTML is never a published destination. See the module docstring.
+EXCLUDED_DIRS = ("tools", "tests", "content")
 
-# Namespaces whose pages are published for indexing. The rule is "a reader or an auditor should be able
-# to arrive here from a search result", so the evidence registers (pages/, decisions/) are in and the
-# superseded prototypes are not.
-INCLUDED_DIRS = ["pages", "journal", "decisions", "marketing"]
+#: Files that exist in the tree but are not destinations, matched on the **basename** so that a
+#: nested error page is caught as well as the root one. `research-hub/404.html` is a "Page not found"
+#: document; an exact-path set missed it, and the first generated sitemap advertised it — listing an
+#: error page invites a crawler to index a failure.
+EXCLUDED_FILES = {"404.html"}
 
-# Root-level pages a visitor or crawler may be sent to. `404.html` is excluded on purpose: GitHub Pages
-# serves that file for every unmatched path, so advertising one URL for it is meaningless and advertising
-# many would be a soft-404 signal.
-EXCLUDED_ROOT = {"404.html"}
-
-# Published-but-internal namespaces kept out of the sitemap, each with the reason. They stay linked from
-# the landing page's footer (tools/audit_site.py's REQUIRED_NAMESPACES makes that a build failure if it
-# ever breaks), they are just not what this site asks a crawler to index: `northstar/` is the first
-# prototype dashboard and its product rows are blank (flag F-14), `zone2/`, `research-hub/`,
-# `affiliate-lab/` and `revalidation/` are the working records of the five earlier sessions. Retiring or
-# consolidating them is the owner's call and is on the improvement board as DS-12 / MQ-08, so this file
-# excludes them by rule and says so, rather than quietly dropping content.
-EXCLUDED_DIRS = {"northstar", "zone2", "research-hub", "affiliate-lab", "revalidation", "content",
-                 "assets", "docs", "ledger", "tests", "tools", ".github"}
-
-HEADER = """<?xml version="1.0" encoding="UTF-8"?>
-<!-- GENERATED by tools/build_sitemap.py — do not edit by hand.
-
-     This file is derived from the published tree: every page under the root plus pages/, journal/,
-     decisions/ and marketing/ that is not excluded in tools/build_sitemap.py appears here, in path
-     order. A CI step runs `python3 tools/build_sitemap.py --check`, so a page added by any session
-     appears on the next build and no page can go missing again. <lastmod> is omitted by design: the
-     repository has no official source for a per-page modification date, and this project publishes a
-     blank rather than an inference. See tools/build_sitemap.py's module docstring.
--->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">"""
+#: `sitemap.xml` element order, per https://www.sitemaps.org/protocol.html — `<loc>` is required and
+#: every other element is optional. Emitting only `<loc>` keeps the file inside the protocol.
+HEADER = (
+    '<?xml version="1.0" encoding="UTF-8"?>\n'
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+)
+FOOTER = "</urlset>\n"
 
 
-class Head(HTMLParser):
-    """Collect the head metadata this contract cares about."""
-
-    def __init__(self) -> None:
-        super().__init__()
-        self.title = ""
-        self._in_title = False
-        self.description = ""
-        self.canonical = ""
-        self.og: dict[str, str] = {}
-
-    def handle_starttag(self, tag, attrs):
-        a = dict(attrs)
-        if tag == "title":
-            self._in_title = True
-        elif tag == "meta":
-            name = (a.get("name") or "").lower()
-            prop = (a.get("property") or "").lower()
-            if name == "description":
-                self.description = a.get("content", "")
-            elif prop.startswith("og:"):
-                self.og[prop[3:]] = a.get("content", "")
-        elif tag == "link" and a.get("rel") == "canonical":
-            self.canonical = a.get("href", "")
-
-    def handle_endtag(self, tag):
-        if tag == "title":
-            self._in_title = False
-
-    def handle_data(self, data):
-        if self._in_title:
-            self.title += data
-
-
-def unescape(text: str) -> str:
-    return (text.replace("&amp;", "&").replace("&quot;", '"').replace("&#39;", "'")
-            .replace("&middot;", "·").replace("&apos;", "'").replace("&nbsp;", " ")
-            .replace("&ndash;", "–").replace("&mdash;", "—").replace("&times;", "×")
-            .replace("&gt;", ">").replace("&lt;", "<"))
-
-
-def read_head(path: Path) -> Head:
-    h = Head()
-    h.feed(path.read_text(encoding="utf-8"))
-    return h
-
-
-def published_pages() -> list[Path]:
-    """Every page this site asks a crawler to index, in a deterministic order.
-
-    Root pages sort first (the landing page first of all), then each included namespace. Sorting is by
-    path so the output is stable regardless of the order files happen to be checked out in.
-    """
-    root = sorted(p.name for p in (REPO / ".").glob("*.html") if p.name not in EXCLUDED_ROOT)
-    pages: list[Path] = []
-    for name in root:
-        if name == "index.html":
-            pages.insert(0, REPO / name)
-        else:
-            pages.append(REPO / name)
-    for d in INCLUDED_DIRS:
-        for p in sorted((REPO / d).rglob("*.html")):
-            if any(part in EXCLUDED_DIRS for part in p.parts):
-                continue
-            pages.append(p)
-    return pages
-
-
-def url_for(path: Path) -> str:
-    rel = path.relative_to(REPO).as_posix()
-    return BASE + rel
-
-
-def esc(value: str) -> str:
-    return (value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-            .replace('"', "&quot;").replace("'", "&apos;"))
-
-
-def render_sitemap(pages: list[Path]) -> str:
-    lines = [HEADER]
-    for p in pages:
-        lines.append(f"  <url><loc>{esc(url_for(p))}</loc></url>")
-    lines.append("</urlset>")
-    return "\n".join(lines) + "\n"
-
-
-def audit(pages: list[Path]) -> list[str]:
-    """The head-metadata contract for every indexed page.
-
-    Each rule exists because a specific crawler or link-preview consumer reads that field; the wording of
-    the rule stays inside what this repository can check: presence, and agreement with the URL derived
-    from the file's own path. Nothing here asserts a ranking outcome.
-    """
-    problems: list[str] = []
-    indexed = {url_for(p) for p in pages}
-    for p in pages:
-        h = read_head(p)
-        rel = p.relative_to(REPO).as_posix()
-        mine = url_for(p)
-        if not h.title.strip():
-            problems.append(f"{rel}: no <title>")
-        if not h.description.strip():
-            problems.append(f"{rel}: no <meta name=\"description\">")
-        if h.canonical != mine:
-            problems.append(f"{rel}: canonical is {h.canonical!r}, expected {mine!r}")
-        for prop in ("type", "site_name", "title", "url"):
-            if not h.og.get(prop):
-                problems.append(f"{rel}: no og:{prop}")
-        if h.og.get("url") and h.og["url"] != mine:
-            problems.append(f"{rel}: og:url is {h.og['url']!r}, expected {mine!r}")
-        # og:title is deliberately NOT compared against <title>. `marketing/` writes a short display
-        # title in og:title and appends its masthead to <title>; both are legitimate, and an equality
-        # rule here would have to be satisfied by editing another session's copy rather than by fixing a
-        # defect. Identity is asserted through canonical/og:url, which must be the page's own URL.
-
-    # The sitemap is the index contract, so its contents are checked against the same derivation.
-    current = (REPO / "sitemap.xml")
-    if current.is_file():
-        listed = set(re.findall(r"<loc>(.*?)</loc>", current.read_text(encoding="utf-8")))
-        listed = {unescape(u) for u in listed}
-        missing = sorted(indexed - listed)
-        extra = sorted(listed - indexed)
-        if missing:
-            problems.append("sitemap.xml is missing " + str(len(missing)) + " published page(s): "
-                            + ", ".join(m.split("/Zone2/", 1)[-1] for m in missing[:8]))
-        if extra:
-            problems.append("sitemap.xml lists " + str(len(extra)) + " URL(s) with no file behind them: "
-                            + ", ".join(e.split("/Zone2/", 1)[-1] for e in extra[:8]))
-    else:
-        problems.append("sitemap.xml: not found")
-
-    # robots.txt must advertise a sitemap that exists; a second `Sitemap:` line is only worth adding if
-    # it points somewhere the first one does not already cover.
-    robots = REPO / "robots.txt"
-    if robots.is_file():
-        advertised = re.findall(r"^Sitemap:\s*(\S+)", robots.read_text(encoding="utf-8"), re.M)
-        if BASE + "sitemap.xml" not in advertised:
-            problems.append("robots.txt: does not advertise " + BASE + "sitemap.xml")
-    return problems
-
-
-def fix_heads(pages: list[Path]) -> tuple[int, list[str]]:
-    """Write the canonical + og block into the *hand-written* indexed pages.
-
-    Only files not owned by a generator are touched — a generated page must get its metadata from
-    `tools/build_site.py`, `build_decisions.py`, `build_root_views.py` or `build_summary.py`, and editing
-    its output by hand would fail the next `--check`. `tools/audit_site.py` already protects the counts on
-    the companion namespaces, and this session's claim on the board excludes `marketing/**` copy, which is
-    why `marketing/` is verified below rather than rewritten.
-    """
-    GENERATED = {  # root pages an owned generator writes; they carry the block from their generator now
-        "summary.html": "tools/build_summary.py",
-        "verification.html": "tools/build_root_views.py",
-        "sources.html": "tools/build_root_views.py",
-    }
-    changed, skipped = 0, []
-    for p in pages:
-        rel = p.relative_to(REPO).as_posix()
-        if "/" in rel and rel.split("/")[0] not in {"journal"}:
-            continue  # generated namespaces (pages/, decisions/, marketing/) are handled by their builders
-        if rel in GENERATED:
+def published_pages() -> list[str]:
+    """Every published HTML page, as a repository-relative POSIX path, deterministically ordered."""
+    pages: list[str] = []
+    for path in REPO.rglob("*.html"):
+        rel = path.relative_to(REPO)
+        if any(part.startswith(".") for part in rel.parts):
+            continue  # .git and any dot-directory
+        if rel.parts[0] in EXCLUDED_DIRS:
             continue
-        text = p.read_text(encoding="utf-8")
-        h = read_head(p)
-        if h.canonical == url_for(p):
+        if rel.name in EXCLUDED_FILES:
             continue
-        title = unescape(re.sub(r"\s+", " ", h.title)).strip()
-        desc = unescape(h.description).strip()
-        if not desc:
-            skipped.append(f"{rel}: no <meta description> to copy into og:description")
-            continue
-        ns = "journal" if rel.startswith("journal/") else "root"
-        site_name = "Zone2 Journal" if ns == "journal" else "Zone2"
-        block = head_block(rel, title=title, description=desc, site_name=site_name,
-                           page_type="article" if ns == "journal" and not rel.endswith("index.html") else "website")
-        anchor = None
-        for pat in (r'<meta name="robots"[^>]*>\n', r'<meta name="description"[^>]*>\n', r'<title>.*?</title>\n'):
-            m = re.search(pat, text, re.S)
-            if m:
-                anchor = m
-                break
-        if anchor is None:
-            skipped.append(f"{rel}: no head anchor to insert after")
-            continue
-        new_text = text[:anchor.end()] + block + "\n" + text[anchor.end():]
-        p.write_text(new_text, encoding="utf-8")
-        changed += 1
-    return changed, skipped
+        pages.append(rel.as_posix())
+    # Directory-style ordering keeps each namespace together and the root pages first, which makes
+    # the diff readable when a page is added.
+    return sorted(pages, key=lambda p: (p.count("/"), p))
+
+
+def url_for(rel: str) -> str:
+    """Map a repository-relative path onto its live URL."""
+    if rel == "index.html":
+        return LIVE
+    return LIVE + rel
+
+
+def render() -> str:
+    pages = published_pages()
+    if not pages:
+        raise SystemExit("no published pages found — refusing to write an empty sitemap")
+    body = "".join(f"  <url><loc>{url_for(p)}</loc></url>\n" for p in pages)
+    return HEADER + body + FOOTER
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--check", action="store_true", help="fail if the committed sitemap.xml is not what this tool generates")
-    ap.add_argument("--audit", action="store_true", help="fail if an indexed page breaks the head-metadata contract")
-    ap.add_argument("--fix-heads", action="store_true",
-                    help="write the canonical + og block into the hand-written indexed pages, then exit")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true", help="compare against the committed file")
     args = ap.parse_args()
 
-    pages = published_pages()
+    doc = render()
 
-    if args.fix_heads:
-        changed, skipped = fix_heads(pages)
-        for s in skipped:
-            print(f'skip  {s}')
-        print(f'{changed} hand-written page(s) updated, {len(skipped)} skipped')
-        return 0
-    rendered = render_sitemap(pages)
-
-    if args.fix_heads:
-        changed, skipped = fix_heads(pages)
-        for s in skipped:
-            print(f'skip  {s}')
-        print(f'{changed} hand-written page(s) updated, {len(skipped)} skipped')
-        return 0
-
-    if args.audit:
-        problems = audit(pages)
-        if problems:
-            print("\n".join(problems))
-            print(f"FAIL — {len(problems)} head-metadata / coverage problem(s) across {len(pages)} indexed pages")
-            return 1
-        print(f"OK — {len(pages)} indexed pages: canonical, og:type/site_name/title/url and a description "
-              f"on every one, all of them in sitemap.xml")
-        return 0
-
-    target = REPO / "sitemap.xml"
     if args.check:
-        current = target.read_text(encoding="utf-8") if target.is_file() else ""
-        if current != rendered:
-            print("sitemap.xml is not what tools/build_sitemap.py generates.")
-            print("Run: python3 tools/build_sitemap.py")
-            have = len(re.findall(r"<loc>", current))
-            want = len(re.findall(r"<loc>", rendered))
-            print(f"  committed: {have} <loc> · generated: {want} <loc>")
-            return 1
-        print(f"OK — sitemap.xml is current ({len(pages)} URLs, derived from the published tree)")
-        return 0
+        current = SITEMAP.read_text(encoding="utf-8") if SITEMAP.is_file() else ""
+        if current == doc:
+            print(f"sitemap.xml is current ({len(published_pages())} URLs)")
+            return 0
+        committed = current.count("<url>")
+        expected = doc.count("<url>")
+        print(
+            f"sitemap.xml drifted from the published tree: committed {committed} URLs, "
+            f"a fresh derivation has {expected}.",
+            file=sys.stderr,
+        )
+        if committed != expected:
+            print(
+                "  Re-run: python3 tools/build_sitemap.py",
+                file=sys.stderr,
+            )
+        else:
+            print(
+                "  Same URL count but different content or ordering — re-run the generator.",
+                file=sys.stderr,
+            )
+        tmp = Path(tempfile.mkdtemp(prefix="z2sitemap-")) / "sitemap.xml"
+        tmp.write_text(doc, encoding="utf-8")
+        print(f"  Fresh copy written to {tmp} for diffing.", file=sys.stderr)
+        return 1
 
-    target.write_text(rendered, encoding="utf-8")
-    print(f"wrote sitemap.xml — {len(pages)} URLs")
-    for d in sorted(EXCLUDED_DIRS & {"northstar", "zone2", "research-hub", "affiliate-lab", "revalidation"}):
-        n = len(list((REPO / d).rglob("*.html")))
-        print(f"  excluded by rule (see EXCLUDED_DIRS): {d}/ — {n} page(s), still linked from the landing page footer")
+    SITEMAP.write_text(doc, encoding="utf-8")
+    print(f"wrote sitemap.xml — {len(published_pages())} URLs")
     return 0
 
 

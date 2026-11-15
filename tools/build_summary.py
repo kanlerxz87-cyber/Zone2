@@ -197,6 +197,7 @@ def build() -> str:
 <meta name="robots" content="index,follow">
 <title>Executive summary &middot; Zone2</title>
 {head_block("summary.html", title="Executive summary · Zone2", description=SUMMARY_DESCRIPTION, site_name="Zone2")}
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="pages/assets/dashboard.css">
 <link rel="stylesheet" href="pages/assets/site.css">
 <style>

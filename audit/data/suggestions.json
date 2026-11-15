@@ -1,0 +1,466 @@
+{
+  "note": "The review-and-choose board. Every row is a proposal, not a change: nothing here is implemented until the owner records a choice. Rows are ordered by the sequence in which they can be done — a row whose 'depends_on' is not resolved yet is shown as blocked, and the reason is named. 'cost' and 'risk' are the reviewer's estimates, deliberately coarse, and are labelled as estimates; they are not program facts. Rows marked 'implemented_this_session' were safe, additive, inside this session's own file scope, and are published here so the owner can see exactly what was done on their behalf.",
+  "as_of": "2026-11-15",
+  "status_vocabulary": {
+    "awaiting_owner_decision": "Proposal published; the owner has not chosen an option.",
+    "blocked_on_information": "Cannot be decided until the named gap in gaps.json is closed.",
+    "implemented_this_session": "Additive change inside this session's own scope, already shipped in this pull request, listed here for review and reversible.",
+    "recommended_do_nothing": "Considered and rejected; recorded so the question is not reopened by the next session."
+  },
+  "recommendations": [
+    {
+      "id": "R-01",
+      "area": "Crawlability and rendering",
+      "finding": "A-01",
+      "title": "Make the tables exist before JavaScript runs",
+      "suggestion": "Pre-render the row markup into the HTML at build time from ledger/*.json, and let the script enhance it instead of creating it. No new data source is needed — the rows already exist in the ledger and the renderers already exist in assets/js/app.js.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Pre-render every root page at build time",
+          "tradeoff": "Largest gain, changes every root page and the CI baseline. Reuses ledger data; no value changes."
+        },
+        {
+          "id": "B",
+          "label": "Promote pages/ to the landing and retire the JS shell from the home page",
+          "tradeoff": "Fastest single change; collapses two namespaces into one and forces the A-06 decision early."
+        },
+        {
+          "id": "C",
+          "label": "Add a <noscript> summary table only",
+          "tradeoff": "Cheap and honest, but a crawler that renders nothing still sees one summary, not the record."
+        }
+      ],
+      "recommended": "A",
+      "why": "It is the only option that fixes the defect without discarding the ledger-first architecture, and it removes the 102 KB data payload from the critical path at the same time (A-09).",
+      "cost": "estimate: 1–2 sessions of work in tools/ + regenerated output",
+      "risk": "estimate: low — every value still comes from the ledger; the gate that compares committed HTML to the ledger must be re-baselined once.",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "awaiting_owner_decision",
+      "decision": ""
+    },
+    {
+      "id": "R-02",
+      "area": "Disclosure placement",
+      "finding": "A-02",
+      "title": "Put the sentence where the links are",
+      "suggestion": "Render the required sentence immediately above the first affiliate link on every page that carries one, in the visual weight of a lead-in rather than a footnote, and keep the footer copy as well.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Disclosure block above the first link, repeated in the footer",
+          "tradeoff": "Satisfies both the programme wording and the FTC 'hard to miss' test. Slightly more visual space on short pages."
+        },
+        {
+          "id": "B",
+          "label": "Link-level label on every affiliate anchor as well ('paid link')",
+          "tradeoff": "Strongest reading of the FTC guidance; adds noise next to 600+ links."
+        },
+        {
+          "id": "C",
+          "label": "Leave as is",
+          "tradeoff": "Defensible on section 5's wording, but the site's own rule R-02 and the FTC brochure both argue against a footer-only disclosure. Not recommended."
+        }
+      ],
+      "recommended": "A",
+      "why": "The sentence itself is already correct and verified; only its position is wrong. Option A fixes position without touching the wording the Operating Agreement requires.",
+      "cost": "estimate: under an hour of generator work plus regeneration",
+      "risk": "estimate: very low",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "awaiting_owner_decision",
+      "decision": ""
+    },
+    {
+      "id": "R-03",
+      "area": "Search metadata",
+      "finding": "A-03",
+      "title": "Give the root pages the head tags marketing/ already has",
+      "suggestion": "Add rel=\"canonical\", an Open Graph block and one JSON-LD block per root page, generated from the same page registry that writes the titles.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Canonical + OG only",
+          "tradeoff": "Cheap, no risk of misdescribing the page."
+        },
+        {
+          "id": "B",
+          "label": "Canonical + OG + JSON-LD",
+          "tradeoff": "More surface for rich results, but structured data must be true; a Product block without a price or rating is a thin block and Google's merchant-listing guidance expects real values."
+        },
+        {
+          "id": "C",
+          "label": "Do nothing until the public page set is decided (A-06)",
+          "tradeoff": "Avoids stamping canonicals on pages that may be archived. Slower."
+        }
+      ],
+      "recommended": "A",
+      "why": "Canonical and OG are safe on any page set; JSON-LD should wait for the A-06 decision, because structured data on a page that is later archived is wasted work.",
+      "cost": "estimate: under an hour",
+      "risk": "estimate: low; a wrong canonical is worse than none, so it must be generated, never typed",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "awaiting_owner_decision",
+      "decision": ""
+    },
+    {
+      "id": "R-04",
+      "area": "Outbound link qualification",
+      "finding": "A-04",
+      "title": "Qualify the 150 unqualified Amazon links",
+      "suggestion": "Apply rel=\"sponsored noopener noreferrer\" to every Amazon anchor outside a source-citation cell, using the helper that already exists in assets/js/app.js, and extend the CI assertion beyond pages/.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Qualify all of them, leave citation cells alone",
+          "tradeoff": "Matches Google's guidance and the README's own claim. Citation cells stay clean for audit legibility."
+        },
+        {
+          "id": "B",
+          "label": "Qualify every Amazon anchor including citation cells",
+          "tradeoff": "Maximally consistent, but a review page where every evidence link is sponsored reads oddly to a human auditor."
+        },
+        {
+          "id": "C",
+          "label": "Leave as is and correct the README",
+          "tradeoff": "Honest, but the links themselves remain unqualified where Google asks for qualification."
+        }
+      ],
+      "recommended": "A",
+      "why": "It makes the published claim true, it is mechanical, and it needs no data change.",
+      "cost": "estimate: under an hour",
+      "risk": "estimate: low",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "awaiting_owner_decision",
+      "decision": ""
+    },
+    {
+      "id": "R-05",
+      "area": "Measurement",
+      "finding": "A-05",
+      "title": "Decide whether the site measures anything at all",
+      "suggestion": "Pick one measurement posture and publish it. The site currently describes tracking, conversion analysis and campaign optimization in detail while measuring nothing.",
+      "options": [
+        {
+          "id": "A",
+          "label": "No measurement until an Associates account exists",
+          "tradeoff": "Zero privacy surface, zero data. The optimization pages become explicitly 'planned' rather than 'available'."
+        },
+        {
+          "id": "B",
+          "label": "First-party click counter on a host the owner controls",
+          "tradeoff": "Real outbound-click counts, no cookies or visitor ids (the schema in tools/tracking_schema.sql already assumes this). Needs hosting and a privacy statement."
+        },
+        {
+          "id": "C",
+          "label": "Third-party analytics",
+          "tradeoff": "Fastest to read, largest privacy and consent surface, and it introduces the only third-party script on the site."
+        }
+      ],
+      "recommended": "A",
+      "why": "Until an Associates tag exists (SA-03), a click count cannot be tied to a commission, so the cheapest correct posture is to measure nothing and say so. Option B becomes worthwhile on the day the tag exists.",
+      "cost": "estimate: A is copy-only; B is one session plus hosting",
+      "risk": "estimate: A none; B low if the no-visitor-identifier rule is kept",
+      "reversible": "yes",
+      "depends_on": [
+        "G-02"
+      ],
+      "status": "blocked_on_information",
+      "decision": ""
+    },
+    {
+      "id": "R-06",
+      "area": "Content architecture",
+      "finding": "A-06",
+      "title": "One public site, one page per reader intent",
+      "suggestion": "Publish one reader-facing site (marketing/ is the closest to ready), keep the evidence namespaces as a clearly labelled archive, and stop publishing seven parallel descriptions of three products.",
+      "options": [
+        {
+          "id": "A",
+          "label": "marketing/ becomes the public site; the rest move under /archive/ with noindex",
+          "tradeoff": "Biggest ranking and clarity gain. Requires the archive to be routed and the sitemap rebuilt; nothing is deleted."
+        },
+        {
+          "id": "B",
+          "label": "Keep everything, add noindex to the duplicate namespaces",
+          "tradeoff": "Smaller change, keeps every URL working. The origin still hosts seven descriptions, one of which is the reader-facing one."
+        },
+        {
+          "id": "C",
+          "label": "Do nothing",
+          "tradeoff": "The site continues to present the exact shape Google's scaled-content and thin-affiliation sections describe. Not recommended."
+        }
+      ],
+      "recommended": "B",
+      "why": "It gets the ranking benefit of a single public site without deleting work six sessions produced, and it is reversible in one commit. Option A can follow once the owner has looked at the archive.",
+      "cost": "estimate: one session",
+      "risk": "estimate: medium — every namespace has its own gates and relative asset paths; each must be checked after the move",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "awaiting_owner_decision",
+      "decision": ""
+    },
+    {
+      "id": "R-07",
+      "area": "Trust surfaces",
+      "finding": "A-07",
+      "title": "Name the person responsible",
+      "suggestion": "Publish a named author or editor, an About page that states the verification method in plain language, and a visible 'last reviewed' date on every editorial page.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Real named owner as author, About page, per-article review date",
+          "tradeoff": "The single highest-trust change available. Requires the owner to accept being named."
+        },
+        {
+          "id": "B",
+          "label": "Site-level authorship only ('the Counter Notes desk'), no personal name",
+          "tradeoff": "Cheaper and still better than silence; weaker than a person for Google's authorship signals."
+        },
+        {
+          "id": "C",
+          "label": "No byline",
+          "tradeoff": "Maintains the current gap. Google's own site-reputation example treats an unauthored affiliate article as likely to draw action."
+        }
+      ],
+      "recommended": "A",
+      "why": "It is the only option that answers the question Google's guidance asks first, and it is free.",
+      "cost": "estimate: under an hour once the owner says yes",
+      "risk": "estimate: none technical; reputational if the named person is not real",
+      "reversible": "yes",
+      "depends_on": [
+        "G-05"
+      ],
+      "status": "blocked_on_information",
+      "decision": ""
+    },
+    {
+      "id": "R-08",
+      "area": "Visual evidence",
+      "finding": "A-08",
+      "title": "Put something real on the page",
+      "suggestion": "Add photographs — of the owner's own units where they exist, or manufacturer imagery under the Associates IP licence attached to a tagged link.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Owner's own photographs, dated and captioned as such",
+          "tradeoff": "Strongest evidence available and the only route to first-hand claims. Requires the owner to own or borrow the products."
+        },
+        {
+          "id": "B",
+          "label": "Manufacturer imagery used under the IP licence with a corresponding Special Link",
+          "tradeoff": "Available today; it is not evidence of testing and must not be captioned as if it were."
+        },
+        {
+          "id": "C",
+          "label": "No imagery",
+          "tradeoff": "Keeps the site text-only; forfeits social cards, image search and every 'show your experience' signal."
+        }
+      ],
+      "recommended": "B",
+      "why": "It is achievable without a purchase and is legal under the licence the project is already governed by; A should be layered on top whenever the owner has the products in hand.",
+      "cost": "estimate: under an hour plus asset work",
+      "risk": "estimate: low if each image sits next to a tagged link, as Trademark Guideline 1 requires",
+      "reversible": "yes",
+      "depends_on": [
+        "G-02"
+      ],
+      "status": "blocked_on_information",
+      "decision": ""
+    },
+    {
+      "id": "R-09",
+      "area": "Page weight",
+      "finding": "A-09",
+      "title": "Cut the 472 KB the landing page needs before it renders",
+      "suggestion": "Drop the 102 KB data script from the critical path (R-01 does this for free), subset the two font families to the weights actually used, and preload only the face used above the fold.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Fix after R-01, then subset fonts",
+          "tradeoff": "Sequenced correctly: most of the weight disappears with the rendering fix."
+        },
+        {
+          "id": "B",
+          "label": "Subset fonts now",
+          "tradeoff": "Independent of R-01 and safe; roughly two-thirds of the font bytes can go."
+        },
+        {
+          "id": "C",
+          "label": "Leave as is",
+          "tradeoff": "472 KB to render an empty table on a phone."
+        }
+      ],
+      "recommended": "B",
+      "why": "It can be done independently of the bigger rendering decision, and it is measurable before and after.",
+      "cost": "estimate: under an hour",
+      "risk": "estimate: low; re-render the pages and compare the visual result",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "awaiting_owner_decision",
+      "decision": ""
+    },
+    {
+      "id": "R-10",
+      "area": "Crawl inventory",
+      "finding": "A-10",
+      "title": "Say which URLs are public",
+      "suggestion": "Declare the public page set once, generate one sitemap from it, and make every other namespace's status explicit (archive, noindex, or internal evidence).",
+      "options": [
+        {
+          "id": "A",
+          "label": "One generated sitemap from a declared public set",
+          "tradeoff": "The crawler's view matches the intent. Needs the A-06 decision first."
+        },
+        {
+          "id": "B",
+          "label": "Keep two sitemaps, expand the root one to cover the public set",
+          "tradeoff": "Less invasive; keeps marketing/'s self-contained sitemap."
+        },
+        {
+          "id": "C",
+          "label": "Leave as is",
+          "tradeoff": "16 of 114 URLs declared — the site tells Google everything else is accidental."
+        }
+      ],
+      "recommended": "A",
+      "why": "Two sitemaps on one origin is the same ambiguity as two 'products' pages, one level up.",
+      "cost": "estimate: under an hour after A-06",
+      "risk": "estimate: low",
+      "reversible": "yes",
+      "depends_on": [
+        "G-08"
+      ],
+      "status": "blocked_on_information",
+      "decision": ""
+    },
+    {
+      "id": "R-11",
+      "area": "Titles",
+      "finding": "A-12",
+      "title": "Make every title unique and short",
+      "suggestion": "Add the category or page qualifier to the four duplicated titles and trim the 14 titles over 60 characters in the generator, not in the HTML.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Fix in the generator",
+          "tradeoff": "Permanent, and the gate that compares output to the ledger keeps it fixed."
+        },
+        {
+          "id": "B",
+          "label": "Hand-edit the four pages",
+          "tradeoff": "Faster today; the next regeneration removes it."
+        }
+      ],
+      "recommended": "A",
+      "why": "The generators own these files; a hand edit is undone by the next build.",
+      "cost": "estimate: under an hour",
+      "risk": "estimate: very low",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "awaiting_owner_decision",
+      "decision": ""
+    },
+    {
+      "id": "R-12",
+      "area": "Gate coverage",
+      "finding": "A-13",
+      "title": "Make CI able to see what this audit saw",
+      "suggestion": "Add four checks to the deploy workflow: CSS url() resolution, disclosure-before-first-affiliate-link, rel=sponsored outside pages/, and sitemap coverage of the declared public set.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Add all four",
+          "tradeoff": "A regression in any of them fails the build rather than shipping. A little slower CI."
+        },
+        {
+          "id": "B",
+          "label": "Add the two cheapest now (CSS url(), disclosure position)",
+          "tradeoff": "Immediate coverage of the two defects that actually shipped this week."
+        },
+        {
+          "id": "C",
+          "label": "Add none",
+          "tradeoff": "The suite remains strong on provenance and blind to presentation regressions."
+        }
+      ],
+      "recommended": "B",
+      "why": "Two of the four are implemented and tested in this session (tools/check_css_urls.py, tools/validate_audit.py); the other two need the page set and the disclosure markup decided first.",
+      "cost": "estimate: B is already done and wired; A is another session",
+      "risk": "estimate: low — each new check must be negative-tested before it is trusted, as the existing gates were",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "implemented_this_session",
+      "decision": "partial: tools/check_css_urls.py and tools/validate_audit.py are wired into CI in this pull request; the sponsored-link and sitemap checks remain open"
+    },
+    {
+      "id": "R-13",
+      "area": "Eligibility and measurement",
+      "finding": "A-05",
+      "title": "Settle the Associates account before any further build work",
+      "suggestion": "The only item that blocks revenue is not technical. Confirm the account, the marketplace, the Associate ID, and whether a github.io address satisfies the site-ownership test before generating a single tagged link.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Owner confirms the account and supplies the tag out of band, then the site switches on",
+          "tradeoff": "Unblocks everything; requires the owner to act."
+        },
+        {
+          "id": "B",
+          "label": "Build the tagged-link switch now and ship it dark",
+          "tradeoff": "The site is ready the day the tag exists; the placeholder must be unable to resolve to a live link before approval."
+        },
+        {
+          "id": "C",
+          "label": "Continue building content without the account",
+          "tradeoff": "Does not block growth of the archive, but the site cannot earn and the optimization pages stay theoretical."
+        }
+      ],
+      "recommended": "A",
+      "why": "Everything the brief asks for downstream of revenue — tracking, optimization, campaign learning — is inert without an approved tag.",
+      "cost": "estimate: owner time only",
+      "risk": "estimate: none",
+      "reversible": "yes",
+      "depends_on": [
+        "G-01",
+        "G-02"
+      ],
+      "status": "blocked_on_information",
+      "decision": ""
+    },
+    {
+      "id": "R-14",
+      "area": "Editorial",
+      "finding": "A-07",
+      "title": "Keep the one writing rule that separates this site from the category",
+      "suggestion": "Publish the editorial rule the better pages already follow — no first-hand claim without a dated record, no superlative without the spec that supports it, no number without a source — as a public page, and lint every future article against it. Do not generate volume to fill a content calendar.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Public editorial standard + lint",
+          "tradeoff": "Slow to fill a calendar, hard to dispute, and it is the one claim a competitor cannot copy quickly."
+        },
+        {
+          "id": "B",
+          "label": "Keep the rule internal",
+          "tradeoff": "Less exposure; the reader has to take the site's word for it."
+        },
+        {
+          "id": "C",
+          "label": "Publish more articles at a faster rate",
+          "tradeoff": "The pattern Google's scaled-content section describes. Not recommended."
+        }
+      ],
+      "recommended": "A",
+      "why": "The site's differentiator is not the products, it is the refusal to assert unverified things; publishing that rule turns an internal discipline into a visible reason to trust the page.",
+      "cost": "estimate: under an hour",
+      "risk": "estimate: low",
+      "reversible": "yes",
+      "depends_on": [],
+      "status": "awaiting_owner_decision",
+      "decision": ""
+    }
+  ]
+}

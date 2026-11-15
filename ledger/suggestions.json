@@ -355,6 +355,82 @@
       "decision": "",
       "status": "awaiting owner decision",
       "owner": "owner"
+    },
+    {
+      "id": "SG-11",
+      "area": "Programme eligibility (content bar)",
+      "title": "Close the 'at least 10 posts' content bar before applying, rather than after",
+      "suggestion": "Treat Amazon's content bar as a build gate: publish editorial posts that are a reason to visit the site on their own, and only then apply. Each post carries the same source discipline as the rest of this repository: a named demand question, at least one value read from an official page with its link, and no claim of hands-on use.",
+      "why": "S23 states that all Sites must have robust original content, that 'a good rule of thumb is at least 10 posts', that content must be recent, and that an application is rejected for unoriginal or insufficient content. The repository publishes 14 counted editorial pages (see release/index.html RR-03), but they are specification and comparison surfaces: each one is written to answer a question about these three listings, not to be found by a search. Amazon rejects and does not reassess, so the work has to happen before the application, not after it is refused.",
+      "evidence": [
+        "S23",
+        "S40",
+        "S42",
+        "S39"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Gate the application: no application until 10 posts pass the same source check as the rest of the site",
+          "tradeoff": "Slowest to revenue, and the only option that cannot be refused for content. Needs the owner's author identity (Q-16) before a byline can be honest."
+        },
+        {
+          "id": "B",
+          "label": "Apply now and add posts during the 180-day review window",
+          "tradeoff": "S23 says the team reviews once qualifying sales arrive, so there is a window. Risky: S23 states a rejected application is not reassessed, so a rejection at the wrong moment is permanent."
+        },
+        {
+          "id": "C",
+          "label": "Publish the posts but do not apply until the owner has a domain (Q-17)",
+          "tradeoff": "Removes the ownership question from the same review, at the cost of a second delay."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-16",
+        "Q-17"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-12",
+      "area": "Programme eligibility (content bar)",
+      "title": "Close the 'at least 10 posts' content bar before applying, rather than after",
+      "suggestion": "Treat Amazon's content bar as a build gate: publish editorial posts that are a reason to visit the site on their own, and only then apply. Each post carries the same source discipline as the rest of this repository: a named demand question, at least one value read from an official page with its link, and no claim of hands-on use.",
+      "why": "S23 states that all Sites must have robust original content, that 'a good rule of thumb is at least 10 posts', that content must be recent, and that an application is rejected for unoriginal or insufficient content. The repository publishes 14 counted editorial pages (see release/index.html RR-03), but they are specification and comparison surfaces: each is written to answer a question about these three listings, not to be found by a search. S23 states a rejected application is not reassessed, so the work belongs before the application.",
+      "evidence": [
+        "S23",
+        "S40",
+        "S42",
+        "S39"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Gate the application: no application until 10 posts pass the same source check as the rest of the site",
+          "tradeoff": "Slowest to revenue, and the only option that cannot be refused for content. Needs the owner's author identity (Q-16) before a byline can be honest."
+        },
+        {
+          "id": "B",
+          "label": "Apply now and add posts during the 180-day review window",
+          "tradeoff": "S23 says the team reviews once qualifying sales arrive, so there is a window. Risky: S23 states a rejected application is not reassessed."
+        },
+        {
+          "id": "C",
+          "label": "Publish the posts but do not apply until the owner has a domain (Q-17)",
+          "tradeoff": "Removes the ownership question from the same review, at the cost of a second delay."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-16",
+        "Q-17"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
     }
   ]
 }
