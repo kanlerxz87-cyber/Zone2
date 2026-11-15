@@ -4853,3 +4853,61 @@ dropped; `tools/audit_site.py`'s `namespaces` and `debris` checks both pass on t
 | Files this session changed | `tools/head_meta.py`, `tools/build_head_meta.py` (new), `tools/build_site.py`, `tools/build_decisions.py`, `tools/build_root_views.py`, `tools/build_summary.py` (head emission only), `index.html` (nav grouping, hero CTA, footer dedup), `assets/css/style.css` (3 additive nav rules + mobile variant), `paths.html` + the 9 hand-written root pages + 4 `journal/` pages (metadata block only), `sitemap.xml`, `decisions/**` + `pages/**` (regenerated), `EXECUTIVE_SUMMARY.md` (append-only addendum), `design-notes.html` (one footer citation), `docs/verification-5d6d2254.md` (new), `.github/workflows/pages.yml` (one step), `COORDINATION.md` |
 | Deliberately not touched | `ledger/**` (change requests CR-A…CR-D filed here instead of editing), `marketing/**` copy, `tools/audit_site.py`, `tools/build_sitemap.py`, `tools/seo_audit.py`, `tools/check_css_urls.py`, the four legacy companion namespaces |
 | Open items transferred to the owner | CR-A (F-20's control answers 403 through a non-browser client — wording), CR-B (P2 accessories: six per the listing title vs seven published, and the title itself is perishable), CR-C (P3 is a two-variant manufacturer page — say so), CR-D (never hand-edit the generated sitemap); plus the integration note that PR #104's `tools/page_meta.py` implements the same head-metadata contract and only one should survive |
+
+---
+
+## CLAIM — T42 — `arena/d26f42db-zone2` (2026-11-15 UTC)
+
+| Field | Value |
+|---|---|
+| Task ID | **T42** — renumbered on claim: `T40` was already claimed by three sessions that merged
+| | while this one was fetching sources (`b6defa90`, `08789ab3`, `3db75825`) and `T41` by `08789ab3`.
+| | No existing row was edited. Per the renumbering lesson above, the session id is the identity. |
+| Owner session | `arena/d26f42db-zone2` |
+| Branch | `arena/d26f42db-zone2` (branched from `main` @ `ceaf9a79`) |
+| Started | 2026-11-15 13:08 UTC |
+| Conflict | Claim commit hit a `COORDINATION.md` conflict against `origin/main` (`23c7fd2`, PR #96).
+| | Resolved by keeping the incoming block byte-for-byte and appending this claim at end of file. |
+| Status | in progress |
+
+### Scope (files this session owns)
+
+| Path | What it is |
+|---|---|
+| `console/**` | **Owner's Console** — new namespace: executive summary, suggestion board, information register, redesign prompt pack, repo review, flagged page, source register |
+| `console/data/*.json` | the dataset behind those pages |
+| `tools/build_console.py` | deterministic generator for `console/` (network-free) |
+| `tools/validate_console.py` | deploy gate for `console/` |
+| `COORDINATION.md` | this claim + the closing record (append-only, bottom of file) |
+
+### Explicitly NOT in scope (other sessions / already merged, not touched)
+
+`pages/**`, `ledger/**`, `decisions/**`, `marketing/**`, `journal/**`, `research-hub/**`,
+`revalidation/**`, `affiliate-lab/**`, `zone2/**`, `northstar/**`, `tools/*.py` (existing),
+`assets/**`, root `*.html` except one additive navigation link (recorded below).
+
+### Relationship to the canonical registers (no duplicate stores)
+
+- The canonical suggestion board stays `pages/suggestions.html` (`SG-01…SG-10`, session `2499438c`,
+  T29) and the canonical question register stays `pages/questions.html` (`Q-01…Q-16`). This session
+  does **not** copy, renumber or re-own them.
+- `console/` adds only **new** rows: proposals `P-01…` and information questions `IN-01…`, and each
+  row that touches an inherited item says so by ID and links back to it.
+- Two different open-PR scopes exist while this task runs: **PR #70** (`arena/cffe745a-zone2`,
+  `marketing/articles/**`) and **PR #90** (`arena/e4e7d4b2-zone2`, `COORDINATION.md` only, state
+  CONFLICTING). Neither is merged, closed or edited by this session. `COORDINATION.md` is edited
+  append-only at the end of file to keep #90 rebasable.
+
+### One shared-output edit, and why
+
+A single additive `<a>` is inserted into the root `index.html` navigation so the Owner's Console is
+reachable from the landing page (discoverability only — no text, data or layout change). It is the
+minimum that makes this namespace usable, and it is the only edit this session makes outside the
+scope table above. If it conflicts on push, it is re-applied on top of the incoming version rather
+than resolved by discarding the other side.
+
+### Verification performed (live fetches, 2026-11-15 UTC)
+
+Recorded row by row in `console/sources.html` and `console/review.html`; every row that states a
+value carries the official page it was read from, and anything not confirmed is left blank and
+flagged.
