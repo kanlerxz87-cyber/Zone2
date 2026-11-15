@@ -3,58 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The SEO content engine: article, comparison and buying-guide generation that refuses unverified entries — plan status, topic ideas for review, and the enforced rules.">
 <title>Content — Zone2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Verified affiliate platform</span>
+      </span>
+    </a>
+    <label class="nav-toggle" for="navtoggle">Menu</label>
+    <input type="checkbox" id="navtoggle" class="nav-toggle-input">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Overview</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="content.html" class="active">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a>
+      <a href="verification.html" class="nav-quiet">Verification</a>
+      <a href="sources.html" class="nav-quiet">Sources</a>
+      <a href="flagged.html" class="nav-quiet">Flagged</a>
+      <a href="design-notes.html" class="nav-quiet">Design notes</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>AI-Generated Marketing Content</h2>
-      <p>The brief-mapped content generator is held because no public Amazon document confirms that the destinations of the supplied <code>link.amazon</code> codes are the products intended in the brief (F-03). A separate <a href="marketing/index.html">destination-only marketing set</a> is already published: it includes three product articles, a comparison and a buying guide based on source-linked manufacturer specifications. Those pages do not claim a confirmed brief mapping and carry an identity-scope warning. The rows below describe the blocked brief-mapped pipeline, not the entire site's published content.</p>
-    </div>
+  </div>
+</header>
 
+<main id="main">
+  <section class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Content engine</div>
+      <h1 class="hero-title">Articles that stay inside the lines</h1>
+      <p class="hero-lede">The platform drafts SEO-optimized product articles, comparisons and buying guides — but only from specifications verified on official pages. This page shows the brief-mapped plan and its status, a queue of editorial topic ideas anchored to verified listings, and the rules every draft must pass.</p>
+    </div>
+  </section>
+
+  <div class="page-wrap">
     <div class="disclosure">
       <strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases.
     </div>
 
-    <div class="card">
-      <h3>Content Plan &amp; Status</h3>
+    <section class="section">
+      <h2 class="section-title">Brief-mapped content plan &amp; status</h2>
+      <p class="section-sub">The brief-mapped generator is held because no public Amazon document confirms that the destinations of the supplied <code>link.amazon</code> codes are the products intended in the brief (F-03). A separate <a href="marketing/index.html">destination-only marketing set</a> is already published — three product articles, a comparison and a buying guide built on source-linked manufacturer specifications, carrying an identity-scope warning. The rows below describe the blocked brief-mapped pipeline, not everything on the site.</p>
       <div id="contentTable"></div>
-    </div>
+    </section>
 
-    <div class="card">
-      <h3>Content rules enforced by the platform</h3>
-      <ul style="margin:0;padding-left:20px;font-size:14px">
+    <section class="section">
+      <h2 class="section-title">Editorial topic ideas — for review, not published</h2>
+      <p class="section-sub">
+        A draft queue of article, comparison and buying-guide topics for the air-fryer niche the three
+        resolved destinations share. The design is deliberate: each topic&rsquo;s factual anchor is a claim
+        verified on the official listing linked in its row, and the <strong>Search demand column is
+        intentionally blank</strong> — search volume and trend data require keyword-tool or Associates
+        reports that do not exist yet, and this platform does not estimate demand. Every topic is a
+        suggestion awaiting a recorded decision on the
+        <a href="pages/suggestions.html">suggestions decision board</a>; nothing here goes live until then.
+      </p>
+      <div id="topicsTable"></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Content rules enforced by the platform</h2>
+      <p class="section-sub">The generator refuses an entry it cannot source. These rules run before any article is rendered:</p>
+      <div class="card"><ul style="margin:0;padding-left:20px;font-size:14px">
         <li>Product claims are limited to facts verified on an official Amazon or manufacturer page, with a source link beside each value — no invented features, prices or ratings.</li>
         <li>Comparisons link each product to its official Amazon page; no cross-retailer price comparison is published without serving prices per program policy.</li>
-        <li>The mandatory Associates disclosure appears on every page and article.</li>
+        <li>The mandatory Associates disclosure appears on every page and article, and outbound product links carry <code>rel="sponsored"</code> per Google&rsquo;s paid-link guidance.</li>
         <li>Limited-time promotion mentions are removed as soon as the promotion ends on Amazon.</li>
-      </ul>
-    </div>
+      </ul></div>    </section>
 
     <footer class="site">
-      Verified dataset date: 2026-11-14. Each product claim links to the official Amazon listing or manufacturer
-      page used for that value. The root brief-mapped generator can resume after the owner confirms the link-to-product
-      mapping (F-03); earning commissions separately requires correctly tagged Associates links (F-24).
+      Verified dataset date: 2026-11-14. Each product claim links to the official Amazon listing or manufacturer page used for that value. The root brief-mapped generator can resume after the owner confirms the link-to-product mapping (F-03); earning commissions separately requires correctly tagged Associates links (F-24). Topic ideas are editorial suggestions — implement only after a recorded decision on the board.
     </footer>
-  </main>
-</div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="analysis.html">Analysis</a></li>
+            <li><a href="content.html">Content</a></li>
+            <li><a href="compliance.html">Compliance</a></li>
+            <li><a href="tracking.html">Tracking</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Evidence</h4>
+          <ul>
+            <li><a href="verification.html">Verification log</a></li>
+            <li><a href="sources.html">Source register</a></li>
+            <li><a href="flagged.html">Flagged for review</a></li>
+            <li><a href="summary.html">Executive summary</a></li>
+            <li><a href="pages/index.html">Findings hub</a></li>
+            <li><a href="pages/categories/index.html">Commission categories</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Decisions</h4>
+          <ul>
+            <li><a href="pages/suggestions.html">Suggestions decision board</a></li>
+            <li><a href="pages/questions.html">Open questions register</a></li>
+            <li><a href="design-notes.html">Design notes &amp; growth ideas</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Companion builds</h4>
+          <ul>
+            <li><a href="research-hub/start.html">Affiliate Research Hub</a></li>
+            <li><a href="marketing/index.html">Field Notes — verified articles</a></li>
+            <li><a href="revalidation/index.html">Revalidation 2026-11-14</a></li>
+            <li><a href="affiliate-lab/index.html">Affiliate Lab</a></li>
+            <li><a href="zone2/index.html">Zone2 platform build</a></li>
+            <li><a href="northstar/index.html">Northstar prototype</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
+        As an Amazon Associate I earn from qualifying purchases. Amazon and the Amazon mark are
+        trademarks of Amazon.com, Inc. or its affiliates; this site is independent and not affiliated
+        with Amazon. Outbound product links are marked <code>rel="sponsored"</code> per Google&rsquo;s
+        guidance on paid links. No price is displayed on any page — Amazon restricts price display to
+        links and API responses it serves itself.
+      </div>
+      <div class="footer-note">
+        Verified dataset date: 2026-11-14 · links and sources independently re-fetched 2026-11-15 ·
+        governing documents change without notice and are re-verified each cycle ·
+        <a href="https://affiliate-program.amazon.com/" style="color:#c6cdd7">Amazon Associates</a> ·
+        <a href="https://affiliate-program.amazon.com/help/operating/policies" style="color:#c6cdd7">Program Policies</a> ·
+        <a href="https://affiliate-program.amazon.com/help/operating/agreement" style="color:#c6cdd7">Operating Agreement</a> ·
+        <a href="sources.html" style="color:#c6cdd7">full source register</a>
+      </div>
+    </div>
+  </footer>
+</main>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
