@@ -3203,3 +3203,38 @@ No new product, performance, demand, or revenue figures were added. The destinat
 
 **Plan:** (1) re-run every repo gate on the combined tree and reconcile the page count (T29's record says 97; PR #62's says 96); (2) re-check all 10 suggestion rows and 16 question rows against the ledgers and against the official sources they cite (S01, S02, S07, S19–S21, S23, S24, S32 and the rest of `ledger/sources.json` as referenced); (3) confirm the live Pages deployment of the two new pages; (4) audit open PR #62 for factual claims and scope; (5) publish `docs/verification-42fa4918.md` with one verdict per claim — verified / not re-verifiable today (left blank, flagged) — each with its source link.
 
+
+## Session record — `arena/42fa4918-zone2` (session `42fa4918`, 2026-11-15 UTC) — T31
+
+**Claimed:** T31 (board row above). **Scope:** `docs/verification-42fa4918.md` (new) + this file, append-only. Full detail, verdict table (V-83…V-108), and evidence live in the report; this record summarises.
+
+**Board state during work:** `main` moved twice while this session worked: `9f1e2ff` (PR #61, T29) → `f9a86bd` (PR #64, T30 dashboard integration) → `f30c7aa` (PR #66, T30 closing record). PR #62 was closed unmerged by its own session, superseded by #64 (its record on `main` documents this). `origin/main` was merged into this session's branch before every push; one COORDINATION.md conflict was resolved by keeping both sessions' records (nothing discarded).
+
+**Scope amendment (recorded before the edit).** Resolving that conflict exposed **pre-existing** conflict debris committed on `main` inside this file (present at this session's branch base `e030c40`, i.e. the PR #60 lineage — before T29/T30): a stray `=======` line, a stray `>>>>>>> origin/main` line, and a duplicated fragment (a second "## T26 — closing record" heading mixed with later-session content) between them. The **two stray marker lines were removed** so future merges cannot mis-read them as conflict boundaries; **the duplicated fragment was left byte-identical for owner review**. Logged as **F-39** on the Flagged for Review page path via this record and the report.
+
+### Verification performed (2026-11-15, fetched live; full tables in `docs/verification-42fa4918.md`)
+
+| # | Check | Verdict | Source |
+|---|---|---|---|
+| V-83…V-89, V-94…V-99 | Every §-clause and threshold cited by SG-01…SG-10 and Q-01…Q-16 (3 sales/180 d, personal orders, own-website, 10 posts, 60-day content, tax-interview link, ~60-day payment, 10-sales/30-d Creators API, ASIN length, §2(a) Associates-ID rule, §6(t)/(w)/(y)/(z), §2(b) R-04/R-06/R-08 bases) | **Verified verbatim** on the official pages today — closes the two gaps T29's own record marked "not re-read today" (its V-7/V-8) | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM · https://affiliate-program.amazon.com/help/operating/policies · https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction · https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC |
+| V-90 | Unknown-code control `link.amazon/B00TEST12` → 404 "invalid URL" | **Reproduced today** | https://link.amazon/B00TEST12 |
+| V-91…V-93 | The three supplied links resolve, today, to exactly B0CDY277D3 / B09B7SB46R / B08DKYBTPH with the S19–S21 titles, the shared Air Fryers breadcrumb, `plpRedirect=mhFallback` and rotating `btn_ref` tokens | **Reproduced today** (evidence only; not confirmed ASINs — F-01/F-03/F-28 unchanged) | https://link.amazon/B04G1MEwY · https://link.amazon/B02NbDxp3 · https://link.amazon/B00hJ57DV |
+| V-100…V-101 | Table 1 bands cited by SG-02/SG-08/Q-08 (Kitchen 4.50%, Home 3.00%, All Other 4.00%) and the decision to leave the band unconfirmed | **Verified verbatim**; the breadcrumb names neither band, so asserting no rate is correct | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ |
+| V-102…V-105, V-108 | OA §5 disclosure + "substantially similar" allowance, §4 no-income-guarantee, both document dates (Oct 15 2025 / Apr 14 2026), FTC "clearly and conspicuously", Japan in the country selector | **Verified verbatim / reproduced** | https://affiliate-program.amazon.com/help/operating/agreement · https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking |
+| V-106…V-107 | S09 tools/reports page and the GitHub Pages serving of this site | **Verified** | https://affiliate-program.amazon.com/welcome/topic/tools · Pages API (`status: built`, source `main` `/`) |
+| — | Rendered `pages/suggestions.html` / `pages/questions.html` vs the ledgers | **26/26 rows match**, options/recommendations/sources render; every one of the 24 unique external hrefs on the two pages is a registered source | repo check |
+| — | All repository gates on the combined tree | **PASS** — 5 build-drift gates, `validate_data` (0 err / 0 warn), `test_pipeline` 15/15, `audit_site` **97 pages all classes PASS**, research-hub rebuild+verify, marketing gate (502 links, 0 failures), affiliate-lab gate | repo run |
+| — | Live Pages deployment | **Confirmed** — `pages/suggestions.html` and `pages/questions.html` served live with tables and source links; root dashboard links both (T30) | https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html |
+
+**Extra evidence recorded for the owner (Q-10 path, register untouched):** the IP License section of the official policies page was read in full — License §1 (copy/display solely on your Site), §2(h) (no image caching), §2(i) (dated stamp + disclaimer for any price/availability), §2(k) ("CERTAIN CONTENT…" notice), Trademark Guidelines (marks only with a Special Link, unaltered), and **§4 Agent Terms** (any autonomous software must identify as `Agent/[name]` and must not mimic humans or bypass CAPTCHAs — relevant to this platform's automation layer). Recorded in the report, §7.
+
+### Findings (flagged for review — none blocking)
+
+1. **F-39** — pre-existing conflict debris in this file on `main` (details + scope amendment above). Markers removed; duplicated fragment left for owner review.
+2. **Page-count note** — T29's record says 97 audited pages, T30's says 96; this session measures **97** on `main` = `f30c7aa`. Bookkeeping note only; every gate passed on each session's own tree.
+3. **CR-3 (change request)** — the executive summaries are current through F-38 but do not yet mention the T29/T30 surfaces (`pages/suggestions.html`, `pages/questions.html`). Suggest a short subsection; not edited here (shared output).
+4. **Carried forward** — "verified 2026-11-14" eyebrow on pages checked 2026-11-15 (recorded by T29); stale `in progress` T27 row (flagged by `2499438c`); F-01/F-03 (ASINs), F-05 (API registration), F-07/F-24 (no Associates tag).
+
+**Open-PR audit at close:** #62 closed unmerged (superseded by #64, per its own record); #64/#66 merged; **#65** (`bf8f07a7`, open — `marketing/trending-topics.html` + nav) audited from its diff: its earlier root-level suggestions/decisions duplicates were dropped, its claims match the sources verified above, and its file scope does not overlap T31. Fresh claim from an active session — not taken over.
+
+**PR, merge and deploy:** PR opened from this branch — number, merge commit and deploy runs recorded in the closing entry that follows this record.
