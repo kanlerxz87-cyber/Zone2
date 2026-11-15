@@ -8,31 +8,53 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="shell">
-  <aside class="sidebar">
-    <h1>Zone2</h1>
-    <div class="sub">AI Amazon Affiliate Marketing Platform</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
-      <a href="summary.html">Executive Summary</a>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">
+        <span class="brand-name">Zone2</span>
+        <span class="brand-tag">Verified affiliate platform</span>
+      </span>
+    </a>
+    <label class="nav-toggle" for="navtoggle">Menu</label>
+    <input type="checkbox" id="navtoggle" class="nav-toggle-input">
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Overview</a>
       <a href="products.html">Products</a>
       <a href="analysis.html">Analysis</a>
       <a href="pages/suggestions.html">Suggestions &amp; Decisions</a>
+      <a href="decisions/index.html">Requirements &amp; Review</a>
+      <a href="playbook.html" class="active">Design Playbook</a>
       <a href="content.html">Content</a>
       <a href="compliance.html">Compliance</a>
       <a href="tracking.html">Tracking</a>
-      <a href="verification.html">Verification</a>
-      <a href="sources.html">Sources</a>
-      <a href="flagged.html">Flagged for Review</a>
-      <a href="playbook.html" class="active">Design Playbook</a>
+      <a class="nav-quiet" href="verification.html">Verification</a>
+      <a class="nav-quiet" href="sources.html">Sources</a>
+      <a class="nav-quiet" href="flagged.html">Flagged</a>
+      <a class="nav-quiet" href="design-notes.html">Design notes</a>
     </nav>
-  </aside>
-  <main class="main">
-    <div class="page-head">
-      <h2>Design &amp; Content Playbook</h2>
-      <p>The suggestion set that feeds the site-design prompt: how the site should look, what to write, how to earn organic traffic, and the editorial rules that keep it from reading like generated filler. Task T31, session <code>fcb538fa</code>, compiled 2026-11-15.</p>
-    </div>
+  </div>
+</header>
 
+<main id="main">
+  <section class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Design playbook — task T33</div>
+      <h1 class="hero-title">What this site should say, look like, and never claim</h1>
+      <p class="hero-lede">
+        The suggestion set that feeds the site-design and content prompt: design direction, article angles
+        for the three promoted destinations, an organic-traffic plan, and the editorial rules that keep the
+        writing human — with every hard constraint linked to the official page it was read from on
+        2026-11-15. Compiled by session <code>fcb538fa</code>; nothing here is implemented until the owner
+        records a choice on the <a href="pages/suggestions.html">suggestions board</a>.
+      </p>
+    </div>
+  </section>
+
+  <div class="page-wrap">
     <div class="disclosure">
       <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
       As an Amazon Associate I earn from qualifying purchases.
@@ -243,17 +265,62 @@
     </div>
 
     <footer class="site">
-      Compiled 2026-11-15 (T31, session <code>fcb538fa</code>). Companion views:
-      <a href="index.html">Dashboard</a> ·
-      <a href="summary.html">Executive Summary</a> ·
+      Compiled 2026-11-15 (task T33, session <code>fcb538fa</code>). Companion views:
+      <a href="index.html">Overview</a> ·
+      <a href="summary.html">Executive summary</a> ·
       <a href="pages/suggestions.html">Suggestions decision board</a> ·
       <a href="pages/questions.html">Open questions</a> ·
-      <a href="flagged.html">Flagged for Review</a> ·
+      <a href="flagged.html">Flagged for review</a> ·
+      <a href="design-notes.html">Design notes</a> ·
       <a href="verification.html">Verification log</a> ·
       <a href="sources.html">Source register</a> ·
       <a href="marketing/index.html">Field Notes — verified articles</a>.
     </footer>
-  </main>
-</div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="index.html">Overview</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="verification.html">How rows are verified</a></li>
+            <li><a href="flagged.html">Flagged for review</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Decisions</h4>
+          <ul>
+            <li><a href="pages/suggestions.html">Suggestions board</a></li>
+            <li><a href="pages/questions.html">Open questions</a></li>
+            <li><a href="decisions/index.html">Requirements &amp; review</a></li>
+            <li><a href="playbook.html">Design playbook</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Governing documents</h4>
+          <ul>
+            <li><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">Operating Agreement</a></li>
+            <li><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">Program Policies</a></li>
+            <li><a href="https://affiliate-program.amazon.com/" target="_blank" rel="noopener noreferrer nofollow">Amazon Associates</a></li>
+            <li><a href="sources.html">Full source register</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <strong>Affiliate disclosure:</strong>
+        As an Amazon Associate I earn from qualifying purchases. This site is independent and not affiliated with Amazon.
+        Outbound product links are marked <code>rel="sponsored"</code>. No price is
+        displayed on any page — Amazon restricts price display to links and API responses it serves itself.
+      </div>
+      <div class="footer-note">
+        Official sources on this page fetched 2026-11-15 · governing documents change without notice and
+        are re-verified each cycle · suggestions are proposals until recorded on the decisions board.
+      </div>
+    </div>
+  </footer>
+</main>
 </body>
 </html>
