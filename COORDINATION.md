@@ -2,8 +2,9 @@
 
 Project: **Zone2 — AI-powered Amazon Affiliate Marketing Platform**
 Repo: `kanlerxz87-cyber/Zone2`
-**Last updated:** 2026-11-14 (UTC) — **T23 close-out by session `arena/b38cc982-zone2`**: PR #41 merged
-(`6a90dfc5`), Pages deploy confirmed, independent re-verification of every official source green, T23 marked done.
+**Last updated:** 2026-11-16 (UTC) — **T52 close-out by session `arena/1f51a5ed-zone2`**: PR #138 merged
+(`d9c1be6`), GitHub Pages deploy confirmed (`status: built` from `main`), 17/17 official quotes re-verified
+live, deliverables audit green, gates 35/35, T52 marked done.
 
 > **Task-ID note (2026-11-14).** Five sessions were active at once and the board was edited
 > append-only by each, so a few IDs were reused. The numbering below is the reconciled one:
@@ -5491,3 +5492,64 @@ of PR #139 because they were found after the merge.
 **Two defects the live read caught, recorded rather than glossed:** the hard-coded "four" in a derived page,
 and the duplicated heading/caption. Neither affects a figure or a source link, and neither is visible in the
 tables themselves.
+
+---
+
+---
+
+---
+
+## Closing record — T52 (verification + final integration wave) — `arena/1f51a5ed-zone2` (session `1f51a5ed`, 2026-11-16 UTC)
+
+**Status: DONE.** Claimed as T50, renumbered T52 at rebase (see the claim above); this record supersedes its
+"in progress" status. Full evidence: [`docs/verification-1f51a5ed.md`](docs/verification-1f51a5ed.md) (live on
+the site at https://kanlerxz87-cyber.github.io/Zone2/docs/verification-1f51a5ed.md).
+
+| Item | Result |
+| --- | --- |
+| Task | T52 → **done** |
+| Commits pushed | `e4fd492` claim (pushed before any other edit) · `9e06781` verification record · `1d2f2b3` T50→T52 renumber after rebase |
+| Rebase + conflict log | Parallel sessions merged PRs **#131–#137** while this branch was in flight (`origin/main` `004a040` → `e6ee501`); the PR reported CONFLICTING. Rebased; **one conflict, in the `COORDINATION.md` tail** (my claim vs. `ebc8a709`'s + `970d11d6`'s records). Resolved **without discarding anyone's work**: every merged session's record kept byte-for-byte, my claim appended after them and renumbered **T50 → T52** (T50 shipped by `ebc8a709` via PR #131; T51 by `970d11d6`) per the board's renumbering precedent. Substring sweep for git-style markers: **none** (F-42 lesson applied). |
+| Pull request | **#138** — https://github.com/kanlerxz87-cyber/Zone2/pull/138 ("T52 verification wave (claimed as T50): live official-source re-audit (17/17 quotes), brief deliverables audit, 35/35 gates") |
+| PR checks before merge | `Build and verify` **pass** (22 s) on PR head `1d2f2b3`; `Deploy to GitHub Pages` correctly skipped on the PR |
+| Merge | **MERGED** 2026-11-16T18:43:27Z, merge commit `d9c1be62a61a1e5f4546861ddc2b854caa7f49c5` (`e6ee501` → `d9c1be6`), `--merge`, no approval wait, no `--auto` |
+| CI on `main` at the merge SHA | run **43931825076** `Build, verify and deploy` → **completed/success**; run **43931824882** `pages build and deployment` → **completed/success** |
+| Pages deployment | GitHub Pages API: `status: built`, source `main` `/`, site https://kanlerxz87-cyber.github.io/Zone2/ ; the new verification record confirmed served live by direct fetch |
+| Gates on the final tree | `tools/ci_replay.py` → **35/35 PASS** three times (at claim, pre-PR, and again on the rebased tree that merged) |
+| Files changed (whole task) | `COORDINATION.md` (claim + this record + header "Last updated" line), NEW `docs/verification-1f51a5ed.md`. **Nothing else** — no data row, ledger, generated page, tool, workflow, or another session's namespace. |
+
+### What was verified (all live 2026-11-16 via `fetch_page`; details in the record)
+
+1. **Three supplied links** resolve reproducibly to `B0CDY277D3` / `B09B7SB46R` / `B08DKYBTPH`; titles match
+   `ledger/products.json` (incl. the F-22 450 °F contradiction).
+2. **Amazon Associates Policies** (page states *Updated: April 14, 2026*) and **Operating Agreement**
+   (*Updated: October 15, 2025*): quotes S44, S45, S46, S51, S52, S53, S54, S58, S59 + the §5 disclosure
+   sentence + the Special-Link tag rule — **all verbatim**.
+3. **Manufacturer pages** (Chefman ×2, Emeril ×1): every published spec row re-read and matched.
+4. **Google + FTC**: **17/17** stored quotes (S44–S60) match the live pages; all page-stated dates match
+   (2026-08-28, 2025-12-10, 2026-10-05, 2026-10-01, 2026-07-10, November 2019). **0 quote drift.**
+5. **Brief deliverables**: landing page, category subpages, per-row source links, suggestions board
+   (SG-01…SG-12, live), questions register (Q-01…Q-18), executive summary (live), marketing/journal/
+   trending-topics (live), Flagged for Review (40 flags, live) — mapped row-by-row in the record §6.
+
+### Irregularities remaining open (non-blocking; already published on the live Flagged page)
+
+- **F-01 (high, owner):** supplied codes are 9 characters; an ASIN is 10 — confirm intended ASINs.
+- **F-24 (medium, owner):** no Associates `tag=` on any supplied link — cannot earn as supplied.
+- **F-03 (medium, owner):** code→product binding is observed behaviour, not documented.
+- **F-20 wording item (needs review):** "an unknown link.amazon code returns a 404" over-generalises
+  (T49's three-behaviour reconciliation) — belongs to `ledger/flags.json`, untouched here.
+- **Measurement:** 5 events defined, 0 live (static site).
+- **Board hygiene (observation):** rows T21/T26/T32/T38/T40/T48 still read "in progress" although their
+  sessions' closing records say done — only the owning author closes its row; left as-is. The file-header
+  "Last updated" line **was** updated by this closing record (it had read 2026-11-14 since T23).
+- **Label collision in flight:** PR **#139** (`7c1511ee`) merged while this record was rebasing — its
+  owner had already renumbered itself to **T53** on the board ("T50 and T52 both taken"), so no collision
+  remains there. PR **#140** (`43eb0239`) is still open and still titled "T50" — its owner must renumber
+  when it integrates (T50–T53 are taken); flagged here so the board does not gain another silent collision.
+
+### Verification channel note
+
+Sandbox shell has no outbound TLS; every live check used `fetch_page` and GitHub's API (`gh`), never an
+unverified assumption. Pages deployment was confirmed from the Actions runs at the merge SHA and the
+Pages API `status: built`, not inferred from a badge.
