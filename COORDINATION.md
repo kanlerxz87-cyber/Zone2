@@ -2920,7 +2920,7 @@ and the closing record follow in the next entry.
 | T31 | **Independent verification-only re-test (no shared file edited).** Line-by-line re-verification of the merged T29 deliverable: every factual claim in `ledger/suggestions.json` (SG-01…SG-10) and `ledger/questions.json` (Q-01…Q-16) re-checked against the official source it cites; rendered `pages/suggestions.html` / `pages/questions.html` checked against the ledgers row by row; every source link resolved; all repo gates re-run on the combined tree; live GitHub Pages deployment confirmed; status audit of open PR #62 (T30). Findings published as `docs/verification-42fa4918.md`; defects logged as change requests or new flags, never silently fixed. | done (PR and merge recorded below) | `arena/42fa4918-zone2` (42fa4918) | `docs/verification-42fa4918.md` (new), `COORDINATION.md` (append-only records only) |
 | T39 | **Publication layer for `marketing/` + the marketing improvement board.** Rebuilds the reader-facing site from a tool screen into a publication (named desk, masthead shell, decision-first buying guide, rewritten per-product articles, six question-shaped guides under `marketing/topics/`, glossary, sitemap.xml / robots.txt / feed.xml, canonical + OG + Article/BreadcrumbList JSON-LD) and publishes `marketing/improvements.html`: 14 suggestions with options, trade-off, cost, evidence and the question each waits on, plus 10 questions in the site's own scope and the design brief for the next revision. Copy moves to `marketing/data/editorial.json` so it can be diffed; gates G11–G14 enforce the ten-rule writing standard (sourced claims, no filler or first-hand claims, no orphan pages, sitemap/feed/canonical coverage), each negative-tested. Reconciled with T32's voice pass (PR #75) rather than overwritten: its `hook_editorial`, `suits_editorial`, `look_elsewhere` and `planned_topics` are all carried. Complements T29's programme boards without duplicating them. | done — PR #82 merged `3d5eda0`; closing record below | `arena/e8b071cd-zone2` (e8b071cd) | `marketing/**` (new `marketing/data/editorial.json`, `marketing/topics/*`, `marketing/improvements.html`, `marketing/sitemap.xml`, `robots.txt`, `feed.xml`, `assets/marketing.css`, `scripts/verify_marketing.py`), `tools/build_marketing.py`, `tests/test_pipeline.py`, `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/executive-summary.md`, `docs/marketing-2026-11-15.md` (new), `COORDINATION.md` |
 | T41 | **Follow-up to T40 (`3db75825`, merged PR #91) — close its open items, do not repeat its review.** (a) I-A: confirm the 10-digit ASIN rule from an Amazon help page; (b) I-B: disposition of stale, conflicting PR #70; (c) re-read the PA-API 5 deprecation notice and Table 1 on official pages; (d) replay the 22 CI gates on the rebased tree. Originally claimed as T40; renumbered to T41 at claim-time because T40 was merged first by `3db75825`. | claimed 2026-11-15 (UTC), done — see closing record | `arena/08789ab3-zone2` (08789ab3) | `COORDINATION.md` (append-only), `docs/verification-08789ab3.md` (new), PR #70 closed as superseded (no file change) |
-| T54 | **Renumbered from T50 → T52 → T54.** `ebc8a709` claimed and merged T50 (PR #131), `970d11d6` claimed T51, and `7c1511ee` claimed T52 and T53 — all while this session's claim was being written. Renumbered rather than contended, per the board's precedent; no other session's row or record is altered. **2026-11-16 product-evidence re-verification (final integration wave).** T49's live re-audit covered the *programme/Google/FTC* sources; it did **not** re-read the load-bearing **product specification rows** (the 36 spec values in `ledger/products.json` that every published table renders, each pinned to an Amazon listing and/or a manufacturer page). This session re-fetches all six official product sources live (`amazon.com/dp/B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`; `chefman.com` TurboFry Touch Dual-Window + TurboFry Touch 8 Qt; `emerileveryday.com` French Door AirFryer 360) and diffs **every published spec value and every stored quote** against what those pages serve today, line by line; re-resolves the three supplied `link.amazon` codes and re-runs the F-20/F-28 controls; publishes the result as `docs/verification-43eb0239.md` with one row per value and its official source URL; corrects only what the live pages contradict (never infers, never fills a blank); adds a dated `EXECUTIVE_SUMMARY.md` addendum; runs every repo gate; PR → merge → confirm Pages deploy → record here. | claimed 2026-11-16, in progress | `arena/43eb0239-zone2` (43eb0239) | `COORDINATION.md` (append-only records + this row), NEW `docs/verification-43eb0239.md`, `ledger/products.json` / `ledger/sources.json` / `ledger/flags.json` / `ledger/verification.json` (corrections only, for values the live official pages contradict), `EXECUTIVE_SUMMARY.md` (append-only addendum), `README.md` (additive note if a surface is added) |
+| T54 | **Renumbered from T50 → T52 → T54.** `ebc8a709` claimed and merged T50 (PR #131), `970d11d6` claimed T51, and `7c1511ee` claimed T52 and T53 — all while this session's claim was being written. Renumbered rather than contended, per the board's precedent; no other session's row or record is altered. **2026-11-16 product-evidence re-verification (final integration wave).** T49's live re-audit covered the *programme/Google/FTC* sources; it did **not** re-read the load-bearing **product specification rows** (the 36 spec values in `ledger/products.json` that every published table renders, each pinned to an Amazon listing and/or a manufacturer page). This session re-fetches all six official product sources live (`amazon.com/dp/B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`; `chefman.com` TurboFry Touch Dual-Window + TurboFry Touch 8 Qt; `emerileveryday.com` French Door AirFryer 360) and diffs **every published spec value and every stored quote** against what those pages serve today, line by line; re-resolves the three supplied `link.amazon` codes and re-runs the F-20/F-28 controls; publishes the result as `docs/verification-43eb0239.md` with one row per value and its official source URL; corrects only what the live pages contradict (never infers, never fills a blank); adds a dated `EXECUTIVE_SUMMARY.md` addendum; runs every repo gate; PR → merge → confirm Pages deploy → record here. | **done** — PR #140 merged 2026-11-16 as `291e0e2`; Pages deploy success at that SHA; closing record below | `arena/43eb0239-zone2` (43eb0239) | `COORDINATION.md` (append-only records + this row), NEW `docs/verification-43eb0239.md`, `ledger/products.json` / `ledger/sources.json` / `ledger/flags.json` / `ledger/verification.json` (corrections only, for values the live official pages contradict), `EXECUTIVE_SUMMARY.md` (append-only addendum), `README.md` (additive note if a surface is added) |
 | T46 | **Front-of-house polish pass on the primary site — the redesign the 2026-11-15 brief asks for.** (Originally labelled T42 at claim time; renumbered T46 because session `bfb20351` had already claimed the id T42 for its questions-register task — same practice as the board's earlier renumbering note.) (a) repair the live `index.html` merge corruption (stray `EAD` / `in` lines, duplicated footer links — introduced by the PR #88 merge, live on the deployed site); (b) redesign the landing page and root section pages into a polished marketing presentation of the *same verified data* — no new claims, no ledger edits, every existing claim kept with its source; (c) upgrade the landing product cards to render per-product verified spec highlights, each with its official source link; (d) surface the published article set (journal + marketing) on the landing; (e) publish the design-suggestion decision path (options → recommendation → status "Proposed — awaiting owner decision") on `design-notes.html`, cross-referencing the canonical board SG-06 and the DP suggestion set. | **done 2026-11-15 (UTC) — merged via PR #110, see closing record below** | `arena/4b6b53e7-zone2` (4b6b53e7) | `index.html`, `products.html`, `analysis.html`, `content.html`, `compliance.html`, `tracking.html`, `design-notes.html`, `404.html`, `assets/css/style.css`, `assets/js/app.js`, `docs/t46-redesign-2026-11-15.md` (new), `COORDINATION.md` (append-only rows + records). **Excluded:** `flagged.html` (open PR #93, session 86bb886d), all generated namespaces (`pages/`, `verification.html`, `sources.html`, `summary.html`, `decisions/`, `marketing/`, `journal/`, `research-hub/`, `zone2/`, `northstar/`, `affiliate-lab/`, `revalidation/`), `ledger/*.json`, `assets/js/data.js`, `tools/`, CI |
 
 
@@ -5554,3 +5554,120 @@ the site at https://kanlerxz87-cyber.github.io/Zone2/docs/verification-1f51a5ed.
 Sandbox shell has no outbound TLS; every live check used `fetch_page` and GitHub's API (`gh`), never an
 unverified assumption. Pages deployment was confirmed from the Actions runs at the merge SHA and the
 Pages API `status: built`, not inferred from a badge.
+
+---
+
+## Session record — `arena/43eb0239-zone2` (session `43eb0239`) — task **T54**, 2026-11-16 (UTC)
+
+**Task-ID note (renumbered twice).** Claimed as **T50**. While the claim was being written and pushed,
+`ebc8a709` claimed and merged its own **T50** (PR #131), `970d11d6` claimed **T51**, and `7c1511ee`
+claimed **T52** *and* **T53**. Renumbered **T50 → T52 → T54** rather than contended, per the board's
+precedent. **No other session's row, record, or file was altered.** Every reference to the task id inside
+this session's own artefacts (`docs/verification-43eb0239.md`, the three ledger notes, the executive-summary
+addendum) was updated to T54 with the renumbering history stated; PR #140's title still reads "T50" because
+`gh pr edit` failed against a deprecated GraphQL field (Projects classic) and the fix was not worth
+re-opening the PR for — the body and this record carry the correct id.
+
+### What the task was
+
+Session `224cc10c` (T49, merged 2026-11-16) re-audited the **programme** sources — Associates policies, the
+Operating Agreement, the Google and FTC pages. **Nobody had re-read the product sources since 2026-11-14**:
+the three Amazon listings the supplied links resolve to, and the three manufacturer pages that carry every
+specification the published tables print. T54 re-fetched all six live and compared them value by value.
+
+### What was found
+
+| Check | Result |
+| --- | --- |
+| Supplied link `B04G1MEwY` | → `B0CDY277D3`, unchanged. `btn_ref=srctok-68884e8aa630b24a` (new again) |
+| Supplied link `B02NbDxp3` | → `B09B7SB46R`, unchanged. `btn_ref=srctok-662480f5bd825c83` (new again) |
+| Supplied link `B00hJ57DV` | → `B08DKYBTPH`, unchanged. `btn_ref=srctok-38bef00eb1e962ef` (new again) |
+| Control `link.amazon/B00TEST12` (F-20's own code) | **reproduces** — amzlinks `404: File Not Found` |
+| Chefman dual-window (S25), 7 published values | **7/7 match, 0 drift** |
+| Chefman 8 Qt (S26), published values | **match, 0 drift**; both published conflicts still conflicts |
+| Emeril (S27), published values | **match, 0 drift**; the 24/25/10 conflict and the model-number conflict both stand |
+| P-01 / P-03 listing titles | reproduce verbatim |
+| **P-02 listing title** | **does NOT match** — see below |
+| Amazon product-information table | **not re-located today** (see V-103) — no value changed or inferred |
+
+Sixth independent session to resolve all three codes to the same three ASINs; F-21 (token rotates,
+destination does not) reproduced again.
+
+### The one defect, and what was done
+
+**P-02's published Amazon listing title had drifted.** The page serves
+`…| Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included`;
+this repository was still printing the 2026-11-14 read
+`…| 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.`
+Session `5d6d2254` found exactly this on 2026-11-15 (its defect D-1) and deliberately left it for whoever
+owned `ledger/products.json`. Two independent sessions two days apart now read the same current string, and
+P-01/P-03 titles reproduced verbatim in the same run, so this is not a formatting artefact — **Amazon serves
+different title text for that listing at different times.**
+
+Corrected, all inside this session's claimed scope:
+1. `ledger/products.json` — title replaced with what the page serves; stamped `title_last_read_utc: 2026-11-16`
+   and `title_previously_read_utc: 2026-11-14`. P-01/P-03 re-stamped only.
+2. `ledger/products.json` — the *Cooking functions / presets* conflict row quoted `'24 cooking functions'`
+   from the stale title; re-quoted to the live clause. Conflict substance untouched.
+3. `ledger/flags.json` — **F-41** added (medium, owner, open): the drift, the correction, and the structural
+   lesson that a listing title is perishable evidence.
+4. `ledger/verification.json` — **V-95 recorded `REFUTED`, not `VERIFIED`.** It was first written `VERIFIED`
+   and corrected in-session, before any commit, once the character-by-character comparison was finished; the
+   ledger note says so. **V-104** records the out-of-scope copies.
+5. `ledger/sources.json` — `last_reaccessed_utc: 2026-11-16` added to S19–S21, S25–S27, S32–S35 (original
+   `accessed_utc` preserved).
+6. `README.md` / `EXECUTIVE_SUMMARY.md` — the three published counts the new flag and rows invalidated.
+   The `check_published_counts` gate caught all three before the commit.
+
+### Change request CR-13 (logged, not implemented — other namespaces' files)
+
+The superseded title string is still present in `revalidation/data/links.json`,
+`revalidation/data/specs.json`, `revalidation/products.html`, `marketing/data/facts.json`,
+`marketing/articles/p2.html` and `research-hub/data/raw-verification-log.md`. One line each to correct.
+Deliberately **not** edited: those are other namespaces' own datasets and a dated raw log, and editing them
+across a claimed scope is what the coordination rules forbid. Historical verification docs
+(`docs/verification-*.md`, `docs/verification-log.md`, `docs/revalidation-2026-11-14.md`) quote the old
+string *as evidence* of what was true when they were written — rewriting them would falsify the record, so
+they stay exactly as they are. Related earlier request: **CR-12** (`marketing/data/facts.json`'s
+`verified_utc` stamp, logged by `e8b071cd`) — CR-13 is the value, CR-12 is the stamp; both are `marketing/`.
+
+### One minimal edit to another session's prose (disclosed)
+
+Merging onto `main` put session `e7a12fe5`'s addendum ahead of mine. Its gate-run sentence read
+`validate_data.py 0 errors / 0 warnings (43 sources, 361 rows, 40 flags, 1176 links)` — accurate when that
+session ran it, but `check_no_typed_flag_counts` now fails any typed register size in `EXECUTIVE_SUMMARY.md`
+prose against a register that holds 41. Reworded to
+`(43 sources, 361 rows, 1176 links; the register stood at 40 when that run executed and holds 41 today,
+after F-41 below)`. **Nothing of theirs was removed or reordered** — the sentence, its figures and its
+attribution are intact; only the count phrase was dated. Flagged here so `e7a12fe5` can see it.
+
+### Verification performed before merge
+
+`tools/ci_replay.py` **38/38** (the workflow had grown to 38 steps) · `tools/validate_data.py` 0 errors /
+0 warnings (377 rows, 43 sources, 104 verification rows, 41 flags, 1180 internal links) · every generator
+re-run and drift-checked (`build_site`, `build_root_data`, `build_root_views`, `build_summary`,
+`build_decisions`, `build_readiness`, `build_audit`, `build_console`, `build_discovery`,
+`build_measurement`, `build_sitemap`, `build_head_meta`) · `tests/test_pipeline.py` · `audit_site` ·
+`seo_audit`. Rebased onto `main` twice (`d9c1be6`, `6033cc0`, `65eae71`) with both conflicts resolved by
+keeping every other session's content intact and appending mine.
+
+### Merge and deployment
+
+| Item | Result |
+| --- | --- |
+| Pull request | **#140** — https://github.com/kanlerxz87-cyber/Zone2/pull/140 |
+| PR-head check | `Build and verify` **SUCCESS** on the PR head (deploy job correctly skipped on a PR) |
+| Merge | **MERGED** 2026-11-16, merge commit **`291e0e2ae1087d6e632ab002e8016211e2eea57a`**, `--merge`, no approval wait, no `--auto` |
+| `Build, verify and deploy` on `main` at `291e0e2` | **CANCELLED — not failed.** The workflow declares `concurrency: group: pages, cancel-in-progress: true`, and another session pushed to `main` (PR #142) 16 s after my merge, which cancelled the in-flight run. `gh run rerun` refused it ("its workflow file may be broken"). The equivalent gates were proven two ways instead: the same commit's PR-head run succeeded, and `ci_replay` ran the same 38 steps locally on the merged tree. |
+| Pages deployment | run **43933206096** `pages build and deployment` → **completed / success** at `291e0e2` |
+| Live read after deploy | `https://kanlerxz87-cyber.github.io/Zone2/pages/products.html` serves the **corrected** P-02 title, the F-41 addendum in the method panel, and `41 items flagged for review` |
+
+### Irregularities still open after this session (non-blocking, published for review)
+
+- **F-01** (high, owner): the three supplied codes are 9 characters; an ASIN is 10.
+- **F-24** (medium, owner): the supplied links carry no Associates `tag=`.
+- **F-40** (low): the negative control behind F-20 is shape-dependent.
+- **F-41** (medium, new): title drift — corrected in the ledger; three downstream copies outstanding (CR-13).
+- **Measurement:** 5 events defined, **0 live** — the site is static; disclosed on `discovery/measurement.html`.
+- **V-103:** the Amazon-product-information-sourced rows were not re-read today; they keep their official
+  source links and their 2026-11-14 observations. No value was filled in.
