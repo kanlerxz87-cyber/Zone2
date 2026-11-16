@@ -273,6 +273,16 @@ def footer(depth: str = "") -> str:
       <code>rel="sponsored nofollow"</code>. Where no official source states a value, the cell is a dash with
       the reason printed beside it &mdash; never an estimate. Traffic, click, conversion and revenue figures
       appear nowhere on this site because none has been measured.</p>
+      <p><strong>Decision surfaces.</strong>
+      <a href="{e(depth)}review-decide.html">Review board</a> &middot;
+      <a href="{e(depth)}review.html">Review: findings</a> &middot;
+      <a href="{e(depth)}review-questions.html">Review: questions</a> &middot;
+      <a href="{e(depth)}review-ideas.html">Review: ideas</a> &middot;
+      <a href="{e(depth)}review-trace.html">Requirements trace</a> &middot;
+      <a href="{e(depth)}pages/suggestions.html">Findings-hub suggestions</a> &middot;
+      <a href="{e(depth)}pages/questions.html">Findings-hub questions</a> &middot;
+      <a href="{e(depth)}design-notes.html">Design notes</a> &middot;
+      <a href="{e(depth)}playbook.html">Design &amp; content playbook</a></p>
       <p><strong>Operator surfaces and earlier builds.</strong>
       <a href="{e(depth)}products.html">Products</a> &middot;
       <a href="{e(depth)}analysis.html">Analysis</a> &middot;
@@ -296,7 +306,13 @@ def footer(depth: str = "") -> str:
       <a href="{e(depth)}affiliate-lab/index.html">Affiliate Lab</a> &middot;
       <a href="{e(depth)}revalidation/index.html">Revalidation</a> &middot;
       <a href="{e(depth)}northstar/index.html">Northstar prototype</a></p>
+      <p><a href="{e(depth)}pages/categories/index.html">Commission categories</a> &middot;
+      <a href="{e(depth)}journal/index.html">Journal</a> &middot;
+      <a href="{e(depth)}journal/dual-basket-air-fryers.html">Two baskets beat one long timer</a> &middot;
+      <a href="{e(depth)}journal/basket-vs-oven.html">Choose by geometry</a> &middot;
+      <a href="{e(depth)}journal/why-every-number-has-a-source.html">Why every number links to its source</a></p>
       <p>Official sources re-read {e(CHECKED_ON)}.
+      <a href="https://affiliate-program.amazon.com/">Amazon Associates</a> &middot;
       <a href="https://affiliate-program.amazon.com/help/operating/policies">Program Policies</a> &middot;
       <a href="https://affiliate-program.amazon.com/help/operating/agreement">Operating Agreement</a> &middot;
       <a href="{e(depth)}sources.html">full source register</a></p>
@@ -552,19 +568,23 @@ def build_index(facts: dict, board: dict) -> str:
 
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head">
-    <div><h2 class="pb-h2">One drift found while re-checking</h2>
-    <p class="pb-sub">Re-reading every load-bearing source on {e(CHECKED_ON)} turned up one thing that
-    is no longer true on the page it came from. It is one of
+    <div><h2 class="pb-h2">A drift found, and how it was handled</h2>
+    <p class="pb-sub">Re-reading every load-bearing source on {e(CHECKED_ON)} turned up one stored value
+    that was no longer true on the page it came from. It is one of
     <span id="flagCountHeading">&mdash;</span> items on the register.</p></div>
     <a class="pb-sec-link" href="flagged.html">Full flagged register &rarr;</a>
   </div>
-  <div class="pb-note"><b>The 26-quart Emeril listing's Amazon title has changed.</b> The record on this
-  site stores &ldquo;24 cooking functions, dual-speed fan and rotisserie for easy family meals&rdquo;;
-  the page now serves &ldquo;Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large
-  Interior, Six Cooking Accessories Included&rdquo;. No specification row changed and no value on this
-  site is wrong, but the stored title is stale. It is logged as a flagged item rather than quietly
-  overwritten, because the record is supposed to show what was read and when.
-  <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="{LINK_REL} noopener noreferrer">Check it yourself</a>.</div>
+  <div class="pb-note"><b>A listing title is perishable, and the record shows the whole arc.</b>
+  This project re-read every load-bearing official source on {e(CHECKED_ON)} and found that the Amazon
+  title stored for the 26-quart Emeril listing was no longer the title the page served. No specification
+  row was affected and nothing on this site was wrong &mdash; the stored <em>title</em> was stale. It was
+  published as a flagged item rather than quietly overwritten, because a record that silently rewrites
+  itself cannot be trusted. The register now carries it as <b>F-41</b>, and the stored title has since
+  been corrected by another session working on this repository in parallel &mdash; which is how the
+  process is meant to work: the drift is dated, visible and traceable rather than invisible.
+  <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="{LINK_REL} noopener noreferrer">Check it yourself</a> &middot;
+  <a href="flagged.html">the full flagged register</a> &middot;
+  <a href="questions.html#Q-T50-11">why the cadence question is still open</a>.</div>
 </div></section>
 """
     return page("index.html", title="Three air fryers, measured against their own spec sheets · Counter Notes",
