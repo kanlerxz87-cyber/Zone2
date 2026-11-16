@@ -63,6 +63,23 @@ DECISIONS = DATA["decision_vocabulary"]
 
 AREAS = sorted({p["area"] for p in PROPOSALS})
 
+_WORDS = {8: "Eight", 9: "Nine", 10: "Ten", 11: "Eleven", 12: "Twelve", 13: "Thirteen",
+          14: "Fourteen", 15: "Fifteen", 16: "Sixteen", 17: "Seventeen", 18: "Eighteen"}
+
+
+def word(n: int, *, lower: bool = False) -> str:
+    """A number spelled out, derived from the register so the prose cannot drift from the table."""
+    w = _WORDS.get(n, str(n))
+    return w.lower() if lower else w
+
+
+N_PROP = len(PROPOSALS)
+N_Q = len(QUESTIONS)
+N_IDEA = len(IDEAS)
+N_REQ = len(REQUIREMENTS)
+N_FIND = len(FINDINGS)
+N_MEAS = len(MEASUREMENTS)
+
 
 class BuildError(RuntimeError):
     """Raised rather than emitting a page that states something the register does not."""
@@ -149,6 +166,7 @@ def page(title: str, description: str, rel_path: str, body: str, active: str) ->
 {head_block(rel_path, title=f"{title} — Zone2", description=description, site_name="Zone2")}
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/review.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -219,7 +237,7 @@ def page_ideas() -> str:
       <div class="hero-eyebrow">Content ideas · {len(IDEAS)} concepts · none written</div>
       <h1 class="hero-title">Topics a reader would actually <em>search for</em>.</h1>
       <p class="hero-lede">
-        Five article concepts, each with the basis for thinking it will find an audience, the page it
+        {word(N_IDEA)} article concepts, each with the basis for thinking it will find an audience, the page it
         would become, and why it might convert. None of them is written and none of them is promised:
         writing one is a separate decision, and it needs a tagged link to be worth anything.
         The existing thirteen guides and three articles already answer the questions a spec sheet can
@@ -228,7 +246,7 @@ def page_ideas() -> str:
       <div class="hero-meta">
         <span class="chip">{len(IDEAS)} concepts</span>
         <span class="chip">0 written</span>
-        <span class="chip">2 need no new information at all</span>
+        <span class="chip">{sum(1 for i in IDEAS if not i["waiting_on"])} need no new information at all</span>
       </div>
     </div>
   </section>
@@ -239,7 +257,7 @@ def page_ideas() -> str:
       <p class="section-sub">
         A “trend” claim requires data this project does not have. Only one row here makes a dated,
         checkable claim — PS-13, about the November–December season — and it is stated as a season, not
-        as a measurement. The other four are argued from what the site already publishes, which is the
+        as a measurement. The other {word(N_IDEA - 1, lower=True)} are argued from what the site already publishes, which is the
         only honest basis available without a keyword tool (PQ-03).
       </p>
       <div class="table-wrap">
@@ -347,7 +365,7 @@ def page_review() -> str:
       <div class="hero-eyebrow">Decision surface · nothing here is implemented</div>
       <h1 class="hero-title">Choose a <em>path</em> before anything changes.</h1>
       <p class="hero-lede">
-        Twelve proposals for the 2026-11-16 request, each with three options, the cost and risk of
+        {word(N_PROP)} proposals for the 2026-11-16 request, each with three options, the cost and risk of
         each, the question it waits on, and an official source. Every row is still
         <strong>awaiting your decision</strong> — {awaiting} of {len(PROPOSALS)} of them — so nothing here has
         been built. Read the table, open a proposal, pick an option. That is the whole interface.
@@ -373,14 +391,14 @@ def page_review() -> str:
       <p class="section-sub">
         The <a href="review-trace.html">requirements trace</a> takes the request sentence by sentence
         and states, for each one, what exists, what is missing, and which row of this board would
-        close it. Three of the {len(REQUIREMENTS)} rows rest on no official source at all
-        ({no_source_reqs} do), because no official page defines what "automates product research"
-        must produce — those rows say so instead of inventing a definition.
+        close it. {no_source_reqs} of the {len(REQUIREMENTS)} rows rest on no official source at all,
+        because no official page defines what clauses like "automates product research" must produce —
+        those rows say so, in their own words, instead of borrowing a source they do not have.
       </p>
     </section>
 
     <section class="section">
-      <h2 class="section-title">The twelve proposals, on one scale</h2>
+      <h2 class="section-title">The {word(N_PROP, lower=True)} proposals, on one scale</h2>
       <p class="section-sub">{score_note}</p>
       <div class="table-wrap">
         <table>
@@ -429,8 +447,8 @@ def page_review() -> str:
   </div>
 """
     return page(
-        "Review board: twelve proposals, one decision at a time",
-        "Twelve scoped proposals for the 2026-11-16 request, each with three options, a cost, a risk, "
+        f"Review board: {word(N_PROP, lower=True)} proposals, one decision at a time",
+        f"{word(N_PROP)} scoped proposals for the 2026-11-16 request, each with three options, a cost, a risk, "
         "the open question it waits on and an official source. Every row is awaiting a decision and "
         "nothing on the board is implemented.",
         "review.html",
@@ -507,7 +525,7 @@ def page_questions() -> str:
     </section>
 
     <section class="section">
-      <h2 class="section-title">The four that decide the other five</h2>
+      <h2 class="section-title">The four that decide the rest</h2>
       <p class="section-sub">Most of the board collapses once these are answered. They are listed first on purpose.</p>
       <div class="cards-grid">
         <div class="card"><h3>PQ-01 · the account</h3><p>Without an approved Associates account and a tag, no link on this site can earn anything. Every commercial proposal is downstream of this row.</p><p><a href="#PQ-01">Read the row</a></p></div>
@@ -690,7 +708,7 @@ def page_trace() -> str:
     return page(
         "Requirements trace and design findings",
         "The 2026-11-16 request traced sentence by sentence, with what exists, what is missing and an "
-        "official source per row, plus twelve measurements and nine design findings.",
+        f"official source per row, plus {word(N_MEAS, lower=True)} measurements and {word(N_FIND, lower=True)} design findings.",
         "review-trace.html",
         body,
         "review-trace.html",

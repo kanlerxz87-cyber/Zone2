@@ -875,3 +875,49 @@ the suggestions board and the questions register, each with the action that woul
 **Flagged irregularities (non-blocking, on `pages/flags.html`):** F-01/F-03 (product identity not established by an official document), F-24 (no Associates tag on the supplied links), F-05 (Creators API unregistered; PA-API 5.0 deprecated), F-08 (no performance reports; no traffic/revenue figures published anywhere). None blocks merge; all are published for owner review with their source links and closing actions.
 
 **What remains owner-open:** confirm the product → intended-ASIN mapping with the brief owner; assign decisions for SG-01…SG-12 in `ledger/suggestions.json`; close or carry Q-01…Q-18 in `ledger/questions.json` (Q-02 Associate ID, Q-04 domain ownership, Q-17 declared Associates URL are the account-holder actions that unblock monetisation).
+
+---
+
+## Addendum — review board, requirements trace and the AI-slop diagnosis, 2026-11-16 (session `arena/7c1511ee-zone2`, task T52)
+
+**What this session was asked for, and what it found.** The 2026-11-16 request asked for four things that
+had no single home: suggestions a reviewer can *choose from* before anything is implemented; the questions
+and missing information that make a choice reasonable; suggestions aimed at *discovering* missing
+information; and a site that reads like a polished marketing site rather than generated output. The first
+three already existed in fragments across six boards with incompatible scales and no recorded decision. The
+fourth had never been measured. This session added one register that scores every proposal on one scale,
+traced the request sentence by sentence, and converted the "AI slop" complaint into nine counted findings.
+
+**Delivered — four new pages, one register, one gate, fifteen negative tests.**
+
+| Artifact | What it is |
+|---|---|
+| [`review.html`](review.html) | 12 proposals `PS-01…PS-12` on one scale: three options each, commitment/cost/risk per option, a recommendation, the question it waits on, and the official source. All 12 read **awaiting your decision** |
+| [`review-questions.html`](review-questions.html) | 9 questions `PQ-01…PQ-09`: what is verified, what is missing, the exact action that obtains it, and who takes it. **No row carries an answer** |
+| [`review-trace.html`](review-trace.html) | The request traced as 16 rows `RP-01…RP-16` (6 met, 5 partial, 5 not met), 12 measurements `PM-01…PM-12`, 9 design findings `PD-01…PD-09`, 11 official sources quoted verbatim |
+| [`review-ideas.html`](review-ideas.html) | 5 article concepts `PS-13…PS-17`, each with its basis, the page it would become, and why it might convert |
+| `docs/review-board.json` | The register. In `docs/` because `tools/build_decisions.py --check` hashes every file under `decisions/`, so a register stored there is permanent drift |
+| `tools/validate_review_board.py` + `tools/test_review_board.py` | An 12-rule gate and 17 injected defects, each of which must fire. Both run in CI with `build_review_board.py --check` |
+
+**The "AI slop" complaint, measured.** Nine findings, each counted on 2026-11-16 rather than asserted:
+68 of the 71 product links on the 20 marketing pages render as a *citation* ("M4 · www.amazon.com Amazon
+listing") rather than a way to buy (`PD-01`); there are **no product images** on any of the 20 pages
+(`PD-02`); the site's own methodology is its most repeated subject (`PD-03`); the hero's primary button
+("Which one to buy") leads to a page containing **zero** product links and which explicitly declines to
+name a winner (`PD-04`); **no page carries a ranked shortlist**, the one page type a shopper searches for
+(`PD-05`); the root navigation is **76 links** in two groups (`PD-06`); every page prints a verification
+date that Amazon's 60-day freshness guidance will keep failing (`PD-07`); no page names an author or
+explains that it is generated from a source register (`PD-08`); and seven decision boards publish
+proposals with the choice visible on none of them (`PD-09`).
+
+**What did *not* change.** No product fact, count, quotation or flag owned by an earlier session was
+edited. The three supplied links were re-resolved live and are unchanged (`B04G1MEwY → B0CDY277D3`,
+`B02NbDxp3 → B09B7SB46R`, `B00hJ57DV → B08DKYBTPH`), still 9-character codes, still carrying no Associates
+tag. `release/index.html` moved only because RR-10's `{measure}` token is derived: 140 → 144 published
+pages, from the four pages this task added.
+
+**The three decisions that unblock the most, if only one is read.** `PS-08` (name the audience — shopper
+first, operator views labelled internal), `PS-05` (turn citation labels into buy links with the source kept
+beside them) and `PS-02` (make the products the subject and the method a linked feature). None of them
+needs an Amazon account, a domain, or a paid tool. All three are still awaiting a decision, because a
+proposal is not an implementation and this session did not decide on the owner's behalf.

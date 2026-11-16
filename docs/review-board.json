@@ -382,9 +382,9 @@
     {
       "id": "PM-09",
       "measure": "Decision boards that publish proposals",
-      "value": "6 before this task, 7 after",
-      "how_measured": "pages/suggestions.html, console/suggestions.html, audit/suggestions.html, discovery/suggestions.html, marketing/improvements.html, decisions/index.html; this task adds decisions/review.html",
-      "means": "Six places already asked for a decision and the answer was not visible in any of them. Adding a seventh without saying that would make the problem worse, so PS-12 proposes consolidation instead.",
+      "value": "5 boards carry proposals today, 6 counting the decisions hub; 6 files in total",
+      "how_measured": "pages/suggestions.html, console/suggestions.html, audit/suggestions.html, discovery/suggestions.html, marketing/improvements.html carry proposals; decisions/index.html is a hub; review.html is this task's surface",
+      "means": "Several places ask for a decision and none results in a visible one. The exact count depends on whether the decisions hub is counted as a board - this row publishes both readings rather than picking one silently (see the verification record).",
       "source_ids": []
     },
     {
@@ -1167,7 +1167,7 @@
     },
     {
       "id": "PD-09",
-      "title": "Seven decision boards, and the choice is visible on none of them",
+      "title": "Several decision boards, and the choice is visible on none of them",
       "what_a_reader_sees": "Suggestions, proposals and options - and no recorded selection anywhere.",
       "why_it_matters": "The brief asks for a section where someone can choose the best path. Multiple sections each invite a choice and none records one, so a reviewer cannot tell which board is authoritative or which proposal was ever accepted.",
       "proposed_fix": "PS-12",

@@ -9,7 +9,7 @@ The 2026-11-16 request states the contract this gate enforces:
 
 A suggestion board is exactly where that rule is easiest to break, because a proposal *is* an
 assertion: it claims a problem exists, that a fix would work, and that a cost is realistic.
-So this gate holds the register to eleven rules, and most of them are defects this repository
+So this gate holds the register to twelve rules, and most of them are defects this repository
 has already shipped at least once in another namespace:
 
    1. source integrity      - every cited id resolves; a dangling citation is a rumour with a number
@@ -366,6 +366,53 @@ def check_pages(rep: Report) -> None:
                     rep.fail(f"{name}: link {href!r} targets a fragment that does not exist")
 
 
+def check_structure(rep: Report) -> None:
+    """Rule 12: the pages are static documents. No script, and balanced tags.
+
+    The sandbox cannot install a browser, so the pages are not screenshot-tested. This rule is what
+    is checked instead: a page that ships no JavaScript cannot have a runtime defect, and a page
+    whose tags balance cannot render as a collapsed layout because of this session's markup.
+    """
+    VOID = {"meta", "link", "br", "img", "input", "hr", "source", "area", "base", "col",
+            "embed", "param", "track", "wbr"}
+
+    class Balancer(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__()
+            self.stack: list[str] = []
+            self.errors: list[str] = []
+            self.scripts = 0
+
+        def handle_starttag(self, tag, attrs):
+            if tag == "script":
+                self.scripts += 1
+            if tag not in VOID:
+                self.stack.append(tag)
+
+        def handle_endtag(self, tag):
+            if not self.stack:
+                self.errors.append(f"stray </{tag}>")
+                return
+            if self.stack[-1] == tag:
+                self.stack.pop()
+            else:
+                self.errors.append(f"expected </{self.stack[-1]}> but found </{tag}>")
+
+    for name in rb.PAGES:
+        path = REPO / name
+        if not path.is_file():
+            continue
+        b = Balancer()
+        b.feed(path.read_text(encoding="utf-8"))
+        if b.scripts:
+            rep.fail(f"{name}: ships {b.scripts} <script> element(s) - these pages must be static")
+        if b.stack:
+            rep.fail(f"{name}: unclosed element(s) {b.stack}")
+        for err in b.errors:
+            rep.fail(f"{name}: {err}")
+    rep.stats["structure_checks"] = len(rb.PAGES)
+
+
 def check_counts(rep: Report) -> None:
     """Rule 7: every number printed on the hub is recomputed here, not trusted from the page."""
     raw = (REPO / "review.html").read_text(encoding="utf-8")
@@ -403,6 +450,7 @@ def main() -> int:
     check_requirements(rep)
     check_findings(rep)
     check_pages(rep)
+    check_structure(rep)
     check_counts(rep)
 
     print(json.dumps(rep.stats, indent=2))

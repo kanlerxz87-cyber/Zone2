@@ -162,6 +162,18 @@ def _(d):
     return d
 
 
+@mutation("a score is a float rather than an integer", "is not an integer 1-5")
+def _(d):
+    d["proposals"][3]["effort"] = 2.5
+    return d
+
+
+@mutation("an idea reads as written while undecided", "reads as implemented")
+def _(d):
+    d["ideas"][1]["why_it_converts"] = "It was built and is now live."
+    return d
+
+
 def main() -> int:
     failures = []
 
