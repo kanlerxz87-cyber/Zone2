@@ -894,9 +894,10 @@
           "blocks": [
             {
               "kind": "prose",
-              "html": "The Emeril is not a basket fryer with a bigger badge. Its published shape is a countertop oven: dual French doors, 360-degree hot-air circulation with a dual-speed fan, ten named cooking modes including Bake, Roast, Proof and Warm, and seven accessories of which the manufacturer names an air fry basket, a rotisserie spit and a bake pan. The accessory count ships as partial: the page says seven and names three.",
+              "html": "The Emeril is not a basket fryer with a bigger badge. Its published shape is a countertop oven: dual French doors, 360-degree hot-air circulation with a dual-speed fan, ten named cooking modes including Bake, Roast, Proof and Warm, and an accessory count the official pages disagree about: the manufacturer's description says seven — an air fry basket, a rotisserie spit, a bake pan and more, without itemising the rest — while the Amazon listing title for the same model says six. Both statements were read on 2026-11-16. The accessory count ships as a conflict, not a number: both are official, neither is averaged, and no count is published as the answer.",
               "src": [
-                "M3"
+                "M3",
+                "M4"
               ]
             },
             {
@@ -1089,9 +1090,10 @@
             },
             {
               "kind": "prose",
-              "html": "The <strong>26 Qt French-door oven</strong> is the four-to-six-person machine: a cavity sized for a whole chicken or a 12-inch pizza, modes that include Bake, Roast, Proof and Warm, and an accessory set that names a rotisserie spit and a bake pan among its seven pieces.",
+              "html": "The <strong>26 Qt French-door oven</strong> is the four-to-six-person machine: a cavity sized for a whole chicken or a 12-inch pizza, modes that include Bake, Roast, Proof and Warm, and an accessory set the manufacturer counts as seven pieces and names a rotisserie spit and a bake pan among them — a count the Amazon listing title for the same model answers with six (read 2026-11-16), so it is published as a conflict.",
               "src": [
-                "M3"
+                "M3",
+                "M4"
               ]
             },
             {
@@ -1781,7 +1783,7 @@
         ],
         [
           "Air fryer accessories, priced by what they do",
-          "Blocked: the Emeril page names an air fry basket, a rotisserie spit and a bake pan among 7 accessories and does not enumerate all seven."
+          "Blocked: the Emeril page names an air fry basket, a rotisserie spit and a bake pan among 7 accessories and does not enumerate all seven — and the Amazon listing title for the same model says six, so the count itself is now published as a conflict (read 2026-11-16)."
         ],
         [
           "Can you cook frozen food in a dual-basket fryer? (sync timing, in practice)",
