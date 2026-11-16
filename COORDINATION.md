@@ -5259,3 +5259,15 @@ Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live check
 | Irregularities | Supplied tokens remain 9-character/unconfirmed mappings; no Associates tag/account access; no live analytics/events or substantiated performance/trend metrics; companion metadata report remains as previously documented. All are linked in the public Flagged for Review pages and in the new dated review report. |
 | No owner access | No connected apps or Associates Central credentials were available. Those account-specific states were left unknown; no credentials were requested. |
 | Branch constraint | Work remained on the Arena-pinned `arena/ebc8a709-zone2`; no branch was created or switched. |
+
+### T50 deployment/merge confirmation (post-merge close-out)
+
+| Item | Result |
+|---|---|
+| Pull request | **#131** — https://github.com/kanlerxz87-cyber/Zone2/pull/131 |
+| PR checks | `Build and verify` passed on PR head `0b8f66f89f3267f0a1f0ba7953549d27d5305361`; deploy was correctly skipped on the PR. |
+| Merge | **MERGED** 2026-11-16T18:29:47Z by merge commit `4a062e310f57d53fad4eea44e0320c55bfb4e7b1`. |
+| Main CI | Run **43929413561** completed successfully at the merge SHA; `Build and verify` and `Deploy to GitHub Pages` passed. Only runner/action deprecation and Ubuntu migration notices were reported; no failing checks. |
+| Pages workflow | Run **43929412469** completed successfully; build, status report, and deploy jobs all passed. |
+| Published site | GitHub Pages API reports `built` at the configured `main` `/` source: https://kanlerxz87-cyber.github.io/Zone2/ |
+| Follow-up record | This coordination-only post-merge row is being submitted as a small follow-up PR because #131 was already merged before the asynchronous main-branch deployment finished. |
