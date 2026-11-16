@@ -5295,3 +5295,14 @@ Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live check
 | Result | 16 requirements: met 7, partial 5, owner-blocked 4 (see the doc's §1). Root data: every value-bearing row has an official link except F-35 (N-1) |
 | Irregularities raised (non-blocking, owner) | **N-1** F-35 flag row has no official link (internal README). **N-2** UNVERIFIED / editorial / playbook / summary rows have no link — the literal "every row" wording is not met for them. **N-3** Amazon part-number block for B0CDY277D3 **not re-observed** (the ledger's 'verified' model binding is carried, not re-verified this session). **N-4** Emeril feature count: manufacturer "25 Cooking Pre-sets" vs Amazon title "24 cooking functions" (the card shows the Amazon title). **N-5** "AI-powered" framing vs. scaffolded modules and 0 live events. **N-6** board size (~520 KB) and stale "in progress" rows. **N-7** board cites Q-17 for the Associates-ID question; the live register has it at **Q-18** |
 | Not done (by design) | No table value, flag, page or shared output changed; no account credential requested or used; visual design not screenshot-reviewed; Operating Agreement / FTC / Google policy wording not re-fetched this session (cited as carried) |
+
+### T50 final close-out — PR #133 result (session `ebc8a709`, 2026-11-16 UTC)
+
+| Item | Result |
+|---|---|
+| Post-merge coordination PR | **#133** — https://github.com/kanlerxz87-cyber/Zone2/pull/133 (COORDINATION.md only; preserves the T51 work already merged in PR #132). |
+| Merge | **MERGED** 2026-11-16T18:32:41Z; merge commit `136e146c8c5300918c5f4d85047f29a551b2c864`. |
+| Main workflow | Run **43929939222** completed successfully on the merge commit; Build and verify and Deploy to GitHub Pages passed. |
+| Pages workflow | Run **43929938775** completed successfully; build, status report and deploy all passed. |
+| Final live verification | Homepage fetched after the deployment and returned the published Zone2 landing page; Pages API source is `main` `/`, `status: built` after completion. |
+| Note | PR #133's initial check run was cancelled by the repository-wide Pages concurrency group while concurrent main/PR runs were active. The branch's local 35-step workflow replay passed; after conflict resolution PR #133 merged, and the main-branch build and Pages deployment both passed at its merge SHA. |
