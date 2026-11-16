@@ -70,7 +70,7 @@ const PRODUCTS = [
     resolvesToAsin: "B09B7SB46R",
     resolvesToUrl: "https://www.amazon.com/dp/B09B7SB46R",
     brand: "Emeril Lagasse",
-    title: "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+    title: "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
     category: "Home & Kitchen",
     categoryPath: "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
     price: null,
@@ -280,10 +280,10 @@ const SPECS = [
   {
     pid: "p02",
     attribute: "Cooking functions / presets",
-    value: "CONFLICT — Amazon listing title: '24 cooking functions'; Emeril Everyday description: '24 one-touch cooking presets'; Emeril Everyday specification tile: '25 Cooking Pre-sets'; Emeril Everyday feature block headed '10-In-1 Versatility' lists ten functions (Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm)",
+    value: "CONFLICT — Amazon listing title (as served 2026-11-16): '24 One-Touch Preset Options'; Emeril Everyday description: '24 one-touch cooking presets'; Emeril Everyday specification tile: '25 Cooking Pre-sets'; Emeril Everyday feature block headed '10-In-1 Versatility' lists ten functions (Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm)",
     status: "conflict",
     source: "https://www.amazon.com/dp/B09B7SB46R",
-    sourceLabel: "Amazon listing title; Emeril Everyday official store (description, specification tile and '10-In-1 Versatility' feature block) — the manufacturer's own page disagrees with itself (flag F-19)",
+    sourceLabel: "Amazon listing title as served 2026-11-16; Emeril Everyday official store (description, specification tile and '10-In-1 Versatility' feature block) — the manufacturer's own page disagrees with itself (flag F-19). The Amazon title served a different second clause on 2026-11-14 — '24 cooking functions' — which this repository quoted until 2026-11-16 (flag F-41).",
     sourceIds: ["S20", "S27"],
   },
   {
@@ -940,7 +940,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 40;
+const CANONICAL_FLAG_COUNT = 41;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1383,6 +1383,17 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-40",
     source: "https://link.amazon/ZZ9QQ7X4LK",
     sourceIds: ["S43", "S32", "S36", "S33"],
+  },
+  {
+    item: "F-41 — A listing title is perishable: P-02's published Amazon title had drifted from the live listing for two days before this session corrected it",
+    detail: "Session 5d6d2254 recorded this as defect D-1 on 2026-11-15 and deliberately did not fix it, because ledger/products.json was another session's scope at the time. Re-read on 2026-11-16 by session 43eb0239 (T54), the drift reproduces: https://www.amazon.com/dp/B09B7SB46R serves 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included', while this repository was publishing the 2026-11-14 read - '... | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.' Two independent sessions, two days apart, read the same current string, so the stored value has been replaced and the observation is stamped (title_last_read_utc / title_previously_read_utc). P-01 and P-03 titles reproduced verbatim on the same day, which rules out a formatting difference in how this site reads titles.",
+    severity: "medium",
+    impact: "Corrected in ledger/products.json and therefore in every surface generated from it. NOT yet corrected: revalidation/data/links.json, revalidation/data/specs.json, revalidation/products.html, marketing/data/facts.json, marketing/articles/p2.html and research-hub/data/raw-verification-log.md still carry the superseded string, and those are other namespaces' files - logged as change request CR-13 in COORDINATION.md rather than edited across a claimed scope. The residual risk is structural, not cosmetic: any Amazon listing title can change again, and a title read on one day is only defensible for as long as it carries the date it was read.",
+    actionRequired: "Owner: (1) accept or reject CR-13 - correcting the three downstream copies is a one-line change in each; (2) decide whether a listing title should be re-read on a schedule rather than stored indefinitely, which is the territory of the decision board. No product attribute, price or rating is affected either way.",
+    ledgerFlag: "F-41",
+    ledgerUrl: "pages/flags.html#F-41",
+    source: "https://www.amazon.com/dp/B09B7SB46R",
+    sourceIds: ["S20", "S27"],
   },
 ];
 /* END GENERATED: flags */

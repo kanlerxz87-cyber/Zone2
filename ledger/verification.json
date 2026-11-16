@@ -1,6 +1,6 @@
 {
-  "note": "Verification log. One row per claim that had to be checked to build or review this repository. Method is reproducible as described; verdicts were recorded on 2026-11-13 by reading the cited page, not from recollection. UNVERIFIED rows stay blank on the site. Rows V-33..V-50 were added 2026-11-14 by session a133aa61 during final integration: this session had live outbound access, so the governing pages, the three supplied URLs and the three manufacturer pages were re-read and compared line by line instead of being carried forward from another session's notes. Rows V-51..V-70 were added 2026-11-14 by session ba8b2d38 (T27): an independent fourth pass that re-fetched every official Amazon page cited by this repository, all three supplied links, all three /dp/<token> URLs, and ran one new control (V-68) that no earlier session had run. Rows V-71..V-82 were added 2026-11-14 by session d3ce1c29 (T26): an independent re-read of the governing Amazon pages, the three-ASIN replication of the plpRedirect=mhFallback control (previously run for one ASIN only, V-45), a live re-resolution of all three supplied links, and the row count of S04's bounty and bonus tables.",
-  "as_of": "2026-11-15",
+  "note": "Verification log. One row per claim that had to be checked to build or review this repository. Method is reproducible as described; verdicts were recorded on 2026-11-13 by reading the cited page, not from recollection. UNVERIFIED rows stay blank on the site. Rows V-33..V-50 were added 2026-11-14 by session a133aa61 during final integration: this session had live outbound access, so the governing pages, the three supplied URLs and the three manufacturer pages were re-read and compared line by line instead of being carried forward from another session's notes. Rows V-51..V-70 were added 2026-11-14 by session ba8b2d38 (T27): an independent fourth pass that re-fetched every official Amazon page cited by this repository, all three supplied links, all three /dp/<token> URLs, and ran one new control (V-68) that no earlier session had run. Rows V-71..V-82 were added 2026-11-14 by session d3ce1c29 (T26): an independent re-read of the governing Amazon pages, the three-ASIN replication of the plpRedirect=mhFallback control (previously run for one ASIN only, V-45), a live re-resolution of all three supplied links, and the row count of S04's bounty and bonus tables. Rows V-90..V-103 were added 2026-11-16 by session 43eb0239 (T54): an independent line-by-line re-read of the six official *product* sources - the three Amazon listings the supplied links resolve to, and the three manufacturer pages - which no session had re-read since 2026-11-14. All three supplied links were re-resolved, the unissued-code control was re-run, and every published specification value sourced to a manufacturer page was compared against the live text. V-103 records the one gap: the Amazon product-information table could not be re-located today, so the rows sourced only to it are carried forward unchanged and are not re-asserted. Corrections 2026-11-16: V-95 was first written VERIFIED and changed to REFUTED within the same session, before any commit, once the stored Emeril listing title was compared character by character against the live page; V-104 was appended to record the out-of-scope copies of that title.",
+  "as_of": "2026-11-16",
   "rows": [
     {
       "id": "V-01",
@@ -1010,6 +1010,179 @@
         "S23"
       ],
       "consequence": "Verbatim: \"our Associates team will check your application once you've driven qualified sales (we require at least three within the first 180 days). Please note that personal orders do not qualify.\"; \"All Sites must have robust original content (even when advertising is removed) - a good rule of thumb is at least 10 posts. They must be publicly available\"; \"Content on your website must be recent (generally within the last 60 days). You must own your website.\"; \"Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application.\"; \"Unfortunately, we aren't able to reassess an application once it's been rejected.\" Accepted social networks are listed by name (Facebook open group and fan pages, Instagram, Twitter, YouTube, TikTok, Twitch.tv) with \"in most cases, at least 500\" organic followers or likes required and the exact page URL demanded. Published on paths.html as the launch bar."
+    },
+    {
+      "id": "V-90",
+      "subject": "Supplied link 1, re-resolved 2026-11-16",
+      "claim": "https://link.amazon/B04G1MEwY still resolves to one specific listing, amazon.com/dp/B0CDY277D3",
+      "method": "live fetch on 2026-11-16; the served page title and the breadcrumb are read from the response, not from memory",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S33",
+        "S19"
+      ],
+      "consequence": "Sixth independent session to resolve this code to the same ASIN. The rewrite token on this fetch was btn_ref=srctok-68884e8aa630b24a, different again from every earlier day - so F-21 (token rotates, destination does not) reproduces once more. No product attribute is sourced to the link behaviour."
+    },
+    {
+      "id": "V-91",
+      "subject": "Supplied link 2, re-resolved 2026-11-16",
+      "claim": "https://link.amazon/B02NbDxp3 still resolves to amazon.com/dp/B09B7SB46R",
+      "method": "live fetch on 2026-11-16; served page title and breadcrumb read from the response",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S34",
+        "S20"
+      ],
+      "consequence": "Destination unchanged. btn_ref=srctok-662480f5bd825c83 on this fetch (new value, same ASIN)."
+    },
+    {
+      "id": "V-92",
+      "subject": "Supplied link 3, re-resolved 2026-11-16",
+      "claim": "https://link.amazon/B00hJ57DV still resolves to amazon.com/dp/B08DKYBTPH",
+      "method": "live fetch on 2026-11-16; served page title and breadcrumb read from the response",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S35",
+        "S21"
+      ],
+      "consequence": "Destination unchanged. btn_ref=srctok-38bef00eb1e962ef on this fetch (new value, same ASIN)."
+    },
+    {
+      "id": "V-93",
+      "subject": "Unissued-code control, re-run 2026-11-16",
+      "claim": "F-20's positive control still reproduces: link.amazon/B00TEST12 does not fall back to a live product page",
+      "method": "live fetch on 2026-11-16 of the exact control URL F-20 names",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S32"
+      ],
+      "consequence": "Served response is amzlinks.in's '404: File Not Found / You've clicked on an invalid URL.' page - identical to the recorded observation. F-40's caveat still applies: this control is anchored to this specific code, and other unissued shapes behaved differently on other days; it is not a general claim about every unknown code."
+    },
+    {
+      "id": "V-94",
+      "subject": "Destination listing 1 (B0CDY277D3) - identity rows re-read 2026-11-16",
+      "claim": "title, brand and category path published for this ASIN match the live listing",
+      "method": "live fetch of https://www.amazon.com/dp/B0CDY277D3 on 2026-11-16; compared against ledger/products.json P-01.resolved",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S19"
+      ],
+      "consequence": "Served title: 'CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black'; breadcrumb Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers. Both match the published rows character for character."
+    },
+    {
+      "id": "V-95",
+      "subject": "Destination listing 2 (B09B7SB46R) - identity rows re-read 2026-11-16",
+      "claim": "the brand and category path published for this ASIN match the live listing; the TITLE did NOT",
+      "method": "live fetch of https://www.amazon.com/dp/B09B7SB46R on 2026-11-16; the stored title in ledger/products.json P-02.resolved was compared character by character with the served <title>",
+      "verdict": "REFUTED",
+      "source_ids": [
+        "S20"
+      ],
+      "consequence": "The listing serves 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'. This repository was publishing a different second clause - '26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.' - read on 2026-11-14. Session 5d6d2254 recorded the same drift on 2026-11-15 (its defect D-1) and left it for the owner of ledger/products.json; two independent sessions two days apart now read the same current string. Corrected in this session: the stored title is now what the page serves, stamped title_last_read_utc=2026-11-16 / title_previously_read_utc=2026-11-14, and logged as flag F-41. Brand and category path matched throughout. P-01 and P-03 titles reproduced verbatim on the same day, so this is not a formatting artefact: Amazon serves different title text for this listing at different times."
+    },
+    {
+      "id": "V-96",
+      "subject": "Destination listing 3 (B08DKYBTPH) - identity rows re-read 2026-11-16",
+      "claim": "title, brand and category path published for this ASIN match the live listing",
+      "method": "live fetch of https://www.amazon.com/dp/B08DKYBTPH on 2026-11-16; compared against ledger/products.json P-03.resolved",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S21"
+      ],
+      "consequence": "Served title: 'Chefman Air Fryer 8 Qt | TurboFry(R) 4-in-1 with 450 degrees F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel'; same category path. The '450 degrees F Hi-Fry' figure in the title is the Amazon half of conflict row F-22 and it is still there."
+    },
+    {
+      "id": "V-97",
+      "subject": "Manufacturer page S25 (Chefman TurboFry Touch 6 Qt Dual-Window) - every published value re-read 2026-11-16",
+      "claim": "all seven specification values the site sources to this page are still exactly what the page states",
+      "method": "live fetch on 2026-11-16; the Specifications block was compared value by value against P-01.resolved.specs",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S25"
+      ],
+      "consequence": "Verbatim from the served page: 'Capacity: 6 Qt / 5.67 L'; '200-450 degrees F / 95-235 degrees C temperature range'; 'Dimensions: 13.38 in x 11.81 in x 10.63 in / 33.98 cm x 30 cm x 27 cm'; 'Weight: 13.3 lbs / 6.03 kg'; 'Power: 1700W/120V'; 'Model Number: RJ38-SQPF-3TDB-2W'; 'cETL approved with a 1-year Chefman(R) assurance'. 7 of 7 match - 0 drift."
+    },
+    {
+      "id": "V-98",
+      "subject": "Manufacturer page S26 (Chefman 8 Qt TurboFry Touch) - every published value re-read 2026-11-16",
+      "claim": "all specification values the site sources to this page are still exactly what the page states",
+      "method": "live fetch on 2026-11-16; the Specifications block was compared value by value against P-03.resolved.specs",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S26"
+      ],
+      "consequence": "Verbatim from the served page: 'Capacity: 5 Qt or 8 Qt / 4.73 L or 7.57 L' (the 8 Qt model is the published row); '200-400 degrees F / 95-205 degrees C temperature range'; 'Power: 1700W/120V'; 'Dimensions: (8 Qt Model) 15.4 in x 12.6 in x 13.5 in / 39.11 cm x 32 cm x 34.29 cm'; 'Weight: (8 Qt Model) 12.8 lbs / 5.8 kg'; 'Model Number: RJ38-SQSS-8T'; 'cETL approved with a 1-year Chefman(R) assurance'; Features block '4 cooking presets' and 'Touch screen controls'. All match - 0 drift."
+    },
+    {
+      "id": "V-99",
+      "subject": "Manufacturer page S27 (Emeril Everyday French Door AirFryer 360) - every published value re-read 2026-11-16",
+      "claim": "all specification values the site sources to this page are still exactly what the page states",
+      "method": "live fetch on 2026-11-16; the specification tiles, the title, the description and the feature block were compared against P-02.resolved.specs",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S27"
+      ],
+      "consequence": "Verbatim from the served page: title 'EMERIL LAGASSE FRENCH DOOR AIRFRYER 360(TM) TOASTER OVEN COMBO, 26 QT'; model '4-00675-02A-VN'; tiles '26-Quart Capacity / preparing food for 4-6 people', '24.6 Liters', 'Dual-Speed Fan', '25 Cooking Pre-sets', '16.9in D x 15.8in W x 14.8in H', 'Temperature Control', '120 volts'; '1-Years Warranty'; description 'Equipped with 24 one-touch cooking presets' and 'Included are 7 premium accessories'; feature block '10-In-1 Versatility' listing Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm. All match - 0 drift."
+    },
+    {
+      "id": "V-100",
+      "subject": "Conflict row: Emeril model number - re-tested 2026-11-16",
+      "claim": "the two official sources still disagree, so the published row must stay a conflict and not be resolved to one number",
+      "method": "live fetch of both sources on 2026-11-16 and comparison of the model string each one prints",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S20",
+        "S27"
+      ],
+      "consequence": "Amazon still shows 4-00675-02X-VN; Emeril Everyday still shows 4-00675-02A-VN. The conflict stands exactly as published (F-23). Nothing was chosen between them."
+    },
+    {
+      "id": "V-101",
+      "subject": "Conflict row: Emeril cooking functions - re-tested 2026-11-16",
+      "claim": "the Emeril manufacturer page still contradicts itself (24 in the description, 25 on the specification tile, 10 in the feature block), so the published row must stay a conflict and not be resolved to one number",
+      "method": "live fetch of both official sources on 2026-11-16 and comparison of every count each page prints against the stored conflict row",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S20",
+        "S27"
+      ],
+      "consequence": "Every Emeril-side figure reproduces verbatim, and the Amazon listing still states 24, now as '24 One-Touch Preset Options'. The conflict stands (F-19); nothing was averaged or picked. One correction: the conflict row's Amazon quote still read \"'24 cooking functions'\" from the 2026-11-14 title, which the listing no longer serves, so it has been re-quoted to the live wording. The substance of the conflict - 24 against 25 against 10 - is unchanged."
+    },
+    {
+      "id": "V-102",
+      "subject": "Conflict row: Chefman 8 Qt maximum temperature - re-tested 2026-11-16",
+      "claim": "the Amazon listing title still says 450 degrees F while the manufacturer page still says 200-400 degrees F, so the published conflict stands",
+      "method": "live fetch of both sources on 2026-11-16",
+      "verdict": "VERIFIED",
+      "source_ids": [
+        "S21",
+        "S26"
+      ],
+      "consequence": "F-22 stands. The manufacturer's 200-400 degrees F range remains the value published as the specification; the Amazon title figure is published beside it as the conflicting one."
+    },
+    {
+      "id": "V-103",
+      "subject": "Amazon product-information block - not re-located on 2026-11-16",
+      "claim": "the rows this repository sources only to the Amazon product-information table (controls, special features, material, colour, UPC, and B09B7SB46R's wattage / temperature / model rows) could not be re-read today, so they are carried forward on their existing evidence rather than re-asserted",
+      "method": "live fetches of https://www.amazon.com/dp/B0CDY277D3, /B09B7SB46R and /B08DKYBTPH on 2026-11-16; the listing body is request-dependent, and two consecutive fetches of the same URL returned different chunk counts (22 and 16 for B09B7SB46R), so the product-information table could not be located with confidence",
+      "verdict": "UNVERIFIED",
+      "source_ids": [
+        "S19",
+        "S20",
+        "S21"
+      ],
+      "consequence": "No value was changed, filled in, or inferred. Every one of these rows keeps its published official source link and its 2026-11-14 observation. What today's run does establish for all three products is the identity layer (destination ASIN, listing title, brand, category path - V-90 to V-96) and every manufacturer-sourced specification value (V-97 to V-99), which is the majority of the published table. This row exists so the limit of today's re-verification is on the record rather than implied to be complete."
+    },
+    {
+      "id": "V-104",
+      "subject": "Dated copies of the pre-2026-11-16 Emeril title that live outside this session's scope",
+      "claim": "the corrected title is now published everywhere this repository's canonical ledger reaches, and the copies that remain are logged rather than silently edited",
+      "method": "repo-wide search for the superseded title string; each hit classified as generated-from-ledger, historical record, or another namespace's own dataset",
+      "verdict": "OBSERVED",
+      "source_ids": [
+        "S20"
+      ],
+      "consequence": "The superseded string is still present in revalidation/data/links.json, revalidation/data/specs.json, revalidation/products.html, marketing/data/facts.json, marketing/articles/p2.html and research-hub/data/raw-verification-log.md. The first group is other namespaces' own datasets; the last is a dated raw log. Per the coordination rules they are logged as change request CR-13 in COORDINATION.md instead of being edited across a claimed scope. Historical verification docs (docs/verification-*.md, docs/verification-log.md, docs/revalidation-2026-11-14.md) quote the old string as evidence of what was true when they were written and are deliberately left intact. Every surface generated from ledger/products.json now carries the corrected title."
     }
   ]
 }

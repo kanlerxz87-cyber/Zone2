@@ -1,5 +1,5 @@
 {
-  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28–S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing Associates pages were re-read live; S32-S35 were added 2026-11-14 by session 4338f55e for the unknown-code control and the three supplied short links. The two sessions initially reused the same ids; tools/merge_ledger_2026_11_14.py resolved the collision so no id points at two different pages. S36-S37 were added 2026-11-14 by session ba8b2d38 (T27) during an independent live re-fetch: S36 is a control that passes a VALID 10-character ASIN to the link.amazon short-link service, and S37 is the Associates program home page, cited for the 'up to 10%' commission ceiling the dashboard publishes.",
+  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28–S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing Associates pages were re-read live; S32-S35 were added 2026-11-14 by session 4338f55e for the unknown-code control and the three supplied short links. The two sessions initially reused the same ids; tools/merge_ledger_2026_11_14.py resolved the collision so no id points at two different pages. S36-S37 were added 2026-11-14 by session ba8b2d38 (T27) during an independent live re-fetch: S36 is a control that passes a VALID 10-character ASIN to the link.amazon short-link service, and S37 is the Associates program home page, cited for the 'up to 10%' commission ceiling the dashboard publishes. RE-ACCESS NOTE 2026-11-16 (session 43eb0239, T50): the three Amazon listing pages (S19/S20/S21), the three manufacturer pages (S25/S26/S27), the three supplied short links (S33/S34/S35) and the unissued-code control (S32) were each re-fetched live on 2026-11-16 and compared line by line with what this repository publishes; the original accessed_utc is kept and the re-access date is recorded in last_reaccessed_utc.",
   "accessed_utc": "2026-11-14",
   "sources": [
     {
@@ -251,7 +251,8 @@
       "accessed_utc": "2026-11-13",
       "used_for": [
         "evidence only: link.amazon token redirected here with plpRedirect=mhFallback; NOT the requested product"
-      ]
+      ],
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S20",
@@ -263,7 +264,8 @@
       "accessed_utc": "2026-11-13",
       "used_for": [
         "evidence only: mhFallback; NOT the requested product"
-      ]
+      ],
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S21",
@@ -275,7 +277,8 @@
       "accessed_utc": "2026-11-13",
       "used_for": [
         "evidence only: mhFallback; NOT the requested product"
-      ]
+      ],
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S22",
@@ -326,7 +329,8 @@
       "accessed_utc": "2026-11-14",
       "used_for": [
         "specifications re-read: model RJ38-SQPF-3TDB-2W, 6 Qt/5.67 L, 200-450F/95-235C, 13.38x11.81x10.63 in, 13.3 lb/6.03 kg, 1700W/120V, cETL with 1-year Chefman assurance"
-      ]
+      ],
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S26",
@@ -338,7 +342,8 @@
       "accessed_utc": "2026-11-14",
       "used_for": [
         "specifications re-read: 8 Qt/7.57 L, 200-400F/95-205C, 8 Qt model 15.4x12.6x13.5 in, 12.8 lb/5.8 kg, 1700W/120V, model RJ38-SQSS-8T, cETL with 1-year assurance"
-      ]
+      ],
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S27",
@@ -350,7 +355,8 @@
       "accessed_utc": "2026-11-14",
       "used_for": [
         "specifications re-read on the spec tiles: 26-Quart capacity / 24.6 Liters, 16.9\"D x 15.8\"W x 14.8\"H, 120 volts, Dual-Speed Fan, '25 Cooking Pre-sets'; the product description text on the same page says '10-in-1'; model number shown as 4-00675-02A-VN - see flag F-19"
-      ]
+      ],
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S28",
@@ -419,7 +425,8 @@
         "evidence observation E-06"
       ],
       "title": "Amazon short-link service — unknown code control (9 characters, never published)",
-      "publisher": "Amazon.com (short-link service link.amazon)"
+      "publisher": "Amazon.com (short-link service link.amazon)",
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S33",
@@ -432,7 +439,8 @@
         "evidence E-01, E-08, E-09, E-10"
       ],
       "title": "Supplied affiliate short link 1 (as provided in the brief)",
-      "publisher": "Amazon.com"
+      "publisher": "Amazon.com",
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S34",
@@ -445,7 +453,8 @@
         "evidence E-02, E-08, E-10"
       ],
       "title": "Supplied affiliate short link 2 (as provided in the brief)",
-      "publisher": "Amazon.com"
+      "publisher": "Amazon.com",
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S35",
@@ -458,7 +467,8 @@
         "evidence E-03, E-08, E-10"
       ],
       "title": "Supplied affiliate short link 3 (as provided in the brief)",
-      "publisher": "Amazon.com"
+      "publisher": "Amazon.com",
+      "last_reaccessed_utc": "2026-11-16"
     },
     {
       "id": "S36",
