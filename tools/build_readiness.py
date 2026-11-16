@@ -26,7 +26,18 @@ and fails when the committed HTML differs. validate() fails the build on:
   * a GAP / OPEN / UNVERIFIED row with no owner action (a gap with no next step is not a finding)
   * a `measure` key this generator cannot compute (an unmeasurable row)
   * a count the register states that disagrees with the tree it is describing
+  * a `{measure}` token in a `site_state` that names no measure this generator can compute
   * a published page without the disclosure sentence, a product price, or a broken local link
+
+Counts are derived, not typed
+-----------------------------
+A `site_state` may contain a `{measure}` token — for example `{pages_with_disclosure}`. The token is
+replaced with the measured value when the page is rendered, and the rendered number is the one the gate
+checks. A hand-typed number is still accepted, and is still checked against the tree, so a typed count
+that drifts still fails the build. The difference is that a token cannot drift: every page any session
+adds to this repository moves the number, and a token follows it. This defect class had already bitten
+this register twice (T48 recorded the 124-vs-126 instance; the 126-vs-134 instance was measured on
+2026-11-16), each time because the sentence in the register was typed and the tree moved.
 
 Usage
 -----
@@ -182,6 +193,30 @@ def measured_facts(reg: dict) -> dict[str, object]:
     return {k: fn(reg) for k, fn in MEASURES.items()}
 
 
+# A `{measure}` token inside a `site_state`. The token names a key of MEASURES; the builder replaces it
+# with the measured value at render time, so the number in the sentence is derived from the tree rather
+# than typed into the register and left behind when the tree moves.
+TOKEN_RE = re.compile(r"\{([a-z_][a-z0-9_]*)\}")
+
+
+def tokens_in(text: str) -> list[str]:
+    """The measure names a `site_state` asks to have substituted into it."""
+    return TOKEN_RE.findall(text or "")
+
+
+def resolve_tokens(text: str, facts: dict[str, object]) -> str:
+    """Replace every `{measure}` token with its measured value.
+
+    An unknown token is left in place on purpose: the gate reports it, and a literal `{foo}` reaching
+    the published page is a visible defect rather than a silent zero.
+    """
+    if not text:
+        return text
+    return TOKEN_RE.sub(
+        lambda m: str(facts[m.group(1)]) if m.group(1) in facts else m.group(0), text
+    )
+
+
 # --------------------------------------------------------------------------- validation
 
 def validate(reg: dict) -> list[str]:
@@ -241,6 +276,26 @@ def validate(reg: dict) -> list[str]:
             elif not str(r.get("site_state", "")).strip():
                 problems.append(f"{rid}: declares measure {r['measure']!r} but states no site_state")
 
+        # A `{measure}` token in a site_state is how a count stays derived instead of typed.
+        site_state = str(r.get("site_state", ""))
+        names = tokens_in(site_state)
+        for name in names:
+            if name not in MEASURES:
+                problems.append(
+                    f"{rid}: site_state asks for {{{{{name}}}}} but this generator cannot compute that "
+                    f"measure - the token would reach the published page unrendered"
+                )
+            elif r.get("measure") and name != r["measure"]:
+                problems.append(
+                    f"{rid}: site_state asks for {{{{{name}}}}} but the row's measure is "
+                    f"{r['measure']!r} - the row would state a number it is not checked against"
+                )
+        if names and not r.get("measure"):
+            problems.append(
+                f"{rid}: site_state carries a measure token but the row declares no 'measure', so "
+                f"nothing would check the number it states"
+            )
+
     return problems
 
 
@@ -248,7 +303,14 @@ def check_claims(reg: dict) -> list[str]:
     """Cross-check the numbers the register states against the tree it describes.
 
     A measured row carries its count inside `site_state`, so the number lives in exactly one place.
-    This reads it back out and fails when the tree no longer produces it.
+    Two forms are accepted:
+
+      * a `{measure}` token — the count is substituted at render time from the same measurement the
+        gate uses, so it cannot drift. `rendered_claims()` then proves the rendered page states it.
+      * a hand-typed number — still accepted, still checked, and still fails when the tree moves.
+
+    The second form is why this function exists at all; the first is why a typed number is no longer
+    needed on any row whose count changes whenever a page is added.
     """
     problems: list[str] = []
     facts = measured_facts(reg)
@@ -256,11 +318,45 @@ def check_claims(reg: dict) -> list[str]:
         if not r.get("measure") or r["measure"] not in facts:
             continue  # validate() already reported the unknown key
         want = facts[r["measure"]]
-        if str(want) not in str(r.get("site_state", "")):
+        site_state = str(r.get("site_state", ""))
+        if r["measure"] in tokens_in(site_state):
+            continue  # derived; checked on the rendered page instead
+        if str(want) not in site_state:
             problems.append(
                 f"{r['id']}: site_state does not state the measured value {want} "
                 f"(measure {r['measure']}); the tree and the register disagree"
             )
+    return problems
+
+
+def rendered_claims(reg: dict, page: str) -> list[str]:
+    """Prove that every derived count reaches the published page as the measured number.
+
+    This is the check that replaces the typed-number check for token rows: the substitution happens
+    here, and this asserts the result is in the page that will be deployed.
+    """
+    problems: list[str] = []
+    facts = measured_facts(reg)
+    for r in reg["rows"]:
+        names = tokens_in(str(r.get("site_state", "")))
+        if not names:
+            continue
+        resolved = resolve_tokens(str(r.get("site_state", "")), facts)
+        for name in names:
+            if name not in facts:
+                continue  # validate() already reported the unknown measure
+            want = str(facts[name])
+            if want not in resolved:
+                problems.append(
+                    f"{r['id']}: the rendered site_state does not state the measured value {want} "
+                    f"(measure {name})"
+                )
+        if esc(resolved) not in page:
+            problems.append(
+                f"{r['id']}: the rendered site_state does not appear on the published page"
+            )
+    if TOKEN_RE.search(page):
+        problems.append("an unresolved measure token reached the published page")
     return problems
 
 
@@ -300,7 +396,7 @@ def render_rows(reg: dict) -> str:
         if r.get("quote"):
             extra += f'<blockquote class="rr-quote">{esc(r["quote"])}</blockquote>'
         if r.get("site_state"):
-            extra += f'<div class="row-note"><em>Site state:</em> {esc(r["site_state"])}</div>'
+            extra += f'<div class="row-note"><em>Site state:</em> {esc(resolve_tokens(r["site_state"], facts))}</div>'
         if r.get("measure"):
             extra += (f'<div class="row-note">measured in this tree: <code>{esc(r["measure"])}</code>'
                       f' = {esc(facts[r["measure"]])}</div>')
@@ -563,6 +659,7 @@ def main() -> int:
     page = render(reg)
     problems += no_price_problems(page)
     problems += link_problems(page)
+    problems += rendered_claims(reg, page)
     if DISCLOSURE not in page:
         problems.append("the rendered page is missing the disclosure sentence")
 

@@ -299,6 +299,26 @@ jobs:
       - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
         run: python3 tools/validate_decisions.py
 
+      # ---- arena/2b07e526-zone2: the release-readiness board (T45) ----
+      # RESTORED 2026-11-16 by session 224cc10c. This step was dropped from the workflow by commit
+      # 80c9a55 (session f8e18ca8, "Independent audit"), whose message claimed "workflow (+4 steps)"
+      # while the diff actually *replaced* this block with its own four. Nothing checked the
+      # readiness board between that commit and 2026-11-16, which is why the board's typed counts
+      # drifted from the tree twice (124 vs 126, then 126 vs 134) without a single red build.
+      # One row per named requirement on Amazon's Application Review Process page (S23), each with the
+      # official source and, where measurable, a count recomputed from this tree. The generator fails on a
+      # row with no official source, a quote that is not on S23 as captured, a BLOCKED row with no named
+      # blocker, a finding with no owner action, a count that disagrees with the tree, a missing
+      # disclosure, a printed product price, or a broken local link. Verified to fail on purpose on
+      # 2026-11-15 against 14 injected defects before being added here.
+      - name: Rebuild the release-readiness board and confirm committed output is current
+        run: python3 tools/build_readiness.py --check
+
+      # The negative tests for the board above. A gate that has only ever passed is a claim, not a
+      # control: 13 injected defects must each fire, and the unmutated register must be clean.
+      - name: Release-readiness gate negative tests (13 injected defects must each fire)
+        run: python3 tools/test_readiness.py
+
       # ---- arena/f8e18ca8-zone2: the independent audit namespace ----
       # 1B-2 (session 1b839f87) recorded that nothing in this workflow resolves a CSS url(),
       # which is how the font 404 shipped on every page for weeks. Negative-tested: appending a
