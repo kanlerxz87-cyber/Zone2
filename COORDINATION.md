@@ -5671,3 +5671,68 @@ keeping every other session's content intact and appending mine.
 - **Measurement:** 5 events defined, **0 live** — the site is static; disclosed on `discovery/measurement.html`.
 - **V-103:** the Amazon-product-information-sourced rows were not re-read today; they keep their official
   source links and their 2026-11-14 observations. No value was filled in.
+## Task claim — T50 — `arena/9251f262-zone2` (session id `9251f262`) — claimed 2026-11-16T18:35Z
+
+**Branch:** `arena/9251f262-zone2` (base `004a040bf5cad721ad49b84916d27d0f61f31e5c` = current `origin/main`).
+**Open PRs at claim time:** none (`gh pr list --state open` empty). **Blocks:** none. T49 is closed out and merged
+(PR #130 → `004a040`), so no other session holds a live claim on 2026-11-16.
+
+| Field | Value |
+|---|---|
+| Task | **T50** — the 2026-11-16 request, end to end, in this session |
+| Owner | `arena/9251f262-zone2` (`9251f262`) |
+| Status | claimed → in progress |
+
+### Scope — what T50 actually changes
+
+1. **Live official-source re-verification (line by line).** Re-fetch, today, every official source the published
+   tables rest on: the three supplied `link.amazon` short links and their `/dp/` destinations, the Chefman and
+   Emeril Everyday manufacturer pages, the Associates Program Policies, the Operating Agreement, the
+   Application Review Process page, and the Google / FTC guidance pages. Compare every stored quote and
+   destination against what is actually served. Record in **NEW** `docs/verification-9251f262.md`.
+2. **Line-by-line repo review.** Read the published surfaces row by row against the brief; flag every irregularity
+   (missing per-row source link, unverified value presented as fact, copy/link defect, cross-page contradiction).
+   Record in **NEW** `docs/review-9251f262.md`; publish the open ones on `flagged.html`.
+3. **The redesign the brief asks for — "it should not read like some AI slop website like it looks like now."**
+   A new editorial design system (**NEW** `assets/css/publish.css`) + a rewritten root landing page and root
+   section pages that read like a publication about air fryers rather than a status report about verification.
+   **Hard constraint: zero verified datum changes.** No ledger row, no `assets/js/data.js` value, no product
+   attribute is altered; every table row keeps its official-source link; blanks stay blank.
+4. **A dedicated Suggestions section** (**NEW** root `suggestions.html`) — every suggestion listed with its
+   options, cost, trade-off, recommendation, the question it waits on, and an explicit
+   **Proposed — awaiting owner decision** status, so the owner picks a path *before* anything is implemented.
+5. **A Questions / Information / Answers register** (**NEW** root `questions.html`) — what we know, what we do
+   not know, the answer each gap needs, and the concrete action that would discover it.
+6. **Category subpages** (**NEW** root `guides/` namespace: `index`, `basket-air-fryers`, `air-fryer-ovens`,
+   `buying-guides`, `method`) — the article set organised the way a reader browses it, each entry linking to the
+   published article and to the official source behind its claims.
+7. **Executive summary** update (append-only addendum to `EXECUTIVE_SUMMARY.md`) + README structure note.
+8. **Final integration:** re-run every gate on the combined tree, confirm no broken links, PR → merge without
+   waiting → confirm the GitHub Pages deploy → record the PR link and merge result here.
+
+### Files in scope (claimed)
+
+`COORDINATION.md` (append-only rows + records) · **NEW** `docs/verification-9251f262.md` · **NEW**
+`docs/review-9251f262.md` · **NEW** `assets/css/publish.css` · `index.html` · `products.html` ·
+`content.html` · `analysis.html` · **NEW** `suggestions.html` · **NEW** `questions.html` ·
+**NEW** `guides/**` (5 pages) · `EXECUTIVE_SUMMARY.md` (append-only) · `README.md` (structure note) ·
+`sitemap.xml` (additive) · `dashboard.html` is **not** created.
+
+### Files explicitly NOT in scope (no other session owns them today, but they are the verified record —
+T50 treats them as read-only evidence)
+
+`ledger/**` · `assets/js/**` · `tools/**` · `.github/**` · `pages/**` · `decisions/**` · `discovery/**` ·
+`marketing/**` · `journal/**` · `research-hub/**` · `zone2/**` · `northstar/**` · `affiliate-lab/**` ·
+`revalidation/**` · `console/**` · `audit/**` · `release/**` · `content/**` · `tests/**` ·
+`verification.html` · `sources.html` · `summary.html` · `flagged.html` · `compliance.html` ·
+`tracking.html` · `paths.html` · `design-notes.html` · `playbook.html` · `404.html` · `assets/css/style.css`.
+
+Where T50 needs one of those to change, the request is **logged here instead of executed**:
+
+| # | Request to another scope | Why T50 is not doing it |
+|---|---|---|
+| R-1 | `ledger/flags.json` F-20 title over-generalisation (logged as a needs-review wording item by `224cc10c` on 2026-11-16): anchor the wording to the specific control code `B00TEST12` rather than "an unknown code". | `ledger/**` is the verified record; the wording item does not change any published figure, so it stays on the Flagged for Review register for the owner rather than being edited by a session that did not run the control. |
+| R-2 | `sitemap.xml` should carry the new `guides/` URLs. | `sitemap.xml` is generated by `tools/build_sitemap.py`; T50 appends the URLs additively inside its own commit and leaves the generator's ownership intact. |
+
+**Takeover rule:** if this session produces no commit for more than 60 minutes, any session may take over T50
+and note the handoff below.
