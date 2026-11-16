@@ -217,7 +217,7 @@
       "id": "Q-T50-01",
       "question": "Which three products did the brief actually mean?",
       "status": "open",
-      "what_we_know": "Each supplied link resolves, reproducibly and across six sessions on four dates, to one live Amazon listing: B0CDY277D3, B09B7SB46R and B08DKYBTPH. An unknown code on the same short-link service does not return a product, so the codes are honoured lookups rather than ignored tokens.",
+      "what_we_know": "Each supplied link resolves, reproducibly, to one live Amazon listing: B0CDY277D3, B09B7SB46R and B08DKYBTPH. This project has re-read them on four separate dates (2026-11-13, 11-14, 11-15 and 11-16) and the destination has been identical every time. An unknown code on the same short-link service does not return a product, so the codes are honoured lookups rather than ignored tokens.",
       "what_is_missing": "No public Amazon document binds a link.amazon short code to a product. The codes are nine characters and an ASIN is ten, so the token itself is not an ASIN and cannot be decoded from outside the account that minted it.",
       "how_to_discover": "Open each of the three supplied links while signed in to the Associates account the links were created in, and record the ASIN from the resulting page or from the account's own link report.",
       "blocks": ["SG-T50-03", "SG-T50-06"],
