@@ -1,0 +1,186 @@
+{
+  "note": "The design pack (task T50, session arena/dc72a69e-zone2). Three parts. 'diagnosis' is measured: every number in it came from a command run on the published tree on 2026-11-16. 'rewrites' are before/after pairs where the BEFORE is copied verbatim from a published page and the AFTER is a craft judgement by this session, labelled as one — it is not a program fact and no official source endorses it. 'system' and 'prompt' are the deliverable the brief asks for: the specification and the paste-ready text that would make the site look and read like a publication. Nothing here is implemented.",
+  "as_of": "2026-11-16",
+  "diagnosis": {
+    "headline": "It was written from the brief outwards, so the reader arrived second. A parallel session rebuilt the front pages mid-review; the traces below are what survived that rebuild.",
+    "detail": "Measured on 2026-11-16 against the tree before session arena/9251f262-zone2 (T55) landed, then re-measured after rebasing onto it. T55 rebuilt the landing page and the front pages as a publication: the self-describing headings are gone, the overclaim is gone, and the site's own voice is down from 8% of sentences to 4%. What the rebuild did not touch is the trace below that does the most damage, because it lives on the operator surfaces rather than the reader-facing ones.",
+    "traces": [
+      {
+        "id": "DT-1",
+        "trace": "The client's own requirement list is printed on operator and companion pages as self-description",
+        "measured": "'AI-powered' 25 occurrences on 14 pages; 'AI-powered Amazon affiliate' 11 occurrences on 11 pages (RV-09). After T55, none of the 14 is reader-facing: they are operator surfaces and companion prototypes.",
+        "why_it_reads_as_generated": "A human writing about their own work does not describe it in the vocabulary of the commission that paid for it. The phrase is the brief's, surviving into the deliverable, which is the most reliable tell there is.",
+        "what_an_official_source_says": "Google's guidance on generative AI content: using such tools to generate many pages without adding value for users may violate the spam policy on scaled content abuse (BR-13). Amazon's content bar asks for 'robust original content' (BR-08). Neither is triggered by the label alone — but advertising the label removes any benefit of the doubt.",
+        "source_ids": [
+          "BR-13",
+          "BR-08"
+        ]
+      },
+      {
+        "id": "DT-2",
+        "trace": "Headings were labels on boxes rather than answers to questions — largely fixed on the front pages by T55, still present on operator surfaces",
+        "measured": "The nine level-2 headings on the landing page measured 'Three links in. Three listings identified.', 'The honest numbers', 'What this platform is…' and six others of the same kind. T55 replaced them with 'The short version', 'The three machines on the bench', 'Start with the question, not the product' and 'The receipts'. The habit survives on the operator surfaces, where 4% of sentences across the seven root pages still have the site as their subject (RV-11).",
+        "why_it_reads_as_generated": "A section called 'The honest numbers' is a section that has decided what it is before it knows what it is for. It is the structure of a report generated from a schema, not of a page written to be read.",
+        "what_an_official_source_says": "Google's people-first guidance asks, among other things, whether the content demonstrates first-hand expertise, and warns that content 'spread across a large network of sites, so that individual pages or sites don't get as much attention or care' is a quality warning sign (BR-15, BR-16). This repository publishes 14 separate surfaces (RV-16).",
+        "source_ids": [
+          "BR-15",
+          "BR-16"
+        ]
+      },
+      {
+        "id": "DT-3",
+        "trace": "RESOLVED BY T55 — the landing page stated, above the fold, the one claim the register says is unconfirmed",
+        "measured": "Landing heading read 'Three links in. Three listings identified.' while F-03 recorded that no Amazon document binds any of the three codes to a product. T55 removed the heading on 2026-11-16; verified absent after the rebase (RV-10).",
+        "why_it_reads_as_generated": "Confidence untethered from evidence is the signature. It is kept here because the measurement was real, and because the same class of sentence is one careless edit away from returning.",
+        "what_an_official_source_says": "Compliance row R-06/R-21 on pages/compliance.html: no inaccurate, overbroad, deceptive or otherwise misleading claims about any Product. The FTC: 'You can't talk about your experience with a product you haven't tried' (BR-18).",
+        "source_ids": [
+          "BR-18"
+        ]
+      }
+    ],
+    "what_is_already_good": [
+      "The front pages are now reader-shaped: the landing page opens with the three machines and their real specifications, not with the project.",
+      "The public editorial set (marketing/ · Counter Notes) already reads like a publication: question-shaped headlines, a stated limit in plain language, opinions in labelled boxes away from measurements.",
+      "Category guides (guides/) arrived with T55 on 2026-11-16.",
+      "The project already bans generated-prose phrases in two namespaces; genuine residual usage across 150 pages is now zero (RV-12).",
+      "The typed counts that gate the data are derived from the tree, not hand-written, so the data pages cannot drift. Only the two prose counts on the readiness board did (FB-01, FB-02)."
+    ]
+  },
+  "rewrites": [
+    {
+      "id": "DR-1",
+      "where": "index.html — hero",
+      "before_label": "As published",
+      "before": "Eyebrow: “AI-powered Amazon affiliate platform”. Heading: “Affiliate content you can check, not just read.” Lede: “Counter Notes is the publication this platform writes: buying guides, head-to-heads and spec-level reviews of the machines on the bench. Zone2 researches the products behind them, manages the links and tracks what converts — under one rule the industry usually skips: publish only what an official page actually says.”",
+      "after_label": "Rewrite — the reader's question first, the method second, the project not at all",
+      "after": "Eyebrow: “Counter Notes · three air fryers”. Heading: “Which of these three air fryers fits your counter?” Lede: “Two are basket fryers from the same brand — one six quarts, one eight. The third is a twenty-six-quart oven with French doors. We took the capacity, the temperature range and the footprint of each off the manufacturer's page and off Amazon's listing, put the three side by side, and left blank everything neither page states.”",
+      "why": "The published version opens by naming the platform and closes by describing its own integrity policy, which is a thing a reader cannot use. The rewrite opens with the decision the reader actually has in front of them, states the three options in one sentence, and earns the method claim by putting it after the facts rather than before them. Every number in the rewrite is a value the site already publishes with a source.",
+      "fact_check": "Chefman 6 Qt dual basket (B0CDY277D3) and Chefman 8 Qt (B08DKYBTPH) are both basket fryers from Chefman; Emeril Lagasse 26QT French Door (B09B7SB46R) is the oven. Capacity, temperature range and footprint rows are published per row with sources on products.html and the marketing comparison. No price, rating or review count appears in the rewrite, because none can be (BR-01, R-04).",
+      "source_ids": [
+        "BR-19",
+        "BR-20",
+        "BR-21"
+      ],
+      "status": "superseded by T55 — the page it was measured on has been rebuilt",
+      "before_note": "The BEFORE text is the copy as published when this session measured it on 2026-16-11, before session arena/9251f262-zone2 rebuilt index.html later the same day. It is preserved as the record of what was measured, not as a description of the live page.",
+      "after_note": "T55's rebuilt landing page opens 'The 6-quart, the 8-quart, and the oven that wants to be both.' — the same move this rewrite argued for, arrived at independently."
+    },
+    {
+      "id": "DR-2",
+      "where": "index.html — the product section heading",
+      "before_label": "As published",
+      "before": "“Three links in. Three listings identified.”",
+      "after_label": "Rewrite — say what was observed, and what it does not establish",
+      "after": "“Three links in. Three listings we can read — and three mappings we cannot confirm.”",
+      "why": "Two characters' work. The published line asserts identification, which the project's own register declines to assert. The rewritten line is not weaker: it is the sentence a careful writer would produce from the same evidence, and it is the one that survives the owner's check in Associates Central either way.",
+      "fact_check": "See F-03 on the canonical register and BR-19..BR-21 for what was actually observed.",
+      "source_ids": [
+        "BR-19",
+        "BR-20",
+        "BR-21"
+      ],
+      "status": "superseded by T55 — the page it was measured on has been rebuilt",
+      "before_note": "The BEFORE text is the copy as published when this session measured it on 2026-16-11, before session arena/9251f262-zone2 rebuilt index.html later the same day. It is preserved as the record of what was measured, not as a description of the live page."
+    },
+    {
+      "id": "DR-3",
+      "where": "index.html — the metrics band",
+      "before_label": "As published",
+      "before": "“The honest numbers” … “Where an affiliate site would normally put growth numbers, this dashboard puts the verification state. There are no performance figures anywhere on this site — none exist yet, and inventing them is the one thing the platform refuses to do.”",
+      "after_label": "Rewrite — make the blanks the feature instead of apologising for them",
+      "after": "“What we could not find out” … “Price, star rating and review count are the three columns every air-fryer page on the internet fills in, and they are the three this one leaves empty. Amazon permits a price on a site only when it comes from Amazon's own link or API, and permits a star rating only through the same channel. Neither is configured here, so the column is empty rather than estimated.”",
+      "why": "The published version frames the absence as a virtue of the platform — 'the one thing the platform refuses to do' — which is the site congratulating itself. The rewrite frames it as information about the product pages the reader is choosing between, which is what it actually is: three specific columns, three specific reasons, and a promise that they stay empty rather than guessed.",
+      "fact_check": "Price and availability may be shown only as Amazon serves them (compliance row R-04, carried from S02); customer reviews and star ratings require the API (BR-01). Measured: no page on the site prints a product price (RV-13).",
+      "source_ids": [
+        "BR-01"
+      ],
+      "status": "superseded by T55 — the page it was measured on has been rebuilt",
+      "before_note": "The BEFORE text is the copy as published when this session measured it on 2026-16-11, before session arena/9251f262-zone2 rebuilt index.html later the same day. It is preserved as the record of what was measured, not as a description of the live page."
+    }
+  ],
+  "system": {
+    "note": "Concrete tokens for a rebuild. Where a value is constrained by a rule, the rule is named; everything else is a craft judgement and says so.",
+    "principle": "One publication, one voice, one declared URL. Every element on a page is either a fact with a source, a clearly labelled judgement, or a blank with a reason.",
+    "type": {
+      "judgement": "A serif display face for headlines and a humanist sans for body, at a body size of 18–19px with a line length of 62–70 characters. The current build sets body text at the browser default inside a wide grid, which is the single largest contributor to the 'generated page' feel: long measures plus small text is the look of a rendered table, not of an article.",
+      "token_examples": "display: 40/46/1.08 · h2: 28/34/1.15 · body: 18/29/1.6 · caption: 14/20"
+    },
+    "colour": {
+      "judgement": "Near-black ink on warm off-white, one accent used only for interactive elements, and three semantic colours that carry meaning rather than decoration: sourced (ink), blank (muted with a dotted rule), conflict (amber). The semantic colours are the point — they let a reader scan a table and know which cells are evidence and which are absence without reading a word.",
+      "token_examples": "ink #16130F · paper #FBFAF7 · accent #1F5B4A · blank #8A8478 · conflict #9A6314"
+    },
+    "layout": {
+      "judgement": "A single content column of 68ch, a right-hand rail only on article pages, and no card grid above the fold. The landing page currently opens with a four-item trust strip that describes the project's values; a publication opens with the answer.",
+      "token_examples": "measure 68ch · gutter 24/32/48 · section rhythm 72px · max card count above fold 0"
+    },
+    "components": [
+      {
+        "name": "Source-anchored figure",
+        "spec": "Every published number sits on a hairline with the publisher domain beside it, linked. Not a footnote — the number and its origin are one object.",
+        "constraint": "This is what separates the site from a thin affiliate page. Google names 'additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons' as what makes an affiliate page good (BR-12)."
+      },
+      {
+        "name": "Blank with a reason",
+        "spec": "An empty cell renders as an en-dash with a dotted underline and a tooltip stating which rule or absence makes it empty. It is never filled with a dash alone, and never with an estimate.",
+        "constraint": "BR-01 (ratings via API) and compliance row R-04 (prices as Amazon serves them)."
+      },
+      {
+        "name": "Recommendation block",
+        "spec": "The verdict, when there is one, in a bordered box that names the one spec that decided it. The disclosure sentence is printed inside this block, not in the footer.",
+        "constraint": "FTC: 'The disclosure should be placed with the endorsement message itself' (BR-17). Amazon: the §5 statement must be 'clearly and prominently' stated (BR-05)."
+      },
+      {
+        "name": "Byline with a real claim",
+        "spec": "A named author and a one-line statement of what they actually did — 'read the three listings and the three manufacturer pages on 2026-11-16' — never 'tested' unless there is a dated record of testing.",
+        "constraint": "FTC: 'You can't talk about your experience with a product you haven't tried' (BR-18). Google asks whether the content demonstrates first-hand expertise (BR-16)."
+      },
+      {
+        "name": "Qualified outbound link",
+        "spec": "Every product link carries rel=\"sponsored nofollow\" and, once a tag exists, the Associates tag in Amazon's format.",
+        "constraint": "Google: buying and selling links is normal as long as they are qualified with rel=\"nofollow\" or rel=\"sponsored\" (BR-12's page, link-spam section). Amazon: §6(v) and §6(w) forbid cloaking and unclear link presentation (BR-04), and the tag must be embedded (BR-10)."
+      }
+    ]
+  },
+  "prompt": {
+    "note": "Paste-ready. It is written so that a design pass cannot quietly reintroduce an unverified value: the constraints are listed before the aesthetics, and the acceptance tests are machine-checkable.",
+    "usage": "Give this to the agent or developer doing the rebuild, together with the repository. It assumes the data layer is untouched: the pages are a presentation of ledger/*.json and marketing/data/*.json, and no value moves.",
+    "text": [
+      "You are redesigning the public face of an Amazon Associates affiliate site about three air fryers. The data layer is finished and verified; do not change a single published value.",
+      "",
+      "WHAT EXISTS TODAY",
+      "- A static site on GitHub Pages, 139 published pages across 14 namespaces. The reader-facing publication is /marketing/ (\"Counter Notes\"); the owner-facing evidence lives in /pages/, /console/, /audit/, /discovery/ and the repository root.",
+      "- Three product listings, resolved from supplied short links: Chefman 6 Qt dual basket (B0CDY277D3), Emeril Lagasse 26 QT French door (B09B7SB46R), Chefman 8 Qt (B08DKYBTPH).",
+      "- Per-row sourcing: every published spec value links to the page it was read from. Roughly 40 open items are published on a Flagged for Review page rather than filled in.",
+      "",
+      "HARD CONSTRAINTS — these are rules, not preferences. Cite the source page if you need to check one.",
+      "1. No price anywhere. Amazon permits a price on a site only when Amazon itself serves it. The three listing pages are the only permitted source and none is integrated, so every price cell stays empty.",
+      "2. No star rating or review count. These may be displayed only when obtained through Amazon's Creators API or PA API. No credential exists, so the cells stay empty.",
+      "3. The sentence \"As an Amazon Associate I earn from qualifying purchases.\" must appear clearly and prominently on every page, and must sit with the recommendation rather than in the footer. (Amazon Operating Agreement §5; FTC: the disclosure belongs with the endorsement message.)",
+      "4. Every outbound product link must carry rel=\"sponsored nofollow\". Link destinations must not be cloaked or made unclear.",
+      "5. No claim of hands-on testing. Nobody has used these products and there is no dated record of use.",
+      "6. Never describe the site as AI-powered or AI-generated, in copy or in markup. It reads as machine output and it invites the wrong reading from a reviewer.",
+      "7. Do not restate the client's requirement list as public copy. Describe what the pages do, not what was commissioned.",
+      "8. An empty cell is never filled with an estimate, a range, or a dash alone. It renders as an en-dash with the reason it is empty.",
+      "",
+      "THE ACTUAL BRIEF",
+      "Make it read like a small, careful publication written by one person who did the reading, not like a report generated from a database. Specifically:",
+      "- Open with the reader's decision, not with the project. The first screen should let someone choose between three air fryers, not explain what the site is.",
+      "- Headings are the questions a buyer actually types: how many quarts, two baskets or one, will it fit, basket or oven. Not labels like \"Overview\" or \"Position at a glance\".",
+      "- Body text at 18–19px on a 62–70 character measure. Serif for headlines, humanist sans for body.",
+      "- Turn the blanks into the signature feature: three semantic states — sourced (ink), blank (muted, dotted rule, tooltip with the reason), conflict (amber, both values shown).",
+      "- Put the verdict, where there is one, in a bordered box that names the spec that decided it, with the disclosure inside that box.",
+      "- A named byline with a true one-line statement of what the author actually did.",
+      "- Cards only below the fold. No four-item value strip above it.",
+      "- One declared site. Pick the reader-facing surface and make the evidence namespaces reachable from it, not parallel to it.",
+      "",
+      "ACCEPTANCE TESTS — the build must fail if any of these is false",
+      "- No page contains the strings \"AI-powered\" or \"AI generated\".",
+      "- No page matches a currency amount outside the Amazon bounty/commission tables.",
+      "- Every page contains the exact §5 sentence, and on any page with a product recommendation the sentence appears above that recommendation.",
+      "- Every link to amazon.com carries rel=\"sponsored\".",
+      "- Every empty cell carries a non-empty reason.",
+      "- No heading is one of the abstract labels being replaced.",
+      "- Every published spec value still links to the page it was read from."
+    ]
+  }
+}

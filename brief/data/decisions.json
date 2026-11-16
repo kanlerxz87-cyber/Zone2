@@ -1,0 +1,26 @@
+{
+  "note": "The owner's decision sheet for the design brief (task T50, session arena/dc72a69e-zone2). This is the file the owner edits. Nothing on the suggestions board is implemented anywhere on this project until a choice is recorded here — or until the owner tells the agent the IDs, which the agent then records here in the same form. Every choice must be the letter of an option that already exists on the row; a choice that is not one of the row's own options is a new proposal, not a decision.",
+  "as_of": "2026-11-16",
+  "how_to_record": [
+    "Open brief/data/decisions.json in the repository.",
+    "Find the row for the proposal you have decided on, under \"sheet\".",
+    "Set \"choice\" to the letter of the option you want (A, B or C), add a short \"note\" if you want, and set \"decided_by\" and \"decided_on\".",
+    "Commit the file. The next build re-renders the board with your choice shown on the row and the state changed from proposed to chosen.",
+    "Or tell the agent the IDs and the letters, and it will record them here in the same form."
+  ],
+  "why_it_exists": "The brief asks for a section where suggestions are reviewed and a path chosen before anything is implemented. This is it. The board is the proposals; this file is the choosing. Until a row here has a letter, nothing on the board is anything more than an argument.",
+  "sheet": [
+    { "id": "DB-01", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-02", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-03", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-04", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-05", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-06", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-07", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-08", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-09", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-10", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-11", "choice": "", "note": "", "decided_by": "", "decided_on": "" },
+    { "id": "DB-12", "choice": "", "note": "", "decided_by": "", "decided_on": "" }
+  ]
+}

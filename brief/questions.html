@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What we know · Zone2 design brief</title>
+<meta name="description" content="Thirteen questions an official page answers, ten nothing here can, and the inventory of what the project already holds.">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/brief/questions.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Zone2">
+<meta property="og:title" content="What we know · Zone2 design brief">
+<meta property="og:description" content="Thirteen questions an official page answers, ten nothing here can, and the inventory of what the project already holds.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/brief/questions.html">
+<meta name="robots" content="index,follow">
+<style>
+:root{--ink:#16130f;--paper:#fbfaf7;--muted:#6b6459;--line:#e3ded3;--accent:#1f5b4a;
+--blank:#8a8478;--warn:#9a6314;--card:#fff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+font:18px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:64rem;margin:0 auto;padding:0 24px}
+a{color:var(--accent)}
+.skip{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+header.mast{border-bottom:1px solid var(--line);background:var(--card)}
+.mast-in{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;padding:18px 24px;max-width:64rem;margin:0 auto}
+.brand{font-weight:700;text-decoration:none;color:var(--ink)}
+.brand span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+nav.top{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-left:auto}
+nav.top a{color:var(--muted);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
+nav.top a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+main{padding:32px 0 64px}
+h1{font:700 40px/1.1 Georgia,"Times New Roman",serif;margin:0 0 12px;letter-spacing:-.01em}
+h2{font:700 27px/1.2 Georgia,"Times New Roman",serif;margin:44px 0 10px}
+h3{font:600 20px/1.3 Georgia,"Times New Roman",serif;margin:26px 0 6px}
+p,li{max-width:44rem}
+.standfirst{font-size:20px;color:#3a342b;margin:0 0 8px;max-width:44rem}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.lede{color:#3a342b}
+.disclosure{border:1px solid var(--line);background:#fff;border-left:3px solid var(--accent);
+padding:12px 14px;font-size:15px;margin:0 0 20px;border-radius:3px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:14px 0 8px;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:9px 12px 9px 0}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line)}
+tbody tr:hover{background:#f6f3ec}
+tr[id]{scroll-margin-top:16px}
+blockquote{margin:8px 0;padding:10px 14px;border-left:3px solid var(--line);color:#3a342b;
+background:#fff;font-size:16px;max-width:44rem}
+code{font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f1ede4;
+padding:1px 5px;border-radius:3px}
+pre{background:#f6f3ec;border:1px solid var(--line);padding:14px 16px;overflow-x:auto;
+font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;border-radius:4px;
+white-space:pre-wrap;word-break:break-word}
+.pill{display:inline-block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fff;white-space:nowrap}
+.pill.official{border-color:#bcd8cc;color:#1f5b4a}
+.pill.observed{border-color:#cfd6e3;color:#3b5a86}
+.pill.carried{border-color:#e0d6bd;color:var(--warn)}
+.pill.open{color:var(--warn);border-color:#e0d6bd}
+.pill.done{color:#1f5b4a;border-color:#bcd8cc}
+.pill.blocked{color:#8a3a2a;border-color:#e3c4bb}
+.num{font:700 22px/1.1 Georgia,serif}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);background:var(--card);border-radius:4px;padding:14px 16px}
+.card .num{display:block;margin-bottom:4px}
+.card .lbl{font-size:14px;color:var(--muted)}
+.note{font-size:15px;color:var(--muted);max-width:44rem}
+.blank{color:var(--blank);border-bottom:1px dotted var(--blank);cursor:help}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:#fff;
+padding:14px 16px;margin:18px 0;border-radius:3px;max-width:44rem}
+.callout.warn{border-left-color:var(--warn)}
+.src{font-size:13px;color:var(--muted)}
+.src a{color:var(--accent)}
+ul.tight li{margin-bottom:5px}
+footer.site{border-top:1px solid var(--line);background:var(--card);padding:24px 0 40px;font-size:14px;color:var(--muted)}
+footer.site p{max-width:52rem}
+@media (max-width:640px){h1{font-size:31px}body{font-size:17px}.mast-in{padding:14px 24px}nav.top{margin-left:0}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "What we know", "description": "Thirteen questions an official page answers, ten nothing here can, and the inventory of what the project already holds.", "datePublished": "2026-11-16T00:00:00+00:00", "inLanguage": "en", "isAccessibleForFree": true, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kanlerxz87-cyber.github.io/Zone2/brief/questions.html"}, "publisher": {"@type": "Organization", "name": "Zone2", "url": "https://kanlerxz87-cyber.github.io/Zone2/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="mast-in">
+    <a class="brand" href="index.html"><b>Zone2 design brief</b><span>What the site should look like, and what has to be decided first</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html">Executive summary</a><a href="design-prompt.html">Design prompt</a><a href="topics.html">Articles &amp; topics</a><a href="suggestions.html">Choose a path</a><a href="questions.html" aria-current="page">What we know</a><a href="review.html">Repo review</a><a href="verification.html">Verification</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged</a></nav>
+  </div>
+</header>
+<div class="wrap">
+  <main id="main">
+    <p class="disclosure" data-rule="R-01"><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p class="crumbs" aria-label="Breadcrumb">Design brief › What we know</p>
+
+<p class="eyebrow">What we know · 2026-11-16</p>
+<h1>What an official page settles, what nothing can, and what we already hold</h1>
+<p class="standfirst">Three registers. The first quotes only what a linked official page says. The second
+is empty by design: an open question's answer cell is never filled with an inference. The third is what
+the project already has, and how each item was established.</p>
+
+<h2>Answered — 13 questions an official page settles</h2>
+<table>
+<thead><tr><th>Question</th><th>Answer, as the page states it</th><th>Source</th></tr></thead>
+<tbody><tr id="BQ-01"><td><strong>May the site show Amazon star ratings and review counts?</strong></td><td>Not as configured. The Program Policies allow them only when obtained through Amazon&#x27;s API: “You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API and you comply with the requirements for Creators API and PA API described in the License.”</td><td class="src"><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-01</a><div class="note">0 of 138 published pages show one (RV-04&#x27;s sibling measurement; the readiness board&#x27;s own figure is 0).</div></td></tr><tr id="BQ-02"><td><strong>Must the product links on the declared site carry an Associates tag?</strong></td><td>Yes. “Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application.” The same page states that an account rejected for missing tagged links is told to correct them.</td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a><div class="note">0 of 138 published pages carry a tag in that format (RV-04).</div></td></tr><tr id="BQ-03"><td><strong>How many sales must the site drive before the application is reviewed?</strong></td><td>“After you sign up, our Associates team will check your application once you’ve driven qualified sales (we require at least three within the first 180 days).” The same page adds that personal orders do not qualify.</td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-07</a><div class="note">0. No tagged link exists, so no qualifying purchase can be attributed (RV-04).</div></td></tr><tr id="BQ-04"><td><strong>What content bar must the declared site clear?</strong></td><td>“All Sites must have robust original content (even when advertising is removed) – a good rule of thumb is at least 10 posts. They must be publicly available (for example, they should not be a closed group, or behind a paywall).” Rejection for unoriginal or insufficient content is final: “we aren&#x27;t able to reassess an application once it&#x27;s been rejected.”</td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-08</a><div class="note">14 candidate editorial posts are counted, clearing the rule of thumb; the readiness board still marks the row GAP because every counted page is a specification or comparison surface about these three listings (RV-15).</div></td></tr><tr id="BQ-05"><td><strong>How recent must the content be, and who must own the site?</strong></td><td>“Content on your website must be recent (generally within the last 60 days). You must own your website.”</td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-09</a><div class="note">The oldest date any published page prints for its own content is 2026-11-13, three days before this review. Ownership is not established by anything in the repository.</div></td></tr><tr id="BQ-06"><td><strong>Does Amazon promise the site any traffic or income if it does the work?</strong></td><td>No. “We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations.”</td><td class="src"><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-06</a><div class="note">Consistent with the site publishing no performance figures anywhere.</div></td></tr><tr id="BQ-07"><td><strong>May the site say the products were tested?</strong></td><td>No. The FTC&#x27;s guidance is flat: “You can’t talk about your experience with a product you haven’t tried.” Google asks whether the content “clearly demonstrate[s] first-hand expertise and a depth of knowledge (for example, expertise that comes from having actually used a product or service, or visiting a place)”.</td><td class="src"><a href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer nofollow">BR-18</a> · <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-16</a><div class="note">No page claims testing. The byline question is open (BQ-16).</div></td></tr><tr id="BQ-08"><td><strong>Where must the affiliate disclosure sit on a page?</strong></td><td>With the recommendation, not at the end. The FTC: “Place it so it’s hard to miss. The disclosure should be placed with the endorsement message itself”, and warns that disclosures “are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos, or anywhere that requires a person to click MORE.” Amazon&#x27;s agreement requires the statement to be stated “clearly and prominently”.</td><td class="src"><a href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer nofollow">BR-17</a> · <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-05</a><div class="note">138 of 138 pages carry the exact sentence, but on the reader-facing pages it sits in a strip above the content rather than inside the recommendation (RV-03, DB-04).</div></td></tr><tr id="BQ-09"><td><strong>May the site offer a reader anything for clicking through?</strong></td><td>No. “You will not offer any person or entity any consideration, reward, or incentive (including any money, rebate, discount, points, donation to charity or other organization, or other benefit) for using Special Links.”</td><td class="src"><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-03</a><div class="note">No page offers one.</div></td></tr><tr id="BQ-10"><td><strong>May the site use short links that hide the Amazon destination?</strong></td><td>Not if the destination is unclear. “You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site”, and separately you may not “cloak, hide, spoof, or otherwise obscure the URL of your Site containing Special Links”.</td><td class="src"><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-04</a><div class="note">The three links this whole project rests on are themselves short links on link.amazon, a domain the canonical register flags as not the documented public Associates short-link domain (F-04). Whether §6(w) applies to them is not settled by any page this session could read.</div></td></tr><tr id="BQ-11"><td><strong>What does Google say about writing about trending topics?</strong></td><td>It is listed as a warning sign: “Are you writing about things simply because they seem trending and not because you&#x27;d write about them otherwise for your existing audience?” The same list asks “Are you producing lots of content on many different topics in hopes that some of it might perform well in search results?”</td><td class="src"><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-14</a><div class="note">This is the rule the topics board on this site is built to satisfy.</div></td></tr><tr id="BQ-12"><td><strong>Is AI-generated content allowed?</strong></td><td>Google&#x27;s answer is about scale and value, not about the tool: “using generative AI tools or other similar tools to generate many pages without adding value for users may violate Google&#x27;s spam policy on scaled content abuse”. The spam policy defines the abuse as “when many pages are generated for the primary purpose of manipulating search rankings and not helping users”.</td><td class="src"><a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow">BR-13</a> · <a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">BR-11</a><div class="note">No page on this site is generated at request time; all are static files built from JSON ledgers. Twelve pages describe the site as AI-powered anyway (RV-09).</div></td></tr><tr id="BQ-13"><td><strong>Can an affiliate site be good, by Google&#x27;s own standard?</strong></td><td>Yes, and it says how: “Not every site that participates in an affiliate program is a thin affiliate. Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.”</td><td class="src"><a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">BR-12</a><div class="note">Of the five named value-adds, this site can currently claim two: product comparisons and category navigation. Price information, original reviews and rigorous testing ratings are all closed to it by BQ-01 and BQ-07.</div></td></tr></tbody>
+</table>
+
+<h2>Open — 10 questions nothing here can answer</h2>
+<p class="note">The answer column is empty on purpose. Each row states what is already known, what is
+missing, the concrete action that would close it, and who can close it.</p>
+<table>
+<thead><tr><th>Question</th><th>Answer</th><th>What is known</th><th>What is missing</th><th>How to close it</th></tr></thead>
+<tbody>
+<tr id="BQ-14">
+  <td><strong>What is the Associates ID (tag) and which marketplace is it registered in?</strong><div class="src"><span class="pill">Q-02</span> <span class="pill">Q-01</span> <span class="pill">F-07</span> <span class="pill">F-24</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>Amazon&#x27;s format is a name followed by a hyphen and two digits (BR-10). No page in this repository contains one; the three supplied links carry no tag parameter at all.</td>
+  <td>The tag itself, the marketplace (the register already carries an open question about US versus another marketplace), and the date the account was approved.</td>
+  <td>Open Associates Central, copy the tag from any product link you build there, and record it. One sign-in.<div class="note">Who can close it: owner only</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-11">DB-11</a> </div></td>
+</tr>
+<tr id="BQ-15">
+  <td><strong>Which single surface is the declared Site, and what exact URL will be listed?</strong><div class="src"><span class="pill">Q-06</span> <span class="pill">Q-17</span> <span class="pill">MQ-08</span> <span class="pill">DS-12</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>Fourteen surfaces publish pages today (RV-16). Amazon asks applicants to keep their Site list current and to be precise about what is reviewed; the readiness board marks RR-11 a GAP for exactly this reason.</td>
+  <td>The choice. Every option has a cost: the reader-facing publication reads best but lacks the evidence tables, the root dashboard has the tables but reads like a report.</td>
+  <td>Choose on the decision sheet (DB-06). Everything else — nav, canonical URLs, the application — follows from it.<div class="note">Who can close it: owner, on advice</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-06">DB-06</a> <a href="suggestions.html#DB-02">DB-02</a> <a href="suggestions.html#DB-03">DB-03</a> </div></td>
+</tr>
+<tr id="BQ-16">
+  <td><strong>Who is the named author or editor, and will they be named publicly?</strong><div class="src"><span class="pill">Q-16</span> <span class="pill">MQ-03</span> <span class="pill">SG-05</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>No page carries a byline. Google&#x27;s guidance ties trust to background about the author or the site that publishes the content; Amazon asks for robust original content and looks for a reason a customer would seek the site out.</td>
+  <td>A name, or a decision to publish under the desk name and accept the weaker signal.</td>
+  <td>Decide, then add the byline with a true scope sentence (DB-07).<div class="note">Who can close it: owner only</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-07">DB-07</a> </div></td>
+</tr>
+<tr id="BQ-17">
+  <td><strong>Were the three link.amazon codes minted in the owner&#x27;s own Associates account, and under which tracking ID?</strong><div class="src"><span class="pill">Q-18</span> <span class="pill">F-01</span> <span class="pill">F-03</span> <span class="pill">F-04</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>All three resolve, reproducibly, to one listing each (BR-19..BR-21). The codes are nine characters; an ASIN is ten. No Amazon document binds a code to a product.</td>
+  <td>Whether the account that minted them is the owner&#x27;s, which is the only thing that would make them earn for the owner.</td>
+  <td>Check the links in the owner&#x27;s own Associates Central account, or rebuild them there and compare destinations.<div class="note">Who can close it: owner only</div>
+      <div class="note">Blocks: —</div></td>
+</tr>
+<tr id="BQ-18">
+  <td><strong>Which products did the three codes actually mean?</strong><div class="src"><span class="pill">Q-03</span> <span class="pill">F-01</span> <span class="pill">F-03</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>What each code resolves to, observed on four separate dates across four sessions (BR-19..BR-21). Not the same thing as what the brief intended.</td>
+  <td>Confirmation from the owner, or a full ten-character ASIN for each product.</td>
+  <td>Re-supply the three products as full ASINs or full /dp/ URLs. Until then every page must keep saying &#x27;the product this link resolves to&#x27;, which is the constraint behind FB-05.<div class="note">Who can close it: owner only</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-02">DB-02</a> </div></td>
+</tr>
+<tr id="BQ-19">
+  <td><strong>Is there an approved Associates account at all?</strong><div class="src"><span class="pill">Q-02</span> <span class="pill">F-07</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>Nothing in the repository establishes one: no account, no marketplace, no tag, no report export, no API credential.</td>
+  <td>Everything. The readiness board&#x27;s RR-06 (three qualifying sales) and RR-07 (API enrolment) are both marked BLOCKED pending this.</td>
+  <td>Apply — but only after BQ-15 and the content bar are settled, because a rejected application is not reassessed (BR-08).<div class="note">Who can close it: owner only</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-11">DB-11</a> </div></td>
+</tr>
+<tr id="BQ-20">
+  <td><strong>Which authorised source will tell the site what readers are actually searching for?</strong><div class="src"><span class="pill">Q-13</span> <span class="pill">MQ-06</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>None. No keyword tool, no Search Console property, no Amazon report exists for this project. Google&#x27;s guidance explicitly warns against writing about things because they seem trending (BR-14).</td>
+  <td>Any demand signal at all. Every topic on the topics board is therefore an argument, not a measurement.</td>
+  <td>Connect Search Console for the declared domain and read the queries the site already receives; or buy a keyword tool and record which one, so the number can be cited.<div class="note">Who can close it: owner (tooling) then agent (reading it)</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-11">DB-11</a> </div></td>
+</tr>
+<tr id="BQ-21">
+  <td><strong>Will anyone test these three products, with a dated record?</strong><div class="src"><span class="pill">Q-11</span> <span class="pill">SG-05</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>Nobody has. The FTC forbids implying otherwise (BR-18), and Google rewards first-hand expertise it does not have (BR-16).</td>
+  <td>The products, or the decision not to.</td>
+  <td>Buy or borrow them and keep a dated log, or commit to the spec-sheet-only position and make that the site&#x27;s stated angle rather than its apology.<div class="note">Who can close it: owner only</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-07">DB-07</a> </div></td>
+</tr>
+<tr id="BQ-22">
+  <td><strong>Who owns the domain the site will be declared at?</strong><div class="src"><span class="pill">Q-04</span> <span class="pill">Q-17</span> <span class="pill">DS-04</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>Amazon: “You must own your website.” The site currently publishes at a GitHub Pages project URL under a GitHub account.</td>
+  <td>Whether the applicant controls that GitHub account, or whether a separate domain will be registered.</td>
+  <td>Register a domain and point it at the Pages site, or confirm control of the existing URL. It has to happen before the URL architecture hardens.<div class="note">Who can close it: owner only</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-06">DB-06</a> </div></td>
+</tr>
+<tr id="BQ-23">
+  <td><strong>How often will the published facts be re-checked, and by whom?</strong><div class="src"><span class="pill">Q-07</span> <span class="pill">MQ-07</span> <span class="pill">DS-13</span> </div></td>
+  <td><span class="blank" title="no official source settles this — left empty on purpose">—</span></td>
+  <td>Every page prints a verification date between one and three days old. Amazon&#x27;s policies page was updated on 2026-04-14 and the agreement on 2025-10-15, so the sources move independently of this repository.</td>
+  <td>A cadence, an owner for it, and a gate that fails when a page is stale (DB-09).</td>
+  <td>Pick an interval and build the check. Or remove the printed dates.<div class="note">Who can close it: owner decision, agent implementation</div>
+      <div class="note">Blocks: <a href="suggestions.html#DB-09">DB-09</a> <a href="suggestions.html#DB-12">DB-12</a> </div></td>
+</tr></tbody>
+</table>
+
+<h2>Inventory — what the project already holds</h2>
+<table>
+<thead><tr><th>Item</th><th>How it was established</th><th>Value</th></tr></thead>
+<tbody><tr id="IN-01"><td><strong>Three resolved product destinations</strong></td><td>Live fetch of each supplied short link on 2026-11-16 (BR-19, BR-20, BR-21); the same three destinations were recorded on 2026-11-14 and 2026-11-15 by earlier sessions.</td><td><span class="num">B0CDY277D3, B09B7SB46R, B08DKYBTPH</span></td></tr><tr id="IN-02"><td><strong>138 published pages, every one carrying the §5 disclosure</strong></td><td>Substring search across the tree (RV-03); enforced by two gates.</td><td><span class="num">138 of 138</span></td></tr><tr id="IN-03"><td><strong>22 gates, all green on the tree this session started from</strong></td><td>Every gate replayed locally before any edit (RV-01).</td><td><span class="num">22 of 22, plus 15 of 15 pipeline tests</span></td></tr><tr id="IN-04"><td><strong>A flag register with 40 items, each with the official page it was read from</strong></td><td>pages/flags.html, generated from ledger/flags.json.</td><td><span class="num">F-01 … F-40</span></td></tr><tr id="IN-05"><td><strong>A source register of 43 pages, with each source&#x27;s class made explicit</strong></td><td>pages/sources.html, generated from ledger/sources.json.</td><td><span class="num">S01 … S43</span></td></tr><tr id="IN-06"><td><strong>A release-readiness board measuring the site against the twelve requirements Amazon states for an application review</strong></td><td>release/index.html, generated from ledger/readiness.json and re-derived on every build.</td><td><span class="num">12 rows; 4 MET, 4 GAP, 3 BLOCKED, 1 OPEN</span></td></tr><tr id="IN-07"><td><strong>Eight question-shaped guides already published under the reader-facing brand</strong></td><td>marketing/topics/ — capacity, dual basket, basket versus oven, Hi-Fry, footprint, spec drift, air fryer versus oven, are they worth it.</td><td><span class="num">8 guides</span></td></tr><tr id="IN-08"><td><strong>Specification tables with per-row sources</strong></td><td>marketing/ and pages/products.html; the specification values were read from manufacturer and Amazon pages on 2026-11-14/15 and are carried on this site (BR-22).</td><td><span class="num">48 specification rows</span></td></tr><tr id="IN-09"><td><strong>Clicks, conversions and earnings</strong></td><td>Nothing. No tag exists, so no qualifying purchase can be attributed to this site.</td><td><span class="num">0 — and this is the hole the whole revenue story sits in</span></td></tr></tbody>
+</table>
+
+<p class="note">This register extends and does not replace the canonical
+<a href="../pages/questions.html">Q-01…Q-18</a>, the Owner's Console's information register, or the
+independent audit's gap register.</p>
+
+  </main>
+</div>
+<footer class="site">
+  <div class="wrap">
+    <p>As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Generated by <code>tools/build_brief.py</code> from <code>brief/data/*.json</code>, measured on 2026-11-16.
+    Every row on these pages ends in the official page it was read from, or says plainly that no source
+    settles it. Nothing here is implemented: each proposal waits for a recorded owner decision.</p>
+    <p><a href="../index.html">Owner dashboard</a> ·
+       <a href="../pages/suggestions.html">Suggestion board (SG-01…SG-12)</a> ·
+       <a href="../pages/questions.html">Question register (Q-01…Q-18)</a> ·
+       <a href="../pages/flags.html">Flag register (F-01…F-40)</a> ·
+       <a href="../console/index.html">Owner's Console</a> ·
+       <a href="../marketing/index.html">Reader-facing site</a></p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{
+  "note": "Irregularities raised by this session's review (task T50, session arena/dc72a69e-zone2), namespaced FB- so they cannot collide with the canonical register F-01..F-40 at pages/flags.html, the console's IR-01..IR-09, the audit's findings or the discovery register. Nothing here blocks a deployment: each item blocks an assertion or a decision, not a build. Every row states what would close it and who can close it. Rows marked 'carried' were found by earlier sessions and are re-stated here only where this session's own measurements reproduced them. FB-05 was closed by another session's rebuild while this review was in flight; it is retained as closed rather than deleted so the register does not silently change its mind.",
+  "as_of": "2026-11-16",
+  "severity_note": "Severity is the reviewer's judgement, labelled as such. It is not a program fact and no official source states it.",
+  "flags": [
+    {
+      "id": "FB-01",
+      "severity": "medium",
+      "status": "open",
+      "title": "The release-readiness board states a page count that is 22 pages stale",
+      "detail": "Row RR-01 of ledger/readiness.json says '116 published HTML pages'. Measured on this tree: 160 published, 150 excluding this namespace and the board's own output page. RR-01 has no {measure} token, so unlike RR-03, RR-05 and RR-10 nothing recomputes the number when the tree moves.",
+      "why_it_matters": "The board exists to answer 'which of Amazon's stated requirements does this site meet today'. A row whose evidence is a stale count is a row a reader cannot check, on the one page whose job is to be checkable.",
+      "evidence": "RV-02, RV-06",
+      "source_ids": [],
+      "close_action": "Add a {published_pages} measure to tools/build_readiness.py and replace the typed number in RR-01 with the token.",
+      "owner": "owner (an agent session with tools/build_readiness.py and ledger/readiness.json in scope)",
+      "file_out_of_this_scope": "ledger/readiness.json, tools/build_readiness.py"
+    },
+    {
+      "id": "FB-02",
+      "severity": "medium",
+      "status": "open",
+      "title": "The release-readiness board states a link count that is 7 pages stale",
+      "detail": "Row RR-05 says '72 pages link to amazon.com/dp/'. Measured: 87. RR-05 carries the {pages_with_tagged_link} token for its headline count but the supporting sentence is typed.",
+      "why_it_matters": "Same class of defect as FB-01, on the row that carries the single most consequential finding on the project (zero tagged links).",
+      "evidence": "RV-07",
+      "source_ids": [],
+      "close_action": "Derive the supporting sentence from the same measure as the headline, or drop the sentence.",
+      "owner": "owner (an agent session with ledger/readiness.json in scope)",
+      "file_out_of_this_scope": "ledger/readiness.json"
+    },
+    {
+      "id": "FB-03",
+      "severity": "low",
+      "status": "open",
+      "title": "The canonical suggestion board carries the same proposal twice (SG-11 and SG-12)",
+      "detail": "SG-11 and SG-12 share an area, a title and near-identical body text. The board's own derived counts therefore report 12 suggestions where 11 distinct proposals exist, and the release-readiness board's RR-03 and RR-09 both point at SG-12 while RR-03 and RR-09 are the same gap.",
+      "why_it_matters": "The brief asks for a board where the owner chooses a path. A duplicated row is a path offered twice, and the owner cannot tell whether choosing one discharges the other.",
+      "evidence": "RV-08",
+      "source_ids": [],
+      "close_action": "Delete one row and repoint RR-03 / RR-09 at the survivor, or merge the two into one row with the union of their options.",
+      "owner": "owner (an agent session with ledger/suggestions.json in scope)",
+      "file_out_of_this_scope": "ledger/suggestions.json"
+    },
+    {
+      "id": "FB-04",
+      "severity": "medium",
+      "status": "open",
+      "title": "Fourteen operator and companion pages still describe the site as 'AI-powered'",
+      "detail": "25 occurrences across 14 pages; the exact phrase 'AI-powered Amazon affiliate' on 11. The T55 rebuild removed it from every reader-facing page on 2026-11-16; what remains is the operator surfaces (console/, research-hub/, summary.html, review-trace.html) and two companion prototypes (affiliate-lab/, zone2/).",
+      "why_it_matters": "It is the single strongest signal that the copy was produced from a brief rather than from the work. It also invites exactly the reading of the site that Google's scaled-content-abuse policy describes, for no benefit: no reader chooses an affiliate site because it is AI-powered.",
+      "evidence": "RV-09",
+      "source_ids": [
+        "BR-13",
+        "BR-08",
+        "BR-11"
+      ],
+      "close_action": "Remove the phrase from the operator and companion pages. Describe what the pages do (sourced rows, blanks left blank) rather than what built them.",
+      "owner": "owner — this is a copy decision, and it is proposed as DB-01 on the design board"
+    },
+    {
+      "id": "FB-05",
+      "severity": "medium",
+      "status": "closed",
+      "title": "CLOSED BY T55 — the landing page's overclaim was removed by another session's rebuild",
+      "detail": "index.html printed 'Three links in. Three listings identified.' while flag F-03 recorded that no Amazon document binds any of the three codes to a product. Session arena/9251f262-zone2 (T55) rebuilt index.html on 2026-11-16 and the heading is no longer published. Kept on the register as closed rather than deleted, because the measurement was real and the fix came from elsewhere.",
+      "why_it_matters": "This is the 'AI slop' tell in its purest form: a confident sentence that the project's own evidence contradicts, placed above the fold.",
+      "evidence": "RV-10",
+      "source_ids": [
+        "BR-19",
+        "BR-20",
+        "BR-21"
+      ],
+      "close_action": "None — closed by T55. Verified absent from index.html after the rebase (RV-10).",
+      "owner": "closed by session arena/9251f262-zone2 (T55, PR #144)"
+    },
+    {
+      "id": "FB-06",
+      "severity": "high",
+      "status": "open",
+      "title": "Zero of 138 published pages carry an Associates tag, so no page on the site can currently earn",
+      "detail": "Measured with Amazon's published tag format (NAME-NN). The three supplied short links resolve without a tag parameter. Amazon's own application-review page states that the tags 'must be embedded in your Amazon product links on the site(s) declared in your application', and that the application is checked once at least three qualifying sales have been driven within the first 180 days.",
+      "why_it_matters": "This is the finding the brief's 'so real people can click the links and buy' runs into. Until a tag exists, traffic cannot convert into qualifying purchases, and without three of them the application is never reviewed. Everything downstream — conversion data, the optimizer, the revenue model — is blocked behind one string the owner has to supply.",
+      "evidence": "RV-04",
+      "source_ids": [
+        "BR-10",
+        "BR-07"
+      ],
+      "close_action": "Supply the Associates ID (tag) and the marketplace; then rebuild the links with it.",
+      "owner": "owner — carried on the canonical register as F-07 and F-24, and asked as BQ-02 on the questions register"
+    },
+    {
+      "id": "FB-07",
+      "severity": "low",
+      "status": "open",
+      "title": "43 pages across seven companion namespaces carry no canonical URL",
+      "detail": "95 of 138 pages carry a self-referencing canonical. The remaining 43 sit entirely in preserved companion namespaces (research-hub 12, affiliate-lab 10, zone2 8, audit 6, revalidation 6, northstar 1, release 1). tools/build_head_meta.py --audit reports them rather than failing them, by design.",
+      "why_it_matters": "It is the owner's open decision (MQ-08 / DS-12), not a defect. It is recorded here because 'which surface is the site' has to be answered before an application lists a URL.",
+      "evidence": "RV-14",
+      "source_ids": [],
+      "close_action": "Decide which surface is the declared Site, then either fold the companions into the head contract or exclude them from the declared set.",
+      "owner": "owner — open decision, carried as MQ-08 and DS-12"
+    },
+    {
+      "id": "FB-08",
+      "severity": "low",
+      "status": "open",
+      "title": "This session re-fetched the listings and the program and search documents, but not the manufacturer pages",
+      "detail": "The three Amazon destination listings and every program and ranking rule quoted in this namespace were fetched live on 2026-11-16. The manufacturer pages behind the published specifications were not: they were read on 2026-11-14/15 by earlier sessions and are indexed in the canonical register.",
+      "why_it_matters": "A verification page that hides which rows it did not re-check is the thing this project exists to avoid. The gap is one row on the source register (BR-22) and one row here instead of being invisible.",
+      "evidence": "RV-13",
+      "source_ids": [
+        "BR-22"
+      ],
+      "close_action": "Re-fetch chefman.com and emerileveryday.com and re-quote the specification rows, or accept the carry and date it.",
+      "owner": "owner — proposed as DB-09 on the design board"
+    }
+  ]
+}

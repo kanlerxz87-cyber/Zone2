@@ -1,0 +1,259 @@
+{
+  "note": "Source register for the design brief (task T50, session arena/dc72a69e-zone2). IDs are namespaced BR- so they cannot collide with the canonical register S01..S60 at pages/sources.html, the console's C-01.., the audit's SA-.. or the discovery register. Every 'verified' row was fetched live on 2026-11-16 UTC by this session with fetch_page; the sandbox shell's outbound TLS is broken, so no row rests on curl. Every 'carried' row states so explicitly: it was read by an earlier session and is not re-asserted here. A row's quote is copied from the page as served; where a row has no quote, this session read the page but publishes no wording from it.",
+  "as_of": "2026-11-16",
+  "accessed_utc": "2026-11-16",
+  "classes": {
+    "official": "An Amazon Associates program document, a Google Search Central document, or an FTC document. These are the only pages this project treats as able to settle a program or ranking rule.",
+    "observed": "The supplied affiliate short links and the Amazon listing pages they resolve to. Evidence about the artefact under test. Never used to state a program rule, and never used to state a product attribute the listing page does not print.",
+    "carried": "Read by an earlier session and published in that session's register. Not re-fetched by this session; quoted only where this session saw the text on the page."
+  },
+  "sources": [
+    {
+      "id": "BR-01",
+      "title": "Associates Program Policies — Participation Requirements §6(t): customer reviews and star ratings",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "class": "official",
+      "quote": "You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API and you comply with the requirements for Creators API and PA API described in the License."
+    },
+    {
+      "id": "BR-02",
+      "title": "Associates Program Policies — Participation Requirements §6(y): price tracking and price alerting",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "class": "official",
+      "quote": "Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality."
+    },
+    {
+      "id": "BR-03",
+      "title": "Associates Program Policies — Participation Requirements §6(g): no incentive to use a Special Link",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "class": "official",
+      "quote": "You will not offer any person or entity any consideration, reward, or incentive (including any money, rebate, discount, points, donation to charity or other organization, or other benefit) for using Special Links."
+    },
+    {
+      "id": "BR-04",
+      "title": "Associates Program Policies — Participation Requirements §6(v) and §6(w): cloaking and link shortening",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Updated: April 14, 2026",
+      "class": "official",
+      "quote": "You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site."
+    },
+    {
+      "id": "BR-05",
+      "title": "Associates Program Operating Agreement — §5 Identifying Yourself as an Associate",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Updated: October 15, 2025",
+      "class": "official",
+      "quote": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”"
+    },
+    {
+      "id": "BR-06",
+      "title": "Associates Program Operating Agreement — §4: no representation about traffic or income",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Updated: October 15, 2025",
+      "class": "official",
+      "quote": "We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations."
+    },
+    {
+      "id": "BR-07",
+      "title": "Associates Program — Application Review Process: the three-sales threshold and the tagged-link rule",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "official",
+      "quote": "After you sign up, our Associates team will check your application once you’ve driven qualified sales (we require at least three within the first 180 days)."
+    },
+    {
+      "id": "BR-08",
+      "title": "Associates Program — Application Review Process: the content bar for the declared Site",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "official",
+      "quote": "All Sites must have robust original content (even when advertising is removed) – a good rule of thumb is at least 10 posts. They must be publicly available (for example, they should not be a closed group, or behind a paywall)."
+    },
+    {
+      "id": "BR-09",
+      "title": "Associates Program — Application Review Process: recency and ownership",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "official",
+      "quote": "Content on your website must be recent (generally within the last 60 days). You must own your website."
+    },
+    {
+      "id": "BR-10",
+      "title": "Associates Program — Application Review Process: what a Special Link tag is",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "publisher": "Amazon.com Associates Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "official",
+      "quote": "Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application."
+    },
+    {
+      "id": "BR-11",
+      "title": "Google Search Central — spam policies: scaled content abuse",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "publisher": "Google Search Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Last updated 2026-08-28 UTC.",
+      "class": "official",
+      "quote": "Scaled content abuse is when many pages are generated for the primary purpose of manipulating search rankings and not helping users. This abusive practice is typically focused on creating large amounts of unoriginal content that provides little to no value to users, no matter how it's created."
+    },
+    {
+      "id": "BR-12",
+      "title": "Google Search Central — spam policies: thin affiliation, and what a good affiliate site is",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "publisher": "Google Search Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Last updated 2026-08-28 UTC.",
+      "class": "official",
+      "quote": "Not every site that participates in an affiliate program is a thin affiliate. Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons."
+    },
+    {
+      "id": "BR-13",
+      "title": "Google Search Central — guidance on generative AI content",
+      "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+      "publisher": "Google Search Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "Last updated 2026-10-01 UTC.",
+      "class": "official",
+      "quote": "However, using generative AI tools or other similar tools to generate many pages without adding value for users may violate Google's spam policy on scaled content abuse."
+    },
+    {
+      "id": "BR-14",
+      "title": "Google Search Central — creating helpful, reliable, people-first content: the trending-topic warning",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "publisher": "Google Search Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "page_dated_note": "The page prints a last-updated line; this session's read captured the guidance sections but not the datestamp, so no date is asserted here.",
+      "class": "official",
+      "quote": "Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?"
+    },
+    {
+      "id": "BR-15",
+      "title": "Google Search Central — creating helpful, reliable, people-first content: the spread-across-sites warning",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "publisher": "Google Search Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "official",
+      "quote": "Is the content mass-produced by or outsourced to a large number of creators, or spread across a large network of sites, so that individual pages or sites don't get as much attention or care?"
+    },
+    {
+      "id": "BR-16",
+      "title": "Google Search Central — creating helpful, reliable, people-first content: first-hand expertise",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "publisher": "Google Search Central",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "official",
+      "quote": "Does your content clearly demonstrate first-hand expertise and a depth of knowledge (for example, expertise that comes from having actually used a product or service, or visiting a place)?"
+    },
+    {
+      "id": "BR-17",
+      "title": "FTC — Disclosures 101 for Social Media Influencers: placement",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "publisher": "U.S. Federal Trade Commission",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "November 2019",
+      "class": "official",
+      "quote": "The disclosure should be placed with the endorsement message itself."
+    },
+    {
+      "id": "BR-18",
+      "title": "FTC — Disclosures 101 for Social Media Influencers: claims that require proof",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "publisher": "U.S. Federal Trade Commission",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "November 2019",
+      "class": "official",
+      "quote": "You can’t talk about your experience with a product you haven’t tried."
+    },
+    {
+      "id": "BR-19",
+      "title": "SUPPLIED LINK 1 — link.amazon/B04G1MEwY, destination observed 2026-11-16",
+      "url": "https://link.amazon/B04G1MEwY",
+      "publisher": "Amazon (short-link service) → www.amazon.com",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "observed",
+      "quote": "Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen",
+      "observation": "Resolves to https://www.amazon.com/dp/B0CDY277D3 (breadcrumb: Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers). No Associates tag parameter is present in the resolved URL."
+    },
+    {
+      "id": "BR-20",
+      "title": "SUPPLIED LINK 2 — link.amazon/B02NbDxp3, destination observed 2026-11-16",
+      "url": "https://link.amazon/B02NbDxp3",
+      "publisher": "Amazon (short-link service) → www.amazon.com",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "observed",
+      "quote": "Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen",
+      "observation": "Resolves to https://www.amazon.com/dp/B09B7SB46R (breadcrumb: Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers). No Associates tag parameter is present in the resolved URL."
+    },
+    {
+      "id": "BR-21",
+      "title": "SUPPLIED LINK 3 — link.amazon/B00hJ57DV, destination observed 2026-11-16",
+      "url": "https://link.amazon/B00hJ57DV",
+      "publisher": "Amazon (short-link service) → www.amazon.com",
+      "fetched": "2026-11-16",
+      "rechecked": "yes",
+      "page_dated": "",
+      "class": "observed",
+      "quote": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
+      "observation": "Resolves to https://www.amazon.com/dp/B08DKYBTPH (breadcrumb: Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers). No Associates tag parameter is present. The listing title prints 450°F for the Hi-Fry option, which is the conflict already carried on the canonical register as F-22; this session observed the title text only and does not restate any specification from it."
+    },
+    {
+      "id": "BR-22",
+      "title": "CARRIED — the manufacturer pages behind the three listings",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html",
+      "publisher": "chefman.com · emerileveryday.com (indexed in the canonical register as S19–S21 / S31–S33)",
+      "fetched": "2026-11-16",
+      "rechecked": "carried",
+      "page_dated": "",
+      "class": "carried",
+      "quote": "",
+      "observation": "This session re-fetched the three Amazon destination listings (BR-19..BR-21) and the program and search documents above. It did not re-fetch the manufacturer pages; the specifications published across this repository were read from them on 2026-11-14/15 by earlier sessions and are indexed, with their links, on the canonical source register. This row exists so the brief's source list shows the gap instead of hiding it."
+    }
+  ]
+}
