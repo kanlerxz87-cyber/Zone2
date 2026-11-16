@@ -5319,3 +5319,26 @@ Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live check
 | Live site | `https://kanlerxz87-cyber.github.io/Zone2/` fetched 2026-11-16: landing renders. |
 | Repository note | Commits `92acffe` and `2e660ce` carry a `T50:` prefix from the first attempt. The records above show this work is **T51**; the prefix is history, not a second claim. |
 | Workflow dispatch | `gh workflow run` returned HTTP 403 for this integration; not needed, because the push-triggered run on the tip succeeded. |
+
+---
+
+## Session claim — T52 (verification + final integration wave; claimed as T50, renumbered) — `arena/1f51a5ed-zone2` (session `1f51a5ed`, 2026-11-16 UTC)
+
+**Branch note (documented deviation).** The coordination rule asks for a branch named `session-<id>/<task>`.
+Arena pins this session to `arena/1f51a5ed-zone2` and forbids creating or switching branches, so this
+session works on its one pinned branch and holds itself to strict file-scope discipline instead — the same
+deviation every prior session recorded.
+
+| Item | Value |
+|---|---|
+| Task | **T52** (claimed as T50 at 2026-11-16T18:35Z; renumbered at rebase because `ebc8a709` shipped **T50** (PR #131) and `970d11d6` shipped **T51** while this branch was in flight — per the board's renumbering precedent no other session's record is altered) — final wave for the 2026-11-16 request: (a) independent live re-verification of the three supplied `link.amazon` links and the official program/manufacturer/search-policy sources the site cites; (b) line-by-line audit of every published deliverable against the brief (suggestions decision board, questions register, executive summary, marketing articles/trends, flagged register, per-row source links, blank-or-flagged rule, dashboard UI with category subpages); (c) run every repository gate on the combined tree; (d) fix anything red or broken found within scope; (e) PR → merge without waiting → confirm GitHub Pages deploy → record here. |
+| Status | **claimed, in progress** |
+| Owner | `1f51a5ed` (branch `arena/1f51a5ed-zone2`, base `004a040` = merge of PR #130) |
+| File scope | `COORDINATION.md` (append-only records + this row), NEW `docs/verification-1f51a5ed.md`, and any fix strictly required by a red gate or a broken published link — each such fix named here before it is made |
+| Deliberately **not** touched | `ledger/**`, `assets/**`, `marketing/**`, `console/**`, `pages/**` (regenerated only), `journal/**`, `decisions/**`, `audit/**`, `discovery/**`, `research-hub/**`, `northstar/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**`, `tools/**`, `.github/**` — no other session holds an open claim on them, and none of them needs edits unless a gate goes red |
+| Board state at claim (measured) | `origin/main` = `004a040` (PR #130 merged 2026-11-16T14:58:17Z); `gh pr list --state open` → **empty**; latest `main` CI runs `completed/success` (run 43891405619 build+verify, 43891405420 pages deploy); local `tools/ci_replay.py` → **35/35 PASS** on this branch's exact tree; no task row beyond T49 is open with a live owner — all prior sessions merged or closed, so no takeover conflicts this claim |
+| Verification channel note | Sandbox shell has no outbound TLS; live checks use `fetch_page` and `gh`/GitHub API only, as in T49 |
+
+**Claim commit and push happen immediately after this record, before any non-coordination edit.**
+
+| Renumbering trail | claimed **T50** → **T52** (T50 shipped by `ebc8a709` PR #131; T51 shipped by `970d11d6`). Nothing of either session's record was edited; this claim's original T50 label is kept visible above. |
