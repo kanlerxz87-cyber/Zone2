@@ -82,6 +82,8 @@ jobs:
           problems += check("revalidation", sorted(f.name for f in Path("revalidation").glob("*.html")))
           # T42: the Owner's Console resolves "../" links upward, so check it from the repo root too.
           problems += check("console", sorted(f.name for f in Path("console").glob("*.html")))
+          # T49: the discovery review namespace (PR #104, integrated) is published like any other.
+          problems += check("discovery", sorted(f.name for f in Path("discovery").glob("*.html")))
           problems += check(".", [f.name for f in sorted(Path(".").glob("*.html")) if f.name != "404.html"])
           for page in sorted(Path("pages").rglob("*.html")):
               rel = page.relative_to("pages")
@@ -140,7 +142,8 @@ jobs:
                   sorted(glob.glob('revalidation/*.html')) + \
                   sorted(glob.glob('affiliate-lab/*.html')) + \
                   sorted(glob.glob('pages/**/*.html', recursive=True)) + \
-                  sorted(glob.glob('console/*.html'))
+                  sorted(glob.glob('console/*.html')) + \
+                  sorted(glob.glob('discovery/*.html'))
           assert len(pages) >= 70, f'expected every published page, found {len(pages)}'
           for f in pages:
               t = open(f, encoding='utf-8').read()
@@ -298,6 +301,42 @@ jobs:
 
       - name: Decision gate (sourcing, closed vocabulary, blockers, derived counts, disclosure, links)
         run: python3 tools/validate_decisions.py
+
+      # ---- arena/2b07e526-zone2: the release-readiness board (T45) ----
+      # RESTORED 2026-11-16 by session 224cc10c. This step was dropped from the workflow by commit
+      # 80c9a55 (session f8e18ca8, "Independent audit"), whose message claimed "workflow (+4 steps)"
+      # while the diff actually *replaced* this block with its own four. Nothing checked the
+      # readiness board between that commit and 2026-11-16, which is why the board's typed counts
+      # drifted from the tree twice (124 vs 126, then 126 vs 134) without a single red build.
+      # One row per named requirement on Amazon's Application Review Process page (S23), each with the
+      # official source and, where measurable, a count recomputed from this tree. The generator fails on a
+      # row with no official source, a quote that is not on S23 as captured, a BLOCKED row with no named
+      # blocker, a finding with no owner action, a count that disagrees with the tree, a missing
+      # disclosure, a printed product price, or a broken local link. Verified to fail on purpose on
+      # 2026-11-15 against 14 injected defects before being added here.
+      - name: Rebuild the release-readiness board and confirm committed output is current
+        run: python3 tools/build_readiness.py --check
+
+      # The negative tests for the board above. A gate that has only ever passed is a claim, not a
+      # control: 13 injected defects must each fire, and the unmutated register must be clean.
+      - name: Release-readiness gate negative tests (13 injected defects must each fire)
+        run: python3 tools/test_readiness.py
+
+      # ---- arena/224cc10c-zone2: the discovery review namespace (T47, integrated by T49) ----
+      # Six pages answering three questions the site had not put on one surface: what a line-by-line
+      # review found (17 measured findings), what information is still missing (10 open questions),
+      # and what could be done about it at what cost (14 proposals, none decided). Every row ends in
+      # the official page it was read from, and the quote is printed beside the link.
+      # PR #104 shipped this namespace with a second head-layer implementation, which put two canonical
+      # links and two conflicting og:url values on every page; that implementation was discarded on
+      # merge and the pages now carry the repository's single head contract.
+      - name: Rebuild the discovery review and confirm committed output is current
+        run: |
+          python3 tools/build_discovery.py --check
+          python3 tools/build_measurement.py --check
+
+      - name: Discovery gate (sourcing, quotes, blank-or-flagged, derived counts, links, disclosure)
+        run: python3 tools/validate_discovery.py
 
       # ---- arena/f8e18ca8-zone2: the independent audit namespace ----
       # 1B-2 (session 1b839f87) recorded that nothing in this workflow resolves a CSS url(),

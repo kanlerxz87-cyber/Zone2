@@ -52,6 +52,7 @@ REQUIRED_NAMESPACES = [
     "affiliate-lab/index.html",
     "revalidation/index.html",
     "marketing/index.html",
+    "discovery/index.html",
 ]
 
 # URLs Amazon answers with an error page. Evidence: ledger/verification.json V-02..V-04 and

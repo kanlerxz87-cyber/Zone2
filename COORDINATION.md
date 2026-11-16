@@ -5102,3 +5102,55 @@ are in `COORDINATION.md` and `docs/*.md` prose that is quoting earlier sessions'
 `V-01…V-11` · 9 irregularities `IR-01…IR-09` · 31 sources `C-01…C-31` · 28 verification checks `VR-01…VR-28` ·
 10 measurements `MS-01…MS-10` · 8 rewrites `RW-01…RW-08` · 9 principles `DP-01…DP-09` · 6 articles `AR-01…AR-06`.
 All namespaced away from the canonical `SG-`/`Q-`/`F-`/`DS-`/`RF-` registers, which are indexed and untouched.
+
+---
+
+## Session claim — T49 (final integration wave) — `arena/224cc10c-zone2` (session `224cc10c`, 2026-11-16 UTC)
+
+**Branch note (documented deviation).** The project's coordination rule asks for a branch named
+`session-<id>/<task>`. Arena pins this session to `arena/224cc10c-zone2` and forbids creating or
+switching to another branch, so this session works on its one pinned branch and holds itself to strict
+file-scope discipline instead. This is the same deviation every prior session recorded.
+
+| Item | Value |
+|---|---|
+| Task | **T49** — final integration wave for the 2026-11-16 request: (a) repair the one red gate on `main`; (b) integrate the one substantial unmerged body of work (PR #104, T47 discovery review); (c) resolve the three stale open PRs; (d) line-by-line re-verification of the combined tree against official sources; (e) PR → merge → confirm Pages deploy → record. |
+| Status | **in progress** |
+| Owner | `224cc10c` (branch `arena/224cc10c-zone2`, base `14402f6` = merge of PR #128) |
+| File scope | `COORDINATION.md` (append-only), `tools/build_readiness.py` + `ledger/readiness.json` (RR-10 / RR-11 **only**) + regenerated `release/index.html`, the T47 files listed below, `.github/workflows/pages.yml` (one additive CI step), `sitemap.xml` (regenerated, never hand-edited), NEW `docs/verification-224cc10c.md`, and additive nav links on the root pages where the new surface must be reachable |
+| T47 files in scope | `discovery/**` (new namespace), `docs/design-brief-t40.md`, `docs/discovery-t40.json`, `docs/discovery-t40-sources.json`, `docs/measurement-t40.json`, `tools/build_discovery.py`, `tools/build_measurement.py`, `tools/validate_discovery.py` |
+| Deliberately **not** touched | `tools/head_meta.py` / `tools/build_head_meta.py` (main's head layer is canonical — T47's duplicate `tools/page_meta.py` + `tools/build_meta.py` is **discarded**, not merged), `ledger/**` other than the two readiness rows, `assets/**`, `marketing/**`, `console/**`, `pages/**` (regenerated only), `journal/**`, `decisions/**`, `audit/**`, `research-hub/**`, `northstar/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**` |
+
+### Board state at claim (measured, not typed)
+
+`origin/main` = `14402f6`. Open PRs at claim time: **#104** (`3e0b3b4e`, T47 discovery review — 13 commits,
+base `debc915`, 54 commits behind `main`), **#113** (`f8e18ca8`, close-out record, `COORDINATION.md` only),
+**#118** (`86bb886d`, close-out record, `COORDINATION.md` + `review-2026-11-15.html`). All three were last
+touched on **2026-11-15 ~13:40Z** — more than 60 minutes and one full day old, with no commits since, so
+the project's takeover rule applies. #104 is taken over by this session (its scope is the T47 body of work
+this session must integrate). #113 and #118 are coordination-only close-out records; their content is
+absorbed into this session's own record and they are closed as superseded rather than merged, so that two
+stale coordination-only PRs do not race this session's board edit.
+
+### Gate state at claim — one red gate on `main`
+
+Every repository gate was replayed locally on `14402f6`. Twenty-one of twenty-two are green
+(`build_site`, `build_root_views`, `build_summary`, `build_sitemap`, `build_decisions`, `build_audit`,
+`build_console`, `build_marketing`, `build_readiness`–`build_head_meta`, `validate_data`, `validate_decisions`,
+`validate_audit`, `validate_console`, `validate_discovery` *(absent on `main` — arrives with T47)*,
+`audit_site`, `seo_audit`, `check_css_urls`, `test_audit`, `verify_marketing`, `verify` ×3, `test_pipeline`).
+
+**The red one:** `python3 tools/build_readiness.py --check` fails on `main` itself —
+`RR-10` states "126 of 126 published pages carry the exact sentence …" while the tree now measures **134**,
+and `RR-11` states "12 published surfaces exist today" while the tree measures **13**. This is the third
+occurrence of the same defect class in this repository (T48 recorded the 124-vs-126 instance of it).
+
+**Why it recurs and the durable fix.** `build_readiness.py` measures the tree at check time and then
+requires the measured number to appear *inside a hand-typed sentence in `ledger/readiness.json`*. Every page
+any session adds moves the number, so the sentence is wrong again the next merge. Editing the two sentences
+would fix today's build and re-break it at the next merge. Instead, this session makes the count **derived
+rather than typed**: a `site_state` may carry a `{measure}` token, the builder substitutes the measured
+value at render time, and the validator checks the **rendered** number. A typed number is still accepted and
+still checked, so the gate keeps failing when a hand-typed count drifts — but a token can never drift.
+
+**Claim commit and push happen immediately after this record, before any non-coordination edit.**
