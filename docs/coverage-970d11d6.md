@@ -1,7 +1,8 @@
-# Requirements-to-evidence coverage audit — session `970d11d6` (T50)
+# Requirements-to-evidence coverage audit — session `970d11d6` (T51; renumbered from T50)
 
 **Date (UTC):** 2026-11-16 · **Branch:** `arena/970d11d6-zone2` (from `main` @ `004a040`) · **Type:** read-only verification.
 **Scope:** maps each explicit requirement of the 2026-11-16 brief to the file or live page that satisfies it, and re-counts the table rows against the "every row has an official source link; blank and flag otherwise" rule.
+**Overlap:** the supplied-link, policy-page and gate checks also appear in `docs/review-2026-11-16.md` (T50, session `ebc8a709`, PR #131). This audit does not repeat them as findings; it adds the requirement matrix, row-level counts and N-1…N-7.
 **Not edited:** `ledger/**`, `pages/**`, `marketing/**`, `audit/**`, `console/**`, root `*.html`, `assets/**`, `tools/**`, `.github/**`. Every item below that needs a change is logged as an owner request, not made here.
 
 Status vocabulary: **met** (evidence found and checked) · **partial** (met in part; gap stated) · **owner-blocked** (needs the Associates account owner, or a credential this sandbox does not hold) · **not assessed** (not checked in this session).
