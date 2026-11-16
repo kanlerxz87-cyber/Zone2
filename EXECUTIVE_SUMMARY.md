@@ -854,3 +854,24 @@ on this site can attribute a commission (F-07 / F-24); the three intended produc
 by any official document (F-01 … F-03); the Creators API account is unregistered (F-05); and there are no
 performance reports, because there is no traffic to report (F-08). Everything the owner must decide is on
 the suggestions board and the questions register, each with the action that would discover the answer.
+## Addendum — official-source re-verification and decision-surface confirmation, 2026-11-16 (session `arena/e7a12fe5-zone2`, task T40)
+
+**Scope.** A fresh line-by-line re-verification of the official sources the published site rests on, recorded in full at `docs/verification-e7a12fe5.md`. No product attribute, price, rating, commission band or register row was added, changed or inferred; nothing here states a figure the official pages do not state.
+
+**Official sources re-fetched live on 2026-11-16 and confirmed:**
+- Associates Program Operating Agreement (`affiliate-program.amazon.com/help/operating/agreement`, Updated October 15, 2025) — §5 disclosure sentence.
+- Associates Program Policies (`affiliate-program.amazon.com/help/operating/policies`, Updated April 14, 2026) — Commission Income Statement §1 attribution window; Participation Requirements §6; IP License.
+- Standard Commission Income Statement / Table 1 (`affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ`) — Kitchen 4.50%, Home 3.00%, All Other Categories 4.00%; Prime bounties $12.00. Matches `ledger/commission_table.json` row by row.
+- ASIN definition and tagged Special Link format (`affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC`) — ASIN is a 10-digit code; enforces rejection of the three 9-char supplied tokens via `tools/asin_guard.py`.
+- FTC Endorsement Guides (`ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking`) — clear-and-conspicuous material-connection disclosure.
+- Google qualify-outbound-links (`developers.google.com/search/docs/crawling-indexing/qualify-outbound-links`, Updated 2025-12-10) — `rel="sponsored"` for paid/affiliate links.
+
+**The three supplied links re-confirmed:** each `link.amazon/<code>` resolves reproducibly to one live Amazon listing (Chefman 6 Qt dual-basket → B0CDY277D3; Emeril Lagasse 26 QT → B09B7SB46R; Chefman 8 Qt TurboFry → B08DKYBTPH). Each supplied code is 9 characters (not a 10-digit ASIN); `amazon.com/dp/<code>` returns Page Not Found; no resolved URL carries an Associates `tag=`, so as supplied none can earn commission (F-24). The short-code → destination mapping is observed behaviour, not documented intent (F-03; Q-03 / Q-18 owner-open).
+
+**Decision surfaces confirmed linked and prominent:** the root landing page links the Suggestions board (`pages/suggestions.html`, SG-01…SG-12) and the Open questions register (`pages/questions.html`, Q-01…Q-18) from both the primary navigation and the footer "Decisions" column. Each suggestion row carries options, a recommendation, the questions that must be answered first, and an owner decision field awaiting record in `ledger/suggestions.json`. Nothing is implemented until a choice is recorded there.
+
+**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (43 sources, 361 rows, 40 flags, 1176 links); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 141 pages, all checks PASS.
+
+**Flagged irregularities (non-blocking, on `pages/flags.html`):** F-01/F-03 (product identity not established by an official document), F-24 (no Associates tag on the supplied links), F-05 (Creators API unregistered; PA-API 5.0 deprecated), F-08 (no performance reports; no traffic/revenue figures published anywhere). None blocks merge; all are published for owner review with their source links and closing actions.
+
+**What remains owner-open:** confirm the product → intended-ASIN mapping with the brief owner; assign decisions for SG-01…SG-12 in `ledger/suggestions.json`; close or carry Q-01…Q-18 in `ledger/questions.json` (Q-02 Associate ID, Q-04 domain ownership, Q-17 declared Associates URL are the account-holder actions that unblock monetisation).
