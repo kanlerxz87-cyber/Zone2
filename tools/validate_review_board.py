@@ -9,7 +9,7 @@ The 2026-11-16 request states the contract this gate enforces:
 
 A suggestion board is exactly where that rule is easiest to break, because a proposal *is* an
 assertion: it claims a problem exists, that a fix would work, and that a cost is realistic.
-So this gate holds the register to twelve rules, and most of them are defects this repository
+So this gate holds the register to thirteen rules, and most of them are defects this repository
 has already shipped at least once in another namespace:
 
    1. source integrity      - every cited id resolves; a dangling citation is a rumour with a number
@@ -299,6 +299,22 @@ def check_findings(rep: Report) -> None:
         if not i.get("source_ids"):
             rep.fail(f"{iid}: no source - even an idea must rest on the official page that justifies it")
     rep.stats["ideas"] = len(idea_ids)
+
+    irr_ids = set()
+    for i in rb.IRREGULARITIES:
+        iid = i["id"]
+        if iid in irr_ids:
+            rep.fail(f"duplicate irregularity id {iid}")
+        irr_ids.add(iid)
+        for field in ("severity", "found", "effect", "resolution", "owner_action"):
+            if not (i.get(field) or "").strip():
+                rep.fail(f"{iid}: empty {field!r} - an unactionable flag is noise")
+        if i.get("severity") not in ("high", "medium", "low"):
+            rep.fail(f"{iid}: severity {i.get('severity')!r} not in high/medium/low")
+        for sid in i.get("source_ids") or []:
+            if sid not in rb.SOURCES:
+                rep.fail(f"{iid}: cites unknown source {sid!r}")
+    rep.stats["irregularities"] = len(irr_ids)
     rep.stats["findings"] = len(ids)
     rep.stats["measurements"] = len(rb.MEASUREMENTS)
 

@@ -897,7 +897,7 @@ traced the request sentence by sentence, and converted the "AI slop" complaint i
 | [`review-trace.html`](review-trace.html) | The request traced as 16 rows `RP-01…RP-16` (6 met, 5 partial, 5 not met), 12 measurements `PM-01…PM-12`, 9 design findings `PD-01…PD-09`, 11 official sources quoted verbatim |
 | [`review-ideas.html`](review-ideas.html) | 5 article concepts `PS-13…PS-17`, each with its basis, the page it would become, and why it might convert |
 | `docs/review-board.json` | The register. In `docs/` because `tools/build_decisions.py --check` hashes every file under `decisions/`, so a register stored there is permanent drift |
-| `tools/validate_review_board.py` + `tools/test_review_board.py` | An 12-rule gate and 17 injected defects, each of which must fire. Both run in CI with `build_review_board.py --check` |
+| `tools/validate_review_board.py` + `tools/test_review_board.py` | An 13-rule gate and 19 injected defects, each of which must fire. Both run in CI with `build_review_board.py --check` |
 
 **The "AI slop" complaint, measured.** Nine findings, each counted on 2026-11-16 rather than asserted:
 68 of the 71 product links on the 20 marketing pages render as a *citation* ("M4 · www.amazon.com Amazon

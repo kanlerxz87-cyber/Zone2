@@ -86,7 +86,7 @@ working-directory state.
 ci_replay.py ............ CI REPLAY PASSED — 38 steps   (was 35; +3 for this task)
 build_review_board --check   pass, 4 pages, 0 drift
 validate_review_board ....... pass, 0 errors, 0 warnings
-test_review_board ........... 17 injected defects, each fired; 1 control passed
+test_review_board ........... 19 injected defects, each fired; 1 control passed
 build_decisions --check ..... pass after the register moved out of decisions/
 build_readiness --check ..... pass; RR-10 derived count 140 -> 144
 build_sitemap --check ....... pass; 143 URLs
@@ -100,13 +100,18 @@ test_audit, test_readiness .. pass
 research-hub/scripts/verify.py  pass
 ```
 
-## 6. Two defects this session introduced and then fixed (recorded, not hidden)
+## 6. Three defects this session introduced and then fixed (recorded, not hidden)
 
 1. **`validate_decisions` failed because the register sat in `decisions/`.** `tools/build_decisions.py
    --check` hashes every file under `decisions/`, generated or not, so any register stored there is
    permanent drift. Fixed by moving the register to `docs/review-board.json`, which is the repository's
    existing convention (`docs/discovery-t40.json`). No file owned by another session was edited.
-2. **`validate_data` failed on the footer's own negation.** The rule requires a negation on the same line
+2. **`validate_data` failed on a typed count in `README.md`.** The README said "5 flags" next to the new
+   review-board row; the gate reads any "N flags" in the root surfaces as a claim about `ledger/flags.json`,
+   which holds 40. No external ledger was touched; the sentence was reworded so it no longer makes a count
+   claim at all. This is the same defect class the repository has flagged three times before (F-17, F-26,
+   F-29), and the gate caught it in CI rather than in review — which is the point.
+3. **`validate_data` failed on the footer's own negation.** The rule requires a negation on the same line
    as the phrase "affiliated with Amazon". The first render split them across two lines. Fixed by keeping
    the negation inside one element. The sentence itself was not weakened.
 

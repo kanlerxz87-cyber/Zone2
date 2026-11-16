@@ -38,7 +38,12 @@ def run(data: dict) -> tuple[int, str]:
     (tmp / "ledger" / "sources.json").write_text(
         (REPO / "ledger" / "sources.json").read_text(encoding="utf-8"), encoding="utf-8"
     )
-    for page in ("review.html", "review-questions.html", "review-trace.html", "review-ideas.html"):
+    # Derive the page list from the builder, so a page added later cannot silently escape the harness.
+    import importlib.util as _ilu
+    _spec = _ilu.spec_from_file_location("_rb", REPO / "tools" / "build_review_board.py")
+    _rb = _ilu.module_from_spec(_spec)
+    _spec.loader.exec_module(_rb)
+    for page in _rb.PAGES:
         (tmp / page).write_text((REPO / page).read_text(encoding="utf-8"), encoding="utf-8")
     # Pages must resolve their links; copy the minimum tree they point at.
     for d in ("pages", "marketing", "decisions", "assets"):
@@ -159,6 +164,18 @@ def _(d):
 @mutation("a findings row points at a proposal that does not exist", "is not a proposal on this board")
 def _(d):
     d["design_findings"][0]["proposed_fix"] = "PS-99"
+    return d
+
+
+@mutation("an irregularity cites a source that does not exist", "cites unknown source")
+def _(d):
+    d["irregularities"][0]["source_ids"] = ["S77"]
+    return d
+
+
+@mutation("an irregularity has no severity", "empty 'severity'")
+def _(d):
+    d["irregularities"][0]["severity"] = ""
     return d
 
 

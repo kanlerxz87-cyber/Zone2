@@ -347,14 +347,14 @@ jobs:
       # 9 open questions, a 16-row requirements trace of the 2026-11-16 request and 5 article concepts.
       # The gate holds them to the project contract (every row sourced or explicitly flagged, an open
       # question never carrying an answer, nothing reading as decided, derived counts, disclosure, links
-      # and fragments, no product price) and is negative-tested below: 17 injected defects must each fire.
+      # and fragments, no product price) and is negative-tested below: 19 injected defects must each fire.
       - name: Rebuild the review board and confirm committed output is current
         run: python3 tools/build_review_board.py --check
 
       - name: Review-board gate (sourcing, options, nothing-decided, derived counts, links, no prices)
         run: python3 tools/validate_review_board.py
 
-      - name: Review-board gate negative tests (17 injected defects must each fire)
+      - name: Review-board gate negative tests (19 injected defects must each fire)
         run: python3 tools/test_review_board.py
 
       - name: Every stylesheet url() resolves to a file

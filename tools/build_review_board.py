@@ -59,6 +59,7 @@ FINDINGS = DATA["design_findings"]
 MEASUREMENTS = DATA["measurements"]
 REQUIREMENTS = DATA["requirements"]
 IDEAS = DATA["ideas"]
+IRREGULARITIES = DATA["irregularities"]
 DECISIONS = DATA["decision_vocabulary"]
 
 AREAS = sorted({p["area"] for p in PROPOSALS})
@@ -148,6 +149,7 @@ def page(title: str, description: str, rel_path: str, body: str, active: str) ->
         ("review-questions.html", "Questions"),
         ("review-trace.html", "Requirements trace"),
         ("review-ideas.html", "Idea board"),
+        ("review-decide.html", "Answer sheet"),
         ("decisions/index.html", "Decisions view"),
         ("pages/suggestions.html", "Suggestion register"),
         ("flagged.html", "Flagged for review"),
@@ -295,6 +297,139 @@ def page_ideas() -> str:
     )
 
 
+def page_decide() -> str:
+    """The one page a reviewer needs: what to answer, and how, without reading a table first."""
+    open_props = [p for p in PROPOSALS if p["decision"] == "AWAITING_DECISION"]
+    unblocked = [p for p in open_props if not p["waiting_on"]]
+    blocked = [p for p in open_props if p["waiting_on"]]
+
+    # Unblocked proposals, ordered by the single scale the board claims: value first, cost second.
+    def value(p):
+        return p["quality_impact"] + p["conversion_impact"]
+
+    def cost(p):
+        return p["risk"] + p["effort"]
+
+    ranked = sorted(unblocked, key=lambda p: (-value(p), cost(p), p["id"]))
+    top = ranked[:4]
+
+    option_rows = []
+    for p in top:
+        for o in p["options"]:
+            option_rows.append(
+                f'<tr id="{esc(p["id"])}-{esc(o["id"])}">'
+                f'<td class="id">{esc(p["id"])} · {esc(o["id"])}</td>'
+                f"<td>{esc(o['label'])}</td>"
+                f"<td>{esc(o['cost'])}</td>"
+                f"<td>{esc(o['risk'])}</td>"
+                f'<td class="wait">{esc(p["area"])}</td>'
+                "</tr>"
+            )
+
+    answer_rows = []
+    for q in QUESTIONS:
+        answer_rows.append(
+            f'<tr id="{esc(q["id"])}">'
+            f'<td class="id">{esc(q["id"])}</td>'
+            f"<td>{esc(q['question'])}</td>"
+            f'<td class="obtain">{esc(q["obtain"])}</td>'
+            f"<td>{source_cell(q['source_ids'])}</td>"
+            "</tr>"
+        )
+
+    body = f"""
+  <section class="hero-light">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Answer sheet · {len(open_props)} decisions and {len(QUESTIONS)} questions</div>
+      <h1 class="hero-title">One page to answer, so nothing has to be <em>read twice</em>.</h1>
+      <p class="hero-lede">
+        The board has {len(PROPOSALS)} proposals and {len(QUESTIONS)} questions, and reading all of it is a
+        waste of your time if you only want to reply. This page is the short version: the
+        {len(top)} proposals that need nothing from anybody, the {len(blocked)} that wait on an answer,
+        and the {len(QUESTIONS)} questions with the exact action that closes each one. Reply in any form —
+        a list is enough.
+      </p>
+      <div class="hero-meta">
+        <span class="chip">{len(unblocked)} decidable now</span>
+        <span class="chip">{len(blocked)} blocked on an answer</span>
+        <span class="chip">{len(QUESTIONS)} questions · 0 answered</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-wrap">
+    <section class="section">
+      <h2 class="section-title">1. The {word(len(top), lower=True)} proposals to decide first</h2>
+      <p class="section-sub">
+        Chosen by value (quality + conversion) and then by cost (risk + effort), from the
+        {len(unblocked)} proposals that need no missing information. This ordering is a reading of the
+        board, not a measurement.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>The {len(top)} proposals that need nothing from anybody, with every option they offer. Each row is a whole answer.</caption>
+          <thead><tr><th scope="col">ID · option</th><th scope="col">If you pick this</th><th scope="col">What it costs</th><th scope="col">What it risks</th><th scope="col">Area</th></tr></thead>
+          <tbody>
+            {''.join(f'<tr id="{esc(o["id"])}"><td class="id">{esc(o["id"])}</td><td>{esc(o["label"])}</td><td>{esc(o["cost"])}</td><td>{esc(o["risk"])}</td><td class="wait">{esc(o["area"])}</td></tr' for o in [])}
+            {''.join(option_rows)}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">2. How to reply</h2>
+      <div class="callout">
+        <p><strong>Short form is fine.</strong> “PS-05 A, PS-02 A, defer PS-07” is a complete answer.
+        Nothing else is required — no form, no file, no account.</p>
+        <p><strong>What happens next.</strong> The decision is written into
+        <code>docs/review-board.json</code> with your words and the date, the page is regenerated, and the
+        gate checks that the option you named is one the row actually offered. Only then does a build
+        session start.</p>
+        <p><strong>Deferring is an answer.</strong> <code>DEFERRED</code> needs one sentence on what would
+        make it decidable. Nothing gets deleted and nothing gets decided for you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">3. The {len(QUESTIONS)} questions, one action each</h2>
+      <p class="section-sub">
+        None of these needs a build session. Each is a lookup, a sign-in, or one email, and each is
+        phrased so that a one-line reply closes it.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Open questions with the action that obtains the answer. An empty answer is deliberate: this project does not infer.</caption>
+          <thead><tr><th scope="col">ID</th><th scope="col">The question</th><th scope="col">The action that closes it</th><th scope="col">Source</th></tr></thead>
+          <tbody>{''.join(answer_rows)}</tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">4. What this page does not do</h2>
+      <div class="callout callout-warn">
+        <p>It does not record your answer by itself. The site is static and ships no form handler, and a
+        form that posted nowhere would be worse than this page. Your reply is the record; the next session
+        transcribes it into the register with the gate checking it.</p>
+        <p>It does not recommend everything. {word(len(top), lower=True)} proposals are surfaced here because
+        they need nothing from anybody and score highest on value per unit of cost; the other
+        {len(unblocked) - len(top)} decidable proposals and the {len(blocked)} blocked ones are on the
+        <a href="review.html">board</a>, each with the answer it waits on.</p>
+      </div>
+    </section>
+  </div>
+"""
+    return page(
+        "Answer sheet — four decisions, nine questions, one reply",
+        "The short version of the review board: the proposals that can be decided today, the questions with "
+        "the action that closes each one, and how to reply. Nothing here is implemented.",
+        "review-decide.html",
+        body,
+        "review-decide.html",
+    )
+
+
 def page_review() -> str:
     awaiting = sum(1 for p in PROPOSALS if p["decision"] == "AWAITING_DECISION")
     selected = sum(1 for p in PROPOSALS if p["decision"] == "SELECTED")
@@ -427,6 +562,30 @@ def page_review() -> str:
       <h2 class="section-title">The proposals in full</h2>
       <p class="section-sub">Three options each. Every option states what it commits to, what it costs and what it risks, because an option without a trade-off is a slogan.</p>
       {''.join(detail)}
+    </section>
+
+    <section class="section" id="irregularities">
+      <h2 class="section-title">Flagged for review: {len(IRREGULARITIES)} items from this session</h2>
+      <p class="section-sub">
+        Irregularities this session found or caused, published rather than tidied away. None blocks
+        the site; each names what happened, how it was resolved, and whether anything is left for you.
+        Rows with no official source say so - they describe this repository, not an external rule.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Flags raised by T50. Four are closed by this session and one leaves an optional owner action.</caption>
+          <thead><tr><th scope="col">ID</th><th scope="col">Severity</th><th scope="col">What was found</th><th scope="col">Effect</th><th scope="col">Resolution</th><th scope="col">For the owner</th><th scope="col">Source</th></tr></thead>
+          <tbody>
+            {''.join(
+                f'<tr id="{esc(i["id"])}"><td class="id">{esc(i["id"])}</td>'
+                f'<td><span class="badge {"warn" if i["severity"]=="medium" else "ok"}">{esc(i["severity"])}</span></td>'
+                f'<td>{esc(i["found"])}</td><td>{esc(i["effect"])}</td><td>{esc(i["resolution"])}</td>'
+                f'<td>{esc(i["owner_action"])}</td><td>{source_cell(i["source_ids"])}</td></tr>'
+                for i in IRREGULARITIES
+            )}
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section class="section">
@@ -720,6 +879,7 @@ PAGES = {
     "review-questions.html": page_questions,
     "review-trace.html": page_trace,
     "review-ideas.html": page_ideas,
+    "review-decide.html": page_decide,
 }
 
 

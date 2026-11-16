@@ -1250,5 +1250,56 @@
       "decision_note": "",
       "waiting_on": []
     }
+  ],
+  "irregularities": [
+    {
+      "id": "PI-01",
+      "severity": "medium",
+      "found": "tools/build_decisions.py --check hashes every file under decisions/, generated or not",
+      "effect": "Any register stored in decisions/ is permanent drift against a fresh build. This session's own register hit it: validate_decisions failed until the file was moved.",
+      "resolution": "Moved to docs/review-board.json, the convention docs/discovery-t40.json already uses. No file owned by another session was edited.",
+      "owner_action": "None - closed by this session. Recorded because the trap is still live for the next session.",
+      "source_ids": []
+    },
+    {
+      "id": "PI-02",
+      "severity": "low",
+      "found": "The footer negation required by the Sec. 5 endorsement rule must sit on the same line as the phrase it negates",
+      "effect": "A first render split 'not' and 'affiliated with Amazon' across two lines and validate_data failed all four pages.",
+      "resolution": "Negation kept inside one element. The sentence was not weakened.",
+      "owner_action": "None - closed. Flagged because the rule is line-based, and the next author will hit it.",
+      "source_ids": [
+        "S80"
+      ]
+    },
+    {
+      "id": "PI-03",
+      "severity": "low",
+      "found": "Several decision boards publish proposals and none records a decision",
+      "effect": "A reviewer cannot tell which board is authoritative. The count is ambiguous: five boards carry proposals, six files exist counting decisions/index.html, which is a hub.",
+      "resolution": "Published with both readings rather than one (PM-09), and PS-12 proposes an index over consolidation.",
+      "owner_action": "Decide PS-12. Recorded here so the ambiguity is visible rather than tidied away.",
+      "source_ids": []
+    },
+    {
+      "id": "PI-04",
+      "severity": "low",
+      "found": "No browser render of the four new pages was possible in this environment",
+      "effect": "npx playwright install chromium fails with 'Download failure, code=1'. A screenshot test would have caught a layout defect that a structural check cannot.",
+      "resolution": "Checked instead: tags balance on all four pages (html.parser stack), the pages ship no script, and every internal href and fragment resolves. The gate now enforces the static/balance rule, so it will not regress silently.",
+      "owner_action": "Optional: open the four pages on a phone and report a layout problem if one appears.",
+      "source_ids": []
+    },
+    {
+      "id": "PI-05",
+      "severity": "low",
+      "found": "Six of the sixteen traced requirement rows rest on no official source",
+      "effect": "No official page defines what 'automates product research', a 'complete requirements list', or a review board must contain, so the judgement on those rows is this session's, not an authority's.",
+      "resolution": "Each such row says in its own words that no official page can settle it, and the gate fails a row that drops the source without that statement.",
+      "owner_action": "None. The distinction is published so that a sourced row and an unsourced one cannot be mistaken for each other.",
+      "source_ids": [
+        "S83"
+      ]
+    }
   ]
 }
