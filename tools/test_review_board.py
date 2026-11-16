@@ -19,7 +19,7 @@ import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-REGISTER = REPO / "decisions" / "data" / "review-board.json"
+REGISTER = REPO / "docs" / "review-board.json"
 VALIDATOR = REPO / "tools" / "validate_review_board.py"
 BASE = json.loads(REGISTER.read_text(encoding="utf-8"))
 
@@ -32,8 +32,8 @@ def run(data: dict) -> tuple[int, str]:
     (tmp / "tools").mkdir()
     for f in ("build_review_board.py", "head_meta.py", "validate_review_board.py"):
         (tmp / "tools" / f).write_text((REPO / "tools" / f).read_text(encoding="utf-8"), encoding="utf-8")
-    (tmp / "decisions" / "data").mkdir(parents=True)
-    (tmp / "decisions" / "data" / "review-board.json").write_text(json.dumps(data), encoding="utf-8")
+    (tmp / "docs").mkdir(parents=True)
+    (tmp / "docs" / "review-board.json").write_text(json.dumps(data), encoding="utf-8")
     (tmp / "ledger").mkdir()
     (tmp / "ledger" / "sources.json").write_text(
         (REPO / "ledger" / "sources.json").read_text(encoding="utf-8"), encoding="utf-8"

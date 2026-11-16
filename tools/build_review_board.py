@@ -43,7 +43,7 @@ import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-REGISTER = REPO / "decisions" / "data" / "review-board.json"
+REGISTER = REPO / "docs" / "review-board.json"
 OUT = REPO
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -176,9 +176,9 @@ def page(title: str, description: str, rel_path: str, body: str, active: str) ->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-disclosure">
-        <strong>Affiliate disclosure:</strong> {esc(DISCLOSURE)} This site is independent and not
-        affiliated with Amazon. Outbound product links are marked <code>rel="sponsored"</code>.
-        No price is displayed on any page.
+        <strong>Affiliate disclosure:</strong> {esc(DISCLOSURE)}
+        <span class="footer-independent">This site is independent and is not affiliated with Amazon.</span>
+        Outbound product links are marked <code>rel="sponsored"</code>. No price is displayed on any page.
       </div>
       <div class="footer-note">
         Review board for task T50, compiled {esc(AS_OF)} from
