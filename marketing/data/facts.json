@@ -1,6 +1,6 @@
 {
   "$schema_version": "1.0",
-  "note": "Fact base for the marketing set. EVERY value here was read off an official page on 2026-11-14 and is quoted (or tightly paraphrased) from it. No value is inferred, averaged, or carried over from another session's ledger. Blank means 'no official source states it' - the marketing renderer refuses to print a blank as a fact and prints an explicit UNVERIFIED marker instead.",
+  "note": "Fact base for the marketing set. EVERY value here was read off an official page on 2026-11-14 and is quoted (or tightly paraphrased) from it. No value is inferred, averaged, or carried over from another session's ledger. Blank means 'no official source states it' - the marketing renderer refuses to print a blank as a fact and prints an explicit UNVERIFIED marker instead. Rows re-read on a later date carry that date inside the row's own detail text; verified_utc stays the date the file as a whole was read.",
   "verified_utc": "2026-11-14",
   "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
   "link_level_disclosure": "(paid link)",
@@ -275,10 +275,11 @@
         },
         {
           "attr": "Included accessories",
-          "value": "7 premium accessories",
-          "detail": "Manufacturer names an air fry basket, rotisserie spit, bake pan 'and more'; the full seven are not itemised in the manufacturer text, so the accessories beyond those three are NOT listed here.",
-          "status": "partial",
-          "src": "M3"
+          "value": "7 (manufacturer) vs 6 (Amazon listing title)",
+          "detail": "CONFLICT, both official statements shown, neither averaged. The manufacturer's product description (emerileveryday.com, read 2026-11-16) says: 'Included are 7 premium accessories to maximize versatility—air fry basket, rotisserie spit, bake pan, and more' — and it does not itemise the full seven, so the accessories beyond those three are NOT listed here. The Amazon listing title for the same model (read 2026-11-16) says: 'Six Cooking Accessories Included'. The Amazon Item details block read 2026-11-14 said 'Configuration: Air Fryer Toaster Oven Combo with 24 Functions and 7 Accessories' with six components named (Rack, Bake Pan, Drip Tray, Crisper Basket, Rotisserie Spit, Fetch Tool) — Amazon's own page therefore disagrees with its own title as well as with the manufacturer. No count is published as the answer.",
+          "status": "conflict",
+          "src": "M3",
+          "src_alt": "M4"
         },
         {
           "attr": "Warranty",
@@ -335,7 +336,8 @@
           "href": "p3.html",
           "label": "Chefman 8 Qt article"
         }
-      ]
+      ],
+      "title_note": "Amazon serves more than one title for B09B7SB46R, so a quoted listing title is perishable evidence carrying its read date. title_official was read 2026-11-14. The title served at the same URL on 2026-11-16 was: 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'. P1's and P3's titles reproduced verbatim on 2026-11-16; P2's did not. Re-read the listing before republishing any quoted title."
     },
     {
       "key": "P3",
