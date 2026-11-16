@@ -894,7 +894,7 @@ traced the request sentence by sentence, and converted the "AI slop" complaint i
 |---|---|
 | [`review.html`](review.html) | 12 proposals `PS-01…PS-12` on one scale: three options each, commitment/cost/risk per option, a recommendation, the question it waits on, and the official source. All 12 read **awaiting your decision** |
 | [`review-questions.html`](review-questions.html) | 9 questions `PQ-01…PQ-09`: what is verified, what is missing, the exact action that obtains it, and who takes it. **No row carries an answer** |
-| [`review-trace.html`](review-trace.html) | The request traced as 16 rows `RP-01…RP-16` (6 met, 5 partial, 5 not met), 12 measurements `PM-01…PM-12`, 9 design findings `PD-01…PD-09`, 11 official sources quoted verbatim |
+| [`review-trace.html`](review-trace.html) | The request traced as 16 rows `RP-01…RP-16` (6 met, 5 partial, 5 not met), 13 measurements `PM-01…PM-13`, 9 design findings `PD-01…PD-09`, 11 official sources quoted verbatim |
 | [`review-ideas.html`](review-ideas.html) | 5 article concepts `PS-13…PS-17`, each with its basis, the page it would become, and why it might convert |
 | `docs/review-board.json` | The register. In `docs/` because `tools/build_decisions.py --check` hashes every file under `decisions/`, so a register stored there is permanent drift |
 | `tools/validate_review_board.py` + `tools/test_review_board.py` | An 13-rule gate and 19 injected defects, each of which must fire. Both run in CI with `build_review_board.py --check` |

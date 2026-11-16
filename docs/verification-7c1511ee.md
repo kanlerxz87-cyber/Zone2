@@ -59,7 +59,7 @@ Register check: 11 sources defined, 11 cited, 0 unused (`tools/validate_review_b
 
 **Corrections made after first publication.** Three measurements were wrong or became stale while this
 session was still writing: `PM-04` (published 68 of 71, actually 71 of 80 — a regex missed 9 anchors),
-`PM-08` (76 became 82 when this task added one nav entry and five footer links) and `PM-01`/`PM-02`
+`PM-08` (76 became 82 when this task first added five footer links, and 80 after trimming to three) and `PM-01`/`PM-02`
 (139/24 became 144/24 when five pages were added). Each now states the base-commit figure and the
 after-this-task figure explicitly, and the commands to reproduce both. The defects are also listed in
 section 6 below, because publication of a wrong figure is exactly the failure the brief is about.
