@@ -342,7 +342,7 @@ jobs:
       # 1B-2 (session 1b839f87) recorded that nothing in this workflow resolves a CSS url(),
       # which is how the font 404 shipped on every page for weeks. Negative-tested: appending a
       # url() to any stylesheet makes this step fail.
-      # ---- arena/7c1511ee-zone2: the review board (T50) ----
+      # ---- arena/7c1511ee-zone2: the review board (T52) ----
       # Four reader/owner surfaces generated from docs/review-board.json: 12 proposals on one scale,
       # 9 open questions, a 16-row requirements trace of the 2026-11-16 request and 5 article concepts.
       # The gate holds them to the project contract (every row sourced or explicitly flagged, an open

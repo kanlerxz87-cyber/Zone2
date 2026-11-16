@@ -2,7 +2,7 @@
   "$schema_version": "1.0",
   "register": "RB",
   "as_of": "2026-11-16",
-  "task": "T50",
+  "task": "T52",
   "session": "arena/7c1511ee-zone2",
   "measured_utc": "2026-11-16",
   "note": "The review board for the 2026-11-16 request. It exists so a reviewer can compare every possible path, see what each one costs, see what it waits on, and choose one - before any change is made. Nothing in this file is implemented: every proposal starts at AWAITING_DECISION and tools/validate_review_board.py fails the build if a row reads as done while no decision is recorded. Measured rows (PM-) come from inspecting this repository on 2026-11-16 and name the file and page they were counted from. Requirement rows (RP-) trace the 2026-11-16 brief sentence by sentence. Question rows (PQ-) exist to surface missing information; an open question carries no answer, only what is known, what is missing, and how to obtain it.",

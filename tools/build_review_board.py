@@ -201,7 +201,7 @@ def page(title: str, description: str, rel_path: str, body: str, active: str) ->
         Outbound product links are marked <code>rel="sponsored"</code>. No price is displayed on any page.
       </div>
       <div class="footer-note">
-        Review board for task T50, compiled {esc(AS_OF)} from
+        Review board for task T52, compiled {esc(AS_OF)} from
         <code>decisions/data/review-board.json</code> · rendered by
         <code>tools/build_review_board.py</code> · every count on this page is derived at build
         time · nothing on this board is implemented until a decision is recorded against it.
@@ -573,7 +573,7 @@ def page_review() -> str:
       </p>
       <div class="table-wrap">
         <table>
-          <caption>Flags raised by T50. Four are closed by this session and one leaves an optional owner action.</caption>
+          <caption>Flags raised by T52. Four are closed by this session and one leaves an optional owner action.</caption>
           <thead><tr><th scope="col">ID</th><th scope="col">Severity</th><th scope="col">What was found</th><th scope="col">Effect</th><th scope="col">Resolution</th><th scope="col">For the owner</th><th scope="col">Source</th></tr></thead>
           <tbody>
             {''.join(
