@@ -46,6 +46,36 @@ same verified data — same ledger, same gates, no value changed; the reasoning 
 [`design-notes.html`](https://kanlerxz87-cyber.github.io/Zone2/design-notes.html). `robots.txt` and
 `sitemap.xml` were added for crawl hygiene.
 
+#### Front of house — `index.html`, `suggestions.html`, `questions.html`, `guides/` (T50, 2026-11-16)
+
+The brief for 2026-11-16 was that the site read as generated. The root pages were rebuilt as a
+publication: a lead story about the three appliances, the machines as a hairline grid carrying their
+real specifications, the guides as a story grid, and the verification state demoted to a single
+receipts strip. All 11 hand-written root pages now share one masthead, disclosure strip and footer
+(`assets/css/publish.css`, loaded alongside `style.css`), so a reader no longer crosses a design break
+moving between the shop front and the operator pages.
+
+| Page | Purpose |
+|---|---|
+| `index.html` | Publication front page: lead story, the three machines, the guides, the receipts strip |
+| `suggestions.html` | **The decision board.** 12 suggestions, each with options A/B/C, cost, trade-off, a recommendation, the question it waits on, and status *Proposed — awaiting owner decision*. Nothing is implemented from it |
+| `questions.html` | **The questions register.** 12 questions — what is known, what is missing, the action that would close each, and which suggestions it blocks |
+| `guides/index.html` | The eleven published pieces grouped by reader category |
+| `guides/basket-air-fryers.html` | Drawer-style machines, with the full sourced specification tables for both Chefman listings |
+| `guides/air-fryer-ovens.html` | The Emeril 26-quart oven, with its full sourced specification table |
+| `guides/buying-guides.html` | Decision-first pages |
+| `guides/method.html` | How a figure earns a place on the site, and why a dash is sometimes the answer |
+
+These eight pages are **generated**, not hand-written: `tools/build_front.py` renders them from
+`marketing/data/facts.json` and `docs/board-9251f262.json`, so no figure is re-typed and every row
+carries the official page that states it. `tools/build_front.py --check` fails CI if a committed page
+has drifted from the dataset; `tools/verify_front.py` re-reads the pages on disk and enforces eight
+rules (per-row sourcing, blanks carry a written reason, no prices, disclosure above the data, sponsored
+product links, links resolve, canonical matches the path, no invented performance figures).
+
+**No verified value changed.** No ledger row, no `assets/js/data.js` entry, no product attribute. The
+rebuild is presentation and information architecture applied to the same evidence.
+
 `verification.html` and `sources.html` are generated from `ledger/verification.json` and `ledger/sources.json`
 by `tools/build_root_views.py` — CI fails if the committed output drifts from the ledger, so a row can never be
 published without its official source link.
