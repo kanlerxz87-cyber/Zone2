@@ -6062,3 +6062,38 @@ URLs. `tools/build_head_meta.py --audit`: clean.
 The design brief's own gate caught its own drift: when the rebase changed the tree, it failed the executive
 summary for printing 138 pages where 150 now stood. That is the rule working — it exists because FB-01 and
 FB-02 are two rows on the readiness board with no such rule.
+
+---
+
+## T57 — post-deploy note (session `dc72a69e`, 2026-11-16)
+
+PR **#145** merged into `main` as **`f388664`**; the `pages build and deployment` run
+<https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43938149056> succeeded. The live namespace was
+fetched and read back at <https://kanlerxz87-cyber.github.io/Zone2/brief/> — nine pages, all rendering.
+
+**Reading the deployed page caught two defects the gates had not.** Both were the FB-01/FB-02 class
+(stale numbers surviving next to freshly measured ones), in the one document whose job is to be checkable:
+
+1. **The `Decide these three first` row printed four cards, two numbered "Decide 3".** `decide_first` in
+   `brief/data/summary.json` had accumulated a duplicate `BQ-14` when the tag question was inserted after
+   the list was first written.
+2. **Three prose bullets still carried the pre-rebase numbers** — "138 of 138 pages carry the disclosure",
+   "22 gates and 15 pipeline tests are green", "which of the fourteen published surfaces" — while the state
+   table directly above them said 150, 43 and 16. The table had been re-measured after both rebases; the
+   prose had not.
+
+Both fixed. **Two new gate rules and two new negative tests** now make the class unrepeatable here:
+
+- `tools/validate_brief.py::check_summary_prose` — a count of the form "N of M pages", "N of M
+  gates/workflow steps" or "N published surfaces" anywhere in the summary's prose, notes or headline is
+  compared against a value measured from the tree **in the same run**. Three narrow patterns, not broad
+  prose-scanning, so the rule stays readable.
+- `decide_first` ids must be unique and their `order` must be `1..n`.
+
+Negative-tested: `tools/test_brief.py` now injects **14** defects, including a prose bullet contradicting
+the table and a duplicated decide-first entry, and asserts each fires.
+
+**Worth recording for whoever owns the readiness board next:** this is precisely why CR-1 matters. The
+brief's own summary printed a stale count, and the reason it was caught within an hour rather than never
+is that a rule recomputed it. `RR-01` and `RR-05` have no such rule, and their drift grew from 22 pages to
+34 while this session worked.

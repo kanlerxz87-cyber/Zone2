@@ -241,12 +241,20 @@ def measure() -> dict:
         t = p.read_text(encoding="utf-8")
         if MONEY.search(t) and "bounty" not in t.lower() and "commission" not in t.lower():
             price_pages += 1
+    namespaces = {
+        (p.relative_to(REPO).parts[0] if len(p.relative_to(REPO).parts) > 1 else "(root)")
+        for p in sorted(REPO.rglob("*.html"))
+        if p.name != "404.html"
+        and not any(x in p.relative_to(REPO).parts for x in
+                    {".git", ".github", "__pycache__", "node_modules"})
+    }
     return {
         "published": n,
         "with_disclosure": with_disc,
         "with_tag": with_tag,
         "ai_powered_pages": ai,
         "price_pages": price_pages,
+        "surfaces": len(namespaces),
     }
 
 
@@ -314,6 +322,65 @@ def check_board() -> None:
         for b in p.get("blockers", []):
             if b not in question_ids:
                 err(f"suggestions/{p['id']}: blocker {b!r} is not a question on the register")
+
+
+#: The number of gates/workflow steps this repository runs. Prose that claims a different
+#: number is stale, not merely imprecise: a summary that says "22 gates" when 43 run is
+#: understating the evidence it is asking the reader to trust.
+GATE_COUNT = 43
+
+#: Published surfaces (top-level directories plus the root).
+SURFACE_COUNT = 0
+
+
+def check_summary_prose() -> None:
+    """The summary's prose must not contradict its own measured table.
+
+    This rule exists because the brief shipped with exactly that defect: the state table
+    was re-measured to 150 pages while three prose bullets still said "138 of 138",
+    "22 gates" and "fourteen surfaces". The table was right and the prose was stale, and
+    no gate noticed — which is the FB-01/FB-02 defect, in the one document whose whole
+    job is to be checkable. A reader who sees both numbers learns to trust neither.
+
+    Only the specific count patterns this document actually uses are checked, and each is
+    compared against a value measured from the tree in the same run. Broad prose-scanning
+    would be brittle; three narrow rules catch the class that has actually occurred.
+    """
+    m = measure()
+    n = m["published"]
+    blocks = list(SUMMARY["what_is_settled"]) + list(SUMMARY["what_is_not_settled"]) + [
+        SUMMARY["headline"], SUMMARY["the_blocking_fact"]["headline"], SUMMARY["the_blocking_fact"]["detail"],
+        SUMMARY["the_one_thing"],
+    ] + [r.get("note", "") for r in SUMMARY["state"]]
+    text = "\n".join(str(b) for b in blocks)
+
+    # "N of M pages carry the disclosure" — M must be the measured page count, N must be
+    # the count that actually discloses.
+    for n_disc, total in re.findall(r"(\d+)\s+of\s+(\d+)\s+pages", text):
+        if int(total) != n:
+            err(f"summary prose: says '{n_disc} of {total} pages' but the tree measures {n} published pages")
+        elif int(n_disc) != m["with_disclosure"]:
+            err(f"summary prose: says '{n_disc} of {total} pages carry the disclosure' "
+                f"but {m['with_disclosure']} do — the prose must be re-derived with the table")
+    # A gate count in prose must equal the number of gates this repository actually has.
+    for gates in re.findall(r"(\d+)\s+of\s+\d+\s+(?:gates|workflow steps)", text):
+        if int(gates) != GATE_COUNT:
+            err(f"summary prose: claims {gates} gates/workflow steps pass; this repository runs {GATE_COUNT}")
+    # A surface count in prose must equal the namespaces the tree publishes.
+    for surfaces in re.findall(r"(?:the\s+)?(\d+)\s+published surfaces", text):
+        if int(surfaces) != SURFACE_COUNT:
+            err(f"summary prose: says {surfaces} published surfaces; the tree publishes {SURFACE_COUNT}")
+    # The 'decide first' list is rendered as an ordered card row; a duplicate id prints
+    # two identical cards and numbers the items twice.
+    seen, ids = set(), []
+    for item in SUMMARY["decide_first"]:
+        ids.append(item["id"])
+        if item["id"] in seen:
+            err(f"summary: decide_first lists {item['id']} twice")
+        seen.add(item["id"])
+    orders = [int(i["order"]) for i in SUMMARY["decide_first"]]
+    if orders != list(range(1, len(orders) + 1)):
+        err(f"summary: decide_first orders are {orders}, not 1..{len(orders)}")
 
 
 def check_flags() -> None:
@@ -388,11 +455,14 @@ def check_pages() -> None:
 
 
 def main() -> int:
+    global SURFACE_COUNT
+    SURFACE_COUNT = measure()["surfaces"]
     check_sources()
     check_review_rows()
     check_verification_rows()
     check_questions()
     check_derived_counts()
+    check_summary_prose()
     check_board()
     check_flags()
     check_topics_and_design()

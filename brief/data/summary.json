@@ -110,14 +110,14 @@
   },
   "what_is_settled": [
     "The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).",
-    "The evidence discipline holds at scale: 138 of 138 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
-    "The machinery is trustworthy: 22 gates and 15 pipeline tests are green, and the counts that matter are derived from the tree rather than typed.",
+    "The evidence discipline holds at scale: 150 of 150 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
+    "The machinery is trustworthy: 43 of 43 workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
     "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit."
   ],
   "what_is_not_settled": [
     "Whether the three listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18).",
     "Whether an Associates account exists at all, and if it does, its tag and marketplace (BQ-14, BQ-19).",
-    "Which of the fourteen published surfaces is the site that would be declared (BQ-15).",
+    "Which of the 16 published surfaces is the site that would be declared (BQ-15).",
     "Who writes it, under what name, and whether that name is public (BQ-16).",
     "What readers are searching for. There is no demand signal anywhere in the project, so no topic on the topics board can be ranked by expected volume (BQ-20)."
   ],
@@ -136,11 +136,6 @@
       "order": 3,
       "id": "DB-01",
       "why": "It costs under an hour and it is reversible. The T55 rebuild removed the phrase from every reader-facing page; 14 operator and companion pages still carry it."
-    },
-    {
-      "order": 3,
-      "id": "BQ-14",
-      "why": "Supplying the Associates tag is the owner's one action that unblocks the entire revenue side. It takes one sign-in and no code."
     }
   ],
   "the_one_thing": "If only one thing happens next, it should be the tag. Everything the brief asks the platform to do with real traffic — track it, convert it, optimize against it — is unreachable until a link on a page can be attributed to the owner.",
