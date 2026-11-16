@@ -45,8 +45,11 @@ from head_meta import head_block, url_for
 REPO = Path(__file__).resolve().parents[1]
 
 # The surfaces this contract holds to a passing standard: the reader publication, the hand-written
-# editorial layer, the generated evidence registers, the decision surface, and the root pages.
-CONTRACT_DIRS = ["pages", "journal", "decisions", "marketing"]
+# editorial layer, the generated evidence registers, the decision surface, the discovery review, and
+# the root pages. "discovery" was added by session 224cc10c (T49): PR #104 shipped the namespace with
+# a second, parallel head layer that put two canonical links and two conflicting og:url values on
+# every page. It was discarded on merge, and the pages now carry this contract's canonical form.
+CONTRACT_DIRS = ["pages", "journal", "decisions", "marketing", "discovery"]
 
 # Root pages a generator owns. Their head block comes from that generator, so `--fix-heads` must not
 # write into them (the next `--check` would revert it) — and their generators are patched instead.

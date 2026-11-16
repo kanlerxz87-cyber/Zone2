@@ -1,0 +1,194 @@
+{
+  "note": "T40 discovery register - SOURCES. Every entry was fetched live by session arena/3e0b3b4e-zone2 on 2026-11-15 (UTC) and the text in `quote` was copied from the page as served (whitespace normalised only). IDs begin at S44 because ledger/sources.json already holds S43 (added by another session after this register was written) without editing that file, so existing sources keep their authors. A source may be cited only for the proposition in `used_for`; the quote is stored beside it so a reader can check the claim against the page itself.",
+  "accessed_utc": "2026-11-15",
+  "session": "arena/3e0b3b4e-zone2",
+  "sources": [
+    {
+      "id": "S44",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program Participation Requirements, Section 6(t) - customer reviews and star ratings",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "anchor": "Associates Program Participation Requirements",
+      "page_stated_update": null,
+      "quote": "(t) You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API and you comply with the requirements for Creators API and PA API described in the License.",
+      "used_for": "The site publishes no star rating and no review count. That is a policy consequence of having no Creators API access, not an oversight, and this source is why the image/rating work cannot be finished without the account."
+    },
+    {
+      "id": "S45",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program IP License and Usage Requirements - Section 1(a), Section 2(h) and Section 2(k)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "anchor": "Associates Program IP License and Usage Requirements",
+      "page_stated_update": null,
+      "quote": "we hereby grant you a limited, revocable, non-transferable, non-sublicensable, non-exclusive, royalty-free license to: (a) copy and display Program Content solely on your Site ... (h) You will not store or cache Product Advertising Content consisting of an image, but you may store a link to Product Advertising Content consisting of an image for up to 24 hours. ... (k) If you display Product Advertising Content consisting of text on your application, you will include the following disclaimer in plain view to end users of your application: \"CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.\"",
+      "used_for": "Product photographs may come only from Program Content, may not be stored or cached (a link to one may be, for up to 24 hours), and displaying Amazon-sourced text requires the plain-view 2(k) disclaimer, which no page on this site carries today. This is the licence constraint behind DG-01, DG-14 and suggestion SG-12."
+    },
+    {
+      "id": "S46",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program Participation Requirements, Sections 6(v) and 6(w) - cloaking and link shorteners",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "anchor": "Associates Program Participation Requirements",
+      "page_stated_update": null,
+      "quote": "(v) You will not cloak, hide, spoof, or otherwise obscure the URL of your Site containing Special Links (including by use of Redirecting Links) or the user agent of the application in which Program Content is displayed or used such that we cannot reasonably determine the site or application from which a customer clicks through such Special Link to an Amazon Site. (w) You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site.",
+      "used_for": "The three supplied link.amazon short links cannot be republished as this site's Special Links. Source for DG-02 and suggestion SG-13."
+    },
+    {
+      "id": "S47",
+      "publisher": "Google Search Central",
+      "kind": "official-search",
+      "title": "Google Search Essentials - Spam policies, 'Scaled content abuse'",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "anchor": "scaled-content",
+      "page_stated_update": null,
+      "quote": "Scaled content abuse is when many pages are generated for the primary purpose of manipulating search rankings and not helping users. This abusive practice is typically focused on creating large amounts of unoriginal content that provides little to no value to users, no matter how it's created. ... Using generative AI tools or other similar tools to generate many pages without adding value for users",
+      "used_for": "Caps any 'publish more pages' growth plan unless every page adds something a competitor's page does not have. Source for DG-03 and suggestion SG-08."
+    },
+    {
+      "id": "S48",
+      "publisher": "Google Search Central",
+      "kind": "official-search",
+      "title": "Google Search Essentials - Spam policies, 'Thin affiliation'",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "anchor": "thin-affiliate-pages",
+      "page_stated_update": null,
+      "quote": "Thin affiliation is the practice of publishing content with product affiliate links where the product descriptions and reviews are copied directly from the original merchant without any original content or added value. ... Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.",
+      "used_for": "Names the four things this site already owns (comparison tables, per-row sourcing, cross-source conflicts, navigation) as the assets a growth plan should build on. Source for DG-03 and suggestion SG-09."
+    },
+    {
+      "id": "S49",
+      "publisher": "Google Search Central",
+      "kind": "official-search",
+      "title": "Google Search Central - Qualify your outbound links to Google",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "anchor": "sponsored",
+      "page_stated_update": "2025-12-10",
+      "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
+      "used_for": "Confirms the existing rel=\"sponsored nofollow\" emission is the correct shape, and that it must survive whatever link change the owner eventually approves. Source for DG-05."
+    },
+    {
+      "id": "S50",
+      "publisher": "Google Search Central",
+      "kind": "official-search",
+      "title": "Google Search Central - Review snippet (Review, AggregateRating) structured data, guidelines",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/review-snippet",
+      "anchor": "technical-guidelines",
+      "page_stated_update": null,
+      "quote": "Don't aggregate reviews or ratings from other websites. ... Don't include fake or undisclosed incentivized reviews on your page or in your structured data markup. ... Make sure the review content you mark up are readily available to users from the marked-up page.",
+      "used_for": "Confirms why Product / Review / AggregateRating markup stays absent: the site has tested nothing, so any rating in markup would be either aggregated from elsewhere or invented. Source for DG-06 and DG-16."
+    },
+    {
+      "id": "S51",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program Participation Requirements, Section 6(f) - search traffic must land on your site",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "anchor": "Associates Program Participation Requirements",
+      "page_stated_update": null,
+      "quote": "You may purchase paid search advertisements and submit links to Search Engines to appear in response to a general Internet search query or keyword (i.e., in natural, free, organic, or unpaid search results), so long as you comply with the Agreement and those paid or unpaid search results send users to your site and not directly, or indirectly via a Redirecting Link (as defined in the Commission Income Statement), to an Amazon Site.",
+      "used_for": "Search results must land on this site first. Rules out the 'link straight into Amazon from an ad or a search result' growth tactics. Source for DG-04 and DG-15."
+    },
+    {
+      "id": "S52",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program Commission Income Statement, Section 2(e) - Redirecting Links are disqualified",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "anchor": "Associates Program Commission Income Statement",
+      "page_stated_update": null,
+      "quote": "(e) any Product purchased by a customer who is referred to an Amazon Site by a link that sends users indirectly to an Amazon Site via an intermediate site, without requiring the customer to click on a link or take some other affirmative action on that intermediate site (a \"Redirecting Link\")",
+      "used_for": "A purchase that arrives through a redirect the visitor never clicked does not earn. Source for DG-02, alongside S45."
+    },
+    {
+      "id": "S53",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program Participation Requirements, Section 6(y) - price tracking and alerting",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "anchor": "Associates Program Participation Requirements",
+      "page_stated_update": null,
+      "quote": "(y) Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.",
+      "used_for": "Rules out a price-history chart and a price-drop alert as buildable features. Both are re-scoped as proposals that require Amazon's written agreement first. Source for DG-07 and suggestion SG-10."
+    },
+    {
+      "id": "S54",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program Participation Requirements, Section 2(b) - prices and availability",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "anchor": "Associates Program Participation Requirements",
+      "page_stated_update": null,
+      "quote": "your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API and you comply with the requirements regarding use of Creators API or PA API in the License.",
+      "used_for": "Even with an approved account, a price may only be shown when Amazon serves it on the link or the API supplies it. A copied or photographed price is not compliant. Source for DG-07 and DG-08."
+    },
+    {
+      "id": "S55",
+      "publisher": "Federal Trade Commission",
+      "kind": "official-legal",
+      "title": "FTC - Disclosures 101 for Social Media Influencers (published November 2019)",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "anchor": "How to Disclose",
+      "page_stated_update": null,
+      "quote": "Make sure people will see and understand the disclosure. - Place it so it's hard to miss. ... Disclosures are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos, or anywhere that requires a person to click MORE.",
+      "used_for": "Underpins the existing link-level '(paid link)' tag beside every product link, and is the reason a disclosure footer alone would not be enough. Source for DG-09."
+    },
+    {
+      "id": "S56",
+      "publisher": "Google Search Central",
+      "kind": "official-search",
+      "title": "Google Search Central - Creating helpful, reliable, people-first content (Effort, Originality, Who/How/Why)",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "anchor": "self-assess",
+      "page_stated_update": "2026-10-05",
+      "quote": "Effort: The extent to which human work went into creating the content or the systems powering it. ... Originality: The extent to which the content offers unique, original information or perspectives that aren't already available on other websites. ... When creating content, here are some who-related questions to ask yourself: Is it self-evident to your visitors who authored your content? ... Sharing details about the processes involved can help readers and visitors better understand any unique and useful role automation may have served.",
+      "used_for": "The standard the editorial rules are measured against, and the reason the site needs authorship that is honest about being automated. Source for DG-10 and DG-17."
+    },
+    {
+      "id": "S57",
+      "publisher": "Google Search Central",
+      "kind": "official-search",
+      "title": "Google Search's guidance on using generative AI content on your website",
+      "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+      "anchor": "focus",
+      "page_stated_update": "2026-10-01",
+      "quote": "Generative AI can be particularly useful when researching a topic, and to add structure to original content. However, using generative AI tools or other similar tools to generate many pages without adding value for users may violate Google's spam policy on scaled content abuse. ... It is critical to manually factcheck and review all AI-generated content for accuracy and trustworthiness before publishing.",
+      "used_for": "Settles the 'should we disclose AI use' question in the direction this site already leans: the requirement is added value plus a manual fact-check gate, and the site's build gates are that fact-check made executable. Source for DG-10."
+    },
+    {
+      "id": "S58",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program Operating Agreement, Section 4 - no representation about traffic or commission income",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "anchor": "Section 4",
+      "page_stated_update": "2025-10-15",
+      "quote": "We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations.",
+      "used_for": "Any 'projected earnings' or 'expected revenue' figure on this site would contradict the clause it cites. The measurement plan therefore stores a forecast as an owner assumption and never publishes it as expected income. Source for DG-11 and suggestion SG-11."
+    },
+    {
+      "id": "S59",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official-amazon",
+      "title": "Associates Program Operating Agreement, Section 5 - second and third sentences (public communications about the Agreement)",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "anchor": "Section 5",
+      "page_stated_update": "2025-10-15",
+      "quote": "Except for this disclosure, and other than as required by applicable law, you will not make any public communication with respect to this Agreement or your participation in the Associates Program without our advance written permission. You will not misrepresent or embellish our relationship with you (including by expressing or implying that we support, sponsor, or endorse you), or express or imply any affiliation between us and you or any other person or entity except as expressly permitted by this Agreement.",
+      "used_for": "Raises a question about the site's own compliance commentary, which discusses the Agreement at length in public. Published as an open question (DG-13), not as a violation finding: whether descriptive, cited compliance commentary is a 'public communication with respect to this Agreement' is a legal judgement this project cannot make and must not assert."
+    },
+    {
+      "id": "S60",
+      "publisher": "Google Search Central",
+      "kind": "official-search",
+      "title": "Google Search Central - General structured data guidelines",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "anchor": "General guidelines",
+      "page_stated_update": null,
+      "quote": "Don't mark up content that is not visible to readers of the page. For example, don't include the rating of a book for which there is no visible rating. ... The structured data must be representative of the main content of the page.",
+      "used_for": "Requires that any structured data this site emits describes content a reader can actually see on the page, which is why the marketing set's Article and BreadcrumbList markup is limited to what each page shows. Source for DG-16."
+    }
+  ]
+}
