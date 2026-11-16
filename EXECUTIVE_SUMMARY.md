@@ -982,3 +982,69 @@ each with its source links. Nothing is implemented on this site until it is chos
 
 **Numbers for the reviewer, all derived from the registers:** 41 flags (16 open · 25 resolved), 43 sources,
 104 logged checks, 18 open questions, and every repository gate green on the merged tree.
+---
+
+## Addendum — 2026-11-16 — T50, session `arena/9251f262-zone2` — the "do not read like AI slop" rebuild
+
+Appended, never rewritten: everything above stands as written by its own session.
+
+### What the brief asked for this round
+
+Four things, and they are in tension with each other, so this section states which way each was resolved.
+
+1. **"It should look like a polished marketing affiliate website … it should not read like some AI slop
+   website like it looks like now."** The site's own landing page was the complaint. It opened with how
+   many links resolved and how many were confirmed — operator reporting, placed where a reader arriving
+   from search expects to find air fryers.
+2. **Catchy, trendy articles, and organic traffic.** Eleven pieces already existed. They were buried
+   under the operator chrome and not grouped for browsing.
+3. **A simple dashboard.** Also asked for. The tables and the evidence views were kept; they moved
+   behind the landing rather than onto it.
+4. **A suggestions section and a questions register,** so a person can review options and choose a path
+   before anything is implemented.
+
+### What changed
+
+| Change | Detail |
+|---|---|
+| **The landing page is now a publication front page.** | A lead story about the three appliances, five numbered take-aways, the three machines as a hairline grid with their real specifications, the guides as a story grid, and the verification state demoted to one receipts strip. |
+| **One design system across the site.** | `assets/css/publish.css` (new) plus the Counter Notes masthead, disclosure strip and footer on all 11 hand-written root pages. Previously the front pages and the operator pages used different headers. |
+| **Dedicated decision boards.** | `suggestions.html` (12 suggestions, each with options A/B/C, cost, trade-off, a recommendation, the question it waits on, and an explicit *Proposed — awaiting owner decision* status) and `questions.html` (12 questions, each with what is known, what is missing, and the action that would close it). The two cross-link. |
+| **Category subpages.** | `guides/` with four reader categories — basket air fryers, air-fryer ovens, buying guides, method — each listing the published pieces and, for the two product categories, the full sourced specification tables. |
+| **Every figure still comes from the dataset.** | `tools/build_front.py` renders all eight new pages from `marketing/data/facts.json`, so no number was re-typed. Every row ends in a link to the official page that states it, or a dash with the reason printed beside it. |
+| **Two new gates.** | `tools/build_front.py --check` (pages are reproducible from the dataset) and `tools/verify_front.py` (8 checks: per-row sourcing, blanks carry a reason, no prices, disclosure above the data, sponsored links, links resolve, canonical matches path, no invented performance figures). CI is now 37 steps, all green. |
+
+### What did not change
+
+No verified value. No ledger row, no `assets/js/data.js` entry, no product attribute, no commission band,
+no flag. The redesign is presentation and information architecture applied to the same evidence.
+
+### Verified this session
+
+Every load-bearing official source was re-fetched live on 2026-11-16 and compared string by string. The
+three supplied links resolve to the same three listings as recorded (fourth consecutive date). All 11
+commission bands in Table 1 match. The ASIN definition and the qualifying link format match verbatim. The
+three manufacturer pages match every stored specification row, including both recorded conflicts. Full
+record: `docs/verification-9251f262.md`.
+
+### One drift found, published rather than quietly corrected
+
+The Amazon listing title stored for the 26-quart Emeril oven is no longer the title Amazon serves. No
+specification row is affected and nothing on the site is wrong — the stored *title* is stale. It is flagged
+on the landing page and in the review rather than overwritten, because a silent edit would destroy the
+record of what was read and when. Logged as cross-scope request R-3.
+
+### Where this leaves the earning half
+
+Unchanged, and still not a technical problem:
+
+| Blocker | What would close it |
+|---|---|
+| No Associates tag, so no link can attribute a sale (F-24) | The owner supplies the tag and marketplace |
+| The three intended products are not established by any official document (F-01…F-03) | The owner confirms the three ASINs inside Associates Central |
+| No API credential, so no catalog, rating or band lookup (F-05) | Register for the Creators API; PA-API 5.0 is deprecated |
+| No traffic, click, conversion or revenue figure exists | Turn on measurement, then wait — nothing before that is real |
+
+Three of the four are one message from the owner away from closing. The fourth is a hosting decision.
+All twelve suggestions and all twelve questions are on the new boards with the actions that would settle
+them; nothing on either board has been implemented.
