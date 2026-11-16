@@ -5154,3 +5154,77 @@ value at render time, and the validator checks the **rendered** number. A typed 
 still checked, so the gate keeps failing when a hand-typed count drifts — but a token can never drift.
 
 **Claim commit and push happen immediately after this record, before any non-coordination edit.**
+
+## Closing record — T49 (final integration wave) — `arena/224cc10c-zone2` (session `224cc10c`, 2026-11-16 UTC)
+
+**Status: DONE.** The 2026-11-16 request is fully integrated, merged and deployed.
+
+| Item | Result |
+| --- | --- |
+| Task | T49 → **done** (claim above; this record supersedes its "in progress" status) |
+| Commits pushed | `6a3a991` readiness gate repair (derived `{measure}` tokens, restored `build_readiness.py --check` step, `tools/test_readiness.py` 13/13) · `e31202d` T47 discovery namespace integrated selectively + `tools/ci_replay.py` · `eb617be` live re-audit of all 17 discovery sources |
+| Pull request | **#129** — https://github.com/kanlerxz87-cyber/Zone2/pull/129 ("T49 final integration: readiness gate repair, T47 discovery namespace, live official-source re-audit") |
+| PR checks before merge | `Build and verify` **pass** (19 s) on the PR head; deploy job correctly skipped on the PR |
+| Merge | **MERGED** 2026-11-16T14:51:47Z, merge commit `72957129cf5258f08b3739b3619657fa2b7354ed` (`14402f6` → `7295712`), `--merge`, no approval wait, no `--auto` |
+| CI on `main` at the merge SHA | run **43890237877** `Build, verify and deploy` → **completed/success**; jobs: `Build and verify`=success, `Deploy to GitHub Pages`=success (warnings only: Node.js 20 action deprecation, ubuntu-latest migration notice) |
+| Pages deployment | run **43890236772** `pages-build-deployment` → **completed/success** at `7295712`; GitHub Pages API `status: built`, site https://kanlerxz87-cyber.github.io/Zone2/ |
+| Stale PRs resolved | **#104** closed as *integrated* (selective: `e31202d`; parallel metadata layer discarded) · **#113** and **#118** closed as *superseded* coordination-only records — all three with explanatory close comments; `gh pr list --state open` is now empty |
+| Rebase | no-op: `origin/main` stayed `14402f6` (the branch's exact merge-base) until the merge |
+
+### What landed on `main`
+
+1. **Readiness gate repair** — RR-10/RR-11 in `ledger/readiness.json` now carry derived `{measure}` tokens resolved and validated by `tools/build_readiness.py` (typed counts still checked, so drift still fails); the workflow step `build_readiness.py --check` that had been dropped from `main` is restored, plus a new negative-test step running `tools/test_readiness.py` (13/13).
+2. **T47 discovery namespace (PR #104, selective)** — `discovery/` (index, findings, questions, suggestions, measurement, sources), `docs/discovery-t40.json` (17 findings/14 blocking, 10 questions, 14 suggestions), `docs/discovery-t40-sources.json` (17 sources), `docs/measurement-t40.json` (5 events, 0 live), `docs/design-brief-t40.md`, `tools/build_discovery.py` + `build_measurement.py` + `validate_discovery.py` — all rewired onto the repository's single head contract `tools/head_meta.py` (PR #104's `tools/build_meta.py`/`tools/page_meta.py` **excluded**: duplicate canonical/OG tags, conflicting URLs). Workflow link/disclosure sweeps, sitemap entries and landing-page nav/footer links extended to the new namespace.
+3. **`tools/ci_replay.py`** — purpose-built parser (PyYAML unavailable under PEP 668) that replays all 35 workflow `run:` steps locally in order.
+4. **Live source re-audit (`eb617be`)** — see below.
+
+### Sources verified live on 2026-11-16 (official; fetched with `fetch_page` because sandbox shell TLS is blocked)
+
+| Source | URL | Result |
+| --- | --- | --- |
+| Supplied short link `B04G1MEwY` | https://link.amazon/B04G1MEwY | resolves → `amazon.com/dp/B0CDY277D3` — matches `ledger/products.json` |
+| Supplied short link `B02NbDxp3` | https://link.amazon/B02NbDxp3 | resolves → `amazon.com/dp/B09B7SB46R` — matches |
+| Supplied short link `B00hJ57DV` | https://link.amazon/B00hJ57DV | resolves → `amazon.com/dp/B08DKYBTPH` — matches |
+| Associates Program Policies | https://affiliate-program.amazon.com/help/operating/policies | page states **Updated: April 14, 2026**; quotes S44, S45 (§1(a), §2(h), §2(k)), S46 (§6(v)(w)), S51 (§6(f)), S52 (Commission §2(e)), S53 (§6(y)), S54 (§2(b)) all verbatim |
+| Operating Agreement | https://affiliate-program.amazon.com/help/operating/agreement | page states **Updated: October 15, 2025**; quotes S58 (§4), S59 (§5) verbatim |
+| Application Review Process | https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM | re-read: robust original content, generally recent within 60 days, ≥10 posts rule of thumb |
+| Google spam policies | https://developers.google.com/search/docs/essentials/spam-policies | **Last updated 2026-08-28**; quotes S47 (scaled content abuse), S48 (thin affiliation) verbatim |
+| Google gen-AI guidance | https://developers.google.com/search/docs/fundamentals/using-gen-ai-content | **Last updated 2026-10-01**; quote S57 verbatim |
+| Google helpful content | https://developers.google.com/search/docs/fundamentals/creating-helpful-content | **Last updated 2026-10-05**; quote S56 verbatim |
+| Google outbound links | https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links | **Last updated 2025-12-10**; quote S49 verbatim |
+| Google structured data guidelines | https://developers.google.com/search/docs/appearance/structured-data/sd-policies | **Last updated 2026-07-10**; S60 **quote drift found and corrected** (below) |
+| Google review snippet | https://developers.google.com/search/docs/appearance/structured-data/review-snippet | quote S50 (all three fragments) verbatim |
+| FTC Disclosures 101 | https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers | page states **November 2019**; quote S55 verbatim |
+
+**Register audit result:** 16 of 17 stored quotes matched the served pages verbatim (whitespace/line normalisation aside). **S60 correction:** the stored example sentence ("don't include the rating of a book…") and final sentence ("must be representative of the main content…") are no longer what Google serves — the current page says "if the JSON-LD markup describes a performer, the HTML body must describe that same performer" and "Your structured data must be a true representation of the page content". Replaced with the current verbatim text, `page_stated_update` filled where the page states a date (S44–S46/S51–S54 → 2026-04-14, S47–S48 → 2026-08-28, S60 → 2026-07-10), and the re-audit appended to the register note. `discovery/sources.html` regenerated.
+
+### Invalid-code control re-run and reconciliation with the 2026-11-14 ledger observations
+
+| Probe (2026-11-16, `fetch_page`) | Observed |
+| --- | --- |
+| `link.amazon/B00TEST12` (F-20's exact control) | **reproduces** — resolves to `amzlinks.in/B00TEST12`, serves the recorded "404: File Not Found … You've clicked on an invalid URL." page |
+| `link.amazon/B00TEST13` | same amzlinks 404 page |
+| `link.amazon/B0CDY277D3` (F-28's control: valid-format ASIN) | same amzlinks 404 page — **F-28 reproduces** |
+| `link.amazon/A00TEST12` | **different:** redirects to `https://www.amazon.com/` (homepage) |
+| `link.amazon/C00TEST12` | **different:** redirects to `https://www.amazon.com/` (homepage) |
+| `link.amazon/ZZZZZZZZZ` | **different:** bare `403 Forbidden` at `link.amazon`, no redirect |
+| `link.amazon/NOTACODE9` (earlier probe, same day) | bare `403 Forbidden` |
+
+**Reconciliation:** the ledger's recorded controls (F-20, F-28) reproduce exactly and the three supplied links still resolve reproducibly to their recorded product pages, so the published conclusions stand. However the *generalization* in F-20's title ("an unknown link.amazon code returns a 404") is **too broad**: unknown codes on the same service showed at least three distinct behaviors today (amzlinks 404 page for `B0…` codes, homepage redirect for `A00…`/`C00…`, bare 403 for two others). The cause of the 403s and the routing difference is **unknown** — not inferred here. Logged as a **needs-review wording item** for whoever owns `ledger/flags.json` (this session's claim excludes `ledger/**` other than the two readiness rows): anchor F-20/F-03 wording to the specific control code rather than "an unknown code". No published figure or destination claim changes.
+
+### Gates run on the final tree (all green, after `eb617be`)
+
+`ci_replay` **35/35** · `validate_discovery` 0 errors/0 warnings (6 pages, 17 quotes, 18 citations, 5 events, 0 live) · `build_head_meta --audit` 87 pages/0 problems · `audit_site` all checks across 141 published pages · `seo_audit` all checks pass, sitemap 139 URLs · `build_readiness` 140/140 pages disclose, 14 surfaces, `test_readiness` 13/13 · `validate_data`, `validate_decisions`, `audit/console/marketing/research-hub/revalidation/affiliate-lab` verifiers, `tests/test_pipeline.py` all pass (run earlier in the session on this branch).
+
+### Irregularities remaining open (non-blocking, published for review)
+
+- **F-01 (high, owner):** the three supplied codes are 9 characters; an ASIN is 10 — identity rests on the observed link destinations pending Associates Central confirmation.
+- **F-24 (medium, owner):** supplied links carry no Associates `tag=` parameter — as supplied they cannot earn commission.
+- **F-20 title over-generalization:** see reconciliation above — needs-review wording item on `ledger/flags.json`.
+- **Measurement:** 5 defined events, **0 live** — the site is static; disclosed on `discovery/measurement.html`.
+- **S60 quote drift:** corrected in `eb617be` (this record is its audit trail).
+- Owner actions unchanged: supply the Associates ID/target marketplace (F-24), confirm the three destinations (F-03), re-supply full ASINs if the brief's tokens were meant as ASINs (F-01).
+
+### Verification channel note
+
+Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live checks above used `fetch_page` and GitHub's API (`gh`), never an unverified assumption. Pages deployment was confirmed via the Actions runs at the merge SHA and the Pages API `status: built`, not inferred from a badge.
