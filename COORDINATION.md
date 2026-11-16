@@ -5228,3 +5228,19 @@ still checked, so the gate keeps failing when a hand-typed count drifts — but 
 ### Verification channel note
 
 Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live checks above used `fetch_page` and GitHub's API (`gh`), never an unverified assumption. Pages deployment was confirmed via the Actions runs at the merge SHA and the Pages API `status: built`, not inferred from a badge.
+
+---
+
+## Session claim — T50 (current-state verification and close-out) — `arena/ebc8a709-zone2` (session `ebc8a709`, 2026-11-16 UTC)
+
+**Status: IN PROGRESS.** Review the already-deployed site and repository on the pinned Arena branch, rerun the available gates, re-fetch high-impact official sources (the three supplied short links, Associates Agreement and Policies, FTC disclosure guidance, and Google Search spam policy), verify GitHub Pages build/deploy status, and record the results plus any fresh irregularities. This is a documentation-only audit: no product facts, canonical registers, site data, or navigation will be changed.
+
+| Item | Value |
+| --- | --- |
+| Task | **T50** — current-state review and verification close-out for the user's 2026-11-16 request |
+| Owner | `ebc8a709` (`arena/ebc8a709-zone2`) |
+| File scope | `COORDINATION.md` (append-only) and new `docs/review-2026-11-16.md` only |
+| Branch rule | Arena pins this session to `arena/ebc8a709-zone2`; the request's `session-<id>/<task>` branch convention cannot be followed without violating the pinned-branch rule, so no branch switch/create will be attempted. |
+| Initial state | HEAD `004a040bf5cad721ad49b84916d27d0f61f31e5c` (same as `main`); working tree clean; no open PRs reported by GitHub at start. |
+
+**Claim commit and push are made immediately before writing the audit report.**
