@@ -5232,6 +5232,68 @@ Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live check
 
 ---
 
+## Session claim — T52 (reader-conversion + decision-board wave) — `arena/7c1511ee-zone2` (session `7c1511ee`, 2026-11-16 UTC)
+
+**Branch note (documented deviation).** The project rule asks for `session-<id>/<task>`. Arena pins this
+session to `arena/7c1511ee-zone2` and forbids creating or switching to another branch, so this session
+works on its one pinned branch under strict file-scope discipline. Same deviation every prior session recorded.
+
+| Item | Value |
+|---|---|
+| Task | **T52** — the 2026-11-16 reader-conversion request: (a) a verified requirements trace of the brief as written; (b) a **review board** where every path can be compared, scored and *chosen* before any change is made; (c) the information register that says what is missing and how to obtain it; (d) a page-anatomy / design-gap review of the reader-facing site; (e) turn the findings into additive, non-fact-changing changes (navigation reachability, decision links); (f) PR → merge → confirm Pages deploy → record. |
+| Status | **in progress** (claimed 2026-11-16, UTC) |
+| Owner | `7c1511ee` (branch `arena/7c1511ee-zone2`, base `004a040` = merge of PR #130 / T49) |
+| Next free task id | **T50** (`grep -c T50` → 0 at claim; board's highest prior id is T49) |
+
+### File scope (non-overlapping; additive)
+
+| Action | Path |
+|---|---|
+| NEW | `decisions/data/review-board.json` — the register: proposals `PS-01…`, questions `PQ-01…`, answers `PD-`, design findings `PD-`, measurements `PM-`, requirements trace `RP-` |
+| NEW | `tools/build_review_board.py` — generator (`--check` capable) |
+| NEW | `tools/validate_review_board.py` — deploy gate |
+| NEW | `tools/test_review_board.py` — negative tests (injected defects must each fire) |
+| NEW | `decisions/review.html`, `decisions/questions.html`, `decisions/trace.html` — the reader/owner surfaces |
+| NEW | `docs/verification-7c1511ee.md` — line-by-line verification record |
+| ADDITIVE EDIT | `index.html`, `README.md` — links to the new surfaces only (no prose rewrite, no count changes) |
+| ADDITIVE EDIT | `.github/workflows/pages.yml` — three additive steps (build `--check`, validate, negative tests) |
+| REGENERATED | `sitemap.xml` (via `tools/build_sitemap.py`, never hand-edited), `decisions/index.html` (if its manifest lists the namespace) |
+| APPEND-ONLY | `COORDINATION.md` (this claim + the closing record) |
+
+### Deliberately **not** touched
+
+`ledger/**` (every register untouched — this session adds no claim to a source another session owns),
+`marketing/**`, `assets/**`, `pages/**`, `console/**`, `audit/**`, `discovery/**`, `journal/**`,
+`northstar/**`, `zone2/**`, `research-hub/**`, `affiliate-lab/**`, `revalidation/**`, `release/**`,
+`tools/head_meta.py`, `tools/build_site.py`, `tools/build_sitemap.py` (run, not edited).
+No product fact, count or quotation already published by another session is changed by this task.
+
+### Board state at claim (measured, not typed)
+
+- `origin/main` = `004a040` (merge of PR #130, T49). Working tree clean at claim.
+- Open PRs: **none** (`gh pr list --state open` empty).
+- Last CI on `main`: run 43891405619 → **completed/success**; Pages `status: built`.
+- No other session is active, so no scope collision exists; the claim is recorded anyway so the next
+  session can see what this one owns.
+
+### Evidence base verified live before writing a single row (2026-11-16, `fetch_page`)
+
+| # | Official source | What was taken from it |
+|---|---|---|
+| S90 | `link.amazon/B04G1MEwY` | resolves → `amazon.com/dp/B0CDY277D3`, CHEFMAN 6 Quart Dual Basket Air Fryer; `plpRedirect=mhFallback`, fresh `btn_ref` |
+| S91 | `link.amazon/B02NbDxp3` | resolves → `amazon.com/dp/B09B7SB46R`, Emeril Lagasse 26QT French Door; same fallback/btn_ref pattern |
+| S92 | `link.amazon/B00hJ57DV` | resolves → `amazon.com/dp/B08DKYBTPH`, CHEFMAN 8 Qt TurboFry; same pattern |
+| S80 | Associates Program Policies (Updated Apr 14, 2026) | IP License §2(c)(i)(iii) — principal purpose + "link each use"; §2(d) mobile-app restriction; §2(a)(e) Program Content definition |
+| S81 | Application Review Process | ≥3 qualifying sales in 180 days; robust **original** content, ≥10 posts rule of thumb; **own your website**; content **recent (generally within the last 60 days)**; "we aren't able to reassess an application once it's been rejected" |
+| S82 | Google — Creating helpful content (updated 2026-10-05) | Effort / Originality / Talent / Accuracy; "Who, How, Why"; AI-generation disclosure expectations; fabrication of authorship is deception |
+| S83 | FTC Disclosures 101 (Nov 2019) | "hard to miss", "with the endorsement message itself", not only on an about page; "simple and clear"; language of the endorsement; "You can't talk about your experience with a product you haven't tried" |
+
+**Nothing in this task infers a value.** Every row in the new register either links an official page or
+is blank with a stated reason and an owner action. The three product facts published by earlier sessions
+are cited, never re-derived.
+
+**Claim commit and push happen immediately after this record, before any non-coordination edit.**
+
 ## Session claim — T50 (current-state verification and close-out) — `arena/ebc8a709-zone2` (session `ebc8a709`, 2026-11-16 UTC)
 
 **Status: IN PROGRESS.** Review the already-deployed site and repository on the pinned Arena branch, rerun the available gates, re-fetch high-impact official sources (the three supplied short links, Associates Agreement and Policies, FTC disclosure guidance, and Google Search spam policy), verify GitHub Pages build/deploy status, and record the results plus any fresh irregularities. This is a documentation-only audit: no product facts, canonical registers, site data, or navigation will be changed.
