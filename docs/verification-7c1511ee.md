@@ -51,7 +51,7 @@ Register check: 11 sources defined, 11 cited, 0 unused (`tools/validate_review_b
 | PM-05 | 0 product links on the hero's destination | `grep -c 'amazon.com/dp/' marketing/buying-guide.html` → 0 |
 | PM-06 | 0 ranked shortlists | no marketing page contains a ranked list of ≥2 products |
 | PM-07 | 0 named authors | no marketing page carries a byline |
-| PM-08 | 76 nav links at base; 82 after this task's one added nav entry | count `<a ` inside the `<nav class="nav">` element of `index.html` |
+| PM-08 | 76 nav links at base; 80 after this task adds one nav entry | count `<a ` inside the `<nav class="nav">` element of `index.html` |
 | PM-09 | 5 boards carry proposals (6 counting the hub), 7 after this task | the six named filenames all exist; `review.html` is the seventh |
 | PM-10 | 0 of 28 answered | `ledger/questions.json` (18) + `marketing/data/editorial.json` (10), no `answer` field set |
 | PM-11 | 3 of 3 resolve unchanged | section 1 above |

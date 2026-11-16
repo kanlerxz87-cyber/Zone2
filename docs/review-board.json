@@ -374,9 +374,9 @@
     {
       "id": "PM-08",
       "measure": "Links on the site root (index.html) navigation",
-      "value": "76 at the base commit (82 after this task's single additive nav entry and five footer links)",
+      "value": "76 at the base commit (80 after this task adds one nav entry and three footer links)",
       "how_measured": "count every anchor inside the nav element of index.html at the base commit, then on this tree",
-      "means": "A shopper's front door is a 76-link operator console. The primary action a reader can take is not visible as a primary action.",
+      "means": "A shopper's front door is an operator console with two groups of links before any product. This task adds one entry, deliberately, and no more: a bigger nav would make the finding worse.",
       "source_ids": []
     },
     {
@@ -418,6 +418,14 @@
       "source_ids": [
         "S82"
       ]
+    },
+    {
+      "id": "PM-13",
+      "measure": "Methodology vocabulary vs product vocabulary in the visible prose of the 20 marketing pages",
+      "value": "548 methodology words against 860 product words (ratio 0.64) in 32,168 visible words",
+      "how_measured": "strip tags from every marketing page, count whole-word occurrences of a fixed 11-word methodology list (verified, source, sourced, official, blank, method, methodology, flag, unverified, disclosure, conflict) and a fixed 10-term product list (air fryer, basket, quart, qt, preset, temperature, watt, °F, door, rack)",
+      "means": "Roughly two words of methodology for every three of product. Not the dominant subject, but far too high a share for a buyer-facing page, and the reason a reader meets the audit trail before the appliance.",
+      "source_ids": []
     }
   ],
   "proposals": [
@@ -1105,7 +1113,7 @@
       "what_a_reader_sees": "Verification banners, source chips, blank-row explanations, an 'open items' strip and a methodology panel before any appliance is described in detail.",
       "why_it_matters": "It is honest, and it is not what a reader came for. It also makes the prose read as a compliance artefact rather than as a publication, which is the definition of the impression the owner is complaining about.",
       "proposed_fix": "PS-02",
-      "measured_by": "",
+      "measured_by": "PM-13",
       "source_ids": [
         "S83"
       ]
