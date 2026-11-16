@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **40 flags (F-01 … F-40)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **41 flags (F-01 … F-41)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -797,7 +797,7 @@ rendering in fallback system fonts since the redesign. No gate could see it, bec
 namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
 class of bug — a resource a build cannot fail on — is on the record for the next time.
 
-**Numbers for the reviewer, all derived from the registers:** 40 flags, 43 sources, 89 logged checks, 17 open
+**Numbers for the reviewer, all derived from the registers:** 41 flags, 43 sources, 104 logged checks, 18 open
 questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
 or performance figure: the site still has no authorised source for one, and an absent number beats an invented
 one.
@@ -870,7 +870,7 @@ the suggestions board and the questions register, each with the action that woul
 
 **Decision surfaces confirmed linked and prominent:** the root landing page links the Suggestions board (`pages/suggestions.html`, SG-01…SG-12) and the Open questions register (`pages/questions.html`, Q-01…Q-18) from both the primary navigation and the footer "Decisions" column. Each suggestion row carries options, a recommendation, the questions that must be answered first, and an owner decision field awaiting record in `ledger/suggestions.json`. Nothing is implemented until a choice is recorded there.
 
-**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (43 sources, 361 rows, 40 flags, 1176 links); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 141 pages, all checks PASS.
+**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (43 sources, 361 rows, 1176 links; the register stood at 40 when that run executed and holds 41 today, after F-41 below); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 141 pages, all checks PASS.
 
 **Flagged irregularities (non-blocking, on `pages/flags.html`):** F-01/F-03 (product identity not established by an official document), F-24 (no Associates tag on the supplied links), F-05 (Creators API unregistered; PA-API 5.0 deprecated), F-08 (no performance reports; no traffic/revenue figures published anywhere). None blocks merge; all are published for owner review with their source links and closing actions.
 
@@ -921,3 +921,64 @@ first, operator views labelled internal), `PS-05` (turn citation labels into buy
 beside them) and `PS-02` (make the products the subject and the method a linked feature). None of them
 needs an Amazon account, a domain, or a paid tool. All three are still awaiting a decision, because a
 proposal is not an implementation and this session did not decide on the owner's behalf.
+
+---
+
+## Addendum — 2026-11-16 (session `43eb0239`, task T54 — renumbered: T50 went to `ebc8a709`, T51 to `970d11d6`, T52/T53 to `7c1511ee`)
+
+**The product evidence was re-read from the official pages today, and one published value was wrong.**
+
+Session `224cc10c` (T49) had already re-audited the *programme* sources — Associates policies, the Operating
+Agreement, the Google and FTC pages. This pass re-read the other half, which nobody had touched since
+2026-11-14: the three Amazon listings the supplied links resolve to, and the three manufacturer pages that
+carry every specification the tables print. All six were fetched live and compared value by value. The
+full record is [`docs/verification-43eb0239.md`](docs/verification-43eb0239.md), and the rows are in the
+register as `V-90` … `V-104`.
+
+**What held.** All three supplied links still resolve to the same three listings they resolved to on
+2026-11-13 — `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH` — for the sixth independent session, and all three
+`btn_ref` tracking tokens are new again, which is flag F-21 reproducing exactly as published. The
+unissued-code control behind F-20 reproduces. Every specification value sourced to a manufacturer page
+matched the live text character for character: seven of seven on the Chefman dual-window page, the whole
+8 Qt page including both of its published conflicts, and every value on the Emeril page including the
+three-way preset disagreement. The two Chefman conflicts and the two Emeril conflicts all still stand, and
+no session picked a winner between them.
+
+**What did not hold.** The Amazon listing title this site publishes for `B09B7SB46R` was **stale**: the page
+serves "…| Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking
+Accessories Included", while the repository was still printing the 2026-11-14 read, "…| 26QT air fryer oven
+with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals." Session
+`5d6d2254` found the same thing on 2026-11-15 and left it, correctly, for whoever owned
+`ledger/products.json`. Two independent sessions two days apart now read the same current string, and the
+other two products' titles reproduced verbatim in the same run, so this is not how the site reads titles —
+**Amazon serves different title text for that listing at different times.** The stored value has been
+replaced with what the page serves today and stamped with the date it was read and the date it was
+previously read. Logged as **F-41**, and the register row for that check is recorded `REFUTED`, not
+`VERIFIED`.
+
+**The lesson is the deliverable, not the typo.** A listing title is perishable evidence, and it is only
+defensible for as long as it carries the date it was read. Three downstream copies of the old string — in
+`revalidation/`, `marketing/` and `research-hub/` — are logged as change request **CR-13** in
+`COORDINATION.md` rather than edited across another namespace's claim; the historical verification docs keep
+the old string, because they quote it as evidence of what was true when they were written and rewriting them
+would falsify the record.
+
+**What could not be verified today is on the record too (`V-103`).** The rows sourced *only* to the Amazon
+product-information table were not re-read: the listing body is request-dependent and two consecutive
+fetches of the same URL returned different page lengths, so reading a number out of the wrong section
+would have been worse than not reading it. Nothing was changed, filled in or inferred. Every one of those
+rows keeps its official source link and its earlier observation date.
+
+**Where the decision material stands.** Nothing in this pass changes what blocks the earning half: no
+Associate ID, so no link on this site can attribute a commission (F-07 / F-24); the three intended products
+are still not established by any official document (F-01 … F-03); the Creators API account is unregistered
+(F-05); and there are no performance reports, because there is no traffic to report (F-08). The owner's
+decision surfaces are unchanged and current — the ten suggestions with options and trade-offs on
+[the decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html), the
+**18 open questions** with the method that would close each one on
+[the questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html), and the
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **41 flags**,
+each with its source links. Nothing is implemented on this site until it is chosen there.
+
+**Numbers for the reviewer, all derived from the registers:** 41 flags (16 open · 25 resolved), 43 sources,
+104 logged checks, 18 open questions, and every repository gate green on the merged tree.

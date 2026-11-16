@@ -1,5 +1,5 @@
 {
-  "note": "Ledger of the three affiliate links named in the project brief. Two different questions are kept apart on purpose. (1) IDENTITY OF THE TOKEN AS SUPPLIED — each supplied code is 9 characters, an ASIN is 10, and amazon.com/dp/<code> returns Amazon's Page Not Found page, so no attribute can be stated for the token itself; those fields are blank and the rows are marked UNVERIFIED. (2) WHAT THE LINK RESOLVES TO — each link.amazon URL resolves to one specific Amazon product page, reproducibly, and an unknown code on the same service returns a 404 rather than a random product (flag F-20), so the destination is a verified observation of the link's behaviour. The two are recorded separately because Amazon publishes no document that binds a link.amazon code to a product, so the destination is not established as the item the brief intended. Verified 2026-11-14 by live fetch.",
+  "note": "Ledger of the three affiliate links named in the project brief. Two different questions are kept apart on purpose. (1) IDENTITY OF THE TOKEN AS SUPPLIED — each supplied code is 9 characters, an ASIN is 10, and amazon.com/dp/<code> returns Amazon's Page Not Found page, so no attribute can be stated for the token itself; those fields are blank and the rows are marked UNVERIFIED. (2) WHAT THE LINK RESOLVES TO — each link.amazon URL resolves to one specific Amazon product page, reproducibly, and an unknown code on the same service returns a 404 rather than a random product (flag F-20), so the destination is a verified observation of the link's behaviour. The two are recorded separately because Amazon publishes no document that binds a link.amazon code to a product, so the destination is not established as the item the brief intended. Verified 2026-11-14 by live fetch. ADDENDUM 2026-11-16 (session 43eb0239, T54): P-02's published listing title was found to have drifted from the live Amazon listing — the same defect session 5d6d2254 recorded as D-1 on 2026-11-15 and deliberately left for the owner of ledger/products.json. Two independent sessions, two days apart, read the same current title, so the stored string has been replaced with what the official page serves today and the observation is stamped in title_last_read_utc / title_previously_read_utc. P-01 and P-03 titles reproduced verbatim and were re-stamped only. The 'Cooking functions / presets' conflict row quoted the stale Amazon clause; it now quotes the live one. No value was inferred, filled in, or chosen between the conflicting figures. See flag F-41.",
   "verified_utc": "2026-11-14",
   "lookup_path": "Creators API GetItems (S07, S08) with an authenticated Associates account - not available in this workspace",
   "entries": [
@@ -182,7 +182,8 @@
         "availability": "",
         "bsr": "",
         "commission_rate": "",
-        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred."
+        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
+        "title_last_read_utc": "2026-11-16"
       }
     },
     {
@@ -226,7 +227,7 @@
       "resolves_to": "https://www.amazon.com/dp/B09B7SB46R",
       "resolved": {
         "asin": "B09B7SB46R",
-        "title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+        "title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
         "brand": "Emeril Lagasse",
         "category": "Home & Kitchen",
         "category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
@@ -299,13 +300,13 @@
           },
           {
             "attribute": "Cooking functions / presets",
-            "value": "CONFLICT — Amazon listing title: '24 cooking functions'; Emeril Everyday description: '24 one-touch cooking presets'; Emeril Everyday specification tile: '25 Cooking Pre-sets'; Emeril Everyday feature block headed '10-In-1 Versatility' lists ten functions (Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm)",
+            "value": "CONFLICT — Amazon listing title (as served 2026-11-16): '24 One-Touch Preset Options'; Emeril Everyday description: '24 one-touch cooking presets'; Emeril Everyday specification tile: '25 Cooking Pre-sets'; Emeril Everyday feature block headed '10-In-1 Versatility' lists ten functions (Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast, Warm)",
             "status": "conflict",
             "source_ids": [
               "S20",
               "S27"
             ],
-            "source_label": "Amazon listing title; Emeril Everyday official store (description, specification tile and '10-In-1 Versatility' feature block) — the manufacturer's own page disagrees with itself (flag F-19)"
+            "source_label": "Amazon listing title as served 2026-11-16; Emeril Everyday official store (description, specification tile and '10-In-1 Versatility' feature block) — the manufacturer's own page disagrees with itself (flag F-19). The Amazon title served a different second clause on 2026-11-14 — '24 cooking functions' — which this repository quoted until 2026-11-16 (flag F-41)."
           },
           {
             "attribute": "Door style",
@@ -372,7 +373,9 @@
         "availability": "",
         "bsr": "",
         "commission_rate": "",
-        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred."
+        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
+        "title_last_read_utc": "2026-11-16",
+        "title_previously_read_utc": "2026-11-14"
       }
     },
     {
@@ -553,7 +556,8 @@
         "availability": "",
         "bsr": "",
         "commission_rate": "",
-        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred."
+        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
+        "title_last_read_utc": "2026-11-16"
       }
     }
   ],
