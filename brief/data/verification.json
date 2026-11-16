@@ -1,0 +1,346 @@
+{
+  "note": "Verification log for the design brief (task T50, session arena/dc72a69e-zone2). One row per check this session performed on 2026-11-16 UTC. 'result' is one of: match (the page served the text this project publishes), mismatch (it did not — raised as a flag), reproduced (a prior observation was re-run and came out the same), or measured (a count of this repository's own files, which no external page can settle). Sandbox shell curl fails outbound TLS, so every live check used fetch_page; no row rests on the shell's network. Every count was taken again on 2026-11-16 after rebasing onto main at 18e8de8, because session arena/9251f262-zone2 (T55) rebuilt the front pages and added the guides/ namespace while this session was in flight; VF-30's finding was resolved by that rebuild and is recorded as closed rather than deleted.",
+  "as_of": "2026-11-16",
+  "channel_note": "Outbound TLS from the sandbox shell fails with SSL_ERROR_SYSCALL. Every live check below was therefore run with fetch_page or the GitHub API, and the channel is named on each row.",
+  "checks": [
+    {
+      "id": "VF-01",
+      "what": "Supplied link 1 destination",
+      "method": "fetch_page on https://link.amazon/B04G1MEwY",
+      "observed": "Resolves to www.amazon.com/dp/B0CDY277D3 — 'CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows…'. Breadcrumb Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers. No tag parameter.",
+      "source_ids": [
+        "BR-19"
+      ],
+      "result": "reproduced"
+    },
+    {
+      "id": "VF-02",
+      "what": "Supplied link 2 destination",
+      "method": "fetch_page on https://link.amazon/B02NbDxp3",
+      "observed": "Resolves to www.amazon.com/dp/B09B7SB46R — 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven…'. No tag parameter.",
+      "source_ids": [
+        "BR-20"
+      ],
+      "result": "reproduced"
+    },
+    {
+      "id": "VF-03",
+      "what": "Supplied link 3 destination",
+      "method": "fetch_page on https://link.amazon/B00hJ57DV",
+      "observed": "Resolves to www.amazon.com/dp/B08DKYBTPH — 'Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option…'. No tag parameter. The title's 450°F figure is the conflict carried as F-22; this session observed the title text only and restates no specification from it.",
+      "source_ids": [
+        "BR-21"
+      ],
+      "result": "reproduced"
+    },
+    {
+      "id": "VF-04",
+      "what": "Program Policies — §6(t), customer reviews and star ratings",
+      "method": "fetch_page; read the Participation Requirements §6 list",
+      "observed": "Page states 'Updated: April 14, 2026'. Quoted text served verbatim.",
+      "source_ids": [
+        "BR-01"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-05",
+      "what": "Program Policies — §6(y), price tracking and alerting",
+      "method": "fetch_page; same list",
+      "observed": "Quoted text served verbatim.",
+      "source_ids": [
+        "BR-02"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-06",
+      "what": "Program Policies — §6(g), no incentive for using Special Links",
+      "method": "fetch_page; same list",
+      "observed": "Quoted text served verbatim.",
+      "source_ids": [
+        "BR-03"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-07",
+      "what": "Program Policies — §6(v) and §6(w), cloaking and unclear link presentation",
+      "method": "fetch_page; same list",
+      "observed": "Quoted text served verbatim.",
+      "source_ids": [
+        "BR-04"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-08",
+      "what": "Operating Agreement — §5, the disclosure sentence",
+      "method": "fetch_page; read §5",
+      "observed": "Page states 'Updated: October 15, 2025'. Quoted sentence served verbatim, including the curly quotation marks.",
+      "source_ids": [
+        "BR-05"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-09",
+      "what": "Operating Agreement — §4, no representation about traffic or income",
+      "method": "fetch_page; read §4",
+      "observed": "Quoted text served verbatim.",
+      "source_ids": [
+        "BR-06"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-10",
+      "what": "Application Review Process — the three-qualifying-sales threshold",
+      "method": "fetch_page; read the introduction",
+      "observed": "Quoted text served verbatim, including the parenthetical 'we require at least three within the first 180 days'.",
+      "source_ids": [
+        "BR-07"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-11",
+      "what": "Application Review Process — the content bar",
+      "method": "fetch_page; read the introduction",
+      "observed": "Quoted text served verbatim, including 'a good rule of thumb is at least 10 posts'.",
+      "source_ids": [
+        "BR-08"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-12",
+      "what": "Application Review Process — recency and ownership",
+      "method": "fetch_page; read the Websites section",
+      "observed": "Quoted text served verbatim.",
+      "source_ids": [
+        "BR-09"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-13",
+      "what": "Application Review Process — what a Special Link tag is",
+      "method": "fetch_page; read the Application FAQs",
+      "observed": "Quoted text served verbatim, including the example format 'abcd-20'.",
+      "source_ids": [
+        "BR-10"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-14",
+      "what": "Google spam policies — scaled content abuse",
+      "method": "fetch_page; read the Scaled content abuse section and the page footer",
+      "observed": "Page states 'Last updated 2026-08-28 UTC.' Quoted definition served verbatim, including the bullet 'Using generative AI tools or other similar tools to generate many pages without adding value for users'.",
+      "source_ids": [
+        "BR-11",
+        "BR-13"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-15",
+      "what": "Google spam policies — thin affiliation, and what makes an affiliate page good",
+      "method": "fetch_page; read the Thin affiliation section",
+      "observed": "Quoted text served verbatim, including the five named value-adds.",
+      "source_ids": [
+        "BR-12"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-16",
+      "what": "Google guidance on generative AI content",
+      "method": "fetch_page; read the page body and footer",
+      "observed": "Page states 'Last updated 2026-10-01 UTC.' Quoted sentence served verbatim.",
+      "source_ids": [
+        "BR-13"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-17",
+      "what": "Google helpful-content guidance — the trending-topic warning",
+      "method": "fetch_page; read the 'Avoid creating search engine-first content' list",
+      "observed": "Quoted question served verbatim.",
+      "source_ids": [
+        "BR-14"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-18",
+      "what": "Google helpful-content guidance — the spread-across-sites warning",
+      "method": "fetch_page; read the content-and-quality questions",
+      "observed": "Quoted question served verbatim.",
+      "source_ids": [
+        "BR-15"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-19",
+      "what": "Google helpful-content guidance — first-hand expertise",
+      "method": "fetch_page; read the people-first questions",
+      "observed": "Quoted question served verbatim.",
+      "source_ids": [
+        "BR-16"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-20",
+      "what": "FTC Disclosures 101 — placement of the disclosure",
+      "method": "fetch_page; read the 'How to Disclose' section",
+      "observed": "Page states November 2019. Quoted guidance served verbatim, including 'Disclosures are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos'.",
+      "source_ids": [
+        "BR-17"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-21",
+      "what": "FTC Disclosures 101 — claims that require proof",
+      "method": "fetch_page; read the 'What Else to Know' section",
+      "observed": "Quoted sentence served verbatim.",
+      "source_ids": [
+        "BR-18"
+      ],
+      "result": "match"
+    },
+    {
+      "id": "VF-22",
+      "what": "Every repository gate, replayed on the unmodified base tree",
+      "method": "tools/ci_replay.py replays every workflow step in order against this tree, then tests/test_pipeline.py",
+      "observed": "43 of 43 workflow steps pass locally via tools/ci_replay.py, plus 15 of 15 pipeline tests",
+      "source_ids": [],
+      "result": "measured"
+    },
+    {
+      "id": "VF-23",
+      "what": "Published page inventory",
+      "method": "Path.rglob('*.html') over the repository, excluding .git/.github",
+      "observed": "162 HTML files; 2 are error documents; 160 published; 150 excluding this namespace and release/index.html",
+      "source_ids": [],
+      "result": "measured"
+    },
+    {
+      "id": "VF-24",
+      "what": "Pages carrying an Associates tag",
+      "method": "Regex tag=[A-Za-z0-9]+-[0-9]{2} across the 138 published pages",
+      "observed": "0 of 150. The placeholder tag=YOURASSOCIATEID does not match and is not counted.",
+      "source_ids": [
+        "BR-10"
+      ],
+      "result": "measured"
+    },
+    {
+      "id": "VF-25",
+      "what": "Pages carrying the exact §5 disclosure sentence",
+      "method": "Substring search across the 138 published pages",
+      "observed": "150 of 150.",
+      "source_ids": [
+        "BR-05"
+      ],
+      "result": "measured"
+    },
+    {
+      "id": "VF-26",
+      "what": "Readiness row RR-01's stated page count, against the tree",
+      "method": "Compare ledger/readiness.json RR-01 with VF-23",
+      "observed": "RR-01 states '116 published HTML pages'; 150 measured. Difference 34 pages. Raised as FB-01.",
+      "source_ids": [],
+      "result": "mismatch"
+    },
+    {
+      "id": "VF-27",
+      "what": "Readiness row RR-05's stated link count, against the tree",
+      "method": "Compare ledger/readiness.json RR-05 with a substring search for amazon.com/dp/",
+      "observed": "RR-05 states '72 pages link to amazon.com/dp/'; 87 measured. Difference 15 pages. Raised as FB-02.",
+      "source_ids": [],
+      "result": "mismatch"
+    },
+    {
+      "id": "VF-28",
+      "what": "Whether SG-11 and SG-12 on the suggestion board are the same proposal",
+      "method": "Field-by-field comparison in ledger/suggestions.json",
+      "observed": "Same area, same title, near-identical body text. Raised as FB-03.",
+      "source_ids": [],
+      "result": "measured"
+    },
+    {
+      "id": "VF-29",
+      "what": "How often the site describes itself as AI-powered",
+      "method": "Case-insensitive count across the 138 published pages",
+      "observed": "'AI-powered' 25 occurrences on 14 pages; 'AI-powered Amazon affiliate' 11 occurrences on 11 pages. After the T55 rebuild none of the 14 is reader-facing. Raised as FB-04.",
+      "source_ids": [
+        "BR-13"
+      ],
+      "result": "measured"
+    },
+    {
+      "id": "VF-30",
+      "what": "The landing page's product-section heading, against the flag register",
+      "method": "Read index.html's h2 elements and compare with ledger/flags.json F-03",
+      "observed": "RESOLVED BY T55: the heading read 'Three links in. Three listings identified.'; after session arena/9251f262-zone2 rebuilt index.html on 2026-11-16 the string is absent. FB-05 closed.",
+      "source_ids": [
+        "BR-19"
+      ],
+      "result": "reproduced"
+    },
+    {
+      "id": "VF-31",
+      "what": "How often the copy talks about the site instead of to the reader",
+      "method": "On the seven root pages, count sentences of more than five words whose subject is the site",
+      "observed": "12 of 299 sentences, 4%",
+      "source_ids": [],
+      "result": "measured"
+    },
+    {
+      "id": "VF-32",
+      "what": "Residual banned phrases in published prose",
+      "method": "Scan all 138 pages, then read the surrounding text of each hit to separate genuine usage from a banned-word list",
+      "observed": "17 raw hits; every one sits inside a list of words the project forbids (console/design.html) or inside a before/after demonstration of generated copy (marketing/improvements.html). Genuine usage: 0.",
+      "source_ids": [],
+      "result": "measured"
+    },
+    {
+      "id": "VF-33",
+      "what": "Any page printing a money figure",
+      "method": "Regex for a $ amount across the 138 published pages, then manual read of each hit",
+      "observed": "5 pages, all printing Amazon bounty and commission program amounts. No page prints a product price.",
+      "source_ids": [],
+      "result": "measured"
+    },
+    {
+      "id": "VF-34",
+      "what": "Pages without a self-referencing canonical URL",
+      "method": "Substring search across the 138 published pages, grouped by namespace, cross-checked against tools/build_head_meta.py --audit",
+      "observed": "107 of 150 carry one; the 43 without are entirely in companion namespaces, which the gate reports rather than fails by design.",
+      "source_ids": [],
+      "result": "measured"
+    },
+    {
+      "id": "VF-35",
+      "what": "The readiness board's own state counts",
+      "method": "Parse the state column of release/index.html's main table",
+      "observed": "12 rows: 4 MET, 3 GAP, 3 BLOCKED, 1 UNVERIFIED, 1 OPEN.",
+      "source_ids": [],
+      "result": "measured"
+    },
+    {
+      "id": "VF-36",
+      "what": "The live site and the deployment that serves it",
+      "method": "GitHub API and Actions runs (not yet run this session — recorded as a placeholder that must be filled before this record closes)",
+      "observed": "",
+      "source_ids": [],
+      "result": "pending"
+    }
+  ]
+}

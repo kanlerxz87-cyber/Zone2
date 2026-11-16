@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repo review · Zone2 design brief</title>
+<meta name="description" content="Line-by-line review of the repository: every number was measured by a command, with the method shown and links for manual review.">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/brief/review.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Zone2">
+<meta property="og:title" content="Repo review · Zone2 design brief">
+<meta property="og:description" content="Line-by-line review of the repository: every number was measured by a command, with the method shown and links for manual review.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/brief/review.html">
+<meta name="robots" content="index,follow">
+<style>
+:root{--ink:#16130f;--paper:#fbfaf7;--muted:#6b6459;--line:#e3ded3;--accent:#1f5b4a;
+--blank:#8a8478;--warn:#9a6314;--card:#fff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+font:18px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:64rem;margin:0 auto;padding:0 24px}
+a{color:var(--accent)}
+.skip{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+header.mast{border-bottom:1px solid var(--line);background:var(--card)}
+.mast-in{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;padding:18px 24px;max-width:64rem;margin:0 auto}
+.brand{font-weight:700;text-decoration:none;color:var(--ink)}
+.brand span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+nav.top{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-left:auto}
+nav.top a{color:var(--muted);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
+nav.top a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+main{padding:32px 0 64px}
+h1{font:700 40px/1.1 Georgia,"Times New Roman",serif;margin:0 0 12px;letter-spacing:-.01em}
+h2{font:700 27px/1.2 Georgia,"Times New Roman",serif;margin:44px 0 10px}
+h3{font:600 20px/1.3 Georgia,"Times New Roman",serif;margin:26px 0 6px}
+p,li{max-width:44rem}
+.standfirst{font-size:20px;color:#3a342b;margin:0 0 8px;max-width:44rem}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.lede{color:#3a342b}
+.disclosure{border:1px solid var(--line);background:#fff;border-left:3px solid var(--accent);
+padding:12px 14px;font-size:15px;margin:0 0 20px;border-radius:3px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:14px 0 8px;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:9px 12px 9px 0}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line)}
+tbody tr:hover{background:#f6f3ec}
+tr[id]{scroll-margin-top:16px}
+blockquote{margin:8px 0;padding:10px 14px;border-left:3px solid var(--line);color:#3a342b;
+background:#fff;font-size:16px;max-width:44rem}
+code{font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f1ede4;
+padding:1px 5px;border-radius:3px}
+pre{background:#f6f3ec;border:1px solid var(--line);padding:14px 16px;overflow-x:auto;
+font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;border-radius:4px;
+white-space:pre-wrap;word-break:break-word}
+.pill{display:inline-block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fff;white-space:nowrap}
+.pill.official{border-color:#bcd8cc;color:#1f5b4a}
+.pill.observed{border-color:#cfd6e3;color:#3b5a86}
+.pill.carried{border-color:#e0d6bd;color:var(--warn)}
+.pill.open{color:var(--warn);border-color:#e0d6bd}
+.pill.done{color:#1f5b4a;border-color:#bcd8cc}
+.pill.blocked{color:#8a3a2a;border-color:#e3c4bb}
+.num{font:700 22px/1.1 Georgia,serif}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);background:var(--card);border-radius:4px;padding:14px 16px}
+.card .num{display:block;margin-bottom:4px}
+.card .lbl{font-size:14px;color:var(--muted)}
+.note{font-size:15px;color:var(--muted);max-width:44rem}
+.blank{color:var(--blank);border-bottom:1px dotted var(--blank);cursor:help}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:#fff;
+padding:14px 16px;margin:18px 0;border-radius:3px;max-width:44rem}
+.callout.warn{border-left-color:var(--warn)}
+.src{font-size:13px;color:var(--muted)}
+.src a{color:var(--accent)}
+ul.tight li{margin-bottom:5px}
+footer.site{border-top:1px solid var(--line);background:var(--card);padding:24px 0 40px;font-size:14px;color:var(--muted)}
+footer.site p{max-width:52rem}
+@media (max-width:640px){h1{font-size:31px}body{font-size:17px}.mast-in{padding:14px 24px}nav.top{margin-left:0}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Repo review", "description": "Line-by-line review of the repository: every number was measured by a command, with the method shown and links for manual review.", "datePublished": "2026-11-16T00:00:00+00:00", "inLanguage": "en", "isAccessibleForFree": true, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kanlerxz87-cyber.github.io/Zone2/brief/review.html"}, "publisher": {"@type": "Organization", "name": "Zone2", "url": "https://kanlerxz87-cyber.github.io/Zone2/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="mast-in">
+    <a class="brand" href="index.html"><b>Zone2 design brief</b><span>What the site should look like, and what has to be decided first</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html">Executive summary</a><a href="design-prompt.html">Design prompt</a><a href="topics.html">Articles &amp; topics</a><a href="suggestions.html">Choose a path</a><a href="questions.html">What we know</a><a href="review.html" aria-current="page">Repo review</a><a href="verification.html">Verification</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged</a></nav>
+  </div>
+</header>
+<div class="wrap">
+  <main id="main">
+    <p class="disclosure" data-rule="R-01"><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p class="crumbs" aria-label="Breadcrumb">Design brief › Repo review</p>
+
+<p class="eyebrow">Repository review · 2026-11-16 · base 18e8de8 (mai</p>
+<h1>Line by line: what is actually in the repository</h1>
+<p class="standfirst">Every number below was produced by a command run in this working tree on 2026-11-16.
+None is quoted from another session's prose. Where a published page states a different figure, the row
+says so and links to the flag.</p>
+<p class="note"><strong>Method.</strong> Read-only review. Every repository gate replayed locally, then a Path.rglob inventory of the tree with the counts below computed from file contents. Re-measured on 2026-11-16 after rebasing onto main at 18e8de8, because session arena/9251f262-zone2 (T55) rebuilt the front pages and added guides/ while this review was in flight.</p>
+
+<h2>Gate state on the tree this session started from</h2>
+<p class="note">A green gate is the only reason anything else on this site can be believed, so it is measured first. Every gate below was run locally on 004a040 before a single file was edited.</p>
+<table>
+<thead><tr><th>What was measured</th><th>Value</th><th>Method</th><th>Source</th></tr></thead>
+<tbody><tr id="RV-01"><td><strong>Every repository gate replayed on the unmodified base tree</strong></td><td>43 of 43 workflow steps pass (tools/ci_replay.py), plus 15 of 15 pipeline tests</td><td><code style="font-size:12.5px">tools/ci_replay.py replays every workflow step in order against this tree, then tests/test_pipeline.py</code></td><td class="src"><div class="note">source kind: measurement</div></td></tr></tbody>
+</table>
+<h2>What is actually in the tree</h2>
+<p class="note">Counts computed from file contents, not from any page&#x27;s own prose. Where a published page states a different number, the row says so and links to the flag.</p>
+<table>
+<thead><tr><th>What was measured</th><th>Value</th><th>Method</th><th>Source</th></tr></thead>
+<tbody><tr id="RV-02"><td><strong>Published page count</strong><div class="src"><a href="flagged.html#FB-01">FB-01</a></div></td><td>162 HTML files, of which 2 are error documents; 160 published; 150 excluding this namespace and release/index.html, which the readiness board deliberately does not count because it would be counting itself</td><td><code style="font-size:12.5px">Path.rglob(&#x27;*.html&#x27;) over the repository, excluding .git/.github</code></td><td class="src"><div class="note">source kind: measurement</div></td></tr><tr id="RV-03"><td><strong>Disclosure coverage</strong></td><td>150 of 150</td><td><code style="font-size:12.5px">Substring search for the exact §5 sentence across the 138 published pages</code></td><td class="src"><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-05</a><div class="note">source kind: official</div></td></tr><tr id="RV-04"><td><strong>Pages carrying an Associates tag in Amazon&#x27;s NAME-NN format</strong><div class="src"><a href="flagged.html#FB-06">FB-06</a></div></td><td>0 of 150</td><td><code style="font-size:12.5px">Regex tag=[A-Za-z0-9]+-[0-9]{2} across the 138 published pages; the placeholder tag=YOURASSOCIATEID is not a tag and does not match</code></td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a><div class="note">source kind: official</div></td></tr><tr id="RV-05"><td><strong>The three supplied short links, re-resolved today</strong></td><td>All three resolve and match the destinations recorded in the ledger: B04G1MEwY → /dp/B0CDY277D3, B02NbDxp3 → /dp/B09B7SB46R, B00hJ57DV → /dp/B08DKYBTPH. None carries a tag parameter.</td><td><code style="font-size:12.5px">fetch_page on each of the three supplied URLs; destination read from the resolved URL and the listing &lt;title&gt;</code></td><td class="src"><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">BR-19</a> · <a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer nofollow">BR-20</a> · <a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer nofollow">BR-21</a><div class="note">source kind: observed</div></td></tr><tr id="RV-06"><td><strong>Drift in readiness row RR-01&#x27;s stated page count</strong><div class="src"><a href="flagged.html#FB-01">FB-01</a></div></td><td>RR-01 states &#x27;116 published HTML pages&#x27;; 150 measured. Difference: 34 pages.</td><td><code style="font-size:12.5px">Compare ledger/readiness.json RR-01 site_state (&#x27;116 published HTML pages&#x27;) with RV-02&#x27;s measured count</code></td><td class="src"><div class="note">source kind: measurement</div></td></tr><tr id="RV-07"><td><strong>Drift in readiness row RR-05&#x27;s stated link count</strong><div class="src"><a href="flagged.html#FB-02">FB-02</a></div></td><td>RR-05 states &#x27;72 pages link to amazon.com/dp/&#x27;; 87 measured. Difference: 15 pages.</td><td><code style="font-size:12.5px">Compare ledger/readiness.json RR-05 site_state (&#x27;72 pages link to amazon.com/dp/&#x27;) with a substring search across the 138 published pages</code></td><td class="src"><div class="note">source kind: measurement</div></td></tr><tr id="RV-08"><td><strong>Duplicate rows on the canonical suggestion board</strong><div class="src"><a href="flagged.html#FB-03">FB-03</a></div></td><td>SG-11 and SG-12 carry the same id area, the same title (&#x27;Close the &quot;at least 10 posts&quot; content bar before applying, rather than after&#x27;) and near-identical body text. The board therefore advertises 12 suggestions where 11 distinct proposals exist.</td><td><code style="font-size:12.5px">Field-by-field comparison of ledger/suggestions.json SG-11 and SG-12</code></td><td class="src"><div class="note">source kind: measurement</div></td></tr><tr id="RV-13"><td><strong>Any page printing a money figure</strong></td><td>5 pages print a $ figure: affiliate-lab/analysis.html, pages/commissions.html, pages/flags.html, pages/verification.html, verification.html. All 5 print Amazon bounty and commission program amounts. No page prints a product price.</td><td><code style="font-size:12.5px">Regex for a $ amount across the 138 published pages, then manual read of each hit</code></td><td class="src"><div class="note">The rule this is measured against is compliance row R-04 on pages/compliance.html, carried from ledger/sources.json S02 (the same Associate Program Policies page this session fetched as BR-01..BR-04). This session did not capture R-04&#x27;s clause verbatim, so it is not re-quoted here.</div><div class="note">source kind: carried</div></td></tr><tr id="RV-14"><td><strong>Pages without a self-referencing canonical URL</strong></td><td>107 of 150 carry one. The 43 without are entirely in companion namespaces: research-hub 12, affiliate-lab 10, zone2 8, audit 6, revalidation 6, northstar 1, release 1. The head-metadata gate reports these rather than failing them, by design — folding them in is the owner&#x27;s open decision (MQ-08 / DS-12).</td><td><code style="font-size:12.5px">Substring search for rel=&quot;canonical&quot; across the 138 published pages, grouped by namespace, cross-checked against tools/build_head_meta.py --audit</code></td><td class="src"><div class="note">source kind: measurement</div></td></tr><tr id="RV-15"><td><strong>Editorial post count against Amazon&#x27;s stated content bar</strong></td><td>14 candidate editorial posts are counted (3 marketing articles, 1 buying guide, 1 comparison, 6 question-shaped guides, 3 journal pieces). RR-03 is nonetheless marked GAP: the count clears Amazon&#x27;s rule of thumb of at least 10 posts, but every counted page is a specification or comparison surface about these three listings rather than an article a reader would arrive at from a search.</td><td><code style="font-size:12.5px">Read ledger/readiness.json RR-03 and its measured value, and compare with the text of the requirement</code></td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-08</a><div class="note">source kind: official</div></td></tr><tr id="RV-16"><td><strong>How many separate published surfaces a reviewer would be shown</strong></td><td>16 surfaces: pages 39, repository root 21, marketing 20, research-hub 12, affiliate-lab 10, brief 9, console 8, zone2 8, audit 6, discovery 6, revalidation 6, guides 5, decisions 4, journal 4, northstar 1, release 1</td><td><code style="font-size:12.5px">Group the 139 published pages by top-level directory</code></td><td class="src"><div class="note">Rule this bears on: <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-15</a></div><div class="note">source kind: measurement</div></td></tr></tbody>
+</table>
+<h2>Measured traces of machine-written copy</h2>
+<p class="note">The brief says the site reads like AI output. &#x27;Reads like&#x27; is a judgement; the counts below are not. Each row is a reproducible measure of a specific pattern in the published pages.</p>
+<table>
+<thead><tr><th>What was measured</th><th>Value</th><th>Method</th><th>Source</th></tr></thead>
+<tbody><tr id="RV-09"><td><strong>The client&#x27;s requirement list printed as public self-description</strong><div class="src"><a href="flagged.html#FB-04">FB-04</a></div></td><td>&#x27;AI-powered&#x27; appears 25 times on 14 pages; the phrase &#x27;AI-powered Amazon affiliate&#x27; 11 times on 11 pages. After the T55 rebuild on 2026-11-16, none of the 14 is a reader-facing page: they are operator surfaces (console/, research-hub/, summary.html, review-trace.html) and companion prototypes (affiliate-lab/, zone2/).</td><td><code style="font-size:12.5px">Case-insensitive count of &#x27;AI-powered&#x27; and of the exact phrase &#x27;AI-powered Amazon affiliate&#x27; across all 138 published pages</code></td><td class="src"><div class="note">Rule this bears on: <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow">BR-13</a></div><div class="note">source kind: measurement</div></td></tr><tr id="RV-10"><td><strong>A landing-page heading that contradicts the project&#x27;s own register</strong><div class="src"><a href="flagged.html#FB-05">FB-05</a></div></td><td>RESOLVED BY T55. The heading read &#x27;Three links in. Three listings identified.&#x27; when this review measured it; session arena/9251f262-zone2 rebuilt index.html on 2026-11-16 and the heading is gone. It is kept on the register as the record of what was measured, and FB-05 is closed rather than deleted.</td><td><code style="font-size:12.5px">Read the &lt;h2&gt; elements of index.html and compare the second one against ledger/flags.json F-03</code></td><td class="src"><div class="note">Rule this bears on: <a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">BR-19</a></div><div class="note">source kind: measurement</div></td></tr><tr id="RV-11"><td><strong>How often the copy talks about the site instead of to the reader</strong></td><td>12 of 299 sentences, 4% — down from 8% on the same seven pages before the T55 rebuild</td><td><code style="font-size:12.5px">On the seven root pages, split prose into sentences of more than five words and count those whose subject is the site itself (This site / The platform / Zone2 / This project / The repository)</code></td><td class="src"><div class="note">source kind: measurement</div></td></tr><tr id="RV-12"><td><strong>Residual banned phrases in published prose</strong></td><td>0 genuine usages. 17 raw hits; every one sits inside a list of words the project forbids (console/design.html) or inside a before/after demonstration of generated copy (marketing/improvements.html).</td><td><code style="font-size:12.5px">Scan all 138 pages for the phrases the project already bans, then read the surrounding text to separate a genuine usage from an occurrence inside a banned-word list</code></td><td class="src"><div class="note">source kind: measurement</div></td></tr></tbody>
+</table>
+
+<h2>Links for manual review</h2>
+<p class="note">Every surface a reviewer can open and check for themselves.</p>
+<table>
+<thead><tr><th>Surface</th><th>Pages</th><th>What to check there</th></tr></thead>
+<tbody><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/">Primary dashboard (repository root)</a></td><td>21</td><td>Rebuilt by T55 on 2026-11-16; the lead story, the five take-aways and the bench grid.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/guides/index.html">Guides (T55)</a></td><td>5</td><td>Category guides added by T55: basket fryers, air-fryer ovens, buying guides, method.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/suggestions.html">Suggestion board (T55, repository root)</a></td><td>1</td><td>The front-of-house suggestion board published by T55; a second board alongside pages/suggestions.html.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/questions.html">Question register (T55, repository root)</a></td><td>1</td><td>The front-of-house question register published by T55.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/pages/index.html">Findings subpages</a></td><td>39</td><td>One table per question; every row ends in an official link or an explicit blank.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/marketing/">Counter Notes (public editorial)</a></td><td>20</td><td>The buying guide and the head-to-head; this is the closest thing on the site to the polished publication the brief describes.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/journal/">Journal</a></td><td>4</td><td>Hand-written editorial voice; three pieces.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/console/">Owner&#x27;s Console</a></td><td>8</td><td>The existing proposal board P-01..P-14 and the design pack.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/audit/">Independent audit</a></td><td>6</td><td>16 findings from a fresh read of the deployed tree.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/discovery/">Discovery review</a></td><td>6</td><td>17 measured findings, 10 open questions, 14 proposals.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/release/">Release readiness board</a></td><td>1</td><td>The 12 requirements Amazon states for an application review, and this site&#x27;s state against each.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html">Canonical suggestion board</a></td><td>1</td><td>SG-01..SG-12, including the duplicated pair SG-11 / SG-12.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html">Canonical questions register</a></td><td>1</td><td>Q-01..Q-18, the open rows left blank on purpose.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html">Flag register</a></td><td>1</td><td>F-01..F-40, each with the official page it was read from.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/verification.html">Verification log</a></td><td>1</td><td>One row per check, with the method and the page it was checked against.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/sources.html">Source register</a></td><td>1</td><td>Every page a published value was read from, with its class made explicit.</td></tr><tr><td><a href="https://kanlerxz87-cyber.github.io/Zone2/research-hub/">Companion prototypes (preserved, not canonical)</a></td><td>37</td><td>research-hub, affiliate-lab, zone2, northstar, revalidation and decisions — earlier sessions&#x27; work, kept rather than discarded.</td></tr></tbody>
+</table>
+
+  </main>
+</div>
+<footer class="site">
+  <div class="wrap">
+    <p>As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Generated by <code>tools/build_brief.py</code> from <code>brief/data/*.json</code>, measured on 2026-11-16.
+    Every row on these pages ends in the official page it was read from, or says plainly that no source
+    settles it. Nothing here is implemented: each proposal waits for a recorded owner decision.</p>
+    <p><a href="../index.html">Owner dashboard</a> ·
+       <a href="../pages/suggestions.html">Suggestion board (SG-01…SG-12)</a> ·
+       <a href="../pages/questions.html">Question register (Q-01…Q-18)</a> ·
+       <a href="../pages/flags.html">Flag register (F-01…F-40)</a> ·
+       <a href="../console/index.html">Owner's Console</a> ·
+       <a href="../marketing/index.html">Reader-facing site</a></p>
+  </div>
+</footer>
+</body>
+</html>

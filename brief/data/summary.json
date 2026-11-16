@@ -1,0 +1,185 @@
+{
+  "note": "Executive summary (task T50, session arena/dc72a69e-zone2). Every number in the state table was measured on 2026-11-16 by a command run in this working tree, or read off an official page fetched on the same date; none is quoted from another session's prose. Where a figure could not be confirmed from an official source, the cell is empty and the row says so. RE-MEASURED 2026-11-16 after rebasing onto main at 18e8de8: session arena/9251f262-zone2 (T55) rebuilt the front pages and added the guides/ namespace while this brief was in flight, so every count below was taken again on the combined tree rather than carried from the earlier read.",
+  "as_of": "2026-11-16",
+  "base_commit": "18e8de8 (main, after PR #144 merged) — rebased; measured again on 2026-11-16",
+  "headline": "The research platform is finished and it is honest. The earning part has not started, and it cannot start until the owner supplies one string.",
+  "the_ask": [
+    "Build an AI-powered Amazon affiliate platform: product research, trend and conversion analysis, pricing, review, competition and commission analysis, SEO articles, comparisons and buying guides, niche discovery, link and campaign management, click and conversion tracking, continuous optimization — automated, scalable, data-driven, and compliant with Amazon Associates policy and disclosure rules.",
+    "Build the marketing for three supplied affiliate links.",
+    "Make it look like a polished marketing site rather than machine output, with articles that earn organic traffic.",
+    "Provide a suggestions board where a path is chosen before anything is implemented, and a clear register of what is known, what is not, and how to find out.",
+    "Provide an executive summary."
+  ],
+  "state": [
+    {
+      "metric": "Supplied links that resolve, reproducibly, to one listing each",
+      "value": "3 of 3",
+      "source_ids": [
+        "BR-19",
+        "BR-20",
+        "BR-21"
+      ]
+    },
+    {
+      "metric": "Brief-to-product mappings confirmed by an official Amazon document",
+      "value": "0 of 3",
+      "source_ids": [
+        "BR-19"
+      ],
+      "note": "Carried on the canonical register as F-01 and F-03; the supplied codes are nine characters and an ASIN is ten."
+    },
+    {
+      "metric": "Published pages carrying an Associates tag",
+      "value": "0 of 150",
+      "source_ids": [
+        "BR-10"
+      ],
+      "note": "Consequence: no click on this site can become a qualifying purchase, so the three-sales threshold before an application is reviewed cannot be approached."
+    },
+    {
+      "metric": "Published pages carrying the exact §5 disclosure sentence",
+      "value": "150 of 150",
+      "source_ids": [
+        "BR-05"
+      ]
+    },
+    {
+      "metric": "Published pages printing a product price",
+      "value": "0 of 150",
+      "source_ids": [
+        "BR-01"
+      ],
+      "note": "Five pages print Amazon bounty and commission program amounts; no page prints a product price (RV-13)."
+    },
+    {
+      "metric": "Workflow steps replayed locally on the combined tree",
+      "value": "43 of 43",
+      "source_ids": [],
+      "note": "tools/ci_replay.py runs every workflow step in order against this working tree (RV-01)."
+    },
+    {
+      "metric": "Separate published surfaces a visitor could land on",
+      "value": "15",
+      "source_ids": [
+        "BR-15"
+      ],
+      "note": "Excluding this namespace, which links to all of them. Google names content spread across a large network of sites as a quality warning sign (RV-16)."
+    },
+    {
+      "metric": "Candidate editorial posts against Amazon's rule of thumb of at least 10",
+      "value": "14",
+      "source_ids": [
+        "BR-08"
+      ],
+      "note": "Count clears the bar; the readiness board still marks the row GAP because every counted page is a specification or comparison surface rather than an article a reader would arrive at from a search (RV-15)."
+    },
+    {
+      "metric": "Amazon's stated requirements met, gapped, blocked, unverified or open",
+      "value": "4 met · 8 not met",
+      "source_ids": [
+        "BR-07",
+        "BR-08",
+        "BR-10"
+      ],
+      "note": "Read from release/index.html, which is re-derived from the tree on every build. Of the eight: 3 gap, 3 blocked, 1 unverified, 1 open."
+    },
+    {
+      "metric": "Clicks, conversions and earnings recorded",
+      "value": "0",
+      "source_ids": [
+        "BR-06"
+      ],
+      "note": "No tag, no account, no report export. Amazon states it makes no representation about the traffic or income any associate can expect."
+    },
+    {
+      "metric": "Pages carrying the phrase 'AI-powered' in public copy",
+      "value": "14",
+      "source_ids": [
+        "BR-13"
+      ],
+      "note": "25 occurrences across those 14 pages; 11 carry the full phrase 'AI-powered Amazon affiliate'. After the T55 rebuild none of the 14 is a reader-facing page — they are operator and companion surfaces (RV-09). This namespace is excluded from the count, because it quotes the phrase in order to diagnose it."
+    }
+  ],
+  "the_blocking_fact": {
+    "headline": "Nothing on this site can earn money today, and the fix is one string the owner has to supply.",
+    "detail": "Amazon requires Associates tags to be embedded in the product links on the site declared in the application, and it reviews an application only once at least three qualifying sales have been driven within the first 180 days. This site has zero tagged links, so it has zero qualifying purchases, so the application cannot be reviewed. Meanwhile the three links the whole project was built around are themselves short links carrying no tag, so even the supplied links would not attribute a sale to the owner. Every downstream capability in the brief — conversion tracking, the optimizer, the revenue model, the API enrolment that would let the site publish prices and ratings — sits behind this one missing value.",
+    "source_ids": [
+      "BR-10",
+      "BR-07"
+    ]
+  },
+  "what_is_settled": [
+    "The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).",
+    "The evidence discipline holds at scale: 138 of 138 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
+    "The machinery is trustworthy: 22 gates and 15 pipeline tests are green, and the counts that matter are derived from the tree rather than typed.",
+    "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit."
+  ],
+  "what_is_not_settled": [
+    "Whether the three listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18).",
+    "Whether an Associates account exists at all, and if it does, its tag and marketplace (BQ-14, BQ-19).",
+    "Which of the fourteen published surfaces is the site that would be declared (BQ-15).",
+    "Who writes it, under what name, and whether that name is public (BQ-16).",
+    "What readers are searching for. There is no demand signal anywhere in the project, so no topic on the topics board can be ranked by expected volume (BQ-20)."
+  ],
+  "decide_first": [
+    {
+      "order": 1,
+      "id": "DB-06",
+      "why": "Declaring one site determines what every other change is a change to. It is also the only decision that has to be right before an application names a URL, because an application is not reassessed after a rejection."
+    },
+    {
+      "order": 2,
+      "id": "BQ-14",
+      "why": "Supplying the Associates tag is the owner's one action that unblocks the entire revenue side. It takes one sign-in and no code."
+    },
+    {
+      "order": 3,
+      "id": "DB-01",
+      "why": "It costs under an hour and it is reversible. The T55 rebuild removed the phrase from every reader-facing page; 14 operator and companion pages still carry it."
+    },
+    {
+      "order": 3,
+      "id": "BQ-14",
+      "why": "Supplying the Associates tag is the owner's one action that unblocks the entire revenue side. It takes one sign-in and no code."
+    }
+  ],
+  "the_one_thing": "If only one thing happens next, it should be the tag. Everything the brief asks the platform to do with real traffic — track it, convert it, optimize against it — is unreachable until a link on a page can be attributed to the owner.",
+  "how_to_use_this_namespace": [
+    {
+      "page": "index.html",
+      "what": "This summary, the state table, and the three decisions that unblock the most."
+    },
+    {
+      "page": "design-prompt.html",
+      "what": "Why the site reads as machine output, measured; three before-and-after rewrites of actual published copy; the design system; and a paste-ready prompt for the rebuild."
+    },
+    {
+      "page": "topics.html",
+      "what": "Twelve article proposals, each with the verified fact it rests on — and a stated reason none of them can be ranked by traffic."
+    },
+    {
+      "page": "suggestions.html",
+      "what": "The board. Twelve proposals with options, costs, risks and blockers. Nothing here is implemented."
+    },
+    {
+      "page": "questions.html",
+      "what": "Thirteen questions an official page answers, ten it cannot, and the inventory of what the project holds."
+    },
+    {
+      "page": "review.html",
+      "what": "Line-by-line review of the repository, with the commands behind every number and links for manual review."
+    },
+    {
+      "page": "flagged.html",
+      "what": "Eight irregularities raised by this review, each with what would close it and who can."
+    },
+    {
+      "page": "sources.html",
+      "what": "Every page a value in this namespace was read from, with the verbatim quote and the fetch date."
+    },
+    {
+      "page": "verification.html",
+      "what": "One row per check this session ran, with the method and the page it was checked against."
+    }
+  ]
+}

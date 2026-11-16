@@ -89,6 +89,7 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | T48 | **Close change request CR-8 (decision-board deep links) and run this wave's final integration.** (a) add `id` anchors `SG-01`…`SG-10` to the suggestion rows of `pages/suggestions.html` — the questions register already carries `Q-01`…`Q-16` anchors, so only the suggestions half of CR-8 remains; (b) restore the deep links to those anchors where the playbook and the design-prompt doc cite a suggestion by id (CR-8's stated purpose: "so decision reasoning can be cross-linked"); (c) record the disposition of CR-9 (executive-summary coverage of the decision surfaces); (d) run every repo gate on the combined tree, re-observe the live site and the three supplied links, publish a dated line-by-line verification record; (e) PR → merge without waiting → confirm the GitHub Pages deploy → record here. Takeover basis for CR-8: its owner session (`2499438c`, T29, PR #61) finished and merged; no active claimant; open PRs #90/#93/#95 touch none of the files in this scope. | claimed 2026-11-15T13:18Z, in progress | `arena/e69d851b-zone2` (e69d851b) | `tools/build_site.py` (anchor emission only), regenerated `pages/suggestions.html` (only), `playbook.html` (SG id → deep link only), `docs/design-prompt-suggestions.md` (SG id → deep link only), NEW `docs/verification-e69d851b.md`, `COORDINATION.md` (append-only records + this row) |
 | T51 | **Requirements-to-evidence coverage audit of the 2026-11-16 brief (verification only; renumbered from T50, which `ebc8a709` claimed and merged first as PR #131).** Maps every explicit requirement of the brief to the file or live page that satisfies it, with status met / partial / owner-blocked; re-counts table rows with and without an official source link; records irregularities N-1…N-7 (incl. Q-17/Q-18 drift on the board). Additive to `docs/review-2026-11-16.md`, which covers the supplied-link, policy and gate checks. No data, page or shared output edited. | **done 2026-11-16 (UTC)** — closing record at the end of this file | `arena/970d11d6-zone2` (970d11d6) | NEW `docs/coverage-970d11d6.md`, `COORDINATION.md` (this row + append-only record) |
 | T56 | **Close the open change requests and run this wave's final integration for the recurring 2026-11-16 brief.** (a) **CR-A + T49's F-20 wording item** (same defect): re-run the short-link controls live today, then re-anchor `ledger/flags.json` F-20's title/detail to the behaviour actually observed for the specific control codes (404 amzlinks page for `B0…` codes; homepage redirect for `A00…`/`C00…`; bare 403 for others) instead of the over-general "an unknown code returns a 404"; (b) **CR-B**: re-read P2's `Included accessories` row against the live listing, relabel `conflict` with both figures if confirmed, and mark the quoted title as perishable evidence with a read date; (c) **CR-C**: add the 5 Qt / 8 Qt variant sentence to the P3 article after re-reading the manufacturer page; (d) **CR-D**: record a disposition for the `docs/*.md` sitemap question (no silent generator change without a check that it passes); (e) fresh dated line-by-line verification record of the official sources used by the published surfaces (live fetches, each with its URL); (f) re-run every repository gate on the combined tree; (g) integration PR → merge without waiting → confirm the GitHub Pages deploy → record the PR link and merge result here. **Renumbered T50 → T55 → T56 at integration:** while this branch was in flight, `ebc8a709` claimed and shipped T50 (PR #131), `970d11d6` shipped T51, `1f51a5ed` claimed T52 (PR #138), `7c1511ee` claimed T52/T53, `43eb0239` claimed T54 (PR #140), and `9251f262` shipped T55 (PR #144/#146) — all on `main` before this push. This session claimed at 18:30:03Z, five minutes before `9251f262` claimed T50 at 18:35Z, but their PR merged first and the board's precedent lets the merged claim keep the id, so this claim becomes **T56**. Renumbered rather than contended; no other session's row or record is edited. **Takeover basis:** CR-A…CR-D were filed by `5d6d2254` (T42, merged) with no disposition recorded anywhere on this board; T49 (`224cc10c`, merged) re-logged the F-20 wording item as "for whoever owns `ledger/flags.json`"; `gh pr list --state open` is empty; no other session holds a claim on these files. | **done 2026-11-16 (UTC)** — PR #147 merged 2026-11-16T19:11:51Z (`1961dae`); Pages deploy success; closing record below | `arena/8fb7c287-zone2` (8fb7c287) | `ledger/flags.json` (F-20 wording only), `ledger/products.json` (P2 accessories row only), `marketing/data/facts.json` + `marketing/data/editorial.json` (CR-B/CR-C rows only), regenerated outputs via the existing builders only (`pages/**`, root views, `assets/js/data.js`, `marketing/**` generated HTML, `sitemap.xml`), NEW `docs/verification-8fb7c287.md`, `COORDINATION.md` (append-only records + this row). **Excluded:** `.github/**`, `tools/**` (unless a gate forces a fix — logged here first), all other sessions' namespaces, any change to a verified value not backed by a live official fetch. |
+| T57 | **Renumbered from T50 → T57.** Collisions of the day: `ebc8a709` claimed and shipped T50 (PR #131), `970d11d6` shipped T51, `1f51a5ed` claimed T52 (PR #138), `7c1511ee` claimed T52/T53, `43eb0239` shipped T54 (PR #140), `9251f262` shipped T55 (PR #144/#146), `8fb7c287` shipped T56 (PR #147). This session **claimed T50 at 18:36:10Z**, after `8fb7c287` claimed at 18:30:03Z and after `9251f262` claimed at 18:35Z; all three merged first and the board's precedent lets the merged claim keep the id, so this claim becomes **T57**. Renumbered rather than contended; no other session's row or record is edited. **The design brief.** (a) A paste-ready design prompt that would stop the site reading like machine output, with the diagnosis measured not asserted, three rewrites of actual published copy, a design system, and machine-checkable acceptance tests; (b) 12 article and topic proposals for the three promoted products, each with the verified fact it rests on and a stated reason none can be ranked by expected volume; (c) a review-and-choose board where a path is chosen **before** anything is implemented; (d) a register of what is known, what is not, and how to find the missing information; (e) an executive summary. Published as a new `brief/` namespace (9 generated pages) with `BR-` sources, `DB-` proposals, `TQ-` topics, `BQ-` questions, `RV-` review rows, `FB-` flags and `VF-` checks — adding no row to any existing register. Raises FB-01…FB-08, including two typed counts on the release-readiness board that have drifted from the tree (logged as CR-1, out of scope) and one (FB-05) **closed by T55's rebuild** while this session was in flight. | **done** — PR #145; closing record at the end of this file | `arena/dc72a69e-zone2` (dc72a69e) | NEW `brief/**` (namespace, `brief/data/*.json`, `brief/assets/brief.css` if added), NEW `tools/build_brief.py`, `tools/validate_brief.py`, `tools/test_brief.py`, NEW `docs/verification-dc72a69e.md`, `README.md` (additive section), `EXECUTIVE_SUMMARY.md` (append-only addendum), `COORDINATION.md` (append-only records + this row), regenerated `sitemap.xml` and `release/index.html` (derived only — no ledger data changed), three additive CI steps, one nav entry added to `tools/build_front.py` (forced: `index.html` is generated by it and `tools/audit_site.py` fails an unlinked namespace). **Excluded:** `ledger/**`, every other session's namespace, any change to a verified value. |
 
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
@@ -5896,3 +5897,168 @@ concluding a deploy failed.
 | Integration conflicts | Two rebases onto a fast-moving `main` (PRs #140/#142, #144/#146 landed mid-flight). Every conflict resolved **additively**: `COORDINATION.md` both-sides-kept; `ledger/products.json` note composed from both edits; `ledger/flags.json` auto-merged (41 flags, F-41 intact + F-20 reworded); `43eb0239`'s title correction kept verbatim; generated pages never hand-merged — re-run through their builders. Nothing discarded. Task id renumbered T50 → T55 → T56 (merged claim keeps the id); no other session's row, record or file edited |
 | Non-blocking residuals | I-4: `A00TEST12`/`C00TEST12` HTTP-500 vs homepage-redirect discrepancy (cause unknown, recorded as observed); CR-13's `revalidation/` + `research-hub/` title copies remain open in their namespaces; owner blockers F-01/F-03/F-24 unchanged (Associates ID, destination confirmation, tagged links); PR #145 (`dc72a69e`) open — unrelated design-brief scope |
 | Session rule observed | Claimed before starting; edited only claimed files (plus regenerated builder outputs); cross-scope items (`revalidation/`, `research-hub/`, their open R-4/R-5) logged, never edited; sandbox TLS limitation honoured — all live checks via `fetch_page`/`gh` |
+## Session claim — T50 — `arena/dc72a69e-zone2` (session `dc72a69e`, 2026-11-16 UTC)
+
+**Branch note (documented deviation, same as every prior session).** The coordination rule asks for a
+branch named `session-<id>/<task>`. Arena pins this session to `arena/dc72a69e-zone2` and forbids
+creating or switching to another branch, so this session works on its one pinned branch and holds
+itself to strict file-scope discipline instead.
+
+| Item | Value |
+|---|---|
+| Task | **T50** — the 2026-11-16 "design brief" wave. The brief asks for five things the repository has never put on one surface: (1) **suggestions that feed into a prompt to design the site** so it reads as a polished marketing affiliate site and not machine output; (2) **catchy, trending-article and topic ideas** for the promoted products, aimed at organic traffic; (3) a **section dedicated to suggestions** where the owner reviews proposals and chooses a path *before* anything is implemented; (4) a **clear list of questions / information / answers** — what the project already has, what it does not, and how to discover each missing piece; (5) an **executive summary** of the important details. Plus the standing duties: line-by-line repo review against official sources with links for manual review, a GitHub Pages site with a clean landing page and category subpages, per-row source links (blank + flag where unverifiable), PR → merge → deploy → record. |
+| Status | **in progress** — claimed 2026-11-16, before any file in the scope below was edited |
+| Owner | `dc72a69e` (branch `arena/dc72a69e-zone2`, base `004a040` = merge of PR #130) |
+| Base commit | `004a040bf5cad721ad49b84916d27d0f61f31e5c` (`main`, T49 merge) |
+| File scope | NEW `brief/**` (namespace: `brief/index.html`, `brief/design-prompt.html`, `brief/topics.html`, `brief/suggestions.html`, `brief/questions.html`, `brief/review.html`, `brief/sources.html`, `brief/flagged.html`, `brief/verification.html`, `brief/assets/brief.css`, `brief/data/*.json`) · NEW `tools/build_brief.py` + `tools/validate_brief.py` · NEW `docs/verification-dc72a69e.md` · `COORDINATION.md` (append-only) · `EXECUTIVE_SUMMARY.md` (append-only addendum) · `README.md` (additive section only) · `sitemap.xml` (regenerated by `tools/build_sitemap.py`, never hand-edited) · `.github/workflows/pages.yml` (**two additive steps only**, no existing step altered) · `index.html` (**additive nav + footer links only**) |
+| Deliberately **not** touched | `ledger/**`, `pages/**`, `console/**`, `audit/**`, `discovery/**`, `decisions/**`, `marketing/**`, `journal/**`, `assets/**`, `research-hub/**`, `northstar/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**`, `release/**`, `tools/**` other than the two new files, every other root `*.html` page body. Cross-scope requests are logged as change requests at the end of this session's record instead of being edited. |
+
+### Board state at claim (measured, not typed)
+
+`origin/main` = `004a040`. `gh pr list --state open` → **empty**. Every remote `arena/*` branch was last
+touched on 2026-11-15 or earlier; none has a commit within the 60-minute takeover window, so no claim is
+being taken over and no other session is active in this repo at claim time.
+
+### Non-overlap justification
+
+Every one of the five deliverables above already exists in *some* form elsewhere in the tree — the
+suggestion boards (`pages/suggestions.html` SG-01…SG-10, `console/suggestions.html` P-01…P-14,
+`audit/suggestions.html` R-01…R-14), the question registers (`pages/questions.html` Q-01…Q-16,
+`console/questions.html` IN-*, `audit/gaps.html` G-01…G-15), the design notes (`design-notes.html`,
+`console/design.html`, `docs/design-prompt-*.md`). T50 duplicates none of them: it **indexes** those
+registers with links and adds only rows namespaced `BR-` (sources), `DB-` (design proposals),
+`TQ-` (topic ideas), `BQ-` (questions), `RV-` (review measurements), `VF-` (verification checks). No
+existing file is edited except the six explicitly additive ones listed in the scope row.
+
+### Verification channel note
+
+Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`). Every live check in this session uses
+`fetch_page` or the GitHub API (`gh`), never an inference from a cached page or another session's prose.
+
+
+---
+
+## T57 — closing record: session `arena/dc72a69e-zone2` — the design brief
+
+**Task-id note.** Claimed as **T50**; renumbered **T57**. `ebc8a709` shipped T50 (PR #131), `970d11d6`
+shipped T51, `7c1511ee` claimed T52/T53, `43eb0239` shipped T54 (PR #140), `9251f262` shipped T55
+(PR #144/#146) and `8fb7c287` shipped T56 (PR #147) — all on `main` before this push. Renumbered rather
+than contended, per the board's precedent; commit-message ids are left as written.
+
+**Session id:** `dc72a69e` · **Base at claim:** `004a040` (PR #130) · **Rebased twice:** onto `main` at
+`18e8de8` (PR #144, T55) and again onto `1961dae` (PR #147, T56) · **Branch:** `arena/dc72a69e-zone2` ·
+**Status:** complete.
+
+### What the task asked for, and where each part landed
+
+The brief asked for five things at once, and this session was scoped to the ones no other session had
+claimed: a design prompt that would stop the site reading like machine output; articles and topics for the
+promoted products; a section where suggestions are reviewed and a path chosen **before** anything is
+implemented; a register of what is known, what is not, and how to find out; and an executive summary.
+
+All five are published in a new namespace, `brief/`, at
+<https://kanlerxz87-cyber.github.io/Zone2/brief/> — nine generated pages, `BR-` sources, `DB-` proposals,
+`TQ-` topics, `BQ-` questions, `RV-` review rows, `FB-` flags, `VF-` verification checks. Generated by
+`tools/build_brief.py` from `brief/data/*.json`; gated by `tools/validate_brief.py`; negative-tested by
+`tools/test_brief.py` (12 injected defects, each must fire).
+
+**Nothing on the board is implemented.** Twelve proposals (`DB-01…DB-12`) wait with options A/B/C, effort,
+risk, reversibility and blockers. Ten questions on `brief/questions.html` are left **empty on purpose**,
+each with the action that would close it and who can close it. That is the brief's "before implementing any
+changes" requirement, and it is enforced: the gate fails if an open answer is filled in.
+
+### The finding that matters most
+
+**0 of 150 published pages carry an Associates tag.** Amazon requires the tag to be embedded in the product
+links on the declared site, and reviews an application only after three qualifying sales in 180 days. No
+tag → no attributed purchase → no review. The whole revenue half of the brief sits behind one string the
+owner has to supply. One sign-in, no code.
+
+### The "AI slop" complaint, measured
+
+- 25 occurrences of "AI-powered" across 14 pages; 11 carry the full "AI-powered Amazon affiliate".
+- The landing page's second heading asserted "Three listings identified" — the one claim F-03 declines to
+  assert.
+- 8% of sentences across the seven root pages had the site itself as their subject.
+
+**A parallel session fixed part of this while the brief was being written.** Session `arena/9251f262-zone2`
+(**T55**, PR #144) rebuilt the front pages as a publication on the same day. After rebasing onto it and
+re-measuring: the overclaim heading is gone (verified absent), the abstract headings are gone, and
+self-reference is down from 8% to 4%. **FB-05 is recorded as closed, not deleted** — the measurement was
+real, and a register that silently changes its mind is worse than one that records the repair. FB-04 is
+re-scoped: 14 operator and companion pages still print the phrase, and none of them is reader-facing.
+
+### Irregularities (`FB-01…FB-08`), none blocking
+
+| ID | What | Status |
+|---|---|---|
+| FB-01 | `RR-01` prints "116 published HTML pages"; the tree measures 150 | open — CR-1 |
+| FB-02 | `RR-05` prints "72 pages link to amazon.com/dp/"; measured 87 | open — CR-1 |
+| FB-03 | `SG-11` and `SG-12` are the same proposal twice | open — CR-1 |
+| FB-04 | "AI-powered" on 14 operator/companion pages | open |
+| FB-05 | Landing-page overclaim | **closed by T55** |
+| FB-06 | Zero tagged links (high) | open — owner |
+| FB-07 | 43 companion pages without a canonical | open — owner decision |
+| FB-08 | Manufacturer pages not re-fetched by this session | open |
+
+FB-01 and FB-02 are the same defect twice, and the drift in FB-01 grew from 22 pages to 34 while this
+session worked, because every namespace another session adds makes a typed count worse. That is the
+argument for deriving it.
+
+### Change request CR-1 (cross-scope, not actioned)
+
+`ledger/readiness.json` (`RR-01`, `RR-05`) and `ledger/suggestions.json` (`SG-11`/`SG-12`) are outside this
+session's claimed scope. Requested of whichever session next claims them: derive the two counts, and
+resolve the duplicated row. No other session is blocked by this.
+
+### Scope extensions (forced, both recorded)
+
+Two shared files, both **derived artifacts that went stale when this namespace added pages**:
+
+1. `release/index.html` — regenerated by `tools/build_readiness.py`, because two of its measures count
+   every published page. **No ledger data was changed.**
+2. `sitemap.xml` — regenerated by `tools/build_sitemap.py`. Never hand-edited.
+
+Two more, forced by a merge with T55:
+
+3. `index.html` — T55's `tools/build_front.py` generates this page from a hardcoded nav list, and
+   `tools/audit_site.py` fails a published namespace that nothing links to. I added **one nav entry** to
+   that list and regenerated. Nothing else in `tools/build_front.py` was touched.
+4. `README.md`, `EXECUTIVE_SUMMARY.md`, `.github/workflows/pages.yml` — additive only. In the workflow,
+   three new steps; no existing step altered.
+
+### Merge conflicts resolved (3, all logged per protocol)
+
+0. **Second rebase onto `1961dae` (T56, PR #147).** `COORDINATION.md` only, and append-at-tail again.
+   Resolution kept both records in order and removed the three marker lines; the `board` check in
+   `tools/audit_site.py` confirms none remain. **All measurements were re-taken after both rebases and
+   were unchanged** (150 published pages in the measured set, 150 disclose, 0 tagged, 0 prices, 87
+   `dp/` links, 14 "AI-powered" pages, 16 surfaces), so no register needed a second correction.
+
+1. **`COORDINATION.md`** — both sessions appended at the tail. Resolution kept **both records in order**;
+   only the three git marker lines were removed. The `board` check in `tools/audit_site.py` confirms zero
+   markers remain.
+2. **`index.html`, `README.md`, `EXECUTIVE_SUMMARY.md`, `release/index.html`** — T55 had rebuilt the front
+   pages wholesale. Resolution took T55's version (it is a deliberate rebuild that supersedes the copy I
+   had measured) and re-applied this session's additive sections and links on top. Nothing of T55's was
+   discarded; nothing of this session's was lost.
+
+### Sources
+
+22 rows (`BR-01…BR-22`), 21 fetched live on 2026-11-16. The sandbox shell cannot reach the network
+(`curl` → `SSL_ERROR_SYSCALL`), so every live check used `fetch_page` and repository facts used `gh`. The
+three supplied links were re-resolved and match the ledger. Program and ranking rules quoted verbatim from
+the Associates Program Policies (updated 2026-04-14), the Operating Agreement (2025-10-15), the Application
+Review Process, Google's spam policies (2026-08-28), Google's generative-AI guidance (2026-10-01), Google's
+helpful-content guidance, and the FTC's Disclosures 101 (November 2019). **One row is `carried`**: the
+manufacturer pages were not re-fetched, and the register says so rather than hiding it.
+
+### Gates
+
+`tools/ci_replay.py` replays all 43 workflow steps in order against this working tree: **43 of 43 pass**.
+`tests/test_pipeline.py`: 15 of 15. `tools/audit_site.py`: 162 pages. `tools/seo_audit.py`: 160 sitemap
+URLs. `tools/build_head_meta.py --audit`: clean.
+
+The design brief's own gate caught its own drift: when the rebase changed the tree, it failed the executive
+summary for printing 138 pages where 150 now stood. That is the rule working — it exists because FB-01 and
+FB-02 are two rows on the readiness board with no such rule.

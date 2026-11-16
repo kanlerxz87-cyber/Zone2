@@ -338,6 +338,40 @@ jobs:
       - name: Discovery gate (sourcing, quotes, blank-or-flagged, derived counts, links, disclosure)
         run: python3 tools/validate_discovery.py
 
+      # ---- arena/dc72a69e-zone2: the design-brief namespace (T50) ----
+      # Two steps, added rather than folded into an existing step, so no session's gate is
+      # altered by this one. The first is the drift check every generated namespace here has:
+      # brief/*.html must equal a fresh render of brief/data/*.json. The second is the
+      # contract itself.
+      #
+      # The contract holds this namespace to the same rules as the rest of the site, plus one
+      # that exists because of FB-01 and FB-02: the measured counts the executive summary
+      # prints are re-derived from the tree at gate time. Those two flags are rows on the
+      # release-readiness board that typed '116 published HTML pages' and '72 pages link to
+      # amazon.com/dp/' while the tree grew to 150 and 87, and no gate noticed, because the
+      # numbers were typed into prose rather than measured. A summary that cannot drift is
+      # the point, so the gate recomputes rather than trusting the file.
+      #
+      # What it fails on: a source id that resolves to nothing; a measurement row with no
+      # stated method; an official row with no source; a carried row that does not say what
+      # it carries; an open question whose answer has been filled in; a recorded choice that
+      # is not one of the row's own options; a recommendation that names no option; a
+      # blocker that is not on the register it names; a money figure; a missing disclosure;
+      # a missing canonical; a broken local link; and a same-page anchor that addresses
+      # nothing. Negative-tested 2026-11-16 against twelve injected defects before being
+      # added here — see docs/verification-dc72a69e.md.
+      - name: Rebuild the design brief and confirm committed output is current
+        run: python3 tools/build_brief.py --check
+
+      - name: Design-brief gate (sourcing, blank-or-flagged, derived counts, board integrity, disclosure, links, no prices)
+        run: python3 tools/validate_brief.py
+
+      # Same rule as the readiness board's negative tests: a gate that has only ever passed is
+      # a claim, not a control. Twelve injected defects must each fire, and the unmutated
+      # register must be clean.
+      - name: Design-brief gate negative tests (12 injected defects must each fire)
+        run: python3 tools/test_brief.py
+
       # ---- arena/f8e18ca8-zone2: the independent audit namespace ----
       # 1B-2 (session 1b839f87) recorded that nothing in this workflow resolves a CSS url(),
       # which is how the font 404 shipped on every page for weeks. Negative-tested: appending a

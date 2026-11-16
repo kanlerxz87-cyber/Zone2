@@ -1,0 +1,296 @@
+{
+  "note": "Line-by-line repository review (task T50, session arena/dc72a69e-zone2), measured against the tree at base commit 004a040 on 2026-11-16 UTC. Every number here was produced by a command this session ran in this working tree; none is quoted from another session's prose. A row is one of three kinds and says which: 'measurement' (a count of this repository's own files — no official source can settle it, so none is cited), 'observed' (a live fetch this session performed, cited to its BR- row), or 'official' (a rule read off a linked official page). A measurement row that contradicts a published figure is raised as a flag on flagged.html and cross-referenced here.",
+  "as_of": "2026-11-16",
+  "base_commit": "18e8de8 (main, after PR #144 — T55 — merged); re-measured on the combined tree",
+  "method": "Read-only review. Every repository gate replayed locally, then a Path.rglob inventory of the tree with the counts below computed from file contents. Re-measured on 2026-11-16 after rebasing onto main at 18e8de8, because session arena/9251f262-zone2 (T55) rebuilt the front pages and added guides/ while this review was in flight.",
+  "sections": [
+    {
+      "id": "GATE",
+      "name": "Gate state on the tree this session started from",
+      "lead": "A green gate is the only reason anything else on this site can be believed, so it is measured first. Every gate below was run locally on 004a040 before a single file was edited."
+    },
+    {
+      "id": "TREE",
+      "name": "What is actually in the tree",
+      "lead": "Counts computed from file contents, not from any page's own prose. Where a published page states a different number, the row says so and links to the flag."
+    },
+    {
+      "id": "VOICE",
+      "name": "Measured traces of machine-written copy",
+      "lead": "The brief says the site reads like AI output. 'Reads like' is a judgement; the counts below are not. Each row is a reproducible measure of a specific pattern in the published pages."
+    },
+    {
+      "id": "MANUAL",
+      "name": "Links for manual review",
+      "lead": "Every surface a reviewer can open and check for themselves, with the page count each one publishes."
+    }
+  ],
+  "rows": [
+    {
+      "id": "RV-01",
+      "section": "GATE",
+      "what": "Every repository gate replayed on the unmodified base tree",
+      "method": "tools/ci_replay.py replays every workflow step in order against this tree, then tests/test_pipeline.py",
+      "value": "43 of 43 workflow steps pass (tools/ci_replay.py), plus 15 of 15 pipeline tests",
+      "source_kind": "measurement",
+      "source_id": "",
+      "flag": ""
+    },
+    {
+      "id": "RV-02",
+      "section": "TREE",
+      "what": "Published page count",
+      "method": "Path.rglob('*.html') over the repository, excluding .git/.github",
+      "value": "162 HTML files, of which 2 are error documents; 160 published; 150 excluding this namespace and release/index.html, which the readiness board deliberately does not count because it would be counting itself",
+      "source_kind": "measurement",
+      "source_id": "",
+      "flag": "FB-01"
+    },
+    {
+      "id": "RV-03",
+      "section": "TREE",
+      "what": "Disclosure coverage",
+      "method": "Substring search for the exact §5 sentence across the 138 published pages",
+      "value": "150 of 150",
+      "source_kind": "official",
+      "source_id": "BR-05",
+      "flag": ""
+    },
+    {
+      "id": "RV-04",
+      "section": "TREE",
+      "what": "Pages carrying an Associates tag in Amazon's NAME-NN format",
+      "method": "Regex tag=[A-Za-z0-9]+-[0-9]{2} across the 138 published pages; the placeholder tag=YOURASSOCIATEID is not a tag and does not match",
+      "value": "0 of 150",
+      "source_kind": "official",
+      "source_id": "BR-10",
+      "flag": "FB-06"
+    },
+    {
+      "id": "RV-05",
+      "section": "TREE",
+      "what": "The three supplied short links, re-resolved today",
+      "method": "fetch_page on each of the three supplied URLs; destination read from the resolved URL and the listing <title>",
+      "value": "All three resolve and match the destinations recorded in the ledger: B04G1MEwY → /dp/B0CDY277D3, B02NbDxp3 → /dp/B09B7SB46R, B00hJ57DV → /dp/B08DKYBTPH. None carries a tag parameter.",
+      "source_kind": "observed",
+      "source_id": "BR-19, BR-20, BR-21",
+      "flag": ""
+    },
+    {
+      "id": "RV-06",
+      "section": "TREE",
+      "what": "Drift in readiness row RR-01's stated page count",
+      "method": "Compare ledger/readiness.json RR-01 site_state ('116 published HTML pages') with RV-02's measured count",
+      "value": "RR-01 states '116 published HTML pages'; 150 measured. Difference: 34 pages.",
+      "source_kind": "measurement",
+      "source_id": "",
+      "flag": "FB-01"
+    },
+    {
+      "id": "RV-07",
+      "section": "TREE",
+      "what": "Drift in readiness row RR-05's stated link count",
+      "method": "Compare ledger/readiness.json RR-05 site_state ('72 pages link to amazon.com/dp/') with a substring search across the 138 published pages",
+      "value": "RR-05 states '72 pages link to amazon.com/dp/'; 87 measured. Difference: 15 pages.",
+      "source_kind": "measurement",
+      "source_id": "",
+      "flag": "FB-02"
+    },
+    {
+      "id": "RV-08",
+      "section": "TREE",
+      "what": "Duplicate rows on the canonical suggestion board",
+      "method": "Field-by-field comparison of ledger/suggestions.json SG-11 and SG-12",
+      "value": "SG-11 and SG-12 carry the same id area, the same title ('Close the \"at least 10 posts\" content bar before applying, rather than after') and near-identical body text. The board therefore advertises 12 suggestions where 11 distinct proposals exist.",
+      "source_kind": "measurement",
+      "source_id": "",
+      "flag": "FB-03"
+    },
+    {
+      "id": "RV-09",
+      "section": "VOICE",
+      "what": "The client's requirement list printed as public self-description",
+      "method": "Case-insensitive count of 'AI-powered' and of the exact phrase 'AI-powered Amazon affiliate' across all 138 published pages",
+      "value": "'AI-powered' appears 25 times on 14 pages; the phrase 'AI-powered Amazon affiliate' 11 times on 11 pages. After the T55 rebuild on 2026-11-16, none of the 14 is a reader-facing page: they are operator surfaces (console/, research-hub/, summary.html, review-trace.html) and companion prototypes (affiliate-lab/, zone2/).",
+      "source_kind": "measurement",
+      "flag": "FB-04",
+      "context_source_id": "BR-13"
+    },
+    {
+      "id": "RV-10",
+      "section": "VOICE",
+      "what": "A landing-page heading that contradicts the project's own register",
+      "method": "Read the <h2> elements of index.html and compare the second one against ledger/flags.json F-03",
+      "value": "RESOLVED BY T55. The heading read 'Three links in. Three listings identified.' when this review measured it; session arena/9251f262-zone2 rebuilt index.html on 2026-11-16 and the heading is gone. It is kept on the register as the record of what was measured, and FB-05 is closed rather than deleted.",
+      "source_kind": "measurement",
+      "flag": "FB-05",
+      "context_source_id": "BR-19"
+    },
+    {
+      "id": "RV-11",
+      "section": "VOICE",
+      "what": "How often the copy talks about the site instead of to the reader",
+      "method": "On the seven root pages, split prose into sentences of more than five words and count those whose subject is the site itself (This site / The platform / Zone2 / This project / The repository)",
+      "value": "12 of 299 sentences, 4% — down from 8% on the same seven pages before the T55 rebuild",
+      "source_kind": "measurement",
+      "source_id": "",
+      "flag": ""
+    },
+    {
+      "id": "RV-12",
+      "section": "VOICE",
+      "what": "Residual banned phrases in published prose",
+      "method": "Scan all 138 pages for the phrases the project already bans, then read the surrounding text to separate a genuine usage from an occurrence inside a banned-word list",
+      "value": "0 genuine usages. 17 raw hits; every one sits inside a list of words the project forbids (console/design.html) or inside a before/after demonstration of generated copy (marketing/improvements.html).",
+      "source_kind": "measurement",
+      "source_id": "",
+      "flag": ""
+    },
+    {
+      "id": "RV-13",
+      "section": "TREE",
+      "what": "Any page printing a money figure",
+      "method": "Regex for a $ amount across the 138 published pages, then manual read of each hit",
+      "value": "5 pages print a $ figure: affiliate-lab/analysis.html, pages/commissions.html, pages/flags.html, pages/verification.html, verification.html. All 5 print Amazon bounty and commission program amounts. No page prints a product price.",
+      "source_kind": "carried",
+      "source_id": "",
+      "carried_note": "The rule this is measured against is compliance row R-04 on pages/compliance.html, carried from ledger/sources.json S02 (the same Associate Program Policies page this session fetched as BR-01..BR-04). This session did not capture R-04's clause verbatim, so it is not re-quoted here.",
+      "flag": ""
+    },
+    {
+      "id": "RV-14",
+      "section": "TREE",
+      "what": "Pages without a self-referencing canonical URL",
+      "method": "Substring search for rel=\"canonical\" across the 138 published pages, grouped by namespace, cross-checked against tools/build_head_meta.py --audit",
+      "value": "107 of 150 carry one. The 43 without are entirely in companion namespaces: research-hub 12, affiliate-lab 10, zone2 8, audit 6, revalidation 6, northstar 1, release 1. The head-metadata gate reports these rather than failing them, by design — folding them in is the owner's open decision (MQ-08 / DS-12).",
+      "source_kind": "measurement",
+      "source_id": "",
+      "flag": ""
+    },
+    {
+      "id": "RV-15",
+      "section": "TREE",
+      "what": "Editorial post count against Amazon's stated content bar",
+      "method": "Read ledger/readiness.json RR-03 and its measured value, and compare with the text of the requirement",
+      "value": "14 candidate editorial posts are counted (3 marketing articles, 1 buying guide, 1 comparison, 6 question-shaped guides, 3 journal pieces). RR-03 is nonetheless marked GAP: the count clears Amazon's rule of thumb of at least 10 posts, but every counted page is a specification or comparison surface about these three listings rather than an article a reader would arrive at from a search.",
+      "source_kind": "official",
+      "source_id": "BR-08",
+      "flag": ""
+    },
+    {
+      "id": "RV-16",
+      "section": "TREE",
+      "what": "How many separate published surfaces a reviewer would be shown",
+      "method": "Group the 139 published pages by top-level directory",
+      "value": "16 surfaces: pages 39, repository root 21, marketing 20, research-hub 12, affiliate-lab 10, brief 9, console 8, zone2 8, audit 6, discovery 6, revalidation 6, guides 5, decisions 4, journal 4, northstar 1, release 1",
+      "source_kind": "measurement",
+      "flag": "",
+      "context_source_id": "BR-15",
+      "source_id": ""
+    }
+  ],
+  "manual_review": [
+    {
+      "surface": "Primary dashboard (repository root)",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/",
+      "pages": 21,
+      "what_to_check": "Rebuilt by T55 on 2026-11-16; the lead story, the five take-aways and the bench grid."
+    },
+    {
+      "surface": "Guides (T55)",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/guides/index.html",
+      "pages": 5,
+      "what_to_check": "Category guides added by T55: basket fryers, air-fryer ovens, buying guides, method."
+    },
+    {
+      "surface": "Suggestion board (T55, repository root)",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/suggestions.html",
+      "pages": 1,
+      "what_to_check": "The front-of-house suggestion board published by T55; a second board alongside pages/suggestions.html."
+    },
+    {
+      "surface": "Question register (T55, repository root)",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/questions.html",
+      "pages": 1,
+      "what_to_check": "The front-of-house question register published by T55."
+    },
+    {
+      "surface": "Findings subpages",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/pages/index.html",
+      "pages": 39,
+      "what_to_check": "One table per question; every row ends in an official link or an explicit blank."
+    },
+    {
+      "surface": "Counter Notes (public editorial)",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/marketing/",
+      "pages": 20,
+      "what_to_check": "The buying guide and the head-to-head; this is the closest thing on the site to the polished publication the brief describes."
+    },
+    {
+      "surface": "Journal",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/journal/",
+      "pages": 4,
+      "what_to_check": "Hand-written editorial voice; three pieces."
+    },
+    {
+      "surface": "Owner's Console",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/console/",
+      "pages": 8,
+      "what_to_check": "The existing proposal board P-01..P-14 and the design pack."
+    },
+    {
+      "surface": "Independent audit",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/audit/",
+      "pages": 6,
+      "what_to_check": "16 findings from a fresh read of the deployed tree."
+    },
+    {
+      "surface": "Discovery review",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/discovery/",
+      "pages": 6,
+      "what_to_check": "17 measured findings, 10 open questions, 14 proposals."
+    },
+    {
+      "surface": "Release readiness board",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/release/",
+      "pages": 1,
+      "what_to_check": "The 12 requirements Amazon states for an application review, and this site's state against each."
+    },
+    {
+      "surface": "Canonical suggestion board",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html",
+      "pages": 1,
+      "what_to_check": "SG-01..SG-12, including the duplicated pair SG-11 / SG-12."
+    },
+    {
+      "surface": "Canonical questions register",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html",
+      "pages": 1,
+      "what_to_check": "Q-01..Q-18, the open rows left blank on purpose."
+    },
+    {
+      "surface": "Flag register",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html",
+      "pages": 1,
+      "what_to_check": "F-01..F-40, each with the official page it was read from."
+    },
+    {
+      "surface": "Verification log",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/verification.html",
+      "pages": 1,
+      "what_to_check": "One row per check, with the method and the page it was checked against."
+    },
+    {
+      "surface": "Source register",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/sources.html",
+      "pages": 1,
+      "what_to_check": "Every page a published value was read from, with its class made explicit."
+    },
+    {
+      "surface": "Companion prototypes (preserved, not canonical)",
+      "url": "https://kanlerxz87-cyber.github.io/Zone2/research-hub/",
+      "pages": 37,
+      "what_to_check": "research-hub, affiliate-lab, zone2, northstar, revalidation and decisions — earlier sessions' work, kept rather than discarded."
+    }
+  ]
+}

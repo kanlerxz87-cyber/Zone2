@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · Zone2 design brief</title>
+<meta name="description" content="The state of the Zone2 affiliate project, measured: what is settled, what is not, and the one missing value that blocks the revenue side.">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/brief/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Zone2">
+<meta property="og:title" content="Executive summary · Zone2 design brief">
+<meta property="og:description" content="The state of the Zone2 affiliate project, measured: what is settled, what is not, and the one missing value that blocks the revenue side.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/brief/index.html">
+<meta name="robots" content="index,follow">
+<style>
+:root{--ink:#16130f;--paper:#fbfaf7;--muted:#6b6459;--line:#e3ded3;--accent:#1f5b4a;
+--blank:#8a8478;--warn:#9a6314;--card:#fff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+font:18px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:64rem;margin:0 auto;padding:0 24px}
+a{color:var(--accent)}
+.skip{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+header.mast{border-bottom:1px solid var(--line);background:var(--card)}
+.mast-in{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;padding:18px 24px;max-width:64rem;margin:0 auto}
+.brand{font-weight:700;text-decoration:none;color:var(--ink)}
+.brand span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+nav.top{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-left:auto}
+nav.top a{color:var(--muted);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
+nav.top a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+main{padding:32px 0 64px}
+h1{font:700 40px/1.1 Georgia,"Times New Roman",serif;margin:0 0 12px;letter-spacing:-.01em}
+h2{font:700 27px/1.2 Georgia,"Times New Roman",serif;margin:44px 0 10px}
+h3{font:600 20px/1.3 Georgia,"Times New Roman",serif;margin:26px 0 6px}
+p,li{max-width:44rem}
+.standfirst{font-size:20px;color:#3a342b;margin:0 0 8px;max-width:44rem}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.lede{color:#3a342b}
+.disclosure{border:1px solid var(--line);background:#fff;border-left:3px solid var(--accent);
+padding:12px 14px;font-size:15px;margin:0 0 20px;border-radius:3px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:14px 0 8px;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:9px 12px 9px 0}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line)}
+tbody tr:hover{background:#f6f3ec}
+tr[id]{scroll-margin-top:16px}
+blockquote{margin:8px 0;padding:10px 14px;border-left:3px solid var(--line);color:#3a342b;
+background:#fff;font-size:16px;max-width:44rem}
+code{font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f1ede4;
+padding:1px 5px;border-radius:3px}
+pre{background:#f6f3ec;border:1px solid var(--line);padding:14px 16px;overflow-x:auto;
+font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;border-radius:4px;
+white-space:pre-wrap;word-break:break-word}
+.pill{display:inline-block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fff;white-space:nowrap}
+.pill.official{border-color:#bcd8cc;color:#1f5b4a}
+.pill.observed{border-color:#cfd6e3;color:#3b5a86}
+.pill.carried{border-color:#e0d6bd;color:var(--warn)}
+.pill.open{color:var(--warn);border-color:#e0d6bd}
+.pill.done{color:#1f5b4a;border-color:#bcd8cc}
+.pill.blocked{color:#8a3a2a;border-color:#e3c4bb}
+.num{font:700 22px/1.1 Georgia,serif}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);background:var(--card);border-radius:4px;padding:14px 16px}
+.card .num{display:block;margin-bottom:4px}
+.card .lbl{font-size:14px;color:var(--muted)}
+.note{font-size:15px;color:var(--muted);max-width:44rem}
+.blank{color:var(--blank);border-bottom:1px dotted var(--blank);cursor:help}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:#fff;
+padding:14px 16px;margin:18px 0;border-radius:3px;max-width:44rem}
+.callout.warn{border-left-color:var(--warn)}
+.src{font-size:13px;color:var(--muted)}
+.src a{color:var(--accent)}
+ul.tight li{margin-bottom:5px}
+footer.site{border-top:1px solid var(--line);background:var(--card);padding:24px 0 40px;font-size:14px;color:var(--muted)}
+footer.site p{max-width:52rem}
+@media (max-width:640px){h1{font-size:31px}body{font-size:17px}.mast-in{padding:14px 24px}nav.top{margin-left:0}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Executive summary", "description": "The state of the Zone2 affiliate project, measured: what is settled, what is not, and the one missing value that blocks the revenue side.", "datePublished": "2026-11-16T00:00:00+00:00", "inLanguage": "en", "isAccessibleForFree": true, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kanlerxz87-cyber.github.io/Zone2/brief/index.html"}, "publisher": {"@type": "Organization", "name": "Zone2", "url": "https://kanlerxz87-cyber.github.io/Zone2/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="mast-in">
+    <a class="brand" href="index.html"><b>Zone2 design brief</b><span>What the site should look like, and what has to be decided first</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html" aria-current="page">Executive summary</a><a href="design-prompt.html">Design prompt</a><a href="topics.html">Articles &amp; topics</a><a href="suggestions.html">Choose a path</a><a href="questions.html">What we know</a><a href="review.html">Repo review</a><a href="verification.html">Verification</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged</a></nav>
+  </div>
+</header>
+<div class="wrap">
+  <main id="main">
+    <p class="disclosure" data-rule="R-01"><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p class="crumbs" aria-label="Breadcrumb">Design brief</p>
+
+<p class="eyebrow">Executive summary · measured 2026-11-16</p>
+<h1>The research platform is finished and it is honest. The earning part has not started, and it cannot start until the owner supplies one string.</h1>
+
+<div class="callout warn">
+  <p class="eyebrow">The blocking fact</p>
+  <h3 style="margin-top:0">Nothing on this site can earn money today, and the fix is one string the owner has to supply.</h3>
+  <p>Amazon requires Associates tags to be embedded in the product links on the site declared in the application, and it reviews an application only once at least three qualifying sales have been driven within the first 180 days. This site has zero tagged links, so it has zero qualifying purchases, so the application cannot be reviewed. Meanwhile the three links the whole project was built around are themselves short links carrying no tag, so even the supplied links would not attribute a sale to the owner. Every downstream capability in the brief — conversion tracking, the optimizer, the revenue model, the API enrolment that would let the site publish prices and ratings — sits behind this one missing value.</p>
+  <p class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a> · <a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-07</a></p>
+</div>
+
+<h2>Where the project stands, measured</h2>
+<table>
+<thead><tr><th>Measure</th><th>Value</th><th>Source</th></tr></thead>
+<tbody><tr><td>Supplied links that resolve, reproducibly, to one listing each</td><td><span class="num">3 of 3</span></td><td class="src"><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">BR-19</a> · <a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer nofollow">BR-20</a> · <a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer nofollow">BR-21</a></td></tr><tr><td>Brief-to-product mappings confirmed by an official Amazon document</td><td><span class="num">0 of 3</span></td><td class="src"><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">BR-19</a><div class="note">Carried on the canonical register as F-01 and F-03; the supplied codes are nine characters and an ASIN is ten.</div></td></tr><tr><td>Published pages carrying an Associates tag</td><td><span class="num">0 of 150</span></td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a><div class="note">Consequence: no click on this site can become a qualifying purchase, so the three-sales threshold before an application is reviewed cannot be approached.</div></td></tr><tr><td>Published pages carrying the exact §5 disclosure sentence</td><td><span class="num">150 of 150</span></td><td class="src"><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-05</a></td></tr><tr><td>Published pages printing a product price</td><td><span class="num">0 of 150</span></td><td class="src"><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-01</a><div class="note">Five pages print Amazon bounty and commission program amounts; no page prints a product price (RV-13).</div></td></tr><tr><td>Workflow steps replayed locally on the combined tree</td><td><span class="num">43 of 43</span></td><td class="src"><div class="note">tools/ci_replay.py runs every workflow step in order against this working tree (RV-01).</div></td></tr><tr><td>Separate published surfaces a visitor could land on</td><td><span class="num">15</span></td><td class="src"><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-15</a><div class="note">Excluding this namespace, which links to all of them. Google names content spread across a large network of sites as a quality warning sign (RV-16).</div></td></tr><tr><td>Candidate editorial posts against Amazon&#x27;s rule of thumb of at least 10</td><td><span class="num">14</span></td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-08</a><div class="note">Count clears the bar; the readiness board still marks the row GAP because every counted page is a specification or comparison surface rather than an article a reader would arrive at from a search (RV-15).</div></td></tr><tr><td>Amazon&#x27;s stated requirements met, gapped, blocked, unverified or open</td><td><span class="num">4 met · 8 not met</span></td><td class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-07</a> · <a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-08</a> · <a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a><div class="note">Read from release/index.html, which is re-derived from the tree on every build. Of the eight: 3 gap, 3 blocked, 1 unverified, 1 open.</div></td></tr><tr><td>Clicks, conversions and earnings recorded</td><td><span class="num">0</span></td><td class="src"><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-06</a><div class="note">No tag, no account, no report export. Amazon states it makes no representation about the traffic or income any associate can expect.</div></td></tr><tr><td>Pages carrying the phrase &#x27;AI-powered&#x27; in public copy</td><td><span class="num">14</span></td><td class="src"><a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow">BR-13</a><div class="note">25 occurrences across those 14 pages; 11 carry the full phrase &#x27;AI-powered Amazon affiliate&#x27;. After the T55 rebuild none of the 14 is a reader-facing page — they are operator and companion surfaces (RV-09). This namespace is excluded from the count, because it quotes the phrase in order to diagnose it.</div></td></tr></tbody>
+</table>
+<p class="note">Every value was produced by a command run in this working tree on 2026-11-16, or read off
+an official page fetched the same day. A row whose value could not be confirmed from an official source
+is empty and says so.</p>
+
+<h2>Decide these three first</h2>
+<div class="grid"><div class="card"><p class="eyebrow">Decide 1</p><p><a href="suggestions.html#DB-06">DB-06 — Declare one site, and demote the other thirteen to linked evidence</a></p><p class="note">Declaring one site determines what every other change is a change to. It is also the only decision that has to be right before an application names a URL, because an application is not reassessed after a rejection.</p></div><div class="card"><p class="eyebrow">Decide 2</p><p><a href="questions.html#BQ-14">BQ-14 — What is the Associates ID (tag) and which marketplace is it registered in?</a></p><p class="note">Supplying the Associates tag is the owner&#x27;s one action that unblocks the entire revenue side. It takes one sign-in and no code.</p></div><div class="card"><p class="eyebrow">Decide 3</p><p><a href="suggestions.html#DB-01">DB-01 — Stop describing the site as AI-powered on the operator and companion pages</a></p><p class="note">It costs under an hour and it is reversible. The T55 rebuild removed the phrase from every reader-facing page; 14 operator and companion pages still carry it.</p></div><div class="card"><p class="eyebrow">Decide 3</p><p><a href="questions.html#BQ-14">BQ-14 — What is the Associates ID (tag) and which marketplace is it registered in?</a></p><p class="note">Supplying the Associates tag is the owner&#x27;s one action that unblocks the entire revenue side. It takes one sign-in and no code.</p></div></div>
+
+<h2>What was asked</h2>
+<ul class="tight"><li>Build an AI-powered Amazon affiliate platform: product research, trend and conversion analysis, pricing, review, competition and commission analysis, SEO articles, comparisons and buying guides, niche discovery, link and campaign management, click and conversion tracking, continuous optimization — automated, scalable, data-driven, and compliant with Amazon Associates policy and disclosure rules.</li><li>Build the marketing for three supplied affiliate links.</li><li>Make it look like a polished marketing site rather than machine output, with articles that earn organic traffic.</li><li>Provide a suggestions board where a path is chosen before anything is implemented, and a clear register of what is known, what is not, and how to find out.</li><li>Provide an executive summary.</li></ul>
+
+<h2>What is settled</h2>
+<ul class="tight"><li>The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).</li><li>The evidence discipline holds at scale: 138 of 138 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.</li><li>The machinery is trustworthy: 22 gates and 15 pipeline tests are green, and the counts that matter are derived from the tree rather than typed.</li><li>The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit.</li></ul>
+
+<h2>What is not</h2>
+<ul class="tight"><li>Whether the three listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18).</li><li>Whether an Associates account exists at all, and if it does, its tag and marketplace (BQ-14, BQ-19).</li><li>Which of the fourteen published surfaces is the site that would be declared (BQ-15).</li><li>Who writes it, under what name, and whether that name is public (BQ-16).</li><li>What readers are searching for. There is no demand signal anywhere in the project, so no topic on the topics board can be ranked by expected volume (BQ-20).</li></ul>
+
+<h2>What is in this namespace</h2>
+<ul class="tight"><li><a href="index.html"><strong>Index</strong></a> — This summary, the state table, and the three decisions that unblock the most.</li><li><a href="design-prompt.html"><strong>Design Prompt</strong></a> — Why the site reads as machine output, measured; three before-and-after rewrites of actual published copy; the design system; and a paste-ready prompt for the rebuild.</li><li><a href="topics.html"><strong>Topics</strong></a> — Twelve article proposals, each with the verified fact it rests on — and a stated reason none of them can be ranked by traffic.</li><li><a href="suggestions.html"><strong>Suggestions</strong></a> — The board. Twelve proposals with options, costs, risks and blockers. Nothing here is implemented.</li><li><a href="questions.html"><strong>Questions</strong></a> — Thirteen questions an official page answers, ten it cannot, and the inventory of what the project holds.</li><li><a href="review.html"><strong>Review</strong></a> — Line-by-line review of the repository, with the commands behind every number and links for manual review.</li><li><a href="flagged.html"><strong>Flagged</strong></a> — Eight irregularities raised by this review, each with what would close it and who can.</li><li><a href="sources.html"><strong>Sources</strong></a> — Every page a value in this namespace was read from, with the verbatim quote and the fetch date.</li><li><a href="verification.html"><strong>Verification</strong></a> — One row per check this session ran, with the method and the page it was checked against.</li></ul>
+
+<h2>The one thing</h2>
+<p class="lede">If only one thing happens next, it should be the tag. Everything the brief asks the platform to do with real traffic — track it, convert it, optimize against it — is unreachable until a link on a page can be attributed to the owner.</p>
+<p class="note">Base commit <code>18e8de8 (main, after PR #144 merged) — rebased; measured again on 2026-11-16</code>. This summary adds to, and does not replace,
+the <a href="../pages/executive-summary.html">canonical executive summary</a>.</p>
+
+  </main>
+</div>
+<footer class="site">
+  <div class="wrap">
+    <p>As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Generated by <code>tools/build_brief.py</code> from <code>brief/data/*.json</code>, measured on 2026-11-16.
+    Every row on these pages ends in the official page it was read from, or says plainly that no source
+    settles it. Nothing here is implemented: each proposal waits for a recorded owner decision.</p>
+    <p><a href="../index.html">Owner dashboard</a> ·
+       <a href="../pages/suggestions.html">Suggestion board (SG-01…SG-12)</a> ·
+       <a href="../pages/questions.html">Question register (Q-01…Q-18)</a> ·
+       <a href="../pages/flags.html">Flag register (F-01…F-40)</a> ·
+       <a href="../console/index.html">Owner's Console</a> ·
+       <a href="../marketing/index.html">Reader-facing site</a></p>
+  </div>
+</footer>
+</body>
+</html>

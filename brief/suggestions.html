@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Choose a path · Zone2 design brief</title>
+<meta name="description" content="The review-and-choose board: twelve proposals with options, costs, risks and blockers. Nothing on it has been implemented.">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/brief/suggestions.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Zone2">
+<meta property="og:title" content="Choose a path · Zone2 design brief">
+<meta property="og:description" content="The review-and-choose board: twelve proposals with options, costs, risks and blockers. Nothing on it has been implemented.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/brief/suggestions.html">
+<meta name="robots" content="index,follow">
+<style>
+:root{--ink:#16130f;--paper:#fbfaf7;--muted:#6b6459;--line:#e3ded3;--accent:#1f5b4a;
+--blank:#8a8478;--warn:#9a6314;--card:#fff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+font:18px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:64rem;margin:0 auto;padding:0 24px}
+a{color:var(--accent)}
+.skip{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+header.mast{border-bottom:1px solid var(--line);background:var(--card)}
+.mast-in{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;padding:18px 24px;max-width:64rem;margin:0 auto}
+.brand{font-weight:700;text-decoration:none;color:var(--ink)}
+.brand span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+nav.top{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-left:auto}
+nav.top a{color:var(--muted);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
+nav.top a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+main{padding:32px 0 64px}
+h1{font:700 40px/1.1 Georgia,"Times New Roman",serif;margin:0 0 12px;letter-spacing:-.01em}
+h2{font:700 27px/1.2 Georgia,"Times New Roman",serif;margin:44px 0 10px}
+h3{font:600 20px/1.3 Georgia,"Times New Roman",serif;margin:26px 0 6px}
+p,li{max-width:44rem}
+.standfirst{font-size:20px;color:#3a342b;margin:0 0 8px;max-width:44rem}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.lede{color:#3a342b}
+.disclosure{border:1px solid var(--line);background:#fff;border-left:3px solid var(--accent);
+padding:12px 14px;font-size:15px;margin:0 0 20px;border-radius:3px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:14px 0 8px;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:9px 12px 9px 0}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line)}
+tbody tr:hover{background:#f6f3ec}
+tr[id]{scroll-margin-top:16px}
+blockquote{margin:8px 0;padding:10px 14px;border-left:3px solid var(--line);color:#3a342b;
+background:#fff;font-size:16px;max-width:44rem}
+code{font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f1ede4;
+padding:1px 5px;border-radius:3px}
+pre{background:#f6f3ec;border:1px solid var(--line);padding:14px 16px;overflow-x:auto;
+font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;border-radius:4px;
+white-space:pre-wrap;word-break:break-word}
+.pill{display:inline-block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fff;white-space:nowrap}
+.pill.official{border-color:#bcd8cc;color:#1f5b4a}
+.pill.observed{border-color:#cfd6e3;color:#3b5a86}
+.pill.carried{border-color:#e0d6bd;color:var(--warn)}
+.pill.open{color:var(--warn);border-color:#e0d6bd}
+.pill.done{color:#1f5b4a;border-color:#bcd8cc}
+.pill.blocked{color:#8a3a2a;border-color:#e3c4bb}
+.num{font:700 22px/1.1 Georgia,serif}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);background:var(--card);border-radius:4px;padding:14px 16px}
+.card .num{display:block;margin-bottom:4px}
+.card .lbl{font-size:14px;color:var(--muted)}
+.note{font-size:15px;color:var(--muted);max-width:44rem}
+.blank{color:var(--blank);border-bottom:1px dotted var(--blank);cursor:help}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:#fff;
+padding:14px 16px;margin:18px 0;border-radius:3px;max-width:44rem}
+.callout.warn{border-left-color:var(--warn)}
+.src{font-size:13px;color:var(--muted)}
+.src a{color:var(--accent)}
+ul.tight li{margin-bottom:5px}
+footer.site{border-top:1px solid var(--line);background:var(--card);padding:24px 0 40px;font-size:14px;color:var(--muted)}
+footer.site p{max-width:52rem}
+@media (max-width:640px){h1{font-size:31px}body{font-size:17px}.mast-in{padding:14px 24px}nav.top{margin-left:0}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Choose a path", "description": "The review-and-choose board: twelve proposals with options, costs, risks and blockers. Nothing on it has been implemented.", "datePublished": "2026-11-16T00:00:00+00:00", "inLanguage": "en", "isAccessibleForFree": true, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kanlerxz87-cyber.github.io/Zone2/brief/suggestions.html"}, "publisher": {"@type": "Organization", "name": "Zone2", "url": "https://kanlerxz87-cyber.github.io/Zone2/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="mast-in">
+    <a class="brand" href="index.html"><b>Zone2 design brief</b><span>What the site should look like, and what has to be decided first</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html">Executive summary</a><a href="design-prompt.html">Design prompt</a><a href="topics.html">Articles &amp; topics</a><a href="suggestions.html" aria-current="page">Choose a path</a><a href="questions.html">What we know</a><a href="review.html">Repo review</a><a href="verification.html">Verification</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged</a></nav>
+  </div>
+</header>
+<div class="wrap">
+  <main id="main">
+    <p class="disclosure" data-rule="R-01"><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p class="crumbs" aria-label="Breadcrumb">Design brief › Choose a path</p>
+
+<p class="eyebrow">Choose a path · 2026-11-16</p>
+<h1>Twelve proposals. Nothing implemented until you pick one.</h1>
+<p class="standfirst">The rows are listed in the order that unblocks the most. DB-06 and DB-01 are prerequisites for almost everything else: one declares what the site is, the other removes the label that makes it read as generated from the pages T55 did not rebuild.</p>
+
+<div class="callout">
+  <p class="eyebrow">How to record a choice</p>
+  <p>Open brief/data/decisions.json, set the row&#x27;s &#x27;choice&#x27; to the letter of the option you want, add a note, and set decided_by and decided_on. The next build re-renders the board with the choice shown on the row. Or tell the agent the IDs and it will record them in the same form.</p>
+</div>
+
+<p class="note">Costs and risks are the reviewer's estimates, deliberately coarse, and are labelled as
+estimates — they are not program facts. Rows below marked <span class="pill blocked">blocked on a question</span>
+cannot be decided until the named question on the
+<a href="questions.html">information register</a> is answered.</p>
+
+
+<section id="DB-01">
+  <h3>DB-01 · Stop describing the site as AI-powered on the operator and companion pages</h3>
+  <p class="src"><span class="pill">Public copy</span> <span class="pill open">awaiting a choice</span>
+     sequence 2 — the reader-facing half is already done by T55</p>
+  <p class="eyebrow">What changes</p>
+  <p>Remove &#x27;AI-powered&#x27; and &#x27;AI-powered Amazon affiliate&#x27; from the 14 pages that still print them: console/, research-hub/, summary.html, review-trace.html, affiliate-lab/, zone2/. The T55 rebuild already cleared every reader-facing page on 2026-11-16.</p>
+  <p class="eyebrow">Why</p>
+  <p>It is the brief&#x27;s vocabulary surviving into the deliverable, and it is the strongest single signal that the copy was produced from a commission rather than from the work. Google&#x27;s guidance names the risk it invites (BR-13); Amazon&#x27;s content bar asks for robust original content (BR-08). No reader has ever chosen an affiliate site because it was AI-powered.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Remove from every public page; keep one note on the owner console<div class="note">Reader-facing copy loses the claim entirely; the provenance is still recorded where only the owner looks.</div></li><li><strong>B.</strong> Remove everywhere, including owner surfaces<div class="note">Cleanest, but loses the record of how the pages were produced.</div></li><li><strong>C.</strong> Keep, and add a sentence explaining what is and is not automated<div class="note">Honest, but puts the word back in front of the reader, which is the problem.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      </td></tr>
+  <tr><th>Effort</th><td>estimate: under an hour; a find-and-replace plus a read of each affected page</td></tr>
+  <tr><th>Risk</th><td>estimate: none to compliance. A cosmetic risk that some pages read plainer.</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>RV-09 <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow">BR-13</a> · <a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-08</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-05, P-01</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-02">
+  <h3>DB-02 · Correct the overclaim wherever it survives, now that the landing page has been rebuilt</h3>
+  <p class="src"><span class="pill">Landing page</span> <span class="pill open">awaiting a choice</span>
+     sequence 3</p>
+  <p class="eyebrow">What changes</p>
+  <p>T55 removed the &#x27;Three listings identified&#x27; heading from index.html. What is left is DR-1&#x27;s discipline applied to the owner-facing pages: no page anywhere may state the mapping as fact while F-03 is open.</p>
+  <p class="eyebrow">Why</p>
+  <p>The hero currently introduces the platform and then states its integrity policy; the reader is third. And the second heading asserts the one thing the project&#x27;s own register declines to assert (FB-05).</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Apply the rewrites as written<div class="note">Faster; the copy is on the design-prompt page and can be checked against the spec rows.</div></li><li><strong>B.</strong> Apply the correction only, leave the hero<div class="note">Removes the overclaim, keeps the self-describing opening that reads as generated.</div></li><li><strong>C.</strong> Commission new hero copy from the publication&#x27;s own voice<div class="note">Best fit with Counter Notes, but costs a writing pass.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      </td></tr>
+  <tr><th>Effort</th><td>estimate: one to two hours including a re-read of every number in the replacement copy</td></tr>
+  <tr><th>Risk</th><td>estimate: low. The rewrite introduces no new value that is not already published with a source.</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>RV-10, RV-11 <a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">BR-19</a> · <a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer nofollow">BR-20</a> · <a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer nofollow">BR-21</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-03, DS-05, P-01</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-03">
+  <h3>DB-03 · Replace the abstract headings that survive on the operator surfaces</h3>
+  <p class="src"><span class="pill">Information architecture</span> <span class="pill open">awaiting a choice</span>
+     sequence 3</p>
+  <p class="eyebrow">What changes</p>
+  <p>T55 renamed the landing page&#x27;s headings (&#x27;The short version&#x27;, &#x27;Start with the question, not the product&#x27;). The same treatment is still owed to the operator namespace, whose pages carry headings like &#x27;Position at a glance&#x27; and &#x27;What this platform is&#x27;.</p>
+  <p class="eyebrow">Why</p>
+  <p>A heading that names the artifact is a heading generated from a schema. A heading that names the buyer&#x27;s question is a heading a person wrote (RV-11, DT-2).</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Rewrite the four self-describing headings on the landing page<div class="note">Small change, most of the effect.</div></li><li><strong>B.</strong> Rewrite headings across the whole owner-facing namespace<div class="note">Consistent, but touches 39 generated pages and their builder.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      </td></tr>
+  <tr><th>Effort</th><td>estimate: under an hour for A; a day for B</td></tr>
+  <tr><th>Risk</th><td>estimate: low</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>RV-11 </td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-02</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-04">
+  <h3>DB-04 · Move the disclosure into the recommendation block instead of the page footer</h3>
+  <p class="src"><span class="pill">Compliance as design</span> <span class="pill open">awaiting a choice</span>
+     sequence 4</p>
+  <p class="eyebrow">What changes</p>
+  <p>Every product recommendation renders inside a bordered block that carries the §5 sentence above the verdict, not in a strip at the top or a line at the bottom.</p>
+  <p class="eyebrow">Why</p>
+  <p>Both governing sources ask for proximity to the endorsement, not presence on the page: the Operating Agreement says &#x27;clearly and prominently&#x27; (BR-05), and the FTC says the disclosure &#x27;should be placed with the endorsement message itself&#x27; and is &#x27;likely to be missed&#x27; at the end of a post (BR-17). The site currently satisfies the letter and misses the point.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Disclosure inside every recommendation block<div class="note">Repeats the sentence on pages with several recommendations, which is what the FTC wants.</div></li><li><strong>B.</strong> Disclosure at the top of the page and inside the first recommendation only<div class="note">Less repetition; weaker on the second and later recommendations.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      </td></tr>
+  <tr><th>Effort</th><td>estimate: half a day across the marketing templates</td></tr>
+  <tr><th>Risk</th><td>estimate: low, and it reduces compliance risk rather than adding it</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>RV-03 <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-05</a> · <a href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer nofollow">BR-17</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-05</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-05">
+  <h3>DB-05 · Make the blank cell a designed state rather than an absence</h3>
+  <p class="src"><span class="pill">Presentation</span> <span class="pill open">awaiting a choice</span>
+     sequence 5</p>
+  <p class="eyebrow">What changes</p>
+  <p>An empty cell renders as an en-dash on a dotted rule, with a tooltip and a visible legend naming which rule or absence makes it empty. Three semantic states across the whole site: sourced (ink), blank (muted), conflict (amber, both values shown).</p>
+  <p class="eyebrow">Why</p>
+  <p>The site&#x27;s discipline is its differentiator, and it currently renders as a gap. Google&#x27;s own description of a good affiliate page is a page that adds value (BR-12); a blank with a stated reason is added value, a bare dash is not.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Full three-state treatment with a legend on every table<div class="note">Best signal; a legend on every table costs a little vertical space.</div></li><li><strong>B.</strong> Tooltip only, no visible legend<div class="note">Tighter, but the reason is invisible on touch devices.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      </td></tr>
+  <tr><th>Effort</th><td>estimate: a day across the table components</td></tr>
+  <tr><th>Risk</th><td>estimate: low</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>RV-13 <a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">BR-12</a> · <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-01</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-05, SG-07</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-06">
+  <h3>DB-06 · Declare one site, and demote the other thirteen to linked evidence</h3>
+  <p class="src"><span class="pill">Site architecture</span> <span class="pill open">awaiting a choice</span>
+     sequence 1 — it determines what DB-02 and DB-03 are rewriting</p>
+  <p class="eyebrow">What changes</p>
+  <p>Pick the reader-facing surface as the declared Site. Every other namespace stays published but becomes reachable only from it. Sixteen surfaces publish today — two more than before T55 and this namespace landed.</p>
+  <p class="eyebrow">Why</p>
+  <p>Google&#x27;s people-first guidance names as a warning sign content &#x27;spread across a large network of sites, so that individual pages or sites don&#x27;t get as much attention or care&#x27; (BR-15). This repository publishes 14 surfaces (RV-16). Amazon&#x27;s application asks for the Site list to be kept current and to name exact URLs (BR-10&#x27;s page), and RR-11 on the readiness board is already a GAP for exactly this reason.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Counter Notes (marketing/) is the site; everything else is evidence behind it<div class="note">Cleanest for an application, and the only surface already written for readers. Costs a navigation rebuild.</div></li><li><strong>B.</strong> Keep the root dashboard as the site and fold the editorial into it<div class="note">Preserves the work already done on the dashboard, but the dashboard is the surface that reads as generated.</div></li><li><strong>C.</strong> Leave fourteen surfaces and declare the root URL only<div class="note">No work, but the owner is submitting a site whose own architecture contradicts the content bar.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      </td></tr>
+  <tr><th>Effort</th><td>estimate: several days</td></tr>
+  <tr><th>Risk</th><td>estimate: medium — it is the largest change on this board, and it touches navigation that five namespaces depend on</td></tr>
+  <tr><th>Reversible</th><td>partly — the pages can be un-linked, but a declared URL cannot be un-submitted</td></tr>
+  <tr><th>Blocked by</th><td><a href="questions.html#BQ-15">BQ-15</a><a href="questions.html#BQ-22">BQ-22</a></td></tr>
+  <tr><th>Evidence</th><td>RV-16, RV-14 <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-15</a> · <a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-12, MQ-08, SG-01</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-07">
+  <h3>DB-07 · Publish a named byline with a true one-line scope statement</h3>
+  <p class="src"><span class="pill">Trust</span> <span class="pill open">awaiting a choice</span>
+     sequence 6</p>
+  <p class="eyebrow">What changes</p>
+  <p>Every reader-facing article carries an author and a sentence saying what that person actually did — for example, that they read the three listings and the manufacturer pages on a stated date. Never &#x27;tested&#x27;.</p>
+  <p class="eyebrow">Why</p>
+  <p>Google asks whether content demonstrates first-hand expertise and whether there is background about the author (BR-16). The FTC is blunter: you cannot talk about experience with a product you have not tried (BR-18). A byline that states the real scope is both the honest answer and the strongest trust signal available without a testing programme.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Real name, true scope sentence, dated<div class="note">Best for trust; requires the owner to be named publicly.</div></li><li><strong>B.</strong> Desk name (Counter Notes) with a true scope sentence<div class="note">No personal exposure; weaker on the expertise signal Google describes.</div></li><li><strong>C.</strong> No byline until a testing programme exists<div class="note">Safest, and leaves the trust signal on the table indefinitely.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      <div class="note">B if the owner prefers not to be named publicly.</div></td></tr>
+  <tr><th>Effort</th><td>estimate: an hour plus the decision</td></tr>
+  <tr><th>Risk</th><td>estimate: low in itself; the decision of whether to be named is the owner&#x27;s</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td><a href="questions.html#BQ-16">BQ-16</a><a href="questions.html#BQ-21">BQ-21</a></td></tr>
+  <tr><th>Evidence</th><td>RV-15 <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-16</a> · <a href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer nofollow">BR-18</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>MQ-03, Q-16, SG-05</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-08">
+  <h3>DB-08 · Set body text at 18–19px on a 62–70 character measure</h3>
+  <p class="src"><span class="pill">Typography</span> <span class="pill open">awaiting a choice</span>
+     sequence 7</p>
+  <p class="eyebrow">What changes</p>
+  <p>Body size up from the browser default, measure down from the current wide grid, serif display headlines, humanist sans for body. Cards and trust strips move below the fold.</p>
+  <p class="eyebrow">Why</p>
+  <p>Small text on a long measure is the look of a rendered table, and it is the second-largest contributor to the generated feel after the vocabulary. This is a craft judgement, not a rule; no official source states a font size.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Apply to the reader-facing surface first<div class="note">The pages a visitor sees change; the evidence tables keep their density.</div></li><li><strong>B.</strong> Apply across every namespace<div class="note">Consistent, but the dense evidence tables were designed to be dense.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      </td></tr>
+  <tr><th>Effort</th><td>estimate: a day for A</td></tr>
+  <tr><th>Risk</th><td>estimate: low</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>— </td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-11, P-06</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-09">
+  <h3>DB-09 · Set a re-verification cadence, or take the dates off the pages</h3>
+  <p class="src"><span class="pill">Evidence maintenance</span> <span class="pill open">awaiting a choice</span>
+     sequence 8</p>
+  <p class="eyebrow">What changes</p>
+  <p>Either commit to re-fetching the load-bearing official pages on a stated interval and reprinting the date, or stop printing verification dates altogether.</p>
+  <p class="eyebrow">Why</p>
+  <p>Every page on the site prints a verification date that is already between one and three days old, and the oldest date any page prints is 2026-11-13. Google warns against changing dates to make content seem fresh when it has not substantively changed. A date that no one maintains is worse than no date: it is a claim that decays silently.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Quarterly re-verification, date printed and enforced by a gate<div class="note">Highest integrity, and a recurring cost.</div></li><li><strong>B.</strong> Re-verify only when a page is edited<div class="note">Cheap; the date stops meaning &#x27;checked&#x27; and starts meaning &#x27;written&#x27;.</div></li><li><strong>C.</strong> Remove printed dates<div class="note">Honest and free, and loses a genuine differentiator.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      <div class="note">C if the site is going to be parked rather than pursued.</div></td></tr>
+  <tr><th>Effort</th><td>estimate: an hour to set the interval; a day to build the gate that enforces it</td></tr>
+  <tr><th>Risk</th><td>estimate: low</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>RV-02 <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-14</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-13, MQ-07</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-10">
+  <h3>DB-10 · Derive the two stale counts on the readiness board and remove the duplicated suggestion row</h3>
+  <p class="src"><span class="pill">Data hygiene</span> <span class="pill open">awaiting a choice</span>
+     sequence 9</p>
+  <p class="eyebrow">What changes</p>
+  <p>Replace RR-01&#x27;s typed &#x27;116 published HTML pages&#x27; and RR-05&#x27;s typed &#x27;72 pages link to amazon.com/dp/&#x27; with measured tokens, and resolve SG-11 / SG-12 into one row.</p>
+  <p class="eyebrow">Why</p>
+  <p>These are the only two typed counts left on a board whose entire purpose is to be checkable (FB-01, FB-02), and the duplicated row makes the suggestion board advertise twelve proposals where eleven exist (FB-03).</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Derive both counts and delete the duplicate<div class="note">Correct, and touches files owned by earlier sessions&#x27; scopes.</div></li><li><strong>B.</strong> Log it as a change request and leave it<div class="note">No conflict risk; the defects stay published.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      <div class="note">It sits outside this session&#x27;s file scope, so it is logged as change request CR-1 rather than done.</div></td></tr>
+  <tr><th>Effort</th><td>estimate: two hours</td></tr>
+  <tr><th>Risk</th><td>estimate: low, but it is outside this session&#x27;s file scope and is logged as change request CR-1 instead of being done</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>RV-06, RV-07, RV-08 </td></tr>
+  <tr><th>Inherited rows this touches</th><td>—</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-11">
+  <h3>DB-11 · Instrument the site before writing another article</h3>
+  <p class="src"><span class="pill">Measurement</span> <span class="pill blocked">blocked on a question</span>
+     sequence blocked — cannot start until the tag exists (BQ-14) and the account is approved (BQ-19)</p>
+  <p class="eyebrow">What changes</p>
+  <p>Once a tag exists, add click-level measurement of the outbound product links and a dated record of what was clicked. Until then, write nothing new.</p>
+  <p class="eyebrow">Why</p>
+  <p>Every other proposal on this board is a judgement about what readers want, and today there is not one measured reader. Amazon&#x27;s page states plainly that it makes no representation about the traffic or commission income any associate can expect (BR-06); the only way to replace that with knowledge is to measure this site.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Instrument first, then write<div class="note">Slower to publish; every later editorial decision has evidence behind it.</div></li><li><strong>B.</strong> Write the ten posts Amazon&#x27;s content bar asks for, then instrument<div class="note">Clears the application bar sooner; the second ten articles get written blind too.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>B</strong>
+      <div class="note">A otherwise: instrument first, then write.</div></td></tr>
+  <tr><th>Effort</th><td>estimate: a day of work, but it cannot start until the tag exists</td></tr>
+  <tr><th>Risk</th><td>estimate: low</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td><a href="questions.html#BQ-14">BQ-14</a><a href="questions.html#BQ-19">BQ-19</a><a href="questions.html#BQ-20">BQ-20</a></td></tr>
+  <tr><th>Evidence</th><td>RV-04 <a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-06</a> · <a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-07</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-08, DS-09, SG-09</td></tr>
+  </tbody>
+  </table>
+</section>
+<section id="DB-12">
+  <h3>DB-12 · Re-fetch the manufacturer pages, or date the carry</h3>
+  <p class="src"><span class="pill">Evidence maintenance</span> <span class="pill open">awaiting a choice</span>
+     sequence 9</p>
+  <p class="eyebrow">What changes</p>
+  <p>Re-read the Chefman and Emeril Lagasse product pages and re-quote the specification rows, or mark the published specs with the date they were last read and the fact that they were carried.</p>
+  <p class="eyebrow">Why</p>
+  <p>This session re-fetched the three Amazon destination listings and every program and ranking rule it quotes, but not the manufacturer pages (FB-08, BR-22). The specifications on the site are therefore one or two days older than the listings they sit beside.</p>
+  <p class="eyebrow">Options</p>
+  <ul class="tight"><li><strong>A.</strong> Re-fetch and re-quote<div class="note">Everything on the site is read on one date.</div></li><li><strong>B.</strong> Date the carry and move on<div class="note">Honest and free; the specs stay as old as they are.</div></li></ul>
+  <table>
+  <tbody>
+  <tr><th style="width:12rem">Recommended</th><td><strong>A</strong>
+      <div class="note">Fold it into whatever cadence DB-09 sets.</div></td></tr>
+  <tr><th>Effort</th><td>estimate: an hour of fetches</td></tr>
+  <tr><th>Risk</th><td>estimate: low</td></tr>
+  <tr><th>Reversible</th><td>yes</td></tr>
+  <tr><th>Blocked by</th><td>—</td></tr>
+  <tr><th>Evidence</th><td>RV-13 <a href="https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html" target="_blank" rel="noopener noreferrer nofollow">BR-22</a></td></tr>
+  <tr><th>Inherited rows this touches</th><td>DS-13</td></tr>
+  </tbody>
+  </table>
+</section>
+
+  </main>
+</div>
+<footer class="site">
+  <div class="wrap">
+    <p>As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Generated by <code>tools/build_brief.py</code> from <code>brief/data/*.json</code>, measured on 2026-11-16.
+    Every row on these pages ends in the official page it was read from, or says plainly that no source
+    settles it. Nothing here is implemented: each proposal waits for a recorded owner decision.</p>
+    <p><a href="../index.html">Owner dashboard</a> ·
+       <a href="../pages/suggestions.html">Suggestion board (SG-01…SG-12)</a> ·
+       <a href="../pages/questions.html">Question register (Q-01…Q-18)</a> ·
+       <a href="../pages/flags.html">Flag register (F-01…F-40)</a> ·
+       <a href="../console/index.html">Owner's Console</a> ·
+       <a href="../marketing/index.html">Reader-facing site</a></p>
+  </div>
+</footer>
+</body>
+</html>

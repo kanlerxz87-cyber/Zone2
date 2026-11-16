@@ -1,0 +1,360 @@
+{
+  "note": "The information register (task T50, session arena/dc72a69e-zone2). Three sections. 'answered' — a question an official page settles; the answer quotes or restates only what the linked page says, and nothing else. 'open' — a question nothing in this repository can answer; the answer field is empty on purpose and is never filled with an inference, and each row states what is already known, what is missing, and the concrete action that would close it. 'inventory' — what the project already holds, and how each item was established. This register extends and does not replace the canonical Q-01..Q-18 at pages/questions.html, the console's IN- register or the audit's G-01..G-15.",
+  "as_of": "2026-11-16",
+  "sections": {
+    "answered": "Settled by an official page this session fetched and read on 2026-11-16.",
+    "open": "Not answerable from anything in this repository. The answer cell is empty by design.",
+    "inventory": "What the project already holds, each item with the observation or document that establishes it."
+  },
+  "answered": [
+    {
+      "id": "BQ-01",
+      "question": "May the site show Amazon star ratings and review counts?",
+      "answer": "Not as configured. The Program Policies allow them only when obtained through Amazon's API: “You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API and you comply with the requirements for Creators API and PA API described in the License.”",
+      "source_ids": [
+        "BR-01"
+      ],
+      "measured": "0 of 138 published pages show one (RV-04's sibling measurement; the readiness board's own figure is 0)."
+    },
+    {
+      "id": "BQ-02",
+      "question": "Must the product links on the declared site carry an Associates tag?",
+      "answer": "Yes. “Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application.” The same page states that an account rejected for missing tagged links is told to correct them.",
+      "source_ids": [
+        "BR-10"
+      ],
+      "measured": "0 of 138 published pages carry a tag in that format (RV-04)."
+    },
+    {
+      "id": "BQ-03",
+      "question": "How many sales must the site drive before the application is reviewed?",
+      "answer": "“After you sign up, our Associates team will check your application once you’ve driven qualified sales (we require at least three within the first 180 days).” The same page adds that personal orders do not qualify.",
+      "source_ids": [
+        "BR-07"
+      ],
+      "measured": "0. No tagged link exists, so no qualifying purchase can be attributed (RV-04)."
+    },
+    {
+      "id": "BQ-04",
+      "question": "What content bar must the declared site clear?",
+      "answer": "“All Sites must have robust original content (even when advertising is removed) – a good rule of thumb is at least 10 posts. They must be publicly available (for example, they should not be a closed group, or behind a paywall).” Rejection for unoriginal or insufficient content is final: “we aren't able to reassess an application once it's been rejected.”",
+      "source_ids": [
+        "BR-08"
+      ],
+      "measured": "14 candidate editorial posts are counted, clearing the rule of thumb; the readiness board still marks the row GAP because every counted page is a specification or comparison surface about these three listings (RV-15)."
+    },
+    {
+      "id": "BQ-05",
+      "question": "How recent must the content be, and who must own the site?",
+      "answer": "“Content on your website must be recent (generally within the last 60 days). You must own your website.”",
+      "source_ids": [
+        "BR-09"
+      ],
+      "measured": "The oldest date any published page prints for its own content is 2026-11-13, three days before this review. Ownership is not established by anything in the repository."
+    },
+    {
+      "id": "BQ-06",
+      "question": "Does Amazon promise the site any traffic or income if it does the work?",
+      "answer": "No. “We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations.”",
+      "source_ids": [
+        "BR-06"
+      ],
+      "measured": "Consistent with the site publishing no performance figures anywhere."
+    },
+    {
+      "id": "BQ-07",
+      "question": "May the site say the products were tested?",
+      "answer": "No. The FTC's guidance is flat: “You can’t talk about your experience with a product you haven’t tried.” Google asks whether the content “clearly demonstrate[s] first-hand expertise and a depth of knowledge (for example, expertise that comes from having actually used a product or service, or visiting a place)”.",
+      "source_ids": [
+        "BR-18",
+        "BR-16"
+      ],
+      "measured": "No page claims testing. The byline question is open (BQ-16)."
+    },
+    {
+      "id": "BQ-08",
+      "question": "Where must the affiliate disclosure sit on a page?",
+      "answer": "With the recommendation, not at the end. The FTC: “Place it so it’s hard to miss. The disclosure should be placed with the endorsement message itself”, and warns that disclosures “are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos, or anywhere that requires a person to click MORE.” Amazon's agreement requires the statement to be stated “clearly and prominently”.",
+      "source_ids": [
+        "BR-17",
+        "BR-05"
+      ],
+      "measured": "138 of 138 pages carry the exact sentence, but on the reader-facing pages it sits in a strip above the content rather than inside the recommendation (RV-03, DB-04)."
+    },
+    {
+      "id": "BQ-09",
+      "question": "May the site offer a reader anything for clicking through?",
+      "answer": "No. “You will not offer any person or entity any consideration, reward, or incentive (including any money, rebate, discount, points, donation to charity or other organization, or other benefit) for using Special Links.”",
+      "source_ids": [
+        "BR-03"
+      ],
+      "measured": "No page offers one."
+    },
+    {
+      "id": "BQ-10",
+      "question": "May the site use short links that hide the Amazon destination?",
+      "answer": "Not if the destination is unclear. “You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site”, and separately you may not “cloak, hide, spoof, or otherwise obscure the URL of your Site containing Special Links”.",
+      "source_ids": [
+        "BR-04"
+      ],
+      "measured": "The three links this whole project rests on are themselves short links on link.amazon, a domain the canonical register flags as not the documented public Associates short-link domain (F-04). Whether §6(w) applies to them is not settled by any page this session could read."
+    },
+    {
+      "id": "BQ-11",
+      "question": "What does Google say about writing about trending topics?",
+      "answer": "It is listed as a warning sign: “Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?” The same list asks “Are you producing lots of content on many different topics in hopes that some of it might perform well in search results?”",
+      "source_ids": [
+        "BR-14"
+      ],
+      "measured": "This is the rule the topics board on this site is built to satisfy."
+    },
+    {
+      "id": "BQ-12",
+      "question": "Is AI-generated content allowed?",
+      "answer": "Google's answer is about scale and value, not about the tool: “using generative AI tools or other similar tools to generate many pages without adding value for users may violate Google's spam policy on scaled content abuse”. The spam policy defines the abuse as “when many pages are generated for the primary purpose of manipulating search rankings and not helping users”.",
+      "source_ids": [
+        "BR-13",
+        "BR-11"
+      ],
+      "measured": "No page on this site is generated at request time; all are static files built from JSON ledgers. Twelve pages describe the site as AI-powered anyway (RV-09)."
+    },
+    {
+      "id": "BQ-13",
+      "question": "Can an affiliate site be good, by Google's own standard?",
+      "answer": "Yes, and it says how: “Not every site that participates in an affiliate program is a thin affiliate. Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.”",
+      "source_ids": [
+        "BR-12"
+      ],
+      "measured": "Of the five named value-adds, this site can currently claim two: product comparisons and category navigation. Price information, original reviews and rigorous testing ratings are all closed to it by BQ-01 and BQ-07."
+    }
+  ],
+  "open": [
+    {
+      "id": "BQ-14",
+      "question": "What is the Associates ID (tag) and which marketplace is it registered in?",
+      "answer": "",
+      "known": "Amazon's format is a name followed by a hyphen and two digits (BR-10). No page in this repository contains one; the three supplied links carry no tag parameter at all.",
+      "missing": "The tag itself, the marketplace (the register already carries an open question about US versus another marketplace), and the date the account was approved.",
+      "how_to_close": "Open Associates Central, copy the tag from any product link you build there, and record it. One sign-in.",
+      "who_can_close": "owner only",
+      "blocks": [
+        "DB-11"
+      ],
+      "register_refs": [
+        "Q-02",
+        "Q-01",
+        "F-07",
+        "F-24"
+      ]
+    },
+    {
+      "id": "BQ-15",
+      "question": "Which single surface is the declared Site, and what exact URL will be listed?",
+      "answer": "",
+      "known": "Fourteen surfaces publish pages today (RV-16). Amazon asks applicants to keep their Site list current and to be precise about what is reviewed; the readiness board marks RR-11 a GAP for exactly this reason.",
+      "missing": "The choice. Every option has a cost: the reader-facing publication reads best but lacks the evidence tables, the root dashboard has the tables but reads like a report.",
+      "how_to_close": "Choose on the decision sheet (DB-06). Everything else — nav, canonical URLs, the application — follows from it.",
+      "who_can_close": "owner, on advice",
+      "blocks": [
+        "DB-06",
+        "DB-02",
+        "DB-03"
+      ],
+      "register_refs": [
+        "Q-06",
+        "Q-17",
+        "MQ-08",
+        "DS-12"
+      ]
+    },
+    {
+      "id": "BQ-16",
+      "question": "Who is the named author or editor, and will they be named publicly?",
+      "answer": "",
+      "known": "No page carries a byline. Google's guidance ties trust to background about the author or the site that publishes the content; Amazon asks for robust original content and looks for a reason a customer would seek the site out.",
+      "missing": "A name, or a decision to publish under the desk name and accept the weaker signal.",
+      "how_to_close": "Decide, then add the byline with a true scope sentence (DB-07).",
+      "who_can_close": "owner only",
+      "blocks": [
+        "DB-07"
+      ],
+      "register_refs": [
+        "Q-16",
+        "MQ-03",
+        "SG-05"
+      ]
+    },
+    {
+      "id": "BQ-17",
+      "question": "Were the three link.amazon codes minted in the owner's own Associates account, and under which tracking ID?",
+      "answer": "",
+      "known": "All three resolve, reproducibly, to one listing each (BR-19..BR-21). The codes are nine characters; an ASIN is ten. No Amazon document binds a code to a product.",
+      "missing": "Whether the account that minted them is the owner's, which is the only thing that would make them earn for the owner.",
+      "how_to_close": "Check the links in the owner's own Associates Central account, or rebuild them there and compare destinations.",
+      "who_can_close": "owner only",
+      "blocks": [],
+      "register_refs": [
+        "Q-18",
+        "F-01",
+        "F-03",
+        "F-04"
+      ]
+    },
+    {
+      "id": "BQ-18",
+      "question": "Which products did the three codes actually mean?",
+      "answer": "",
+      "known": "What each code resolves to, observed on four separate dates across four sessions (BR-19..BR-21). Not the same thing as what the brief intended.",
+      "missing": "Confirmation from the owner, or a full ten-character ASIN for each product.",
+      "how_to_close": "Re-supply the three products as full ASINs or full /dp/ URLs. Until then every page must keep saying 'the product this link resolves to', which is the constraint behind FB-05.",
+      "who_can_close": "owner only",
+      "blocks": [
+        "DB-02"
+      ],
+      "register_refs": [
+        "Q-03",
+        "F-01",
+        "F-03"
+      ]
+    },
+    {
+      "id": "BQ-19",
+      "question": "Is there an approved Associates account at all?",
+      "answer": "",
+      "known": "Nothing in the repository establishes one: no account, no marketplace, no tag, no report export, no API credential.",
+      "missing": "Everything. The readiness board's RR-06 (three qualifying sales) and RR-07 (API enrolment) are both marked BLOCKED pending this.",
+      "how_to_close": "Apply — but only after BQ-15 and the content bar are settled, because a rejected application is not reassessed (BR-08).",
+      "who_can_close": "owner only",
+      "blocks": [
+        "DB-11"
+      ],
+      "register_refs": [
+        "Q-02",
+        "F-07"
+      ]
+    },
+    {
+      "id": "BQ-20",
+      "question": "Which authorised source will tell the site what readers are actually searching for?",
+      "answer": "",
+      "known": "None. No keyword tool, no Search Console property, no Amazon report exists for this project. Google's guidance explicitly warns against writing about things because they seem trending (BR-14).",
+      "missing": "Any demand signal at all. Every topic on the topics board is therefore an argument, not a measurement.",
+      "how_to_close": "Connect Search Console for the declared domain and read the queries the site already receives; or buy a keyword tool and record which one, so the number can be cited.",
+      "who_can_close": "owner (tooling) then agent (reading it)",
+      "blocks": [
+        "DB-11"
+      ],
+      "register_refs": [
+        "Q-13",
+        "MQ-06"
+      ]
+    },
+    {
+      "id": "BQ-21",
+      "question": "Will anyone test these three products, with a dated record?",
+      "answer": "",
+      "known": "Nobody has. The FTC forbids implying otherwise (BR-18), and Google rewards first-hand expertise it does not have (BR-16).",
+      "missing": "The products, or the decision not to.",
+      "how_to_close": "Buy or borrow them and keep a dated log, or commit to the spec-sheet-only position and make that the site's stated angle rather than its apology.",
+      "who_can_close": "owner only",
+      "blocks": [
+        "DB-07"
+      ],
+      "register_refs": [
+        "Q-11",
+        "SG-05"
+      ]
+    },
+    {
+      "id": "BQ-22",
+      "question": "Who owns the domain the site will be declared at?",
+      "answer": "",
+      "known": "Amazon: “You must own your website.” The site currently publishes at a GitHub Pages project URL under a GitHub account.",
+      "missing": "Whether the applicant controls that GitHub account, or whether a separate domain will be registered.",
+      "how_to_close": "Register a domain and point it at the Pages site, or confirm control of the existing URL. It has to happen before the URL architecture hardens.",
+      "who_can_close": "owner only",
+      "blocks": [
+        "DB-06"
+      ],
+      "register_refs": [
+        "Q-04",
+        "Q-17",
+        "DS-04"
+      ]
+    },
+    {
+      "id": "BQ-23",
+      "question": "How often will the published facts be re-checked, and by whom?",
+      "answer": "",
+      "known": "Every page prints a verification date between one and three days old. Amazon's policies page was updated on 2026-04-14 and the agreement on 2025-10-15, so the sources move independently of this repository.",
+      "missing": "A cadence, an owner for it, and a gate that fails when a page is stale (DB-09).",
+      "how_to_close": "Pick an interval and build the check. Or remove the printed dates.",
+      "who_can_close": "owner decision, agent implementation",
+      "blocks": [
+        "DB-09",
+        "DB-12"
+      ],
+      "register_refs": [
+        "Q-07",
+        "MQ-07",
+        "DS-13"
+      ]
+    }
+  ],
+  "inventory": [
+    {
+      "id": "IN-01",
+      "item": "Three resolved product destinations",
+      "established_by": "Live fetch of each supplied short link on 2026-11-16 (BR-19, BR-20, BR-21); the same three destinations were recorded on 2026-11-14 and 2026-11-15 by earlier sessions.",
+      "value": "B0CDY277D3, B09B7SB46R, B08DKYBTPH"
+    },
+    {
+      "id": "IN-02",
+      "item": "138 published pages, every one carrying the §5 disclosure",
+      "established_by": "Substring search across the tree (RV-03); enforced by two gates.",
+      "value": "138 of 138"
+    },
+    {
+      "id": "IN-03",
+      "item": "22 gates, all green on the tree this session started from",
+      "established_by": "Every gate replayed locally before any edit (RV-01).",
+      "value": "22 of 22, plus 15 of 15 pipeline tests"
+    },
+    {
+      "id": "IN-04",
+      "item": "A flag register with 40 items, each with the official page it was read from",
+      "established_by": "pages/flags.html, generated from ledger/flags.json.",
+      "value": "F-01 … F-40"
+    },
+    {
+      "id": "IN-05",
+      "item": "A source register of 43 pages, with each source's class made explicit",
+      "established_by": "pages/sources.html, generated from ledger/sources.json.",
+      "value": "S01 … S43"
+    },
+    {
+      "id": "IN-06",
+      "item": "A release-readiness board measuring the site against the twelve requirements Amazon states for an application review",
+      "established_by": "release/index.html, generated from ledger/readiness.json and re-derived on every build.",
+      "value": "12 rows; 4 MET, 4 GAP, 3 BLOCKED, 1 OPEN"
+    },
+    {
+      "id": "IN-07",
+      "item": "Eight question-shaped guides already published under the reader-facing brand",
+      "established_by": "marketing/topics/ — capacity, dual basket, basket versus oven, Hi-Fry, footprint, spec drift, air fryer versus oven, are they worth it.",
+      "value": "8 guides"
+    },
+    {
+      "id": "IN-08",
+      "item": "Specification tables with per-row sources",
+      "established_by": "marketing/ and pages/products.html; the specification values were read from manufacturer and Amazon pages on 2026-11-14/15 and are carried on this site (BR-22).",
+      "value": "48 specification rows"
+    },
+    {
+      "id": "IN-09",
+      "item": "Clicks, conversions and earnings",
+      "established_by": "Nothing. No tag exists, so no qualifying purchase can be attributed to this site.",
+      "value": "0 — and this is the hole the whole revenue story sits in"
+    }
+  ]
+}

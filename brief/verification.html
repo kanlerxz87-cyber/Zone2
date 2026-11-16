@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification · Zone2 design brief</title>
+<meta name="description" content="One row per check this session ran, with the method used, what was observed, and whether it matched what the project publishes.">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/brief/verification.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Zone2">
+<meta property="og:title" content="Verification · Zone2 design brief">
+<meta property="og:description" content="One row per check this session ran, with the method used, what was observed, and whether it matched what the project publishes.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/brief/verification.html">
+<meta name="robots" content="index,follow">
+<style>
+:root{--ink:#16130f;--paper:#fbfaf7;--muted:#6b6459;--line:#e3ded3;--accent:#1f5b4a;
+--blank:#8a8478;--warn:#9a6314;--card:#fff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+font:18px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:64rem;margin:0 auto;padding:0 24px}
+a{color:var(--accent)}
+.skip{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+header.mast{border-bottom:1px solid var(--line);background:var(--card)}
+.mast-in{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;padding:18px 24px;max-width:64rem;margin:0 auto}
+.brand{font-weight:700;text-decoration:none;color:var(--ink)}
+.brand span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+nav.top{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-left:auto}
+nav.top a{color:var(--muted);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
+nav.top a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+main{padding:32px 0 64px}
+h1{font:700 40px/1.1 Georgia,"Times New Roman",serif;margin:0 0 12px;letter-spacing:-.01em}
+h2{font:700 27px/1.2 Georgia,"Times New Roman",serif;margin:44px 0 10px}
+h3{font:600 20px/1.3 Georgia,"Times New Roman",serif;margin:26px 0 6px}
+p,li{max-width:44rem}
+.standfirst{font-size:20px;color:#3a342b;margin:0 0 8px;max-width:44rem}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.lede{color:#3a342b}
+.disclosure{border:1px solid var(--line);background:#fff;border-left:3px solid var(--accent);
+padding:12px 14px;font-size:15px;margin:0 0 20px;border-radius:3px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:14px 0 8px;display:block;overflow-x:auto}
+th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:9px 12px 9px 0}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line)}
+tbody tr:hover{background:#f6f3ec}
+tr[id]{scroll-margin-top:16px}
+blockquote{margin:8px 0;padding:10px 14px;border-left:3px solid var(--line);color:#3a342b;
+background:#fff;font-size:16px;max-width:44rem}
+code{font:14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f1ede4;
+padding:1px 5px;border-radius:3px}
+pre{background:#f6f3ec;border:1px solid var(--line);padding:14px 16px;overflow-x:auto;
+font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;border-radius:4px;
+white-space:pre-wrap;word-break:break-word}
+.pill{display:inline-block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fff;white-space:nowrap}
+.pill.official{border-color:#bcd8cc;color:#1f5b4a}
+.pill.observed{border-color:#cfd6e3;color:#3b5a86}
+.pill.carried{border-color:#e0d6bd;color:var(--warn)}
+.pill.open{color:var(--warn);border-color:#e0d6bd}
+.pill.done{color:#1f5b4a;border-color:#bcd8cc}
+.pill.blocked{color:#8a3a2a;border-color:#e3c4bb}
+.num{font:700 22px/1.1 Georgia,serif}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);background:var(--card);border-radius:4px;padding:14px 16px}
+.card .num{display:block;margin-bottom:4px}
+.card .lbl{font-size:14px;color:var(--muted)}
+.note{font-size:15px;color:var(--muted);max-width:44rem}
+.blank{color:var(--blank);border-bottom:1px dotted var(--blank);cursor:help}
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:#fff;
+padding:14px 16px;margin:18px 0;border-radius:3px;max-width:44rem}
+.callout.warn{border-left-color:var(--warn)}
+.src{font-size:13px;color:var(--muted)}
+.src a{color:var(--accent)}
+ul.tight li{margin-bottom:5px}
+footer.site{border-top:1px solid var(--line);background:var(--card);padding:24px 0 40px;font-size:14px;color:var(--muted)}
+footer.site p{max-width:52rem}
+@media (max-width:640px){h1{font-size:31px}body{font-size:17px}.mast-in{padding:14px 24px}nav.top{margin-left:0}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Verification", "description": "One row per check this session ran, with the method used, what was observed, and whether it matched what the project publishes.", "datePublished": "2026-11-16T00:00:00+00:00", "inLanguage": "en", "isAccessibleForFree": true, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://kanlerxz87-cyber.github.io/Zone2/brief/verification.html"}, "publisher": {"@type": "Organization", "name": "Zone2", "url": "https://kanlerxz87-cyber.github.io/Zone2/"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="mast-in">
+    <a class="brand" href="index.html"><b>Zone2 design brief</b><span>What the site should look like, and what has to be decided first</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html">Executive summary</a><a href="design-prompt.html">Design prompt</a><a href="topics.html">Articles &amp; topics</a><a href="suggestions.html">Choose a path</a><a href="questions.html">What we know</a><a href="review.html">Repo review</a><a href="verification.html" aria-current="page">Verification</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged</a></nav>
+  </div>
+</header>
+<div class="wrap">
+  <main id="main">
+    <p class="disclosure" data-rule="R-01"><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p class="crumbs" aria-label="Breadcrumb">Design brief › Verification</p>
+
+<p class="eyebrow">Verification · 2026-11-16</p>
+<h1>One row per check this session ran</h1>
+<p class="standfirst">Verification log for the design brief (task T50, session arena/dc72a69e-zone2).</p>
+<div class="callout"><p>Outbound TLS from the sandbox shell fails with SSL_ERROR_SYSCALL. Every live check below was therefore run with fetch_page or the GitHub API, and the channel is named on each row.</p></div>
+<table>
+<thead><tr><th>ID</th><th>What was checked</th><th>Method</th><th>Observed</th><th>Result</th></tr></thead>
+<tbody>
+<tr id="VF-01">
+  <td><strong>VF-01</strong></td>
+  <td>Supplied link 1 destination</td>
+  <td><code style="font-size:12.5px">fetch_page on https://link.amazon/B04G1MEwY</code></td>
+  <td>Resolves to www.amazon.com/dp/B0CDY277D3 — &#x27;CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows…&#x27;. Breadcrumb Home &amp; Kitchen › Kitchen &amp; Dining › Small Appliances › Fryers › Air Fryers. No tag parameter.</td>
+  <td><span class="pill done">reproduced</span>
+      <div class="src"><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">BR-19</a></div></td>
+</tr>
+<tr id="VF-02">
+  <td><strong>VF-02</strong></td>
+  <td>Supplied link 2 destination</td>
+  <td><code style="font-size:12.5px">fetch_page on https://link.amazon/B02NbDxp3</code></td>
+  <td>Resolves to www.amazon.com/dp/B09B7SB46R — &#x27;Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven…&#x27;. No tag parameter.</td>
+  <td><span class="pill done">reproduced</span>
+      <div class="src"><a href="https://link.amazon/B02NbDxp3" target="_blank" rel="noopener noreferrer nofollow">BR-20</a></div></td>
+</tr>
+<tr id="VF-03">
+  <td><strong>VF-03</strong></td>
+  <td>Supplied link 3 destination</td>
+  <td><code style="font-size:12.5px">fetch_page on https://link.amazon/B00hJ57DV</code></td>
+  <td>Resolves to www.amazon.com/dp/B08DKYBTPH — &#x27;Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option…&#x27;. No tag parameter. The title&#x27;s 450°F figure is the conflict carried as F-22; this session observed the title text only and restates no specification from it.</td>
+  <td><span class="pill done">reproduced</span>
+      <div class="src"><a href="https://link.amazon/B00hJ57DV" target="_blank" rel="noopener noreferrer nofollow">BR-21</a></div></td>
+</tr>
+<tr id="VF-04">
+  <td><strong>VF-04</strong></td>
+  <td>Program Policies — §6(t), customer reviews and star ratings</td>
+  <td><code style="font-size:12.5px">fetch_page; read the Participation Requirements §6 list</code></td>
+  <td>Page states &#x27;Updated: April 14, 2026&#x27;. Quoted text served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-01</a></div></td>
+</tr>
+<tr id="VF-05">
+  <td><strong>VF-05</strong></td>
+  <td>Program Policies — §6(y), price tracking and alerting</td>
+  <td><code style="font-size:12.5px">fetch_page; same list</code></td>
+  <td>Quoted text served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-02</a></div></td>
+</tr>
+<tr id="VF-06">
+  <td><strong>VF-06</strong></td>
+  <td>Program Policies — §6(g), no incentive for using Special Links</td>
+  <td><code style="font-size:12.5px">fetch_page; same list</code></td>
+  <td>Quoted text served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-03</a></div></td>
+</tr>
+<tr id="VF-07">
+  <td><strong>VF-07</strong></td>
+  <td>Program Policies — §6(v) and §6(w), cloaking and unclear link presentation</td>
+  <td><code style="font-size:12.5px">fetch_page; same list</code></td>
+  <td>Quoted text served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer nofollow">BR-04</a></div></td>
+</tr>
+<tr id="VF-08">
+  <td><strong>VF-08</strong></td>
+  <td>Operating Agreement — §5, the disclosure sentence</td>
+  <td><code style="font-size:12.5px">fetch_page; read §5</code></td>
+  <td>Page states &#x27;Updated: October 15, 2025&#x27;. Quoted sentence served verbatim, including the curly quotation marks.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-05</a></div></td>
+</tr>
+<tr id="VF-09">
+  <td><strong>VF-09</strong></td>
+  <td>Operating Agreement — §4, no representation about traffic or income</td>
+  <td><code style="font-size:12.5px">fetch_page; read §4</code></td>
+  <td>Quoted text served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-06</a></div></td>
+</tr>
+<tr id="VF-10">
+  <td><strong>VF-10</strong></td>
+  <td>Application Review Process — the three-qualifying-sales threshold</td>
+  <td><code style="font-size:12.5px">fetch_page; read the introduction</code></td>
+  <td>Quoted text served verbatim, including the parenthetical &#x27;we require at least three within the first 180 days&#x27;.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-07</a></div></td>
+</tr>
+<tr id="VF-11">
+  <td><strong>VF-11</strong></td>
+  <td>Application Review Process — the content bar</td>
+  <td><code style="font-size:12.5px">fetch_page; read the introduction</code></td>
+  <td>Quoted text served verbatim, including &#x27;a good rule of thumb is at least 10 posts&#x27;.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-08</a></div></td>
+</tr>
+<tr id="VF-12">
+  <td><strong>VF-12</strong></td>
+  <td>Application Review Process — recency and ownership</td>
+  <td><code style="font-size:12.5px">fetch_page; read the Websites section</code></td>
+  <td>Quoted text served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-09</a></div></td>
+</tr>
+<tr id="VF-13">
+  <td><strong>VF-13</strong></td>
+  <td>Application Review Process — what a Special Link tag is</td>
+  <td><code style="font-size:12.5px">fetch_page; read the Application FAQs</code></td>
+  <td>Quoted text served verbatim, including the example format &#x27;abcd-20&#x27;.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a></div></td>
+</tr>
+<tr id="VF-14">
+  <td><strong>VF-14</strong></td>
+  <td>Google spam policies — scaled content abuse</td>
+  <td><code style="font-size:12.5px">fetch_page; read the Scaled content abuse section and the page footer</code></td>
+  <td>Page states &#x27;Last updated 2026-08-28 UTC.&#x27; Quoted definition served verbatim, including the bullet &#x27;Using generative AI tools or other similar tools to generate many pages without adding value for users&#x27;.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">BR-11</a> · <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow">BR-13</a></div></td>
+</tr>
+<tr id="VF-15">
+  <td><strong>VF-15</strong></td>
+  <td>Google spam policies — thin affiliation, and what makes an affiliate page good</td>
+  <td><code style="font-size:12.5px">fetch_page; read the Thin affiliation section</code></td>
+  <td>Quoted text served verbatim, including the five named value-adds.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener noreferrer nofollow">BR-12</a></div></td>
+</tr>
+<tr id="VF-16">
+  <td><strong>VF-16</strong></td>
+  <td>Google guidance on generative AI content</td>
+  <td><code style="font-size:12.5px">fetch_page; read the page body and footer</code></td>
+  <td>Page states &#x27;Last updated 2026-10-01 UTC.&#x27; Quoted sentence served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow">BR-13</a></div></td>
+</tr>
+<tr id="VF-17">
+  <td><strong>VF-17</strong></td>
+  <td>Google helpful-content guidance — the trending-topic warning</td>
+  <td><code style="font-size:12.5px">fetch_page; read the &#x27;Avoid creating search engine-first content&#x27; list</code></td>
+  <td>Quoted question served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-14</a></div></td>
+</tr>
+<tr id="VF-18">
+  <td><strong>VF-18</strong></td>
+  <td>Google helpful-content guidance — the spread-across-sites warning</td>
+  <td><code style="font-size:12.5px">fetch_page; read the content-and-quality questions</code></td>
+  <td>Quoted question served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-15</a></div></td>
+</tr>
+<tr id="VF-19">
+  <td><strong>VF-19</strong></td>
+  <td>Google helpful-content guidance — first-hand expertise</td>
+  <td><code style="font-size:12.5px">fetch_page; read the people-first questions</code></td>
+  <td>Quoted question served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="noopener noreferrer nofollow">BR-16</a></div></td>
+</tr>
+<tr id="VF-20">
+  <td><strong>VF-20</strong></td>
+  <td>FTC Disclosures 101 — placement of the disclosure</td>
+  <td><code style="font-size:12.5px">fetch_page; read the &#x27;How to Disclose&#x27; section</code></td>
+  <td>Page states November 2019. Quoted guidance served verbatim, including &#x27;Disclosures are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos&#x27;.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer nofollow">BR-17</a></div></td>
+</tr>
+<tr id="VF-21">
+  <td><strong>VF-21</strong></td>
+  <td>FTC Disclosures 101 — claims that require proof</td>
+  <td><code style="font-size:12.5px">fetch_page; read the &#x27;What Else to Know&#x27; section</code></td>
+  <td>Quoted sentence served verbatim.</td>
+  <td><span class="pill done">match</span>
+      <div class="src"><a href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer nofollow">BR-18</a></div></td>
+</tr>
+<tr id="VF-22">
+  <td><strong>VF-22</strong></td>
+  <td>Every repository gate, replayed on the unmodified base tree</td>
+  <td><code style="font-size:12.5px">tools/ci_replay.py replays every workflow step in order against this tree, then tests/test_pipeline.py</code></td>
+  <td>43 of 43 workflow steps pass locally via tools/ci_replay.py, plus 15 of 15 pipeline tests</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-23">
+  <td><strong>VF-23</strong></td>
+  <td>Published page inventory</td>
+  <td><code style="font-size:12.5px">Path.rglob(&#x27;*.html&#x27;) over the repository, excluding .git/.github</code></td>
+  <td>162 HTML files; 2 are error documents; 160 published; 150 excluding this namespace and release/index.html</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-24">
+  <td><strong>VF-24</strong></td>
+  <td>Pages carrying an Associates tag</td>
+  <td><code style="font-size:12.5px">Regex tag=[A-Za-z0-9]+-[0-9]{2} across the 138 published pages</code></td>
+  <td>0 of 150. The placeholder tag=YOURASSOCIATEID does not match and is not counted.</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a></div></td>
+</tr>
+<tr id="VF-25">
+  <td><strong>VF-25</strong></td>
+  <td>Pages carrying the exact §5 disclosure sentence</td>
+  <td><code style="font-size:12.5px">Substring search across the 138 published pages</code></td>
+  <td>150 of 150.</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"><a href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer nofollow">BR-05</a></div></td>
+</tr>
+<tr id="VF-26">
+  <td><strong>VF-26</strong></td>
+  <td>Readiness row RR-01&#x27;s stated page count, against the tree</td>
+  <td><code style="font-size:12.5px">Compare ledger/readiness.json RR-01 with VF-23</code></td>
+  <td>RR-01 states &#x27;116 published HTML pages&#x27;; 150 measured. Difference 34 pages. Raised as FB-01.</td>
+  <td><span class="pill open">mismatch</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-27">
+  <td><strong>VF-27</strong></td>
+  <td>Readiness row RR-05&#x27;s stated link count, against the tree</td>
+  <td><code style="font-size:12.5px">Compare ledger/readiness.json RR-05 with a substring search for amazon.com/dp/</code></td>
+  <td>RR-05 states &#x27;72 pages link to amazon.com/dp/&#x27;; 87 measured. Difference 15 pages. Raised as FB-02.</td>
+  <td><span class="pill open">mismatch</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-28">
+  <td><strong>VF-28</strong></td>
+  <td>Whether SG-11 and SG-12 on the suggestion board are the same proposal</td>
+  <td><code style="font-size:12.5px">Field-by-field comparison in ledger/suggestions.json</code></td>
+  <td>Same area, same title, near-identical body text. Raised as FB-03.</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-29">
+  <td><strong>VF-29</strong></td>
+  <td>How often the site describes itself as AI-powered</td>
+  <td><code style="font-size:12.5px">Case-insensitive count across the 138 published pages</code></td>
+  <td>&#x27;AI-powered&#x27; 25 occurrences on 14 pages; &#x27;AI-powered Amazon affiliate&#x27; 11 occurrences on 11 pages. After the T55 rebuild none of the 14 is reader-facing. Raised as FB-04.</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"><a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" target="_blank" rel="noopener noreferrer nofollow">BR-13</a></div></td>
+</tr>
+<tr id="VF-30">
+  <td><strong>VF-30</strong></td>
+  <td>The landing page&#x27;s product-section heading, against the flag register</td>
+  <td><code style="font-size:12.5px">Read index.html&#x27;s h2 elements and compare with ledger/flags.json F-03</code></td>
+  <td>RESOLVED BY T55: the heading read &#x27;Three links in. Three listings identified.&#x27;; after session arena/9251f262-zone2 rebuilt index.html on 2026-11-16 the string is absent. FB-05 closed.</td>
+  <td><span class="pill done">reproduced</span>
+      <div class="src"><a href="https://link.amazon/B04G1MEwY" target="_blank" rel="noopener noreferrer nofollow">BR-19</a></div></td>
+</tr>
+<tr id="VF-31">
+  <td><strong>VF-31</strong></td>
+  <td>How often the copy talks about the site instead of to the reader</td>
+  <td><code style="font-size:12.5px">On the seven root pages, count sentences of more than five words whose subject is the site</code></td>
+  <td>12 of 299 sentences, 4%</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-32">
+  <td><strong>VF-32</strong></td>
+  <td>Residual banned phrases in published prose</td>
+  <td><code style="font-size:12.5px">Scan all 138 pages, then read the surrounding text of each hit to separate genuine usage from a banned-word list</code></td>
+  <td>17 raw hits; every one sits inside a list of words the project forbids (console/design.html) or inside a before/after demonstration of generated copy (marketing/improvements.html). Genuine usage: 0.</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-33">
+  <td><strong>VF-33</strong></td>
+  <td>Any page printing a money figure</td>
+  <td><code style="font-size:12.5px">Regex for a $ amount across the 138 published pages, then manual read of each hit</code></td>
+  <td>5 pages, all printing Amazon bounty and commission program amounts. No page prints a product price.</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-34">
+  <td><strong>VF-34</strong></td>
+  <td>Pages without a self-referencing canonical URL</td>
+  <td><code style="font-size:12.5px">Substring search across the 138 published pages, grouped by namespace, cross-checked against tools/build_head_meta.py --audit</code></td>
+  <td>107 of 150 carry one; the 43 without are entirely in companion namespaces, which the gate reports rather than fails by design.</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-35">
+  <td><strong>VF-35</strong></td>
+  <td>The readiness board&#x27;s own state counts</td>
+  <td><code style="font-size:12.5px">Parse the state column of release/index.html&#x27;s main table</code></td>
+  <td>12 rows: 4 MET, 3 GAP, 3 BLOCKED, 1 UNVERIFIED, 1 OPEN.</td>
+  <td><span class="pill official">measured</span>
+      <div class="src"></div></td>
+</tr>
+<tr id="VF-36">
+  <td><strong>VF-36</strong></td>
+  <td>The live site and the deployment that serves it</td>
+  <td><code style="font-size:12.5px">GitHub API and Actions runs (not yet run this session — recorded as a placeholder that must be filled before this record closes)</code></td>
+  <td><span class="blank" title="not yet run">—</span></td>
+  <td><span class="pill blocked">pending</span>
+      <div class="src"></div></td>
+</tr></tbody>
+</table>
+
+  </main>
+</div>
+<footer class="site">
+  <div class="wrap">
+    <p>As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Generated by <code>tools/build_brief.py</code> from <code>brief/data/*.json</code>, measured on 2026-11-16.
+    Every row on these pages ends in the official page it was read from, or says plainly that no source
+    settles it. Nothing here is implemented: each proposal waits for a recorded owner decision.</p>
+    <p><a href="../index.html">Owner dashboard</a> ·
+       <a href="../pages/suggestions.html">Suggestion board (SG-01…SG-12)</a> ·
+       <a href="../pages/questions.html">Question register (Q-01…Q-18)</a> ·
+       <a href="../pages/flags.html">Flag register (F-01…F-40)</a> ·
+       <a href="../console/index.html">Owner's Console</a> ·
+       <a href="../marketing/index.html">Reader-facing site</a></p>
+  </div>
+</footer>
+</body>
+</html>

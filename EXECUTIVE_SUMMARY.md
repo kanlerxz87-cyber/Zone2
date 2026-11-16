@@ -1048,3 +1048,55 @@ Unchanged, and still not a technical problem:
 Three of the four are one message from the owner away from closing. The fourth is a hosting decision.
 All twelve suggestions and all twelve questions are on the new boards with the actions that would settle
 them; nothing on either board has been implemented.
+
+---
+
+## Addendum — 2026-11-16 — the design brief (session `dc72a69e`, T57 — renumbered from T50)
+
+**One sentence.** The research platform is finished and honest; the earning part has not started, and it
+cannot start until the owner supplies one string: the Associates ID (tag).
+
+Read in full at <https://kanlerxz87-cyber.github.io/Zone2/brief/>.
+
+**Measured on 2026-11-16, and re-measured after T55 landed mid-review.** 150 published pages (excluding
+error documents, the readiness board's own page, and the brief itself); 150 of 150 carry the exact §5
+disclosure; **0 of 150 carry an Associates tag**; 0 print a product price; 43 of 43 workflow steps replay
+green locally; 16 separate published surfaces. The three supplied
+links resolve, on four dates across four sessions, to the same three listings: a Chefman 6-quart dual
+basket (`B0CDY277D3`), an Emeril Lagasse 26-quart French-door oven (`B09B7SB46R`) and a Chefman 8-quart
+basket fryer (`B08DKYBTPH`).
+
+**Why the tag is the whole story.** Amazon requires Associates tags to be embedded in the product links on
+the site declared in an application, and reviews that application only once at least three qualifying sales
+have been driven within the first 180 days. Zero tagged links means zero qualifying purchases, which means
+the application is never reviewed. Everything downstream in the brief — conversion tracking, the optimizer,
+the revenue model, and the API enrolment that would let the site publish prices and star ratings — sits
+behind that one value. It costs the owner one sign-in and no code.
+
+**What the design brief answers.** The brief asks why the site reads like machine output. Measured: 14
+pages carry the phrase "AI-powered" in public copy (11 carry the full "AI-powered Amazon affiliate"), which
+is the commission's vocabulary surviving into the deliverable; the landing page's second heading said
+"Three listings identified", which is the one claim the project's own flag register (F-03) declines to
+assert; and 4% of sentences across the seven root pages have the site itself as their subject.
+
+**A parallel session fixed part of this while the brief was being written.** Session `arena/9251f262-zone2`
+(T55, PR #144) rebuilt the front pages as a publication on the same day: the overclaim heading is gone, the
+abstract headings are gone, and self-reference fell from 8% to 4%. The brief was re-measured against the
+combined tree and says so on every affected row. What T55 did not reach is the 14 operator and companion
+pages that still print "AI-powered" — none of them reader-facing. The brief
+publishes three rewrites of the actual published copy, a design system, and a paste-ready prompt whose
+acceptance tests are machine-checkable.
+
+**Two defects found on the readiness board, same class, twice.** `RR-01` prints "116 published HTML pages"
+(the tree measures 150, and 159 once this namespace is counted) and `RR-05` prints "72 pages link to
+amazon.com/dp/" (measured 87). Both are typed into prose rather than derived, so both drifted with no gate
+noticing. Logged as change request CR-1 in COORDINATION.md — the files that own them are outside this
+session's claimed scope. The brief's own summary is not allowed to make that mistake: its gate re-derives
+the counts from the tree every run.
+
+**A third:** the canonical suggestion board carries the same proposal twice (`SG-11` and `SG-12`), so it
+advertises twelve suggestions where eleven exist.
+
+**Nothing on the new board is implemented.** Twelve proposals (`DB-01…DB-12`) wait on
+`brief/suggestions.html` with options, costs, risks and blockers; ten questions on `brief/questions.html`
+are left empty on purpose, each with the action that would close it and who can close it.
