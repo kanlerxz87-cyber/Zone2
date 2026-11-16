@@ -44,18 +44,25 @@ Register check: 11 sources defined, 11 cited, 0 unused (`tools/validate_review_b
 
 | ID | Value published | Command that reproduces it |
 |---|---|---|
-| PM-01 | 139 | `python3 -c "import sys;sys.path.insert(0,'tools');import build_sitemap as b;print(len(b.published_pages()))"` |
-| PM-02 | 24 of 139 (17.3%) | same, filtered on the `marketing/` and `journal/` prefixes |
+| PM-01 | 139 at the base commit (144 after this task) | `python3 -c "import sys;sys.path.insert(0,'tools');import build_sitemap as b;print(len(b.published_pages()))"` |
+| PM-02 | 24 of 139 (17.3%) at base; 24 of 144 (16.7%) after | same, filtered on the `marketing/` and `journal/` prefixes |
 | PM-03 | 0 images | `grep -c '<img' marketing/*.html marketing/topics/*.html marketing/articles/*.html` → 0 everywhere |
-| PM-04 | 68 of 71 product links render as a citation label | parse every `<a href="…amazon.com/dp/…">` on the marketing pages and print its text: 34 `M4 · …`, 16 `M2 · …`, 13 `M6 · …`, 8 `www.amazon.com` |
+| PM-04 | 71 of 80 product links (89%) render as a citation label | parse every anchor on the 20 marketing pages whose href contains `amazon.com/dp/` (80), then classify its visible text: 34 `M4 · …`, 16 `M2 · …`, 13 `M6 · …`, 8 `www.amazon.com`. **Corrected 2026-11-16**: an earlier count of 68 of 71 came from a regex that missed 9 anchors; the corrected figures are in the register |
 | PM-05 | 0 product links on the hero's destination | `grep -c 'amazon.com/dp/' marketing/buying-guide.html` → 0 |
 | PM-06 | 0 ranked shortlists | no marketing page contains a ranked list of ≥2 products |
 | PM-07 | 0 named authors | no marketing page carries a byline |
-| PM-08 | 76 nav links | count `<a ` inside the `<nav class="nav">` element of `index.html` |
+| PM-08 | 76 nav links at base; 82 after this task's one added nav entry | count `<a ` inside the `<nav class="nav">` element of `index.html` |
 | PM-09 | 5 boards carry proposals (6 counting the hub), 7 after this task | the six named filenames all exist; `review.html` is the seventh |
 | PM-10 | 0 of 28 answered | `ledger/questions.json` (18) + `marketing/data/editorial.json` (10), no `answer` field set |
 | PM-11 | 3 of 3 resolve unchanged | section 1 above |
 | PM-12 | every marketing page prints a 2026-11-14/15 date | `grep -l '2026-11-14\|2026-11-15' marketing/*.html marketing/topics/*.html marketing/articles/*.html` |
+
+**Corrections made after first publication.** Three measurements were wrong or became stale while this
+session was still writing: `PM-04` (published 68 of 71, actually 71 of 80 — a regex missed 9 anchors),
+`PM-08` (76 became 82 when this task added one nav entry and five footer links) and `PM-01`/`PM-02`
+(139/24 became 144/24 when five pages were added). Each now states the base-commit figure and the
+after-this-task figure explicitly, and the commands to reproduce both. The defects are also listed in
+section 6 below, because publication of a wrong figure is exactly the failure the brief is about.
 
 **Flag (this session, needs review).** `PM-09` says "6 before this task". Six *files* exist, but
 `decisions/index.html` is a hub rather than a proposal board, so a strict count of boards carrying
@@ -100,7 +107,7 @@ test_audit, test_readiness .. pass
 research-hub/scripts/verify.py  pass
 ```
 
-## 6. Three defects this session introduced and then fixed (recorded, not hidden)
+## 6. Five defects this session introduced and then fixed (recorded, not hidden)
 
 1. **`validate_decisions` failed because the register sat in `decisions/`.** `tools/build_decisions.py
    --check` hashes every file under `decisions/`, generated or not, so any register stored there is
@@ -111,7 +118,14 @@ research-hub/scripts/verify.py  pass
    which holds 40. No external ledger was touched; the sentence was reworded so it no longer makes a count
    claim at all. This is the same defect class the repository has flagged three times before (F-17, F-26,
    F-29), and the gate caught it in CI rather than in review — which is the point.
-3. **`validate_data` failed on the footer's own negation.** The rule requires a negation on the same line
+3. **A measurement was published wrong (`PM-04`).** The first count, 68 of 71, came from a regex that
+   missed 9 anchors whose attributes were ordered differently. A second, independent count over the same
+   files gave 80 links, of which 71 carry a citation label. Corrected in the register and on the page.
+4. **Two measurements went stale while this session was still writing them.** `PM-08` (76 → 82 nav links)
+   and `PM-01`/`PM-02` (139 → 144 pages) moved because this task itself added a nav entry, five footer
+   links and five pages. Both now publish the base-commit figure and the after figure, which is the only
+   way a count about "the site" can stay true while the site is being changed.
+5. **`validate_data` failed on the footer's own negation.** The rule requires a negation on the same line
    as the phrase "affiliated with Amazon". The first render split them across two lines. Fixed by keeping
    the negation inside one element. The sentence itself was not weakened.
 

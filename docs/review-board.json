@@ -310,16 +310,16 @@
     {
       "id": "PM-01",
       "measure": "Published HTML pages in the whole site",
-      "value": "139",
-      "how_measured": "python3 -c 'import tools.build_sitemap as b; print(len(b.published_pages()))'",
+      "value": "139 (before this task; 144 after the five pages it adds)",
+      "how_measured": "python3 -c \"import sys;sys.path.insert(0,'tools');import build_sitemap as b;print(len(b.published_pages()))\" at the base commit 004a040, then again after rendering",
       "means": "The site is large.",
       "source_ids": []
     },
     {
       "id": "PM-02",
       "measure": "Published pages written for a shopper (marketing/ plus journal/)",
-      "value": "24 of 139 = 17.3%",
-      "how_measured": "same enumeration, counted by path prefix",
+      "value": "24 of 139 = 17.3% at the base commit (24 of 144 = 16.7% after this task)",
+      "how_measured": "same enumeration, counted by path prefix: marketing/ (20) + journal/ (4)",
       "means": "About one page in six is for a buyer. The other 115 are for the operator or are working records. A crawler's first impression of the domain is the operator's dashboard.",
       "source_ids": []
     },
@@ -336,8 +336,8 @@
     {
       "id": "PM-04",
       "measure": "Anchor text of the 71 product links on the marketing pages",
-      "value": "68 of 71 render as a citation label such as 'M4 - www.amazon.com Amazon listing'",
-      "how_measured": "parsed every anchor whose href contains amazon.com/dp/ and printed its visible text",
+      "value": "71 of 80 product links (89%) render as a citation label such as 'M4 · www.amazon.com Amazon listing'",
+      "how_measured": "counted every anchor on the 20 marketing pages whose href contains amazon.com/dp/ (80), and classified its visible text: 34 'M4 · …', 16 'M2 · …', 13 'M6 · …', 8 'www.amazon.com' = 71 citation-styled; the other 9 are three product-title links, a breadcrumb, a resolved-destination note and three bare URLs",
       "means": "The most-clicked elements in an affiliate site read as footnotes. A shopper looking for a way to buy sees a source citation.",
       "source_ids": [
         "S86"
@@ -355,7 +355,7 @@
       "id": "PM-06",
       "measure": "Buying guides among the 13 guides, comparisons and articles",
       "value": "0",
-      "how_measured": "no marketing page carries a ranked shortlist of two or more products, which is what a buying guide is",
+      "how_measured": "no marketing page carries an ordered ranked list (<ol>) of two or more products; the three pages with two or more product links are an index, the improvement board and a flag page",
       "means": "The one page type a shopper searches for by name ('best air fryer for...') does not exist. The buying guide that does exist explicitly declines to pick.",
       "source_ids": [
         "S85"
@@ -374,8 +374,8 @@
     {
       "id": "PM-08",
       "measure": "Links on the site root (index.html) navigation",
-      "value": "76",
-      "how_measured": "counted every anchor in the nav element; two groups, 19 visible entries",
+      "value": "76 at the base commit (82 after this task's single additive nav entry and five footer links)",
+      "how_measured": "count every anchor inside the nav element of index.html at the base commit, then on this tree",
       "means": "A shopper's front door is a 76-link operator console. The primary action a reader can take is not visible as a primary action.",
       "source_ids": []
     },
@@ -608,9 +608,9 @@
     },
     {
       "id": "PS-05",
-      "title": "Turn the 71 citation labels into buy links, keeping the source one click away",
+      "title": "Turn the citation-styled product links into buy links, keeping the source one click away",
       "area": "Conversion mechanics",
-      "problem": "Measured in PM-04: 68 of the 71 product links render as a source chip such as 'M4 - www.amazon.com Amazon listing'. The link that earns the commission is styled as a footnote, and the one place a reader is asked to act says 'Amazon listing'. The source must stay - that is the project's rule - but it does not have to be the button.",
+      "problem": "Measured in PM-04: 71 of the 80 product links on the marketing pages render as a source chip such as 'M4 · www.amazon.com Amazon listing'. The link that earns the commission is styled as a footnote, and the one place a reader is asked to act says 'Amazon listing'. The source must stay - that is the project's rule - but it does not have to be the button.",
       "options": [
         {
           "id": "A",
@@ -1080,7 +1080,7 @@
     {
       "id": "PD-01",
       "title": "The most important number on each page is a citation, and the way to buy is a footnote",
-      "what_a_reader_sees": "On a product page the eye is led to a source chip reading 'M4 - www.amazon.com Amazon listing'. There is no button, no arrow, and no statement of what happens if it is clicked.",
+      "what_a_reader_sees": "On a product page the eye is led to a source chip reading 'M4 · www.amazon.com Amazon listing'. There is no button and no statement of what happens if it is clicked; 71 of the 80 product links on the site are styled this way.",
       "why_it_matters": "Affiliate revenue is a function of qualified clicks. A citation-labelled link is the weakest possible invitation to click, and it is the only invitation on the page.",
       "proposed_fix": "PS-05",
       "measured_by": "PM-04",
