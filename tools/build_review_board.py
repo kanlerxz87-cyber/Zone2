@@ -367,7 +367,7 @@ def page_decide() -> str:
       </p>
       <div class="table-wrap">
         <table>
-          <caption>The {len(top)} proposals that need nothing from anybody, with every option they offer. Each row is a whole answer.</caption>
+          <caption>Every option of the {word(len(top), lower=True)} proposals that need nothing from anybody. Each row is a whole answer; the proposal id and the option letter together are what you reply with.</caption>
           <thead><tr><th scope="col">ID · option</th><th scope="col">If you pick this</th><th scope="col">What it costs</th><th scope="col">What it risks</th><th scope="col">Area</th></tr></thead>
           <tbody>
             {''.join(f'<tr id="{esc(o["id"])}"><td class="id">{esc(o["id"])}</td><td>{esc(o["label"])}</td><td>{esc(o["cost"])}</td><td>{esc(o["risk"])}</td><td class="wait">{esc(o["area"])}</td></tr' for o in [])}
@@ -421,7 +421,7 @@ def page_decide() -> str:
   </div>
 """
     return page(
-        "Answer sheet — four decisions, nine questions, one reply",
+        f"Answer sheet — {word(len(top), lower=True)} decisions, {word(len(QUESTIONS), lower=True)} questions, one reply",
         "The short version of the review board: the proposals that can be decided today, the questions with "
         "the action that closes each one, and how to reply. Nothing here is implemented.",
         "review-decide.html",
