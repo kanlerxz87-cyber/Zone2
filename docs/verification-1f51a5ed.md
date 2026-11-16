@@ -1,6 +1,10 @@
-# Verification record — session `1f51a5ed` (T50), 2026-11-16 UTC
+# Verification record — session `1f51a5ed` (T52, claimed as T50), 2026-11-16 UTC
 
-**Branch:** `arena/1f51a5ed-zone2` · **Base:** `004a040` (merge of PR #130)
+**Branch:** `arena/1f51a5ed-zone2` · **Base:** `004a040` (merge of PR #130), rebased onto `e6ee501`
+(merges of PRs #131–#137 from parallel sessions) before the PR — one COORDINATION.md tail conflict
+resolved by keeping every merged session's records and appending this session's claim renumbered
+**T50 → T52** (T50 shipped by `ebc8a709` via PR #131, T51 by `970d11d6`), per the board's
+renumbering precedent. Gates were re-run on the rebased tree (§7).
 **Method:** every live check below was fetched with `fetch_page` (sandbox shell has no outbound TLS);
 repository gates were replayed locally with `tools/ci_replay.py`. Nothing in this record is inferred —
 each row names the official page it was read from, with its URL for manual review.
