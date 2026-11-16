@@ -412,6 +412,18 @@ jobs:
           print(f'{len(pages)} subpages: disclosure present, sponsored links qualified')
           PY
 
+      # T50 (session arena/9251f262-zone2): the reader-facing front-of-house pages. The build
+      # step rewrites them from marketing/data/facts.json, so a hand-edit that is not
+      # reproducible from the dataset is caught here; the gate then re-reads the pages as they
+      # sit on disk and enforces the sourcing, blank, disclosure, sponsored-link, canonical and
+      # no-invented-metrics rules on each one.
+      - name: Rebuild the front pages and confirm committed output is current
+        run: python3 tools/build_front.py --check
+
+      - name: Front-of-house gate (per-row sourcing, blanks carry a reason, disclosure above
+              the data, sponsored links, canonical, no prices, no invented metrics)
+        run: python3 tools/verify_front.py
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
