@@ -1,6 +1,6 @@
 # Line-by-line verification — 2026-11-16 — session `arena/8fb7c287-zone2` (`8fb7c287`)
 
-**Task:** T55 — close change requests CR-A…CR-D, filed by session `5d6d2254` (T42) and never dispositioned on the board. Claimed as T50; renumbered T50 → T55 at integration because `ebc8a709`, `970d11d6`, `1f51a5ed`, `7c1511ee` and `43eb0239` took T50…T54 on `main` while this branch was in flight — per the board's precedent, renumbered rather than contended, no other session's row or record edited.
+**Task:** T56 — close change requests CR-A…CR-D, filed by session `5d6d2254` (T42) and never dispositioned on the board, plus T49's F-20 wording item. Claimed as T50 at 18:30:03Z; renumbered T50 → T55 → T56 at integration because `ebc8a709` (T50, PR #131), `970d11d6` (T51), `1f51a5ed` (T52, PR #138), `7c1511ee` (T52/T53), `43eb0239` (T54, PR #140) and `9251f262` (T55, PR #144/#146) took T50…T55 on `main` while this branch was in flight — per the board's precedent (merged claim keeps the id), renumbered rather than contended, no other session's row or record edited.
 and T49's F-20 wording item, with a fresh dated verification pass over the official sources the published surfaces rest on.
 
 **Method.** Every live check below was run on **2026-11-16 (UTC)** with the workspace page fetcher, because
@@ -123,7 +123,7 @@ session's anchored-control sentence and re-verification stamp) plus four generat
 
 **How it was resolved — nothing discarded:**
 
-- `COORDINATION.md`: **both** rows kept (theirs first, this session's renumbered T50 → **T55** with the
+- `COORDINATION.md`: **both** rows kept (theirs first, this session's renumbered T50 → **T56** with the
   collision narrated), matching the board's own renumbering precedent.
 - `ledger/products.json` `note`: **both** edits composed into one string — their F-41 ADDENDUM retained, this
   session's control sentence anchored to `B00TEST12`, this session's last-re-verified stamp appended.
@@ -132,7 +132,8 @@ session's anchored-control sentence and re-verification stamp) plus four generat
   `marketing/data/facts.json` was then harmonised to match (closing the marketing half of CR-13).
 - Generated pages (`console/*`, `decisions/flagged.html`, `pages/flags.html`, `pages/products.html`): taken
   from the merged data by **re-running every builder**, never hand-merged.
-- Task id: renumbered T50 → **T55**; no other session's row, record or file was edited.
+- Task id: renumbered T50 → **T55 → T56** (a second collision: `9251f262`'s T55, PR #144/#146, merged while this branch was rebasing — their claim was written five minutes after this session's, but theirs merged first, so the id stays theirs). No other session's row, record or file was edited.
+- A second rebase then carried this branch onto `964d847` (PR #146) cleanly; all builders were re-run after it, which propagated the accessories conflict into the new front-of-house `guides/` pages and refreshed the derived `<!--MEASURED-->` counts (145 pages / 14 namespaces / 7,105 links).
 
 **Post-integration gates:** `python3 tools/ci_replay.py` — **38/38 steps PASSED** on the combined tree
 (the workflow grew from 35 to 38 steps with the parallel sessions' additions), including the flag-count check
