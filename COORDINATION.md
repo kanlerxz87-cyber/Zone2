@@ -5232,7 +5232,7 @@ Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live check
 
 ---
 
-## Session claim — T52 (reader-conversion + decision-board wave) — `arena/7c1511ee-zone2` (session `7c1511ee`, 2026-11-16 UTC)
+## Session claim — T53 (reader-conversion + decision-board wave) — `arena/7c1511ee-zone2` (session `7c1511ee`, 2026-11-16 UTC)
 
 **Branch note (documented deviation).** The project rule asks for `session-<id>/<task>`. Arena pins this
 session to `arena/7c1511ee-zone2` and forbids creating or switching to another branch, so this session
@@ -5240,10 +5240,10 @@ works on its one pinned branch under strict file-scope discipline. Same deviatio
 
 | Item | Value |
 |---|---|
-| Task | **T52** — the 2026-11-16 reader-conversion request: (a) a verified requirements trace of the brief as written; (b) a **review board** where every path can be compared, scored and *chosen* before any change is made; (c) the information register that says what is missing and how to obtain it; (d) a page-anatomy / design-gap review of the reader-facing site; (e) turn the findings into additive, non-fact-changing changes (navigation reachability, decision links); (f) PR → merge → confirm Pages deploy → record. |
+| Task | **T53** — the 2026-11-16 reader-conversion request: (a) a verified requirements trace of the brief as written; (b) a **review board** where every path can be compared, scored and *chosen* before any change is made; (c) the information register that says what is missing and how to obtain it; (d) a page-anatomy / design-gap review of the reader-facing site; (e) turn the findings into additive, non-fact-changing changes (navigation reachability, decision links); (f) PR → merge → confirm Pages deploy → record. |
 | Status | **in progress** (claimed 2026-11-16, UTC) |
 | Owner | `7c1511ee` (branch `arena/7c1511ee-zone2`, base `004a040` = merge of PR #130 / T49) |
-| Next free task id | **T52** — originally claimed as T50, but `ebc8a709` claimed and merged T50 first (PR #131) and `970d11d6` took T51, so this task renumbered rather than contending (the board's own precedent, followed by 970d11d6 too) |
+| Next free task id | **T53** — claimed as T50, then T52; both were taken by parallel sessions while this branch was in flight (`ebc8a709` shipped T50 as PR #131, `970d11d6` shipped T51, `1f51a5ed` claimed T52 as PR #138). Renumbered rather than contending, following the board's own precedent. No other session's record was edited; a first pass of the rename script touched one line of `ebc8a709`'s close-out and it was restored verbatim before commit. |
 
 ### File scope (non-overlapping; additive)
 
@@ -5407,7 +5407,7 @@ deviation every prior session recorded.
 
 ## Closing record — T50 (reader-conversion + decision-board wave) — `arena/7c1511ee-zone2` (session `7c1511ee`, 2026-11-16 UTC)
 
-## Closing record — T52 (reader-conversion + decision-board wave) — `arena/7c1511ee-zone2` (session `7c1511ee`, 2026-11-16 UTC)
+## Closing record — T53 (reader-conversion + decision-board wave) — `arena/7c1511ee-zone2` (session `7c1511ee`, 2026-11-16 UTC)
 
 **Status: DONE** (pending PR merge + deploy confirmation, recorded below once known).
 

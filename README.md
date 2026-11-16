@@ -74,7 +74,7 @@ every page, links resolve, board integrity, derived counts). Both run in CI.
 `pages/questions.html` (`Q-01…Q-16`) keep their rows and their IDs; the console indexes them and adds only
 namespaced rows (`P-`, `IN-`, `IR-`, `C-`) so nothing can collide.
 
-### Review board — repository root (T52, session `arena/7c1511ee-zone2`)
+### Review board — repository root (T53, session `arena/7c1511ee-zone2`)
 
 **The section to open if the question is "which change do we make, and what is it waiting on".** Twelve
 proposals on one scale — each with three options, the commitment/cost/risk of each, a recommendation, the
