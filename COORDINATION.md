@@ -5491,3 +5491,10 @@ of PR #139 because they were found after the merge.
 **Two defects the live read caught, recorded rather than glossed:** the hard-coded "four" in a derived page,
 and the duplicated heading/caption. Neither affects a figure or a source link, and neither is visible in the
 tables themselves.
+
+**Follow-up merged.** PR **[#141](https://github.com/kanlerxz87-cyber/Zone2/pull/141)** merged at
+2026-11-16T18:48:24Z (merge commit `65eae71935b6004043dc70b9ccb1bc1ac043dae4`), CI run 43932700550
+success, Pages run 43932698692 success. Live re-read with a cache-busting query confirms the served page now
+carries `<title>Answer sheet — 4 decisions, nine questions, one reply</title>` and the caption reads
+"Every option of the 4 proposals that need nothing from anybody … the proposal id and the option letter
+together are what you reply with." **All T53 work is merged and live.**
