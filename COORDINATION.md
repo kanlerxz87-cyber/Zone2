@@ -4772,6 +4772,24 @@ value; no `og:image` while Q-10 is open.
 | CR-C | Add one sentence to the P3 article: the manufacturer sells 5 Qt and 8 Qt on one page, and every figure quoted is the 8 Qt line. Evidence: https://chefman.com/products/turbofry-touch-air-fryer-1 spec bullets read "(5 Qt Model)" / "(8 Qt Model)"; see D-3. | `marketing/data/editorial.json` | Removes a way for a careful reader to doubt a row that is in fact correct. |
 | CR-D | `sitemap.xml` is generated now — any session that wants to edit it by hand should add the page and re-run `python3 tools/build_sitemap.py`, or the CI step will fail. `docs/*.md` are reachable on the deployed site (the Pages artifact is the repository root) but are not in the sitemap by `156aae86`'s rule, which excludes `tools/`, `tests/` and `content/` only; if that is intentional, fine; if not, one line in the generator covers it. | `tools/build_sitemap.py`, `tools/build_marketing.py` | Prevents the next hand-edit from silently reverting on someone else's build. |
 
+#### Disposition of CR-A…CR-D — session `8fb7c287` (T50), 2026-11-16 (UTC)
+
+All four change requests above were filed by `5d6d2254` (T42, merged) and sat on this board with no
+disposition. Closed as follows; full evidence in `docs/verification-8fb7c287.md` §5.
+
+| CR | Disposition | Where the change landed |
+|---|---|---|
+| **CR-A** | **CLOSED — by wording, not by a new flag.** Session `bbcc741f` had already published **F-40** on 2026-11-15 — the flag CR-A asked for (it records the 403 for `ZZ9QQ7X4LK` and narrows F-20's evidence) — so a new "F-4x" would have duplicated it; T49's later instruction for this defect was to anchor the wording instead. F-20's title now names the specific control code (`B00TEST12`), its detail states every observed status code with date and observer (this session's re-runs: `B00TEST12` → amzlinks 404 reproduces; `NOTACODE9` and `ZZZZZZZZZ` → bare 403; `A00TEST12`/`C00TEST12` → HTTP 500 through the fetcher, recorded as observed), and its action-required names both controls with their expected answers. Flag count unchanged (40), so no typed count drifted. **T49's F-20 wording item is the same defect and is closed by the same edit.** | `ledger/flags.json` (F-20), regenerated `assets/js/data.js`, `pages/flags.html`, `decisions/flagged.html`, `console/*` |
+| **CR-B** | **CLOSED.** Live re-read 2026-11-16: the manufacturer description says "Included are 7 premium accessories …" (reachable today — `5d6d2254` could not reach it on 11-15) and the Amazon listing title says "Six Cooking Accessories Included"; the stored P2 title is NOT the title served today, while P1's and P3's reproduce verbatim. P2's `Included accessories` row is now `conflict` with both figures, both sources (M3 + M4) and read dates on every surface; a `title_note` on P2 records both title observations with read dates; the ledger P-02 row and the editorial guide sentences that leaned on "seven"/"partial" were aligned. | `marketing/data/facts.json`, `marketing/data/editorial.json`, `ledger/products.json`, regenerated `marketing/*.html`, `pages/products.html`, `assets/js/data.js` |
+| **CR-C** | **CLOSED — already satisfied in the current tree; no duplicate edit made.** The sentence exists since commit `876df57` (2026-11-15 12:12 UTC) in `products/P3/gap` and renders on `marketing/articles/p3.html` ("One manufacturer URL sells both the 5 Qt and the 8 Qt model. Every row in this table is the 8 Qt variant, …"), with corroboration in the Capacity row note and the comparison table. The CR was filed against a pre-merge read. Re-verified against the live Chefman page 2026-11-16 (5 Qt / 8 Qt size selector, per-model bullets). | none needed — evidence: `marketing/articles/p3.html`, `docs/verification-8fb7c287.md` §5 |
+| **CR-D** | **CLOSED — intentional, no generator change.** `tools/build_sitemap.py` documents "WHAT COUNTS AS PUBLISHED: Every `*.html` file …" — a sitemap lists HTML destinations; `docs/*.md` are Markdown working records, reachable but deliberately not advertised to crawlers. Emitting Markdown URLs would break the generator's own `--check` contract for no benefit. Hand-editing `sitemap.xml` remains forbidden (it is derived; re-run the builder instead). | none — evidence: `tools/build_sitemap.py` docstring; `sitemap.xml` regenerated, 139 URLs, unchanged |
+
+Residual, non-blocking, recorded in `docs/verification-8fb7c287.md` §8: the `A00TEST12`/`C00TEST12` HTTP-500
+vs homepage-redirect discrepancy (cause unknown, no published claim depends on it); historical session
+records keep their dated wording on purpose; `EXECUTIVE_SUMMARY.md`'s F-28 sentence reviewed and left as
+written (it documents that specific control comparison).
+
+
 ### Closing record — T42 — `arena/5d6d2254-zone2`
 
 | Item | Value |
