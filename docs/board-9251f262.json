@@ -1,0 +1,337 @@
+{
+  "$schema": "zone2/front-board/1.0",
+  "note": "Decision-board content for the 2026-11-16 front-of-house build (T50, session arena/9251f262-zone2). Two boards: SUGGESTIONS (things we could do, each with options and a recommendation) and QUESTIONS (what we know, what we do not, and the action that would close each gap). Every suggestion carries status 'Proposed - awaiting owner decision': nothing on this board has been implemented. A factual claim appears here only when an official source states it; that source is named in 'source' with its URL. Where no source states a value, the field is an explicit null and the row says so.",
+  "generated_by": "tools/build_front.py",
+  "compiled_utc": "2026-11-16",
+
+  "sources": {
+    "S02": { "name": "Amazon Associates Program Policies", "url": "https://affiliate-program.amazon.com/help/operating/policies", "page_stated_update": "2026-04-14" },
+    "S01": { "name": "Amazon Associates Operating Agreement", "url": "https://affiliate-program.amazon.com/help/operating/agreement", "page_stated_update": "2025-10-15" },
+    "S04": { "name": "Associates Program Standard Commission Income Statement (Table 1)", "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "page_stated_update": null },
+    "S24": { "name": "Amazon: How do I build a simple text link to a specific item on Amazon?", "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC", "page_stated_update": null },
+    "S23": { "name": "Amazon Associates application review process", "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM", "page_stated_update": null },
+    "S06": { "name": "Creators API - PA-API 5.0 deprecation notice", "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation", "page_stated_update": null },
+    "S41": { "name": "Google Search Essentials - spam policies", "url": "https://developers.google.com/search/docs/essentials/spam-policies", "page_stated_update": "2026-08-28" },
+    "S40": { "name": "Google - Creating helpful, reliable, people-first content", "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "page_stated_update": "2026-10-05" },
+    "S39": { "name": "Google - Using generative AI content on your site", "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content", "page_stated_update": "2026-10-01" },
+    "S12": { "name": "Google - Qualify your outbound links to search engines", "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links", "page_stated_update": "2025-12-10" },
+    "S11": { "name": "FTC - Disclosures 101 for Social Media Influencers", "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "page_stated_update": null }
+  },
+
+  "suggestions": [
+    {
+      "id": "SG-T50-01",
+      "area": "Site design",
+      "title": "Lead with the products, not with the verification process",
+      "summary": "The landing page that shipped before this pass opened with how many links resolved and how many were confirmed. That is operator reporting, and a reader arriving from search does not care. This pass moves the products, the verdicts and the articles above the fold and demotes the verification state to a single strip. No verified value moves or changes.",
+      "options": [
+        { "label": "A", "text": "Keep the operator dashboard as the landing page and put the publication one click away.", "cost": "No build cost", "tradeoff": "Readers arriving from search bounce on a page that talks about process instead of products." },
+        { "label": "B", "text": "Rebuild the landing page as a publication front page; keep every dashboard surface reachable from the footer and a single navigation group.", "cost": "One pass, no data change", "tradeoff": "The owner loses the at-a-glance verification state on the first screen; it moves to a strip lower down." },
+        { "label": "C", "text": "Split into two separate sites with two separate domains.", "cost": "Two codebases, two deploys", "tradeoff": "Doubles the maintenance and splits whatever authority the domain earns." }
+      ],
+      "recommendation": "B",
+      "waits_on": [],
+      "source": null,
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-02",
+      "area": "Revenue",
+      "title": "Put an Associates tag on every product link",
+      "summary": "Amazon's own help page gives the qualifying link format as http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID. None of the three links supplied carries a tag parameter, so as supplied they cannot attribute a sale to any Associates account. Until a tag exists every outbound link on this site is a preview link marked rel=\"sponsored nofollow\" and earns nothing.",
+      "options": [
+        { "label": "A", "text": "Leave the links untagged and label them plainly as non-monetised preview links.", "cost": "None", "tradeoff": "The site cannot earn. Everything downstream - click tracking, conversion, optimisation - stays theoretical." },
+        { "label": "B", "text": "Ask the owner for the Associates ID and marketplace, then regenerate every link through the existing link builder with the tag applied.", "cost": "One configuration value", "tradeoff": "Requires the owner to supply a credential this project must never invent." },
+        { "label": "C", "text": "Register a new Associates account for this project.", "cost": "Application + review", "tradeoff": "Amazon reviews the site before approval; see the application-review criteria." }
+      ],
+      "recommendation": "B",
+      "waits_on": ["Q-T50-02", "Q-T50-03", "Q-T50-04"],
+      "source": "S24",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-03",
+      "area": "Identity",
+      "title": "Confirm the three products inside Associates Central",
+      "summary": "Each supplied link resolves, reproducibly, to one live Amazon listing. That destination is an observation of the link's behaviour, not a statement about what the brief meant: the supplied codes are nine characters, an Amazon ASIN is ten, and no public Amazon document binds a short-link code to a product. Confirming the three ASINs inside the Associates account is the only step that turns 'the listing this link opens' into 'the product this campaign promotes'.",
+      "options": [
+        { "label": "A", "text": "Keep writing destination-first: describe the listings the links open and say on every page that the mapping is unconfirmed.", "cost": "None", "tradeoff": "Honest, but every article is one ASIN correction away from being about the wrong product." },
+        { "label": "B", "text": "Have the owner open the three links while signed in to Associates Central and record the ASIN each one lands on, then re-verify against the Creators API.", "cost": "Ten minutes of owner time", "tradeoff": "None. This is the cheapest unblock available." },
+        { "label": "C", "text": "Re-supply the three products as full ten-character ASINs or complete product URLs.", "cost": "One message", "tradeoff": "Discards the short links, which may carry tracking the owner wants." }
+      ],
+      "recommendation": "B",
+      "waits_on": ["Q-T50-01"],
+      "source": "S24",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-04",
+      "area": "Organic traffic",
+      "title": "Publish question-shaped guides, then measure whether anyone arrives",
+      "summary": "The eight published guides are built around the questions a buyer actually types - how many quarts, two baskets or one, will it fit, does the Hi-Fry number mean anything - rather than around product names. That is the shape Google's own guidance rewards: it describes helpful content as content created for people, and it names thin affiliate pages with no added value as a spam pattern to avoid. Demand and search-volume figures for these topics are left blank everywhere on this site: no official source states them and guessing them is exactly the failure mode the guidance warns about.",
+      "options": [
+        { "label": "A", "text": "Stop at the eight guides already published.", "cost": "None", "tradeoff": "Eight pages is a small surface for a search engine to find." },
+        { "label": "B", "text": "Set a publishing cadence, add each new guide to the existing sitemap and feed, and turn on real analytics so the next topic is chosen from measured queries instead of instinct.", "cost": "Recurring writing time", "tradeoff": "Needs analytics to be genuinely useful rather than decorative." },
+        { "label": "C", "text": "Buy keyword-volume data and pick topics purely on volume.", "cost": "Paid tool", "tradeoff": "Volume data is third-party, not an official source; under this project's rule it cannot be published as fact." }
+      ],
+      "recommendation": "B",
+      "waits_on": ["Q-T50-08", "Q-T50-11"],
+      "source": "S40",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-05",
+      "area": "Measurement",
+      "title": "Turn on click and conversion measurement before writing anything else",
+      "summary": "Five events are defined in the measurement plan and zero are live, because the site is static and nothing records an outbound click. Without them every optimisation decision is a guess. The measurement page states this plainly rather than presenting a dashboard of invented numbers.",
+      "options": [
+        { "label": "A", "text": "Leave measurement off and keep saying so.", "cost": "None", "tradeoff": "No campaign can be optimised, which is a core requirement of the brief." },
+        { "label": "B", "text": "Add a privacy-preserving outbound-click counter and a self-hosted analytics endpoint; record the five defined events.", "cost": "Small build", "tradeoff": "Needs a hosting decision - GitHub Pages serves static files only." },
+        { "label": "C", "text": "Use Amazon's own reports as the only source of truth and infer on-site clicks from them.", "cost": "None", "tradeoff": "Amazon reports purchases, not the clicks that preceded them, so the funnel stays half invisible." }
+      ],
+      "recommendation": "B",
+      "waits_on": ["Q-T50-08", "Q-T50-10"],
+      "source": null,
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-06",
+      "area": "Revenue",
+      "title": "Settle which commission band actually applies to these three listings",
+      "summary": "Table 1 of the Standard Commission Income Statement lists Kitchen at a fixed 4.50% and All Other Categories at 4.00%. All three resolved listings sit in the Air Fryers browse node, which is inside Home & Kitchen - but the band that applies to a given ASIN is a property of the listing, not of the browse path, and only the Associates account can read it. The site publishes both figures and marks the choice as open rather than picking one.",
+      "options": [
+        { "label": "A", "text": "Assume 4.50% because the browse path says Kitchen.", "cost": "None", "tradeoff": "The browse path is not the rate field. Publishing an assumed rate is the kind of value this project refuses to invent." },
+        { "label": "B", "text": "Read the rate per ASIN from the Associates account or the Creators API and store it as a verified row.", "cost": "One authenticated lookup", "tradeoff": "Needs the Associates credential." },
+        { "label": "C", "text": "Publish both bands and the condition that separates them, permanently.", "cost": "None", "tradeoff": "Accurate but stalls any revenue model that needs a single number." }
+      ],
+      "recommendation": "B",
+      "waits_on": ["Q-T50-05", "Q-T50-02"],
+      "source": "S04",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-07",
+      "area": "Compliance",
+      "title": "Keep the disclosure above the fold on every page, including this one",
+      "summary": "The Operating Agreement requires the affiliate disclosure to be clear and conspicuous; the FTC's guidance for influencers says the same in plain terms - disclose it where people will actually see it, not buried at the bottom. Every page in this build carries the disclosure in a strip directly under the masthead, before any product content.",
+      "options": [
+        { "label": "A", "text": "Footer-only disclosure, as most affiliate sites do.", "cost": "None", "tradeoff": "Fails the 'clear and conspicuous' standard the agreement and the FTC both set." },
+        { "label": "B", "text": "Disclosure strip under the masthead on every page, repeated in the footer.", "cost": "None", "tradeoff": "Costs about forty pixels of above-the-fold space." },
+        { "label": "C", "text": "Disclose once on a dedicated page and link to it.", "cost": "None", "tradeoff": "A reader who lands on a product page never sees it." }
+      ],
+      "recommendation": "B",
+      "waits_on": [],
+      "source": "S11",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-08",
+      "area": "Compliance",
+      "title": "Keep every outbound product link marked as sponsored",
+      "summary": "Google's guidance on qualifying outbound links says links that are part of a paid arrangement should be marked so the paid relationship is not passed to search engines. Every product link in this build carries rel=\"sponsored nofollow\", and the deploy gate fails the build if a page stops doing it.",
+      "options": [
+        { "label": "A", "text": "Mark only some links, or mark them after the site starts earning.", "cost": "None", "tradeoff": "Inconsistent markup is the exact pattern the guidance is written against." },
+        { "label": "B", "text": "Mark every outbound product link now and keep the check in CI.", "cost": "None", "tradeoff": "None." }
+      ],
+      "recommendation": "B",
+      "waits_on": [],
+      "source": "S12",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-09",
+      "area": "Content",
+      "title": "Never publish a price, and say on the page why the price is missing",
+      "summary": "The program policies restrict displaying prices to content Amazon itself serves through links or API responses. Manufacturer pages do list prices; this site still publishes none. A reader who sees a dash instead of a price needs one sentence explaining it, otherwise the dash reads as broken research rather than as a rule being followed.",
+      "options": [
+        { "label": "A", "text": "Show the manufacturer's list price with a note that it may differ from Amazon's.", "cost": "None", "tradeoff": "Breaks the program policy the rest of the build is designed around." },
+        { "label": "B", "text": "Print a dash with a one-line reason beside it, and link to the policy that forces it.", "cost": "None", "tradeoff": "Some readers will still leave to check the price." },
+        { "label": "C", "text": "Render prices only inside an official Amazon widget the account is entitled to use.", "cost": "Widget configuration", "tradeoff": "Depends on an approved Associates account and on the widget being available for the marketplace." }
+      ],
+      "recommendation": "B",
+      "waits_on": ["Q-T50-06"],
+      "source": "S02",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-10",
+      "area": "Catalogue",
+      "title": "Decide whether this is a three-product site or a category site with three products in it",
+      "summary": "Everything published so far covers three air fryers. The platform brief asks for niche discovery at scale - trending products, competition analysis, continuous optimisation - which is a different shape of site than three hand-checked reviews. Which one this is determines whether the next unit of work is a fourth article or a research pipeline.",
+      "options": [
+        { "label": "A", "text": "Stay a three-product review site and make it excellent.", "cost": "None", "tradeoff": "Leaves most of the platform brief - automation, niche discovery, scale - unbuilt." },
+        { "label": "B", "text": "Treat the three as the seed set: build the research pipeline next, and let it propose the fourth through the twentieth product via this same decision board.", "cost": "Pipeline build", "tradeoff": "Needs the Creators API credential; PA-API 5.0 is deprecated and no longer the route in." },
+        { "label": "C", "text": "Expand by hand, one product at a time, on owner request.", "cost": "Writing time per product", "tradeoff": "Does not scale to the automation the brief asks for." }
+      ],
+      "recommendation": "B",
+      "waits_on": ["Q-T50-12", "Q-T50-07"],
+      "source": "S06",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-11",
+      "area": "Freshness",
+      "title": "Set a re-verification cadence and print the date on every page",
+      "summary": "This pass found a real drift: the Amazon listing title stored in the record for the 26-quart Emeril oven is no longer the title Amazon serves. The specification rows were unaffected, but a record that is never re-read will eventually be wrong. A stated cadence plus a visible 'last checked' date is what keeps a sourced site honest over time.",
+      "options": [
+        { "label": "A", "text": "Re-verify only when something looks wrong.", "cost": "None", "tradeoff": "Drift is invisible until it matters." },
+        { "label": "B", "text": "Re-read every official source on a fixed schedule, record what changed, and print the date on the page.", "cost": "Recurring verification time", "tradeoff": "None beyond the time." },
+        { "label": "C", "text": "Automate the re-read and fail the build when a recorded quote no longer appears on the source page.", "cost": "Build + scheduled runner", "tradeoff": "Needs a scheduler; GitHub Actions can do this on a cron." }
+      ],
+      "recommendation": "C",
+      "waits_on": ["Q-T50-11"],
+      "source": null,
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T50-12",
+      "area": "Site design",
+      "title": "Hold the writing to a standard the build can enforce",
+      "summary": "The brief's complaint was that the site read as generated. The fix is not a different tone - it is a rule set the build can fail on: no scene-setting opener, no adjective where a number belongs, no recycled manufacturer copy, opinion in a labelled box away from the measurements, and every number traceable to a page a reader can open. The existing verification scripts already enforce several of these; this suggestion is to keep them and to add the ones that are still only habits.",
+      "options": [
+        { "label": "A", "text": "Treat writing quality as a review-time judgement.", "cost": "None", "tradeoff": "Judgement drifts, especially when the volume rises." },
+        { "label": "B", "text": "Keep the enforced rules, publish the full rule set on the method page, and negative-test each one so the check cannot quietly stop firing.", "cost": "None", "tradeoff": "Rules constrain phrasing, which some writers find limiting." },
+        { "label": "C", "text": "Generate articles without a rule set and edit afterwards.", "cost": "None", "tradeoff": "This is the failure mode the brief is complaining about." }
+      ],
+      "recommendation": "B",
+      "waits_on": [],
+      "source": "S39",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    }
+  ],
+
+  "questions": [
+    {
+      "id": "Q-T50-01",
+      "question": "Which three products did the brief actually mean?",
+      "status": "open",
+      "what_we_know": "Each supplied link resolves, reproducibly and across six sessions on four dates, to one live Amazon listing: B0CDY277D3, B09B7SB46R and B08DKYBTPH. An unknown code on the same short-link service does not return a product, so the codes are honoured lookups rather than ignored tokens.",
+      "what_is_missing": "No public Amazon document binds a link.amazon short code to a product. The codes are nine characters and an ASIN is ten, so the token itself is not an ASIN and cannot be decoded from outside the account that minted it.",
+      "how_to_discover": "Open each of the three supplied links while signed in to the Associates account the links were created in, and record the ASIN from the resulting page or from the account's own link report.",
+      "blocks": ["SG-T50-03", "SG-T50-06"],
+      "source": "S24"
+    },
+    {
+      "id": "Q-T50-02",
+      "question": "What is the Associates tag for this project?",
+      "status": "open",
+      "what_we_know": "None of the three resolved URLs carries a tag parameter. Amazon's documented qualifying link format requires one: http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID.",
+      "what_is_missing": "The tag itself. It is an account credential, so it cannot be looked up, guessed or inferred - inventing one would attribute sales to a stranger's account.",
+      "how_to_discover": "The account holder reads it from Associates Central and supplies it. There is no other route.",
+      "blocks": ["SG-T50-02", "SG-T50-05", "SG-T50-06"],
+      "source": "S24"
+    },
+    {
+      "id": "Q-T50-03",
+      "question": "Which marketplace is this campaign for?",
+      "status": "open",
+      "what_we_know": "All three supplied links resolve to amazon.com, the US store. Table 1 and the commission bands are marketplace-specific.",
+      "what_is_missing": "Confirmation that the US store is the intended target rather than an artefact of where the links were minted.",
+      "how_to_discover": "Owner confirms, or the Associates account's own marketplace setting settles it.",
+      "blocks": ["SG-T50-02", "SG-T50-06"],
+      "source": "S04"
+    },
+    {
+      "id": "Q-T50-04",
+      "question": "Is the site already approved into the Associates program?",
+      "status": "open",
+      "what_we_know": "Amazon publishes review criteria for new applications - a site with substantial original content that is generally recent, and a guideline of at least ten posts.",
+      "what_is_missing": "Whether an application has been made, is pending, or has been approved. No Associates ID exists anywhere in this repository, which is consistent with 'not yet' but does not prove it.",
+      "how_to_discover": "Owner checks Associates Central, or applies; the review outcome is visible only inside the account.",
+      "blocks": ["SG-T50-02", "SG-T50-10"],
+      "source": "S23"
+    },
+    {
+      "id": "Q-T50-05",
+      "question": "Which commission band applies to each of the three ASINs?",
+      "status": "open",
+      "what_we_know": "Table 1 fixes Kitchen at 4.50% and All Other Categories at 4.00%. All three listings sit under Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+      "what_is_missing": "The rate field for the individual ASIN. A browse path is navigation, not the rate classification; only the account or an authenticated API response states it.",
+      "how_to_discover": "Read it per ASIN from the Associates account or from a Creators API response once credentials exist.",
+      "blocks": ["SG-T50-06"],
+      "source": "S04"
+    },
+    {
+      "id": "Q-T50-06",
+      "question": "May this site display a price?",
+      "status": "answered",
+      "what_we_know": "No. The program policies restrict the display of prices to content Amazon serves through its own links or API responses. Every price cell on this site is therefore a dash with the reason printed beside it.",
+      "what_is_missing": "Nothing. The rule is published and the build enforces it.",
+      "how_to_discover": "Already answered by the source; re-read each verification cycle in case the policy changes.",
+      "blocks": [],
+      "source": "S02"
+    },
+    {
+      "id": "Q-T50-07",
+      "question": "May this site display star ratings and review counts?",
+      "status": "answered",
+      "what_we_know": "Only from content Amazon serves through its API. The ratings visible on a product page may not be republished from a plain fetch. No API credential exists, so the cells stay blank.",
+      "what_is_missing": "The credential. The rule itself is settled.",
+      "how_to_discover": "Register for the Creators API - it replaced the deprecated PA-API 5.0 - and read ratings from an authenticated response.",
+      "blocks": ["SG-T50-10"],
+      "source": "S06"
+    },
+    {
+      "id": "Q-T50-08",
+      "question": "How many people visit the site, and where do they come from?",
+      "status": "open",
+      "what_we_know": "Nothing. Five events are defined in the measurement plan and none is live, because the site is static and records nothing.",
+      "what_is_missing": "All of it. No traffic, click, conversion or revenue figure exists, which is why none appears anywhere on this site.",
+      "how_to_discover": "Turn on measurement (SG-T50-05) and wait for real traffic. Any figure produced before then would be invented.",
+      "blocks": ["SG-T50-04", "SG-T50-05"],
+      "source": null
+    },
+    {
+      "id": "Q-T50-09",
+      "question": "Who is the reader, and which country are they shopping in?",
+      "status": "open",
+      "what_we_know": "The listings are US-store listings with US voltage (120 V) and US units (quarts, degrees Fahrenheit).",
+      "what_is_missing": "Whether the intended audience is US-only. It matters because the commission bands, the voltage and the unit conventions are all marketplace-specific.",
+      "how_to_discover": "Owner decision, or inferred from analytics once measurement is live - not before.",
+      "blocks": ["SG-T50-04"],
+      "source": "S04"
+    },
+    {
+      "id": "Q-T50-10",
+      "question": "Does this project have a host that can run code, or only GitHub Pages?",
+      "status": "open",
+      "what_we_know": "The site is currently served from GitHub Pages, which serves static files and runs no application code.",
+      "what_is_missing": "Whether a back end is available or planned. It determines whether click tracking, scheduled re-verification and an automated publishing pipeline are possible at all.",
+      "how_to_discover": "Owner decision. GitHub Actions can cover scheduled jobs without a server; click tracking needs somewhere to receive the event.",
+      "blocks": ["SG-T50-05", "SG-T50-11"],
+      "source": null
+    },
+    {
+      "id": "Q-T50-11",
+      "question": "How often should the official sources be re-read?",
+      "status": "open",
+      "what_we_know": "This pass re-read every load-bearing source on 2026-11-16 and found one drift: the 26-quart Emeril listing's stored Amazon title is no longer the title Amazon serves. The program policies page states its own update date (2026-04-14) and the Operating Agreement states its (2025-10-15), so drift is detectable when a page states a date.",
+      "what_is_missing": "A decision on cadence, and a scheduled runner to enforce it.",
+      "how_to_discover": "Owner sets the cadence; a GitHub Actions schedule can then run the existing verifiers and fail on drift.",
+      "blocks": ["SG-T50-11"],
+      "source": "S02"
+    },
+    {
+      "id": "Q-T50-12",
+      "question": "Is the automation in the brief in scope now, or after the content proves out?",
+      "status": "open",
+      "what_we_know": "The brief asks for automated product research, trend detection, pricing and competition analysis, content generation, link management, click and conversion tracking and continuous optimisation. The research and scoring modules exist in the repository and are data-gated: they return 'insufficient data' rather than a guess.",
+      "what_is_missing": "Sequencing. Every one of those modules needs the Associates credential and, for anything live, a host.",
+      "how_to_discover": "Owner picks a launch path; the three named paths are published and each states what choosing it does not authorise.",
+      "blocks": ["SG-T50-10", "SG-T50-04"],
+      "source": null
+    }
+  ]
+}
