@@ -5228,3 +5228,34 @@ still checked, so the gate keeps failing when a hand-typed count drifts — but 
 ### Verification channel note
 
 Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live checks above used `fetch_page` and GitHub's API (`gh`), never an unverified assumption. Pages deployment was confirmed via the Actions runs at the merge SHA and the Pages API `status: built`, not inferred from a badge.
+
+---
+
+## Session claim — T50 (current-state verification and close-out) — `arena/ebc8a709-zone2` (session `ebc8a709`, 2026-11-16 UTC)
+
+**Status: IN PROGRESS.** Review the already-deployed site and repository on the pinned Arena branch, rerun the available gates, re-fetch high-impact official sources (the three supplied short links, Associates Agreement and Policies, FTC disclosure guidance, and Google Search spam policy), verify GitHub Pages build/deploy status, and record the results plus any fresh irregularities. This is a documentation-only audit: no product facts, canonical registers, site data, or navigation will be changed.
+
+| Item | Value |
+| --- | --- |
+| Task | **T50** — current-state review and verification close-out for the user's 2026-11-16 request |
+| Owner | `ebc8a709` (`arena/ebc8a709-zone2`) |
+| File scope | `COORDINATION.md` (append-only) and new `docs/review-2026-11-16.md` only |
+| Branch rule | Arena pins this session to `arena/ebc8a709-zone2`; the request's `session-<id>/<task>` branch convention cannot be followed without violating the pinned-branch rule, so no branch switch/create will be attempted. |
+| Initial state | HEAD `004a040bf5cad721ad49b84916d27d0f61f31e5c` (same as `main`); working tree clean; no open PRs reported by GitHub at start. |
+
+**Claim commit and push are made immediately before writing the audit report.**
+
+## Closing record — T50 (current-state verification and close-out) — `arena/ebc8a709-zone2` (session `ebc8a709`, 2026-11-16 UTC)
+
+**Status: DONE.** The site and repository were re-reviewed; a dated report was added at `docs/review-2026-11-16.md`. No product facts, canonical registers, site data, or navigation were changed.
+
+| Item | Result |
+|---|---|
+| Task | **T50 → done** |
+| Files changed | `COORDINATION.md` (append-only), `docs/review-2026-11-16.md` |
+| Official source re-fetches | Three supplied short links and their current Amazon product destinations; Amazon Associates Policies (updated 2026-04-14); Operating Agreement (updated 2025-10-15); FTC Disclosures 101; Google Search spam policies. See the report for exact URLs and bounded observations. |
+| Local gates | `ci_replay` 35/35; validate data/decisions/audit/console/discovery all clean; site audit 141 pages passed; SEO audit 139 sitemap URLs passed; head metadata 87 pages/0 problems (44 report-only companion canonical omissions); readiness tests 13/13; pipeline 15/15; CSS URL check 0 broken. |
+| GitHub Pages | API `status: built`, source `main` `/`; workflow run **43891405619** has both Build and verify and Deploy to GitHub Pages successful. |
+| Irregularities | Supplied tokens remain 9-character/unconfirmed mappings; no Associates tag/account access; no live analytics/events or substantiated performance/trend metrics; companion metadata report remains as previously documented. All are linked in the public Flagged for Review pages and in the new dated review report. |
+| No owner access | No connected apps or Associates Central credentials were available. Those account-specific states were left unknown; no credentials were requested. |
+| Branch constraint | Work remained on the Arena-pinned `arena/ebc8a709-zone2`; no branch was created or switched. |
