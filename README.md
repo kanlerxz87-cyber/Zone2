@@ -69,8 +69,8 @@ moving between the shop front and the operator pages.
 These eight pages are **generated**, not hand-written: `tools/build_front.py` renders them from
 `marketing/data/facts.json` and `docs/board-9251f262.json`, so no figure is re-typed and every row
 carries the official page that states it. `tools/build_front.py --check` fails CI if a committed page
-has drifted from the dataset; `tools/verify_front.py` re-reads the pages on disk and enforces eight
-rules (per-row sourcing, blanks carry a written reason, no prices, disclosure above the data, sponsored
+has drifted from the dataset; `tools/verify_front.py` re-reads the pages on disk and enforces the rules above
+(per-row sourcing, blanks carry a written reason, no prices, disclosure above the data, sponsored
 product links, links resolve, canonical matches the path, no invented performance figures).
 
 **No verified value changed.** No ledger row, no `assets/js/data.js` entry, no product attribute. The

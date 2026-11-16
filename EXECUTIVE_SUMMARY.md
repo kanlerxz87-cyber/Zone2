@@ -1012,7 +1012,7 @@ Four things, and they are in tension with each other, so this section states whi
 | **Dedicated decision boards.** | `suggestions.html` (12 suggestions, each with options A/B/C, cost, trade-off, a recommendation, the question it waits on, and an explicit *Proposed — awaiting owner decision* status) and `questions.html` (12 questions, each with what is known, what is missing, and the action that would close it). The two cross-link. |
 | **Category subpages.** | `guides/` with four reader categories — basket air fryers, air-fryer ovens, buying guides, method — each listing the published pieces and, for the two product categories, the full sourced specification tables. |
 | **Every figure still comes from the dataset.** | `tools/build_front.py` renders all eight new pages from `marketing/data/facts.json`, so no number was re-typed. Every row ends in a link to the official page that states it, or a dash with the reason printed beside it. |
-| **Two new gates.** | `tools/build_front.py --check` (pages are reproducible from the dataset) and `tools/verify_front.py` (8 checks: per-row sourcing, blanks carry a reason, no prices, disclosure above the data, sponsored links, links resolve, canonical matches path, no invented performance figures). CI is now 37 steps, all green. |
+| **Two new gates.** | `tools/build_front.py --check` (pages are reproducible from the dataset) and `tools/verify_front.py` (per-row sourcing, blanks carry a reason, no prices, disclosure above the data, sponsored links, links resolve, canonical matches path, no invented performance figures). CI is now 37 steps, all green. |
 
 ### What did not change
 
