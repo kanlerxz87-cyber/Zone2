@@ -6097,3 +6097,36 @@ the table and a duplicated decide-first entry, and asserts each fires.
 brief's own summary printed a stale count, and the reason it was caught within an hour rather than never
 is that a rule recomputed it. `RR-01` and `RR-05` have no such rule, and their drift grew from 22 pages to
 34 while this session worked.
+
+## T57 — merge and deploy result (session `dc72a69e`, 2026-11-16)
+
+| | |
+|---|---|
+| **PR #145** | <https://github.com/kanlerxz87-cyber/Zone2/pull/145> — merged without waiting for approval |
+| **Merge commit** | `f388664` on `main` |
+| **Pages deploy** | <https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43938149056> — success |
+| **PR #149** (follow-up) | <https://github.com/kanlerxz87-cyber/Zone2/pull/149> — merged |
+| **Merge commit** | `3007e5b` on `main` |
+| **Pages deploy** | <https://github.com/kanlerxz87-cyber/Zone2/actions/runs/43938918271> — success |
+| **Live read-back** | Fetched and read; the two post-deploy defects are gone from the served page |
+
+**The Pages CDN gotcha, confirmed again from this session's side.** `9251f262` recorded it for `/` vs
+`/index.html`; it bites inside a namespace too. Fetching `https://kanlerxz87-cyber.github.io/Zone2/brief/`
+returned the **pre-fix** page for more than ten minutes after a green deploy: four Decide cards with two
+numbered "Decide 3", "138 of 138", "22 gates", "fourteen published surfaces". Appending `?cb=<string>`
+returned the correct page immediately — one Decide 3, "150 of 150", "43 of 43", "16 published surfaces".
+
+**Anyone verifying a Pages deploy on this repository should not trust the first clean-URL fetch.** Read
+back with a cache-busting query before concluding a fix did or did not ship. A session that had only read
+the clean URL would have concluded the fix failed, or — worse — that the original page had been right.
+
+### What is now published
+
+Nine pages at <https://kanlerxz87-cyber.github.io/Zone2/brief/>: executive summary, design prompt (measured
+diagnosis, three rewrites of real published copy, design system, paste-ready prompt), 12 article proposals,
+the 12-proposal choose-a-path board, the information register (13 answered / 10 deliberately empty), the
+line-by-line review, 36 verification checks, 22 sourced quotes, and 8 flags.
+
+**Nothing on the board is implemented.** The owner's next action is recorded in three places and takes one
+sign-in: supply the Associates ID. Until then no link on the site can attribute a purchase, and the
+application cannot be reviewed.
