@@ -5404,3 +5404,67 @@ deviation every prior session recorded.
 **Claim commit and push happen immediately after this record, before any non-coordination edit.**
 
 | Renumbering trail | claimed **T50** → **T52** (T50 shipped by `ebc8a709` PR #131; T51 shipped by `970d11d6`). Nothing of either session's record was edited; this claim's original T50 label is kept visible above. |
+
+## Closing record — T50 (reader-conversion + decision-board wave) — `arena/7c1511ee-zone2` (session `7c1511ee`, 2026-11-16 UTC)
+
+**Status: DONE** (pending PR merge + deploy confirmation, recorded below once known).
+
+| Item | Result |
+|---|---|
+| Task | T50 — claimed above; this record supersedes its "in progress" status |
+| Branch | `arena/7c1511ee-zone2`, base `004a040` (merge of PR #130) |
+| New surfaces | `review.html`, `review-decide.html`, `review-questions.html`, `review-trace.html`, `review-ideas.html` |
+| New register | `docs/review-board.json` — 12 proposals `PS-01…PS-12`, 5 ideas `PS-13…PS-17`, 9 questions `PQ-01…PQ-09`, 16 requirement rows `RP-01…RP-16`, 13 measurements `PM-01…PM-13`, 9 design findings `PD-01…PD-09`, 5 irregularities `PI-01…PI-05`, 11 sources `S80…S90` |
+| New tooling | `tools/build_review_board.py` (`--check`), `tools/validate_review_board.py` (13 rules), `tools/test_review_board.py` (19 injected defects, each must fire; 1 control) |
+| New asset | `assets/css/review.css` — scoped; does not override `assets/css/style.css` |
+| Additive edits | `index.html` (1 nav entry, 3 footer links), `README.md` (one section), `EXECUTIVE_SUMMARY.md` (one addendum), `.github/workflows/pages.yml` (+3 steps: 35 → 38) |
+| Regenerated, never hand-edited | `sitemap.xml` (139 → 144 URLs), `release/index.html` (RR-10's derived `{measure}` count 140 → 144) |
+| Deliberately untouched | `ledger/**` (no fact, count or flag of another session changed), `marketing/**`, `assets/css/style.css`, `pages/**`, `console/**`, `audit/**`, `discovery/**`, `journal/**`, `decisions/**` (generated, and already hash-checked), `northstar/**`, `zone2/**`, `research-hub/**`, `affiliate-lab/**`, `revalidation/**`, `tools/head_meta.py`, `tools/build_site.py`, `tools/build_sitemap.py` (run, not edited) |
+
+### Board state at close (measured)
+
+- Open PRs at claim: **none**. No competing session, so no scope collision occurred and no takeover was needed.
+- `gh pr list --state open` at close: see the PR line recorded after push.
+
+### What this task found that was not previously published
+
+1. **The site's most-clicked element is styled as a footnote.** 71 of the 80 product links on the 20
+   marketing pages render as a citation chip (`M4 · www.amazon.com Amazon listing`). Measured, reproduced,
+   published as `PM-04` / `PD-01` / `PS-05`.
+2. **The hero's primary call to action leads to a page with zero product links.** `marketing/buying-guide.html`
+   contains no `amazon.com/dp/` link and explicitly declines to name a winner. `PM-05` / `PD-04` / `PS-04`.
+3. **No page carries a ranked shortlist** — the one page type a shopper arrives from search expecting.
+   `PM-06` / `PD-05` / `PS-04`.
+4. **Zero product images across 20 marketing pages**, and the image-rights question is still open (`PQ-08`).
+5. **The methodology vocabulary is 0.64× the product vocabulary** in visible prose (548 vs 860 words),
+   which quantifies the "reads like an audit trail" complaint. `PM-13` / `PD-03`.
+6. **Five boards published proposals and none recorded a decision.** The count is ambiguous (five carry
+   proposals, six files counting the hub), so both readings are published rather than one. `PM-09` /
+   `PD-09` / `PS-12` / `PI-03`.
+
+### Defects this session introduced and fixed (recorded, not hidden)
+
+`docs/verification-7c1511ee.md` §6 lists all five with the fix: the register initially sat in `decisions/`
+which is hash-checked as generated output (moved to `docs/`); a typed "5 flags" count in `README.md` was
+caught by `validate_data`; `PM-04` was published wrong (68 of 71) and corrected to 71 of 80 after an
+independent recount; `PM-08`/`PM-01`/`PM-02` went stale mid-session because this task changed the tree it
+was measuring, and now publish both the base-commit and after figures.
+
+### Verification performed
+
+- All three supplied links re-resolved live on 2026-11-16; destinations unchanged; still 9-character codes;
+  still no Associates `tag`. No claim made about `plpRedirect=mhFallback` beyond the recorded control.
+- 11 official pages fetched live and quoted verbatim in the register (Amazon policies ×3 sections,
+  Application Review Process ×2 sections, Google helpful content / spam policies / reviews, FTC ×2,
+  the three Amazon listings). Page-stated update dates recorded where the page prints one.
+- `ci_replay.py` **38/38** on the pushed commit, run twice: once in the working tree and once from a fresh
+  `git clone` of the pushed commit, so the result is not an artefact of working-directory state.
+- Every figure on the pages reproduced with a printed command; three were wrong and are corrected.
+
+### Sources (new to this task; the ledger's `S01…S43` are untouched)
+
+`S80` Associates Program Policies (page states Updated Apr 14 2026) · `S81`/`S82` Application Review
+Process (robust original content ≥10 posts; must own your website; content recent, generally 60 days) ·
+`S83` Google helpful content (Last updated 2026-10-05) · `S84` Google spam policies — thin affiliation ·
+`S85` Google write high quality reviews (Last updated 2025-12-10) · `S86`/`S87` FTC Disclosures 101
+(November 2019) · `S88`–`S90` the three Amazon listing pages.
