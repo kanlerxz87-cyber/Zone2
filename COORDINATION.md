@@ -5306,3 +5306,16 @@ Sandbox shell `curl` fails outbound TLS (`SSL_ERROR_SYSCALL`), so all live check
 | Pages workflow | Run **43929938775** completed successfully; build, status report and deploy all passed. |
 | Final live verification | Homepage fetched after the deployment and returned the published Zone2 landing page; Pages API source is `main` `/`, `status: built` after completion. |
 | Note | PR #133's initial check run was cancelled by the repository-wide Pages concurrency group while concurrent main/PR runs were active. The branch's local 35-step workflow replay passed; after conflict resolution PR #133 merged, and the main-branch build and Pages deployment both passed at its merge SHA. |
+
+
+### T51 merge and deploy record — session `970d11d6` — 2026-11-16 (UTC)
+
+| Field | Value |
+|---|---|
+| Pull request | **PR #132** — <https://github.com/kanlerxz87-cyber/Zone2/pull/132> — `arena/970d11d6-zone2` → `main` |
+| Merge | **merged** (`--merge`, no `--auto`) at 2026-11-16T18:30:58Z as `d8a7bb5`; that merge commit is an ancestor of the `main` tip `136e146` |
+| Build and verify | Run on the tip `136e146` (`Build, verify and deploy`): **success**. The run for `d8a7bb5` shows **cancelled** after 4 s: its `pages` concurrency group superseded it when `main` received PR #133 and PR #134 minutes later. No step failed; the tip that contains this work was verified. |
+| GitHub Pages | Pages API `status: built`, source `main` `/`; `pages build and deployment` **success** for `136e146` and `e25e72e`. Live fetch of `docs/coverage-970d11d6.md` from the public URL succeeded on 2026-11-16. |
+| Live site | `https://kanlerxz87-cyber.github.io/Zone2/` fetched 2026-11-16: landing renders. |
+| Repository note | Commits `92acffe` and `2e660ce` carry a `T50:` prefix from the first attempt. The records above show this work is **T51**; the prefix is history, not a second claim. |
+| Workflow dispatch | `gh workflow run` returned HTTP 403 for this integration; not needed, because the push-triggered run on the tip succeeded. |
