@@ -182,7 +182,7 @@
       "submitted_token": "B02NbDxp3",
       "submitted_token_length": 9,
       "submitted_token_is_asin": false,
-      "title_official": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+      "title_official": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
       "title_source": "https://www.amazon.com/dp/B09B7SB46R",
       "manufacturer": "Emeril Lagasse",
       "manufacturer_product_name": "EMERIL LAGASSE FRENCH DOOR AIRFRYER 360™ TOASTER OVEN COMBO, 26 QT",
@@ -337,7 +337,9 @@
           "label": "Chefman 8 Qt article"
         }
       ],
-      "title_note": "Amazon serves more than one title for B09B7SB46R, so a quoted listing title is perishable evidence carrying its read date. title_official was read 2026-11-14. The title served at the same URL on 2026-11-16 was: 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'. P1's and P3's titles reproduced verbatim on 2026-11-16; P2's did not. Re-read the listing before republishing any quoted title."
+      "title_note": "Amazon serves more than one title for B09B7SB46R, so a quoted listing title is perishable evidence carrying its read date. The string stored until 2026-11-16 was the 2026-11-14 read: 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.'. Two independent sessions on two days (5d6d2254 reading 2026-11-15 as defect D-1; 43eb0239 reading 2026-11-16 as flag F-41) observed the listing serving 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included', so the stored value was replaced with what the page serves and both readings are stamped here. P1's and P3's titles reproduced verbatim on 2026-11-16, which rules out a formatting difference in how this site reads titles. Re-read the listing before republishing any quoted title. (Closes the marketing half of CR-13; the revalidation/ and research-hub/ copies remain open there.)",
+      "title_last_read_utc": "2026-11-16",
+      "title_previously_read_utc": "2026-11-14"
     },
     {
       "key": "P3",
