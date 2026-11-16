@@ -358,7 +358,7 @@ jobs:
       # is not one of the row's own options; a recommendation that names no option; a
       # blocker that is not on the register it names; a money figure; a missing disclosure;
       # a missing canonical; a broken local link; and a same-page anchor that addresses
-      # nothing. Negative-tested 2026-11-16 against twelve injected defects before being
+      # nothing. Negative-tested 2026-11-16 against fourteen injected defects before being
       # added here — see docs/verification-dc72a69e.md.
       - name: Rebuild the design brief and confirm committed output is current
         run: python3 tools/build_brief.py --check
@@ -367,9 +367,11 @@ jobs:
         run: python3 tools/validate_brief.py
 
       # Same rule as the readiness board's negative tests: a gate that has only ever passed is
-      # a claim, not a control. Twelve injected defects must each fire, and the unmutated
-      # register must be clean.
-      - name: Design-brief gate negative tests (12 injected defects must each fire)
+      # a claim, not a control. Fourteen injected defects must each fire, and the unmutated
+      # register must be clean. Case 13 (prose that contradicts the measured table) is the
+      # one that caught a real defect on the deployed page: the state table said 150 pages
+      # while three prose bullets still said 138.
+      - name: Design-brief gate negative tests (14 injected defects must each fire)
         run: python3 tools/test_brief.py
 
       # ---- arena/f8e18ca8-zone2: the independent audit namespace ----

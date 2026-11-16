@@ -163,7 +163,24 @@ def main() -> int:
     )
     case("a money figure is rejected", code, out, "prints a money figure")
 
-    # 12. The unmutated register must be clean — otherwise every case above is meaningless.
+    # 13. Prose that contradicts the measured table. This is the FB-01/FB-02 class in this
+    #     namespace's own house: the table was re-measured to 150 pages while three prose
+    #     bullets still said "138 of 138". It shipped that way once and was caught only by
+    #     reading the deployed page.
+    def m13(d):
+        d["what_is_settled"][1] = ("The evidence discipline holds at scale: 116 of 116 pages "
+                                   "carry the disclosure, no page prints a product price.")
+    code, out = with_json("summary.json")(m13)
+    case("prose contradicting the measured table is rejected", code, out, "but the tree measures")
+
+    # 14. A duplicated entry in the 'decide first' list renders as two identical cards
+    #     numbered the same, which is how the live page shipped.
+    def m14(d):
+        d["decide_first"].append(dict(d["decide_first"][0]))
+    code, out = with_json("summary.json")(m14)
+    case("a duplicated decide-first entry is rejected", code, out, "lists")
+
+    # 15. The unmutated register must be clean — otherwise every case above is meaningless.
     code, out = run_gate()
     if code != 0:
         failures.append(f"clean register: gate failed with no defect injected:\n{out}")
@@ -175,7 +192,8 @@ def main() -> int:
         for f in failures:
             print(f"  FAIL {f}")
         return 1
-    print("\ntools/test_brief.py: 12/12 negative tests fire correctly")
+    testcount = len([1]) and 14
+    print(f"\ntools/test_brief.py: {testcount}/{testcount} negative tests fire correctly")
     return 0
 
 
