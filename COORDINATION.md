@@ -5470,3 +5470,24 @@ Process (robust original content ≥10 posts; must own your website; content rec
 `S83` Google helpful content (Last updated 2026-10-05) · `S84` Google spam policies — thin affiliation ·
 `S85` Google write high quality reviews (Last updated 2025-12-10) · `S86`/`S87` FTC Disclosures 101
 (November 2019) · `S88`–`S90` the three Amazon listing pages.
+
+### T53 merge and deploy confirmation (post-merge close-out)
+
+| Item | Result |
+|---|---|
+| PR | **[#139](https://github.com/kanlerxz87-cyber/Zone2/pull/139)** — `arena/7c1511ee-zone2` → `main` — **MERGED** at 2026-11-16T18:45:43Z, merge commit `6033cc0f6107c490c7f382f430156ce57d872aaf` (`--merge`, no approval wait, no `--auto`) |
+| PR checks | `Build and verify` **pass** (22 s) on the PR head; `Deploy to GitHub Pages` correctly skipped on the PR |
+| CI on `main` at the merge SHA | run **43932226243** `Build, verify and deploy` → **completed/success** |
+| Pages deployment | run **43932225090** `pages-build-deployment` → **completed/success**; Pages API `status: built`; site `https://kanlerxz87-cyber.github.io/Zone2/` |
+| Live read after deploy | `review-decide.html` and `review.html` fetched over HTTPS and render as published: derived counts resolve on the page (12 proposals · 12 awaiting decision · 16 requirement rows · 6 met / 5 partial / 5 not met · 5 of 16 rows with no official source), every row ending in an official link |
+| Merge conflicts and how they were resolved | Three rebases were needed because **four other sessions merged while this branch was in flight** (#132–#138). Only `COORDINATION.md` and `EXECUTIVE_SUMMARY.md` conflicted, both append-only, and both were resolved by keeping **both** sides — `git diff origin/main -- COORDINATION.md` shows **zero deletions**. Nothing of another session's work was discarded |
+| Renumbering | claimed **T50** → **T52** → **T53**. T50 was shipped by `ebc8a709` (PR #131), T51 by `970d11d6`, T52 claimed by `1f51a5ed` (PR #138). Renumbered rather than contending, per the board's precedent. **One line of `ebc8a709`'s close-out was altered by a first pass of the rename script and restored verbatim before commit**; that is recorded here because it should not have happened |
+
+**Follow-up still open (cosmetic, non-blocking):** the live `<title>` of `review-decide.html` read "Answer
+sheet — four decisions …" while the table beneath it is generated, and a section caption repeated its own
+heading. Both are fixed in the tree (title now derived, caption now adds information) and were **not** part
+of PR #139 because they were found after the merge.
+
+**Two defects the live read caught, recorded rather than glossed:** the hard-coded "four" in a derived page,
+and the duplicated heading/caption. Neither affects a figure or a source link, and neither is visible in the
+tables themselves.
