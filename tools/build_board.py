@@ -335,8 +335,9 @@ def page(title: str, description: str, here: str, body: str) -> str:
 </header>
 <div class="disclosure">
   <div class="wrap">
-    <strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} Product links on this site carry
-    no Associates tag yet, so nothing bought through them can be attributed — see
+    <strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} {sub("{{tagged}} of {{pages}}")} pages on this
+    site now carry an Associates tag; the rest, including all five of the supplied links, do not,
+    so most purchases made through them cannot be attributed — see
     <a href="flagged.html#FL-02">FL-02</a>.
   </div>
 </div>

@@ -6824,3 +6824,76 @@ Measured site handed over (excluding `board/`): **171 pages**, 171 disclosing, *
 | CR-3 | Derive the five typed counts in `brief/data/summary.json` | **Partly closed here** — the step count is now `{{gate_count}}`; the five state-table counts are still typed and were re-derived by hand again |
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | Open — 171 of 171 pages still collapse |
 | CR-5 | Agree one rule for what counts as a "tagged page" | **New.** Open — see FL-14. This session anchored `validate_brief.py` to `[?&]tag=`; the other three copies should be checked against the same rule. |
+
+---
+
+## T62 — follow-up record: session `arena/1bfbc559-zone2` (2026-11-17)
+
+**PR #158 merged** at 2026-11-17T17:18:58Z as `515cb7a`. Pages build **succeeded**
+(`status=built`, commit `515cb7a`), and `board/` is live at
+https://kanlerxz87-cyber.github.io/Zone2/board/.
+
+### The two red runs on the checks tab are not failures
+
+`pages.yml` declares `concurrency: group: pages, cancel-in-progress: true`. With four
+sessions merging into `main` inside an hour, each new push cancels the previous run
+*before any job is created*. Those runs report `conclusion: failure` with
+**`total_count: 0` jobs** — no job ever started, so nothing was ever tested, let alone
+broken. The run that was not cancelled passed, and the Pages deployment for `515cb7a`
+reports `built`. Worth knowing before anyone reads the checks tab as evidence: **a
+cancelled run and a failed run look the same in the default view and are not the same
+thing.**
+
+### Corrections made after the merge, because the live page contradicted itself
+
+Reading the live `board/` page after deployment turned up three inaccuracies that no
+gate could have caught, because all three were *true statements about numbers that had
+since moved*:
+
+1. **The board's own affiliate disclosure was false.** It read "Product links on this
+   site carry no Associates tag yet" — printed on all nine pages, while the same page's
+   own table said 7 of 171 pages carry one. Session `7264f3c2`'s tag application had
+   invalidated it. It now reads, derived: *"{{tagged}} of {{pages}} pages on this site now
+   carry an Associates tag; the rest, including all five of the supplied links, do not."*
+   A disclosure that understates the commercial relationship is the one kind of
+   inaccuracy on an affiliate site that is not merely untidy.
+2. **FL-14's evidence was itself the defect it describes.** Quoting the tag as it appears
+   in a URL made the page count as tagged under the loose rule. Reworded to describe the
+   pattern without emitting it.
+3. **The flag count in this session's PR body said 15; the register holds 14.** Corrected
+   here. FL-12 is marked resolved rather than deleted, so it still occupies a row — a
+   fixed defect that vanishes from the record teaches the next session nothing.
+
+### The recurring shape, stated once
+
+Every correction above, and every conflict in this branch, is the same thing: **a value
+recorded in one place and a tree that moved somewhere else.** It has now appeared in
+`ledger/readiness.json` (fixed with tokens by `0f5673ee`), in `brief/data/summary.json`
+(five typed counts, re-derived by hand three times), in this board's own flag titles
+(tokenised numbers, hand-written prose), and in a sentence in a page header.
+
+Tokens fix the arithmetic. They do not fix the prose that interprets the arithmetic, and
+they cannot — there is no token for "this is still true". The only defence is reading the
+rendered page after it is live, which is how all three of these were found.
+
+### Final state
+
+`ci_replay.py` **49/49** · `validate_board.py` clean · `test_board.py` **19/19** ·
+`build_board.py --check` 9 pages current · `build_brief.py` + `validate_brief.py` clean ·
+`test_brief.py` 14/14 · `audit_site.py` **180 pages, all 7 checks PASS** ·
+`sitemap.xml` 178 URLs · `release/index.html` 12 rows, **5 met / 7 open**.
+
+Measured: **171 pages** (excluding `board/`), 171 disclosing, **7 tagged**, 103 with
+`og:image`, 44 JSON-LD, 2462 Amazon links / 179 sponsored. **14 flags, 4 high**, 3 marked
+resolved or partly resolved and retained.
+
+### Cross-scope requests — final status
+
+| id | Request | Status |
+|---|---|---|
+| CR-1 | `ledger/readiness.json` counts drift | **Fixed** by `0f5673ee`, re-verified |
+| CR-2 | Ingest the two new links into `ledger/`, intent fields empty | **Open** — not my scope |
+| CR-3 | Derive the five typed counts in `brief/data/summary.json` | **Partly closed** — `{{gate_count}}` tokenised; the five state-table counts still typed |
+| CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Open** — 171 of 171 pages still collapse |
+| CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
+| CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
