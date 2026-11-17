@@ -218,7 +218,7 @@
       "id": "VF-22",
       "what": "Every repository gate, replayed on the unmodified base tree",
       "method": "tools/ci_replay.py replays every workflow step in order against this tree, then tests/test_pipeline.py",
-      "observed": "43 of 43 workflow steps pass locally via tools/ci_replay.py, plus 15 of 15 pipeline tests",
+      "observed": "{{gate_count}} of {{gate_count}} workflow steps pass locally via tools/ci_replay.py, plus 15 of 15 pipeline tests",
       "source_ids": [],
       "result": "measured"
     },

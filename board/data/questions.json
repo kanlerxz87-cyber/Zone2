@@ -1,0 +1,338 @@
+{
+  "note": "The register the brief asks for: a list of the questions that have to be answered before a decision on this project can be reasonably made, split by what we already have and what we do not. Three of these are answered, and the answers are printed. The rest are empty ON PURPOSE — an empty answer field is the register's way of saying the information does not exist yet, and tools/validate_board.py fails the build if a question whose state is 'open' carries an answer. Every open row names the action that would close it and who can close it. Nothing here is inferred.",
+  "as_of": "2026-11-17",
+  "state_vocabulary": {
+    "answered": "the answer is printed and sourced",
+    "open": "the answer does not exist yet; the field is empty and must stay empty",
+    "unanswerable-here": "the answer exists but only inside a system this workspace cannot sign in to"
+  },
+  "questions": [
+    {
+      "id": "BQ2-01",
+      "question": "Is 'shopnow047c-20' an issued, active Associates ID belonging to this account?",
+      "state": "unanswerable-here",
+      "known": "It is the first tracking ID any brief for this project has supplied. It matches the shape Amazon publishes for a special-link tag: the application-review page gives the example 'abcd-20' (BD-13). **Since this question was recorded, session `7264f3c2` applied it** — {{tagged}} of {{pages}} pages now carry the owner's tracking ID (shopnow047c-20) as a link parameter, the first real tag in the repository. That is an action taken elsewhere; it is recorded here because a reader of this row would otherwise believe nothing had happened.",
+      "not_known": "Whether the account exists, is enrolled, and is in good standing; whether this string is the ID that account was issued.",
+      "answer": "",
+      "how_to_close": "Sign in to Associates Central and read the ID from the account. It cannot be checked from any public page: Amazon states the ID is 'automatically generated when you apply for the Associates Programme' (BD-12), so there is no public register to look it up in.",
+      "who_can_close": "owner — one sign-in, no code",
+      "cost_if_left_open": "Every product link on the site stays unattributable, and the {{tagged}} links that now carry the tag cannot be confirmed to attribute to this account. RQ-22 cannot start.",
+      "blocks": [
+        "BS-01",
+        "RQ-22"
+      ],
+      "source_ids": [
+        "BD-12",
+        "BD-13"
+      ]
+    },
+    {
+      "id": "BQ2-02",
+      "question": "Which marketplace is the tracking ID registered against?",
+      "state": "unanswerable-here",
+      "known": "The Associates programme publishes separate country sites, and the links supplied all resolve to amazon.com. The operator's stated location is Singapore, and Amazon lists Singapore among its Associate programme countries.",
+      "not_known": "Which marketplace account the ID belongs to, and therefore which amazon.<tld> the tagged links should point at.",
+      "answer": "",
+      "how_to_close": "Read the marketplace from the same Associates Central account as BQ2-01.",
+      "who_can_close": "owner",
+      "cost_if_left_open": "A tag issued for one marketplace does not attribute sales on another. Guessing would silently produce links that earn nothing while looking correct.",
+      "blocks": [
+        "BS-01",
+        "RQ-22"
+      ],
+      "source_ids": [
+        "BD-12",
+        "BD-13"
+      ]
+    },
+    {
+      "id": "BQ2-03",
+      "question": "What are the five intended ASINs?",
+      "state": "unanswerable-here",
+      "known": "All five supplied links resolve, reproducibly, to one live listing each (BD-01, BD-02, BD-06, BD-07, BD-08), and the two new ones serve the same title on direct arrival at the destination ASIN without the short link (BD-03, BD-04).",
+      "not_known": "Which product the submitter meant. No public document binds a link.amazon code to a product, so the destination is an observation of the link's behaviour and not a statement of intent.",
+      "answer": "",
+      "how_to_close": "Creators API GetItems against the enrolled account, or read the five items back inside Associates Central. Either closes all five rows at once.",
+      "who_can_close": "owner",
+      "cost_if_left_open": "The product-intent record (RQ-21) keeps ten empty fields by rule. This is the correct state, not a blockage — but it does mean no attribute of any product may be asserted as the intended one.",
+      "blocks": [
+        "RQ-21",
+        "BS-03"
+      ],
+      "source_ids": [
+        "BD-01",
+        "BD-02",
+        "BD-03",
+        "BD-04",
+        "BD-06",
+        "BD-07",
+        "BD-08",
+        "BD-12"
+      ]
+    },
+    {
+      "id": "BQ2-04",
+      "question": "Are the supplied short links valid Special Links under the Operating Agreement?",
+      "state": "open",
+      "known": "None of the five resolved URLs carries a tag parameter, and each carries a per-link btn_ref token instead. The service honours the code — an unissued code answers differently from a supplied one.",
+      "not_known": "Their exact compliance status.",
+      "answer": "",
+      "how_to_close": "Do not close it by reasoning. The brief records this as unresolved in FLG-003 and instructs that no claim be made either way. It is reproduced here as an open question rather than as a finding, because a register that asserts a compliance status it has not verified is worse than one that says nothing.",
+      "who_can_close": "owner, with the enrolled account",
+      "cost_if_left_open": "BS-01 has to proceed on the basis of building fresh tagged links rather than reusing the supplied ones.",
+      "blocks": [
+        "BS-01"
+      ],
+      "source_ids": [
+        "BD-12",
+        "BD-13"
+      ]
+    },
+    {
+      "id": "BQ2-05",
+      "question": "Were the two new products meant for this site, or pasted in from a different list?",
+      "state": "open",
+      "known": "Three of the five resolve into the Air Fryers category node and two into Meat Thermometers — two different browse trees under the same Home & Kitchen parent (BD-03, BD-04, BD-09, BD-10, BD-11). The whole published site is about air fryers.",
+      "not_known": "Whether the submitter intends the site to cover both.",
+      "answer": "",
+      "how_to_close": "Ask the person who supplied them. This is a one-line question and only they can answer it, because the evidence is consistent with both readings.",
+      "who_can_close": "owner",
+      "cost_if_left_open": "BS-03 cannot be chosen sensibly. Publishing a meat-thermometer category the owner did not want is wasted work; dropping two products they did want is worse.",
+      "blocks": [
+        "BS-03",
+        "RQ-31"
+      ],
+      "source_ids": [
+        "BD-03",
+        "BD-04",
+        "BD-09",
+        "BD-10",
+        "BD-11"
+      ]
+    },
+    {
+      "id": "BQ2-06",
+      "question": "Was the three-question chooser ever built, or was the requirement satisfied by the question-led article section?",
+      "state": "open",
+      "known": "{{chooser_pages}} pages carry a chooser component. The comparison page carries a section that poses three questions and links each to its own article.",
+      "not_known": "Whether the earlier 'Implemented' status referred to that section or to a component that was subsequently removed in the front-page rebuild.",
+      "answer": "",
+      "how_to_close": "The session that rebuilt the front pages can answer from its own log; otherwise diff the pre-rebuild comparison page.",
+      "who_can_close": "the session that owns marketing/ — recorded here, not actioned",
+      "cost_if_left_open": "RQ-15 stays in dispute between two different repairs, and a chooser may or may not need building.",
+      "blocks": [
+        "RQ-15"
+      ],
+      "source_ids": [
+        "BD-21"
+      ]
+    },
+    {
+      "id": "BQ2-07",
+      "question": "What is the publishing cadence, and who writes each piece?",
+      "state": "open",
+      "known": "A topic set exists for the air fryers and a feed is shipped. No cadence is recorded anywhere in the repository.",
+      "not_known": "How often, and by whom.",
+      "answer": "",
+      "how_to_close": "A written decision, added to the decisions register. One line.",
+      "who_can_close": "owner",
+      "cost_if_left_open": "Amazon's review page asks that site content be recent — 'generally within the last 60 days' (BD-13). An unrecorded cadence tends to become no cadence.",
+      "blocks": [
+        "BS-03",
+        "BS-08"
+      ],
+      "source_ids": [
+        "BD-13"
+      ]
+    },
+    {
+      "id": "BQ2-08",
+      "question": "Which flag cross-reference does requirement S-11 want fixed?",
+      "state": "open",
+      "known": "The row cites an S-APIFAQ notes field in a sources file on a different repository, and links two flag ids on a third.",
+      "not_known": "Which specific reference is wrong.",
+      "answer": "",
+      "how_to_close": "Name the id. The row cannot be actioned while the identifier is a description rather than a reference.",
+      "who_can_close": "whoever filed S-11",
+      "cost_if_left_open": "RQ-07 stays partly done.",
+      "blocks": [
+        "RQ-07"
+      ],
+      "source_ids": [
+        "BD-21"
+      ]
+    },
+    {
+      "id": "BQ2-09",
+      "question": "How many qualifying sales has the site driven?",
+      "state": "unanswerable-here",
+      "known": "The campaign ledger is empty by design and declares itself so. Amazon requires at least three qualifying sales within the first 180 days before an application is reviewed, and personal orders do not count (BD-13).",
+      "not_known": "The count, because no link can attribute a sale until BQ2-01 is closed.",
+      "answer": "",
+      "how_to_close": "Associates reporting, once tagged links exist. The ledger's schema is already written for it.",
+      "who_can_close": "owner, after BS-01",
+      "cost_if_left_open": "The application cannot be reviewed. This is the whole revenue half of the project.",
+      "blocks": [
+        "BS-01"
+      ],
+      "source_ids": [
+        "BD-13"
+      ]
+    },
+    {
+      "id": "BQ2-10",
+      "question": "What queries does the site actually receive?",
+      "state": "open",
+      "known": "{{sc_pages}} of {{pages}} pages carry a Search Console verification tag, so nothing is being collected.",
+      "not_known": "All of it.",
+      "answer": "",
+      "how_to_close": "Add the verification tag and wait for data to accumulate. There is no shortcut: this is the one question on the board that is closed by time rather than by an action.",
+      "who_can_close": "owner — a meta tag and a form",
+      "cost_if_left_open": "Every editorial decision stays a guess. The brief's own priority — choose the next topic from measured queries instead of instinct — is unreachable until this closes.",
+      "blocks": [
+        "BS-02",
+        "BS-08",
+        "RQ-19",
+        "RQ-28"
+      ],
+      "source_ids": [
+        "BD-16"
+      ]
+    },
+    {
+      "id": "BQ2-11",
+      "question": "One site with two categories, or one category?",
+      "state": "open",
+      "known": "The two categories that would be involved sit under one parent — Home & Kitchen — and both are counter-top cooking gear. They diverge two levels down, at Small Appliances versus Kitchen Utensils & Gadgets (BD-03, BD-09).",
+      "not_known": "Whether the owner wants the site to be one thing or two.",
+      "answer": "",
+      "how_to_close": "This is BS-03, not a research question. It needs a decision, not more information — the information needed to make it is already printed on the products page.",
+      "who_can_close": "owner, after BQ2-05",
+      "cost_if_left_open": "Nothing can be written for the two new products.",
+      "blocks": [
+        "BS-03"
+      ],
+      "source_ids": [
+        "BD-03",
+        "BD-04"
+      ]
+    },
+    {
+      "id": "BQ2-12",
+      "question": "Who is responsible for what the site publishes?",
+      "state": "open",
+      "known": "No page names an author or a responsible editor. Google's human-review factors include 'Its stated or implied authorship, meaning, is there an explicit acknowledgement of ownership or responsibility for the content?' — and the worked example of a page that draws action is precisely an unauthored affiliate article not integrated into the publication (BD-16).",
+      "not_known": "Who, if anyone, will be named.",
+      "answer": "",
+      "how_to_close": "A name, a role and a one-line standing, on the site. This one is a decision with a compliance tail, not a research task.",
+      "who_can_close": "owner",
+      "cost_if_left_open": "The site is indistinguishable, on the one factor Google publishes for judging this, from the kind of page Google gives as its example of what it acts on.",
+      "blocks": [
+        "BS-07",
+        "RQ-30"
+      ],
+      "source_ids": [
+        "BD-16"
+      ]
+    },
+    {
+      "id": "BQ2-13",
+      "question": "Is there a budget to acquire the products?",
+      "state": "open",
+      "known": "No page carries product photography of any kind, and the first-hand-use requirement was decided against earlier. The two new products are far cheaper to acquire than a 26-quart oven.",
+      "not_known": "Whether acquisition is on the table at all.",
+      "answer": "",
+      "how_to_close": "A yes or no from the owner.",
+      "who_can_close": "owner",
+      "cost_if_left_open": "Two rows on the brief stay closed by construction: real photography (RQ-14) and living-with-it review (RQ-03).",
+      "blocks": [
+        "RQ-03",
+        "RQ-14",
+        "BS-05"
+      ],
+      "source_ids": [
+        "BD-17"
+      ]
+    },
+    {
+      "id": "BQ2-14",
+      "question": "Where would the self-hosted analytics endpoint run?",
+      "state": "open",
+      "known": "The five events are fully specified and a schema exists, and no published page calls any endpoint. This site is served as static files from GitHub Pages, which is a constraint on the answer.",
+      "not_known": "The host, and therefore whether 'self-hosted' is achievable at all on this stack.",
+      "answer": "",
+      "how_to_close": "Decide the host first; the wiring is downstream of it. Note that a static Pages site can still log a click by writing to a separate service, but that service is then a third party, which cuts against the brief's privacy-preserving wording.",
+      "who_can_close": "owner, with whoever runs the infrastructure",
+      "cost_if_left_open": "RQ-25 stays specified-but-unwired, and with it the measurement half of RQ-19.",
+      "blocks": [
+        "BS-02",
+        "RQ-25"
+      ],
+      "source_ids": [
+        "BD-22"
+      ]
+    },
+    {
+      "id": "BQ2-15",
+      "question": "Do all five supplied links resolve to a live Amazon listing?",
+      "state": "answered",
+      "known": "Measured live on 2026-11-17.",
+      "not_known": "Nothing material.",
+      "answer": "Yes. All five resolve, and each lands on one live listing: B04G1MEwY to B0CDY277D3, B02NbDxp3 to B09B7SB46R, B00hJ57DV to B08DKYBTPH, B0c8moW59 to B0DHZTCNR5, B0f3GKalj to B0DZFD6R9Z. The first three reproduce the destinations recorded on four earlier dates.",
+      "how_to_close": "Closed.",
+      "who_can_close": "this session",
+      "cost_if_left_open": "None.",
+      "blocks": [],
+      "source_ids": [
+        "BD-01",
+        "BD-02",
+        "BD-06",
+        "BD-07",
+        "BD-08",
+        "BD-09",
+        "BD-10",
+        "BD-11"
+      ]
+    },
+    {
+      "id": "BQ2-16",
+      "question": "Do any of the five resolved URLs carry an Associates tag?",
+      "state": "answered",
+      "known": "Measured live on 2026-11-17 across all five.",
+      "not_known": "Nothing material.",
+      "answer": "No. None of the five carries a tag parameter. Each carries a per-link btn_ref source token and plpRedirect=mhFallback instead, which is consistent with the earlier finding recorded as F-24.",
+      "how_to_close": "Closed.",
+      "who_can_close": "this session",
+      "cost_if_left_open": "None.",
+      "blocks": [
+        "BS-01"
+      ],
+      "source_ids": [
+        "BD-01",
+        "BD-02",
+        "BD-06",
+        "BD-07",
+        "BD-08",
+        "BD-12"
+      ]
+    },
+    {
+      "id": "BQ2-17",
+      "question": "Is a 9-character token a valid ASIN?",
+      "state": "answered",
+      "known": "Amazon's own definition, read live 2026-11-17, and a control run on the same date.",
+      "not_known": "Nothing material.",
+      "answer": "No. Amazon defines the ASIN as 'the 10-digit code that Amazon uses to denote specific products' (BD-12), and all five supplied tokens are 9 characters. The control confirms the two are different namespaces rather than a truncation: a valid, live 10-character ASIN placed in the same slot returns the service's 'invalid URL' page (BD-05).",
+      "how_to_close": "Closed.",
+      "who_can_close": "this session",
+      "cost_if_left_open": "None.",
+      "blocks": [
+        "RQ-21"
+      ],
+      "source_ids": [
+        "BD-05",
+        "BD-12"
+      ]
+    }
+  ]
+}

@@ -46,7 +46,11 @@ DATA = OUT / "data"
 
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 MONEY = re.compile(r"\$\s?\d[\d,]*(?:\.\d{1,2})?")
-TAG = re.compile(r"tag=[A-Za-z0-9]+-[0-9]{2}\b")
+# A tag counts only when it is a parameter of a link, not when the shape appears in a
+# sentence about tags. Anchoring on [?&] matches how tools/build_board.py and
+# tools/validate_data.py already read it; without the anchor, any page that quotes a
+# tag in prose is counted as carrying one (see FL-14 on the decision board).
+TAG = re.compile(r"[?&]tag=[A-Za-z0-9]+-[0-9]{2}\b")
 
 #: Hosts allowed to carry a value this namespace publishes. A source on any other
 #: host is not an official page for the purposes of this project.

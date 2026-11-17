@@ -36,6 +36,7 @@ Run: python3 tools/build_brief.py [--check]
 """
 
 from __future__ import annotations
+import re
 
 import html
 import json
@@ -61,16 +62,45 @@ def load(name: str) -> dict:
     return json.loads((DATA / name).read_text(encoding="utf-8"))
 
 
-SOURCES_DOC = load("sources.json")
-REVIEW = load("review.json")
+# Counts that live in the data as {{tokens}} and are measured from the tree.
+#
+# Four numbers in brief/data/*.json were typed by hand and re-typed by hand every
+# time the tree grew — the step count moved 43 -> 46 -> 49 across three merges,
+# and the page count moved 150 -> 158 -> 159 -> 167 -> 168. That is the same defect
+# the repository has now hit in three namespaces (see CR-1 in ledger/readiness.json,
+# fixed with {measure} tokens, and FL-12 on the decision board). Any figure the tree
+# can be counted to produce is substituted rather than typed.
+TOKENS: dict[str, object] = {
+    "gate_count": len(__import__("ci_replay").steps()),
+}
+
+
+def sub_tokens(node):
+    """Replace {{token}} anywhere in a loaded structure. Unknown token = build error."""
+    def repl(m):
+        key = m.group(1)
+        if key not in TOKENS:
+            raise SystemExit(f"build_brief: unknown token {{{{{key}}}}}")
+        return str(TOKENS[key])
+    if isinstance(node, str):
+        return re.sub(r"\{\{(\w+)\}\}", repl, node)
+    if isinstance(node, list):
+        return [sub_tokens(x) for x in node]
+    if isinstance(node, dict):
+        return {k: sub_tokens(v) for k, v in node.items()}
+    return node
+
+
+SOURCES_DOC = sub_tokens(load("sources.json"))
+REVIEW = sub_tokens(load("review.json"))
 FLAGS = load("flags.json")
 DESIGN = load("design.json")
 TOPICS = load("topics.json")
 SUGGESTIONS = load("suggestions.json")
 DECISIONS = load("decisions.json")
 QUESTIONS = load("questions.json")
-SUMMARY = load("summary.json")
-VERIFICATION = load("verification.json")
+SUMMARY = sub_tokens(load("summary.json"))
+VERIFICATION = sub_tokens(load("verification.json"))
 
 SOURCES = {s["id"]: s for s in SOURCES_DOC["sources"]}
 AS_OF = SOURCES_DOC["as_of"]

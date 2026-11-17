@@ -1202,7 +1202,7 @@ they are outside this session's file scope.
 Verification: [`docs/verification-613900e6.md`](docs/verification-613900e6.md). All 46 CI steps pass on the
 combined tree.
 
-## Addendum — 2026-11-17 (session `7264f3c2`, T61; claimed as T58): the tag arrived, and what it changed
+## Addendum — 2026-11-17 (session `7264f3c2`, T62; claimed as T58): the tag arrived, and what it changed
 
 The previous section ends with the one action that unblocked the revenue side: the owner supplying
 the Associates tag. On 2026-11-17 the brief supplied it — **`shopnow047c-20`** — and this session
@@ -1234,3 +1234,70 @@ independent passes reaching the same destinations. They are recorded, not promot
 disposition waits on DS-16/DQ-11. The per-link Associates-workflow validation the
 brief demands before scaling is recorded as pending on every row: it needs the owner's enrolled
 session, and no conversion figure exists to publish.
+
+## Addendum — 2026-11-17 — the five-product brief (session `arena/1bfbc559-zone2`, T62)
+
+### Three new facts
+
+**Two products the repository had never seen.** The brief names five products. `link.amazon/B0c8moW59`
+and `link.amazon/B0f3GKalj` appear in no file in this repository before 2026-11-17 — verified by a
+case-insensitive search across every `.json`, `.html`, `.md` and `.py` in the tree. Both were fetched live
+and both resolve: to a ThermoMaven instant-read meat thermometer (`B0DHZTCNR5`) and a CHEF iQ Sense
+wireless meat thermometer (`B0DZFD6R9Z`). Both serve the same title on direct arrival at `/dp/<ASIN>`
+without the short link.
+
+**So the catalogue is not one category.** Three products resolve into
+*Small Appliances › Fryers › Air Fryers* and two into
+*Kitchen Utensils & Gadgets › Thermometers & Timers › Meat*. Every product page this site has published —
+the comparison, the buying guide, the counter-space analysis, the question-shaped articles — is about air
+fryers. The plan is out of date, not the pages.
+
+**A tracking ID, for the first time.** `shopnow047c-20` matches the shape Amazon publishes for a
+special-link tag (`abcd-20`), and it cannot be confirmed as an issued, active ID from any public page —
+Amazon states IDs are generated on application. No published page carries a tag today: 0 of 162.
+
+### What was built
+
+Nine pages at `board/`: the product-intent confirmation record (intent and observation in separate field
+groups that never merge), a twelve-row choose-a-path board where nothing is applied, a 17-question
+known/unknown register whose open answers are empty by rule, a trace of every requirement row in the brief
+against the tree, ten topic proposals, the source register, the verification record and the flagged page.
+
+**Nothing on the board is implemented.** The `chosen` field on every suggestion is empty, and the build
+fails if it is not.
+
+### The requirement rows, checked rather than taken on trust
+
+Most hold up: 162 of 162 pages carry the disclosure, the front page leads with the products, the campaign
+ledger is exactly the empty-but-defined thing the brief asks for. Four do not: **S-04** (7 pages with no
+meta description — the only unfinished P1 row), **S-19** (no chooser component exists), **S-24**
+(4 reader pages one hop short), **S-09** (no social preview image on any of the 162 pages, though 108
+carry the rest of the `og:` block).
+
+The loudest number is not a defect: 2,238 Amazon-host links of which 132 carry `rel="sponsored"`. The
+unmarked remainder are citations to a source inside a verification table, not offers — and Google defines
+the value by what the link is.
+
+### One defect found in the repository's own gates
+
+The context-aware rule that is supposed to stop any page printing a product price **never fires**. Four
+copies of it (`.github/workflows/pages.yml:155`, `tools/validate_data.py:550`,
+`tools/build_readiness.py:623`, `tools/validate_audit.py:272`) strip HTML tags *before* splitting the page
+on those same tags, so all 162 pages collapse to a single unit and the program-economics exemption
+swallows every price. Reversing the two operations makes the rule fire. `board/`'s own gate is written the
+corrected way round, and its negative test caught its own evidence paragraph on the first run — which is
+how the defect in the other four was noticed. Logged as FL-13 and CR-4; not fixed here, because those
+files are outside this session's scope.
+
+### Gates
+
+`tools/ci_replay.py`: **46 of 46**. `tools/validate_board.py`: clean. `tools/test_board.py`: 19 injected
+defects, each fires. `tools/audit_site.py`: 171 pages, all checks pass.
+
+### Cross-scope requests filed
+
+- **CR-2** — ingest the two new supplied links into `ledger/products.json`, copying the intent fields as
+  empty rather than filling them from the observation.
+- **CR-3** — the design brief's summary still types five counts (they moved from 150 pages to 159 when
+  `board/` was added); derive them, as `tools/build_board.py` does.
+- **CR-4** — fix the price-rule ordering in all four copies.

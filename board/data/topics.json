@@ -1,0 +1,117 @@
+{
+  "note": "Article and topic proposals. Every title here is a question, because that is the shape the brief asks for and the shape the site already does well. Each one rests on a fact that was read off an official page on 2026-11-17, and the source is printed next to it. What is NOT here, and will not be invented: no search volume, no trend ranking, no 'people also ask' count, no claim that one of these is more popular than another. The brief offers its four working titles as hypotheses and is explicit that they are not claims about popularity, and the site's own evidence rule for trending claims forbids the alternative. Until BQ2-10 closes there is no instrument that could rank these, so any ordering here would be decoration.",
+  "as_of": "2026-11-17",
+  "ranking_note": "Deliberately unordered. Ordering these would imply a measurement that has not been taken.",
+  "rows": [
+    {
+      "id": "TP-01",
+      "working_title": "Basket or oven-style air fryer: what should you compare?",
+      "cluster": "air fryers",
+      "why_this_shape": "It is the first decision a buyer actually faces, and the product set answers it three different ways — so the page can compare instead of describe.",
+      "rests_on": "The three air-fryer destinations span both forms: a 6-quart twin-basket machine (BD-09), a 26-quart French-door oven (BD-10) and an 8-quart single basket (BD-11).",
+      "products": ["PI-01", "PI-02", "PI-03"],
+      "existing_page": "guides/basket-air-fryers.html and guides/air-fryer-ovens.html both exist",
+      "status": "proposed — the shape exists, the page that puts the two side by side does not",
+      "source_ids": ["BD-09", "BD-10", "BD-11"]
+    },
+    {
+      "id": "TP-02",
+      "working_title": "A no-hype checklist for comparing air fryer capacity",
+      "cluster": "air fryers",
+      "why_this_shape": "Capacity is the number every listing leads with and the one buyers most often misread, because a 6-quart twin basket and a 6-quart single basket are not the same cooking space.",
+      "rests_on": "The published capacity figures, each read from the listing and the manufacturer page rather than from the marketing headline: 6 quarts across two independent 3-quart baskets (BD-09), 26 quarts (BD-10), 8 quarts (BD-11).",
+      "products": ["PI-01", "PI-02", "PI-03"],
+      "existing_page": "marketing/topics/how-many-quarts-do-you-need.html",
+      "status": "proposed — a checklist page is a different page from the one that exists",
+      "source_ids": ["BD-09", "BD-10", "BD-11"]
+    },
+    {
+      "id": "TP-03",
+      "working_title": "How to assess cleanup and counter-space trade-offs",
+      "cluster": "air fryers",
+      "why_this_shape": "It is the regret buyers report most and the thing no listing tells you, which makes it the rare affiliate page that adds something rather than restating a spec sheet.",
+      "rests_on": "Published dimensions and dishwasher-safe claims, and the site's own existing counter-space analysis — capacity per centimetre of counter depth — which is the one piece of original analysis on the site.",
+      "products": ["PI-01", "PI-02", "PI-03"],
+      "existing_page": "marketing/topics/will-it-fit-your-counter.html",
+      "status": "proposed — the counter-space half is published, the cleanup half is not",
+      "source_ids": ["BD-09", "BD-10", "BD-11"]
+    },
+    {
+      "id": "TP-04",
+      "working_title": "Questions to ask before buying a multi-function kitchen appliance",
+      "cluster": "cross-category",
+      "why_this_shape": "The brief offers this title and it is the one that survives the category question — it is answerable whichever way BQ2-11 goes, because it is about the buyer's decision rather than about a product type.",
+      "rests_on": "The two new products name five cooking environments between them, and one of them names air frying in its own listing title (BD-04), which is the honest bridge between the two halves of the product set.",
+      "products": ["PI-02", "PI-04", "PI-05"],
+      "existing_page": "none",
+      "status": "proposed",
+      "source_ids": ["BD-04", "BD-10"]
+    },
+    {
+      "id": "TP-05",
+      "working_title": "Instant-read or wireless: what are you actually paying for?",
+      "cluster": "meat thermometers",
+      "why_this_shape": "It is the first decision a thermometer buyer faces, and the two products in this set sit on opposite sides of it — so the page can be a comparison rather than two reviews.",
+      "rests_on": "One destination is a one-second instant-read thermometer with an auto-rotate bright LED screen and no wireless function named in its title (BD-03); the other is a wireless thermometer with WiFi unlimited range and three ultra-thin probes (BD-04).",
+      "products": ["PI-04", "PI-05"],
+      "existing_page": "none — no page on the site mentions a thermometer",
+      "status": "proposed — blocked by BS-03",
+      "source_ids": ["BD-03", "BD-04"]
+    },
+    {
+      "id": "TP-06",
+      "working_title": "How many probes does a meat thermometer need?",
+      "cluster": "meat thermometers",
+      "why_this_shape": "Probe count is the specification that most changes how a thermometer is used and the one a first-time buyer has no intuition for.",
+      "rests_on": "One product's listing names three ultra-thin probes (BD-04); the other is a single-probe instant read (BD-03).",
+      "products": ["PI-04", "PI-05"],
+      "existing_page": "none",
+      "status": "proposed — blocked by BS-03",
+      "source_ids": ["BD-03", "BD-04"]
+    },
+    {
+      "id": "TP-07",
+      "working_title": "What does 'NIST certified' mean on a thermometer box?",
+      "cluster": "meat thermometers",
+      "why_this_shape": "Both listings put a certification mark in the title. Explaining a specification the buyer cannot evaluate is exactly the added value the anti-thin-affiliation guidance asks for.",
+      "rests_on": "Both destination listings state NIST or NSF certification in the product title as served (BD-03: 'NIST&NSF Certified'; BD-04: '1000°F Heat Safe | 5 Sensors').",
+      "products": ["PI-04", "PI-05"],
+      "existing_page": "none",
+      "status": "proposed — blocked by BS-03, and it needs an official definition of the certification to be read before it is written",
+      "source_ids": ["BD-03", "BD-04"]
+    },
+    {
+      "id": "TP-08",
+      "working_title": "Do you need an app to cook a steak?",
+      "cluster": "meat thermometers",
+      "why_this_shape": "It is a real objection, not a feature list, and it is the question a buyer asks after they have already decided they want a thermometer.",
+      "rests_on": "One product's listing names WiFi unlimited range via an app and a 1000°F heat-safe probe (BD-04); the other names an auto-rotate LED screen and no app (BD-03).",
+      "products": ["PI-04", "PI-05"],
+      "existing_page": "none",
+      "status": "proposed — blocked by BS-03",
+      "source_ids": ["BD-03", "BD-04"]
+    },
+    {
+      "id": "TP-09",
+      "working_title": "The two tools that decide whether dinner is cooked",
+      "cluster": "cross-category",
+      "why_this_shape": "It is the only title here that turns the site's awkward product set into an asset rather than a problem: an air fryer cooks it, a thermometer tells you when it is done, and a site that sells both can say something a single-category site cannot.",
+      "rests_on": "One of the two thermometers names 'Air Fryer' among the cooking environments in its own listing title (BD-04), alongside BBQ, grill, oven and smoker.",
+      "products": ["PI-01", "PI-02", "PI-03", "PI-04", "PI-05"],
+      "existing_page": "none",
+      "status": "proposed — the most interesting title here and the most dependent on BS-03",
+      "source_ids": ["BD-04", "BD-09", "BD-10", "BD-11"]
+    },
+    {
+      "id": "TP-10",
+      "working_title": "What we could not verify, and why we left it blank",
+      "cluster": "site",
+      "why_this_shape": "It is the page the site is already unusually good at, and it is the one no competitor has. It also directly serves the brief's own instinct to grow on the verification angle rather than on volume.",
+      "rests_on": "The five product-intent rows on board/products.html, ten of whose fields are empty on purpose.",
+      "products": ["PI-01", "PI-02", "PI-03", "PI-04", "PI-05"],
+      "existing_page": "journal/why-every-number-has-a-source.html covers the method",
+      "status": "proposed — the method page exists; the live register of blanks does not",
+      "source_ids": ["BD-21"]
+    }
+  ]
+}

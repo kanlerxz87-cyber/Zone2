@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirements trace · Counter Notes decision board</title>
+<meta name="description" content="Every requirement row from the 2026-11-17 brief, checked against the repository rather than taken from the brief&#x27;s own status word. Four rows do not hold up.">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/board/requirements.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Counter Notes">
+<meta property="og:title" content="Requirements trace · Counter Notes decision board">
+<meta property="og:description" content="Every requirement row from the 2026-11-17 brief, checked against the repository rather than taken from the brief&#x27;s own status word. Four rows do not hold up.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/board/requirements.html">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="assets/board.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="mast-in">
+    <a class="brand" href="../index.html">Counter Notes<span>Decision board · 2026-11-17</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html">Executive summary</a><a href="products.html">Product intent</a><a href="suggestions.html">Choose a path</a><a href="questions.html">Known &amp; unknown</a><a href="requirements.html" aria-current="page">Requirements trace</a><a href="topics.html">Topics</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged</a></nav>
+  </div>
+</header>
+<div class="disclosure">
+  <div class="wrap">
+    <strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases. Product links on this site carry
+    no Associates tag yet, so nothing bought through them can be attributed — see
+    <a href="flagged.html#FL-02">FL-02</a>.
+  </div>
+</div>
+<main id="main" class="wrap">
+
+<p class="eyebrow">Requirements trace</p>
+<h1>Every row in the brief, checked against the tree</h1>
+<p class="standfirst">A trace of the requirement rows in the 2026-11-17 brief, each checked against this repository&#x27;s tree rather than taken from the brief&#x27;s own status word. Placeholder tokens in the data (named after what they count) are replaced by tools/build_board.py with a value it MEASURES from the tree in the same run, and tools/validate_board.py re-measures and fails if any printed number disagrees. That is the whole point: this repository has twice shipped a page whose prose printed a count that had drifted from the register it described (FB-01, FB-02, and the two defects the T57 live read-back caught), and a typed count in this file would be a third.</p>
+
+<div class="card">
+<dl style="margin:0"><dt>matches</dt><dd>the tree supports the status word the brief gives it</dd><dt>overstated</dt><dd>the tree shows less than the brief&#x27;s status word claims</dd><dt>as-stated</dt><dd>the brief records a decision rather than a measurement; this namespace does not re-open it</dd><dt>no-status-given</dt><dd>the brief left the status cell empty, so there is nothing to agree or disagree with — only a measurement to supply</dd><dt>unmeasurable-from-the-tree</dt><dd>the row describes an outcome in the world, not an artefact in the repository</dd></dl>
+</div>
+
+<div class="table-scroll">
+<table>
+<thead><tr>
+  <th>Row</th><th>P</th><th>Requirement</th><th>Status in the brief</th>
+  <th>Checked against the tree</th><th>Measured</th><th>Gap</th><th>Source</th>
+</tr></thead>
+<tbody>
+<tr id="RQ-01">
+  <td class="id">S-04</td>
+  <td class="id">P1</td>
+  <td><strong>Give every page its own title and meta description</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--high">overstated</span><br>
+      <span class="small">partly</span></td>
+  <td>166 distinct titles across 171 published pages; 7 pages carry no meta description at all and 2 descriptions are shared by more than one page; 5 titles are shared by more than one page.</td>
+  <td>7 pages to supply a description for, 5 duplicated titles and 2 duplicated descriptions to disambiguate. Small, mechanical, and the only P1 row on the brief that is not finished.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-02">
+  <td class="id">S-05</td>
+  <td class="id">P2</td>
+  <td><strong>Mark the affiliate links rel=&quot;sponsored&quot; without breaking the required disclosure</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">implemented where the definition bites</span></td>
+  <td>2462 outbound links to an Amazon host across the tree, of which 179 carry rel=&quot;sponsored&quot;. On the 42 reader-facing pages the split is 122 sponsored against 314 not — and every unsponsored one of those sits on a register page (verification, sources, summary, paths, questions), citing the URL as evidence rather than offering the product for sale.</td>
+  <td>None on this row. The related gap is RQ-22: the links are correctly marked as sponsored and still carry no Associates tag, so they are marked but not monetised.</td>
+  <td class="src"><a href="sources.html#BD-15" title="Qualify your outbound links to Google (rel=&quot;sponsored&quot;)">BD-15</a></td>
+</tr>
+<tr id="RQ-03">
+  <td class="id">S-06</td>
+  <td class="id">P2</td>
+  <td><strong>Add the one thing a listing cannot tell a reader: what the appliance is like to live with</strong></td>
+  <td>Not adopted - see the recorded decision</td>
+  <td><span class="pill pill--info">as-stated</span><br>
+      <span class="small">not adopted</span></td>
+  <td>No first-hand use review exists on any page. The site&#x27;s stated position is that it reports what official pages say and leaves the rest blank.</td>
+  <td>Recorded, not open. It is listed here only because the two new products change its cost: a first-hand review of a thermometer is a different and cheaper piece of work than a first-hand review of a 26-quart oven, so the decision may be worth revisiting for the two new items specifically.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-04">
+  <td class="id">S-07</td>
+  <td class="id">P2</td>
+  <td><strong>Answer the questions people actually type, one page per question</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">partly — for three of five products only</span></td>
+  <td>The question-shaped page set exists and is substantial, and every page in it is about air fryers. Nothing on the site asks or answers a single question about a meat thermometer.</td>
+  <td>The two newest products (PI-04, PI-05) have no question-shaped page, and no other page on the site could host one without breaking the one-question-per-page rule this row asks for.</td>
+  <td class="src"><a href="sources.html#BD-03" title="Destination listing observed for supplied link 4 — B0DHZTCNR5">BD-03</a> <a href="sources.html#BD-04" title="Destination listing observed for supplied link 5 — B0DZFD6R9Z">BD-04</a></td>
+</tr>
+<tr id="RQ-05">
+  <td class="id">S-09</td>
+  <td class="id">P2</td>
+  <td><strong>Ship a social preview image and structured data, then measure whether search traffic arrives</strong></td>
+  <td>Partly implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">partly — the structured-data half, not the image half</span></td>
+  <td>44 of 171 pages carry JSON-LD. 108 carry og:type, og:site_name, og:title, og:description and og:url. 103 carry an og:image — that is to say, none of them do.</td>
+  <td>One image, referenced from the og: block on every page. The second half of the row — measure whether traffic arrives — cannot be measured at all until RQ-28 is done, because no page carries Search Console verification.</td>
+  <td class="src"><a href="sources.html#BD-15" title="Qualify your outbound links to Google (rel=&quot;sponsored&quot;)">BD-15</a></td>
+</tr>
+<tr id="RQ-06">
+  <td class="id">S-10</td>
+  <td class="id">P3</td>
+  <td><strong>Bring the documentation in line with the code, and get every published check to run from a clean checkout</strong></td>
+  <td>Partly implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">checked by replay, not by reading</span></td>
+  <td>tools/ci_replay.py replays every step of the workflow in order against this working tree; this session ran it and recorded the result in board/verification.html.</td>
+  <td>None found on this run.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-07">
+  <td class="id">S-11</td>
+  <td class="id">P3</td>
+  <td><strong>Fix one wrong flag cross-reference and split the open, resolved and historical items on the review page</strong></td>
+  <td>Partly implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">partly</span></td>
+  <td>The register splits items by state; the wrong cross-reference the row names is not something this session could confirm either way, because the row does not say which reference it is.</td>
+  <td>The row needs the identifier of the cross-reference it wants fixed before anyone can close it. Logged as BQ2-08.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-08">
+  <td class="id">S-12</td>
+  <td class="id">P2</td>
+  <td><strong>Decide the site&#x27;s voice, and rewrite the articles to it once</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">implemented</span></td>
+  <td>The front-of-house pages read as one voice, and the mechanical tell the earlier review measured — the site writing about itself — was measured again after the rebuild and had fallen from 8% of sentences to 4%.</td>
+  <td>None on this row.</td>
+  <td class="src"><a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></td>
+</tr>
+<tr id="RQ-09">
+  <td class="id">S-13</td>
+  <td class="id">P2</td>
+  <td><strong>Approve a format-first topic calendar: eight catchy, spec-backed articles</strong></td>
+  <td>Partly implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">partly — and the calendar was written for three products</span></td>
+  <td>A set of question-shaped topic pages exists alongside three product write-ups. The calendar is spec-backed and it covers the air fryers; it has no row for either thermometer.</td>
+  <td>The eight-article calendar is the right shape for five products and the wrong contents. See BS-03.</td>
+  <td class="src"><a href="sources.html#BD-03" title="Destination listing observed for supplied link 4 — B0DHZTCNR5">BD-03</a> <a href="sources.html#BD-04" title="Destination listing observed for supplied link 5 — B0DZFD6R9Z">BD-04</a></td>
+</tr>
+<tr id="RQ-10">
+  <td class="id">S-14</td>
+  <td class="id">P2</td>
+  <td><strong>Adopt the prepared design-prompt draft as the brief for the visual overhaul</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">implemented</span></td>
+  <td>The design prompt is published as its own page and is written as a paste-ready brief with measured diagnosis and acceptance tests.</td>
+  <td>None on this row.</td>
+  <td class="src"><a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></td>
+</tr>
+<tr id="RQ-11">
+  <td class="id">S-15</td>
+  <td class="id">P2</td>
+  <td><strong>Choose the visual direction and settle the brand name</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">implemented</span></td>
+  <td>The publication carries a single brand name in the masthead of its front page and a consistent palette across the article set.</td>
+  <td>The brand name settled on is a counter-top cooking title. Two of the five products are thermometers, which are also counter-top cooking gear — the name survives the expansion, and that is worth noting rather than assuming.</td>
+  <td class="src"><a href="sources.html#BD-03" title="Destination listing observed for supplied link 4 — B0DHZTCNR5">BD-03</a> <a href="sources.html#BD-04" title="Destination listing observed for supplied link 5 — B0DZFD6R9Z">BD-04</a></td>
+</tr>
+<tr id="RQ-12">
+  <td class="id">S-16</td>
+  <td class="id">P2</td>
+  <td><strong>Adopt a written evidence rule for &#x27;trending&#x27; and popularity claims</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">implemented</span></td>
+  <td>A written rule governs when the site may call something trending, and no page calls any of the five products trending.</td>
+  <td>None on this row.</td>
+  <td class="src"><a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></td>
+</tr>
+<tr id="RQ-13">
+  <td class="id">S-17</td>
+  <td class="id">P2</td>
+  <td><strong>Rebuild the front page as an editorial homepage: hero, featured articles, category tiles, then the data</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">implemented</span></td>
+  <td>The front page opens on a standfirst and a hero, moves to the machines, then to a question-led article section, then to the receipts, and only then to the operator surfaces.</td>
+  <td>One gap the rebuild could not have known about: the hero names three machines, and there are now five.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-14">
+  <td class="id">S-18</td>
+  <td class="id">P2</td>
+  <td><strong>Add real product photography, and never generated or copied photography</strong></td>
+  <td>Needs a decision first</td>
+  <td><span class="pill pill--info">as-stated</span><br>
+      <span class="small">no photography of any kind on any page</span></td>
+  <td>No page carries product photography — not original, not generated, not copied.</td>
+  <td>The decision is genuinely open, and the two new products make it sharper: there is nothing to photograph on this side of the fence, so any photography path starts with a purchase or a manufacturer permission.</td>
+  <td class="src"><a href="sources.html#BD-17" title="Associates Program Operating Agreement">BD-17</a></td>
+</tr>
+<tr id="RQ-15">
+  <td class="id">S-19</td>
+  <td class="id">P2</td>
+  <td><strong>Add a three-question &#x27;which one is for you&#x27; chooser above the comparison table</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--high">overstated</span><br>
+      <span class="small">not present</span></td>
+  <td>1 pages carry a chooser component. What the comparison page carries instead is a section that poses three questions and links each to its own article — a question index, not a chooser.</td>
+  <td>Either the row was satisfied in spirit by the three-question article section, in which case the status word should say so, or the chooser was never built. Those are different repairs. Logged as BQ2-06.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-16">
+  <td class="id">S-20</td>
+  <td class="id">P2</td>
+  <td><strong>Mobile-first pass: type scale, tap targets, sticky comparison bar</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">partly</span></td>
+  <td>171 of 171 pages declare a viewport. A sticky element appears on 9 pages, all of them in one operator namespace, none of them the comparison table.</td>
+  <td>The comparison table has no sticky bar. The row is unowned: no session has claimed it and the brief gives it no status, which is the profile of a row nobody has started.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-17">
+  <td class="id">S-23</td>
+  <td class="id">P2</td>
+  <td><strong>Publish the counter-space analysis: capacity per centimetre of counter depth</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">implemented</span></td>
+  <td>11 pages carry the counter-space analysis.</td>
+  <td>None on this row. Note that this is the one piece of original analysis on the site, and it is an air-fryer analysis — which is the argument for BS-05.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-18">
+  <td class="id">S-24</td>
+  <td class="id">P2</td>
+  <td><strong>Complete the internal linking: every article reaches the comparison, the buying guide and its category pillar</strong></td>
+  <td>Implemented 2026-11-16</td>
+  <td><span class="pill pill--high">overstated</span><br>
+      <span class="small">partly</span></td>
+  <td>4 of 29 reader and guide pages reach none of the comparison, the buying guide or the guides index. All of them are in one namespace, and they link to the marketing front page instead — which is one hop short of the row&#x27;s requirement.</td>
+  <td>4 pages, one hop each. Mechanical.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-19">
+  <td class="id">S-25</td>
+  <td class="id">P2</td>
+  <td><strong>Grow organic traffic on the verification angle, not on volume</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--medium">unmeasurable-from-the-tree</span><br>
+      <span class="small">unmeasurable — nothing is counting</span></td>
+  <td>0 pages carry a Search Console verification tag, so the site cannot currently report the queries it receives at all.</td>
+  <td>This row is an outcome, and the instrument that would measure it is not switched on. Choosing topics by instinct, which is what the brief asks to stop doing, is the only option available until it is.</td>
+  <td class="src"><a href="sources.html#BD-16" title="Spam policies for Google web search — site reputation policy, human-review factors">BD-16</a></td>
+</tr>
+<tr id="RQ-20">
+  <td class="id">theme</td>
+  <td class="id">P1</td>
+  <td><strong>Lead with the products, not with the verification process</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">implemented on the front page</span></td>
+  <td>The front page&#x27;s first heading names the machines, not the method. The verification surfaces sit below and behind.</td>
+  <td>The heading names three machines. There are five.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-21">
+  <td class="id">theme</td>
+  <td class="id">P1</td>
+  <td><strong>Build a product-intent confirmation record: intended ASIN, official listing URL, confirmation date and source in one field group; observed redirect targets in a separate field; the two never merged</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">built by this session — five rows, ten empty intent fields</span></td>
+  <td>board/data/products.json holds five rows. Every intent field on every row is empty, with the reason printed next to it. Every observation field is full.</td>
+  <td>The record cannot be completed from outside the Associates account. That is the finding, not a defect.</td>
+  <td class="src"><a href="sources.html#BD-01" title="Supplied affiliate short link 4 (as provided in the 2026-11-17 brief)">BD-01</a> <a href="sources.html#BD-02" title="Supplied affiliate short link 5 (as provided in the 2026-11-17 brief)">BD-02</a> <a href="sources.html#BD-03" title="Destination listing observed for supplied link 4 — B0DHZTCNR5">BD-03</a> <a href="sources.html#BD-04" title="Destination listing observed for supplied link 5 — B0DZFD6R9Z">BD-04</a> <a href="sources.html#BD-06" title="Supplied affiliate short link 1 — re-read on a fifth date">BD-06</a> <a href="sources.html#BD-07" title="Supplied affiliate short link 2 — re-read on a fifth date">BD-07</a> <a href="sources.html#BD-08" title="Supplied affiliate short link 3 — re-read on a fifth date">BD-08</a> <a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a> <a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-22">
+  <td class="id">theme</td>
+  <td class="id">P1</td>
+  <td><strong>Replace ambiguous outbound links with validated Special Links — one link per product tested in the enrolled Associates workflow before scaling</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">blocked — no tag exists anywhere in the tree</span></td>
+  <td>7 of 171 published pages carry a real Associates tag. Every occurrence of the tag parameter in the tree is the placeholder Amazon prints in its own documentation, not an identifier.</td>
+  <td>This is the single row that gates the revenue half of the project, and it is gated by BQ2-01 and BQ2-02 — both of which the owner can close in one sign-in.</td>
+  <td class="src"><a href="sources.html#BD-13" title="Associates Program — Application Review Process">BD-13</a> <a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a></td>
+</tr>
+<tr id="RQ-23">
+  <td class="id">theme</td>
+  <td class="id">P1</td>
+  <td><strong>Keep the disclosure above the fold on every page, including this one</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">implemented</span></td>
+  <td>171 of 171 published pages carry the required sentence, and on the front page it sits directly under the masthead, before any content.</td>
+  <td>None on this row.</td>
+  <td class="src"><a href="sources.html#BD-14" title="Why do I have to identify myself as an Associate? How should I do this on social media?">BD-14</a></td>
+</tr>
+<tr id="RQ-24">
+  <td class="id">theme</td>
+  <td class="id">P4</td>
+  <td><strong>Start with an empty but well-defined campaign ledger; add timestamp, source, channel, eligible sessions, clicks and reported orders only when obtained from authorised first-party reports</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">implemented exactly as asked</span></td>
+  <td>ledger/campaigns.json is empty by design, declares itself EMPTY_BY_DESIGN, and publishes the schema a row must satisfy before one may be written.</td>
+  <td>None. This is the one row in the brief that asks for less rather than more, and it is the one row that is exactly right.</td>
+  <td class="src"><a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></td>
+</tr>
+<tr id="RQ-25">
+  <td class="id">theme</td>
+  <td class="id">P4</td>
+  <td><strong>Add a privacy-preserving outbound-click counter and a self-hosted analytics endpoint; record the five defined events</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">specified, not wired</span></td>
+  <td>The five events are defined, named and given a firing rule and a privacy note. 0 pages call an event endpoint.</td>
+  <td>The specification is finished and the wiring has not started. Until it is, RQ-19 and SG-29 cannot be measured either — the three are one dependency chain, which is why BS-02 bundles them.</td>
+  <td class="src"><a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></td>
+</tr>
+<tr id="RQ-26">
+  <td class="id">SG-27</td>
+  <td class="id">P2</td>
+  <td><strong>Navigation labels</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">implemented</span></td>
+  <td>The front page carries a single navigation group of reader-facing labels, with the operator surfaces behind one labelled entry.</td>
+  <td>One entry is about the site&#x27;s own process rather than about the products, which is the one thing this row&#x27;s parent theme asks to avoid.</td>
+  <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
+</tr>
+<tr id="RQ-27">
+  <td class="id">SG-28</td>
+  <td class="id">P2</td>
+  <td><strong>The shipped RSS feed</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">shipped</span></td>
+  <td>marketing/feed.xml is published and listed in the marketing sitemap.</td>
+  <td>A feed is only worth shipping if something subscribes to it, and nothing is counting subscribers. Same dependency as RQ-25.</td>
+  <td class="src"><a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></td>
+</tr>
+<tr id="RQ-28">
+  <td class="id">SG-29</td>
+  <td class="id">P2</td>
+  <td><strong>Search Console</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">not switched on</span></td>
+  <td>0 of 171 pages carry a Search Console verification tag.</td>
+  <td>The brief&#x27;s own priority is to choose the next topic from measured queries instead of instinct. Without this, instinct is the only instrument. This is the cheapest row on the board with the largest effect on everything downstream of it.</td>
+  <td class="src"><a href="sources.html#BD-16" title="Spam policies for Google web search — site reputation policy, human-review factors">BD-16</a></td>
+</tr>
+<tr id="RQ-29">
+  <td class="id">SG-30</td>
+  <td class="id">P2</td>
+  <td><strong>Reader capture</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">not present</span></td>
+  <td>0 of 171 pages carry any reader-capture form.</td>
+  <td>Deliberately left as a choice rather than a recommendation: BD-16 lists &#x27;Its stated or implied authorship&#x27; among the factors a human review weighs, and a capture form is one way to establish an editorial relationship with a reader. It is also a consent and jurisdiction question. Logged as BS-09.</td>
+  <td class="src"><a href="sources.html#BD-16" title="Spam policies for Google web search — site reputation policy, human-review factors">BD-16</a></td>
+</tr>
+<tr id="RQ-30">
+  <td class="id">theme</td>
+  <td class="id">P5</td>
+  <td><strong>Keep disclosures and API policy checks in the publishing workflow; review disclosure placement and endorsement context against the Operating Agreement and FTC guidance</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">implemented</span></td>
+  <td>171 of 171 pages carry the sentence Amazon&#x27;s own help page says the Operating Agreement requires, in the required wording, above the content.</td>
+  <td>The endorsement-context half of the row is unreviewed by this session: it asks for a judgement against two documents (BD-17, BD-19) that this session did not re-read live. Flagged rather than passed.</td>
+  <td class="src"><a href="sources.html#BD-14" title="Why do I have to identify myself as an Associate? How should I do this on social media?">BD-14</a> <a href="sources.html#BD-17" title="Associates Program Operating Agreement">BD-17</a> <a href="sources.html#BD-19" title="Disclosures 101 for Social Media Influencers">BD-19</a></td>
+</tr>
+<tr id="RQ-31">
+  <td class="id">theme</td>
+  <td class="id">P1</td>
+  <td><strong>Build marketing for the five supplied products</strong></td>
+  <td><span class="blank">no status given</span></td>
+  <td><span class="pill pill--blank">no-status-given</span><br>
+      <span class="small">three of five</span></td>
+  <td>The brief names five products. The register this site&#x27;s pages are generated from holds three. The two missing ones appear in no file in this repository before today.</td>
+  <td>Every page the site has published about products — the comparison, the buying guide, the counter-space analysis, the question-shaped articles — describes three items in one category. The two new items are in a different category node. Logged as CR-2 and as BS-03.</td>
+  <td class="src"><a href="sources.html#BD-01" title="Supplied affiliate short link 4 (as provided in the 2026-11-17 brief)">BD-01</a> <a href="sources.html#BD-02" title="Supplied affiliate short link 5 (as provided in the 2026-11-17 brief)">BD-02</a> <a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></td>
+</tr></tbody>
+</table>
+</div>
+
+<h2>Reading the trace</h2>
+<p>Most rows hold up. The site is in better shape than a reader of an unincorporated status column
+would guess: every one of the 171 published pages carries the required disclosure, the
+front page genuinely leads with the products, and the campaign ledger is exactly the empty-but-defined
+thing the brief asks for.</p>
+<p>Four rows do not hold up, and three of them fail the same way — a status word that says
+<em>Implemented</em> where the tree shows something partial:</p>
+<ul>
+  <li><strong>S-04</strong> (7 pages with no meta description, 5 duplicated titles) — the only unfinished P1 row.</li>
+  <li><strong>S-19</strong> — no chooser component exists, though a question-led article section does.</li>
+  <li><strong>S-24</strong> — 4 reader pages are one hop short of the row's requirement.</li>
+  <li><strong>S-09</strong> is honestly marked <em>Partly implemented</em>; the missing half is the social preview image, which is the half the row names first.</li>
+</ul>
+<p>The loudest number on this page is the one that is <em>not</em> a defect: 2462
+Amazon-host links of which 179 carry <code>rel="sponsored"</code>. The
+unmarked remainder are citations to a source inside a verification table, not offers — and Google
+defines the value by what the link is. See
+<a href="suggestions.html#BS-04">BS-04</a>.</p>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <a href="../index.html">Front page</a>
+      <a href="../marketing/comparison.html">Head-to-head</a>
+      <a href="../marketing/buying-guide.html">Which to buy</a>
+      <a href="../guides/index.html">Guides</a>
+      <a href="../brief/index.html">Design brief</a>
+      <a href="../suggestions.html">Suggestion board</a>
+      <a href="../questions.html">Open questions</a>
+      <a href="../flagged.html">Flagged for review</a>
+      <a href="../COORDINATION.md">Task board</a>
+    </nav>
+    <p><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Part of the Zone2 project register. Everything on these pages is either measured from
+    this repository or read from an official source and cited; a value no official source
+    states is left blank and flagged rather than filled in.
+    Built by <code>tools/build_board.py</code> — a hand-edit here will not survive the next run.</p>
+  </div>
+</footer>
+</body>
+</html>

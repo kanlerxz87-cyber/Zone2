@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · Counter Notes decision board</title>
+<meta name="description" content="Irregularities found while checking the 2026-11-17 brief against the repository, each with the source that establishes it. None blocks a merge.">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/board/flagged.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Counter Notes">
+<meta property="og:title" content="Flagged for review · Counter Notes decision board">
+<meta property="og:description" content="Irregularities found while checking the 2026-11-17 brief against the repository, each with the source that establishes it. None blocks a merge.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/board/flagged.html">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="assets/board.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="mast-in">
+    <a class="brand" href="../index.html">Counter Notes<span>Decision board · 2026-11-17</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html">Executive summary</a><a href="products.html">Product intent</a><a href="suggestions.html">Choose a path</a><a href="questions.html">Known &amp; unknown</a><a href="requirements.html">Requirements trace</a><a href="topics.html">Topics</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html" aria-current="page">Flagged</a></nav>
+  </div>
+</header>
+<div class="disclosure">
+  <div class="wrap">
+    <strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases. Product links on this site carry
+    no Associates tag yet, so nothing bought through them can be attributed — see
+    <a href="flagged.html#FL-02">FL-02</a>.
+  </div>
+</div>
+<main id="main" class="wrap">
+
+<p class="eyebrow">Flagged for review</p>
+<h1>14 irregularities, 4 of them high severity</h1>
+<p class="standfirst">Irregularities found while checking the 2026-11-17 brief against the tree. None of them blocks a merge; all of them are published on board/flagged.html with the source that establishes each one. The distinction this file keeps: a FLAG is something observed, a QUESTION (board/questions.json) is something unknown, and a SUGGESTION (board/suggestions.json) is something not yet chosen. Nothing moves between the three without evidence.</p>
+
+<div class="card card--warn">
+<p style="margin:0"><strong>None of these blocks a merge.</strong> They are published here, with the
+source that establishes each one, so they can be reviewed after the site is live and changes requested.
+That is the arrangement this repository has used since the second session.</p>
+</div>
+
+
+<section class="card" id="FL-01" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-01
+    <span class="pill pill--high">high</span></p>
+  <h3 style="margin:0 0 8px">Two of the five supplied products exist in no file in this repository</h3>
+  <p class="small"><strong>What.</strong> link.amazon/B0c8moW59 and link.amazon/B0f3GKalj appear in no .json, .html, .md or .py file in the tree before this session. The register the rest of the site is generated from holds three products; the brief names five.</p>
+  <p class="small"><strong>Evidence.</strong> Case-insensitive search across every matching file in the tree. Both links were then fetched live on 2026-11-17 and both resolve.</p>
+  <p class="small"><strong>Why it matters.</strong> Two surfaces now describe the same project with two different product counts, and there is no rule reconciling them. This repository has already shipped two defects of exactly this class — a page printing a page count that had drifted from the tree it described.</p>
+  <p class="small"><strong>Status.</strong> open — logged as CR-2 on the shared board, not actioned here</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> Whichever session owns ledger/products.json ingests PI-04 and PI-05, copying the intent fields as empty. See BS-12.
+    · Sources: <span class="src"><a href="sources.html#BD-01" title="Supplied affiliate short link 4 (as provided in the 2026-11-17 brief)">BD-01</a> <a href="sources.html#BD-02" title="Supplied affiliate short link 5 (as provided in the 2026-11-17 brief)">BD-02</a> <a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></span></p>
+</section>
+<section class="card" id="FL-02" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-02
+    <span class="pill pill--high">high</span></p>
+  <h3 style="margin:0 0 8px">An Associates tag is live on a minority of pages, and none of the five supplied links carries one</h3>
+  <p class="small"><strong>What.</strong> 7 of 171 published pages now carry a real Associates tag (shopnow047c-20), applied by session 7264f3c2 on 2026-11-17 — the first time any page in this repository has carried one. The remaining 171 minus 7 carry only YOURASSOCIATEID or YOURID, the placeholders Amazon prints in its own documentation. Critically, **all five supplied link.amazon links still resolve without a tag**: the tag reaches the pages this site wrote, not the short links the owner supplied.</p>
+  <p class="small"><strong>Evidence.</strong> Measured across every published page; all five supplied links fetched live 2026-11-17.</p>
+  <p class="small"><strong>Why it matters.</strong> Amazon states the tags must be embedded in the product links on the declared site, and reviews an application only after three qualifying sales in 180 days. No tag means no attributed sale, which means no review. The brief now supplies a tracking ID for the first time, which is the missing value — but see BQ2-01: supplying a string is not the same as confirming it is an issued, active ID.</p>
+  <p class="small"><strong>Status.</strong> partly resolved 2026-11-17 by session 7264f3c2 — the tag exists and is live; it does not yet reach the supplied links</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> Confirm in Associates Central that shopnow047c-20 is active for the intended marketplace (BQ2-01 is still open), then decide BS-01 to carry it across the remaining pages — and establish whether a link.amazon short code can carry a tag at all, which no source in this repository confirms.
+    · Sources: <span class="src"><a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a> <a href="sources.html#BD-13" title="Associates Program — Application Review Process">BD-13</a> <a href="sources.html#BD-01" title="Supplied affiliate short link 4 (as provided in the 2026-11-17 brief)">BD-01</a> <a href="sources.html#BD-02" title="Supplied affiliate short link 5 (as provided in the 2026-11-17 brief)">BD-02</a> <a href="sources.html#BD-06" title="Supplied affiliate short link 1 — re-read on a fifth date">BD-06</a> <a href="sources.html#BD-07" title="Supplied affiliate short link 2 — re-read on a fifth date">BD-07</a> <a href="sources.html#BD-08" title="Supplied affiliate short link 3 — re-read on a fifth date">BD-08</a></span></p>
+</section>
+<section class="card" id="FL-03" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-03
+    <span class="pill pill--high">high</span></p>
+  <h3 style="margin:0 0 8px">The five products span two category nodes and the published site covers one</h3>
+  <p class="small"><strong>What.</strong> Three resolve into Air Fryers and two into Meat Thermometers — two different browse trees under the same Home &amp; Kitchen parent. No page on the site mentions a thermometer.</p>
+  <p class="small"><strong>Evidence.</strong> The category breadcrumb served by each destination listing, read live 2026-11-17.</p>
+  <p class="small"><strong>Why it matters.</strong> It invalidates the plan rather than the pages. The eight-article calendar, the comparison, the buying guide and the counter-space analysis were all built for three products in one category.</p>
+  <p class="small"><strong>Status.</strong> open — needs a decision, not a fix</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> Answer BQ2-05, then choose BS-03.
+    · Sources: <span class="src"><a href="sources.html#BD-03" title="Destination listing observed for supplied link 4 — B0DHZTCNR5">BD-03</a> <a href="sources.html#BD-04" title="Destination listing observed for supplied link 5 — B0DZFD6R9Z">BD-04</a> <a href="sources.html#BD-09" title="Destination listing observed for supplied link 1 — B0CDY277D3">BD-09</a> <a href="sources.html#BD-10" title="Destination listing observed for supplied link 2 — B09B7SB46R">BD-10</a> <a href="sources.html#BD-11" title="Destination listing observed for supplied link 3 — B08DKYBTPH">BD-11</a></span></p>
+</section>
+<section class="card" id="FL-04" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-04
+    <span class="pill pill--medium">medium</span></p>
+  <h3 style="margin:0 0 8px">Requirement S-09 names a social preview image first, and most pages still lack one</h3>
+  <p class="small"><strong>What.</strong> 103 of 171 pages carry an og:image, up from none — session 7264f3c2 added social preview images on 2026-11-17. The remainder carry the rest of the og: block without the image. The brief&#x27;s status word for the row is &#x27;Partly implemented&#x27;, which was already fair and is now closer to accurate.</p>
+  <p class="small"><strong>Evidence.</strong> Measured across every published page. tools/build_marketing.py now emits og:image, og:image:width, og:image:height and og:image:alt for the pages it builds — that is where the 103 come from. tools/build_head_meta.py still emits the og: block without an image for the pages it serves.</p>
+  <p class="small"><strong>Why it matters.</strong> Every link to this site previews as a bare title wherever it is shared. See BS-10.</p>
+  <p class="small"><strong>Status.</strong> partly resolved 2026-11-17 by session 7264f3c2</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> Choose BS-10 to finish the row, or accept the partial status explicitly.
+    · Sources: <span class="src"><a href="sources.html#BD-15" title="Qualify your outbound links to Google (rel=&quot;sponsored&quot;)">BD-15</a></span></p>
+</section>
+<section class="card" id="FL-05" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-05
+    <span class="pill pill--medium">medium</span></p>
+  <h3 style="margin:0 0 8px">The three-question chooser row says &#x27;Implemented&#x27; and the tree shows none</h3>
+  <p class="small"><strong>What.</strong> 1 pages carry a chooser component. What exists instead is a section that poses three questions and links each to its own article.</p>
+  <p class="small"><strong>Evidence.</strong> Measured across every published page.</p>
+  <p class="small"><strong>Why it matters.</strong> Two very different repairs follow from two different readings: either the status word is wrong, or a component was lost in the front-page rebuild. The tree cannot tell them apart, so it is recorded rather than assumed.</p>
+  <p class="small"><strong>Status.</strong> open — needs the owning session</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> Answer BQ2-06.
+    · Sources: <span class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></span></p>
+</section>
+<section class="card" id="FL-06" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-06
+    <span class="pill pill--medium">medium</span></p>
+  <h3 style="margin:0 0 8px">The P1 row says &#x27;Implemented&#x27; and 7 pages have no meta description</h3>
+  <p class="small"><strong>What.</strong> Every page has a title, but 7 pages carry no meta description and 2 descriptions are shared between pages. 5 titles are duplicated.</p>
+  <p class="small"><strong>Evidence.</strong> Measured across every published page.</p>
+  <p class="small"><strong>Why it matters.</strong> It is the only P1 row on the brief that is unfinished, and the fix is mechanical.</p>
+  <p class="small"><strong>Status.</strong> open</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> See BS-11.
+    · Sources: <span class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></span></p>
+</section>
+<section class="card" id="FL-07" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-07
+    <span class="pill pill--low">low</span></p>
+  <h3 style="margin:0 0 8px">The internal-linking row says &#x27;Implemented&#x27; and 4 reader pages are a hop short</h3>
+  <p class="small"><strong>What.</strong> 4 of 29 reader and guide pages reach none of the comparison, the buying guide or the guides index. They link to the marketing front page instead.</p>
+  <p class="small"><strong>Evidence.</strong> Measured by following every internal href on each reader and guide page.</p>
+  <p class="small"><strong>Why it matters.</strong> One hop per page. Mechanical.</p>
+  <p class="small"><strong>Status.</strong> open</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> See BS-11.
+    · Sources: <span class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></span></p>
+</section>
+<section class="card" id="FL-08" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-08
+    <span class="pill pill--medium">medium</span></p>
+  <h3 style="margin:0 0 8px">The brief asks to measure whether anyone arrives, and nothing is measuring</h3>
+  <p class="small"><strong>What.</strong> 0 of 171 pages carry a Search Console verification tag and 0 call an event endpoint. The five events are specified and unwired.</p>
+  <p class="small"><strong>Evidence.</strong> Measured across every published page; docs/measurement-t40.json defines EV-01 to EV-05.</p>
+  <p class="small"><strong>Why it matters.</strong> Three separate rows on the brief ask for an outcome that can only be measured by an instrument that is switched off. Until it is on, topic choice is guesswork, which is the thing the brief asks to stop doing.</p>
+  <p class="small"><strong>Status.</strong> open</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> Choose BS-02.
+    · Sources: <span class="src"><a href="sources.html#BD-16" title="Spam policies for Google web search — site reputation policy, human-review factors">BD-16</a></span></p>
+</section>
+<section class="card" id="FL-09" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-09
+    <span class="pill pill--info">informational</span></p>
+  <h3 style="margin:0 0 8px">Four sources in this register are carried, not re-fetched</h3>
+  <p class="small"><strong>What.</strong> BD-17, BD-18, BD-19 and BD-20 are quoted from the repository&#x27;s own source register and were not re-read live by this session. Each says so on the sources page.</p>
+  <p class="small"><strong>Evidence.</strong> The carried_note field on each row names the date the repository last read it and the session that did.</p>
+  <p class="small"><strong>Why it matters.</strong> A register that silently upgrades a carried quote to a live one is the failure this whole file exists to prevent. Labelling it is the fix, not re-fetching it.</p>
+  <p class="small"><strong>Status.</strong> recorded, not open</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> None.
+    · Sources: <span class="src"><a href="sources.html#BD-17" title="Associates Program Operating Agreement">BD-17</a> <a href="sources.html#BD-18" title="Associates Program Policies (Participation Requirements, IP License, Trademark Guidelines)">BD-18</a> <a href="sources.html#BD-19" title="Disclosures 101 for Social Media Influencers">BD-19</a> <a href="sources.html#BD-20" title="Creating helpful, reliable, people-first content">BD-20</a></span></p>
+</section>
+<section class="card" id="FL-10" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-10
+    <span class="pill pill--info">informational</span></p>
+  <h3 style="margin:0 0 8px">The compliance status of the supplied short links is recorded as unresolved, not as a finding</h3>
+  <p class="small"><strong>What.</strong> The brief instructs that no claim be made that the supplied short links are invalid, and points to FLG-003 on a different site for the unresolved question.</p>
+  <p class="small"><strong>Evidence.</strong> Reproduced as BQ2-04 rather than as a finding, on the brief&#x27;s explicit instruction.</p>
+  <p class="small"><strong>Why it matters.</strong> It is the one place where this board refuses to answer a question it could plausibly argue its way to. A compliance register that asserts a status it has not verified is worse than one that says nothing.</p>
+  <p class="small"><strong>Status.</strong> recorded, not open</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> None, unless the owner can close it from the enrolled account.
+    · Sources: <span class="src"><a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a></span></p>
+</section>
+<section class="card" id="FL-11" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-11
+    <span class="pill pill--info">informational</span></p>
+  <h3 style="margin:0 0 8px">The brief&#x27;s decision and flag references point at two other repositories, and they are live</h3>
+  <p class="small"><strong>What.</strong> The brief treats roughly fifteen decision records (D-04 through D-27) and several flag ids as settled by reference to a Zone4 site, and cites FLG-003 on a Zone3 site.</p>
+  <p class="small"><strong>Evidence.</strong> The Zone4 decisions page was fetched live on 2026-11-17: it exists, it reports 26 decisions recorded and 13 open, and it hosts anchors in the D-nn form. It also names, as its own open decisions, &#x27;Do the three product links carry an Associates tag?&#x27; and &#x27;Which Associates marketplace and tracking ID should receive purchases?&#x27;</p>
+  <p class="small"><strong>Why it matters.</strong> The references are real, which is worth knowing — a brief that cited a dead page would be a different problem. Two things this session did NOT do: verify each of the fifteen decision ids individually, and fetch the Zone3 FLG-003 page. Both are left as verified-unknown rather than assumed.</p>
+  <p class="small"><strong>Status.</strong> recorded, not open</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> None. Noted because the tracking ID supplied in this brief would, once confirmed, answer the tracking-ID question that is still open on the other site.
+    · Sources: <span class="src"><a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></span></p>
+</section>
+<section class="card" id="FL-12" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-12
+    <span class="pill pill--medium">medium</span></p>
+  <h3 style="margin:0 0 8px">The release-readiness board prints two page counts that the tree outgrew</h3>
+  <p class="small"><strong>What.</strong> ledger/readiness.json records RR-01 as &#x27;{published_html_pages} published HTML pages&#x27; and RR-05 as &#x27;{pages_linking_dp} pages link to amazon.com/dp/&#x27;, both derived at build time by tools/build_readiness.py rather than typed. As of 2026-11-17 the tree derives 178 and 103. The drift this flag recorded was 46 pages when it was filed.</p>
+  <p class="small"><strong>Evidence.</strong> CR-1 was filed by session dc72a69e on 2026-11-16 with the drift at 22 pages. It was fixed on 2026-11-17 by session 0f5673ee, which replaced the typed counts with the {measure} tokens now in readiness.json. This row is retained as the record of the defect, not as an open one.</p>
+  <p class="small"><strong>Why it matters.</strong> It is the same defect this repository has now hit three times, in three namespaces, and the reason board/ derives every count it prints instead of typing it. The fix is structural: a derived count cannot drift.</p>
+  <p class="small"><strong>Status.</strong> resolved</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> None. Verified resolved on 2026-11-17. Whoever owns ledger/readiness.json should leave the tokens in place; re-typing a number here would reintroduce the defect.
+    · Sources: <span class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a> <a href="sources.html#BD-22" title="Shared task board — CR-2, the cross-scope request for the two new supplied links">BD-22</a></span></p>
+</section>
+<section class="card" id="FL-13" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-13
+    <span class="pill pill--high">high</span></p>
+  <h3 style="margin:0 0 8px">The rule that is supposed to stop a page printing a product price never fires</h3>
+  <p class="small"><strong>What.</strong> Four copies of the context-aware price rule strip HTML tags before splitting the page into units on those same tags. After the strip there is nothing left to split on, so every page collapses to a single unit — and because almost every page mentions commission, earn or rate somewhere, the program-economics exemption then swallows any product price on it. Measured across the tree: 171 of 171 pages collapse to one unit, so the rule cannot fire on any of them.</p>
+  <p class="small"><strong>Evidence.</strong> The inverted order is at .github/workflows/pages.yml:155, tools/validate_data.py:550, tools/build_readiness.py:623 and tools/validate_audit.py:272 - each reads re.split(r&quot;&lt;/tr&gt;|&lt;/p&gt;|&lt;/li&gt;|&lt;br\\s*/?&gt;&quot;, re.sub(r&quot;&lt;[^&gt;]+&gt;&quot;, &quot; &quot;, text)). Reversing the two operations makes the rule fire: a paragraph that offers the product at a dollar figure inside a buying context is flagged under the corrected order and passes silently under the current one. This board&#x27;s own gate was written the corrected way round, and its negative test caught this very paragraph on its first run - the corrected rule works, and that is how the defect in the other four copies was noticed.</p>
+  <p class="small"><strong>Why it matters.</strong> The site&#x27;s no-prices rule is one of the four things every session asserts about every deploy. It is currently asserted by a check that cannot fail. No page is known to print a price today — this is a hole in the fence, not a breach — but the hole is in all four copies, including the one that gates every push to main.</p>
+  <p class="small"><strong>Status.</strong> open — logged as CR-4 on the shared board, not actioned here</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> In each of the four places: build the units by splitting the raw text first and stripping tags from each unit afterwards, i.e. [re.sub(r&quot;&lt;[^&gt;]+&gt;&quot;, &quot; &quot;, u) for u in re.split(r&quot;&lt;/tr&gt;|&lt;/p&gt;|&lt;/li&gt;|&lt;br\\s*/?&gt;&quot;, text)]. tools/validate_board.py already does it that way and its negative test proves the check fires.
+    · Sources: <span class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></span></p>
+</section>
+<section class="card" id="FL-14" style="margin-bottom:14px">
+  <p class="eyebrow" style="margin-bottom:4px">FL-14
+    <span class="pill pill--medium">medium</span></p>
+  <h3 style="margin:0 0 8px">Two namespaces count &#x27;tagged pages&#x27; with different rules and report different numbers</h3>
+  <p class="small"><strong>What.</strong> tools/validate_brief.py matches the tag on the bare pattern tag=[A-Za-z0-9]+-[0-9]{2}, which fires on the shape wherever it appears — including inside a sentence about tags. tools/build_board.py and tools/validate_data.py match [?&amp;]tag=, which fires only on a real URL parameter. The two therefore disagree about the same tree, and the gap is not a rounding difference: it is whether a page that merely discusses a tag counts as carrying one.</p>
+  <p class="small"><strong>Evidence.</strong> Observed while recording BQ2-01 on 2026-11-17. A sentence that quoted the tag as it appears in a URL was counted as a tagged page by the design-brief gate and not by this board&#x27;s measurement, which reported one fewer. Two other pages in the repository — pages/flags.html and release/index.html — quote the same string in prose and are counted the same way. The sentences have been left as they are, since they are not this session&#x27;s to edit; the rule is what is wrong.</p>
+  <p class="small"><strong>Why it matters.</strong> The tagged-page count is the one number that decides whether the revenue side of this site works at all. A reader who compares the design brief&#x27;s summary with the decision board&#x27;s register will find two different figures and no way to tell which is right — which is how a number stops being evidence and becomes decoration.</p>
+  <p class="small"><strong>Status.</strong> open</p>
+  <p class="small" style="margin-bottom:0"><strong>Owner action.</strong> Agree one rule — a tag counts only when it is a parameter of an outbound Amazon link — and apply it in both places. The sentence in BQ2-01 is the test case: it must not count.
+    · Sources: <span class="src"><a href="sources.html#BD-13" title="Associates Program — Application Review Process">BD-13</a></span></p>
+</section>
+
+<h2>A note on severity</h2>
+<p>“High” here means <em>it changes what should be done next</em>, not <em>the site is broken</em>. The
+site builds, every page carries the disclosure, and no page prints a price. The three high rows are
+about a plan that has been overtaken: two products the register does not know about, a tag that does not
+exist anywhere, and a category split that the published site does not cover.</p>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <a href="../index.html">Front page</a>
+      <a href="../marketing/comparison.html">Head-to-head</a>
+      <a href="../marketing/buying-guide.html">Which to buy</a>
+      <a href="../guides/index.html">Guides</a>
+      <a href="../brief/index.html">Design brief</a>
+      <a href="../suggestions.html">Suggestion board</a>
+      <a href="../questions.html">Open questions</a>
+      <a href="../flagged.html">Flagged for review</a>
+      <a href="../COORDINATION.md">Task board</a>
+    </nav>
+    <p><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Part of the Zone2 project register. Everything on these pages is either measured from
+    this repository or read from an official source and cited; a value no official source
+    states is left blank and flagged rather than filled in.
+    Built by <code>tools/build_board.py</code> — a hand-edit here will not survive the next run.</p>
+  </div>
+</footer>
+</body>
+</html>
