@@ -43,6 +43,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import head_meta  # noqa: E402  — the repository's single canonical/OG contract
+import site_config  # noqa: E402  — one source of truth for the Associates tag
 
 ROOT = Path(__file__).resolve().parent.parent
 FACTS = ROOT / "marketing" / "data" / "facts.json"
@@ -53,6 +54,9 @@ CHECKED_ON = "2026-11-16"
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 LINK_REL = "sponsored nofollow"
 LINK_DISCLOSURE = "(paid link)"
+# Second sentence of the disclosure strip — always true of the current link state
+# (ledger/site_config.json), never typed here.
+DISC_STATE = site_config.disclosure_variant()
 
 # Editorial copy for the three listings. Every figure quoted in these strings also
 # appears as a sourced row in the generated table below it — the prose never introduces
@@ -178,7 +182,7 @@ def source_cell(product: dict, row: dict) -> str:
         s = src_map(product).get(sid)
         if s:
             host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", s["url"]).split("/")[0])
-            return (f'<a class="pb-src" href="{e(s["url"])}" target="_blank" '
+            return (f'<a class="pb-src" href="{e(site_config.tag_amazon_url(s["url"]))}" target="_blank" '
                     f'rel="{LINK_REL} noopener noreferrer">{e(host)}</a>')
     reason = row.get("blank_reason") or "No official source states this value."
     return f'<span class="pb-blank">&mdash;<small>{e(reason)}</small></span>'
@@ -194,8 +198,10 @@ def value_cell(row: dict) -> str:
 
 
 def product_link(product: dict) -> str:
-    asin = product["asin"]
-    return f"https://www.amazon.com/dp/{e(asin)}"
+    """Outbound product href: a tagged Special Link when the owner configured a tag
+    (ledger/site_config.json), otherwise the untagged preview. Displayed evidence text
+    elsewhere on these pages stays the bare listing URL — what was read is what is shown."""
+    return site_config.product_href(product["asin"])
 
 
 def spec_rows(product: dict, attrs: list[str]) -> list[dict]:
@@ -235,7 +241,7 @@ def masthead(active: str) -> str:
     <nav class="pb-nav" aria-label="Sections">{''.join(items)}<a href="{e(depth)}products.html">Operator dashboard</a></nav>
   </div>
 </header>
-<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} A commission may be earned when you buy through our links, at no extra cost to you. Product links on this site carry no Associates tag yet, so they are preview links and earn nothing.</div></div>"""
+<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} {e(DISC_STATE)}</div></div>"""
 
 
 def footer(depth: str = "") -> str:
@@ -431,7 +437,7 @@ def product_table(product: dict, attrs: list[str] | None = None) -> str:
             f"<td>{source_cell(product, r)}</td></tr>"
         )
     sids = " ".join(
-        f'<a class="pb-src" href="{e(s["url"])}" target="_blank" rel="{LINK_REL} noopener noreferrer">{e(s["name"])}</a>'
+        f'<a class="pb-src" href="{e(site_config.tag_amazon_url(s["url"]))}" target="_blank" rel="{LINK_REL} noopener noreferrer">{e(s["name"])}</a>'
         for s in product["official_sources"]
     )
     return (f'<div class="pb-table-scroll"><table class="pb-table">'
@@ -587,7 +593,7 @@ def build_index(facts: dict, board: dict) -> str:
   itself cannot be trusted. The register now carries it as <b>F-41</b>, and the stored title has since
   been corrected by another session working on this repository in parallel &mdash; which is how the
   process is meant to work: the drift is dated, visible and traceable rather than invisible.
-  <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="{LINK_REL} noopener noreferrer">Check it yourself</a> &middot;
+  <a href="{e(site_config.product_href('B09B7SB46R'))}" target="_blank" rel="{LINK_REL} noopener noreferrer">Check it yourself</a> &middot;
   <a href="flagged.html">the full flagged register</a> &middot;
   <a href="questions.html#Q-T50-11">why the cadence question is still open</a>.</div>
 </div></section>
@@ -712,11 +718,12 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
         p = prods[key]
         v = PRODUCT_VOICE[key]
         dp = product_link(p)
+        dp_bare = f"https://www.amazon.com/dp/{p['asin']}"
         tables += (
             f'<h3 style="font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:600;'
             f'margin:32px 0 6px;letter-spacing:-0.015em">{e(v["display"])}</h3>'
             f'<p style="font-size:14px;color:var(--ink-soft);margin:0 0 14px">'
-            f'<a href="{e(dp)}" target="_blank" rel="{LINK_REL} noopener noreferrer">{e(dp)}</a> '
+            f'<a href="{e(dp)}" target="_blank" rel="{LINK_REL} noopener noreferrer">{e(dp_bare)}</a> '
             f'&middot; {e(LINK_DISCLOSURE)}</p>'
             + product_table(p)
         )

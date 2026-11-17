@@ -1,0 +1,54 @@
+{
+  "note": "Site-level monetization configuration. The Associates tag is supplied verbatim by the owner in the 2026-11-17 brief ('Selected Tracking ID:shopnow047c-20') — it is never invented, never modified, and validated here against the tagged format Amazon assigns (e.g. exampletag-20) and against the R-11 rule that an Associates ID must contain no Amazon mark. When this file carries no tag, every generator falls back to preview_link() and labels the links as non-earning. The tag changes only the href query string; the disclosure sentence (R-01), the link-level disclosure (R-02) and rel=\"sponsored nofollow\" (R-17) are unchanged by it.",
+  "as_of_utc": "2026-11-17",
+  "supplied_by": "owner brief 2026-11-17 (recurring Zone2 brief, 'Selected Tracking ID:shopnow047c-20')",
+  "associates_tag": "shopnow047c-20",
+  "marketplace": "amazon.com",
+  "link_format": "https://www.amazon.com/dp/{ASIN}?tag=shopnow047c-20 — Amazon's own help page gives the qualifying Special Link shape as http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID; the tag parameter identifies the Associates account the sale is tracked to (S24/S02 in ledger/sources.json)",
+  "validation": {
+    "per_product": "one link per product was requested and tested (brief: 'Test one link per product in the enrolled Associates workflow and confirm destination and tracking report before scaling'). Destination confirmation is done below from live reads dated 2026-11-17. Tracking-report confirmation requires the owner's Associates Central session and is NOT done here — recorded as F-43 and left open on purpose.",
+    "rows": [
+      {
+        "entry": "P-01",
+        "asin": "B0CDY277D3",
+        "special_link": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+        "destination_confirmed_utc": "2026-11-17",
+        "destination_evidence": "live fetch 2026-11-17 served 'Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen' (the same listing the untagged link serves)",
+        "tracking_report_confirmed": "",
+        "tracking_report_note": "not confirmed — requires the owner's Associates Central reporting (F-43)"
+      },
+      {
+        "entry": "P-02",
+        "asin": "B09B7SB46R",
+        "special_link": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+        "destination_confirmed_utc": "2026-11-17",
+        "destination_evidence": "live fetch 2026-11-17 served 'Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen'",
+        "tracking_report_confirmed": "",
+        "tracking_report_note": "not confirmed — requires the owner's Associates Central reporting (F-43)"
+      },
+      {
+        "entry": "P-03",
+        "asin": "B08DKYBTPH",
+        "special_link": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+        "destination_confirmed_utc": "2026-11-17",
+        "destination_evidence": "live fetch 2026-11-17 served 'Amazon.com: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen'",
+        "tracking_report_confirmed": "",
+        "tracking_report_note": "not confirmed — requires the owner's Associates Central reporting (F-43)"
+      }
+    ]
+  },
+  "rules_carried": {
+    "R-01": "Site-level disclosure sentence on every page, unchanged by tagging",
+    "R-02": "Link-level disclosure '(paid link)' adjacent to every product link, unchanged by tagging",
+    "R-07": "Every product link to Amazon carries the tag as a URL parameter (Special Link), and the observed evidence URLs recorded in ledgers are never rewritten to carry it",
+    "R-08": "No sub-tag or per-visitor parameter is ever appended (Participation Requirements forbid associating a sub-tag or Associates reporting with a specific end user)",
+    "R-11": "The tag contains no Amazon mark (checked at build time by tools/validate_data.py check_marks)",
+    "R-14": "No competing-network attribution parameter is ever added to the same link",
+    "R-17": "rel=\"sponsored nofollow\" is emitted whether the link is tagged or a preview"
+  },
+  "source_ids": [
+    "S02",
+    "S24",
+    "S05"
+  ]
+}

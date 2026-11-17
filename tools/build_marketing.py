@@ -10,9 +10,10 @@ Design rules, each enforced here rather than trusted:
     source is a hard build error - the build stops instead of publishing it.
 3.  **A conflict is published as a conflict.**  Two official statements that disagree are both shown, with
     both sources, and the row is marked ``CONFLICT``.  The renderer does not pick a winner silently.
-4.  **Every affiliate link goes through ``tools/link_builder.py``.**  With no Associates ID configured, that
-    means ``preview_link()`` - which is explicitly non-monetized and must be labelled as such.  The renderer
-    refuses to hand-write ``amazon.com/dp/`` URLs.
+4.  **Every affiliate link goes through ``tools/link_builder.py``.**  With an Associates tag configured in
+    ``ledger/site_config.json`` that means ``build_product_link()`` - a tagged Special Link labelled
+    ``(paid link)``; without one it means ``preview_link()`` - explicitly non-monetized and labelled as
+    such.  The renderer refuses to hand-write ``amazon.com/dp/`` URLs.
 5.  **No price is ever printed.**  Price rows are ``withheld_by_policy`` and the verifier re-checks the
     rendered HTML for money patterns in a buying context.
 
@@ -35,7 +36,14 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "tools"))
 
-from link_builder import REQUIRED_SITE_DISCLOSURE, LinkPolicyError, audit_html, preview_link  # noqa: E402
+from link_builder import (  # noqa: E402
+    REQUIRED_SITE_DISCLOSURE,
+    LinkPolicyError,
+    audit_html,
+    build_product_link,
+    preview_link,
+)
+import site_config  # noqa: E402  — one source of truth for the Associates tag
 
 DATA = REPO / "marketing" / "data" / "facts.json"
 OUT = REPO / "marketing"
@@ -105,29 +113,52 @@ def source_link(src_id: str | None) -> str:
         raise BuildError(f"row cites unknown source id {src_id!r}; refusing to publish an unresolvable citation")
     host = src["url"].split("/")[2]
     kind = "manufacturer" if src["kind"] == "manufacturer" else "Amazon listing"
-    # A citation pointing at an Amazon marketplace page is marked sponsored as well. It earns nothing
-    # (there is no tag), but over-declaring a commercial relationship is the safe direction, and it keeps
-    # the repository's existing "no amazon.com/dp/ link without rel=sponsored" rule literally true.
+    # A citation pointing at an Amazon marketplace page is marked sponsored as well. When an Associates
+    # tag is configured the citation href carries it too (the programme expects product links to Amazon
+    # to be Special Links), while the displayed citation stays the exact page the fact was read from.
+    # Over-declaring a commercial relationship is the safe direction, and it keeps the repository's
+    # existing "no amazon.com/dp/ link without rel=sponsored" rule literally true.
     rel = "sponsored nofollow noopener noreferrer" if host.endswith("amazon.com") else "noopener noreferrer nofollow"
+    href = site_config.tag_amazon_url(src["url"])
     return (
-        f'<a class="src" href="{esc(src["url"])}" target="_blank" rel="{rel}">'
+        f'<a class="src" href="{esc(href)}" target="_blank" rel="{rel}">'
         f'{esc(src_id)} · {esc(host)}<span class="src-kind">{esc(kind)}</span></a>'
     )
 
 
 def product_link(product: dict) -> str:
-    """Emit the product link through link_builder, never by hand."""
-    link = preview_link(
-        product["asin"],
-        link_text=f'{product["manufacturer_product_name"]} (see this model on Amazon)',
-    )
+    """Emit the product link through link_builder, never by hand.
+
+    With an Associates tag configured (ledger/site_config.json) this emits a tagged Special
+    Link; without one it emits preview_link() and labels the link as non-earning. Either way
+    the disclosure halves (R-01/R-02) and rel="sponsored nofollow" are unchanged.
+    """
+    tag = site_config.associates_tag()
+    name = product["manufacturer_product_name"]
+    if tag:
+        link = build_product_link(
+            product["asin"],
+            tag,
+            link_text=f"{name} (see this model on the listing)",
+        )
+        note = "Special Link (paid link)"
+        note_title = (
+            "tagged Special Link carrying our Associates ID; a qualifying purchase may earn "
+            "this site a commission at no extra cost to you"
+        )
+    else:
+        link = preview_link(
+            product["asin"],
+            link_text=f"{name} (see this model on Amazon)",
+        )
+        note = "preview link \u2014 no Associates ID configured, earns nothing"
+        note_title = " ".join(link.warnings)
     href = esc(link.href)
     text = esc(link.text)
-    warn = esc(" ".join(link.warnings))
     return (
         f'<a class="sponsored-link" href="{href}" rel="sponsored nofollow" target="_blank" '
-        f'referrerpolicy="no-referrer-when-downgrade" data-link-state="PREVIEW_NO_TAG">{text}</a>'
-        f'<span class="link-note" title="{warn}">preview link \u2014 no Associates ID configured, earns nothing</span>'
+        f'referrerpolicy="no-referrer-when-downgrade" data-link-state="{site_config.link_state()}">{text}</a>'
+        f'<span class="link-note" title="{esc(note_title)}">{note}</span>'
         # R-02: a clear, conspicuous statement adjacent to the affiliate link itself.
         f'<span class="disclosure disclosure--link" data-rule="R-02">{esc(FACTS["link_level_disclosure"])}</span>'
     )
@@ -198,7 +229,7 @@ def feature_list(product: dict) -> str:
     items = "".join(f"<li>{esc(f)}</li>" for f in product["features_official"])
     return (
         f'<ul class="features">{items}</ul>'
-        f'<p class="row-note">Features as stated on the <a class="src" href="{esc(src["url"])}" '
+        f'<p class="row-note">Features as stated on the <a class="src" href="{esc(site_config.tag_amazon_url(src["url"]))}" '
         f'target="_blank" rel="noopener noreferrer nofollow">{esc(src["name"])}</a>.</p>'
     )
 
@@ -231,7 +262,7 @@ def ext_link(label: str, url: str) -> str:
     host = url.split("/")[2]
     rel = "sponsored nofollow noopener noreferrer" if host.endswith("amazon.com") else "noopener noreferrer nofollow"
     return (
-        f'<a class="src" href="{esc(url)}" target="_blank" rel="{rel}">'
+        f'<a class="src" href="{esc(site_config.tag_amazon_url(url))}" target="_blank" rel="{rel}">'
         f"{esc(label)}</a>"
     )
 
@@ -536,8 +567,11 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
   <p class="foot-brand">{esc(BRAND['name'])}</p>
   <p>{esc(BRAND['footer_note'])}</p>
   <p>{esc(REQUIRED_SITE_DISCLOSURE)}</p>
-  <p>Product links are <strong>preview links</strong>: no Associates ID is configured for this project, so they
-  are not monetized and carry <code>rel="sponsored nofollow"</code>. Facts verified {esc(AS_OF)} against official
+  <p>Product links marked <strong>(paid link)</strong> are Special Links carrying our Associates ID, so a
+  qualifying purchase through one may earn this site a commission at no extra cost to you; they carry
+  <code>rel="sponsored nofollow"</code>. Source citations are the pages facts were read from: their displayed
+  URL is the evidence, and when a citation points at an Amazon listing its href carries the same tag because
+  the programme expects product links to Amazon to be Special Links. Facts verified {esc(AS_OF)} against official
   manufacturer and Amazon product pages.
   <a href="{root}flagged.html">Open items</a> ·
   <a href="{root}improvements.html">Improvement board</a> ·
@@ -584,7 +618,7 @@ def page_index() -> str:
     )
     checked = "".join(
         f'<li><span class="pill {"pill-ok" if v["status"] == "verified" else "pill-flag"}">{esc(v["status"])}</span> '
-        f"{esc(v['claim'])} <a class=\"src\" href=\"{esc(v['url'])}\" target=\"_blank\" "
+        f"{esc(v['claim'])} <a class=\"src\" href=\"{esc(site_config.tag_amazon_url(v['url']))}\" target=\"_blank\" "
         f'rel="{"sponsored nofollow noopener noreferrer" if v["url"].split("/")[2].endswith("amazon.com") else "noopener noreferrer nofollow"}">'
         f"{esc(v['url'].split('/')[2])}</a></li>"
         for v in VERIFIED_TODAY
@@ -1011,7 +1045,7 @@ def page_verification() -> str:
     src_rows = "".join(
         f'<tr><th scope="row">{esc(s["id"])}</th><td>{esc(s["name"])}</td>'
         f'<td>{esc("manufacturer" if s["kind"] == "manufacturer" else "Amazon listing")}</td>'
-        f'<td><a class="src" href="{esc(s["url"])}" target="_blank" '
+        f'<td><a class="src" href="{esc(site_config.tag_amazon_url(s["url"]))}" target="_blank" '
         f'rel="{"sponsored " if s["url"].split("/")[2].endswith("amazon.com") else ""}noopener noreferrer nofollow">'
         f'{esc(s["url"])}</a></td></tr>'
         for s in sorted(SOURCES.values(), key=lambda s: s["id"])
@@ -1021,6 +1055,25 @@ def page_verification() -> str:
         f'<td class="cell-src"><a class="src" href="{esc(f["source"])}" target="_blank" rel="noopener noreferrer nofollow">{esc(f["source"])}</a></td></tr>'
         for f in FACTS["program_facts"]
     )
+    if site_config.link_state() == "TAGGED":
+        links_state_block = (
+            '<p>Product links on this site are <strong>Special Links</strong> carrying the Associates ID '
+            "the owner supplied on 2026-11-17 (<code>shopnow047c-20</code>), marked "
+            '<code>rel="sponsored nofollow"</code> and labelled <strong>(paid link)</strong>. A qualifying '
+            "purchase through one may earn this site a commission at no extra cost to the buyer. The ID was "
+            "supplied by the owner; none was invented. One link per product was opened on 2026-11-17 and "
+            "each resolved to the listing this site writes about; confirmation of the click in Associates "
+            "reporting is the owner's step and is tracked as an open item on the flagged page.</p>"
+        )
+    else:
+        links_state_block = (
+            "<p>No Amazon Associates ID is configured for this project, and inventing one is prohibited. "
+            "Every outbound product link here is therefore an inert <strong>preview link</strong> produced "
+            'by the project\'s link builder, marked <code>rel="sponsored nofollow"</code> and labelled as '
+            "non-earning. Before publishing, the owner must set the Associates ID; the builder will then "
+            'emit a properly tagged Special Link instead, and the "preview link" labels disappear '
+            "automatically because they are driven by that same configuration.</p>"
+        )
     body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <span>Verification</span></nav>
     <div class="page-head">
     <p class="receipts">Re-checked {esc(ED_AS_OF)}: the three supplied short links, all three Amazon
@@ -1062,13 +1115,8 @@ def page_verification() -> str:
     </section>
 
     <section class="card">
-      <h2>Links are not monetized</h2>
-      <p>No Amazon Associates ID is configured for this project, and inventing one is prohibited. Every
-      outbound product link here is therefore an inert <strong>preview link</strong> produced by the
-      project's link builder, marked <code>rel="sponsored nofollow"</code> and labelled as non-earning. Before
-      publishing, the owner must set the Associates ID; the builder will then emit a properly tagged Special
-      Link instead, and the "preview link" labels disappear automatically because they are driven by that
-      same configuration.</p>
+      <h2>How the product links work</h2>
+      {links_state_block}
     </section>
 """
     return shell("Verification", "Method, sources and row counts for the verified marketing set.", body,
@@ -1098,6 +1146,20 @@ def page_flagged() -> str:
             f"<td>{esc(r['attr'])}</td><td><span class=\"pill {klass}\">{label}</span></td>"
             f"<td>{esc(why)}</td><td class=\"cell-src\">{srcs}</td></tr>"
         )
+    if site_config.link_state() == "TAGGED":
+        tag_owner_action = (
+            "<strong>Confirm the tracking report.</strong> The Associates ID the owner supplied "
+            "(<code>shopnow047c-20</code>) is on every product link now, and one link per product was "
+            "opened on 2026-11-17 and resolved to the listing this page describes. What this project "
+            "cannot do from here is open Associates Central: the owner confirms the click and the order "
+            "appear in the tracking report before the link set is scaled to more placements."
+        )
+    else:
+        tag_owner_action = (
+            "<strong>Set the Associates ID.</strong> Until one is configured, every product link on this "
+            "site is a non-earning preview link. Nothing is tagged, because a fabricated tag would be "
+            "worse than none."
+        )
     body = f"""    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Overview</a> › <span>Flagged for review</span></nav>
     <div class="page-head">
       <h1>Flagged for review</h1>
@@ -1117,8 +1179,7 @@ def page_flagged() -> str:
     <section class="card">
       <h2>Owner actions</h2>
       <ol class="plain">
-        <li><strong>Set the Associates ID.</strong> Until one is configured, every product link on this site is a
-        non-earning preview link. Nothing is tagged, because a fabricated tag would be worse than none.</li>
+        <li>{tag_owner_action}</li>
         <li><strong>Resolve the Emeril preset count.</strong> The manufacturer's own page says both "25 Cooking
         Pre-sets" and "24 one-touch cooking presets"; Amazon's title says 24. Ask the brand which is current.</li>
         <li><strong>Resolve the Chefman 8 Qt maximum temperature.</strong> The Amazon title advertises a 450 °F
@@ -1222,7 +1283,7 @@ def page_topic(slug: str) -> str:
             '<section class="block block--cta"><h2>The models this guide is about</h2>'
             f'<ul class="related">{"".join(rows)}</ul>'
             '<p class="row-note">Links go to our own write-ups, which carry the product page link and its '
-            "preview state.</p></section>"
+            f'link state ({esc(site_config.link_state().lower().replace("_", " "))}).</p></section>'
         )
     related = "".join(
         f'<li><a href="{esc(r)}">{esc(GUIDE_BY_SLUG[r]["title"])}</a> <span>{esc(GUIDE_BY_SLUG[r]["kicker"])}</span></li>'

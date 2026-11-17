@@ -8,7 +8,8 @@ Fails (non-zero exit) if any of these stop being true, so none of them depends o
   G3  every generated page has fully resolved internal links and asset references
   G4  no page prints a money amount in a buying context (the project's no-price rule)
   G5  every outbound Amazon marketplace link carries rel="sponsored" (Google's outbound-link rule)
-  G6  every generated page states the preview state of its links while no Associates ID is configured
+  G6  every generated page states the true link state: tagged Special Links labelled "(paid link)" while an
+      Associates tag is configured, or the preview state of its links while none is
   G7  **every table row that shows a value also shows a source link** - the core project rule
   G8  every row marked UNVERIFIED/WITHHELD prints no value at all
   G9  committed HTML matches a fresh build (nothing hand-edited)
@@ -37,6 +38,7 @@ sys.path.insert(0, str(REPO / "tools"))
 
 from build_marketing import LIVE, PAGES, SOURCES, build  # noqa: E402
 from link_builder import REQUIRED_SITE_DISCLOSURE  # noqa: E402
+import site_config  # noqa: E402  — the gate follows the same link state the builder does
 
 ROOT = REPO / "marketing"
 FACTS = json.loads((ROOT / "data" / "facts.json").read_text(encoding="utf-8"))
@@ -64,6 +66,10 @@ PROGRAM_CONTEXT = re.compile(
 )
 
 failures: list[str] = []
+
+# The gate follows the same configuration the builder does: with a tag configured the
+# pages must say "Special Link (paid link)"; without one they must say "preview link".
+TAGGED = bool(site_config.associates_tag())
 
 
 def fail(msg: str) -> None:
@@ -106,6 +112,11 @@ def check_links(rel: str, doc: str) -> None:
                 if "sponsored" not in (a.get("rel") or "").lower():
                     fail(f"G5 {rel}: Amazon link without rel=sponsored: {ref[:90]}")
                 if "tag=" not in ref:
+                    if TAGGED:
+                        # While a valid Associates tag is configured, an untagged Amazon link is a
+                        # defect, not a labelled preview: the preview-label escape exists only for
+                        # the no-tag state (G6's stated scope).
+                        fail(f"G5 {rel}: untagged Amazon link while an Associates tag is configured: {ref[:90]}")
                     if "NOT FOR PUBLICATION" not in doc and "preview link" not in doc:
                         fail(f"G5 {rel}: untagged Amazon link with no preview label: {ref[:90]}")
             if host not in OFFICIAL_HOSTS:
@@ -251,8 +262,14 @@ def main() -> int:
             fail(f"G1 {rel}: missing the Associates disclosure sentence")
         if "sponsored-link" in doc and "disclosure--link" not in doc:
             fail(f"G2 {rel}: affiliate link without a link-level disclosure")
-        if "sponsored-link" in doc and "preview link" not in doc:
-            fail(f"G6 {rel}: shows an affiliate link but does not state it is a non-earning preview link")
+        if "sponsored-link" in doc:
+            if TAGGED:
+                if 'data-link-state="TAGGED"' not in doc:
+                    fail(f"G6 {rel}: a tag is configured but a product link is not marked TAGGED")
+                if "(paid link)" not in doc:
+                    fail(f"G6 {rel}: tagged Special Link without the (paid link) link-level disclosure")
+            elif "preview link" not in doc:
+                fail(f"G6 {rel}: shows an affiliate link but does not state it is a non-earning preview link")
         check_links(rel, doc)
         check_prices(rel, doc)
         check_rows(rel, doc)
@@ -276,7 +293,7 @@ def main() -> int:
         print(f"\n{len(failures)} failure(s)")
         return 1
     print(f"OK  {pages} pages · {rows} spec rows · 0 failures")
-    print("    disclosure on every page · affiliate links disclosed and marked preview · no prices ·")
+    print("    disclosure on every page · affiliate links disclosed and their link state marked · no prices ·")
     print("    internal links resolve · every valued row carries an official source link")
     return 0
 
