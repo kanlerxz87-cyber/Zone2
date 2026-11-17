@@ -406,10 +406,12 @@ jobs:
         run: python3 tools/validate_intake.py
 
       # Same rule as the other namespaces' negative tests: a gate that has only ever passed is a
-      # claim, not a control. Fifteen injected defects must each fire, and the unmutated register
+      # claim, not a control. Sixteen injected defects must each fire, and the unmutated register
       # must be clean. Case 1 (an intent field filled with the observed ASIN) and case 3 (an open
       # question acquiring an answer) are the two this namespace was built to make impossible.
-      - name: Intake gate negative tests (15 injected defects must each fire)
+      # Case 16 was added after the first publish shipped a typed observation_count that had
+      # drifted from the log; the page now derives it and the register is held to the derived value.
+      - name: Intake gate negative tests (16 injected defects must each fire)
         run: python3 tools/test_intake.py
 
       # ---- arena/f8e18ca8-zone2: the independent audit namespace ----
