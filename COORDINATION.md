@@ -6146,3 +6146,7 @@ application cannot be reviewed.
 ### T58 scope extension (2026-11-17)
 
 The new tracking-ID input makes F-07's old wording (“no tracking ID supplied”) factually stale, while the two additional supplied links need a first-class review flag rather than an orphan note. No active claim owns these files. Scope is extended to `ledger/flags.json` (revise F-07 without closing it; add F-42 for the two new link-intent gaps), and the strictly derived outputs `assets/js/data.js` (`tools/build_root_data.py`), `pages/flags.html` (`tools/build_site.py`), `sources.html` (`tools/build_root_views.py`), plus the related validator tests. No other existing flag is to be rewritten.
+
+### T58 scope extension 2 (2026-11-17)
+
+The published T57 reader/owner board repeats the now-stale “no tag supplied / three submitted products” status. To keep that canonical decision surface aligned with the new intake register, scope also includes `docs/board-9251f262.json` and its generated `suggestions.html` / `questions.html` / `index.html` / guide front pages via the already-claimed `tools/build_front.py`. Only status text and the existing Q/SG wording are being refreshed; no product claims, scores, or demand figures are added. Its existing gate (`tools/verify_front.py`) remains unchanged unless a failure demonstrates a necessary contract correction.
