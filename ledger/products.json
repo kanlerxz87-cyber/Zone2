@@ -1,5 +1,5 @@
 {
-  "note": "Ledger of the three affiliate links named in the project brief. Two different questions are kept apart on purpose. (1) IDENTITY OF THE TOKEN AS SUPPLIED — each supplied code is 9 characters, an ASIN is 10, and amazon.com/dp/<code> returns Amazon's Page Not Found page, so no attribute can be stated for the token itself; those fields are blank and the rows are marked UNVERIFIED. (2) WHAT THE LINK RESOLVES TO — each link.amazon URL resolves to one specific Amazon product page, reproducibly, and the unissued control code B00TEST12 on the same service returns a 404 rather than a random product, while other unissued codes on the same service answer differently (flags F-20, F-40), so the destination is a verified observation of the link's behaviour. The two are recorded separately because Amazon publishes no document that binds a link.amazon code to a product, so the destination is not established as the item the brief intended. Verified 2026-11-14 by live fetch. ADDENDUM 2026-11-16 (session 43eb0239, T54): P-02's published listing title was found to have drifted from the live Amazon listing — the same defect session 5d6d2254 recorded as D-1 on 2026-11-15 and deliberately left for the owner of ledger/products.json. Two independent sessions, two days apart, read the same current title, so the stored string has been replaced with what the official page serves today and the observation is stamped in title_last_read_utc / title_previously_read_utc. P-01 and P-03 titles reproduced verbatim and were re-stamped only. The 'Cooking functions / presets' conflict row quoted the stale Amazon clause; it now quotes the live one. No value was inferred, filled in, or chosen between the conflicting figures. See flag F-41. Last re-verified 2026-11-16 by live fetch (session 8fb7c287).",
+  "note": "Ledger of the three affiliate links named in the project brief. Two different questions are kept apart on purpose. (1) IDENTITY OF THE TOKEN AS SUPPLIED — each supplied code is 9 characters, an ASIN is 10, and amazon.com/dp/<code> returns Amazon's Page Not Found page, so no attribute can be stated for the token itself; those fields are blank and the rows are marked UNVERIFIED. (2) WHAT THE LINK RESOLVES TO — each link.amazon URL resolves to one specific Amazon product page, reproducibly, and the unissued control code B00TEST12 on the same service returns a 404 rather than a random product, while other unissued codes on the same service answer differently (flags F-20, F-40), so the destination is a verified observation of the link's behaviour. The two are recorded separately because Amazon publishes no document that binds a link.amazon code to a product, so the destination is not established as the item the brief intended. Verified 2026-11-14 by live fetch. ADDENDUM 2026-11-16 (session 43eb0239, T54): P-02's published listing title was found to have drifted from the live Amazon listing — the same defect session 5d6d2254 recorded as D-1 on 2026-11-15 and deliberately left for the owner of ledger/products.json. Two independent sessions, two days apart, read the same current title, so the stored string has been replaced with what the official page serves today and the observation is stamped in title_last_read_utc / title_previously_read_utc. P-01 and P-03 titles reproduced verbatim and were re-stamped only. The 'Cooking functions / presets' conflict row quoted the stale Amazon clause; it now quotes the live one. No value was inferred, filled in, or chosen between the conflicting figures. See flag F-41. Last re-verified 2026-11-16 by live fetch (session 8fb7c287). ADDENDUM 2026-11-17 (session 1539a895, T59 — renumbered from T58): the brief names five link.amazon links, but only the first three had been processed. This session resolves the 4th (B0c8moW59) and 5th (B0f3GKalj) live and adds them as P-04 and P-05. Both resolve to kitchen thermometers — B0c8moW59 -> B0DHZTCNR5 (ThermoMaven 1-sec digital meat thermometer) and B0f3GKalj -> B0DZFD6R9Z (CHEF iQ Sense smart wireless meat thermometer) — a second product category. Each supplied code is still 9 characters (not a valid ASIN) and /dp/<code> returns Amazon's Page Not Found page, exactly as for the first three. Each entry now carries an explicit product-intent confirmation record (intended_asin / official_listing_url / confirmation_date / intent_source) kept separate from the observed redirect target, per the brief's rule that the two must never be merged; the intent fields are blank until the owner confirms them. Destination specifications are recorded from the two official Amazon listing pages (S61, S62); the CHEF iQ battery-life row is published as a conflict (50 vs 70 hours) rather than resolved. No verified value from the first three entries was altered; no price, rating or commission value was inferred.",
   "verified_utc": "2026-11-14",
   "lookup_path": "Creators API GetItems (S07, S08) with an authenticated Associates account - not available in this workspace",
   "entries": [
@@ -559,6 +559,382 @@
         "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08). They are left blank rather than inferred.",
         "title_last_read_utc": "2026-11-16"
       }
+    },
+    {
+      "id": "P-04",
+      "label": "Submitted item 4",
+      "submitted_url": "https://link.amazon/B0c8moW59",
+      "token_as_given": "B0c8moW59",
+      "asin_format_valid": false,
+      "asin_length_observed": 9,
+      "canonical_dp_url": "https://www.amazon.com/dp/B0c8moW59",
+      "canonical_dp_result": "Page Not Found (Amazon error page)",
+      "title": "",
+      "brand": "",
+      "category": "",
+      "price": "",
+      "availability": "",
+      "rating": "",
+      "review_count": "",
+      "bsr": "",
+      "commission_rate": "",
+      "competition_level": "",
+      "conversion": "",
+      "clicks": "",
+      "status": "UNVERIFIED",
+      "source_ids": [
+        "S16",
+        "S61"
+      ],
+      "why_blank": "Token is 9 characters, so it is not a valid ASIN; the canonical /dp/ URL returns Amazon's Page Not Found page. The supplied short link does open one live listing, and that destination is stable across re-fetches, but no public Amazon document binds the short code to it (F-03), the per-link btn_ref token changes between days (F-21), and no resolved URL carries an Associates tag (F-24). No official record therefore identifies the intended product, so no attribute may be stated.",
+      "flag_ids": [
+        "F-01",
+        "F-02",
+        "F-04",
+        "F-06",
+        "F-20",
+        "F-21",
+        "F-22",
+        "F-23",
+        "F-24",
+        "F-42",
+        "F-43"
+      ],
+      "resolves_to": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "intent_confirmation": {
+        "intended_asin": "",
+        "official_listing_url": "",
+        "confirmation_date": "",
+        "intent_source": "",
+        "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "intent_status": "UNCONFIRMED",
+        "note": "Product-intent confirmation record. intended_asin / official_listing_url / confirmation_date / intent_source are populated only when the owner confirms the item intended in the brief; they are deliberately blank now. observed_redirect_target records what the link was observed to resolve to and is kept in a separate field so the two readings can never be merged (brief rule)."
+      },
+      "resolved": {
+        "asin": "B0DHZTCNR5",
+        "title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+        "brand": "ThermoMaven",
+        "category": "Home & Kitchen",
+        "category_path": "Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat",
+        "resolves_to": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "observation_status": "OBSERVED",
+        "observed_utc": "2026-11-17",
+        "source_ids": [
+          "S61"
+        ],
+        "manufacturer_source_ids": [],
+        "specs": [
+          {
+            "attribute": "Response time",
+            "value": "1 second",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Response Time: 1 seconds')"
+          },
+          {
+            "attribute": "Accuracy",
+            "value": "±0.5 °F",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing title ('±0.5℉ Accuracy')"
+          },
+          {
+            "attribute": "Upper temperature range",
+            "value": "572 °F",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Upper Temperature Range: 572 °F')"
+          },
+          {
+            "attribute": "Resolution",
+            "value": "0.1 °",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Resolution: 0.1°')"
+          },
+          {
+            "attribute": "Immersion depth",
+            "value": "6.5 in",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Immersion Depth: 6.5 inches')"
+          },
+          {
+            "attribute": "Display type",
+            "value": "Digital",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Display Type: Digital')"
+          },
+          {
+            "attribute": "Power source",
+            "value": "Battery powered (1 AAA battery, included)",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Power Source: Battery Powered'; 'Number of Batteries: 1 AAA batteries required. (included)')"
+          },
+          {
+            "attribute": "Additional features",
+            "value": "Auto off, fast reading system, high accuracy, ultra clear screen, waterproof",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Additional Features')"
+          },
+          {
+            "attribute": "Reusability",
+            "value": "Reusable",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Reusability: Reusable')"
+          },
+          {
+            "attribute": "Indoor / outdoor use",
+            "value": "Indoor, Outdoor",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Features & Specs ('Indoor Outdoor Usage: Indoor, Outdoor')"
+          },
+          {
+            "attribute": "Specification met",
+            "value": "NIST, NSF",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > User guide ('Specification Met: NIST, NSF')"
+          },
+          {
+            "attribute": "Material",
+            "value": "Plastic",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Materials & Care ('Outer Material: Plastic'; 'Inner Material: Plastic')"
+          },
+          {
+            "attribute": "Care instructions",
+            "value": "Wipe clean",
+            "status": "verified",
+            "source_ids": [
+              "S61"
+            ],
+            "source_label": "Amazon listing — Product information > Materials & Care ('Product Care Instructions: Wipe Clean')"
+          }
+        ],
+        "price": "",
+        "rating": "",
+        "review_count": "",
+        "availability": "",
+        "bsr": "",
+        "commission_rate": "",
+        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08) — for these thermometer items the public Table 1 does not name the 'Kitchen Utensils & Gadgets' node (F-43). They are left blank rather than inferred.",
+        "title_last_read_utc": "2026-11-17"
+      }
+    },
+    {
+      "id": "P-05",
+      "label": "Submitted item 5",
+      "submitted_url": "https://link.amazon/B0f3GKalj",
+      "token_as_given": "B0f3GKalj",
+      "asin_format_valid": false,
+      "asin_length_observed": 9,
+      "canonical_dp_url": "https://www.amazon.com/dp/B0f3GKalj",
+      "canonical_dp_result": "Page Not Found (Amazon error page)",
+      "title": "",
+      "brand": "",
+      "category": "",
+      "price": "",
+      "availability": "",
+      "rating": "",
+      "review_count": "",
+      "bsr": "",
+      "commission_rate": "",
+      "competition_level": "",
+      "conversion": "",
+      "clicks": "",
+      "status": "UNVERIFIED",
+      "source_ids": [
+        "S16",
+        "S62"
+      ],
+      "why_blank": "Token is 9 characters, so it is not a valid ASIN; the canonical /dp/ URL returns Amazon's Page Not Found page. The supplied short link does open one live listing, and that destination is stable across re-fetches, but no public Amazon document binds the short code to it (F-03), the per-link btn_ref token changes between days (F-21), and no resolved URL carries an Associates tag (F-24). No official record therefore identifies the intended product, so no attribute may be stated.",
+      "flag_ids": [
+        "F-01",
+        "F-02",
+        "F-04",
+        "F-06",
+        "F-20",
+        "F-21",
+        "F-22",
+        "F-23",
+        "F-24",
+        "F-42",
+        "F-43"
+      ],
+      "resolves_to": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "intent_confirmation": {
+        "intended_asin": "",
+        "official_listing_url": "",
+        "confirmation_date": "",
+        "intent_source": "",
+        "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "intent_status": "UNCONFIRMED",
+        "note": "Product-intent confirmation record. intended_asin / official_listing_url / confirmation_date / intent_source are populated only when the owner confirms the item intended in the brief; they are deliberately blank now. observed_redirect_target records what the link was observed to resolve to and is kept in a separate field so the two readings can never be merged (brief rule)."
+      },
+      "resolved": {
+        "asin": "B0DZFD6R9Z",
+        "title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+        "brand": "CHEF iQ",
+        "category": "Home & Kitchen",
+        "category_path": "Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat",
+        "resolves_to": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "observation_status": "OBSERVED",
+        "observed_utc": "2026-11-17",
+        "source_ids": [
+          "S62"
+        ],
+        "manufacturer_source_ids": [],
+        "specs": [
+          {
+            "attribute": "Sensors",
+            "value": "5 (4 internal temperature sensors + 1 ambient sensor)",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — About this Item ('FIVE SENSORS, MAX ACCURACY: ... 4 internal temperature sensors. Additionally, an ambient sensor ...')"
+          },
+          {
+            "attribute": "Accuracy",
+            "value": "within 1 °F",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — Product Description ('designed for incredible accuracy within 1°F'; 'Accurate within 1˚F')"
+          },
+          {
+            "attribute": "Heat safety",
+            "value": "1000 °F",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing title and About this Item ('1000°F Heat Safe'; 'built to endure 1000°F heat')"
+          },
+          {
+            "attribute": "Probes included",
+            "value": "3 ultra-thin probes",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing title and About this Item ('3 Ultra-Thin Probes'; 'THREE PROBES INCLUDED')"
+          },
+          {
+            "attribute": "Probe length",
+            "value": "4.75 in",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — Product Description ('equipped with a 4.75\" long design')"
+          },
+          {
+            "attribute": "Connectivity",
+            "value": "WiFi (unlimited range) and Bluetooth",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing title and About this Item ('WiFi Unlimited Range'; 'Pair your digital Bluetooth food thermometer with the CHEF iQ App')"
+          },
+          {
+            "attribute": "Battery life",
+            "value": "up to 50 hours (About this Item) / 70+ hours (Product Description)",
+            "status": "conflict",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — About this Item ('running for up to 50 hours on a full charge') contradicts the Product Description ('up to 70 hours of usage on a full charge'). Both figures are published; neither is chosen.",
+            "why_blank": "Two values appear on the same official listing and disagree (50 vs 70 hours). The repository publishes both rather than selecting one."
+          },
+          {
+            "attribute": "Probe care",
+            "value": "Waterproof and dishwasher-safe probes",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — About this Item ('Waterproof and dishwasher-safe probes')"
+          },
+          {
+            "attribute": "Warranty",
+            "value": "Two-year assurance provided by CHEF iQ",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — About this Item ('two-year assurance provided by CHEF iQ')"
+          },
+          {
+            "attribute": "Smart hub",
+            "value": "Speaker for audio notifications plus phone push notifications; charges all probes simultaneously",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — About this Item ('Smart Hub features a speaker for audio notifications as well as push notifications'; 'The hub can charge all three probes simultaneously')"
+          },
+          {
+            "attribute": "Air-fryer / deep-fryer safe",
+            "value": "Yes",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — Product Description ('Air-fryer and deep-fryer safe')"
+          },
+          {
+            "attribute": "Size options",
+            "value": "1, 2, 3 or 4 probes",
+            "status": "verified",
+            "source_ids": [
+              "S62"
+            ],
+            "source_label": "Amazon listing — Options Available > Size ('1 Probe', '2 Probes', '3 Probes', '4 Probes')"
+          }
+        ],
+        "price": "",
+        "rating": "",
+        "review_count": "",
+        "availability": "",
+        "bsr": "",
+        "commission_rate": "",
+        "why_blank": "Price, rating, review count, availability and sales rank are point-in-time values that the Amazon Associates Program Policies do not allow to be republished outside an Amazon link or a licensed API (S02), and the category commission band needs an authenticated catalog lookup (S04, S08) — for these thermometer items the public Table 1 does not name the 'Kitchen Utensils & Gadgets' node (F-43). They are left blank rather than inferred.",
+        "title_last_read_utc": "2026-11-17"
+      }
     }
   ],
   "evidence_observations": [
@@ -716,6 +1092,6 @@
       ]
     }
   ],
-  "last_reverified_utc": "2026-11-16",
+  "last_reverified_utc": "2026-11-17",
   "reverification_note": "Session 4338f55e re-read the three supplied links and the three manufacturer pages on 2026-11-14; session a133aa61 re-read them independently with live outbound access on the same day. Both record the same three destinations. The unknown-code control (S32) shows the short-link service honours the code; the per-link btn_ref token rotates between days (F-21). Session ba8b2d38 (T27) re-fetched all three supplied links and all three /dp/<token> URLs independently on 2026-11-14 and recorded the result as E-11 and E-12: the destinations are unchanged for the third time, the btn_ref tokens are new for the third time, and a valid 10-character ASIN sent to the same short-link service returns a 404 (E-11), which withdraws the 'truncated ASIN' reading of E-05. Re-verified 2026-11-15 (session bbcc741f): V-83…V-87 and E-13/E-14 reproduce all three destinations for a third date and re-run both controls; the negative-control caveat is published as F-40 and the one question that can close the identity is Q-18. Product attributes remain blank by rule - a destination observed through someone else's link is not a confirmed product record. Re-verified 2026-11-16 (session 8fb7c287): all three supplied links re-fetched — destinations unchanged for a fourth date (/dp/B0CDY277D3, /dp/B09B7SB46R, /dp/B08DKYBTPH), each with a fresh btn_ref and no tag= parameter; controls re-run — B00TEST12 reproduces the amzlinks 404 byte-for-byte, B0CDY277D3 (a valid ASIN in the token position) reproduces the same 404 (F-28), NOTACODE9 and ZZZZZZZZZ each return a bare 403 (the observation behind F-40 and the reason F-20's title now names its specific control code); manufacturer pages re-read — the Emeril description still says 'Included are 7 premium accessories … air fry basket, rotisserie spit, bake pan, and more', and the Chefman page still sells the 5 Qt and 8 Qt models on one URL with per-model bullets; Amazon listing titles re-read — P-01 and P-03 reproduce verbatim, P-02 does NOT (the title served today ends 'Six Cooking Accessories Included'), so the P2 accessories row is republished as a conflict (manufacturer 7 vs listing title 6) and a quoted listing title is recorded as perishable evidence with its read date."
 }

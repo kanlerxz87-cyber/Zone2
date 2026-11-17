@@ -552,6 +552,34 @@
         "evidence only: the request was answered at the edge with HTTP 403 Forbidden and never reached a lookup",
         "flag F-40 - the negative control that F-20 relies on is not stable across token shapes"
       ]
+    },
+    {
+      "id": "S61",
+      "publisher": "Amazon.com (product catalog page)",
+      "kind": "official",
+      "title": "Destination listing observed for supplied link 4 — B0DHZTCNR5 (ThermoMaven 1 Sec Professional Digital Meat Thermometer)",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "used_for": [
+        "evidence only: link.amazon token B0c8moW59 redirected here; NOT the requested product as an identity",
+        "source for the observed destination specifications of the ThermoMaven thermometer"
+      ],
+      "last_reaccessed_utc": "2026-11-17"
+    },
+    {
+      "id": "S62",
+      "publisher": "Amazon.com (product catalog page)",
+      "kind": "official",
+      "title": "Destination listing observed for supplied link 5 — B0DZFD6R9Z (CHEF iQ Sense Smart Wireless Meat Thermometer, Gen3)",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "used_for": [
+        "evidence only: link.amazon token B0f3GKalj redirected here; NOT the requested product as an identity",
+        "source for the observed destination specifications of the CHEF iQ thermometer"
+      ],
+      "last_reaccessed_utc": "2026-11-17"
     }
   ]
 }

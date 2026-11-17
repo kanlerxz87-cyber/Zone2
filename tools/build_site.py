@@ -321,7 +321,7 @@ def page_hub() -> str:
 
 def page_exec() -> str:
     key = [
-        ("What each supplied link resolves to", True, "Each of the three supplied link.amazon URLs resolves to one specific Amazon product page, reproducibly, and an UNKNOWN code on the same service returns a 404 instead of a product - so the codes are honoured lookups, not ignored tokens.", ["S28", "S19", "S20", "S21"]),
+        ("What each supplied link resolves to", True, "Each of the five supplied link.amazon URLs resolves to one specific Amazon product page, reproducibly, and an UNKNOWN code on the same service returns a 404 instead of a product - so the codes are honoured lookups, not ignored tokens.", ["S28", "S19", "S20", "S21", "S44", "S45"]),
         ("The brief's product identity, as a documented contract", False, "Each supplied code is 9 characters (an ASIN is 10), the canonical /dp/ URLs return Amazon's Page Not Found page, and no public Amazon document binds a link.amazon code to a product. The destination is therefore published as an observation, never as a confirmed brief mapping.", ["S16", "S17", "S18", "S24"]),
         ("Marketing content for confirmed brief identities", False, "No copy claims the observed destinations are confirmed identities for the products intended in the brief. The separate /marketing set does publish three destination-only articles, a comparison and a buying guide from manufacturer-verified specifications; its pages label the unresolved mapping. The root generator remains blocked for brief-mapped content until the owner confirms the mapping.", ["S24", "S25", "S26", "S27", "S32", "S33", "S34", "S35"]),
         ("Platform automation built", True, "Collector, scoring, content linters, link builder, click tracker, optimizer and a deterministic site builder are present and runnable, with policy rules encoded as code.", ["S01", "S02"]),
@@ -349,8 +349,8 @@ def page_exec() -> str:
         "Reviewing the previously merged commit found no false claims \u2014 its four citations are live official pages \u2014 but it predated the commission table, the attribution mechanics, per-row sourcing and the category subpages added here.",
     ]
     actions = [
-        ("A1", "Confirm in Associates Central that the three resolved destinations are the products intended in the brief, or provide the intended valid ASINs / full amazon.<tld>/dp/ URLs", "user", "unblocks content and analysis that assert a match to the brief; current destination-only specs remain separately sourced and labelled", ["S16", "S17", "S18", "S24", "S25", "S26", "S27"]),
-        ("A1b", "Supply links that carry the Associates tag (…?tag=YOURASSOCIATEID)", "user", "as supplied the three links carry no tag, so they cannot attribute a sale or earn a commission", ["S24", "S19", "S20", "S21"]),
+        ("A1", "Confirm in Associates Central that the five resolved destinations are the products intended in the brief, or provide the intended valid ASINs / full amazon.<tld>/dp/ URLs", "user", "unblocks content and analysis that assert a match to the brief; current destination-only specs remain separately sourced and labelled", ["S16", "S17", "S18", "S24", "S25", "S26", "S27"]),
+        ("A1b", "Supply links that carry the Associates tag (…?tag=YOURASSOCIATEID)", "user", "as supplied the five links carry no tag, so they cannot attribute a sale or earn a commission", ["S24", "S19", "S20", "S21", "S44", "S45"]),
         ("A2", "Create or confirm an Associates account, marketplace and Associates ID/tag", "user", "turns the inert link preview into a compliant tagged Special Link and enables earnings reporting", ["S01", "S02"]),
         ("A3", "Register for the Creators API (requires >=10 qualifying sales in the past 30 days)", "user", "activates real product research, offer and browse-node data", ["S07"]),
         ("A4", "Store one dated Associates report export at ledger/associates_report.json", "user", "unlocks conversion, EPC and the optimizer's revenue-side actions", ["S02"]),
@@ -359,7 +359,7 @@ def page_exec() -> str:
     body = (
         panel(
             "Bottom line",
-            '<p class="lede">The research, compliance and source-governed content platform is built and live, but it is not yet monetized. The three supplied '
+            '<p class="lede">The research, compliance and source-governed content platform is built and live, but it is not yet monetized. The five supplied '
             "links reproducibly resolve to specific product pages; destination-only articles, comparison and buying guide use manufacturer-verified "
             "specifications with source links. The site does not claim those destinations are the products intended in the brief, because the mapping "
             "is not documented. There is no Associates tag, and unconfirmed prices, ratings, commissions and performance remain blank.</p>",
@@ -515,7 +515,7 @@ def page_products() -> str:
         + spec_tables
         + panel("Evidence observations (reproducible by hand)", table(["ID", "Observation", "Interpretation", "Status", "Evidence"], ev))
         + panel(
-            "Next action for these three items",
+            "Next action for these five items",
             '<ul class="checklist">'
             "<li><span class=\"flag\">&#9873;</span>Supply the full 10-character ASIN, or the complete product URL, for each item.</li>"
             "<li><span class=\"check\">&#10003;</span>Point the collector at it: <code>python3 tools/amazon_creators_api.py</code> with credentials writes a dated, hashed record.</li>"
@@ -523,7 +523,7 @@ def page_products() -> str:
             "</ul>",
         )
     )
-    return render("products.html", "Requested products", "The three items named in the brief, with every unconfirmed field left blank.", body)
+    return render("products.html", "Requested products", "The five items named in the brief, with every unconfirmed field left blank.", body)
 
 
 def page_commissions() -> str:
@@ -608,7 +608,7 @@ def page_category(g: dict) -> str:
         ("Categories in this band", ", ".join(g["categories"]), [COMMISSION["source_id"]]),
         ("Commercial reading", g["commercial_note"], []),
         ("Verified products assigned here", "0", []),
-        ("Why zero", "a category may only be attached to a product by a catalog record for that product, and none of the three requested items resolved to a record", ["S16", "S17", "S18"]),
+        ("Why zero", "a category may only be attached to a product by a catalog record for that product, and none of the five requested items resolved to a record", ["S16", "S17", "S18"]),
     ]
     per_product = [
         ("Clicks", "not published", "no live endpoint and no click log in this build"),
@@ -1032,7 +1032,7 @@ def page_content() -> str:
         notice(
             "Gate first, prose second",
             "The generator validates before it writes: an entry without a resolved catalog record produces a refusal record instead "
-            "of a draft, and a draft that fails any lint never reaches content/published/. That is why the article count for the three "
+            "of a draft, and a draft that fails any lint never reaches content/published/. That is why the article count for the five "
             "requested items is zero.",
         )
         + panel("Templates", table(["Asset", "File", "Behaviour"], [[text_cell(a), text_cell(b, code=True), text_cell(c)] for a, b, c in kinds]))

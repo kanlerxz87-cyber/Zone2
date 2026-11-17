@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **41 flags (F-01 … F-41)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **43 flags (F-01 … F-43)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -797,7 +797,7 @@ rendering in fallback system fonts since the redesign. No gate could see it, bec
 namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
 class of bug — a resource a build cannot fail on — is on the record for the next time.
 
-**Numbers for the reviewer, all derived from the registers:** 41 flags, 43 sources, 104 logged checks, 18 open
+**Numbers for the reviewer, all derived from the registers:** 43 flags, 45 sources, 108 logged checks, 20 open
 questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
 or performance figure: the site still has no authorised source for one, and an absent number beats an invented
 one.
@@ -868,9 +868,9 @@ the suggestions board and the questions register, each with the action that woul
 
 **The three supplied links re-confirmed:** each `link.amazon/<code>` resolves reproducibly to one live Amazon listing (Chefman 6 Qt dual-basket → B0CDY277D3; Emeril Lagasse 26 QT → B09B7SB46R; Chefman 8 Qt TurboFry → B08DKYBTPH). Each supplied code is 9 characters (not a 10-digit ASIN); `amazon.com/dp/<code>` returns Page Not Found; no resolved URL carries an Associates `tag=`, so as supplied none can earn commission (F-24). The short-code → destination mapping is observed behaviour, not documented intent (F-03; Q-03 / Q-18 owner-open).
 
-**Decision surfaces confirmed linked and prominent:** the root landing page links the Suggestions board (`pages/suggestions.html`, SG-01…SG-12) and the Open questions register (`pages/questions.html`, Q-01…Q-18) from both the primary navigation and the footer "Decisions" column. Each suggestion row carries options, a recommendation, the questions that must be answered first, and an owner decision field awaiting record in `ledger/suggestions.json`. Nothing is implemented until a choice is recorded there.
+**Decision surfaces confirmed linked and prominent:** the root landing page links the Suggestions board (`pages/suggestions.html`, SG-01…SG-14) and the Open questions register (`pages/questions.html`, Q-01…Q-20) from both the primary navigation and the footer "Decisions" column. Each suggestion row carries options, a recommendation, the questions that must be answered first, and an owner decision field awaiting record in `ledger/suggestions.json`. Nothing is implemented until a choice is recorded there.
 
-**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (43 sources, 361 rows, 1176 links; the register stood at 40 when that run executed and holds 41 today, after F-41 below); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 141 pages, all checks PASS.
+**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (45 sources, 422 rows, 1217 links, all derived from the live register); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 162 pages, all checks PASS.
 
 **Flagged irregularities (non-blocking, on `pages/flags.html`):** F-01/F-03 (product identity not established by an official document), F-24 (no Associates tag on the supplied links), F-05 (Creators API unregistered; PA-API 5.0 deprecated), F-08 (no performance reports; no traffic/revenue figures published anywhere). None blocks merge; all are published for owner review with their source links and closing actions.
 
@@ -977,11 +977,11 @@ decision surfaces are unchanged and current — the ten suggestions with options
 [the decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html), the
 **18 open questions** with the method that would close each one on
 [the questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html), and the
-[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **41 flags**,
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **43 flags**,
 each with its source links. Nothing is implemented on this site until it is chosen there.
 
-**Numbers for the reviewer, all derived from the registers:** 41 flags (16 open · 25 resolved), 43 sources,
-104 logged checks, 18 open questions, and every repository gate green on the merged tree.
+**Numbers for the reviewer, all derived from the registers:** 43 flags (18 open · 25 resolved), 45 sources,
+108 logged checks, 20 open questions, and every repository gate green on the merged tree.
 ---
 
 ## Addendum — 2026-11-16 — T50, session `arena/9251f262-zone2` — the "do not read like AI slop" rebuild
@@ -1100,3 +1100,56 @@ advertises twelve suggestions where eleven exist.
 **Nothing on the new board is implemented.** Twelve proposals (`DB-01…DB-12`) wait on
 `brief/suggestions.html` with options, costs, risks and blockers; ten questions on `brief/questions.html`
 are left empty on purpose, each with the action that would close it and who can close it.
+
+---
+
+## Addendum 2026-11-17 — the brief names five links, not three (T59, session `1539a895`; renumbered from T58)
+
+Every prior session processed only the first three of the five `link.amazon` links the brief supplies.
+The **4th (`B0c8moW59`) and 5th (`B0f3GKalj`) had zero references anywhere in the repository** before this
+session. Both were resolved live on 2026-11-17 and added to the source-governed ledger as `P-04` and `P-05`.
+
+| # | Link as supplied | Token | Token length | Valid ASIN? | `/dp/<token>` result | Observed destination (ASIN) | Observed product | Official evidence |
+|---|---|---|---|---|---|---|---|---|
+| 4 | `https://link.amazon/B0c8moW59` | `B0c8moW59` | 9 | **No** | Page Not Found | `B0DHZTCNR5` | ThermoMaven 1 Sec Professional Digital Meat Thermometer | [Amazon listing](https://www.amazon.com/dp/B0DHZTCNR5) |
+| 5 | `https://link.amazon/B0f3GKalj` | `B0f3GKalj` | 9 | **No** | Page Not Found | `B0DZFD6R9Z` | CHEF iQ Sense Smart Wireless Meat Thermometer (Gen3) | [Amazon listing](https://www.amazon.com/dp/B0DZFD6R9Z) |
+
+**What changed.** The two new destinations are **kitchen thermometers** — a second product category the
+air-fryer shop front does not cover. Both supplied codes are still 9 characters (not valid ASINs) and
+`/dp/<code>` returns Amazon's Page Not Found page, exactly as for the first three (the same control and
+flags `F-01`/`F-28`). Each link opens one stable Amazon listing, reproducibly, but no public Amazon document
+binds a `link.amazon` code to a destination, so the destinations are recorded as **observed**, not as
+established identities.
+
+**Product-intent confirmation record (new, per the brief).** Each of `P-04`/`P-05` now carries an explicit
+`intent_confirmation` block with four fields the owner fills in — `intended_asin`, `official_listing_url`,
+`confirmation_date`, `intent_source` — kept in separate fields from `observed_redirect_target`, so the two
+readings can never be merged. All four intent fields are blank until the owner confirms; the redirect target
+is recorded separately as an observation. This is the schema the brief asks for and is proposed as the
+standard intake for every future link (suggestion `SG-14`).
+
+**Verified destination specifications (read from the two official listing pages, sourced per row).**
+`P-04` (ThermoMaven): 1-second response, ±0.5 °F accuracy, 572 °F upper range, 0.1 ° resolution, 6.5 in
+immersion depth, digital display, AAA battery, NIST/NSF specification met, plastic, wipe-clean.
+`P-05` (CHEF iQ): 5 sensors (4 internal + 1 ambient), within 1 °F accuracy, 1000 °F heat-safe, 3 ultra-thin
+probes (4.75 in), WiFi + Bluetooth, waterproof/dishwasher-safe probes, two-year assurance, smart hub with
+speaker and push notifications, air-fryer/deep-fryer safe, 1/2/3/4-probe options. **One published conflict
+is recorded, not resolved:** the CHEF iQ battery life is stated as "up to 50 hours" in the *About this Item*
+block and "up to 70 hours" in the *Product Description* on the same listing — both figures are published.
+
+**Still blank and flagged (never inferred).** Price, rating, review count, availability and sales rank for all
+five links (Amazon policy restricts republishing them outside a served link or licensed API). The
+commission band for the two thermometers is also blank: both sit in *Home & Kitchen › Kitchen & Dining ›
+Kitchen Utensils & Gadgets*, a node Amazon's public Table 1 does not name, so the band cannot be assigned
+between the 4.50% "Kitchen" and 3.00% "Home" rows without guessing (flag `F-43`, question `Q-20`).
+
+**New decision records (nothing implemented; all awaiting an owner choice).** Flags `F-42` (the two links
+were never processed and resolve to a new category) and `F-43` (commission-band ambiguity). Questions `Q-19`
+(confirm the intended ASINs for links 4 and 5) and `Q-20` (confirm the commission band via an authenticated
+catalog lookup). Suggestions `SG-13` (build a matching thermometer content set once intent is confirmed) and
+`SG-14` (adopt the product-intent confirmation record as standard intake). The shop front still leads with the
+three air fryers; the two thermometers are published in the product catalog with their sourced specs, and the
+editorial expansion waits on `Q-19`.
+
+**Register state after this addendum:** 5 product entries, 45 sources, 108 verification rows, 43 flags
+(18 open · 25 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
