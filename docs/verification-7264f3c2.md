@@ -54,6 +54,7 @@ and the published artifact keeps a blank or an explicit "pending" — nothing wa
 | IR-2 | The brief supplied a tag but no evidence of the enrolled account or marketplace; the per-link Associates-workflow validation therefore stays pending | ledger F-07 dated note; `docs/product-intent.json` `special_link.associates_workflow_validated = null`; RR-05 owner_action |
 | IR-3 | Two stale hard-coded rules had to be updated because reality changed: the release-readiness negative test R7 mutated RR-05 (now MET) into an empty `blocked_by` without setting BLOCKED, and the design-brief gate hard-coded "0 tagged pages" | `tools/test_readiness.py` (mutation sets state too), `tools/validate_brief.py` (`check_derived_counts` now derives the tag row like its siblings) |
 | IR-4 | Eleven published pages that no current generator rebuilds (404, analysis, compliance, content, design-notes, flagged, paths, playbook, products, review-2026-11-15, tracking) still carried the pre-tag disclosure strip text baked in by an older generator build | Fixed in place this session (site chrome only; no historical record text altered). Logged as a forced scope extension in COORDINATION.md — a half-updated site asserting two different realities is the exact defect class the gates exist to prevent |
+| IR-5 | `tools/validate_brief.py` hard-coded `GATE_COUNT = 43`; `main` gained the intake namespace's three CI steps during this branch's flight (workflow now runs 46), so the constant was stale the moment the rebase landed | Fixed by deriving the count from the workflow at runtime via `tools/ci_replay.py`'s step parser (never typable again); logged as a scope extension in COORDINATION.md |
 
 ## E. Sources carried, not re-fetched
 
@@ -62,3 +63,27 @@ specification value was touched, so nothing in this session's changes rests on t
 application-review page (FB-06's quote), the Operating Agreement, the FTC pages and Google's
 guidance pages are cited from the ledger and brief registers, which record their own read dates;
 this session re-read the two Amazon help pages (V-1, V-2) that its own new claims rest on.
+
+
+## F. Re-verification on the combined tree (2026-11-17, after the rebase onto `main`)
+
+While this branch was in flight, four parallel sessions merged to `main` (`e58dac0` → `6fe5343`):
+PR #151 (`0f5673ee`, CR-1 closure — RR-01/RR-05 derived counts, SG-11 dedupe), PRs #153/#155/#156
+(`1539a895`, renumbered T59 — onboarded `B0c8moW59`/`B0f3GKalj` as P-04/P-05), PR #154 (`613900e6`,
+renumbered T60 — the `intake/` register). This session's claim was renumbered **T58 → T61** per the
+board's precedent (merged claim keeps the id). The rebase resolved every conflict by keeping both
+sides; nothing from another session was discarded. Checks re-run on the combined tree:
+
+| Check | Result on the combined tree |
+|---|---|
+| `tools/ci_replay.py` (all workflow steps, in order) | **PASSED — 46/46** (was 43 pre-merge; +3 intake steps from PR #154) |
+| `tools/validate_brief.py` + `tools/test_brief.py` | clean; 14/14 negative tests fire |
+| `tools/test_readiness.py` | 14/14 negative tests fired (multi-measure row model intact) |
+| `tools/test_intake.py` (main's) | OK — baseline clean, 15 injected defects fired |
+| `tools/verify_front.py` | OK — 8 pages, all checks pass |
+| `marketing/scripts/verify_marketing.py` | OK — 20 pages · 48 spec rows · 0 failures |
+| Re-measured summary counts | 159 published pages · 159 disclose · 8 tagged · 0 print a price (intake pages + intent.html added 8 over main's 151) |
+| Release-readiness board | 12 rows — 5 MET (RR-01/04/05/08/10), 3 GAP, 2 BLOCKED, 1 UNVERIFIED, 1 OPEN; RR-05 carries both derived tokens |
+| Sitemap | 169 URLs, includes `intent.html` and the eight `intake/` pages |
+| Cross-register consistency | this register's five observed destinations (L1→B0CDY277D3, L2→B09B7SB46R, L3→B08DKYBTPH, L4→B0DHZTCNR5, L5→B0DZFD6R9Z) agree row-for-row with T59's `ledger/products.json` P-01–P-05 records and T60's `intake/` observations — three independent passes, same destinations; the datasets stay separate as the brief requires |
+| Typed brief rows updated to the re-derived tree | workflow steps 46 of 46; requirements 5 met · 7 not met; disclosure prose 159 of 159; clicks note reworded (tag supplied, counter live, no first-party report yet) |

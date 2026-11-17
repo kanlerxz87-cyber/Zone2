@@ -331,7 +331,11 @@ def check_board() -> None:
 #: The number of gates/workflow steps this repository runs. Prose that claims a different
 #: number is stale, not merely imprecise: a summary that says "22 gates" when 43 run is
 #: understating the evidence it is asking the reader to trust.
-GATE_COUNT = 43
+#: T58 (session 7264f3c2), 2026-11-17: previously a hard-coded 43, which itself drifted the
+#: moment `main` gained the intake namespace's three CI steps (now 46). Derived from the
+#: workflow at runtime via tools/ci_replay.py's parser instead of typed, so the count can
+#: never go stale again. (Logged as a scope extension in docs/verification-7264f3c2.md.)
+GATE_COUNT = len(__import__("ci_replay").steps())
 
 #: Published surfaces (top-level directories plus the root).
 SURFACE_COUNT = 0

@@ -45,7 +45,7 @@
     },
     {
       "metric": "Published pages printing a product price",
-      "value": "8 of 159",
+      "value": "0 of 159",
       "source_ids": [
         "BR-01"
       ],
@@ -53,7 +53,7 @@
     },
     {
       "metric": "Workflow steps replayed locally on the combined tree",
-      "value": "43 of 43",
+      "value": "46 of 46",
       "source_ids": [],
       "note": "tools/ci_replay.py runs every workflow step in order against this working tree (RV-01)."
     },
@@ -75,13 +75,13 @@
     },
     {
       "metric": "Amazon's stated requirements met, gapped, blocked, unverified or open",
-      "value": "4 met · 8 not met",
+      "value": "5 met · 7 not met",
       "source_ids": [
         "BR-07",
         "BR-08",
         "BR-10"
       ],
-      "note": "Read from release/index.html, which is re-derived from the tree on every build. Of the eight: 3 gap, 3 blocked, 1 unverified, 1 open."
+      "note": "Read from release/index.html, which is re-derived from the tree on every build. Of the seven: 3 gap, 2 blocked, 1 unverified, 1 open. RR-05 (tagged Special Links) flipped to MET on 2026-11-17 when the owner-supplied tag was embedded in every reader-facing product link."
     },
     {
       "metric": "Clicks, conversions and earnings recorded",
@@ -89,7 +89,7 @@
       "source_ids": [
         "BR-06"
       ],
-      "note": "No tag, no account, no report export. Amazon states it makes no representation about the traffic or income any associate can expect."
+      "note": "The tag arrived 2026-11-17 and the privacy-preserving client-side counter is live (DS-11), but no first-party Associates report exists yet to export, and the aggregate counts publish only once an endpoint keeps them. Amazon states it makes no representation about the traffic or income any associate can expect."
     },
     {
       "metric": "Pages carrying the phrase 'AI-powered' in public copy",
@@ -110,9 +110,10 @@
   },
   "what_is_settled": [
     "The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).",
-    "The evidence discipline holds at scale: PROV_DISC pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
-    "The machinery is trustworthy: 43 of 43 workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
-    "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit."
+    "The evidence discipline holds at scale: 159 of 159 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
+    "The machinery is trustworthy: 46 of 46 workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
+    "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit.",
+    "All five supplied links resolve, re-observed on 2026-11-17 across three independent passes (BR-19, BR-20, BR-21 plus the T59/T60 onboarding records): three air fryers and two kitchen thermometers, which is a category question the owner still owes a decision on (DS-16)."
   ],
   "what_is_not_settled": [
     "Whether the three listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18).",
