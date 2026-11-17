@@ -135,6 +135,16 @@ CASES = [
         lambda reg: BR.rendered_claims(reg, "<html><body>the sentence was dropped</body></html>"),
         "does not appear on the published page",
     ),
+    (
+        "R13 a multi-measure row whose site_state names a measure outside its declared list",
+        lambda reg: row(reg, "RR-05").__setitem__(
+            "site_state",
+            "{pages_with_tagged_link} tagged. {pages_with_disclosure} disclosure. "
+            "{pages_linking_dp} dp links."
+        ),
+        lambda reg: BR.validate(reg),
+        "the row would state a number it is not checked against",
+    ),
 ]
 
 

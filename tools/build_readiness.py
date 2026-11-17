@@ -147,6 +147,27 @@ def count_pages_with_tagged_link() -> int:
     return sum(1 for p in published_pages() if pat.search(p.read_text(encoding="utf-8")))
 
 
+def count_published_html_pages() -> int:
+    """Total published HTML pages this repository ships (the board excludes its own output).
+
+    Measured from the tree, not typed: every page any session adds moves this number, and a token
+    follows it. This is the measure behind RR-01, whose typed "116 published HTML pages" had drifted
+    to 161 by 2026-11-17 (CR-1 / FB-01).
+    """
+    return len(published_pages())
+
+
+def count_pages_linking_dp() -> int:
+    """Pages that link to an Amazon product page (`amazon.com/dp/...`).
+
+    Every such link on this site is an untagged source citation, not a Special Link (RR-05).
+    Measured from the tree, not typed: the typed "72 pages" had drifted to 92 (CR-1 / FB-02).
+    """
+    return sum(
+        1 for p in published_pages() if "amazon.com/dp/" in p.read_text(encoding="utf-8")
+    )
+
+
 def published_namespaces() -> list[str]:
     """Directories that publish at least one HTML page, plus the repository root."""
     skip = {".git", ".github", "__pycache__", "node_modules", "tools", "tests", "docs", "ledger",
@@ -180,10 +201,27 @@ def oldest_page_date() -> tuple[str, int]:
     return oldest, (ref - date(y, m, d)).days
 
 
+def measures_of(r: dict) -> list[str]:
+    """The measures a row declares.
+
+    A row normally declares one measure, but a row whose `site_state` states two counts (RR-05
+    states both the tagged-link count and the dp-link count) declares them as a list. A string is
+    accepted for the common case so existing rows and tests keep working unchanged.
+    """
+    m = r.get("measure")
+    if not m:
+        return []
+    if isinstance(m, str):
+        return [m]
+    return list(m)
+
+
 MEASURES = {
     "editorial_posts": lambda reg: count_editorial_posts(reg),
     "pages_with_disclosure": lambda reg: count_pages_with_disclosure(),
     "pages_with_tagged_link": lambda reg: count_pages_with_tagged_link(),
+    "pages_linking_dp": lambda reg: count_pages_linking_dp(),
+    "published_html_pages": lambda reg: count_published_html_pages(),
     "published_namespaces": lambda reg: len(published_namespaces()),
     "oldest_page_days": lambda reg: oldest_page_date()[1],
 }
@@ -270,11 +308,13 @@ def validate(reg: dict) -> list[str]:
                 f"{rid}: {r['state']} with no owner_action - a gap with no next step is not a finding"
             )
 
-        if r.get("measure"):
-            if r["measure"] not in MEASURES:
-                problems.append(f"{rid}: unknown measure {r['measure']!r} - the row would be unmeasurable")
-            elif not str(r.get("site_state", "")).strip():
-                problems.append(f"{rid}: declares measure {r['measure']!r} but states no site_state")
+        ms = measures_of(r)
+        if ms:
+            for m in ms:
+                if m not in MEASURES:
+                    problems.append(f"{rid}: unknown measure {m!r} - the row would be unmeasurable")
+            if not str(r.get("site_state", "")).strip():
+                problems.append(f"{rid}: declares measure(s) {ms!r} but states no site_state")
 
         # A `{measure}` token in a site_state is how a count stays derived instead of typed.
         site_state = str(r.get("site_state", ""))
@@ -285,12 +325,12 @@ def validate(reg: dict) -> list[str]:
                     f"{rid}: site_state asks for {{{{{name}}}}} but this generator cannot compute that "
                     f"measure - the token would reach the published page unrendered"
                 )
-            elif r.get("measure") and name != r["measure"]:
+            elif ms and name not in ms:
                 problems.append(
-                    f"{rid}: site_state asks for {{{{{name}}}}} but the row's measure is "
-                    f"{r['measure']!r} - the row would state a number it is not checked against"
+                    f"{rid}: site_state asks for {{{{{name}}}}} but the row's measure(s) are "
+                    f"{ms!r} - the row would state a number it is not checked against"
                 )
-        if names and not r.get("measure"):
+        if names and not ms:
             problems.append(
                 f"{rid}: site_state carries a measure token but the row declares no 'measure', so "
                 f"nothing would check the number it states"
@@ -315,17 +355,20 @@ def check_claims(reg: dict) -> list[str]:
     problems: list[str] = []
     facts = measured_facts(reg)
     for r in reg["rows"]:
-        if not r.get("measure") or r["measure"] not in facts:
+        ms = [m for m in measures_of(r) if m in facts]
+        if not ms:
             continue  # validate() already reported the unknown key
-        want = facts[r["measure"]]
         site_state = str(r.get("site_state", ""))
-        if r["measure"] in tokens_in(site_state):
-            continue  # derived; checked on the rendered page instead
-        if str(want) not in site_state:
-            problems.append(
-                f"{r['id']}: site_state does not state the measured value {want} "
-                f"(measure {r['measure']}); the tree and the register disagree"
-            )
+        tokens = tokens_in(site_state)
+        for m in ms:
+            if m in tokens:
+                continue  # derived; checked on the rendered page instead
+            want = facts[m]
+            if str(want) not in site_state:
+                problems.append(
+                    f"{r['id']}: site_state does not state the measured value {want} "
+                    f"(measure {m}); the tree and the register disagree"
+                )
     return problems
 
 
@@ -398,8 +441,13 @@ def render_rows(reg: dict) -> str:
         if r.get("site_state"):
             extra += f'<div class="row-note"><em>Site state:</em> {esc(resolve_tokens(r["site_state"], facts))}</div>'
         if r.get("measure"):
-            extra += (f'<div class="row-note">measured in this tree: <code>{esc(r["measure"])}</code>'
-                      f' = {esc(facts[r["measure"]])}</div>')
+            parts = [
+                f"<code>{esc(m)}</code> = {esc(facts[m])}"
+                for m in measures_of(r)
+                if m in facts
+            ]
+            if parts:
+                extra += f'<div class="row-note">measured in this tree: {" &nbsp; ".join(parts)}</div>'
         if r.get("blocked_by"):
             links = " ".join(
                 f'<a class="pagelink" href="../pages/questions.html#{esc(q)}">{esc(q)}</a>'
