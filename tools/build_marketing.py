@@ -10,9 +10,10 @@ Design rules, each enforced here rather than trusted:
     source is a hard build error - the build stops instead of publishing it.
 3.  **A conflict is published as a conflict.**  Two official statements that disagree are both shown, with
     both sources, and the row is marked ``CONFLICT``.  The renderer does not pick a winner silently.
-4.  **Every affiliate link goes through ``tools/link_builder.py``.**  With no Associates ID configured, that
-    means ``preview_link()`` - which is explicitly non-monetized and must be labelled as such.  The renderer
-    refuses to hand-write ``amazon.com/dp/`` URLs.
+4.  **Every affiliate link goes through ``tools/link_builder.py``.**  Since the owner supplied the
+    Associates tag (2026-11-17), that means ``build_product_link()`` with ``ASSOCIATES_TAG`` - a tagged
+    Special Link whose format the builder validates.  The renderer refuses to hand-write ``amazon.com/dp/``
+    URLs, and citation links (class="src") stay unmonetized by design.
 5.  **No price is ever printed.**  Price rows are ``withheld_by_policy`` and the verifier re-checks the
     rendered HTML for money patterns in a buying context.
 
@@ -35,13 +36,22 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "tools"))
 
-from link_builder import REQUIRED_SITE_DISCLOSURE, LinkPolicyError, audit_html, preview_link  # noqa: E402
+from link_builder import (  # noqa: E402
+    ASSOCIATES_TAG,
+    REQUIRED_SITE_DISCLOSURE,
+    LinkPolicyError,
+    audit_html,
+    build_product_link,
+)
 
 DATA = REPO / "marketing" / "data" / "facts.json"
 OUT = REPO / "marketing"
 CSS = "assets/marketing.css"
 SITE_NAME = "Zone2 Field Notes"
 LIVE = "https://kanlerxz87-cyber.github.io/Zone2/marketing/"
+# The site-wide social preview card (T58, 2026-11-17). A brand card, deliberately not product
+# photography — the product-imagery rights question is still open (Q-10).
+OG_IMAGE = "https://kanlerxz87-cyber.github.io/Zone2/assets/img/og.jpg"
 
 FACTS = json.loads(DATA.read_text(encoding="utf-8"))
 PRODUCTS = {p["key"]: p for p in FACTS["products"]}
@@ -116,18 +126,27 @@ def source_link(src_id: str | None) -> str:
 
 
 def product_link(product: dict) -> str:
-    """Emit the product link through link_builder, never by hand."""
-    link = preview_link(
+    """Emit the product link through link_builder, never by hand.
+
+    T58 (session `7264f3c2`, 2026-11-17): the owner supplied the Associates tag
+    (``tools/link_builder.ASSOCIATES_TAG``), so this emits a tagged Special Link instead of the
+    preview placeholder every page carried before. The builder validates the ASIN, the tag format
+    and the absence of competing attribution parameters; the marketing verifier fails any sponsored
+    product link that reaches Amazon without that tag, and forbids tags on citation links
+    (class="src"), which stay unmonetized evidence by design.
+    """
+    link = build_product_link(
         product["asin"],
-        link_text=f'{product["manufacturer_product_name"]} (see this model on Amazon)',
+        ASSOCIATES_TAG,
+        link_text=f'{product["manufacturer_product_name"]} (see this model\'s listing)',
     )
     href = esc(link.href)
     text = esc(link.text)
-    warn = esc(" ".join(link.warnings))
     return (
         f'<a class="sponsored-link" href="{href}" rel="sponsored nofollow" target="_blank" '
-        f'referrerpolicy="no-referrer-when-downgrade" data-link-state="PREVIEW_NO_TAG">{text}</a>'
-        f'<span class="link-note" title="{warn}">preview link \u2014 no Associates ID configured, earns nothing</span>'
+        f'referrerpolicy="no-referrer-when-downgrade" data-link-state="TAGGED" '
+        f'data-product-key="{esc(product["key"])}">{text}</a>'
+        f'<span class="link-note">Special Link \u2014 Associates tag {esc(ASSOCIATES_TAG)}</span>'
         # R-02: a clear, conspicuous statement adjacent to the affiliate link itself.
         f'<span class="disclosure disclosure--link" data-rule="R-02">{esc(FACTS["link_level_disclosure"])}</span>'
     )
@@ -483,6 +502,11 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:url" content="{esc(url)}">
+<meta property="og:image" content="{esc(OG_IMAGE)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Counter Notes — every number links to its source">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="{esc(BRAND['name'])} — new guides" href="{root}feed.xml">
 <link rel="stylesheet" href="{root}{CSS}">
 {ld}
@@ -498,7 +522,8 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
 <div class="shell">
   <div class="col" id="main">
     <p class="disclosure" data-rule="R-01"><strong>Affiliate disclosure.</strong> {esc(REQUIRED_SITE_DISCLOSURE)}
-    A commission may be earned when you buy through our links, at no extra cost to you.
+    A commission may be earned when you buy through our links, at no extra cost to you. Product links are
+    Special Links carrying the Associates tag <code>{esc(ASSOCIATES_TAG)}</code>.
     <a href="{root}verification.html">How we verify</a>.</p>
     <aside class="scope-note" role="note"><strong>Product identity is not confirmed.</strong> These pages describe the Amazon listings the supplied short links resolved to on {esc(ED_AS_OF)}; they do not establish that those destinations are the products intended in the brief. The supplied codes are 9 characters and an ASIN is 10, so we write about the listings we can read rather than for products we cannot name.
     <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank"
@@ -536,13 +561,16 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
   <p class="foot-brand">{esc(BRAND['name'])}</p>
   <p>{esc(BRAND['footer_note'])}</p>
   <p>{esc(REQUIRED_SITE_DISCLOSURE)}</p>
-  <p>Product links are <strong>preview links</strong>: no Associates ID is configured for this project, so they
-  are not monetized and carry <code>rel="sponsored nofollow"</code>. Facts verified {esc(AS_OF)} against official
+  <p>Product links are tagged Special Links carrying the Associates tag <strong>{esc(ASSOCIATES_TAG)}</strong>
+  and <code>rel="sponsored nofollow"</code>; citation links to official pages are not affiliate links.
+  On this site the click counter records aggregate page and link events only — no cookie, no visitor
+  identifier, nothing per person. Facts verified {esc(AS_OF)} against official
   manufacturer and Amazon product pages.
   <a href="{root}flagged.html">Open items</a> ·
   <a href="{root}improvements.html">Improvement board</a> ·
   <a href="{root}../index.html">Owner dashboard</a></p>
 </footer>
+<script src="{root}../assets/js/events.js" defer></script>
 </body>
 </html>
 """
@@ -1062,13 +1090,16 @@ def page_verification() -> str:
     </section>
 
     <section class="card">
-      <h2>Links are not monetized</h2>
-      <p>No Amazon Associates ID is configured for this project, and inventing one is prohibited. Every
-      outbound product link here is therefore an inert <strong>preview link</strong> produced by the
-      project's link builder, marked <code>rel="sponsored nofollow"</code> and labelled as non-earning. Before
-      publishing, the owner must set the Associates ID; the builder will then emit a properly tagged Special
-      Link instead, and the "preview link" labels disappear automatically because they are driven by that
-      same configuration.</p>
+      <h2>Links are monetized Special Links</h2>
+      <p>Updated 2026-11-17: the owner supplied the Associates tracking ID, and every outbound product
+      link here is now a tagged <strong>Special Link</strong> produced by the project's link builder,
+      carrying the tag <code>{esc(ASSOCIATES_TAG)}</code>, marked <code>rel="sponsored nofollow"</code>
+      and disclosed next to the link itself. The link builder validates the tag format, the ASIN and the
+      absence of competing attribution parameters on every build, and the verifier fails any sponsored
+      product link that reaches Amazon without the tag. Citation links to the official pages
+      (class="src") deliberately stay untagged: they are evidence, not shopping links. Which product each
+      supplied short link was <em>intended</em> to point at is still an open question — see the
+      <a href="../intent.html">link &amp; intent register</a>.</p>
     </section>
 """
     return shell("Verification", "Method, sources and row counts for the verified marketing set.", body,
@@ -1117,8 +1148,12 @@ def page_flagged() -> str:
     <section class="card">
       <h2>Owner actions</h2>
       <ol class="plain">
-        <li><strong>Set the Associates ID.</strong> Until one is configured, every product link on this site is a
-        non-earning preview link. Nothing is tagged, because a fabricated tag would be worse than none.</li>
+        <li><strong>Validate one Special Link per product in the enrolled Associates workflow.</strong>
+        Done 2026-11-17: the owner supplied the Associates tag and every product link on this site is a
+        tagged Special Link. Still open: signing in to Associates Central to confirm each link's
+        destination and that the tracking report attributes it — that check needs the owner's enrolled
+        session and cannot be run from this repository. Until it is recorded, scale to no further
+        products or placements.</li>
         <li><strong>Resolve the Emeril preset count.</strong> The manufacturer's own page says both "25 Cooking
         Pre-sets" and "24 one-touch cooking presets"; Amazon's title says 24. Ask the brand which is current.</li>
         <li><strong>Resolve the Chefman 8 Qt maximum temperature.</strong> The Amazon title advertises a 450 °F
@@ -1221,8 +1256,8 @@ def page_topic(slug: str) -> str:
         product_links = (
             '<section class="block block--cta"><h2>The models this guide is about</h2>'
             f'<ul class="related">{"".join(rows)}</ul>'
-            '<p class="row-note">Links go to our own write-ups, which carry the product page link and its '
-            "preview state.</p></section>"
+            '<p class="row-note">Links go to our own write-ups, which carry the tagged product page '
+            "link and its disclosure.</p></section>"
         )
     related = "".join(
         f'<li><a href="{esc(r)}">{esc(GUIDE_BY_SLUG[r]["title"])}</a> <span>{esc(GUIDE_BY_SLUG[r]["kicker"])}</span></li>'

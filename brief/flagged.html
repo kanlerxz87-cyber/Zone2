@@ -11,6 +11,11 @@
 <meta property="og:title" content="Flagged · Zone2 design brief">
 <meta property="og:description" content="Eight irregularities raised by this session&#x27;s review, each with the measurement behind it, what would close it, and who can.">
 <meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/brief/flagged.html">
+<meta property="og:image" content="https://kanlerxz87-cyber.github.io/Zone2/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Counter Notes — every number links to its source">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="index,follow">
 <style>
 :root{--ink:#16130f;--paper:#fbfaf7;--muted:#6b6459;--line:#e3ded3;--accent:#1f5b4a;
@@ -146,9 +151,9 @@ blocks an assertion or a decision, not a build.</p>
       <div class="note">Files: <code>—</code></div></td>
 </tr>
 <tr id="FB-06">
-  <td><strong>FB-06</strong><div class="src"><span class="pill open">open</span>
+  <td><strong>FB-06</strong><div class="src"><span class="pill closed">closed</span>
       <span class="pill">high</span></div></td>
-  <td><strong>Zero of 138 published pages carry an Associates tag, so no page on the site can currently earn</strong><p>Measured with Amazon&#x27;s published tag format (NAME-NN). The three supplied short links resolve without a tag parameter. Amazon&#x27;s own application-review page states that the tags &#x27;must be embedded in your Amazon product links on the site(s) declared in your application&#x27;, and that the application is checked once at least three qualifying sales have been driven within the first 180 days.</p>
+  <td><strong>Zero of 138 published pages carry an Associates tag, so no page on the site can currently earn</strong><p>Measured with Amazon&#x27;s published tag format (NAME-NN). The three supplied short links resolve without a tag parameter. Amazon&#x27;s own application-review page states that the tags &#x27;must be embedded in your Amazon product links on the site(s) declared in your application&#x27;, and that the application is checked once at least three qualifying sales have been driven within the first 180 days. CLOSED 2026-11-17 (session 7264f3c2): the owner supplied the Associates tag shopnow047c-20; every reader-facing product link on the generated pages now carries it via tools/link_builder.py:build_product_link(), and both deploy gates fail a product CTA without it. The measurement layer went live the same day (decision DS-11). The title&#x27;s measured count describes the state on 2026-11-16 and is kept as history.</p>
       <p class="note"><strong>Why it matters.</strong> This is the finding the brief&#x27;s &#x27;so real people can click the links and buy&#x27; runs into. Until a tag exists, traffic cannot convert into qualifying purchases, and without three of them the application is never reviewed. Everything downstream — conversion data, the optimizer, the revenue model — is blocked behind one string the owner has to supply.</p></td>
   <td>RV-04<div class="src"><a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-10</a> · <a href="https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM" target="_blank" rel="noopener noreferrer nofollow">BR-07</a></div></td>
   <td>Supply the Associates ID (tag) and the marketplace; then rebuild the links with it.<div class="note">Owner: owner — carried on the canonical register as F-07 and F-24, and asked as BQ-02 on the questions register</div>

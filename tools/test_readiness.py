@@ -95,7 +95,13 @@ CASES = [
     ),
     (
         "R7 a BLOCKED row that names nobody who can clear it",
-        lambda reg: row(reg, "RR-05").__setitem__("blocked_by", []),
+        # T58 (2026-11-17): RR-05 became MET when the owner supplied the Associates tag, so the
+        # mutation now sets the state as well as emptying the blocker list — the rule under test
+        # is about BLOCKED rows, and the fixture must still produce one.
+        lambda reg: (
+            row(reg, "RR-05").__setitem__("blocked_by", []),
+            row(reg, "RR-05").__setitem__("state", "BLOCKED"),
+        ),
         lambda reg: BR.validate(reg),
         "no blocked_by",
     ),

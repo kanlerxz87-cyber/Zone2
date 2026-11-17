@@ -36,6 +36,15 @@ DISCLOSURE_BANNED = ("commissionable link", "affiliate stuff", "some links maybe
 TAG_RE = re.compile(r"^[a-z0-9]+-\d{2}$")
 # R-08: a sub-tag must be a static campaign label, never something derived from the visitor.
 SUBTAG_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,47}$")
+
+# The owner-supplied Associates tracking ID (brief of 2026-11-17). Before this constant existed the
+# repository had none — ledger flag F-07 recorded "no Associates account, marketplace, tracking ID, or
+# tag supplied", and every product link on the site was emitted through preview_link() as a clearly
+# labelled non-earning placeholder. The tag is validated against TAG_RE by build_product_link(), so an
+# invalid string fails the build rather than publishing an untracked link. Evidence and citation links
+# (class="src" / class="pb-src") deliberately do NOT use this constant: they point at observed
+# destinations and stay unmonetized by design.
+ASSOCIATES_TAG = "shopnow047c-20"
 COMPETING_ATTRIBUTION_PARAMS = {
     "aff_id",
     "aigid",

@@ -1,5 +1,5 @@
 {
-  "note": "T40 measurement layer - DATA MODEL AND DECISION PLAN. This file is a proposal, not an implementation. It defines what could be measured on this site, what may be measured under the program rules, and what each measurement would let the owner decide - so that the choice in discovery/suggestions.html DS-11 can be made against a concrete design instead of an idea. NOTHING here collects anything today: there is no script, no endpoint, no cookie and no account. The `status` of every event is DESIGNED, never LIVE, and the measurement gate fails the build if that ever changes without a recorded owner decision.",
+  "note": "T40 measurement layer - DATA MODEL AND DECISION PLAN. This file is a proposal, not an implementation. It defines what could be measured on this site, what may be measured under the program rules, and what each measurement would let the owner decide - so that the choice in discovery/suggestions.html DS-11 can be made against a concrete design instead of an idea. NOTHING here collects anything today: there is no script, no endpoint, no cookie and no account. The `status` of every event is DESIGNED, never LIVE, and the measurement gate fails the build if that ever changes without a recorded owner decision. UPDATE 2026-11-17 (session 7264f3c2): the owner recorded that decision on DS-11 and chose option A. EV-01, EV-02 and EV-03 are now LIVE as a privacy-preserving client-side counter (assets/js/events.js): no cookie, no identifier, nothing per person, and no count is published anywhere on the site. The events queue in the visitor's own browser only, because the endpoint that would persist them does not exist on GitHub Pages static hosting (MI-01 stays open). EV-04 and EV-05 remain BLOCKED on first-party reports. The wording above is kept for the record.",
   "as_of": "2026-11-15",
   "session": "arena/3e0b3b4e-zone2",
   "status_vocabulary": ["DESIGNED", "BLOCKED", "LIVE"],
@@ -39,7 +39,10 @@
     {
       "id": "EV-01",
       "name": "page_view",
-      "status": "DESIGNED",
+      "status": "LIVE",
+      "live_since": "2026-11-17",
+      "collected_by": "assets/js/events.js (front pages and the marketing set)",
+      "persistence": "client-side only: a bounded queue in the visitor's own browser until MI-01's endpoint exists; nothing is transmitted and no count is published",
       "fires_on": "A dashboard or marketing page being served.",
       "fields": ["page_path", "referrer_host ONLY (the hostname, never the full URL or query)", "day_bucket (a date, never a time)"],
       "deliberately_not_collected": ["IP address", "user agent", "device ID", "any cookie or local identifier", "full referrer URL", "query string"],
@@ -49,7 +52,10 @@
     {
       "id": "EV-02",
       "name": "product_link_click",
-      "status": "DESIGNED",
+      "status": "LIVE",
+      "live_since": "2026-11-17",
+      "collected_by": "assets/js/events.js, wired to every a[data-link-state] product link",
+      "persistence": "client-side only, as EV-01; the operator dashboards may still hold PREVIEW_NO_TAG rows from before the tag was supplied",
       "fires_on": "A click on a product link, before navigation.",
       "fields": ["page_path", "product_key (P1/P2/P3 - a static label from the fact base, never a value derived from the visitor)", "link_state (PREVIEW_NO_TAG or TAGGED)"],
       "deliberately_not_collected": ["anything that persists across pages", "the destination of the click", "whether the visitor bought anything (the site cannot know this and must not imply it does)"],
@@ -59,7 +65,10 @@
     {
       "id": "EV-03",
       "name": "disclosure_view",
-      "status": "DESIGNED",
+      "status": "LIVE",
+      "live_since": "2026-11-17",
+      "collected_by": "assets/js/events.js, via an IntersectionObserver on the disclosure strip",
+      "persistence": "client-side only, as EV-01",
       "fires_on": "The required disclosure entering the viewport above a product link.",
       "fields": ["page_path", "disclosure_position"],
       "deliberately_not_collected": ["scroll depth", "time on page", "read events"],
@@ -74,7 +83,7 @@
       "fields": ["period_start", "period_end", "clicks", "ordered_items", "conversion_rate", "earnings_float", "source = 'associates_report'"],
       "deliberately_not_collected": ["any per-customer data - Associates reporting is aggregate by design", "any value this project could compute but Amazon does not publish"],
       "decides": "Whether any of the above converted, and therefore whether the whole content strategy is working.",
-      "blocked_by": "DQ-01: no Associates account exists, so no reporting exists to import. The site must not invent a placeholder figure to fill this table.",
+      "blocked_by": "DQ-01: no Associates account exists, so no reporting exists to import. The site must not invent a placeholder figure to fill this table. (UPDATE 2026-11-17 (session 7264f3c2): the Associates tag was supplied and is embedded in the published Special Links; no enrolled account or first-party report is available to this repository, so the import stays blocked.)",
       "analogy_in_repo": "tools/validate_data.py already forbids a populated clicks/conversion/earnings field anywhere in ledger/. This event is the only route by which those fields could ever legally be filled."
     },
     {
@@ -126,9 +135,9 @@
     "source_ids": []
   },
   "open_items": [
-    {"id": "MI-01", "item": "The event sink does not exist. GitHub Pages serves static files and cannot accept a POST, so a first-party counter needs an endpoint the owner controls (a serverless function, a log drain, or a hosted database).", "status": "unresolved", "blocks": "EV-01, EV-02, EV-03"},
-    {"id": "MI-02", "item": "Retention policy is undefined. Aggregate daily counts can be kept indefinitely; anything finer should expire. The owner must choose before collection starts.", "status": "unresolved", "blocks": "EV-01, EV-02, EV-03"},
-    {"id": "MI-03", "item": "A bot filter is undefined. A static counter counts crawlers and link scanners as visitors. Without a filter the numbers are inflated and the decisions built on them are wrong.", "status": "unresolved", "blocks": "EV-01"},
+    {"id": "MI-01", "item": "The event sink does not exist. GitHub Pages serves static files and cannot accept a POST, so a first-party counter needs an endpoint the owner controls (a serverless function, a log drain, or a hosted database). (UPDATE 2026-11-17 (session 7264f3c2): the client half now exists - assets/js/events.js queues aggregate events locally and posts to a relative api/events contract when one is deployed; the endpoint itself still does not exist.)", "status": "unresolved", "blocks": "EV-01, EV-02, EV-03"},
+    {"id": "MI-02", "item": "Retention policy is undefined. Aggregate daily counts can be kept indefinitely; anything finer should expire. The owner must choose before collection starts. (UPDATE 2026-11-17 (session 7264f3c2): still open; the client queue stores a day bucket only - the coarsest granularity - but the retention choice remains the owner's.)", "status": "unresolved", "blocks": "EV-01, EV-02, EV-03"},
+    {"id": "MI-03", "item": "A bot filter is undefined. A static counter counts crawlers and link scanners as visitors. Without a filter the numbers are inflated and the decisions built on them are wrong. (UPDATE 2026-11-17 (session 7264f3c2): partially mitigated client-side - events fire only on the production host and page_view is de-duplicated per page load; server-side filtering is still needed once an endpoint exists.)", "status": "unresolved", "blocks": "EV-01"},
     {"id": "MI-04", "item": "There is no way to verify a click led to a purchase from this side, and this project must never imply there is. Attribution is Amazon's to report, not this site's to guess.", "status": "unresolved", "blocks": "EV-04"}
   ]
 }

@@ -278,6 +278,26 @@
       "blocks": [],
       "source_ids": ["S37"],
       "owner": "owner"
+    },
+    {
+      "id": "DQ-11",
+      "question": "For each of the five supplied short links, which product did the owner intend to promote?",
+      "known": "The five supplied short links were re-resolved on 2026-11-17. Three land on the Chefman and Emeril listings this site already describes. Two land on meat-thermometer listings outside that set - B0c8moW59 opens the ThermoMaven 1 Sec thermometer (B0DHZTCNR5) and B0f3GKalj opens the CHEF iQ Sense (B0DZFD6R9Z). Each observation, with its exact URL and date, is recorded in docs/product-intent.json and published at intent.html, with the intended identity and the observed destination kept in separate fields.",
+      "missing": "The owner's own statement of which product each supplied code was meant to promote, and - for the two out-of-set codes - whether they were supplied in error, belong to a second product wave, or should be dropped.",
+      "how_to_obtain": "Only the owner can answer it: check the Associates account link history or the original affiliate-programme instructions, then record the intended ASIN beside the observed destination in the intent register. The two fields are kept separate on purpose; merging them would turn an observation into an assertion.",
+      "blocks": ["DS-15", "DS-16"],
+      "source_ids": ["S02"],
+      "owner": "owner"
+    },
+    {
+      "id": "DQ-12",
+      "question": "Where should the aggregate click-event ledger live, and how long is it kept?",
+      "known": "GitHub Pages serves static files only, so no first-party endpoint exists there. assets/js/events.js queues aggregate, cookie-free events in the visitor's own browser and posts nothing yet (open item MI-01).",
+      "missing": "The hosting decision for the endpoint - serverless function, log drain, or hosted database - and the retention rule for whatever it stores (open item MI-02).",
+      "how_to_obtain": "The owner chooses a host, deploys the endpoint contract already drafted in tools/tracking_schema.sql, and records the choice here. Until then the counter stays client-side and its counts are published nowhere.",
+      "blocks": ["DS-17"],
+      "source_ids": ["S02"],
+      "owner": "owner"
     }
   ],
   "suggestions": [
@@ -474,8 +494,8 @@
       ],
       "recommended": "A",
       "needs_answers": ["DQ-01", "DQ-04"],
-      "decision": "",
-      "status": "awaiting owner decision",
+      "decision": "Recorded 2026-11-17 from the owner's brief (session 7264f3c2). Option A is chosen. The privacy-preserving, cookie-free first-party counter is switched on for the three client-side events - EV-01 page_view, EV-02 product_link_click, EV-03 disclosure_view - implemented in assets/js/events.js on the reader-facing pages: no cookie, no identifier, nothing derived from the visitor, and no count published anywhere on the site. The self-hosted endpoint that would persist the counts does not exist on GitHub Pages static hosting and stays open (new question DQ-12, new suggestion DS-17). EV-04 and EV-05 remain blocked until first-party reports (Associates reporting, Search Console) exist and are imported.",
+      "status": "decided",
       "owner": "owner"
     },
     {
@@ -528,6 +548,96 @@
       ],
       "recommended": "A",
       "needs_answers": [],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-15",
+      "area": "Monetisation",
+      "title": "When may a campaign key or a sixth product join the registry?",
+      "suggestion": "Keep ledger/campaigns.json EMPTY_BY_DESIGN until two gates pass for any candidate: the owner records which product the supplied link was intended to point at (closing DQ-11 for that link, in the intent register), and one Special Link per product is validated in the enrolled Associates workflow - destination confirmed and tracking report attributed - before scaling to anything else.",
+      "why": "The Participation Requirements tie commission attribution to the tag on the Special Link, and the project's own rule is that a campaign key must point at a verified product identity. Publishing campaign keys against unconfirmed identities would monetise a guess.",
+      "evidence": ["S02", "S56"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Gate every campaign key on a recorded owner confirmation plus one Associates-workflow validation per product",
+          "tradeoff": "Slower to scale; every key that ships is defensible line by line."
+        },
+        {
+          "id": "B",
+          "label": "Open campaign keys now for the three destination-confirmed products",
+          "tradeoff": "Faster, but the intended-product question (DQ-11) stays unanswered and the keys would assert a mapping only the owner can confirm."
+        },
+        {
+          "id": "C",
+          "label": "Keep everything empty until all five supplied links are owner-confirmed",
+          "tradeoff": "Simplest and safest; leaves the two out-of-set codes unusable even if the owner confirms the three in-set ones."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-11"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-16",
+      "area": "Content strategy",
+      "title": "What, if anything, should be published for the two supplied links that land outside the air-fryer set?",
+      "suggestion": "Two of the five supplied codes resolve to meat thermometers, not air fryers (observed 2026-11-17; intent.html). Choose: park them with a recorded observation and ask the owner (recommended until DQ-11 closes), build a second verification-first cluster for probe thermometers under the same sourcing rules, or drop them from the register.",
+      "why": "The site's voice and evidence standard were built for one category. Silently writing about a second category without a decision would dilute the cluster logic the search strategy depends on; silently ignoring two supplied links would leave the brief half-unexecuted with no recorded reason.",
+      "evidence": ["S02"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Record and park: publish the observation in the intent register and wait for the owner",
+          "tradeoff": "Two supplied links sit unmonetized and unexplained to readers until the owner answers."
+        },
+        {
+          "id": "B",
+          "label": "Build a probe-thermometer cluster under the same verification standard",
+          "tradeoff": "Doubles the editorial scope; the existing traffic measurement cannot yet say whether a second category earns its cost."
+        },
+        {
+          "id": "C",
+          "label": "Drop the two codes from the register once the owner confirms they were supplied in error",
+          "tradeoff": "Cleanest site; loses whatever opportunity the two links carried, on the owner's say-so."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-11"],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "DS-17",
+      "area": "Measurement",
+      "title": "Where should the aggregate click ledger live?",
+      "suggestion": "The client counter records EV-01..EV-03 into a bounded in-page queue only, because GitHub Pages serves static files. Choose the persistence path: a self-hosted serverless endpoint writing the schema already drafted in tools/tracking_schema.sql, a cookie-free hosted counter, or keeping the client-side queue until a later decision.",
+      "why": "Counts that live in a visitor's own browser are never wrong on the site, but they are invisible to every decision the measurement layer exists to support. The endpoint is the difference between collecting events and being able to act on them.",
+      "evidence": ["S02", "S46"],
+      "options": [
+        {
+          "id": "A",
+          "label": "Self-hosted endpoint (serverless function or log drain) on the tracking_schema.sql contract",
+          "tradeoff": "Full control and first-party data; the owner operates a service, its retention rule (DQ-12) and its abuse filtering."
+        },
+        {
+          "id": "B",
+          "label": "Cookie-free hosted counter (no identifiers, aggregate only)",
+          "tradeoff": "No code to operate; a third party sits in the measurement path and the data contract is theirs, not this repository's."
+        },
+        {
+          "id": "C",
+          "label": "Keep the client-side queue and decide later",
+          "tradeoff": "Nothing new to operate; the events stay invisible and EV-01..03 remain measurements without an audience."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": ["DQ-12"],
       "decision": "",
       "status": "awaiting owner decision",
       "owner": "owner"
