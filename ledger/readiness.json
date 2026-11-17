@@ -37,8 +37,9 @@
       "id": "RR-01",
       "requirement": "The Site must be publicly available - not a closed group, not behind a paywall.",
       "quote": "They must be publicly available (for example, they should not be a closed group, or behind a paywall).",
-      "site_state": "116 published HTML pages, all anonymous and login-free; the site is served by GitHub Pages at https://kanlerxz87-cyber.github.io/Zone2/.",
+      "site_state": "{published_html_pages} published HTML pages, all anonymous and login-free; the site is served by GitHub Pages at https://kanlerxz87-cyber.github.io/Zone2/.",
       "state": "MET",
+      "measure": "published_html_pages",
       "owner_action": "",
       "source_ids": [
         "S23",
@@ -86,7 +87,7 @@
       "id": "RR-05",
       "requirement": "Associates tags (Special Links, e.g. abcd-20) must be embedded in the Amazon product links on the Site declared in the application.",
       "quote": "Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application.",
-      "site_state": "0 pages carry an Associates tag in Amazon's NAME-NN format. 72 pages link to amazon.com/dp/; every one of them is an untagged source citation, not a Special Link.",
+      "site_state": "{pages_with_tagged_link} pages carry an Associates tag in Amazon's NAME-NN format. {pages_linking_dp} pages link to amazon.com/dp/; every one of them is an untagged source citation, not a Special Link.",
       "state": "BLOCKED",
       "owner_action": "Q-02 / F-07 / F-24 - no Associates ID exists, so no link on the Site can carry a tag. The three supplied short links resolve without a tag parameter.",
       "source_ids": [
@@ -97,7 +98,10 @@
       "blocked_by": [
         "Q-02"
       ],
-      "measure": "pages_with_tagged_link"
+      "measure": [
+        "pages_with_tagged_link",
+        "pages_linking_dp"
+      ]
     },
     {
       "id": "RR-06",

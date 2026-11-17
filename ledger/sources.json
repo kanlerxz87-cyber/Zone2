@@ -315,7 +315,7 @@
       "page_stated_update": null,
       "accessed_utc": "2026-11-15",
       "used_for": [
-        "Verbatim, re-read live 2026-11-15: \"ASIN is the 10-digit code that Amazon uses to denote specific products.\" The three resolved destinations (B0CDY277D3, B09B7SB46R, B08DKYBTPH) each carry 10 characters; the three submitted tokens carry 9. The repository's earlier '10-character' phrasing is its own observation of this definition, not the published wording (see ledger/decisions_findings.json RF-01 and suggestion SG-11).",
+        "Verbatim, re-read live 2026-11-15: \"ASIN is the 10-digit code that Amazon uses to denote specific products.\" The three resolved destinations (B0CDY277D3, B09B7SB46R, B08DKYBTPH) each carry 10 characters; the three submitted tokens carry 9. The repository's earlier '10-character' phrasing is its own observation of this definition, not the published wording (see ledger/decisions_findings.json RF-01 and suggestion SG-12).",
         "The simple text-link format published on the same page — amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID — which the page states \"qualifies for the direct link bonus\"; the tagged /dp/ form is the pattern Special Links must follow"
       ]
     },
