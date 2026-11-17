@@ -141,5 +141,22 @@ All outside this session's file scope, so logged as CR-2 in `COORDINATION.md` ra
 ## 9. Gates
 
 Every gate in the repository was run on the combined tree after this work: **46 of 46 CI steps
-pass**, including the three added for this namespace (drift check, contract gate, and 15 negative
-tests — baseline clean, all 15 injected defects fire).
+pass**, including the three added for this namespace (drift check, contract gate, and 16 negative
+tests — baseline clean, all 16 injected defects fire).
+
+## 10. A defect in this session's own first publish, and what it produced
+
+Reading the deployed page (not the gate) caught a typed count that had drifted from the log:
+`SUB-01` rendered "2 observation(s)" while only `OBS-02` referenced it. The count had been typed
+into `intake/data/submissions.json` rather than measured — the same class as CR-1 and FB-01/FB-02
+elsewhere in this repository.
+
+Two changes came out of it, so the class cannot recur here:
+
+1. `tools/build_intake.py` now renders the observation count **derived** from
+   `observations.json` in the same run, rather than reading the typed field.
+2. `tools/validate_intake.py::check_observation_counts` fails the build when the register's typed
+   value disagrees with the derived one, and `tools/test_intake.py` case 16 proves the rule fires.
+
+This is worth recording because the defect survived 15 negative tests, a passing contract gate and
+a green CI run. It was found by reading the page a reader would see.

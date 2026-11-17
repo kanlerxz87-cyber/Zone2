@@ -6320,3 +6320,26 @@ verified full specification rows for both products from the official listings, w
 did not repeat; this session additionally covers all five links (not only the two new ones), the
 tracking id `shopnow047c-20`, the measurement/events record, and the decision board. Neither
 session's work is superseded by the other.
+
+
+### T60 follow-up (same session): a typed count in this namespace's own first publish
+
+Reading the **deployed** page — not a gate — caught a defect in this session's first publish:
+`SUB-01` rendered "2 observation(s)" while only `OBS-02` referenced it. `observation_count` had
+been typed into `intake/data/submissions.json` rather than measured from
+`intake/data/observations.json`. The value is corrected to 1.
+
+It survived 15 negative tests, a passing contract gate and a green CI run, which is the point:
+the count was typed rather than derived, which is precisely the CR-1 / FB-01 / FB-02 class this
+board has now seen four times. Two changes make it unrepeatable in this namespace:
+
+1. `tools/build_intake.py` renders the observation count **derived** from `observations.json` in
+   the same run; it no longer reads the typed field.
+2. `tools/validate_intake.py::check_observation_counts` fails the build when the register's typed
+   value disagrees with the derived one, and `tools/test_intake.py` **case 16** proves it fires
+   (baseline clean, 16 of 16 injected defects now fire).
+
+**Logged for whoever owns the shared docs:** `README.md` line ~273 attributes the "links 4 and 5
+were added" work to "(T58, session `1539a895`)". That session renumbered itself to **T59** in its
+own closing record but the README reference was not updated with it. Left unedited here, since it
+is another session's attribution; noted so an integration pass can correct it.

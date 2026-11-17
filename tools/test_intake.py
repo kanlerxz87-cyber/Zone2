@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Negative tests for tools/validate_intake.py.
 
-A gate that has only ever passed is a claim, not a control. This file injects fifteen
+A gate that has only ever passed is a claim, not a control. This file injects sixteen
 defects into a throwaway copy of the namespace — one at a time — and asserts that each one
 makes the validator fail. It then asserts the unmutated copy is clean, because a gate that
 fires on everything is as useless as one that fires on nothing.
@@ -167,6 +167,13 @@ def d15(root: Path) -> None:
     t = p.read_text(encoding="utf-8")
     t = t.replace("8 irregularities", "12 irregularities")  # every occurrence, incl. the body
     p.write_text(t, encoding="utf-8")
+
+
+@case("16", "a typed observation_count drifts from the observation log")
+def d16(root: Path) -> None:
+    d = load(root, "submissions.json")
+    d["entries"][0]["observation_count"] = 2  # only one observation row references SUB-01
+    save(root, "submissions.json", d)
 
 
 # ------------------------------------------------------------------- harness
