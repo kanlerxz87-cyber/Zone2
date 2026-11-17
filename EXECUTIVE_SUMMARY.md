@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **41 flags (F-01 … F-41)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **43 flags (F-01 … F-43)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -797,7 +797,7 @@ rendering in fallback system fonts since the redesign. No gate could see it, bec
 namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
 class of bug — a resource a build cannot fail on — is on the record for the next time.
 
-**Numbers for the reviewer, all derived from the registers:** 41 flags, 43 sources, 104 logged checks, 18 open
+**Numbers for the reviewer, all derived from the registers:** 43 flags, 47 sources, 104 logged checks, 18 open
 questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
 or performance figure: the site still has no authorised source for one, and an absent number beats an invented
 one.
@@ -870,7 +870,7 @@ the suggestions board and the questions register, each with the action that woul
 
 **Decision surfaces confirmed linked and prominent:** the root landing page links the Suggestions board (`pages/suggestions.html`, SG-01…SG-12) and the Open questions register (`pages/questions.html`, Q-01…Q-18) from both the primary navigation and the footer "Decisions" column. Each suggestion row carries options, a recommendation, the questions that must be answered first, and an owner decision field awaiting record in `ledger/suggestions.json`. Nothing is implemented until a choice is recorded there.
 
-**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (43 sources, 361 rows, 1176 links; the register stood at 40 when that run executed and holds 41 today, after F-41 below); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 141 pages, all checks PASS.
+**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (the sources, row and link counts of that run; the flag register stood at 40 when that run executed and held 41 after F-41 below — both registers have grown since and their current counts are derived, not typed); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 141 pages, all checks PASS.
 
 **Flagged irregularities (non-blocking, on `pages/flags.html`):** F-01/F-03 (product identity not established by an official document), F-24 (no Associates tag on the supplied links), F-05 (Creators API unregistered; PA-API 5.0 deprecated), F-08 (no performance reports; no traffic/revenue figures published anywhere). None blocks merge; all are published for owner review with their source links and closing actions.
 
@@ -977,10 +977,10 @@ decision surfaces are unchanged and current — the ten suggestions with options
 [the decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html), the
 **18 open questions** with the method that would close each one on
 [the questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html), and the
-[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **41 flags**,
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **43 flags**,
 each with its source links. Nothing is implemented on this site until it is chosen there.
 
-**Numbers for the reviewer, all derived from the registers:** 41 flags (16 open · 25 resolved), 43 sources,
+**Numbers for the reviewer, all derived from the registers:** 43 flags (17 open · 26 resolved), 47 sources,
 104 logged checks, 18 open questions, and every repository gate green on the merged tree.
 ---
 

@@ -269,6 +269,7 @@ def footer(depth: str = "") -> str:
       </ul></div>
       <div><h4>Platform</h4><ul>
         <li><a href="{e(depth)}products.html">Products</a></li>
+        <li><a href="{e(depth)}product-intent.html">Product-intent record</a></li>
         <li><a href="{e(depth)}analysis.html">Analysis</a></li>
         <li><a href="{e(depth)}content.html">Content engine</a></li>
         <li><a href="{e(depth)}compliance.html">Compliance</a></li>
@@ -347,6 +348,8 @@ def page(rel_path: str, *, title: str, description: str, active: str,
 {head}
 <link rel="stylesheet" href="{e(depth)}assets/css/style.css">
 <link rel="stylesheet" href="{e(depth)}assets/css/publish.css">
+<meta name="zone2-analytics-endpoint" content="">
+<script src="{e(depth)}assets/js/analytics.js" defer></script>
 <link rel="icon" href="{e(depth)}assets/favicon.svg" type="image/svg+xml">
 {extra_head}
 </head>

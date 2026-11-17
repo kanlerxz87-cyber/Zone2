@@ -2,13 +2,20 @@
   "note": "T40 measurement layer - DATA MODEL AND DECISION PLAN. This file is a proposal, not an implementation. It defines what could be measured on this site, what may be measured under the program rules, and what each measurement would let the owner decide - so that the choice in discovery/suggestions.html DS-11 can be made against a concrete design instead of an idea. NOTHING here collects anything today: there is no script, no endpoint, no cookie and no account. The `status` of every event is DESIGNED, never LIVE, and the measurement gate fails the build if that ever changes without a recorded owner decision.",
   "as_of": "2026-11-15",
   "session": "arena/3e0b3b4e-zone2",
-  "status_vocabulary": ["DESIGNED", "BLOCKED", "LIVE"],
+  "status_vocabulary": [
+    "DESIGNED",
+    "BLOCKED",
+    "LIVE",
+    "SHIPPED"
+  ],
   "principles": [
     {
       "id": "MP-01",
       "rule": "No personal data, no cookie, no cross-site identifier, and no identifier derived from a visitor.",
       "why": "Amazon's Participation Requirements forbid associating a sub-tag or reporting ID with a specific end user (R-08 in ledger/compliance.json; S02 in ledger/sources.json). A design that cannot do that even if asked is stronger than a policy that says not to.",
-      "source_ids": ["S46"]
+      "source_ids": [
+        "S46"
+      ]
     },
     {
       "id": "MP-02",
@@ -20,7 +27,9 @@
       "id": "MP-03",
       "rule": "Publish no traffic, conversion or income expectation, and no forecast.",
       "why": "The Operating Agreement states that Amazon makes no representation or warranty regarding the amount of traffic or commission income an Associate can expect (S58). A projection on this site would present as knowledge exactly what that clause disclaims. The layer records what happened; it never prints what will.",
-      "source_ids": ["S58"]
+      "source_ids": [
+        "S58"
+      ]
     },
     {
       "id": "MP-04",
@@ -32,89 +41,180 @@
       "id": "MP-05",
       "rule": "Search measurement must not route visitors straight to Amazon.",
       "why": "Search results, paid or unpaid, must send users to the site and not directly or indirectly to an Amazon Site (S51). Any Search Console or paid-search plan is constrained by that.",
-      "source_ids": ["S51"]
+      "source_ids": [
+        "S51"
+      ]
     }
   ],
   "events": [
     {
       "id": "EV-01",
       "name": "page_view",
-      "status": "DESIGNED",
+      "status": "SHIPPED",
       "fires_on": "A dashboard or marketing page being served.",
-      "fields": ["page_path", "referrer_host ONLY (the hostname, never the full URL or query)", "day_bucket (a date, never a time)"],
-      "deliberately_not_collected": ["IP address", "user agent", "device ID", "any cookie or local identifier", "full referrer URL", "query string"],
+      "fields": [
+        "page_path",
+        "referrer_host ONLY (the hostname, never the full URL or query)",
+        "day_bucket (a date, never a time)"
+      ],
+      "deliberately_not_collected": [
+        "IP address",
+        "user agent",
+        "device ID",
+        "any cookie or local identifier",
+        "full referrer URL",
+        "query string"
+      ],
       "decides": "Which pages are being found at all. This is the only event that would justify writing the next page.",
-      "analogy_in_repo": "Nothing today. The repository has no client-side script beyond render functions in assets/js/app.js."
+      "analogy_in_repo": "Nothing today. The repository has no client-side script beyond render functions in assets/js/app.js.",
+      "implementation": {
+        "shipped_utc": "2026-11-17",
+        "client": "assets/js/analytics.js",
+        "endpoint": "tools/analytics_server.py",
+        "gate": "tools/test_measurement.py",
+        "recording": "not started - awaiting a deployed sink (MI-01)",
+        "note": "Shipped 2026-11-17: assets/js/analytics.js (fires this event), tools/analytics_server.py (records and aggregates it), tools/test_measurement.py (gate). Collection is a no-op until the owner deploys the endpoint and sets the meta tag (MI-01); no data exists today and no figure is claimed."
+      }
     },
     {
       "id": "EV-02",
       "name": "product_link_click",
-      "status": "DESIGNED",
+      "status": "SHIPPED",
       "fires_on": "A click on a product link, before navigation.",
-      "fields": ["page_path", "product_key (P1/P2/P3 - a static label from the fact base, never a value derived from the visitor)", "link_state (PREVIEW_NO_TAG or TAGGED)"],
-      "deliberately_not_collected": ["anything that persists across pages", "the destination of the click", "whether the visitor bought anything (the site cannot know this and must not imply it does)"],
+      "fields": [
+        "page_path",
+        "product_key (P1/P2/P3 - a static label from the fact base, never a value derived from the visitor)",
+        "link_state (PREVIEW_NO_TAG or TAGGED)"
+      ],
+      "deliberately_not_collected": [
+        "anything that persists across pages",
+        "the destination of the click",
+        "whether the visitor bought anything (the site cannot know this and must not imply it does)"
+      ],
       "decides": "Which page and which product deserve more work. This is the single most useful measurement on an affiliate site.",
-      "analogy_in_repo": "tools/link_builder.py already labels every link with data-link-state=\"PREVIEW_NO_TAG\"; the event key exists in the markup today and simply nothing counts it."
+      "analogy_in_repo": "tools/link_builder.py already labels every link with data-link-state=\"PREVIEW_NO_TAG\"; the event key exists in the markup today and simply nothing counts it.",
+      "implementation": {
+        "shipped_utc": "2026-11-17",
+        "client": "assets/js/analytics.js",
+        "endpoint": "tools/analytics_server.py",
+        "gate": "tools/test_measurement.py",
+        "recording": "not started - awaiting a deployed sink (MI-01)",
+        "note": "Shipped 2026-11-17: assets/js/analytics.js (fires this event), tools/analytics_server.py (records and aggregates it), tools/test_measurement.py (gate). Collection is a no-op until the owner deploys the endpoint and sets the meta tag (MI-01); no data exists today and no figure is claimed."
+      }
     },
     {
       "id": "EV-03",
       "name": "disclosure_view",
-      "status": "DESIGNED",
+      "status": "SHIPPED",
       "fires_on": "The required disclosure entering the viewport above a product link.",
-      "fields": ["page_path", "disclosure_position"],
-      "deliberately_not_collected": ["scroll depth", "time on page", "read events"],
+      "fields": [
+        "page_path",
+        "disclosure_position"
+      ],
+      "deliberately_not_collected": [
+        "scroll depth",
+        "time on page",
+        "read events"
+      ],
       "decides": "Whether the disclosure is actually in the reader's line of sight before the first product link, which is what the FTC guidance asks for (S55). This is a compliance measurement, not a marketing one.",
-      "analogy_in_repo": "Every page already carries the sentence and the link-level tag; nothing verifies that a reader sees it before the first link."
+      "analogy_in_repo": "Every page already carries the sentence and the link-level tag; nothing verifies that a reader sees it before the first link.",
+      "implementation": {
+        "shipped_utc": "2026-11-17",
+        "client": "assets/js/analytics.js",
+        "endpoint": "tools/analytics_server.py",
+        "gate": "tools/test_measurement.py",
+        "recording": "not started - awaiting a deployed sink (MI-01)",
+        "note": "Shipped 2026-11-17: assets/js/analytics.js (fires this event), tools/analytics_server.py (records and aggregates it), tools/test_measurement.py (gate). Collection is a no-op until the owner deploys the endpoint and sets the meta tag (MI-01); no data exists today and no figure is claimed."
+      }
     },
     {
       "id": "EV-04",
       "name": "conversion_import",
       "status": "BLOCKED",
       "fires_on": "A manual or scheduled import of the Associates reporting CSV for a period.",
-      "fields": ["period_start", "period_end", "clicks", "ordered_items", "conversion_rate", "earnings_float", "source = 'associates_report'"],
-      "deliberately_not_collected": ["any per-customer data - Associates reporting is aggregate by design", "any value this project could compute but Amazon does not publish"],
+      "fields": [
+        "period_start",
+        "period_end",
+        "clicks",
+        "ordered_items",
+        "conversion_rate",
+        "earnings_float",
+        "source = 'associates_report'"
+      ],
+      "deliberately_not_collected": [
+        "any per-customer data - Associates reporting is aggregate by design",
+        "any value this project could compute but Amazon does not publish"
+      ],
       "decides": "Whether any of the above converted, and therefore whether the whole content strategy is working.",
-      "blocked_by": "DQ-01: no Associates account exists, so no reporting exists to import. The site must not invent a placeholder figure to fill this table.",
-      "analogy_in_repo": "tools/validate_data.py already forbids a populated clicks/conversion/earnings field anywhere in ledger/. This event is the only route by which those fields could ever legally be filled."
+      "blocked_by": "Associates reporting (Orders and Commission Income export). The tracking ID shopnow047c-20 is now configured on every Special Link this site publishes (2026-11-17) and one destination check per product passed in the owner's enrolled Associates workflow, but the tracking-report confirmation (F-43) and any earnings export need the owner's Associates Central session. This site must not invent a placeholder figure.",
+      "analogy_in_repo": "tools/validate_data.py already forbids a populated clicks/conversion/earnings field anywhere in ledger/. This event is the only route by which those fields could ever legally be filled.",
+      "implementation": {
+        "shipped_utc": null,
+        "note": "None. The only permitted source is the owner's Associates report."
+      }
     },
     {
       "id": "EV-05",
       "name": "search_query_import",
       "status": "BLOCKED",
       "fires_on": "A periodic export from Search Console.",
-      "fields": ["period_start", "period_end", "query", "page_path", "impressions", "clicks", "average_position"],
-      "deliberately_not_collected": ["per-user search history", "any query containing something that looks like a person's name or address (filtered at import)"],
+      "fields": [
+        "period_start",
+        "period_end",
+        "query",
+        "page_path",
+        "impressions",
+        "clicks",
+        "average_position"
+      ],
+      "deliberately_not_collected": [
+        "per-user search history",
+        "any query containing something that looks like a person's name or address (filtered at import)"
+      ],
       "decides": "Which question people actually typed, which is the only reliable input to a content plan. Without it every new article topic stays a judgement.",
-      "blocked_by": "DQ-04: Search Console requires the owner's Google account and a verified property.",
-      "analogy_in_repo": "marketing/trending-topics.html already argues that no topic on this site can be called trending without data. This event is what would make that possible."
+      "blocked_by": "No designated decision exists for this project to answer: the metric requires an owner-designated decision and a stored decision register (MI-04), plus a recorded retention policy for its inputs (MI-02). DQ-03 is the questionnaire that starts this.",
+      "analogy_in_repo": "marketing/trending-topics.html already argues that no topic on this site can be called trending without data. This event is what would make that possible.",
+      "implementation": {
+        "shipped_utc": null,
+        "note": "None, by design until the owner designates a decision."
+      }
     }
   ],
   "decisions_enabled": [
     {
       "id": "MD-01",
       "decision": "Which page to improve next",
-      "needs": ["EV-01", "EV-02"],
+      "needs": [
+        "EV-01",
+        "EV-02"
+      ],
       "rule": "A page with impressions and no clicks is a packaging problem; a page with clicks and no imports is a product-fit problem. The layer must be able to tell those apart, which is why EV-01 and EV-02 are separate events.",
       "available_today": false
     },
     {
       "id": "MD-02",
       "decision": "Which of the three products to lead with",
-      "needs": ["EV-02"],
+      "needs": [
+        "EV-02"
+      ],
       "rule": "Count product_link_click by product_key. The product with the most clicks on the least content is the one to write about next.",
       "available_today": false
     },
     {
       "id": "MD-03",
       "decision": "Whether the disclosure is placed well enough",
-      "needs": ["EV-03"],
+      "needs": [
+        "EV-03"
+      ],
       "rule": "If disclosure_view does not precede the first product_link_click on a majority of sessions, the layout is failing the FTC's 'hard to miss' standard and should change.",
       "available_today": false
     },
     {
       "id": "MD-04",
       "decision": "Whether to change the content strategy at all",
-      "needs": ["EV-04"],
+      "needs": [
+        "EV-04"
+      ],
       "rule": "Nothing above can answer this. It needs actual conversions, which need an account. Until then the honest answer to 'is this working' is 'unknown', and the site says so.",
       "available_today": false
     }
@@ -126,9 +226,34 @@
     "source_ids": []
   },
   "open_items": [
-    {"id": "MI-01", "item": "The event sink does not exist. GitHub Pages serves static files and cannot accept a POST, so a first-party counter needs an endpoint the owner controls (a serverless function, a log drain, or a hosted database).", "status": "unresolved", "blocks": "EV-01, EV-02, EV-03"},
-    {"id": "MI-02", "item": "Retention policy is undefined. Aggregate daily counts can be kept indefinitely; anything finer should expire. The owner must choose before collection starts.", "status": "unresolved", "blocks": "EV-01, EV-02, EV-03"},
-    {"id": "MI-03", "item": "A bot filter is undefined. A static counter counts crawlers and link scanners as visitors. Without a filter the numbers are inflated and the decisions built on them are wrong.", "status": "unresolved", "blocks": "EV-01"},
-    {"id": "MI-04", "item": "There is no way to verify a click led to a purchase from this side, and this project must never imply there is. Attribution is Amazon's to report, not this site's to guess.", "status": "unresolved", "blocks": "EV-04"}
-  ]
+    {
+      "id": "MI-01",
+      "item": "The event sink does not exist. GitHub Pages serves static files and cannot accept a POST, so a first-party counter needs an endpoint the owner controls (a serverless function, a log drain, or a hosted database).",
+      "status": "unresolved",
+      "blocks": "EV-01, EV-02, EV-03",
+      "note": "The event sink still does not exist outside this repository: the collector code ships (tools/analytics_server.py) and the client ships on every reader-facing page, but nothing runs anywhere until the owner deploys the collector and sets the analytics-endpoint meta tag. Until then the script is a no-op and no data exists."
+    },
+    {
+      "id": "MI-02",
+      "item": "Retention policy is undefined. Aggregate daily counts can be kept indefinitely; anything finer should expire. The owner must choose before collection starts.",
+      "status": "unresolved",
+      "blocks": "EV-01, EV-02, EV-03",
+      "note": "A retention policy is not recorded. The collector ships a 30-day default for raw event lines (with a documented prune command) and keeps only daily aggregates beyond that, but the owner must confirm or set the policy before anything is collected."
+    },
+    {
+      "id": "MI-03",
+      "item": "A bot filter is undefined. A static counter counts crawlers and link scanners as visitors. Without a filter the numbers are inflated and the decisions built on them are wrong.",
+      "status": "unresolved",
+      "blocks": "EV-01",
+      "note": "Bot filtering is not designed. The collector ships a minimal crawler user-agent prefix filter only; that is not a bot policy and does not answer this item."
+    },
+    {
+      "id": "MI-04",
+      "item": "There is no way to verify a click led to a purchase from this side, and this project must never imply there is. Attribution is Amazon's to report, not this site's to guess.",
+      "status": "unresolved",
+      "blocks": "EV-04",
+      "note": "Campaign optimization needs a canonical source of truth for decisions, not markdown notes. ledger/campaigns.json is empty by design and remains the ledger of record; no decision register has been designated."
+    }
+  ],
+  "current_state": "Update 2026-11-17: the privacy-preserving counter (assets/js/analytics.js), the self-hosted collector (tools/analytics_server.py) and their gate (tools/test_measurement.py) now ship, and EV-01..EV-03 are marked SHIPPED - not LIVE, because nothing has been collected and no data exists. The site is not yet pointed at a deployed sink (MI-01); the endpoint meta tag ships empty. EV-04 stays BLOCKED: conversion data can only come from Associates reporting, and no report has been imported (F-43). The five events remain as recorded below, and the click/conversion ledger still has no rows: this design states what would be measured and why, never what has been measured."
 }

@@ -35,8 +35,8 @@
 <main id="main">
   <section class="pb-lead"><div class="pb-wrap">
   <p class="pb-kicker">Tracking</p>
-  <h1 class="pb-h1" style="max-width:26ch">Links, clicks, conversions — built compliantly, switched off until it can earn</h1>
-  <p class="pb-stand pb-measure">Special Link management and click/conversion tracking designed per the official program rules. Nothing here is live: the supplied links carry no Associates tag, so as supplied they cannot attribute a sale — the platform says so rather than pretending otherwise.</p>
+  <h1 class="pb-h1" style="max-width:26ch">Links, clicks, conversions — tagged links live, measurement shipped and off until a sink exists</h1>
+  <p class="pb-stand pb-measure">Special Link management and click/conversion tracking, built to the official program rules. The owner-supplied Associates tag (shopnow047c-20) is configured on every published Special Link since 2026-11-17; the privacy-preserving click counter ships but is not switched on — no sink is deployed, nothing is collected, and no click or conversion figure appears anywhere. Conversions are knowable only from Associates reporting (F-43).</p>
 </div></section>
 
   <div class="page-wrap">
@@ -46,7 +46,7 @@
 
     <section class="section">
       <h2 class="section-title">Campaign &amp; tracking setup</h2>
-      <p class="section-sub">The three supplied links carry no Associates <code>tag</code>, so as supplied they cannot attribute a sale or earn a commission (F-24); no Associates account or tag was supplied either, so the compliant setup below is planned — labelled as planned, not implied to be live.</p>
+      <p class="section-sub">The three supplied links carry no Associates <code>tag</code>, so as supplied they cannot attribute a sale or earn a commission (F-24). The tag the owner supplied is configured on the separate, validated Special Links this site publishes — one destination check per product passed in the owner's enrolled Associates workflow on 2026-11-17 (<code>ledger/site_config.json</code> rows P-01…P-03); the tracking-report check needs the owner's Associates Central session (F-43). The compliant click-counter setup below ships as code and stays off: no sink is deployed (MI-01), so nothing is collected.</p>
       <div id="trackingTable"></div>
     </section>
 
@@ -62,7 +62,7 @@
       <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">
         Source: <a href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Associates Program Policies — Commission Income Statement</a>.
       </p></div>
-      <div class="callout callout-warn"><strong>Privacy posture:</strong> the planned click counter is first-party and privacy-minimal — no cookies, no IP addresses, no visitor identifiers — so tracking never becomes a compliance liability of its own. The schema and guard code are in <code>tools/</code>.</div>    </section>
+      <div class="callout callout-warn"><strong>Privacy posture:</strong> the shipped click counter is first-party and privacy-minimal — no cookies, no IP addresses, no visitor identifiers — so tracking never becomes a compliance liability of its own. The collector is <code>assets/js/analytics.js</code>, the self-hosted endpoint is <code>tools/analytics_server.py</code>, and their gate is <code>tools/test_measurement.py</code> (22/22 checks — the endpoint refuses conversion and per-visitor fields).</div>    </section>
 
     <footer class="site">
       Verified dataset date: 2026-11-14.

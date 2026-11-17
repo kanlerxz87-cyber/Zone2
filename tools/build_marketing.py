@@ -516,6 +516,8 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
 <meta property="og:url" content="{esc(url)}">
 <link rel="alternate" type="application/rss+xml" title="{esc(BRAND['name'])} — new guides" href="{root}feed.xml">
 <link rel="stylesheet" href="{root}{CSS}">
+<meta name="zone2-analytics-endpoint" content="">
+<script src="../{root}assets/js/analytics.js" defer></script>
 {ld}
 </head>
 <body class="pub">

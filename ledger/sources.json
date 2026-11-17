@@ -1,5 +1,5 @@
 {
-  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28–S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing Associates pages were re-read live; S32-S35 were added 2026-11-14 by session 4338f55e for the unknown-code control and the three supplied short links. The two sessions initially reused the same ids; tools/merge_ledger_2026_11_14.py resolved the collision so no id points at two different pages. S36-S37 were added 2026-11-14 by session ba8b2d38 (T27) during an independent live re-fetch: S36 is a control that passes a VALID 10-character ASIN to the link.amazon short-link service, and S37 is the Associates program home page, cited for the 'up to 10%' commission ceiling the dashboard publishes. RE-ACCESS NOTE 2026-11-16 (session 43eb0239, T50): the three Amazon listing pages (S19/S20/S21), the three manufacturer pages (S25/S26/S27), the three supplied short links (S33/S34/S35) and the unissued-code control (S32) were each re-fetched live on 2026-11-16 and compared line by line with what this repository publishes; the original accessed_utc is kept and the re-access date is recorded in last_reaccessed_utc.",
+  "note": "Register of every source used by this repository. Rows in other data files reference these by id. A row whose source is not listed here cannot be published to the site tables. S23-S27 were added on 2026-11-14 by session bbe4ca47 when the underlying pages were re-read line by line; manufacturer pages are marked kind=manufacturer so a consumer can see they are primary manufacturer sources, not Amazon sources. S28\u2013S31 were added on 2026-11-14 by session 4338f55e: the three supplied short links themselves and the unknown-code control that decides how they behave. kind=supplied marks the URLs the client supplied; kind=control marks an experiment run by this project against Amazon's own service. S28-S31 were added 2026-11-14 by session a133aa61 during the final integration, when the governing Associates pages were re-read live; S32-S35 were added 2026-11-14 by session 4338f55e for the unknown-code control and the three supplied short links. The two sessions initially reused the same ids; tools/merge_ledger_2026_11_14.py resolved the collision so no id points at two different pages. S36-S37 were added 2026-11-14 by session ba8b2d38 (T27) during an independent live re-fetch: S36 is a control that passes a VALID 10-character ASIN to the link.amazon short-link service, and S37 is the Associates program home page, cited for the 'up to 10%' commission ceiling the dashboard publishes. RE-ACCESS NOTE 2026-11-16 (session 43eb0239, T50): the three Amazon listing pages (S19/S20/S21), the three manufacturer pages (S25/S26/S27), the three supplied short links (S33/S34/S35) and the unissued-code control (S32) were each re-fetched live on 2026-11-16 and compared line by line with what this repository publishes; the original accessed_utc is kept and the re-access date is recorded in last_reaccessed_utc.",
   "accessed_utc": "2026-11-14",
   "sources": [
     {
@@ -245,7 +245,7 @@
       "id": "S19",
       "publisher": "Amazon.com (product catalog page)",
       "kind": "official",
-      "title": "Destination listing observed for supplied link 1 — B0CDY277D3 (CHEFMAN 6 Quart Dual Basket)",
+      "title": "Destination listing observed for supplied link 1 \u2014 B0CDY277D3 (CHEFMAN 6 Quart Dual Basket)",
       "url": "https://www.amazon.com/dp/B0CDY277D3",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
@@ -258,7 +258,7 @@
       "id": "S20",
       "publisher": "Amazon.com (product catalog page)",
       "kind": "official",
-      "title": "Destination listing observed for supplied link 2 — B09B7SB46R (Emeril Lagasse 26QT French Door)",
+      "title": "Destination listing observed for supplied link 2 \u2014 B09B7SB46R (Emeril Lagasse 26QT French Door)",
       "url": "https://www.amazon.com/dp/B09B7SB46R",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
@@ -271,7 +271,7 @@
       "id": "S21",
       "publisher": "Amazon.com (product catalog page)",
       "kind": "official",
-      "title": "Destination listing observed for supplied link 3 — B08DKYBTPH (Chefman 8 Qt TurboFry)",
+      "title": "Destination listing observed for supplied link 3 \u2014 B08DKYBTPH (Chefman 8 Qt TurboFry)",
       "url": "https://www.amazon.com/dp/B08DKYBTPH",
       "page_stated_update": null,
       "accessed_utc": "2026-11-13",
@@ -316,7 +316,7 @@
       "accessed_utc": "2026-11-15",
       "used_for": [
         "Verbatim, re-read live 2026-11-15: \"ASIN is the 10-digit code that Amazon uses to denote specific products.\" The three resolved destinations (B0CDY277D3, B09B7SB46R, B08DKYBTPH) each carry 10 characters; the three submitted tokens carry 9. The repository's earlier '10-character' phrasing is its own observation of this definition, not the published wording (see ledger/decisions_findings.json RF-01 and suggestion SG-11).",
-        "The simple text-link format published on the same page — amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID — which the page states \"qualifies for the direct link bonus\"; the tagged /dp/ form is the pattern Special Links must follow"
+        "The simple text-link format published on the same page \u2014 amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID \u2014 which the page states \"qualifies for the direct link bonus\"; the tagged /dp/ form is the pattern Special Links must follow"
       ]
     },
     {
@@ -360,7 +360,7 @@
     },
     {
       "id": "S28",
-      "publisher": "Amazon (Associates Central help — Associates Program Standard Commission Income Statement)",
+      "publisher": "Amazon (Associates Central help \u2014 Associates Program Standard Commission Income Statement)",
       "kind": "official",
       "title": "Standard Commission Income Statement (Table 1 fixed rates + Bounty Events)",
       "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
@@ -373,9 +373,9 @@
     },
     {
       "id": "S29",
-      "publisher": "Amazon (Associates Central help — Participation Requirements)",
+      "publisher": "Amazon (Associates Central help \u2014 Participation Requirements)",
       "kind": "official",
-      "title": "Associates Program Participation Requirements — 'Links on Your Site' section (policies#Associates Program Participation Requirements)",
+      "title": "Associates Program Participation Requirements \u2014 'Links on Your Site' section (policies#Associates Program Participation Requirements)",
       "url": "https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Participation%20Requirements",
       "page_stated_update": "2026-04-14",
       "accessed_utc": "2026-11-14",
@@ -389,7 +389,7 @@
     },
     {
       "id": "S30",
-      "publisher": "Amazon (Associates Central help — IP License)",
+      "publisher": "Amazon (Associates Central help \u2014 IP License)",
       "kind": "official",
       "title": "Associates Program IP License and Usage Requirements",
       "url": "https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20IP%20License",
@@ -403,9 +403,9 @@
     },
     {
       "id": "S31",
-      "publisher": "Amazon (Associates Central — Creators API documentation)",
+      "publisher": "Amazon (Associates Central \u2014 Creators API documentation)",
       "kind": "official",
-      "title": "Creators API — PA-API 5 Deprecation Notice",
+      "title": "Creators API \u2014 PA-API 5 Deprecation Notice",
       "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
       "page_stated_update": null,
       "accessed_utc": "2026-11-14",
@@ -424,7 +424,7 @@
         "flag F-20",
         "evidence observation E-06"
       ],
-      "title": "Amazon short-link service — unknown code control (9 characters, never published)",
+      "title": "Amazon short-link service \u2014 unknown code control (9 characters, never published)",
       "publisher": "Amazon.com (short-link service link.amazon)",
       "last_reaccessed_utc": "2026-11-16"
     },
@@ -552,6 +552,62 @@
         "evidence only: the request was answered at the edge with HTTP 403 Forbidden and never reached a lookup",
         "flag F-40 - the negative control that F-20 relies on is not stable across token shapes"
       ]
+    },
+    {
+      "id": "S61",
+      "url": "https://link.amazon/B0c8moW59",
+      "kind": "supplied",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "used_for": [
+        "product-intent record PI-04: submitted link 4 as provided in the recurring brief (2026-11-17 wording lists five link.amazon codes)",
+        "observation: resolves to https://www.amazon.com/dp/B0DHZTCNR5 (meat thermometer), read 2026-11-17"
+      ],
+      "title": "Supplied affiliate short link 4 (as provided in the 2026-11-17 brief wording)",
+      "publisher": "Amazon.com",
+      "last_reaccessed_utc": "2026-11-17"
+    },
+    {
+      "id": "S62",
+      "url": "https://link.amazon/B0f3GKalj",
+      "kind": "supplied",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "used_for": [
+        "product-intent record PI-05: submitted link 5 as provided in the recurring brief (2026-11-17 wording lists five link.amazon codes)",
+        "observation: resolves to https://www.amazon.com/dp/B0DZFD6R9Z (meat thermometer), read 2026-11-17"
+      ],
+      "title": "Supplied affiliate short link 5 (as provided in the 2026-11-17 brief wording)",
+      "publisher": "Amazon.com",
+      "last_reaccessed_utc": "2026-11-17"
+    },
+    {
+      "id": "S63",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "kind": "listing",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "used_for": [
+        "product-intent record PI-04 observed field: 'ThermoMaven 1 Sec Professional Digital Meat Thermometer, \u00b10.5F Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black'",
+        "F-42: the observed destination is in Meat Thermometers & Timers, not the air-fryer niche this site publishes"
+      ],
+      "title": "Destination listing observed for supplied link 4 \u2014 B0DHZTCNR5 (ThermoMaven meat thermometer)",
+      "publisher": "Amazon.com",
+      "last_reaccessed_utc": "2026-11-17"
+    },
+    {
+      "id": "S64",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "kind": "listing",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "used_for": [
+        "product-intent record PI-05 observed field: 'CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3'",
+        "F-42: the observed destination is in Meat Thermometers & Timers, not the air-fryer niche this site publishes"
+      ],
+      "title": "Destination listing observed for supplied link 5 \u2014 B0DZFD6R9Z (CHEF iQ Sense meat thermometer)",
+      "publisher": "Amazon.com",
+      "last_reaccessed_utc": "2026-11-17"
     }
   ]
 }

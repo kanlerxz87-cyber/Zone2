@@ -40,6 +40,7 @@ AS_OF = DATA["as_of"]
 STATUS_PILL = {
     "DESIGNED": "pill-warn",
     "BLOCKED": "pill-bad",
+    "SHIPPED": "pill-ok",
     "LIVE": "pill-ok",
 }
 
@@ -66,7 +67,7 @@ def page() -> str:
         f'<td>{"".join(f"<code>{esc(f)}</code><br>" for f in e["fields"])}'
         f'<div class="note-sm"><strong>Not collected on purpose:</strong> '
         f'{esc("; ".join(e["deliberately_not_collected"]))}</div></td>'
-        f'<td>{esc(e.get("blocked_by", "—"))}</td></tr>'
+        f'<td>{esc(e.get("blocked_by") or (e.get("implementation") or {}).get("note") or "—")}</td></tr>'
         for e in DATA["events"]
     )
 
@@ -97,16 +98,23 @@ def page() -> str:
 
     body = f"""
 <h1>What could be measured, and what it would let you decide</h1>
-<p class="lede">The platform claims to track clicks and conversions and optimize campaigns. It tracks nothing.
-That is not laziness: with no tagged link, no analytics and no Associates account there is nothing to track, and
-the site's own validator refuses an invented number. This page is the plan that would change it — every event,
-the decision it supports, and what blocks it.</p>
+<p class="lede">The platform claims to track clicks and conversions and optimize campaigns. It collects nothing
+yet — and that is stated, not hidden. On 2026-11-17 the owner's brief directed turning measurement on first: the
+privacy-preserving counter and a self-hosted collector now ship in this repository (EV-01…EV-03 read SHIPPED),
+but nothing is collected until the owner deploys the collector and points the site at it, and the two rows whose
+only source is Amazon-side reporting stay BLOCKED. This page is the plan and the current state: every event,
+the decision it supports, what it refuses to collect, and what blocks it.</p>
 
 <div class="note">
-  <p><strong>Nothing on this page is implemented.</strong> Every event below is marked DESIGNED or BLOCKED, never
-  LIVE. There is no script, no endpoint, no cookie and no account behind any row. The build fails if an event is
-  ever marked LIVE while the suggestion that authorises it
-  (<a href="suggestions.html#DS-11">DS-11</a>) still carries no recorded decision.</p>
+  <p><strong>What SHIPPED means here — and what it does not.</strong> SHIPPED is the status of code: the
+  collector (assets/js/analytics.js), the self-hosted endpoint (tools/analytics_server.py) and their gate
+  (tools/test_measurement.py) exist and run. It is not the status of data: no sink is deployed, the endpoint
+  meta tag ships empty, and no event has ever been recorded — so nothing on any page of this site reports a
+  number. LIVE is reserved for a row whose collection is verified; the build fails if an event is ever marked
+  LIVE while the suggestion that authorises it
+  (<a href="suggestions.html#DS-11">DS-11</a>) carried no recorded decision (that decision is recorded now,
+  2026-11-17, adopting the cookie-free first-party counter the brief directed). No cookie and no visitor
+  identifier is used by any of it.</p>
 </div>
 
 <h2>The rules a measurement layer has to survive</h2>
@@ -150,18 +158,19 @@ constrains it.</p>
 </div>
 
 <h2>The honest position today</h2>
-<p>Until an Associates account exists, the answer to "is this working" is <em>unknown</em>, and the site should
-say so rather than print a number that looks like an answer. The one thing a cookie-free counter would change
-before an account exists is narrower and still worth having: it would say which page sends people to which
-product, which is the only input needed to decide what to write next.</p>
-<p>That choice is <a href="suggestions.html#DS-11">DS-11</a>. Its options are a cookie-free first-party counter,
-a third-party analytics script, or waiting for Associates reporting alone — and the trade-offs are stated on the
-row.</p>
+<p>The counter would say which page sends people to which product — the only input needed to decide what to write
+next — but it is not switched on: the collector code ships and waits for a deployed sink (MI-01), so the answer to
+"is this working" remains <em>unknown</em>, and the site says so rather than print a number that looks like an
+answer. Whether the traffic converts is knowable only from Associates reporting, which needs the owner's account
+session (F-43).</p>
+<p>That choice is <a href="suggestions.html#DS-11">DS-11</a>, recorded 2026-11-17: option A — a cookie-free
+first-party counter plus a self-hosted endpoint, no per-visitor data — is adopted, and the remaining work is to
+deploy the sink and set the endpoint tag (the rest of DQ-04).</p>
 """
     return bd.page(
         "Measurement plan",
-        "What this site could measure, the decision each measurement supports, what it refuses to collect, and what "
-        "blocks it — nothing implemented, every event marked DESIGNED or BLOCKED.",
+        "What this site measures in principle, the decision each event supports, what it refuses to collect, and what "
+        "blocks it — three events shipped but collecting nothing, two blocked on Amazon-side data.",
         body,
         here="measurement.html",
         crumbs=[("index.html", "Overview"), ("measurement.html", "Measurement plan")],

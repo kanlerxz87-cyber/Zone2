@@ -940,7 +940,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 41;
+const CANONICAL_FLAG_COUNT = 43;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1012,10 +1012,10 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-07 — No Associates account, marketplace, tracking ID, or tag supplied",
-    detail: "The brief did not include an Associates ID/tag, target marketplace, or category access. Commission eligibility and reporting are account- and marketplace-specific, so no account-level figure can be verified or attributed.",
+    detail: "The brief did not include an Associates ID/tag, target marketplace, or category access. Commission eligibility and reporting are account- and marketplace-specific, so no account-level figure can be verified or attributed. RESOLVED 2026-11-17: the owner supplied the tracking ID in the brief ('Selected Tracking ID:shopnow047c-20'). It is stored in ledger/site_config.json (never invented, never derived) and the link builder now emits tagged Special Links labelled (paid link) across the reader-facing surfaces. The marketplace column stays blank: the owner stated an ID, not a marketplace, and the links point at amazon.com because that is the site these pages describe. Confirmation of the click and the order in Associates reporting remains open as F-43.",
     severity: "medium",
     impact: "Link builder runs in inert preview mode; earnings/conversion columns stay blank; the disclosure statement is still shown because it is required of every participant.",
-    actionRequired: "Provide Associates ID + marketplace if live linking is wanted.",
+    actionRequired: "None for the ID itself. Remaining owner step: confirm the tracking report (F-43).",
     ledgerFlag: "F-07",
     ledgerUrl: "pages/flags.html#F-07",
     source: "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -1394,6 +1394,28 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-41",
     source: "https://www.amazon.com/dp/B09B7SB46R",
     sourceIds: ["S20", "S27"],
+  },
+  {
+    item: "F-42 — Two of the five submitted link.amazon codes resolve to meat thermometers, not air fryers — the intended products are still unconfirmed",
+    detail: "The recurring brief wording lists five submitted short links (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj); this repository's registers previously carried the first three. Live reads on 2026-11-17 (session eeea2626, docs/verification-eeea2626.md) show: B04G1MEwY > https://www.amazon.com/dp/B0CDY277D3 (air fryer, unchanged for a fifth dated read), B02NbDxp3 > https://www.amazon.com/dp/B09B7SB46R (air fryer oven, unchanged), B00hJ57DV > https://www.amazon.com/dp/B08DKYBTPH (air fryer, unchanged), B0c8moW59 > https://www.amazon.com/dp/B0DHZTCNR5 (ThermoMaven meat thermometer, first observed 2026-11-17, source S63), B0f3GKalj > https://www.amazon.com/dp/B0DZFD6R9Z (CHEF iQ Sense meat thermometer, first observed 2026-11-17, source S64). Every arrival carried plpRedirect=mhFallback and a fresh btn_ref. NOTHING here says the supplied short links are invalid: their exact compliance status is unresolved (F-03), and no Amazon document binds a link.amazon code to a catalog record. What is established is only where each link went when this project opened it. The product-intent confirmation record (ledger/product_intent.json) keeps the intended fields blank and the observed fields separate, exactly so this ambiguity cannot be papered over. No thermometer content has been published and no product attribute for either thermometer has been recorded beyond the listing title as served.",
+    severity: "medium",
+    impact: "The site's editorial scope (air fryers) covers three of the observed destinations. Two observed destinations are a different category entirely, so the question 'what products is this site supposed to promote' is open for five submitted links, not three. The owner's answer decides whether the niche stays single-category (SG-10 / DS-10) and which ASINs the product-intent record may ever fill in.",
+    actionRequired: "Owner: confirm, per submitted link, the intended ASIN (10 characters) or the intended product page, so ledger/product_intent.json can fill its intended fields from a stated source. Until then the intended fields stay blank and flagged.",
+    ledgerFlag: "F-42",
+    ledgerUrl: "pages/flags.html#F-42",
+    source: "https://link.amazon/B04G1MEwY",
+    sourceIds: ["S33", "S34", "S35", "S61", "S62", "S63", "S64"],
+  },
+  {
+    item: "F-43 — Tagged Special Links pass the destination check; the tracking-report check needs the owner's Associates Central session",
+    detail: "The brief requires: 'Test one link per product in the enrolled Associates workflow and confirm destination and tracking report before scaling.' On 2026-11-17 (session eeea2626) one link per product was composed through tools/link_builder.py in the validated Special Link format (amazon.com/dp/{ASIN}?tag=shopnow047c-20, per S24) and opened: each served the same listing the untagged link serves (destination confirmed, per-product rows in ledger/site_config.json). The second half of the check — seeing the click and any order in the Associates tracking report — cannot be done from this workspace: it requires the owner's Associates Central session and reporting access (S02). No tracking-report figure is claimed, forecast or implied anywhere on this site. Until the owner confirms the report, the link set is one placement per product and is not scaled to more placements.",
+    severity: "medium",
+    impact: "No page is blocked; the disclosure and rel=sponsored markings are in place regardless. What is blocked is scaling: more placements, more campaigns (ledger/campaigns.json stays EMPTY_BY_DESIGN), and any conversion figure.",
+    actionRequired: "Owner: open Associates Central, confirm the tracking ID shopnow047c-20 records the test click (and any order) for the three Special Links dated 2026-11-17, then record the confirmation date here.",
+    ledgerFlag: "F-43",
+    ledgerUrl: "pages/flags.html#F-43",
+    source: "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+    sourceIds: ["S24", "S02", "S09"],
   },
 ];
 /* END GENERATED: flags */

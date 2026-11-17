@@ -184,11 +184,11 @@ blank + flag**: [findings hub](https://kanlerxz87-cyber.github.io/Zone2/pages/in
 [platform modules, 12 subpages](https://kanlerxz87-cyber.github.io/Zone2/pages/modules/index.html) ·
 [compliance control ledger](https://kanlerxz87-cyber.github.io/Zone2/pages/compliance.html) ·
 [verification log (104 checks, V-01…V-104)](https://kanlerxz87-cyber.github.io/Zone2/pages/verification.html) ·
-[source register (43 sources, S01…S43)](https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html) ·
+[source register (47 sources, S01…S47)](https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html) ·
 [tracking](https://kanlerxz87-cyber.github.io/Zone2/pages/tracking.html) ·
 [content engine](https://kanlerxz87-cyber.github.io/Zone2/pages/content-engine.html) ·
 [architecture](https://kanlerxz87-cyber.github.io/Zone2/pages/architecture.html) ·
-[flagged for review (41 flags, F-01…F-41)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
+[flagged for review (43 flags, F-01…F-43)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
 
 All three counts are derived from `ledger/*.json` and held to the register by
 `tools/validate_data.py::check_published_counts`, so they cannot be typed wrong again.
