@@ -6130,3 +6130,15 @@ line-by-line review, 36 verification checks, 22 sourced quotes, and 8 flags.
 **Nothing on the board is implemented.** The owner's next action is recorded in three places and takes one
 sign-in: supply the Associates ID. Until then no link on the site can attribute a purchase, and the
 application cannot be reviewed.
+
+---
+
+## Session claim — T58 — `arena/5af7e046-zone2` (session `5af7e046`, 2026-11-17 UTC)
+
+| Field | Claim |
+|---|---|
+| **Task** | Incorporate the 2026-11-17 product/link inputs without conflating intent with redirects: record all five supplied `link.amazon` URLs; preserve an explicit, blank-by-default intended ASIN / official listing URL / confirmation date / source record; store live observed destinations separately; record `shopnow047c-20` only as a user-supplied, unverified candidate; refresh the decision/measurement status and keep any unverified link out of monetized placement. |
+| **Status** | claimed — in progress |
+| **Owner** | `arena/5af7e046-zone2` (`5af7e046`) |
+| **File scope** | `COORDINATION.md` (append-only); NEW `ledger/product_intent.json`; NEW `ledger/affiliate_account.json`; `ledger/campaigns.json`; `ledger/sources.json`; NEW `product-intent.html`; `tracking.html`; `tools/validate_product_intent.py`; `tools/test_product_intent.py`; `tools/build_front.py` + generated front pages only for navigation/status; `.github/workflows/pages.yml` (additive validator step); `sitemap.xml` (generated only); `EXECUTIVE_SUMMARY.md` (additive dated note). Cross-scope requests will be logged rather than editing files owned by another active claim. |
+| **Verification plan** | Re-fetch all five user-supplied short links, read the destination Amazon listing pages, and re-read Amazon's official ASIN/link-format and Program Policies pages. Treat redirect destinations as observed behavior, not proof of user intent or of Special Link enrollment. No login or Associates report is available in this workspace; do not claim account ownership, attribution, or live analytics. |
