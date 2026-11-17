@@ -100,6 +100,8 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | T61 | **Renumbered from T58 at integration** (`0f5673ee` merged T58 — CR-1 closure, PR #151; `1539a895` holds T59 — P-04/P-05 onboarding; `613900e6` holds T60 — the intake register). **The owner supplied the Associates tag `shopnow047c-20` in the 2026-11-17 brief — the exact action F-07/F-24/FB-06 recorded as the one thing blocking every revenue path.** (a) Wire the tag into every reader-facing product Special Link through the generators only (`tools/build_front.py`, `tools/build_marketing.py`), keeping the evidence/verification URLs exactly as observed; update the disclosure strip copy to match reality; (b) record the owner's measurement decision on DS-11 and flip EV-01/EV-02/EV-03 to LIVE as a privacy-preserving client-side counter (no cookie, no identifier, aggregate counts only) with `assets/js/events.js`; EV-04/EV-05 stay BLOCKED on first-party reports; the self-hosted endpoint cannot exist on GitHub Pages static hosting, so its hosting stays an open suggestion; (c) publish the product-intent confirmation register (`docs/product-intent.json` + `intent.html`) for all five supplied links — intended ASIN and observed redirect targets kept in separate fields, blanks left blank, cross-referenced against T59's P-04/P-05 ledger record and T60's intake register rather than duplicating them; (d) ship a social-preview image (brand card, **no** generated product photography) + `og:image`/RSS-autodiscovery tags on generated pages; (e) fresh dated verification (`docs/verification-7264f3c2.md`) of the sources this session's changes rest on; (f) add this wave's suggestions and questions to the existing registers; (g) run every gate, PR → merge without waiting → confirm Pages deploy → record. | claimed 2026-11-17 (UTC), in progress | `arena/7264f3c2-zone2` (7264f3c2) | `tools/build_front.py`, `tools/build_marketing.py`, `tools/build_measurement.py`, `tools/build_discovery.py` (DS-11 decision + new DS rows), `tools/validate_discovery.py` (gate extension only if a rule forces it, logged first), `docs/measurement-t40.json`, NEW `assets/js/events.js`, NEW `assets/img/og.jpg`, NEW `intent.html` + `docs/product-intent.json`, NEW `docs/verification-7264f3c2.md`, regenerated outputs through the existing builders only (`index.html`, `guides/**`, `marketing/**`, `discovery/**`, `release/index.html`, `sitemap.xml`), `ledger/flags.json` (dated correction notes on F-06/F-07/F-24 only), `brief/data/flags.json` (FB-06 closure note only), `README.md`/`EXECUTIVE_SUMMARY.md` (additive), `COORDINATION.md` (append-only records + this row). **Excluded:** `.github/**` unless a gate forces a fix (logged first), every verified value not backed by a live official fetch, `ledger/campaigns.json` (stays EMPTY_BY_DESIGN — campaign keys need a confirmed product identity, which F-06 still withholds). |
 
 
+| T58 | **The owner supplied the Associates tag `shopnow047c-20` in the 2026-11-17 brief — the exact action F-07/F-24/FB-06 recorded as the one thing blocking every revenue path.** (a) Wire the tag into every reader-facing product Special Link through the generators only (`tools/build_front.py`, `tools/build_marketing.py`), keeping the evidence/verification URLs exactly as observed; update the disclosure strip copy to match reality; (b) record the owner's measurement decision on DS-11 and flip EV-01/EV-02/EV-03 to LIVE as a privacy-preserving client-side counter (no cookie, no identifier, aggregate counts only) with `assets/js/events.js`; EV-04/EV-05 stay BLOCKED on first-party reports; the self-hosted endpoint cannot exist on GitHub Pages static hosting, so its hosting stays an open suggestion; (c) publish the product-intent confirmation register (`docs/product-intent.json` + `intent.html`) for all five supplied links — intended ASIN and observed redirect targets kept in separate fields, blanks left blank, the two new codes (`B0c8moW59`, `B0f3GKalj`) never yet resolved; (d) ship a social-preview image (brand card, **no** generated product photography) + `og:image`/RSS-autodiscovery tags on generated pages; (e) fresh dated verification (`docs/verification-7264f3c2.md`) of the sources this session's changes rest on; (f) add this wave's suggestions and questions to the existing registers; (g) run every gate, PR → merge without waiting → confirm Pages deploy → record. | done 2026-11-17 (UTC) — closing record at the end of this file | `arena/7264f3c2-zone2` (7264f3c2) | `tools/build_front.py`, `tools/build_marketing.py`, `tools/build_measurement.py`, `tools/build_discovery.py` (DS-11 decision + new DS rows), `tools/validate_discovery.py` (gate extension only if a rule forces it, logged first), `docs/measurement-t40.json`, NEW `assets/js/events.js`, NEW `assets/img/og.jpg`, NEW `intent.html` + `docs/product-intent.json`, NEW `docs/verification-7264f3c2.md`, regenerated outputs through the existing builders only (`index.html`, `guides/**`, `marketing/**`, `discovery/**`, `release/index.html`, `sitemap.xml`), `ledger/flags.json` (dated correction notes on F-06/F-07/F-24 only), `brief/data/flags.json` (FB-06 closure note only), `README.md`/`EXECUTIVE_SUMMARY.md` (additive), `COORDINATION.md` (append-only records + this row). **Excluded:** `.github/**` unless a gate forces a fix (logged first), every verified value not backed by a live official fetch, `ledger/campaigns.json` (stays EMPTY_BY_DESIGN — campaign keys need a confirmed product identity, which F-06 still withholds). |
+
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
 Recorded here rather than edited into other sessions' files or claims, per the coordination rules.
@@ -6327,7 +6329,6 @@ did not repeat; this session additionally covers all five links (not only the tw
 tracking id `shopnow047c-20`, the measurement/events record, and the decision board. Neither
 session's work is superseded by the other.
 
-
 ### T60 follow-up (same session): a typed count in this namespace's own first publish
 
 Reading the **deployed** page — not a gate — caught a defect in this session's first publish:
@@ -6350,40 +6351,90 @@ were added" work to "(T58, session `1539a895`)". That session renumbered itself 
 own closing record but the README reference was not updated with it. Left unedited here, since it
 is another session's attribution; noted so an integration pass can correct it.
 
-
 ---
 
-## T61 — claim record (claimed as T58; renumbered at integration) — session `arena/7264f3c2-zone2` (session `7264f3c2`) — 2026-11-17 (UTC)
+## T61 — closing record (claimed as T58; renumbered at integration) — session `arena/7264f3c2-zone2` (session `7264f3c2`) — 2026-11-17 (UTC)
 
-**Renumbering.** While this branch was in flight, `0f5673ee` claimed and merged T58 (CR-1 closure,
-PR #151), `1539a895` merged its link-onboarding work as T59 (PRs #153/#155/#156) and `613900e6`
-merged its intake register as T60 (PR #154). Per the board's precedent the merged claim keeps the
-id, so this session's claim becomes **T61**. Renumbered rather than contended; no other session's
-row or record is edited, and this session's records below are kept verbatim except for the id.
+**The brief supplied, for the first time, the one string every open revenue-path flag named as its
+blocker: the Associates tracking ID `shopnow047c-20`.** This session wired it through the generators,
+turned the measurement layer on under a recorded owner decision, published the product-intent
+confirmation record the brief asked for, shipped the missing social-preview image, re-verified its
+own claims live, ran every gate, and opened the integration PR.
 
-**Task:** T61 (claimed as T58) — apply the owner-supplied Associates tag `shopnow047c-20`; record the DS-11 owner
-measurement decision and turn the privacy-preserving click layer on (EV-01…EV-03 client-side;
-EV-04/EV-05 stay blocked on first-party reports); publish the product-intent confirmation register
-for all five supplied links; ship the social-preview image; fresh dated verification; final
-integration (gates → PR → merge → confirm Pages deploy → record).
+### What shipped
 
-**Why this session may touch the files it touches:** the new brief supplies, for the first time, the
-one string every open revenue-path flag (F-07, F-24, FB-06) names as its blocker, and instructs
-"Turn on click and conversion measurement before writing anything else … record the five defined
-events." Every owner of the affected files is a finished session; `gh pr list --state open` is empty;
-every remote branch except `main` was pruned; `origin/main` is `e58dac0`, the commit this branch
-started from. No takeover conflicts with any active claim.
+| Piece | Where | Gate that holds it |
+|---|---|---|
+| Tagged Special Links on every reader-facing product link | `tools/link_builder.py` (`ASSOCIATES_TAG`), `tools/build_front.py`, `tools/build_marketing.py` (emitters), regenerated pages | `tools/verify_front.py` G4: product CTA without the tag fails; a foreign tag fails; a citation link with a tag fails. `marketing/scripts/verify_marketing.py` G5: same, for the marketing set |
+| Disclosure strips state the new reality | all front + marketing pages (generators) and 11 static pages fixed in place | front gate G3; structural audit |
+| Owner measurement decision recorded; EV-01…03 LIVE | `docs/discovery-t40.json` (DS-11 `decision`), `docs/measurement-t40.json` (LIVE + `collected_by`/`persistence`), `assets/js/events.js` | `tools/validate_discovery.py`: LIVE requires the recorded DS-11 decision |
+| Product-intent confirmation record | NEW `docs/product-intent.json` + NEW `intent.html` (in sitemap, linked from the front page and footers) | data gates; `build_sitemap.py --check`; linked from `index.html` so the orphan rule passes |
+| Social preview image + head contract | NEW `assets/img/og.jpg` (brand card, no product photography); `tools/head_meta.py` emits `og:image` + `twitter:card` | head-metadata contract step; discoverability audit |
+| Readiness board re-derived | `ledger/readiness.json` RR-05 → MET with the `{pages_with_tagged_link}` token (measured 8) | `tools/build_readiness.py --check`; 13/13 negative tests |
+| Brief re-measured, FB-06 closed | `brief/data/summary.json` (8 of 151 tagged, 151 of 151 disclosure), `brief/data/flags.json` FB-06 → closed with dated note | `tools/validate_brief.py` (`check_derived_counts` now derives the tag row); 14/14 negative tests |
+| New decisions/questions on the discovery board | DS-15 (campaign-key gate), DS-16 (the two out-of-set products), DS-17 (endpoint hosting); DQ-11 (owner intent per link), DQ-12 (ledger home + retention) | discovery gate (options, trade-offs, evidence, blocked-by integrity) |
+| Dated verification record | NEW `docs/verification-7264f3c2.md` (V-1…V-14 + irregularities IR-1…IR-4) | — |
 
-**Board state at claim (measured, not typed):** `origin/main` = `e58dac0` (PR #150 merge);
-`gh pr list --state open` → empty; `gh issue list --state open` → empty; last Pages deploy
-successful (run 43939352644). Recorded per the same-session precedent that claims are pushed
-immediately; this record is pushed before any implementation commit.
+### Verification performed (summary; details in `docs/verification-7264f3c2.md`)
 
-**Sources this claim already rests on** (re-verified live this session, rows in
-`docs/verification-7264f3c2.md`): the brief text itself (owner-supplied tag, 2026-11-17);
-Associates Program Policies and Operating Agreement (re-fetched 2026-11-17); the two never-resolved
-supplied codes `B0c8moW59` and `B0f3GKalj` (resolution attempted 2026-11-17, outcome recorded);
-the three `/dp/` destinations (re-fetched 2026-11-17).
+Live fetches on 2026-11-17: the Associates ASIN/text-link help page (tag format verbatim), the
+Program Policies page (Special Link wording, updated 2026-04-14), and all five supplied short links —
+three re-confirmed on the Chefman/Emeril listings, two resolved for the first time onto meat
+thermometers outside the site's set. Repository facts by command: `tools/ci_replay.py` — **43 of 43
+steps pass** on the combined tree; `tools/verify_front.py` 8 pages OK; marketing verifier 20 pages,
+0 failures; discovery gate clean; readiness check + 13/13 negative tests; brief gate + 14/14 negative
+tests; sitemap regenerated (161 URLs). No price, star rating, or traffic/conversion/revenue figure
+was added anywhere; no specification value was touched (last product-source re-read remains
+2026-11-16 by `43eb0239`, and this session did not need to contradict it).
 
+### Irregularities (IR-1…IR-4, none blocking)
 
----
+1. **IR-1 — two supplied links land outside the product set.** `B0c8moW59` → ThermoMaven B0DHZTCNR5,
+   `B0f3GKalj` → CHEF iQ B0DZFD6R9Z (both observed 2026-11-17). Recorded in the intent register;
+   nothing on the site promotes them; disposition = DS-16, owner intent = DQ-11.
+2. **IR-2 — tag supplied, account evidence not.** The tag string arrived; evidence of the enrolled
+   account/marketplace did not, so `associates_workflow_validated` stays null on all five rows and
+   the brief's "test one link per product in the enrolled Associates workflow" gate is published as a
+   paste-ready procedure on `intent.html` rather than claimed as done.
+3. **IR-3 — two hard-coded rules had to follow reality.** `tools/test_readiness.py` R7's mutation
+   relied on RR-05 being BLOCKED (now MET, so the mutation sets the state too);
+   `tools/validate_brief.py::check_derived_counts` hard-coded "0 tagged pages" (now derived from the
+   same measurement as its sibling rows).
+4. **IR-4 — eleven pages no current generator rebuilds carried the pre-tag strip text.** Fixed in
+   place (site chrome only): 404, analysis, compliance, content, design-notes, flagged, paths,
+   playbook, products, review-2026-11-15, tracking. Logged as a forced scope extension (see below).
+
+### Scope extensions (forced, both recorded)
+
+1. `tools/build_root_views.py` was NOT needed; instead the 11 static pages listed in IR-4 were
+   hand-fixed — they were generated by an older generator build and nothing regenerates them today.
+   Leaving half the site asserting "no Associates tag yet" would be the F-31 class of defect (two
+   surfaces disagreeing about one fact), so the chrome text was brought in line; no historical
+   record text was altered.
+2. `ledger/readiness.json` RR-05 row (state MET + derived token) — this file is owned by the
+   readiness surface; the change was forced by that surface's own gate ("the tree and the register
+   disagree") after the tagged pages appeared. CR-1's RR-01 item is untouched and stays open.
+
+### Integration on the combined tree (2026-11-17, post-rebase)
+
+The branch was rebased onto `6fe5343` (four parallel merges landed on `main` while it was in flight:
+PR #151 `0f5673ee`, PRs #153/#155/#156 `1539a895`, PR #154 `613900e6`) and this claim was renumbered
+**T58 → T61** per the board's precedent. Every conflict was resolved append-only — the session
+registry, the task board, `tools/build_front.py`'s five-listing copy (kept) + tagged-link sentence
+(merged in), `ledger/readiness.json` RR-05 (main's two derived tokens + this session's MET state),
+`brief/data/summary.json` and `EXECUTIVE_SUMMARY.md` (both addenda kept, this one renumbered).
+Nothing from another session was discarded. Re-verification on the combined tree (full detail in
+`docs/verification-7264f3c2.md` §F): **ci_replay PASSED 46/46** (main's three intake steps added);
+all unit gates green; re-measured 159 published pages · 159 disclose · 8 tagged · 0 prices; release
+board 5 MET / 7 open with RR-05 carrying both derived tokens; sitemap 169 URLs including
+`intent.html` and the eight `intake/` pages; this register's five observed destinations agree
+row-for-row with T59's P-01–P-05 and T60's intake observations (three independent passes, same
+destinations; datasets stay separate). One more forced scope extension was logged (IR-5 in the
+verification doc): `tools/validate_brief.py`'s `GATE_COUNT` was a hard-coded 43 and went stale the
+moment main's intake steps landed — it is now derived from the workflow at runtime.
+
+### Merge and deploy result
+
+| | |
+|---|---|
+| PR | filled in after the merge below |

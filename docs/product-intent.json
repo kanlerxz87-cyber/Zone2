@@ -1,0 +1,201 @@
+{
+  "$schema_version": "1.0",
+  "note": "Product-intent confirmation record (T58, session arena/7264f3c2-zone2, 2026-11-17). Built to the brief's requirement: 'For each submitted link, store the intended ASIN, official listing URL, confirmation date, and source. Keep observed redirect targets in a separate field. Do not merge the two fields.' The intended half and the observed half are separate objects per link and are never combined: `intent` is what the brief is believed to want, `observation` is what a fetch on a dated read actually served. Where an official source does not bind a supplied code to a product, the intended field stays an explicit null with the reason - it is never inferred (ledger flag F-06; the ASIN definition is source A01). Published at intent.html.",
+  "as_of": "2026-11-17",
+  "session": "arena/7264f3c2-zone2",
+  "associates_tag": "shopnow047c-20",
+  "associates_tag_note": "The tag was supplied by the owner on 2026-11-17 and is embedded in the published product Special Links for P1/P2/P3 (see tools/link_builder.py ASSOCIATES_TAG). The supplied short links below are evidence records and deliberately carry no tag: they are observations, not shopping links.",
+  "validation_rule": "Amazon Associates policy (Participation Requirements; source S02) ties attribution to the tag on the Special Link. Per the brief: test one link per product in the enrolled Associates workflow and confirm destination and tracking report before scaling. That test needs the owner's signed-in Associates session and is recorded per link below as null until the owner runs it; the paste-ready procedure lives on intent.html.",
+  "fields_rule": "intent.intended_asin is a checkable 10-character identifier per Amazon's ASIN definition (source A01). Every supplied code below is 9 characters, so intended_asin is null everywhere with that recorded reason; merging the observed ASIN into this field would fabricate an intent the record does not hold.",
+  "sources": {
+    "A01": {
+      "label": "Amazon Associates help - ASIN definition (10-character identifier)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+      "kind": "official-amazon"
+    },
+    "A02": {
+      "label": "Amazon Associates Program Policies (Special Links; participation requirements)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "kind": "official-amazon"
+    },
+    "A03": {
+      "label": "Amazon listing - CHEFMAN 6 Quart Dual Basket Air Fryer (B0CDY277D3)",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "kind": "official-amazon"
+    },
+    "A04": {
+      "label": "Amazon listing - Emeril Lagasse 26QT French Door Air Fryer Toaster Oven (B09B7SB46R)",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "kind": "official-amazon"
+    },
+    "A05": {
+      "label": "Amazon listing - Chefman Air Fryer 8 Qt TurboFry (B08DKYBTPH)",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "kind": "official-amazon"
+    },
+    "A06": {
+      "label": "Amazon listing - ThermoMaven 1 Sec Professional Digital Meat Thermometer (B0DHZTCNR5), observed destination of B0c8moW59",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "kind": "official-amazon"
+    },
+    "A07": {
+      "label": "Amazon listing - CHEF iQ Sense Smart Wireless Meat Thermometer (B0DZFD6R9Z), observed destination of B0f3GKalj",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "kind": "official-amazon"
+    }
+  },
+  "links": [
+    {
+      "id": "L1",
+      "supplied_url": "https://link.amazon/B04G1MEwY",
+      "supplied_code": "B04G1MEwY",
+      "supplied_code_length": 9,
+      "supplied_code_is_asin": false,
+      "intent": {
+        "intended_asin": null,
+        "intended_asin_blank_reason": "Supplied code is 9 characters; an ASIN is 10 (A01). No official Amazon document binds this code to a product, so the intended identity is recorded as null, never inferred (ledger flag F-06).",
+        "intended_product_record": "P1",
+        "intended_product_rationale": "The site's P1 record (Chefman TurboFry Touch 6 Qt Dual-Window) is the product this project treats as the brief's first item; that treatment is a working hypothesis, not a confirmed mapping.",
+        "mapping_status": "UNCONFIRMED - destination confirmed, intent not",
+        "confirmation_date": null,
+        "confirmation_source": null
+      },
+      "observation": {
+        "observed_on": "2026-11-17",
+        "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3?lv=shuf&channelId=500&plpRedirect=mhFallback",
+        "destination_asin": "B0CDY277D3",
+        "destination_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+        "destination_is_listing": true,
+        "source": "A03"
+      },
+      "special_link": {
+        "published_for": "P1",
+        "tag": "shopnow047c-20",
+        "associates_workflow_validated": null,
+        "validation_blank_reason": "Needs the owner's signed-in Associates session; null is recorded rather than an assumed pass."
+      }
+    },
+    {
+      "id": "L2",
+      "supplied_url": "https://link.amazon/B02NbDxp3",
+      "supplied_code": "B02NbDxp3",
+      "supplied_code_length": 9,
+      "supplied_code_is_asin": false,
+      "intent": {
+        "intended_asin": null,
+        "intended_asin_blank_reason": "Supplied code is 9 characters; an ASIN is 10 (A01). No official Amazon document binds this code to a product (F-06).",
+        "intended_product_record": "P2",
+        "intended_product_rationale": "The site's P2 record (Emeril Lagasse French Door AirFryer 360, 26 Qt) is the working hypothesis for the brief's second item.",
+        "mapping_status": "UNCONFIRMED - destination confirmed, intent not",
+        "confirmation_date": null,
+        "confirmation_source": null
+      },
+      "observation": {
+        "observed_on": "2026-11-17",
+        "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R?lv=shuf&channelId=500&plpRedirect=mhFallback",
+        "destination_asin": "B09B7SB46R",
+        "destination_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+        "destination_is_listing": true,
+        "source": "A04"
+      },
+      "special_link": {
+        "published_for": "P2",
+        "tag": "shopnow047c-20",
+        "associates_workflow_validated": null,
+        "validation_blank_reason": "Needs the owner's signed-in Associates session."
+      }
+    },
+    {
+      "id": "L3",
+      "supplied_url": "https://link.amazon/B00hJ57DV",
+      "supplied_code": "B00hJ57DV",
+      "supplied_code_length": 9,
+      "supplied_code_is_asin": false,
+      "intent": {
+        "intended_asin": null,
+        "intended_asin_blank_reason": "Supplied code is 9 characters; an ASIN is 10 (A01). No official Amazon document binds this code to a product (F-06).",
+        "intended_product_record": "P3",
+        "intended_product_rationale": "The site's P3 record (Chefman TurboFry Touch 8 Qt Stainless Steel) is the working hypothesis for the brief's third item.",
+        "mapping_status": "UNCONFIRMED - destination confirmed, intent not",
+        "confirmation_date": null,
+        "confirmation_source": null
+      },
+      "observation": {
+        "observed_on": "2026-11-17",
+        "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1",
+        "destination_asin": "B08DKYBTPH",
+        "destination_title": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+        "destination_is_listing": true,
+        "source": "A05"
+      },
+      "special_link": {
+        "published_for": "P3",
+        "tag": "shopnow047c-20",
+        "associates_workflow_validated": null,
+        "validation_blank_reason": "Needs the owner's signed-in Associates session."
+      }
+    },
+    {
+      "id": "L4",
+      "supplied_url": "https://link.amazon/B0c8moW59",
+      "supplied_code": "B0c8moW59",
+      "supplied_code_length": 9,
+      "supplied_code_is_asin": false,
+      "intent": {
+        "intended_asin": null,
+        "intended_asin_blank_reason": "Supplied code is 9 characters; an ASIN is 10 (A01). No official source states what product this code was meant to promote, and this session does not assume the observed destination is the intent (F-06).",
+        "intended_product_record": null,
+        "intended_product_rationale": "No site record corresponds to the observed destination; the destination is a meat thermometer, outside the air-fryer set the site describes. Disposition decision recorded as DS-16 on the discovery board.",
+        "mapping_status": "UNRESOLVED - destination observed, intent unknown, no site record",
+        "confirmation_date": null,
+        "confirmation_source": null
+      },
+      "observation": {
+        "observed_on": "2026-11-17",
+        "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5?lv=shuf&btn_type=ss&gaOptInStatus=true&_encoding=UTF8&sp_csd=d2lkZ2V0TmFtZT1zcF9waG9uZV9ob21lcGFnZV9ibGVuZGVk&language=en_US&content-id=amzn1.sym.4582c56b-139d-4168-9db2-822c68889360&ie=UTF8&btn_ref=srctok-633f9dc54185b50f&channelId=500&plpRedirect=mhFallback",
+        "destination_asin": "B0DHZTCNR5",
+        "destination_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, \u00b10.5\u2109 Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+        "destination_is_listing": true,
+        "source": "A06",
+        "note": "First resolution of this code recorded in this repository. The destination is a product the site does not cover; nothing on the site promotes it and no content was written from it."
+      },
+      "special_link": {
+        "published_for": null,
+        "tag": null,
+        "associates_workflow_validated": null,
+        "validation_blank_reason": "No published Special Link exists for this code; validation cannot precede an identity decision (DS-15/DS-16)."
+      }
+    },
+    {
+      "id": "L5",
+      "supplied_url": "https://link.amazon/B0f3GKalj",
+      "supplied_code": "B0f3GKalj",
+      "supplied_code_length": 9,
+      "supplied_code_is_asin": false,
+      "intent": {
+        "intended_asin": null,
+        "intended_asin_blank_reason": "Supplied code is 9 characters; an ASIN is 10 (A01). No official source states what product this code was meant to promote, and this session does not assume the observed destination is the intent (F-06).",
+        "intended_product_record": null,
+        "intended_product_rationale": "No site record corresponds to the observed destination; the destination is a wireless meat thermometer, outside the air-fryer set. Disposition decision recorded as DS-16 on the discovery board.",
+        "mapping_status": "UNRESOLVED - destination observed, intent unknown, no site record",
+        "confirmation_date": null,
+        "confirmation_source": null
+      },
+      "observation": {
+        "observed_on": "2026-11-17",
+        "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z?lv=shuf&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&btn_type=ss&gaOptInStatus=true&language=en_US&btn_ref=srctok-101536bcd8e0be02&channelId=500&plpRedirect=mhFallback&th=1",
+        "destination_asin": "B0DZFD6R9Z",
+        "destination_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000\u00b0F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+        "destination_is_listing": true,
+        "source": "A07",
+        "note": "First resolution of this code recorded in this repository. The destination is a product the site does not cover; nothing on the site promotes it and no content was written from it."
+      },
+      "special_link": {
+        "published_for": null,
+        "tag": null,
+        "associates_workflow_validated": null,
+        "validation_blank_reason": "No published Special Link exists for this code; validation cannot precede an identity decision (DS-15/DS-16)."
+      }
+    }
+  ]
+}

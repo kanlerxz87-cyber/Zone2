@@ -1502,7 +1502,7 @@
       "id": "DS-08",
       "area": "Monetisation",
       "title": "Do not chase clicks until a tagged link exists",
-      "suggestion": "Every product link on the site is emitted through the preview builder, labelled as a preview and carrying rel=sponsored nofollow, because no Associates ID is configured. Keep it that way until the owner supplies one; never fabricate a tag to make a link look live.",
+      "suggestion": "Every product link on the site is emitted through the preview builder, labelled as a preview and carrying rel=sponsored nofollow, because no Associates ID is configured. Keep it that way until the owner supplies one; never fabricate a tag to make a link look live. UPDATE 2026-11-17 (session 7264f3c2): the owner supplied the Associates tag shopnow047c-20, so option B is now implemented - every product link is a tagged Special Link and the verifier enforces the tag. Option A's label remains as the historical record of what was implemented before the tag existed.",
       "why": "A fabricated tag is worse than no tag: it would attribute traffic to an account nobody owns and it breaches the participation requirements the site is built to satisfy. The honest state of the site is: content ready, revenue not.",
       "options": [
         {
@@ -1521,7 +1521,7 @@
           "tradeoff": "Directly prohibited by the programme terms this site is built under. Recorded so nobody tries it."
         }
       ],
-      "recommended": "A",
+      "recommended": "B",
       "impact": "High",
       "effort": "Low",
       "evidence": [
@@ -1544,7 +1544,7 @@
       "id": "DS-09",
       "area": "Measurement",
       "title": "Instrument the one thing that decides the next 20 articles",
-      "suggestion": "Add click-through measurement on the outbound links using the sub-tag mechanism Amazon itself provides, one static sub-tag per article, no user-derived values. Without it, the next content decision is made by taste.",
+      "suggestion": "Add click-through measurement on the outbound links using the sub-tag mechanism Amazon itself provides, one static sub-tag per article, no user-derived values. Without it, the next content decision is made by taste. UPDATE 2026-11-17 (session 7264f3c2): implemented as a privacy-preserving, cookie-free first-party counter (assets/js/events.js - page views, outbound product-link clicks, disclosure views; no identifier, nothing per person), recorded as owner decision DS-11 on the discovery board. Static per-article sub-tags (option A) stay available at link-builder level; the Associates-report half still needs the owner's enrolled account.",
       "why": "The platform brief asks for continuous optimisation. Optimisation needs a per-article outcome, and the only outcome that exists here is the click. The rules that constrain the implementation are already in this repository's compliance ledger: a sub-tag must be a static campaign label and must never be tied to an end user.",
       "options": [
         {
@@ -1577,7 +1577,7 @@
         "Q-09",
         "MQ-06"
       ],
-      "status": "awaiting-owner-decision"
+      "status": "implemented-as-recommended"
     },
     {
       "id": "DS-10",

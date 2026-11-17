@@ -43,6 +43,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import head_meta  # noqa: E402  — the repository's single canonical/OG contract
+from link_builder import ASSOCIATES_TAG, build_product_link  # noqa: E402  — the policy-guarded Special Link emitter
 
 ROOT = Path(__file__).resolve().parent.parent
 FACTS = ROOT / "marketing" / "data" / "facts.json"
@@ -194,8 +195,18 @@ def value_cell(row: dict) -> str:
 
 
 def product_link(product: dict) -> str:
-    asin = product["asin"]
-    return f"https://www.amazon.com/dp/{e(asin)}"
+    """The outbound product link, composed by the policy-guarded link builder — never by hand.
+
+    T58 (session `7264f3c2`, 2026-11-17): the owner supplied the Associates tracking ID
+    (`ASSOCIATES_TAG` in tools/link_builder.py), so this is now a tagged Special Link rather than
+    the inert preview link every page published before. build_product_link() refuses an invalid
+    identifier, a malformed tag, competing attribution parameters and user-derived sub-tags, so a
+    policy violation fails the build instead of publishing. Citation links (class="pb-src") never
+    route through here: evidence links stay unmonetized by design.
+    """
+    link = build_product_link(product["asin"], ASSOCIATES_TAG,
+                              link_text="See this model's listing")
+    return link.href
 
 
 def spec_rows(product: dict, attrs: list[str]) -> list[dict]:
@@ -241,7 +252,7 @@ def masthead(active: str) -> str:
     <nav class="pb-nav" aria-label="Sections">{''.join(items)}<a href="{e(depth)}products.html">Operator dashboard</a></nav>
   </div>
 </header>
-<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} A commission may be earned when you buy through our links, at no extra cost to you. Product links on this site carry no Associates tag yet, so they are preview links and earn nothing.</div></div>"""
+<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} A commission may be earned when you buy through our links, at no extra cost to you. Product links are Special Links carrying the Associates tag <code>{e(ASSOCIATES_TAG)}</code>; citation and evidence links are not affiliate links.</div></div>"""
 
 
 def footer(depth: str = "") -> str:
@@ -258,6 +269,7 @@ def footer(depth: str = "") -> str:
       <div><h4>Decide</h4><ul>
         <li><a href="{e(depth)}suggestions.html">Suggestion board</a></li>
         <li><a href="{e(depth)}questions.html">Open questions</a></li>
+        <li><a href="{e(depth)}intent.html">Link &amp; intent register</a></li>
         <li><a href="{e(depth)}paths.html">Launch paths</a></li>
         <li><a href="{e(depth)}flagged.html">Flagged for review</a></li>
       </ul></div>
@@ -280,10 +292,14 @@ def footer(depth: str = "") -> str:
       <p><strong>{e(DISCLOSURE)}</strong> Amazon and the Amazon mark are trademarks of
       Amazon.com, Inc. or its affiliates; this site is independent and not affiliated with Amazon.</p>
       <p>No price is displayed on any page of this site: the Amazon Associates Program Policies restrict
-      price display to links and API responses Amazon serves itself. Outbound product links are marked
-      <code>rel="sponsored nofollow"</code>. Where no official source states a value, the cell is a dash with
-      the reason printed beside it &mdash; never an estimate. Traffic, click, conversion and revenue figures
-      appear nowhere on this site because none has been measured.</p>
+      price display to content Amazon itself serves. Outbound product links are tagged Special Links
+      marked <code>rel="sponsored nofollow"</code>; citation links to official pages are not affiliate
+      links. Where no official source states a value, the cell is a dash with
+      the reason printed beside it &mdash; never an estimate. Traffic, conversion and revenue figures
+      appear nowhere on this site because none has been imported from a first-party report. The on-site
+      click counter records aggregate page and link events only &mdash; no cookie, no visitor identifier,
+      nothing per person &mdash; and its counts are not published until an endpoint keeps them and a
+      first report makes the comparison meaningful.</p>
       <p><strong>Decision surfaces.</strong>
       <a href="{e(depth)}review-decide.html">Review board</a> &middot;
       <a href="{e(depth)}review.html">Review: findings</a> &middot;
@@ -357,6 +373,7 @@ def page(rel_path: str, *, title: str, description: str, active: str,
 {body}
 </main>
 {footer(depth)}
+<script src="{e(depth)}assets/js/events.js" defer></script>
 {f'<script src="{e(depth)}assets/js/data.js"></script><script src="{e(depth)}assets/js/app.js"></script>' if with_data else ''}
 </body>
 </html>
@@ -460,7 +477,7 @@ def bench_card(product: dict) -> str:
   <p class="pb-bench-note">{e(v['display'])} &middot; {e(product['model'] or 'model not stated')}</p>
   <p>{e(v['note'])}</p>
   <ul>{''.join(lis)}</ul>
-  <a class="pb-bench-cta" href="{e(dp)}" target="_blank" rel="{LINK_REL} noopener noreferrer">See the listing on Amazon {e(LINK_DISCLOSURE)} &rarr;</a>
+  <a class="pb-bench-cta" href="{e(dp)}" target="_blank" rel="{LINK_REL} noopener noreferrer" data-link-state="TAGGED" data-product-key="{e(product['key'])}">See the listing on Amazon {e(LINK_DISCLOSURE)} &rarr;</a>
 </article>"""
 
 
@@ -537,8 +554,10 @@ def build_index(facts: dict, board: dict) -> str:
   in total; the two thermometers they resolve to are onboarded in the catalog too &mdash; see
   <a href="products.html">the product catalog</a>. That destination is reproducible, but it is not the
   same claim as &ldquo;this is the product the brief meant&rdquo; &mdash; see
-  <a href="questions.html#Q-T50-01">Q-T50-01</a> and <a href="flagged.html">the flagged register</a>.</p>
-</div></section>
+  <a href="questions.html#Q-T50-01">Q-T50-01</a> and <a href="flagged.html">the flagged register</a>.
+  The buttons above are tagged Special Links (Associates tag <code>{e(ASSOCIATES_TAG)}</code>); the
+  per-link confirmation record &mdash; intended product, observed destination, date &mdash; lives in
+  the <a href="intent.html">link &amp; intent register</a>.</p></div></section>
 
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head">
@@ -552,13 +571,18 @@ def build_index(facts: dict, board: dict) -> str:
 <section class="pb-receipts"><div class="pb-wrap">
   <h2 class="pb-h2">The receipts</h2>
   <p class="pb-sub">Where an affiliate site would put growth numbers, this one puts its own verification
-  state. No traffic, click, conversion or revenue figure appears anywhere on this site: none has been
-  measured, and inventing one is the thing this project refuses to do.</p>
+  state. No traffic, conversion or revenue figure appears anywhere on this site: none has been imported
+  from a first-party report, and inventing one is the thing this project refuses to do. Aggregate,
+  cookie-free click counting is switched on (recorded as decision DS-11 on 2026-11-17) &mdash; its counts
+  will be published only once an endpoint keeps them and an Associates report exists to check them
+  against.</p>
   <div class="pb-figs">
     <div class="pb-fig"><b>5<i> / 5</i></b><span>Supplied links that resolve, reproducibly, to one
       specific Amazon listing each. Re-observed {e(CHECKED_ON)}.</span></div>
-    <div class="pb-fig"><b>0<i> / 5</i></b><span>Product mappings confirmed by an official Amazon
-      document. <a href="flagged.html">Flag F-03</a>.</span></div>
+    <div class="pb-fig"><b>5<i> / 5</i></b><span>Supplied links that resolve, reproducibly, to one
+      specific Amazon listing each &mdash; two of them kitchen thermometers rather than air fryers.
+      Re-observed 2026-11-17; <a href="intent.html">the link &amp; intent register</a>.</span></div>
+    <div class="pb-fig"><b>0<i> / 5</i></b><span>Product mappings confirmed by an official Amazon      document. <a href="flagged.html">Flag F-03</a>.</span></div>
     <div class="pb-fig"><b>9<i> / 10</i></b><span>Characters per supplied code against the 10-character
       ASIN rule on Amazon's own help page. <a href="flagged.html">Flag F-01</a>.</span></div>
     <div class="pb-fig"><b>4.50%<i> or 4.00%</i></b><span>Kitchen band vs &ldquo;All Other Categories&rdquo;
@@ -725,7 +749,8 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
             f'<h3 style="font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:600;'
             f'margin:32px 0 6px;letter-spacing:-0.015em">{e(v["display"])}</h3>'
             f'<p style="font-size:14px;color:var(--ink-soft);margin:0 0 14px">'
-            f'<a href="{e(dp)}" target="_blank" rel="{LINK_REL} noopener noreferrer">{e(dp)}</a> '
+            f'<a href="{e(dp)}" target="_blank" rel="{LINK_REL} noopener noreferrer" '
+            f'data-link-state="TAGGED" data-product-key="{e(p["key"])}">{e(dp)}</a> '
             f'&middot; {e(LINK_DISCLOSURE)}</p>'
             + product_table(p)
         )

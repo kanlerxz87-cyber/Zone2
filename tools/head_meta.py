@@ -48,14 +48,29 @@ def head_block(rel_path: str, *, title: str, description: str,
 
     `title` and `description` are passed in rather than invented: each caller already has the page's own
     display title and description, and copying them here is a transcription, not a claim.
+
+    T58 (session `7264f3c2`, 2026-11-17): `og:image`, its dimensions, an alt text and the
+    `twitter:card` are added here rather than per-caller, because this module is the one place the
+    head contract lives. The image is `assets/img/og.jpg`, a brand card generated for this site —
+    the S-09 gap ("ship a social preview image") closed at the root of the contract so every
+    generated page inherits it and none can drift. The image is deliberately NOT product
+    photography: Amazon's Program Images rule restricts how Program Images may be used, and the
+    questions register (Q-10) keeps the product-imagery rights question open.
     """
     url = url_for(rel_path)
     t, d = escape(title, quote=True), escape(description, quote=True)
+    image = BASE + "assets/img/og.jpg"
+    image_alt = "Counter Notes — every number links to its source"
     return (
         f'<link rel="canonical" href="{escape(url, quote=True)}">\n'
         f'<meta property="og:type" content="{escape(page_type, quote=True)}">\n'
         f'<meta property="og:site_name" content="{escape(site_name, quote=True)}">\n'
         f'<meta property="og:title" content="{t}">\n'
         f'<meta property="og:description" content="{d}">\n'
-        f'<meta property="og:url" content="{escape(url, quote=True)}">'
+        f'<meta property="og:url" content="{escape(url, quote=True)}">\n'
+        f'<meta property="og:image" content="{escape(image, quote=True)}">\n'
+        f'<meta property="og:image:width" content="1200">\n'
+        f'<meta property="og:image:height" content="630">\n'
+        f'<meta property="og:image:alt" content="{escape(image_alt, quote=True)}">\n'
+        f'<meta name="twitter:card" content="summary_large_image">'
     )

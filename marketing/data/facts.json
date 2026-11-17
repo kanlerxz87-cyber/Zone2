@@ -4,8 +4,8 @@
   "verified_utc": "2026-11-14",
   "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
   "link_level_disclosure": "(paid link)",
-  "associates_tag_configured": false,
-  "associates_tag_note": "No Associates ID is stored anywhere in this repository and none may be invented (Operating Agreement / Participation Requirements; ledger flag F-07). Every product link in this set is therefore emitted through tools/link_builder.py:preview_link() - a clearly labelled, non-monetized placeholder - and the site says so on every page that shows a link.",
+  "associates_tag_configured": true,
+  "associates_tag_note": "UPDATE 2026-11-17 (session 7264f3c2): the owner supplied the Associates tracking ID shopnow047c-20 in the brief; every product link in this set is now emitted through tools/link_builder.py:build_product_link() as a tagged Special Link, and the marketing verifier fails any sponsored product link that reaches Amazon without it. Original note, kept for the record: No Associates ID is stored anywhere in this repository and none may be invented (Operating Agreement / Participation Requirements; ledger flag F-07). Every product link in this set was therefore emitted through tools/link_builder.py:preview_link() - a clearly labelled, non-monetized placeholder - and the site said so on every page that showed a link.",
   "products": [
     {
       "key": "P1",

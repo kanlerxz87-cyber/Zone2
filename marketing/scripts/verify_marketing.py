@@ -7,8 +7,10 @@ Fails (non-zero exit) if any of these stop being true, so none of them depends o
   G2  every page that shows an affiliate link also carries a link-level disclosure (R-02)
   G3  every generated page has fully resolved internal links and asset references
   G4  no page prints a money amount in a buying context (the project's no-price rule)
-  G5  every outbound Amazon marketplace link carries rel="sponsored" (Google's outbound-link rule)
-  G6  every generated page states the preview state of its links while no Associates ID is configured
+  G5  every outbound Amazon marketplace link carries rel="sponsored" (Google's outbound-link rule);
+      since the owner supplied the Associates tag (2026-11-17): every product Special Link carries
+      the owner's tag, no link carries a different tag, and citation links carry no tag at all
+  G6  every generated page states the tagged-Special-Link state of its links (T58)
   G7  **every table row that shows a value also shows a source link** - the core project rule
   G8  every row marked UNVERIFIED/WITHHELD prints no value at all
   G9  committed HTML matches a fresh build (nothing hand-edited)
@@ -105,9 +107,19 @@ def check_links(rel: str, doc: str) -> None:
             if host in MARKETPLACE_HOSTS:
                 if "sponsored" not in (a.get("rel") or "").lower():
                     fail(f"G5 {rel}: Amazon link without rel=sponsored: {ref[:90]}")
-                if "tag=" not in ref:
-                    if "NOT FOR PUBLICATION" not in doc and "preview link" not in doc:
-                        fail(f"G5 {rel}: untagged Amazon link with no preview label: {ref[:90]}")
+                # T58 (2026-11-17): the owner supplied the Associates tag, so the rules hardened.
+                #  - a product link (class="sponsored-link") MUST carry the owner's tag;
+                #  - any tagged link must carry THE owner's tag, never another account's;
+                #  - a citation link (class="src") MUST NOT carry a tag: evidence stays unmonetized.
+                classes = (a.get("class") or "").split()
+                if "sponsored-link" in classes and "tag=shopnow047c-20" not in ref:
+                    fail(f"G5 {rel}: product Special Link without the owner's Associates tag: {ref[:90]}")
+                if "src" in classes and "tag=" in ref:
+                    fail(f"G5 {rel}: citation link carries an Associates tag; evidence must stay unmonetized: {ref[:90]}")
+                if "tag=" in ref and "tag=shopnow047c-20" not in ref:
+                    fail(f"G5 {rel}: Associates tag other than the owner's on {ref[:90]}")
+                if "tag=" not in ref and "src" not in classes:
+                    fail(f"G5 {rel}: untagged Amazon link that is not a citation: {ref[:90]}")
             if host not in OFFICIAL_HOSTS:
                 fail(f"G10 {rel}: link to a non-allow-listed host {host!r}")
             continue
@@ -251,8 +263,8 @@ def main() -> int:
             fail(f"G1 {rel}: missing the Associates disclosure sentence")
         if "sponsored-link" in doc and "disclosure--link" not in doc:
             fail(f"G2 {rel}: affiliate link without a link-level disclosure")
-        if "sponsored-link" in doc and "preview link" not in doc:
-            fail(f"G6 {rel}: shows an affiliate link but does not state it is a non-earning preview link")
+        if "sponsored-link" in doc and "Special Link" not in doc:
+            fail(f"G6 {rel}: shows an affiliate link but does not state its tagged-Special-Link state")
         check_links(rel, doc)
         check_prices(rel, doc)
         check_rows(rel, doc)
@@ -276,7 +288,7 @@ def main() -> int:
         print(f"\n{len(failures)} failure(s)")
         return 1
     print(f"OK  {pages} pages · {rows} spec rows · 0 failures")
-    print("    disclosure on every page · affiliate links disclosed and marked preview · no prices ·")
+    print("    disclosure on every page · affiliate links disclosed and tagged as Special Links · no prices ·")
     print("    internal links resolve · every valued row carries an official source link")
     return 0
 

@@ -267,7 +267,11 @@ def check_derived_counts() -> None:
     """
     m = measure()
     expect = {
-        "Published pages carrying an Associates tag": f"0 of {m['published']}",
+        # T58 (2026-11-17): the owner supplied the Associates tag, so "zero tagged pages" stopped
+        # being a law of this repository. The expectation is now derived from the same measurement
+        # as its sibling rows rather than hard-coding yesterday's zero; the row's own note in
+        # summary.json records the date and what changed.
+        "Published pages carrying an Associates tag": f"{m['with_tag']} of {m['published']}",
         "Published pages carrying the exact §5 disclosure sentence": f"{m['with_disclosure']} of {m['published']}",
         "Published pages printing a product price": f"0 of {m['published']}",
         "Pages describing the site as AI-powered": str(m["ai_powered_pages"]),

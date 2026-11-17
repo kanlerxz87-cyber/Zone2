@@ -1201,3 +1201,36 @@ they are outside this session's file scope.
 
 Verification: [`docs/verification-613900e6.md`](docs/verification-613900e6.md). All 46 CI steps pass on the
 combined tree.
+
+## Addendum — 2026-11-17 (session `7264f3c2`, T61; claimed as T58): the tag arrived, and what it changed
+
+The previous section ends with the one action that unblocked the revenue side: the owner supplying
+the Associates tag. On 2026-11-17 the brief supplied it — **`shopnow047c-20`** — and this session
+wired it through the generators rather than pasting it into pages.
+
+**What changed on the site.** Every reader-facing product link is now a tagged Special Link emitted
+by `tools/link_builder.py:build_product_link()` (`rel="sponsored nofollow"`, tag `shopnow047c-20`,
+link-level "(paid link)" disclosure kept). The gates hardened in the same direction: a product CTA
+without the tag fails the build, any tag that is not the owner's fails the build, and citation
+links to official pages must carry no tag at all — evidence stays unmonetized. The social-preview
+image the site never had is shipped (`assets/img/og.jpg`, a brand card, deliberately not product
+photography) and the head contract now carries `og:image` + `twitter:card` on every generated page.
+
+**What measurement changed.** The owner decision was recorded on DS-11 and the three client-side
+events of the measurement design went LIVE (`assets/js/events.js`): page views, product-link clicks,
+disclosure views — no cookie, no identifier, nothing per person, and no count published anywhere.
+EV-04 (conversions) and EV-05 (search queries) stay blocked on first-party reports; the endpoint
+that would persist the counts does not exist on GitHub Pages static hosting and stays open as
+DS-17/DQ-12 with `tools/tracking_schema.sql` as the contract.
+
+**What did not change.** The mapping question (F-06) is untouched: no official Amazon document binds
+a supplied code to a product, so every `intended_asin` in the new
+[`docs/product-intent.json`](docs/product-intent.json) register stays null with its reason, and the
+observed redirect targets live in separate fields, never merged. Two of the five supplied links land
+outside the air-fryer set — `B0c8moW59` on a ThermoMaven meat thermometer (B0DHZTCNR5) and `B0f3GKalj`
+on a CHEF iQ Sense (B0DZFD6R9Z). This session re-observed both live; they were first recorded by T59
+(`1539a895`, onboarded as P-04/P-05) and corroborated by T60 (`613900e6`, the intake register) — three
+independent passes reaching the same destinations. They are recorded, not promoted, and their
+disposition waits on DS-16/DQ-11. The per-link Associates-workflow validation the
+brief demands before scaling is recorded as pending on every row: it needs the owner's enrolled
+session, and no conversion figure exists to publish.

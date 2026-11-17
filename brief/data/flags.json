@@ -77,9 +77,9 @@
     {
       "id": "FB-06",
       "severity": "high",
-      "status": "open",
+      "status": "closed",
       "title": "Zero of 138 published pages carry an Associates tag, so no page on the site can currently earn",
-      "detail": "Measured with Amazon's published tag format (NAME-NN). The three supplied short links resolve without a tag parameter. Amazon's own application-review page states that the tags 'must be embedded in your Amazon product links on the site(s) declared in your application', and that the application is checked once at least three qualifying sales have been driven within the first 180 days.",
+      "detail": "Measured with Amazon's published tag format (NAME-NN). The three supplied short links resolve without a tag parameter. Amazon's own application-review page states that the tags 'must be embedded in your Amazon product links on the site(s) declared in your application', and that the application is checked once at least three qualifying sales have been driven within the first 180 days. CLOSED 2026-11-17 (session 7264f3c2): the owner supplied the Associates tag shopnow047c-20; every reader-facing product link on the generated pages now carries it via tools/link_builder.py:build_product_link(), and both deploy gates fail a product CTA without it. The measurement layer went live the same day (decision DS-11). The title's measured count describes the state on 2026-11-16 and is kept as history.",
       "why_it_matters": "This is the finding the brief's 'so real people can click the links and buy' runs into. Until a tag exists, traffic cannot convert into qualifying purchases, and without three of them the application is never reviewed. Everything downstream — conversion data, the optimizer, the revenue model — is blocked behind one string the owner has to supply.",
       "evidence": "RV-04",
       "source_ids": [
