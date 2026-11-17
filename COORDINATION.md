@@ -6130,3 +6130,69 @@ line-by-line review, 36 verification checks, 22 sourced quotes, and 8 flags.
 **Nothing on the board is implemented.** The owner's next action is recorded in three places and takes one
 sign-in: supply the Associates ID. Until then no link on the site can attribute a purchase, and the
 application cannot be reviewed.
+
+---
+
+## T58 — claimed 2026-11-17 (UTC) by session `arena/ff0a867f-zone2`
+
+**Session id:** `ff0a867f` · **Branch:** `arena/ff0a867f-zone2` · **Base at claim:** `e58dac0` (PR #150)
+**Status:** in progress
+
+### What changed since the last recorded state
+
+The owner supplied one thing the entire register said was missing, plus two products:
+
+1. **Associates tracking ID `shopnow047c-20`.** Every open blocker on the site traced to "no Associates ID is
+   stored anywhere in this repository" (F-07, FB-06, BQ-05, CR-2). None of the 150 published pages carried a
+   tag. This removes that blocker. The ID matches the required tagged format and contains no Amazon mark.
+2. **Two more supplied links** — `https://link.amazon/B0c8moW59` and `https://link.amazon/B0f3GKalj`.
+
+### Measured on claim (before any edit)
+
+| Measure | Value | Method |
+|---|---|---|
+| Repo HTML pages | 162 | `find . -name '*.html' -not -path './.git/*' \| wc -l` |
+| Occurrences of `shopnow047c-20` | 0 | `grep -r` across all html/json/md/js |
+| Occurrences of either new link code | 0 | `grep -r` |
+| Products on the front pages | 3 (all air fryers) | `marketing/data/facts.json` |
+| Open PRs / issues | 0 / 0 | `gh pr list`, `gh issue list` |
+
+**No other session is active** (zero open PRs, zero open issues, no claim after T57's close-out on
+2026-11-16). This is the sole session, so T58 is also the integration session.
+
+### The finding that changes the portfolio
+
+The two new links **are not air fryers.** Resolved live 2026-11-17 by following each redirect:
+
+| Supplied link | Resolved ASIN | What it actually is |
+|---|---|---|
+| `link.amazon/B0c8moW59` | `B0DHZTCNR5` | ThermoMaven 1 Sec Professional Digital Meat Thermometer |
+| `link.amazon/B0f3GKalj` | `B0DZFD6R9Z` | CHEF iQ Sense Gen3 Smart Wireless Meat Thermometer |
+
+Both sit in Amazon's `Kitchen Utensils & Gadgets › Thermometers & Timers › Meat` node, not `Fryers › Air
+Fryers`. The site is therefore a **two-category** publication from this session on, not a single-category
+air-fryer site. Every page that calls the whole portfolio "three air fryers" is now wrong and is corrected in
+this session.
+
+### A control that settles a two-day-old conflict (F-03 / F-12)
+
+A **bare** `https://www.amazon.com/dp/B0DHZTCNR5` fetch — no short link, no token, a known-good 10-character
+ASIN that resolves to a real product page — returns `plpRedirect=mhFallback` in its final URL, exactly as the
+supplied `link.amazon` redirects did.
+
+`mhFallback` is therefore **not** evidence that a supplied code is invalid. It is Amazon's own behaviour for
+this class of request. The earlier sessions read the same parameter as proof of a bogus link; the control
+shows the parameter is uninformative. F-03 and F-12's "fallback destination" wording is corrected on the
+Flagged page rather than deleted — the measurement was real, the interpretation was wrong.
+
+### File scope (this session)
+
+**Owned / edited:** `marketing/data/facts.json`, `docs/board-ff0a867f.json` (new), `tools/build_front.py`,
+`tools/verify_front.py`, `tools/link_builder.py`, `tools/build_sitemap.py` (derived), root `*.html` generated
+by those builds, NEW `press/**` (article set), NEW `docs/verification-ff0a867f.md`, `EXECUTIVE_SUMMARY.md`
+(addendum), `README.md` (additive), `COORDINATION.md` (append-only).
+
+**Excluded:** `ledger/**`, `brief/**`, `console/**`, `discovery/**`, `audit/**`, `review-*.html` — owned by
+earlier sessions and already published. Where a correction is needed in one of those, it is logged here as a
+change request rather than edited.
+
