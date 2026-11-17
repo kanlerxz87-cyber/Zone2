@@ -1,0 +1,417 @@
+{
+  "note": "The suggestions board. Twelve rows, each with two or three options, and nothing on it is applied. The 'chosen' field on every row is empty and tools/validate_board.py fails the build if it is not — that is the mechanism that keeps this a place where a path is picked rather than a place where work is done. Each option states what it costs, what it buys, what it risks and whether it can be undone. The 'lean' field is this session's reading of where the measurements point; it is a lean, not a decision, and the choice is still the owner's.",
+  "as_of": "2026-11-17",
+  "rows": [
+    {
+      "id": "BS-01",
+      "title": "Put a real Associates tag on every product link",
+      "why_now": "This is the one row that gates the revenue half of the project. {{tagged}} of {{pages}} published pages carry a real tag; none of the five supplied links does either (BQ2-16). Amazon states the tags 'must be embedded in your Amazon product links on the site(s) declared in your application' (BD-13), and that an application is reviewed only after three qualifying sales in 180 days (BD-13). No tag means no attributed purchase, which means no review.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Test one link first, then scale",
+          "what": "Build one tagged Special Link, in the format Amazon publishes, for one product. Click it yourself from the live site. Confirm it lands on the right listing and that the click appears in the Associates reports. Only then rebuild the rest.",
+          "effort": "An hour, once the ID exists",
+          "risk": "Lowest. A wrong tag is caught on one link instead of on all of them.",
+          "reversibility": "Fully reversible — one link",
+          "source_ids": ["BD-12", "BD-13"]
+        },
+        {
+          "id": "B",
+          "label": "Rebuild all five at once",
+          "what": "Generate the tagged form for all five products and republish every page that links to them.",
+          "effort": "Same hour, plus the rebuild",
+          "risk": "Higher. If the marketplace is wrong (BQ2-02), all five links are wrong at once and none of them attributes.",
+          "reversibility": "Reversible, but the failure is silent — the links work, they just earn nothing",
+          "source_ids": ["BD-12", "BD-13"]
+        },
+        {
+          "id": "C",
+          "label": "Keep publishing the supplied short links",
+          "what": "Leave the links as supplied and continue.",
+          "effort": "None",
+          "risk": "Highest. Their compliance status is unresolved (BQ2-04), no tag is attached (BQ2-16), and no sale can be attributed. This is the current state, not a plan.",
+          "reversibility": "n/a — it is the status quo",
+          "source_ids": ["BD-12", "BD-13"]
+        }
+      ],
+      "lean": "A. The brief asks for exactly this — 'test one link per product in the enrolled Associates workflow and confirm destination and tracking report before scaling.' The cost of testing first is one link; the cost of not testing is a silent failure across every page.",
+      "blocked_by": ["BQ2-01", "BQ2-02", "BQ2-04"],
+      "chosen": "",
+      "source_ids": ["BD-12", "BD-13"]
+    },
+    {
+      "id": "BS-02",
+      "title": "Switch on measurement before writing anything else",
+      "why_now": "The brief asks for this first, and the tree shows why: {{sc_pages}} pages carry a Search Console verification tag and {{endpoint_pages}} call an event endpoint. The five events are already specified. Nothing is being counted, so every editorial decision from here on is a guess — including which of the two thermometers to write about first.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Search Console plus the five events",
+          "what": "Add the verification tag, then wire the click counter to the endpoint the schema already describes.",
+          "effort": "The tag is minutes. The endpoint needs a host (BQ2-14).",
+          "risk": "Low, but it is the first row that puts a data-collection surface on a public site, so the privacy note already written into the event spec should be read before the wiring rather than after.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-16"]
+        },
+        {
+          "id": "B",
+          "label": "Search Console only, for now",
+          "what": "Take the queries, leave the click counter until the host question is settled.",
+          "effort": "Minutes",
+          "risk": "Lowest, and it unblocks the one measurement the brief's editorial priority actually depends on.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-16"]
+        },
+        {
+          "id": "C",
+          "label": "Neither, until the site has more to measure",
+          "what": "Write first, measure later.",
+          "effort": "None now",
+          "risk": "Highest. The brief's stated method is to choose topics from measured queries instead of instinct; this option makes instinct permanent by default.",
+          "reversibility": "Reversible, but every topic chosen before it is a topic chosen blind",
+          "source_ids": ["BD-16"]
+        }
+      ],
+      "lean": "B now, A when the host is settled. BQ2-10 is the rare question that closes with time rather than action, so the clock starts whenever the tag goes on — and it is the cheapest thing on this board.",
+      "blocked_by": ["BQ2-10", "BQ2-14"],
+      "chosen": "",
+      "source_ids": ["BD-16"]
+    },
+    {
+      "id": "BS-03",
+      "title": "Decide what the site is now that two of the five products are thermometers",
+      "why_now": "Three of the five resolve into Air Fryers and two into Meat Thermometers — two different browse trees under one Home & Kitchen parent (BD-03, BD-09). Every product page the site has published is about air fryers. The eight-article calendar, the comparison, the buying guide and the counter-space analysis were all built for three products in one category.",
+      "options": [
+        {
+          "id": "A",
+          "label": "A second category pillar",
+          "what": "Give the thermometers their own pillar, their own question-shaped pages and their own comparison row, linked from the one navigation group alongside the air fryers.",
+          "effort": "Largest. It is most of the work already done for air fryers, done again.",
+          "risk": "Splits a small site into two small sites. Both categories have to reach the ten-post rule of thumb Amazon gives (BD-13) on their own.",
+          "reversibility": "Reversible, but expensive to undo",
+          "source_ids": ["BD-13", "BD-03"]
+        },
+        {
+          "id": "B",
+          "label": "One wider pillar: counter-top cooking gear",
+          "what": "Widen the existing pillar rather than adding a second. The brand name already points this way, both categories sit under one parent, and the site's one piece of original analysis — capacity per centimetre of counter depth — generalises across both.",
+          "effort": "Moderate. Reframe the top level, keep everything below it, add the two products.",
+          "risk": "A wider pillar is a vaguer promise to a reader. It also has to earn its own queries rather than inheriting the air-fryer ones.",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-03", "BD-04", "BD-09"]
+        },
+        {
+          "id": "C",
+          "label": "Air fryers only — drop the two new links",
+          "what": "Keep the site as it is and do not publish the two thermometers.",
+          "effort": "None",
+          "risk": "Only sensible if BQ2-05 comes back as 'they were not meant for this site'. If they were, this throws away two products the owner asked for.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-03", "BD-04"]
+        }
+      ],
+      "lean": "Ask BQ2-05 before choosing. If the two products were meant for this site, B is the cheaper way to hold five products in one publication; A is the right answer only if the thermometers turn out to be their own audience. C is a real option and should not be dismissed by momentum.",
+      "blocked_by": ["BQ2-05", "BQ2-11"],
+      "chosen": "",
+      "source_ids": ["BD-03", "BD-04", "BD-09", "BD-10", "BD-11"]
+    },
+    {
+      "id": "BS-04",
+      "title": "Decide what to do about the outbound links that carry no rel=\"sponsored\"",
+      "why_now": "{{amazon_links}} outbound links to an Amazon host across the tree, of which {{sponsored_links}} carry the value. That looks alarming until you separate what the links are: on the {{reader_pages}} reader-facing pages, {{sponsored_reader}} are sponsored and {{unsponsored_reader}} are not, and every unsponsored one sits on a register page citing a URL as evidence.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Leave it as it is",
+          "what": "Product offers stay marked; evidence citations stay unmarked.",
+          "effort": "None",
+          "risk": "Lowest, and it matches the definition: Google asks for the value on 'advertisements or paid placements' (BD-15). A citation in a verification table is neither.",
+          "reversibility": "n/a — it is the current state",
+          "source_ids": ["BD-15"]
+        },
+        {
+          "id": "B",
+          "label": "Mark every link to an Amazon host",
+          "what": "Add the value to all of them, citations included.",
+          "effort": "One pass over the generators",
+          "risk": "Misrepresents a citation to a source as a paid placement, which is a different inaccuracy in the other direction.",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-15"]
+        },
+        {
+          "id": "C",
+          "label": "Mark none, and drop the value from the product links too",
+          "what": "Remove the value everywhere.",
+          "effort": "One pass",
+          "risk": "Highest. It undoes RQ-02 and contradicts the published guidance directly (BD-15).",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-15"]
+        }
+      ],
+      "lean": "A. The headline number is misleading and this row exists mainly to record why: the split is correct, and the fix that would make the number look better would make the markup less accurate.",
+      "blocked_by": [],
+      "chosen": "",
+      "source_ids": ["BD-15"]
+    },
+    {
+      "id": "BS-05",
+      "title": "Extend the site's one piece of original analysis to the new category",
+      "why_now": "The counter-space analysis — capacity per centimetre of counter depth — is the only original analysis on the site, and it is what separates it from a page that restates a spec sheet. It is an air-fryer analysis. A thermometer has no capacity and a different footprint question, so the extension is a new piece of work, not a copy.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Write the thermometer equivalent",
+          "what": "A measured comparison of what the two thermometers ask of a kitchen — probe count, range, whether it needs an app, what has to live on the counter.",
+          "effort": "One article, plus the spec reading that every other row on this site already does",
+          "risk": "Low. It is the same method that already works here.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-03", "BD-04"]
+        },
+        {
+          "id": "B",
+          "label": "Do not extend it until BQ2-11 is decided",
+          "what": "Leave the analysis as an air-fryer piece.",
+          "effort": "None",
+          "risk": "Writing it before the category question is settled risks building for a shape the site will not take.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-03"]
+        }
+      ],
+      "lean": "B, then A. The method is the site's best asset and it generalises; the only reason to wait is that the shape of the site is still open.",
+      "blocked_by": ["BQ2-11", "BQ2-13"],
+      "chosen": "",
+      "source_ids": ["BD-03", "BD-04"]
+    },
+    {
+      "id": "BS-06",
+      "title": "Carry the disclosure onto the new category pages before writing them",
+      "why_now": "{{disclosed}} of {{pages}} published pages carry the required sentence, so the pattern is already right. The risk is at the point of expansion: new pages get written quickly and a disclosure is the kind of thing that gets forgotten on a new template rather than on an existing one.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Gate it — no new page ships without it",
+          "what": "Keep the check that already fails the build on a page with no disclosure, and make sure it covers the new namespace before the namespace has pages.",
+          "effort": "Minutes, before the first new page rather than after the tenth",
+          "risk": "Lowest, and it is the row the brief's compliance gate asks for.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-14"]
+        },
+        {
+          "id": "B",
+          "label": "Rely on the template",
+          "what": "Copy an existing page and trust that the disclosure comes with it.",
+          "effort": "None",
+          "risk": "The disclosure requirement is the one thing on this site with a documented consequence for getting it wrong (BD-14).",
+          "reversibility": "Reversible, but the failure is invisible until someone looks",
+          "source_ids": ["BD-14"]
+        }
+      ],
+      "lean": "A. Amazon's own page states the requirement as two obligations — a link-level disclosure and the site-level statement (BD-14) — and the site-level one is already in place everywhere. This row is about not losing that at the moment of growth.",
+      "blocked_by": [],
+      "chosen": "",
+      "source_ids": ["BD-14", "BD-19"]
+    },
+    {
+      "id": "BS-07",
+      "title": "Name a responsible editor on the site",
+      "why_now": "Google's published human-review factors include 'Its stated or implied authorship, meaning, is there an explicit acknowledgement of ownership or responsibility for the content?' — and its worked example of a page that draws action is 'unauthored affiliate article not integrated in publication' (BD-16). No page on this site names anyone.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Name a person or a standing editorial identity",
+          "what": "One line on the site saying who is responsible for what is published, and how to reach them.",
+          "effort": "One line and a decision about who",
+          "risk": "Low, but it is a real name or a real role — a fabricated byline would be worse than none, and the same guidance prohibits fabricating creator profiles.",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-16"]
+        },
+        {
+          "id": "B",
+          "label": "Publish under the brand with no named editor",
+          "what": "The brand is the author.",
+          "effort": "None",
+          "risk": "Leaves the one published factor unaddressed.",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-16"]
+        }
+      ],
+      "lean": "A, and it is the cheapest of the rows that move the 'reads like machine output' complaint. The constraint is real: the name has to be a name that accepts responsibility.",
+      "blocked_by": ["BQ2-12"],
+      "chosen": "",
+      "source_ids": ["BD-16"]
+    },
+    {
+      "id": "BS-08",
+      "title": "Choose the next topics from measured queries, not from instinct",
+      "why_now": "The brief's own editorial priority, and the one thing that cannot be done today: with no Search Console (RQ-28) and no event endpoint (RQ-25), there is no measured anything to choose from. The four working titles the brief offers are explicitly hypotheses, not findings.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Publish the hypotheses, then re-rank once data exists",
+          "what": "Write the question-shaped pages the brief suggests — stated as questions, never as claims about popularity — and revise the order once queries are measurable.",
+          "effort": "The writing is the work",
+          "risk": "Low, provided no page asserts search volume or popularity, which the site's own evidence rule already forbids.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-16"]
+        },
+        {
+          "id": "B",
+          "label": "Wait for data before writing anything",
+          "what": "Turn on measurement, wait, then write to the queries.",
+          "effort": "Weeks of writing nothing",
+          "risk": "A site with no recent content runs against the review guidance that content should generally be within the last 60 days (BD-13).",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-13", "BD-16"]
+        }
+      ],
+      "lean": "A, with the discipline attached: publish the questions, never a claim about how many people ask them.",
+      "blocked_by": ["BQ2-10"],
+      "chosen": "",
+      "source_ids": ["BD-13", "BD-16"]
+    },
+    {
+      "id": "BS-09",
+      "title": "Decide whether the site tries to keep a reader",
+      "why_now": "{{capture_pages}} of {{pages}} pages carry any reader-capture form, and the RSS feed is shipped but nothing counts subscribers. The brief lists reader capture as one of the four parallel passes without saying what it is for, so this board does not assume it is wanted.",
+      "options": [
+        {
+          "id": "A",
+          "label": "No capture",
+          "what": "Leave it out. The site is a publication people find, not a list people join.",
+          "effort": "None",
+          "risk": "Lowest, and it avoids a consent and jurisdiction question entirely.",
+          "reversibility": "n/a — it is the current state",
+          "source_ids": ["BD-16"]
+        },
+        {
+          "id": "B",
+          "label": "Email capture with a plain consent note",
+          "what": "One form, one stated purpose, no tracking beyond it.",
+          "effort": "A form and a policy line",
+          "risk": "Introduces a data-protection obligation the site does not currently have, in whichever jurisdiction the reader is in.",
+          "reversibility": "Reversible, but the data is not",
+          "source_ids": ["BD-16"]
+        },
+        {
+          "id": "C",
+          "label": "RSS only, and count subscribers",
+          "what": "Keep the feed, add nothing else, and measure it once measurement exists.",
+          "effort": "Small",
+          "risk": "Low, and it collects no personal data at all.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-16"]
+        }
+      ],
+      "lean": "C if anything. It is the only option that gives the site a returning readership without taking on a data obligation, and it uses an asset that already exists.",
+      "blocked_by": [],
+      "chosen": "",
+      "source_ids": ["BD-16"]
+    },
+    {
+      "id": "BS-10",
+      "title": "Ship the social preview image",
+      "why_now": "{{og_image}} of {{pages}} pages carry an og:image, against 108 that carry the rest of the og: block. Every link to this site currently previews as a bare title wherever it is shared, which is the cheapest available fix to how the site looks from the outside.",
+      "options": [
+        {
+          "id": "A",
+          "label": "One brand image for the whole site",
+          "what": "A single preview image, referenced from the og: block every page already emits.",
+          "effort": "One image and one line in the head builder",
+          "risk": "Low. It is not product photography, so it does not touch RQ-14's open question about photography.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-15"]
+        },
+        {
+          "id": "B",
+          "label": "A per-article image",
+          "what": "A distinct preview for each article.",
+          "effort": "An image per article, forever",
+          "risk": "Higher, and it collides with the photography question that is deliberately still open (RQ-14).",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-15"]
+        },
+        {
+          "id": "C",
+          "label": "Leave it",
+          "what": "No preview image.",
+          "effort": "None",
+          "risk": "Leaves the first half of requirement S-09 undone.",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-15"]
+        }
+      ],
+      "lean": "A. It closes S-09's named gap without opening RQ-14's.",
+      "blocked_by": [],
+      "chosen": "",
+      "source_ids": ["BD-15"]
+    },
+    {
+      "id": "BS-11",
+      "title": "Close the three mechanical rows nobody has claimed",
+      "why_now": "Three rows are small, unclaimed and unfinished: {{no_desc}} pages have no meta description (RQ-01), {{guides_unlinked}} reader pages do not reach the comparison or the buying guide (RQ-18), and the chooser row is in dispute between two repairs (RQ-15). None of them is hard. All three are the kind of thing that survives for months because none of them is interesting.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Do all three in one pass",
+          "what": "Descriptions for the pages that lack them, one internal link per orphaned page, and a decision recorded on the chooser question.",
+          "effort": "Half a day",
+          "risk": "Lowest-risk work on this board, and the only row with no open question behind it.",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-21"]
+        },
+        {
+          "id": "B",
+          "label": "Descriptions and links only; settle the chooser question first",
+          "what": "Do the two that need no decision, and answer BQ2-06 before writing any chooser.",
+          "effort": "A few hours",
+          "risk": "None",
+          "reversibility": "Fully reversible",
+          "source_ids": ["BD-21"]
+        },
+        {
+          "id": "C",
+          "label": "Leave them",
+          "what": "Carry on.",
+          "effort": "None",
+          "risk": "The P1 row on the brief stays unfinished.",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-21"]
+        }
+      ],
+      "lean": "B. Two of the three need nothing but a decision to do them; the third needs an answer before it is worth doing.",
+      "blocked_by": ["BQ2-06"],
+      "chosen": "",
+      "source_ids": ["BD-21"]
+    },
+    {
+      "id": "BS-12",
+      "title": "Ingest the two new supplied links into the shared register",
+      "why_now": "This namespace holds all five rows, but the register the site's other pages are generated from still holds three, because this session does not own it. Two files, two sessions apart, both describing the same project, disagreeing about how many products there are.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Ingest them, keeping the two field groups apart",
+          "what": "Add PI-04 and PI-05 to ledger/products.json with the intent fields empty and the observation fields full, exactly as they are recorded here, and add the two new source rows.",
+          "effort": "Small, for whoever owns the register",
+          "risk": "Low, provided the intent fields are copied as empty and not filled from the observation.",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-22"]
+        },
+        {
+          "id": "B",
+          "label": "Leave the register at three",
+          "what": "Let the two namespaces disagree.",
+          "effort": "None",
+          "risk": "A reader who finds the products page sees three items; a reader who finds this board sees five. That is the FB-01/FB-02 failure mode — two surfaces, two numbers, no rule reconciling them.",
+          "reversibility": "Reversible",
+          "source_ids": ["BD-22"]
+        }
+      ],
+      "lean": "A, and it is logged as CR-2 on the shared board rather than done here, because the file is not this session's to change.",
+      "blocked_by": [],
+      "chosen": "",
+      "source_ids": ["BD-22"]
+    }
+  ]
+}

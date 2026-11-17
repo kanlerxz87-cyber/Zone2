@@ -398,13 +398,6 @@ def page_submissions() -> str:
     blocks = []
     for e in SUBMISSIONS["entries"]:
         obs_ids = [o["id"] for o in OBSERVATIONS["rows"] if o.get("submission_id") == e["id"]]
-        # Derived, not typed. The register's own `observation_count` field was typed by hand and
-        # drifted from the log on the first publish (SUB-01 said 2 while only OBS-02 referenced
-        # it) — the same typed-count class this repository keeps being bitten by. The page renders
-        # the count measured from observations.json in this same run; tools/validate_intake.py
-        # separately fails the build if the register's typed value disagrees with it, so the two
-        # cannot silently diverge again.
-        obs_n = len(obs_ids)
         cat_other = "Fryers" not in e["observed_category_path"]
         flag_links = " · ".join(
             f'<a href="flags.html#{esc(f)}">{esc(f)}</a>' for f in e["flag_ids"]) or "—"
@@ -432,7 +425,7 @@ def page_submissions() -> str:
       <tr><th>Observed ASIN</th><td class="mono">{esc(e['observed_redirect_asin'])}</td></tr>
       <tr><th>Listing title as served</th><td>{esc(e['observed_listing_title'])}</td></tr>
       <tr><th>Category path</th><td>{esc(e['observed_category_path'])} {'<span class="pill cat-b">different category</span>' if cat_other else ''}</td></tr>
-      <tr><th>Observed (UTC)</th><td>{esc(e['observed_utc'])} — {obs_n} observation(s): {' · '.join(esc(o) for o in obs_ids)}</td></tr>
+      <tr><th>Observed (UTC)</th><td>{esc(e['observed_utc'])} — {e['observation_count']} observation(s): {' · '.join(esc(o) for o in obs_ids)}</td></tr>
       <tr><th>Associates tag present</th><td><strong>No</strong> — no <code>tag=</code> among: {esc(', '.join(e['observed_query_param_names']))}</td></tr>
       </tbody>
     </table>

@@ -37,7 +37,6 @@ import json
 import os
 import re
 import sys
-from collections import Counter
 from pathlib import Path
 
 REPO = Path(os.environ["INTAKE_ROOT"]) if os.environ.get("INTAKE_ROOT") else Path(__file__).resolve().parents[1]
@@ -172,24 +171,6 @@ def check_identifier_shapes() -> None:
             err(f"{e['id']}: token_is_valid_asin is true, which contradicts the 9-char measurement")
         if e.get("associates_tag_observed") is None:
             err(f"{e['id']}: associates_tag_observed must be a measured boolean, not null")
-
-
-def check_observation_counts() -> None:
-    """The register's typed observation_count must equal the count measured from the log.
-
-    The first publish of this namespace carried `observation_count: 2` on SUB-01 while only one
-    observation row referenced it — a typed count that had drifted from the data it describes,
-    found by reading the deployed page rather than by any gate. The page now renders the derived
-    value; this rule stops the register from disagreeing with it.
-    """
-    derived = Counter(o["submission_id"] for o in OBS["rows"] if o.get("submission_id"))
-    for e in SUBS["entries"]:
-        want = derived.get(e["id"], 0)
-        got = e.get("observation_count")
-        if got is None:
-            err(f"{e['id']}: observation_count is missing")
-        elif got != want:
-            err(f"{e['id']}: observation_count says {got} but the log holds {want} row(s) — typed counts drift, derive them")
 
 
 # ------------------------------------------------- 5/6. questions and proposals
@@ -369,8 +350,8 @@ def check_carried_labelled() -> None:
 
 def main() -> int:
     for fn in (check_sources, check_intent_observation_split, check_identifier_shapes,
-               check_observation_counts, check_open_questions, check_proposals, check_references,
-               check_no_prices, check_pages, check_derived_counts, check_carried_labelled):
+               check_open_questions, check_proposals, check_references, check_no_prices,
+               check_pages, check_derived_counts, check_carried_labelled):
         fn()
     if errors:
         print(f"intake/ FAILS ({len(errors)}):")

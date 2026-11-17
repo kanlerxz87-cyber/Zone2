@@ -31,7 +31,7 @@
       "section": "GATE",
       "what": "Every repository gate replayed on the unmodified base tree",
       "method": "tools/ci_replay.py replays every workflow step in order against this tree, then tests/test_pipeline.py",
-      "value": "43 of 43 workflow steps pass (tools/ci_replay.py), plus 15 of 15 pipeline tests",
+      "value": "{{gate_count}} of {{gate_count}} workflow steps pass (tools/ci_replay.py), plus 15 of 15 pipeline tests",
       "source_kind": "measurement",
       "source_id": "",
       "flag": ""

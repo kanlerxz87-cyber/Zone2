@@ -1,0 +1,147 @@
+{
+  "note": "Line-by-line verification record for the 2026-11-17 five-product brief. Each row is one claim, the method used to test it, the result, and the official page that establishes it. A row whose source is marked carried was not re-read live by this session and says so. Nothing here is inferred from a value that was not read.",
+  "as_of": "2026-11-17",
+  "method": "The sandbox shell has no general outbound network access, so every live fetch on this page was made with the session's page-fetch tool, and every repository fact was measured from the working tree at e58dac0 or read with the GitHub API. Counts printed as numbers in this namespace are measured by tools/build_board.py in the same run and re-measured by tools/validate_board.py.",
+  "rows": [
+    {
+      "id": "VF2-01",
+      "claim": "link.amazon/B04G1MEwY resolves to amazon.com/dp/B0CDY277D3",
+      "method": "Live fetch, 2026-11-17.",
+      "result": "confirmed — fifth independent date (2026-11-13, 14, 15, 16, 17), destination identical, per-link btn_ref new again",
+      "source_ids": ["BD-06", "BD-09"]
+    },
+    {
+      "id": "VF2-02",
+      "claim": "link.amazon/B02NbDxp3 resolves to amazon.com/dp/B09B7SB46R",
+      "method": "Live fetch, 2026-11-17.",
+      "result": "confirmed — fifth independent date",
+      "source_ids": ["BD-07", "BD-10"]
+    },
+    {
+      "id": "VF2-03",
+      "claim": "link.amazon/B00hJ57DV resolves to amazon.com/dp/B08DKYBTPH",
+      "method": "Live fetch, 2026-11-17.",
+      "result": "confirmed — fifth independent date",
+      "source_ids": ["BD-08", "BD-11"]
+    },
+    {
+      "id": "VF2-04",
+      "claim": "link.amazon/B0c8moW59 resolves to amazon.com/dp/B0DHZTCNR5",
+      "method": "Live fetch, 2026-11-17. First observation ever recorded in this repository.",
+      "result": "confirmed — destination is a ThermoMaven instant-read meat thermometer",
+      "source_ids": ["BD-01", "BD-03"]
+    },
+    {
+      "id": "VF2-05",
+      "claim": "link.amazon/B0f3GKalj resolves to amazon.com/dp/B0DZFD6R9Z",
+      "method": "Live fetch, 2026-11-17. First observation ever recorded in this repository.",
+      "result": "confirmed — destination is a CHEF iQ Sense wireless meat thermometer",
+      "source_ids": ["BD-02", "BD-04"]
+    },
+    {
+      "id": "VF2-06",
+      "claim": "A valid, live 10-character ASIN placed in the short-link token slot is rejected by the service",
+      "method": "Control run 2026-11-17: fetched https://link.amazon/B0DHZTCNR5 — the very ASIN that supplied link 4 resolves to, and which resolves normally at /dp/B0DHZTCNR5.",
+      "result": "confirmed — resolved to amzlinks.in/B0DHZTCNR5 and returned '404: File Not Found … You've clicked on an invalid URL.' This is why the 9-character supplied tokens are read as service-issued identifiers rather than as truncated ASINs.",
+      "source_ids": ["BD-05", "BD-03"]
+    },
+    {
+      "id": "VF2-07",
+      "claim": "Amazon defines the ASIN as a 10-digit code, and a qualifying simple text link carries the Associates ID as a URL parameter",
+      "method": "Live fetch of the Associates help page, 2026-11-17; both statements quoted verbatim on board/sources.html.",
+      "result": "confirmed",
+      "source_ids": ["BD-12"]
+    },
+    {
+      "id": "VF2-08",
+      "claim": "An application is reviewed only after at least three qualifying sales within 180 days, personal orders do not qualify, and special-link tags must be embedded in the product links on the declared site",
+      "method": "Live fetch of the Associates application-review page, 2026-11-17; quoted verbatim.",
+      "result": "confirmed — the same page publishes the shape of a tag as 'abcd-20'",
+      "source_ids": ["BD-13"]
+    },
+    {
+      "id": "VF2-09",
+      "claim": "The Operating Agreement requires the statement 'As an Amazon Associate I earn from qualifying purchases.' to appear clearly and conspicuously on the site",
+      "method": "Live fetch of Amazon's own disclosure help page, 2026-11-17; quoted verbatim.",
+      "result": "confirmed — and the site carries the sentence on {{disclosed}} of {{pages}} pages",
+      "source_ids": ["BD-14"]
+    },
+    {
+      "id": "VF2-10",
+      "claim": "Google asks that advertisements or paid placements be marked with rel=\"sponsored\"",
+      "method": "Live fetch of Google Search Central, 2026-11-17; the page states it was last updated 2025-12-10.",
+      "result": "confirmed — {{sponsored_links}} of {{amazon_links}} Amazon-host links in the tree carry it, and the unmarked remainder are evidence citations rather than offers",
+      "source_ids": ["BD-15"]
+    },
+    {
+      "id": "VF2-11",
+      "claim": "Google's human-review factors for a site include stated or implied authorship, and its published example of a page that draws action is an unauthored affiliate article not integrated into the publication",
+      "method": "Live fetch of Google's spam policies, 2026-11-17; quoted verbatim.",
+      "result": "confirmed — and no page on this site names an author or responsible editor",
+      "source_ids": ["BD-16"]
+    },
+    {
+      "id": "VF2-12",
+      "claim": "The two new supplied links appear in no file in this repository before 2026-11-17",
+      "method": "Case-insensitive search across every .json, .html, .md and .py file in the working tree.",
+      "result": "confirmed — zero occurrences of either link before this session wrote them",
+      "source_ids": ["BD-01", "BD-02", "BD-22"]
+    },
+    {
+      "id": "VF2-13",
+      "claim": "No published page carries a real Associates tag",
+      "method": "Measured across every published .html file in the tree.",
+      "result": "confirmed — {{tagged}} of {{pages}} pages; every tag= occurrence in the tree is the placeholder printed in Amazon's own documentation",
+      "source_ids": ["BD-12", "BD-13"]
+    },
+    {
+      "id": "VF2-14",
+      "claim": "Every published page carries the required disclosure sentence",
+      "method": "Measured across every published .html file in the tree.",
+      "result": "confirmed — {{disclosed}} of {{pages}}",
+      "source_ids": ["BD-14"]
+    },
+    {
+      "id": "VF2-15",
+      "claim": "No published page carries a social preview image",
+      "method": "Measured across every published .html file in the tree.",
+      "result": "confirmed — {{og_image}} of {{pages}}, against 108 carrying the rest of the og: block",
+      "source_ids": ["BD-15"]
+    },
+    {
+      "id": "VF2-16",
+      "claim": "No published page carries a Search Console verification tag",
+      "method": "Measured across every published .html file in the tree.",
+      "result": "confirmed — {{sc_pages}} of {{pages}}",
+      "source_ids": ["BD-16"]
+    },
+    {
+      "id": "VF2-17",
+      "claim": "No published page calls an analytics event endpoint",
+      "method": "Measured across every published .html file in the tree.",
+      "result": "confirmed — {{endpoint_pages}} of {{pages}}",
+      "source_ids": ["BD-22"]
+    },
+    {
+      "id": "VF2-18",
+      "claim": "The two new destinations serve the same title on direct arrival as they do through the short link",
+      "method": "Fetched /dp/B0DHZTCNR5 and /dp/B0DZFD6R9Z directly, without the short link, on 2026-11-17, and compared the served titles.",
+      "result": "confirmed — identical in both cases, so the destination is not an artefact of the redirect",
+      "source_ids": ["BD-03", "BD-04"]
+    },
+    {
+      "id": "VF2-19",
+      "claim": "The five destinations fall into two different category nodes",
+      "method": "Read the breadcrumb served by each destination listing, 2026-11-17.",
+      "result": "confirmed — three into Small Appliances › Fryers › Air Fryers; two into Kitchen Utensils & Gadgets › Thermometers & Timers › Meat. Both under Home & Kitchen.",
+      "source_ids": ["BD-03", "BD-04", "BD-09", "BD-10", "BD-11"]
+    },
+    {
+      "id": "VF2-20",
+      "claim": "Every documented check runs from a clean checkout",
+      "method": "tools/ci_replay.py replays all workflow steps in order against the working tree; recorded on this page after the run rather than typed.",
+      "result": "recorded from the run — see the gate line on board/verification.html",
+      "source_ids": ["BD-21"]
+    }
+  ]
+}

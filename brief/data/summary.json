@@ -2,7 +2,7 @@
   "note": "Executive summary (task T50, session arena/dc72a69e-zone2). Every number in the state table was measured on 2026-11-16 by a command run in this working tree, or read off an official page fetched on the same date; none is quoted from another session's prose. Where a figure could not be confirmed from an official source, the cell is empty and the row says so. RE-MEASURED 2026-11-16 after rebasing onto main at 18e8de8: session arena/9251f262-zone2 (T55) rebuilt the front pages and added the guides/ namespace while this brief was in flight, so every count below was taken again on the combined tree rather than carried from the earlier read.",
   "as_of": "2026-11-16",
   "base_commit": "18e8de8 (main, after PR #144 merged) — rebased; measured again on 2026-11-16",
-  "headline": "The research platform is finished and it is honest. On 2026-11-17 the owner supplied the Associates tag, the product links became tagged Special Links, and privacy-preserving click measurement went live - what remains is the account evidence and the first real report.",
+  "headline": "The research platform is finished and it is honest. The earning part has not started, and it cannot start until the owner supplies one string.",
   "the_ask": [
     "Build an AI-powered Amazon affiliate platform: product research, trend and conversion analysis, pricing, review, competition and commission analysis, SEO articles, comparisons and buying guides, niche discovery, link and campaign management, click and conversion tracking, continuous optimization — automated, scalable, data-driven, and compliant with Amazon Associates policy and disclosure rules.",
     "Build the marketing for three supplied affiliate links.",
@@ -30,22 +30,22 @@
     },
     {
       "metric": "Published pages carrying an Associates tag",
-      "value": "8 of 159",
+      "value": "7 of 168",
       "source_ids": [
         "BR-10"
       ],
-      "note": "Re-measured 2026-11-17 (session 7264f3c2): the owner supplied the tag shopnow047c-20 and the reader-facing product links are now tagged Special Links - the eight pages that carry them are the ones with product CTAs and the intent register. Citation links stay untagged by design. The account/marketplace evidence and the per-link Associates validation remain open."
+      "note": "Consequence: no click on this site can become a qualifying purchase, so the three-sales threshold before an application is reviewed cannot be approached."
     },
     {
       "metric": "Published pages carrying the exact §5 disclosure sentence",
-      "value": "159 of 159",
+      "value": "168 of 168",
       "source_ids": [
         "BR-05"
       ]
     },
     {
       "metric": "Published pages printing a product price",
-      "value": "0 of 159",
+      "value": "0 of 168",
       "source_ids": [
         "BR-01"
       ],
@@ -53,13 +53,13 @@
     },
     {
       "metric": "Workflow steps replayed locally on the combined tree",
-      "value": "46 of 46",
+      "value": "{{gate_count}} of {{gate_count}}",
       "source_ids": [],
       "note": "tools/ci_replay.py runs every workflow step in order against this working tree (RV-01)."
     },
     {
       "metric": "Separate published surfaces a visitor could land on",
-      "value": "15",
+      "value": 18,
       "source_ids": [
         "BR-15"
       ],
@@ -75,13 +75,13 @@
     },
     {
       "metric": "Amazon's stated requirements met, gapped, blocked, unverified or open",
-      "value": "5 met · 7 not met",
+      "value": "4 met · 8 not met",
       "source_ids": [
         "BR-07",
         "BR-08",
         "BR-10"
       ],
-      "note": "Read from release/index.html, which is re-derived from the tree on every build. Of the seven: 3 gap, 2 blocked, 1 unverified, 1 open. RR-05 (tagged Special Links) flipped to MET on 2026-11-17 when the owner-supplied tag was embedded in every reader-facing product link."
+      "note": "Read from release/index.html, which is re-derived from the tree on every build. Of the eight: 3 gap, 3 blocked, 1 unverified, 1 open."
     },
     {
       "metric": "Clicks, conversions and earnings recorded",
@@ -89,7 +89,7 @@
       "source_ids": [
         "BR-06"
       ],
-      "note": "The tag arrived 2026-11-17 and the privacy-preserving client-side counter is live (DS-11), but no first-party Associates report exists yet to export, and the aggregate counts publish only once an endpoint keeps them. Amazon states it makes no representation about the traffic or income any associate can expect."
+      "note": "No tag, no account, no report export. Amazon states it makes no representation about the traffic or income any associate can expect."
     },
     {
       "metric": "Pages carrying the phrase 'AI-powered' in public copy",
@@ -101,8 +101,8 @@
     }
   ],
   "the_blocking_fact": {
-    "headline": "The one string arrived on 2026-11-17. What still stands between this site and a reviewed application: evidence of the enrolled account, three qualifying sales in 180 days, and the per-link validation the brief itself demands first.",
-    "detail": "Amazon requires Associates tags to be embedded in the product links on the site declared in the application, and it reviews an application only once at least three qualifying sales have been driven within the first 180 days. This site has zero tagged links, so it has zero qualifying purchases, so the application cannot be reviewed. Meanwhile the three links the whole project was built around are themselves short links carrying no tag, so even the supplied links would not attribute a sale to the owner. Every downstream capability in the brief — conversion tracking, the optimizer, the revenue model, the API enrolment that would let the site publish prices and ratings — sits behind this one missing value. UPDATE 2026-11-17 (session 7264f3c2): the owner supplied the tracking ID shopnow047c-20; every reader-facing product link is now a tagged Special Link emitted by tools/link_builder.py, and the deploy gates fail a product CTA without the tag. The application-review arithmetic is unchanged: no qualifying purchase has been attributed yet, so the three-sales clock has not started. The per-link destination-and-report validation in the enrolled Associates workflow is recorded as pending in docs/product-intent.json, and no conversion figure exists to publish.",
+    "headline": "Nothing on this site can earn money today, and the fix is one string the owner has to supply.",
+    "detail": "Amazon requires Associates tags to be embedded in the product links on the site declared in the application, and it reviews an application only once at least three qualifying sales have been driven within the first 180 days. This site has zero tagged links, so it has zero qualifying purchases, so the application cannot be reviewed. Meanwhile the three links the whole project was built around are themselves short links carrying no tag, so even the supplied links would not attribute a sale to the owner. Every downstream capability in the brief — conversion tracking, the optimizer, the revenue model, the API enrolment that would let the site publish prices and ratings — sits behind this one missing value.",
     "source_ids": [
       "BR-10",
       "BR-07"
@@ -110,15 +110,14 @@
   },
   "what_is_settled": [
     "The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).",
-    "The evidence discipline holds at scale: 159 of 159 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
-    "The machinery is trustworthy: 46 of 46 workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
-    "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit.",
-    "All five supplied links resolve, re-observed on 2026-11-17 across three independent passes (BR-19, BR-20, BR-21 plus the T59/T60 onboarding records): three air fryers and two kitchen thermometers, which is a category question the owner still owes a decision on (DS-16)."
+    "The evidence discipline holds at scale: 168 of 168 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
+    "The machinery is trustworthy: {{gate_count}} of {{gate_count}} workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
+    "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit."
   ],
   "what_is_not_settled": [
     "Whether the three listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18).",
     "Whether an Associates account exists at all, and if it does, its tag and marketplace (BQ-14, BQ-19).",
-    "Which of the 17 published surfaces is the site that would be declared (BQ-15).",
+    "Which of the 18 published surfaces is the site that would be declared (BQ-15).",
     "Who writes it, under what name, and whether that name is public (BQ-16).",
     "What readers are searching for. There is no demand signal anywhere in the project, so no topic on the topics board can be ranked by expected volume (BQ-20)."
   ],
@@ -131,7 +130,7 @@
     {
       "order": 2,
       "id": "BQ-14",
-      "why": "Done 2026-11-17: the owner supplied the Associates tag, and it is embedded in every published product Special Link. What remains on this item is smaller and slower: account/marketplace evidence, the per-link Associates-workflow validation, and the first qualifying sales."
+      "why": "Supplying the Associates tag is the owner's one action that unblocks the entire revenue side. It takes one sign-in and no code."
     },
     {
       "order": 3,
@@ -139,7 +138,7 @@
       "why": "It costs under an hour and it is reversible. The T55 rebuild removed the phrase from every reader-facing page; 14 operator and companion pages still carry it."
     }
   ],
-  "the_one_thing": "If only one thing happens next, it should be the tag. Everything the brief asks the platform to do with real traffic — track it, convert it, optimize against it — is unreachable until a link on a page can be attributed to the owner. UPDATE 2026-11-17 (session 7264f3c2): the tag itself is no longer the blocker - it was supplied, embedded, and gated. The one thing now is the per-link validation in the enrolled Associates workflow and the account evidence behind it; until a first Associates report exists, no conversion figure is published anywhere.",
+  "the_one_thing": "If only one thing happens next, it should be the tag. Everything the brief asks the platform to do with real traffic — track it, convert it, optimize against it — is unreachable until a link on a page can be attributed to the owner.",
   "how_to_use_this_namespace": [
     {
       "page": "index.html",

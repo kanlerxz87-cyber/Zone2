@@ -393,3 +393,53 @@ identifier and nothing per person, under the owner decision recorded on DS-11. C
 the visitor's own browser until the owner deploys the endpoint (`tools/tracking_schema.sql` is the
 contract); nothing is transmitted and no count is published until then. Conversions still come only
 from Associates reporting (EV-04, blocked).
+
+### Submitted-link intake — `intake/` (T60, session `arena/613900e6-zone2`, 2026-11-17; renumbered from T62)
+
+**2026-11-17 (T62, session `1539a895`)** — see the addendum in [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md)
+
+resolve to. Links 4 and 5 were added on 2026-11-17 (T62); their destination specifications are sourced to the
+
+
+## The decision board (`board/`) — the five-product brief, 2026-11-17
+
+Added by session `arena/1bfbc559-zone2` (T62). The 2026-11-17 brief named **five** products;
+the register held **three**. The two new ones — `link.amazon/B0c8moW59` and
+`link.amazon/B0f3GKalj` — appear in no file in this repository before that date, and both
+resolve to **meat thermometers**, not air fryers. The brief also supplied a tracking ID
+(`shopnow047c-20`) for the first time in the project's history.
+
+Nine generated pages, built by `tools/build_board.py` from `board/data/*.json`, gated by
+`tools/validate_board.py`, negative-tested by `tools/test_board.py` (19 injected defects,
+each must fire):
+
+| Page | What it holds |
+|---|---|
+| `board/index.html` | Executive summary and the three decisions that gate everything else |
+| `board/products.html` | The product-intent confirmation record — five rows, intent and observation held in separate field groups that never merge |
+| `board/suggestions.html` | Twelve suggestions, two or three costed options each, **nothing applied** |
+| `board/questions.html` | 17 questions: 3 answered and sourced, 14 left empty on purpose, each with the action that would close it |
+| `board/requirements.html` | Every row in the brief, checked against the tree rather than against the brief's own status word |
+| `board/topics.html` | Ten question-shaped article proposals, deliberately unordered |
+| `board/sources.html` | The source register — live reads and carried quotes labelled apart |
+| `board/verification.html` | The line-by-line verification record — each claim with its method, result and source |
+| `board/flagged.html` | 13 irregularities |
+
+Three rules are specific to this namespace and enforced by the gate: **nothing is chosen**
+(every suggestion's `chosen` field is empty), **an open question carries no answer**, and
+**an intent field may never borrow a value from the observation group**.
+
+Every count printed on these pages is measured from the tree in the same run that writes
+them and re-measured by the gate. `board/` is excluded from its own measurement — a register
+that measures itself measures the wrong thing.
+
+```bash
+python3 tools/build_board.py            # write the nine pages (also replays the CI gates)
+python3 tools/build_board.py --check    # fail if committed board/ is stale
+python3 tools/validate_board.py         # the gate
+python3 tools/test_board.py             # prove every check fires
+```
+
+**Nothing on the board is implemented.** See `board/flagged.html` for the 13 irregularities,
+four of them high severity — including FL-13: the rule that is supposed to stop a page
+printing a product price never fires, in all four copies of it in this repository.

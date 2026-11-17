@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product-intent confirmation record · Counter Notes decision board</title>
+<meta name="description" content="Five supplied affiliate links: the intended product fields left empty on purpose, and the observed redirect targets recorded separately, never merged.">
+<link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/board/products.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Counter Notes">
+<meta property="og:title" content="Product-intent confirmation record · Counter Notes decision board">
+<meta property="og:description" content="Five supplied affiliate links: the intended product fields left empty on purpose, and the observed redirect targets recorded separately, never merged.">
+<meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/board/products.html">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="assets/board.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+  <div class="mast-in">
+    <a class="brand" href="../index.html">Counter Notes<span>Decision board · 2026-11-17</span></a>
+    <nav class="top" aria-label="Sections"><a href="index.html">Executive summary</a><a href="products.html" aria-current="page">Product intent</a><a href="suggestions.html">Choose a path</a><a href="questions.html">Known &amp; unknown</a><a href="requirements.html">Requirements trace</a><a href="topics.html">Topics</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged</a></nav>
+  </div>
+</header>
+<div class="disclosure">
+  <div class="wrap">
+    <strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases. Product links on this site carry
+    no Associates tag yet, so nothing bought through them can be attributed — see
+    <a href="flagged.html#FL-02">FL-02</a>.
+  </div>
+</div>
+<main id="main" class="wrap">
+
+<p class="eyebrow">Product-intent confirmation record</p>
+<h1>Two questions, two field groups, never merged</h1>
+<p class="standfirst">The brief asks for a record that keeps the intended product — ASIN, official
+listing URL, confirmation date, source — apart from what the supplied link was observed to do. That is
+a distinction worth keeping: one is what someone meant, the other is what a URL did. On all five rows
+the first group is empty and the second is full.</p>
+
+<div class="card">
+<h4 style="margin-top:0">The rule, and why the emptiness is the finding</h4>
+<p>Product-intent confirmation record, built to the two-field rule the 2026-11-17 brief sets out: the INTENDED product (ASIN, official listing URL, confirmation date, source) and the OBSERVED redirect target are two different questions and are stored in two different objects that are never merged. The intended-product fields are empty on every row, because no value has been supplied or confirmed for them: the brief gives a link, not an ASIN, and each supplied token is 9 characters where Amazon&#x27;s own definition of an ASIN is &#x27;the 10-digit code that Amazon uses to denote specific products&#x27; (BD-12, read live 2026-11-17). A filled-in intended-ASIN field here would be an inference, so it is left blank and the row is marked UNVERIFIED. The observation fields are full: each supplied URL does resolve, reproducibly, to one live listing, and that is a fact about the link&#x27;s behaviour, not about the product&#x27;s identity.</p>
+<p><strong>The definition every token is measured against:</strong> “ASIN is the 10-digit code that Amazon uses to denote specific products.”
+— <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" rel="nofollow noopener" target="_blank">Amazon’s own help page</a>, read live 2026-11-17.
+All five supplied tokens are 9 characters. A control confirms the two are different namespaces rather
+than a truncation: a valid, live 10-character ASIN placed in the same slot returns the service's
+“invalid URL” page. <span class="src"><a href="sources.html#BD-05" title="CONTROL — a valid, live 10-character ASIN placed in the short-link token slot">BD-05</a> <a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a></span></p>
+</div>
+
+<h2>The five rows</h2>
+
+<section class="card" id="PI-01" style="margin-bottom:18px">
+  <div class="head" style="padding:15px 18px 12px;border-bottom:1px solid var(--line-soft)">
+    <p class="eyebrow" style="margin-bottom:4px">PI-01 · Submitted item 1</p>
+    <h3 style="margin:0 0 6px"><a href="https://link.amazon/B04G1MEwY" rel="sponsored nofollow noopener" target="_blank">https://link.amazon/B04G1MEwY</a></h3>
+    <p class="small" style="margin:0">Token as given: <code>B04G1MEwY</code> ·
+      9 characters ·
+      <span class="pill pill--blank">does not match the published ASIN definition</span>
+      <span class="pill pill--blank">UNVERIFIED</span>
+    </p>
+  </div>
+  <div style="padding:14px 18px 16px">
+    <div class="fieldgroup fieldgroup--intent">
+      <h4>Intended product — the four fields that travel together</h4>
+      <dl>
+        <dt>Intended ASIN</dt><dd class="blank">empty</dd>
+        <dt>Official listing URL</dt><dd class="blank">empty</dd>
+        <dt>Confirmation date</dt><dd class="blank">empty</dd>
+        <dt>Source of confirmation</dt><dd class="blank">empty</dd>
+      </dl>
+    </div>
+    <div class="fieldgroup fieldgroup--observed">
+      <h4>Observed redirect target — a separate field group, never merged into the one above</h4>
+      <dl>
+        <dt>Resolved URL</dt><dd class="small"><a href="https://www.amazon.com/dp/B0CDY277D3?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-1ffea10d1d3c7fc5&amp;channelId=704&amp;plpRedirect=mhFallback" rel="sponsored nofollow noopener" target="_blank">https://www.amazon.com/dp/B0CDY277D3?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-1ffea10d1d3c7fc5&amp;channelId=704&amp;plpRedirect=mhFallback</a></dd>
+        <dt>ASIN at the destination</dt><dd><code>B0CDY277D3</code></dd>
+        <dt>Listing title as served</dt><dd>CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black</dd>
+        <dt>Category path as served</dt><dd>Home &amp; Kitchen › Kitchen &amp; Dining › Small Appliances › Fryers › Air Fryers</dd>
+        <dt>Observed</dt><dd>2026-11-17 by session 1bfbc559</dd>
+        <dt>Earlier observations</dt><dd>2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16</dd>
+        <dt>Carries an Associates tag</dt><dd>no</dd>
+      </dl>
+    </div>
+    <p class="small" style="margin:0 0 6px"><strong>Why the intent fields are empty.</strong>
+      No ASIN was supplied and none has been confirmed. The token is 9 characters, so it fails the published ASIN definition (BD-12), and https://www.amazon.com/dp/B04G1MEwY returns Amazon&#x27;s not-found page. The one route that would close this — reading the item back inside Associates Central, or a Creators API GetItems call against the account — is behind a sign-in this workspace does not hold.</p>
+    <p class="small" style="margin:0">Sources: <span class="src"><a href="sources.html#BD-06" title="Supplied affiliate short link 1 — re-read on a fifth date">BD-06</a> <a href="sources.html#BD-09" title="Destination listing observed for supplied link 1 — B0CDY277D3">BD-09</a> <a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a></span></p>
+  </div>
+</section>
+<section class="card" id="PI-02" style="margin-bottom:18px">
+  <div class="head" style="padding:15px 18px 12px;border-bottom:1px solid var(--line-soft)">
+    <p class="eyebrow" style="margin-bottom:4px">PI-02 · Submitted item 2</p>
+    <h3 style="margin:0 0 6px"><a href="https://link.amazon/B02NbDxp3" rel="sponsored nofollow noopener" target="_blank">https://link.amazon/B02NbDxp3</a></h3>
+    <p class="small" style="margin:0">Token as given: <code>B02NbDxp3</code> ·
+      9 characters ·
+      <span class="pill pill--blank">does not match the published ASIN definition</span>
+      <span class="pill pill--blank">UNVERIFIED</span>
+    </p>
+  </div>
+  <div style="padding:14px 18px 16px">
+    <div class="fieldgroup fieldgroup--intent">
+      <h4>Intended product — the four fields that travel together</h4>
+      <dl>
+        <dt>Intended ASIN</dt><dd class="blank">empty</dd>
+        <dt>Official listing URL</dt><dd class="blank">empty</dd>
+        <dt>Confirmation date</dt><dd class="blank">empty</dd>
+        <dt>Source of confirmation</dt><dd class="blank">empty</dd>
+      </dl>
+    </div>
+    <div class="fieldgroup fieldgroup--observed">
+      <h4>Observed redirect target — a separate field group, never merged into the one above</h4>
+      <dl>
+        <dt>Resolved URL</dt><dd class="small"><a href="https://www.amazon.com/dp/B09B7SB46R?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-6af2110975721338&amp;channelId=704&amp;plpRedirect=mhFallback" rel="sponsored nofollow noopener" target="_blank">https://www.amazon.com/dp/B09B7SB46R?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-6af2110975721338&amp;channelId=704&amp;plpRedirect=mhFallback</a></dd>
+        <dt>ASIN at the destination</dt><dd><code>B09B7SB46R</code></dd>
+        <dt>Listing title as served</dt><dd>Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included</dd>
+        <dt>Category path as served</dt><dd>Home &amp; Kitchen › Kitchen &amp; Dining › Small Appliances › Fryers › Air Fryers</dd>
+        <dt>Observed</dt><dd>2026-11-17 by session 1bfbc559</dd>
+        <dt>Earlier observations</dt><dd>2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16</dd>
+        <dt>Carries an Associates tag</dt><dd>no</dd>
+      </dl>
+    </div>
+    <p class="small" style="margin:0 0 6px"><strong>Why the intent fields are empty.</strong>
+      As PI-01. No ASIN supplied; the token is 9 characters; /dp/B02NbDxp3 returns the not-found page.</p>
+    <p class="small" style="margin:0">Sources: <span class="src"><a href="sources.html#BD-07" title="Supplied affiliate short link 2 — re-read on a fifth date">BD-07</a> <a href="sources.html#BD-10" title="Destination listing observed for supplied link 2 — B09B7SB46R">BD-10</a> <a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a></span></p>
+  </div>
+</section>
+<section class="card" id="PI-03" style="margin-bottom:18px">
+  <div class="head" style="padding:15px 18px 12px;border-bottom:1px solid var(--line-soft)">
+    <p class="eyebrow" style="margin-bottom:4px">PI-03 · Submitted item 3</p>
+    <h3 style="margin:0 0 6px"><a href="https://link.amazon/B00hJ57DV" rel="sponsored nofollow noopener" target="_blank">https://link.amazon/B00hJ57DV</a></h3>
+    <p class="small" style="margin:0">Token as given: <code>B00hJ57DV</code> ·
+      9 characters ·
+      <span class="pill pill--blank">does not match the published ASIN definition</span>
+      <span class="pill pill--blank">UNVERIFIED</span>
+    </p>
+  </div>
+  <div style="padding:14px 18px 16px">
+    <div class="fieldgroup fieldgroup--intent">
+      <h4>Intended product — the four fields that travel together</h4>
+      <dl>
+        <dt>Intended ASIN</dt><dd class="blank">empty</dd>
+        <dt>Official listing URL</dt><dd class="blank">empty</dd>
+        <dt>Confirmation date</dt><dd class="blank">empty</dd>
+        <dt>Source of confirmation</dt><dd class="blank">empty</dd>
+      </dl>
+    </div>
+    <div class="fieldgroup fieldgroup--observed">
+      <h4>Observed redirect target — a separate field group, never merged into the one above</h4>
+      <dl>
+        <dt>Resolved URL</dt><dd class="small"><a href="https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-573e21e39d4d4c1c&amp;channelId=704&amp;plpRedirect=mhFallback&amp;th=1" rel="sponsored nofollow noopener" target="_blank">https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;btn_ref=srctok-573e21e39d4d4c1c&amp;channelId=704&amp;plpRedirect=mhFallback&amp;th=1</a></dd>
+        <dt>ASIN at the destination</dt><dd><code>B08DKYBTPH</code></dd>
+        <dt>Listing title as served</dt><dd>Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel</dd>
+        <dt>Category path as served</dt><dd>Home &amp; Kitchen › Kitchen &amp; Dining › Small Appliances › Fryers › Air Fryers</dd>
+        <dt>Observed</dt><dd>2026-11-17 by session 1bfbc559</dd>
+        <dt>Earlier observations</dt><dd>2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16</dd>
+        <dt>Carries an Associates tag</dt><dd>no</dd>
+      </dl>
+    </div>
+    <p class="small" style="margin:0 0 6px"><strong>Why the intent fields are empty.</strong>
+      As PI-01. No ASIN supplied; the token is 9 characters; /dp/B00hJ57DV returns the not-found page.</p>
+    <p class="small" style="margin:0">Sources: <span class="src"><a href="sources.html#BD-08" title="Supplied affiliate short link 3 — re-read on a fifth date">BD-08</a> <a href="sources.html#BD-11" title="Destination listing observed for supplied link 3 — B08DKYBTPH">BD-11</a> <a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a></span></p>
+  </div>
+</section>
+<section class="card" id="PI-04" style="margin-bottom:18px">
+  <div class="head" style="padding:15px 18px 12px;border-bottom:1px solid var(--line-soft)">
+    <p class="eyebrow" style="margin-bottom:4px">PI-04 · Submitted item 4 — first recorded anywhere in this repository by this session</p>
+    <h3 style="margin:0 0 6px"><a href="https://link.amazon/B0c8moW59" rel="sponsored nofollow noopener" target="_blank">https://link.amazon/B0c8moW59</a></h3>
+    <p class="small" style="margin:0">Token as given: <code>B0c8moW59</code> ·
+      9 characters ·
+      <span class="pill pill--blank">does not match the published ASIN definition</span>
+      <span class="pill pill--blank">UNVERIFIED</span>
+    </p>
+  </div>
+  <div style="padding:14px 18px 16px">
+    <div class="fieldgroup fieldgroup--intent">
+      <h4>Intended product — the four fields that travel together</h4>
+      <dl>
+        <dt>Intended ASIN</dt><dd class="blank">empty</dd>
+        <dt>Official listing URL</dt><dd class="blank">empty</dd>
+        <dt>Confirmation date</dt><dd class="blank">empty</dd>
+        <dt>Source of confirmation</dt><dd class="blank">empty</dd>
+      </dl>
+    </div>
+    <div class="fieldgroup fieldgroup--observed">
+      <h4>Observed redirect target — a separate field group, never merged into the one above</h4>
+      <dl>
+        <dt>Resolved URL</dt><dd class="small"><a href="https://www.amazon.com/dp/B0DHZTCNR5?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;_encoding=UTF8&amp;sp_csd=d2lkZ2V0TmFtZT1zcF9waG9uZV9ob21lcGFnZV9ibGVuZGVk&amp;language=en_US&amp;content-id=amzn1.sym.4582c56b-139d-4168-9db2-822c68889360&amp;ie=UTF8&amp;btn_ref=srctok-633f9dc54185b50f&amp;channelId=500&amp;plpRedirect=mhFallback" rel="sponsored nofollow noopener" target="_blank">https://www.amazon.com/dp/B0DHZTCNR5?lv=shuf&amp;btn_type=ss&amp;gaOptInStatus=true&amp;_encoding=UTF8&amp;sp_csd=d2lkZ2V0TmFtZT1zcF9waG9uZV9ob21lcGFnZV9ibGVuZGVk&amp;language=en_US&amp;content-id=amzn1.sym.4582c56b-139d-4168-9db2-822c68889360&amp;ie=UTF8&amp;btn_ref=srctok-633f9dc54185b50f&amp;channelId=500&amp;plpRedirect=mhFallback</a></dd>
+        <dt>ASIN at the destination</dt><dd><code>B0DHZTCNR5</code></dd>
+        <dt>Listing title as served</dt><dd>ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&amp;NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black</dd>
+        <dt>Category path as served</dt><dd>Home &amp; Kitchen › Kitchen &amp; Dining › Kitchen Utensils &amp; Gadgets › Thermometers &amp; Timers › Meat</dd>
+        <dt>Observed</dt><dd>2026-11-17 by session 1bfbc559</dd>
+        <dt>Earlier observations</dt><dd>none — first observation</dd>
+        <dt>Carries an Associates tag</dt><dd>no</dd>
+      </dl>
+    </div>
+    <p class="small" style="margin:0 0 6px"><strong>Why the intent fields are empty.</strong>
+      As PI-01, and additionally: this link appears in no file in this repository before 2026-11-17 (verified by a case-insensitive grep across every .json, .html, .md and .py in the tree), so there is not even a prior observation to lean on. The brief supplies the URL and nothing else.</p>
+    <p class="small" style="margin:0">Sources: <span class="src"><a href="sources.html#BD-01" title="Supplied affiliate short link 4 (as provided in the 2026-11-17 brief)">BD-01</a> <a href="sources.html#BD-03" title="Destination listing observed for supplied link 4 — B0DHZTCNR5">BD-03</a> <a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a></span></p>
+  </div>
+</section>
+<section class="card" id="PI-05" style="margin-bottom:18px">
+  <div class="head" style="padding:15px 18px 12px;border-bottom:1px solid var(--line-soft)">
+    <p class="eyebrow" style="margin-bottom:4px">PI-05 · Submitted item 5 — first recorded anywhere in this repository by this session</p>
+    <h3 style="margin:0 0 6px"><a href="https://link.amazon/B0f3GKalj" rel="sponsored nofollow noopener" target="_blank">https://link.amazon/B0f3GKalj</a></h3>
+    <p class="small" style="margin:0">Token as given: <code>B0f3GKalj</code> ·
+      9 characters ·
+      <span class="pill pill--blank">does not match the published ASIN definition</span>
+      <span class="pill pill--blank">UNVERIFIED</span>
+    </p>
+  </div>
+  <div style="padding:14px 18px 16px">
+    <div class="fieldgroup fieldgroup--intent">
+      <h4>Intended product — the four fields that travel together</h4>
+      <dl>
+        <dt>Intended ASIN</dt><dd class="blank">empty</dd>
+        <dt>Official listing URL</dt><dd class="blank">empty</dd>
+        <dt>Confirmation date</dt><dd class="blank">empty</dd>
+        <dt>Source of confirmation</dt><dd class="blank">empty</dd>
+      </dl>
+    </div>
+    <div class="fieldgroup fieldgroup--observed">
+      <h4>Observed redirect target — a separate field group, never merged into the one above</h4>
+      <dl>
+        <dt>Resolved URL</dt><dd class="small"><a href="https://www.amazon.com/dp/B0DZFD6R9Z?lv=shuf&amp;sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&amp;btn_type=ss&amp;gaOptInStatus=true&amp;language=en_US&amp;btn_ref=srctok-101536bcd8e0be02&amp;channelId=500&amp;plpRedirect=mhFallback&amp;th=1" rel="sponsored nofollow noopener" target="_blank">https://www.amazon.com/dp/B0DZFD6R9Z?lv=shuf&amp;sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&amp;btn_type=ss&amp;gaOptInStatus=true&amp;language=en_US&amp;btn_ref=srctok-101536bcd8e0be02&amp;channelId=500&amp;plpRedirect=mhFallback&amp;th=1</a></dd>
+        <dt>ASIN at the destination</dt><dd><code>B0DZFD6R9Z</code></dd>
+        <dt>Listing title as served</dt><dd>CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3</dd>
+        <dt>Category path as served</dt><dd>Home &amp; Kitchen › Kitchen &amp; Dining › Kitchen Utensils &amp; Gadgets › Thermometers &amp; Timers › Meat</dd>
+        <dt>Observed</dt><dd>2026-11-17 by session 1bfbc559</dd>
+        <dt>Earlier observations</dt><dd>none — first observation</dd>
+        <dt>Carries an Associates tag</dt><dd>no</dd>
+      </dl>
+    </div>
+    <p class="small" style="margin:0 0 6px"><strong>Why the intent fields are empty.</strong>
+      As PI-04. No file in this repository mentions this link before 2026-11-17.</p>
+    <p class="small" style="margin:0">Sources: <span class="src"><a href="sources.html#BD-02" title="Supplied affiliate short link 5 (as provided in the 2026-11-17 brief)">BD-02</a> <a href="sources.html#BD-04" title="Destination listing observed for supplied link 5 — B0DZFD6R9Z">BD-04</a> <a href="sources.html#BD-12" title="How do I build a simple text link to a specific item on Amazon?">BD-12</a></span></p>
+  </div>
+</section>
+
+<h2>What the five say together</h2>
+<div class="card card--warn">
+<p>Three of the five resolve into the Air Fryers category node and two resolve into Meat Thermometers. Every page this repository has published about products — the comparison, the buying guide, the chooser, the counter-space analysis — is about air fryers only. The two newest products have no page, no category pillar and no comparison row anywhere on the site.</p>
+<p class="small" style="margin:0">Basis: The category path served by each destination listing, read live 2026-11-17 (BD-03, BD-04, BD-09, BD-10, BD-11)..
+This is a statement about what the links <em>do</em>, not about what the submitter
+<em>meant</em> — which is exactly the separation this page is built to keep.
+<span class="src"><a href="sources.html#BD-03" title="Destination listing observed for supplied link 4 — B0DHZTCNR5">BD-03</a> <a href="sources.html#BD-04" title="Destination listing observed for supplied link 5 — B0DZFD6R9Z">BD-04</a> <a href="sources.html#BD-09" title="Destination listing observed for supplied link 1 — B0CDY277D3">BD-09</a> <a href="sources.html#BD-10" title="Destination listing observed for supplied link 2 — B09B7SB46R">BD-10</a> <a href="sources.html#BD-11" title="Destination listing observed for supplied link 3 — B08DKYBTPH">BD-11</a></span></p>
+</div>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <a href="../index.html">Front page</a>
+      <a href="../marketing/comparison.html">Head-to-head</a>
+      <a href="../marketing/buying-guide.html">Which to buy</a>
+      <a href="../guides/index.html">Guides</a>
+      <a href="../brief/index.html">Design brief</a>
+      <a href="../suggestions.html">Suggestion board</a>
+      <a href="../questions.html">Open questions</a>
+      <a href="../flagged.html">Flagged for review</a>
+      <a href="../COORDINATION.md">Task board</a>
+    </nav>
+    <p><strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Part of the Zone2 project register. Everything on these pages is either measured from
+    this repository or read from an official source and cited; a value no official source
+    states is left blank and flagged rather than filled in.
+    Built by <code>tools/build_board.py</code> — a hand-edit here will not survive the next run.</p>
+  </div>
+</footer>
+</body>
+</html>

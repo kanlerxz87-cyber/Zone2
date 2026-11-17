@@ -1,0 +1,231 @@
+{
+  "note": "Source register for the 2026-11-17 five-product brief (session 1bfbc559). Every row in every other board/data file cites one of these ids. A row marked live_2026_11_17 was fetched and read by this session on that date; a row marked carried is quoted from the repository's own register (ledger/sources.json) and was NOT re-fetched by this session, and says so. No value anywhere in this namespace is sourced to a page this register does not list.",
+  "accessed_utc": "2026-11-17",
+  "sources": [
+    {
+      "id": "BD-01",
+      "url": "https://link.amazon/B0c8moW59",
+      "title": "Supplied affiliate short link 4 (as provided in the 2026-11-17 brief)",
+      "publisher": "Amazon (link.amazon short-link service)",
+      "kind": "supplied",
+      "status": "live_2026_11_17",
+      "quote": "GET ended at https://www.amazon.com/dp/B0DHZTCNR5?lv=shuf&btn_type=ss&gaOptInStatus=true&_encoding=UTF8&sp_csd=...&btn_ref=srctok-633f9dc54185b50f&channelId=500&plpRedirect=mhFallback — page title served: \"Amazon.com: ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black : Home & Kitchen\"",
+      "used_for": ["PI-04 observed redirect target", "VF2-04"]
+    },
+    {
+      "id": "BD-02",
+      "url": "https://link.amazon/B0f3GKalj",
+      "title": "Supplied affiliate short link 5 (as provided in the 2026-11-17 brief)",
+      "publisher": "Amazon (link.amazon short-link service)",
+      "kind": "supplied",
+      "status": "live_2026_11_17",
+      "quote": "GET ended at https://www.amazon.com/dp/B0DZFD6R9Z?lv=shuf&sbo=...&btn_type=ss&gaOptInStatus=true&language=en_US&btn_ref=srctok-101536bcd8e0be02&channelId=500&plpRedirect=mhFallback&th=1 — page title served: \"Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen\"",
+      "used_for": ["PI-05 observed redirect target", "VF2-05"]
+    },
+    {
+      "id": "BD-03",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "title": "Destination listing observed for supplied link 4 — B0DHZTCNR5",
+      "publisher": "Amazon",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "Title served on direct arrival: \"Amazon.com: ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black : Home & Kitchen\". Breadcrumb served: Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat.",
+      "used_for": ["PI-04 observed listing", "RQ-21", "TP-"]
+    },
+    {
+      "id": "BD-04",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "title": "Destination listing observed for supplied link 5 — B0DZFD6R9Z",
+      "publisher": "Amazon",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "Title served on direct arrival: \"Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen\". Breadcrumb served: Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat.",
+      "used_for": ["PI-05 observed listing", "RQ-21", "TP-"]
+    },
+    {
+      "id": "BD-05",
+      "url": "https://link.amazon/B0DHZTCNR5",
+      "title": "CONTROL — a valid, live 10-character ASIN placed in the short-link token slot",
+      "publisher": "Amazon (amzlinks.in)",
+      "kind": "control",
+      "status": "live_2026_11_17",
+      "quote": "GET https://link.amazon/B0DHZTCNR5 resolved to https://amzlinks.in/B0DHZTCNR5 and returned \"404: File Not Found … Uh oh, it looks like something went wrong. You've clicked on an invalid URL.\" The same 10-character code resolves normally at https://www.amazon.com/dp/B0DHZTCNR5 (BD-03).",
+      "used_for": ["VF2-06", "the reason the 9-character supplied tokens are not read as truncated ASINs"]
+    },
+    {
+      "id": "BD-06",
+      "url": "https://link.amazon/B04G1MEwY",
+      "title": "Supplied affiliate short link 1 — re-read on a fifth date",
+      "publisher": "Amazon (link.amazon short-link service)",
+      "kind": "supplied",
+      "status": "live_2026_11_17",
+      "quote": "GET ended at https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-1ffea10d1d3c7fc5&channelId=704&plpRedirect=mhFallback — destination unchanged from the 2026-11-13, 11-14, 11-15 and 11-16 observations; btn_ref is new again, as recorded in flag F-21.",
+      "used_for": ["PI-01 observed redirect target", "VF2-01"]
+    },
+    {
+      "id": "BD-07",
+      "url": "https://link.amazon/B02NbDxp3",
+      "title": "Supplied affiliate short link 2 — re-read on a fifth date",
+      "publisher": "Amazon (link.amazon short-link service)",
+      "kind": "supplied",
+      "status": "live_2026_11_17",
+      "quote": "GET ended at https://www.amazon.com/dp/B09B7SB46R?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-6af2110975721338&channelId=704&plpRedirect=mhFallback — page title served: \"Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen\".",
+      "used_for": ["PI-02 observed redirect target", "VF2-02"]
+    },
+    {
+      "id": "BD-08",
+      "url": "https://link.amazon/B00hJ57DV",
+      "title": "Supplied affiliate short link 3 — re-read on a fifth date",
+      "publisher": "Amazon (link.amazon short-link service)",
+      "kind": "supplied",
+      "status": "live_2026_11_17",
+      "quote": "GET ended at https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-573e21e39d4d4c1c&channelId=704&plpRedirect=mhFallback&th=1 — page title served: \"Amazon.com: Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen\".",
+      "used_for": ["PI-03 observed redirect target", "VF2-03"]
+    },
+    {
+      "id": "BD-09",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "title": "Destination listing observed for supplied link 1 — B0CDY277D3",
+      "publisher": "Amazon",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "Title served: \"CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black\". Breadcrumb: Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers.",
+      "used_for": ["PI-01 observed listing"]
+    },
+    {
+      "id": "BD-10",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "title": "Destination listing observed for supplied link 2 — B09B7SB46R",
+      "publisher": "Amazon",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "Title served: \"Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included\". Breadcrumb: Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers.",
+      "used_for": ["PI-02 observed listing"]
+    },
+    {
+      "id": "BD-11",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "title": "Destination listing observed for supplied link 3 — B08DKYBTPH",
+      "publisher": "Amazon",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "Title served: \"Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel\". Breadcrumb: Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers.",
+      "used_for": ["PI-03 observed listing"]
+    },
+    {
+      "id": "BD-12",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+      "title": "How do I build a simple text link to a specific item on Amazon?",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "\"So if you need to build a simple text link to a specific item on Amazon.com, here is the link format you need to use: http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID … This link format qualifies for the direct link bonus.\" On the ASIN: \"ASIN is the 10-digit code that Amazon uses to denote specific products. It is short for 'Amazon.com Standard Item Number.' Every item in our catalog has a unique ASIN.\" On the identifier: \"YOURASSOCIATEID is the unique ID that is used to identify your Associates account, automatically generated when you apply for the Associates Programme.\"",
+      "used_for": ["the ASIN definition the product-intent record measures each supplied token against", "the tag slot the submitted tracking ID would occupy", "VF2-07", "BQ2-02"]
+    },
+    {
+      "id": "BD-13",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "title": "Associates Program — Application Review Process",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "\"After you sign up, our Associates team will check your application once you've driven qualified sales (we require at least three within the first 180 days). Please note that personal orders do not qualify.\" … \"All Sites must have robust original content (even when advertising is removed) – a good rule of thumb is at least 10 posts.\" … \"Content on your website must be recent (generally within the last 60 days).\" … and on the tag itself: \"Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application.\"",
+      "used_for": ["the published shape of a special-link tag, which the submitted tracking ID matches", "BQ2-01", "BS-01", "VF2-08"]
+    },
+    {
+      "id": "BD-14",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98",
+      "title": "Why do I have to identify myself as an Associate? How should I do this on social media?",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "\"To meet the Associate Program's requirements, you must (1) include a legally compliant disclosure with your links and (2) identify yourself on your Site as an Amazon Associate with the language required by the Operating Agreement.\" … \"the Operating Agreement requires that the following statement clearly and conspicuously appears on your Site: 'As an Amazon Associate I earn from qualifying purchases.'\" … a link-level disclosure must be \"Clear\" and \"Conspicuous … placed near any affiliate link or product review in a location that customers will notice easily. They shouldn't have to hunt for it.\"",
+      "used_for": ["RQ-30", "BS-06", "VF2-09"]
+    },
+    {
+      "id": "BD-15",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "title": "Qualify your outbound links to Google (rel=\"sponsored\")",
+      "publisher": "Google (Google Search Central documentation)",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "page_stated_update": "2025-12-10",
+      "quote": "\"Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.\" Multiple values are permitted: \"You may specify multiple rel values as a space- or comma-separated list.\"",
+      "used_for": ["RQ-05", "BS-04", "VF2-10"]
+    },
+    {
+      "id": "BD-16",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "title": "Spam policies for Google web search — site reputation policy, human-review factors",
+      "publisher": "Google (Google Search Central documentation)",
+      "kind": "official",
+      "status": "live_2026_11_17",
+      "quote": "On what a human review looks at: \"How the content is presented, meaning are the graphic design, formatting, typography and UX features of the content consistent with the host domain? … The quality of the content … Its stated or implied authorship, meaning, is there an explicit acknowledgement of ownership or responsibility for the content? … Does the content appear on multiple other sites in identical or near-identical form\". And the worked example of what draws action: \"Likely to take action: unauthored affiliate article not integrated in publication … Neither the author of the article nor the responsible editor is identified, nor are there disclaimers about the commercial character of the content. The article isn't part of any of the thematic sections of the publication, and no links or menu are available to reach the article from the main page.\"",
+      "used_for": ["BS-07", "BS-08", "BS-09", "RQ-27", "RQ-29"]
+    },
+    {
+      "id": "BD-17",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "title": "Associates Program Operating Agreement",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official",
+      "status": "carried",
+      "carried_note": "Not re-fetched by this session. Quoted from the repository's own register (ledger/sources.json S01, accessed 2026-11-13; the page states it was last updated 2025-10-15). Used here only for the disclosure wording the brief also cites, which BD-14 restates verbatim from Amazon's own help page and which this session did read live.",
+      "quote": "Carried: the Operating Agreement is the source of the required disclosure sentence \"As an Amazon Associate I earn from qualifying purchases.\" (restated verbatim on Amazon's own help page, BD-14, read live 2026-11-17) and of the rule that Special Links must carry the assigned Associates ID.",
+      "used_for": ["RQ-31", "BQ2-03"]
+    },
+    {
+      "id": "BD-18",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "title": "Associates Program Policies (Participation Requirements, IP License, Trademark Guidelines)",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "kind": "official",
+      "status": "carried",
+      "carried_note": "Not re-fetched by this session. Quoted from the repository's own register (ledger/sources.json S02, accessed 2026-11-13; the page states it was last updated 2026-04-14). Flagged rather than asserted: no claim in this namespace about a specific Participation Requirement clause number is sourced to this carried row.",
+      "quote": "Carried: the Participation Requirements are the source of the rules about how Special Links may be presented and about obscuring a link's destination. This session read no clause of it live, so no clause is quoted.",
+      "used_for": ["BQ2-04"]
+    },
+    {
+      "id": "BD-19",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "title": "Disclosures 101 for Social Media Influencers",
+      "publisher": "U.S. Federal Trade Commission",
+      "kind": "official",
+      "status": "carried",
+      "carried_note": "Not re-fetched by this session. Quoted from the repository's own register (ledger/sources.json S11, accessed 2026-11-13). Amazon's own disclosure page (BD-14, read live 2026-11-17) links to it as further guidance, which is the only reason it appears here.",
+      "quote": "Carried: FTC business-education guidance on clear and conspicuous disclosures, referenced by Amazon's own help page (BD-14).",
+      "used_for": ["BS-06"]
+    },
+    {
+      "id": "BD-20",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "title": "Creating helpful, reliable, people-first content",
+      "publisher": "Google (Google Search Central documentation)",
+      "kind": "official",
+      "status": "carried",
+      "carried_note": "Not re-fetched by this session. Quoted from the repository's own register (ledger/sources.json S40, accessed 2026-11-15). BD-16, read live 2026-11-17, carries the same publisher's more specific human-review factors, and every editorial claim in this namespace is sourced there instead.",
+      "quote": "Carried: the Who/How/Why test and the quality vocabulary the 'reads like machine output' complaint maps onto.",
+      "used_for": ["BS-08"]
+    },
+    {
+      "id": "BD-21",
+      "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/board/data/products.json",
+      "title": "This namespace's own product-intent confirmation record",
+      "publisher": "This repository",
+      "kind": "repository",
+      "status": "live_2026_11_17",
+      "quote": "The two field groups the brief requires — intent and observation — held in separate objects per row, never merged.",
+      "used_for": ["every PI- row"]
+    },
+    {
+      "id": "BD-22",
+      "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/COORDINATION.md",
+      "title": "Shared task board — CR-2, the cross-scope request for the two new supplied links",
+      "publisher": "This repository",
+      "kind": "repository",
+      "status": "live_2026_11_17",
+      "quote": "Filed 2026-11-17 by session 1bfbc559: the two new supplied links belong in ledger/products.json and ledger/sources.json, which this session does not own.",
+      "used_for": ["FL-01"]
+    }
+  ]
+}
