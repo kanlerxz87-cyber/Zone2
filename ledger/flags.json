@@ -585,6 +585,38 @@
         "S20",
         "S27"
       ]
+    },
+    {
+      "id": "F-42",
+      "severity": "medium",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-17",
+      "title": "The 4th and 5th supplied links were never processed, and they resolve to a different product category",
+      "detail": "The brief names five link.amazon links, but every prior session processed only the first three (B04G1MEwY, B02NbDxp3, B00hJ57DV), which resolve to air fryers. Links 4 (B0c8moW59) and 5 (B0f3GKalj) had zero references anywhere in the repository before this session. Re-resolved live on 2026-11-17, each opens one stable Amazon listing — B0c8moW59 -> B0DHZTCNR5 (ThermoMaven 1-sec digital meat thermometer) and B0f3GKalj -> B0DZFD6R9Z (CHEF iQ Sense smart wireless meat thermometer) — i.e. kitchen thermometers, a second product category the site's air-fryer marketing copy does not cover. The two codes are still 9 characters, not valid ASINs, and /dp/<code> returns Amazon's Page Not Found page, exactly as for the first three (F-01, F-28 control).",
+      "impact": "Two of the five requested products had no catalog row, no verification, no marketing content and no decision record. The published shop front under-represents the brief by two items and spans a category (thermometers) with no reader-facing content.",
+      "action_required": "Owner: confirm the intended ASINs for links 4 and 5 (Q-19), then decide whether to build a matching thermometer content set (SG-13). No price, rating or commission value is asserted for either.",
+      "source_ids": [
+        "S61",
+        "S62",
+        "S16"
+      ]
+    },
+    {
+      "id": "F-43",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-17",
+      "title": "The commission band for kitchen thermometers is ambiguous in Amazon's published Table 1",
+      "detail": "Both new destinations sit in Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. Amazon's public Standard Commission Income Statement (Table 1) lists 'Kitchen' at 4.50% and 'Home' at 3.00%, but does not name the 'Kitchen Utensils & Gadgets' node, so the band for these two items cannot be assigned from the public table without guessing between the two. The repository's rule is to leave a value blank when no official source states it, so commission_rate stays blank for P-04 and P-05 rather than being inferred from the parent category.",
+      "impact": "Commission-potential scoring for the two thermometers is blocked until an authenticated Creators API catalog lookup returns the item's category, or the owner confirms the band.",
+      "action_required": "Owner: an authenticated Creators API GetItems lookup for B0DHZTCNR5 and B0DZFD6R9Z returns the authoritative category and therefore the band; until then the field stays blank and flagged.",
+      "source_ids": [
+        "S04",
+        "S61",
+        "S62"
+      ]
     }
   ]
 }

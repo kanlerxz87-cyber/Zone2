@@ -277,6 +277,41 @@
         "S02"
       ],
       "owner": "owner"
+    },
+    {
+      "id": "Q-19",
+      "question": "For the 4th and 5th supplied links, what are the intended ASINs, and are the observed thermometer destinations the products the brief meant to promote?",
+      "known": "B0c8moW59 resolves reproducibly to B0DHZTCNR5 (ThermoMaven 1-sec digital meat thermometer) and B0f3GKalj to B0DZFD6R9Z (CHEF iQ Sense smart wireless meat thermometer), each to one stable listing (V-105, V-106). Both codes are 9 characters, not valid ASINs, and /dp/<code> returns Page Not Found (V-107, F-01). No public Amazon document binds a link.amazon code to a destination (F-03), and no resolved URL carries an Associates tag (F-24).",
+      "missing": "Whether the two thermometer listings are the products the brief intended, or whether the intended items are different ASINs entirely. Only the owner can state intent; nothing public maps a short code back to a requested product.",
+      "how_to_find": "Owner: in Associates Central, open the two links (or SiteStripe > Get Link on the intended product pages) and read the Tracking ID and destination each account-issued link points to; or supply the full 10-character ASIN / amazon.<tld>/dp/ URL for each intended item. Until then the intent fields on P-04/P-05 stay blank and the destinations are labelled observed only.",
+      "blocks": [
+        "SG-13",
+        "SG-14"
+      ],
+      "source_ids": [
+        "S61",
+        "S62",
+        "S16",
+        "S02"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-20",
+      "question": "Which commission band applies to the two thermometer destinations, and is it confirmed by an authenticated catalog lookup?",
+      "known": "Both destinations sit in Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat (S61, S62). Amazon's public Standard Commission Income Statement (Table 1) lists 'Kitchen' at 4.50% and 'Home' at 3.00% but does not name the 'Kitchen Utensils & Gadgets' node (S04).",
+      "missing": "The authoritative category for B0DHZTCNR5 and B0DZFD6R9Z, and therefore the commission band. The public table alone does not resolve which of the two bands applies.",
+      "how_to_find": "Owner: an authenticated Creators API GetItems lookup for each ASIN returns the item's category and commission rate (S04, S08). Until that lookup runs, commission_rate stays blank and flagged (F-43) rather than inferred from the parent category.",
+      "blocks": [
+        "SG-13"
+      ],
+      "source_ids": [
+        "S04",
+        "S08",
+        "S61",
+        "S62"
+      ],
+      "owner": "owner"
     }
   ]
 }

@@ -393,6 +393,81 @@
       "decision": "",
       "status": "awaiting owner decision",
       "owner": "owner"
+    },
+    {
+      "id": "SG-13",
+      "area": "Shop front / content (thermometer category)",
+      "title": "Treat the two newly supplied thermometer links as a second product category and build a matching set of buyer-question articles",
+      "suggestion": "Once the intended ASINs are confirmed (Q-19), add a thermometer content set to the shop front parallel to the air-fryer set: a category landing, a comparison of the two thermometers, a buying guide, and question-shaped articles (e.g. 'wireless vs instant-read: which thermometer for your cooking style', 'how many probes do you actually need'). Every article carries the same source discipline: each figure read from the official listing with its link, no hands-on claim, no price, no rating, and the observed-vs-intended label kept visible.",
+      "why": "The brief names five products but the shop front only covered three air fryers; the two thermometers had no catalog row, no verification and no reader-facing content (F-42). Google's guidance is that affiliate pages should offer meaningful original content — comparisons and navigation — rather than thin listing copies, and question-shaped titles answer what readers actually type. This is the same publication standard the air-fryer set already meets, applied to the second category.",
+      "evidence": [
+        "S61",
+        "S62",
+        "S23",
+        "S40"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Build the full thermometer set now, labelled observed-only until Q-19 confirms intent",
+          "tradeoff": "Fastest to a complete shop front; carries the same observed-vs-intended label the air-fryer set already uses, so nothing is overclaimed."
+        },
+        {
+          "id": "B",
+          "label": "Wait for Q-19 before writing any thermometer content",
+          "tradeoff": "Cleanest identity, but leaves two of five requested products with no reader-facing page until the owner acts."
+        },
+        {
+          "id": "C",
+          "label": "Publish the two thermometer catalog rows and spec tables now, defer the editorial articles to the next cadence",
+          "tradeoff": "Middle path: the verified data ships immediately, the editorial expansion waits on the identity decision."
+        }
+      ],
+      "recommended": "C",
+      "needs_answers": [
+        "Q-19",
+        "Q-20"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
+    },
+    {
+      "id": "SG-14",
+      "area": "Intake / compliance gate",
+      "title": "Adopt the product-intent confirmation record as the standard intake for every submitted affiliate link",
+      "suggestion": "For every submitted link, store the intended ASIN, official listing URL, confirmation date and source in dedicated fields, and keep the observed redirect target in a separate field — never merged. The record is populated only when the owner confirms intent; until then the row reads observed-only. This is now the schema on P-04/P-05 and should be the schema for all future intakes.",
+      "why": "Amazon's ASIN is a checkable identifier, so a confirmed intended ASIN is the one field that turns an observed redirect into a defensible product identity. Keeping the two readings in separate fields prevents the observed destination from being silently promoted to 'the intended product', which is the exact overclaim this repository has repeatedly corrected (F-03, F-24). It also gives the owner a single, dated place to act.",
+      "evidence": [
+        "S16",
+        "S61",
+        "S62",
+        "S02"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Adopt it as the mandatory intake schema and apply it to all five links retroactively",
+          "tradeoff": "One consistent record across the brief; the intent fields stay blank until the owner confirms each, so no value is invented."
+        },
+        {
+          "id": "B",
+          "label": "Apply it only to new intakes going forward",
+          "tradeoff": "Less retroactive work, but leaves the first three links without the explicit intent fields."
+        },
+        {
+          "id": "C",
+          "label": "Adopt it and add a gate that refuses to publish a product row whose intent fields are blank without an observed-only label",
+          "tradeoff": "Strongest guard against overclaiming; requires a small validator change (logged, not made without the owner's go-ahead)."
+        }
+      ],
+      "recommended": "A",
+      "needs_answers": [
+        "Q-19"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
     }
   ]
 }

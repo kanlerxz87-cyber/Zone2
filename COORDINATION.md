@@ -6134,6 +6134,7 @@ line-by-line review, 36 verification checks, 22 sourced quotes, and 8 flags.
 sign-in: supply the Associates ID. Until then no link on the site can attribute a purchase, and the
 application cannot be reviewed.
 
+
 ## Session claim — T58 — `arena/0f5673ee-zone2` (session `0f5673ee`) — 2026-11-17 (UTC)
 
 **Claimed before starting; edits only the files in the T58 scope.** CR-1 was filed by `dc72a69e` (T57) on 2026-11-16 and left unclaimed: "Requested of whichever session next claims them: derive the two counts, and resolve the duplicated row." `gh pr list --state open` is empty and no session holds a claim on these files, so this session takes it.
@@ -6158,3 +6159,63 @@ application cannot be reviewed.
 | Pages deploy | `gh api …/pages` → `built`, source `main`. Live read-back (cache-busted, per the project's Pages-CDN caveat): `release/index.html` serves "161 published HTML pages" + "`published_html_pages` = 161" and "0 pages carry an Associates tag… 92 pages link to amazon.com/dp/" + "`pages_with_tagged_link` = 0  `pages_linking_dp` = 92"; `pages/suggestions.html` serves "**11 suggestions** · 18 open questions" with anchors SG-01..SG-10, SG-12 (no SG-11). |
 | Non-blocking residuals | **FB-03** (brief namespace) describes the SG-11/SG-12 duplicate; the condition no longer exists but `brief/data/flags.json` is another session's namespace and was not edited — recommend its owner mark FB-03 closed. Descriptive "SG-01…SG-12" range prose in README/EXEC_SUMMARY/docs/brief is now loose; canonical register is correct; logged for the owner/final integration. **RR-05 remains BLOCKED** on Q-02 (no Associates ID / Special Links). No traffic, click, conversion or revenue figure exists or is published (5 events defined, 0 live). |
 | Session rule observed | Claimed T58 in this file before starting and pushed the claim first; edited only claimed files (ledger registers + the readiness builder/tests) and regenerated derived artifacts through their existing builders; cross-scope items (`brief/`, `docs/`, README/EXEC_SUMMARY descriptive prose) logged, never edited; no verified value changed without a live official source. |
+
+---
+
+## T59 — closing record (session `1539a895`, 2026-11-17; renumbered from T58 at integration)
+
+**Task.** Onboard the two newly supplied affiliate links (`B0c8moW59`, `B0f3GKalj`) that the brief names but
+no prior session had processed. The brief supplies **five** `link.amazon` links; every prior session handled
+only the first three.
+
+**What was done.**
+1. **Resolved both new links live (2026-11-17).** `B0c8moW59` → `B0DHZTCNR5` (ThermoMaven 1-sec professional
+   digital meat thermometer); `B0f3GKalj` → `B0DZFD6R9Z` (CHEF iQ Sense smart wireless meat thermometer,
+   Gen3). Each opens one stable Amazon listing. Both codes are 9 characters (not valid ASINs) and
+   `/dp/<code>` returns Amazon's Page Not Found page — the established control reproduces. The two
+   destinations are **kitchen thermometers**, a second product category.
+2. **Verified destination specs from the official listing pages** (`S61`, `S62`), one row per attribute,
+   each pinned to the listing text that states it. Recorded one **published conflict** unresolved: the CHEF iQ
+   battery life is 50 hours (*About this Item*) vs 70 hours (*Product Description*) on the same listing — both
+   published.
+3. **Added `P-04`/`P-05` to `ledger/products.json`** with an explicit **product-intent confirmation record**:
+   `intended_asin`, `official_listing_url`, `confirmation_date`, `intent_source` (blank until the owner
+   confirms) kept in separate fields from `observed_redirect_target` — the two readings never merged, per the
+   brief's rule.
+4. **Extended the registers:** sources `S61`/`S62`; flags `F-42` (links unprocessed, new category) and `F-43`
+   (commission-band ambiguity); verification rows `V-105`…`V-108`; questions `Q-19` (confirm intended ASINs)
+   and `Q-20` (confirm commission band); suggestions `SG-13` (thermometer content set, gated on `Q-19`) and
+   `SG-14` (adopt the intent-confirmation record as standard intake).
+5. **Updated `EXECUTIVE_SUMMARY.md`** (T58 addendum: five-link table, product-intent record, sourced specs,
+   blanks, new decision rows) and **`README.md`** (the supplied-links section now covers five).
+6. **Regenerated every derived surface** via the existing builders only (`build_root_data`, `build_site`,
+   `build_root_views`, `build_sitemap`, `build_summary`, `build_readiness`, `build_console`,
+   `build_decisions`). The product catalog (`pages/products.html`) now renders all five with sourced specs.
+
+**Irregularities found and resolved (logged, none blocking).**
+- **Source-ID collision with the discovery namespace.** The discovery register owns `S44`…`S60`; the first
+  draft used `S44`/`S45` for the new product listings and `validate_discovery.py` flagged the overlap. The two
+  ledger sources were renumbered to **`S61`/`S62`**. No other session's IDs altered.
+- **Typed derived counts drifted** (41→43 flags, 43→45 sources, 104→108 checks, +2 questions, +2
+  suggestions). `validate_data.py` and `audit_site.py` caught typed copies in generated `pages/*.html`
+  (regenerated) and in hand-authored `README.md`/`EXECUTIVE_SUMMARY.md` (updated to the live counts).
+- **Hardcoded "three" copy in `build_site.py`** (product-catalog subtitle and decision text) corrected to
+  "five"; the two new listing sources added to the affected evidence lists. A correctness fix to a published
+  surface, logged here per protocol.
+
+**Sources.** `S61` (https://www.amazon.com/dp/B0DHZTCNR5) and `S62`
+(https://www.amazon.com/dp/B0DZFD6R9Z), fetched live 2026-11-17; the `/dp/<token>` controls for both new
+codes; plus the standing program sources (`S02`, `S04`, `S08`, `S16`, `S23`, `S40`) cited by the new
+flags/questions/suggestions. Full line-by-line record: `docs/verification-1539a895.md`.
+
+**Gates.** `validate_data.py` 0 errors · `validate_console`/`validate_decisions`/`validate_audit`/
+`validate_brief`/`validate_discovery`/`validate_review_board` all pass · `audit_site.py` 162 pages PASS ·
+`seo_audit` pass · `build_head_meta --audit` 0 problems · `check_css_urls` 0 broken · `verify_front` pass ·
+`tests/test_pipeline.py` 15/15 · `test_readiness`/`test_brief`/`test_review_board`/`test_audit` pass ·
+`ci_replay.py` (all 43 CI steps) pass.
+
+**No verified value from the first three entries was altered.** No price, rating, review count, availability,
+sales rank or commission value was inferred for any of the five links. The thermometer editorial expansion
+waits on the owner's `Q-19` decision (`SG-13`); nothing on the suggestion board is implemented.
+
+**Status:** gates green on the rebased tree; PR #153 opened, merge and Pages-deploy confirmation recorded below.

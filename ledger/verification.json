@@ -1183,6 +1183,52 @@
         "S20"
       ],
       "consequence": "The superseded string is still present in revalidation/data/links.json, revalidation/data/specs.json, revalidation/products.html, marketing/data/facts.json, marketing/articles/p2.html and research-hub/data/raw-verification-log.md. The first group is other namespaces' own datasets; the last is a dated raw log. Per the coordination rules they are logged as change request CR-13 in COORDINATION.md instead of being edited across a claimed scope. Historical verification docs (docs/verification-*.md, docs/verification-log.md, docs/revalidation-2026-11-14.md) quote the old string as evidence of what was true when they were written and are deliberately left intact. Every surface generated from ledger/products.json now carries the corrected title."
+    },
+    {
+      "id": "V-105",
+      "subject": "Supplied link 4 — https://link.amazon/B0c8moW59",
+      "claim": "the short link resolves, reproducibly, to one live Amazon listing, B0DHZTCNR5 (ThermoMaven 1 Sec Professional Digital Meat Thermometer)",
+      "method": "live fetch of https://link.amazon/B0c8moW59 on 2026-11-17; the final URL and page title were read from the served page",
+      "verdict": "OBSERVED",
+      "source_ids": [
+        "S61"
+      ],
+      "consequence": "P-04 is recorded with its observed destination. The destination is stable across re-fetches but is not bound to the 9-character code by any public Amazon document, so it is an observation, not an established identity (F-03, F-20)."
+    },
+    {
+      "id": "V-106",
+      "subject": "Supplied link 5 — https://link.amazon/B0f3GKalj",
+      "claim": "the short link resolves, reproducibly, to one live Amazon listing, B0DZFD6R9Z (CHEF iQ Sense Smart Wireless Meat Thermometer, Gen3)",
+      "method": "live fetch of https://link.amazon/B0f3GKalj on 2026-11-17; the final URL and page title were read from the served page",
+      "verdict": "OBSERVED",
+      "source_ids": [
+        "S62"
+      ],
+      "consequence": "P-05 is recorded with its observed destination. Same standing as V-105: observed behaviour, not an established identity (F-03, F-20)."
+    },
+    {
+      "id": "V-107",
+      "subject": "Canonical /dp/ lookups for the two new 9-character codes",
+      "claim": "https://www.amazon.com/dp/B0c8moW59 and https://www.amazon.com/dp/B0f3GKalj each return Amazon's Page Not Found page",
+      "method": "live fetch of both /dp/ URLs on 2026-11-17; both served Amazon's 'Sorry! We couldn't find that page.' error page",
+      "verdict": "OBSERVED",
+      "source_ids": [
+        "S61",
+        "S62"
+      ],
+      "consequence": "Confirms the 9-character codes are not ASINs and cannot address a catalog record as written, matching the control and flag F-01/F-28 already recorded for the first three codes."
+    },
+    {
+      "id": "V-108",
+      "subject": "Thermometer destination specifications (P-04, P-05)",
+      "claim": "the published specification rows for the two thermometer destinations were read from their official Amazon listing pages and carry that listing as their source",
+      "method": "read the 'Product information' / 'About this Item' / 'Product Description' blocks of https://www.amazon.com/dp/B0DHZTCNR5 (S61) and https://www.amazon.com/dp/B0DZFD6R9Z (S62) on 2026-11-17; each spec row pins the attribute to the listing text that states it",
+      "verdict": "OBSERVED",
+      "source_ids": [
+        "S61",
+        "S62"
+      ],
+      "consequence": "P-04 and P-05 carry sourced specification rows. The CHEF iQ battery-life value is published as a conflict (50 vs 70 hours on the same listing) rather than resolved. Price, rating, review count, availability, sales rank and commission band remain blank and flagged (F-43)."
     }
   ]
 }
