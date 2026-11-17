@@ -494,8 +494,9 @@ def build_index(facts: dict, board: dict) -> str:
         <a class="pb-btn" href="marketing/buying-guide.html">Which one should I buy?</a>
         <a class="pb-btn pb-btn--ghost" href="guides/index.html">All the guides</a>
       </div>
-      <p class="pb-byline"><b>What this is.</b> Three Amazon listings this project was asked to
-      promote, read row by row against their own spec sheets. &middot;
+      <p class="pb-byline"><b>What this is.</b> Five Amazon listings this project was asked to
+      promote &mdash; three air fryers and two kitchen thermometers &mdash; read row by row against
+      their own spec sheets. &middot;
       <b>Sources re-read</b> {e(CHECKED_ON)} &middot;
       <b>Then</b> <a href="guides/method.html">how we verify</a>.</p>
     </div>
@@ -525,9 +526,11 @@ def build_index(facts: dict, board: dict) -> str:
     <a class="pb-sec-link" href="marketing/comparison.html">Every number, side by side &rarr;</a>
   </div>
   <div class="pb-bench">{bench}</div>
-  <p class="pb-sub" style="margin-top:18px">The listings above are the pages the three supplied
-  <code>link.amazon</code> short links open. That destination is reproducible, but it is not the same
-  claim as &ldquo;this is the product the brief meant&rdquo; &mdash; see
+  <p class="pb-sub" style="margin-top:18px">The listings above are the three air-fryer listings the
+  first batch of supplied <code>link.amazon</code> short links open. The brief names five links
+  in total; the two thermometers they resolve to are onboarded in the catalog too &mdash; see
+  <a href="products.html">the product catalog</a>. That destination is reproducible, but it is not the
+  same claim as &ldquo;this is the product the brief meant&rdquo; &mdash; see
   <a href="questions.html#Q-T50-01">Q-T50-01</a> and <a href="flagged.html">the flagged register</a>.</p>
 </div></section>
 
@@ -546,9 +549,9 @@ def build_index(facts: dict, board: dict) -> str:
   state. No traffic, click, conversion or revenue figure appears anywhere on this site: none has been
   measured, and inventing one is the thing this project refuses to do.</p>
   <div class="pb-figs">
-    <div class="pb-fig"><b>3<i> / 3</i></b><span>Supplied links that resolve, reproducibly, to one
+    <div class="pb-fig"><b>5<i> / 5</i></b><span>Supplied links that resolve, reproducibly, to one
       specific Amazon listing each. Re-observed {e(CHECKED_ON)}.</span></div>
-    <div class="pb-fig"><b>0<i> / 3</i></b><span>Product mappings confirmed by an official Amazon
+    <div class="pb-fig"><b>0<i> / 5</i></b><span>Product mappings confirmed by an official Amazon
       document. <a href="flagged.html">Flag F-03</a>.</span></div>
     <div class="pb-fig"><b>9<i> / 10</i></b><span>Characters per supplied code against the 10-character
       ASIN rule on Amazon's own help page. <a href="flagged.html">Flag F-01</a>.</span></div>
@@ -563,7 +566,7 @@ def build_index(facts: dict, board: dict) -> str:
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head">
     <div><h2 class="pb-h2">What we would change next &mdash; your call</h2>
-    <p class="pb-sub">Twelve suggestions sit on the board with their options, costs and trade-offs.
+    <p class="pb-sub">Thirteen suggestions sit on the board with their options, costs and trade-offs.
     Nothing on it has been implemented. This build follows the rule, not the recommendation: every
     item still says <em>proposed</em> until you record a choice.</p></div>
     <a class="pb-sec-link" href="suggestions.html">Open the whole board &rarr;</a>
@@ -602,7 +605,7 @@ def build_suggestions(facts: dict, board: dict) -> str:
     body = f"""
 <section class="pb-lead"><div class="pb-wrap">
   <p class="pb-kicker">Decision board</p>
-  <h1 class="pb-h1">Twelve things we could do next. <em>None of them is done.</em></h1>
+  <h1 class="pb-h1">Thirteen things we could do next. <em>None of them is done.</em></h1>
   <p class="pb-stand">This is the review surface the brief asked for: every suggestion, with the options
   it could take, what each option costs, what it gives up, and the question that has to be answered
   before it can be decided. Read it, pick a path, and record the choice &mdash; nothing on this page
