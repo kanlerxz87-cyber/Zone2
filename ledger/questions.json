@@ -1,11 +1,11 @@
 {
   "note": "Questions and missing information that must be answered before the decisions in ledger/suggestions.json can be made. Each row states what is verified, what is missing, and how the gap can be closed. An empty answer is left blank on purpose; nothing is inferred to fill it.",
-  "as_of": "2026-11-15",
+  "as_of": "2026-11-17",
   "questions": [
     {
       "id": "Q-01",
       "question": "Which Amazon marketplace and Associates account will the links use: US (amazon.com) or Japan?",
-      "known": "The three supplied links resolve to amazon.com product pages (S19–S21). The Associates country selector lists Japan (S01, observed on the page 2026-11-15).",
+      "known": "The three supplied links resolve to amazon.com product pages (S19\u2013S21). The Associates country selector lists Japan (S01, observed on the page 2026-11-15).",
       "missing": "Whether the owner holds an Associates account in the US or Japan; whether these three products are sold on amazon.co.jp; which terms apply to a Japan account.",
       "how_to_find": "Owner checks the Associates account country. Agent checks the Japanese Amazon site for the same ASINs once they are known (Q-03).",
       "blocks": [
@@ -41,7 +41,7 @@
       "question": "What are the full product identifiers (10-character ASINs or full amazon.<tld>/dp/ URLs) for the three products?",
       "known": "The tokens as supplied (B04G1MEwY, B02NbDxp3, B00hJ57DV) are 9 characters. An ASIN is a 10-character code (S24). A valid ASIN sent to the short-link service returns the same 404 as an unknown code, so the short codes cannot be turned into ASINs (F-01, F-28).",
       "missing": "The full ASIN for each product as the owner means it.",
-      "how_to_find": "Owner copies the product URL (amazon.com/dp/…) from the product's listing. The agent then checks it against the official page.",
+      "how_to_find": "Owner copies the product URL (amazon.com/dp/\u2026) from the product's listing. The agent then checks it against the official page.",
       "blocks": [
         "SG-01",
         "SG-04"
@@ -69,7 +69,7 @@
     {
       "id": "Q-05",
       "question": "Are the three supplied products the whole scope, or the first step of a wider niche?",
-      "known": "All three destination pages are air fryers or air-fryer ovens (S19–S21).",
+      "known": "All three destination pages are air fryers or air-fryer ovens (S19\u2013S21).",
       "missing": "The owner's intended scope and budget for research.",
       "how_to_find": "Owner decision.",
       "blocks": [
@@ -115,7 +115,7 @@
     {
       "id": "Q-08",
       "question": "Which Table 1 commission band applies to each of the three ASINs?",
-      "known": "Table 1 lists Kitchen at 4.50%, Home at 3.00%, and All Other Categories at 4.00% (S04). The destination breadcrumb is Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers (S19–S21).",
+      "known": "Table 1 lists Kitchen at 4.50%, Home at 3.00%, and All Other Categories at 4.00% (S04). The destination breadcrumb is Home & Kitchen \u203a Kitchen & Dining \u203a Small Appliances \u203a Fryers \u203a Air Fryers (S19\u2013S21).",
       "missing": "Which Table 1 band Amazon applies to each ASIN. The breadcrumb alone does not say.",
       "how_to_find": "Agent reads the Table 1 notes and the category mapping on S04 once more. Owner confirms in Associates Central if product-level category data is shown there. Until then the band stays unconfirmed.",
       "blocks": [
@@ -264,7 +264,7 @@
     {
       "id": "Q-18",
       "question": "Were these three link.amazon short links minted in your own Associates account, and under which Tracking ID?",
-      "known": "Each supplied link resolves, reproducibly, to one live amazon.com listing (V-83…V-85). The token in the URL is a service-issued identifier, not an ASIN: putting a real ASIN in the same position returns 'invalid URL' (V-86, S36). None of the three resolved URLs carries an Associates tag= parameter (F-24), and the click passes through amzlinks.in before reaching amazon.com (F-20).",
+      "known": "Each supplied link resolves, reproducibly, to one live amazon.com listing (V-83\u2026V-85). The token in the URL is a service-issued identifier, not an ASIN: putting a real ASIN in the same position returns 'invalid URL' (V-86, S36). None of the three resolved URLs carries an Associates tag= parameter (F-24), and the click passes through amzlinks.in before reaching amazon.com (F-20).",
       "missing": "Whether an Associates account and Tracking ID exist on the owner's side that these three tokens belong to, and therefore whether any click through them is attributed to the owner at all. Only the account that created them can see that; nothing public maps a token back to a creator.",
       "how_to_find": "Owner: Associates Central > Tools > Links, or SiteStripe > Get Link on each product page - a link created by your account is listed there with its Tracking ID. If these three are not in that list, they belong to someone else's account and must not be published as the site's affiliate links.",
       "blocks": [
@@ -275,6 +275,56 @@
         "S33",
         "S36",
         "S02"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-19",
+      "question": "What were the five submitted link.amazon codes meant to promote - the intended ASIN for each, especially the two that currently open meat-thermometer listings?",
+      "known": "Each code resolves reproducibly to one amazon.com listing (S19-S21, S61-S64): B04G1MEwY to B0CDY277D3 and B02NbDxp3 to B09B7SB46R and B00hJ57DV to B08DKYBTPH (air fryers), B0c8moW59 to B0DHZTCNR5 and B0f3GKalj to B0DZFD6R9Z (meat thermometers). The product-intent record keeps intended fields blank and observed fields separate (ledger/product_intent.json, F-42).",
+      "missing": "The owner's statement of what each code was minted to promote: intended ASIN (10 characters) or intended listing, with the date and source of that confirmation. Nothing on this side may fill those fields (F-03: no Amazon document binds a short-link code to a catalog record).",
+      "how_to_find": "Owner checks where each code was minted - Associates Central's SiteStripe or link history, or the tool that generated it - and states the intended product per code. The agent then records it in ledger/product_intent.json's intended fields, dated and sourced.",
+      "blocks": [],
+      "source_ids": [
+        "S24",
+        "S33",
+        "S34",
+        "S35",
+        "S61",
+        "S62",
+        "S63",
+        "S64"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-20",
+      "question": "Does your Associates Central tracking report show the tested Special Links (one per product), confirming tag attribution before any scaling?",
+      "known": "The tag shopnow047c-20 is configured on every published Special Link (2026-11-17), and one destination check per product passed in the owner's enrolled Associates workflow (P-01..P-03, ledger/site_config.json). No tracking figure has been read or claimed (F-43).",
+      "missing": "The owner's confirmation from Associates Central reporting that the clicks registered against the tag and that the destination matches. The agent has no session and cannot read reports.",
+      "how_to_find": "Owner opens Associates Central, runs the Link Checker on one Special Link per product, then reads the Orders/Clicks report after a click test. The result - whatever it is - is recorded in ledger/site_config.json's validation rows and F-43.",
+      "blocks": [
+        "SG-15"
+      ],
+      "source_ids": [
+        "S02",
+        "S09",
+        "S24"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-21",
+      "question": "Should evidence citations - the untagged amazon.com/dp/ source links under every table row - stay untagged, or carry the Associates tag as well?",
+      "known": "The current rule leaves every evidence URL untagged (tools/site_config.py): only validated product links are Special Links. All Special Links carry rel=sponsored and the disclosure; evidence links carry rel=nofollow and no tag (F-24 notes the supplied links stay as supplied).",
+      "missing": "The owner's preference, and a reading of the Program Policies on whether a cited source URL should be a Special Link. Tagging citations would blur the line between evidence and commerce that this site's registers are built on; leaving them untagged forgoes attribution on clicks that start from a source cell.",
+      "how_to_find": "Owner reads the Linking Requirements and Special Links sections (S02) and decides. The answer is recorded in tools/site_config.py's tagging rule and on the compliance page.",
+      "blocks": [
+        "SG-13"
+      ],
+      "source_ids": [
+        "S02",
+        "S24"
       ],
       "owner": "owner"
     }

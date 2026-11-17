@@ -267,9 +267,9 @@ def check_derived_counts() -> None:
     """
     m = measure()
     expect = {
-        "Published pages carrying an Associates tag": f"0 of {m['published']}",
+        "Published pages carrying an Associates tag": f"{m['with_tag']} of {m['published']}",
         "Published pages carrying the exact §5 disclosure sentence": f"{m['with_disclosure']} of {m['published']}",
-        "Published pages printing a product price": f"0 of {m['published']}",
+        "Published pages printing a product price": f"{m['price_pages']} of {m['published']}",
         "Pages describing the site as AI-powered": str(m["ai_powered_pages"]),
     }
     for row in SUMMARY["state"]:
@@ -327,7 +327,18 @@ def check_board() -> None:
 #: The number of gates/workflow steps this repository runs. Prose that claims a different
 #: number is stale, not merely imprecise: a summary that says "22 gates" when 43 run is
 #: understating the evidence it is asking the reader to trust.
-GATE_COUNT = 43
+def _gate_count() -> int:
+    """The number of workflow steps pages.yml actually runs.
+
+    This constant used to be typed (43) — the same defect class this suite exists to
+    prevent. It is derived from the workflow file now, so adding or removing a step
+    cannot leave the prose check asserting a stale number.
+    """
+    wf = (REPO / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
+    return len(re.findall(r"^\s*- name:.*?^\s*run:", wf, flags=re.M | re.S))
+
+
+GATE_COUNT = _gate_count()
 
 #: Published surfaces (top-level directories plus the root).
 SURFACE_COUNT = 0

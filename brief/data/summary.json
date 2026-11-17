@@ -1,10 +1,10 @@
 {
-  "note": "Executive summary (task T50, session arena/dc72a69e-zone2). Every number in the state table was measured on 2026-11-16 by a command run in this working tree, or read off an official page fetched on the same date; none is quoted from another session's prose. Where a figure could not be confirmed from an official source, the cell is empty and the row says so. RE-MEASURED 2026-11-16 after rebasing onto main at 18e8de8: session arena/9251f262-zone2 (T55) rebuilt the front pages and added the guides/ namespace while this brief was in flight, so every count below was taken again on the combined tree rather than carried from the earlier read.",
-  "as_of": "2026-11-16",
-  "base_commit": "18e8de8 (main, after PR #144 merged) — rebased; measured again on 2026-11-16",
-  "headline": "The research platform is finished and it is honest. The earning part has not started, and it cannot start until the owner supplies one string.",
+  "note": "Executive summary (task T50, session arena/dc72a69e-zone2). Every number in the state table was measured on 2026-11-16 by a command run in this working tree, or read off an official page fetched on the same date; none is quoted from another session's prose. Where a figure could not be confirmed from an official source, the cell is empty and the row says so. RE-MEASURED 2026-11-16 after rebasing onto main at 18e8de8: session arena/9251f262-zone2 (T55) rebuilt the front pages and added the guides/ namespace while this brief was in flight, so every count below was taken again on the combined tree rather than carried from the earlier read. RE-MEASURED 2026-11-17 (session arena/eeea2626-zone2) on the combined tree after the owner's Associates tag was applied across the published Special Links, the product-intent record shipped, the privacy-preserving measurement layer shipped (collecting nothing), and the fourth brief guide landed: every count below was taken again, and the blocking-fact narrative was rewritten because the one string arrived on 2026-11-17.",
+  "as_of": "2026-11-17 | base_commit: e58dac0 (main, after PR #150 merged) \u2014 rebased; measured again on 2026-11-17",
+  "base_commit": "18e8de8 (main, after PR #144 merged) \u2014 rebased; measured again on 2026-11-16",
+  "headline": "The research platform is finished and it is honest. The tag the owner supplied is embedded across the site; what the earning part still needs is evidence \u2014 the intended product behind each supplied code, and one tracking report only the owner can read.",
   "the_ask": [
-    "Build an AI-powered Amazon affiliate platform: product research, trend and conversion analysis, pricing, review, competition and commission analysis, SEO articles, comparisons and buying guides, niche discovery, link and campaign management, click and conversion tracking, continuous optimization — automated, scalable, data-driven, and compliant with Amazon Associates policy and disclosure rules.",
+    "Build an AI-powered Amazon affiliate platform: product research, trend and conversion analysis, pricing, review, competition and commission analysis, SEO articles, comparisons and buying guides, niche discovery, link and campaign management, click and conversion tracking, continuous optimization \u2014 automated, scalable, data-driven, and compliant with Amazon Associates policy and disclosure rules.",
     "Build the marketing for three supplied affiliate links.",
     "Make it look like a polished marketing site rather than machine output, with articles that earn organic traffic.",
     "Provide a suggestions board where a path is chosen before anything is implemented, and a clear register of what is known, what is not, and how to find out.",
@@ -13,7 +13,7 @@
   "state": [
     {
       "metric": "Supplied links that resolve, reproducibly, to one listing each",
-      "value": "3 of 3",
+      "value": "5 of 5",
       "source_ids": [
         "BR-19",
         "BR-20",
@@ -22,7 +22,7 @@
     },
     {
       "metric": "Brief-to-product mappings confirmed by an official Amazon document",
-      "value": "0 of 3",
+      "value": "0 of 5",
       "source_ids": [
         "BR-19"
       ],
@@ -30,22 +30,22 @@
     },
     {
       "metric": "Published pages carrying an Associates tag",
-      "value": "0 of 150",
+      "value": "21 of 152",
       "source_ids": [
         "BR-10"
       ],
-      "note": "Consequence: no click on this site can become a qualifying purchase, so the three-sales threshold before an application is reviewed cannot be approached."
+      "note": "Consequence: a click on a validated Special Link can now become a qualifying purchase (tag embedded 2026-11-17). The supplied short links themselves still carry no tag, and the tracking-report check is unconfirmed (F-43)."
     },
     {
-      "metric": "Published pages carrying the exact §5 disclosure sentence",
-      "value": "150 of 150",
+      "metric": "Published pages carrying the exact \u00a75 disclosure sentence",
+      "value": "152 of 152",
       "source_ids": [
         "BR-05"
       ]
     },
     {
       "metric": "Published pages printing a product price",
-      "value": "0 of 150",
+      "value": "0 of 152",
       "source_ids": [
         "BR-01"
       ],
@@ -53,13 +53,13 @@
     },
     {
       "metric": "Workflow steps replayed locally on the combined tree",
-      "value": "43 of 43",
+      "value": "45 of 45",
       "source_ids": [],
       "note": "tools/ci_replay.py runs every workflow step in order against this working tree (RV-01)."
     },
     {
       "metric": "Separate published surfaces a visitor could land on",
-      "value": "15",
+      "value": "16",
       "source_ids": [
         "BR-15"
       ],
@@ -67,7 +67,7 @@
     },
     {
       "metric": "Candidate editorial posts against Amazon's rule of thumb of at least 10",
-      "value": "14",
+      "value": "15",
       "source_ids": [
         "BR-08"
       ],
@@ -75,7 +75,7 @@
     },
     {
       "metric": "Amazon's stated requirements met, gapped, blocked, unverified or open",
-      "value": "4 met · 8 not met",
+      "value": "5 met \u00b7 7 not met",
       "source_ids": [
         "BR-07",
         "BR-08",
@@ -97,26 +97,26 @@
       "source_ids": [
         "BR-13"
       ],
-      "note": "25 occurrences across those 14 pages; 11 carry the full phrase 'AI-powered Amazon affiliate'. After the T55 rebuild none of the 14 is a reader-facing page — they are operator and companion surfaces (RV-09). This namespace is excluded from the count, because it quotes the phrase in order to diagnose it."
+      "note": "25 occurrences across those 14 pages; 11 carry the full phrase 'AI-powered Amazon affiliate'. After the T55 rebuild none of the 14 is a reader-facing page \u2014 they are operator and companion surfaces (RV-09). This namespace is excluded from the count, because it quotes the phrase in order to diagnose it."
     }
   ],
   "the_blocking_fact": {
-    "headline": "Nothing on this site can earn money today, and the fix is one string the owner has to supply.",
-    "detail": "Amazon requires Associates tags to be embedded in the product links on the site declared in the application, and it reviews an application only once at least three qualifying sales have been driven within the first 180 days. This site has zero tagged links, so it has zero qualifying purchases, so the application cannot be reviewed. Meanwhile the three links the whole project was built around are themselves short links carrying no tag, so even the supplied links would not attribute a sale to the owner. Every downstream capability in the brief — conversion tracking, the optimizer, the revenue model, the API enrolment that would let the site publish prices and ratings — sits behind this one missing value.",
+    "headline": "The tag is no longer missing \u2014 the confirmations are. A click can attribute now; what is still blocked is everything that needs owner-side evidence.",
+    "detail": "Amazon requires Associates tags to be embedded in the product links on the site declared in the application, and it reviews an application only once at least three qualifying sales have been driven within the first 180 days. On 2026-11-17 the owner supplied tracking ID shopnow047c-20 and it is now embedded in every validated Special Link this site publishes, each marked rel=sponsored and disclosed, with one destination check per product passed in the owner's enrolled workflow \u2014 so a click can attribute a qualifying purchase. What remains: the five supplied short links themselves carry no tag and their compliance status is unresolved (never 'invalid'), the intended product behind each code is unconfirmed and two of the five currently open meat-thermometer listings (F-42), the tracking-report check needs the owner's Associates Central session (F-43), and no click is collected until the analytics sink is deployed (MI-01). Conversion reporting, the optimizer, and API enrolment that would let the site publish prices and ratings still sit behind those owner-side confirmations.",
     "source_ids": [
       "BR-10",
       "BR-07"
     ]
   },
   "what_is_settled": [
-    "The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).",
-    "The evidence discipline holds at scale: 150 of 150 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
-    "The machinery is trustworthy: 43 of 43 workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
+    "The five supplied links resolve, on dated reads across sessions, to stable listings: B04G1MEwY to a Chefman 6-quart dual basket, B02NbDxp3 to an Emeril Lagasse 26-quart French-door oven, B00hJ57DV to a Chefman 8-quart basket fryer, and B0c8moW59 and B0f3GKalj to two meat thermometers (BR-19, BR-20, BR-21, and the S61\u2013S64 reads).",
+    "The evidence discipline holds at scale: 152 of 152 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
+    "The machinery is trustworthy: 45 of 45 workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
     "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit."
   ],
   "what_is_not_settled": [
-    "Whether the three listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18).",
-    "Whether an Associates account exists at all, and if it does, its tag and marketplace (BQ-14, BQ-19).",
+    "Whether the five listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18); the product-intent record's intended fields stay blank until the owner states them (F-42).",
+    "Whether the account behind the supplied tag matches the declared site and marketplace (BQ-14, BQ-19) \u2014 the owner supplied tracking ID shopnow047c-20 on 2026-11-17, but nothing has been read from Associates Central itself (F-43).",
     "Which of the 16 published surfaces is the site that would be declared (BQ-15).",
     "Who writes it, under what name, and whether that name is public (BQ-16).",
     "What readers are searching for. There is no demand signal anywhere in the project, so no topic on the topics board can be ranked by expected volume (BQ-20)."
@@ -138,7 +138,7 @@
       "why": "It costs under an hour and it is reversible. The T55 rebuild removed the phrase from every reader-facing page; 14 operator and companion pages still carry it."
     }
   ],
-  "the_one_thing": "If only one thing happens next, it should be the tag. Everything the brief asks the platform to do with real traffic — track it, convert it, optimize against it — is unreachable until a link on a page can be attributed to the owner.",
+  "the_one_thing": "If only one thing happens next, it should be the owner's confirmation of what each supplied link was meant to promote \u2014 the intended ASIN per code, with the date and source of that confirmation. The tag is in; the product-intent record's intended fields are the last blanks keeping this site from stating what it links to.",
   "how_to_use_this_namespace": [
     {
       "page": "index.html",
@@ -150,7 +150,7 @@
     },
     {
       "page": "topics.html",
-      "what": "Twelve article proposals, each with the verified fact it rests on — and a stated reason none of them can be ranked by traffic."
+      "what": "Twelve article proposals, each with the verified fact it rests on \u2014 and a stated reason none of them can be ranked by traffic."
     },
     {
       "page": "suggestions.html",

@@ -30,20 +30,22 @@
     "marketing/topics/will-it-fit-your-counter.html",
     "journal/basket-vs-oven.html",
     "journal/dual-basket-air-fryers.html",
-    "journal/why-every-number-has-a-source.html"
+    "journal/why-every-number-has-a-source.html",
+    "marketing/topics/questions-before-multi-function.html"
   ],
   "rows": [
     {
       "id": "RR-01",
       "requirement": "The Site must be publicly available - not a closed group, not behind a paywall.",
       "quote": "They must be publicly available (for example, they should not be a closed group, or behind a paywall).",
-      "site_state": "116 published HTML pages, all anonymous and login-free; the site is served by GitHub Pages at https://kanlerxz87-cyber.github.io/Zone2/.",
+      "site_state": "{published_pages} published HTML pages, all anonymous and login-free; the site is served by GitHub Pages at https://kanlerxz87-cyber.github.io/Zone2/. The count is derived at build time by tools/build_readiness.py, not typed.",
       "state": "MET",
       "owner_action": "",
       "source_ids": [
         "S23",
         "S22"
-      ]
+      ],
+      "measure": "published_pages"
     },
     {
       "id": "RR-02",
@@ -60,9 +62,9 @@
       "id": "RR-03",
       "requirement": "All Sites must have robust original content - a good rule of thumb is at least 10 posts.",
       "quote": "All Sites must have robust original content (even when advertising is removed) - a good rule of thumb is at least 10 posts.",
-      "site_state": "14 editorial posts are counted in the candidate list below: 3 marketing articles, 1 buying guide, 1 comparison, 6 question-shaped guides and 3 journal pieces. All 14 are counted; the gap is in what they are, not how many.",
+      "site_state": "{editorial_posts} editorial posts are counted in the candidate list below: 3 marketing articles, 1 buying guide, 1 comparison, 7 question-shaped guides and 3 journal pieces. All 15 are counted; the gap is in what they are, not how many.",
       "state": "GAP",
-      "owner_action": "SG-12 - write editorial posts to the published bar before applying. Every page counted below is a specification or comparison surface; none is the general-interest article a reader would arrive at from a search.",
+      "owner_action": "SG-11 - write editorial posts to the published bar before applying. Every page counted below is a specification or comparison surface; none is the general-interest article a reader would arrive at from a search.",
       "source_ids": [
         "S23",
         "S40",
@@ -74,7 +76,7 @@
       "id": "RR-04",
       "requirement": "Content on the website must be recent - generally within the last 60 days.",
       "quote": "Content on your website must be recent (generally within the last 60 days).",
-      "site_state": "The oldest date any page prints for its own content is 2026-11-13 — 2 days before 2026-11-15, inside Amazon's 60-day window. It is one compliance observation on the affiliate-lab pages, not stale editorial copy.",
+      "site_state": "The oldest date any page prints for its own content is 2026-11-13 \u2014 2 days before 2026-11-15, inside Amazon's 60-day window. It is one compliance observation on the affiliate-lab pages, not stale editorial copy.",
       "state": "MET",
       "owner_action": "",
       "source_ids": [
@@ -86,17 +88,15 @@
       "id": "RR-05",
       "requirement": "Associates tags (Special Links, e.g. abcd-20) must be embedded in the Amazon product links on the Site declared in the application.",
       "quote": "Associates special links are the identifiers (e.g. abcd-20) embedded in Amazon product links. These tags must be embedded in your Amazon product links on the site(s) declared in your application.",
-      "site_state": "0 pages carry an Associates tag in Amazon's NAME-NN format. 72 pages link to amazon.com/dp/; every one of them is an untagged source citation, not a Special Link.",
-      "state": "BLOCKED",
-      "owner_action": "Q-02 / F-07 / F-24 - no Associates ID exists, so no link on the Site can carry a tag. The three supplied short links resolve without a tag parameter.",
+      "site_state": "{pages_with_tagged_link} pages carry the Associates tag shopnow047c-20 in Amazon's NAME-NN format, published as validated Special Links with data-link-state and a rel=sponsored mark (checkable by tools/audit_html.py and the G5/G6 rules; one destination check per product passed 2026-11-17, ledger/site_config.json rows P-01..P-03). Every other amazon.com/dp/ link on the site is an untagged source citation, not a Special Link.",
+      "state": "MET",
+      "owner_action": "F-43's tracking-report confirmation is still owed in Associates Central (Q-20) - it does not block this row: the embedding is done and gate-checked.",
       "source_ids": [
         "S23",
         "S02",
         "S24"
       ],
-      "blocked_by": [
-        "Q-02"
-      ],
+      "blocked_by": [],
       "measure": "pages_with_tagged_link"
     },
     {

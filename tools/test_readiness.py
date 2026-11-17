@@ -95,7 +95,10 @@ CASES = [
     ),
     (
         "R7 a BLOCKED row that names nobody who can clear it",
-        lambda reg: row(reg, "RR-05").__setitem__("blocked_by", []),
+        # Target is chosen at run time: RR-05 used to be the BLOCKED fixture, but the
+        # tag shipped on 2026-11-17 and the row is MET now. The test mutates whatever
+        # row is BLOCKED today, so the fixture cannot rot again.
+        lambda reg: next(r for r in reg["rows"] if r["state"] == "BLOCKED").__setitem__("blocked_by", []),
         lambda reg: BR.validate(reg),
         "no blocked_by",
     ),

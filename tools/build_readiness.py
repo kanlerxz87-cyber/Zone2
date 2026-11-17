@@ -181,6 +181,7 @@ def oldest_page_date() -> tuple[str, int]:
 
 
 MEASURES = {
+    "published_pages": lambda reg: len(published_pages()),
     "editorial_posts": lambda reg: count_editorial_posts(reg),
     "pages_with_disclosure": lambda reg: count_pages_with_disclosure(),
     "pages_with_tagged_link": lambda reg: count_pages_with_tagged_link(),

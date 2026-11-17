@@ -460,6 +460,12 @@ jobs:
               the data, sponsored links, canonical, no prices, no invented metrics)
         run: python3 tools/verify_front.py
 
+      - name: Product-intent record — intended and observed fields never merged (builder self-check)
+        run: python3 tools/build_intent.py --check
+
+      - name: Measurement layer gate (the event schema refuses conversions and per-visitor data)
+        run: python3 tools/test_measurement.py
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
