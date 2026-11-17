@@ -1,0 +1,224 @@
+{
+  "note": "A decision board, not a task list. Each row is a choice the owner has to make, with the options on one scale and what each one costs and requires. Every 'choice' field is empty: nothing here is decided, and a gate in this namespace fails the build if a choice is recorded that is not one of that row's own options, or if a row is marked decided without one. The point of the board is that a path is chosen BEFORE anything is implemented.",
+  "as_of": "2026-11-17",
+  "rows": [
+    {
+      "id": "IP-01",
+      "title": "Confirm what the five links are for, before anything is built on them",
+      "question": "The intended ASIN is blank for all five rows. Do we wait for that, or proceed on what the links measurably do?",
+      "why_now": "Two of the five links were unknown to this repository until today (IF-04), and all five fail the ASIN format check (IF-03). Building product pages before intent is confirmed risks writing a page about the wrong product.",
+      "options": [
+        {
+          "id": "IP-01-a",
+          "label": "Confirm intent first, then build",
+          "cost": "One sign-in and five lookups",
+          "requires": [
+            "IQ-01"
+          ],
+          "consequence": "Nothing is published about a product until its identity is confirmed. Slower to first page, and no page can be wrong about what it is selling."
+        },
+        {
+          "id": "IP-01-b",
+          "label": "Build on the observed destinations, label them as observed",
+          "cost": "No wait",
+          "requires": [],
+          "consequence": "Pages can ship now, but every page must say the destination is measured rather than confirmed, or it misleads. This is what the rest of the repository currently does."
+        },
+        {
+          "id": "IP-01-c",
+          "label": "Build only the three known links now, hold the two new ones",
+          "cost": "No wait, narrower scope",
+          "requires": [
+            "IQ-03"
+          ],
+          "consequence": "Avoids writing about the two thermometer links until IQ-03 is answered, at the cost of leaving a fifth of the submitted set unpromoted."
+        }
+      ],
+      "choice": "",
+      "blocked_by": [
+        "IQ-01",
+        "IQ-03"
+      ],
+      "source_ids": [
+        "IN-03",
+        "IN-22"
+      ]
+    },
+    {
+      "id": "IP-02",
+      "title": "One site with two categories, or two sites, or air fryers only",
+      "question": "Three links are air fryers and two are meat thermometers (IF-01). What is the site about?",
+      "why_now": "The current site is built around a single-category premise. That premise no longer covers the submitted set, and a site that claims to be about air fryers while selling thermometers reads as incoherent to a visitor and to a search engine.",
+      "options": [
+        {
+          "id": "IP-02-a",
+          "label": "One kitchen-appliance site with two category sections",
+          "cost": "New category pillar pages and a navigation change",
+          "requires": [
+            "IQ-03"
+          ],
+          "consequence": "Keeps one domain and one authority. Needs genuine content for both categories or the thin-content rule applies."
+        },
+        {
+          "id": "IP-02-b",
+          "label": "Two separate sites, one per category",
+          "cost": "A second domain, host and content set",
+          "requires": [
+            "IQ-03"
+          ],
+          "consequence": "Cleanest editorial fit and no cross-category dilution, at roughly double the publishing work."
+        },
+        {
+          "id": "IP-02-c",
+          "label": "Air fryers only; drop the two thermometer links",
+          "cost": "None",
+          "requires": [
+            "IQ-03"
+          ],
+          "consequence": "Smallest coherent site. Leaves two submitted products unpromoted unless the owner assigns them elsewhere."
+        }
+      ],
+      "choice": "",
+      "blocked_by": [
+        "IQ-03",
+        "IQ-08"
+      ],
+      "source_ids": [
+        "IN-09",
+        "IN-12",
+        "IN-13"
+      ]
+    },
+    {
+      "id": "IP-03",
+      "title": "Which links go on the page",
+      "question": "Keep the supplied short links, or regenerate each one as a tagged Special Link?",
+      "why_now": "No resolved URL carries a tag (IF-02), and the Operating Agreement requires links to use the tagged formats Amazon provides (IN-01). The brief asks for validated Special Links tested one at a time, and explicitly says not to claim the supplied links are invalid.",
+      "options": [
+        {
+          "id": "IP-03-a",
+          "label": "Test one link end to end, then scale if the report shows it",
+          "cost": "One Associates sign-in, one click, one report read",
+          "requires": [
+            "IQ-04",
+            "IQ-02"
+          ],
+          "consequence": "Matches the brief's own sequencing. Settles the compliance question with evidence instead of assertion."
+        },
+        {
+          "id": "IP-03-b",
+          "label": "Regenerate all five as tagged /dp/ links now",
+          "cost": "One Associates session",
+          "requires": [
+            "IQ-01",
+            "IQ-02"
+          ],
+          "consequence": "Removes the ambiguity entirely by using the format Amazon publishes, but only once the intended ASIN is known."
+        },
+        {
+          "id": "IP-03-c",
+          "label": "Keep the supplied links as they are",
+          "cost": "None",
+          "requires": [],
+          "consequence": "Leaves attribution unproven. Defensible only if IQ-04 comes back showing the tag is applied during the redirect."
+        }
+      ],
+      "choice": "",
+      "blocked_by": [
+        "IQ-01",
+        "IQ-02",
+        "IQ-04",
+        "IQ-05"
+      ],
+      "source_ids": [
+        "IN-01",
+        "IN-03"
+      ]
+    },
+    {
+      "id": "IP-04",
+      "title": "How clicks and conversions get measured",
+      "question": "The brief asks for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. This host cannot run server-side code (IF-08). Where does the data go?",
+      "why_now": "Measurement is meant to come before further writing, so that the next topic is chosen from what people actually search for. The host constraint has to be settled first or the work is thrown away.",
+      "options": [
+        {
+          "id": "IP-04-a",
+          "label": "First-party redirect counter on a host the owner controls",
+          "cost": "A host with server-side code, plus DNS",
+          "requires": [
+            "IQ-07"
+          ],
+          "consequence": "Keeps visitor data out of third parties and can stay cookie-free, which is what the existing schema in tools/tracking_schema.sql was drawn for. Costs a host."
+        },
+        {
+          "id": "IP-04-b",
+          "label": "A third-party privacy-focused analytics product",
+          "cost": "A subscription or a free tier",
+          "requires": [
+            "IQ-07"
+          ],
+          "consequence": "Fastest to turn on and needs no infrastructure, but hands page-level data to a vendor and may need a privacy notice change."
+        },
+        {
+          "id": "IP-04-c",
+          "label": "Associates reports only, no site-side counter",
+          "cost": "None",
+          "requires": [],
+          "consequence": "Uses only Amazon's own numbers, which are the sole permitted source of conversion and earnings figures anyway. Tells you what converted but not which page or which block earned the click, so it cannot tell you which article to write next."
+        }
+      ],
+      "choice": "",
+      "blocked_by": [
+        "IQ-07",
+        "IQ-02"
+      ],
+      "source_ids": [
+        "IN-16",
+        "IN-02"
+      ]
+    },
+    {
+      "id": "IP-05",
+      "title": "Editorial and brand path",
+      "question": "How does the site stop reading like generated filler?",
+      "why_now": "The brief asks for catchy, trendy articles on a polished marketing site. The measured diagnosis and a paste-ready design prompt already exist in brief/. What is missing is the author, the photography decision and the publishing cadence.",
+      "options": [
+        {
+          "id": "IP-05-a",
+          "label": "Named author, licensed original photography, one guide a week",
+          "cost": "Highest: a writer, a camera or a licence, and a cadence",
+          "requires": [
+            "IQ-09",
+            "IQ-10"
+          ],
+          "consequence": "The only option that produces genuinely original material, which is what the helpful-content guidance rewards. Slowest and most expensive."
+        },
+        {
+          "id": "IP-05-b",
+          "label": "Named author, no photography, one guide a fortnight",
+          "cost": "Medium",
+          "requires": [
+            "IQ-10"
+          ],
+          "consequence": "Drops the unresolved rights question entirely and still produces original writing. Pages will look plainer."
+        },
+        {
+          "id": "IP-05-c",
+          "label": "Keep the current verified-specification style",
+          "cost": "None",
+          "requires": [],
+          "consequence": "Accurate and sourced, but it is the style the brief describes as reading like an audit."
+        }
+      ],
+      "choice": "",
+      "blocked_by": [
+        "IQ-09",
+        "IQ-10"
+      ],
+      "source_ids": [
+        "IN-20",
+        "IN-21"
+      ]
+    }
+  ]
+}

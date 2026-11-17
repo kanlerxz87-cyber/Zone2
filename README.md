@@ -173,6 +173,43 @@ pages). Both are typed rather than derived, so both drifted silently. They are l
 CR-1 in COORDINATION.md because the files that own them are outside this session's scope.
 
 
+### Submitted-link intake — `intake/` (T60, session `arena/613900e6-zone2`, 2026-11-17; renumbered from T58)
+
+The 2026-11-17 brief names **five** `link.amazon` links. This repository was built around **three**, and
+`B0c8moW59`, `B0f3GKalj` and the tracking id `shopnow047c-20` appeared nowhere in the tree. This namespace
+closes that gap — it adds rows under its own prefixes (`IN-`, `SUB-`, `OBS-`, `IF-`, `IQ-`, `IP-`, `EV-`) and
+edits no register another session owns.
+
+Eight pages: [executive summary](https://kanlerxz87-cyber.github.io/Zone2/intake/index.html) ·
+[product-intent record](https://kanlerxz87-cyber.github.io/Zone2/intake/submissions.html) ·
+[observations](https://kanlerxz87-cyber.github.io/Zone2/intake/observations.html) ·
+[measurement](https://kanlerxz87-cyber.github.io/Zone2/intake/tracking.html) ·
+[choose a path](https://kanlerxz87-cyber.github.io/Zone2/intake/proposals.html) ·
+[what we know](https://kanlerxz87-cyber.github.io/Zone2/intake/questions.html) ·
+[flagged](https://kanlerxz87-cyber.github.io/Zone2/intake/flags.html) ·
+[sources](https://kanlerxz87-cyber.github.io/Zone2/intake/sources.html)
+
+**The product-intent confirmation record** keeps two things apart, because they are not the same fact:
+the *intended* ASIN, official listing URL, confirmation date and source — all blank, because a 9-character
+token is not an ASIN and nothing public binds the code to a product — and the *observed* redirect target,
+which is measured and populated. The two field groups are never merged, and a gate fails the build if
+they are.
+
+| Submitted | Resolves to | Category |
+|---|---|---|
+| `B04G1MEwY` | `B0CDY277D3` | Air Fryers |
+| `B02NbDxp3` | `B09B7SB46R` | Air Fryers |
+| `B00hJ57DV` | `B08DKYBTPH` | Air Fryers |
+| `B0c8moW59` | `B0DHZTCNR5` | **Meat Thermometers** |
+| `B0f3GKalj` | `B0DZFD6R9Z` | **Meat Thermometers** |
+
+Three findings change what should be built: two of the five are not air fryers (**IF-01**); no resolved URL
+carries an Associates `tag=`, so none is established as a Special Link (**IF-02**); and the self-hosted
+analytics endpoint the brief asks for cannot run here, because GitHub Pages is static-only (**IF-08**).
+
+Gate: `tools/build_intake.py` (drift check) · `tools/validate_intake.py` (contract) ·
+`tools/test_intake.py` (15 injected defects, each must fire) — all three run in CI.
+
 ### Findings & verified subpages — `pages/`
 
 37 generated pages, one table per question, **every row ending in an official-source link or an explicit

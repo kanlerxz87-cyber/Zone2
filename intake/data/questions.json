@@ -1,0 +1,170 @@
+{
+  "note": "What is known, what is not, and how to find out. Every 'answer' field is empty on purpose: an open question with a filled-in answer is a guess wearing a label, and a gate in this namespace fails the build if one appears. 'How to answer it' names the source or action that would settle it. 'Blocks' names the decision that cannot reasonably be taken until it is answered.",
+  "as_of": "2026-11-17",
+  "rows": [
+    {
+      "id": "IQ-01",
+      "question": "What is the intended ASIN and official listing URL for each of the five submitted links?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Read the link report in Associates Central for each code, or run a Creators API GetItems call against the ASIN you believe each one is.",
+      "official_source_ids": [
+        "IN-03",
+        "IN-22"
+      ],
+      "blocks": [
+        "IP-01",
+        "IP-03"
+      ],
+      "submission_ids": [
+        "SUB-01",
+        "SUB-02",
+        "SUB-03",
+        "SUB-04",
+        "SUB-05"
+      ]
+    },
+    {
+      "id": "IQ-02",
+      "question": "Is shopnow047c-20 an Associates tracking ID, and for which marketplace and account?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Sign in to Associates Central and read the tracking ID shown in the account settings or in any generated link.",
+      "official_source_ids": [
+        "IN-03"
+      ],
+      "blocks": [
+        "IP-03",
+        "IP-04"
+      ],
+      "submission_ids": []
+    },
+    {
+      "id": "IQ-03",
+      "question": "Are the two meat-thermometer links meant to be promoted on the same site as the three air fryers?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Owner decision. The evidence that raises it is on the submissions page: two of five resolve to a different category subtree (IF-01).",
+      "official_source_ids": [
+        "IN-12",
+        "IN-13"
+      ],
+      "blocks": [
+        "IP-02"
+      ],
+      "submission_ids": [
+        "SUB-04",
+        "SUB-05"
+      ]
+    },
+    {
+      "id": "IQ-04",
+      "question": "When one of these links is clicked from an enrolled Associates account, does the resulting session carry the owner's tag and appear in the tracking report?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "The brief's own method: test one link, then read the corresponding row in the Associates reports before scaling to the rest. Cannot be done from this workspace - it needs a signed-in Associates session.",
+      "official_source_ids": [
+        "IN-01",
+        "IN-02",
+        "IN-03"
+      ],
+      "blocks": [
+        "IP-03"
+      ],
+      "submission_ids": [
+        "SUB-01",
+        "SUB-02",
+        "SUB-03",
+        "SUB-04",
+        "SUB-05"
+      ]
+    },
+    {
+      "id": "IQ-05",
+      "question": "Is the short-link service behind these codes operated by Amazon?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Not answerable from any official Amazon page found. The 404 control is served from amzlinks.in (IF-05). The owner generated the links somewhere - that place is the answer.",
+      "official_source_ids": [
+        "IN-14"
+      ],
+      "blocks": [
+        "IP-03"
+      ],
+      "submission_ids": []
+    },
+    {
+      "id": "IQ-06",
+      "question": "Is the Associates account enrolled, and does it meet the Creators API prerequisite?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Associates Central account status. Amazon's Creators API introduction states a prerequisite of 10 qualifying sales in the past 30 days.",
+      "official_source_ids": [
+        "IN-22"
+      ],
+      "blocks": [
+        "IP-01",
+        "IP-04"
+      ],
+      "submission_ids": []
+    },
+    {
+      "id": "IQ-07",
+      "question": "Where will click and conversion events be recorded, given that this host cannot run server-side code?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Owner decision among the options in IP-04. The constraint is documented, not guessed at: GitHub Pages is static-only (IN-16).",
+      "official_source_ids": [
+        "IN-16"
+      ],
+      "blocks": [
+        "IP-04"
+      ],
+      "submission_ids": []
+    },
+    {
+      "id": "IQ-08",
+      "question": "Which marketplace should the site target, and in which country is the operator resident?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Owner decision. It governs which Associates programme applies and which taxonomy in the Commission Income Statement the products fall under.",
+      "official_source_ids": [
+        "IN-01",
+        "IN-02"
+      ],
+      "blocks": [
+        "IP-02",
+        "IP-03"
+      ],
+      "submission_ids": []
+    },
+    {
+      "id": "IQ-09",
+      "question": "Will product photography be licensed original shots, Amazon Program Content, or none?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Owner decision. The Operating Agreement defines Program Content to include images and excludes content relating to products on any site other than the Amazon Site. This project has not resolved the rights question and publishes no product imagery.",
+      "official_source_ids": [
+        "IN-01"
+      ],
+      "blocks": [
+        "IP-05"
+      ],
+      "submission_ids": []
+    },
+    {
+      "id": "IQ-10",
+      "question": "Who is named as the author of the published guides?",
+      "answer": "",
+      "status": "OPEN",
+      "how_to_answer_it": "Owner decision. A named author with a real byline is part of the publication-quality path the brief asks for; a fabricated byline would be worse than none.",
+      "official_source_ids": [
+        "IN-21"
+      ],
+      "blocks": [
+        "IP-05"
+      ],
+      "submission_ids": []
+    }
+  ]
+}

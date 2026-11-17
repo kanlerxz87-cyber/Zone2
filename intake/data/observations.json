@@ -1,0 +1,184 @@
+{
+  "note": "Dated observation log. Every row is one live fetch, with the URL requested, what came back, and the session/shuffle tokens the response carried. Two caveats are recorded rather than smoothed over. (1) The second pass for SUB-04 and SUB-05 returned the SAME Amazon session id and the same btn_ref as the first pass, so the two passes share a session context and are weaker evidence than two independent sessions would be - see flag IF-06. (2) Session ids and btn_ref values are per-request tracking tokens; they are recorded because they are part of what was observed, and because a previous session found the btn_ref differs across days (ledger flag F-21).",
+  "as_of": "2026-11-17",
+  "method": "Each URL was requested once per pass and the resolved URL and page title read from the response.",
+  "rows": [
+    {
+      "id": "OBS-01",
+      "kind": "control-direct",
+      "submission_id": null,
+      "requested_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_utc": "2026-11-17",
+      "outcome": "200 - product page served",
+      "resolved_url": "https://www.amazon.com/dp/B0CDY277D3?lv=shuf&channelId=500&plpRedirect=mhFallback",
+      "resolved_asin": "B0CDY277D3",
+      "page_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "session_id": "142-4418931-1979540",
+      "btn_ref": null,
+      "why_it_matters": "A bare request to a valid ASIN also returns plpRedirect=mhFallback, so that marker is not evidence that a link fell back to an arbitrary page. This reproduces the control recorded in the repository's README.",
+      "source_ids": [
+        "IN-09"
+      ]
+    },
+    {
+      "id": "OBS-02",
+      "kind": "pass-A",
+      "submission_id": "SUB-01",
+      "requested_url": "https://link.amazon/B04G1MEwY",
+      "observed_utc": "2026-11-17",
+      "outcome": "200 - redirected to a product page",
+      "resolved_url": "https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-1ffea10d1d3c7fc5&channelId=704&plpRedirect=mhFallback",
+      "resolved_asin": "B0CDY277D3",
+      "page_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "session_id": "137-2345144-6813537",
+      "btn_ref": "srctok-1ffea10d1d3c7fc5",
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-04",
+        "IN-09"
+      ]
+    },
+    {
+      "id": "OBS-03",
+      "kind": "pass-A",
+      "submission_id": "SUB-02",
+      "requested_url": "https://link.amazon/B02NbDxp3",
+      "observed_utc": "2026-11-17",
+      "outcome": "200 - redirected to a product page",
+      "resolved_url": "https://www.amazon.com/dp/B09B7SB46R?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-6af2110975721338&channelId=704&plpRedirect=mhFallback",
+      "resolved_asin": "B09B7SB46R",
+      "page_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "session_id": "139-1213369-4460060",
+      "btn_ref": "srctok-6af2110975721338",
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-05",
+        "IN-10"
+      ]
+    },
+    {
+      "id": "OBS-04",
+      "kind": "pass-A",
+      "submission_id": "SUB-03",
+      "requested_url": "https://link.amazon/B00hJ57DV",
+      "observed_utc": "2026-11-17",
+      "outcome": "200 - redirected to a product page",
+      "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-573e21e39d4d4c1c&channelId=704&plpRedirect=mhFallback&th=1",
+      "resolved_asin": "B08DKYBTPH",
+      "page_title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "session_id": "133-4996738-8819319",
+      "btn_ref": "srctok-573e21e39d4d4c1c",
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-06",
+        "IN-11"
+      ]
+    },
+    {
+      "id": "OBS-05",
+      "kind": "pass-A",
+      "submission_id": "SUB-04",
+      "requested_url": "https://link.amazon/B0c8moW59",
+      "observed_utc": "2026-11-17",
+      "outcome": "200 - redirected to a product page",
+      "resolved_url": "https://www.amazon.com/dp/B0DHZTCNR5?lv=shuf&btn_type=ss&gaOptInStatus=true&_encoding=UTF8&sp_csd=d2lkZ2V0TmFtZT1zcF9waG9uZV9ob21lcGFnZV9ibGVuZGVk&language=en_US&content-id=amzn1.sym.4582c56b-139d-4168-9db2-822c68889360&ie=UTF8&btn_ref=srctok-633f9dc54185b50f&channelId=500&plpRedirect=mhFallback",
+      "resolved_asin": "B0DHZTCNR5",
+      "page_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+      "session_id": "134-4510030-8424149",
+      "btn_ref": "srctok-633f9dc54185b50f",
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-07",
+        "IN-12"
+      ]
+    },
+    {
+      "id": "OBS-06",
+      "kind": "pass-A",
+      "submission_id": "SUB-05",
+      "requested_url": "https://link.amazon/B0f3GKalj",
+      "observed_utc": "2026-11-17",
+      "outcome": "200 - redirected to a product page",
+      "resolved_url": "https://www.amazon.com/dp/B0DZFD6R9Z?lv=shuf&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&btn_type=ss&gaOptInStatus=true&language=en_US&btn_ref=srctok-101536bcd8e0be02&channelId=500&plpRedirect=mhFallback&th=1",
+      "resolved_asin": "B0DZFD6R9Z",
+      "page_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "session_id": "132-4435338-5192244",
+      "btn_ref": "srctok-101536bcd8e0be02",
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-08",
+        "IN-13"
+      ]
+    },
+    {
+      "id": "OBS-07",
+      "kind": "pass-B",
+      "submission_id": "SUB-04",
+      "requested_url": "https://link.amazon/B0c8moW59",
+      "observed_utc": "2026-11-17",
+      "outcome": "200 - redirected to the same product page as OBS-05",
+      "resolved_url": "https://www.amazon.com/dp/B0DHZTCNR5?lv=shuf&btn_type=ss&gaOptInStatus=true&_encoding=UTF8&sp_csd=d2lkZ2V0TmFtZT1zcF9waG9uZV9ob21lcGFnZV9ibGVuZGVk&language=en_US&content-id=amzn1.sym.4582c56b-139d-4168-9db2-822c68889360&ie=UTF8&btn_ref=srctok-633f9dc54185b50f&channelId=500&plpRedirect=mhFallback",
+      "resolved_asin": "B0DHZTCNR5",
+      "page_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+      "session_id": "134-4510030-8424149",
+      "btn_ref": "srctok-633f9dc54185b50f",
+      "same_destination_as": "OBS-05",
+      "same_session_as": "OBS-05",
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-07",
+        "IN-12"
+      ],
+      "flag_ids": [
+        "IF-06"
+      ]
+    },
+    {
+      "id": "OBS-08",
+      "kind": "pass-B",
+      "submission_id": "SUB-05",
+      "requested_url": "https://link.amazon/B0f3GKalj",
+      "observed_utc": "2026-11-17",
+      "outcome": "200 - redirected to the same product page as OBS-06",
+      "resolved_url": "https://www.amazon.com/dp/B0DZFD6R9Z?lv=shuf&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&btn_type=ss&gaOptInStatus=true&language=en_US&btn_ref=srctok-101536bcd8e0be02&channelId=500&plpRedirect=mhFallback&th=1",
+      "resolved_asin": "B0DZFD6R9Z",
+      "page_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "session_id": "132-4435338-5192244",
+      "btn_ref": "srctok-101536bcd8e0be02",
+      "same_destination_as": "OBS-06",
+      "same_session_as": "OBS-06",
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-08",
+        "IN-13"
+      ],
+      "flag_ids": [
+        "IF-06"
+      ]
+    },
+    {
+      "id": "OBS-09",
+      "kind": "control",
+      "submission_id": null,
+      "requested_url": "https://link.amazon/B0c8moW5Z",
+      "observed_utc": "2026-11-17",
+      "outcome": "404 - File Not Found",
+      "resolved_url": "https://amzlinks.in/B0c8moW5Z",
+      "resolved_asin": null,
+      "page_title": "404: File Not Found",
+      "session_id": null,
+      "btn_ref": null,
+      "page_text": [
+        "Uh oh, it looks like something went wrong.",
+        "You’ve clicked on an invalid URL."
+      ],
+      "why_it_matters": "An unissued 9-character code of the same shape as the submitted codes is answered with a 404 rather than a product page. The five supplied codes therefore resolve because they are issued lookups, not because the service ignores its input and falls back to something arbitrary. It does not follow that the destination is the product the owner intended.",
+      "source_ids": [
+        "IN-14"
+      ],
+      "flag_ids": [
+        "IF-05"
+      ]
+    }
+  ]
+}
