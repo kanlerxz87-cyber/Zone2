@@ -6130,3 +6130,31 @@ line-by-line review, 36 verification checks, 22 sourced quotes, and 8 flags.
 **Nothing on the board is implemented.** The owner's next action is recorded in three places and takes one
 sign-in: supply the Associates ID. Until then no link on the site can attribute a purchase, and the
 application cannot be reviewed.
+
+## Session claim — T58 — `arena/eeea2626-zone2` (session `eeea2626`, 2026-11-17 UTC)
+
+**Branch note (documented deviation, same as every prior session).** The coordination rule asks for a
+branch named `session-<id>/<task>`. Arena pins this session to `arena/eeea2626-zone2` and forbids
+creating or switching to another branch, so this session works on its one pinned branch and holds
+itself to strict file-scope discipline instead.
+
+| Item | Value |
+|---|---|
+| Task | **T58 — the 2026-11-17 owner brief: monetization enablement + measurement turn-on + product-intent record + publication passes.** Two owner inputs land in this brief that no earlier wave had: (1) **Selected Tracking ID `shopnow047c-20`** — the string the whole revenue half of the project was blocked on (FB-06 / F-07 / F-24); (2) the directive **"Turn on click and conversion measurement before writing anything else — add a privacy-preserving outbound-click counter and a self-hosted analytics endpoint; record the five defined events"**, which is the owner decision DS-11 was waiting for. Plus the standing brief duties: a product-intent confirmation record (intended ASIN / listing URL / confirmation date / source kept **separate** from observed redirect targets), validated Special Links replacing the ambiguous outbound links (one link per product tested live for destination; tracking-report confirmation left owner-side, flagged), disclosure above the fold on every page, every outbound product link `rel="sponsored"`, the publication passes (nav labels, the shipped RSS feed, Search Console readiness, reader capture — the brief's SG-27…SG-30 rows), suggestions + questions registers extended, executive-summary addendum, line-by-line live re-verification with links, PR → merge → Pages deploy → record. |
+| Status | **in progress** — claimed 2026-11-17T16:12Z, before any file in the scope below was edited |
+| Owner | `eeea2626` (branch `arena/eeea2626-zone2`, base `e58dac0` = merge of PR #150) |
+| Base commit | `e58dac09eac142a17d7fbcd6c9fc385f270ca6b2` (`main`, T57 close-out) |
+| File scope | NEW `ledger/site_config.json`, `ledger/product_intent.json` · NEW `tools/site_config.py`, `tools/build_intent.py`, `tools/analytics_server.py`, `tools/test_measurement.py` · NEW `assets/js/analytics.js` · NEW generated root `product-intent.html` · NEW `docs/verification-eeea2626.md` · EDIT generators + their regenerated outputs only: `tools/build_front.py`, `tools/build_marketing.py`, `tools/build_root_views.py`, `tools/build_root_data.py`, `tools/build_measurement.py`, `tools/build_discovery.py` (state-aware prose only), `tools/build_readiness.py` (CR-1 derived counts — the board explicitly requests the next claimant of these files to derive RR-01/RR-05), `marketing/scripts/verify_marketing.py` (G5/G6 state-aware once a tag exists) · EDIT data registers: `docs/measurement-t40.json` (five events recorded; statuses per the recorded owner decision), `docs/discovery-t40.json` (DS-11 owner decision recorded), `ledger/questions.json` (Q-19…Q-21), `ledger/suggestions.json` (SG-13…SG-17 incl. the brief's SG-27…SG-30 pass rows; SG-12 duplicate resolved per CR-1), `ledger/flags.json` (F-07 resolution + F-42/F-43 new irregularities), `ledger/modules.json` (tracking-module state), `ledger/readiness.json` (RR-01/RR-05 derived), `marketing/data/editorial.json` (copy rows that would otherwise state the un-tagged state as current; one new question-shaped guide) · EDIT hand pages (disclosure strip copy only): `404.html`, `design-notes.html`, `paths.html`, `playbook.html`, `review-2026-11-15.html` · EDIT `README.md` (derived count strings + additive section), `EXECUTIVE_SUMMARY.md` (addendum + derived count strings), `COORDINATION.md` (append-only) · EDIT `.github/workflows/pages.yml` (**additive steps only**) · regenerated derived outputs: `index.html`, `suggestions.html`, `questions.html`, `guides/*.html`, `marketing/**`, root evidence views, `assets/js/data.js`, `discovery/**`, `pages/**`, `release/index.html`, `summary.html`, `sitemap.xml`, `brief/data/summary.json` counts **only where the design-brief gate re-derives and fails them** (gate-forced, logged) |
+| Deliberately **not** touched | `ledger/campaigns.json` (still EMPTY_BY_DESIGN: campaign keys may only point at owner-confirmed product identity, and the intended ASINs remain unconfirmed — the product-intent record keeps intended vs observed separate per the brief), `ledger/products.json`, `ledger/sources.json`, `research-hub/**`, `northstar/**`, `zone2/**`, `affiliate-lab/**`, `revalidation/**`, `console/**`, `audit/**`, `decisions/**`, `brief/**` (except gate-forced derived counts), `tools/` other than the files named above, every verified value in any register |
+
+### Board state at claim (measured, not typed)
+
+`origin/main` = `e58dac0`. `gh pr list --state open` → **empty**. Pages status `built`. No session
+claim on any of the files above is active (the last close-outs are T56 `8fb7c287` and T57 `dc72a69e`,
+both recorded done). No claim is being taken over.
+
+### Verification channel note
+
+Sandbox shell `curl` fails outbound TLS. Every live check in this session uses `fetch_page` or `gh`,
+never an inference from a cached page or another session's prose. Live reads are dated in
+`docs/verification-eeea2626.md` and in `ledger/product_intent.json`.
