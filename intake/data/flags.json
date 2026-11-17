@@ -1,0 +1,137 @@
+{
+  "note": "Irregularities found while registering the five submitted links. Published for owner review; none of them blocks a merge, and none has been silently fixed. Each row states what was measured, what it does and does not establish, and the source it came from.",
+  "as_of": "2026-11-17",
+  "rows": [
+    {
+      "id": "IF-01",
+      "severity": "high",
+      "title": "Two of the five submitted links resolve to a different product category than the other three",
+      "measured": "SUB-01..SUB-03 resolve into Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers. SUB-04 and SUB-05 resolve into Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat.",
+      "what_it_establishes": "The five links do not point at one product category. Any page that describes the promoted set as air fryers would be wrong about two of the five.",
+      "what_it_does_not_establish": "It does not establish that the two thermometer links were submitted in error, nor that the owner intended a single-category site. Intent is unconfirmed for all five (IF-03).",
+      "source_ids": [
+        "IN-09",
+        "IN-12",
+        "IN-13"
+      ],
+      "submission_ids": [
+        "SUB-04",
+        "SUB-05"
+      ],
+      "suggested_owner_action": "Confirm whether the two thermometer links belong in this project, then choose IP-02."
+    },
+    {
+      "id": "IF-02",
+      "severity": "high",
+      "title": "No resolved URL carries an Associates tag, so none of the five is established as a Special Link",
+      "measured": "Every resolved URL carries lv, btn_type, gaOptInStatus, btn_ref, channelId and plpRedirect. None carries tag=. Amazon's own help page publishes the format as amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID (IN-03) and the Operating Agreement requires links to 'properly use the special tagged link formats we provide' (IN-01).",
+      "what_it_establishes": "The tag parameter is absent from all five observed destinations.",
+      "what_it_does_not_establish": "It does not establish that the links are invalid or non-compliant. A tag may be attached server-side during the redirect in a way this measurement cannot see, which is exactly why the brief's FLG-003 treats their compliance status as unresolved. This project does not claim either way.",
+      "source_ids": [
+        "IN-01",
+        "IN-03"
+      ],
+      "submission_ids": [
+        "SUB-01",
+        "SUB-02",
+        "SUB-03",
+        "SUB-04",
+        "SUB-05"
+      ],
+      "suggested_owner_action": "Test one link from an enrolled Associates account and read the tracking report before scaling, as the brief requires."
+    },
+    {
+      "id": "IF-03",
+      "severity": "high",
+      "title": "Intended ASIN is unconfirmed for all five submissions",
+      "measured": "Each submitted token is 9 characters. Amazon's help page defines an ASIN as 'the 10-digit code that Amazon uses to denote specific products' (IN-03). No public Amazon document binds a short code to a destination ASIN.",
+      "what_it_establishes": "The four intent fields on every row are legitimately blank.",
+      "what_it_does_not_establish": "It does not establish that the observed destinations are wrong. They are reproducible; they are simply not proven to be what was meant.",
+      "source_ids": [
+        "IN-03",
+        "IN-22"
+      ],
+      "submission_ids": [
+        "SUB-01",
+        "SUB-02",
+        "SUB-03",
+        "SUB-04",
+        "SUB-05"
+      ],
+      "suggested_owner_action": "Confirm the intended ASIN and official listing URL from Associates Central or a Creators API lookup, then fill the intent fields."
+    },
+    {
+      "id": "IF-04",
+      "severity": "high",
+      "title": "The submitted set grew from three links to five, and the repository's registers did not",
+      "measured": "Before this session, a search of every tracked file returned no occurrence of B0c8moW59, B0f3GKalj or shopnow047c-20. The product register, the README's 'three supplied links' section and the resolved-destination tables are all built around three.",
+      "what_it_establishes": "Every published statement of the form 'the three supplied links' is now incomplete by two.",
+      "what_it_does_not_establish": "It does not establish that any published statement about the original three is wrong.",
+      "source_ids": [
+        "IN-07",
+        "IN-08"
+      ],
+      "submission_ids": [
+        "SUB-04",
+        "SUB-05"
+      ],
+      "suggested_owner_action": "Choose IP-01. The other registers are owned by finished sessions, so this namespace records the gap rather than editing them."
+    },
+    {
+      "id": "IF-05",
+      "severity": "medium",
+      "title": "The control 404 is served from amzlinks.in, and no official Amazon page confirms who operates that host",
+      "measured": "Requesting an unissued code resolves the 404 page at https://amzlinks.in/B0c8moW5Z with the text 'Uh oh, it looks like something went wrong. You've clicked on an invalid URL.'",
+      "what_it_establishes": "The short-link service's error page is served from a non-amazon.com domain.",
+      "what_it_does_not_establish": "It does not establish who operates that host, or whether the service is Amazon's. Third-party write-ups exist and are not official sources, so this project records the observation and leaves the question open. Whether these are Amazon-issued links matters to IP-03.",
+      "source_ids": [
+        "IN-14"
+      ],
+      "submission_ids": [],
+      "suggested_owner_action": "Answer IQ-05, ideally from Associates Central where the links were generated."
+    },
+    {
+      "id": "IF-06",
+      "severity": "low",
+      "title": "The two observation passes for SUB-04 and SUB-05 are not fully independent",
+      "measured": "OBS-07 returned the same Amazon session id (134-4510030-8424149) and the same btn_ref as OBS-05; OBS-08 likewise matched OBS-06 (132-4435338-5192244).",
+      "what_it_establishes": "Both passes resolved to the same ASIN and the same page title.",
+      "what_it_does_not_establish": "It does not establish stability across independent sessions. That is why observation_count is reported with this caveat rather than being presented as N independent confirmations.",
+      "source_ids": [
+        "IN-07",
+        "IN-08"
+      ],
+      "submission_ids": [
+        "SUB-04",
+        "SUB-05"
+      ],
+      "suggested_owner_action": "None required; recorded so a reader does not over-read the count."
+    },
+    {
+      "id": "IF-07",
+      "severity": "medium",
+      "title": "shopnow047c-20 is recorded as submitted, with no attribute attached",
+      "measured": "The brief names it as the selected tracking ID. No official page was found that defines this identifier, confirms it is an Associates tracking ID, or links it to a marketplace or account.",
+      "what_it_establishes": "It was submitted.",
+      "what_it_does_not_establish": "It does not establish that it is a valid Associates tracking ID, which marketplace it belongs to, or that it is the tag the links will use.",
+      "source_ids": [
+        "IN-03"
+      ],
+      "submission_ids": [],
+      "suggested_owner_action": "Answer IQ-02."
+    },
+    {
+      "id": "IF-08",
+      "severity": "high",
+      "title": "The self-hosted analytics endpoint the brief asks for cannot run on this host",
+      "measured": "GitHub's own documentation states: 'GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files straight from a repository on GitHub' (IN-16). This site is published by GitHub Pages.",
+      "what_it_establishes": "There is no place on this host to run server-side code, so a self-hosted endpoint that receives beacons and writes them to a store cannot be deployed here.",
+      "what_it_does_not_establish": "It does not establish that measurement is impossible. It establishes that the measurement decision (IP-04) must be taken before any of it is built, because the options differ in what they cost and what they can store.",
+      "source_ids": [
+        "IN-16"
+      ],
+      "submission_ids": [],
+      "suggested_owner_action": "Choose IP-04 before writing tracking code."
+    }
+  ]
+}

@@ -1153,3 +1153,51 @@ editorial expansion waits on `Q-19`.
 
 **Register state after this addendum:** 5 product entries, 45 sources, 108 verification rows, 43 flags
 (18 open · 25 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
+
+---
+
+## Addendum 2026-11-17 — the submitted set grew from three links to five (T60, session `613900e6`; renumbered from T58 — see the coordination note)
+
+The brief of 2026-11-17 names five affiliate links. Every register in this repository was built around
+three, and two of the codes (`B0c8moW59`, `B0f3GKalj`) plus the tracking id (`shopnow047c-20`) appeared
+nowhere in the tree. A new `intake/` namespace registers all five and changes no other register.
+
+*Read alongside the T59 addendum above.* Session `1539a895` (T59) resolved the same two links into the
+ledger as `P-04`/`P-05` with full specifications; this session resolved them independently into `intake/`
+as `SUB-04`/`SUB-05` and reached the **same two destinations** (`B0DHZTCNR5`, `B0DZFD6R9Z`). The two
+records are complementary, not competing: T59 owns the ledger rows and the specs, this one owns the
+all-five register, the tracking id, the measurement record and the decision board.
+
+**What the five links do.** Three resolve into Air Fryers (`B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`); two
+resolve into Meat Thermometers (`B0DHZTCNR5`, `B0DZFD6R9Z`). Every page that describes the promoted range
+as air fryers is now wrong about two fifths of it. All five resolve reproducibly, and an unissued code of
+the same shape returns a 404, so the codes are honoured lookups rather than ignored input.
+
+**What is still not established.** The intended ASIN for any of the five. Each submitted token is 9
+characters and Amazon's help page defines an ASIN as "the 10-digit code that Amazon uses to denote
+specific products", so no submitted token identifies a product on its own. The record therefore carries the
+intended ASIN, listing URL, confirmation date and source in one group of fields — all blank — and the
+observed redirect target in a separate group. They are not merged.
+
+**No resolved URL carries an Associates `tag=`.** Under the Operating Agreement a Special Link must use the
+tagged formats Amazon provides. It does not follow that the supplied links are invalid — a tag may be
+attached during the redirect — and this project does not claim either way, which is also why the brief's
+FLG-003 exists. Settling it takes one enrolled account and one report read.
+
+**The measurement plan cannot be built as specified.** The brief asks for a self-hosted analytics endpoint;
+GitHub Pages is a static site hosting service, so there is nowhere on this host to run one. Recorded rather
+than worked around, because the three honest options differ in cost and in what they may store.
+
+**Decisions, none taken.** Five proposals with fifteen options sit on `intake/proposals.html` with costs and
+blockers; ten questions on `intake/questions.html` are left deliberately empty, each with the action that
+would close it. Nothing in the namespace is implemented.
+
+**A defect found in an existing control (CR-2).** The "no page prints a product price" rule used by six
+gates in this repository is inert: it strips HTML tags before splitting on them, so the whole page becomes
+one unit, and the mandatory disclosure contains the word "earn", which suppresses every hit. Reproduced on
+three real pages with an injected `$149.99`. The new intake gate splits correctly and proves it with a
+negative test. The six existing sites are logged as CR-2 in `COORDINATION.md` rather than edited, because
+they are outside this session's file scope.
+
+Verification: [`docs/verification-613900e6.md`](docs/verification-613900e6.md). All 46 CI steps pass on the
+combined tree.

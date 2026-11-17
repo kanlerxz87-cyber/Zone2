@@ -1,0 +1,125 @@
+{
+  "note": "Measurement record. It is deliberately empty of numbers. The brief asks for a campaign ledger that starts empty but well-defined, and for clicks and reported orders to be added ONLY when they come from an authorised first-party report. Nothing has been measured: this site has no analytics running, and Amazon's own reports are the sole permitted source of conversion and earnings figures. So the columns exist, the types are declared, and every row is blank. A dated provenance trail is kept from now on - it begins empty because nothing has been provenanced yet. No conversion score and no revenue forecast appears here, and the Operating Agreement states that Amazon makes no representation about the traffic or commission income anyone can expect.",
+  "as_of": "2026-11-17",
+  "tracking_id": {
+    "submitted_value": "shopnow047c-20",
+    "submitted_utc": "2026-11-17",
+    "submitted_via": "the 2026-11-17 project brief, which names it as 'Selected Tracking ID'",
+    "confirmed_as_associates_id": "",
+    "marketplace": "",
+    "confirmation_date": "",
+    "confirmation_source": "",
+    "status": "SUBMITTED_UNCONFIRMED",
+    "why_blank": "No official page was found that defines this identifier or confirms it as an Associates tracking ID. It is recorded exactly as submitted and given no attribute beyond that. See IQ-02 and IF-07.",
+    "source_ids": [
+      "IN-03"
+    ]
+  },
+  "events": {
+    "note": "The five events this project proposes to record. Each states what it measures, what it must never store, and which decision on the board it feeds. They are proposed, not instrumented: no code collects any of them yet, because IP-04 has not been chosen and this host cannot run a server-side endpoint (IF-08).",
+    "privacy_rule": "No event carries an IP address, user-agent, cookie value, advertising identifier or any per-visitor key. Amazon's Participation Requirements forbid tying a sub-tag or Associates reporting to a specific end user, and the schema in tools/tracking_schema.sql was drawn to that rule.",
+    "rows": [
+      {
+        "id": "EV-1",
+        "name": "guide_view",
+        "measures": "A question-shaped guide page was opened.",
+        "must_not_store": "Anything that identifies the visitor.",
+        "feeds": "Which question to publish next.",
+        "status": "PROPOSED",
+        "source_ids": [
+          "IN-16"
+        ]
+      },
+      {
+        "id": "EV-2",
+        "name": "outbound_click",
+        "measures": "A sponsored product link was clicked, counted first-party.",
+        "must_not_store": "Any per-visitor parameter in the outbound href; the counter records page and block, not person.",
+        "feeds": "Which placement earns the click.",
+        "status": "PROPOSED",
+        "source_ids": [
+          "IN-15",
+          "IN-01"
+        ]
+      },
+      {
+        "id": "EV-3",
+        "name": "chooser_complete",
+        "measures": "A visitor finished the three-question 'which one is for you' chooser.",
+        "must_not_store": "The visitor's answers in a form that can be linked back to them.",
+        "feeds": "Which trade-off actually decides a purchase.",
+        "status": "PROPOSED",
+        "source_ids": [
+          "IN-21"
+        ]
+      },
+      {
+        "id": "EV-4",
+        "name": "compare_open",
+        "measures": "The comparison table or the sticky compare bar was opened.",
+        "must_not_store": "Anything beyond the fact that it was opened, and which page it was on.",
+        "feeds": "Whether the comparison earns its place above the fold.",
+        "status": "PROPOSED",
+        "source_ids": [
+          "IN-21"
+        ]
+      },
+      {
+        "id": "EV-5",
+        "name": "feed_subscribe",
+        "measures": "The feed or the reader-capture form was used.",
+        "must_not_store": "An email address anywhere a static site could expose it; capture must be handled off this host.",
+        "feeds": "Whether a return audience exists at all.",
+        "status": "PROPOSED",
+        "source_ids": [
+          "IN-16"
+        ]
+      }
+    ]
+  },
+  "campaign_ledger": {
+    "state": "EMPTY_BY_DESIGN",
+    "why_empty": "A campaign key must point at a confirmed product identity. Intent is unconfirmed for all five submissions, so no campaign may be published yet. This mirrors the existing empty ledger in ledger/campaigns.json and adds no row to it.",
+    "columns": [
+      {
+        "name": "timestamp_utc",
+        "type": "ISO-8601 date-time",
+        "note": "when the row was added, not when the traffic happened"
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "note": "which authorised report the row came from"
+      },
+      {
+        "name": "channel",
+        "type": "string",
+        "note": "page or block the traffic is attributed to"
+      },
+      {
+        "name": "eligible_sessions",
+        "type": "integer or blank",
+        "note": "only from an authorised first-party report"
+      },
+      {
+        "name": "clicks",
+        "type": "integer or blank",
+        "note": "only from an authorised first-party report"
+      },
+      {
+        "name": "reported_orders",
+        "type": "integer or blank",
+        "note": "only from an Associates report; never inferred"
+      },
+      {
+        "name": "provenance",
+        "type": "string",
+        "note": "dated note on where the figure came from"
+      }
+    ],
+    "rows": [],
+    "source_ids": [
+      "IN-02"
+    ]
+  }
+}

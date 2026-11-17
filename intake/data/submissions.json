@@ -1,0 +1,226 @@
+{
+  "note": "PRODUCT-INTENT CONFIRMATION RECORD - the five affiliate links named in the 2026-11-17 brief. Two different questions, in two different groups of fields, never merged. (A) INTENT: what the owner meant to promote - intended_asin, intended_listing_url, confirmation_date, intended_source. All four are blank for all five rows and stay blank until the owner confirms them from an Associates report; there is no official page that binds a submitted short code to a product. (B) OBSERVATION: what the link actually does - observed_redirect_target, observed_redirect_asin, observed_listing_title, observed_utc. These are populated because they were measured live. The separation is the record's whole purpose: a reader can see the destination we measured and the intent we could not confirm, and can tell which is which. Prices, ratings, review counts and sales ranks are not recorded at all - Associates Program Policies restrict their display outside an Amazon link or licensed API, and nothing here needed them. INDEPENDENT CORROBORATION 2026-11-17: session `1539a895` (T59) resolved the two new codes into the project ledger as P-04/P-05, in separate files and under separate row ids, on the same day, and reached the same two destinations recorded here (B0DHZTCNR5, B0DZFD6R9Z). Two independent sessions agreeing is stronger than either session's single pass. T59 additionally verified full specification rows for both products from the official listings, which this namespace does not repeat; this namespace additionally covers all five links, the tracking id, the measurement record and the decision board. Neither record supersedes the other.",
+  "as_of": "2026-11-17",
+  "asin_rule_source_ids": [
+    "IN-03"
+  ],
+  "intended_fields": [
+    "intended_asin",
+    "intended_listing_url",
+    "confirmation_date",
+    "intended_source"
+  ],
+  "observed_fields": [
+    "observed_redirect_target",
+    "observed_redirect_asin",
+    "observed_listing_title",
+    "observed_category_path",
+    "observed_utc",
+    "observed_query_param_names"
+  ],
+  "entries": [
+    {
+      "id": "SUB-01",
+      "submitted_url": "https://link.amazon/B04G1MEwY",
+      "submitted_token": "B04G1MEwY",
+      "token_char_count": 9,
+      "token_is_valid_asin": false,
+      "intended_asin": "",
+      "intended_listing_url": "",
+      "confirmation_date": "",
+      "intended_source": "",
+      "intent_status": "UNCONFIRMED",
+      "why_intent_blank": "Amazon's own help page defines an ASIN as 'the 10-digit code that Amazon uses to denote specific products' (IN-03). The submitted token is 9 characters, so it is not an ASIN and identifies nothing on its own. The intended ASIN is therefore a fact only the owner holds; it stays blank until confirmed, and the observed destination is never promoted into it.",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_redirect_asin": "B0CDY277D3",
+      "observed_listing_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "observed_category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "observed_utc": "2026-11-17",
+      "observation_count": 2,
+      "observed_query_param_names": [
+        "lv",
+        "btn_type",
+        "gaOptInStatus",
+        "btn_ref",
+        "channelId",
+        "plpRedirect"
+      ],
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-04",
+        "IN-09",
+        "IN-03",
+        "IN-01"
+      ],
+      "flag_ids": [
+        "IF-02",
+        "IF-03"
+      ]
+    },
+    {
+      "id": "SUB-02",
+      "submitted_url": "https://link.amazon/B02NbDxp3",
+      "submitted_token": "B02NbDxp3",
+      "token_char_count": 9,
+      "token_is_valid_asin": false,
+      "intended_asin": "",
+      "intended_listing_url": "",
+      "confirmation_date": "",
+      "intended_source": "",
+      "intent_status": "UNCONFIRMED",
+      "why_intent_blank": "Amazon's own help page defines an ASIN as 'the 10-digit code that Amazon uses to denote specific products' (IN-03). The submitted token is 9 characters, so it is not an ASIN and identifies nothing on its own. The intended ASIN is therefore a fact only the owner holds; it stays blank until confirmed, and the observed destination is never promoted into it.",
+      "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_redirect_asin": "B09B7SB46R",
+      "observed_listing_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "observed_category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "observed_utc": "2026-11-17",
+      "observation_count": 1,
+      "observed_query_param_names": [
+        "lv",
+        "btn_type",
+        "gaOptInStatus",
+        "btn_ref",
+        "channelId",
+        "plpRedirect"
+      ],
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-05",
+        "IN-10",
+        "IN-03",
+        "IN-01"
+      ],
+      "flag_ids": [
+        "IF-02",
+        "IF-03"
+      ]
+    },
+    {
+      "id": "SUB-03",
+      "submitted_url": "https://link.amazon/B00hJ57DV",
+      "submitted_token": "B00hJ57DV",
+      "token_char_count": 9,
+      "token_is_valid_asin": false,
+      "intended_asin": "",
+      "intended_listing_url": "",
+      "confirmation_date": "",
+      "intended_source": "",
+      "intent_status": "UNCONFIRMED",
+      "why_intent_blank": "Amazon's own help page defines an ASIN as 'the 10-digit code that Amazon uses to denote specific products' (IN-03). The submitted token is 9 characters, so it is not an ASIN and identifies nothing on its own. The intended ASIN is therefore a fact only the owner holds; it stays blank until confirmed, and the observed destination is never promoted into it.",
+      "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_redirect_asin": "B08DKYBTPH",
+      "observed_listing_title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "observed_category_path": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+      "observed_utc": "2026-11-17",
+      "observation_count": 1,
+      "observed_query_param_names": [
+        "lv",
+        "btn_type",
+        "gaOptInStatus",
+        "btn_ref",
+        "channelId",
+        "plpRedirect",
+        "th"
+      ],
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-06",
+        "IN-11",
+        "IN-03",
+        "IN-01"
+      ],
+      "flag_ids": [
+        "IF-02",
+        "IF-03"
+      ]
+    },
+    {
+      "id": "SUB-04",
+      "submitted_url": "https://link.amazon/B0c8moW59",
+      "submitted_token": "B0c8moW59",
+      "token_char_count": 9,
+      "token_is_valid_asin": false,
+      "intended_asin": "",
+      "intended_listing_url": "",
+      "confirmation_date": "",
+      "intended_source": "",
+      "intent_status": "UNCONFIRMED",
+      "why_intent_blank": "Amazon's own help page defines an ASIN as 'the 10-digit code that Amazon uses to denote specific products' (IN-03). The submitted token is 9 characters, so it is not an ASIN and identifies nothing on its own. The intended ASIN is therefore a fact only the owner holds; it stays blank until confirmed, and the observed destination is never promoted into it.",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed_redirect_asin": "B0DHZTCNR5",
+      "observed_listing_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+      "observed_category_path": "Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat",
+      "observed_utc": "2026-11-17",
+      "observation_count": 2,
+      "observed_query_param_names": [
+        "lv",
+        "btn_type",
+        "gaOptInStatus",
+        "_encoding",
+        "sp_csd",
+        "language",
+        "content-id",
+        "ie",
+        "btn_ref",
+        "channelId",
+        "plpRedirect"
+      ],
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-07",
+        "IN-12",
+        "IN-03",
+        "IN-01"
+      ],
+      "flag_ids": [
+        "IF-01",
+        "IF-02",
+        "IF-03",
+        "IF-04"
+      ]
+    },
+    {
+      "id": "SUB-05",
+      "submitted_url": "https://link.amazon/B0f3GKalj",
+      "submitted_token": "B0f3GKalj",
+      "token_char_count": 9,
+      "token_is_valid_asin": false,
+      "intended_asin": "",
+      "intended_listing_url": "",
+      "confirmation_date": "",
+      "intended_source": "",
+      "intent_status": "UNCONFIRMED",
+      "why_intent_blank": "Amazon's own help page defines an ASIN as 'the 10-digit code that Amazon uses to denote specific products' (IN-03). The submitted token is 9 characters, so it is not an ASIN and identifies nothing on its own. The intended ASIN is therefore a fact only the owner holds; it stays blank until confirmed, and the observed destination is never promoted into it.",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_redirect_asin": "B0DZFD6R9Z",
+      "observed_listing_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "observed_category_path": "Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat",
+      "observed_utc": "2026-11-17",
+      "observation_count": 2,
+      "observed_query_param_names": [
+        "lv",
+        "sbo",
+        "btn_type",
+        "gaOptInStatus",
+        "language",
+        "btn_ref",
+        "channelId",
+        "plpRedirect",
+        "th"
+      ],
+      "associates_tag_observed": false,
+      "source_ids": [
+        "IN-08",
+        "IN-13",
+        "IN-03",
+        "IN-01"
+      ],
+      "flag_ids": [
+        "IF-01",
+        "IF-02",
+        "IF-03",
+        "IF-04"
+      ]
+    }
+  ]
+}

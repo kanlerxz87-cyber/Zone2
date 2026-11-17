@@ -94,6 +94,8 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | T58 | **Close CR-1 (the drift-prone typed counts) and resolve the duplicated suggestion row — the two items `dc72a69e` (T57) explicitly left for the next session.** (a) **CR-1 part 1:** replace the typed counts on the release-readiness board — RR-01's "116 published HTML pages" and RR-05's "72 pages link to amazon.com/dp/" — with derived `{measure}` tokens, so the numbers are substituted from the tree at build time and cannot drift (the tree measures 161 HTML pages and 92 `amazon.com/dp/` pages today; the typed values had drifted by 45 and 20). Adds two measures to `tools/build_readiness.py` (`published_html_pages`, `pages_linking_dp`) and extends the row model to allow a row to declare more than one measure, so RR-05 can carry both its tagged-link and dp-link counts under one gate; the existing single-measure rule and all 13 negative tests are preserved and one new negative test covers the multi-measure rule. (b) **CR-1 part 2:** resolve the duplicated suggestion — `SG-11` and `SG-12` are the same proposal twice; keep `SG-12` (the id every functional reference already points at — `ledger/questions.json` Q-17 `blocks`, and RR-03/RR-09 `owner_action`) and delete `SG-11`, updating the two descriptive ledger mentions of `SG-11` (`ledger/products.json`, `ledger/sources.json`) to `SG-12` so no register carries a dangling id. Regenerates the derived `pages/suggestions.html` and `release/index.html` through their existing builders; no verified value changes; every gate re-run; PR → merge → confirm Pages deploy → record. | done 2026-11-17 (UTC) — PR merged; closing record below | `arena/0f5673ee-zone2` (0f5673ee) | `ledger/readiness.json` (RR-01, RR-05 rows only), `ledger/suggestions.json` (remove SG-11), `ledger/products.json` + `ledger/sources.json` (descriptive SG-11→SG-12 mentions only), `tools/build_readiness.py` (two measures + multi-measure row model), `tools/test_readiness.py` (one added negative case), regenerated `release/index.html` + `pages/suggestions.html` (derived), NEW `docs/verification-0f5673ee.md`, `COORDINATION.md` (append-only records + this row). **Excluded:** every other session's namespace, `.github/**`, any change to a verified value not backed by a live official fetch, the brief/docs/README/EXEC_SUMMARY descriptive range prose (logged as a follow-up, non-blocking). |
 | T59 | **Renumbered from T58 at integration.** While this branch was in flight, session `0f5673ee` claimed and merged T58 (CR-1 closure, PR #151/#152). This session had claimed T58 first for a wholly different, non-overlapping task — onboarding the two supplied links no prior session processed — and per the board's precedent the merged claim keeps the id, so this claim becomes **T59**. Renumbered rather than contended; no other session's row or record is edited. **Onboard the two newly supplied affiliate links that no prior session processed.** The brief names **five** `link.amazon` links, but every prior session (T2, T20, T22, T23, T54…T58) handled only the first **three** (`B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV` → air fryers). The **4th (`B0c8moW59`) and 5th (`B0f3GKalj`) appear nowhere in the repository** — zero references. This session: (1) resolves both codes live and confirms each opens one stable Amazon listing (B0c8moW59 → B0DHZTCNR5 ThermoMaven 1-sec digital meat thermometer; B0f3GKalj → B0DZFD6R9Z CHEF iQ Sense smart wireless meat thermometer) — a **new product category** (kitchen thermometers, not air fryers); (2) reads the destination specs from the two official Amazon listing pages and records them sourced; (3) adds `P-04`/`P-05` to `ledger/products.json` with an explicit **product-intent confirmation record** — `intended_asin`, `official_listing_url`, `confirmation_date`, `intent_source` kept in separate fields from `observed_redirect_target`, per the brief's rule that the two must never be merged; (4) adds sources `S61`/`S62`, flags `F-42`/`F-43`, verification rows, questions `Q-19`/`Q-20`, suggestions `SG-13`/`SG-14`; (5) updates `EXECUTIVE_SUMMARY.md` and the product catalog for five links; (6) regenerates every derived surface via the existing builders only; (7) runs every gate, PR → merge → confirm Pages deploy → record. **No verified value altered; unconfirmed fields stay blank and flagged; no price, rating or commission inferred.** | claimed 2026-11-17 (UTC), **done** — PRs #153, #155, #156 merged; Pages deploy confirmed | `arena/1539a895-zone2` (1539a895) | `ledger/{products,sources,flags,verification,questions,suggestions}.json`, `assets/js/data.js` (generated + one hand-authored ASIN_SOURCE addition), `EXECUTIVE_SUMMARY.md`, regenerated `products.html`/root views/`sitemap.xml` via existing builders, NEW `docs/verification-1539a895.md`, `COORDINATION.md` (append-only records + this row). **Excluded:** `.github/**`, `tools/**` (unless a gate forces a fix — logged first), all other sessions' namespaces, any verified value not backed by a live official fetch. |
 
+| T60 | **The five-link intake register (2026-11-17 brief wave).** The 2026-11-17 brief names **five** submitted `link.amazon` links and a tracking id; this repository's registers were built around **three** (`B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV`) and the strings `B0c8moW59`, `B0f3GKalj` and `shopnow047c-20` appear **nowhere in the tree** (verified by grep across every tracked file). This session closes that gap without editing another session's register: (a) resolves all five links live, twice, on 2026-11-17, and re-runs the unissued-code control; (b) publishes a **product-intent confirmation record** in which `intended_asin`, `intended_listing_url`, `confirmation_date` and `intended_source` are four separate fields that stay **blank** until the owner confirms them, and the observed redirect target lives in a **different** field that is never merged into them — the separation the brief requires; (c) records the tracking id `shopnow047c-20` as submitted-but-unconfirmed with the reason no attribute can be attached to it; (d) raises the irregularity that **two of the five links resolve to meat thermometers, not air fryers**, so the site's single-category premise no longer covers the submitted set; (e) publishes decision surfaces (proposals, open questions) for the choices this creates, with nothing marked decided; (f) runs every repository gate on the combined tree; (g) integration PR -> merge without waiting -> confirm the Pages deploy -> record here. **Takeover basis:** `gh pr list --state open` is empty, `main` is at `e58dac0`, every prior session's row reads done or merged, and no session holds a claim on any of these files. **Renumbered to T58:** T50-T57 are all taken by merged sessions (see their rows). | **claimed 2026-11-17T16:02:59Z; renumbered T58 → T60 at integration** | `arena/613900e6-zone2` (613900e6) | NEW `intake/**` (namespace + `intake/data/*.json`), NEW `tools/build_intake.py`, NEW `tools/validate_intake.py`, NEW `tools/test_intake.py`, NEW `docs/verification-613900e6.md`, `COORDINATION.md` (append-only records + this row), `README.md` (additive section), `EXECUTIVE_SUMMARY.md` (append-only addendum), regenerated `sitemap.xml`, three additive CI steps, one additive nav entry in `tools/build_front.py` (forced: `index.html` is generated by it and `tools/audit_site.py` fails an unlinked namespace). **Excluded:** `ledger/**`, `pages/**`, `brief/**`, `console/**`, `audit/**`, `discovery/**`, `marketing/**`, `research-hub/**`, `zone2/**`, `northstar/**`, `revalidation/**`, `affiliate-lab/**`, `.github/**` (unless a gate forces a fix - logged here first), and any change to a value in another session's register. |
+
 ## Change requests & flags raised by `s-f786c0d7` (PR #10)
 
 Recorded here rather than edited into other sessions' files or claims, per the coordination rules.
@@ -6233,3 +6235,88 @@ waits on the owner's `Q-19` decision (`SG-13`); nothing on the suggestion board 
 | Gates (final tree) | `validate_data` 0 errors · `validate_discovery` PASS · all other validators PASS · `audit_site` PASS · `seo_audit` PASS · `check_css_urls` clean · `verify_front` PASS · `test_pipeline` 15/15 · `test_readiness`/`test_brief`/`test_review_board`/`test_audit` PASS · `build_head_meta --audit` 0 problems · `ci_replay` PASS |
 | No verified value changed | No product attribute, source quote, policy claim, flag or commission figure was altered. The rebase/renumber and the #156 drift fix touched only the task id label, the conflict resolution, doc references, and typed prose counts on the landing page. |
 | Non-blocking residuals | **Q-19** (confirm intended ASINs for links 4/5) and **Q-20** (confirm commission band) remain open; the thermometer editorial expansion waits on the owner's `Q-19` decision (`SG-13`). **RR-05 remains BLOCKED** on Q-02 (no Associates ID / Special Links). No traffic, click, conversion or revenue figure exists or is published. The brief's own link-token validity question (FLG-003) remains unresolved — the short links resolve to live listings, so they are not claimed invalid. |
+## T60 — session `arena/613900e6-zone2` (613900e6), 2026-11-17
+
+### Change requests logged (not implemented in another session's files)
+
+`CR-1` and `CR-2` are both already taken on this board by earlier sessions, so this session's
+request is id'd with its task number to avoid a collision. No other session's row is edited.
+
+| ID | File | Request | Status |
+|---|---|---|---|
+| CR-T60-1 | `.github/workflows/pages.yml` (×2), `tools/validate_data.py:550`, `tools/validate_audit.py:272`, `tools/validate_decisions.py:284`, `tools/build_readiness.py:623` | **The "no page prints a product price" rule is inert in six gates.** All six use `re.split(r"</tr>\|</p>\|</li>\|<br\s*/?>", re.sub(r"<[^>]+>", " ", t))`. `re.sub` strips the tags *before* `re.split` looks for them, so `units` collapses to `[whole page]`. The mandatory disclosure contains the word "earn", which `PROGRAM_CONTEXT` matches, so `not PROGRAM_CONTEXT.search(unit)` is always false and the rule can never fire. **Reproduced:** an injected `<p>Buy now at the current price of $149.99 today.</p>` was not reported by that ordering on `index.html`, `pages/suggestions.html` and `marketing/index.html`. **Fix:** split on block tags first, then strip tags inside each unit — `re.split(r"</(?:p\|li\|tr\|div\|section\|blockquote\|h[1-6]\|td\|th)\s*>", t)` then `re.sub(r"<[^>]+>", " ", chunk)`. `tools/validate_intake.py` does it this way and proves it with negative test case 12. | open — logged, not edited (all six sites are outside this session's claimed file scope) |
+
+### Sources used
+
+All fetched and read live on 2026-11-17 unless marked CARRIED:
+
+| Id | Page |
+|---|---|
+| IN-01 | <https://affiliate-program.amazon.com/help/operating/agreement> (states updated 2025-10-15) |
+| IN-02 | <https://affiliate-program.amazon.com/help/operating/policies> (states updated 2026-04-14) |
+| IN-03 | <https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC> |
+| IN-04…IN-08 | the five submitted `link.amazon` URLs |
+| IN-09…IN-13 | the five resolved `amazon.com/dp/` listing pages |
+| IN-14 | control: `https://link.amazon/B0c8moW5Z` (unissued code → 404) |
+| IN-15 | <https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links> (2025-12-10) |
+| IN-16 | <https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages> |
+| IN-17…IN-22 | CARRIED from `ledger/sources.json` (FTC ×2, Google ×3, Creators API ×1) — labelled CARRIED on every row that cites them, with their own last-verified dates |
+
+### Verification performed
+
+- All five submitted links resolved live, twice for SUB-04/SUB-05, plus two controls (an unissued
+  code, and a bare request to a known-good ASIN). Logged row by row in
+  `intake/data/observations.json` and published on `intake/observations.html`.
+- The ASIN definition, the Operating Agreement's Special Links and disclosure clauses, the Program
+  Policies header, Google's `rel="sponsored"` guidance and the GitHub Pages description were each
+  re-read from the official page on 2026-11-17 and are quoted verbatim.
+- Every gate in the repository was run on the combined tree: **46 of 46 CI steps pass**.
+- The new namespace's own gate is negative-tested: baseline clean, **15 of 15 injected defects
+  fire** (`tools/test_intake.py`).
+
+### Irregularities raised
+
+`IF-01`…`IF-08` on <https://kanlerxz87-cyber.github.io/Zone2/intake/flags.html>. The three that change
+what should be built: **IF-01** (two of five links are meat thermometers, not air fryers, so the
+site's single-category premise no longer covers the submitted set), **IF-02** (no resolved URL
+carries an Associates `tag=`, so none is established as a Special Link — deliberately not claimed
+as invalidity, since the brief's FLG-003 leaves the supplied links' status unresolved), and
+**IF-08** (GitHub Pages is static-only, so the self-hosted analytics endpoint the brief asks for
+cannot run here).
+
+**Derived counts corrected in another namespace.** Adding 8 pages moved the tree from 150 to 158
+published pages, which broke `brief/data/summary.json` (typed "150 of 150" and "16 surfaces") and
+staled `release/index.html`. Both are derived values, not facts, so as this wave's integration
+session this one rebuilt them (`tools/build_brief.py`, `tools/build_readiness.py`) and updated the
+two typed counts in `brief/data/summary.json` to the measured 158 and 17. No ledger data changed.
+
+
+### T60 renumbering and the overlap with T59 (session `613900e6`)
+
+**Renumbered T58 → T60.** Three sessions claimed the id on 2026-11-17. `0f5673ee` claimed it and
+merged first (PR #152, `ae6b866`, 16:17:14Z) for the CR-1 drift-count fix, so by the board's
+precedent the merged claim keeps the id and **T58 is `0f5673ee`'s**. `1539a895` claimed at 16:06:04Z
+and renumbered to **T59** (PR #153). This session claimed at **16:02:59Z** — earlier than
+`1539a895` but later than `0f5673ee`, whose claim was already in flight — and becomes **T60**.
+Renumbered rather than contended; no other session's row, record or id is altered.
+
+**The overlap with T59 is real and is recorded rather than hidden.** Both sessions independently
+found that `B0c8moW59` and `B0f3GKalj` were absent from the repository and resolved them live on
+the same day. `1539a895` recorded the result in the ledger as **P-04/P-05** with an
+`intent_confirmation` block and verified product specifications. This session recorded it in a
+separate `intake/` namespace with its own row ids. The two records do not collide — different
+files, different id prefixes, no ledger row edited here — but a reader should know both exist.
+
+**The useful part: the two sessions agree.** Independent live fetches, same day, same two codes:
+
+| Code | T59 (ledger P-04/P-05) | T60 (intake SUB-04/SUB-05) | Agree |
+|---|---|---|---|
+| `B0c8moW59` | `B0DHZTCNR5` | `B0DHZTCNR5` | yes |
+| `B0f3GKalj` | `B0DZFD6R9Z` | `B0DZFD6R9Z` | yes |
+
+Two independent sessions reaching the same two destinations is stronger evidence than either
+session's single pass, and it is recorded here so the corroboration is not lost. T59 additionally
+verified full specification rows for both products from the official listings, which this session
+did not repeat; this session additionally covers all five links (not only the two new ones), the
+tracking id `shopnow047c-20`, the measurement/events record, and the decision board. Neither
+session's work is superseded by the other.

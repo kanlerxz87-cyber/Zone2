@@ -1,0 +1,350 @@
+{
+  "note": "Sources for the intake/ namespace (T60, session arena/613900e6-zone2, 2026-11-17). Two kinds of row, kept apart on purpose. LIVE = fetched and read by this session on the date in accessed_utc; the quote printed beside it was on that page at that time. CARRIED = a source this session did not re-fetch; it is already in ledger/sources.json under the id in carried_from, it is labelled CARRIED wherever it is cited, and its own last_verified_utc is reproduced rather than restated. A carried row is never used to support a value this session measured.",
+  "as_of": "2026-11-17",
+  "sources": [
+    {
+      "id": "IN-01",
+      "kind": "official",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "title": "Associates Program Operating Agreement",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "page_stated_update": "2025-10-15",
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [
+        "The links must properly use the special “tagged” link formats we provide and comply with this Agreement (“Special Links”).",
+        "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”",
+        "We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program",
+        "Program Content specifically excludes any data, images, text, or other information or content relating to product offerings on any site other than the Amazon Site."
+      ],
+      "used_for": [
+        "definition of a Special Link (Sec. 1)",
+        "the required Associate disclosure (Sec. 5)",
+        "no forecast of traffic or commission income (Sec. 4)"
+      ]
+    },
+    {
+      "id": "IN-02",
+      "kind": "official",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "title": "Associates Program Policies",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "page_stated_update": "2026-04-14",
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [
+        "These Associates Program policies (“Program Policies”) are incorporated by reference in the Associates Program Operating Agreement"
+      ],
+      "used_for": [
+        "Qualifying Purchase / Session definition (Commission Income Statement Sec. 1)",
+        "Participation Requirements referenced by the brief"
+      ]
+    },
+    {
+      "id": "IN-03",
+      "kind": "official",
+      "publisher": "Amazon (Amazon.com Associates Central Help)",
+      "title": "How do I build a simple text link to a specific item on Amazon?",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [
+        "ASIN: ASIN is the 10-digit code that Amazon uses to denote specific products. It is short for “Amazon.com Standard Item Number.” Every item in our catalog has a unique ASIN.",
+        "http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID",
+        "This link format qualifies for the direct link bonus.",
+        "YOURASSOCIATEID: YOURASSOCIATEID is the unique ID that is used to identify your Associates account, automatically generated when you apply for the Associates Programme."
+      ],
+      "used_for": [
+        "the checkable ASIN identifier the product-intent record is built on (10-digit/10-character rule)",
+        "the tagged link format an official Amazon page publishes",
+        "the tag= parameter every Special Link must carry"
+      ]
+    },
+    {
+      "id": "IN-04",
+      "kind": "supplied",
+      "publisher": "Submitted by the project owner",
+      "title": "Submitted affiliate link 1",
+      "url": "https://link.amazon/B04G1MEwY",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-01 submitted URL"
+      ]
+    },
+    {
+      "id": "IN-05",
+      "kind": "supplied",
+      "publisher": "Submitted by the project owner",
+      "title": "Submitted affiliate link 2",
+      "url": "https://link.amazon/B02NbDxp3",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-02 submitted URL"
+      ]
+    },
+    {
+      "id": "IN-06",
+      "kind": "supplied",
+      "publisher": "Submitted by the project owner",
+      "title": "Submitted affiliate link 3",
+      "url": "https://link.amazon/B00hJ57DV",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-03 submitted URL"
+      ]
+    },
+    {
+      "id": "IN-07",
+      "kind": "supplied",
+      "publisher": "Submitted by the project owner",
+      "title": "Submitted affiliate link 4",
+      "url": "https://link.amazon/B0c8moW59",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-04 submitted URL"
+      ]
+    },
+    {
+      "id": "IN-08",
+      "kind": "supplied",
+      "publisher": "Submitted by the project owner",
+      "title": "Submitted affiliate link 5",
+      "url": "https://link.amazon/B0f3GKalj",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-05 submitted URL"
+      ]
+    },
+    {
+      "id": "IN-09",
+      "kind": "observed",
+      "publisher": "Amazon.com",
+      "title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-01 observed destination title and category"
+      ]
+    },
+    {
+      "id": "IN-10",
+      "kind": "observed",
+      "publisher": "Amazon.com",
+      "title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-02 observed destination title and category"
+      ]
+    },
+    {
+      "id": "IN-11",
+      "kind": "observed",
+      "publisher": "Amazon.com",
+      "title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-03 observed destination title and category"
+      ]
+    },
+    {
+      "id": "IN-12",
+      "kind": "observed",
+      "publisher": "Amazon.com",
+      "title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-04 observed destination title and category"
+      ]
+    },
+    {
+      "id": "IN-13",
+      "kind": "observed",
+      "publisher": "Amazon.com",
+      "title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [],
+      "used_for": [
+        "SUB-05 observed destination title and category"
+      ]
+    },
+    {
+      "id": "IN-14",
+      "kind": "control",
+      "publisher": "This project (control run against Amazon's short-link service)",
+      "title": "CONTROL - an unissued 9-character code of the same shape as the submitted codes",
+      "url": "https://link.amazon/B0c8moW5Z",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [
+        "Uh oh, it looks like something went wrong.",
+        "You’ve clicked on an invalid URL."
+      ],
+      "used_for": [
+        "control: an unissued code is answered with a 404, so the five issued codes are honoured lookups rather than ignored input"
+      ]
+    },
+    {
+      "id": "IN-15",
+      "kind": "official",
+      "publisher": "Google Search Central",
+      "title": "Qualify your outbound links to Google",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "page_stated_update": "2025-12-10",
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [
+        "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value."
+      ],
+      "used_for": [
+        "rel=\"sponsored\" on every outbound product link"
+      ]
+    },
+    {
+      "id": "IN-16",
+      "kind": "official",
+      "publisher": "GitHub Docs",
+      "title": "What is GitHub Pages?",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-17",
+      "status": "LIVE",
+      "quotes": [
+        "GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files straight from a repository on GitHub, optionally runs the files through a build process, and publishes a website."
+      ],
+      "used_for": [
+        "the hard constraint on the measurement plan: no server-side endpoint can run on this host"
+      ]
+    },
+    {
+      "id": "IN-17",
+      "kind": "official",
+      "publisher": "U.S. Federal Trade Commission",
+      "title": "Disclosures 101 for Social Media Influencers",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-13",
+      "status": "CARRIED",
+      "carried_from": "S07 (ledger/sources.json)",
+      "last_verified_utc": "2026-11-13",
+      "quotes": [],
+      "used_for": [
+        "disclosure placement and prominence (brief's Priority 5 compliance gate)"
+      ]
+    },
+    {
+      "id": "IN-18",
+      "kind": "official",
+      "publisher": "U.S. Federal Trade Commission",
+      "title": "Endorsements, Influencers, and Reviews",
+      "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-13",
+      "status": "CARRIED",
+      "carried_from": "S24 (ledger/sources.json)",
+      "last_verified_utc": "2026-11-13",
+      "quotes": [],
+      "used_for": [
+        "endorsement context for the compliance gate"
+      ]
+    },
+    {
+      "id": "IN-19",
+      "kind": "official",
+      "publisher": "Google Search Central",
+      "title": "Create unique descriptions for each page on your site",
+      "url": "https://developers.google.com/search/docs/appearance/snippet",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-13",
+      "status": "CARRIED",
+      "carried_from": "ledger/sources.json (Google snippet guidance)",
+      "last_verified_utc": "2026-11-13",
+      "quotes": [],
+      "used_for": [
+        "per-page title and meta description rule"
+      ]
+    },
+    {
+      "id": "IN-20",
+      "kind": "official",
+      "publisher": "Google Search Central",
+      "title": "Spam policies for Google Search (thin affiliation)",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-13",
+      "status": "CARRIED",
+      "carried_from": "ledger/sources.json (Google spam policies)",
+      "last_verified_utc": "2026-11-13",
+      "quotes": [],
+      "used_for": [
+        "the 'meaningful content beyond the listing' rule the guides are written to"
+      ]
+    },
+    {
+      "id": "IN-21",
+      "kind": "official",
+      "publisher": "Google Search Central",
+      "title": "Creating helpful, reliable, people-first content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-13",
+      "status": "CARRIED",
+      "carried_from": "ledger/sources.json (Google helpful content)",
+      "last_verified_utc": "2026-11-13",
+      "quotes": [],
+      "used_for": [
+        "editorial standard for the question-shaped guides"
+      ]
+    },
+    {
+      "id": "IN-22",
+      "kind": "official",
+      "publisher": "Amazon (Amazon.com Associates Central)",
+      "title": "Creators API reference - GetItems operation",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-13",
+      "status": "CARRIED",
+      "carried_from": "S08 (ledger/sources.json)",
+      "last_verified_utc": "2026-11-13",
+      "quotes": [],
+      "used_for": [
+        "the sanctioned ASIN -> product identity lookup, and the blocker on confirming intent"
+      ]
+    }
+  ]
+}
