@@ -7557,7 +7557,7 @@ production collection, enrollment/intent/reports and CN-08). No user's manual an
 
 **Changes made:** Only `COORDINATION.md` (session registry entry, T68 task board row, this closing record). No product fact, intended confirmation, campaign observation, or strategic choice is added, changed, or inferred. All blanks remain blank; all flagged items remain flagged.
 
-**PR and merge:** PR created from `arena/57eb4af5-zone2` to `main`; merged without waiting for review; GitHub Pages deployment confirmed via the `pages.yml` workflow (`Build, verify and deploy` + `Deploy to GitHub Pages` jobs).
+**PR and merge:** PR #179 (https://github.com/kanlerxz87-cyber/Zone2/pull/179), merged 2026-11-19 as merge commit `138b0eba4773b9204638128f2b6ae6dcf166db88` via `gh pr merge 179 --merge`. **Actions run 44509112617**: `Build, verify and deploy` success (2m4s); `Deploy to GitHub Pages` success (19s), including the read-only live publication verification step (8 critical pages + measurement.json + sitemap.xml + feed.xml). **Pages deployment** confirmed via the `pages.yml` workflow on `main`.
 
 **Still open (non-blocking, per prior sessions):** intended ASIN/listing/date/source confirmations, enrolled Associates attribution, production collector host, Search Console ownership and real reports, CN-08 administrator-only Pages source-mode setting. None of these are blocking; all are published with source links on Flagged for Review.
 
