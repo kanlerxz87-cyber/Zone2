@@ -6897,3 +6897,21 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Open** — 171 of 171 pages still collapse |
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
+
+
+---
+
+## T65 — Claim: session `arena/da47d78d-zone2` (2026-11-19 UTC)
+
+**Claimant:** Session `da47d78d` on working branch `arena/da47d78d-zone2` (branched from `main` @ `4398071d49fdda73c084aa6f3dedf4f72b268076`).
+
+### Task Scope
+- **CI / Workflow Repair:** Resolve merge conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>>`) left in `.github/workflows/pages.yml` from PR #161 / #158. Keep both `intake/` and `board/` verification steps intact. Add preflight conflict-marker detection to `tools/ci_replay.py`.
+- **Five-Product Affiliate Marketing & Verification:** Verify all five submitted links (`B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV`, `B0c8moW59`, `B0f3GKalj`), ensuring product-intent records keep intent and observed destination strictly segregated. Ensure `shopnow047c-20` is correctly configured on published Special Links with `rel="sponsored nofollow"`, while evidence citations stay unmonetized.
+- **Publication & Shop-First Polish:** Ensure question-shaped buyer guides, clear navigation, above-the-fold disclosures, and privacy-preserving aggregate event tracking (`events.js`).
+- **CR-4 Resolution:** Correct inverted price-rule ordering in validators (split on tags first, then strip tags).
+- **Executive Summary & Decision Surface:** Complete comprehensive `EXECUTIVE_SUMMARY.md` outlining all findings, decisions, suggestions, open questions, and compliance rules.
+- **Pull Request & Final Integration:** Build, run full test suite (`ci_replay.py` 49/49), open PR from `arena/da47d78d-zone2` to `main`, and merge.
+
+### Claimed Files
+`.github/workflows/pages.yml`, `tools/ci_replay.py`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md`, `tools/validate_data.py`, `tools/validate_audit.py`, `tools/build_readiness.py`, and related documentation/reporting views.
