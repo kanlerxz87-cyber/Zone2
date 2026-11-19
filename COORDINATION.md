@@ -33,6 +33,7 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | `arena/8fb7c287-zone2` (`8fb7c287`, **this session**) | `arena/8fb7c287-zone2` | **T56 (renumbered from T50 → T55 → T56 at integration — T50…T55 were taken by parallel sessions while this branch was in flight) — close the open change requests (CR-A…CR-D + T49's F-20 wording item), fresh dated line-by-line verification of the official sources, final integration** (gates → PR → merge → confirm Pages deploy → record) | claimed 2026-11-16 (UTC), in progress |
 | `arena/1539a895-zone2` (`1539a895`, **this session**) | `arena/1539a895-zone2` | **T59 (renumbered from T58 at integration — `0f5673ee` merged T58 for the CR-1 closure first) — onboard the two newly supplied affiliate links (B0c8moW59, B0f3GKalj) that no prior session processed.** Resolve both `link.amazon` codes to their observed Amazon destinations, verify the destination specs from the official listing pages, add P-04/P-05 to the source-governed ledger with an explicit product-intent confirmation record (intended ASIN / official listing URL / confirmation date / source kept separate from the observed redirect target), extend sources/flags/verification/questions/suggestions, update the executive summary, regenerate every derived surface, run all gates, PR → merge → confirm Pages deploy → record. No verified value altered; blanks stay blank and flagged. | claimed 2026-11-17 (UTC), in progress |
 | `arena/7264f3c2-zone2` (`7264f3c2`, **this session**) | `arena/7264f3c2-zone2` | **T61 (renumbered from T58 at integration — `0f5673ee` merged T58 for the CR-1 closure first, and `1539a895`/`613900e6` hold T59/T60; the merged claim keeps the id, per the board's precedent) — the owner supplied the Associates tag.** Apply `shopnow047c-20` to every reader-facing product Special Link, record the owner measurement decision on DS-11 and turn the privacy-preserving click layer on for the three collectable events (EV-01…EV-03 client-side; EV-04/05 stay blocked on first-party reports), publish the product-intent confirmation register for all five supplied links (re-observing all five live; the two new codes were independently onboarded as P-04/P-05 by T59 and recorded in the intake register by T60), ship the social-preview image, fresh dated verification of the sources this session's changes rest on, final integration (gates → PR → merge → confirm Pages deploy → record) | claimed 2026-11-17 (UTC), in progress |
+| `arena/32788da6-zone2` (`32788da6`, **this session**) | `arena/32788da6-zone2` | **T64 — the Thermometer desk: question-shaped, reader-facing guides for the two products that have none (RQ-04).** P-04/P-05 resolve to meat thermometers and no published page answers a single buyer question about them. Builds a sourced section inside the Counter Notes publication, adds it to the existing feed and sitemaps, re-verifies every value it prints live on 2026-11-19, raises the irregularities found while doing so, adds this wave's suggestions/questions, integrates (gates → PR → merge → confirm Pages deploy → record). Does **not** touch T63's scope (`.github/workflows/pages.yml`, `tools/build_front.py`, `assets/css/publish.css`, the front pages it rebuilds). | claimed 2026-11-19 (UTC), in progress |
 
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
@@ -6898,6 +6899,7 @@ resolved or partly resolved and retained.
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
 
+<<<<<<< HEAD
 
 ---
 
@@ -6957,3 +6959,38 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Fixed & Closed** by `da47d78d` across all validators and CI |
 | CR-5 | One rule for what counts as a "tagged page" | Documented (`[?&]tag=` rule standard across tree) |
 | CR-6 | Concurrency cancellation reporting | Documented in `EXECUTIVE_SUMMARY.md` |
+=======
+---
+
+## T64 — the Thermometer desk: session `arena/32788da6-zone2` (2026-11-19)
+
+**Claimed 2026-11-19 (UTC) on branch `arena/32788da6-zone2`.** Status: **in progress.**
+
+**Why this task.** `board/requirements.html` RQ-04 measures that the two newest products (P-04 ThermoMaven,
+P-05 CHEF iQ Sense) have *no* question-shaped page: "Nothing on the site asks or answers a single question
+about a meat thermometer." Every reader-facing guide is about air fryers. Two of the five promoted products
+therefore cannot earn a single organic visit.
+
+**Coordination check before claiming.** `gh pr list --state open` empty; `main` at `4398071`. Session
+`arena/1d0347fb-zone2` claimed **T63** at 2026-11-19T05:37Z (workflow repair + front-page navigation polish;
+scope `.github/workflows/pages.yml`, `tools/build_front.py`, `assets/css/publish.css`, front pages rebuilt by
+that generator). T64 is disjoint from it by construction.
+
+| Scope (T64) | Detail |
+|---|---|
+| NEW `tools/build_thermometers.py` | generator + `--check`, refuses to emit an unsourced value, a price, or an untagged product link |
+| NEW `marketing/data/thermometers.json` | sourced facts (re-read live 2026-11-19) + editorial copy for the section |
+| NEW `marketing/thermometers/**` | generated pages only |
+| `tools/build_marketing.py` | **additive only**: thermometer guides appear in the existing `feed.xml`, `marketing/sitemap.xml` and topics index |
+| `marketing/data/editorial.json` | one nav entry (`Thermometers`) |
+| regenerated `marketing/**` + root `sitemap.xml` | through the existing builders only |
+| `ledger/flags.json`, `ledger/questions.json`, `ledger/suggestions.json` | append-only new rows; regenerated derived views via their existing builders |
+| NEW `docs/verification-32788da6.md`, `EXECUTIVE_SUMMARY.md` (append-only addendum), this file (append-only) | |
+
+**Excluded:** everything in T63's scope; `.github/**`; any verified value not re-read from a live official page;
+any price, rating, review count or sales claim; every other session's namespace.
+
+**Cross-scope request to T63 (CR-7):** please link `marketing/thermometers/` from the landing page / guide
+navigation when you rebuild `index.html` — it is a reader-facing section and should not be reachable only via
+the Counter Notes nav, the feed and the sitemap.
+>>>>>>> a3b68d3 (Claim T64 (session 32788da6): thermometer desk — question-shaped guides for P-04/P-05)
