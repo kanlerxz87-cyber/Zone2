@@ -6957,3 +6957,12 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Fixed & Closed** by `da47d78d` across all validators and CI |
 | CR-5 | One rule for what counts as a "tagged page" | Documented (`[?&]tag=` rule standard across tree) |
 | CR-6 | Concurrency cancellation reporting | Documented in `EXECUTIVE_SUMMARY.md` |
+
+
+#### 6. Final Integration, Merge & GitHub Pages Deployment Record
+- **Pull Request:** [#165](https://github.com/kanlerxz87-cyber/Zone2/pull/165)
+- **Merge SHA:** `66b721350a41703623c52a0a2569502756a1b920` (merged cleanly into `main`)
+- **Actions Verification Run:** [44468762949](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44468762949) (`completed/success` in 41s)
+- **GitHub Pages Deployment Run:** [44468762430](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44468762430) (`completed/success` in 31s)
+- **Pages API Status:** `status: built` at `https://kanlerxz87-cyber.github.io/Zone2/`
+- **Result:** Live site is healthy, zero broken internal links, 100% statutory disclosure compliance, zero unauthorized product prices, and full 5-product intent/observation segregation intact.
