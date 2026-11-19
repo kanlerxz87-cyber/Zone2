@@ -1489,3 +1489,36 @@ the confirmation date/source apart from redirect observations.
 bot-filtering choices before collecting events.
 4. Verify Search Console ownership and use actual query/page data before treating any topic as measured
 interest. Until then the guide subjects remain editorial hypotheses.
+
+## Addendum — 2026-11-19 (session `arena/6ce606cb-zone2`, T66): shop-first front page, thermometer guides, decision desk
+
+*Renumbered from T63 at integration: `cf98ff65` merged T63 first (PR #166/#168). This addendum builds on it and
+keeps all of its work. Full record: [`docs/verification-6ce606cb.md`](docs/verification-6ce606cb.md).*
+
+**What a reader sees now.** The front page leads with the five supplied listings, not with the verification
+process. There are three air fryers and two meat thermometers, each with one line of opinion, a "best for"
+line, its highlights from its own sourced rows, and a tagged, sponsored button. The reader menu now has
+*Air fryers* and *Meat thermometers* next to cf98ff65's publication links; every dashboard sits in the single
+*Project &amp; tools* group and in the footer. The disclosure strip stays under the masthead and in the footer.
+
+**New reading.** A meat-thermometer category page and three question-shaped guides: *Is the turkey done?*
+(published a week before Thanksgiving), *Instant-read or leave-in?* and *Can you use a meat thermometer in an
+air fryer?* Every temperature is cited to FoodSafety.gov or USDA FSIS in the same paragraph, and a gate fails
+the build otherwise. Thermometer figures are read from the ledger rows that were transcribed from the Amazon
+listings, never re-typed.
+
+**Decide before implementing.** The new decision desk (`desk/`) groups 24 suggestions under four goals: make it
+read like a shop, make it findable, make the machinery trustworthy, make it read like a publication. Each
+suggestion shows its options, evidence, unknowns and how to find out. Nothing is marked decided. Where the brief
+already points to an option (front page, tag, sitemap and cadence, measurement, disclosure, sponsored links) the
+desk says so and shows what has shipped, but the choice stays with the owner. `desk/questions.html` ranks the
+open questions by how many suggestions each one blocks.
+
+**Corrections and new flags.** The 0-job workflow "failures" after PR #158 were parse failures, not
+cancellations (F-44, closed). New open flags: the ThermoMaven listing now advertises a newer model (F-45); the
+two product registers disagree on the 8-quart Chefman's power status (F-46); the RSS feed's dates are not
+RFC 822 and the feed omits the root guides (F-47); a readiness row still describes three air fryers (F-48).
+The register now holds 48 flags (22 open · 26 resolved).
+
+**Verification.** Every gate in the workflow replays green on the merged tree (51 of 51 steps), the structural
+audit passes on 186 pages, and the sitemap lists 184 URLs.

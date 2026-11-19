@@ -443,3 +443,10 @@ python3 tools/test_board.py             # prove every check fires
 **Nothing on the board is implemented.** See `board/flagged.html` for the 13 irregularities,
 four of them high severity — including FL-13: the rule that is supposed to stop a page
 printing a product price never fires, in all four copies of it in this repository.
+
+## 2026-11-19 — T66 (session `arena/6ce606cb-zone2`)
+
+* **Front page** leads with all five listings (three air fryers, two meat thermometers) — `tools/build_front.py`.
+* **Meat thermometers**: [category page](https://kanlerxz87-cyber.github.io/Zone2/guides/thermometers.html) and three cited guides (`guides/thermometers-*.html`).
+* **Decision desk**: [every suggestion by goal](https://kanlerxz87-cyber.github.io/Zone2/desk/index.html) and [the questions to answer first](https://kanlerxz87-cyber.github.io/Zone2/desk/questions.html) — `tools/build_desk.py`, gate `tools/validate_desk.py`.
+* Record: [`docs/verification-6ce606cb.md`](docs/verification-6ce606cb.md).
