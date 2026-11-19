@@ -6899,7 +6899,6 @@ resolved or partly resolved and retained.
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
 
-<<<<<<< HEAD
 
 ---
 
@@ -6959,7 +6958,7 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Fixed & Closed** by `da47d78d` across all validators and CI |
 | CR-5 | One rule for what counts as a "tagged page" | Documented (`[?&]tag=` rule standard across tree) |
 | CR-6 | Concurrency cancellation reporting | Documented in `EXECUTIVE_SUMMARY.md` |
-=======
+
 ---
 
 ## T64 — the Thermometer desk: session `arena/32788da6-zone2` (2026-11-19)
@@ -6993,4 +6992,3 @@ any price, rating, review count or sales claim; every other session's namespace.
 **Cross-scope request to T63 (CR-7):** please link `marketing/thermometers/` from the landing page / guide
 navigation when you rebuild `index.html` — it is a reader-facing section and should not be reachable only via
 the Counter Notes nav, the feed and the sitemap.
->>>>>>> a3b68d3 (Claim T64 (session 32788da6): thermometer desk — question-shaped guides for P-04/P-05)
