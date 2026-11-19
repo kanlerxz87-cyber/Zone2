@@ -1170,15 +1170,153 @@ def build_index(facts, board):
 def build_guides_index(facts, board):
     return publication.guides_index()
 
+def _decision_dates(board: dict) -> tuple[str, str]:
+    compiled = str(board.get("compiled_utc") or "unknown")
+    directions = [
+        str(row["owner_direction"].get("date", ""))
+        for row in board.get("suggestions", [])
+        if row.get("owner_direction") and row["owner_direction"].get("date")
+    ]
+    return compiled, max(directions, default=compiled)
+
+
+def _replace_pb_lead(doc: str, lead: str) -> str:
+    updated, count = re.subn(
+        r'<section class="pb-lead"[^>]*>.*?</section>',
+        lambda _match: lead,
+        doc,
+        count=1,
+        flags=re.S,
+    )
+    if count != 1:
+        raise ValueError("expected exactly one generated decision-page lead")
+    return updated
+
+
+def _suggestions_lead(board: dict) -> str:
+    current_count = len(publication.PROPOSALS)
+    current_questions = len(publication.QUESTIONS)
+    prior = board["suggestions"]
+    prior_count = len(prior)
+    owner_directions = sum(bool(row.get("owner_direction")) for row in prior)
+    compiled, latest_direction = _decision_dates(board)
+    return f'''<section class="pb-lead" data-register-summary="suggestions"><div class="pb-wrap">
+  <p class="pb-kicker">Decision board · current release</p>
+  <h1 class="pb-h1">{num_word(current_count, cap=True)} current proposals to review. <em>{num_word(prior_count)} earlier proposals are preserved below.</em></h1>
+  <p class="pb-stand">Start with the current release options: each states the evidence needed, lays out the trade-offs, and links to the question that could change the choice. The earlier decision register stays separate below. A browser preference is for review only; it does not approve or implement a change.</p>
+  <p class="pb-byline" data-current-proposals="{current_count}" data-current-questions="{current_questions}" data-preserved-proposals="{prior_count}" data-owner-directions="{owner_directions}">
+    <b>{current_count} current proposals</b> &middot; <b>{current_questions} current questions</b> &middot;
+    <b>{prior_count} earlier proposals preserved</b> &middot; <b>{owner_directions} earlier owner directions recorded</b>
+  </p>
+  <p class="pb-byline" data-summary-dates="suggestions" data-page-updated="{e(UPDATED_ON)}" data-current-as-of="{e(publication.DATE)}" data-board-compiled="{e(compiled)}" data-owner-directions-through="{e(latest_direction)}">
+    Page last updated {e(UPDATED_ON)}; current release data as of <time datetime="{e(publication.DATE)}">{e(publication.DATE)}</time>;
+    earlier board compiled <time datetime="{e(compiled)}">{e(compiled)}</time>;
+    owner directions recorded through <time datetime="{e(latest_direction)}">{e(latest_direction)}</time>.
+  </p>
+</div></section>'''
+
+
+def _questions_lead(board: dict) -> str:
+    current_count = len(publication.QUESTIONS)
+    prior = board["questions"]
+    prior_count = len(prior)
+    answered = sum(row.get("status") == "answered" for row in prior)
+    open_count = prior_count - answered
+    compiled, _ = _decision_dates(board)
+    return f'''<section class="pb-lead" data-register-summary="questions"><div class="pb-wrap">
+  <p class="pb-kicker">Questions register · current release</p>
+  <h1 class="pb-h1">What still needs an answer. <em>Current prerequisites first; earlier questions stay separate below.</em></h1>
+  <p class="pb-stand">The current release questions distinguish recorded facts, missing account or operator information, and a concrete way to discover it. The earlier board’s questions are preserved as a separate, dated set; an unanswered field stays blank rather than becoming an assumption.</p>
+  <p class="pb-byline" data-current-questions="{current_count}" data-preserved-questions="{prior_count}" data-preserved-open="{open_count}" data-preserved-answered="{answered}">
+    <b>{current_count} current questions</b> &middot; <b>{prior_count} earlier questions preserved</b> &middot;
+    <b>{open_count} earlier questions open</b> &middot; <b>{answered} earlier questions answered</b>
+  </p>
+  <p class="pb-byline" data-summary-dates="questions" data-page-updated="{e(UPDATED_ON)}" data-current-as-of="{e(publication.DATE)}" data-board-compiled="{e(compiled)}">
+    Page last updated {e(UPDATED_ON)}; current release data as of <time datetime="{e(publication.DATE)}">{e(publication.DATE)}</time>;
+    earlier question board compiled <time datetime="{e(compiled)}">{e(compiled)}</time>.
+  </p>
+</div></section>'''
+
+
+def _insert_after_pb_lead(doc: str, section: str) -> str:
+    updated, count = re.subn(
+        r'(<section class="pb-lead"[^>]*>.*?</section>)',
+        lambda match: match.group(1) + section,
+        doc,
+        count=1,
+        flags=re.S,
+    )
+    if count != 1:
+        raise ValueError("expected exactly one generated decision-page lead")
+    return updated
+
+
+def _preserved_board_note(board: dict, kind: str) -> str:
+    compiled, latest_direction = _decision_dates(board)
+    suggestions = board["suggestions"]
+    owner_directions = sum(bool(row.get("owner_direction")) for row in suggestions)
+    if kind == "suggestions":
+        return (
+            '<div class="cn-wrap cn-note" id="earlier-decision-register">'
+            '<h2>Earlier decision records, preserved</h2>'
+            f'<p>The next section retains all {len(suggestions)} earlier suggestions as recorded. '
+            f'{owner_directions} carry a dated owner direction; that is not a count of implementations. '
+            f'The board was compiled {e(compiled)} and its latest recorded owner direction is dated '
+            f'{e(latest_direction)}. These records are not merged into the current release proposals above.</p></div>'
+        )
+    questions = board["questions"]
+    answered = sum(row.get("status") == "answered" for row in questions)
+    open_count = len(questions) - answered
+    return (
+        '<div class="cn-wrap cn-note" id="earlier-question-register">'
+        '<h2>Earlier questions, preserved</h2>'
+        f'<p>The next section retains all {len(questions)} questions from the earlier board: '
+        f'{open_count} were recorded open and {answered} answered there. The question board was compiled '
+        f'{e(compiled)}. These counts are separate from the current release prerequisites above.</p></div>'
+    )
+
+
 def build_suggestions(facts, board):
     doc = _upstream_suggestions(facts, board)
-    section = publication.suggestions_current() + '<div class="cn-wrap cn-note"><h2>Earlier decision records, preserved</h2><p>The recorded owner directions and option IDs below are unchanged. Earlier implementation notes may predate this release; use the current measurement and prerequisite records above for present deployment decisions.</p></div>'
-    return doc.replace('</section>', '</section>' + section, 1)
+    doc = _replace_pb_lead(doc, _suggestions_lead(board))
+    section = publication.suggestions_current() + _preserved_board_note(board, "suggestions")
+    doc = _insert_after_pb_lead(doc, section)
+    doc = doc.replace(
+        '<h2 class="pb-h2">The board</h2>',
+        f'<h2 class="pb-h2">Earlier decision board · {len(board["suggestions"])} preserved suggestions</h2>',
+        1,
+    )
+    doc = doc.replace(
+        'Ordered roughly by how much is riding on them. Each row links to the questions\n  that block it, and each question links back.',
+        'Original ordering retained. Each row links to the earlier questions that block it, and each question links back.',
+        1,
+    )
+    return doc
+
 
 def build_questions(facts, board):
     doc = _upstream_questions(facts, board)
-    section = '<section class="cn-wrap cn-section"><h2 class="cn-table-title">Current release prerequisites · 19 November 2026</h2>' + publication.question_register() + '</section>'
-    return doc.replace('</section>', '</section>' + section, 1)
+    doc = _replace_pb_lead(doc, _questions_lead(board))
+    current_section = (
+        f'<section class="cn-wrap cn-section" id="current-release-questions">'
+        f'<h2 class="cn-table-title">Current release prerequisites · {e(publication.DATE)}</h2>'
+        f'<p>{len(publication.QUESTIONS)} current questions. Each includes what is known, what is missing, '
+        'whether an answer is recorded, and how to discover the missing information.</p>'
+        f'{publication.question_register()}</section>'
+        + _preserved_board_note(board, "questions")
+    )
+    doc = _insert_after_pb_lead(doc, current_section)
+    doc = doc.replace(
+        '<h2 class="pb-h2">Open first, then answered</h2>',
+        f'<h2 class="pb-h2">Earlier question register · {len(board["questions"])} preserved questions</h2>',
+        1,
+    )
+    doc = doc.replace(
+        'The open ones are the ones that block work. The answered ones are recorded too,\n  because a settled rule that nobody can find gets re-litigated every cycle.',
+        'The earlier register is shown as recorded. Open and answered totals above refer only to that dated board; use the current prerequisites first for this release.',
+        1,
+    )
+    return doc
 
 def build_cleanup_earlier(facts, board):
     # Both sessions added this path independently; preserve the earlier treatment as well.

@@ -7,6 +7,7 @@ from __future__ import annotations
 import html
 import json
 import posixpath
+import re
 from pathlib import Path
 from email.utils import format_datetime
 from datetime import datetime, timezone
@@ -25,6 +26,7 @@ TOOLS = [
     ("workspace.html", "Workspace overview"), ("suggestions.html", "Suggestions & choices"),
     ("questions.html", "Questions & missing information"), ("measurement.html", "Measurement & campaign ledger"),
     ("executive-summary.html", "Executive summary"), ("intent.html", "Link & intent register"),
+    ("decision-room.html", "Decision Room"), ("decision-prompt.html", "Design brief (T69)"),
     ("flagged.html", "Flagged for Review"), ("publishing.html", "Publishing cadence & design brief"),
     ("products.html", "Research catalog"), ("analysis.html", "Research analysis"),
     ("content.html", "Content engine"), ("compliance.html", "Compliance research"),
@@ -358,7 +360,10 @@ QUESTIONS = [
 
 def question_register():
     rows = ''.join(f'<tr id="{e(i)}"><th scope="row">{e(i)}<br>{e(q)}</th><td>{e(known)}</td><td>{e(missing)}</td><td><span class="cn-empty">—</span><small class="cn-value-note">Unverified / open</small></td><td>{e(action)} {sources([sid])}</td></tr>' for i,q,known,missing,action,sid in QUESTIONS)
-    return '<div class="cn-table-scroll" tabindex="0" role="region" aria-label="Current known and unknown register"><table class="cn-table"><caption>Current information gaps. The official link constrains the rule; it does not establish an account-specific answer. Open answers deliberately remain blank.</caption><thead><tr><th>Question</th><th>What we know</th><th>What is missing</th><th>Answer</th><th>How to discover it / official reference</th></tr></thead><tbody>' + rows + '</tbody></table></div>'
+    caption = (f'Current release information gaps: {len(QUESTIONS)} questions as of {e(DATE)}. '
+               'The official link constrains the rule; it does not establish an account-specific answer. '
+               'Open answers deliberately remain blank.')
+    return '<div class="cn-table-scroll" tabindex="0" role="region" aria-label="Current known and unknown register"><table class="cn-table"><caption>' + caption + '</caption><thead><tr><th>Question</th><th>What we know</th><th>What is missing</th><th>Answer</th><th>How to discover it / official reference</th></tr></thead><tbody>' + rows + '</tbody></table></div>'
 
 
 PROPOSALS = [
@@ -379,7 +384,7 @@ def suggestions_current():
     for ident,title,sid,qid,options,recommended in PROPOSALS:
         opts = ''.join(f'<label class="cn-choice"><input type="radio" name="{e(ident)}" value="{e(code)}"><span><strong>{e(code)} · {e(label)}{(" · recommended" if code==recommended else "")}</strong><small>{e(cost)}</small></span></label>' for code,label,cost in options)
         cards.append(f'<article class="cn-proposal" id="{e(ident)}" data-proposal="{e(ident)}"><p class="cn-eyebrow">{e(ident)} · PROPOSED, NOT IMPLEMENTED</p><h3>{e(title)}</h3><p>Evidence needed: <a href="questions.html#{e(qid)}">{e(qid)}</a>. Official context: {sources([sid])}</p><fieldset><legend>Record a preferred path for review</legend>{opts}</fieldset><p class="cn-choice-state" data-choice-state role="status">No local preference recorded.</p></article>')
-    return f'''<section class="cn-wrap cn-section-tight" id="current-proposals"><div class="cn-note"><h2>Review a path before applying it.</h2><p>These are new strategic proposals, not automatic changes. You may record a preference below. It stays in this browser only and does not approve a deployment, submit account data or change the site. Export the review record if you want it retained outside this device.</p><div class="cn-review-controls"><button type="button" class="cn-button" id="export-choices">Export review choices</button><button type="button" class="cn-plain-button" id="clear-choices">Clear local choices</button><span id="review-status" role="status"></span></div></div>{''.join(cards)}</section>'''
+    return f'''<section class="cn-wrap cn-section-tight" id="current-proposals"><div class="cn-note"><h2>Current release proposals · {e(DATE)}</h2><p>{len(PROPOSALS)} proposals are open for review. These are strategic options, not automatic changes. A preference recorded here stays in this browser only; it does not approve a deployment, submit account data or change the site. The separate earlier decision register is preserved below. Export the review record if you want it retained outside this device.</p><div class="cn-review-controls"><button type="button" class="cn-button" id="export-choices">Export review choices</button><button type="button" class="cn-plain-button" id="clear-choices">Clear local choices</button><span id="review-status" role="status"></span></div></div>{''.join(cards)}</section>'''
 
 
 def measurement():
@@ -419,11 +424,26 @@ CURRENT_FLAGS = [
     ('CN-09','Advisory','Inherited Actions runtime declarations need review','The successful GitHub run warned that inherited Node20 action declarations are forced onto Node24. No insecure runtime opt-out is set; this is an advisory, not a failed build or deployment.','GH-ACTIONS-RUNTIME','Review official Node24-capable action releases and update compatible versions with full checks. Do not downgrade the runner or claim untested dependency upgrades are complete.'),
     ('CN-11','Repaired; retained','Five product notes shared a third of their text','Measured before repair with 8-word shingles (Jaccard) on the published pages: chef-iq-sense × thermomaven-instant-read 0.389, chefman-dual-basket × chefman-single-basket 0.363. Each note now carries per-product fit, not-a-fit, trade-off, four checks and a verdict; the worst pair is 0.163 and tools/note_overlap.py fails the build above 0.25. The threshold is this project’s own budget, not an engine’s published rule.','GOOGLE-SPAM','Keep every new product note below the gate; treat the threshold as reviewable, not as a ranking fact.'),
     ('CN-10','Repaired; retained','Unused link options could mint or overwrite tracking IDs','The legacy builder could concatenate an unissued static campaign suffix and allow query parameters to replace the tag. Current reader links never used those options. The helper now refuses both paths and preserves the exact supplied ID; dedicated negative tests cover them.','AMZ-POLICIES','Keep the legacy campaign registry empty until identity/enrolled-report checks pass. Approved identifiers must be supplied with provenance, never synthesized from a label.'),
+    # T69 (session arena/698addcd-zone2, 2026-11-19). Measurements M1-M5 and their reproduction are
+    # in docs/verification-t69.md; each row below is a defect this session found and did not silently fix.
+    ('CN-17','Repaired; retained','Legacy dashboard CSS was clipping publication table labels','assets/css/style.css sets th{text-transform:uppercase;white-space:nowrap} for its own dashboards, and that stylesheet loads on every page. publication.css never reset those three properties, so 22 row labels were clipped mid-sentence (questions.html 7, flagged.html 10, publishing.html 5) and every tbody th rendered uppercase. Repaired by a scoped reset in publication.css; re-measured at 0 clipped and 0 uppercase across the 15 affected pages. See docs/verification-t69.md#m1.','GOOGLE-HELPFUL','Keep the publication table rules scoped; any new shared stylesheet must be checked against .cn-table.'),
+    ('CN-12','Open','Two shop front doors, and the sitemap advertises the one fewer pages link to','shop.html and shop/index.html are different designs (~3% text similarity, different h1). shop/index.html is linked from 52 published pages and shop.html from 15, yet only shop.html is index,follow and in sitemap.xml; shop/index.html is noindex. Raised as Decision Room DR-01 with options and a recommendation; not changed because it moves a published URL. See docs/verification-t69.md#m2.','GOOGLE-CANONICAL','Answer DRQ-01, then make the chosen URL canonical and regenerate the sitemap.'),
+    ('CN-13','Open','The most substantive product pages are excluded from search','The deployed artifact has 18 index,follow pages and 214 noindex. Among the noindex pages are shop/chefman-6-qt-dual-basket-air-fryer.html (802 words, 2 tables, 20 sourced rows, 16 official links) and shop/thermomaven-1-second-instant-read-meat-thermometer.html (640 words, 20 rows), while their indexable counterparts carry 334 and 339 words with 9 and 7 source links. Raising this does not assert that indexing them would rank them. See docs/verification-t69.md#m2.','GOOGLE-SITEMAP','Answer DRQ-02: approve an indexable URL set, then re-gate and re-package.'),
+    ('CN-14','Open','Three feeds, and the same five questions published at two URLs each','feed.xml (5 items), shop/feed.xml (6) and marketing/feed.xml (16) are all published. All five questions in feed.xml reappear in shop/feed.xml at shop-local URLs; two carry byte-identical titles. No URL is broken — this is duplication, not a dead link. Raised as DR-03 and DR-05. See docs/verification-t69.md#m3.','GOOGLE-CANONICAL','Answer DRQ-03: name the site feed and confirm one-URL-per-question.'),
+    ('CN-15','Advisory','The same 68 dashboard links appear twice on every reader page','The front page carries 68 distinct dashboard links in the Workspace menu and the same 68 again in the footer, out of 197 anchors in total. The four reader links are correct. Not a compliance failure; it is the brief-s own "keep dashboards in the footer" rule satisfied in letter but not in spirit. Raised as DR-06. See docs/verification-t69.md#m4.','GOOGLE-HELPFUL','Answer DRQ-05 before the G9 navigation contract is changed.'),
+    ('CN-16','Advisory','The paid product link is an 18px-tall control on a phone','Every a.cn-retailer-link measures 142x18 CSS px at 390px, with 63px of clear space to its neighbour. SC 2.5.8 accepts undersized targets that are sufficiently spaced, so the site passes the criterion; the criterion-s own note encourages meeting 24x24 regardless for important links. Recorded as craft, not a compliance failure. Raised as DR-07. See docs/verification-t69.md#m5.','W3C-258','Answer DRQ-06; one padding declaration fixes it.'),
 ]
 
 
 def flags():
-    rows=''.join(f'<tr id="{i}"><th scope="row">{i}<br>{e(title)}</th><td>{e(state)}</td><td>{e(detail)}</td><td>{e(action)}</td><td>{sources([sid])}</td></tr>' for i,state,title,detail,sid,action in CURRENT_FLAGS)
+    def linkify(detail):
+        # A written reference to the dated record becomes a clickable link, so a reader can check
+        # the claim instead of having to find the file. Only plain-text repository paths with an
+        # #anchor are rewritten; nothing is invented.
+        return re.sub(r'docs/(verification-[a-z0-9]+)\.md#([a-z0-9]+)',
+                      lambda m: f'<a href="docs/{m.group(1)}.md#{m.group(2)}">docs/{m.group(1)}.md#{m.group(2)}</a>',
+                      e(detail))
+    rows=''.join(f'<tr id="{i}"><th scope="row">{i}<br>{e(title)}</th><td>{e(state)}</td><td>{linkify(detail)}</td><td>{e(action)}</td><td>{sources([sid])}</td></tr>' for i,state,title,detail,sid,action in CURRENT_FLAGS)
     body=intro('FLAGGED FOR REVIEW','The open questions stay in the open.','Current release irregularities and external gates, followed by the preserved historical flag register. An unverified product field stays blank. Open items do not disguise themselves as passed checks.')
     body+='<section class="cn-wrap cn-section-tight"><div class="cn-table-scroll" tabindex="0" role="region" aria-label="Current release flags"><table class="cn-table"><caption>Current release review · 19 November 2026. Repository findings cite the official rule or platform reference; reproduction details are in the dated verification record.</caption><thead><tr><th>Finding</th><th>State</th><th>Evidence / limitation</th><th>How to resolve</th><th>Official reference</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>Independent repeated checks also reported initial/repeat variation for the last two short links. <a href="docs/source-observations-33e03d63.json">The dated T67 observation record</a> is preserved separately; it does not replace current observations, confirm intent, establish a routing cause, or declare a link invalid.</p><p><a href="docs/verification-37333afd.md">Dated verification and reproduction record</a> · <a href="questions.html">Questions and discovery actions</a></p><h2 class="cn-table-title">Historical source-governed flags</h2><p>These are dated research findings, not a claim that their original status text describes the current release. Read each full record and its date. Current states above take precedence for this release.</p>'
     ledger=json.loads((ROOT/'ledger/flags.json').read_text())['flags']
@@ -466,7 +486,10 @@ def workspace():
 
 
 def indexable_paths():
-    return {'index.html','shop.html','compare.html','guides/index.html','about.html','privacy.html'} | {'guides/'+g['slug']+'.html' for g in GUIDES} | {'guides/'+p['slug']+'.html' for p in PRODUCTS.values()}
+    # T69 (session arena/698addcd): the Decision Room and its design brief are reader- and
+    # owner-facing destinations, not evidence archives, so they are indexable and listed.
+    return {'index.html','shop.html','compare.html','guides/index.html','about.html','privacy.html',
+            'decision-room.html','decision-prompt.html'} | {'guides/'+g['slug']+'.html' for g in GUIDES} | {'guides/'+p['slug']+'.html' for p in PRODUCTS.values()}
 
 
 def extra_pages():

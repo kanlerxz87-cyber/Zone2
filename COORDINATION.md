@@ -8359,3 +8359,89 @@ the combined tree via `tools/build_board.py`. No work from either session was di
 (RQ-15, BQ2-06, FL-05) applied cleanly on top of main's data. The task-ID collision on T76 is disambiguated
 by session ID; the other sessions' work is T76-labelled in their own records and this session's T76 is the
 RQ-15/S-19 chooser.
+
+---
+
+## T78 (claimed as T76, recorded as T77, final id T78) — session `arena/95bfb73c-zone2` (95bfb73c) — 2026-11-19 (UTC)
+
+> **ID note.** Claimed **T76** at 21:55Z after verifying it free on this tree and on `origin/main`.
+> Three other sessions claimed T76 while this one worked, and two landed first: `353f0afc` (PR #201,
+> 21:50:57Z) and `ed2307a8` (PRs #202/#204, 21:54:26Z / 21:56:47Z). The board's rule is that the
+> merged claim keeps the id, so this record was renumbered to **T77** — and then a *fourth* session
+> (`47786492`, PR #205) recorded **T77** on `main` before this branch merged. The id is therefore
+> **T78**. Nothing of any session is dropped: every record is preserved and they describe four
+> different pieces of work. Full disclosure is kept here rather than tidied away.
+
+**Task:** land stale, red, conflicting **PR #194** on current `main` — the Decision Room
+(`decision-room.html`) and the design brief (`decision-prompt.html`), both built but never published.
+
+**Why it was a takeover (60-minute rule, met on measurement):** #194's head `f8412b1` dated
+**2026-11-19T20:07:12Z**, 1 h 48 m before this session's claim; `mergeable: false` with **8 conflicted
+files**; CI failing twice at step 21/66; no close-out by session `1b09bb6d`. #194's commits were
+carried forward intact — the branch was never rewritten or force-pushed.
+
+### THE DEFECT THAT WAS ACTUALLY FAILING CI — found, fixed at the cause
+
+`docs/verification-t69.md` line 113 printed raw element names in prose — `<item><title>` — with **no
+closing tag**. In an HTML document `<title>` is **RCDATA**: everything after it is text until
+`</title>`. `tools/audit_site.py` reads *every* published page with `html.parser`, `.md` files
+included, so the unclosed tag swallowed the `<a id="m4">` … `<a id="m7">` anchors below it, and the
+five `flagged.html` citations pointing at `#m4`/`#m5` reported as dead. **Python 3.13 (the runner) and
+Chrome implement RCDATA; Python 3.11 (every local run) does not** — which is exactly why four local
+trees passed while the runner failed twice, and why the earlier `prose_counts` reading was a red
+herring. The failure was located by temporarily turning the step's output into check-run annotations
+(GitHub's job-log host is unreachable from this sandbox), then removed again once the cause was known.
+
+**Two fixes, one at each layer:**
+1. **The document** now describes the element names instead of printing them, so the anchors survive
+   any parser. No number, measurement or conclusion on that page changed.
+2. **The gate** no longer parses Markdown with an HTML parser at all. A `.md` target is resolved by
+   the new `markdown_anchors()`: literal `id=` attributes plus GitHub-style heading slugs derived by
+   regex. The gate's answer can no longer depend on the Python version running it.
+3. **A general sweep** for the same class found the trap in six more `.md` files
+   (`COORDINATION.md`, `docs/audit-2026-11-15.md`, `docs/repo-review.md`,
+   `docs/verification-5d6d2254.md`, `docs/verification-5f7f77a4.md`, `docs/verification-672f9c4c.md`,
+   `docs/verification-8fb7c287.md`); none carries an anchor after the tag, so none was broken.
+
+**Negative-tested, because a gate that cannot fail is decoration:** deleting a real anchor
+(`<a id="m5"></a>`) still fails `audit_site` with exit 1 and names the exact citation.
+
+### Other conflict resolutions (rule stated before merging)
+
+`assets/css/publication.css` — **UNION** at each of three successive merges: T69's table reset +
+Decision Room styles, T72's mobile floor/44 px targets/sticky bar, and T76's (`47786492`)
+three-question chooser. `EXECUTIVE_SUMMARY.md` — **UNION**, both addenda kept.
+`board/*.html`, `board/data/measured.json`, `compare.html`, `release/index.html`, `brief/*` —
+**REGENERATED** through their owning builders, never hand-edited. The `.github/workflows/pages.yml`
+Decision Room gate steps that #194 adds are **kept**: they gate the pages this branch publishes.
+
+**A real defect the replay caught:** resolving `compare.html` with `build_board.py` (which does not own
+it) left it stale; `build_front.py` then added the `decision-room.html` / `decision-prompt.html` links
+to its nav and footer — the new pages were **unreachable from `compare.html`** until that ran.
+
+### Gates on the combined tree
+
+`ci_replay.py` **66/66 PASSED** (on repeated runs across three main merges) · `audit_site` 230 pages
+7/7 · `verify_publication` `ok: true` (230 pages, 18 indexable, 1,463 product anchors, 173 factual
+rows) · `validate_data` 108 rows 0 errors · `verify_decision_room` PASS (13 decisions, 10 owner
+questions, 17 sources) · `tests/test_decision_room.py` 15/15 · `validate_board` 9 pages ·
+`validate_brief` all checks pass · every builder `--check` 0 drift · browser pass `ok: true` ·
+0 broken internal links on the two new pages · **GitHub Actions "Build, verify and deploy": success.**
+
+### Official sources re-read live 2026-11-19
+
+Program Policies (stamped *Updated: April 14, 2026*; the 24-hour Session definition is present) ·
+Operating Agreement §7–§12 · FTC *Disclosures 101* (*"You can't talk about your experience with a
+product you haven't tried"*; place the disclosure so it is hard to miss) · Google *qualify outbound
+links* (*mark paid placements `sponsored`*; page updated 2025-12-10) · W3C SC 2.5.8 (24×24 CSS px,
+with the **spacing** and **inline** exceptions) · USDA FSIS *Food Thermometers* (*"Color is Not a
+Reliable Indicator that Food is Safe"*, *"Check Manufacturer's Instructions"*).
+
+### Flagged, non-blocking, published for review
+
+The six open/advisory Decision Room items · **product-intent confirmations for all five supplied links
+stay blank**, intended ASIN and observed redirect target in **separate fields, never merged** ·
+Search Console still off, so topic order remains a stated hypothesis, not measured demand ·
+`plpRedirect=mhFallback` appears on bare valid `/dp/` loads and is not fallback evidence.
+**No price, rating, review count, search-volume, popularity, conversion or revenue figure is printed
+anywhere, and none is invented to fill a row.**
