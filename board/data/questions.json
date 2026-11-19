@@ -111,18 +111,18 @@
       ]
     },
     {
-      "id": "BQ2-06",
-      "question": "Was the three-question chooser ever built, or was the requirement satisfied by the question-led article section?",
-      "state": "open",
-      "known": "{{chooser_pages}} pages carry a chooser component. The comparison page carries a section that poses three questions and links each to its own article.",
-      "not_known": "Whether the earlier 'Implemented' status referred to that section or to a component that was subsequently removed in the front-page rebuild.",
-      "answer": "",
-      "how_to_close": "The session that rebuilt the front pages can answer from its own log; otherwise diff the pre-rebuild comparison page.",
-      "who_can_close": "the session that owns marketing/ — recorded here, not actioned",
-      "cost_if_left_open": "RQ-15 stays in dispute between two different repairs, and a chooser may or may not need building.",
-      "blocks": [
-        "RQ-15"
-      ],
+    "id": "BQ2-06",
+    "question": "Was the three-question chooser ever built, or was the requirement satisfied by the question-led article section?",
+    "state": "answered",
+    "known": "{{chooser_pages}} pages carry a chooser component. The comparison page carries a three-question 'Which one is for you?' chooser immediately above the comparison list.",
+    "not_known": "Before 2026-11-19: whether the earlier 'Implemented' status referred to the question-led article section or to a chooser component removed in the front-page rebuild. Resolved — no chooser component existed; the status referred to the question section.",
+    "answer": "The chooser was never built before this session. The earlier 'Implemented' status referred to a question-led article section, not to a chooser component. Session 47786492 (T76) built the real three-question chooser above the comparison table on 2026-11-19; RQ-15 is now implemented and this question is closed.",
+    "how_to_close": "Closed by session 47786492 (T76): the chooser is built in tools/publication.py and measured by tools/build_board.py.",
+    "who_can_close": "session 47786492 (T76) — closed",
+    "cost_if_left_open": "None — closed.",
+    "blocks": [
+      "RQ-15"
+    ],
       "source_ids": [
         "BD-21"
       ]

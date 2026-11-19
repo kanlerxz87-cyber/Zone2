@@ -1805,3 +1805,19 @@ the gate results. The board rows that changed on this branch are RQ-16 and RQ-18
 **What remains unknown.** Intended-product confirmation for all five links; enrolled Associates workflow and report validation for the supplied tag; Search Console verification and query export; a permanent authorized measurement host; a named editor and corrections contact; and a jurisdictional privacy determination. Observed redirect targets remain separate from intent. The exact compliance status of the supplied short links remains unresolved; a missing tag in a fetched redirect proves neither invalidity nor attribution.
 
 **Evidence.** `docs/verification-ed2307a8.md` holds the sources re-read on 2026-11-19, the line-by-line checks, the gate results, and the irregularities left open. Review the pack on the [suggestions board](https://kanlerxz87-cyber.github.io/Zone2/suggestions.html) and the [questions register](https://kanlerxz87-cyber.github.io/Zone2/questions.html) before choosing a path.
+## Addendum — 2026-11-19 (session `arena/47786492-zone2`, T76): the "which one is for you" chooser, built
+
+**What changed.** RQ-15 / S-19 asked for a three-question "which one is for you" chooser above the comparison
+table, and the register recorded it `overstated` — the brief said "Implemented", the tree had none. Session
+`47786492` (T76) built it: a `CHOOSER` block and a `chooser()` renderer in `tools/publication.py`, placed in
+`compare()` immediately above `#compare-list`, with progressive-enhancement logic in `assets/js/publication.js`
+and styles in `assets/css/publication.css`. Three buyer questions map to one of the five formats the page already
+publishes; the recommendation is a format pointer + a check reminder, framed as a starting point. A `<noscript>`
+fallback links straight to the comparison and the temperature-tool guide. BQ2-06 is answered and FL-05 resolved.
+
+**Evidence.** `docs/verification-47786492.md`. Measured `chooser_pages` 1 → 3 on the combined tree: the old
+count was a false positive from a passing phrase in `intake/tracking.html`; the new component is
+`compare.html` (`data-chooser`); the third is `suggestions.html`, which mentions "chooser" in the SG-T76-04
+proposal merged to `main` this session. All gates pass on the rebuilt tree: `validate_data`,
+`seo_audit`, `audit_site`, `verify_front`, `package_site`/`verify_publication`, `build_board --check`,
+`validate_board`, and the standalone `ci_replay` (63/63).

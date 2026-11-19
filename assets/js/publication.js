@@ -45,4 +45,43 @@
       result.append(link, document.createElement('br'), document.createTextNode(choice[2] + ' A starting point, not a tested recommendation.'));
     });
   }
+
+  var chooserForm = document.getElementById('chooser-form');
+  var chooserResult = document.getElementById('chooser-result');
+  if (chooserForm && chooserResult) {
+    var payload = {};
+    try { payload = JSON.parse(chooserForm.dataset.chooserMap || '{}'); } catch (err) { payload = {}; }
+    var cmap = payload.map || { q1: {}, q2: {}, notes: {} };
+    var cguides = payload.guides || {};
+    var ctemperature = payload.temperature || ['#compare-list', 'Temperature-tool guide'];
+    var ccaveat = payload.caveat || 'A starting point, not a tested recommendation.';
+    chooserForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var q1 = document.querySelector('input[name="chooser-q1"]:checked');
+      var q2 = document.querySelector('input[name="chooser-q2"]:checked');
+      var q3 = document.querySelector('input[name="chooser-q3"]:checked');
+      if (!q1) { chooserResult.textContent = 'Choose a job first to get a starting point.'; return; }
+      var key = cmap.q1[q1.value];
+      if (key === 'temperature') { key = q2 ? cmap.q2[q2.value] : 'temperature'; }
+      var g = cguides[key] || ctemperature;
+      var note = q3 ? (cmap.notes[q3.value] || '') : '';
+      chooserResult.replaceChildren();
+      var lead = document.createElement('strong');
+      lead.textContent = 'A starting point: ' + g[1] + '. ';
+      chooserResult.append(lead);
+      var ln = document.createElement('a');
+      ln.href = g[0];
+      ln.textContent = 'Read the guide →';
+      chooserResult.append(ln, document.createElement('br'));
+      var cp = document.createElement('a');
+      cp.href = key === 'temperature' ? '#compare-list' : '#' + key;
+      cp.textContent = 'See it in the comparison →';
+      chooserResult.append(cp);
+      if (note) {
+        chooserResult.append(document.createElement('br'));
+        chooserResult.append(document.createTextNode(note + ' '));
+      }
+      chooserResult.append(document.createTextNode(ccaveat));
+    });
+  }
 }());
