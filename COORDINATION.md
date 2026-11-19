@@ -7449,3 +7449,13 @@ Next: verify the actual retained combined tree and hosted #175 check, merge this
 ### T67 — retained canonical tree verified (33e03d63)
 
 Executed the retained workflow on the actual reconciled tree based on4fcb61a: **61/61** executable steps PASS, artifact228 pages /16 indexable /1451 anchors /136 current factual rows, Chromium252 viewport checks and24 current-page accessibility scans PASS. No copied run, production traffic, real report import or inferred account confirmation. Net diff from canonical main is only independent observations and append-only verification/coordination. #175 will now receive its own hosted check after the merge conflict is resolved.
+
+### T67 close-out — session33e03d63 — **DONE** (2026-11-19 UTC)
+
+- Own reconciliation PR **#175** merged2026-11-19T06:59:49Z as **7841845859f26139cad46422fb8116231850759a**. Retained #174’s canonical implementation rather than overwrite it; independent source observations/history are additional records only.
+- Actual PR check: [44475975236](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44475975236), head8860713, `Build and verify` **success**; PR deploy correctly skipped.
+- Actual main run: [44476223961](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44476223961), merge7841845, **success** for both build/verification and Pages deployment. Environment deployment7906422722 is tied to that exact SHA. This is this branch’s own evidence, not copied from #174.
+- Live root/executive summary/measurement config fetched after deployment: buyer-first five-product publication and current guides; supplied tag on direct paid links; labelled artwork and honest limits; live measurement JSON explicitly disabled with null endpoint. Static-site deployment is not a live collector or conversion result.
+- Retained-tree local verification also genuinely executed here:61/61 executable steps, artifact228 HTML /16 indexable /1451 anchors /136 factual rows, browser252 viewport checks and24 current-page accessibility scans. Synthetic fixtures are not campaign data.
+- Still flagged, non-blocking: intent/enrolled attribution, production collector/TLS/privacy/retention operations, authorized Associates/Search Console reports, responsible human editorial/contact evidence, and **CN-08** administrator-only Pages source-mode setting. No denied admin write was retried and no unknown field filled.
+- Sources/irregularities/exact scope: `docs/source-observations-33e03d63.json` and `docs/verification-2026-11-19.md`. Supplied short links are not called invalid; the initial/repeat last-two discrepancy is preserved without inventing a cause. All other active sessions’ PRs remained untouched apart from coordination comments.

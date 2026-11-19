@@ -123,3 +123,27 @@ not campaign metrics, and no authorized performance report was imported.
 The only net additions relative to4fcb61a are this verification history, this session's coordination
 records and the independent source-observation JSON. No active canonical implementation, source fact,
 intent field, recorded choice or collector configuration is changed by this reconciliation.
+
+## Hosted PR, merge and production deployment — confirmed
+
+- This session's PR **[#175](https://github.com/kanlerxz87-cyber/Zone2/pull/175)** passed the actual
+  GitHub `Build and verify` job on head **8860713** in
+  [run44475975236](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44475975236). PR deployment
+  was correctly skipped. This is not merely the local replay.
+- #175 merged **2026-11-19T06:59:49Z** as **7841845859f26139cad46422fb8116231850759a**.
+- Its own main [run44476223961](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44476223961)
+  completed **success**: both `Build and verify` and `Deploy to GitHub Pages` passed.
+- Deployment **7906422722**, environment `github-pages`, is tied to that exact merge SHA. The
+  separate legacy publisher also ran; the administrator-only CN-08 mode gate remains unresolved.
+- After the artifact deployment succeeded, fetched the live root, `executive-summary.html` and
+  `measurement.json` with a release query. Root serves the five-product buyer edit, current guides,
+  labelled AI image/format drawings, direct links using`shopnow047c-20`, and honest source limits.
+  Executive summary keeps implementation separate from missing external evidence. The actual live
+  measurement JSON reports `enabled:false`, `endpoint:null`, `mode:github_pages_static`.
+- No production collector, account enrollment, intended ASIN confirmation, real click/order report,
+  measured query demand or revenue outcome is claimed by this successful static deployment.
+
+**T67 implementation/reconciliation is complete.** Canonical publication/collector retained, all
+parallel records preserved, own hosted checks and Pages deployment confirmed, observations published
+separately from intent. This closing record is a documentation-only follow-up, not another publication
+or collection change. Historical interim “pending” statements above are checkpoints, superseded here.
