@@ -184,3 +184,18 @@ collector/importers and disabled Pages state; the earlier Nov17 observations are
 
 These results supersede the **pre-rebase** counts above. Full combined CI now has 61 executable steps;
 its final result and GitHub PR/merge/Pages references will be recorded after execution.
+
+
+## Combined CI and PR verification
+
+- Full strict **combined-tree replay passed 61/61 executable steps** after rebase. All previous gates,
+  including the two shop gates, passed; the full current browser/artifact suites passed again.
+- PR [#174](https://github.com/kanlerxz87-cyber/Zone2/pull/174) opened from this branch.
+  Initial GitHub run [44473749563](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44473749563)
+  passed Build and verify on `c30ca2f`; deployment was correctly skipped on the PR.
+- Direct `gh api PUT .../pages` returned **403 Resource not accessible by integration**. Read/PR/push
+  authentication works; this is a Pages-administration permission limit, not proof of a hosting change.
+  The main-only repository deployment job, already explicitly granted `pages:write`, now requests
+  `build_type: workflow` through the official GitHub API **before** deploying `_site`. This prevents
+  a second legacy/raw-checkout build from racing the verified artifact if GitHub accepts the change.
+  Its actual result is pending until the main deployment; no successful switch is claimed here.

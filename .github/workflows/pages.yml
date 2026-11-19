@@ -563,6 +563,20 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # The interactive GitHub integration can read Pages but cannot administer it.
+      # The authorized repository deployment job has explicit pages:write above.
+      # Disable the separate legacy/raw-checkout publisher before deploying _site.
+      - name: Use the verified artifact as the only Pages deployment source
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const response = await github.request('PUT /repos/{owner}/{repo}/pages', {
+              ...context.repo,
+              build_type: 'workflow'
+            });
+            if (response.data.build_type !== 'workflow') {
+              core.setFailed('Pages did not accept workflow artifact deployment');
+            }
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

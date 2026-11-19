@@ -7345,3 +7345,14 @@ factual rows**, contract clean. Chromium: **252 viewport checks**, all pages ren
 with zero automated WCAG A/AA violations; behavior/privacy/persistence tests pass. A long upstream
 owner-decision status pill exposed mobile overflow; wrapping repaired without changing the status text.
 Full combined CI (now 61 executable steps) and actual GitHub deployment are the remaining release checks.
+
+### T63 (`37333afd`) — PR and actual check evidence
+
+- Combined-tree `build_board.py` → strict replay **61/61 passed**; its measured JSON now records the
+  actual result, not a chosen conflict side. All 228 pages / 252 viewport checks passed again.
+- PR **#174**, https://github.com/kanlerxz87-cyber/Zone2/pull/174. GitHub build check passed on
+  `c30ca2f` in run **44473749563**; PR deployment correctly skipped. No review wait is required.
+- The app's direct Pages-admin PUT was denied (403); read/push/PR access is working. The repository's
+  main-only deploy job has the already-declared `pages:write` permission and now requests workflow-only
+  Pages before artifact deployment. This is pending actual GitHub execution, not a claimed settings change.
+  If GitHub denies that job too, the deployment will fail visibly and will be repaired before completion.
