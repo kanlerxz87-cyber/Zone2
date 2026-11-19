@@ -84,14 +84,11 @@ jobs:
           problems += check("console", sorted(f.name for f in Path("console").glob("*.html")))
           # T49: the discovery review namespace (PR #104, integrated) is published like any other.
           problems += check("discovery", sorted(f.name for f in Path("discovery").glob("*.html")))
-<<<<<<< HEAD
           # T60 (session arena/613900e6-zone2): the submitted-link intake namespace.
           problems += check("intake", sorted(f.name for f in Path("intake").glob("*.html")))
-=======
           # T58: the decision board links sideways to its own stylesheet and upward to the
           # root site, so its references have to resolve like any other published namespace.
           problems += check("board", sorted(f.name for f in Path("board").glob("*.html")))
->>>>>>> 979fd5e (T58: the five-product brief - two links the register has never seen, and a decision board for choosing)
           problems += check(".", [f.name for f in sorted(Path(".").glob("*.html")) if f.name != "404.html"])
           for page in sorted(Path("pages").rglob("*.html")):
               rel = page.relative_to("pages")
@@ -383,7 +380,6 @@ jobs:
       - name: Design-brief gate negative tests (14 injected defects must each fire)
         run: python3 tools/test_brief.py
 
-<<<<<<< HEAD
       # ---- arena/613900e6-zone2: the submitted-link intake (T60) ----
       # The 2026-11-17 brief names five affiliate links; this repository's registers were built
       # around three, and two of the codes plus the tracking id appear nowhere in the tree. This
@@ -418,7 +414,6 @@ jobs:
       # question acquiring an answer) are the two this namespace was built to make impossible.
       - name: Intake gate negative tests (15 injected defects must each fire)
         run: python3 tools/test_intake.py
-=======
       # ---- arena/1bfbc559-zone2: the decision board (T58) ----
       # The five-product brief: a product-intent confirmation record whose intent and
       # observation fields are held apart, a choose-a-path board where nothing is applied,
@@ -438,7 +433,6 @@ jobs:
 
       - name: Decision-board gate negative tests (19 injected defects must each fire)
         run: python3 tools/test_board.py
->>>>>>> 979fd5e (T58: the five-product brief - two links the register has never seen, and a decision board for choosing)
 
       # ---- arena/f8e18ca8-zone2: the independent audit namespace ----
       # 1B-2 (session 1b839f87) recorded that nothing in this workflow resolves a CSS url(),

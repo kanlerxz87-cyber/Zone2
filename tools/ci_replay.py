@@ -49,7 +49,30 @@ def steps() -> list[tuple[str, str]]:
     return out
 
 
+def conflict_markers() -> list[str]:
+    """T63 (session 75efdf57): refuse to replay a workflow GitHub would reject.
+
+    The line parser above ignores anything that is not a `- name:` / `run:` line, so
+    unresolved merge-conflict markers in pages.yml were invisible to it: this script
+    reported 49/49 while GitHub refused the file and every run since PR #158 ended in
+    `failure` with zero jobs. Any marker at column 0 in the workflow, or in any tracked
+    tool, is now a hard failure before a single step runs.
+    """
+    hits: list[str] = []
+    targets = [REPO / ".github" / "workflows" / "pages.yml", *sorted((REPO / "tools").glob("*.py"))]
+    for path in targets:
+        for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            if line.startswith(("<<<<<<< ", ">>>>>>> ")) or line == "=======":
+                hits.append(f"{path.relative_to(REPO)}:{n}: {line[:60]}")
+    return hits
+
+
 def main() -> int:
+    markers = conflict_markers()
+    if markers:
+        print("CI REPLAY REFUSED — unresolved merge-conflict markers (GitHub would reject the workflow):")
+        print("\n".join("  " + m for m in markers))
+        return 1
     only = sys.argv[1] if len(sys.argv) > 1 else None
     failed = []
     all_steps = steps()
