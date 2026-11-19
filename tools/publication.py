@@ -275,7 +275,10 @@ QUESTIONS = [
 
 def question_register():
     rows = ''.join(f'<tr id="{e(i)}"><th scope="row">{e(i)}<br>{e(q)}</th><td>{e(known)}</td><td>{e(missing)}</td><td><span class="cn-empty">—</span><small class="cn-value-note">Unverified / open</small></td><td>{e(action)} {sources([sid])}</td></tr>' for i,q,known,missing,action,sid in QUESTIONS)
-    return '<div class="cn-table-scroll" tabindex="0" role="region" aria-label="Current known and unknown register"><table class="cn-table"><caption>Current information gaps. The official link constrains the rule; it does not establish an account-specific answer. Open answers deliberately remain blank.</caption><thead><tr><th>Question</th><th>What we know</th><th>What is missing</th><th>Answer</th><th>How to discover it / official reference</th></tr></thead><tbody>' + rows + '</tbody></table></div>'
+    caption = (f'Current release information gaps: {len(QUESTIONS)} questions as of {e(DATE)}. '
+               'The official link constrains the rule; it does not establish an account-specific answer. '
+               'Open answers deliberately remain blank.')
+    return '<div class="cn-table-scroll" tabindex="0" role="region" aria-label="Current known and unknown register"><table class="cn-table"><caption>' + caption + '</caption><thead><tr><th>Question</th><th>What we know</th><th>What is missing</th><th>Answer</th><th>How to discover it / official reference</th></tr></thead><tbody>' + rows + '</tbody></table></div>'
 
 
 PROPOSALS = [
@@ -296,7 +299,7 @@ def suggestions_current():
     for ident,title,sid,qid,options,recommended in PROPOSALS:
         opts = ''.join(f'<label class="cn-choice"><input type="radio" name="{e(ident)}" value="{e(code)}"><span><strong>{e(code)} · {e(label)}{(" · recommended" if code==recommended else "")}</strong><small>{e(cost)}</small></span></label>' for code,label,cost in options)
         cards.append(f'<article class="cn-proposal" id="{e(ident)}" data-proposal="{e(ident)}"><p class="cn-eyebrow">{e(ident)} · PROPOSED, NOT IMPLEMENTED</p><h3>{e(title)}</h3><p>Evidence needed: <a href="questions.html#{e(qid)}">{e(qid)}</a>. Official context: {sources([sid])}</p><fieldset><legend>Record a preferred path for review</legend>{opts}</fieldset><p class="cn-choice-state" data-choice-state role="status">No local preference recorded.</p></article>')
-    return f'''<section class="cn-wrap cn-section-tight" id="current-proposals"><div class="cn-note"><h2>Review a path before applying it.</h2><p>These are new strategic proposals, not automatic changes. You may record a preference below. It stays in this browser only and does not approve a deployment, submit account data or change the site. Export the review record if you want it retained outside this device.</p><div class="cn-review-controls"><button type="button" class="cn-button" id="export-choices">Export review choices</button><button type="button" class="cn-plain-button" id="clear-choices">Clear local choices</button><span id="review-status" role="status"></span></div></div>{''.join(cards)}</section>'''
+    return f'''<section class="cn-wrap cn-section-tight" id="current-proposals"><div class="cn-note"><h2>Current release proposals · {e(DATE)}</h2><p>{len(PROPOSALS)} proposals are open for review. These are strategic options, not automatic changes. A preference recorded here stays in this browser only; it does not approve a deployment, submit account data or change the site. The separate earlier decision register is preserved below. Export the review record if you want it retained outside this device.</p><div class="cn-review-controls"><button type="button" class="cn-button" id="export-choices">Export review choices</button><button type="button" class="cn-plain-button" id="clear-choices">Clear local choices</button><span id="review-status" role="status"></span></div></div>{''.join(cards)}</section>'''
 
 
 def measurement():

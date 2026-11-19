@@ -7900,3 +7900,87 @@ rewritten; no upstream commit is discarded.
 commission, traffic figure, conversion or revenue number is added, changed or inferred. A value that
 cannot be confirmed from an official source stays **blank** and is flagged as unverified on
 *Flagged for Review* with the source link. Nothing here applies itself.
+
+---
+
+<!-- T72 integration (session arena/1b09bb6d-zone2): the append-only conflict at the end of this file is resolved by keeping BOTH chronologies — the upstream T71/T72 records above and the integrated PR #182 (session 60b0ea6b) record below. No upstream content is discarded. -->
+
+## T69 — claim: make current suggestions/questions rollups match the displayed registers
+
+| Field | Record |
+|---|---|
+| Session / branch | `arena/60b0ea6b-zone2`; work remains on the Arena-assigned current branch |
+| Claimed | 2026-11-19 (UTC), before implementation |
+| Status | **in progress** |
+| Baseline | `605e49f` (PR #178 merge). The working tree was clean. Existing open PRs #162/#163/#172 are older, superseded/integration-era work; this task does not adopt their data or branch. Current repository output was inspected before editing. |
+| Task | The current root `suggestions.html` shows five current S63 proposals plus the preserved 18-row board, but its lead still reads “18 things” / “4 decided” without distinguishing those registers and says “last updated 2026-11-16.” `questions.html` likewise shows seven current-release questions plus 17 preserved questions while its lead reports only 17. Fix the reader-facing summaries and section labels so current versus preserved counts/dates are explicit and derived from their actual source arrays. Add regression coverage that fails if these rollups drift. No owner direction, answer, product fact, source claim, link intent, or campaign observation is changed. |
+| File scope | `tools/publication.py`, `tools/build_front.py`, `tools/verify_front.py`, NEW `tests/test_front_surfaces.py`, generated `suggestions.html` / `questions.html` through `tools/build_front.py`, NEW `docs/verification-60b0ea6b.md`, `COORDINATION.md` (append-only). |
+| Excluded | `docs/board-9251f262.json`, `board/data/**`, `ledger/**`, `content/publication.json`, `shop/**`, official-source/product research, tracking/measurement, workflow, sitemap/feed, every other session's claimed data. Existing board counts and owner directions will be rendered as preserved records, not edited or consolidated. |
+| Coordination | The mandatory pre-push rebase found upstream T68 already recorded for `arena/57eb4af5-zone2`; that entire upstream record is retained unchanged. This narrower task is renumbered T69 to avoid a collision. Existing PRs #162/#163/#172 are not edited, merged or closed. This is a distinct derived-output accuracy repair, not a takeover of another session's topic-data or product-research task. |
+| Baseline finding | Local tree check: `publication.PROPOSALS` has 5 current proposals; `publication.QUESTIONS` has 7 current questions; `docs/board-9251f262.json` carries 18 preserved suggestions (4 with owner directions) and 17 preserved questions (15 open, 2 answered). Rendered roots visibly combine both sets but the current headings/bylines report only the preserved set. These are repository-derived counts, not external traffic or product facts. |
+
+### T69 scope extension — run the summary mutations in CI (2026-11-19)
+
+Before implementation, add one explicit call to the new front-summary regression test in
+`.github/workflows/pages.yml`, immediately after the existing Front-of-house gate. This keeps the test
+on the existing verified build path instead of leaving a local-only script. The workflow change is
+additive only; no job, permission, deploy condition, or existing test is removed or reordered. No other
+session currently claims this workflow step. Updated T69 scope: add `.github/workflows/pages.yml` (one
+additive test invocation). The `tests/test_front_surfaces.py` tests use only repository-generated counts
+and do not access external sites or credentials.
+
+### T69 workflow integration correction — preserve the derived CI-step count
+
+The first full replay observed **62** steps and stopped at the design-brief freshness gate: `brief/index.html`,
+`brief/review.html` and `brief/verification.html` derive their published gate count from
+`len(tools/ci_replay.py::steps())`. The extra workflow step would therefore force unrelated generated
+`brief/` output changes. Preserve the new regression tests without increasing the workflow step count:
+remove the separate additive step and append `&& python3 tests/test_front_surfaces.py` to the existing
+Front-of-house gate's `run` command. This supersedes the prior T69 scope extension's separate-step
+wording; the workflow scope is only that one existing command-line edit. Do not modify `brief/**`.
+
+### T69 integration record — preserve parallel freshness fix and add derived rollup contract
+
+While this branch's derived-register work was being finalized, `main` advanced through PR #180
+(`arena/56aa1fac-zone2`), which independently fixed the suggestion/question page-update label and added
+G11. The rebase onto `e081f42` retained that completed work and both append-only session records; the two
+T69 entries are parallel, distinct scopes, not a replacement. This branch keeps the page-update label
+from `UPDATED_ON` and explicitly separates it from the current release's `publication.DATE`, the earlier
+board's `compiled_utc`, and (on suggestions) the latest owner-direction date. The local derived-summary
+gate checks those visible labels and counts against their respective data sources; G11 remains in the
+combined front gate. The regression invocation stays appended to the existing Front-of-house command,
+so the workflow-derived count remains 61 and no unrelated `brief/**` output is regenerated.
+
+### T69 rebase refresh — preserve upstream close-out PR #181
+
+After the first integration onto `e081f42`, `main` advanced through upstream PR #181, which records the
+completed PR #180 merge and Pages verification. This branch was rebased again onto `b04078f`; PR #181's
+append-only coordination close-out is retained. It changes no T69 source or generated publication file.
+
+### T69 integration refresh — PR #183 adds current register rows and one independent gate
+
+After the rebase onto `b04078f`, upstream PR #183 merged onto `main` as `b37eadf`. It added four
+current S68 proposals and four current Q68 questions to the source arrays, so the correct current
+rollups are now 9 proposals and 11 questions; the preserved historical board remains 18 suggestions
+and 17 questions. This branch regenerated only the derived root decision surfaces and broadened the
+current-question row-ID verifier to accept the new source IDs; it did not edit `content/publication.json`
+or `docs/board-9251f262.json`.
+
+PR #183 also added the independent product-note overlap workflow step and regenerated its design-brief
+count. The combined replay is therefore 62 steps, not the earlier 61. The T69 regression stays in the
+existing Front-of-house command, adds no step of its own, and does not edit `brief/**`. Combined-tree
+build, gates and replay were rerun after rebasing onto `b37eadf`.
+
+### T69 rebase refresh — preserve upstream PR #186 close-out
+
+After integrating PR #183 and verifying the 9/11 current rollups, `main` advanced through PR #186,
+which adds the upstream T70 deployment-verification close-out for #183. This branch was rebased onto
+`34bab9d`; that append-only record is retained. It does not alter this task's code, data, or generated
+pages. The next combined-tree validation is performed on this base.
+
+### T69 rebase refresh — preserve upstream PR #185 integration
+
+After PR #186, `main` advanced through PR #185 (`arena/9ffe2d83-zone2`) to `4374bda`. This branch was
+rebased onto that head, preserving PR #185's flag-count and cross-namespace close-out. Its file scope
+does not change the current publication arrays or `docs/board-9251f262.json`; this branch keeps both
+inputs untouched and revalidates the combined tree.
