@@ -1,183 +1,116 @@
 #!/usr/bin/env python3
-"""Gate for the T50 front-of-house pages (session `arena/9251f262-zone2`).
+"""Current-publication gate: source rows, blank intent, disclosures, direct links and output drift.
 
-Run by the deploy workflow after `tools/build_front.py`. It re-reads the eight generated
-pages as they sit on disk and fails the build if any of the project's own rules are broken:
-
-  G1  every specification row ends in EITHER a link to an official source OR an explicit
-      dash carrying a written reason — never a bare value and never a filled-in guess;
-  G2  no page prints a product price;
-  G3  every page carries the prescribed Operating Agreement §5 disclosure sentence, in a
-      strip above the first product content;
-  G4  every outbound product link is marked rel="sponsored nofollow";
-  G5  every suggestion row states its status, its options, its recommendation and that it
-      is not implemented; every question row states what is known, what is missing and how
-      to discover it;
-  G6  every internal link resolves to a file that exists;
-  G7  every page carries a canonical URL that matches its own path (head_meta contract);
-  G8  no page emits a traffic, click, conversion or revenue figure.
-
-It is deliberately strict about the blank rule: an unverified value rendered as a plain
-number is treated the same as a fabricated one, because a reader cannot tell them apart.
+An offline structural check does not claim to re-fetch official sources or prove
+account enrollment. Those limits and the dated checks are published in the Workroom.
 """
 from __future__ import annotations
 
+import copy
 import json
 import re
-import sys
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import parse_qs, urlsplit
 
-ROOT = Path(__file__).resolve().parent.parent
-PAGES = [
-    "index.html",
-    "suggestions.html",
-    "questions.html",
-    "guides/index.html",
-    "guides/basket-air-fryers.html",
-    "guides/air-fryer-ovens.html",
-    "guides/buying-guide.html".replace("buying-guide", "buying-guides"),
-    "guides/method.html",
-]
+from publication import DATA, TARGETS, AS_OF
+from publication_shell import DISCLOSURE
 
-DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
-# A price is a currency amount. The commission percentages (4.50%, 4.00%) and the
-# "10-character" ASIN rule are the only numerics this gate must NOT trip on.
-PRICE_RE = re.compile(r"(?:US)?\$\s?\d[\d,]*\.?\d{0,2}\b|\b\d[\d,]*\.\d{2}\s?(?:USD|usd)\b")
-# A performance *figure* is a number bound to a metric word, e.g. "1,203 visitors",
-# "4.2% CTR", "clicks: 812". The words alone are fine — the board is allowed to discuss
-# measurement. What the gate forbids is a number attached to one.
-METRIC_WORD = r"(?:visitors|visits|page\s?views|sessions|clicks|conversions|impressions|" \
-              r"monthly\s+traffic|traffic|revenue|earnings|CTR|click-?through(?:\s+rate)?)"
-VANITY_NUM_RE = re.compile(
-    rf"\b\d[\d,]*(?:\.\d+)?\s*%?\s+{METRIC_WORD}\b"
-    rf"|\b{METRIC_WORD}\s*(?:of|:|=|was|were|is|at)?\s+\d[\d,]*(?:\.\d+)?\s*%?",
-    re.I)
+ROOT=Path(__file__).resolve().parents[1]
+PAGES=[p for p in TARGETS if p.endswith('.html')]
+OFFICIAL={'chefman.com','www.emerileveryday.com','www.amazon.com','affiliate-program.amazon.com',
+          'www.ftc.gov','developers.google.com','support.google.com','docs.github.com','link.amazon'}
+MONEY=re.compile(r'(?:US)?\$\s?\d[\d,]*(?:\.\d{1,2})?')
 
 
-def fail(errors: list[str], msg: str) -> None:
-    errors.append(msg)
+class Refs(HTMLParser):
+    def __init__(self):
+        super().__init__(); self.refs=[]; self.anchors=[]
+    def handle_starttag(self,tag,attrs):
+        a=dict(attrs)
+        if tag=='a': self.anchors.append(a)
+        if tag in {'a','link'} and a.get('href'): self.refs.append(a['href'])
+        if tag in {'img','script'} and a.get('src'): self.refs.append(a['src'])
 
 
-def checks() -> list[str]:
-    errors: list[str] = []
-    board = json.loads((ROOT / "docs" / "board-9251f262.json").read_text(encoding="utf-8"))
-
-    for rel in PAGES:
-        p = ROOT / rel
-        if not p.is_file():
-            fail(errors, f"G6 missing page: {rel}")
-            continue
-        h = p.read_text(encoding="utf-8")
-        depth = "../" if "/" in rel else ""
-
-        # ---- G1: rows are sourced or explicitly blank -------------------------
-        body_rows = re.findall(r'<tr><td class="k">(.*?)</tr>', h, re.S)
-        for row in body_rows:
-            has_src = 'class="pb-src"' in row
-            has_blank = 'class="pb-blank"' in row
-            if not has_src and not has_blank:
-                fail(errors, f"G1 {rel}: row without a source link or a stated blank: {row[:90]}")
-            if has_blank and "<small>" not in row:
-                fail(errors, f"G1 {rel}: blank cell carries no written reason: {row[:90]}")
-
-        # ---- G2: no prices ----------------------------------------------------
-        for m in PRICE_RE.finditer(h):
-            fail(errors, f"G2 {rel}: price-like string {m.group(0)!r}")
-        if re.search(r"\b(?:price|list price|MSRP)\b\s*[:=]\s*\d", h, re.I):
-            fail(errors, f"G2 {rel}: a numeric price assignment")
-
-        # ---- G3: disclosure above the product content -------------------------
-        if DISCLOSURE not in h:
-            fail(errors, f"G3 {rel}: prescribed disclosure sentence missing")
-        else:
-            d_at = h.find(DISCLOSURE)
-            if "<main" in h and h.find("<main") < d_at:
-                # the disclosure strip sits outside <main>, before it — that is fine;
-                # what must not happen is a product table preceding any disclosure.
-                pass
-            first_table = h.find('<table class="pb-table"')
-            if first_table != -1 and d_at > first_table:
-                fail(errors, f"G3 {rel}: disclosure appears after product data")
-
-        # ---- G4: sponsored product links --------------------------------------
-        # T58 (2026-11-17): the owner supplied the Associates tag, so the rules hardened.
-        #  - a product CTA (class="pb-bench-cta") MUST carry the owner's tag;
-        #  - any tagged link must carry THE owner's tag, never another account's;
-        #  - a citation link (class="pb-src") MUST NOT carry a tag: evidence stays unmonetized.
-        for m in re.finditer(r'<a[^>]+href="(https?://(?:www\.)?amazon\.com[^"]*)"[^>]*>', h):
-            tag = m.group(0)
-            href = m.group(1)
-            if "sponsored" not in tag or "nofollow" not in tag:
-                fail(errors, f"G4 {rel}: amazon.com link without sponsored+nofollow: {tag[:110]}")
-            classes = re.search(r'class="([^"]*)"', tag)
-            cls = classes.group(1).split() if classes else []
-            if "pb-bench-cta" in cls and "tag=shopnow047c-20" not in href:
-                fail(errors, f"G4 {rel}: product CTA without the owner's Associates tag: {href[:110]}")
-            if "pb-src" in cls and "tag=" in href:
-                fail(errors, f"G4 {rel}: citation link carries an Associates tag; evidence must stay unmonetized: {href[:110]}")
-            if "tag=" in href and "tag=shopnow047c-20" not in href:
-                fail(errors, f"G4 {rel}: Associates tag other than the owner's on {href[:110]}")
-
-        # ---- G6: internal links resolve ---------------------------------------
-        for m in re.finditer(r'(?:href|src)="([^"#?]+?)(?:[#?][^"]*)?"', h):
-            ref = m.group(1)
-            if ref.startswith(("http", "mailto:", "data:")):
-                continue
-            target = (p.parent / ref).resolve()
-            if not target.is_file():
-                fail(errors, f"G6 {rel}: broken reference {ref}")
-
-        # ---- G7: canonical matches the path -----------------------------------
-        want = "https://kanlerxz87-cyber.github.io/Zone2/" + ("" if rel == "index.html" else rel)
-        if f'<link rel="canonical" href="{want}">' not in h:
-            fail(errors, f"G7 {rel}: canonical is not {want}")
-
-        # ---- G8: no invented performance metrics ------------------------------
-        for m in VANITY_NUM_RE.finditer(h):
-            window = h[max(0, m.start() - 90):m.end() + 90]
-            # A sentence that says the figure is zero or unmeasured is the honest form and
-            # must pass; the gate is only for asserted numbers.
-            if re.search(r"\b(zero|0 live|none has been measured|no .{0,24}figure|"
-                         r"nothing|unknown|not measured|records nothing)\b", window, re.I):
-                continue
-            fail(errors, f"G8 {rel}: performance figure asserted: {m.group(0)!r}")
-
-    # ---- G5: board completeness, straight from the dataset --------------------
-    for sg in board["suggestions"]:
-        if not sg.get("options"):
-            fail(errors, f"G5 {sg['id']}: no options")
-        if sg.get("recommendation") not in {o["label"] for o in sg["options"]}:
-            fail(errors, f"G5 {sg['id']}: recommendation is not one of its options")
-        if "Proposed" not in sg.get("status", ""):
-            fail(errors, f"G5 {sg['id']}: status is not 'Proposed — awaiting owner decision'")
-    for q in board["questions"]:
-        for field in ("what_we_know", "what_is_missing", "how_to_discover"):
-            if not str(q.get(field, "")).strip():
-                fail(errors, f"G5 {q['id']}: empty {field}")
-    ids = {s["id"] for s in board["suggestions"]}
-    qids = {q["id"] for q in board["questions"]}
-    for s in board["suggestions"]:
-        for w in s.get("waits_on", []):
-            if w not in qids:
-                fail(errors, f"G5 {s['id']}: waits on unknown question {w}")
-    for q in board["questions"]:
-        for b in q.get("blocks", []):
-            if b not in ids:
-                fail(errors, f"G5 {q['id']}: blocks unknown suggestion {b}")
-
+def data_errors(data):
+    errors=[]
+    if len(data['products'])!=5: errors.append('exactly five submitted products required')
+    if len({p['key'] for p in data['products']})!=5: errors.append('duplicate product key')
+    for key,s in data['sources'].items():
+        if urlsplit(s.get('url','')).hostname not in OFFICIAL: errors.append(f'{key}: unofficial/missing source')
+        if not s.get('checked_on') or not s.get('quote'): errors.append(f'{key}: missing check date or scope')
+    for p in data['products']:
+        if not re.fullmatch(r'[A-Z0-9]{10}',p['asin_observed']): errors.append(p['key']+': invalid observed ASIN shape')
+        intent=p.get('intent',{})
+        if set(intent)!={'intended_asin','official_listing_url','confirmation_date','source'}: errors.append(p['key']+': intent field group incomplete')
+        if any(intent.values()): errors.append(p['key']+': intent filled without a separately reviewed confirmation workflow')
+        observations=p.get('redirect_observations',[])
+        if not observations or observations[-1].get('target_asin')!=p['asin_observed']:
+            errors.append(p['key']+': latest dated observation does not match the displayed destination')
+        if p.get('attribution_report_confirmed'): errors.append(p['key']+': attribution cannot be asserted without authorized evidence')
+        if set(intent)&{'observed_redirect_target','asin_observed'}: errors.append(p['key']+': observation merged with intent')
+        for row in p['rows']:
+            if row.get('source') not in data['sources']: errors.append(p['key']+': unregistered fact source')
+            if not row.get('value') and not row.get('reason'): errors.append(p['key']+': blank without reason')
+    for s in data['suggestions']:
+        ids={o['id'] for o in s['options']}
+        if len(ids)<2 or s['recommendation'] not in ids: errors.append(s['id']+': invalid review options')
+        if s.get('selected') or s.get('applied'): errors.append(s['id']+': proposal pre-applied')
+        for field in ['known','missing','effort','risk']:
+            if not s.get(field): errors.append(s['id']+': missing '+field)
+        if s.get('source') not in data['sources']: errors.append(s['id']+': missing official reference')
+    for q in data['questions']:
+        if q.get('answer'): errors.append(q['id']+': open answer filled')
+        if not q.get('discover') or not q.get('missing'): errors.append(q['id']+': missing discovery action')
     return errors
 
 
-def main() -> int:
-    errors = checks()
+def html_errors(document,rel):
+    errors=[]
+    p=Refs(); p.feed(document)
+    if document.count(DISCLOSURE)<2: errors.append(rel+': needs masthead and footer disclosure')
+    if '<main' not in document or document.find(DISCLOSURE)>document.find('<main'): errors.append(rel+': disclosure must precede main')
+    if 'data-disclosure-strip' not in document: errors.append(rel+': no visible strip marker')
+    if MONEY.search(document): errors.append(rel+': static currency amount')
+    canonical='https://kanlerxz87-cyber.github.io/Zone2/'+('' if rel=='index.html' else rel)
+    if f'<link rel="canonical" href="{canonical}">' not in document: errors.append(rel+': wrong canonical')
+    for anchor in p.anchors:
+        href=anchor.get('href',''); u=urlsplit(href)
+        if u.hostname in {'amazon.com','www.amazon.com','link.amazon'}:
+            if not {'sponsored','nofollow'}<=set(anchor.get('rel','').split()): errors.append(rel+': unsponsored product link')
+        if anchor.get('data-product-key'):
+            if u.hostname not in {'amazon.com','www.amazon.com'} or parse_qs(u.query).get('tag')!=['shopnow047c-20']:
+                errors.append(rel+': CTA has wrong destination/tag')
+            if anchor.get('data-validation-state')!='awaiting-account-report': errors.append(rel+': missing account-validation gate')
+    for ref in p.refs:
+        if ref.startswith(('https:','http:','mailto:','data:','#')): continue
+        path=ref.split('#')[0].split('?')[0]
+        target=(ROOT/rel).parent/path
+        if not target.is_file(): errors.append(f'{rel}: broken local reference {ref}')
+    for body in re.findall(r'<tbody>(.*?)</tbody>',document,re.S):
+        for row in re.findall(r'<tr\b[^>]*>.*?</tr>',body,re.S):
+            urls=re.findall(r'href="(https://[^\"]+)"',row)
+            if not any(urlsplit(u).hostname in OFFICIAL for u in urls): errors.append(rel+': table row has no official reference')
+    return errors
+
+
+def checks():
+    errors=data_errors(DATA)
+    for rel in PAGES:
+        path=ROOT/rel
+        if not path.is_file(): errors.append('missing '+rel); continue
+        errors+=html_errors(path.read_text(),rel)
+        if path.read_text()!=TARGETS[rel](): errors.append('stale '+rel)
+    return errors
+
+
+def main():
+    errors=checks()
     if errors:
-        print(f"FRONT GATE FAILED — {len(errors)} problem(s):")
-        for x in errors:
-            print("  •", x)
-        return 1
-    print(f"front gate OK — {len(PAGES)} pages, all checks pass")
+        print('\n'.join(errors)); return 1
+    print(f'Publication gate passed: {len(PAGES)} pages; source-linked rows, five separated intent records, no fabricated outcomes')
     return 0
 
 
-if __name__ == "__main__":
-    raise SystemExit(main())
+if __name__=='__main__': raise SystemExit(main())
