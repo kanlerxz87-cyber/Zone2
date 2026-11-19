@@ -8,7 +8,7 @@
   "dup_titles": 4,
   "endpoint_pages": 0,
   "feed_present": true,
-  "gates": "tools/ci_replay.py exit 1 \u2014 CI REPLAY FAILED at: Decision-board gate (sourcing, blanks, nothing decided, open questions empty, (see the run for the failing step)",
+  "gates": "tools/ci_replay.py exit 0 \u2014 CI REPLAY PASSED \u2014 51 steps (all steps passed)",
   "guide_pages": 41,
   "guides_unlinked": 4,
   "jsonld": 66,
