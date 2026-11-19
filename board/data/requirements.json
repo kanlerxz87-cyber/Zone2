@@ -68,11 +68,11 @@
       "priority": "P2",
       "requirement": "Ship a social preview image and structured data, then measure whether search traffic arrives",
       "brief_status": "Partly implemented 2026-11-16",
-      "measured_status": "partly — the structured-data half, not the image half",
+      "measured_status": "partly — preview metadata is present on a subset; Search Console remains off",
       "verdict": "matches",
-      "measured": "{{jsonld}} of {{pages}} pages carry JSON-LD. 108 carry og:type, og:site_name, og:title, og:description and og:url. {{og_image}} carry an og:image — that is to say, none of them do.",
-      "evidence": "tools/build_head_meta.py emits the og: block and does not emit og:image; the audit on the same tool reports clean, because it does not require an image. The row is honestly 'partly' — but the missing half is the half the row names first.",
-      "gap": "One image, referenced from the og: block on every page. The second half of the row — measure whether traffic arrives — cannot be measured at all until RQ-28 is done, because no page carries Search Console verification.",
+      "measured": "{{jsonld}} of {{pages}} pages carry JSON-LD. {{og_image}} of {{pages}} pages carry an og:image. {{sc_pages}} of {{pages}} pages carry a Search Console verification tag.",
+      "evidence": "Measured by tools/build_board.py from the checked-in HTML tree. These counts describe published markup, not search-engine indexing or traffic.",
+      "gap": "Coverage is incomplete: add consistent preview metadata to the remaining pages if needed, then connect the site's Search Console property to observe its own queries. The repository alone cannot establish search traffic.",
       "source_ids": ["BD-15"]
     },
     {
