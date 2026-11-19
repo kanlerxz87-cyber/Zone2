@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-SKIP_DIRS = {".git", "node_modules", "__pycache__", ".local", ".cache", "_site"}
+SKIP_DIRS = {".git", "node_modules", "__pycache__", ".local", ".cache"}
 URL = re.compile(r"""url\(\s*(?P<q>['"]?)(?P<u>[^'")]+)(?P=q)\s*\)""", re.I)
 
 

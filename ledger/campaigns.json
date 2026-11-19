@@ -1,5 +1,5 @@
 {
-  "note": "Legacy static redirect-campaign registry, empty by design. The current publication uses direct tagged Amazon links and tools/analytics_server.py daily counters, not this redirect service. Five observed product destinations exist, but intended identities and account attribution are not confirmed. No authorized campaign/report dataset is available; no live campaign is asserted.",
+  "note": "The legacy redirect campaign registry remains empty and is not used by the current direct-link publication. Current observed identities are recorded separately from unconfirmed intent. No enrolled-report validation or authorized performance import exists. The measurement collector counts direct links; it never redirects customers. Unknown report values remain blank, not zero.",
   "as_of": "2026-11-19",
   "state": "EMPTY_BY_DESIGN",
   "source_ids": [
@@ -8,13 +8,50 @@
   "schema": {
     "key": "static lowercase label, e.g. 'kitchen-hero' (regex ^[a-z0-9][a-z0-9_-]{0,47}$)",
     "page": "site path carrying the block",
-    "entry": "ledger/products.json id P-01..P-05, only after intended identity and enrolled-account validation",
+    "entry": "ledger/products.json entry ID (P-01..P-05), subject to separate intent and enrolled validation",
     "position": "hero | mid | table | faq | footer",
     "asin": "10-character identifier from a verified catalog record",
     "enabled": "boolean; disabled campaigns refuse to redirect rather than sending an unverifiable click"
   },
   "campaigns": [],
   "history_note": "Static campaign registry consumed by tools/redirect_server.py. Empty by design: a campaign key must point at a VERIFIED product identity, and none of the three requested items resolved to a catalog record, so no link and no campaign may be published yet (Flagged for Review F-06/F-07). Keys are static labels; the tracker rejects anything that looks per-visitor, because the Participation Requirements forbid associating a sub-tag or Associates reporting with a specific end user (rule R-08).",
-  "report_ledger": "ledger/campaign-reports.json",
-  "official_source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+  "observation_schema": [
+    {
+      "field": "timestamp",
+      "definition": "ISO UTC import timestamp"
+    },
+    {
+      "field": "source",
+      "definition": "authorized first-party report source"
+    },
+    {
+      "field": "source_hash",
+      "definition": "SHA-256 of normalized authorized export"
+    },
+    {
+      "field": "channel",
+      "definition": "report channel, not inferred from an order"
+    },
+    {
+      "field": "period_start",
+      "definition": "ISO date"
+    },
+    {
+      "field": "period_end",
+      "definition": "ISO date"
+    },
+    {
+      "field": "eligible_sessions",
+      "definition": "nullable integer supplied by the report; never inferred from page views"
+    },
+    {
+      "field": "clicks",
+      "definition": "nullable nonnegative integer supplied by the report"
+    },
+    {
+      "field": "reported_orders",
+      "definition": "nullable nonnegative integer supplied by the report"
+    }
+  ],
+  "observations": []
 }

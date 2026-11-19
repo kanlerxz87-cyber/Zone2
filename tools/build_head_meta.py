@@ -49,7 +49,7 @@ REPO = Path(__file__).resolve().parents[1]
 # the root pages. "discovery" was added by session 224cc10c (T49): PR #104 shipped the namespace with
 # a second, parallel head layer that put two canonical links and two conflicting og:url values on
 # every page. It was discarded on merge, and the pages now carry this contract's canonical form.
-CONTRACT_DIRS = ["pages", "journal", "decisions", "marketing", "discovery", "guides"]
+CONTRACT_DIRS = ["pages", "journal", "decisions", "marketing", "discovery"]
 
 # Root pages a generator owns. Their head block comes from that generator, so `--fix-heads` must not
 # write into them (the next `--check` would revert it) — and their generators are patched instead.

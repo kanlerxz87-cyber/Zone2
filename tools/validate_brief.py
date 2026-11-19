@@ -89,7 +89,6 @@ SUGGESTIONS = load("suggestions.json")
 DECISIONS = load("decisions.json")
 QUESTIONS = load("questions.json")
 from build_brief import sub_tokens
-from site_inventory import brief_measure, brief_pages
 SUMMARY = sub_tokens(load("summary.json"))
 VERIFICATION = load("verification.json")
 
@@ -220,11 +219,25 @@ def measured_pages() -> list[Path]:
     the summary claims to describe. It is stated here rather than left implicit
     because a count whose denominator is unstated is not a measurement.
     """
-    return brief_pages(REPO)
+    skip = {".git", ".github", "__pycache__", "node_modules", ".local", "_site"}
+    out = []
+    for p in sorted(REPO.rglob("*.html")):
+        rel = p.relative_to(REPO)
+        if any(part in skip for part in rel.parts):
+            continue
+        if rel.name == "404.html":
+            continue
+        if rel.parts[0] == "brief":
+            continue
+        if rel == Path("release") / "index.html":
+            continue
+        out.append(p)
+    return out
 
 
 def measure() -> dict:
-    return brief_measure(REPO)
+    from site_inventory import measure as source_inventory
+    return source_inventory(REPO)
 
 
 def check_derived_counts() -> None:

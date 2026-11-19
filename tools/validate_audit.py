@@ -32,7 +32,6 @@ import argparse
 import json
 import os
 import re
-from price_policy import context_units
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
@@ -269,8 +268,8 @@ def check_pages() -> list[str]:
         html_text[key] = text
         if DISCLOSURE not in text:
             problems.append(f"A11 {p.name}: missing the required disclosure sentence")
-        # A12: no product price in a buying context
-        units = context_units(text)
+        # A12: no product price in a buying context (split first, then strip tags: CR-4 / FL-13)
+        units = [re.sub(r"<[^>]+>", " ", u) for u in re.split(r"</tr>|</p>|</li>|<br\s*/?>", text)]
         for unit in units:
             for m in MONEY.finditer(unit):
                 if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):

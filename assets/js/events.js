@@ -1,81 +1,87 @@
-/* Counter Notes · EV-01 page_view, EV-02 product_link_click, EV-03 disclosure_view.
-   EV-04/05 are authorized report imports, NEVER browser events.
-   No cookies, localStorage, visitor/session ID, fingerprint, referrer or query.
-   Direct Amazon links are observed, never blocked or routed through a redirect.
-   Raw best-effort event counts are not unique readers or eligible Amazon Sessions.
-   See privacy.html and docs/MEASUREMENT.md for retention/deployment limitations. */
+/* Counter Notes — aggregate events only. No cookies, localStorage, identifiers,
+   raw referrers, query strings, IP/UA fields, background retries, or link redirects.
+   GitHub Pages config is OFF. Self-hosting supplies a same-origin runtime config.
+   EV-04/05 are operator imports, NEVER browser purchase/search inference. */
 (function () {
   'use strict';
-  var config = window.CN_MEASUREMENT || {};
-  if (!config.enabled || !config.endpoint || !window.fetch) { return; }
-  if (navigator.globalPrivacyControl || navigator.doNotTrack === '1' || window.doNotTrack === '1') { return; }
-  if (navigator.webdriver && config.mode !== 'test') { return; }
-  var endpoint;
-  try {
-    endpoint = new URL(config.endpoint, location.href);
-    if (endpoint.origin !== location.origin || endpoint.search || endpoint.hash) { return; }
-    if (endpoint.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') { return; }
-  } catch (error) { return; }
-  var page = location.pathname.replace(/^\/Zone2(?=\/)/, '');
-  var pending = [];
-  var sent = 0;
-  var failed = 0;
-  var scheduled = false;
-  function flush() {
-    scheduled = false;
-    if (!pending.length) { return; }
-    var batch = pending.splice(0, 20);
-    // At-most-once attempt: no retry after an ambiguous network result, no persistent queue.
-    // An unavailable collector loses events rather than inventing exact delivery guarantees.
+  var script = document.currentScript;
+  if (!script || navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true) { return; }
+  var root = new URL('../../', script.src);
+  if (root.origin !== location.origin) { return; }
+  var relative = location.pathname.slice(root.pathname.length);
+  if (!relative || relative.endsWith('/')) { relative += 'index.html'; }
+  // Only static, registered paths; never forward an arbitrary incoming path or query.
+  if (!/^(?:[a-z0-9-]+\/)*[a-z0-9-]+\.html$/.test(relative)) { return; }
+  var endpoint = null;
+  var active = false;
+  var pageSeen = false;
+  var disclosureSeen = false;
+  var observer = null;
+
+  function record(event, fields) {
+    if (!active) { return; }
+    var data = Object.assign({ event: event, page: relative }, fields || {});
+    // A failure loses a count, not the reader. keepalive does not block navigation.
+    // fetch completion is NOT treated as an Amazon conversion.
+    fetch(endpoint.href, {
+      method: 'POST', headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify({ events: [data] }), credentials: 'omit',
+      keepalive: true, cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer'
+    }).catch(function () { /* do not persist or retry browser events */ });
+  }
+
+  function channel() {
+    if (!document.referrer) { return 'direct'; }
     try {
-      window.fetch(endpoint.href, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ events: batch }),
-        credentials: 'omit',
-        referrerPolicy: 'no-referrer',
-        keepalive: true
-      }).then(function (response) {
-        if (response.ok) { sent += batch.length; } else { failed += batch.length; }
-      }).catch(function () { failed += batch.length; });
-    } catch (error) { failed += batch.length; }
+      var ref = new URL(document.referrer);
+      if (ref.origin === location.origin) { return 'internal'; }
+      if (/(^|\.)(google\.[a-z.]+|bing\.com|duckduckgo\.com|search\.yahoo\.com)$/.test(ref.hostname)) { return 'search'; }
+    } catch (e) { /* unknown referrer is not stored */ }
+    return 'other';
   }
-  function record(name, fields) {
-    var event = { name: name, page: page };
-    Object.keys(fields || {}).forEach(function (key) { event[key] = fields[key]; });
-    pending.push(event);
-    if (!scheduled) {
-      scheduled = true;
-      window.setTimeout(flush, 0);
+
+  function observePage() {
+    if (document.visibilityState === 'hidden' || pageSeen) { return; }
+    pageSeen = true;
+    record('page_view', { channel: channel() });
+    var strip = document.querySelector('[data-disclosure-strip], .pb-disc, .cn-disclosure');
+    if (strip && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(function (entries) {
+        if (!disclosureSeen && entries.some(function (entry) { return entry.isIntersecting; })) {
+          disclosureSeen = true;
+          record('disclosure_view', { position: 'strip' });
+          observer.disconnect();
+        }
+      }, { threshold: 0.1 });
+      observer.observe(strip);
     }
+    // No observer support means an unknown disclosure view, not an invented one.
   }
-  record('page_view');
-  document.addEventListener('click', function (event) {
-    var anchor = event.target && event.target.closest ? event.target.closest('a[data-product-key]') : null;
-    if (!anchor || anchor.getAttribute('data-link-state') !== 'TAGGED') { return; }
-    var key = anchor.getAttribute('data-product-key') || '';
-    if (/^P-[0-9]{2}$/.test(key)) { key = 'P' + Number(key.slice(2)); }
-    if (!/^P[1-5]$/.test(key)) { return; }
-    record('product_link_click', { product: key });
-    flush(); // Do not preventDefault or wait: shopping works even if this request fails.
-  }, true);
-  var strip = document.querySelector('[data-disclosure-strip], .pb-disc, .disclosure[data-rule="R-01"]');
-  if (strip && 'IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function (entries) {
-      if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= 0.5; })) {
-        record('disclosure_view', { position: 'strip' });
-        observer.disconnect();
-      }
-    }, { threshold: 0.5 });
-    observer.observe(strip);
+
+  function click(ev) {
+    if (!ev.isTrusted || (ev.type === 'auxclick' && ev.button !== 1)) { return; }
+    var link = ev.target && ev.target.closest ? ev.target.closest('a[data-product-key]') : null;
+    if (!link || link.getAttribute('aria-disabled') === 'true') { return; }
+    var product = link.getAttribute('data-product-key');
+    if (/^P-0[1-5]$/.test(product)) { product = 'P' + product.slice(-1); }
+    if (!/^P[1-5]$/.test(product)) { return; }
+    var dest;
+    try { dest = new URL(link.href); } catch (e) { return; }
+    if (dest.protocol !== 'https:' || !/^(www\.)?amazon\.com$/.test(dest.hostname) || dest.searchParams.get('tag') !== 'shopnow047c-20') { return; }
+    record('product_link_click', { product: product });
+    // Never preventDefault, change the href, open Amazon automatically, or cloak it.
   }
-  // No fallback event: if visibility cannot be observed, it must not be invented.
-  window.addEventListener('pagehide', flush);
-  document.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'hidden') { flush(); }
-  });
-  window.CNEvents = Object.freeze({
-    status: function () { return { mode: config.mode, acknowledged: sent, failed: failed, pending: pending.length }; },
-    flush: flush
-  });
+
+  fetch(new URL('measurement.json', root).href, { credentials: 'omit', cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer' })
+    .then(function (response) { if (!response.ok) { throw new Error('config unavailable'); } return response.json(); })
+    .then(function (config) {
+      if (config.enabled !== true || config.mode === 'github_pages_static' || typeof config.endpoint !== 'string') { return; }
+      endpoint = new URL(config.endpoint, root);
+      if (endpoint.origin !== location.origin || endpoint.pathname !== root.pathname + 'api/events' || endpoint.search || endpoint.hash) { return; }
+      active = true;
+      observePage();
+      document.addEventListener('visibilitychange', observePage);
+      document.addEventListener('click', click, true);
+      document.addEventListener('auxclick', click, true);
+    }).catch(function () { /* measurement is fail-closed; shopping still works */ });
 }());

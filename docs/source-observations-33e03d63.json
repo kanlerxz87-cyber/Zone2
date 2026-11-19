@@ -1,0 +1,622 @@
+{
+  "as_of": "2026-11-19",
+  "brand": "Counter Notes",
+  "author": "Counter Notes research desk",
+  "author_note": "AI-assisted source research, not hands-on product testing. No individual author credentials or product-use experience are claimed.",
+  "sources": {
+    "chefman_dual": {
+      "label": "Chefman · dual-window specifications",
+      "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "checked_on": "2026-11-19",
+      "quote": "Capacity: 6 Qt / 5.67 L; Power: 1700W/120V"
+    },
+    "chefman_single": {
+      "label": "Chefman · stainless-steel specifications",
+      "url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "checked_on": "2026-11-19",
+      "quote": "Capacity: 5 Qt or 8 Qt / 4.73 L or 7.57 L"
+    },
+    "emeril": {
+      "label": "Emeril Everyday · specifications",
+      "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+      "checked_on": "2026-11-19",
+      "quote": "26-Quart Capacity; 16.9\"D x 15.8\"W x 14.8\"H"
+    },
+    "amazon_p1": {
+      "label": "Amazon · Chefman dual-basket listing",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "checked_on": "2026-11-19",
+      "quote": "2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets"
+    },
+    "amazon_p2": {
+      "label": "Amazon · Emeril listing",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "checked_on": "2026-11-19",
+      "quote": "24 One-Touch Preset Options"
+    },
+    "amazon_p3": {
+      "label": "Amazon · Chefman 8 Qt listing",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "checked_on": "2026-11-19",
+      "quote": "TurboFry® 4-in-1 with 450°F Hi-Fry Option"
+    },
+    "amazon_p4": {
+      "label": "Amazon · ThermoMaven listing",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "checked_on": "2026-11-19",
+      "quote": "ThermoMaven 1 Sec Professional Digital Meat Thermometer"
+    },
+    "amazon_p5": {
+      "label": "Amazon · CHEF iQ listing",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "checked_on": "2026-11-19",
+      "quote": "Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes"
+    },
+    "agreement": {
+      "label": "Amazon · Operating Agreement §5",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "checked_on": "2026-11-19",
+      "quote": "As an Amazon Associate I earn from qualifying purchases."
+    },
+    "policies": {
+      "label": "Amazon · Program Policies",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "checked_on": "2026-11-19",
+      "quote": "You will not artificially generate clicks or impressions on your Site or create Sessions on an Amazon Site"
+    },
+    "ftc": {
+      "label": "FTC · disclosure guidance",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "checked_on": "2026-11-19",
+      "quote": "You can’t talk about your experience with a product you haven’t tried."
+    },
+    "helpful": {
+      "label": "Google · people-first content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "checked_on": "2026-11-19",
+      "quote": "Does the main heading or page title avoid exaggerating or being shocking in nature?"
+    },
+    "sponsored": {
+      "label": "Google · sponsored links",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "checked_on": "2026-11-19",
+      "quote": "Mark links that are advertisements or paid placements"
+    },
+    "noindex": {
+      "label": "Google · noindex",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+      "checked_on": "2026-11-19",
+      "quote": "We have to crawl your page in order to see <meta> tags and HTTP headers."
+    },
+    "search": {
+      "label": "Google · Search Console performance",
+      "url": "https://support.google.com/webmasters/answer/7576553?hl=en",
+      "checked_on": "2026-11-19",
+      "quote": "Learn which queries are bringing traffic to your site"
+    },
+    "pages": {
+      "label": "GitHub · Pages hosting",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+      "checked_on": "2026-11-19",
+      "quote": "GitHub Pages is a static site hosting service"
+    }
+  },
+  "products": [
+    {
+      "key": "P1",
+      "category": "air-fryers",
+      "name": "Chefman 6 Qt Dual-Window",
+      "brand": "CHEFMAN",
+      "format": "Dual-basket air fryer",
+      "illustration": "dual-basket",
+      "angle": "Two dishes, separate baskets.",
+      "description": "A format to compare when you want separate baskets and a finish-together setting.",
+      "tradeoff": "Compare each basket’s usable space, not just the combined capacity.",
+      "asin_observed": "B0CDY277D3",
+      "submitted_url": "https://link.amazon/B04G1MEwY",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_on": "2026-11-19",
+      "article": "guides/products/chefman-dual-window.html",
+      "intent": {
+        "intended_asin": "",
+        "official_listing_url": "",
+        "confirmation_date": "",
+        "source": ""
+      },
+      "attribution_report_confirmed": false,
+      "rows": [
+        {
+          "label": "Combined capacity",
+          "value": "6 Qt / 5.67 L",
+          "source": "chefman_dual"
+        },
+        {
+          "label": "Basket layout",
+          "value": "Two independent 3 Qt baskets",
+          "source": "amazon_p1"
+        },
+        {
+          "label": "Finish-together setting",
+          "value": "Sync Finish",
+          "source": "chefman_dual"
+        },
+        {
+          "label": "Basket care",
+          "value": "Nonstick, dishwasher-safe baskets",
+          "source": "chefman_dual"
+        }
+      ],
+      "redirect_observations": [
+        {
+          "checked_on": "2026-11-19",
+          "sequence": "initial fetch in this session",
+          "source_url": "https://link.amazon/B04G1MEwY",
+          "target_asin": "B0CDY277D3",
+          "method": "Exact submitted URL fetched; tool-reported final Amazon URL/title. Not owner intent or account attribution."
+        }
+      ],
+      "observation_note": "A fetched destination is an observation, not confirmation of intended product or account attribution."
+    },
+    {
+      "key": "P2",
+      "category": "air-fryers",
+      "name": "Emeril Lagasse French Door 360",
+      "brand": "EMERIL LAGASSE",
+      "format": "26 Qt air-fryer oven",
+      "illustration": "oven",
+      "angle": "Think oven, not drawer.",
+      "description": "French doors and an oven-style interior. Start with the footprint before comparing cooking modes.",
+      "tradeoff": "Preset counts disagree across official sections; a larger count is not a tested advantage.",
+      "asin_observed": "B09B7SB46R",
+      "submitted_url": "https://link.amazon/B02NbDxp3",
+      "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_on": "2026-11-19",
+      "article": "guides/products/emeril-french-door-360.html",
+      "intent": {
+        "intended_asin": "",
+        "official_listing_url": "",
+        "confirmation_date": "",
+        "source": ""
+      },
+      "attribution_report_confirmed": false,
+      "rows": [
+        {
+          "label": "Capacity",
+          "value": "26 Qt / 24.6 L",
+          "source": "emeril"
+        },
+        {
+          "label": "Published dimensions",
+          "value": "16.9 in D × 15.8 in W × 14.8 in H",
+          "source": "emeril"
+        },
+        {
+          "label": "Door format",
+          "value": "French doors",
+          "source": "emeril"
+        },
+        {
+          "label": "Confirmed preset count",
+          "value": "",
+          "reason": "Unverified as a single value: the manufacturer’s spec tile says 25; its description and Amazon title say 24.",
+          "source": "emeril",
+          "also_source": "amazon_p2"
+        }
+      ],
+      "redirect_observations": [
+        {
+          "checked_on": "2026-11-19",
+          "sequence": "initial fetch in this session",
+          "source_url": "https://link.amazon/B02NbDxp3",
+          "target_asin": "B09B7SB46R",
+          "method": "Exact submitted URL fetched; tool-reported final Amazon URL/title. Not owner intent or account attribution."
+        }
+      ],
+      "observation_note": "A fetched destination is an observation, not confirmation of intended product or account attribution."
+    },
+    {
+      "key": "P3",
+      "category": "air-fryers",
+      "name": "Chefman 8 Qt TurboFry Touch",
+      "brand": "CHEFMAN",
+      "format": "Single-basket air fryer",
+      "illustration": "single-basket",
+      "angle": "One basket. A different trade-off.",
+      "description": "The single-basket option in this edit. Compare the shape of your usual batch with the published capacity.",
+      "tradeoff": "Check the exact variant: the manufacturer and Amazon listing disagree on maximum temperature.",
+      "asin_observed": "B08DKYBTPH",
+      "submitted_url": "https://link.amazon/B00hJ57DV",
+      "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_on": "2026-11-19",
+      "article": "guides/products/chefman-turbofry-8qt.html",
+      "intent": {
+        "intended_asin": "",
+        "official_listing_url": "",
+        "confirmation_date": "",
+        "source": ""
+      },
+      "attribution_report_confirmed": false,
+      "rows": [
+        {
+          "label": "Capacity (8 Qt variant)",
+          "value": "8 Qt / 7.57 L",
+          "source": "chefman_single"
+        },
+        {
+          "label": "Published dimensions (8 Qt)",
+          "value": "15.4 × 12.6 × 13.5 in, in manufacturer’s stated order",
+          "source": "chefman_single"
+        },
+        {
+          "label": "Basket care",
+          "value": "Top-rack dishwasher-safe basket",
+          "source": "chefman_single"
+        },
+        {
+          "label": "Confirmed maximum temperature",
+          "value": "",
+          "reason": "Unverified for the exact variant: manufacturer says 400°F; Amazon title says 450°F Hi-Fry. Check the model/manual before purchase.",
+          "source": "chefman_single",
+          "also_source": "amazon_p3"
+        }
+      ],
+      "redirect_observations": [
+        {
+          "checked_on": "2026-11-19",
+          "sequence": "initial fetch in this session",
+          "source_url": "https://link.amazon/B00hJ57DV",
+          "target_asin": "B08DKYBTPH",
+          "method": "Exact submitted URL fetched; tool-reported final Amazon URL/title. Not owner intent or account attribution."
+        }
+      ],
+      "observation_note": "A fetched destination is an observation, not confirmation of intended product or account attribution."
+    },
+    {
+      "key": "P4",
+      "category": "thermometers",
+      "name": "ThermoMaven Digital Thermometer",
+      "brand": "THERMOMAVEN",
+      "format": "Digital probe thermometer",
+      "illustration": "probe",
+      "angle": "Start with a spot check.",
+      "description": "Compare a digital probe’s readout, care instructions and response-time claims before adding app-connected features.",
+      "tradeoff": "The response time is a listing claim, not a measurement from this publication.",
+      "asin_observed": "B0DHZTCNR5",
+      "submitted_url": "https://link.amazon/B0c8moW59",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed_on": "2026-11-19",
+      "article": "guides/products/thermomaven-digital.html",
+      "intent": {
+        "intended_asin": "",
+        "official_listing_url": "",
+        "confirmation_date": "",
+        "source": ""
+      },
+      "attribution_report_confirmed": false,
+      "rows": [
+        {
+          "label": "Product type",
+          "value": "Digital meat thermometer",
+          "source": "amazon_p4"
+        },
+        {
+          "label": "Claimed response time",
+          "value": "1 second (Amazon listing claim; not independently tested)",
+          "source": "amazon_p4"
+        },
+        {
+          "label": "Display description",
+          "value": "Auto-rotate bright LED screen (listing title)",
+          "source": "amazon_p4"
+        },
+        {
+          "label": "Independently tested accuracy",
+          "value": "",
+          "reason": "Unverified: no independent test or calibration record has been supplied.",
+          "source": "amazon_p4"
+        }
+      ],
+      "redirect_observations": [
+        {
+          "checked_on": "2026-11-19",
+          "sequence": "initial fetch in this session",
+          "source_url": "https://link.amazon/B0c8moW59",
+          "target_asin": "B0DZFD6R9Z",
+          "method": "Exact submitted URL fetched; tool-reported final Amazon URL/title. Not owner intent or account attribution."
+        },
+        {
+          "checked_on": "2026-11-19",
+          "sequence": "repeat exact-link fetch after inconsistent initial observation",
+          "source_url": "https://link.amazon/B0c8moW59",
+          "target_asin": "B0DHZTCNR5",
+          "method": "Exact submitted URL fetched again; tool-reported final URL/title matches the historical ledger. Cause of the inconsistent first observation is not established."
+        }
+      ],
+      "observation_note": "The initial and repeat fetch records disagree; the most recent observation shown here is not proof of stable routing or owner intent."
+    },
+    {
+      "key": "P5",
+      "category": "thermometers",
+      "name": "CHEF iQ Sense · three probes",
+      "brand": "CHEF iQ",
+      "format": "Wireless meat thermometer",
+      "illustration": "wireless",
+      "angle": "Compare wireless monitoring.",
+      "description": "The app-connected format in this edit. Verify the probe bundle and connectivity requirements for your setup.",
+      "tradeoff": "Do not treat a heat-safety headline as a food-temperature target or an unrestricted-use instruction.",
+      "asin_observed": "B0DZFD6R9Z",
+      "submitted_url": "https://link.amazon/B0f3GKalj",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_on": "2026-11-19",
+      "article": "guides/products/chef-iq-sense.html",
+      "intent": {
+        "intended_asin": "",
+        "official_listing_url": "",
+        "confirmation_date": "",
+        "source": ""
+      },
+      "attribution_report_confirmed": false,
+      "rows": [
+        {
+          "label": "Product type",
+          "value": "Smart wireless meat thermometer",
+          "source": "amazon_p5"
+        },
+        {
+          "label": "Bundle in observed listing",
+          "value": "3 ultra-thin probes (listing title)",
+          "source": "amazon_p5"
+        },
+        {
+          "label": "Connectivity headline",
+          "value": "WiFi (listing title; range not independently tested)",
+          "source": "amazon_p5"
+        },
+        {
+          "label": "Independently tested range",
+          "value": "",
+          "reason": "Unverified: no connection-range test has been performed by this publication.",
+          "source": "amazon_p5"
+        }
+      ],
+      "redirect_observations": [
+        {
+          "checked_on": "2026-11-19",
+          "sequence": "initial fetch in this session",
+          "source_url": "https://link.amazon/B0f3GKalj",
+          "target_asin": "B0DHZTCNR5",
+          "method": "Exact submitted URL fetched; tool-reported final Amazon URL/title. Not owner intent or account attribution."
+        },
+        {
+          "checked_on": "2026-11-19",
+          "sequence": "repeat exact-link fetch after inconsistent initial observation",
+          "source_url": "https://link.amazon/B0f3GKalj",
+          "target_asin": "B0DZFD6R9Z",
+          "method": "Exact submitted URL fetched again; tool-reported final URL/title matches the historical ledger. Cause of the inconsistent first observation is not established."
+        }
+      ],
+      "observation_note": "The initial and repeat fetch records disagree; the most recent observation shown here is not proof of stable routing or owner intent."
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "CN-S01",
+      "title": "Validate attribution before scaling promotion",
+      "priority": "First",
+      "state": "Account access needed",
+      "known": "The supplied tracking ID is present in direct product links. No Associates destination/report validation is available here.",
+      "missing": "An enrolled-workflow check and authorized tracking report for one link per product.",
+      "options": [
+        {
+          "id": "validate",
+          "label": "Validate five pilot links",
+          "detail": "Recommended. Confirm the exact intended ASIN, generate/check its Special Link in the enrolled workflow and inspect the authorized report before wider distribution."
+        },
+        {
+          "id": "hold",
+          "label": "Keep the research edit only",
+          "detail": "Do not scale campaigns while account-level attribution remains unresolved."
+        }
+      ],
+      "recommendation": "validate",
+      "effort": "Estimate: one account-level validation pass, then report availability; not an automated guarantee.",
+      "risk": "A syntactically tagged URL is not proof that an account is eligible or that an order was attributed.",
+      "source": "policies"
+    },
+    {
+      "id": "CN-S02",
+      "title": "Connect the counter to infrastructure you control",
+      "priority": "First",
+      "state": "Hosting authorization needed",
+      "known": "The collector and browser client are implemented and tested. GitHub Pages cannot run a server.",
+      "missing": "An owner-controlled HTTPS host/reverse proxy, its logging settings and privacy review.",
+      "options": [
+        {
+          "id": "selfhost",
+          "label": "Self-host behind the same origin",
+          "detail": "Recommended. Run the supplied service, keep the aggregate database private, disable access logs and test real persistence before activation."
+        },
+        {
+          "id": "wait",
+          "label": "Wait without collecting",
+          "detail": "Keep the explicit disabled configuration. Do not collect browser-local queues or pretend orders are measured."
+        }
+      ],
+      "recommendation": "selfhost",
+      "effort": "Estimate: deployment and end-to-end verification; recurring hosting responsibility.",
+      "risk": "Raw events can include bots. They cannot establish unique humans, eligible Sessions or purchases.",
+      "source": "pages"
+    },
+    {
+      "id": "CN-S03",
+      "title": "Let measured questions choose the next guide",
+      "priority": "Next",
+      "state": "Search Console access needed",
+      "known": "Four question-led guides form the current starting cluster. No search-query export is available.",
+      "missing": "A verified URL-prefix property and dated query/page performance export.",
+      "options": [
+        {
+          "id": "queries",
+          "label": "Review actual query gaps weekly",
+          "detail": "Recommended. Refresh a useful existing answer before proposing another near-duplicate page."
+        },
+        {
+          "id": "hold",
+          "label": "Hold new topics until data arrives",
+          "detail": "Maintain the existing guides and source checks without inventing trend or search-volume claims."
+        }
+      ],
+      "recommendation": "queries",
+      "effort": "Estimate: one weekly editorial review after access and sufficient observations exist.",
+      "risk": "A sitemap helps discovery; it does not guarantee indexing, ranking or sales.",
+      "source": "search"
+    },
+    {
+      "id": "CN-S04",
+      "title": "Add real authorship and original product photography",
+      "priority": "Next",
+      "state": "Evidence/rights needed",
+      "known": "Current bylines name an organization, not a fictional reviewer. The food hero is labelled AI-generated; diagrams are not product photographs.",
+      "missing": "A consenting accountable editor, documented experience and licensed or original product images.",
+      "options": [
+        {
+          "id": "original",
+          "label": "Commission a documented hands-on review",
+          "detail": "Recommended when feasible. Record who used which model, the method, limits and image rights before changing any review claims."
+        },
+        {
+          "id": "research",
+          "label": "Remain explicitly research-based",
+          "detail": "Retain the current organization byline, format illustrations and no hands-on verdicts."
+        }
+      ],
+      "recommendation": "original",
+      "effort": "Estimate: depends on product access, editor availability and rights clearance; no invented budget.",
+      "risk": "Do not imply firsthand testing or reproduce marketplace media without a permitted route.",
+      "source": "ftc"
+    },
+    {
+      "id": "CN-S05",
+      "title": "Keep RSS now; consider email only with a real service",
+      "priority": "Later",
+      "state": "RSS shipped / email proposed",
+      "known": "The existing RSS endpoint and the new root feed contain real guide links. No email subscription backend is connected.",
+      "missing": "An approved provider, consent/retention plan and tested unsubscribe workflow before an email form can be offered.",
+      "options": [
+        {
+          "id": "rss",
+          "label": "Use the working RSS feed",
+          "detail": "Recommended for now. No email address, account or pretend success message is needed."
+        },
+        {
+          "id": "email",
+          "label": "Review an opt-in email service",
+          "detail": "Only after privacy, deliverability and unsubscribe behavior have been approved and tested."
+        }
+      ],
+      "recommendation": "rss",
+      "effort": "RSS has no signup workflow. Email introduces recurring operational and privacy work.",
+      "risk": "Never display a subscription form that silently discards addresses or claims an unconfigured signup succeeded.",
+      "source": "policies"
+    },
+    {
+      "id": "CN-S06",
+      "title": "Hold AI publishing behind an evidence gate",
+      "priority": "Always",
+      "state": "Approval required for new claims",
+      "known": "Reproducible builds, source-linked tables and policy tests are automated. No profitable-niche, demand or revenue score has been established.",
+      "missing": "Authorized catalog/report data and a recorded editorial decision for each new factual or commercial claim.",
+      "options": [
+        {
+          "id": "gate",
+          "label": "Draft automatically, publish after checks",
+          "detail": "Recommended. Require source coverage, blank unknowns, disclosure, sponsored links and an accountable editorial review."
+        },
+        {
+          "id": "pause",
+          "label": "Pause unattended drafting",
+          "detail": "Prioritize source maintenance and measured reader questions instead of increasing the page count."
+        }
+      ],
+      "recommendation": "gate",
+      "effort": "Estimate: review time grows with new claims, not just the number of generated words.",
+      "risk": "Bulk rewriting product listings is not original reporting and provides no traffic or revenue guarantee.",
+      "source": "helpful"
+    }
+  ],
+  "questions": [
+    {
+      "id": "CN-Q01",
+      "question": "Are the five observed listings the products you intended?",
+      "known": "Five supplied URLs and five observed Amazon destinations are recorded separately.",
+      "missing": "Intended ASIN, official listing URL, confirmation date and confirmation source for each submission.",
+      "answer": "",
+      "discover": "Use the enrolled Associates workflow to confirm each exact model/variant and retain the official listing and dated confirmation. Do not copy an observation into an intent field.",
+      "source": "policies"
+    },
+    {
+      "id": "CN-Q02",
+      "question": "Does this site and tag belong to an eligible enrolled account?",
+      "known": "The brief supplies shopnow047c-20. That string is configured in product links.",
+      "missing": "Enrolled account/site eligibility, marketplace confirmation and a first-party attribution report.",
+      "answer": "",
+      "discover": "Review the account’s site settings and one pilot link per product, then retain the authorized dated tracking export. No self-purchases or artificial clicks.",
+      "source": "agreement"
+    },
+    {
+      "id": "CN-Q03",
+      "question": "Where can the production collector actually run?",
+      "known": "The tested service can run on an owner-controlled host. Pages itself is static.",
+      "missing": "A provisioned HTTPS same-origin route, host responsibility, log controls and privacy/legal review.",
+      "answer": "",
+      "discover": "Deploy behind a controlled reverse proxy, exercise the health/POST contract using an isolated test database, verify private storage and retention, then activate the production client.",
+      "source": "pages"
+    },
+    {
+      "id": "CN-Q04",
+      "question": "Which searches bring qualified readers here?",
+      "known": "No authorized Search Console query export is available. Topic titles are editorial hypotheses, not trends.",
+      "missing": "A verified property and a dated performance export with query/page impressions and clicks.",
+      "answer": "",
+      "discover": "Verify the site property with its owner’s Google account and import a personal-data-reviewed first-party export. Compare like periods; do not equate impressions with visits.",
+      "source": "search"
+    },
+    {
+      "id": "CN-Q05",
+      "question": "Who is the primary buyer, and in which marketplace?",
+      "known": "The observed destinations are on Amazon.com. A visitor’s location does not establish the intended market.",
+      "missing": "Declared audience, marketplace, budget context and household/cooking needs.",
+      "answer": "",
+      "discover": "Review authorized aggregate location/query reports when available. Record the audience choice explicitly before localizing links or making budget/value recommendations.",
+      "source": "helpful"
+    },
+    {
+      "id": "CN-Q06",
+      "question": "Who can provide accountable firsthand review and imagery?",
+      "known": "This edit is AI-assisted source research. No product-use experience or individual reviewer credentials are claimed.",
+      "missing": "A real editor’s consent/credentials, test records for the exact variants and image permissions.",
+      "answer": "",
+      "discover": "Obtain product access and original test/photo records or documented media rights. Preserve the research-only label until that evidence exists.",
+      "source": "ftc"
+    },
+    {
+      "id": "CN-Q07",
+      "question": "Which specifications still need manufacturer clarification?",
+      "known": "Emeril’s official sections disagree on presets; Chefman’s 8 Qt manufacturer page and Amazon title disagree on maximum temperature.",
+      "missing": "Current exact-variant manual or written manufacturer clarification that resolves each conflict.",
+      "answer": "",
+      "discover": "Match the model and revision to its manual or manufacturer support response. Keep each conflicting observation dated; do not choose the more marketable number.",
+      "source": "chefman_single"
+    }
+  ],
+  "cadence": {
+    "status": "Editorial operating plan, not a claim that a scheduled publisher is running",
+    "weekly": "Every Monday: review authorized query/click reports, verify one existing guide’s sources, then propose at most one substantive update or new question.",
+    "publish_gate": "Publish only after sources, intent/attribution gates where relevant, disclosure, sponsored links, editorial review and the full build pass. Otherwise hold; do not fill the slot with generated copy.",
+    "monthly": "Monthly: review source drift, broken links, duplicate topics and authorized reported outcomes. Re-check the hosting/privacy controls before enabling new collection.",
+    "topic_rule": "No topic is labelled trending, high-converting or profitable without dated authorized data. Seasonal packaging is editorial context, not demand evidence."
+  },
+  "observation_correction": "An earlier progress statement that all five destinations matched historical records exceeded the evidence. The first and repeat fetch records for the last two submissions disagree. The repeat matches the historical ledger; no cause or stable-link claim is inferred.",
+  "record_scope": "Independent dated research by session33e03d63, preserved for review; not the active publication build data, intended-product confirmation or authorized account report.",
+  "canonical_implementation": "content/publication.json and measurement/collector.py, retained from merged PR174."
+}

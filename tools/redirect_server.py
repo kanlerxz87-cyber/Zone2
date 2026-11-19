@@ -1,7 +1,4 @@
-"""Legacy click-redirect prototype, not used by the current publication.
-
-For daily counters without redirecting product links use tools/analytics_server.py.
-The current registry is intentionally empty; this prototype is not deployed.
+"""First-party click measurement endpoint.
 
 Scope is narrow on purpose.  Amazon's Program Policies (source S02) forbid associating a sub-tag - or any
 Associates reporting - with a specific end user, so this tracker cannot and does not identify visitors.
@@ -9,7 +6,7 @@ Conversion and earnings are not measured here at all: they come from Associates 
 definition (R-13/R-15).  This service only counts which page and which static campaign sent a click.
 
 Design:
-  * no cookies, no fingerprints, no IP or IP-derived prefix persisted
+  * no cookies, no fingerprints, no IP persisted (only a salted /24 prefix for optional abuse limits)
   * campaign keys come from a static registry file, never from request data (R-08)
   * the outbound href is built by tools/link_builder.py, so the tag/rel guarantees always hold
   * writes one JSON line per click to the event log (append-only), aggregated by tools/optimize.py
@@ -157,8 +154,8 @@ def make_server(host: str = "0.0.0.0", port: int = 8080):
             link = lb.build_product_link(
                 asin,
                 os.environ.get("ZONE2_PARTNER_TAG", ""),
-                link_text="View listing",
-                # Campaign labels stay first-party; do not invent an Amazon tag suffix.
+                link_text="View on Amazon",
+                subtag=campaign.position,
             )
             return link.href
         except lb.LinkPolicyError as exc:

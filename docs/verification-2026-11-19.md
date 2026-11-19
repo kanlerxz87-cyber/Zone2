@@ -1,3 +1,5 @@
+> **Reconciled current state:** PR #174 landed as `4fcb61a` before #175 opened. Its single publication and `measurement/collector.py` are retained unchanged. This document preserves the independent implementation/test history at `11a9b92`; earlier commands and counts below are historical, not the active entry points. Dated source observations are now in `docs/source-observations-33e03d63.json`, separate from current publication data and all blank intent fields. Current #175 checks/deployment evidence is appended at the end.
+
 # Publication / measurement verification — session 33e03d63
 
 Date: **2026-11-19 UTC**. Working branch: `arena/33e03d63-zone2`.
@@ -90,3 +92,34 @@ helper, not a discarded rule.
 
 The actual hosted PR/merge/deploy result is appended only after GitHub returns it. No other session's
 run is reused as this branch's verification.
+
+## Canonical-release reconciliation
+
+PR174 merged at 2026-11-19T06:50:29Z, immediately before PR175 was created. PR175 was conflicting,
+so no GitHub PR check was scheduled. Retained main4fcb61a's complete publication, measurement service,
+all sources/namespaces/recorded choices, assets and61-step gate configuration, rather than shipping a
+second incompatible front end/collector. This session's full code remains in parent11a9b92 and Git
+history. Only dated independent observations and verification/coordination are added to canonical main.
+This preserves more than selecting either side of individual generated conflicts and does not silently
+approve any suggestion. No other PR is merged or closed by this session.
+
+The current Pages admin source-mode setting is a CN-08 gate. #174 already documented a denied
+administration PUT. No retry or claim of changing that setting is made here. An actual successful
+artifact deployment and live check must be recorded separately from that administrator-only mode.
+
+Actual retained-tree and hosted PR/main results: pending at this exact reconciliation checkpoint.
+
+## Retained canonical tree — verification actually run by this session
+
+On the reconciled working tree based on **4fcb61a**, this session ran the retained strict workflow
+replay itself: **61/61 executable steps passed**. This is a new execution, not a copied #174 result.
+Artifact verification passed for **228 HTML pages**, **16 indexable reader pages**, **1451 static
+product anchors** and **136 current factual rows**. All the retained source/namespace gates passed.
+The retained Chromium suite passed **252 viewport checks**, scanned24 current pages for accessibility,
+rendered all archives, and exercised keyboard/finder/filters/local preferences/no-JS/real fixture
+POST persistence/DNT/GPC/static-OFF behavior. Fixture counts in that test are synthetic and temporary,
+not campaign metrics, and no authorized performance report was imported.
+
+The only net additions relative to4fcb61a are this verification history, this session's coordination
+records and the independent source-observation JSON. No active canonical implementation, source fact,
+intent field, recorded choice or collector configuration is changed by this reconciliation.

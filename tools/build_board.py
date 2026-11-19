@@ -41,8 +41,6 @@ from __future__ import annotations
 import html
 import json
 import re
-from site_inventory import has_tagged_link
-from price_policy import context_units
 import sys
 from pathlib import Path
 
@@ -52,7 +50,7 @@ DATA = BOARD / "data"
 SITE = "https://kanlerxz87-cyber.github.io/Zone2"
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 
-SKIP_DIRS = {".git", "__pycache__", "node_modules", ".github", "_site", ".local", ".cache"}
+SKIP_DIRS = {".git", "__pycache__", "node_modules", ".github", ".local", "_site"}
 PLACEHOLDER_TAGS = {"YOURASSOCIATEID", "YOURID", "YOURASSOCIATEID-20", ""}
 
 NAV = [
@@ -165,7 +163,11 @@ def measure() -> dict[str, object]:
         if re.search(r"counter.?space|capacity per centimetre|capacity per centimeter", t, re.I):
             counter += 1
 
-        if has_tagged_link(t):
+        real_tag = False
+        for mm in re.finditer(r"[?&]tag=([A-Za-z0-9_\-]*)", t):
+            if mm.group(1) not in PLACEHOLDER_TAGS:
+                real_tag = True
+        if real_tag:
             tagged += 1
 
         for _href, rel in _amazon_links(t):
@@ -198,7 +200,7 @@ def measure() -> dict[str, object]:
     # moved twice before this page was even published.
     collapse = 0
     for p in pages:
-        units = context_units(texts[p])
+        units = re.split(r"</tr>|</p>|</li>|<br\s*/?>", re.sub(r"<[^>]+>", " ", texts[p]))
         if len(units) == 1:
             collapse += 1
 
@@ -1096,7 +1098,7 @@ def main(argv: list[str] | None = None) -> int:
     # previous commit's pages and report a stale build that this run just fixed.
     gates = run_gates()
     (DATA / "measured.json").write_text(
-        json.dumps({**_MEASURED, "gates": gates, "measured_utc": "2026-11-19",
+        json.dumps({**_MEASURED, "gates": gates, "measured_utc": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
                     "substitutions": dict(sorted(_SUBS.items()))},
                    indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
