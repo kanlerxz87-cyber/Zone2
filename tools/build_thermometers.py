@@ -369,7 +369,7 @@ def page_hub() -> str:
     </section>
 """
     return page(
-        "Meat thermometers",
+        "Meat thermometers, compared row by row",  # T72: the guide page carries the bare title
         "Instant-read or leave-in? Two meat thermometers compared row by row from their listings, with USDA's "
         "safe temperatures and placement rules linked beside every line.",
         body, rel=f"{SECTION}/index.html", crumb_label="Thermometers",

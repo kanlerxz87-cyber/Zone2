@@ -239,10 +239,13 @@ def guide_page(g):
 
 def compare():
     body = intro('SIDE BY SIDE', 'Compare the job, not the hype.', 'Different formats solve different shopping questions. The rows below keep manufacturer statements, listing descriptions and unresolved details separate.')
-    body += '<section class="cn-wrap cn-section-tight cn-compare-list">'
+    body += '<section id="compare-list" class="cn-wrap cn-section-tight cn-compare-list">'  # T72: anchor for the mobile sticky bar
     for p in PRODUCTS.values():
         body += f'<article id="{e(p["key"])}"><div class="cn-compare-heading"><img src="assets/img/{e(p["design"])}.svg" width="180" height="125" alt="Generic format illustration"><div><p class="cn-eyebrow">{e(p["type"])}</p><h2><a href="guides/{e(p["slug"])}.html">{e(p["name"])}</a></h2><p>{e(p["tradeoff"])}</p></div></div>{spec_table(p)}<p class="cn-compare-link">{product_cta(p, cls="cn-retailer-link")}</p></article>'
     body += collection_note('compare.html') + '</section>'
+    # T72 (session aecb287a): phone-only sticky bar, so a reader can jump back to the table from any row.
+    body += ('<nav class="cn-sticky-compare" aria-label="Comparison shortcuts"><span>Compare · five listings</span>'
+             '<a href="#compare-list">Back to the list</a><a href="shop.html">Shop the edit</a></nav>')
     return shell('compare.html', 'Compare air fryer and thermometer formats', 'Official specification rows for the five observed Amazon listings, with sources, practical trade-offs and unverified details left blank.', body)
 
 

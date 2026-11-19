@@ -1773,3 +1773,28 @@ so a future note cannot quietly become a restatement of an existing one. The wor
 thermometer listings' own review content was left out: Associates Program Policies §Participation
 Requirements 6(t) restricts displaying customer reviews or star ratings to data obtained through the
 Creators/PA API, and that access is not connected. The intended-ASIN confirmations remain blank.
+
+## Addendum — 2026-11-19 (session `arena/aecb287a-zone2`, T72): the measured gaps, closed or named
+
+**What changed.** The register still reported three rows as open. The tree is now measured again and the
+three are handled in order:
+
+- **S-04 (unique titles and descriptions) — closed.** Every one of the 228 published HTML pages now has its own
+  meta description, taken from that page's own lead paragraph. Before this session, 7 pages had none, 39 `pages/`
+  pages and 4 `decisions/` pages shared one description, and 4 titles were duplicated. The measured count is now
+  zero for all three. Source: Google Search Central, "Create unique descriptions for each page on your site".
+- **S-24 (every article reaches the comparison, buying guide and pillar) — closed.** The four `journal/` articles
+  had no route to those pages. Each now has a "Where to go next" block.
+- **S-20 (mobile-first pass) — partly done, still open.** Measured in headless Chromium at a 390 px phone width:
+  sub-11 px text on the 64 reader pages fell from 3,098 runs to 344; small controls fell from 5,271 to 1,574 (inline
+  text links are excluded, as WCAG 2.2 allows). A phone-only sticky bar now sits on the comparison page. The
+  remaining 344 small labels are on the marketing desk and the flagged tables, which use a separate stylesheet.
+  Sources: WCAG 2.2 SC 2.5.8 and its inline exception; SC 2.5.5 (44 px).
+
+**What did not change, and why.** Shopping-style product links on the reader pages already carry the owner's tag
+`shopnow047c-20` and `rel="sponsored"`. The bare Amazon links that remain are evidence citations, which are left
+untagged by design. The Associates Special-Link test, Search Console verification, the reader-capture choice, the
+analytics endpoint and product photography still need the owner. They are recorded as open items, not filled in.
+
+**Evidence.** `docs/verification-aecb287a.md` holds the sources read on 2026-11-19, the before/after measurements and
+the gate results. The board rows that changed are RQ-01, RQ-16 and RQ-18.

@@ -74,3 +74,28 @@ def head_block(rel_path: str, *, title: str, description: str,
         f'<meta property="og:image:alt" content="{escape(image_alt, quote=True)}">\n'
         f'<meta name="twitter:card" content="summary_large_image">'
     )
+
+
+#: Longest meta description this module emits. Search snippets truncate well before a long one ends.
+META_DESCRIPTION_MAX = 158
+
+
+def meta_description(lead: str, title: str) -> str:
+    """A page's own meta description, transcribed from the lead paragraph the page already shows.
+
+    T72 (session `aecb287a`, 2026-11-19). The `pages/` and `decisions/` generators used one shared
+    description for every page they produced, so 39 `pages/` pages and 4 `decisions/` pages carried
+    identical `<meta name="description">` text (measured: `board/data/measured.json`, `dup_desc` ...).
+    Deriving the description from each page's own lead keeps it a transcription of visible text,
+    never a new claim: whitespace is collapsed, and a lead longer than META_DESCRIPTION_MAX is cut at
+    a word boundary with an ellipsis. A page with no lead falls back to a sentence that names the page
+    and states what the site does and does not claim.
+    """
+    text = " ".join((lead or "").split())
+    if not text:
+        text = f"{title}: a page of the Zone2 research workspace. Verified data only; a blank cell means unconfirmed."
+    if len(text) <= META_DESCRIPTION_MAX:
+        return text
+    cut = text[: META_DESCRIPTION_MAX - 1]
+    cut = cut[: cut.rfind(" ")] if " " in cut else cut
+    return cut.rstrip(" ,;:.") + "…"

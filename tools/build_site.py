@@ -24,7 +24,7 @@ from pathlib import Path
 # generator, so make the tools/ directory importable however this script is invoked.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from flag_state import open_count  # shared predicate (F-29/F-31)
-from head_meta import head_block  # canonical + og:* for every generated subpage (T42)
+from head_meta import head_block, meta_description  # canonical + og:* for every generated subpage (T42); per-page description (T72)
 
 REPO = Path(__file__).resolve().parents[1]
 PAGES = REPO / "pages"
@@ -198,8 +198,9 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
             continue
         active = " active" if href == rel else ""
         items.append(f'<a class="nav-link{active}" href="{up}{esc(href)}">{esc(label)}</a>')
+    description = meta_description(lead, title)  # T72: each page's own lead, not one shared sentence
     head_tags = head_block("pages/" + rel, title=f"{title} · {SITE_NAME}",
-                            description=HUB_DESCRIPTION, site_name=SITE_NAME)
+                            description=description, site_name=SITE_NAME)
     flag_count = len(FLAGS["flags"])
     links = []
     for rel, label in SIBLINGS:
@@ -213,7 +214,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{esc(HUB_DESCRIPTION)}">
+<meta name="description" content="{esc(description)}">
 <meta name="robots" content="index,follow">
 <title>{esc(title)} &middot; {esc(SITE_NAME)}</title>
 {head_tags}
@@ -632,7 +633,7 @@ def page_category(g: dict) -> str:
         + panel("Per-product economics for this band", table(["Metric", "Value", "Basis"], [[text_cell(a), status_pill(b) if b == "not published" else text_cell(b), text_cell(c)] for a, b, c in per_product]))
         + panel("How the pipeline uses this band", checklist(esc(s) for s in steps))
     )
-    return render(f"categories/{g['slug']}.html", f"Category band {g['rate_pct']}%", ", ".join(g["categories"]), body, depth=1)
+    return render(f"categories/{g['slug']}.html", f"Category band {g['rate_pct']}% · {g['id']}", ", ".join(g["categories"]), body, depth=1)  # T72: band id disambiguates equal rates
 
 
 def page_modules_index() -> str:
@@ -709,7 +710,7 @@ def page_module(m: dict) -> str:
     )
     return render(
         f"modules/{m['id'].lower()}-{slugify(m['name'])}.html",
-        m["name"],
+        f"{m['id']} · {m['name']}",  # T72: the niche-discovery module and the niches page shared one title
         m["purpose"],
         body,
         depth=1,

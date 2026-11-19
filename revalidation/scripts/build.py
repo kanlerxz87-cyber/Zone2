@@ -59,6 +59,19 @@ def badge(status: str) -> str:
     return f'<span class="badge {cls}">{label}</span>'
 
 
+def meta_description(lede: str, title: str) -> str:
+    """T72 (session aecb287a): the page's own lede, whitespace-collapsed and cut at a word boundary.
+
+    Before this, the six revalidation pages had no <meta name="description"> at all (measured:
+    board/data/measured.json no_desc). The text is a transcription of the lede the page already shows.
+    """
+    text = " ".join((lede or "").split()) or f"{title}: a page of the Zone2 revalidation record."
+    if len(text) <= 158:
+        return text
+    cut = text[:157]
+    return cut[: cut.rfind(" ")].rstrip(" ,;:.") + "…"
+
+
 def page(title: str, current: str, lede: str, body: str) -> str:
     nav = "".join(
         f'<a href="{p}" class="active">{escape(t)}</a>'
@@ -71,6 +84,7 @@ def page(title: str, current: str, lede: str, body: str) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{escape(meta_description(lede, title))}">
 <title>{escape(title)} — Zone2 Revalidation</title>
 <link rel="stylesheet" href="assets.css">
 </head>

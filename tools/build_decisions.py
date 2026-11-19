@@ -39,7 +39,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from head_meta import head_block  # canonical + og:* for the decision surface (T42)
+from head_meta import head_block, meta_description  # canonical + og:* for the decision surface (T42); per-page description (T72)
 
 REPO = Path(__file__).resolve().parents[1]
 DATA = REPO / "ledger"
@@ -232,8 +232,9 @@ NAV = [
 def render(rel: str, title: str, lead: str, body: str, *, badge: str = "") -> str:
     """Same shell as pages/ (tools/build_site.py::render) so the two namespaces are one site."""
     c = counts()
+    description = meta_description(lead, title)  # T72: each page's own lead, not one shared sentence
     head_tags = head_block("decisions/" + rel, title=f"{title} · {SITE_NAME} decisions",
-                            description=HUB_DESCRIPTION, site_name=f"{SITE_NAME} decisions")
+                            description=description, site_name=f"{SITE_NAME} decisions")
     items = []
     for href, label in NAV:
         active = " active" if href == rel else ""
@@ -243,7 +244,7 @@ def render(rel: str, title: str, lead: str, body: str, *, badge: str = "") -> st
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{esc(HUB_DESCRIPTION)}">
+<meta name="description" content="{esc(description)}">
 <meta name="robots" content="index,follow">
 <title>{esc(title)} &middot; {esc(SITE_NAME)} decisions</title>
 {head_tags}
