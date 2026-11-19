@@ -8185,3 +8185,67 @@ bump the three prose counts in the same change.
 - **Pages deploy:** workflow "pages build and deployment" run 44621142871 → **success**; "Build, verify and deploy" run 44621144101 → **success**; Pages API `status: built`, latest build commit `7cf2eef` (2026-11-19T21:40:56Z), site `https://kanlerxz87-cyber.github.io/Zone2/`.
 - **Flagged, non-blocking, left open:** F-54 (the listing contradicts itself — owner decides which statement governs), Q-22 (2-year vs 3-year owner question). Conflict-row counts after merge: catalog 5 (P-03 Max temperature, P-02 Presets, P-02 Included accessories, P-05 Battery, P-05 Warranty).
 - **Not touched (scope discipline):** `README.md` / `EXECUTIVE_SUMMARY.md` count prose and `tools/build_front.py` (PR #194's claim — regenerated only), `ledger/flags.json`, `ledger/questions.json`, `.github/**`, `console/**`, `board/**`, `marketing/**` (desk already correct).
+
+## T76 claim — session `arena/95bfb73c-zone2` (95bfb73c) — 2026-11-19 (UTC)
+
+**Claimed:** 2026-11-19T21:55Z (UTC), on branch `arena/95bfb73c-zone2`, base `main` @ `0c101a7`.
+Task id **T76** verified free at claim time: `grep -c T76 COORDINATION.md` = 0 on this tree and on
+`origin/main`. Open PRs at claim time: **#194** (`1b09bb6d`, T73 final integration), **#184**
+(`698addcd`), **#182** (`60b0ea6b`).
+
+**Why this is a takeover, not duplicate work.** The protocol's 60-minute rule is met on the record:
+PR #194's last commit `f8412b1` is dated **2026-11-19T20:07:12Z**; this claim is **1 h 48 m** later.
+Independent evidence gathered before claiming:
+
+| Check | Result |
+|---|---|
+| PR #194 last commit | `f8412b1` @ 2026-11-19T20:07:12Z (1 h 48 m old) |
+| PR #194 CI | **failing** — run `44605391629` failed at step 21/66, `Structural audit (fragments, spec sources, prose counts, orphans, disclosure)`; two consecutive runs failed (`44603346914` @ 19:55Z, `44605391629` @ 20:07Z) |
+| PR #194 mergeability | `mergeable: false`, `mergeable_state: dirty` — **8 files conflict** against `main` after #198/#199/#200 landed |
+| Session id `1b09bb6d` on the board | present as a T73 claim row; no close-out, no PR link, no deploy record — the task is unfinished |
+| PRs #184 / #182 | already absorbed into #194's branch history (`5759d18`, `0951e6f` are in its ancestry); they carry no unique commits #194 does not |
+
+So #194 is a **stale, red, conflicting** integration PR whose only remaining value is its content.
+Leaving it open would keep the two owner-facing surfaces it builds (`decision-room.html`,
+`decision-prompt.html`) off the live site indefinitely, and the failing step is the structural audit —
+a gate that *should* fail rather than be merged past. Nothing in #194 is discarded: this session
+**merges its branch forward, resolves the conflicts without dropping either side, fixes the audit,
+regenerates every derived output, re-runs all gates, and publishes**.
+
+**Task:** T76 — land PR #194's content on top of current `main` and publish it.
+(a) Merge `arena/1b09bb6d-zone2` into this branch; resolve the 8 conflicts as a **union where the two
+sides add different things** (`assets/css/publication.css` = T69's table reset + Decision Room styles
+**plus** T72's mobile floor / tap targets / sticky bar; `EXECUTIVE_SUMMARY.md` = both addenda) and by
+**regeneration** where the file is builder output (`board/*.html`, `board/data/measured.json`,
+`compare.html`, `release/index.html`).
+(b) Find the actual cause of the step-21 structural-audit failure on the *combined* tree and fix the
+cause, not the symptom — `tools/audit_site.py` passes on `main` alone (228 pages, 7/7) and on #194's
+branch alone (230 pages, 7/7); the failure only exists after the branches are combined, so the
+prose-count pins in `README.md` / `EXECUTIVE_SUMMARY.md` are the first suspect.
+(c) Re-run `tools/ci_replay.py` end to end, plus every individual gate, and confirm `ok: true`.
+(d) Re-read live every official source the new pages cite, record a dated verification doc.
+(e) PR → merge without waiting → confirm the GitHub Pages deploy → append the close-out and mark
+#194 superseded-and-absorbed (closed by this merge, not by a rewrite).
+
+**File scope:** `EXECUTIVE_SUMMARY.md` (merge resolution + T76 addendum), `assets/css/publication.css`
+(merge resolution), `README.md` (**only** the prose-count lines, if the audit proves they are the
+cause), every file PR #194 adds (`decision-room.html`, `decision-prompt.html`, `content/decision-room.json`,
+`content/publication.json`, `tools/build_decision_room.py`, `tools/verify_decision_room.py`,
+`tests/test_decision_room.py`, `docs/verification-1b09bb6d.md`, …) as merged, every **generated** file
+those builders own (regenerated, never hand-edited), NEW `docs/verification-95bfb73c.md`, append-only
+`COORDINATION.md`.
+
+**Excluded:** `tools/build_front.py` (run, never edited), `tools/publication.py` (theirs is identical —
+verified in the merge), `ledger/**` (no product/source data changes this session), `marketing/**`,
+`shop/**`, `console/**`, `.github/**` (no workflow change unless the audit shows the gate itself is
+wrong), every other session's branch, and any value this session does not re-read live.
+
+**Gates planned:** `python3 tools/ci_replay.py` (full 66-step replay), `tools/audit_site.py`,
+`tools/validate_data.py`, `tools/validate_board.py`, `tools/validate_shop.py`,
+`tools/verify_publication.py`, `tools/build_decision_room.py --check`,
+`tools/verify_decision_room.py`, `tests/test_decision_room.py`, `tests/test_page_identity.py`,
+`tests/test_pipeline.py`, and every builder's `--check` (0 drift required).
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T76 | **Take over PR #194 (stale 1 h 48 m, CI red at step 21, 8 conflicting files) and publish its content on current `main`.** Merge the branch forward with union/regeneration resolutions, diagnose and fix the combined-tree structural-audit failure at its cause, regenerate every derived output, re-run all 66 replay steps, re-read the official sources the new pages cite, PR → merge without waiting → confirm Pages deploy → record. Nothing from #194 is discarded. | **claimed 2026-11-19 (UTC), in progress** | `arena/95bfb73c-zone2` (95bfb73c) | as listed above |
