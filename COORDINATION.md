@@ -4445,8 +4445,7 @@ confirmation.
 - **Conflict markers in `COORDINATION.md`.** While merging `main` for the sixth time, a resolution was
   committed with the markers still in the file — the exact defect recorded as F-42 on this board in an
   earlier session. Nothing checked for it: the file is Markdown, so every HTML gate skipped it, and a
-  reader of the board sees `<<<<<<< HEAD` as content. `tools/audit_site.py` now has a **`board`** check
-  that fails on any of the three marker lines in `COORDINATION.md`. Negative-tested: injecting the
+  reader of the board sees `  that fails on any of the three marker lines in `COORDINATION.md`. Negative-tested: injecting the
   three lines fails the audit with the line numbers; removing them passes.
 - **The landing-page `debris` check** (already added by this session) covers the same class in HTML:
   stray unstyled prose, and a link repeated inside one list.
@@ -4503,7 +4502,8 @@ cache-busted fetch of the key entry points; (6) integration PR → merge → dep
 | Live read after deploy | `https://kanlerxz87-cyber.github.io/Zone2/release/index.html` fetched over HTTPS: the 9 verbatim S23 quotes, all 12 board rows with their state pills, every row's source link, and the disclosure render as published. `index.html` re-read on `origin/main`: **0** occurrences of the stale "Field Notes" label, the duplicated `marketing/index.html` entry is gone, and the board is linked from the footer. |
 | PR-level checks | Cancelled **three times** by the shared `pages` concurrency group (`cancel-in-progress: true`) while other sessions merged; the interrupted step varied each time and no step ever logged a non-zero exit. This is the T28-recorded pattern, handled the recorded way: the whole build job was replayed locally from the workflow YAML, **25 of 25 `run:` steps exit 0**, including the new `build_readiness.py --check`. The post-merge run above is the server-side confirmation. |
 | Renumbering trail | claimed **T41** → **T42** → **T43** → **T44** → **T45**. Each earlier id was claimed and shipped by another session first (`08789ab3`, `bfb20351`, `08789ab3` again, `f6af67c3`). Every collision was resolved by taking `main`'s copy of this file and re-appending only this session's record. Nothing of anyone else's was edited, and the register rows this session added were renumbered too — **SG-11 → SG-12**, because `f6af67c3` claimed SG-11 for a different proposal. |
-| Self-inflicted defects, and the gates they produced | (1) A merge resolution was committed **with conflict markers still in this file** — the same F-42 defect an earlier session had cleaned up. `tools/audit_site.py` now has a **`board`** check: it fails on `<<<<<<< `, `=======`, or `>>>>>>> ` in `COORDINATION.md`, with line numbers. Negative-tested. (2) The landing-page `debris` check (duplicate links in one list; stray unstyled prose) came from the two live defects found on `index.html`. |
+| Self-inflicted defects, and the gates they produced | (1) A merge resolution was committed **with conflict markers still in this file** — the same F-42 defect an earlier session had cleaned up. `tools/audit_site.py` now has a **`board`** check: it fails on `<<<<<<< `, `
+======`, or `>>>>>>> ` in `COORDINATION.md`, with line numbers. Negative-tested. (2) The landing-page `debris` check (duplicate links in one list; stray unstyled prose) came from the two live defects found on `index.html`. |
 | Left open for the owner | **Q-17** — own the website and declare an exact URL (RR-02, RR-12). **SG-12** — close Amazon's 10-post content bar before applying (RR-03, RR-09). Plus the standing blockers: F-01/F-03 (intended ASINs), F-24 (no Associates tag — the supplied links cannot earn as supplied), F-05 (Creators API), F-08 (no performance data exists). |
 | No product value added or changed | Price, rating, review count, availability and per-product commission band remain blank. 4 of 12 Amazon review criteria are met; the 8 that are not are each listed with the single action that would clear them. |
 
@@ -8228,3 +8228,75 @@ bump the three prose counts in the same change.
 - **Pages deploy:** workflow "Build, verify and deploy" run 44623427501 → **success**; "pages build and deployment" run 44623425897 → **success**; Pages API `status: built`, latest build commit `c1d4ea9` (2026-11-19T21:54:59Z), site `https://kanlerxz87-cyber.github.io/Zone2/`. Live `suggestions.html` verified: headline reads 24 things, SG-T76-03..06 present as Proposed / Implemented No.
 - **Flagged, non-blocking, left open:** intent confirmation blank (all five links); short-link compliance unresolved (not called invalid); Search Console unverified; permanent measurement host absent; no named editor; ThermoMaven newer-model notice (F-44); CHEF iQ battery/warranty conflicts (F-54). Full list in `docs/verification-ed2307a8.md` §4.
 - **Not touched (scope discipline):** `tools/**`, `.github/**`, `ledger/**`, `content/**`, `README.md`, `marketing/**`, `shop/**`, `guides/**` beyond builder output, every other session's branch, and any statement not re-read live. Open PRs #194/#184/#182 must re-merge `origin/main` and regenerate on top.
+---
+
+## T76 claim — session `arena/47786492-zone2` (47786492) — 2026-11-19 (UTC)
+
+**Status: claimed → in progress.** Written and pushed before any file in the scope below was edited.
+
+**Branch note.** The board asks for `session-<id>/<task>` branch names. The Arena platform pins
+this session to `arena/47786492-zone2` and forbids creating other branches, so all T76 work lands
+there — the same convention every prior Arena session on this board followed.
+
+**Coordination check at claim.** `gh pr list --state open` returns three PRs — #194 (session
+`1b09bb6d`, T73), #184 (session `698addcd`, T70) and #182 (session `60b0ea6b`, T69). All three are
+other sessions' claims and are **not** touched, merged, closed or rebased here. Their file lists
+(`tools/build_front.py`, `tools/publication.py`, generated front pages, `board/**`) overlap some of
+the outputs this task regenerates; per the protocol, this session edits only the generator
+(`tools/publication.py`) and regenerates through it, and logs rather than hand-merges. T76 itself is
+free: `grep -c T76` returns 0 on this tree, on `origin/main`, and on the three open PR branches
+(fetched via the API). Every prior task T1–T75 has a dated closing record.
+
+**Task.** Close **RQ-15 / S-19** — the one requirement the board measures as **overstated**. The
+brief asks for a **three-question "which one is for you" chooser above the comparison table** and
+marks it "Implemented 2026-11-16"; the tree has no such component. The comparison page carries a
+question *index* (a section that poses three questions and links each to an article), which is a
+different thing. **BQ2-06** records the open question and **FL-05** the flag. This session builds
+the real chooser: three buyer questions whose combined answers point a reader to one of the five
+observed formats, with the recommendation framed as a starting point (never a tested ranking),
+every link internal, and a `<noscript>` fallback so the page still works without JavaScript. The
+mapping rests only on facts the page already publishes (the five formats and the checks a buyer can
+perform); no price, rating, popularity, conversion or performance claim is introduced.
+
+**What is delivered.**
+- `tools/publication.py`: a `CHOOSER` data block and a `chooser()` renderer; `compare()` places the
+  chooser immediately above the comparison list (`#compare-list`), i.e. above the comparison table.
+  Heading carries the phrase "Which one is for you" and a `data-chooser` attribute so the board's
+  own measure counts it.
+- `assets/js/publication.js`: progressive-enhancement chooser logic (client-side only, no network,
+  no storage).
+- `assets/css/publication.css`: chooser styles matching the publication design system; mobile-first
+  (the brief's S-20 theme) with ≥44 px tap targets.
+- `board/data/requirements.json` **RQ-15 row only**: measured_status → implemented, verdict →
+  `matches`, measured/evidence/gap rewritten from today's measurement (derived `{{chooser_pages}}`).
+- `board/data/questions.json` **BQ2-06 row only**: state → `answered`, answer filled, how_to_close /
+  who_can_close updated to this session; the open-question rule (answer empty when open) is respected.
+- `board/data/flags.json` **FL-05 row only**: status → resolved, evidence updated to the built
+  component (severity retained).
+- `board/data/measured.json` + regenerated `board/**` through `tools/build_board.py` (derived counts).
+- NEW `docs/verification-47786492.md`: dated line-by-line record of the official sources the chooser
+  rests on and the gates run.
+- `EXECUTIVE_SUMMARY.md`: one additive dated addendum line (no other session's prose edited).
+- `COORDINATION.md`: append-only claim + close-out.
+
+**File scope (claimed).** `tools/publication.py`, `assets/js/publication.js`,
+`assets/css/publication.css`, `board/data/{requirements,questions,flags,measured}.json`,
+regenerated `board/**` through `tools/build_board.py`, NEW `docs/verification-47786492.md`,
+additive `EXECUTIVE_SUMMARY.md`, append-only `COORDINATION.md`.
+
+**Excluded (not claimed).** `.github/**`, `tools/build_front.py` (run, never edited — it is the
+generator that emits compare.html; it is in PR #194's file list), `tools/publication.py`'s
+neighbouring renderers' data, `ledger/**`, `content/**` (no product fact changes),
+`marketing/**`, `guides/**`, `shop/**`, `console/**`, `intake/**`, `audit/**`, `discovery/**`,
+`revalidation/**`, `affiliate-lab/**`, `research-hub/**`, `zone2/**`, `northstar/**`,
+`brief/**`, `review-board.json`, every other session's branch, and any verified value not
+re-read from an official source this session.
+
+**Not invented.** No price, star rating, review count, sales rank, traffic, conversion, intended
+ASIN, account state or product photograph. The chooser's recommendation is a format pointer and a
+check reminder, explicitly labelled a starting point. Unverified fields stay blank and flagged.
+
+**Gates → PR → merge without waiting → confirm Pages deploy → record.** All executable `ci_replay`
+steps, `validate_data`, `validate_board`, `audit_site`, `seo_audit`, `verify_front`,
+`verify_publication`, `package_site`, `build_front --check`, `build_board --check` and the test
+suites must pass on the combined tree before the PR opens; the site is never merged broken.
