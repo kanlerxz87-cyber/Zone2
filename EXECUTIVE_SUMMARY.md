@@ -1681,3 +1681,49 @@ on `main` as 10727edd's F-45 and F-44. Verification detail: [`docs/verification-
 - `tools/audit_site.py`: 210 pages, all checks pass.
 - `tools/seo_audit.py`: all checks pass.
 - `tools/verify_front.py` (G1–G10, 15 pages) and `tools/validate_shop.py` (S1–S12): pass.
+
+---
+
+## Addendum — 2026-11-19 (session `arena/5f7f77a4-zone2`, T68): the product notes now differ from each other
+
+**What was measured first.** The five reader-facing product notes used to differ only in their name, one
+intro sentence, one trade-off sentence and five table rows; the rest — byline, "why look at this format",
+link-provenance note, closing read — was the shared shell. Stripping chrome and comparing 8-word shingles
+(Jaccard) put a third of two notes in common:
+
+| Pair | Overlap before | Overlap after |
+|---|---|---|
+| `guides/chef-iq-sense.html` × `guides/thermomaven-instant-read.html` | 0.389 | 0.163 |
+| `guides/chefman-dual-basket.html` × `guides/chefman-single-basket.html` | 0.363 | 0.163 |
+| `guides/chefman-dual-basket.html` × `guides/emeril-french-door.html` | 0.342 | 0.147 |
+
+The threshold is this project's own repair budget (0.25), not a number any search engine publishes. Google
+documents *why* substantially similar and mass-generated pages are a problem — doorway abuse and scaled
+content abuse — and those two citations are printed next to the measurement.
+
+**What changed for a reader.** Each note now carries, written for that product: a good-fit / less-of-a-fit
+pair, the trade-off in plain words, four checks a buyer can perform before buying, and a short verdict.
+The specification tables are unchanged — same values, same row-by-row official source links, same blanks.
+Examples of what is new: an air fryer note explains why a 6-quart *total* is two 3-quart cooking spaces; an
+oven note explains that French doors need clearance in two directions; both thermometer notes use USDA's
+own probe-depth guidance (2–3 in from the side for thin food on an instant-read; at least 1 in, left in
+place, for a wireless probe) to say which format suits which check.
+
+**What is now gated.** `tools/note_overlap.py` measures the property on the built pages and fails at 0.25,
+so a future note cannot quietly become a restatement of an existing one. The workflow replay is **62/62**.
+
+**What is still not known, and now written down as decisions rather than tasks.**
+- **S68-01 / Q68-01** — the deployed artifact holds 226 HTML pages: 16 reader URLs in the sitemap, 187 pages
+  with `noindex`, and **23 crawlable pages in neither** (`brief/` 9, `console/` 8, `discovery/` 6). Nobody
+  chose that state; it is what the packaging step happens to produce. Three options are on the board.
+- **S68-02 / Q68-03** — imagery. Every note uses a labelled generic illustration. No product photograph, and
+  no Amazon-served image, is used or claimed.
+- **S68-03** — whether the notes stay short and link out to the question-led guides, or grow into standalone
+  reviews. Recommendation: keep them short; the guides are already the long form.
+- **S68-04 / Q68-04** — the meta descriptions. They are already unique per page and Google's guidance asks
+  for exactly that; rewriting them for click-through needs impression data this project does not have.
+
+**Not done, deliberately.** No price, star rating, review count or sales figure was added. The two
+thermometer listings' own review content was left out: Associates Program Policies §Participation
+Requirements 6(t) restricts displaying customer reviews or star ratings to data obtained through the
+Creators/PA API, and that access is not connected. The intended-ASIN confirmations remain blank.

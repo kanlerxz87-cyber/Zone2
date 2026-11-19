@@ -7593,3 +7593,55 @@ production collection, enrollment/intent/reports and CN-08). No user's manual an
 - **Main verification and deployment:** [run 44510299668](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44510299668) completed successfully on the merge SHA. Both **Build and verify** and **Deploy to GitHub Pages** passed, including the workflow’s read-only live-publication verification step. GitHub Pages deployment `7911139841` has status `success` and environment URL `https://kanlerxz87-cyber.github.io/Zone2/`; the Pages API reports `built` from `main` at `/`.
 - The published suggestion and question registers now identify 2026-11-19 as their page-update date; no source-check date or data row was changed. G11 rejects the former stale 2026-11-16 byline on either register.
 - All prior non-blocking review gates remain as noted in the implementation checkpoint: FLG-003 short-link compliance unresolved; intended product records blank; tracking ID not account-authenticated; production collection off until an authorized persistent host exists; no authorized Associates/Search Console reports. No performance or revenue claim was added.
+
+## T70 — claim: reader-first product notes, duplicate-content repair, suggestion queue
+
+| Field | Record |
+|---|---|
+| Session / branch | `arena/5f7f77a4-zone2` (session `5f7f77a4`) — **renumbered T68 → T70** because session `57eb4af5` claimed T68 on `main` first; the later claim yields, per the board's precedent; all work stays on this Arena-assigned branch |
+| Claimed | 2026-11-19 (UTC), before implementation |
+| Status | **in progress** |
+| Baseline | `605e49f` (`main`, PR #178 merged). Local replay of the retained workflow: **61/61 steps passed** before any edit. |
+| Task | Repair the measured duplicate-content problem between the five reader-facing product notes; give each product note original, sourced decision copy so a buyer can act without re-searching; add this wave's suggestions and missing-information questions to the two owner-review surfaces; record the audit findings and their official citations; integrate (gates → PR → merge → confirm Pages deploy). |
+| File scope | `content/publication.json` (new reader copy per product), `tools/publication.py` (render the new sections; regenerate `index.html`, `shop.html`, `compare.html`, `about.html`, `privacy.html`, `guides/*.html`, `suggestions.html`, `questions.html`, `flagged.html`, `workspace.html`, `publishing.html`, `executive-summary.html`, `measurement.html`, `intent.html`, `feed.xml`), `docs/verification-5f7f77a4.md` (new), `EXECUTIVE_SUMMARY.md` (new dated addendum only), append-only `COORDINATION.md` |
+| Not claimed | `.github/workflows/pages.yml`, `tools/build_front.py`, `tools/shop_layout.py`, `assets/css/*`, `board/**`, other sessions' namespaces and data. Open PRs #162/#163/#172 are **not** merged or closed by this session. |
+| Not invented | No price, star rating, review count, sales rank, traffic figure, conversion, intended ASIN, account state or product photograph. Unverified fields stay blank and flagged. |
+
+**Measured problem this session is fixing (not an impression).** Eight-word-shingle Jaccard between the five
+reader pages of the current release: `chef-iq-sense` vs `thermomaven-instant-read` **0.389**,
+`chefman-dual-basket` vs `chefman-single-basket` **0.363**, `chefman-dual-basket` vs `emeril-french-door`
+**0.342**. Roughly a third of every product note is the shell: an intro sentence, a trade-off sentence, and
+five table rows. That is the structural reason the set reads as generated, and it is the thing a reader
+cannot act on. Scope: original, sourced decision copy per product — not more pages.
+
+### T68 (`5f7f77a4`) — result record, 2026-11-19
+
+**Measured problem, measured repair.** The five product notes shared a third of their text
+(8-word shingle Jaccard: `chef-iq-sense` × `thermomaven-instant-read` **0.389**,
+`chefman-dual-basket` × `chefman-single-basket` **0.363**). Each note now carries per-product
+copy — fit / not-a-fit, trade-off, four checks, verdict — and the worst pair is **0.163**.
+`tools/note_overlap.py` gates this at 0.25 on every build. The specification tables, their
+values, their row-level official source links and their blanks are unchanged.
+
+**Also measured, not fixed (deliberately).** The deployed artifact holds 226 HTML pages:
+16 reader URLs in the root sitemap, 187 `noindex`, and **23 crawlable pages in neither**
+(`brief/` 9, `console/` 8, `discovery/` 6). Recorded as Q68-01 / S68-01 with three options.
+
+**Registers extended.** S68-01…S68-04 (all "Proposed — not implemented"), Q68-01…Q68-04,
+flag CN-11. Sources `GOOGLE-SPAM`, `GOOGLE-SEO`, `GOOGLE-SNIPPET` added with a 2026-11-19
+`checked` date.
+
+**Gates.** `tools/ci_replay.py` **62/62** (was 61; the new duplication step is the 62nd).
+`verify_front` 16/16, `verify_publication` clean (228 pages / 16 indexable / 1,451 anchors /
+138 factual rows), `audit_site` 228 pass, `seo_audit` pass, sitemap and readiness current,
+CSS urls 0 broken, browser 252 viewport checks and 24 accessibility scans clean.
+
+**Evidence limits recorded, not worked around.** Amazon `/dp/` fetches returned 503 from this
+sandbox, and `kanlerxz87-cyber.github.io` did not complete TLS on 2026-11-19 (host-level; the
+GitHub API answered 200). No Amazon value was re-typed from a search result, no live-page
+claim is made here, and the Pages deploy result is recorded separately below from the API and
+the run list rather than from a page fetch.
+
+**Scope discipline.** No other session's files were touched: `.github/workflows/pages.yml` was
+edited only to insert the new gate step, and no open PR (#162, #163, #172) was merged or closed.
+Sources, the exact source list and the reproduction method: `docs/verification-5f7f77a4.md`.
