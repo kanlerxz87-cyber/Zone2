@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-19 (UTC)
 **Session / branch:** `arena/60b0ea6b-zone2`
-**Original baseline:** `605e49f` (PR #178 merge). During the work, `main` advanced through PRs #179 and #180; this branch was rebased onto `e081f42` and retains both upstream coordination histories and the merged freshness-label correction.
+**Original baseline:** `605e49f` (PR #178 merge). During the work, `main` advanced through PRs #179, #180, and #181; this branch was rebased onto `b04078f` and retains all upstream coordination histories and the merged freshness-label correction.
 
 ## Scope and observed defect
 
@@ -26,7 +26,7 @@ While this branch was in progress, PR [#180](https://github.com/kanlerxz87-cyber
 
 No product specification, source claim, redirect observation, product-intent field, affiliate link, account state, or strategic choice was changed. `docs/board-9251f262.json` remains untouched. No external product or policy claim was added or re-verified in this derived-summary change.
 
-## Verification performed after rebasing onto `e081f42`
+## Verification performed on the combined tree rebased onto `b04078f`
 
 - `python3 -m py_compile tools/publication.py tools/build_front.py tools/verify_front.py tests/test_front_surfaces.py` — pass.
 - `python3 tests/test_front_surfaces.py` — **12/12 pass**, including negative mutations.

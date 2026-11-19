@@ -7789,3 +7789,9 @@ board's `compiled_utc`, and (on suggestions) the latest owner-direction date. Th
 gate checks those visible labels and counts against their respective data sources; G11 remains in the
 combined front gate. The regression invocation stays appended to the existing Front-of-house command,
 so the workflow-derived count remains 61 and no unrelated `brief/**` output is regenerated.
+
+### T69 rebase refresh — preserve upstream close-out PR #181
+
+After the first integration onto `e081f42`, `main` advanced through upstream PR #181, which records the
+completed PR #180 merge and Pages verification. This branch was rebased again onto `b04078f`; PR #181's
+append-only coordination close-out is retained. It changes no T69 source or generated publication file.
