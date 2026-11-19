@@ -77,8 +77,10 @@ def load(name: str) -> dict:
 # from the SAME measure() the gate uses, so a new page means "re-run build_brief", which the
 # `--check` step enforces, never "edit a number". validate_brief additionally checks that the
 # PUBLISHED brief/index.html shows the current measurement.
-_M = __import__("validate_brief").measure()
+from site_inventory import measure as source_inventory
+_M = source_inventory()
 TOKENS: dict[str, object] = {
+    **source_inventory(),
     "gate_count": len(__import__("ci_replay").steps()),
     "pages_tagged": f"{_M['with_tag']} of {_M['published']}",
     "pages_disclosed": f"{_M['with_disclosure']} of {_M['published']}",

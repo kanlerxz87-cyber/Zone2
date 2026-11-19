@@ -1,9 +1,8 @@
 name: Build, verify and deploy
 
-# Final integration workflow (session 78c94859).
-#
-# GitHub Pages for this repository is configured as a legacy build from branch
-# `main`, path `/`. This workflow guarantees that nothing broken reaches `main`:
+# Publication integration T63: deploy only the checked _site artifact using Pages Actions.
+# All historical namespace gates remain. Do not upload the raw checkout or private data.
+# This workflow checks:
 #   - the primary Zone2 platform (repo root) is complete and its internal links resolve
 #   - the companion sites (research-hub/, northstar/, zone2/) are complete
 #   - no page prints a price, and every page carries the static affiliate disclosure
@@ -23,11 +22,11 @@ permissions:
 # T63 (session 10727edd, 2026-11-19): one group PER REF. With a single global `pages` group,
 # any session's pull-request run cancelled every other session's run, including the gate on
 # main (observed: run 44468560526, PR #164, cancelled 29 s in by another branch's run).
-# A newer push to the SAME ref still supersedes its older run. Deploys are serialised
+# T63 37333afd: do not cancel running checks, even on a newer push. Deploys are serialised
 # separately by the job-level group on `deploy` below, which never cancels.
 concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  group: pages-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -509,13 +508,48 @@ jobs:
               no prices, no invented metrics, canonical, image alt text, briefing integrity)
         run: python3 tools/validate_shop.py
 
+      - name: Original publication artwork is reproducible
+        run: python3 tools/build_artwork.py --check
+
+      - name: Privacy-preserving collector and authorized report import tests
+        run: python3 -m unittest discover -s measurement -p 'test_*.py' -v
+
+      - name: Event client privacy and behavior tests
+        run: node tests/test_events.cjs
+
+      - name: Price guard regressions (all six repaired copies)
+        run: python3 tests/test_price_guards.py
+
+      - name: Publication data and packaging mutation tests
+        run: python3 tests/test_publication.py
+
+      - name: Review-only editorial plan smoke test
+        run: python3 tools/editorial_plan.py
+
+      - name: Package the deploy artifact
+        run: python3 tools/package_site.py
+
+      - name: Deployed publication contract (all pages, sources, links and privacy)
+        run: python3 tools/verify_publication.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install browser verification dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Browser verification (desktop, mobile, keyboard, accessibility and real local persistence)
+        run: node tests/browser.cjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
   deploy:
     name: Deploy to GitHub Pages
@@ -529,6 +563,17 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Pages settings require Administration:write as well as Pages:write.
+      # Do not pretend the deployment token can administer repository settings.
+      - name: Report Pages source mode without assuming administrator permission
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const response = await github.request('GET /repos/{owner}/{repo}/pages', context.repo);
+            core.info('Pages build_type: ' + response.data.build_type);
+            if (response.data.build_type !== 'workflow') {
+              core.warning('Legacy branch publishing remains enabled. This job deploys the verified artifact; see CN-08 for the administrator-only source-setting gate.');
+            }
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

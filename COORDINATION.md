@@ -7236,3 +7236,133 @@ PASS · `seo_audit.py` PASS · `verify_front.py` 15 pages G1–G10 PASS · `vali
   - `Check today's price (paid link)` buttons pointing at `amazon.com/dp/<ASIN>?tag=shopnow047c-20`.
 - **Still open, for the owner (not blocking):** OQ-01 (intended products), SG-S11 (overlapping guide sets) and
   flags F-49…F-53. All are published with source links on the Flagged for Review page and the owner briefing.
+
+
+---
+
+## T63 — final-integration claim — session `arena/37333afd-zone2` — 2026-11-19 (UTC)
+
+| Field | Claim |
+|---|---|
+| Status | **in progress**, claimed before implementation |
+| Session / current branch | `arena/37333afd-zone2` (Arena-assigned; no other branch will be created) |
+| Base | `4398071d49fdda73c084aa6f3dedf4f72b268076` |
+| Coordination check | Read board and latest closing records; `gh pr list --state open` returned no open PRs on 2026-11-19. T58–T62 have closing/merge records; stale older “in progress” labels are not new claims. |
+| Role | Final integration: improve the existing canonical publication, not another parallel microsite. Preserve previous evidence and source records. |
+| Claimed scope | Root publication/front-page generator `tools/build_front.py`, reader styles/scripts/assets under `assets/`, existing `guides/` and their generator, root reader/measurement/privacy/editorial pages; existing root suggestions/questions/executive-summary generators and data as needed; `measurement/` self-hosted collector, schema, tests, configuration and deployment documentation; root canonical sitemap/feed/robots and global publication checks; `.github/workflows/pages.yml`, CI replay and associated tests; `docs/verification-37333afd.md`, `EXECUTIVE_SUMMARY.md`, `README.md`, and additive coordination entries. Minimal shared-output regeneration and cross-site sponsored-link/disclosure/indexing repairs are part of this final-integration claim and will be documented. |
+| Excluded | No rewriting other sessions’ research findings, no deleting historical evidence, no invented product specifications, prices, ratings, popularity, conversions, commission attribution or confirmed product intent. |
+| Immediate irregularity | Literal unresolved Git conflict markers were found in the committed `.github/workflows/pages.yml`; CI/deployment cannot be assumed healthy merely because legacy Pages currently reports built. Will reproduce, repair and test. |
+| External gates | Associates account/report access, owner intent confirmations, Search Console ownership, a public writable analytics host, and authorized AI/API credentials cannot be manufactured. Implement runnable machinery and visible gates; do not claim external activation without evidence. |
+| Verification / completion | Fresh official-source checks with links; blank unknown fields; publish unresolved items on Flagged for Review; run builds/tests/link checks and browser checks; PR from this branch → merge if green → verify Pages build through GitHub API; append merge/deploy result here. |
+
+
+### T63 progress — measurement first, 2026-11-19
+
+Implemented the collector before new editorial content: `measurement/collector.py` (SQLite daily counters,
+strict static dimensions, 90-day retention, same-origin-only writes, DNT/GPC, global non-identifying abuse
+cap, no raw access logs); local-only first-party report imports for EV-04/05, dated SHA-256 provenance,
+idempotency/overlap checks, and an empty production ledger. Replaced the misleading browser-storage queue
+with a fail-closed memory-only client; no device storage, retry queue, inferred purchases or fake disclosure
+views. Committed Pages config remains OFF because static hosting cannot accept POST. The self-hosted
+service overrides the runtime config when actually running; a preview is never labelled production.
+
+Tests: 24 collector tests passed; 12 client privacy/behavior cases passed with synthetic inputs only.
+Workflow: removed both unresolved conflict blocks **retaining both intake and board checks**, separated PR/main
+concurrency groups, stopped cancellation races, and made local replay reject conflict markers and use shell
+`errexit`/`pipefail`. Repaired all six split-after-strip price checks (CR-T60-1 / CR-4). Existing affected
+validators and the 14-case readiness negative suite pass. Full combined-tree verification still pending.
+
+Official verification so far: Operating Agreement §§1/4/5; Program Policies (search, review/rating, no artificial
+clicks, IP/API caching and Agent provisions); FTC disclosure guidance; Amazon ASIN/text-link help; three
+manufacturer pages and all five short-link destinations. Exact URLs and scope will be in
+`docs/verification-37333afd.md`. Short-link compliance is unresolved, **not declared invalid**; no authenticated
+Associates tracking report or intended-product confirmation was obtained. No product price/rating copied.
+
+### T63 progress — publication integration, 2026-11-19
+
+Rebuilt the canonical front-of-house around five observed product listings and two kitchen clusters,
+with five question-led guides, format comparison, source-linked product notes, organizational authorship,
+original labelled schematic artwork and an explicitly AI-generated food image. All intent fields remain
+blank; the separate observed destinations have fresh dates. Added current questions/proposals without
+self-approving them; optional local preference/export controls never implement a proposal. A root feed,
+reader-only sitemap, packaging transform and review-only editorial planner are now implemented.
+
+The same-origin SQLite service is running as a **temporary preview**, not production hosting. Real Chromium
+screenshots at 1440×1000 and 390×844 were inspected: no horizontal overflow and disclosure directly below
+the masthead above fold. Initial front gate and JS syntax checks pass; workflow formally parsed with PyYAML.
+Corrected the stale five-event model and discovery measurement generator: browser-only queuing was not
+persistent LIVE collection. Pages remains OFF, reports remain absent, no actual performance row is added.
+
+Fresh verification scope and official URLs are recorded in `docs/verification-37333afd.md`. Current source
+conflicts (including 10-in-1/11-in-1) remain unverified. Integration gates, dedicated price mutations, broader
+browser/accessibility checks and actual artifact deployment are still in progress. Source crawlers exclude
+ignored `.local` tooling and `_site`; historical namespaces are not being deleted or re-dated.
+
+### T63 (`37333afd`) progress — full local verification and upstream integration
+
+Strict CI replay passed **59/59 executable steps** before rebasing. New tests: 24 collector cases,
+12 reported client VM cases, six price-guard tests (control + mutation each), 27 publication/artifact
+cases, and Chromium **222 viewport checks / 24 current pages with zero automated WCAG A/AA findings**.
+All 198 packaged pages were rendered; no browser runtime errors or missing local resources; real local
+POST→SQLite verified with outbound Amazon navigation blocked and fixture DB removed afterward.
+The artifact gate checked 125 current factual rows and 1,137 static product anchors. Static Pages remains
+OFF, real reports/intent/enrollment/permanent hosting remain unavailable. Details in the verification record.
+
+At the pre-push fetch, `origin/main` advanced from 4398071 to **20b9bd9** while this session worked.
+PRs #164/#167/#170 and close-out records have landed; #162/#163/#172 are open. Those sessions' closing
+records have now been read. This session does not merge/close their open PRs. It will rebase this current
+branch onto the new main, preserve their added data/namespaces/gates and coordination records, integrate
+shared outputs through the canonical generators, log conflicts and re-run the **combined-tree** checks.
+The earlier 198-page / 59-step result is a dated pre-rebase result, not a claim about the new combined tree.
+
+### T63 (`37333afd`) — rebase conflict resolution, 2026-11-19
+
+Rebased onto `20b9bd9` (PR #173 / T66 close-out). Conflicts were resolved without dropping the upstream
+shop, thermometer desk, source/flag additions, owner directions or any gate:
+
+- Coordination: main's entire chronology plus this session's append-only records.
+- Workflow: **both** shop checks plus all prior intake/board checks and this session's added tests;
+  upstream strict preflight retained, shell `errexit`/`pipefail` retained, non-cancelling per-ref checks
+  plus upstream serialized deploy group. Upload only the `_site` artifact.
+- Price checks: upstream and this session had equivalent split-before-strip repairs. Kept upstream
+  versions/comments where equivalent; the dedicated control/mutation tests still execute all six copies.
+- Front renderer: retained the upstream builders, data, option IDs, recorded owner directions and added
+  guide bodies. One current shell/front page is used; the previous navigation/footer union is explicitly
+  preserved in Workspace and footer. `guides/cleanup-and-counter-space.html` had an add/add collision:
+  the earlier treatment is preserved at **`guides/cleanup-and-counter-space-earlier.html`**, linked from
+  the guide shelf and Workspace, not discarded. `shop/**`, `marketing/thermometers/**`, all their data,
+  generators and validators are retained. SG-S11 / SG-T63-06 remain proposals, not silently marked chosen.
+- Brief inventory: retained upstream token aliases and published-output checks, using the shared
+  inventory module to avoid an import cycle. Corrected stale browser-queue/missing-collector prose in
+  the older summary while preserving its dated Nov17 observation rows; Nov19 observations remain separate.
+- Derived board/brief/console/release outputs: re-rendered from the combined tree, not selected by hand.
+  A board run result is not fabricated to resolve a conflict; it remains pending until actual replay.
+- Product labels: the client/verifier accept both existing static `P-01..P-05` and current `P1..P5`
+  labels as the same registered product dimensions, never a visitor-derived identifier.
+
+Combined artifact: **228 pages / 16 indexable reader URLs / 1,451 static product anchors / 135 current
+factual rows**, contract clean. Chromium: **252 viewport checks**, all pages rendered, 24 current pages
+with zero automated WCAG A/AA violations; behavior/privacy/persistence tests pass. A long upstream
+owner-decision status pill exposed mobile overflow; wrapping repaired without changing the status text.
+Full combined CI (now 61 executable steps) and actual GitHub deployment are the remaining release checks.
+
+### T63 (`37333afd`) — PR and actual check evidence
+
+- Combined-tree `build_board.py` → strict replay **61/61 passed**; its measured JSON now records the
+  actual result, not a chosen conflict side. All 228 pages / 252 viewport checks passed again.
+- PR **#174**, https://github.com/kanlerxz87-cyber/Zone2/pull/174. GitHub build check passed on
+  `c30ca2f` in run **44473749563**; PR deployment correctly skipped. No review wait is required.
+- The app's direct Pages-admin PUT was denied (403); read/push/PR access is working. The repository's
+  main-only deploy job has the already-declared `pages:write` permission and now requests workflow-only
+  Pages before artifact deployment. This is pending actual GitHub execution, not a claimed settings change.
+  If GitHub denies that job too, the deployment will fail visibly and will be repaired before completion.
+
+### T63 (`37333afd`) — Pages permission prerequisite, corrected before merge
+
+The official Pages REST update section was fetched and read: it requires **Administration write AND
+Pages write** and an appropriate repository role, and a successful update returns 204 No Content.
+The planned deployment-token PUT therefore made an unjustified permission/response assumption. It was
+removed **before main/deploy execution**. No denied write is retried. The job now reads/reports the mode
+and warns if the independent legacy publisher remains; actual artifact deployment still uses the existing
+working deploy-pages Action. **CN-08** records the administrator-only source-setting gate. This is not
+reported as a successful settings change or a broken credential connection; read/push/PR checks work.

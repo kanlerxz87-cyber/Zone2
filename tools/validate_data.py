@@ -219,6 +219,8 @@ def check_marks(report: Report) -> None:
     claim = re.compile(r"\b(?:officially )?(?:endorsed|sponsored|partnered|affiliated) with amazon\b", re.I)
     negation = re.compile(r"\b(?:not|no|never|avoid|prohibit|forbid|must not|cannot|free from)\b", re.I)
     for path in sorted(REPO.rglob("*.html")):
+        if any(part in {".git", ".local", "_site", "node_modules"} for part in path.relative_to(REPO).parts):
+            continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         for line in text.splitlines():
             for m in claim.finditer(line):
@@ -228,6 +230,8 @@ def check_marks(report: Report) -> None:
 
     # (c) a title that leads with a mark can read as an official Amazon property: surface for review only
     for path in sorted(REPO.rglob("*.html")):
+        if any(part in {".git", ".local", "_site", "node_modules"} for part in path.relative_to(REPO).parts):
+            continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         m = re.search(r"<title>\s*([A-Z][^<]{0,80})", text)
         if m and re.match(r"^(amazon|amzn|prime|kindle)\b", m.group(1), re.I):
@@ -424,14 +428,14 @@ def check_published_counts(report: Report, canonical_flags: int) -> None:
         text = path.read_text(encoding="utf-8", errors="ignore")
         # Only the reader-facing caption prose matters here, not code samples or data rows.
         for line_no, line in enumerate(text.splitlines(), 1):
-            if "<script" in line or "CANONICAL_FLAG_COUNT" in line:
+            if "<script" in line or "<tr" in line or "CANONICAL_FLAG_COUNT" in line:
                 continue
             for m in typed.finditer(re.sub(r"<[^>]+>", " ", line)):
                 stated_line = int(m.group(1))
-                if stated_line != canonical:
+                if stated_line != canonical_flags:
                     report.fail(
                         f"{name}:{line_no}: typed count '{m.group(0)}' but the register holds "
-                        f"{canonical} flags - derive the caption from CANONICAL_FLAG_COUNT"
+                        f"{canonical_flags} flags - derive the caption from CANONICAL_FLAG_COUNT"
                     )
 
 
@@ -489,6 +493,10 @@ def check_no_typed_flag_counts(report: Report) -> None:
     for path in _flag_prose_pages():
         rel = path.relative_to(REPO).as_posix()
         text = path.read_text(encoding="utf-8", errors="ignore")
+        # The current flag page preserves dated defect titles verbatim (e.g. the old
+        # “11 items flagged” bug). They are evidence, not a claim of today's total.
+        # check_typed_counts separately pins every historical row ID to the ledger.
+        text = re.sub(r'<table\b[^>]*\bdata-historical-flags[^>]*>.*?</table>', '', text, flags=re.S)
         for m in pattern.finditer(text):
             if int(m.group(1)) != canonical:
                 report.fail(
@@ -531,6 +539,16 @@ def check_typed_counts(report: Report) -> None:
             report.fail(f"{name}: missing - cannot verify its derived count captions")
             continue
         text = p.read_text(encoding="utf-8")
+        if '<body class="cn-publication">' in text:
+            # T63 replaced the dashboard with a publication; it prints no live flag KPI.
+            # The historical flag register is still projected from its canonical data.
+            # Do not require obsolete JS count placeholders on a page with no count claim.
+            if name == "flagged.html":
+                expected = {f["id"] for f in _load("flags.json")["flags"]}
+                actual = set(re.findall(r'<tr id="(F-[0-9]+)"', text))
+                if actual != expected:
+                    report.fail("flagged.html: historical flag rows drifted from the canonical ledger")
+            continue
         for marker in ids:
             if f'id="{marker}"' not in text:
                 report.fail(

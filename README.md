@@ -1,3 +1,69 @@
+# Counter Notes · Zone2
+
+**Current release — 19 November 2026:** a product-led kitchen publication for the five supplied Amazon
+links. Start at [the publication](https://kanlerxz87-cyber.github.io/Zone2/) or the
+[current executive summary](https://kanlerxz87-cyber.github.io/Zone2/executive-summary.html).
+The implementation is on `arena/37333afd-zone2`; PR, merge and live-deployment evidence will be recorded
+in [the verification record](docs/verification-37333afd.md) and [coordination board](COORDINATION.md).
+
+## What this release actually provides
+
+- Five source-linked product notes in two clusters: air fryers/countertop ovens and temperature tools.
+  Five practical question-led guides, a format comparison, honest AI-assisted organizational authorship,
+  original labelled artwork, root RSS and one reader sitemap. No invented hands-on review or “best” score.
+- One Workspace navigation group and footer for all dashboards and preserved evidence archives.
+  The **deployed `_site` artifact** applies noindex to operator/archive pages, self-canonicals, masthead
+  disclosure repeated in the footer, and sponsored product anchors—including dynamically rendered links.
+  Historical source files and decisions remain traceable; old implementation statements are dated snapshots.
+- An implemented **first-party SQLite collector**, not just browser-storage queues: daily aggregates for
+  `page_view`, `product_link_click`, `disclosure_view`; separately gated local importers for
+  `conversion_import` and `search_query_import`. No reader IDs, cookies, analytics localStorage, raw
+  referrers or IP/UA database fields. DNT/GPC and 90-day retention. See [measurement/README.md](measurement/README.md).
+- Pages config intentionally **OFF**: GitHub Pages is [static hosting](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+  A tested temporary preview is not a permanent collector deployment. No authorized performance report
+  has been imported; unavailable activity is not represented as zero orders.
+- Direct reader product links use the supplied tracking ID `shopnow047c-20`. Neither enrollment nor
+  attribution is authenticated. Intended ASIN/listing/date/source stay blank and separate from the dated
+  observed destinations. The supplied short links are **not declared invalid**.
+- Reviewable suggestions and known/unknown/discovery registers; local preference/export controls do not
+  implement proposals. A review-only editorial planner includes a shared-meal seasonal reading cluster.
+  No unattended LLM service, scraper, price/review feed or autonomous conversion optimizer is connected.
+
+## Run and verify
+
+```sh
+python3 tools/build_front.py
+python3 tools/build_artwork.py --check
+python3 tools/build_sitemap.py
+python3 tools/package_site.py
+python3 tools/verify_publication.py
+python3 -m measurement.collector serve --preview --port 8000
+# open /Zone2/ on the same origin; use the proxied Arena preview host, never a browser-side localhost API
+```
+
+The Pages workflow uploads **only `_site`**, never the checkout, `.git`, local tooling or SQLite data.
+Preserve all prior namespace gates. For the complete configured CI replay:
+
+```sh
+python3 tools/ci_replay.py
+# Browser dependencies are development-only (npm ci); no production npm runtime is needed.
+# The browser suite starts/stops a local fixture collector, blocks external navigation,
+# tests desktop/mobile/keyboard/accessibility and verifies real local SQLite persistence.
+```
+
+Current code/data: `content/publication.json`, `content/guides.json`, `tools/publication.py`,
+`tools/package_site.py`, `tools/verify_publication.py`, `measurement/`.
+[Official sources and exact verification scope](docs/verification-37333afd.md) distinguish facts,
+listing claims, unverified conflicts, tests and external deployment/account gates.
+
+## Earlier dated project records
+
+The material below is preserved for traceability. Earlier counts, missing-tag statements and client-only
+measurement descriptions are historical—not the state of the current publication. The current summary
+and verification record above take precedence. No historical date is silently refreshed.
+
+---
+
 # Zone2
 
 AI-powered Amazon affiliate marketing platform — product research, trend and conversion analysis,

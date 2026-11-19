@@ -281,7 +281,7 @@ def check_pages(rep: Report) -> None:
                     f"{derived[label]} - near {ctx!r} (F-17/F-26/F-29 class)"
                 )
         # No product prices anywhere in this namespace.
-        units = re.split(r"</tr>|</p>|</li>|<br\s*/?>", plain)
+        units = [re.sub(r"<[^>]+>", " ", part) for part in re.split(r"</tr>|</p>|</li>|<br\s*/?>", text)]
         for unit in units:
             for m in MONEY.finditer(unit):
                 if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):

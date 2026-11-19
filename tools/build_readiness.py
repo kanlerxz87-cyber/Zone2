@@ -112,7 +112,7 @@ def published_pages() -> list[Path]:
     rebuild shift the number it reports. Excluded by path, not by directory, so the rest of release/
     would still be counted if it ever holds another page.
     """
-    skip = {".git", "__pycache__", "node_modules", ".github"}
+    skip = {".git", "__pycache__", "node_modules", ".github", ".local", "_site"}
     out = []
     for p in sorted(REPO.rglob("*.html")):
         if any(part in skip for part in p.relative_to(REPO).parts):
@@ -171,7 +171,7 @@ def count_pages_linking_dp() -> int:
 def published_namespaces() -> list[str]:
     """Directories that publish at least one HTML page, plus the repository root."""
     skip = {".git", ".github", "__pycache__", "node_modules", "tools", "tests", "docs", "ledger",
-            "content", "assets"}
+            "content", "assets", ".local", "_site", "measurement"}
     out = ["."]
     for d in sorted(p for p in REPO.iterdir() if p.is_dir()):
         if d.name in skip:

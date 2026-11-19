@@ -52,7 +52,7 @@ SITEMAP = REPO / "sitemap.xml"
 LIVE = "https://kanlerxz87-cyber.github.io/Zone2/"
 
 #: Directories whose HTML is never a published destination. See the module docstring.
-EXCLUDED_DIRS = ("tools", "tests", "content")
+EXCLUDED_DIRS = ("tools", "tests", "content", "measurement", "node_modules", "_site")
 
 #: Files that exist in the tree but are not destinations, matched on the **basename** so that a
 #: nested error page is caught as well as the root one. `research-hub/404.html` is a "Page not found"
@@ -93,8 +93,19 @@ def url_for(rel: str) -> str:
     return LIVE + rel
 
 
+def indexable_pages() -> list[str]:
+    # One reader publication, not 100+ competing audit/prototype search destinations.
+    # The deployment packager applies noindex to every other reachable evidence page.
+    from publication import indexable_paths
+    pages = sorted(indexable_paths(), key=lambda p: (p.count("/"), p))
+    missing = [p for p in pages if not (REPO / p).is_file()]
+    if missing:
+        raise SystemExit("Indexable registry names missing pages: " + ", ".join(missing))
+    return pages
+
+
 def render() -> str:
-    pages = published_pages()
+    pages = indexable_pages()
     if not pages:
         raise SystemExit("no published pages found — refusing to write an empty sitemap")
     body = "".join(f"  <url><loc>{url_for(p)}</loc></url>\n" for p in pages)
@@ -111,7 +122,7 @@ def main() -> int:
     if args.check:
         current = SITEMAP.read_text(encoding="utf-8") if SITEMAP.is_file() else ""
         if current == doc:
-            print(f"sitemap.xml is current ({len(published_pages())} URLs)")
+            print(f"sitemap.xml is current ({len(indexable_pages())} URLs)")
             return 0
         committed = current.count("<url>")
         expected = doc.count("<url>")
@@ -136,7 +147,7 @@ def main() -> int:
         return 1
 
     SITEMAP.write_text(doc, encoding="utf-8")
-    print(f"wrote sitemap.xml — {len(published_pages())} URLs")
+    print(f"wrote sitemap.xml — {len(indexable_pages())} URLs")
     return 0
 
 

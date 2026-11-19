@@ -1,0 +1,88 @@
+[
+  {
+    "slug": "basket-or-oven",
+    "title": "Basket or oven-style air fryer: what should you compare?",
+    "short_title": "Basket or oven? Start with dinner.",
+    "category": "Buying well",
+    "description": "Compare the cooking space, access, cleanup and counter commitment—not just the number of modes on the box.",
+    "published": "2026-11-19",
+    "art": "formats",
+    "products": ["P1", "P2", "P3"],
+    "answer": "Start with the shape of your usual meal. Compare one uninterrupted basket, separate baskets, and an oven cavity as different layouts—not as a ranking of quart numbers.",
+    "sections": [
+      {"id": "meal", "heading": "Start with the meal, not the menu of modes.", "paragraphs": ["Picture a dinner you actually make, rather than a dish you might cook once. Does it involve two components you want to manage separately? One large item? A tray you want to reach through a door? Those are useful shopping questions even before you pick a brand.", "The Chefman dual-window model is described with two baskets and Sync Finish. The single-basket Chefman and the French-door Emeril offer different layouts. Our suggestion is to shortlist by layout first, then compare the exact model's dimensions and instructions."], "sources": ["M1", "M3", "M5"]},
+      {"id": "capacity", "heading": "A bigger total is not the whole answer.", "paragraphs": ["The manufacturer pages list 6 quarts for the dual-window Chefman, 8 quarts for the single-basket Chefman, and 26 quarts for the Emeril oven. Those numbers describe capacity; they do not establish how much of your particular meal will fit in a useful arrangement.", "Do not translate a quart total into a serving promise of our own. Ask for the usable basket or tray measurements if the official page does not give the answer you need. Our capacity checklist walks through what to record without inventing a household-size formula."], "sources": ["M1", "M3", "M5"]},
+      {"id": "access", "heading": "Think about the movement, too.", "paragraphs": ["A door and a pull-out basket are different ways of accessing the cooking space. Before ordering, sketch where the appliance would live and what would sit in front of it. Then check the exact model's installation instructions instead of treating the outside dimensions as permission to squeeze it into a gap.", "This is a practical exercise, not a fit guarantee. We have not installed these appliances or measured their doors, baskets or working clearances in person. If that missing measurement decides the purchase, ask the manufacturer before buying."], "sources": ["M1", "M3", "M5"]},
+      {"id": "care", "heading": "Decide which cleanup you are willing to do.", "paragraphs": ["Chefman describes the dual-window model's baskets as nonstick and dishwasher-safe. Its stainless-steel page specifies a top-rack dishwasher-safe basket. That is more useful than a vague promise of easy cleanup, but it is still a manufacturer statement, not our cleaning test.", "Make a short list of what you will wash: the basket or tray, any rack, and any other accessory you plan to use. Verify each part's instructions separately. Do not extend a basket's care claim to an oven body, heating element or accessory that the instructions do not name."], "sources": ["M1", "M5"]},
+      {"id": "choose", "heading": "A useful shortlist has a reason—and a reservation.", "paragraphs": ["A split-basket layout is worth examining if separate dishes are your main concern. A single basket is worth examining if uninterrupted space matters more. A countertop oven is worth examining if its particular cooking modes and format match jobs you already do. These are editorial starting points, not findings that one product cooks better.", "For each shortlisted model, write down one reason it fits your routine and one question that could rule it out. If you cannot answer the second question from the listing or manual, keep it open. The side-by-side page links the official pages so you can check the version and details before buying."], "sources": ["M1", "M3", "M5"]}
+    ]
+  },
+  {
+    "slug": "air-fryer-capacity",
+    "title": "A no-hype checklist for comparing air fryer capacity",
+    "short_title": "How much air fryer is enough?",
+    "category": "Size & space",
+    "description": "Quarts, basket layout and usable measurements: a practical way to compare capacity without made-up serving formulas.",
+    "published": "2026-11-19",
+    "art": "capacity",
+    "products": ["P1", "P3", "P2"],
+    "answer": "Record the stated capacity, how it is divided, and the usable measurements you can actually confirm. Leave serving estimates blank unless the exact model's source states them.",
+    "sections": [
+      {"id": "number", "heading": "First, write down what the number describes.", "paragraphs": ["The front of a product name is a starting point, not a complete comparison. Chefman's dual-window page lists 6 Qt / 5.67 L, the stainless-steel 8-quart model lists 8 Qt / 7.57 L, and Emeril lists 26 quarts / 24.6 liters. Keep the unit and the exact model next to the number.", "Our checklist adds a second column: the layout. A split-basket total and an oven cavity should not quietly become interchangeable just because both are expressed in quarts. This is why our comparison describes the format beside the capacity rather than awarding the largest number a winner's badge."], "sources": ["M1", "M3", "M5"]},
+      {"id": "usual", "heading": "Use your usual food as the question.", "paragraphs": ["Choose a few things you already cook. What information would you need to decide whether they fit: the width of a tray, the length of a basket, or the space available when two foods are kept separate? Ask those concrete questions of the exact listing or manual.", "We have not measured usable basket area, arranged food in these machines, or tested batch sizes. When those details are not confirmed in our source review, they stay unknown. A volume figure alone is not a reason for us to promise a particular number of portions."], "sources": ["M1", "M3", "M5"]},
+      {"id": "split", "heading": "Check whether you want to divide the space.", "paragraphs": ["The Amazon title for the observed dual-window Chefman listing describes two independent 3Qt baskets. The manufacturer describes Sync Finish so both baskets finish cooking at the same time. That combination may be relevant when separate dishes are the reason you are shopping.", "It does not establish that your preferred large item will fit either basket. If you normally cook one item that needs uninterrupted room, request the internal measurements before deciding that the combined total answers your question."], "sources": ["M1", "M2"]},
+      {"id": "checklist", "heading": "Take this checklist to the listing.", "paragraphs": ["Record the exact model number, stated capacity and unit, basket or cavity layout, published outside dimensions, and any confirmed usable internal dimensions. Add the source and the date beside each. If an internal measurement is missing, leave it blank and ask for it.", "Then record your own constraint separately: the space you have and the food shape you want to accommodate. Do not label a model suitable until the measurements and model instructions support that decision. A shortlist can be useful without pretending to be a tested fit recommendation."], "sources": ["M1", "M3", "M5"]}
+    ]
+  },
+  {
+    "slug": "cleanup-and-counter-space",
+    "title": "How should you assess cleanup and counter-space trade-offs?",
+    "short_title": "The counter-space question nobody can skip.",
+    "category": "Everyday kitchen",
+    "description": "Check the footprint, access and part-by-part care instructions before a new appliance takes up permanent counter space.",
+    "published": "2026-11-19",
+    "art": "space",
+    "products": ["P1", "P2", "P3"],
+    "answer": "Compare where the appliance will stand, how you will access it, and exactly which parts the maker says you can wash. Outside dimensions alone do not establish installation clearances.",
+    "sections": [
+      {"id": "place", "heading": "Choose a place before choosing a finish.", "paragraphs": ["Pick the actual location you have in mind. Measure that space and record what is around it. Our suggestion is to make the practical questions visible early: where will you work, where will the appliance open, and where will you put the parts when cleaning?", "The Emeril page labels its dimensions as 16.9 inches deep, 15.8 inches wide and 14.8 inches high. The Chefman pages publish dimension strings without labelling the axis order in the text we checked. We reproduce those strings without silently deciding which number is width or depth."], "sources": ["M1", "M3", "M5"]},
+      {"id": "clearance", "heading": "A footprint is not an installation plan.", "paragraphs": ["Before purchase, obtain the exact model's manual and check its placement instructions. Do not interpret an outside measurement as the required distance from a wall, overhead cabinet or nearby object. We do not provide a universal clearance number because that would substitute a guess for model-specific instructions.", "If a seller or manufacturer cannot confirm the measurement that matters to your kitchen, that is an unresolved buying question. A paper outline can help you think about the footprint, but it cannot test heat, access or safe placement."], "sources": ["M1", "M3", "M5"]},
+      {"id": "wash", "heading": "Read the care claim one part at a time.", "paragraphs": ["The dual-window Chefman page says its baskets are nonstick and dishwasher-safe. The stainless-steel Chefman page specifically lists a top-rack dishwasher-safe basket. Keep that wording attached to the part it names.", "Our buying exercise is to list the pieces you expect to clean and look up each one's instructions. Do not turn a statement about a removable basket into a statement about every component. We have not run a wash-cycle test or assessed long-term coating durability."], "sources": ["M1", "M5"]},
+      {"id": "routine", "heading": "Choose the routine you will keep.", "paragraphs": ["Ask yourself where a removable part will dry, whether you want to take it apart after each use, and whether the appliance has a place when it is not in use. These are personal constraints, not product performance scores.", "A larger format may still make sense for you; a smaller one may still be awkward. Our comparison keeps the source measurements and open questions together so you can rule a model in or out for your own kitchen rather than buying on a blanket easy-clean claim."], "sources": ["M1", "M3", "M5"]}
+    ]
+  },
+  {
+    "slug": "multi-function-appliance-checklist",
+    "title": "What should you ask before buying a multi-function kitchen appliance?",
+    "short_title": "More modes. But will you use them?",
+    "category": "Buying well",
+    "description": "A decision checklist for a multi-function countertop appliance: your real jobs, model identity, accessories, space and unresolved claims.",
+    "published": "2026-11-19",
+    "art": "modes",
+    "products": ["P2", "P1", "P3"],
+    "answer": "List the jobs you actually need, then check the exact model's modes, accessories and instructions. A mode count is not evidence that one appliance replaces everything you own.",
+    "sections": [
+      {"id": "jobs", "heading": "Write your own job description first.", "paragraphs": ["Before reading a product's mode count, write down what you want to do with it. Be specific enough to know what would count as a useful answer. Reheating a particular meal, preparing a tray, or managing two dishes are better shopping prompts than a general wish for more versatility.", "The Emeril page describes a 10-in-1 appliance and names Air Fry, Bake, Broil, Defrost, Dehydrate, Grill, Proof, Reheat, Roast and Warm. That is a list of manufacturer-described functions, not a test that every function meets your expectations."], "sources": ["M3"]},
+      {"id": "counts", "heading": "Treat inconsistent counts as a question.", "paragraphs": ["The same Emeril manufacturer page presents 25 cooking presets in a specification tile and 24 one-touch presets in the description. Its description also mentions seven accessories, while the Amazon title we observed mentions six. We have not selected whichever number makes the better headline.", "Before ordering, ask which model, version and accessory bundle you will receive. A date-stamped conflict is more useful than a confident number that hides the disagreement. The current comparison leaves these disputed fields unverified."], "sources": ["M3", "M4"]},
+      {"id": "version", "heading": "Make sure the version is the one you compared.", "paragraphs": ["Model identity matters outside the oven category too. Chefman's stainless-steel page states a 200–400 °F temperature range for the model family, while the observed 8-quart Amazon title advertises a 450 °F Hi-Fry option. These public pages do not give us enough evidence to explain away the difference.", "Record the model number shown at purchase and compare the official instructions for that version. Until that is settled, do not use the disputed temperature as the reason to choose it."], "sources": ["M5", "M6"]},
+      {"id": "replace", "heading": "Do not retire another appliance on a slogan.", "paragraphs": ["A multi-function claim is a reason to investigate, not our evidence that your existing equipment is redundant. List which jobs you would actually move, what accessories each needs, and what information would make you change your mind.", "Our editorial suggestion is to choose a format only after the practical questions—capacity, access, care and placement—have answers. We have not tested replacement performance, energy savings or cooking speed, so none is presented here as a buying benefit we measured."], "sources": ["M1", "M3", "M5"]}
+    ]
+  },
+  {
+    "slug": "instant-read-or-wireless",
+    "title": "Instant-read or wireless thermometer: which questions should you ask?",
+    "short_title": "A quick check, or a connected probe?",
+    "category": "Temperature tools",
+    "description": "Compare spot checks and connected monitoring, then verify probe placement, model instructions and care rather than relying on a headline speed claim.",
+    "published": "2026-11-19",
+    "art": "thermometer",
+    "products": ["P4", "P5"],
+    "answer": "Start with whether you want a reading at the food or connected monitoring. Then verify the exact model's insertion, operating and care instructions. Neither a speed claim nor a wireless label replaces correct use.",
+    "sections": [
+      {"id": "job", "heading": "Name the job before the technology.", "paragraphs": ["The two thermometer links in this publication lead to different formats. The observed ThermoMaven listing describes a digital instant-read thermometer; the CHEF iQ Sense title describes a smart wireless thermometer with three probes and WiFi. Those are listing descriptions, not results of our own testing.", "Ask whether you want to take a reading where you are standing or whether connected monitoring would solve a problem in your routine. We have not tested either device's speed, connection reliability, app or accuracy, so this is a question-led shortlist, not a winner announcement."], "sources": ["M7", "M8"]},
+      {"id": "placement", "heading": "Placement is part of the purchase decision.", "paragraphs": ["USDA FSIS advises reading the manufacturer's instructions to find out how far a thermometer must be inserted for an accurate reading. It also explains that color is not a reliable indicator that food has reached a safe internal temperature.", "Before buying, obtain the exact model's probe-placement instructions and consider the food you intend to measure. Do not assume that one probe format or a headline response-time claim answers that practical question. Follow the relevant official food-safety guidance when using any thermometer."], "sources": ["USDA"]},
+      {"id": "limits", "heading": "Ask what each limit applies to.", "paragraphs": ["For a connected device, read the model-specific connection requirements and operating instructions rather than treating wireless range language in a title as a guarantee in your kitchen. For either format, check the care instructions and the limits of the particular components.", "The ThermoMaven title makes accuracy and certification claims. We have not independently checked certificates or carried out an accuracy test. Those claims are not converted into an endorsement or an independently verified specification here."], "sources": ["M7", "M8", "USDA"]},
+      {"id": "list", "heading": "Take a short question list to the seller.", "paragraphs": ["Confirm the exact model, what is included, the insertion requirement, which parts can be exposed to heat, how each part is cleaned, and whether any app or connection is required for the features you want. Ask for the manual if the listing does not settle it.", "Our product notes link directly to the observed listings and keep unverified operating details blank. The short-link destinations were observed, but the intended-product confirmation and authenticated Associates tracking checks are still open. That limitation is recorded rather than disguised as a verified recommendation."], "sources": ["M7", "M8", "AMZ-LINKS"]}
+    ]
+  }
+]

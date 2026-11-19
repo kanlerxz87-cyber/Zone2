@@ -43,6 +43,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import head_meta  # noqa: E402  — the repository's single canonical/OG contract
+import publication
 import shop_layout  # noqa: E402  (T66: one masthead/footer for front pages and shop/)
 from link_builder import ASSOCIATES_TAG, build_product_link  # noqa: E402  — the policy-guarded Special Link emitter
 import front_t63 as t63  # noqa: E402  — T63 reader-first content (thermometers, FSIS rows, new guides)
@@ -243,34 +244,13 @@ def footer(depth: str = "") -> str:
 
 def page(rel_path: str, *, title: str, description: str, active: str,
          body: str, depth: str = "", extra_head: str = "", with_data: bool = False) -> str:
-    head = head_meta.head_block(rel_path, title=title, description=description,
-                                site_name="Counter Notes",
-                                page_type="article" if rel_path != "index.html" else "website")
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(title)}</title>
-<meta name="description" content="{e(description)}">
-{head}
-<link rel="stylesheet" href="{e(depth)}assets/css/style.css">
-<link rel="stylesheet" href="{e(depth)}assets/css/publish.css">
-<link rel="icon" href="{e(depth)}assets/favicon.svg" type="image/svg+xml">
-{extra_head}
-</head>
-<body>
-<a class="skip-link" href="#main">{'Skip to content'}</a>
-{masthead(active)}
-<main id="main">
-{body}
-</main>
-{footer(depth)}
-<script src="{e(depth)}assets/js/events.js" defer></script>
-{f'<script src="{e(depth)}assets/js/data.js"></script><script src="{e(depth)}assets/js/app.js"></script>' if with_data else ''}
-</body>
-</html>
-"""
+    scripts = ("assets/js/review-choices.js",) if rel_path == "suggestions.html" else ()
+    doc = publication.shell(rel_path, title.replace(" · Counter Notes", ""), description, body, scripts=scripts)
+    if extra_head:
+        doc = doc.replace("</head>", extra_head + "</head>")
+    if with_data:
+        doc = doc.replace("</body>", f'<script src="{e(depth)}assets/js/data.js"></script><script src="{e(depth)}assets/js/app.js"></script></body>')
+    return "\n".join(line.rstrip() for line in doc.splitlines()) + "\n"
 
 
 def implemented_line(sg: dict) -> str:
@@ -950,7 +930,7 @@ def build_current_summary(facts: dict, board: dict) -> str:
   <p class="pb-stand">Counter Notes is now a reader-facing publication with sourced buyer guides,
   a comparison, an RSS feed and a generated sitemap. This is the current project summary, not a
   product-performance claim: the product-link observations below are dated 2026-11-17, and this
-  integration pass did not repeat the Amazon redirects.</p>
+  earlier pass did not repeat the Amazon redirects. This integration preserves those dated records; <a href="intent.html">fresh 19 November observations</a> and the <a href="executive-summary.html">current release summary</a> are recorded separately.</p>
   <p class="pb-byline"><b>Working rule.</b> Intended product identity, observed redirect destination,
   and campaign performance are separate records. Unknowns stay blank; proposals stay proposals.</p>
 </div></section>
@@ -965,7 +945,7 @@ def build_current_summary(facts: dict, board: dict) -> str:
   </tr></thead><tbody>{''.join(product_rows)}</tbody></table></div>
   <p class="pb-note"><b>Do not read the short-code shape as a compliance verdict.</b> The exact compliance
   status of the supplied short links remains unresolved in <a href="https://kanlerxz87-cyber.github.io/Zone3/flagged.html#FLG-003" target="_blank" rel="noopener noreferrer">FLG-003</a>.
-  The code supplied is not itself a 10-digit ASIN, but that fact alone does not establish whether the
+  The code supplied is not itself a 10-character ASIN, but that fact alone does not establish whether the
   short link is compliant. The official record of intended ASIN, official listing URL, confirmation date
   and confirmation source is kept apart from the observed redirect target.
   <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">Amazon’s ASIN and link-format help</a>.</p>
@@ -975,9 +955,9 @@ def build_current_summary(facts: dict, board: dict) -> str:
   <div class="pb-sec-head"><div><h2 class="pb-h2">What is working — and what is not</h2>
   <p class="pb-sub">The site automates deterministic checks; account actions, first-party reports and product-intent confirmation still require evidence the repository does not hold.</p></div></div>
   <div class="pb-table-scroll"><table class="pb-table"><thead><tr><th>Area</th><th>Evidence-backed status</th><th>What remains open</th><th>Official review</th></tr></thead><tbody>
-    <tr><td class="k">Special Links</td><td>The owner supplied <code>{e(ASSOCIATES_TAG)}</code>. The tag appears in this publication’s disclosure copy, but repository HTML inspection shows that product-destination links do not consistently carry it.</td><td>Account ownership, active status, marketplace and each product’s enrolled-Associates destination/report test are not confirmed. The five supplied short links themselves were observed without an Associates tag; that is not a finding that the short links are invalid. Apply and test the supplied tag on every intended Special Link only after product intent is confirmed.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Amazon Operating Agreement</a> <a class="pb-src" href="{ASIN_HELP_URL}" target="_blank" rel="noopener noreferrer">Amazon link format</a></td></tr>
+    <tr><td class="k">Special Links</td><td>The owner supplied <code>{e(ASSOCIATES_TAG)}</code>. Current reader product buttons use direct tagged links to observed listings. Historical citations remain distinct and unmonetized; the tag alone does not authenticate enrollment or attribution.</td><td>Account ownership, active status, marketplace and each product’s enrolled-Associates destination/report test are not confirmed. The five supplied short links themselves were observed without an Associates tag; that is not a finding that the short links are invalid. Apply and test the supplied tag on every intended Special Link only after product intent is confirmed.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Amazon Operating Agreement</a> <a class="pb-src" href="{ASIN_HELP_URL}" target="_blank" rel="noopener noreferrer">Amazon link format</a></td></tr>
     <tr><td class="k">Disclosure and paid-link marking</td><td>The build gates check the required Associates statement and sponsored qualification on product offers; source citations are kept distinct from offers.</td><td>Keep disclosure placement and endorsement context in every new publishing review.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Amazon Agreement</a> <a class="pb-src" href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer">FTC disclosure guidance</a> <a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer">Google sponsored links</a></td></tr>
-    <tr><td class="k">Click and conversion measurement</td><td><code>assets/js/events.js</code> queues three aggregate event types locally in the browser; it sends nothing and publishes no counts without an endpoint.</td><td>GitHub Pages is static hosting. No self-hosted event sink, retention decision, server-side bot filter, Associates report import or Search Console query import is present. The event registers disagree on implementation status, and the page-view code sends its hostname field as <code>r</code> while the measurement schema calls it <code>referrer_host</code>. Reconcile these contracts before implementing an endpoint.</td><td><a class="pb-src" href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" target="_blank" rel="noopener noreferrer">GitHub Pages: static hosting</a> <a class="pb-src" href="discovery/measurement.html#EV-01">Event register</a> <a class="pb-src" href="intake/tracking.html">Submitted brief’s tracking record</a></td></tr>
+    <tr><td class="k">Click and conversion measurement</td><td>A same-origin SQLite collector implements three aggregate browser events and two local authorized-report importers. The counter uses no browser queue, cookie or reader identifier. Production Pages collection stays OFF; a sandbox preview is not a permanent host.</td><td>GitHub Pages is static hosting. A permanent authorized host, TLS/log/backup review, enrolled Associates report and verified Search Console export remain unavailable. The contract is reconciled in the current measurement register, with 90-day retention. A global request budget is not bot detection. See <a href="measurement.html">current implementation and deployment states</a>.</td><td><a class="pb-src" href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" target="_blank" rel="noopener noreferrer">GitHub Pages: static hosting</a> <a class="pb-src" href="discovery/measurement.html#EV-01">Event register</a> <a class="pb-src" href="intake/tracking.html">Submitted brief’s tracking record</a></td></tr>
     <tr><td class="k">Campaign ledger</td><td><code>ledger/campaigns.json</code> is empty by design. No click, order or revenue score is invented.</td><td>Only add rows from authorized first-party reports, with dated provenance. Product intent must be confirmed before campaigns are associated with a submitted product.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Amazon Program Policies</a> <a class="pb-src" href="ledger/campaigns.json">Empty ledger and schema</a></td></tr>
     <tr><td class="k">Search and editorial</td><td>The publication has question-shaped guides, a feed and sitemap. Titles are editorial hypotheses, not claims about trends, query popularity or search volume.</td><td>No Search Console property or query report is recorded. Verify ownership, submit the sitemap, then plan topics from measured query/page data. Set an accountable editor, cadence and image-rights policy before scaling.</td><td><a class="pb-src" href="https://support.google.com/webmasters/answer/9008080?hl=en" target="_blank" rel="noopener noreferrer">Google: verify ownership</a> <a class="pb-src" href="https://support.google.com/webmasters/answer/7451001?hl=en" target="_blank" rel="noopener noreferrer">Google: sitemaps</a> <a class="pb-src" href="https://support.google.com/webmasters/answer/7576553?hl=en" target="_blank" rel="noopener noreferrer">Google: performance/query report</a></td></tr>
     <tr><td class="k">Product research and commission</td><td>Verified manufacturer/listing specifications can be shown with their sources. Price, rating, review count, competition and product-specific conversion/commission potential remain blank where not confirmed.</td><td>Do not rank products or forecast revenue without authorized catalog data and first-party reports; confirm product category and account eligibility first.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Amazon Program Policies</a> <a class="pb-src" href="sources.html">Source register</a></td></tr>
@@ -991,7 +971,7 @@ def build_current_summary(facts: dict, board: dict) -> str:
   <ol class="pb-prose">
     <li>For each of the five submissions, what exact product was intended? Record the ASIN, official listing URL, date and confirmation source; keep the redirect observation in its separate field.</li>
     <li>Which Associates account and marketplace owns the supplied tag, and does one test link per confirmed product reach the intended destination and appear in the authorized report?</li>
-    <li>Where will the first-party event endpoint run, what is the retention/bot-filter rule, and which of the two conflicting five-event definitions is canonical?</li>
+    <li>Where will the implemented first-party collector run permanently? Review infrastructure logging, 90-day pruning/backups and privacy jurisdiction. The current five-event contract is docs/measurement-t40.json; no event count establishes a person or an eligible session.</li>
     <li>Who is the named editor, what publishing cadence is sustainable, and will visuals be original, properly licensed or permitted Program Content?</li>
     <li>A thermometer category is now published from the two observed thermometer destinations, because the brief asked for all five links to be promoted. Are those the intended products? In particular, should the ThermoMaven link point at the newer model its listing now advertises (F-44)?</li>
   </ol>
@@ -1176,6 +1156,34 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
 # --------------------------------------------------------------------------- #
 # main
 # --------------------------------------------------------------------------- #
+# T63 37333afd integration: prior reader builders remain above for traceability;
+# new canonical reader entry points and current decision prerequisites share one shell.
+_upstream_home = build_index
+_upstream_guides_index = build_guides_index
+_upstream_suggestions = build_suggestions
+_upstream_questions = build_questions
+_upstream_cleanup = build_guide_cleanup
+
+def build_index(facts, board):
+    return publication.home()
+
+def build_guides_index(facts, board):
+    return publication.guides_index()
+
+def build_suggestions(facts, board):
+    doc = _upstream_suggestions(facts, board)
+    section = publication.suggestions_current() + '<div class="cn-wrap cn-note"><h2>Earlier decision records, preserved</h2><p>The recorded owner directions and option IDs below are unchanged. Earlier implementation notes may predate this release; use the current measurement and prerequisite records above for present deployment decisions.</p></div>'
+    return doc.replace('</section>', '</section>' + section, 1)
+
+def build_questions(facts, board):
+    doc = _upstream_questions(facts, board)
+    section = '<section class="cn-wrap cn-section"><h2 class="cn-table-title">Current release prerequisites · 19 November 2026</h2>' + publication.question_register() + '</section>'
+    return doc.replace('</section>', '</section>' + section, 1)
+
+def build_cleanup_earlier(facts, board):
+    # Both sessions added this path independently; preserve the earlier treatment as well.
+    return _upstream_cleanup(facts, board).replace('cleanup-and-counter-space.html', 'cleanup-and-counter-space-earlier.html')
+
 TARGETS: list[tuple[str, callable]] = [
     ("index.html", build_index),
     ("summary.html", build_current_summary),
@@ -1191,7 +1199,7 @@ TARGETS: list[tuple[str, callable]] = [
     ("guides/instant-read-or-wireless-thermometer.html", build_guide_thermo_compare),
     ("guides/thermometer-for-air-fryer.html", build_guide_thermo_airfryer),
     ("guides/multi-function-appliance-questions.html", build_guide_multifunction),
-    ("guides/cleanup-and-counter-space.html", build_guide_cleanup),
+    ("guides/cleanup-and-counter-space-earlier.html", build_cleanup_earlier),
     ("behind-the-site.html", build_behind),
 ]
 
@@ -1210,6 +1218,16 @@ def main() -> int:
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(want, encoding="utf-8")
             print(f"  wrote {rel} ({len(want):,} bytes)")
+    extras = publication.extra_pages()
+    extras["feed.xml"] = publication.feed()
+    for rel, want in extras.items():
+        out = ROOT / rel
+        if check:
+            if not out.is_file() or out.read_text(encoding="utf-8") != want:
+                stale.append(rel)
+        else:
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(want, encoding="utf-8")
     if check:
         if stale:
             for s in stale:

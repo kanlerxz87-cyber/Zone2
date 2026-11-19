@@ -1,3 +1,57 @@
+# Current executive summary · Counter Notes
+
+**19 November 2026 · release implementation** — Product-led publication, five supplied links, two kitchen
+clusters. PR/merge/deployment references are tracked in [verification](docs/verification-37333afd.md)
+and [COORDINATION.md](COORDINATION.md); no successful live deployment is inferred from a local build.
+
+## Shipped in this branch
+
+1. A polished kitchen front page, guide shelf, five substantial buyer-question guides, five product notes,
+   format comparison, honest AI-assisted organizational authorship and original labelled imagery.
+   Product choices lead; all evidence and dashboards are in one Workspace group and the footer.
+2. A privacy-preserving self-hosted service with actual daily SQLite persistence, three browser events
+   and two authorized-report importers. The temporary preview is testable; **Pages collection stays OFF**.
+   A permanent authorized host, infrastructure logging/TLS/retention review and actual reports are absent.
+3. Source-governed product data: every current factual row cites an official page; disputed mode/preset,
+   accessory and temperature values stay blank. No current prices, ratings, popularity or sales forecasts.
+4. Above-fold masthead disclosure and repeated footer disclosure on every deployed HTML page; sponsored
+   product links globally, including dynamic archive links. One canonical reader sitemap and root RSS;
+   operator/archive pages remain reachable but noindex. Recrawl, indexing and ranking are not guaranteed.
+5. Current suggestions compare options before changes are applied; questions state knowns, missing
+   information, blank answers and discovery actions. Optional local review preferences do not approve
+   changes. Weekly review is a proposal, not unattended publication. RSS is the working follow path;
+   email capture awaits a real authorized provider and privacy/contact process.
+
+## What remains unknown
+
+The supplied tracking ID is `shopnow047c-20`, used on direct reader links but not authenticated.
+No intended-product confirmation, enrolled Associates workflow/report, permanent collector host,
+Search Console verification/query export, real orders or demand, named human review/contact, authorized
+LLM/API service or jurisdictional privacy determination was supplied. Observed redirect targets are
+separate from intent. A missing tag in a fetched redirect proves neither invalidity nor attribution;
+exact short-link compliance remains unresolved. The [Amazon agreement](https://affiliate-program.amazon.com/help/operating/agreement),
+[Program Policies](https://affiliate-program.amazon.com/help/operating/policies),
+[FTC guidance](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers),
+[Google people-first guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+and [GitHub hosting limitations](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
+constrain this release; none authenticates an account-specific result.
+
+## Suggested sequence—not a claim of external completion
+
+Validate one enrolled-workflow link/report per product without artificial clicks or self-purchases;
+provision authorized same-origin collection and verify persistence; verify Search Console ownership;
+then use authorized query evidence to choose the next guide. Review each path on the
+[suggestions board](https://kanlerxz87-cyber.github.io/Zone2/suggestions.html) before implementing it.
+No conversion score or revenue forecast substitutes for the missing reports.
+
+## Earlier dated executive records
+
+The following chronology is preserved verbatim. Its older three-link scope, untagged-preview state,
+counts and implementation claims are snapshots, not the current release. Read the current release
+summary above and its dated verification record before using any old statement for a new decision.
+
+---
+
 # Executive Summary — AI-Powered Amazon Affiliate Platform (Zone2)
 
 **Status:** platform built and live; three observed destination products have source-linked marketing copy, but their mapping to the products intended in the brief is unverified and the preview links are not monetized.

@@ -1,8 +1,8 @@
 {
-  "note": "Executive summary (task T50, session arena/dc72a69e-zone2). Every number in the state table was measured on 2026-11-16 by a command run in this working tree, or read off an official page fetched on the same date; none is quoted from another session's prose. Where a figure could not be confirmed from an official source, the cell is empty and the row says so. RE-MEASURED 2026-11-16 after rebasing onto main at 18e8de8: session arena/9251f262-zone2 (T55) rebuilt the front pages and added the guides/ namespace while this brief was in flight, so every count below was taken again on the combined tree rather than carried from the earlier read.",
+  "note": "Executive summary (task T50, session arena/dc72a69e-zone2). Every number in the state table was measured on 2026-11-16 by a command run in this working tree, or read off an official page fetched on the same date; none is quoted from another session's prose. Where a figure could not be confirmed from an official source, the cell is empty and the row says so. RE-MEASURED 2026-11-16 after rebasing onto main at 18e8de8: session arena/9251f262-zone2 (T55) rebuilt the front pages and added the guides/ namespace while this brief was in flight, so every count below was taken again on the combined tree rather than carried from the earlier read. CURRENT INVENTORY UPDATE 2026-11-19 (T63): source-tree counts use shared tokens and exclusions, not the deployed artifact. Prior scope and decisions remain in Git and in this namespace; current publication summary is ../executive-summary.html.",
   "as_of": "2026-11-16",
   "base_commit": "18e8de8 (main, after PR #144 merged) — rebased; measured again on 2026-11-16",
-  "headline": "The research platform is finished and it is honest. The earning part has not started, and it cannot start until the owner supplies one string.",
+  "headline": "The earlier design brief remains traceable. Current release: a product-led publication, with implemented measurement and external account/hosting gates still open.",
   "the_ask": [
     "Build an AI-powered Amazon affiliate platform: product research, trend and conversion analysis, pricing, review, competition and commission analysis, SEO articles, comparisons and buying guides, niche discovery, link and campaign management, click and conversion tracking, continuous optimization — automated, scalable, data-driven, and compliant with Amazon Associates policy and disclosure rules.",
     "Build the marketing for three supplied affiliate links.",
@@ -30,96 +30,95 @@
     },
     {
       "metric": "Published pages carrying an Associates tag",
-      "value": "{{pages_tagged}}",
+      "value": "{{with_tag}} of {{published}}",
       "source_ids": [
         "BR-10"
       ],
-      "note": "Consequence: no click on this site can become a qualifying purchase, so the three-sales threshold before an application is reviewed cannot be approached."
+      "note": "Measured from source HTML, not the transformed deploy artifact. The owner-supplied tag is not authenticated enrollment or order attribution."
     },
     {
       "metric": "Published pages carrying the exact §5 disclosure sentence",
-      "value": "{{pages_disclosed}}",
+      "value": "{{with_disclosure}} of {{published}}",
       "source_ids": [
         "BR-05"
       ]
     },
     {
       "metric": "Published pages printing a product price",
-      "value": "{{pages_priced}}",
+      "value": "{{price_pages}} of {{published}}",
       "source_ids": [
         "BR-01"
       ],
-      "note": "Five pages print Amazon bounty and commission program amounts; no page prints a product price (RV-13)."
+      "note": "Source-tree rule separates program amounts from product prices. The stricter deployed artifact and repaired price guards are tested independently."
     },
     {
       "metric": "Workflow steps replayed locally on the combined tree",
-      "value": "{{gate_count}} of {{gate_count}}",
+      "value": "{{gate_count}} configured steps",
       "source_ids": [],
-      "note": "tools/ci_replay.py runs every workflow step in order against this working tree (RV-01)."
+      "note": "Configured count, not proof that a run passed. Check the actual Actions/replay result and current verification record."
     },
     {
       "metric": "Separate published surfaces a visitor could land on",
-      "value": 18,
+      "value": "{{surfaces}}",
       "source_ids": [
         "BR-15"
       ],
-      "note": "Excluding this namespace, which links to all of them. Google names content spread across a large network of sites as a quality warning sign (RV-16)."
+      "note": "Source namespaces, not competing indexed publications. The deploy artifact noindexes evidence/prototypes and advertises only reader URLs."
     },
     {
       "metric": "Candidate editorial posts against Amazon's rule of thumb of at least 10",
-      "value": "14",
+      "value": "",
       "source_ids": [
         "BR-08"
       ],
-      "note": "Count clears the bar; the readiness board still marks the row GAP because every counted page is a specification or comparison surface rather than an article a reader would arrive at from a search (RV-15)."
+      "note": "Unverified against an enrolled Amazon application review. The current publication has five question-led guides; do not treat source-page totals as approval."
     },
     {
       "metric": "Amazon's stated requirements met, gapped, blocked, unverified or open",
-      "value": "4 met · 8 not met",
+      "value": "See current release board",
       "source_ids": [
         "BR-07",
         "BR-08",
         "BR-10"
       ],
-      "note": "Read from release/index.html, which is re-derived from the tree on every build. Of the eight: 3 gap, 3 blocked, 1 unverified, 1 open."
+      "note": "release/index.html derives its current source-tree measurements. A MET engineering row is not Amazon account approval."
     },
     {
       "metric": "Clicks, conversions and earnings recorded",
-      "value": "0",
+      "value": "",
       "source_ids": [
         "BR-06"
       ],
-      "note": "No tag, no account, no report export. Amazon states it makes no representation about the traffic or income any associate can expect."
+      "note": "Unavailable, not zero: Pages collection OFF, no authorized report imported. Preview/test fixture events are not campaign performance."
     },
     {
-      "metric": "Pages carrying the phrase 'AI-powered' in public copy",
-      "value": "14",
+      "metric": "Pages describing the site as AI-powered",
+      "value": "{{ai_powered_pages}}",
       "source_ids": [
         "BR-13"
       ],
-      "note": "25 occurrences across those 14 pages; 11 carry the full phrase 'AI-powered Amazon affiliate'. After the T55 rebuild none of the 14 is a reader-facing page — they are operator and companion surfaces (RV-09). This namespace is excluded from the count, because it quotes the phrase in order to diagnose it."
+      "note": "Literal source-text matches, including diagnostic quotes; not a claim of an active AI service. No unattended LLM/API service is connected."
     }
   ],
   "the_blocking_fact": {
-    "headline": "Nothing on this site can earn money today, and the fix is one string the owner has to supply.",
-    "detail": "Amazon requires Associates tags to be embedded in the product links on the site declared in the application, and it reviews an application only once at least three qualifying sales have been driven within the first 180 days. This site has zero tagged links, so it has zero qualifying purchases, so the application cannot be reviewed. Meanwhile the three links the whole project was built around are themselves short links carrying no tag, so even the supplied links would not attribute a sale to the owner. Every downstream capability in the brief — conversion tracking, the optimizer, the revenue model, the API enrolment that would let the site publish prices and ratings — sits behind this one missing value.",
+    "headline": "The supplied tracking ID is not the remaining missing string. Account evidence and permanent hosting remain open.",
+    "detail": "The owner supplied shopnow047c-20. Direct reader product links use it, but no enrolled Associates workflow/report has authenticated attribution. The supplied short links are not declared invalid. Product intent is still separate from observed destinations. A first-party collector is implemented; permanent hosting and real report imports remain unavailable. See the current release summary rather than treating the earlier three-link brief as the present deployment.",
     "source_ids": [
       "BR-10",
       "BR-07"
     ]
   },
   "what_is_settled": [
-    "The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).",
-    "The evidence discipline holds at scale: {{pages_disclosed}} pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
-    "The machinery is trustworthy: {{gate_count}} of {{gate_count}} workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
-    "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit."
+    "The earlier three-link observations remain traceable; the current intent register contains all five separately dated observations, with no inferred confirmation.",
+    "{{with_disclosure}} of {{published}} pages in this source-inventory scope carry the disclosure. The deployed artifact additionally enforces masthead/footer disclosure and sponsored product anchors globally.",
+    "The workflow configures {{gate_count}} executable checks. Actual passing/failing status must come from the run; a configured count is not a successful run.",
+    "Current source-led publication, original labelled artwork, reproducible builds and an implemented five-event service are separate from enrollment, permanent hosting or sales evidence."
   ],
   "what_is_not_settled": [
-    "Whether the three listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18).",
-    "Whether an Associates account exists at all, and if it does, its tag and marketplace (BQ-14, BQ-19).",
-    "Which of the 19 published surfaces is the site that would be declared (BQ-15).",
-    "Who writes it, under what name, and whether that name is public (BQ-16).",
-    "What readers are searching for. There is no demand signal anywhere in the project, so no topic on the topics board can be ranked by expected volume (BQ-20)."
+    "Which exact product was intended for each of the five supplied links; no observation is promoted into confirmation.",
+    "Authenticated enrollment, Special Link/report attribution, authorized orders and search query exports.",
+    "Permanent first-party collector infrastructure, operator contact, human review and jurisdictional privacy review.",
+    "Which future strategic proposal to choose. The original decision records remain unchanged and new proposals are reviewable before implementation."
   ],
   "decide_first": [
     {
@@ -138,7 +137,7 @@
       "why": "It costs under an hour and it is reversible. The T55 rebuild removed the phrase from every reader-facing page; 14 operator and companion pages still carry it."
     }
   ],
-  "the_one_thing": "If only one thing happens next, it should be the tag. Everything the brief asks the platform to do with real traffic — track it, convert it, optimize against it — is unreachable until a link on a page can be attributed to the owner.",
+  "the_one_thing": "Use the current questions and suggestions registers to resolve external prerequisites; do not infer account approval, demand or conversions from a link shape or a local fixture.",
   "how_to_use_this_namespace": [
     {
       "page": "index.html",
