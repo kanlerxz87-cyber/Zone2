@@ -1,0 +1,213 @@
+{
+  "note": "Shop catalog for the five supplied links (T63, session arena/75efdf57-zone2). Every value below was re-read live from the official page named in its row on checked_on. A value no official page states is left blank with the reason; a value two official pages state differently is published as a conflict with both readings. No price, star rating, review count, sales rank, commission figure or performance number appears here by design. The asin field is the OBSERVED destination of the supplied link (resolved live 2026-11-19); the owner has not confirmed it as the INTENDED product (ledger flag F-06, intake register) - see intent block.",
+  "checked_on": "2026-11-19",
+  "sources": {
+    "S19": {"label": "Amazon listing B0CDY277D3 (destination of link.amazon/B04G1MEwY)", "url": "https://www.amazon.com/dp/B0CDY277D3", "host": "amazon.com"},
+    "S20": {"label": "Amazon listing B09B7SB46R (destination of link.amazon/B02NbDxp3)", "url": "https://www.amazon.com/dp/B09B7SB46R", "host": "amazon.com"},
+    "S21": {"label": "Amazon listing B08DKYBTPH (destination of link.amazon/B00hJ57DV)", "url": "https://www.amazon.com/dp/B08DKYBTPH", "host": "amazon.com"},
+    "S61": {"label": "Amazon listing B0DHZTCNR5 (destination of link.amazon/B0c8moW59)", "url": "https://www.amazon.com/dp/B0DHZTCNR5", "host": "amazon.com"},
+    "S62": {"label": "Amazon listing B0DZFD6R9Z (destination of link.amazon/B0f3GKalj)", "url": "https://www.amazon.com/dp/B0DZFD6R9Z", "host": "amazon.com"},
+    "S25": {"label": "Chefman official product page - TurboFry Touch 6 Qt Dual-Window", "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer", "host": "chefman.com"},
+    "S26": {"label": "Chefman official product page - TurboFry Touch 8 Qt Stainless", "url": "https://chefman.com/products/turbofry-touch-air-fryer-1", "host": "chefman.com"},
+    "S27": {"label": "Emeril Everyday official store - French Door AirFryer 360, 26 QT", "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360", "host": "emerileveryday.com"},
+    "S01": {"label": "Amazon Associates Program Operating Agreement", "url": "https://affiliate-program.amazon.com/help/operating/agreement", "host": "affiliate-program.amazon.com"},
+    "S02": {"label": "Amazon Associates Program Policies (updated April 14, 2026)", "url": "https://affiliate-program.amazon.com/help/operating/policies", "host": "affiliate-program.amazon.com"},
+    "S12": {"label": "Google Search Central - Qualify your outbound links (rel=sponsored)", "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links", "host": "developers.google.com"},
+    "SH-01": {"label": "FoodSafety.gov - Safe Minimum Internal Temperature Chart (last reviewed November 21, 2024)", "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures", "host": "foodsafety.gov"},
+    "SH-02": {"label": "FTC - Disclosures 101 for Social Media Influencers", "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "host": "ftc.gov"},
+    "SH-03": {"label": "FTC - Endorsements, Influencers, and Reviews (guidance hub)", "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews", "host": "ftc.gov"},
+    "SH-04": {"label": "Submitted short link link.amazon/B04G1MEwY (resolved 2026-11-19)", "url": "https://link.amazon/B04G1MEwY", "host": "link.amazon"},
+    "SH-05": {"label": "Submitted short link link.amazon/B02NbDxp3 (resolved 2026-11-19)", "url": "https://link.amazon/B02NbDxp3", "host": "link.amazon"},
+    "SH-06": {"label": "Submitted short link link.amazon/B00hJ57DV (resolved 2026-11-19)", "url": "https://link.amazon/B00hJ57DV", "host": "link.amazon"},
+    "SH-07": {"label": "Submitted short link link.amazon/B0c8moW59 (resolved 2026-11-19)", "url": "https://link.amazon/B0c8moW59", "host": "link.amazon"},
+    "SH-08": {"label": "Submitted short link link.amazon/B0f3GKalj (resolved 2026-11-19)", "url": "https://link.amazon/B0f3GKalj", "host": "link.amazon"},
+    "SH-09": {"label": "Zone3 Flagged for Review - FLG-003 (link.amazon compliance status unresolved)", "url": "https://kanlerxz87-cyber.github.io/Zone3/flagged.html#FLG-003", "host": "kanlerxz87-cyber.github.io"}
+  },
+  "categories": [
+    {"slug": "air-fryers", "name": "Air fryers", "kicker": "Countertop cooking", "image": "airfryer",
+     "image_alt": "Crisp chicken wings and thick-cut fries on parchment paper (illustrative food photograph, not a product photo)",
+     "dek": "Two baskets, one big basket, or a full French-door oven. Three very different ways to put an air fryer on your counter - compared on capacity, footprint and what each one does that the others cannot.",
+     "products": ["P-01", "P-03", "P-02"]},
+    {"slug": "meat-thermometers", "name": "Meat thermometers", "kicker": "Cook to temperature, not to time", "image": "thermometer",
+     "image_alt": "A sliced medium-rare steak resting on a wooden board (illustrative food photograph, not a product photo)",
+     "dek": "An instant-read probe you dip and pull, or a set of wireless probes you leave in the roast and watch from your phone. Which one fits depends on how you cook, not on which is fancier.",
+     "products": ["P-04", "P-05"]}
+  ],
+  "products": [
+    {
+      "id": "P-01", "slug": "chefman-6-qt-dual-basket-air-fryer", "category": "air-fryers",
+      "asin": "B0CDY277D3", "brand": "Chefman",
+      "name": "Chefman TurboFry Touch 6 Qt Dual-Basket Air Fryer",
+      "short": "Chefman 6 Qt Dual-Basket",
+      "listing_title_source": "S19",
+      "headline": "Two 3-quart baskets that finish at the same moment",
+      "dek": "The one to get if dinner is usually a protein and a side. Two independent baskets, and a Sync Finish setting so both halves of the meal are ready together.",
+      "badge": "Best for two-part meals",
+      "key_facts": [["Capacity", "6 Qt (2 x 3 Qt)"], ["Max temp", "450 °F"], ["Power", "1700 W"]],
+      "good_fit": [
+        "You regularly cook two different things at once - wings in one basket, fries in the other.",
+        "You want both baskets to finish together without doing the timer math yourself (Sync Finish).",
+        "You like to watch food brown without pulling a basket: both baskets have viewing windows and there is an interior light."
+      ],
+      "think_twice": [
+        "Each basket is 3 Qt, so one large item has to fit in half of the machine's total capacity.",
+        "At 13.38 x 11.81 x 10.63 in it is not the smallest unit on this site; measure your counter first."
+      ],
+      "rows": [
+        {"attr": "Capacity", "value": "6 Qt / 5.67 L total - two independent 3 Qt baskets", "status": "verified", "src": ["S25", "S19"], "note": "Chefman specifications: 'Capacity: 6 Qt / 5.67 L'. Amazon title: '2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets'."},
+        {"attr": "Temperature range", "value": "200-450 °F / 95-235 °C", "status": "verified", "src": ["S25"], "note": "Chefman: '200-450°F / 95º-235ºC temperature range'; 'Max temp: 450ºF/ 235ºC with Hi-Fry function'."},
+        {"attr": "Both baskets finish together", "value": "Yes - Sync Function", "status": "verified", "src": ["S25"], "note": "Chefman: 'Sync Function so both baskets finish cooking at the same time'."},
+        {"attr": "Power", "value": "1700 W / 120 V", "status": "verified", "src": ["S25"]},
+        {"attr": "Dimensions", "value": "13.38 x 11.81 x 10.63 in (33.98 x 30 x 27 cm)", "status": "verified", "src": ["S25"]},
+        {"attr": "Weight", "value": "13.3 lb / 6.03 kg", "status": "verified", "src": ["S25"]},
+        {"attr": "Baskets", "value": "Nonstick, dishwasher-safe", "status": "verified", "src": ["S25"]},
+        {"attr": "Visibility", "value": "Dual viewing windows, interior light", "status": "verified", "src": ["S25"]},
+        {"attr": "Model number", "value": "RJ38-SQPF-3TDB-2W", "status": "verified", "src": ["S25"]},
+        {"attr": "Certification and warranty", "value": "cETL approved, 1-year Chefman assurance", "status": "verified", "src": ["S25"]},
+        {"attr": "Price", "value": "", "status": "blank", "src": [], "blank_reason": "Not printed on this site. Amazon's Program Policies restrict how prices from Amazon may be shown; the current price is on the listing itself."},
+        {"attr": "Customer rating", "value": "", "status": "blank", "src": [], "blank_reason": "Not printed. Star ratings change daily and this site has no authorized feed for them; read them on the listing."}
+      ],
+      "intent": {"submitted_link": "SH-04", "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3", "observed_on": "2026-11-19", "intended_asin": "", "intended_listing_url": "", "confirmation_date": "", "intent_source": "", "why_blank": "The owner has not confirmed which product the short link was meant to point at (ledger F-06). The observed redirect target is recorded separately and is never copied into the intent fields."}
+    },
+    {
+      "id": "P-03", "slug": "chefman-8-qt-turbofry-air-fryer", "category": "air-fryers",
+      "asin": "B08DKYBTPH", "brand": "Chefman",
+      "name": "Chefman TurboFry Touch 8 Qt Air Fryer",
+      "short": "Chefman 8 Qt TurboFry",
+      "listing_title_source": "S21",
+      "headline": "One big basket, four presets, nothing to learn",
+      "dek": "The straightforward choice: a single 8-quart basket - the largest single basket on this site - four one-touch presets and a shake reminder. Chefman says it is designed for 4-6 people.",
+      "badge": "Biggest single basket",
+      "key_facts": [["Capacity", "8 Qt"], ["Presets", "4"], ["Weight", "12.8 lb"]],
+      "good_fit": [
+        "You cook one thing in a big batch - a family-size tray of fries or a pile of wings.",
+        "You want few buttons: four presets (fries, chicken, fish, meat) plus manual time and temperature.",
+        "You forget to shake the basket: an LED shake reminder prompts you."
+      ],
+      "think_twice": [
+        "Only one basket - two different foods share the same time and temperature.",
+        "The maximum temperature is published two ways (400 °F by Chefman, '450°F Hi-Fry' in the Amazon title); if high-heat crisping matters to you, confirm it before buying."
+      ],
+      "rows": [
+        {"attr": "Capacity", "value": "8 Qt / 7.57 L", "status": "verified", "src": ["S26"], "note": "Chefman: 'Capacity: 5 Qt or 8 Qt / 4.73 L or 7.57 L'; model RJ38-SQSS-8T is the 8 Qt."},
+        {"attr": "Maximum temperature", "value": "CONFLICT - Chefman: 200-400 °F (95-205 °C), 'Max temp: 400ºF'. Amazon listing title: '450°F Hi-Fry Option'.", "status": "conflict", "src": ["S26", "S21"], "note": "Both read live 2026-11-19. Published as a conflict, not resolved by picking one (ledger F-row on record since 2026-11-14)."},
+        {"attr": "Presets", "value": "4 - fries, chicken, fish, meat", "status": "verified", "src": ["S26"]},
+        {"attr": "Shake reminder", "value": "LED shake reminder", "status": "verified", "src": ["S26"]},
+        {"attr": "Auto shut-off", "value": "Stops when the timer ends or the basket is opened", "status": "verified", "src": ["S26"]},
+        {"attr": "Basket", "value": "Nonstick, top-rack dishwasher-safe basket and rack", "status": "verified", "src": ["S26"]},
+        {"attr": "Power", "value": "1700 W / 120 V (Chefman specifications)", "status": "verified", "src": ["S26"], "note": "The repository's ledger also records an Amazon bullet reading '1000 Watts/120 Volts' (observed 2026-11-14); that bullet was not re-read in this session, so it is noted here rather than restated."},
+        {"attr": "Dimensions", "value": "15.4 x 12.6 x 13.5 in (39.11 x 32 x 34.29 cm)", "status": "verified", "src": ["S26"]},
+        {"attr": "Weight", "value": "12.8 lb / 5.8 kg", "status": "verified", "src": ["S26"]},
+        {"attr": "Designed for", "value": "4-6 people", "status": "verified", "src": ["S26"]},
+        {"attr": "Model number", "value": "RJ38-SQSS-8T", "status": "verified", "src": ["S26"]},
+        {"attr": "Certification and warranty", "value": "cETL approved, 1-year Chefman assurance", "status": "verified", "src": ["S26"]},
+        {"attr": "Price", "value": "", "status": "blank", "src": [], "blank_reason": "Not printed on this site. Amazon's Program Policies restrict how prices from Amazon may be shown; the current price is on the listing itself."}
+      ],
+      "intent": {"submitted_link": "SH-06", "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH", "observed_on": "2026-11-19", "intended_asin": "", "intended_listing_url": "", "confirmation_date": "", "intent_source": "", "why_blank": "The owner has not confirmed which product the short link was meant to point at (ledger F-06). The observed redirect target is recorded separately and is never copied into the intent fields."}
+    },
+    {
+      "id": "P-02", "slug": "emeril-lagasse-26-qt-french-door-air-fryer-oven", "category": "air-fryers",
+      "asin": "B09B7SB46R", "brand": "Emeril Lagasse",
+      "name": "Emeril Lagasse French Door AirFryer 360, 26 QT",
+      "short": "Emeril 26 QT French Door",
+      "listing_title_source": "S20",
+      "headline": "An oven with French doors that also air fries",
+      "dek": "Not really a basket air fryer at all: a 26-quart countertop convection oven with dual French doors, a rotisserie and ten cooking functions. It can stand in for a toaster oven too, but it is the deepest machine here.",
+      "badge": "Most versatile",
+      "key_facts": [["Capacity", "26 qt"], ["Functions", "10-in-1"], ["Depth", "16.9 in"]],
+      "good_fit": [
+        "You want one appliance to roast, bake, broil, dehydrate, proof and air fry.",
+        "You cook for a group - Emeril sizes it for 4-6 people - or want room for a rotisserie.",
+        "You prefer opening doors to pulling out a basket."
+      ],
+      "think_twice": [
+        "At 16.9 in deep it needs real counter depth - measure under your upper cabinets.",
+        "The preset and accessory counts differ between official pages (see the table); go by what matters to you, not by the number."
+      ],
+      "rows": [
+        {"attr": "Capacity", "value": "26 qt / 24.6 L - for 4-6 people", "status": "verified", "src": ["S27"], "note": "Emeril Everyday spec block: '26-Quart Capacity, preparing food for 4-6 people'; '24.6 Liters Capacity'."},
+        {"attr": "Dimensions", "value": "16.9 in D x 15.8 in W x 14.8 in H", "status": "verified", "src": ["S27"]},
+        {"attr": "Doors", "value": "Dual French doors", "status": "verified", "src": ["S27", "S20"]},
+        {"attr": "Cooking functions", "value": "10-in-1: air fry, bake, broil, defrost, dehydrate, grill, proof, reheat, roast, warm", "status": "verified", "src": ["S27"]},
+        {"attr": "Presets", "value": "CONFLICT - Amazon title: '24 One-Touch Preset Options'. Emeril description: '24 one-touch cooking presets'. Emeril spec block: '25 Cooking Pre-sets'.", "status": "conflict", "src": ["S20", "S27"], "note": "The manufacturer's own page states two different numbers. All three read live 2026-11-19."},
+        {"attr": "Included accessories", "value": "CONFLICT - Amazon title: 'Six Cooking Accessories Included'. Emeril description: '7 premium accessories ... air fry basket, rotisserie spit, bake pan, and more'.", "status": "conflict", "src": ["S20", "S27"]},
+        {"attr": "Airflow", "value": "Dual-speed fan, 360° hot-air circulation", "status": "verified", "src": ["S27"]},
+        {"attr": "Voltage", "value": "120 V", "status": "verified", "src": ["S27"]},
+        {"attr": "Wattage", "value": "", "status": "blank", "src": [], "blank_reason": "The Emeril store page states 120 V but no wattage. The ledger's Amazon reading (1700 W, observed 2026-11-14) was not re-read in this session, so it is not restated."},
+        {"attr": "Model number (manufacturer store)", "value": "4-00675-02A-VN", "status": "verified", "src": ["S27"], "note": "The ledger records the Amazon listing as 4-00675-02X-VN (conflict on record since 2026-11-14; not re-read this session)."},
+        {"attr": "Warranty", "value": "1 year", "status": "verified", "src": ["S27"]},
+        {"attr": "Price", "value": "", "status": "blank", "src": [], "blank_reason": "Not printed on this site. Amazon's Program Policies restrict how prices from Amazon may be shown; the current price is on the listing itself."}
+      ],
+      "intent": {"submitted_link": "SH-05", "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R", "observed_on": "2026-11-19", "intended_asin": "", "intended_listing_url": "", "confirmation_date": "", "intent_source": "", "why_blank": "The owner has not confirmed which product the short link was meant to point at (ledger F-06). The observed redirect target is recorded separately and is never copied into the intent fields."}
+    },
+    {
+      "id": "P-04", "slug": "thermomaven-1-second-instant-read-meat-thermometer", "category": "meat-thermometers",
+      "asin": "B0DHZTCNR5", "brand": "ThermoMaven",
+      "name": "ThermoMaven 1-Second Instant-Read Digital Meat Thermometer",
+      "short": "ThermoMaven Instant-Read",
+      "listing_title_source": "S61",
+      "headline": "Dip it, read it, done - in about a second",
+      "dek": "A handheld instant-read probe: you check the thickest part of the meat, read the number, and pull it out. The listing states ±0.5 °F accuracy with NIST certification and a 1-second reading.",
+      "badge": "Best everyday thermometer",
+      "key_facts": [["Reading", "1 sec"], ["Accuracy", "±0.5 °F"], ["Power", "1 AAA"]],
+      "good_fit": [
+        "You want a quick yes/no on doneness for chicken, burgers, pork chops or fish.",
+        "You cook in an air fryer or on a grill and open it to check anyway.",
+        "You want something waterproof you can rinse under the tap."
+      ],
+      "think_twice": [
+        "It is not a leave-in probe - for a long roast or smoke you will be opening the oven to check.",
+        "Amazon shows a newer model of this item on the listing; compare both before buying."
+      ],
+      "rows": [
+        {"attr": "Reading speed", "value": "1 second", "status": "verified", "src": ["S61"], "note": "Listing: 'gets accurate temperature readings in just 1 second'."},
+        {"attr": "Accuracy", "value": "±0.5 °F, with NIST certification", "status": "verified", "src": ["S61"]},
+        {"attr": "Sensor", "value": "Thermocouple", "status": "verified", "src": ["S61"]},
+        {"attr": "Display", "value": "Bright LED, auto-rotating for left- or right-handed use", "status": "verified", "src": ["S61"]},
+        {"attr": "Wake and sleep", "value": "Motion-activated", "status": "verified", "src": ["S61"]},
+        {"attr": "Water resistance", "value": "Waterproof - rinse under running water", "status": "verified", "src": ["S61"]},
+        {"attr": "Certifications", "value": "NIST, NSF", "status": "verified", "src": ["S61"]},
+        {"attr": "In the box", "value": "Thermometer, 1 AAA battery, user manual, calibration certificate", "status": "verified", "src": ["S61"]},
+        {"attr": "Material and care", "value": "Plastic; wipe clean", "status": "verified", "src": ["S61"]},
+        {"attr": "Maximum temperature", "value": "", "status": "blank", "src": [], "blank_reason": "The ledger records 572 °F (observed 2026-11-17), but that section of the listing was not re-read in this session, so it is not restated."},
+        {"attr": "Listing note", "value": "Amazon displays 'There is a newer model of this item' (B0GL7Z4KP4) on this listing", "status": "verified", "src": ["S61"], "note": "Observed 2026-11-19. Raised as flag F-45."},
+        {"attr": "Price", "value": "", "status": "blank", "src": [], "blank_reason": "Not printed on this site. Amazon's Program Policies restrict how prices from Amazon may be shown; the current price is on the listing itself."}
+      ],
+      "intent": {"submitted_link": "SH-07", "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5", "observed_on": "2026-11-19", "intended_asin": "", "intended_listing_url": "", "confirmation_date": "", "intent_source": "", "why_blank": "The owner has not confirmed which product the short link was meant to point at. The observed redirect target is recorded separately and is never copied into the intent fields."}
+    },
+    {
+      "id": "P-05", "slug": "chef-iq-sense-smart-wireless-meat-thermometer", "category": "meat-thermometers",
+      "asin": "B0DZFD6R9Z", "brand": "CHEF iQ",
+      "name": "CHEF iQ Sense Smart Wireless Meat Thermometer (3 probes)",
+      "short": "CHEF iQ Sense",
+      "listing_title_source": "S62",
+      "headline": "Leave three probes in and watch from your phone",
+      "dek": "Wireless leave-in probes that report to an app over WiFi and Bluetooth. Three probes means three proteins - or three steaks at three donenesses - in one cook.",
+      "badge": "Best for roasts and long cooks",
+      "key_facts": [["Probes", "3"], ["Heat-safe", "1000 °F"], ["Battery", "up to 50 h"]],
+      "good_fit": [
+        "You roast, smoke or grill long cooks and want alerts instead of hovering.",
+        "You cook more than one protein at a time.",
+        "You want rest timers and estimated finish times from an app."
+      ],
+      "think_twice": [
+        "It depends on a phone app and a charged hub; an instant-read probe has no setup at all.",
+        "For a quick weeknight chicken breast, a leave-in system is more than you need."
+      ],
+      "rows": [
+        {"attr": "Probes", "value": "3 ultra-thin probes (listing also offers 1, 2 and 4-probe sizes)", "status": "verified", "src": ["S62"]},
+        {"attr": "Sensors", "value": "5 - 4 internal temperature sensors + 1 ambient sensor", "status": "verified", "src": ["S62"], "note": "Listing: 'FIVE SENSORS ... 4 internal temperature sensors. Additionally, an ambient sensor tracks your cooking environment's temp'."},
+        {"attr": "Heat safety", "value": "Built to endure 1000 °F", "status": "verified", "src": ["S62"]},
+        {"attr": "Connectivity", "value": "WiFi (unlimited range) and Bluetooth", "status": "verified", "src": ["S62"]},
+        {"attr": "Battery", "value": "Up to 50 hours on a full charge (About this item)", "status": "verified", "src": ["S62"], "note": "The ledger records a different figure ('70+ hours') in the listing's product description (observed 2026-11-17, flag on record); that section was not re-read here."},
+        {"attr": "Hub", "value": "Speaker for audio alerts, phone push notifications, charges all three probes at once", "status": "verified", "src": ["S62"]},
+        {"attr": "App features", "value": "Real-time temperatures, flip reminders, rest timers, estimated cook times, guided recipes", "status": "verified", "src": ["S62"]},
+        {"attr": "Cleaning", "value": "Waterproof, dishwasher-safe probes", "status": "verified", "src": ["S62"]},
+        {"attr": "Warranty", "value": "Two-year assurance from CHEF iQ", "status": "verified", "src": ["S62"]},
+        {"attr": "Accuracy", "value": "", "status": "blank", "src": [], "blank_reason": "Not stated in the 'About this item' bullets read on 2026-11-19; the ledger's 'within 1 °F' reading comes from a section not re-read in this session."},
+        {"attr": "Price", "value": "", "status": "blank", "src": [], "blank_reason": "Not printed on this site. Amazon's Program Policies restrict how prices from Amazon may be shown; the current price is on the listing itself."}
+      ],
+      "intent": {"submitted_link": "SH-08", "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z", "observed_on": "2026-11-19", "intended_asin": "", "intended_listing_url": "", "confirmation_date": "", "intent_source": "", "why_blank": "The owner has not confirmed which product the short link was meant to point at. The observed redirect target is recorded separately and is never copied into the intent fields."}
+    }
+  ]
+}
