@@ -6897,3 +6897,19 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Open** — 171 of 171 pages still collapse |
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
+
+---
+
+## T63 — claim: publication front door, real measurement boundary, and final integration
+
+| Field | Record |
+|---|---|
+| Session / branch | `arena/33e03d63-zone2` (session `33e03d63`); all work stays on this Arena-assigned branch |
+| Claimed | 2026-11-19 (UTC), before implementation |
+| Status | **in progress** |
+| Baseline | `4398071` (`main`); no open pull requests at claim; T58–T62 closing records read. Old registry rows still saying “in progress” are superseded by their dated closing records, not treated as current claims. |
+| Task | Replace the audit-led front page with a polished, five-product editorial storefront; consolidate operator navigation rather than add another competing site; make suggestions and missing-information questions actionable without auto-applying decisions; implement and test the privacy-preserving measurement service before adding editorial material; keep report-only orders distinct from browser clicks; repair relevant false-positive gates; verify sources actually available, publish access limitations and unverified fields; build, test, PR, merge and verify Pages deployment. |
+| File scope | `tools/build_front.py`, `tools/verify_front.py`, `tools/build_head_meta.py`, `tools/head_meta.py`, `tools/build_sitemap.py`, `tools/build_marketing.py`, `tools/build_measurement.py`, `tools/redirect_server.py`, `tools/tracking_schema.sql`; `assets/css/publish.css`, NEW publication CSS/JS and locally hosted editorial images under `assets/`; `assets/js/events.js`; NEW analytics service/config/tests and measurement documentation; NEW publication/decision data and builder/tests if needed; `marketing/data/editorial.json` (cadence only, not unverified product facts); relevant price-rule validators and `.github/workflows/pages.yml`; shared generated HTML/meta/sitemap/feed outputs through builders only; `README.md`, `EXECUTIVE_SUMMARY.md`, NEW dated verification/executive report; `COORDINATION.md` append-only. |
+| Not claimed | Existing historical verification records or other sessions’ hand-authored namespaces/data; no invented prices, reviews, traffic, intended ASIN confirmations, account ownership, live production analytics host, or Amazon reported orders. Requests touching those sources will be logged rather than silently rewritten. |
+| Coordination | This is the final integration session for its claimed files. Existing sessions finished on 2026-11-17 (over 60 minutes ago); no current competing PR/claim was found. Repository branch restrictions override the request to create a separate session branch. Before each push, pull/rebase this same branch; do not switch branches. |
+| Verification policy | Official source pages will be fetched where tools permit. A failed or blocked fetch is recorded as such, not called a fresh verification. Prior observations are dated and retained as prior observations. Amazon intent/Associates report confirmation remains a publishing gate, not something this agent can attest without authorized reports. |
