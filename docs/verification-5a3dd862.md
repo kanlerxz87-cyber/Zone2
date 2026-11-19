@@ -15,7 +15,7 @@
 
 ## Before and after
 
-After PR #194 and the later chooser PR merged while this task was in progress, the comparison was re-run on that combined page tree. The before pass served the current HTML and non-CSS assets while routing the four reader stylesheets and two generated dashboard CSS copies to their `origin/main` versions at `8f2d55e` (PR #206); the after pass used this branch's working-tree stylesheets. This isolates this branch's CSS changes while keeping the updated page set and browser/method constant.
+After PR #194, the chooser PR #205 and the PR #207 integration merged while this task was in progress, the comparison was re-run on that combined page tree. The before pass served the current HTML and non-CSS assets while routing the four reader stylesheets and two generated dashboard CSS copies to their `origin/main` versions at `46601cf` (PR #207); the after pass used this branch's working-tree stylesheets. This isolates this branch's CSS changes while keeping the updated page set and browser/method constant.
 
 | Reader-facing measure, 85 pages | Before | After | Change |
 |---|---:|---:|---:|
