@@ -1,5 +1,5 @@
 {
-  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-29 was added 2026-11-14 by session ba8b2d38 (T27) after reading the deployed site: the register page and the summary page published different open-flag counts for the same register. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-30 to F-32 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-32's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-33 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code. F-34 was added 2026-11-14 by session d3ce1c29: commit d6ec452 truncated the shared task board by 1,831 lines; the board is restored from git history in the same pass. ADDENDUM 2026-11-14 (session 0a697d4a, T28): F-37 and F-38 were added by an independent row-by-row re-read of the official programme pages (bounty/bonus transcription; omitted Participation Requirements). They were drafted as F-27/F-28 but both ids were taken by other sessions while this one was running, so they are published under the next free ids. No existing id was reused. F-41 was added 2026-11-16 by session 43eb0239 (T54) after a line-by-line re-read of the live Amazon listing found that the stored title for P-02 no longer matched the page. The value was corrected in the same pass; the flag records the drift and the copies that remain outside this session's scope (CR-13).",
+  "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-29 was added 2026-11-14 by session ba8b2d38 (T27) after reading the deployed site: the register page and the summary page published different open-flag counts for the same register. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-30 to F-32 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-32's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-33 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code. F-34 was added 2026-11-14 by session d3ce1c29: commit d6ec452 truncated the shared task board by 1,831 lines; the board is restored from git history in the same pass. ADDENDUM 2026-11-14 (session 0a697d4a, T28): F-37 and F-38 were added by an independent row-by-row re-read of the official programme pages (bounty/bonus transcription; omitted Participation Requirements). They were drafted as F-27/F-28 but both ids were taken by other sessions while this one was running, so they are published under the next free ids. No existing id was reused. F-41 was added 2026-11-16 by session 43eb0239 (T54) after a line-by-line re-read of the live Amazon listing found that the stored title for P-02 no longer matched the page. The value was corrected in the same pass; the flag records the drift and the copies that remain outside this session's scope (CR-13). F-49 to F-53 were added 2026-11-19 by session 75efdf57 (T66) while re-reading the five products for the shop section: Emeril accessory and function counts (F-49), Emeril page placeholder text (F-50), P-01 model identity matched by description only (F-51), the CHEF iQ 'Specification Met' list (F-52) and the CHEF iQ battery life stated two ways (F-53). They were drafted as F-48 to F-52 and published under the next free ids after session 10727edd's F-44 to F-48 reached main first. That session's F-44 (ThermoMaven newer model) and F-45 (unparseable workflow, false-green replay, the wrong 'cancelled runs' diagnosis) already record the four other findings this session drafted, so those were not added again. No existing id was reused.",
   "as_of": "2026-11-19",
   "flags": [
     {
@@ -689,6 +689,78 @@
       "action_required": "Resolved by T63: guides/meat-thermometers.html plus two thermometer guides, both linked from the front page and the masthead; spec rows read from the sourced P-04/P-05 ledger records.",
       "source_ids": [
         "S61",
+        "S62"
+      ]
+    },
+    {
+      "id": "F-49",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "Emeril accessory and function counts disagree across official pages (7 vs 6 accessories; 10-in-1 vs an 11-in-1 image label)",
+      "detail": "Re-read 2026-11-19. Emeril Everyday's store page description says '7 premium accessories'; the Amazon listing title for B09B7SB46R says 'Six Cooking Accessories Included'. The same Emeril page lists ten functions under a '10-in-1' heading while an image alt text on that page says '11-in-1'. The preset-count disagreement (24 vs 25) is already F-19.",
+      "impact": "Repeating either accessory count, or '11-in-1', would state a figure an official page contradicts.",
+      "action_required": "Editor: check the printed manual linked from the Emeril store page, or ask Emeril support; the shop publishes the accessory count as a conflict meanwhile.",
+      "source_ids": [
+        "S27",
+        "S20"
+      ]
+    },
+    {
+      "id": "F-50",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "The Emeril store page still contains Shopify template placeholder text",
+      "detail": "Re-read 2026-11-19: the Emeril Everyday product page for SKU 4-00675-02A-VN includes the theme placeholder 'Use this text to answer questions...' in a content block. It does not change any specification, but it shows the page is not fully curated, which is why its internal contradictions (F-19, F-49) are plausible template residue.",
+      "impact": "Lowers confidence in any figure taken only from that page.",
+      "action_required": "None required; noted so a future editor weighs the page accordingly.",
+      "source_ids": [
+        "S27"
+      ]
+    },
+    {
+      "id": "F-51",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "P-01's Amazon listing is matched to Chefman's Dual Window page by description, not by a printed model number",
+      "detail": "The shop takes P-01's specifications (capacity, temperature, power, size, weight) from Chefman's TurboFry Touch Dual Window page (model RJ38-SQPF-3TDB-2W), whose description matches the Amazon listing B0CDY277D3 (6 Qt, two 3 Qt baskets, sync finish, windows). The listing read on 2026-11-19 does not print a model number that can be matched to it, so the identity is a strong reading, not a confirmation. F-22 already relies on the same match.",
+      "impact": "If the listing is a different revision, P-01's figures could differ from the published ones.",
+      "action_required": "Owner or editor: confirm the model number from the listing's product information or from Chefman support.",
+      "source_ids": [
+        "S19",
+        "S25"
+      ]
+    },
+    {
+      "id": "F-52",
+      "severity": "low",
+      "owner": "done",
+      "status": "closed",
+      "published_on": "2026-11-19",
+      "title": "The CHEF iQ listing's 'Specification Met' field lists about twenty standards, including medical-device and pressure-vessel norms",
+      "detail": "Read 2026-11-19 on https://www.amazon.com/dp/B0DZFD6R9Z: the seller-entered 'Specification Met' attribute lists roughly twenty certifications and standards, among them ISO 13485 (medical devices), ASME and CCC. Such a list is implausible for a meat thermometer and is not corroborated by the brand page. The shop does not print it.",
+      "impact": "Reprinting the list would repeat an unverified certification claim.",
+      "action_required": "None; the field stays unpublished unless CHEF iQ documents the certifications.",
+      "source_ids": [
+        "S62"
+      ]
+    },
+    {
+      "id": "F-53",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "The CHEF iQ listing gives two battery lives: up to 50 hours and up to 70 hours",
+      "detail": "On https://www.amazon.com/dp/B0DZFD6R9Z, 'About this item' says 'running for up to 50 hours on a full charge' (re-read 2026-11-19) while the product description says 'up to 70 hours of usage on a full charge' (recorded 2026-11-17 in ledger/products.json). Both are on the same official listing. The shop publishes the row as a conflict and the guide advises planning on the lower figure.",
+      "impact": "Quoting either figure alone would state something the same page contradicts.",
+      "action_required": "Editor: ask CHEF iQ support or check the product manual; record the answer with its source.",
+      "source_ids": [
         "S62"
       ]
     }

@@ -43,6 +43,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import head_meta  # noqa: E402  — the repository's single canonical/OG contract
+import shop_layout  # noqa: E402  (T66: one masthead/footer for front pages and shop/)
 from link_builder import ASSOCIATES_TAG, build_product_link  # noqa: E402  — the policy-guarded Special Link emitter
 import front_t63 as t63  # noqa: E402  — T63 reader-first content (thermometers, FSIS rows, new guides)
 
@@ -224,160 +225,20 @@ def spec_rows(product: dict, attrs: list[str]) -> list[dict]:
 
 
 def masthead(active: str) -> str:
-    # Merged masthead (T63, session 10727edd, after PR #166 from session cf98ff65 landed on main
-    # with its own masthead). Both sessions' intents are kept:
-    #   - reader sections first: 10727edd's five (incl. the Thermometers route, F-48) plus
-    #     cf98ff65's Journal and All articles;
-    #   - every owner/operator surface in ONE native, keyboard-accessible <details> group
-    #     (cf98ff65's "Project & tools"), with 10727edd's "Behind the site" hub as its first entry;
-    #   - aria-current on the active link (cf98ff65).
-    nav = [
-        ("index.html", "Front page"),
-        ("marketing/buying-guide.html", "Air fryers"),
-        ("guides/meat-thermometers.html", "Thermometers"),
-        ("guides/index.html", "Guides"),
-        ("marketing/comparison.html", "Compare"),
-        ("journal/index.html", "Journal"),
-        ("marketing/index.html", "All articles"),
-    ]
-    tools = [
-        ("behind-the-site.html", "Behind the site (all surfaces)"),
-        ("suggestions.html", "Suggestions"),
-        ("questions.html", "Open questions"),
-        ("brief/index.html", "Design brief"),
-        ("intake/index.html", "Submitted links"),
-        ("board/index.html", "Decision board"),
-        ("products.html", "Products dashboard"),
-        ("analysis.html", "Analysis"),
-        ("content.html", "Content engine"),
-        ("compliance.html", "Compliance"),
-        ("tracking.html", "Tracking"),
-        ("verification.html", "Verification log"),
-        ("sources.html", "Source register"),
-        ("flagged.html", "Flagged for review"),
-        ("summary.html", "Executive summary"),
-    ]
+    """Reader nav + one "Project & tools" group + the disclosure strip.
+
+    T66 (session 75efdf57, 2026-11-19): the menu that sessions cf98ff65 and 10727edd merged here is
+    now defined once, in tools/shop_layout.py, so the front pages and the shop/ section render
+    the same masthead. Content is unchanged apart from one added reader link ("Shop") and the
+    owner briefing / intent register appended to the tools group.
+    """
     depth = "../" if active.startswith("guides/") else ""
-
-    def link(href: str, label: str) -> str:
-        current = ' class="is-on" aria-current="page"' if href == active else ""
-        return f'<a href="{e(depth + href)}"{current}>{e(label)}</a>'
-
-    items = "".join(link(h, l) for h, l in nav)
-    tool_items = "".join(link(h, l) for h, l in tools)
-    tools_current = ' aria-current="page"' if active in {h for h, _ in tools} else ""
-    return f"""<header class="pb-mast">
-  <div class="pb-wrap">
-    <div class="pb-mast-top">
-      <div>
-        <div class="pb-word">Counter <em>Notes</em></div>
-        <div class="pb-tag">Air fryers, meat thermometers and the questions to ask before you buy</div>
-      </div>
-      <div class="pb-mast-meta">Updated {e(UPDATED_ON)}</div>
-    </div>
-    <nav class="pb-nav" aria-label="Primary navigation">{items}<details class="pb-nav-tools"><summary{tools_current}>Project &amp; tools</summary><div class="pb-nav-menu">{tool_items}</div></details></nav>
-  </div>
-</header>
-<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} If you buy through a product link marked &ldquo;(paid link)&rdquo;, we may earn a commission at no extra cost to you. The Associates tag supplied for this project is <code>{e(ASSOCIATES_TAG)}</code>; its account status has not yet been confirmed in Associates Central. Links to manufacturer pages, government sources and evidence are never affiliate links.</div></div>"""
+    return shop_layout.masthead(depth, active, UPDATED_ON)
 
 
 def footer(depth: str = "") -> str:
-    return f"""<footer class="pb-foot">
-  <div class="pb-wrap">
-    <div class="pb-foot-grid">
-      <div><h4>Read</h4><ul>
-        <li><a href="{e(depth)}index.html">Front page</a></li>
-        <li><a href="{e(depth)}guides/index.html">All guides</a></li>
-        <li><a href="{e(depth)}marketing/buying-guide.html">Which one to buy</a></li>
-        <li><a href="{e(depth)}marketing/comparison.html">Head-to-head</a></li>
-        <li><a href="{e(depth)}guides/meat-thermometers.html">Meat thermometers</a></li>
-        <li><a href="{e(depth)}guides/thermometer-for-air-fryer.html">Thermometer + air fryer</a></li>
-        <li><a href="{e(depth)}marketing/articles/index.html">The air-fryer write-ups</a></li>
-      </ul></div>
-      <div><h4>Decide</h4><ul>
-        <li><a href="{e(depth)}suggestions.html">Suggestion board</a></li>
-        <li><a href="{e(depth)}questions.html">Open questions</a></li>
-        <li><a href="{e(depth)}intent.html">Link &amp; intent register</a></li>
-        <li><a href="{e(depth)}paths.html">Launch paths</a></li>
-        <li><a href="{e(depth)}brief/index.html">Design brief</a></li>
-        <li><a href="{e(depth)}intake/index.html">Submitted-link register</a></li>
-        <li><a href="{e(depth)}board/index.html">Decision board</a></li>
-        <li><a href="{e(depth)}flagged.html">Flagged for review</a></li>
-      </ul></div>
-      <div><h4>Evidence</h4><ul>
-        <li><a href="{e(depth)}verification.html">Verification log</a></li>
-        <li><a href="{e(depth)}sources.html">Source register</a></li>
-        <li><a href="{e(depth)}marketing/verification.html">How we verify</a></li>
-        <li><a href="{e(depth)}summary.html">Executive summary</a></li>
-      </ul></div>
-      <div><h4>Platform</h4><ul>
-        <li><a href="{e(depth)}behind-the-site.html">Behind the site (all surfaces)</a></li>
-        <li><a href="{e(depth)}products.html">Products</a></li>
-        <li><a href="{e(depth)}analysis.html">Analysis</a></li>
-        <li><a href="{e(depth)}content.html">Content engine</a></li>
-        <li><a href="{e(depth)}compliance.html">Compliance</a></li>
-        <li><a href="{e(depth)}tracking.html">Tracking</a></li>
-        <li><a href="{e(depth)}pages/index.html">Findings hub</a></li>
-      </ul></div>
-    </div>
-    <div class="pb-foot-detail">
-      <p><strong>{e(DISCLOSURE)}</strong> Amazon and the Amazon mark are trademarks of
-      Amazon.com, Inc. or its affiliates; this site is independent and not affiliated with Amazon.</p>
-      <p>No price is displayed on any page of this site: the Amazon Associates Program Policies restrict
-      price display to content Amazon itself serves. Outbound product links are tagged Special Links
-      marked <code>rel="sponsored nofollow"</code>; citation links to official pages are not affiliate
-      links. Where no official source states a value, the cell is a dash with
-      the reason printed beside it &mdash; never an estimate. Traffic, conversion and revenue figures
-      appear nowhere on this site because none has been imported from a first-party report. The on-site
-      click counter records aggregate page and link events only &mdash; no cookie, no visitor identifier,
-      nothing per person &mdash; and its counts are not published until an endpoint keeps them and a
-      first report makes the comparison meaningful.</p>
-      <p><strong>Decision surfaces.</strong>
-      <a href="{e(depth)}review-decide.html">Review board</a> &middot;
-      <a href="{e(depth)}review.html">Review: findings</a> &middot;
-      <a href="{e(depth)}review-questions.html">Review: questions</a> &middot;
-      <a href="{e(depth)}review-ideas.html">Review: ideas</a> &middot;
-      <a href="{e(depth)}review-trace.html">Requirements trace</a> &middot;
-      <a href="{e(depth)}pages/suggestions.html">Findings-hub suggestions</a> &middot;
-      <a href="{e(depth)}pages/questions.html">Findings-hub questions</a> &middot;
-      <a href="{e(depth)}design-notes.html">Design notes</a> &middot;
-      <a href="{e(depth)}playbook.html">Design &amp; content playbook</a></p>
-      <p><strong>Operator surfaces and earlier builds.</strong>
-      <a href="{e(depth)}products.html">Products</a> &middot;
-      <a href="{e(depth)}analysis.html">Analysis</a> &middot;
-      <a href="{e(depth)}content.html">Content engine</a> &middot;
-      <a href="{e(depth)}compliance.html">Compliance</a> &middot;
-      <a href="{e(depth)}tracking.html">Tracking</a> &middot;
-      <a href="{e(depth)}verification.html">Verification log</a> &middot;
-      <a href="{e(depth)}sources.html">Source register</a> &middot;
-      <a href="{e(depth)}summary.html">Executive summary</a> &middot;
-      <a href="{e(depth)}pages/index.html">Findings hub</a> &middot;
-      <a href="{e(depth)}decisions/index.html">Decision hub</a> &middot;
-      <a href="{e(depth)}release/index.html">Release readiness</a> &middot;
-      <a href="{e(depth)}audit/index.html">Independent audit</a> &middot;
-      <a href="{e(depth)}discovery/index.html">Discovery review</a> &middot;
-      <a href="{e(depth)}console/index.html">Owner&rsquo;s Console</a> &middot;
-      <a href="{e(depth)}journal/index.html">Journal</a> &middot;
-      <a href="{e(depth)}marketing/index.html">Counter Notes archive</a> &middot;
-      <a href="{e(depth)}marketing/improvements.html">Improvement board</a> &middot;
-      <a href="{e(depth)}research-hub/start.html">Affiliate Research Hub</a> &middot;
-      <a href="{e(depth)}zone2/index.html">Zone2 platform build</a> &middot;
-      <a href="{e(depth)}affiliate-lab/index.html">Affiliate Lab</a> &middot;
-      <a href="{e(depth)}revalidation/index.html">Revalidation</a> &middot;
-      <a href="{e(depth)}northstar/index.html">Northstar prototype</a></p>
-      <p><a href="{e(depth)}pages/categories/index.html">Commission categories</a> &middot;
-      <a href="{e(depth)}journal/index.html">Journal</a> &middot;
-      <a href="{e(depth)}journal/dual-basket-air-fryers.html">Two baskets beat one long timer</a> &middot;
-      <a href="{e(depth)}journal/basket-vs-oven.html">Choose by geometry</a> &middot;
-      <a href="{e(depth)}journal/why-every-number-has-a-source.html">Why every number links to its source</a></p>
-      <p>Official sources re-read {e(CHECKED_ON)}.
-      <a href="https://affiliate-program.amazon.com/">Amazon Associates</a> &middot;
-      <a href="https://affiliate-program.amazon.com/help/operating/policies">Program Policies</a> &middot;
-      <a href="https://affiliate-program.amazon.com/help/operating/agreement">Operating Agreement</a> &middot;
-      <a href="{e(depth)}sources.html">full source register</a></p>
-    </div>
-  </div>
-</footer>"""
+    """Shared footer (T66): a superset of the previous links here, plus the shop routes."""
+    return shop_layout.footer(depth, CHECKED_ON)
 
 
 def page(rel_path: str, *, title: str, description: str, active: str,
@@ -688,6 +549,7 @@ def build_index(facts: dict, board: dict) -> str:
         <a class="pb-btn" href="marketing/buying-guide.html">Help me choose an air fryer</a>
         <a class="pb-btn pb-btn--ghost" href="guides/meat-thermometers.html">Pick a thermometer</a>
       </div>
+      <p class="pb-stand"><a href="shop/index.html">Or browse the shop: all five products on one page, with a product page each &rarr;</a></p>
     </div>
     <aside class="pb-takeaways pb-picks">
       <h2>Quick picks: start from how you cook</h2>

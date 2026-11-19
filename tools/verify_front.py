@@ -16,7 +16,7 @@ pages as they sit on disk and fails the build if any of the project's own rules 
   G6  every internal link resolves to a file that exists;
   G7  every page carries a canonical URL that matches its own path (head_meta contract);
   G8  no page emits a traffic, click, conversion or revenue figure;
-  G9  reader links stay in the primary navigation; owner dashboards are grouped under one
+  G9  reader links (incl. the shop) stay in the primary navigation; owner dashboards are grouped under one
       accessible Project & tools disclosure and remain reachable from the footer;
   G10 the current executive-summary product rows match the five intent records and carry
        official Amazon links, with intent fields still explicitly blank.
@@ -156,12 +156,15 @@ def checks() -> list[str]:
             got = [href for href, _ in re.findall(r'<a href="([^"]+)"[^>]*>(.*?)</a>', reader_part, re.S)]
             # Merged menu (T63, 10727edd, reconciling PR #166): cf98ff65's six reader links plus the
             # Thermometers route, so the two thermometer products stay one click from every page (F-48).
+            # T66 (75efdf57, 2026-11-19): one link added - "Shop" (shop/index.html) straight after the
+            # front page - so the five product pages are one click from every page. The menu is
+            # defined once in tools/shop_layout.py and shared with the shop/ section.
             expected = [depth + x for x in (
-                "index.html", "marketing/buying-guide.html", "guides/meat-thermometers.html",
-                "guides/index.html", "marketing/comparison.html", "journal/index.html",
-                "marketing/index.html")]
+                "index.html", "shop/index.html", "marketing/buying-guide.html",
+                "guides/meat-thermometers.html", "guides/index.html", "marketing/comparison.html",
+                "journal/index.html", "marketing/index.html")]
             if got != expected:
-                fail(errors, f"G9 {rel}: reader navigation is not the expected seven-link publication menu")
+                fail(errors, f"G9 {rel}: reader navigation is not the expected eight-link publication menu")
             if nav.count('<details class="pb-nav-tools"') != 1 or "Project &amp; tools" not in nav:
                 fail(errors, f"G9 {rel}: owner tools are not in one Project & tools disclosure group")
             tool_menu = nav.split('<div class="pb-nav-menu">', 1)[-1].split('</div>', 1)[0]
@@ -179,7 +182,8 @@ def checks() -> list[str]:
             else:
                 for target in ("brief/index.html", "intake/index.html", "board/index.html",
                                "products.html", "analysis.html", "content.html", "compliance.html",
-                               "tracking.html", "verification.html", "sources.html", "summary.html"):
+                               "tracking.html", "verification.html", "sources.html", "summary.html",
+                               "shop/index.html", "shop/briefing.html"):
                     if f'href="{depth}{target}"' not in footer.group(0):
                         fail(errors, f"G9 {rel}: footer does not expose {target}")
 

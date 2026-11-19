@@ -225,7 +225,7 @@ blank + flag**: [findings hub](https://kanlerxz87-cyber.github.io/Zone2/pages/in
 [tracking](https://kanlerxz87-cyber.github.io/Zone2/pages/tracking.html) ·
 [content engine](https://kanlerxz87-cyber.github.io/Zone2/pages/content-engine.html) ·
 [architecture](https://kanlerxz87-cyber.github.io/Zone2/pages/architecture.html) ·
-[flagged for review (48 flags, F-01…F-48)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
+[flagged for review (53 flags, F-01…F-53)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
 
 All three counts are derived from `ledger/*.json` and held to the register by
 `tools/validate_data.py::check_published_counts`, so they cannot be typed wrong again.
@@ -455,6 +455,17 @@ behind a single **Behind the site** link.
 - **Four new question-shaped guides** in `guides/`: *Instant-read or wireless thermometer?*, *Do you need a thermometer for an air fryer?*, *Multi-function appliance questions*, *Cleanup and counter space*. Together with `guides/meat-thermometers.html` they give the two thermometers reader-facing pages for the first time (F-48).
 - **Board** (`suggestions.html`, `questions.html`): owner directions from the brief are quoted verbatim, with their date and source. A suggestion counts as implemented only when such a direction exists (verify_front G5).
 - **CI was not running on main from PR #158 to PR #161.** `pages.yml` had conflict markers and could not be parsed (F-45). This is fixed, and `tools/ci_replay.py` now refuses to run on conflict markers or invalid YAML.
-- Registers after T63: 48 flags (F-01…F-48), 49 sources (S01…S66).
+- Registers after T63: flags F-01…F-48, 49 sources (S01…S66).
 
 Verification record: [`docs/verification-10727edd.md`](docs/verification-10727edd.md).
+
+## The shop (`shop/`) — 2026-11-19, session `75efdf57` (T66)
+
+`python3 tools/build_shop.py` writes the shop from `shop/data/catalog.json`, `guides.json` and
+`briefing.json`; `python3 tools/validate_shop.py` gates it (every row and comparison cell sourced or
+blank-with-reason, disclosure strip above `<main>` and in the footer, tagged + sponsored + counted
+product buttons, untagged citations, no prices, no invented metrics, canonical, image alt text, feed,
+briefing integrity). Guides are written with tokens (`{{v:P-01:Capacity}}`, `{{s:SH-01}}`,
+`{{buy:P-04}}`) so a figure in prose is always the sourced value from the catalog, never retyped.
+The shared masthead and footer live in `tools/shop_layout.py` and are used by `tools/build_front.py`
+too, so the menu is defined once for the whole site. Owner decisions for this round: [`shop/briefing.html`](https://kanlerxz87-cyber.github.io/Zone2/shop/briefing.html).

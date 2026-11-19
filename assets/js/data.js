@@ -1217,7 +1217,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 48;
+const CANONICAL_FLAG_COUNT = 53;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1748,6 +1748,61 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-48",
     source: "https://www.amazon.com/dp/B0DHZTCNR5",
     sourceIds: ["S61", "S62"],
+  },
+  {
+    item: "F-49 — Emeril accessory and function counts disagree across official pages (7 vs 6 accessories; 10-in-1 vs an 11-in-1 image label)",
+    detail: "Re-read 2026-11-19. Emeril Everyday's store page description says '7 premium accessories'; the Amazon listing title for B09B7SB46R says 'Six Cooking Accessories Included'. The same Emeril page lists ten functions under a '10-in-1' heading while an image alt text on that page says '11-in-1'. The preset-count disagreement (24 vs 25) is already F-19.",
+    severity: "low",
+    impact: "Repeating either accessory count, or '11-in-1', would state a figure an official page contradicts.",
+    actionRequired: "Editor: check the printed manual linked from the Emeril store page, or ask Emeril support; the shop publishes the accessory count as a conflict meanwhile.",
+    ledgerFlag: "F-49",
+    ledgerUrl: "pages/flags.html#F-49",
+    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+    sourceIds: ["S27", "S20"],
+  },
+  {
+    item: "F-50 — The Emeril store page still contains Shopify template placeholder text",
+    detail: "Re-read 2026-11-19: the Emeril Everyday product page for SKU 4-00675-02A-VN includes the theme placeholder 'Use this text to answer questions...' in a content block. It does not change any specification, but it shows the page is not fully curated, which is why its internal contradictions (F-19, F-49) are plausible template residue.",
+    severity: "low",
+    impact: "Lowers confidence in any figure taken only from that page.",
+    actionRequired: "None required; noted so a future editor weighs the page accordingly.",
+    ledgerFlag: "F-50",
+    ledgerUrl: "pages/flags.html#F-50",
+    source: "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+    sourceIds: ["S27"],
+  },
+  {
+    item: "F-51 — P-01's Amazon listing is matched to Chefman's Dual Window page by description, not by a printed model number",
+    detail: "The shop takes P-01's specifications (capacity, temperature, power, size, weight) from Chefman's TurboFry Touch Dual Window page (model RJ38-SQPF-3TDB-2W), whose description matches the Amazon listing B0CDY277D3 (6 Qt, two 3 Qt baskets, sync finish, windows). The listing read on 2026-11-19 does not print a model number that can be matched to it, so the identity is a strong reading, not a confirmation. F-22 already relies on the same match.",
+    severity: "low",
+    impact: "If the listing is a different revision, P-01's figures could differ from the published ones.",
+    actionRequired: "Owner or editor: confirm the model number from the listing's product information or from Chefman support.",
+    ledgerFlag: "F-51",
+    ledgerUrl: "pages/flags.html#F-51",
+    source: "https://www.amazon.com/dp/B0CDY277D3",
+    sourceIds: ["S19", "S25"],
+  },
+  {
+    item: "F-52 — The CHEF iQ listing's 'Specification Met' field lists about twenty standards, including medical-device and pressure-vessel norms",
+    detail: "Read 2026-11-19 on https://www.amazon.com/dp/B0DZFD6R9Z: the seller-entered 'Specification Met' attribute lists roughly twenty certifications and standards, among them ISO 13485 (medical devices), ASME and CCC. Such a list is implausible for a meat thermometer and is not corroborated by the brand page. The shop does not print it.",
+    severity: "low",
+    impact: "Reprinting the list would repeat an unverified certification claim.",
+    actionRequired: "None; the field stays unpublished unless CHEF iQ documents the certifications.",
+    ledgerFlag: "F-52",
+    ledgerUrl: "pages/flags.html#F-52",
+    source: "https://www.amazon.com/dp/B0DZFD6R9Z",
+    sourceIds: ["S62"],
+  },
+  {
+    item: "F-53 — The CHEF iQ listing gives two battery lives: up to 50 hours and up to 70 hours",
+    detail: "On https://www.amazon.com/dp/B0DZFD6R9Z, 'About this item' says 'running for up to 50 hours on a full charge' (re-read 2026-11-19) while the product description says 'up to 70 hours of usage on a full charge' (recorded 2026-11-17 in ledger/products.json). Both are on the same official listing. The shop publishes the row as a conflict and the guide advises planning on the lower figure.",
+    severity: "low",
+    impact: "Quoting either figure alone would state something the same page contradicts.",
+    actionRequired: "Editor: ask CHEF iQ support or check the product manual; record the answer with its source.",
+    ledgerFlag: "F-53",
+    ledgerUrl: "pages/flags.html#F-53",
+    source: "https://www.amazon.com/dp/B0DZFD6R9Z",
+    sourceIds: ["S62"],
   },
 ];
 /* END GENERATED: flags */
