@@ -43,9 +43,20 @@ def test_marketing_pages_label_unconfirmed_brief_mapping():
     import build_site
 
     exec_html = build_site.page_exec()
-    assert "not yet monetized" in exec_html
-    assert "destination-only articles" in exec_html
-    assert "no published product claim" not in exec_html
+    intent = json.loads((REPO / "docs" / "product-intent.json").read_text(encoding="utf-8"))
+    assert "0 of 5 owner-confirmed intended-product mappings" in exec_html
+    assert "Associates-workflow validation pending for 3" in exec_html
+    assert "No performance report is recorded here" in exec_html
+    assert "no associates tag" not in exec_html.lower()
+    for row in intent["links"]:
+        assert row["supplied_code"] in exec_html
+        assert row["observation"]["destination_asin"] in exec_html
+    for url in (
+        "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+        "https://chefman.com/products/turbofry-touch-air-fryer-1",
+        "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+    ):
+        assert url in exec_html, url
 
 
 def test_submitted_tokens_are_rejected_and_not_repaired():
@@ -273,7 +284,7 @@ def test_build_is_deterministic():
 
 def test_guard_check_label_cannot_drift_from_the_test_suite():
     """F-35 regression: README.md's executable-guard-checks label must equal the number of test
-    functions, and the root captions must keep their derived markers."""
+    functions, and the executive-summary/flagged-register captions keep their derived markers."""
     import validate_data
 
     readme = REPO / "README.md"

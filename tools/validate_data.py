@@ -499,8 +499,8 @@ def check_typed_counts(report: Report) -> None:
     are published. The executable-guard-checks label in README.md escaped that net (it describes
     tests/test_pipeline.py, not a ledger) and drifted three times in one day - 11 against 13 tests,
     then 13 against 14 - while every other count was already gated. This pins it to the actual count
-    of test functions and asserts the root captions still render from their derived markers
-    (flagCountHeading / flagRegisterCount / flag-count-inline) instead of typed prose.
+    of test functions and asserts the executive-summary and flagged-register captions still render
+    their derived markers (flagCountHeading / flagCount / flagRegisterCount) instead of typed prose.
     """
     tests_src = (REPO / "tests" / "test_pipeline.py").read_text(encoding="utf-8")
     tests_n = len(re.findall(r"^def test_", tests_src, re.M))
@@ -516,7 +516,7 @@ def check_typed_counts(report: Report) -> None:
                 "(F-35). Update the label or the suite; never leave them inconsistent."
             )
     markers = [
-        ("index.html", ("flagCountHeading", "flagCount")),
+        ("summary.html", ("flagCountHeading", "flagCount")),
         ("flagged.html", ("flagRegisterCount", "flagRegisterMax")),
     ]
     for name, ids in markers:

@@ -99,24 +99,34 @@ def checks() -> list[str]:
             if first_table != -1 and d_at > first_table:
                 fail(errors, f"G3 {rel}: disclosure appears after product data")
 
-        # ---- G4: sponsored product links --------------------------------------
-        # T58 (2026-11-17): the owner supplied the Associates tag, so the rules hardened.
-        #  - a product CTA (class="pb-bench-cta") MUST carry the owner's tag;
-        #  - any tagged link must carry THE owner's tag, never another account's;
-        #  - a citation link (class="pb-src") MUST NOT carry a tag: evidence stays unmonetized.
+        # ---- G4: affiliate links and evidence citations have different semantics ----
+        # The owner-supplied tag belongs on product CTAs, not on source citations.
+        #  - every non-citation Amazon link must be a sponsored, nofollow Special Link
+        #    carrying the selected tag;
+        #  - a source citation (class="pb-src") must never carry an Associates tag or
+        #    rel="sponsored". Evidence links are unmonetized even when they point to Amazon.
         for m in re.finditer(r'<a[^>]+href="(https?://(?:www\.)?amazon\.com[^"]*)"[^>]*>', h):
             tag = m.group(0)
             href = m.group(1)
-            if "sponsored" not in tag or "nofollow" not in tag:
-                fail(errors, f"G4 {rel}: amazon.com link without sponsored+nofollow: {tag[:110]}")
             classes = re.search(r'class="([^"]*)"', tag)
             cls = classes.group(1).split() if classes else []
-            if "pb-bench-cta" in cls and "tag=shopnow047c-20" not in href:
-                fail(errors, f"G4 {rel}: product CTA without the owner's Associates tag: {href[:110]}")
-            if "pb-src" in cls and "tag=" in href:
-                fail(errors, f"G4 {rel}: citation link carries an Associates tag; evidence must stay unmonetized: {href[:110]}")
-            if "tag=" in href and "tag=shopnow047c-20" not in href:
-                fail(errors, f"G4 {rel}: Associates tag other than the owner's on {href[:110]}")
+            rel_attr = re.search(r'rel="([^"]*)"', tag)
+            rel_tokens = set(rel_attr.group(1).lower().split()) if rel_attr else set()
+            has_tag = re.search(r'(?:[?&])tag=', href, re.I) is not None
+
+            if "pb-src" in cls:
+                if "sponsored" in rel_tokens:
+                    fail(errors, f"G4 {rel}: evidence citation incorrectly marked sponsored: {href[:110]}")
+                if has_tag:
+                    fail(errors, f"G4 {rel}: citation link carries an Associates tag; evidence must stay unmonetized: {href[:110]}")
+                continue
+
+            if not {"sponsored", "nofollow"}.issubset(rel_tokens):
+                fail(errors, f"G4 {rel}: product link missing sponsored+nofollow: {tag[:110]}")
+            if "tag=shopnow047c-20" not in href:
+                fail(errors, f"G4 {rel}: product link without the selected Associates tag: {href[:110]}")
+            if has_tag and "tag=shopnow047c-20" not in href:
+                fail(errors, f"G4 {rel}: product link carries an unselected Associates tag: {href[:110]}")
 
         # ---- G6: internal links resolve ---------------------------------------
         for m in re.finditer(r'(?:href|src)="([^"#?]+?)(?:[#?][^"]*)?"', h):

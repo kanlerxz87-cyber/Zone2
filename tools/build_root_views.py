@@ -115,7 +115,7 @@ def page(title: str, lead: str, active: str, body: str) -> str:
       <p>{esc(lead)}</p>
     </div>
 
-    <div class="disclosure">
+    <div class="disclosure" role="note">
       <strong>Affiliate disclosure (required by the Amazon Associates Operating Agreement §5):</strong>
       {DISCLOSURE}
     </div>
@@ -123,6 +123,7 @@ def page(title: str, lead: str, active: str, body: str) -> str:
 {body}
 
     <footer class="site">
+      <p><strong>{DISCLOSURE}</strong></p>
       Generated from <code>ledger/*.json</code> by <code>tools/build_root_views.py</code> — do not hand-edit.
       Re-verified {esc(AS_OF)}. · <a href="index.html">Dashboard</a> ·
       <a href="sources.html">All sources</a> ·

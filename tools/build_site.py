@@ -233,6 +233,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
     <div class="crumb"><a href="{root}index.html">{esc(SITE_NAME)}</a> <span>/</span> <strong>{esc(title)}</strong></div>
     <div class="top-right"><span class="live-tag"><i></i> Live on GitHub Pages</span><a class="chip" href="{root}index.html">Dashboard</a></div>
   </header>
+  <div class="disclosure" role="note"><strong>Affiliate disclosure:</strong> {esc(DISCLOSURE)}</div>
   <div class="content">
     <div class="page-head">
       <div>
@@ -320,65 +321,125 @@ def page_hub() -> str:
 
 
 def page_exec() -> str:
-    key = [
-        ("What each supplied link resolves to", True, "Each of the five supplied link.amazon URLs resolves to one specific Amazon product page, reproducibly, and an UNKNOWN code on the same service returns a 404 instead of a product - so the codes are honoured lookups, not ignored tokens.", ["S28", "S19", "S20", "S21", "S44", "S45"]),
-        ("The brief's product identity, as a documented contract", False, "Each supplied code is 9 characters (an ASIN is 10), the canonical /dp/ URLs return Amazon's Page Not Found page, and no public Amazon document binds a link.amazon code to a product. The destination is therefore published as an observation, never as a confirmed brief mapping.", ["S16", "S17", "S18", "S24"]),
-        ("Marketing content for confirmed brief identities", False, "No copy claims the observed destinations are confirmed identities for the products intended in the brief. The separate /marketing set does publish three destination-only articles, a comparison and a buying guide from manufacturer-verified specifications; its pages label the unresolved mapping. The root generator remains blocked for brief-mapped content until the owner confirms the mapping.", ["S24", "S25", "S26", "S27", "S32", "S33", "S34", "S35"]),
-        ("Platform automation built", True, "Collector, scoring, content linters, link builder, click tracker, optimizer and a deterministic site builder are present and runnable, with policy rules encoded as code.", ["S01", "S02"]),
-        ("Official commission economics", True, "Amazon's published fixed-rate table transcribed row by row (11 bands, 10.00% down to 0.00%), plus bounty amounts, attribution windows and payment terms.", ["S04", "S02"]),
-        ("Compliance wiring", True, f"{len(COMPLIANCE['rules'])} rules from the Operating Agreement, Program Policies and Participation Requirements, each mapped to a specific implemented control.", ["S01", "S02", "S03", "S05"]),
-        ("Pricing / review / competition data", False, "Requires the Creators API with an eligible Associates account; this build has no credentials, so those columns stay blank rather than filled from memory or scraping.", ["S06", "S07"]),
-        ("Clicks, conversion, earnings", False, "Nothing to verify: no report export was supplied and no live endpoint exists, so all performance cells render as empty states.", ["S02"]),
-        ("Published site", True, "GitHub Pages is enabled for this repository and the landing dashboard plus all generated subpages are served from main.", ["S22"]),
-    ]
-    rows = [
-        [
-            text_cell(q),
-            f"<td>{status_pill('VERIFIED' if ok else 'UNVERIFIED')}</td>",
-            text_cell(basis),
-            source_cell(srcs),
-        ]
-        for q, ok, basis, srcs in key
-    ]
-    findings = [
-        "The highest-value action is identifier hygiene, not copywriting: the supplied 9-character tokens cannot be used as ASINs or treated as a documented brief-to-product mapping. The observed destination ASINs can be researched as those destinations, and that is the scope of the published source-linked marketing set. None of the supplied links carries an Associates tag, and no public Amazon document binds the short codes to the intended brief products.",
-        "Amazon's published economics shape the plan. Only a few bands are high (Luxury Beauty 10.00%; music/handmade/video 5.00%; Books/Kitchen/Automotive 4.50%); the largest consumer clusters sit at 3.00% and the default band is 4.00%, while nine category groups pay 0.00% and are excluded from the niche queue before ranking even starts.",
-        "Attribution is narrow and mechanical: a 24-hour Session, an 89-day cart path, and shipment/payment inside 180 days. Content is therefore worth optimising only where readers are close to a purchase decision, and the model credits nothing outside that window.",
-        "Prices and ratings may not be self-hosted as static text: they may appear only from an Amazon-served link or a dated API response. That is why a product whose listing could not be fetched shows a blank price cell, and nothing on the site can look like a stale price.",
-        "PA-API 5.0 is deprecated (calls return 403 AccessDenied) in favour of the Creators API, which itself requires an Associates account with 10 or more qualifying sales in the last 30 days. Any stack built on the old API fails at runtime; this one degrades to a recorded BLOCKED state instead of scraping.",
-        "Reviewing the previously merged commit found no false claims \u2014 its four citations are live official pages \u2014 but it predated the commission table, the attribution mechanics, per-row sourcing and the category subpages added here.",
-    ]
-    actions = [
-        ("A1", "Confirm in Associates Central that the five resolved destinations are the products intended in the brief, or provide the intended valid ASINs / full amazon.<tld>/dp/ URLs", "user", "unblocks content and analysis that assert a match to the brief; current destination-only specs remain separately sourced and labelled", ["S16", "S17", "S18", "S24", "S25", "S26", "S27"]),
-        ("A1b", "Supply links that carry the Associates tag (…?tag=YOURASSOCIATEID)", "user", "as supplied the five links carry no tag, so they cannot attribute a sale or earn a commission", ["S24", "S19", "S20", "S21", "S44", "S45"]),
-        ("A2", "Create or confirm an Associates account, marketplace and Associates ID/tag", "user", "turns the inert link preview into a compliant tagged Special Link and enables earnings reporting", ["S01", "S02"]),
-        ("A3", "Register for the Creators API (requires >=10 qualifying sales in the past 30 days)", "user", "activates real product research, offer and browse-node data", ["S07"]),
-        ("A4", "Store one dated Associates report export at ledger/associates_report.json", "user", "unlocks conversion, EPC and the optimizer's revenue-side actions", ["S02"]),
-        ("A5", "Run the build with policy/rate re-reads before each publishing cycle", "operator", "both governing pages carry update dates and change without notice", ["S01", "S02"]),
-    ]
+    """Publish the five dated link observations without promoting them into intended identities."""
+    intent_doc = json.loads((REPO / "docs" / "product-intent.json").read_text(encoding="utf-8"))
+    intent_by_code = {row["supplied_code"]: row for row in intent_doc.get("links", [])}
+    entries = PRODUCTS.get("entries", [])
+    if {entry.get("token_as_given") for entry in entries} != set(intent_by_code):
+        raise SystemExit("executive summary: product and intent registers do not contain the same supplied codes")
+
+    def is_confirmed(intent_row: dict) -> bool:
+        intent = intent_row.get("intent", {})
+        return bool(intent.get("intended_asin") and intent.get("confirmation_date") and intent.get("confirmation_source"))
+
+    confirmed = sum(1 for record in intent_doc["links"] if is_confirmed(record))
+    tagged = [record for record in intent_doc["links"] if record.get("special_link", {}).get("tag")]
+    pending = sum(
+        1 for record in tagged
+        if record.get("special_link", {}).get("associates_workflow_validated") is None
+    )
+    rows = []
+    for entry in entries:
+        code = entry["token_as_given"]
+        intent_record = intent_by_code[code]
+        intent = intent_record.get("intent", {})
+        observation = intent_record.get("observation", {})
+        resolved = entry.get("resolved", {})
+        if not observation.get("destination_asin") or not observation.get("observed_on"):
+            raise SystemExit(f"executive summary: {code} has no dated destination observation")
+        if resolved.get("asin") != observation["destination_asin"]:
+            raise SystemExit(f"executive summary: {code} observation and product-ledger destination disagree")
+        sources = list(resolved.get("source_ids", []))
+        sources.extend(sid for sid in resolved.get("manufacturer_source_ids", []) if sid not in sources)
+        if not sources:
+            raise SystemExit(f"executive summary: {code} has no official destination source")
+
+        submitted = (
+            f'<td><a class="pagelink" href="{esc(intent_record["supplied_url"])}" target="_blank" '
+            f'rel="noopener noreferrer nofollow">{esc(code)}</a>'
+            f'<div class="row-note">Supplied short link; observation recorded {esc(observation["observed_on"])}. '
+            "Evidence citation, not a purchase call to action.</div></td>"
+        )
+        destination = (
+            f'<td><strong>{esc(resolved.get("asin", observation["destination_asin"]))}</strong>'
+            f'<div class="row-note">Observed destination, not the intended-product field.</div>'
+            f'<div class="row-note">{esc(resolved.get("brand", ""))} · {esc(resolved.get("title", ""))}</div></td>'
+        )
+        if is_confirmed(intent_record):
+            intended = f'<td>{esc(intent["intended_asin"])}<div class="row-note">Owner-confirmed {esc(intent["confirmation_date"])}</div></td>'
+        else:
+            status = intent.get("mapping_status", "UNCONFIRMED")
+            intended = blank_cell(f"{status}; no owner confirmation source is recorded")
+
+        special = intent_record.get("special_link", {})
+        if special.get("tag"):
+            validation = special.get("associates_workflow_validated")
+            if validation is None:
+                state = "Associates-workflow validation pending"
+            elif validation is True:
+                state = "recorded as validated in the owner's workflow"
+            else:
+                state = "recorded as not validated in the owner's workflow"
+            special_cell = (
+                f'<td><code>{esc(special["tag"])}</code><div class="row-note">Site-generated Special Link record; '
+                f'{state}. This does not establish product intent, attribution or earnings.</div></td>'
+            )
+        else:
+            special_cell = blank_cell("No purchase link is published; product intent is unresolved")
+
+        rows.append([
+            submitted,
+            destination,
+            intended,
+            special_cell,
+            source_cell(sources, blank_hint="no official source is recorded"),
+        ])
+
+    observed_dates = sorted({row["observation"]["observed_on"] for row in intent_doc["links"] if row.get("observation", {}).get("observed_on")})
+    dates_label = ", ".join(esc(value) for value in observed_dates) or "not recorded"
+    bottom = (
+        f'<p class="lede">The records contain {len(entries)} supplied-link observations and '
+        f'{confirmed} of {len(entries)} owner-confirmed intended-product mappings. The dated observations '
+        f'are from {dates_label}; this build did not re-fetch the supplied links or product pages. '
+        f"{len(tagged)} site-generated Special Link records carry the selected Associates ID, with "
+        f"Associates-workflow validation pending for {pending}. The other {len(entries) - len(tagged)} "
+        "observations have no published purchase link.</p>"
+        "<p>No performance report is recorded here. Clicks, orders, conversions and earnings are not inferred "
+        "from a tag, a redirect or a client-side event counter.</p>"
+    )
     body = (
-        panel(
-            "Bottom line",
-            '<p class="lede">The research, compliance and source-governed content platform is built and live, but it is not yet monetized. The five supplied '
-            "links reproducibly resolve to specific product pages; destination-only articles, comparison and buying guide use manufacturer-verified "
-            "specifications with source links. The site does not claim those destinations are the products intended in the brief, because the mapping "
-            "is not documented. There is no Associates tag, and unconfirmed prices, ratings, commissions and performance remain blank.</p>",
-        )
-        + panel("Key questions answered", table(["Question", "Verdict", "Basis", "Evidence"], rows))
-        + panel("Findings", "<ol class=\"findings\">" + "".join(f"<li>{esc(f)}</li>" for f in findings) + "</ol>")
+        panel("Current position", bottom)
         + panel(
-            "Prioritised actions",
-            table(["#", "Action", "Owner", "Why it matters", "Evidence"], [[text_cell(a), text_cell(b), text_cell(c), text_cell(d), source_cell(e)] for a, b, c, d, e in actions]),
+            "Supplied-link observations and intended products — separate records",
+            table(
+                ["Supplied code / observation", "Observed destination", "Intended ASIN", "Published site link record", "Official listing and manufacturer sources"],
+                rows,
+            ),
         )
-        + notice(
-            "Not claimed by this project",
-            "no monetized, Associates-tagged product link; no claim that the observed destinations are the products intended in the brief; no traffic, "
-            "conversion or earnings figure; no \u201ctrending product\u201d or \u201cbest niche\u201d ranking; and no automated publishing to a third-party CMS. "
-            "The /marketing pages use untagged preview links and publish only sourced specifications for the observed destinations. An Associates ID, owner "
-            "confirmation of the mapping, Creators API access and dated performance reports have not been supplied; dependent claims and values remain blocked or blank.",
+        + panel(
+            "What this page does not establish",
+            '<ul class="checklist">'
+            '<li>No observed destination is treated as proof of the product intended in the brief; all blank intent fields stay blank.</li>'
+            '<li>A site-generated tag is not a substitute for checking each link in the enrolled Associates workflow.</li>'
+            '<li>No current price, availability, sales, order, conversion or earnings result is asserted here.</li>'
+            '<li>The two thermometer destinations are records of what the supplied links were observed to open; they are not recommendations in the air-fryer buying guide.</li>'
+            '</ul>'
+            '<p>For the detailed register and next owner decisions, see <a href="../summary.html">the current executive summary</a>, '
+            '<a href="../intent.html">the link-and-intent register</a>, and <a href="../board/requirements.html#RQ-22">the requirements note</a>.</p>',
+        )
+        + panel(
+            "Attribution and link policy references",
+            table(
+                ["Question", "Current record", "Official sources"],
+                [[
+                    text_cell("How to validate a Special Link"),
+                    text_cell("The selected ID is present on three site-generated links; workflow validation is pending. No attribution result is claimed."),
+                    source_cell(["S01", "S02", "S24"]),
+                ]],
+            ),
         )
     )
-    return render("executive-summary.html", "Executive summary", "What was verified, what was built, and what is blocking the rest.", body)
+    return render("executive-summary.html", "Executive summary", "Five supplied-link observations, separated from the intended products and their unverified link status.", body)
 
 
 def page_products() -> str:
