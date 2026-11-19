@@ -693,10 +693,10 @@ const SPECS = [
   {
     pid: "p05",
     attribute: "Warranty",
-    value: "Two-year assurance provided by CHEF iQ",
-    status: "verified",
+    value: "Two-year assurance provided by CHEF iQ (About this Item) / Warranty Description: 3 Year (Item details)",
+    status: "conflict",
     source: "https://www.amazon.com/dp/B0DZFD6R9Z",
-    sourceLabel: "Amazon listing — About this Item ('two-year assurance provided by CHEF iQ')",
+    sourceLabel: "Amazon listing — About this Item ('two-year assurance provided by CHEF iQ') contradicts Item details ('Warranty Description: 3 Year'). Both figures are published; neither is chosen.",
     sourceIds: ["S62"],
   },
   {
