@@ -233,6 +233,16 @@ def extras() -> dict:
             if not ids:
                 row["blank_reason"] = sp.get("why_blank") or "No official source recorded."
             rows.append(row)
+        # A dated re-read can show that a ledger row is incomplete (for example a second,
+        # disagreeing statement on the same listing). The override replaces the published row
+        # only; the ledger is left for its owner and the discrepancy is flagged (F-49).
+        by_attr = {r["attr"]: r for r in rows}
+        for o in t.get("row_overrides", []):
+            if o["attr"] not in by_attr:
+                raise SystemExit(f"{t['key']}: override for unknown ledger attribute {o['attr']!r}")
+            if o.get("src") not in srcs:
+                raise SystemExit(f"{t['key']}: override for {o['attr']!r} cites unknown source {o.get('src')!r}")
+            by_attr[o["attr"]].update({"value": o["value"], "status": o["status"], "src": o["src"]})
         rows += t.get("extra_rows", [])
         official = []
         for sid in dict.fromkeys(r["src"] for r in rows if r.get("src")):
@@ -1121,6 +1131,9 @@ def guide_page(slug: str, body_html: str, sources: list[str]) -> str:
   Product figures are what each listing stated on the date shown; a listing can change after that.</p>
   <h2>Read next</h2>
   <ul class="pb-sources">{others}<li><a href="index.html">All guides</a></li></ul>
+  <p class="pb-fine">The thermometer desk in the marketing section covers the same question:
+  <a href="{e(g['companion']['href'])}">{e(g['companion']['title'])}</a>. Which of the two stays is an
+  open owner decision (<a href="../desk/index.html#SG-T66-13">SG-T66-13</a>).</p>
 </div></section>
 """
     return page(f"guides/{slug}", title=f"{g['title']} · Counter Notes", description=g["hook"],
@@ -1320,6 +1333,10 @@ def build_thermometers(facts: dict, board: dict) -> str:
   <a class="pb-sec-link" href="index.html">All categories &rarr;</a></div>
   <div class="pb-rail"><section><h2>Published {e(ov['guides'][0]['published'])}</h2><ul>{guides}</ul></section>
   <section><h2>Safe minimum temperatures</h2>{food_safety_table()}</section></div>
+  <p class="pb-fine">The marketing section has its own <a href="../marketing/thermometers/index.html">thermometer
+  desk</a>, with a page for each listing and a guide to checking a thermometer&rsquo;s accuracy. Three of its
+  questions overlap the guides above; which set stays is an open owner decision
+  (<a href="../desk/index.html#SG-T66-13">SG-T66-13</a>).</p>
 </div></section>
 
 <section class="pb-sec"><div class="pb-wrap">

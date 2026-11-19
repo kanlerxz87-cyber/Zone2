@@ -139,6 +139,15 @@
           "src": null,
           "blank_reason": "Not reproduced here under the same policy; read them on the listing."
         }
+      ],
+      "row_overrides": [
+        {
+          "attr": "Warranty",
+          "value": "Two-year assurance provided by CHEF iQ (About this item) / 3 Year (Item details: Warranty Description)",
+          "status": "conflict",
+          "src": "S62",
+          "note": "Re-read 2026-11-19: the same listing states the term two ways. Both are printed and neither is chosen. The ledger row (P-05) still records only the two-year statement; see flag F-49 and question Q-22."
+        }
       ]
     }
   ],
@@ -187,7 +196,11 @@
       "title": "Is the turkey done? Where the thermometer goes, and the one number that matters",
       "hook": "165 °F, checked in three places. Where the probe goes, which kind of thermometer makes the day easier, and how to test your thermometer before you trust it.",
       "category": "thermometers",
-      "published": "2026-11-19"
+      "published": "2026-11-19",
+      "companion": {
+        "href": "../marketing/thermometers/where-to-put-the-thermometer-in-a-turkey.html",
+        "title": "Where does the thermometer go in a turkey? Three spots, one number"
+      }
     },
     {
       "slug": "thermometers-instant-read-or-leave-in.html",
@@ -195,7 +208,11 @@
       "title": "Instant-read or leave-in? Picking a meat thermometer you will actually use",
       "hook": "One lives in a drawer and answers in a second. The other lives in the roast and texts you. They solve different problems, and most kitchens only need one of them.",
       "category": "thermometers",
-      "published": "2026-11-19"
+      "published": "2026-11-19",
+      "companion": {
+        "href": "../marketing/thermometers/instant-read-or-leave-in.html",
+        "title": "Instant-read or leave-in: which meat thermometer do you actually need?"
+      }
     },
     {
       "slug": "thermometers-in-an-air-fryer.html",
@@ -203,7 +220,11 @@
       "title": "Can you use a meat thermometer in an air fryer?",
       "hook": "Yes, but the kind matters. One of our air fryers halts cooking the moment you open the basket, which changes how you check.",
       "category": "thermometers",
-      "published": "2026-11-19"
+      "published": "2026-11-19",
+      "companion": {
+        "href": "../marketing/thermometers/thermometer-for-air-fryer.html",
+        "title": "Do you need a meat thermometer for an air fryer?"
+      }
     }
   ],
   "goals": {
@@ -622,6 +643,40 @@
         "Q-T50-01"
       ],
       "source": null,
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T66-13",
+      "goal": "publication",
+      "area": "Categories",
+      "title": "Pick one home for the thermometer guides",
+      "summary": "Two sessions published thermometer pages on 2026-11-19 without seeing each other's work: T64 under marketing/thermometers/ (a category page, two product pages, four guides) and T66 under guides/thermometers*.html (a category page and three guides). Three topics overlap (turkey placement, instant-read or leave-in, thermometers in an air fryer). The figures agree; each pair cites the same FoodSafety.gov and USDA FSIS pages. Until this is decided, every T66 guide links its T64 counterpart and the T66 category page links T64's desk. Flag F-50. Recommendation B: T64's section is the broader one (product pages and an accuracy guide as well) and is already in the RSS feed; T66's food-safety chart and front-page shelf can move with it.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep both sets, cross-linked as they are now.",
+          "cost": "None now; every edit is made twice",
+          "tradeoff": "Two pages per question compete with each other in search and can drift apart."
+        },
+        {
+          "label": "B",
+          "text": "Keep T64's marketing/thermometers/ as the home; turn the three T66 guides into short pointers (or remove them) and send the reader menu's 'Meat thermometers' link there.",
+          "cost": "One session; the sitemap and both gates change",
+          "tradeoff": "Loses T66's food-safety chart and front-page shelf unless they are moved across."
+        },
+        {
+          "label": "C",
+          "text": "Keep T66's guides/ as the home; merge T64's unique pages (product pages, the accuracy check) into it.",
+          "cost": "One session; build_thermometers.py and verify_marketing change",
+          "tradeoff": "Touches another session's generator and its gates."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T50-01"
+      ],
+      "source": "G1",
       "status": "Proposed - awaiting owner decision",
       "implemented": false
     }

@@ -1217,7 +1217,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 48;
+const CANONICAL_FLAG_COUNT = 50;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1696,7 +1696,7 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-44 — The 0-second 'failure' workflow runs after PR #158 were parse failures, not cancellations (CR-6 misdiagnosed)",
-    detail: "After PR #158 merged, every Deploy run on main finished in 0 s with 0 jobs (for example run 44136794504). The T62 record (CR-6) described these as cancelled or superseded runs. They were not: .github/workflows/pages.yml still contained unresolved git conflict markers, so GitHub could not load the workflow file at all and created no jobs. The local replay (tools/ci_replay.py) did not notice because it reads the steps with a tolerant hand-written parser instead of a YAML loader, so it reported 49/49 passing on a file GitHub rejected. Sessions 6ce606cb (T63) and da47d78d (T65) each removed the markers independently; both added a pre-check to ci_replay.py (conflict markers in the workflow and other tracked text files, and a YAML parse when PyYAML is available). The first T63 pull-request run after the repair (44466706223) loaded the workflow and passed its Build and verify job.",
+    detail: "After PR #158 merged, every Deploy run on main finished in 0 s with 0 jobs (for example run 44136794504). The T62 record (CR-6) described these as cancelled or superseded runs. They were not: .github/workflows/pages.yml still contained unresolved git conflict markers, so GitHub could not load the workflow file at all and created no jobs. The local replay (tools/ci_replay.py) did not notice because it reads the steps with a tolerant hand-written parser instead of a YAML loader, so it reported 49/49 passing on a file GitHub rejected. Three sessions removed the markers independently on 2026-11-19: da47d78d (T65, PR #165), cf98ff65 (T63, PR #166) and 6ce606cb (T66). T65 and T66 each added a pre-check to ci_replay.py (conflict markers in the workflow and other tracked text files, and a YAML parse when PyYAML is available). The first pull-request run on the T66 branch after the repair (44466706223) loaded the workflow and passed its Build and verify job.",
     severity: "medium",
     impact: "For about two days no push to main deployed, while the board recorded the failures as harmless cancellations. Pages kept serving the last good build.",
     actionRequired: "None outstanding. Read a 0-job run as 'the workflow did not load' until proven otherwise; ci_replay.py now refuses to run on a workflow that would not load.",
@@ -1710,7 +1710,7 @@ const FLAGGED_ROWS = [
     detail: "Re-read on 2026-11-19, the listing that link.amazon/B0c8moW59 opens (B0DHZTCNR5, ThermoMaven 1 Sec, Black) carried the notice 'There is a newer model of this item', pointing to B0GL7Z4KP4 (shown in Orange). That listing has not been read or sourced, so this repository does not know whether it is a new revision or a colour variant. The site keeps linking B0DHZTCNR5, the listing the supplied link opens; it does not switch on its own.",
     severity: "low",
     impact: "Buyers clicking the ThermoMaven button may land on an older model than Amazon recommends.",
-    actionRequired: "Owner: say which listing is intended (decision desk SG-T63-12 / Q-T63-07). If it is the newer one, a session reads and sources B0GL7Z4KP4 before any link changes.",
+    actionRequired: "Owner: say which listing is intended (decision desk SG-T66-12 / Q-T66-07; the same question is Q-21 in ledger/questions.json, raised by T64). If it is the newer one, a session reads and sources B0GL7Z4KP4 before any link changes.",
     ledgerFlag: "F-45",
     ledgerUrl: "pages/flags.html#F-45",
     source: "https://www.amazon.com/dp/B0DHZTCNR5",
@@ -1721,7 +1721,7 @@ const FLAGGED_ROWS = [
     detail: "marketing/data/facts.json (which feeds the reader pages) records P3 Power as '1700 W / 120 V', status verified, citing the Chefman product page, and mentions in a note that a 1000 W figure has circulated. ledger/products.json (which feeds the dashboards) records the same attribute for P-03 as a CONFLICT, because the Amazon listing's own bullet list says '1000 Watts/120 Volts - RJ38-SQSS-8T' while its product-information block and the Chefman page both say 1700 W. Both registers quote real official text; they differ on whether the disagreement is shown as a conflict. The rule for every other conflict in this repository is to publish both values.",
     severity: "medium",
     impact: "The reader-facing pages show a single verified wattage where the ledger publishes an official-source conflict.",
-    actionRequired: "Owner or a later session: decide which register is the source of truth (decision desk SG-T63-08) and regenerate the other from it; meanwhile, show the P3 power row as a conflict on the reader pages.",
+    actionRequired: "Owner or a later session: decide which register is the source of truth (decision desk SG-T66-08) and regenerate the other from it; meanwhile, show the P3 power row as a conflict on the reader pages.",
     ledgerFlag: "F-46",
     ledgerUrl: "pages/flags.html#F-46",
     source: "https://www.amazon.com/dp/B08DKYBTPH",
@@ -1729,10 +1729,10 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-47 — marketing/feed.xml writes ISO-8601 pubDate values; RSS 2.0 requires RFC 822 dates",
-    detail: "Every <pubDate> in marketing/feed.xml is written as '2026-11-15T00:00:00Z' (tools/build_marketing.py, page_feed()). The RSS 2.0 specification (https://www.rssboard.org/rss-specification, version 2.0.11) states: 'All date-times in RSS conform to the Date and Time Specification of RFC 822', with the example 'Sat, 07 Sep 2002 00:00:01 GMT'. The feed also lists only the marketing topic pages, so the root guides (including the T63 thermometer guides) are not in any feed. build_marketing.py belongs to another session's scope, so T63 did not change it.",
+    detail: "Every <pubDate> in marketing/feed.xml is written as '2026-11-15T00:00:00Z' (tools/build_marketing.py, page_feed()). The RSS 2.0 specification (https://www.rssboard.org/rss-specification, version 2.0.11) states: 'All date-times in RSS conform to the Date and Time Specification of RFC 822', with the example 'Sat, 07 Sep 2002 00:00:01 GMT'. The feed also lists only the marketing topic pages, so the root guides (including the T66 thermometer guides) are not in any feed. build_marketing.py belongs to another session's scope, so T66 did not change it.",
     severity: "low",
     impact: "Strict feed readers and validators may reject or misdate the items; readers who follow the feed never see the root guides.",
-    actionRequired: "A session that owns tools/build_marketing.py: emit RFC 822 dates (for example email.utils.format_datetime) and decide whether to extend the feed to every guide (decision desk SG-T63-10).",
+    actionRequired: "A session that owns tools/build_marketing.py: emit RFC 822 dates (for example email.utils.format_datetime) and decide whether to extend the feed to every guide (decision desk SG-T66-10).",
     ledgerFlag: "F-47",
     ledgerUrl: "pages/flags.html#F-47",
     source: "",
@@ -1740,7 +1740,7 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-48 — Release-readiness row RR-08 still describes the site as covering three air-fryer appliances",
-    detail: "The site state typed into RR-08 on the release-readiness board says 'The published set covers three air-fryer appliances plus programme research.' Since T61/T63 the site also publishes the two meat-thermometer listings that supplied links 4 and 5 open, with their own category page and guides. The row's conclusion (no unsuitable category) is unaffected; only its description is out of date. The board belongs to another session's scope (T45), so T63 regenerated it from its own generator without editing its register.",
+    detail: "The site state typed into RR-08 on the release-readiness board says 'The published set covers three air-fryer appliances plus programme research.' Since T61/T66 the site also publishes the two meat-thermometer listings that supplied links 4 and 5 open, with their own category page and guides. The row's conclusion (no unsuitable category) is unaffected; only its description is out of date. The board belongs to another session's scope (T45), so T66 regenerated it from its own generator without editing its register.",
     severity: "low",
     impact: "A reviewer reading the readiness board gets an incomplete picture of what the site covers.",
     actionRequired: "The session that owns the release-readiness register: update RR-08's site state to name both categories.",
@@ -1748,6 +1748,28 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-48",
     source: "https://www.amazon.com/dp/B0DHZTCNR5",
     sourceIds: ["S61", "S62"],
+  },
+  {
+    item: "F-49 — The ledger records the CHEF iQ warranty as a verified two-year term; the same listing also says '3 Year'",
+    detail: "ledger/products.json P-05 has a Warranty row with value 'Two-year assurance provided by CHEF iQ', status verified (S62). Re-read on 2026-11-19, listing B0DZFD6R9Z states the term two ways: About this item says 'a two-year assurance provided by CHEF iQ', and the Item details table says 'Warranty Description | 3 Year'. T64 recorded the same disagreement as Q-22 and prints both on its thermometer desk. The T66 pages now print both as a conflict through an overlay override; the ledger row is unchanged because the ledger belongs to another session.",
+    severity: "low",
+    impact: "Any page that reads the ledger row directly shows a single warranty term as verified when the official listing disagrees with itself.",
+    actionRequired: "The ledger's owner: mark the P-05 Warranty row as a conflict carrying both statements, as the Battery life row already is. Owner or editor: check the CHEF iQ user guide or warranty page (Q-22).",
+    ledgerFlag: "F-49",
+    ledgerUrl: "pages/flags.html#F-49",
+    source: "https://www.amazon.com/dp/B0DZFD6R9Z",
+    sourceIds: ["S62"],
+  },
+  {
+    item: "F-50 — Two thermometer sections were published on the same day, with three overlapping guides",
+    detail: "T64 (PR #167) published marketing/thermometers/ (a category page, two product pages, four guides). T66 published guides/thermometers.html and three guides. Neither session could see the other's branch. Three questions are covered twice: turkey placement, instant-read or leave-in, and thermometers in an air fryer. Every Fahrenheit figure agrees between the pairs and both cite the same FoodSafety.gov and USDA FSIS pages, so nothing printed is wrong. The reader menu's 'Meat thermometers' link points at the T66 page. Each T66 guide now links its T64 counterpart, and the T66 category page links T64's desk.",
+    severity: "medium",
+    impact: "Readers and search engines see two pages answering the same question, which compete with each other and can drift apart when one is edited.",
+    actionRequired: "Owner: choose one home for the thermometer guides (decision desk SG-T66-13). The session that implements the choice updates the reader menu, the sitemap and both gates.",
+    ledgerFlag: "F-50",
+    ledgerUrl: "pages/flags.html#F-50",
+    source: "",
+    sourceIds: [],
   },
 ];
 /* END GENERATED: flags */

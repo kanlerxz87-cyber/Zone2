@@ -639,7 +639,7 @@
       "title": "Amazon now shows a 'newer model' notice on the ThermoMaven listing the 4th supplied link opens",
       "detail": "Re-read on 2026-11-19, the listing that link.amazon/B0c8moW59 opens (B0DHZTCNR5, ThermoMaven 1 Sec, Black) carried the notice 'There is a newer model of this item', pointing to B0GL7Z4KP4 (shown in Orange). That listing has not been read or sourced, so this repository does not know whether it is a new revision or a colour variant. The site keeps linking B0DHZTCNR5, the listing the supplied link opens; it does not switch on its own.",
       "impact": "Buyers clicking the ThermoMaven button may land on an older model than Amazon recommends.",
-      "action_required": "Owner: say which listing is intended (decision desk SG-T66-12 / Q-T66-07). If it is the newer one, a session reads and sources B0GL7Z4KP4 before any link changes.",
+      "action_required": "Owner: say which listing is intended (decision desk SG-T66-12 / Q-T66-07; the same question is Q-21 in ledger/questions.json, raised by T64). If it is the newer one, a session reads and sources B0GL7Z4KP4 before any link changes.",
       "source_ids": [
         "S61"
       ]
@@ -685,6 +685,32 @@
         "S61",
         "S62"
       ]
+    },
+    {
+      "id": "F-49",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "The ledger records the CHEF iQ warranty as a verified two-year term; the same listing also says '3 Year'",
+      "detail": "ledger/products.json P-05 has a Warranty row with value 'Two-year assurance provided by CHEF iQ', status verified (S62). Re-read on 2026-11-19, listing B0DZFD6R9Z states the term two ways: About this item says 'a two-year assurance provided by CHEF iQ', and the Item details table says 'Warranty Description | 3 Year'. T64 recorded the same disagreement as Q-22 and prints both on its thermometer desk. The T66 pages now print both as a conflict through an overlay override; the ledger row is unchanged because the ledger belongs to another session.",
+      "impact": "Any page that reads the ledger row directly shows a single warranty term as verified when the official listing disagrees with itself.",
+      "action_required": "The ledger's owner: mark the P-05 Warranty row as a conflict carrying both statements, as the Battery life row already is. Owner or editor: check the CHEF iQ user guide or warranty page (Q-22).",
+      "source_ids": [
+        "S62"
+      ]
+    },
+    {
+      "id": "F-50",
+      "severity": "medium",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "Two thermometer sections were published on the same day, with three overlapping guides",
+      "detail": "T64 (PR #167) published marketing/thermometers/ (a category page, two product pages, four guides). T66 published guides/thermometers.html and three guides. Neither session could see the other's branch. Three questions are covered twice: turkey placement, instant-read or leave-in, and thermometers in an air fryer. Every Fahrenheit figure agrees between the pairs and both cite the same FoodSafety.gov and USDA FSIS pages, so nothing printed is wrong. The reader menu's 'Meat thermometers' link points at the T66 page. Each T66 guide now links its T64 counterpart, and the T66 category page links T64's desk.",
+      "impact": "Readers and search engines see two pages answering the same question, which compete with each other and can drift apart when one is edited.",
+      "action_required": "Owner: choose one home for the thermometer guides (decision desk SG-T66-13). The session that implements the choice updates the reader menu, the sitemap and both gates.",
+      "source_ids": []
     }
   ]
 }

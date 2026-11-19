@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **48 flags (F-01 … F-48)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **50 flags (F-01 … F-50)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -797,7 +797,7 @@ rendering in fallback system fonts since the redesign. No gate could see it, bec
 namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
 class of bug — a resource a build cannot fail on — is on the record for the next time.
 
-**Numbers for the reviewer, all derived from the registers:** 48 flags, 45 sources, 108 logged checks, 20 open
+**Numbers for the reviewer, all derived from the registers:** 50 flags, 45 sources, 108 logged checks, 20 open
 questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
 or performance figure: the site still has no authorised source for one, and an absent number beats an invented
 one.
@@ -977,10 +977,10 @@ decision surfaces are unchanged and current — the ten suggestions with options
 [the decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html), the
 **18 open questions** with the method that would close each one on
 [the questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html), and the
-[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **48 flags**,
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **50 flags**,
 each with its source links. Nothing is implemented on this site until it is chosen there.
 
-**Numbers for the reviewer, all derived from the registers:** 48 flags (22 open · 26 resolved), 45 sources,
+**Numbers for the reviewer, all derived from the registers:** 50 flags (24 open · 26 resolved), 45 sources,
 108 logged checks, 20 open questions, and every repository gate green on the merged tree.
 ---
 
@@ -1151,8 +1151,8 @@ catalog lookup). Suggestions `SG-13` (build a matching thermometer content set o
 three air fryers; the two thermometers are published in the product catalog with their sourced specs, and the
 editorial expansion waits on `Q-19`.
 
-**Register state after this addendum:** 5 product entries, 45 sources, 108 verification rows, 48 flags
-(22 open · 26 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
+**Register state after this addendum:** 5 product entries, 45 sources, 108 verification rows, 50 flags
+(24 open · 26 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
 
 ---
 
@@ -1490,6 +1490,55 @@ bot-filtering choices before collecting events.
 4. Verify Search Console ownership and use actual query/page data before treating any topic as measured
 interest. Until then the guide subjects remain editorial hypotheses.
 
+
+---
+
+## Addendum — T64, the thermometer desk (session `arena/32788da6-zone2`, 2026-11-19)
+
+**What changed for a reader.** Two of the five promoted products, the ThermoMaven instant-read (P-04) and the
+CHEF iQ Sense wireless probe (P-05), now have reader pages. Before this, not one page on the site asked or
+answered a question about a meat thermometer (RQ-04). The new section is `marketing/thermometers/`, reachable
+from the "Thermometers" nav entry, the guides index, `feed.xml` and both sitemaps. It has seven pages:
+- a desk page comparing the two thermometers, with tagged Special Links;
+- one row-by-row page per thermometer;
+- four question-shaped guides:
+  - *Instant-read or leave-in: which meat thermometer do you actually need?*
+  - *Do you need a meat thermometer for an air fryer?* (links across to the air-fryer desk)
+  - *Where does the thermometer go in a turkey? Three spots, one number* (in season: US Thanksgiving is 2026-11-26)
+  - *Is your meat thermometer accurate? USDA's ice-water check*
+
+The titles are editorial hypotheses about how readers phrase the question, not search-volume claims.
+
+**How it is sourced.** Five official pages, all read live on 2026-11-19, and nothing else:
+- the two Amazon listings the supplied short links resolved to that day;
+- three USDA Food Safety and Inspection Service pages: food thermometers, the safe-temperature chart, and air
+  fryers.
+
+Every specification row links to its listing. Every food-safety sentence links to USDA. Every opinion sits in a
+labelled "Our take" box. Values the 2026-11-17 read recorded but that can no longer be re-read as text are left
+blank with that reason, not reprinted: CHEF iQ accuracy, and its 70-hour battery figure. No price, rating, review
+count or sales rank is printed.
+
+**How it is enforced.** `tools/build_thermometers.py` refuses to publish:
+- an unsourced value, or a blank without a reason;
+- a sentence without a source;
+- a price or a rating;
+- a banned phrase or a first-hand claim;
+- an off-list host, or an untagged product link.
+
+All ten injected defects were refused. `tools/build_marketing.py` renders the desk inside its own build, so the
+feed, sitemap, orphan and canonical gates cover it. The full CI replay passes all 49 workflow steps, before and
+after rebasing onto T65.
+
+**Open for the owner.** Q-21 and Q-22 in the question register, and SG-15 on the decision board:
+- whether the brief meant the ThermoMaven HT07 or the newer model Amazon now points to (B0GL7Z4KP4);
+- which of the CHEF iQ listing's two warranty statements applies (two-year vs "3 Year");
+- whether the 3-probe size is the intended one.
+
+Product intent for both links remains unconfirmed (F-03). The pages say so next to every product link.
+
+Full record: `docs/verification-32788da6.md`.
+
 ## Addendum — 2026-11-19 (session `arena/6ce606cb-zone2`, T66): shop-first front page, thermometer guides, decision desk
 
 *Renumbered from T63 at integration: `cf98ff65` merged T63 first (PR #166/#168). This addendum builds on it and
@@ -1507,7 +1556,7 @@ air fryer?* Every temperature is cited to FoodSafety.gov or USDA FSIS in the sam
 the build otherwise. Thermometer figures are read from the ledger rows that were transcribed from the Amazon
 listings, never re-typed.
 
-**Decide before implementing.** The new decision desk (`desk/`) groups 24 suggestions under four goals: make it
+**Decide before implementing.** The new decision desk (`desk/`) groups 25 suggestions under four goals: make it
 read like a shop, make it findable, make the machinery trustworthy, make it read like a publication. Each
 suggestion shows its options, evidence, unknowns and how to find out. Nothing is marked decided. Where the brief
 already points to an option (front page, tag, sitemap and cadence, measurement, disclosure, sponsored links) the
@@ -1517,8 +1566,8 @@ open questions by how many suggestions each one blocks.
 **Corrections and new flags.** The 0-job workflow "failures" after PR #158 were parse failures, not
 cancellations (F-44, closed). New open flags: the ThermoMaven listing now advertises a newer model (F-45); the
 two product registers disagree on the 8-quart Chefman's power status (F-46); the RSS feed's dates are not
-RFC 822 and the feed omits the root guides (F-47); a readiness row still describes three air fryers (F-48).
-The register now holds 48 flags (22 open · 26 resolved).
+RFC 822 and the feed omits the root guides (F-47); a readiness row still describes three air fryers (F-48); the ledger shows the CHEF iQ warranty as a verified two-year term although the listing also says three years (F-49); and T64 and T66 both published thermometer guides the same day, three of them on the same questions (F-50, decision desk SG-T66-13). The figures agree and each guide links its counterpart.
+The register now holds 50 flags (24 open · 26 resolved).
 
 **Verification.** Every gate in the workflow replays green on the merged tree (51 of 51 steps), the structural
 audit passes on 186 pages, and the sitemap lists 184 URLs.

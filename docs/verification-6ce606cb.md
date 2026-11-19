@@ -1,7 +1,7 @@
 # Verification record — T66 (session `arena/6ce606cb-zone2`, 2026-11-19 UTC)
 
 **Renumbered from T63 at integration.** `cf98ff65` claimed and merged T63 (PR #166, #168) while this branch
-was in flight; `da47d78d` merged T65 (PR #165); T64 is held by open PRs #163 and #167. This branch merged
+was in flight; `da47d78d` merged T65 (PR #165); `32788da6` merged T64 (PR #167, thermometer desk) and `f669bf2c` holds T64 in open PR #163. This branch merged
 `main` twice and kept all of their work (see "Conflicts and how they were resolved").
 
 ## What this session shipped
@@ -11,10 +11,10 @@ was in flight; `da47d78d` merged T65 (PR #165); T64 is held by open PRs #163 and
 | Front page | Leads with all five supplied listings: three air fryers (rows from `marketing/data/facts.json`) and two meat thermometers (rows read from `ledger/products.json` `resolved.specs`, sources S61/S62). A "Quick pick" list, a seasonal strip, two product shelves, derived counts. The duplicated "5 / 5" receipt and the missing space in "document." are gone; the board teaser count is derived. | `tools/build_front.py` → `index.html` |
 | Navigation | cf98ff65's reader menu and single "Project & tools" group kept; two category links (Air fryers, Meat thermometers) added to the reader menu, and the decision desk added to the tools group. Every dashboard stays in the footer. | `masthead()`, `tools/verify_front.py` G9 |
 | Thermometer guides | `guides/thermometers.html` (category, both listings row by row, safe-temperature chart) and three question-shaped guides: *Is the turkey done?*, *Instant-read or leave-in?*, *Can you use a meat thermometer in an air fryer?* Every Fahrenheit figure in an article block carries a citation in the same block (enforced by gate D5). | `guides/thermometers*.html` |
-| Decision desk | 24 suggestions (12 from the T50 board + 12 new) under four goals (shop / findable / machinery / publication), each with options, evidence, unknowns and how to find out; nothing is marked decided. A ranked "answer these first" page for 19 questions. | `tools/build_desk.py`, `tools/validate_desk.py`, `desk/` |
+| Decision desk | 25 suggestions (12 from the T50 board + 13 new) under four goals (shop / findable / machinery / publication), each with options, evidence, unknowns and how to find out; nothing is marked decided. A ranked "answer these first" page for 19 questions. | `tools/build_desk.py`, `tools/validate_desk.py`, `desk/` |
 | Overlay data | Editorial voice, food-safety rows, guide metadata, goal map, brief signals, one evidenced question update (Q-T50-02 answered: the tag was supplied), new suggestions and questions. Read-only input. | `docs/front-6ce606cb.json` |
 | CI | Removed the conflict markers that had made `pages.yml` unloadable since PR #158; added `preflight()` to `tools/ci_replay.py`; two additive workflow steps (desk `--check` and gate) and `check("desk")`/`check("guides")` in the link heredoc. | `.github/workflows/pages.yml`, `tools/ci_replay.py` |
-| Flags | F-44 … F-48 appended (register now 48 flags). | `ledger/flags.json` |
+| Flags | F-44 … F-50 appended (register now 50 flags). | `ledger/flags.json` |
 
 ## Sources read on 2026-11-19 and what each supports
 
@@ -36,13 +36,15 @@ was in flight; `da47d78d` merged T65 (PR #165); T64 is held by open PRs #163 and
 Prices and star ratings were visible on the product pages and are **not** published anywhere (rows say
 "withheld" with the reason). No commission, traffic or conversion figure was added.
 
-## Irregularities found (flags F-44 … F-48)
+## Irregularities found (flags F-44 … F-50)
 
 * **F-44 (closed)** — the 0-job "failure" runs after PR #158 were workflow **parse failures**, not cancellations as CR-6 said. Fixed independently by T65, cf98ff65's T63 and this session.
 * **F-45 (open)** — ThermoMaven listing shows a "newer model" notice (B0GL7Z4KP4); the site keeps linking the supplied destination until the owner says otherwise.
 * **F-46 (open)** — `facts.json` shows the 8-quart Chefman's power as verified 1700 W; `ledger/products.json` records the same attribute as a CONFLICT (an Amazon bullet says 1000 W).
 * **F-47 (open)** — `marketing/feed.xml` uses ISO-8601 `pubDate`; RSS 2.0 requires RFC 822. The feed also lists only marketing topic pages, so the root guides are in no feed. `tools/build_marketing.py` is outside this session's scope.
 * **F-48 (open)** — release-readiness RR-08 still describes the site as three air-fryer appliances.
+* **F-49 (open)** — the ledger records the CHEF iQ warranty as a verified two-year term. Re-read on 2026-11-19, the listing's About this item says "two-year assurance provided by CHEF iQ" and its Item details say "Warranty Description | 3 Year" (T64's Q-22 found the same). The T66 pages now print both as a conflict through an overlay `row_overrides` entry. The ledger row is unchanged (another session's file).
+* **F-50 (open)** — T64 (PR #167, `marketing/thermometers/`) and T66 (`guides/thermometers*.html`) published thermometer guides on the same day. Three questions overlap. Every Fahrenheit figure agrees (145/160/165 °F food-safety values and the listings' 572/1000 °F probe limits), and each pair cites the same government pages. Each T66 guide now links its T64 counterpart, and the T66 category page links T64's desk. The consolidation choice is decision-desk item SG-T66-13 (recommendation B: keep T64's section).
 * Not flagged, noted for the record: cf98ff65's completion record disputes T65's statement that the tag is "verified and active". This session agrees the account status is unconfirmed; nothing here says otherwise.
 
 ## Gates run on the final merged tree
@@ -50,7 +52,7 @@ Prices and star ratings were visible on the product pages and are **not** publis
 * `python3 tools/ci_replay.py` → preflight OK, **CI REPLAY PASSED — 51 steps**.
 * `python3 tools/audit_site.py` → 186 pages, 7/7 checks PASS.
 * `python3 tools/verify_front.py` → 13 pages, G1–G10 pass.
-* `python3 tools/validate_desk.py` → 24 suggestions in 4 goals, 19 questions, 3 guides; D1–D5 pass.
+* `python3 tools/validate_desk.py` → 25 suggestions in 4 goals, 19 questions, 3 guides; D1–D5 pass.
   Negative-tested: an uncited temperature, a desk count edited by hand, and a row rendered as "Decided" each fail the gate.
 * `sitemap.xml` rebuilt from the tree: 184 URLs.
 
@@ -65,7 +67,7 @@ Prices and star ratings were visible on the product pages and are **not** publis
 
 * `brief/data/summary.json` — five typed measurements updated to the values its own gate measures (pages carrying the tag, disclosure, price; prose page count; published-surface count). No other field touched.
 * `release/index.html`, `brief/*.html`, `board/**`, `assets/js/data.js`, `pages/**`, `console/**`, `summary.html` — regenerated by their own generators because counts derived from the tree and the flag register changed. No generator logic changed.
-* `README.md`, `EXECUTIVE_SUMMARY.md` — flag counts updated 43 → 48 (open/resolved 22 · 26) where `tools/audit_site.py` compares prose to the register.
+* `README.md`, `EXECUTIVE_SUMMARY.md` — flag counts updated 43 → 50 (open/resolved 22 · 26) where `tools/audit_site.py` compares prose to the register.
 
 ## Still needs the owner (see the decision desk)
 
