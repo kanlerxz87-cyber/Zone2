@@ -87,3 +87,22 @@ policy requires (verify_front G2). Advice I could not source (kettle circuits, "
 
 Known carry-over: the four "of N pages" values in `brief/data/summary.json` are still typed figures (CR-3).
 They were re-measured to 174 and remain open as CR-3 until someone converts them into build-time tokens.
+
+## 7. Reconciling PR #166 (session cf98ff65), which merged while this PR was open
+
+Session cf98ff65 also claimed "T63", at 05:59 UTC, 21 minutes after this session's claim. It merged PR #166,
+which edited `tools/build_front.py`, `tools/verify_front.py`, `assets/css/publish.css`, and the generated pages.
+I rebased onto it and checked line by line that **every line #166 appended to COORDINATION.md and
+EXECUTIVE_SUMMARY.md is present** (0 missing, apart from the six typed register counts this PR corrects).
+I ported each of its features into the combined generator:
+
+| #166 feature | Outcome in the merged tree |
+|---|---|
+| "Project & tools" `<details>` group holding every dashboard | Kept as is. This session's "Behind the site" hub is now its first entry |
+| Six-link reader nav (adds Journal, All articles) | Kept, plus the Thermometers route, which makes seven. G9 was updated to match, so both thermometer products stay one click from every page (F-48) |
+| Disclosure strip states that the tag's account status is unconfirmed | Kept, merged with this session's "(paid link)" wording. It is accurate while Q-T50-02 is open |
+| "Editorial hypotheses, not measured search queries or volume claims" | Kept on the index. The heading "Questions buyers *actually* ask" became "Questions to ask before you buy", because "actually" implied measured data |
+| Derived "N proposals sit on the board" on the index | Kept. The check passes unchanged |
+| Suggestions headline "None is applied yet" (G9) | **Changed.** It became untrue once the brief's owner directions were recorded. The check now requires both derived counts: total proposals and owner-decided |
+| New five-link `summary.html` generator and G10 | Kept unchanged, except two sentences that asked whether to "add a thermometer category". That category now exists, so they now ask the owner to confirm the thermometer identities (F-44) |
+| pages.yml comment rewrites | Kept. This PR changes only the concurrency block |

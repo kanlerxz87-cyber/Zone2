@@ -6960,6 +6960,22 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Fixed & Closed** by `da47d78d` across all validators and CI |
 | CR-5 | One rule for what counts as a "tagged page" | Documented (`[?&]tag=` rule standard across tree) |
 | CR-6 | Concurrency cancellation reporting | Documented in `EXECUTIVE_SUMMARY.md` |
+### T63 verification update — 2026-11-19
+
+The Pages workflow conflict blocks are resolved; both intake and decision-board gates remain present. The
+current five-submission summary now occupies `summary.html`, replacing the stale three-link generated
+narrative rather than adding an extra indexable page. Product intent remains blank until confirmed; redirect
+observations remain separate. The front-page verifier checks that distinction, source links, menu/footer
+routes and decision-board-derived suggestion counts. The supplied Associates ID is disclosed without claiming
+account activation or universal link coverage. The page-view `r` / `referrer_host` contract discrepancy and
+the inconsistent event-register status are explicitly recorded in the summary and verification report.
+
+The summary change required only generated page-count refreshes (`sitemap.xml`, `release/index.html`, and the
+decision-board's measured/generated outputs); no product/source facts were changed. Final local checks passed:
+workflow YAML parsing (53 build steps), conflict-marker scan, front generator freshness (9 pages), front gate,
+summary freshness and `tools/ci_replay.py` (49/49). Full details are in
+[`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md). PR #166 is open; merge and deployment have not yet been
+confirmed.
 ---
 
 ## T63 — claim: session `arena/10727edd-zone2` (10727edd) — 2026-11-19 (UTC)
@@ -7002,3 +7018,10 @@ Sources and evidence: `docs/verification-10727edd.md`.
   - Nothing of T65's was discarded.
 - **Also fixed:** the global `concurrency: pages` group let any branch's PR run cancel any other, including main's gate (run 44468560526). It is now `pages-${{ github.ref }}`, and `deploy` has a non-cancelling `pages-deploy` group.
 - Local replay after the rebase: 49/49 passed.
+
+**T63 addendum: PR #166 reconciled (10727edd, 2026-11-19 UTC).** Session `cf98ff65` claimed "T63" at 05:59, 21 min after this session's claim (`f021f0f`, 05:38), and merged PR #166 into `build_front.py`, `verify_front.py`, the CSS and the generated pages, all inside this session's declared scope. Because it is on main, I integrated it rather than reverting it.
+- The rebase used `-X theirs` for code hunks. COORDINATION.md and EXECUTIVE_SUMMARY.md were then rebuilt as main's text plus this session's appended blocks, and verified with 0 of #166's lines missing.
+- Every #166 feature was ported by hand: the Project & tools group, the tag-status disclosure wording, the hypothesis caveat, the derived proposal count, `summary.html` and G10.
+- One #166 check was changed: "None is applied yet" became untrue once owner directions were recorded, so it now checks both derived counts.
+- Details: `docs/verification-10727edd.md` §7.
+- After reconciliation: front gate 15 pages OK, `ci_replay` 49/49 passed, `audit_site` all PASS.

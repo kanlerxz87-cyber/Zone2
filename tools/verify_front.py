@@ -154,16 +154,19 @@ def checks() -> list[str]:
             nav = nav_match.group(1)
             reader_part = nav.split('<details class="pb-nav-tools"', 1)[0]
             got = [href for href, _ in re.findall(r'<a href="([^"]+)"[^>]*>(.*?)</a>', reader_part, re.S)]
+            # Merged menu (T63, 10727edd, reconciling PR #166): cf98ff65's six reader links plus the
+            # Thermometers route, so the two thermometer products stay one click from every page (F-48).
             expected = [depth + x for x in (
-                "index.html", "marketing/buying-guide.html", "guides/index.html",
-                "marketing/comparison.html", "journal/index.html", "marketing/index.html")]
+                "index.html", "marketing/buying-guide.html", "guides/meat-thermometers.html",
+                "guides/index.html", "marketing/comparison.html", "journal/index.html",
+                "marketing/index.html")]
             if got != expected:
-                fail(errors, f"G9 {rel}: reader navigation is not the expected six-link publication menu")
+                fail(errors, f"G9 {rel}: reader navigation is not the expected seven-link publication menu")
             if nav.count('<details class="pb-nav-tools"') != 1 or "Project &amp; tools" not in nav:
                 fail(errors, f"G9 {rel}: owner tools are not in one Project & tools disclosure group")
             tool_menu = nav.split('<div class="pb-nav-menu">', 1)[-1].split('</div>', 1)[0]
             tools = (
-                "suggestions.html", "questions.html", "brief/index.html", "intake/index.html",
+                "behind-the-site.html", "suggestions.html", "questions.html", "brief/index.html", "intake/index.html",
                 "board/index.html", "products.html", "analysis.html", "content.html",
                 "compliance.html", "tracking.html", "verification.html", "sources.html",
                 "flagged.html", "summary.html")
@@ -186,8 +189,17 @@ def checks() -> list[str]:
                 fail(errors, "G9 index.html: buyer-question topics must be labelled as editorial hypotheses")
             if f">{proposal_count} proposals sit on the board" not in h:
                 fail(errors, "G9 index.html: suggestion count does not match the decision register")
-        if rel == "suggestions.html" and f">{proposal_count} proposals. <em>None is applied yet.</em>" not in h:
-            fail(errors, "G9 suggestions.html: headline count does not match the decision register")
+        # T63 (10727edd): "None is applied yet" stopped being true when the 2026-11-19 brief recorded
+        # owner directions on four suggestions (G5 checks each one is quoted verbatim). The headline
+        # must now state both derived counts: total proposals, and how many carry an owner direction.
+        if rel == "suggestions.html":
+            sys.path.insert(0, str(ROOT / "tools"))
+            from build_front import num_word  # the same word-renderer the page uses
+            decided = sum(1 for s in board["suggestions"] if s.get("owner_direction"))
+            want = (f">{num_word(proposal_count, cap=True)} things we could do next. "
+                    f"<em>{num_word(decided, cap=True)} decided by the owner")
+            if want not in h:
+                fail(errors, "G9 suggestions.html: headline counts do not match the decision register")
 
         # ---- G10: the five-link summary stays in sync with intent records -----
         if rel == "summary.html":

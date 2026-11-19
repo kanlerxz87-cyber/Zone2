@@ -224,26 +224,48 @@ def spec_rows(product: dict, attrs: list[str]) -> list[dict]:
 
 
 def masthead(active: str) -> str:
-    # T63 (session 10727edd, 2026-11-19): the brief asked for the products to lead and for every
-    # dashboard surface to sit behind "a single navigation group". The masthead therefore carries
-    # five reader sections and ONE entry, "Behind the site", that opens a hub listing every
-    # operator, decision and evidence surface. The three entries earlier sessions added here so
-    # tools/audit_site.py would not report brief/, intake/ and board/ as orphans are kept
-    # reachable from index.html through the footer and the hub instead — nothing was unlinked.
+    # Merged masthead (T63, session 10727edd, after PR #166 from session cf98ff65 landed on main
+    # with its own masthead). Both sessions' intents are kept:
+    #   - reader sections first: 10727edd's five (incl. the Thermometers route, F-48) plus
+    #     cf98ff65's Journal and All articles;
+    #   - every owner/operator surface in ONE native, keyboard-accessible <details> group
+    #     (cf98ff65's "Project & tools"), with 10727edd's "Behind the site" hub as its first entry;
+    #   - aria-current on the active link (cf98ff65).
     nav = [
         ("index.html", "Front page"),
         ("marketing/buying-guide.html", "Air fryers"),
         ("guides/meat-thermometers.html", "Thermometers"),
         ("guides/index.html", "Guides"),
         ("marketing/comparison.html", "Compare"),
+        ("journal/index.html", "Journal"),
+        ("marketing/index.html", "All articles"),
+    ]
+    tools = [
+        ("behind-the-site.html", "Behind the site (all surfaces)"),
+        ("suggestions.html", "Suggestions"),
+        ("questions.html", "Open questions"),
+        ("brief/index.html", "Design brief"),
+        ("intake/index.html", "Submitted links"),
+        ("board/index.html", "Decision board"),
+        ("products.html", "Products dashboard"),
+        ("analysis.html", "Analysis"),
+        ("content.html", "Content engine"),
+        ("compliance.html", "Compliance"),
+        ("tracking.html", "Tracking"),
+        ("verification.html", "Verification log"),
+        ("sources.html", "Source register"),
+        ("flagged.html", "Flagged for review"),
+        ("summary.html", "Executive summary"),
     ]
     depth = "../" if active.startswith("guides/") else ""
-    items = []
-    for href, label in nav:
-        rel = depth + href
-        cls = ' class="is-on"' if href == active else ""
-        items.append(f'<a href="{e(rel)}"{cls}>{e(label)}</a>')
-    behind_cls = " is-on" if active == "behind-the-site.html" else ""
+
+    def link(href: str, label: str) -> str:
+        current = ' class="is-on" aria-current="page"' if href == active else ""
+        return f'<a href="{e(depth + href)}"{current}>{e(label)}</a>'
+
+    items = "".join(link(h, l) for h, l in nav)
+    tool_items = "".join(link(h, l) for h, l in tools)
+    tools_current = ' aria-current="page"' if active in {h for h, _ in tools} else ""
     return f"""<header class="pb-mast">
   <div class="pb-wrap">
     <div class="pb-mast-top">
@@ -253,10 +275,10 @@ def masthead(active: str) -> str:
       </div>
       <div class="pb-mast-meta">Updated {e(UPDATED_ON)}</div>
     </div>
-    <nav class="pb-nav" aria-label="Sections">{''.join(items)}<a class="pb-nav-behind{behind_cls}" href="{e(depth)}behind-the-site.html">Behind the site</a></nav>
+    <nav class="pb-nav" aria-label="Primary navigation">{items}<details class="pb-nav-tools"><summary{tools_current}>Project &amp; tools</summary><div class="pb-nav-menu">{tool_items}</div></details></nav>
   </div>
 </header>
-<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} If you buy through a product link marked &ldquo;(paid link)&rdquo;, we may earn a commission at no extra cost to you. Links to manufacturer pages, government sources and evidence are never affiliate links.</div></div>"""
+<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} If you buy through a product link marked &ldquo;(paid link)&rdquo;, we may earn a commission at no extra cost to you. The Associates tag supplied for this project is <code>{e(ASSOCIATES_TAG)}</code>; its account status has not yet been confirmed in Associates Central. Links to manufacturer pages, government sources and evidence are never affiliate links.</div></div>"""
 
 
 def footer(depth: str = "") -> str:
@@ -280,8 +302,6 @@ def footer(depth: str = "") -> str:
         <li><a href="{e(depth)}brief/index.html">Design brief</a></li>
         <li><a href="{e(depth)}intake/index.html">Submitted-link register</a></li>
         <li><a href="{e(depth)}board/index.html">Decision board</a></li>
-        <li><a href="{e(depth)}brief/index.html">Design brief</a></li>
-        <li><a href="{e(depth)}intake/index.html">Submitted links</a></li>
         <li><a href="{e(depth)}flagged.html">Flagged for review</a></li>
       </ul></div>
       <div><h4>Evidence</h4><ul>
@@ -718,9 +738,10 @@ def build_index(facts: dict, board: dict) -> str:
 
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head">
-    <div><h2 class="pb-h2">Questions buyers actually ask</h2>
+    <div><h2 class="pb-h2">Questions to ask before you buy</h2>
     <p class="pb-sub">Each guide starts from a question, not a product, and ends at the row in a
-    spec table that settles it. {num_word(n_guides, cap=True)} published so far.</p></div>
+    spec table that settles it. {num_word(n_guides, cap=True)} published so far. The questions are
+    editorial hypotheses, not measured search queries or volume claims.</p></div>
     <a class="pb-sec-link" href="guides/index.html">Every guide, by category &rarr;</a>
   </div>
   <div class="pb-stories">{stories}</div>
@@ -739,6 +760,8 @@ def build_index(facts: dict, board: dict) -> str:
   <p class="pb-trust-foot">Anything we could not confirm is published, with its source, on the
   <a href="flagged.html">Flagged for Review register</a>: <span id="flagCount">&mdash;</span> items right
   now, counted live from the register.<span class="pb-sr"> Register total: <span id="flagCountHeading">&mdash;</span>.</span></p>
+  <p class="pb-trust-foot">What we might change next is on the <a href="suggestions.html">decision board</a>:
+  <b>{len(board['suggestions'])} proposals sit on the board</b>, {sum(1 for s in board['suggestions'] if s.get('owner_direction'))} with a recorded owner direction.</p>
 </div></section>
 """
     return page("index.html", title="Air fryers and meat thermometers, compared on the specs that decide it · Counter Notes",
@@ -1099,7 +1122,7 @@ def build_current_summary(facts: dict, board: dict) -> str:
     <li>Which Associates account and marketplace owns the supplied tag, and does one test link per confirmed product reach the intended destination and appear in the authorized report?</li>
     <li>Where will the first-party event endpoint run, what is the retention/bot-filter rule, and which of the two conflicting five-event definitions is canonical?</li>
     <li>Who is the named editor, what publishing cadence is sustainable, and will visuals be original, properly licensed or permitted Program Content?</li>
-    <li>Is this publication strictly about air fryers, or should the two observed thermometer destinations become a separate category only after their intended identity is confirmed?</li>
+    <li>A thermometer category is now published from the two observed thermometer destinations, because the brief asked for all five links to be promoted. Are those the intended products? In particular, should the ThermoMaven link point at the newer model its listing now advertises (F-44)?</li>
   </ol>
 </div></section>
 
@@ -1108,7 +1131,7 @@ def build_current_summary(facts: dict, board: dict) -> str:
   <p class="pb-sub">Recommendations are review items, not approvals. Nothing is auto-applied from this list.</p></div>
   <a class="pb-sec-link" href="suggestions.html">Review options and trade-offs &rarr;</a></div>
   <ol class="pb-prose">
-    <li><b>Resolve intent first.</b> Confirm all five product mappings and decide whether the publication remains air-fryer-only or adds a thermometer category.</li>
+    <li><b>Resolve intent first.</b> Confirm all five product mappings, including the two thermometers now published as their own category.</li>
     <li><b>Validate one tagged Special Link per confirmed product.</b> Check destination and Associates reporting inside the enrolled account before scaling.</li>
     <li><b>Connect measurement honestly.</b> Reconcile the event definitions, choose a first-party endpoint and retention policy, verify Search Console ownership, then report only data actually received.</li>
     <li><b>Publish a short editorial pilot.</b> Use buyer questions such as basket-versus-oven trade-offs, capacity, cleanup/counter space and multi-function appliance checklists as hypotheses. Add an accountable byline and original/authorized visuals; do not call topics “trending” without evidence or imply hands-on use that did not occur.</li>
