@@ -19,7 +19,7 @@ import publication as pub
 from package_site import is_product_url
 
 ROOT=Path(__file__).resolve().parents[1]
-OFFICIAL_HOSTS={'github.com','link.amazon','affiliate-program.amazon.com','www.amazon.com','amazon.com','chefman.com','www.chefman.com','www.emerileveryday.com','www.ftc.gov','ftc.gov','docs.github.com','developers.google.com','support.google.com','www.fsis.usda.gov'}
+OFFICIAL_HOSTS={'github.blog','github.com','link.amazon','affiliate-program.amazon.com','www.amazon.com','amazon.com','chefman.com','www.chefman.com','www.emerileveryday.com','www.ftc.gov','ftc.gov','docs.github.com','developers.google.com','support.google.com','www.fsis.usda.gov'}
 CURRENT=pub.indexable_paths()|set(pub.extra_pages())|{'suggestions.html','questions.html'}
 
 

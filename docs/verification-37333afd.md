@@ -220,3 +220,48 @@ Preview entry-point regression added: bare `/` and `/Zone2` redirect to `/Zone2/
 preview port cannot leave relative assets/API calls at the wrong root. Collector suite is now **25 tests**;
 the original 24-test results above remain dated records. A real browser root-redirect assertion is added
 before the existing viewport/behavior suite. This affects self-hosting/preview routing, not Pages settings.
+
+
+## Shipped — PR, merge and live Pages evidence (2026-11-19 UTC)
+
+**Implementation status: DONE for this release; external account/hosting/admin gates remain open.**
+
+- [PR #174](https://github.com/kanlerxz87-cyber/Zone2/pull/174) merged at **2026-11-19T06:50:29Z** as
+  **`4fcb61ae2570d3636adf95b151f731de9e66c949`**. No user-review wait; checks passed before merge.
+- Final PR build [44474717270](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44474717270)
+  passed on `dd5e53d`. Full final local replay passed **61/61**; collector suite **25 tests**,
+  client harness 12 reported cases, price suite 6 controls/mutations, publication suite 27 tests,
+  Chromium 252 viewport checks / zero automated WCAG A/AA findings on 24 current pages.
+- Main run [44475122952](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44475122952)
+  concluded **success** at **2026-11-19T06:52:23Z**. **Both** Build and verify and Deploy to GitHub Pages
+  succeeded. This is actual GitHub execution, not a local replay claim.
+- GitHub Pages deployment **7906272532** reports `success`, commit `4fcb61a`, environment URL
+  **https://kanlerxz87-cyber.github.io/Zone2/**. The Pages API reports `status: built` and
+  **`build_type: legacy`**. No administrator setting change is claimed; CN-08 remains open.
+- Fresh read-only live fetches, cache-keyed to the release, showed:
+  [front page](https://kanlerxz87-cyber.github.io/Zone2/?release=4fcb61a) with all five products, direct
+  supplied-tag paid links, original labelled artwork, guides and RSS;
+  [measurement](https://kanlerxz87-cyber.github.io/Zone2/measurement.html?release=4fcb61a) with production
+  OFF and an empty report ledger; [ThermoMaven notes](https://kanlerxz87-cyber.github.io/Zone2/guides/thermomaven-instant-read.html?release=4fcb61a)
+  distinguishing title claims from independent verification; and the
+  [findings hub](https://kanlerxz87-cyber.github.io/Zone2/pages/index.html?release=4fcb61a) with its dated
+  archive banner. Markdown extraction omits mastheads/footers: their exact attributes were verified on
+  the uploaded artifact and in Chromium, not inferred from the extracted prose.
+- A follow-up read-only deployment gate now checks **eight public HTML URLs** for repeated disclosure,
+  strip-before-main order, sponsored static product anchors, exact canonical/indexing state; it also
+  checks disabled measurement config, root RSS and sitemap. Five bounded attempts tolerate CDN
+  propagation; failure remains a failed deployment check. Exact script passed an offline packaged
+  control plus two injected failures. Its real network result must be taken from the follow-up run.
+- Successful GitHub execution emitted an inherited action-runtime advisory. Fresh
+  [official GitHub changelog](https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/)
+  confirms the Node24 transition; **CN-09** preserves the advisory. No insecure Node20 opt-out is set,
+  no untested dependency upgrade is claimed and this warning is not called a failed build.
+
+Primary shipped artifact: **228 HTML pages / 16 indexable reader URLs / 1,451 static product anchors /
+136 current factual rows**. The close-out candidate adds only the CN-09 advisory row (137 current rows)
+and the read-only live gate; product facts, intent, reports and strategic decisions are unchanged.
+
+Permanent writable hosting, enrolled Associates validation, intended-product confirmations, authorized
+query/order exports, Search Console ownership, accountable human/contact details and jurisdictional
+privacy review remain open. So do CN-08 (administrator-only sole-publisher setting) and CN-09 (runtime
+advisory review). No credentials, manual answer, self-click or self-purchase was requested or generated.

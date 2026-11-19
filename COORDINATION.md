@@ -7459,3 +7459,42 @@ Executed the retained workflow on the actual reconciled tree based on4fcb61a: **
 - Retained-tree local verification also genuinely executed here:61/61 executable steps, artifact228 HTML /16 indexable /1451 anchors /136 factual rows, browser252 viewport checks and24 current-page accessibility scans. Synthetic fixtures are not campaign data.
 - Still flagged, non-blocking: intent/enrolled attribution, production collector/TLS/privacy/retention operations, authorized Associates/Search Console reports, responsible human editorial/contact evidence, and **CN-08** administrator-only Pages source-mode setting. No denied admin write was retried and no unknown field filled.
 - Sources/irregularities/exact scope: `docs/source-observations-33e03d63.json` and `docs/verification-2026-11-19.md`. Supplied short links are not called invalid; the initial/repeat last-two discrepancy is preserved without inventing a cause. All other active sessions’ PRs remained untouched apart from coordination comments.
+
+
+
+### T63 (`arena/37333afd-zone2`) — close-out: shipped, main CI and live Pages confirmed
+
+**Status: DONE — implementation deployed; external evidence/admin gates explicitly open.**
+
+- **PR:** [#174](https://github.com/kanlerxz87-cyber/Zone2/pull/174), merged
+  **2026-11-19T06:50:29Z**, commit **4fcb61ae2570d3636adf95b151f731de9e66c949**.
+- **Checks:** final PR run **44474717270** passed; strict combined local replay **61/61**.
+  Collector **25 tests**, client 12 reported cases, six actual price guards with control/mutation,
+  publication **27 tests**, Chromium **252 viewport checks**; zero automated WCAG A/AA findings on
+  24 current pages, no runtime errors/missing local resources, all 228 archives/current pages rendered.
+- **Main:** [run 44475122952](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44475122952)
+  **success**, both Build and verify and Deploy to GitHub Pages. Completed **06:52:23Z**.
+- **Deployment:** **7906272532**, same merge SHA, status **success**, environment/live URL
+  **https://kanlerxz87-cyber.github.io/Zone2/**. Pages API `built`, **legacy still enabled** (CN-08).
+- **Live fetch:** release-keyed front page shows all five product notes and tagged paid links; measurement
+  says production OFF/no imported report; thermometer notes qualify claims; findings hub shows the
+  archive banner. Exact header/footer/meta/link contracts were checked on the uploaded artifact and in
+  Chromium. A follow-up deploy step makes read-only HTTP checks of eight critical public HTML pages plus
+  config/feed/sitemap, not just upload success; offline control and two negative cases passed.
+- **Current artifact scope:** 228 pages, 16 indexable reader URLs, 1,451 static product anchors. Main
+  release checked 136 current factual rows; close-out adds one advisory row (137). No product fact,
+  intended confirmation, campaign observation or strategic choice is invented by that addendum.
+- **Sources and full reproduction scope:** `docs/verification-37333afd.md`. Primary docs now lead with
+  the actual shipped result rather than the old three-link/untagged/browser-queue state.
+
+**Still open (not silently completed):** permanent collector host; enrolled link/report checks; intended
+ASIN/listing/date/source; Search Console ownership and real reports; human/contact/privacy jurisdiction;
+CN-08 administrator-only sole-publisher setting (direct API denied, no permission assumed); CN-09 inherited
+Actions runtime advisory (successful Node24-forced run, no insecure opt-out, official source linked).
+No other session's open PR was merged/closed by this work. Earlier source/flag/choice records remain.
+
+
+Close-out refresh: main advanced to 7841845 via independent T67 / PR #175. Its complete source-observation
+and coordination records are retained; canonical code was deliberately preserved by that session. Only
+this closing coordination append conflicted and both chronologies were kept. Independent last-two-link
+initial/repeat variation is not promoted into a product-intent or routing-cause conclusion.

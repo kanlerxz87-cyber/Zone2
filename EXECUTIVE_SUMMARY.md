@@ -1,8 +1,11 @@
 # Current executive summary · Counter Notes
 
-**19 November 2026 · release implementation** — Product-led publication, five supplied links, two kitchen
-clusters. PR/merge/deployment references are tracked in [verification](docs/verification-37333afd.md)
-and [COORDINATION.md](COORDINATION.md); no successful live deployment is inferred from a local build.
+**19 November 2026 · shipped and live-verified** — Product-led publication, five supplied links, two
+kitchen clusters. [PR #174](https://github.com/kanlerxz87-cyber/Zone2/pull/174) merged as `4fcb61a`;
+[main build + Pages deploy](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44475122952) succeeded.
+Live publication, measurement state, product notes and archive banner were fetched. Full evidence is in
+[verification](docs/verification-37333afd.md) and [COORDINATION.md](COORDINATION.md). Production analytics
+hosting, account/report evidence and the administrator-only Pages source switch remain open.
 
 ## Shipped in this branch
 
