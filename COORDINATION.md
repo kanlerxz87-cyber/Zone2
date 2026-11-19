@@ -7777,3 +7777,15 @@ The first full replay observed **62** steps and stopped at the design-brief fres
 remove the separate additive step and append `&& python3 tests/test_front_surfaces.py` to the existing
 Front-of-house gate's `run` command. This supersedes the prior T69 scope extension's separate-step
 wording; the workflow scope is only that one existing command-line edit. Do not modify `brief/**`.
+
+### T69 integration record — preserve parallel freshness fix and add derived rollup contract
+
+While this branch's derived-register work was being finalized, `main` advanced through PR #180
+(`arena/56aa1fac-zone2`), which independently fixed the suggestion/question page-update label and added
+G11. The rebase onto `e081f42` retained that completed work and both append-only session records; the two
+T69 entries are parallel, distinct scopes, not a replacement. This branch keeps the page-update label
+from `UPDATED_ON` and explicitly separates it from the current release's `publication.DATE`, the earlier
+board's `compiled_utc`, and (on suggestions) the latest owner-direction date. The local derived-summary
+gate checks those visible labels and counts against their respective data sources; G11 remains in the
+combined front gate. The regression invocation stays appended to the existing Front-of-house command,
+so the workflow-derived count remains 61 and no unrelated `brief/**` output is regenerated.
