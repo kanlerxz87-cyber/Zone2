@@ -283,3 +283,11 @@ separate from this publication's dated observation and from all intended-product
 page links `docs/source-observations-33e03d63.json`; no cause, stable routing or link-invalidity conclusion
 is inferred. The follow-up artifact now has **138** current factual rows; page, sitemap, static-anchor
 and viewport totals are unchanged from the primary release.
+
+The read-only live gate also requires `publication-build.json` to match the exact deployed source
+commit. The marker is generated from the checkout HEAD only in `_site` (not a fabricated checked-in
+version), has no reader data, and prevents a legacy/raw checkout or cached prior artifact from being
+mistaken for the tested release. In clean GitHub checkout/deployment this is release provenance, not
+account authentication. The marker is required by the artifact verifier; its new mutation brings the
+publication suite to **28 tests**. The exact updated live script again passed the offline packaged
+control and two injected failures. Requests refuse redirects and have per-request timeouts.

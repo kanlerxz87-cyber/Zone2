@@ -167,6 +167,11 @@ def verify(site):
         config=json.loads((site/'measurement.json').read_text())
         if config.get('enabled') is not False or config.get('endpoint') is not None or config.get('mode')!='github_pages_static':errors.append('Pages measurement must stay OFF')
     except (OSError,ValueError):errors.append('Missing/invalid Pages measurement config')
+    try:
+        build=json.loads((site/'publication-build.json').read_text())
+        if build.get('schema')!='counter-notes-build-v1' or not isinstance(build.get('commit'),str) or not re.fullmatch(r'[0-9a-f]{40}',build['commit']):
+            errors.append('Invalid source build metadata')
+    except (OSError,ValueError):errors.append('Missing source build metadata')
     for p in site.rglob('*'):
         rel=p.relative_to(site)
         if any(part in {'.git','.local','node_modules','tests','__pycache__'} for part in rel.parts) or '.sqlite' in p.name:errors.append('Private/tooling file leaked to artifact')

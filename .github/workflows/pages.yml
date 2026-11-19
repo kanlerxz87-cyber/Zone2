@@ -599,6 +599,8 @@ jobs:
             let error;
             for (let attempt = 0; attempt < 5; attempt++) {
               try {
+                const version = JSON.parse(await read('publication-build.json'));
+                if (version.schema !== 'counter-notes-build-v1' || version.commit !== context.sha) throw new Error('Public artifact is not the expected source commit');
                 for (const [path, indexable] of pages) {
                   const html = await read(path);
                   if (html.split(disclosure).length < 3) throw new Error(path + ': repeated disclosure absent');
@@ -617,7 +619,7 @@ jobs:
                 if (config.enabled !== false || config.endpoint !== null) throw new Error('Pages collection must remain OFF');
                 if (!(await read('sitemap.xml')).includes('<urlset')) throw new Error('Canonical sitemap absent');
                 if (!(await read('feed.xml')).includes('<rss')) throw new Error('Root RSS absent');
-                core.info('Live verification passed: 8 HTML pages, repeated disclosures, sponsorship, robots/canonicals, disabled collection, sitemap and RSS. Read-only requests only.');
+                core.info('Live verification passed: exact source commit, 8 HTML pages, repeated disclosures, sponsorship, robots/canonicals, disabled collection, sitemap and RSS. Read-only requests only.');
                 return;
               } catch (failure) {
                 error = failure;
