@@ -1,0 +1,839 @@
+{
+  "$schema": "counter-notes-decision-room-v1",
+  "note": "Decision Room register for session arena/698addcd-zone2 (T69), 2026-11-19. Every row here rests on a measurement this session actually took, or on an official document it read; the evidence column says which and links to it. Nothing here is a claim about demand, popularity, search volume or expected revenue, and no row changes a product fact, an intent confirmation or a campaign number. This file is an INPUT to tools/build_decision_room.py, which renders decision-room.html and decision-prompt.html. Rows the owner has not answered stay 'open' and are rendered as questions, not as decisions taken.",
+  "as_of": "2026-11-19",
+  "generated_by": "tools/build_decision_room.py",
+  "how_to_read": [
+    "Each row is one thing that could change, the evidence for changing it, what it costs, what it gives up, and the single answer that unblocks it.",
+    "A row marked 'open' is waiting on the owner. Nothing on this page applies itself, and nothing on it is implemented by being written here.",
+    "Rows are grouped by the question a reader would ask, not by the department that would do the work."
+  ],
+  "sources": {
+    "T69-CSS": {
+      "label": "Measured: computed style + overflow sweep in Chromium 1440px and 390px",
+      "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m1",
+      "host": "github.com",
+      "what": "programmatic read of white-space / text-transform / scrollWidth on every table cell"
+    },
+    "T69-ARTIFACT": {
+      "label": "Measured: the packaged _site artifact, robots + canonical + sitemap",
+      "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m2",
+      "host": "github.com",
+      "what": "count of index,follow vs noindex pages and the sitemap URL set"
+    },
+    "T69-FEEDS": {
+      "label": "Measured: item-level overlap of feed.xml and shop/feed.xml",
+      "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m3",
+      "host": "github.com",
+      "what": "same-question guides published twice at two URLs, both advertised in a feed"
+    },
+    "T69-NAV": {
+      "label": "Measured: outbound link count per page and the navigation contract",
+      "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m4",
+      "host": "github.com",
+      "what": "68 dashboard links per page in the menu and again in the footer"
+    },
+    "T69-TAP": {
+      "label": "Measured: pointer target boxes and spacing at 390px",
+      "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m5",
+      "host": "github.com",
+      "what": "paid-link button boxes 18px tall"
+    },
+    "W3C-258": {
+      "label": "W3C — Understanding SC 2.5.8 Target Size (Minimum), Level AA",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+      "host": "w3.org",
+      "what": "24 by 24 CSS pixels, or sufficient spacing between undersized targets"
+    },
+    "GOOG-CANON": {
+      "label": "Google Search Central — Consolidate duplicate URLs (canonical)",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "host": "developers.google.com",
+      "what": "how a search engine picks one URL when the same content is reachable at several"
+    },
+    "GOOG-HELPFUL": {
+      "label": "Google Search Central — Helpful, reliable, people-first content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "host": "developers.google.com",
+      "what": "the quality standard the editorial rows are measured against"
+    },
+    "GOOG-SPAM": {
+      "label": "Google Search Central — Spam policies: thin affiliation",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "host": "developers.google.com",
+      "what": "affiliate pages must offer meaningful original content, not just product links"
+    },
+    "GOOG-OUTBOUND": {
+      "label": "Google Search Central — Qualify your outbound links (rel=sponsored)",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "host": "developers.google.com",
+      "what": "paid links carry rel=sponsored"
+    },
+    "GOOG-SNIPPET": {
+      "label": "Google Search Central — Create unique titles and descriptions",
+      "url": "https://developers.google.com/search/docs/appearance/snippet",
+      "host": "developers.google.com",
+      "what": "every page needs its own title and meta description"
+    },
+    "GOOG-SITEMAP": {
+      "label": "Google Search Central — Build and submit a sitemap",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+      "host": "developers.google.com",
+      "what": "one sitemap per site listing the URLs you want indexed"
+    },
+    "GOOG-GSC": {
+      "label": "Google Search Console — Verify site ownership",
+      "url": "https://support.google.com/webmasters/answer/9008080",
+      "host": "support.google.com",
+      "what": "the only authorized source of query and page reports for this site"
+    },
+    "AMZ-AGREEMENT": {
+      "label": "Amazon Associates Program Operating Agreement",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "host": "affiliate-program.amazon.com",
+      "what": "the disclosure and Program Content terms"
+    },
+    "AMZ-POLICIES": {
+      "label": "Amazon Associates Program Policies",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "host": "affiliate-program.amazon.com",
+      "what": "price display, link format and participation requirements"
+    },
+    "FTC-101": {
+      "label": "FTC — Disclosures 101 for Social Media Influencers",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "host": "ftc.gov",
+      "what": "clear and conspicuous disclosure, placed where it is seen"
+    },
+    "FSIS-TEMP": {
+      "label": "USDA FSIS — Food thermometers: why colour is not a safety check",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
+      "host": "www.fsis.usda.gov",
+      "what": "the government page the thermometer cluster already cites"
+    }
+  },
+  "decisions": [
+    {
+      "id": "DR-01",
+      "cluster": "Findability",
+      "title": "Delete or redirect the duplicate shop front door at shop.html",
+      "question": "Two different shop home pages are live. Which one should exist?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "shop.html and shop/index.html are two separate designs with different h1 text (\"Find the format that fits your routine.\" vs \"Five pieces of kitchen gear, explained before you buy\") and ~3% text similarity.",
+          "src": "T69-ARTIFACT"
+        },
+        {
+          "claim": "shop/index.html is linked from 52 published pages; shop.html from 15 — including the front page hero and every product card button.",
+          "src": "T69-ARTIFACT"
+        },
+        {
+          "claim": "Only shop.html is in sitemap.xml and marked index,follow. shop/index.html — the one 52 pages link to — is noindex,follow and absent from the sitemap.",
+          "src": "T69-ARTIFACT"
+        },
+        {
+          "claim": "Google consolidates duplicates by canonical and sitemap signals; two near-duplicate commerce landing pages compete for the same intent.",
+          "src": "GOOG-CANON"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Keep shop/index.html, redirect shop.html to it",
+          "costs": "One rule in the packager; ~15 internal links to shop.html keep working through the redirect.",
+          "gives_up": "Nothing. shop.html's design is the weaker of the two."
+        },
+        {
+          "id": "B",
+          "label": "Keep shop.html, retire shop/index.html",
+          "costs": "52 pages of internal links must be rewritten; the shop section's own category pages lose their parent.",
+          "gives_up": "The shop section's richer per-product spec pages."
+        },
+        {
+          "id": "C",
+          "label": "Leave both, differentiate them deliberately",
+          "costs": "Two pages to maintain and two sets of metadata; still two front doors for one intent.",
+          "gives_up": "Clarity, and any claim that the site has one canonical shop."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "shop/index.html is the page 52 pages already point at, and the page whose children (categories, per-product pages, shop-local guides) form a coherent section. Making the sitemap advertise the page nobody links to is backwards.",
+      "unblocks_with": "One answer from the owner: which shop URL should be canonical. Then this is a packager rule plus a regenerated sitemap.",
+      "not_implemented_here_because": "It changes a published URL and the sitemap, which the brief reserves for an explicit decision rather than a silent cleanup.",
+      "owner_question": "DRQ-01",
+      "official_reference": "GOOG-CANON"
+    },
+    {
+      "id": "DR-02",
+      "cluster": "Findability",
+      "title": "Index the product and buying-guide pages that currently answer nothing to search",
+      "question": "The deepest verified content on this site is invisible to search engines. Should it be indexed?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "The deployed artifact has 16 index,follow pages and 212 noindex pages.",
+          "src": "T69-ARTIFACT"
+        },
+        {
+          "claim": "shop/chefman-6-qt-dual-basket-air-fryer.html is noindex and carries 802 words, 2 tables, 20 sourced rows and 16 official source links. The indexable guides/chefman-dual-basket.html carries 334 words and 9 source links.",
+          "src": "T69-ARTIFACT"
+        },
+        {
+          "claim": "Same pattern for the ThermoMaven: 640 noindex words with 20 rows vs 339 indexable words with 7 source links.",
+          "src": "T69-ARTIFACT"
+        },
+        {
+          "claim": "Affiliate pages are held to a thin-affiliation standard: they must offer meaningful original content beyond product links.",
+          "src": "GOOG-SPAM"
+        },
+        {
+          "claim": "A sitemap should list the URLs you want indexed.",
+          "src": "GOOG-SITEMAP"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Index the five product pages and the shop-local guides",
+          "costs": "Moves ~12 URLs from noindex to index; each must pass the existing disclosure, sponsorship and sourcing gates on its own.",
+          "gives_up": "The current, very clean 16-page indexing surface."
+        },
+        {
+          "id": "B",
+          "label": "Keep the 16-page surface; strengthen those pages instead",
+          "costs": "Editorial work to fold the 20-row tables into the guides that are indexable.",
+          "gives_up": "The section structure already built in shop/."
+        },
+        {
+          "id": "C",
+          "label": "Index product pages only, keep guides noindex",
+          "costs": "Splits the section's search surface by page type and needs a reason per type.",
+          "gives_up": "Simplicity."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "The noindex boundary was drawn to keep operator dashboards out of search, and it does that. But it also swept up the most substantive reader pages, which is the opposite of the intent. The sourcing gates already exist and run over shop/**.",
+      "unblocks_with": "Owner approval of an indexing surface of roughly 28 URLs, plus a decision on which shop pages are reader pages versus owner pages.",
+      "not_implemented_here_because": "It changes what the site asks search engines to index — an owner decision with a real downside if the product pages are judged thin.",
+      "owner_question": "DRQ-02",
+      "official_reference": "GOOG-SITEMAP"
+    },
+    {
+      "id": "DR-03",
+      "cluster": "Findability",
+      "title": "Pick one feed, and stop publishing the same five questions at ten URLs",
+      "question": "Three feeds are live, and all five questions in the root feed are repeated in the shop feed at different URLs. Which feed is the site's feed?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "Three self-describing feeds are published: feed.xml (5 guide items), shop/feed.xml (6) and marketing/feed.xml (16).",
+          "src": "T69-FEEDS"
+        },
+        {
+          "claim": "All five questions in feed.xml also appear in shop/feed.xml at a different URL. Two carry a byte-identical title (\"Basket or oven-style air fryer: what should you compare?\" and \"A no-hype checklist for comparing air fryer capacity\"); the other three are reworded versions of the same question, e.g. \"How should you assess cleanup and counter-space trade-offs?\" vs \"How to assess cleanup and counter-space trade-offs\".",
+          "src": "T69-FEEDS"
+        },
+        {
+          "claim": "So the site asks a subscriber to receive the same five answers twice, under ten different URLs, from two feeds.",
+          "src": "T69-FEEDS"
+        },
+        {
+          "claim": "Two URLs with the same content split the signals a search engine uses to decide which one to rank.",
+          "src": "GOOG-CANON"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "One feed (feed.xml), one URL per guide, 301 the other",
+          "costs": "Retire shop/feed.xml and the shop-local duplicate guide URLs; keep the shop guide pages only where they add rows the root guide lacks.",
+          "gives_up": "The shop section's self-contained feed."
+        },
+        {
+          "id": "B",
+          "label": "Three feeds, but no duplicated questions",
+          "costs": "Each feed keeps a distinct purpose, and every guide exists at exactly one URL.",
+          "gives_up": "Nothing, but it needs a rule the build can enforce."
+        },
+        {
+          "id": "C",
+          "label": "Leave it; the feeds are for different audiences",
+          "costs": "Nothing now.",
+          "gives_up": "The ability to say the site publishes each answer once."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "A reader who subscribes to the site's feed should not receive the same question twice under different URLs. One feed and one URL per guide is the version that survives contact with a search engine.",
+      "unblocks_with": "Which feed the site's <link rel=alternate> should point at. Everything else follows mechanically.",
+      "not_implemented_here_because": "Retiring a feed and its URLs is a publishing decision, and the duplicate pages are the shop section's own scope (T66), not this session's.",
+      "owner_question": "DRQ-03",
+      "official_reference": "GOOG-CANON"
+    },
+    {
+      "id": "DR-04",
+      "cluster": "Craft",
+      "title": "Give shop.html and shop/** the same masthead and disclosure strip as every other page",
+      "question": "Two chrome systems are live on one site. Should the shop pages look like the publication?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "shop/** renders a salmon-tinted disclosure band with the Associates tag printed inline, and a different masthead and footer, because shop_layout.py builds pb-* chrome while every root page builds cn-* chrome.",
+          "src": "T69-CSS"
+        },
+        {
+          "claim": "On shop/chefman-6-qt-dual-basket-air-fryer.html the band plus masthead occupies the top ~270px of a 1440px-wide first screen, and the product name does not begin until below it.",
+          "src": "T69-CSS",
+          "note": "measured: masthead+band bounding box"
+        },
+        {
+          "claim": "The disclosure must be clear and conspicuous and placed where it will be seen. Both variants satisfy that; the question here is consistency, not compliance.",
+          "src": "FTC-101"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "One cn-* masthead and disclosure strip for the whole site",
+          "costs": "shop_layout's pb-* chrome is retired or reduced to the dated archive pages that still need it; every shop page is rebuilt and re-gated.",
+          "gives_up": "The shop section's distinct look."
+        },
+        {
+          "id": "B",
+          "label": "Keep pb-* but reduce the band to a single compact line",
+          "costs": "One CSS change; the disclosure stays above the fold and repeats in the footer.",
+          "gives_up": "Nothing structurally, but two systems remain."
+        },
+        {
+          "id": "C",
+          "label": "Leave two systems in place",
+          "costs": "Every future page must be built twice, and the site will keep looking assembled from parts.",
+          "gives_up": "The claim that the site looks published rather than generated."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "The root publication chrome is the better of the two and is what the brief asked for when it said the site should read like a publication. Two systems is the most expensive option over time, and it is already producing visible inconsistency between neighbouring pages.",
+      "unblocks_with": "Confirmation that the shop section's distinct chrome is not wanted. The disclosure sentence itself is not optional and stays above the fold either way.",
+      "owner_question": "DRQ-04",
+      "official_reference": "FTC-101"
+    },
+    {
+      "id": "DR-05",
+      "cluster": "Findability",
+      "title": "Keep the duplicate shop-local guides only where they beat the root guide",
+      "question": "Four shop guides repeat four root guides at different URLs. Which one survives for each pair?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "shop/guides/ answers four of the same five questions as guides/, at different URLs: basket-or-oven-air-fryer.html vs basket-or-oven.html, air-fryer-capacity-checklist.html vs air-fryer-capacity.html, cleanup-and-counter-space.html vs cleanup-and-counter-space.html, multi-function-appliance-questions.html vs multi-function-appliance-checklist.html.",
+          "src": "T69-FEEDS"
+        },
+        {
+          "claim": "The root version of basket-or-oven is longer (947 words vs 828), but the shop version of the product pages carries the 20-row sourced spec tables that the 334-word root product pages do not.",
+          "src": "T69-ARTIFACT",
+          "note": "measured per pair"
+        },
+        {
+          "claim": "Near-duplicate pages competing for one query is the thin-affiliation failure the helpful-content guidance names.",
+          "src": "GOOG-HELPFUL"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "One page per question; keep the richer body",
+          "costs": "A diff per pair, then a redirect for the retired URL.",
+          "gives_up": "The shop section's local guide index as a complete set."
+        },
+        {
+          "id": "B",
+          "label": "Keep both and differentiate by audience",
+          "costs": "Each pair must be rewritten to a different intent, not just different words.",
+          "gives_up": "Effort, with a real risk they stay near-duplicates."
+        },
+        {
+          "id": "C",
+          "label": "Keep both as-is",
+          "costs": "Nothing now.",
+          "gives_up": "The one-answer-one-URL principle DR-03 depends on."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "For basket-or-oven the root guide is longer and better sourced. For the capacity checklist the shop version carries the row-level table. Measuring pair by pair is cheap; guessing is not.",
+      "unblocks_with": "Agreement that one URL per question is the rule. Then the pairs can be resolved one at a time without any further owner input.",
+      "owner_question": "DRQ-03",
+      "official_reference": "GOOG-HELPFUL"
+    },
+    {
+      "id": "DR-06",
+      "cluster": "Craft",
+      "title": "Cut per-page dashboard link count from 68 to a footer-only list",
+      "question": "Every reader page ships 68 internal dashboard links in the menu and again in the footer. How many does a reader need?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "index.html contains 197 anchors in total; 68 of them are the Workspace menu and the same 68 repeat in the footer.",
+          "src": "T69-NAV"
+        },
+        {
+          "claim": "The four reader links (Shop, Buying guides, Compare, Our approach) are correct and accessible; the problem is the second, 68-item group.",
+          "src": "T69-NAV"
+        },
+        {
+          "claim": "Pages built around the reader's task, not the publisher's process, are the stated standard.",
+          "src": "GOOG-HELPFUL"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Move all 68 to the footer only; menu keeps a single 'Project' link",
+          "costs": "One change in publication.py plus the G9 gate expectation.",
+          "gives_up": "One-click reach from the header for the owner."
+        },
+        {
+          "id": "B",
+          "label": "Group the 68 into six labelled sub-menus",
+          "costs": "A grouping taxonomy to agree and maintain.",
+          "gives_up": "Nothing, but 68 links is still 68 links."
+        },
+        {
+          "id": "C",
+          "label": "Leave 68 in both places",
+          "costs": "Nothing now.",
+          "gives_up": "Reader focus on every page, on every page."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "The brief's own requirement is that dashboards stay reachable from the footer and a single navigation group. A 68-item disclosure in the masthead satisfies the letter and defeats the purpose.",
+      "unblocks_with": "Nothing external. This is the cheapest high-impact change on the page and could be applied in one edit.",
+      "owner_question": "DRQ-05",
+      "official_reference": "GOOG-HELPFUL"
+    },
+    {
+      "id": "DR-07",
+      "cluster": "Craft",
+      "title": "Give the paid-link button a real tap target",
+      "question": "The link that earns money is an 18-pixel-tall text link on a phone. Should it be a button?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "\"View on Amazon ↗ paid link\" measures 142 x 18 CSS px at 390px wide, 63px from its sibling link.",
+          "src": "T69-TAP"
+        },
+        {
+          "claim": "SC 2.5.8 asks for 24 x 24 CSS px, but accepts undersized targets that are sufficiently spaced. At 63px spacing this passes the letter of the criterion.",
+          "src": "W3C-258"
+        },
+        {
+          "claim": "The criterion's own note encourages authors to meet the minimum size regardless of spacing, especially for important links.",
+          "src": "W3C-258"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Render the paid link as a full-width button on mobile",
+          "costs": "One rule; the card footer becomes taller.",
+          "gives_up": "Some of the cards' compactness."
+        },
+        {
+          "id": "B",
+          "label": "Add vertical padding to reach 44px",
+          "costs": "One rule, no layout change.",
+          "gives_up": "Nothing."
+        },
+        {
+          "id": "C",
+          "label": "Leave it, it passes 2.5.8",
+          "costs": "Nothing.",
+          "gives_up": "Tap comfort on the one control that matters commercially."
+        }
+      ],
+      "recommendation": "B",
+      "recommendation_reason": "The site already passes the success criterion, so this is craft rather than compliance. Padding to 44px costs one declaration and makes the money link easy to hit.",
+      "unblocks_with": "Nothing external.",
+      "owner_question": "DRQ-06",
+      "official_reference": "W3C-258"
+    },
+    {
+      "id": "DR-08",
+      "cluster": "Findability",
+      "title": "Verify the site in Search Console before choosing another topic",
+      "question": "Which buyer questions bring readers? Nobody can answer that yet.",
+      "status": "blocked",
+      "evidence": [
+        {
+          "claim": "Q63-04 on the existing register records this as open: no Search Console property, so no authorized query report exists.",
+          "src": "GOOG-GSC"
+        },
+        {
+          "claim": "The site publishes 16 indexable pages, each with a self-canonical, and one sitemap.",
+          "src": "T69-ARTIFACT"
+        },
+        {
+          "claim": "Search Console is the only authorized source of query, page and sitemap reports for a property the owner controls.",
+          "src": "GOOG-GSC"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Owner verifies the URL-prefix property, then imports a dated report",
+          "costs": "One ownership action, then a periodic export.",
+          "gives_up": "Nothing. This is the prerequisite for every measurement row."
+        },
+        {
+          "id": "B",
+          "label": "Publish topics from editorial judgement and never measure",
+          "costs": "Nothing.",
+          "gives_up": "Any claim that the next topic was chosen from evidence."
+        },
+        {
+          "id": "C",
+          "label": "Use a third-party volume estimate instead",
+          "costs": "A subscription and a step away from first-party evidence.",
+          "gives_up": "Reproducibility — the estimate cannot be checked against this site."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "The brief asks that the next topic be chosen from measured queries rather than instinct. Without a verified property there is nothing to choose from, and no honest way to report progress.",
+      "unblocks_with": "The owner verifying the property in their own Google account. This session cannot do it and will not claim it.",
+      "owner_question": "DRQ-07",
+      "official_reference": "GOOG-GSC"
+    },
+    {
+      "id": "DR-09",
+      "cluster": "Trust",
+      "title": "Confirm the intended product for each of the five links",
+      "question": "The site writes confidently about five products nobody has confirmed were the ones the brief meant.",
+      "status": "blocked",
+      "evidence": [
+        {
+          "claim": "All five intent records (P-01..P-05) carry the observed redirect target but leave intended_asin, intended_listing_url, confirmation_date and intent_source blank.",
+          "src": "T69-ARTIFACT"
+        },
+        {
+          "claim": "Amazon's Program Policies govern how product links are constructed and how participation is validated.",
+          "src": "AMZ-POLICIES"
+        },
+        {
+          "claim": "Observed redirect destinations are recorded in a field that is never copied into the intent fields.",
+          "src": "T69-ARTIFACT"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Owner confirms each intended ASIN and the date",
+          "costs": "One minute per product.",
+          "gives_up": "Nothing."
+        },
+        {
+          "id": "B",
+          "label": "Treat the observed destination as the intended product",
+          "costs": "Nothing.",
+          "gives_up": "The distinction the register exists to preserve, and the ability to say the site knows what it is selling."
+        },
+        {
+          "id": "C",
+          "label": "Publish the pages without an intent record",
+          "costs": "Nothing.",
+          "gives_up": "The audit trail that makes the product pages defensible."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "This is the highest-value five minutes available to the project. Every product page currently rests on an observation, and the site says so on every one of them.",
+      "unblocks_with": "Five confirmations from the owner, each with a date and a source.",
+      "owner_question": "DRQ-08",
+      "official_reference": "AMZ-POLICIES"
+    },
+    {
+      "id": "DR-10",
+      "cluster": "Trust",
+      "title": "Decide whether the site will ever test the products",
+      "question": "The site carefully says it has not tested anything. Is that permanently true?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "Every guide carries a byline stating it is AI-assisted and source-led, and not a hands-on test.",
+          "src": "T69-CSS"
+        },
+        {
+          "claim": "The helpful-content standard asks for first-hand experience and demonstrable expertise where the topic calls for it.",
+          "src": "GOOG-HELPFUL"
+        },
+        {
+          "claim": "Product photography and hands-on testing are the two things a manufacturer listing cannot provide.",
+          "src": "GOOG-SPAM"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Stay source-led and say so, permanently",
+          "costs": "Nothing. The disclosure is already on every page.",
+          "gives_up": "The strongest content differentiator a review site can have."
+        },
+        {
+          "id": "B",
+          "label": "Buy and test the five products, publish what is found",
+          "costs": "The purchase price of five products and the time to use them.",
+          "gives_up": "Nothing, except the money."
+        },
+        {
+          "id": "C",
+          "label": "Stay source-led now, revisit after traffic exists",
+          "costs": "A dated decision to revisit.",
+          "gives_up": "Ambiguity, which is the point."
+        }
+      ],
+      "recommendation": "C",
+      "recommendation_reason": "Buying five products before the site has a single measured visitor is the wrong order. Staying source-led is honest and already disclosed; the question is whether it is a strategy or a stopgap, and that should be written down.",
+      "unblocks_with": "One sentence from the owner: permanent, or revisit-on-date.",
+      "owner_question": "DRQ-09",
+      "official_reference": "GOOG-HELPFUL"
+    },
+    {
+      "id": "DR-11",
+      "cluster": "Craft",
+      "title": "Replace 'AI-generated editorial image · not a cooking test' with photography you own",
+      "question": "The hero image says, in print, that it is AI-generated. Should it?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "The front-page hero carries the caption \"AI-generated editorial image · not a cooking test\" directly under the photograph.",
+          "src": "T69-CSS"
+        },
+        {
+          "claim": "The shop pages instead use flat SVG illustrations of the three appliance formats.",
+          "src": "T69-CSS"
+        },
+        {
+          "claim": "Program Content restrictions govern the use of Amazon images and text.",
+          "src": "AMZ-AGREEMENT"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Commission or shoot five real photographs and drop the disclaimer by showing real work",
+          "costs": "A photographer, or a phone and an afternoon.",
+          "gives_up": "Nothing. This is the single largest credibility gain available."
+        },
+        {
+          "id": "B",
+          "label": "Keep the AI image but stop captioning it on the hero",
+          "costs": "Nothing.",
+          "gives_up": "Honesty. Not recommended."
+        },
+        {
+          "id": "C",
+          "label": "Use the Amazon product images",
+          "costs": "Nothing.",
+          "gives_up": "Legal footing — Program Content terms restrict this, and the rights question is unresolved."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "A site that advertises its own artificiality in the hero is telling the reader to discount it. The caption is honest and should stay until there is a real photograph to replace it — but the replacement is the point.",
+      "unblocks_with": "Whether the owner can produce or license original photography. Until then the caption stays exactly as it is.",
+      "owner_question": "DRQ-10",
+      "official_reference": "AMZ-AGREEMENT"
+    },
+    {
+      "id": "DR-12",
+      "cluster": "Craft",
+      "title": "Let the header navigation wrap instead of hiding 'Our approach' on phones",
+      "question": "One of four reader links disappears below 550px. Should all four fit?",
+      "status": "open",
+      "evidence": [
+        {
+          "claim": "At 390px the primary navigation shows 3 of 4 links; \"Our approach\" is display:none by CSS.",
+          "src": "T69-CSS"
+        },
+        {
+          "claim": "The footer 'About & editorial standards' link still reaches the same page, so the content is not unreachable.",
+          "src": "T69-NAV"
+        },
+        {
+          "claim": "The disclosure strip also states 'How our links work' on the first screen, which links to the same page's affiliate section.",
+          "src": "T69-CSS"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Allow the nav to wrap to a second line",
+          "costs": "A slightly taller header on small screens.",
+          "gives_up": "A little vertical space above the disclosure."
+        },
+        {
+          "id": "B",
+          "label": "Collapse all four into a menu button",
+          "costs": "A disclosure pattern and more code.",
+          "gives_up": "One-tap access to Shop."
+        },
+        {
+          "id": "C",
+          "label": "Leave the hidden link",
+          "costs": "Nothing.",
+          "gives_up": "Nothing material — the page is reachable twice elsewhere."
+        }
+      ],
+      "recommendation": "C",
+      "recommendation_reason": "Measured honestly, this is the weakest row on the page: the destination is reachable from the disclosure strip and the footer on the same screen. Recorded so it is not rediscovered later, but it should not displace real work.",
+      "unblocks_with": "Nothing.",
+      "owner_question": "DRQ-06",
+      "official_reference": "W3C-258"
+    },
+    {
+      "id": "DR-13",
+      "cluster": "Craft",
+      "title": "Stop the dashboard stylesheet clipping row labels in publication tables",
+      "question": "Legacy table rules were reaching the reader-facing tables. Was that a real defect, and is it fixed?",
+      "status": "fixed",
+      "fixed_on": "2026-11-19",
+      "fixed_note": "Fixed in this session: assets/css/publication.css now resets white-space, text-transform and letter-spacing for .cn-table body cells, and leaves uppercase only on the thead headings.",
+      "evidence": [
+        {
+          "claim": "assets/css/style.css declares `th { text-transform: uppercase; white-space: nowrap; letter-spacing: .08em; }` for its own dashboard tables. publication.css overrode the colour and padding of .cn-table but never these three inherited properties.",
+          "src": "T69-CSS"
+        },
+        {
+          "claim": "Before the fix, 22 row labels were wider than their cell and clipped mid-sentence at 1440px: questions.html 7, flagged.html 10, publishing.html 5. Every other tbody th on the site rendered uppercase, including 23 on compare.html and 63 on flagged.html.",
+          "src": "T69-CSS"
+        },
+        {
+          "claim": "This is a stylesheet specificity defect, not a content defect: the labels were correct in the HTML and unreadable on screen.",
+          "src": "T69-CSS"
+        }
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Scope the reset to .cn-table in publication.css (chosen)",
+          "costs": "Three declarations. No markup changes, so no page needed rebuilding.",
+          "gives_up": "Nothing."
+        },
+        {
+          "id": "B",
+          "label": "Remove the rules from style.css",
+          "costs": "Changes every legacy dashboard table, which is another session's surface.",
+          "gives_up": "The dashboards' current look."
+        },
+        {
+          "id": "C",
+          "label": "Leave it",
+          "costs": "Nothing.",
+          "gives_up": "22 readable labels and the site's claim that a reader can read its evidence."
+        }
+      ],
+      "recommendation": "A",
+      "recommendation_reason": "The smallest possible change that fixes the visible defect without touching any other session's surface.",
+      "unblocks_with": "Nothing — done. Recorded here so the fix is auditable rather than silent.",
+      "not_implemented_here_because": "Implemented. Row kept for the audit trail.",
+      "owner_question": null,
+      "official_reference": "T69-CSS"
+    }
+  ],
+  "owner_questions": [
+    {
+      "id": "DRQ-01",
+      "asked": "Which shop URL should be canonical: shop.html or shop/index.html?",
+      "answer_shape": "One URL. Recommendation: shop/index.html, with shop.html redirecting.",
+      "blocks": [
+        "DR-01"
+      ],
+      "how_to_close": "Reply with the URL, or approve the recommendation."
+    },
+    {
+      "id": "DRQ-02",
+      "asked": "Should the five product pages and the shop-local guides be indexable?",
+      "answer_shape": "Yes / no / product pages only. Recommendation: yes, ~28 indexable URLs.",
+      "blocks": [
+        "DR-02"
+      ],
+      "how_to_close": "Approve an indexable URL list."
+    },
+    {
+      "id": "DRQ-03",
+      "asked": "Which feed is the site's feed, and is one-URL-per-question the rule?",
+      "answer_shape": "One feed URL plus yes/no. Recommendation: feed.xml, yes.",
+      "blocks": [
+        "DR-03",
+        "DR-05"
+      ],
+      "how_to_close": "Name the feed and confirm the rule."
+    },
+    {
+      "id": "DRQ-04",
+      "asked": "Should shop/** adopt the same masthead and disclosure strip as the rest of the site?",
+      "answer_shape": "Yes / shrink the band only / leave it. Recommendation: yes.",
+      "blocks": [
+        "DR-04"
+      ],
+      "how_to_close": "Pick an option."
+    },
+    {
+      "id": "DRQ-05",
+      "asked": "Are 68 dashboard links per page needed in the header as well as the footer?",
+      "answer_shape": "Footer only / grouped sub-menus / leave. Recommendation: footer only.",
+      "blocks": [
+        "DR-06"
+      ],
+      "how_to_close": "Pick an option."
+    },
+    {
+      "id": "DRQ-06",
+      "asked": "Should the paid-link control be enlarged on mobile?",
+      "answer_shape": "Button / padding only / leave. Recommendation: padding only.",
+      "blocks": [
+        "DR-07",
+        "DR-12"
+      ],
+      "how_to_close": "Pick an option."
+    },
+    {
+      "id": "DRQ-07",
+      "asked": "Will you verify the site in Google Search Console and share a dated report?",
+      "answer_shape": "Yes plus a date.",
+      "blocks": [
+        "DR-08"
+      ],
+      "how_to_close": "Verify in your own Google account; nothing here can do it for you."
+    },
+    {
+      "id": "DRQ-08",
+      "asked": "For each of the five submitted links, which product did you intend?",
+      "answer_shape": "Five ASINs with a date and a source each.",
+      "blocks": [
+        "DR-09"
+      ],
+      "how_to_close": "Fill the intent fields on the Link & intent register."
+    },
+    {
+      "id": "DRQ-09",
+      "asked": "Will this site ever test the products, or is source-led permanent?",
+      "answer_shape": "Permanent / buy and test / revisit on a date. Recommendation: revisit on a date.",
+      "blocks": [
+        "DR-10"
+      ],
+      "how_to_close": "One sentence."
+    },
+    {
+      "id": "DRQ-10",
+      "asked": "Can you supply or license original photography for the five products?",
+      "answer_shape": "Yes (with or without a date) / no.",
+      "blocks": [
+        "DR-11"
+      ],
+      "how_to_close": "Yes or no. The current caption stays until then."
+    }
+  ],
+  "discoverable_without_asking": [
+    "Per-pair word counts for the four duplicate guides (computed by tools/build_decision_room.py from the pages themselves).",
+    "The exact indexable URL set before and after any DR-02 change (derived from publication.indexable_paths()).",
+    "Whether every shop page passes the existing S1-S12 sourcing gate (tools/validate_shop.py already answers this).",
+    "Whether the disclosure sentence appears twice on every page (tools/verify_publication.py already asserts this)."
+  ]
+}

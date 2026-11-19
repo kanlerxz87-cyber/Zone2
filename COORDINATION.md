@@ -7984,3 +7984,42 @@ After PR #186, `main` advanced through PR #185 (`arena/9ffe2d83-zone2`) to `4374
 rebased onto that head, preserving PR #185's flag-count and cross-namespace close-out. Its file scope
 does not change the current publication arrays or `docs/board-9251f262.json`; this branch keeps both
 inputs untouched and revalidates the combined tree.
+
+---
+
+<!-- T72 integration (session arena/1b09bb6d-zone2): the append-only conflict at the end of this file is resolved by keeping BOTH chronologies — the upstream T71/T72 records above and the integrated PR #184 (session 698addcd) record below. No upstream content is discarded. -->
+
+## Session record — `arena/698addcd-zone2` (T70)
+
+**Branch:** `arena/698addcd-zone2` (base `main` @ `138b0eb`, merge of PR #179). **Claimed:** 2026-11-19 (UTC). **Status: in progress.**
+
+> **ID note.** This session claimed "T69" before `arena/56aa1fac-zone2` merged its own T69 (the
+> freshness-label correction, PR #180) to `main`. Per the board's existing precedent, the merged
+> claim keeps the id and this one is renumbered **T70**. No work was dropped; only the label moved.
+> The conflict was in the shared append-only end of this file and both chronologies are retained.
+
+**Role:** final integration session for this branch. No other branch is active on `main` as of the claim
+(`gh run list` shows main green at `138b0eb`); PRs #162/#163/#172 are stale drafts from earlier
+sessions and are left untouched — not merged, not closed, not rebased by this session.
+
+**Task (T70):** the owner asked for (a) a run of suggestions that would feed a design prompt for a
+polished, marketing-led affiliate site, (b) a decision-ready register of the questions and missing
+information those choices depend on, and (c) fixes for defects found while reviewing the shipped site
+line by line. This session therefore does three things and nothing else:
+
+1. **Repairs evidence-backed defects** in reader-facing pages, each with the measurement that proves it.
+2. **Publishes a Decision Room** (`decision-room.html`) — the brief's "section dedicated for suggestions
+   so someone can review suggestions and choose the best path before implementing any changes" — and
+   `decision-prompt.html`, the design-prompt brief the suggestions feed into.
+3. **Runs the full gate → PR → merge → deploy sequence** and records the result here.
+
+**File scope (non-overlapping, claimed):** `assets/css/publication.css`, `assets/css/fix-t69.css` (new),
+`tools/publication.py`, `tools/verify_front.py`, `tools/build_front.py`, `tools/shop_layout.py` (only if a
+nav label must change), `tools/build_decision_room.py` (new), `tools/verify_decision_room.py` (new),
+`decision-room.html` (new), `decision-prompt.html` (new), `.github/workflows/pages.yml` (gate wiring only),
+`COORDINATION.md` (this record, append-only), `sitemap.xml` (regenerated). No product fact, source
+observation, intent confirmation or campaign number is altered by this session.
+
+**Not in scope:** product/source data (`shop/data/*.json`, `content/*.json`, `coordination` board data),
+the shop `noindex` boundary (raised as a decision, not changed — see DR-01), and any other session's
+open PR.
