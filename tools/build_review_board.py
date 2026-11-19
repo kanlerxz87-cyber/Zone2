@@ -64,7 +64,8 @@ DECISIONS = DATA["decision_vocabulary"]
 
 AREAS = sorted({p["area"] for p in PROPOSALS})
 
-_WORDS = {8: "Eight", 9: "Nine", 10: "Ten", 11: "Eleven", 12: "Twelve", 13: "Thirteen",
+_WORDS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven",
+          8: "Eight", 9: "Nine", 10: "Ten", 11: "Eleven", 12: "Twelve", 13: "Thirteen",
           14: "Fourteen", 15: "Fifteen", 16: "Sixteen", 17: "Seventeen", 18: "Eighteen"}
 
 
@@ -80,6 +81,30 @@ N_IDEA = len(IDEAS)
 N_REQ = len(REQUIREMENTS)
 N_FIND = len(FINDINGS)
 N_MEAS = len(MEASUREMENTS)
+
+# Waves. Wave 1 rows (T53, 2026-11-16) carry no `wave` field; wave 2 (T72, 2026-11-19) rows
+# carry "wave": "2026-11-19". Every wave count printed on these pages is derived here, never typed.
+WAVE1_DATE = "2026-11-16"
+WAVE2_DATE = "2026-11-19"
+
+def _is_w2(row) -> bool:
+    return row.get("wave") == WAVE2_DATE
+
+N_PROP_W2 = sum(1 for p in PROPOSALS if _is_w2(p))
+N_Q_W2 = sum(1 for q in QUESTIONS if _is_w2(q))
+N_IDEA_W2 = sum(1 for i in IDEAS if _is_w2(i))
+N_PROP_W1 = N_PROP - N_PROP_W2
+N_Q_W1 = N_Q - N_Q_W2
+N_IDEA_W1 = N_IDEA - N_IDEA_W2
+
+# The sister question registers, counted at build time so the prose cannot drift from them again
+# (PI-07: the wave-1 prose typed 18 and 10; the ledger has since grown to 22).
+LEDGER_QUESTIONS = len(json.loads((REPO / "ledger" / "questions.json").read_text(encoding="utf-8"))["questions"])
+MARKETING_QUESTIONS = len(
+    json.loads((REPO / "marketing" / "data" / "editorial.json").read_text(encoding="utf-8")).get("questions", [])
+)
+GUIDE_PAGES = len([p for p in (REPO / "guides").glob("*.html")])
+SEASONAL_IDEAS = [i["id"] for i in IDEAS if "season" in str(i.get("trend_basis", "")).lower()]
 
 
 class BuildError(RuntimeError):
@@ -242,11 +267,12 @@ def page_ideas() -> str:
         {word(N_IDEA)} article concepts, each with the basis for thinking it will find an audience, the page it
         would become, and why it might convert. None of them is written and none of them is promised:
         writing one is a separate decision, and it needs a tagged link to be worth anything.
-        The existing thirteen guides and three articles already answer the questions a spec sheet can
+        The existing {GUIDE_PAGES} guide pages already answer the questions a spec sheet can
         answer, so these are chosen for what the spec sheet cannot.
       </p>
       <div class="hero-meta">
         <span class="chip">{len(IDEAS)} concepts</span>
+        <span class="chip">{N_IDEA_W2} new from the 2026-11-19 brief</span>
         <span class="chip">0 written</span>
         <span class="chip">{sum(1 for i in IDEAS if not i["waiting_on"])} need no new information at all</span>
       </div>
@@ -257,14 +283,14 @@ def page_ideas() -> str:
     <section class="section">
       <h2 class="section-title">The idea board</h2>
       <p class="section-sub">
-        A “trend” claim requires data this project does not have. Only one row here makes a dated,
-        checkable claim — PS-13, about the November–December season — and it is stated as a season, not
-        as a measurement. The other {word(N_IDEA - 1, lower=True)} are argued from what the site already publishes, which is the
+        A “trend” claim requires data this project does not have. {len(SEASONAL_IDEAS)} rows make dated,
+        checkable claims — {", ".join(SEASONAL_IDEAS)}, each about a season and not a measurement. The other
+        {word(N_IDEA - len(SEASONAL_IDEAS), lower=True)} are argued from what the site already publishes, which is the
         only honest basis available without a keyword tool (PQ-03).
       </p>
       <div class="table-wrap">
         <table>
-          <caption>Article concepts for the 2026-11-16 request. Each row ends in the official page its argument rests on.</caption>
+          <caption>Article concepts from the 2026-11-16 review and the 2026-11-19 brief. Each row ends in the official page its argument rests on.</caption>
           <thead>
             <tr><th scope="col">ID</th><th scope="col">Concept</th><th scope="col">The page it would become</th><th scope="col">Why now</th><th scope="col">Why it might convert</th><th scope="col">Waits on</th><th scope="col">Decision</th><th scope="col">Source</th></tr>
           </thead>
@@ -288,9 +314,10 @@ def page_ideas() -> str:
   </div>
 """
     return page(
-        "Idea board — five article concepts, none written",
-        "Five article concepts for the 2026-11-16 request, each with its basis, the page it would become, "
-        "why it might convert, and the official source it rests on. Nothing here is written or promised.",
+        f"Idea board — {word(N_IDEA, lower=True)} article concepts, none written",
+        f"{word(N_IDEA)} article concepts from the 2026-11-16 review and the 2026-11-19 brief, each with its "
+        "basis, the page it would become, why it might convert, and the official source it rests on. Nothing "
+        "here is written or promised.",
         "review-ideas.html",
         body,
         "review-ideas.html",
@@ -302,6 +329,31 @@ def page_decide() -> str:
     open_props = [p for p in PROPOSALS if p["decision"] == "AWAITING_DECISION"]
     unblocked = [p for p in open_props if not p["waiting_on"]]
     blocked = [p for p in open_props if p["waiting_on"]]
+    w2 = [p for p in PROPOSALS if _is_w2(p)]
+
+    # Wave-2 summary: one row per new proposal, with the recommended option's label. The letter in the
+    # first column is what a reviewer replies with; the recommendation itself is not a decision.
+    w2_rows = []
+    for p in w2:
+        rec = next((o for o in p["options"] if o["id"] == p.get("recommended_option")), None)
+        rec_cell = (
+            f'<strong>{esc(p.get("recommended_option", "?"))}</strong> — {esc(rec["label"])}'
+            if rec else esc(p["recommendation"])
+        )
+        waits = (
+            ", ".join(f'<a href="review-questions.html#{esc(w)}">{esc(w)}</a>' for w in p["waiting_on"])
+            if p["waiting_on"] else "nothing — decidable now"
+        )
+        w2_rows.append(
+            f'<tr id="{esc(p["id"])}">'
+            f'<td class="id">{esc(p["id"])} · {esc(p.get("recommended_option", "?"))}</td>'
+            f'<td><strong>{esc(p["title"])}</strong></td>'
+            f"<td>{rec_cell}</td>"
+            f'<td class="wait">{waits}</td>'
+            f'<td class="wait">{esc(p["area"])}</td>'
+            f"{source_cell(p['evidence'])}"
+            "</tr>"
+        )
 
     # Unblocked proposals, ordered by the single scale the board claims: value first, cost second.
     def value(p):
@@ -345,7 +397,8 @@ def page_decide() -> str:
       <p class="hero-lede">
         The board has {len(PROPOSALS)} proposals and {len(QUESTIONS)} questions, and reading all of it is a
         waste of your time if you only want to reply. This page is the short version: the
-        {len(top)} proposals that need nothing from anybody, the {len(blocked)} that wait on an answer,
+        {len(top)} proposals that need nothing from anybody, the {len(w2)} new suggestions from the
+        2026-11-19 brief with their recommended letters, the {len(blocked)} that wait on an answer,
         and the {len(QUESTIONS)} questions with the exact action that closes each one. Reply in any form —
         a list is enough.
       </p>
@@ -353,6 +406,7 @@ def page_decide() -> str:
         <span class="chip">{len(unblocked)} decidable now</span>
         <span class="chip">{len(blocked)} blocked on an answer</span>
         <span class="chip">{len(QUESTIONS)} questions · 0 answered</span>
+        <span class="chip">{len(w2)} wave-2 suggestions</span>
       </div>
     </div>
   </section>
@@ -377,8 +431,34 @@ def page_decide() -> str:
       </div>
     </section>
 
+    <section class="section" id="wave2">
+      <h2 class="section-title">2. The {word(len(w2), lower=True)} new suggestions from the 2026-11-19 brief</h2>
+      <p class="section-sub">
+        Wave 2 of this board: the brief's suggestions for making the site read like a publication a shopper
+        can act on — a voice gate against generated-slop phrasing, a seasonal calendar gated on
+        re-verification, topics chosen from measured queries, one brand name, a reader-return path, a decision
+        cadence, and the unclaimed mobile pass. The recommendation column is the letter this session would
+        pick; picking it is still your call, made the same way as section 1.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Wave-2 proposals with the recommended option and the question each waits on. A recommendation is not a decision; the id · letter pair is what you reply with.</caption>
+          <thead><tr><th scope="col">ID · pick</th><th scope="col">The suggestion</th><th scope="col">If you pick the recommendation</th><th scope="col">Waits on</th><th scope="col">Area</th><th scope="col">Source</th></tr></thead>
+          <tbody>{''.join(w2_rows)}</tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <p><strong>The path from suggestion to change, on this board.</strong> 1 — a suggestion arrives as a
+        row with options, costs and risks. 2 — you pick a letter on this page. 3 — the next session writes the
+        letter, your words and the date into <code>docs/review-board.json</code>; the gate fails if the letter
+        is not one the row offered. 4 — only then does an implementation session start, on its own branch,
+        with its own gates. 5 — the row keeps showing the recorded decision instead of vanishing. Nothing
+        skips a step, and nothing is implemented while a row reads “awaiting your decision”.</p>
+      </div>
+    </section>
+
     <section class="section">
-      <h2 class="section-title">2. How to reply</h2>
+      <h2 class="section-title">3. How to reply</h2>
       <div class="callout">
         <p><strong>Short form is fine.</strong> “PS-05 A, PS-02 A, defer PS-07” is a complete answer.
         Nothing else is required — no form, no file, no account.</p>
@@ -392,7 +472,7 @@ def page_decide() -> str:
     </section>
 
     <section class="section">
-      <h2 class="section-title">3. The {len(QUESTIONS)} questions, one action each</h2>
+      <h2 class="section-title">4. The {len(QUESTIONS)} questions, one action each</h2>
       <p class="section-sub">
         None of these needs a build session. Each is a lookup, a sign-in, or one email, and each is
         phrased so that a one-line reply closes it.
@@ -407,7 +487,7 @@ def page_decide() -> str:
     </section>
 
     <section class="section">
-      <h2 class="section-title">4. What this page does not do</h2>
+      <h2 class="section-title">5. What this page does not do</h2>
       <div class="callout callout-warn">
         <p>It does not record your answer by itself. The site is static and ships no form handler, and a
         form that posted nowhere would be worse than this page. Your reply is the record; the next session
@@ -500,7 +580,8 @@ def page_review() -> str:
       <div class="hero-eyebrow">Decision surface · nothing here is implemented</div>
       <h1 class="hero-title">Choose a <em>path</em> before anything changes.</h1>
       <p class="hero-lede">
-        {word(N_PROP)} proposals for the 2026-11-16 request, each with three options, the cost and risk of
+        {word(N_PROP)} proposals on one board — {word(N_PROP_W1, lower=True)} from the 2026-11-16 review and
+        {word(N_PROP_W2, lower=True)} from the 2026-11-19 brief — each with options, the cost and risk of
         each, the question it waits on, and an official source. Every row is still
         <strong>awaiting your decision</strong> — {awaiting} of {len(PROPOSALS)} of them — so nothing here has
         been built. Read the table, open a proposal, pick an option. That is the whole interface.
@@ -537,7 +618,7 @@ def page_review() -> str:
       <p class="section-sub">{score_note}</p>
       <div class="table-wrap">
         <table>
-          <caption>Proposals for the 2026-11-16 request. Sorting is by area, then by id. The last column is the official page the row's argument rests on; a row with none says so.</caption>
+          <caption>Proposals from the 2026-11-16 review (ids PS-…) and the 2026-11-19 brief (ids PW-…). Sorting is by area, then by id. The last column is the official page the row's argument rests on; a row with none says so.</caption>
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -663,7 +744,7 @@ def page_questions() -> str:
       </p>
       <div class="table-wrap">
         <table>
-          <caption>Open questions raised by the 2026-11-16 request. Every row ends in the official page that makes the question answerable in principle.</caption>
+          <caption>Open questions from the 2026-11-16 review (PQ-01–PQ-09) and the 2026-11-19 brief (PQ-10–PQ-13). Every row ends in the official page that makes the question answerable in principle.</caption>
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -691,28 +772,29 @@ def page_questions() -> str:
         <div class="card"><h3>PQ-08 · the images</h3><p>Twenty product pages carry no photograph. The image rights question is the single largest visual constraint on the site.</p><p><a href="#PQ-08">Read the row</a></p></div>
         <div class="card"><h3>PQ-04 · the traffic</h3><p>Nobody knows whether the site has any organic visits. Search Console needs no tag and no payment, so this is the cheapest unknown to close.</p><p><a href="#PQ-04">Read the row</a></p></div>
         <div class="card"><h3>PQ-09 · the scope</h3><p>Three products or a whole category. Depth on three models and breadth across a category need different content plans.</p><p><a href="#PQ-09">Read the row</a></p></div>
+        <div class="card"><h3>PQ-10 · the property</h3><p>Zero verification tags ship on any page (PM-14), so nobody can say which queries arrive. Until someone owns the Search Console property, every topic choice is instinct — PW-03 waits on this row.</p><p><a href="#PQ-10">Read the row</a></p></div>
       </div>
     </section>
 
     <section class="section">
       <h2 class="section-title">Questions this register did not invent</h2>
       <p class="section-sub">
-        Twenty-eight open questions already existed before this task, in two other registers, and
-        none of them is answered either. They are not duplicated here; they are linked, because the
-        same information closes both.
+        {word(LEDGER_QUESTIONS + MARKETING_QUESTIONS)} open questions already existed before this task, in two
+        other registers, and none of them is answered either. They are not duplicated here; they are linked,
+        because the same information closes both.
       </p>
       <div class="table-wrap">
         <table>
           <caption>Existing question registers, with their size and state at the time of writing.</caption>
           <thead><tr><th scope="col">Register</th><th scope="col">Rows</th><th scope="col">Answered</th><th scope="col">Where</th></tr></thead>
           <tbody>
-            <tr><td>Ledger question register</td><td class="num">18</td><td class="num">0</td><td><a href="pages/questions.html">Q-01 – Q-18 questions page</a> · <a href="review-questions.html">read this register's companion view</a></td></tr>
-            <tr><td>Marketing question set</td><td class="num">10</td><td class="num">0</td><td><a href="marketing/improvements.html">MQ-01 – MQ-10 on the improvement board</a></td></tr>
+            <tr><td>Ledger question register</td><td class="num">{LEDGER_QUESTIONS}</td><td class="num">0</td><td><a href="pages/questions.html">Q-01 – Q-{LEDGER_QUESTIONS:02d} questions page</a> · <a href="review-questions.html">read this register's companion view</a></td></tr>
+            <tr><td>Marketing question set</td><td class="num">{MARKETING_QUESTIONS}</td><td class="num">0</td><td><a href="marketing/improvements.html">MQ-01 – MQ-{MARKETING_QUESTIONS:02d} on the improvement board</a></td></tr>
             <tr><td>This register</td><td class="num">{len(QUESTIONS)}</td><td class="num">0</td><td>this page</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note">Three registers, three vocabularies, thirty-seven questions and no answers. That is PS-12 on the board.</p>
+      <p class="note">Three registers, three vocabularies, {LEDGER_QUESTIONS + MARKETING_QUESTIONS + len(QUESTIONS)} questions and no answers. That is PS-12 on the board.</p>
     </section>
   </div>
 """
