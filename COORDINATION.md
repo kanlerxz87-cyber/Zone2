@@ -7576,3 +7576,12 @@ production collection, enrollment/intent/reports and CN-08). No user's manual an
 
 **Rebase/conflict record:** During the initial claim push, `origin/main` advanced from `605e49f` to `138b0eb` through PR #179 (session `57eb4af5`). The rebase conflicted at the shared append-only end of this file. Both the merged T68 close-out and this session's claim are retained; this task is T69 because T68 was used by the merged session. No upstream content was discarded.
 
+
+### T69 implementation checkpoint — local verification complete; PR/deploy pending
+
+- Replaced the “last updated” label on the generated suggestion and question registers with `UPDATED_ON` (2026-11-19); source-check references continue to use `CHECKED_ON` (2026-11-16). No product, tag, attribution, choice, or measurement value changed.
+- Added gate G11 in `tools/verify_front.py`. Injecting the former 2026-11-16 byline into each page separately made G11 fail as intended; the current generated pages pass.
+- **Local verification:** `python3 tools/build_front.py --check`; `python3 tools/verify_front.py` (16 pages); and `python3 tools/ci_replay.py` with strict YAML parsing enabled (PyYAML installed only in a temporary `/tmp` virtualenv): **61/61 steps PASS**. The replay packaged 228 HTML pages (16 indexable), checked 1,451 product anchors and 138 current factual rows, then passed 252 browser viewport checks and 24 accessibility-page scans. Browser events were synthetic local fixtures, not campaign data.
+- **Date evidence:** `docs/board-9251f262.json` owner directions and `t63_note`, plus the current dated release-prerequisite section in `questions.html`. **No external product/compliance claim was added or re-verified in this narrow correction.** Official-source links and all existing unknowns remain unchanged.
+- **Irregularities unchanged and non-blocking:** supplied short-link compliance remains unresolved in FLG-003; intended ASIN/listing/date/source fields remain blank; the owner-provided tag is not account-authenticated; static GitHub Pages collection remains disabled; no authorized Associates or Search Console reports are present. No report, traffic, order, conversion, popularity, or revenue number was added.
+- **Status:** implementation ready for the current-branch PR; actual hosted check, merge and Pages deployment still pending and will be recorded below after they occur.
