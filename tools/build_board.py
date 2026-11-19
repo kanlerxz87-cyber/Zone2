@@ -122,6 +122,7 @@ def measure() -> dict[str, object]:
     no_desc = 0
     disclosed = 0
     og_image = 0
+    og_full = 0
     jsonld = 0
     tagged = 0
     viewport = 0
@@ -148,6 +149,12 @@ def measure() -> dict[str, object]:
             disclosed += 1
         if "og:image" in t:
             og_image += 1
+        # T68 (2026-11-19, salvaged from stale PR #163): RQ-05 used to TYPE the og identity
+        # count ("108 carry og:type, og:site_name, og:title, og:description and og:url") next to
+        # derived siblings — and the tree outgrew it. Derived here, like every other number on
+        # that row, so it cannot drift again.
+        if all(tag in t for tag in ("og:type", "og:site_name", "og:title", "og:description", "og:url")):
+            og_full += 1
         if "application/ld+json" in t:
             jsonld += 1
         if 'name="viewport"' in t:
@@ -210,6 +217,7 @@ def measure() -> dict[str, object]:
         "tagged": tagged,
         "disclosed": disclosed,
         "og_image": og_image,
+        "og_full": og_full,
         "jsonld": jsonld,
         "viewport_pages": viewport,
         "unique_titles": len(titles),

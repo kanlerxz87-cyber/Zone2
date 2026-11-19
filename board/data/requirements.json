@@ -70,9 +70,9 @@
       "brief_status": "Partly implemented 2026-11-16",
       "measured_status": "partly — preview metadata is present on a subset; Search Console remains off",
       "verdict": "matches",
-      "measured": "{{jsonld}} of {{pages}} pages carry JSON-LD. {{og_image}} of {{pages}} pages carry an og:image. {{sc_pages}} of {{pages}} pages carry a Search Console verification tag.",
-      "evidence": "Measured by tools/build_board.py from the checked-in HTML tree. These counts describe published markup, not search-engine indexing or traffic.",
-      "gap": "Coverage is incomplete: add consistent preview metadata to the remaining pages if needed, then connect the site's Search Console property to observe its own queries. The repository alone cannot establish search traffic.",
+      "measured": "{{jsonld}} of {{pages}} pages carry JSON-LD. {{og_full}} of {{pages}} carry og:type, og:site_name, og:title, og:description and og:url. {{og_image}} of {{pages}} carry an og:image. {{sc_pages}} of {{pages}} carry a Search Console verification tag.",
+      "evidence": "Measured by tools/build_board.py from the checked-in HTML tree; every figure on this row is a derived token recorded in board/data/measured.json. These counts describe published markup, not search-engine indexing or traffic.",
+      "gap": "Coverage is incomplete: the row's first-named deliverable — a social preview image on every page — is present on a subset only, and the second half (measure whether search traffic arrives) cannot be measured until the site's Search Console property is verified. The repository alone cannot establish search traffic.",
       "source_ids": ["BD-15"]
     },
     {

@@ -7051,10 +7051,10 @@ mistake; commit `10d5a25` removed them, and `audit_site` debris PASS confirms.
 | CR | To | Request | Status |
 |---|---|---|---|
 | CR-7 | T63 (`arena/1d0347fb-zone2`) | Link `marketing/thermometers/` from the front page when `tools/build_front.py` is rebuilt | **Closed** — verified on `main` 2026-11-19 by T71: `index.html` and `tools/build_front.py` both carry `marketing/thermometers/` links |
-| CR-8 | Owner of `marketing/scripts/verify_marketing.py` | Add `www.fsis.usda.gov` to `OFFICIAL_HOSTS` and run G1–G10 over every rendered page, desk included (SG-15 A) | **Closed 2026-11-19 by T71 (`arena/6998bc41-zone2`)** — commit `11ca606`; G1–G10 now cover all 27 rendered pages (20 registry + 7 desk), four negative controls pass, `verify_marketing` green; sources V1–V3 in `docs/verification-6998bc41.md` |
-| CR-9 | Next integration session | Promote Q-21/Q-22 to F-44/F-45 in one pass that also updates `README.md`, `EXECUTIVE_SUMMARY.md` count prose, `assets/js/data.js` and the root pages (SG-15 C) | **Closed 2026-11-19 by T71** — commit `a76be41`. Q-21's finding was already F-44 and Q-22's battery half already F-53 (no duplicates); Q-22's warranty half is new **F-54** (both statements re-read live on the listing today); Q-21/Q-22 cross-linked; every count surface moved 53 → 54 (README, EXECUTIVE_SUMMARY, data.js `CANONICAL_FLAG_COUNT`, root `flagged.html`, `pages/**` chips, `pages/flags.html`) with `validate_data` + `audit_site` green |
-| CR-10 | Brief namespace | Correct the stale note "no click on this site can become a qualifying purchase" in `brief/data/summary.json` (untrue since T58 added the tag), and derive its four state-table counts | **Closed 2026-11-19 by T71** — proven, not edited: commit `8b5b138` (2026-11-17) replaced the note (current count 0), and the four `{{…}}` counts substitute at build time (`brief/index.html` prints "40 of 216" / "216 of 216"; no `{{` in any brief page; `build_brief --check` + `validate_brief` green). Evidence in `docs/verification-6998bc41.md` §4 |
-| CR-11 | Owner of `ledger/products.json` | P-05's "Warranty" row publishes only the two-year figure as `verified`, while the same listing's Item details states `Warranty Description: 3 Year` (both re-read live 2026-11-19) and the thermometer desk prints a conflict. Align the row with the conflict treatment used for the battery row (blank + reason + both statements), or record why one term is chosen — do not choose silently. | **Open — new, raised by T71** (file outside T69's claimed scope); fully described in flag F-54 |
+| CR-8 | Owner of `marketing/scripts/verify_marketing.py` | Add `www.fsis.usda.gov` to `OFFICIAL_HOSTS` and run G1–G10 over every rendered page, desk included (SG-15 A) | **Closed 2026-11-19 — independently closed on both sides: by T68 (`9ffe2d83`, PR #185, merged first) and by T71 (`arena/6998bc41-zone2`, commit `11ca606`, union-merged into PR #188 with T68's implementation kept and this session's same-origin link check added)** — G1–G10 now cover all 27 rendered pages (20 registry + 7 desk), four negative controls pass, `verify_marketing` green; sources V1–V3 in `docs/verification-6998bc41.md` |
+| CR-9 | Next integration session | Promote Q-21/Q-22 to F-44/F-45 in one pass that also updates `README.md`, `EXECUTIVE_SUMMARY.md` count prose, `assets/js/data.js` and the root pages (SG-15 C) | **Closed 2026-11-19 — parallel closures by T68 (`9ffe2d83`, PR #185, canonical F-54 row) and T71 (commit `a76be41`; its F-54 wording was superseded by the union resolution in favour of the already-published row)**. Q-21's finding was already F-44 and Q-22's battery half already F-53 (no duplicates); Q-22's warranty half is new **F-54** (both statements re-read live on the listing today); Q-21/Q-22 cross-linked; every count surface moved 53 → 54 (README, EXECUTIVE_SUMMARY, data.js `CANONICAL_FLAG_COUNT`, root `flagged.html`, `pages/**` chips, `pages/flags.html`) with `validate_data` + `audit_site` green |
+| CR-10 | Brief namespace | Correct the stale note "no click on this site can become a qualifying purchase" in `brief/data/summary.json` (untrue since T58 added the tag), and derive its four state-table counts | **Closed 2026-11-19 — verified independently by T68 (PR #185) and T71; proven, not edited: commit `8b5b138` (2026-11-17) replaced the note (current count 0), and the four `{{…}}` counts substitute at build time (`brief/index.html` prints "40 of 216" / "216 of 216"; no `{{` in any brief page; `build_brief --check` + `validate_brief` green). Evidence in `docs/verification-6998bc41.md` §4 |
+| CR-14 | Owner of `ledger/products.json` | P-05's "Warranty" row publishes only the two-year figure as `verified`, while the same listing's Item details states `Warranty Description: 3 Year` (both re-read live 2026-11-19) and the thermometer desk prints a conflict. Align the row with the conflict treatment used for the battery row (blank + reason + both statements), or record why one term is chosen — do not choose silently. | **Open — new, raised by T71** (id renumbered: a historical CR-11 already exists in the T29-era record; file outside this claim's scope). Described in flag F-54's promotion trail in this session's record — the published F-54 row itself is the canonical one from `9ffe2d83`'s parallel closure (PR #185) and was not edited here. |
 
 ### T64 close-out — PR #167 merged and Pages deployment confirmed (2026-11-19) · **Status: DONE**
 
@@ -7544,6 +7544,74 @@ This documentation-only close-out records observed results; no further feature, 
 report, hosting account or permission is changed. All external gates remain explicit (especially actual
 production collection, enrollment/intent/reports and CN-08). No user's manual answer was requested.
 
+---
+
+## T68 — claim: session `arena/9ffe2d83-zone2` (`9ffe2d83`) — 2026-11-19 (UTC)
+
+**Status:** claimed, in progress (written before any file in the scope below was edited).
+
+**Coordination check at claim:** `gh pr list --state open` → #162 (draft), #163, #172, all
+CONFLICTING with current `main` (605e49f). Their branches' last commits are 06:15–06:20Z; it is
+now past 10:45Z — **more than four hours with no commits**, so each meets the board's 60-minute
+takeover rule. No registry row for an active session owns any file in the scope below; every
+other 2026-11-19 session (cf98ff65, 32788da6, 75efdf57, 33e03d63, 37333afd, 10727edd) has a
+merged close-out record. This claim takes over the stale PRs' unshipped, still-valid content
+only; nothing is discarded from any branch, and each PR receives a comment explaining its
+disposition before it is closed.
+
+**Task — final integration for this wave + closure of the four open change requests:**
+
+1. **CR-8** (open, owner was "owner of `marketing/scripts/verify_marketing.py`" — no active
+   owner): add `www.fsis.usda.gov` (and `fsis.usda.gov` if linked) to `OFFICIAL_HOSTS` and run
+   G1–G10 over every rendered marketing page, thermometer desk included (SG-15 A). The desk's
+   food-safety sentences cite FSIS pages, so the allow-list, not the source, must change.
+2. **CR-9** (open, owner "next integration session" — this session): promote **Q-22** to a new
+   flag row (**F-54** — Q-21 is already promoted as F-44 by an earlier session; F-45…F-53 hold
+   other findings, so CR-9's original "F-44/F-45" ids are taken and the next free id is used),
+   then make **one coordinated counts pass**: `assets/js/data.js` `CANONICAL_FLAG_COUNT`,
+   `README.md`, `EXECUTIVE_SUMMARY.md` count prose, and every root page — regenerated through
+   their own builders, never hand-edited where a generator exists.
+3. **CR-10** (open, brief namespace): verify whether the stale "no click on this site can become
+   a qualifying purchase" note still exists in `brief/data/summary.json`; correct it if it does
+   (the owner tag shipped in T58/T61), and make the four state-table counts derived where they
+   are still typed. If the items are already corrected, record the evidence instead of editing.
+4. **CR-7** (open): verify that the front page links `marketing/thermometers/` (it appears to);
+   if verified, record closure evidence — no edit for an already-done item.
+5. **Stale PR salvage, from #163** (`f669bf2c`, session crashed): remove the uncited
+   "regret buyers report most" popularity claim from topic TP-03, and fix the self-contradictory
+   RQ-05 row ("…carry an og:image — that is to say, none of them do") using the derived
+   `{{og_image}}`/`{{sc_pages}}` tokens the current builder already provides; also derive the
+   still-typed og:type figure if a token can be added without touching a claimed file. Regenerate
+   `board/topics.html` / `board/requirements.html` with `tools/build_board.py`.
+   PRs **#162** and **#172** are reviewed the same way; their buyer-first front page, shop-first
+   front, CI-repair and thermometer-guide intents were already shipped by merged PRs #166/#167/
+   #170/#174/#175/#177 — they are closed as superseded with comments, not force-merged over newer
+   verified work.
+6. **Fresh dated verification** (`docs/verification-9ffe2d83.md`) of every official source this
+   session's changes rest on (FSIS thermometer/temperature pages for CR-8's allow-list, the CHEF
+   iQ listing for F-54, Amazon ASIN-definition page for context), fetched this session; blanks stay
+   blank and unverifiable values stay flagged. This wave's suggestions/questions appended only if
+   a real gap is found.
+7. **Gates → PR → merge without waiting → confirm GitHub Pages deploy → record here.** All
+   executable `ci_replay` steps, the Python test suites, `validate_board`, `validate_data`,
+   `audit_site`, `seo_audit` and the marketing verifier must pass on the combined tree before the
+   PR opens; the site is never merged broken.
+
+**Files in this claim:** `marketing/scripts/verify_marketing.py`, `ledger/flags.json`
+(append-only F-54), `assets/js/data.js` (`CANONICAL_FLAG_COUNT` only), `README.md` (flag-count
+prose only), `EXECUTIVE_SUMMARY.md` (count prose / addendum only), `board/data/topics.json`,
+`board/data/requirements.json`, `tools/build_board.py` (derived-token addition only, if needed),
+regenerated derived views via their own builders (`board/*.html`, `pages/*.html`, root evidence
+views, `brief/index.html` if CR-10 changes), `brief/data/summary.json` (CR-10 only),
+NEW `docs/verification-9ffe2d83.md`, `COORDINATION.md` (append-only).
+
+**Excluded:** `.github/workflows/pages.yml` (no gate failure forces it; logged here first if
+that changes), `tools/build_front.py` / `assets/css/publish.css` / `guides/**` / `shop/**`
+(front-page and shop work is shipped and separately closed), every verified product value in
+`ledger/{products,verification,sources}.json`, all other sessions' namespaces
+(`console/`, `intake/`, `audit/`, `discovery/`, `marketing/**` content, `research-hub/`,
+`zone2/`, `northstar/`, `revalidation/`, `affiliate-lab/`, `marketing/articles/**`), and any
+value not re-read from an official source this session.
 ## Session record — `arena/57eb4af5-zone2` (T68)
 
 **Branch:** `arena/57eb4af5-zone2` (base `main` @ `605e49f`, merge of PR #178). **Claimed:** 2026-11-19 (UTC). **Status: done.**
@@ -7648,6 +7716,31 @@ the run list rather than from a page fetch.
 edited only to insert the new gate step, and no open PR (#162, #163, #172) was merged or closed.
 Sources, the exact source list and the reproduction method: `docs/verification-5f7f77a4.md`.
 
+### T70 (`5f7f77a4`) — close-out: merged, main CI green, Pages deployed, live pages verified
+
+- **PR:** [#183](https://github.com/kanlerxz87-cyber/Zone2/pull/183), merged **2026-11-19T11:11:51Z** as
+  merge commit **`b37eadfb5072709b0e6146c705ee9c180ce07ab4`** (base `b04078f`, after a rebase onto it).
+- **Hosted PR check:** run **44512235349** — `Build and verify` **pass** (2m3s); the PR deploy job was
+  correctly skipped.
+- **Main:** run **44512621858** `success` (Build and verify + Deploy to GitHub Pages); Pages build run
+  **44512621078** `success`. Deployment `github-pages` on SHA `b37eadf`; the Pages API reports
+  **`built`** from `main` at `/`.
+- **Live fetch after deployment:** `guides/chef-iq-sense.html` and `guides/chefman-dual-basket.html`
+  both return the new per-product copy — the fit / not-a-fit lists, the trade-off paragraph, the four
+  checks with their USDA and manufacturer citations, and the unchanged specification tables. The
+  disclosure strip is above `<main>` on both, and each paid CTA carries `shopnow047c-20` with
+  `rel="sponsored nofollow"`.
+- **Verified on the rebased tree before merging:** replay **62/62**, `verify_front` 16/16,
+  `verify_publication` clean (228 / 16 / 1,451 / 138), `audit_site` 228 pass, `seo_audit` pass,
+  sitemap and readiness current, CSS urls 0 broken, `note_overlap` worst pair **0.163**, browser 252
+  viewport checks and 24 accessibility scans clean. The artifact measurement was re-taken after the
+  rebase and is unchanged: **226 HTML / 16 sitemap / 187 noindex / 23 crawlable-and-unlisted**.
+- **Still open, non-blocking:** Q68-01 (the 23 unlisted pages), Q68-03 (imagery decision), intended-ASIN
+  confirmations, enrollment/report attribution, permanent collector host, Search Console ownership,
+  CN-08 administrator Pages source mode. Nothing was filled in to close them.
+- **Not touched:** no other session's namespace or data; no open PR merged or closed by this session
+  other than its own #183.
+
 
 ## T71 claim — session `arena/6998bc41-zone2` (6998bc41) — 2026-11-19 (UTC)
 
@@ -7687,11 +7780,13 @@ Sources, the exact source list and the reproduction method: `docs/verification-5
 2. `11ca606` — **CR-8 closed.** `marketing/scripts/verify_marketing.py`: `www.fsis.usda.gov` added to `OFFICIAL_HOSTS`; G1–G10 iterate every rendered HTML page (fresh-build set, registry + desk, never hand-listed); same-origin absolute links resolve inside the repo with an existence check. Result: 20 → **27 covered pages**, 0 failures, four negative controls behave (bad host fails, FSIS passes, broken self-link fails, other-origin fails). Sources V1–V3 (three FSIS factsheets) re-read live today.
 3. `a76be41` — **CR-9 closed.** Coverage checked first: Q-21 = existing **F-44**, Q-22 battery = existing **F-53** → no duplicate rows; Q-22 warranty = **new F-54**, both statements re-read live today on `https://www.amazon.com/dp/B0DZFD6R9Z` ("two-year assurance provided by CHEF iQ" in About this item; "Warranty Description: 3 Year" in Item details; source S62). `ledger/questions.json` Q-21/Q-22 gained dated PROMOTED cross-link notes; the probe-size half stays an owner question (SG-14). Every count surface moved 53 → 54 in the same commit — README (1), EXECUTIVE_SUMMARY (5, two open/resolved splits recomputed via `tools/flag_state.py` → 25 open · 29 resolved), `assets/js/data.js` (`CANONICAL_FLAG_COUNT = 54`), regenerated root `flagged.html`, `pages/**` chips, `pages/flags.html` ("54 flagged items · 25 open · 29 resolved"), plus `decisions/`, `console/`, `board/` renders that read the ledger. `validate_data` (canonical_flags 54, 0 errors) and `audit_site` (prose_counts PASS) green.
 4. `d2e3217` — **CR-10 proven closed** (no edit needed: the stale sentence was replaced by `8b5b138` on 2026-11-17; the four state-table `{{…}}` counts substitute at build time — `brief/index.html` prints "40 of 216" / "216 of 216", no `{{` remains in any brief page, `build_brief --check` + `validate_brief` green) — **and the two surviving data corrections from stale PR #163 ported verbatim with attribution to session `f669bf2c`** (RQ-05's preview/Search-Console row, which still claimed no page carries an og:image although T61 shipped one — re-measured today: og:image 152 pages, SC tag 0 pages, all through `build_board` tokens; TP-03's topic framing, which had asserted an unevidenced demand claim against the brief's own evidence rule). Board regenerated via `tools/build_board.py`; `validate_board` green; the board's `gates` cell refreshed after the replay passed. Ledger changes also flowed through `build_decisions` + `build_console` (their `--check` had gone stale; regenerated and re-verified).
-5. **Stale-PR triage** (log only): **#162** (`6ce606cb`, draft) partially superseded by #165/#166/#170/#164/#174/#177 — its unique `desk/` decision-desk generator stays preserved on the branch; porting it needs `tools/build_front.py` (outside this claim) and would collide with merged front pages, so a future port is requested, not forced. **#163** (`f669bf2c`) — data corrections ported (above); its coordination record remains on the branch. **#172** (`5d423a61`) — alternative front/summary rewrite superseded by #174/#175/#177/#178 (each verified live in their own records); porting it would overwrite merged sessions' work. **No PR was merged, closed or rebased; no branch but this one was written to.**
+5. **Stale-PR triage** (log only): **#162** (`6ce606cb`, draft) partially superseded by #165/#166/#170/#164/#174/#177 — its unique `desk/` decision-desk generator stays preserved on the branch (PRs #162/#163/#172 were subsequently CLOSED by session `9ffe2d83` in merged PR #185 — this session did not close them; the desk-port request stands); porting it needs `tools/build_front.py` (outside this claim) and would collide with merged front pages, so a future port is requested, not forced. **#163** (`f669bf2c`) — data corrections ported (above); its coordination record remains on the branch. **#172** (`5d423a61`) — alternative front/summary rewrite superseded by #174/#175/#177/#178 (each verified live in their own records); porting it would overwrite merged sessions' work. **No PR was merged, closed or rebased; no branch but this one was written to.**
 6. `docs/verification-6998bc41.md` — the dated line-by-line record: six live source reads (V1–V6), the four CR-8 controls, the CR-9 coverage table, the CR-10 proof, the #163 port rationale, the triage table, and the irregularities below.
 
-**Irregularities raised:** **CR-11** (new, logged in the CR table): `ledger/products.json`'s P-05 Warranty row publishes only the two-year figure as verified while the listing's Item details states 3 Year and the desk prints a conflict — the row is outside T69's claimed scope, so it is requested, not edited, and fully described in flag F-54. Noted, not changed: the dated "3 of 3" rows in `brief/data/summary.json` (correct as a 2026-11-16 snapshot). Not re-observed: F-44's newer-model banner (stays attributed to `10727edd`'s same-day read; this session only cross-linked it). **S-20 / RQ-16 (mobile-first pass) remains unclaimed — this session did not take it.**
+**Irregularities raised:** **CR-14** (new — renumbered from a draft 'CR-11' once the historical CR-11..CR-13 were seen; logged in the CR table): `ledger/products.json`'s P-05 Warranty row publishes only the two-year figure as verified while the listing's Item details states 3 Year and the desk prints a conflict — the row is outside T69's claimed scope, so it is requested, not edited, and fully described in flag F-54. Noted, not changed: the dated "3 of 3" rows in `brief/data/summary.json` (correct as a 2026-11-16 snapshot). Not re-observed: F-44's newer-model banner (stays attributed to `10727edd`'s same-day read; this session only cross-linked it). **S-20 / RQ-16 (mobile-first pass) remains unclaimed — this session did not take it.**
 
 **Verification performed:** sources V1–V6 live on 2026-11-19; `verify_marketing` 27 pages/0 failures + 4 controls; `validate_data` ok (54/54/49/108); `audit_site` 7/7; `validate_brief`, `build_brief --check`; `validate_board`, `build_board --check`; namespace freshness for decisions/readiness/audit/review_board/console/discovery/intake/root data/root views/site/front/summary; full `tools/ci_replay.py` **61/61 PASSED** after the changes (re-run at final integration); packaging + publication contract run at final integration (see closing addendum). No product fact, intent field, campaign row or decision was changed; no price was recorded; blanks stay blank.
+
+**Reconciliation with the parallel closure (session `9ffe2d83`, T68, PR #185 — merged to `main` first):** while this branch was in flight, `9ffe2d83` independently executed the same CR-7..CR-10 scope and merged it. On the union merge into this branch (`origin/main` merged here, both sides kept): **canonical published state comes from `9ffe2d83`** — the `ledger/flags.json` F-54 row and register-note attribution (their wording, their id, published first; this session's parallel F-54 wording was superseded, not deleted-in-history), `ledger/questions.json` promotion notes, `board/data/requirements.json`/`topics.json` (their version is strictly stronger: RQ-05 uses the new `og_full` fully-derived token added to `tools/build_board.py`), and their EXECUTIVE_SUMMARY addendum. **Union where both added safety:** `marketing/scripts/verify_marketing.py` keeps `9ffe2d83`'s all-pages loop + desk-coverage sanity assert **and** this session's same-origin `SITE_PREFIX` self-link check (verified: 27 pages, 0 failures, plus this session's four negative controls). **This session's independent contributions that remain additive:** the dated `docs/verification-6998bc41.md` record (six live source reads V1–V6, the four CR-8 controls, the CR-10 proof, triage detail), **CR-14** (the `ledger/products.json` P-05 divergence — not raised by `9ffe2d83`), the desk-port request for #162's `desk/` namespace, and the T71 renumber trail. PRs #162/#163/#172 were closed by `9ffe2d83` in PR #185 — noted, not reversed. `assets/js/data.js` on `main` was missing the F-54 `FLAGGED_ROWS` entry that its own register publishes; regenerating from the merged register restores it.
 
 **Pending at the time of this paragraph:** PR creation, merge without waiting, GitHub Pages deploy confirmation, and the live fetch — all recorded in the closing addendum appended after deployment.

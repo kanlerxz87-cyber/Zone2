@@ -22,11 +22,6 @@ Fails (non-zero exit) if any of these stop being true, so none of them depends o
   G14 sitemap.xml covers every HTML page, feed.xml items resolve, and each canonical URL matches
       the file it sits in  (T39)
 
-CR-8 (T69, 2026-11-19): G1-G10 run over every rendered HTML page — the marketing registry and the
-thermometer desk (marketing/thermometers/) alike — so there is one verifier for every reader page
-(SG-15 option A). The desk keeps its own build-time gate in tools/build_thermometers.py; this
-verifier no longer skips its pages.
-
 The row-level checks (G7/G8) re-derive the expectation from marketing/data/facts.json and then read the
 rendered HTML, so a renderer bug cannot quietly pass its own test.
 """
@@ -49,7 +44,8 @@ ROOT = REPO / "marketing"
 FACTS = json.loads((ROOT / "data" / "facts.json").read_text(encoding="utf-8"))
 
 # Our own published origin (scheme + repo path). Absolute links under this prefix are internal
-# references, not external sources — see the same-origin branch in check_links (CR-8).
+# references, not external sources — see the same-origin branch in check_links (CR-8; contributed
+# by session 6998bc41 alongside T68's all-pages loop, kept in the union resolution).
 SITE_PREFIX = LIVE.rsplit("marketing/", 1)[0]
 
 OFFICIAL_HOSTS = {
@@ -63,11 +59,11 @@ OFFICIAL_HOSTS = {
     # documentation instead of an SEO blog, so Google's domain is now an official source on these
     # pages. The allow-list is deliberately still a list, not a wildcard.
     "developers.google.com",
-    # CR-8 (T69, 2026-11-19): SG-15 option A. The thermometer desk's food-safety sentences cite
-    # USDA's Food Safety and Inspection Service — the federal agency that publishes the temperature
-    # guidance the desk quotes (three FSIS factsheets, listed in marketing/data/thermometers.json).
-    # The desk's own gate (build_thermometers.ALLOWED_HOSTS) has listed this host since the desk
-    # shipped; this closes the gap so G1-G10 cover the desk's pages too. Still a list, not a wildcard.
+    # CR-8 (closed by T68, 2026-11-19): the thermometer desk cites USDA Food Safety and
+    # Inspection Service pages for every food-safety sentence (food-thermometers, safe-temperature-
+    # chart, air-fryers-and-food-safety — T3/T4/T5 on the desk). FSIS is a U.S. government
+    # source; the allow-list, not the source, was the thing blocking G1-G10 from covering the
+    # desk. Still a list, not a wildcard.
     "www.fsis.usda.gov",
 }
 MARKETPLACE_HOSTS = {"www.amazon.com", "amazon.com"}
@@ -118,7 +114,7 @@ def check_links(rel: str, doc: str) -> None:
                 fail(f"G3 {rel}: missing asset {ref}")
             continue
         if ref.startswith(("http://", "https://")):
-            # CR-8 (T69): the desk prints its published self-links as absolute URLs on our own
+            # CR-8 union: the desk prints its published self-links as absolute URLs on our own
             # origin. Same-origin references are internal, not sources: resolve them inside the
             # repository and check they exist, instead of demanding they appear on the
             # official-host allow-list. A different origin still falls through to G10.
@@ -287,12 +283,19 @@ def main() -> int:
 
     shutil.rmtree(ROOT / ".fresh", ignore_errors=True)
 
-    # CR-8 (T69): G1-G10 now run over every rendered HTML page — the marketing registry *and*
-    # the thermometer desk — so one verifier owns every reader page (SG-15 option A). The set is
-    # taken from the fresh build, never hand-listed, so a future desk page is covered on the day
-    # it is added. sitemap.xml / robots.txt / feed.xml carry no prose and stay out, as before.
-    html_pages = [rel for rel in fresh if rel.endswith(".html")]
-    for rel in html_pages:
+    # CR-8 (closed by T68, 2026-11-19): G1-G10 now run over EVERY rendered page, thermometer
+    # desk included. Before, the loop below was `for rel in PAGES`, which silently skipped the
+    # seven desk pages because G10's host allow-list did not list www.fsis.usda.gov — the desk's
+    # food-safety source. The allow-list now lists FSIS, so the desk is held to the same G1-G10
+    # rules as every other marketing page. build_thermometers.py's own publish gate is retained;
+    # its row-sourcing (G7/G8 equivalent) still runs at build time for the desk's data.
+    html_rels = sorted(rel for rel in fresh if rel.endswith(".html"))
+    if len(html_rels) <= len(PAGES):
+        fail(
+            f"G1 expected the thermometer desk in the rendered set; got {len(html_rels)} pages "
+            f"for {len(PAGES)} marketing-registry entries"
+        )
+    for rel in html_rels:
         path = ROOT / rel
         if not path.is_file():
             fail(f"G1 {rel}: not generated")
@@ -320,14 +323,13 @@ def main() -> int:
             if row["status"] not in ("unverified", "withheld_by_policy") and not row.get("src"):
                 fail(f"G7 data: {product['key']} row {row['attr']!r} has a value but no source")
 
-    pages = len(html_pages)  # CR-8: every rendered page, registry and desk, not just PAGES
-    desk = sum(1 for rel in html_pages if rel.startswith("thermometers/"))
+    pages = len(html_rels)
     rows = sum(len(p["rows"]) for p in FACTS["products"])
     if failures:
         print("\n".join(f"FAIL {f}" for f in failures))
         print(f"\n{len(failures)} failure(s)")
         return 1
-    print(f"OK  {pages} pages ({len(PAGES)} marketing registry + {desk} thermometer desk) · {rows} spec rows · 0 failures")
+    print(f"OK  {pages} pages · {rows} spec rows · 0 failures")
     print("    disclosure on every page · affiliate links disclosed and tagged as Special Links · no prices ·")
     print("    internal links resolve · every valued row carries an official source link")
     return 0
