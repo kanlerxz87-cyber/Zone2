@@ -61,4 +61,4 @@ Repository inspection also found an unresolved measurement-contract mismatch: `a
 
 ## Publication / integration status
 
-This record documents local verification only. PR #166 is open from `arena/cf98ff65-zone2` to `main`. No merge or GitHub Pages deployment is confirmed here. T65's earlier completion note calls the supplied tag “verified and active”; this task found no authorized account evidence that confirms activation or link coverage, so the current summary marks that status unverified.
+PR #166 was merged from `arena/cf98ff65-zone2` to `main` on 2026-11-19 at 06:01:43 UTC (merge commit `785740716952f309e5895ffeaea6c675115cc2d7`). Post-merge build-and-deploy run <https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44469199247> passed; Pages deployment run <https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44469198656> succeeded, and the Pages API reports `status: built` at <https://kanlerxz87-cyber.github.io/Zone2/>. T65's earlier completion note calls the supplied tag “verified and active”; this task found no authorized account evidence that confirms activation or link coverage, so the current summary marks that status unverified.
