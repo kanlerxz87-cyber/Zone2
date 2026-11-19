@@ -58,8 +58,53 @@ def steps() -> list[tuple[str, str]]:
     return out
 
 
+def preflight() -> list[str]:
+    """T63 (session 6ce606cb): fail before replaying if the workflow could not load on GitHub.
+
+    The step parser above is deliberately tolerant, so it happily replayed a pages.yml that
+    still carried merge-conflict markers from PR #158. GitHub's YAML loader rejected that
+    file, and every push from #158 to #161 produced a run with zero jobs, which was
+    mistaken for a cancelled run (CR-6). Two checks close the gap: no tracked file may hold
+    a conflict marker, and, when PyYAML is importable, the workflow must parse.
+    """
+    problems: list[str] = []
+    marker = re.compile(r"^(<{7} |>{7} |={7}$)", re.M)
+    files = subprocess.run(["git", "ls-files"], cwd=str(REPO), capture_output=True, text=True).stdout.split()
+    for f in files:
+        path = REPO / f
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        if f.endswith((".md",)):
+            # Markdown legitimately uses ======= as a setext heading underline.
+            if re.search(r"^(<{7} |>{7} )", text, re.M):
+                problems.append(f"conflict marker in {f}")
+            continue
+        if marker.search(text):
+            problems.append(f"conflict marker in {f}")
+    try:
+        import yaml  # type: ignore
+    except ImportError:
+        yaml = None
+    if yaml is not None:
+        try:
+            doc = yaml.safe_load(WF)
+            if not isinstance(doc, dict) or "jobs" not in doc:
+                problems.append("pages.yml parsed but has no jobs mapping")
+        except Exception as exc:  # pragma: no cover - reported, not raised
+            problems.append(f"pages.yml is not valid YAML: {exc}")
+    return problems
+
+
 def main() -> int:
     only = sys.argv[1] if len(sys.argv) > 1 else None
+    pre = preflight()
+    if pre:
+        print("PREFLIGHT FAILED (the workflow would not load on GitHub):")
+        print("\n".join("  - " + x for x in pre))
+        return 1
+    print("preflight: no conflict markers; workflow loads")
     failed = []
     all_steps = steps()
     ran = 0
