@@ -270,7 +270,10 @@ jobs:
         run: python3 tools/build_summary.py --check
 
       - name: Structural audit (fragments, spec sources, prose counts, orphans, disclosure)
-        run: python3 tools/audit_site.py
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 tools/audit_site.py 2>&1 | sed 's/^\(.*\)$/::error::\1/'
 
       # ---- arena/156aae86-zone2: discoverability (T41) ----
       # audit_site.py above proves every page is reachable BY A LINK. Nothing proved a page was
