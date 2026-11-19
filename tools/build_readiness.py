@@ -667,8 +667,9 @@ Nothing on this page is a product recommendation, and no product price is publis
 def no_price_problems(page: str) -> list[str]:
     """The same context-aware rule as tools/validate_data.py and the CI price step."""
     out = []
-    text = re.sub(r"<[^>]+>", " ", page)
-    for unit in re.split(r"</tr>|</p>|</li>|<br\s*/?>", text):
+    # Split first, then strip tags so the context boundary is preserved (CR-4 / FL-13).
+    units = [re.sub(r"<[^>]+>", " ", u) for u in re.split(r"</tr>|</p>|</li>|<br\s*/?>", page)]
+    for unit in units:
         for m in MONEY.finditer(unit):
             if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):
                 out.append(f"money value {m.group(0)!r} in a buying context")
