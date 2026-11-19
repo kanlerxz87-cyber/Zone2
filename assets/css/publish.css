@@ -303,3 +303,54 @@
   .pb-foot-grid    { grid-template-columns: 1fr; }
   .pb-nav          { gap: 16px; }
 }
+
+/* ---- T63 (session 6ce606cb, 2026-11-19): shop-first front, thermometer guides, desk ----
+   Additive only; every colour is an existing --* variable from style.css. */
+.pb-bench--two  { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pb-bench-for   { font-size: 13.5px; color: var(--ink); background: var(--accent-soft);
+                  padding: 7px 10px; border-radius: var(--radius); }
+.pb-bench-for b { font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+                  color: var(--accent-dark); margin-right: 6px; }
+.pb-bench-more  { display: block; margin-top: 8px; font-size: 12.5px; color: var(--ink-soft); }
+.pb-picks       { list-style: none; margin: 0; padding: 0; }
+.pb-picks li    { border-bottom: 1px solid var(--line-soft); }
+.pb-picks li:last-child { border-bottom: 0; }
+.pb-picks a     { display: flex; flex-direction: column; gap: 2px; padding: 9px 0;
+                  text-decoration: none; color: var(--ink); }
+.pb-picks a span { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
+.pb-picks a b   { font-size: 14.5px; font-weight: 650; }
+.pb-picks a:hover b { color: var(--accent); }
+.pb-season      { background: var(--accent-soft); border-top: 1px solid var(--line);
+                  border-bottom: 1px solid var(--line); padding: 14px 0; }
+.pb-season p    { margin: 0; font-size: 15px; color: var(--ink); }
+.pb-season a    { color: var(--accent-dark); font-weight: 600; }
+.pb-fine        { font-size: 12.5px; color: var(--faint); line-height: 1.5; margin-top: 16px; }
+.pb-article     { max-width: 72ch; }
+.pb-article h2  { font-family: "Fraunces", Georgia, serif; font-size: 24px; font-weight: 600;
+                  letter-spacing: -0.015em; margin: 34px 0 10px; }
+.pb-article h2:first-child { margin-top: 0; }
+.pb-article p, .pb-article li { font-size: 16.5px; line-height: 1.7; color: var(--ink); }
+.pb-article ul, .pb-article ol { padding-left: 22px; }
+.pb-article li  { margin-bottom: 8px; }
+.pb-article .pb-table-scroll { margin: 14px 0 6px; }
+.pb-article .pb-note { margin: 22px 0; }
+.pb-sources li  { font-size: 14px; }
+.pb-product     { padding: 28px 0; border-top: 1px solid var(--line-soft); }
+.pb-product:first-of-type { border-top: 0; padding-top: 6px; }
+.pb-product .pb-h2 { margin: 2px 0 6px; }
+.pb-goal        { scroll-margin-top: 16px; }
+.pb-goal-meta   { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--ink-soft);
+                  margin: 4px 0 18px; }
+.pb-goal-meta b { color: var(--ink); }
+.pb-signal      { border-left: 3px solid var(--gold); background: var(--paper);
+                  padding: 10px 14px; margin: 0 0 14px; font-size: 13.5px; line-height: 1.55;
+                  color: var(--ink-soft); }
+.pb-signal b    { color: var(--ink); }
+.pb-unknowns    { margin: 12px 0 0; padding: 0; list-style: none; font-size: 13.5px; }
+.pb-unknowns li { padding: 8px 0; border-top: 1px dashed var(--line-soft); color: var(--ink-soft);
+                  line-height: 1.5; }
+.pb-unknowns li b { color: var(--ink); }
+.pb-rank td.n   { color: var(--accent-dark); }
+@media (max-width: 1000px) {
+  .pb-bench--two { grid-template-columns: 1fr; }
+}

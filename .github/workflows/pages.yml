@@ -89,6 +89,10 @@ jobs:
           # T58: the decision board links sideways to its own stylesheet and upward to the
           # root site, so its references have to resolve like any other published namespace.
           problems += check("board", sorted(f.name for f in Path("board").glob("*.html")))
+          # T63 (session arena/6ce606cb-zone2): the decision desk and the guides namespace
+          # (which now includes the thermometer category and guides) link upward to the root.
+          problems += check("desk", sorted(f.name for f in Path("desk").glob("*.html")))
+          problems += check("guides", sorted(f.name for f in Path("guides").glob("*.html")))
           problems += check(".", [f.name for f in sorted(Path(".").glob("*.html")) if f.name != "404.html"])
           for page in sorted(Path("pages").rglob("*.html")):
               rel = page.relative_to("pages")
@@ -520,6 +524,17 @@ jobs:
       - name: Front-of-house gate (per-row sourcing, blanks carry a reason, disclosure above
               the data, sponsored links, canonical, no prices, no invented metrics)
         run: python3 tools/verify_front.py
+
+      # T63 (session arena/6ce606cb-zone2): the decision desk regroups the T50 board and the T63
+      # suggestions under four goals. The build step proves the committed pages are reproducible
+      # from the inputs; the gate enforces ids, statuses (nothing decided), derived counts,
+      # disclosure, canonical, links, and a citation beside every temperature in the guides.
+      - name: Rebuild the decision desk and confirm committed output is current
+        run: python3 tools/build_desk.py --check
+
+      - name: Decision desk gate (goals, options, unknowns, nothing decided, derived counts,
+              cited temperatures in the thermometer guides)
+        run: python3 tools/validate_desk.py
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

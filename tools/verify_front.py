@@ -37,6 +37,11 @@ PAGES = [
     "guides/air-fryer-ovens.html",
     "guides/buying-guide.html".replace("buying-guide", "buying-guides"),
     "guides/method.html",
+    # T63 (session 6ce606cb, 2026-11-19): thermometer category and guides from build_front TARGETS.
+    "guides/thermometers.html",
+    "guides/thermometers-is-the-turkey-done.html",
+    "guides/thermometers-instant-read-or-leave-in.html",
+    "guides/thermometers-in-an-air-fryer.html",
 ]
 
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."

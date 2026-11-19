@@ -1,0 +1,750 @@
+{
+  "$schema": "zone2/front-overlay/v1",
+  "note": "T63 (session arena/6ce606cb-zone2, 2026-11-19). Read-only input to tools/build_front.py and tools/build_desk.py. Holds (1) editorial voice for the two thermometer listings; their specification rows are NOT stored here but read from ledger/products.json resolved.specs (sources S61/S62, destinations re-observed 2026-11-19); (2) official food-safety rows from FoodSafety.gov; (3) the three new thermometer guides; (4) an overlay on docs/board-9251f262.json: goal grouping, what the 2026-11-19 brief asks for (signals only: every suggestion stays Proposed until the owner records a choice), one evidenced question update, and this wave's new suggestions and questions. No value here was inferred.",
+  "read_on": "2026-11-19",
+  "sources": {
+    "FS1": {
+      "name": "FoodSafety.gov — Safe Minimum Internal Temperature Chart (page states it was last reviewed November 21, 2024)",
+      "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+      "kind": "government",
+      "read_on": "2026-11-19"
+    },
+    "FS2": {
+      "name": "USDA FSIS — Food Thermometers fact sheet",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
+      "kind": "government",
+      "read_on": "2026-11-19"
+    },
+    "M5": {
+      "name": "Chefman official product page — TurboFry Touch 8 Qt",
+      "url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "kind": "manufacturer",
+      "read_on": "2026-11-19"
+    },
+    "G1": {
+      "name": "Google Search Central — Creating helpful, reliable, people-first content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "kind": "platform",
+      "read_on": "2026-11-19"
+    },
+    "G2": {
+      "name": "Google Search Central — Block Search indexing with noindex (updated 2025-12-10)",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+      "kind": "platform",
+      "read_on": "2026-11-19"
+    },
+    "G3": {
+      "name": "Search Console Help — Verify your site ownership",
+      "url": "https://support.google.com/webmasters/answer/9008080",
+      "kind": "platform",
+      "read_on": "2026-11-19"
+    },
+    "GH1": {
+      "name": "GitHub Docs — About custom domains and GitHub Pages",
+      "url": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages",
+      "kind": "platform",
+      "read_on": "2026-11-19"
+    },
+    "GH2": {
+      "name": "GitHub Docs — Events that trigger workflows (scheduled runs)",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+      "kind": "platform",
+      "read_on": "2026-11-19"
+    },
+    "S61": {
+      "name": "Amazon listing — ThermoMaven 1 Sec (B0DHZTCNR5); ledger source S61",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "kind": "marketplace",
+      "read_on": "2026-11-19"
+    },
+    "S62": {
+      "name": "Amazon listing — CHEF iQ Sense Gen3 (B0DZFD6R9Z); ledger source S62",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "kind": "marketplace",
+      "read_on": "2026-11-19"
+    }
+  },
+  "thermometers": [
+    {
+      "key": "P4",
+      "ledger_id": "P-04",
+      "asin": "B0DHZTCNR5",
+      "brand": "ThermoMaven",
+      "display": "ThermoMaven 1 Sec Professional Digital Meat Thermometer",
+      "short": "ThermoMaven instant-read",
+      "headline": "A one-second answer, then back in the drawer",
+      "best_for": "Checking doneness fast: chops, burgers, a basket of wings",
+      "note": "A thermocouple instant-read with an auto-rotating screen. You take a reading and pull it out. The listing never says it can stay in the oven.",
+      "supplied_link": "https://link.amazon/B0c8moW59",
+      "highlights": [
+        "Response time",
+        "Accuracy",
+        "Upper temperature range",
+        "Specification met"
+      ],
+      "listing_notice": "On 2026-11-19 the listing showed 'There is a newer model of this item', pointing to B0GL7Z4KP4 (Orange). This site still links the listing the supplied short link opens; see flag F-45 and question Q-T63-07.",
+      "extra_rows": [
+        {
+          "attr": "Can it stay in food while cooking?",
+          "value": "",
+          "status": "unverified",
+          "src": null,
+          "blank_reason": "The listing does not say so. Treat it as an instant-read tool: USDA FSIS advises against leaving a thermometer in food unless it is designed to stay there."
+        },
+        {
+          "attr": "Price",
+          "value": "",
+          "status": "withheld_by_policy",
+          "src": null,
+          "blank_reason": "Prices change, and Amazon's program policies limit how they can be shown off Amazon. The button opens the live listing."
+        },
+        {
+          "attr": "Star rating / review count",
+          "value": "",
+          "status": "withheld_by_policy",
+          "src": null,
+          "blank_reason": "Not reproduced here under the same policy; read them on the listing."
+        }
+      ]
+    },
+    {
+      "key": "P5",
+      "ledger_id": "P-05",
+      "asin": "B0DZFD6R9Z",
+      "brand": "CHEF iQ",
+      "display": "CHEF iQ Sense Smart Wireless Meat Thermometer (3 probes)",
+      "short": "CHEF iQ Sense",
+      "headline": "Leave it in the bird and watch from the sofa",
+      "best_for": "Roasts, a whole turkey, all-day smoking: anything you would otherwise keep opening the door to check",
+      "note": "Wireless probes that stay in the food, a hub that talks, and a phone app. Three probes means three things at once, each to its own target.",
+      "supplied_link": "https://link.amazon/B0f3GKalj",
+      "highlights": [
+        "Probes included",
+        "Sensors",
+        "Heat safety",
+        "Connectivity"
+      ],
+      "extra_rows": [
+        {
+          "attr": "Price",
+          "value": "",
+          "status": "withheld_by_policy",
+          "src": null,
+          "blank_reason": "Prices change, and Amazon's program policies limit how they can be shown off Amazon. The button opens the live listing."
+        },
+        {
+          "attr": "Star rating / review count",
+          "value": "",
+          "status": "withheld_by_policy",
+          "src": null,
+          "blank_reason": "Not reproduced here under the same policy; read them on the listing."
+        }
+      ]
+    }
+  ],
+  "food_safety": [
+    {
+      "attr": "Chicken, turkey and all poultry (whole bird, breasts, legs, thighs, wings, ground, stuffing)",
+      "value": "165 °F (74 °C)",
+      "status": "verified",
+      "src": "FS1"
+    },
+    {
+      "attr": "Beef, pork, veal, lamb: steaks, roasts, chops",
+      "value": "145 °F (63 °C), then rest 3 minutes",
+      "status": "verified",
+      "src": "FS1"
+    },
+    {
+      "attr": "Ground meat and sausage",
+      "value": "160 °F (71 °C)",
+      "status": "verified",
+      "src": "FS1"
+    },
+    {
+      "attr": "Fish (whole or fillet)",
+      "value": "145 °F (63 °C)",
+      "status": "verified",
+      "src": "FS1"
+    },
+    {
+      "attr": "Egg dishes (frittata, quiche)",
+      "value": "160 °F (71 °C)",
+      "status": "verified",
+      "src": "FS1"
+    },
+    {
+      "attr": "Leftovers and casseroles",
+      "value": "165 °F (74 °C)",
+      "status": "verified",
+      "src": "FS1"
+    }
+  ],
+  "guides": [
+    {
+      "slug": "thermometers-is-the-turkey-done.html",
+      "kicker": "Thanksgiving",
+      "title": "Is the turkey done? Where the thermometer goes, and the one number that matters",
+      "hook": "165 °F, checked in three places. Where the probe goes, which kind of thermometer makes the day easier, and how to test your thermometer before you trust it.",
+      "category": "thermometers",
+      "published": "2026-11-19"
+    },
+    {
+      "slug": "thermometers-instant-read-or-leave-in.html",
+      "kicker": "Buying guide",
+      "title": "Instant-read or leave-in? Picking a meat thermometer you will actually use",
+      "hook": "One lives in a drawer and answers in a second. The other lives in the roast and texts you. They solve different problems, and most kitchens only need one of them.",
+      "category": "thermometers",
+      "published": "2026-11-19"
+    },
+    {
+      "slug": "thermometers-in-an-air-fryer.html",
+      "kicker": "Air fryer + probe",
+      "title": "Can you use a meat thermometer in an air fryer?",
+      "hook": "Yes, but the kind matters. One of our air fryers halts cooking the moment you open the basket, which changes how you check.",
+      "category": "thermometers",
+      "published": "2026-11-19"
+    }
+  ],
+  "goals": {
+    "shop": {
+      "title": "Make it read like a shop, not an audit",
+      "blurb": "Turn a careful source register into a page a buyer can act on."
+    },
+    "findable": {
+      "title": "Make it findable",
+      "blurb": "Give search engines one site to index and a reason to rank it."
+    },
+    "machinery": {
+      "title": "Make the machinery trustworthy",
+      "blurb": "Automate the parts that can be automated, and put a gate in front of the parts that cannot."
+    },
+    "publication": {
+      "title": "Make it read like a publication",
+      "blurb": "Authorship, navigation, brand, imagery, seasons and clusters: the changes that make the site feel published rather than generated."
+    }
+  },
+  "goal_map": {
+    "SG-T50-01": "shop",
+    "SG-T50-09": "shop",
+    "SG-T50-10": "shop",
+    "SG-T50-04": "findable",
+    "SG-T50-02": "machinery",
+    "SG-T50-03": "machinery",
+    "SG-T50-05": "machinery",
+    "SG-T50-06": "machinery",
+    "SG-T50-07": "machinery",
+    "SG-T50-08": "machinery",
+    "SG-T50-11": "machinery",
+    "SG-T50-12": "publication"
+  },
+  "question_updates": {
+    "Q-T50-02": {
+      "status": "answered",
+      "what_we_know": "The owner supplied the tracking ID shopnow047c-20 in the brief. Since PR #160 (T61) it is on every product button this site writes, applied by the policy-guarded link builder. The five supplied short links do not carry it: they are Amazon's own redirects, and no resolved URL carried a tag when re-observed on 2026-11-19."
+    }
+  },
+  "suggestions": [
+    {
+      "id": "SG-T63-01",
+      "goal": "shop",
+      "area": "Imagery",
+      "title": "Show real product images, from a source the account is allowed to use",
+      "summary": "Every card on the front page is text-only. Shoppers expect to see the thing. Amazon's program policies govern how its content, images included, may be used off Amazon, and which mechanism this account can use is not known yet.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Stay text-only, with simple category icons.",
+          "cost": "None",
+          "tradeoff": "Clean and safe, but reads less like a shop."
+        },
+        {
+          "label": "B",
+          "text": "Use images served through an Amazon mechanism the account is entitled to, once Q-T63-01 confirms which one.",
+          "cost": "One build pass once access is confirmed",
+          "tradeoff": "Depends on account entitlements nobody has checked yet."
+        },
+        {
+          "label": "C",
+          "text": "Buy the products and take our own photographs.",
+          "cost": "The products plus a photo session",
+          "tradeoff": "Best for trust and originality; slowest, and needs Q-T63-05."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T63-01"
+      ],
+      "source": "S02",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-02",
+      "goal": "shop",
+      "area": "Content",
+      "title": "Add hands-on notes from someone who has used the products",
+      "summary": "Today every write-up compares what the maker and the listing promise. Google's guidance asks whether content offers original information and whether it is clear who made it and how. First-hand use is the one ingredient this site cannot produce from spec sheets.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Stay spec-led and say so plainly on every write-up.",
+          "cost": "None",
+          "tradeoff": "Honest but interchangeable with every other spec roundup."
+        },
+        {
+          "label": "B",
+          "text": "Buy the five, use them for two weeks, and add a short dated 'what we noticed' block with our own photos to each write-up.",
+          "cost": "The products plus writing time",
+          "tradeoff": "Strongest signal for readers and search; needs a named author and a budget."
+        },
+        {
+          "label": "C",
+          "text": "Summarise other sites' reviews.",
+          "cost": "Low",
+          "tradeoff": "Thin, derivative, and exactly what the guidance warns against."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T63-04",
+        "Q-T63-05"
+      ],
+      "source": "G1",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-12",
+      "goal": "shop",
+      "area": "Catalogue",
+      "title": "Decide what the ThermoMaven button should open now that Amazon shows a newer model",
+      "summary": "On 2026-11-19 the listing the supplied link opens (B0DHZTCNR5) carried a 'There is a newer model of this item' notice pointing to B0GL7Z4KP4 (Orange). Whether that is a new revision or a colour variant was not verified.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep linking the listing the supplied short link opens.",
+          "cost": "None",
+          "tradeoff": "Matches what the owner supplied; might point buyers at an older model."
+        },
+        {
+          "label": "B",
+          "text": "Switch to B0GL7Z4KP4 after reading and sourcing its listing.",
+          "cost": "One verification pass",
+          "tradeoff": "Overrides the supplied link without the owner saying so."
+        },
+        {
+          "label": "C",
+          "text": "Show both, labelled.",
+          "cost": "Small",
+          "tradeoff": "More choice, more clutter."
+        }
+      ],
+      "recommendation": "A",
+      "waits_on": [
+        "Q-T63-07"
+      ],
+      "source": null,
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-03",
+      "goal": "findable",
+      "area": "Search",
+      "title": "Verify the site in Google Search Console and submit the sitemap",
+      "summary": "Without a verified Search Console property there is no query data at all, so SG-T50-04's 'choose the next topic from measured queries' cannot start. Verification can be done with an HTML file or an HTML tag, both of which this repository can publish.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Do nothing and rely on crawling.",
+          "cost": "None",
+          "tradeoff": "No idea what anyone searches for."
+        },
+        {
+          "label": "B",
+          "text": "Owner creates the property; we commit the verification file or tag and submit sitemap.xml.",
+          "cost": "Ten minutes of owner time",
+          "tradeoff": "Needs the owner's Google account."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T63-03"
+      ],
+      "source": "G3",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-04",
+      "goal": "findable",
+      "area": "Brand",
+      "title": "Move to a real domain name",
+      "summary": "The site lives at a GitHub sub-path. GitHub Pages supports custom domains, and GitHub recommends a www subdomain and verifying the domain first.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Stay on kanlerxz87-cyber.github.io/Zone2.",
+          "cost": "None",
+          "tradeoff": "Looks like a project, not a publication."
+        },
+        {
+          "label": "B",
+          "text": "Register a domain, verify it with GitHub, and serve the site on its www subdomain.",
+          "cost": "Domain registration plus one DNS change",
+          "tradeoff": "Every canonical URL changes once; worth doing before traffic arrives, not after."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T63-02"
+      ],
+      "source": "GH1",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-05",
+      "goal": "findable",
+      "area": "Site structure",
+      "title": "Take the old builds and duplicate dashboards out of the search index",
+      "summary": "The repository publishes close to two hundred pages across a dozen namespaces, most of them earlier builds and internal review surfaces. A reader-facing site competes with its own scaffolding. Google honours a noindex meta tag page by page, which works on GitHub Pages.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep everything indexable.",
+          "cost": "None",
+          "tradeoff": "Search engines see far more audit pages than buyer pages."
+        },
+        {
+          "label": "B",
+          "text": "Add noindex to legacy and internal namespaces; keep them reachable from the footer index.",
+          "cost": "One generator pass per namespace",
+          "tradeoff": "Nothing is lost; those pages simply stop competing in search."
+        },
+        {
+          "label": "C",
+          "text": "Delete them from the published site; git history keeps them.",
+          "cost": "One pass",
+          "tradeoff": "Cleanest, but breaks any bookmarks."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T63-06"
+      ],
+      "source": "G2",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-06",
+      "goal": "findable",
+      "area": "Calendar",
+      "title": "Publish ahead of the season instead of on the day",
+      "summary": "Gift guides and holiday cooking questions are searched before the day, not on it. T63 published the turkey guide on 2026-11-19, a week before Thanksgiving (2026-11-26), as a first example. Next up are the December holidays and New Year.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Evergreen guides only.",
+          "cost": "None",
+          "tradeoff": "Misses the weeks when people are actually shopping."
+        },
+        {
+          "label": "B",
+          "text": "A light seasonal calendar: one piece two to three weeks before each major cooking or gifting date, each tied to a product we cover.",
+          "cost": "About one guide a month",
+          "tradeoff": "Needs someone to keep the calendar."
+        },
+        {
+          "label": "C",
+          "text": "Chase daily trends.",
+          "cost": "High",
+          "tradeoff": "Unsustainable and off-topic for five products."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [],
+      "source": "G1",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-07",
+      "goal": "machinery",
+      "area": "Link health",
+      "title": "Re-check the five supplied links on a schedule and open an issue when one changes",
+      "summary": "Every destination on this site rests on five short links resolving to the same listings. They have done so on every date checked, most recently 2026-11-19, but nothing watches them between sessions. GitHub Actions workflows can run at a scheduled time.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep checking by hand when a session happens to run.",
+          "cost": "None",
+          "tradeoff": "A changed destination could sit unnoticed for days."
+        },
+        {
+          "label": "B",
+          "text": "A weekly scheduled workflow that resolves the five links and opens an issue if any destination ASIN changes.",
+          "cost": "One small workflow",
+          "tradeoff": "Amazon may rate-limit automated requests, so a failed check has to be read as 'unknown', not 'changed'."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [],
+      "source": "GH2",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-08",
+      "goal": "machinery",
+      "area": "Data",
+      "title": "Keep one register of product facts, not two",
+      "summary": "marketing/data/facts.json (used by the reader pages) and ledger/products.json (used by the dashboards) were transcribed separately and now disagree. For the 8-quart Chefman's power, facts.json says 'verified, 1700 W / 120 V' while the ledger records a CONFLICT, because an Amazon bullet says 1000 W (flag F-46).",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep both and reconcile by hand.",
+          "cost": "None now",
+          "tradeoff": "They will drift again."
+        },
+        {
+          "label": "B",
+          "text": "Make ledger/products.json the single source and generate facts.json from it.",
+          "cost": "One generator",
+          "tradeoff": "Touches two namespaces at once."
+        },
+        {
+          "label": "C",
+          "text": "Make facts.json the source instead.",
+          "cost": "One generator",
+          "tradeoff": "facts.json has fewer fields, so the ledger would lose detail."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [],
+      "source": null,
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-09",
+      "goal": "publication",
+      "area": "Authorship",
+      "title": "Put a name on the writing and add an About page",
+      "summary": "Every page is signed 'Counter Notes'. Google's guidance asks readers' questions of every page: who made it, how, and why. An About page that says who picks the products, how they are checked, and that the links earn a commission answers all three.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Stay unsigned.",
+          "cost": "None",
+          "tradeoff": "Reads as anonymous and generated."
+        },
+        {
+          "label": "B",
+          "text": "A named editor with a short bio on every guide, plus an About page.",
+          "cost": "One page plus a byline field",
+          "tradeoff": "Needs a real person willing to be named."
+        },
+        {
+          "label": "C",
+          "text": "A pen name with an honest About page.",
+          "cost": "Same as B",
+          "tradeoff": "Better than nothing, weaker than a real name."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T63-04"
+      ],
+      "source": "G1",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-10",
+      "goal": "publication",
+      "area": "Reader capture",
+      "title": "Give returning readers a way to follow along",
+      "summary": "An RSS feed exists (marketing/feed.xml), but it lists only the marketing topic pages; the root guides are not in it. An email list would reach more people but needs a provider, a privacy notice and somewhere to store addresses, which static hosting cannot provide by itself.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Extend RSS to cover every guide (one feed for the whole site) and link it from every footer.",
+          "cost": "One generator change in build_marketing.py, which another session owns",
+          "tradeoff": "Few readers use RSS, but it costs almost nothing."
+        },
+        {
+          "label": "B",
+          "text": "An email newsletter through a third-party provider, with a privacy notice.",
+          "cost": "Provider account and a privacy page",
+          "tradeoff": "Adds a data processor; pointless before there is traffic."
+        }
+      ],
+      "recommendation": "A",
+      "waits_on": [
+        "Q-T50-08",
+        "Q-T50-10"
+      ],
+      "source": null,
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    },
+    {
+      "id": "SG-T63-11",
+      "goal": "publication",
+      "area": "Categories",
+      "title": "Treat thermometers as a second category, paired with air fryers",
+      "summary": "Two of the five supplied links open meat thermometers, not air fryers. T63 gave them a category page and three guides, one of which joins the two categories (using a thermometer in an air fryer). Whether thermometers were intended at all is still Q-T50-01.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep both categories and build the 'air fryer plus probe' cluster.",
+          "cost": "Ongoing writing",
+          "tradeoff": "Broader site, still coherent: both are countertop cooking."
+        },
+        {
+          "label": "B",
+          "text": "Split thermometers into their own site.",
+          "cost": "A second site",
+          "tradeoff": "Splits the little authority the domain has."
+        },
+        {
+          "label": "C",
+          "text": "Drop the thermometers.",
+          "cost": "Removes pages",
+          "tradeoff": "Ignores two of the five supplied links."
+        }
+      ],
+      "recommendation": "A",
+      "waits_on": [
+        "Q-T50-01"
+      ],
+      "source": null,
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-T63-01",
+      "question": "Can this Associates account show Amazon product images, and through which tool?",
+      "status": "open",
+      "what_we_know": "The site shows no product images. Amazon's program policies govern how Amazon content, images included, may be used off Amazon.",
+      "what_is_missing": "Which tools this account is actually entitled to use, and whether the account is approved (Q-T50-04).",
+      "how_to_discover": "Sign in to Associates Central, check which link and image tools and API access the account has, and record the answer here.",
+      "blocks": [
+        "SG-T63-01"
+      ],
+      "source": "S02"
+    },
+    {
+      "id": "Q-T63-02",
+      "question": "Is there a domain name for this site, and who will own it?",
+      "status": "open",
+      "what_we_know": "The site is served from a github.io sub-path. GitHub Pages supports apex and www custom domains and recommends verifying the domain first.",
+      "what_is_missing": "Whether the owner has or wants a domain, which name, and who pays for it.",
+      "how_to_discover": "Owner decision. If yes: register it, verify it in GitHub settings, then we add the CNAME and update every canonical URL in one pass.",
+      "blocks": [
+        "SG-T63-04"
+      ],
+      "source": "GH1"
+    },
+    {
+      "id": "Q-T63-03",
+      "question": "Which Google account will own the site in Search Console?",
+      "status": "open",
+      "what_we_know": "A sitemap derived from the tree and a robots.txt are published. Search Console supports HTML-file and HTML-tag verification, both of which this repository can publish.",
+      "what_is_missing": "A verified property. Without one there is no data on which searches show this site or get clicked.",
+      "how_to_discover": "Owner adds the property in Search Console and sends the verification token; we commit it and submit sitemap.xml.",
+      "blocks": [
+        "SG-T63-03",
+        "SG-T50-04"
+      ],
+      "source": "G3"
+    },
+    {
+      "id": "Q-T63-04",
+      "question": "Who is the named author, and have they used any of the five products?",
+      "status": "open",
+      "what_we_know": "Every page is currently signed with the site name only. Google's helpful-content guidance asks who created a page and how.",
+      "what_is_missing": "A name, a two-line bio, and an honest statement of hands-on experience (or none).",
+      "how_to_discover": "Owner supplies them; we add a byline and an About page.",
+      "blocks": [
+        "SG-T63-09",
+        "SG-T63-02"
+      ],
+      "source": "G1"
+    },
+    {
+      "id": "Q-T63-05",
+      "question": "Is there a budget to buy the products for hands-on testing?",
+      "status": "open",
+      "what_we_know": "Nothing on this site comes from first-hand use; every claim is the maker's or the listing's.",
+      "what_is_missing": "A budget, and someone with the kitchen and the time.",
+      "how_to_discover": "Owner decision. Start with the one product where a hands-on note would settle the most: the 8-quart Chefman, where two official pages disagree on wattage.",
+      "blocks": [
+        "SG-T63-02"
+      ],
+      "source": "M5"
+    },
+    {
+      "id": "Q-T63-06",
+      "question": "Does anyone still rely on the old builds and internal dashboards being indexed by search engines?",
+      "status": "open",
+      "what_we_know": "About a dozen namespaces (northstar/, zone2/, research-hub/, affiliate-lab/, revalidation/, review pages and others) are published alongside the reader pages. Google drops a page carrying a noindex tag from its results, page by page.",
+      "what_is_missing": "Whether any of them is linked from outside or used by anyone, which Search Console would show (Q-T63-03).",
+      "how_to_discover": "Owner confirms; after Search Console is verified, its page-indexing report shows which of them are indexed or receive clicks.",
+      "blocks": [
+        "SG-T63-05"
+      ],
+      "source": "G2"
+    },
+    {
+      "id": "Q-T63-07",
+      "question": "Should the ThermoMaven button follow Amazon's 'newer model' notice?",
+      "status": "open",
+      "what_we_know": "On 2026-11-19 the supplied link opened B0DHZTCNR5, and that listing showed 'There is a newer model of this item' pointing to B0GL7Z4KP4 (Orange).",
+      "what_is_missing": "The owner's intent, and whether B0GL7Z4KP4 is a revision or a colour variant. Its listing has not been read or sourced.",
+      "how_to_discover": "Owner confirms which listing they mean; if it is the newer one, we read and source that listing before switching.",
+      "blocks": [
+        "SG-T63-12"
+      ],
+      "source": "S61"
+    }
+  ],
+  "food_safety_note": "Rows transcribed from the FoodSafety.gov chart (FS1), page states it was last reviewed November 21, 2024, read 2026-11-19.",
+  "brief_signals": {
+    "SG-T50-01": {
+      "asks": "Lead with the products rather than the verification process; keep dashboard surfaces reachable from the footer and one navigation group.",
+      "matches": "B",
+      "shipped": "T63 rebuilt the front page around all five products, cut the masthead to one reader navigation group, and moved every dashboard surface to the footer."
+    },
+    "SG-T50-02": {
+      "asks": "Use the supplied tracking ID shopnow047c-20.",
+      "matches": "B",
+      "shipped": "Since T61 (PR #160) every product button carries the tag, applied by the policy-guarded link builder."
+    },
+    "SG-T50-04": {
+      "asks": "One site to index, a sitemap and feed, a publishing cadence and real analytics.",
+      "matches": "B",
+      "shipped": "Partly. T63 published three new guides; the tree-derived sitemap picks them up. They are not in marketing/feed.xml, which by design lists only marketing topic pages (verify_marketing G14), and its generator is outside this session's scope. Query data waits on Search Console (Q-T63-03)."
+    },
+    "SG-T50-05": {
+      "asks": "A privacy-preserving outbound-click counter, a self-hosted analytics endpoint and the five defined events.",
+      "matches": "B",
+      "shipped": "Partly. The cookie-free counter exists since T61. A self-hosted endpoint cannot run on GitHub Pages and waits on Q-T50-10."
+    },
+    "SG-T50-07": {
+      "asks": "Disclosure above the fold on every page, repeated in the footer.",
+      "matches": "B",
+      "shipped": "Every page this generator writes carries the strip under the masthead and again in the footer."
+    },
+    "SG-T50-08": {
+      "asks": "Every outbound product link marked as sponsored.",
+      "matches": "B",
+      "shipped": "Every product link is rel=\"sponsored nofollow\"; gate G4 fails the build otherwise."
+    }
+  }
+}
