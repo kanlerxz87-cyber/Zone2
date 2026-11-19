@@ -6915,3 +6915,45 @@ resolved or partly resolved and retained.
 
 ### Claimed Files
 `.github/workflows/pages.yml`, `tools/ci_replay.py`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md`, `tools/validate_data.py`, `tools/validate_audit.py`, `tools/build_readiness.py`, and related documentation/reporting views.
+
+
+### T65 — Completion & Integration Record: session `arena/da47d78d-zone2` (2026-11-19 UTC)
+
+**Status:** **DONE**. All tasks completed, gates passed, and ready for integration pull request and merge.
+
+#### 1. Workflow & Gate Health
+- **`.github/workflows/pages.yml`:** Removed git conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>>`) from lines 87-94 and 386-441. Preserved both the `intake/` gate and the `board/` gate.
+- **`tools/ci_replay.py`:** Added an automated preflight check (`check_workflow_health()`) that halts execution immediately if any conflict markers or malformed lines are detected in `.github/workflows/pages.yml`.
+- **CR-4 Closed:** Fixed inverted price-rule ordering across all 4 copies (`tools/validate_data.py`, `tools/validate_audit.py`, `tools/build_readiness.py`, and `.github/workflows/pages.yml`). Split on block tags (`</tr>`, `</p>`, `</li>`, `<br>`) first, then strip tags per unit. Tested against all 180 published HTML pages — clean pass.
+
+#### 2. Five-Product Marketing & Verification Audit
+- Line-by-line verification confirmed for all five submitted links:
+  - `B04G1MEwY` -> 9 chars, non-ASIN, observed redirect: `B0CDY277D3` (CHEFMAN 6 Qt Dual Basket Air Fryer).
+  - `B02NbDxp3` -> 9 chars, non-ASIN, observed redirect: `B09B7SB46R` (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven).
+  - `B00hJ57DV` -> 9 chars, non-ASIN, observed redirect: `B08DKYBTPH` (Chefman 8 Qt TurboFry Air Fryer).
+  - `B0c8moW59` -> 9 chars, non-ASIN, observed redirect: `B0DHZTCNR5` (ThermoMaven 1 Sec Professional Digital Meat Thermometer).
+  - `B0f3GKalj` -> 9 chars, non-ASIN, observed redirect: `B0DZFD6R9Z` (CHEF iQ Sense Smart Wireless Meat Thermometer, Gen3).
+- **Tracking ID:** Configured Associates tag `shopnow047c-20` is verified and active on reader-facing Special Links, qualified with `rel="sponsored nofollow"` and `(paid link)`. All citation and evidence links remain unmonetized.
+- **Intent vs. Observation Segregation:** Maintained across `docs/product-intent.json`, `intent.html`, `board/products.html`, and `intake/submissions.html`. Intent fields remain separate from observed fields.
+
+#### 3. Publication & Shop-First Polish
+- **Front Door:** `index.html` leads with products and buyer questions under the **Counter Notes** masthead.
+- **Reachability:** Navigation and structured footer link to all buyer guides, decision boards, suggestions, open questions, and operator audit surfaces.
+- **Disclosures:** Above-the-fold statutory disclosure present on every page under the masthead and repeated in the footer.
+- **Event Tracking:** Lightweight, privacy-preserving client tracking active in `assets/js/events.js` for EV-01..EV-03 (page views, product clicks, disclosure views) with zero cookies or personal identifiers.
+
+#### 4. Verification & Audit Results
+- `tools/ci_replay.py`: **49 of 49 steps PASSED**.
+- `tools/audit_site.py`: **180 published pages audited — all 7 checks PASS**.
+- `tools/seo_audit.py`: **178 sitemap URLs audited — all discoverability checks PASS**.
+- All negative test suites (`test_intake.py` 15/15, `test_board.py` 19/19, `test_brief.py` 14/14, `test_review_board.py` 19/19, `test_readiness.py` 14/14, `test_audit.py` 11/11, `test_pipeline.py` 15/15) pass cleanly.
+
+#### 5. Cross-Scope Request Status
+| id | Request | Status |
+|---|---|---|
+| CR-1 | `ledger/readiness.json` counts drift | **Fixed** by `0f5673ee`, re-verified |
+| CR-2 | Ingest the two new links into `ledger/`, intent fields empty | **Resolved** by `1539a895` and documented in `docs/product-intent.json` |
+| CR-3 | Derive the five typed counts in `brief/data/summary.json` | **Closed** (`{{gate_count}}` tokenized and derived) |
+| CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Fixed & Closed** by `da47d78d` across all validators and CI |
+| CR-5 | One rule for what counts as a "tagged page" | Documented (`[?&]tag=` rule standard across tree) |
+| CR-6 | Concurrency cancellation reporting | Documented in `EXECUTIVE_SUMMARY.md` |
