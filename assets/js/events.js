@@ -1,138 +1,81 @@
-/* ============================================================================
-   Counter Notes — privacy-preserving event counter (T58, session 7264f3c2, 2026-11-17)
-
-   Implements EV-01 (page_view), EV-02 (product_link_click) and EV-03 (disclosure_view)
-   from docs/measurement-t40.json, LIVE under the owner decision recorded on
-   discovery/suggestions.html#DS-11 (option A, recorded 2026-11-17).
-
-   The contract this file obeys (principles MP-01..MP-05 in the measurement design):
-
-   MP-01  No personal data: no cookie, no cross-site identifier, and nothing derived from
-          the visitor. The queue below stores AGGREGATE EVENTS — page path, a day bucket,
-          a static link label — in the visitor's own browser, same-origin, and nothing
-          about a person could be reconstructed from them even in principle.
-   MP-02  Measure the page and the link, never the person: every field is a static label
-          carried by the page or the link itself.
-   MP-03  Publish no traffic, conversion or income expectation: this script prints nothing
-          and no count derived from it is rendered anywhere on the site.
-   MP-05  Search and navigation are never intercepted: clicks are observed, never blocked.
-
-   Persistence: GitHub Pages serves static files, so the endpoint that would keep these
-   counts does not exist yet (open item MI-01; suggestion DS-17 on the discovery board).
-   Until the owner deploys one, events accumulate in a bounded same-origin queue and
-   nothing is transmitted. Deploying an endpoint is one line: set
-   window.CN_EVENTS_ENDPOINT = '/api/events' (or any absolute first-party URL) before this
-   script loads; the queue then flushes via navigator.sendBeacon on page hide. The event
-   shape matches tools/tracking_schema.sql's site_clicks contract: page, link label, day —
-   never an IP, user agent, cookie or per-visitor id.
-   ========================================================================== */
+/* Counter Notes · EV-01 page_view, EV-02 product_link_click, EV-03 disclosure_view.
+   EV-04/05 are authorized report imports, NEVER browser events.
+   No cookies, localStorage, visitor/session ID, fingerprint, referrer or query.
+   Direct Amazon links are observed, never blocked or routed through a redirect.
+   Raw best-effort event counts are not unique readers or eligible Amazon Sessions.
+   See privacy.html and docs/MEASUREMENT.md for retention/deployment limitations. */
 (function () {
   'use strict';
-
-  // Measure the production host only: previews, local checkouts and mirror hosts record
-  // nothing, so a developer session can never inflate a count.
-  if (location.hostname !== 'kanlerxz87-cyber.github.io') { return; }
-
-  var QUEUE_KEY = 'counter-notes-events-v1'; // a bucket for aggregate events, not an identifier
-  var MAX_EVENTS = 200;                      // bounded: the oldest event is dropped, never grown unbounded
-  var ENDPOINT = window.CN_EVENTS_ENDPOINT || null;
-
-  function dayBucket() {
-    // A date, never a time: the design forbids anything finer than a day bucket.
-    try { return new Date().toISOString().slice(0, 10); } catch (e) { return ''; }
-  }
-
-  function pagePath() {
-    return location.pathname;
-  }
-
-  function referrerHost() {
-    // The hostname only — never the full referrer URL, never its query string.
-    try { return document.referrer ? new URL(document.referrer).hostname : ''; }
-    catch (e) { return ''; }
-  }
-
-  function loadQueue() {
-    try {
-      var raw = window.localStorage.getItem(QUEUE_KEY);
-      var arr = raw ? JSON.parse(raw) : [];
-      return Object.prototype.toString.call(arr) === '[object Array]' ? arr : [];
-    } catch (e) { return []; } // storage unavailable (private mode): the event is simply not recorded
-  }
-
-  function saveQueue(q) {
-    try { window.localStorage.setItem(QUEUE_KEY, JSON.stringify(q.slice(-MAX_EVENTS))); }
-    catch (e) { /* as above: losing an aggregate count is acceptable; storing an identifier is not */ }
-  }
-
-  function record(name, fields) {
-    var ev = { n: name, d: dayBucket(), p: pagePath() };
-    if (fields) { for (var k in fields) { if (Object.prototype.hasOwnProperty.call(fields, k)) { ev[k] = fields[k]; } } }
-    var q = loadQueue();
-    q.push(ev);
-    saveQueue(q);
-  }
-
+  var config = window.CN_MEASUREMENT || {};
+  if (!config.enabled || !config.endpoint || !window.fetch) { return; }
+  if (navigator.globalPrivacyControl || navigator.doNotTrack === '1' || window.doNotTrack === '1') { return; }
+  if (navigator.webdriver && config.mode !== 'test') { return; }
+  var endpoint;
+  try {
+    endpoint = new URL(config.endpoint, location.href);
+    if (endpoint.origin !== location.origin || endpoint.search || endpoint.hash) { return; }
+    if (endpoint.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') { return; }
+  } catch (error) { return; }
+  var page = location.pathname.replace(/^\/Zone2(?=\/)/, '');
+  var pending = [];
+  var sent = 0;
+  var failed = 0;
+  var scheduled = false;
   function flush() {
-    if (!ENDPOINT || typeof navigator === 'undefined' || !navigator.sendBeacon) { return; }
-    var q = loadQueue();
-    if (!q.length) { return; }
+    scheduled = false;
+    if (!pending.length) { return; }
+    var batch = pending.splice(0, 20);
+    // At-most-once attempt: no retry after an ambiguous network result, no persistent queue.
+    // An unavailable collector loses events rather than inventing exact delivery guarantees.
     try {
-      // sendBeacon with the aggregate queue only. If the endpoint is down the queue stays
-      // where it is — capped, aggregate, local — and the next page tries again.
-      if (navigator.sendBeacon(ENDPOINT, JSON.stringify({ events: q }))) { saveQueue([]); }
-    } catch (e) { /* never break the page for a measurement */ }
+      window.fetch(endpoint.href, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ events: batch }),
+        credentials: 'omit',
+        referrerPolicy: 'no-referrer',
+        keepalive: true
+      }).then(function (response) {
+        if (response.ok) { sent += batch.length; } else { failed += batch.length; }
+      }).catch(function () { failed += batch.length; });
+    } catch (error) { failed += batch.length; }
   }
-
-  // ---- EV-01: page_view — once per page load -------------------------------
-  record('page_view', { r: referrerHost() });
-
-  // ---- EV-02: product_link_click — observed, never intercepted -------------
-  document.addEventListener('click', function (ev) {
-    var node = ev.target;
-    while (node && node !== document.body) {
-      if (node.nodeType === 1 && node.tagName === 'A' && node.getAttribute('data-link-state')) {
-        record('product_link_click', {
-          k: node.getAttribute('data-product-key') || 'unkeyed',
-          s: node.getAttribute('data-link-state')
-        });
-        return; // do not preventDefault: the visitor goes to Amazon exactly as before
-      }
-      node = node.parentNode;
+  function record(name, fields) {
+    var event = { name: name, page: page };
+    Object.keys(fields || {}).forEach(function (key) { event[key] = fields[key]; });
+    pending.push(event);
+    if (!scheduled) {
+      scheduled = true;
+      window.setTimeout(flush, 0);
     }
+  }
+  record('page_view');
+  document.addEventListener('click', function (event) {
+    var anchor = event.target && event.target.closest ? event.target.closest('a[data-product-key]') : null;
+    if (!anchor || anchor.getAttribute('data-link-state') !== 'TAGGED') { return; }
+    var key = anchor.getAttribute('data-product-key') || '';
+    if (/^P-[0-9]{2}$/.test(key)) { key = 'P' + Number(key.slice(2)); }
+    if (!/^P[1-5]$/.test(key)) { return; }
+    record('product_link_click', { product: key });
+    flush(); // Do not preventDefault or wait: shopping works even if this request fails.
   }, true);
-
-  // ---- EV-03: disclosure_view — the strip entering the reader's viewport ----
-  var disclosureSeen = false;
-  function markDisclosure() {
-    if (disclosureSeen) { return; }
-    disclosureSeen = true;
-    record('disclosure_view', { pos: 'strip' });
+  var strip = document.querySelector('[data-disclosure-strip], .pb-disc, .disclosure[data-rule="R-01"]');
+  if (strip && 'IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      if (entries.some(function (entry) { return entry.isIntersecting && entry.intersectionRatio >= 0.5; })) {
+        record('disclosure_view', { position: 'strip' });
+        observer.disconnect();
+      }
+    }, { threshold: 0.5 });
+    observer.observe(strip);
   }
-  if ('IntersectionObserver' in window) {
-    var target = document.querySelector('.pb-disc') || document.querySelector('.disclosure[data-rule="R-01"]');
-    if (target) {
-      var io = new IntersectionObserver(function (entries) {
-        for (var i = 0; i < entries.length; i++) {
-          if (entries[i].isIntersecting) { markDisclosure(); io.disconnect(); break; }
-        }
-      });
-      io.observe(target);
-    }
-  } else {
-    markDisclosure(); // no observer support: counting the view is still better than not counting it
-  }
-
-  // ---- flush on the way out, if an endpoint is configured -------------------
+  // No fallback event: if visibility cannot be observed, it must not be invented.
   window.addEventListener('pagehide', flush);
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'hidden') { flush(); }
   });
-
-  // Exposed read-only, for the operator to inspect the aggregate queue in the console.
-  window.CNEvents = {
-    queue: function () { return loadQueue().slice(); },
-    size: function () { return loadQueue().length; },
+  window.CNEvents = Object.freeze({
+    status: function () { return { mode: config.mode, acknowledged: sent, failed: failed, pending: pending.length }; },
     flush: flush
-  };
+  });
 }());

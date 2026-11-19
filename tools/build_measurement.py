@@ -41,6 +41,7 @@ STATUS_PILL = {
     "DESIGNED": "pill-warn",
     "BLOCKED": "pill-bad",
     "LIVE": "pill-ok",
+    "READY_NOT_DEPLOYED": "pill-warn",
 }
 
 
@@ -96,18 +97,14 @@ def page() -> str:
     )
 
     body = f"""
-<h1>What could be measured, and what it would let you decide</h1>
-<p class="lede">The platform claims to track clicks and conversions and optimize campaigns. It tracks nothing.
-That is not laziness: with no tagged link, no analytics and no Associates account there is nothing to track, and
-the site's own validator refuses an invented number. This page is the plan that would change it — every event,
-the decision it supports, and what blocks it.</p>
-
-<div class="note">
-  <p><strong>Nothing on this page is implemented.</strong> Every event below is marked DESIGNED or BLOCKED, never
-  LIVE. There is no script, no endpoint, no cookie and no account behind any row. The build fails if an event is
-  ever marked LIVE while the suggestion that authorises it
-  (<a href="suggestions.html#DS-11">DS-11</a>) still carries no recorded decision.</p>
-</div>
+<h1>Measurement: implemented, not connected to production</h1>
+<p class="lede">The self-hosted counter and the two report importers are implemented and tested.
+GitHub Pages is static: it cannot run the collector. Its committed configuration is disabled, so no
+production event collection, orders, revenue or query data is claimed.</p>
+<div class="note"><p><strong>Local service, not a production deployment.</strong>
+<code>tools/analytics_server.py</code> accepts EV-01–03 and stores daily aggregates, without browser
+storage or visitor identifiers. EV-04/05 can only be imported from authorized first-party exports.
+No such export is available here. <a href="../privacy.html">Privacy and deployment status</a>.</p></div>
 
 <h2>The rules a measurement layer has to survive</h2>
 <p>Written first, because they rule out most of the obvious designs. Each is anchored to the official page that
@@ -133,7 +130,7 @@ constrains it.</p>
 <h2>What each measurement would let you decide</h2>
 <div class="tablewrap">
   <table>
-    <caption>Every row reads "no data" today. That column is the point of this page.</caption>
+    <caption>No authorized production dataset has been imported. Unknown is not zero.</caption>
     <thead><tr><th>ID</th><th>Decision</th><th>Needs</th><th>Available today</th></tr></thead>
     <tbody>{decisions}</tbody>
   </table>
@@ -149,19 +146,17 @@ constrains it.</p>
   <p><strong>What this page does not claim.</strong> {esc(DATA["privacy_and_consent"]["what_is_not_asserted"])}</p>
 </div>
 
-<h2>The honest position today</h2>
-<p>Until an Associates account exists, the answer to "is this working" is <em>unknown</em>, and the site should
-say so rather than print a number that looks like an answer. The one thing a cookie-free counter would change
-before an account exists is narrower and still worth having: it would say which page sends people to which
-product, which is the only input needed to decide what to write next.</p>
-<p>That choice is <a href="suggestions.html#DS-11">DS-11</a>. Its options are a cookie-free first-party counter,
-a third-party analytics script, or waiting for Associates reporting alone — and the trade-offs are stated on the
-row.</p>
+<h2>What remains outside this repository’s authority</h2>
+<p>Provisioning an owner-controlled HTTPS collector host, confirming the enrolled Associates account,
+validating one destination and tracking report per product, and verifying Search Console all require
+authorized infrastructure or account access. Those gates remain open; no visitor is silently redirected
+and no browser event is ever presented as a purchase.</p>
+<p><a href="../privacy.html">Current implementation and privacy notice</a> ·
+<a href="../suggestions.html">Review proposed next steps</a>.</p>
 """
     return bd.page(
         "Measurement plan",
-        "What this site could measure, the decision each measurement supports, what it refuses to collect, and what "
-        "blocks it — nothing implemented, every event marked DESIGNED or BLOCKED.",
+        "Implementation status for five events: self-hosted daily counters and authorized report imports, with production activation explicitly gated.",
         body,
         here="measurement.html",
         crumbs=[("index.html", "Overview"), ("measurement.html", "Measurement plan")],
