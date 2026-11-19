@@ -8032,3 +8032,30 @@ listed above, which appears in neither PR's file list).
 | id | Task | Status | Session | File scope |
 |---|---|---|---|---|
 | T74 | **Wave 2 of the review board — the 2026-11-19 brief's suggestion wave, on the one decision surface the board already has.** (a) New proposals `PW-01…`: the design-prompt suggestions the brief asks for — a written anti-generated-slop voice gate, a dated seasonal publishing calendar grounded in official guidance rather than invented trend data, a Search-Console-first topic-selection loop, settling the reader-facing brand identity, an email-capture path with its compliance conditions, a decision cadence that stops boards from accumulating unanswered proposals, and prioritising the unclaimed mobile-first pass (S-20/RQ-16) before more content ships. (b) New questions `PQ-10…`: the information each of those needs before it is decidable, each with what is known, what is missing, and the action that obtains it. (c) New article concepts continuing the idea board's sequence, argued only from official pages and the conflicts the site already publishes. (d) Fresh measurements taken on the committed tree today, new findings that name what a reader sees, and the irregularities found while measuring. (e) Derive the counts the renderer hard-coded — they had drifted from the tree (guide count; the ledger and marketing question-register sizes). (f) Live re-reads of every official source the wave rests on, recorded in a fresh dated verification doc. (g) All gates, PR → merge without waiting → confirm Pages deploy → record. | **claimed 2026-11-19 (UTC), in progress** | `arena/9a72588c-zone2` (9a72588c) | `docs/review-board.json` (append wave-2 rows + a `wave` field so wave counts are derived, not typed), `tools/build_review_board.py` (derive hard-coded counts, wave-aware prose, a short pipeline section on the answer sheet), `tools/validate_review_board.py` (add `www.fsis.usda.gov` to the allowlist, same edit CR-8 made to `verify_marketing.py`), `tools/test_review_board.py` only if a count assertion forces it, regenerated `review.html`, `review-questions.html`, `review-trace.html`, `review-ideas.html`, `review-decide.html`, NEW `docs/verification-9a72588c.md`, append-only `COORDINATION.md`. **Excluded:** `.github/**`, `tools/build_front.py`, `tools/publication.py`, `tools/verify_publication.py`, root `index.html`/`questions.html`/`suggestions.html`/`decision-*`, `guides/**`, `board/**`, `ledger/**`, `brief/**`, `marketing/**`, every other session's branch, and any verified value this session does not re-read live. |
+### T74 close-out (claimed as T72; renumbered at rebase) — PR #196 merged; Pages deployment verified — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#196](https://github.com/kanlerxz87-cyber/Zone2/pull/196), merged **2026-11-19T20:12:24Z** as
+  merge commit **`d019bcc0c4ff60ceb1257320f887583e3329a55b`** (base `9847fde`, the merge of PR #195).
+- **PR check:** run **44605808292** — `Build and verify` **pass** (2m5s); the PR deploy job correctly skipped.
+- **Main:** run **44606260301** `success` (Build, verify and deploy); Pages build run **44606259176** `success`.
+- **Live fetches after deployment (2026-11-19, via the page fetcher):** `review.html` serves "19 proposals on
+  one board — twelve from the 2026-11-16 review and seven from the 2026-11-19 brief", "19 awaiting decision ·
+  0 selected", "13 open questions · 0 answered"; `review-decide.html` serves "Answer sheet · 19 decisions and
+  13 questions", the section "2. The seven new suggestions from the 2026-11-19 brief" with the PW rows and
+  their recommended letters, the chip "7 wave-2 suggestions", and the suggestion-to-change pipeline; both
+  carry the disclosure sentence.
+- **Renumber trail:** this session claimed "T72" at 19:47 UTC while `main` stood at `fc243e0`. While the
+  branch was in flight, sessions `672f9c4c` (T72, PR #192) and `e078d7c5` (T72 record-only) landed, and
+  `672f9c4c`'s close-out took T73. Per the board's precedent the later claim yields the id; the reconciled
+  id is **T74**. No work was dropped and no scope overlapped (their scope: per-page titles/meta, flags/sources
+  counts; this scope: the review-board namespace only).
+- **Rebase resolution:** COORDINATION.md resolved union-style (both sessions' records kept verbatim);
+  `board/data/measured.json` resolved by regeneration through `tools/build_board.py` on the combined tree.
+- **Final gates on the combined tree:** full `ci_replay` **63/63 PASSED** (the workflow grew one step with
+  PR #192); `validate_review_board` PASS 0 warnings; `test_review_board` **21 injected defects, each fired ·
+  1 control passed** (two new mutations cover the wave-2 `recommended_option` rule); `build_review_board
+  --check` 0 drift.
+- **Still open, non-blocking:** every wave-2 row is `AWAITING_DECISION` by design; PQ-10…PQ-13 await the
+  owner; the two unregistered open PRs (#182 `60b0ea6b`, #184 `698addcd`) remain untouched and are recorded
+  in PI-08; PW-07's underlying task (S-20/RQ-16, the mobile-first pass) remains unclaimed and is now the
+  board's recommended next build session.
