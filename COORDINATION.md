@@ -7835,6 +7835,7 @@ as history on purpose (OBS-2/OBS-3 in the verification record).
 | id | Task | Status | Session | File scope |
 |---|---|---|---|---|
 | T71 | **Close CR-8, CR-9, CR-10 (the three requests the T64 close-out left open) and integrate the surviving correction in stale PR #163.** (a) **CR-8** — `marketing/scripts/verify_marketing.py`: add `www.fsis.usda.gov` to `OFFICIAL_HOSTS` and run G1–G10 over every rendered page, `marketing/thermometers/` desk included (SG-15 option A); fix only what the run proves, inside this scope. (b) **CR-9** — promote `ledger/questions.json` Q-21/Q-22 into the flag register **without duplication**: Q-21's finding is already F-44 and Q-22's battery half is already F-53, so only genuinely uncovered findings get new rows (next free ids), Q-21/Q-22 get cross-links to their flags, and every count surface (`README.md`, `EXECUTIVE_SUMMARY.md`, regenerated root views and `assets/js/data.js` through their builders) moves together so `audit_site check_counts` and `validate_data check_published_counts` pass. (c) **CR-10** — prove the stale note in `brief/data/summary.json` is gone and the four state-table `{{tokens}}` derive (`build_brief` + `validate_brief`), then close CR-10 in the log. (d) Port PR #163's two data corrections (`board/data/requirements.json` RQ-05 measured row, `board/data/topics.json` TP-03 row) with attribution to session `f669bf2c`, regenerate `board/*.html` via `tools/build_board.py`. (e) Triage #162/#163/#172: log what each carries, which parts main already has, and the handoff — no other session's branch is touched. (f) Fresh dated verification record, every gate, PR → merge without waiting → confirm Pages deploy → record. | **done 2026-11-19** — PR #188 merged 11:49:50Z (`e2a295c`), main CI + Pages green, live fetches verified | `arena/6998bc41-zone2` (6998bc41) | `marketing/scripts/verify_marketing.py` (CR-8), `ledger/flags.json` (append-only new rows), `ledger/questions.json` (Q-21/Q-22 cross-link notes only), count prose in `README.md` / `EXECUTIVE_SUMMARY.md` (count lines only), regenerated derived outputs through the existing builders only (`flagged.html`, root views, `assets/js/data.js`, `board/*.html`), `board/data/requirements.json` + `board/data/topics.json` (port of #163's corrections), `brief/data/summary.json` + `brief/**` regeneration **only if CR-10 proves still open**, NEW `docs/verification-6998bc41.md`, `COORDINATION.md` (append-only records + this claim). **Excluded:** `.github/workflows/pages.yml` and `tools/ci_replay.py` (#162's claim), `tools/build_front.py`, `tools/build_summary.py`, `tools/build_site.py` (#172's claims), every other session's branch, any verified value not backed by a recorded official read, `ledger/campaigns.json` (stays EMPTY_BY_DESIGN). |
+| T72 | **Final integration and publication verification.** Confirm the combined tree is source-governed and gate-green, publish the reader-facing site (landing page, category subpages, buying guides, executive summary, suggestions/decision board, questions register, Flagged for Review page), run every repository gate, then create a pull request from this branch to `main`, merge without waiting, confirm GitHub Pages deploys successfully, and record the PR link, merge commit and deploy result on this board. No product or source data changes; blanks stay blank and every valued row carries an official source link. | **claimed 2026-11-19 (UTC), in progress** | `arena/e078d7c5-zone2` (e078d7c5) | `COORDINATION.md` (append-only claim + close-out record); verification read-only against the official sources already registered in the ledger (Amazon Associates Operating Agreement §5 disclosure, Program Policies §6 Participation Requirements, Standard Commission Income Statement / Table 1, ASIN help page, FTC Endorsement Guides, Google qualify-outbound-links); no data file edited. |
 
 
 ## Session record — `arena/6998bc41-zone2` (T71, claimed as T69) — 2026-11-19 (UTC)
@@ -7868,3 +7869,33 @@ as history on purpose (OBS-2/OBS-3 in the verification record).
 - **Left as logged, not merged away:** CR-14 (products.json P-05 divergence, open, owner), #162's `desk/` port request (PRs #162/#163/#172 closed by `9ffe2d83` in #185 — not reversed), S-20/RQ-16 unclaimed, and every blank/open item from prior sessions.
 
 **Pending at the time of this paragraph:** PR creation, merge without waiting, GitHub Pages deploy confirmation, and the live fetch — all recorded in the closing addendum appended after deployment.
+
+
+## Session record — `arena/e078d7c5-zone2` (T72) — 2026-11-19 (UTC)
+
+**Status: claim recorded; integration and verification below.**
+
+**Claimed:** 2026-11-19 (UTC), on `arena/e078d7c5-zone2` (base `fc243e0`, current `main` HEAD; PR #189 merge of the T71 close-out). `gh pr list --state open` returns PR #182 (session `60b0ea6b`, T69) and PR #184 (session `698addcd`, T70) — both belong to other sessions and are not touched, merged, or closed here. No open issues. GitHub Pages: `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/.
+
+**Scope:** `COORDINATION.md` only (append-only T72 claim row and this session record). No data, page, tool, workflow, or other-session file is edited. The reader-facing site (landing page, category subpages, buying guides, executive summary, suggestions/decision board, questions register, Flagged for Review page) is already published and verified; this session runs the integration cycle (gates → PR → merge → confirm Pages deploy → record) and documents the result.
+
+**Verification performed this session (read-only, no data changes):**
+- `tools/validate_data.py` — exit 0; 0 errors, 0 warnings; 435 rows; 49 sources; 54 canonical flags; 5 product entries; 1,315 internal links checked, 0 errors; 0 product prices printed.
+- `python3 tools/build_site.py --check` — 39 built, 0 drifted.
+- `python3 tests/test_pipeline.py` — 15/15 passed.
+- `python3 tools/build_root_views.py --check` — 0 drifted.
+- `python3 tools/build_root_data.py --check` — up to date.
+- `python3 tools/build_summary.py --check` — current.
+- `python3 tools/build_sitemap.py` — sitemap.xml written, 16 reader URLs.
+- `python3 marketing/scripts/verify_marketing.py` — OK; 27 pages · 48 spec rows · 0 failures.
+- `python3 tools/audit_site.py` — 228 published pages audited; fragments / spec_sources / prose_counts / namespaces / disclosure / debris / board all PASS.
+- `python3 tools/verify_front.py` — front gate OK — 16 pages, all checks pass.
+- `python3 tools/package_site.py` — Packaged 228 HTML pages into `_site`; 16 reader URLs indexable.
+- `python3 tools/verify_publication.py` — `ok: true`; 1,453 product anchors checked; 144 current factual rows checked.
+
+**State of the site (already live, no changes required):**
+- Landing page (`index.html`): publication front page — leads with the five supplied links as tagged `shopnow047c-20` Special Links (`rel="sponsored"`), disclosure strip under the masthead and repeated in the footer, canonical + OG + RSS, question-shaped buying guides, category-organized product grid.
+- Every page: disclosure above the fold; outbound product links marked `rel="sponsored"`; no prices, ratings, or invented performance figures.
+- Flagged irregularities (open, owner action, not inferable): product identity mapping (F-03 — no public Amazon document binds a `link.amazon` code to a product); no Associates tag on resolved links (F-24 — cannot attribute commission as supplied); commission band per resolved product not inferable (Kitchen 4.50% vs Home 3.00% both possible under the resolved breadcrumb); CR-14 (P-05 warranty divergence); S-20/RQ-16 mobile-first pass unclaimed.
+
+**Next:** create a PR from `arena/e078d7c5-zone2` to `main` with a summary of the changes, the sources used, and the flagged irregularities; merge without waiting (`gh pr merge <N> --merge`); confirm GitHub Pages deploys successfully; then append the close-out record (PR link, merge commit, deploy status) to this session record and mark T72 done.
