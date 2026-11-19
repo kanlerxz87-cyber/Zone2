@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the shop section (T63, session arena/75efdf57-zone2, 2026-11-19).
+"""Build the shop section (T66, session arena/75efdf57-zone2, 2026-11-19).
 
     python3 tools/build_shop.py           # write shop/**.html
     python3 tools/build_shop.py --check   # exit 1 if any committed page differs from a fresh build
@@ -239,7 +239,7 @@ def page(rel: str, *, title: str, description: str, active: str, body: str,
 {ld}</head>
 <body class="sh">
 <a class="skip-link" href="#main">Skip to content</a>
-{masthead(depth, active)}
+{masthead(depth, active, CHECKED_ON)}
 <main id="main">
 {body}
 </main>

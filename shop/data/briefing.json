@@ -1,5 +1,5 @@
 {
-  "note": "Owner briefing (T63, session arena/75efdf57-zone2, 2026-11-19). Nothing on this page is applied: every suggestion is 'Proposed - awaiting owner decision', and every open question carries what is known (with a source), what is missing and how to find out. Source ids resolve against shop/data/catalog.json 'sources'.",
+  "note": "Owner briefing (T66, session arena/75efdf57-zone2, 2026-11-19). Nothing on this page is applied: every suggestion is 'Proposed - awaiting owner decision', and every open question carries what is known (with a source), what is missing and how to find out. Source ids resolve against shop/data/catalog.json 'sources'.",
   "as_of": "2026-11-19",
   "summary": [
     {"h": "What changed today", "t": "The front page now leads with the five products instead of the verification process. A new shop section adds one page per product, two category pages (air fryers, meat thermometers) and six question-shaped buying guides. Every dashboard from earlier sessions is still published, reachable from one 'Behind the scenes' menu and the footer."},

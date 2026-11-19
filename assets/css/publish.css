@@ -40,6 +40,24 @@
                   padding: 2px 0; border-bottom: 2px solid transparent; }
 .pb-nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .pb-nav a.is-on { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+.pb-nav-tools { position: relative; }
+.pb-nav-tools > summary { cursor: pointer; list-style: none; font-size: 13.5px;
+                         color: var(--ink-soft); padding: 2px 0; border-bottom: 2px solid transparent; }
+.pb-nav-tools > summary::-webkit-details-marker { display: none; }
+.pb-nav-tools > summary::after { content: "⌄"; font-size: 11px; margin-left: 5px; }
+.pb-nav-tools > summary:hover,
+.pb-nav-tools > summary[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+.pb-nav-tools[open] > summary { color: var(--ink); }
+.pb-nav-menu { position: absolute; z-index: 30; top: calc(100% + 9px); right: 0;
+               display: grid; grid-template-columns: repeat(2, minmax(140px, 1fr));
+               gap: 2px 8px; min-width: 340px; padding: 12px;
+               background: var(--surface); border: 1px solid var(--line);
+               box-shadow: 0 12px 28px rgba(30, 25, 20, .14); }
+.pb-nav .pb-nav-menu a { display: block; padding: 7px 8px; border: 0; border-radius: 3px;
+                         font-size: 13px; }
+.pb-nav .pb-nav-menu a:hover { background: var(--paper); border: 0; }
+.pb-nav-tools summary:focus-visible,
+.pb-nav .pb-nav-menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* ---- Disclosure strip ---------------------------------------------------- */
 .pb-disc        { background: var(--accent-soft); border-bottom: 1px solid var(--warn-line);
@@ -302,4 +320,7 @@
   .pb-figs         { grid-template-columns: 1fr; }
   .pb-foot-grid    { grid-template-columns: 1fr; }
   .pb-nav          { gap: 16px; }
+  .pb-nav-tools    { width: 100%; }
+  .pb-nav-menu     { position: static; grid-template-columns: 1fr; min-width: 0;
+                     width: 100%; margin-top: 8px; box-shadow: none; }
 }

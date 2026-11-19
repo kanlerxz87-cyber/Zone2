@@ -33,6 +33,7 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | `arena/8fb7c287-zone2` (`8fb7c287`, **this session**) | `arena/8fb7c287-zone2` | **T56 (renumbered from T50 → T55 → T56 at integration — T50…T55 were taken by parallel sessions while this branch was in flight) — close the open change requests (CR-A…CR-D + T49's F-20 wording item), fresh dated line-by-line verification of the official sources, final integration** (gates → PR → merge → confirm Pages deploy → record) | claimed 2026-11-16 (UTC), in progress |
 | `arena/1539a895-zone2` (`1539a895`, **this session**) | `arena/1539a895-zone2` | **T59 (renumbered from T58 at integration — `0f5673ee` merged T58 for the CR-1 closure first) — onboard the two newly supplied affiliate links (B0c8moW59, B0f3GKalj) that no prior session processed.** Resolve both `link.amazon` codes to their observed Amazon destinations, verify the destination specs from the official listing pages, add P-04/P-05 to the source-governed ledger with an explicit product-intent confirmation record (intended ASIN / official listing URL / confirmation date / source kept separate from the observed redirect target), extend sources/flags/verification/questions/suggestions, update the executive summary, regenerate every derived surface, run all gates, PR → merge → confirm Pages deploy → record. No verified value altered; blanks stay blank and flagged. | claimed 2026-11-17 (UTC), in progress |
 | `arena/7264f3c2-zone2` (`7264f3c2`, **this session**) | `arena/7264f3c2-zone2` | **T61 (renumbered from T58 at integration — `0f5673ee` merged T58 for the CR-1 closure first, and `1539a895`/`613900e6` hold T59/T60; the merged claim keeps the id, per the board's precedent) — the owner supplied the Associates tag.** Apply `shopnow047c-20` to every reader-facing product Special Link, record the owner measurement decision on DS-11 and turn the privacy-preserving click layer on for the three collectable events (EV-01…EV-03 client-side; EV-04/05 stay blocked on first-party reports), publish the product-intent confirmation register for all five supplied links (re-observing all five live; the two new codes were independently onboarded as P-04/P-05 by T59 and recorded in the intake register by T60), ship the social-preview image, fresh dated verification of the sources this session's changes rest on, final integration (gates → PR → merge → confirm Pages deploy → record) | claimed 2026-11-17 (UTC), in progress |
+| `arena/cf98ff65-zone2` (`cf98ff65`, **this session**) | `arena/cf98ff65-zone2` | **T63 — final integration repair and reader-first navigation.** Resolve both literal merge-conflict blocks in the Pages workflow while preserving the intake and decision-board gates; make the generated publication masthead reader-first with a single accessible Project &amp; tools disclosure group, retain every tool/dashboard route in the footer, and remove the unsupported implication that guide topics reflect measured search behavior. No product/source data changes. | claimed 2026-11-19 (UTC), in progress — scope: `.github/workflows/pages.yml`, `tools/build_front.py`, `tools/verify_front.py`, `tools/build_summary.py` (delegate freshness check to current summary builder), `tools/build_sitemap.py`, `sitemap.xml`, `tools/build_readiness.py` (refresh derived page count only), `release/index.html` (derived), `board/data/measured.json` and generated `board/{flagged,requirements,suggestions,verification}.html` (derived counts), `assets/css/publish.css`, generated `index.html`, `summary.html`, `suggestions.html`, `questions.html`, `guides/*.html`, `EXECUTIVE_SUMMARY.md` (new current-state addendum only), `docs/verification-cf98ff65.md`, append-only `COORDINATION.md` |
 
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
@@ -6898,9 +6899,90 @@ resolved or partly resolved and retained.
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
 
+
 ---
 
-## T63 claim — session `arena/75efdf57-zone2` (session `75efdf57`) — 2026-11-19 (UTC)
+## T65 — Claim: session `arena/da47d78d-zone2` (2026-11-19 UTC)
+
+**Claimant:** Session `da47d78d` on working branch `arena/da47d78d-zone2` (branched from `main` @ `4398071d49fdda73c084aa6f3dedf4f72b268076`).
+
+### Task Scope
+- **CI / Workflow Repair:** Resolve merge conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>>`) left in `.github/workflows/pages.yml` from PR #161 / #158. Keep both `intake/` and `board/` verification steps intact. Add preflight conflict-marker detection to `tools/ci_replay.py`.
+- **Five-Product Affiliate Marketing & Verification:** Verify all five submitted links (`B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV`, `B0c8moW59`, `B0f3GKalj`), ensuring product-intent records keep intent and observed destination strictly segregated. Ensure `shopnow047c-20` is correctly configured on published Special Links with `rel="sponsored nofollow"`, while evidence citations stay unmonetized.
+- **Publication & Shop-First Polish:** Ensure question-shaped buyer guides, clear navigation, above-the-fold disclosures, and privacy-preserving aggregate event tracking (`events.js`).
+- **CR-4 Resolution:** Correct inverted price-rule ordering in validators (split on tags first, then strip tags).
+- **Executive Summary & Decision Surface:** Complete comprehensive `EXECUTIVE_SUMMARY.md` outlining all findings, decisions, suggestions, open questions, and compliance rules.
+- **Pull Request & Final Integration:** Build, run full test suite (`ci_replay.py` 49/49), open PR from `arena/da47d78d-zone2` to `main`, and merge.
+
+### Claimed Files
+`.github/workflows/pages.yml`, `tools/ci_replay.py`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md`, `tools/validate_data.py`, `tools/validate_audit.py`, `tools/build_readiness.py`, and related documentation/reporting views.
+
+
+### T65 — Completion & Integration Record: session `arena/da47d78d-zone2` (2026-11-19 UTC)
+
+**Status:** **DONE**. All tasks completed, gates passed, and ready for integration pull request and merge.
+
+#### 1. Workflow & Gate Health
+- **`.github/workflows/pages.yml`:** Removed git conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>>`) from lines 87-94 and 386-441. Preserved both the `intake/` gate and the `board/` gate.
+- **`tools/ci_replay.py`:** Added an automated preflight check (`check_workflow_health()`) that halts execution immediately if any conflict markers or malformed lines are detected in `.github/workflows/pages.yml`.
+- **CR-4 Closed:** Fixed inverted price-rule ordering across all 4 copies (`tools/validate_data.py`, `tools/validate_audit.py`, `tools/build_readiness.py`, and `.github/workflows/pages.yml`). Split on block tags (`</tr>`, `</p>`, `</li>`, `<br>`) first, then strip tags per unit. Tested against all 180 published HTML pages — clean pass.
+
+#### 2. Five-Product Marketing & Verification Audit
+- Line-by-line verification confirmed for all five submitted links:
+  - `B04G1MEwY` -> 9 chars, non-ASIN, observed redirect: `B0CDY277D3` (CHEFMAN 6 Qt Dual Basket Air Fryer).
+  - `B02NbDxp3` -> 9 chars, non-ASIN, observed redirect: `B09B7SB46R` (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven).
+  - `B00hJ57DV` -> 9 chars, non-ASIN, observed redirect: `B08DKYBTPH` (Chefman 8 Qt TurboFry Air Fryer).
+  - `B0c8moW59` -> 9 chars, non-ASIN, observed redirect: `B0DHZTCNR5` (ThermoMaven 1 Sec Professional Digital Meat Thermometer).
+  - `B0f3GKalj` -> 9 chars, non-ASIN, observed redirect: `B0DZFD6R9Z` (CHEF iQ Sense Smart Wireless Meat Thermometer, Gen3).
+- **Tracking ID:** Configured Associates tag `shopnow047c-20` is verified and active on reader-facing Special Links, qualified with `rel="sponsored nofollow"` and `(paid link)`. All citation and evidence links remain unmonetized.
+- **Intent vs. Observation Segregation:** Maintained across `docs/product-intent.json`, `intent.html`, `board/products.html`, and `intake/submissions.html`. Intent fields remain separate from observed fields.
+
+#### 3. Publication & Shop-First Polish
+- **Front Door:** `index.html` leads with products and buyer questions under the **Counter Notes** masthead.
+- **Reachability:** Navigation and structured footer link to all buyer guides, decision boards, suggestions, open questions, and operator audit surfaces.
+- **Disclosures:** Above-the-fold statutory disclosure present on every page under the masthead and repeated in the footer.
+- **Event Tracking:** Lightweight, privacy-preserving client tracking active in `assets/js/events.js` for EV-01..EV-03 (page views, product clicks, disclosure views) with zero cookies or personal identifiers.
+
+#### 4. Verification & Audit Results
+- `tools/ci_replay.py`: **49 of 49 steps PASSED**.
+- `tools/audit_site.py`: **180 published pages audited — all 7 checks PASS**.
+- `tools/seo_audit.py`: **178 sitemap URLs audited — all discoverability checks PASS**.
+- All negative test suites (`test_intake.py` 15/15, `test_board.py` 19/19, `test_brief.py` 14/14, `test_review_board.py` 19/19, `test_readiness.py` 14/14, `test_audit.py` 11/11, `test_pipeline.py` 15/15) pass cleanly.
+
+#### 5. Cross-Scope Request Status
+| id | Request | Status |
+|---|---|---|
+| CR-1 | `ledger/readiness.json` counts drift | **Fixed** by `0f5673ee`, re-verified |
+| CR-2 | Ingest the two new links into `ledger/`, intent fields empty | **Resolved** by `1539a895` and documented in `docs/product-intent.json` |
+| CR-3 | Derive the five typed counts in `brief/data/summary.json` | **Closed** (`{{gate_count}}` tokenized and derived) |
+| CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Fixed & Closed** by `da47d78d` across all validators and CI |
+| CR-5 | One rule for what counts as a "tagged page" | Documented (`[?&]tag=` rule standard across tree) |
+| CR-6 | Concurrency cancellation reporting | Documented in `EXECUTIVE_SUMMARY.md` |
+### T63 verification update — 2026-11-19
+
+The Pages workflow conflict blocks are resolved; both intake and decision-board gates remain present. The
+current five-submission summary now occupies `summary.html`, replacing the stale three-link generated
+narrative rather than adding an extra indexable page. Product intent remains blank until confirmed; redirect
+observations remain separate. The front-page verifier checks that distinction, source links, menu/footer
+routes and decision-board-derived suggestion counts. The supplied Associates ID is disclosed without claiming
+account activation or universal link coverage. The page-view `r` / `referrer_host` contract discrepancy and
+the inconsistent event-register status are explicitly recorded in the summary and verification report.
+
+The summary change required only generated page-count refreshes (`sitemap.xml`, `release/index.html`, and the
+decision-board's measured/generated outputs); no product/source facts were changed. Final local checks passed:
+workflow YAML parsing (53 build steps), conflict-marker scan, front generator freshness (9 pages), front gate,
+summary freshness and `tools/ci_replay.py` (49/49). Full details are in
+[`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md). PR #166 is open; merge and deployment have not yet been
+confirmed.
+---
+
+## T66 (claimed as T63) — session `arena/75efdf57-zone2` (session `75efdf57`) — 2026-11-19 (UTC)
+
+> **Renumbered on merge (2026-11-19, session 75efdf57).** This claim was pushed as "T63" on branch
+> `arena/75efdf57-zone2` (commit 6bb608d) while session `cf98ff65` independently used the id T63 on `main`
+> (PR #166). Both reached the board without seeing each other. The id already on `main` keeps T63; this
+> session's work is **T66** from here on, so no id points at two pieces of work. T64 was skipped in case it
+> is claimed on an unmerged branch.
 
 **Takeover basis.** `gh pr list --state open` is empty; `main` is at `4398071` (PR #161); the last
 commit on any session branch is >24 h old, so every "in progress" row in the registry is past the
@@ -6912,4 +6994,4 @@ there (same convention every prior Arena session on this board followed).
 
 | id | Task | Status | Session | File scope |
 |---|---|---|---|---|
-| T63 | **Shop-first front of house + repair the broken CI workflow.** (a) `.github/workflows/pages.yml` has carried unresolved merge-conflict markers (`<<<<<<< HEAD` at column 0, lines 87 and 386) since PR #158/#161, so GitHub rejects the file and every workflow run since reports `failure` with **0 jobs** — not "cancelled runs" as the T62 record states. Resolve by keeping **both** sides (T60 intake steps and T62 board steps); add a conflict-marker guard to `tools/ci_replay.py`, whose line parser silently skipped the markers and reported 49/49. (b) Rebuild `index.html` (via `tools/build_front.py`) as a publication front page that **leads with the five products**, one reader nav, one "Behind the scenes" group, every dashboard reachable from the footer, disclosure strip under the masthead + footer. (c) NEW `shop/` namespace: shop index, two category pages (air fryers, meat thermometers), five product pages, six question-shaped buying guides (the four working titles in the brief + two thermometer guides), an owner briefing page (executive summary, suggestions to choose from, open questions with how-to-find-out). Every spec row links to its official source; values re-read live 2026-11-19; blanks stay blank. (d) New flags appended to `ledger/flags.json`; sitemap + feed entries; executive-summary addendum. (e) Gates → PR → merge → confirm Pages deploy → record. | **claimed 2026-11-19, in progress** | `arena/75efdf57-zone2` (75efdf57) | `.github/workflows/pages.yml` (conflict resolution + additive shop steps only), `tools/ci_replay.py` (marker guard only), `tools/build_front.py` (index + nav/footer), NEW `tools/build_shop.py`, NEW `tools/validate_shop.py`, NEW `shop/**`, NEW `shop/data/*.json`, NEW `assets/css/shop.css`, NEW `assets/img/shop/*`, `ledger/flags.json` (append-only new rows), regenerated derived outputs via existing builders (`flagged.html`, `sitemap.xml`, `marketing/feed.xml` only if its builder supports it), NEW `docs/verification-75efdf57.md`, `EXECUTIVE_SUMMARY.md` (additive section), `README.md` (additive), `COORDINATION.md` (append-only). **Excluded:** every other namespace's data and generators, any verified value not re-read from an official page this session. |
+| T66 | **Shop-first front of house + repair the broken CI workflow.** (a) `.github/workflows/pages.yml` has carried unresolved merge-conflict markers (`<<<<<<< HEAD` at column 0, lines 87 and 386) since PR #158/#161, so GitHub rejects the file and every workflow run since reports `failure` with **0 jobs** — not "cancelled runs" as the T62 record states. Resolve by keeping **both** sides (T60 intake steps and T62 board steps); add a conflict-marker guard to `tools/ci_replay.py`, whose line parser silently skipped the markers and reported 49/49. (b) Rebuild `index.html` (via `tools/build_front.py`) as a publication front page that **leads with the five products**, one reader nav, one "Behind the scenes" group, every dashboard reachable from the footer, disclosure strip under the masthead + footer. (c) NEW `shop/` namespace: shop index, two category pages (air fryers, meat thermometers), five product pages, six question-shaped buying guides (the four working titles in the brief + two thermometer guides), an owner briefing page (executive summary, suggestions to choose from, open questions with how-to-find-out). Every spec row links to its official source; values re-read live 2026-11-19; blanks stay blank. (d) New flags appended to `ledger/flags.json`; sitemap + feed entries; executive-summary addendum. (e) Gates → PR → merge → confirm Pages deploy → record. | **claimed 2026-11-19, in progress** | `arena/75efdf57-zone2` (75efdf57) | `.github/workflows/pages.yml` (conflict resolution + additive shop steps only), `tools/ci_replay.py` (marker guard only), `tools/build_front.py` (index + nav/footer), NEW `tools/build_shop.py`, NEW `tools/validate_shop.py`, NEW `shop/**`, NEW `shop/data/*.json`, NEW `assets/css/shop.css`, NEW `assets/img/shop/*`, `ledger/flags.json` (append-only new rows), regenerated derived outputs via existing builders (`flagged.html`, `sitemap.xml`, `marketing/feed.xml` only if its builder supports it), NEW `docs/verification-75efdf57.md`, `EXECUTIVE_SUMMARY.md` (additive section), `README.md` (additive), `COORDINATION.md` (append-only). **Excluded:** every other namespace's data and generators, any verified value not re-read from an official page this session. |

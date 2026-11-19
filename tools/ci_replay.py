@@ -16,7 +16,16 @@ REPO = Path(__file__).resolve().parent.parent
 WF = (REPO / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
 
 
+def check_workflow_health() -> None:
+    for idx, line in enumerate(WF.splitlines(), 1):
+        if re.match(r"^(<<<<<<<|=======|>>>>>>>)", line):
+            raise SystemExit(
+                f"ERROR: .github/workflows/pages.yml contains unresolved conflict marker at line {idx}: {line}"
+            )
+
+
 def steps() -> list[tuple[str, str]]:
+    check_workflow_health()
     out: list[tuple[str, str]] = []
     lines = WF.splitlines()
     i = 0
@@ -50,7 +59,7 @@ def steps() -> list[tuple[str, str]]:
 
 
 def conflict_markers() -> list[str]:
-    """T63 (session 75efdf57): refuse to replay a workflow GitHub would reject.
+    """T66 (session 75efdf57): refuse to replay a workflow GitHub would reject.
 
     The line parser above ignores anything that is not a `- name:` / `run:` line, so
     unresolved merge-conflict markers in pages.yml were invisible to it: this script

@@ -1,5 +1,5 @@
 {
-  "note": "Shop catalog for the five supplied links (T63, session arena/75efdf57-zone2). Every value below was re-read live from the official page named in its row on checked_on. A value no official page states is left blank with the reason; a value two official pages state differently is published as a conflict with both readings. No price, star rating, review count, sales rank, commission figure or performance number appears here by design. The asin field is the OBSERVED destination of the supplied link (resolved live 2026-11-19); the owner has not confirmed it as the INTENDED product (ledger flag F-06, intake register) - see intent block.",
+  "note": "Shop catalog for the five supplied links (T66, session arena/75efdf57-zone2). Every value below was re-read live from the official page named in its row on checked_on. A value no official page states is left blank with the reason; a value two official pages state differently is published as a conflict with both readings. No price, star rating, review count, sales rank, commission figure or performance number appears here by design. The asin field is the OBSERVED destination of the supplied link (resolved live 2026-11-19); the owner has not confirmed it as the INTENDED product (ledger flag F-06, intake register) - see intent block.",
   "checked_on": "2026-11-19",
   "sources": {
     "S19": {

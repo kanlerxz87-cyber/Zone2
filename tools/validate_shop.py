@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gate for the shop section (T63, session arena/75efdf57-zone2, 2026-11-19).
+"""Gate for the shop section (T66, session arena/75efdf57-zone2, 2026-11-19).
 
 Reads the published HTML under shop/ (and the shop data) and fails on any of:
 

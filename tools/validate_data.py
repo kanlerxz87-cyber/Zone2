@@ -547,7 +547,8 @@ def check_no_product_prices(report: Report) -> None:
         text = path.read_text(encoding="utf-8", errors="ignore")
         # A row of a table, or a block of prose, is the unit of context: a bounty figure sits in a row
         # whose header says "Published rate", not in a product's price slot.
-        units = re.split(r"</tr>|</p>|</li>|<br\s*/?>", re.sub(r"<[^>]+>", " ", text))
+        # Split first, then strip tags so the context boundary is preserved (CR-4 / FL-13).
+        units = [re.sub(r"<[^>]+>", " ", u) for u in re.split(r"</tr>|</p>|</li>|<br\s*/?>", text)]
         for unit in units:
             for m in MONEY.finditer(unit):
                 if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):
