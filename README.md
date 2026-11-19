@@ -567,11 +567,11 @@ carried them — open and untouched for more than eight hours — have been take
   `CN-11`. `main` had already published it; the incoming row was renumbered **`CN-17`** so no duplicate
   anchor ships and no existing cross-reference breaks.
 
-**Gates on the combined tree:** `tools/ci_replay.py` **65/65 PASSED** (strict YAML parse enabled) ·
+**Gates on the combined tree:** `tools/ci_replay.py` **66/66 PASSED** (strict YAML parse enabled) ·
 `verify_publication` `ok: true` — 230 HTML pages, 18 indexable, 1 453 sponsored product anchors, 172
 current factual rows each with an official source · `audit_site` 7/7 over 230 pages ·
 `verify_decision_room` PASS · note-overlap worst pair 0.163 against a 0.25 budget ·
-`validate_data` clean (54 flags, 49 sources, 108 rows).
+`validate_data` clean (55 flags, 50 sources, 108 rows).
 
 **Verification record:** [`docs/verification-1b09bb6d.md`](docs/verification-1b09bb6d.md) — ten official
 sources re-read live on 2026-11-19 with the quoted text beside each published claim.

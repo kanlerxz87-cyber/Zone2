@@ -1812,7 +1812,7 @@ restores wrapping and normal case and leaves the uppercase treatment where it be
 headings. Re-measured at **0 clipped and 0 uppercase** across the 15 affected pages.
 
 **Gates on the combined tree.** `tools/ci_replay.py` — every `run:` step of the Pages workflow, in
-order, with a strict YAML parse of the workflow enabled — **65/65 PASSED**. The publication contract
+order, with a strict YAML parse of the workflow enabled — **66/66 PASSED**. The publication contract
 reports `ok: true` over **230** HTML pages (18 indexable), **1 453** product anchors all carrying
 `rel="sponsored"`, and **172** current factual rows each ending in an official source link. The
 structural audit passes 7/7 over 230 pages; the product-note duplication gate reports a worst pair of

@@ -253,7 +253,7 @@ attribution**, because no authenticated Associates report is available here.
 
 | Gate | Result |
 |---|---|
-| `tools/ci_replay.py` (every `run:` step of `pages.yml`, in order, **strict YAML parse enabled**) | **65/65 PASSED** |
+| `tools/ci_replay.py` (every `run:` step of `pages.yml`, in order, **strict YAML parse enabled**) | **66/66 PASSED** |
 | `tools/verify_publication.py` | `ok: true` — **230** HTML pages, **18** indexable, **1 453** product anchors all `rel="sponsored"`, **172** current factual rows each carrying an official source link, **0** errors |
 | `tools/verify_front.py` | front gate OK — 16 pages, all checks pass |
 | `tools/verify_decision_room.py` | PASS — 2 pages, 13 decisions, 10 owner questions, 17 sources |
@@ -261,16 +261,24 @@ attribution**, because no authenticated Associates report is available here.
 | `tests/test_front_surfaces.py` | 12 regression tests pass |
 | `tools/note_overlap.py` | worst pair **0.163** (gate fails above 0.25) |
 | `tools/audit_site.py` | 230 published pages audited — fragments, spec_sources, prose_counts, namespaces, disclosure, debris, board: **7/7 PASS** |
-| `tools/validate_data.py` | clean — 54 flags (unique ids), 49 sources, 108 rows |
+| `tools/validate_data.py` | clean — 55 flags (unique ids), 50 sources, 108 rows |
 | `tools/package_site.py` | 230 HTML pages packaged; 18 reader URLs indexable |
 | `tools/validate_board.py` / `validate_brief.py` / `validate_intake.py` / `validate_decisions.py` / `validate_console.py` / `validate_shop.py` / `validate_audit.py` / `validate_discovery.py` / `validate_review_board.py` | all pass, including every negative-test suite (14–19 injected defects each, all firing) |
+
+**The prose counts moved once more during the release.** While this pull request was open, a
+parallel session merged PR #192 into `main`, adding flag `F-55` and source `S67` — the register
+went from 54 flags and 49 sources to **55 flags and 50 sources**. The prose on `README.md` and
+`EXECUTIVE_SUMMARY.md` states those counts in prose and the structural audit compares them against
+the registers, so the two surfaces were reconciled to **55 flags / 50 sources** in the same commit
+as the merge. The first CI run of this pull request failed on that comparison, not on any
+product, source or link check; no gate was loosened and no value was invented.
 
 **One intermediate failure, recorded honestly.** The first full replay stopped at *"Rebuild the
 decision board"* → *"Decision-board gate"*. Cause: `tools/build_board.py` writes
 `board/data/measured.json` **after** it runs the gates, so during its own inner replay the measured
 snapshot was still the previous one and the board's derived counts did not match. Re-running the
 builder once the tree was stable fixed it, and the snapshot now records
-`tools/ci_replay.py exit 0 — CI REPLAY PASSED — 65 steps (all steps passed)`. No gate was loosened;
+`tools/ci_replay.py exit 0 — CI REPLAY PASSED — 66 steps (all steps passed)`. No gate was loosened;
 the builder's ordering was already correct and the tree simply had to settle before the measurement
 was taken.
 
