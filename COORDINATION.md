@@ -8185,3 +8185,25 @@ bump the three prose counts in the same change.
 - **Pages deploy:** workflow "pages build and deployment" run 44621142871 → **success**; "Build, verify and deploy" run 44621144101 → **success**; Pages API `status: built`, latest build commit `7cf2eef` (2026-11-19T21:40:56Z), site `https://kanlerxz87-cyber.github.io/Zone2/`.
 - **Flagged, non-blocking, left open:** F-54 (the listing contradicts itself — owner decides which statement governs), Q-22 (2-year vs 3-year owner question). Conflict-row counts after merge: catalog 5 (P-03 Max temperature, P-02 Presets, P-02 Included accessories, P-05 Battery, P-05 Warranty).
 - **Not touched (scope discipline):** `README.md` / `EXECUTIVE_SUMMARY.md` count prose and `tools/build_front.py` (PR #194's claim — regenerated only), `ledger/flags.json`, `ledger/questions.json`, `.github/**`, `console/**`, `board/**`, `marketing/**` (desk already correct).
+
+## Session record — `arena/353f0afc-zone2` (this session) — 2026-11-19 (UTC)
+
+**Branch:** `arena/353f0afc-zone2`, base `main` @ `0c101a7` (merge of PR #200). The Arena branch is pinned; all work lands there.
+
+**Coordination check at claim:** `gh pr list --state open` returned no open pull requests. `main` is at `0c101a7`. GitHub Pages: `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/. All prior tasks T1–T75 read done/merged in this file; no live session's claim overlaps the scope below.
+
+**Claimed task — T76 (final review, official-source verification, and publication).** Re-verify the official sources the published site rests on (Amazon Associates disclosure and link-qualification rules, FTC disclosure guidance, Google sponsored-link guidance, and each live Amazon listing the five submitted links resolve to), record dated verdicts, flag anything that cannot be confirmed from an official source, run every repository gate, then create a PR from this branch to `main`, merge without waiting, confirm GitHub Pages deploys, and record the PR link, merge commit and deploy result here. No product fact, price, rating, intended-ASIN confirmation or campaign number is added or inferred; blanks stay blank and every valued row keeps its official source link.
+
+**File scope:** `COORDINATION.md` (this claim row and this close-out record only), NEW `docs/verification-353f0afc.md` (dated official-source verdicts and irregularities). Every other file is read-only for this session; no ledger, page, tool, workflow, or data file is edited. If a gate forces a fix, it is logged here first.
+
+**Status:** in progress.
+
+### T76 progress addendum — `arena/353f0afc-zone2`, 2026-11-19 (UTC)
+
+**Verification complete.** Official sources re-read live on 2026-11-19: Operating Agreement §5 (S1, verbatim disclosure), Program Policies (S2), FTC Disclosures 101 (S3), Google qualify-outbound-links (S4), ASIN definition (S5), and all five Amazon listings (S6–S10). All five supplied links resolve reproducibly to live listings (B0CDY277D3, B09B7SB46R, B08DKYBTPH air fryers; B0DHZTCNR5, B0DZFD6R9Z meat thermometers); `plpRedirect=mhFallback` appears on bare valid `/dp/` loads and is not fallback evidence; intended-ASIN fields stay `null` (owner-gated); collection stays OFF (Pages cannot host a writable collector). Record: `docs/verification-353f0afc.md`.
+
+**Gates:** `validate_data.py` exit 0 (436 rows, 50 sources, 55 flags, 1315 links, 0 errors); `build_site.py --check` 39 built 0 drifted; `tests/test_pipeline.py` 15/15; disclosure strip on 35/35 pages; `price_findings: 0`; `package_site` + `verify_publication` ok.
+
+**Irregularities flagged (owner-gated, non-blocking):** category split (3 air fryers + 2 meat thermometers — no single category covers the submitted set); intent/attribution/confirmation fields blank pending owner; collector OFF pending owner host. No value inferred.
+
+**Next:** PR `arena/353f0afc-zone2` → `main`, merge without waiting, confirm GitHub Pages deploy, then append PR link / merge commit / deploy result here and mark T76 done.
