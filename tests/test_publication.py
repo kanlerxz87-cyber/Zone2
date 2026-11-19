@@ -88,6 +88,7 @@ class ArtifactTests(unittest.TestCase):
             self.assertTrue(any(expected in error for error in errors),expected)
         finally:path.write_text(original)
 
+    def test_build_metadata_is_required(self):self.mutate('publication-build.json',lambda s:'{}','source build metadata')
     def test_removed_disclosure(self):self.mutate('shop.html',lambda s:s.replace(pub.DISCLOSURE,''),'disclosure must appear')
     def test_unsponsored_anchor(self):self.mutate('shop.html',lambda s:s.replace('rel="sponsored nofollow noopener"','rel="nofollow noopener"',1),'unsponsored product')
     def test_noindex_archive_is_mandatory(self):self.mutate('pages/index.html',lambda s:s.replace('noindex,follow','index,follow'),'indexing state')

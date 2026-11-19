@@ -110,33 +110,25 @@ def build_product_link(
     )
     if associates_tag:
         _require(
-            bool(TAG_RE.match(associates_tag)),
+            bool(TAG_RE.fullmatch(associates_tag)),
             "Associates ID must use the tagged format assigned by Amazon (e.g. exampletag-20); do not invent one",
         )
     else:
         raise LinkPolicyError(
             "NO_TAG: an Associates ID was not supplied. Use preview_link() for a non-publishing placeholder."
         )
-    if subtag:
-        _require(
-            bool(SUBTAG_RE.match(subtag)),
-            "sub-tag must be a static lowercase campaign label (R-08); never a user/session/IP-derived value",
-        )
-        _require(
-            not any(tok in subtag for tok in ("user", "uid", "session", "ip", "visitor")),
-            "sub-tag looks user-derived, which the Participation Requirements forbid (R-08)",
-        )
-
+    # A static label is not an issued Associates tracking/sub-tag identifier.
+    # Current publication calls use neither legacy option. Refuse to mint a tag
+    # suffix or let arbitrary query parameters replace the supplied attribution.
+    _require(
+        subtag is None or subtag == "",
+        "UNAPPROVED_SUBTAG: do not synthesize issued tracking IDs from campaign labels (R-07/R-08)",
+    )
+    _require(
+        extra_params is None or extra_params == {},
+        "UNAPPROVED_PARAMETERS: extra attribution/link parameters require explicit policy review; supplied tag may not be overridden (R-07/R-14)",
+    )
     params: dict[str, str] = {"tag": associates_tag}
-    if subtag:
-        params["linkCode"] = "sl1"
-        params["tag"] = f"{associates_tag}-{subtag}" if not associates_tag.endswith("-" + subtag) else associates_tag
-    for key, val in (extra_params or {}).items():
-        _require(
-            key.lower() not in COMPETING_ATTRIBUTION_PARAMS,
-            f"parameter {key!r} is a competing-network attribution field; combining attribution is prohibited (R-14)",
-        )
-        params[key] = val
 
     href = f"https://{marketplace}/dp/{verdict.normalized}?{urlencode(params)}"
     _require("tag=" in href, "a Special Link must carry the Associates tag as a URL parameter (R-07)")

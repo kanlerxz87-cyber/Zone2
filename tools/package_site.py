@@ -9,6 +9,8 @@ Only _site is uploaded; never upload the checkout, private SQLite data or .git.
 from __future__ import annotations
 import argparse
 import html
+import json
+import subprocess
 import os
 import re
 import shutil
@@ -129,6 +131,10 @@ def build(out=OUT):
             target.write_text(pub.feed(),encoding='utf-8')
         else:
             shutil.copyfile(src,target)
+    commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    if not re.fullmatch(r'[0-9a-f]{40}',commit):
+        raise ValueError('Cannot identify source checkout commit for the deployment artifact')
+    (out/'publication-build.json').write_text(json.dumps({'schema':'counter-notes-build-v1','commit':commit},sort_keys=True)+'\n')
     (out/'.nojekyll').write_text('')
     return pages
 

@@ -3,8 +3,10 @@
 **Current release — 19 November 2026:** a product-led kitchen publication for the five supplied Amazon
 links. Start at [the publication](https://kanlerxz87-cyber.github.io/Zone2/) or the
 [current executive summary](https://kanlerxz87-cyber.github.io/Zone2/executive-summary.html).
-The implementation is on `arena/37333afd-zone2`; PR, merge and live-deployment evidence will be recorded
-in [the verification record](docs/verification-37333afd.md) and [coordination board](COORDINATION.md).
+**Shipped:** [PR #174](https://github.com/kanlerxz87-cyber/Zone2/pull/174), merged as
+`4fcb61a` on 2026-11-19. [Main build and Pages deployment](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44475122952)
+succeeded and live content was fetched. Exact evidence and remaining gates are in
+[the verification record](docs/verification-37333afd.md) and [coordination board](COORDINATION.md).
 
 ## What this release actually provides
 

@@ -1,5 +1,5 @@
 {
-  "amazon_links": 3016,
+  "amazon_links": 3017,
   "capture_pages": 0,
   "chooser_pages": 1,
   "counter_pages": 58,
@@ -8,11 +8,11 @@
   "dup_titles": 4,
   "endpoint_pages": 0,
   "feed_present": true,
-  "gates": "Combined replay 61/61 passed; administrative settings change deliberately not assumed.",
+  "gates": "Follow-up replay pending after issued-tag guard hardening; primary release checks remain recorded separately.",
   "guide_pages": 51,
   "guides_unlinked": 4,
   "jsonld": 97,
-  "measured_utc": "2026-11-19T06:45:38.089675+00:00",
+  "measured_utc": "2026-11-19T07:12:47.298009+00:00",
   "no_desc": 7,
   "og_image": 152,
   "pages": 219,
@@ -22,7 +22,7 @@
   "sponsored_links": 662,
   "sponsored_reader": 445,
   "substitutions": {
-    "amazon_links": 3016,
+    "amazon_links": 3017,
     "capture_pages": 0,
     "chooser_pages": 1,
     "counter_pages": 58,
@@ -43,11 +43,11 @@
     "sponsored_reader": 445,
     "tagged": 40,
     "unique_titles": 215,
-    "unsponsored_reader": 270,
+    "unsponsored_reader": 271,
     "viewport_pages": 219
   },
   "tagged": 40,
   "unique_titles": 215,
-  "unsponsored_reader": 270,
+  "unsponsored_reader": 271,
   "viewport_pages": 219
 }

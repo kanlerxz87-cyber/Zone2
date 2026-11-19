@@ -517,8 +517,8 @@ jobs:
       - name: Event client privacy and behavior tests
         run: node tests/test_events.cjs
 
-      - name: Price guard regressions (all six repaired copies)
-        run: python3 tests/test_price_guards.py
+      - name: Price and issued-tag guard regressions
+        run: python3 tests/test_price_guards.py && python3 tests/test_link_policy.py
 
       - name: Publication data and packaging mutation tests
         run: python3 tests/test_publication.py
@@ -577,3 +577,53 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify the live publication rather than only upload success
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const base = 'https://kanlerxz87-cyber.github.io/Zone2/';
+            const disclosure = 'As an Amazon Associate I earn from qualifying purchases.';
+            const pages = [
+              ['', true], ['shop.html', true], ['guides/chefman-dual-basket.html', true],
+              ['guides/thermomaven-instant-read.html', true], ['measurement.html', false],
+              ['flagged.html', false], ['pages/index.html', false], ['shop/index.html', false]
+            ];
+            async function read(path) {
+              const url = new URL(path, base);
+              url.searchParams.set('release', context.sha);
+              const response = await fetch(url, { redirect: 'error', signal: AbortSignal.timeout(20000) });
+              if (!response.ok) throw new Error(path + ': HTTP ' + response.status);
+              return response.text();
+            }
+            let error;
+            for (let attempt = 0; attempt < 5; attempt++) {
+              try {
+                const version = JSON.parse(await read('publication-build.json'));
+                if (version.schema !== 'counter-notes-build-v1' || version.commit !== context.sha) throw new Error('Public artifact is not the expected source commit');
+                for (const [path, indexable] of pages) {
+                  const html = await read(path);
+                  if (html.split(disclosure).length < 3) throw new Error(path + ': repeated disclosure absent');
+                  const strip = html.indexOf('data-disclosure-strip');
+                  if (strip < 0 || strip > html.indexOf('<main')) throw new Error(path + ': disclosure not before main');
+                  const robots = indexable ? 'index,follow' : 'noindex,follow';
+                  if (!html.includes('<meta name="robots" content="' + robots + '">')) throw new Error(path + ': robots state mismatch');
+                  const canonical = base + path;
+                  const found = Array.from(html.matchAll(/<link rel="canonical" href="([^"]+)">/g), m => m[1]);
+                  if (found.length !== 1 || found[0] !== canonical) throw new Error(path + ': canonical mismatch');
+                  for (const match of html.matchAll(/<a\b[^>]*href="https:\/\/(?:www\.)?amazon\.com[^"]*"[^>]*>/g)) {
+                    if (!/rel="[^"]*\bsponsored\b/.test(match[0])) throw new Error(path + ': unsponsored product anchor');
+                  }
+                }
+                const config = JSON.parse(await read('measurement.json'));
+                if (config.enabled !== false || config.endpoint !== null) throw new Error('Pages collection must remain OFF');
+                if (!(await read('sitemap.xml')).includes('<urlset')) throw new Error('Canonical sitemap absent');
+                if (!(await read('feed.xml')).includes('<rss')) throw new Error('Root RSS absent');
+                core.info('Live verification passed: exact source commit, 8 HTML pages, repeated disclosures, sponsorship, robots/canonicals, disabled collection, sitemap and RSS. Read-only requests only.');
+                return;
+              } catch (failure) {
+                error = failure;
+                if (attempt < 4) await new Promise(resolve => setTimeout(resolve, 5000));
+              }
+            }
+            throw error;

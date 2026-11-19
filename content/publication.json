@@ -136,6 +136,13 @@
       "url": "https://docs.github.com/en/rest/pages/pages#update-information-about-a-github-pages-site",
       "checked": "2026-11-19",
       "scope": "Updating Pages settings requires Pages write AND Administration write plus an appropriate repository role; a successful update returns 204 No Content. The current app received 403, and no settings change is claimed."
+    },
+    "GH-ACTIONS-RUNTIME": {
+      "publisher": "GitHub",
+      "title": "Actions Node20 deprecation and Node24 migration",
+      "url": "https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+      "checked": "2026-11-19",
+      "scope": "Official updated changelog: runners default to Node24 and users should review Node24-capable action versions. Successful deployment emitted inherited action-runtime declaration warnings; no insecure opt-out is enabled."
     }
   },
   "products": [
