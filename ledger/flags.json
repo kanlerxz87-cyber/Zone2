@@ -1,6 +1,6 @@
 {
   "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-29 was added 2026-11-14 by session ba8b2d38 (T27) after reading the deployed site: the register page and the summary page published different open-flag counts for the same register. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-30 to F-32 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-32's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-33 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code. F-34 was added 2026-11-14 by session d3ce1c29: commit d6ec452 truncated the shared task board by 1,831 lines; the board is restored from git history in the same pass. ADDENDUM 2026-11-14 (session 0a697d4a, T28): F-37 and F-38 were added by an independent row-by-row re-read of the official programme pages (bounty/bonus transcription; omitted Participation Requirements). They were drafted as F-27/F-28 but both ids were taken by other sessions while this one was running, so they are published under the next free ids. No existing id was reused. F-41 was added 2026-11-16 by session 43eb0239 (T54) after a line-by-line re-read of the live Amazon listing found that the stored title for P-02 no longer matched the page. The value was corrected in the same pass; the flag records the drift and the copies that remain outside this session's scope (CR-13).",
-  "as_of": "2026-11-16",
+  "as_of": "2026-11-19",
   "flags": [
     {
       "id": "F-01",
@@ -614,6 +614,80 @@
       "action_required": "Owner: an authenticated Creators API GetItems lookup for B0DHZTCNR5 and B0DZFD6R9Z returns the authoritative category and therefore the band; until then the field stays blank and flagged.",
       "source_ids": [
         "S04",
+        "S61",
+        "S62"
+      ]
+    },
+    {
+      "id": "F-44",
+      "severity": "medium",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "The ThermoMaven listing that supplied link 4 opens now shows a 'newer model' notice",
+      "detail": "Re-read live on 2026-11-19, https://www.amazon.com/dp/B0DHZTCNR5 displays 'There is a newer model of this item' linking to B0GL7Z4KP4 (an orange colourway of the same-titled product). Nothing about B0GL7Z4KP4 has been verified, and no attribute is inferred from it.",
+      "impact": "If the owner intended the newer model, every ThermoMaven product link points at a superseded listing.",
+      "action_required": "Owner: confirm the intended ASIN in the P-04 product-intent record (Q-T63-03 / SG-T63-05).",
+      "source_ids": [
+        "S61"
+      ]
+    },
+    {
+      "id": "F-45",
+      "severity": "high",
+      "owner": "done",
+      "status": "closed",
+      "published_on": "2026-11-19",
+      "title": "The deploy workflow was unparseable for four merges, so no CI gate ran on main",
+      "detail": ".github/workflows/pages.yml carried unresolved merge-conflict markers (<<<<<<< HEAD at lines 87 and 386) from PR #158 (515cb7a) through PR #161 (4398071). GitHub could not parse the file: those runs completed as 'failure' with zero jobs and the file path as the run name. The local replay tools/ci_replay.py skips lines it does not recognise, so it kept reporting every step green. CR-6 attributed the red runs to 'cancel-in-progress'; that diagnosis was wrong. GitHub Pages kept deploying through the legacy branch build, so the site stayed live but ungated.",
+      "impact": "Four merges reached main and were deployed without any gate running.",
+      "action_required": "Resolved by T63: conflict resolved keeping both sessions' steps; tools/ci_replay.py now refuses to run if any tracked non-Markdown file carries a conflict marker or if pages.yml fails a strict YAML parse.",
+      "source_ids": [
+        "S66"
+      ]
+    },
+    {
+      "id": "F-46",
+      "severity": "low",
+      "owner": "done",
+      "status": "closed",
+      "published_on": "2026-11-19",
+      "title": "Typed counts on the front page and the suggestion board had drifted from the register",
+      "detail": "index.html and suggestions.html said 'Thirteen' suggestions while docs/board-9251f262.json held 12 rows; the front page said 'Eight guides' while the guide register listed 11, and printed the '5 / 5 supplied links resolve' figure twice.",
+      "impact": "Reader-facing prose contradicted the register it described.",
+      "action_required": "Resolved by T63: the counts are rendered from the registers at build time (num_word in tools/build_front.py); the duplicate figure was removed with the old receipts section.",
+      "source_ids": [
+        "S66"
+      ]
+    },
+    {
+      "id": "F-47",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "The brief's citation IDs do not match this repository's source register",
+      "detail": "The 2026-11-19 brief cites 'S07' and 'S24' as FTC pages (Disclosures 101; Endorsements, Influencers, and Reviews). In ledger/sources.json, S07 is Amazon's Creators API introduction and S24 is Amazon's 'build a simple text link' help page. The brief's FLG-003 link points at a different repository's site (kanlerxz87-cyber.github.io/Zone3/flagged.html). Both FTC pages were fetched and are now registered here as S64 and S65; nothing in this repository was renumbered.",
+      "impact": "A reviewer following the brief's IDs into this register lands on the wrong document.",
+      "action_required": "Owner: confirm whether the brief was written against the Zone3 register; if so, cite this register's IDs (S64/S65) in future briefs.",
+      "source_ids": [
+        "S64",
+        "S65",
+        "S07",
+        "S24"
+      ]
+    },
+    {
+      "id": "F-48",
+      "severity": "medium",
+      "owner": "done",
+      "status": "closed",
+      "published_on": "2026-11-19",
+      "title": "Two of the five supplied products had no reader-facing page",
+      "detail": "The thermometers that supplied links 4 and 5 open (B0DHZTCNR5, B0DZFD6R9Z) appeared only in audit and operator registers; the front page, the guides and the navigation covered the three air fryers only.",
+      "impact": "Two products the owner asked to promote could not be reached by a reader.",
+      "action_required": "Resolved by T63: guides/meat-thermometers.html plus two thermometer guides, both linked from the front page and the masthead; spec rows read from the sourced P-04/P-05 ledger records.",
+      "source_ids": [
         "S61",
         "S62"
       ]

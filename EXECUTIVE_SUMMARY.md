@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **43 flags (F-01 … F-43)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **48 flags (F-01 … F-48)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -797,7 +797,7 @@ rendering in fallback system fonts since the redesign. No gate could see it, bec
 namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
 class of bug — a resource a build cannot fail on — is on the record for the next time.
 
-**Numbers for the reviewer, all derived from the registers:** 43 flags, 45 sources, 108 logged checks, 20 open
+**Numbers for the reviewer, all derived from the registers:** 48 flags, 49 sources, 108 logged checks, 20 open
 questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
 or performance figure: the site still has no authorised source for one, and an absent number beats an invented
 one.
@@ -870,7 +870,7 @@ the suggestions board and the questions register, each with the action that woul
 
 **Decision surfaces confirmed linked and prominent:** the root landing page links the Suggestions board (`pages/suggestions.html`, SG-01…SG-14) and the Open questions register (`pages/questions.html`, Q-01…Q-20) from both the primary navigation and the footer "Decisions" column. Each suggestion row carries options, a recommendation, the questions that must be answered first, and an owner decision field awaiting record in `ledger/suggestions.json`. Nothing is implemented until a choice is recorded there.
 
-**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (45 sources, 422 rows, 1217 links, all derived from the live register); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 162 pages, all checks PASS.
+**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (49 sources, 423 rows, 1217 links, all derived from the live register); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 162 pages, all checks PASS.
 
 **Flagged irregularities (non-blocking, on `pages/flags.html`):** F-01/F-03 (product identity not established by an official document), F-24 (no Associates tag on the supplied links), F-05 (Creators API unregistered; PA-API 5.0 deprecated), F-08 (no performance reports; no traffic/revenue figures published anywhere). None blocks merge; all are published for owner review with their source links and closing actions.
 
@@ -977,10 +977,10 @@ decision surfaces are unchanged and current — the ten suggestions with options
 [the decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html), the
 **18 open questions** with the method that would close each one on
 [the questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html), and the
-[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **43 flags**,
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **48 flags**,
 each with its source links. Nothing is implemented on this site until it is chosen there.
 
-**Numbers for the reviewer, all derived from the registers:** 43 flags (18 open · 25 resolved), 45 sources,
+**Numbers for the reviewer, all derived from the registers:** 48 flags (20 open · 28 resolved), 49 sources,
 108 logged checks, 20 open questions, and every repository gate green on the merged tree.
 ---
 
@@ -1151,7 +1151,7 @@ catalog lookup). Suggestions `SG-13` (build a matching thermometer content set o
 three air fryers; the two thermometers are published in the product catalog with their sourced specs, and the
 editorial expansion waits on `Q-19`.
 
-**Register state after this addendum:** 5 product entries, 45 sources, 108 verification rows, 43 flags
+**Register state after this addendum:** 5 product entries, 49 sources, 108 verification rows, 48 flags
 (18 open · 25 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
 
 ---
@@ -1538,3 +1538,27 @@ after rebasing onto T65.
 Product intent for both links remains unconfirmed (F-03). The pages say so next to every product link.
 
 Full record: `docs/verification-32788da6.md`.
+
+---
+
+## Addendum — T63, session 10727edd (2026-11-19)
+
+**What changed for a reader.** The front page now opens on the products rather than on the audit. All
+five supplied links have a reader-facing home. Four new guides target questions people actually search
+for ("instant-read or wireless?", "do I need a thermometer for an air fryer?"). Every spec on them is
+drawn from a sourced ledger row, and no price or star rating appears anywhere.
+
+**The most important finding.** From PR #158 to PR #161, **no CI gate ran on main**. Unresolved
+conflict markers made `.github/workflows/pages.yml` unparseable. Pages kept deploying through the legacy
+branch build, so the site stayed live but nothing checked it (F-45). CR-6's "cancel-in-progress"
+diagnosis was wrong. The workflow is now repaired, and the local replay refuses to run if a file carries a
+conflict marker.
+
+**Waiting on the owner, none of it blocking:** confirm `shopnow047c-20` in Associates Central (Q-T50-02);
+test one Special Link (FLG-003, which stays unresolved and is not claimed invalid); confirm whether the
+ThermoMaven link should point at the newer model (F-44 / Q-T63-03); verify the site in Search Console
+(Q-T63-05); explain why the brief cites Zone3's register IDs (F-47).
+
+**Register state after T63:** 48 flags (20 open · 28 resolved), 49 sources, 18 suggestions on the
+front-page board (4 carrying a recorded owner direction), 17 questions on that board. Full replay: 49/49 gates pass.
+Evidence: [`docs/verification-10727edd.md`](docs/verification-10727edd.md).

@@ -44,6 +44,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import head_meta  # noqa: E402  — the repository's single canonical/OG contract
 from link_builder import ASSOCIATES_TAG, build_product_link  # noqa: E402  — the policy-guarded Special Link emitter
+import front_t63 as t63  # noqa: E402  — T63 reader-first content (thermometers, FSIS rows, new guides)
 
 ROOT = Path(__file__).resolve().parent.parent
 FACTS = ROOT / "marketing" / "data" / "facts.json"
@@ -51,6 +52,7 @@ BOARD = ROOT / "docs" / "board-9251f262.json"
 SITE = "https://kanlerxz87-cyber.github.io/Zone2/"
 
 CHECKED_ON = "2026-11-16"
+UPDATED_ON = "2026-11-19"  # T63: date of this build's live source re-read (docs/verification-10727edd.md)
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 LINK_REL = "sponsored nofollow"
 LINK_DISCLOSURE = "(paid link)"
@@ -105,6 +107,11 @@ GUIDE_CATEGORIES = {
         "blurb": "A small convection oven that also air fries. More capacity, more modes, and a very different shape of counter commitment.",
         "keys": ["P2"],
     },
+    "meat-thermometers": {
+        "title": "Meat thermometers",
+        "blurb": "An instant-read you carry to the food, and a leave-in wireless set that reports to your phone. Two of the five supplied links open these listings; both are compared here row by row.",
+        "keys": ["P4", "P5"],
+    },
     "buying-guides": {
         "title": "Buying guides",
         "blurb": "Decision-first pages: start from the question, end at one of the three listings, and show the row that settles it.",
@@ -153,7 +160,8 @@ ARTICLES = [
     ("Journal", "Why every number here links to its source",
      "journal/why-every-number-has-a-source.html", "method",
      "Most affiliate sites are written backwards. This one was built the other way round."),
-]
+] + [(kicker, title, f"guides/{slug}.html", cat, dek)  # T63: the four question-shaped guides
+     for slug, kicker, title, dek, cat in t63.NEW_GUIDES]
 
 
 # --------------------------------------------------------------------------- #
@@ -216,18 +224,24 @@ def spec_rows(product: dict, attrs: list[str]) -> list[dict]:
 
 
 def masthead(active: str) -> str:
-    # Reader navigation stays focused on shopping and editorial content. Owner-facing
-    # dashboards live together in one native, keyboard-accessible disclosure group and
-    # remain listed in the footer; they do not compete with the reader's first choices.
+    # Merged masthead (T63, session 10727edd, after PR #166 from session cf98ff65 landed on main
+    # with its own masthead). Both sessions' intents are kept:
+    #   - reader sections first: 10727edd's five (incl. the Thermometers route, F-48) plus
+    #     cf98ff65's Journal and All articles;
+    #   - every owner/operator surface in ONE native, keyboard-accessible <details> group
+    #     (cf98ff65's "Project & tools"), with 10727edd's "Behind the site" hub as its first entry;
+    #   - aria-current on the active link (cf98ff65).
     nav = [
-        ("index.html", "Counter Notes"),
-        ("marketing/buying-guide.html", "Buying guide"),
+        ("index.html", "Front page"),
+        ("marketing/buying-guide.html", "Air fryers"),
+        ("guides/meat-thermometers.html", "Thermometers"),
         ("guides/index.html", "Guides"),
         ("marketing/comparison.html", "Compare"),
         ("journal/index.html", "Journal"),
         ("marketing/index.html", "All articles"),
     ]
     tools = [
+        ("behind-the-site.html", "Behind the site (all surfaces)"),
         ("suggestions.html", "Suggestions"),
         ("questions.html", "Open questions"),
         ("brief/index.html", "Design brief"),
@@ -244,30 +258,27 @@ def masthead(active: str) -> str:
         ("summary.html", "Executive summary"),
     ]
     depth = "../" if active.startswith("guides/") else ""
-    items = []
-    for href, label in nav:
-        rel = depth + href
+
+    def link(href: str, label: str) -> str:
         current = ' class="is-on" aria-current="page"' if href == active else ""
-        items.append(f'<a href="{e(rel)}"{current}>{e(label)}</a>')
-    tool_items = []
-    for href, label in tools:
-        rel = depth + href
-        current = ' class="is-on" aria-current="page"' if href == active else ""
-        tool_items.append(f'<a href="{e(rel)}"{current}>{e(label)}</a>')
-    tools_current = ' aria-current="page"' if active in {href for href, _ in tools} else ""
+        return f'<a href="{e(depth + href)}"{current}>{e(label)}</a>'
+
+    items = "".join(link(h, l) for h, l in nav)
+    tool_items = "".join(link(h, l) for h, l in tools)
+    tools_current = ' aria-current="page"' if active in {h for h, _ in tools} else ""
     return f"""<header class="pb-mast">
   <div class="pb-wrap">
     <div class="pb-mast-top">
       <div>
         <div class="pb-word">Counter <em>Notes</em></div>
-        <div class="pb-tag">Countertop cooking gear, read off the spec sheet</div>
+        <div class="pb-tag">Air fryers, meat thermometers and the questions to ask before you buy</div>
       </div>
-      <div class="pb-mast-meta">Sources re-read {e(CHECKED_ON)}</div>
+      <div class="pb-mast-meta">Updated {e(UPDATED_ON)}</div>
     </div>
-    <nav class="pb-nav" aria-label="Primary navigation">{''.join(items)}<details class="pb-nav-tools"><summary{tools_current}>Project &amp; tools</summary><div class="pb-nav-menu">{''.join(tool_items)}</div></details></nav>
+    <nav class="pb-nav" aria-label="Primary navigation">{items}<details class="pb-nav-tools"><summary{tools_current}>Project &amp; tools</summary><div class="pb-nav-menu">{tool_items}</div></details></nav>
   </div>
 </header>
-<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} A commission may be earned when you buy through our links, at no extra cost to you. The Associates tag supplied for this project is <code>{e(ASSOCIATES_TAG)}</code>; its account status and its presence on every product destination have not been confirmed. Citation and evidence links are not affiliate links.</div></div>"""
+<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} If you buy through a product link marked &ldquo;(paid link)&rdquo;, we may earn a commission at no extra cost to you. The Associates tag supplied for this project is <code>{e(ASSOCIATES_TAG)}</code>; its account status has not yet been confirmed in Associates Central. Links to manufacturer pages, government sources and evidence are never affiliate links.</div></div>"""
 
 
 def footer(depth: str = "") -> str:
@@ -279,7 +290,9 @@ def footer(depth: str = "") -> str:
         <li><a href="{e(depth)}guides/index.html">All guides</a></li>
         <li><a href="{e(depth)}marketing/buying-guide.html">Which one to buy</a></li>
         <li><a href="{e(depth)}marketing/comparison.html">Head-to-head</a></li>
-        <li><a href="{e(depth)}marketing/articles/index.html">The three write-ups</a></li>
+        <li><a href="{e(depth)}guides/meat-thermometers.html">Meat thermometers</a></li>
+        <li><a href="{e(depth)}guides/thermometer-for-air-fryer.html">Thermometer + air fryer</a></li>
+        <li><a href="{e(depth)}marketing/articles/index.html">The air-fryer write-ups</a></li>
       </ul></div>
       <div><h4>Decide</h4><ul>
         <li><a href="{e(depth)}suggestions.html">Suggestion board</a></li>
@@ -298,6 +311,7 @@ def footer(depth: str = "") -> str:
         <li><a href="{e(depth)}summary.html">Executive summary</a></li>
       </ul></div>
       <div><h4>Platform</h4><ul>
+        <li><a href="{e(depth)}behind-the-site.html">Behind the site (all surfaces)</a></li>
         <li><a href="{e(depth)}products.html">Products</a></li>
         <li><a href="{e(depth)}analysis.html">Analysis</a></li>
         <li><a href="{e(depth)}content.html">Content engine</a></li>
@@ -398,6 +412,28 @@ def page(rel_path: str, *, title: str, description: str, active: str,
 """
 
 
+def implemented_line(sg: dict) -> str:
+    """T63: a row the owner decided says so; every other row keeps the original wording."""
+    od = sg.get("owner_direction")
+    if not od:
+        return ('<span><b>Implemented</b> No &mdash; no suggestion on this board is applied until a '
+                'choice is recorded.</span>')
+    state = "Yes" if sg.get("implemented") else "Partly"
+    return f'<span><b>Implemented</b> {state} &mdash; owner chose option {e(od["chosen_option"])} on {e(od["date"])}.</span>'
+
+
+def owner_direction_block(sg: dict) -> str:
+    od = sg.get("owner_direction")
+    note = sg.get("brief_note")
+    if od:
+        return (f'\n  <p class="pb-owner"><b>Owner direction ({e(od["date"])}).</b> The brief quotes option '
+                f'{e(od["chosen_option"])} verbatim: &ldquo;{e(od["quote"])}&rdquo; '
+                f'<b>Where it stands:</b> {e(od["implementation"])}</p>')
+    if note:
+        return f'\n  <p class="pb-owner">{e(note)}</p>'
+    return ""
+
+
 def decision_block(sg: dict, board: dict) -> str:
     opts = []
     for o in sg["options"]:
@@ -413,8 +449,9 @@ def decision_block(sg: dict, board: dict) -> str:
         s = board["sources"].get(sg["source"])
         if s:
             host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", s["url"]).split("/")[0])
+            rel = f"{LINK_REL} noopener noreferrer" if "amazon." in host else "noopener noreferrer"
             src = (f'<span><b>Source</b> <a href="{e(s["url"])}" target="_blank" '
-                   f'rel="noopener noreferrer">{e(s["name"])} &middot; {e(host)}</a></span>')
+                   f'rel="{rel}">{e(s["name"])} &middot; {e(host)}</a></span>')
     waits = ", ".join(
         f'<a href="questions.html#{e(q)}">{e(q)}</a>' for q in sg.get("waits_on", [])
     ) or "none &mdash; this can be decided now"
@@ -422,7 +459,7 @@ def decision_block(sg: dict, board: dict) -> str:
   <div class="pb-decision-hd">
     <span class="pb-decision-id">{e(sg['id'])}</span>
     <h3>{e(sg['title'])}</h3>
-    <span class="pb-pill pb-pill--warn">{e(sg['status'])}</span>
+    <span class="pb-pill pb-pill--{'ok' if sg.get('implemented') else 'warn'}">{e(sg['status'])}</span>
   </div>
   <p><b>Area:</b> {e(sg['area'])} &middot; {e(sg['summary'])}</p>
   <div class="pb-opts">{''.join(opts)}</div>
@@ -430,8 +467,8 @@ def decision_block(sg: dict, board: dict) -> str:
     <span><b>Recommended</b> Option {e(sg['recommendation'])}</span>
     <span><b>Waits on</b> {waits}</span>
     {src}
-    <span><b>Implemented</b> No &mdash; no suggestion on this board is applied until a choice is recorded.</span>
-  </div>
+    {implemented_line(sg)}
+  </div>{owner_direction_block(sg)}
 </article>"""
 
 
@@ -445,8 +482,9 @@ def question_block(q: dict, board: dict) -> str:
         s = board["sources"].get(q["source"])
         if s:
             host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", s["url"]).split("/")[0])
+            rel = f"{LINK_REL} noopener noreferrer" if "amazon." in host else "noopener noreferrer"
             src = (f'<span><b>Source</b> <a href="{e(s["url"])}" target="_blank" '
-                   f'rel="noopener noreferrer">{e(s["name"])} &middot; {e(host)}</a></span>')
+                   f'rel="{rel}">{e(s["name"])} &middot; {e(host)}</a></span>')
     return f"""<article class="pb-decision" id="{e(q['id'])}">
   <div class="pb-decision-hd">
     <span class="pb-decision-id">{e(q['id'])}</span>
@@ -500,152 +538,521 @@ def bench_card(product: dict) -> str:
 
 
 # --------------------------------------------------------------------------- #
+# T63 helpers (session 10727edd, 2026-11-19)
+# --------------------------------------------------------------------------- #
+NUM_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+             "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+             "seventeen", "eighteen", "nineteen", "twenty"]
+
+
+def num_word(n: int, cap: bool = False) -> str:
+    """A count rendered from the register it describes — never typed (the 'Thirteen' drift, F-46)."""
+    w = NUM_WORDS[n] if 0 <= n < len(NUM_WORDS) else str(n)
+    return w[:1].upper() + w[1:] if cap else w
+
+
+def all_products(facts: dict) -> dict:
+    prods = {p["key"]: p for p in facts["products"]}
+    prods.update(t63.load_thermometers())
+    return prods
+
+
+def voice(key: str) -> dict:
+    return PRODUCT_VOICE.get(key) or t63.THERMO_VOICE[key]
+
+
+def cta(product: dict, depth: str = "", label: str = "See the listing on Amazon") -> str:
+    dp = product_link(product)
+    return (f'<a class="pb-bench-cta" href="{e(dp)}" target="_blank" rel="{LINK_REL} noopener noreferrer" '
+            f'data-link-state="TAGGED" data-product-key="{e(product["key"])}">{e(label)} '
+            f'{e(LINK_DISCLOSURE)} &rarr;</a>')
+
+
+def thermo_card(product: dict, depth: str = "") -> str:
+    v = t63.THERMO_VOICE[product["key"]]
+    rows = spec_rows(product, v["highlights"])
+    lis = "".join(f"<li><span>{e(r['attr'])}</span><span>{e((r.get('value') or '').strip() or '—')}</span></li>"
+                  for r in rows)
+    return f"""<article>
+  <p class="pb-bench-brand">{e(v['brand'])} &middot; {e(v['kind'])}</p>
+  <h3><a href="{e(depth)}guides/instant-read-or-wireless-thermometer.html">{e(v['headline'])}</a></h3>
+  <p class="pb-bench-note">{e(v['display'])}</p>
+  <p>{e(v['note'])}</p>
+  <ul>{lis}</ul>
+  {cta(product, depth)}
+</article>"""
+
+
+def sourced_table(caption: str, head: tuple[str, str, str], rows: list[tuple[str, str, str, str]]) -> str:
+    """A cross-product table. Each row: (label, value, status, source_url). Empty url -> dash + reason."""
+    trs = []
+    for label, value, status, url in rows:
+        kind, pill_label = STATUS_PILL.get(status, ("idle", "unverified"))
+        pill = f'<span class="pb-pill pb-pill--{kind}">{e(pill_label)}</span>'
+        val = f"{e(value)} {pill}" if value else f'<span class="pb-blank">&mdash;</span> {pill}'
+        if url:
+            src = (f'<a class="pb-src" href="{e(url)}" target="_blank" '
+                   f'rel="{LINK_REL} noopener noreferrer">{e(t63.host_of(url))}</a>')
+        else:
+            src = '<span class="pb-blank">&mdash;<small>No official page states this value.</small></span>'
+        trs.append(f'<tr><td class="k">{e(label)}</td><td>{val}</td><td>{src}</td></tr>')
+    return (f'<div class="pb-table-scroll"><table class="pb-table"><caption>{caption}</caption>'
+            f'<thead><tr><th>{e(head[0])}</th><th>{e(head[1])}</th><th>{e(head[2])}</th></tr></thead>'
+            f'<tbody>{"".join(trs)}</tbody></table></div>')
+
+
+def row_of(product: dict, attr: str) -> dict | None:
+    return next((r for r in product["rows"] if r["attr"] == attr), None)
+
+
+def cell(product: dict, attr: str, label: str | None = None) -> tuple[str, str, str, str]:
+    """One cross-table row read straight from a product's sourced rows."""
+    r = row_of(product, attr)
+    name = label or f"{voice(product['key'])['short']} — {attr}"
+    if not r:
+        return (name, "", "unverified", "")
+    url = src_map(product).get(r.get("src"), {}).get("url", "") if r.get("src") else ""
+    return (name, r.get("value") or "", r.get("status", "unverified"), url)
+
+
+def fsis_table() -> str:
+    rows = [(food, temp, "verified", t63.FSIS_URL) for food, temp in t63.FSIS_ROWS]
+    return sourced_table(
+        f'Minimum internal temperatures, transcribed from the '
+        f'<a href="{e(t63.FSIS_URL)}" target="_blank" rel="noopener noreferrer">{e(t63.FSIS_NAME)}</a> '
+        f'on {e(t63.TODAY)}.',
+        ("Food", "Minimum internal temperature", "Official source"), rows)
+
+
+# --------------------------------------------------------------------------- #
 # pages
 # --------------------------------------------------------------------------- #
 def build_index(facts: dict, board: dict) -> str:
-    prods = {p["key"]: p for p in facts["products"]}
+    prods = all_products(facts)
+    fryers = "".join(bench_card(prods[k]) for k in ("P1", "P3", "P2"))
+    thermos = "".join(thermo_card(prods[k]) for k in ("P4", "P5"))
 
-    bench = "".join(bench_card(prods[k]) for k in ("P1", "P2", "P3"))
+    picks = [
+        ("You cook a main and a side at the same time", "P1",
+         "Two baskets, and Sync Finish ends both together.", "marketing/articles/p1.html"),
+        ("You want one big basket and no learning curve", "P3",
+         "8 quarts, four presets.", "marketing/articles/p3.html"),
+        ("You want an oven that also air fries", "P2",
+         "26 quarts behind French doors, ten cooking modes.", "marketing/articles/p2.html"),
+        ("You want a number in a second, anywhere", "P4",
+         "Instant-read, one-second response per its listing.", "guides/instant-read-or-wireless-thermometer.html"),
+        ("You want to leave the probe in and walk away", "P5",
+         "Three wireless probes, WiFi to your phone.", "guides/instant-read-or-wireless-thermometer.html"),
+    ]
+    pick_lis = "".join(
+        f'<li><span class="pb-pick-if">{e(cond)}</span>'
+        f'<a href="{e(href)}">{e(voice(k)["short"])}</a><small>{e(why)}</small></li>'
+        for cond, k, why, href in picks)
 
-    lead_articles = [a for a in ARTICLES if a[0] in ("Capacity", "Design", "Specs")][:3]
+    guide_cards = [
+        ("Thermometers", "Instant-read or leave-in wireless: which meat thermometer fits the way you cook?",
+         "guides/instant-read-or-wireless-thermometer.html",
+         "One you stab in and read; one that stays in and pings your phone."),
+        ("Food safety", "Do you need a meat thermometer for an air fryer?",
+         "guides/thermometer-for-air-fryer.html",
+         "The dial sets the air temperature. The USDA chart is written in the food's."),
+        ("Capacity", "How many quarts of air fryer do you actually need?",
+         "marketing/topics/how-many-quarts-do-you-need.html",
+         "Six quarts of what? How to translate the number every box leads with."),
+        ("Design", "Two baskets or one big one? A trade you cannot undo later",
+         "marketing/topics/dual-basket-or-one-big-basket.html",
+         "The dual-basket pitch is about timing, not volume."),
+        ("Checklist", "Seven questions to ask before buying a multi-function appliance",
+         "guides/multi-function-appliance-questions.html",
+         "Ten modes sounds like ten appliances. Count the ones you will use."),
+        ("Fit & cleanup", "How to judge cleanup and counter space before you buy",
+         "guides/cleanup-and-counter-space.html",
+         "The machine you return is the one that did not fit or nobody washed."),
+    ]
     stories = "".join(
-        f'<a class="pb-story" href="{e(href)}"><span class="k">{e(kicker)}</span>'
-        f'<h3>{e(title)}</h3><p>{e(blurb)}</p></a>'
-        for kicker, title, href, _cat, blurb in lead_articles
-    )
+        f'<a class="pb-story" href="{e(href)}"><span class="k">{e(k)}</span>'
+        f'<h3>{e(t)}</h3><p>{e(b)}</p></a>' for k, t, href, b in guide_cards)
+    n_guides = len(ARTICLES)
 
-    open_sg = [s for s in board["suggestions"]][:3]
-    board_cards = "".join(
-        f'<div class="pb-bt"><h3>{e(s["title"])}</h3><p>{e(s["area"])} &middot; '
-        f'Option {e(s["recommendation"])} recommended. {e(s["status"])}.</p>'
-        f'<a href="suggestions.html#{e(s["id"])}">Read the options &rarr;</a></div>'
-        for s in open_sg
-    )
-
+    poultry = t63.FSIS_ROWS[0][1].split(" (")[0]
     body = f"""
-<section class="pb-lead"><div class="pb-wrap">
+<section class="pb-lead pb-lead--hero"><div class="pb-wrap">
   <div class="pb-lead-grid">
     <div>
-      <p class="pb-kicker">Three air fryers &middot; one counter</p>
-      <h1 class="pb-h1">The 6-quart, the 8-quart, and the <em>oven</em> that wants to be both.</h1>
-      <p class="pb-stand">Every figure on this page came off a manufacturer page or an Amazon
-      listing, on a date you can check. Where the two disagree we print both. Where neither says
-      anything, we print a dash and tell you why. No price, no star rating, no invented test score.</p>
+      <p class="pb-kicker">Roasting season &middot; kitchen buying guides</p>
+      <h1 class="pb-h1">The air fryer that fits your counter, and the thermometer that tells you <em>dinner is done</em>.</h1>
+      <p class="pb-stand">Five kitchen tools, compared on what you can check before you buy:
+      footprint, capacity, controls, cleanup, and what each one is really for. Every figure links to
+      the page it came from, so you never have to take our word for it.</p>
       <div class="pb-actions">
-        <a class="pb-btn" href="marketing/buying-guide.html">Which one should I buy?</a>
-        <a class="pb-btn pb-btn--ghost" href="guides/index.html">All the guides</a>
+        <a class="pb-btn" href="marketing/buying-guide.html">Help me choose an air fryer</a>
+        <a class="pb-btn pb-btn--ghost" href="guides/meat-thermometers.html">Pick a thermometer</a>
       </div>
-      <p class="pb-byline"><b>What this is.</b> Five Amazon listings this project was asked to
-      promote &mdash; three air fryers and two kitchen thermometers &mdash; read row by row against
-      their own spec sheets. &middot;
-      <b>Sources re-read</b> {e(CHECKED_ON)} &middot;
-      <b>Then</b> <a href="guides/method.html">how we verify</a>.</p>
     </div>
-    <aside class="pb-takeaways">
-      <h2>The short version</h2>
-      <ol>
-        <li><b>Two 3-quart baskets, or one big one.</b> The Chefman 6 Qt is the only machine here
-        that finishes both halves of a meal at the same time.</li>
-        <li><b>26 quarts is a different appliance.</b> The Emeril is an oven with French doors that
-        also air fries &mdash; and the deepest machine here, 16.9 in front to back against 12.6 in
-        for the 8-quart Chefman.</li>
-        <li><b>The 8-quart Chefman is the plainest.</b> Four presets, one basket, and the largest
-        single chamber of the three.</li>
-        <li><b>Two official pages disagree twice.</b> On the Emeril's preset count and on the 8-quart
-        Chefman's maximum temperature. Both disagreements are published, not resolved by picking one.</li>
-        <li><b>No price is printed anywhere here.</b> Amazon's program policies restrict price display
-        to content Amazon itself serves. <a href="guides/method.html">The rule and its source</a>.</li>
-      </ol>
+    <aside class="pb-takeaways pb-picks">
+      <h2>Quick picks: start from how you cook</h2>
+      <ol>{pick_lis}</ol>
+      <p class="pb-picks-note">Matched on published specs, not on a test score. No price or star
+      rating is shown on this site; the listing shows both.</p>
     </aside>
+  </div>
+  <figure class="pb-hero-art"><img src="assets/img/hero-counter.jpg" width="1600" height="900"
+    alt="Illustration of an air fryer on a kitchen counter beside a roast chicken and a probe thermometer"
+    loading="eager" decoding="async"><figcaption>Illustration, not product photography.</figcaption></figure>
+</div></section>
+
+<section class="pb-sec" id="air-fryers"><div class="pb-wrap">
+  <div class="pb-sec-head">
+    <div><h2 class="pb-h2">Air fryers</h2>
+    <p class="pb-sub">A two-basket 6-quart, a one-basket 8-quart, and a 26-quart oven with doors.
+    One line of opinion each, then the numbers off the spec sheet.</p></div>
+    <a class="pb-sec-link" href="marketing/comparison.html">All three side by side &rarr;</a>
+  </div>
+  <div class="pb-bench">{fryers}</div>
+</div></section>
+
+<section class="pb-sec" id="thermometers"><div class="pb-wrap">
+  <div class="pb-sec-head">
+    <div><h2 class="pb-h2">Meat thermometers</h2>
+    <p class="pb-sub">An instant-read you carry to the food, and a leave-in wireless set that reports
+    to your phone. Different jobs, not better and worse.</p></div>
+    <a class="pb-sec-link" href="guides/meat-thermometers.html">Full spec tables &rarr;</a>
+  </div>
+  <div class="pb-bench pb-bench--two">{thermos}</div>
+</div></section>
+
+<section class="pb-pair"><div class="pb-wrap">
+  <div class="pb-pair-grid">
+    <div>
+      <p class="pb-kicker">Use them together</p>
+      <h2 class="pb-h2">The {e(poultry)} rule: why an air fryer and a thermometer share a counter</h2>
+      <p>An air fryer's dial sets the temperature of the <em>air</em>. The USDA's safe-cooking chart
+      is written in the temperature <em>inside the food</em>: {e(poultry)} for all poultry,
+      &ldquo;as measured with a food thermometer.&rdquo; No air fryer on this page claims to
+      measure that for you.</p>
+      <a class="pb-sec-link" href="guides/thermometer-for-air-fryer.html">Read the guide &rarr;</a>
+    </div>
+    <div>{fsis_table()}</div>
   </div>
 </div></section>
 
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head">
-    <div><h2 class="pb-h2">The three machines on the bench</h2>
-    <p class="pb-sub">One line of opinion each, then the numbers straight off the spec sheet.</p></div>
-    <a class="pb-sec-link" href="marketing/comparison.html">Every number, side by side &rarr;</a>
-  </div>
-  <div class="pb-bench">{bench}</div>
-  <p class="pb-sub" style="margin-top:18px">The listings above are the three air-fryer listings the
-  first batch of supplied <code>link.amazon</code> short links open. The brief names five links
-  in total; the two thermometers they resolve to are onboarded in the catalog too &mdash; see
-  <a href="products.html">the product catalog</a>. That destination is reproducible, but it is not the
-  same claim as &ldquo;this is the product the brief meant&rdquo; &mdash; see
-  <a href="questions.html#Q-T50-01">Q-T50-01</a> and <a href="flagged.html">the flagged register</a>.
-  The buttons above are tagged Special Links (Associates tag <code>{e(ASSOCIATES_TAG)}</code>); the
-  per-link confirmation record &mdash; intended product, observed destination, date &mdash; lives in
-  the <a href="intent.html">link &amp; intent register</a>.</p></div></section>
-
-<section class="pb-sec"><div class="pb-wrap">
-  <div class="pb-sec-head">
-    <div><h2 class="pb-h2">Start with the question, not the product</h2>
-    <p class="pb-sub">Eight guides, each framed around a practical buyer question. These are editorial hypotheses, not measured search queries or volume claims.</p></div>
-    <a class="pb-sec-link" href="guides/index.html">Browse by category &rarr;</a>
+    <div><h2 class="pb-h2">Questions to ask before you buy</h2>
+    <p class="pb-sub">Each guide starts from a question, not a product, and ends at the row in a
+    spec table that settles it. {num_word(n_guides, cap=True)} published so far. The questions are
+    editorial hypotheses, not measured search queries or volume claims.</p></div>
+    <a class="pb-sec-link" href="guides/index.html">Every guide, by category &rarr;</a>
   </div>
   <div class="pb-stories">{stories}</div>
 </div></section>
 
-<section class="pb-receipts"><div class="pb-wrap">
-  <h2 class="pb-h2">The receipts</h2>
-  <p class="pb-sub">Where an affiliate site would put growth numbers, this one puts its own verification
-  state. No traffic, conversion or revenue figure appears anywhere on this site: none has been imported
-  from a first-party report, and inventing one is the thing this project refuses to do. Aggregate,
-  cookie-free click counting is switched on (recorded as decision DS-11 on 2026-11-17) &mdash; its counts
-  will be published only once an endpoint keeps them and an Associates report exists to check them
-  against.</p>
-  <div class="pb-figs">
-    <div class="pb-fig"><b>5<i> / 5</i></b><span>Supplied links that resolve, reproducibly, to one
-      specific Amazon listing each. Re-observed {e(CHECKED_ON)}.</span></div>
-    <div class="pb-fig"><b>5<i> / 5</i></b><span>Supplied links that resolve, reproducibly, to one
-      specific Amazon listing each &mdash; two of them kitchen thermometers rather than air fryers.
-      Re-observed 2026-11-17; <a href="intent.html">the link &amp; intent register</a>.</span></div>
-    <div class="pb-fig"><b>0<i> / 5</i></b><span>Product mappings confirmed by an official Amazon      document. <a href="flagged.html">Flag F-03</a>.</span></div>
-    <div class="pb-fig"><b>9<i> / 10</i></b><span>Characters per supplied code against the 10-character
-      ASIN rule on Amazon's own help page. <a href="flagged.html">Flag F-01</a>.</span></div>
-    <div class="pb-fig"><b>4.50%<i> or 4.00%</i></b><span>Kitchen band vs &ldquo;All Other Categories&rdquo;
-      in Table 1. Which applies is <a href="questions.html#Q-T50-05">Q-T50-05</a>.</span></div>
-    <div class="pb-fig"><b><span id="flagCount">&mdash;</span><i> open</i></b><span>Items on the
-      <a href="flagged.html">Flagged for Review register</a>, each with its official-source link.
-      This number is rendered from the register, never typed.</span></div>
+<section class="pb-trust"><div class="pb-wrap">
+  <div class="pb-trust-grid">
+    <div><h3>Sourced, row by row</h3><p>Specs come from the manufacturer's page or the Amazon
+    listing, with a link on every row. When two official pages disagree, we print both.</p></div>
+    <div><h3>Blanks stay blank</h3><p>If no official page states a value, you see a dash and the
+    reason, never an estimate. No invented test scores, no fake &ldquo;tested by&rdquo; badges.</p></div>
+    <div><h3>Paid links are labelled</h3><p>Product buttons are affiliate links marked
+    &ldquo;(paid link)&rdquo;. Evidence links never are. <a href="guides/method.html">How we check</a>
+    &middot; <a href="behind-the-site.html">Behind the site</a>.</p></div>
   </div>
-</div></section>
-
-<section class="pb-sec"><div class="pb-wrap">
-  <div class="pb-sec-head">
-    <div><h2 class="pb-h2">What we would change next &mdash; your call</h2>
-    <p class="pb-sub">{len(board['suggestions'])} proposals sit on the board with their options, costs and trade-offs.
-    Nothing on it has been implemented. This build follows the rule, not the recommendation: every
-    item still says <em>proposed</em> until you record a choice.</p></div>
-    <a class="pb-sec-link" href="suggestions.html">Open the whole board &rarr;</a>
-  </div>
-  <div class="pb-board-tease">{board_cards}</div>
-</div></section>
-
-<section class="pb-sec"><div class="pb-wrap">
-  <div class="pb-sec-head">
-    <div><h2 class="pb-h2">A drift found, and how it was handled</h2>
-    <p class="pb-sub">Re-reading every load-bearing source on {e(CHECKED_ON)} turned up one stored value
-    that was no longer true on the page it came from. It is one of
-    <span id="flagCountHeading">&mdash;</span> items on the register.</p></div>
-    <a class="pb-sec-link" href="flagged.html">Full flagged register &rarr;</a>
-  </div>
-  <div class="pb-note"><b>A listing title is perishable, and the record shows the whole arc.</b>
-  This project re-read every load-bearing official source on {e(CHECKED_ON)} and found that the Amazon
-  title stored for the 26-quart Emeril listing was no longer the title the page served. No specification
-  row was affected and nothing on this site was wrong &mdash; the stored <em>title</em> was stale. It was
-  published as a flagged item rather than quietly overwritten, because a record that silently rewrites
-  itself cannot be trusted. The register now carries it as <b>F-41</b>, and the stored title has since
-  been corrected by another session working on this repository in parallel &mdash; which is how the
-  process is meant to work: the drift is dated, visible and traceable rather than invisible.
-  <a href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="{LINK_REL} noopener noreferrer">Check it yourself</a> &middot;
-  <a href="flagged.html">the full flagged register</a> &middot;
-  <a href="questions.html#Q-T50-11">why the cadence question is still open</a>.</div>
+  <p class="pb-trust-foot">Anything we could not confirm is published, with its source, on the
+  <a href="flagged.html">Flagged for Review register</a>: <span id="flagCount">&mdash;</span> items right
+  now, counted live from the register.<span class="pb-sr"> Register total: <span id="flagCountHeading">&mdash;</span>.</span></p>
+  <p class="pb-trust-foot">What we might change next is on the <a href="suggestions.html">decision board</a>:
+  <b>{len(board['suggestions'])} proposals sit on the board</b>, {sum(1 for s in board['suggestions'] if s.get('owner_direction'))} with a recorded owner direction.</p>
 </div></section>
 """
-    return page("index.html", title="Three air fryers, measured against their own spec sheets · Counter Notes",
-                description="Air fryer reviews and guides built from manufacturer and Amazon listings only: sourced spec rows, published disagreements, and blanks left blank instead of filled in.",
-                active="index.html", body=body, with_data=True)
+    return page("index.html", title="Air fryers and meat thermometers, compared on the specs that decide it · Counter Notes",
+                description="Air fryer and meat thermometer buying guides: quick picks by how you cook, side-by-side spec tables linked to official pages, and the USDA temperatures that make a thermometer worth owning.",
+                active="index.html", body=body, with_data=True,
+                extra_head='<link rel="preload" as="image" href="assets/img/hero-counter.jpg">')
+
+
+def guide_shell(slug: str, body_html: str, related: list[str]) -> str:
+    g = next(x for x in t63.NEW_GUIDES if x[0] == slug)
+    _slug, kicker, title, dek, cat = g
+    rel_path = f"guides/{slug}.html"
+    rel_links = "".join(
+        f'<li><a href="{e(h)}">{e(t)}</a></li>' for t, h in
+        [(x[2], f"{x[0]}.html") for x in t63.NEW_GUIDES if x[0] in related])
+    # Cross-link to the thermometer desk another session published the same day (PR #167), so a
+    # reader finds both treatments; which page should be canonical is SG-T63-06, left to the owner.
+    desk = {"instant-read-or-wireless-thermometer": ("../marketing/thermometers/instant-read-or-leave-in.html",
+                                                     "The thermometer desk's take: instant-read or leave-in?"),
+            "thermometer-for-air-fryer": ("../marketing/thermometers/thermometer-for-air-fryer.html",
+                                          "The thermometer desk's take on the same question")}.get(slug)
+    desk_link = (f'<li><a href="{e(desk[0])}">{e(desk[1])}</a></li>'
+                 '<li><a href="../marketing/thermometers/index.html">The thermometer desk, both thermometers row by row</a></li>'
+                 if desk else "")
+    body = f"""
+<article class="pb-article">
+<section class="pb-lead"><div class="pb-wrap">
+  <p class="pb-kicker">{e(kicker)} &middot; <a href="{e(cat)}.html" style="color:inherit">{e(GUIDE_CATEGORIES[cat]['title'])}</a></p>
+  <h1 class="pb-h1 pb-measure">{e(title)}</h1>
+  <p class="pb-stand pb-measure">{e(dek)}</p>
+  <p class="pb-byline"><b>Counter Notes</b> &middot; published {e(t63.TODAY)} &middot; sources re-read {e(t63.TODAY)}
+  &middot; <a href="method.html">how we check</a></p>
+</div></section>
+<section class="pb-sec"><div class="pb-wrap"><div class="pb-prose">
+{body_html}
+</div>
+<aside class="pb-related"><h2>Keep reading</h2><ul>{rel_links}
+{desk_link}<li><a href="index.html">Every guide, by category</a></li></ul></aside>
+</div></section>
+</article>
+"""
+    return page(rel_path, title=f"{title} · Counter Notes", description=dek, active=rel_path,
+                body=body, depth="../", extra_head=t63.jsonld_article(rel_path, title, dek))
+
+
+def g_cta(product: dict) -> str:
+    return f'<p class="pb-inline-cta">{cta(product, label="Check " + voice(product["key"])["short"] + " on Amazon")}</p>'
+
+
+def build_guide_thermo_compare(facts: dict, board: dict) -> str:
+    p = all_products(facts)
+    tm, cq = p["P4"], p["P5"]
+    nm = t63.NEWER_MODEL_ASIN
+    body = f"""
+<h2>The short answer</h2>
+<ul class="pb-checks">
+  <li><b>You check food at the end and want a number now:</b> an instant-read. The ThermoMaven's
+  listing states a 1-second response and &plusmn;0.5 &deg;F accuracy, and it runs on one AAA battery
+  that comes in the box.</li>
+  <li><b>You roast, smoke or cook for hours and want to walk away:</b> a leave-in wireless set. The
+  CHEF iQ Sense listing states three probes, WiFi with unlimited range, and a hub that charges all
+  three at once.</li>
+</ul>
+
+<h2>Two numbers that look alike and are not</h2>
+<p>The ThermoMaven lists an <em>upper temperature range</em> of 572 &deg;F: the hottest thing it can
+measure. The CHEF iQ lists <em>1000 &deg;F heat safe</em>: how much heat the probe is built to
+survive while it sits in a grill. Neither number tells you the other. Read them as answers to
+different questions.</p>
+
+<h2>Questions to ask yourself</h2>
+<ol class="pb-checks">
+  <li><b>How many things are cooking at once?</b> One probe answers one question. The CHEF iQ set
+  on this page has three; its listing also offers 1, 2, 3 or 4 probe sizes.</li>
+  <li><b>Will you remember to charge it?</b> The ThermoMaven takes a AAA battery. The CHEF iQ is
+  rechargeable, and its own listing gives two different battery lives, &ldquo;up to 50 hours&rdquo;
+  in one section and &ldquo;70+ hours&rdquo; in another. We print both and pick neither.</li>
+  <li><b>Is it going in the air fryer?</b> The CHEF iQ description says &ldquo;air-fryer and
+  deep-fryer safe&rdquo;. The ThermoMaven listing does not say either way, so neither do we. An
+  instant-read is used outside the machine anyway: pull the basket, read, push it back.</li>
+  <li><b>How do you clean it?</b> ThermoMaven: wipe clean, and the listing calls it waterproof.
+  CHEF iQ: waterproof, dishwasher-safe probes.</li>
+</ol>
+
+<h2>The ThermoMaven, row by row</h2>
+{product_table(tm)}
+{g_cta(tm)}
+
+<h2>The CHEF iQ Sense, row by row</h2>
+{product_table(cq)}
+{g_cta(cq)}
+
+<h2>What these listings cannot tell you</h2>
+<p>Accuracy figures on both pages are the seller's own claims; we have no independent test, and we
+will not invent one. One more thing we saw when we re-read the ThermoMaven page on {e(t63.TODAY)}:
+Amazon now shows &ldquo;There is a newer model of this item&rdquo;, pointing at a different listing
+(<a href="https://www.amazon.com/dp/{e(nm)}" target="_blank" rel="sponsored nofollow noopener noreferrer">{e(nm)}</a>).
+We have not compared the two, so we say nothing about it.</p>
+<p class="pb-fineprint">Both products are the listings the owner's supplied short links open. Whether
+those are the exact products intended is a separate, open question
+(<a href="../intent.html">link &amp; intent register</a>).</p>
+"""
+    return guide_shell("instant-read-or-wireless-thermometer", body,
+                       ["thermometer-for-air-fryer", "cleanup-and-counter-space"])
+
+
+def build_guide_thermo_airfryer(facts: dict, board: dict) -> str:
+    p = all_products(facts)
+    rows = [cell(p["P1"], "Temperature range", "Chefman 6 Qt dual-window: air temperature range"),
+            cell(p["P3"], "Temperature range", "Chefman 8 Qt: air temperature range"),
+            cell(p["P2"], "Temperature range", "Emeril 26 Qt oven: air temperature range"),
+            cell(p["P4"], "Response time", "ThermoMaven: time to a reading"),
+            cell(p["P5"], "Air-fryer / deep-fryer safe", "CHEF iQ Sense: air-fryer safe")]
+    body = f"""
+<h2>The short answer</h2>
+<p>If you cook chicken, pork or anything ground in an air fryer: yes, or at least it is the only
+way to know. The USDA Food Safety and Inspection Service puts it plainly:
+&ldquo;{e(t63.FSIS_QUOTE)}&rdquo;</p>
+
+<h2>The dial is not the doneness</h2>
+<p>Every air fryer on this site publishes a temperature range, and every one of them is the
+temperature of the <em>air</em> the fan pushes around the basket. None of the three official pages
+claims to measure the food. That is the gap a thermometer fills.</p>
+{sourced_table("Air temperature is what the appliance sets. Internal temperature is what the chart asks for.",
+               ("What", "As published", "Official source"), rows)}
+
+<h2>The temperatures that matter</h2>
+{fsis_table()}
+<p>For whole cuts of beef, pork, veal and lamb, the chart adds a rest: at least three minutes before
+carving.</p>
+
+<h2>Which kind of thermometer suits an air fryer?</h2>
+<ul class="pb-checks">
+  <li><b>Instant-read:</b> pull the basket, take a reading, slide it back. Nothing has to survive the
+  cooking chamber. <a href="instant-read-or-wireless-thermometer.html">Compare the two types</a>.</li>
+  <li><b>Leave-in wireless:</b> the CHEF iQ description says &ldquo;air-fryer and deep-fryer safe&rdquo;.
+  Whether a probe fits under the drawer of a particular basket model is not stated on any page we
+  read, so measure your basket before you count on it.</li>
+</ul>
+{g_cta(p["P4"])}
+{g_cta(p["P5"])}
+"""
+    return guide_shell("thermometer-for-air-fryer", body,
+                       ["instant-read-or-wireless-thermometer", "multi-function-appliance-questions"])
+
+
+def build_guide_multifunction(facts: dict, board: dict) -> str:
+    p = all_products(facts)
+    em, c8 = p["P2"], p["P3"]
+    body = f"""
+<p>A multi-function appliance is a bet that one box will replace several. Sometimes it does.
+Sometimes it replaces one appliance well and the rest only on paper. These seven questions use the 26-quart Emeril
+Lagasse French-door oven as the worked example, because it is the multi-function machine on this
+site, and the 8-quart Chefman as the single-purpose contrast.</p>
+
+<ol class="pb-checks">
+  <li><b>Which modes will you use every week?</b> The Emeril lists ten: air fry, bake, broil,
+  defrost, dehydrate, grill, proof, reheat, roast and warm. Circle the ones you would actually use.
+  If it is two, a simpler machine may serve you better.</li>
+  <li><b>Where will it live?</b> Its manufacturer page gives 16.9&Prime; deep, 15.8&Prime; wide and
+  14.8&Prime; high. Measure the depth of your counter and the height under your wall cabinets.</li>
+  <li><b>Does the door need room to swing?</b> Dual French doors open outward, so the space in front
+  of the machine matters as much as the footprint.</li>
+  <li><b>Which count do you trust when the pages disagree?</b> The Emeril's preset count and its
+  accessory count differ between the manufacturer page and the Amazon title. When counts disagree,
+  read the list, not the number on the front.</li>
+  <li><b>Is your outlet up to it?</b> 1700 W at 120 V on the official pages. Check that against
+  the circuit you plan to use.</li>
+  <li><b>What does the warranty cover?</b> One year, per the manufacturer page.</li>
+  <li><b>Would a single-purpose machine do the job?</b> The 8-quart Chefman has four presets and
+  one basket. It does less, and that is the point.</li>
+</ol>
+
+<h2>The Emeril oven, row by row</h2>
+{product_table(em)}
+{g_cta(em)}
+
+<h2>The single-purpose contrast</h2>
+{product_table(c8, ["Capacity", "Presets", "Dimensions (8 Qt)", "Power", "Temperature range"])}
+{g_cta(c8)}
+"""
+    return guide_shell("multi-function-appliance-questions", body,
+                       ["cleanup-and-counter-space", "thermometer-for-air-fryer"])
+
+
+def build_guide_cleanup(facts: dict, board: dict) -> str:
+    p = all_products(facts)
+    fit = [cell(p["P1"], "Dimensions", "Chefman 6 Qt dual-window"),
+           cell(p["P3"], "Dimensions (8 Qt)", "Chefman 8 Qt"),
+           cell(p["P2"], "Dimensions", "Emeril 26 Qt French-door oven"),
+           ("Drawer pull-out clearance (any model)", "", "unverified", "")]
+    clean = [cell(p["P1"], "Basket care", "Chefman 6 Qt dual-window"),
+             cell(p["P3"], "Basket care", "Chefman 8 Qt"),
+             ("Emeril 26 Qt French-door oven", "", "unverified", ""),
+             cell(p["P4"], "Care instructions", "ThermoMaven instant-read"),
+             cell(p["P5"], "Probe care", "CHEF iQ Sense probes")]
+    body = f"""
+<p>Most kitchen-appliance regret is not about cooking. It is about the gap
+between the top of the machine and the bottom of the cabinet, or the basket nobody wants to scrub.
+Check these two things before anything else.</p>
+
+<h2>1. Will it fit?</h2>
+<p>Take a tape measure to three places: counter depth, height under the wall cabinet, and the space
+in front for a drawer or door to open. The official dimensions are below. None of the pages states
+how far a drawer pulls out, so that row is a dash: measure the one in the shop or ask the seller.</p>
+{sourced_table("Footprint as published on each official page.", ("Model", "Dimensions as published", "Official source"), fit)}
+<p>Leave a little air around the machine as well; the manufacturer manual for your model is the
+place to check how much.</p>
+
+<h2>2. Will you actually clean it?</h2>
+{sourced_table("Cleanup as each official page describes it. A dash means the page we read does not say.",
+               ("Item", "Care as published", "Official source"), clean)}
+<p>Rule of thumb: a part that goes in the dishwasher gets cleaned; a part that needs hand-scrubbing
+gets put off. If the page does not say, assume hand-wash until the manual tells you otherwise.</p>
+
+<h2>3. Think in footprints, not quarts</h2>
+<p>Quarts are measured by each brand its own way. Dimensions are not. If two machines fit your
+space, then compare capacity; <a href="../marketing/topics/how-many-quarts-do-you-need.html">here is
+how to read the quarts number</a>.</p>
+{g_cta(p["P1"])}
+{g_cta(p["P3"])}
+"""
+    return guide_shell("cleanup-and-counter-space", body,
+                       ["multi-function-appliance-questions", "instant-read-or-wireless-thermometer"])
+
+
+BEHIND_GROUPS = [
+    ("Decide", "Where the open choices live. Nothing on these pages applies itself.", [
+        ("suggestions.html", "Suggestion board", "Every proposed change, with options, cost and trade-offs."),
+        ("questions.html", "Open questions", "What is known, what is missing, and how to find out."),
+        ("board/index.html", "Decision board", "The five-product brief: choose-a-path and the requirements trace."),
+        ("review-decide.html", "Review board", "Findings to review before anything is implemented."),
+        ("paths.html", "Launch paths", "The named launch paths and what each one does not authorise."),
+        ("decisions/index.html", "Decision hub", "Decisions recorded so far, with blockers."),
+        ("console/index.html", "Owner's Console", "The owner's decision sheet."),
+    ]),
+    ("Evidence", "How every number on the reader pages was checked.", [
+        ("flagged.html", "Flagged for review", "Every irregularity, with its official-source link."),
+        ("verification.html", "Verification log", "Each check performed, with its result."),
+        ("sources.html", "Source register", "Every official source the site relies on."),
+        ("intent.html", "Link & intent register", "Supplied links: intended product vs observed destination, kept apart."),
+        ("intake/index.html", "Submitted links", "The five supplied short links, as observed."),
+        ("summary.html", "Executive summary", "The state of the project on one page."),
+        ("audit/index.html", "Independent audit", "A second session's audit of the tree."),
+    ]),
+    ("Platform", "The operator dashboards behind the affiliate workflow.", [
+        ("products.html", "Products", "The product catalog as the platform sees it."),
+        ("analysis.html", "Analysis", "Scoring modules (data-gated: they say 'insufficient data' rather than guess)."),
+        ("content.html", "Content engine", "Planned and published content."),
+        ("compliance.html", "Compliance", "Disclosure and link-policy checks."),
+        ("tracking.html", "Tracking", "The click-measurement plan and its status."),
+        ("release/index.html", "Release readiness", "What is met and what is still open."),
+        ("pages/index.html", "Findings hub", "The ledger rendered as browsable pages."),
+        ("brief/index.html", "Design brief", "The design brief and its measured state."),
+        ("discovery/index.html", "Discovery review", "The discovery-phase register."),
+    ]),
+    ("Archive", "Earlier builds, preserved rather than deleted.", [
+        ("marketing/index.html", "Counter Notes archive", "The first editorial build."),
+        ("journal/index.html", "Journal", "Long-form notes."),
+        ("research-hub/start.html", "Affiliate Research Hub", "An earlier research dashboard."),
+        ("zone2/index.html", "Zone2 platform build", "An earlier multi-page dashboard."),
+        ("affiliate-lab/index.html", "Affiliate Lab", "An earlier lab build."),
+        ("revalidation/index.html", "Revalidation", "An earlier revalidation pass."),
+        ("northstar/index.html", "Northstar prototype", "The first prototype."),
+    ]),
+]
+
+
+def build_behind(facts: dict, board: dict) -> str:
+    groups = []
+    for title, blurb, items in BEHIND_GROUPS:
+        lis = "".join(f'<li><a href="{e(h)}">{e(t)}</a><p>{e(d)}</p></li>' for h, t, d in items)
+        groups.append(f'<section><h2>{e(title)}</h2><p class="pb-rail-blurb">{e(blurb)}</p><ul>{lis}</ul></section>')
+    body = f"""
+<section class="pb-lead"><div class="pb-wrap">
+  <p class="pb-kicker">Behind the site</p>
+  <h1 class="pb-h1">How this site is checked, and <em>what is still undecided</em>.</h1>
+  <p class="pb-stand pb-measure">The reader pages lead with the products. Everything that supports them
+  (the verification log, the flagged register, the suggestion board, the open questions and the operator
+  dashboards) lives here, one click from every page.</p>
+  <p class="pb-byline"><b>{num_word(len(board['suggestions']), cap=True)} suggestions</b> awaiting a
+  decision &middot; <b>{num_word(sum(1 for q in board['questions'] if q['status'] != 'answered'))} open questions</b>
+  &middot; updated {e(UPDATED_ON)}</p>
+</div></section>
+<section class="pb-sec"><div class="pb-wrap">
+  <div class="pb-rail">{''.join(groups)}</div>
+</div></section>
+"""
+    return page("behind-the-site.html", title="Behind the site · Counter Notes",
+                description="Every verification, decision and operator surface behind Counter Notes, in one place: flagged items, sources, the suggestion board, open questions and dashboards.",
+                active="behind-the-site.html", body=body)
 
 
 def build_current_summary(facts: dict, board: dict) -> str:
@@ -724,7 +1131,7 @@ def build_current_summary(facts: dict, board: dict) -> str:
     <li>Which Associates account and marketplace owns the supplied tag, and does one test link per confirmed product reach the intended destination and appear in the authorized report?</li>
     <li>Where will the first-party event endpoint run, what is the retention/bot-filter rule, and which of the two conflicting five-event definitions is canonical?</li>
     <li>Who is the named editor, what publishing cadence is sustainable, and will visuals be original, properly licensed or permitted Program Content?</li>
-    <li>Is this publication strictly about air fryers, or should the two observed thermometer destinations become a separate category only after their intended identity is confirmed?</li>
+    <li>A thermometer category is now published from the two observed thermometer destinations, because the brief asked for all five links to be promoted. Are those the intended products? In particular, should the ThermoMaven link point at the newer model its listing now advertises (F-44)?</li>
   </ol>
 </div></section>
 
@@ -733,7 +1140,7 @@ def build_current_summary(facts: dict, board: dict) -> str:
   <p class="pb-sub">Recommendations are review items, not approvals. Nothing is auto-applied from this list.</p></div>
   <a class="pb-sec-link" href="suggestions.html">Review options and trade-offs &rarr;</a></div>
   <ol class="pb-prose">
-    <li><b>Resolve intent first.</b> Confirm all five product mappings and decide whether the publication remains air-fryer-only or adds a thermometer category.</li>
+    <li><b>Resolve intent first.</b> Confirm all five product mappings, including the two thermometers now published as their own category.</li>
     <li><b>Validate one tagged Special Link per confirmed product.</b> Check destination and Associates reporting inside the enrolled account before scaling.</li>
     <li><b>Connect measurement honestly.</b> Reconcile the event definitions, choose a first-party endpoint and retention policy, verify Search Console ownership, then report only data actually received.</li>
     <li><b>Publish a short editorial pilot.</b> Use buyer questions such as basket-versus-oven trade-offs, capacity, cleanup/counter space and multi-function appliance checklists as hypotheses. Add an accountable byline and original/authorized visuals; do not call topics “trending” without evidence or imply hands-on use that did not occur.</li>
@@ -759,7 +1166,7 @@ def build_suggestions(facts: dict, board: dict) -> str:
     body = f"""
 <section class="pb-lead"><div class="pb-wrap">
   <p class="pb-kicker">Decision board</p>
-  <h1 class="pb-h1">{len(board['suggestions'])} proposals. <em>None is applied yet.</em></h1>
+  <h1 class="pb-h1">{num_word(len(board['suggestions']), cap=True)} things we could do next. <em>{num_word(sum(1 for s in board['suggestions'] if s.get('owner_direction')), cap=True)} decided by the owner, the rest waiting on you.</em></h1>
   <p class="pb-stand">This is the review surface the brief asked for: every suggestion, with the options
   it could take, what each option costs, what it gives up, and the question that has to be answered
   before it can be decided. Read it, pick a path, and record the choice &mdash; nothing on this page
@@ -778,8 +1185,10 @@ def build_suggestions(facts: dict, board: dict) -> str:
   {blocks}
   <div class="pb-note"><b>How a suggestion leaves this board.</b> It does not, on its own. A choice has
   to be recorded against its id, and only then does it become work. Until then the status stays
-  <em>Proposed &mdash; awaiting owner decision</em>, which is the honest state of all
-  {len(board['suggestions'])} rows above.</div>
+  <em>Proposed &mdash; awaiting owner decision</em>, which is the honest state of
+  {sum(1 for s in board['suggestions'] if not s.get('owner_direction'))} of the
+  {len(board['suggestions'])} rows above. A row reads <em>Decided</em> only where the owner's own brief
+  quotes one of its options word for word; the quote is printed on the row.</div>
 </div></section>
 """
     return page("suggestions.html", title="Suggestion board · Counter Notes",
@@ -834,7 +1243,7 @@ def build_guides_index(facts: dict, board: dict) -> str:
 <section class="pb-lead"><div class="pb-wrap">
   <p class="pb-kicker">Guides</p>
   <h1 class="pb-h1">Everything published here, <em>by the question it answers</em>.</h1>
-  <p class="pb-stand">Eleven pieces, grouped the way a reader browses rather than the way the files are
+  <p class="pb-stand">{num_word(len(ARTICLES), cap=True)} pieces, grouped the way a reader browses rather than the way the files are
   laid out. Each one argues from the same rows the tables use, and shows its conflicts where the
   official pages disagree.</p>
 </div></section>
@@ -856,7 +1265,7 @@ def build_guides_index(facts: dict, board: dict) -> str:
 
 def build_category(slug: str, facts: dict, board: dict) -> str:
     cat = GUIDE_CATEGORIES[slug]
-    prods = {p["key"]: p for p in facts["products"]}
+    prods = all_products(facts)
     arts = [a for a in ARTICLES if a[3] == slug]
 
     lis = "".join(
@@ -867,7 +1276,7 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
     tables = ""
     for key in cat["keys"]:
         p = prods[key]
-        v = PRODUCT_VOICE[key]
+        v = voice(key)
         dp = product_link(p)
         tables += (
             f'<h3 style="font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:600;'
@@ -879,6 +1288,10 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
             + product_table(p)
         )
 
+    # T63 (10727edd): the thermometer desk from PR #167 covers the same two products in more depth.
+    desk_rail = ('<section><h2>More on thermometers</h2><ul><li><a href="../marketing/thermometers/index.html">'
+                 'The thermometer desk</a><p>Both thermometers row by row, plus guides on accuracy checks and '
+                 'turkey placement.</p></li></ul></section>') if slug == "meat-thermometers" else ""
     body = f"""
 <section class="pb-lead"><div class="pb-wrap">
   <p class="pb-kicker">Category &middot; <a href="index.html" style="color:inherit">Guides</a></p>
@@ -889,7 +1302,7 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head"><div><h2 class="pb-h2">In this category</h2></div>
   <a class="pb-sec-link" href="index.html">All categories &rarr;</a></div>
-  <div class="pb-rail"><section><h2>Published</h2><ul>{lis}</ul></section></div>
+  <div class="pb-rail"><section><h2>Published</h2><ul>{lis}</ul></section>{desk_rail}</div>
 </div></section>
 {f'<section class="pb-sec"><div class="pb-wrap"><div class="pb-sec-head"><div><h2 class="pb-h2">The verified rows behind them</h2><p class="pb-sub">Read from the official pages on {e(CHECKED_ON)}. A dash means no official source states the value.</p></div></div>{tables}</div></section>' if tables else ''}
 """
@@ -911,6 +1324,13 @@ TARGETS: list[tuple[str, callable]] = [
     ("guides/air-fryer-ovens.html", lambda f, b: build_category("air-fryer-ovens", f, b)),
     ("guides/buying-guides.html", lambda f, b: build_category("buying-guides", f, b)),
     ("guides/method.html", lambda f, b: build_category("method", f, b)),
+    # T63 (session 10727edd): reader-first additions
+    ("guides/meat-thermometers.html", lambda f, b: build_category("meat-thermometers", f, b)),
+    ("guides/instant-read-or-wireless-thermometer.html", build_guide_thermo_compare),
+    ("guides/thermometer-for-air-fryer.html", build_guide_thermo_airfryer),
+    ("guides/multi-function-appliance-questions.html", build_guide_multifunction),
+    ("guides/cleanup-and-counter-space.html", build_guide_cleanup),
+    ("behind-the-site.html", build_behind),
 ]
 
 

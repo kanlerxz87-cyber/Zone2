@@ -238,6 +238,16 @@ def editorial_checks(rendered: dict[str, str]) -> None:
             if f'rel="canonical" href="{LIVE}{rel}"' not in doc:
                 fail(f"G14 {rel}: canonical URL does not match its own path")
     for item in re.findall(r"<item>.*?<link>([^<]+)</link>", rendered.get("feed.xml", ""), flags=re.S):
+        # T63 (session 10727edd): the feed also carries the question-shaped guides under the
+        # site's guides/ directory. An item outside marketing/ must resolve to a committed page
+        # at the site root; an item inside marketing/ must still be a page this builder renders.
+        site_root = LIVE.rsplit("marketing/", 1)[0]
+        if not item.startswith(LIVE) and item.startswith(site_root):
+            rel_site = item[len(site_root):]
+            repo_root = Path(__file__).resolve().parents[2]
+            if not rel_site.endswith(".html") or not (repo_root / rel_site).is_file():
+                fail(f"G14 feed.xml: {item} does not resolve to a published page")
+            continue
         target = item.replace(LIVE, "")
         if target not in rendered:
             fail(f"G14 feed.xml: {item} is not a generated page")
