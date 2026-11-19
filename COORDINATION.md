@@ -7989,3 +7989,29 @@ the five product-intent confirmations, Search Console, a permanent collector) ar
 
 **Status:** implementation complete and every gate green; PR → merge → Pages-deploy confirmation
 recorded in the addendum below.
+
+### T73 close-out — PR #192 merged; Pages deployment verified — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#192](https://github.com/kanlerxz87-cyber/Zone2/pull/192) — `arena/672f9c4c-zone2` → `main`,
+  merged via `gh pr merge 192 --merge` at **2026-11-19T19:56:52Z**, merge commit
+  **`3efa3aae7d56a3018e10fa4dca996b82c50b1534`**.
+- **PR check:** `Build and verify` run 44603114374 — **pass** (1m52s). Deploy job correctly skipped on
+  the pull request.
+- **Main:** run **44603563106** `Build, verify and deploy` — **success**, every step green including the
+  new *Per-page identity gate negative tests* step and the post-deploy *Verify the live publication
+  rather than only upload success* step (which re-reads the live site and checks the committed SHA,
+  repeated disclosures, robots/canonical state, sponsorship, collection-off and the sitemap/RSS).
+  Pages build run **44603561969** — **success**.
+- **Branch hygiene:** the branch was rebased onto `main` (`54f1f43`) before the PR; the rebase rewrote
+  only this session's own three commits, so it was published with `--force-with-lease`. No other
+  session's commit was altered. The one conflict (`COORDINATION.md`, append-only) was resolved by
+  **keeping both sides**; session `e078d7c5`'s T72 row and close-out are intact and unedited.
+- **Deployed state verified by** the workflow's live step (the Pages origin is not reachable from this
+  sandbox — `curl` and `urllib` to `kanlerxz87-cyber.github.io` both fail with a TLS connection close,
+  the same allowlist limitation recorded in §4 of the verification record), **plus** a local sweep of the
+  exact `_site` artifact the workflow uploads: 16/16 indexable reader pages carry a description,
+  0 duplicated titles, 0 duplicated descriptions.
+- **Counts after merge:** 55 flags (26 open · 29 resolved), 50 sources, `CANONICAL_FLAG_COUNT = 55`;
+  RQ-01 now reads `matches` / `closed 2026-11-19 (T73)`.
+- **Not reversed:** F-55 stays open for owner review as published; **CR-14** stays open; **S-20 / RQ-16**
+  stays unclaimed; every earlier blank and open item is unchanged.
