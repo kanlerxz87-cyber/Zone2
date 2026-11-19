@@ -8158,3 +8158,19 @@ Pages deploy → append the close-out (PR link, merge commit, deploy result) and
 | id | Task | Status | Session | File scope |
 |---|---|---|---|---|
 | T75 | **Close CR-14 — the P-05 Warranty row.** Re-read both warranty statements live on the official listing (2026-11-19); align `ledger/products.json`'s P-05 Warranty row with the battery row's conflict treatment (both statements, `status: conflict`, `source_label` quoting both readings, `why_blank` saying neither is chosen — no term selected); mirror the fix in `shop/data/catalog.json` in that file's `same_page` conflict style; append verification row V-109; regenerate every derived surface through its existing builders; run all gates; PR → merge without waiting → confirm Pages deploy → record. Blanks stay blank; no value is inferred; F-54 and Q-22 stay open (the listing conflict itself is an owner question). | **claimed 2026-11-19 (UTC), in progress** | `arena/4c81759e-zone2` (4c81759e) | `ledger/products.json` (P-05 Warranty row only), `shop/data/catalog.json` (P-05 Warranty row only), `ledger/verification.json` (append V-109), regenerated-through-builders-only: `assets/js/data.js`, `pages/products.html`, `shop/*.html`, `guides/meat-thermometers.html`, `guides/instant-read-or-wireless-thermometer.html`, any other byte-drifting `build_front` output, `verification.html`, NEW `docs/verification-4c81759e.md`, append-only `COORDINATION.md` (this claim + CR-14 status + close-out). **Excluded:** `.github/**`, `tools/build_front.py` (run, never edited), `tools/publication.py`, `tools/verify_publication.py`, `EXECUTIVE_SUMMARY.md`, `README.md`, `console/**`, `board/**`, `content/**`, root `index/flagged/questions/suggestions/shop/summary/compare/intent/measurement.html` (regenerated only if a builder reports drift; expected byte-identical), `marketing/**` (desk already correct), `ledger/flags.json`, `ledger/questions.json`, every other session's branch, and any statement this session does not re-read live. |
+
+**Amendment (2026-11-19, same session): V-109 dropped — scope stays 108 register rows.**
+The V-109 append was executed, then reverted before commit, after `tools/audit_site.py`
+failed `prose_counts` (exit 1): `check_counts` pins the "108 checks" prose in `README.md`
+(line 291) and `EXECUTIVE_SUMMARY.md` (lines 857, 1041) to `len(verification.json rows)`,
+and both files are in the claimed file scope of active PR #194 (session `1b09bb6d`, who
+explicitly declined CR-14). Bumping their count lines would be a cross-scope edit of
+another session's files — the protocol says log instead of edit. Resolution: keep the
+register at 108 (`git checkout -- ledger/verification.json`), leave README/EXEC untouched,
+and preserve the 2026-11-19 re-read evidence where it already lives canonically — flag
+**F-54** ("Re-read live on 2026-11-19 by session 9ffe2d83…", both statements verbatim),
+question **Q-22** (both statements quoted, owner question), **V-108** (P-05 spec sourcing),
+plus the new dated record `docs/verification-4c81759e.md`. After the revert, `audit_site`
+and `validate_data` pass (108 rows, 0 errors) and `build_site --check` shows no drift.
+If a future session with claim on README/EXEC wants the register grown, re-append V-109 and
+bump the three prose counts in the same change.

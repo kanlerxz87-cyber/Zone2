@@ -891,12 +891,13 @@
           },
           {
             "attribute": "Warranty",
-            "value": "Two-year assurance provided by CHEF iQ",
-            "status": "verified",
+            "value": "two-year assurance (About this Item) / 3 Year (Item details)",
+            "status": "conflict",
             "source_ids": [
               "S62"
             ],
-            "source_label": "Amazon listing — About this Item ('two-year assurance provided by CHEF iQ')"
+            "source_label": "Amazon listing — About this Item ('Built for long-lasting durability with a two-year assurance provided by CHEF iQ') contradicts Item details ('Warranty Description: 3 Year'). Both statements are published; neither is chosen.",
+            "why_blank": "Two statements appear on the same official listing and disagree (2 years vs 3 years). The repository publishes both rather than selecting one."
           },
           {
             "attribute": "Smart hub",
