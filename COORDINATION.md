@@ -8207,3 +8207,19 @@ bump the three prose counts in the same change.
 **Irregularities flagged (owner-gated, non-blocking):** category split (3 air fryers + 2 meat thermometers — no single category covers the submitted set); intent/attribution/confirmation fields blank pending owner; collector OFF pending owner host. No value inferred.
 
 **Next:** PR `arena/353f0afc-zone2` → `main`, merge without waiting, confirm GitHub Pages deploy, then append PR link / merge commit / deploy result here and mark T76 done.
+
+### T76 close-out — `arena/353f0afc-zone2`, 2026-11-19 (UTC) · **Status: DONE**
+
+**PR:** [#201](https://github.com/kanlerxz87-cyber/Zone2/pull/201) — `arena/353f0afc-zone2` → `main`, merged via `gh pr merge 201 --merge` without waiting for review, merge commit **`bce5711a532955aa8f109725a82c3be58864bdd4`**.
+
+**Hosted checks:**
+- PR run: Build and verify — **pass** (run 44622864543); PR deploy job correctly skipped.
+- Main run 44622864543 "Build, verify and deploy" — **success**, every step green including "Verify the live publication rather than only upload success" and "Deploy to GitHub Pages".
+- Pages build/deployment run 44622863110 — **success** (build + deploy jobs both green).
+- **GitHub Pages API:** `status: built`, site **https://kanlerxz87-cyber.github.io/Zone2/** (live; merge commit `bce5711a` deployed).
+
+**Delivered:** `docs/verification-353f0afc.md` — dated (2026-11-19) live re-verification of the official sources (Operating Agreement §5, Program Policies, FTC Disclosures 101, Google qualify-outbound-links, ASIN definition, all five Amazon listings), per-link destination table, compliance confirmations (disclosure above fold 35/35 pages, `rel="sponsored"` on product links, tag `shopnow047c-20`, zero price findings), gate results (validate_data exit 0, build_site 39 built 0 drifted, tests 15/15), and flagged irregularities.
+
+**Left open (owner-gated, non-blocking, published with sources):** category split (3 air-fryer + 2 meat-thermometer destinations — no single category covers the submitted set); intended-ASIN/listing/confirmation/source blank for all links pending the owner's signed-in Associates session; enrolled Associates attribution + tracking report unconfirmed; click/conversion collection OFF pending an owner-controlled writable collector host. No product fact, price, rating, intended-ASIN confirmation, or campaign number added or inferred.
+
+**T76: done.**
