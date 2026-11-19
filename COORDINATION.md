@@ -6992,3 +6992,13 @@ resolved or partly resolved and retained.
 - CR-3 remains open: the `brief/data/summary.json` page counts are still typed, re-measured here to 174.
 
 Sources and evidence: `docs/verification-10727edd.md`.
+
+**T63 addendum: rebase and a second CI fix (10727edd, 2026-11-19 UTC).**
+- PR #165 (T65, `da47d78d`) merged while #164 was open, and it also repaired pages.yml. I rebased onto it:
+  - pages.yml: kept main's version whole, since it carries the CR-4 split-then-strip ordering; the step sets were otherwise identical.
+  - `ci_replay.py`: both guards kept.
+  - EXECUTIVE_SUMMARY.md: took main's text, re-applied the register counts, and put our addendum after T65's.
+  - COORDINATION.md: took main's file plus our appended blocks.
+  - Nothing of T65's was discarded.
+- **Also fixed:** the global `concurrency: pages` group let any branch's PR run cancel any other, including main's gate (run 44468560526). It is now `pages-${{ github.ref }}`, and `deploy` has a non-cancelling `pages-deploy` group.
+- Local replay after the rebase: 49/49 passed.

@@ -14,6 +14,23 @@ earlier verification records and does not replace them.
 
 Local replay at hand-off: **CI REPLAY PASSED — 49 steps**.
 
+**A second CI defect appeared once the workflow parsed again.** The workflow-level
+`concurrency: {group: pages, cancel-in-progress: true}` made every session's pull-request run cancel
+every other session's run, including the gate and deploy on main. This was observed on PR #164: run
+[44468560526](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44468560526) was cancelled 29 s in by
+another branch's run. The group is now `pages-${{ github.ref }}`, so only a newer push to the same ref
+supersedes a run. The `deploy` job has its own `pages-deploy` group with `cancel-in-progress: false`,
+which follows GitHub's documented pattern ([docs.github.com: concurrency](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs)).
+Part of CR-6's concern was therefore real, but it could not have caused the earlier red runs, because no
+job ran in those.
+
+**Rebase onto PR #165 (T65, session da47d78d), which landed while this PR was open.** T65 had repaired
+pages.yml independently. I kept main's version whole, because it also carries the CR-4 split-then-strip
+fix; the step sets were otherwise identical. Both conflict guards in `ci_replay.py` remain (main's
+`check_workflow_health()` for pages.yml, and this session's `preflight()` for all tracked files plus
+strict YAML). For COORDINATION.md, I took main's file and added this session's appended blocks. I did
+not strip markers by text.
+
 ## 2. Product facts used in the new reader pages
 
 Every specification cell is rendered from `ledger/products.json` or `marketing/data/facts.json` along with
