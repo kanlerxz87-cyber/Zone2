@@ -7809,3 +7809,10 @@ PR #183 also added the independent product-note overlap workflow step and regene
 count. The combined replay is therefore 62 steps, not the earlier 61. The T69 regression stays in the
 existing Front-of-house command, adds no step of its own, and does not edit `brief/**`. Combined-tree
 build, gates and replay were rerun after rebasing onto `b37eadf`.
+
+### T69 rebase refresh — preserve upstream PR #186 close-out
+
+After integrating PR #183 and verifying the 9/11 current rollups, `main` advanced through PR #186,
+which adds the upstream T70 deployment-verification close-out for #183. This branch was rebased onto
+`34bab9d`; that append-only record is retained. It does not alter this task's code, data, or generated
+pages. The next combined-tree validation is performed on this base.
