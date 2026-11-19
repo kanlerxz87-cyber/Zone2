@@ -7781,3 +7781,5 @@ human/privacy review, CN-08 Pages source mode, CN-09 runtime advisory — plus *
 this claim; recorded here for its owner). Dated historical prose ("22 CI steps" in the
 2026-11-15 addendum; "F-01…F-48 after T63"; the brief namespace's three-link-era rows) was left
 as history on purpose (OBS-2/OBS-3 in the verification record).
+
+**This close-out record ships via PR [#187](https://github.com/kanlerxz87-cyber/Zone2/pull/187).**
