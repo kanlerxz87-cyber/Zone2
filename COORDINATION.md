@@ -7795,3 +7795,17 @@ so the workflow-derived count remains 61 and no unrelated `brief/**` output is r
 After the first integration onto `e081f42`, `main` advanced through upstream PR #181, which records the
 completed PR #180 merge and Pages verification. This branch was rebased again onto `b04078f`; PR #181's
 append-only coordination close-out is retained. It changes no T69 source or generated publication file.
+
+### T69 integration refresh — PR #183 adds current register rows and one independent gate
+
+After the rebase onto `b04078f`, upstream PR #183 merged onto `main` as `b37eadf`. It added four
+current S68 proposals and four current Q68 questions to the source arrays, so the correct current
+rollups are now 9 proposals and 11 questions; the preserved historical board remains 18 suggestions
+and 17 questions. This branch regenerated only the derived root decision surfaces and broadened the
+current-question row-ID verifier to accept the new source IDs; it did not edit `content/publication.json`
+or `docs/board-9251f262.json`.
+
+PR #183 also added the independent product-note overlap workflow step and regenerated its design-brief
+count. The combined replay is therefore 62 steps, not the earlier 61. The T69 regression stays in the
+existing Front-of-house command, adds no step of its own, and does not edit `brief/**`. Combined-tree
+build, gates and replay were rerun after rebasing onto `b37eadf`.
