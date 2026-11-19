@@ -6954,3 +6954,7 @@ The site still has no Search Console verification tag and no Search Console quer
 choice and named-editor choice remain open in the existing board; they were not papered over with generated
 product imagery or an invented byline. The site's reader-first front-page work is claimed separately by
 PR #162; this session has not edited or merged that branch.
+
+### Integration status
+
+PR [#163](https://github.com/kanlerxz87-cyber/Zone2/pull/163) is **open, not merged**. The reason and local-vs-GitHub check distinction are recorded in [the PR comment](https://github.com/kanlerxz87-cyber/Zone2/pull/163#issuecomment-7001062295). No Pages deploy is claimed for this change; the latest confirmed Pages build remains `built` at `4398071d49fdda73c084aa6f3dedf4f72b268076`. Merge was withheld because the active T63 workflow repair in PR #162 has not yet made GitHub checks available for this branch.
