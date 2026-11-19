@@ -37,8 +37,8 @@
 <p class="standfirst">The register the brief asks for: a list of the questions that have to be answered before a decision on this project can be reasonably made, split by what we already have and what we do not. Three of these are answered, and the answers are printed. The rest are empty ON PURPOSE — an empty answer field is the register&#x27;s way of saying the information does not exist yet, and tools/validate_board.py fails the build if a question whose state is &#x27;open&#x27; carries an answer. Every open row names the action that would close it and who can close it. Nothing here is inferred.</p>
 
 <div class="card">
-<p style="margin:0"><strong>The shape of this register.</strong> 3 question(s) are
-answered and the answers are printed and sourced. 14 are empty <em>on purpose</em> — an
+<p style="margin:0"><strong>The shape of this register.</strong> 4 question(s) are
+answered and the answers are printed and sourced. 13 are empty <em>on purpose</em> — an
 empty answer field is how this register says the information does not exist yet, and the build fails if
 an open question carries an answer. Every open row names the action that would close it and who can
 close it. Nothing is inferred.</p>
@@ -46,6 +46,21 @@ close it. Nothing is inferred.</p>
 
 <h2>Answered</h2>
 
+<section class="question question--answered" id="BQ2-06">
+  <p class="eyebrow" style="margin-bottom:4px">BQ2-06
+    <span class="pill pill--done">answered</span></p>
+  <h3>Was the three-question chooser ever built, or was the requirement satisfied by the question-led article section?</h3>
+  <dl>
+    <dt>What we have</dt><dd>3 pages carry a chooser component. The comparison page carries a three-question &#x27;Which one is for you?&#x27; chooser immediately above the comparison list.</dd>
+    <dt>What we do not</dt><dd>Before 2026-11-19: whether the earlier &#x27;Implemented&#x27; status referred to the question-led article section or to a chooser component removed in the front-page rebuild. Resolved — no chooser component existed; the status referred to the question section.</dd>
+    <dt>Answer</dt><dd><strong>The chooser was never built before this session. The earlier &#x27;Implemented&#x27; status referred to a question-led article section, not to a chooser component. Session 47786492 (T76) built the real three-question chooser above the comparison table on 2026-11-19; RQ-15 is now implemented and this question is closed.</strong></dd>
+    <dt>How to close it</dt><dd>Closed by session 47786492 (T76): the chooser is built in tools/publication.py and measured by tools/build_board.py.</dd>
+    <dt>Who can close it</dt><dd>session 47786492 (T76) — closed</dd>
+    <dt>Cost of leaving it open</dt><dd>None — closed.</dd>
+    <dt>Blocks</dt><dd><a href="requirements.html#RQ-15">RQ-15</a></dd>
+    <dt>Sources</dt><dd class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></dd>
+  </dl>
+</section>
 <section class="question question--answered" id="BQ2-15">
   <p class="eyebrow" style="margin-bottom:4px">BQ2-15
     <span class="pill pill--done">answered</span></p>
@@ -167,21 +182,6 @@ close it. Nothing is inferred.</p>
     <dt>Cost of leaving it open</dt><dd>BS-03 cannot be chosen sensibly. Publishing a meat-thermometer category the owner did not want is wasted work; dropping two products they did want is worse.</dd>
     <dt>Blocks</dt><dd><a href="suggestions.html#BS-03">BS-03</a> <a href="requirements.html#RQ-31">RQ-31</a></dd>
     <dt>Sources</dt><dd class="src"><a href="sources.html#BD-03" title="Destination listing observed for supplied link 4 — B0DHZTCNR5">BD-03</a> <a href="sources.html#BD-04" title="Destination listing observed for supplied link 5 — B0DZFD6R9Z">BD-04</a> <a href="sources.html#BD-09" title="Destination listing observed for supplied link 1 — B0CDY277D3">BD-09</a> <a href="sources.html#BD-10" title="Destination listing observed for supplied link 2 — B09B7SB46R">BD-10</a> <a href="sources.html#BD-11" title="Destination listing observed for supplied link 3 — B08DKYBTPH">BD-11</a></dd>
-  </dl>
-</section>
-<section class="question question--open" id="BQ2-06">
-  <p class="eyebrow" style="margin-bottom:4px">BQ2-06
-    <span class="pill pill--blank">open</span></p>
-  <h3>Was the three-question chooser ever built, or was the requirement satisfied by the question-led article section?</h3>
-  <dl>
-    <dt>What we have</dt><dd>1 pages carry a chooser component. The comparison page carries a section that poses three questions and links each to its own article.</dd>
-    <dt>What we do not</dt><dd>Whether the earlier &#x27;Implemented&#x27; status referred to that section or to a component that was subsequently removed in the front-page rebuild.</dd>
-    <dt>Answer</dt><dd><span class="blank">empty — the information does not exist yet</span></dd>
-    <dt>How to close it</dt><dd>The session that rebuilt the front pages can answer from its own log; otherwise diff the pre-rebuild comparison page.</dd>
-    <dt>Who can close it</dt><dd>the session that owns marketing/ — recorded here, not actioned</dd>
-    <dt>Cost of leaving it open</dt><dd>RQ-15 stays in dispute between two different repairs, and a chooser may or may not need building.</dd>
-    <dt>Blocks</dt><dd><a href="requirements.html#RQ-15">RQ-15</a></dd>
-    <dt>Sources</dt><dd class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></dd>
   </dl>
 </section>
 <section class="question question--open" id="BQ2-07">

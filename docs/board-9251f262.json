@@ -702,6 +702,210 @@
       "source": "GOOGLE-CANONICAL",
       "status": "Proposed - awaiting owner decision",
       "implemented": false
+    },
+    {
+      "id": "SG-T76-01",
+      "area": "Site design",
+      "title": "Adopt a polished-marketing design prompt for the reader pages",
+      "summary": "The brief asks for a site that reads as a polished marketing affiliate publication, not as generated filler. This proposal turns that brief into a reusable design prompt: a product-first hero, category tiles for air fryers and thermometers, a guide shelf, side-by-side trade-off tables, mobile-first layout, and the existing disclosure and sponsored-link rules kept above the fold. Nothing is implemented until the owner approves the prompt.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep the current publication design unchanged.",
+          "cost": "None",
+          "tradeoff": "No new design risk, but the brief's polish concern stays unaddressed."
+        },
+        {
+          "label": "B",
+          "text": "Adopt the prompt as the brief for the next visual pass, keeping every verified value and gate.",
+          "cost": "One design pass, no data change",
+          "tradeoff": "Needs owner approval of the visual direction before any pixel changes; current pages stay live meanwhile."
+        },
+        {
+          "label": "C",
+          "text": "Replace the site with a generic e-commerce template.",
+          "cost": "Full rebuild",
+          "tradeoff": "Loses the source-linked tables, disclosure placement and editorial voice; highest risk of the generic look the brief rejects."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T76-01"
+      ],
+      "source": "S40",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false,
+      "owner_direction": null
+    },
+    {
+      "id": "SG-T76-02",
+      "area": "Content",
+      "title": "Publish a trendy-article calendar without trend claims",
+      "summary": "The brief asks for catchy, trendy articles and topics related to the products, and for organic traffic. This proposal publishes question-shaped, seasonal, spec-backed guides labelled as editorial hypotheses until measured query data exists. The published set already covers basket versus oven, capacity, cleanup and counter space, multi-function checklists, and thermometer choice; no title is called trending without evidence.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Publish only topics with measured Search Console demand.",
+          "cost": "Blocked until verification",
+          "tradeoff": "Strongest evidence, but no new guides until data exists."
+        },
+        {
+          "label": "B",
+          "text": "Publish a labelled editorial-hypothesis calendar, then replace guesses with measured queries.",
+          "cost": "One guide per review cycle",
+          "tradeoff": "Readers get useful guides now; titles must never be called trending without evidence."
+        },
+        {
+          "label": "C",
+          "text": "Publish seasonal deal-led articles.",
+          "cost": "Frequent rewrites",
+          "tradeoff": "Deal language conflicts with the no-price policy and promotion-removal rule; highest compliance risk."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T76-02"
+      ],
+      "source": "S40",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false,
+      "owner_direction": null
+    },
+    {
+      "id": "SG-T76-03",
+      "area": "Organic traffic",
+      "title": "Make the site findable, then measure whether anyone arrives",
+      "summary": "Give search engines one reader site to index: canonical URLs, a reader sitemap and RSS feed, internal linking between guides and product notes, and Search Console verification. Then choose the next topic from measured queries instead of instinct. Indexing and ranking are never guaranteed.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep reader pages indexable, operator pages noindex, verify Search Console and submit the sitemap.",
+          "cost": "Owner account step",
+          "tradeoff": "Cleanest findability signal; needs the owner's Google account."
+        },
+        {
+          "label": "B",
+          "text": "Index operator and archive pages too.",
+          "cost": "More surfaces to maintain",
+          "tradeoff": "Restated content competes with the reader pages and is harder to defend."
+        },
+        {
+          "label": "C",
+          "text": "Rely on social and RSS only, with no search work.",
+          "cost": "None",
+          "tradeoff": "No search arrivals to measure; topic choice stays guesswork."
+        }
+      ],
+      "recommendation": "A",
+      "waits_on": [
+        "Q-T76-03"
+      ],
+      "source": "GOOGLE-CANONICAL",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false,
+      "owner_direction": null
+    },
+    {
+      "id": "SG-T76-04",
+      "area": "Decision-making",
+      "title": "Improve buying decisions with a chooser and trade-off tables",
+      "summary": "The brief wants the site to improve decision making so readers can act on the information and design. This proposal adds a short chooser, a side-by-side comparison, and trade-off tables for capacity, footprint, cleanup and probes, all read from verified specs. No ranked winner is published without testing or popularity evidence.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep spec tables only, with no chooser.",
+          "cost": "None",
+          "tradeoff": "Accurate, but the reader must do the comparison work alone."
+        },
+        {
+          "label": "B",
+          "text": "Add a chooser, comparison and trade-off tables from verified specs.",
+          "cost": "One build pass",
+          "tradeoff": "Helps the reader decide; must not become a tested ranking or best-product claim."
+        },
+        {
+          "label": "C",
+          "text": "Add a ranked best-product list.",
+          "cost": "Editorial judgement",
+          "tradeoff": "Ranking implies testing or popularity evidence the site does not have; conflicts with the honest-authorship rule."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T76-04"
+      ],
+      "source": "S40",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false,
+      "owner_direction": null
+    },
+    {
+      "id": "SG-T76-05",
+      "area": "Trust & voice",
+      "title": "Hold the writing to an anti-slop standard",
+      "summary": "The brief says the site reads like generated filler. This proposal adopts a written standard: everyday language, specific trade-offs, labelled illustrations rather than fake photos or tests, no invented experience, and disclosure placed with the endorsement. The standard is enforced in review, not by a filter alone.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Leave copy and imagery as-is.",
+          "cost": "None",
+          "tradeoff": "No new risk; the generic-tone concern stays."
+        },
+        {
+          "label": "B",
+          "text": "Adopt the voice, authorship and imagery standard and enforce it in review.",
+          "cost": "One rewrite pass",
+          "tradeoff": "More editorial time; strongest trust signal without claiming hands-on testing."
+        },
+        {
+          "label": "C",
+          "text": "Commission human testing and photography.",
+          "cost": "Product purchase and testing time",
+          "tradeoff": "Strongest evidence, but needs budget, units and a named tester before any test claim."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T76-05"
+      ],
+      "source": "FTC-D101",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false,
+      "owner_direction": null
+    },
+    {
+      "id": "SG-T76-06",
+      "area": "Discovery",
+      "title": "Run a missing-information sprint before scaling",
+      "summary": "The brief asks for a clear list of questions, information and answers before any decision, plus suggestions to discover missing information. This proposal runs an ordered sprint: intended-product confirmation, Associates validation, Search Console verification, measurement hosting, and editor and cadence, each with an owner action and an official source.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Scale publishing now and fill gaps later.",
+          "cost": "None now",
+          "tradeoff": "Risks promoting the wrong products and optimising on absent data."
+        },
+        {
+          "label": "B",
+          "text": "Run the discovery sprint first, in the order on the questions register.",
+          "cost": "Owner account steps",
+          "tradeoff": "Slower start; every later decision rests on confirmed facts."
+        },
+        {
+          "label": "C",
+          "text": "Pause all publishing until every gap is closed.",
+          "cost": "No new guides meanwhile",
+          "tradeoff": "Safest, but loses the reader value the current guides already provide."
+        }
+      ],
+      "recommendation": "B",
+      "waits_on": [
+        "Q-T76-06"
+      ],
+      "source": "S01",
+      "status": "Proposed - awaiting owner decision",
+      "implemented": false,
+      "owner_direction": null
     }
   ],
   "questions": [
@@ -914,7 +1118,80 @@
         "SG-T50-04"
       ],
       "source": "GSC-VERIFY"
+    },
+    {
+      "id": "Q-T76-01",
+      "question": "Which visual direction and brand voice does the owner approve for the polished-marketing pass?",
+      "status": "open",
+      "what_we_know": "The live Counter Notes publication leads with products, keeps disclosure above the fold, marks product links as sponsored, and links every spec row to an official page. The current palette, type and layout are already published.",
+      "what_is_missing": "Owner approval of the design prompt: palette, type, hero, category tiles, guide shelf and tables, plus the voice the copy must hold.",
+      "how_to_discover": "Owner reviews the prompt and one mock page, then records a choice against SG-T76-01.",
+      "blocks": [
+        "SG-T76-01"
+      ],
+      "source": "S40"
+    },
+    {
+      "id": "Q-T76-02",
+      "question": "Which article topics have measured reader demand?",
+      "status": "open",
+      "what_we_know": "Published guides are labelled editorial hypotheses, not measured queries or volume claims. The front page states this on every topic card.",
+      "what_is_missing": "Search Console query and page data. No property is verified and no query report is recorded.",
+      "how_to_discover": "Verify the site in Search Console, export queries, and choose the next topic from measured data.",
+      "blocks": [
+        "SG-T76-02"
+      ],
+      "source": "GSC-VERIFY"
+    },
+    {
+      "id": "Q-T76-03",
+      "question": "Will the owner verify the site in Google Search Console and submit the sitemap?",
+      "status": "open",
+      "what_we_know": "A canonical reader sitemap and RSS feed exist, and operator pages are noindex in the deployed artifact. Verification needs only a file or homepage tag, which this repository can publish.",
+      "what_is_missing": "Owner Google account verification. No query report is recorded.",
+      "how_to_discover": "Owner adds the property and supplies the verification token; a session commits it and submits the sitemap.",
+      "blocks": [
+        "SG-T76-03"
+      ],
+      "source": "GSC-VERIFY"
+    },
+    {
+      "id": "Q-T76-04",
+      "question": "Which products did the owner intend, so decision aids promote the right items?",
+      "status": "open",
+      "what_we_know": "The five supplied short links resolve to observed listings: three air fryers and two thermometers. Intended ASIN fields remain blank and are kept separate from observed redirect targets.",
+      "what_is_missing": "Intended ASIN, official listing URL, confirmation date and confirmation source for each product.",
+      "how_to_discover": "Owner confirms each mapping in Associates Central and records intent separately from the observed redirect.",
+      "blocks": [
+        "SG-T76-04"
+      ],
+      "source": "S24"
+    },
+    {
+      "id": "Q-T76-05",
+      "question": "Who is accountable for editorial review, corrections and contact?",
+      "status": "open",
+      "what_we_know": "The site states AI-assisted organizational authorship, no hands-on testing, and no named human reviewer. Illustrations are labelled as illustrations, not product photographs.",
+      "what_is_missing": "A named editor, a corrections contact, and a review cadence.",
+      "how_to_discover": "Owner names the editor and contact; publish both on the About page.",
+      "blocks": [
+        "SG-T76-05"
+      ],
+      "source": "FTC-D101"
+    },
+    {
+      "id": "Q-T76-06",
+      "question": "What is the discovery order for closing the missing-information gaps?",
+      "status": "open",
+      "what_we_know": "Gaps are listed across the questions register, each with an official source for the rule and a single action that would close it.",
+      "what_is_missing": "A prioritised sequence and the owner time for the account steps.",
+      "how_to_discover": "Owner approves the sequence: intent, Associates validation, Search Console, measurement hosting, editor and cadence.",
+      "blocks": [
+        "SG-T76-06"
+      ],
+      "source": "S01"
     }
   ],
-  "t63_note": "2026-11-19 (session arena/10727edd-zone2): owner directions recorded on SG-T50-01/04/05/07 where the brief quotes an option's text verbatim; SG-T50-08 left Proposed because only its title was quoted. Appended SG-T63-01..05 and Q-T63-01..05; Q-T50-02 updated with the supplied tag."
+  "t63_note": "2026-11-19 (session arena/10727edd-zone2): owner directions recorded on SG-T50-01/04/05/07 where the brief quotes an option's text verbatim; SG-T50-08 left Proposed because only its title was quoted. Appended SG-T63-01..05 and Q-T63-01..05; Q-T50-02 updated with the supplied tag.",
+  "t76_note": "2026-11-19 (session arena/ed2307a8-zone2): appended SG-T76-01..06 and Q-T76-01..06 (polished-marketing decision pack, proposals only). No verified value changed; no suggestion implemented."
 }

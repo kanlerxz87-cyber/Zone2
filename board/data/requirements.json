@@ -224,19 +224,19 @@
    ]
   },
   {
-   "id": "RQ-15",
-   "brief_ref": "S-19",
-   "priority": "P2",
-   "requirement": "Add a three-question 'which one is for you' chooser above the comparison table",
-   "brief_status": "Implemented 2026-11-16",
-   "measured_status": "not present",
-   "verdict": "overstated",
-   "measured": "{{chooser_pages}} pages carry a chooser component. What the comparison page carries instead is a section that poses three questions and links each to its own article — a question index, not a chooser.",
-   "evidence": "Measured across every published page; the pattern searched for covers the component's own likely class and heading names.",
-   "gap": "Either the row was satisfied in spirit by the three-question article section, in which case the status word should say so, or the chooser was never built. Those are different repairs. Logged as BQ2-06.",
-   "source_ids": [
-    "BD-21"
-   ]
+    "id": "RQ-15",
+    "brief_ref": "S-19",
+    "priority": "P2",
+    "requirement": "Add a three-question 'which one is for you' chooser above the comparison table",
+    "brief_status": "Implemented 2026-11-16",
+    "measured_status": "implemented 2026-11-19 (T76)",
+    "verdict": "matches",
+    "measured": "{{chooser_pages}} pages carry a chooser component. The comparison page now carries a three-question 'Which one is for you?' chooser immediately above the comparison list: three buyer questions whose combined answers point to one of the five observed formats, with a no-JavaScript fallback that links straight to the comparison and the temperature-tool guide.",
+    "evidence": "Built by session 47786492 on 2026-11-19 in tools/publication.py (a CHOOSER block and a chooser() renderer placed above #compare-list), assets/js/publication.js and assets/css/publication.css. The recommendation maps to the five formats the page already publishes and is framed as a starting point; no price, rating, popularity, conversion or performance claim is introduced.",
+    "gap": "None on this row. The chooser is client-side and progressive: with JavaScript off, the page still links to the comparison and the temperature-tool guide.",
+    "source_ids": [
+      "BD-21"
+    ]
   },
   {
    "id": "RQ-16",

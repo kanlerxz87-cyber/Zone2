@@ -1866,3 +1866,35 @@ official source that establishes them, sit on
 The intended-ASIN confirmations for all five links stay **blank**; the observed redirect targets stay
 in a **separate field**; no price, rating, review count, search-volume, popularity, conversion or
 revenue figure is printed anywhere.
+
+## Addendum — 2026-11-19 (session `arena/ed2307a8-zone2`, T76): polished-marketing decision pack
+
+**What changed.** The decision board gained a polished-marketing pack, published as proposals only. Six new suggestions (SG-T76-01..06) cover: a reusable polished-marketing design prompt for the reader pages; a trendy-article calendar that never calls a topic trending without evidence; a findability plan (one indexable reader site, sitemap and feed, Search Console verification); decision aids (chooser, comparison and trade-off tables from verified specs); an anti-slop voice, authorship and imagery standard; and a missing-information discovery sprint. Six new questions (Q-T76-01..06) state what is known, what is missing, and the single action that would close each gap: design approval, measured demand, Search Console verification, intended-product confirmation, accountable editor, and discovery order. Every new row reads Proposed — awaiting owner decision and Implemented No. No verified value changed; no suggestion was implemented from this pack.
+
+**Current executive summary.** Counter Notes is a product-led kitchen publication: five supplied links resolve to three air-fryer listings and two thermometer listings, each with source-linked specifications, question-shaped guides, a format comparison, and a chooser. Disclosure sits above the fold on every page and repeats in the footer; every product link is marked sponsored and carries the owner-supplied tag. No current prices, star ratings, popularity claims, tested rankings or sales forecasts are published. Guide topics are editorial hypotheses until measured query data exists. The AI-powered platform behind the publication automates deterministic builds, source and intent gates, and aggregate measurement, but account actions, first-party reports and product-intent confirmation still require evidence the repository does not hold.
+
+**What remains unknown.** Intended-product confirmation for all five links; enrolled Associates workflow and report validation for the supplied tag; Search Console verification and query export; a permanent authorized measurement host; a named editor and corrections contact; and a jurisdictional privacy determination. Observed redirect targets remain separate from intent. The exact compliance status of the supplied short links remains unresolved; a missing tag in a fetched redirect proves neither invalidity nor attribution.
+
+**Evidence.** `docs/verification-ed2307a8.md` holds the sources re-read on 2026-11-19, the line-by-line checks, the gate results, and the irregularities left open. Review the pack on the [suggestions board](https://kanlerxz87-cyber.github.io/Zone2/suggestions.html) and the [questions register](https://kanlerxz87-cyber.github.io/Zone2/questions.html) before choosing a path.
+## Addendum — 2026-11-19 (session `arena/47786492-zone2`, T76): the "which one is for you" chooser, built
+
+**What changed.** RQ-15 / S-19 asked for a three-question "which one is for you" chooser above the comparison
+table, and the register recorded it `overstated` — the brief said "Implemented", the tree had none. Session
+`47786492` (T76) built it: a `CHOOSER` block and a `chooser()` renderer in `tools/publication.py`, placed in
+`compare()` immediately above `#compare-list`, with progressive-enhancement logic in `assets/js/publication.js`
+and styles in `assets/css/publication.css`. Three buyer questions map to one of the five formats the page already
+publishes; the recommendation is a format pointer + a check reminder, framed as a starting point. A `<noscript>`
+fallback links straight to the comparison and the temperature-tool guide. BQ2-06 is answered and FL-05 resolved.
+
+**Evidence.** `docs/verification-47786492.md`. Measured `chooser_pages` 1 → 3 on the combined tree: the old
+count was a false positive from a passing phrase in `intake/tracking.html`; the new component is
+`compare.html` (`data-chooser`); the third is `suggestions.html`, which mentions "chooser" in the SG-T76-04
+proposal merged to `main` this session. All gates pass on the rebuilt tree: `validate_data`,
+`seo_audit`, `audit_site`, `verify_front`, `package_site`/`verify_publication`, `build_board --check`,
+`validate_board`, and the standalone `ci_replay` (63/63).
+
+## Addendum — 2026-11-19 (session `arena/af15a2f9-zone2`, T79 claimed as T77): the takeover close-out and the topic pipeline
+
+**What changed.** Stale PR #194 (T73 final integration: Decision Room, design brief, current-vs-preserved registers) was taken over under the 60-minute rule and completed on this branch against current `main`; the same content had also been integrated independently by session `95bfb73c` (PR #203), and this merge unifies both integrations without dropping either session's records or styles. On top of the unified tree, the request's remaining content ask is now built: **six topic pitches (TP-01..TP-06)** on the Decision Room — working titles with buyer questions, formats, covered products, sourced facts, costs and give-ups — and a **Content direction** block inside the paste-ready design prompt, so the prompt handed to a design session carries the article pipeline. Every pitch is labelled an editorial hypothesis; gate D10 and 13 mutation tests fail the build on hype words, unsourced pitches or a pitch promoted without a decision. Measured Search Console queries replace the pitch order when DRQ-07 closes.
+
+**Evidence.** `docs/verification-af15a2f9.md` — takeover basis, conflict resolutions, gate results (ci_replay 66/66; publication contract `ok: true`, 230 HTML pages, 18 indexable, 1,471 sponsored product anchors, 173 factual rows) and the flagged irregularities (IR-1..IR-4), including the reproducible `build_board` gates-string fixed point. No price, rating, demand or revenue figure is added; blanks stay blank; intent fields stay separate from observations.

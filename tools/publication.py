@@ -239,8 +239,88 @@ def guide_page(g):
     return shell(rel, g['title'], g['description'], body, article=g)
 
 
+# T76 (session 47786492, 2026-11-19): the three-question "which one is for you" chooser,
+# placed above the comparison table (RQ-15 / S-19). The brief asks for a chooser; the tree
+# had only a question index. The mapping rests on the five formats this page already
+# publishes and on checks a buyer can perform on the listing — no price, rating, popularity,
+# conversion or performance claim. The recommendation is framed as a starting point.
+CHOOSER = {
+    "eyebrow": "LET'S NARROW IT DOWN",
+    "title": "Which one is for you?",
+    "deck": "Answer three questions about how you cook. We'll point you to the format that fits — a starting point, not a tested ranking.",
+    "questions": [
+        {"id": "q1", "prompt": "What's the job in your kitchen?", "options": [
+            {"value": "two", "label": "Cook two things at the same time"},
+            {"value": "one", "label": "Cook one batch at a time"},
+            {"value": "oven", "label": "Roast or toast, oven-style"},
+            {"value": "temperature", "label": "Check whether food is done"},
+        ]},
+        {"id": "q2", "prompt": "How do you want to be told it's done?", "options": [
+            {"value": "quick", "label": "I'll check it myself, quickly"},
+            {"value": "reported", "label": "I want it reported to me"},
+            {"value": "undecided", "label": "Not deciding yet"},
+        ]},
+        {"id": "q3", "prompt": "What matters most?", "options": [
+            {"value": "space", "label": "Fitting a small space"},
+            {"value": "simple", "label": "Simple, everyday use"},
+            {"value": "connected", "label": "Connected monitoring"},
+        ]},
+    ],
+    "map": {
+        "q1": {"two": "P1", "one": "P3", "oven": "P2", "temperature": "temperature"},
+        "q2": {"quick": "P4", "reported": "P5", "undecided": "temperature"},
+        "notes": {
+            "space": "Check the listed dimensions on the listing before you buy.",
+            "simple": "Check the model's controls and presets on the listing.",
+            "connected": "Check the model's stated range and app requirements.",
+        },
+    },
+    "temperature_guide": "instant-read-or-wireless",
+    "caveat": "A starting point, not a tested recommendation.",
+}
+
+
+def _chooser_payload():
+    """The chooser's answer→product map and its guide targets, as one JSON object.
+
+    Rendered into a single data attribute so the page's own JS reads the same map the
+    server rendered — no second, drifting copy of the product slugs in the script.
+    """
+    guides = {k: [href("compare.html", "guides/" + PRODUCTS[k]["slug"] + ".html"), PRODUCTS[k]["type"]]
+              for k in ("P1", "P2", "P3", "P4", "P5")}
+    return {
+        "map": CHOOSER["map"],
+        "guides": guides,
+        "temperature": [href("compare.html", "guides/" + CHOOSER["temperature_guide"] + ".html"),
+                        "Temperature-tool guide"],
+        "caveat": CHOOSER["caveat"],
+    }
+
+
+def chooser():
+    fields = []
+    for q in CHOOSER["questions"]:
+        opts = "".join(
+            f'<label class="cn-chooser-opt"><input type="radio" name="chooser-{e(q["id"])}" value="{e(o["value"])}"><span>{e(o["label"])}</span></label>'
+            for o in q["options"])
+        fields.append(f'<fieldset class="cn-chooser-q"><legend>{e(q["prompt"])}</legend>{opts}</fieldset>')
+    form = (
+        '<form id="chooser-form" class="cn-chooser-form" novalidate data-chooser-map="'
+        + e(json.dumps(_chooser_payload(), ensure_ascii=False)) + '">'
+        '<div class="cn-chooser-fields">' + "".join(fields) + '</div>'
+        '<button class="cn-button" type="submit">Show me a starting point <span aria-hidden="true">→</span></button>'
+        '<p class="cn-chooser-result" id="chooser-result" role="status">Answer the three questions for a starting point.</p>'
+        '<noscript><p class="cn-chooser-noscript">JavaScript is off, so the chooser can\'t run. '
+        'Compare the five formats directly, or read the '
+        '<a href="guides/instant-read-or-wireless.html">temperature-tool guide</a>.</p></noscript>'
+        '</form>'
+    )
+    return f'<section class="cn-chooser-section" data-chooser><div class="cn-wrap cn-chooser"><div><p class="cn-eyebrow">{e(CHOOSER["eyebrow"])}</p><h2>{e(CHOOSER["title"])}</h2><p>{e(CHOOSER["deck"])}</p></div>{form}</div></section>'
+
+
 def compare():
     body = intro('SIDE BY SIDE', 'Compare the job, not the hype.', 'Different formats solve different shopping questions. The rows below keep manufacturer statements, listing descriptions and unresolved details separate.')
+    body += chooser()
     body += '<section id="compare-list" class="cn-wrap cn-section-tight cn-compare-list">'  # T72: anchor for the mobile sticky bar
     for p in PRODUCTS.values():
         body += f'<article id="{e(p["key"])}"><div class="cn-compare-heading"><img src="assets/img/{e(p["design"])}.svg" width="180" height="125" alt="Generic format illustration"><div><p class="cn-eyebrow">{e(p["type"])}</p><h2><a href="guides/{e(p["slug"])}.html">{e(p["name"])}</a></h2><p>{e(p["tradeoff"])}</p></div></div>{spec_table(p)}<p class="cn-compare-link">{product_cta(p, cls="cn-retailer-link")}</p></article>'
