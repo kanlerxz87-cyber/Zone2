@@ -129,6 +129,13 @@
       "url": "https://support.google.com/webmasters/answer/9008080?hl=en",
       "checked": "2026-11-19",
       "scope": "Sensitive Search Console access requires verified ownership; HTML file/tag methods are available. No property or token was provided."
+    },
+    "GH-PAGES-ADMIN": {
+      "publisher": "GitHub",
+      "title": "Pages settings API permissions",
+      "url": "https://docs.github.com/en/rest/pages/pages#update-information-about-a-github-pages-site",
+      "checked": "2026-11-19",
+      "scope": "Updating Pages settings requires Pages write AND Administration write plus an appropriate repository role; a successful update returns 204 No Content. The current app received 403, and no settings change is claimed."
     }
   },
   "products": [

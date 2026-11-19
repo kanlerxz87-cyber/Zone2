@@ -199,3 +199,18 @@ its final result and GitHub PR/merge/Pages references will be recorded after exe
   `build_type: workflow` through the official GitHub API **before** deploying `_site`. This prevents
   a second legacy/raw-checkout build from racing the verified artifact if GitHub accepts the change.
   Its actual result is pending until the main deployment; no successful switch is claimed here.
+
+
+### Pages source-setting prerequisite corrected before merge
+
+Fresh official [GitHub Pages REST documentation](https://docs.github.com/en/rest/pages/pages#update-information-about-a-github-pages-site)
+was read (update section): a settings update requires **Pages write AND Administration write** and an
+appropriate repository role; success returns **204 No Content**, not a Pages JSON body. Therefore the
+planned main-only PUT was removed **before it ever executed**. A token's `pages:write` deployment
+permission is not administrative authority. The deploy job only reads/reports the actual source mode,
+warns if legacy is still enabled, and uses the already working artifact-deploy Action. It does not retry
+an unauthorized settings write or claim a successful switch.
+
+This is **CN-08, open**: a qualified repository administrator must select GitHub Actions as the source
+for sole-publisher assurance on future pushes. Current artifact deployment and its live verification are
+separate from this administrative gate. No credentials or manual answer are solicited in the session.

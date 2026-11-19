@@ -7356,3 +7356,13 @@ Full combined CI (now 61 executable steps) and actual GitHub deployment are the 
   main-only deploy job has the already-declared `pages:write` permission and now requests workflow-only
   Pages before artifact deployment. This is pending actual GitHub execution, not a claimed settings change.
   If GitHub denies that job too, the deployment will fail visibly and will be repaired before completion.
+
+### T63 (`37333afd`) — Pages permission prerequisite, corrected before merge
+
+The official Pages REST update section was fetched and read: it requires **Administration write AND
+Pages write** and an appropriate repository role, and a successful update returns 204 No Content.
+The planned deployment-token PUT therefore made an unjustified permission/response assumption. It was
+removed **before main/deploy execution**. No denied write is retried. The job now reads/reports the mode
+and warns if the independent legacy publisher remains; actual artifact deployment still uses the existing
+working deploy-pages Action. **CN-08** records the administrator-only source-setting gate. This is not
+reported as a successful settings change or a broken credential connection; read/push/PR checks work.
