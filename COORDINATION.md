@@ -6974,8 +6974,23 @@ The summary change required only generated page-count refreshes (`sitemap.xml`, 
 decision-board's measured/generated outputs); no product/source facts were changed. Final local checks passed:
 workflow YAML parsing (53 build steps), conflict-marker scan, front generator freshness (9 pages), front gate,
 summary freshness and `tools/ci_replay.py` (49/49). Full details are in
-[`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md). PR #166 is open; merge and deployment have not yet been
-confirmed.
+[`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md). PR #166 was merged as `7857407`; Pages deployment run
+`44469198656` succeeded and the Pages API reports `status: built`.
+
+### T63 close-out — PR #166 merged and Pages deployment confirmed (2026-11-19)
+
+PR #166 (`https://github.com/kanlerxz87-cyber/Zone2/pull/166`) merged to `main` at
+`2026-11-19T06:01:43Z`, merge commit `785740716952f309e5895ffeaea6c675115cc2d7`. The required PR check
+passed. Post-merge workflow run `44469199247` completed successfully; Pages deployment run `44469198656`
+completed successfully. The GitHub Pages API reports `status: built` and the live URL
+`https://kanlerxz87-cyber.github.io/Zone2/`.
+
+The rebase incorporated T65's intervening mainline work, including its conflict-marker preflight and
+CR-4 validator correction. T63 retained both intake and board gates and added reader-first navigation and
+current-state records. One statement in T65's completion record says the Associates tag is “verified and
+active”; this is not corroborated by authorized account evidence in T63. The T63 summary and verification
+record explicitly treat activation and universal link coverage as unconfirmed. Product-intent fields remain
+blank, and no product/source facts were changed by T63.
 ---
 
 ## T63 — claim: session `arena/10727edd-zone2` (10727edd) — 2026-11-19 (UTC)
