@@ -6897,3 +6897,9 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Open** — 171 of 171 pages still collapse |
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
+
+---
+
+## T63 — publication and integration repair: session `arena/1d0347fb-zone2` (2026-11-19)
+
+**Claimed on current Arena branch `arena/1d0347fb-zone2`.** Scope: `.github/workflows/pages.yml` (repair the unresolved conflict-marker YAML by retaining both the submitted-link intake and decision-board gates), `tools/build_front.py`, `assets/css/publish.css`, and only the front-of-house pages rebuilt by that generator; this file for the claim, verification record, and flags. Do not alter other ledgers or their generated namespaces. Objective: preserve the evidence-first product publication while reducing the reader-facing navigation clutter; keep operator surfaces reachable from one clearly grouped navigation menu and the footer. Review the claimed files and run their relevant gates before any broader site edits. Status: in progress.
