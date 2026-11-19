@@ -63,6 +63,7 @@
     var link = ev.target && ev.target.closest ? ev.target.closest('a[data-product-key]') : null;
     if (!link || link.getAttribute('aria-disabled') === 'true') { return; }
     var product = link.getAttribute('data-product-key');
+    if (/^P-0[1-5]$/.test(product)) { product = 'P' + product.slice(-1); }
     if (!/^P[1-5]$/.test(product)) { return; }
     var dest;
     try { dest = new URL(link.href); } catch (e) { return; }

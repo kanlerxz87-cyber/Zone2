@@ -47,6 +47,24 @@ TOOLS = [
 ]
 
 
+# Preserve the complete upstream navigation/footer union, including the shop and
+# thermometer desk delivered while this integration was in flight. No board or
+# article is deleted and no owner choice is silently changed.
+import re as _re
+import shop_layout as _prior_chrome
+_existing_targets = {url for url, _ in TOOLS}
+_preserved_links = list(_prior_chrome.TOOLS) + list(_prior_chrome.READER_NAV)
+_preserved_links += [(url, html.unescape(_re.sub(r'<[^>]+>', '', label))) for url, label in
+                     _re.findall(r'<a href="([^"]+)"[^>]*>(.*?)</a>', _prior_chrome.footer('', DATE), _re.S)
+                     if not url.startswith(('https:', 'http:'))]
+_preserved_links += [('marketing/thermometers/index.html', 'Earlier thermometer desk'),
+                     ('guides/cleanup-and-counter-space-earlier.html', 'Earlier cleanup/space guide')]
+for _url, _label in _preserved_links:
+    if _url not in _existing_targets:
+        TOOLS.append((_url, _label))
+        _existing_targets.add(_url)
+
+
 def e(value):
     return html.escape(str(value if value is not None else ""), quote=True)
 
@@ -137,7 +155,7 @@ def guide_card(g, rel):
 
 
 def collection_note(rel):
-    return f'<p class="cn-fineprint">Design illustrations, not product photographs. These are the observed Amazon destinations of the supplied links; intended-product confirmation and enrolled Associates reporting checks remain open. <a href="{e(href(rel, "intent.html"))}">Link & intent record</a>. No price, tested ranking or popularity claim is implied.</p>'
+    return f'<p class="cn-fineprint">Design illustrations, not product photographs. These are the observed Amazon destinations of the supplied links; intended-product confirmation and enrolled Associates reporting checks remain open. <a href="{e(href(rel, "intent.html"))}">Link & intent record</a>. No price, tested ranking or popularity claim is implied. Guide topics are editorial hypotheses, not measured search queries or volume claims.</p>'
 
 
 def home():
@@ -186,7 +204,7 @@ def product_page(p):
 def guides_index():
     rel = 'guides/index.html'
     body = intro('THE BUYING-GUIDE SHELF', 'A good question is a good place to start.', 'Capacity, counter space, cleanup and temperature tools. Practical reading for a more considered kitchen—not a list of supposed bests.')
-    body += '<section class="cn-wrap cn-section cn-section-tight"><div class="cn-guide-grid">' + ''.join(guide_card(g,rel) for g in GUIDES) + '</div><div class="cn-note"><h2>Browse the earlier research</h2><p>The original specification tables and dated articles are preserved for reference. <a href="basket-air-fryers.html">Basket air fryers</a> · <a href="air-fryer-ovens.html">Air-fryer ovens</a> · <a href="buying-guides.html">Earlier buying guides</a> · <a href="method.html">Source method</a>. They are not fresh hands-on tests.</p></div></section>' + rss_block(rel)
+    body += '<section class="cn-wrap cn-section cn-section-tight"><div class="cn-guide-grid">' + ''.join(guide_card(g,rel) for g in GUIDES) + '</div><div class="cn-note"><h2>Browse the earlier research</h2><p>The original specification tables and dated articles are preserved for reference. <a href="basket-air-fryers.html">Basket air fryers</a> · <a href="air-fryer-ovens.html">Air-fryer ovens</a> · <a href="buying-guides.html">Earlier buying guides</a> · <a href="method.html">Source method</a>. They are not fresh hands-on tests. Additional preserved treatments: <a href="meat-thermometers.html">thermometer category</a> · <a href="instant-read-or-wireless-thermometer.html">earlier instant-read/wireless guide</a> · <a href="thermometer-for-air-fryer.html">thermometers with an air fryer</a> · <a href="multi-function-appliance-questions.html">multifunction questions</a> · <a href="cleanup-and-counter-space-earlier.html">earlier cleanup/space guide</a> · <a href="../shop/guides/index.html">earlier shop guides</a> · <a href="../marketing/thermometers/index.html">thermometer desk</a>.</p></div></section>' + rss_block(rel)
     return shell(rel, 'Question-led kitchen buying guides', 'Practical guides to air fryer capacity, basket versus oven formats, cleanup, counter space, multifunction appliances and thermometers.', body)
 
 

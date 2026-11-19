@@ -72,7 +72,7 @@ def transform(doc, rel):
     doc=re.sub(r'<link\b(?=[^>]*\brel\s*=\s*["\x27]canonical["\x27])[^>]*>\s*','',doc,flags=re.I)
     doc=re.sub(r'<meta\b(?=[^>]*\bname\s*=\s*["\x27]robots["\x27])[^>]*>\s*','',doc,flags=re.I)
     meta=f'<link rel="canonical" href="{BASE + ("" if rel=="index.html" else rel)}">\n<meta name="robots" content="{("index,follow" if indexable else "noindex,follow")}">\n'
-    if rel not in CURRENT:
+    if rel not in CURRENT and '<body class="cn-publication">' not in doc:
         meta+=f'<link rel="stylesheet" href="{depth}assets/css/publication.css">\n'
         # Keep the archived source content intact; only replace a pre-main masthead.
         old=re.search(r'<header\b[^>]*>.*?</header>',doc,re.S|re.I)
@@ -80,7 +80,7 @@ def transform(doc, rel):
         if old and (not main or old.start()<main.start()):
             doc=doc[:old.start()]+doc[old.end():]
         banner=f'<div class="cn-archive-banner"><div class="cn-wrap"><span>Dated research archive · earlier implementation states may have changed.</span><a href="{depth}executive-summary.html">Read the current release summary →</a></div></div>'
-        header=pub.masthead(rel)+banner+f'<script src="{depth}assets/js/archive-links.js"></script>'
+        header=pub.masthead(rel)+banner+f'<script src="{depth}assets/js/archive-links.js"></script><script src="{depth}assets/js/publication.js" defer></script>'
         doc=re.sub(r'(<body\b[^>]*>)',lambda m:m.group(1)+'\n'+header,doc,count=1,flags=re.I)
         foot=f'<div class="cn-archive-footer"><strong>{pub.DISCLOSURE}</strong> <a href="{depth}workspace.html">All workspace tools</a> · <a href="{depth}index.html">Counter Notes publication</a> · <a href="{depth}privacy.html">Current privacy notice</a></div>'
         doc=re.sub(r'</body>',lambda m:foot+'\n'+m.group(0),doc,count=1,flags=re.I)

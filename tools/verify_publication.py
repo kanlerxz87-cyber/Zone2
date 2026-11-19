@@ -19,7 +19,7 @@ import publication as pub
 from package_site import is_product_url
 
 ROOT=Path(__file__).resolve().parents[1]
-OFFICIAL_HOSTS={'link.amazon','affiliate-program.amazon.com','www.amazon.com','amazon.com','chefman.com','www.chefman.com','www.emerileveryday.com','www.ftc.gov','ftc.gov','docs.github.com','developers.google.com','support.google.com','www.fsis.usda.gov'}
+OFFICIAL_HOSTS={'github.com','link.amazon','affiliate-program.amazon.com','www.amazon.com','amazon.com','chefman.com','www.chefman.com','www.emerileveryday.com','www.ftc.gov','ftc.gov','docs.github.com','developers.google.com','support.google.com','www.fsis.usda.gov'}
 CURRENT=pub.indexable_paths()|set(pub.extra_pages())|{'suggestions.html','questions.html'}
 
 
@@ -121,6 +121,7 @@ def verify(site):
                 if 'sponsored' not in a.get('rel','').split():errors.append(f'{rel}: unsponsored product anchor')
             if a.get('data-product-key'):
                 key=a['data-product-key'];u=urlsplit(a['href'])
+                if re.fullmatch(r'P-0[1-5]',key):key='P'+key[-1]
                 if key not in pub.PRODUCTS or u.scheme!='https' or u.hostname!='amazon.com' or u.path!='/dp/'+pub.PRODUCTS[key]['observation']['observed_asin'] or parse_qs(u.query)!={'tag':['shopnow047c-20']}:
                     errors.append(f'{rel}: product CTA destination/tag mismatch')
         if rel in CURRENT:

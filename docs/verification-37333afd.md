@@ -163,3 +163,24 @@ working link shape, static sitemap, screenshot or local preview.
 PR, merge and permanent Pages verification remain pending at this record point. The temporary preview
 is running, but **permanent production measurement, authenticated enrollment, intended-product identity,
 Search Console ownership and real performance reports remain open**.
+
+## Upstream integration verification
+
+`main` advanced during implementation; this branch was rebased onto `20b9bd9` rather than ignoring the
+parallel work. Detailed conflict decisions are in the matching coordination entry. Preserved upstream:
+shop and thermometer-desk namespaces, every source/flag addition, all option/owner-direction records,
+all shop/intake/board gates, strict preflight and serialized deploy concurrency. The independent cleanup
+guide is retained as `guides/cleanup-and-counter-space-earlier.html`; no guide body was discarded. The
+current compact menu/footer includes the complete earlier footer/tool union. Existing canonical-content
+choice proposals remain undecided; no deletion or redirect is disguised as an approved choice.
+
+After rebase: artifact contract clean over **228 pages**, **16 indexable reader URLs**, **1,451 static
+product anchors**, **135 current factual rows**. Real Chromium: **252 viewport checks**, every archive
+rendered, zero runtime errors/missing resources, and zero automated WCAG A/AA findings on 24 current pages.
+All privacy, navigation, filtering, review-preference and local persistence behaviors passed again.
+Product key aliases are static labels, not reader IDs. Long upstream decision-status pills now wrap on
+mobile; the actual recorded text is preserved. Earlier summary measurement prose now describes the real
+collector/importers and disabled Pages state; the earlier Nov17 observations are not re-dated.
+
+These results supersede the **pre-rebase** counts above. Full combined CI now has 61 executable steps;
+its final result and GitHub PR/merge/Pages references will be recorded after execution.

@@ -16,3 +16,5 @@
 .cn-disclosure{font-size:12px}.cn-footer-bottom p{font-size:11px}.cn-footer p{color:#536348}.cn-fineprint{color:#626c57}.cn-hero-note,.cn-hero-visual figcaption{color:#646b57}
 @media(max-width:550px){.cn-disclosure{font-size:11px}.cn-footer-bottom p,.cn-fineprint{font-size:10px}}
 .cn-publication .cn-value-note,.cn-publication .cn-byline,.cn-publication .pb-byline,.cn-publication .cn-article .cn-section-source,.cn-publication .cn-table caption,.cn-publication #filter-status,.cn-publication .cn-product-hero-art figcaption,.cn-publication .pb-opt b{color:#4d6144}
+/* Upstream decision records can carry long, evidence-qualified status labels. */
+.cn-publication .pb-pill{white-space:normal;max-width:100%;overflow-wrap:anywhere;line-height:1.7}

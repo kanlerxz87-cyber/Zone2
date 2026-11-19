@@ -7314,3 +7314,34 @@ records have now been read. This session does not merge/close their open PRs. It
 branch onto the new main, preserve their added data/namespaces/gates and coordination records, integrate
 shared outputs through the canonical generators, log conflicts and re-run the **combined-tree** checks.
 The earlier 198-page / 59-step result is a dated pre-rebase result, not a claim about the new combined tree.
+
+### T63 (`37333afd`) — rebase conflict resolution, 2026-11-19
+
+Rebased onto `20b9bd9` (PR #173 / T66 close-out). Conflicts were resolved without dropping the upstream
+shop, thermometer desk, source/flag additions, owner directions or any gate:
+
+- Coordination: main's entire chronology plus this session's append-only records.
+- Workflow: **both** shop checks plus all prior intake/board checks and this session's added tests;
+  upstream strict preflight retained, shell `errexit`/`pipefail` retained, non-cancelling per-ref checks
+  plus upstream serialized deploy group. Upload only the `_site` artifact.
+- Price checks: upstream and this session had equivalent split-before-strip repairs. Kept upstream
+  versions/comments where equivalent; the dedicated control/mutation tests still execute all six copies.
+- Front renderer: retained the upstream builders, data, option IDs, recorded owner directions and added
+  guide bodies. One current shell/front page is used; the previous navigation/footer union is explicitly
+  preserved in Workspace and footer. `guides/cleanup-and-counter-space.html` had an add/add collision:
+  the earlier treatment is preserved at **`guides/cleanup-and-counter-space-earlier.html`**, linked from
+  the guide shelf and Workspace, not discarded. `shop/**`, `marketing/thermometers/**`, all their data,
+  generators and validators are retained. SG-S11 / SG-T63-06 remain proposals, not silently marked chosen.
+- Brief inventory: retained upstream token aliases and published-output checks, using the shared
+  inventory module to avoid an import cycle. Corrected stale browser-queue/missing-collector prose in
+  the older summary while preserving its dated Nov17 observation rows; Nov19 observations remain separate.
+- Derived board/brief/console/release outputs: re-rendered from the combined tree, not selected by hand.
+  A board run result is not fabricated to resolve a conflict; it remains pending until actual replay.
+- Product labels: the client/verifier accept both existing static `P-01..P-05` and current `P1..P5`
+  labels as the same registered product dimensions, never a visitor-derived identifier.
+
+Combined artifact: **228 pages / 16 indexable reader URLs / 1,451 static product anchors / 135 current
+factual rows**, contract clean. Chromium: **252 viewport checks**, all pages rendered, 24 current pages
+with zero automated WCAG A/AA violations; behavior/privacy/persistence tests pass. A long upstream
+owner-decision status pill exposed mobile overflow; wrapping repaired without changing the status text.
+Full combined CI (now 61 executable steps) and actual GitHub deployment are the remaining release checks.

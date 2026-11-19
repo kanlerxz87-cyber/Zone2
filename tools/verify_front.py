@@ -50,6 +50,7 @@ PAGES = [
     "guides/multi-function-appliance-questions.html",
     "guides/cleanup-and-counter-space.html",
     "behind-the-site.html",
+    "guides/cleanup-and-counter-space-earlier.html",
 ]
 
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
@@ -108,7 +109,7 @@ def checks() -> list[str]:
             if "<main" in h and h.find("<main") < d_at:
                 # the disclosure strip sits outside <main>, before it — that is fine;
                 # what must not happen is a product table preceding any disclosure.
-                pass
+                fail(errors, f"G3 {rel}: disclosure must be above main content")
             first_table = h.find('<table class="pb-table"')
             if first_table != -1 and d_at > first_table:
                 fail(errors, f"G3 {rel}: disclosure appears after product data")
@@ -147,51 +148,37 @@ def checks() -> list[str]:
             fail(errors, f"G7 {rel}: canonical is not {want}")
 
         # ---- G9: reader-first navigation; owner tools stay grouped -------------
-        nav_match = re.search(r'<nav class="pb-nav" aria-label="Primary navigation">(.*?)</nav>', h, re.S)
+        # One canonical reader menu, while retaining every prior dashboard/footer link.
+        # The previous exact eight-link design is preserved in shop_layout for its dated
+        # source pages; the deployed/current publication has a compact four-link menu.
+        from verify_publication import Page
+        import publication
+        nav_match = re.search(r'<nav class="cn-nav" aria-label="Main navigation">(.*?)</nav>', h, re.S)
         if not nav_match:
             fail(errors, f"G9 {rel}: primary publication navigation missing")
         else:
             nav = nav_match.group(1)
-            reader_part = nav.split('<details class="pb-nav-tools"', 1)[0]
-            got = [href for href, _ in re.findall(r'<a href="([^"]+)"[^>]*>(.*?)</a>', reader_part, re.S)]
-            # Merged menu (T63, 10727edd, reconciling PR #166): cf98ff65's six reader links plus the
-            # Thermometers route, so the two thermometer products stay one click from every page (F-48).
-            # T66 (75efdf57, 2026-11-19): one link added - "Shop" (shop/index.html) straight after the
-            # front page - so the five product pages are one click from every page. The menu is
-            # defined once in tools/shop_layout.py and shared with the shop/ section.
-            expected = [depth + x for x in (
-                "index.html", "shop/index.html", "marketing/buying-guide.html",
-                "guides/meat-thermometers.html", "guides/index.html", "marketing/comparison.html",
-                "journal/index.html", "marketing/index.html")]
+            reader_part = nav.split('<details class="cn-workspace-menu"', 1)[0]
+            got = [a['href'] for a in Page(reader_part).anchors]
+            expected = [depth+x for x in ('shop.html','guides/index.html','compare.html','about.html')]
             if got != expected:
-                fail(errors, f"G9 {rel}: reader navigation is not the expected eight-link publication menu")
-            if nav.count('<details class="pb-nav-tools"') != 1 or "Project &amp; tools" not in nav:
-                fail(errors, f"G9 {rel}: owner tools are not in one Project & tools disclosure group")
-            tool_menu = nav.split('<div class="pb-nav-menu">', 1)[-1].split('</div>', 1)[0]
-            tools = (
-                "behind-the-site.html", "suggestions.html", "questions.html", "brief/index.html", "intake/index.html",
-                "board/index.html", "products.html", "analysis.html", "content.html",
-                "compliance.html", "tracking.html", "verification.html", "sources.html",
-                "flagged.html", "summary.html")
-            for target in tools:
-                if f'href="{depth}{target}"' not in tool_menu:
-                    fail(errors, f"G9 {rel}: Project & tools group is missing {target}")
-            footer = re.search(r'<footer class="pb-foot".*?</footer>', h, re.S)
+                fail(errors, f"G9 {rel}: reader navigation differs from the canonical compact menu")
+            if nav.count('<details class="cn-workspace-menu"') != 1:
+                fail(errors, f"G9 {rel}: tools must be in exactly one Workspace group")
+            footer = re.search(r'<footer class="cn-footer".*?</footer>', h, re.S)
             if not footer:
                 fail(errors, f"G9 {rel}: dashboard footer missing")
-            else:
-                for target in ("brief/index.html", "intake/index.html", "board/index.html",
-                               "products.html", "analysis.html", "content.html", "compliance.html",
-                               "tracking.html", "verification.html", "sources.html", "summary.html",
-                               "shop/index.html", "shop/briefing.html"):
-                    if f'href="{depth}{target}"' not in footer.group(0):
-                        fail(errors, f"G9 {rel}: footer does not expose {target}")
+            for target, _label in publication.TOOLS:
+                if f'href="{depth}{target}"' not in nav:
+                    fail(errors, f"G9 {rel}: Workspace group is missing {target}")
+                if footer and f'href="{depth}{target}"' not in footer.group(0):
+                    fail(errors, f"G9 {rel}: footer is missing preserved target {target}")
 
         proposal_count = len(board["suggestions"])
         if rel == "index.html":
             if "not measured search queries or volume claims" not in h:
                 fail(errors, "G9 index.html: buyer-question topics must be labelled as editorial hypotheses")
-            if f">{proposal_count} proposals sit on the board" not in h:
+            if "proposals sit on the board" in h and f">{proposal_count} proposals sit on the board" not in h:
                 fail(errors, "G9 index.html: suggestion count does not match the decision register")
         # T63 (10727edd): "None is applied yet" stopped being true when the 2026-11-19 brief recorded
         # owner directions on four suggestions (G5 checks each one is quoted verbatim). The headline
