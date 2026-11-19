@@ -7938,6 +7938,16 @@ as history on purpose (OBS-2/OBS-3 in the verification record).
 - **Still open, owner-only:** Search Console verification (SG-29/RQ-28); reader-capture choice (SG-30/RQ-29); the self-hosted analytics endpoint (RQ-25 — not runnable on GitHub Pages); the Associates Special-Link test (RQ-22); product photography decision (S-18/RQ-14).
 - **Sources read 2026-11-19:** Google Search Central snippet guidance (V1); WCAG 2.2 Understanding SC 2.5.8 (V2); SC 2.5.5 as referenced from V2 (V3). Full list in `docs/verification-aecb287a.md` §1.
 - **Verification performed:** scan of all 228 HTML files for description/title duplicates; headless-Chromium phone measurements (390 px) on the 64 reader pages before and after; `build_front --check`, `build_site --check`, `build_decisions --check`, `revalidation/build --check`, `build_board --check`, `validate_board`, `build_head_meta --audit` (0 problems), `validate_data`, `audit_site`, `verify_publication`; `tools/ci_replay.py` 63/63 on the merged tree.
+### T74 close-out addendum — PR #193 merged; Pages deployment verified — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#193](https://github.com/kanlerxz87-cyber/Zone2/pull/193) — `arena/aecb287a-zone2` → `main`, merged via `gh pr merge 193 --merge` at **2026-11-19T20:17:34Z**, merge commit **`d13926c7888203404f76ac3afc976be98f325502`**.
+- **PR check:** `Build, verify and deploy` (pull request) — **success**.
+- **Main:** run **44607167897** `Build, verify and deploy` — **success** (including the post-deploy live-publication check); Pages build run **44607165934** — **success**.
+- **Scope as merged:** S-24 (journal links), S-20 (partial: mobile type floor, 44 px control targets, phone sticky bar on `compare.html`), board rows RQ-18 and RQ-16, the T74 records. **S-04 was not re-implemented:** `672f9c4c`'s merged work was kept unchanged.
+- **Live check:** `fetch_page` on the live `compare.html` and `journal/basket-vs-oven.html` returns the current content, with `tag=shopnow047c-20` and `rel="sponsored"` on the product links. Its markdown extraction drops `<nav>` elements, so the new "Where to go next" block and the sticky bar are not visible there; they are verified from the built artifact and the workflow's post-deploy check.
+- **Merge friction, recorded:** `main` moved three times during this PR's flight (`e078d7c5` T72, `672f9c4c` T73, and PR #196). Each time the branch was merged with `main` and conflicts resolved by keeping both sides. Generated outputs were taken from `main` and regenerated through their builders. The `ci_replay` decision-board gate fired transiently inside `build_board.py` on two runs; a direct `ci_replay.py` run passed 63/63 each time.
+- **Left open (owner-only or residual):** Search Console (SG-29/RQ-28); reader-capture choice (SG-30/RQ-29); analytics endpoint hosting (RQ-25); Associates Special-Link test (RQ-22); product photography (S-18/RQ-14); 344 residual sub-11 px labels and the remaining small table/chip targets (RQ-16 stays `no-status-given`).
+
 ## T73 (claimed as T72) — session `arena/672f9c4c-zone2` (`672f9c4c`) — 2026-11-19 (UTC)
 
 **Scope claimed first** (commit `40bc195`, pushed before any edit): close **S-04 / RQ-01**, the only
