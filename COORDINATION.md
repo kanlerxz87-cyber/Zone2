@@ -8197,3 +8197,13 @@ bump the three prose counts in the same change.
 **File scope:** `COORDINATION.md` (this claim row and this close-out record only), NEW `docs/verification-353f0afc.md` (dated official-source verdicts and irregularities). Every other file is read-only for this session; no ledger, page, tool, workflow, or data file is edited. If a gate forces a fix, it is logged here first.
 
 **Status:** in progress.
+
+### T76 progress addendum — `arena/353f0afc-zone2`, 2026-11-19 (UTC)
+
+**Verification complete.** Official sources re-read live on 2026-11-19: Operating Agreement §5 (S1, verbatim disclosure), Program Policies (S2), FTC Disclosures 101 (S3), Google qualify-outbound-links (S4), ASIN definition (S5), and all five Amazon listings (S6–S10). All five supplied links resolve reproducibly to live listings (B0CDY277D3, B09B7SB46R, B08DKYBTPH air fryers; B0DHZTCNR5, B0DZFD6R9Z meat thermometers); `plpRedirect=mhFallback` appears on bare valid `/dp/` loads and is not fallback evidence; intended-ASIN fields stay `null` (owner-gated); collection stays OFF (Pages cannot host a writable collector). Record: `docs/verification-353f0afc.md`.
+
+**Gates:** `validate_data.py` exit 0 (436 rows, 50 sources, 55 flags, 1315 links, 0 errors); `build_site.py --check` 39 built 0 drifted; `tests/test_pipeline.py` 15/15; disclosure strip on 35/35 pages; `price_findings: 0`; `package_site` + `verify_publication` ok.
+
+**Irregularities flagged (owner-gated, non-blocking):** category split (3 air fryers + 2 meat thermometers — no single category covers the submitted set); intent/attribution/confirmation fields blank pending owner; collector OFF pending owner host. No value inferred.
+
+**Next:** PR `arena/353f0afc-zone2` → `main`, merge without waiting, confirm GitHub Pages deploy, then append PR link / merge commit / deploy result here and mark T76 done.
