@@ -7053,6 +7053,27 @@ mistake; commit `10d5a25` removed them, and `audit_site` debris PASS confirms.
 | CR-9 | Next integration session | Promote Q-21/Q-22 to F-44/F-45 in one pass that also updates `README.md`, `EXECUTIVE_SUMMARY.md` count prose, `assets/js/data.js` and the root pages (SG-15 C) | Open |
 | CR-10 | Brief namespace | Correct the stale note "no click on this site can become a qualifying purchase" in `brief/data/summary.json` (untrue since T58 added the tag), and derive its four state-table counts | Open |
 
+### T64 close-out — PR #167 merged and Pages deployment confirmed (2026-11-19) · **Status: DONE**
+
+PR #167 (`https://github.com/kanlerxz87-cyber/Zone2/pull/167`) was merged to `main` at `2026-11-19T06:08:03Z`
+as merge commit `d7b8328247f44744eeb441653849099b92ebb619`.
+- The required PR check "Build and verify" passed (28 s).
+- Post-merge workflow run `44469952292` ("Build, verify and deploy") succeeded.
+- Pages run `44469951282` ("pages build and deployment") succeeded.
+- The Pages API reports `status: built` for commit `d7b8328`.
+- `https://kanlerxz87-cyber.github.io/Zone2/marketing/thermometers/thermometer-for-air-fryer.html` was fetched
+  live after deployment and serves the merged content.
+
+Before the merge, the branch absorbed #165 (T65), #166 (T63) and #168 (T63 close-out). Each conflict was in an
+append-only log or a generated view:
+- the logs kept both records;
+- the generated views were rebuilt by their own generators;
+- `ci_replay` passed 49/49 after every merge.
+
+Sources, verification and irregularities: `docs/verification-32788da6.md`. Still open for others: CR-7 (front
+page link to `marketing/thermometers/`; T63 closed without it), CR-8, CR-9 and CR-10, plus Q-21, Q-22 and SG-15
+for the owner.
+
 ---
 
 ## T66 (claimed as T63) — session `arena/75efdf57-zone2` (session `75efdf57`) — 2026-11-19 (UTC)
