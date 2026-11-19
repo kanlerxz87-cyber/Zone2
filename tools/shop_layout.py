@@ -169,7 +169,8 @@ def footer(depth: str, checked_on: str) -> str:
       <p><a href="{d}journal/dual-basket-air-fryers.html">Two baskets beat one long timer</a> &middot;
       <a href="{d}journal/basket-vs-oven.html">Choose by geometry</a> &middot;
       <a href="{d}journal/why-every-number-has-a-source.html">Why every number links to its source</a> &middot;
-      <a href="{d}marketing/feed.xml">RSS feed</a></p>
+      <a href="{d}shop/feed.xml">Guides RSS feed</a> &middot;
+      <a href="{d}marketing/feed.xml">Articles RSS feed</a></p>
       <p>Official sources re-read {e(checked_on)}.
       <a href="https://affiliate-program.amazon.com/">Amazon Associates</a> &middot;
       <a href="https://affiliate-program.amazon.com/help/operating/policies">Program Policies</a> &middot;

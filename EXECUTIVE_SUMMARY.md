@@ -1489,3 +1489,54 @@ the confirmation date/source apart from redirect observations.
 bot-filtering choices before collecting events.
 4. Verify Search Console ownership and use actual query/page data before treating any topic as measured
 interest. Until then the guide subjects remain editorial hypotheses.
+
+## Addendum — 2026-11-19 (session `arena/75efdf57-zone2`, T66; claimed as T63): the site now reads as a shop
+
+**In one paragraph.** The front page leads with the five products. A new shop section adds a page for
+each product, two category pages, a side-by-side comparison, six question-shaped buying guides with
+their own RSS feed, and an owner briefing. Each figure on those pages links to the manufacturer page or
+Amazon listing it came from, re-read on 19 November 2026. Every product button is a tagged Special Link
+(`shopnow047c-20`, account status still unconfirmed), marked `rel="sponsored nofollow"` and
+*(paid link)*, and counted by the cookie-free click counter. No price, star rating, review count or
+performance number is printed. All dashboards from earlier sessions stay published, reachable from a
+single "Project & tools" menu and from the footer.
+
+**What a buyer sees** ([live front page](https://kanlerxz87-cyber.github.io/Zone2/),
+[shop](https://kanlerxz87-cyber.github.io/Zone2/shop/index.html)):
+- **Products:** five cards, each with a fit label, three sourced key facts and a price button.
+- **Product pages:** "a good fit if / think twice if", a full sourced spec table, and a note on where the
+  specs come from. The link record at the bottom keeps the observed destination apart from the
+  (blank) intended product.
+- **Guides:** six guides answering one buyer question each. The titles are editorial hypotheses, not
+  measured search demand. The [temperatures guide](https://kanlerxz87-cyber.github.io/Zone2/shop/guides/air-fryer-meat-thermometer-temperatures.html)
+  uses the FoodSafety.gov chart, and a seasonal callout ties it to Thanksgiving (26 November 2026).
+- **Disclosure:** a strip under the masthead on every page, repeated in the footer.
+
+**The owner briefing** ([shop/briefing.html](https://kanlerxz87-cyber.github.io/Zone2/shop/briefing.html))
+holds this session's decision material:
+- an executive summary;
+- ten suggestions (SG-S01…SG-S10), each with options, cost, trade-off, a recommendation and the
+  questions it waits on, all still *Proposed*;
+- eleven open questions (OQ-01…OQ-11), each with what is known (with its source), what is missing and
+  how to find out;
+- inputs for the next design prompt.
+
+The decision that blocks everything else is still **OQ-01**: confirm that the five observed listings
+are the products intended.
+
+**Irregularities.** Flags F-44 to F-52 were added to the register:
+- **F-44:** merge-conflict markers in the workflow on `main` meant no CI gate ran from PR #158 until
+  19 November.
+- **F-46:** the local replay reported a false green throughout.
+- **F-47:** corrects the earlier "cancelled runs" note.
+- **F-45, F-48 to F-52:** listing and manufacturer discrepancies found while re-reading the five
+  products.
+
+The workflow was repaired independently by session `da47d78d` (PR #165) and on this branch.
+Verification detail: [`docs/verification-75efdf57.md`](docs/verification-75efdf57.md).
+
+**Gates at hand-off.**
+- `tools/ci_replay.py`: 51 of 51 workflow steps pass, including the two new shop steps.
+- `tools/audit_site.py`: 197 pages, all checks pass.
+- `tools/seo_audit.py`: all checks pass.
+- `tools/verify_front.py` (G1–G10) and `tools/validate_shop.py` (S1–S12): pass.

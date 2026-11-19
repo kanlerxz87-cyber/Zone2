@@ -250,7 +250,8 @@ def page(rel_path: str, *, title: str, description: str, active: str,
 <link rel="stylesheet" href="{e(depth)}assets/css/style.css">
 <link rel="stylesheet" href="{e(depth)}assets/css/publish.css">
 <link rel="stylesheet" href="{e(depth)}assets/css/shop.css">
-<link rel="alternate" type="application/rss+xml" title="Counter Notes" href="{e(depth)}marketing/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Counter Notes - buying guides" href="{e(depth)}shop/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Counter Notes - articles" href="{e(depth)}marketing/feed.xml">
 <link rel="icon" href="{e(depth)}assets/favicon.svg" type="image/svg+xml">
 {extra_head}
 </head>
@@ -412,7 +413,7 @@ def build_index(facts: dict, board: dict) -> str:
 <section class="sh-wrap">
   <div class="sh-season">
     <p class="sh-kick">In season &middot; Thanksgiving is Thursday, 26 November</p>
-    <h2>Turkey is done at 165 &deg;F &mdash; measured in the thickest part, not guessed from the clock.</h2>
+    <h2>Turkey is done at 165 &deg;F &mdash; read on a thermometer, not guessed from the clock.</h2>
     <p>That is the U.S. government&rsquo;s safe minimum for all poultry {build_shop.src_link(cat, "SH-01")}. Our temperature guide has the full chart and how each thermometer here fits the job.</p>
     <p><a class="sh-btn" href="shop/guides/{e(temps["slug"])}.html">{e(temps["title"])}</a></p>
   </div>

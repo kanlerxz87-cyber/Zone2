@@ -625,9 +625,9 @@
       "status": "closed",
       "published_on": "2026-11-19",
       "title": "The deploy workflow on main contained unresolved merge-conflict markers, so every CI run since PR #158 failed with zero jobs",
-      "detail": "Found 2026-11-19 by session 75efdf57. .github/workflows/pages.yml on main (4398071) contained column-0 '<<<<<<<', '=======' and '>>>>>>>' lines left by a merge (979fd5e), between the T60 intake steps and the T62 board steps. The file was therefore not valid YAML; GitHub rejected the workflow before any job started, which is why the runs for PRs #158 and #161 show 'failure' with 0 jobs (e.g. run 44136794504). The live site kept updating through GitHub's branch-based Pages build, so the defect was invisible on the site itself. Fixed on branch arena/75efdf57-zone2 (commit 85e5b83) by keeping both sides of the conflict; the file parses again (53 build steps).",
+      "detail": "Found 2026-11-19 by session 75efdf57. .github/workflows/pages.yml on main (4398071) contained column-0 '<<<<<<<', '=======' and '>>>>>>>' lines left by a merge (979fd5e), between the T60 intake steps and the T62 board steps. The file was therefore not valid YAML; GitHub rejected the workflow before any job started, which is why the runs for PRs #158 and #161 show 'failure' with 0 jobs (e.g. run 44136794504). The live site kept updating through GitHub's branch-based Pages build, so the defect was invisible on the site itself. Two sessions fixed it independently on 2026-11-19 by keeping both sides of the conflict: session da47d78d (T65), which reached main first in PR #165, and session 75efdf57 on branch arena/75efdf57-zone2 (commit 85e5b83). Session cf98ff65's post-merge run 44469199247 on main completed successfully, so the gate is running again.",
       "impact": "For the length of the defect no gate in the workflow ran on any merge: content reached the live site unchecked.",
-      "action_required": "None open once the T66 PR merges and its Actions run is green; the run link is recorded in COORDINATION.md.",
+      "action_required": "None open: the workflow parses and post-merge runs on main succeed (run 44469199247). The T66 merge adds two shop steps; its Actions run is recorded in COORDINATION.md.",
       "source_ids": []
     },
     {
@@ -651,9 +651,9 @@
       "status": "closed",
       "published_on": "2026-11-19",
       "title": "tools/ci_replay.py reported 49/49 PASS on a workflow GitHub could not parse",
-      "detail": "ci_replay.py replays the run: steps of pages.yml locally. Run on unfixed main on 2026-11-19 it printed 49/49 PASS while GitHub rejected the same file, because the replay parsed steps leniently and never checked for conflict markers. Session 75efdf57 added a conflict_markers() guard: the replay now refuses (exit 1, 'CI REPLAY REFUSED') when pages.yml or any tools/*.py holds a column-0 conflict marker. Negative-tested against the broken file (refused) and the fixed file (passes).",
+      "detail": "ci_replay.py replays the run: steps of pages.yml locally. Run on unfixed main on 2026-11-19 it printed 49/49 PASS while GitHub rejected the same file, because the replay parsed steps leniently and never checked for conflict markers. Two guards now exist: session da47d78d (T65) added check_workflow_health() for pages.yml, and session 75efdf57 added conflict_markers(), which also covers tools/*.py: the replay now refuses (exit 1, 'CI REPLAY REFUSED') when pages.yml or any tools/*.py holds a column-0 conflict marker. Negative-tested against the broken file (refused) and the fixed file (passes).",
       "impact": "Earlier session records that cite a green local replay as evidence of a green build are not evidence for any run after PR #158.",
-      "action_required": "None open; the guard ships with the T66 PR.",
+      "action_required": "None open; both guards are in tools/ci_replay.py on main once the T66 PR merges.",
       "source_ids": []
     },
     {

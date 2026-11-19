@@ -19,6 +19,7 @@ Reads the published HTML under shop/ (and the shop data) and fails on any of:
   S10 data          catalog: verified rows cite known sources; blank rows have a reason and no
                     value; conflict rows cite at least two sources; intent fields stay separate
                     (an observed target is never copied into an intended field)
+  S12 feed        shop/feed.xml parses and every item resolves to a published guide
   S11 briefing      every suggestion is 'Proposed', its recommendation is one of its options, its
                     waits_on ids exist; every open question has known/missing/how filled in
 
@@ -207,6 +208,29 @@ def check_data(errors: list[str]) -> None:
                 errors.append(f"S11 {q['id']}: unknown source {sid}")
 
 
+def check_feed(errors: list[str]) -> None:
+    """S12 feed: shop/feed.xml parses as RSS 2.0 and every item resolves to a published guide."""
+    import xml.etree.ElementTree as ET
+    f = ROOT / "shop" / "feed.xml"
+    if not f.is_file():
+        errors.append("S12 shop/feed.xml missing")
+        return
+    try:
+        root = ET.fromstring(f.read_bytes())
+    except ET.ParseError as exc:
+        errors.append(f"S12 shop/feed.xml does not parse ({exc})")
+        return
+    items = root.findall("./channel/item")
+    if not items:
+        errors.append("S12 shop/feed.xml has no items")
+    for it in items:
+        link = (it.findtext("link") or "").strip()
+        if not link.startswith(LIVE) or not (ROOT / link[len(LIVE):]).is_file():
+            errors.append(f"S12 feed item link does not resolve to a published page: {link}")
+        if not (it.findtext("pubDate") or "").strip():
+            errors.append(f"S12 feed item without pubDate: {link}")
+
+
 def main() -> int:
     errors: list[str] = []
     ps = pages()
@@ -215,12 +239,13 @@ def main() -> int:
     for p in ps:
         check_page(p, errors)
     check_data(errors)
+    check_feed(errors)
     if errors:
         print(f"SHOP GATE FAILED - {len(errors)} problem(s):")
         for x in errors:
             print("  " + x)
         return 1
-    print(f"shop gate PASS: {len(ps)} pages, S1-S11 clean")
+    print(f"shop gate PASS: {len(ps)} pages + feed, S1-S12 clean")
     return 0
 
 

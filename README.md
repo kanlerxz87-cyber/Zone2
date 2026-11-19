@@ -443,3 +443,14 @@ python3 tools/test_board.py             # prove every check fires
 **Nothing on the board is implemented.** See `board/flagged.html` for the 13 irregularities,
 four of them high severity — including FL-13: the rule that is supposed to stop a page
 printing a product price never fires, in all four copies of it in this repository.
+
+## The shop (`shop/`) — 2026-11-19, session `75efdf57` (T66)
+
+`python3 tools/build_shop.py` writes the shop from `shop/data/catalog.json`, `guides.json` and
+`briefing.json`; `python3 tools/validate_shop.py` gates it (every row and comparison cell sourced or
+blank-with-reason, disclosure strip above `<main>` and in the footer, tagged + sponsored + counted
+product buttons, untagged citations, no prices, no invented metrics, canonical, image alt text, feed,
+briefing integrity). Guides are written with tokens (`{{v:P-01:Capacity}}`, `{{s:SH-01}}`,
+`{{buy:P-04}}`) so a figure in prose is always the sourced value from the catalog, never retyped.
+The shared masthead and footer live in `tools/shop_layout.py` and are used by `tools/build_front.py`
+too. Owner decisions for this round: [`shop/briefing.html`](https://kanlerxz87-cyber.github.io/Zone2/shop/briefing.html).

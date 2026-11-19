@@ -235,7 +235,8 @@ def page(rel: str, *, title: str, description: str, active: str, body: str,
 <link rel="stylesheet" href="{depth}assets/css/publish.css">
 <link rel="stylesheet" href="{depth}assets/css/shop.css">
 <link rel="icon" href="{depth}assets/favicon.svg" type="image/svg+xml">
-<link rel="alternate" type="application/rss+xml" title="Counter Notes" href="{depth}marketing/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Counter Notes - buying guides" href="{depth}shop/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Counter Notes - articles" href="{depth}marketing/feed.xml">
 {ld}</head>
 <body class="sh">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -565,12 +566,45 @@ def build_briefing(cat: dict, br: dict) -> str:
                 active="", body=body)
 
 
+def build_feed(gd: dict) -> str:
+    """RSS 2.0 for the buying guides (shop/feed.xml). Dates are the guides' published date;
+    nothing is invented. tools/validate_shop.py parses it and resolves every item link."""
+    from email.utils import format_datetime
+    from datetime import datetime, timezone
+    from xml.sax.saxutils import escape as x
+
+    y, m, d = (int(v) for v in gd["published"].split("-"))
+    pub = format_datetime(datetime(y, m, d, tzinfo=timezone.utc))
+    items = "".join(
+        f"""
+    <item>
+      <title>{x(g["title"])}</title>
+      <link>{x(head_meta.url_for(f"shop/guides/{g['slug']}.html"))}</link>
+      <guid isPermaLink="true">{x(head_meta.url_for(f"shop/guides/{g['slug']}.html"))}</guid>
+      <pubDate>{pub}</pubDate>
+      <description>{x(g["dek"])}</description>
+    </item>""" for g in gd["guides"])
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Counter Notes - buying guides</title>
+    <link>{x(head_meta.url_for("shop/guides/index.html"))}</link>
+    <atom:link href="{x(head_meta.url_for("shop/feed.xml"))}" rel="self" type="application/rss+xml"/>
+    <description>Question-shaped buying guides for air fryers and meat thermometers. Every figure links to its official source. {x(DISCLOSURE)}</description>
+    <language>en-us</language>
+    <lastBuildDate>{pub}</lastBuildDate>{items}
+  </channel>
+</rss>
+"""
+
+
 def build_all() -> dict[str, str]:
     cat, gd, br = load()
     out: dict[str, str] = {"shop/index.html": build_shop_index(cat, gd),
                            "shop/compare.html": build_compare(cat),
                            "shop/guides/index.html": build_guides_index(gd),
-                           "shop/briefing.html": build_briefing(cat, br)}
+                           "shop/briefing.html": build_briefing(cat, br),
+                           "shop/feed.xml": build_feed(gd)}
     for c in cat["categories"]:
         out[f"shop/{c['slug']}.html"] = build_category(cat, gd, c)
     for p in cat["products"]:
@@ -578,7 +612,7 @@ def build_all() -> dict[str, str]:
     for g in gd["guides"]:
         out[f"shop/guides/{g['slug']}.html"] = build_guide(cat, gd, g)
     for rel, h in out.items():
-        if DISCLOSURE not in h:
+        if rel.endswith(".html") and DISCLOSURE not in h:
             raise BuildError(f"{rel}: disclosure missing")
     return out
 
@@ -597,13 +631,13 @@ def main() -> int:
         if stale:
             print("SHOP BUILD STALE - committed pages differ from a fresh build: " + ", ".join(stale))
             return 1
-        print(f"shop build current: {len(out)} pages")
+        print(f"shop build current: {len(out)} files")
         return 0
     for rel, h in out.items():
         f = ROOT / rel
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_text(h, encoding="utf-8")
-    print(f"shop build wrote {len(out)} pages")
+    print(f"shop build wrote {len(out)} files")
     return 0
 
 
