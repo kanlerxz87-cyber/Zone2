@@ -1,1313 +1,1939 @@
 {
-  "$schema_version": "1.0",
-  "register": "RB",
-  "as_of": "2026-11-16",
-  "task": "T53",
-  "session": "arena/7c1511ee-zone2",
-  "measured_utc": "2026-11-16",
-  "note": "The review board for the 2026-11-16 request. It exists so a reviewer can compare every possible path, see what each one costs, see what it waits on, and choose one - before any change is made. Nothing in this file is implemented: every proposal starts at AWAITING_DECISION and tools/validate_review_board.py fails the build if a row reads as done while no decision is recorded. Measured rows (PM-) come from inspecting this repository on 2026-11-16 and name the file and page they were counted from. Requirement rows (RP-) trace the 2026-11-16 brief sentence by sentence. Question rows (PQ-) exist to surface missing information; an open question carries no answer, only what is known, what is missing, and how to obtain it.",
-  "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
-  "decision_vocabulary": {
-    "AWAITING_DECISION": "Nobody has chosen. The row is a proposal and nothing has been built from it.",
-    "SELECTED": "The owner picked one option. Implementation is still a separate, later step and is not implied.",
-    "DEFERRED": "The owner chose not to decide yet. The row records why, and what would make it decidable."
+ "$schema_version": "1.0",
+ "register": "RB",
+ "as_of": "2026-11-19",
+ "task": "T53",
+ "session": "arena/7c1511ee-zone2",
+ "measured_utc": "2026-11-19",
+ "note": "The review board for the 2026-11-16 request. It exists so a reviewer can compare every possible path, see what each one costs, see what it waits on, and choose one - before any change is made. Nothing in this file is implemented: every proposal starts at AWAITING_DECISION and tools/validate_review_board.py fails the build if a row reads as done while no decision is recorded. Measured rows (PM-) come from inspecting this repository on 2026-11-16 and name the file and page they were counted from. Requirement rows (RP-) trace the 2026-11-16 brief sentence by sentence. Question rows (PQ-) exist to surface missing information; an open question carries no answer, only what is known, what is missing, and how to obtain it. Wave 2 (2026-11-19, session arena/9a72588c-zone2): adds the 2026-11-19 brief's suggestion wave — proposals PW-01…PW-07, questions PQ-10…PQ-13, ideas PS-18…PS-21, findings PD-10…PD-12, measurements PM-14…PM-18, irregularities PI-06…PI-08 and sources S91…S97. Wave-1 rows are preserved verbatim from T53 (as_of 2026-11-16); every wave-2 quote was read live on 2026-11-19 and the reads are recorded in docs/verification-9a72588c.md. Nothing here is implemented; every new row ends in an official page or names the measurement it rests on.",
+ "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+ "decision_vocabulary": {
+  "AWAITING_DECISION": "Nobody has chosen. The row is a proposal and nothing has been built from it.",
+  "SELECTED": "The owner picked one option. Implementation is still a separate, later step and is not implied.",
+  "DEFERRED": "The owner chose not to decide yet. The row records why, and what would make it decidable."
+ },
+ "sources": [
+  {
+   "id": "S80",
+   "publisher": "Amazon Associates Central",
+   "kind": "official-amazon",
+   "title": "Associates Program Policies (page states Updated: April 14, 2026) - IP License and Usage Requirements",
+   "url": "https://affiliate-program.amazon.com/help/operating/policies",
+   "quote": "You will not use Creators API, PA API, Data Feeds, or Product Advertising Content with any site or application, or in any other manner, that does not have the principal purpose of advertising and marketing an Amazon Site and driving sales of products and services on an Amazon Site.",
+   "used_for": "PS-01, and the requirements trace RP-01/RP-02: the site's principal purpose test, which shapes what the whole design has to look like."
   },
-  "sources": [
+  {
+   "id": "S81",
+   "publisher": "Amazon Associates Central",
+   "kind": "official-amazon",
+   "title": "Help - Application Review Process",
+   "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+   "quote": "All Sites must have robust original content (even when advertising is removed) - a good rule of thumb is at least 10 posts. They must be publicly available (for example, they should not be a closed group, or behind a paywall).",
+   "used_for": "PS-04, PS-05, RP-05: the content scale and originality bar, and the posts rule of thumb, that a launch has to clear."
+  },
+  {
+   "id": "S82",
+   "publisher": "Amazon Associates Central",
+   "kind": "official-amazon",
+   "title": "Help - Application Review Process, Websites section",
+   "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+   "quote": "Content on your website must be recent (generally within the last 60 days). You must own your website.",
+   "used_for": "PS-06, PQ-06, RR-04: the freshness and ownership conditions, and the reason a dated page is a liability rather than a proof of care."
+  },
+  {
+   "id": "S83",
+   "publisher": "Google Search Central",
+   "kind": "official-search",
+   "title": "Creating helpful, reliable, people-first content (page states Last updated 2026-10-05 UTC)",
+   "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+   "quote": "The extent to which human work went into creating the content or the systems powering it. For example, writing original analysis, translating a poem manually, or building a custom interactive map for a game represents high effort. Conversely, automatically generating pages from feeds or using generative AI to produce large amounts of text without manual oversight or curation represents little to no effort.",
+   "used_for": "PS-02, PD-03, RR-02/RR-03: why a page whose visible subject is its own sourcing discipline scores worse than it deserves, and why automation must be disclosed rather than hidden."
+  },
+  {
+   "id": "S84",
+   "publisher": "Google Search Central",
+   "kind": "official-search",
+   "title": "Spam Policies for Google Web Search - Thin affiliation",
+   "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+   "quote": "Not every site that participates in an affiliate program is a thin affiliate. Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.",
+   "used_for": "PS-02, PS-08, RP-03: the affirmative list a site has to satisfy, not merely avoid violating."
+  },
+  {
+   "id": "S85",
+   "publisher": "Google Search Central",
+   "kind": "official-search",
+   "title": "Write high quality reviews (page states Last updated 2025-12-10 UTC)",
+   "url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
+   "quote": "Ensure there is enough useful content in your ranked lists for them to stand on their own, even if you choose to write separate in-depth single reviews.",
+   "used_for": "PS-07, PS-08: the standard for a buying guide page, which is the page type that converts."
+  },
+  {
+   "id": "S86",
+   "publisher": "Federal Trade Commission",
+   "kind": "official-legal",
+   "title": "Disclosures 101 for Social Media Influencers (page states November 2019)",
+   "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+   "quote": "The disclosure should be placed with the endorsement message itself.",
+   "used_for": "PS-10, RR-06: the required position of the disclosure relative to the link, which is why it may not live only in a footer."
+  },
+  {
+   "id": "S87",
+   "publisher": "Federal Trade Commission",
+   "kind": "official-legal",
+   "title": "Disclosures 101 for Social Media Influencers (page states November 2019) - What Else to Know",
+   "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+   "quote": "You can't talk about your experience with a product you haven't tried.",
+   "used_for": "PS-09, PQ-11: the constraint that forbids first-person experience claims while no product has been used, and therefore forbids most of the ordinary review voice."
+  },
+  {
+   "id": "S88",
+   "publisher": "Amazon.com",
+   "kind": "official-amazon",
+   "title": "Amazon product detail page reached by supplied short link 1",
+   "url": "https://www.amazon.com/dp/B0CDY277D3",
+   "quote": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+   "used_for": "RR-01: the title of the listing the first supplied link resolves to, observed again on 2026-11-16."
+  },
+  {
+   "id": "S89",
+   "publisher": "Amazon.com",
+   "kind": "official-amazon",
+   "title": "Amazon product detail page reached by supplied short link 2",
+   "url": "https://www.amazon.com/dp/B09B7SB46R",
+   "quote": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+   "used_for": "RR-01: the title of the listing the second supplied link resolves to, observed again on 2026-11-16."
+  },
+  {
+   "id": "S90",
+   "publisher": "Amazon.com",
+   "kind": "official-amazon",
+   "title": "Amazon product detail page reached by supplied short link 3",
+   "url": "https://www.amazon.com/dp/B08DKYBTPH",
+   "quote": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450 degrees F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+   "used_for": "RR-01: the title of the listing the third supplied link resolves to, observed again on 2026-11-16."
+  },
+  {
+   "id": "S91",
+   "publisher": "USDA Food Safety and Inspection Service",
+   "kind": "official-legal",
+   "title": "Safe Minimum Internal Temperature Chart (page states Last Updated: Apr 14, 2025)",
+   "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+   "quote": "Cook all food to these minimum internal temperatures, as measured with a food thermometer, before removing food from the heat source. For reasons of personal preference, consumers may choose to cook food to higher temperatures.",
+   "used_for": "PS-19 and PW-02: the official anchor a thermometer reference page stands on, and proof that a dated official page can be re-read and re-cited rather than invented.",
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "S92",
+   "publisher": "Google Search Central",
+   "kind": "official-search",
+   "title": "SEO Starter Guide: The Basics (Google Search Central)",
+   "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+   "quote": "Think about the words that a user might search for to find a piece of your content. Users who know a lot about the topic might use different keywords in their search queries than someone who is new to the topic.",
+   "used_for": "PW-03, PQ-10, PD-10: the official basis for choosing topics from real query behaviour instead of instinct.",
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "S93",
+   "publisher": "Google Search Central",
+   "kind": "official-search",
+   "title": "Understanding page experience in Google Search results (Google Search Central)",
+   "url": "https://developers.google.com/search/docs/appearance/page-experience",
+   "quote": "Google's core ranking systems look to reward content that provides a good page experience. Site owners seeking to be successful with our systems shouldn't focus on only one or two aspects of page experience.",
+   "used_for": "PW-07, PD-12: why the one unclaimed page-experience pass outranks shipping more content on the current layout.",
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "S94",
+   "publisher": "Federal Trade Commission",
+   "kind": "official-legal",
+   "title": "CAN-SPAM Act: A Compliance Guide for Business (FTC)",
+   "url": "https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business",
+   "quote": "Despite its name, the CAN-SPAM Act doesn't apply just to bulk email. It covers all commercial messages, which the law defines as “any electronic mail message the primary purpose of which is the commercial advertisement or promotion of a commercial product or service,” including email that promotes content on commercial websites.",
+   "used_for": "PW-05, PQ-11: the legal duties an email-capture path inherits before a single message is sent.",
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "S95",
+   "publisher": "Google Search Central",
+   "kind": "official-search",
+   "title": "Spam Policies for Google Web Search — scaled content abuse section (same page as S84, quoted for the section wave 2 rests on)",
+   "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+   "quote": "Scaled content abuse is when many pages are generated for the primary purpose of manipulating search rankings and not helping users. This abusive practice is typically focused on creating large amounts of unoriginal content that provides little to no value to users, no matter how it's created.",
+   "used_for": "PW-01: the official description of the failure mode a written voice gate exists to prevent.",
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "S96",
+   "publisher": "Amazon.com",
+   "kind": "official-amazon",
+   "title": "Amazon listing B0DZFD6R9Z — title as served on 2026-11-19 (re-read live)",
+   "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+   "quote": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+   "used_for": "PS-19, PS-21: the current identity of the fifth supplied product's listing, re-read live on 2026-11-19.",
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "S97",
+   "publisher": "Amazon.com",
+   "kind": "official-amazon",
+   "title": "Amazon listing B0DHZTCNR5 — title as served on 2026-11-19 (re-read live)",
+   "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+   "quote": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+   "used_for": "PS-21: the current identity of the fourth supplied product's listing, re-read live on 2026-11-19; it confirms the newer-model situation the ledger's Q-21 holds open still holds today.",
+   "wave": "2026-11-19"
+  }
+ ],
+ "requirements": [
+  {
+   "id": "RP-01",
+   "brief_clause": "Build an AI-powered Amazon affiliate marketing platform that automates product research",
+   "asks_for": "A research capability that finds and evaluates products without a human doing the search.",
+   "state": "PARTIAL",
+   "what_exists": "A scoring module, an ASIN guard, a link builder and a tracking schema exist as code in tools/ (scoring.py, asin_guard.py, link_builder.py, tracking_schema.sql). What does not exist is a record of the module having chosen, ranked or rejected any real product.",
+   "what_is_missing": "A dated run of the research module against a real candidate set, with its output stored. Without that, 'AI-powered research' is a claim about code, not about results.",
+   "source_ids": [
+    "S80"
+   ],
+   "verified_against": "no official page defines what 'automates product research' must produce - file inspection only"
+  },
+  {
+   "id": "RP-02",
+   "brief_clause": "identifies trending and high-converting products, analyzes pricing, reviews, competition, and commission potential",
+   "asks_for": "Five measured signals per product: trend, conversion, price, review volume, competition, plus commission rate.",
+   "state": "NOT_MET",
+   "what_exists": "Nothing. No trend series, no conversion data, no stored price, no review count, no competitor set is published anywhere in this repository.",
+   "what_is_missing": "Every one of the five signals, for every product. Amazon does not expose price, rating or review count to an automated fetch; the per-category commission schedule is behind sign-in (recorded as the open irregularity on the Flagged page).",
+   "source_ids": [
+    "S80",
+    "S84"
+   ],
+   "verified_against": "repository-wide search on 2026-11-16 for stored price, rating and review-count values returned none outside the policy statements"
+  },
+  {
+   "id": "RP-03",
+   "brief_clause": "generates SEO-optimized product articles, comparisons, and buying guides",
+   "asks_for": "Three page types - single-product article, comparison, buying guide - written to rank.",
+   "state": "MET",
+   "what_exists": "All three page types exist and are published: 3 product articles (marketing/articles/p1..p3), a comparison (marketing/comparison.html) and a buying guide (marketing/buying-guide.html), plus 8 question-shaped guides.",
+   "what_is_missing": "Ranking is not something a repository can demonstrate; only Search Console can. That measurement is PQ-04 and it is the only honest way to call this 'optimized' rather than 'optimized for'.",
+   "source_ids": [
+    "S84",
+    "S85"
+   ],
+   "verified_against": "tools/build_sitemap.py published_pages() on 2026-11-16: all three types present and linked"
+  },
+  {
+   "id": "RP-04",
+   "brief_clause": "publish and manage affiliate links",
+   "asks_for": "Links that carry the owner's Associates ID and can be managed.",
+   "state": "NOT_MET",
+   "what_exists": "A policy-checking link builder that refuses a malformed tag (tools/link_builder.py) and a preview-link mode that emits clearly labelled, non-monetised links.",
+   "what_is_missing": "An Associates tag. Every product link on the site is a preview link and the site says so. As supplied, the three short links carry no tag parameter, so as supplied they cannot earn commission.",
+   "source_ids": [
+    "S80",
+    "S81"
+   ],
+   "verified_against": "marketing/data/facts.json associates_tag_configured = false; confirmed 2026-11-16"
+  },
+  {
+   "id": "RP-05",
+   "brief_clause": "track clicks and conversions",
+   "asks_for": "A measurement path from click to conversion.",
+   "state": "NOT_MET",
+   "what_exists": "Five event definitions and a SQL schema, with zero events live. The site is static and ships no analytics.",
+   "what_is_missing": "A collector, a consent posture, and a decision about which events are worth collecting. All three are undecided, so nothing is collected.",
+   "source_ids": [
+    "S81"
+   ],
+   "verified_against": "discovery/measurement.html: 5 defined events, 0 live, stated on the page"
+  },
+  {
+   "id": "RP-06",
+   "brief_clause": "continuously optimize campaigns to maximize affiliate revenue",
+   "asks_for": "A loop that changes the site in response to measured results.",
+   "state": "NOT_MET",
+   "what_exists": "Nothing to optimise against: no revenue, no click data, no conversion data, and no tagged link.",
+   "what_is_missing": "A first measured number. Any 'optimisation' before RP-04 and RP-05 exist would be optimisation of a guess.",
+   "source_ids": [],
+   "verified_against": "no official page can define an optimisation target for a site with no measured revenue - confirmed by reading discovery/measurement.html on 2026-11-16"
+  },
+  {
+   "id": "RP-07",
+   "brief_clause": "Prioritize automation, scalability, data-driven decisions",
+   "asks_for": "The system does the work repeatedly, without a person, and decides from data.",
+   "state": "PARTIAL",
+   "what_exists": "Automation of the verification and publishing machinery is real and extensive: 20-plus generators, 35 replayable CI steps, and a negative test proving each gate can fail.",
+   "what_is_missing": "Automation of the *commercial* work - research, selection, optimisation. The automation built so far is accuracy automation, which is not what this clause asks for.",
+   "source_ids": [
+    "S83"
+   ],
+   "verified_against": "no official page defines 'scalable' as a measurement - counted instead from the workflow and tools/ on 2026-11-16"
+  },
+  {
+   "id": "RP-08",
+   "brief_clause": "compliance with Amazon Associates policies and disclosure requirements",
+   "asks_for": "Every policy obligation met, with evidence.",
+   "state": "PARTIAL",
+   "what_exists": "The strongest part of the build: a control ledger of 20 rules mapped to implemented controls, the mandated sentence on every published page, rel=sponsored on outbound product links, a link builder that refuses non-compliant tags, and a build that fails if a page is missing the disclosure.",
+   "what_is_missing": "Three items that no amount of code can close: an approved account, a tagged link, and a site the owner owns on a domain the owner controls.",
+   "source_ids": [
+    "S80",
+    "S81",
+    "S82",
+    "S86"
+   ],
+   "verified_against": "tools/audit_site.py check_disclosure across 139 published pages on 2026-11-16"
+  },
+  {
+   "id": "RP-09",
+   "brief_clause": "The goal of this project is to collect, organize, and analyze utilizing a full list of requirements.",
+   "asks_for": "One complete requirements list, collected and analysed.",
+   "state": "PARTIAL",
+   "what_exists": "Two requirement registers already exist and both are machine-gated: ledger/requirements.json (programme and compliance, with a closed four-value status vocabulary) and ledger/readiness.json (Amazon's Application Review Process, row by row). This register is the third and the only one that traces the 2026-11-16 brief sentence by sentence.",
+   "what_is_missing": "A single joined view. The three registers currently have three different status vocabularies and no page reads all three at once; that is PS-03.",
+   "source_ids": [
+    "S81"
+   ],
+   "verified_against": "no official page defines what a complete requirements list must contain - counted by reading the three registers on 2026-11-16"
+  },
+  {
+   "id": "RP-10",
+   "brief_clause": "It should look like a polished marketing affiliate website ... It should not read like some AI slop website",
+   "asks_for": "A reader-facing surface that a shopper would trust, not a build artefact.",
+   "state": "NOT_MET",
+   "what_exists": "Good prose and a strict anti-slop rule set, enforced by a gate: a banned-phrase list, a no-superlative rule, sourced sentences, no price, no star rating, and a stated opinion in a labelled box.",
+   "what_is_missing": "The page anatomy a shopper uses to buy. Measured on 2026-11-16: the 20 marketing pages carry 0 product images, the 71 product links carry citation labels rather than buy labels, the hero's primary button leads to a page with no product link, and the site's front page is an operator dashboard. That is PD-01 to PD-08.",
+   "source_ids": [
+    "S83",
+    "S84",
+    "S85"
+   ],
+   "verified_against": "counted on 2026-11-16 across marketing/*.html (see the PM- rows)"
+  },
+  {
+   "id": "RP-11",
+   "brief_clause": "Create a section dedicated for suggestions so someone can review suggestions and choose the best path before implementing any changes.",
+   "asks_for": "A review section where the options are compared and chosen before anything is built.",
+   "state": "MET",
+   "what_exists": "Five suggestion surfaces already existed before this task (pages/suggestions.html with SG-01..SG-12, console/, audit/, discovery/, marketing/improvements.html), plus decisions/review.html added by this task, which is the first one that scores every proposal on one scale and tracks a recorded decision.",
+   "what_is_missing": "An actual owner decision. Every proposal on every board is still AWAITING_DECISION, and the boards are separate registers rather than one.",
+   "source_ids": [],
+   "verified_against": "no official page defines what a review board must look like - the six surfaces were counted on 2026-11-16; five pre-date this task"
+  },
+  {
+   "id": "RP-12",
+   "brief_clause": "I want a clear list of questions, informations and answers that need to be addressed before any decision can be reasonably made",
+   "asks_for": "Questions with their answers, and an explicit statement of what is unknown.",
+   "state": "PARTIAL",
+   "what_exists": "28 open questions across the existing registers (Q-01..Q-18 in the ledger, MQ-01..MQ-10 in the marketing set), each with what is known, what is missing and how to obtain it. Not one of them carries an answer, because the information to answer them is not in this repository.",
+   "what_is_missing": "The owner's answers, and 9 further questions (PQ-01..PQ-09) that only became visible once the brief was traced sentence by sentence.",
+   "source_ids": [
+    "S81",
+    "S82"
+   ],
+   "verified_against": "ledger/questions.json read on 2026-11-16: 18 rows, 0 answered"
+  },
+  {
+   "id": "RP-13",
+   "brief_clause": "Suggestions need to be made to discover missing information.",
+   "asks_for": "Proposals whose purpose is to surface what is not known.",
+   "state": "MET",
+   "what_exists": "PS-03 and PS-11 are exactly this: a discovery sprint that produces the missing numbers, and a habit of pricing every proposal by the question it waits on. Every PQ- row names a named, owned action rather than an aspiration.",
+   "what_is_missing": "Nothing structural in this register. The measurement that would prove it working is a first answered question, and none has been answered yet.",
+   "source_ids": [
+    "S82"
+   ],
+   "verified_against": "this register: 12 PQ- rows each carry a non-empty obtain field naming who acts"
+  },
+  {
+   "id": "RP-14",
+   "brief_clause": "Create an executive summary outlining important details.",
+   "asks_for": "One page a decision-maker can read in five minutes.",
+   "state": "MET",
+   "what_exists": "Three already: EXECUTIVE_SUMMARY.md at the repository root, summary.html as a published page, and zone2/docs/EXECUTIVE_SUMMARY.md. All three predate this task.",
+   "what_is_missing": "Nothing structural. The new decision surfaces are advertised from the root page footer so a reader of the summary can reach them.",
+   "source_ids": [],
+   "verified_against": "no official page defines the contents of an executive summary - the three files were confirmed on disk and in the sitemap on 2026-11-16"
+  },
+  {
+   "id": "RP-15",
+   "brief_clause": "Create a github page live site ... with a clean landing page and subpages organized by category ... simple dashboard ... table format",
+   "asks_for": "A live GitHub Pages site, a clean landing page, category subpages, and a dashboard-like table view.",
+   "state": "MET",
+   "what_exists": "139 pages are live at kanlerxz87-cyber.github.io/Zone2, deployed by Actions on every push to main, with a table-based research hub and a decision namespace organised by category.",
+   "what_is_missing": "The landing page at the site root is an operator dashboard rather than a shopper's front door; that is a design choice, and it is PD-06.",
+   "source_ids": [],
+   "verified_against": "no official page governs the arrangement of a GitHub Pages site - deployment confirmed through the GitHub Actions API on 2026-11-16"
+  },
+  {
+   "id": "RP-16",
+   "brief_clause": "Every table row must have a source link to an official site. If a value can't be confirmed from an official source, leave it blank and flag it as unverified. Never infer or fill in values.",
+   "asks_for": "Per-row provenance and blanks rather than guesses.",
+   "state": "MET",
+   "what_exists": "The repository's central invariant, and it is enforced rather than asserted: gates in at least six namespaces fail a row that has neither a resolvable official source nor an explicit unverified marker, and negative tests prove each gate can fail.",
+   "what_is_missing": "Nothing known. This is the practice this register reuses for itself.",
+   "source_ids": [],
+   "verified_against": "no official page states this rule - it is the project's own contract, checked instead by the six validators named in what_exists"
+  }
+ ],
+ "measurements": [
+  {
+   "id": "PM-01",
+   "measure": "Published HTML pages in the whole site",
+   "value": "139 (before this task; 144 after the five pages it adds)",
+   "how_measured": "python3 -c \"import sys;sys.path.insert(0,'tools');import build_sitemap as b;print(len(b.published_pages()))\" at the base commit 004a040, then again after rendering",
+   "means": "The site is large.",
+   "source_ids": []
+  },
+  {
+   "id": "PM-02",
+   "measure": "Published pages written for a shopper (marketing/ plus journal/)",
+   "value": "24 of 139 = 17.3% at the base commit (24 of 144 = 16.7% after this task)",
+   "how_measured": "same enumeration, counted by path prefix: marketing/ (20) + journal/ (4)",
+   "means": "About one page in six is for a buyer. The other 115 are for the operator or are working records. A crawler's first impression of the domain is the operator's dashboard.",
+   "source_ids": []
+  },
+  {
+   "id": "PM-03",
+   "measure": "Product photographs on the 20 marketing pages",
+   "value": "0",
+   "how_measured": "count of the img tag across marketing/*.html, marketing/topics/*.html and marketing/articles/*.html",
+   "means": "Every page that asks a reader to buy shows no picture of what it is selling. The design notes record that the image rights question is open.",
+   "source_ids": [
+    "S80"
+   ]
+  },
+  {
+   "id": "PM-04",
+   "measure": "Anchor text of the 71 product links on the marketing pages",
+   "value": "71 of 80 product links (89%) render as a citation label such as 'M4 · www.amazon.com Amazon listing'",
+   "how_measured": "counted every anchor on the 20 marketing pages whose href contains amazon.com/dp/ (80), and classified its visible text: 34 'M4 · …', 16 'M2 · …', 13 'M6 · …', 8 'www.amazon.com' = 71 citation-styled; the other 9 are three product-title links, a breadcrumb, a resolved-destination note and three bare URLs",
+   "means": "The most-clicked elements in an affiliate site read as footnotes. A shopper looking for a way to buy sees a source citation.",
+   "source_ids": [
+    "S86"
+   ]
+  },
+  {
+   "id": "PM-05",
+   "measure": "Product links on the page the hero's primary button opens",
+   "value": "0 of 3 pages",
+   "how_measured": "the hero primary action is marketing/buying-guide.html; that page, marketing/topics/index.html and marketing/topics/will-it-fit-your-counter.html contain no amazon.com/dp/ link",
+   "means": "The site's most prominent call to action leads to a dead end for a buyer.",
+   "source_ids": []
+  },
+  {
+   "id": "PM-06",
+   "measure": "Buying guides among the 13 guides, comparisons and articles",
+   "value": "0",
+   "how_measured": "no marketing page carries an ordered ranked list (<ol>) of two or more products; the three pages with two or more product links are an index, the improvement board and a flag page",
+   "means": "The one page type a shopper searches for by name ('best air fryer for...') does not exist. The buying guide that does exist explicitly declines to pick.",
+   "source_ids": [
+    "S85"
+   ]
+  },
+  {
+   "id": "PM-07",
+   "measure": "Author attribution across the 20 marketing pages",
+   "value": "0 named authors",
+   "how_measured": "search for an author byline, a person, or an editor on every marketing page",
+   "means": "Search guidance treats clear authorship as a trust signal and fabricated profiles as deception, so the only honest options are a real named editor or an explicit account of how the pages are made.",
+   "source_ids": [
+    "S83"
+   ]
+  },
+  {
+   "id": "PM-08",
+   "measure": "Links on the site root (index.html) navigation",
+   "value": "76 at the base commit (80 after this task adds one nav entry and three footer links)",
+   "how_measured": "count every anchor inside the nav element of index.html at the base commit, then on this tree",
+   "means": "A shopper's front door is an operator console with two groups of links before any product. This task adds one entry, deliberately, and no more: a bigger nav would make the finding worse.",
+   "source_ids": []
+  },
+  {
+   "id": "PM-09",
+   "measure": "Decision boards that publish proposals",
+   "value": "5 boards carry proposals today, 6 counting the decisions hub; 6 files in total",
+   "how_measured": "pages/suggestions.html, console/suggestions.html, audit/suggestions.html, discovery/suggestions.html, marketing/improvements.html carry proposals; decisions/index.html is a hub; review.html is this task's surface",
+   "means": "Several places ask for a decision and none results in a visible one. The exact count depends on whether the decisions hub is counted as a board - this row publishes both readings rather than picking one silently (see the verification record).",
+   "source_ids": []
+  },
+  {
+   "id": "PM-10",
+   "measure": "Open questions carrying an answer",
+   "value": "0 of 28",
+   "how_measured": "ledger/questions.json (18) plus marketing/data/editorial.json questions (10)",
+   "means": "Every decision on every board waits on information that is not in the repository. The blocking question is the same in most cases: no Associates account and no tagged link.",
+   "source_ids": [
+    "S81"
+   ]
+  },
+  {
+   "id": "PM-11",
+   "measure": "The three supplied short links, re-resolved live",
+   "value": "3 of 3 resolve, unchanged",
+   "how_measured": "fetch_page on each short link on 2026-11-16; destinations B0CDY277D3, B09B7SB46R, B08DKYBTPH",
+   "means": "The destinations are stable across days. The supplied codes remain 9 characters and the links still carry no Associates tag.",
+   "source_ids": [
+    "S88",
+    "S89",
+    "S90"
+   ]
+  },
+  {
+   "id": "PM-12",
+   "measure": "Pages dated in a way that will age",
+   "value": "Every marketing page prints a verification date of 2026-11-14 or 2026-11-15",
+   "how_measured": "search for the printed date on each marketing page",
+   "means": "Amazon asks that site content generally be within the last 60 days. A visitor in January sees a site that announces it is stale, and the date is doing the opposite of the job it was added for.",
+   "source_ids": [
+    "S82"
+   ]
+  },
+  {
+   "id": "PM-13",
+   "measure": "Methodology vocabulary vs product vocabulary in the visible prose of the 20 marketing pages",
+   "value": "548 methodology words against 860 product words (ratio 0.64) in 32,168 visible words",
+   "how_measured": "strip tags from every marketing page, count whole-word occurrences of a fixed 11-word methodology list (verified, source, sourced, official, blank, method, methodology, flag, unverified, disclosure, conflict) and a fixed 10-term product list (air fryer, basket, quart, qt, preset, temperature, watt, °F, door, rack)",
+   "means": "Roughly two words of methodology for every three of product. Not the dominant subject, but far too high a share for a buyer-facing page, and the reason a reader meets the audit trail before the appliance.",
+   "source_ids": []
+  },
+  {
+   "id": "PM-14",
+   "measure": "Search Console verification tags in the committed tree",
+   "value": "0 of 226 published HTML pages",
+   "how_measured": "grep -rl 'google-site-verification' --include='*.html' . | wc -l, run 2026-11-19; page count from tools/build_sitemap.published_pages()",
+   "means": "No search property is claimed; PQ-04 and PQ-10 stay open, and PW-03 waits on them.",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PM-15",
+   "measure": "Visibility of the five review pages in the deployed artifact",
+   "value": "0 of 5 review pages are among the 16 indexable reader URLs; all five deploy noindex",
+   "how_measured": "python3 -c \"import sys;sys.path.insert(0,'tools');import publication as p;print([x for x in p.indexable_paths() if 'review' in x])\" returned [], 2026-11-19",
+   "means": "The wave-1 ideas had no route to a searcher; PD-10's premise.",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PM-16",
+   "measure": "Recorded decisions on this register at the wave-2 rebuild",
+   "value": "12 of 12 proposals awaiting a decision; 0 of 9 questions answered",
+   "how_measured": "json counts over docs/review-board.json, 2026-11-19 (before wave 2 was appended)",
+   "means": "PI-03's pattern continues; PW-06's premise.",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PM-17",
+   "measure": "Guide pages under guides/",
+   "value": "20 HTML files on 2026-11-19 (the wave-1 prose printed 13)",
+   "how_measured": "ls guides/*.html | wc -l",
+   "means": "The content set the unclaimed mobile pass would cover keeps growing; PW-07's premise.",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PM-18",
+   "measure": "Voice / banned-phrase enforcement in the build",
+   "value": "0 verifier rules scan generated prose for filler phrases",
+   "how_measured": "grep -rniE 'look no further|fast-paced|game-changer|in today' tools/*.py found no enforcement rule; verify_publication checks anchors and row counts, not prose fillers (2026-11-19)",
+   "means": "PW-01's premise: the drift the design diagnosis measured could return without any gate failing.",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  }
+ ],
+ "proposals": [
+  {
+   "id": "PS-01",
+   "title": "Give the site a shopper-facing front door and move the operator console behind it",
+   "area": "Information architecture",
+   "problem": "The repository root is, by measurement, an operator dashboard: 76 navigation links in two groups, a KPI band, requirement counts and a compliance ledger. It should be the front door, and Amazon's IP License requires the site's principal purpose to be marketing Amazon products and driving sales (S80). A front page that leads with the project's own bookkeeping satisfies neither the reader nor the clause.",
+   "options": [
     {
-      "id": "S80",
-      "publisher": "Amazon Associates Central",
-      "kind": "official-amazon",
-      "title": "Associates Program Policies (page states Updated: April 14, 2026) - IP License and Usage Requirements",
-      "url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "quote": "You will not use Creators API, PA API, Data Feeds, or Product Advertising Content with any site or application, or in any other manner, that does not have the principal purpose of advertising and marketing an Amazon Site and driving sales of products and services on an Amazon Site.",
-      "used_for": "PS-01, and the requirements trace RP-01/RP-02: the site's principal purpose test, which shapes what the whole design has to look like."
+     "id": "A",
+     "label": "Keep the dashboard at the root and put a shopper entry point above the fold",
+     "commitment": "One root edit, no moves, no redirects. The dashboard stays at the same URL and gains a single hero band that leads to the buying content.",
+     "cost": "About one session. No URL changes, so nothing that already links here breaks.",
+     "risk": "The root still reads as a console the moment a reader scrolls; the fix is cosmetic at the page level.",
+     "waits_on": []
     },
     {
-      "id": "S81",
-      "publisher": "Amazon Associates Central",
-      "kind": "official-amazon",
-      "title": "Help - Application Review Process",
-      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
-      "quote": "All Sites must have robust original content (even when advertising is removed) - a good rule of thumb is at least 10 posts. They must be publicly available (for example, they should not be a closed group, or behind a paywall).",
-      "used_for": "PS-04, PS-05, RP-05: the content scale and originality bar, and the posts rule of thumb, that a launch has to clear."
+     "id": "B",
+     "label": "Move the operator dashboard to /console/ and make the root a publication front page",
+     "commitment": "A real URL move, permanent redirects from the old paths, the sitemap regenerated, and every one of the 76 internal links re-pointed and re-checked.",
+     "cost": "Two or three sessions, dominated by link repair and by the audit that must prove zero new broken links.",
+     "risk": "Highest blast radius of any option on this board. The repository has 139 pages and a sitemap gate; a partial move fails the build.",
+     "waits_on": []
     },
     {
-      "id": "S82",
-      "publisher": "Amazon Associates Central",
-      "kind": "official-amazon",
-      "title": "Help - Application Review Process, Websites section",
-      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
-      "quote": "Content on your website must be recent (generally within the last 60 days). You must own your website.",
-      "used_for": "PS-06, PQ-06, RR-04: the freshness and ownership conditions, and the reason a dated page is a liability rather than a proof of care."
-    },
-    {
-      "id": "S83",
-      "publisher": "Google Search Central",
-      "kind": "official-search",
-      "title": "Creating helpful, reliable, people-first content (page states Last updated 2026-10-05 UTC)",
-      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-      "quote": "The extent to which human work went into creating the content or the systems powering it. For example, writing original analysis, translating a poem manually, or building a custom interactive map for a game represents high effort. Conversely, automatically generating pages from feeds or using generative AI to produce large amounts of text without manual oversight or curation represents little to no effort.",
-      "used_for": "PS-02, PD-03, RR-02/RR-03: why a page whose visible subject is its own sourcing discipline scores worse than it deserves, and why automation must be disclosed rather than hidden."
-    },
-    {
-      "id": "S84",
-      "publisher": "Google Search Central",
-      "kind": "official-search",
-      "title": "Spam Policies for Google Web Search - Thin affiliation",
-      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
-      "quote": "Not every site that participates in an affiliate program is a thin affiliate. Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.",
-      "used_for": "PS-02, PS-08, RP-03: the affirmative list a site has to satisfy, not merely avoid violating."
-    },
-    {
-      "id": "S85",
-      "publisher": "Google Search Central",
-      "kind": "official-search",
-      "title": "Write high quality reviews (page states Last updated 2025-12-10 UTC)",
-      "url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
-      "quote": "Ensure there is enough useful content in your ranked lists for them to stand on their own, even if you choose to write separate in-depth single reviews.",
-      "used_for": "PS-07, PS-08: the standard for a buying guide page, which is the page type that converts."
-    },
-    {
-      "id": "S86",
-      "publisher": "Federal Trade Commission",
-      "kind": "official-legal",
-      "title": "Disclosures 101 for Social Media Influencers (page states November 2019)",
-      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
-      "quote": "The disclosure should be placed with the endorsement message itself.",
-      "used_for": "PS-10, RR-06: the required position of the disclosure relative to the link, which is why it may not live only in a footer."
-    },
-    {
-      "id": "S87",
-      "publisher": "Federal Trade Commission",
-      "kind": "official-legal",
-      "title": "Disclosures 101 for Social Media Influencers (page states November 2019) - What Else to Know",
-      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
-      "quote": "You can't talk about your experience with a product you haven't tried.",
-      "used_for": "PS-09, PQ-11: the constraint that forbids first-person experience claims while no product has been used, and therefore forbids most of the ordinary review voice."
-    },
-    {
-      "id": "S88",
-      "publisher": "Amazon.com",
-      "kind": "official-amazon",
-      "title": "Amazon product detail page reached by supplied short link 1",
-      "url": "https://www.amazon.com/dp/B0CDY277D3",
-      "quote": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
-      "used_for": "RR-01: the title of the listing the first supplied link resolves to, observed again on 2026-11-16."
-    },
-    {
-      "id": "S89",
-      "publisher": "Amazon.com",
-      "kind": "official-amazon",
-      "title": "Amazon product detail page reached by supplied short link 2",
-      "url": "https://www.amazon.com/dp/B09B7SB46R",
-      "quote": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
-      "used_for": "RR-01: the title of the listing the second supplied link resolves to, observed again on 2026-11-16."
-    },
-    {
-      "id": "S90",
-      "publisher": "Amazon.com",
-      "kind": "official-amazon",
-      "title": "Amazon product detail page reached by supplied short link 3",
-      "url": "https://www.amazon.com/dp/B08DKYBTPH",
-      "quote": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450 degrees F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
-      "used_for": "RR-01: the title of the listing the third supplied link resolves to, observed again on 2026-11-16."
+     "id": "C",
+     "label": "Publish the reader front page at a subpath and advertise it from the root",
+     "commitment": "No move at all: marketing/index.html already is a publication front page, so this is a launcher band on the root plus a clearer label in the navigation.",
+     "cost": "Under one session. Fully reversible.",
+     "risk": "A crawler still lands on the dashboard first, so the principal-purpose reading in S80 is unchanged.",
+     "waits_on": []
     }
-  ],
-  "requirements": [
+   ],
+   "recommendation": "C as the reversible first step, then A once a tagged link exists, then B only if search performance shows the root is what a crawler judges.",
+   "evidence": [
+    "S80",
+    "S83"
+   ],
+   "waiting_on": [
+    "PQ-01"
+   ],
+   "quality_impact": 5,
+   "conversion_impact": 4,
+   "risk": 1,
+   "effort": 1,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-02",
+   "title": "Make the site's subject the products, and its method a feature rather than the subject",
+   "area": "Editorial stance",
+   "problem": "The pages are exceptionally well sourced, and almost all of them talk about their own sourcing. Reading marketing/index.html end to end, the recurring subject is the discipline of the page rather than the air fryer. Google's helpful-content guidance rewards effort and originality but asks whether the content is about the thing the reader came for; the same guidance says automation should be disclosed, not that the disclosure should be the content. A shopper searching 'air fryer for a family of four' wants the answer first and the method on a linked page.",
+   "options": [
     {
-      "id": "RP-01",
-      "brief_clause": "Build an AI-powered Amazon affiliate marketing platform that automates product research",
-      "asks_for": "A research capability that finds and evaluates products without a human doing the search.",
-      "state": "PARTIAL",
-      "what_exists": "A scoring module, an ASIN guard, a link builder and a tracking schema exist as code in tools/ (scoring.py, asin_guard.py, link_builder.py, tracking_schema.sql). What does not exist is a record of the module having chosen, ranked or rejected any real product.",
-      "what_is_missing": "A dated run of the research module against a real candidate set, with its output stored. Without that, 'AI-powered research' is a claim about code, not about results.",
-      "source_ids": [
-        "S80"
-      ],
-      "verified_against": "no official page defines what 'automates product research' must produce - file inspection only"
+     "id": "A",
+     "label": "Lead every page with the answer, and move the methodology to one page it links to",
+     "commitment": "An editorial rewrite of 9 page openers. No fact changes: every number and citation stays, and the voice gate keeps failing banned phrases, superlatives and unsourced claims.",
+     "cost": "One focused session for the openers; the remainder of each page can stay as it is.",
+     "risk": "Low, and it is the only option that changes what a reader sees first.",
+     "waits_on": []
     },
     {
-      "id": "RP-02",
-      "brief_clause": "identifies trending and high-converting products, analyzes pricing, reviews, competition, and commission potential",
-      "asks_for": "Five measured signals per product: trend, conversion, price, review volume, competition, plus commission rate.",
-      "state": "NOT_MET",
-      "what_exists": "Nothing. No trend series, no conversion data, no stored price, no review count, no competitor set is published anywhere in this repository.",
-      "what_is_missing": "Every one of the five signals, for every product. Amazon does not expose price, rating or review count to an automated fetch; the per-category commission schedule is behind sign-in (recorded as the open irregularity on the Flagged page).",
-      "source_ids": [
-        "S80",
-        "S84"
-      ],
-      "verified_against": "repository-wide search on 2026-11-16 for stored price, rating and review-count values returned none outside the policy statements"
+     "id": "B",
+     "label": "Keep the method-first voice and treat transparency as the differentiator",
+     "commitment": "No rewrite. Accept that the audience is a reader who wants the audit trail.",
+     "cost": "Zero.",
+     "risk": "It is a defensible position for a specialist publication and a poor one for a site whose purpose is to send buyers to Amazon. It also leaves PM-03 to PM-08 untouched.",
+     "waits_on": []
     },
     {
-      "id": "RP-03",
-      "brief_clause": "generates SEO-optimized product articles, comparisons, and buying guides",
-      "asks_for": "Three page types - single-product article, comparison, buying guide - written to rank.",
-      "state": "MET",
-      "what_exists": "All three page types exist and are published: 3 product articles (marketing/articles/p1..p3), a comparison (marketing/comparison.html) and a buying guide (marketing/buying-guide.html), plus 8 question-shaped guides.",
-      "what_is_missing": "Ranking is not something a repository can demonstrate; only Search Console can. That measurement is PQ-04 and it is the only honest way to call this 'optimized' rather than 'optimized for'.",
-      "source_ids": [
-        "S84",
-        "S85"
-      ],
-      "verified_against": "tools/build_sitemap.py published_pages() on 2026-11-16: all three types present and linked"
-    },
-    {
-      "id": "RP-04",
-      "brief_clause": "publish and manage affiliate links",
-      "asks_for": "Links that carry the owner's Associates ID and can be managed.",
-      "state": "NOT_MET",
-      "what_exists": "A policy-checking link builder that refuses a malformed tag (tools/link_builder.py) and a preview-link mode that emits clearly labelled, non-monetised links.",
-      "what_is_missing": "An Associates tag. Every product link on the site is a preview link and the site says so. As supplied, the three short links carry no tag parameter, so as supplied they cannot earn commission.",
-      "source_ids": [
-        "S80",
-        "S81"
-      ],
-      "verified_against": "marketing/data/facts.json associates_tag_configured = false; confirmed 2026-11-16"
-    },
-    {
-      "id": "RP-05",
-      "brief_clause": "track clicks and conversions",
-      "asks_for": "A measurement path from click to conversion.",
-      "state": "NOT_MET",
-      "what_exists": "Five event definitions and a SQL schema, with zero events live. The site is static and ships no analytics.",
-      "what_is_missing": "A collector, a consent posture, and a decision about which events are worth collecting. All three are undecided, so nothing is collected.",
-      "source_ids": [
-        "S81"
-      ],
-      "verified_against": "discovery/measurement.html: 5 defined events, 0 live, stated on the page"
-    },
-    {
-      "id": "RP-06",
-      "brief_clause": "continuously optimize campaigns to maximize affiliate revenue",
-      "asks_for": "A loop that changes the site in response to measured results.",
-      "state": "NOT_MET",
-      "what_exists": "Nothing to optimise against: no revenue, no click data, no conversion data, and no tagged link.",
-      "what_is_missing": "A first measured number. Any 'optimisation' before RP-04 and RP-05 exist would be optimisation of a guess.",
-      "source_ids": [],
-      "verified_against": "no official page can define an optimisation target for a site with no measured revenue - confirmed by reading discovery/measurement.html on 2026-11-16"
-    },
-    {
-      "id": "RP-07",
-      "brief_clause": "Prioritize automation, scalability, data-driven decisions",
-      "asks_for": "The system does the work repeatedly, without a person, and decides from data.",
-      "state": "PARTIAL",
-      "what_exists": "Automation of the verification and publishing machinery is real and extensive: 20-plus generators, 35 replayable CI steps, and a negative test proving each gate can fail.",
-      "what_is_missing": "Automation of the *commercial* work - research, selection, optimisation. The automation built so far is accuracy automation, which is not what this clause asks for.",
-      "source_ids": [
-        "S83"
-      ],
-      "verified_against": "no official page defines 'scalable' as a measurement - counted instead from the workflow and tools/ on 2026-11-16"
-    },
-    {
-      "id": "RP-08",
-      "brief_clause": "compliance with Amazon Associates policies and disclosure requirements",
-      "asks_for": "Every policy obligation met, with evidence.",
-      "state": "PARTIAL",
-      "what_exists": "The strongest part of the build: a control ledger of 20 rules mapped to implemented controls, the mandated sentence on every published page, rel=sponsored on outbound product links, a link builder that refuses non-compliant tags, and a build that fails if a page is missing the disclosure.",
-      "what_is_missing": "Three items that no amount of code can close: an approved account, a tagged link, and a site the owner owns on a domain the owner controls.",
-      "source_ids": [
-        "S80",
-        "S81",
-        "S82",
-        "S86"
-      ],
-      "verified_against": "tools/audit_site.py check_disclosure across 139 published pages on 2026-11-16"
-    },
-    {
-      "id": "RP-09",
-      "brief_clause": "The goal of this project is to collect, organize, and analyze utilizing a full list of requirements.",
-      "asks_for": "One complete requirements list, collected and analysed.",
-      "state": "PARTIAL",
-      "what_exists": "Two requirement registers already exist and both are machine-gated: ledger/requirements.json (programme and compliance, with a closed four-value status vocabulary) and ledger/readiness.json (Amazon's Application Review Process, row by row). This register is the third and the only one that traces the 2026-11-16 brief sentence by sentence.",
-      "what_is_missing": "A single joined view. The three registers currently have three different status vocabularies and no page reads all three at once; that is PS-03.",
-      "source_ids": [
-        "S81"
-      ],
-      "verified_against": "no official page defines what a complete requirements list must contain - counted by reading the three registers on 2026-11-16"
-    },
-    {
-      "id": "RP-10",
-      "brief_clause": "It should look like a polished marketing affiliate website ... It should not read like some AI slop website",
-      "asks_for": "A reader-facing surface that a shopper would trust, not a build artefact.",
-      "state": "NOT_MET",
-      "what_exists": "Good prose and a strict anti-slop rule set, enforced by a gate: a banned-phrase list, a no-superlative rule, sourced sentences, no price, no star rating, and a stated opinion in a labelled box.",
-      "what_is_missing": "The page anatomy a shopper uses to buy. Measured on 2026-11-16: the 20 marketing pages carry 0 product images, the 71 product links carry citation labels rather than buy labels, the hero's primary button leads to a page with no product link, and the site's front page is an operator dashboard. That is PD-01 to PD-08.",
-      "source_ids": [
-        "S83",
-        "S84",
-        "S85"
-      ],
-      "verified_against": "counted on 2026-11-16 across marketing/*.html (see the PM- rows)"
-    },
-    {
-      "id": "RP-11",
-      "brief_clause": "Create a section dedicated for suggestions so someone can review suggestions and choose the best path before implementing any changes.",
-      "asks_for": "A review section where the options are compared and chosen before anything is built.",
-      "state": "MET",
-      "what_exists": "Five suggestion surfaces already existed before this task (pages/suggestions.html with SG-01..SG-12, console/, audit/, discovery/, marketing/improvements.html), plus decisions/review.html added by this task, which is the first one that scores every proposal on one scale and tracks a recorded decision.",
-      "what_is_missing": "An actual owner decision. Every proposal on every board is still AWAITING_DECISION, and the boards are separate registers rather than one.",
-      "source_ids": [],
-      "verified_against": "no official page defines what a review board must look like - the six surfaces were counted on 2026-11-16; five pre-date this task"
-    },
-    {
-      "id": "RP-12",
-      "brief_clause": "I want a clear list of questions, informations and answers that need to be addressed before any decision can be reasonably made",
-      "asks_for": "Questions with their answers, and an explicit statement of what is unknown.",
-      "state": "PARTIAL",
-      "what_exists": "28 open questions across the existing registers (Q-01..Q-18 in the ledger, MQ-01..MQ-10 in the marketing set), each with what is known, what is missing and how to obtain it. Not one of them carries an answer, because the information to answer them is not in this repository.",
-      "what_is_missing": "The owner's answers, and 9 further questions (PQ-01..PQ-09) that only became visible once the brief was traced sentence by sentence.",
-      "source_ids": [
-        "S81",
-        "S82"
-      ],
-      "verified_against": "ledger/questions.json read on 2026-11-16: 18 rows, 0 answered"
-    },
-    {
-      "id": "RP-13",
-      "brief_clause": "Suggestions need to be made to discover missing information.",
-      "asks_for": "Proposals whose purpose is to surface what is not known.",
-      "state": "MET",
-      "what_exists": "PS-03 and PS-11 are exactly this: a discovery sprint that produces the missing numbers, and a habit of pricing every proposal by the question it waits on. Every PQ- row names a named, owned action rather than an aspiration.",
-      "what_is_missing": "Nothing structural in this register. The measurement that would prove it working is a first answered question, and none has been answered yet.",
-      "source_ids": [
-        "S82"
-      ],
-      "verified_against": "this register: 12 PQ- rows each carry a non-empty obtain field naming who acts"
-    },
-    {
-      "id": "RP-14",
-      "brief_clause": "Create an executive summary outlining important details.",
-      "asks_for": "One page a decision-maker can read in five minutes.",
-      "state": "MET",
-      "what_exists": "Three already: EXECUTIVE_SUMMARY.md at the repository root, summary.html as a published page, and zone2/docs/EXECUTIVE_SUMMARY.md. All three predate this task.",
-      "what_is_missing": "Nothing structural. The new decision surfaces are advertised from the root page footer so a reader of the summary can reach them.",
-      "source_ids": [],
-      "verified_against": "no official page defines the contents of an executive summary - the three files were confirmed on disk and in the sitemap on 2026-11-16"
-    },
-    {
-      "id": "RP-15",
-      "brief_clause": "Create a github page live site ... with a clean landing page and subpages organized by category ... simple dashboard ... table format",
-      "asks_for": "A live GitHub Pages site, a clean landing page, category subpages, and a dashboard-like table view.",
-      "state": "MET",
-      "what_exists": "139 pages are live at kanlerxz87-cyber.github.io/Zone2, deployed by Actions on every push to main, with a table-based research hub and a decision namespace organised by category.",
-      "what_is_missing": "The landing page at the site root is an operator dashboard rather than a shopper's front door; that is a design choice, and it is PD-06.",
-      "source_ids": [],
-      "verified_against": "no official page governs the arrangement of a GitHub Pages site - deployment confirmed through the GitHub Actions API on 2026-11-16"
-    },
-    {
-      "id": "RP-16",
-      "brief_clause": "Every table row must have a source link to an official site. If a value can't be confirmed from an official source, leave it blank and flag it as unverified. Never infer or fill in values.",
-      "asks_for": "Per-row provenance and blanks rather than guesses.",
-      "state": "MET",
-      "what_exists": "The repository's central invariant, and it is enforced rather than asserted: gates in at least six namespaces fail a row that has neither a resolvable official source nor an explicit unverified marker, and negative tests prove each gate can fail.",
-      "what_is_missing": "Nothing known. This is the practice this register reuses for itself.",
-      "source_ids": [],
-      "verified_against": "no official page states this rule - it is the project's own contract, checked instead by the six validators named in what_exists"
+     "id": "C",
+     "label": "Split the site: a shopper publication and a separate evidence publication",
+     "commitment": "Two audiences, two navigation trees, one shared data layer.",
+     "cost": "Largest content change on this board; every page has to be assigned to one side.",
+     "risk": "Doubles the surface that must each carry a disclosure and each be kept fresh within 60 days.",
+     "waits_on": []
     }
-  ],
-  "measurements": [
+   ],
+   "recommendation": "A. It is the change the complaint names, it is reversible, and it changes no fact.",
+   "evidence": [
+    "S83",
+    "S84"
+   ],
+   "waiting_on": [],
+   "quality_impact": 5,
+   "conversion_impact": 4,
+   "risk": 2,
+   "effort": 3,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-03",
+   "title": "Run one discovery sprint against the five signals the brief asks for, and publish the result even if the result is 'not obtainable'",
+   "area": "Missing information",
+   "problem": "Three registers already ask questions; none of them produces the numbers the brief's own second clause depends on. Price, review volume, competition and commission rate are all absent, and RP-02 is the only requirement row that is entirely NOT_MET. Asking better questions has not worked for several waves because the answers live outside the repository.",
+   "options": [
     {
-      "id": "PM-01",
-      "measure": "Published HTML pages in the whole site",
-      "value": "139 (before this task; 144 after the five pages it adds)",
-      "how_measured": "python3 -c \"import sys;sys.path.insert(0,'tools');import build_sitemap as b;print(len(b.published_pages()))\" at the base commit 004a040, then again after rendering",
-      "means": "The site is large.",
-      "source_ids": []
+     "id": "A",
+     "label": "A dated, one-session research pass per product with every value either sourced or recorded as unobtainable",
+     "commitment": "Three products, one page of output, one source per value, and an explicit 'not obtainable by automated fetch' where that is the truth.",
+     "cost": "One session. Produces a datable artefact rather than a plan.",
+     "risk": "Some of the five signals may come back unobtainable, which makes the brief's clause unmet in public - the correct outcome, and the opposite of what a marketing page wants to say.",
+     "waits_on": []
     },
     {
-      "id": "PM-02",
-      "measure": "Published pages written for a shopper (marketing/ plus journal/)",
-      "value": "24 of 139 = 17.3% at the base commit (24 of 144 = 16.7% after this task)",
-      "how_measured": "same enumeration, counted by path prefix: marketing/ (20) + journal/ (4)",
-      "means": "About one page in six is for a buyer. The other 115 are for the operator or are working records. A crawler's first impression of the domain is the operator's dashboard.",
-      "source_ids": []
+     "id": "B",
+     "label": "Wait for an approved Associates account, then use the API",
+     "commitment": "Depends on PQ-01 and PQ-02 closing first.",
+     "cost": "Unknown, and outside this project's control.",
+     "risk": "Blocks every commercial requirement behind an approval that has not happened.",
+     "waits_on": [
+      "PQ-01",
+      "PQ-02"
+     ]
     },
     {
-      "id": "PM-03",
-      "measure": "Product photographs on the 20 marketing pages",
-      "value": "0",
-      "how_measured": "count of the img tag across marketing/*.html, marketing/topics/*.html and marketing/articles/*.html",
-      "means": "Every page that asks a reader to buy shows no picture of what it is selling. The design notes record that the image rights question is open.",
-      "source_ids": [
-        "S80"
-      ]
-    },
-    {
-      "id": "PM-04",
-      "measure": "Anchor text of the 71 product links on the marketing pages",
-      "value": "71 of 80 product links (89%) render as a citation label such as 'M4 · www.amazon.com Amazon listing'",
-      "how_measured": "counted every anchor on the 20 marketing pages whose href contains amazon.com/dp/ (80), and classified its visible text: 34 'M4 · …', 16 'M2 · …', 13 'M6 · …', 8 'www.amazon.com' = 71 citation-styled; the other 9 are three product-title links, a breadcrumb, a resolved-destination note and three bare URLs",
-      "means": "The most-clicked elements in an affiliate site read as footnotes. A shopper looking for a way to buy sees a source citation.",
-      "source_ids": [
-        "S86"
-      ]
-    },
-    {
-      "id": "PM-05",
-      "measure": "Product links on the page the hero's primary button opens",
-      "value": "0 of 3 pages",
-      "how_measured": "the hero primary action is marketing/buying-guide.html; that page, marketing/topics/index.html and marketing/topics/will-it-fit-your-counter.html contain no amazon.com/dp/ link",
-      "means": "The site's most prominent call to action leads to a dead end for a buyer.",
-      "source_ids": []
-    },
-    {
-      "id": "PM-06",
-      "measure": "Buying guides among the 13 guides, comparisons and articles",
-      "value": "0",
-      "how_measured": "no marketing page carries an ordered ranked list (<ol>) of two or more products; the three pages with two or more product links are an index, the improvement board and a flag page",
-      "means": "The one page type a shopper searches for by name ('best air fryer for...') does not exist. The buying guide that does exist explicitly declines to pick.",
-      "source_ids": [
-        "S85"
-      ]
-    },
-    {
-      "id": "PM-07",
-      "measure": "Author attribution across the 20 marketing pages",
-      "value": "0 named authors",
-      "how_measured": "search for an author byline, a person, or an editor on every marketing page",
-      "means": "Search guidance treats clear authorship as a trust signal and fabricated profiles as deception, so the only honest options are a real named editor or an explicit account of how the pages are made.",
-      "source_ids": [
-        "S83"
-      ]
-    },
-    {
-      "id": "PM-08",
-      "measure": "Links on the site root (index.html) navigation",
-      "value": "76 at the base commit (80 after this task adds one nav entry and three footer links)",
-      "how_measured": "count every anchor inside the nav element of index.html at the base commit, then on this tree",
-      "means": "A shopper's front door is an operator console with two groups of links before any product. This task adds one entry, deliberately, and no more: a bigger nav would make the finding worse.",
-      "source_ids": []
-    },
-    {
-      "id": "PM-09",
-      "measure": "Decision boards that publish proposals",
-      "value": "5 boards carry proposals today, 6 counting the decisions hub; 6 files in total",
-      "how_measured": "pages/suggestions.html, console/suggestions.html, audit/suggestions.html, discovery/suggestions.html, marketing/improvements.html carry proposals; decisions/index.html is a hub; review.html is this task's surface",
-      "means": "Several places ask for a decision and none results in a visible one. The exact count depends on whether the decisions hub is counted as a board - this row publishes both readings rather than picking one silently (see the verification record).",
-      "source_ids": []
-    },
-    {
-      "id": "PM-10",
-      "measure": "Open questions carrying an answer",
-      "value": "0 of 28",
-      "how_measured": "ledger/questions.json (18) plus marketing/data/editorial.json questions (10)",
-      "means": "Every decision on every board waits on information that is not in the repository. The blocking question is the same in most cases: no Associates account and no tagged link.",
-      "source_ids": [
-        "S81"
-      ]
-    },
-    {
-      "id": "PM-11",
-      "measure": "The three supplied short links, re-resolved live",
-      "value": "3 of 3 resolve, unchanged",
-      "how_measured": "fetch_page on each short link on 2026-11-16; destinations B0CDY277D3, B09B7SB46R, B08DKYBTPH",
-      "means": "The destinations are stable across days. The supplied codes remain 9 characters and the links still carry no Associates tag.",
-      "source_ids": [
-        "S88",
-        "S89",
-        "S90"
-      ]
-    },
-    {
-      "id": "PM-12",
-      "measure": "Pages dated in a way that will age",
-      "value": "Every marketing page prints a verification date of 2026-11-14 or 2026-11-15",
-      "how_measured": "search for the printed date on each marketing page",
-      "means": "Amazon asks that site content generally be within the last 60 days. A visitor in January sees a site that announces it is stale, and the date is doing the opposite of the job it was added for.",
-      "source_ids": [
-        "S82"
-      ]
-    },
-    {
-      "id": "PM-13",
-      "measure": "Methodology vocabulary vs product vocabulary in the visible prose of the 20 marketing pages",
-      "value": "548 methodology words against 860 product words (ratio 0.64) in 32,168 visible words",
-      "how_measured": "strip tags from every marketing page, count whole-word occurrences of a fixed 11-word methodology list (verified, source, sourced, official, blank, method, methodology, flag, unverified, disclosure, conflict) and a fixed 10-term product list (air fryer, basket, quart, qt, preset, temperature, watt, °F, door, rack)",
-      "means": "Roughly two words of methodology for every three of product. Not the dominant subject, but far too high a share for a buyer-facing page, and the reason a reader meets the audit trail before the appliance.",
-      "source_ids": []
+     "id": "C",
+     "label": "Use a third-party keyword or trend tool instead of Amazon data",
+     "commitment": "A subscription, a vendor, and a licence to cite their numbers.",
+     "cost": "A recurring fee, and a dataset we do not own.",
+     "risk": "Third-party numbers would sit beside official ones with no shared provenance, which is the exact failure mode this repository was built to prevent.",
+     "waits_on": [
+      "PQ-03"
+     ]
     }
-  ],
-  "proposals": [
+   ],
+   "recommendation": "A now, and B the day the account is approved. C only if A returns unobtainable for most of the five.",
+   "evidence": [
+    "S80",
+    "S81"
+   ],
+   "waiting_on": [],
+   "quality_impact": 4,
+   "conversion_impact": 5,
+   "risk": 2,
+   "effort": 2,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-04",
+   "title": "Publish the shortlist page a shopper actually searches for",
+   "area": "Page inventory",
+   "problem": "No page on the site contains a ranked shortlist. The buying guide explicitly declines to name a winner, on the sound principle that the specs do not separate the three models. But 'which one to buy' is the query, and Google's review guidance asks that ranked lists stand on their own. Declining to rank is a defensible editorial position and a poor commercial one, and the brief's whole purpose is to make the sale.",
+   "options": [
     {
-      "id": "PS-01",
-      "title": "Give the site a shopper-facing front door and move the operator console behind it",
-      "area": "Information architecture",
-      "problem": "The repository root is, by measurement, an operator dashboard: 76 navigation links in two groups, a KPI band, requirement counts and a compliance ledger. It should be the front door, and Amazon's IP License requires the site's principal purpose to be marketing Amazon products and driving sales (S80). A front page that leads with the project's own bookkeeping satisfies neither the reader nor the clause.",
-      "options": [
-        {
-          "id": "A",
-          "label": "Keep the dashboard at the root and put a shopper entry point above the fold",
-          "commitment": "One root edit, no moves, no redirects. The dashboard stays at the same URL and gains a single hero band that leads to the buying content.",
-          "cost": "About one session. No URL changes, so nothing that already links here breaks.",
-          "risk": "The root still reads as a console the moment a reader scrolls; the fix is cosmetic at the page level.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Move the operator dashboard to /console/ and make the root a publication front page",
-          "commitment": "A real URL move, permanent redirects from the old paths, the sitemap regenerated, and every one of the 76 internal links re-pointed and re-checked.",
-          "cost": "Two or three sessions, dominated by link repair and by the audit that must prove zero new broken links.",
-          "risk": "Highest blast radius of any option on this board. The repository has 139 pages and a sitemap gate; a partial move fails the build.",
-          "waits_on": []
-        },
-        {
-          "id": "C",
-          "label": "Publish the reader front page at a subpath and advertise it from the root",
-          "commitment": "No move at all: marketing/index.html already is a publication front page, so this is a launcher band on the root plus a clearer label in the navigation.",
-          "cost": "Under one session. Fully reversible.",
-          "risk": "A crawler still lands on the dashboard first, so the principal-purpose reading in S80 is unchanged.",
-          "waits_on": []
-        }
-      ],
-      "recommendation": "C as the reversible first step, then A once a tagged link exists, then B only if search performance shows the root is what a crawler judges.",
-      "evidence": [
-        "S80",
-        "S83"
-      ],
-      "waiting_on": [
-        "PQ-01"
-      ],
-      "quality_impact": 5,
-      "conversion_impact": 4,
-      "risk": 1,
-      "effort": 1,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
+     "id": "A",
+     "label": "Publish a shortlist scoped to use cases, with the ranking rule stated inline",
+     "commitment": "One page, three or four 'best for X' rows, each decided by a named spec and linked to its source. No score invented, no star rating.",
+     "cost": "One session. It is the highest-intent page the site could add.",
+     "risk": "A ranking invites disagreement. Mitigated by making the rule arithmetic and visible, and by giving one row to each use case rather than a single overall winner.",
+     "waits_on": []
     },
     {
-      "id": "PS-02",
-      "title": "Make the site's subject the products, and its method a feature rather than the subject",
-      "area": "Editorial stance",
-      "problem": "The pages are exceptionally well sourced, and almost all of them talk about their own sourcing. Reading marketing/index.html end to end, the recurring subject is the discipline of the page rather than the air fryer. Google's helpful-content guidance rewards effort and originality but asks whether the content is about the thing the reader came for; the same guidance says automation should be disclosed, not that the disclosure should be the content. A shopper searching 'air fryer for a family of four' wants the answer first and the method on a linked page.",
-      "options": [
-        {
-          "id": "A",
-          "label": "Lead every page with the answer, and move the methodology to one page it links to",
-          "commitment": "An editorial rewrite of 9 page openers. No fact changes: every number and citation stays, and the voice gate keeps failing banned phrases, superlatives and unsourced claims.",
-          "cost": "One focused session for the openers; the remainder of each page can stay as it is.",
-          "risk": "Low, and it is the only option that changes what a reader sees first.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Keep the method-first voice and treat transparency as the differentiator",
-          "commitment": "No rewrite. Accept that the audience is a reader who wants the audit trail.",
-          "cost": "Zero.",
-          "risk": "It is a defensible position for a specialist publication and a poor one for a site whose purpose is to send buyers to Amazon. It also leaves PM-03 to PM-08 untouched.",
-          "waits_on": []
-        },
-        {
-          "id": "C",
-          "label": "Split the site: a shopper publication and a separate evidence publication",
-          "commitment": "Two audiences, two navigation trees, one shared data layer.",
-          "cost": "Largest content change on this board; every page has to be assigned to one side.",
-          "risk": "Doubles the surface that must each carry a disclosure and each be kept fresh within 60 days.",
-          "waits_on": []
-        }
-      ],
-      "recommendation": "A. It is the change the complaint names, it is reversible, and it changes no fact.",
-      "evidence": [
-        "S83",
-        "S84"
-      ],
-      "waiting_on": [],
-      "quality_impact": 5,
-      "conversion_impact": 4,
-      "risk": 2,
-      "effort": 3,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
+     "id": "B",
+     "label": "Decline to rank, and say why on the buying guide",
+     "commitment": "No new page. Keep the current position.",
+     "cost": "Zero.",
+     "risk": "Leaves the query unanswered and the traffic to somebody else's ranking.",
+     "waits_on": []
     },
     {
-      "id": "PS-03",
-      "title": "Run one discovery sprint against the five signals the brief asks for, and publish the result even if the result is 'not obtainable'",
-      "area": "Missing information",
-      "problem": "Three registers already ask questions; none of them produces the numbers the brief's own second clause depends on. Price, review volume, competition and commission rate are all absent, and RP-02 is the only requirement row that is entirely NOT_MET. Asking better questions has not worked for several waves because the answers live outside the repository.",
-      "options": [
-        {
-          "id": "A",
-          "label": "A dated, one-session research pass per product with every value either sourced or recorded as unobtainable",
-          "commitment": "Three products, one page of output, one source per value, and an explicit 'not obtainable by automated fetch' where that is the truth.",
-          "cost": "One session. Produces a datable artefact rather than a plan.",
-          "risk": "Some of the five signals may come back unobtainable, which makes the brief's clause unmet in public - the correct outcome, and the opposite of what a marketing page wants to say.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Wait for an approved Associates account, then use the API",
-          "commitment": "Depends on PQ-01 and PQ-02 closing first.",
-          "cost": "Unknown, and outside this project's control.",
-          "risk": "Blocks every commercial requirement behind an approval that has not happened.",
-          "waits_on": [
-            "PQ-01",
-            "PQ-02"
-          ]
-        },
-        {
-          "id": "C",
-          "label": "Use a third-party keyword or trend tool instead of Amazon data",
-          "commitment": "A subscription, a vendor, and a licence to cite their numbers.",
-          "cost": "A recurring fee, and a dataset we do not own.",
-          "risk": "Third-party numbers would sit beside official ones with no shared provenance, which is the exact failure mode this repository was built to prevent.",
-          "waits_on": [
-            "PQ-03"
-          ]
-        }
-      ],
-      "recommendation": "A now, and B the day the account is approved. C only if A returns unobtainable for most of the five.",
-      "evidence": [
-        "S80",
-        "S81"
-      ],
-      "waiting_on": [],
-      "quality_impact": 4,
-      "conversion_impact": 5,
-      "risk": 2,
-      "effort": 2,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-04",
-      "title": "Publish the shortlist page a shopper actually searches for",
-      "area": "Page inventory",
-      "problem": "No page on the site contains a ranked shortlist. The buying guide explicitly declines to name a winner, on the sound principle that the specs do not separate the three models. But 'which one to buy' is the query, and Google's review guidance asks that ranked lists stand on their own. Declining to rank is a defensible editorial position and a poor commercial one, and the brief's whole purpose is to make the sale.",
-      "options": [
-        {
-          "id": "A",
-          "label": "Publish a shortlist scoped to use cases, with the ranking rule stated inline",
-          "commitment": "One page, three or four 'best for X' rows, each decided by a named spec and linked to its source. No score invented, no star rating.",
-          "cost": "One session. It is the highest-intent page the site could add.",
-          "risk": "A ranking invites disagreement. Mitigated by making the rule arithmetic and visible, and by giving one row to each use case rather than a single overall winner.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Decline to rank, and say why on the buying guide",
-          "commitment": "No new page. Keep the current position.",
-          "cost": "Zero.",
-          "risk": "Leaves the query unanswered and the traffic to somebody else's ranking.",
-          "waits_on": []
-        },
-        {
-          "id": "C",
-          "label": "Rank only after first-hand testing exists",
-          "commitment": "Wait for PQ-11.",
-          "cost": "Unknown.",
-          "risk": "Indefinite, and it conflates two different things: a spec-derived recommendation and a tested review. The FTC constraint in S87 forbids claiming experience, not ranking on published specs.",
-          "waits_on": [
-            "PQ-11"
-          ]
-        }
-      ],
-      "recommendation": "A, with the ranking rule printed above the table and the no-experience disclosure kept.",
-      "evidence": [
-        "S85",
-        "S87"
-      ],
-      "waiting_on": [],
-      "quality_impact": 4,
-      "conversion_impact": 5,
-      "risk": 2,
-      "effort": 2,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-05",
-      "title": "Turn the citation-styled product links into buy links, keeping the source one click away",
-      "area": "Conversion mechanics",
-      "problem": "Measured in PM-04: 71 of the 80 product links on the marketing pages render as a source chip such as 'M4 · www.amazon.com Amazon listing'. The link that earns the commission is styled as a footnote, and the one place a reader is asked to act says 'Amazon listing'. The source must stay - that is the project's rule - but it does not have to be the button.",
-      "options": [
-        {
-          "id": "A",
-          "label": "A two-element pattern: a button that says what happens next, and a source chip beside it",
-          "commitment": "One renderer change in tools/build_marketing.py, applied to all 71 links, with the source id preserved verbatim next to the button.",
-          "cost": "One session, and it touches a generated namespace - so the generator changes and the pages are regenerated, never hand-edited.",
-          "risk": "Low. The gate that forbids a price and requires a source on each row keeps working, and the disclosure stays in the footer and moves to the button.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Keep citation labels and add a separate 'check price at Amazon' line",
-          "commitment": "Additive only.",
-          "cost": "Half a session.",
-          "risk": "Two competing treatments of the same link on one page.",
-          "waits_on": []
-        },
-        {
-          "id": "C",
-          "label": "Leave the links as they are until a tagged link exists",
-          "commitment": "Nothing.",
-          "cost": "Zero.",
-          "risk": "Keeps the strongest anti-conversion element on the site in place for as long as the account is unapproved, which may be indefinitely.",
-          "waits_on": [
-            "PQ-01"
-          ]
-        }
-      ],
-      "recommendation": "A. The preview-link mode already labels itself as unmonetised, so the button can be honest today and become earnable the day a tag exists.",
-      "evidence": [
-        "S86",
-        "S84"
-      ],
-      "waiting_on": [],
-      "quality_impact": 3,
-      "conversion_impact": 5,
-      "risk": 1,
-      "effort": 2,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-06",
-      "title": "Stop printing a verification date on every marketing page",
-      "area": "Freshness",
-      "problem": "Every marketing page prints a date of 2026-11-14 or 2026-11-15. Amazon's review guidance asks that site content generally be within the last 60 days. A page that announces its own age fails that test every day after it is published, and it will do so while being perfectly accurate. The date was added as evidence of care and now functions as evidence of staleness.",
-      "options": [
-        {
-          "id": "A",
-          "label": "Keep the source but drop the date from the reader-facing sentence, and publish the verification date on one page",
-          "commitment": "An editing pass over the printed dates, with the per-row source links untouched and the dates preserved on the verification page.",
-          "cost": "Half a session.",
-          "risk": "Loses a visible trust signal on the article pages. Mitigated because the source links stay beside every number.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Keep the dates and set a re-verification interval that actually gets run",
-          "commitment": "A scheduled re-fetch, with the date moved forward only when a page has genuinely been re-read.",
-          "cost": "Recurring, and it needs a person to run it.",
-          "risk": "A scheduled job that silently stops makes every date wrong at once.",
-          "waits_on": [
-            "PQ-07"
-          ]
-        },
-        {
-          "id": "C",
-          "label": "Leave it to the owner to decide when to re-verify",
-          "commitment": "Nothing.",
-          "cost": "Zero.",
-          "risk": "The 60-day condition stays unmet by default.",
-          "waits_on": []
-        }
-      ],
-      "recommendation": "A now, and B only if a real re-verification loop is staffed.",
-      "evidence": [
-        "S82"
-      ],
-      "waiting_on": [],
-      "quality_impact": 3,
-      "conversion_impact": 2,
-      "risk": 1,
-      "effort": 1,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-07",
-      "title": "Resolve the image question, and ship no product photography until it is resolved",
-      "area": "Visual identity",
-      "problem": "There are zero photographs on 20 marketing pages, which is why the pages read as a dossier. The design notes say the rights question is open. Amazon's IP License is specific about what Program Content may be used for and how, and the licence runs only for pages whose purpose is marketing Amazon. Stock photography would put a product the site does not own at the centre of a page selling something else.",
-      "options": [
-        {
-          "id": "A",
-          "label": "Written confirmation from Associates support on product-image use, then official image URLs only",
-          "commitment": "One support request, one stored answer, then images sourced only from Amazon's own asset hosts.",
-          "cost": "One email and one session once answered.",
-          "risk": "The answer may be narrower than hoped, and it may take weeks.",
-          "waits_on": [
-            "PQ-08"
-          ]
-        },
-        {
-          "id": "B",
-          "label": "Commit to a typographic identity and stop treating images as a missing feature",
-          "commitment": "A deliberate no-photography design: large numbers, spec diagrams drawn as HTML and CSS, and comparison tables as the visual centrepiece.",
-          "cost": "One design session.",
-          "risk": "That is the current position, and the measured result is what the complaint is about, so this option changes nothing unless the typography gets substantially stronger.",
-          "waits_on": []
-        },
-        {
-          "id": "C",
-          "label": "Use licensed stock photography of food and kitchens, never of the product",
-          "commitment": "A licence, attribution, and a rule that no stock image implies we photographed the appliance.",
-          "cost": "A licence fee, plus a sourcing note on every page.",
-          "risk": "Improves warmth and adds a licensing surface that has to be maintained.",
-          "waits_on": [
-            "PQ-08"
-          ]
-        }
-      ],
-      "recommendation": "A and B together: request the answer, and meanwhile make the typographic identity deliberate and better rather than merely absent.",
-      "evidence": [
-        "S80",
-        "S87"
-      ],
-      "waiting_on": [
-        "PQ-08"
-      ],
-      "quality_impact": 5,
-      "conversion_impact": 3,
-      "risk": 2,
-      "effort": 4,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-08",
-      "title": "Decide, in writing, who the site is for - because four of its features cannot both be right",
-      "area": "Purpose",
-      "problem": "The site is currently both a buyer's publication and an operator's console, and the same navigation serves both. That is why the root has 76 links, why the disclosure competes with a verification banner, and why a shopper meets a word like 'plpRedirect' within one screen. Twice already the registers ask this (Q-06, MQ-01) and it has never been answered, so every later design decision inherits the ambiguity.",
-      "options": [
-        {
-          "id": "A",
-          "label": "Shopper first; the operator views stay reachable but are labelled internal",
-          "commitment": "A stated audience, and every page gets one label: reader or owner.",
-          "cost": "One decision plus a labelling pass over 139 pages.",
-          "risk": "Some owner pages become one click less convenient. That is the intended trade.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Dual purpose, with the root acting as a hub that asks which you are",
-          "commitment": "A choice screen at the root.",
-          "cost": "One session.",
-          "risk": "Adds a click for everybody and satisfies the principal-purpose test least well.",
-          "waits_on": []
-        },
-        {
-          "id": "C",
-          "label": "Operator first, with the reader pages treated as output rather than as a destination",
-          "commitment": "An explicit statement that this is a working research repository.",
-          "cost": "Zero edits, one honest sentence.",
-          "risk": "It contradicts the brief's request for a marketing website. Defensible only if that request is withdrawn.",
-          "waits_on": []
-        }
-      ],
-      "recommendation": "A. Every other proposal on this board is easier to score once this is answered.",
-      "evidence": [
-        "S80",
-        "S83"
-      ],
-      "waiting_on": [],
-      "quality_impact": 5,
-      "conversion_impact": 5,
-      "risk": 2,
-      "effort": 4,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-09",
-      "title": "Publish an authorship and method statement, and make it true",
-      "area": "Trust",
-      "problem": "No marketing page carries an author. Search guidance asks who created the content and explicitly treats fabricated profiles as deception; it also asks how automated content was produced and disclosed. This project's pages are generated by a pipeline from a fact register, which is a legitimate and unusual production method, and it is disclosed nowhere in reader-facing language.",
-      "options": [
-        {
-          "id": "A",
-          "label": "One 'how this site is made' page, linked from every article, naming the pipeline and the editor's role",
-          "commitment": "A real page describing the actual process, including that pages are generated from a register and reviewed by a named person if one exists.",
-          "cost": "One session, and it is honest immediately because the process is already documented internally.",
-          "risk": "Requires deciding whether there is a named human. If there is not, the page must say so plainly rather than leave a gap.",
-          "waits_on": [
-            "PQ-05"
-          ]
-        },
-        {
-          "id": "B",
-          "label": "Add a byline with a persona",
-          "commitment": "A fictional author.",
-          "cost": "Zero.",
-          "risk": "Not available. Search guidance names fabricated profiles as a form of deception, and this repository's own rule V-09 forbids an invented author.",
-          "waits_on": []
-        },
-        {
-          "id": "C",
-          "label": "Say nothing about authorship",
-          "commitment": "Nothing.",
-          "cost": "Zero.",
-          "risk": "Leaves a trust signal absent on the pages that most need one.",
-          "waits_on": []
-        }
-      ],
-      "recommendation": "A. It is the one option that is both permitted and useful.",
-      "evidence": [
-        "S83"
-      ],
-      "waiting_on": [
-        "PQ-05"
-      ],
-      "quality_impact": 4,
-      "conversion_impact": 2,
-      "risk": 1,
-      "effort": 2,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-10",
-      "title": "Move the link-level disclosure onto the link",
-      "area": "Compliance",
-      "problem": "The mandated sentence is on every page and always in the footer or a banner. FTC guidance says the disclosure should be placed with the endorsement message itself and not only where a reader must go looking. The three product articles do carry an in-context '(paid link)' marker; the 17 other pages that carry product links do not.",
-      "options": [
-        {
-          "id": "A",
-          "label": "Every product link gets a visible adjacent marker, generated rather than typed",
-          "commitment": "One renderer change plus a gate that fails a product link without an adjacent marker.",
-          "cost": "One session.",
-          "risk": "Low, and it converts a reviewer's question into a build failure.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Keep the footer sentence and the three article markers",
-          "commitment": "Nothing.",
-          "cost": "Zero.",
-          "risk": "Knowingly leaves 17 pages in a weaker position than the three that do it properly.",
-          "waits_on": []
-        }
-      ],
-      "recommendation": "A. It is a one-session change that closes a stated policy gap on 17 pages.",
-      "evidence": [
-        "S86",
-        "S80"
-      ],
-      "waiting_on": [],
-      "quality_impact": 2,
-      "conversion_impact": 1,
-      "risk": 1,
-      "effort": 1,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-11",
-      "title": "Adopt a one-screen proposal template so every future suggestion arrives decidable",
-      "area": "Decision hygiene",
-      "problem": "This board, and the six that precede it, contain proposals that cannot be compared: different registers, different scales, different vocabularies, and none of them carrying a recorded decision. The result is what the brief complains about - a reader cannot choose the best path because no two rows are on the same scale.",
-      "options": [
-        {
-          "id": "A",
-          "label": "Mandate the template this register uses: problem, three options with cost and risk, a recommendation, the question it waits on, and four scores",
-          "commitment": "A short rule in the contribution guide, and the validator refuses a proposal missing any field.",
-          "cost": "Already built as part of this task.",
-          "risk": "None material. Scores are self-assessed, so they must never be presented as measurements.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Leave each board's own format alone",
-          "commitment": "Nothing.",
-          "cost": "Zero.",
-          "risk": "Seven incompatible boards keep growing.",
-          "waits_on": []
-        }
-      ],
-      "recommendation": "A, with the scores printed as an explicitly self-assessed ordering aid rather than as evidence.",
-      "evidence": [
-        "S83"
-      ],
-      "waiting_on": [],
-      "quality_impact": 3,
-      "conversion_impact": 1,
-      "risk": 1,
-      "effort": 1,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
-    },
-    {
-      "id": "PS-12",
-      "title": "Consolidate the seven decision boards into one index, and stop adding an eighth",
-      "area": "Decision hygiene",
-      "problem": "Measured in PM-09: six boards published proposals before this task and this task adds a seventh. Each was built in good faith by a different session, and a reader looking for 'the suggestions' has no way to know which one is authoritative. The brief asks for a section where someone can review suggestions and choose; seven sections is not one.",
-      "options": [
-        {
-          "id": "A",
-          "label": "A single index page that lists every board, its row count, its owner and whether it carries recorded decisions",
-          "commitment": "One page and one link from every board back to it. No board is deleted and no other session's register is edited.",
-          "cost": "One session, and it is additive so it cannot conflict with a session that owns one of the boards.",
-          "risk": "None to correctness; it does not reduce the number of boards, it makes the number visible.",
-          "waits_on": []
-        },
-        {
-          "id": "B",
-          "label": "Retire five boards and migrate their rows into one register",
-          "commitment": "Migrating the rows of five boards into one register.",
-          "cost": "Large, and unsafe while another session is active.",
-          "risk": "High: the coordination rule forbids editing another session's files, and a migration would touch five.",
-          "waits_on": []
-        },
-        {
-          "id": "C",
-          "label": "Do nothing; each board serves a different reader",
-          "commitment": "Nothing.",
-          "cost": "Zero.",
-          "risk": "The stated purpose - one place to choose a path - stays unmet.",
-          "waits_on": []
-        }
-      ],
-      "recommendation": "A first, and B only in a final integration session with no other session active. Either way this row stays awaiting your decision: nothing is consolidated until you record one.",
-      "evidence": [],
-      "waiting_on": [],
-      "quality_impact": 3,
-      "conversion_impact": 1,
-      "risk": 1,
-      "effort": 2,
-      "decision": "AWAITING_DECISION",
-      "decision_note": ""
+     "id": "C",
+     "label": "Rank only after first-hand testing exists",
+     "commitment": "Wait for PQ-11.",
+     "cost": "Unknown.",
+     "risk": "Indefinite, and it conflates two different things: a spec-derived recommendation and a tested review. The FTC constraint in S87 forbids claiming experience, not ranking on published specs.",
+     "waits_on": [
+      "PQ-11"
+     ]
     }
-  ],
-  "questions": [
+   ],
+   "recommendation": "A, with the ranking rule printed above the table and the no-experience disclosure kept.",
+   "evidence": [
+    "S85",
+    "S87"
+   ],
+   "waiting_on": [],
+   "quality_impact": 4,
+   "conversion_impact": 5,
+   "risk": 2,
+   "effort": 2,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-05",
+   "title": "Turn the citation-styled product links into buy links, keeping the source one click away",
+   "area": "Conversion mechanics",
+   "problem": "Measured in PM-04: 71 of the 80 product links on the marketing pages render as a source chip such as 'M4 · www.amazon.com Amazon listing'. The link that earns the commission is styled as a footnote, and the one place a reader is asked to act says 'Amazon listing'. The source must stay - that is the project's rule - but it does not have to be the button.",
+   "options": [
     {
-      "id": "PQ-01",
-      "question": "Is there an approved Associates account, and what is its Associate ID and marketplace?",
-      "known": "No Associate ID is stored anywhere in this repository, and the marketing fact base records associates_tag_configured as false. The three supplied short links carry no tag parameter (re-observed 2026-11-16). Amazon requires at least three qualifying sales within 180 days before an application is reviewed, and personal orders do not count.",
-      "missing": "Approval status, Associate ID, and target marketplace. All three live in the owner's associates account, which this project cannot read.",
-      "obtain": "The owner signs in to Associates Central and records the status, ID and marketplace. A public 'one-line' answer is the only thing any of this needs.",
-      "owner": "owner",
-      "blocks": [
-        "PS-01",
-        "PS-05"
-      ],
-      "source_ids": [
-        "S80",
-        "S81"
-      ]
+     "id": "A",
+     "label": "A two-element pattern: a button that says what happens next, and a source chip beside it",
+     "commitment": "One renderer change in tools/build_marketing.py, applied to all 71 links, with the source id preserved verbatim next to the button.",
+     "cost": "One session, and it touches a generated namespace - so the generator changes and the pages are regenerated, never hand-edited.",
+     "risk": "Low. The gate that forbids a price and requires a source on each row keeps working, and the disclosure stays in the footer and moves to the button.",
+     "waits_on": []
     },
     {
-      "id": "PQ-02",
-      "question": "Do the three supplied short links carry the owner's tracking ID, or were they minted elsewhere?",
-      "known": "Each resolution on 2026-11-16 carries plpRedirect=mhFallback, lv=shuf, a per-fetch btn_ref and a channelId, and no Associates tag parameter. The three tokens are 9 characters; an ASIN is 10.",
-      "missing": "The provenance of the links and the intended products. Two readings are still open and this register does not resolve them: the links may be untagged share links for these three listings, or they may be fallback redirects that happen to land on related items.",
-      "obtain": "The owner opens the links in their own browser while signed in to Associates Central and reports the destination and whether a tag is attached; or re-issues the links from the product-link tool in their own account.",
-      "owner": "owner",
-      "blocks": [
-        "PS-03"
-      ],
-      "source_ids": [
-        "S88",
-        "S89",
-        "S90"
-      ]
+     "id": "B",
+     "label": "Keep citation labels and add a separate 'check price at Amazon' line",
+     "commitment": "Additive only.",
+     "cost": "Half a session.",
+     "risk": "Two competing treatments of the same link on one page.",
+     "waits_on": []
     },
     {
-      "id": "PQ-03",
-      "question": "Which source is permitted to supply trend and demand data?",
-      "known": "No trend, demand or competition data is stored in this repository. Amazon's licence is explicit that Product Advertising Content may not be used to aggregate, analyse or repurpose it, and that automated collection of product data is constrained.",
-      "missing": "An authorised source, its terms, and whether this project may republish a figure derived from it.",
-      "obtain": "The owner selects and pays for a keyword or trend tool, or confirms that only figures the site can source to an official page may appear - in which case some of the brief's clause cannot be met at all, and the site should say so.",
-      "owner": "owner",
-      "blocks": [],
-      "source_ids": [
-        "S80"
-      ]
-    },
-    {
-      "id": "PQ-04",
-      "question": "Has the live site any measurable organic traffic, and from which queries?",
-      "known": "Nothing. The repository ships no analytics and the measurement plan states 5 defined events and 0 live. Search Console is not connected.",
-      "missing": "Impressions, clicks, and query terms. Without these, 'SEO-optimized' cannot be distinguished from 'written with SEO in mind'.",
-      "obtain": "The owner verifies the domain in Google Search Console and reports a first 28-day snapshot. This does not require a tag, an account, or a paid tool.",
-      "owner": "owner",
-      "blocks": [],
-      "source_ids": [
-        "S83"
-      ]
-    },
-    {
-      "id": "PQ-05",
-      "question": "Who is the named editor or author, and do they exist?",
-      "known": "No marketing page carries an author. The project's own voice rule V-09 forbids an invented author, and search guidance names fabricated profiles as deception.",
-      "missing": "A real person, or an explicit decision to publish as an unedited automated publication and say so.",
-      "obtain": "The owner names the responsible person or states that there is none. Either answer is publishable; silence is not.",
-      "owner": "owner",
-      "blocks": [
-        "PS-09"
-      ],
-      "source_ids": [
-        "S83"
-      ]
-    },
-    {
-      "id": "PQ-06",
-      "question": "Will the site run on a domain the owner owns, and which exact URL will be declared in the Associates application?",
-      "known": "The site is at kanlerxz87-cyber.github.io and Amazon's review page states that an applicant must own the website and that a rejected application is not reassessed. Two readings of the GitHub Pages subdomain against that sentence are live in the registers and this task does not settle them.",
-      "missing": "Whether a custom domain is owned, and which URL will be declared.",
-      "obtain": "The owner either registers a domain and points it at this repository or states that the github.io address is the intended declared site. A domain registration is the only action that closes it.",
-      "owner": "owner",
-      "blocks": [],
-      "source_ids": [
-        "S82",
-        "S81"
-      ]
-    },
-    {
-      "id": "PQ-07",
-      "question": "Who re-verifies the pages, how often, and what happens if nobody does?",
-      "known": "Every marketing page prints a 2026-11-14 or 2026-11-15 verification date. Amazon asks that content generally be within the last 60 days. No scheduled job re-fetches the sources.",
-      "missing": "An owner for the loop, an interval, and a fallback policy for when the loop stops.",
-      "obtain": "The owner names the person and the interval, or approves PS-06 option A so that a stale date cannot accrue in public.",
-      "owner": "owner",
-      "blocks": [
-        "PS-06"
-      ],
-      "source_ids": [
-        "S82"
-      ]
-    },
-    {
-      "id": "PQ-08",
-      "question": "May the site use Amazon product imagery, and under which part of the licence?",
-      "known": "Zero images are published. Amazon's licence permits Program Content use on pages whose principal purpose is marketing Amazon, requires each use to link to the relevant Amazon page, and restricts use in mobile applications. No written confirmation specific to this site exists in the repository.",
-      "missing": "A written answer that says whether product images may appear, and on what condition.",
-      "obtain": "The owner sends one question to Associates support and stores the reply verbatim. That reply, not this register, becomes the source.",
-      "owner": "owner",
-      "blocks": [
-        "PS-07"
-      ],
-      "source_ids": [
-        "S80"
-      ]
-    },
-    {
-      "id": "PQ-09",
-      "question": "Are these three products the whole programme, or the first three of a larger category?",
-      "known": "All three listings are air fryers. The repository already records the portfolio as single-category. Nine question-shaped guides and three product articles are built around exactly these three models.",
-      "missing": "Whether the intent is depth on three products or breadth across the category.",
-      "obtain": "The owner states the intended scope. It changes the content plan more than any other open question, because breadth needs a competitor set this site does not have.",
-      "owner": "owner",
-      "blocks": [],
-      "source_ids": [
-        "S84"
-      ]
+     "id": "C",
+     "label": "Leave the links as they are until a tagged link exists",
+     "commitment": "Nothing.",
+     "cost": "Zero.",
+     "risk": "Keeps the strongest anti-conversion element on the site in place for as long as the account is unapproved, which may be indefinitely.",
+     "waits_on": [
+      "PQ-01"
+     ]
     }
-  ],
-  "design_findings": [
+   ],
+   "recommendation": "A. The preview-link mode already labels itself as unmonetised, so the button can be honest today and become earnable the day a tag exists.",
+   "evidence": [
+    "S86",
+    "S84"
+   ],
+   "waiting_on": [],
+   "quality_impact": 3,
+   "conversion_impact": 5,
+   "risk": 1,
+   "effort": 2,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-06",
+   "title": "Stop printing a verification date on every marketing page",
+   "area": "Freshness",
+   "problem": "Every marketing page prints a date of 2026-11-14 or 2026-11-15. Amazon's review guidance asks that site content generally be within the last 60 days. A page that announces its own age fails that test every day after it is published, and it will do so while being perfectly accurate. The date was added as evidence of care and now functions as evidence of staleness.",
+   "options": [
     {
-      "id": "PD-01",
-      "title": "The most important number on each page is a citation, and the way to buy is a footnote",
-      "what_a_reader_sees": "On a product page the eye is led to a source chip reading 'M4 · www.amazon.com Amazon listing'. There is no button and no statement of what happens if it is clicked; 71 of the 80 product links on the site are styled this way.",
-      "why_it_matters": "Affiliate revenue is a function of qualified clicks. A citation-labelled link is the weakest possible invitation to click, and it is the only invitation on the page.",
-      "proposed_fix": "PS-05",
-      "measured_by": "PM-04",
-      "source_ids": [
-        "S86"
-      ]
+     "id": "A",
+     "label": "Keep the source but drop the date from the reader-facing sentence, and publish the verification date on one page",
+     "commitment": "An editing pass over the printed dates, with the per-row source links untouched and the dates preserved on the verification page.",
+     "cost": "Half a session.",
+     "risk": "Loses a visible trust signal on the article pages. Mitigated because the source links stay beside every number.",
+     "waits_on": []
     },
     {
-      "id": "PD-02",
-      "title": "Twenty product pages, zero product images",
-      "what_a_reader_sees": "A dossier of tables and prose. Nothing to look at where the product should be.",
-      "why_it_matters": "Shoppers scan visually before they read. A page about an appliance that cannot show the appliance reads as second-hand, which is exactly the impression the complaint describes.",
-      "proposed_fix": "PS-07",
-      "measured_by": "PM-03",
-      "source_ids": [
-        "S80"
-      ]
+     "id": "B",
+     "label": "Keep the dates and set a re-verification interval that actually gets run",
+     "commitment": "A scheduled re-fetch, with the date moved forward only when a page has genuinely been re-read.",
+     "cost": "Recurring, and it needs a person to run it.",
+     "risk": "A scheduled job that silently stops makes every date wrong at once.",
+     "waits_on": [
+      "PQ-07"
+     ]
     },
     {
-      "id": "PD-03",
-      "title": "The site's own methodology is the most repeated subject on the site",
-      "what_a_reader_sees": "Verification banners, source chips, blank-row explanations, an 'open items' strip and a methodology panel before any appliance is described in detail.",
-      "why_it_matters": "It is honest, and it is not what a reader came for. It also makes the prose read as a compliance artefact rather than as a publication, which is the definition of the impression the owner is complaining about.",
-      "proposed_fix": "PS-02",
-      "measured_by": "PM-13",
-      "source_ids": [
-        "S83"
-      ]
-    },
-    {
-      "id": "PD-04",
-      "title": "The primary call to action leads to a page with no product links",
-      "what_a_reader_sees": "A large button reading 'Which one to buy'.",
-      "why_it_matters": "Measured in PM-05: the destination, marketing/buying-guide.html, contains zero amazon.com/dp/ links, and it explicitly declines to name a winner. The site's most prominent promise is not kept by its destination.",
-      "proposed_fix": "PS-04",
-      "measured_by": "PM-05",
-      "source_ids": [
-        "S85"
-      ]
-    },
-    {
-      "id": "PD-05",
-      "title": "No page answers 'which one should I buy' with a shortlist",
-      "what_a_reader_sees": "Three individual write-ups, one comparison, and a guide that explains what it will not tell you.",
-      "why_it_matters": "The shortlist is the page type a shopper arrives from search expecting, and the page type Google's review guidance describes. Its absence removes both the ranking opportunity and the buying decision.",
-      "proposed_fix": "PS-04",
-      "measured_by": "PM-06",
-      "source_ids": [
-        "S85"
-      ]
-    },
-    {
-      "id": "PD-06",
-      "title": "The front door is a control room",
-      "what_a_reader_sees": "76 navigation links in two groups, a KPI band, requirement counts, and a compliance ledger, before a shopper reaches a single product.",
-      "why_it_matters": "A first-time visitor decides in seconds whether the site is for them. A dashboard signals 'internal project' - and Amazon's licence requires the principal purpose to be marketing Amazon and driving sales.",
-      "proposed_fix": "PS-01",
-      "measured_by": "PM-08",
-      "source_ids": [
-        "S80"
-      ]
-    },
-    {
-      "id": "PD-07",
-      "title": "Every date printed on every page will be older than the freshness window",
-      "what_a_reader_sees": "'Verified 2026-11-15' on the page itself.",
-      "why_it_matters": "It is accurate today and self-defeating in eleven weeks. Amazon's review guidance asks for content generally within the last 60 days, so a printed date is a countdown that never resets itself.",
-      "proposed_fix": "PS-06",
-      "measured_by": "PM-12",
-      "source_ids": [
-        "S82"
-      ]
-    },
-    {
-      "id": "PD-08",
-      "title": "Nothing on the page tells a reader who wrote it or how",
-      "what_a_reader_sees": "No byline, no editor, no account of the pipeline that actually generated the page.",
-      "why_it_matters": "Search guidance asks who created the content and how, and calls fabricated authorship deception. The honest answer - generated from a sourced register - is unusual enough to be a genuine differentiator, and it is currently invisible.",
-      "proposed_fix": "PS-09",
-      "measured_by": "PM-07",
-      "source_ids": [
-        "S83"
-      ]
-    },
-    {
-      "id": "PD-09",
-      "title": "Several decision boards, and the choice is visible on none of them",
-      "what_a_reader_sees": "Suggestions, proposals and options - and no recorded selection anywhere.",
-      "why_it_matters": "The brief asks for a section where someone can choose the best path. Multiple sections each invite a choice and none records one, so a reviewer cannot tell which board is authoritative or which proposal was ever accepted.",
-      "proposed_fix": "PS-12",
-      "measured_by": "PM-09",
-      "source_ids": []
+     "id": "C",
+     "label": "Leave it to the owner to decide when to re-verify",
+     "commitment": "Nothing.",
+     "cost": "Zero.",
+     "risk": "The 60-day condition stays unmet by default.",
+     "waits_on": []
     }
-  ],
-  "ideas": [
+   ],
+   "recommendation": "A now, and B only if a real re-verification loop is staffed.",
+   "evidence": [
+    "S82"
+   ],
+   "waiting_on": [],
+   "quality_impact": 3,
+   "conversion_impact": 2,
+   "risk": 1,
+   "effort": 1,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-07",
+   "title": "Resolve the image question, and ship no product photography until it is resolved",
+   "area": "Visual identity",
+   "problem": "There are zero photographs on 20 marketing pages, which is why the pages read as a dossier. The design notes say the rights question is open. Amazon's IP License is specific about what Program Content may be used for and how, and the licence runs only for pages whose purpose is marketing Amazon. Stock photography would put a product the site does not own at the centre of a page selling something else.",
+   "options": [
     {
-      "id": "PS-13",
-      "title": "Answer the freshness clock with one continuously updated page",
-      "area": "Content strategy",
-      "trend_basis": "Seasonal demand for air fryers peaks in November and December, and the site's pages are dated 2026-11-14/15 - the peak of that window.",
-      "article_concept": "'The air fryer question we get every November' - one page that is re-dated when it is genuinely re-read, carrying the three models' current official specs beside the same facts from the previous cycle so the reader sees what changed.",
-      "why_it_converts": "It gives a returning reader a reason to come back and gives a search crawler a page whose visible date is current, which addresses the 60-day condition without inventing a fact.",
-      "source_ids": [
-        "S82"
-      ],
-      "decision": "AWAITING_DECISION",
-      "decision_note": "",
-      "waiting_on": [
-        "PQ-07"
-      ]
+     "id": "A",
+     "label": "Written confirmation from Associates support on product-image use, then official image URLs only",
+     "commitment": "One support request, one stored answer, then images sourced only from Amazon's own asset hosts.",
+     "cost": "One email and one session once answered.",
+     "risk": "The answer may be narrower than hoped, and it may take weeks.",
+     "waits_on": [
+      "PQ-08"
+     ]
     },
     {
-      "id": "PS-14",
-      "title": "The capacity arithmetic as an interactive tool, not an article",
-      "area": "Content strategy",
-      "trend_basis": "'What size air fryer' is the buyer's first question, and the site already answers it in prose with the arithmetic worked out for exactly three models.",
-      "article_concept": "A small, JS-free capacity calculator: enter the number of people and what you cook, get which of the three stated capacities the manufacturer's own page says fits that use. Every output links the sentence it came from.",
-      "why_it_converts": "Google's guidance names 'functional page tools' as evidence of effort, and a tool is the one asset a competitor cannot copy by rewriting the prose.",
-      "source_ids": [
-        "S83",
-        "S84"
-      ],
-      "decision": "AWAITING_DECISION",
-      "decision_note": "",
-      "waiting_on": []
+     "id": "B",
+     "label": "Commit to a typographic identity and stop treating images as a missing feature",
+     "commitment": "A deliberate no-photography design: large numbers, spec diagrams drawn as HTML and CSS, and comparison tables as the visual centrepiece.",
+     "cost": "One design session.",
+     "risk": "That is the current position, and the measured result is what the complaint is about, so this option changes nothing unless the typography gets substantially stronger.",
+     "waits_on": []
     },
     {
-      "id": "PS-15",
-      "title": "A counter-footprint checker built from the published dimensions",
-      "area": "Content strategy",
-      "trend_basis": "The site already recorded that fit, not performance, is a common reason a countertop appliance is returned - and it publishes all three footprints in inches.",
-      "article_concept": "'Will it fit under my cabinet?' Enter your clear height and depth; the page compares them against the three published dimensions and says which fits, up to the limit of what a dimension can tell you.",
-      "why_it_converts": "It converts a table row that is currently buried into the single reason a buyer abandons a purchase, and it is built entirely from facts already verified.",
-      "source_ids": [
-        "S84"
-      ],
-      "decision": "AWAITING_DECISION",
-      "decision_note": "",
-      "waiting_on": []
-    },
-    {
-      "id": "PS-16",
-      "title": "Two named-category heads rather than three competing brand pages",
-      "area": "Content strategy",
-      "trend_basis": "All three listings sit in the same Amazon category path. Two of the three are Chefman, so brand-level comparison is really model-level comparison.",
-      "article_concept": "'Chefman dual-basket vs Chefman single-basket: the two models that look alike and are not' and 'French-door oven or basket fryer: what the door changes' - each anchored to the published specs, not to brand adjectives.",
-      "why_it_converts": "It targets the two queries a buyer types after deciding on a category, and it avoids the thin-affiliate trap of a page per brand with the same boilerplate.",
-      "source_ids": [
-        "S84",
-        "S85"
-      ],
-      "decision": "AWAITING_DECISION",
-      "decision_note": "",
-      "waiting_on": []
-    },
-    {
-      "id": "PS-17",
-      "title": "A sourcing-contest page: invite a correction and publish the winner",
-      "area": "Content strategy",
-      "trend_basis": "The site's differentiator is that every number is sourced, and manufacturers publish conflicting numbers. That conflict is itself the most interesting content the site owns.",
-      "article_concept": "'Two official pages disagree about this air fryer. Here is both of them.' One page per disagreement, updated when either manufacturer's page changes, with the reader invited to send the page they found.",
-      "why_it_converts": "It is original, it is checkable, it is impossible to generate without the sources, and it earns links from the only people who care - which is what organic traffic is built from.",
-      "source_ids": [
-        "S83"
-      ],
-      "decision": "AWAITING_DECISION",
-      "decision_note": "",
-      "waiting_on": []
+     "id": "C",
+     "label": "Use licensed stock photography of food and kitchens, never of the product",
+     "commitment": "A licence, attribution, and a rule that no stock image implies we photographed the appliance.",
+     "cost": "A licence fee, plus a sourcing note on every page.",
+     "risk": "Improves warmth and adds a licensing surface that has to be maintained.",
+     "waits_on": [
+      "PQ-08"
+     ]
     }
-  ],
-  "irregularities": [
+   ],
+   "recommendation": "A and B together: request the answer, and meanwhile make the typographic identity deliberate and better rather than merely absent.",
+   "evidence": [
+    "S80",
+    "S87"
+   ],
+   "waiting_on": [
+    "PQ-08"
+   ],
+   "quality_impact": 5,
+   "conversion_impact": 3,
+   "risk": 2,
+   "effort": 4,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-08",
+   "title": "Decide, in writing, who the site is for - because four of its features cannot both be right",
+   "area": "Purpose",
+   "problem": "The site is currently both a buyer's publication and an operator's console, and the same navigation serves both. That is why the root has 76 links, why the disclosure competes with a verification banner, and why a shopper meets a word like 'plpRedirect' within one screen. Twice already the registers ask this (Q-06, MQ-01) and it has never been answered, so every later design decision inherits the ambiguity.",
+   "options": [
     {
-      "id": "PI-01",
-      "severity": "medium",
-      "found": "tools/build_decisions.py --check hashes every file under decisions/, generated or not",
-      "effect": "Any register stored in decisions/ is permanent drift against a fresh build. This session's own register hit it: validate_decisions failed until the file was moved.",
-      "resolution": "Moved to docs/review-board.json, the convention docs/discovery-t40.json already uses. No file owned by another session was edited.",
-      "owner_action": "None - closed by this session. Recorded because the trap is still live for the next session.",
-      "source_ids": []
+     "id": "A",
+     "label": "Shopper first; the operator views stay reachable but are labelled internal",
+     "commitment": "A stated audience, and every page gets one label: reader or owner.",
+     "cost": "One decision plus a labelling pass over 139 pages.",
+     "risk": "Some owner pages become one click less convenient. That is the intended trade.",
+     "waits_on": []
     },
     {
-      "id": "PI-02",
-      "severity": "low",
-      "found": "The footer negation required by the Sec. 5 endorsement rule must sit on the same line as the phrase it negates",
-      "effect": "A first render split 'not' and 'affiliated with Amazon' across two lines and validate_data failed all four pages.",
-      "resolution": "Negation kept inside one element. The sentence was not weakened.",
-      "owner_action": "None - closed. Flagged because the rule is line-based, and the next author will hit it.",
-      "source_ids": [
-        "S80"
-      ]
+     "id": "B",
+     "label": "Dual purpose, with the root acting as a hub that asks which you are",
+     "commitment": "A choice screen at the root.",
+     "cost": "One session.",
+     "risk": "Adds a click for everybody and satisfies the principal-purpose test least well.",
+     "waits_on": []
     },
     {
-      "id": "PI-03",
-      "severity": "low",
-      "found": "Several decision boards publish proposals and none records a decision",
-      "effect": "A reviewer cannot tell which board is authoritative. The count is ambiguous: five boards carry proposals, six files exist counting decisions/index.html, which is a hub.",
-      "resolution": "Published with both readings rather than one (PM-09), and PS-12 proposes an index over consolidation.",
-      "owner_action": "Decide PS-12. Recorded here so the ambiguity is visible rather than tidied away.",
-      "source_ids": []
-    },
-    {
-      "id": "PI-04",
-      "severity": "low",
-      "found": "No browser render of the four new pages was possible in this environment",
-      "effect": "npx playwright install chromium fails with 'Download failure, code=1'. A screenshot test would have caught a layout defect that a structural check cannot.",
-      "resolution": "Checked instead: tags balance on all four pages (html.parser stack), the pages ship no script, and every internal href and fragment resolves. The gate now enforces the static/balance rule, so it will not regress silently.",
-      "owner_action": "Optional: open the four pages on a phone and report a layout problem if one appears.",
-      "source_ids": []
-    },
-    {
-      "id": "PI-05",
-      "severity": "low",
-      "found": "Six of the sixteen traced requirement rows rest on no official source",
-      "effect": "No official page defines what 'automates product research', a 'complete requirements list', or a review board must contain, so the judgement on those rows is this session's, not an authority's.",
-      "resolution": "Each such row says in its own words that no official page can settle it, and the gate fails a row that drops the source without that statement.",
-      "owner_action": "None. The distinction is published so that a sourced row and an unsourced one cannot be mistaken for each other.",
-      "source_ids": [
-        "S83"
-      ]
+     "id": "C",
+     "label": "Operator first, with the reader pages treated as output rather than as a destination",
+     "commitment": "An explicit statement that this is a working research repository.",
+     "cost": "Zero edits, one honest sentence.",
+     "risk": "It contradicts the brief's request for a marketing website. Defensible only if that request is withdrawn.",
+     "waits_on": []
     }
-  ]
+   ],
+   "recommendation": "A. Every other proposal on this board is easier to score once this is answered.",
+   "evidence": [
+    "S80",
+    "S83"
+   ],
+   "waiting_on": [],
+   "quality_impact": 5,
+   "conversion_impact": 5,
+   "risk": 2,
+   "effort": 4,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-09",
+   "title": "Publish an authorship and method statement, and make it true",
+   "area": "Trust",
+   "problem": "No marketing page carries an author. Search guidance asks who created the content and explicitly treats fabricated profiles as deception; it also asks how automated content was produced and disclosed. This project's pages are generated by a pipeline from a fact register, which is a legitimate and unusual production method, and it is disclosed nowhere in reader-facing language.",
+   "options": [
+    {
+     "id": "A",
+     "label": "One 'how this site is made' page, linked from every article, naming the pipeline and the editor's role",
+     "commitment": "A real page describing the actual process, including that pages are generated from a register and reviewed by a named person if one exists.",
+     "cost": "One session, and it is honest immediately because the process is already documented internally.",
+     "risk": "Requires deciding whether there is a named human. If there is not, the page must say so plainly rather than leave a gap.",
+     "waits_on": [
+      "PQ-05"
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Add a byline with a persona",
+     "commitment": "A fictional author.",
+     "cost": "Zero.",
+     "risk": "Not available. Search guidance names fabricated profiles as a form of deception, and this repository's own rule V-09 forbids an invented author.",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "Say nothing about authorship",
+     "commitment": "Nothing.",
+     "cost": "Zero.",
+     "risk": "Leaves a trust signal absent on the pages that most need one.",
+     "waits_on": []
+    }
+   ],
+   "recommendation": "A. It is the one option that is both permitted and useful.",
+   "evidence": [
+    "S83"
+   ],
+   "waiting_on": [
+    "PQ-05"
+   ],
+   "quality_impact": 4,
+   "conversion_impact": 2,
+   "risk": 1,
+   "effort": 2,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-10",
+   "title": "Move the link-level disclosure onto the link",
+   "area": "Compliance",
+   "problem": "The mandated sentence is on every page and always in the footer or a banner. FTC guidance says the disclosure should be placed with the endorsement message itself and not only where a reader must go looking. The three product articles do carry an in-context '(paid link)' marker; the 17 other pages that carry product links do not.",
+   "options": [
+    {
+     "id": "A",
+     "label": "Every product link gets a visible adjacent marker, generated rather than typed",
+     "commitment": "One renderer change plus a gate that fails a product link without an adjacent marker.",
+     "cost": "One session.",
+     "risk": "Low, and it converts a reviewer's question into a build failure.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Keep the footer sentence and the three article markers",
+     "commitment": "Nothing.",
+     "cost": "Zero.",
+     "risk": "Knowingly leaves 17 pages in a weaker position than the three that do it properly.",
+     "waits_on": []
+    }
+   ],
+   "recommendation": "A. It is a one-session change that closes a stated policy gap on 17 pages.",
+   "evidence": [
+    "S86",
+    "S80"
+   ],
+   "waiting_on": [],
+   "quality_impact": 2,
+   "conversion_impact": 1,
+   "risk": 1,
+   "effort": 1,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-11",
+   "title": "Adopt a one-screen proposal template so every future suggestion arrives decidable",
+   "area": "Decision hygiene",
+   "problem": "This board, and the six that precede it, contain proposals that cannot be compared: different registers, different scales, different vocabularies, and none of them carrying a recorded decision. The result is what the brief complains about - a reader cannot choose the best path because no two rows are on the same scale.",
+   "options": [
+    {
+     "id": "A",
+     "label": "Mandate the template this register uses: problem, three options with cost and risk, a recommendation, the question it waits on, and four scores",
+     "commitment": "A short rule in the contribution guide, and the validator refuses a proposal missing any field.",
+     "cost": "Already built as part of this task.",
+     "risk": "None material. Scores are self-assessed, so they must never be presented as measurements.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Leave each board's own format alone",
+     "commitment": "Nothing.",
+     "cost": "Zero.",
+     "risk": "Seven incompatible boards keep growing.",
+     "waits_on": []
+    }
+   ],
+   "recommendation": "A, with the scores printed as an explicitly self-assessed ordering aid rather than as evidence.",
+   "evidence": [
+    "S83"
+   ],
+   "waiting_on": [],
+   "quality_impact": 3,
+   "conversion_impact": 1,
+   "risk": 1,
+   "effort": 1,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PS-12",
+   "title": "Consolidate the seven decision boards into one index, and stop adding an eighth",
+   "area": "Decision hygiene",
+   "problem": "Measured in PM-09: six boards published proposals before this task and this task adds a seventh. Each was built in good faith by a different session, and a reader looking for 'the suggestions' has no way to know which one is authoritative. The brief asks for a section where someone can review suggestions and choose; seven sections is not one.",
+   "options": [
+    {
+     "id": "A",
+     "label": "A single index page that lists every board, its row count, its owner and whether it carries recorded decisions",
+     "commitment": "One page and one link from every board back to it. No board is deleted and no other session's register is edited.",
+     "cost": "One session, and it is additive so it cannot conflict with a session that owns one of the boards.",
+     "risk": "None to correctness; it does not reduce the number of boards, it makes the number visible.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Retire five boards and migrate their rows into one register",
+     "commitment": "Migrating the rows of five boards into one register.",
+     "cost": "Large, and unsafe while another session is active.",
+     "risk": "High: the coordination rule forbids editing another session's files, and a migration would touch five.",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "Do nothing; each board serves a different reader",
+     "commitment": "Nothing.",
+     "cost": "Zero.",
+     "risk": "The stated purpose - one place to choose a path - stays unmet.",
+     "waits_on": []
+    }
+   ],
+   "recommendation": "A first, and B only in a final integration session with no other session active. Either way this row stays awaiting your decision: nothing is consolidated until you record one.",
+   "evidence": [],
+   "waiting_on": [],
+   "quality_impact": 3,
+   "conversion_impact": 1,
+   "risk": 1,
+   "effort": 2,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PW-01",
+   "title": "Codify the anti-generated-slop voice gate, so the build enforces the site's voice instead of trusting it",
+   "area": "Editorial voice",
+   "wave": "2026-11-19",
+   "problem": "The repository's own design diagnosis measured the brief's vocabulary leaking into published pages (the brief's own label stood on 14 pages before the T55 rebuild, brief/data/design.json DT-1), and Google's scaled-content policy names the exact failure mode the brief fears: many pages generated without adding value (S95). Today nothing in the build scans prose for filler — no verifier rule matches a banned-phrase list (PM-18) — so a regression would pass every gate silently.",
+   "options": [
+    {
+     "id": "A",
+     "label": "Codify a written voice rule in the publication verifier: no category-eulogy openings, the first sentence carries a fact, and a maintained filler-phrase list fails the build",
+     "commitment": "The verifier fails when a banned phrase ships, and the list is dated and reviewable like every other register.",
+     "cost": "One session to codify, plus list maintenance each time a false positive is adjudicated.",
+     "risk": "A phrase list is opinion until tested; the first pass will catch phrases that a legitimate sentence wanted.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Keep the voice rules as prose guidance in the design brief only",
+     "commitment": "No code change; the rules stay a document.",
+     "cost": "None now.",
+     "risk": "Nothing enforces them, so the drift DT-1 measured can return unnoticed — the exact outcome the brief calls “AI slop”.",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "Give every page a human editor before publish",
+     "commitment": "A named person reads each page.",
+     "cost": "A person per page, on every future wave.",
+     "risk": "No editor is named anywhere in the tree (PQ-12), so this option is unstaffable until that question closes.",
+     "waits_on": []
+    }
+   ],
+   "recommended_option": "A",
+   "recommendation": "A — it is the only option that survives a regression without depending on a person nobody has named.",
+   "evidence": [
+    "S95",
+    "S83",
+    "S85"
+   ],
+   "waiting_on": [],
+   "quality_impact": 4,
+   "conversion_impact": 3,
+   "risk": 2,
+   "effort": 3,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PW-02",
+   "title": "Adopt a dated seasonal calendar whose re-dates are gated on re-verification",
+   "area": "Content strategy",
+   "wave": "2026-11-19",
+   "problem": "The idea board's strongest concept (PS-13) hangs on a freshness argument nobody owns. The Associates application bar requires content to be recent (S82: “generally within the last 60 days”), and Google's starter guide asks publishers to check published content and update it (S92) — but no row on any board owns the re-date cycle, and the site's pages are dated at the November peak, the moment they start ageing.",
+   "options": [
+    {
+     "id": "A",
+     "label": "Adopt a four-date calendar (holiday roasting, game day, New Year reset, mid-summer) that re-reads every spec row on its season's pages before re-dating them",
+     "commitment": "Each re-date happens only after the page's facts are re-read live; the calendar is a gate, not good intentions.",
+     "cost": "Four verification passes a year, sized to the pages each season touches.",
+     "risk": "A season can be skipped under time pressure; the gate must record the skip rather than let the date drift.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Re-date pages opportunistically whenever they are touched",
+     "commitment": "No calendar; freshness rides on other work.",
+     "cost": "None upfront.",
+     "risk": "Untouched pages go stale silently — the exact failure the 60-day rule penalises.",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "Fix no process; treat freshness as a launch-time concern",
+     "commitment": "Nothing changes.",
+     "cost": "Zero.",
+     "risk": "The recency condition fails on the next quiet month, with no record of who decided not to care.",
+     "waits_on": []
+    }
+   ],
+   "recommended_option": "A",
+   "recommendation": "A — it turns PS-13's idea into an owned, checkable process instead of a wish.",
+   "evidence": [
+    "S82",
+    "S92"
+   ],
+   "waiting_on": [],
+   "quality_impact": 4,
+   "conversion_impact": 4,
+   "risk": 2,
+   "effort": 3,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PW-03",
+   "title": "Choose the next topics from measured queries, not instinct — Search Console first",
+   "area": "Measurement",
+   "wave": "2026-11-19",
+   "problem": "The brief asks for topics chosen from measured queries; this register has asked whether any organic traffic exists since 2026-11-16 (PQ-04) and no search property is claimed anywhere in the tree (PM-14: 0 verification tags on 226 pages). Until a property exists and someone reads it, every topic choice is instinct — which is what the brief forbids — and the five wave-1 concepts sit behind that same wall (PD-10).",
+   "options": [
+    {
+     "id": "A",
+     "label": "The owner verifies a Search Console property; each topic wave is chosen from 90 days of real queries, and the query list is recorded with the decision",
+     "commitment": "A quarterly digest session that reads the Performance report and records the queries next to the chosen topics.",
+     "cost": "One sign-in by the owner, plus a short digest session each quarter.",
+     "risk": "A young site returns sparse queries; the digest records the sparseness honestly instead of pretending demand.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Choose topics from the question registers alone until traffic data exists",
+     "commitment": "No measurement step; the registers drive the calendar.",
+     "cost": "None.",
+     "risk": "Contradicts the brief's measure-first clause, and the registers may not reflect demand (PQ-03 remains unanswered).",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "Buy a third-party keyword tool",
+     "commitment": "A subscription and a data-source decision.",
+     "cost": "A recurring fee outside any budget the owner has stated.",
+     "risk": "It measures a proxy market, not this site's own queries — and PQ-03 never authorised a data source.",
+     "waits_on": []
+    }
+   ],
+   "recommended_option": "A",
+   "recommendation": "A — the only option that measures this site rather than a proxy, and the cheapest unknown to close (PQ-04 says so).",
+   "evidence": [
+    "S92"
+   ],
+   "waiting_on": [
+    "PQ-10"
+   ],
+   "quality_impact": 4,
+   "conversion_impact": 4,
+   "risk": 1,
+   "effort": 2,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PW-04",
+   "title": "Settle the reader-facing brand identity: one name everywhere",
+   "area": "Presentation",
+   "wave": "2026-11-19",
+   "problem": "The reader publication prints “Counter Notes” (the masthead and the packaged archive footer), the review board and operator surfaces print “Zone2 — Verified affiliate platform”, and the repository answers to a third label. A reader can meet two names for one site in a single session. Google's people-first guidance asks “who created the content” (S83); a site that cannot state its own name in one word is not answering it.",
+   "options": [
+    {
+     "id": "A",
+     "label": "One reader-facing name everywhere (“Counter Notes”), with “Zone2” kept as the repository label only",
+     "commitment": "Mastheads, page titles, social previews and footers all print the reader brand; the repo label stays a git fact.",
+     "cost": "One labelling session over the generated surfaces.",
+     "risk": "Re-render churn touches many pages at once — a merge-coordination cost the board already knows.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Keep both names as they are now (reader brand plus repository label)",
+     "commitment": "No change.",
+     "cost": "None.",
+     "risk": "The mixed identity persists, and every new surface must decide again which name it prints.",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "The owner picks a different name entirely",
+     "commitment": "A naming decision precedes any build.",
+     "cost": "The same labelling session, once a name exists.",
+     "risk": "Nothing ships until the name is picked — an indefinite hold on presentation work.",
+     "waits_on": []
+    }
+   ],
+   "recommended_option": "A",
+   "recommendation": "A — it is the only option a reader never has to think about.",
+   "evidence": [
+    "S83"
+   ],
+   "waiting_on": [],
+   "quality_impact": 3,
+   "conversion_impact": 3,
+   "risk": 1,
+   "effort": 2,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PW-05",
+   "title": "Give readers a way to come back — email capture, gated on a named review",
+   "area": "Audience",
+   "wave": "2026-11-19",
+   "problem": "The brief wants organic traffic; the site ships an RSS feed but no durable reader relationship, and every visit ends with nowhere to return. Email is the standard answer, but commercial email carries legal duties the site has never planned for: the CAN-SPAM guide requires accurate headers, a truthful subject, an identified advertisement, a physical postal address and prompt opt-out handling (S94) — and no one is named to review that posture (PQ-11).",
+   "options": [
+    {
+     "id": "A",
+     "label": "Add newsletter capture with double opt-in on a static-host-compatible provider, with the CAN-SPAM duties implemented before the first send",
+     "commitment": "The compliance checklist ships before the subscribe form does.",
+     "cost": "A provider account, a privacy-notice update, and the named review PQ-11 asks for.",
+     "risk": "An unmonitored inbox becomes a dead end; the owner must staff it every week it runs.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Grow the RSS feed instead and add no email for now",
+     "commitment": "The feed stays the only subscription path.",
+     "cost": "None.",
+     "risk": "RSS reaches far fewer readers than email for most audiences; the traffic goal then rests on search alone.",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "Defer email until measured traffic exists",
+     "commitment": "No capture work this wave.",
+     "cost": "None now.",
+     "risk": "The first readers arrive with nowhere to return, and the list starts at zero exactly when it should have started early.",
+     "waits_on": []
+    }
+   ],
+   "recommended_option": "B",
+   "recommendation": "B until PQ-11 closes, then A — the board records the sequence instead of pretending the review has happened.",
+   "evidence": [
+    "S94",
+    "S86"
+   ],
+   "waiting_on": [
+    "PQ-11"
+   ],
+   "quality_impact": 3,
+   "conversion_impact": 4,
+   "risk": 2,
+   "effort": 3,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PW-06",
+   "title": "Adopt a decision cadence: one digest, one register, no orphan proposals",
+   "area": "Process",
+   "wave": "2026-11-19",
+   "problem": "PI-03 recorded that several boards publish proposals and none records a decision. Three days later the pattern holds on this register: 12 of 12 proposals and 0 of 9 questions answered (PM-16), while every merged session adds rows to one board or another. A decision surface that only grows stops being one — and the brief's rule, that a reviewer chooses the best path before anything is implemented, needs rows that can actually close.",
+   "options": [
+    {
+     "id": "A",
+     "label": "A monthly decision digest: every proposal older than 30 days is re-surfaced on the answer sheet with what it blocks, and each session that touches a row records a decision or a deferral for it",
+     "commitment": "The digest prints the age and the blocking cost of every stale row, and prints “0 replies” honestly when that is the truth.",
+     "cost": "One short digest pass per month.",
+     "risk": "Digests without an owner reply become ritual; the digest must measure its own usefulness rather than assume it.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Record decisions only when the owner replies spontaneously",
+     "commitment": "No process.",
+     "cost": "None.",
+     "risk": "That is the current state, and it has produced three waves of unanswered rows in three days.",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "Auto-select each row's recommendation after 30 days of silence",
+     "commitment": "The machine's judgement stands in for the owner's.",
+     "cost": "None.",
+     "risk": "It inverts the brief's review-before-implementing rule; stated as an option so the gap is not filled quietly by a future session.",
+     "waits_on": []
+    }
+   ],
+   "recommended_option": "A",
+   "recommendation": "A — the smallest process that keeps the board from rotting, and the only one that keeps a human gate.",
+   "evidence": [],
+   "waiting_on": [],
+   "quality_impact": 4,
+   "conversion_impact": 2,
+   "risk": 1,
+   "effort": 2,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  },
+  {
+   "id": "PW-07",
+   "title": "Make the unclaimed mobile-first pass (S-20/RQ-16) the next build session, before more content ships",
+   "area": "Page experience",
+   "wave": "2026-11-19",
+   "problem": "The mobile-first pass — type scale, tap targets, sticky comparison bar — is the one requirement row no session has claimed, while content sessions keep shipping guide pages that inherit whatever the layout does (PM-17: 20 files under guides/, up from the 13 the wave-1 prose printed). Google's page-experience guidance asks whether content displays well on mobile devices (S93); each new page shipped before that pass raises its cost.",
+   "options": [
+    {
+     "id": "A",
+     "label": "Make the mobile pass the next build session, ahead of any new article",
+     "commitment": "One session on the publication stylesheet and templates, measured against the viewport checks the CI already runs.",
+     "cost": "One build session.",
+     "risk": "It delays the seasonal calendar (PW-02) by one session.",
+     "waits_on": []
+    },
+    {
+     "id": "B",
+     "label": "Ship the calendar first and batch the mobile fixes later",
+     "commitment": "Content now, layout later.",
+     "cost": "None now.",
+     "risk": "Every new page inherits the unresolved mobile state and must be re-touched afterwards.",
+     "waits_on": []
+    },
+    {
+     "id": "C",
+     "label": "Run both in parallel sessions",
+     "commitment": "Two sessions at once.",
+     "cost": "Two sessions plus merge coordination.",
+     "risk": "Parallel edits to shared stylesheets are exactly the conflict class the coordination board warns about.",
+     "waits_on": []
+    }
+   ],
+   "recommended_option": "A",
+   "recommendation": "A — one page-experience pass beats two waves of re-touches.",
+   "evidence": [
+    "S93"
+   ],
+   "waiting_on": [],
+   "quality_impact": 4,
+   "conversion_impact": 3,
+   "risk": 1,
+   "effort": 3,
+   "decision": "AWAITING_DECISION",
+   "decision_note": ""
+  }
+ ],
+ "questions": [
+  {
+   "id": "PQ-01",
+   "question": "Is there an approved Associates account, and what is its Associate ID and marketplace?",
+   "known": "No Associate ID is stored anywhere in this repository, and the marketing fact base records associates_tag_configured as false. The three supplied short links carry no tag parameter (re-observed 2026-11-16). Amazon requires at least three qualifying sales within 180 days before an application is reviewed, and personal orders do not count.",
+   "missing": "Approval status, Associate ID, and target marketplace. All three live in the owner's associates account, which this project cannot read.",
+   "obtain": "The owner signs in to Associates Central and records the status, ID and marketplace. A public 'one-line' answer is the only thing any of this needs.",
+   "owner": "owner",
+   "blocks": [
+    "PS-01",
+    "PS-05"
+   ],
+   "source_ids": [
+    "S80",
+    "S81"
+   ]
+  },
+  {
+   "id": "PQ-02",
+   "question": "Do the three supplied short links carry the owner's tracking ID, or were they minted elsewhere?",
+   "known": "Each resolution on 2026-11-16 carries plpRedirect=mhFallback, lv=shuf, a per-fetch btn_ref and a channelId, and no Associates tag parameter. The three tokens are 9 characters; an ASIN is 10.",
+   "missing": "The provenance of the links and the intended products. Two readings are still open and this register does not resolve them: the links may be untagged share links for these three listings, or they may be fallback redirects that happen to land on related items.",
+   "obtain": "The owner opens the links in their own browser while signed in to Associates Central and reports the destination and whether a tag is attached; or re-issues the links from the product-link tool in their own account.",
+   "owner": "owner",
+   "blocks": [
+    "PS-03"
+   ],
+   "source_ids": [
+    "S88",
+    "S89",
+    "S90"
+   ]
+  },
+  {
+   "id": "PQ-03",
+   "question": "Which source is permitted to supply trend and demand data?",
+   "known": "No trend, demand or competition data is stored in this repository. Amazon's licence is explicit that Product Advertising Content may not be used to aggregate, analyse or repurpose it, and that automated collection of product data is constrained.",
+   "missing": "An authorised source, its terms, and whether this project may republish a figure derived from it.",
+   "obtain": "The owner selects and pays for a keyword or trend tool, or confirms that only figures the site can source to an official page may appear - in which case some of the brief's clause cannot be met at all, and the site should say so.",
+   "owner": "owner",
+   "blocks": [],
+   "source_ids": [
+    "S80"
+   ]
+  },
+  {
+   "id": "PQ-04",
+   "question": "Has the live site any measurable organic traffic, and from which queries?",
+   "known": "Nothing. The repository ships no analytics and the measurement plan states 5 defined events and 0 live. Search Console is not connected.",
+   "missing": "Impressions, clicks, and query terms. Without these, 'SEO-optimized' cannot be distinguished from 'written with SEO in mind'.",
+   "obtain": "The owner verifies the domain in Google Search Console and reports a first 28-day snapshot. This does not require a tag, an account, or a paid tool.",
+   "owner": "owner",
+   "blocks": [],
+   "source_ids": [
+    "S83"
+   ]
+  },
+  {
+   "id": "PQ-05",
+   "question": "Who is the named editor or author, and do they exist?",
+   "known": "No marketing page carries an author. The project's own voice rule V-09 forbids an invented author, and search guidance names fabricated profiles as deception.",
+   "missing": "A real person, or an explicit decision to publish as an unedited automated publication and say so.",
+   "obtain": "The owner names the responsible person or states that there is none. Either answer is publishable; silence is not.",
+   "owner": "owner",
+   "blocks": [
+    "PS-09"
+   ],
+   "source_ids": [
+    "S83"
+   ]
+  },
+  {
+   "id": "PQ-06",
+   "question": "Will the site run on a domain the owner owns, and which exact URL will be declared in the Associates application?",
+   "known": "The site is at kanlerxz87-cyber.github.io and Amazon's review page states that an applicant must own the website and that a rejected application is not reassessed. Two readings of the GitHub Pages subdomain against that sentence are live in the registers and this task does not settle them.",
+   "missing": "Whether a custom domain is owned, and which URL will be declared.",
+   "obtain": "The owner either registers a domain and points it at this repository or states that the github.io address is the intended declared site. A domain registration is the only action that closes it.",
+   "owner": "owner",
+   "blocks": [],
+   "source_ids": [
+    "S82",
+    "S81"
+   ]
+  },
+  {
+   "id": "PQ-07",
+   "question": "Who re-verifies the pages, how often, and what happens if nobody does?",
+   "known": "Every marketing page prints a 2026-11-14 or 2026-11-15 verification date. Amazon asks that content generally be within the last 60 days. No scheduled job re-fetches the sources.",
+   "missing": "An owner for the loop, an interval, and a fallback policy for when the loop stops.",
+   "obtain": "The owner names the person and the interval, or approves PS-06 option A so that a stale date cannot accrue in public.",
+   "owner": "owner",
+   "blocks": [
+    "PS-06"
+   ],
+   "source_ids": [
+    "S82"
+   ]
+  },
+  {
+   "id": "PQ-08",
+   "question": "May the site use Amazon product imagery, and under which part of the licence?",
+   "known": "Zero images are published. Amazon's licence permits Program Content use on pages whose principal purpose is marketing Amazon, requires each use to link to the relevant Amazon page, and restricts use in mobile applications. No written confirmation specific to this site exists in the repository.",
+   "missing": "A written answer that says whether product images may appear, and on what condition.",
+   "obtain": "The owner sends one question to Associates support and stores the reply verbatim. That reply, not this register, becomes the source.",
+   "owner": "owner",
+   "blocks": [
+    "PS-07"
+   ],
+   "source_ids": [
+    "S80"
+   ]
+  },
+  {
+   "id": "PQ-09",
+   "question": "Are these three products the whole programme, or the first three of a larger category?",
+   "known": "All three listings are air fryers. The repository already records the portfolio as single-category. Nine question-shaped guides and three product articles are built around exactly these three models.",
+   "missing": "Whether the intent is depth on three products or breadth across the category.",
+   "obtain": "The owner states the intended scope. It changes the content plan more than any other open question, because breadth needs a competitor set this site does not have.",
+   "owner": "owner",
+   "blocks": [],
+   "source_ids": [
+    "S84"
+   ]
+  },
+  {
+   "id": "PQ-10",
+   "question": "Who will own the Search Console property for this site, with which account, and who reads its reports?",
+   "known": "The deployed tree ships zero Search Console verification tags (PM-14: 0 of 226 published pages), and this register has asked whether any organic traffic exists since 2026-11-16 (PQ-04) with no reply.",
+   "missing": "Whether the owner has, or will create, a Google account to verify the property — and the name of the person who will read the Performance report each month.",
+   "obtain": "The owner verifies the property in Search Console (one sign-in; DNS or HTML verification) and replies with the account and the reader's name. No build session is required.",
+   "owner": "owner",
+   "blocks": [
+    "PW-03"
+   ],
+   "source_ids": [
+    "S92"
+   ],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PQ-11",
+   "question": "Who reviews the privacy and consent posture, by name, before any new data capture beyond the current cookie-free counter goes live?",
+   "known": "The site's click counter is cookie-free and aggregate, the orders/revenue events stay blocked on authorized first-party reports, and the privacy notice is published. Commercial email carries its own duties (S94) that no page plans for today.",
+   "missing": "A named human reviewer and a date for the privacy review — the same open gate the measurement record has carried since the counter shipped.",
+   "obtain": "The owner names the reviewer, or records that no capture ships until someone is named. Either reply closes the row.",
+   "owner": "owner",
+   "blocks": [
+    "PW-05"
+   ],
+   "source_ids": [
+    "S94",
+    "S86"
+   ],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PQ-12",
+   "question": "Who signs off a finished article before it is published, and how long may that take?",
+   "known": "Every proposal and idea on this board ends in “awaiting your decision”; nothing in the publishing workflow names a human approver, and no build gate can supply editorial judgement (PM-16: 0 answers recorded on this register at the wave-2 rebuild).",
+   "missing": "The approver's name and a turnaround rule a publishing calendar can assume.",
+   "obtain": "The owner names the approver and the rule in a reply; the next session records it beside the calendar row.",
+   "owner": "owner",
+   "blocks": [
+    "PW-02"
+   ],
+   "source_ids": [
+    "S85"
+   ],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PQ-13",
+   "question": "Which first-party report will supply orders and revenue, in what format, and how often?",
+   "known": "The campaign ledger stays empty by design, and the two reported-order events (EV-04/EV-05) are blocked on authorized first-party reports; the Associates tag itself is wired on every paid link.",
+   "missing": "Whether the owner will export the Associates monthly report at all — and who ingests it.",
+   "obtain": "The owner exports one monthly report (or states none will come); the ledger stays empty until a real export arrives, as it always has.",
+   "owner": "owner",
+   "blocks": [
+    "PW-06"
+   ],
+   "source_ids": [
+    "S80"
+   ],
+   "wave": "2026-11-19"
+  }
+ ],
+ "design_findings": [
+  {
+   "id": "PD-01",
+   "title": "The most important number on each page is a citation, and the way to buy is a footnote",
+   "what_a_reader_sees": "On a product page the eye is led to a source chip reading 'M4 · www.amazon.com Amazon listing'. There is no button and no statement of what happens if it is clicked; 71 of the 80 product links on the site are styled this way.",
+   "why_it_matters": "Affiliate revenue is a function of qualified clicks. A citation-labelled link is the weakest possible invitation to click, and it is the only invitation on the page.",
+   "proposed_fix": "PS-05",
+   "measured_by": "PM-04",
+   "source_ids": [
+    "S86"
+   ]
+  },
+  {
+   "id": "PD-02",
+   "title": "Twenty product pages, zero product images",
+   "what_a_reader_sees": "A dossier of tables and prose. Nothing to look at where the product should be.",
+   "why_it_matters": "Shoppers scan visually before they read. A page about an appliance that cannot show the appliance reads as second-hand, which is exactly the impression the complaint describes.",
+   "proposed_fix": "PS-07",
+   "measured_by": "PM-03",
+   "source_ids": [
+    "S80"
+   ]
+  },
+  {
+   "id": "PD-03",
+   "title": "The site's own methodology is the most repeated subject on the site",
+   "what_a_reader_sees": "Verification banners, source chips, blank-row explanations, an 'open items' strip and a methodology panel before any appliance is described in detail.",
+   "why_it_matters": "It is honest, and it is not what a reader came for. It also makes the prose read as a compliance artefact rather than as a publication, which is the definition of the impression the owner is complaining about.",
+   "proposed_fix": "PS-02",
+   "measured_by": "PM-13",
+   "source_ids": [
+    "S83"
+   ]
+  },
+  {
+   "id": "PD-04",
+   "title": "The primary call to action leads to a page with no product links",
+   "what_a_reader_sees": "A large button reading 'Which one to buy'.",
+   "why_it_matters": "Measured in PM-05: the destination, marketing/buying-guide.html, contains zero amazon.com/dp/ links, and it explicitly declines to name a winner. The site's most prominent promise is not kept by its destination.",
+   "proposed_fix": "PS-04",
+   "measured_by": "PM-05",
+   "source_ids": [
+    "S85"
+   ]
+  },
+  {
+   "id": "PD-05",
+   "title": "No page answers 'which one should I buy' with a shortlist",
+   "what_a_reader_sees": "Three individual write-ups, one comparison, and a guide that explains what it will not tell you.",
+   "why_it_matters": "The shortlist is the page type a shopper arrives from search expecting, and the page type Google's review guidance describes. Its absence removes both the ranking opportunity and the buying decision.",
+   "proposed_fix": "PS-04",
+   "measured_by": "PM-06",
+   "source_ids": [
+    "S85"
+   ]
+  },
+  {
+   "id": "PD-06",
+   "title": "The front door is a control room",
+   "what_a_reader_sees": "76 navigation links in two groups, a KPI band, requirement counts, and a compliance ledger, before a shopper reaches a single product.",
+   "why_it_matters": "A first-time visitor decides in seconds whether the site is for them. A dashboard signals 'internal project' - and Amazon's licence requires the principal purpose to be marketing Amazon and driving sales.",
+   "proposed_fix": "PS-01",
+   "measured_by": "PM-08",
+   "source_ids": [
+    "S80"
+   ]
+  },
+  {
+   "id": "PD-07",
+   "title": "Every date printed on every page will be older than the freshness window",
+   "what_a_reader_sees": "'Verified 2026-11-15' on the page itself.",
+   "why_it_matters": "It is accurate today and self-defeating in eleven weeks. Amazon's review guidance asks for content generally within the last 60 days, so a printed date is a countdown that never resets itself.",
+   "proposed_fix": "PS-06",
+   "measured_by": "PM-12",
+   "source_ids": [
+    "S82"
+   ]
+  },
+  {
+   "id": "PD-08",
+   "title": "Nothing on the page tells a reader who wrote it or how",
+   "what_a_reader_sees": "No byline, no editor, no account of the pipeline that actually generated the page.",
+   "why_it_matters": "Search guidance asks who created the content and how, and calls fabricated authorship deception. The honest answer - generated from a sourced register - is unusual enough to be a genuine differentiator, and it is currently invisible.",
+   "proposed_fix": "PS-09",
+   "measured_by": "PM-07",
+   "source_ids": [
+    "S83"
+   ]
+  },
+  {
+   "id": "PD-09",
+   "title": "Several decision boards, and the choice is visible on none of them",
+   "what_a_reader_sees": "Suggestions, proposals and options - and no recorded selection anywhere.",
+   "why_it_matters": "The brief asks for a section where someone can choose the best path. Multiple sections each invite a choice and none records one, so a reviewer cannot tell which board is authoritative or which proposal was ever accepted.",
+   "proposed_fix": "PS-12",
+   "measured_by": "PM-09",
+   "source_ids": []
+  },
+  {
+   "id": "PD-10",
+   "title": "The five wave-1 ideas have no route to a reader",
+   "what_a_reader_sees": "The five concepts live on a review page that deploys as noindex and appears in no sitemap (PM-15), and no search property is claimed anywhere in the tree (PM-14). A searcher cannot meet any of them, and the board has never measured whether anyone read one.",
+   "why_it_matters": "The brief's traffic goal runs through content; content the indexer never sees cannot start the loop the brief asks for, however good the concepts are.",
+   "proposed_fix": "PW-03",
+   "measured_by": "PM-15",
+   "source_ids": [
+    "S92"
+   ],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PD-11",
+   "title": "The board accumulates proposals faster than it records decisions",
+   "what_a_reader_sees": "Twelve proposals and nine questions were added on 2026-11-16 and every one still awaits an answer today (PM-16); the second wave joins them, and the answer sheet must re-rank a pile nobody has touched.",
+   "why_it_matters": "A decision surface whose rows never resolve stops being one; the brief's review-before-implementing rule needs rows that can actually close.",
+   "proposed_fix": "PW-06",
+   "measured_by": "PM-16",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PD-12",
+   "title": "The mobile requirement is the last unclaimed row while content keeps shipping",
+   "what_a_reader_sees": "Guide pages keep growing (PM-17: 20 files, up from 13 in wave 1) on a layout whose mobile pass no session has claimed; each new page inherits the same unresolved mobile state.",
+   "why_it_matters": "Every page shipped before that pass raises the pass's cost and adds a future re-touch; the page-experience guidance asks directly whether content displays well on mobile devices (S93).",
+   "proposed_fix": "PW-07",
+   "measured_by": "PM-17",
+   "source_ids": [
+    "S93"
+   ],
+   "wave": "2026-11-19"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "PS-13",
+   "title": "Answer the freshness clock with one continuously updated page",
+   "area": "Content strategy",
+   "trend_basis": "Seasonal demand for air fryers peaks in November and December, and the site's pages are dated 2026-11-14/15 - the peak of that window.",
+   "article_concept": "'The air fryer question we get every November' - one page that is re-dated when it is genuinely re-read, carrying the three models' current official specs beside the same facts from the previous cycle so the reader sees what changed.",
+   "why_it_converts": "It gives a returning reader a reason to come back and gives a search crawler a page whose visible date is current, which addresses the 60-day condition without inventing a fact.",
+   "source_ids": [
+    "S82"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": [
+    "PQ-07"
+   ]
+  },
+  {
+   "id": "PS-14",
+   "title": "The capacity arithmetic as an interactive tool, not an article",
+   "area": "Content strategy",
+   "trend_basis": "'What size air fryer' is the buyer's first question, and the site already answers it in prose with the arithmetic worked out for exactly three models.",
+   "article_concept": "A small, JS-free capacity calculator: enter the number of people and what you cook, get which of the three stated capacities the manufacturer's own page says fits that use. Every output links the sentence it came from.",
+   "why_it_converts": "Google's guidance names 'functional page tools' as evidence of effort, and a tool is the one asset a competitor cannot copy by rewriting the prose.",
+   "source_ids": [
+    "S83",
+    "S84"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": []
+  },
+  {
+   "id": "PS-15",
+   "title": "A counter-footprint checker built from the published dimensions",
+   "area": "Content strategy",
+   "trend_basis": "The site already recorded that fit, not performance, is a common reason a countertop appliance is returned - and it publishes all three footprints in inches.",
+   "article_concept": "'Will it fit under my cabinet?' Enter your clear height and depth; the page compares them against the three published dimensions and says which fits, up to the limit of what a dimension can tell you.",
+   "why_it_converts": "It converts a table row that is currently buried into the single reason a buyer abandons a purchase, and it is built entirely from facts already verified.",
+   "source_ids": [
+    "S84"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": []
+  },
+  {
+   "id": "PS-16",
+   "title": "Two named-category heads rather than three competing brand pages",
+   "area": "Content strategy",
+   "trend_basis": "All three listings sit in the same Amazon category path. Two of the three are Chefman, so brand-level comparison is really model-level comparison.",
+   "article_concept": "'Chefman dual-basket vs Chefman single-basket: the two models that look alike and are not' and 'French-door oven or basket fryer: what the door changes' - each anchored to the published specs, not to brand adjectives.",
+   "why_it_converts": "It targets the two queries a buyer types after deciding on a category, and it avoids the thin-affiliate trap of a page per brand with the same boilerplate.",
+   "source_ids": [
+    "S84",
+    "S85"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": []
+  },
+  {
+   "id": "PS-17",
+   "title": "A sourcing-contest page: invite a correction and publish the winner",
+   "area": "Content strategy",
+   "trend_basis": "The site's differentiator is that every number is sourced, and manufacturers publish conflicting numbers. That conflict is itself the most interesting content the site owns.",
+   "article_concept": "'Two official pages disagree about this air fryer. Here is both of them.' One page per disagreement, updated when either manufacturer's page changes, with the reader invited to send the page they found.",
+   "why_it_converts": "It is original, it is checkable, it is impossible to generate without the sources, and it earns links from the only people who care - which is what organic traffic is built from.",
+   "source_ids": [
+    "S83"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": []
+  },
+  {
+   "id": "PS-18",
+   "title": "One number, two answers: the cooking-functions conflict as a page",
+   "area": "Comparisons",
+   "wave": "2026-11-19",
+   "trend_basis": "Not a trend claim. The site already publishes the disagreement as flag F-19: the second listing's title states 24 preset functions while its own manufacturer tile states 25 cooking pre-sets — a dated, checkable conflict.",
+   "article_concept": "A question-shaped page that teaches the reader how to count cooking functions without trusting marketing arithmetic: what the two listings state (S88, S89), why the counts disagree, and a three-step checklist for comparing function counts across any two listings.",
+   "why_it_converts": "A reader resolving a genuine confusion is close to a purchase decision, and no manufacturer page will ever publish its own disagreement.",
+   "source_ids": [
+    "S88",
+    "S89"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": []
+  },
+  {
+   "id": "PS-19",
+   "title": "The temperature page every thermometer reader actually needs",
+   "area": "Reference",
+   "wave": "2026-11-19",
+   "trend_basis": "A season, not a trend claim: holiday roasting, when the thermometer questions peak alongside the ovens. The anchor is a dated official chart (S91, last updated April 2025) the site can re-read each season.",
+   "article_concept": "One reference page pairing the USDA safe minimum temperatures with the foods the two thermometer listings name in their own titles (S96, S97), so the reader sees which foods each device is sold for beside the one official answer: each food's safe minimum internal temperature and rest time.",
+   "why_it_converts": "It answers the question behind the purchase — “will this tell me when chicken is ready?” — with the single official source and both devices one link away.",
+   "source_ids": [
+    "S91",
+    "S96",
+    "S97"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": []
+  },
+  {
+   "id": "PS-20",
+   "title": "How many wings fit: the game-day capacity arithmetic",
+   "area": "Seasonal",
+   "wave": "2026-11-19",
+   "trend_basis": "A dated season (early February), stated as a season exactly like PS-13's November — no volume claim is made.",
+   "article_concept": "A page that turns the dual-basket listing's own published split (6-quart total, two independent 3-quart baskets, S88) into wing-count arithmetic with the single-basket 8-quart listing beside it (S90), ending in the only conclusion the specs allow: how much fits per basket, stated as capacity.",
+   "why_it_converts": "It meets a seasonal intent with arithmetic a shopper cannot do at the shelf, and both appliances are one link away.",
+   "source_ids": [
+    "S88",
+    "S90"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": []
+  },
+  {
+   "id": "PS-21",
+   "title": "Two probes or one dial: which questions each thermometer listing answers",
+   "area": "Comparisons",
+   "wave": "2026-11-19",
+   "trend_basis": "Argued from what the two listings print today — both re-read live on 2026-11-19 (S96, S97) — not from any popularity signal.",
+   "article_concept": "A side-by-side of the questions each listing answers in its own title text — wireless range, probe count and heat tolerance on one; read speed, certification and waterproofing on the other — ending in the questions neither answers, which are exactly the ones the ledger's Q-21 and Q-22 hold open.",
+   "why_it_converts": "It converts the board's open questions into reader value: a page that says “here is what nobody will tell you yet” is the page a careful buyer saves.",
+   "source_ids": [
+    "S96",
+    "S97"
+   ],
+   "decision": "AWAITING_DECISION",
+   "decision_note": "",
+   "waiting_on": []
+  }
+ ],
+ "irregularities": [
+  {
+   "id": "PI-01",
+   "severity": "medium",
+   "found": "tools/build_decisions.py --check hashes every file under decisions/, generated or not",
+   "effect": "Any register stored in decisions/ is permanent drift against a fresh build. This session's own register hit it: validate_decisions failed until the file was moved.",
+   "resolution": "Moved to docs/review-board.json, the convention docs/discovery-t40.json already uses. No file owned by another session was edited.",
+   "owner_action": "None - closed by this session. Recorded because the trap is still live for the next session.",
+   "source_ids": []
+  },
+  {
+   "id": "PI-02",
+   "severity": "low",
+   "found": "The footer negation required by the Sec. 5 endorsement rule must sit on the same line as the phrase it negates",
+   "effect": "A first render split 'not' and 'affiliated with Amazon' across two lines and validate_data failed all four pages.",
+   "resolution": "Negation kept inside one element. The sentence was not weakened.",
+   "owner_action": "None - closed. Flagged because the rule is line-based, and the next author will hit it.",
+   "source_ids": [
+    "S80"
+   ]
+  },
+  {
+   "id": "PI-03",
+   "severity": "low",
+   "found": "Several decision boards publish proposals and none records a decision",
+   "effect": "A reviewer cannot tell which board is authoritative. The count is ambiguous: five boards carry proposals, six files exist counting decisions/index.html, which is a hub.",
+   "resolution": "Published with both readings rather than one (PM-09), and PS-12 proposes an index over consolidation.",
+   "owner_action": "Decide PS-12. Recorded here so the ambiguity is visible rather than tidied away.",
+   "source_ids": []
+  },
+  {
+   "id": "PI-04",
+   "severity": "low",
+   "found": "No browser render of the four new pages was possible in this environment",
+   "effect": "npx playwright install chromium fails with 'Download failure, code=1'. A screenshot test would have caught a layout defect that a structural check cannot.",
+   "resolution": "Checked instead: tags balance on all four pages (html.parser stack), the pages ship no script, and every internal href and fragment resolves. The gate now enforces the static/balance rule, so it will not regress silently.",
+   "owner_action": "Optional: open the four pages on a phone and report a layout problem if one appears.",
+   "source_ids": []
+  },
+  {
+   "id": "PI-05",
+   "severity": "low",
+   "found": "Six of the sixteen traced requirement rows rest on no official source",
+   "effect": "No official page defines what 'automates product research', a 'complete requirements list', or a review board must contain, so the judgement on those rows is this session's, not an authority's.",
+   "resolution": "Each such row says in its own words that no official page can settle it, and the gate fails a row that drops the source without that statement.",
+   "owner_action": "None. The distinction is published so that a sourced row and an unsourced one cannot be mistaken for each other.",
+   "source_ids": [
+    "S83"
+   ]
+  },
+  {
+   "id": "PI-06",
+   "severity": "low",
+   "found": "The wave-1 idea rows carry ids PS-13–PS-17, inside the id space the proposals array already uses (PS-01–PS-12), so “PS-13” means an idea on one page and reads like a proposal id everywhere else.",
+   "effect": "No build failure — the validator checks id uniqueness per array — but a reader cross-referencing the two pages can conflate a concept with a proposal.",
+   "resolution": "Wave 2 gives proposals their own prefix (PW-); existing ids are preserved verbatim because renumbering would break cross-references recorded in earlier sessions.",
+   "owner_action": "None required; the prefixes now disambiguate.",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PI-07",
+   "severity": "low",
+   "found": "Three printed counts on these pages had drifted from the tree: the idea board said “thirteen guides” when guides/ holds 20 files (PM-17), and the questions page typed 18 ledger questions and 10 marketing questions when the ledger has grown to 22.",
+   "effect": "The pages understated the site's own size to the reader; the drift was invisible because the numbers were typed rather than derived.",
+   "resolution": "The wave-2 rebuild derives all three counts from the registers and the file tree at build time; no typed count remains on these pages.",
+   "owner_action": "None required.",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  },
+  {
+   "id": "PI-08",
+   "severity": "low",
+   "found": "Two open pull requests (#182 session 60b0ea6b, #184 session 698addcd) exist whose session ids appear nowhere on this board and whose titles re-use task ids already held by merged sessions (T69 = PR #180, T70 = PR #183).",
+   "effect": "No conflict with this wave: their file lists (build_front.py, publication.py, front pages, decision-room, board/**) are disjoint from the review-board namespace. Both PRs are over seven hours old with no new commits.",
+   "resolution": "Noted, not touched. This session neither merges, closes nor edits them, and keeps its file scope disjoint; merge order is left to the board's integration convention.",
+   "owner_action": "None required; recorded so a future integration session sees the state as it was.",
+   "source_ids": [],
+   "wave": "2026-11-19"
+  }
+ ]
 }

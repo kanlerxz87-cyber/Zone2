@@ -38,6 +38,11 @@ def run(data: dict) -> tuple[int, str]:
     (tmp / "ledger" / "sources.json").write_text(
         (REPO / "ledger" / "sources.json").read_text(encoding="utf-8"), encoding="utf-8"
     )
+    # Wave 2 (T72): build_review_board derives counts from the sister registers and the guide
+    # tree at import time, so the sandbox needs those files to mirror the real tree shape.
+    (tmp / "ledger" / "questions.json").write_text(
+        (REPO / "ledger" / "questions.json").read_text(encoding="utf-8"), encoding="utf-8"
+    )
     # Derive the page list from the builder, so a page added later cannot silently escape the harness.
     import importlib.util as _ilu
     _spec = _ilu.spec_from_file_location("_rb", REPO / "tools" / "build_review_board.py")
@@ -53,6 +58,15 @@ def run(data: dict) -> tuple[int, str]:
         dst.mkdir()
         for src in (REPO / d).glob("*.html"):
             (dst / src.name).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+    # Wave 2 (T72): build_review_board derives counts from the sister registers and the guide tree
+    # at import time, so the sandbox needs those files to mirror the real tree shape.
+    (tmp / "marketing" / "data").mkdir(parents=True, exist_ok=True)
+    (tmp / "marketing" / "data" / "editorial.json").write_text(
+        (REPO / "marketing" / "data" / "editorial.json").read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    (tmp / "guides").mkdir(exist_ok=True)
+    for g in (REPO / "guides").glob("*.html"):
+        (tmp / "guides" / g.name).write_text(g.read_text(encoding="utf-8"), encoding="utf-8")
     (tmp / "decisions" / "index.html").write_text("<a href='x'>x</a>", encoding="utf-8")
     (tmp / "flagged.html").write_text("<a href='x'>x</a>", encoding="utf-8")
     (tmp / "index.html").write_text("<a href='x'>x</a>", encoding="utf-8")
@@ -188,6 +202,19 @@ def _(d):
 @mutation("an idea reads as written while undecided", "reads as implemented")
 def _(d):
     d["ideas"][1]["why_it_converts"] = "It was built and is now live."
+    return d
+
+
+@mutation("a structured recommendation names an unoffered option", "names an unoffered option")
+def _(d):
+    d["proposals"][0]["recommended_option"] = "Z"
+    return d
+
+
+@mutation("a structured pick is not named in the recommendation prose", "not named in the recommendation prose")
+def _(d):
+    d["proposals"][0]["recommended_option"] = "A"
+    d["proposals"][0]["recommendation"] = "Pick the one that measures first."
     return d
 
 
