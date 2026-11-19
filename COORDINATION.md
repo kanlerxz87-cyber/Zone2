@@ -7767,3 +7767,13 @@ additive only; no job, permission, deploy condition, or existing test is removed
 session currently claims this workflow step. Updated T69 scope: add `.github/workflows/pages.yml` (one
 additive test invocation). The `tests/test_front_surfaces.py` tests use only repository-generated counts
 and do not access external sites or credentials.
+
+### T69 workflow integration correction — preserve the derived CI-step count
+
+The first full replay observed **62** steps and stopped at the design-brief freshness gate: `brief/index.html`,
+`brief/review.html` and `brief/verification.html` derive their published gate count from
+`len(tools/ci_replay.py::steps())`. The extra workflow step would therefore force unrelated generated
+`brief/` output changes. Preserve the new regression tests without increasing the workflow step count:
+remove the separate additive step and append `&& python3 tests/test_front_surfaces.py` to the existing
+Front-of-house gate's `run` command. This supersedes the prior T69 scope extension's separate-step
+wording; the workflow scope is only that one existing command-line edit. Do not modify `brief/**`.
