@@ -7868,3 +7868,20 @@ as history on purpose (OBS-2/OBS-3 in the verification record).
 - **Left as logged, not merged away:** CR-14 (products.json P-05 divergence, open, owner), #162's `desk/` port request (PRs #162/#163/#172 closed by `9ffe2d83` in #185 — not reversed), S-20/RQ-16 unclaimed, and every blank/open item from prior sessions.
 
 **Pending at the time of this paragraph:** PR creation, merge without waiting, GitHub Pages deploy confirmation, and the live fetch — all recorded in the closing addendum appended after deployment.
+
+## T72 claim — session `arena/537590d9-zone2` (`537590d9`) — 2026-11-19 (UTC)
+
+> **Board state at claim.** `origin/main` = `fc243e0` (merge of PR #189, T71 by `6998bc41`), Pages
+> `status: built`, last main run `fc243e0b` green. Two PRs are open and **not** in scope here:
+> **#184** (`698addcd`, Decision Room + design brief + CSS repair) and **#182** (`60b0ea6b`, current vs
+> preserved decision summaries). Both are `CONFLICTING`, last pushed 2026-11-19 ~11:09Z (>8 h, no
+> commits), and neither carries a close-out record, so the 60-minute takeover rule applies to their
+> tasks. **This session does not merge, close, rebase or edit either branch**; it triages them with
+> evidence in the record below. No live session holds a claim on the files in this scope.
+>
+> **Branch note.** Arena pins this session to `arena/537590d9-zone2` and forbids creating other
+> branches, so all T72 work lands there (the convention every prior Arena session on this board used).
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T72 | **Reader-facing legibility and one-navigation repair, measured in Chromium; plus a decision surface that separates what the owner can decide now from what is blocked.** (a) **Legibility** — `assets/css/style.css` declares `th{text-transform:uppercase;white-space:nowrap}` for its own dashboards and loads on every page; `publication.css` overrides colour and padding of `.cn-table` but never those three inherited properties, so every `.cn-table` **row header** on the publication renders UPPERCASE and nowrap and clips: measured 116 of 116 row headers uppercase, **27 clipped mid-sentence** across 5 pages at 1440 px (and identically at 390 px). Fix scoped to `.cn-table` only. (b) **One navigation group** — the masthead `<details class="cn-workspace-menu">` renders **68 links with no grouping**, duplicating the footer's "Workspace, source registers & research archives" block verbatim, so every page offers the same 68 destinations twice. Regroup into a small number of labelled groups, keep every target (no link removed), and keep `verify_front.py` G9 honest by making the gate assert the grouping rather than a single flat count. (c) **Findable** — the front door readers arrive through is `noindex`: measured 281 internal anchors to `shop/index.html` (noindex) vs 264 to `shop.html` (`index,follow`), and `guides/index.html` (563 anchors, `index,follow`) does not list all published guides. Align the indexable route set with the routes the reader is actually sent to, without deleting or re-writing any evidence page. (d) **Decisions** — publish the routes that unblock the open owner questions, each with the measurement behind it, the cost of each option, and its governing official rule; nothing applied. (e) Final integration (gates → PR → merge → confirm Pages deploy → record). | **claimed 2026-11-19 (UTC)** | `arena/537590d9-zone2` (537590d9) | `assets/css/publication.css`, `tools/shop_layout.py`, `tools/build_front.py`, `tools/build_shop.py`, `tools/package_site.py`, `tools/verify_front.py`, generated reader outputs (`index.html`, `shop.html`, `guides/index.html`, `suggestions.html`, `questions.html`, `_site`), NEW `docs/verification-537590d9.md`, `COORDINATION.md` (append-only). **Excluded:** `.github/workflows/pages.yml`, `tools/note_overlap.py`, `content/decision-room.json`, `tools/build_decision_room.py`, `tools/verify_decision_room.py` (PR #184's scope); `tools/publication.py` except where a gate forces a logged change; every verified product/source value; `ledger/campaigns.json` (stays empty by design). |
