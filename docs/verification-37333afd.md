@@ -291,3 +291,34 @@ mistaken for the tested release. In clean GitHub checkout/deployment this is rel
 account authentication. The marker is required by the artifact verifier; its new mutation brings the
 publication suite to **28 tests**. The exact updated live script again passed the offline packaged
 control and two injected failures. Requests refuse redirects and have per-request timeouts.
+
+
+## Final hardening release — exact live artifact verified
+
+[PR #177](https://github.com/kanlerxz87-cyber/Zone2/pull/177) merged **2026-11-19T07:16:31Z** as
+**`607ec1f5a6186bbfcebe5a9ddc8d631ca777a050`**. Its PR build
+[44477885859](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44477885859) passed on `dc6affa`.
+Main run [44478356354](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44478356354) concluded
+**success at 2026-11-19T07:18:08Z**, including Build and verify, Deploy to GitHub Pages, and
+**Verify the live publication rather than only upload success**. The actual eight-HTML/config/feed/
+sitemap network checks and exact-source-commit check passed. This is no longer just an offline fixture.
+
+GitHub Pages deployment **7906694842** identifies the same merge SHA. A subsequent public fetch of
+[`publication-build.json`](https://kanlerxz87-cyber.github.io/Zone2/publication-build.json?release=607ec1f)
+returned `counter-notes-build-v1` and that exact commit. A live fetch of
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/flagged.html?release=607ec1f) showed CN-08,
+CN-09 and repaired CN-10 plus the separately preserved T67 observations. No other branch's deployment
+result is substituted for these results.
+
+Final implementation verification: **61/61** strict local replay and actual PR/main checks;
+**25 collector tests, 7 issued-tag tests, 28 publication tests, six price controls/mutations**, plus the
+retained namespace suites and 12 reported client cases. Artifact **228 HTML / 16 indexable reader URLs /
+1,451 static product anchors / 138 current factual rows**; browser **252 viewport checks**, zero runtime
+errors/missing local resources and zero automated WCAG A/AA findings on 24 current pages. These are
+engineering fixtures, not traffic, eligible sessions, sales or complete accessibility certification.
+
+**DONE: implementation, hardening, PR/merge, deployment and live verification.** This closing record
+changes documentation/verification metadata only. External gates remain as explicitly published:
+permanent collection host, intent/enrolled-account/report evidence, Search Console, human/contact/legal
+review, administrator-only Pages source mode, and the runtime-version advisory. Production Pages
+collection stays OFF and no real performance report is invented.
