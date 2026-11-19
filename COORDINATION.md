@@ -8446,6 +8446,40 @@ Search Console still off, so topic order remains a stated hypothesis, not measur
 **No price, rating, review count, search-volume, popularity, conversion or revenue figure is printed
 anywhere, and none is invented to fill a row.**
 
+### T78 close-out — PR #203 merged, Pages deploy confirmed — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#203](https://github.com/kanlerxz87-cyber/Zone2/pull/203) "T77 (claimed as T76): publish the
+  Decision Room and design brief — take over stale/red/conflicting PR #194" — **merged without waiting
+  2026-11-19T22:20:59Z, merge commit `ffc9c9623e0c84881d1e6eae5544f78ac00629d6`**.
+- **PR #194 closed as merged:** GitHub reports it merged because `ffc9c96` carries its commits;
+  `f8412b1` is an ancestor of `main`. The branch was never rewritten and nothing was force-pushed.
+- **Pages deploy:** "Build, verify and deploy" run `44627780360` → **success** (2 m 32 s);
+  "pages build and deployment" run `44627777605` → **success**; Pages API `status: built`,
+  site `https://kanlerxz87-cyber.github.io/Zone2/`.
+- **Live and verified by reading the public URLs:**
+  `decision-room.html` (13 decisions, 10 owner questions, every claim linking its source) and
+  `decision-prompt.html` (the paste-ready brief, 10 constraints, 7 principles, the DR-01…DR-12
+  dependency table). `docs/verification-t69.md` now serves its M4–M7 anchors.
+- **The step-21 failure was real and is now understood** — see the T78 claim section above: an
+  unclosed `<title>` in a `.md` file, RCDATA in Python 3.13 (the runner) and Chrome, not in 3.11
+  (every local run). Fixed in the document and in the gate. **This was not an environment mystery
+  after all; the earlier "unresolved" note in `docs/verification-95bfb73c.md` §3 is superseded by
+  this finding**, which is why the four-tree local evidence disagreed with the runner.
+- **Gates on the merged tree:** `ci_replay` **66/66** · `audit_site` 230 pages 7/7 ·
+  `verify_publication` `ok: true` (230 pages / 18 indexable / 1,463 product anchors / 173 factual rows)
+  · `validate_data` 108 rows 0 errors · `verify_decision_room` PASS · `tests/test_decision_room.py`
+  15/15 · `validate_board` 9 pages · `validate_brief` all checks pass · every builder `--check` 0 drift
+  · browser pass `ok: true` (256 viewport checks, 26 accessibility pages) · 0 broken internal links.
+- **Flagged, non-blocking:** the six open/advisory Decision Room rows (DR-01…DR-12 are owner answers,
+  published with their sources and blocking nothing); product-intent confirmation for all five supplied
+  links stays blank with intent and observed redirect target in separate fields; Search Console off, so
+  topic order remains a stated hypothesis and not measured demand.
+- **Coordination note for future sessions:** four sessions claimed T76/T77 concurrently on 2026-11-19.
+  The board's 60-minute rule worked, but the id space did not. **Check `origin/main`, not the local
+  file, immediately before claiming**, and prefer a fresh id over renumbering another session's record.
+  This session's first renumber attempt damaged two other sessions' records; that edit was reverted and
+  `COORDINATION.md` restored from `origin/main` before anything was committed.
+
 ## T79 claim (claimed as T77) — session `arena/af15a2f9-zone2` (af15a2f9) — 2026-11-19 (UTC) — TAKEOVER of stale T73
 
 **Task-ID correction (2026-11-19, this merge).** These records were written as **T77** (claim pushed 21:55:10Z). Session `arena/95bfb73c-zone2` renumbered its own claim to T77 at 21:57:29Z and landed on `main` first (PR #203). Per the board's precedent — the record not yet merged yields the id — **this session's records are renumbered T79** (claimed as T77). T78 was taken by session `47786492`/`95bfb73c`'s T78 record (PR #203 close-out). Scope, evidence and gates are unchanged.
