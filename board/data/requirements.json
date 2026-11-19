@@ -1,417 +1,495 @@
 {
-  "note": "A trace of the requirement rows in the 2026-11-17 brief, each checked against this repository's tree rather than taken from the brief's own status word. Placeholder tokens in the data (named after what they count) are replaced by tools/build_board.py with a value it MEASURES from the tree in the same run, and tools/validate_board.py re-measures and fails if any printed number disagrees. That is the whole point: this repository has twice shipped a page whose prose printed a count that had drifted from the register it described (FB-01, FB-02, and the two defects the T57 live read-back caught), and a typed count in this file would be a third.",
-  "as_of": "2026-11-17",
-  "tree_measured_at": "e58dac0",
-  "verdict_vocabulary": {
-    "matches": "the tree supports the status word the brief gives it",
-    "overstated": "the tree shows less than the brief's status word claims",
-    "as-stated": "the brief records a decision rather than a measurement; this namespace does not re-open it",
-    "no-status-given": "the brief left the status cell empty, so there is nothing to agree or disagree with — only a measurement to supply",
-    "unmeasurable-from-the-tree": "the row describes an outcome in the world, not an artefact in the repository"
+ "note": "A trace of the requirement rows in the 2026-11-17 brief, each checked against this repository's tree rather than taken from the brief's own status word. Placeholder tokens in the data (named after what they count) are replaced by tools/build_board.py with a value it MEASURES from the tree in the same run, and tools/validate_board.py re-measures and fails if any printed number disagrees. That is the whole point: this repository has twice shipped a page whose prose printed a count that had drifted from the register it described (FB-01, FB-02, and the two defects the T57 live read-back caught), and a typed count in this file would be a third.",
+ "as_of": "2026-11-17",
+ "tree_measured_at": "e58dac0",
+ "verdict_vocabulary": {
+  "matches": "the tree supports the status word the brief gives it",
+  "overstated": "the tree shows less than the brief's status word claims",
+  "as-stated": "the brief records a decision rather than a measurement; this namespace does not re-open it",
+  "no-status-given": "the brief left the status cell empty, so there is nothing to agree or disagree with — only a measurement to supply",
+  "unmeasurable-from-the-tree": "the row describes an outcome in the world, not an artefact in the repository"
+ },
+ "rows": [
+  {
+   "id": "RQ-01",
+   "brief_ref": "S-04",
+   "priority": "P1",
+   "requirement": "Give every page its own title and meta description",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "closed 2026-11-19 (T72)",
+   "verdict": "matches",
+   "measured": "{{unique_titles}} distinct titles across {{pages}} published pages; {{no_desc}} pages carry no meta description and {{dup_desc}} descriptions are shared by more than one page; {{dup_titles}} titles are shared by more than one page.",
+   "evidence": "Measured by tools/build_board.py across every published .html file, and enforced from 2026-11-19 by D8 in tools/seo_audit.py (a CI step) with negative controls in tests/test_page_identity.py. T72 closed the row at its generators rather than in the output: the 7 blank pages were the 404 page and all six revalidation/ pages (revalidation/scripts/build.py plus 404.html), the 39 identical pages/ descriptions and 4 identical decisions/ descriptions were a single HUB_DESCRIPTION string printed by tools/build_site.py and tools/build_decisions.py, and the duplicated titles were the two category bands, pages/niches.html vs the M-11 module page, and both thermometer pages. Every replacement is derived from text the page already published (its own <h1> and standfirst), so no new claim was introduced.",
+   "gap": "None remaining. D8 fails the build if any of the three properties regresses.",
+   "source_ids": [
+    "BD-21"
+   ]
   },
-  "rows": [
-    {
-      "id": "RQ-01",
-      "brief_ref": "S-04",
-      "priority": "P1",
-      "requirement": "Give every page its own title and meta description",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "partly",
-      "verdict": "overstated",
-      "measured": "{{unique_titles}} distinct titles across {{pages}} published pages; {{no_desc}} pages carry no meta description at all and {{dup_desc}} descriptions are shared by more than one page; {{dup_titles}} titles are shared by more than one page.",
-      "evidence": "Measured by tools/build_board.py across every published .html file. The pages with no description are the 404 page and the whole revalidation/ namespace.",
-      "gap": "{{no_desc}} pages to supply a description for, {{dup_titles}} duplicated titles and {{dup_desc}} duplicated descriptions to disambiguate. Small, mechanical, and the only P1 row on the brief that is not finished.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-02",
-      "brief_ref": "S-05",
-      "priority": "P2",
-      "requirement": "Mark the affiliate links rel=\"sponsored\" without breaking the required disclosure",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "implemented where the definition bites",
-      "verdict": "matches",
-      "measured": "{{amazon_links}} outbound links to an Amazon host across the tree, of which {{sponsored_links}} carry rel=\"sponsored\". On the {{reader_pages}} reader-facing pages the split is {{sponsored_reader}} sponsored against {{unsponsored_reader}} not — and every unsponsored one of those sits on a register page (verification, sources, summary, paths, questions), citing the URL as evidence rather than offering the product for sale.",
-      "evidence": "BD-15 defines the value by what the link is: 'Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.' A citation to a source page inside a verification table is neither.",
-      "gap": "None on this row. The related gap is RQ-22: the links are correctly marked as sponsored and still carry no Associates tag, so they are marked but not monetised.",
-      "source_ids": ["BD-15"]
-    },
-    {
-      "id": "RQ-03",
-      "brief_ref": "S-06",
-      "priority": "P2",
-      "requirement": "Add the one thing a listing cannot tell a reader: what the appliance is like to live with",
-      "brief_status": "Not adopted - see the recorded decision",
-      "measured_status": "not adopted",
-      "verdict": "as-stated",
-      "measured": "No first-hand use review exists on any page. The site's stated position is that it reports what official pages say and leaves the rest blank.",
-      "evidence": "The brief records this as decided against, with the decision linked as D-06. This namespace does not re-open another session's recorded decision.",
-      "gap": "Recorded, not open. It is listed here only because the two new products change its cost: a first-hand review of a thermometer is a different and cheaper piece of work than a first-hand review of a 26-quart oven, so the decision may be worth revisiting for the two new items specifically.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-04",
-      "brief_ref": "S-07",
-      "priority": "P2",
-      "requirement": "Answer the questions people actually type, one page per question",
-      "brief_status": "",
-      "measured_status": "partly — for three of five products only",
-      "verdict": "no-status-given",
-      "measured": "The question-shaped page set exists and is substantial, and every page in it is about air fryers. Nothing on the site asks or answers a single question about a meat thermometer.",
-      "evidence": "PI-04 and PI-05 resolve into Meat Thermometers; no published page carries that category.",
-      "gap": "The two newest products (PI-04, PI-05) have no question-shaped page, and no other page on the site could host one without breaking the one-question-per-page rule this row asks for.",
-      "source_ids": ["BD-03", "BD-04"]
-    },
-    {
-      "id": "RQ-05",
-      "brief_ref": "S-09",
-      "priority": "P2",
-      "requirement": "Ship a social preview image and structured data, then measure whether search traffic arrives",
-      "brief_status": "Partly implemented 2026-11-16",
-      "measured_status": "partly — preview metadata is present on a subset; Search Console remains off",
-      "verdict": "matches",
-      "measured": "{{jsonld}} of {{pages}} pages carry JSON-LD. {{og_full}} of {{pages}} carry og:type, og:site_name, og:title, og:description and og:url. {{og_image}} of {{pages}} carry an og:image. {{sc_pages}} of {{pages}} carry a Search Console verification tag.",
-      "evidence": "Measured by tools/build_board.py from the checked-in HTML tree; every figure on this row is a derived token recorded in board/data/measured.json. These counts describe published markup, not search-engine indexing or traffic.",
-      "gap": "Coverage is incomplete: the row's first-named deliverable — a social preview image on every page — is present on a subset only, and the second half (measure whether search traffic arrives) cannot be measured until the site's Search Console property is verified. The repository alone cannot establish search traffic.",
-      "source_ids": ["BD-15"]
-    },
-    {
-      "id": "RQ-06",
-      "brief_ref": "S-10",
-      "priority": "P3",
-      "requirement": "Bring the documentation in line with the code, and get every published check to run from a clean checkout",
-      "brief_status": "Partly implemented 2026-11-16",
-      "measured_status": "checked by replay, not by reading",
-      "verdict": "matches",
-      "measured": "tools/ci_replay.py replays every step of the workflow in order against this working tree; this session ran it and recorded the result in board/verification.html.",
-      "evidence": "A documented check that is not replayed is a claim. The number is printed on the verification page because it is measured, never typed.",
-      "gap": "None found on this run.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-07",
-      "brief_ref": "S-11",
-      "priority": "P3",
-      "requirement": "Fix one wrong flag cross-reference and split the open, resolved and historical items on the review page",
-      "brief_status": "Partly implemented 2026-11-16",
-      "measured_status": "partly",
-      "verdict": "matches",
-      "measured": "The register splits items by state; the wrong cross-reference the row names is not something this session could confirm either way, because the row does not say which reference it is.",
-      "evidence": "The row cites an S-APIFAQ notes field in data/sources.json on a different repository. This namespace records the ambiguity rather than guessing at which reference was meant.",
-      "gap": "The row needs the identifier of the cross-reference it wants fixed before anyone can close it. Logged as BQ2-08.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-08",
-      "brief_ref": "S-12",
-      "priority": "P2",
-      "requirement": "Decide the site's voice, and rewrite the articles to it once",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "implemented",
-      "verdict": "matches",
-      "measured": "The front-of-house pages read as one voice, and the mechanical tell the earlier review measured — the site writing about itself — was measured again after the rebuild and had fallen from 8% of sentences to 4%.",
-      "evidence": "Recorded by session dc72a69e in COORDINATION.md; the measurement was re-taken after that session rebased onto the rebuild rather than taken from the pre-rebuild pages.",
-      "gap": "None on this row.",
-      "source_ids": ["BD-22"]
-    },
-    {
-      "id": "RQ-09",
-      "brief_ref": "S-13",
-      "priority": "P2",
-      "requirement": "Approve a format-first topic calendar: eight catchy, spec-backed articles",
-      "brief_status": "Partly implemented 2026-11-16",
-      "measured_status": "partly — and the calendar was written for three products",
-      "verdict": "matches",
-      "measured": "A set of question-shaped topic pages exists alongside three product write-ups. The calendar is spec-backed and it covers the air fryers; it has no row for either thermometer.",
-      "evidence": "PI-04 and PI-05 were not part of the product set when the calendar was approved.",
-      "gap": "The eight-article calendar is the right shape for five products and the wrong contents. See BS-03.",
-      "source_ids": ["BD-03", "BD-04"]
-    },
-    {
-      "id": "RQ-10",
-      "brief_ref": "S-14",
-      "priority": "P2",
-      "requirement": "Adopt the prepared design-prompt draft as the brief for the visual overhaul",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "implemented",
-      "verdict": "matches",
-      "measured": "The design prompt is published as its own page and is written as a paste-ready brief with measured diagnosis and acceptance tests.",
-      "evidence": "brief/design-prompt.html in this repository.",
-      "gap": "None on this row.",
-      "source_ids": ["BD-22"]
-    },
-    {
-      "id": "RQ-11",
-      "brief_ref": "S-15",
-      "priority": "P2",
-      "requirement": "Choose the visual direction and settle the brand name",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "implemented",
-      "verdict": "matches",
-      "measured": "The publication carries a single brand name in the masthead of its front page and a consistent palette across the article set.",
-      "evidence": "index.html masthead, read 2026-11-17.",
-      "gap": "The brand name settled on is a counter-top cooking title. Two of the five products are thermometers, which are also counter-top cooking gear — the name survives the expansion, and that is worth noting rather than assuming.",
-      "source_ids": ["BD-03", "BD-04"]
-    },
-    {
-      "id": "RQ-12",
-      "brief_ref": "S-16",
-      "priority": "P2",
-      "requirement": "Adopt a written evidence rule for 'trending' and popularity claims",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "implemented",
-      "verdict": "matches",
-      "measured": "A written rule governs when the site may call something trending, and no page calls any of the five products trending.",
-      "evidence": "Recorded as decision D-19 by an earlier session; the rule's effect is visible in that no published page asserts popularity.",
-      "gap": "None on this row.",
-      "source_ids": ["BD-22"]
-    },
-    {
-      "id": "RQ-13",
-      "brief_ref": "S-17",
-      "priority": "P2",
-      "requirement": "Rebuild the front page as an editorial homepage: hero, featured articles, category tiles, then the data",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "implemented",
-      "verdict": "matches",
-      "measured": "The front page opens on a standfirst and a hero, moves to the machines, then to a question-led article section, then to the receipts, and only then to the operator surfaces.",
-      "evidence": "index.html, read 2026-11-17.",
-      "gap": "One gap the rebuild could not have known about: the hero names three machines, and there are now five.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-14",
-      "brief_ref": "S-18",
-      "priority": "P2",
-      "requirement": "Add real product photography, and never generated or copied photography",
-      "brief_status": "Needs a decision first",
-      "measured_status": "no photography of any kind on any page",
-      "verdict": "as-stated",
-      "measured": "No page carries product photography — not original, not generated, not copied.",
-      "evidence": "The brief leaves this open on purpose and cites the Operating Agreement's definition of Program Content.",
-      "gap": "The decision is genuinely open, and the two new products make it sharper: there is nothing to photograph on this side of the fence, so any photography path starts with a purchase or a manufacturer permission.",
-      "source_ids": ["BD-17"]
-    },
-    {
-      "id": "RQ-15",
-      "brief_ref": "S-19",
-      "priority": "P2",
-      "requirement": "Add a three-question 'which one is for you' chooser above the comparison table",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "not present",
-      "verdict": "overstated",
-      "measured": "{{chooser_pages}} pages carry a chooser component. What the comparison page carries instead is a section that poses three questions and links each to its own article — a question index, not a chooser.",
-      "evidence": "Measured across every published page; the pattern searched for covers the component's own likely class and heading names.",
-      "gap": "Either the row was satisfied in spirit by the three-question article section, in which case the status word should say so, or the chooser was never built. Those are different repairs. Logged as BQ2-06.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-16",
-      "brief_ref": "S-20",
-      "priority": "P2",
-      "requirement": "Mobile-first pass: type scale, tap targets, sticky comparison bar",
-      "brief_status": "",
-      "measured_status": "partly",
-      "verdict": "no-status-given",
-      "measured": "{{viewport_pages}} of {{pages}} pages declare a viewport. A sticky element appears on 9 pages, all of them in one operator namespace, none of them the comparison table.",
-      "evidence": "Measured across every published page.",
-      "gap": "The comparison table has no sticky bar. The row is unowned: no session has claimed it and the brief gives it no status, which is the profile of a row nobody has started.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-17",
-      "brief_ref": "S-23",
-      "priority": "P2",
-      "requirement": "Publish the counter-space analysis: capacity per centimetre of counter depth",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "implemented",
-      "verdict": "matches",
-      "measured": "{{counter_pages}} pages carry the counter-space analysis.",
-      "evidence": "Measured across every published page.",
-      "gap": "None on this row. Note that this is the one piece of original analysis on the site, and it is an air-fryer analysis — which is the argument for BS-05.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-18",
-      "brief_ref": "S-24",
-      "priority": "P2",
-      "requirement": "Complete the internal linking: every article reaches the comparison, the buying guide and its category pillar",
-      "brief_status": "Implemented 2026-11-16",
-      "measured_status": "partly",
-      "verdict": "overstated",
-      "measured": "{{guides_unlinked}} of {{guide_pages}} reader and guide pages reach none of the comparison, the buying guide or the guides index. All of them are in one namespace, and they link to the marketing front page instead — which is one hop short of the row's requirement.",
-      "evidence": "Measured by following every internal href on each reader and guide page.",
-      "gap": "{{guides_unlinked}} pages, one hop each. Mechanical.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-19",
-      "brief_ref": "S-25",
-      "priority": "P2",
-      "requirement": "Grow organic traffic on the verification angle, not on volume",
-      "brief_status": "",
-      "measured_status": "unmeasurable — nothing is counting",
-      "verdict": "unmeasurable-from-the-tree",
-      "measured": "{{sc_pages}} pages carry a Search Console verification tag, so the site cannot currently report the queries it receives at all.",
-      "evidence": "Measured across every published page. See RQ-28.",
-      "gap": "This row is an outcome, and the instrument that would measure it is not switched on. Choosing topics by instinct, which is what the brief asks to stop doing, is the only option available until it is.",
-      "source_ids": ["BD-16"]
-    },
-    {
-      "id": "RQ-20",
-      "brief_ref": "theme",
-      "priority": "P1",
-      "requirement": "Lead with the products, not with the verification process",
-      "brief_status": "",
-      "measured_status": "implemented on the front page",
-      "verdict": "no-status-given",
-      "measured": "The front page's first heading names the machines, not the method. The verification surfaces sit below and behind.",
-      "evidence": "index.html, read 2026-11-17.",
-      "gap": "The heading names three machines. There are five.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-21",
-      "brief_ref": "theme",
-      "priority": "P1",
-      "requirement": "Build a product-intent confirmation record: intended ASIN, official listing URL, confirmation date and source in one field group; observed redirect targets in a separate field; the two never merged",
-      "brief_status": "",
-      "measured_status": "built by this session — five rows, ten empty intent fields",
-      "verdict": "no-status-given",
-      "measured": "board/data/products.json holds five rows. Every intent field on every row is empty, with the reason printed next to it. Every observation field is full.",
-      "evidence": "The five supplied links were each fetched live on 2026-11-17 and their destinations recorded (BD-01, BD-02, BD-06, BD-07, BD-08); the two new ones were also fetched on direct arrival at their destination ASIN, without the short link, to confirm the destination is not an artefact of the redirect (BD-03, BD-04).",
-      "gap": "The record cannot be completed from outside the Associates account. That is the finding, not a defect.",
-      "source_ids": ["BD-01", "BD-02", "BD-03", "BD-04", "BD-06", "BD-07", "BD-08", "BD-12", "BD-21"]
-    },
-    {
-      "id": "RQ-22",
-      "brief_ref": "theme",
-      "priority": "P1",
-      "requirement": "Replace ambiguous outbound links with validated Special Links — one link per product tested in the enrolled Associates workflow before scaling",
-      "brief_status": "",
-      "measured_status": "blocked — no tag exists anywhere in the tree",
-      "verdict": "no-status-given",
-      "measured": "{{tagged}} of {{pages}} published pages carry a real Associates tag. Every occurrence of the tag parameter in the tree is the placeholder Amazon prints in its own documentation, not an identifier.",
-      "evidence": "Measured across every published page. Amazon's application-review page states the tags 'must be embedded in your Amazon product links on the site(s) declared in your application' and gives their shape as 'abcd-20' (BD-13).",
-      "gap": "This is the single row that gates the revenue half of the project, and it is gated by BQ2-01 and BQ2-02 — both of which the owner can close in one sign-in.",
-      "source_ids": ["BD-13", "BD-12"]
-    },
-    {
-      "id": "RQ-23",
-      "brief_ref": "theme",
-      "priority": "P1",
-      "requirement": "Keep the disclosure above the fold on every page, including this one",
-      "brief_status": "",
-      "measured_status": "implemented",
-      "verdict": "no-status-given",
-      "measured": "{{disclosed}} of {{pages}} published pages carry the required sentence, and on the front page it sits directly under the masthead, before any content.",
-      "evidence": "Measured across every published page; the wording is the one Amazon's own help page says the Operating Agreement requires (BD-14).",
-      "gap": "None on this row.",
-      "source_ids": ["BD-14"]
-    },
-    {
-      "id": "RQ-24",
-      "brief_ref": "theme",
-      "priority": "P4",
-      "requirement": "Start with an empty but well-defined campaign ledger; add timestamp, source, channel, eligible sessions, clicks and reported orders only when obtained from authorised first-party reports",
-      "brief_status": "",
-      "measured_status": "implemented exactly as asked",
-      "verdict": "no-status-given",
-      "measured": "ledger/campaigns.json is empty by design, declares itself EMPTY_BY_DESIGN, and publishes the schema a row must satisfy before one may be written.",
-      "evidence": "ledger/campaigns.json, read 2026-11-17.",
-      "gap": "None. This is the one row in the brief that asks for less rather than more, and it is the one row that is exactly right.",
-      "source_ids": ["BD-22"]
-    },
-    {
-      "id": "RQ-25",
-      "brief_ref": "theme",
-      "priority": "P4",
-      "requirement": "Add a privacy-preserving outbound-click counter and a self-hosted analytics endpoint; record the five defined events",
-      "brief_status": "",
-      "measured_status": "specified, not wired",
-      "verdict": "no-status-given",
-      "measured": "The five events are defined, named and given a firing rule and a privacy note. {{endpoint_pages}} pages call an event endpoint.",
-      "evidence": "docs/measurement-t40.json defines EV-01 page_view, EV-02 product_link_click, EV-03 disclosure_view, EV-04 conversion_import and EV-05 search_query_import. The endpoint exists as code and as a schema; no published page calls it.",
-      "gap": "The specification is finished and the wiring has not started. Until it is, RQ-19 and SG-29 cannot be measured either — the three are one dependency chain, which is why BS-02 bundles them.",
-      "source_ids": ["BD-22"]
-    },
-    {
-      "id": "RQ-26",
-      "brief_ref": "SG-27",
-      "priority": "P2",
-      "requirement": "Navigation labels",
-      "brief_status": "",
-      "measured_status": "implemented",
-      "verdict": "no-status-given",
-      "measured": "The front page carries a single navigation group of reader-facing labels, with the operator surfaces behind one labelled entry.",
-      "evidence": "index.html, read 2026-11-17.",
-      "gap": "One entry is about the site's own process rather than about the products, which is the one thing this row's parent theme asks to avoid.",
-      "source_ids": ["BD-21"]
-    },
-    {
-      "id": "RQ-27",
-      "brief_ref": "SG-28",
-      "priority": "P2",
-      "requirement": "The shipped RSS feed",
-      "brief_status": "",
-      "measured_status": "shipped",
-      "verdict": "no-status-given",
-      "measured": "marketing/feed.xml is published and listed in the marketing sitemap.",
-      "evidence": "marketing/feed.xml, read 2026-11-17.",
-      "gap": "A feed is only worth shipping if something subscribes to it, and nothing is counting subscribers. Same dependency as RQ-25.",
-      "source_ids": ["BD-22"]
-    },
-    {
-      "id": "RQ-28",
-      "brief_ref": "SG-29",
-      "priority": "P2",
-      "requirement": "Search Console",
-      "brief_status": "",
-      "measured_status": "not switched on",
-      "verdict": "no-status-given",
-      "measured": "{{sc_pages}} of {{pages}} pages carry a Search Console verification tag.",
-      "evidence": "Measured across every published page.",
-      "gap": "The brief's own priority is to choose the next topic from measured queries instead of instinct. Without this, instinct is the only instrument. This is the cheapest row on the board with the largest effect on everything downstream of it.",
-      "source_ids": ["BD-16"]
-    },
-    {
-      "id": "RQ-29",
-      "brief_ref": "SG-30",
-      "priority": "P2",
-      "requirement": "Reader capture",
-      "brief_status": "",
-      "measured_status": "not present",
-      "verdict": "no-status-given",
-      "measured": "{{capture_pages}} of {{pages}} pages carry any reader-capture form.",
-      "evidence": "Measured across every published page.",
-      "gap": "Deliberately left as a choice rather than a recommendation: BD-16 lists 'Its stated or implied authorship' among the factors a human review weighs, and a capture form is one way to establish an editorial relationship with a reader. It is also a consent and jurisdiction question. Logged as BS-09.",
-      "source_ids": ["BD-16"]
-    },
-    {
-      "id": "RQ-30",
-      "brief_ref": "theme",
-      "priority": "P5",
-      "requirement": "Keep disclosures and API policy checks in the publishing workflow; review disclosure placement and endorsement context against the Operating Agreement and FTC guidance",
-      "brief_status": "",
-      "measured_status": "implemented",
-      "verdict": "no-status-given",
-      "measured": "{{disclosed}} of {{pages}} pages carry the sentence Amazon's own help page says the Operating Agreement requires, in the required wording, above the content.",
-      "evidence": "BD-14, read live 2026-11-17, states both the requirement and the exact wording.",
-      "gap": "The endorsement-context half of the row is unreviewed by this session: it asks for a judgement against two documents (BD-17, BD-19) that this session did not re-read live. Flagged rather than passed.",
-      "source_ids": ["BD-14", "BD-17", "BD-19"]
-    },
-    {
-      "id": "RQ-31",
-      "brief_ref": "theme",
-      "priority": "P1",
-      "requirement": "Build marketing for the five supplied products",
-      "brief_status": "",
-      "measured_status": "three of five",
-      "verdict": "no-status-given",
-      "measured": "The brief names five products. The register this site's pages are generated from holds three. The two missing ones appear in no file in this repository before today.",
-      "evidence": "A case-insensitive search across every .json, .html, .md and .py in the tree returns no occurrence of either new link before this session wrote it.",
-      "gap": "Every page the site has published about products — the comparison, the buying guide, the counter-space analysis, the question-shaped articles — describes three items in one category. The two new items are in a different category node. Logged as CR-2 and as BS-03.",
-      "source_ids": ["BD-01", "BD-02", "BD-22"]
-    }
-  ]
+  {
+   "id": "RQ-02",
+   "brief_ref": "S-05",
+   "priority": "P2",
+   "requirement": "Mark the affiliate links rel=\"sponsored\" without breaking the required disclosure",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "implemented where the definition bites",
+   "verdict": "matches",
+   "measured": "{{amazon_links}} outbound links to an Amazon host across the tree, of which {{sponsored_links}} carry rel=\"sponsored\". On the {{reader_pages}} reader-facing pages the split is {{sponsored_reader}} sponsored against {{unsponsored_reader}} not — and every unsponsored one of those sits on a register page (verification, sources, summary, paths, questions), citing the URL as evidence rather than offering the product for sale.",
+   "evidence": "BD-15 defines the value by what the link is: 'Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.' A citation to a source page inside a verification table is neither.",
+   "gap": "None on this row. The related gap is RQ-22: the links are correctly marked as sponsored and still carry no Associates tag, so they are marked but not monetised.",
+   "source_ids": [
+    "BD-15"
+   ]
+  },
+  {
+   "id": "RQ-03",
+   "brief_ref": "S-06",
+   "priority": "P2",
+   "requirement": "Add the one thing a listing cannot tell a reader: what the appliance is like to live with",
+   "brief_status": "Not adopted - see the recorded decision",
+   "measured_status": "not adopted",
+   "verdict": "as-stated",
+   "measured": "No first-hand use review exists on any page. The site's stated position is that it reports what official pages say and leaves the rest blank.",
+   "evidence": "The brief records this as decided against, with the decision linked as D-06. This namespace does not re-open another session's recorded decision.",
+   "gap": "Recorded, not open. It is listed here only because the two new products change its cost: a first-hand review of a thermometer is a different and cheaper piece of work than a first-hand review of a 26-quart oven, so the decision may be worth revisiting for the two new items specifically.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-04",
+   "brief_ref": "S-07",
+   "priority": "P2",
+   "requirement": "Answer the questions people actually type, one page per question",
+   "brief_status": "",
+   "measured_status": "partly — for three of five products only",
+   "verdict": "no-status-given",
+   "measured": "The question-shaped page set exists and is substantial, and every page in it is about air fryers. Nothing on the site asks or answers a single question about a meat thermometer.",
+   "evidence": "PI-04 and PI-05 resolve into Meat Thermometers; no published page carries that category.",
+   "gap": "The two newest products (PI-04, PI-05) have no question-shaped page, and no other page on the site could host one without breaking the one-question-per-page rule this row asks for.",
+   "source_ids": [
+    "BD-03",
+    "BD-04"
+   ]
+  },
+  {
+   "id": "RQ-05",
+   "brief_ref": "S-09",
+   "priority": "P2",
+   "requirement": "Ship a social preview image and structured data, then measure whether search traffic arrives",
+   "brief_status": "Partly implemented 2026-11-16",
+   "measured_status": "partly — preview metadata is present on a subset; Search Console remains off",
+   "verdict": "matches",
+   "measured": "{{jsonld}} of {{pages}} pages carry JSON-LD. {{og_full}} of {{pages}} carry og:type, og:site_name, og:title, og:description and og:url. {{og_image}} of {{pages}} carry an og:image. {{sc_pages}} of {{pages}} carry a Search Console verification tag.",
+   "evidence": "Measured by tools/build_board.py from the checked-in HTML tree; every figure on this row is a derived token recorded in board/data/measured.json. These counts describe published markup, not search-engine indexing or traffic.",
+   "gap": "Coverage is incomplete: the row's first-named deliverable — a social preview image on every page — is present on a subset only, and the second half (measure whether search traffic arrives) cannot be measured until the site's Search Console property is verified. The repository alone cannot establish search traffic.",
+   "source_ids": [
+    "BD-15"
+   ]
+  },
+  {
+   "id": "RQ-06",
+   "brief_ref": "S-10",
+   "priority": "P3",
+   "requirement": "Bring the documentation in line with the code, and get every published check to run from a clean checkout",
+   "brief_status": "Partly implemented 2026-11-16",
+   "measured_status": "checked by replay, not by reading",
+   "verdict": "matches",
+   "measured": "tools/ci_replay.py replays every step of the workflow in order against this working tree; this session ran it and recorded the result in board/verification.html.",
+   "evidence": "A documented check that is not replayed is a claim. The number is printed on the verification page because it is measured, never typed.",
+   "gap": "None found on this run.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-07",
+   "brief_ref": "S-11",
+   "priority": "P3",
+   "requirement": "Fix one wrong flag cross-reference and split the open, resolved and historical items on the review page",
+   "brief_status": "Partly implemented 2026-11-16",
+   "measured_status": "partly",
+   "verdict": "matches",
+   "measured": "The register splits items by state; the wrong cross-reference the row names is not something this session could confirm either way, because the row does not say which reference it is.",
+   "evidence": "The row cites an S-APIFAQ notes field in data/sources.json on a different repository. This namespace records the ambiguity rather than guessing at which reference was meant.",
+   "gap": "The row needs the identifier of the cross-reference it wants fixed before anyone can close it. Logged as BQ2-08.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-08",
+   "brief_ref": "S-12",
+   "priority": "P2",
+   "requirement": "Decide the site's voice, and rewrite the articles to it once",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "implemented",
+   "verdict": "matches",
+   "measured": "The front-of-house pages read as one voice, and the mechanical tell the earlier review measured — the site writing about itself — was measured again after the rebuild and had fallen from 8% of sentences to 4%.",
+   "evidence": "Recorded by session dc72a69e in COORDINATION.md; the measurement was re-taken after that session rebased onto the rebuild rather than taken from the pre-rebuild pages.",
+   "gap": "None on this row.",
+   "source_ids": [
+    "BD-22"
+   ]
+  },
+  {
+   "id": "RQ-09",
+   "brief_ref": "S-13",
+   "priority": "P2",
+   "requirement": "Approve a format-first topic calendar: eight catchy, spec-backed articles",
+   "brief_status": "Partly implemented 2026-11-16",
+   "measured_status": "partly — and the calendar was written for three products",
+   "verdict": "matches",
+   "measured": "A set of question-shaped topic pages exists alongside three product write-ups. The calendar is spec-backed and it covers the air fryers; it has no row for either thermometer.",
+   "evidence": "PI-04 and PI-05 were not part of the product set when the calendar was approved.",
+   "gap": "The eight-article calendar is the right shape for five products and the wrong contents. See BS-03.",
+   "source_ids": [
+    "BD-03",
+    "BD-04"
+   ]
+  },
+  {
+   "id": "RQ-10",
+   "brief_ref": "S-14",
+   "priority": "P2",
+   "requirement": "Adopt the prepared design-prompt draft as the brief for the visual overhaul",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "implemented",
+   "verdict": "matches",
+   "measured": "The design prompt is published as its own page and is written as a paste-ready brief with measured diagnosis and acceptance tests.",
+   "evidence": "brief/design-prompt.html in this repository.",
+   "gap": "None on this row.",
+   "source_ids": [
+    "BD-22"
+   ]
+  },
+  {
+   "id": "RQ-11",
+   "brief_ref": "S-15",
+   "priority": "P2",
+   "requirement": "Choose the visual direction and settle the brand name",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "implemented",
+   "verdict": "matches",
+   "measured": "The publication carries a single brand name in the masthead of its front page and a consistent palette across the article set.",
+   "evidence": "index.html masthead, read 2026-11-17.",
+   "gap": "The brand name settled on is a counter-top cooking title. Two of the five products are thermometers, which are also counter-top cooking gear — the name survives the expansion, and that is worth noting rather than assuming.",
+   "source_ids": [
+    "BD-03",
+    "BD-04"
+   ]
+  },
+  {
+   "id": "RQ-12",
+   "brief_ref": "S-16",
+   "priority": "P2",
+   "requirement": "Adopt a written evidence rule for 'trending' and popularity claims",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "implemented",
+   "verdict": "matches",
+   "measured": "A written rule governs when the site may call something trending, and no page calls any of the five products trending.",
+   "evidence": "Recorded as decision D-19 by an earlier session; the rule's effect is visible in that no published page asserts popularity.",
+   "gap": "None on this row.",
+   "source_ids": [
+    "BD-22"
+   ]
+  },
+  {
+   "id": "RQ-13",
+   "brief_ref": "S-17",
+   "priority": "P2",
+   "requirement": "Rebuild the front page as an editorial homepage: hero, featured articles, category tiles, then the data",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "implemented",
+   "verdict": "matches",
+   "measured": "The front page opens on a standfirst and a hero, moves to the machines, then to a question-led article section, then to the receipts, and only then to the operator surfaces.",
+   "evidence": "index.html, read 2026-11-17.",
+   "gap": "One gap the rebuild could not have known about: the hero names three machines, and there are now five.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-14",
+   "brief_ref": "S-18",
+   "priority": "P2",
+   "requirement": "Add real product photography, and never generated or copied photography",
+   "brief_status": "Needs a decision first",
+   "measured_status": "no photography of any kind on any page",
+   "verdict": "as-stated",
+   "measured": "No page carries product photography — not original, not generated, not copied.",
+   "evidence": "The brief leaves this open on purpose and cites the Operating Agreement's definition of Program Content.",
+   "gap": "The decision is genuinely open, and the two new products make it sharper: there is nothing to photograph on this side of the fence, so any photography path starts with a purchase or a manufacturer permission.",
+   "source_ids": [
+    "BD-17"
+   ]
+  },
+  {
+   "id": "RQ-15",
+   "brief_ref": "S-19",
+   "priority": "P2",
+   "requirement": "Add a three-question 'which one is for you' chooser above the comparison table",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "not present",
+   "verdict": "overstated",
+   "measured": "{{chooser_pages}} pages carry a chooser component. What the comparison page carries instead is a section that poses three questions and links each to its own article — a question index, not a chooser.",
+   "evidence": "Measured across every published page; the pattern searched for covers the component's own likely class and heading names.",
+   "gap": "Either the row was satisfied in spirit by the three-question article section, in which case the status word should say so, or the chooser was never built. Those are different repairs. Logged as BQ2-06.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-16",
+   "brief_ref": "S-20",
+   "priority": "P2",
+   "requirement": "Mobile-first pass: type scale, tap targets, sticky comparison bar",
+   "brief_status": "",
+   "measured_status": "partly",
+   "verdict": "no-status-given",
+   "measured": "{{viewport_pages}} of {{pages}} pages declare a viewport. A sticky element appears on 9 pages, all of them in one operator namespace, none of them the comparison table.",
+   "evidence": "Measured across every published page.",
+   "gap": "The comparison table has no sticky bar. The row is unowned: no session has claimed it and the brief gives it no status, which is the profile of a row nobody has started.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-17",
+   "brief_ref": "S-23",
+   "priority": "P2",
+   "requirement": "Publish the counter-space analysis: capacity per centimetre of counter depth",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "implemented",
+   "verdict": "matches",
+   "measured": "{{counter_pages}} pages carry the counter-space analysis.",
+   "evidence": "Measured across every published page.",
+   "gap": "None on this row. Note that this is the one piece of original analysis on the site, and it is an air-fryer analysis — which is the argument for BS-05.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-18",
+   "brief_ref": "S-24",
+   "priority": "P2",
+   "requirement": "Complete the internal linking: every article reaches the comparison, the buying guide and its category pillar",
+   "brief_status": "Implemented 2026-11-16",
+   "measured_status": "partly",
+   "verdict": "overstated",
+   "measured": "{{guides_unlinked}} of {{guide_pages}} reader and guide pages reach none of the comparison, the buying guide or the guides index. All of them are in one namespace, and they link to the marketing front page instead — which is one hop short of the row's requirement.",
+   "evidence": "Measured by following every internal href on each reader and guide page.",
+   "gap": "{{guides_unlinked}} pages, one hop each. Mechanical.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-19",
+   "brief_ref": "S-25",
+   "priority": "P2",
+   "requirement": "Grow organic traffic on the verification angle, not on volume",
+   "brief_status": "",
+   "measured_status": "unmeasurable — nothing is counting",
+   "verdict": "unmeasurable-from-the-tree",
+   "measured": "{{sc_pages}} pages carry a Search Console verification tag, so the site cannot currently report the queries it receives at all.",
+   "evidence": "Measured across every published page. See RQ-28.",
+   "gap": "This row is an outcome, and the instrument that would measure it is not switched on. Choosing topics by instinct, which is what the brief asks to stop doing, is the only option available until it is.",
+   "source_ids": [
+    "BD-16"
+   ]
+  },
+  {
+   "id": "RQ-20",
+   "brief_ref": "theme",
+   "priority": "P1",
+   "requirement": "Lead with the products, not with the verification process",
+   "brief_status": "",
+   "measured_status": "implemented on the front page",
+   "verdict": "no-status-given",
+   "measured": "The front page's first heading names the machines, not the method. The verification surfaces sit below and behind.",
+   "evidence": "index.html, read 2026-11-17.",
+   "gap": "The heading names three machines. There are five.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-21",
+   "brief_ref": "theme",
+   "priority": "P1",
+   "requirement": "Build a product-intent confirmation record: intended ASIN, official listing URL, confirmation date and source in one field group; observed redirect targets in a separate field; the two never merged",
+   "brief_status": "",
+   "measured_status": "built by this session — five rows, ten empty intent fields",
+   "verdict": "no-status-given",
+   "measured": "board/data/products.json holds five rows. Every intent field on every row is empty, with the reason printed next to it. Every observation field is full.",
+   "evidence": "The five supplied links were each fetched live on 2026-11-17 and their destinations recorded (BD-01, BD-02, BD-06, BD-07, BD-08); the two new ones were also fetched on direct arrival at their destination ASIN, without the short link, to confirm the destination is not an artefact of the redirect (BD-03, BD-04).",
+   "gap": "The record cannot be completed from outside the Associates account. That is the finding, not a defect.",
+   "source_ids": [
+    "BD-01",
+    "BD-02",
+    "BD-03",
+    "BD-04",
+    "BD-06",
+    "BD-07",
+    "BD-08",
+    "BD-12",
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-22",
+   "brief_ref": "theme",
+   "priority": "P1",
+   "requirement": "Replace ambiguous outbound links with validated Special Links — one link per product tested in the enrolled Associates workflow before scaling",
+   "brief_status": "",
+   "measured_status": "blocked — no tag exists anywhere in the tree",
+   "verdict": "no-status-given",
+   "measured": "{{tagged}} of {{pages}} published pages carry a real Associates tag. Every occurrence of the tag parameter in the tree is the placeholder Amazon prints in its own documentation, not an identifier.",
+   "evidence": "Measured across every published page. Amazon's application-review page states the tags 'must be embedded in your Amazon product links on the site(s) declared in your application' and gives their shape as 'abcd-20' (BD-13).",
+   "gap": "This is the single row that gates the revenue half of the project, and it is gated by BQ2-01 and BQ2-02 — both of which the owner can close in one sign-in.",
+   "source_ids": [
+    "BD-13",
+    "BD-12"
+   ]
+  },
+  {
+   "id": "RQ-23",
+   "brief_ref": "theme",
+   "priority": "P1",
+   "requirement": "Keep the disclosure above the fold on every page, including this one",
+   "brief_status": "",
+   "measured_status": "implemented",
+   "verdict": "no-status-given",
+   "measured": "{{disclosed}} of {{pages}} published pages carry the required sentence, and on the front page it sits directly under the masthead, before any content.",
+   "evidence": "Measured across every published page; the wording is the one Amazon's own help page says the Operating Agreement requires (BD-14).",
+   "gap": "None on this row.",
+   "source_ids": [
+    "BD-14"
+   ]
+  },
+  {
+   "id": "RQ-24",
+   "brief_ref": "theme",
+   "priority": "P4",
+   "requirement": "Start with an empty but well-defined campaign ledger; add timestamp, source, channel, eligible sessions, clicks and reported orders only when obtained from authorised first-party reports",
+   "brief_status": "",
+   "measured_status": "implemented exactly as asked",
+   "verdict": "no-status-given",
+   "measured": "ledger/campaigns.json is empty by design, declares itself EMPTY_BY_DESIGN, and publishes the schema a row must satisfy before one may be written.",
+   "evidence": "ledger/campaigns.json, read 2026-11-17.",
+   "gap": "None. This is the one row in the brief that asks for less rather than more, and it is the one row that is exactly right.",
+   "source_ids": [
+    "BD-22"
+   ]
+  },
+  {
+   "id": "RQ-25",
+   "brief_ref": "theme",
+   "priority": "P4",
+   "requirement": "Add a privacy-preserving outbound-click counter and a self-hosted analytics endpoint; record the five defined events",
+   "brief_status": "",
+   "measured_status": "specified, not wired",
+   "verdict": "no-status-given",
+   "measured": "The five events are defined, named and given a firing rule and a privacy note. {{endpoint_pages}} pages call an event endpoint.",
+   "evidence": "docs/measurement-t40.json defines EV-01 page_view, EV-02 product_link_click, EV-03 disclosure_view, EV-04 conversion_import and EV-05 search_query_import. The endpoint exists as code and as a schema; no published page calls it.",
+   "gap": "The specification is finished and the wiring has not started. Until it is, RQ-19 and SG-29 cannot be measured either — the three are one dependency chain, which is why BS-02 bundles them.",
+   "source_ids": [
+    "BD-22"
+   ]
+  },
+  {
+   "id": "RQ-26",
+   "brief_ref": "SG-27",
+   "priority": "P2",
+   "requirement": "Navigation labels",
+   "brief_status": "",
+   "measured_status": "implemented",
+   "verdict": "no-status-given",
+   "measured": "The front page carries a single navigation group of reader-facing labels, with the operator surfaces behind one labelled entry.",
+   "evidence": "index.html, read 2026-11-17.",
+   "gap": "One entry is about the site's own process rather than about the products, which is the one thing this row's parent theme asks to avoid.",
+   "source_ids": [
+    "BD-21"
+   ]
+  },
+  {
+   "id": "RQ-27",
+   "brief_ref": "SG-28",
+   "priority": "P2",
+   "requirement": "The shipped RSS feed",
+   "brief_status": "",
+   "measured_status": "shipped",
+   "verdict": "no-status-given",
+   "measured": "marketing/feed.xml is published and listed in the marketing sitemap.",
+   "evidence": "marketing/feed.xml, read 2026-11-17.",
+   "gap": "A feed is only worth shipping if something subscribes to it, and nothing is counting subscribers. Same dependency as RQ-25.",
+   "source_ids": [
+    "BD-22"
+   ]
+  },
+  {
+   "id": "RQ-28",
+   "brief_ref": "SG-29",
+   "priority": "P2",
+   "requirement": "Search Console",
+   "brief_status": "",
+   "measured_status": "not switched on",
+   "verdict": "no-status-given",
+   "measured": "{{sc_pages}} of {{pages}} pages carry a Search Console verification tag.",
+   "evidence": "Measured across every published page.",
+   "gap": "The brief's own priority is to choose the next topic from measured queries instead of instinct. Without this, instinct is the only instrument. This is the cheapest row on the board with the largest effect on everything downstream of it.",
+   "source_ids": [
+    "BD-16"
+   ]
+  },
+  {
+   "id": "RQ-29",
+   "brief_ref": "SG-30",
+   "priority": "P2",
+   "requirement": "Reader capture",
+   "brief_status": "",
+   "measured_status": "not present",
+   "verdict": "no-status-given",
+   "measured": "{{capture_pages}} of {{pages}} pages carry any reader-capture form.",
+   "evidence": "Measured across every published page.",
+   "gap": "Deliberately left as a choice rather than a recommendation: BD-16 lists 'Its stated or implied authorship' among the factors a human review weighs, and a capture form is one way to establish an editorial relationship with a reader. It is also a consent and jurisdiction question. Logged as BS-09.",
+   "source_ids": [
+    "BD-16"
+   ]
+  },
+  {
+   "id": "RQ-30",
+   "brief_ref": "theme",
+   "priority": "P5",
+   "requirement": "Keep disclosures and API policy checks in the publishing workflow; review disclosure placement and endorsement context against the Operating Agreement and FTC guidance",
+   "brief_status": "",
+   "measured_status": "implemented",
+   "verdict": "no-status-given",
+   "measured": "{{disclosed}} of {{pages}} pages carry the sentence Amazon's own help page says the Operating Agreement requires, in the required wording, above the content.",
+   "evidence": "BD-14, read live 2026-11-17, states both the requirement and the exact wording.",
+   "gap": "The endorsement-context half of the row is unreviewed by this session: it asks for a judgement against two documents (BD-17, BD-19) that this session did not re-read live. Flagged rather than passed.",
+   "source_ids": [
+    "BD-14",
+    "BD-17",
+    "BD-19"
+   ]
+  },
+  {
+   "id": "RQ-31",
+   "brief_ref": "theme",
+   "priority": "P1",
+   "requirement": "Build marketing for the five supplied products",
+   "brief_status": "",
+   "measured_status": "three of five",
+   "verdict": "no-status-given",
+   "measured": "The brief names five products. The register this site's pages are generated from holds three. The two missing ones appear in no file in this repository before today.",
+   "evidence": "A case-insensitive search across every .json, .html, .md and .py in the tree returns no occurrence of either new link before this session wrote it.",
+   "gap": "Every page the site has published about products — the comparison, the buying guide, the counter-space analysis, the question-shaped articles — describes three items in one category. The two new items are in a different category node. Logged as CR-2 and as BS-03.",
+   "source_ids": [
+    "BD-01",
+    "BD-02",
+    "BD-22"
+   ]
+  }
+ ]
 }

@@ -368,8 +368,12 @@ def page_hub() -> str:
       <p class="not-tested">{esc(NOT_DONE.format(as_of=AS_OF))}</p>
     </section>
 """
+    # T72 (session arena/672f9c4c-zone2, 2026-11-19): this desk and guides/meat-thermometers.html are
+    # BOTH canonical at "Meat thermometers", because front-page category headings and this
+    # namespace's derived titles are the same string. The distinguishing half is already this page's
+    # own <h1> ("Meat thermometers, read off the listing"), so the title now prints it.
     return page(
-        "Meat thermometers",
+        "Meat thermometers, read off the listing",
         "Instant-read or leave-in? Two meat thermometers compared row by row from their listings, with USDA's "
         "safe temperatures and placement rules linked beside every line.",
         body, rel=f"{SECTION}/index.html", crumb_label="Thermometers",
