@@ -1477,7 +1477,7 @@ and the [FTC disclosure guidance](https://www.ftc.gov/business-guidance/resource
 - No product/source facts were changed and no live Amazon redirect was repeated in this integration pass.
   The changed verification scope and commands are recorded in
   [`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md).
-- PR #166 is open from `arena/cf98ff65-zone2` to `main`; no merge or GitHub Pages deployment is confirmed by this addendum.
+- PR #166 merged on 2026-11-19 at 06:01:43 UTC as merge commit `785740716952f309e5895ffeaea6c675115cc2d7`. The post-merge build-and-deploy run passed, the GitHub Pages deployment run succeeded, and the Pages API reports `status: built` at <https://kanlerxz87-cyber.github.io/Zone2/>.
 
 ### Next evidence to collect
 
