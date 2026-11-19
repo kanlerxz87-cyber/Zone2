@@ -7498,3 +7498,16 @@ Close-out refresh: main advanced to 7841845 via independent T67 / PR #175. Its c
 and coordination records are retained; canonical code was deliberately preserved by that session. Only
 this closing coordination append conflicted and both chronologies were kept. Independent last-two-link
 initial/repeat variation is not promoted into a product-intent or routing-cause conclusion.
+
+### T63 (`37333afd`) — narrowly scoped link-helper safety follow-up
+
+Before final close-out, T67's independent record highlighted an unused legacy helper branch that is
+still present in canonical `tools/link_builder.py`: a static `subtag` is concatenated onto an issued tag,
+and `extra_params` can replace `tag`. Current publication callers use neither option, so the shipped
+reader URLs are unchanged; nevertheless the helper contradicts the exact-issued-ID rule. Claiming only
+`tools/link_builder.py` and its dedicated negative tests plus this session's existing workflow regression
+step/flag/verification records: fail closed on synthesized sub-tags and unreviewed parameter overrides,
+keep the exact owner-supplied ID, and prove ordinary current links remain byte-for-byte identical. No
+other open branch claims that file; T67 retained canonical main rather than applying its earlier variant.
+This is a defect repair, not approval of a new campaign, tag, experiment or report. Independent redirect
+observations remain separate evidence and are not copied into current product intent.
