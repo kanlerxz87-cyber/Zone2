@@ -7613,3 +7613,35 @@ reader pages of the current release: `chef-iq-sense` vs `thermomaven-instant-rea
 **0.342**. Roughly a third of every product note is the shell: an intro sentence, a trade-off sentence, and
 five table rows. That is the structural reason the set reads as generated, and it is the thing a reader
 cannot act on. Scope: original, sourced decision copy per product — not more pages.
+
+### T68 (`5f7f77a4`) — result record, 2026-11-19
+
+**Measured problem, measured repair.** The five product notes shared a third of their text
+(8-word shingle Jaccard: `chef-iq-sense` × `thermomaven-instant-read` **0.389**,
+`chefman-dual-basket` × `chefman-single-basket` **0.363**). Each note now carries per-product
+copy — fit / not-a-fit, trade-off, four checks, verdict — and the worst pair is **0.163**.
+`tools/note_overlap.py` gates this at 0.25 on every build. The specification tables, their
+values, their row-level official source links and their blanks are unchanged.
+
+**Also measured, not fixed (deliberately).** The deployed artifact holds 226 HTML pages:
+16 reader URLs in the root sitemap, 187 `noindex`, and **23 crawlable pages in neither**
+(`brief/` 9, `console/` 8, `discovery/` 6). Recorded as Q68-01 / S68-01 with three options.
+
+**Registers extended.** S68-01…S68-04 (all "Proposed — not implemented"), Q68-01…Q68-04,
+flag CN-11. Sources `GOOGLE-SPAM`, `GOOGLE-SEO`, `GOOGLE-SNIPPET` added with a 2026-11-19
+`checked` date.
+
+**Gates.** `tools/ci_replay.py` **62/62** (was 61; the new duplication step is the 62nd).
+`verify_front` 16/16, `verify_publication` clean (228 pages / 16 indexable / 1,451 anchors /
+138 factual rows), `audit_site` 228 pass, `seo_audit` pass, sitemap and readiness current,
+CSS urls 0 broken, browser 252 viewport checks and 24 accessibility scans clean.
+
+**Evidence limits recorded, not worked around.** Amazon `/dp/` fetches returned 503 from this
+sandbox, and `kanlerxz87-cyber.github.io` did not complete TLS on 2026-11-19 (host-level; the
+GitHub API answered 200). No Amazon value was re-typed from a search result, no live-page
+claim is made here, and the Pages deploy result is recorded separately below from the API and
+the run list rather than from a page fetch.
+
+**Scope discipline.** No other session's files were touched: `.github/workflows/pages.yml` was
+edited only to insert the new gate step, and no open PR (#162, #163, #172) was merged or closed.
+Sources, the exact source list and the reproduction method: `docs/verification-5f7f77a4.md`.
