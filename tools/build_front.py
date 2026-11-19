@@ -43,6 +43,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import head_meta  # noqa: E402  — the repository's single canonical/OG contract
+import publication
 import shop_layout  # noqa: E402  (T66: one masthead/footer for front pages and shop/)
 from link_builder import ASSOCIATES_TAG, build_product_link  # noqa: E402  — the policy-guarded Special Link emitter
 import front_t63 as t63  # noqa: E402  — T63 reader-first content (thermometers, FSIS rows, new guides)
@@ -243,34 +244,13 @@ def footer(depth: str = "") -> str:
 
 def page(rel_path: str, *, title: str, description: str, active: str,
          body: str, depth: str = "", extra_head: str = "", with_data: bool = False) -> str:
-    head = head_meta.head_block(rel_path, title=title, description=description,
-                                site_name="Counter Notes",
-                                page_type="article" if rel_path != "index.html" else "website")
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(title)}</title>
-<meta name="description" content="{e(description)}">
-{head}
-<link rel="stylesheet" href="{e(depth)}assets/css/style.css">
-<link rel="stylesheet" href="{e(depth)}assets/css/publish.css">
-<link rel="icon" href="{e(depth)}assets/favicon.svg" type="image/svg+xml">
-{extra_head}
-</head>
-<body>
-<a class="skip-link" href="#main">{'Skip to content'}</a>
-{masthead(active)}
-<main id="main">
-{body}
-</main>
-{footer(depth)}
-<script src="{e(depth)}assets/js/events.js" defer></script>
-{f'<script src="{e(depth)}assets/js/data.js"></script><script src="{e(depth)}assets/js/app.js"></script>' if with_data else ''}
-</body>
-</html>
-"""
+    scripts = ("assets/js/review-choices.js",) if rel_path == "suggestions.html" else ()
+    doc = publication.shell(rel_path, title.replace(" · Counter Notes", ""), description, body, scripts=scripts)
+    if extra_head:
+        doc = doc.replace("</head>", extra_head + "</head>")
+    if with_data:
+        doc = doc.replace("</body>", f'<script src="{e(depth)}assets/js/data.js"></script><script src="{e(depth)}assets/js/app.js"></script></body>')
+    return doc
 
 
 def implemented_line(sg: dict) -> str:
@@ -1176,6 +1156,33 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
 # --------------------------------------------------------------------------- #
 # main
 # --------------------------------------------------------------------------- #
+# T63 37333afd integration: prior reader builders remain above for traceability;
+# new canonical reader entry points and current decision prerequisites share one shell.
+_upstream_home = build_index
+_upstream_guides_index = build_guides_index
+_upstream_suggestions = build_suggestions
+_upstream_questions = build_questions
+_upstream_cleanup = build_guide_cleanup
+
+def build_index(facts, board):
+    return publication.home()
+
+def build_guides_index(facts, board):
+    return publication.guides_index()
+
+def build_suggestions(facts, board):
+    doc = _upstream_suggestions(facts, board)
+    return doc.replace('<main id="main" tabindex="-1">', '<main id="main" tabindex="-1">' + publication.suggestions_current())
+
+def build_questions(facts, board):
+    doc = _upstream_questions(facts, board)
+    section = '<section class="cn-wrap cn-section"><h2 class="cn-table-title">Current release prerequisites · 19 November 2026</h2>' + publication.question_register() + '</section>'
+    return doc.replace('<main id="main" tabindex="-1">', '<main id="main" tabindex="-1">' + section)
+
+def build_cleanup_earlier(facts, board):
+    # Both sessions added this path independently; preserve the earlier treatment as well.
+    return _upstream_cleanup(facts, board).replace('cleanup-and-counter-space.html', 'cleanup-and-counter-space-earlier.html')
+
 TARGETS: list[tuple[str, callable]] = [
     ("index.html", build_index),
     ("summary.html", build_current_summary),
@@ -1191,7 +1198,7 @@ TARGETS: list[tuple[str, callable]] = [
     ("guides/instant-read-or-wireless-thermometer.html", build_guide_thermo_compare),
     ("guides/thermometer-for-air-fryer.html", build_guide_thermo_airfryer),
     ("guides/multi-function-appliance-questions.html", build_guide_multifunction),
-    ("guides/cleanup-and-counter-space.html", build_guide_cleanup),
+    ("guides/cleanup-and-counter-space-earlier.html", build_cleanup_earlier),
     ("behind-the-site.html", build_behind),
 ]
 
@@ -1210,6 +1217,16 @@ def main() -> int:
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(want, encoding="utf-8")
             print(f"  wrote {rel} ({len(want):,} bytes)")
+    extras = publication.extra_pages()
+    extras["feed.xml"] = publication.feed()
+    for rel, want in extras.items():
+        out = ROOT / rel
+        if check:
+            if not out.is_file() or out.read_text(encoding="utf-8") != want:
+                stale.append(rel)
+        else:
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(want, encoding="utf-8")
     if check:
         if stale:
             for s in stale:

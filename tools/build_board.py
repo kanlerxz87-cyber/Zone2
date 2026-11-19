@@ -50,7 +50,7 @@ DATA = BOARD / "data"
 SITE = "https://kanlerxz87-cyber.github.io/Zone2"
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 
-SKIP_DIRS = {".git", "__pycache__", "node_modules", ".github"}
+SKIP_DIRS = {".git", "__pycache__", "node_modules", ".github", ".local", "_site"}
 PLACEHOLDER_TAGS = {"YOURASSOCIATEID", "YOURID", "YOURASSOCIATEID-20", ""}
 
 NAV = [

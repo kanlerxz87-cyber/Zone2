@@ -1,143 +1,275 @@
 {
-  "note": "T40 measurement layer - DATA MODEL AND DECISION PLAN. This file is a proposal, not an implementation. It defines what could be measured on this site, what may be measured under the program rules, and what each measurement would let the owner decide - so that the choice in discovery/suggestions.html DS-11 can be made against a concrete design instead of an idea. NOTHING here collects anything today: there is no script, no endpoint, no cookie and no account. The `status` of every event is DESIGNED, never LIVE, and the measurement gate fails the build if that ever changes without a recorded owner decision. UPDATE 2026-11-17 (session 7264f3c2): the owner recorded that decision on DS-11 and chose option A. EV-01, EV-02 and EV-03 are now LIVE as a privacy-preserving client-side counter (assets/js/events.js): no cookie, no identifier, nothing per person, and no count is published anywhere on the site. The events queue in the visitor's own browser only, because the endpoint that would persist them does not exist on GitHub Pages static hosting (MI-01 stays open). EV-04 and EV-05 remain BLOCKED on first-party reports. The wording above is kept for the record.",
-  "as_of": "2026-11-15",
+  "note": "Current five-event contract, updated by T63. Runnable first-party collector and local authorized-report importers exist. Production GitHub Pages collection is OFF. A sandbox preview/test is not production traffic. No device queue, conversion inference or fabricated performance rows. Original plans and implementation history are retained in Git.",
+  "as_of": "2026-11-19",
   "session": "arena/3e0b3b4e-zone2",
-  "status_vocabulary": ["DESIGNED", "BLOCKED", "LIVE"],
+  "status_vocabulary": [
+    "DESIGNED",
+    "IMPLEMENTED_OFF",
+    "BLOCKED",
+    "LIVE"
+  ],
   "principles": [
     {
       "id": "MP-01",
-      "rule": "No personal data, no cookie, no cross-site identifier, and no identifier derived from a visitor.",
+      "rule": "The counter stores no reader identifier, cookie, IP/UA field, raw referrer or per-user reporting ID.",
       "why": "Amazon's Participation Requirements forbid associating a sub-tag or reporting ID with a specific end user (R-08 in ledger/compliance.json; S02 in ledger/sources.json). A design that cannot do that even if asked is stronger than a policy that says not to.",
-      "source_ids": ["S46"]
+      "source_ids": [
+        "S46"
+      ]
     },
     {
       "id": "MP-02",
       "rule": "Measure the page and the link, never the person.",
-      "why": "The only questions this site needs answered are 'which page sends people to which product' and 'which page earns'. Both are aggregate counts on a page-plus-link key. Nothing about an individual changes any decision the owner can make.",
-      "source_ids": []
+      "why": "Daily page/link counters are descriptive event aggregates, not people or eligible sessions. Authorized account-level orders remain separate and cannot be assigned to individual pages or queries.",
+      "source_ids": [
+        "S46"
+      ]
     },
     {
       "id": "MP-03",
       "rule": "Publish no traffic, conversion or income expectation, and no forecast.",
       "why": "The Operating Agreement states that Amazon makes no representation or warranty regarding the amount of traffic or commission income an Associate can expect (S58). A projection on this site would present as knowledge exactly what that clause disclaims. The layer records what happened; it never prints what will.",
-      "source_ids": ["S58"]
+      "source_ids": [
+        "S58"
+      ]
     },
     {
       "id": "MP-04",
       "rule": "Every event has a stated decision it supports, or it is not collected.",
       "why": "Measurement without a decision is cost with no benefit. This file therefore lists the decision beside each event, and the gate refuses an event with no decision.",
-      "source_ids": []
+      "source_ids": [
+        "S56"
+      ]
     },
     {
       "id": "MP-05",
       "rule": "Search measurement must not route visitors straight to Amazon.",
       "why": "Search results, paid or unpaid, must send users to the site and not directly or indirectly to an Amazon Site (S51). Any Search Console or paid-search plan is constrained by that.",
-      "source_ids": ["S51"]
+      "source_ids": [
+        "S51"
+      ]
     }
   ],
   "events": [
     {
       "id": "EV-01",
       "name": "page_view",
-      "status": "LIVE",
-      "live_since": "2026-11-17",
-      "collected_by": "assets/js/events.js (front pages and the marketing set)",
-      "persistence": "client-side only: a bounded queue in the visitor's own browser until MI-01's endpoint exists; nothing is transmitted and no count is published",
-      "fires_on": "A dashboard or marketing page being served.",
-      "fields": ["page_path", "referrer_host ONLY (the hostname, never the full URL or query)", "day_bucket (a date, never a time)"],
-      "deliberately_not_collected": ["IP address", "user agent", "device ID", "any cookie or local identifier", "full referrer URL", "query string"],
-      "decides": "Which pages are being found at all. This is the only event that would justify writing the next page.",
-      "analogy_in_repo": "Nothing today. The repository has no client-side script beyond render functions in assets/js/app.js."
+      "status": "IMPLEMENTED_OFF",
+      "collected_by": "assets/js/events.js + measurement/collector.py",
+      "persistence": "Self-hosted SQLite daily aggregates only when a first-party host is active; Pages configuration OFF.",
+      "fires_on": "Visible registered page load, at most once per load.",
+      "fields": [
+        "event",
+        "page (registered HTML path)",
+        "channel (direct/search/internal/other)"
+      ],
+      "deliberately_not_collected": [
+        "reader identifiers or cookies",
+        "raw URLs, query strings, IP/user-agent fields",
+        "per-customer purchase data or inferred conversions"
+      ],
+      "decides": "Compare observed page-load and outbound-click counts; no unique reader, eligible session or causal conclusion.",
+      "blocked_by": "Permanent owner-controlled hosting, TLS, persistence/log/privacy review; Pages cannot accept POST.",
+      "source_ids": [
+        "S58"
+      ]
     },
     {
       "id": "EV-02",
       "name": "product_link_click",
-      "status": "LIVE",
-      "live_since": "2026-11-17",
-      "collected_by": "assets/js/events.js, wired to every a[data-link-state] product link",
-      "persistence": "client-side only, as EV-01; the operator dashboards may still hold PREVIEW_NO_TAG rows from before the tag was supplied",
-      "fires_on": "A click on a product link, before navigation.",
-      "fields": ["page_path", "product_key (P1/P2/P3 - a static label from the fact base, never a value derived from the visitor)", "link_state (PREVIEW_NO_TAG or TAGGED)"],
-      "deliberately_not_collected": ["anything that persists across pages", "the destination of the click", "whether the visitor bought anything (the site cannot know this and must not imply it does)"],
-      "decides": "Which page and which product deserve more work. This is the single most useful measurement on an affiliate site.",
-      "analogy_in_repo": "tools/link_builder.py already labels every link with data-link-state=\"PREVIEW_NO_TAG\"; the event key exists in the markup today and simply nothing counts it."
+      "status": "IMPLEMENTED_OFF",
+      "collected_by": "assets/js/events.js + measurement/collector.py",
+      "persistence": "Self-hosted SQLite daily aggregates only when a first-party host is active; Pages configuration OFF.",
+      "fires_on": "Trusted primary or middle click on a marked, tagged, direct Amazon product link.",
+      "fields": [
+        "event",
+        "page (registered HTML path)",
+        "product (static P1–P5)"
+      ],
+      "deliberately_not_collected": [
+        "reader identifiers or cookies",
+        "raw URLs, query strings, IP/user-agent fields",
+        "per-customer purchase data or inferred conversions"
+      ],
+      "decides": "Compare daily page/product outbound activity. More clicks do not establish more orders or profitability.",
+      "blocked_by": "Permanent owner-controlled hosting, TLS, persistence/log/privacy review; Pages cannot accept POST.",
+      "source_ids": [
+        "S46"
+      ]
     },
     {
       "id": "EV-03",
       "name": "disclosure_view",
-      "status": "LIVE",
-      "live_since": "2026-11-17",
-      "collected_by": "assets/js/events.js, via an IntersectionObserver on the disclosure strip",
-      "persistence": "client-side only, as EV-01",
-      "fires_on": "The required disclosure entering the viewport above a product link.",
-      "fields": ["page_path", "disclosure_position"],
-      "deliberately_not_collected": ["scroll depth", "time on page", "read events"],
-      "decides": "Whether the disclosure is actually in the reader's line of sight before the first product link, which is what the FTC guidance asks for (S55). This is a compliance measurement, not a marketing one.",
-      "analogy_in_repo": "Every page already carries the sentence and the link-level tag; nothing verifies that a reader sees it before the first link."
+      "status": "IMPLEMENTED_OFF",
+      "collected_by": "assets/js/events.js + measurement/collector.py",
+      "persistence": "Self-hosted SQLite daily aggregates only when a first-party host is active; Pages configuration OFF.",
+      "fires_on": "Actual disclosure-strip IntersectionObserver intersection. No observer means unknown.",
+      "fields": [
+        "event",
+        "page (registered HTML path)",
+        "position (strip)"
+      ],
+      "deliberately_not_collected": [
+        "reader identifiers or cookies",
+        "raw URLs, query strings, IP/user-agent fields",
+        "per-customer purchase data or inferred conversions"
+      ],
+      "decides": "Check aggregate disclosure intersections alongside visual/structural checks. No per-person sequence, majority-of-sessions or compliance proof is reconstructable.",
+      "blocked_by": "Permanent owner-controlled hosting, TLS, persistence/log/privacy review; Pages cannot accept POST.",
+      "source_ids": [
+        "S55"
+      ]
     },
     {
       "id": "EV-04",
       "name": "conversion_import",
       "status": "BLOCKED",
-      "fires_on": "A manual or scheduled import of the Associates reporting CSV for a period.",
-      "fields": ["period_start", "period_end", "clicks", "ordered_items", "conversion_rate", "earnings_float", "source = 'associates_report'"],
-      "deliberately_not_collected": ["any per-customer data - Associates reporting is aggregate by design", "any value this project could compute but Amazon does not publish"],
-      "decides": "Whether any of the above converted, and therefore whether the whole content strategy is working.",
-      "blocked_by": "DQ-01: no Associates account exists, so no reporting exists to import. The site must not invent a placeholder figure to fill this table. (UPDATE 2026-11-17 (session 7264f3c2): the Associates tag was supplied and is embedded in the published Special Links; no enrolled account or first-party report is available to this repository, so the import stays blocked.)",
-      "analogy_in_repo": "tools/validate_data.py already forbids a populated clicks/conversion/earnings field anywhere in ledger/. This event is the only route by which those fields could ever legally be filled."
+      "fires_on": "Local import of a normalized authorized Associates aggregate export. No browser conversion event.",
+      "fields": [
+        "source",
+        "period_start",
+        "period_end",
+        "tracking_id",
+        "channel",
+        "eligible_sessions (nullable)",
+        "clicks (nullable)",
+        "reported_orders (nullable)",
+        "imported_at (server)",
+        "sha256 (server)"
+      ],
+      "deliberately_not_collected": [
+        "reader identifiers or cookies",
+        "raw URLs, query strings, IP/user-agent fields",
+        "per-customer purchase data or inferred conversions"
+      ],
+      "decides": "Inspect reported account-level orders without inferring attribution to a page/query or calculating a revenue forecast.",
+      "blocked_by": "Authorized Associates export and enrolled tracking-report evidence unavailable.",
+      "collected_by": "measurement/collector.py local CLI only",
+      "persistence": "Validated local report aggregates and hash/date provenance; no real report imported.",
+      "source_ids": [
+        "S58"
+      ]
     },
     {
       "id": "EV-05",
       "name": "search_query_import",
       "status": "BLOCKED",
-      "fires_on": "A periodic export from Search Console.",
-      "fields": ["period_start", "period_end", "query", "page_path", "impressions", "clicks", "average_position"],
-      "deliberately_not_collected": ["per-user search history", "any query containing something that looks like a person's name or address (filtered at import)"],
-      "decides": "Which question people actually typed, which is the only reliable input to a content plan. Without it every new article topic stays a judgement.",
-      "blocked_by": "DQ-04: Search Console requires the owner's Google account and a verified property.",
-      "analogy_in_repo": "marketing/trending-topics.html already argues that no topic on this site can be called trending without data. This event is what would make that possible."
+      "fires_on": "Local import of a normalized authorized Search Console export.",
+      "fields": [
+        "source",
+        "period_start",
+        "period_end",
+        "page",
+        "query (reviewed topic allowlist only)",
+        "impressions",
+        "clicks",
+        "average_position",
+        "imported_at (server)",
+        "sha256 (server)"
+      ],
+      "deliberately_not_collected": [
+        "per-user search history",
+        "any query outside the reviewed non-personal topic allowlist; names cannot be safely screened by regex alone"
+      ],
+      "decides": "Review actual reported buyer queries and arrivals. No report means topic demand remains unknown.",
+      "blocked_by": "Authorized verified Search Console property/export unavailable.",
+      "collected_by": "measurement/collector.py local CLI only",
+      "persistence": "Validated local report aggregates and hash/date provenance; no real report imported.",
+      "source_ids": [
+        "S56"
+      ]
     }
   ],
   "decisions_enabled": [
     {
       "id": "MD-01",
       "decision": "Which page to improve next",
-      "needs": ["EV-01", "EV-02"],
-      "rule": "A page with impressions and no clicks is a packaging problem; a page with clicks and no imports is a product-fit problem. The layer must be able to tell those apart, which is why EV-01 and EV-02 are separate events.",
+      "needs": [
+        "EV-01",
+        "EV-02"
+      ],
+      "rule": "Compare descriptive daily page/load and outbound counts, then review page intent and sources; counts alone do not diagnose causality.",
       "available_today": false
     },
     {
       "id": "MD-02",
-      "decision": "Which of the three products to lead with",
-      "needs": ["EV-02"],
-      "rule": "Count product_link_click by product_key. The product with the most clicks on the least content is the one to write about next.",
+      "decision": "Which of the five product formats to investigate next",
+      "needs": [
+        "EV-02"
+      ],
+      "rule": "Use reported daily product-link counts as one descriptive signal, not proof of demand, profitability or a winning product.",
       "available_today": false
     },
     {
       "id": "MD-03",
       "decision": "Whether the disclosure is placed well enough",
-      "needs": ["EV-03"],
-      "rule": "If disclosure_view does not precede the first product_link_click on a majority of sessions, the layout is failing the FTC's 'hard to miss' standard and should change.",
+      "needs": [
+        "EV-03"
+      ],
+      "rule": "Use structural and viewport tests plus actual intersection counts. No session identifier exists, so individual disclosure/click ordering or a session majority cannot be calculated.",
       "available_today": false
     },
     {
       "id": "MD-04",
       "decision": "Whether to change the content strategy at all",
-      "needs": ["EV-04"],
-      "rule": "Nothing above can answer this. It needs actual conversions, which need an account. Until then the honest answer to 'is this working' is 'unknown', and the site says so.",
+      "needs": [
+        "EV-04"
+      ],
+      "rule": "Requires authorized orders plus scope-aware interpretation. Do not infer page-level sales or publish a forecast from absent or account-level data.",
       "available_today": false
     }
   ],
   "privacy_and_consent": {
-    "position": "A design that stores no personal data and sets no cookie has no consent banner problem under the usual cookie rules, because there is no cookie and no identifier. That is the main reason to prefer this design over a third-party analytics script (option B in DS-11).",
-    "what_is_asserted": "Only the design position above, which is this project's own engineering judgement.",
-    "what_is_not_asserted": "No claim is made about GDPR, CCPA or any specific jurisdiction's requirements, and none should be inferred from this file. Whether a cookie-free aggregate counter falls inside or outside a particular regime is a legal question the owner must put to their own adviser. Recorded as a gap, not an answer.",
-    "source_ids": []
+    "position": "Engineering safeguards: aggregate daily counts, no reader identifiers, DNT/GPC honored, no browser queue or retries, 90-day retention. Pages collection remains disabled.",
+    "what_is_asserted": "Only the described implementation. Infrastructure sees network metadata; proxy/CDN logging and backups require explicit review. Optional operator proposal preferences use localStorage only on explicit selection and are not counter data.",
+    "what_is_not_asserted": "No blanket GDPR/ePrivacy/CCPA compliance or consent exemption is claimed. Operator identity, jurisdiction, privacy contact and production hosting must be reviewed.",
+    "source_ids": [
+      "S46",
+      "S55"
+    ]
   },
   "open_items": [
-    {"id": "MI-01", "item": "The event sink does not exist. GitHub Pages serves static files and cannot accept a POST, so a first-party counter needs an endpoint the owner controls (a serverless function, a log drain, or a hosted database). (UPDATE 2026-11-17 (session 7264f3c2): the client half now exists - assets/js/events.js queues aggregate events locally and posts to a relative api/events contract when one is deployed; the endpoint itself still does not exist.)", "status": "unresolved", "blocks": "EV-01, EV-02, EV-03"},
-    {"id": "MI-02", "item": "Retention policy is undefined. Aggregate daily counts can be kept indefinitely; anything finer should expire. The owner must choose before collection starts. (UPDATE 2026-11-17 (session 7264f3c2): still open; the client queue stores a day bucket only - the coarsest granularity - but the retention choice remains the owner's.)", "status": "unresolved", "blocks": "EV-01, EV-02, EV-03"},
-    {"id": "MI-03", "item": "A bot filter is undefined. A static counter counts crawlers and link scanners as visitors. Without a filter the numbers are inflated and the decisions built on them are wrong. (UPDATE 2026-11-17 (session 7264f3c2): partially mitigated client-side - events fire only on the production host and page_view is de-duplicated per page load; server-side filtering is still needed once an endpoint exists.)", "status": "unresolved", "blocks": "EV-01"},
-    {"id": "MI-04", "item": "There is no way to verify a click led to a purchase from this side, and this project must never imply there is. Attribution is Amazon's to report, not this site's to guess.", "status": "unresolved", "blocks": "EV-04"}
-  ]
+    {
+      "id": "MI-01",
+      "item": "Writable collector implemented and runnable in a sandbox; permanent authorized hosting is absent. Pages stays OFF.",
+      "status": "unresolved",
+      "blocks": "Production EV-01, EV-02, EV-03"
+    },
+    {
+      "id": "MI-02",
+      "item": "90-day expiry implemented; daily pruning, backup expiry and infrastructure logging configuration remain deployment requirements.",
+      "status": "deployment review",
+      "blocks": "Production retention assurance"
+    },
+    {
+      "id": "MI-03",
+      "item": "Trusted browser interactions, strict dimensions and a global request budget reduce noise but are not bot detection. Counts are not unique humans.",
+      "status": "limitation",
+      "blocks": "Human/session-level interpretations"
+    },
+    {
+      "id": "MI-04",
+      "item": "Only authorized Associates reports establish reported orders. No report supplied; no page/query attribution inferred.",
+      "status": "unresolved",
+      "blocks": "EV-04"
+    },
+    {
+      "id": "MI-05",
+      "item": "Verified Search Console property and reviewed authorized query export unavailable.",
+      "status": "unresolved",
+      "blocks": "EV-05"
+    }
+  ],
+  "history": [
+    {
+      "as_of": "2026-11-15",
+      "session": "arena/3e0b3b4e-zone2",
+      "note": "Original five-event proposal; previous wording remains in Git history."
+    },
+    {
+      "as_of": "2026-11-17",
+      "note": "Earlier implementation queued browser-only events and described them as LIVE. Superseded: a queue without a writable host is not persistent measurement."
+    }
+  ],
+  "implementation_session": "arena/37333afd-zone2"
 }

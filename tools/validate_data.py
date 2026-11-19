@@ -219,6 +219,8 @@ def check_marks(report: Report) -> None:
     claim = re.compile(r"\b(?:officially )?(?:endorsed|sponsored|partnered|affiliated) with amazon\b", re.I)
     negation = re.compile(r"\b(?:not|no|never|avoid|prohibit|forbid|must not|cannot|free from)\b", re.I)
     for path in sorted(REPO.rglob("*.html")):
+        if any(part in {".git", ".local", "_site", "node_modules"} for part in path.relative_to(REPO).parts):
+            continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         for line in text.splitlines():
             for m in claim.finditer(line):
@@ -228,6 +230,8 @@ def check_marks(report: Report) -> None:
 
     # (c) a title that leads with a mark can read as an official Amazon property: surface for review only
     for path in sorted(REPO.rglob("*.html")):
+        if any(part in {".git", ".local", "_site", "node_modules"} for part in path.relative_to(REPO).parts):
+            continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         m = re.search(r"<title>\s*([A-Z][^<]{0,80})", text)
         if m and re.match(r"^(amazon|amzn|prime|kindle)\b", m.group(1), re.I):

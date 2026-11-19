@@ -7277,3 +7277,23 @@ clicks, IP/API caching and Agent provisions); FTC disclosure guidance; Amazon AS
 manufacturer pages and all five short-link destinations. Exact URLs and scope will be in
 `docs/verification-37333afd.md`. Short-link compliance is unresolved, **not declared invalid**; no authenticated
 Associates tracking report or intended-product confirmation was obtained. No product price/rating copied.
+
+### T63 progress — publication integration, 2026-11-19
+
+Rebuilt the canonical front-of-house around five observed product listings and two kitchen clusters,
+with five question-led guides, format comparison, source-linked product notes, organizational authorship,
+original labelled schematic artwork and an explicitly AI-generated food image. All intent fields remain
+blank; the separate observed destinations have fresh dates. Added current questions/proposals without
+self-approving them; optional local preference/export controls never implement a proposal. A root feed,
+reader-only sitemap, packaging transform and review-only editorial planner are now implemented.
+
+The same-origin SQLite service is running as a **temporary preview**, not production hosting. Real Chromium
+screenshots at 1440×1000 and 390×844 were inspected: no horizontal overflow and disclosure directly below
+the masthead above fold. Initial front gate and JS syntax checks pass; workflow formally parsed with PyYAML.
+Corrected the stale five-event model and discovery measurement generator: browser-only queuing was not
+persistent LIVE collection. Pages remains OFF, reports remain absent, no actual performance row is added.
+
+Fresh verification scope and official URLs are recorded in `docs/verification-37333afd.md`. Current source
+conflicts (including 10-in-1/11-in-1) remain unverified. Integration gates, dedicated price mutations, broader
+browser/accessibility checks and actual artifact deployment are still in progress. Source crawlers exclude
+ignored `.local` tooling and `_site`; historical namespaces are not being deleted or re-dated.

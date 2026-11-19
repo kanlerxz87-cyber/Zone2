@@ -218,7 +218,7 @@ def measured_pages() -> list[Path]:
     the summary claims to describe. It is stated here rather than left implicit
     because a count whose denominator is unstated is not a measurement.
     """
-    skip = {".git", ".github", "__pycache__", "node_modules"}
+    skip = {".git", ".github", "__pycache__", "node_modules", ".local", "_site"}
     out = []
     for p in sorted(REPO.rglob("*.html")):
         rel = p.relative_to(REPO)
@@ -250,7 +250,7 @@ def measure() -> dict:
         for p in sorted(REPO.rglob("*.html"))
         if p.name != "404.html"
         and not any(x in p.relative_to(REPO).parts for x in
-                    {".git", ".github", "__pycache__", "node_modules"})
+                    {".git", ".github", "__pycache__", "node_modules", ".local", "_site"})
     }
     return {
         "published": n,

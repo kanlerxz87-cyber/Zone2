@@ -40,7 +40,7 @@ REPO = Path(__file__).resolve().parents[1]
 LEDGER = REPO / "ledger"
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 
-SKIP_DIRS = {".git", "__pycache__", "node_modules", ".github"}
+SKIP_DIRS = {".git", "__pycache__", "node_modules", ".github", ".local", "_site"}
 
 # Namespaces that must be reachable from the landing page (`index.html`).
 REQUIRED_NAMESPACES = [

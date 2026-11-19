@@ -77,7 +77,7 @@ def measure() -> dict:
     titles = []
     for path in sorted(REPO.rglob("*.html")):
         rel = path.relative_to(REPO)
-        if ".git" in rel.parts or rel.parts[0] == "console":
+        if any(part in {".git", ".local", "_site", "node_modules", "__pycache__"} for part in rel.parts) or rel.parts[0] == "console":
             continue
         pages += 1
         ns[rel.parts[0] if len(rel.parts) > 1 else "(root)"] += 1

@@ -60,7 +60,7 @@ def head_block(rel_path: str, *, title: str, description: str,
     url = url_for(rel_path)
     t, d = escape(title, quote=True), escape(description, quote=True)
     image = BASE + "assets/img/og.jpg"
-    image_alt = "Counter Notes — every number links to its source"
+    image_alt = "Counter Notes — thoughtful kitchen buying guides"
     return (
         f'<link rel="canonical" href="{escape(url, quote=True)}">\n'
         f'<meta property="og:type" content="{escape(page_type, quote=True)}">\n'
