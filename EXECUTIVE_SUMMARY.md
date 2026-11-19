@@ -1795,3 +1795,74 @@ analytics endpoint and product photography still need the owner. They are record
 
 **Evidence.** `docs/verification-aecb287a.md` holds the sources read on 2026-11-19, the before/after measurements and
 the gate results. The board rows that changed on this branch are RQ-16 and RQ-18 (RQ-01 is `main`'s, from PR #192).
+
+## Addendum — 2026-11-19 (session `arena/1b09bb6d-zone2`, T72): final integration, the Decision Room, and the design brief
+
+**What this release is.** Two owner-facing surfaces the brief asked for by name are now published and
+live, and the two pull requests that carried them — left open and untouched for more than eight hours
+— have been integrated, re-verified and released.
+
+1. **The Decision Room** — <https://kanlerxz87-cyber.github.io/Zone2/decision-room.html>. Thirteen
+   decisions, grouped by the question a reader would ask rather than by the department that would do
+   the work: **9 open, 2 blocked on an account or a record, 1 fixed, 1 advisory**. Each row carries the
+   measurement behind it (with a link), **what every option costs**, **what each option gives up**, and
+   **the single owner answer that unblocks it**. Ten owner questions, seventeen cited sources.
+   **Nothing on the page applies itself.**
+2. **The design brief the suggestions feed** —
+   <https://kanlerxz87-cyber.github.io/Zone2/decision-prompt.html>. Written to be pasted verbatim into
+   a design session: ten constraints, seven principles, and the table of unanswered decisions each
+   change depends on. It states constraints rather than adjectives.
+3. **The suggestion and question registers now separate the current release from the preserved
+   history.** `suggestions.html` opens with *Current release proposals · 19 November 2026* and its count;
+   the earlier eighteen-row decision board is preserved below, unchanged, behind its own heading.
+   `questions.html` opens with *Current release information gaps: N questions as of 19 November 2026*.
+   A reader can now see what is live **and** what was decided earlier without confusing the two.
+
+**What was found and fixed while integrating.** The two branches had independently allocated the same
+flag id, `CN-11`: `main` had already published it for the product-note duplication finding, and PR #184
+had allocated it for the CSS-clipping finding. Shipping both would have put duplicate anchors on
+*Flagged for Review*. **The incoming row was renumbered `CN-17`** — the next free id — and the
+published `CN-11` was left untouched so every existing cross-reference still resolves. This is the
+only content change the merge required; everything else was a union or a rebuild.
+
+**A measured defect, repaired.** `assets/css/style.css` sets `th { text-transform: uppercase;
+white-space: nowrap }` for its own dashboards, and that stylesheet loads on every page. The
+publication's own stylesheet overrode the colours and padding of `.cn-table` but never those three
+inherited properties, so **22 reader-facing row labels were clipped mid-sentence** — `flagged.html`
+10, `questions.html` 7, `publishing.html` 5 — and every `tbody th` rendered uppercase. A scoped reset
+restores wrapping and normal case and leaves the uppercase treatment where it belongs, on the column
+headings. Re-measured at **0 clipped and 0 uppercase** across the 15 affected pages.
+
+**Gates on the combined tree.** `tools/ci_replay.py` — every `run:` step of the Pages workflow, in
+order, with a strict YAML parse of the workflow enabled — **66/66 PASSED**. The publication contract
+reports `ok: true` over **230** HTML pages (18 indexable), **1 453** product anchors all carrying
+`rel="sponsored"`, and **172** current factual rows each ending in an official source link. The
+structural audit passes 7/7 over 230 pages; the product-note duplication gate reports a worst pair of
+**0.163** against a 0.25 budget; the Decision Room gate passes on 13 decisions, 10 owner questions and
+seventeen cited references, and its 15 mutation tests prove the gate can actually fail.
+
+**Re-read today, from the official pages.** The Amazon Operating Agreement (§1 Special Links, §4 no
+traffic or income guarantee, §5 the exact disclosure sentence), the Program Policies (§2(e) a
+"Redirecting Link" is a disqualified purchase, §2(g) a link that is not properly formatted is not
+tracked, §1 the 24-hour Session definition), the FTC's *Disclosures 101* (place the disclosure where
+it is hard to miss; "sponsored" is a clear word), Google's *Thin affiliation* ("Good affiliate sites
+add value by offering meaningful content or features … navigation of products or categories, and
+product comparisons"), Google's *people-first content*, *snippets* (unique descriptions per page),
+*canonical URLs* (redirects and `rel=canonical` are strong signals, sitemap inclusion a weak one) and
+*sitemaps* ("submitting a sitemap is merely a hint"), W3C SC 2.5.8 Target Size (Minimum) (24×24 CSS
+px, or the spacing exception), and USDA FSIS *Food Thermometers* ("Color is Not a Reliable Indicator
+that Food is Safe"; "Check Manufacturer's Instructions"). Every link is on the
+[sources page](https://kanlerxz87-cyber.github.io/Zone2/sources.html); the method and the raw counts
+are in [`docs/verification-1b09bb6d.md`](docs/verification-1b09bb6d.md).
+
+**Still open, and published for review.** Six decisions from the Decision Room remain open or
+advisory: two shop front doors; 18 indexable pages against 212 noindex, with the product pages that
+carry the sourced specification rows among the noindex set; three feeds publishing the same five
+question guides at ten URLs; 68 dashboard links repeated twice per page; the 142×18 px paid-link
+control on a phone (which *passes* SC 2.5.8 on the spacing exception and is recorded as craft, not
+compliance); and the unresolved compliance status of the five supplied short links. All six carry the
+official source that establishes them, sit on
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/flagged.html), and **block nothing**.
+The intended-ASIN confirmations for all five links stay **blank**; the observed redirect targets stay
+in a **separate field**; no price, rating, review count, search-volume, popularity, conversion or
+revenue figure is printed anywhere.
