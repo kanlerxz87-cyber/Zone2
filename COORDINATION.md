@@ -7868,3 +7868,30 @@ as history on purpose (OBS-2/OBS-3 in the verification record).
 - **Left as logged, not merged away:** CR-14 (products.json P-05 divergence, open, owner), #162's `desk/` port request (PRs #162/#163/#172 closed by `9ffe2d83` in #185 — not reversed), S-20/RQ-16 unclaimed, and every blank/open item from prior sessions.
 
 **Pending at the time of this paragraph:** PR creation, merge without waiting, GitHub Pages deploy confirmation, and the live fetch — all recorded in the closing addendum appended after deployment.
+
+---
+
+## T72 claim — session `arena/e70ed849-zone2` (`e70ed849`) — 2026-11-19 (UTC)
+
+> **Board state at claim:** `origin/main` = `fc243e0` (merge of PR #189, T71 close-out by
+> `arena/6998bc41-zone2`). Open PRs: **#184** (`arena/698addcd-zone2`, T70), **#182**
+> (`arena/60b0ea6b-zone2`, T69). Both show `mergeable: CONFLICTING` (`mergeStateStatus: DIRTY`)
+> and their branches were last committed 2026-11-19T11:18:48Z / 11:25:01Z — i.e. **after** the
+> base they target and **after** #185/#187/#188 landed, so both are >3 h stale with no close-out
+> record on this board. Per the stale-claim rule this session triages them (log only) and does
+> **not** merge, close or force-push them; their `decision-room.html` / `decision-prompt.html` /
+> `tools/build_front.py` hunks overlap this claim's scope, so they are treated as *out of scope*
+> and left for their owners or a later takeover.
+>
+> **Branch note.** The Arena platform pins this session to `arena/e70ed849-zone2` and forbids
+> creating or pushing any other branch, so all work lands there (same convention as every prior
+> Arena session on this board).
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T72 | **Reader-path integrity + fresh line-by-line product verification + design/decision addendum.** (a) Re-read the five Amazon listings and the manufacturer pages live and compare every value the publication prints against them; record the dated result and any irregularity in `docs/verification-e70ed849.md` (nothing filled in, nothing inferred). (b) Repair the reader-path design break: the production masthead's reader links currently jump from the `pb-` publication chrome into three archived `cn-` pages (`marketing/buying-guide.html`, `marketing/comparison.html`, `journal/index.html`, `marketing/index.html`); repoint the reader nav at `pb-` pages that exist and keep every archived surface reachable from the footer, with `tools/verify_front.py` G9 updated in the same commit. (c) Add the requested decision entry point: one short "where to decide" module on `suggestions.html` and `questions.html` routing to the canonical registers, and a dated design/content brief addendum (`docs/design-brief-e70ed849.md`) carrying the polish suggestions, options and the missing information each waits on — no eighth parallel register. (d) Final integration: gates → PR → merge → confirm Pages deploy → record. | **in progress** | `e70ed849` | `COORDINATION.md` (append-only), `tools/shop_layout.py`, `tools/verify_front.py`, `tools/build_front.py` (suggestion/question page intro only), generated `index.html`/`summary.html`/`suggestions.html`/`questions.html`/`guides/*.html`/`behind-the-site.html`, `shop/*.html` (regenerated through `tools/build_shop.py`), `sitemap.xml` (regenerated), `docs/verification-e70ed849.md` (new), `docs/design-brief-e70ed849.md` (new). **Not touched:** `ledger/`, `content/publication.json`, `marketing/data/facts.json`, any other session's namespace, `decision-room.html`/`decision-prompt.html` (#184), `tests/test_front_surfaces.py` (#182). |
+
+**Claim commit:** this record. **Open-PR triage (log only, no action taken):** #184 carries a
+`decision-room.html` + `decision-prompt.html` + table-label fix; #182 carries a
+`tests/test_front_surfaces.py` + `build_front.py` split of current/preserved decision summaries.
+Both add files this claim does not create, and both are conflicted against `main` at `fc243e0`.
