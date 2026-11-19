@@ -143,6 +143,27 @@
       "url": "https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
       "checked": "2026-11-19",
       "scope": "Official updated changelog: runners default to Node24 and users should review Node24-capable action versions. Successful deployment emitted inherited action-runtime declaration warnings; no insecure opt-out is enabled."
+    },
+    "GOOGLE-SPAM": {
+      "publisher": "Google Search Central",
+      "title": "Spam policies for Google web search",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "checked": "2026-11-19",
+      "scope": "Doorway abuse ('creating substantially similar pages') and scaled content abuse (many generated pages without added value)."
+    },
+    "GOOGLE-SEO": {
+      "publisher": "Google Search Central",
+      "title": "SEO starter guide",
+      "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+      "checked": "2026-11-19",
+      "scope": "Descriptive titles and URLs, useful content near the top of a page, and the absence of any automatic first-place ranking."
+    },
+    "GOOGLE-SNIPPET": {
+      "publisher": "Google Search Central",
+      "title": "Control your snippets in search results",
+      "url": "https://developers.google.com/search/docs/appearance/snippet",
+      "checked": "2026-11-19",
+      "scope": "Meta descriptions are not a ranking factor; they may be used as the snippet when they describe the page well."
     }
   },
   "products": [
@@ -211,6 +232,44 @@
         "confirmation_date": "",
         "source": "",
         "tracking_report_reference": ""
+      },
+      "reader": {
+        "dek": "Two baskets that finish together, windows you can look through, and a footprint to measure before it claims the counter.",
+        "lede": "This is the one to look at first if your weeknight cooking has two parts that want different treatment — crisp something while a side finishes, without reheating the first batch. Six quarts are split across two baskets of three, so what you actually get is two small cooking spaces rather than one large one.",
+        "fit_for": [
+          "Cooking a main and a side at the same time, set to different temperature or time.",
+          "Anyone who wants to watch food through a window rather than open the drawer to check."
+        ],
+        "not_for": [
+          "Cooking one large, flat item that needs an uninterrupted surface.",
+          "A kitchen with very little counter depth left; check the dimensions row first."
+        ],
+        "tradeoff": "You are trading one big cooking space for two smaller ones. A tray of wings for a crowd is a two-batch job here, because each basket is about three quarts.",
+        "checks": [
+          {
+            "heading": "What the split actually means",
+            "body": "The listing title describes two independent 3-quart baskets within a 6-quart total. Read any recipe's quantity against a single basket, not the total, or you will plan for more food than fits on one side."
+          },
+          {
+            "heading": "Why the windows matter more than they sound",
+            "body": "The manufacturer lists dual viewing windows with an interior light. On a draw-style fryer that is a small thing that changes how often you open the machine — and opening it drops heat you then have to recover."
+          },
+          {
+            "heading": "What Syncing the finish does and does not do",
+            "body": "Sync Finish is a manufacturer statement that both baskets finish at the same time. It is a timing convenience, not a claim about how evenly either basket cooks."
+          },
+          {
+            "heading": "Cleaning, before you commit",
+            "body": "The manufacturer describes nonstick, dishwasher-safe baskets. Confirm the current instruction leaflet still says so when the unit arrives; care instructions are the part of a listing most likely to drift."
+          }
+        ],
+        "sources": [
+          "M1",
+          "M2"
+        ],
+        "verdict": "A dual-basket 6-quart fryer is worth shortlisting if you cook two components at once and have the counter depth for a drawer-style body. It is a poor fit if your meals are one large item at a time.",
+        "reviewed": "2026-11-19",
+        "card_line": "Crisp one thing while the other finishes. Two 3-quart baskets, windows to watch through, and a finish-together timer."
       }
     },
     {
@@ -281,6 +340,44 @@
         "confirmation_date": "",
         "source": "",
         "tracking_report_reference": ""
+      },
+      "reader": {
+        "dek": "A countertop convection oven with French doors that also air fries — 26 quarts of capacity and a real footprint to plan for.",
+        "lede": "This is the largest format in the set and the one that behaves least like a usual air fryer. Food goes in through doors rather than a pull-out drawer, which changes access, how you watch it cook, and how much space it needs around it. It is worth considering when one appliance has to cover more than frying.",
+        "fit_for": [
+          "Cooking for a group, or items that need a wide, flat surface rather than a basket.",
+          "Anyone who wants one countertop appliance to handle more than one cooking job."
+        ],
+        "not_for": [
+          "A small kitchen, or a counter where the machine cannot be opened without blocking a walkway.",
+          "Buying on a mode count alone; the count itself is disputed on the manufacturer's own page (see below)."
+        ],
+        "tradeoff": "You are trading simplicity and counter space for capacity and versatility. A door-style oven also behaves differently from a drawer: heat escapes forward when you open it, so checking the food costs more than it does on a basket fryer.",
+        "checks": [
+          {
+            "heading": "Plan the footprint, not just the capacity",
+            "body": "Capacity in quarts tells you nothing about whether it fits. The manufacturer lists 16.9 in deep by 15.8 in wide by 14.8 in high, which is a different shape of commitment from a 6-quart drawer."
+          },
+          {
+            "heading": "Expect door clearance in two directions",
+            "body": "French doors swing outward. Leave room in front for them to open and room above for loading and unloading, then check that the open doors are not where you need to stand."
+          },
+          {
+            "heading": "The mode and preset counts are unresolved here",
+            "body": "The manufacturer's description and its own specification tiles disagree: 10-in-1 versus 11-in-1 modes, and 24 versus 25 presets. The Amazon title's accessory count also differs from the manufacturer's. Those rows are deliberately left blank on this site until the exact model's manual settles them."
+          },
+          {
+            "heading": "What the doors change about cooking",
+            "body": "Doors give you a wide opening and a clear line of sight without a basket to lift out. That suits a roast or a tray of vegetables; it suits thin, loose food less well than a basket does."
+          }
+        ],
+        "sources": [
+          "M3",
+          "M4"
+        ],
+        "verdict": "Worth shortlisting where capacity and versatility matter more than simplicity, and where you have measured the counter first. If you mainly want crisp food for two, the size and the door clearance are costs you would not recover.",
+        "reviewed": "2026-11-19",
+        "card_line": "The big one: 26 quarts behind French doors, for roasts and trays rather than a handful of fries."
       }
     },
     {
@@ -351,6 +448,44 @@
         "confirmation_date": "",
         "source": "",
         "tracking_report_reference": ""
+      },
+      "reader": {
+        "dek": "One eight-quart basket, four presets, and the simplest control panel of the three air fryers here.",
+        "lede": "The straightforward option: one cooking space, big for a single basket, with a control panel that does not ask you to learn anything. It is the format to consider when the food is simple and plentiful rather than two separate dishes.",
+        "fit_for": [
+          "One large batch at a time — a whole tray of wings, a pile of fries, vegetables for a family.",
+          "Anyone who wants fewer choices on the panel and no second basket to reason about."
+        ],
+        "not_for": [
+          "Two dishes that need different temperatures at the same time.",
+          "Buying on a combined mode-plus-temperature headline; the two official pages disagree (see below)."
+        ],
+        "tradeoff": "A single basket means one temperature and one timer for everything inside it. If two components need different settings, one of them waits.",
+        "checks": [
+          {
+            "heading": "The temperature claim needs care",
+            "body": "The manufacturer's page states a 200–400 °F range while the Amazon listing title advertises a 450 °F Hi-Fry mode. Both are official, they disagree, and this site prints neither as settled. Check the manual for the exact model you receive."
+          },
+          {
+            "heading": "Eight quarts is a big single space",
+            "body": "For one item at a time this is the most cooking surface of the three air fryers here. It also means a larger body on the counter, so measure before you buy and check the dimensions row."
+          },
+          {
+            "heading": "Four presets, and what that means",
+            "body": "The manufacturer lists four cooking presets. Fewer presets is not a downgrade; it is fewer things to override when your food does not match the icon."
+          },
+          {
+            "heading": "Basket care",
+            "body": "The manufacturer describes a top-rack dishwasher-safe basket. Top-rack only is worth noting if you usually fill the bottom rack first."
+          }
+        ],
+        "sources": [
+          "M5",
+          "M6"
+        ],
+        "verdict": "The pick of this set when the job is one big batch and you want to think about it as little as possible. Not the pick when your meals are two dishes with two different settings.",
+        "reviewed": "2026-11-19",
+        "card_line": "One eight-quart basket, four presets, and nothing to learn. For a single big batch, done simply."
       }
     },
     {
@@ -412,6 +547,44 @@
         "confirmation_date": "",
         "source": "",
         "tracking_report_reference": ""
+      },
+      "reader": {
+        "dek": "An instant-read thermometer for checking food at the point of use, where a one-second claim stands in for something only a calibration check can tell you.",
+        "lede": "An instant-read is the thermometer you pick up, insert, and read. It is not designed to stay in the food while it cooks, so its job is the check at the end and the check halfway through — not continuous monitoring.",
+        "fit_for": [
+          "Spot checks: is this chicken done, is this steak where I want it.",
+          "Thin foods, where a probe inserted from the side gives a reading a leave-in probe cannot."
+        ],
+        "not_for": [
+          "Watching a long roast without opening the oven.",
+          "Anyone who needs a continuous temperature log rather than a moment's reading."
+        ],
+        "tradeoff": "You trade continuous monitoring for a fast, direct reading. Every check means opening the oven or the air fryer, which costs heat and time.",
+        "checks": [
+          {
+            "heading": "USDA says 2–3 inches of probe in thin food",
+            "body": "For thin foods the USDA advises inserting the probe through the side, with the whole sensing area — usually 2–3 inches on an instant-read — reaching the centre. On a thin chicken breast or a burger, how far the probe goes in matters as much as the reading."
+          },
+          {
+            "heading": "Where to put it in poultry",
+            "body": "USDA guidance for whole poultry is three places: the innermost part of the thigh, the innermost part of the wing, and the thickest part of the breast, avoiding bone. A single reading in one spot is not the check USDA describes."
+          },
+          {
+            "heading": "A one-second response is a listing claim",
+            "body": "The listing claims a one-second response. Nobody here timed it, and response time is not the same property as accuracy. Treat it as a specification, not a result."
+          },
+          {
+            "heading": "Accuracy is checkable, and this site has not checked it",
+            "body": "USDA describes an ice-water check: at least two inches of stem in ice water for at least thirty seconds, reading 32 °F. Until that is done on a specific unit, treat absolute accuracy as unverified — here and on any other listing."
+          }
+        ],
+        "sources": [
+          "M7",
+          "USDA"
+        ],
+        "verdict": "Buy this shape of tool if you want a quick, direct reading and will handle the probe carefully. It does not replace a leave-in probe if you want to monitor a roast without opening the door.",
+        "reviewed": "2026-11-19",
+        "card_line": "The thermometer you pick up and read. Its job is the check at the end, not watching the whole cook."
       }
     },
     {
@@ -473,6 +646,44 @@
         "confirmation_date": "",
         "source": "",
         "tracking_report_reference": ""
+      },
+      "reader": {
+        "dek": "Three probes and a WiFi connection, for cooking where you would rather read the temperature on a screen than open the oven.",
+        "lede": "A leave-in wireless set is a different job from an instant-read: the probe stays in the food, and you read the temperature elsewhere. The value is in not opening the oven — and the cost is in setup, probes and care.",
+        "fit_for": [
+          "Long cooks — a roast, a whole bird, a low-and-slow piece of meat you do not want to keep opening the oven for.",
+          "Anyone cooking with a phone nearby who wants to watch progress rather than guess."
+        ],
+        "not_for": [
+          "A quick spot check on a thin piece of food, where an instant-read is simpler and cheaper.",
+          "Anyone who wants no app, no pairing and no battery in the loop."
+        ],
+        "tradeoff": "You trade simplicity and money for live monitoring. Setup, probe placement and charging all become part of cooking dinner.",
+        "checks": [
+          {
+            "heading": "Wireless probes are leave-in, not instant",
+            "body": "USDA lists wireless and smart thermometers as designed to remain in the food while it cooks, placed at least one inch deep in the thickest part. That depth is deeper than an instant-read needs, and it changes where the probe can go."
+          },
+          {
+            "heading": "Three probes means three placements",
+            "body": "The listing title names three probes. Plan where each one goes before you start — USDA's poultry guidance wants the thigh, wing and breast checked, which is a useful three-probe job in itself."
+          },
+          {
+            "heading": "'Wireless' still has a power and pairing story",
+            "body": "The listing title describes WiFi. The connection requirements, range, app support and battery life are not established on this page; check the manufacturer's current documentation for the exact model before relying on it mid-cook."
+          },
+          {
+            "heading": "Do not leave an instant-read in the oven",
+            "body": "USDA's care guidance is explicit that a thermometer should not be left in food while cooking unless the manufacturer says it is designed for that. A leave-in wireless probe is the format built for that use; an instant-read is not."
+          }
+        ],
+        "sources": [
+          "M8",
+          "USDA"
+        ],
+        "verdict": "The right shape of tool for long cooks and oven work where you want to stop opening the door. For everything else, an instant-read is simpler and does the same check.",
+        "reviewed": "2026-11-19",
+        "card_line": "Three probes that stay in the food while you read the temperature somewhere else. For long cooks."
       }
     }
   ]

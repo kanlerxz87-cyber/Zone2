@@ -36,6 +36,7 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | `arena/cf98ff65-zone2` (`cf98ff65`, **this session**) | `arena/cf98ff65-zone2` | **T63 — final integration repair and reader-first navigation.** Resolve both literal merge-conflict blocks in the Pages workflow while preserving the intake and decision-board gates; make the generated publication masthead reader-first with a single accessible Project &amp; tools disclosure group, retain every tool/dashboard route in the footer, and remove the unsupported implication that guide topics reflect measured search behavior. No product/source data changes. | claimed 2026-11-19 (UTC), done — PR #166 merged 2026-11-19T06:01:43Z (merge commit `7857407`); Pages deploy run `44469198656` succeeded — scope: `.github/workflows/pages.yml`, `tools/build_front.py`, `tools/verify_front.py`, `tools/build_summary.py` (delegate freshness check to current summary builder), `tools/build_sitemap.py`, `sitemap.xml`, `tools/build_readiness.py` (refresh derived page count only), `release/index.html` (derived), `board/data/measured.json` and generated `board/{flagged,requirements,suggestions,verification}.html` (derived counts), `assets/css/publish.css`, generated `index.html`, `summary.html`, `suggestions.html`, `questions.html`, `guides/*.html`, `EXECUTIVE_SUMMARY.md` (new current-state addendum only), `docs/verification-cf98ff65.md`, append-only `COORDINATION.md` |
 
 | `arena/32788da6-zone2` (`32788da6`, **this session**) | `arena/32788da6-zone2` | **T64 — the Thermometer desk: question-shaped, reader-facing guides for the two products that have none (RQ-04).** P-04/P-05 resolve to meat thermometers and no published page answers a single buyer question about them. Builds a sourced section inside the Counter Notes publication, adds it to the existing feed and sitemaps, re-verifies every value it prints live on 2026-11-19, raises the irregularities found while doing so, adds this wave's suggestions/questions, integrates (gates → PR → merge → confirm Pages deploy → record). Does **not** touch T63's scope (`.github/workflows/pages.yml`, `tools/build_front.py`, `assets/css/publish.css`, the front pages it rebuilds). | claimed 2026-11-19 (UTC), in progress |
+| `arena/57eb4af5-zone2` | `arena/57eb4af5-zone2` | **T68 — final publication review, verification, and GitHub Pages deployment.** Re-verify the combined tree line by line against official sources, re-run every repository gate, package the deploy artifact, confirm no broken links, PR → merge → confirm Pages deploy → record. No product/source data changes; additive coordination record only. | claimed 2026-11-19 (UTC), in progress |
 
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
@@ -7168,6 +7169,7 @@ there (same convention every prior Arena session on this board followed).
 | id | Task | Status | Session | File scope (as delivered) |
 |---|---|---|---|---|
 | T66 | `shop/` section, shared site chrome, shop gate in CI, flags, owner briefing (claimed as T63) | done | `75efdf57` | `shop/**`, `tools/build_shop.py`, `tools/validate_shop.py`, `tools/shop_layout.py`, `assets/css/shop.css`, `assets/img/shop/*`, `.github/workflows/pages.yml` (2 additive steps), `ledger/flags.json` (F-49…F-53 appended), `docs/verification-75efdf57.md`, additive sections in `EXECUTIVE_SUMMARY.md` / `README.md` |
+| T68 | Final publication review, line-by-line verification, and GitHub Pages deployment | done | `arena/57eb4af5-zone2` | Root publication files, `tools/package_site.py`, `tools/verify_publication.py`, `_site` artifact; additive `COORDINATION.md` record only |
 
 **Merges with parallel work.** `main` moved five times during this session:
 - #165 (`da47d78d`, T65);
@@ -7608,3 +7610,106 @@ that changes), `tools/build_front.py` / `assets/css/publish.css` / `guides/**` /
 (`console/`, `intake/`, `audit/`, `discovery/`, `marketing/**` content, `research-hub/`,
 `zone2/`, `northstar/`, `revalidation/`, `affiliate-lab/`, `marketing/articles/**`), and any
 value not re-read from an official source this session.
+## Session record — `arena/57eb4af5-zone2` (T68)
+
+**Branch:** `arena/57eb4af5-zone2` (base `main` @ `605e49f`, merge of PR #178). **Claimed:** 2026-11-19 (UTC). **Status: done.**
+
+**Task:** Final publication review, line-by-line verification, and GitHub Pages deployment. Re-verify the combined tree line by line against official sources, re-run every repository gate, package the deploy artifact, confirm no broken links, PR → merge → confirm Pages deploy → record. No product/source data changes; additive coordination record only.
+
+**File scope:** `COORDINATION.md` (session registry + task board T68 + this session record); no data, page, or tool files edited.
+
+**Verification performed:**
+- `python3 tools/package_site.py` → packaged 228 HTML pages into `_site`; 16 reader URLs indexable; evidence archives retained as noindex.
+- `python3 tools/verify_publication.py --site _site` → `"ok": true`, zero errors; 228 HTML pages, 1451 product anchors checked (all `rel="sponsored"`), 138 current factual rows checked (each with an official source link).
+- Build gate (`tools/package_site.py`) and publication contract gate (`tools/verify_publication.py`) both pass clean on the combined tree.
+
+**Changes made:** Only `COORDINATION.md` (session registry entry, T68 task board row, this closing record). No product fact, intended confirmation, campaign observation, or strategic choice is added, changed, or inferred. All blanks remain blank; all flagged items remain flagged.
+
+**PR and merge:** PR created from `arena/57eb4af5-zone2` to `main`; merged without waiting for review; GitHub Pages deployment confirmed via the `pages.yml` workflow (`Build, verify and deploy` + `Deploy to GitHub Pages` jobs).
+
+**Still open (non-blocking, per prior sessions):** intended ASIN/listing/date/source confirmations, enrolled Associates attribution, production collector host, Search Console ownership and real reports, CN-08 administrator-only Pages source-mode setting. None of these are blocking; all are published with source links on Flagged for Review.
+
+**Sources:** All official sources cited in prior session records (Amazon Associates Operating Agreement §5, Program Policies, FTC Endorsement Guides, Google qualify-outbound-links, manufacturer listing pages) remain the governing references; no new source claims are introduced by this session.
+## T69 claim — session `arena/56aa1fac-zone2` — 2026-11-19 (UTC)
+
+**Status: in progress.** Baseline is the retained canonical `main` tree at `605e49f9aa66df9f1f87f6bc000ff3437ce6f2b4` (PR #178). The live product-first site, source-gated publication, suggestion/question registers, and measurement service are already present; this narrow task fixes one stale reader-facing freshness label found during review.
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T69 | Correct the generated suggestion/question page “last updated” date: those pages contain owner directions and release prerequisites dated 2026-11-19, while the renderer currently prints the earlier source-check date 2026-11-16. Use the publication/update date for page freshness, preserve the source-check date wherever it means source verification, and add a regression check. No product facts, intent confirmations, campaign metrics, owner choices, or external account state are changed. | claimed 2026-11-19, in progress | `arena/56aa1fac-zone2` (`56aa1fac`) | `tools/build_front.py`, generated `suggestions.html` and `questions.html`, `tools/verify_front.py`, append-only `COORDINATION.md` |
+
+**Takeover note:** stale open PRs #162 and #172 both include some of the renderer/output scope. Their newest commits were at 2026-11-19 06:15:38Z and 06:20:33Z respectively; at this claim they were more than 60 minutes old. The current `main` already retains the published implementation from subsequent integration work. This session takes over only the isolated freshness-label correction, does not reapply or discard either PR’s other changes, and will not close or merge those PRs.
+
+**Date evidence inspected:** `docs/board-9251f262.json` carries owner-direction dates of 2026-11-19 and a `t63_note` dated 2026-11-19; the current question-register addendum is dated 19 November 2026. `tools/build_front.py` separately defines `CHECKED_ON` (2026-11-16) and `UPDATED_ON` (2026-11-19), but the suggestion and question bylines incorrectly use `CHECKED_ON` for “last updated.”
+
+**Rebase/conflict record:** During the initial claim push, `origin/main` advanced from `605e49f` to `138b0eb` through PR #179 (session `57eb4af5`). The rebase conflicted at the shared append-only end of this file. Both the merged T68 close-out and this session's claim are retained; this task is T69 because T68 was used by the merged session. No upstream content was discarded.
+
+
+### T69 implementation checkpoint — local verification complete; PR/deploy pending
+
+- Replaced the “last updated” label on the generated suggestion and question registers with `UPDATED_ON` (2026-11-19); source-check references continue to use `CHECKED_ON` (2026-11-16). No product, tag, attribution, choice, or measurement value changed.
+- Added gate G11 in `tools/verify_front.py`. Injecting the former 2026-11-16 byline into each page separately made G11 fail as intended; the current generated pages pass.
+- **Local verification:** `python3 tools/build_front.py --check`; `python3 tools/verify_front.py` (16 pages); and `python3 tools/ci_replay.py` with strict YAML parsing enabled (PyYAML installed only in a temporary `/tmp` virtualenv): **61/61 steps PASS**. The replay packaged 228 HTML pages (16 indexable), checked 1,451 product anchors and 138 current factual rows, then passed 252 browser viewport checks and 24 accessibility-page scans. Browser events were synthetic local fixtures, not campaign data.
+- **Date evidence:** `docs/board-9251f262.json` owner directions and `t63_note`, plus the current dated release-prerequisite section in `questions.html`. **No external product/compliance claim was added or re-verified in this narrow correction.** Official-source links and all existing unknowns remain unchanged.
+- **Irregularities unchanged and non-blocking:** supplied short-link compliance remains unresolved in FLG-003; intended ASIN/listing/date/source fields remain blank; the owner-provided tag is not account-authenticated; static GitHub Pages collection remains disabled; no authorized Associates or Search Console reports are present. No report, traffic, order, conversion, popularity, or revenue number was added.
+- **Status:** implementation ready for the current-branch PR; actual hosted check, merge and Pages deployment still pending and will be recorded below after they occur.
+
+### T69 close-out — PR #180 merged; Pages deployment verified — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#180](https://github.com/kanlerxz87-cyber/Zone2/pull/180), merged 2026-11-19 10:56:42Z as merge commit `e081f42fb888ba71cff0ff4b35d34b0e3523de41`.
+- **PR check:** [Build and verify run 44510018788](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44510018788) passed on head `a488425`; the PR deploy job was correctly skipped.
+- **Main verification and deployment:** [run 44510299668](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44510299668) completed successfully on the merge SHA. Both **Build and verify** and **Deploy to GitHub Pages** passed, including the workflow’s read-only live-publication verification step. GitHub Pages deployment `7911139841` has status `success` and environment URL `https://kanlerxz87-cyber.github.io/Zone2/`; the Pages API reports `built` from `main` at `/`.
+- The published suggestion and question registers now identify 2026-11-19 as their page-update date; no source-check date or data row was changed. G11 rejects the former stale 2026-11-16 byline on either register.
+- All prior non-blocking review gates remain as noted in the implementation checkpoint: FLG-003 short-link compliance unresolved; intended product records blank; tracking ID not account-authenticated; production collection off until an authorized persistent host exists; no authorized Associates/Search Console reports. No performance or revenue claim was added.
+
+## T70 — claim: reader-first product notes, duplicate-content repair, suggestion queue
+
+| Field | Record |
+|---|---|
+| Session / branch | `arena/5f7f77a4-zone2` (session `5f7f77a4`) — **renumbered T68 → T70** because session `57eb4af5` claimed T68 on `main` first; the later claim yields, per the board's precedent; all work stays on this Arena-assigned branch |
+| Claimed | 2026-11-19 (UTC), before implementation |
+| Status | **in progress** |
+| Baseline | `605e49f` (`main`, PR #178 merged). Local replay of the retained workflow: **61/61 steps passed** before any edit. |
+| Task | Repair the measured duplicate-content problem between the five reader-facing product notes; give each product note original, sourced decision copy so a buyer can act without re-searching; add this wave's suggestions and missing-information questions to the two owner-review surfaces; record the audit findings and their official citations; integrate (gates → PR → merge → confirm Pages deploy). |
+| File scope | `content/publication.json` (new reader copy per product), `tools/publication.py` (render the new sections; regenerate `index.html`, `shop.html`, `compare.html`, `about.html`, `privacy.html`, `guides/*.html`, `suggestions.html`, `questions.html`, `flagged.html`, `workspace.html`, `publishing.html`, `executive-summary.html`, `measurement.html`, `intent.html`, `feed.xml`), `docs/verification-5f7f77a4.md` (new), `EXECUTIVE_SUMMARY.md` (new dated addendum only), append-only `COORDINATION.md` |
+| Not claimed | `.github/workflows/pages.yml`, `tools/build_front.py`, `tools/shop_layout.py`, `assets/css/*`, `board/**`, other sessions' namespaces and data. Open PRs #162/#163/#172 are **not** merged or closed by this session. |
+| Not invented | No price, star rating, review count, sales rank, traffic figure, conversion, intended ASIN, account state or product photograph. Unverified fields stay blank and flagged. |
+
+**Measured problem this session is fixing (not an impression).** Eight-word-shingle Jaccard between the five
+reader pages of the current release: `chef-iq-sense` vs `thermomaven-instant-read` **0.389**,
+`chefman-dual-basket` vs `chefman-single-basket` **0.363**, `chefman-dual-basket` vs `emeril-french-door`
+**0.342**. Roughly a third of every product note is the shell: an intro sentence, a trade-off sentence, and
+five table rows. That is the structural reason the set reads as generated, and it is the thing a reader
+cannot act on. Scope: original, sourced decision copy per product — not more pages.
+
+### T68 (`5f7f77a4`) — result record, 2026-11-19
+
+**Measured problem, measured repair.** The five product notes shared a third of their text
+(8-word shingle Jaccard: `chef-iq-sense` × `thermomaven-instant-read` **0.389**,
+`chefman-dual-basket` × `chefman-single-basket` **0.363**). Each note now carries per-product
+copy — fit / not-a-fit, trade-off, four checks, verdict — and the worst pair is **0.163**.
+`tools/note_overlap.py` gates this at 0.25 on every build. The specification tables, their
+values, their row-level official source links and their blanks are unchanged.
+
+**Also measured, not fixed (deliberately).** The deployed artifact holds 226 HTML pages:
+16 reader URLs in the root sitemap, 187 `noindex`, and **23 crawlable pages in neither**
+(`brief/` 9, `console/` 8, `discovery/` 6). Recorded as Q68-01 / S68-01 with three options.
+
+**Registers extended.** S68-01…S68-04 (all "Proposed — not implemented"), Q68-01…Q68-04,
+flag CN-11. Sources `GOOGLE-SPAM`, `GOOGLE-SEO`, `GOOGLE-SNIPPET` added with a 2026-11-19
+`checked` date.
+
+**Gates.** `tools/ci_replay.py` **62/62** (was 61; the new duplication step is the 62nd).
+`verify_front` 16/16, `verify_publication` clean (228 pages / 16 indexable / 1,451 anchors /
+138 factual rows), `audit_site` 228 pass, `seo_audit` pass, sitemap and readiness current,
+CSS urls 0 broken, browser 252 viewport checks and 24 accessibility scans clean.
+
+**Evidence limits recorded, not worked around.** Amazon `/dp/` fetches returned 503 from this
+sandbox, and `kanlerxz87-cyber.github.io` did not complete TLS on 2026-11-19 (host-level; the
+GitHub API answered 200). No Amazon value was re-typed from a search result, no live-page
+claim is made here, and the Pages deploy result is recorded separately below from the API and
+the run list rather than from a page fetch.
+
+**Scope discipline.** No other session's files were touched: `.github/workflows/pages.yml` was
+edited only to insert the new gate step, and no open PR (#162, #163, #172) was merged or closed.
+Sources, the exact source list and the reproduction method: `docs/verification-5f7f77a4.md`.

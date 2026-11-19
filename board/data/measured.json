@@ -1,5 +1,5 @@
 {
-  "amazon_links": 3019,
+  "amazon_links": 3021,
   "capture_pages": 0,
   "chooser_pages": 1,
   "counter_pages": 58,
@@ -8,11 +8,11 @@
   "dup_titles": 4,
   "endpoint_pages": 0,
   "feed_present": true,
-  "gates": "tools/ci_replay.py exit 1 \u2014 CI REPLAY FAILED at: Rebuild the Owner's Console and confirm committed output is current (see the run for the failing step)",
+  "gates": "tools/ci_replay.py exit 1 \u2014 CI REPLAY FAILED at: Decision-board gate (sourcing, blanks, nothing decided, open questions empty, (see the run for the failing step)",
   "guide_pages": 51,
   "guides_unlinked": 4,
   "jsonld": 97,
-  "measured_utc": "2026-11-19T11:03:14.445487+00:00",
+  "measured_utc": "2026-11-19T11:15:33.792516+00:00",
   "no_desc": 7,
   "og_full": 165,
   "og_image": 152,
@@ -23,7 +23,7 @@
   "sponsored_links": 663,
   "sponsored_reader": 446,
   "substitutions": {
-    "amazon_links": 3019,
+    "amazon_links": 3021,
     "capture_pages": 0,
     "chooser_pages": 1,
     "counter_pages": 58,
@@ -45,11 +45,11 @@
     "sponsored_reader": 446,
     "tagged": 40,
     "unique_titles": 215,
-    "unsponsored_reader": 271,
+    "unsponsored_reader": 273,
     "viewport_pages": 219
   },
   "tagged": 40,
   "unique_titles": 215,
-  "unsponsored_reader": 271,
+  "unsponsored_reader": 273,
   "viewport_pages": 219
 }
