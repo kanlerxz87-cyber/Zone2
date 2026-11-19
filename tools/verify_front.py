@@ -74,6 +74,148 @@ def fail(errors: list[str], msg: str) -> None:
     errors.append(msg)
 
 
+def decision_surface_problems(rel: str, document: str, board: dict) -> list[str]:
+    """Keep current-release rollups separate from the date-stamped preserved board."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    import publication
+    from build_front import CHECKED_ON, UPDATED_ON, num_word
+
+    errors: list[str] = []
+    current_date = publication.DATE
+    page_kind = "suggestions" if rel == "suggestions.html" else "questions"
+    date_summary_match = re.search(
+        rf'<p class="pb-byline" data-summary-dates="{page_kind}"[^>]*>.*?</p>',
+        document,
+        re.S,
+    )
+    date_summary = date_summary_match.group(0) if date_summary_match else ""
+    if f"Page last updated {UPDATED_ON}" not in date_summary:
+        errors.append(f"G11 {rel}: current page-update label 'last updated {UPDATED_ON}' is missing")
+    if CHECKED_ON != UPDATED_ON and f"Page last updated {CHECKED_ON}" in date_summary:
+        errors.append(f"G11 {rel}: source-check date is incorrectly presented as the page-update date")
+    compiled = str(board.get("compiled_utc") or "unknown")
+    directions = [
+        str(row["owner_direction"].get("date", ""))
+        for row in board.get("suggestions", [])
+        if row.get("owner_direction") and row["owner_direction"].get("date")
+    ]
+    latest_direction = max(directions, default=compiled)
+
+    if rel == "suggestions.html":
+        current_count = len(publication.PROPOSALS)
+        current_questions = len(publication.QUESTIONS)
+        preserved = board["suggestions"]
+        preserved_count = len(preserved)
+        owner_directions = sum(bool(row.get("owner_direction")) for row in preserved)
+        expected_summary = (
+            f'<p class="pb-byline" data-current-proposals="{current_count}" '
+            f'data-current-questions="{current_questions}" '
+            f'data-preserved-proposals="{preserved_count}" '
+            f'data-owner-directions="{owner_directions}">'
+        )
+        if expected_summary not in document:
+            errors.append("G9 suggestions.html: current and preserved register counts are not separately derived")
+        summary_match = re.search(re.escape(expected_summary) + r"(.*?)</p>", document, re.S)
+        summary_text = summary_match.group(0) if summary_match else ""
+        for label in (
+            f"{current_count} current proposals",
+            f"{current_questions} current questions",
+            f"{preserved_count} earlier proposals preserved",
+            f"{owner_directions} earlier owner directions recorded",
+        ):
+            if label not in summary_text:
+                errors.append(f"G9 suggestions.html: missing current/preserved summary text {label!r}")
+        for label in (
+            f"{num_word(current_count, cap=True)} current proposals to review.",
+            f"{num_word(preserved_count)} earlier proposals are preserved below.",
+        ):
+            if label not in document:
+                errors.append(f"G9 suggestions.html: missing current/preserved heading text {label!r}")
+        expected_dates = (
+            f'data-summary-dates="suggestions" data-page-updated="{UPDATED_ON}" '
+            f'data-current-as-of="{current_date}" data-board-compiled="{compiled}" '
+            f'data-owner-directions-through="{latest_direction}"'
+        )
+        if expected_dates not in date_summary:
+            errors.append("G9 suggestions.html: current release and preserved-board dates are not explicit")
+        for label in (
+            f"current release data as of <time datetime=\"{current_date}\">{current_date}</time>",
+            f"earlier board compiled <time datetime=\"{compiled}\">{compiled}</time>",
+            f"owner directions recorded through <time datetime=\"{latest_direction}\">{latest_direction}</time>",
+        ):
+            if label not in date_summary:
+                errors.append(f"G9 suggestions.html: visible date label {label!r} is missing")
+        if f'id="current-proposals"' not in document or "Current release proposals" not in document:
+            errors.append("G9 suggestions.html: current proposals do not have a distinct labelled section")
+        if "Earlier decision records, preserved" not in document or "Earlier decision board ·" not in document:
+            errors.append("G9 suggestions.html: the preserved suggestion register is not clearly labelled")
+
+        expected_current_ids = [row[0] for row in publication.PROPOSALS]
+        actual_current_ids = re.findall(r'<article class="cn-proposal" id="([^"]+)" data-proposal=', document)
+        if actual_current_ids != expected_current_ids:
+            errors.append("G9 suggestions.html: rendered current proposal rows differ from the current proposal register")
+        expected_preserved_ids = [row["id"] for row in preserved]
+        actual_preserved_ids = re.findall(r'<article class="pb-decision" id="([^"]+)"', document)
+        if actual_preserved_ids != expected_preserved_ids:
+            errors.append("G9 suggestions.html: preserved suggestion rows differ from the dated source board")
+
+    elif rel == "questions.html":
+        current_count = len(publication.QUESTIONS)
+        preserved = board["questions"]
+        preserved_count = len(preserved)
+        answered = sum(row.get("status") == "answered" for row in preserved)
+        open_count = preserved_count - answered
+        expected_summary = (
+            f'<p class="pb-byline" data-current-questions="{current_count}" '
+            f'data-preserved-questions="{preserved_count}" '
+            f'data-preserved-open="{open_count}" '
+            f'data-preserved-answered="{answered}">'
+        )
+        if expected_summary not in document:
+            errors.append("G9 questions.html: current and preserved question counts are not separately derived")
+        summary_match = re.search(re.escape(expected_summary) + r"(.*?)</p>", document, re.S)
+        summary_text = summary_match.group(0) if summary_match else ""
+        for label in (
+            f"{current_count} current questions",
+            f"{preserved_count} earlier questions preserved",
+            f"{open_count} earlier questions open",
+            f"{answered} earlier questions answered",
+        ):
+            if label not in summary_text:
+                errors.append(f"G9 questions.html: missing current/preserved summary text {label!r}")
+        if f"{current_count} current questions. Each includes what is known" not in document:
+            errors.append("G9 questions.html: current question summary is missing its discovery-context caption")
+        expected_dates = (
+            f'data-summary-dates="questions" data-page-updated="{UPDATED_ON}" '
+            f'data-current-as-of="{current_date}" data-board-compiled="{compiled}"'
+        )
+        if expected_dates not in date_summary:
+            errors.append("G9 questions.html: current release and preserved-board dates are not explicit")
+        for label in (
+            f"current release data as of <time datetime=\"{current_date}\">{current_date}</time>",
+            f"earlier question board compiled <time datetime=\"{compiled}\">{compiled}</time>",
+        ):
+            if label not in date_summary:
+                errors.append(f"G9 questions.html: visible date label {label!r} is missing")
+        if f'id="current-release-questions"' not in document or "Current release prerequisites" not in document:
+            errors.append("G9 questions.html: current prerequisite register has no distinct label")
+        if "Earlier questions, preserved" not in document or "Earlier question register ·" not in document:
+            errors.append("G9 questions.html: the earlier question register is not clearly labelled")
+
+        expected_current_ids = [row[0] for row in publication.QUESTIONS]
+        actual_current_ids = re.findall(r'<tr id="(Q\d+-[^"]+)"', document)
+        if actual_current_ids != expected_current_ids:
+            errors.append("G9 questions.html: current prerequisite rows differ from the current question register")
+        expected_preserved_ids = [
+            row["id"] for row in preserved if row.get("status") != "answered"
+        ] + [row["id"] for row in preserved if row.get("status") == "answered"]
+        actual_preserved_ids = re.findall(r'<article class="pb-decision" id="([^"]+)"', document)
+        if actual_preserved_ids != expected_preserved_ids:
+            errors.append("G9 questions.html: preserved question rows differ from the dated source board")
+
+    return errors
+
+
 def checks() -> list[str]:
     errors: list[str] = []
     board = json.loads((ROOT / "docs" / "board-9251f262.json").read_text(encoding="utf-8"))
@@ -182,17 +324,9 @@ def checks() -> list[str]:
                 fail(errors, "G9 index.html: buyer-question topics must be labelled as editorial hypotheses")
             if "proposals sit on the board" in h and f">{proposal_count} proposals sit on the board" not in h:
                 fail(errors, "G9 index.html: suggestion count does not match the decision register")
-        # T63 (10727edd): "None is applied yet" stopped being true when the 2026-11-19 brief recorded
-        # owner directions on four suggestions (G5 checks each one is quoted verbatim). The headline
-        # must now state both derived counts: total proposals, and how many carry an owner direction.
-        if rel == "suggestions.html":
-            sys.path.insert(0, str(ROOT / "tools"))
-            from build_front import num_word  # the same word-renderer the page uses
-            decided = sum(1 for s in board["suggestions"] if s.get("owner_direction"))
-            want = (f">{num_word(proposal_count, cap=True)} things we could do next. "
-                    f"<em>{num_word(decided, cap=True)} decided by the owner")
-            if want not in h:
-                fail(errors, "G9 suggestions.html: headline counts do not match the decision register")
+        if rel in {"suggestions.html", "questions.html"}:
+            for problem in decision_surface_problems(rel, h, board):
+                fail(errors, problem)
 
         # ---- G10: the five-link summary stays in sync with intent records -----
         if rel == "summary.html":

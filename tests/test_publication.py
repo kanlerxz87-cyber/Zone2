@@ -78,7 +78,12 @@ class ArtifactTests(unittest.TestCase):
     def test_clean_artifact(self):
         errors,stats=verify.verify(ROOT/'_site')
         self.assertEqual(errors,[])
-        self.assertEqual(stats['indexable_pages'],16)
+        # T69 (session arena/698addcd, 2026-11-19): the published indexable surface grew from 16
+        # to 18 when decision-room.html and decision-prompt.html were added to
+        # publication.indexable_paths(). The assertion is kept deliberately exact rather than
+        # loosened to a range: any later change to what this site asks search engines to index is
+        # supposed to be a conscious edit to this line, reviewed alongside the reason for it.
+        self.assertEqual(stats['indexable_pages'],18)
         self.assertGreater(stats['html_pages'],180)
 
     def mutate(self,rel,change,expected):
