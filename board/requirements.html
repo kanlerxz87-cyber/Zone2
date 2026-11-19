@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Requirements trace · Counter Notes decision board</title>
-<meta name="description" content="Every requirement row from the 2026-11-17 brief, checked against the repository rather than taken from the brief&#x27;s own status word. Four rows do not hold up.">
+<meta name="description" content="Every requirement row from the 2026-11-17 brief, checked against the repository rather than taken from the brief&#x27;s own status word. 2 rows do not hold up.">
 <link rel="canonical" href="https://kanlerxz87-cyber.github.io/Zone2/board/requirements.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Counter Notes">
 <meta property="og:title" content="Requirements trace · Counter Notes decision board">
-<meta property="og:description" content="Every requirement row from the 2026-11-17 brief, checked against the repository rather than taken from the brief&#x27;s own status word. Four rows do not hold up.">
+<meta property="og:description" content="Every requirement row from the 2026-11-17 brief, checked against the repository rather than taken from the brief&#x27;s own status word. 2 rows do not hold up.">
 <meta property="og:url" content="https://kanlerxz87-cyber.github.io/Zone2/board/requirements.html">
 <meta name="robots" content="index,follow">
 <link rel="stylesheet" href="assets/board.css">
@@ -52,10 +52,10 @@
   <td class="id">P1</td>
   <td><strong>Give every page its own title and meta description</strong></td>
   <td>Implemented 2026-11-16</td>
-  <td><span class="pill pill--high">overstated</span><br>
-      <span class="small">partly</span></td>
-  <td>215 distinct titles across 219 published pages; 7 pages carry no meta description at all and 2 descriptions are shared by more than one page; 4 titles are shared by more than one page.</td>
-  <td>7 pages to supply a description for, 4 duplicated titles and 2 duplicated descriptions to disambiguate. Small, mechanical, and the only P1 row on the brief that is not finished.</td>
+  <td><span class="pill pill--done">matches</span><br>
+      <span class="small">implemented — every published page carries its own title and its own meta description</span></td>
+  <td>219 distinct titles across 219 published pages; 0 pages carry no meta description at all and 0 descriptions are shared by more than one page; 0 titles are shared by more than one page.</td>
+  <td>None on this row. tools/seo_audit.py now fails the build if a published page lacks a title or a meta description, or if two published pages share either one, and tools/test_seo_meta.py injects five defects to prove each one fires. The other open rows on the brief are unchanged.</td>
   <td class="src"><a href="sources.html#BD-21" title="This namespace&#x27;s own product-intent confirmation record">BD-21</a></td>
 </tr>
 <tr id="RQ-02">
@@ -97,9 +97,9 @@
   <td><strong>Ship a social preview image and structured data, then measure whether search traffic arrives</strong></td>
   <td>Partly implemented 2026-11-16</td>
   <td><span class="pill pill--done">matches</span><br>
-      <span class="small">partly — the structured-data half, not the image half</span></td>
-  <td>97 of 219 pages carry JSON-LD. 108 carry og:type, og:site_name, og:title, og:description and og:url. 152 carry an og:image — that is to say, none of them do.</td>
-  <td>One image, referenced from the og: block on every page. The second half of the row — measure whether traffic arrives — cannot be measured at all until RQ-28 is done, because no page carries Search Console verification.</td>
+      <span class="small">partly — preview metadata is present on a subset; Search Console remains off</span></td>
+  <td>97 of 219 pages carry JSON-LD. 152 of 219 pages carry an og:image. 0 of 219 pages carry a Search Console verification tag.</td>
+  <td>Coverage is incomplete: add consistent preview metadata to the remaining pages if needed, then connect the site&#x27;s Search Console property to observe its own queries. The repository alone cannot establish search traffic.</td>
   <td class="src"><a href="sources.html#BD-15" title="Qualify your outbound links to Google (rel=&quot;sponsored&quot;)">BD-15</a></td>
 </tr>
 <tr id="RQ-06">
@@ -396,14 +396,12 @@
 would guess: every one of the 219 published pages carries the required disclosure, the
 front page genuinely leads with the products, and the campaign ledger is exactly the empty-but-defined
 thing the brief asks for.</p>
-<p>Four rows do not hold up, and three of them fail the same way — a status word that says
+<p>2 rows do not hold up, and they fail the same way — a status word that says
 <em>Implemented</em> where the tree shows something partial:</p>
 <ul>
-  <li><strong>S-04</strong> (7 pages with no meta description, 4 duplicated titles) — the only unfinished P1 row.</li>
   <li><strong>S-19</strong> — no chooser component exists, though a question-led article section does.</li>
-  <li><strong>S-24</strong> — 4 reader pages are one hop short of the row's requirement.</li>
-  <li><strong>S-09</strong> is honestly marked <em>Partly implemented</em>; the missing half is the social preview image, which is the half the row names first.</li>
-</ul>
+  <li><strong>S-24</strong> — 4 reader pages are one hop short of the row's requirement.</li></ul>
+<p>The rows marked <em>Partly implemented</em> say so in the brief as well, and they are listed here so the partial ones are not mistaken for finished ones: <strong>S-07</strong>, <strong>S-09</strong>, <strong>S-11</strong>, <strong>S-13</strong>, <strong>S-20</strong>. Every one of them states the remaining gap in its own row.</p>
 <p>The loudest number on this page is the one that is <em>not</em> a defect: 3017
 Amazon-host links of which 662 carry <code>rel="sponsored"</code>. The
 unmarked remainder are citations to a source inside a verification table, not offers — and Google

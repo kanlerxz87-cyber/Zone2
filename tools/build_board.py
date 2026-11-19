@@ -233,6 +233,9 @@ def measure() -> dict[str, object]:
 
 
 _MEASURED: dict[str, object] = {}
+_OVERSTATED_COUNT = 0     # set in page_requirements() from the data, so the prose cannot drift from the table
+_OVERSTATED_BULLETS = ""  # same: only rows the table marks overstated appear in the list
+_PARTLY_LINE = ""         # same: the partly-implemented rows are named, so a partial row is not read as finished
 
 # Every token this run substituted, and the value it substituted. Written to
 # board/data/measured.json so tools/validate_board.py can re-measure the tree and prove
@@ -693,6 +696,31 @@ close it. Nothing is inferred.</p>
 
 def page_requirements() -> str:
     d = load("requirements")
+    global _OVERSTATED_COUNT, _OVERSTATED_BULLETS, _PARTLY_LINE
+    # The prose below is derived from the same rows the table above prints, so a status word that
+    # the tree contradicts cannot be described one way in the list and another way in the table.
+    notes = {
+        "S-19": "no chooser component exists, though a question-led article section does.",
+        "S-24": f"{_MEASURED['guides_unlinked']} reader pages are one hop short of the row's requirement.",
+        "S-04": f"{_MEASURED['no_desc']} pages with no meta description and {_MEASURED['dup_titles']} shared titles.",
+    }
+    over = [r for r in d["rows"] if r.get("verdict") == "overstated"]
+    _OVERSTATED_COUNT = len(over)
+    _OVERSTATED_BULLETS = "".join(
+        f"\n  <li><strong>{r['brief_ref']}</strong> — {notes.get(r['brief_ref'], r['measured_status'])}</li>"
+        for r in over
+    ) or "\n  <li>None. Every row's status word is supported by the tree.</li>"
+    partly = [r for r in d["rows"] if r.get("measured_status", "").startswith("partly")
+              and r.get("verdict") != "overstated"]
+    if partly:
+        _PARTLY_LINE = (
+            "The rows marked <em>Partly implemented</em> say so in the brief as well, and they are listed here so "
+            "the partial ones are not mistaken for finished ones: "
+            + ", ".join(f"<strong>{r['brief_ref']}</strong>" for r in partly)
+            + ". Every one of them states the remaining gap in its own row."
+        )
+    else:
+        _PARTLY_LINE = "No row is left partly implemented." 
     pill = {
         "matches": "done",
         "overstated": "high",
@@ -742,14 +770,10 @@ def page_requirements() -> str:
 would guess: every one of the {_MEASURED['pages']} published pages carries the required disclosure, the
 front page genuinely leads with the products, and the campaign ledger is exactly the empty-but-defined
 thing the brief asks for.</p>
-<p>Four rows do not hold up, and three of them fail the same way — a status word that says
+<p>{_OVERSTATED_COUNT} row{'' if _OVERSTATED_COUNT == 1 else 's'} do not hold up, and they fail the same way — a status word that says
 <em>Implemented</em> where the tree shows something partial:</p>
-<ul>
-  <li><strong>S-04</strong> ({_MEASURED['no_desc']} pages with no meta description, {_MEASURED['dup_titles']} duplicated titles) — the only unfinished P1 row.</li>
-  <li><strong>S-19</strong> — no chooser component exists, though a question-led article section does.</li>
-  <li><strong>S-24</strong> — {_MEASURED['guides_unlinked']} reader pages are one hop short of the row's requirement.</li>
-  <li><strong>S-09</strong> is honestly marked <em>Partly implemented</em>; the missing half is the social preview image, which is the half the row names first.</li>
-</ul>
+<ul>{_OVERSTATED_BULLETS}</ul>
+<p>{_PARTLY_LINE}</p>
 <p>The loudest number on this page is the one that is <em>not</em> a defect: {_MEASURED['amazon_links']}
 Amazon-host links of which {_MEASURED['sponsored_links']} carry <code>rel="sponsored"</code>. The
 unmarked remainder are citations to a source inside a verification table, not offers — and Google
@@ -759,7 +783,9 @@ defines the value by what the link is. See
     return page(
         "Requirements trace · Counter Notes decision board",
         "Every requirement row from the 2026-11-17 brief, checked against the repository rather than "
-        "taken from the brief's own status word. Four rows do not hold up.",
+        "taken from the brief's own status word. "
+        + (f"{_OVERSTATED_COUNT} row{'' if _OVERSTATED_COUNT == 1 else 's'} do not hold up."
+           if _OVERSTATED_COUNT else "Every row holds up."),
         "requirements.html",
         body,
     )

@@ -7539,3 +7539,51 @@ errors/missing local resources. Browser fixture DBs are removed and Amazon navig
 This documentation-only close-out records observed results; no further feature, product fact, decision,
 report, hosting account or permission is changed. All external gates remain explicit (especially actual
 production collection, enrollment/intent/reports and CN-08). No user's manual answer was requested.
+
+---
+
+## T68 — session `arena/493cbfe2-zone2` — close S-04 (the last open P1 row) and integrate the stale board corrections
+
+| Field | Record |
+|---|---|
+| Session / branch | `arena/493cbfe2-zone2` (session `493cbfe2`); all work stays on this Arena-assigned branch |
+| Claimed | 2026-11-19 (UTC), before implementation |
+| Status | **in progress** |
+| Baseline | `605e49f` (`main`); PRs #172, #163 and #162 were open and are analysed below |
+| Task | (a) Close RQ-01 / S-04 — the only P1 row on the 2026-11-17 brief that was still open — by giving every published page its own `<title>` and its own `<meta name="description">`; (b) add the check that keeps it true, with negative tests; (c) integrate the substantive data corrections from the two other open sessions and regenerate the derived boards; (d) fresh dated verification of the five supplied links and the official sources this session's rows rest on; (e) refresh the suggestion and question registers with what this session found; (f) gates → PR → merge → confirm Pages deploy → record. |
+| File scope | `tools/build_site.py`, `tools/build_decisions.py`, `tools/build_thermometers.py`, `tools/seo_audit.py`, `tools/test_seo_meta.py` (NEW), `tools/build_board.py`, `revalidation/scripts/build.py`, `404.html`, `board/data/requirements.json`, `board/data/topics.json`, regenerated `pages/**`, `decisions/**`, `revalidation/**`, `marketing/thermometers/**`, `board/**`, `brief/**`; `.github/workflows/pages.yml` (one additive step); `ledger/suggestions.json`, `ledger/questions.json` and their generated root pages; `docs/verification-493cbfe2.md`, `docs/source-observations-493cbfe2.json` (NEW); `README.md`, `EXECUTIVE_SUMMARY.md` (additive); `COORDINATION.md` (append-only). |
+| Not claimed | No product value, price, rating, review count, intended-ASIN confirmation, enrollment, order, traffic or strategic choice is introduced by this session. The other sessions' branches are not modified. |
+| Coordination | Three pull requests were open when this session claimed the work: #172 (`arena/5d423a61-zone2`), #163 (`arena/f669bf2c-zone2`) and #162 (draft, `arena/6ce606cb-zone2`). Their last commits are 05:55, 06:20 and 06:15 UTC on 2026-11-19, more than four hours before this claim, and each session left a closing record saying its merge was deferred. See "Integration of the three open pull requests" below for the measured evidence behind each decision. |
+
+### Integration of the three open pull requests (measured before this session's own edits)
+
+- **#172 — not merged, and merging it would undo already-merged work.** Its base is `4398071`, and its
+  `tools/build_front.py` *removes* the T63 reader-first content that main now ships: the diff deletes the
+  `import front_t63 as t63` line, the `"meat-thermometers"` guide category, and the four question-shaped
+  guide pages that `front_t63.NEW_GUIDES` produces. Main already contains that work through PRs #174,
+  #175 and #177. The branch is also `CONFLICTING` against main. Merging it would delete published reader
+  pages. It is left open, unmerged, for its owner.
+- **#162 — draft, and its unique content is already merged.** `shop/**` and the shop guides are in main
+  from the merged T66 work, so its remaining delta is a `desk/` namespace on an old base. It is a draft and
+  is `CONFLICTING`; it is left open, unmerged, for its owner.
+- **#163 — its two data corrections are integrated here instead.** The branch is stale by construction: its
+  generated `board/requirements.html` prints "44 of 171 pages", while the tree now has more than twice
+  that. Merging it as-is would fail the board's own drift gate. The two *substantive* corrections it
+  contains are taken: (1) the TP-03 topic proposal loses the uncited claim that cleanup "is the regret
+  buyers report most", which no source in this repository supports; (2) the RQ-05 row stops saying that
+  "103 carry an og:image — that is to say, none of them do", which was true when written and is false now
+  that `assets/img/og.jpg` ships. Both are applied to `board/data/*.json` and the board is regenerated, so
+  the printed numbers come from the tree rather than from the stale branch.
+
+### Measured state of this session's own work
+
+- **RQ-01 / S-04 closed by measurement.** Before: 7 published pages carried no meta description at all
+  (the 404 page and the whole `revalidation/` namespace), 2 descriptions were shared by 43 pages (39 of
+  them in `pages/`, 4 in `decisions/`), and 4 titles were shared by 8 pages. After: **0 pages without a
+  title, 0 pages without a description, 0 shared titles, 0 shared descriptions across 228 published
+  pages**, measured by `tools/seo_audit.py` and independently by `tools/build_board.py`.
+- **The check is new and negative-tested.** `tools/seo_audit.py` gained D8 (presence and uniqueness of
+  the title and the description on every published page); `tools/test_seo_meta.py` injects five defects —
+  a missing description, a missing title, a shared title, a shared description and a whitespace-only
+  description — plus a clean-tree control, and all six cases fire.
+- **The workflow gained one step** (62 executable steps, up from 61). The local replay passes 62/62.

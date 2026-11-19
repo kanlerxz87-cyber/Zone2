@@ -27,8 +27,15 @@ CHECKS
                             page itself. Reported only, because the duplicate-content decision is an
                             owner decision recorded on the suggestions board (MQ-08 / DS-12), and the
                             marketing set is internally consistent.
+  D8  page metadata        every published page carries its own `<title>` and its own
+                            `<meta name="description">`, and no two published pages share either one.
+                            S-04 is the brief's only P1 row that was still open: 39 of the pages in
+                            `pages/` shared one description, four of them shared a title, and the
+                            `revalidation/` namespace and the 404 page carried no description at all.
+                            Google builds the search snippet from the description, so a shared one means
+                            two pages competing for the same query instead of each earning its own.
 
-Exit code 1 on any D1–D6 failure. D7 never fails.
+Exit code 1 on any D1–D6 or D8 failure. D7 never fails.
 
 Usage:
     python3 tools/seo_audit.py
@@ -90,6 +97,53 @@ class Refs(HTMLParser):
                 self.canonical.append(a["href"])
             if ("icon" in rel or "shortcut" in rel) and a.get("href"):
                 self.icons.append(a["href"])
+
+
+TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.S | re.I)
+DESCRIPTION_RE = re.compile(
+    r"<meta\s+name=[\"']description[\"']\s+content=[\"'](.*?)[\"']", re.S | re.I
+)
+
+
+def metadata_problems(pages: list[Path], root: Path) -> list[str]:
+    """D8: every published page must have its own title and its own meta description.
+
+    Kept as a separate function so tools/test_seo_meta.py can drive it over a synthetic tree
+    and prove that each failure mode actually fires. A gate that has only ever passed is a
+    claim, not a control.
+    """
+    problems: list[str] = []
+    titles: dict[str, list[str]] = {}
+    descriptions: dict[str, list[str]] = {}
+    for rel in pages:
+        text = (root / rel).read_text(encoding="utf-8", errors="replace")
+        name = rel.as_posix()
+        title_match = TITLE_RE.search(text)
+        title = title_match.group(1).strip() if title_match else ""
+        desc_match = DESCRIPTION_RE.search(text)
+        description = desc_match.group(1).strip() if desc_match else ""
+        if not title:
+            problems.append(f"D8 metadata: {name} has no <title>")
+        else:
+            titles.setdefault(title, []).append(name)
+        if not description:
+            problems.append(f"D8 metadata: {name} has no meta description")
+        else:
+            descriptions.setdefault(description, []).append(name)
+    for title, names in sorted(titles.items()):
+        if len(names) > 1:
+            problems.append(
+                f"D8 metadata: title shared by {len(names)} pages: {title[:70]!r} — "
+                + ", ".join(names)
+            )
+    for description, names in sorted(descriptions.items()):
+        if len(names) > 1:
+            problems.append(
+                f"D8 metadata: meta description shared by {len(names)} pages: {description[:70]!r} — "
+                + ", ".join(names[:8])
+                + (f" (+{len(names) - 8} more)" if len(names) > 8 else "")
+            )
+    return problems
 
 
 def parse_sitemap(path: Path) -> list[str]:
@@ -207,6 +261,10 @@ def main() -> int:
     for item in canonical_mismatch:
         notes.append(f"D7 canonical points elsewhere: {item}")
 
+    # ---- D8: every published page has its own title and its own meta description -----------
+    d8_problems = metadata_problems(pages, REPO)
+    problems.extend(d8_problems)
+
     # ---- D5: marketing/sitemap.xml must cover marketing/** ---------------------------------
     m_sitemap = REPO / "marketing" / "sitemap.xml"
     m_pages = [p for p in pages if p.parts[0] == "marketing"]
@@ -241,6 +299,7 @@ def main() -> int:
     print(f"  D5 marketing sitemap   {'PASS' if not any(p.startswith('D5') for p in problems) else 'FAIL'}")
     print(f"  D6 favicon             {'PASS' if not missing_icons else 'FAIL'}")
     print(f"  D7 canonical (report)  {len(canonical_mismatch)} page(s) point elsewhere")
+    print(f"  D8 page metadata       {'PASS' if not d8_problems else 'FAIL'}")
 
     for note in notes:
         print(f"  note: {note}")

@@ -229,11 +229,12 @@ NAV = [
 ]
 
 
-def render(rel: str, title: str, lead: str, body: str, *, badge: str = "") -> str:
+def render(rel: str, title: str, lead: str, body: str, *, badge: str = "",
+           description: str = HUB_DESCRIPTION) -> str:
     """Same shell as pages/ (tools/build_site.py::render) so the two namespaces are one site."""
     c = counts()
     head_tags = head_block("decisions/" + rel, title=f"{title} · {SITE_NAME} decisions",
-                            description=HUB_DESCRIPTION, site_name=f"{SITE_NAME} decisions")
+                            description=description, site_name=f"{SITE_NAME} decisions")
     items = []
     for href, label in NAV:
         active = " active" if href == rel else ""
@@ -243,7 +244,7 @@ def render(rel: str, title: str, lead: str, body: str, *, badge: str = "") -> st
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{esc(HUB_DESCRIPTION)}">
+<meta name="description" content="{esc(description)}">
 <meta name="robots" content="index,follow">
 <title>{esc(title)} &middot; {esc(SITE_NAME)} decisions</title>
 {head_tags}
@@ -420,6 +421,7 @@ def page_index() -> str:
         "The requirement set, the content plan and the review record behind the canonical decision board, with every "
         "claim traced to an official source or explicitly left blank.",
         "".join(body),
+        description="The Zone2 decision hub: the requirement set, the content plan and the review record behind the canonical decision board, with every claim traced to an official source or left blank.",
     )
 
 
@@ -488,6 +490,7 @@ def page_requirements() -> str:
         "The full requirement set",
         "Every requirement in the brief, its state, and the exact place in the repository that satisfies or fails it.",
         "".join(parts),
+        description="Every requirement in the Zone2 brief, its measured state, and the exact place in the repository that satisfies or fails it.",
     )
 
 
@@ -573,6 +576,7 @@ def page_content_plan() -> str:
         "The \"does not read like AI slop\" requirement, restated as the four things Google actually asks for, with a "
         "plan that starts from the evidence this project already owns.",
         "".join(body),
+        description="The Zone2 content plan: the four things Google asks for, restated as a publishing plan that starts from the evidence the project already owns.",
     )
 
 
@@ -686,6 +690,7 @@ def page_flagged() -> str:
         "Everything unverified or still open in this review — requirement gaps, unanswered questions, this task's own "
         "corrected error, and the project flags that bear on them.",
         "".join(body),
+        description="Everything still unverified or open in the Zone2 decision review: requirement gaps, unanswered questions and the project flags that bear on them, each with its official source.",
     )
 
 

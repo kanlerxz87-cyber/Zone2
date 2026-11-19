@@ -285,8 +285,17 @@ jobs:
       - name: Rebuild the sitemap and confirm committed output is current
         run: python3 tools/build_sitemap.py --check
 
-      - name: Discoverability audit (sitemap coverage, robots, noindex, favicon, canonical)
+      - name: Discoverability audit (sitemap coverage, robots, noindex, favicon, canonical, page metadata)
         run: python3 tools/seo_audit.py
+
+      # D8 in the gate above: every published page carries its own <title> and its own
+      # <meta name="description">, and no two pages share either one. S-04 is the only P1 row
+      # on the 2026-11-17 brief that was still open on 19 November 2026: 39 pages in
+      # `pages/` shared a single description, four pairs shared a title, and `revalidation/`
+      # plus the 404 page carried no description at all. The negative tests below prove the
+      # check fires on each of those defects rather than merely passing on a clean tree.
+      - name: Page-metadata gate negative tests (5 injected defects must each fire)
+        run: python3 tools/test_seo_meta.py
 
       # ---- arena/5d6d2254-zone2: the head-metadata contract (T42) ----
       # tools/seo_audit.py above reports a canonical that points at the wrong URL; this gate is what makes

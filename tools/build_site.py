@@ -189,7 +189,8 @@ SIBLINGS = [
 ]
 
 
-def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge: str = "") -> str:
+def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge: str = "",
+           description: str = HUB_DESCRIPTION) -> str:
     up = "../" * depth
     root = "../" * (depth + 1)
     items = []
@@ -199,7 +200,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
         active = " active" if href == rel else ""
         items.append(f'<a class="nav-link{active}" href="{up}{esc(href)}">{esc(label)}</a>')
     head_tags = head_block("pages/" + rel, title=f"{title} · {SITE_NAME}",
-                            description=HUB_DESCRIPTION, site_name=SITE_NAME)
+                            description=description, site_name=SITE_NAME)
     flag_count = len(FLAGS["flags"])
     links = []
     for rel, label in SIBLINGS:
@@ -213,7 +214,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{esc(HUB_DESCRIPTION)}">
+<meta name="description" content="{esc(description)}">
 <meta name="robots" content="index,follow">
 <title>{esc(title)} &middot; {esc(SITE_NAME)}</title>
 {head_tags}
@@ -316,7 +317,8 @@ def page_hub() -> str:
         )
         + panel("What is built vs what is blocked", f'<ul class="checklist">{built}</ul>')
     )
-    return render("index.html", "Findings hub", "Every table, every flag, and the evidence behind each row.", body)
+    return render("index.html", "Findings hub", "Every table, every flag, and the evidence behind each row.", body,
+                description="The Zone2 findings hub: an index of the verification log, the requested product catalogue, the published commission bands and every open flag, in one table of tables.")
 
 
 def page_exec() -> str:
@@ -378,7 +380,8 @@ def page_exec() -> str:
             "confirmation of the mapping, Creators API access and dated performance reports have not been supplied; dependent claims and values remain blocked or blank.",
         )
     )
-    return render("executive-summary.html", "Executive summary", "What was verified, what was built, and what is blocking the rest.", body)
+    return render("executive-summary.html", "Executive summary", "What was verified, what was built, and what is blocking the rest.", body,
+                description="What the Zone2 project has verified, what it has built, and the external evidence that still blocks the rest — the whole state of play on one page.")
 
 
 def page_products() -> str:
@@ -523,7 +526,8 @@ def page_products() -> str:
             "</ul>",
         )
     )
-    return render("products.html", "Requested products", "The five items named in the brief, with every unconfirmed field left blank.", body)
+    return render("products.html", "Requested products", "The five items named in the brief, with every unconfirmed field left blank.", body,
+                description="The five products named in the brief, every field an official source does not confirm left blank and flagged, with the source link beside each confirmed value.")
 
 
 def page_commissions() -> str:
@@ -575,7 +579,8 @@ def page_commissions() -> str:
             "grouping in the source — flag F-31.)",
         )
     )
-    return render("commissions.html", "Commissions & economics", "Amazon's published rates, bounties, attribution windows and payment terms, transcribed from the source.", body)
+    return render("commissions.html", "Commissions & economics", "Amazon's published rates, bounties, attribution windows and payment terms, transcribed from the source.", body,
+                description="Amazon's published commission rates, bounty amounts, attribution windows and payment terms, transcribed from the official statement with its access date.")
 
 
 def page_categories_index() -> str:
@@ -598,7 +603,8 @@ def page_categories_index() -> str:
         )
         + panel("Category subpages", table(["Band", "Categories", "Published fixed rate", "Count", "Commercial reading", "Source"], rows))
     )
-    return render("categories/index.html", "Categories", "Subpages organised by Amazon's published commission categories.", body, depth=1)
+    return render("categories/index.html", "Categories", "Subpages organised by Amazon's published commission categories.", body, depth=1,
+                description="One subpage per commission band Amazon publishes, with the fixed rate for each band and the categories that band covers.")
 
 
 def page_category(g: dict) -> str:
@@ -632,7 +638,9 @@ def page_category(g: dict) -> str:
         + panel("Per-product economics for this band", table(["Metric", "Value", "Basis"], [[text_cell(a), status_pill(b) if b == "not published" else text_cell(b), text_cell(c)] for a, b, c in per_product]))
         + panel("How the pipeline uses this band", checklist(esc(s) for s in steps))
     )
-    return render(f"categories/{g['slug']}.html", f"Category band {g['rate_pct']}%", ", ".join(g["categories"]), body, depth=1)
+    return render(f"categories/{g['slug']}.html", f"Category band {g['rate_pct']}% — {g['categories'][0]}",
+                ", ".join(g["categories"]), body, depth=1,
+                description=f"Amazon's published commission band {g['rate_pct']}% for {g['categories'][0]}: the band id, the categories it covers, the rate and the per-product economics.")
 
 
 def page_modules_index() -> str:
@@ -656,7 +664,8 @@ def page_modules_index() -> str:
         )
         + panel("Module register", table(["ID", "Module", "State", "Implemented in", "Blockers", "Sources"], rows))
     )
-    return render("modules/index.html", "Platform modules", "The capabilities the brief asked for, and the honest state of each.", body, depth=1)
+    return render("modules/index.html", "Platform modules", "The capabilities the brief asked for, and the honest state of each.", body, depth=1,
+                description="The twelve platform modules the brief asked for, each with its state, its blockers and the official inputs it depends on.")
 
 
 RULE_TAGS = {
@@ -714,6 +723,7 @@ def page_module(m: dict) -> str:
         body,
         depth=1,
         badge=status_pill(m["state"].upper()),
+        description=f"{m['name']} — {m['purpose']} Its state, verification method, blockers and the program rules that constrain it.",
     )
 
 
@@ -751,7 +761,8 @@ def page_compliance() -> str:
         + panel("Control ledger", table(["Rule", "Domain", "Requirement as stated by the source", "Citation", "Implemented control in this repo", "Status", "Source"], rows))
         + panel("Publishing checklist", checklist(esc(c) for c in checks))
     )
-    return render("compliance.html", "Compliance", "Program rules, mapped one-to-one to the control that enforces each of them.", body)
+    return render("compliance.html", "Compliance", "Program rules, mapped one-to-one to the control that enforces each of them.", body,
+                description="Amazon Associates program rules mapped one to one onto the control in this repository that enforces each of them, with the citation and the source link.")
 
 
 def page_verification() -> str:
@@ -779,7 +790,8 @@ def page_verification() -> str:
         + panel("Verdict counts", table(["Verdict", "Rows"], [[f"<td>{status_pill(k)}</td>", num_cell(v)] for k, v in sorted(counts.items())]))
         + panel("Verification log", table(["ID", "Subject", "Claim checked", "Method", "Verdict", "Source", "Consequence"], rows))
     )
-    return render("verification.html", "Verification log", f"{len(rows)} checks, each tied to an official source and a method.", body)
+    return render("verification.html", "Verification log", f"{len(rows)} checks, each tied to an official source and a method.", body,
+                description="The dated verification log: every check this repository has run, the method it used, the official source behind it and the result.")
 
 
 def page_sources() -> str:
@@ -804,7 +816,8 @@ def page_sources() -> str:
         )
         + panel("Source register", table(["ID", "Title / link", "Publisher", "Kind", "Page states it was updated", "Accessed", "Used for"], rows))
     )
-    return render("sources.html", "Official sources", "Every document this repository relies on, with its access date.", body)
+    return render("sources.html", "Official sources", "Every document this repository relies on, with its access date.", body,
+                description="The official source register behind the Zone2 findings: every document relied on, with its class, publisher and access date.")
 
 
 def _q_anchor(qid: str) -> str:
@@ -859,7 +872,8 @@ def page_suggestions() -> str:
             ),
         )
     )
-    return render("suggestions.html", "Suggestions", "Decision board: options, a recommendation and the evidence for each path. Choose before anything changes.", body)
+    return render("suggestions.html", "Suggestions", "Decision board: options, a recommendation and the evidence for each path. Choose before anything changes.", body,
+                description="The Zone2 decision board: every proposal with its options, costs, risks and the evidence behind it, so a path can be chosen before anything is changed.")
 
 
 def page_questions() -> str:
@@ -886,7 +900,8 @@ def page_questions() -> str:
         )
         + panel(f"{len(rows)} open questions", table(["ID", "Question", "Verified now", "Still missing", "How to close the gap", "Blocks", "Source"], rows))
     )
-    return render("questions.html", "Open questions", "Questions and missing information, with the official sources that answer part of each.", body)
+    return render("questions.html", "Open questions", "Questions and missing information, with the official sources that answer part of each.", body,
+                description="What is settled, what is missing, and the single action that would close each open question on the Zone2 project, with the official source for every answer.")
 
 
 def _open_flag_count() -> int:
@@ -946,7 +961,8 @@ def page_flags() -> str:
             "the rate band attaches from the published table. No other code change is required.",
         )
     )
-    return render("flags.html", "Flagged for review", "Unverified items and irregularities, with source links, for after-launch review.", body, badge="")
+    return render("flags.html", "Flagged for review", "Unverified items and irregularities, with source links, for after-launch review.", body, badge="",
+                description="Unverified values and irregularities found while checking the brief, each with its official source and its reason, published for review after launch.")
 
 
 def page_niches() -> str:
@@ -960,7 +976,8 @@ def page_niches() -> str:
         + panel("Inputs required before any niche may be ranked", table(["Required input", "State", "Where it must come from", "Source"], rows))
         + panel("Row schema the queue will use", "<pre class=\"code\">" + esc(json.dumps(NICHES["row_schema"], indent=2, sort_keys=True)) + "</pre>")
     )
-    return render("niches.html", "Niche discovery", "The method and the filter are sourced; the ranking stays empty until demand data exists.", body)
+    return render("niches.html", "Niche discovery register", "The method and the filter are sourced; the ranking stays empty until demand data exists.", body,
+                description="How niche eligibility is filtered and what a ranking would need before it could run. The queue stays empty until demand data exists.")
 
 
 def page_tracking() -> str:
@@ -1000,7 +1017,8 @@ def page_tracking() -> str:
         + panel("Data contract (see tools/tracking_schema.sql)", table(["Field", "Type / origin", "Source of record", "Rule"], [[text_cell(a, code=True), text_cell(b), text_cell(c, raw=True), text_cell(d)] for a, b, c, d in cols]))
         + panel("Privacy and policy constraints honoured", checklist(esc(h) for h in honour))
     )
-    return render("tracking.html", "Tracking & measurement", "What the click layer records, what it must never record, and what stays blank.", body)
+    return render("tracking.html", "Tracking & measurement", "What the click layer records, what it must never record, and what stays blank.", body,
+                description="What the click layer records, what it must never record, and which metrics stay blank until authorized Associates reports exist.")
 
 
 def page_content() -> str:
@@ -1040,7 +1058,8 @@ def page_content() -> str:
         + panel("SEO mechanics honoured", checklist(esc(s) for s in seo))
         + panel("Generation status for the requested items", table(["Entry", "Identity", "Generator result", "Note", "Source"], state))
     )
-    return render("content-engine.html", "Content engine", "How copy gets produced without inventing facts.", body)
+    return render("content-engine.html", "Content engine", "How copy gets produced without inventing facts.", body,
+                description="How article, comparison and guide copy is generated from templates without inventing facts, prices, ratings or personal experience.")
 
 
 def page_architecture() -> str:
@@ -1084,7 +1103,8 @@ def page_architecture() -> str:
         )
         + panel("Repository layout", f"<pre class=\"code\">{esc(layout)}</pre>")
     )
-    return render("architecture.html", "Architecture", "How the loop runs, and where it refuses to guess.", body)
+    return render("architecture.html", "Architecture", "How the loop runs, and where it refuses to guess.", body,
+                description="The nine-stage loop from catalog lookup to re-verification, the guardrail that stands at each stage, and the repository layout it runs on.")
 
 
 DESIGN_SOURCE_CANDIDATES = (

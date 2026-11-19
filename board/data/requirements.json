@@ -16,11 +16,11 @@
       "priority": "P1",
       "requirement": "Give every page its own title and meta description",
       "brief_status": "Implemented 2026-11-16",
-      "measured_status": "partly",
-      "verdict": "overstated",
+      "measured_status": "implemented — every published page carries its own title and its own meta description",
+      "verdict": "matches",
       "measured": "{{unique_titles}} distinct titles across {{pages}} published pages; {{no_desc}} pages carry no meta description at all and {{dup_desc}} descriptions are shared by more than one page; {{dup_titles}} titles are shared by more than one page.",
-      "evidence": "Measured by tools/build_board.py across every published .html file. The pages with no description are the 404 page and the whole revalidation/ namespace.",
-      "gap": "{{no_desc}} pages to supply a description for, {{dup_titles}} duplicated titles and {{dup_desc}} duplicated descriptions to disambiguate. Small, mechanical, and the only P1 row on the brief that is not finished.",
+      "evidence": "Measured by tools/build_board.py across every published .html file. On 19 November 2026 this row measured 7 pages with no meta description at all, 2 descriptions shared by more than one page and 4 titles shared by more than one page. Session 493cbfe2 gave each published page its own title and description and added check D8 to tools/seo_audit.py, so the tree is measured against the same rule on every build.",
+      "gap": "None on this row. tools/seo_audit.py now fails the build if a published page lacks a title or a meta description, or if two published pages share either one, and tools/test_seo_meta.py injects five defects to prove each one fires. The other open rows on the brief are unchanged.",
       "source_ids": ["BD-21"]
     },
     {
@@ -68,11 +68,11 @@
       "priority": "P2",
       "requirement": "Ship a social preview image and structured data, then measure whether search traffic arrives",
       "brief_status": "Partly implemented 2026-11-16",
-      "measured_status": "partly — the structured-data half, not the image half",
+      "measured_status": "partly — preview metadata is present on a subset; Search Console remains off",
       "verdict": "matches",
-      "measured": "{{jsonld}} of {{pages}} pages carry JSON-LD. 108 carry og:type, og:site_name, og:title, og:description and og:url. {{og_image}} carry an og:image — that is to say, none of them do.",
-      "evidence": "tools/build_head_meta.py emits the og: block and does not emit og:image; the audit on the same tool reports clean, because it does not require an image. The row is honestly 'partly' — but the missing half is the half the row names first.",
-      "gap": "One image, referenced from the og: block on every page. The second half of the row — measure whether traffic arrives — cannot be measured at all until RQ-28 is done, because no page carries Search Console verification.",
+      "measured": "{{jsonld}} of {{pages}} pages carry JSON-LD. {{og_image}} of {{pages}} pages carry an og:image. {{sc_pages}} of {{pages}} pages carry a Search Console verification tag.",
+      "evidence": "Measured by tools/build_board.py from the checked-in HTML tree. These counts describe published markup, not search-engine indexing or traffic. The og:image figure points at assets/img/og.jpg, which this site has published since session 7264f3c2 shipped it, so the older wording on this row (“that is to say, none of them do”) no longer describes the tree and has been corrected.",
+      "gap": "Coverage is incomplete: add consistent preview metadata to the remaining pages if needed, then connect the site's Search Console property to observe its own queries. The repository alone cannot establish search traffic.",
       "source_ids": ["BD-15"]
     },
     {

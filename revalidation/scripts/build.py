@@ -59,7 +59,7 @@ def badge(status: str) -> str:
     return f'<span class="badge {cls}">{label}</span>'
 
 
-def page(title: str, current: str, lede: str, body: str) -> str:
+def page(title: str, current: str, lede: str, body: str, description: str = "") -> str:
     nav = "".join(
         f'<a href="{p}" class="active">{escape(t)}</a>'
         if p == current
@@ -72,6 +72,7 @@ def page(title: str, current: str, lede: str, body: str) -> str:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)} — Zone2 Revalidation</title>
+<meta name="description" content="{escape(description or lede)}">
 <link rel="stylesheet" href="assets.css">
 </head>
 <body>
@@ -203,6 +204,7 @@ both -&gt; /dp/B0CDY277D3?lv=shuf&amp;btn_type=ss&amp;<span>btn_ref=srctok-1e229
         "A controlled re-check of the three supplied Amazon links, and a correction to a published "
         "conclusion that did not survive its control test.",
         body,
+        description="Overview of the controlled re-check of the three supplied Amazon links: what was re-fetched, what the control test changed, and which conclusions were corrected.",
     )
 
 
@@ -265,6 +267,7 @@ def build_links(links) -> str:
         "Per-link evidence: what each supplied short link does, what its code does on its own, and which "
         "of the two results actually identifies a product.",
         body,
+        description="Per-link evidence for the three supplied short links: what each link does, what its code does on its own, and which of the two results actually identifies a product.",
     )
 
 
@@ -316,6 +319,7 @@ def build_products(specs) -> str:
         "products.html",
         "Product attributes for the three ASINs the supplied links resolve to. Blank means unverified — never inferred.",
         body,
+        description="Product attributes for the three ASINs the supplied links resolve to. A blank cell means unverified, never inferred.",
     )
 
 
@@ -386,6 +390,7 @@ def build_method(links, program) -> str:
         "method.html",
         "How each value was checked, what this environment cannot reach, and why some cells are blank on purpose.",
         body,
+        description="How every value in the Zone2 revalidation namespace was checked, what this environment cannot reach, and why some cells are left blank on purpose.",
     )
 
 
@@ -421,6 +426,7 @@ def build_flagged(flags) -> str:
         "flagged.html",
         "Every open irregularity and unverified item from this session, with its evidence and official source links.",
         body,
+        description="Every open irregularity and unverified item found while re-validating the supplied links, with its evidence and official source links.",
     )
 
 
@@ -449,6 +455,7 @@ def build_sources(links, specs, program) -> str:
         "sources.html",
         "The complete list of official sources cited by this session, with links for manual review.",
         body,
+        description="The complete list of official sources cited by the Zone2 revalidation namespace, with links for manual review.",
     )
 
 
