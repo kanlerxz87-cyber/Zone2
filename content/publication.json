@@ -164,6 +164,20 @@
       "url": "https://developers.google.com/search/docs/appearance/snippet",
       "checked": "2026-11-19",
       "scope": "Meta descriptions are not a ranking factor; they may be used as the snippet when they describe the page well."
+    },
+    "GOOGLE-SITEMAP": {
+      "publisher": "Google Search Central",
+      "title": "Build and submit a sitemap",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+      "checked": "2026-11-19",
+      "scope": "A sitemap lists URLs an owner wants crawled and indexed; submitting one does not guarantee indexing."
+    },
+    "W3C-258": {
+      "publisher": "W3C Web Accessibility Initiative",
+      "title": "Understanding SC 2.5.8: Target Size (Minimum), Level AA",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+      "checked": "2026-11-19",
+      "scope": "Targets should be at least 24 by 24 CSS pixels, except where sufficient spacing or an equivalent control exists."
     }
   },
   "products": [

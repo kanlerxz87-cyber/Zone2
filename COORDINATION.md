@@ -7873,6 +7873,173 @@ as history on purpose (OBS-2/OBS-3 in the verification record).
 
 **Pending at the time of this paragraph:** PR creation, merge without waiting, GitHub Pages deploy confirmation, and the live fetch — all recorded in the closing addendum appended after deployment.
 
+## T73 claim — session `arena/1b09bb6d-zone2` (`1b09bb6d`) — 2026-11-19 (UTC)
+
+**Status: claimed — final integration session.**
+
+> **Renumbered T72 → T73 at integration (2026-11-19).** This session's claim was written and
+> pushed at **19:40:08Z**, four minutes *before* session `arena/e078d7c5-zone2` claimed **T72** at
+> 19:44:12Z — but that session's coordination-only pull requests (#190, #191) merged into `main`
+> first, so its T72 record is the one already published. Per the board's standing precedent the
+> session still in flight yields the id. **No work was dropped and no scope overlapped:** that
+> session edited `COORDINATION.md` only and explicitly left #182 and #184 untouched, whereas this
+> session integrated #182 and #184 — the two branches that carry the Decision Room, the design
+> brief and the clipped-label repair. Both chronologies are kept in this file. Baseline is the retained canonical `main` tree at
+`fc243e0b8d85e5bf77eacc45ca0469bd6567a5a3` (merge of PR #189, the T71 close-out). The live site is
+`https://kanlerxz87-cyber.github.io/Zone2/` and the Pages API reports `status: built` from `main` at `/`.
+
+**Task.** This is the **final integration session** the project brief calls for. It does four things,
+in order: (1) **re-verify the combined tree line by line against official sources** — every published
+factual row re-checked against the official page it cites, with the read dated today; (2) **integrate the
+two stale open PRs** (#182 `60b0ea6b`, #184 `698addcd`) that no session finished — the two branches that
+carry the *Decision Room*, the *design prompt* the suggestions feed, the *clipped-label repair*, and the
+*current-vs-preserved register split*, all of which are the surfaces the owner's brief asks for by name;
+(3) **run every repository gate** on the combined tree and confirm the site builds with no broken links;
+(4) **PR → merge without waiting → confirm the GitHub Pages deploy → record**, and publish every flagged
+or unverified item on the *Flagged for Review* page with its source link.
+
+**Takeover basis (the board's 60-minute rule).** Both branches are stale: #182's last commit is
+`0951e6f` at 2026-11-19 11:25:01Z and #184's is `5759d18` at 2026-11-19 11:18:48Z — **more than eight
+hours** before this claim (2026-11-19 19:40Z) with no commits since, and **neither session id appears
+anywhere in this board**, so neither left a live claim. `gh pr list --state open` shows only these two.
+Both are therefore taken over here, with the handoff recorded. Their branches are read and merged, never
+rewritten; no upstream commit is discarded.
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T73 | **Final integration: re-verify the combined tree line by line, integrate stale PRs #182 and #184, run every gate, and publish.** | **claimed 2026-11-19 (UTC), in progress** | `arena/1b09bb6d-zone2` (`1b09bb6d`) | `COORDINATION.md` (append-only records + this claim). **Integrated branches (read-only inputs, merged not edited):** `origin/arena/60b0ea6b-zone2` (#182) and `origin/arena/698addcd-zone2` (#184). **Additive integration files:** `docs/verification-1b09bb6d.md` (NEW), `EXECUTIVE_SUMMARY.md` (append-only addendum), `README.md` (append-only addendum). **Regenerated outputs** through the existing builders only (`index.html`, `questions.html`, `suggestions.html`, `flagged.html`, `decision-room.html`, `decision-prompt.html`, `guides/**`, `shop/**`, `board/**`, `brief/**`, `release/index.html`, `sitemap.xml`, `feed.xml`). **Not claimed:** any verified product/spec/source value not backed by a dated official read; `ledger/campaigns.json` (stays `EMPTY_BY_DESIGN`); the intended-ASIN confirmation fields (stay blank until the owner confirms); any other session's namespace. |
+
+**Rule this session holds itself to.** No product fact, price, star rating, review count, ASIN,
+commission, traffic figure, conversion or revenue number is added, changed or inferred. A value that
+cannot be confirmed from an official source stays **blank** and is flagged as unverified on
+*Flagged for Review* with the source link. Nothing here applies itself.
+
+---
+
+<!-- T72 integration (session arena/1b09bb6d-zone2): the append-only conflict at the end of this file is resolved by keeping BOTH chronologies — the upstream T71/T72 records above and the integrated PR #182 (session 60b0ea6b) record below. No upstream content is discarded. -->
+
+## T69 — claim: make current suggestions/questions rollups match the displayed registers
+
+| Field | Record |
+|---|---|
+| Session / branch | `arena/60b0ea6b-zone2`; work remains on the Arena-assigned current branch |
+| Claimed | 2026-11-19 (UTC), before implementation |
+| Status | **in progress** |
+| Baseline | `605e49f` (PR #178 merge). The working tree was clean. Existing open PRs #162/#163/#172 are older, superseded/integration-era work; this task does not adopt their data or branch. Current repository output was inspected before editing. |
+| Task | The current root `suggestions.html` shows five current S63 proposals plus the preserved 18-row board, but its lead still reads “18 things” / “4 decided” without distinguishing those registers and says “last updated 2026-11-16.” `questions.html` likewise shows seven current-release questions plus 17 preserved questions while its lead reports only 17. Fix the reader-facing summaries and section labels so current versus preserved counts/dates are explicit and derived from their actual source arrays. Add regression coverage that fails if these rollups drift. No owner direction, answer, product fact, source claim, link intent, or campaign observation is changed. |
+| File scope | `tools/publication.py`, `tools/build_front.py`, `tools/verify_front.py`, NEW `tests/test_front_surfaces.py`, generated `suggestions.html` / `questions.html` through `tools/build_front.py`, NEW `docs/verification-60b0ea6b.md`, `COORDINATION.md` (append-only). |
+| Excluded | `docs/board-9251f262.json`, `board/data/**`, `ledger/**`, `content/publication.json`, `shop/**`, official-source/product research, tracking/measurement, workflow, sitemap/feed, every other session's claimed data. Existing board counts and owner directions will be rendered as preserved records, not edited or consolidated. |
+| Coordination | The mandatory pre-push rebase found upstream T68 already recorded for `arena/57eb4af5-zone2`; that entire upstream record is retained unchanged. This narrower task is renumbered T69 to avoid a collision. Existing PRs #162/#163/#172 are not edited, merged or closed. This is a distinct derived-output accuracy repair, not a takeover of another session's topic-data or product-research task. |
+| Baseline finding | Local tree check: `publication.PROPOSALS` has 5 current proposals; `publication.QUESTIONS` has 7 current questions; `docs/board-9251f262.json` carries 18 preserved suggestions (4 with owner directions) and 17 preserved questions (15 open, 2 answered). Rendered roots visibly combine both sets but the current headings/bylines report only the preserved set. These are repository-derived counts, not external traffic or product facts. |
+
+### T69 scope extension — run the summary mutations in CI (2026-11-19)
+
+Before implementation, add one explicit call to the new front-summary regression test in
+`.github/workflows/pages.yml`, immediately after the existing Front-of-house gate. This keeps the test
+on the existing verified build path instead of leaving a local-only script. The workflow change is
+additive only; no job, permission, deploy condition, or existing test is removed or reordered. No other
+session currently claims this workflow step. Updated T69 scope: add `.github/workflows/pages.yml` (one
+additive test invocation). The `tests/test_front_surfaces.py` tests use only repository-generated counts
+and do not access external sites or credentials.
+
+### T69 workflow integration correction — preserve the derived CI-step count
+
+The first full replay observed **62** steps and stopped at the design-brief freshness gate: `brief/index.html`,
+`brief/review.html` and `brief/verification.html` derive their published gate count from
+`len(tools/ci_replay.py::steps())`. The extra workflow step would therefore force unrelated generated
+`brief/` output changes. Preserve the new regression tests without increasing the workflow step count:
+remove the separate additive step and append `&& python3 tests/test_front_surfaces.py` to the existing
+Front-of-house gate's `run` command. This supersedes the prior T69 scope extension's separate-step
+wording; the workflow scope is only that one existing command-line edit. Do not modify `brief/**`.
+
+### T69 integration record — preserve parallel freshness fix and add derived rollup contract
+
+While this branch's derived-register work was being finalized, `main` advanced through PR #180
+(`arena/56aa1fac-zone2`), which independently fixed the suggestion/question page-update label and added
+G11. The rebase onto `e081f42` retained that completed work and both append-only session records; the two
+T69 entries are parallel, distinct scopes, not a replacement. This branch keeps the page-update label
+from `UPDATED_ON` and explicitly separates it from the current release's `publication.DATE`, the earlier
+board's `compiled_utc`, and (on suggestions) the latest owner-direction date. The local derived-summary
+gate checks those visible labels and counts against their respective data sources; G11 remains in the
+combined front gate. The regression invocation stays appended to the existing Front-of-house command,
+so the workflow-derived count remains 61 and no unrelated `brief/**` output is regenerated.
+
+### T69 rebase refresh — preserve upstream close-out PR #181
+
+After the first integration onto `e081f42`, `main` advanced through upstream PR #181, which records the
+completed PR #180 merge and Pages verification. This branch was rebased again onto `b04078f`; PR #181's
+append-only coordination close-out is retained. It changes no T69 source or generated publication file.
+
+### T69 integration refresh — PR #183 adds current register rows and one independent gate
+
+After the rebase onto `b04078f`, upstream PR #183 merged onto `main` as `b37eadf`. It added four
+current S68 proposals and four current Q68 questions to the source arrays, so the correct current
+rollups are now 9 proposals and 11 questions; the preserved historical board remains 18 suggestions
+and 17 questions. This branch regenerated only the derived root decision surfaces and broadened the
+current-question row-ID verifier to accept the new source IDs; it did not edit `content/publication.json`
+or `docs/board-9251f262.json`.
+
+PR #183 also added the independent product-note overlap workflow step and regenerated its design-brief
+count. The combined replay is therefore 62 steps, not the earlier 61. The T69 regression stays in the
+existing Front-of-house command, adds no step of its own, and does not edit `brief/**`. Combined-tree
+build, gates and replay were rerun after rebasing onto `b37eadf`.
+
+### T69 rebase refresh — preserve upstream PR #186 close-out
+
+After integrating PR #183 and verifying the 9/11 current rollups, `main` advanced through PR #186,
+which adds the upstream T70 deployment-verification close-out for #183. This branch was rebased onto
+`34bab9d`; that append-only record is retained. It does not alter this task's code, data, or generated
+pages. The next combined-tree validation is performed on this base.
+
+### T69 rebase refresh — preserve upstream PR #185 integration
+
+After PR #186, `main` advanced through PR #185 (`arena/9ffe2d83-zone2`) to `4374bda`. This branch was
+rebased onto that head, preserving PR #185's flag-count and cross-namespace close-out. Its file scope
+does not change the current publication arrays or `docs/board-9251f262.json`; this branch keeps both
+inputs untouched and revalidates the combined tree.
+
+---
+
+<!-- T72 integration (session arena/1b09bb6d-zone2): the append-only conflict at the end of this file is resolved by keeping BOTH chronologies — the upstream T71/T72 records above and the integrated PR #184 (session 698addcd) record below. No upstream content is discarded. -->
+
+## Session record — `arena/698addcd-zone2` (T70)
+
+**Branch:** `arena/698addcd-zone2` (base `main` @ `138b0eb`, merge of PR #179). **Claimed:** 2026-11-19 (UTC). **Status: in progress.**
+
+> **ID note.** This session claimed "T69" before `arena/56aa1fac-zone2` merged its own T69 (the
+> freshness-label correction, PR #180) to `main`. Per the board's existing precedent, the merged
+> claim keeps the id and this one is renumbered **T70**. No work was dropped; only the label moved.
+> The conflict was in the shared append-only end of this file and both chronologies are retained.
+
+**Role:** final integration session for this branch. No other branch is active on `main` as of the claim
+(`gh run list` shows main green at `138b0eb`); PRs #162/#163/#172 are stale drafts from earlier
+sessions and are left untouched — not merged, not closed, not rebased by this session.
+
+**Task (T70):** the owner asked for (a) a run of suggestions that would feed a design prompt for a
+polished, marketing-led affiliate site, (b) a decision-ready register of the questions and missing
+information those choices depend on, and (c) fixes for defects found while reviewing the shipped site
+line by line. This session therefore does three things and nothing else:
+
+1. **Repairs evidence-backed defects** in reader-facing pages, each with the measurement that proves it.
+2. **Publishes a Decision Room** (`decision-room.html`) — the brief's "section dedicated for suggestions
+   so someone can review suggestions and choose the best path before implementing any changes" — and
+   `decision-prompt.html`, the design-prompt brief the suggestions feed into.
+3. **Runs the full gate → PR → merge → deploy sequence** and records the result here.
+
+**File scope (non-overlapping, claimed):** `assets/css/publication.css`, `assets/css/fix-t69.css` (new),
+`tools/publication.py`, `tools/verify_front.py`, `tools/build_front.py`, `tools/shop_layout.py` (only if a
+nav label must change), `tools/build_decision_room.py` (new), `tools/verify_decision_room.py` (new),
+`decision-room.html` (new), `decision-prompt.html` (new), `.github/workflows/pages.yml` (gate wiring only),
+`COORDINATION.md` (this record, append-only), `sitemap.xml` (regenerated). No product fact, source
+observation, intent confirmation or campaign number is altered by this session.
+
+**Not in scope:** product/source data (`shop/data/*.json`, `content/*.json`, `coordination` board data),
+the shop `noindex` boundary (raised as a decision, not changed — see DR-01), and any other session's
+open PR.
+
+---
+
+<!-- T73 integration (session arena/1b09bb6d-zone2): the append-only conflict at the end of this file is resolved by keeping BOTH chronologies — this session's T73 record above and session e078d7c5's T72 record below. No upstream content is discarded. -->
 
 ## Session record — `arena/e078d7c5-zone2` (T72) — 2026-11-19 (UTC)
 
