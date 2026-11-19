@@ -26,7 +26,7 @@ DATA = json.loads((ROOT / "content" / "decision-room.json").read_text(encoding="
 
 
 def register_problems(data: dict) -> list[str]:
-    """Run only the register-level rules (D5/D6/D7/D9) so a mutation is isolated from page output."""
+    """Run only the register-level rules (D5/D6/D7/D9/D10) so a mutation is isolated from page output."""
     errors: list[str] = []
     known_sources = set(data["sources"])
     known_questions = {q["id"] for q in data["owner_questions"]}
@@ -63,6 +63,7 @@ def register_problems(data: dict) -> list[str]:
     for q in data["owner_questions"]:
         if q["id"] not in referenced:
             errors.append(f"D7 {q['id']}: nothing references it")
+    errors.extend(gate.topic_problems(data))
     return errors
 
 
@@ -133,6 +134,82 @@ class Mutations(unittest.TestCase):
         def change(d):
             d["decisions"][0]["options"] = d["decisions"][0]["options"][:1]
         self.assertTrue(any("needs two options" in p for p in self.mutated(change)))
+
+
+class TopicPitches(unittest.TestCase):
+    """D10: a topic pitch is a sourced editorial hypothesis or the gate fails (T77)."""
+
+    def mutated(self, change) -> list[str]:
+        data = copy.deepcopy(DATA)
+        change(data)
+        return register_problems(data)
+
+    def test_too_few_pitches_fails(self):
+        def change(d):
+            d["topic_pitches"] = d["topic_pitches"][:2]
+        self.assertTrue(any("at least 5 pitches" in p for p in self.mutated(change)))
+
+    def test_missing_topic_note_fails(self):
+        def change(d):
+            d["topic_note"] = ""
+        self.assertTrue(any("topic_note" in p for p in self.mutated(change)))
+
+    def test_hype_title_fails(self):
+        def change(d):
+            d["topic_pitches"][0]["title"] = "The best air fryer, trending now"
+        self.assertTrue(any("banned claim word" in p for p in self.mutated(change)))
+
+    def test_hype_buyer_question_fails(self):
+        def change(d):
+            d["topic_pitches"][0]["buyer_question"] = "What is the most popular option?"
+        self.assertTrue(any("banned claim word" in p for p in self.mutated(change)))
+
+    def test_pitch_without_verified_fact_fails(self):
+        def change(d):
+            d["topic_pitches"][0]["rests_on"] = []
+        self.assertTrue(any("no rests_on" in p for p in self.mutated(change)))
+
+    def test_pitch_with_dangling_source_fails(self):
+        def change(d):
+            d["topic_pitches"][0]["rests_on"][0]["src"] = "NOT-A-SOURCE"
+        self.assertTrue(any("unknown source id" in p for p in self.mutated(change)))
+
+    def test_duplicate_pitch_id_fails(self):
+        def change(d):
+            d["topic_pitches"][1]["id"] = d["topic_pitches"][0]["id"]
+        self.assertTrue(any("duplicate topic id" in p for p in self.mutated(change)))
+
+    def test_pitch_missing_cost_fails(self):
+        def change(d):
+            d["topic_pitches"][0]["costs"] = ""
+        self.assertTrue(any("missing 'costs'" in p for p in self.mutated(change)))
+
+    def test_pitch_missing_give_up_fails(self):
+        def change(d):
+            d["topic_pitches"][0]["gives_up"] = ""
+        self.assertTrue(any("missing 'gives_up'" in p for p in self.mutated(change)))
+
+    def test_pitch_covers_unknown_product_fails(self):
+        def change(d):
+            d["topic_pitches"][0]["covers"] = ["P9"]
+        self.assertTrue(any("covers must name" in p for p in self.mutated(change)))
+
+    def test_pitch_status_must_stay_pitch(self):
+        def change(d):
+            d["topic_pitches"][0]["status"] = "published"
+        self.assertTrue(any("status must be 'pitch'" in p for p in self.mutated(change)))
+
+    def test_rendered_room_carries_every_pitch_as_a_hypothesis(self):
+        text = gen.build_room(DATA)
+        for t in DATA["topic_pitches"]:
+            self.assertIn(t["id"], text)
+        self.assertIn("editorial hypothesis", text)
+
+    def test_prompt_carries_the_content_direction(self):
+        text = gen.build_prompt(DATA)
+        self.assertIn("Content direction", text)
+        for t in DATA["topic_pitches"]:
+            self.assertIn(t["id"], text)
 
 
 class PageGuards(unittest.TestCase):

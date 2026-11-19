@@ -1892,3 +1892,9 @@ count was a false positive from a passing phrase in `intake/tracking.html`; the 
 proposal merged to `main` this session. All gates pass on the rebuilt tree: `validate_data`,
 `seo_audit`, `audit_site`, `verify_front`, `package_site`/`verify_publication`, `build_board --check`,
 `validate_board`, and the standalone `ci_replay` (63/63).
+
+## Addendum — 2026-11-19 (session `arena/af15a2f9-zone2`, T79 claimed as T77): the takeover close-out and the topic pipeline
+
+**What changed.** Stale PR #194 (T73 final integration: Decision Room, design brief, current-vs-preserved registers) was taken over under the 60-minute rule and completed on this branch against current `main`; the same content had also been integrated independently by session `95bfb73c` (PR #203), and this merge unifies both integrations without dropping either session's records or styles. On top of the unified tree, the request's remaining content ask is now built: **six topic pitches (TP-01..TP-06)** on the Decision Room — working titles with buyer questions, formats, covered products, sourced facts, costs and give-ups — and a **Content direction** block inside the paste-ready design prompt, so the prompt handed to a design session carries the article pipeline. Every pitch is labelled an editorial hypothesis; gate D10 and 13 mutation tests fail the build on hype words, unsourced pitches or a pitch promoted without a decision. Measured Search Console queries replace the pitch order when DRQ-07 closes.
+
+**Evidence.** `docs/verification-af15a2f9.md` — takeover basis, conflict resolutions, gate results (ci_replay 66/66; publication contract `ok: true`, 230 HTML pages, 18 indexable, 1,471 sponsored product anchors, 173 factual rows) and the flagged irregularities (IR-1..IR-4), including the reproducible `build_board` gates-string fixed point. No price, rating, demand or revenue figure is added; blanks stay blank; intent fields stay separate from observations.
