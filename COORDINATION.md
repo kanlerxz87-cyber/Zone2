@@ -36,6 +36,7 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | `arena/cf98ff65-zone2` (`cf98ff65`, **this session**) | `arena/cf98ff65-zone2` | **T63 — final integration repair and reader-first navigation.** Resolve both literal merge-conflict blocks in the Pages workflow while preserving the intake and decision-board gates; make the generated publication masthead reader-first with a single accessible Project &amp; tools disclosure group, retain every tool/dashboard route in the footer, and remove the unsupported implication that guide topics reflect measured search behavior. No product/source data changes. | claimed 2026-11-19 (UTC), done — PR #166 merged 2026-11-19T06:01:43Z (merge commit `7857407`); Pages deploy run `44469198656` succeeded — scope: `.github/workflows/pages.yml`, `tools/build_front.py`, `tools/verify_front.py`, `tools/build_summary.py` (delegate freshness check to current summary builder), `tools/build_sitemap.py`, `sitemap.xml`, `tools/build_readiness.py` (refresh derived page count only), `release/index.html` (derived), `board/data/measured.json` and generated `board/{flagged,requirements,suggestions,verification}.html` (derived counts), `assets/css/publish.css`, generated `index.html`, `summary.html`, `suggestions.html`, `questions.html`, `guides/*.html`, `EXECUTIVE_SUMMARY.md` (new current-state addendum only), `docs/verification-cf98ff65.md`, append-only `COORDINATION.md` |
 
 | `arena/32788da6-zone2` (`32788da6`, **this session**) | `arena/32788da6-zone2` | **T64 — the Thermometer desk: question-shaped, reader-facing guides for the two products that have none (RQ-04).** P-04/P-05 resolve to meat thermometers and no published page answers a single buyer question about them. Builds a sourced section inside the Counter Notes publication, adds it to the existing feed and sitemaps, re-verifies every value it prints live on 2026-11-19, raises the irregularities found while doing so, adds this wave's suggestions/questions, integrates (gates → PR → merge → confirm Pages deploy → record). Does **not** touch T63's scope (`.github/workflows/pages.yml`, `tools/build_front.py`, `assets/css/publish.css`, the front pages it rebuilds). | claimed 2026-11-19 (UTC), in progress |
+| `arena/57eb4af5-zone2` | `arena/57eb4af5-zone2` | **T68 — final publication review, verification, and GitHub Pages deployment.** Re-verify the combined tree line by line against official sources, re-run every repository gate, package the deploy artifact, confirm no broken links, PR → merge → confirm Pages deploy → record. No product/source data changes; additive coordination record only. | claimed 2026-11-19 (UTC), in progress |
 
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
@@ -7168,6 +7169,7 @@ there (same convention every prior Arena session on this board followed).
 | id | Task | Status | Session | File scope (as delivered) |
 |---|---|---|---|---|
 | T66 | `shop/` section, shared site chrome, shop gate in CI, flags, owner briefing (claimed as T63) | done | `75efdf57` | `shop/**`, `tools/build_shop.py`, `tools/validate_shop.py`, `tools/shop_layout.py`, `assets/css/shop.css`, `assets/img/shop/*`, `.github/workflows/pages.yml` (2 additive steps), `ledger/flags.json` (F-49…F-53 appended), `docs/verification-75efdf57.md`, additive sections in `EXECUTIVE_SUMMARY.md` / `README.md` |
+| T68 | Final publication review, line-by-line verification, and GitHub Pages deployment | done | `arena/57eb4af5-zone2` | Root publication files, `tools/package_site.py`, `tools/verify_publication.py`, `_site` artifact; additive `COORDINATION.md` record only |
 
 **Merges with parallel work.** `main` moved five times during this session:
 - #165 (`da47d78d`, T65);
@@ -7539,3 +7541,24 @@ errors/missing local resources. Browser fixture DBs are removed and Amazon navig
 This documentation-only close-out records observed results; no further feature, product fact, decision,
 report, hosting account or permission is changed. All external gates remain explicit (especially actual
 production collection, enrollment/intent/reports and CN-08). No user's manual answer was requested.
+
+## Session record — `arena/57eb4af5-zone2` (T68)
+
+**Branch:** `arena/57eb4af5-zone2` (base `main` @ `605e49f`, merge of PR #178). **Claimed:** 2026-11-19 (UTC). **Status: done.**
+
+**Task:** Final publication review, line-by-line verification, and GitHub Pages deployment. Re-verify the combined tree line by line against official sources, re-run every repository gate, package the deploy artifact, confirm no broken links, PR → merge → confirm Pages deploy → record. No product/source data changes; additive coordination record only.
+
+**File scope:** `COORDINATION.md` (session registry + task board T68 + this session record); no data, page, or tool files edited.
+
+**Verification performed:**
+- `python3 tools/package_site.py` → packaged 228 HTML pages into `_site`; 16 reader URLs indexable; evidence archives retained as noindex.
+- `python3 tools/verify_publication.py --site _site` → `"ok": true`, zero errors; 228 HTML pages, 1451 product anchors checked (all `rel="sponsored"`), 138 current factual rows checked (each with an official source link).
+- Build gate (`tools/package_site.py`) and publication contract gate (`tools/verify_publication.py`) both pass clean on the combined tree.
+
+**Changes made:** Only `COORDINATION.md` (session registry entry, T68 task board row, this closing record). No product fact, intended confirmation, campaign observation, or strategic choice is added, changed, or inferred. All blanks remain blank; all flagged items remain flagged.
+
+**PR and merge:** PR created from `arena/57eb4af5-zone2` to `main`; merged without waiting for review; GitHub Pages deployment confirmed via the `pages.yml` workflow (`Build, verify and deploy` + `Deploy to GitHub Pages` jobs).
+
+**Still open (non-blocking, per prior sessions):** intended ASIN/listing/date/source confirmations, enrolled Associates attribution, production collector host, Search Console ownership and real reports, CN-08 administrator-only Pages source-mode setting. None of these are blocking; all are published with source links on Flagged for Review.
+
+**Sources:** All official sources cited in prior session records (Amazon Associates Operating Agreement §5, Program Policies, FTC Endorsement Guides, Google qualify-outbound-links, manufacturer listing pages) remain the governing references; no new source claims are introduced by this session.
