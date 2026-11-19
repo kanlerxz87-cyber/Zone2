@@ -6900,13 +6900,54 @@ resolved or partly resolved and retained.
 
 ---
 
-## T63 claim — session `arena/f669bf2c-zone2` — publication front-door polish (2026-11-19 UTC)
+## T64 claim — session `arena/f669bf2c-zone2` — board-data cleanup (2026-11-19 UTC)
 
-**Status: in progress.** Scope: `tools/build_front.py`, `assets/css/publish.css`, generated output from
-`tools/build_front.py` (`index.html`, `suggestions.html`, `questions.html`, `guides/*.html`), plus this
-append-only coordination record. Goal: make the shopper-facing front page less like an operator report,
-keep the existing product and guide content primary, group operator destinations behind one plainly
-labelled navigation entry, preserve footer access, and make the existing suggestion board's topic ideas
-visible as hypotheses rather than popularity claims. No product facts or intent mappings will be changed.
-No dashboard surface is being deleted; all retain their footer routes. This work is on the current Arena
-branch `arena/f669bf2c-zone2`; no other branch will be created or used.
+**Scope was narrowed after a collision was discovered.** Open PR #162, owned by `arena/6ce606cb-zone2`,
+claims T63 and includes `tools/build_front.py`, `assets/css/publish.css`, `index.html` and generated
+`guides/**` in its declared file scope. Those are the exact files this session initially changed. On
+discovery, all edits to those overlapping files were restored to the current base; no overlapping change
+will be pushed or merged. The other session's declared scope is left untouched.
+
+T64 is limited to two independent board-data corrections: remove an unsupported consumer-regret claim
+from topic proposal TP-03, and correct stale RQ-05 text using measurements already produced by
+`tools/build_board.py` (not external traffic data). RQ-26 was restored to its base version because its
+navigation description belongs with the other session's T63 front-page work. Files: `board/data/topics.json`,
+`board/data/requirements.json`, generated `board/topics.html` and `board/requirements.html`, plus this
+append-only record. No product values, link-intent fields, analytics or customer data are changed.
+
+---
+
+## T64 close-out — session `arena/f669bf2c-zone2` — 2026-11-19 UTC
+
+**Implementation complete; PR/deploy result to be appended after integration.** This was narrowed to avoid
+PR #162's declared T63 scope (`tools/build_front.py`, `assets/css/publish.css`, `index.html`, and
+`guides/**`). All local edits to those overlapping paths were restored before this close-out.
+
+### Changes kept in this non-overlapping pass
+
+- **TP-03:** removed the uncited claim that cleanup is the regret buyers report most. The revised proposal
+  describes only the current fit-guide gap and makes manufacturer care instructions a requirement to
+  verify before publication; no product superiority or popularity claim remains.
+- **RQ-05:** corrected stale prose that said no page had an `og:image` even though the repository's own
+  measurement showed otherwise. The generated row now distinguishes published markup from actual traffic
+  and renders counts from `tools/build_board.py`: at this build, 44/171 pages carry JSON-LD, 103/171 have
+  `og:image`, and 0/171 have a Search Console verification tag. Those are tree measurements, not Google
+  indexing or traffic results.
+- **RQ-26:** no change retained; its navigation status belongs with the active T63 page work.
+
+### Verification and sources
+
+`python3 tools/build_board.py` regenerated the board and its gates reported `CI REPLAY PASSED — 49 steps`;
+`python3 tools/ci_replay.py` independently passed all 49 steps; `git diff --check` passed. The board's
+source-backed topic records remain at `board/topics.html` / `board/sources.html`. Manual review links:
+Amazon destination listings [BD-09](https://www.amazon.com/dp/B0CDY277D3),
+[BD-10](https://www.amazon.com/dp/B09B7SB46R), [BD-11](https://www.amazon.com/dp/B08DKYBTPH); Google's
+link qualification guidance [BD-15](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links).
+The RQ-05 counts are produced by repository measurement, not an external authority.
+
+### Irregularities retained
+
+The site still has no Search Console verification tag and no Search Console query data. The product-photo
+choice and named-editor choice remain open in the existing board; they were not papered over with generated
+product imagery or an invented byline. The site's reader-first front-page work is claimed separately by
+PR #162; this session has not edited or merged that branch.
