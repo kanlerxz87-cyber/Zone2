@@ -39,7 +39,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from head_meta import head_block, meta_description  # canonical + og:* for the decision surface (T42); per-page description (T72)
+from head_meta import head_block  # canonical + og:* for the decision surface (T42)
 
 REPO = Path(__file__).resolve().parents[1]
 DATA = REPO / "ledger"
@@ -51,6 +51,20 @@ SITE_NAME = "Zone2"
 HUB_DESCRIPTION = ("Decision surface for the Zone2 Amazon affiliate platform: sourced requirements, the open "
                  "questions blocking each proposal, and suggestions awaiting an owner decision. Nothing "
                  "here is implemented until it is chosen.")
+
+# T72 (session arena/672f9c4c-zone2, 2026-11-19): same defect as pages/ — all four files in this
+# namespace printed HUB_DESCRIPTION, so four URLs carried one identical summary for S-04/RQ-01.
+# Each caller already passes its own lead, which is the standfirst the page renders under its <h1>;
+# the description is composed from title + that lead, so nothing is added that the page does not say.
+def page_description(title: str, lead: str) -> str:
+    title, lead = " ".join(title.split()), " ".join(lead.split())
+    text = f"{title}: {lead}"
+    if len(text) <= 160:
+        return f"{text} · {SITE_NAME} decisions"
+    trimmed = text[:157].rsplit(" ", 1)[0].rstrip(",;:·—-")
+    return f"{trimmed}…"
+
+
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 AS_OF = "2026-11-15"
 
@@ -232,7 +246,7 @@ NAV = [
 def render(rel: str, title: str, lead: str, body: str, *, badge: str = "") -> str:
     """Same shell as pages/ (tools/build_site.py::render) so the two namespaces are one site."""
     c = counts()
-    description = meta_description(lead, title)  # T72: each page's own lead, not one shared sentence
+    description = page_description(title, lead)
     head_tags = head_block("decisions/" + rel, title=f"{title} · {SITE_NAME} decisions",
                             description=description, site_name=f"{SITE_NAME} decisions")
     items = []

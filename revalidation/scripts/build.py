@@ -11,7 +11,9 @@ Rules enforced by construction:
 """
 from __future__ import annotations
 
+import html
 import json
+import re
 import sys
 from html import escape
 from pathlib import Path
@@ -59,19 +61,6 @@ def badge(status: str) -> str:
     return f'<span class="badge {cls}">{label}</span>'
 
 
-def meta_description(lede: str, title: str) -> str:
-    """T72 (session aecb287a): the page's own lede, whitespace-collapsed and cut at a word boundary.
-
-    Before this, the six revalidation pages had no <meta name="description"> at all (measured:
-    board/data/measured.json no_desc). The text is a transcription of the lede the page already shows.
-    """
-    text = " ".join((lede or "").split()) or f"{title}: a page of the Zone2 revalidation record."
-    if len(text) <= 158:
-        return text
-    cut = text[:157]
-    return cut[: cut.rfind(" ")].rstrip(" ,;:.") + "…"
-
-
 def page(title: str, current: str, lede: str, body: str) -> str:
     nav = "".join(
         f'<a href="{p}" class="active">{escape(t)}</a>'
@@ -79,13 +68,21 @@ def page(title: str, current: str, lede: str, body: str) -> str:
         else f'<a href="{p}">{escape(t)}</a>'
         for p, t in NAV
     )
+    # T72 (session arena/672f9c4c-zone2, 2026-11-19): S-04/RQ-01. All six pages in this namespace
+    # carried NO <meta name="description"> at all, so the decision board measured them as blank and
+    # the discoverability gate could say nothing about them. The description is derived from the
+    # page's own title and its own lede — the standfirst already rendered under the <h1> below —
+    # so it adds no claim. Plain text, stripped of any inline markup before it enters the tag.
+    description = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", f"{title}: {lede}"))).strip()
+    if len(description) > 160:
+        description = description[:157].rsplit(" ", 1)[0].rstrip(",;:·—-") + "…"
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{escape(meta_description(lede, title))}">
 <title>{escape(title)} — Zone2 Revalidation</title>
+<meta name="description" content="{escape(description, quote=True)}">
 <link rel="stylesheet" href="assets.css">
 </head>
 <body>

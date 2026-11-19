@@ -289,11 +289,11 @@ blank + flag**: [findings hub](https://kanlerxz87-cyber.github.io/Zone2/pages/in
 [platform modules, 12 subpages](https://kanlerxz87-cyber.github.io/Zone2/pages/modules/index.html) ·
 [compliance control ledger](https://kanlerxz87-cyber.github.io/Zone2/pages/compliance.html) ·
 [verification log (108 checks, V-01…V-108)](https://kanlerxz87-cyber.github.io/Zone2/pages/verification.html) ·
-[source register (49 sources, S01…S66)](https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html) ·
+[source register (50 sources, S01…S67)](https://kanlerxz87-cyber.github.io/Zone2/pages/sources.html) ·
 [tracking](https://kanlerxz87-cyber.github.io/Zone2/pages/tracking.html) ·
 [content engine](https://kanlerxz87-cyber.github.io/Zone2/pages/content-engine.html) ·
 [architecture](https://kanlerxz87-cyber.github.io/Zone2/pages/architecture.html) ·
-[flagged for review (54 flags, F-01…F-54)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
+[flagged for review (55 flags, F-01…F-55)](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html)
 
 All three counts are derived from `ledger/*.json` and held to the register by
 `tools/validate_data.py::check_published_counts`, so they cannot be typed wrong again.
@@ -523,7 +523,7 @@ behind a single **Behind the site** link.
 - **Four new question-shaped guides** in `guides/`: *Instant-read or wireless thermometer?*, *Do you need a thermometer for an air fryer?*, *Multi-function appliance questions*, *Cleanup and counter space*. Together with `guides/meat-thermometers.html` they give the two thermometers reader-facing pages for the first time (F-48).
 - **Board** (`suggestions.html`, `questions.html`): owner directions from the brief are quoted verbatim, with their date and source. A suggestion counts as implemented only when such a direction exists (verify_front G5).
 - **CI was not running on main from PR #158 to PR #161.** `pages.yml` had conflict markers and could not be parsed (F-45). This is fixed, and `tools/ci_replay.py` now refuses to run on conflict markers or invalid YAML.
-- Registers after T63: flags F-01…F-48, 49 sources (S01…S66).
+- Registers after T72: flags F-01…F-55, 50 sources (S01…S67).
 
 Verification record: [`docs/verification-10727edd.md`](docs/verification-10727edd.md).
 

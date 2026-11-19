@@ -1,4 +1,4 @@
-# Verification record — T73 (claimed as T72), session `arena/aecb287a-zone2`, 2026-11-19 (UTC)
+# Verification record — T74 (claimed as T72), session `arena/aecb287a-zone2`, 2026-11-19 (UTC)
 
 Scope: the measured gaps the requirements register still reported as open — S-04 (titles and
 descriptions), S-24 (internal links from the journal), S-20 (mobile-first pass). Claim: `COORDINATION.md`
@@ -15,26 +15,14 @@ descriptions), S-24 (internal links from the journal), S-20 (mobile-first pass).
 Amazon Associates policy text relevant to this change (sponsored marking, tag on Special Links) was **not**
 re-read this session. The existing links are unchanged in destination and attribute; no new Amazon claim is made.
 
-## 2. S-04 — titles and meta descriptions (RQ-01)
+## 2. S-04 — titles and meta descriptions (RQ-01): not re-done on this branch
 
-Before (measured, `board/data/measured.json` at 2026-11-19T11:44Z): 219 pages in the board's contract,
-`no_desc` 7, `dup_desc` 2, `dup_titles` 4.
-Measured by a separate scan of all 228 published HTML files before the edit: 7 pages without a description,
-duplicated descriptions shared by 39 `pages/` pages and 4 `decisions/` pages, and 4 duplicated titles.
+Closed on `main` by session `672f9c4c` (PR #192, merged), with its own gate (D8, `tools/seo_audit.py`). This branch merged
+`main` and **kept `main`'s S-04 implementation unchanged**, so the two sessions' edits do not diverge.
 
-Changes (each through its generator; no hand edit except `404.html`):
-
-- `tools/head_meta.py::meta_description()` — a new helper: the page's own lead paragraph, whitespace collapsed,
-  cut at a word boundary at 158 characters. Used by `tools/build_site.py` (`pages/`), `tools/build_decisions.py`
-  (`decisions/`) and `revalidation/scripts/build.py` (`revalidation/`).
-- `tools/build_site.py` — category band titles now include the band id (`Category band 4.00% · C-04` vs `… · C-OTH`);
-  module titles now include the module id (`M-11 · Niche discovery`), so the module page no longer duplicates the niches page.
-- `tools/build_thermometers.py` — the marketing desk title is "Meat thermometers, compared row by row",
-  so it no longer duplicates the guide's title.
-- `404.html` — a description was added (one hand-written sentence; it makes no product claim).
-
-After (scan of the same 228 files): missing descriptions 0, duplicated descriptions 0, duplicated titles 0.
-Board measure after the rebuild: `no_desc` 0, `dup_desc` 0, `dup_titles` 0.
+Re-measured on the merged tree on 2026-11-19: published pages with a missing description 0; duplicated descriptions 0;
+duplicated titles 0. The six pages without a description are Playwright's own HTML under `node_modules/`
+(installed by `tools/ci_replay.py`), which are not published pages.
 
 ## 3. S-24 — internal links (RQ-18)
 
@@ -76,7 +64,7 @@ Residuals, not claimed as finished (so S-20 stays open in the register, with a n
 
 ## 5. Gates
 
-- `tools/ci_replay.py` — 62/62 steps passed (run after all HTML/CSS/generator edits and again after the board
+- `tools/ci_replay.py` — 63/63 steps passed (run after all HTML/CSS/generator edits and again after the board
   regeneration; see the close-out in `COORDINATION.md`).
 - `tools/validate_board.py`, `tools/build_board.py --check` — pass.
 - `tools/build_front.py --check`, `tools/build_site.py --check`, `tools/build_decisions.py --check`,
@@ -86,9 +74,9 @@ Residuals, not claimed as finished (so S-20 stays open in the register, with a n
 
 ## 6. Board rows changed
 
-`board/data/requirements.json`: RQ-01 and RQ-18 moved from `overstated` to `matches` (the tree now supports the
-"Implemented" status word the brief gives them); RQ-16 keeps `no-status-given` and records the partial pass.
-No other row changed (checked by diff against `HEAD`: only these three rows differ).
+`board/data/requirements.json`: RQ-18 moved from `overstated` to `matches` (the tree now supports the
+"Implemented" status word the brief gives it); RQ-16 keeps `no-status-given` and records the partial pass.
+No other row changed. RQ-01 keeps `main`'s value from PR #192.
 
 ## 7. Not done in this task (owner or later action)
 

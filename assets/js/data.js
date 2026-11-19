@@ -1217,7 +1217,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 54;
+const CANONICAL_FLAG_COUNT = 55;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1814,6 +1814,17 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-54",
     source: "https://www.amazon.com/dp/B0DZFD6R9Z",
     sourceIds: ["S62"],
+  },
+  {
+    item: "F-55 — The brief recorded S-04 as 'Implemented' for two days while the tree measured it the other way, and nothing in the build was checking",
+    detail: "Re-measured at the start of T72 (session arena/672f9c4c-zone2) on 2026-11-19, before any edit: of 219 published HTML pages, 7 carried no meta description at all (404.html and all six revalidation/ pages), 39 pages/ files printed one identical description string, 4 decisions/ files printed another identical one, and 4 titles were each shared by two pages (the 4.00% and 0.00% commission bands, pages/niches.html with pages/modules/m-11-niche-discovery.html, and guides/meat-thermometers.html with marketing/thermometers/index.html). board/data/requirements.json RQ-01 had recorded this as 'overstated' since 2026-11-17, so the register was right; the missing piece was a gate. tools/seo_audit.py checked sitemap coverage, robots, noindex, favicon and canonical (D1-D7) and did not look at titles or descriptions, so a page could regress to a blank or duplicated summary without failing a build. T72 fixed all three properties at the generators and added D8 to that gate with negative controls in tests/test_page_identity.py. Published as a flag rather than silently repaired because the two-day gap between the brief's status word and the tree is itself the finding: the same failure mode as F-45 (a replay that printed PASSED while the real runner refused to parse the workflow) and FB-01/FB-02 (prose counts that had drifted from the register they described).",
+    severity: "medium",
+    impact: "A duplicated or missing description does not break the site; it makes every page carrying it compete with its siblings on one identical summary, which is exactly the property S-04 exists to prevent. The row is closed and gated now, so this flag is a record of how it went wrong and a reminder that a status word in a brief is not a measurement.",
+    actionRequired: "Owner, at review: nothing is blocked. If a future session edits a generator that emits a <head>, D8 in tools/seo_audit.py is the check to run first; if it fails, fix the generator rather than the emitted file, because tools/build_site.py --check and tools/build_decisions.py --check will overwrite a hand-edit.",
+    ledgerFlag: "F-55",
+    ledgerUrl: "pages/flags.html#F-55",
+    source: "https://developers.google.com/search/docs/appearance/title-link",
+    sourceIds: ["S67"],
   },
 ];
 /* END GENERATED: flags */

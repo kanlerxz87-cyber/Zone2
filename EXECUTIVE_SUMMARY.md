@@ -203,7 +203,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **54 flags (F-01 … F-54)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **55 flags (F-01 … F-55)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -854,7 +854,7 @@ rendering in fallback system fonts since the redesign. No gate could see it, bec
 namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
 class of bug — a resource a build cannot fail on — is on the record for the next time.
 
-**Numbers for the reviewer, all derived from the registers:** 54 flags, 49 sources, 108 logged checks, 20 open
+**Numbers for the reviewer, all derived from the registers:** 55 flags, 50 sources, 108 logged checks, 20 open
 questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
 or performance figure: the site still has no authorised source for one, and an absent number beats an invented
 one.
@@ -927,7 +927,7 @@ the suggestions board and the questions register, each with the action that woul
 
 **Decision surfaces confirmed linked and prominent:** the root landing page links the Suggestions board (`pages/suggestions.html`, SG-01…SG-14) and the Open questions register (`pages/questions.html`, Q-01…Q-20) from both the primary navigation and the footer "Decisions" column. Each suggestion row carries options, a recommendation, the questions that must be answered first, and an owner decision field awaiting record in `ledger/suggestions.json`. Nothing is implemented until a choice is recorded there.
 
-**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (49 sources, 423 rows, 1217 links, all derived from the live register); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 162 pages, all checks PASS.
+**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (50 sources, 436 rows, 1315 links, all derived from the live register); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 162 pages, all checks PASS.
 
 **Flagged irregularities (non-blocking, on `pages/flags.html`):** F-01/F-03 (product identity not established by an official document), F-24 (no Associates tag on the supplied links), F-05 (Creators API unregistered; PA-API 5.0 deprecated), F-08 (no performance reports; no traffic/revenue figures published anywhere). None blocks merge; all are published for owner review with their source links and closing actions.
 
@@ -1034,10 +1034,10 @@ decision surfaces are unchanged and current — the ten suggestions with options
 [the decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html), the
 **18 open questions** with the method that would close each one on
 [the questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html), and the
-[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **54 flags**,
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **55 flags**,
 each with its source links. Nothing is implemented on this site until it is chosen there.
 
-**Numbers for the reviewer, all derived from the registers:** 54 flags (25 open · 29 resolved), 49 sources,
+**Numbers for the reviewer, all derived from the registers:** 55 flags (26 open · 29 resolved), 50 sources,
 108 logged checks, 20 open questions, and every repository gate green on the merged tree.
 ---
 
@@ -1208,8 +1208,8 @@ catalog lookup). Suggestions `SG-13` (build a matching thermometer content set o
 three air fryers; the two thermometers are published in the product catalog with their sourced specs, and the
 editorial expansion waits on `Q-19`.
 
-**Register state after this addendum:** 5 product entries, 49 sources, 108 verification rows, 54 flags
-(25 open · 29 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
+**Register state after this addendum:** 5 product entries, 50 sources, 108 verification rows, 55 flags
+(26 open · 29 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
 
 ---
 
@@ -1616,7 +1616,7 @@ test one Special Link (FLG-003, which stays unresolved and is not claimed invali
 ThermoMaven link should point at the newer model (F-44 / Q-T63-03); verify the site in Search Console
 (Q-T63-05); explain why the brief cites Zone3's register IDs (F-47).
 
-**Register state after T63:** flags F-01…F-48 (20 open · 28 resolved at that merge), 49 sources, 18 suggestions on the
+**Register state after T63:** flags F-01…F-48 (20 open · 28 resolved at that merge), 50 sources, 18 suggestions on the
 front-page board (4 carrying a recorded owner direction), 17 questions on that board. Full replay: 49/49 gates pass.
 Evidence: [`docs/verification-10727edd.md`](docs/verification-10727edd.md).
 
@@ -1699,9 +1699,9 @@ other findings, so Q-22's warranty conflict was published under the next free id
 (the CHEF iQ listing states its warranty two ways — "two-year assurance provided by CHEF iQ" in the
 bullets and "Warranty Description: 3 Year" in Item details — both re-read live on
 [the listing](https://www.amazon.com/dp/B0DZFD6R9Z) on 2026-11-19). The counts pass then moved
-every surface together: `CANONICAL_FLAG_COUNT` → 54, the register prose in this document and in
+every surface together: `CANONICAL_FLAG_COUNT` → 55, the register prose in this document and in
 `README.md`, and the regenerated `pages/` set, root Flagged for Review register, and Owner's
-Console. `tools/validate_data.py` reports 54/54 flags consistent and
+Console. `tools/validate_data.py` reports 55/55 flags consistent and
 `tools/audit_site.py` prose counts pass.
 
 **CR-10 (verified already corrected — evidence recorded, no edit).** The stale note
@@ -1727,7 +1727,7 @@ repair, thermometer guides) were already shipped by merged PRs #166/#167/#170/#1
 
 **Gates at hand-off (this session's tree):** `tools/ci_replay.py` **61 of 61** workflow steps
 pass — including the 252-viewport browser verification and 24-page accessibility scan — plus
-`validate_data` (54 flags), `audit_site` (228 pages), `validate_board`, the marketing verifier at
+`validate_data` (55 flags), `audit_site` (228 pages), `validate_board`, the marketing verifier at
 27 pages with the desk included, and the publication contract. Verification detail:
 [`docs/verification-9ffe2d83.md`](docs/verification-9ffe2d83.md).
 ## Addendum — 2026-11-19 (session `arena/5f7f77a4-zone2`, T68): the product notes now differ from each other
@@ -1774,15 +1774,12 @@ thermometer listings' own review content was left out: Associates Program Polici
 Requirements 6(t) restricts displaying customer reviews or star ratings to data obtained through the
 Creators/PA API, and that access is not connected. The intended-ASIN confirmations remain blank.
 
-## Addendum — 2026-11-19 (session `arena/aecb287a-zone2`, T73, claimed as T72): the measured gaps, closed or named
+## Addendum — 2026-11-19 (session `arena/aecb287a-zone2`, T74, claimed as T72): the measured gaps, closed or named
 
 **What changed.** The register still reported three rows as open. The tree is now measured again and the
 three are handled in order:
 
-- **S-04 (unique titles and descriptions) — closed.** Every one of the 228 published HTML pages now has its own
-  meta description, taken from that page's own lead paragraph. Before this session, 7 pages had none, 39 `pages/`
-  pages and 4 `decisions/` pages shared one description, and 4 titles were duplicated. The measured count is now
-  zero for all three. Source: Google Search Central, "Create unique descriptions for each page on your site".
+- **S-04 (unique titles and descriptions) — closed on `main` by session `672f9c4c` (PR #192).** This branch merged that work unchanged and re-measured it: no published page is missing a description, and none is duplicated.
 - **S-24 (every article reaches the comparison, buying guide and pillar) — closed.** The four `journal/` articles
   had no route to those pages. Each now has a "Where to go next" block.
 - **S-20 (mobile-first pass) — partly done, still open.** Measured in headless Chromium at a 390 px phone width:
@@ -1797,4 +1794,4 @@ untagged by design. The Associates Special-Link test, Search Console verificatio
 analytics endpoint and product photography still need the owner. They are recorded as open items, not filled in.
 
 **Evidence.** `docs/verification-aecb287a.md` holds the sources read on 2026-11-19, the before/after measurements and
-the gate results. The board rows that changed are RQ-01, RQ-16 and RQ-18.
+the gate results. The board rows that changed on this branch are RQ-16 and RQ-18 (RQ-01 is `main`'s, from PR #192).
