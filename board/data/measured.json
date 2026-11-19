@@ -1,5 +1,5 @@
 {
-  "amazon_links": 3054,
+  "amazon_links": 3047,
   "capture_pages": 0,
   "chooser_pages": 2,
   "counter_pages": 60,
@@ -8,11 +8,11 @@
   "dup_titles": 0,
   "endpoint_pages": 0,
   "feed_present": true,
-  "gates": "tools/ci_replay.py exit 1 \u2014 CI REPLAY FAILED at: preflight (see the run for the failing step)",
+  "gates": "tools/ci_replay.py exit 1 \u2014 CI REPLAY FAILED at: Decision-board gate (sourcing, blanks, nothing decided, open questions empty, (see the run for the failing step)",
   "guide_pages": 51,
   "guides_unlinked": 0,
   "jsonld": 99,
-  "measured_utc": "2026-11-19T21:56:58.025183+00:00",
+  "measured_utc": "2026-11-19T21:58:07.709116+00:00",
   "no_desc": 0,
   "og_full": 167,
   "og_image": 154,
@@ -23,7 +23,7 @@
   "sponsored_links": 666,
   "sponsored_reader": 449,
   "substitutions": {
-    "amazon_links": 3054,
+    "amazon_links": 3047,
     "capture_pages": 0,
     "chooser_pages": 2,
     "counter_pages": 60,
@@ -45,11 +45,11 @@
     "sponsored_reader": 449,
     "tagged": 40,
     "unique_titles": 221,
-    "unsponsored_reader": 280,
+    "unsponsored_reader": 273,
     "viewport_pages": 221
   },
   "tagged": 40,
   "unique_titles": 221,
-  "unsponsored_reader": 280,
+  "unsponsored_reader": 273,
   "viewport_pages": 221
 }
