@@ -7757,3 +7757,13 @@ Sources, the exact source list and the reproduction method: `docs/verification-5
 | Excluded | `docs/board-9251f262.json`, `board/data/**`, `ledger/**`, `content/publication.json`, `shop/**`, official-source/product research, tracking/measurement, workflow, sitemap/feed, every other session's claimed data. Existing board counts and owner directions will be rendered as preserved records, not edited or consolidated. |
 | Coordination | The mandatory pre-push rebase found upstream T68 already recorded for `arena/57eb4af5-zone2`; that entire upstream record is retained unchanged. This narrower task is renumbered T69 to avoid a collision. Existing PRs #162/#163/#172 are not edited, merged or closed. This is a distinct derived-output accuracy repair, not a takeover of another session's topic-data or product-research task. |
 | Baseline finding | Local tree check: `publication.PROPOSALS` has 5 current proposals; `publication.QUESTIONS` has 7 current questions; `docs/board-9251f262.json` carries 18 preserved suggestions (4 with owner directions) and 17 preserved questions (15 open, 2 answered). Rendered roots visibly combine both sets but the current headings/bylines report only the preserved set. These are repository-derived counts, not external traffic or product facts. |
+
+### T69 scope extension — run the summary mutations in CI (2026-11-19)
+
+Before implementation, add one explicit call to the new front-summary regression test in
+`.github/workflows/pages.yml`, immediately after the existing Front-of-house gate. This keeps the test
+on the existing verified build path instead of leaving a local-only script. The workflow change is
+additive only; no job, permission, deploy condition, or existing test is removed or reordered. No other
+session currently claims this workflow step. Updated T69 scope: add `.github/workflows/pages.yml` (one
+additive test invocation). The `tests/test_front_surfaces.py` tests use only repository-generated counts
+and do not access external sites or credentials.
