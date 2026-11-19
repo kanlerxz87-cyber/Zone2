@@ -728,3 +728,40 @@ body.pub .crumbs { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 12px; 
 @media print {
   body.pub .rail, body.pub .topnav { display: none; }
 }
+
+/* ------------------------------------------------------------------------- */
+/* T76 (session 5a3dd862, 2026-11-19): S-20 / RQ-16 mobile type floor and tap targets, marketing desk.
+   Phones only (max-width: 780px); desktop unchanged — the convention T72 (aecb287a) set for the
+   publication namespace and recorded in docs/verification-aecb287a.md. Completes the residual that
+   record named: 344 text runs of 9-10.6px on marketing/* pages and flagged tables.
+   Text floor: sub-11px -> 11px. Standalone targets -> 24px minimum (WCAG 2.5.8, SC 2.5.8 Target Size
+   Minimum); top-nav and rail controls -> 44px (WCAG 2.5.5, matching T72's header/footer rule).
+   Links inside running text are exempt (SC 2.5.8 Inline exception) and are not changed.
+   In-table source chips (a.src) keep a 24px floor, not 44px: a 44px chip stack would push a spec row
+   past the viewport on a 390px screen (measured in docs/verification-5a3dd862.md). */
+@media (max-width: 780px) {
+  code { font-size: max(.88em, 11px); }
+  .pill { font-size: 11px; }
+  body.pub .pill { font-size: 11px; }
+  body.pub .take-label { font-size: 11px; }
+  body.pub .pair-tag { font-size: 11px; }
+  a.src { padding-block: 5px; }
+  .q > a, table.data > a, section.block > a, section.card > a { display: inline-block; padding-block: 5px; }
+  aside.rail > a { min-height: 44px; display: inline-flex; align-items: center; }
+  nav.topnav > a { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* T76 round 2 (same session): descendant selectors — the first pass used direct-child selectors that
+   the measurement labels only approximate. Base rules such as body.pub .topnav a outrank bare
+   element selectors, so these restatements carry the body.pub prefix and sit last in this file. */
+@media (max-width: 780px) {
+  body.pub .topnav a { min-height: 44px; display: inline-flex; align-items: center; }
+  body.pub .rail a { min-height: 44px; display: inline-flex; align-items: center; }
+  body.pub .q a, body.pub .sug a { display: inline-block; padding-block: 5px; }
+  body.pub table.data a { display: inline-block; padding-block: 5px; }
+}
+
+/* T76 round 3 (same session): card/block link floors on the marketing desk, matching round 2's rule. */
+@media (max-width: 780px) {
+  body.pub .block a, body.pub .card a { display: inline-block; padding-block: 5px; }
+}

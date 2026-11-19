@@ -506,3 +506,43 @@ footer.site a { color: var(--accent); }
   .article-card { padding: 18px 18px; }
   .product-card { padding: 19px 18px; }
 }
+
+/* ------------------------------------------------------------------------- */
+/* T76 (session 5a3dd862, 2026-11-19): S-20 / RQ-16 mobile type floor and tap targets, style.css
+   components, plus restatements for three publication.css selectors. Phones only (max-width: 780px);
+   desktop unchanged (T72's convention). The restatements below need !important because
+   assets/css/publication.css loads AFTER this file on the publication pages and sets the same
+   font sizes (9px table headers, 8px .cn-paid, 10px .cn-toc h2) with equal-or-higher specificity;
+   publication.css is a live claim (PR #194) and is deliberately not edited here — see COORDINATION.md
+   T76. Standalone targets -> 24px (SC 2.5.8). */
+@media (max-width: 780px) {
+  .brand-tag { font-size: 11px; }
+  .nav-label { font-size: 11px; }
+  .spec-highlights .spec .sv a { font-size: 11px; }
+  .article-card .a-kicker { font-size: 11px; }
+  code { font-size: max(.86em, 11px); }
+  /* restatements of publication.css-owned selectors (source: assets/css/publication.css) */
+  .cn-table th { font-size: 11px !important; }
+  .cn-paid { font-size: 11px !important; }
+  .cn-toc h2 { font-size: 11px !important; }
+  /* standalone table-cell targets (flagged.html, comparison tables) */
+  table.cn-table a { display: inline-block; padding-block: 5px; }
+}
+
+/* T76 round 2 (same session): standalone link floors measured on verification.html (a.src rows),
+   summary.html and guide pages (lone CTA links), and journal footers. li > a is deliberately broad:
+   list links that sit inside sentences grow their line box slightly on phones, which is preferred
+   over a sub-24px target (SC 2.5.8); links with sibling text keep their sentence placement. */
+@media (max-width: 780px) {
+  a.src { display: inline-block; padding-block: 5px; }
+  li > a { display: inline-block; padding-block: 5px; }
+  p > a:only-child { display: inline-block; padding-block: 5px; }
+  .cn-note > a { display: inline-block; padding-block: 5px; }
+  footer.site-footer > a, footer.site > a { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* T76 round 3 (same session): table-cell link floors (products.html, paths.html rows), same reasoning
+   as the li > a rule in round 2. */
+@media (max-width: 780px) {
+  td > a, th > a { display: inline-block; padding-block: 5px; }
+}

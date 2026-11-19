@@ -186,3 +186,25 @@
 .sh-behind li a span { font-size: 13.5px; color: var(--ink-soft); }
 .sh-behind li a:hover b { color: var(--accent); }
 @media (max-width: 860px) { .sh-behind { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------------------- */
+/* T76 (session 5a3dd862, 2026-11-19): S-20 / RQ-16 mobile type floor and tap targets, shop namespace.
+   Phones only (max-width: 780px); desktop unchanged. Residual measured in docs/verification-5a3dd862.md
+   (.sh-paid .8em -> 10.8px on a 13.5px parent; .sh-more-link 22px target; .sh code .86em).
+   Scope amendment for this file is recorded in COORDINATION.md (T76). */
+@media (max-width: 780px) {
+  .sh code { font-size: max(.86em, 11px); }
+  .sh-paid { font-size: max(.8em, 11px); }
+  .sh-more-link { display: inline-block; padding-block: 5px; }
+}
+
+/* T76 round 2 (same session): the container rules (.sh-facts .pb-src etc.) outrank the pb-* block in
+   publish.css, so the source-chip floor is restated here where it wins. Box properties only.
+   table.pb-table a covers the product-name row links in the compare/specs tables. */
+@media (max-width: 780px) {
+  body.sh .pb-src {
+    display: inline-flex !important; align-items: center;
+    min-height: 24px !important; padding-block: 5px !important;
+  }
+  table.pb-table a { display: inline-block; padding-block: 5px; }
+}

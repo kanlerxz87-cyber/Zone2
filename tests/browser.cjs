@@ -20,6 +20,22 @@ function python(code) {
   if(p.status!==0)throw new Error(p.stderr);
   return p.stdout.trim();
 }
+// S-20 mobile type floor (T76, session 5a3dd862): at phone width no element's own text may compute
+// under 11px on reader surfaces. The floor lives in the four reader stylesheets; see
+// docs/verification-5a3dd862.md for the measured sign-off this gate protects.
+function textFloorRuns(){
+  const seen=new Set();let bad=0;
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let n;
+  while((n=walker.nextNode())){
+    if(!n.textContent.trim())continue;
+    const el=n.parentElement;
+    if(!el||seen.has(el))continue;
+    seen.add(el);
+    if(parseFloat(getComputedStyle(el).fontSize)<11-0.01)bad++;
+  }
+  return bad;
+}
 function ready(child) {
   return new Promise((resolve,reject)=>{
     const timer=setTimeout(()=>reject(new Error('Test collector startup timed out')),20000);
@@ -59,6 +75,7 @@ async function run() {
   assert.equal(new URL(page.url()).pathname,'/Zone2/');
   summary.behavior_checks.push('bare preview URL redirects to the correct relative-asset base');
   const current=JSON.parse(python("import sys,json;sys.path.insert(0,'tools');import publication as p;print(json.dumps(sorted(p.indexable_paths()|set(p.extra_pages())|{'suggestions.html','questions.html'})))"));
+  const reader=JSON.parse(python("import sys,json,os;sys.path.insert(0,'tools');import build_board as b;f=lambda r:(('/' in r) and r.split('/')[0] in b.READER_ROOTS) or (('/' not in r) and r in b.READER_ROOT_FILES);print(json.dumps(sorted(r for r in (os.path.relpath(str(p)) for p in b.published_pages()) if f(r))))"));
   for(const viewport of [{width:1440,height:1000},{width:390,height:844}]){
     await page.setViewportSize(viewport);
     for(const rel of current){
@@ -76,6 +93,7 @@ async function run() {
       assert.equal(result.h1,1,rel+' H1 count');
       summary.viewport_checks++;
       if(viewport.width===390){
+        assert.equal(await page.evaluate(textFloorRuns),0,rel+' text under 11px at 390px (S-20 mobile type floor)');
         await page.addScriptTag({content:axeSource});
         const axe=await page.evaluate(async()=>await axe.run({exclude:[]},{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
         if(axe.violations.length){
@@ -101,6 +119,10 @@ async function run() {
     assert(visible,rel+' archive disclosure not above-fold/visible');
     const unqualified=await page.evaluate(()=>Array.from(document.querySelectorAll('a[href]')).filter(a=>/^(?:www\.)?amazon\.com$|^link\.amazon$|^amzn\.to$/.test(new URL(a.href).hostname)&&!a.relList.contains('sponsored')).map(a=>a.href));
     assert.deepEqual(unqualified,[],rel+' runtime product links not sponsored');
+    if(reader.includes(rel)){
+      assert.equal(await page.evaluate(textFloorRuns),0,rel+' text under 11px at 390px (S-20 mobile type floor)');
+      summary.text_floor_pages=(summary.text_floor_pages||0)+1;
+    }
     summary.viewport_checks++;
   }
   await page.setViewportSize({width:390,height:844});

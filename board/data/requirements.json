@@ -61,11 +61,11 @@
    "priority": "P2",
    "requirement": "Answer the questions people actually type, one page per question",
    "brief_status": "",
-   "measured_status": "partly — for three of five products only",
+   "measured_status": "partly — question pages exist for all five products; the questions' popularity is unmeasured",
    "verdict": "no-status-given",
-   "measured": "The question-shaped page set exists and is substantial, and every page in it is about air fryers. Nothing on the site asks or answers a single question about a meat thermometer.",
-   "evidence": "PI-04 and PI-05 resolve into Meat Thermometers; no published page carries that category.",
-   "gap": "The two newest products (PI-04, PI-05) have no question-shaped page, and no other page on the site could host one without breaking the one-question-per-page rule this row asks for.",
+   "measured": "Question-shaped pages now exist for all five products: the air-fryer guide set, and for the two thermometers guides/instant-read-or-wireless-thermometer.html, guides/chef-iq-sense.html, guides/thermomaven-instant-read.html and the marketing/thermometers desk (published by T63/T64, PRs #164/#167, 2026-11-19). Re-measured for T76 on 2026-11-19; the earlier reading ('Nothing on the site asks or answers a single question about a meat thermometer') was stale.",
+   "evidence": "Page titles read live from the tree on 2026-11-19 (T76): 'Instant-read or leave-in wireless: which meat thermometer fits the way you cook?', 'CHEF iQ Sense wireless thermometer: what to know before buying', 'ThermoMaven instant-read thermometer: what to know before buying'.",
+   "gap": "The one-page-per-question shape is in place for all five products. What the row asks — the questions people actually type — cannot be selected from measured queries until Search Console or another first-party query source is on (see RQ-19, RQ-28). Whether the remaining question pages match real query demand is unmeasured.",
    "source_ids": [
     "BD-03",
     "BD-04"
@@ -244,11 +244,11 @@
    "priority": "P2",
    "requirement": "Mobile-first pass: type scale, tap targets, sticky comparison bar",
    "brief_status": "",
-   "measured_status": "partly",
+   "measured_status": "done — signed off measured 2026-11-19 (T76)",
    "verdict": "no-status-given",
-   "measured": "{{viewport_pages}} of {{pages}} pages declare a viewport. A sticky element appears on 9 pages, all of them in one operator namespace, none of them the comparison table.",
-   "evidence": "Measured across every published page.",
-   "gap": "Partly done on 2026-11-19 (T74, session aecb287a), measured in headless Chromium at a 390 px viewport. Done: a mobile type floor (text under 11 px is raised to 11 px at 780 px and below, desktop unchanged), 44 px minimum targets on header, footer, filter and button controls, and a phone-only sticky bar on compare.html. Still open: sub-11 px labels on the marketing desk and flagged tables (a separate stylesheet), and small inline targets inside tables and chips. Requires a sign-off pass before the row can be called finished.",
+   "measured": "{{viewport_pages}} of {{pages}} pages declare a viewport. The phone-only sticky comparison bar (.cn-sticky-compare) sits on compare.html. At a 390 px headless-Chromium viewport the 64 reader pages plus all 17 shop/ pages and root compare.html, shop.html, about.html and privacy.html (85 pages total) show 0 text-bearing elements under 11 px and 0 standalone targets with either dimension under 24 CSS px (before: 454 and 1,894 under the same method).",
+   "evidence": "Measured on 2026-11-19 in headless Chromium 153.0.8010.0 at 390x844 over the 85-page reader/shop sign-off set; method, 2,024-target 24-44 px band classification and official W3C criterion links are in docs/verification-5a3dd862.md.",
+   "gap": "Signed off 2026-11-19 (T76), completing T72's partial pass (PR #193). Type floor: text-bearing elements below 11 px raised to 11 px at 780 px and below in all four reader stylesheets (marketing.css, style.css, publish.css, shop.css), desktop unchanged. Tap targets: all standalone reader-scope targets measured at least 24x24 CSS px (WCAG 2.2 SC 2.5.8 size branch, Level AA); inline links in sentences are separately classified under its Inline exception. Prominent header/footer/top-nav links have a 44 px minimum height; this is not a claim that all such links meet the 44x44 AAA target. The remaining 2,024 targets below 44 px comprise 1,312 source/reference chips, 222 other table-cell links, 220 header/navigation/footer links and 270 other section/card/content links and controls; every one measures at least 24x24 CSS px. See docs/verification-5a3dd862.md for the explicit classification and caveats. Operator/admin namespaces remain out of scope. The sticky comparison bar and disclosure-above-fold checks run in tests/browser.cjs; the new 390 px text-floor assertion covers the reader pages.",
    "source_ids": [
     "BD-21"
    ]

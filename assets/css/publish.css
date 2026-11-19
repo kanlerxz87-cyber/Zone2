@@ -400,3 +400,21 @@
                   border: 1px solid var(--ok-line); border-radius: var(--radius-sm);
                   font-size: 13.5px; line-height: 1.55; color: var(--ink); }
 .pb-trust-foot  { font-size: 13px; color: var(--faint); margin: 22px 0 0; }
+
+/* ------------------------------------------------------------------------- */
+/* T76 (session 5a3dd862, 2026-11-19): S-20 / RQ-16 mobile type floor and tap targets, pb-* components.
+   Phones only (max-width: 780px); desktop unchanged. Publication pages carry these rules twice after
+   this change (T72's floor in publication.css restates the same values); shop pages, which do not load
+   publication.css, now get the floor from their own stylesheet chain. Standalone targets -> 24px
+   (SC 2.5.8); footer link grid -> 44px (SC 2.5.5), matching T72's .cn-footer rule. */
+@media (max-width: 780px) {
+  .pb-pill { font-size: 11px; }
+  .pb-src::after { font-size: 11px; }
+  .pb-src, .pb-sec-link { display: inline-block; padding-block: 5px; }
+  .pb-foot a { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* T76 round 4 (same session): top-nav links on the pb-* pages match T72's 44px header-nav rule. */
+@media (max-width: 780px) {
+  nav.pb-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+}
