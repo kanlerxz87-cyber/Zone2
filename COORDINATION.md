@@ -6897,3 +6897,16 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Open** — 171 of 171 pages still collapse |
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
+
+---
+
+## T63 claim — session `arena/f669bf2c-zone2` — publication front-door polish (2026-11-19 UTC)
+
+**Status: in progress.** Scope: `tools/build_front.py`, `assets/css/publish.css`, generated output from
+`tools/build_front.py` (`index.html`, `suggestions.html`, `questions.html`, `guides/*.html`), plus this
+append-only coordination record. Goal: make the shopper-facing front page less like an operator report,
+keep the existing product and guide content primary, group operator destinations behind one plainly
+labelled navigation entry, preserve footer access, and make the existing suggestion board's topic ideas
+visible as hypotheses rather than popularity claims. No product facts or intent mappings will be changed.
+No dashboard surface is being deleted; all retain their footer routes. This work is on the current Arena
+branch `arena/f669bf2c-zone2`; no other branch will be created or used.
