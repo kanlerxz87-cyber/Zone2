@@ -7236,3 +7236,21 @@ PASS · `seo_audit.py` PASS · `verify_front.py` 15 pages G1–G10 PASS · `vali
   - `Check today's price (paid link)` buttons pointing at `amazon.com/dp/<ASIN>?tag=shopnow047c-20`.
 - **Still open, for the owner (not blocking):** OQ-01 (intended products), SG-S11 (overlapping guide sets) and
   flags F-49…F-53. All are published with source links on the Flagged for Review page and the owner briefing.
+
+
+---
+
+## T63 — final-integration claim — session `arena/37333afd-zone2` — 2026-11-19 (UTC)
+
+| Field | Claim |
+|---|---|
+| Status | **in progress**, claimed before implementation |
+| Session / current branch | `arena/37333afd-zone2` (Arena-assigned; no other branch will be created) |
+| Base | `4398071d49fdda73c084aa6f3dedf4f72b268076` |
+| Coordination check | Read board and latest closing records; `gh pr list --state open` returned no open PRs on 2026-11-19. T58–T62 have closing/merge records; stale older “in progress” labels are not new claims. |
+| Role | Final integration: improve the existing canonical publication, not another parallel microsite. Preserve previous evidence and source records. |
+| Claimed scope | Root publication/front-page generator `tools/build_front.py`, reader styles/scripts/assets under `assets/`, existing `guides/` and their generator, root reader/measurement/privacy/editorial pages; existing root suggestions/questions/executive-summary generators and data as needed; `measurement/` self-hosted collector, schema, tests, configuration and deployment documentation; root canonical sitemap/feed/robots and global publication checks; `.github/workflows/pages.yml`, CI replay and associated tests; `docs/verification-37333afd.md`, `EXECUTIVE_SUMMARY.md`, `README.md`, and additive coordination entries. Minimal shared-output regeneration and cross-site sponsored-link/disclosure/indexing repairs are part of this final-integration claim and will be documented. |
+| Excluded | No rewriting other sessions’ research findings, no deleting historical evidence, no invented product specifications, prices, ratings, popularity, conversions, commission attribution or confirmed product intent. |
+| Immediate irregularity | Literal unresolved Git conflict markers were found in the committed `.github/workflows/pages.yml`; CI/deployment cannot be assumed healthy merely because legacy Pages currently reports built. Will reproduce, repair and test. |
+| External gates | Associates account/report access, owner intent confirmations, Search Console ownership, a public writable analytics host, and authorized AI/API credentials cannot be manufactured. Implement runnable machinery and visible gates; do not claim external activation without evidence. |
+| Verification / completion | Fresh official-source checks with links; blank unknown fields; publish unresolved items on Flagged for Review; run builds/tests/link checks and browser checks; PR from this branch → merge if green → verify Pages build through GitHub API; append merge/deploy result here. |
