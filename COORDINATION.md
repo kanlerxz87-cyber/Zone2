@@ -8423,3 +8423,41 @@ confirmation is added. Blanks stay blank; conflicts stay conflicts; working topi
 editorial hypotheses, not measured demand.
 
 **Status:** in progress.
+
+### T77 close-out — takeover completed; Decision Room + design brief + topic pitches live — **DONE pending merge** (2026-11-19 UTC)
+
+- **Takeover honoured, nothing discarded.** PR **#194**'s branch (`arena/1b09bb6d-zone2`, `f8412b1`)
+  was merged whole into `arena/af15a2f9-zone2`. Conflicts resolved by the established rules:
+  `EXECUTIVE_SUMMARY.md` union (both dated addenda kept), `assets/css/publication.css` union
+  (T72 mobile styles + T69 th-clip repair + Decision Room styles), generated outputs
+  (`board/**`, `release/**`, `compare.html` and every builder target) regenerated from the merged
+  registers, T75's P-05 warranty conflict rows kept as the current data. PRs #184/#182 were already
+  integrated inside that branch and land with it.
+- **Added for the 2026-11-17/19 request:** six topic pitches `TP-01..TP-06` on `decision-room.html`
+  ("Six topic pitches to choose from before anyone writes") — working titles with buyer questions,
+  formats, covered products, sourced `rests_on` claims, costs and give-ups — plus a **Content
+  direction** block inside the paste-ready design prompt on `decision-prompt.html`. Every pitch is
+  labelled an editorial hypothesis; a new gate **D10** (`tools/verify_decision_room.py`) and 13
+  mutation tests (`tests/test_decision_room.py`, 28 total) fail the build on any hype word
+  (best/trending/popular/top-rated/best-selling/high-converting), missing field, dangling source or
+  pitch promoted out of `status: pitch`. Measured Search Console queries replace the pitch order
+  when DRQ-07 closes (DR-08), and preserved marketing-desk treatments fold into one root URL
+  (DR-05).
+- **Gates (combined tree, all green):** `tools/ci_replay.py` **66/66 PASSED** ·
+  `tools/verify_decision_room.py` PASS (13 decisions, 10 owner questions, 23 sources) ·
+  `tests/test_decision_room.py` **28/28** · `package_site` + `verify_publication`
+  `ok: true` — **230 HTML pages, 18 indexable, 1,471 sponsored product anchors, 173 factual rows** ·
+  `build_sitemap --check` 18 URLs · `build_head_meta --audit` 0 problems · `validate_data` 0 errors ·
+  `audit_site` 7/7 · browser suite `ok: true` (256 viewport checks, 26 accessibility pages).
+- **Irregularities (logged in `docs/verification-af15a2f9.md` §5, non-blocking):** IR-1 the
+  `build_board` gates-string fixed point (first run records exit 1 on a green tree; second records
+  exit 0; final state verified green); IR-2 dated addendum anchor counts differ across snapshots
+  (current: 1,471/173); IR-3 T76's record claims no open PRs at its claim while #194/#184/#182 were
+  open; IR-4 the standing owner-gated unknowns (intended ASINs, enrollment reports, Search Console,
+  collector host, photography) unchanged and still published as open.
+- **Product-listing sources** (`AMZ-P1..AMZ-P5`, `MFR-CHEFMAN`) are evidence citations to the same
+  official pages the register already holds — re-read live on 2026-11-19 by sessions `353f0afc`
+  (T76) and `4c81759e` (T75); this session holds no general web access and claims no new fetch.
+  Blanks stay blank; intent fields stay separate from observations; no price, rating, demand or
+  revenue figure added.
+- **PR, merge and Pages deploy:** recorded in the T77 final note below once GitHub returns them.

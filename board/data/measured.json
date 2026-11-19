@@ -1,5 +1,5 @@
 {
-  "amazon_links": 3044,
+  "amazon_links": 3052,
   "capture_pages": 0,
   "chooser_pages": 1,
   "counter_pages": 60,
@@ -12,7 +12,7 @@
   "guide_pages": 51,
   "guides_unlinked": 0,
   "jsonld": 99,
-  "measured_utc": "2026-11-19T22:03:18.231909+00:00",
+  "measured_utc": "2026-11-19T22:18:46.463893+00:00",
   "no_desc": 0,
   "og_full": 167,
   "og_image": 154,
@@ -23,7 +23,7 @@
   "sponsored_links": 663,
   "sponsored_reader": 446,
   "substitutions": {
-    "amazon_links": 3044,
+    "amazon_links": 3052,
     "capture_pages": 0,
     "chooser_pages": 1,
     "counter_pages": 60,

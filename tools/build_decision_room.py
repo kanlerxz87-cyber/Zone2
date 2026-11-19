@@ -123,6 +123,47 @@ def decision_row(d: dict, data: dict) -> str:
 </article>'''
 
 
+# --------------------------------------------------------------------------- topic pitches (T77)
+
+def topic_card(t: dict, data: dict) -> str:
+    """A working title to choose or kill before it is written. Never a trend claim (S-16)."""
+    rests = "".join(
+        f'<li><span>{e(item["claim"])}</span> {cite(data, item["src"])}</li>' for item in t["rests_on"]
+    )
+    covers = ", ".join(e(c) for c in t["covers"])
+    return f'''<article class="dr-card" id="{e(t["id"])}">
+  <div class="dr-card-head">
+    <p class="dr-cluster">Topic pitch · {e(t["id"])} · {e(t["format"])}</p>
+    <span class="dr-status is-open">Pitch — nothing written yet</span>
+  </div>
+  <h2>{e(t["title"])}</h2>
+  <p class="dr-question">{e(t["buyer_question"])}</p>
+  <h3>What it would rest on</h3>
+  <ul class="dr-evidence">{rests}</ul>
+  <h3>What it costs and what it gives up</h3>
+  <p class="dr-opt-line"><strong>Costs:</strong> {e(t["costs"])}</p>
+  <p class="dr-opt-line"><strong>Gives up:</strong> {e(t["gives_up"])}</p>
+  <div class="dr-verdict">
+    <p class="cn-eyebrow">Who it is for</p>
+    <p>{e(t["intent"])}</p>
+    <p class="dr-unblock"><strong>Covers:</strong> {covers}</p>
+  </div>
+</article>'''
+
+
+def topics_section(data: dict) -> str:
+    pitches = data.get("topic_pitches") or []
+    words = {5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten",
+             11: "Eleven", 12: "Twelve"}
+    numword = words.get(len(pitches), str(len(pitches)))
+    cards = "".join(topic_card(t, data) for t in pitches)
+    return f'''<section class="cn-wrap cn-section dr-group" id="topic-pitches">
+  <h2 class="cn-table-title">{numword} topic pitches to choose from before anyone writes</h2>
+  <p class="cn-fineprint">{e(data.get("topic_note", ""))}</p>
+  {cards}
+</section>'''
+
+
 def build_room(data: dict) -> str:
     rows = data["decisions"]
     counts = {
@@ -188,6 +229,7 @@ def build_room(data: dict) -> str:
   Nothing here converts either into a claim about demand, popularity or revenue.</p>
 </section>
 {grouped}
+{topics_section(data)}
 <section class="cn-wrap cn-section" id="owner-questions">
   <h2 class="cn-table-title">Answer these ten things and every row above can move</h2>
   <p class="cn-fineprint">These are the only inputs this project needs from its owner. Each one is
@@ -252,6 +294,16 @@ def build_prompt(data: dict) -> str:
         "Constraints that are not negotiable: the Associates disclosure sentence appears above the "
         "fold and again in the footer on every page; every product link is sponsored-tagged; no "
         "price is printed; no number is invented.",
+        "",
+        "Content direction — the article pipeline this design serves. Each line is a working title "
+        "and an editorial hypothesis, not a measured trend; no title may call a product best, "
+        "trending or popular. Measured Search Console queries replace this order once the property "
+        "is verified (DR-08). One question per URL, the buyer's question first, and every spec row "
+        "ends in its official source:",
+    ]
+    for t in data.get("topic_pitches") or []:
+        prompt_lines.append(f"  - {t['id']} ({t['format']}): {t['title']} — {t['buyer_question']}")
+    prompt_lines += [
         "",
         "Open decisions this brief depends on (each must be answered before the matching change):",
     ]

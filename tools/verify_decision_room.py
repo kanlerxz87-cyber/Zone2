@@ -22,6 +22,11 @@ project already holds every other reader page to:
       --check` would pass — so a hand edit to the HTML cannot diverge from the register;
   D9  no decision row claims to be `fixed` unless it carries a written note of what was fixed,
       and no row marked `open` or `blocked` describes itself as implemented.
+  D10 (T77) every topic pitch is a complete, sourced editorial hypothesis: a TP id, a working
+      title with no best/trending/popular claim (the S-16 evidence rule), a buyer question, a
+      format, the products it covers, at least one `rests_on` claim citing a registered source,
+      and both a cost and a give-up. The rendered pages carry every pitch id and the words
+      "editorial hypothesis", so a pitch cannot be written into the site as a trend claim.
 
 Exit code 1 on any failure, with every failure printed.
 """
@@ -52,6 +57,55 @@ METRIC = re.compile(
 
 def fail(errors: list[str], message: str) -> None:
     errors.append(message)
+
+
+# S-16 evidence rule: a working title may not assert popularity, trend or superiority. A title is
+# the one place a hype word would leak into a headline, a <title> tag and a feed item at once.
+BANNED_TITLE_WORDS = re.compile(r"\b(best|trending|trendy|popular|top[- ]?rated|best[- ]?selling|high[- ]?converting)\b", re.I)
+
+TOPIC_FIELDS = ("id", "title", "buyer_question", "format", "covers", "rests_on", "costs", "gives_up", "status")
+
+
+def topic_problems(data: dict) -> list[str]:
+    """D10: the topic pitches are complete, sourced editorial hypotheses — or the gate fails."""
+    errors: list[str] = []
+    pitches = data.get("topic_pitches")
+    if not isinstance(pitches, list) or len(pitches) < 5:
+        errors.append(f"D10 topic_pitches: expected at least 5 pitches, got {0 if not isinstance(pitches, list) else len(pitches)}")
+        return errors
+    if not data.get("topic_note"):
+        errors.append("D10 topic_pitches: missing topic_note (the editorial-hypothesis statement)")
+    known_sources = set(data["sources"])
+    seen: set[str] = set()
+    for t in pitches:
+        tid = t.get("id", "<no id>")
+        for field in TOPIC_FIELDS:
+            if not t.get(field):
+                errors.append(f"D10 {tid}: missing '{field}'")
+        if not isinstance(t.get("id"), str) or not re.fullmatch(r"TP-\d{2}", t.get("id", "")):
+            errors.append(f"D10 {tid}: id must match TP-xx")
+        elif t["id"] in seen:
+            errors.append(f"D10 {t['id']}: duplicate topic id")
+        else:
+            seen.add(t["id"])
+        if t.get("status") != "pitch":
+            errors.append(f"D10 {tid}: status must be 'pitch' — nothing here is written or decided")
+        for field in ("title", "buyer_question"):
+            m = BANNED_TITLE_WORDS.search(str(t.get(field, "")))
+            if m:
+                errors.append(f"D10 {tid}: {field} contains banned claim word {m.group(0)!r} (S-16: no hype without evidence)")
+        covers = t.get("covers") or []
+        if not covers or any(c not in {"P1", "P2", "P3", "P4", "P5"} for c in covers):
+            errors.append(f"D10 {tid}: covers must name at least one known product key")
+        rests = t.get("rests_on") or []
+        if not rests:
+            errors.append(f"D10 {tid}: no rests_on — a pitch with no verified fact behind it is a guess")
+        for item in rests:
+            if not item.get("claim"):
+                errors.append(f"D10 {tid}: rests_on entry without a claim")
+            if item.get("src") not in known_sources:
+                errors.append(f"D10 {tid}: rests_on cites unknown source id {item.get('src')!r}")
+    return errors
 
 
 class Refs(HTMLParser):
@@ -137,6 +191,9 @@ def main() -> int:
             if b not in {d["id"] for d in data["decisions"]}:
                 fail(errors, f"D7 {q['id']}: blocks unknown decision {b!r}")
 
+    # ---- D10: topic pitches are sourced editorial hypotheses --------------------
+    errors.extend(topic_problems(data))
+
     # ---- D8: rendered output is the register ----------------------------------
     sys.path.insert(0, str(ROOT / "tools"))
     import build_decision_room as gen  # noqa: E402
@@ -152,6 +209,20 @@ def main() -> int:
             fail(errors, f"D8 {name}: not generated — run tools/build_decision_room.py")
         elif path.read_text(encoding="utf-8") != rendered:
             fail(errors, f"D8 {name}: on disk differs from content/decision-room.json — re-run tools/build_decision_room.py")
+
+    # ---- D10: the rendered pages carry the pitches as hypotheses ----------------
+    room_html = (ROOT / "decision-room.html").read_text(encoding="utf-8") if (ROOT / "decision-room.html").is_file() else ""
+    prompt_html = (ROOT / "decision-prompt.html").read_text(encoding="utf-8") if (ROOT / "decision-prompt.html").is_file() else ""
+    for t in data.get("topic_pitches") or []:
+        tid = t.get("id", "<no id>")
+        if tid not in room_html:
+            fail(errors, f"D10 {tid}: not present on decision-room.html")
+        if tid not in prompt_html:
+            fail(errors, f"D10 {tid}: not present in the design prompt")
+    if "editorial hypothesis" not in room_html:
+        fail(errors, "D10 decision-room.html: the editorial-hypothesis label is missing")
+    if "Content direction" not in prompt_html:
+        fail(errors, "D10 decision-prompt.html: the Content direction block is missing")
 
     # ---- per-page HTML rules --------------------------------------------------
     for rel in PAGES:

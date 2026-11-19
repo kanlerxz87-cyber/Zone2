@@ -110,6 +110,42 @@
       "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
       "host": "www.fsis.usda.gov",
       "what": "the government page the thermometer cluster already cites"
+    },
+    "AMZ-P1": {
+      "label": "Amazon listing — Chefman TurboFry Touch 6 Qt dual-window air fryer (observed destination of the first supplied link)",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "host": "www.amazon.com",
+      "what": "capacity, power, dimensions, Sync Finish and care rows as published in the listing"
+    },
+    "AMZ-P2": {
+      "label": "Amazon listing — Emeril Lagasse 26 QT French Door air fryer toaster oven (observed destination of the second supplied link)",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "host": "www.amazon.com",
+      "what": "capacity, dimensions, power, temperature range and door rows as published in the listing"
+    },
+    "AMZ-P3": {
+      "label": "Amazon listing — Chefman TurboFry Touch 8 Qt air fryer (observed destination of the third supplied link)",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "host": "www.amazon.com",
+      "what": "capacity, power, dimensions, presets and care rows as published in the listing"
+    },
+    "AMZ-P4": {
+      "label": "Amazon listing — ThermoMaven 1-second instant-read meat thermometer (observed destination of the fourth supplied link)",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "host": "www.amazon.com",
+      "what": "probe type and use rows as published in the listing"
+    },
+    "AMZ-P5": {
+      "label": "Amazon listing — CHEF iQ Sense wireless meat thermometer (observed destination of the fifth supplied link)",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "host": "www.amazon.com",
+      "what": "probe type and use rows as published in the listing"
+    },
+    "MFR-CHEFMAN": {
+      "label": "Chefman official product page — TurboFry Touch Dual-Window air fryer",
+      "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "host": "chefman.com",
+      "what": "manufacturer statements on the dual-basket format and finish-together timing"
     }
   },
   "decisions": [
@@ -835,5 +871,157 @@
     "The exact indexable URL set before and after any DR-02 change (derived from publication.indexable_paths()).",
     "Whether every shop page passes the existing S1-S12 sourcing gate (tools/validate_shop.py already answers this).",
     "Whether the disclosure sentence appears twice on every page (tools/verify_publication.py already asserts this)."
+  ],
+  "topic_note": "Every pitch below is an editorial hypothesis, not measured demand. These six working titles are suggestions to review and choose from before anything is written; nothing here is a claim about search volume, popularity, trends or revenue, and no title calls a product best or trending. The order is this session's lean, not a decision: when DRQ-07 closes and reviewed Search Console queries exist, measured questions replace this order (DR-08). Each pitch names the verified rows it would rest on, so a reviewer can reject a pitch before it costs any writing. Where a preserved marketing-desk treatment already answers the question (marketing/thermometers/), the pitch folds that treatment into one root URL rather than publishing a second answer (DR-05).",
+  "topic_pitches": [
+    {
+      "id": "TP-01",
+      "title": "Two baskets, one dinner: the finish-together question",
+      "buyer_question": "Do I actually need two baskets to get everything on the table hot at once?",
+      "format": "comparison",
+      "covers": [
+        "P1",
+        "P3"
+      ],
+      "rests_on": [
+        {
+          "claim": "P1 is listed with a 6 Qt capacity across two baskets, and the manufacturer states both baskets finish cooking at the same time (Sync Finish).",
+          "src": "MFR-CHEFMAN"
+        },
+        {
+          "claim": "P3 is listed as one 8 Qt basket with an LED shake reminder — one zone, one timer.",
+          "src": "AMZ-P3"
+        }
+      ],
+      "intent": "A cook deciding between the two Chefman sizes who has ever served one cold side dish.",
+      "costs": "One comparison page built from the two Chefman listings and their care rows; every claim already has its source row.",
+      "gives_up": "The lazy version where a single basket is treated as a flaw. Some cooks only ever cook one thing, and the page has to say so.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-02",
+      "title": "Ice water and boiling water: the five-minute thermometer check",
+      "buyer_question": "How do I know my meat thermometer is still reading true?",
+      "format": "answer guide",
+      "covers": [
+        "P4",
+        "P5"
+      ],
+      "rests_on": [
+        {
+          "claim": "USDA FSIS states that colour is not a reliable indicator that food is safe and advises checking the manufacturer's instructions.",
+          "src": "FSIS-TEMP"
+        },
+        {
+          "claim": "P4 is listed as a 1-second instant-read probe thermometer and P5 as a wireless leave-in set — two different routines for the same doubt.",
+          "src": "AMZ-P4"
+        }
+      ],
+      "intent": "Someone with a drawer thermometer and no idea whether to trust it before a big cook.",
+      "costs": "One answer page, plus folding the preserved marketing-desk accuracy treatment into this URL (DR-05: one URL per answer).",
+      "gives_up": "Any implication that we measured accuracy ourselves. The check runs in the reader's kitchen, and the page says exactly that.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-03",
+      "title": "Where the probe goes: turkey placement without the guesswork",
+      "buyer_question": "Where exactly does the probe go in a turkey — and do the instructions say?",
+      "format": "guide",
+      "covers": [
+        "P4",
+        "P5"
+      ],
+      "rests_on": [
+        {
+          "claim": "USDA FSIS advises checking the manufacturer's instructions for thermometer use, and states colour is not a reliable safety indicator.",
+          "src": "FSIS-TEMP"
+        },
+        {
+          "claim": "Both thermometer listings publish probe type and use information; the placement rules come from those instructions, not from memory.",
+          "src": "AMZ-P5"
+        }
+      ],
+      "intent": "A first-time holiday host with a new probe and a whole bird.",
+      "costs": "One guide quoting the instructions and FSIS; the preserved marketing-desk placement page is folded in rather than duplicated.",
+      "gives_up": "Folklore. No grandmother's-thumb rule appears unless an official document states it.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-04",
+      "title": "Will it fit under your cabinets? The height question the footprint guide skips",
+      "buyer_question": "The counter depth is fine — but will it fit under the upper cabinets, with room to open?",
+      "format": "guide",
+      "covers": [
+        "P2",
+        "P1",
+        "P3"
+      ],
+      "rests_on": [
+        {
+          "claim": "P2 is listed at 16.9 in deep × 15.8 in wide × 14.8 in high.",
+          "src": "AMZ-P2"
+        },
+        {
+          "claim": "P1 is listed at 13.38 × 11.81 × 10.63 in and P3 at 15.4 × 12.6 × 13.5 in — the exterior numbers a reader can measure against their own clearance.",
+          "src": "AMZ-P1"
+        }
+      ],
+      "intent": "A buyer with standard upper cabinets and a tape measure.",
+      "costs": "One guide built from the three verified dimension rows, with a bring-your-own-tape-measure close.",
+      "gives_up": "Any verdict about the reader's kitchen. The listings publish exterior dimensions only, and the page keeps saying so.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-05",
+      "title": "The Thanksgiving-week counter: the pieces of gear that earn their space right now",
+      "buyer_question": "With a big dinner coming, which piece of gear actually changes the day?",
+      "format": "seasonal cluster hub",
+      "covers": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "rests_on": [
+        {
+          "claim": "The three air-fryer listings publish capacity, power and dimensions; the two thermometer listings state their probe type — every card on the hub links to those rows.",
+          "src": "AMZ-P2"
+        },
+        {
+          "claim": "Google's people-first guidance is the standard this hub is written to: useful first, seasonal framing second.",
+          "src": "GOOG-HELPFUL"
+        }
+      ],
+      "intent": "A host planning the week of 2026-11-26 who wants one page instead of five tabs.",
+      "costs": "A dated hub that must carry its dates on its face and be honest when the season passes.",
+      "gives_up": "Evergreen pretence. A seasonal hypothesis is allowed to expire, and this one is written for one week only.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-06",
+      "title": "Watts, volts, and the outlet you already have",
+      "buyer_question": "Will any of these trip the kitchen circuit — and do they need a special outlet?",
+      "format": "answer page",
+      "covers": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "rests_on": [
+        {
+          "claim": "All three air-fryer listings publish 1700 watts at 120 volts — one shared number the page can check row by row.",
+          "src": "AMZ-P1"
+        },
+        {
+          "claim": "P2's listing states 120 V and 1700 W in its product-information block.",
+          "src": "AMZ-P2"
+        }
+      ],
+      "intent": "A renter or old-house cook wondering about the outlet and the breaker, not the recipes.",
+      "costs": "One short answer page from three verified power rows.",
+      "gives_up": "Electrical advice beyond what the listings state. The page reports the numbers and tells the reader to check their own kitchen.",
+      "status": "pitch"
+    }
   ]
 }
