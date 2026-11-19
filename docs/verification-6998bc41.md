@@ -1,6 +1,8 @@
-# Verification record — session `arena/6998bc41-zone2` (T69) — 2026-11-19 (UTC)
+# Verification record — session `arena/6998bc41-zone2` (T71, claimed as T69) — 2026-11-19 (UTC)
 
-**Task:** close the three open change requests the T64 close-out left behind (CR-8, CR-9, CR-10),
+**Task id:** renumbered **T69 → T71** at integration (sessions `56aa1fac`/PR #180 and `5f7f77a4`/PR #183
+landed their own T69/T70 on `main` while this branch was in flight; scopes did not overlap — see the
+renumber note in `COORDINATION.md`). **Task:** close the three open change requests the T64 close-out left behind (CR-8, CR-9, CR-10),
 port the surviving data corrections from stale PR #163, triage stalled PRs #162/#163/#172, and run
 the final integration (gates → PR → merge → confirm Pages deploy → record).
 
@@ -155,6 +157,27 @@ confirmations (owner), enrolled Associates link/report validation (owner), Searc
 (SG-29), reader capture (SG-30), production collector host (CN-02/CN-08), and the unclaimed
 mobile-first pass **S-20 / RQ-16** (no session has claimed it; this session did not either).
 
+## 7a. Integration with `origin/main` (PRs #180 and #183, merged while this branch was in flight)
+
+`origin/main` advanced twice during this session's work: PR #180 (session `56aa1fac`, **T69** — the
+suggestion/question "last updated" byline fix, new `verify_front` G11) and PR #183 (session
+`5f7f77a4`, **T70** — publication content/`content/publication.json`, `tools/publication.py`,
+`note_overlap.py`, an `executive-summary` addendum). Neither scope overlapped this claim's
+(CR-8/CR-9/CR-10, the #163 port, stale-PR triage). Resolution, commit `c8359c8`:
+
+- `COORDINATION.md`: both sides' records kept in full; **this session's task renumbered T69 → T71**
+  per the board's "later claim yields the id" precedent, with an explicit renumber note.
+- `EXECUTIVE_SUMMARY.md`: auto-merged (their addendum + this session's 54-count edits both intact;
+  zero `53 flags` strings remain; five `54 flags` phrases present).
+- Generated conflicts (`board/data/measured.json`, `board/requirements.html`, `board/suggestions.html`,
+  `board/verification.html`, `flagged.html`): resolved **by regeneration from the merged inputs**
+  (`build_board`, `build_front`, `build_summary`, `build_console`, `build_root_data`,
+  `build_root_views`, `build_site`, `build_decisions`) — never by hand-picking one side, per the
+  board's request in #163.
+- Merged tree re-verified: `ci_replay` **62/62** (the workflow gained a step in #180/#183),
+  `validate_board` all checks pass, `audit_site` 7/7 (228 pages), board `gates` cell records the
+  passing 62-step replay.
+
 ## 8. Gates run by this session, in order
 
 | Gate | Result |
@@ -165,7 +188,7 @@ mobile-first pass **S-20 / RQ-16** (no session has claimed it; this session did 
 | `python3 tools/build_brief.py --check` + `python3 tools/validate_brief.py` | stale `[]`; all checks pass |
 | `python3 tools/build_board.py --check` + `python3 tools/validate_board.py` | 9 pages current; all checks pass |
 | namespace freshness checks (`build_decisions`, `build_readiness`, `build_audit`, `build_review_board`, `build_console`, `build_discovery`, `build_intake`, `build_root_data`, `build_root_views`, `build_site`, `build_front`, `build_summary`) | all current after regeneration |
-| `python3 tools/ci_replay.py` (full configured workflow replay) | **PASSED — 61 steps** |
+| `python3 tools/ci_replay.py` (full configured workflow replay) | **PASSED — 61 steps** on the pre-merge tree; **PASSED — 62 steps** after merging `origin/main` (PRs #180/#183) and regenerating the merged tree |
 | `python3 tools/package_site.py` + `python3 tools/verify_publication.py --site _site` | see the closing record below (run at final integration) |
 
 Sources for every claim above are the live reads in section 1 and the repositories' own registers
