@@ -1774,7 +1774,7 @@ thermometer listings' own review content was left out: Associates Program Polici
 Requirements 6(t) restricts displaying customer reviews or star ratings to data obtained through the
 Creators/PA API, and that access is not connected. The intended-ASIN confirmations remain blank.
 
-## Addendum — 2026-11-19 (session `arena/aecb287a-zone2`, T72): the measured gaps, closed or named
+## Addendum — 2026-11-19 (session `arena/aecb287a-zone2`, T73, claimed as T72): the measured gaps, closed or named
 
 **What changed.** The register still reported three rows as open. The tree is now measured again and the
 three are handled in order:

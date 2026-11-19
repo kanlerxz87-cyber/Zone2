@@ -1,4 +1,4 @@
-# Verification record — T72, session `arena/aecb287a-zone2`, 2026-11-19 (UTC)
+# Verification record — T73 (claimed as T72), session `arena/aecb287a-zone2`, 2026-11-19 (UTC)
 
 Scope: the measured gaps the requirements register still reported as open — S-04 (titles and
 descriptions), S-24 (internal links from the journal), S-20 (mobile-first pass). Claim: `COORDINATION.md`
