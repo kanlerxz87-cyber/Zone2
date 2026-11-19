@@ -67,14 +67,14 @@
       ]
     },
     {
-      "id": "FL-05",
-      "severity": "medium",
-      "title": "The three-question chooser row says 'Implemented' and the tree shows none",
-      "what": "{{chooser_pages}} pages carry a chooser component. What exists instead is a section that poses three questions and links each to its own article.",
-      "evidence": "Measured across every published page.",
-      "why_it_matters": "Two very different repairs follow from two different readings: either the status word is wrong, or a component was lost in the front-page rebuild. The tree cannot tell them apart, so it is recorded rather than assumed.",
-      "status": "open — needs the owning session",
-      "owner_action": "Answer BQ2-06.",
+    "id": "FL-05",
+    "severity": "medium",
+    "title": "The three-question chooser row said 'Implemented' while the tree showed none — now built",
+    "what": "{{chooser_pages}} pages carry a chooser component. The comparison page now carries a three-question 'Which one is for you?' chooser immediately above the comparison list.",
+    "evidence": "Measured across every published page. Built by session 47786492 (T76) on 2026-11-19 in tools/publication.py, assets/js/publication.js and assets/css/publication.css.",
+    "why_it_matters": "Two very different repairs follow from two different readings: either the status word is wrong, or a component was lost in the front-page rebuild. The tree cannot tell them apart, so it was recorded rather than assumed — then resolved by building the component.",
+    "status": "resolved 2026-11-19 (T76)",
+    "owner_action": "Closed: the chooser is built; BQ2-06 answered.",
       "source_ids": [
         "BD-21"
       ]

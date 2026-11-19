@@ -1,4 +1,4 @@
-# Verification record — T77 (claimed as T76; renumbered at merge), session `arena/95bfb73c-zone2`
+# Verification record — T78 (claimed as T76, then T77, renumbered to T78 at merge), session `arena/95bfb73c-zone2`
 
 **Date:** 2026-11-19 (UTC)
 **Task:** Take over stale, CI-red, conflicting PR #194 and publish its content on current `main`.
