@@ -19,7 +19,11 @@ import publication as pub
 from package_site import is_product_url
 
 ROOT=Path(__file__).resolve().parents[1]
-OFFICIAL_HOSTS={'github.blog','github.com','link.amazon','affiliate-program.amazon.com','www.amazon.com','amazon.com','chefman.com','www.chefman.com','www.emerileveryday.com','www.ftc.gov','ftc.gov','docs.github.com','developers.google.com','support.google.com','www.fsis.usda.gov'}
+# T69 (session arena/698addcd): www.w3.org added on the precedent set by CR-8, which added
+# www.fsis.usda.gov for exactly this reason - an official standards body became the governing
+# citation for a reader-facing rule. W3C authors WCAG, so it is the authoritative source for
+# SC 2.5.8 Target Size (Minimum) cited by the Decision Room's accessibility rows.
+OFFICIAL_HOSTS={'github.blog','github.com','link.amazon','affiliate-program.amazon.com','www.amazon.com','amazon.com','chefman.com','www.chefman.com','www.emerileveryday.com','www.ftc.gov','ftc.gov','docs.github.com','developers.google.com','support.google.com','www.fsis.usda.gov','www.w3.org'}
 CURRENT=pub.indexable_paths()|set(pub.extra_pages())|{'suggestions.html','questions.html'}
 
 

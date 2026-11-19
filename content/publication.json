@@ -1,479 +1,493 @@
 {
-  "as_of": "2026-11-19",
-  "brand": "Counter Notes",
-  "author": "Counter Notes",
-  "authorship": "AI-assisted publication; no hands-on testing or named human reviewer is claimed.",
-  "sources": {
-    "AMZ-AGREEMENT": {
-      "publisher": "Amazon Associates",
-      "title": "Operating Agreement",
-      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
-      "checked": "2026-11-19",
-      "scope": "Sections 1, 4 and 5: tagged link format, no traffic/income guarantee, prominent disclosure."
-    },
-    "AMZ-POLICIES": {
-      "publisher": "Amazon Associates",
-      "title": "Program Policies",
-      "url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "checked": "2026-11-19",
-      "scope": "Participation and IP/API rules: no artificial clicks, reviews/ratings restrictions, no per-user reporting IDs, caching and Agent rules."
-    },
-    "AMZ-LINKS": {
-      "publisher": "Amazon Associates",
-      "title": "Text links and ASINs",
-      "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
-      "checked": "2026-11-19",
-      "scope": "The documented text-link format includes an ASIN and Associate ID; ASINs identify catalog products. A short-link code need not itself be an ASIN."
-    },
-    "FTC": {
-      "publisher": "Federal Trade Commission",
-      "title": "Disclosures 101",
-      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
-      "checked": "2026-11-19",
-      "scope": "Disclosure should be hard to miss and placed with the endorsement. Do not claim experience with a product not tried."
-    },
-    "GH-PAGES": {
-      "publisher": "GitHub",
-      "title": "What is GitHub Pages?",
-      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
-      "checked": "2026-11-19",
-      "scope": "Pages is static hosting. GitHub documents visitor IP logging for security."
-    },
-    "GOOGLE-HELPFUL": {
-      "publisher": "Google Search Central",
-      "title": "People-first content",
-      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-      "checked": "2026-11-19",
-      "scope": "Helpful original analysis, clear authorship and who/how/why; no ranking promise."
-    },
-    "GOOGLE-CANONICAL": {
-      "publisher": "Google Search Central",
-      "title": "Canonical URL guidance",
-      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-      "checked": "2026-11-19",
-      "scope": "Canonical annotations and sitemap inclusion are signals, not guaranteed indexing."
-    },
-    "USDA": {
-      "publisher": "USDA FSIS",
-      "title": "Food Thermometers",
-      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
-      "checked": "2026-11-19",
-      "scope": "Check manufacturer insertion and care instructions. Food color alone does not establish a safe internal temperature."
-    },
-    "M1": {
-      "publisher": "Chefman",
-      "title": "Chefman official product page",
-      "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
-      "checked": "2026-11-19",
-      "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
-    },
-    "M2": {
-      "publisher": "Amazon.com",
-      "title": "Amazon US product page",
-      "url": "https://www.amazon.com/dp/B0CDY277D3",
-      "checked": "2026-11-19",
-      "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
-    },
-    "M3": {
-      "publisher": "Emeril Lagasse",
-      "title": "Emeril Everyday official store",
-      "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
-      "checked": "2026-11-19",
-      "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
-    },
-    "M4": {
-      "publisher": "Amazon.com",
-      "title": "Amazon US product page",
-      "url": "https://www.amazon.com/dp/B09B7SB46R",
-      "checked": "2026-11-19",
-      "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
-    },
-    "M5": {
-      "publisher": "Chefman",
-      "title": "Chefman official product page",
-      "url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
-      "checked": "2026-11-19",
-      "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
-    },
-    "M6": {
-      "publisher": "Amazon.com",
-      "title": "Amazon US product page",
-      "url": "https://www.amazon.com/dp/B08DKYBTPH",
-      "checked": "2026-11-19",
-      "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
-    },
-    "M7": {
-      "publisher": "Amazon.com",
-      "title": "Official product listing",
-      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
-      "checked": "2026-11-19",
-      "scope": "Listing title and identity read. No independent testing, certification verification, price or review data."
-    },
-    "M8": {
-      "publisher": "Amazon.com",
-      "title": "Official product listing",
-      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
-      "checked": "2026-11-19",
-      "scope": "Listing title and identity read. No independent testing, certification verification, price or review data."
-    },
-    "GOOGLE-NOINDEX": {
-      "publisher": "Google Search Central",
-      "title": "Block Search indexing with noindex",
-      "url": "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
-      "checked": "2026-11-19",
-      "scope": "A crawlable page can use a robots noindex meta tag. Crawling/recrawl is required; disappearance from results is not instantaneous."
-    },
-    "GOOGLE-OWNERSHIP": {
-      "publisher": "Google Search Console",
-      "title": "Verify site ownership",
-      "url": "https://support.google.com/webmasters/answer/9008080?hl=en",
-      "checked": "2026-11-19",
-      "scope": "Sensitive Search Console access requires verified ownership; HTML file/tag methods are available. No property or token was provided."
-    },
-    "GH-PAGES-ADMIN": {
-      "publisher": "GitHub",
-      "title": "Pages settings API permissions",
-      "url": "https://docs.github.com/en/rest/pages/pages#update-information-about-a-github-pages-site",
-      "checked": "2026-11-19",
-      "scope": "Updating Pages settings requires Pages write AND Administration write plus an appropriate repository role; a successful update returns 204 No Content. The current app received 403, and no settings change is claimed."
-    },
-    "GH-ACTIONS-RUNTIME": {
-      "publisher": "GitHub",
-      "title": "Actions Node20 deprecation and Node24 migration",
-      "url": "https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
-      "checked": "2026-11-19",
-      "scope": "Official updated changelog: runners default to Node24 and users should review Node24-capable action versions. Successful deployment emitted inherited action-runtime declaration warnings; no insecure opt-out is enabled."
-    }
+ "as_of": "2026-11-19",
+ "brand": "Counter Notes",
+ "author": "Counter Notes",
+ "authorship": "AI-assisted publication; no hands-on testing or named human reviewer is claimed.",
+ "sources": {
+  "AMZ-AGREEMENT": {
+   "publisher": "Amazon Associates",
+   "title": "Operating Agreement",
+   "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+   "checked": "2026-11-19",
+   "scope": "Sections 1, 4 and 5: tagged link format, no traffic/income guarantee, prominent disclosure."
   },
-  "products": [
-    {
-      "key": "P1",
-      "slug": "chefman-dual-basket",
-      "name": "Chefman TurboFry Touch 6 Qt",
-      "brand": "Chefman",
-      "type": "Dual-basket air fryer",
-      "category": "air-fryers",
-      "design": "dual",
-      "kicker": "FOR TWO DISHES",
-      "question": "Two dishes. Separate baskets.",
-      "intro": "A dual-basket format to consider when your main and side need different settings. Start with the split capacity, not just the total on the box.",
-      "tradeoff": "A split basket layout is not the same as one uninterrupted cooking space. Check the shape of what you cook.",
-      "submitted": "https://link.amazon/B04G1MEwY",
-      "source": "M1",
-      "specs": [
-        [
-          "Capacity",
-          "6 Qt / 5.67 L",
-          "M1",
-          "verified"
-        ],
-        [
-          "Temperature range",
-          "200–450 °F",
-          "M1",
-          "verified"
-        ],
-        [
-          "Sync Finish",
-          "Both baskets finish cooking at the same time",
-          "M1",
-          "manufacturer statement"
-        ],
-        [
-          "Care",
-          "Nonstick, dishwasher-safe baskets",
-          "M1",
-          "manufacturer statement"
-        ],
-        [
-          "Dimensions",
-          "13.38 × 11.81 × 10.63 in",
-          "M1",
-          "axis order not labelled by source"
-        ]
-      ],
-      "checked": "2026-11-19",
-      "intent": {
-        "intended_asin": "",
-        "official_listing_url": "",
-        "confirmation_date": "",
-        "source": ""
-      },
-      "observation": {
-        "observed_asin": "B0CDY277D3",
-        "observed_at": "2026-11-19",
-        "source": "M2",
-        "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
-        "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
-      },
-      "associates_validation": {
-        "status": "PENDING",
-        "confirmation_date": "",
-        "source": "",
-        "tracking_report_reference": ""
-      }
-    },
-    {
-      "key": "P2",
-      "slug": "emeril-french-door",
-      "name": "Emeril Lagasse French Door 360",
-      "brand": "Emeril Lagasse",
-      "type": "26 Qt countertop oven",
-      "category": "air-fryers",
-      "design": "oven",
-      "kicker": "FOR OVEN-STYLE COOKING",
-      "question": "A different kind of counter commitment.",
-      "intro": "French doors and a larger oven cavity make this a different format from a pull-out basket. Compare the footprint and cooking modes before comparing capacities.",
-      "tradeoff": "The manufacturer page says both 24 presets and 25 presets. Confirm the exact model and included accessories before ordering.",
-      "submitted": "https://link.amazon/B02NbDxp3",
-      "source": "M3",
-      "specs": [
-        [
-          "Capacity",
-          "26 Qt / 24.6 L",
-          "M3",
-          "verified"
-        ],
-        [
-          "Dimensions",
-          "16.9 in D × 15.8 in W × 14.8 in H",
-          "M3",
-          "verified"
-        ],
-        [
-          "Cooking modes",
-          "",
-          "M3",
-          "unverified — description says 10-in-1; image text says 11-in-1"
-        ],
-        [
-          "Preset count",
-          "",
-          "M3",
-          "unverified — manufacturer description says 24; specification tile says 25"
-        ],
-        [
-          "Included accessories",
-          "",
-          [
-            "M3",
-            "M4"
-          ],
-          "unverified — manufacturer description says 7; Amazon title says 6"
-        ]
-      ],
-      "checked": "2026-11-19",
-      "intent": {
-        "intended_asin": "",
-        "official_listing_url": "",
-        "confirmation_date": "",
-        "source": ""
-      },
-      "observation": {
-        "observed_asin": "B09B7SB46R",
-        "observed_at": "2026-11-19",
-        "source": "M4",
-        "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
-        "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
-      },
-      "associates_validation": {
-        "status": "PENDING",
-        "confirmation_date": "",
-        "source": "",
-        "tracking_report_reference": ""
-      }
-    },
-    {
-      "key": "P3",
-      "slug": "chefman-single-basket",
-      "name": "Chefman TurboFry Touch 8 Qt",
-      "brand": "Chefman",
-      "type": "Single-basket air fryer",
-      "category": "air-fryers",
-      "design": "single",
-      "kicker": "FOR ONE COOKING SPACE",
-      "question": "One basket. Keep the comparison simple.",
-      "intro": "An 8-quart basket and four cooking presets on the manufacturer page. Check that the model on the listing is the version you mean to buy.",
-      "tradeoff": "Chefman lists a 200–400 °F range, while the Amazon title advertises a 450 °F Hi-Fry option. Do not assume the two pages describe identical versions.",
-      "submitted": "https://link.amazon/B00hJ57DV",
-      "source": "M5",
-      "specs": [
-        [
-          "Capacity",
-          "8 Qt / 7.57 L",
-          "M5",
-          "verified"
-        ],
-        [
-          "Cooking presets",
-          "4",
-          "M5",
-          "manufacturer statement"
-        ],
-        [
-          "Temperature range",
-          "",
-          [
-            "M5",
-            "M6"
-          ],
-          "unverified — manufacturer says 200–400 °F; Amazon title advertises 450 °F Hi-Fry"
-        ],
-        [
-          "Care",
-          "Top-rack dishwasher-safe basket",
-          "M5",
-          "manufacturer statement"
-        ],
-        [
-          "Dimensions",
-          "15.4 × 12.6 × 13.5 in",
-          "M5",
-          "8 Qt model; axis order not labelled by source"
-        ]
-      ],
-      "checked": "2026-11-19",
-      "intent": {
-        "intended_asin": "",
-        "official_listing_url": "",
-        "confirmation_date": "",
-        "source": ""
-      },
-      "observation": {
-        "observed_asin": "B08DKYBTPH",
-        "observed_at": "2026-11-19",
-        "source": "M6",
-        "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH",
-        "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
-      },
-      "associates_validation": {
-        "status": "PENDING",
-        "confirmation_date": "",
-        "source": "",
-        "tracking_report_reference": ""
-      }
-    },
-    {
-      "key": "P4",
-      "slug": "thermomaven-instant-read",
-      "name": "ThermoMaven instant-read thermometer",
-      "brand": "ThermoMaven",
-      "type": "Digital food thermometer",
-      "category": "thermometers",
-      "design": "instant",
-      "kicker": "FOR A SPOT CHECK",
-      "question": "A reading, right where you are cooking.",
-      "intro": "An instant-read format for checking food at the point of use. Read the probe-placement and care instructions rather than choosing on a speed claim alone.",
-      "tradeoff": "The listing makes accuracy and certification claims. This publication has not independently tested or verified those certifications.",
-      "submitted": "https://link.amazon/B0c8moW59",
-      "source": "M7",
-      "specs": [
-        [
-          "Format",
-          "Digital instant-read",
-          "M7",
-          "listing description"
-        ],
-        [
-          "Response-time claim",
-          "1 second",
-          "M7",
-          "listing claim — not independently tested"
-        ],
-        [
-          "Verified accuracy",
-          "",
-          "M7",
-          "unverified — no independent test or certificate checked"
-        ],
-        [
-          "Care instructions",
-          "",
-          "M7",
-          "unverified in this review scope; check the model instructions"
-        ]
-      ],
-      "checked": "2026-11-19",
-      "intent": {
-        "intended_asin": "",
-        "official_listing_url": "",
-        "confirmation_date": "",
-        "source": ""
-      },
-      "observation": {
-        "observed_asin": "B0DHZTCNR5",
-        "observed_at": "2026-11-19",
-        "source": "M7",
-        "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5",
-        "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
-      },
-      "associates_validation": {
-        "status": "PENDING",
-        "confirmation_date": "",
-        "source": "",
-        "tracking_report_reference": ""
-      }
-    },
-    {
-      "key": "P5",
-      "slug": "chef-iq-sense",
-      "name": "CHEF iQ Sense wireless thermometer",
-      "brand": "CHEF iQ",
-      "type": "Wireless food thermometer",
-      "category": "thermometers",
-      "design": "wireless",
-      "kicker": "FOR CONNECTED COOKING",
-      "question": "Would remote monitoring help your routine?",
-      "intro": "A wireless format with three probes named in the observed listing title. Compare the connection requirements, probe fit and care instructions before buying.",
-      "tradeoff": "Wireless range and heat-safety wording in a title are not a guarantee of performance in your kitchen. Check model-specific limits and instructions.",
-      "submitted": "https://link.amazon/B0f3GKalj",
-      "source": "M8",
-      "specs": [
-        [
-          "Format",
-          "Smart wireless meat thermometer",
-          "M8",
-          "listing description"
-        ],
-        [
-          "Probe count",
-          "3",
-          "M8",
-          "listing title"
-        ],
-        [
-          "Connection",
-          "WiFi",
-          "M8",
-          "listing title — requirements not tested"
-        ],
-        [
-          "Verified operating limits",
-          "",
-          "M8",
-          "unverified in this review scope; obtain the exact model manual"
-        ]
-      ],
-      "checked": "2026-11-19",
-      "intent": {
-        "intended_asin": "",
-        "official_listing_url": "",
-        "confirmation_date": "",
-        "source": ""
-      },
-      "observation": {
-        "observed_asin": "B0DZFD6R9Z",
-        "observed_at": "2026-11-19",
-        "source": "M8",
-        "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z",
-        "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
-      },
-      "associates_validation": {
-        "status": "PENDING",
-        "confirmation_date": "",
-        "source": "",
-        "tracking_report_reference": ""
-      }
-    }
-  ]
+  "AMZ-POLICIES": {
+   "publisher": "Amazon Associates",
+   "title": "Program Policies",
+   "url": "https://affiliate-program.amazon.com/help/operating/policies",
+   "checked": "2026-11-19",
+   "scope": "Participation and IP/API rules: no artificial clicks, reviews/ratings restrictions, no per-user reporting IDs, caching and Agent rules."
+  },
+  "AMZ-LINKS": {
+   "publisher": "Amazon Associates",
+   "title": "Text links and ASINs",
+   "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+   "checked": "2026-11-19",
+   "scope": "The documented text-link format includes an ASIN and Associate ID; ASINs identify catalog products. A short-link code need not itself be an ASIN."
+  },
+  "FTC": {
+   "publisher": "Federal Trade Commission",
+   "title": "Disclosures 101",
+   "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+   "checked": "2026-11-19",
+   "scope": "Disclosure should be hard to miss and placed with the endorsement. Do not claim experience with a product not tried."
+  },
+  "GH-PAGES": {
+   "publisher": "GitHub",
+   "title": "What is GitHub Pages?",
+   "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+   "checked": "2026-11-19",
+   "scope": "Pages is static hosting. GitHub documents visitor IP logging for security."
+  },
+  "GOOGLE-HELPFUL": {
+   "publisher": "Google Search Central",
+   "title": "People-first content",
+   "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+   "checked": "2026-11-19",
+   "scope": "Helpful original analysis, clear authorship and who/how/why; no ranking promise."
+  },
+  "GOOGLE-CANONICAL": {
+   "publisher": "Google Search Central",
+   "title": "Canonical URL guidance",
+   "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+   "checked": "2026-11-19",
+   "scope": "Canonical annotations and sitemap inclusion are signals, not guaranteed indexing."
+  },
+  "USDA": {
+   "publisher": "USDA FSIS",
+   "title": "Food Thermometers",
+   "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
+   "checked": "2026-11-19",
+   "scope": "Check manufacturer insertion and care instructions. Food color alone does not establish a safe internal temperature."
+  },
+  "M1": {
+   "publisher": "Chefman",
+   "title": "Chefman official product page",
+   "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+   "checked": "2026-11-19",
+   "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
+  },
+  "M2": {
+   "publisher": "Amazon.com",
+   "title": "Amazon US product page",
+   "url": "https://www.amazon.com/dp/B0CDY277D3",
+   "checked": "2026-11-19",
+   "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
+  },
+  "M3": {
+   "publisher": "Emeril Lagasse",
+   "title": "Emeril Everyday official store",
+   "url": "https://www.emerileveryday.com/products/emeril_lagasse_french_door_airfryer_360",
+   "checked": "2026-11-19",
+   "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
+  },
+  "M4": {
+   "publisher": "Amazon.com",
+   "title": "Amazon US product page",
+   "url": "https://www.amazon.com/dp/B09B7SB46R",
+   "checked": "2026-11-19",
+   "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
+  },
+  "M5": {
+   "publisher": "Chefman",
+   "title": "Chefman official product page",
+   "url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+   "checked": "2026-11-19",
+   "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
+  },
+  "M6": {
+   "publisher": "Amazon.com",
+   "title": "Amazon US product page",
+   "url": "https://www.amazon.com/dp/B08DKYBTPH",
+   "checked": "2026-11-19",
+   "scope": "Public page read; manufacturer statements or listing title, not hands-on performance testing or enrolled-account attribution."
+  },
+  "M7": {
+   "publisher": "Amazon.com",
+   "title": "Official product listing",
+   "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+   "checked": "2026-11-19",
+   "scope": "Listing title and identity read. No independent testing, certification verification, price or review data."
+  },
+  "M8": {
+   "publisher": "Amazon.com",
+   "title": "Official product listing",
+   "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+   "checked": "2026-11-19",
+   "scope": "Listing title and identity read. No independent testing, certification verification, price or review data."
+  },
+  "GOOGLE-NOINDEX": {
+   "publisher": "Google Search Central",
+   "title": "Block Search indexing with noindex",
+   "url": "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+   "checked": "2026-11-19",
+   "scope": "A crawlable page can use a robots noindex meta tag. Crawling/recrawl is required; disappearance from results is not instantaneous."
+  },
+  "GOOGLE-OWNERSHIP": {
+   "publisher": "Google Search Console",
+   "title": "Verify site ownership",
+   "url": "https://support.google.com/webmasters/answer/9008080?hl=en",
+   "checked": "2026-11-19",
+   "scope": "Sensitive Search Console access requires verified ownership; HTML file/tag methods are available. No property or token was provided."
+  },
+  "GH-PAGES-ADMIN": {
+   "publisher": "GitHub",
+   "title": "Pages settings API permissions",
+   "url": "https://docs.github.com/en/rest/pages/pages#update-information-about-a-github-pages-site",
+   "checked": "2026-11-19",
+   "scope": "Updating Pages settings requires Pages write AND Administration write plus an appropriate repository role; a successful update returns 204 No Content. The current app received 403, and no settings change is claimed."
+  },
+  "GH-ACTIONS-RUNTIME": {
+   "publisher": "GitHub",
+   "title": "Actions Node20 deprecation and Node24 migration",
+   "url": "https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+   "checked": "2026-11-19",
+   "scope": "Official updated changelog: runners default to Node24 and users should review Node24-capable action versions. Successful deployment emitted inherited action-runtime declaration warnings; no insecure opt-out is enabled."
+  },
+  "GOOGLE-SITEMAP": {
+   "publisher": "Google Search Central",
+   "title": "Build and submit a sitemap",
+   "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+   "checked": "2026-11-19",
+   "scope": "A sitemap lists URLs an owner wants crawled and indexed; submitting one does not guarantee indexing."
+  },
+  "W3C-258": {
+   "publisher": "W3C Web Accessibility Initiative",
+   "title": "Understanding SC 2.5.8: Target Size (Minimum), Level AA",
+   "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+   "checked": "2026-11-19",
+   "scope": "Targets should be at least 24 by 24 CSS pixels, except where sufficient spacing or an equivalent control exists."
+  }
+ },
+ "products": [
+  {
+   "key": "P1",
+   "slug": "chefman-dual-basket",
+   "name": "Chefman TurboFry Touch 6 Qt",
+   "brand": "Chefman",
+   "type": "Dual-basket air fryer",
+   "category": "air-fryers",
+   "design": "dual",
+   "kicker": "FOR TWO DISHES",
+   "question": "Two dishes. Separate baskets.",
+   "intro": "A dual-basket format to consider when your main and side need different settings. Start with the split capacity, not just the total on the box.",
+   "tradeoff": "A split basket layout is not the same as one uninterrupted cooking space. Check the shape of what you cook.",
+   "submitted": "https://link.amazon/B04G1MEwY",
+   "source": "M1",
+   "specs": [
+    [
+     "Capacity",
+     "6 Qt / 5.67 L",
+     "M1",
+     "verified"
+    ],
+    [
+     "Temperature range",
+     "200–450 °F",
+     "M1",
+     "verified"
+    ],
+    [
+     "Sync Finish",
+     "Both baskets finish cooking at the same time",
+     "M1",
+     "manufacturer statement"
+    ],
+    [
+     "Care",
+     "Nonstick, dishwasher-safe baskets",
+     "M1",
+     "manufacturer statement"
+    ],
+    [
+     "Dimensions",
+     "13.38 × 11.81 × 10.63 in",
+     "M1",
+     "axis order not labelled by source"
+    ]
+   ],
+   "checked": "2026-11-19",
+   "intent": {
+    "intended_asin": "",
+    "official_listing_url": "",
+    "confirmation_date": "",
+    "source": ""
+   },
+   "observation": {
+    "observed_asin": "B0CDY277D3",
+    "observed_at": "2026-11-19",
+    "source": "M2",
+    "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
+    "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
+   },
+   "associates_validation": {
+    "status": "PENDING",
+    "confirmation_date": "",
+    "source": "",
+    "tracking_report_reference": ""
+   }
+  },
+  {
+   "key": "P2",
+   "slug": "emeril-french-door",
+   "name": "Emeril Lagasse French Door 360",
+   "brand": "Emeril Lagasse",
+   "type": "26 Qt countertop oven",
+   "category": "air-fryers",
+   "design": "oven",
+   "kicker": "FOR OVEN-STYLE COOKING",
+   "question": "A different kind of counter commitment.",
+   "intro": "French doors and a larger oven cavity make this a different format from a pull-out basket. Compare the footprint and cooking modes before comparing capacities.",
+   "tradeoff": "The manufacturer page says both 24 presets and 25 presets. Confirm the exact model and included accessories before ordering.",
+   "submitted": "https://link.amazon/B02NbDxp3",
+   "source": "M3",
+   "specs": [
+    [
+     "Capacity",
+     "26 Qt / 24.6 L",
+     "M3",
+     "verified"
+    ],
+    [
+     "Dimensions",
+     "16.9 in D × 15.8 in W × 14.8 in H",
+     "M3",
+     "verified"
+    ],
+    [
+     "Cooking modes",
+     "",
+     "M3",
+     "unverified — description says 10-in-1; image text says 11-in-1"
+    ],
+    [
+     "Preset count",
+     "",
+     "M3",
+     "unverified — manufacturer description says 24; specification tile says 25"
+    ],
+    [
+     "Included accessories",
+     "",
+     [
+      "M3",
+      "M4"
+     ],
+     "unverified — manufacturer description says 7; Amazon title says 6"
+    ]
+   ],
+   "checked": "2026-11-19",
+   "intent": {
+    "intended_asin": "",
+    "official_listing_url": "",
+    "confirmation_date": "",
+    "source": ""
+   },
+   "observation": {
+    "observed_asin": "B09B7SB46R",
+    "observed_at": "2026-11-19",
+    "source": "M4",
+    "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
+    "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
+   },
+   "associates_validation": {
+    "status": "PENDING",
+    "confirmation_date": "",
+    "source": "",
+    "tracking_report_reference": ""
+   }
+  },
+  {
+   "key": "P3",
+   "slug": "chefman-single-basket",
+   "name": "Chefman TurboFry Touch 8 Qt",
+   "brand": "Chefman",
+   "type": "Single-basket air fryer",
+   "category": "air-fryers",
+   "design": "single",
+   "kicker": "FOR ONE COOKING SPACE",
+   "question": "One basket. Keep the comparison simple.",
+   "intro": "An 8-quart basket and four cooking presets on the manufacturer page. Check that the model on the listing is the version you mean to buy.",
+   "tradeoff": "Chefman lists a 200–400 °F range, while the Amazon title advertises a 450 °F Hi-Fry option. Do not assume the two pages describe identical versions.",
+   "submitted": "https://link.amazon/B00hJ57DV",
+   "source": "M5",
+   "specs": [
+    [
+     "Capacity",
+     "8 Qt / 7.57 L",
+     "M5",
+     "verified"
+    ],
+    [
+     "Cooking presets",
+     "4",
+     "M5",
+     "manufacturer statement"
+    ],
+    [
+     "Temperature range",
+     "",
+     [
+      "M5",
+      "M6"
+     ],
+     "unverified — manufacturer says 200–400 °F; Amazon title advertises 450 °F Hi-Fry"
+    ],
+    [
+     "Care",
+     "Top-rack dishwasher-safe basket",
+     "M5",
+     "manufacturer statement"
+    ],
+    [
+     "Dimensions",
+     "15.4 × 12.6 × 13.5 in",
+     "M5",
+     "8 Qt model; axis order not labelled by source"
+    ]
+   ],
+   "checked": "2026-11-19",
+   "intent": {
+    "intended_asin": "",
+    "official_listing_url": "",
+    "confirmation_date": "",
+    "source": ""
+   },
+   "observation": {
+    "observed_asin": "B08DKYBTPH",
+    "observed_at": "2026-11-19",
+    "source": "M6",
+    "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH",
+    "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
+   },
+   "associates_validation": {
+    "status": "PENDING",
+    "confirmation_date": "",
+    "source": "",
+    "tracking_report_reference": ""
+   }
+  },
+  {
+   "key": "P4",
+   "slug": "thermomaven-instant-read",
+   "name": "ThermoMaven instant-read thermometer",
+   "brand": "ThermoMaven",
+   "type": "Digital food thermometer",
+   "category": "thermometers",
+   "design": "instant",
+   "kicker": "FOR A SPOT CHECK",
+   "question": "A reading, right where you are cooking.",
+   "intro": "An instant-read format for checking food at the point of use. Read the probe-placement and care instructions rather than choosing on a speed claim alone.",
+   "tradeoff": "The listing makes accuracy and certification claims. This publication has not independently tested or verified those certifications.",
+   "submitted": "https://link.amazon/B0c8moW59",
+   "source": "M7",
+   "specs": [
+    [
+     "Format",
+     "Digital instant-read",
+     "M7",
+     "listing description"
+    ],
+    [
+     "Response-time claim",
+     "1 second",
+     "M7",
+     "listing claim — not independently tested"
+    ],
+    [
+     "Verified accuracy",
+     "",
+     "M7",
+     "unverified — no independent test or certificate checked"
+    ],
+    [
+     "Care instructions",
+     "",
+     "M7",
+     "unverified in this review scope; check the model instructions"
+    ]
+   ],
+   "checked": "2026-11-19",
+   "intent": {
+    "intended_asin": "",
+    "official_listing_url": "",
+    "confirmation_date": "",
+    "source": ""
+   },
+   "observation": {
+    "observed_asin": "B0DHZTCNR5",
+    "observed_at": "2026-11-19",
+    "source": "M7",
+    "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5",
+    "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
+   },
+   "associates_validation": {
+    "status": "PENDING",
+    "confirmation_date": "",
+    "source": "",
+    "tracking_report_reference": ""
+   }
+  },
+  {
+   "key": "P5",
+   "slug": "chef-iq-sense",
+   "name": "CHEF iQ Sense wireless thermometer",
+   "brand": "CHEF iQ",
+   "type": "Wireless food thermometer",
+   "category": "thermometers",
+   "design": "wireless",
+   "kicker": "FOR CONNECTED COOKING",
+   "question": "Would remote monitoring help your routine?",
+   "intro": "A wireless format with three probes named in the observed listing title. Compare the connection requirements, probe fit and care instructions before buying.",
+   "tradeoff": "Wireless range and heat-safety wording in a title are not a guarantee of performance in your kitchen. Check model-specific limits and instructions.",
+   "submitted": "https://link.amazon/B0f3GKalj",
+   "source": "M8",
+   "specs": [
+    [
+     "Format",
+     "Smart wireless meat thermometer",
+     "M8",
+     "listing description"
+    ],
+    [
+     "Probe count",
+     "3",
+     "M8",
+     "listing title"
+    ],
+    [
+     "Connection",
+     "WiFi",
+     "M8",
+     "listing title — requirements not tested"
+    ],
+    [
+     "Verified operating limits",
+     "",
+     "M8",
+     "unverified in this review scope; obtain the exact model manual"
+    ]
+   ],
+   "checked": "2026-11-19",
+   "intent": {
+    "intended_asin": "",
+    "official_listing_url": "",
+    "confirmation_date": "",
+    "source": ""
+   },
+   "observation": {
+    "observed_asin": "B0DZFD6R9Z",
+    "observed_at": "2026-11-19",
+    "source": "M8",
+    "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z",
+    "note": "Canonical listing component of the returned URL. Query tokens were observed but are not needed for product identification. This is not an intent confirmation."
+   },
+   "associates_validation": {
+    "status": "PENDING",
+    "confirmation_date": "",
+    "source": "",
+    "tracking_report_reference": ""
+   }
+  }
+ ]
 }

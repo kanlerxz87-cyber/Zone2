@@ -508,6 +508,23 @@ jobs:
               no prices, no invented metrics, canonical, image alt text, briefing integrity)
         run: python3 tools/validate_shop.py
 
+      # T69 (session arena/698addcd-zone2): the Decision Room and the design brief. The build step
+      # regenerates both pages from content/decision-room.json, so a hand edit to the HTML cannot
+      # diverge from the register; the gate re-reads them on disk and enforces the same rules every
+      # other reader page meets (disclosure above <main> and in the footer, self-canonical,
+      # index,follow, every internal link resolves, no price and no asserted performance figure),
+      # plus the register's own rules: every option states its cost and what it gives up, every
+      # recommendation is one of that row's options, every cited source id exists, every owner
+      # question is referenced, and a row marked "fixed" carries a written note of what was fixed.
+      - name: Rebuild the Decision Room and confirm committed output is current
+        run: python3 tools/build_decision_room.py --check
+
+      - name: Decision Room gate (evidence, option costs, sourcing, disclosure, no prices or metrics)
+        run: python3 tools/verify_decision_room.py
+
+      - name: Decision Room mutation tests (the gate must be able to fail)
+        run: python3 tests/test_decision_room.py
+
       - name: Original publication artwork is reproducible
         run: python3 tools/build_artwork.py --check
 
