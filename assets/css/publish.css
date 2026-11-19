@@ -324,3 +324,75 @@
   .pb-nav-menu     { position: static; grid-template-columns: 1fr; min-width: 0;
                      width: 100%; margin-top: 8px; box-shadow: none; }
 }
+
+/* ==========================================================================
+   T63 (session arena/10727edd-zone2, 2026-11-19) — reader-first front page.
+   Additive only: no existing rule above is changed. Presentation, no facts.
+   ========================================================================== */
+.pb-nav a.pb-nav-behind { margin-left: auto; color: var(--faint); font-size: 12.5px;
+                          text-transform: uppercase; letter-spacing: .08em; }
+.pb-nav a.pb-nav-behind:hover, .pb-nav a.pb-nav-behind.is-on { color: var(--ink); }
+
+.pb-lead--hero  { padding-bottom: 0; }
+.pb-hero-art    { margin: 34px 0 0; border-radius: var(--radius); overflow: hidden;
+                  border: 1px solid var(--line); background: var(--paper); position: relative; }
+.pb-hero-art img{ display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+                  max-height: 440px; object-fit: cover; object-position: 70% 60%; }
+.pb-hero-art figcaption { position: absolute; right: 12px; bottom: 10px; font-size: 11px;
+                  color: var(--ink-soft); background: rgba(246,243,236,.85); padding: 2px 8px;
+                  border-radius: 999px; }
+
+.pb-picks ol    { counter-reset: none; }
+.pb-picks li    { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 10px 0;
+                  border-top: 1px solid var(--line-soft); }
+.pb-picks li::before { display: none; }
+.pb-picks li:first-child { border-top: 0; }
+.pb-pick-if     { font-size: 12px; text-transform: uppercase; letter-spacing: .06em;
+                  color: var(--faint); }
+.pb-picks li a  { font-family: "Fraunces", Georgia, serif; font-size: 17px; font-weight: 600;
+                  color: var(--ink); text-decoration: none; }
+.pb-picks li a:hover { color: var(--accent); }
+.pb-picks li small { font-size: 13px; color: var(--ink-soft); }
+.pb-picks-note  { font-size: 12px; color: var(--faint); margin: 10px 0 0; line-height: 1.45; }
+
+.pb-bench--two  { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .pb-bench--two { grid-template-columns: 1fr; } }
+
+.pb-pair        { background: var(--accent-soft); border-top: 1px solid var(--line);
+                  border-bottom: 1px solid var(--line); padding: 52px 0; }
+.pb-pair-grid   { display: grid; grid-template-columns: 5fr 7fr; gap: 40px; align-items: start; }
+.pb-pair p      { font-size: 15.5px; line-height: 1.6; color: var(--ink); max-width: 52ch; }
+@media (max-width: 900px) { .pb-pair-grid { grid-template-columns: 1fr; } }
+
+.pb-trust       { padding: 40px 0 56px; }
+.pb-trust-grid  { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px;
+                  border-top: 3px solid var(--ink); padding-top: 22px; }
+.pb-trust h3    { font-family: "Fraunces", Georgia, serif; font-size: 18px; margin: 0 0 6px; }
+.pb-trust p     { font-size: 14px; color: var(--ink-soft); line-height: 1.55; margin: 0; }
+@media (max-width: 760px) { .pb-trust-grid { grid-template-columns: 1fr; } }
+
+/* long-form guides */
+.pb-article .pb-sec > .pb-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; }
+@media (max-width: 960px) { .pb-article .pb-sec > .pb-wrap { grid-template-columns: 1fr; } }
+.pb-prose       { max-width: 72ch; font-size: 16.5px; line-height: 1.7; color: var(--ink); }
+.pb-prose h2    { font-family: "Fraunces", Georgia, serif; font-size: 25px; font-weight: 600;
+                  letter-spacing: -0.015em; margin: 38px 0 10px; line-height: 1.2; }
+.pb-prose h2:first-child { margin-top: 0; }
+.pb-prose p     { margin: 0 0 14px; }
+.pb-prose .pb-table-scroll { margin: 16px 0 10px; font-size: 14px; }
+.pb-checks      { padding-left: 1.2em; margin: 0 0 16px; }
+.pb-checks li   { margin: 0 0 10px; }
+.pb-inline-cta  { margin: 10px 0 24px; }
+.pb-inline-cta .pb-bench-cta { display: inline-block; }
+.pb-fineprint   { font-size: 13px; color: var(--ink-soft); border-left: 3px solid var(--line);
+                  padding-left: 12px; }
+.pb-related     { position: sticky; top: 24px; align-self: start; border-top: 3px solid var(--ink);
+                  padding-top: 14px; }
+.pb-related h2  { font-size: 12px; text-transform: uppercase; letter-spacing: .09em;
+                  color: var(--faint); margin: 0 0 10px; font-family: inherit; }
+.pb-related ul  { list-style: none; padding: 0; margin: 0; }
+.pb-related li  { padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 14.5px;
+                  line-height: 1.4; }
+.pb-related a   { color: var(--ink); text-decoration: none; }
+.pb-related a:hover { color: var(--accent); }
+.pb-rail-blurb  { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 12px; line-height: 1.5; }

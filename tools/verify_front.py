@@ -42,6 +42,14 @@ PAGES = [
     "guides/air-fryer-ovens.html",
     "guides/buying-guide.html".replace("buying-guide", "buying-guides"),
     "guides/method.html",
+    # T63 (session 10727edd, 2026-11-19): the reader-first pages build_front.py now writes.
+    # Same eight rules; a new page that is not on this list would be ungated.
+    "guides/meat-thermometers.html",
+    "guides/instant-read-or-wireless-thermometer.html",
+    "guides/thermometer-for-air-fryer.html",
+    "guides/multi-function-appliance-questions.html",
+    "guides/cleanup-and-counter-space.html",
+    "behind-the-site.html",
 ]
 
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."

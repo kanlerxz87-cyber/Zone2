@@ -1648,6 +1648,22 @@ def page_feed() -> str:
             f"<description>{esc(g['hook'])}</description>"
             "</item>"
         )
+    # T63 (session 10727edd, 2026-11-19): the brief asks that each new guide be added to the
+    # existing feed. The four question-shaped guides live under guides/ and are declared once, in
+    # tools/front_t63.py; they are appended here, newest first, so the feed has one source of truth.
+    import front_t63  # noqa: E402  (tools/ is on sys.path when this script runs)
+    site = "https://kanlerxz87-cyber.github.io/Zone2/"
+    for slug, _kicker, title, dek, _cat in front_t63.NEW_GUIDES:
+        url = f"{site}guides/{slug}.html"
+        items.insert(0,
+            "<item>"
+            f"<title>{esc(title)}</title>"
+            f"<link>{url}</link>"
+            f"<guid isPermaLink=\"true\">{url}</guid>"
+            f"<pubDate>{front_t63.TODAY}T00:00:00Z</pubDate>"
+            f"<description>{esc(dek)}</description>"
+            "</item>"
+        )
     return (
         '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel>'
         f"<title>{esc(BRAND['name'])}</title><link>{LIVE}</link>"
