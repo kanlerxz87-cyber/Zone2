@@ -777,6 +777,15 @@ def guide_shell(slug: str, body_html: str, related: list[str]) -> str:
     rel_links = "".join(
         f'<li><a href="{e(h)}">{e(t)}</a></li>' for t, h in
         [(x[2], f"{x[0]}.html") for x in t63.NEW_GUIDES if x[0] in related])
+    # Cross-link to the thermometer desk another session published the same day (PR #167), so a
+    # reader finds both treatments; which page should be canonical is SG-T63-06, left to the owner.
+    desk = {"instant-read-or-wireless-thermometer": ("../marketing/thermometers/instant-read-or-leave-in.html",
+                                                     "The thermometer desk's take: instant-read or leave-in?"),
+            "thermometer-for-air-fryer": ("../marketing/thermometers/thermometer-for-air-fryer.html",
+                                          "The thermometer desk's take on the same question")}.get(slug)
+    desk_link = (f'<li><a href="{e(desk[0])}">{e(desk[1])}</a></li>'
+                 '<li><a href="../marketing/thermometers/index.html">The thermometer desk, both thermometers row by row</a></li>'
+                 if desk else "")
     body = f"""
 <article class="pb-article">
 <section class="pb-lead"><div class="pb-wrap">
@@ -790,7 +799,7 @@ def guide_shell(slug: str, body_html: str, related: list[str]) -> str:
 {body_html}
 </div>
 <aside class="pb-related"><h2>Keep reading</h2><ul>{rel_links}
-<li><a href="index.html">Every guide, by category</a></li></ul></aside>
+{desk_link}<li><a href="index.html">Every guide, by category</a></li></ul></aside>
 </div></section>
 </article>
 """
@@ -1279,6 +1288,10 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
             + product_table(p)
         )
 
+    # T63 (10727edd): the thermometer desk from PR #167 covers the same two products in more depth.
+    desk_rail = ('<section><h2>More on thermometers</h2><ul><li><a href="../marketing/thermometers/index.html">'
+                 'The thermometer desk</a><p>Both thermometers row by row, plus guides on accuracy checks and '
+                 'turkey placement.</p></li></ul></section>') if slug == "meat-thermometers" else ""
     body = f"""
 <section class="pb-lead"><div class="pb-wrap">
   <p class="pb-kicker">Category &middot; <a href="index.html" style="color:inherit">Guides</a></p>
@@ -1289,7 +1302,7 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head"><div><h2 class="pb-h2">In this category</h2></div>
   <a class="pb-sec-link" href="index.html">All categories &rarr;</a></div>
-  <div class="pb-rail"><section><h2>Published</h2><ul>{lis}</ul></section></div>
+  <div class="pb-rail"><section><h2>Published</h2><ul>{lis}</ul></section>{desk_rail}</div>
 </div></section>
 {f'<section class="pb-sec"><div class="pb-wrap"><div class="pb-sec-head"><div><h2 class="pb-h2">The verified rows behind them</h2><p class="pb-sub">Read from the official pages on {e(CHECKED_ON)}. A dash means no official source states the value.</p></div></div>{tables}</div></section>' if tables else ''}
 """
