@@ -37,6 +37,7 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 
 | `arena/32788da6-zone2` (`32788da6`, **this session**) | `arena/32788da6-zone2` | **T64 — the Thermometer desk: question-shaped, reader-facing guides for the two products that have none (RQ-04).** P-04/P-05 resolve to meat thermometers and no published page answers a single buyer question about them. Builds a sourced section inside the Counter Notes publication, adds it to the existing feed and sitemaps, re-verifies every value it prints live on 2026-11-19, raises the irregularities found while doing so, adds this wave's suggestions/questions, integrates (gates → PR → merge → confirm Pages deploy → record). Does **not** touch T63's scope (`.github/workflows/pages.yml`, `tools/build_front.py`, `assets/css/publish.css`, the front pages it rebuilds). | claimed 2026-11-19 (UTC), in progress |
 | `arena/57eb4af5-zone2` | `arena/57eb4af5-zone2` | **T68 — final publication review, verification, and GitHub Pages deployment.** Re-verify the combined tree line by line against official sources, re-run every repository gate, package the deploy artifact, confirm no broken links, PR → merge → confirm Pages deploy → record. No product/source data changes; additive coordination record only. | claimed 2026-11-19 (UTC), in progress |
+| `arena/672f9c4c-zone2` (`672f9c4c`, **this session**) | `arena/672f9c4c-zone2` | **T73 (claimed as T72; renumbered when session `e078d7c5`'s T72/PR #190/#191 landed on `main` during this branch's flight) — close the last unfinished P1 row (S-04 / RQ-01: give every page its own title and meta description), measured not asserted.** `board/requirements.json` RQ-01 currently reads `overstated`, and this session re-measured the tree: **7 pages carry no `meta description` at all** (the 404 page and all six `revalidation/` pages), **4 titles are duplicated** (two `pages/categories/` bands share a title, `guides/meat-thermometers.html` and `marketing/thermometers/index.html` share one, and `pages/niches.html` shares one with `pages/modules/m-11-niche-discovery.html`), and **3 description strings are shared by more than one page** (`pages/` 39 pages on one string, `decisions/` 4 pages on one string, plus the 7 blanks). Fixed at each generator (`tools/build_site.py`, `tools/build_decisions.py`, `revalidation/scripts/build.py`), plus `404.html`; then a **new mechanical gate** so the property cannot regress. | claimed 2026-11-19 (UTC), in progress |
 | `arena/6998bc41-zone2` (`6998bc41`, **this session**) | `arena/6998bc41-zone2` | **T71 (claimed as T69; renumbered when `56aa1fac`'s T69/PR #180 and `5f7f77a4`'s T70/PR #183 landed) — close the open change requests CR-8, CR-9 and CR-10; port the surviving data corrections from stale PR #163; triage stalled PRs #162/#163/#172; final integration (gates → PR → merge → confirm Pages deploy → record).** | **done 2026-11-19** — PR [#188](https://github.com/kanlerxz87-cyber/Zone2/pull/188) merged 11:49:50Z (merge commit `e2a295c`); main run 44518297322 success incl. Pages deploy; live fetches verified |
 
 
@@ -8075,3 +8076,109 @@ open PR.
 - **Live site:** publication front page with disclosure above the fold, `shopnow047c-20` tagged `rel="sponsored"` Special Links, question-shaped buying guides, category subpages, executive summary, suggestions/decision board, questions register, Flagged for Review page — all verified gate-green before merge
 - **No data changes:** blanks stay blank; every valued row carries an official source link; other sessions' open PRs (#182 T69, #184 T70) left untouched
 - **T72: done**
+## T73 (claimed as T72) — session `arena/672f9c4c-zone2` (`672f9c4c`) — 2026-11-19 (UTC)
+
+**Scope claimed first** (commit `40bc195`, pushed before any edit): close **S-04 / RQ-01**, the only
+P1 row `board/data/requirements.json` still measured as unfinished ("give every page its own title and
+meta description"). Files: `tools/build_site.py`, `tools/build_decisions.py`,
+`revalidation/scripts/build.py`, `404.html`, `tools/seo_audit.py`, `tests/test_page_identity.py`,
+`.github/workflows/pages.yml` (one new step), `board/data/requirements.json`, `ledger/flags.json`,
+`ledger/sources.json`, prose counts in `README.md` / `EXECUTIVE_SUMMARY.md`, regenerated derived
+outputs through their builders, new `docs/verification-672f9c4c.md`, this record. No other session's
+branch, no product fact, no price, no intent field, no campaign row.
+
+### What was measured before any edit (2026-11-19)
+
+| Property | Before | After |
+|---|---|---|
+| Published pages | 219 | 219 |
+| Pages with **no** meta description | **7** (`404.html` + all six `revalidation/` pages) | **0** |
+| Distinct titles | 215 of 219 | **219 of 219** |
+| Description strings shared by >1 page | **3** (one string on 39 `pages/` files, one on 4 `decisions/` files, plus the 7 blanks) | **0** |
+
+The four duplicated titles were `Category band 4.00%` (C-04 vs C-OTH), `Category band 0.00%` (C-00 vs
+C-00b), `Niche discovery` (`pages/niches.html` vs `pages/modules/m-11-niche-discovery.html`) and
+`Meat thermometers` (`guides/meat-thermometers.html` vs `marketing/thermometers/index.html`).
+
+### How it was fixed
+
+At the **generator**, never in the output (`build_site.py --check` / `build_decisions.py --check`
+would overwrite a hand-edit and the replay proves it). Each replacement description is composed from
+two strings the page already publishes — its `<h1>` and its standfirst — so no new claim enters the
+site. Each title fix adds a fact already printed on the page (the band id, the empty ranking, the
+desk's own `<h1>`). `404.html` gained a description stating only what the page is.
+
+### The gate
+
+**D8 per-page identity** added to `tools/seo_audit.py` (an existing CI step): fails when any published
+page carries no description, or when two pages share a title or a description, measured over every page
+including `noindex` archives. **Negative controls:** `tests/test_page_identity.py`, 8 tests, new CI
+step — each of the three pre-T73 defects is injected into a temporary tree and must fire, the repaired
+shape must pass, and a blank description must not be reported as a duplicate (so a green build cannot
+come from a check that fired for the wrong reason).
+
+### Sources re-read
+
+**S67** — [Google Search Central, title links](https://developers.google.com/search/docs/appearance/title-link),
+the standard D8 and F-55 are measured against. **Scope limitation, stated not hidden:** this sandbox's
+outbound network reaches only `github.com`, `codeload.github.com`, `api.github.com`,
+`registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org`; direct `curl` to `developers.google.com`,
+`amazon.com` and `fsis.usda.gov` returns `SSL_ERROR_SYSCALL` (exit 000). S67 is therefore recorded from
+its stable published URL and scope and is **flagged for a live re-read by the next session with
+outbound access** — it is not presented as a fresh fetch. No earlier observation was re-dated.
+
+### Irregularity raised
+
+**F-55** (published on `flagged.html` and `pages/flags.html`, source S67): the brief carried S-04 as
+"Implemented 2026-11-16" for two days while the tree measured the opposite and no build step checked.
+Same failure mode as F-45 (a replay printing PASSED while the real runner refused to parse the
+workflow) and FB-01/FB-02 (prose counts drifted from their register). Register counts moved with the
+row in one pass: **54 → 55 flags** (26 open · 29 resolved via `tools/flag_state.py`), **49 → 50
+sources**, `CANONICAL_FLAG_COUNT` 54 → 55, plus the README/EXECUTIVE_SUMMARY prose counts and every
+regenerated surface.
+
+### Gates on this tree (pre-merge)
+
+`tools/ci_replay.py` **63/63 PASSED** (was 62; the D8 control step is the 63rd) · `tools/seo_audit.py`
+D1–D8 PASS over 226 pages · `tests/test_page_identity.py` 8/8 · `validate_data` 0 errors (55/55 flags,
+50 sources, 436 rows, 1315 links) · `audit_site` 7/7 (228 pages) · `build_site --check` 39/0 drift ·
+`build_decisions --check` 8/0 drift · `validate_board` all pass · `build_brief --check` +
+`validate_brief` green · `revalidation/scripts/verify.py` 6 pages/73 rows/0 failures ·
+`package_site` 228 pages/16 indexable · `verify_publication` ok (1453 sponsored anchors, 145 factual
+rows). Full detail: [`docs/verification-672f9c4c.md`](docs/verification-672f9c4c.md).
+
+### Not done, and why
+
+`ledger/products.json`, `shop/**` and every reader product page were out of scope (no product fact
+belongs to this task). CR-14 stays open — this session does not choose between the CHEF iQ warranty
+figures. S-20 / RQ-16 (mobile-first) stays unclaimed. Owner-only gates (authenticated enrollment,
+the five product-intent confirmations, Search Console, a permanent collector) are untouched.
+
+**Status:** implementation complete and every gate green; PR → merge → Pages-deploy confirmation
+recorded in the addendum below.
+
+### T73 close-out — PR #192 merged; Pages deployment verified — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#192](https://github.com/kanlerxz87-cyber/Zone2/pull/192) — `arena/672f9c4c-zone2` → `main`,
+  merged via `gh pr merge 192 --merge` at **2026-11-19T19:56:52Z**, merge commit
+  **`3efa3aae7d56a3018e10fa4dca996b82c50b1534`**.
+- **PR check:** `Build and verify` run 44603114374 — **pass** (1m52s). Deploy job correctly skipped on
+  the pull request.
+- **Main:** run **44603563106** `Build, verify and deploy` — **success**, every step green including the
+  new *Per-page identity gate negative tests* step and the post-deploy *Verify the live publication
+  rather than only upload success* step (which re-reads the live site and checks the committed SHA,
+  repeated disclosures, robots/canonical state, sponsorship, collection-off and the sitemap/RSS).
+  Pages build run **44603561969** — **success**.
+- **Branch hygiene:** the branch was rebased onto `main` (`54f1f43`) before the PR; the rebase rewrote
+  only this session's own three commits, so it was published with `--force-with-lease`. No other
+  session's commit was altered. The one conflict (`COORDINATION.md`, append-only) was resolved by
+  **keeping both sides**; session `e078d7c5`'s T72 row and close-out are intact and unedited.
+- **Deployed state verified by** the workflow's live step (the Pages origin is not reachable from this
+  sandbox — `curl` and `urllib` to `kanlerxz87-cyber.github.io` both fail with a TLS connection close,
+  the same allowlist limitation recorded in §4 of the verification record), **plus** a local sweep of the
+  exact `_site` artifact the workflow uploads: 16/16 indexable reader pages carry a description,
+  0 duplicated titles, 0 duplicated descriptions.
+- **Counts after merge:** 55 flags (26 open · 29 resolved), 50 sources, `CANONICAL_FLAG_COUNT = 55`;
+  RQ-01 now reads `matches` / `closed 2026-11-19 (T73)`.
+- **Not reversed:** F-55 stays open for owner review as published; **CR-14** stays open; **S-20 / RQ-16**
+  stays unclaimed; every earlier blank and open item is unchanged.

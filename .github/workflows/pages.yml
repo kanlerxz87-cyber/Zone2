@@ -545,6 +545,14 @@ jobs:
       - name: Price and issued-tag guard regressions
         run: python3 tests/test_price_guards.py && python3 tests/test_link_policy.py
 
+      # T72 (session arena/672f9c4c-zone2, 2026-11-19): D8 in tools/seo_audit.py is the gate that
+      # keeps S-04 / RQ-01 shut (every page has its own title and description). These are its
+      # negative controls: each of the three pre-T72 defects must fire, and the repaired shape
+      # must pass. A gate that has never been shown to fail is not a gate.
+      - name: Per-page identity gate negative tests (blank description, duplicate title,
+              duplicate description must each fire)
+        run: python3 tests/test_page_identity.py
+
       - name: Publication data and packaging mutation tests
         run: python3 tests/test_publication.py
 
