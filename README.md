@@ -537,3 +537,41 @@ briefing integrity). Guides are written with tokens (`{{v:P-01:Capacity}}`, `{{s
 `{{buy:P-04}}`) so a figure in prose is always the sourced value from the catalog, never retyped.
 The shared masthead and footer live in `tools/shop_layout.py` and are used by `tools/build_front.py`
 too, so the menu is defined once for the whole site. Owner decisions for this round: [`shop/briefing.html`](https://kanlerxz87-cyber.github.io/Zone2/shop/briefing.html).
+
+---
+
+## T72 — final integration: the Decision Room and the design brief (session `arena/1b09bb6d-zone2`, 2026-11-19)
+
+Two owner-facing surfaces the brief asks for by name are now published, and the two pull requests that
+carried them — open and untouched for more than eight hours — have been taken over under the board's
+60-minute rule, integrated, re-verified and released.
+
+- **[`decision-room.html`](https://kanlerxz87-cyber.github.io/Zone2/decision-room.html)** — 13 decisions
+  (9 open · 2 blocked · 1 fixed · 1 advisory), grouped by the question a reader would ask. Every row
+  carries the measurement behind it, **what each option costs**, **what each option gives up**, and the
+  **single owner answer that unblocks it**. 10 owner questions, 17 cited sources. Nothing applies itself.
+  Built by `tools/build_decision_room.py`, gated by `tools/verify_decision_room.py` (D1–D9) and
+  `tests/test_decision_room.py` (15 mutation tests — the gate must be able to fail).
+- **[`decision-prompt.html`](https://kanlerxz87-cyber.github.io/Zone2/decision-prompt.html)** — the design
+  brief the suggestions feed, written to be pasted verbatim: ten constraints, seven principles, and the
+  table of unanswered decisions each change depends on.
+- **`suggestions.html` / `questions.html`** now separate the *current release* from the *preserved
+  history*: the current count and date lead, and the earlier eighteen-row decision board is kept below
+  behind its own heading, unchanged.
+- **Repaired:** 22 reader-facing row labels were being clipped mid-sentence by a legacy dashboard
+  stylesheet rule that loaded on every page (10 on `flagged.html`, 7 on `questions.html`, 5 on
+  `publishing.html`), and every `tbody th` rendered uppercase. A scoped reset in
+  `assets/css/publication.css` restores wrapping and normal case; re-measured at 0 clipped / 0 uppercase
+  across the 15 affected pages.
+- **One defect the merge exposed:** both integrated branches had independently allocated the flag id
+  `CN-11`. `main` had already published it; the incoming row was renumbered **`CN-17`** so no duplicate
+  anchor ships and no existing cross-reference breaks.
+
+**Gates on the combined tree:** `tools/ci_replay.py` **65/65 PASSED** (strict YAML parse enabled) ·
+`verify_publication` `ok: true` — 230 HTML pages, 18 indexable, 1 453 sponsored product anchors, 172
+current factual rows each with an official source · `audit_site` 7/7 over 230 pages ·
+`verify_decision_room` PASS · note-overlap worst pair 0.163 against a 0.25 budget ·
+`validate_data` clean (54 flags, 49 sources, 108 rows).
+
+**Verification record:** [`docs/verification-1b09bb6d.md`](docs/verification-1b09bb6d.md) — ten official
+sources re-read live on 2026-11-19 with the quoted text beside each published claim.
