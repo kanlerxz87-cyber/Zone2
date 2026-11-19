@@ -6911,3 +6911,37 @@ resolved or partly resolved and retained.
 | Explicitly out of scope | `ledger/**`, `board/**`, `intake/**`, `brief/**`, `console/**`, `marketing/**`, `pages/**`, `assets/js/**`, third-party account settings, and any product/source value that cannot be checked from an official source. No identity mapping, price, rating, commission, conversion, or account claim will be inferred. |
 | First action | Claim committed and pushed before review or implementation, per the shared-board protocol. |
 
+
+### T63 coordination correction — 2026-11-19 UTC
+
+**Status: withdrawn before implementation; no reader-facing or workflow files changed by this session.**
+
+Immediately after the claim was pushed, the GitHub branch list showed seven newly active T63
+claims. The earliest dedicated reader-front scope is `arena/f669bf2c-zone2`; the overlapping
+workflow/front/shop scopes are already claimed by `arena/75efdf57-zone2`,
+`arena/6ce606cb-zone2`, `arena/10727edd-zone2`, `arena/1d0347fb-zone2`,
+`arena/37333afd-zone2` and `arena/33e03d63-zone2`. Per the task-board rule, this session will
+not edit files another active session has claimed and will not duplicate the reader-front,
+analytics, shop, workflow, ledger, or sitemap work.
+
+**Handoff observations (verified from GitHub's official API / this tree, not product facts):**
+
+- `.github/workflows/pages.yml` contains unresolved `<<<<<<<`, `=======`, and `>>>>>>>` markers
+  at lines 87–94 and 386–441. The workflow must be repaired by its current owner before it can
+  run any gate. This explains the GitHub Actions `failure` / zero-job runs observed for the
+  current branch and `main`; it is distinct from the successful legacy GitHub Pages deployment.
+- GitHub's Pages API reports `status: built`, source `main` / `/`, and public URL
+  `https://kanlerxz87-cyber.github.io/Zone2/` for commit `4398071d49fdda73c084aa6f3dedf4f72b268076`.
+  The latest legacy Pages deployment is therefore live, but it does **not** prove that the
+  malformed Actions workflow ran.
+- `python3 tools/ci_replay.py` passed its local 49-step replay on the unmodified tree. That is
+  useful coverage evidence, but it did not parse the workflow and cannot substitute for an
+  Actions run until the conflict markers are removed.
+- No new Amazon/product/commission/identity claim was made, because direct live source access
+  is outside this sandbox's allowed host list. Existing dated official-source links remain the
+  manual-review record; no value was refreshed or inferred here.
+
+**Sources for the handoff:**
+`https://api.github.com/repos/kanlerxz87-cyber/Zone2/pages` ·
+`https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44466573202` ·
+`https://github.com/kanlerxz87-cyber/Zone2/blob/main/.github/workflows/pages.yml`
