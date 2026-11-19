@@ -23,11 +23,11 @@ permissions:
 # T63 (session 10727edd, 2026-11-19): one group PER REF. With a single global `pages` group,
 # any session's pull-request run cancelled every other session's run, including the gate on
 # main (observed: run 44468560526, PR #164, cancelled 29 s in by another branch's run).
-# A newer push to the SAME ref still supersedes its older run. Deploys are serialised
+# T63 37333afd: do not cancel running checks, even on a newer push. Deploys are serialised
 # separately by the job-level group on `deploy` below, which never cancels.
 concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  group: pages-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:

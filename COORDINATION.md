@@ -7254,3 +7254,26 @@ PASS · `seo_audit.py` PASS · `verify_front.py` 15 pages G1–G10 PASS · `vali
 | Immediate irregularity | Literal unresolved Git conflict markers were found in the committed `.github/workflows/pages.yml`; CI/deployment cannot be assumed healthy merely because legacy Pages currently reports built. Will reproduce, repair and test. |
 | External gates | Associates account/report access, owner intent confirmations, Search Console ownership, a public writable analytics host, and authorized AI/API credentials cannot be manufactured. Implement runnable machinery and visible gates; do not claim external activation without evidence. |
 | Verification / completion | Fresh official-source checks with links; blank unknown fields; publish unresolved items on Flagged for Review; run builds/tests/link checks and browser checks; PR from this branch → merge if green → verify Pages build through GitHub API; append merge/deploy result here. |
+
+
+### T63 progress — measurement first, 2026-11-19
+
+Implemented the collector before new editorial content: `measurement/collector.py` (SQLite daily counters,
+strict static dimensions, 90-day retention, same-origin-only writes, DNT/GPC, global non-identifying abuse
+cap, no raw access logs); local-only first-party report imports for EV-04/05, dated SHA-256 provenance,
+idempotency/overlap checks, and an empty production ledger. Replaced the misleading browser-storage queue
+with a fail-closed memory-only client; no device storage, retry queue, inferred purchases or fake disclosure
+views. Committed Pages config remains OFF because static hosting cannot accept POST. The self-hosted
+service overrides the runtime config when actually running; a preview is never labelled production.
+
+Tests: 24 collector tests passed; 12 client privacy/behavior cases passed with synthetic inputs only.
+Workflow: removed both unresolved conflict blocks **retaining both intake and board checks**, separated PR/main
+concurrency groups, stopped cancellation races, and made local replay reject conflict markers and use shell
+`errexit`/`pipefail`. Repaired all six split-after-strip price checks (CR-T60-1 / CR-4). Existing affected
+validators and the 14-case readiness negative suite pass. Full combined-tree verification still pending.
+
+Official verification so far: Operating Agreement §§1/4/5; Program Policies (search, review/rating, no artificial
+clicks, IP/API caching and Agent provisions); FTC disclosure guidance; Amazon ASIN/text-link help; three
+manufacturer pages and all five short-link destinations. Exact URLs and scope will be in
+`docs/verification-37333afd.md`. Short-link compliance is unresolved, **not declared invalid**; no authenticated
+Associates tracking report or intended-product confirmation was obtained. No product price/rating copied.

@@ -113,7 +113,7 @@ def main() -> int:
             continue
         ran += 1
         print(f"\n=== [{n}/{len(all_steps)}] {name} ===", flush=True)
-        r = subprocess.run(["bash", "-c", body], cwd=str(REPO))
+        r = subprocess.run(["bash", "-e", "-o", "pipefail", "-c", body], cwd=str(REPO))
         if r.returncode != 0:
             failed.append(name)
             print(f"!!! FAILED: {name}")

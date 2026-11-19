@@ -1,0 +1,6 @@
+{
+  "enabled": false,
+  "endpoint": null,
+  "mode": "github_pages_static",
+  "reason": "GitHub Pages cannot run a writable collector. No events leave the browser until the site is deployed with the self-hosted service and a same-origin endpoint."
+}
