@@ -1804,6 +1804,17 @@ const FLAGGED_ROWS = [
     source: "https://www.amazon.com/dp/B0DZFD6R9Z",
     sourceIds: ["S62"],
   },
+  {
+    item: "F-54 — The CHEF iQ listing states its warranty two ways: two years in the bullets, three years in Item details",
+    detail: "Re-read live on 2026-11-19 by session 9ffe2d83 on https://www.amazon.com/dp/B0DZFD6R9Z: 'About this item' ends with 'Built for long-lasting durability with a two-year assurance provided by CHEF iQ', while the same page's Item details table gives 'Warranty Description: 3 Year'. Both statements are on the same official listing. This is the warranty half of Q-22, promoted to the flag register in the T68 counts pass (CR-9); the same read re-confirmed the 50-hour battery bullet (F-53), the long 'Specification Met' list (F-52) and that the page sells 1-, 2-, 3- and 4-probe sizes with B0DZFD6R9Z the 3-probe size. The thermometer desk and the shop publish the warranty row as a conflict and pick neither term.",
+    severity: "low",
+    impact: "Quoting either warranty term alone would state something the same official listing contradicts; the probe-size half of Q-22 remains an owner-intent question in the P-05 record (SG-14), not a flag.",
+    actionRequired: "Editor or owner: check the CHEF iQ user guide linked from the listing (Safety and product resources -> User Guide PDF) or the manufacturer's warranty page, record the term with its source; owner confirms the intended probe size in the P-05 product-intent fields.",
+    ledgerFlag: "F-54",
+    ledgerUrl: "pages/flags.html#F-54",
+    source: "https://www.amazon.com/dp/B0DZFD6R9Z",
+    sourceIds: ["S62"],
+  },
 ];
 /* END GENERATED: flags */
 

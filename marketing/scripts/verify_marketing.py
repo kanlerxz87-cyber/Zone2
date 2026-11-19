@@ -43,6 +43,11 @@ from link_builder import REQUIRED_SITE_DISCLOSURE  # noqa: E402
 ROOT = REPO / "marketing"
 FACTS = json.loads((ROOT / "data" / "facts.json").read_text(encoding="utf-8"))
 
+# Our own published origin (scheme + repo path). Absolute links under this prefix are internal
+# references, not external sources — see the same-origin branch in check_links (CR-8; contributed
+# by session 6998bc41 alongside T68's all-pages loop, kept in the union resolution).
+SITE_PREFIX = LIVE.rsplit("marketing/", 1)[0]
+
 OFFICIAL_HOSTS = {
     "www.amazon.com",
     "amazon.com",
@@ -109,6 +114,15 @@ def check_links(rel: str, doc: str) -> None:
                 fail(f"G3 {rel}: missing asset {ref}")
             continue
         if ref.startswith(("http://", "https://")):
+            # CR-8 union: the desk prints its published self-links as absolute URLs on our own
+            # origin. Same-origin references are internal, not sources: resolve them inside the
+            # repository and check they exist, instead of demanding they appear on the
+            # official-host allow-list. A different origin still falls through to G10.
+            if ref.startswith(SITE_PREFIX):
+                own = ref[len(SITE_PREFIX):]
+                if not (REPO / rel_path(own)).is_file():
+                    fail(f"G3 {rel}: absolute self-link does not resolve in the repo: {ref[:90]}")
+                continue
             host = re.sub(r"^https?://", "", ref).split("/")[0].lower()
             if host in MARKETPLACE_HOSTS:
                 if "sponsored" not in (a.get("rel") or "").lower():
