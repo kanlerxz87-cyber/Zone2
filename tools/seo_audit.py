@@ -27,8 +27,15 @@ CHECKS
                             page itself. Reported only, because the duplicate-content decision is an
                             owner decision recorded on the suggestions board (MQ-08 / DS-12), and the
                             marketing set is internally consistent.
+  D8  per-page identity     S-04 / RQ-01, which the decision board measures as the brief's only
+                            unfinished P1 row. Three mechanical properties over every published page:
+                            (a) it carries a non-empty `<meta name="description">`; (b) no two pages
+                            share a `<title>`; (c) no two pages share a description. Before T72 the
+                            tree failed all three — 7 pages had no description at all and one string
+                            served 39 URLs — and nothing failed the build, which is why the row
+                            stayed open while the brief called it "Implemented".
 
-Exit code 1 on any D1–D6 failure. D7 never fails.
+Exit code 1 on any D1–D6 or D8 failure. D7 never fails.
 
 Usage:
     python3 tools/seo_audit.py
@@ -79,17 +86,34 @@ class Refs(HTMLParser):
         self.robots: list[str] = []
         self.canonical: list[str] = []
         self.icons: list[str] = []
+        self.description: list[str] = []
+        self.title: list[str] = []
+        self._in_title = False
 
     def handle_starttag(self, tag: str, attrs) -> None:
         a = dict(attrs)
+        if tag == "title":
+            self._in_title = True
         if tag == "meta" and (a.get("name") or "").lower() == "robots":
             self.robots.append((a.get("content") or "").lower())
+        if tag == "meta" and (a.get("name") or "").lower() == "description":
+            self.description.append((a.get("content") or "").strip())
         if tag == "link":
             rel = (a.get("rel") or "").lower().split()
             if "canonical" in rel and a.get("href"):
                 self.canonical.append(a["href"])
             if ("icon" in rel or "shortcut" in rel) and a.get("href"):
                 self.icons.append(a["href"])
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "title":
+            self._in_title = False
+
+    def handle_data(self, data: str) -> None:
+        if self._in_title:
+            text = " ".join(data.split())
+            if text:
+                self.title.append(text)
 
 
 def parse_sitemap(path: Path) -> list[str]:
@@ -207,6 +231,42 @@ def main() -> int:
     for item in canonical_mismatch:
         notes.append(f"D7 canonical points elsewhere: {item}")
 
+    # ---- D8: per-page identity (S-04 / RQ-01) --------------------------------------------
+    # Deliberately measured over *every published page*, including the noindex archives: a
+    # duplicate title is a defect whether or not the page is advertised in the sitemap, and the
+    # brief's row says "every page" rather than "every indexed page".
+    missing_desc: list[str] = []
+    title_owner: dict[str, list[str]] = {}
+    desc_owner: dict[str, list[str]] = {}
+    for rel in pages:
+        parser = Refs()
+        parser.feed((REPO / rel).read_text(encoding="utf-8", errors="replace"))
+        desc = next((d for d in parser.description if d), "")
+        title = " ".join(parser.title).strip()
+        if not desc:
+            missing_desc.append(rel.as_posix())
+        else:
+            desc_owner.setdefault(desc, []).append(rel.as_posix())
+        if title:
+            title_owner.setdefault(title, []).append(rel.as_posix())
+    dup_titles = {k: v for k, v in title_owner.items() if len(v) > 1}
+    dup_descs = {k: v for k, v in desc_owner.items() if len(v) > 1}
+    if missing_desc:
+        problems.append(
+            f"D8 per-page identity: {len(missing_desc)} published page(s) carry no meta description — "
+            + ", ".join(missing_desc[:12]) + (" …" if len(missing_desc) > 12 else "")
+        )
+    if dup_titles:
+        problems.append(
+            f"D8 per-page identity: {len(dup_titles)} title(s) shared by more than one page — "
+            + "; ".join(f"{k!r} on {len(v)} pages" for k, v in sorted(dup_titles.items())[:6])
+        )
+    if dup_descs:
+        problems.append(
+            f"D8 per-page identity: {len(dup_descs)} description(s) shared by more than one page — "
+            + "; ".join(f"{k[:60]!r}… on {len(v)} pages" for k, v in sorted(dup_descs.items())[:6])
+        )
+
     # ---- D5: marketing/sitemap.xml must cover marketing/** ---------------------------------
     m_sitemap = REPO / "marketing" / "sitemap.xml"
     m_pages = [p for p in pages if p.parts[0] == "marketing"]
@@ -241,6 +301,10 @@ def main() -> int:
     print(f"  D5 marketing sitemap   {'PASS' if not any(p.startswith('D5') for p in problems) else 'FAIL'}")
     print(f"  D6 favicon             {'PASS' if not missing_icons else 'FAIL'}")
     print(f"  D7 canonical (report)  {len(canonical_mismatch)} page(s) point elsewhere")
+    d8_ok = not (missing_desc or dup_titles or dup_descs)
+    print(f"  D8 per-page identity   {'PASS' if d8_ok else 'FAIL'}"
+          f"  ({len(pages) - len(missing_desc)}/{len(pages)} described, "
+          f"{len(title_owner)} distinct titles, {len(desc_owner)} distinct descriptions)")
 
     for note in notes:
         print(f"  note: {note}")

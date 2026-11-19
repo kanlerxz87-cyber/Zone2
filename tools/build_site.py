@@ -36,6 +36,29 @@ SITE_NAME = "Zone2"  # never an Amazon mark - Participation Requirements rule R-
 # Shared by the <meta description> and the og:description, so the two cannot drift apart.
 HUB_DESCRIPTION = ("Source-verified Amazon affiliate research platform: category data, compliance controls, "
                  "verification log and open flags. Every table row links to an official source or is left blank.")
+
+# T72 (session arena/672f9c4c-zone2, 2026-11-19): S-04 / RQ-01 is the only P1 requirement row the
+# decision board still measures as `overstated`, and the reason is this namespace. Every one of the
+# 39 generated pages/ files printed HUB_DESCRIPTION verbatim, so 39 URLs competed with one identical
+# summary, and two category bands plus niches.html shared a <title> with another page. A page's own
+# lead line is already written for every caller (it is the visible standfirst on each page), so the
+# description is DERIVED from it rather than newly invented: title + own lead, never a new claim.
+# The gates that police this are tools/validate_headings.py (structural) and the D8 check in
+# tools/seo_audit.py (discoverability); board/requirements.json RQ-01 is re-measured from the tree.
+def page_description(title: str, lead: str) -> str:
+    """The page's own summary, composed only of strings the caller already publishes on the page.
+
+    Nothing is added that the page does not already say in its <h1> and standfirst, and the brand is
+    appended (not prepended) so a search result reads the distinguishing words first.
+    """
+    title, lead = " ".join(title.split()), " ".join(lead.split())
+    text = f"{title}: {lead}"
+    if len(text) <= 160:
+        return f"{text} · {SITE_NAME}"
+    trimmed = text[:157].rsplit(" ", 1)[0].rstrip(",;:·—-")
+    return f"{trimmed}…"
+
+
 # Final integration 2026-11-14 (session 4338f55e): the generated pages/ namespace was branded
 # "Northstar", which is the name of the *preserved earlier prototype* kept at northstar/. The
 # published site is one product, so the findings namespace now carries the same brand as the
@@ -198,8 +221,11 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
             continue
         active = " active" if href == rel else ""
         items.append(f'<a class="nav-link{active}" href="{up}{esc(href)}">{esc(label)}</a>')
+    # T72: the page's OWN summary, not the namespace's hub summary. `lead` is the standfirst this
+    # page already renders under its <h1>, so the description adds no claim the page does not make.
+    description = page_description(title, lead)
     head_tags = head_block("pages/" + rel, title=f"{title} · {SITE_NAME}",
-                            description=HUB_DESCRIPTION, site_name=SITE_NAME)
+                            description=description, site_name=SITE_NAME)
     flag_count = len(FLAGS["flags"])
     links = []
     for rel, label in SIBLINGS:
@@ -213,7 +239,7 @@ def render(rel: str, title: str, lead: str, body: str, *, depth: int = 0, badge:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{esc(HUB_DESCRIPTION)}">
+<meta name="description" content="{esc(description)}">
 <meta name="robots" content="index,follow">
 <title>{esc(title)} &middot; {esc(SITE_NAME)}</title>
 {head_tags}
@@ -632,7 +658,11 @@ def page_category(g: dict) -> str:
         + panel("Per-product economics for this band", table(["Metric", "Value", "Basis"], [[text_cell(a), status_pill(b) if b == "not published" else text_cell(b), text_cell(c)] for a, b, c in per_product]))
         + panel("How the pipeline uses this band", checklist(esc(s) for s in steps))
     )
-    return render(f"categories/{g['slug']}.html", f"Category band {g['rate_pct']}%", ", ".join(g["categories"]), body, depth=1)
+    # T72: rate alone cannot identify a band — two published rates are each carried by two bands
+    # (4.00% by C-04 and C-OTH, 0.00% by C-00 and C-00b), so "Category band 4.00%" was emitted twice.
+    # The band id is printed in the page's own detail table ("Band id"), so adding it adds no claim.
+    return render(f"categories/{g['slug']}.html", f"Category band {g['rate_pct']}% ({g['id']})",
+                  ", ".join(g["categories"]), body, depth=1)
 
 
 def page_modules_index() -> str:
@@ -960,7 +990,11 @@ def page_niches() -> str:
         + panel("Inputs required before any niche may be ranked", table(["Required input", "State", "Where it must come from", "Source"], rows))
         + panel("Row schema the queue will use", "<pre class=\"code\">" + esc(json.dumps(NICHES["row_schema"], indent=2, sort_keys=True)) + "</pre>")
     )
-    return render("niches.html", "Niche discovery", "The method and the filter are sourced; the ranking stays empty until demand data exists.", body)
+    # T72: `modules/m-11-niche-discovery.html` renders the module's own name, "Niche discovery", so
+    # these two pages shared a <title>. The page's own standfirst distinguishes it: the method is
+    # here, the ranking is not. Both halves are already printed on the page.
+    return render("niches.html", "Niche discovery: method and empty ranking",
+                  "The method and the filter are sourced; the ranking stays empty until demand data exists.", body)
 
 
 def page_tracking() -> str:
