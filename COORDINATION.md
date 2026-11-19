@@ -7546,7 +7546,7 @@ production collection, enrollment/intent/reports and CN-08). No user's manual an
 
 ## T68 — claim: session `arena/9ffe2d83-zone2` (`9ffe2d83`) — 2026-11-19 (UTC)
 
-**Status:** claimed, in progress (written before any file in the scope below was edited).
+**Status:** claimed → in progress → **done** (close-out record at the end of this file; PR #185 merged `4374bda`, Pages deployment 7911653991 success). Written before any file in the scope below was edited.
 
 **Coordination check at claim:** `gh pr list --state open` → #162 (draft), #163, #172, all
 CONFLICTING with current `main` (605e49f). Their branches' last commits are 06:15–06:20Z; it is
@@ -7714,6 +7714,75 @@ the run list rather than from a page fetch.
 edited only to insert the new gate step, and no open PR (#162, #163, #172) was merged or closed.
 Sources, the exact source list and the reproduction method: `docs/verification-5f7f77a4.md`.
 
+---
+
+## T68 close-out — session `arena/9ffe2d83-zone2` (`9ffe2d83`) — **DONE** (2026-11-19 UTC)
+
+**Session registry.** `arena/9ffe2d83-zone2` · branched from `605e49f` (PR #178 merge) · role:
+final integration for this wave (CR-7…CR-10 closure + stale-PR takeover) · status **done**.
+**Task-ID collision (kept, disambiguated by session id):** three sessions used **T68** today —
+`57eb4af5` (publication review, PR #179), `5f7f77a4` (duplicate-content repair, PRs #183/#186)
+and this session (CR-7…CR-10 final integration). All records were merged in full; no id was
+reused for a different finding, and the rows are told apart by session id, per the board's
+earlier T21/T63 renumbering precedent. This session keeps the label **T68 / 9ffe2d83**.
+
+**Result — the integration PR:**
+- **PR [#185](https://github.com/kanlerxz87-cyber/Zone2/pull/185)** merged
+  **2026-11-19T11:20:16Z** as **`4374bdaf52605e1804c702c6219da1142b077b6e`**.
+- PR check run [44513480811](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44513480811)
+  — "Build and verify" **success** (62-step workflow incl. note-overlap gate added in #183).
+- Main run [44513909269](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44513909269)
+  — **success**: Build and verify, Deploy to GitHub Pages, and the read-only live verifier.
+- **Deployment 7911653991** (environment `github-pages`) tied to `4374bda`: state **success**
+  11:22:33Z; GitHub Pages API reports **`built`**. Live fetch after deploy:
+  `flagged.html` serves **F-54** with its S62 source link, and the concurrently merged CN-11
+  record — both chronologies present on one live page.
+
+**What shipped (verified 2026-11-19, full evidence: `docs/verification-9ffe2d83.md`):**
+- **CR-8 closed** — `marketing/scripts/verify_marketing.py`: G1–G10 over every rendered page,
+  thermometer desk included; `www.fsis.usda.gov` allow-listed after the three FSIS sources were
+  fetched live (T3/T4/T5; both "Last Updated" dates match the desk's labels). Negative-tested:
+  FSIS removal → 34 G10 failures on desk pages; desk-page mutation → G9 failure.
+- **CR-9 closed** — Q-22's warranty conflict promoted to **F-54** (Q-21 already F-44; F-45…F-53
+  taken) after re-reading both warranty statements live on `amazon.com/dp/B0DZFD6R9Z`; one
+  counts pass: `CANONICAL_FLAG_COUNT` 54, EXECUTIVE_SUMMARY/README prose, regenerated `pages/`,
+  root `flagged.html`, Owner's Console. `validate_data` 54/54, `audit_site` prose counts PASS.
+- **CR-10 verified already corrected upstream** — stale note absent from `brief/data/summary.json`;
+  the four state-table counts are tokens re-measured by `validate_brief` (passing). Evidence
+  recorded, no edit (as the claim promised).
+- **CR-7 verified already done** — front page links `marketing/thermometers/index.html` (2
+  anchors). Evidence recorded, no edit.
+- **#163 salvaged** — TP-03's unsourced buyer-regret claim removed; RQ-05's self-contradictory
+  og:image sentence now prints four derived tokens incl. the new `og_full` metric.
+- **#162/#163/#172 closed** with disposition comments:
+  [#163 comment](https://github.com/kanlerxz87-cyber/Zone2/pull/163#issuecomment-7007403266) ·
+  [#172 comment](https://github.com/kanlerxz87-cyber/Zone2/pull/172#issuecomment-7007406321) ·
+  [#162 comment](https://github.com/kanlerxz87-cyber/Zone2/pull/162#issuecomment-7007406855).
+  No branch deleted or force-pushed; each two-dot diff against `main` would have reverted
+  shipped tooling (−19,907 and −15,108 lines).
+
+**Merge hygiene with the concurrent sessions:** `main` advanced twice during this session's
+flight (PR #183 by `5f7f77a4`, PR #186 by the same session). Both were merged into this branch
+before the PR: COORDINATION/EXECUTIVE_SUMMARY conflicts resolved union-style (both records
+kept verbatim), generated surfaces (`board/*`, `flagged.html`, front pages) resolved by
+regeneration from the combined data, then **ci_replay 62/62** on the combined tree before the
+PR opened. No other session's PR was merged, closed or edited except the three stale ones this
+session took over under the 60-minute rule (all >4 h with no commits at takeover).
+
+**Gates (combined tree, pre-merge):** `ci_replay` **62/62** (incl. 252 viewport checks, 24-page
+a11y scan, note-overlap gate), `validate_data` (54 flags / 49 sources / 108 checks), `audit_site`
+(228 pages), `validate_board`, `validate_brief`, `validate_intake`, marketing verifier
+**27 pages (desk included)**, publication contract, sitemap/SEO/head-meta.
+
+**Still open (not silently completed):** every external gate unchanged — CN-01 intent/enrolled
+attribution, CN-02 permanent collector hosting, CN-03 Search Console/report imports, CN-04
+human/privacy review, CN-08 Pages source mode, CN-09 runtime advisory — plus **OBS-1**:
+`tools/build_thermometers.py`'s docstring still describes CR-8 as open (comment-only, outside
+this claim; recorded here for its owner). Dated historical prose ("22 CI steps" in the
+2026-11-15 addendum; "F-01…F-48 after T63"; the brief namespace's three-link-era rows) was left
+as history on purpose (OBS-2/OBS-3 in the verification record).
+
+**This close-out record ships via PR [#187](https://github.com/kanlerxz87-cyber/Zone2/pull/187).**
 ### T70 (`5f7f77a4`) — close-out: merged, main CI green, Pages deployed, live pages verified
 
 - **PR:** [#183](https://github.com/kanlerxz87-cyber/Zone2/pull/183), merged **2026-11-19T11:11:51Z** as
