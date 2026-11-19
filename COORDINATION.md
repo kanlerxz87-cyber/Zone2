@@ -6897,3 +6897,19 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Open** — 171 of 171 pages still collapse |
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
+
+---
+
+## T63 claim — session `arena/75efdf57-zone2` (session `75efdf57`) — 2026-11-19 (UTC)
+
+**Takeover basis.** `gh pr list --state open` is empty; `main` is at `4398071` (PR #161); the last
+commit on any session branch is >24 h old, so every "in progress" row in the registry is past the
+60-minute stale rule. No live claim overlaps the scope below.
+
+**Branch note.** The board asks for `session-<id>/<task>` branch names. The Arena platform pins
+this session to `arena/75efdf57-zone2` and forbids creating other branches, so all T63 work lands
+there (same convention every prior Arena session on this board followed).
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T63 | **Shop-first front of house + repair the broken CI workflow.** (a) `.github/workflows/pages.yml` has carried unresolved merge-conflict markers (`<<<<<<< HEAD` at column 0, lines 87 and 386) since PR #158/#161, so GitHub rejects the file and every workflow run since reports `failure` with **0 jobs** — not "cancelled runs" as the T62 record states. Resolve by keeping **both** sides (T60 intake steps and T62 board steps); add a conflict-marker guard to `tools/ci_replay.py`, whose line parser silently skipped the markers and reported 49/49. (b) Rebuild `index.html` (via `tools/build_front.py`) as a publication front page that **leads with the five products**, one reader nav, one "Behind the scenes" group, every dashboard reachable from the footer, disclosure strip under the masthead + footer. (c) NEW `shop/` namespace: shop index, two category pages (air fryers, meat thermometers), five product pages, six question-shaped buying guides (the four working titles in the brief + two thermometer guides), an owner briefing page (executive summary, suggestions to choose from, open questions with how-to-find-out). Every spec row links to its official source; values re-read live 2026-11-19; blanks stay blank. (d) New flags appended to `ledger/flags.json`; sitemap + feed entries; executive-summary addendum. (e) Gates → PR → merge → confirm Pages deploy → record. | **claimed 2026-11-19, in progress** | `arena/75efdf57-zone2` (75efdf57) | `.github/workflows/pages.yml` (conflict resolution + additive shop steps only), `tools/ci_replay.py` (marker guard only), `tools/build_front.py` (index + nav/footer), NEW `tools/build_shop.py`, NEW `tools/validate_shop.py`, NEW `shop/**`, NEW `shop/data/*.json`, NEW `assets/css/shop.css`, NEW `assets/img/shop/*`, `ledger/flags.json` (append-only new rows), regenerated derived outputs via existing builders (`flagged.html`, `sitemap.xml`, `marketing/feed.xml` only if its builder supports it), NEW `docs/verification-75efdf57.md`, `EXECUTIVE_SUMMARY.md` (additive section), `README.md` (additive), `COORDINATION.md` (append-only). **Excluded:** every other namespace's data and generators, any verified value not re-read from an official page this session. |
