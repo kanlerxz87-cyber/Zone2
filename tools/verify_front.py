@@ -19,7 +19,9 @@ pages as they sit on disk and fails the build if any of the project's own rules 
   G9  reader links (incl. the shop) stay in the primary navigation; owner dashboards are grouped under one
       accessible Project & tools disclosure and remain reachable from the footer;
   G10 the current executive-summary product rows match the five intent records and carry
-       official Amazon links, with intent fields still explicitly blank.
+       official Amazon links, with intent fields still explicitly blank;
+  G11 the suggestion/question register bylines use the page-update date, not an older
+       product-source check date.
 
 It is deliberately strict about the blank rule: an unverified value rendered as a plain
 number is treated the same as a fabricated one, because a reader cannot tell them apart.
@@ -213,6 +215,17 @@ def checks() -> list[str]:
             for row in re.findall(r'<tr\b[^>]*>(.*?)</tr>', h, re.S):
                 if "<td" in row and not re.search(r'href="https://(?:www\.)?(?:amazon\.com|affiliate-program\.amazon\.com|ftc\.gov|developers\.google\.com|docs\.github\.com|support\.google\.com)', row):
                     fail(errors, f"G10 {rel}: summary table row has no official external source link")
+
+        # ---- G11: page freshness is distinct from source freshness -----------
+        if rel in {"suggestions.html", "questions.html"}:
+            sys.path.insert(0, str(ROOT / "tools"))
+            from build_front import CHECKED_ON, UPDATED_ON
+            current = f"last updated {UPDATED_ON}"
+            stale = f"last updated {CHECKED_ON}"
+            if current not in h:
+                fail(errors, f"G11 {rel}: current page-update label {current!r} is missing")
+            if CHECKED_ON != UPDATED_ON and stale in h:
+                fail(errors, f"G11 {rel}: source-check date is incorrectly presented as the page-update date")
 
         # ---- G8: no invented performance metrics ------------------------------
         for m in VANITY_NUM_RE.finditer(h):

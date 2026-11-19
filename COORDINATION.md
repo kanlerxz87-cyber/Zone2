@@ -7562,16 +7562,52 @@ production collection, enrollment/intent/reports and CN-08). No user's manual an
 **Still open (non-blocking, per prior sessions):** intended ASIN/listing/date/source confirmations, enrolled Associates attribution, production collector host, Search Console ownership and real reports, CN-08 administrator-only Pages source-mode setting. None of these are blocking; all are published with source links on Flagged for Review.
 
 **Sources:** All official sources cited in prior session records (Amazon Associates Operating Agreement §5, Program Policies, FTC Endorsement Guides, Google qualify-outbound-links, manufacturer listing pages) remain the governing references; no new source claims are introduced by this session.
+## T69 claim — session `arena/56aa1fac-zone2` — 2026-11-19 (UTC)
 
-## Session record — `arena/698addcd-zone2` (T69)
+**Status: in progress.** Baseline is the retained canonical `main` tree at `605e49f9aa66df9f1f87f6bc000ff3437ce6f2b4` (PR #178). The live product-first site, source-gated publication, suggestion/question registers, and measurement service are already present; this narrow task fixes one stale reader-facing freshness label found during review.
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T69 | Correct the generated suggestion/question page “last updated” date: those pages contain owner directions and release prerequisites dated 2026-11-19, while the renderer currently prints the earlier source-check date 2026-11-16. Use the publication/update date for page freshness, preserve the source-check date wherever it means source verification, and add a regression check. No product facts, intent confirmations, campaign metrics, owner choices, or external account state are changed. | claimed 2026-11-19, in progress | `arena/56aa1fac-zone2` (`56aa1fac`) | `tools/build_front.py`, generated `suggestions.html` and `questions.html`, `tools/verify_front.py`, append-only `COORDINATION.md` |
+
+**Takeover note:** stale open PRs #162 and #172 both include some of the renderer/output scope. Their newest commits were at 2026-11-19 06:15:38Z and 06:20:33Z respectively; at this claim they were more than 60 minutes old. The current `main` already retains the published implementation from subsequent integration work. This session takes over only the isolated freshness-label correction, does not reapply or discard either PR’s other changes, and will not close or merge those PRs.
+
+**Date evidence inspected:** `docs/board-9251f262.json` carries owner-direction dates of 2026-11-19 and a `t63_note` dated 2026-11-19; the current question-register addendum is dated 19 November 2026. `tools/build_front.py` separately defines `CHECKED_ON` (2026-11-16) and `UPDATED_ON` (2026-11-19), but the suggestion and question bylines incorrectly use `CHECKED_ON` for “last updated.”
+
+**Rebase/conflict record:** During the initial claim push, `origin/main` advanced from `605e49f` to `138b0eb` through PR #179 (session `57eb4af5`). The rebase conflicted at the shared append-only end of this file. Both the merged T68 close-out and this session's claim are retained; this task is T69 because T68 was used by the merged session. No upstream content was discarded.
+
+
+### T69 implementation checkpoint — local verification complete; PR/deploy pending
+
+- Replaced the “last updated” label on the generated suggestion and question registers with `UPDATED_ON` (2026-11-19); source-check references continue to use `CHECKED_ON` (2026-11-16). No product, tag, attribution, choice, or measurement value changed.
+- Added gate G11 in `tools/verify_front.py`. Injecting the former 2026-11-16 byline into each page separately made G11 fail as intended; the current generated pages pass.
+- **Local verification:** `python3 tools/build_front.py --check`; `python3 tools/verify_front.py` (16 pages); and `python3 tools/ci_replay.py` with strict YAML parsing enabled (PyYAML installed only in a temporary `/tmp` virtualenv): **61/61 steps PASS**. The replay packaged 228 HTML pages (16 indexable), checked 1,451 product anchors and 138 current factual rows, then passed 252 browser viewport checks and 24 accessibility-page scans. Browser events were synthetic local fixtures, not campaign data.
+- **Date evidence:** `docs/board-9251f262.json` owner directions and `t63_note`, plus the current dated release-prerequisite section in `questions.html`. **No external product/compliance claim was added or re-verified in this narrow correction.** Official-source links and all existing unknowns remain unchanged.
+- **Irregularities unchanged and non-blocking:** supplied short-link compliance remains unresolved in FLG-003; intended ASIN/listing/date/source fields remain blank; the owner-provided tag is not account-authenticated; static GitHub Pages collection remains disabled; no authorized Associates or Search Console reports are present. No report, traffic, order, conversion, popularity, or revenue number was added.
+- **Status:** implementation ready for the current-branch PR; actual hosted check, merge and Pages deployment still pending and will be recorded below after they occur.
+
+### T69 close-out — PR #180 merged; Pages deployment verified — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#180](https://github.com/kanlerxz87-cyber/Zone2/pull/180), merged 2026-11-19 10:56:42Z as merge commit `e081f42fb888ba71cff0ff4b35d34b0e3523de41`.
+- **PR check:** [Build and verify run 44510018788](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44510018788) passed on head `a488425`; the PR deploy job was correctly skipped.
+- **Main verification and deployment:** [run 44510299668](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44510299668) completed successfully on the merge SHA. Both **Build and verify** and **Deploy to GitHub Pages** passed, including the workflow’s read-only live-publication verification step. GitHub Pages deployment `7911139841` has status `success` and environment URL `https://kanlerxz87-cyber.github.io/Zone2/`; the Pages API reports `built` from `main` at `/`.
+- The published suggestion and question registers now identify 2026-11-19 as their page-update date; no source-check date or data row was changed. G11 rejects the former stale 2026-11-16 byline on either register.
+- All prior non-blocking review gates remain as noted in the implementation checkpoint: FLG-003 short-link compliance unresolved; intended product records blank; tracking ID not account-authenticated; production collection off until an authorized persistent host exists; no authorized Associates/Search Console reports. No performance or revenue claim was added.
+
+## Session record — `arena/698addcd-zone2` (T70)
 
 **Branch:** `arena/698addcd-zone2` (base `main` @ `138b0eb`, merge of PR #179). **Claimed:** 2026-11-19 (UTC). **Status: in progress.**
+
+> **ID note.** This session claimed "T69" before `arena/56aa1fac-zone2` merged its own T69 (the
+> freshness-label correction, PR #180) to `main`. Per the board's existing precedent, the merged
+> claim keeps the id and this one is renumbered **T70**. No work was dropped; only the label moved.
+> The conflict was in the shared append-only end of this file and both chronologies are retained.
 
 **Role:** final integration session for this branch. No other branch is active on `main` as of the claim
 (`gh run list` shows main green at `138b0eb`); PRs #162/#163/#172 are stale drafts from earlier
 sessions and are left untouched — not merged, not closed, not rebased by this session.
 
-**Task (T69):** the owner asked for (a) a run of suggestions that would feed a design prompt for a
+**Task (T70):** the owner asked for (a) a run of suggestions that would feed a design prompt for a
 polished, marketing-led affiliate site, (b) a decision-ready register of the questions and missing
 information those choices depend on, and (c) fixes for defects found while reviewing the shipped site
 line by line. This session therefore does three things and nothing else:
@@ -7592,4 +7628,3 @@ observation, intent confirmation or campaign number is altered by this session.
 **Not in scope:** product/source data (`shop/data/*.json`, `content/*.json`, `coordination` board data),
 the shop `noindex` boundary (raised as a decision, not changed — see DR-01), and any other session's
 open PR.
-
