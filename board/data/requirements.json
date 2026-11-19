@@ -248,7 +248,7 @@
    "verdict": "no-status-given",
    "measured": "{{viewport_pages}} of {{pages}} pages declare a viewport. A sticky element appears on 9 pages, all of them in one operator namespace, none of them the comparison table.",
    "evidence": "Measured across every published page.",
-   "gap": "The comparison table has no sticky bar. The row is unowned: no session has claimed it and the brief gives it no status, which is the profile of a row nobody has started.",
+   "gap": "Partly done on 2026-11-19 (T74, session aecb287a), measured in headless Chromium at a 390 px viewport. Done: a mobile type floor (text under 11 px is raised to 11 px at 780 px and below, desktop unchanged), 44 px minimum targets on header, footer, filter and button controls, and a phone-only sticky bar on compare.html. Still open: sub-11 px labels on the marketing desk and flagged tables (a separate stylesheet), and small inline targets inside tables and chips. Requires a sign-off pass before the row can be called finished.",
    "source_ids": [
     "BD-21"
    ]
@@ -275,10 +275,10 @@
    "requirement": "Complete the internal linking: every article reaches the comparison, the buying guide and its category pillar",
    "brief_status": "Implemented 2026-11-16",
    "measured_status": "partly",
-   "verdict": "overstated",
+   "verdict": "matches",
    "measured": "{{guides_unlinked}} of {{guide_pages}} reader and guide pages reach none of the comparison, the buying guide or the guides index. All of them are in one namespace, and they link to the marketing front page instead — which is one hop short of the row's requirement.",
    "evidence": "Measured by following every internal href on each reader and guide page.",
-   "gap": "{{guides_unlinked}} pages, one hop each. Mechanical.",
+   "gap": "Closed in the tree on 2026-11-19 (T74, session aecb287a). The four journal articles gained a 'Where to go next' block linking the comparison, the buying guide and the guides index. The measured count is {{guides_unlinked}} reader pages without one of those links.",
    "source_ids": [
     "BD-21"
    ]
