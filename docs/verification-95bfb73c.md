@@ -63,7 +63,10 @@ it caught it.
 ## 3. The CI failure on #194 — what is known and what is not
 
 Run `44605391629` failed step 21, `Structural audit (fragments, spec sources, prose counts, orphans,
-disclosure)`, whose whole body is `python3 tools/audit_site.py`. **The failure could not be reproduced**, and this record states that rather than inventing a cause:
+disclosure)`, whose whole body is `python3 tools/audit_site.py`. **SUPERSEDED — the failure WAS found
+and fixed; see §3a below.** This section is kept as written at the time, because the reasoning that
+went into the wrong answer is itself the finding: not being able to reproduce it locally was treated
+as evidence that the code was fine, when in fact the local interpreter was the thing that differed.
 
 | Tree tested | Result |
 |---|---|
@@ -84,7 +87,54 @@ GitHub's job-log endpoint returned `SSL_ERROR_SYSCALL` / `EOF` from this sandbox
 the runner's own diagnostic line is **not available to this session**. What *is* established: the
 failure is not present in the code on any of the four trees that could be tested, it was reproducible
 on the CI runner twice, and the tree that this session merges passed the same 66-step replay locally
-end to end. **Flagged as an unresolved environment question, not asserted as fixed.**
+end to end. **At the time this was flagged as an unresolved environment question rather than asserted
+as fixed — and §3a below is what it actually was.**
+
+---
+
+## 3a. The real cause — found on the third CI run, fixed at both layers
+
+The failure was located by temporarily rewriting the step so its output became check-run annotations
+(`sed 's/^/::error::/'`), because GitHub's job-log host (`results-receiver.actions.githubusercontent.com`)
+returned `SSL_ERROR_SYSCALL` from this sandbox on every route. The annotations named it exactly:
+
+```
+flagged.html:23: 'docs/verification-t69.md#m5' — fragment #m5 addresses nothing in docs/verification-t69.md
+flagged.html:23: 'docs/verification-t69.md#m4' — fragment #m4 addresses nothing in docs/verification-t69.md
+```
+
+**The defect.** `docs/verification-t69.md` line 113 printed raw element names in prose —
+`` `<item><title>` `` — with **no closing `</title>`**. In an HTML document `<title>` is **RCDATA**:
+every character after it is text, not markup, until a `</title>` appears. `tools/audit_site.py` reads
+every published page with `html.parser` — `.md` files included — so the unclosed tag swallowed the
+`<a id="m4">` … `<a id="m7">` anchors below it, and the five `flagged.html` citations to `#m4`/`#m5`
+reported as dead.
+
+**Why every local run passed.** Python **3.13** — which the runner resolves `python3` to — and Chrome
+implement the RCDATA rule for `<title>`. Python **3.11**, which is what this sandbox has, does not: it
+reports `m1…m7` as element ids and the gate passes. That single version difference is the whole
+explanation for four locally-green trees and two red CI runs.
+
+**Two fixes, one at each layer.**
+
+1. **The document.** The element names are now described rather than printed, so the anchors survive
+   any parser. No number, measurement or conclusion on that page changed.
+2. **The gate.** `check_fragments()` no longer parses Markdown as HTML at all. A `.md` target is
+   resolved by the new `markdown_anchors()`, which reads literal `id=` attributes and derives
+   GitHub's heading slugs by regex. The gate's answer can no longer depend on the interpreter.
+
+**Negative-tested**, because a gate that cannot fail is decoration: deleting `<a id="m5"></a>` still
+fails `audit_site` with exit 1 and names the exact citation.
+
+**A general sweep** for the same class found the unclosed-`<title>` pattern in six more `.md` files
+(`COORDINATION.md`, `docs/audit-2026-11-15.md`, `docs/repo-review.md`,
+`docs/verification-5d6d2254.md`, `docs/verification-5f7f77a4.md`, `docs/verification-672f9c4c.md`,
+`docs/verification-8fb7c287.md`). None of them carries an anchor after the tag, so none was broken —
+but all seven are one anchor away from the same failure.
+
+**The lesson worth keeping:** "it passes locally" was evidence about the interpreter, not about the
+tree. When a gate disagrees with CI and the tree is identical, the next thing to compare is the
+toolchain, not the data.
 
 ---
 
