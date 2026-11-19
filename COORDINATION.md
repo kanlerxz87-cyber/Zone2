@@ -6897,3 +6897,17 @@ resolved or partly resolved and retained.
 | CR-4 | Fix the inverted price-rule ordering in all 4 copies | **Open** — 171 of 171 pages still collapse |
 | CR-5 | One rule for what counts as a "tagged page" | **Open** — `validate_brief.py` anchored to `[?&]tag=`; the other copies should be checked |
 | CR-6 | `concurrency: cancel-in-progress` reports cancelled runs as failures | **New. Open** — cosmetic, but it will keep misleading anyone reading the checks tab |
+
+---
+
+## T63 — final publication integration & live-source review — `arena/fc646635-zone2` (2026-11-19 UTC)
+
+| Field | Record |
+|---|---|
+| Status | **claimed / in progress** |
+| Owner | `arena/fc646635-zone2` |
+| Role | Final integration pass for the current brief: re-check the reader-facing publication front against its generated source, expose decision-ready findings without inventing product facts, and run the repository's shipped verification gates. |
+| File scope | `COORDINATION.md`; `tools/build_front.py`; `tools/verify_front.py`; generated root reader pages owned by that generator (`index.html`, `suggestions.html`, `questions.html`, `guides/*.html`); `docs/publication-audit-2026-11-19.md`; new session-local `publication/` assets/pages only if required. |
+| Explicitly out of scope | `ledger/**`, `board/**`, `intake/**`, `brief/**`, `console/**`, `marketing/**`, `pages/**`, `assets/js/**`, third-party account settings, and any product/source value that cannot be checked from an official source. No identity mapping, price, rating, commission, conversion, or account claim will be inferred. |
+| First action | Claim committed and pushed before review or implementation, per the shared-board protocol. |
+
