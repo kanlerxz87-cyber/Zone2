@@ -625,7 +625,7 @@
       "status": "closed",
       "published_on": "2026-11-19",
       "title": "The 0-second 'failure' workflow runs after PR #158 were parse failures, not cancellations (CR-6 misdiagnosed)",
-      "detail": "After PR #158 merged, every Deploy run on main finished in 0 s with 0 jobs (for example run 44136794504). The T62 record (CR-6) described these as cancelled or superseded runs. They were not: .github/workflows/pages.yml still contained unresolved git conflict markers, so GitHub could not load the workflow file at all and created no jobs. The local replay (tools/ci_replay.py) did not notice because it reads the steps with a tolerant hand-written parser instead of a YAML loader, so it reported 49/49 passing on a file GitHub rejected. Sessions 6ce606cb (T63) and da47d78d (T65) each removed the markers independently; both added a pre-check to ci_replay.py (conflict markers in the workflow and other tracked text files, and a YAML parse when PyYAML is available). The first T63 pull-request run after the repair (44466706223) loaded the workflow and passed its Build and verify job.",
+      "detail": "After PR #158 merged, every Deploy run on main finished in 0 s with 0 jobs (for example run 44136794504). The T62 record (CR-6) described these as cancelled or superseded runs. They were not: .github/workflows/pages.yml still contained unresolved git conflict markers, so GitHub could not load the workflow file at all and created no jobs. The local replay (tools/ci_replay.py) did not notice because it reads the steps with a tolerant hand-written parser instead of a YAML loader, so it reported 49/49 passing on a file GitHub rejected. Three sessions removed the markers independently on 2026-11-19: da47d78d (T65, PR #165), cf98ff65 (T63, PR #166) and 6ce606cb (T66). T65 and T66 each added a pre-check to ci_replay.py (conflict markers in the workflow and other tracked text files, and a YAML parse when PyYAML is available). The first pull-request run on the T66 branch after the repair (44466706223) loaded the workflow and passed its Build and verify job.",
       "impact": "For about two days no push to main deployed, while the board recorded the failures as harmless cancellations. Pages kept serving the last good build.",
       "action_required": "None outstanding. Read a 0-job run as 'the workflow did not load' until proven otherwise; ci_replay.py now refuses to run on a workflow that would not load.",
       "source_ids": []
@@ -639,7 +639,7 @@
       "title": "Amazon now shows a 'newer model' notice on the ThermoMaven listing the 4th supplied link opens",
       "detail": "Re-read on 2026-11-19, the listing that link.amazon/B0c8moW59 opens (B0DHZTCNR5, ThermoMaven 1 Sec, Black) carried the notice 'There is a newer model of this item', pointing to B0GL7Z4KP4 (shown in Orange). That listing has not been read or sourced, so this repository does not know whether it is a new revision or a colour variant. The site keeps linking B0DHZTCNR5, the listing the supplied link opens; it does not switch on its own.",
       "impact": "Buyers clicking the ThermoMaven button may land on an older model than Amazon recommends.",
-      "action_required": "Owner: say which listing is intended (decision desk SG-T63-12 / Q-T63-07). If it is the newer one, a session reads and sources B0GL7Z4KP4 before any link changes.",
+      "action_required": "Owner: say which listing is intended (decision desk SG-T66-12 / Q-T66-07). If it is the newer one, a session reads and sources B0GL7Z4KP4 before any link changes.",
       "source_ids": [
         "S61"
       ]
@@ -653,7 +653,7 @@
       "title": "The two product registers disagree on the status of the 8-quart Chefman's power rating",
       "detail": "marketing/data/facts.json (which feeds the reader pages) records P3 Power as '1700 W / 120 V', status verified, citing the Chefman product page, and mentions in a note that a 1000 W figure has circulated. ledger/products.json (which feeds the dashboards) records the same attribute for P-03 as a CONFLICT, because the Amazon listing's own bullet list says '1000 Watts/120 Volts - RJ38-SQSS-8T' while its product-information block and the Chefman page both say 1700 W. Both registers quote real official text; they differ on whether the disagreement is shown as a conflict. The rule for every other conflict in this repository is to publish both values.",
       "impact": "The reader-facing pages show a single verified wattage where the ledger publishes an official-source conflict.",
-      "action_required": "Owner or a later session: decide which register is the source of truth (decision desk SG-T63-08) and regenerate the other from it; meanwhile, show the P3 power row as a conflict on the reader pages.",
+      "action_required": "Owner or a later session: decide which register is the source of truth (decision desk SG-T66-08) and regenerate the other from it; meanwhile, show the P3 power row as a conflict on the reader pages.",
       "source_ids": [
         "S21",
         "S26"
@@ -666,9 +666,9 @@
       "status": "open",
       "published_on": "2026-11-19",
       "title": "marketing/feed.xml writes ISO-8601 pubDate values; RSS 2.0 requires RFC 822 dates",
-      "detail": "Every <pubDate> in marketing/feed.xml is written as '2026-11-15T00:00:00Z' (tools/build_marketing.py, page_feed()). The RSS 2.0 specification (https://www.rssboard.org/rss-specification, version 2.0.11) states: 'All date-times in RSS conform to the Date and Time Specification of RFC 822', with the example 'Sat, 07 Sep 2002 00:00:01 GMT'. The feed also lists only the marketing topic pages, so the root guides (including the T63 thermometer guides) are not in any feed. build_marketing.py belongs to another session's scope, so T63 did not change it.",
+      "detail": "Every <pubDate> in marketing/feed.xml is written as '2026-11-15T00:00:00Z' (tools/build_marketing.py, page_feed()). The RSS 2.0 specification (https://www.rssboard.org/rss-specification, version 2.0.11) states: 'All date-times in RSS conform to the Date and Time Specification of RFC 822', with the example 'Sat, 07 Sep 2002 00:00:01 GMT'. The feed also lists only the marketing topic pages, so the root guides (including the T66 thermometer guides) are not in any feed. build_marketing.py belongs to another session's scope, so T66 did not change it.",
       "impact": "Strict feed readers and validators may reject or misdate the items; readers who follow the feed never see the root guides.",
-      "action_required": "A session that owns tools/build_marketing.py: emit RFC 822 dates (for example email.utils.format_datetime) and decide whether to extend the feed to every guide (decision desk SG-T63-10).",
+      "action_required": "A session that owns tools/build_marketing.py: emit RFC 822 dates (for example email.utils.format_datetime) and decide whether to extend the feed to every guide (decision desk SG-T66-10).",
       "source_ids": []
     },
     {
@@ -678,7 +678,7 @@
       "status": "open",
       "published_on": "2026-11-19",
       "title": "Release-readiness row RR-08 still describes the site as covering three air-fryer appliances",
-      "detail": "The site state typed into RR-08 on the release-readiness board says 'The published set covers three air-fryer appliances plus programme research.' Since T61/T63 the site also publishes the two meat-thermometer listings that supplied links 4 and 5 open, with their own category page and guides. The row's conclusion (no unsuitable category) is unaffected; only its description is out of date. The board belongs to another session's scope (T45), so T63 regenerated it from its own generator without editing its register.",
+      "detail": "The site state typed into RR-08 on the release-readiness board says 'The published set covers three air-fryer appliances plus programme research.' Since T61/T66 the site also publishes the two meat-thermometer listings that supplied links 4 and 5 open, with their own category page and guides. The row's conclusion (no unsuitable category) is unaffected; only its description is out of date. The board belongs to another session's scope (T45), so T66 regenerated it from its own generator without editing its register.",
       "impact": "A reviewer reading the readiness board gets an incomplete picture of what the site covers.",
       "action_required": "The session that owns the release-readiness register: update RR-08's site state to name both categories.",
       "source_ids": [

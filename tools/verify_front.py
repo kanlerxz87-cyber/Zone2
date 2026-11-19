@@ -15,7 +15,11 @@ pages as they sit on disk and fails the build if any of the project's own rules 
       to discover it;
   G6  every internal link resolves to a file that exists;
   G7  every page carries a canonical URL that matches its own path (head_meta contract);
-  G8  no page emits a traffic, click, conversion or revenue figure.
+  G8  no page emits a traffic, click, conversion or revenue figure;
+  G9  reader links stay in the primary navigation; owner dashboards are grouped under one
+      accessible Project & tools disclosure and remain reachable from the footer;
+  G10 the current executive-summary product rows match the five intent records and carry
+       official Amazon links, with intent fields still explicitly blank.
 
 It is deliberately strict about the blank rule: an unverified value rendered as a plain
 number is treated the same as a fabricated one, because a reader cannot tell them apart.
@@ -30,6 +34,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PAGES = [
     "index.html",
+    "summary.html",
     "suggestions.html",
     "questions.html",
     "guides/index.html",
@@ -37,7 +42,7 @@ PAGES = [
     "guides/air-fryer-ovens.html",
     "guides/buying-guide.html".replace("buying-guide", "buying-guides"),
     "guides/method.html",
-    # T63 (session 6ce606cb, 2026-11-19): thermometer category and guides from build_front TARGETS.
+    # T66 (session 6ce606cb, 2026-11-19): thermometer category and guides from build_front TARGETS.
     "guides/thermometers.html",
     "guides/thermometers-is-the-turkey-done.html",
     "guides/thermometers-instant-read-or-leave-in.html",
@@ -66,6 +71,7 @@ def fail(errors: list[str], msg: str) -> None:
 def checks() -> list[str]:
     errors: list[str] = []
     board = json.loads((ROOT / "docs" / "board-9251f262.json").read_text(encoding="utf-8"))
+    submissions = json.loads((ROOT / "intake" / "data" / "submissions.json").read_text(encoding="utf-8"))["entries"]
 
     for rel in PAGES:
         p = ROOT / rel
@@ -136,6 +142,75 @@ def checks() -> list[str]:
         want = "https://kanlerxz87-cyber.github.io/Zone2/" + ("" if rel == "index.html" else rel)
         if f'<link rel="canonical" href="{want}">' not in h:
             fail(errors, f"G7 {rel}: canonical is not {want}")
+
+        # ---- G9: reader-first navigation; owner tools stay grouped -------------
+        nav_match = re.search(r'<nav class="pb-nav" aria-label="Primary navigation">(.*?)</nav>', h, re.S)
+        if not nav_match:
+            fail(errors, f"G9 {rel}: primary publication navigation missing")
+        else:
+            nav = nav_match.group(1)
+            reader_part = nav.split('<details class="pb-nav-tools"', 1)[0]
+            got = [href for href, _ in re.findall(r'<a href="([^"]+)"[^>]*>(.*?)</a>', reader_part, re.S)]
+            # T66 (session 6ce606cb, 2026-11-19): the two product-category links (air fryers,
+            # meat thermometers) are inserted after the front page; cf98ff65's six links keep
+            # their order and the tools group is unchanged.
+            expected = [depth + x for x in (
+                "index.html", "guides/basket-air-fryers.html", "guides/thermometers.html",
+                "marketing/buying-guide.html", "guides/index.html",
+                "marketing/comparison.html", "journal/index.html", "marketing/index.html")]
+            if got != expected:
+                fail(errors, f"G9 {rel}: reader navigation is not the expected publication menu")
+            if nav.count('<details class="pb-nav-tools"') != 1 or "Project &amp; tools" not in nav:
+                fail(errors, f"G9 {rel}: owner tools are not in one Project & tools disclosure group")
+            tool_menu = nav.split('<div class="pb-nav-menu">', 1)[-1].split('</div>', 1)[0]
+            tools = (
+                "suggestions.html", "questions.html", "brief/index.html", "intake/index.html",
+                "board/index.html", "products.html", "analysis.html", "content.html",
+                "compliance.html", "tracking.html", "verification.html", "sources.html",
+                "flagged.html", "summary.html")
+            for target in tools:
+                if f'href="{depth}{target}"' not in tool_menu:
+                    fail(errors, f"G9 {rel}: Project & tools group is missing {target}")
+            footer = re.search(r'<footer class="pb-foot".*?</footer>', h, re.S)
+            if not footer:
+                fail(errors, f"G9 {rel}: dashboard footer missing")
+            else:
+                for target in ("brief/index.html", "intake/index.html", "board/index.html",
+                               "products.html", "analysis.html", "content.html", "compliance.html",
+                               "tracking.html", "verification.html", "sources.html", "summary.html"):
+                    if f'href="{depth}{target}"' not in footer.group(0):
+                        fail(errors, f"G9 {rel}: footer does not expose {target}")
+
+        proposal_count = len(board["suggestions"])
+        if rel == "index.html":
+            if "not measured search queries or volume claims" not in h:
+                fail(errors, "G9 index.html: buyer-question topics must be labelled as editorial hypotheses")
+            if f">{proposal_count} proposals sit on the board" not in h:
+                fail(errors, "G9 index.html: suggestion count does not match the decision register")
+        if rel == "suggestions.html" and f">{proposal_count} proposals. <em>None is applied yet.</em>" not in h:
+            fail(errors, "G9 suggestions.html: headline count does not match the decision register")
+
+        # ---- G10: the five-link summary stays in sync with intent records -----
+        if rel == "summary.html":
+            product_rows = re.findall(r'<tr id="(SUB-\d+)">(.*?)</tr>', h, re.S)
+            if len(product_rows) != len(submissions):
+                fail(errors, f"G10 {rel}: rendered {len(product_rows)} product-intent rows, expected {len(submissions)}")
+            by_id = {item["id"]: item for item in submissions}
+            for sub_id, row in product_rows:
+                item = by_id.get(sub_id)
+                if not item:
+                    fail(errors, f"G10 {rel}: unknown product-intent row {sub_id}")
+                    continue
+                asin = item.get("observed_redirect_asin", "")
+                if asin and f'<code>{asin}</code>' not in row:
+                    fail(errors, f"G10 {rel}: {sub_id} does not display its recorded observed ASIN separately from intent")
+                if f'href="intake/submissions.html#{sub_id}"' not in row:
+                    fail(errors, f"G10 {rel}: {sub_id} does not link to its intent/observation record")
+                if not item.get("intended_asin") and "Not confirmed" not in row:
+                    fail(errors, f"G10 {rel}: {sub_id} fills or hides an unconfirmed intended ASIN")
+            for row in re.findall(r'<tr\b[^>]*>(.*?)</tr>', h, re.S):
+                if "<td" in row and not re.search(r'href="https://(?:www\.)?(?:amazon\.com|affiliate-program\.amazon\.com|ftc\.gov|developers\.google\.com|docs\.github\.com|support\.google\.com)', row):
+                    fail(errors, f"G10 {rel}: summary table row has no official external source link")
 
         # ---- G8: no invented performance metrics ------------------------------
         for m in VANITY_NUM_RE.finditer(h):

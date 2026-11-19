@@ -1,6 +1,6 @@
 {
   "$schema": "zone2/front-overlay/v1",
-  "note": "T63 (session arena/6ce606cb-zone2, 2026-11-19). Read-only input to tools/build_front.py and tools/build_desk.py. Holds (1) editorial voice for the two thermometer listings; their specification rows are NOT stored here but read from ledger/products.json resolved.specs (sources S61/S62, destinations re-observed 2026-11-19); (2) official food-safety rows from FoodSafety.gov; (3) the three new thermometer guides; (4) an overlay on docs/board-9251f262.json: goal grouping, what the 2026-11-19 brief asks for (signals only: every suggestion stays Proposed until the owner records a choice), one evidenced question update, and this wave's new suggestions and questions. No value here was inferred.",
+  "note": "T66 (session arena/6ce606cb-zone2, 2026-11-19). Read-only input to tools/build_front.py and tools/build_desk.py. Holds (1) editorial voice for the two thermometer listings; their specification rows are NOT stored here but read from ledger/products.json resolved.specs (sources S61/S62, destinations re-observed 2026-11-19); (2) official food-safety rows from FoodSafety.gov; (3) the three new thermometer guides; (4) an overlay on docs/board-9251f262.json: goal grouping, what the 2026-11-19 brief asks for (signals only: every suggestion stays Proposed until the owner records a choice), one evidenced question update, and this wave's new suggestions and questions. No value here was inferred.",
   "read_on": "2026-11-19",
   "sources": {
     "FS1": {
@@ -82,7 +82,7 @@
         "Upper temperature range",
         "Specification met"
       ],
-      "listing_notice": "On 2026-11-19 the listing showed 'There is a newer model of this item', pointing to B0GL7Z4KP4 (Orange). This site still links the listing the supplied short link opens; see flag F-45 and question Q-T63-07.",
+      "listing_notice": "On 2026-11-19 the listing showed 'There is a newer model of this item', pointing to B0GL7Z4KP4 (Orange). This site still links the listing the supplied short link opens; see flag F-45 and question Q-T66-07.",
       "extra_rows": [
         {
           "attr": "Can it stay in food while cooking?",
@@ -246,7 +246,7 @@
   },
   "suggestions": [
     {
-      "id": "SG-T63-01",
+      "id": "SG-T66-01",
       "goal": "shop",
       "area": "Imagery",
       "title": "Show real product images, from a source the account is allowed to use",
@@ -260,7 +260,7 @@
         },
         {
           "label": "B",
-          "text": "Use images served through an Amazon mechanism the account is entitled to, once Q-T63-01 confirms which one.",
+          "text": "Use images served through an Amazon mechanism the account is entitled to, once Q-T66-01 confirms which one.",
           "cost": "One build pass once access is confirmed",
           "tradeoff": "Depends on account entitlements nobody has checked yet."
         },
@@ -268,19 +268,19 @@
           "label": "C",
           "text": "Buy the products and take our own photographs.",
           "cost": "The products plus a photo session",
-          "tradeoff": "Best for trust and originality; slowest, and needs Q-T63-05."
+          "tradeoff": "Best for trust and originality; slowest, and needs Q-T66-05."
         }
       ],
       "recommendation": "B",
       "waits_on": [
-        "Q-T63-01"
+        "Q-T66-01"
       ],
       "source": "S02",
       "status": "Proposed - awaiting owner decision",
       "implemented": false
     },
     {
-      "id": "SG-T63-02",
+      "id": "SG-T66-02",
       "goal": "shop",
       "area": "Content",
       "title": "Add hands-on notes from someone who has used the products",
@@ -307,15 +307,15 @@
       ],
       "recommendation": "B",
       "waits_on": [
-        "Q-T63-04",
-        "Q-T63-05"
+        "Q-T66-04",
+        "Q-T66-05"
       ],
       "source": "G1",
       "status": "Proposed - awaiting owner decision",
       "implemented": false
     },
     {
-      "id": "SG-T63-12",
+      "id": "SG-T66-12",
       "goal": "shop",
       "area": "Catalogue",
       "title": "Decide what the ThermoMaven button should open now that Amazon shows a newer model",
@@ -342,14 +342,14 @@
       ],
       "recommendation": "A",
       "waits_on": [
-        "Q-T63-07"
+        "Q-T66-07"
       ],
       "source": null,
       "status": "Proposed - awaiting owner decision",
       "implemented": false
     },
     {
-      "id": "SG-T63-03",
+      "id": "SG-T66-03",
       "goal": "findable",
       "area": "Search",
       "title": "Verify the site in Google Search Console and submit the sitemap",
@@ -370,14 +370,14 @@
       ],
       "recommendation": "B",
       "waits_on": [
-        "Q-T63-03"
+        "Q-T66-03"
       ],
       "source": "G3",
       "status": "Proposed - awaiting owner decision",
       "implemented": false
     },
     {
-      "id": "SG-T63-04",
+      "id": "SG-T66-04",
       "goal": "findable",
       "area": "Brand",
       "title": "Move to a real domain name",
@@ -398,14 +398,14 @@
       ],
       "recommendation": "B",
       "waits_on": [
-        "Q-T63-02"
+        "Q-T66-02"
       ],
       "source": "GH1",
       "status": "Proposed - awaiting owner decision",
       "implemented": false
     },
     {
-      "id": "SG-T63-05",
+      "id": "SG-T66-05",
       "goal": "findable",
       "area": "Site structure",
       "title": "Take the old builds and duplicate dashboards out of the search index",
@@ -432,18 +432,18 @@
       ],
       "recommendation": "B",
       "waits_on": [
-        "Q-T63-06"
+        "Q-T66-06"
       ],
       "source": "G2",
       "status": "Proposed - awaiting owner decision",
       "implemented": false
     },
     {
-      "id": "SG-T63-06",
+      "id": "SG-T66-06",
       "goal": "findable",
       "area": "Calendar",
       "title": "Publish ahead of the season instead of on the day",
-      "summary": "Gift guides and holiday cooking questions are searched before the day, not on it. T63 published the turkey guide on 2026-11-19, a week before Thanksgiving (2026-11-26), as a first example. Next up are the December holidays and New Year.",
+      "summary": "Gift guides and holiday cooking questions are searched before the day, not on it. T66 published the turkey guide on 2026-11-19, a week before Thanksgiving (2026-11-26), as a first example. Next up are the December holidays and New Year.",
       "options": [
         {
           "label": "A",
@@ -471,7 +471,7 @@
       "implemented": false
     },
     {
-      "id": "SG-T63-07",
+      "id": "SG-T66-07",
       "goal": "machinery",
       "area": "Link health",
       "title": "Re-check the five supplied links on a schedule and open an issue when one changes",
@@ -497,7 +497,7 @@
       "implemented": false
     },
     {
-      "id": "SG-T63-08",
+      "id": "SG-T66-08",
       "goal": "machinery",
       "area": "Data",
       "title": "Keep one register of product facts, not two",
@@ -529,7 +529,7 @@
       "implemented": false
     },
     {
-      "id": "SG-T63-09",
+      "id": "SG-T66-09",
       "goal": "publication",
       "area": "Authorship",
       "title": "Put a name on the writing and add an About page",
@@ -556,14 +556,14 @@
       ],
       "recommendation": "B",
       "waits_on": [
-        "Q-T63-04"
+        "Q-T66-04"
       ],
       "source": "G1",
       "status": "Proposed - awaiting owner decision",
       "implemented": false
     },
     {
-      "id": "SG-T63-10",
+      "id": "SG-T66-10",
       "goal": "publication",
       "area": "Reader capture",
       "title": "Give returning readers a way to follow along",
@@ -592,11 +592,11 @@
       "implemented": false
     },
     {
-      "id": "SG-T63-11",
+      "id": "SG-T66-11",
       "goal": "publication",
       "area": "Categories",
       "title": "Treat thermometers as a second category, paired with air fryers",
-      "summary": "Two of the five supplied links open meat thermometers, not air fryers. T63 gave them a category page and three guides, one of which joins the two categories (using a thermometer in an air fryer). Whether thermometers were intended at all is still Q-T50-01.",
+      "summary": "Two of the five supplied links open meat thermometers, not air fryers. T66 gave them a category page and three guides, one of which joins the two categories (using a thermometer in an air fryer). Whether thermometers were intended at all is still Q-T50-01.",
       "options": [
         {
           "label": "A",
@@ -628,88 +628,88 @@
   ],
   "questions": [
     {
-      "id": "Q-T63-01",
+      "id": "Q-T66-01",
       "question": "Can this Associates account show Amazon product images, and through which tool?",
       "status": "open",
       "what_we_know": "The site shows no product images. Amazon's program policies govern how Amazon content, images included, may be used off Amazon.",
       "what_is_missing": "Which tools this account is actually entitled to use, and whether the account is approved (Q-T50-04).",
       "how_to_discover": "Sign in to Associates Central, check which link and image tools and API access the account has, and record the answer here.",
       "blocks": [
-        "SG-T63-01"
+        "SG-T66-01"
       ],
       "source": "S02"
     },
     {
-      "id": "Q-T63-02",
+      "id": "Q-T66-02",
       "question": "Is there a domain name for this site, and who will own it?",
       "status": "open",
       "what_we_know": "The site is served from a github.io sub-path. GitHub Pages supports apex and www custom domains and recommends verifying the domain first.",
       "what_is_missing": "Whether the owner has or wants a domain, which name, and who pays for it.",
       "how_to_discover": "Owner decision. If yes: register it, verify it in GitHub settings, then we add the CNAME and update every canonical URL in one pass.",
       "blocks": [
-        "SG-T63-04"
+        "SG-T66-04"
       ],
       "source": "GH1"
     },
     {
-      "id": "Q-T63-03",
+      "id": "Q-T66-03",
       "question": "Which Google account will own the site in Search Console?",
       "status": "open",
       "what_we_know": "A sitemap derived from the tree and a robots.txt are published. Search Console supports HTML-file and HTML-tag verification, both of which this repository can publish.",
       "what_is_missing": "A verified property. Without one there is no data on which searches show this site or get clicked.",
       "how_to_discover": "Owner adds the property in Search Console and sends the verification token; we commit it and submit sitemap.xml.",
       "blocks": [
-        "SG-T63-03",
+        "SG-T66-03",
         "SG-T50-04"
       ],
       "source": "G3"
     },
     {
-      "id": "Q-T63-04",
+      "id": "Q-T66-04",
       "question": "Who is the named author, and have they used any of the five products?",
       "status": "open",
       "what_we_know": "Every page is currently signed with the site name only. Google's helpful-content guidance asks who created a page and how.",
       "what_is_missing": "A name, a two-line bio, and an honest statement of hands-on experience (or none).",
       "how_to_discover": "Owner supplies them; we add a byline and an About page.",
       "blocks": [
-        "SG-T63-09",
-        "SG-T63-02"
+        "SG-T66-09",
+        "SG-T66-02"
       ],
       "source": "G1"
     },
     {
-      "id": "Q-T63-05",
+      "id": "Q-T66-05",
       "question": "Is there a budget to buy the products for hands-on testing?",
       "status": "open",
       "what_we_know": "Nothing on this site comes from first-hand use; every claim is the maker's or the listing's.",
       "what_is_missing": "A budget, and someone with the kitchen and the time.",
       "how_to_discover": "Owner decision. Start with the one product where a hands-on note would settle the most: the 8-quart Chefman, where two official pages disagree on wattage.",
       "blocks": [
-        "SG-T63-02"
+        "SG-T66-02"
       ],
       "source": "M5"
     },
     {
-      "id": "Q-T63-06",
+      "id": "Q-T66-06",
       "question": "Does anyone still rely on the old builds and internal dashboards being indexed by search engines?",
       "status": "open",
       "what_we_know": "About a dozen namespaces (northstar/, zone2/, research-hub/, affiliate-lab/, revalidation/, review pages and others) are published alongside the reader pages. Google drops a page carrying a noindex tag from its results, page by page.",
-      "what_is_missing": "Whether any of them is linked from outside or used by anyone, which Search Console would show (Q-T63-03).",
+      "what_is_missing": "Whether any of them is linked from outside or used by anyone, which Search Console would show (Q-T66-03).",
       "how_to_discover": "Owner confirms; after Search Console is verified, its page-indexing report shows which of them are indexed or receive clicks.",
       "blocks": [
-        "SG-T63-05"
+        "SG-T66-05"
       ],
       "source": "G2"
     },
     {
-      "id": "Q-T63-07",
+      "id": "Q-T66-07",
       "question": "Should the ThermoMaven button follow Amazon's 'newer model' notice?",
       "status": "open",
       "what_we_know": "On 2026-11-19 the supplied link opened B0DHZTCNR5, and that listing showed 'There is a newer model of this item' pointing to B0GL7Z4KP4 (Orange).",
       "what_is_missing": "The owner's intent, and whether B0GL7Z4KP4 is a revision or a colour variant. Its listing has not been read or sourced.",
       "how_to_discover": "Owner confirms which listing they mean; if it is the newer one, we read and source that listing before switching.",
       "blocks": [
-        "SG-T63-12"
+        "SG-T66-12"
       ],
       "source": "S61"
     }
@@ -719,7 +719,7 @@
     "SG-T50-01": {
       "asks": "Lead with the products rather than the verification process; keep dashboard surfaces reachable from the footer and one navigation group.",
       "matches": "B",
-      "shipped": "T63 rebuilt the front page around all five products, cut the masthead to one reader navigation group, and moved every dashboard surface to the footer."
+      "shipped": "T66 rebuilt the front page around all five products, cut the masthead to one reader navigation group, and moved every dashboard surface to the footer."
     },
     "SG-T50-02": {
       "asks": "Use the supplied tracking ID shopnow047c-20.",
@@ -729,7 +729,7 @@
     "SG-T50-04": {
       "asks": "One site to index, a sitemap and feed, a publishing cadence and real analytics.",
       "matches": "B",
-      "shipped": "Partly. T63 published three new guides; the tree-derived sitemap picks them up. They are not in marketing/feed.xml, which by design lists only marketing topic pages (verify_marketing G14), and its generator is outside this session's scope. Query data waits on Search Console (Q-T63-03)."
+      "shipped": "Partly. T66 published three new guides; the tree-derived sitemap picks them up. They are not in marketing/feed.xml, which by design lists only marketing topic pages (verify_marketing G14), and its generator is outside this session's scope. Query data waits on Search Console (Q-T66-03)."
     },
     "SG-T50-05": {
       "asks": "A privacy-preserving outbound-click counter, a self-hosted analytics endpoint and the five defined events.",

@@ -59,7 +59,7 @@ def steps() -> list[tuple[str, str]]:
 
 
 def preflight() -> list[str]:
-    """T63 (session 6ce606cb): fail before replaying if the workflow could not load on GitHub.
+    """T66 (session 6ce606cb): fail before replaying if the workflow could not load on GitHub.
 
     The step parser above is deliberately tolerant, so it happily replayed a pages.yml that
     still carried merge-conflict markers from PR #158. GitHub's YAML loader rejected that

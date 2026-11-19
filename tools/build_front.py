@@ -26,7 +26,7 @@ WHAT IT WRITES
   guides/buying-guides.html      category page
   guides/method.html             category page
 
-T63 (session `arena/6ce606cb-zone2`, 2026-11-19) — shop-first rebuild
+T66 (session `arena/6ce606cb-zone2`, 2026-11-19) — shop-first rebuild
 ---------------------------------------------------------------------
   * the front page now leads with all five supplied listings: three air fryers from
     facts.json, two meat thermometers whose rows are read from ledger/products.json
@@ -61,16 +61,17 @@ from link_builder import ASSOCIATES_TAG, build_product_link  # noqa: E402  — t
 ROOT = Path(__file__).resolve().parent.parent
 FACTS = ROOT / "marketing" / "data" / "facts.json"
 BOARD = ROOT / "docs" / "board-9251f262.json"
-OVERLAY = ROOT / "docs" / "front-6ce606cb.json"          # T63: voice, guides, board overlay
-LEDGER_PRODUCTS = ROOT / "ledger" / "products.json"     # T63: thermometer rows (resolved.specs)
+OVERLAY = ROOT / "docs" / "front-6ce606cb.json"          # T66: voice, guides, board overlay
+LEDGER_PRODUCTS = ROOT / "ledger" / "products.json"     # T66: thermometer rows (resolved.specs)
 LEDGER_SOURCES = ROOT / "ledger" / "sources.json"
 SITE = "https://kanlerxz87-cyber.github.io/Zone2/"
 
-# T63: all five short links re-resolved and both thermometer listings re-read on this date.
+# T66: all five short links re-resolved and both thermometer listings re-read on this date.
 CHECKED_ON = "2026-11-19"
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 LINK_REL = "sponsored nofollow"
 LINK_DISCLOSURE = "(paid link)"
+ASIN_HELP_URL = "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC"
 
 # Editorial copy for the three listings. Every figure quoted in these strings also
 # appears as a sourced row in the generated table below it — the prose never introduces
@@ -117,7 +118,7 @@ STATUS_PILL = {
 }
 
 GUIDE_CATEGORIES = {
-    # T63: the two thermometer listings get their own category; rendered by build_thermometers().
+    # T66: the two thermometer listings get their own category; rendered by build_thermometers().
     "thermometers": {
         "title": "Meat thermometers",
         "blurb": "An instant-read that answers in a second and a wireless probe that stays in the roast, plus the safe temperatures that make either of them worth owning.",
@@ -194,7 +195,7 @@ def e(s: object) -> str:
 def load() -> tuple[dict, dict]:
     facts = json.loads(FACTS.read_text(encoding="utf-8"))
     board = json.loads(BOARD.read_text(encoding="utf-8"))
-    # T63: evidenced question updates from the overlay are applied in memory only; the
+    # T66: evidenced question updates from the overlay are applied in memory only; the
     # board file belongs to another session and is never written.
     upd = extras()["overlay"].get("question_updates", {})
     for q in board["questions"]:
@@ -207,7 +208,7 @@ _EXTRAS: dict | None = None
 
 
 def extras() -> dict:
-    """T63: the overlay plus the two thermometer listings, normalised to the facts.json shape.
+    """T66: the overlay plus the two thermometer listings, normalised to the facts.json shape.
 
     Rows come from ledger/products.json `resolved.specs`, so the ledger stays the single place
     the thermometer values were transcribed. The overlay contributes editorial voice only, plus
@@ -264,7 +265,7 @@ def num_word(n: int, lower: bool = False) -> str:
 
 
 def ov_source_link(sid: str, label: str | None = None) -> str:
-    """A citation to a source in the T63 overlay register. Evidence links are never tagged."""
+    """A citation to a source in the T66 overlay register. Evidence links are never tagged."""
     s = extras()["overlay"]["sources"][sid]
     rel = LINK_REL + " noopener noreferrer" if "amazon." in s["url"] else "noopener noreferrer"
     return (f'<a class="pb-src" href="{e(s["url"])}" target="_blank" rel="{rel}">'
@@ -318,26 +319,50 @@ def spec_rows(product: dict, attrs: list[str]) -> list[dict]:
 
 
 def masthead(active: str) -> str:
-    # T63 (session 6ce606cb, 2026-11-19): one short reader navigation group, per SG-T50-01's
-    # Option B. Earlier sessions added Design brief (dc72a69e, T50), Submitted links
-    # (613900e6, T58), Decision board (1bfbc559, T61), Suggestions, Questions and an Operator
-    # dashboard link here so tools/audit_site.py would see each namespace linked from
-    # index.html. Every one of them now sits in footer(), which is on every page including
-    # index.html, so each stays linked and reachable; only its position changed.
+    # Merged 2026-11-19 (T66, session 6ce606cb) with cf98ff65's T66 masthead: reader navigation
+    # leads with the two product categories; owner-facing dashboards stay in cf98ff65's single
+    # keyboard-accessible "Project & tools" disclosure group (plus the decision desk) and in
+    # the footer. cf98ff65's six reader links are kept in their order; the two category
+    # links are inserted after the front page (tools/verify_front.py G9 updated to match).
     nav = [
-        ("index.html", "Front page"),
+        ("index.html", "Counter Notes"),
         ("guides/basket-air-fryers.html", "Air fryers"),
         ("guides/thermometers.html", "Meat thermometers"),
-        ("marketing/buying-guide.html", "Which to buy"),
+        ("marketing/buying-guide.html", "Buying guide"),
         ("guides/index.html", "Guides"),
+        ("marketing/comparison.html", "Compare"),
+        ("journal/index.html", "Journal"),
+        ("marketing/index.html", "All articles"),
+    ]
+    tools = [
         ("desk/index.html", "Decision desk"),
+        ("suggestions.html", "Suggestions"),
+        ("questions.html", "Open questions"),
+        ("brief/index.html", "Design brief"),
+        ("intake/index.html", "Submitted links"),
+        ("board/index.html", "Decision board"),
+        ("products.html", "Products dashboard"),
+        ("analysis.html", "Analysis"),
+        ("content.html", "Content engine"),
+        ("compliance.html", "Compliance"),
+        ("tracking.html", "Tracking"),
+        ("verification.html", "Verification log"),
+        ("sources.html", "Source register"),
+        ("flagged.html", "Flagged for review"),
+        ("summary.html", "Executive summary"),
     ]
     depth = "../" if "/" in active else ""
     items = []
     for href, label in nav:
         rel = depth + href
-        cls = ' class="is-on"' if href == active else ""
-        items.append(f'<a href="{e(rel)}"{cls}>{e(label)}</a>')
+        current = ' class="is-on" aria-current="page"' if href == active else ""
+        items.append(f'<a href="{e(rel)}"{current}>{e(label)}</a>')
+    tool_items = []
+    for href, label in tools:
+        rel = depth + href
+        current = ' class="is-on" aria-current="page"' if href == active else ""
+        tool_items.append(f'<a href="{e(rel)}"{current}>{e(label)}</a>')
+    tools_current = ' aria-current="page"' if active in {href for href, _ in tools} else ""
     return f"""<header class="pb-mast">
   <div class="pb-wrap">
     <div class="pb-mast-top">
@@ -347,10 +372,10 @@ def masthead(active: str) -> str:
       </div>
       <div class="pb-mast-meta">Sources re-read {e(CHECKED_ON)}</div>
     </div>
-    <nav class="pb-nav" aria-label="Sections">{''.join(items)}</nav>
+    <nav class="pb-nav" aria-label="Primary navigation">{''.join(items)}<details class="pb-nav-tools"><summary{tools_current}>Project &amp; tools</summary><div class="pb-nav-menu">{''.join(tool_items)}</div></details></nav>
   </div>
 </header>
-<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} A commission may be earned when you buy through our links, at no extra cost to you. Product links are Special Links carrying the Associates tag <code>{e(ASSOCIATES_TAG)}</code>; citation and evidence links are not affiliate links.</div></div>"""
+<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} A commission may be earned when you buy through our links, at no extra cost to you. The Associates tag supplied for this project is <code>{e(ASSOCIATES_TAG)}</code>; its account status and its presence on every product destination have not been confirmed. Citation and evidence links are not affiliate links.</div></div>"""
 
 
 def footer(depth: str = "") -> str:
@@ -374,10 +399,10 @@ def footer(depth: str = "") -> str:
         <li><a href="{e(depth)}questions.html">Open questions</a></li>
         <li><a href="{e(depth)}intent.html">Link &amp; intent register</a></li>
         <li><a href="{e(depth)}paths.html">Launch paths</a></li>
+        <li><a href="{e(depth)}brief/index.html">Design brief</a></li>
+        <li><a href="{e(depth)}intake/index.html">Submitted-link register</a></li>
         <li><a href="{e(depth)}board/index.html">Decision board</a></li>
         <li><a href="{e(depth)}flagged.html">Flagged for review</a></li>
-        <li><a href="{e(depth)}brief/index.html">Design brief</a></li>
-        <li><a href="{e(depth)}intake/index.html">Submitted links</a></li>
       </ul></div>
       <div><h4>Evidence</h4><ul>
         <li><a href="{e(depth)}verification.html">Verification log</a></li>
@@ -591,7 +616,7 @@ def bench_card(product: dict, depth: str = "") -> str:
 
 
 def sourced_table(rows: list[dict], sources: dict, head: tuple[str, str, str], caption: str) -> str:
-    """T63: a three-column table whose last cell is a citation or a stated blank (gate G1)."""
+    """T66: a three-column table whose last cell is a citation or a stated blank (gate G1)."""
     trs = []
     for r in rows:
         s = sources.get(r.get("src") or "")
@@ -618,7 +643,7 @@ def all_products(facts: dict) -> dict:
 
 
 def thermo_guides() -> list[tuple]:
-    """The T63 thermometer guides, in the ARTICLES tuple shape (kicker, title, href, cat, blurb)."""
+    """The T66 thermometer guides, in the ARTICLES tuple shape (kicker, title, href, cat, blurb)."""
     return [(g["kicker"], g["title"], "guides/" + g["slug"], g["category"], g["hook"])
             for g in extras()["overlay"]["guides"]]
 
@@ -724,7 +749,7 @@ def build_index(facts: dict, board: dict) -> str:
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head">
     <div><h2 class="pb-h2">Start with the question, not the product</h2>
-    <p class="pb-sub">{num_word(len(guides))} guides, each built around something a buyer actually asks.</p></div>
+    <p class="pb-sub">{num_word(len(guides))} guides, each framed around a practical buyer question. These are editorial hypotheses, not measured search queries or volume claims.</p></div>
     <a class="pb-sec-link" href="guides/index.html">Browse by category &rarr;</a>
   </div>
   <div class="pb-stories">{stories}</div>
@@ -756,8 +781,10 @@ def build_index(facts: dict, board: dict) -> str:
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-sec-head">
     <div><h2 class="pb-h2">What we would change next &mdash; your call</h2>
-    <p class="pb-sub">{num_word(c['suggestions'])} suggestions, grouped under {num_word(c['goals'], True)} goals, each
-    with its options, its evidence, what is still unknown and how to find out. None is marked decided.
+    <p class="pb-sub">{len(board['suggestions'])} proposals sit on the board, and
+    {len(extras()['overlay']['suggestions'])} more were added on 2026-11-19: {num_word(c['suggestions'], True)} in all,
+    grouped under {num_word(c['goals'], True)} goals, each with its options, its evidence, what is still unknown and
+    how to find out. Nothing on it has been implemented and none is marked decided.
     {num_word(c['open'])} questions are still open; <a href="desk/questions.html">answer these first</a>.</p></div>
     <a class="pb-sec-link" href="desk/index.html">Open the decision desk &rarr;</a>
   </div>
@@ -771,7 +798,7 @@ def build_index(facts: dict, board: dict) -> str:
   published as flag <b>F-41</b> instead of being quietly overwritten, then corrected, so the drift is dated
   and traceable. On {e(CHECKED_ON)} the ThermoMaven listing began pointing to a newer model; that is
   logged the same way, as an open question rather than a silent switch
-  (<a href="desk/questions.html#Q-T63-07">Q-T63-07</a>).
+  (<a href="desk/questions.html#Q-T66-07">Q-T66-07</a>).
   <a href="flagged.html">The full flagged register</a> holds <span id="flagCountHeading">&mdash;</span> items.</div>
 </div></section>
 """
@@ -780,14 +807,120 @@ def build_index(facts: dict, board: dict) -> str:
                 active="index.html", body=body, with_data=True)
 
 
+def build_current_summary(facts: dict, board: dict) -> str:
+    """Reader-facing, current executive summary from the five-link intent register.
+
+    This replaces the stale three-link `summary.html` narrative. It reads the newer
+    product-intent ledger and never fills an intended value from an observed redirect target.
+    """
+    submissions = json.loads((ROOT / "intake" / "data" / "submissions.json").read_text(encoding="utf-8"))
+    entries = submissions["entries"]
+    product_rows = []
+    for item in entries:
+        asin = item.get("observed_redirect_asin") or ""
+        submitted = item.get("submitted_token") or ""
+        target_link = (f'<span>Observed ASIN <code>{e(asin)}</code>'
+                       if asin else '<span class="pb-blank">&mdash;<small>No observed destination recorded.</small></span>')
+        intended = item.get("intended_asin") or ""
+        intent_cell = (f'<code>{e(intended)}</code>' if intended else
+                       '<span class="pb-blank">Not confirmed<small>Intended ASIN and official listing URL remain blank.</small></span>')
+        product_rows.append(
+            f'<tr id="{e(item["id"])}"><td><code>{e(submitted)}</code>'
+            f'<small>{e(item.get("token_char_count", ""))} characters as supplied</small></td>'
+            f'<td>{intent_cell}</td><td>{target_link}'
+            f'<small>Observed {e(item.get("observed_utc", ""))}; not evidence of intended identity.</small></td>'
+            f'<td><a class="pb-src" href="intake/submissions.html#{e(item["id"])}">Intent/observation record</a>'
+            f' <a class="pb-src" href="{ASIN_HELP_URL}" target="_blank" rel="noopener noreferrer">Amazon ASIN rule</a></td></tr>'
+        )
+
+    body = f"""
+<section class="pb-lead"><div class="pb-wrap">
+  <p class="pb-kicker">Current executive summary · 2026-11-19</p>
+  <h1 class="pb-h1">The evidence, the gaps, and the next sensible decisions.</h1>
+  <p class="pb-stand">Counter Notes is now a reader-facing publication with sourced buyer guides,
+  a comparison, an RSS feed and a generated sitemap. This is the current project summary, not a
+  product-performance claim: the product-link observations below are dated 2026-11-17, and this
+  integration pass did not repeat the Amazon redirects.</p>
+  <p class="pb-byline"><b>Working rule.</b> Intended product identity, observed redirect destination,
+  and campaign performance are separate records. Unknowns stay blank; proposals stay proposals.</p>
+</div></section>
+
+<section class="pb-sec"><div class="pb-wrap">
+  <div class="pb-sec-head"><div><h2 class="pb-h2">Five submitted links — intent is still unconfirmed</h2>
+  <p class="pb-sub">The five recorded observations resolve to three air-fryer listings and two meat-thermometer
+  listings. That describes observed destinations only; it does not establish what the owner intended.</p></div>
+  <a class="pb-sec-link" href="intake/submissions.html">Open the full confirmation register &rarr;</a></div>
+  <div class="pb-table-scroll"><table class="pb-table"><thead><tr>
+    <th>Code supplied</th><th>Intended ASIN</th><th>Observed target</th><th>Review sources</th>
+  </tr></thead><tbody>{''.join(product_rows)}</tbody></table></div>
+  <p class="pb-note"><b>Do not read the short-code shape as a compliance verdict.</b> The exact compliance
+  status of the supplied short links remains unresolved in <a href="https://kanlerxz87-cyber.github.io/Zone3/flagged.html#FLG-003" target="_blank" rel="noopener noreferrer">FLG-003</a>.
+  The code supplied is not itself a 10-digit ASIN, but that fact alone does not establish whether the
+  short link is compliant. The official record of intended ASIN, official listing URL, confirmation date
+  and confirmation source is kept apart from the observed redirect target.
+  <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank" rel="noopener noreferrer">Amazon’s ASIN and link-format help</a>.</p>
+</div></section>
+
+<section class="pb-sec"><div class="pb-wrap">
+  <div class="pb-sec-head"><div><h2 class="pb-h2">What is working — and what is not</h2>
+  <p class="pb-sub">The site automates deterministic checks; account actions, first-party reports and product-intent confirmation still require evidence the repository does not hold.</p></div></div>
+  <div class="pb-table-scroll"><table class="pb-table"><thead><tr><th>Area</th><th>Evidence-backed status</th><th>What remains open</th><th>Official review</th></tr></thead><tbody>
+    <tr><td class="k">Special Links</td><td>The owner supplied <code>{e(ASSOCIATES_TAG)}</code>. The tag appears in this publication’s disclosure copy, but repository HTML inspection shows that product-destination links do not consistently carry it.</td><td>Account ownership, active status, marketplace and each product’s enrolled-Associates destination/report test are not confirmed. The five supplied short links themselves were observed without an Associates tag; that is not a finding that the short links are invalid. Apply and test the supplied tag on every intended Special Link only after product intent is confirmed.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Amazon Operating Agreement</a> <a class="pb-src" href="{ASIN_HELP_URL}" target="_blank" rel="noopener noreferrer">Amazon link format</a></td></tr>
+    <tr><td class="k">Disclosure and paid-link marking</td><td>The build gates check the required Associates statement and sponsored qualification on product offers; source citations are kept distinct from offers.</td><td>Keep disclosure placement and endorsement context in every new publishing review.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="noopener noreferrer">Amazon Agreement</a> <a class="pb-src" href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer">FTC disclosure guidance</a> <a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" target="_blank" rel="noopener noreferrer">Google sponsored links</a></td></tr>
+    <tr><td class="k">Click and conversion measurement</td><td><code>assets/js/events.js</code> queues three aggregate event types locally in the browser; it sends nothing and publishes no counts without an endpoint.</td><td>GitHub Pages is static hosting. No self-hosted event sink, retention decision, server-side bot filter, Associates report import or Search Console query import is present. The event registers disagree on implementation status, and the page-view code sends its hostname field as <code>r</code> while the measurement schema calls it <code>referrer_host</code>. Reconcile these contracts before implementing an endpoint.</td><td><a class="pb-src" href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" target="_blank" rel="noopener noreferrer">GitHub Pages: static hosting</a> <a class="pb-src" href="discovery/measurement.html#EV-01">Event register</a> <a class="pb-src" href="intake/tracking.html">Submitted brief’s tracking record</a></td></tr>
+    <tr><td class="k">Campaign ledger</td><td><code>ledger/campaigns.json</code> is empty by design. No click, order or revenue score is invented.</td><td>Only add rows from authorized first-party reports, with dated provenance. Product intent must be confirmed before campaigns are associated with a submitted product.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Amazon Program Policies</a> <a class="pb-src" href="ledger/campaigns.json">Empty ledger and schema</a></td></tr>
+    <tr><td class="k">Search and editorial</td><td>The publication has question-shaped guides, a feed and sitemap. Titles are editorial hypotheses, not claims about trends, query popularity or search volume.</td><td>No Search Console property or query report is recorded. Verify ownership, submit the sitemap, then plan topics from measured query/page data. Set an accountable editor, cadence and image-rights policy before scaling.</td><td><a class="pb-src" href="https://support.google.com/webmasters/answer/9008080?hl=en" target="_blank" rel="noopener noreferrer">Google: verify ownership</a> <a class="pb-src" href="https://support.google.com/webmasters/answer/7451001?hl=en" target="_blank" rel="noopener noreferrer">Google: sitemaps</a> <a class="pb-src" href="https://support.google.com/webmasters/answer/7576553?hl=en" target="_blank" rel="noopener noreferrer">Google: performance/query report</a></td></tr>
+    <tr><td class="k">Product research and commission</td><td>Verified manufacturer/listing specifications can be shown with their sources. Price, rating, review count, competition and product-specific conversion/commission potential remain blank where not confirmed.</td><td>Do not rank products or forecast revenue without authorized catalog data and first-party reports; confirm product category and account eligibility first.</td><td><a class="pb-src" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener noreferrer">Amazon Program Policies</a> <a class="pb-src" href="sources.html">Source register</a></td></tr>
+  </tbody></table></div>
+</div></section>
+
+<section class="pb-sec"><div class="pb-wrap">
+  <div class="pb-sec-head"><div><h2 class="pb-h2">Questions to answer before scaling</h2>
+  <p class="pb-sub">Each question is a gate, not a placeholder to guess around. The linked register includes what is known, what is missing, who can obtain it, and the next evidence to collect.</p></div>
+  <a class="pb-sec-link" href="questions.html">Open all questions &rarr;</a></div>
+  <ol class="pb-prose">
+    <li>For each of the five submissions, what exact product was intended? Record the ASIN, official listing URL, date and confirmation source; keep the redirect observation in its separate field.</li>
+    <li>Which Associates account and marketplace owns the supplied tag, and does one test link per confirmed product reach the intended destination and appear in the authorized report?</li>
+    <li>Where will the first-party event endpoint run, what is the retention/bot-filter rule, and which of the two conflicting five-event definitions is canonical?</li>
+    <li>Who is the named editor, what publishing cadence is sustainable, and will visuals be original, properly licensed or permitted Program Content?</li>
+    <li>Is this publication strictly about air fryers, or should the two observed thermometer destinations become a separate category only after their intended identity is confirmed?</li>
+  </ol>
+</div></section>
+
+<section class="pb-sec"><div class="pb-wrap">
+  <div class="pb-sec-head"><div><h2 class="pb-h2">Suggested order of work</h2>
+  <p class="pb-sub">Recommendations are review items, not approvals. Nothing is auto-applied from this list.</p></div>
+  <a class="pb-sec-link" href="suggestions.html">Review options and trade-offs &rarr;</a></div>
+  <ol class="pb-prose">
+    <li><b>Resolve intent first.</b> Confirm all five product mappings and decide whether the publication remains air-fryer-only or adds a thermometer category.</li>
+    <li><b>Validate one tagged Special Link per confirmed product.</b> Check destination and Associates reporting inside the enrolled account before scaling.</li>
+    <li><b>Connect measurement honestly.</b> Reconcile the event definitions, choose a first-party endpoint and retention policy, verify Search Console ownership, then report only data actually received.</li>
+    <li><b>Publish a short editorial pilot.</b> Use buyer questions such as basket-versus-oven trade-offs, capacity, cleanup/counter space and multi-function appliance checklists as hypotheses. Add an accountable byline and original/authorized visuals; do not call topics “trending” without evidence or imply hands-on use that did not occur.</li>
+  </ol>
+  <p class="pb-note"><b>Editorial guardrail.</b> The FTC says an endorser cannot describe experience with a product they have not tried. A sourced specification comparison is not a hands-on test, and the copy should keep that distinction clear. <a href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="noopener noreferrer">FTC guidance</a>.</p>
+</div></section>
+
+<section class="pb-sec"><div class="pb-wrap">
+  <h2 class="pb-h2">Review the registers</h2>
+  <div class="pb-rail">
+    <section><h2>Decide</h2><ul><li><a href="suggestions.html">Suggestions board</a><p>Options, costs and trade-offs; nothing chosen.</p></li><li><a href="questions.html">Known and unknown</a><p>What can be decided now, and the evidence still missing.</p></li><li><a href="board/index.html">Five-link decision board</a><p>Requirement trace, intent fields and flagged irregularities.</p></li></ul></section>
+    <section><h2>Verify</h2><ul><li><a href="intent.html">Product-intent record</a><p>Intent and observed redirect targets kept separate.</p></li><li><a href="flagged.html">Flagged for review</a><p>Open irregularities and their sources.</p></li><li><a href="sources.html">Official source register</a><p>Source pages and verification records.</p></li></ul></section>
+  </div>
+</div></section>
+"""
+    return page("summary.html", title="Executive summary · Counter Notes",
+                description="Current evidence, open questions and reviewable recommendations for Counter Notes. Product intent, redirect observations and performance data are kept separate.",
+                active="summary.html", body=body)
+
+
 def build_suggestions(facts: dict, board: dict) -> str:
     blocks = "".join(decision_block(s, board) for s in board["suggestions"])
     body = f"""
 <section class="pb-lead"><div class="pb-wrap">
   <p class="pb-kicker">Decision board</p>
-  <h1 class="pb-h1">{num_word(len(board['suggestions']))} things we could do next. <em>None of them is done.</em></h1>
-  <p class="pb-note">T63 (2026-11-19): these {num_word(len(board['suggestions']), True)} rows, plus
-  {num_word(len(extras()['overlay']['suggestions']), True)} new ones, are now grouped by goal on
+  <h1 class="pb-h1">{len(board['suggestions'])} proposals. <em>None is applied yet.</em></h1>
+  <p class="pb-note">T66 (2026-11-19): these {num_word(len(board['suggestions']), True)} proposals, plus
+  {num_word(len(extras()['overlay']['suggestions']), True)} new ones, are grouped by goal on
   <a href="desk/index.html">the decision desk</a>, together with the questions to answer first.</p>
   <p class="pb-stand">This is the review surface the brief asked for: every suggestion, with the options
   it could take, what each option costs, what it gives up, and the question that has to be answered
@@ -928,7 +1061,7 @@ def build_category(slug: str, facts: dict, board: dict) -> str:
 
 
 # --------------------------------------------------------------------------- #
-# T63: meat thermometers
+# T66: meat thermometers
 # --------------------------------------------------------------------------- #
 def fs(sid: str, label: str) -> str:
     """Inline citation for the food-safety and listing sources held in the overlay."""
@@ -1205,6 +1338,7 @@ def build_thermometers(facts: dict, board: dict) -> str:
 # --------------------------------------------------------------------------- #
 TARGETS: list[tuple[str, callable]] = [
     ("index.html", build_index),
+    ("summary.html", build_current_summary),
     ("suggestions.html", build_suggestions),
     ("questions.html", build_questions),
     ("guides/index.html", build_guides_index),
@@ -1212,7 +1346,7 @@ TARGETS: list[tuple[str, callable]] = [
     ("guides/air-fryer-ovens.html", lambda f, b: build_category("air-fryer-ovens", f, b)),
     ("guides/buying-guides.html", lambda f, b: build_category("buying-guides", f, b)),
     ("guides/method.html", lambda f, b: build_category("method", f, b)),
-    # T63 (session 6ce606cb): thermometer category and guides. Also listed in verify_front PAGES.
+    # T66 (session 6ce606cb): thermometer category and guides. Also listed in verify_front PAGES.
     ("guides/thermometers.html", build_thermometers),
     ("guides/thermometers-is-the-turkey-done.html", build_turkey),
     ("guides/thermometers-instant-read-or-leave-in.html", build_instant_or_leave),

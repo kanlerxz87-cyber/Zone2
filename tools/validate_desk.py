@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Gate for the T63 decision desk, overlay and thermometer guides (session `arena/6ce606cb-zone2`).
+"""Gate for the T66 decision desk, overlay and thermometer guides (session `arena/6ce606cb-zone2`).
 
-  D1  every suggestion (T50 board + T63 overlay) has a valid goal, a unique id, options with
+  D1  every suggestion (T50 board + T66 overlay) has a valid goal, a unique id, options with
       text/cost/trade-off, a recommendation that is one of its options, and a Proposed status;
   D2  every waits_on names a known question; every question's blocks names a known suggestion;
       every question states what is known, what is missing and how to find out;

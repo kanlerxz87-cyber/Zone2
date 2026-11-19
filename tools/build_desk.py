@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Decision desk generator — T63, session `arena/6ce606cb-zone2` (2026-11-19).
+"""Decision desk generator — T66, session `arena/6ce606cb-zone2` (2026-11-19).
 
 WHY THIS FILE EXISTS
 --------------------
 The brief asked for a place to review and choose paths *before* anything is implemented, and
 for a clear list of the questions that have to be answered first, each with a way to find the
 answer. The T50 board (docs/board-9251f262.json) holds twelve suggestions in one long list.
-The desk regroups them, together with the twelve T63 suggestions in docs/front-6ce606cb.json,
+The desk regroups them, together with the twelve T66 suggestions in docs/front-6ce606cb.json,
 under the four goals the brief names:
 
   shop         make it read like a shop, not an audit
@@ -24,7 +24,7 @@ WHAT IT WRITES
   desk/index.html       the four goals, every suggestion, options / evidence / unknowns
   desk/questions.html   the questions, ranked by how many suggestions each one blocks
 
-Inputs are read-only: docs/board-9251f262.json (another session's file), the T63 overlay, and
+Inputs are read-only: docs/board-9251f262.json (another session's file), the T66 overlay, and
 tools/build_front.py for the shared page chrome (masthead, disclosure strip, footer).
 
 Usage:  python3 tools/build_desk.py           (writes the pages)
@@ -57,9 +57,9 @@ def desk_data() -> dict:
     for s in board["suggestions"]:
         sgs.append(dict(s, goal=ov["goal_map"].get(s["id"]), origin="T50 board (2026-11-16)"))
     for s in ov["suggestions"]:
-        sgs.append(dict(s, origin="T63 (2026-11-19)"))
+        sgs.append(dict(s, origin="T66 (2026-11-19)"))
     qs = [dict(q, origin="T50 board") for q in board["questions"]]
-    qs += [dict(q, origin="T63") for q in ov["questions"]]
+    qs += [dict(q, origin="T66") for q in ov["questions"]]
     blocks_count = {q["id"]: 0 for q in qs}
     for s in sgs:
         for w in s.get("waits_on", []):
@@ -72,7 +72,7 @@ def desk_data() -> dict:
 def src_link(d: dict, sid: str | None) -> str:
     if not sid or sid not in d["sources"]:
         return ("<b>Evidence</b> this repository: the observation is recorded in the summary above "
-                "and in the T63 verification record, not on an external page.")
+                "and in the T66 verification record, not on an external page.")
     s = d["sources"][sid]
     host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", s["url"]).split("/")[0])
     rel = "sponsored nofollow noopener noreferrer" if "amazon." in s["url"] else "noopener noreferrer"
@@ -187,7 +187,7 @@ def build_index(d: dict) -> str:
 {''.join(sections)}
 <section class="pb-sec"><div class="pb-wrap">
   <div class="pb-note"><b>How a choice gets recorded.</b> Reply with the suggestion id and an option letter (for
-  example &ldquo;SG-T63-03: B&rdquo;). The next session records it in the coordination log with the date and
+  example &ldquo;SG-T66-03: B&rdquo;). The next session records it in the coordination log with the date and
   your words, then does the work. Until then every row keeps the status <em>{e(STATUS)}</em>.
   The original board is still at <a href="../suggestions.html">the suggestion board</a> and
   <a href="../questions.html">the questions register</a>.</div>
