@@ -520,6 +520,19 @@ jobs:
               the data, sponsored links, canonical, no prices, no invented metrics)
         run: python3 tools/verify_front.py
 
+      # T63 (session arena/75efdf57-zone2): the shop section (shop/**). The build step rewrites
+      # every shop page from shop/data/*.json and fails on an unresolvable guide token or a guide
+      # quoting a blank/conflicting value; the gate then re-reads the pages on disk: every row and
+      # compare cell sourced or blank-with-reason, disclosure strip above <main> and in the footer,
+      # product buttons tagged + sponsored + counted by events.js, citations untagged, no prices,
+      # no invented metrics, canonical, images with alt text, briefing integrity.
+      - name: Rebuild the shop section and confirm committed output is current
+        run: python3 tools/build_shop.py --check
+
+      - name: Shop gate (sourcing, disclosure strip, tagged sponsored buttons, untagged citations,
+              no prices, no invented metrics, canonical, image alt text, briefing integrity)
+        run: python3 tools/validate_shop.py
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
