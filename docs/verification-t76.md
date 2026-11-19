@@ -2,7 +2,8 @@
 
 **Date:** 2026-11-19 (UTC)
 **Branch:** `arena/f8c77723-zone2`
-**Scope:** remeasurement of PR #194's current reader-facing claims against a locally packaged Pages artifact after integrating main's latest merged tip. This is a repository/artifact check, **not** a live-site fetch, Search Console report, or product/account verification. No product fact, intended ASIN, observation, campaign metric, or owner-only blank was changed.
+**Base:** `origin/main` after PR #207 (`46601cf`, including six editorial-hypothesis topic pitches and the D10 gate).
+**Scope:** remeasurement of the integrated Decision Room and publication claims against a locally packaged Pages artifact. This is a repository/artifact check, **not** a live-site fetch, Search Console report, or product/account verification. No product fact, intended ASIN, observation, campaign metric, or owner-only blank was changed.
 
 All counts below are reproducible from committed builders and the ignored `_site/` artifact. The current decision rows cite this record rather than treating older T69 measurements as current.
 
@@ -14,12 +15,12 @@ All counts below are reproducible from committed builders and the ignored `_site
 
 **Method.** Run `python3 tools/package_site.py`, then use Playwright/Chromium at 1440×900 and 390×844 on every packaged HTML page containing `.cn-table tbody th`. For each body row-header cell, compare `scrollWidth`/`clientWidth` and `scrollHeight`/`clientHeight`, and read computed `white-space` and `text-transform`.
 
-**Result in the packaged artifact:** **14 pages, 173 row-header cells, 0 clipped, 0 uppercase, 0 `nowrap` at both 1440×900 and 390×844.** The 14 page counts are:
+**Result in the packaged artifact:** **14 pages, 172 row-header cells, 0 clipped, 0 uppercase, 0 `nowrap` at both 1440×900 and 390×844.** The 14 page counts are:
 
 | Packaged page | `tbody th` cells |
 |---|---:|
 | `compare.html` | 23 |
-| `decision-prompt.html` | 12 |
+| `decision-prompt.html` | 11 |
 | `decision-room.html` | 10 |
 | `executive-summary.html` | 7 |
 | `flagged.html` | 72 |
@@ -32,9 +33,9 @@ All counts below are reproducible from committed builders and the ignored `_site
 | `measurement.html` | 5 |
 | `publishing.html` | 5 |
 | `questions.html` | 11 |
-| **Total** | **173** |
+| **Total** | **172** |
 
-The scoped `.cn-table` reset in `assets/css/publication.css` remains in the packaged stylesheet. This is a remeasurement of the repair; the table data and labels were not changed.
+The scoped `.cn-table` reset in `assets/css/publication.css` remains in the packaged stylesheet; no row-label text was altered to make it fit. The prompt now has 11 body rows because DR-07 is fixed and is no longer listed among unresolved decisions.
 
 ---
 
@@ -133,7 +134,7 @@ No source in this measurement establishes which product the owner intended for a
 ## V — local validation (not a deployment confirmation)
 
 - `.venv/bin/python tools/ci_replay.py` — **66/66 workflow steps passed**, with PyYAML available for the strict workflow parse. This includes the source/data gates, builders, mutation tests, reader-surface gates, packaging, and browser checks.
-- The packaged contract reports **230 HTML pages, 18 indexable URLs, 1,463 product anchors checked, and 172 current factual rows**; `ok: true`, with no errors. This is distinct from the 173 `.cn-table tbody th` cells measured in M1.
+- The packaged contract reports **230 HTML pages, 18 indexable URLs, 1,471 product anchors checked, and 172 current factual rows**; `ok: true`, with no errors. This is one fewer than the 173-row T77 snapshot: DR-07 is now fixed/re-verified, so its row is no longer among the open decisions included in `decision-prompt.html`. The 172 sourced table rows counted by the publication contract and the 172 `.cn-table tbody th` cells in M1 are separate measurements.
 - Structural audit: **7/7 checks passed** across 230 published pages. The front-page and shop gates also passed.
 - Browser run: **256 viewport checks, 26 mobile accessibility pages, and 11 behavior/privacy checks passed**. The regression now explicitly checks the 70/70 Workspace link sets, 200 homepage DOM anchors, 44px retailer controls, and publication-table row-label overflow/case at the mobile viewport.
 

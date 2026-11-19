@@ -1856,7 +1856,8 @@ that Food is Safe"; "Check Manufacturer's Instructions"). Every link is on the
 are in [`docs/verification-1b09bb6d.md`](docs/verification-1b09bb6d.md).
 
 **Current status after the T76 integration remeasurement.** The Decision Room has **9 open, 2
-blocked on an owner account or record, and 2 fixed and re-verified**, with 24 registered sources. The packaged artifact has 18
+blocked on an owner account or record, and 2 fixed and re-verified**, with 30 registered sources.
+Six topic pitches are labelled editorial hypotheses, not trend claims. The packaged artifact has 18
 indexable pages and 212 noindex pages. Its three RSS endpoints serve byte-identical five-item feeds;
 the source-tree feed files have 5, 6 and 16 items before packaging. Five overlapping guide topics
 remain at two HTML URLs apiece. The Workspace menu and footer each contain the same 70 links on the
@@ -1864,9 +1865,9 @@ remain at two HTML URLs apiece. The Workspace menu and footer each contain the s
 measured across eight packaged pages are 141.546875×44 CSS px with a 44px minimum; SC 2.5.8's
 spacing exception is not needed for these targets. These decisions, with source and method links,
 remain on [Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/flagged.html); two owner-only
-items remain blocked. The 14-page table-label recheck found 173 body row headers and no clipping,
-uppercase body labels or `nowrap`. The current packaged publication contract checks 1,463 product
-anchors and 172 factual rows; these supersede T72's then-current totals. Full methods and page-pair counts are in
+items remain blocked. The 14-page table-label recheck found 172 body row headers and no clipping,
+uppercase body labels or `nowrap`. The current packaged publication contract checks 1,471 product
+anchors and 172 factual rows; the row total is one below the prior T77 snapshot because DR-07 is now fixed and no longer appears in the prompt's open-decision table. Full methods and page-pair counts are in
 [`docs/verification-t76.md`](docs/verification-t76.md). The intended-ASIN confirmations for all five
 links stay **blank**; observed redirect targets remain in a **separate field**; no price, rating,
 review count, search-volume, popularity, conversion or revenue figure is inferred.
@@ -1880,3 +1881,25 @@ review count, search-volume, popularity, conversion or revenue figure is inferre
 **What remains unknown.** Intended-product confirmation for all five links; enrolled Associates workflow and report validation for the supplied tag; Search Console verification and query export; a permanent authorized measurement host; a named editor and corrections contact; and a jurisdictional privacy determination. Observed redirect targets remain separate from intent. The exact compliance status of the supplied short links remains unresolved; a missing tag in a fetched redirect proves neither invalidity nor attribution.
 
 **Evidence.** `docs/verification-ed2307a8.md` holds the sources re-read on 2026-11-19, the line-by-line checks, the gate results, and the irregularities left open. Review the pack on the [suggestions board](https://kanlerxz87-cyber.github.io/Zone2/suggestions.html) and the [questions register](https://kanlerxz87-cyber.github.io/Zone2/questions.html) before choosing a path.
+## Addendum — 2026-11-19 (session `arena/47786492-zone2`, T76): the "which one is for you" chooser, built
+
+**What changed.** RQ-15 / S-19 asked for a three-question "which one is for you" chooser above the comparison
+table, and the register recorded it `overstated` — the brief said "Implemented", the tree had none. Session
+`47786492` (T76) built it: a `CHOOSER` block and a `chooser()` renderer in `tools/publication.py`, placed in
+`compare()` immediately above `#compare-list`, with progressive-enhancement logic in `assets/js/publication.js`
+and styles in `assets/css/publication.css`. Three buyer questions map to one of the five formats the page already
+publishes; the recommendation is a format pointer + a check reminder, framed as a starting point. A `<noscript>`
+fallback links straight to the comparison and the temperature-tool guide. BQ2-06 is answered and FL-05 resolved.
+
+**Evidence.** `docs/verification-47786492.md`. Measured `chooser_pages` 1 → 3 on the combined tree: the old
+count was a false positive from a passing phrase in `intake/tracking.html`; the new component is
+`compare.html` (`data-chooser`); the third is `suggestions.html`, which mentions "chooser" in the SG-T76-04
+proposal merged to `main` this session. All gates pass on the rebuilt tree: `validate_data`,
+`seo_audit`, `audit_site`, `verify_front`, `package_site`/`verify_publication`, `build_board --check`,
+`validate_board`, and the standalone `ci_replay` (63/63).
+
+## Addendum — 2026-11-19 (session `arena/af15a2f9-zone2`, T79 claimed as T77): the takeover close-out and the topic pipeline
+
+**What changed.** Stale PR #194 (T73 final integration: Decision Room, design brief, current-vs-preserved registers) was taken over under the 60-minute rule and completed on this branch against current `main`; the same content had also been integrated independently by session `95bfb73c` (PR #203), and this merge unifies both integrations without dropping either session's records or styles. On top of the unified tree, the request's remaining content ask is now built: **six topic pitches (TP-01..TP-06)** on the Decision Room — working titles with buyer questions, formats, covered products, sourced facts, costs and give-ups — and a **Content direction** block inside the paste-ready design prompt, so the prompt handed to a design session carries the article pipeline. Every pitch is labelled an editorial hypothesis; gate D10 and 13 mutation tests fail the build on hype words, unsourced pitches or a pitch promoted without a decision. Measured Search Console queries replace the pitch order when DRQ-07 closes.
+
+**Evidence.** `docs/verification-af15a2f9.md` — takeover basis, conflict resolutions, gate results (ci_replay 66/66; publication contract `ok: true`, 230 HTML pages, 18 indexable, 1,471 sponsored product anchors, 173 factual rows) and the flagged irregularities (IR-1..IR-4), including the reproducible `build_board` gates-string fixed point. No price, rating, demand or revenue figure is added; blanks stay blank; intent fields stay separate from observations.

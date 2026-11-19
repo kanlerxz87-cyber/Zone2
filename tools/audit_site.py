@@ -116,6 +116,37 @@ def resolve(page: Path, href: str) -> Path | None:
     return (page.parent / target).resolve()
 
 
+def markdown_anchors(text: str) -> set[str]:
+    """Anchors and heading slugs of a Markdown document, without parsing it as HTML.
+
+    A `.md` file is not HTML. Feeding one to an `HTMLParser` happens to work for simple
+    inline tags, but it is only ever a coincidence: an opening `<title>` (RCDATA) or
+    `<script>`/`<style>` (RAWTEXT) in a code span makes the parser treat everything after
+    it as text, silently dropping every later `<a id="...">` anchor. That is not
+    hypothetical — it is exactly how `docs/verification-t69.md#m4` and `#m5` came to fail
+    on the CI runner and pass locally, because the parser that ships with Python 3.13
+    implements RCDATA for `<title>` and the 3.11 one does not.
+
+    On GitHub, a `.md` file is rendered by GitHub's Markdown renderer, which does NOT
+    implement those HTML tree-construction rules: raw `<a id="m4">` survives. So the
+    anchors a reader can actually land on are every literal `id=` in the source, plus the
+    heading slug GitHub generates from each heading. Both are derived here by regex, so
+    the answer cannot depend on the Python version running the gate.
+    """
+    anchors = set(re.findall(r"""<a\s[^>]*\bid\s*=\s*["']([^"']+)["']""", text))
+    for heading in re.findall(r"^#{1,6}\s+(.+?)\s*#*\s*$", text, re.M):
+        # Emulate GitHub's heading slug: drop emphasis/backticks/punctuation, then
+        # spaces to hyphens. "## M4 — outbound link count" becomes "m4--outbound-link-count".
+        slug = heading.strip().lower()
+        slug = re.sub(r"`", "", slug)
+        slug = re.sub(r"[*_]", "", slug)
+        slug = re.sub(r"[^\w\s-]", "", slug)
+        slug = re.sub(r"\s+", "-", slug).strip("-")
+        if slug:
+            anchors.add(slug)
+    return anchors
+
+
 def check_fragments(pages, parsed) -> list[str]:
     problems = []
     for p in pages:
@@ -125,6 +156,16 @@ def check_fragments(pages, parsed) -> list[str]:
             target, frag = href.split("#", 1)
             tgt = resolve(p, href)
             if tgt is None or not tgt.is_file():
+                continue
+            if tgt.suffix.lower() in (".md", ".markdown"):
+                # Markdown is rendered by GitHub, not by an HTML parser — see
+                # markdown_anchors() for why reading it with HTMLParser is wrong.
+                if frag and frag.lower() not in {a.lower() for a in markdown_anchors(
+                        tgt.read_text(encoding="utf-8", errors="replace"))}:
+                    problems.append(
+                        f"{p.relative_to(REPO)}:{line}: {href!r} — fragment #{frag} "
+                        f"addresses nothing in {tgt.relative_to(REPO)}"
+                    )
                 continue
             tgt_page = parsed.get(tgt)
             if tgt_page is None:

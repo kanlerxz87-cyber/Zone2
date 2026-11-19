@@ -117,7 +117,17 @@ in the sitemap and `index,follow`. Raised as **DR-01**.
 
 <a id="m3"></a>
 
-**Method.** Parsed `<item><title>` and `<link>` from each feed with a regex over the committed XML.
+**Method.** Parsed the item title and item link elements from each feed with a regex over the committed XML.
+
+> Rendered-tag note (T77, 2026-11-19): this line used to print the raw element names, including an
+> opening `title` tag with no closing tag. In an HTML document a `<title>` element is **RCDATA** —
+> everything that follows it is text, not markup, until a `</title>` appears. The published page is
+> Markdown, but it used to be parsed as HTML by the link checker (which reads every published page,
+> `.md` included), so the unclosed tag swallowed the four anchors below it, M4 through M7.
+> Chrome and Python 3.13's `html.parser` treat `<title>` as RCDATA and dropped those four anchors;
+> Python 3.11's parser does not, which is why a local run on 3.11 passed while the CI runner failed.
+> The element names are now described rather than printed, so the anchors survive any parser. No
+> measurement, number or conclusion on this page changed.
 
 **Result:**
 

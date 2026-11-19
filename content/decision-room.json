@@ -16,28 +16,28 @@
       "what": "programmatic read of white-space / text-transform / scrollWidth on every table cell"
     },
     "T69-ARTIFACT": {
-      "label": "Measured: the packaged _site artifact, robots + canonical + sitemap",
+      "label": "Historical T69 packaged-artifact measurement; current package recheck is T76",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m2",
       "host": "github.com",
-      "what": "count of index,follow vs noindex pages and the sitemap URL set"
+      "what": "Earlier package snapshot. Current robots, sitemap, shop-link and selected page counts are in T76-ARTIFACT."
     },
     "T69-FEEDS": {
-      "label": "Historical T69 source-tree feed observation; current package recheck is T76",
+      "label": "Historical T69 source-tree feed observation; superseded by T76 package recheck",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m3",
       "host": "github.com",
-      "what": "Earlier feed-file overlap at the T69 revision; current packaged endpoints are documented in T76-FEEDS"
+      "what": "Earlier feed-file counts. Current source-versus-package distinction is in T76-FEEDS."
     },
     "T69-NAV": {
-      "label": "Historical T69 Workspace-link count; superseded by the T76 packaged recheck",
+      "label": "Historical T69 Workspace-link count; superseded by T76 package recheck",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m4",
       "host": "github.com",
-      "what": "Earlier source-tree count; the current packaged 70-link measurement is in T76-NAV"
+      "what": "Earlier navigation snapshot. Current 70-link/200-anchor measurements are in T76-NAV."
     },
     "T69-TAP": {
-      "label": "Historical T69 paid-link target observation; superseded by the T76 packaged recheck",
+      "label": "Historical T69 paid-link target observation; superseded by T76 package recheck",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m5",
       "host": "github.com",
-      "what": "Earlier source-tree target-size measurement; the current 44px packaged measurement is in T76-TAP"
+      "what": "Earlier tap-target snapshot. Current 44px controls are in T76-TAP."
     },
     "W3C-258": {
       "label": "W3C — Understanding SC 2.5.8 Target Size (Minimum), Level AA",
@@ -111,11 +111,47 @@
       "host": "www.fsis.usda.gov",
       "what": "the government page the thermometer cluster already cites"
     },
+    "AMZ-P1": {
+      "label": "Amazon listing — Chefman TurboFry Touch 6 Qt dual-window air fryer (observed destination of the first supplied link)",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "host": "www.amazon.com",
+      "what": "capacity, power, dimensions, Sync Finish and care rows as published in the listing"
+    },
+    "AMZ-P2": {
+      "label": "Amazon listing — Emeril Lagasse 26 QT French Door air fryer toaster oven (observed destination of the second supplied link)",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "host": "www.amazon.com",
+      "what": "capacity, dimensions, power, temperature range and door rows as published in the listing"
+    },
+    "AMZ-P3": {
+      "label": "Amazon listing — Chefman TurboFry Touch 8 Qt air fryer (observed destination of the third supplied link)",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "host": "www.amazon.com",
+      "what": "capacity, power, dimensions, presets and care rows as published in the listing"
+    },
+    "AMZ-P4": {
+      "label": "Amazon listing — ThermoMaven 1-second instant-read meat thermometer (observed destination of the fourth supplied link)",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "host": "www.amazon.com",
+      "what": "probe type and use rows as published in the listing"
+    },
+    "AMZ-P5": {
+      "label": "Amazon listing — CHEF iQ Sense wireless meat thermometer (observed destination of the fifth supplied link)",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "host": "www.amazon.com",
+      "what": "probe type and use rows as published in the listing"
+    },
+    "MFR-CHEFMAN": {
+      "label": "Chefman official product page — TurboFry Touch Dual-Window air fryer",
+      "url": "https://chefman.com/products/turbofry-touch-dual-window-air-fryer",
+      "host": "chefman.com",
+      "what": "manufacturer statements on the dual-basket format and finish-together timing"
+    },
     "T76-ARTIFACT": {
-      "label": "Measured: packaged robots, canonicals, sitemap and shop-content links (T76 recheck)",
+      "label": "Measured: packaged robots, canonicals, sitemap, shop links and product-page counts (T76 recheck)",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2",
       "host": "github.com",
-      "what": "packaged robots/canonicals/sitemap, main-content links, and selected packaged product-page counts"
+      "what": "packaged indexability, main-content links, and selected product-page word/table/source-link counts"
     },
     "T76-FEEDS": {
       "label": "Measured: source and packaged RSS outputs (T76 recheck)",
@@ -127,7 +163,7 @@
       "label": "Measured: paired root and shop-local guide pages (T76 recheck)",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m3",
       "host": "github.com",
-      "what": "five guide topic pairs and their packaged main-section word counts; length is not quality"
+      "what": "five overlapping guide-topic pairs and their packaged main-section word counts; length is not quality"
     },
     "T76-NAV": {
       "label": "Measured: Workspace navigation and footer groups (T76 recheck)",
@@ -136,7 +172,7 @@
       "what": "Workspace link groups, homepage DOM anchors and primary reader navigation visibility at 390x844"
     },
     "T76-TAP": {
-      "label": "Measured: mobile paid-link targets and reader navigation (T76 recheck)",
+      "label": "Measured: mobile paid-link target boxes (T76 recheck)",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m5",
       "host": "github.com",
       "what": "mobile retailer target boxes and computed minimum height at 390x844"
@@ -145,13 +181,13 @@
       "label": "Measured: publication table row headers after packaging (T76 recheck)",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m1",
       "host": "github.com",
-      "what": "computed wrapping, case and overflow across all packaged .cn-table body row headers at 1440x900 and 390x844"
+      "what": "computed wrapping, case and overflow across packaged .cn-table body row headers at 1440x900 and 390x844"
     },
     "T76-OWNER": {
       "label": "Measured: owner-only intent fields remain separate from observed destinations (T76)",
       "url": "https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m6",
       "host": "github.com",
-      "what": "review of current publication data and the limit of repository evidence about intent/account state"
+      "what": "review of current publication data and limits of repository evidence about intent/account state"
     }
   },
   "decisions": [
@@ -163,7 +199,7 @@
       "status": "open",
       "evidence": [
         {
-          "claim": "shop.html and shop/index.html are two different shop front doors with different packaged H1 text: ‘Find the format that fits your routine.’ and ‘Five pieces of kitchen gear, explained before you buy.’",
+          "claim": "shop.html and shop/index.html are two different shop front doors with different packaged H1 text: “Find the format that fits your routine.” and “Five pieces of kitchen gear, explained before you buy.”",
           "src": "T76-ARTIFACT"
         },
         {
@@ -183,14 +219,14 @@
         {
           "id": "A",
           "label": "Keep shop/index.html, redirect shop.html to it",
-          "costs": "A packager/canonical/sitemap rule; existing main-content and shared-chrome links continue to resolve through the redirect until the generators are updated.",
+          "costs": "One rule in the packager; ~15 internal links to shop.html keep working through the redirect.",
           "gives_up": "Nothing. shop.html's design is the weaker of the two."
         },
         {
           "id": "B",
           "label": "Keep shop.html, retire shop/index.html",
-          "costs": "Repoint the 17 main-content pages and the shared Workspace target; the shop section's category pages lose their parent.",
-          "gives_up": "The shop section's richer per-product specification pages."
+          "costs": "52 pages of internal links must be rewritten; the shop section's own category pages lose their parent.",
+          "gives_up": "The shop section's richer per-product spec pages."
         },
         {
           "id": "C",
@@ -367,12 +403,11 @@
           "src": "T76-GUIDES"
         },
         {
-          "claim": "Two of the five guide pairs share the same H1 text; the other three differ. Word counts alone do not establish which page is more useful; compare each page's sourced rows and reader task.",
-          "src": "T76-GUIDES",
-          "note": "measured per pair"
+          "claim": "Two of the five guide pairs share the same H1 text; the other three differ. Word counts alone do not establish which page is more useful; compare each page’s sourced rows and reader task.",
+          "src": "T76-GUIDES"
         },
         {
-          "claim": "Google's spam policy describes thin-affiliation pages in terms of lacking added value. This record does not claim that any of the paired guides violates that policy; it asks for a deliberate one-URL decision.",
+          "claim": "Google’s spam policy describes thin-affiliation pages in terms of lacking added value. This record does not claim that any paired guide violates that policy; it asks for a deliberate one-URL decision.",
           "src": "GOOG-SPAM"
         }
       ],
@@ -410,7 +445,7 @@
       "status": "open",
       "evidence": [
         {
-          "claim": "The packaged index.html contains 70 distinct links in .cn-menu-links and the same 70 in .cn-footer-tool-grid; Chromium's parsed homepage DOM has 200 a[href] elements at 390×844. The same 70/70 group is present on all 37 body.cn-publication pages.",
+          "claim": "The packaged index.html contains 70 distinct links in .cn-menu-links and the same 70 in .cn-footer-tool-grid; Chromium’s parsed homepage DOM has 200 a[href] elements at 390×844. The same 70/70 group is present on all 37 body.cn-publication pages.",
           "src": "T76-NAV"
         },
         {
@@ -418,7 +453,7 @@
           "src": "T76-NAV"
         },
         {
-          "claim": "Pages built around the reader's task, not the publisher's process, are the stated standard.",
+          "claim": "Pages built around the reader’s task, not the publisher’s process, are the stated standard.",
           "src": "GOOG-HELPFUL"
         }
       ],
@@ -734,14 +769,14 @@
       "question": "Legacy table rules were reaching the reader-facing tables. Was that a real defect, and is it fixed?",
       "status": "fixed",
       "fixed_on": "2026-11-19",
-      "fixed_note": "The scoped .cn-table reset from PR #194 was retained. The T76 packaged-artifact recheck measured all 173 body row-header cells across 14 pages at 1440×900 and 390×844: 0 clipped, 0 uppercase, 0 nowrap.",
+      "fixed_note": "The scoped .cn-table reset from PR #194 was retained. The T76 packaged-artifact recheck measured all 172 body row-header cells across 14 pages at 1440×900 and 390×844: 0 clipped, 0 uppercase, 0 nowrap.",
       "evidence": [
         {
           "claim": "The legacy dashboard stylesheet declares uppercase, nowrap row-header styling; the publication table reset overrides these inherited rules.",
           "src": "T69-CSS"
         },
         {
-          "claim": "The packaged artifact contains 173 .cn-table tbody th cells across 14 pages; at both 1440×900 and 390×844 the sweep found 0 clipped, 0 uppercase and 0 nowrap cells.",
+          "claim": "The packaged artifact contains 172 .cn-table tbody th cells across 14 pages; at both 1440×900 and 390×844 the sweep found 0 clipped, 0 uppercase and 0 nowrap cells.",
           "src": "T76-TABLES"
         }
       ],
@@ -822,7 +857,7 @@
     },
     {
       "id": "DRQ-06",
-      "asked": "Should the 'Our approach' reader link be visible in the mobile primary navigation as well as the disclosure strip and footer?",
+      "asked": "Should the “Our approach” reader link be visible in the mobile primary navigation as well as the disclosure strip and footer?",
       "answer_shape": "Wrap / collapse the four reader links / keep three visible. Recommendation: keep the current layout; the destination remains linked elsewhere.",
       "blocks": [
         "DR-12"
@@ -871,5 +906,157 @@
     "The exact indexable URL set before and after any DR-02 change (derived from publication.indexable_paths()).",
     "Whether every shop page passes the existing S1-S12 sourcing gate (tools/validate_shop.py already answers this).",
     "Whether the disclosure sentence appears twice on every page (tools/verify_publication.py already asserts this)."
+  ],
+  "topic_note": "Every pitch below is an editorial hypothesis, not measured demand. These six working titles are suggestions to review and choose from before anything is written; nothing here is a claim about search volume, popularity, trends or revenue, and no title calls a product best or trending. The order is this session's lean, not a decision: when DRQ-07 closes and reviewed Search Console queries exist, measured questions replace this order (DR-08). Each pitch names the verified rows it would rest on, so a reviewer can reject a pitch before it costs any writing. Where a preserved marketing-desk treatment already answers the question (marketing/thermometers/), the pitch folds that treatment into one root URL rather than publishing a second answer (DR-05).",
+  "topic_pitches": [
+    {
+      "id": "TP-01",
+      "title": "Two baskets, one dinner: the finish-together question",
+      "buyer_question": "Do I actually need two baskets to get everything on the table hot at once?",
+      "format": "comparison",
+      "covers": [
+        "P1",
+        "P3"
+      ],
+      "rests_on": [
+        {
+          "claim": "P1 is listed with a 6 Qt capacity across two baskets, and the manufacturer states both baskets finish cooking at the same time (Sync Finish).",
+          "src": "MFR-CHEFMAN"
+        },
+        {
+          "claim": "P3 is listed as one 8 Qt basket with an LED shake reminder — one zone, one timer.",
+          "src": "AMZ-P3"
+        }
+      ],
+      "intent": "A cook deciding between the two Chefman sizes who has ever served one cold side dish.",
+      "costs": "One comparison page built from the two Chefman listings and their care rows; every claim already has its source row.",
+      "gives_up": "The lazy version where a single basket is treated as a flaw. Some cooks only ever cook one thing, and the page has to say so.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-02",
+      "title": "Ice water and boiling water: the five-minute thermometer check",
+      "buyer_question": "How do I know my meat thermometer is still reading true?",
+      "format": "answer guide",
+      "covers": [
+        "P4",
+        "P5"
+      ],
+      "rests_on": [
+        {
+          "claim": "USDA FSIS states that colour is not a reliable indicator that food is safe and advises checking the manufacturer's instructions.",
+          "src": "FSIS-TEMP"
+        },
+        {
+          "claim": "P4 is listed as a 1-second instant-read probe thermometer and P5 as a wireless leave-in set — two different routines for the same doubt.",
+          "src": "AMZ-P4"
+        }
+      ],
+      "intent": "Someone with a drawer thermometer and no idea whether to trust it before a big cook.",
+      "costs": "One answer page, plus folding the preserved marketing-desk accuracy treatment into this URL (DR-05: one URL per answer).",
+      "gives_up": "Any implication that we measured accuracy ourselves. The check runs in the reader's kitchen, and the page says exactly that.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-03",
+      "title": "Where the probe goes: turkey placement without the guesswork",
+      "buyer_question": "Where exactly does the probe go in a turkey — and do the instructions say?",
+      "format": "guide",
+      "covers": [
+        "P4",
+        "P5"
+      ],
+      "rests_on": [
+        {
+          "claim": "USDA FSIS advises checking the manufacturer's instructions for thermometer use, and states colour is not a reliable safety indicator.",
+          "src": "FSIS-TEMP"
+        },
+        {
+          "claim": "Both thermometer listings publish probe type and use information; the placement rules come from those instructions, not from memory.",
+          "src": "AMZ-P5"
+        }
+      ],
+      "intent": "A first-time holiday host with a new probe and a whole bird.",
+      "costs": "One guide quoting the instructions and FSIS; the preserved marketing-desk placement page is folded in rather than duplicated.",
+      "gives_up": "Folklore. No grandmother's-thumb rule appears unless an official document states it.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-04",
+      "title": "Will it fit under your cabinets? The height question the footprint guide skips",
+      "buyer_question": "The counter depth is fine — but will it fit under the upper cabinets, with room to open?",
+      "format": "guide",
+      "covers": [
+        "P2",
+        "P1",
+        "P3"
+      ],
+      "rests_on": [
+        {
+          "claim": "P2 is listed at 16.9 in deep × 15.8 in wide × 14.8 in high.",
+          "src": "AMZ-P2"
+        },
+        {
+          "claim": "P1 is listed at 13.38 × 11.81 × 10.63 in and P3 at 15.4 × 12.6 × 13.5 in — the exterior numbers a reader can measure against their own clearance.",
+          "src": "AMZ-P1"
+        }
+      ],
+      "intent": "A buyer with standard upper cabinets and a tape measure.",
+      "costs": "One guide built from the three verified dimension rows, with a bring-your-own-tape-measure close.",
+      "gives_up": "Any verdict about the reader's kitchen. The listings publish exterior dimensions only, and the page keeps saying so.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-05",
+      "title": "The Thanksgiving-week counter: the pieces of gear that earn their space right now",
+      "buyer_question": "With a big dinner coming, which piece of gear actually changes the day?",
+      "format": "seasonal cluster hub",
+      "covers": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "rests_on": [
+        {
+          "claim": "The three air-fryer listings publish capacity, power and dimensions; the two thermometer listings state their probe type — every card on the hub links to those rows.",
+          "src": "AMZ-P2"
+        },
+        {
+          "claim": "Google's people-first guidance is the standard this hub is written to: useful first, seasonal framing second.",
+          "src": "GOOG-HELPFUL"
+        }
+      ],
+      "intent": "A host planning the week of 2026-11-26 who wants one page instead of five tabs.",
+      "costs": "A dated hub that must carry its dates on its face and be honest when the season passes.",
+      "gives_up": "Evergreen pretence. A seasonal hypothesis is allowed to expire, and this one is written for one week only.",
+      "status": "pitch"
+    },
+    {
+      "id": "TP-06",
+      "title": "Watts, volts, and the outlet you already have",
+      "buyer_question": "Will any of these trip the kitchen circuit — and do they need a special outlet?",
+      "format": "answer page",
+      "covers": [
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "rests_on": [
+        {
+          "claim": "All three air-fryer listings publish 1700 watts at 120 volts — one shared number the page can check row by row.",
+          "src": "AMZ-P1"
+        },
+        {
+          "claim": "P2's listing states 120 V and 1700 W in its product-information block.",
+          "src": "AMZ-P2"
+        }
+      ],
+      "intent": "A renter or old-house cook wondering about the outlet and the breaker, not the recipes.",
+      "costs": "One short answer page from three verified power rows.",
+      "gives_up": "Electrical advice beyond what the listings state. The page reports the numbers and tells the reader to check their own kitchen.",
+      "status": "pitch"
+    }
   ]
 }

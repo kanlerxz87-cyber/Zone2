@@ -51,19 +51,19 @@
   <p class="dr-question">Two different shop home pages are live. Which one should exist?</p>
 
   <h3>What the measurement shows</h3>
-  <ul class="dr-evidence"><li><span>shop.html and shop/index.html are two different shop front doors with different packaged H1 text: ‘Find the format that fits your routine.’ and ‘Five pieces of kitchen gear, explained before you buy.’</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap and shop-content links (T76 recheck) ↗</a></li><li><span>Counting anchors inside &lt;main&gt; in the packaged artifact, excluding repeated shared chrome: 17 source pages link to shop/index.html and 2 link to shop.html.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap and shop-content links (T76 recheck) ↗</a></li><li><span>shop.html is index,follow and in the sitemap; shop/index.html is noindex,follow and absent. The 18 indexable canonical URLs match the 18 sitemap entries.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap and shop-content links (T76 recheck) ↗</a></li><li><span>Google documents canonical, redirect and sitemap signals for consolidating duplicate URLs; the canonical target remains an owner choice.</span> <a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Consolidate duplicate URLs (canonical) ↗</a></li></ul>
+  <ul class="dr-evidence"><li><span>shop.html and shop/index.html are two different shop front doors with different packaged H1 text: “Find the format that fits your routine.” and “Five pieces of kitchen gear, explained before you buy.”</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap, shop links and product-page counts (T76 recheck) ↗</a></li><li><span>Counting anchors inside &lt;main&gt; in the packaged artifact, excluding repeated shared chrome: 17 source pages link to shop/index.html and 2 link to shop.html.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap, shop links and product-page counts (T76 recheck) ↗</a></li><li><span>shop.html is index,follow and in the sitemap; shop/index.html is noindex,follow and absent. The 18 indexable canonical URLs match the 18 sitemap entries.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap, shop links and product-page counts (T76 recheck) ↗</a></li><li><span>Google documents canonical, redirect and sitemap signals for consolidating duplicate URLs; the canonical target remains an owner choice.</span> <a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Consolidate duplicate URLs (canonical) ↗</a></li></ul>
   <h3>What the options cost</h3>
   <p class="cn-fineprint">Nothing here is applied by being listed. Each option lists what it costs
   and what it gives up, in this project's judgement, against the governing rule for this row:
   <a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Consolidate duplicate URLs (canonical) ↗</a></p>
   <div class="dr-opts"><div class="dr-opt">
   <p class="dr-opt-head"><span class="dr-opt-id">A</span> Keep shop/index.html, redirect shop.html to it<span class="dr-opt-rec">Recommended</span></p>
-  <p class="dr-opt-line"><strong>Costs:</strong> A packager/canonical/sitemap rule; existing main-content and shared-chrome links continue to resolve through the redirect until the generators are updated.</p>
+  <p class="dr-opt-line"><strong>Costs:</strong> One rule in the packager; ~15 internal links to shop.html keep working through the redirect.</p>
   <p class="dr-opt-line"><strong>Gives up:</strong> Nothing. shop.html&#x27;s design is the weaker of the two.</p>
 </div><div class="dr-opt">
   <p class="dr-opt-head"><span class="dr-opt-id">B</span> Keep shop.html, retire shop/index.html</p>
-  <p class="dr-opt-line"><strong>Costs:</strong> Repoint the 17 main-content pages and the shared Workspace target; the shop section&#x27;s category pages lose their parent.</p>
-  <p class="dr-opt-line"><strong>Gives up:</strong> The shop section&#x27;s richer per-product specification pages.</p>
+  <p class="dr-opt-line"><strong>Costs:</strong> 52 pages of internal links must be rewritten; the shop section&#x27;s own category pages lose their parent.</p>
+  <p class="dr-opt-line"><strong>Gives up:</strong> The shop section&#x27;s richer per-product spec pages.</p>
 </div><div class="dr-opt">
   <p class="dr-opt-head"><span class="dr-opt-id">C</span> Leave both, differentiate them deliberately</p>
   <p class="dr-opt-line"><strong>Costs:</strong> Two pages to maintain and two sets of metadata; still two front doors for one intent.</p>
@@ -83,7 +83,7 @@
   <p class="dr-question">The deepest verified content on this site is invisible to search engines. Should it be indexed?</p>
 
   <h3>What the measurement shows</h3>
-  <ul class="dr-evidence"><li><span>The packaged artifact has 18 index,follow pages and 212 noindex,follow pages.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap and shop-content links (T76 recheck) ↗</a></li><li><span>The packaged Chefman shop product page has 779 main words, 2 tables, 20 total table rows (18 body rows plus 2 headers), and 16 official-source links. The indexable root guide has 653 main words, 1 table with 6 total rows, and 9 official-source links.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap and shop-content links (T76 recheck) ↗</a></li><li><span>For ThermoMaven, the noindex shop page has 603 main words, 2 tables, 20 total table rows, and 15 official-source links; its indexable root guide has 663 main words, 1 table with 5 total rows, and 8 official-source links.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap and shop-content links (T76 recheck) ↗</a></li><li><span>Affiliate pages are held to a thin-affiliation standard: they must offer meaningful original content beyond product links.</span> <a class="pb-src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Spam policies: thin affiliation ↗</a></li><li><span>A sitemap should list the URLs you want indexed.</span> <a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Build and submit a sitemap ↗</a></li></ul>
+  <ul class="dr-evidence"><li><span>The packaged artifact has 18 index,follow pages and 212 noindex,follow pages.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap, shop links and product-page counts (T76 recheck) ↗</a></li><li><span>The packaged Chefman shop product page has 779 main words, 2 tables, 20 total table rows (18 body rows plus 2 headers), and 16 official-source links. The indexable root guide has 653 main words, 1 table with 6 total rows, and 9 official-source links.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap, shop links and product-page counts (T76 recheck) ↗</a></li><li><span>For ThermoMaven, the noindex shop page has 603 main words, 2 tables, 20 total table rows, and 15 official-source links; its indexable root guide has 663 main words, 1 table with 5 total rows, and 8 official-source links.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap, shop links and product-page counts (T76 recheck) ↗</a></li><li><span>Affiliate pages are held to a thin-affiliation standard: they must offer meaningful original content beyond product links.</span> <a class="pb-src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Spam policies: thin affiliation ↗</a></li><li><span>A sitemap should list the URLs you want indexed.</span> <a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Build and submit a sitemap ↗</a></li></ul>
   <h3>What the options cost</h3>
   <p class="cn-fineprint">Nothing here is applied by being listed. Each option lists what it costs
   and what it gives up, in this project's judgement, against the governing rule for this row:
@@ -147,7 +147,7 @@
   <p class="dr-question">Four shop guides repeat four root guides at different URLs. Which one survives for each pair?</p>
 
   <h3>What the measurement shows</h3>
-  <ul class="dr-evidence"><li><span>Five overlapping buyer-question topics remain as root/shop-local guide pairs at different packaged URLs: basket-or-oven (936/837 main words), capacity (803/640), cleanup (788/628), multi-function (758/542), and thermometer choice (739/698). These are word counts, not a quality score.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m3" target="_blank" rel="nofollow noopener noreferrer">Measured: paired root and shop-local guide pages (T76 recheck) ↗</a></li><li><span>Two of the five guide pairs share the same H1 text; the other three differ. Word counts alone do not establish which page is more useful; compare each page&#x27;s sourced rows and reader task.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m3" target="_blank" rel="nofollow noopener noreferrer">Measured: paired root and shop-local guide pages (T76 recheck) ↗</a></li><li><span>Google&#x27;s spam policy describes thin-affiliation pages in terms of lacking added value. This record does not claim that any of the paired guides violates that policy; it asks for a deliberate one-URL decision.</span> <a class="pb-src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Spam policies: thin affiliation ↗</a></li></ul>
+  <ul class="dr-evidence"><li><span>Five overlapping buyer-question topics remain as root/shop-local guide pairs at different packaged URLs: basket-or-oven (936/837 main words), capacity (803/640), cleanup (788/628), multi-function (758/542), and thermometer choice (739/698). These are word counts, not a quality score.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m3" target="_blank" rel="nofollow noopener noreferrer">Measured: paired root and shop-local guide pages (T76 recheck) ↗</a></li><li><span>Two of the five guide pairs share the same H1 text; the other three differ. Word counts alone do not establish which page is more useful; compare each page’s sourced rows and reader task.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m3" target="_blank" rel="nofollow noopener noreferrer">Measured: paired root and shop-local guide pages (T76 recheck) ↗</a></li><li><span>Google’s spam policy describes thin-affiliation pages in terms of lacking added value. This record does not claim that any paired guide violates that policy; it asks for a deliberate one-URL decision.</span> <a class="pb-src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Spam policies: thin affiliation ↗</a></li></ul>
   <h3>What the options cost</h3>
   <p class="cn-fineprint">Nothing here is applied by being listed. Each option lists what it costs
   and what it gives up, in this project's judgement, against the governing rule for this row:
@@ -179,7 +179,7 @@
   <p class="dr-question">Which buyer questions bring readers? Nobody can answer that yet.</p>
 
   <h3>What the measurement shows</h3>
-  <ul class="dr-evidence"><li><span>Q63-04 on the existing register records this as open: no Search Console property, so no authorized query report exists.</span> <a class="pb-src" href="https://support.google.com/webmasters/answer/9008080" target="_blank" rel="nofollow noopener noreferrer">Google Search Console — Verify site ownership ↗</a></li><li><span>The site publishes 18 indexable pages, each with a self-canonical, and one sitemap.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap and shop-content links (T76 recheck) ↗</a></li><li><span>Search Console is the only authorized source of query, page and sitemap reports for a property the owner controls.</span> <a class="pb-src" href="https://support.google.com/webmasters/answer/9008080" target="_blank" rel="nofollow noopener noreferrer">Google Search Console — Verify site ownership ↗</a></li></ul>
+  <ul class="dr-evidence"><li><span>Q63-04 on the existing register records this as open: no Search Console property, so no authorized query report exists.</span> <a class="pb-src" href="https://support.google.com/webmasters/answer/9008080" target="_blank" rel="nofollow noopener noreferrer">Google Search Console — Verify site ownership ↗</a></li><li><span>The site publishes 18 indexable pages, each with a self-canonical, and one sitemap.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m2" target="_blank" rel="nofollow noopener noreferrer">Measured: packaged robots, canonicals, sitemap, shop links and product-page counts (T76 recheck) ↗</a></li><li><span>Search Console is the only authorized source of query, page and sitemap reports for a property the owner controls.</span> <a class="pb-src" href="https://support.google.com/webmasters/answer/9008080" target="_blank" rel="nofollow noopener noreferrer">Google Search Console — Verify site ownership ↗</a></li></ul>
   <h3>What the options cost</h3>
   <p class="cn-fineprint">Nothing here is applied by being listed. Each option lists what it costs
   and what it gives up, in this project's judgement, against the governing rule for this row:
@@ -243,7 +243,7 @@
   <p class="dr-question">Each current publication page places 70 Workspace links in the masthead group and repeats the same 70 in the footer. How many does a reader need?</p>
 
   <h3>What the measurement shows</h3>
-  <ul class="dr-evidence"><li><span>The packaged index.html contains 70 distinct links in .cn-menu-links and the same 70 in .cn-footer-tool-grid; Chromium&#x27;s parsed homepage DOM has 200 a[href] elements at 390×844. The same 70/70 group is present on all 37 body.cn-publication pages.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m4" target="_blank" rel="nofollow noopener noreferrer">Measured: Workspace navigation and footer groups (T76 recheck) ↗</a></li><li><span>The four intended primary reader links are Shop, Buying guides, Compare and Our approach; at 390px the fourth is hidden by CSS and is covered separately in DR-12.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m4" target="_blank" rel="nofollow noopener noreferrer">Measured: Workspace navigation and footer groups (T76 recheck) ↗</a></li><li><span>Pages built around the reader&#x27;s task, not the publisher&#x27;s process, are the stated standard.</span> <a class="pb-src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Helpful, reliable, people-first content ↗</a></li></ul>
+  <ul class="dr-evidence"><li><span>The packaged index.html contains 70 distinct links in .cn-menu-links and the same 70 in .cn-footer-tool-grid; Chromium’s parsed homepage DOM has 200 a[href] elements at 390×844. The same 70/70 group is present on all 37 body.cn-publication pages.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m4" target="_blank" rel="nofollow noopener noreferrer">Measured: Workspace navigation and footer groups (T76 recheck) ↗</a></li><li><span>The four intended primary reader links are Shop, Buying guides, Compare and Our approach; at 390px the fourth is hidden by CSS and is covered separately in DR-12.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m4" target="_blank" rel="nofollow noopener noreferrer">Measured: Workspace navigation and footer groups (T76 recheck) ↗</a></li><li><span>Pages built around the reader’s task, not the publisher’s process, are the stated standard.</span> <a class="pb-src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Helpful, reliable, people-first content ↗</a></li></ul>
   <h3>What the options cost</h3>
   <p class="cn-fineprint">Nothing here is applied by being listed. Each option lists what it costs
   and what it gives up, in this project's judgement, against the governing rule for this row:
@@ -275,7 +275,7 @@
   <p class="dr-question">The packaged paid-link controls already measure 44px tall on mobile. Keep this minimum, enlarge the button, or remove the rule?</p>
   <p class="dr-fixed"><strong>What changed:</strong> The 44px mobile min-height rule already existed in the main stylesheet; the T76 packaged-artifact recheck found all 29 visible controls across eight pages measuring 141.546875×44 CSS px with computed min-height:44px. The integration remeasured the existing rule and did not add or change it.</p>
   <h3>What the measurement shows</h3>
-  <ul class="dr-evidence"><li><span>At 390×844, all 29 packaged a.cn-retailer-link controls across 8 pages measured 141.546875×44 CSS px; each had computed min-height:44px and rel=sponsored.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m5" target="_blank" rel="nofollow noopener noreferrer">Measured: mobile paid-link targets and reader navigation (T76 recheck) ↗</a></li><li><span>WCAG 2.2 SC 2.5.8 gives a 24×24 CSS-pixel minimum target size or a spacing exception for smaller targets.</span> <a class="pb-src" href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank" rel="nofollow noopener noreferrer">W3C — Understanding SC 2.5.8 Target Size (Minimum), Level AA ↗</a></li><li><span>These measured targets exceed the 24×24 minimum by their dimensions; the spacing exception is not needed for this control set.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m5" target="_blank" rel="nofollow noopener noreferrer">Measured: mobile paid-link targets and reader navigation (T76 recheck) ↗</a></li></ul>
+  <ul class="dr-evidence"><li><span>At 390×844, all 29 packaged a.cn-retailer-link controls across 8 pages measured 141.546875×44 CSS px; each had computed min-height:44px and rel=sponsored.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m5" target="_blank" rel="nofollow noopener noreferrer">Measured: mobile paid-link target boxes (T76 recheck) ↗</a></li><li><span>WCAG 2.2 SC 2.5.8 gives a 24×24 CSS-pixel minimum target size or a spacing exception for smaller targets.</span> <a class="pb-src" href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank" rel="nofollow noopener noreferrer">W3C — Understanding SC 2.5.8 Target Size (Minimum), Level AA ↗</a></li><li><span>These measured targets exceed the 24×24 minimum by their dimensions; the spacing exception is not needed for this control set.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m5" target="_blank" rel="nofollow noopener noreferrer">Measured: mobile paid-link target boxes (T76 recheck) ↗</a></li></ul>
   <h3>What the options cost</h3>
   <p class="cn-fineprint">Nothing here is applied by being listed. Each option lists what it costs
   and what it gives up, in this project's judgement, against the governing rule for this row:
@@ -369,9 +369,9 @@
   </div>
   <h2>Keep publication table row labels wrapping and in sentence case</h2>
   <p class="dr-question">Legacy table rules were reaching the reader-facing tables. Was that a real defect, and is it fixed?</p>
-  <p class="dr-fixed"><strong>What changed:</strong> The scoped .cn-table reset from PR #194 was retained. The T76 packaged-artifact recheck measured all 173 body row-header cells across 14 pages at 1440×900 and 390×844: 0 clipped, 0 uppercase, 0 nowrap.</p>
+  <p class="dr-fixed"><strong>What changed:</strong> The scoped .cn-table reset from PR #194 was retained. The T76 packaged-artifact recheck measured all 172 body row-header cells across 14 pages at 1440×900 and 390×844: 0 clipped, 0 uppercase, 0 nowrap.</p>
   <h3>What the measurement shows</h3>
-  <ul class="dr-evidence"><li><span>The legacy dashboard stylesheet declares uppercase, nowrap row-header styling; the publication table reset overrides these inherited rules.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m1" target="_blank" rel="nofollow noopener noreferrer">Measured: computed style + overflow sweep in Chromium 1440px and 390px ↗</a></li><li><span>The packaged artifact contains 173 .cn-table tbody th cells across 14 pages; at both 1440×900 and 390×844 the sweep found 0 clipped, 0 uppercase and 0 nowrap cells.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m1" target="_blank" rel="nofollow noopener noreferrer">Measured: publication table row headers after packaging (T76 recheck) ↗</a></li></ul>
+  <ul class="dr-evidence"><li><span>The legacy dashboard stylesheet declares uppercase, nowrap row-header styling; the publication table reset overrides these inherited rules.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t69.md#m1" target="_blank" rel="nofollow noopener noreferrer">Measured: computed style + overflow sweep in Chromium 1440px and 390px ↗</a></li><li><span>The packaged artifact contains 172 .cn-table tbody th cells across 14 pages; at both 1440×900 and 390×844 the sweep found 0 clipped, 0 uppercase and 0 nowrap cells.</span> <a class="pb-src" href="https://github.com/kanlerxz87-cyber/Zone2/blob/main/docs/verification-t76.md#m1" target="_blank" rel="nofollow noopener noreferrer">Measured: publication table row headers after packaging (T76 recheck) ↗</a></li></ul>
   <h3>What the options cost</h3>
   <p class="cn-fineprint">Nothing here is applied by being listed. Each option lists what it costs
   and what it gives up, in this project's judgement, against the governing rule for this row:
@@ -459,6 +459,113 @@
     <p class="dr-unblock"><strong>Unblocks with:</strong> One sentence from the owner: permanent, or revisit-on-date.</p>
   </div>
 </article></section>
+<section class="cn-wrap cn-section dr-group" id="topic-pitches">
+  <h2 class="cn-table-title">Six topic pitches to choose from before anyone writes</h2>
+  <p class="cn-fineprint">Every pitch below is an editorial hypothesis, not measured demand. These six working titles are suggestions to review and choose from before anything is written; nothing here is a claim about search volume, popularity, trends or revenue, and no title calls a product best or trending. The order is this session&#x27;s lean, not a decision: when DRQ-07 closes and reviewed Search Console queries exist, measured questions replace this order (DR-08). Each pitch names the verified rows it would rest on, so a reviewer can reject a pitch before it costs any writing. Where a preserved marketing-desk treatment already answers the question (marketing/thermometers/), the pitch folds that treatment into one root URL rather than publishing a second answer (DR-05).</p>
+  <article class="dr-card" id="TP-01">
+  <div class="dr-card-head">
+    <p class="dr-cluster">Topic pitch · TP-01 · comparison</p>
+    <span class="dr-status is-open">Pitch — nothing written yet</span>
+  </div>
+  <h2>Two baskets, one dinner: the finish-together question</h2>
+  <p class="dr-question">Do I actually need two baskets to get everything on the table hot at once?</p>
+  <h3>What it would rest on</h3>
+  <ul class="dr-evidence"><li><span>P1 is listed with a 6 Qt capacity across two baskets, and the manufacturer states both baskets finish cooking at the same time (Sync Finish).</span> <a class="pb-src" href="https://chefman.com/products/turbofry-touch-dual-window-air-fryer" target="_blank" rel="nofollow noopener noreferrer">Chefman official product page — TurboFry Touch Dual-Window air fryer ↗</a></li><li><span>P3 is listed as one 8 Qt basket with an LED shake reminder — one zone, one timer.</span> <a class="pb-src" href="https://www.amazon.com/dp/B08DKYBTPH" target="_blank" rel="nofollow noopener noreferrer">Amazon listing — Chefman TurboFry Touch 8 Qt air fryer (observed destination of the third supplied link) ↗</a></li></ul>
+  <h3>What it costs and what it gives up</h3>
+  <p class="dr-opt-line"><strong>Costs:</strong> One comparison page built from the two Chefman listings and their care rows; every claim already has its source row.</p>
+  <p class="dr-opt-line"><strong>Gives up:</strong> The lazy version where a single basket is treated as a flaw. Some cooks only ever cook one thing, and the page has to say so.</p>
+  <div class="dr-verdict">
+    <p class="cn-eyebrow">Who it is for</p>
+    <p>A cook deciding between the two Chefman sizes who has ever served one cold side dish.</p>
+    <p class="dr-unblock"><strong>Covers:</strong> P1, P3</p>
+  </div>
+</article><article class="dr-card" id="TP-02">
+  <div class="dr-card-head">
+    <p class="dr-cluster">Topic pitch · TP-02 · answer guide</p>
+    <span class="dr-status is-open">Pitch — nothing written yet</span>
+  </div>
+  <h2>Ice water and boiling water: the five-minute thermometer check</h2>
+  <p class="dr-question">How do I know my meat thermometer is still reading true?</p>
+  <h3>What it would rest on</h3>
+  <ul class="dr-evidence"><li><span>USDA FSIS states that colour is not a reliable indicator that food is safe and advises checking the manufacturer&#x27;s instructions.</span> <a class="pb-src" href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers" target="_blank" rel="nofollow noopener noreferrer">USDA FSIS — Food thermometers: why colour is not a safety check ↗</a></li><li><span>P4 is listed as a 1-second instant-read probe thermometer and P5 as a wireless leave-in set — two different routines for the same doubt.</span> <a class="pb-src" href="https://www.amazon.com/dp/B0DHZTCNR5" target="_blank" rel="nofollow noopener noreferrer">Amazon listing — ThermoMaven 1-second instant-read meat thermometer (observed destination of the fourth supplied link) ↗</a></li></ul>
+  <h3>What it costs and what it gives up</h3>
+  <p class="dr-opt-line"><strong>Costs:</strong> One answer page, plus folding the preserved marketing-desk accuracy treatment into this URL (DR-05: one URL per answer).</p>
+  <p class="dr-opt-line"><strong>Gives up:</strong> Any implication that we measured accuracy ourselves. The check runs in the reader&#x27;s kitchen, and the page says exactly that.</p>
+  <div class="dr-verdict">
+    <p class="cn-eyebrow">Who it is for</p>
+    <p>Someone with a drawer thermometer and no idea whether to trust it before a big cook.</p>
+    <p class="dr-unblock"><strong>Covers:</strong> P4, P5</p>
+  </div>
+</article><article class="dr-card" id="TP-03">
+  <div class="dr-card-head">
+    <p class="dr-cluster">Topic pitch · TP-03 · guide</p>
+    <span class="dr-status is-open">Pitch — nothing written yet</span>
+  </div>
+  <h2>Where the probe goes: turkey placement without the guesswork</h2>
+  <p class="dr-question">Where exactly does the probe go in a turkey — and do the instructions say?</p>
+  <h3>What it would rest on</h3>
+  <ul class="dr-evidence"><li><span>USDA FSIS advises checking the manufacturer&#x27;s instructions for thermometer use, and states colour is not a reliable safety indicator.</span> <a class="pb-src" href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers" target="_blank" rel="nofollow noopener noreferrer">USDA FSIS — Food thermometers: why colour is not a safety check ↗</a></li><li><span>Both thermometer listings publish probe type and use information; the placement rules come from those instructions, not from memory.</span> <a class="pb-src" href="https://www.amazon.com/dp/B0DZFD6R9Z" target="_blank" rel="nofollow noopener noreferrer">Amazon listing — CHEF iQ Sense wireless meat thermometer (observed destination of the fifth supplied link) ↗</a></li></ul>
+  <h3>What it costs and what it gives up</h3>
+  <p class="dr-opt-line"><strong>Costs:</strong> One guide quoting the instructions and FSIS; the preserved marketing-desk placement page is folded in rather than duplicated.</p>
+  <p class="dr-opt-line"><strong>Gives up:</strong> Folklore. No grandmother&#x27;s-thumb rule appears unless an official document states it.</p>
+  <div class="dr-verdict">
+    <p class="cn-eyebrow">Who it is for</p>
+    <p>A first-time holiday host with a new probe and a whole bird.</p>
+    <p class="dr-unblock"><strong>Covers:</strong> P4, P5</p>
+  </div>
+</article><article class="dr-card" id="TP-04">
+  <div class="dr-card-head">
+    <p class="dr-cluster">Topic pitch · TP-04 · guide</p>
+    <span class="dr-status is-open">Pitch — nothing written yet</span>
+  </div>
+  <h2>Will it fit under your cabinets? The height question the footprint guide skips</h2>
+  <p class="dr-question">The counter depth is fine — but will it fit under the upper cabinets, with room to open?</p>
+  <h3>What it would rest on</h3>
+  <ul class="dr-evidence"><li><span>P2 is listed at 16.9 in deep × 15.8 in wide × 14.8 in high.</span> <a class="pb-src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="nofollow noopener noreferrer">Amazon listing — Emeril Lagasse 26 QT French Door air fryer toaster oven (observed destination of the second supplied link) ↗</a></li><li><span>P1 is listed at 13.38 × 11.81 × 10.63 in and P3 at 15.4 × 12.6 × 13.5 in — the exterior numbers a reader can measure against their own clearance.</span> <a class="pb-src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="nofollow noopener noreferrer">Amazon listing — Chefman TurboFry Touch 6 Qt dual-window air fryer (observed destination of the first supplied link) ↗</a></li></ul>
+  <h3>What it costs and what it gives up</h3>
+  <p class="dr-opt-line"><strong>Costs:</strong> One guide built from the three verified dimension rows, with a bring-your-own-tape-measure close.</p>
+  <p class="dr-opt-line"><strong>Gives up:</strong> Any verdict about the reader&#x27;s kitchen. The listings publish exterior dimensions only, and the page keeps saying so.</p>
+  <div class="dr-verdict">
+    <p class="cn-eyebrow">Who it is for</p>
+    <p>A buyer with standard upper cabinets and a tape measure.</p>
+    <p class="dr-unblock"><strong>Covers:</strong> P2, P1, P3</p>
+  </div>
+</article><article class="dr-card" id="TP-05">
+  <div class="dr-card-head">
+    <p class="dr-cluster">Topic pitch · TP-05 · seasonal cluster hub</p>
+    <span class="dr-status is-open">Pitch — nothing written yet</span>
+  </div>
+  <h2>The Thanksgiving-week counter: the pieces of gear that earn their space right now</h2>
+  <p class="dr-question">With a big dinner coming, which piece of gear actually changes the day?</p>
+  <h3>What it would rest on</h3>
+  <ul class="dr-evidence"><li><span>The three air-fryer listings publish capacity, power and dimensions; the two thermometer listings state their probe type — every card on the hub links to those rows.</span> <a class="pb-src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="nofollow noopener noreferrer">Amazon listing — Emeril Lagasse 26 QT French Door air fryer toaster oven (observed destination of the second supplied link) ↗</a></li><li><span>Google&#x27;s people-first guidance is the standard this hub is written to: useful first, seasonal framing second.</span> <a class="pb-src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Helpful, reliable, people-first content ↗</a></li></ul>
+  <h3>What it costs and what it gives up</h3>
+  <p class="dr-opt-line"><strong>Costs:</strong> A dated hub that must carry its dates on its face and be honest when the season passes.</p>
+  <p class="dr-opt-line"><strong>Gives up:</strong> Evergreen pretence. A seasonal hypothesis is allowed to expire, and this one is written for one week only.</p>
+  <div class="dr-verdict">
+    <p class="cn-eyebrow">Who it is for</p>
+    <p>A host planning the week of 2026-11-26 who wants one page instead of five tabs.</p>
+    <p class="dr-unblock"><strong>Covers:</strong> P1, P2, P3, P4, P5</p>
+  </div>
+</article><article class="dr-card" id="TP-06">
+  <div class="dr-card-head">
+    <p class="dr-cluster">Topic pitch · TP-06 · answer page</p>
+    <span class="dr-status is-open">Pitch — nothing written yet</span>
+  </div>
+  <h2>Watts, volts, and the outlet you already have</h2>
+  <p class="dr-question">Will any of these trip the kitchen circuit — and do they need a special outlet?</p>
+  <h3>What it would rest on</h3>
+  <ul class="dr-evidence"><li><span>All three air-fryer listings publish 1700 watts at 120 volts — one shared number the page can check row by row.</span> <a class="pb-src" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank" rel="nofollow noopener noreferrer">Amazon listing — Chefman TurboFry Touch 6 Qt dual-window air fryer (observed destination of the first supplied link) ↗</a></li><li><span>P2&#x27;s listing states 120 V and 1700 W in its product-information block.</span> <a class="pb-src" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank" rel="nofollow noopener noreferrer">Amazon listing — Emeril Lagasse 26 QT French Door air fryer toaster oven (observed destination of the second supplied link) ↗</a></li></ul>
+  <h3>What it costs and what it gives up</h3>
+  <p class="dr-opt-line"><strong>Costs:</strong> One short answer page from three verified power rows.</p>
+  <p class="dr-opt-line"><strong>Gives up:</strong> Electrical advice beyond what the listings state. The page reports the numbers and tells the reader to check their own kitchen.</p>
+  <div class="dr-verdict">
+    <p class="cn-eyebrow">Who it is for</p>
+    <p>A renter or old-house cook wondering about the outlet and the breaker, not the recipes.</p>
+    <p class="dr-unblock"><strong>Covers:</strong> P1, P2, P3</p>
+  </div>
+</article>
+</section>
 <section class="cn-wrap cn-section" id="owner-questions">
   <h2 class="cn-table-title">Answer these ten things and every row above can move</h2>
   <p class="cn-fineprint">These are the only inputs this project needs from its owner. Each one is
@@ -505,7 +612,7 @@
       <td><a class="pb-src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Helpful, reliable, people-first content ↗</a></td>
     </tr><tr id="DRQ-06">
       <th scope="row"><code>DRQ-06</code></th>
-      <td>Should the &#x27;Our approach&#x27; reader link be visible in the mobile primary navigation as well as the disclosure strip and footer?</td>
+      <td>Should the “Our approach” reader link be visible in the mobile primary navigation as well as the disclosure strip and footer?</td>
       <td>Wrap / collapse the four reader links / keep three visible. Recommendation: keep the current layout; the destination remains linked elsewhere.</td>
       <td>Pick an option for the mobile primary navigation.</td>
       <td>DR-12</td>
@@ -546,7 +653,7 @@
   <ul class="dr-how"><li>Per-pair word counts for the four duplicate guides (computed by tools/build_decision_room.py from the pages themselves).</li><li>The exact indexable URL set before and after any DR-02 change (derived from publication.indexable_paths()).</li><li>Whether every shop page passes the existing S1-S12 sourcing gate (tools/validate_shop.py already answers this).</li><li>Whether the disclosure sentence appears twice on every page (tools/verify_publication.py already asserts this).</li></ul>
   <div class="cn-note">
     <h2>What is already fixed and re-verified</h2>
-    <p><strong>DR-07</strong> — The 44px mobile min-height rule already existed in the main stylesheet; the T76 packaged-artifact recheck found all 29 visible controls across eight pages measuring 141.546875×44 CSS px with computed min-height:44px. The integration remeasured the existing rule and did not add or change it. <strong>DR-13</strong> — The scoped .cn-table reset from PR #194 was retained. The T76 packaged-artifact recheck measured all 173 body row-header cells across 14 pages at 1440×900 and 390×844: 0 clipped, 0 uppercase, 0 nowrap. Everything else on this page is a proposal awaiting a decision, and says so.</p>
+    <p><strong>DR-07</strong> — The 44px mobile min-height rule already existed in the main stylesheet; the T76 packaged-artifact recheck found all 29 visible controls across eight pages measuring 141.546875×44 CSS px with computed min-height:44px. The integration remeasured the existing rule and did not add or change it. <strong>DR-13</strong> — The scoped .cn-table reset from PR #194 was retained. The T76 packaged-artifact recheck measured all 172 body row-header cells across 14 pages at 1440×900 and 390×844: 0 clipped, 0 uppercase, 0 nowrap. Everything else on this page is a proposal awaiting a decision, and says so.</p>
     <p><a class="cn-text-link" href="decision-prompt.html">Read the design brief these decisions feed <span aria-hidden="true">→</span></a></p>
   </div>
 </section></main><footer class="cn-footer"><div class="cn-wrap">

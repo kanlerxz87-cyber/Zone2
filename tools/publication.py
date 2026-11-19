@@ -239,8 +239,88 @@ def guide_page(g):
     return shell(rel, g['title'], g['description'], body, article=g)
 
 
+# T76 (session 47786492, 2026-11-19): the three-question "which one is for you" chooser,
+# placed above the comparison table (RQ-15 / S-19). The brief asks for a chooser; the tree
+# had only a question index. The mapping rests on the five formats this page already
+# publishes and on checks a buyer can perform on the listing — no price, rating, popularity,
+# conversion or performance claim. The recommendation is framed as a starting point.
+CHOOSER = {
+    "eyebrow": "LET'S NARROW IT DOWN",
+    "title": "Which one is for you?",
+    "deck": "Answer three questions about how you cook. We'll point you to the format that fits — a starting point, not a tested ranking.",
+    "questions": [
+        {"id": "q1", "prompt": "What's the job in your kitchen?", "options": [
+            {"value": "two", "label": "Cook two things at the same time"},
+            {"value": "one", "label": "Cook one batch at a time"},
+            {"value": "oven", "label": "Roast or toast, oven-style"},
+            {"value": "temperature", "label": "Check whether food is done"},
+        ]},
+        {"id": "q2", "prompt": "How do you want to be told it's done?", "options": [
+            {"value": "quick", "label": "I'll check it myself, quickly"},
+            {"value": "reported", "label": "I want it reported to me"},
+            {"value": "undecided", "label": "Not deciding yet"},
+        ]},
+        {"id": "q3", "prompt": "What matters most?", "options": [
+            {"value": "space", "label": "Fitting a small space"},
+            {"value": "simple", "label": "Simple, everyday use"},
+            {"value": "connected", "label": "Connected monitoring"},
+        ]},
+    ],
+    "map": {
+        "q1": {"two": "P1", "one": "P3", "oven": "P2", "temperature": "temperature"},
+        "q2": {"quick": "P4", "reported": "P5", "undecided": "temperature"},
+        "notes": {
+            "space": "Check the listed dimensions on the listing before you buy.",
+            "simple": "Check the model's controls and presets on the listing.",
+            "connected": "Check the model's stated range and app requirements.",
+        },
+    },
+    "temperature_guide": "instant-read-or-wireless",
+    "caveat": "A starting point, not a tested recommendation.",
+}
+
+
+def _chooser_payload():
+    """The chooser's answer→product map and its guide targets, as one JSON object.
+
+    Rendered into a single data attribute so the page's own JS reads the same map the
+    server rendered — no second, drifting copy of the product slugs in the script.
+    """
+    guides = {k: [href("compare.html", "guides/" + PRODUCTS[k]["slug"] + ".html"), PRODUCTS[k]["type"]]
+              for k in ("P1", "P2", "P3", "P4", "P5")}
+    return {
+        "map": CHOOSER["map"],
+        "guides": guides,
+        "temperature": [href("compare.html", "guides/" + CHOOSER["temperature_guide"] + ".html"),
+                        "Temperature-tool guide"],
+        "caveat": CHOOSER["caveat"],
+    }
+
+
+def chooser():
+    fields = []
+    for q in CHOOSER["questions"]:
+        opts = "".join(
+            f'<label class="cn-chooser-opt"><input type="radio" name="chooser-{e(q["id"])}" value="{e(o["value"])}"><span>{e(o["label"])}</span></label>'
+            for o in q["options"])
+        fields.append(f'<fieldset class="cn-chooser-q"><legend>{e(q["prompt"])}</legend>{opts}</fieldset>')
+    form = (
+        '<form id="chooser-form" class="cn-chooser-form" novalidate data-chooser-map="'
+        + e(json.dumps(_chooser_payload(), ensure_ascii=False)) + '">'
+        '<div class="cn-chooser-fields">' + "".join(fields) + '</div>'
+        '<button class="cn-button" type="submit">Show me a starting point <span aria-hidden="true">→</span></button>'
+        '<p class="cn-chooser-result" id="chooser-result" role="status">Answer the three questions for a starting point.</p>'
+        '<noscript><p class="cn-chooser-noscript">JavaScript is off, so the chooser can\'t run. '
+        'Compare the five formats directly, or read the '
+        '<a href="guides/instant-read-or-wireless.html">temperature-tool guide</a>.</p></noscript>'
+        '</form>'
+    )
+    return f'<section class="cn-chooser-section" data-chooser><div class="cn-wrap cn-chooser"><div><p class="cn-eyebrow">{e(CHOOSER["eyebrow"])}</p><h2>{e(CHOOSER["title"])}</h2><p>{e(CHOOSER["deck"])}</p></div>{form}</div></section>'
+
+
 def compare():
     body = intro('SIDE BY SIDE', 'Compare the job, not the hype.', 'Different formats solve different shopping questions. The rows below keep manufacturer statements, listing descriptions and unresolved details separate.')
+    body += chooser()
     body += '<section id="compare-list" class="cn-wrap cn-section-tight cn-compare-list">'  # T72: anchor for the mobile sticky bar
     for p in PRODUCTS.values():
         body += f'<article id="{e(p["key"])}"><div class="cn-compare-heading"><img src="assets/img/{e(p["design"])}.svg" width="180" height="125" alt="Generic format illustration"><div><p class="cn-eyebrow">{e(p["type"])}</p><h2><a href="guides/{e(p["slug"])}.html">{e(p["name"])}</a></h2><p>{e(p["tradeoff"])}</p></div></div>{spec_table(p)}<p class="cn-compare-link">{product_cta(p, cls="cn-retailer-link")}</p></article>'
@@ -347,7 +427,7 @@ CURRENT_FLAGS = [
     # The original Decision Room findings entered with T69 (session arena/698addcd-zone2).
     # Their measurements remain as historical context in docs/verification-t69.md; the current
     # artifact-dependent rows below were remeasured for T76 in docs/verification-t76.md.
-    ('CN-17', 'Repaired; retained', 'Legacy dashboard CSS was clipping publication row labels', 'In the packaged artifact at 1440px and 390px, 14 pages contain 173 .cn-table tbody th cells; remeasurement found 0 clipped cells, 0 uppercase body labels and 0 nowrap labels. The scoped reset in publication.css remains in place. See docs/verification-t76.md#m1.', 'GOOGLE-HELPFUL', 'Keep the publication table rules scoped; recheck .cn-table after any shared-stylesheet change.'),
+    ('CN-17', 'Repaired; retained', 'Legacy dashboard CSS was clipping publication row labels', 'In the packaged artifact at 1440px and 390px, 14 pages contain 172 .cn-table tbody th cells; remeasurement found 0 clipped cells, 0 uppercase body labels and 0 nowrap labels. The scoped reset in publication.css remains in place. See docs/verification-t76.md#m1.', 'GOOGLE-HELPFUL', 'Keep the publication table rules scoped; recheck .cn-table after any shared-stylesheet change.'),
     ('CN-12', 'Open', 'Two shop front doors with different indexing signals', 'shop.html and shop/index.html are different shop designs with distinct packaged H1 text. In the packaged artifact, 17 main-content pages link to shop/index.html and 2 to shop.html; shared chrome is counted separately. Only shop.html is index,follow and in the sitemap; shop/index.html is noindex,follow and absent. Canonical choice remains owner-gated. See docs/verification-t76.md#m2.', 'GOOGLE-CANONICAL', 'Answer DRQ-01, then make the chosen URL canonical and regenerate the sitemap.'),
     ('CN-13', 'Open', 'Substantive shop product pages are noindex while root guides are indexable', 'The packaged artifact has 18 index,follow pages and 212 noindex,follow pages. Chefman: the noindex shop page has 779 main words, 2 tables, 20 total table rows and 16 official-source links; the indexable root guide has 653 words, 1 table, 6 total rows and 9 source links. ThermoMaven: the shop page has 603 words, 2 tables, 20 rows and 15 source links; the root guide has 663 words, 1 table, 5 rows and 8 source links. Word counts do not establish usefulness or predict indexing outcomes. See docs/verification-t76.md#m2.', 'GOOGLE-SITEMAP', 'Answer DRQ-02: approve an indexable URL set, then re-gate and re-package.'),
     ('CN-14', 'Open', 'Three feed endpoints serve the same packaged five-item feed', 'The packaged artifact contains feed.xml, shop/feed.xml and marketing/feed.xml with five items each; the three files are byte-identical. The source-tree shop/feed.xml has 6 items and marketing/feed.xml has 16, but tools/package_site.py replaces both nested feeds with the root output. The deployed feed endpoints do not publish separate shop-local guide URLs; those HTML page pairs remain a separate DR-05 decision. See docs/verification-t76.md#m3.', 'GOOGLE-CANONICAL', 'Answer DRQ-03: choose one advertised endpoint or specify distinct section feeds.'),
