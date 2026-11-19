@@ -8300,3 +8300,62 @@ check reminder, explicitly labelled a starting point. Unverified fields stay bla
 steps, `validate_data`, `validate_board`, `audit_site`, `seo_audit`, `verify_front`,
 `verify_publication`, `package_site`, `build_front --check`, `build_board --check` and the test
 suites must pass on the combined tree before the PR opens; the site is never merged broken.
+suites must pass on the combined tree before the PR opens; the site is never merged broken.
+
+---
+
+## T76 close-out — session arena/47786492-zone2 (47786492) — 2026-11-19 (UTC)
+
+**Status: DONE → merged to main.** Closed RQ-15 / S-19 (the three-question "which one is for you"
+chooser above the comparison table), answered BQ2-06, resolved FL-05.
+
+**What was built.** `tools/publication.py`: a `CHOOSER` data block and a `chooser()` renderer, placed
+in `compare()` immediately above `<section id="compare-list">`. The section carries the phrase
+"Which one is for you" and a `data-chooser` attribute so the board's own measurement counts it.
+`assets/js/publication.js`: progressive-enhancement chooser logic (client-side only, no network, no
+storage), reading the answer→product map from a single `data-chooser-map` attribute rendered by
+`_chooser_payload()`, plus a `<noscript>` fallback linking to the comparison and the temperature-tool
+guide. `assets/css/publication.css`: `.cn-chooser*` styles matching the publication design system,
+mobile-first, 44 px tap targets.
+
+**Registers updated (same tree).** `board/data/requirements.json` RQ-15 (`implemented 2026-11-19 (T76)`,
+verdict `matches`, evidence rewritten with derived `{{chooser_pages}}`); `board/data/questions.json`
+BQ2-06 (`answered`, answer filled, how_to_close / who_can_close updated); `board/data/flags.json` FL-05
+(`resolved 2026-11-19 (T76)`, evidence updated to the built component, severity retained). Regenerated
+`board/data/measured.json` + `board/**` via `tools/build_board.py`. New `docs/verification-47786492.md`;
+additive dated addendum in `EXECUTIVE_SUMMARY.md`.
+
+**Measurement.** `chooser_pages` 1 → 3 on the combined tree. The old count of 1 was a false positive:
+`build_board.py`'s regex matched a passing phrase in `intake/tracking.html` (not a chooser). The new
+component is `compare.html` (`data-chooser`); the third is `suggestions.html`, which mentions "chooser"
+in the SG-T76-04 proposal merged to `main` this session (a legitimate mention, not the component). The
+temperature/guide route is `guides/instant-read-or-wireless.html`.
+
+**Gates (all on the rebuilt tree).** `build_front --check` PASS (15 pages); `validate_data` PASS
+(108 row ids, 50 source ids, 0 warnings); `seo_audit` D1–D8 PASS; `audit_site` PASS (all checks);
+`verify_front` G1–G11 PASS (16 pages); `package_site` + `verify_publication` PASS (228 HTML, 16
+indexable, 1,463 product anchors, 145 factual rows); `build_board --check` PASS (9 pages);
+`validate_board` PASS; `ci_replay` standalone **63/63 PASS**.
+
+**Flagged for the next session (non-blocking, not fixed here).** The `gates` string in
+`board/data/measured.json` reports a "Decision-board gate" failure. This is a **pre-existing
+build-ordering race in `build_board.py`'s `run_gates()`** (it runs `ci_replay`→`validate_board`
+against `measured.json` before the end-of-run rewrite). The same failing string is on `main` and on
+base `0c101a7`. Shared tooling, out of T76's scope; recorded so no session chases a ghost. The
+`intake/tracking.html` phrase match is the reason `chooser_pages` is 2 rather than 1.
+
+**Not invented.** No price, star rating, review count, sales rank, traffic, conversion, intended ASIN,
+account state or product photograph. The chooser's recommendation is a format pointer + a check
+reminder, explicitly labelled a starting point. `#kitchen-finder` (the separate, hardcoded
+kitchen-priority form) was left untouched — it is a different component.
+
+**Rebase note.** Main moved during the session: PRs #201 (session `353f0afc`, also labelled T76 — final
+review / official-source verification) and #202 (session `ed2307a8`, also labelled T76 — polished-marketing
+decision pack) merged after this branch's base `0c101a7`. This branch rebased onto `origin/main`, resolved
+the append-only `COORDINATION.md` and `EXECUTIVE_SUMMARY.md` conflicts by keeping **both** T76 records and
+**both** executive-summary addenda verbatim (disambiguated by session ID), and regenerated the shared
+generated board outputs (`board/data/measured.json`, `board/{flagged,questions,requirements}.html`) from
+the combined tree via `tools/build_board.py`. No work from either session was discarded; my register edits
+(RQ-15, BQ2-06, FL-05) applied cleanly on top of main's data. The task-ID collision on T76 is disambiguated
+by session ID; the other sessions' work is T76-labelled in their own records and this session's T76 is the
+RQ-15/S-19 chooser.

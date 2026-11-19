@@ -32,3 +32,33 @@
 /* T72: sticky comparison bar, phones only (780px and below). Hidden on desktop. */
 .cn-sticky-compare{display:none}
 @media (max-width:780px){.cn-sticky-compare{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;gap:8px;align-items:center;justify-content:space-between;padding:6px 12px;background:#203c32;color:#faf8f1;font-size:12px;box-shadow:0 -2px 10px rgba(0,0,0,.18)}.cn-sticky-compare span{font-weight:600;letter-spacing:.2px}.cn-sticky-compare a{color:#faf8f1;min-height:44px;display:inline-flex;align-items:center;padding:0 6px;text-decoration:underline}body:has(.cn-sticky-compare){padding-bottom:64px}}
+
+/* T76 (session 47786492, 2026-11-19): the three-question "which one is for you" chooser,
+   built above the comparison table (RQ-15 / S-19). Modelled on the .cn-finder pattern;
+   mobile-first with 44px tap targets on the options and the submit control. */
+.cn-chooser-section{background:#e9ecdc;border-top:1px solid #dce1cb;border-bottom:1px solid #dce1cb}
+.cn-chooser{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding-block:46px;align-items:center}
+.cn-chooser .cn-eyebrow{margin-bottom:10px!important}
+.cn-chooser h2{font-size:39px;line-height:1.17;letter-spacing:-1.4px;margin-bottom:16px}
+.cn-chooser>div>p:not(.cn-eyebrow){font-size:12px;color:#5f6e54;line-height:1.85;margin:0}
+.cn-chooser-form{background:#f9faef;border:1px solid #d8debd;border-radius:6px;padding:28px}
+.cn-chooser-q{border:0;padding:0;margin:0 0 20px}
+.cn-chooser-q:last-of-type{margin-bottom:18px}
+.cn-chooser-q legend{font-size:11px;font-weight:600;margin-bottom:11px;padding:0}
+.cn-chooser-opt{display:flex;align-items:center;gap:11px;padding:12px 12px;border:1px solid #d8debd;border-radius:4px;margin-bottom:9px;cursor:pointer;font-size:12px;color:#324832;background:#fffef9}
+.cn-chooser-opt:hover{border-color:#aeb89a}
+.cn-chooser-opt input{width:17px;height:17px;accent-color:#294c3c;flex:0 0 auto}
+.cn-chooser-opt:has(input:checked){border-color:#294c3c;background:#eef0e1}
+.cn-chooser-form .cn-button{width:100%;justify-content:space-between;margin-top:4px}
+.cn-chooser-result{font-size:10px;min-height:34px;line-height:1.8;margin:14px 0 0!important}
+.cn-chooser-result a{font-weight:600;margin-right:10px}
+.cn-chooser-result strong{color:#294535}
+.cn-chooser-noscript{font-size:10px;color:#5f6e54;line-height:1.8;margin:12px 0 0!important}
+.cn-chooser-noscript a{font-weight:600}
+@media(max-width:780px){
+  .cn-chooser{grid-template-columns:1fr;gap:24px;padding-block:32px}
+  .cn-chooser h2{font-size:33px}
+  .cn-chooser-form{padding:20px}
+  .cn-chooser-opt{padding:13px 12px;min-height:44px}
+  .cn-chooser-form .cn-button{min-height:44px}
+}
