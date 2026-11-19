@@ -7738,3 +7738,22 @@ Sources, the exact source list and the reproduction method: `docs/verification-5
   CN-08 administrator Pages source mode. Nothing was filled in to close them.
 - **Not touched:** no other session's namespace or data; no open PR merged or closed by this session
   other than its own #183.
+
+
+
+
+
+
+## T69 — claim: make current suggestions/questions rollups match the displayed registers
+
+| Field | Record |
+|---|---|
+| Session / branch | `arena/60b0ea6b-zone2`; work remains on the Arena-assigned current branch |
+| Claimed | 2026-11-19 (UTC), before implementation |
+| Status | **in progress** |
+| Baseline | `605e49f` (PR #178 merge). The working tree was clean. Existing open PRs #162/#163/#172 are older, superseded/integration-era work; this task does not adopt their data or branch. Current repository output was inspected before editing. |
+| Task | The current root `suggestions.html` shows five current S63 proposals plus the preserved 18-row board, but its lead still reads “18 things” / “4 decided” without distinguishing those registers and says “last updated 2026-11-16.” `questions.html` likewise shows seven current-release questions plus 17 preserved questions while its lead reports only 17. Fix the reader-facing summaries and section labels so current versus preserved counts/dates are explicit and derived from their actual source arrays. Add regression coverage that fails if these rollups drift. No owner direction, answer, product fact, source claim, link intent, or campaign observation is changed. |
+| File scope | `tools/publication.py`, `tools/build_front.py`, `tools/verify_front.py`, NEW `tests/test_front_surfaces.py`, generated `suggestions.html` / `questions.html` through `tools/build_front.py`, NEW `docs/verification-60b0ea6b.md`, `COORDINATION.md` (append-only). |
+| Excluded | `docs/board-9251f262.json`, `board/data/**`, `ledger/**`, `content/publication.json`, `shop/**`, official-source/product research, tracking/measurement, workflow, sitemap/feed, every other session's claimed data. Existing board counts and owner directions will be rendered as preserved records, not edited or consolidated. |
+| Coordination | The mandatory pre-push rebase found upstream T68 already recorded for `arena/57eb4af5-zone2`; that entire upstream record is retained unchanged. This narrower task is renumbered T69 to avoid a collision. Existing PRs #162/#163/#172 are not edited, merged or closed. This is a distinct derived-output accuracy repair, not a takeover of another session's topic-data or product-research task. |
+| Baseline finding | Local tree check: `publication.PROPOSALS` has 5 current proposals; `publication.QUESTIONS` has 7 current questions; `docs/board-9251f262.json` carries 18 preserved suggestions (4 with owner directions) and 17 preserved questions (15 open, 2 answered). Rendered roots visibly combine both sets but the current headings/bylines report only the preserved set. These are repository-derived counts, not external traffic or product facts. |
