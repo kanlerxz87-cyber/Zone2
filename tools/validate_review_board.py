@@ -9,7 +9,7 @@ The 2026-11-16 request states the contract this gate enforces:
 
 A suggestion board is exactly where that rule is easiest to break, because a proposal *is* an
 assertion: it claims a problem exists, that a fix would work, and that a cost is realistic.
-So this gate holds the register to thirteen rules, and most of them are defects this repository
+So this gate holds the register to twelve rules, and most of them are defects this repository
 has already shipped at least once in another namespace:
 
    1. source integrity      - every cited id resolves; a dangling citation is a rumour with a number
@@ -27,6 +27,8 @@ has already shipped at least once in another namespace:
   10. requirements traced   - every row carries a clause, a state from the closed vocabulary, and either
                               a source or an explicit statement that no official source can settle it
   11. no product price      - the pages are reader-facing, so the repository's no-price rule applies
+  12. structured pick       - a row's recommended_option must be an offered option and must be named
+                              in the recommendation prose (wave 2, T72)
 
 Run: python3 tools/validate_review_board.py
 """
@@ -55,6 +57,11 @@ OFFICIAL_HOSTS = {
     "ftc.gov",
     "developers.google.com",
     "support.google.com",
+    # Wave 2 (T72, 2026-11-19): the USDA Food Safety and Inspection Service chart is the official
+    # anchor for the thermometer reference concept (PS-19). Same addition CR-8 made to
+    # marketing/scripts/verify_marketing.py, for the same reason.
+    "www.fsis.usda.gov",
+    "fsis.usda.gov",
 }
 
 STATES = {"MET", "PARTIAL", "NOT_MET"}
@@ -125,6 +132,13 @@ def check_sources(rep: Report) -> None:
         cited |= set(row.get("source_ids") or [])
     for row in rb.FINDINGS:
         cited |= set(row.get("source_ids") or [])
+    # Wave 2 (T72): ideas and irregularities carry citations too; ignoring them made the
+    # "defined but never cited" warning a false negative for exactly the rows a reader
+    # meets first on the idea board.
+    for row in rb.IDEAS:
+        cited |= set(row.get("source_ids") or [])
+    for row in rb.IRREGULARITIES:
+        cited |= set(row.get("source_ids") or [])
     for sid in sorted(cited):
         if sid not in rb.SOURCES:
             rep.fail(f"source {sid} is cited but not defined")
@@ -164,6 +178,15 @@ def check_proposals(rep: Report) -> None:
         unknown = sorted(named - opt_ids)
         if unknown:
             rep.fail(f"{pid}: recommends {p['recommendation']!r}, naming unoffered option(s) {unknown}")
+
+        # Wave 2 (T72): a structured recommendation must name an offered option, so the answer sheet
+        # can print it without re-parsing prose.
+        rec_opt = p.get("recommended_option")
+        if rec_opt is not None:
+            if rec_opt not in opt_ids:
+                rep.fail(f"{pid}: recommended_option {rec_opt!r} names an unoffered option")
+            if rec_opt not in named:
+                rep.fail(f"{pid}: recommended_option {rec_opt!r} is not named in the recommendation prose")
 
         # Rule 4: the scores are declared self-assessed, and must at least be in range.
         for field in ("quality_impact", "conversion_impact", "risk", "effort"):
