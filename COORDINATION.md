@@ -8580,3 +8580,97 @@ editorial hypotheses, not measured demand.
 - **Live spot-check:** `decision-room.html` fetched after deploy — the Decision Room, DR-01..DR-13 with sourced evidence, the **TP-01..TP-06 topic pitches** (spot-checked TP-06 live: "Watts, volts, and the outlet you already have" with its AMZ-P1/AMZ-P2 citations), and DRQ-01..DRQ-10 all present; `decision-prompt.html` carries the Content direction block.
 - **Stale-PR disposition (corrected):** #194, #184 and #182 were **merged** on GitHub before this session could close them (all three report `MERGED`); their content is on `main` in full via their own merges and via PR #203, unified with this branch's integration by PR #207. `docs/verification-af15a2f9.md` §6 carries the correction.
 - **T79: done.** Topic pitches remain proposals (nothing written from them until the owner chooses, and measured Search Console queries replace the order when DRQ-07 closes). Blanks stay blank; IR-1..IR-4 stay flagged and non-blocking.
+
+**Rebase note (2026-11-19):** PR #208 closed out the PR #207 merge while T76 was underway; that record is preserved above. The T76 claim and its append-only scope amendments remain below.
+
+## T76 claim — session `arena/5a3dd862-zone2` (concurrent T76 session) (5a3dd862) — 2026-11-19 (UTC)
+
+**Claimed:** 2026-11-19 (UTC), on branch `arena/5a3dd862-zone2` (base `0c101a7`, the merge of PR #200).
+Task id **T76** verified free at claim time: `grep -c T76` = 0 on this tree and on `origin/main`.
+**Coordination check before claiming.** `gh pr list --state open`: **#194** (`1b09bb6d`, T73 final
+integration — last commit 20:07Z, under the 60-minute stale rule, not taken over), **#182**/**#184**
+(superseded by #194's takeover, recorded in PI-08, untouched). T63 (`10727edd`, PRs #164/#171) and
+T64 (`32788da6`, PRs #167/#169) merged 2026-11-19 ~06:1x UTC — their file scopes are closed. T74
+(PR #196) and T75 (PR #199, CR-14 closed) close-out records are on this tree. S-20 / RQ-16 was
+named by T74's close-out as "the board's recommended next build session" and remains unclaimed.
+
+**Task: finish S-20 / RQ-16 — the mobile-first pass — and sign it off measured, not asserted.**
+T72 (`aecb287a`, PR #193) shipped the mobile type floor, the 44 px control rule and the
+sticky comparison bar for the publication namespace, and recorded the residuals in
+`docs/verification-aecb287a.md`: **344 text runs of 9–10.6 px** remain on `marketing/*` pages and
+`flagged.html` table cells ("a separate stylesheet and pill/code styles; the change belongs in that
+stylesheet's owner's scope"), and **1,574 small controls** remain ("table-cell links, status chips
+and breadcrumb items … a human sign-off pass is still needed"). The RQ-16 row still reads
+`partly` and "Requires a sign-off pass before the row can be called finished."
+
+| Step | Detail |
+|---|---|
+| (a) Measure first | Re-run T72's exact measurement method (headless Chromium, 390×844, mobile emulation, computed font sizes and control boxes) over the same 64 reader pages (`board/data/measured.json` `reader_pages`) and over every packaged page, **before any edit**. Record offending selectors per stylesheet per page. |
+| (b) Fix in the owning stylesheets | Extend the mobile type floor (sub-11 px → 11 px at ≤780 px; desktop unchanged — T72's convention) and the standalone-target rules into `marketing/assets/marketing.css`, `assets/css/style.css`, `assets/css/publish.css` — additive `@media (max-width:780px)` blocks at end of file only. No HTML file is edited: `flagged.html` and the marketing pages are fixed through the stylesheets they load. |
+| (c) Sign-off pass on the small-target residual | Class every residual control class against WCAG 2.5.8 (W3C Understanding SC 2.5.8 — T72's source V2): links inside running text are exempt (Inline exception) and are counted as signed-off; standalone targets (chips, breadcrumbs, table-cell action links) get the 24×24 SC-2.5.8 floor, and 44×44 (SC 2.5.5, T72's V3) where the layout allows, matching the rule T72 applied to header/footer/filter/button controls. Whatever remains is named and counted, not hidden. |
+| (d) Re-measure | Same method, after the change. Both views (before/after) recorded with counts by page and by selector class. |
+| (e) Board rows | `board/data/requirements.json` **RQ-16** row updated to match the measured tree (verdict word stays `no-status-given` — the brief gave S-20 no status; `measured_status`/`measured`/`gap` text updated with the sign-off reference). **RQ-04**'s measured text is refreshed only if re-measurement confirms it is stale (its row still says "Nothing on the site asks or answers a single question about a meat thermometer" while `guides/meat-thermometers.html`, `guides/instant-read-or-wireless-thermometer.html`, `guides/chef-iq-sense.html` and `guides/thermomaven-instant-read.html` are published — raised here first as an irregularity). |
+| (f) Gate the automatable part | `tests/browser.cjs` (already run by CI over the packaged site) gains one assertion in its mobile sweep: no computed text under 11 px at 390 px, scoped to exactly the pages this session measures clean (asserted over the full packaged set only if the measurement shows the whole set is clean). The judgment part (inline-exempt classification) stays gated by the dated sign-off record in the verification doc, per the brief's "automate the parts that can be automated, gate the parts that cannot". |
+| (g) Integrate | Fresh dated record `docs/verification-5a3dd862.md`; regenerated derived board views through `tools/build_board.py` only; every gate (`ci_replay`, `validate_board`, `build_board --check`, `seo_audit`, `audit_site`, `verify_publication`, `tests/`); PR → merge without waiting → confirm GitHub Pages deploy → append the close-out here. |
+
+**Overlap handling with open PR #194 (`1b09bb6d`).** Its live claim includes `assets/css/publication.css`,
+`tools/publication.py`, `flagged.html`, `compare.html`, `board/data/measured.json`, `tests/test_front_surfaces.py`
+and the generated root front pages. **None of those is edited here.** The fix lives in the three
+stylesheets PR #194 does not claim, which the affected pages load alongside `publication.css`; the
+T72 floor in `publication.css` is not touched or restated there. `board/data/measured.json` and
+`board/*.html` are regenerated through `tools/build_board.py` (derived outputs; conflicts, if any,
+resolve by regeneration on the combined tree — the pattern T74 recorded). If #194 merges first this
+branch re-merges `origin/main` and re-runs the builders before opening its PR; if this PR merges
+first, #194 regenerates on top. `README.md` / `EXECUTIVE_SUMMARY.md` (PR #194's claim) are not
+edited — this task's record lives here and in `docs/verification-5a3dd862.md`.
+
+**Excluded:** `.github/**`; `tools/build_front.py`, `tools/publication.py`, `tools/verify_publication.py`,
+`assets/css/publication.css` (run/gated, never edited); `flagged.html` and every other HTML page
+(regenerated only through their own builders if a gate reports drift; expected byte-identical —
+this task changes CSS, JS-test assertions and one board data file only); `ledger/**`, `brief/**`,
+`console/**`, `audit/**`, `discovery/**`, `intake/**`, `docs/review-board.json`; every verified
+product/source value; operator dashboard namespaces (`board/*.html` styling via `board/assets/board.css`,
+`pages/`, `research-hub/`, `zone2/`, `northstar/`, `revalidation/`, `audit/`) — S-20 is a reader-experience
+row; the sign-off names these as out of scope with counts.
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+**Amendment (2026-11-19, same session, before any implementation edit): `assets/css/shop.css` added to
+scope.** The before-measurement (headless Chromium 153.0.8010.0, 390×844) shows the shop namespace's
+residuals live in `shop.css`'s own selectors (`.sh-paid` at 10.8 px via `.8em`, `.sh-more-link` at 22 px
+target height, `.sh code` at `.86em`), and `shop.css` loads after `style.css` on shop pages — T72's words
+apply: "the change belongs in that stylesheet's owner's scope". `shop.css` is claimed by no live session
+(`gh pr list --state open` files of #194/#182/#184 do not include it). Scope row below amended to match.
+Also recorded: `publication.css` loads **last** on the publication pages (style → publish → publication),
+so the few `publication.css`-owned residuals (`.cn-table thead th` 9 px, `.cn-paid` 8 px, `.cn-toc h2`
+10 px) cannot be restated by earlier files without `!important`; they are restated in `style.css`'s mobile
+block with `!important`, keeping PR #194's live claim on `publication.css` untouched.
+
+| T76 | **Finish S-20 / RQ-16 — the mobile-first pass — measured, then signed off.** (a) Re-run T72's headless-Chromium measurement (390×844) before any edit; (b) extend the mobile type floor and standalone-target rules into `marketing/assets/marketing.css`, `assets/css/style.css`, `assets/css/publish.css` (additive ≤780 px blocks, desktop unchanged); (c) sign off the 1,574-control residual class by class against WCAG 2.5.8 (Inline exception for links in running text; 24×24 floor / 44×44 where layout allows for standalone targets), remainder named and counted; (d) re-measure and record both views; (e) update RQ-16 in `board/data/requirements.json` (and RQ-04's stale text if re-measurement confirms); (f) one permanent gate in `tests/browser.cjs`'s 390 px sweep; (g) `docs/verification-5a3dd862.md`, all gates, PR → merge without waiting → confirm Pages deploy → record. | **claimed 2026-11-19 (UTC), in progress** | `arena/5a3dd862-zone2` (5a3dd862) | `marketing/assets/marketing.css` (additive media block only), `assets/css/style.css` (additive media block only), `assets/css/publish.css` (additive media block only), `tests/browser.cjs` (one added assertion in the existing 390 px sweep), `board/data/requirements.json` (RQ-16 row; RQ-04 row only if re-measured), regenerated-through-`tools/build_board.py`-only: `board/*.html`, `board/data/measured.json`, NEW `docs/verification-5a3dd862.md`, append-only `COORDINATION.md` (this claim + close-out). **Excluded:** everything in the overlap-handling and Excluded paragraphs above. |
+
+**T76 scope amendment / integration-generated artifacts (2026-11-19, logged append-only).** The CSS
+source block in `assets/css/style.css` is the builder source for `pages/assets/dashboard.css` and
+`decisions/assets/dashboard.css`; the clean-replay gate reported each generated copy stale after the
+source change. Both copies were regenerated by their owners' existing builders (`build_site.py`,
+`build_decisions.py`) only — no dashboard content/source was edited. The repository's 63-step replay
+also found pre-existing generated drift in the console and required its normal builder to make the
+combined tree current: `console/index.html`, `console/review.html`, `console/manifest.json` (measured
+internal-link total and corresponding generated hashes only; no hand-authored console copy changed).
+These are integration-required generated outputs, not a change to the operator dashboard product scope.
+They are recorded here because they were absent from the initial file-scope table; all were regenerated
+through builders and passed `ci_replay.py` 63/63. Final scope therefore includes these generated-only
+outputs: `pages/assets/dashboard.css`, `decisions/assets/dashboard.css`, `console/index.html`,
+`console/review.html`, `console/manifest.json`. Source owners remain untouched. The shop stylesheet
+amendment above also stands: `assets/css/shop.css` contains only the additive T76 mobile block.
+
+**T76 post-rebase adjustment (2026-11-19):** while replaying this branch onto `origin/main` after
+PR #194 / #205 merged, the browser type-floor gate found a new 10 px chooser-result message on
+`compare.html` (and its no-script fallback in `assets/css/publication.css`). The chooser markup/JS and
+`publication.css` remain owned by the merged PR's changes; T76 adds the phone-only 11 px restatement
+in its already-claimed `assets/css/style.css` scope, keeping the PR #194/205-owned stylesheet
+untouched. The same combined-tree sweep found 15 short `flagged.html` table links under 24 px wide;
+`style.css` now gives those source-table links a 24 px minimum width. Re-measured the combined tree
+with the same 390×844 Chromium method: the 85-page reader/shop scope is 0 text-bearing elements under
+11 px, 0 standalone targets with either dimension under 24 px, 2,030 in the 24–44 px band, and 0
+overflow pages. Re-ran CI replay after rebasing and regenerating; details/gates updated in the T76
+close-out below.
