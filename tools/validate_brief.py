@@ -245,11 +245,27 @@ def check_derived_counts() -> None:
         "Published pages printing a product price": f"0 of {m['published']}",
         "Pages describing the site as AI-powered": str(m["ai_powered_pages"]),
     }
+    # CR-3: the data may carry {{tokens}} that build_brief fills from this same measure(). Resolve
+    # them identically here, then (below) require the PUBLISHED page to show the measured values,
+    # so a stale render fails even though the data file holds no typed number.
+    tokens = {
+        "pages_tagged": f"{m['with_tag']} of {m['published']}",
+        "pages_disclosed": f"{m['with_disclosure']} of {m['published']}",
+        "pages_priced": f"{m['price_pages']} of {m['published']}",
+    }
+
+    def resolve(v: str) -> str:
+        return re.sub(r"\{\{(\w+)\}\}", lambda t: tokens.get(t.group(1), t.group(0)), v)
+
+    published_index = (REPO / "brief" / "index.html").read_text(encoding="utf-8")
     for row in SUMMARY["state"]:
         want = expect.get(row["metric"])
         if want is None:
             continue
-        got = str(row["value"]).strip()
+        if want not in published_index:
+            err(f"summary: brief/index.html does not show {want!r} for {row['metric']!r} - "
+                "re-run python3 tools/build_brief.py")
+        got = resolve(str(row["value"]).strip())
         if got != want:
             err(
                 f"summary: {row['metric']!r} prints {got!r} but the tree measures {want!r} — "

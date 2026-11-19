@@ -53,6 +53,9 @@ REQUIRED_NAMESPACES = [
     "revalidation/index.html",
     "marketing/index.html",
     "discovery/index.html",
+    # T66 (session 75efdf57, 2026-11-19): the shop section. index.html links it from the reader
+    # nav, the product cards and the footer; this entry makes losing that route a build failure.
+    "shop/index.html",
 ]
 
 # URLs Amazon answers with an error page. Evidence: ledger/verification.json V-02..V-04 and

@@ -468,6 +468,43 @@
       "decision": "",
       "status": "awaiting owner decision",
       "owner": "owner"
+    },
+    {
+      "id": "SG-15",
+      "area": "Publishing gates / thermometer desk",
+      "title": "Bring the thermometer desk under the shared marketing verifier, and promote its open items to flags at the next count pass",
+      "suggestion": "The thermometer desk (marketing/thermometers/, T64) is rendered by build_marketing and covered by verify_marketing's G13/G14 (orphans, sitemap, feed, canonical). It is not in the PAGES registry, so G1–G10 do not run on it. The reason is that G10's host allow-list does not include www.fsis.usda.gov, the source for every food-safety sentence on the desk. tools/build_thermometers.py enforces equivalent gates itself. The desk's irregularities (Q-21, Q-22) sit in the question register rather than the flag register, because adding flags then would have made the typed flag count in README.md and the root pages wrong (T63, session 10727edd, later added F-44…F-48 with different meanings and updated those counts), which this session does not own.",
+      "why": "One verifier for every reader page is easier to trust than two gates that agree today. The food-safety lines must link to USDA FSIS, a primary government source, so the allow-list rather than the sources should change. The flag counts should move in one integration pass that updates every surface together (audit_site check_counts, validate_data check_published_counts).",
+      "evidence": [
+        "S61",
+        "S62",
+        "S42"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "Add www.fsis.usda.gov to verify_marketing OFFICIAL_HOSTS and run G1–G10 over every rendered page, desk included",
+          "tradeoff": "A single gate. It needs a small change in marketing/scripts/verify_marketing.py by the session that owns it (CR-8)."
+        },
+        {
+          "id": "B",
+          "label": "Keep the desk's own gate in build_thermometers.py as the authority for marketing/thermometers/",
+          "tradeoff": "No change elsewhere. There are two places to update when a rule changes."
+        },
+        {
+          "id": "C",
+          "label": "Do A, then promote Q-21/Q-22 to flags F-44/F-45 in the same integration pass that updates the count prose",
+          "tradeoff": "Most complete. It touches README.md and the root pages, so only an integration session should do it."
+        }
+      ],
+      "recommended": "C",
+      "needs_answers": [
+        "Q-21",
+        "Q-22"
+      ],
+      "decision": "",
+      "status": "awaiting owner decision",
+      "owner": "owner"
     }
   ]
 }

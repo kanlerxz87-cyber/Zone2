@@ -23,3 +23,10 @@ body.cn-publication{--cn-ink:#263b30;--cn-paper:#faf8f3;--cn-muted:#566452;--cn-
 
 .cn-icon{display:inline-block;width:12px;height:12px;vertical-align:-2px;flex-shrink:0}.cn-wordmark b .cn-icon{width:25px;height:25px;vertical-align:middle}.cn-disclosure{font-size:12px}.cn-paid{font-size:9px}.cn-footer-small{font-size:10px}
 @media(max-width:580px){.cn-disclosure{font-size:11px}.cn-footer-small{font-size:10px}.cn-hero-stamp{bottom:38px}}
+
+/* Prior top-level chrome stays in source history; the deployed global masthead is singular. */
+.cn-publication .pb-mast,.cn-publication .pb-disc{display:none}
+/* Retained shop citations must wrap on phones; source data/content is untouched. */
+.cn-publication .sh-cite{white-space:normal}.cn-publication .pb-src{overflow-wrap:anywhere}
+.cn-publication .pb-prose,.cn-publication .pb-article .pb-sec>.pb-wrap>*{min-width:0}.cn-publication .pb-table-scroll{max-width:100%}
+@media(max-width:580px){.cn-publication .sh-grid,.cn-publication .sh-tiles,.cn-publication .sh-guides{grid-template-columns:minmax(0,1fr)}.cn-publication .sh-grid>*{min-width:0}}

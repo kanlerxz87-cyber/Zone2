@@ -48,9 +48,20 @@ let runningBrowser;
     '/guides/products/emeril-french-door-360.html', '/guides/products/chefman-turbofry-8qt.html',
     '/guides/products/thermomaven-digital.html', '/guides/products/chef-iq-sense.html',
     '/about.html', '/privacy.html', '/suggestions.html', '/questions.html', '/workroom.html',
-    '/flagged.html', '/pages/index.html', '/decisions/index.html', '/release/index.html', '/board/index.html'
+    '/flagged.html', '/pages/index.html', '/decisions/index.html', '/release/index.html', '/board/index.html',
+    '/shop/index.html', '/shop/briefing.html', '/shop/guides/index.html',
+    '/marketing/thermometers/index.html', '/guides/instant-read-or-wireless-thermometer.html',
+    '/guides/thermometer-for-air-fryer.html', '/behind-the-site.html'
   ];
   const widths = process.env.CN_TEST_WIDTHS ? process.env.CN_TEST_WIDTHS.split(',').map(Number) : [1440, 390, 320];
+  async function assertSponsored(page) {
+    const bad = await page.locator('a[href]').evaluateAll(anchors => anchors.filter(a => {
+      const u = new URL(a.href, location.href);
+      const market = /^(?:www\.)?amazon\.(?:com|ca|co\.uk|de|fr|it|es|nl|com\.au|co\.jp|in)$/.test(u.hostname) || ['link.amazon', 'amzn.to'].includes(u.hostname);
+      return market && !['sponsored', 'nofollow', 'noopener', 'noreferrer'].every(value => a.relList.contains(value));
+    }).map(a => a.href));
+    assert.deepEqual(bad, [], 'All rendered marketplace anchors, including script-generated citations, are qualified');
+  }
   for (const width of widths) {
     await page.setViewportSize({ width, height: 900 });
     for (const rel of pages) {
@@ -72,6 +83,7 @@ let runningBrowser;
       assert(layout.disclosureInView && layout.belowMasthead && layout.height > 20, 'Disclosure visibility ' + width + ' ' + rel);
       assert(layout.text.includes('As an Amazon Associate I earn from qualifying purchases.'), rel);
       assert.equal(layout.shellCount, 1, 'Single masthead ' + rel);
+      await assertSponsored(page);
       seen.push(width + ' ' + rel);
       if (width === 1440 && ['/', '/suggestions.html', '/workroom.html', '/guides/basket-or-oven.html'].includes(rel)) {
         const scan = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
@@ -82,6 +94,12 @@ let runningBrowser;
       }
     }
   }
+  for (const rel of ['/products.html', '/analysis.html', '/northstar/index.html']) {
+    await page.goto(base + rel, { waitUntil: 'networkidle' });
+    await assertSponsored(page);
+  }
+  await page.goto(base + '/flagged.html', { waitUntil: 'networkidle' });
+  assert.equal(await page.locator('#cn-current-flags tbody tr').count(), 6);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(base + '/');
   await page.getByRole('button', { name: 'Thermometers', exact: true }).click();

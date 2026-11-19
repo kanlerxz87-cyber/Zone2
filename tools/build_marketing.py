@@ -435,7 +435,8 @@ def render_blocks(blocks, *, key: str) -> str:
 # --------------------------------------------------------------------------- page shell
 
 
-def json_ld(title: str, description: str, url: str, crumbs) -> str:
+def json_ld(title: str, description: str, url: str, crumbs, *, published: str | None = None,
+            modified: str | None = None) -> str:
     """Article + BreadcrumbList only. Product / Review / AggregateRating markup is deliberately
     absent: nobody has used these products, and Google's review-snippet guidelines require a
     genuine, user-sourced rating behind that markup. See DS-07 and question Q-11."""
@@ -445,8 +446,8 @@ def json_ld(title: str, description: str, url: str, crumbs) -> str:
             "@type": "Article",
             "headline": title,
             "description": description,
-            "datePublished": f"{ED_AS_OF}T00:00:00+00:00",
-            "dateModified": f"{AS_OF}T00:00:00+00:00",
+            "datePublished": f"{published or ED_AS_OF}T00:00:00+00:00",
+            "dateModified": f"{modified or AS_OF}T00:00:00+00:00",
             "inLanguage": "en",
             "isAccessibleForFree": True,
             "mainEntityOfPage": {"@type": "WebPage", "@id": url},
@@ -475,7 +476,14 @@ def json_ld(title: str, description: str, url: str, crumbs) -> str:
 
 def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
           path: str | None = None, crumbs: list | None = None, kicker: str = "",
-          lede: str = "") -> str:
+          lede: str = "", read_on: str | None = None, rail_note: str | None = None) -> str:
+    # `read_on` / `rail_note` (T64, 2026-11-19, additive): a section built from a different fact base
+    # (marketing/data/thermometers.json, via tools/build_thermometers.py) states its own read date and its
+    # own source count instead of inheriting the air-fryer desk's. Defaults leave every existing page
+    # byte-identical, which `--check` proves.
+    read_on = read_on or ED_AS_OF
+    rail_note = rail_note or ("Six official pages, read row by row. Two of them disagree with each other, so the\n"
+                              "      tables show both numbers instead of picking one.")
     root = "../" * depth
     page_path = path or here
     url = LIVE + page_path
@@ -488,7 +496,8 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
         crumb_html = f'<nav class="crumbs" aria-label="Breadcrumb">{" › ".join(parts)}</nav>'
     head_kicker = f'<p class="eyebrow">{esc(kicker)}</p>' if kicker else ""
     head_lede = f'<p class="lede">{esc(lede)}</p>' if lede else ""
-    ld = json_ld(title, description, url, crumbs or [])
+    ld = (json_ld(title, description, url, crumbs or [], published=read_on, modified=read_on)
+          if read_on != ED_AS_OF else json_ld(title, description, url, crumbs or []))
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -525,7 +534,7 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
     A commission may be earned when you buy through our links, at no extra cost to you. Product links are
     Special Links carrying the Associates tag <code>{esc(ASSOCIATES_TAG)}</code>.
     <a href="{root}verification.html">How we verify</a>.</p>
-    <aside class="scope-note" role="note"><strong>Product identity is not confirmed.</strong> These pages describe the Amazon listings the supplied short links resolved to on {esc(ED_AS_OF)}; they do not establish that those destinations are the products intended in the brief. The supplied codes are 9 characters and an ASIN is 10, so we write about the listings we can read rather than for products we cannot name.
+    <aside class="scope-note" role="note"><strong>Product identity is not confirmed.</strong> These pages describe the Amazon listings the supplied short links resolved to on {esc(read_on)}; they do not establish that those destinations are the products intended in the brief. The supplied codes are 9 characters and an ASIN is 10, so we write about the listings we can read rather than for products we cannot name.
     <a href="https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC" target="_blank"
     rel="noopener noreferrer nofollow">Amazon on ASINs and link formats</a> ·
     <a href="{root}../pages/flags.html#F-03">Flag F-03</a></aside>
@@ -541,9 +550,8 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
     </div>
     <div class="rail-card">
       <h2>Verified on</h2>
-      <p class="rail-date">{esc(ED_AS_OF)}</p>
-      <p class="rail-note">Six official pages, read row by row. Two of them disagree with each other, so the
-      tables show both numbers instead of picking one.</p>
+      <p class="rail-date">{esc(read_on)}</p>
+      <p class="rail-note">{rail_note}</p>
       <p><a href="{root}verification.html">Read the method</a></p>
     </div>
     <div class="rail-card">
@@ -564,8 +572,8 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
   <p>Product links are tagged Special Links carrying the Associates tag <strong>{esc(ASSOCIATES_TAG)}</strong>
   and <code>rel="sponsored nofollow"</code>; citation links to official pages are not affiliate links.
   On this site the click counter records aggregate page and link events only — no cookie, no visitor
-  identifier, nothing per person. Facts verified {esc(AS_OF)} against official
-  manufacturer and Amazon product pages.
+  identifier, nothing per person. Facts verified {esc(AS_OF if read_on == ED_AS_OF else read_on)} against official
+  {"manufacturer and Amazon product pages" if read_on == ED_AS_OF else "Amazon listings and USDA food-safety pages"}.
   <a href="{root}flagged.html">Open items</a> ·
   <a href="{root}improvements.html">Improvement board</a> ·
   <a href="{root}../index.html">Owner dashboard</a></p>
@@ -1206,6 +1214,31 @@ def planned_topics_block() -> str:
     )
 
 
+def _thermometers():
+    """The thermometer desk (T64). Imported lazily: build_thermometers imports this module for the shared
+    shell, so a top-level import would be circular."""
+    import build_thermometers
+
+    return build_thermometers
+
+
+def thermometer_guides_block() -> str:
+    rows = "".join(
+        f'<li class="topic-row"><div><p class="eyebrow">{esc(g["kicker"])} · {esc(g["intent"])}</p>'
+        f'<h3><a href="../{esc(g["rel"])}">{esc(g["title"])}</a></h3>'
+        f'<p>{esc(g["hook"])}</p></div>'
+        f'<p class="topic-meta">Answers: <em>{esc(g["target_query"])}</em><br>'
+        f"Read on {esc(g['date'])} · every line sourced</p></li>"
+        for g in _thermometers().guide_entries()
+    )
+    return (
+        '<section class="block" id="thermometers"><h2>From the thermometer desk</h2>'
+        '<p class="row-note">Built from two Amazon listings and three USDA food-safety pages. '
+        '<a href="../thermometers/index.html">The desk, with both thermometers row by row</a>.</p>'
+        f'<ul class="topics">{rows}</ul></section>'
+    )
+
+
 def page_topics_index() -> str:
     items = []
     for g in GUIDES:
@@ -1224,6 +1257,7 @@ def page_topics_index() -> str:
       each one names the number the brands never published.</p>
     </div>
     <ul class="topics">{"".join(items)}</ul>
+{thermometer_guides_block()}
 {planned_topics_block()}
     <section class="block">
       <h2>Not sure which question is yours?</h2>
@@ -1580,7 +1614,7 @@ def page_improvements() -> str:
 def page_sitemap() -> str:
     # Derived from the page registry, never typed: a hand-maintained list is how
     # F-26-style drift starts. One registry, one sitemap, one truth.
-    urls = list(PAGES)
+    urls = list(PAGES) + _thermometers().page_rels()  # T64: the thermometer desk, from its own registry
     entries = "".join(
         f"<url><loc>{LIVE}{u}</loc><lastmod>{ED_AS_OF}</lastmod></url>" for u in urls
     )
@@ -1593,6 +1627,18 @@ def page_robots() -> str:
 
 def page_feed() -> str:
     items = []
+    # T64 (2026-11-19): the thermometer desk's guides, newest first. Titles, links and dates come from
+    # tools/build_thermometers.py, which publishes the same values on the pages themselves.
+    for g in _thermometers().guide_entries():
+        items.append(
+            "<item>"
+            f"<title>{esc(g['title'])}</title>"
+            f"<link>{LIVE}{esc(g['rel'])}</link>"
+            f"<guid isPermaLink=\"true\">{LIVE}{esc(g['rel'])}</guid>"
+            f"<pubDate>{g['date']}T00:00:00Z</pubDate>"
+            f"<description>{esc(g['hook'])}</description>"
+            "</item>"
+        )
     for g in GUIDES:
         items.append(
             "<item>"
@@ -1601,6 +1647,22 @@ def page_feed() -> str:
             f"<guid isPermaLink=\"true\">{LIVE}topics/{esc(g['slug'])}</guid>"
             f"<pubDate>{ED_AS_OF}T00:00:00Z</pubDate>"
             f"<description>{esc(g['hook'])}</description>"
+            "</item>"
+        )
+    # T63 (session 10727edd, 2026-11-19): the brief asks that each new guide be added to the
+    # existing feed. The four question-shaped guides live under guides/ and are declared once, in
+    # tools/front_t63.py; they are appended here, newest first, so the feed has one source of truth.
+    import front_t63  # noqa: E402  (tools/ is on sys.path when this script runs)
+    site = "https://kanlerxz87-cyber.github.io/Zone2/"
+    for slug, _kicker, title, dek, _cat in front_t63.NEW_GUIDES:
+        url = f"{site}guides/{slug}.html"
+        items.insert(0,
+            "<item>"
+            f"<title>{esc(title)}</title>"
+            f"<link>{url}</link>"
+            f"<guid isPermaLink=\"true\">{url}</guid>"
+            f"<pubDate>{front_t63.TODAY}T00:00:00Z</pubDate>"
+            f"<description>{esc(dek)}</description>"
             "</item>"
         )
     return (
@@ -1648,6 +1710,12 @@ def build(out_dir: Path) -> dict[str, str]:
         if REQUIRED_SITE_DISCLOSURE not in doc:
             raise BuildError(f"{rel}: missing the required Associates disclosure")
         rendered[rel] = doc
+    # T64: the thermometer desk renders through its own module, which runs its own publish gate (host
+    # allow-list including www.fsis.usda.gov, sourced claims, no prices or ratings) before returning.
+    for rel, doc in _thermometers().render().items():
+        if rel in rendered:
+            raise BuildError(f"{rel}: generated by both the marketing registry and the thermometer desk")
+        rendered[rel] = doc
     for rel, fn in TEXT_PAGES.items():
         rendered[rel] = fn()
     for rel, doc in rendered.items():
@@ -1675,7 +1743,9 @@ def main(argv=None) -> int:
         if drift:
             print("\n".join(drift))
             return 1
-        print(f"{len(rendered)} marketing outputs ({len(PAGES)} pages + {len(TEXT_PAGES)} machine-readable): committed output is current")
+        n_desk = len(rendered) - len(PAGES) - len(TEXT_PAGES)
+        print(f"{len(rendered)} marketing outputs ({len(PAGES)} pages + {n_desk} thermometer-desk pages + "
+              f"{len(TEXT_PAGES)} machine-readable): committed output is current")
         return 0
 
     rendered = build(OUT)
@@ -1688,3 +1758,6 @@ if __name__ == "__main__":
         raise SystemExit(main())
     except (BuildError, LinkPolicyError) as exc:
         print(f"BUILD REFUSED: {exc}", file=sys.stderr)
+        # T64: a refused build now exits non-zero. Before, it printed the refusal and exited 0, so a
+        # wrapper that only read the exit code would have treated a refused build as a success.
+        raise SystemExit(1)

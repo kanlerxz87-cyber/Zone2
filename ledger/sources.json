@@ -580,6 +580,58 @@
         "source for the observed destination specifications of the CHEF iQ thermometer"
       ],
       "last_reaccessed_utc": "2026-11-17"
+    },
+    {
+      "id": "S63",
+      "publisher": "USDA Food Safety and Inspection Service",
+      "kind": "official",
+      "title": "Safe Minimum Internal Temperature Chart",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+      "page_stated_update": "2025-04-14",
+      "accessed_utc": "2026-11-19",
+      "used_for": [
+        "minimum internal temperatures quoted on the thermometer guides and the front page (T63)"
+      ],
+      "last_reaccessed_utc": "2026-11-19"
+    },
+    {
+      "id": "S64",
+      "publisher": "U.S. Federal Trade Commission",
+      "kind": "official",
+      "title": "Disclosures 101 for Social Media Influencers",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "page_stated_update": "2019-11",
+      "accessed_utc": "2026-11-19",
+      "used_for": [
+        "the brief cites this page as 'S07'; disclosure placement guidance; the rule against describing experience with a product not tried (SG-T63-01/02)"
+      ],
+      "last_reaccessed_utc": "2026-11-19"
+    },
+    {
+      "id": "S65",
+      "publisher": "U.S. Federal Trade Commission",
+      "kind": "official",
+      "title": "Endorsements, Influencers, and Reviews",
+      "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-19",
+      "used_for": [
+        "the brief cites this page as 'S24'; index of FTC endorsement guidance"
+      ],
+      "last_reaccessed_utc": "2026-11-19"
+    },
+    {
+      "id": "S66",
+      "publisher": "GitHub (repository Actions history)",
+      "kind": "official",
+      "title": "Workflow runs for .github/workflows/pages.yml in kanlerxz87-cyber/Zone2",
+      "url": "https://github.com/kanlerxz87-cyber/Zone2/actions/workflows/pages.yml",
+      "page_stated_update": null,
+      "accessed_utc": "2026-11-19",
+      "used_for": [
+        "evidence for F-45: runs on 515cb7a, 00914b59, df17393 and 4398071 completed as 'failure' with the workflow file path as the run name (file did not parse)"
+      ],
+      "last_reaccessed_utc": "2026-11-19"
     }
   ]
 }

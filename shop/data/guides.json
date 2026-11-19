@@ -1,0 +1,118 @@
+{
+  "note": "Question-shaped buying guides (T66, session arena/75efdf57-zone2). Titles 1-4 are the four working titles supplied in the brief; 5-6 extend the same approach to the two thermometers. These are editorial hypotheses, not claims about search volume or popularity. Every product figure in the prose is a token resolved from shop/data/catalog.json at build time, so the guide and the spec table can never disagree. Tokens: {{v:P-xx:Attribute}} value with source link; {{p:P-xx}} link to the product page; {{s:ID}} citation; {{buy:P-xx}} sponsored price link. No guide claims hands-on testing - FTC staff guidance (SH-02): 'You can't talk about your experience with a product you haven't tried.'",
+  "published": "2026-11-19",
+  "author": "Counter Notes editors",
+  "guides": [
+    {
+      "slug": "basket-or-oven-air-fryer",
+      "title": "Basket or oven-style air fryer: what should you compare?",
+      "short": "Basket or oven-style?",
+      "category": "air-fryers",
+      "image": "airfryer",
+      "dek": "A basket air fryer and a French-door air fryer oven do the same job in very different shapes. Here are the four comparisons that actually decide it - and the one people forget.",
+      "products": ["P-01", "P-03", "P-02"],
+      "sections": [
+        {"h": "The short answer", "html": "<p>If you mostly crisp things - fries, wings, frozen snacks, reheated pizza - a basket model is the simpler tool. If you want one box that also bakes, broils, roasts and dehydrates, and you have the counter depth for it, an oven-style unit earns its space. Everything below is how to tell which camp you are in.</p>"},
+        {"h": "1. What do you cook in one go?", "html": "<p>Write down your three most common air-fryer meals. If they are one food at a time, one big basket is enough: the {{p:P-03}} has a single {{v:P-03:Capacity}} basket. If they are a protein plus a side, two baskets matter more than total size - the {{p:P-01}} splits {{v:P-01:Capacity}}, and its Sync Function finishes both together.</p><p>If the honest answer is 'a whole tray of roast vegetables and a chicken', you are describing an oven. The {{p:P-02}} lists {{v:P-02:Capacity}} and these functions: {{v:P-02:Cooking functions}}.</p>"},
+        {"h": "2. How deep is your counter, really?", "html": "<p>Width gets all the attention, but depth is where oven-style units bite. The Emeril is {{v:P-02:Dimensions}}. Measure from the backsplash to the counter edge, and check that the doors can open without hitting a wall or a kettle. Basket models need clearance in front instead: the basket slides out toward you.</p>"},
+        {"h": "3. Baskets or doors?", "html": "<p>Pulling a basket lets you shake food halfway through - which is why the Chefman 8 Qt has an {{v:P-03:Shake reminder}}. Doors let you see and reach a flat tray, turn a roast or use a rotisserie. Neither is better; they suit different food.</p>"},
+        {"h": "4. Read the spec sheet twice", "html": "<p>Official pages do not always agree with each other. For the Emeril, the preset count is published three ways and the accessory count two ways; for the 8-quart Chefman, the maximum temperature is 400 °F on Chefman's page and '450°F Hi-Fry' in the Amazon title. We print both rather than pick one - see the tables on each product page. If a number decides your purchase, confirm it on the listing before you buy.</p>"},
+        {"h": "The one people forget: what replaces what", "html": "<p>An oven-style unit can replace a toaster oven; a basket fryer usually sits next to one. If buying the bigger machine lets something else leave the counter, the footprint maths changes completely.</p>"}
+      ],
+      "faq": [
+        ["Is a bigger air fryer always better?", "No. Capacity only helps if you fill it. Two smaller baskets can be more useful than one big one if you cook two foods at once."],
+        ["Can an air fryer oven replace a toaster oven?", "Oven-style units list functions such as bake, broil, reheat and warm - the Emeril on this site lists ten - so for many kitchens it can. Check the depth first."]
+      ]
+    },
+    {
+      "slug": "air-fryer-capacity-checklist",
+      "title": "A no-hype checklist for comparing air fryer capacity",
+      "short": "Capacity checklist",
+      "category": "air-fryers",
+      "image": "airfryer",
+      "dek": "Quarts on a box are a starting point, not an answer. Six checks that turn a capacity number into 'will my dinner fit?'.",
+      "products": ["P-01", "P-03", "P-02"],
+      "sections": [
+        {"h": "Why the number on the box misleads", "html": "<p>Capacity is usually quoted as total volume. That is fine for comparing two baskets of the same shape, and almost useless for comparing a basket with an oven, or one basket with two.</p>"},
+        {"h": "The checklist", "html": "<ol class=\"sh-check\"><li><b>Total versus per-compartment.</b> The {{p:P-01}} is {{v:P-01:Capacity}}. The largest single thing you can cook is set by one basket, not the total.</li><li><b>Basket versus cavity.</b> Ovens quote the whole cavity: the {{p:P-02}} is {{v:P-02:Capacity}}. Racks and trays use part of that height.</li><li><b>Floor area, not volume.</b> Crisping needs food in a single layer, so the flat area of the basket or tray matters more than how tall it is.</li><li><b>Who the maker sizes it for.</b> Chefman says the 8 Qt is designed for {{v:P-03:Designed for}}; Emeril sizes its oven for 4-6 too. These are the makers' statements, not our test.</li><li><b>Your biggest regular item.</b> Measure the dish, tray or bird you cook most often and compare it with the basket or tray, not with the quart figure.</li><li><b>What fits on your counter.</b> Bigger capacity means a bigger box - check the dimensions on each product page.</li></ol>"},
+        {"h": "How the three on this site line up", "html": "<p>Smallest compartments: the Chefman dual basket (two halves). Biggest single basket: the {{p:P-03}} at {{v:P-03:Capacity}}. Biggest cavity overall: the Emeril oven. Which is 'biggest' depends entirely on what you put in it.</p>"}
+      ],
+      "faq": [
+        ["What size air fryer do I need for a family of four?", "Chefman says its 8 Qt basket is designed for 4-6 people, and Emeril sizes its 26-quart oven for 4-6. Those are the manufacturers' statements; check your largest regular dish against the basket or tray."]
+      ]
+    },
+    {
+      "slug": "cleanup-and-counter-space",
+      "title": "How to assess cleanup and counter-space trade-offs",
+      "short": "Cleanup and counter space",
+      "category": "air-fryers",
+      "image": "counter",
+      "dek": "The appliance you use is the one that is easy to clean and easy to leave out. A practical way to judge both before you buy.",
+      "products": ["P-01", "P-03", "P-02"],
+      "sections": [
+        {"h": "Start with a tape measure", "html": "<p>Measure three things: counter depth, the gap under your upper cabinets, and the free width where the appliance would live. Then compare with the published dimensions: the Chefman dual basket is {{v:P-01:Dimensions}}, the Chefman 8 Qt is {{v:P-03:Dimensions}}, and the Emeril oven is {{v:P-02:Dimensions}}.</p><p>Leave room to work: basket models need space in front to slide the basket out; door models need the doors to swing.</p>"},
+        {"h": "What actually has to be washed", "html": "<p>Look for which parts the maker calls dishwasher-safe. Chefman lists the dual-basket model's baskets as {{v:P-01:Baskets}}, and the 8 Qt's as {{v:P-03:Basket}}. An oven-style unit comes with several trays and accessories - more versatility, more pieces to wash and store.</p>"},
+        {"h": "Weight decides whether it moves", "html": "<p>If the appliance will live in a cupboard, weight matters every time you use it. Chefman publishes {{v:P-01:Weight}} for the dual basket and {{v:P-03:Weight}} for the 8 Qt. We did not find a weight in the specification block of Emeril's store page, so we leave it blank rather than guess.</p>"},
+        {"h": "A simple rule", "html": "<p>If you would leave it out, buy for what you cook. If it has to go back in a cupboard after every use, buy the lightest thing that fits your usual meal.</p>"}
+      ],
+      "faq": [
+        ["Are air fryer baskets dishwasher safe?", "It depends on the model. Chefman lists the baskets on both of its models on this site as dishwasher-safe (the 8 Qt says top-rack). Always check the manufacturer's page for your exact model."]
+      ]
+    },
+    {
+      "slug": "multi-function-appliance-questions",
+      "title": "Questions to ask before buying a multi-function kitchen appliance",
+      "short": "Before you buy a 10-in-1",
+      "category": "air-fryers",
+      "image": "hero",
+      "dek": "'10-in-1' sounds like ten appliances for the price of one. Seven honest questions that tell you whether you would use more than two of them.",
+      "products": ["P-02", "P-01"],
+      "sections": [
+        {"h": "Why this question matters", "html": "<p>Multi-function appliances list a lot of modes. The {{p:P-02}} lists {{v:P-02:Cooking functions}}. The useful question is not how many there are but how many you will use every week.</p>"},
+        {"h": "Seven questions", "html": "<ol class=\"sh-check\"><li><b>Which three modes would I use weekly?</b> If you cannot name three beyond air fry, a simpler basket model may serve you better.</li><li><b>What will it replace?</b> A multi-function oven that lets a toaster oven leave the counter is a space win; one that sits beside it is not.</li><li><b>Do the official numbers agree?</b> For the Emeril, the preset count is published as 24 and 25 on official pages, and the accessory count as six and seven. Small, but a sign to read the spec sheet yourself.</li><li><b>How many accessories will I store?</b> More modes usually means more trays, racks and spits.</li><li><b>Does it fit, with the doors open?</b> Check {{v:P-02:Dimensions}} against your counter.</li><li><b>What is the warranty?</b> Emeril lists {{v:P-02:Warranty}}; Chefman lists {{v:P-01:Certification and warranty}} for its dual basket.</li><li><b>Would two simple tools beat one complex one?</b> A dual-basket air fryer plus your existing oven covers a lot of ground.</li></ol>"}
+      ],
+      "faq": [
+        ["Is a 10-in-1 air fryer oven worth it?", "If you would regularly use at least a few of its modes and it can replace another appliance on your counter, it can be. If you mostly air fry, a basket model is simpler."]
+      ]
+    },
+    {
+      "slug": "instant-read-vs-wireless-meat-thermometer",
+      "title": "Instant-read or leave-in wireless: which meat thermometer fits how you cook?",
+      "short": "Instant-read or wireless?",
+      "category": "meat-thermometers",
+      "image": "thermometer",
+      "dek": "One you dip and pull out in seconds; one you leave in for hours and watch from your phone. They solve different problems - here is how to tell which one is yours.",
+      "products": ["P-04", "P-05"],
+      "sections": [
+        {"h": "The short answer", "html": "<p>Mostly quick cooks - chicken breasts, chops, burgers, air-fryer dinners? An instant-read probe like the {{p:P-04}} is faster and has nothing to set up. Mostly roasts, smoking, whole birds or several proteins at once? A leave-in wireless system like the {{p:P-05}} saves you opening the oven every ten minutes.</p>"},
+        {"h": "How an instant-read probe works for you", "html": "<p>You open the oven or air fryer, push the tip into the thickest part, read the number, close it again. What the ThermoMaven listing states:</p><ul class=\"sh-ticks\"><li><b>Reading speed:</b> {{v:P-04:Reading speed}}</li><li><b>Accuracy:</b> {{v:P-04:Accuracy}}</li><li><b>Water resistance:</b> {{v:P-04:Water resistance}}</li><li><b>In the box:</b> {{v:P-04:In the box}}</li></ul>"},
+        {"h": "How a leave-in wireless system works for you", "html": "<p>You insert the probes before cooking and get live temperatures and alerts on your phone. What the CHEF iQ Sense listing states:</p><ul class=\"sh-ticks\"><li><b>Probes:</b> {{v:P-05:Probes}}</li><li><b>Sensors:</b> {{v:P-05:Sensors}}</li><li><b>Connectivity:</b> {{v:P-05:Connectivity}}</li><li><b>Battery:</b> the listing gives two figures - up to 50 hours in one section, up to 70 hours in another {{s:S62}} - so plan on the lower one until CHEF iQ settles it.</li><li><b>Hub:</b> {{v:P-05:Hub}}</li></ul>"},
+        {"h": "Questions that decide it", "html": "<ul class=\"sh-ticks\"><li><b>How long is your typical cook?</b> Under 30 minutes favours instant-read; hours favour leave-in.</li><li><b>Do you cook more than one protein at a time?</b> Three probes means three readings at once.</li><li><b>Are you happy with an app?</b> The wireless system is built around one; the instant-read needs nothing.</li><li><b>Do you want both?</b> Plenty of cooks use a leave-in probe for the roast and an instant-read to spot-check.</li></ul>"},
+        {"h": "Whatever you buy, cook to these numbers", "html": "<p>A thermometer is only as useful as the target temperature. The safe minimum internal temperatures are in our guide on <a href=\"air-fryer-meat-thermometer-temperatures.html\">which temperatures matter with an air fryer</a>, taken from the US government chart {{s:SH-01}}.</p>"}
+      ],
+      "faq": [
+        ["Can I leave an instant-read thermometer in the oven?", "Instant-read probes are designed to be inserted, read and removed. For readings during a long cook, use a leave-in probe designed for it."],
+        ["Is a wireless thermometer worth it for an air fryer?", "The CHEF iQ Sense listing names air fryers among the places it can be used. For short air-fryer cooks, many people find an instant-read check is enough."]
+      ]
+    },
+    {
+      "slug": "air-fryer-meat-thermometer-temperatures",
+      "title": "Do you need a meat thermometer with an air fryer? The safe temperatures that matter",
+      "short": "Safe temperatures for air-fryer cooking",
+      "category": "meat-thermometers",
+      "image": "thermometer",
+      "dek": "Air fryers brown the outside fast, which is exactly why colour is a poor guide to the inside. The official safe minimum temperatures, and how to check them.",
+      "products": ["P-04", "P-05"],
+      "sections": [
+        {"h": "Why colour is not enough", "html": "<p>Fast, hot air crisps the surface quickly. That is the point of an air fryer - and it is why a golden outside tells you little about the middle. FoodSafety.gov's advice is direct: 'Always use a food thermometer to check whether meat has reached a safe minimum internal temperature' {{s:SH-01}}.</p>"},
+        {"h": "The numbers, from the official chart", "html": "<table class=\"sh-table\"><caption>Safe minimum internal temperatures - FoodSafety.gov chart, last reviewed November 21, 2024</caption><thead><tr><th scope=\"col\">Food</th><th scope=\"col\">Safe minimum internal temperature</th><th scope=\"col\">Source</th></tr></thead><tbody><tr><th scope=\"row\">Chicken, turkey and other poultry (whole, breasts, legs, thighs, wings, ground)</th><td>165 °F (74 °C)</td><td>{{s:SH-01}}</td></tr><tr><th scope=\"row\">Beef, bison, veal, goat and lamb - steaks, roasts, chops</th><td>145 °F (63 °C), then rest 3 minutes</td><td>{{s:SH-01}}</td></tr><tr><th scope=\"row\">Ground meat and sausage (beef, pork and similar)</th><td>160 °F (71 °C)</td><td>{{s:SH-01}}</td></tr><tr><th scope=\"row\">Pork - steaks, roasts, chops</th><td>145 °F (63 °C), then rest 3 minutes</td><td>{{s:SH-01}}</td></tr><tr><th scope=\"row\">Fish (whole or fillet)</th><td>145 °F (63 °C), or until flesh is no longer translucent and separates easily with a fork</td><td>{{s:SH-01}}</td></tr><tr><th scope=\"row\">Leftovers (any type)</th><td>165 °F (74 °C)</td><td>{{s:SH-01}}</td></tr></tbody></table><p class=\"sh-small\">Copied from the official chart, not paraphrased. Wings, nuggets and reheated leftovers - air-fryer staples - all sit at 165 °F.</p>"},
+        {"h": "How to check in an air fryer", "html": "<p>Pause the cook, pull the basket, and insert the probe into the thickest part of the largest piece, away from bone. With an instant-read probe such as the {{p:P-04}} you get a reading in {{v:P-04:Reading speed}} and slide the basket back. With a leave-in system such as the {{p:P-05}}, the probe stays in and the app tells you when you are there.</p>"},
+        {"h": "So, do you need one?", "html": "<p>If you cook meat, poultry or fish in an air fryer, the official guidance says to check with a thermometer. Which kind is a matter of how you cook - our <a href=\"instant-read-vs-wireless-meat-thermometer.html\">instant-read vs wireless guide</a> walks through it.</p>"}
+      ],
+      "faq": [
+        ["What temperature should air-fried chicken reach?", "165 °F (74 °C) for all poultry, per the FoodSafety.gov safe minimum internal temperature chart."],
+        ["Do steaks need to rest?", "The FoodSafety.gov chart lists a 3-minute rest time for beef, bison, veal, goat and lamb steaks, roasts and chops after reaching 145 °F."]
+      ]
+    }
+  ]
+}

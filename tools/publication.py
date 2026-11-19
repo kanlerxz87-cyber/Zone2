@@ -140,7 +140,7 @@ def spec_table(product, *, selected=None):
 
 def guides_index():
     rel = 'guides/index.html'
-    body = f'<div class="cn-wrap cn-pagebody">{pagehead("The guide shelf","Start with a useful question.","Practical comparisons for the kitchen you have, not a shopping list for a kitchen you don’t.")}{guide_cards(root="../")}<section class="cn-section"><h2>Browse the edit</h2><div class="cn-related"><a href="basket-air-fryers.html"><small>Air fryers</small>Basket formats</a><a href="air-fryer-ovens.html"><small>Countertop ovens</small>French-door format</a><a href="thermometers.html"><small>Temperature tools</small>Digital & wireless probes</a><a href="method.html"><small>Our approach</small>Sources, authorship & limits</a></div></section><p class="cn-scope">New guides published 19 November 2026. Working questions are editorial hypotheses, not claims about search volume or popularity. <a href="../workroom.html#cadence">Publishing cadence & measurement gates</a>.</p><details class="cn-legacy"><summary>Earlier guide archive · original dates and scope apply</summary><p><a href="../marketing/topics/index.html">Earlier topic guides</a> · <a href="../journal/index.html">Journal archive</a></p></details></div>'
+    body = f'<div class="cn-wrap cn-pagebody">{pagehead("The guide shelf","Start with a useful question.","Practical comparisons for the kitchen you have, not a shopping list for a kitchen you don’t.")}{guide_cards(root="../")}<section class="cn-section"><h2>Browse the edit</h2><div class="cn-related"><a href="basket-air-fryers.html"><small>Air fryers</small>Basket formats</a><a href="air-fryer-ovens.html"><small>Countertop ovens</small>French-door format</a><a href="thermometers.html"><small>Temperature tools</small>Digital & wireless probes</a><a href="method.html"><small>Our approach</small>Sources, authorship & limits</a></div></section><p class="cn-scope">New guides published 19 November 2026. Working questions are editorial hypotheses, not claims about search volume or popularity. <a href="../workroom.html#cadence">Publishing cadence & measurement gates</a>.</p><details class="cn-legacy"><summary>Earlier guide archive · original dates and scope apply</summary><p><a href="../marketing/topics/index.html">Earlier topic guides</a> · <a href="../journal/index.html">Journal archive</a> · <a href="../guides/instant-read-or-wireless-thermometer.html">Earlier thermometer comparison</a> · <a href="../guides/thermometer-for-air-fryer.html">USDA-based thermometer guide</a> · <a href="../marketing/thermometers/index.html">Thermometer desk</a> · <a href="../shop/guides/index.html">Shop guide set</a></p></details></div>'
     return page(rel,'Kitchen buying guides', 'Four useful buying questions about air-fryer format, capacity, counter space and multi-function appliances.',body)
 
 
@@ -241,7 +241,7 @@ def current_flags():
     return '<div class="cn-table-wrap"><table class="cn-table"><caption>Current integration flags · 19 November 2026. Official references explain the constraint; repository status is an implementation observation.</caption><thead><tr><th>ID</th><th>Issue & discovery/action needed</th><th>State</th><th>Official reference</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
 
 
-def workroom():
+def workroom(rel="workroom.html"):
     status=[('Publication front page','Implemented','One buyer-first front door, five product cards, four focused guides and consistent navigation.','helpful'),('Affiliate disclosure & link markup','Implemented controls; not official approval','Disclosure under the masthead and in the footer. All outbound marketplace product links marked sponsored.','agreement'),('Product intent / account attribution','Unverified','Five observed destinations; all intent confirmations and first-party attribution reports remain unavailable.','policies'),('Measurement','Implemented / production blocked','Three public aggregate events plus two local report-import events. Static production config disabled.','pages'),('Search & outcomes','Unmeasured','No authorized Search Console or Associates export. No profitable-niche, conversion or revenue conclusion.','search')]
     rows=''.join(f'<tr><td>{e(a)}</td><td>{e(b)}</td><td>{e(c)}</td><td>{source(d)}</td></tr>' for a,b,c,d in status)
     srcrows=''.join(f'<tr><td>{e(k)}</td><td>{source(k)}<small>Fetched {e(s["checked_on"])}</small></td><td>{e(s["quote"])}</td></tr>' for k,s in DATA['sources'].items())
@@ -256,7 +256,7 @@ def workroom():
 <section class="cn-reading" id="design-prompt"><h2>A useful prompt for the next design iteration.</h2><div class="cn-callout"><p>Design Counter Notes as an independent kitchen publication, not a compliance dashboard. Keep a warm ivory canvas, deep green typography, restrained terracotta accents, generous space and a serif/sans editorial hierarchy. Lead with a product-intent question, an honest shortlist and useful buying guides. Keep the disclosure directly under the masthead and in the footer. Use original/licensed imagery or clearly labelled conceptual illustrations. Never invent a human reviewer, first-hand experience, price, rating, trend or performance score. Keep all research dashboards under one Workroom navigation group. Suggestions need options, risks, missing evidence and a review draft—not an automatic deploy button. Expand only after measured reader queries and authorized reports justify the next topic.</p></div><p>This is a design recommendation, not evidence of market demand. {source('helpful')}.</p></section>
 <section class="cn-section" id="sources"><h2>Official sources checked for this edit</h2><div class="cn-table-wrap"><table class="cn-table"><caption>A fresh check is limited to the statements actually read. Older research remains dated in its own registers.</caption><thead><tr><th>Reference</th><th>Official page & check date</th><th>Statement read / verification scope</th></tr></thead><tbody>{srcrows}</tbody></table></div></section>
 <section id="tools"><h2>All tools & retained research</h2><p class="cn-scope">These pages remain reachable for review. Earlier dashboards are retained records, not competing publication homepages or fresh account-level verifications.</p><label for="tool-search" class="cn-search-label">Find an operator area</label><input id="tool-search" class="cn-search" type="search" placeholder="Try “tracking”, “source” or “decision”" data-tool-search><nav class="cn-directory" data-tool-directory aria-label="All operator areas">{links}</nav><p class="cn-save-status" role="status" data-tool-status></p></section></div>'''
-    return page('workroom.html','Workroom · executive summary, decisions & evidence','Current executive summary, source register, five-product intent records, review flags, publishing cadence and all operator tools.',body)
+    return page(rel,'Workroom · executive summary, decisions & evidence','Current executive summary, source register, five-product intent records, review flags, publishing cadence and all operator tools.',body)
 
 
 def feed():
@@ -271,6 +271,22 @@ def feed():
         url=BASE+'marketing/topics/'+g['slug']
         pub=format_datetime(datetime.fromisoformat(old['as_of']).replace(tzinfo=timezone.utc))
         items.append(f'<item><title>{xml_escape(g["title"])}</title><link>{url}</link><guid isPermaLink="true">{url}</guid><pubDate>{pub}</pubDate><description>{xml_escape(g["hook"])}</description></item>')
+    from xml.etree import ElementTree as ET
+    from email.utils import parsedate_to_datetime
+    seen={BASE+'guides/'+g['slug']+'.html' for g in GUIDES}
+    seen.update(BASE+'marketing/topics/'+g['slug'] for g in old['guides'])
+    for path in [ROOT/'marketing/feed.xml',ROOT/'shop/feed.xml']:
+        if not path.is_file(): continue
+        for item in ET.parse(path).findall('./channel/item'):
+            url=item.findtext('link') or ''
+            if url in seen: continue
+            seen.add(url)
+            stamp=item.findtext('pubDate') or ''
+            try: pub=parsedate_to_datetime(stamp)
+            except (ValueError,TypeError): pub=datetime.fromisoformat(stamp.replace('Z','+00:00'))
+            title=item.findtext('title') or ''
+            desc='Retained guide; original date and verification scope apply. '+(item.findtext('description') or '')
+            items.append(f'<item><title>{xml_escape(title)}</title><link>{xml_escape(url)}</link><guid isPermaLink="true">{xml_escape(url)}</guid><pubDate>{format_datetime(pub)}</pubDate><description>{xml_escape(desc)}</description></item>')
     return '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Counter Notes · the kitchen edit</title><link>'+BASE+'</link><description>Considered kitchen gear and useful buying questions.</description><language>en</language><atom:link href="'+BASE+'feed.xml" rel="self" type="application/rss+xml"/>'+''.join(items)+'</channel></rss>\n'
 
 

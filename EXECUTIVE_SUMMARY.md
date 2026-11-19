@@ -1,6 +1,6 @@
 # Counter Notes — executive summary
 
-**19 November 2026 · current integration (T63)**
+**19 November 2026 · current integration (T67 / 33e03d63)**
 **As an Amazon Associate I earn from qualifying purchases.**
 
 A buyer-first kitchen publication replaces the audit-led front door. It has five product profiles,
@@ -8,7 +8,7 @@ four useful buying guides, categories, original schematic imagery, a labelled AI
 organization authorship, RSS and one Workroom for operator tools. It does not pretend that source
 research is firsthand testing or that editorial hypotheses are proven search demand.
 
-Merge/deployment results are recorded with actual commit/run identifiers in **T63 of
+Merge/deployment results are recorded with actual commit/run identifiers in **T67 / 33e03d63 of
 [COORDINATION.md](COORDINATION.md)** and [the dated verification record](docs/verification-2026-11-19.md).
 Implementation, local preview and production deployment are separate states.
 
@@ -98,3 +98,5 @@ Earlier executive narratives are retained in
 [the pre-integration history](https://github.com/kanlerxz87-cyber/Zone2/blob/4398071d49fdda73c084aa6f3dedf4f72b268076/EXECUTIVE_SUMMARY.md).
 They are not current evidence of a missing tag, an account that does not exist, working catalog API
 access, live analytics, traffic or Amazon-reported orders.
+
+The complete parallel document at main `20b9bd9` is preserved in [`docs/archive/EXECUTIVE_SUMMARY-before-T67.md`](docs/archive/EXECUTIVE_SUMMARY-before-T67.md); its dated records are historical, not discarded or relabelled as fresh checks.

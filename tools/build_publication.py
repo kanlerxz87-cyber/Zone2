@@ -92,6 +92,9 @@ def transform(document,rel):
     if 'class="cn-skip"' not in document:
         document=re.sub(r'(<body\b[^>]*>)',r'\1<a class="cn-skip" href="#cn-content">Skip to content</a>',document,count=1)
         document=document.replace('</aside>','</aside><div id="cn-content" tabindex="-1"></div>',1)
+    root=depth_for(rel)
+    if 'assets/js/link-policy.js' not in document:
+        document=document.replace('</body>',f'<script src="{root}assets/js/link-policy.js" defer></script>\n</body>')
     return sponsored_links(document)
 
 
@@ -116,6 +119,12 @@ def build():
         if path.suffix=='.html':
             dest.write_text(transform(path.read_text(encoding='utf-8'),rel.as_posix()),encoding='utf-8')
             pages.append(rel.as_posix())
+        elif path.suffix == '.css':
+            # Keep prototype sources intact, but do not initiate Google Fonts
+            # requests from an otherwise self-hosted publication artifact.
+            css=path.read_text(encoding='utf-8')
+            css=re.sub(r"@import\s+url\(['\"]?https://fonts\.googleapis\.com/[^;]+;\s*", '', css)
+            dest.write_text(css,encoding='utf-8')
         else:
             shutil.copyfile(path,dest)
     if not INDEXED <= set(pages): raise ValueError('index policy names missing pages: '+str(INDEXED-set(pages)))

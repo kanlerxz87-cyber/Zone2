@@ -45,6 +45,12 @@ OFFICIAL_HOSTS = {
     "developers.google.com",
     "support.google.com",
     "docs.github.com",
+    # T63 (session 10727edd, 2026-11-19): USDA FSIS is a US federal agency (.gov) and is the
+    # primary source for the safe-minimum-temperature rows on the thermometer guides (S63).
+    "www.fsis.usda.gov",
+    # T63: github.com is cited ONLY as evidence about this repository's own CI history (S66, F-45);
+    # no product attribute may be sourced to it.
+    "github.com",
 }
 
 # Primary manufacturer pages. They are NOT Amazon sources and may never be used to state an Amazon-side

@@ -58,3 +58,35 @@ service and test previews do not establish live production collection or an acco
 Not yet attempted for this branch at this checkpoint. Record only real PR, commit and Actions/Pages
 results here after combined-tree verification. Do not copy another session's successful run as this
 branch's deployment evidence.
+
+## Combined-main result — T67 / 33e03d63
+
+Integrated `origin/main` **20b9bd9** without switching branches. Preserved all parallel namespace
+sources, shop/thermometer guides, flags, option IDs and recorded directions; original front renderer
+and verifier are retained as dated modules, unique routes remain reproducible, full parallel
+README/executive/brief-summary documents are archived. The current summary compatibility route now
+renders the Workroom rather than publishing a conflicting analytics claim.
+
+**Combined strict local replay: 58/58 passed**, including main's preflight and both shop gates plus
+this session's actual artifact/browser checks. All `run:` steps ran; this still does not execute `uses:`
+or prove a hosted Actions deployment.
+
+Actual artifact: **222 HTML pages**, **17 indexable publication pages**, **1410 statically qualified
+marketplace anchors**, no local-reference/fragment, canonical, disclosure, feed or indexing contract
+errors. Feeds preserve the parallel guide URLs/GUIDs/original dates. All earlier footer links are
+retained behind the operator directory.
+
+Real Chromium: **96 layout checks** (32 paths × 1440/390/320), plus three dynamic root/prototype DOM
+link checks. No JS page errors, missing responses or external requests; actual rendered marketplace
+anchors are qualified too. Four sampled current pages again produced **zero automated WCAG A/AA
+violations**. Filter/review/export/no-JS/opt-out/service-down behavior and isolated POST→SQLite
+persistence passed. Test traffic never visited Amazon and no real report/campaign rows were created.
+
+Further integration defects caught and fixed: nowrap shop citation spans, fixed minimum tile widths,
+legacy prose-grid auto-minimums, late-rendered unsponsored source anchors, and a remote Google Fonts
+import. Fixes are in the new deployment CSS/policy/projection; the original prototype/app sources and
+all factual data remain intact. Main's equivalent price repair uses the common regression-tested
+helper, not a discarded rule.
+
+The actual hosted PR/merge/deploy result is appended only after GitHub returns it. No other session's
+run is reused as this branch's verification.

@@ -14,7 +14,7 @@ INDEXED = {
     'guides/products/chefman-turbofry-8qt.html', 'guides/products/thermomaven-digital.html',
     'guides/products/chef-iq-sense.html',
 }
-CURRENT_OPERATOR = {'workroom.html','suggestions.html','questions.html','intent.html','flagged.html'}
+CURRENT_OPERATOR = {'workroom.html','suggestions.html','questions.html','intent.html','flagged.html','summary.html'}
 
 
 def is_indexable(rel):

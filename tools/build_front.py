@@ -9,7 +9,21 @@ Run --check to detect output drift. No network or clock is used by this build.
 from __future__ import annotations
 import sys
 from pathlib import Path
-from publication import TARGETS
+import publication
+from publication import TARGETS as CURRENT_TARGETS
+import build_front_2026_11_19 as retained
+
+# Retain earlier unique guide/desk routes without a second competing homepage.
+# Snapshot builder/code and all parallel data remain unchanged.
+facts, board = retained.load()
+TARGETS = {rel: (lambda fn=fn: fn(facts,board)) for rel,fn in retained.TARGETS if rel not in CURRENT_TARGETS}
+TARGETS.update(CURRENT_TARGETS)
+load = retained.load
+
+def build_current_summary(_facts=None,_board=None):
+    return publication.workroom(rel="summary.html")
+
+TARGETS["summary.html"] = build_current_summary
 ROOT = Path(__file__).resolve().parents[1]
 
 

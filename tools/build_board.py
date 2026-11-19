@@ -1096,7 +1096,7 @@ def main(argv: list[str] | None = None) -> int:
     # previous commit's pages and report a stale build that this run just fixed.
     gates = run_gates()
     (DATA / "measured.json").write_text(
-        json.dumps({**_MEASURED, "gates": gates, "measured_utc": "2026-11-17",
+        json.dumps({**_MEASURED, "gates": gates, "measured_utc": "2026-11-19",
                     "substitutions": dict(sorted(_SUBS.items()))},
                    indent=2, sort_keys=True) + "\n",
         encoding="utf-8",

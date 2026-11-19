@@ -8,7 +8,7 @@ No invented reviewer, product experience, popularity, price, rating, conversion 
 
 Publication: <https://kanlerxz87-cyber.github.io/Zone2/>
 Workroom / current executive summary: <https://kanlerxz87-cyber.github.io/Zone2/workroom.html>
-Exact merge/deployment evidence: **T63 in [COORDINATION.md](COORDINATION.md)** and
+Exact merge/deployment evidence: **T67 / 33e03d63 in [COORDINATION.md](COORDINATION.md)** and
 [the dated verification record](docs/verification-2026-11-19.md). A local preview is not production.
 
 ## What readers get
@@ -123,3 +123,5 @@ Current scope and limits: [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md). Earlier 
 narratives remain in [the pre-integration Git history](https://github.com/kanlerxz87-cyber/Zone2/tree/4398071d49fdda73c084aa6f3dedf4f72b268076),
 not presented here as fresh account/API/analytics verification. Historical site namespaces remain linked
 from the Workroom rather than deleted or promoted as competing homepages.
+
+The complete parallel document at main `20b9bd9` is preserved in [`docs/archive/README-before-T67.md`](docs/archive/README-before-T67.md); its dated records are historical, not discarded or relabelled as fresh checks.

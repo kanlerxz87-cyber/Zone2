@@ -36,6 +36,10 @@ OPERATOR_LINKS = [
 ]
 
 
+# Navigation union from completed parallel main @20b9bd9; data/routes are retained.
+OPERATOR_LINKS += [('shop/index.html', 'All five products · retained'), ('shop/air-fryers.html', 'Air fryers · retained'), ('shop/meat-thermometers.html', 'Meat thermometers · retained'), ('shop/compare.html', 'Compare side by side · retained'), ('shop/guides/index.html', 'Buying guides · retained'), ('index.html', 'Front page · retained'), ('guides/index.html', 'Guide archive · retained'), ('marketing/buying-guide.html', 'Which air fryer to buy · retained'), ('guides/meat-thermometers.html', 'Meat thermometers · retained'), ('guides/thermometer-for-air-fryer.html', 'Thermometer + air fryer · retained'), ('marketing/comparison.html', 'Air fryer head-to-head · retained'), ('marketing/articles/index.html', 'The three write-ups · retained'), ('shop/briefing.html', 'Owner briefing · retained'), ('behind-the-site.html', 'Behind the site (all surfaces) · retained'), ('guides/method.html', 'How we verify · retained'), ('marketing/verification.html', 'Marketing verification · retained'), ('pages/suggestions.html', 'Findings-hub suggestions · retained'), ('pages/questions.html', 'Findings-hub questions · retained'), ('pages/categories/index.html', 'Commission categories · retained'), ('journal/dual-basket-air-fryers.html', 'Two baskets beat one long timer · retained'), ('journal/basket-vs-oven.html', 'Choose by geometry · retained'), ('journal/why-every-number-has-a-source.html', 'Why every number links to its source · retained'), ('shop/feed.xml', 'Guides RSS feed · retained'), ('marketing/feed.xml', 'Articles RSS feed · retained'), ('marketing/thermometers/index.html', 'Thermometer desk · retained')]
+
+
 def esc(s):
     return html.escape(str(s), quote=True)
 

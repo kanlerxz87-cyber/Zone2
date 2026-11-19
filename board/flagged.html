@@ -24,7 +24,7 @@
 </header>
 <div class="disclosure">
   <div class="wrap">
-    <strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases. 13 of 184 pages on this
+    <strong>Affiliate disclosure.</strong> As an Amazon Associate I earn from qualifying purchases. 34 of 213 pages on this
     site now carry an Associates tag; the rest, including all five of the supplied links, do not,
     so most purchases made through them cannot be attributed — see
     <a href="flagged.html#FL-02">FL-02</a>.
@@ -58,7 +58,7 @@ That is the arrangement this repository has used since the second session.</p>
   <p class="eyebrow" style="margin-bottom:4px">FL-02
     <span class="pill pill--high">high</span></p>
   <h3 style="margin:0 0 8px">An Associates tag is live on a minority of pages, and none of the five supplied links carries one</h3>
-  <p class="small"><strong>What.</strong> 13 of 184 published pages now carry a real Associates tag (shopnow047c-20), applied by session 7264f3c2 on 2026-11-17 — the first time any page in this repository has carried one. The remaining 184 minus 13 carry only YOURASSOCIATEID or YOURID, the placeholders Amazon prints in its own documentation. Critically, **all five supplied link.amazon links still resolve without a tag**: the tag reaches the pages this site wrote, not the short links the owner supplied.</p>
+  <p class="small"><strong>What.</strong> 34 of 213 published pages now carry a real Associates tag (shopnow047c-20), applied by session 7264f3c2 on 2026-11-17 — the first time any page in this repository has carried one. The remaining 213 minus 34 carry only YOURASSOCIATEID or YOURID, the placeholders Amazon prints in its own documentation. Critically, **all five supplied link.amazon links still resolve without a tag**: the tag reaches the pages this site wrote, not the short links the owner supplied.</p>
   <p class="small"><strong>Evidence.</strong> Measured across every published page; all five supplied links fetched live 2026-11-17.</p>
   <p class="small"><strong>Why it matters.</strong> Amazon states the tags must be embedded in the product links on the declared site, and reviews an application only after three qualifying sales in 180 days. No tag means no attributed sale, which means no review. The brief now supplies a tracking ID for the first time, which is the missing value — but see BQ2-01: supplying a string is not the same as confirming it is an issued, active ID.</p>
   <p class="small"><strong>Status.</strong> partly resolved 2026-11-17 by session 7264f3c2 — the tag exists and is live; it does not yet reach the supplied links</p>
@@ -80,7 +80,7 @@ That is the arrangement this repository has used since the second session.</p>
   <p class="eyebrow" style="margin-bottom:4px">FL-04
     <span class="pill pill--medium">medium</span></p>
   <h3 style="margin:0 0 8px">Requirement S-09 names a social preview image first, and most pages still lack one</h3>
-  <p class="small"><strong>What.</strong> 116 of 184 pages carry an og:image, up from none — session 7264f3c2 added social preview images on 2026-11-17. The remainder carry the rest of the og: block without the image. The brief&#x27;s status word for the row is &#x27;Partly implemented&#x27;, which was already fair and is now closer to accurate.</p>
+  <p class="small"><strong>What.</strong> 145 of 213 pages carry an og:image, up from none — session 7264f3c2 added social preview images on 2026-11-17. The remainder carry the rest of the og: block without the image. The brief&#x27;s status word for the row is &#x27;Partly implemented&#x27;, which was already fair and is now closer to accurate.</p>
   <p class="small"><strong>Evidence.</strong> Measured across every published page. tools/build_marketing.py now emits og:image, og:image:width, og:image:height and og:image:alt for the pages it builds — that is where the 103 come from. tools/build_head_meta.py still emits the og: block without an image for the pages it serves.</p>
   <p class="small"><strong>Why it matters.</strong> Every link to this site previews as a bare title wherever it is shared. See BS-10.</p>
   <p class="small"><strong>Status.</strong> partly resolved 2026-11-17 by session 7264f3c2</p>
@@ -102,7 +102,7 @@ That is the arrangement this repository has used since the second session.</p>
   <p class="eyebrow" style="margin-bottom:4px">FL-06
     <span class="pill pill--medium">medium</span></p>
   <h3 style="margin:0 0 8px">The P1 row says &#x27;Implemented&#x27; and 7 pages have no meta description</h3>
-  <p class="small"><strong>What.</strong> Every page has a title, but 7 pages carry no meta description and 2 descriptions are shared between pages. 4 titles are duplicated.</p>
+  <p class="small"><strong>What.</strong> Every page has a title, but 7 pages carry no meta description and 3 descriptions are shared between pages. 5 titles are duplicated.</p>
   <p class="small"><strong>Evidence.</strong> Measured across every published page.</p>
   <p class="small"><strong>Why it matters.</strong> It is the only P1 row on the brief that is unfinished, and the fix is mechanical.</p>
   <p class="small"><strong>Status.</strong> open</p>
@@ -113,7 +113,7 @@ That is the arrangement this repository has used since the second session.</p>
   <p class="eyebrow" style="margin-bottom:4px">FL-07
     <span class="pill pill--low">low</span></p>
   <h3 style="margin:0 0 8px">The internal-linking row says &#x27;Implemented&#x27; and 4 reader pages are a hop short</h3>
-  <p class="small"><strong>What.</strong> 4 of 39 reader and guide pages reach none of the comparison, the buying guide or the guides index. They link to the marketing front page instead.</p>
+  <p class="small"><strong>What.</strong> 4 of 50 reader and guide pages reach none of the comparison, the buying guide or the guides index. They link to the marketing front page instead.</p>
   <p class="small"><strong>Evidence.</strong> Measured by following every internal href on each reader and guide page.</p>
   <p class="small"><strong>Why it matters.</strong> One hop per page. Mechanical.</p>
   <p class="small"><strong>Status.</strong> open</p>
@@ -124,7 +124,7 @@ That is the arrangement this repository has used since the second session.</p>
   <p class="eyebrow" style="margin-bottom:4px">FL-08
     <span class="pill pill--medium">medium</span></p>
   <h3 style="margin:0 0 8px">The brief asks to measure whether anyone arrives, and nothing is measuring</h3>
-  <p class="small"><strong>What.</strong> 0 of 184 pages carry a Search Console verification tag and 0 call an event endpoint. The five events are specified and unwired.</p>
+  <p class="small"><strong>What.</strong> 0 of 213 pages carry a Search Console verification tag and 0 call an event endpoint. The five events are specified and unwired.</p>
   <p class="small"><strong>Evidence.</strong> Measured across every published page; docs/measurement-t40.json defines EV-01 to EV-05.</p>
   <p class="small"><strong>Why it matters.</strong> Three separate rows on the brief ask for an outcome that can only be measured by an instrument that is switched off. Until it is on, topic choice is guesswork, which is the thing the brief asks to stop doing.</p>
   <p class="small"><strong>Status.</strong> open</p>
@@ -179,7 +179,7 @@ That is the arrangement this repository has used since the second session.</p>
   <p class="eyebrow" style="margin-bottom:4px">FL-13
     <span class="pill pill--high">high</span></p>
   <h3 style="margin:0 0 8px">The rule that is supposed to stop a page printing a product price never fires</h3>
-  <p class="small"><strong>What.</strong> Four copies of the context-aware price rule strip HTML tags before splitting the page into units on those same tags. After the strip there is nothing left to split on, so every page collapses to a single unit — and because almost every page mentions commission, earn or rate somewhere, the program-economics exemption then swallows any product price on it. Measured across the tree: 0 of 184 pages collapse to one unit, so the rule cannot fire on any of them.</p>
+  <p class="small"><strong>What.</strong> Four copies of the context-aware price rule strip HTML tags before splitting the page into units on those same tags. After the strip there is nothing left to split on, so every page collapses to a single unit — and because almost every page mentions commission, earn or rate somewhere, the program-economics exemption then swallows any product price on it. Measured across the tree: 0 of 213 pages collapse to one unit, so the rule cannot fire on any of them.</p>
   <p class="small"><strong>Evidence.</strong> The inverted order is at .github/workflows/pages.yml:155, tools/validate_data.py:550, tools/build_readiness.py:623 and tools/validate_audit.py:272 - each reads re.split(r&quot;&lt;/tr&gt;|&lt;/p&gt;|&lt;/li&gt;|&lt;br\\s*/?&gt;&quot;, re.sub(r&quot;&lt;[^&gt;]+&gt;&quot;, &quot; &quot;, text)). Reversing the two operations makes the rule fire: a paragraph that offers the product at a dollar figure inside a buying context is flagged under the corrected order and passes silently under the current one. This board&#x27;s own gate was written the corrected way round, and its negative test caught this very paragraph on its first run - the corrected rule works, and that is how the defect in the other four copies was noticed.</p>
   <p class="small"><strong>Why it matters.</strong> The site&#x27;s no-prices rule is one of the four things every session asserts about every deploy. It is currently asserted by a check that cannot fail. No page is known to print a price today — this is a hole in the fence, not a breach — but the hole is in all four copies, including the one that gates every push to main.</p>
   <p class="small"><strong>Status.</strong> open — logged as CR-4 on the shared board, not actioned here</p>

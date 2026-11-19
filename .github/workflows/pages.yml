@@ -1,8 +1,13 @@
 name: Build, verify and deploy
 
-# Current publication deploys a verified _site/ artifact, not the repository root.
-# Historical intake, board and namespace gates are retained. No app collector can
-# run on Pages: the production measurement config intentionally stays disabled.
+# Final integration workflow (session 78c94859).
+#
+# T67 deploys a verified _site/ artifact; Pages build_type is switched to workflow
+# after PR verification, before merge. The old branch-root deploy is no longer the target. This workflow guarantees that nothing broken reaches `main`:
+#   - the primary Zone2 platform (repo root) is complete and its internal links resolve
+#   - the companion sites (research-hub/, northstar/, zone2/) are complete
+#   - no page prints a price, and every page carries the static affiliate disclosure
+#   - all data files parse
 
 on:
   push:
@@ -15,8 +20,13 @@ permissions:
   pages: write
   id-token: write
 
+# T63 (session 10727edd, 2026-11-19): one group PER REF. With a single global `pages` group,
+# any session's pull-request run cancelled every other session's run, including the gate on
+# main (observed: run 44468560526, PR #164, cancelled 29 s in by another branch's run).
+# A newer push to the SAME ref still supersedes its older run. Deploys are serialised
+# separately by the job-level group on `deploy` below, which never cancels.
 concurrency:
-  group: pages-${{ github.workflow }}-${{ github.ref }}
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -81,8 +91,8 @@ jobs:
           problems += check("discovery", sorted(f.name for f in Path("discovery").glob("*.html")))
           # T60 (session arena/613900e6-zone2): the submitted-link intake namespace.
           problems += check("intake", sorted(f.name for f in Path("intake").glob("*.html")))
-          # T58: the decision board links sideways to its own stylesheet and upward to the
-          # root site, so its references have to resolve like any other published namespace.
+          # T58 (session arena/1bfbc559-zone2): check the decision board's links/assets,
+          # including its sideways stylesheet and upward root-site references.
           problems += check("board", sorted(f.name for f in Path("board").glob("*.html")))
           problems += check(".", [f.name for f in sorted(Path(".").glob("*.html")) if f.name != "404.html"])
           for page in sorted(Path("pages").rglob("*.html")):
@@ -378,54 +388,25 @@ jobs:
         run: python3 tools/test_brief.py
 
       # ---- arena/613900e6-zone2: the submitted-link intake (T60) ----
-      # The 2026-11-17 brief names five affiliate links; this repository's registers were built
-      # around three, and two of the codes plus the tracking id appear nowhere in the tree. This
-      # namespace closes that gap. Three steps, added rather than folded into an existing one, so
-      # no other session's gate is altered.
-      #
-      # The first is the drift check every generated namespace here has: intake/*.html must equal
-      # a fresh render of intake/data/*.json. The second is the contract. Beyond the rules every
-      # other namespace holds (every row sourced, an open question left empty, a recorded choice
-      # that is one of the row's own options, derived counts, disclosure, links and fragments, no
-      # product price), it enforces the one this namespace exists for: INTENT AND OBSERVATION ARE
-      # NEVER MERGED. The two field groups must be disjoint, and an intent field may not hold the
-      # observed ASIN or the observed URL.
-      #
-      # What it fails on: a source id that resolves to nothing; an intent field filled from an
-      # observation; a filled intent without a confirmation date and source; an observed ASIN that
-      # is not 10 characters; an open question carrying an answer; a choice that is not one of the
-      # row's options; a reference to a flag, question or proposal that does not exist; a money
-      # figure in a buying context; a missing or misplaced disclosure; a missing canonical; a
-      # product link without rel="sponsored"; a broken local link; a fragment that addresses
-      # nothing, in this page or the one it points at; a printed count that has drifted from the
-      # registers; and a carried source that is not labelled as carried.
+      # The five-link intake keeps product intent separate from observed redirect targets.
+      # Its build, source/intent gate and negative tests all run before publication.
       - name: Rebuild the submitted-link intake and confirm committed output is current
         run: python3 tools/build_intake.py --check
 
       - name: Intake gate (intent/observation separation, sourcing, nothing-decided, derived counts, links, fragments, disclosure, no prices)
         run: python3 tools/validate_intake.py
 
-      # Same rule as the other namespaces' negative tests: a gate that has only ever passed is a
-      # claim, not a control. Fifteen injected defects must each fire, and the unmutated register
-      # must be clean. Case 1 (an intent field filled with the observed ASIN) and case 3 (an open
-      # question acquiring an answer) are the two this namespace was built to make impossible.
       - name: Intake gate negative tests (15 injected defects must each fire)
         run: python3 tools/test_intake.py
+
       # ---- arena/1bfbc559-zone2: the decision board (T58) ----
-      # The five-product brief: a product-intent confirmation record whose intent and
-      # observation fields are held apart, a choose-a-path board where nothing is applied,
-      # a known/unknown register whose open questions carry no answer, and a trace of the
-      # brief's own requirement rows against the tree rather than against its status words.
-      # Same contract as every other gate, plus three rules specific to what this board is:
-      # nothing is chosen, an open question stays empty, and an intent field may never
-      # borrow a value from the observation group. Negative-tested below: 19 injected
-      # defects must each fire.
+      # The board keeps product intent separate from observed destinations, exposes the
+      # questions and suggestions, and does not apply choices without a recorded decision.
       - name: Rebuild the decision board and confirm committed output is current
         run: python3 tools/build_board.py --check
 
-      - name: Decision-board gate (sourcing, blanks carry a reason, nothing decided,
-              open questions empty, field groups never merged, derived counts, disclosure,
-              sponsored links, no prices)
+      - name: Decision-board gate (sourcing, blanks, nothing decided, open questions empty,
+              intent/observation separation, derived counts, disclosure, sponsored links, no prices)
         run: python3 tools/validate_board.py
 
       - name: Decision-board gate negative tests (19 injected defects must each fire)
@@ -517,6 +498,19 @@ jobs:
               the data, sponsored links, canonical, no prices, no invented metrics)
         run: python3 tools/verify_front.py
 
+      # T66 (session arena/75efdf57-zone2): the shop section (shop/**). The build step rewrites
+      # every shop page from shop/data/*.json and fails on an unresolvable guide token or a guide
+      # quoting a blank/conflicting value; the gate then re-reads the pages on disk: every row and
+      # compare cell sourced or blank-with-reason, disclosure strip above <main> and in the footer,
+      # product buttons tagged + sponsored + counted by events.js, citations untagged, no prices,
+      # no invented metrics, canonical, images with alt text, briefing integrity.
+      - name: Rebuild the shop section and confirm committed output is current
+        run: python3 tools/build_shop.py --check
+
+      - name: Shop gate (sourcing, disclosure strip, tagged sponsored buttons, untagged citations,
+              no prices, no invented metrics, canonical, image alt text, briefing integrity)
+        run: python3 tools/validate_shop.py
+
       - name: Aggregate measurement service tests
         run: python3 tools/test_analytics.py
 
@@ -527,7 +521,7 @@ jobs:
         run: python3 tools/test_price_policy.py
 
       - name: Publication JavaScript syntax
-        run: node --check assets/js/events.js && node --check assets/js/publication.js
+        run: node --check assets/js/events.js && node --check assets/js/publication.js && node --check assets/js/link-policy.js
 
       - name: Build production Pages artifact
         run: python3 tools/build_publication.py
@@ -558,6 +552,9 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     environment:
       name: github-pages
