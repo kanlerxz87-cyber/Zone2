@@ -8185,3 +8185,15 @@ bump the three prose counts in the same change.
 - **Pages deploy:** workflow "pages build and deployment" run 44621142871 → **success**; "Build, verify and deploy" run 44621144101 → **success**; Pages API `status: built`, latest build commit `7cf2eef` (2026-11-19T21:40:56Z), site `https://kanlerxz87-cyber.github.io/Zone2/`.
 - **Flagged, non-blocking, left open:** F-54 (the listing contradicts itself — owner decides which statement governs), Q-22 (2-year vs 3-year owner question). Conflict-row counts after merge: catalog 5 (P-03 Max temperature, P-02 Presets, P-02 Included accessories, P-05 Battery, P-05 Warranty).
 - **Not touched (scope discipline):** `README.md` / `EXECUTIVE_SUMMARY.md` count prose and `tools/build_front.py` (PR #194's claim — regenerated only), `ledger/flags.json`, `ledger/questions.json`, `.github/**`, `console/**`, `board/**`, `marketing/**` (desk already correct).
+
+## Session record — `arena/353f0afc-zone2` (this session) — 2026-11-19 (UTC)
+
+**Branch:** `arena/353f0afc-zone2`, base `main` @ `0c101a7` (merge of PR #200). The Arena branch is pinned; all work lands there.
+
+**Coordination check at claim:** `gh pr list --state open` returned no open pull requests. `main` is at `0c101a7`. GitHub Pages: `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/. All prior tasks T1–T75 read done/merged in this file; no live session's claim overlaps the scope below.
+
+**Claimed task — T76 (final review, official-source verification, and publication).** Re-verify the official sources the published site rests on (Amazon Associates disclosure and link-qualification rules, FTC disclosure guidance, Google sponsored-link guidance, and each live Amazon listing the five submitted links resolve to), record dated verdicts, flag anything that cannot be confirmed from an official source, run every repository gate, then create a PR from this branch to `main`, merge without waiting, confirm GitHub Pages deploys, and record the PR link, merge commit and deploy result here. No product fact, price, rating, intended-ASIN confirmation or campaign number is added or inferred; blanks stay blank and every valued row keeps its official source link.
+
+**File scope:** `COORDINATION.md` (this claim row and this close-out record only), NEW `docs/verification-353f0afc.md` (dated official-source verdicts and irregularities). Every other file is read-only for this session; no ledger, page, tool, workflow, or data file is edited. If a gate forces a fix, it is logged here first.
+
+**Status:** in progress.
