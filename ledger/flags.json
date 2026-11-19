@@ -763,6 +763,20 @@
       "source_ids": [
         "S62"
       ]
+    },
+    {
+      "id": "F-54",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "The CHEF iQ Sense listing states its warranty two ways: a two-year assurance in About this item and '3 Year' in Item details",
+      "detail": "Both statements were re-read live on 2026-11-19 on https://www.amazon.com/dp/B0DZFD6R9Z: 'About this item' ends 'Built for long-lasting durability with a two-year assurance provided by CHEF iQ', while the same page's Item details table prints 'Warranty Description: 3 Year' (the listing is registered as S62). The thermometer desk prints both statements as a conflict and picks neither; ledger/products.json's P-05 'Warranty' row currently publishes only the two-year figure as verified, so the two surfaces read differently (cross-scope request CR-11 logged in COORDINATION.md). Promoted from question register Q-22 under CR-9 (SG-15): Q-22's battery half is already F-53, and the counterpart question Q-21 is already F-44, so no duplicate rows were added.",
+      "impact": "A reader comparing coverage gets two different warranty terms from one official listing; quoting either term alone would state something the same page contradicts.",
+      "action_required": "Owner/editor: check the CHEF iQ user guide linked from the listing or the manufacturer's own warranty page, record the answer with its source, then align ledger/products.json's P-05 Warranty row and the desk.",
+      "source_ids": [
+        "S62"
+      ]
     }
   ]
 }

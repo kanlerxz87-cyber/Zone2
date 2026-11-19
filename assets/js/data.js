@@ -1217,7 +1217,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 53;
+const CANONICAL_FLAG_COUNT = 54;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1801,6 +1801,17 @@ const FLAGGED_ROWS = [
     actionRequired: "Editor: ask CHEF iQ support or check the product manual; record the answer with its source.",
     ledgerFlag: "F-53",
     ledgerUrl: "pages/flags.html#F-53",
+    source: "https://www.amazon.com/dp/B0DZFD6R9Z",
+    sourceIds: ["S62"],
+  },
+  {
+    item: "F-54 — The CHEF iQ Sense listing states its warranty two ways: a two-year assurance in About this item and '3 Year' in Item details",
+    detail: "Both statements were re-read live on 2026-11-19 on https://www.amazon.com/dp/B0DZFD6R9Z: 'About this item' ends 'Built for long-lasting durability with a two-year assurance provided by CHEF iQ', while the same page's Item details table prints 'Warranty Description: 3 Year' (the listing is registered as S62). The thermometer desk prints both statements as a conflict and picks neither; ledger/products.json's P-05 'Warranty' row currently publishes only the two-year figure as verified, so the two surfaces read differently (cross-scope request CR-11 logged in COORDINATION.md). Promoted from question register Q-22 under CR-9 (SG-15): Q-22's battery half is already F-53, and the counterpart question Q-21 is already F-44, so no duplicate rows were added.",
+    severity: "low",
+    impact: "A reader comparing coverage gets two different warranty terms from one official listing; quoting either term alone would state something the same page contradicts.",
+    actionRequired: "Owner/editor: check the CHEF iQ user guide linked from the listing or the manufacturer's own warranty page, record the answer with its source, then align ledger/products.json's P-05 Warranty row and the desk.",
+    ledgerFlag: "F-54",
+    ledgerUrl: "pages/flags.html#F-54",
     source: "https://www.amazon.com/dp/B0DZFD6R9Z",
     sourceIds: ["S62"],
   },
