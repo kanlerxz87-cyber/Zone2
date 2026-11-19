@@ -7816,3 +7816,10 @@ After integrating PR #183 and verifying the 9/11 current rollups, `main` advance
 which adds the upstream T70 deployment-verification close-out for #183. This branch was rebased onto
 `34bab9d`; that append-only record is retained. It does not alter this task's code, data, or generated
 pages. The next combined-tree validation is performed on this base.
+
+### T69 rebase refresh — preserve upstream PR #185 integration
+
+After PR #186, `main` advanced through PR #185 (`arena/9ffe2d83-zone2`) to `4374bda`. This branch was
+rebased onto that head, preserving PR #185's flag-count and cross-namespace close-out. Its file scope
+does not change the current publication arrays or `docs/board-9251f262.json`; this branch keeps both
+inputs untouched and revalidates the combined tree.
