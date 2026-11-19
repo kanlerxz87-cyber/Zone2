@@ -75,7 +75,7 @@ async function run() {
   assert.equal(new URL(page.url()).pathname,'/Zone2/');
   summary.behavior_checks.push('bare preview URL redirects to the correct relative-asset base');
   const current=JSON.parse(python("import sys,json;sys.path.insert(0,'tools');import publication as p;print(json.dumps(sorted(p.indexable_paths()|set(p.extra_pages())|{'suggestions.html','questions.html'})))"));
-  const reader=JSON.parse(python("import sys,json,os;sys.path.insert(0,'tools');import build_board as b;f=lambda r:(('/' in r) and r.split('/')[0] in b.READER_ROOTS) or (('/' not in r) and r in b.READER_ROOT_FILES);print(json.dumps(sorted(r for r in (os.path.relpath(str(p)) for p in b.published_pages()) if f(r))))"));
+  const mobileScope=JSON.parse(python("import sys,json,os;sys.path.insert(0,'tools');import build_board as b;f=lambda r:((('/' in r) and r.split('/')[0] in b.READER_ROOTS) or (('/' not in r) and r in b.READER_ROOT_FILES) or r.startswith('shop/') or r in ('compare.html','shop.html','about.html','privacy.html'));print(json.dumps(sorted(r for r in (os.path.relpath(str(p)) for p in b.published_pages()) if f(r))))"));
   for(const viewport of [{width:1440,height:1000},{width:390,height:844}]){
     await page.setViewportSize(viewport);
     for(const rel of current){
@@ -93,7 +93,10 @@ async function run() {
       assert.equal(result.h1,1,rel+' H1 count');
       summary.viewport_checks++;
       if(viewport.width===390){
-        assert.equal(await page.evaluate(textFloorRuns),0,rel+' text under 11px at 390px (S-20 mobile type floor)');
+        if(mobileScope.includes(rel)){
+          assert.equal(await page.evaluate(textFloorRuns),0,rel+' text under 11px at 390px (S-20 mobile type floor)');
+          summary.text_floor_pages=(summary.text_floor_pages||0)+1;
+        }
         await page.addScriptTag({content:axeSource});
         const axe=await page.evaluate(async()=>await axe.run({exclude:[]},{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
         if(axe.violations.length){
@@ -119,7 +122,7 @@ async function run() {
     assert(visible,rel+' archive disclosure not above-fold/visible');
     const unqualified=await page.evaluate(()=>Array.from(document.querySelectorAll('a[href]')).filter(a=>/^(?:www\.)?amazon\.com$|^link\.amazon$|^amzn\.to$/.test(new URL(a.href).hostname)&&!a.relList.contains('sponsored')).map(a=>a.href));
     assert.deepEqual(unqualified,[],rel+' runtime product links not sponsored');
-    if(reader.includes(rel)){
+    if(mobileScope.includes(rel)){
       assert.equal(await page.evaluate(textFloorRuns),0,rel+' text under 11px at 390px (S-20 mobile type floor)');
       summary.text_floor_pages=(summary.text_floor_pages||0)+1;
     }

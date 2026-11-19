@@ -15,28 +15,28 @@
 
 ## Before and after
 
-The before pass served the current HTML and non-CSS assets while routing the four reader stylesheets and two generated dashboard CSS copies to their committed `HEAD` versions. The after pass used the working-tree stylesheets. This isolates the CSS change while keeping the page set and browser/method constant.
+After PR #194 and the later chooser PR merged while this task was in progress, the comparison was re-run on that combined page tree. The before pass served the current HTML and non-CSS assets while routing the four reader stylesheets and two generated dashboard CSS copies to their `origin/main` versions at `8f2d55e` (PR #206); the after pass used this branch's working-tree stylesheets. This isolates this branch's CSS changes while keeping the updated page set and browser/method constant.
 
 | Reader-facing measure, 85 pages | Before | After | Change |
 |---|---:|---:|---:|
-| Text-bearing elements below 11 px | 454 | 0 | −454 |
-| Standalone targets with either dimension below 24 CSS px | 1,894 | 0 | −1,894 |
-| Standalone targets with either dimension below 44 CSS px | 3,323 | 2,024 | −1,299 |
+| Text-bearing elements below 11 px | 455 | 0 | −455 |
+| Standalone targets with either dimension below 24 CSS px | 1,900 | 0 | −1,900 |
+| Standalone targets with either dimension below 44 CSS px | 3,329 | 2,030 | −1,299 |
 | Pages with horizontal overflow | 0 | 0 | no change |
 
 These are measurements of this page tree and viewport, not a claim about every device or browser. The scope intentionally excludes operator/admin namespaces; those remain outside the T76 claim.
 
-## The 2,024 remaining targets below 44 px
+## The 2,030 remaining targets below 44 px
 
-All 2,024 have **both dimensions at least 24 CSS px** in the measurement, so they meet the size branch of WCAG 2.2 SC 2.5.8. The remainder is classified as follows (mutually exclusive buckets, by measured selector):
+All 2,030 have **both dimensions at least 24 CSS px** in the measurement, so they meet the size branch of WCAG 2.2 SC 2.5.8. The remainder is classified as follows (mutually exclusive buckets, by measured selector):
 
 | Bucket | Count | Treatment |
 |---|---:|---|
-| Source/reference chips and links (`a.src`, `.pb-src`, `.sh-more-link`) | 1,312 | Kept at their compact 24 px-or-greater target height in dense source lists and tables. |
+| Source/reference chips and links (`a.src`, `.pb-src`, `.sh-more-link`) | 1,318 | Kept at their compact 24 px-or-greater target height in dense source lists and tables. |
 | Other table-cell links | 222 | Kept compact to preserve evidence-table readability and fit. |
 | Header, navigation and footer links | 220 | Header/top-nav/footer components use a 44 px **minimum height** rule; some narrow labels are less than 44 px wide, so this is not asserted as a 44 × 44 square. |
 | Other section, card, disclosure and content links/controls | 270 | At least 24 × 24 CSS px; includes varied content links and compact section controls. |
-| **Total** | **2,024** | No reader-scope standalone target below 24 × 24 CSS px. |
+| **Total** | **2,030** | No reader-scope standalone target below 24 × 24 CSS px. |
 
 The 44 × 44 square is WCAG 2.2 SC 2.5.5 Target Size (Enhanced), a **Level AAA** criterion; it is not the AA threshold. This pass uses 44 px minimum height for prominent header/footer/navigation controls as a usability convention, and deliberately does not enlarge dense evidence-table references to 44 px. It does **not** claim that every measured target meets SC 2.5.5.
 
@@ -45,8 +45,8 @@ The input exception was checked against the rendered label: for example, the com
 ## Changes and permanent check
 
 - Added phone-only (max-width 780 px) 11 px text-floor rules to `marketing/assets/marketing.css`, `assets/css/style.css`, `assets/css/publish.css` and `assets/css/shop.css`; desktop rules are unchanged.
-- Added 24 px standalone-link floors and 44 px minimum-height rules for prominent navigation/footer controls. `style.css` restates the three `publication.css`-owned small-text rules with `!important` because `publication.css` loads last; the live PR #194-owned `publication.css` was not edited.
-- `tests/browser.cjs` now checks the 11 px floor at 390 px across the reader page set, including archived packaged pages. CI reported `text_floor_pages: 49` in the archive loop; reader pages also present in the current indexable-page loop receive the same assertion there.
+- Added 24 px standalone-link floors and 44 px minimum-height rules for prominent navigation/footer controls. `style.css` restates the `publication.css`-owned small-text rules with `!important` because `publication.css` loads last; it also floors the chooser's result and no-script fallback text added in merged PR #205. Neither `publication.css` nor chooser markup/JS was edited in this task.
+- `tests/browser.cjs` checks the 11 px floor at 390 px across the full 85-page sign-off set. Pages in the current indexable sweep and pages in the archive sweep are both covered; operator/admin pages outside this scope are not included.
 - S-20 remains recorded with the 44 px caveat above; the phone-only sticky comparison bar was already present on `compare.html` from the earlier T72 pass.
 
 ## Official criterion references
@@ -56,7 +56,7 @@ The input exception was checked against the rendered label: for example, the com
 
 ## Gate results
 
-- `python3 tools/ci_replay.py`: **63/63 passed**, including browser verification and the new 390 px type-floor assertion.
+- `python3 tools/ci_replay.py`: **66/66 passed**, including browser verification and the 390 px type-floor assertion across the full sign-off set.
 - `python3 tools/validate_board.py` and `python3 tools/build_board.py --check`: passed.
 - `python3 tests/test_pipeline.py`: 15/15; link-policy, page-identity, price-guard and publication tests passed; event client: 12 behavior/privacy cases passed.
 - Remaining standalone validators are recorded in the T76 close-out in `COORDINATION.md`.

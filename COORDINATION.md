@@ -8662,3 +8662,15 @@ through builders and passed `ci_replay.py` 63/63. Final scope therefore includes
 outputs: `pages/assets/dashboard.css`, `decisions/assets/dashboard.css`, `console/index.html`,
 `console/review.html`, `console/manifest.json`. Source owners remain untouched. The shop stylesheet
 amendment above also stands: `assets/css/shop.css` contains only the additive T76 mobile block.
+
+**T76 post-rebase adjustment (2026-11-19):** while replaying this branch onto `origin/main` after
+PR #194 / #205 merged, the browser type-floor gate found a new 10 px chooser-result message on
+`compare.html` (and its no-script fallback in `assets/css/publication.css`). The chooser markup/JS and
+`publication.css` remain owned by the merged PR's changes; T76 adds the phone-only 11 px restatement
+in its already-claimed `assets/css/style.css` scope, keeping the PR #194/205-owned stylesheet
+untouched. The same combined-tree sweep found 15 short `flagged.html` table links under 24 px wide;
+`style.css` now gives those source-table links a 24 px minimum width. Re-measured the combined tree
+with the same 390×844 Chromium method: the 85-page reader/shop scope is 0 text-bearing elements under
+11 px, 0 standalone targets with either dimension under 24 px, 2,030 in the 24–44 px band, and 0
+overflow pages. Re-ran CI replay after rebasing and regenerating; details/gates updated in the T76
+close-out below.

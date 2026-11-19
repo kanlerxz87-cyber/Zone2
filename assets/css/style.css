@@ -506,10 +506,10 @@ footer.site a { color: var(--accent); }
 
 /* ------------------------------------------------------------------------- */
 /* T76 (session 5a3dd862, 2026-11-19): S-20 / RQ-16 mobile type floor and tap targets, style.css
-   components, plus restatements for three publication.css selectors. Phones only (max-width: 780px);
+   components, plus restatements for publication.css-owned selectors. Phones only (max-width: 780px);
    desktop unchanged (T72's convention). The restatements below need !important because
    assets/css/publication.css loads AFTER this file on the publication pages and sets the same
-   font sizes (9px table headers, 8px .cn-paid, 10px .cn-toc h2) with equal-or-higher specificity;
+   font sizes (9px table headers, 8px .cn-paid, 10px .cn-toc h2, and the later-merged chooser's 10px result/fallback) with equal-or-higher specificity;
    publication.css is a live claim (PR #194) and is deliberately not edited here — see COORDINATION.md
    T76. Standalone targets -> 24px (SC 2.5.8). */
 @media (max-width: 780px) {
@@ -522,8 +522,10 @@ footer.site a { color: var(--accent); }
   .cn-table th { font-size: 11px !important; }
   .cn-paid { font-size: 11px !important; }
   .cn-toc h2 { font-size: 11px !important; }
+  /* T78 chooser merged after this task branched; restate its 10px result/fallback at the T76 floor. */
+  .cn-chooser-result, .cn-chooser-noscript { font-size: 11px !important; }
   /* standalone table-cell targets (flagged.html, comparison tables) */
-  table.cn-table a { display: inline-block; padding-block: 5px; }
+  table.cn-table a { display: inline-block; min-width: 24px; padding-block: 5px; }
 }
 
 /* T76 round 2 (same session): standalone link floors measured on verification.html (a.src rows),
