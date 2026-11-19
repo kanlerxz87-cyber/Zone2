@@ -495,6 +495,14 @@ jobs:
               the data, sponsored links, canonical, no prices, no invented metrics)
         run: python3 tools/verify_front.py
 
+      # T68 (session arena/5f7f77a4-zone2): the five product notes used to share roughly a third of
+      # their text (worst pair 0.389 by 8-word shingle Jaccard). This gate measures the same property
+      # on the built pages and fails above 0.25, so a future note cannot quietly become a restatement
+      # of an existing one. The threshold is this project's own repair budget; no search engine
+      # publishes an overlap value, and the page that reports it says so.
+      - name: Product-note duplication gate (8-word shingles, Jaccard; fails above 0.25)
+        run: python3 tools/note_overlap.py
+
       # T66 (session arena/75efdf57-zone2): the shop section (shop/**). The build step rewrites
       # every shop page from shop/data/*.json and fails on an unresolvable guide token or a guide
       # quoting a blank/conflicting value; the gate then re-reads the pages on disk: every row and

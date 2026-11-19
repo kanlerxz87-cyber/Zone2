@@ -1016,7 +1016,7 @@ def build_suggestions(facts: dict, board: dict) -> str:
   <p class="pb-byline"><b>{len(board['suggestions'])} suggestions</b> &middot;
   <b>{sum(1 for s in board['suggestions'] if s['waits_on'])} blocked on an open question</b> &middot;
   <b>{sum(1 for s in board['suggestions'] if not s['waits_on'])} ready to decide now</b> &middot;
-  last updated {e(CHECKED_ON)}</p>
+  last updated {e(UPDATED_ON)}</p>
 </div></section>
 
 <section class="pb-sec"><div class="pb-wrap">
@@ -1052,7 +1052,7 @@ def build_questions(facts: dict, board: dict) -> str:
   action that would close it, and which suggestions are waiting on it.</p>
   <p class="pb-byline"><b>{len(qs)} questions</b> &middot;
   <b>{len(answered)} answered from an official source</b> &middot;
-  <b>{len(openq)} still open</b> &middot; last updated {e(CHECKED_ON)}</p>
+  <b>{len(openq)} still open</b> &middot; last updated {e(UPDATED_ON)}</p>
 </div></section>
 
 <section class="pb-sec"><div class="pb-wrap">
