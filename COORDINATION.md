@@ -7899,3 +7899,12 @@ as history on purpose (OBS-2/OBS-3 in the verification record).
 - Flagged irregularities (open, owner action, not inferable): product identity mapping (F-03 — no public Amazon document binds a `link.amazon` code to a product); no Associates tag on resolved links (F-24 — cannot attribute commission as supplied); commission band per resolved product not inferable (Kitchen 4.50% vs Home 3.00% both possible under the resolved breadcrumb); CR-14 (P-05 warranty divergence); S-20/RQ-16 mobile-first pass unclaimed.
 
 **Next:** create a PR from `arena/e078d7c5-zone2` to `main` with a summary of the changes, the sources used, and the flagged irregularities; merge without waiting (`gh pr merge <N> --merge`); confirm GitHub Pages deploys successfully; then append the close-out record (PR link, merge commit, deploy status) to this session record and mark T72 done.
+
+### T72 close-out — PR #190 merged; Pages deployment verified — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#190](https://github.com/kanlerxz87-cyber/Zone2/pull/190) — `arena/e078d7c5-zone2` → `main`, **MERGED** via `gh pr merge 190 --merge`, merge commit **c07e1317494ea23b2001b2f8df7133f62ae817a9**
+- **PR check:** `Build, verify and deploy` run #456 — **success**; `pages build and deployment` run #170 — **success**
+- **Pages API:** `status: built`, source `main` `/`, https://kanlerxz87-cyber.github.io/Zone2/ (live; latest build 2026-11-19T19:44:34Z)
+- **Live site:** publication front page with disclosure above the fold, `shopnow047c-20` tagged `rel="sponsored"` Special Links, question-shaped buying guides, category subpages, executive summary, suggestions/decision board, questions register, Flagged for Review page — all verified gate-green before merge
+- **No data changes:** blanks stay blank; every valued row carries an official source link; other sessions' open PRs (#182 T69, #184 T70) left untouched
+- **T72: done**
