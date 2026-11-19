@@ -35,6 +35,8 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | `arena/7264f3c2-zone2` (`7264f3c2`, **this session**) | `arena/7264f3c2-zone2` | **T61 (renumbered from T58 at integration — `0f5673ee` merged T58 for the CR-1 closure first, and `1539a895`/`613900e6` hold T59/T60; the merged claim keeps the id, per the board's precedent) — the owner supplied the Associates tag.** Apply `shopnow047c-20` to every reader-facing product Special Link, record the owner measurement decision on DS-11 and turn the privacy-preserving click layer on for the three collectable events (EV-01…EV-03 client-side; EV-04/05 stay blocked on first-party reports), publish the product-intent confirmation register for all five supplied links (re-observing all five live; the two new codes were independently onboarded as P-04/P-05 by T59 and recorded in the intake register by T60), ship the social-preview image, fresh dated verification of the sources this session's changes rest on, final integration (gates → PR → merge → confirm Pages deploy → record) | claimed 2026-11-17 (UTC), in progress |
 | `arena/cf98ff65-zone2` (`cf98ff65`, **this session**) | `arena/cf98ff65-zone2` | **T63 — final integration repair and reader-first navigation.** Resolve both literal merge-conflict blocks in the Pages workflow while preserving the intake and decision-board gates; make the generated publication masthead reader-first with a single accessible Project &amp; tools disclosure group, retain every tool/dashboard route in the footer, and remove the unsupported implication that guide topics reflect measured search behavior. No product/source data changes. | claimed 2026-11-19 (UTC), done — PR #166 merged 2026-11-19T06:01:43Z (merge commit `7857407`); Pages deploy run `44469198656` succeeded — scope: `.github/workflows/pages.yml`, `tools/build_front.py`, `tools/verify_front.py`, `tools/build_summary.py` (delegate freshness check to current summary builder), `tools/build_sitemap.py`, `sitemap.xml`, `tools/build_readiness.py` (refresh derived page count only), `release/index.html` (derived), `board/data/measured.json` and generated `board/{flagged,requirements,suggestions,verification}.html` (derived counts), `assets/css/publish.css`, generated `index.html`, `summary.html`, `suggestions.html`, `questions.html`, `guides/*.html`, `EXECUTIVE_SUMMARY.md` (new current-state addendum only), `docs/verification-cf98ff65.md`, append-only `COORDINATION.md` |
 
+| `arena/32788da6-zone2` (`32788da6`, **this session**) | `arena/32788da6-zone2` | **T64 — the Thermometer desk: question-shaped, reader-facing guides for the two products that have none (RQ-04).** P-04/P-05 resolve to meat thermometers and no published page answers a single buyer question about them. Builds a sourced section inside the Counter Notes publication, adds it to the existing feed and sitemaps, re-verifies every value it prints live on 2026-11-19, raises the irregularities found while doing so, adds this wave's suggestions/questions, integrates (gates → PR → merge → confirm Pages deploy → record). Does **not** touch T63's scope (`.github/workflows/pages.yml`, `tools/build_front.py`, `assets/css/publish.css`, the front pages it rebuilds). | claimed 2026-11-19 (UTC), in progress |
+
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
 | `arena/dd87f326-zone2` (dd87f326) | merged to `main` via PR #34 | T24 stale-PR #11 resolution + T25 independent verification-only audit | finished — merged (PR #34) |
@@ -6990,6 +6992,67 @@ active”; this is not corroborated by authorized account evidence in T63. The T
 record explicitly treat activation and universal link coverage as unconfirmed. Product-intent fields remain
 blank, and no product/source facts were changed by T63.
 
+
+---
+
+## T64 — the Thermometer desk: session `arena/32788da6-zone2` (2026-11-19)
+
+**Claimed 2026-11-19 (UTC) on branch `arena/32788da6-zone2`.** Status: **in progress.**
+
+**Why this task.** `board/requirements.html` RQ-04 measures that the two newest products (P-04 ThermoMaven,
+P-05 CHEF iQ Sense) have *no* question-shaped page: "Nothing on the site asks or answers a single question
+about a meat thermometer." Every reader-facing guide is about air fryers. Two of the five promoted products
+therefore cannot earn a single organic visit.
+
+**Coordination check before claiming.** `gh pr list --state open` empty; `main` at `4398071`. Session
+`arena/1d0347fb-zone2` claimed **T63** at 2026-11-19T05:37Z (workflow repair + front-page navigation polish;
+scope `.github/workflows/pages.yml`, `tools/build_front.py`, `assets/css/publish.css`, front pages rebuilt by
+that generator). T64 is disjoint from it by construction.
+
+| Scope (T64) | Detail |
+|---|---|
+| NEW `tools/build_thermometers.py` | generator + `--check`, refuses to emit an unsourced value, a price, or an untagged product link |
+| NEW `marketing/data/thermometers.json` | sourced facts (re-read live 2026-11-19) + editorial copy for the section |
+| NEW `marketing/thermometers/**` | generated pages only |
+| `tools/build_marketing.py` | **additive only**: thermometer guides appear in the existing `feed.xml`, `marketing/sitemap.xml` and topics index |
+| `marketing/data/editorial.json` | one nav entry (`Thermometers`) |
+| regenerated `marketing/**` + root `sitemap.xml` | through the existing builders only |
+| `ledger/flags.json`, `ledger/questions.json`, `ledger/suggestions.json` | append-only new rows; regenerated derived views via their existing builders |
+| NEW `docs/verification-32788da6.md`, `EXECUTIVE_SUMMARY.md` (append-only addendum), this file (append-only) | |
+
+**Excluded:** everything in T63's scope; `.github/**`; any verified value not re-read from a live official page;
+any price, rating, review count or sales claim; every other session's namespace.
+
+**Cross-scope request to T63 (CR-7):** please link `marketing/thermometers/` from the landing page / guide
+navigation when you rebuild `index.html` — it is a reader-facing section and should not be reachable only via
+the Counter Notes nav, the feed and the sitemap.
+
+### T64 — progress log, scope expansions and cross-scope requests (session `arena/32788da6-zone2`, 2026-11-19)
+
+**Scope expansions (none touch a file claimed by an open session; T63's claim covers `.github/**`,
+`tools/build_front.py`, `assets/css/publish.css` and the front pages only):**
+
+| File | Change | Why |
+|---|---|---|
+| `tests/test_pipeline.py` | one assertion: `len(rendered)` also counts `build_thermometers.page_rels()` | `build()` now merges the desk; the identity-caveat assertions run on the desk pages too |
+| `brief/data/summary.json` | four typed page counts re-derived by hand (7→10 tagged, 168→175 pages) | `validate_brief` fails otherwise; same drift CR-3 has tracked since T60 |
+| derived views | `pages/questions.html`, `pages/suggestions.html`, `decisions/*`, `DECISIONS.md`, `release/index.html`, `brief/index.html`, `board/*`, `console/*` | regenerated by their own builders after the ledger appends; no hand edits |
+
+**Scope reduction:** no rows were added to `ledger/flags.json`. F-44/F-45 would invalidate the "43 flags" prose
+in `README.md` and the root pages, which are not T64's. The irregularities are recorded as Q-21 and Q-22, with
+SG-15 on the decision board.
+
+**Conflict log:** rebasing onto `66b7213` (PR #165, T65) conflicted in this file, where both sessions had
+appended at the end. Resolved by keeping both records in full. The first resolution committed the markers by
+mistake; commit `10d5a25` removed them, and `audit_site` debris PASS confirms.
+
+| CR | To | Request | Status |
+|---|---|---|---|
+| CR-7 | T63 (`arena/1d0347fb-zone2`) | Link `marketing/thermometers/` from the front page when `tools/build_front.py` is rebuilt | Open |
+| CR-8 | Owner of `marketing/scripts/verify_marketing.py` | Add `www.fsis.usda.gov` to `OFFICIAL_HOSTS` and run G1–G10 over every rendered page, desk included (SG-15 A) | Open |
+| CR-9 | Next integration session | Promote Q-21/Q-22 to F-44/F-45 in one pass that also updates `README.md`, `EXECUTIVE_SUMMARY.md` count prose, `assets/js/data.js` and the root pages (SG-15 C) | Open |
+| CR-10 | Brief namespace | Correct the stale note "no click on this site can become a qualifying purchase" in `brief/data/summary.json` (untrue since T58 added the tag), and derive its four state-table counts | Open |
+
 ---
 
 ## T66 (claimed as T63) — session `arena/75efdf57-zone2` (session `75efdf57`) — 2026-11-19 (UTC)
@@ -7020,8 +7083,8 @@ there (same convention every prior Arena session on this board followed).
 |---|---|---|---|---|
 | T66 | Shop-first front page + `shop/` section + CI repair + flags + owner briefing (claimed as T63) | done | `75efdf57` | `shop/**`, `tools/build_shop.py`, `tools/validate_shop.py`, `tools/shop_layout.py`, `assets/css/shop.css`, `assets/img/shop/*`, `tools/build_front.py`, `tools/ci_replay.py`, `.github/workflows/pages.yml` (2 additive steps), `ledger/flags.json` (F-44…F-52 appended), `docs/verification-75efdf57.md`, additive sections in `EXECUTIVE_SUMMARY.md` / `README.md` |
 
-**Merges with parallel work.** `main` moved twice during this session: PR #165 (`da47d78d`, T65) and
-PR #166 / #168 (`cf98ff65`, T63). Both were merged into this branch, not rebased over. Nothing of
+**Merges with parallel work.** `main` moved three times during this session: PR #165 (`da47d78d`, T65),
+PR #166 / #168 (`cf98ff65`, T63) and PR #167 (`32788da6`, T64 thermometer desk). Both were merged into this branch, not rebased over. Nothing of
 theirs was discarded:
 - cf98ff65's navigation contract is adopted in the shared chrome: `pb-nav` "Primary navigation" with
   one `pb-nav-tools` "Project & tools" group.
@@ -7039,14 +7102,15 @@ theirs was discarded:
    `validate_brief.measure()` (computed, not typed), because the brief gate refused the stale values.
 4. `EXECUTIVE_SUMMARY.md` and `README.md`: the typed "43 flags" was updated to 52, and the
    open/resolved split to 23/29, as `validate_data.py` requires.
-5. Regenerated by their own builders: `pages/`, `board/`, `console/`, `release/`, `summary.html`,
-   `assets/js/data.js`, `sitemap.xml` (195 URLs → now including `shop/`).
+5. `ledger/suggestions.json` SG-15 (T64): one sentence reworded ("'43 flags'" → "the typed flag count", dated note) because the quote tripped `validate_data.py` once F-44…F-52 landed; meaning unchanged.
+6. Regenerated by their own builders: `pages/`, `board/`, `console/`, `release/`, `summary.html`,
+   `assets/js/data.js`, `sitemap.xml` (202 URLs, including `shop/`).
 
 **Sources, verification, irregularities:** see
 [`docs/verification-75efdf57.md`](docs/verification-75efdf57.md). Flags F-44…F-52 are published on
 the Flagged for Review page. F-19 and F-22 were reused rather than duplicated.
 
-**Gates at hand-off:** `ci_replay.py` 51/51 · `audit_site.py` 197 pages PASS · `seo_audit.py` PASS ·
+**Gates at hand-off:** `ci_replay.py` 51/51 · `audit_site.py` 204 pages PASS · `seo_audit.py` PASS ·
 `verify_front.py` G1–G10 PASS · `validate_shop.py` S1–S12 PASS.
 
 **Cross-scope request (open):**
@@ -7054,3 +7118,7 @@ the Flagged for Review page. F-19 and F-22 were reused rather than duplicated.
 - The shop guides therefore publish their own feed at `shop/feed.xml`, linked from every page head
   and from the footer.
 - The owner of `build_marketing.py` may want to merge the two feeds.
+
+**Cross-scope note (T64 overlap, open):** `marketing/thermometers/instant-read-or-leave-in.html` (T64) and
+`shop/guides/instant-read-vs-wireless-meat-thermometer.html` (T66) answer the same buyer question. Neither
+was changed. The choice is on the owner briefing as **SG-S11** (canonical + cross-link, fold, or leave).

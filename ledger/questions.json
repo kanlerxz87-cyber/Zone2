@@ -312,6 +312,36 @@
         "S62"
       ],
       "owner": "owner"
+    },
+    {
+      "id": "Q-21",
+      "question": "Is the ThermoMaven the brief meant the black HT07 at B0DHZTCNR5, or the newer model Amazon now points to (B0GL7Z4KP4)?",
+      "known": "On 2026-11-19 the supplied short link https://link.amazon/B0c8moW59 still resolved to https://www.amazon.com/dp/B0DHZTCNR5 (model HT07, black). That listing now shows an Amazon banner, 'There is a newer model of this item', linking to B0GL7Z4KP4, whose title is the same product title in an orange colourway (S61). The thermometer desk links B0DHZTCNR5 because that is where the supplied link goes.",
+      "missing": "The owner's intended product. The banner shows that Amazon lists a newer model. It does not show whether the brief meant the older or the newer listing, or whether the two differ in anything except colour.",
+      "how_to_find": "Owner: confirm the intended ASIN in the P-04 intent fields (SG-14). If it is B0GL7Z4KP4, re-read that listing row by row before any row is published for it. Nothing about it is published today.",
+      "blocks": [
+        "SG-14",
+        "SG-15"
+      ],
+      "source_ids": [
+        "S61"
+      ],
+      "owner": "owner"
+    },
+    {
+      "id": "Q-22",
+      "question": "Which warranty term applies to the CHEF iQ Sense at B0DZFD6R9Z, and is the 3-probe size the one the brief intended?",
+      "known": "On 2026-11-19 the listing stated the warranty two ways: 'a two-year assurance provided by CHEF iQ' (About this item) and 'Warranty Description: 3 Year' (Item details). The same page sells 1-, 2-, 3- and 4-probe sizes; B0DZFD6R9Z is the 3-probe size ('Included Components: 3 Probes, Hub'), and the supplied short link https://link.amazon/B0f3GKalj resolved to it (S62). The 2026-11-17 read also recorded a battery-life conflict (50 h in the bullets, 70 h in the description). On 2026-11-19 the description rendered only as images, so only the 50-hour statement could be re-read.",
+      "missing": "The warranty term the manufacturer stands behind. Whether the brief meant the 3-probe size or another size from the same listing.",
+      "how_to_find": "Owner or editor: check the CHEF iQ user guide linked from the listing (https://m.media-amazon.com/images/I/81hiQf0-p-L.pdf) or the manufacturer's own warranty page, and record the source. Owner: confirm the intended size in the P-05 intent fields (SG-14). Until then the desk prints both warranty statements as a conflict and picks neither.",
+      "blocks": [
+        "SG-14",
+        "SG-15"
+      ],
+      "source_ids": [
+        "S62"
+      ],
+      "owner": "owner"
     }
   ]
 }

@@ -326,6 +326,38 @@
       "src": [
         "S61"
       ]
+    },
+    {
+      "id": "SG-S11",
+      "title": "Merge the two thermometer guide sets",
+      "area": "Findability",
+      "why": "Two sessions published thermometer guides on the same day: the shop guides (shop/guides/) and the thermometer desk (marketing/thermometers/, T64). 'Instant-read or leave-in' is answered on both, so search engines see two pages competing for one question, and readers can land on either.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Keep the shop guide as the canonical page for each overlapping question, point the other page's canonical tag at it and cross-link the two sets.",
+          "cost": "Edit two generators; agree which page owns each question",
+          "tradeoff": "One page per question; the other remains for readers who arrive there"
+        },
+        {
+          "label": "B",
+          "text": "Fold the desk's unique guides (accuracy, turkey placement, air-fryer use) into shop/guides/ and retire the duplicates with redirects-by-link.",
+          "cost": "Larger content move",
+          "tradeoff": "Cleanest structure; most work"
+        },
+        {
+          "label": "C",
+          "text": "Leave both sets as they are.",
+          "cost": "None",
+          "tradeoff": "Duplicate answers compete in search"
+        }
+      ],
+      "recommendation": "A",
+      "waits_on": [
+        "OQ-06"
+      ],
+      "effort": "Low-Medium",
+      "status": "Proposed - awaiting owner decision"
     }
   ],
   "questions": [

@@ -1490,6 +1490,55 @@ bot-filtering choices before collecting events.
 4. Verify Search Console ownership and use actual query/page data before treating any topic as measured
 interest. Until then the guide subjects remain editorial hypotheses.
 
+
+---
+
+## Addendum — T64, the thermometer desk (session `arena/32788da6-zone2`, 2026-11-19)
+
+**What changed for a reader.** Two of the five promoted products, the ThermoMaven instant-read (P-04) and the
+CHEF iQ Sense wireless probe (P-05), now have reader pages. Before this, not one page on the site asked or
+answered a question about a meat thermometer (RQ-04). The new section is `marketing/thermometers/`, reachable
+from the "Thermometers" nav entry, the guides index, `feed.xml` and both sitemaps. It has seven pages:
+- a desk page comparing the two thermometers, with tagged Special Links;
+- one row-by-row page per thermometer;
+- four question-shaped guides:
+  - *Instant-read or leave-in: which meat thermometer do you actually need?*
+  - *Do you need a meat thermometer for an air fryer?* (links across to the air-fryer desk)
+  - *Where does the thermometer go in a turkey? Three spots, one number* (in season: US Thanksgiving is 2026-11-26)
+  - *Is your meat thermometer accurate? USDA's ice-water check*
+
+The titles are editorial hypotheses about how readers phrase the question, not search-volume claims.
+
+**How it is sourced.** Five official pages, all read live on 2026-11-19, and nothing else:
+- the two Amazon listings the supplied short links resolved to that day;
+- three USDA Food Safety and Inspection Service pages: food thermometers, the safe-temperature chart, and air
+  fryers.
+
+Every specification row links to its listing. Every food-safety sentence links to USDA. Every opinion sits in a
+labelled "Our take" box. Values the 2026-11-17 read recorded but that can no longer be re-read as text are left
+blank with that reason, not reprinted: CHEF iQ accuracy, and its 70-hour battery figure. No price, rating, review
+count or sales rank is printed.
+
+**How it is enforced.** `tools/build_thermometers.py` refuses to publish:
+- an unsourced value, or a blank without a reason;
+- a sentence without a source;
+- a price or a rating;
+- a banned phrase or a first-hand claim;
+- an off-list host, or an untagged product link.
+
+All ten injected defects were refused. `tools/build_marketing.py` renders the desk inside its own build, so the
+feed, sitemap, orphan and canonical gates cover it. The full CI replay passes all 49 workflow steps, before and
+after rebasing onto T65.
+
+**Open for the owner.** Q-21 and Q-22 in the question register, and SG-15 on the decision board:
+- whether the brief meant the ThermoMaven HT07 or the newer model Amazon now points to (B0GL7Z4KP4);
+- which of the CHEF iQ listing's two warranty statements applies (two-year vs "3 Year");
+- whether the 3-probe size is the intended one.
+
+Product intent for both links remains unconfirmed (F-03). The pages say so next to every product link.
+
+Full record: `docs/verification-32788da6.md`.
+
 ## Addendum — 2026-11-19 (session `arena/75efdf57-zone2`, T66; claimed as T63): the site now reads as a shop
 
 **In one paragraph.** The front page leads with the five products. A new shop section adds a page for
@@ -1515,7 +1564,7 @@ single "Project & tools" menu and from the footer.
 **The owner briefing** ([shop/briefing.html](https://kanlerxz87-cyber.github.io/Zone2/shop/briefing.html))
 holds this session's decision material:
 - an executive summary;
-- ten suggestions (SG-S01…SG-S10), each with options, cost, trade-off, a recommendation and the
+- eleven suggestions (SG-S01…SG-S11), each with options, cost, trade-off, a recommendation and the
   questions it waits on, all still *Proposed*;
 - eleven open questions (OQ-01…OQ-11), each with what is known (with its source), what is missing and
   how to find out;
@@ -1537,6 +1586,6 @@ Verification detail: [`docs/verification-75efdf57.md`](docs/verification-75efdf5
 
 **Gates at hand-off.**
 - `tools/ci_replay.py`: 51 of 51 workflow steps pass, including the two new shop steps.
-- `tools/audit_site.py`: 197 pages, all checks pass.
+- `tools/audit_site.py`: 204 pages, all checks pass.
 - `tools/seo_audit.py`: all checks pass.
 - `tools/verify_front.py` (G1–G10) and `tools/validate_shop.py` (S1–S12): pass.
