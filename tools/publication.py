@@ -99,8 +99,8 @@ def shell(rel, title, description, body, *, article=None, scripts=(), indexable=
     schema = {"@context": "https://schema.org", "@type": "WebSite" if rel == "index.html" else "WebPage", "name": title,
               "url": BASE + ("" if rel == "index.html" else rel), "publisher": {"@type": "Organization", "name": "Counter Notes", "url": BASE + "about.html"}}
     if article:
-        schema.update({"@type": "Article", "headline": title, "datePublished": article["published"] + "T09:00:00Z",
-                       "dateModified": article["published"] + "T09:00:00Z", "author": {"@type": "Organization", "name": "Counter Notes", "url": BASE + "about.html#authorship"}})
+        schema.update({"@type": "Article", "headline": title, "datePublished": article["published"],
+                       "dateModified": article["published"], "author": {"@type": "Organization", "name": "Counter Notes", "url": BASE + "about.html#authorship"}})
     schema_text = json.dumps(schema, ensure_ascii=False).replace('<', '\\u003c')
     script_tags = ''.join(f'<script src="{e(depth + s)}" defer></script>' for s in ["assets/js/publication.js", "assets/js/events.js", *scripts])
     return f'''<!DOCTYPE html>
@@ -112,7 +112,7 @@ def shell(rel, title, description, body, *, article=None, scripts=(), indexable=
 <link rel="preload" href="{e(depth)}assets/fonts/fraunces-latin-full-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{e(depth)}assets/css/style.css"><link rel="stylesheet" href="{e(depth)}assets/css/publish.css"><link rel="stylesheet" href="{e(depth)}assets/css/publication.css">
 <script type="application/ld+json">{schema_text}</script></head><body class="cn-publication"><a class="cn-skip" href="#main">Skip to content</a>
-{masthead(rel)}<main id="main">{body}</main>{footer(rel)}{script_tags}</body></html>\n'''
+{masthead(rel)}<main id="main" tabindex="-1">{body}</main>{footer(rel)}{script_tags}</body></html>\n'''
 
 
 def intro(kicker, title, text, *, tail=""):
@@ -299,7 +299,7 @@ def flags():
     for f in ledger:
         official=' '.join(f'<a href="{e(old_sources[s]["url"])}" target="_blank" rel="sponsored nofollow noopener noreferrer">{e(s)} ↗</a>' for s in f.get('source_ids',[]) if s in old_sources)
         historical.append(f'<tr id="{e(f["id"])}"><th scope="row"><a href="pages/flags.html#{e(f["id"])}">{e(f["id"])}</a></th><td>{e(f.get("title",f.get("issue","Dated finding")))}</td><td>{official or sources(["AMZ-AGREEMENT"])}</td></tr>')
-    body+='<div class="cn-table-scroll" tabindex="0" role="region" aria-label="Historical flags"><table class="cn-table"><caption>Preserved canonical ledger flags; follow the full record for original dates, evidence and actions.</caption><thead><tr><th>ID / full record</th><th>Finding</th><th>Original official sources / rule reference</th></tr></thead><tbody>'+''.join(historical)+'</tbody></table></div></section>'
+    body+='<div class="cn-table-scroll" tabindex="0" role="region" aria-label="Historical flags"><table class="cn-table" data-historical-flags><caption>Preserved canonical ledger flags; follow the full record for original dates, evidence and actions.</caption><thead><tr><th>ID / full record</th><th>Finding</th><th>Original official sources / rule reference</th></tr></thead><tbody>'+''.join(historical)+'</tbody></table></div></section>'
     return shell('flagged.html','Flagged for Review','Current irregularities, missing evidence and external launch gates, plus the preserved source-governed historical flag register.',body,indexable=False)
 
 
@@ -350,6 +350,6 @@ def feed():
     items=[]
     for g in GUIDES:
         url=BASE+'guides/'+g['slug']+'.html'
-        pub=format_datetime(datetime.fromisoformat(g['published']).replace(hour=9,tzinfo=timezone.utc),usegmt=True)
+        pub=format_datetime(datetime.fromisoformat(g['published']).replace(tzinfo=timezone.utc),usegmt=True)
         items.append(f'<item><title>{escape(g["title"])}</title><link>{url}</link><guid isPermaLink="true">{url}</guid><pubDate>{pub}</pubDate><description>{escape(g["description"])}</description></item>')
     return '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Counter Notes — new guides</title><link>'+BASE+'</link><description>Thoughtful kitchen buying guides. Good gear. Less guesswork.</description><language>en-us</language><atom:link href="'+BASE+'feed.xml" rel="self" type="application/rss+xml"/>'+''.join(items)+'</channel></rss>\n'

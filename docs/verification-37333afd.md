@@ -114,3 +114,52 @@ collector host; real Associates orders and Search Console query exports; verifie
 operator identity/contact and human review; jurisdictional privacy review; authorized AI/API credentials.
 Suggestions compare options before implementation. No external gate is marked satisfied by a fixture,
 working link shape, static sitemap, screenshot or local preview.
+
+
+## Completed integration verification (before PR)
+
+- **Full strict CI replay: 59/59 executable workflow steps passed.** All previous namespace gates
+  remain; no old gate was dropped to make this release green. The YAML parses as 64 build steps
+  including Actions; `_site` is the only upload path. Local replay cannot execute GitHub's checkout,
+  configure/upload/deploy Actions; those require the actual GitHub run recorded after merge.
+- **Collector: 24 Python tests.** **Client VM harness: 12 reported privacy/behavior cases.** Both use
+  synthetic inputs only. Browser measurement fetches additionally omit the Referer header.
+- **Six price guards:** six tests each exercise a clean control and an injected product price in a
+  different HTML block from a commission disclosure. Both actual workflow script bodies are executed
+  unchanged against temporary fixture sites. All controls pass and all price mutations are rejected.
+- **Publication/packaging: 27 tests**, including missing sources/dates, blank reasons, filled disputed
+  values, copied/partial intent, malformed observations, missing sponsorship/disclosure, wrong canonical,
+  dead fragment, bad tag, unsafe static config, and the script-literal regression. All passed.
+- **Packaged artifact:** 198 HTML pages, 16 registered indexable reader URLs, 1,137 static product anchors
+  checked, 125 current factual table rows checked, zero contract errors. All other HTML is noindex;
+  every document has exactly one self-canonical and masthead/footer disclosure. Internal assets and
+  fragments resolve. Legacy feed/sitemap copies point to the canonical reader publication.
+- **Real Chromium 153.0.8010.0:** 222 viewport checks (24 current pages at desktop 1440×1000 plus
+  every packaged page at mobile 390×844), disclosures visible/uncovered above fold. Current pages have
+  no horizontal overflow. Automated axe WCAG A/AA-tagged checks: **zero violations on 24 current pages**.
+  This is not a claim of complete manual accessibility certification or legacy-page WCAG compliance.
+- **Browser behavior:** skip link/main focus and menu Escape; finder; all three product filters;
+  actual local POST and SQLite persistence; counter has no cookies/storage; DNT and GPC suppress writes;
+  static OFF config transmits no events; product notes/direct links remain accessible without JavaScript;
+  operator preference restore/export/clear works without implementing a proposal.
+- **All archive pages were rendered.** Runtime-created Amazon/short-link anchors were checked for
+  sponsored treatment. A raw-HTML regex initially rewrote an anchor literal inside archive JavaScript
+  and caused syntax errors; fixed by preserving script/style blocks and installing a narrow local
+  link-qualification observer before archived scripts run. No destination or historic fact is rewritten.
+  The final browser run had **no runtime errors and no missing local resources**.
+- Browser runs use an isolated fixture database, block external navigation, and suppress the default
+  action on the local click fixture. No Amazon request/test click or self-purchase is generated. The
+  fixture database is removed after each run; varying fixture totals are never campaign observations.
+- Low-contrast secondary labels were darkened and the skip target made focusable in response to actual
+  browser findings. Chromium was run without the serverless single-process flag to support isolated
+  privacy contexts; routing/keepalive is tested using load/font-ready signals, not a misleading network-idle wait.
+- Repaired a latent undefined-variable failure in the old typed-count validator. Historic defect titles
+  are not mistaken for current flag totals; all preserved flag row IDs are pinned to the canonical ledger.
+  The earlier brief's source-tree inventory now uses shared derived counts and corrects the missing-tag
+  and zero-orders overclaims. These are **source-tree** counts, not deployed-artifact statistics.
+- RSS dates are date-precision editorial dates normalized to midnight UTC; Article dates stay date-only.
+  No unsourced nine-o'clock publication time is asserted. No historical verification date is refreshed.
+
+PR, merge and permanent Pages verification remain pending at this record point. The temporary preview
+is running, but **permanent production measurement, authenticated enrollment, intended-product identity,
+Search Console ownership and real performance reports remain open**.

@@ -88,7 +88,8 @@ TOPICS = load("topics.json")
 SUGGESTIONS = load("suggestions.json")
 DECISIONS = load("decisions.json")
 QUESTIONS = load("questions.json")
-SUMMARY = load("summary.json")
+from build_brief import sub_tokens
+SUMMARY = sub_tokens(load("summary.json"))
 VERIFICATION = load("verification.json")
 
 SOURCES = {s["id"]: s for s in S["sources"]}
@@ -235,31 +236,8 @@ def measured_pages() -> list[Path]:
 
 
 def measure() -> dict:
-    pages = measured_pages()
-    n = len(pages)
-    with_disc = sum(1 for p in pages if DISCLOSURE in p.read_text(encoding="utf-8"))
-    with_tag = sum(1 for p in pages if TAG.search(p.read_text(encoding="utf-8")))
-    ai = sum(1 for p in pages if "AI-powered" in p.read_text(encoding="utf-8"))
-    price_pages = 0
-    for p in pages:
-        t = p.read_text(encoding="utf-8")
-        if MONEY.search(t) and "bounty" not in t.lower() and "commission" not in t.lower():
-            price_pages += 1
-    namespaces = {
-        (p.relative_to(REPO).parts[0] if len(p.relative_to(REPO).parts) > 1 else "(root)")
-        for p in sorted(REPO.rglob("*.html"))
-        if p.name != "404.html"
-        and not any(x in p.relative_to(REPO).parts for x in
-                    {".git", ".github", "__pycache__", "node_modules", ".local", "_site"})
-    }
-    return {
-        "published": n,
-        "with_disclosure": with_disc,
-        "with_tag": with_tag,
-        "ai_powered_pages": ai,
-        "price_pages": price_pages,
-        "surfaces": len(namespaces),
-    }
+    from site_inventory import measure as source_inventory
+    return source_inventory(REPO)
 
 
 def check_derived_counts() -> None:

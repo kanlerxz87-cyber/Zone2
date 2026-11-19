@@ -20,7 +20,8 @@ import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
-from wsgiref.simple_server import WSGIRequestHandler, make_server
+from wsgiref.simple_server import WSGIRequestHandler, WSGIServer, make_server
+from socketserver import ThreadingMixIn
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_PATH = "/Zone2/"
@@ -328,6 +329,14 @@ def application(env, respond):
     return _app(env, respond)
 
 
+class PreviewServer(ThreadingMixIn, WSGIServer):
+    """Preview only: concurrent static fetches must not starve a counter POST.
+
+    Use the documented bounded Gunicorn workers behind TLS for production.
+    """
+    daemon_threads = True
+
+
 class QuietHandler(WSGIRequestHandler):
     def log_message(self, *args):
         pass  # Default access logs contain IPs. No raw access logging here.
@@ -350,7 +359,7 @@ def main():
     if args.command == "serve":
         app = Application(args.site, args.db, origin=os.getenv("CN_PUBLIC_ORIGIN", ""), preview=args.preview)
         print(f"Counter Notes ({'preview, not production data' if args.preview else 'self-hosted'}) on 0.0.0.0:{args.port}{BASE_PATH}", flush=True)
-        with make_server("0.0.0.0", args.port, app, handler_class=QuietHandler) as server:
+        with make_server("0.0.0.0", args.port, app, server_class=PreviewServer, handler_class=QuietHandler) as server:
             server.serve_forever()
         return
     store = Store(args.db)

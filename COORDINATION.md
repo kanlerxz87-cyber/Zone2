@@ -7297,3 +7297,20 @@ Fresh verification scope and official URLs are recorded in `docs/verification-37
 conflicts (including 10-in-1/11-in-1) remain unverified. Integration gates, dedicated price mutations, broader
 browser/accessibility checks and actual artifact deployment are still in progress. Source crawlers exclude
 ignored `.local` tooling and `_site`; historical namespaces are not being deleted or re-dated.
+
+### T63 (`37333afd`) progress — full local verification and upstream integration
+
+Strict CI replay passed **59/59 executable steps** before rebasing. New tests: 24 collector cases,
+12 reported client VM cases, six price-guard tests (control + mutation each), 27 publication/artifact
+cases, and Chromium **222 viewport checks / 24 current pages with zero automated WCAG A/AA findings**.
+All 198 packaged pages were rendered; no browser runtime errors or missing local resources; real local
+POST→SQLite verified with outbound Amazon navigation blocked and fixture DB removed afterward.
+The artifact gate checked 125 current factual rows and 1,137 static product anchors. Static Pages remains
+OFF, real reports/intent/enrollment/permanent hosting remain unavailable. Details in the verification record.
+
+At the pre-push fetch, `origin/main` advanced from 4398071 to **20b9bd9** while this session worked.
+PRs #164/#167/#170 and close-out records have landed; #162/#163/#172 are open. Those sessions' closing
+records have now been read. This session does not merge/close their open PRs. It will rebase this current
+branch onto the new main, preserve their added data/namespaces/gates and coordination records, integrate
+shared outputs through the canonical generators, log conflicts and re-run the **combined-tree** checks.
+The earlier 198-page / 59-step result is a dated pre-rebase result, not a claim about the new combined tree.

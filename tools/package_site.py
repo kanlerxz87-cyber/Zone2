@@ -58,7 +58,11 @@ def sponsor_anchors(doc):
         if re.search(pattern,raw,re.I):
             return re.sub(pattern,attr,raw,count=1,flags=re.I)
         return raw[:-1]+' '+attr+'>'
-    return re.sub(r'<a\b[^>]*>',replace,doc,flags=re.I)
+    # A literal <a> inside JavaScript is data, not an HTML token. Rewriting it
+    # can break quoting or template syntax. Runtime-generated links are covered
+    # by the small archive-links observer inserted before archived scripts run.
+    segments=re.split(r'(<(?:script|style)\b[^>]*>.*?</(?:script|style)\s*>)',doc,flags=re.I|re.S)
+    return ''.join(segment if re.match(r'<(?:script|style)\b',segment,re.I) else re.sub(r'<a\b[^>]*>',replace,segment,flags=re.I) for segment in segments)
 
 
 def transform(doc, rel):
@@ -76,7 +80,7 @@ def transform(doc, rel):
         if old and (not main or old.start()<main.start()):
             doc=doc[:old.start()]+doc[old.end():]
         banner=f'<div class="cn-archive-banner"><div class="cn-wrap"><span>Dated research archive · earlier implementation states may have changed.</span><a href="{depth}executive-summary.html">Read the current release summary →</a></div></div>'
-        header=pub.masthead(rel)+banner
+        header=pub.masthead(rel)+banner+f'<script src="{depth}assets/js/archive-links.js"></script>'
         doc=re.sub(r'(<body\b[^>]*>)',lambda m:m.group(1)+'\n'+header,doc,count=1,flags=re.I)
         foot=f'<div class="cn-archive-footer"><strong>{pub.DISCLOSURE}</strong> <a href="{depth}workspace.html">All workspace tools</a> · <a href="{depth}index.html">Counter Notes publication</a> · <a href="{depth}privacy.html">Current privacy notice</a></div>'
         doc=re.sub(r'</body>',lambda m:foot+'\n'+m.group(0),doc,count=1,flags=re.I)

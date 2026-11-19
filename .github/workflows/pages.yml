@@ -1,9 +1,8 @@
 name: Build, verify and deploy
 
-# Final integration workflow (session 78c94859).
-#
-# GitHub Pages for this repository is configured as a legacy build from branch
-# `main`, path `/`. This workflow guarantees that nothing broken reaches `main`:
+# Publication integration T63: deploy only the checked _site artifact using Pages Actions.
+# All historical namespace gates remain. Do not upload the raw checkout or private data.
+# This workflow checks:
 #   - the primary Zone2 platform (repo root) is complete and its internal links resolve
 #   - the companion sites (research-hub/, northstar/, zone2/) are complete
 #   - no page prints a price, and every page carries the static affiliate disclosure
@@ -509,13 +508,48 @@ jobs:
               no prices, no invented metrics, canonical, image alt text, briefing integrity)
         run: python3 tools/validate_shop.py
 
+      - name: Original publication artwork is reproducible
+        run: python3 tools/build_artwork.py --check
+
+      - name: Privacy-preserving collector and authorized report import tests
+        run: python3 -m unittest discover -s measurement -p 'test_*.py' -v
+
+      - name: Event client privacy and behavior tests
+        run: node tests/test_events.cjs
+
+      - name: Price guard regressions (all six repaired copies)
+        run: python3 tests/test_price_guards.py
+
+      - name: Publication data and packaging mutation tests
+        run: python3 tests/test_publication.py
+
+      - name: Review-only editorial plan smoke test
+        run: python3 tools/editorial_plan.py
+
+      - name: Package the deploy artifact
+        run: python3 tools/package_site.py
+
+      - name: Deployed publication contract (all pages, sources, links and privacy)
+        run: python3 tools/verify_publication.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install browser verification dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Browser verification (desktop, mobile, keyboard, accessibility and real local persistence)
+        run: node tests/browser.cjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
   deploy:
     name: Deploy to GitHub Pages

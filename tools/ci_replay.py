@@ -119,6 +119,9 @@ def main() -> int:
             print(f"!!! FAILED: {name}")
             break
     print("\n" + "=" * 60)
+    if only and not ran:
+        print(f"No run step matched {only!r}")
+        return 1
     if failed:
         print(f"CI REPLAY FAILED at: {failed[0]}")
         return 1

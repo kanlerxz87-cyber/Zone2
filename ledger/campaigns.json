@@ -15,16 +15,43 @@
   },
   "campaigns": [],
   "history_note": "Static campaign registry consumed by tools/redirect_server.py. Empty by design: a campaign key must point at a VERIFIED product identity, and none of the three requested items resolved to a catalog record, so no link and no campaign may be published yet (Flagged for Review F-06/F-07). Keys are static labels; the tracker rejects anything that looks per-visitor, because the Participation Requirements forbid associating a sub-tag or Associates reporting with a specific end user (rule R-08).",
-  "observation_schema": {
-    "timestamp": "ISO UTC import timestamp",
-    "source": "authorized first-party report source",
-    "source_hash": "SHA-256 of normalized authorized export",
-    "channel": "report channel, not inferred from an order",
-    "period_start": "ISO date",
-    "period_end": "ISO date",
-    "eligible_sessions": "nullable integer supplied by the report; never inferred from page views",
-    "clicks": "nullable nonnegative integer supplied by the report",
-    "reported_orders": "nullable nonnegative integer supplied by the report"
-  },
+  "observation_schema": [
+    {
+      "field": "timestamp",
+      "definition": "ISO UTC import timestamp"
+    },
+    {
+      "field": "source",
+      "definition": "authorized first-party report source"
+    },
+    {
+      "field": "source_hash",
+      "definition": "SHA-256 of normalized authorized export"
+    },
+    {
+      "field": "channel",
+      "definition": "report channel, not inferred from an order"
+    },
+    {
+      "field": "period_start",
+      "definition": "ISO date"
+    },
+    {
+      "field": "period_end",
+      "definition": "ISO date"
+    },
+    {
+      "field": "eligible_sessions",
+      "definition": "nullable integer supplied by the report; never inferred from page views"
+    },
+    {
+      "field": "clicks",
+      "definition": "nullable nonnegative integer supplied by the report"
+    },
+    {
+      "field": "reported_orders",
+      "definition": "nullable nonnegative integer supplied by the report"
+    }
+  ],
   "observations": []
 }

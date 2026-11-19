@@ -26,7 +26,7 @@
     fetch(endpoint.href, {
       method: 'POST', headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
       body: JSON.stringify({ events: [data] }), credentials: 'omit',
-      keepalive: true, cache: 'no-store', redirect: 'error'
+      keepalive: true, cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer'
     }).catch(function () { /* do not persist or retry browser events */ });
   }
 
@@ -71,7 +71,7 @@
     // Never preventDefault, change the href, open Amazon automatically, or cloak it.
   }
 
-  fetch(new URL('measurement.json', root).href, { credentials: 'omit', cache: 'no-store', redirect: 'error' })
+  fetch(new URL('measurement.json', root).href, { credentials: 'omit', cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer' })
     .then(function (response) { if (!response.ok) { throw new Error('config unavailable'); } return response.json(); })
     .then(function (config) {
       if (config.enabled !== true || config.mode === 'github_pages_static' || typeof config.endpoint !== 'string') { return; }
