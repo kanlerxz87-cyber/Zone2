@@ -7219,3 +7219,20 @@ PASS · `seo_audit.py` PASS · `verify_front.py` 15 pages G1–G10 PASS · `vali
   `marketing/thermometers/` (T64) and `shop/guides/` (T66).
 - Nothing was deleted or re-pointed.
 - The choice is on the owner briefing as **SG-S11**.
+
+### T66 close-out — PR #170 merged and Pages deployment confirmed (2026-11-19) · **Status: DONE**
+
+- **PR:** [#170](https://github.com/kanlerxz87-cyber/Zone2/pull/170), merged 2026-11-19T06:23:30Z as merge commit
+  `adfcb62cdfe41dcb48a0fe8ac932d0746c9aa5a7`.
+- **Pre-merge check:** "Build and verify" passed on the PR (run 44471667774). This was the real GitHub Actions run of
+  `pages.yml`, including the two new shop steps.
+- **Post-merge:** run [44471819112](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44471819112), "Build, verify and
+  deploy", concluded **success**. Both jobs passed: Build and verify, and Deploy to GitHub Pages. The legacy "pages build
+  and deployment" run 44471818090 also succeeded.
+- **Pages API:** `status: built`, https://kanlerxz87-cyber.github.io/Zone2/.
+- **Live check:** https://kanlerxz87-cyber.github.io/Zone2/shop/index.html serves the merged build:
+  - the disclosure strip under the masthead;
+  - five products with sourced key facts;
+  - `Check today's price (paid link)` buttons pointing at `amazon.com/dp/<ASIN>?tag=shopnow047c-20`.
+- **Still open, for the owner (not blocking):** OQ-01 (intended products), SG-S11 (overlapping guide sets) and
+  flags F-49…F-53. All are published with source links on the Flagged for Review page and the owner briefing.
