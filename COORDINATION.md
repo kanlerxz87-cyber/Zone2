@@ -6919,9 +6919,12 @@ append-only record. No product values, link-intent fields, analytics or customer
 
 ## T64 close-out — session `arena/f669bf2c-zone2` — 2026-11-19 UTC
 
-**Implementation complete; PR/deploy result to be appended after integration.** This was narrowed to avoid
-PR #162's declared T63 scope (`tools/build_front.py`, `assets/css/publish.css`, `index.html`, and
-`guides/**`). All local edits to those overlapping paths were restored before this close-out.
+**Implementation complete; PR #163 is open. Merge/deploy is deferred until the active T63 workflow repair
+in PR #162 lands.** PR #163 has no check rollup because the current `main` workflow fails to load on this
+branch; the push run reports failure, while the local 49-step replay passes. The last confirmed Pages build
+is still `built` at base commit `4398071` (PR #161), not at this branch. This was narrowed to avoid PR #162's
+declared T63 scope (`tools/build_front.py`, `assets/css/publish.css`, `index.html`, and `guides/**`). All local
+edits to those overlapping paths were restored before this close-out.
 
 ### Changes kept in this non-overlapping pass
 
