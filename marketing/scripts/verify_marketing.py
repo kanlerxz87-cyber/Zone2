@@ -22,6 +22,11 @@ Fails (non-zero exit) if any of these stop being true, so none of them depends o
   G14 sitemap.xml covers every HTML page, feed.xml items resolve, and each canonical URL matches
       the file it sits in  (T39)
 
+CR-8 (T69, 2026-11-19): G1-G10 run over every rendered HTML page — the marketing registry and the
+thermometer desk (marketing/thermometers/) alike — so there is one verifier for every reader page
+(SG-15 option A). The desk keeps its own build-time gate in tools/build_thermometers.py; this
+verifier no longer skips its pages.
+
 The row-level checks (G7/G8) re-derive the expectation from marketing/data/facts.json and then read the
 rendered HTML, so a renderer bug cannot quietly pass its own test.
 """
@@ -43,6 +48,10 @@ from link_builder import REQUIRED_SITE_DISCLOSURE  # noqa: E402
 ROOT = REPO / "marketing"
 FACTS = json.loads((ROOT / "data" / "facts.json").read_text(encoding="utf-8"))
 
+# Our own published origin (scheme + repo path). Absolute links under this prefix are internal
+# references, not external sources — see the same-origin branch in check_links (CR-8).
+SITE_PREFIX = LIVE.rsplit("marketing/", 1)[0]
+
 OFFICIAL_HOSTS = {
     "www.amazon.com",
     "amazon.com",
@@ -54,6 +63,12 @@ OFFICIAL_HOSTS = {
     # documentation instead of an SEO blog, so Google's domain is now an official source on these
     # pages. The allow-list is deliberately still a list, not a wildcard.
     "developers.google.com",
+    # CR-8 (T69, 2026-11-19): SG-15 option A. The thermometer desk's food-safety sentences cite
+    # USDA's Food Safety and Inspection Service — the federal agency that publishes the temperature
+    # guidance the desk quotes (three FSIS factsheets, listed in marketing/data/thermometers.json).
+    # The desk's own gate (build_thermometers.ALLOWED_HOSTS) has listed this host since the desk
+    # shipped; this closes the gap so G1-G10 cover the desk's pages too. Still a list, not a wildcard.
+    "www.fsis.usda.gov",
 }
 MARKETPLACE_HOSTS = {"www.amazon.com", "amazon.com"}
 
@@ -103,6 +118,15 @@ def check_links(rel: str, doc: str) -> None:
                 fail(f"G3 {rel}: missing asset {ref}")
             continue
         if ref.startswith(("http://", "https://")):
+            # CR-8 (T69): the desk prints its published self-links as absolute URLs on our own
+            # origin. Same-origin references are internal, not sources: resolve them inside the
+            # repository and check they exist, instead of demanding they appear on the
+            # official-host allow-list. A different origin still falls through to G10.
+            if ref.startswith(SITE_PREFIX):
+                own = ref[len(SITE_PREFIX):]
+                if not (REPO / rel_path(own)).is_file():
+                    fail(f"G3 {rel}: absolute self-link does not resolve in the repo: {ref[:90]}")
+                continue
             host = re.sub(r"^https?://", "", ref).split("/")[0].lower()
             if host in MARKETPLACE_HOSTS:
                 if "sponsored" not in (a.get("rel") or "").lower():
@@ -263,7 +287,12 @@ def main() -> int:
 
     shutil.rmtree(ROOT / ".fresh", ignore_errors=True)
 
-    for rel in PAGES:
+    # CR-8 (T69): G1-G10 now run over every rendered HTML page — the marketing registry *and*
+    # the thermometer desk — so one verifier owns every reader page (SG-15 option A). The set is
+    # taken from the fresh build, never hand-listed, so a future desk page is covered on the day
+    # it is added. sitemap.xml / robots.txt / feed.xml carry no prose and stay out, as before.
+    html_pages = [rel for rel in fresh if rel.endswith(".html")]
+    for rel in html_pages:
         path = ROOT / rel
         if not path.is_file():
             fail(f"G1 {rel}: not generated")
@@ -291,13 +320,14 @@ def main() -> int:
             if row["status"] not in ("unverified", "withheld_by_policy") and not row.get("src"):
                 fail(f"G7 data: {product['key']} row {row['attr']!r} has a value but no source")
 
-    pages = len(PAGES)
+    pages = len(html_pages)  # CR-8: every rendered page, registry and desk, not just PAGES
+    desk = sum(1 for rel in html_pages if rel.startswith("thermometers/"))
     rows = sum(len(p["rows"]) for p in FACTS["products"])
     if failures:
         print("\n".join(f"FAIL {f}" for f in failures))
         print(f"\n{len(failures)} failure(s)")
         return 1
-    print(f"OK  {pages} pages · {rows} spec rows · 0 failures")
+    print(f"OK  {pages} pages ({len(PAGES)} marketing registry + {desk} thermometer desk) · {rows} spec rows · 0 failures")
     print("    disclosure on every page · affiliate links disclosed and tagged as Special Links · no prices ·")
     print("    internal links resolve · every valued row carries an official source link")
     return 0
