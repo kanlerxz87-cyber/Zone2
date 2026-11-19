@@ -65,7 +65,7 @@
   <td>Implemented 2026-11-16</td>
   <td><span class="pill pill--done">matches</span><br>
       <span class="small">implemented where the definition bites</span></td>
-  <td>3019 outbound links to an Amazon host across the tree, of which 662 carry rel=&quot;sponsored&quot;. On the 64 reader-facing pages the split is 445 sponsored against 273 not — and every unsponsored one of those sits on a register page (verification, sources, summary, paths, questions), citing the URL as evidence rather than offering the product for sale.</td>
+  <td>3021 outbound links to an Amazon host across the tree, of which 663 carry rel=&quot;sponsored&quot;. On the 64 reader-facing pages the split is 446 sponsored against 273 not — and every unsponsored one of those sits on a register page (verification, sources, summary, paths, questions), citing the URL as evidence rather than offering the product for sale.</td>
   <td>None on this row. The related gap is RQ-22: the links are correctly marked as sponsored and still carry no Associates tag, so they are marked but not monetised.</td>
   <td class="src"><a href="sources.html#BD-15" title="Qualify your outbound links to Google (rel=&quot;sponsored&quot;)">BD-15</a></td>
 </tr>
@@ -97,9 +97,9 @@
   <td><strong>Ship a social preview image and structured data, then measure whether search traffic arrives</strong></td>
   <td>Partly implemented 2026-11-16</td>
   <td><span class="pill pill--done">matches</span><br>
-      <span class="small">partly — the structured-data half, not the image half</span></td>
-  <td>97 of 219 pages carry JSON-LD. 108 carry og:type, og:site_name, og:title, og:description and og:url. 152 carry an og:image — that is to say, none of them do.</td>
-  <td>One image, referenced from the og: block on every page. The second half of the row — measure whether traffic arrives — cannot be measured at all until RQ-28 is done, because no page carries Search Console verification.</td>
+      <span class="small">partly — preview metadata is present on a subset; Search Console remains off</span></td>
+  <td>97 of 219 pages carry JSON-LD. 165 of 219 carry og:type, og:site_name, og:title, og:description and og:url. 152 of 219 carry an og:image. 0 of 219 carry a Search Console verification tag.</td>
+  <td>Coverage is incomplete: the row&#x27;s first-named deliverable — a social preview image on every page — is present on a subset only, and the second half (measure whether search traffic arrives) cannot be measured until the site&#x27;s Search Console property is verified. The repository alone cannot establish search traffic.</td>
   <td class="src"><a href="sources.html#BD-15" title="Qualify your outbound links to Google (rel=&quot;sponsored&quot;)">BD-15</a></td>
 </tr>
 <tr id="RQ-06">
@@ -404,8 +404,8 @@ thing the brief asks for.</p>
   <li><strong>S-24</strong> — 4 reader pages are one hop short of the row's requirement.</li>
   <li><strong>S-09</strong> is honestly marked <em>Partly implemented</em>; the missing half is the social preview image, which is the half the row names first.</li>
 </ul>
-<p>The loudest number on this page is the one that is <em>not</em> a defect: 3019
-Amazon-host links of which 662 carry <code>rel="sponsored"</code>. The
+<p>The loudest number on this page is the one that is <em>not</em> a defect: 3021
+Amazon-host links of which 663 carry <code>rel="sponsored"</code>. The
 unmarked remainder are citations to a source inside a verification table, not offers — and Google
 defines the value by what the link is. See
 <a href="suggestions.html#BS-04">BS-04</a>.</p>

@@ -1217,7 +1217,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 53;
+const CANONICAL_FLAG_COUNT = 54;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [

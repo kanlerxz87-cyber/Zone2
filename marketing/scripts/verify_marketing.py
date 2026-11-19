@@ -54,6 +54,12 @@ OFFICIAL_HOSTS = {
     # documentation instead of an SEO blog, so Google's domain is now an official source on these
     # pages. The allow-list is deliberately still a list, not a wildcard.
     "developers.google.com",
+    # CR-8 (closed by T68, 2026-11-19): the thermometer desk cites USDA Food Safety and
+    # Inspection Service pages for every food-safety sentence (food-thermometers, safe-temperature-
+    # chart, air-fryers-and-food-safety — T3/T4/T5 on the desk). FSIS is a U.S. government
+    # source; the allow-list, not the source, was the thing blocking G1-G10 from covering the
+    # desk. Still a list, not a wildcard.
+    "www.fsis.usda.gov",
 }
 MARKETPLACE_HOSTS = {"www.amazon.com", "amazon.com"}
 
@@ -263,7 +269,19 @@ def main() -> int:
 
     shutil.rmtree(ROOT / ".fresh", ignore_errors=True)
 
-    for rel in PAGES:
+    # CR-8 (closed by T68, 2026-11-19): G1-G10 now run over EVERY rendered page, thermometer
+    # desk included. Before, the loop below was `for rel in PAGES`, which silently skipped the
+    # seven desk pages because G10's host allow-list did not list www.fsis.usda.gov — the desk's
+    # food-safety source. The allow-list now lists FSIS, so the desk is held to the same G1-G10
+    # rules as every other marketing page. build_thermometers.py's own publish gate is retained;
+    # its row-sourcing (G7/G8 equivalent) still runs at build time for the desk's data.
+    html_rels = sorted(rel for rel in fresh if rel.endswith(".html"))
+    if len(html_rels) <= len(PAGES):
+        fail(
+            f"G1 expected the thermometer desk in the rendered set; got {len(html_rels)} pages "
+            f"for {len(PAGES)} marketing-registry entries"
+        )
+    for rel in html_rels:
         path = ROOT / rel
         if not path.is_file():
             fail(f"G1 {rel}: not generated")
@@ -291,7 +309,7 @@ def main() -> int:
             if row["status"] not in ("unverified", "withheld_by_policy") and not row.get("src"):
                 fail(f"G7 data: {product['key']} row {row['attr']!r} has a value but no source")
 
-    pages = len(PAGES)
+    pages = len(html_rels)
     rows = sum(len(p["rows"]) for p in FACTS["products"])
     if failures:
         print("\n".join(f"FAIL {f}" for f in failures))

@@ -203,7 +203,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **53 flags (F-01 … F-53)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **54 flags (F-01 … F-54)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -854,7 +854,7 @@ rendering in fallback system fonts since the redesign. No gate could see it, bec
 namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
 class of bug — a resource a build cannot fail on — is on the record for the next time.
 
-**Numbers for the reviewer, all derived from the registers:** 53 flags, 49 sources, 108 logged checks, 20 open
+**Numbers for the reviewer, all derived from the registers:** 54 flags, 49 sources, 108 logged checks, 20 open
 questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
 or performance figure: the site still has no authorised source for one, and an absent number beats an invented
 one.
@@ -1034,10 +1034,10 @@ decision surfaces are unchanged and current — the ten suggestions with options
 [the decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html), the
 **18 open questions** with the method that would close each one on
 [the questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html), and the
-[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **53 flags**,
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **54 flags**,
 each with its source links. Nothing is implemented on this site until it is chosen there.
 
-**Numbers for the reviewer, all derived from the registers:** 53 flags (24 open · 29 resolved), 49 sources,
+**Numbers for the reviewer, all derived from the registers:** 54 flags (25 open · 29 resolved), 49 sources,
 108 logged checks, 20 open questions, and every repository gate green on the merged tree.
 ---
 
@@ -1208,8 +1208,8 @@ catalog lookup). Suggestions `SG-13` (build a matching thermometer content set o
 three air fryers; the two thermometers are published in the product catalog with their sourced specs, and the
 editorial expansion waits on `Q-19`.
 
-**Register state after this addendum:** 5 product entries, 49 sources, 108 verification rows, 53 flags
-(18 open · 25 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
+**Register state after this addendum:** 5 product entries, 49 sources, 108 verification rows, 54 flags
+(25 open · 29 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
 
 ---
 
@@ -1684,6 +1684,52 @@ on `main` as 10727edd's F-45 and F-44. Verification detail: [`docs/verification-
 
 ---
 
+## Addendum — 2026-11-19 — T68, session `arena/9ffe2d83-zone2` — closing the four open change requests
+
+**CR-8 (closed).** `marketing/scripts/verify_marketing.py` now runs G1–G10 over **every rendered
+marketing page — the seven thermometer-desk pages included** — after `www.fsis.usda.gov` joined the
+official-host allow-list. FSIS is the source the desk cites for every food-safety sentence
+(food-thermometers, safe-temperature-chart, air-fryers-and-food-safety), so the allow-list changed,
+not the source. Negative-tested this session: removing the FSIS entry produces 34 G10 failures
+naming desk pages; mutating one committed desk page produces a G9 failure. The desk's own publish
+gate in `tools/build_thermometers.py` is retained.
+
+**CR-9 (closed).** Q-21 was already promoted to **F-44** by an earlier session; F-45…F-53 hold
+other findings, so Q-22's warranty conflict was published under the next free id, **F-54**
+(the CHEF iQ listing states its warranty two ways — "two-year assurance provided by CHEF iQ" in the
+bullets and "Warranty Description: 3 Year" in Item details — both re-read live on
+[the listing](https://www.amazon.com/dp/B0DZFD6R9Z) on 2026-11-19). The counts pass then moved
+every surface together: `CANONICAL_FLAG_COUNT` → 54, the register prose in this document and in
+`README.md`, and the regenerated `pages/` set, root Flagged for Review register, and Owner's
+Console. `tools/validate_data.py` reports 54/54 flags consistent and
+`tools/audit_site.py` prose counts pass.
+
+**CR-10 (verified already corrected — evidence recorded, no edit).** The stale note
+("no click on this site can become a qualifying purchase") no longer appears anywhere in
+`brief/data/summary.json`; `the_blocking_fact` was rewritten when the owner's tag shipped, and it
+now states what is actually still missing (enrollment/report attribution, permanent hosting,
+intent confirmation). The four state-table counts the change request named are the four derived
+rows — tagged pages, disclosure pages, price pages, AI-powered pages — all carried as `{{tokens}}`
+and re-measured by `tools/validate_brief.py::check_summary`, which fails the build if the published
+brief page disagrees with the tree.
+
+**CR-7 (verified already done — evidence recorded, no edit).** The front page links
+`marketing/thermometers/index.html` from two places in its published HTML.
+
+**Stale pull requests.** Three open PRs (#162 draft, #163, #172) had gone more than four hours
+without a commit, conflicted with `main`, and their two-dot diff against `main` shows they would
+*revert* the shipped publication/shop/desk tooling. Their valid content was re-applied on the
+current tree instead of force-merged: from **#163**, the unsourced "buyer-regret" popularity claim
+on topic TP-03 was removed and the self-contradictory RQ-05 row ("…carry an og:image — that is to
+say, none of them do") now prints four derived tokens, including a new `og_full` metric added to
+`tools/build_board.py`. #162's and #172's intents (shop-first front, buyer-first publication, CI
+repair, thermometer guides) were already shipped by merged PRs #166/#167/#170/#174/#175/#177.
+
+**Gates at hand-off (this session's tree):** `tools/ci_replay.py` **61 of 61** workflow steps
+pass — including the 252-viewport browser verification and 24-page accessibility scan — plus
+`validate_data` (54 flags), `audit_site` (228 pages), `validate_board`, the marketing verifier at
+27 pages with the desk included, and the publication contract. Verification detail:
+[`docs/verification-9ffe2d83.md`](docs/verification-9ffe2d83.md).
 ## Addendum — 2026-11-19 (session `arena/5f7f77a4-zone2`, T68): the product notes now differ from each other
 
 **What was measured first.** The five reader-facing product notes used to differ only in their name, one
