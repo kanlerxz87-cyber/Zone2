@@ -7366,3 +7366,86 @@ removed **before main/deploy execution**. No denied write is retried. The job no
 and warns if the independent legacy publisher remains; actual artifact deployment still uses the existing
 working deploy-pages Action. **CN-08** records the administrator-only source-setting gate. This is not
 reported as a successful settings change or a broken credential connection; read/push/PR checks work.
+
+## T63 — claim: publication front door, real measurement boundary, and final integration
+
+| Field | Record |
+|---|---|
+| Session / branch | `arena/33e03d63-zone2` (session `33e03d63`); all work stays on this Arena-assigned branch |
+| Claimed | 2026-11-19 (UTC), before implementation |
+| Status | **in progress** |
+| Baseline | `4398071` (`main`); no open pull requests at claim; T58–T62 closing records read. Old registry rows still saying “in progress” are superseded by their dated closing records, not treated as current claims. |
+| Task | Replace the audit-led front page with a polished, five-product editorial storefront; consolidate operator navigation rather than add another competing site; make suggestions and missing-information questions actionable without auto-applying decisions; implement and test the privacy-preserving measurement service before adding editorial material; keep report-only orders distinct from browser clicks; repair relevant false-positive gates; verify sources actually available, publish access limitations and unverified fields; build, test, PR, merge and verify Pages deployment. |
+| File scope | `tools/build_front.py`, `tools/verify_front.py`, `tools/build_head_meta.py`, `tools/head_meta.py`, `tools/build_sitemap.py`, `tools/build_marketing.py`, `tools/build_measurement.py`, `tools/redirect_server.py`, `tools/tracking_schema.sql`; `assets/css/publish.css`, NEW publication CSS/JS and locally hosted editorial images under `assets/`; `assets/js/events.js`; NEW analytics service/config/tests and measurement documentation; NEW publication/decision data and builder/tests if needed; `marketing/data/editorial.json` (cadence only, not unverified product facts); relevant price-rule validators and `.github/workflows/pages.yml`; shared generated HTML/meta/sitemap/feed outputs through builders only; `README.md`, `EXECUTIVE_SUMMARY.md`, NEW dated verification/executive report; `COORDINATION.md` append-only. |
+| Not claimed | Existing historical verification records or other sessions’ hand-authored namespaces/data; no invented prices, reviews, traffic, intended ASIN confirmations, account ownership, live production analytics host, or Amazon reported orders. Requests touching those sources will be logged rather than silently rewritten. |
+| Coordination | This is the final integration session for its claimed files. Existing sessions finished on 2026-11-17 (over 60 minutes ago); no current competing PR/claim was found. Repository branch restrictions override the request to create a separate session branch. Before each push, pull/rebase this same branch; do not switch branches. |
+| Verification policy | Official source pages will be fetched where tools permit. A failed or blocked fetch is recorded as such, not called a fresh verification. Prior observations are dated and retained as prior observations. Amazon intent/Associates report confirmation remains a publishing gate, not something this agent can attest without authorized reports. |
+
+### T63 scope extension / early verification (2026-11-19)
+
+- Baseline deploy workflow contained **two committed merge-conflict blocks** (six marker lines). Both sides were additive: the intake and decision-board checks are both retained. After resolving the markers, the existing local CI replay passed **49/49**. This is an actual defect, not a cancelled-run inference.
+- Measurement implemented first: `tools/analytics_server.py`, strict public EV-01–03 intake, SQLite daily aggregates, authorized local EV-04/05 report import with SHA-256 provenance, 90-day retention, no visitor IDs or access logs, direct links unchanged. **27 isolated synthetic tests passed**; no test click visited Amazon.
+- Explicitly extending this completed predecessor scope to `docs/measurement-t40.json` and `tools/validate_discovery.py` if needed: its three `LIVE` labels only meant browser-local queues, and its generated page still said “no script.” Correct them to **READY_NOT_DEPLOYED** for production. There is no authorized production collector host or first-party reporting export in this workspace. This session will not call the GitHub Pages deployment a live analytics service.
+- Initial claim push: the Arena branch did not yet exist remotely, so `git pull --rebase origin <current-branch>` returned “couldn't find remote ref.” Pulled/rebased `origin/main` without switching branches, then pushed the claim successfully to the assigned branch.
+
+### T63 implementation checkpoint — 2026-11-19
+
+- Measurement source, documentation and disabled production configuration are checkpointed separately from the publication. The local self-hosted preview is running; this is **not** a production collector or evidence of traffic. SQLite/test data stays under ignored `.local/` or temporary directories. No genuine campaign/report data has been imported.
+- The new publication has rendered locally. Desktop/mobile screenshots were inspected and no JS page errors or horizontal overflow occurred on the homepage. A browser-library dependency was missing; the packaged browser's provided system libraries resolved it. Full cross-page/interaction tests are still pending.
+- Correction to an earlier progress statement: initial Nov19 tool observations for the last two exact short URLs disagreed with the historical mapping. Repeating those exact URLs returned fourth→`B0DHZTCNR5` and fifth→`B0DZFD6R9Z`, matching the ledger. Both observations are retained in `docs/publication.json`; the cause is unknown, and no stable-routing or intended-product confirmation is asserted. All four intent fields stay blank. The submitted short links are **not** labelled invalid; compliance remains open at the user's Zone3 FLG-003 reference.
+- Baseline49 replay passed before integration. The first integrated replay correctly caught an obsolete homepage flag-count-marker expectation; that count now belongs only to the retained Flagged for Review register, not the buyer homepage. Current output/build verification is still in progress; do not read this checkpoint as a completed CI/deployment claim.
+
+### T63 final-integration scope extension — 2026-11-19
+
+- Taking over only the completed T50/T62 measured-count integration in `tools/build_brief.py`, `tools/validate_brief.py`, and `brief/data/summary.json` (no active session; predecessor records are two days old). The gate compared typed 168-page counts against the enlarged tree and accidentally counted `_site/` a second time. Replace the remaining dynamic tree counts with tokens shared by the builder/gate; retain dated source findings and blank questions. This closes predecessor CR-3 for those count fields, not every historical narrative claim.
+- Shared inventory/tag segmentation is added under `tools/`; the tag-page definition becomes an actual Amazon anchor with a syntactically tagged query, not a tag-shaped prose string. This is static link markup only, never account attribution.
+- Extending to the empty campaign-registry documentation/schema (no real campaign rows) so the current five-product scope and mandatory report provenance are represented without redirecting reader clicks or inventing report counts. Runtime original/normalized exports remain private.
+- The deployment projection preserves legacy page bodies/IDs and adds a dated archive banner and `noindex,follow`; original verification dates are not upgraded. The canonical publication and all tools share one masthead/disclosure/footer. No private database or browser dependency is included in the artifact.
+
+- Special-Link toolkit hardening added to the final-integration scope: `tools/link_builder.py` previously constructed unissued tag suffixes from a static label, even though Amazon's current §2 requires approved sub-tags. The current publication never used that parameter. Refuse synthesized sub-tags/attribution overrides, retain the exact supplied tracking ID, and mark the unused redirect prototype as legacy. Official policy section fetched: https://affiliate-program.amazon.com/help/operating/policies .
+
+### T67 — reconciliation identifier for session `33e03d63` (initially claimed as T63)
+
+- Multiple parallel sessions independently claimed T63. This session's original claim and checkpoint wording are retained; from this record onward use **T67 / 33e03d63** to disambiguate, not a renamed branch. Current branch stays `arena/33e03d63-zone2`.
+- Pre-integration verification genuinely passed: 56/56 replayed `run:` steps; analytics27, publication24, repaired-price/inventory8 isolated tests; actual artifact193 HTML /17 indexable pages /1094 sponsored marketplace anchors; browser75 layouts, no page errors/missing responses/external requests; zero axe violations on four sampled pages. See `docs/verification-2026-11-19.md`. These are NOT yet combined-main or deployment results.
+- Pre-PR refresh discovered `origin/main` advanced to `20b9bd9`, including completed #164/#165/#166/#167/#170 and close-outs. Their shop, thermometer desk, flags, policy sources, record IDs, CI preflight and additive gates must be preserved. Open #162/#163/#172 also overlap; cross-scope comments will notify them. No other branch will be edited, merged or closed by this session.
+- Integration plan: merge current main into this assigned branch, retain all new namespace data/code/routes, preserve the former front renderer for reproducible earlier routes, keep the new buyer publication as the front door and normalize deploy-only chrome/indexing. Preserve the complete parallel coordination text and historical documentation rather than dropping either side. Re-run all combined gates before any PR merge. Source checks on parallel content remain labelled carried, not falsely fresh.
+
+### T67 combined-main conflict resolution (33e03d63, 2026-11-19)
+
+- Merged main `20b9bd9` into this same assigned branch. Kept main's entire coordination history plus this session's append-only records. Full parallel README/executive/brief-summary snapshots are retained under `docs/archive/`. No parallel namespace data or approval sheet is replaced.
+- Main's complete former front renderer and verifier are preserved as dated modules. The current builder retains all unique prior routes and delegates the five-submission summary compatibility entry point to the current Workroom. The current buyer front page is a presentation integration, not deletion of the shop or thermometer desk.
+- Main's strict CI preflight, USDA/GitHub source-host additions, both shop gates and serialized deployment are kept. Equivalent split-before-strip price repairs use one regression-tested helper. Brief measurement tokens accept both predecessor and current names and keep the predecessor's published-output check.
+- Earlier successful runs from other sessions are NOT this branch's deployment evidence. Combined gates and actual Actions/Pages verification still pending.
+
+- Combined artifact currently contains 222 HTML pages, all retained routes, 17 selected indexable pages and 1410 sponsored marketplace anchors. All local references/fragments pass. The unified feed preserves the parallel front/thermometer/shop item URLs and dates; current items are not duplicated by GUID. The earlier complete footer link set is retained in the Workroom/footer directory.
+- Adding parallel shop/thermometer paths to the browser sample caught pre-existing narrow-screen issues (nowrap citation spans, fixed minimum tile widths, auto-minimum prose grid). Fixed only in the new deploy stylesheet; no source facts or prior guide content were edited. Narrow-phone diagnostic now passes all sampled routes. Full combined replay still needs a fresh successful result.
+
+- The static projection alone cannot qualify links rendered later by legacy JS. Added a small same-origin, no-network `link-policy.js` observer to qualify those anchors without changing their destinations/tags; the browser gate now inspects actual DOM links and exercises dynamic root/prototype views. The source apps owned by predecessor sessions are unchanged.
+
+- The added dynamic-prototype check found a pre-existing remote Google Fonts CSS import. The deployment projection drops only that font import and uses the existing bundled/fallback fonts; original prototype CSS remains intact. The browser suite blocks all external requests, so no affiliate navigation or third-party font request is silently allowed to pass.
+
+### T67 — combined verification ready for PR (33e03d63, 2026-11-19)
+
+- **58/58** combined strict local `run:` replay passed after merging main20b9bd9. Main's CI preflight and both shop gates are preserved. Individual isolated suites: analytics27, publication24, actual-price/inventory8.
+- Artifact222 HTML /17 indexable /1410 static sponsored marketplace anchors; all references/fragments, canonical, disclosure, sitemap and RSS checks pass. Browser96 layouts (32 routes ×3 widths) plus3 dynamic DOM-link paths; no runtime errors, missing responses or external requests. Four sampled current pages have zero automated WCAG A/AA violations. No certification or campaign-performance inference follows.
+- Other open PRs #162/#163/#172/#174 were notified through comments. Their branches were not edited, merged or closed. Main is still20b9bd9 at this checkpoint. The earlier T63 name collision is disambiguated as T67 for this session; all original claims remain intact.
+- Next is the actual PR→Actions→merge→Pages verification. No deployment result is claimed yet. Production collector and authorized reports remain unavailable/non-blocking CN-F gates.
+
+### T67 — canonical implementation reconciliation after #174 landed
+
+PR #174 merged as `4fcb61a` at 2026-11-19T06:50:29Z, just before this branch opened #175. #175 was therefore conflicting and GitHub correctly created no PR checks. A previous “no checks” response was not a passing check or an Actions outage.
+
+**Decision:** retain #174's complete, now-canonical publication, collector, all namespace data/renderers, assets, recorded directions and 61 executable gates. Do not replace it with this session's equivalent second front end or second active measurement contract. This is a conflict resolution in favor of coherent main, not another unapproved content/analytics launch. All of this session's earlier code/verification is preserved in merge parent `11a9b92` and its public branch history; nothing of the canonical main implementation is removed.
+
+Only this session's independent dated source/redirect observations and append-only verification/coordination are added on top. The last-two initial/repeat inconsistency remains an observation, never owner intent, a routing-cause claim or a declaration that short links are invalid. No existing product record is overwritten.
+
+The current active service is `measurement/collector.py`, the active publication data is `content/publication.json`, and current build/packaging checks are those retained from #174. Earlier commands/numbers in this session's log describe the historical `11a9b92` implementation; do not treat them as the active entry points. The current static collector configuration remains OFF. No real traffic/report data is added.
+
+**Git irregularity:** the normal pre-push `git pull --rebase` attempted to flatten the already-integrated main history and conflicted. `--rebase=merges` then hit an upstream overlong generated ref label. Both attempts were aborted, preserving the tested merge. `git pull --rebase --ff-only origin arena/33e03d63-zone2` confirmed the remote feature head was already an ancestor, then the same branch was pushed normally. No force-push or other branch operation occurred.
+
+Next: verify the actual retained combined tree and hosted #175 check, merge this reconciliation, verify its own main/Pages run and record it. #174's successful check is not substituted for #175's deployment evidence. Pages administration mode remains a separately flagged CN-08 permission boundary; no denied settings write is retried.
+
+### T67 — retained canonical tree verified (33e03d63)
+
+Executed the retained workflow on the actual reconciled tree based on4fcb61a: **61/61** executable steps PASS, artifact228 pages /16 indexable /1451 anchors /136 current factual rows, Chromium252 viewport checks and24 current-page accessibility scans PASS. No copied run, production traffic, real report import or inferred account confirmation. Net diff from canonical main is only independent observations and append-only verification/coordination. #175 will now receive its own hosted check after the merge conflict is resolved.
