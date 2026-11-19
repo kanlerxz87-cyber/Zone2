@@ -115,9 +115,10 @@ Intended-product fields remain blank and separate from observed redirects, uncha
   (GitHub Pages is static), and product photography (DR-11) all remain open owner questions. They
   are published on the Decision Room and Flagged for Review pages and block nothing in this merge.
 
-## 6. Disposition of the open pull requests
+## 6. Disposition of the open pull requests (corrected 2026-11-19T22:40Z)
 
-- **#194** (T73, `arena/1b09bb6d-zone2`): content integrated here (all of it), so the PR is closed
-  with a handoff note pointing at this record. Nothing in its branch is discarded.
-- **#184** (T70) and **#182** (T69): already integrated inside #194's branch and now landed on
-  `main` through this merge; closed with the same note.
+All three were **merged** on GitHub before this session could close them (verified via `gh pr view`:
+#194, #184 and #182 all report state `MERGED`), rather than closed as first planned here. The
+effect is the same and better: their content is on `main` in full — through their own merges and
+through PR #203 (session `95bfb73c`'s parallel integration) — and PR #207 unified both integration
+lines without dropping either session's records or styles. Nothing in any branch is discarded.

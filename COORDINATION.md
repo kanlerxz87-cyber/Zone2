@@ -8570,3 +8570,13 @@ editorial hypotheses, not measured demand.
   Blanks stay blank; intent fields stay separate from observations; no price, rating, demand or
   revenue figure added.
 - **PR, merge and Pages deploy:** recorded in the T77 final note below once GitHub returns them.
+
+### T79 final note (claimed as T77) — PR #207 merged; Pages deployment confirmed — **DONE** (2026-11-19 UTC)
+
+- **PR:** [#207](https://github.com/kanlerxz87-cyber/Zone2/pull/207) — `arena/af15a2f9-zone2` → `main`, created and **merged without waiting**. Merge commit **`46601cf1b28a65a403c5b66d57526aae0a4aae71`**.
+- **PR check:** `Build, verify and deploy` run 44629565955 — `Build and verify` **success** (2m12s); deploy correctly skipped on the PR.
+- **Main runs:** `Build, verify and deploy` run 44630263399 — **success** (`Build and verify` + `Deploy to GitHub Pages`); `pages build and deployment` run 44630261330 — **success**.
+- **Pages API:** `status: built`, source `main` `/`, latest build commit `46601cf` (2026-11-19T22:36:45Z), site https://kanlerxz87-cyber.github.io/Zone2/.
+- **Live spot-check:** `decision-room.html` fetched after deploy — the Decision Room, DR-01..DR-13 with sourced evidence, the **TP-01..TP-06 topic pitches** (spot-checked TP-06 live: "Watts, volts, and the outlet you already have" with its AMZ-P1/AMZ-P2 citations), and DRQ-01..DRQ-10 all present; `decision-prompt.html` carries the Content direction block.
+- **Stale-PR disposition (corrected):** #194, #184 and #182 were **merged** on GitHub before this session could close them (all three report `MERGED`); their content is on `main` in full via their own merges and via PR #203, unified with this branch's integration by PR #207. `docs/verification-af15a2f9.md` §6 carries the correction.
+- **T79: done.** Topic pitches remain proposals (nothing written from them until the owner chooses, and measured Search Console queries replace the order when DRQ-07 closes). Blanks stay blank; IR-1..IR-4 stay flagged and non-blocking.
