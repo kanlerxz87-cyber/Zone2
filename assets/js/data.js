@@ -1217,7 +1217,7 @@ const LEDGER_FLAGS_URL = "pages/flags.html";
 // Number of items in ledger/flags.json (the canonical register rendered at pages/flags.html).
 // tools/validate_data.py fails the build if this constant disagrees with the ledger (F-22 on main,
 // renumbered F-26 in the merged register where F-22 is the 450 F temperature conflict).
-const CANONICAL_FLAG_COUNT = 43;
+const CANONICAL_FLAG_COUNT = 48;
 
 /* BEGIN GENERATED: flags */
 const FLAGGED_ROWS = [
@@ -1278,7 +1278,7 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-06 — Published copy must be labelled 'the product this link resolves to' until the owner confirms the mapping",
-    detail: "No public Amazon document binds a link.amazon code to a product, so the observed destinations are not confirmed as the products intended in the brief. The root article/comparison/guide generator remains blocked for brief-mapped copy. Separately, the public /marketing set contains three destination-only articles, a comparison and a buying guide based on official manufacturer specifications; every page now labels the unresolved mapping and links to this finding. This destination-only content is not evidence of the intended brief mapping.",
+    detail: "No public Amazon document binds a link.amazon code to a product, so the observed destinations are not confirmed as the products intended in the brief. The root article/comparison/guide generator remains blocked for brief-mapped copy. Separately, the public /marketing set contains three destination-only articles, a comparison and a buying guide based on official manufacturer specifications; every page now labels the unresolved mapping and links to this finding. This destination-only content is not evidence of the intended brief mapping. UPDATE 2026-11-17 (session 7264f3c2): the owner supplied the Associates tag; the mapping question stays open. What changed: all five supplied short links were re-resolved and recorded with the intended and observed fields kept separate in docs/product-intent.json (published at intent.html). Two codes never resolved before - B0c8moW59 and B0f3GKalj - now carry recorded observations: they land on ThermoMaven B0DHZTCNR5 and CHEF iQ B0DZFD6R9Z, meat thermometers outside this site's product set. Disposition: discovery DS-16, question DQ-11.",
     severity: "high",
     impact: "Destination-only marketing copy is published under /marketing; content claiming the supplied codes identify the brief's intended products remains blocked pending owner confirmation. Specs are source-linked; identity mapping remains unverified.",
     actionRequired: "Confirm in Associates Central that these destinations are the intended products and supply correctly tagged links before treating the content as brief-matched or monetized.",
@@ -1289,7 +1289,7 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-07 — No Associates account, marketplace, tracking ID, or tag supplied",
-    detail: "The brief did not include an Associates ID/tag, target marketplace, or category access. Commission eligibility and reporting are account- and marketplace-specific, so no account-level figure can be verified or attributed.",
+    detail: "The brief did not include an Associates ID/tag, target marketplace, or category access. Commission eligibility and reporting are account- and marketplace-specific, so no account-level figure can be verified or attributed. UPDATE 2026-11-17 (session 7264f3c2): the owner supplied the tracking ID shopnow047c-20 in the brief and it is embedded in every published product Special Link (tools/link_builder.py ASSOCIATES_TAG). Still open: evidence of the enrolled account itself, the marketplace confirmation, and the per-link Associates-workflow validation - DQ-01 stays unanswered in this repository; no first-party report exists to import, so EV-04 stays blocked.",
     severity: "medium",
     impact: "Link builder runs in inert preview mode; earnings/conversion columns stay blank; the disclosure statement is still shown because it is required of every participant.",
     actionRequired: "Provide Associates ID + marketplace if live linking is wanted.",
@@ -1476,7 +1476,7 @@ const FLAGGED_ROWS = [
   },
   {
     item: "F-24 — The three supplied links carry no Associates tag, so as supplied they cannot earn a commission",
-    detail: "Verified 2026-11-14. Every resolved URL ends …&channelId=704&plpRedirect=mhFallback (short-link arrival) or …?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1 (direct arrival); none carries a tag= parameter. Amazon's own help page gives the qualifying Special Link format as http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID and states that the tag identifies the Associates account the sale is tracked to.",
+    detail: "Verified 2026-11-14. Every resolved URL ends …&channelId=704&plpRedirect=mhFallback (short-link arrival) or …?lv=shuf&channelId=500&plpRedirect=mhFallback&th=1 (direct arrival); none carries a tag= parameter. Amazon's own help page gives the qualifying Special Link format as http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID and states that the tag identifies the Associates account the sale is tracked to. UPDATE 2026-11-17 (session 7264f3c2): the supplied links themselves remain untagged evidence, but the site's published product links are now tagged Special Links carrying tag=shopnow047c-20, enforced by tools/verify_front.py and marketing/scripts/verify_marketing.py. The per-link destination-and-report confirmation in the enrolled Associates workflow is recorded as pending (null) in docs/product-intent.json.",
     severity: "medium",
     impact: "As supplied, the three links would earn nothing and could not be attributed in reporting. This blocks revenue, not identification — it is the one step that turns this repository from a verified research platform into a earning affiliate site.",
     actionRequired: "Owner: supply the Associates ID (and the target marketplace) so links can be regenerated in the tagged format the program requires.",
@@ -1693,6 +1693,61 @@ const FLAGGED_ROWS = [
     ledgerUrl: "pages/flags.html#F-43",
     source: "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
     sourceIds: ["S04", "S61", "S62"],
+  },
+  {
+    item: "F-44 — The 0-second 'failure' workflow runs after PR #158 were parse failures, not cancellations (CR-6 misdiagnosed)",
+    detail: "After PR #158 merged, every Deploy run on main finished in 0 s with 0 jobs (for example run 44136794504). The T62 record (CR-6) described these as cancelled or superseded runs. They were not: .github/workflows/pages.yml still contained unresolved git conflict markers, so GitHub could not load the workflow file at all and created no jobs. The local replay (tools/ci_replay.py) did not notice because it reads the steps with a tolerant hand-written parser instead of a YAML loader, so it reported 49/49 passing on a file GitHub rejected. Sessions 6ce606cb (T63) and da47d78d (T65) each removed the markers independently; both added a pre-check to ci_replay.py (conflict markers in the workflow and other tracked text files, and a YAML parse when PyYAML is available). The first T63 pull-request run after the repair (44466706223) loaded the workflow and passed its Build and verify job.",
+    severity: "medium",
+    impact: "For about two days no push to main deployed, while the board recorded the failures as harmless cancellations. Pages kept serving the last good build.",
+    actionRequired: "None outstanding. Read a 0-job run as 'the workflow did not load' until proven otherwise; ci_replay.py now refuses to run on a workflow that would not load.",
+    ledgerFlag: "F-44",
+    ledgerUrl: "pages/flags.html#F-44",
+    source: "",
+    sourceIds: [],
+  },
+  {
+    item: "F-45 — Amazon now shows a 'newer model' notice on the ThermoMaven listing the 4th supplied link opens",
+    detail: "Re-read on 2026-11-19, the listing that link.amazon/B0c8moW59 opens (B0DHZTCNR5, ThermoMaven 1 Sec, Black) carried the notice 'There is a newer model of this item', pointing to B0GL7Z4KP4 (shown in Orange). That listing has not been read or sourced, so this repository does not know whether it is a new revision or a colour variant. The site keeps linking B0DHZTCNR5, the listing the supplied link opens; it does not switch on its own.",
+    severity: "low",
+    impact: "Buyers clicking the ThermoMaven button may land on an older model than Amazon recommends.",
+    actionRequired: "Owner: say which listing is intended (decision desk SG-T63-12 / Q-T63-07). If it is the newer one, a session reads and sources B0GL7Z4KP4 before any link changes.",
+    ledgerFlag: "F-45",
+    ledgerUrl: "pages/flags.html#F-45",
+    source: "https://www.amazon.com/dp/B0DHZTCNR5",
+    sourceIds: ["S61"],
+  },
+  {
+    item: "F-46 — The two product registers disagree on the status of the 8-quart Chefman's power rating",
+    detail: "marketing/data/facts.json (which feeds the reader pages) records P3 Power as '1700 W / 120 V', status verified, citing the Chefman product page, and mentions in a note that a 1000 W figure has circulated. ledger/products.json (which feeds the dashboards) records the same attribute for P-03 as a CONFLICT, because the Amazon listing's own bullet list says '1000 Watts/120 Volts - RJ38-SQSS-8T' while its product-information block and the Chefman page both say 1700 W. Both registers quote real official text; they differ on whether the disagreement is shown as a conflict. The rule for every other conflict in this repository is to publish both values.",
+    severity: "medium",
+    impact: "The reader-facing pages show a single verified wattage where the ledger publishes an official-source conflict.",
+    actionRequired: "Owner or a later session: decide which register is the source of truth (decision desk SG-T63-08) and regenerate the other from it; meanwhile, show the P3 power row as a conflict on the reader pages.",
+    ledgerFlag: "F-46",
+    ledgerUrl: "pages/flags.html#F-46",
+    source: "https://www.amazon.com/dp/B08DKYBTPH",
+    sourceIds: ["S21", "S26"],
+  },
+  {
+    item: "F-47 — marketing/feed.xml writes ISO-8601 pubDate values; RSS 2.0 requires RFC 822 dates",
+    detail: "Every <pubDate> in marketing/feed.xml is written as '2026-11-15T00:00:00Z' (tools/build_marketing.py, page_feed()). The RSS 2.0 specification (https://www.rssboard.org/rss-specification, version 2.0.11) states: 'All date-times in RSS conform to the Date and Time Specification of RFC 822', with the example 'Sat, 07 Sep 2002 00:00:01 GMT'. The feed also lists only the marketing topic pages, so the root guides (including the T63 thermometer guides) are not in any feed. build_marketing.py belongs to another session's scope, so T63 did not change it.",
+    severity: "low",
+    impact: "Strict feed readers and validators may reject or misdate the items; readers who follow the feed never see the root guides.",
+    actionRequired: "A session that owns tools/build_marketing.py: emit RFC 822 dates (for example email.utils.format_datetime) and decide whether to extend the feed to every guide (decision desk SG-T63-10).",
+    ledgerFlag: "F-47",
+    ledgerUrl: "pages/flags.html#F-47",
+    source: "",
+    sourceIds: [],
+  },
+  {
+    item: "F-48 — Release-readiness row RR-08 still describes the site as covering three air-fryer appliances",
+    detail: "The site state typed into RR-08 on the release-readiness board says 'The published set covers three air-fryer appliances plus programme research.' Since T61/T63 the site also publishes the two meat-thermometer listings that supplied links 4 and 5 open, with their own category page and guides. The row's conclusion (no unsuitable category) is unaffected; only its description is out of date. The board belongs to another session's scope (T45), so T63 regenerated it from its own generator without editing its register.",
+    severity: "low",
+    impact: "A reviewer reading the readiness board gets an incomplete picture of what the site covers.",
+    actionRequired: "The session that owns the release-readiness register: update RR-08's site state to name both categories.",
+    ledgerFlag: "F-48",
+    ledgerUrl: "pages/flags.html#F-48",
+    source: "https://www.amazon.com/dp/B0DHZTCNR5",
+    sourceIds: ["S61", "S62"],
   },
 ];
 /* END GENERATED: flags */

@@ -1,6 +1,6 @@
 {
   "note": "Everything this repository could not confirm from an official source, plus irregularities found while reviewing the repo. Published verbatim on the Flagged for Review page. Items here do not block the merge; they block assertion. NOTE (2026-11-14): a candidate flag asserting a fabricated hands-on-testing sentence in content/templates/product_article.md.tmpl was DRAFTED AND WITHDRAWN after grep of the template found no such sentence. It is not published; recorded only so the reviewer knows the check was performed and the claim did not survive it. CORRECTION (2026-11-14, session bbe4ca47): F-03 was downgraded and F-12 withdrawn after the controlled re-test recorded in revalidation/ (change requests CR-1 and CR-2 from session c6e94e8d); both rows now state what reproduced and what did not, rather than deleting the earlier text. FINAL-INTEGRATION CORRECTION (2026-11-14, session 4338f55e): F-03 was rewritten once more after the decisive control was run — an UNKNOWN link.amazon code returns a 404 instead of a random product (flag F-20), so the three supplied codes are honoured lookups and the earlier 'the token was ignored / the destination was arbitrary' reading is withdrawn. F-20 to F-24 were added by the same session. Every flag below is published on the Flagged for Review page with its official source links. MERGED 2026-11-14 (session 4338f55e): the live re-verification by session a133aa61 was adopted in full — its btn_ref finding is folded into F-21 with the observed token values, and its R-09 compliance correction is published as F-25. The two sessions had reused the flag ids F-20 and F-21 for different findings; the ids already published here were kept and the incoming flags were renumbered, so no id points at two different findings. MERGED 2026-11-14 (session cdfaeefe, final integration): session a133aa61's later PR #40 added a twentieth-plus flag under the id F-22 for the dashboard flag-count KPI defect; that id was already published on this branch (the 450 F Hi-Fry temperature conflict), so the incoming flag was renumbered to F-26 exactly as the earlier collisions were. Session a133aa61's PR #37 F-03 edit is subsumed by the F-03 rewrite above and F-21. No id points at two different findings. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-29 was added 2026-11-14 by session ba8b2d38 (T27) after reading the deployed site: the register page and the summary page published different open-flag counts for the same register. F-28 was added 2026-11-14 by session ba8b2d38 (T27) after running the valid-ASIN control that no earlier session had run; it was renumbered from a local F-27 to avoid colliding with session b38cc982's F-27 (research-hub/scripts/build.py), which had reached main first. F-30 to F-32 were added 2026-11-14 by session d3ce1c29 (T26) and are all closed in the same session: an incomplete bounty/bonus transcription presented as complete, a zero-rate caption whose count matched no grouping in the source, and a gap in validate_data.py that let every commission-table row escape the source check. F-32's row count was corrected from 228 to 243 after the verification rows and the new source were added in the same pass. F-33 was added 2026-11-14 by session d3ce1c29: the register panel labelled every item 'open' when most are resolved. F-16 was independently re-verified in the same pass and closed — all four compliance rows it named now cite functions and files that exist in the code. F-34 was added 2026-11-14 by session d3ce1c29: commit d6ec452 truncated the shared task board by 1,831 lines; the board is restored from git history in the same pass. ADDENDUM 2026-11-14 (session 0a697d4a, T28): F-37 and F-38 were added by an independent row-by-row re-read of the official programme pages (bounty/bonus transcription; omitted Participation Requirements). They were drafted as F-27/F-28 but both ids were taken by other sessions while this one was running, so they are published under the next free ids. No existing id was reused. F-41 was added 2026-11-16 by session 43eb0239 (T54) after a line-by-line re-read of the live Amazon listing found that the stored title for P-02 no longer matched the page. The value was corrected in the same pass; the flag records the drift and the copies that remain outside this session's scope (CR-13).",
-  "as_of": "2026-11-16",
+  "as_of": "2026-11-19",
   "flags": [
     {
       "id": "F-01",
@@ -614,6 +614,74 @@
       "action_required": "Owner: an authenticated Creators API GetItems lookup for B0DHZTCNR5 and B0DZFD6R9Z returns the authoritative category and therefore the band; until then the field stays blank and flagged.",
       "source_ids": [
         "S04",
+        "S61",
+        "S62"
+      ]
+    },
+    {
+      "id": "F-44",
+      "severity": "medium",
+      "owner": "done",
+      "status": "closed",
+      "published_on": "2026-11-19",
+      "title": "The 0-second 'failure' workflow runs after PR #158 were parse failures, not cancellations (CR-6 misdiagnosed)",
+      "detail": "After PR #158 merged, every Deploy run on main finished in 0 s with 0 jobs (for example run 44136794504). The T62 record (CR-6) described these as cancelled or superseded runs. They were not: .github/workflows/pages.yml still contained unresolved git conflict markers, so GitHub could not load the workflow file at all and created no jobs. The local replay (tools/ci_replay.py) did not notice because it reads the steps with a tolerant hand-written parser instead of a YAML loader, so it reported 49/49 passing on a file GitHub rejected. Sessions 6ce606cb (T63) and da47d78d (T65) each removed the markers independently; both added a pre-check to ci_replay.py (conflict markers in the workflow and other tracked text files, and a YAML parse when PyYAML is available). The first T63 pull-request run after the repair (44466706223) loaded the workflow and passed its Build and verify job.",
+      "impact": "For about two days no push to main deployed, while the board recorded the failures as harmless cancellations. Pages kept serving the last good build.",
+      "action_required": "None outstanding. Read a 0-job run as 'the workflow did not load' until proven otherwise; ci_replay.py now refuses to run on a workflow that would not load.",
+      "source_ids": []
+    },
+    {
+      "id": "F-45",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "Amazon now shows a 'newer model' notice on the ThermoMaven listing the 4th supplied link opens",
+      "detail": "Re-read on 2026-11-19, the listing that link.amazon/B0c8moW59 opens (B0DHZTCNR5, ThermoMaven 1 Sec, Black) carried the notice 'There is a newer model of this item', pointing to B0GL7Z4KP4 (shown in Orange). That listing has not been read or sourced, so this repository does not know whether it is a new revision or a colour variant. The site keeps linking B0DHZTCNR5, the listing the supplied link opens; it does not switch on its own.",
+      "impact": "Buyers clicking the ThermoMaven button may land on an older model than Amazon recommends.",
+      "action_required": "Owner: say which listing is intended (decision desk SG-T63-12 / Q-T63-07). If it is the newer one, a session reads and sources B0GL7Z4KP4 before any link changes.",
+      "source_ids": [
+        "S61"
+      ]
+    },
+    {
+      "id": "F-46",
+      "severity": "medium",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "The two product registers disagree on the status of the 8-quart Chefman's power rating",
+      "detail": "marketing/data/facts.json (which feeds the reader pages) records P3 Power as '1700 W / 120 V', status verified, citing the Chefman product page, and mentions in a note that a 1000 W figure has circulated. ledger/products.json (which feeds the dashboards) records the same attribute for P-03 as a CONFLICT, because the Amazon listing's own bullet list says '1000 Watts/120 Volts - RJ38-SQSS-8T' while its product-information block and the Chefman page both say 1700 W. Both registers quote real official text; they differ on whether the disagreement is shown as a conflict. The rule for every other conflict in this repository is to publish both values.",
+      "impact": "The reader-facing pages show a single verified wattage where the ledger publishes an official-source conflict.",
+      "action_required": "Owner or a later session: decide which register is the source of truth (decision desk SG-T63-08) and regenerate the other from it; meanwhile, show the P3 power row as a conflict on the reader pages.",
+      "source_ids": [
+        "S21",
+        "S26"
+      ]
+    },
+    {
+      "id": "F-47",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "marketing/feed.xml writes ISO-8601 pubDate values; RSS 2.0 requires RFC 822 dates",
+      "detail": "Every <pubDate> in marketing/feed.xml is written as '2026-11-15T00:00:00Z' (tools/build_marketing.py, page_feed()). The RSS 2.0 specification (https://www.rssboard.org/rss-specification, version 2.0.11) states: 'All date-times in RSS conform to the Date and Time Specification of RFC 822', with the example 'Sat, 07 Sep 2002 00:00:01 GMT'. The feed also lists only the marketing topic pages, so the root guides (including the T63 thermometer guides) are not in any feed. build_marketing.py belongs to another session's scope, so T63 did not change it.",
+      "impact": "Strict feed readers and validators may reject or misdate the items; readers who follow the feed never see the root guides.",
+      "action_required": "A session that owns tools/build_marketing.py: emit RFC 822 dates (for example email.utils.format_datetime) and decide whether to extend the feed to every guide (decision desk SG-T63-10).",
+      "source_ids": []
+    },
+    {
+      "id": "F-48",
+      "severity": "low",
+      "owner": "user",
+      "status": "open",
+      "published_on": "2026-11-19",
+      "title": "Release-readiness row RR-08 still describes the site as covering three air-fryer appliances",
+      "detail": "The site state typed into RR-08 on the release-readiness board says 'The published set covers three air-fryer appliances plus programme research.' Since T61/T63 the site also publishes the two meat-thermometer listings that supplied links 4 and 5 open, with their own category page and guides. The row's conclusion (no unsuitable category) is unaffected; only its description is out of date. The board belongs to another session's scope (T45), so T63 regenerated it from its own generator without editing its register.",
+      "impact": "A reviewer reading the readiness board gets an incomplete picture of what the site covers.",
+      "action_required": "The session that owns the release-readiness register: update RR-08's site state to name both categories.",
+      "source_ids": [
         "S61",
         "S62"
       ]
