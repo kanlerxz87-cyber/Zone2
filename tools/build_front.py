@@ -392,6 +392,28 @@ def page(rel_path: str, *, title: str, description: str, active: str,
 """
 
 
+def implemented_line(sg: dict) -> str:
+    """T63: a row the owner decided says so; every other row keeps the original wording."""
+    od = sg.get("owner_direction")
+    if not od:
+        return ('<span><b>Implemented</b> No &mdash; no suggestion on this board is applied until a '
+                'choice is recorded.</span>')
+    state = "Yes" if sg.get("implemented") else "Partly"
+    return f'<span><b>Implemented</b> {state} &mdash; owner chose option {e(od["chosen_option"])} on {e(od["date"])}.</span>'
+
+
+def owner_direction_block(sg: dict) -> str:
+    od = sg.get("owner_direction")
+    note = sg.get("brief_note")
+    if od:
+        return (f'\n  <p class="pb-owner"><b>Owner direction ({e(od["date"])}).</b> The brief quotes option '
+                f'{e(od["chosen_option"])} verbatim: &ldquo;{e(od["quote"])}&rdquo; '
+                f'<b>Where it stands:</b> {e(od["implementation"])}</p>')
+    if note:
+        return f'\n  <p class="pb-owner">{e(note)}</p>'
+    return ""
+
+
 def decision_block(sg: dict, board: dict) -> str:
     opts = []
     for o in sg["options"]:
@@ -407,8 +429,9 @@ def decision_block(sg: dict, board: dict) -> str:
         s = board["sources"].get(sg["source"])
         if s:
             host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", s["url"]).split("/")[0])
+            rel = f"{LINK_REL} noopener noreferrer" if "amazon." in host else "noopener noreferrer"
             src = (f'<span><b>Source</b> <a href="{e(s["url"])}" target="_blank" '
-                   f'rel="noopener noreferrer">{e(s["name"])} &middot; {e(host)}</a></span>')
+                   f'rel="{rel}">{e(s["name"])} &middot; {e(host)}</a></span>')
     waits = ", ".join(
         f'<a href="questions.html#{e(q)}">{e(q)}</a>' for q in sg.get("waits_on", [])
     ) or "none &mdash; this can be decided now"
@@ -416,7 +439,7 @@ def decision_block(sg: dict, board: dict) -> str:
   <div class="pb-decision-hd">
     <span class="pb-decision-id">{e(sg['id'])}</span>
     <h3>{e(sg['title'])}</h3>
-    <span class="pb-pill pb-pill--warn">{e(sg['status'])}</span>
+    <span class="pb-pill pb-pill--{'ok' if sg.get('implemented') else 'warn'}">{e(sg['status'])}</span>
   </div>
   <p><b>Area:</b> {e(sg['area'])} &middot; {e(sg['summary'])}</p>
   <div class="pb-opts">{''.join(opts)}</div>
@@ -424,8 +447,8 @@ def decision_block(sg: dict, board: dict) -> str:
     <span><b>Recommended</b> Option {e(sg['recommendation'])}</span>
     <span><b>Waits on</b> {waits}</span>
     {src}
-    <span><b>Implemented</b> No &mdash; no suggestion on this board is applied until a choice is recorded.</span>
-  </div>
+    {implemented_line(sg)}
+  </div>{owner_direction_block(sg)}
 </article>"""
 
 
@@ -439,8 +462,9 @@ def question_block(q: dict, board: dict) -> str:
         s = board["sources"].get(q["source"])
         if s:
             host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", s["url"]).split("/")[0])
+            rel = f"{LINK_REL} noopener noreferrer" if "amazon." in host else "noopener noreferrer"
             src = (f'<span><b>Source</b> <a href="{e(s["url"])}" target="_blank" '
-                   f'rel="noopener noreferrer">{e(s["name"])} &middot; {e(host)}</a></span>')
+                   f'rel="{rel}">{e(s["name"])} &middot; {e(host)}</a></span>')
     return f"""<article class="pb-decision" id="{e(q['id'])}">
   <div class="pb-decision-hd">
     <span class="pb-decision-id">{e(q['id'])}</span>
@@ -712,11 +736,14 @@ def build_index(facts: dict, board: dict) -> str:
     &ldquo;(paid link)&rdquo;. Evidence links never are. <a href="guides/method.html">How we check</a>
     &middot; <a href="behind-the-site.html">Behind the site</a>.</p></div>
   </div>
+  <p class="pb-trust-foot">Anything we could not confirm is published, with its source, on the
+  <a href="flagged.html">Flagged for Review register</a>: <span id="flagCount">&mdash;</span> items right
+  now, counted live from the register.<span class="pb-sr"> Register total: <span id="flagCountHeading">&mdash;</span>.</span></p>
 </div></section>
 """
     return page("index.html", title="Air fryers and meat thermometers, compared on the specs that decide it · Counter Notes",
                 description="Air fryer and meat thermometer buying guides: quick picks by how you cook, side-by-side spec tables linked to official pages, and the USDA temperatures that make a thermometer worth owning.",
-                active="index.html", body=body,
+                active="index.html", body=body, with_data=True,
                 extra_head='<link rel="preload" as="image" href="assets/img/hero-counter.jpg">')
 
 
@@ -1107,7 +1134,7 @@ def build_suggestions(facts: dict, board: dict) -> str:
     body = f"""
 <section class="pb-lead"><div class="pb-wrap">
   <p class="pb-kicker">Decision board</p>
-  <h1 class="pb-h1">{num_word(len(board['suggestions']), cap=True)} things we could do next. <em>None of them is done.</em></h1>
+  <h1 class="pb-h1">{num_word(len(board['suggestions']), cap=True)} things we could do next. <em>{num_word(sum(1 for s in board['suggestions'] if s.get('owner_direction')), cap=True)} decided by the owner, the rest waiting on you.</em></h1>
   <p class="pb-stand">This is the review surface the brief asked for: every suggestion, with the options
   it could take, what each option costs, what it gives up, and the question that has to be answered
   before it can be decided. Read it, pick a path, and record the choice &mdash; nothing on this page
@@ -1126,8 +1153,10 @@ def build_suggestions(facts: dict, board: dict) -> str:
   {blocks}
   <div class="pb-note"><b>How a suggestion leaves this board.</b> It does not, on its own. A choice has
   to be recorded against its id, and only then does it become work. Until then the status stays
-  <em>Proposed &mdash; awaiting owner decision</em>, which is the honest state of all
-  {len(board['suggestions'])} rows above.</div>
+  <em>Proposed &mdash; awaiting owner decision</em>, which is the honest state of
+  {sum(1 for s in board['suggestions'] if not s.get('owner_direction'))} of the
+  {len(board['suggestions'])} rows above. A row reads <em>Decided</em> only where the owner's own brief
+  quotes one of its options word for word; the quote is printed on the row.</div>
 </div></section>
 """
     return page("suggestions.html", title="Suggestion board · Counter Notes",

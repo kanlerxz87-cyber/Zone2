@@ -227,8 +227,24 @@ def checks() -> list[str]:
             fail(errors, f"G5 {sg['id']}: no options")
         if sg.get("recommendation") not in {o["label"] for o in sg["options"]}:
             fail(errors, f"G5 {sg['id']}: recommendation is not one of its options")
-        if "Proposed" not in sg.get("status", ""):
-            fail(errors, f"G5 {sg['id']}: status is not 'Proposed — awaiting owner decision'")
+        od = sg.get("owner_direction")
+        if od:
+            # T63 (session 10727edd): a row may read "Decided" only with a recorded owner direction
+            # whose quote is, word for word, the text of the option it names.
+            opt = next((o for o in sg["options"] if o["label"] == od.get("chosen_option")), None)
+            if not opt:
+                fail(errors, f"G5 {sg['id']}: owner_direction names an option the row does not have")
+            elif od.get("quote") != opt["text"]:
+                fail(errors, f"G5 {sg['id']}: owner_direction quote is not the option's text verbatim")
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(od.get("date", ""))) or not od.get("source"):
+                fail(errors, f"G5 {sg['id']}: owner_direction needs an ISO date and a source")
+            if not sg.get("status", "").startswith("Decided"):
+                fail(errors, f"G5 {sg['id']}: has an owner_direction but status does not say Decided")
+        else:
+            if "Proposed" not in sg.get("status", ""):
+                fail(errors, f"G5 {sg['id']}: status is not 'Proposed — awaiting owner decision'")
+            if sg.get("implemented"):
+                fail(errors, f"G5 {sg['id']}: marked implemented with no recorded owner direction")
     for q in board["questions"]:
         for field in ("what_we_know", "what_is_missing", "how_to_discover"):
             if not str(q.get(field, "")).strip():

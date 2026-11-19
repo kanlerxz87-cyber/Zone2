@@ -146,7 +146,7 @@ No monetized, Associates-tagged product link, no claim that the observed destina
   no rate table, no attribution window, no per-row sourcing and no category subpages. All four gaps are closed
   here; nothing of theirs was removed.
 * Irregularities found are published on the site's **Flagged for Review** page
-  (`pages/flags.html`) with source links — the register now holds **43 flags (F-01 … F-43)**, rendered
+  (`pages/flags.html`) with source links — the register now holds **48 flags (F-01 … F-48)**, rendered
   from `ledger/flags.json` and gated so the count cannot be typed wrong again — including the deprecated-API trap and the
   network-allowlist limitation on live verification.
 
@@ -797,7 +797,7 @@ rendering in fallback system fonts since the redesign. No gate could see it, bec
 namespaces plus two builders); it is now repaired at both layers, and the register carries it as `F-39` so the
 class of bug — a resource a build cannot fail on — is on the record for the next time.
 
-**Numbers for the reviewer, all derived from the registers:** 43 flags, 45 sources, 108 logged checks, 20 open
+**Numbers for the reviewer, all derived from the registers:** 48 flags, 49 sources, 108 logged checks, 20 open
 questions, and 22 CI steps green on the merged tree. Nothing in this addendum states a product, price, rating
 or performance figure: the site still has no authorised source for one, and an absent number beats an invented
 one.
@@ -870,7 +870,7 @@ the suggestions board and the questions register, each with the action that woul
 
 **Decision surfaces confirmed linked and prominent:** the root landing page links the Suggestions board (`pages/suggestions.html`, SG-01…SG-14) and the Open questions register (`pages/questions.html`, Q-01…Q-20) from both the primary navigation and the footer "Decisions" column. Each suggestion row carries options, a recommendation, the questions that must be answered first, and an owner decision field awaiting record in `ledger/suggestions.json`. Nothing is implemented until a choice is recorded there.
 
-**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (45 sources, 422 rows, 1217 links, all derived from the live register); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 162 pages, all checks PASS.
+**Repo gates run locally, all green:** `validate_data.py` 0 errors / 0 warnings (49 sources, 423 rows, 1217 links, all derived from the live register); `tests/test_pipeline.py` 15/15; `build_site.py --check` 39 pages, 0 drift; `check_css_urls.py` 0 broken url() references; `build_head_meta.py --audit` 0 problems; `build_summary.py --check` no drift; `audit_site.py` 162 pages, all checks PASS.
 
 **Flagged irregularities (non-blocking, on `pages/flags.html`):** F-01/F-03 (product identity not established by an official document), F-24 (no Associates tag on the supplied links), F-05 (Creators API unregistered; PA-API 5.0 deprecated), F-08 (no performance reports; no traffic/revenue figures published anywhere). None blocks merge; all are published for owner review with their source links and closing actions.
 
@@ -977,10 +977,10 @@ decision surfaces are unchanged and current — the ten suggestions with options
 [the decision board](https://kanlerxz87-cyber.github.io/Zone2/pages/suggestions.html), the
 **18 open questions** with the method that would close each one on
 [the questions register](https://kanlerxz87-cyber.github.io/Zone2/pages/questions.html), and the
-[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **43 flags**,
+[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/pages/flags.html) page carrying **48 flags**,
 each with its source links. Nothing is implemented on this site until it is chosen there.
 
-**Numbers for the reviewer, all derived from the registers:** 43 flags (18 open · 25 resolved), 45 sources,
+**Numbers for the reviewer, all derived from the registers:** 48 flags (20 open · 28 resolved), 49 sources,
 108 logged checks, 20 open questions, and every repository gate green on the merged tree.
 ---
 
@@ -1151,7 +1151,7 @@ catalog lookup). Suggestions `SG-13` (build a matching thermometer content set o
 three air fryers; the two thermometers are published in the product catalog with their sourced specs, and the
 editorial expansion waits on `Q-19`.
 
-**Register state after this addendum:** 5 product entries, 45 sources, 108 verification rows, 43 flags
+**Register state after this addendum:** 5 product entries, 49 sources, 108 verification rows, 48 flags
 (18 open · 25 resolved), 20 questions, 14 suggestions. Every repository gate is green on the merged tree.
 
 ---
@@ -1410,131 +1410,27 @@ The decision desk (`suggestions.html`, `board/suggestions.html`, `brief/suggesti
   - `tools/test_audit.py`: 11/11 injected defects fired.
   - `tests/test_pipeline.py`: 15/15 unit tests passed.
 - **Published Surface Count:** 180 published pages, 100% carrying the statutory disclosure, 0 pages publishing unauthorized prices, 100% internal links resolving cleanly.
-## Current-state addendum — 2026-11-19 (T63 integration)
-
-This section is the current status as of the date above. It supersedes earlier summaries that describe
-only the initial three-link set; it does not rewrite those dated verification records.
-
-### Five submissions: intent is still blank
-
-The current intake register contains five submitted short links. The submitted tokens are not recorded
-as intended ASINs. For each record, `intended_asin`, intended listing URL, confirmation date, and
-confirmation source remain blank; the observed redirect destination is stored separately and was last
-recorded on 2026-11-17. The five observations point to three air-fryer listings and two meat-thermometer
-listings, but that is not proof of what the submitter intended. The exact compliance status of the supplied
-short links remains unresolved in FLG-003; no claim is made that they are invalid. See
-[`intake/submissions.html`](intake/submissions.html), [`intake/flags.html`](intake/flags.html), and the
-[Amazon link-format help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC).
-
-### Publication and integration status
-
-The reader-facing summary is now generated at [`summary.html`](summary.html) from the five-record intent
-register. It keeps intended identity separate from observed destinations, leaves unknown values blank,
-and links readers to the questions, decision board, source register, and suggestions with explicit options
-and trade-offs. The earlier `summary.html` narrative mixed a three-link description with values from a later
-five-entry ledger; it has been replaced rather than represented as current. This Markdown file preserves
-the older dated narrative and its verification trail.
-
-The Pages workflow's two literal conflict blocks have been resolved while retaining both submitted-link
-intake gates (`build`, validator, negative tests) and decision-board gates (`build`, validator, negative
-tests). The generated publication uses reader-first primary navigation, one accessible “Project & tools”
-disclosure group, and footer links for the tool and dashboard routes. The suggestion count is derived from
-the decision register. Buyer-question topics are described as editorial hypotheses, not measured demand.
-
-The front-page disclosure accurately says that `shopnow047c-20` was supplied, while its account status and
-presence on every product destination have not been confirmed. Repository HTML inspection finds product
-destination links do not consistently carry the tag. **Correction to the T65 completion note above:** it
-calls the tag “verified and active”; this integration found no authorized account evidence that establishes
-that status or universal link coverage. Treat activation as unconfirmed until the owner validates it inside
-Associates Central and in an authorized report. The implementation does not claim that account activation,
-per-product Special-Link validation, server-side event collection, conversion attribution, or Search Console
-reporting is live. Amazon's [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement)
-requires properly tagged Special Links; Google's guidance says paid placements should use
-[`rel="sponsored"`](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links).
-
-### Measurement contract still needs reconciliation
-
-`assets/js/events.js` stores page-view, product-click and disclosure-view events in a bounded browser-local
-queue; without a configured endpoint, it transmits nothing and no counts are published. Conversion imports
-and Search Console query imports remain blocked on first-party reports and verified account access.
-There are two documentation discrepancies to resolve before enabling a backend: the intake tracking
-register calls the events proposed/not instrumented while `docs/measurement-t40.json` labels three events
-LIVE (client-side only), and the page-view code sends the referrer hostname under property `r` while the
-measurement schema names `referrer_host`. These were identified by repository inspection, not by a live
-endpoint test. GitHub Pages is documented as static hosting; no event sink was found in this repository.
-See [`docs/measurement-t40.json`](docs/measurement-t40.json), [`intake/tracking.html`](intake/tracking.html),
-[GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages),
-and the [FTC disclosure guidance](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers).
-
-### Verification in this integration
-
-- Python compilation, the front-page generator and freshness check, the summary freshness check, and the
-  front-page verifier passed; the verifier reports nine generated pages current.
-- The Pages workflow parses as YAML and retains the intake and decision-board build, validator and negative
-  test commands; conflict-marker scan is clean.
-- Regenerated the sitemap and dependent derived counts. `tools/ci_replay.py` passed all 49 steps, including
-  the intake/board gates, sitemap coverage, release-readiness checks, and front-page gate.
-- No product/source facts were changed and no live Amazon redirect was repeated in this integration pass.
-  The changed verification scope and commands are recorded in
-  [`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md).
-- PR #166 merged on 2026-11-19 at 06:01:43 UTC as merge commit `785740716952f309e5895ffeaea6c675115cc2d7`. The post-merge build-and-deploy run passed, the GitHub Pages deployment run succeeded, and the Pages API reports `status: built` at <https://kanlerxz87-cyber.github.io/Zone2/>.
-
-### Next evidence to collect
-
-1. Have the submitter confirm the intended ASIN and official listing URL for each of the five links; retain
-the confirmation date/source apart from redirect observations.
-2. Verify the Associates account and marketplace, then confirm each intended Special Link is tagged with
-`shopnow047c-20` and appears in the authorized account report.
-3. Reconcile the measurement definitions and field names before deploying an endpoint; record retention and
-bot-filtering choices before collecting events.
-4. Verify Search Console ownership and use actual query/page data before treating any topic as measured
-interest. Until then the guide subjects remain editorial hypotheses.
-
 
 ---
 
-## Addendum — T64, the thermometer desk (session `arena/32788da6-zone2`, 2026-11-19)
+## Addendum — T63, session 10727edd (2026-11-19)
 
-**What changed for a reader.** Two of the five promoted products, the ThermoMaven instant-read (P-04) and the
-CHEF iQ Sense wireless probe (P-05), now have reader pages. Before this, not one page on the site asked or
-answered a question about a meat thermometer (RQ-04). The new section is `marketing/thermometers/`, reachable
-from the "Thermometers" nav entry, the guides index, `feed.xml` and both sitemaps. It has seven pages:
-- a desk page comparing the two thermometers, with tagged Special Links;
-- one row-by-row page per thermometer;
-- four question-shaped guides:
-  - *Instant-read or leave-in: which meat thermometer do you actually need?*
-  - *Do you need a meat thermometer for an air fryer?* (links across to the air-fryer desk)
-  - *Where does the thermometer go in a turkey? Three spots, one number* (in season: US Thanksgiving is 2026-11-26)
-  - *Is your meat thermometer accurate? USDA's ice-water check*
+**What changed for a reader.** The front page now opens on the products rather than on the audit. All
+five supplied links have a reader-facing home. Four new guides target questions people actually search
+for ("instant-read or wireless?", "do I need a thermometer for an air fryer?"). Every spec on them is
+drawn from a sourced ledger row, and no price or star rating appears anywhere.
 
-The titles are editorial hypotheses about how readers phrase the question, not search-volume claims.
+**The most important finding.** From PR #158 to PR #161, **no CI gate ran on main**. Unresolved
+conflict markers made `.github/workflows/pages.yml` unparseable. Pages kept deploying through the legacy
+branch build, so the site stayed live but nothing checked it (F-45). CR-6's "cancel-in-progress"
+diagnosis was wrong. The workflow is now repaired, and the local replay refuses to run if a file carries a
+conflict marker.
 
-**How it is sourced.** Five official pages, all read live on 2026-11-19, and nothing else:
-- the two Amazon listings the supplied short links resolved to that day;
-- three USDA Food Safety and Inspection Service pages: food thermometers, the safe-temperature chart, and air
-  fryers.
+**Waiting on the owner, none of it blocking:** confirm `shopnow047c-20` in Associates Central (Q-T50-02);
+test one Special Link (FLG-003, which stays unresolved and is not claimed invalid); confirm whether the
+ThermoMaven link should point at the newer model (F-44 / Q-T63-03); verify the site in Search Console
+(Q-T63-05); explain why the brief cites Zone3's register IDs (F-47).
 
-Every specification row links to its listing. Every food-safety sentence links to USDA. Every opinion sits in a
-labelled "Our take" box. Values the 2026-11-17 read recorded but that can no longer be re-read as text are left
-blank with that reason, not reprinted: CHEF iQ accuracy, and its 70-hour battery figure. No price, rating, review
-count or sales rank is printed.
-
-**How it is enforced.** `tools/build_thermometers.py` refuses to publish:
-- an unsourced value, or a blank without a reason;
-- a sentence without a source;
-- a price or a rating;
-- a banned phrase or a first-hand claim;
-- an off-list host, or an untagged product link.
-
-All ten injected defects were refused. `tools/build_marketing.py` renders the desk inside its own build, so the
-feed, sitemap, orphan and canonical gates cover it. The full CI replay passes all 49 workflow steps, before and
-after rebasing onto T65.
-
-**Open for the owner.** Q-21 and Q-22 in the question register, and SG-15 on the decision board:
-- whether the brief meant the ThermoMaven HT07 or the newer model Amazon now points to (B0GL7Z4KP4);
-- which of the CHEF iQ listing's two warranty statements applies (two-year vs "3 Year");
-- whether the 3-probe size is the intended one.
-
-Product intent for both links remains unconfirmed (F-03). The pages say so next to every product link.
-
-Full record: `docs/verification-32788da6.md`.
+**Register state after T63:** 48 flags (20 open · 28 resolved), 49 sources, 17 suggestions on the
+front-page board (4 carrying a recorded owner direction), 17 questions on that board. Full replay: 49/49 gates pass.
+Evidence: [`docs/verification-10727edd.md`](docs/verification-10727edd.md).
