@@ -150,3 +150,12 @@ Ten of ten fired.
   `EXECUTIVE_SUMMARY.md`, `assets/js/data.js` and the root pages together (SG-15 option C).
 - **CR-10 → brief namespace:** correct the stale "no click can become a qualifying purchase" note, and derive the
   four state-table counts (completes CR-3).
+
+## Merge and deployment
+
+- PR #167 merged at 2026-11-19T06:08:03Z as `d7b8328247f44744eeb441653849099b92ebb619`. The PR check "Build and
+  verify" passed.
+- Workflow run `44469952292` (Build, verify and deploy): success.
+- Pages run `44469951282`: success. The Pages API reports `status: built` for `d7b8328`.
+- Live check: `marketing/thermometers/thermometer-for-air-fryer.html` serves the merged page, with the
+  disclosure strip, the USDA citations and the sources list intact.
