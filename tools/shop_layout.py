@@ -3,7 +3,8 @@
 One module, so the reader pages built by tools/build_front.py (index, summary, suggestions,
 questions, guides/*) and by tools/build_shop.py (shop/**) cannot drift apart.
 
-Markup contract (merged 2026-11-19 with session cf98ff65's G9 gate in tools/verify_front.py):
+Markup contract (merged 2026-11-19 with the G9 gate in tools/verify_front.py, written by session
+cf98ff65 and extended by session 10727edd):
   * <nav class="pb-nav" aria-label="Primary navigation"> holds the READER links first, then ONE
     <details class="pb-nav-tools"> group labelled "Project & tools" with every owner dashboard -
     the brief's "keep every dashboard surface reachable from the footer and a single navigation
@@ -28,18 +29,23 @@ def e(s: object) -> str:
     return html.escape(str(s if s is not None else ""), quote=True)
 
 
-#: Reader navigation, shop first. tools/verify_front.py (G9) pins this exact list.
+#: Reader navigation. Base = the merged menu on main (sessions cf98ff65 + 10727edd: front page,
+#: air fryers, thermometers, guides, compare, journal, all articles). T66 adds one entry, "Shop",
+#: straight after the front page. tools/verify_front.py (G9) pins this exact list.
 READER_NAV = [
-    ("index.html", "Counter Notes"),
+    ("index.html", "Front page"),
     ("shop/index.html", "Shop"),
-    ("shop/air-fryers.html", "Air fryers"),
-    ("shop/meat-thermometers.html", "Meat thermometers"),
-    ("shop/guides/index.html", "Guides"),
-    ("shop/compare.html", "Compare"),
+    ("marketing/buying-guide.html", "Air fryers"),
+    ("guides/meat-thermometers.html", "Thermometers"),
+    ("guides/index.html", "Guides"),
+    ("marketing/comparison.html", "Compare"),
+    ("journal/index.html", "Journal"),
+    ("marketing/index.html", "All articles"),
 ]
 
-#: The one owner-facing group. G9 requires the first fourteen; the last two are T66 additions.
+#: The one owner-facing group (main's list; T66 appends the owner briefing and the intent register).
 TOOLS = [
+    ("behind-the-site.html", "Behind the site (all surfaces)"),
     ("suggestions.html", "Suggestions"),
     ("questions.html", "Open questions"),
     ("brief/index.html", "Design brief"),
@@ -54,7 +60,7 @@ TOOLS = [
     ("sources.html", "Source register"),
     ("flagged.html", "Flagged for review"),
     ("summary.html", "Executive summary"),
-    ("shop/briefing.html", "Owner briefing"),
+    ("shop/briefing.html", "Owner briefing (shop)"),
     ("intent.html", "Link & intent register"),
 ]
 
@@ -67,21 +73,21 @@ def _links(depth: str, items: list[tuple[str, str]], active: str) -> str:
     return "".join(out)
 
 
-def masthead(depth: str, active: str, checked_on: str) -> str:
+def masthead(depth: str, active: str, updated_on: str) -> str:
     tools_cur = ' aria-current="page"' if active in {h for h, _ in TOOLS} else ""
     return f"""<header class="pb-mast">
   <div class="pb-wrap">
     <div class="pb-mast-top">
-      <a class="pb-brand" href="{e(depth)}index.html">
+      <div>
         <div class="pb-word">Counter <em>Notes</em></div>
-        <div class="pb-tag">Kitchen gear, explained before you buy</div>
-      </a>
-      <div class="pb-mast-meta">Sources re-read {e(checked_on)}</div>
+        <div class="pb-tag">Air fryers, meat thermometers and the questions to ask before you buy</div>
+      </div>
+      <div class="pb-mast-meta">Updated {e(updated_on)}</div>
     </div>
     <nav class="pb-nav" aria-label="Primary navigation">{_links(depth, READER_NAV, active)}<details class="pb-nav-tools"><summary{tools_cur}>Project &amp; tools</summary><div class="pb-nav-menu">{_links(depth, TOOLS, active)}</div></details></nav>
   </div>
 </header>
-<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} When you buy through a &ldquo;Check today&rsquo;s price&rdquo; button we may earn a commission, at no extra cost to you. Those buttons are marked <em>(paid link)</em> and carry the Associates tag supplied for this project (<code>{e(ASSOCIATES_TAG)}</code>); its account status has not been confirmed. Links to manufacturer and government pages are not affiliate links.</div></div>"""
+<div class="pb-disc"><div class="pb-wrap"><strong>Affiliate disclosure.</strong> {e(DISCLOSURE)} If you buy through a product link marked &ldquo;(paid link)&rdquo;, we may earn a commission at no extra cost to you. The Associates tag supplied for this project is <code>{e(ASSOCIATES_TAG)}</code>; its account status has not yet been confirmed in Associates Central. Links to manufacturer pages, government sources and evidence are never affiliate links.</div></div>"""
 
 
 def footer(depth: str, checked_on: str) -> str:
@@ -100,6 +106,8 @@ def footer(depth: str, checked_on: str) -> str:
         <li><a href="{d}index.html">Front page</a></li>
         <li><a href="{d}guides/index.html">Guide archive</a></li>
         <li><a href="{d}marketing/buying-guide.html">Which air fryer to buy</a></li>
+        <li><a href="{d}guides/meat-thermometers.html">Meat thermometers</a></li>
+        <li><a href="{d}guides/thermometer-for-air-fryer.html">Thermometer + air fryer</a></li>
         <li><a href="{d}marketing/comparison.html">Air fryer head-to-head</a></li>
         <li><a href="{d}marketing/articles/index.html">The three write-ups</a></li>
         <li><a href="{d}journal/index.html">Journal</a></li>
@@ -117,6 +125,7 @@ def footer(depth: str, checked_on: str) -> str:
         <li><a href="{d}flagged.html">Flagged for review</a></li>
       </ul></div>
       <div><h4>Evidence &amp; platform</h4><ul>
+        <li><a href="{d}behind-the-site.html">Behind the site (all surfaces)</a></li>
         <li><a href="{d}summary.html">Executive summary</a></li>
         <li><a href="{d}verification.html">Verification log</a></li>
         <li><a href="{d}sources.html">Source register</a></li>

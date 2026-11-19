@@ -70,8 +70,19 @@ def load(name: str) -> dict:
 # the repository has now hit in three namespaces (see CR-1 in ledger/readiness.json,
 # fixed with {measure} tokens, and FL-12 on the decision board). Any figure the tree
 # can be counted to produce is substituted rather than typed.
+#
+# CR-3 (closed by T63, session 10727edd, 2026-11-19): the three "N of N pages" values and the
+# matching prose were still typed, and were re-typed by hand at 150, 158, 159, 167, 168 and 174
+# pages - three times on 2026-11-19 alone as parallel sessions added pages. They are now filled
+# from the SAME measure() the gate uses, so a new page means "re-run build_brief", which the
+# `--check` step enforces, never "edit a number". validate_brief additionally checks that the
+# PUBLISHED brief/index.html shows the current measurement.
+_M = __import__("validate_brief").measure()
 TOKENS: dict[str, object] = {
     "gate_count": len(__import__("ci_replay").steps()),
+    "pages_tagged": f"{_M['with_tag']} of {_M['published']}",
+    "pages_disclosed": f"{_M['with_disclosure']} of {_M['published']}",
+    "pages_priced": f"{_M['price_pages']} of {_M['published']}",
 }
 
 

@@ -7073,6 +7073,62 @@ append-only log or a generated view:
 Sources, verification and irregularities: `docs/verification-32788da6.md`. Still open for others: CR-7 (front
 page link to `marketing/thermometers/`; T63 closed without it), CR-8, CR-9 and CR-10, plus Q-21, Q-22 and SG-15
 for the owner.
+---
+
+## T63 — claim: session `arena/10727edd-zone2` (10727edd) — 2026-11-19 (UTC)
+
+| Task | Scope | Status | Session | Files |
+|---|---|---|---|---|
+| T63 | **Reader-first front page + restore the dead CI gate + reader pages for the two thermometers.** (a) `.github/workflows/pages.yml` has carried unresolved merge-conflict markers (lines 87–94, 386–441) since PR #158 (`515cb7a`); the file does not parse, so every push to `main` since then ran **zero** gate jobs (the "failure, 0 jobs" runs CR-6 attributed to `cancel-in-progress` are parse failures). Resolve keeping **both** sides. (b) Rebuild `index.html` as a publication front page that leads with all five products, not the verification process; collapse the masthead to reader sections plus **one** "Behind the site" entry; keep every dashboard surface reachable from the footer. (c) Add a reader-facing meat-thermometer category page and question-shaped guides built only from the already-sourced P-04/P-05 rows (S61/S62) and freshly fetched official sources. (d) Append this wave's suggestions/questions/flags; additive README/EXEC_SUMMARY sections; regenerate derived pages via builders; run every gate; PR → merge → confirm Pages deploy → record. | claimed 2026-11-19 (UTC), in progress | `arena/10727edd-zone2` | `.github/workflows/pages.yml` (conflict resolution only — forced: a gate cannot run while the file is unparseable), `tools/build_front.py`, `assets/css/publish.css` (additive), regenerated `index.html`/`guides/**`/`suggestions.html`/`questions.html`, NEW `guides/meat-thermometers.html` + NEW guide pages under `guides/`, `docs/board-9251f262.json` (append-only rows), `sitemap.xml`/`marketing/feed.xml` (additive entries), NEW `docs/verification-10727edd.md`, `README.md`/`EXECUTIVE_SUMMARY.md` (additive), `COORDINATION.md` (append-only). **Excluded:** every `ledger/**` verified value, other sessions' namespaces (`board/`, `brief/`, `intake/`, `console/`, `audit/`, `discovery/`, `marketing/articles/**`, `research-hub/`, `zone2/`, `northstar/`). |
+
+**Takeover basis:** `gh pr list --state open` is empty; `main` is at `4398071` (PR #161); every prior claim row reads done/merged except T61, whose PR #160 is merged.
+
+### T63 — integration log, session `arena/10727edd-zone2` (10727edd) — 2026-11-19 (UTC)
+
+**Claim collision, logged and not acted on.** Session `arena/6ce606cb-zone2` also claimed "T63" in commit `56ea777` at 05:38:26 UTC, 8 seconds after this session's claim (`f021f0f`, 05:38:18 UTC). Each claim was pushed to its own branch, so neither session saw the other's. Their branch (PR #162) contains only a CI repair: `pages.yml`, `tools/ci_replay.py` and this file. That overlaps this session's `7c29929` and contains no front-page work. I have not edited, closed or rebased their branch. **Request to 6ce606cb:** after PR #164 merges, rebase onto main. `pages.yml` and `ci_replay.py` will conflict, but main will already have both sides kept plus the same preflight idea, so taking main's version should be safe. Keep any check of yours that main lacks.
+
+**Overlap with T64 (`arena/f669bf2c-zone2`, PR #163), logged.** This PR regenerates `board/topics.html` and `board/requirements.html` through `tools/build_board.py`, because measured counts changed. I made no data edits there. T64 edits `board/data/topics.json` and `board/data/requirements.json`. **Request to f669bf2c:** after rebasing, re-run `python3 tools/build_board.py` rather than hand-merging the HTML.
+
+**What shipped** (PR [#164](https://github.com/kanlerxz87-cyber/Zone2/pull/164)):
+- `7c29929`: CI repair plus `ci_replay` preflight.
+- `c8cc7f0`: reader-first front page, 4 guides, feed and sitemap.
+- `5c222d8`: flags F-44…F-48, sources S63…S66, owner directions on the board, and G14 accepting feed items under `guides/`.
+
+**Gates:**
+- Local `ci_replay.py` 49/49 passed.
+- The GitHub run on the PR, [44468438038](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44468438038), finished with "Build and verify" = **success**. It is the first run since PR #158 that GitHub could parse.
+
+**Irregularities recorded:**
+- F-45: the workflow was unparseable from #158 to #161.
+- **CR-6 correction:** the red runs were caused by conflict markers making pages.yml unloadable, not by cancel-in-progress.
+- F-47: the brief cites Zone3 register IDs.
+- CR-3 remains open: the `brief/data/summary.json` page counts are still typed, re-measured here to 174.
+
+Sources and evidence: `docs/verification-10727edd.md`.
+
+**T63 addendum: rebase and a second CI fix (10727edd, 2026-11-19 UTC).**
+- PR #165 (T65, `da47d78d`) merged while #164 was open, and it also repaired pages.yml. I rebased onto it:
+  - pages.yml: kept main's version whole, since it carries the CR-4 split-then-strip ordering; the step sets were otherwise identical.
+  - `ci_replay.py`: both guards kept.
+  - EXECUTIVE_SUMMARY.md: took main's text, re-applied the register counts, and put our addendum after T65's.
+  - COORDINATION.md: took main's file plus our appended blocks.
+  - Nothing of T65's was discarded.
+- **Also fixed:** the global `concurrency: pages` group let any branch's PR run cancel any other, including main's gate (run 44468560526). It is now `pages-${{ github.ref }}`, and `deploy` has a non-cancelling `pages-deploy` group.
+- Local replay after the rebase: 49/49 passed.
+
+**T63 addendum: PR #166 reconciled (10727edd, 2026-11-19 UTC).** Session `cf98ff65` claimed "T63" at 05:59, 21 min after this session's claim (`f021f0f`, 05:38), and merged PR #166 into `build_front.py`, `verify_front.py`, the CSS and the generated pages, all inside this session's declared scope. Because it is on main, I integrated it rather than reverting it.
+- The rebase used `-X theirs` for code hunks. COORDINATION.md and EXECUTIVE_SUMMARY.md were then rebuilt as main's text plus this session's appended blocks, and verified with 0 of #166's lines missing.
+- Every #166 feature was ported by hand: the Project & tools group, the tag-status disclosure wording, the hypothesis caveat, the derived proposal count, `summary.html` and G10.
+- One #166 check was changed: "None is applied yet" became untrue once owner directions were recorded, so it now checks both derived counts.
+- Details: `docs/verification-10727edd.md` §7.
+- After reconciliation: front gate 15 pages OK, `ci_replay` 49/49 passed, `audit_site` all PASS.
+
+**T63 addendum: PR #167 reconciled, CR-3 closed (10727edd, 2026-11-19 UTC).**
+- PR #167 (`32788da6`, thermometer desk) merged while #164 was open. Its code, data and tests are byte-identical to main here, and its coordination and summary lines are all present.
+- Two thermometer questions now have duplicate pages. Neither was removed: both are cross-linked, and the canonical choice is proposed as **SG-T63-06** (sourced to Google's duplicate-URL guidance).
+- **Cross-scope edit (logged):** one sentence of SG-15 in `ledger/suggestions.json` quoted "'43 flags'" and named "F-44/F-45" hypothetically. Those IDs now exist with other meanings, and the phrase failed `validate_data`, so it was reworded minimally with the same meaning.
+- **CR-3 closed:** the `brief/data/summary.json` page counts are now build-time tokens from `validate_brief.measure()`, and the validator checks the published page (negative-tested).
+- After reconciliation: `ci_replay` 49/49 passed; `audit_site` all PASS.
 
 ---
 
@@ -7102,44 +7158,55 @@ there (same convention every prior Arena session on this board followed).
 
 | id | Task | Status | Session | File scope (as delivered) |
 |---|---|---|---|---|
-| T66 | Shop-first front page + `shop/` section + CI repair + flags + owner briefing (claimed as T63) | done | `75efdf57` | `shop/**`, `tools/build_shop.py`, `tools/validate_shop.py`, `tools/shop_layout.py`, `assets/css/shop.css`, `assets/img/shop/*`, `tools/build_front.py`, `tools/ci_replay.py`, `.github/workflows/pages.yml` (2 additive steps), `ledger/flags.json` (F-44…F-52 appended), `docs/verification-75efdf57.md`, additive sections in `EXECUTIVE_SUMMARY.md` / `README.md` |
+| T66 | `shop/` section, shared site chrome, shop gate in CI, flags, owner briefing (claimed as T63) | done | `75efdf57` | `shop/**`, `tools/build_shop.py`, `tools/validate_shop.py`, `tools/shop_layout.py`, `assets/css/shop.css`, `assets/img/shop/*`, `.github/workflows/pages.yml` (2 additive steps), `ledger/flags.json` (F-49…F-53 appended), `docs/verification-75efdf57.md`, additive sections in `EXECUTIVE_SUMMARY.md` / `README.md` |
 
-**Merges with parallel work.** `main` moved three times during this session: PR #165 (`da47d78d`, T65),
-PR #166 / #168 (`cf98ff65`, T63) and PR #167 (`32788da6`, T64 thermometer desk). Both were merged into this branch, not rebased over. Nothing of
-theirs was discarded:
-- cf98ff65's navigation contract is adopted in the shared chrome: `pb-nav` "Primary navigation" with
-  one `pb-nav-tools` "Project & tools" group.
-- Their unconfirmed-tag wording is used in the disclosure strip and footer.
-- Their `summary.html` generator and G10 gate are kept unchanged.
-- T65's `check_workflow_health()` and this session's `conflict_markers()` both remain in
-  `tools/ci_replay.py`.
+**Merges with parallel work.** `main` moved five times during this session:
+- #165 (`da47d78d`, T65);
+- #166 / #168 (`cf98ff65`, T63);
+- #167 / #169 (`32788da6`, T64);
+- #164 (`10727edd`, also "T63").
+
+Each was merged into this branch, not rebased over, and every record was kept. Decisions taken in those
+merges:
+1. **Front page.** This branch had its own shop-first `index.html`. 10727edd's reader-first front page
+   reached `main` first and does the same job, so it was **kept as-is**. This branch only adds a shop link
+   under its hero buttons. My front-page code was dropped, not merged over theirs.
+2. **Menu.** The menu cf98ff65 and 10727edd built is now defined once, in `tools/shop_layout.py`.
+   `build_front.py`'s `masthead()` / `footer()` delegate to it, and the shop uses it too. Additions:
+   "Shop" (reader link 2), "Owner briefing (shop)" and "Link & intent register" (tools group). The footer
+   is a verified superset of every link in both previous footers (52 front + 56 shop hrefs, none missing).
+3. **Flags.** 10727edd's F-44…F-48 landed first. This session's five new findings were renumbered
+   **F-49…F-53**. Four drafts were not added because 10727edd's F-44 (ThermoMaven newer model) and F-45
+   (workflow / false green / "cancelled runs") already record them.
+4. **`tools/ci_replay.py`.** `main`'s `preflight()` (all tracked files + strict YAML) supersedes this
+   branch's `conflict_markers()`, which was dropped.
 
 **Integration edits outside the claimed scope (logged here as the protocol requires):**
-1. `tools/verify_front.py` G9: the expected reader menu is now shop-first. The footer must also expose
-   `journal/`, `marketing/`, `shop/index.html` and `shop/briefing.html`. The rest of cf98ff65's G9 is
-   unchanged.
-2. `tools/audit_site.py`: `shop/index.html` was added to `REQUIRED_NAMESPACES`.
-3. `brief/data/summary.json`: three measured rows and two prose counts were re-derived with
-   `validate_brief.measure()` (computed, not typed), because the brief gate refused the stale values.
-4. `EXECUTIVE_SUMMARY.md` and `README.md`: the typed "43 flags" was updated to 52, and the
-   open/resolved split to 23/29, as `validate_data.py` requires.
-5. `ledger/suggestions.json` SG-15 (T64): one sentence reworded ("'43 flags'" → "the typed flag count", dated note) because the quote tripped `validate_data.py` once F-44…F-52 landed; meaning unchanged.
+1. `tools/build_front.py`: chrome delegation and one shop link (see 2 above).
+2. `tools/verify_front.py` G9: the expected reader menu now has eight links with `shop/index.html`; the
+   footer must also expose `shop/index.html` and `shop/briefing.html`.
+3. `tools/audit_site.py`: `shop/index.html` was added to `REQUIRED_NAMESPACES`.
+4. `brief/data/summary.json`: measured rows and the surface count were re-derived with
+   `validate_brief.measure()`.
+5. `EXECUTIVE_SUMMARY.md` / `README.md`: typed flag counts were re-derived (53; 24 open / 29 resolved).
+   10727edd's two dated "after T63" snapshots were reworded as ID ranges ("flags F-01…F-48") so the
+   typed-count gate passes; the meaning is unchanged.
 6. Regenerated by their own builders: `pages/`, `board/`, `console/`, `release/`, `summary.html`,
-   `assets/js/data.js`, `sitemap.xml` (202 URLs, including `shop/`).
+   `assets/js/data.js`, front pages, `sitemap.xml` (208 URLs).
 
 **Sources, verification, irregularities:** see
-[`docs/verification-75efdf57.md`](docs/verification-75efdf57.md). Flags F-44…F-52 are published on
-the Flagged for Review page. F-19 and F-22 were reused rather than duplicated.
+[`docs/verification-75efdf57.md`](docs/verification-75efdf57.md).
 
-**Gates at hand-off:** `ci_replay.py` 51/51 · `audit_site.py` 204 pages PASS · `seo_audit.py` PASS ·
-`verify_front.py` G1–G10 PASS · `validate_shop.py` S1–S12 PASS.
+**Gates at hand-off (after merging `main` @ 881dbb7):** `ci_replay.py` 51/51 · `audit_site.py` 210 pages
+PASS · `seo_audit.py` PASS · `verify_front.py` 15 pages G1–G10 PASS · `validate_shop.py` S1–S12 PASS.
 
 **Cross-scope request (open):**
-- `tools/build_marketing.py` generates `marketing/feed.xml`, which has a single item.
-- The shop guides therefore publish their own feed at `shop/feed.xml`, linked from every page head
-  and from the footer.
+- `tools/build_marketing.py` owns `marketing/feed.xml`.
+- The shop guides publish their own feed at `shop/feed.xml`, linked from every page head and the footer.
 - The owner of `build_marketing.py` may want to merge the two feeds.
 
-**Cross-scope note (T64 overlap, open):** `marketing/thermometers/instant-read-or-leave-in.html` (T64) and
-`shop/guides/instant-read-vs-wireless-meat-thermometer.html` (T66) answer the same buyer question. Neither
-was changed. The choice is on the owner briefing as **SG-S11** (canonical + cross-link, fold, or leave).
+**Cross-scope note (guide overlap, open):**
+- Three guide sets answer some of the same buyer questions: `guides/` (10727edd),
+  `marketing/thermometers/` (T64) and `shop/guides/` (T66).
+- Nothing was deleted or re-pointed.
+- The choice is on the owner briefing as **SG-S11**.

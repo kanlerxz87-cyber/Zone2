@@ -27,7 +27,7 @@
     },
     {
       "h": "The build was quietly broken - it is running again",
-      "t": "From PR #158 until 19 November the deploy workflow file contained unresolved merge-conflict markers. GitHub rejected it, so every check failed with zero jobs while the local replay script kept reporting 'all green'; the site kept updating through GitHub's branch-based Pages build, unchecked. Two sessions repaired the file the same day and both added a guard to the replay script; post-merge runs on main succeed again (flags F-44, F-46)."
+      "t": "From PR #158 until 19 November the deploy workflow file contained unresolved merge-conflict markers. GitHub rejected it, so every check failed with zero jobs while the local replay script kept reporting 'all green'; the site kept updating through GitHub's branch-based Pages build, unchecked. Three sessions repaired the file independently the same day; the replay script now refuses a workflow with conflict markers or invalid YAML, and post-merge runs on main succeed again (flag F-45)."
     },
     {
       "h": "No traffic or sales data exists yet",
@@ -329,27 +329,27 @@
     },
     {
       "id": "SG-S11",
-      "title": "Merge the two thermometer guide sets",
+      "title": "Choose one page per buyer question (three guide sets overlap)",
       "area": "Findability",
-      "why": "Two sessions published thermometer guides on the same day: the shop guides (shop/guides/) and the thermometer desk (marketing/thermometers/, T64). 'Instant-read or leave-in' is answered on both, so search engines see two pages competing for one question, and readers can land on either.",
+      "why": "Three sessions published buyer guides on 19 November without seeing each other: guides/ (session 10727edd: thermometer category, instant-read or wireless, thermometer for an air fryer, multi-function questions, cleanup and counter space), marketing/thermometers/ (session 32788da6, T64) and shop/guides/ (this session). Several answer the same question - 'instant-read or leave-in' has three pages, 'cleanup and counter space' and 'multi-function questions' two each. Search engines see pages competing for one query, and readers can land on any of them.",
       "options": [
         {
           "label": "A",
-          "text": "Keep the shop guide as the canonical page for each overlapping question, point the other page's canonical tag at it and cross-link the two sets.",
-          "cost": "Edit two generators; agree which page owns each question",
-          "tradeoff": "One page per question; the other remains for readers who arrive there"
+          "text": "Pick one page per question as the canonical answer, point the duplicates' canonical tags at it and cross-link them. Nothing is deleted.",
+          "cost": "Edit three generators; one decision per question",
+          "tradeoff": "One indexed answer per question; the other pages remain reachable"
         },
         {
           "label": "B",
-          "text": "Fold the desk's unique guides (accuracy, turkey placement, air-fryer use) into shop/guides/ and retire the duplicates with redirects-by-link.",
-          "cost": "Larger content move",
-          "tradeoff": "Cleanest structure; most work"
+          "text": "Keep one guide set (for example shop/guides/, whose figures are pulled from the sourced catalog at build time) and fold the other sets' unique material into it, then retire the duplicates.",
+          "cost": "Largest content move; three namespaces touched",
+          "tradeoff": "Cleanest structure and one voice; most work"
         },
         {
           "label": "C",
-          "text": "Leave both sets as they are.",
+          "text": "Leave all three sets as they are.",
           "cost": "None",
-          "tradeoff": "Duplicate answers compete in search"
+          "tradeoff": "Duplicate answers compete in search and in the reader's attention"
         }
       ],
       "recommendation": "A",

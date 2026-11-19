@@ -58,31 +58,53 @@ def steps() -> list[tuple[str, str]]:
     return out
 
 
-def conflict_markers() -> list[str]:
-    """T66 (session 75efdf57): refuse to replay a workflow GitHub would reject.
+def preflight() -> list[str]:
+    """T63 (session 10727edd, 2026-11-19): checks the tolerant parser above cannot make.
 
-    The line parser above ignores anything that is not a `- name:` / `run:` line, so
-    unresolved merge-conflict markers in pages.yml were invisible to it: this script
-    reported 49/49 while GitHub refused the file and every run since PR #158 ended in
-    `failure` with zero jobs. Any marker at column 0 in the workflow, or in any tracked
-    tool, is now a hard failure before a single step runs.
+    From PR #158 (515cb7a) to PR #161 (4398071) `pages.yml` carried unresolved merge-conflict
+    markers. GitHub refused to parse the file, so every push ran ZERO gate jobs — while this
+    replay, which skips any line it does not recognise, kept printing "49/49 PASSED". A local
+    replay that is more forgiving than the real runner is a false green. So, before replaying:
+      1. no tracked file except Markdown (COORDINATION.md quotes markers in prose) may carry a
+         line-anchored conflict marker;
+      2. the workflow must parse as YAML with a strict parser when one is installed.
     """
-    hits: list[str] = []
-    targets = [REPO / ".github" / "workflows" / "pages.yml", *sorted((REPO / "tools").glob("*.py"))]
-    for path in targets:
-        for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-            if line.startswith(("<<<<<<< ", ">>>>>>> ")) or line == "=======":
-                hits.append(f"{path.relative_to(REPO)}:{n}: {line[:60]}")
-    return hits
+    problems: list[str] = []
+    files = subprocess.run(["git", "ls-files"], cwd=str(REPO), capture_output=True,
+                           text=True).stdout.split()
+    marker = re.compile(r"^(<{7} |>{7} |={7}$)", re.M)
+    for f in files:
+        if f.endswith(".md"):
+            continue
+        path = REPO / f
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        if marker.search(text):
+            problems.append(f"unresolved merge-conflict marker in {f}")
+    try:
+        import yaml  # type: ignore
+    except ImportError:
+        print("preflight: PyYAML not installed - strict workflow parse skipped "
+              "(pip install pyyaml to enable)")
+    else:
+        try:
+            doc = yaml.safe_load(WF)
+            if not isinstance(doc, dict) or "jobs" not in doc:
+                problems.append("pages.yml parsed but has no `jobs` mapping")
+        except yaml.YAMLError as exc:
+            problems.append(f"pages.yml is not valid YAML: {str(exc).splitlines()[0]}")
+    return problems
 
 
 def main() -> int:
-    markers = conflict_markers()
-    if markers:
-        print("CI REPLAY REFUSED — unresolved merge-conflict markers (GitHub would reject the workflow):")
-        print("\n".join("  " + m for m in markers))
-        return 1
     only = sys.argv[1] if len(sys.argv) > 1 else None
+    bad = preflight()
+    if bad:
+        print("\n".join("!!! PREFLIGHT: " + b for b in bad))
+        print("CI REPLAY FAILED at: preflight")
+        return 1
     failed = []
     all_steps = steps()
     ran = 0

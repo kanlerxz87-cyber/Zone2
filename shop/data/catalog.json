@@ -245,7 +245,7 @@
           "src": [
             "S25"
           ],
-          "note": "Chefman Dual Window page. The Amazon listing does not print a model number that can be matched to it; identity not confirmed (flag F-50)."
+          "note": "Chefman Dual Window page. The Amazon listing does not print a model number that can be matched to it; identity not confirmed (flag F-51)."
         },
         {
           "attr": "Certification and warranty",
@@ -280,7 +280,7 @@
         "intent_source": "",
         "why_blank": "The owner has not confirmed which product the short link was meant to point at (ledger F-06). The observed redirect target is recorded separately and is never copied into the intent fields."
       },
-      "caveat": "Specifications on this page come from Chefman's TurboFry Touch Dual Window page - the manufacturer page whose description (6 Qt, two 3 Qt baskets, sync finish, dual windows) matches the Amazon listing. The Amazon listing does not print that model number, so the match is a strong reading, not a confirmed identity (flag F-50)."
+      "caveat": "Specifications on this page come from Chefman's TurboFry Touch Dual Window page - the manufacturer page whose description (6 Qt, two 3 Qt baskets, sync finish, dual windows) matches the Amazon listing. The Amazon listing does not print that model number, so the match is a strong reading, not a confirmed identity (flag F-51)."
     },
     {
       "id": "P-03",
@@ -591,7 +591,7 @@
         "intent_source": "",
         "why_blank": "The owner has not confirmed which product the short link was meant to point at (ledger F-06). The observed redirect target is recorded separately and is never copied into the intent fields."
       },
-      "caveat": "Specifications come from Emeril Everyday's own store page. That page disagrees with itself and with the Amazon title on presets and accessories, and still carries template placeholder text, so those rows are printed as conflicts (flags F-19, F-48 and F-49)."
+      "caveat": "Specifications come from Emeril Everyday's own store page. That page disagrees with itself and with the Amazon title on presets and accessories, and still carries template placeholder text, so those rows are printed as conflicts (flags F-19, F-49 and F-50)."
     },
     {
       "id": "P-04",
@@ -719,7 +719,7 @@
           "src": [
             "S61"
           ],
-          "note": "Observed 2026-11-19. Raised as flag F-45."
+          "note": "Observed 2026-11-19. Raised as flag F-44."
         },
         {
           "attr": "Price",
@@ -739,7 +739,7 @@
         "intent_source": "",
         "why_blank": "The owner has not confirmed which product the short link was meant to point at. The observed redirect target is recorded separately and is never copied into the intent fields."
       },
-      "caveat": "Amazon shows 'There is a newer model of this item' on this listing. This page covers the listing the supplied link opens (flag F-45)."
+      "caveat": "Amazon shows 'There is a newer model of this item' on this listing. This page covers the listing the supplied link opens (flag F-44)."
     },
     {
       "id": "P-05",
@@ -820,7 +820,7 @@
           "src": [
             "S62"
           ],
-          "note": "Both figures appear on the one Amazon listing; neither is chosen (flag F-52).",
+          "note": "Both figures appear on the one Amazon listing; neither is chosen (flag F-53).",
           "same_page": true
         },
         {
@@ -880,7 +880,7 @@
         "intent_source": "",
         "why_blank": "The owner has not confirmed which product the short link was meant to point at. The observed redirect target is recorded separately and is never copied into the intent fields."
       },
-      "caveat": "Amazon's 'Specification Met' list on this listing is seller-entered and not printed here (flag F-51). The listing gives two different battery figures, so both are shown below (flag F-52)."
+      "caveat": "Amazon's 'Specification Met' list on this listing is seller-entered and not printed here (flag F-52). The listing gives two different battery figures, so both are shown below (flag F-53)."
     }
   ]
 }

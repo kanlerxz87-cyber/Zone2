@@ -16,7 +16,7 @@ pages as they sit on disk and fails the build if any of the project's own rules 
   G6  every internal link resolves to a file that exists;
   G7  every page carries a canonical URL that matches its own path (head_meta contract);
   G8  no page emits a traffic, click, conversion or revenue figure;
-  G9  reader links stay in the primary navigation; owner dashboards are grouped under one
+  G9  reader links (incl. the shop) stay in the primary navigation; owner dashboards are grouped under one
       accessible Project & tools disclosure and remain reachable from the footer;
   G10 the current executive-summary product rows match the five intent records and carry
        official Amazon links, with intent fields still explicitly blank.
@@ -42,6 +42,14 @@ PAGES = [
     "guides/air-fryer-ovens.html",
     "guides/buying-guide.html".replace("buying-guide", "buying-guides"),
     "guides/method.html",
+    # T63 (session 10727edd, 2026-11-19): the reader-first pages build_front.py now writes.
+    # Same eight rules; a new page that is not on this list would be ungated.
+    "guides/meat-thermometers.html",
+    "guides/instant-read-or-wireless-thermometer.html",
+    "guides/thermometer-for-air-fryer.html",
+    "guides/multi-function-appliance-questions.html",
+    "guides/cleanup-and-counter-space.html",
+    "behind-the-site.html",
 ]
 
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
@@ -146,21 +154,22 @@ def checks() -> list[str]:
             nav = nav_match.group(1)
             reader_part = nav.split('<details class="pb-nav-tools"', 1)[0]
             got = [href for href, _ in re.findall(r'<a href="([^"]+)"[^>]*>(.*?)</a>', reader_part, re.S)]
-            # T66 (session 75efdf57, 2026-11-19): the reader menu now leads with the shop, as the
-            # owner's brief asks ("lead with products"). Journal and the article archive moved to
-            # the footer's Read column, which the footer check below still requires. The rest of
-            # this gate (one Project & tools group, every dashboard in it and in the footer) is
-            # unchanged. Logged as an integration edit in COORDINATION.md.
+            # Merged menu (T63, 10727edd, reconciling PR #166): cf98ff65's six reader links plus the
+            # Thermometers route, so the two thermometer products stay one click from every page (F-48).
+            # T66 (75efdf57, 2026-11-19): one link added - "Shop" (shop/index.html) straight after the
+            # front page - so the five product pages are one click from every page. The menu is
+            # defined once in tools/shop_layout.py and shared with the shop/ section.
             expected = [depth + x for x in (
-                "index.html", "shop/index.html", "shop/air-fryers.html",
-                "shop/meat-thermometers.html", "shop/guides/index.html", "shop/compare.html")]
+                "index.html", "shop/index.html", "marketing/buying-guide.html",
+                "guides/meat-thermometers.html", "guides/index.html", "marketing/comparison.html",
+                "journal/index.html", "marketing/index.html")]
             if got != expected:
-                fail(errors, f"G9 {rel}: reader navigation is not the expected six-link shop-first menu")
+                fail(errors, f"G9 {rel}: reader navigation is not the expected eight-link publication menu")
             if nav.count('<details class="pb-nav-tools"') != 1 or "Project &amp; tools" not in nav:
                 fail(errors, f"G9 {rel}: owner tools are not in one Project & tools disclosure group")
             tool_menu = nav.split('<div class="pb-nav-menu">', 1)[-1].split('</div>', 1)[0]
             tools = (
-                "suggestions.html", "questions.html", "brief/index.html", "intake/index.html",
+                "behind-the-site.html", "suggestions.html", "questions.html", "brief/index.html", "intake/index.html",
                 "board/index.html", "products.html", "analysis.html", "content.html",
                 "compliance.html", "tracking.html", "verification.html", "sources.html",
                 "flagged.html", "summary.html")
@@ -174,8 +183,7 @@ def checks() -> list[str]:
                 for target in ("brief/index.html", "intake/index.html", "board/index.html",
                                "products.html", "analysis.html", "content.html", "compliance.html",
                                "tracking.html", "verification.html", "sources.html", "summary.html",
-                               "journal/index.html", "marketing/index.html", "shop/index.html",
-                               "shop/briefing.html"):
+                               "shop/index.html", "shop/briefing.html"):
                     if f'href="{depth}{target}"' not in footer.group(0):
                         fail(errors, f"G9 {rel}: footer does not expose {target}")
 
@@ -185,8 +193,17 @@ def checks() -> list[str]:
                 fail(errors, "G9 index.html: buyer-question topics must be labelled as editorial hypotheses")
             if f">{proposal_count} proposals sit on the board" not in h:
                 fail(errors, "G9 index.html: suggestion count does not match the decision register")
-        if rel == "suggestions.html" and f">{proposal_count} proposals. <em>None is applied yet.</em>" not in h:
-            fail(errors, "G9 suggestions.html: headline count does not match the decision register")
+        # T63 (10727edd): "None is applied yet" stopped being true when the 2026-11-19 brief recorded
+        # owner directions on four suggestions (G5 checks each one is quoted verbatim). The headline
+        # must now state both derived counts: total proposals, and how many carry an owner direction.
+        if rel == "suggestions.html":
+            sys.path.insert(0, str(ROOT / "tools"))
+            from build_front import num_word  # the same word-renderer the page uses
+            decided = sum(1 for s in board["suggestions"] if s.get("owner_direction"))
+            want = (f">{num_word(proposal_count, cap=True)} things we could do next. "
+                    f"<em>{num_word(decided, cap=True)} decided by the owner")
+            if want not in h:
+                fail(errors, "G9 suggestions.html: headline counts do not match the decision register")
 
         # ---- G10: the five-link summary stays in sync with intent records -----
         if rel == "summary.html":
@@ -226,8 +243,24 @@ def checks() -> list[str]:
             fail(errors, f"G5 {sg['id']}: no options")
         if sg.get("recommendation") not in {o["label"] for o in sg["options"]}:
             fail(errors, f"G5 {sg['id']}: recommendation is not one of its options")
-        if "Proposed" not in sg.get("status", ""):
-            fail(errors, f"G5 {sg['id']}: status is not 'Proposed — awaiting owner decision'")
+        od = sg.get("owner_direction")
+        if od:
+            # T63 (session 10727edd): a row may read "Decided" only with a recorded owner direction
+            # whose quote is, word for word, the text of the option it names.
+            opt = next((o for o in sg["options"] if o["label"] == od.get("chosen_option")), None)
+            if not opt:
+                fail(errors, f"G5 {sg['id']}: owner_direction names an option the row does not have")
+            elif od.get("quote") != opt["text"]:
+                fail(errors, f"G5 {sg['id']}: owner_direction quote is not the option's text verbatim")
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(od.get("date", ""))) or not od.get("source"):
+                fail(errors, f"G5 {sg['id']}: owner_direction needs an ISO date and a source")
+            if not sg.get("status", "").startswith("Decided"):
+                fail(errors, f"G5 {sg['id']}: has an owner_direction but status does not say Decided")
+        else:
+            if "Proposed" not in sg.get("status", ""):
+                fail(errors, f"G5 {sg['id']}: status is not 'Proposed — awaiting owner decision'")
+            if sg.get("implemented"):
+                fail(errors, f"G5 {sg['id']}: marked implemented with no recorded owner direction")
     for q in board["questions"]:
         for field in ("what_we_know", "what_is_missing", "how_to_discover"):
             if not str(q.get(field, "")).strip():
