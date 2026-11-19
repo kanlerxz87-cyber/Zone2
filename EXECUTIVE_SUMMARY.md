@@ -1477,7 +1477,7 @@ and the [FTC disclosure guidance](https://www.ftc.gov/business-guidance/resource
 - No product/source facts were changed and no live Amazon redirect was repeated in this integration pass.
   The changed verification scope and commands are recorded in
   [`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md).
-- No pull request, merge, or GitHub Pages deployment is claimed or confirmed by this addendum.
+- PR #166 is open from `arena/cf98ff65-zone2` to `main`; no merge or GitHub Pages deployment is confirmed by this addendum.
 
 ### Next evidence to collect
 

@@ -61,4 +61,4 @@ Repository inspection also found an unresolved measurement-contract mismatch: `a
 
 ## Publication / integration status
 
-This record documents local verification only. No pull request, merge, or GitHub Pages deployment is confirmed here.
+This record documents local verification only. PR #166 is open from `arena/cf98ff65-zone2` to `main`. No merge or GitHub Pages deployment is confirmed here. T65's earlier completion note calls the supplied tag “verified and active”; this task found no authorized account evidence that confirms activation or link coverage, so the current summary marks that status unverified.

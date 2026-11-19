@@ -6972,5 +6972,5 @@ The summary change required only generated page-count refreshes (`sitemap.xml`, 
 decision-board's measured/generated outputs); no product/source facts were changed. Final local checks passed:
 workflow YAML parsing (53 build steps), conflict-marker scan, front generator freshness (9 pages), front gate,
 summary freshness and `tools/ci_replay.py` (49/49). Full details are in
-[`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md). PR, merge and deployment have not yet been
+[`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md). PR #166 is open; merge and deployment have not yet been
 confirmed.
