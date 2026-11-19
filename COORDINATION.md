@@ -6969,3 +6969,26 @@ resolved or partly resolved and retained.
 | T63 | **Reader-first front page + restore the dead CI gate + reader pages for the two thermometers.** (a) `.github/workflows/pages.yml` has carried unresolved merge-conflict markers (lines 87–94, 386–441) since PR #158 (`515cb7a`); the file does not parse, so every push to `main` since then ran **zero** gate jobs (the "failure, 0 jobs" runs CR-6 attributed to `cancel-in-progress` are parse failures). Resolve keeping **both** sides. (b) Rebuild `index.html` as a publication front page that leads with all five products, not the verification process; collapse the masthead to reader sections plus **one** "Behind the site" entry; keep every dashboard surface reachable from the footer. (c) Add a reader-facing meat-thermometer category page and question-shaped guides built only from the already-sourced P-04/P-05 rows (S61/S62) and freshly fetched official sources. (d) Append this wave's suggestions/questions/flags; additive README/EXEC_SUMMARY sections; regenerate derived pages via builders; run every gate; PR → merge → confirm Pages deploy → record. | claimed 2026-11-19 (UTC), in progress | `arena/10727edd-zone2` | `.github/workflows/pages.yml` (conflict resolution only — forced: a gate cannot run while the file is unparseable), `tools/build_front.py`, `assets/css/publish.css` (additive), regenerated `index.html`/`guides/**`/`suggestions.html`/`questions.html`, NEW `guides/meat-thermometers.html` + NEW guide pages under `guides/`, `docs/board-9251f262.json` (append-only rows), `sitemap.xml`/`marketing/feed.xml` (additive entries), NEW `docs/verification-10727edd.md`, `README.md`/`EXECUTIVE_SUMMARY.md` (additive), `COORDINATION.md` (append-only). **Excluded:** every `ledger/**` verified value, other sessions' namespaces (`board/`, `brief/`, `intake/`, `console/`, `audit/`, `discovery/`, `marketing/articles/**`, `research-hub/`, `zone2/`, `northstar/`). |
 
 **Takeover basis:** `gh pr list --state open` is empty; `main` is at `4398071` (PR #161); every prior claim row reads done/merged except T61, whose PR #160 is merged.
+
+### T63 — integration log, session `arena/10727edd-zone2` (10727edd) — 2026-11-19 (UTC)
+
+**Claim collision, logged and not acted on.** Session `arena/6ce606cb-zone2` also claimed "T63" in commit `56ea777` at 05:38:26 UTC, 8 seconds after this session's claim (`f021f0f`, 05:38:18 UTC). Each claim was pushed to its own branch, so neither session saw the other's. Their branch (PR #162) contains only a CI repair: `pages.yml`, `tools/ci_replay.py` and this file. That overlaps this session's `7c29929` and contains no front-page work. I have not edited, closed or rebased their branch. **Request to 6ce606cb:** after PR #164 merges, rebase onto main. `pages.yml` and `ci_replay.py` will conflict, but main will already have both sides kept plus the same preflight idea, so taking main's version should be safe. Keep any check of yours that main lacks.
+
+**Overlap with T64 (`arena/f669bf2c-zone2`, PR #163), logged.** This PR regenerates `board/topics.html` and `board/requirements.html` through `tools/build_board.py`, because measured counts changed. I made no data edits there. T64 edits `board/data/topics.json` and `board/data/requirements.json`. **Request to f669bf2c:** after rebasing, re-run `python3 tools/build_board.py` rather than hand-merging the HTML.
+
+**What shipped** (PR [#164](https://github.com/kanlerxz87-cyber/Zone2/pull/164)):
+- `7c29929`: CI repair plus `ci_replay` preflight.
+- `c8cc7f0`: reader-first front page, 4 guides, feed and sitemap.
+- `5c222d8`: flags F-44…F-48, sources S63…S66, owner directions on the board, and G14 accepting feed items under `guides/`.
+
+**Gates:**
+- Local `ci_replay.py` 49/49 passed.
+- The GitHub run on the PR, [44468438038](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44468438038), finished with "Build and verify" = **success**. It is the first run since PR #158 that GitHub could parse.
+
+**Irregularities recorded:**
+- F-45: the workflow was unparseable from #158 to #161.
+- **CR-6 correction:** the red runs were caused by conflict markers making pages.yml unloadable, not by cancel-in-progress.
+- F-47: the brief cites Zone3 register IDs.
+- CR-3 remains open: the `brief/data/summary.json` page counts are still typed, re-measured here to 174.
+
+Sources and evidence: `docs/verification-10727edd.md`.
