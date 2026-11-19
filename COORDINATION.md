@@ -7511,3 +7511,11 @@ keep the exact owner-supplied ID, and prove ordinary current links remain byte-f
 other open branch claims that file; T67 retained canonical main rather than applying its earlier variant.
 This is a defect repair, not approval of a new campaign, tag, experiment or report. Independent redirect
 observations remain separate evidence and are not copied into current product intent.
+
+Narrow helper follow-up completed: `subtag` synthesis and nonempty `extra_params` now fail closed;
+normal current reader URLs remain identical and the tag must full-match its syntax (no trailing newline).
+Seven dedicated synthetic tests and the existing platform tests passed; the existing regression step
+runs the new tests without dropping any price test or changing the 61-step count. CN-10 retains the
+finding. Flags also link T67's independent last-two-link variation, without changing product intent or
+current observations. Fresh source/artifact gate passes with 138 current factual rows. Full follow-up
+CI/Pages checks will run on the closing PR, not be inferred from #174 or T67's earlier runs.

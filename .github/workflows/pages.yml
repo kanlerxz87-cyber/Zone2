@@ -517,8 +517,8 @@ jobs:
       - name: Event client privacy and behavior tests
         run: node tests/test_events.cjs
 
-      - name: Price guard regressions (all six repaired copies)
-        run: python3 tests/test_price_guards.py
+      - name: Price and issued-tag guard regressions
+        run: python3 tests/test_price_guards.py && python3 tests/test_link_policy.py
 
       - name: Publication data and packaging mutation tests
         run: python3 tests/test_publication.py

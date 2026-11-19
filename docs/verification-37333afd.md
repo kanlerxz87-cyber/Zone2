@@ -265,3 +265,21 @@ Permanent writable hosting, enrolled Associates validation, intended-product con
 query/order exports, Search Console ownership, accountable human/contact details and jurisdictional
 privacy review remain open. So do CN-08 (administrator-only sole-publisher setting) and CN-09 (runtime
 advisory review). No credentials, manual answer, self-click or self-purchase was requested or generated.
+
+### Exact-issued-ID helper follow-up and independent observations
+
+T67's independent record preserved an unused helper defect: optional `subtag` concatenated a made-up
+suffix onto an issued Associates ID, while `extra_params` could replace the tag. The current publication
+never used either option. The helper now rejects both paths (and a newline-terminated tag), preserving
+ordinary current URLs byte-for-byte. **Seven dedicated synthetic tests passed**, including static and
+per-reader sub-tags, attribution overrides, competing/unreviewed dimensions, empty legacy options and
+exact normal-link output. They make no Amazon request and authenticate no account. The existing CI
+regression step runs these alongside all six price guards; there are still 61 executable steps.
+CN-10 retains the repaired finding. No new campaign or issued identifier is invented.
+
+Main's subsequent PR #175 (`7841845`) added only T67's dated independent observations and coordination;
+that work is retained. Its initial/repeat variation for the last two short links remains explicitly
+separate from this publication's dated observation and from all intended-product fields. The Flagged
+page links `docs/source-observations-33e03d63.json`; no cause, stable routing or link-invalidity conclusion
+is inferred. The follow-up artifact now has **138** current factual rows; page, sitemap, static-anchor
+and viewport totals are unchanged from the primary release.
