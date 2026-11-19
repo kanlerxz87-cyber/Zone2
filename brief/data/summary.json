@@ -30,7 +30,7 @@
     },
     {
       "metric": "Published pages carrying an Associates tag",
-      "value": "7 of 168",
+      "value": "10 of 175",
       "source_ids": [
         "BR-10"
       ],
@@ -38,14 +38,14 @@
     },
     {
       "metric": "Published pages carrying the exact §5 disclosure sentence",
-      "value": "168 of 168",
+      "value": "175 of 175",
       "source_ids": [
         "BR-05"
       ]
     },
     {
       "metric": "Published pages printing a product price",
-      "value": "0 of 168",
+      "value": "0 of 175",
       "source_ids": [
         "BR-01"
       ],
@@ -110,7 +110,7 @@
   },
   "what_is_settled": [
     "The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).",
-    "The evidence discipline holds at scale: 168 of 168 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
+    "The evidence discipline holds at scale: 175 of 175 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
     "The machinery is trustworthy: {{gate_count}} of {{gate_count}} workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
     "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit."
   ],

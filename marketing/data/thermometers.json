@@ -7,11 +7,48 @@
     "P5": "ledger/products.json entry P-05 (submitted https://link.amazon/B0f3GKalj; observed redirect target https://www.amazon.com/dp/B0DZFD6R9Z; intent UNCONFIRMED)"
   },
   "sources": [
-    {"id": "T1", "kind": "marketplace", "label": "Amazon listing", "name": "Amazon US listing — ThermoMaven 1 Sec Professional Digital Meat Thermometer (ASIN B0DHZTCNR5)", "url": "https://www.amazon.com/dp/B0DHZTCNR5", "ledger_id": "S61", "read_utc": "2026-11-19"},
-    {"id": "T2", "kind": "marketplace", "label": "Amazon listing", "name": "Amazon US listing — CHEF iQ Sense Smart Wireless Meat Thermometer, 3 probes (ASIN B0DZFD6R9Z)", "url": "https://www.amazon.com/dp/B0DZFD6R9Z", "ledger_id": "S62", "read_utc": "2026-11-19"},
-    {"id": "T3", "kind": "government", "label": "USDA FSIS", "name": "USDA Food Safety and Inspection Service — Food Thermometers", "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers", "read_utc": "2026-11-19"},
-    {"id": "T4", "kind": "government", "label": "USDA FSIS", "name": "USDA Food Safety and Inspection Service — Safe Minimum Internal Temperature Chart (last updated Apr 14, 2025)", "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "read_utc": "2026-11-19"},
-    {"id": "T5", "kind": "government", "label": "USDA FSIS", "name": "USDA Food Safety and Inspection Service — Air Fryers and Food Safety (last updated Jun 24, 2024)", "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers-and-food-safety", "read_utc": "2026-11-19"}
+    {
+      "id": "T1",
+      "kind": "marketplace",
+      "label": "Amazon listing",
+      "name": "Amazon US listing — ThermoMaven 1 Sec Professional Digital Meat Thermometer (ASIN B0DHZTCNR5)",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "ledger_id": "S61",
+      "read_utc": "2026-11-19"
+    },
+    {
+      "id": "T2",
+      "kind": "marketplace",
+      "label": "Amazon listing",
+      "name": "Amazon US listing — CHEF iQ Sense Smart Wireless Meat Thermometer, 3 probes (ASIN B0DZFD6R9Z)",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "ledger_id": "S62",
+      "read_utc": "2026-11-19"
+    },
+    {
+      "id": "T3",
+      "kind": "government",
+      "label": "USDA FSIS",
+      "name": "USDA Food Safety and Inspection Service — Food Thermometers",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
+      "read_utc": "2026-11-19"
+    },
+    {
+      "id": "T4",
+      "kind": "government",
+      "label": "USDA FSIS",
+      "name": "USDA Food Safety and Inspection Service — Safe Minimum Internal Temperature Chart (last updated Apr 14, 2025)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+      "read_utc": "2026-11-19"
+    },
+    {
+      "id": "T5",
+      "kind": "government",
+      "label": "USDA FSIS",
+      "name": "USDA Food Safety and Inspection Service — Air Fryers and Food Safety (last updated Jun 24, 2024)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers-and-food-safety",
+      "read_utc": "2026-11-19"
+    }
   ],
   "products": [
     {
@@ -26,28 +63,130 @@
       "headline": "The one you push in at the end and read in a second",
       "note": "A thermocouple probe with a 6.5-inch reach and a 572 °F ceiling. It answers one question — is it done? — fast.",
       "title_official": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
-      "category_path": "Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat",
       "rows": [
-        {"attr": "Type", "value": "Instant-read digital probe", "detail": "About this item: 'this instant-read thermometer gets accurate temperature readings in just 1 second'.", "status": "verified", "src": "T1"},
-        {"attr": "Sensor", "value": "Thermocouple", "detail": "About this item: 'Featuring a top-tier Thermocouple sensor'.", "status": "verified", "src": "T1"},
-        {"attr": "Reading time", "value": "1 second", "detail": "Product information › Features & Specs: 'Response Time: 1 seconds'. The brand's figure; nobody on this site has timed it.", "status": "verified", "src": "T1"},
-        {"attr": "Accuracy", "value": "±0.5 °F", "detail": "About this item: 'a National Institute of Standards and Technology (NIST) certification for its ±0.5℉ accuracy'.", "status": "verified", "src": "T1"},
-        {"attr": "Heat rating", "value": "572 °F", "detail": "Product information › Features & Specs: 'Upper Temperature Range: 572 °F'.", "status": "verified", "src": "T1"},
-        {"attr": "Resolution", "value": "0.1°", "detail": "Product information › Features & Specs: 'Resolution: 0.1°'.", "status": "verified", "src": "T1"},
-        {"attr": "Probe reach", "value": "6.5 in", "detail": "Product information: 'Immersion Depth: 6.5 inches'; Measurements: 'Item Length: 6.5 inches'.", "status": "verified", "src": "T1"},
-        {"attr": "Display", "value": "LED screen, auto-rotating", "detail": "About this item: 'innovative LED screen'; 'The auto-rotating display makes it accessible for both right-handed and left-handed users'.", "status": "verified", "src": "T1"},
-        {"attr": "Wake and sleep", "value": "Motion-activated", "detail": "About this item: 'a responsive motion-sensing mechanism for quick wake-up and energy-saving sleep'.", "status": "verified", "src": "T1"},
-        {"attr": "Water and cleaning", "value": "Waterproof; rinse under water", "detail": "About this item: 'Fully Waterproof … simply rinse under water'. The Materials & Care field says 'Wipe Clean'. Both are on the page; neither says dishwasher-safe.", "status": "verified", "src": "T1"},
-        {"attr": "Power", "value": "1 AAA battery, included", "detail": "Product information: 'Number of Batteries: 1 AAA batteries required. (included)'.", "status": "verified", "src": "T1"},
-        {"attr": "In the box", "value": "Thermometer, AAA battery, user manual, calibration certificate", "detail": "Included Components: '1*Meat Thermometer, 1*AAA Battery, 1*User Manual, 1*Calibration Certificate'.", "status": "verified", "src": "T1"},
-        {"attr": "Standards listed", "value": "NIST, NSF", "detail": "User guide › 'Specification Met: NIST, NSF'.", "status": "verified", "src": "T1"},
-        {"attr": "Model", "value": "HT07", "detail": "Item details: 'Model Name: HT07'; 'Part Number: HT07'.", "status": "verified", "src": "T1"},
-        {"attr": "Can it stay in food while cooking?", "status": "unverified", "blank_reason": "The listing never says the probe may remain in food during cooking. USDA FSIS: do not leave a thermometer in food while cooking unless the manufacturer's instructions say it is designed for it — so we print a dash, not a yes.", "src_note": "T1, T3"},
-        {"attr": "Warranty term", "status": "unverified", "blank_reason": "The listing says only that the manufacturer's warranty 'can be requested from customer service'. No term is stated, so none is printed."}
+        {
+          "attr": "Type",
+          "value": "Instant-read digital probe",
+          "detail": "About this item: 'this instant-read thermometer gets accurate temperature readings in just 1 second'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Sensor",
+          "value": "Thermocouple",
+          "detail": "About this item: 'Featuring a top-tier Thermocouple sensor'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Reading time",
+          "value": "1 second",
+          "detail": "Product information › Features & Specs: 'Response Time: 1 seconds'. The brand's figure; nobody on this site has timed it.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Accuracy",
+          "value": "±0.5 °F",
+          "detail": "About this item: 'a National Institute of Standards and Technology (NIST) certification for its ±0.5℉ accuracy'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Heat rating",
+          "value": "572 °F",
+          "detail": "Product information › Features & Specs: 'Upper Temperature Range: 572 °F'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Resolution",
+          "value": "0.1°",
+          "detail": "Product information › Features & Specs: 'Resolution: 0.1°'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Probe reach",
+          "value": "6.5 in",
+          "detail": "Product information: 'Immersion Depth: 6.5 inches'; Measurements: 'Item Length: 6.5 inches'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Display",
+          "value": "LED screen, auto-rotating",
+          "detail": "About this item: 'innovative LED screen'; 'The auto-rotating display makes it accessible for both right-handed and left-handed users'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Wake and sleep",
+          "value": "Motion-activated",
+          "detail": "About this item: 'a responsive motion-sensing mechanism for quick wake-up and energy-saving sleep'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Water and cleaning",
+          "value": "Waterproof; rinse under water",
+          "detail": "About this item: 'Fully Waterproof … simply rinse under water'. The Materials & Care field says 'Wipe Clean'. Both are on the page; neither says dishwasher-safe.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Power",
+          "value": "1 AAA battery, included",
+          "detail": "Product information: 'Number of Batteries: 1 AAA batteries required. (included)'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "In the box",
+          "value": "Thermometer, AAA battery, user manual, calibration certificate",
+          "detail": "Included Components: '1*Meat Thermometer, 1*AAA Battery, 1*User Manual, 1*Calibration Certificate'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Standards listed",
+          "value": "NIST, NSF",
+          "detail": "User guide › 'Specification Met: NIST, NSF'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Model",
+          "value": "HT07",
+          "detail": "Item details: 'Model Name: HT07'; 'Part Number: HT07'.",
+          "status": "verified",
+          "src": "T1"
+        },
+        {
+          "attr": "Can it stay in food while cooking?",
+          "status": "unverified",
+          "blank_reason": "The listing never says the probe may remain in food during cooking. USDA FSIS: do not leave a thermometer in food while cooking unless the manufacturer's instructions say it is designed for it — so we print a dash, not a yes.",
+          "src_note": "T1, T3"
+        },
+        {
+          "attr": "Warranty term",
+          "status": "unverified",
+          "blank_reason": "The listing says only that the manufacturer's warranty 'can be requested from customer service'. No term is stated, so none is printed."
+        }
       ],
       "before_you_buy": [
-        {"text": "The listing carries an Amazon banner reading 'There is a newer model of this item', pointing to a different ASIN (B0GL7Z4KP4, an orange colourway of the same title). Our link opens the black HT07 listing the supplied short link resolved to; whether the brief meant this model or the newer one is an open question for the owner (question Q-21).", "src": ["T1"]},
-        {"text": "The supplied short link was re-opened on 2026-11-19 and still resolves to this listing. That proves where the link goes, not which product the brief intended (flag F-03).", "src": ["T1"]}
+        {
+          "text": "The listing carries an Amazon banner reading 'There is a newer model of this item', pointing to a different ASIN (B0GL7Z4KP4, an orange colourway of the same title). Our link opens the black HT07 listing the supplied short link resolved to; whether the brief meant this model or the newer one is an open question for the owner (question Q-21).",
+          "src": [
+            "T1"
+          ]
+        },
+        {
+          "text": "The supplied short link was re-opened on 2026-11-19 and still resolves to this listing. That proves where the link goes, not which product the brief intended (flag F-03).",
+          "src": [
+            "T1"
+          ]
+        }
       ]
     },
     {
@@ -62,26 +201,117 @@
       "headline": "The one you push in at the start and watch from your phone",
       "note": "Three wireless probes rated to 1000 °F, a hub with a speaker, and an app instead of a screen. It answers a different question — how far along is it?",
       "title_official": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
-      "category_path": "Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat",
       "rows": [
-        {"attr": "Type", "value": "Wireless leave-in probe with app", "detail": "Title: 'Smart Wireless Meat Thermometer'; About this item: 'real-time internal temperature updates'.", "status": "verified", "src": "T2"},
-        {"attr": "Probes in this listing", "value": "3", "detail": "Title: '3 Ultra-Thin Probes'; Included Components: '3 Probes, Hub'. The same page also sells 1-, 2- and 4-probe sizes; our link opens the 3-probe size.", "status": "verified", "src": "T2"},
-        {"attr": "Sensors", "value": "5 (4 internal + 1 ambient)", "detail": "About this item: '4 internal temperature sensors. Additionally, an ambient sensor tracks your cooking environment’s temp'.", "status": "verified", "src": "T2"},
-        {"attr": "Heat rating", "value": "1000 °F", "detail": "About this item: 'built to endure 1000°F heat'; Features & Specs: 'Upper Temperature Range: 1000 °F'.", "status": "verified", "src": "T2"},
-        {"attr": "Probe length", "value": "4.75 in", "detail": "Features & Specs: 'Immersion Depth: 4.75 inches'; Measurements: 'Item Length: 4.75 inches'.", "status": "verified", "src": "T2"},
-        {"attr": "Display", "value": "App (no screen on the probe)", "detail": "Features & Specs: 'Display Type: App'.", "status": "verified", "src": "T2"},
-        {"attr": "Connectivity", "value": "Wi-Fi and Bluetooth", "detail": "Features & Specs: 'Connectivity Technology: Bluetooth, Wi Fi'; title: 'WiFi Unlimited Range'.", "status": "verified", "src": "T2"},
-        {"attr": "Hub", "value": "Speaker alerts, phone push notifications, charges all 3 probes at once", "detail": "About this item: 'The Smart Hub features a speaker for audio notifications as well as push notifications on your phone'; 'The hub can charge all three probes simultaneously'.", "status": "verified", "src": "T2"},
-        {"attr": "Battery", "value": "Rechargeable; up to 50 hours per charge", "detail": "Features & Specs: 'Reusability: Rechargeable'; About this item: 'running for up to 50 hours on a full charge'. The 2026-11-17 ledger read also recorded a 70-hour figure in the Product Description (a conflict on one page); on 2026-11-19 that section rendered as images and could not be re-read as text, so only the 50-hour statement is printed.", "status": "partial", "src": "T2"},
-        {"attr": "Probe care", "value": "Waterproof, dishwasher-safe probes", "detail": "About this item: 'Waterproof and dishwasher-safe probes'.", "status": "verified", "src": "T2"},
-        {"attr": "Uses named in the title", "value": "BBQ, grill, oven, smoker, air fryer", "detail": "Quoted from the listing title.", "status": "verified", "src": "T2"},
-        {"attr": "Warranty term", "value": "2 years (About this item) / 3 years (Item details)", "detail": "About this item: 'a two-year assurance provided by CHEF iQ'. Item details: 'Warranty Description: 3 Year'. Two statements on the same page disagree; both are printed and neither is chosen (question Q-22).", "status": "conflict", "src": "T2"},
-        {"attr": "Model", "value": "CQ60-3C-Z1-E", "detail": "Item details: 'Model: CQ60-3C-Z1-E'; 'Part Number: CQ60-3C-Z1-E'.", "status": "verified", "src": "T2"},
-        {"attr": "Accuracy", "status": "unverified", "blank_reason": "Not stated in the listing's text on 2026-11-19. The 2026-11-17 ledger read recorded 'within 1 °F' from the Product Description, which now renders as images; a figure we could not re-read today is not reprinted."}
+        {
+          "attr": "Type",
+          "value": "Wireless leave-in probe with app",
+          "detail": "Title: 'Smart Wireless Meat Thermometer'; About this item: 'real-time internal temperature updates'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Probes in this listing",
+          "value": "3",
+          "detail": "Title: '3 Ultra-Thin Probes'; Included Components: '3 Probes, Hub'. The same page also sells 1-, 2- and 4-probe sizes; our link opens the 3-probe size.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Sensors",
+          "value": "5 (4 internal + 1 ambient)",
+          "detail": "About this item: '4 internal temperature sensors. Additionally, an ambient sensor tracks your cooking environment’s temp'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Heat rating",
+          "value": "1000 °F",
+          "detail": "About this item: 'built to endure 1000°F heat'; Features & Specs: 'Upper Temperature Range: 1000 °F'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Probe length",
+          "value": "4.75 in",
+          "detail": "Features & Specs: 'Immersion Depth: 4.75 inches'; Measurements: 'Item Length: 4.75 inches'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Display",
+          "value": "App (no screen on the probe)",
+          "detail": "Features & Specs: 'Display Type: App'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Connectivity",
+          "value": "Wi-Fi and Bluetooth",
+          "detail": "Features & Specs: 'Connectivity Technology: Bluetooth, Wi Fi'; title: 'WiFi Unlimited Range'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Hub",
+          "value": "Speaker alerts, phone push notifications, charges all 3 probes at once",
+          "detail": "About this item: 'The Smart Hub features a speaker for audio notifications as well as push notifications on your phone'; 'The hub can charge all three probes simultaneously'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Battery",
+          "value": "Rechargeable; up to 50 hours per charge",
+          "detail": "Features & Specs: 'Reusability: Rechargeable'; About this item: 'running for up to 50 hours on a full charge'. The 2026-11-17 ledger read also recorded a 70-hour figure in the Product Description (a conflict on one page); on 2026-11-19 that section rendered as images and could not be re-read as text, so only the 50-hour statement is printed.",
+          "status": "partial",
+          "src": "T2"
+        },
+        {
+          "attr": "Probe care",
+          "value": "Waterproof, dishwasher-safe probes",
+          "detail": "About this item: 'Waterproof and dishwasher-safe probes'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Uses named in the title",
+          "value": "BBQ, grill, oven, smoker, air fryer",
+          "detail": "Quoted from the listing title.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Warranty term",
+          "value": "2 years (About this item) / 3 years (Item details)",
+          "detail": "About this item: 'a two-year assurance provided by CHEF iQ'. Item details: 'Warranty Description: 3 Year'. Two statements on the same page disagree; both are printed and neither is chosen (question Q-22).",
+          "status": "conflict",
+          "src": "T2"
+        },
+        {
+          "attr": "Model",
+          "value": "CQ60-3C-Z1-E",
+          "detail": "Item details: 'Model: CQ60-3C-Z1-E'; 'Part Number: CQ60-3C-Z1-E'.",
+          "status": "verified",
+          "src": "T2"
+        },
+        {
+          "attr": "Accuracy",
+          "status": "unverified",
+          "blank_reason": "Not stated in the listing's text on 2026-11-19. The 2026-11-17 ledger read recorded 'within 1 °F' from the Product Description, which now renders as images; a figure we could not re-read today is not reprinted."
+        }
       ],
       "before_you_buy": [
-        {"text": "This is a multi-size listing: 1, 2, 3 and 4 probes are sold from the same page, and the size selector changes what you buy. Our link opens the 3-probe size, which is the size the supplied short link resolved to on 2026-11-19 (question Q-22).", "src": ["T2"]},
-        {"text": "The listing states the warranty two ways — a two-year assurance in About this item and '3 Year' in Item details. Ask the seller which applies before you rely on either.", "src": ["T2"]}
+        {
+          "text": "This is a multi-size listing: 1, 2, 3 and 4 probes are sold from the same page, and the size selector changes what you buy. Our link opens the 3-probe size, which is the size the supplied short link resolved to on 2026-11-19 (question Q-22).",
+          "src": [
+            "T2"
+          ]
+        },
+        {
+          "text": "The listing states the warranty two ways — a two-year assurance in About this item and '3 Year' in Item details. Ask the seller which applies before you rely on either.",
+          "src": [
+            "T2"
+          ]
+        }
       ]
     }
   ],
@@ -98,33 +328,95 @@
         {
           "h2": "The split, in USDA's words",
           "blocks": [
-            {"kind": "prose", "html": "The food-safety agency's thermometer table separates designs that stay in the food from designs that do not. Wireless and smart thermometers are, in its words, designed to remain in the food while it is cooking, go at least 1 inch deep into the thickest part, and provide live status on the internal temperature. Thermocouples give the fastest reading — 2 to 5 seconds in the same table — and are not designed to remain in the food while it cooks.", "src": ["T3"]},
-            {"kind": "prose", "html": "The two listings on this site land on opposite sides of that line. The ThermoMaven page describes a thermocouple sensor and a 1-second reading. The CHEF iQ Sense page describes a wireless probe that sends real-time internal temperature to an app.", "src": ["T1", "T2"]},
-            {"kind": "take", "html": "The ThermoMaven's 1 second is the brand's own number, and USDA's generic table says 2 to 5 seconds for the type. We have not timed it. Either way, both are fast enough that speed is not the thing to decide on."}
+            {
+              "kind": "prose",
+              "html": "The food-safety agency's thermometer table separates designs that stay in the food from designs that do not. Wireless and smart thermometers are, in its words, designed to remain in the food while it is cooking, go at least 1 inch deep into the thickest part, and provide live status on the internal temperature. Thermocouples give the fastest reading — 2 to 5 seconds in the same table — and are not designed to remain in the food while it cooks.",
+              "src": [
+                "T3"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "The two listings on this site land on opposite sides of that line. The ThermoMaven page describes a thermocouple sensor and a 1-second reading. The CHEF iQ Sense page describes a wireless probe that sends real-time internal temperature to an app.",
+              "src": [
+                "T1",
+                "T2"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "The ThermoMaven's 1 second is the brand's own number, and USDA's generic table says 2 to 5 seconds for the type. We have not timed it. Either way, both are fast enough that speed is not the thing to decide on."
+            }
           ]
         },
         {
           "h2": "Side by side",
           "blocks": [
-            {"kind": "compare", "rows": ["Type", "Sensor", "Reading time", "Accuracy", "Heat rating", "Probe reach|Probe length", "Display", "Connectivity", "Power|Battery", "Water and cleaning|Probe care", "Warranty term", "Model"], "caption": "Every cell is transcribed from the listing linked beside it on 2026-11-19. A dash means the listing does not state the value; the reason sits under it."}
+            {
+              "kind": "compare",
+              "rows": [
+                "Type",
+                "Sensor",
+                "Reading time",
+                "Accuracy",
+                "Heat rating",
+                "Probe reach|Probe length",
+                "Display",
+                "Connectivity",
+                "Power|Battery",
+                "Water and cleaning|Probe care",
+                "Warranty term",
+                "Model"
+              ],
+              "caption": "Every cell is transcribed from the listing linked beside it on 2026-11-19. A dash means the listing does not state the value; the reason sits under it."
+            }
           ]
         },
         {
           "h2": "Which question are you asking?",
           "blocks": [
-            {"kind": "list", "items": ["'Is this done?' — at the end of cooking, across many foods: USDA's table describes the fast-reading types for checking internal temperature near the end of the cooking time.", "'How far along is it?' — over a long cook, without opening the door: USDA's table describes wireless and smart probes as designed to stay in the food and report live."], "src": ["T3"]},
-            {"kind": "prose", "html": "For thin food — a burger, a chop, a thin chicken breast — USDA says to insert the probe through the side so the sensing area reaches the centre. That is a job for a probe you hold, not one you leave in.", "src": ["T3"]},
-            {"kind": "take", "html": "Mostly weeknight chops, burgers and fillets: the instant-read covers it. Roasts, birds and long smokes where you hate opening the door: the leave-in probe is the one that changes how you cook. Owning one of each is a reasonable answer, not a cop-out: they do different jobs."}
+            {
+              "kind": "list",
+              "items": [
+                "'Is this done?' — at the end of cooking, across many foods: USDA's table describes the fast-reading types for checking internal temperature near the end of the cooking time.",
+                "'How far along is it?' — over a long cook, without opening the door: USDA's table describes wireless and smart probes as designed to stay in the food and report live."
+              ],
+              "src": [
+                "T3"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "For thin food — a burger, a chop, a thin chicken breast — USDA says to insert the probe through the side so the sensing area reaches the centre. That is a job for a probe you hold, not one you leave in.",
+              "src": [
+                "T3"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "Mostly weeknight chops, burgers and fillets: the instant-read covers it. Roasts, birds and long smokes where you hate opening the door: the leave-in probe is the one that changes how you cook. Owning one of each is a reasonable answer, not a cop-out: they do different jobs."
+            }
           ]
         },
         {
           "h2": "Two things on the listings to check before you order",
           "blocks": [
-            {"kind": "prose", "html": "The ThermoMaven page shows an Amazon banner saying a newer model of the item exists. The CHEF iQ page sells 1-, 2-, 3- and 4-probe sizes from one listing and states its warranty two different ways. None of that changes a specification above, but each one changes what you might end up with.", "src": ["T1", "T2"]}
+            {
+              "kind": "prose",
+              "html": "The ThermoMaven page shows an Amazon banner saying a newer model of the item exists. The CHEF iQ page sells 1-, 2-, 3- and 4-probe sizes from one listing and states its warranty two different ways. None of that changes a specification above, but each one changes what you might end up with.",
+              "src": [
+                "T1",
+                "T2"
+              ]
+            }
           ]
         }
       ],
-      "related": ["thermometer-for-air-fryer.html", "where-to-put-the-thermometer-in-a-turkey.html", "is-my-meat-thermometer-accurate.html"]
+      "related": [
+        "thermometer-for-air-fryer.html",
+        "where-to-put-the-thermometer-in-a-turkey.html",
+        "is-my-meat-thermometer-accurate.html"
+      ]
     },
     {
       "slug": "thermometer-for-air-fryer.html",
@@ -132,40 +424,110 @@
       "kicker": "Air fryers",
       "target_query": "do you need a meat thermometer for an air fryer",
       "intent": "informational",
-      "meta_description": "USDA says yes, plainly: whatever the appliance, check the inside with a food thermometer. The temperatures to look for, why basket size matters, and which of our two thermometers suits an air fryer.",
-      "hook": "USDA's answer is yes, and it is not hedged: whatever the appliance, check the inside with a food thermometer. Here is what its air-fryer page actually says, the numbers to look for, and which of the two thermometers on this site suits a basket.",
+      "meta_description": "USDA says yes, plainly: always check that food has reached a safe internal temperature with a food thermometer. The temperatures to look for, why basket size matters, and which of our two thermometers suits an air fryer.",
+      "hook": "USDA's answer is yes, and it is not hedged: always check that food has reached a safe minimum internal temperature with a food thermometer. Here is what its air-fryer page actually says, the numbers to look for, and which of the two thermometers on this site suits a basket.",
       "sections": [
         {
           "h2": "What USDA says about air fryers, specifically",
           "blocks": [
-            {"kind": "prose", "html": "USDA's air-fryer page says foods generally need 5 to 25 minutes at 350 to 400 °F, and then, without qualification: always check that food has reached a safe minimum internal temperature with a food thermometer.", "src": ["T5"]},
-            {"kind": "prose", "html": "It gives two reasons a timer is not enough. Overfilling the basket can cause uneven cooking and undercooking. And each air fryer has different cooking times because of its size and power — but the safe internal temperature is always the same.", "src": ["T5"]},
-            {"kind": "prose", "html": "One instruction is a flat no: do not cook raw, stuffed, breaded chicken breast products in the air fryer; follow the manufacturer's cooking instructions instead.", "src": ["T5"]}
+            {
+              "kind": "prose",
+              "html": "USDA's air-fryer page says foods generally need 5 to 25 minutes at 350 to 400 °F, and then, without qualification: always check that food has reached a safe minimum internal temperature with a food thermometer.",
+              "src": [
+                "T5"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "It gives two reasons a timer is not enough. Overfilling the basket can cause uneven cooking and undercooking. And each air fryer has different cooking times because of its size and power — but the safe internal temperature is always the same.",
+              "src": [
+                "T5"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "One instruction is a flat no: do not cook raw, stuffed, breaded chicken breast products in the air fryer; follow the manufacturer's cooking instructions instead.",
+              "src": [
+                "T5"
+              ]
+            }
           ]
         },
         {
           "h2": "The numbers to look for",
           "blocks": [
-            {"kind": "temps", "rows": ["poultry", "ground", "whole_cuts", "fish", "leftovers"], "caption": "USDA's safe minimum internal temperatures, as measured with a food thermometer before removing food from the heat. Copied from the chart linked in each row."},
-            {"kind": "prose", "html": "Colour does not settle it. USDA's thermometer page says a hamburger cooked to 160 °F, as measured with a food thermometer, is safe regardless of colour — and that ground beef can brown on the outside before it reaches a safe temperature.", "src": ["T3"]}
+            {
+              "kind": "temps",
+              "rows": [
+                "poultry",
+                "ground",
+                "whole_cuts",
+                "fish",
+                "leftovers"
+              ],
+              "caption": "USDA's safe minimum internal temperatures, as measured with a food thermometer before removing food from the heat. Copied from the chart linked in each row."
+            },
+            {
+              "kind": "prose",
+              "html": "Colour does not settle it. USDA's thermometer page says a hamburger cooked to 160 °F, as measured with a food thermometer, is safe regardless of colour — and that ground beef can brown on the outside before it reaches a safe temperature.",
+              "src": [
+                "T3"
+              ]
+            }
           ]
         },
         {
           "h2": "Which of our two thermometers suits a basket",
           "blocks": [
-            {"kind": "prose", "html": "The CHEF iQ Sense listing names the air fryer in its title among the cooking methods it is for, and rates its probe to 1000 °F.", "src": ["T2"]},
-            {"kind": "prose", "html": "The ThermoMaven listing does not say its probe may stay in food while cooking, and USDA advises against leaving a thermometer in food unless the manufacturer's instructions say it is built for that. With the ThermoMaven, pull the basket and check at the end.", "src": ["T1", "T3"]},
-            {"kind": "take", "html": "In a basket fryer, checking at the end costs you five seconds — the basket already slides out. A leave-in probe earns its keep on the long cooks in an oven-style machine, where you would rather not keep opening the door."}
+            {
+              "kind": "prose",
+              "html": "The CHEF iQ Sense listing names the air fryer in its title among the cooking methods it is for, and rates its probe to 1000 °F.",
+              "src": [
+                "T2"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "The ThermoMaven listing does not say its probe may stay in food while cooking, and USDA advises against leaving a thermometer in food unless the manufacturer's instructions say it is built for that. With the ThermoMaven, pull the basket and check at the end.",
+              "src": [
+                "T1",
+                "T3"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "In a basket fryer, checking at the end costs you five seconds — the basket already slides out. A leave-in probe earns its keep on the long cooks in an oven-style machine, where you would rather not keep opening the door."
+            }
           ]
         }
       ],
       "cross_links": [
-        ["../articles/p1.html", "Chefman TurboFry Touch 6 Qt Dual-Window", "Two baskets that finish together."],
-        ["../articles/p3.html", "Chefman TurboFry Touch 8 Qt", "One big basket, four presets."],
-        ["../articles/p2.html", "Emeril Lagasse French Door AirFryer 360", "An oven that air fries, with doors."],
-        ["../topics/how-many-quarts-do-you-need.html", "How many quarts of air fryer do you actually need?", "The capacity guide."]
+        [
+          "../articles/p1.html",
+          "Chefman TurboFry Touch 6 Qt Dual-Window",
+          "Two baskets that finish together."
+        ],
+        [
+          "../articles/p3.html",
+          "Chefman TurboFry Touch 8 Qt",
+          "One big basket, four presets."
+        ],
+        [
+          "../articles/p2.html",
+          "Emeril Lagasse French Door AirFryer 360",
+          "An oven that air fries, with doors."
+        ],
+        [
+          "../topics/how-many-quarts-do-you-need.html",
+          "How many quarts of air fryer do you actually need?",
+          "The capacity guide."
+        ]
       ],
-      "related": ["instant-read-or-leave-in.html", "where-to-put-the-thermometer-in-a-turkey.html", "is-my-meat-thermometer-accurate.html"]
+      "related": [
+        "instant-read-or-leave-in.html",
+        "where-to-put-the-thermometer-in-a-turkey.html",
+        "is-my-meat-thermometer-accurate.html"
+      ]
     },
     {
       "slug": "where-to-put-the-thermometer-in-a-turkey.html",
@@ -179,40 +541,105 @@
         {
           "h2": "The three places",
           "blocks": [
-            {"kind": "list", "items": ["The innermost part of the thigh.", "The innermost part of the wing.", "The thickest part of the breast.", "In all three: avoid the bone."], "src": ["T3"]},
-            {"kind": "prose", "html": "All poultry — whole bird, breasts, legs, thighs, wings, giblets and stuffing — has the same safe minimum internal temperature on USDA's chart: 165 °F (73.9 °C).", "src": ["T4"]},
-            {"kind": "prose", "html": "On stuffing, USDA is direct: for optimum safety, do not stuff a whole bird. If you do, the centre of the stuffing must also reach 165 °F.", "src": ["T3"]}
+            {
+              "kind": "list",
+              "items": [
+                "The innermost part of the thigh.",
+                "The innermost part of the wing.",
+                "The thickest part of the breast.",
+                "In all three: avoid the bone."
+              ],
+              "src": [
+                "T3"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "All poultry — whole bird, breasts, legs, thighs, wings, giblets and stuffing — has the same safe minimum internal temperature on USDA's chart: 165 °F (73.9 °C).",
+              "src": [
+                "T4"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "On stuffing, USDA is direct: for optimum safety, do not stuff a whole bird. If you do, the centre of the stuffing must also reach 165 °F.",
+              "src": [
+                "T3"
+              ]
+            }
           ]
         },
         {
           "h2": "Why three, and not one",
           "blocks": [
-            {"kind": "prose", "html": "USDA says a reading is only correct if the thermometer sits in the right place, and that large or irregularly shaped food should be checked in several places, because pieces reach a safe temperature at different times.", "src": ["T3"]},
-            {"kind": "take", "html": "A turkey is the most irregular shape most people ever cook. One reading in the breast tells you about the breast."}
+            {
+              "kind": "prose",
+              "html": "USDA says a reading is only correct if the thermometer sits in the right place, and that large or irregularly shaped food should be checked in several places. It also notes that pieces of food reach a safe temperature at different times.",
+              "src": [
+                "T3"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "A turkey is the most irregular shape most people ever cook. One reading in the breast tells you about the breast."
+            }
           ]
         },
         {
           "h2": "With an instant-read",
           "blocks": [
-            {"kind": "prose", "html": "The ThermoMaven is a thermocouple probe with a 6.5-inch reach. USDA's table says a thermocouple goes a quarter of an inch or deeper, is not designed to stay in food while it cooks, and is for checking the temperature near the end of the cooking time.", "src": ["T1", "T3"]},
-            {"kind": "prose", "html": "So the routine is: near the end, open the oven, check thigh, wing and breast, close the oven. Three readings, one at a time.", "src": ["T3"]}
+            {
+              "kind": "prose",
+              "html": "The ThermoMaven is a thermocouple probe with a 6.5-inch reach. USDA's table says a thermocouple goes a quarter of an inch or deeper, is not designed to stay in food while it cooks, and is for checking the temperature near the end of the cooking time.",
+              "src": [
+                "T1",
+                "T3"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "So the routine is: near the end, open the oven, check thigh, wing and breast, close the oven. Three readings, one at a time.",
+              "src": [
+                "T3"
+              ]
+            }
           ]
         },
         {
           "h2": "With a leave-in probe",
           "blocks": [
-            {"kind": "prose", "html": "The CHEF iQ Sense listing we link to ships three wireless probes — it gives the probe length as 4.75 inches — with a hub that alerts through a speaker and phone notifications. USDA's table says wireless and smart probes go at least 1 inch into the thickest part of the food and are designed to stay there while it cooks.", "src": ["T2", "T3"]},
-            {"kind": "take", "html": "Three probes, three places. This is the one job where a three-probe pack maps exactly onto USDA's instructions — one in the thigh, one in the wing, one in the breast — instead of one probe and a guess."}
+            {
+              "kind": "prose",
+              "html": "The CHEF iQ Sense listing we link to ships three wireless probes — it gives the probe length as 4.75 inches — with a hub that alerts through a speaker and phone notifications. USDA's table says wireless and smart probes go at least 1 inch into the thickest part of the food and are designed to stay there while it cooks.",
+              "src": [
+                "T2",
+                "T3"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "Three probes, three places. This is the one job where a three-probe pack maps exactly onto USDA's instructions — one in the thigh, one in the wing, one in the breast — instead of one probe and a guess."
+            }
           ]
         },
         {
           "h2": "Do this before the day",
           "blocks": [
-            {"kind": "prose", "html": "Check the thermometer itself first. USDA describes an ice-water test — a glass of ice and water, at least 2 inches of stem, at least 30 seconds, and it should read 32 °F. Our calibration guide has the steps.", "src": ["T3"]}
+            {
+              "kind": "prose",
+              "html": "Check the thermometer itself first. USDA describes an ice-water test — a glass of ice and water, at least 2 inches of stem, at least 30 seconds, and it should read 32 °F. Our calibration guide has the steps.",
+              "src": [
+                "T3"
+              ]
+            }
           ]
         }
       ],
-      "related": ["is-my-meat-thermometer-accurate.html", "instant-read-or-leave-in.html", "thermometer-for-air-fryer.html"]
+      "related": [
+        "is-my-meat-thermometer-accurate.html",
+        "instant-read-or-leave-in.html",
+        "thermometer-for-air-fryer.html"
+      ]
     },
     {
       "slug": "is-my-meat-thermometer-accurate.html",
@@ -226,35 +653,108 @@
         {
           "h2": "The ice-water check, step by step",
           "blocks": [
-            {"kind": "list", "items": ["Fill a large glass with ice cubes.", "Add drinking water and stir well.", "Put at least 2 inches of the stem in, touching neither the sides nor the bottom of the glass.", "Wait at least 30 seconds and read it without taking the stem out.", "It should read 32 °F. If it does not, adjust it the way the manufacturer's instructions say."], "src": ["T3"]},
-            {"kind": "prose", "html": "USDA labels the ice-water method best for most thermometers. In the same calibration section it adds that if a thermometer does not allow manual calibration, you may need to replace it.", "src": ["T3"]}
+            {
+              "kind": "list",
+              "items": [
+                "Fill a large glass with ice cubes.",
+                "Add drinking water and stir well.",
+                "Put at least 2 inches of the stem in, touching neither the sides nor the bottom of the glass.",
+                "Wait at least 30 seconds and read it without taking the stem out.",
+                "It should read 32 °F. If it does not, adjust it the way the manufacturer's instructions say."
+              ],
+              "src": [
+                "T3"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "USDA labels the ice-water method best for most thermometers. In the same calibration section it adds that if a thermometer does not allow manual calibration, you may need to replace it.",
+              "src": [
+                "T3"
+              ]
+            }
           ]
         },
         {
           "h2": "Boiling water, and why altitude matters",
           "blocks": [
-            {"kind": "prose", "html": "The second method uses boiling water, at least 2 inches of stem, and at least 30 seconds: the reading should be 212 °F at sea level. USDA notes that distilled water is needed for true accuracy, and that at high altitude water boils lower — by at least 2 °F and perhaps by as much as 5 °F.", "src": ["T3"]},
-            {"kind": "take", "html": "Unless you know your local boiling point, the ice-water check is the one to trust. Ice water is 32 °F everywhere."}
+            {
+              "kind": "prose",
+              "html": "The second method uses boiling water, at least 2 inches of stem, and at least 30 seconds: the reading should be 212 °F at sea level. USDA notes that distilled water is needed for true accuracy, and that at high altitude water boils lower — by at least 2 °F and perhaps by as much as 5 °F.",
+              "src": [
+                "T3"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "Unless you know your local boiling point, the ice-water check is the one to trust. Ice water is 32 °F everywhere."
+            }
           ]
         },
         {
           "h2": "What the two listings claim",
           "blocks": [
-            {"kind": "prose", "html": "The ThermoMaven listing claims ±0.5 °F accuracy with a NIST certification, lists NIST and NSF as standards met, and puts a calibration certificate in the box.", "src": ["T1"]},
-            {"kind": "prose", "html": "The CHEF iQ Sense listing's standards field lists twenty entries, NIST and NSF among them. Its text did not state an accuracy figure when we read it on 2026-11-19, so our table leaves that row blank rather than repeat an earlier reading.", "src": ["T2"]},
-            {"kind": "prose", "html": "Neither listing's text says whether you can recalibrate the thermometer yourself. Both listings link a user manual; we have not read the manuals for this guide, so we do not say either way.", "src": ["T1", "T2"]},
-            {"kind": "take", "html": "A certificate in the box describes the day the thermometer left the factory. The ice-water check describes today. Do it when it arrives, and again before a holiday meal."}
+            {
+              "kind": "prose",
+              "html": "The ThermoMaven listing claims ±0.5 °F accuracy with a NIST certification, lists NIST and NSF as standards met, and puts a calibration certificate in the box.",
+              "src": [
+                "T1"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "The CHEF iQ Sense listing's standards field lists twenty entries, NIST and NSF among them. Its text did not state an accuracy figure when we read it on 2026-11-19, so our table leaves that row blank rather than repeat an earlier reading.",
+              "src": [
+                "T2"
+              ]
+            },
+            {
+              "kind": "prose",
+              "html": "Neither listing's text says whether you can recalibrate the thermometer yourself. Both listings link a user manual; we have not read the manuals for this guide, so we do not say either way.",
+              "src": [
+                "T1",
+                "T2"
+              ]
+            },
+            {
+              "kind": "take",
+              "html": "A certificate in the box describes the day the thermometer left the factory. The ice-water check describes today. Do it when it arrives, and again before a holiday meal."
+            }
           ]
         }
       ],
-      "related": ["where-to-put-the-thermometer-in-a-turkey.html", "instant-read-or-leave-in.html", "thermometer-for-air-fryer.html"]
+      "related": [
+        "where-to-put-the-thermometer-in-a-turkey.html",
+        "instant-read-or-leave-in.html",
+        "thermometer-for-air-fryer.html"
+      ]
     }
   ],
   "temps": {
-    "poultry": {"label": "All poultry — whole bird, breasts, legs, thighs, wings, ground poultry, giblets, stuffing", "value": "165 °F (73.9 °C)", "src": "T4"},
-    "ground": {"label": "Ground meats", "value": "160 °F (71.1 °C)", "src": "T4"},
-    "whole_cuts": {"label": "Beef, pork, veal and lamb steaks, chops and roasts", "value": "145 °F (62.8 °C), then rest at least 3 minutes", "src": "T4"},
-    "fish": {"label": "Fish and shellfish", "value": "145 °F (62.8 °C)", "src": "T4"},
-    "leftovers": {"label": "Leftovers and casseroles", "value": "165 °F (73.9 °C)", "src": "T4"}
+    "poultry": {
+      "label": "All poultry — whole bird, breasts, legs, thighs, wings, ground poultry, giblets, stuffing",
+      "value": "165 °F (73.9 °C)",
+      "src": "T4"
+    },
+    "ground": {
+      "label": "Ground meats",
+      "value": "160 °F (71.1 °C)",
+      "src": "T4"
+    },
+    "whole_cuts": {
+      "label": "Beef, pork, veal and lamb steaks, chops and roasts",
+      "value": "145 °F (62.8 °C), then rest at least 3 minutes",
+      "src": "T4"
+    },
+    "fish": {
+      "label": "Fish and shellfish",
+      "value": "145 °F (62.8 °C)",
+      "src": "T4"
+    },
+    "leftovers": {
+      "label": "Leftovers and casseroles",
+      "value": "165 °F (73.9 °C)",
+      "src": "T4"
+    }
   }
 }

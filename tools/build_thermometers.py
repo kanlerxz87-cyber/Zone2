@@ -423,7 +423,8 @@ def page_product(key: str) -> str:
     <section class="block">
       <h2>The listing title, as published</h2>
       <p class="quote">{esc(p["title_official"])}</p>
-      <p class="row-note">Category on the listing: {esc(p["category_path"])}.</p>
+      <p class="row-note">Quoted in full because the title is itself a claim; the table above shows what the
+      rest of the listing says about each part of it.</p>
     </section>
 
     <section class="block">
@@ -473,7 +474,9 @@ def page_guide(slug: str) -> str:
             if b["kind"] == "compare":
                 ids += [r["src"] for p in PRODUCTS.values() for spec in b["rows"]
                         for r in [_row(p, spec.split("|"))] if r and r.get("src") and r["status"] in VALUED]
-            used += [i for i in ids if i not in used]
+            for i in ids:
+                if i not in used:
+                    used.append(i)
     src_list = "".join(f"<li>{src_link(s)} — {esc(SOURCES[s]['name'])}</li>" for s in sorted(used))
     body = f"""    <article class="post">
     <div class="page-head">
