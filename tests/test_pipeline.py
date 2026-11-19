@@ -31,7 +31,14 @@ def test_marketing_pages_label_unconfirmed_brief_mapping():
     # the builder declares plus its machine-readable outputs - so the count is taken from the builder
     # instead of typed here. The invariant this test guards (the unconfirmed-mapping caveat on every
     # public page) is unchanged and still asserted on each HTML page.
-    assert len(rendered) == len(build_marketing.PAGES) + len(build_marketing.TEXT_PAGES)
+    # T64 (session 32788da6, 2026-11-19): build() also merges the thermometer desk, which keeps its own
+    # page registry (tools/build_thermometers.py) so verify_marketing's G10 allow-list is not widened from
+    # outside its owner's scope. The desk pages are counted from that registry, never typed, and the
+    # caveat assertions below run on them too.
+    import build_thermometers
+
+    assert len(rendered) == (len(build_marketing.PAGES) + len(build_marketing.TEXT_PAGES)
+                             + len(build_thermometers.page_rels()))
     assert len(build_marketing.PAGES) >= 9
     for page, document in rendered.items():
         if not page.endswith(".html"):
