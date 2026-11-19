@@ -7562,3 +7562,26 @@ production collection, enrollment/intent/reports and CN-08). No user's manual an
 **Still open (non-blocking, per prior sessions):** intended ASIN/listing/date/source confirmations, enrolled Associates attribution, production collector host, Search Console ownership and real reports, CN-08 administrator-only Pages source-mode setting. None of these are blocking; all are published with source links on Flagged for Review.
 
 **Sources:** All official sources cited in prior session records (Amazon Associates Operating Agreement §5, Program Policies, FTC Endorsement Guides, Google qualify-outbound-links, manufacturer listing pages) remain the governing references; no new source claims are introduced by this session.
+## T69 claim — session `arena/56aa1fac-zone2` — 2026-11-19 (UTC)
+
+**Status: in progress.** Baseline is the retained canonical `main` tree at `605e49f9aa66df9f1f87f6bc000ff3437ce6f2b4` (PR #178). The live product-first site, source-gated publication, suggestion/question registers, and measurement service are already present; this narrow task fixes one stale reader-facing freshness label found during review.
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T69 | Correct the generated suggestion/question page “last updated” date: those pages contain owner directions and release prerequisites dated 2026-11-19, while the renderer currently prints the earlier source-check date 2026-11-16. Use the publication/update date for page freshness, preserve the source-check date wherever it means source verification, and add a regression check. No product facts, intent confirmations, campaign metrics, owner choices, or external account state are changed. | claimed 2026-11-19, in progress | `arena/56aa1fac-zone2` (`56aa1fac`) | `tools/build_front.py`, generated `suggestions.html` and `questions.html`, `tools/verify_front.py`, append-only `COORDINATION.md` |
+
+**Takeover note:** stale open PRs #162 and #172 both include some of the renderer/output scope. Their newest commits were at 2026-11-19 06:15:38Z and 06:20:33Z respectively; at this claim they were more than 60 minutes old. The current `main` already retains the published implementation from subsequent integration work. This session takes over only the isolated freshness-label correction, does not reapply or discard either PR’s other changes, and will not close or merge those PRs.
+
+**Date evidence inspected:** `docs/board-9251f262.json` carries owner-direction dates of 2026-11-19 and a `t63_note` dated 2026-11-19; the current question-register addendum is dated 19 November 2026. `tools/build_front.py` separately defines `CHECKED_ON` (2026-11-16) and `UPDATED_ON` (2026-11-19), but the suggestion and question bylines incorrectly use `CHECKED_ON` for “last updated.”
+
+**Rebase/conflict record:** During the initial claim push, `origin/main` advanced from `605e49f` to `138b0eb` through PR #179 (session `57eb4af5`). The rebase conflicted at the shared append-only end of this file. Both the merged T68 close-out and this session's claim are retained; this task is T69 because T68 was used by the merged session. No upstream content was discarded.
+
+
+### T69 implementation checkpoint — local verification complete; PR/deploy pending
+
+- Replaced the “last updated” label on the generated suggestion and question registers with `UPDATED_ON` (2026-11-19); source-check references continue to use `CHECKED_ON` (2026-11-16). No product, tag, attribution, choice, or measurement value changed.
+- Added gate G11 in `tools/verify_front.py`. Injecting the former 2026-11-16 byline into each page separately made G11 fail as intended; the current generated pages pass.
+- **Local verification:** `python3 tools/build_front.py --check`; `python3 tools/verify_front.py` (16 pages); and `python3 tools/ci_replay.py` with strict YAML parsing enabled (PyYAML installed only in a temporary `/tmp` virtualenv): **61/61 steps PASS**. The replay packaged 228 HTML pages (16 indexable), checked 1,451 product anchors and 138 current factual rows, then passed 252 browser viewport checks and 24 accessibility-page scans. Browser events were synthetic local fixtures, not campaign data.
+- **Date evidence:** `docs/board-9251f262.json` owner directions and `t63_note`, plus the current dated release-prerequisite section in `questions.html`. **No external product/compliance claim was added or re-verified in this narrow correction.** Official-source links and all existing unknowns remain unchanged.
+- **Irregularities unchanged and non-blocking:** supplied short-link compliance remains unresolved in FLG-003; intended ASIN/listing/date/source fields remain blank; the owner-provided tag is not account-authenticated; static GitHub Pages collection remains disabled; no authorized Associates or Search Console reports are present. No report, traffic, order, conversion, popularity, or revenue number was added.
+- **Status:** implementation ready for the current-branch PR; actual hosted check, merge and Pages deployment still pending and will be recorded below after they occur.
