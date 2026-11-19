@@ -7783,3 +7783,27 @@ this claim; recorded here for its owner). Dated historical prose ("22 CI steps" 
 as history on purpose (OBS-2/OBS-3 in the verification record).
 
 **This close-out record ships via PR [#187](https://github.com/kanlerxz87-cyber/Zone2/pull/187).**
+### T70 (`5f7f77a4`) — close-out: merged, main CI green, Pages deployed, live pages verified
+
+- **PR:** [#183](https://github.com/kanlerxz87-cyber/Zone2/pull/183), merged **2026-11-19T11:11:51Z** as
+  merge commit **`b37eadfb5072709b0e6146c705ee9c180ce07ab4`** (base `b04078f`, after a rebase onto it).
+- **Hosted PR check:** run **44512235349** — `Build and verify` **pass** (2m3s); the PR deploy job was
+  correctly skipped.
+- **Main:** run **44512621858** `success` (Build and verify + Deploy to GitHub Pages); Pages build run
+  **44512621078** `success`. Deployment `github-pages` on SHA `b37eadf`; the Pages API reports
+  **`built`** from `main` at `/`.
+- **Live fetch after deployment:** `guides/chef-iq-sense.html` and `guides/chefman-dual-basket.html`
+  both return the new per-product copy — the fit / not-a-fit lists, the trade-off paragraph, the four
+  checks with their USDA and manufacturer citations, and the unchanged specification tables. The
+  disclosure strip is above `<main>` on both, and each paid CTA carries `shopnow047c-20` with
+  `rel="sponsored nofollow"`.
+- **Verified on the rebased tree before merging:** replay **62/62**, `verify_front` 16/16,
+  `verify_publication` clean (228 / 16 / 1,451 / 138), `audit_site` 228 pass, `seo_audit` pass,
+  sitemap and readiness current, CSS urls 0 broken, `note_overlap` worst pair **0.163**, browser 252
+  viewport checks and 24 accessibility scans clean. The artifact measurement was re-taken after the
+  rebase and is unchanged: **226 HTML / 16 sitemap / 187 noindex / 23 crawlable-and-unlisted**.
+- **Still open, non-blocking:** Q68-01 (the 23 unlisted pages), Q68-03 (imagery decision), intended-ASIN
+  confirmations, enrollment/report attribution, permanent collector host, Search Console ownership,
+  CN-08 administrator Pages source mode. Nothing was filled in to close them.
+- **Not touched:** no other session's namespace or data; no open PR merged or closed by this session
+  other than its own #183.
