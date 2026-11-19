@@ -7539,3 +7539,72 @@ errors/missing local resources. Browser fixture DBs are removed and Amazon navig
 This documentation-only close-out records observed results; no further feature, product fact, decision,
 report, hosting account or permission is changed. All external gates remain explicit (especially actual
 production collection, enrollment/intent/reports and CN-08). No user's manual answer was requested.
+
+---
+
+## T68 — claim: session `arena/9ffe2d83-zone2` (`9ffe2d83`) — 2026-11-19 (UTC)
+
+**Status:** claimed, in progress (written before any file in the scope below was edited).
+
+**Coordination check at claim:** `gh pr list --state open` → #162 (draft), #163, #172, all
+CONFLICTING with current `main` (605e49f). Their branches' last commits are 06:15–06:20Z; it is
+now past 10:45Z — **more than four hours with no commits**, so each meets the board's 60-minute
+takeover rule. No registry row for an active session owns any file in the scope below; every
+other 2026-11-19 session (cf98ff65, 32788da6, 75efdf57, 33e03d63, 37333afd, 10727edd) has a
+merged close-out record. This claim takes over the stale PRs' unshipped, still-valid content
+only; nothing is discarded from any branch, and each PR receives a comment explaining its
+disposition before it is closed.
+
+**Task — final integration for this wave + closure of the four open change requests:**
+
+1. **CR-8** (open, owner was "owner of `marketing/scripts/verify_marketing.py`" — no active
+   owner): add `www.fsis.usda.gov` (and `fsis.usda.gov` if linked) to `OFFICIAL_HOSTS` and run
+   G1–G10 over every rendered marketing page, thermometer desk included (SG-15 A). The desk's
+   food-safety sentences cite FSIS pages, so the allow-list, not the source, must change.
+2. **CR-9** (open, owner "next integration session" — this session): promote **Q-22** to a new
+   flag row (**F-54** — Q-21 is already promoted as F-44 by an earlier session; F-45…F-53 hold
+   other findings, so CR-9's original "F-44/F-45" ids are taken and the next free id is used),
+   then make **one coordinated counts pass**: `assets/js/data.js` `CANONICAL_FLAG_COUNT`,
+   `README.md`, `EXECUTIVE_SUMMARY.md` count prose, and every root page — regenerated through
+   their own builders, never hand-edited where a generator exists.
+3. **CR-10** (open, brief namespace): verify whether the stale "no click on this site can become
+   a qualifying purchase" note still exists in `brief/data/summary.json`; correct it if it does
+   (the owner tag shipped in T58/T61), and make the four state-table counts derived where they
+   are still typed. If the items are already corrected, record the evidence instead of editing.
+4. **CR-7** (open): verify that the front page links `marketing/thermometers/` (it appears to);
+   if verified, record closure evidence — no edit for an already-done item.
+5. **Stale PR salvage, from #163** (`f669bf2c`, session crashed): remove the uncited
+   "regret buyers report most" popularity claim from topic TP-03, and fix the self-contradictory
+   RQ-05 row ("…carry an og:image — that is to say, none of them do") using the derived
+   `{{og_image}}`/`{{sc_pages}}` tokens the current builder already provides; also derive the
+   still-typed og:type figure if a token can be added without touching a claimed file. Regenerate
+   `board/topics.html` / `board/requirements.html` with `tools/build_board.py`.
+   PRs **#162** and **#172** are reviewed the same way; their buyer-first front page, shop-first
+   front, CI-repair and thermometer-guide intents were already shipped by merged PRs #166/#167/
+   #170/#174/#175/#177 — they are closed as superseded with comments, not force-merged over newer
+   verified work.
+6. **Fresh dated verification** (`docs/verification-9ffe2d83.md`) of every official source this
+   session's changes rest on (FSIS thermometer/temperature pages for CR-8's allow-list, the CHEF
+   iQ listing for F-54, Amazon ASIN-definition page for context), fetched this session; blanks stay
+   blank and unverifiable values stay flagged. This wave's suggestions/questions appended only if
+   a real gap is found.
+7. **Gates → PR → merge without waiting → confirm GitHub Pages deploy → record here.** All
+   executable `ci_replay` steps, the Python test suites, `validate_board`, `validate_data`,
+   `audit_site`, `seo_audit` and the marketing verifier must pass on the combined tree before the
+   PR opens; the site is never merged broken.
+
+**Files in this claim:** `marketing/scripts/verify_marketing.py`, `ledger/flags.json`
+(append-only F-54), `assets/js/data.js` (`CANONICAL_FLAG_COUNT` only), `README.md` (flag-count
+prose only), `EXECUTIVE_SUMMARY.md` (count prose / addendum only), `board/data/topics.json`,
+`board/data/requirements.json`, `tools/build_board.py` (derived-token addition only, if needed),
+regenerated derived views via their own builders (`board/*.html`, `pages/*.html`, root evidence
+views, `brief/index.html` if CR-10 changes), `brief/data/summary.json` (CR-10 only),
+NEW `docs/verification-9ffe2d83.md`, `COORDINATION.md` (append-only).
+
+**Excluded:** `.github/workflows/pages.yml` (no gate failure forces it; logged here first if
+that changes), `tools/build_front.py` / `assets/css/publish.css` / `guides/**` / `shop/**`
+(front-page and shop work is shipped and separately closed), every verified product value in
+`ledger/{products,verification,sources}.json`, all other sessions' namespaces
+(`console/`, `intake/`, `audit/`, `discovery/`, `marketing/**` content, `research-hub/`,
+`zone2/`, `northstar/`, `revalidation/`, `affiliate-lab/`, `marketing/articles/**`), and any
+value not re-read from an official source this session.
