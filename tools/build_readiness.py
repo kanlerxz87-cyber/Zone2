@@ -51,6 +51,8 @@ import argparse
 import html
 import json
 import re
+from site_inventory import has_tagged_link
+from price_policy import context_units
 import sys
 from datetime import date
 from pathlib import Path
@@ -112,7 +114,7 @@ def published_pages() -> list[Path]:
     rebuild shift the number it reports. Excluded by path, not by directory, so the rest of release/
     would still be counted if it ever holds another page.
     """
-    skip = {".git", "__pycache__", "node_modules", ".github"}
+    skip = {".git", "__pycache__", "node_modules", ".github", "_site", ".local", ".cache"}
     out = []
     for p in sorted(REPO.rglob("*.html")):
         if any(part in skip for part in p.relative_to(REPO).parts):
@@ -143,8 +145,7 @@ def count_pages_with_tagged_link() -> int:
     `tag=YOURASSOCIATEID` is the placeholder Amazon prints in its own example, not a tag, and does
     not count. Measured 2026-11-15: zero pages carry one.
     """
-    pat = re.compile(r"tag=[A-Za-z0-9]+-[0-9]{2}\b")
-    return sum(1 for p in published_pages() if pat.search(p.read_text(encoding="utf-8")))
+    return sum(1 for p in published_pages() if has_tagged_link(p.read_text(encoding="utf-8")))
 
 
 def count_published_html_pages() -> int:
@@ -171,7 +172,7 @@ def count_pages_linking_dp() -> int:
 def published_namespaces() -> list[str]:
     """Directories that publish at least one HTML page, plus the repository root."""
     skip = {".git", ".github", "__pycache__", "node_modules", "tools", "tests", "docs", "ledger",
-            "content", "assets"}
+            "content", "assets", "_site", ".local", ".cache"}
     out = ["."]
     for d in sorted(p for p in REPO.iterdir() if p.is_dir()):
         if d.name in skip:
@@ -668,7 +669,7 @@ def no_price_problems(page: str) -> list[str]:
     """The same context-aware rule as tools/validate_data.py and the CI price step."""
     out = []
     text = re.sub(r"<[^>]+>", " ", page)
-    for unit in re.split(r"</tr>|</p>|</li>|<br\s*/?>", text):
+    for unit in context_units(page):
         for m in MONEY.finditer(unit):
             if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):
                 out.append(f"money value {m.group(0)!r} in a buying context")

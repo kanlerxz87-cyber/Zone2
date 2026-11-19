@@ -1,0 +1,26 @@
+{
+  "as_of": "2026-11-19",
+  "state": "EMPTY_BY_DESIGN",
+  "note": "No authorized first-party report or real campaign dataset has been supplied. Empty means unavailable, not zero traffic or zero orders. Browser counters are not Amazon eligible Sessions or purchase reports. Keep original/normalized exports and populated ledgers private; this public file is an empty contract, not an invitation to commit personal or account data.",
+  "official_sources": [
+    "https://affiliate-program.amazon.com/help/operating/policies",
+    "https://affiliate-program.amazon.com/home/reports"
+  ],
+  "required_fields": {
+    "campaign_key": "Static predeclared campaign label, only if actually present in the authorized mapping; never derived from a person. Blank if an export only identifies the tracking ID.",
+    "period_start": "Inclusive YYYY-MM-DD reported period start; never inferred from a click timestamp.",
+    "period_end": "Inclusive YYYY-MM-DD reported period end.",
+    "timestamp_utc": "UTC time the authorized normalized report was imported; not a fabricated purchase timestamp.",
+    "source": "Official report URL and private original-export reference, without credentials or query tokens.",
+    "channel": "Static channel such as organic, only when the evidence/mapping establishes it; no user identifier.",
+    "tracking_id": "shopnow047c-20, subject to enrolled-account/report verification.",
+    "eligible_sessions": "Non-negative integer only when expressly reported; otherwise null. Never copied from browser loads or clicks.",
+    "clicks": "Non-negative integer from the authorized report; null if unavailable, distinct from this site's raw outbound counter.",
+    "reported_orders": "Non-negative order count only if reported as orders; never substitute ordered items or infer orders from clicks. Null when unavailable.",
+    "normalized_sha256": "SHA-256 of the normalized imported file; retain original/mapping privately. A hash identifies a file, not proof of Amazon authorship.",
+    "row_provenance": "Private original/normalized row mapping and explicit authorization assertion. The assertion is not an authentication of Amazon."
+  },
+  "campaigns": [],
+  "reports": [],
+  "implementation": "tools/analytics_server.py imports only normalized authorized aggregate reports into a private SQLite database and records source URL, static channel, period, row number, SHA-256 and UTC import time. It does not sum overlapping exports or derive a conversion rate. See docs/MEASUREMENT.md."
+}

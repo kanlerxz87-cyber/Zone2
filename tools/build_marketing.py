@@ -570,6 +570,7 @@ def shell(title: str, description: str, body: str, *, here: str, depth: int = 0,
   <a href="{root}improvements.html">Improvement board</a> ·
   <a href="{root}../index.html">Owner dashboard</a></p>
 </footer>
+<script src="{root}../assets/js/measurement-config.js" defer></script>
 <script src="{root}../assets/js/events.js" defer></script>
 </body>
 </html>

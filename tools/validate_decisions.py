@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import json
 import re
+from price_policy import context_units
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
@@ -281,7 +282,7 @@ def check_pages(rep: Report) -> None:
                     f"{derived[label]} - near {ctx!r} (F-17/F-26/F-29 class)"
                 )
         # No product prices anywhere in this namespace.
-        units = re.split(r"</tr>|</p>|</li>|<br\s*/?>", plain)
+        units = context_units(text)
         for unit in units:
             for m in MONEY.finditer(unit):
                 if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):

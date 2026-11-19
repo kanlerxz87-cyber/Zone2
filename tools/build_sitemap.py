@@ -2,7 +2,7 @@
 """Generate the root `sitemap.xml` from the pages actually published in this repository.
 
 Why a generator instead of the hand-typed list this replaces: the hand-typed file had drifted to
-16 of 115 published pages (86% of the site absent), including every page a search engine would
+16 of 115 indexable pages (86% of the site absent), including every page a search engine would
 need first — `marketing/index.html`, `playbook.html` and all 38 `pages/*.html` findings pages.
 Nothing rebuilt it, so nothing could notice. A sitemap that nobody regenerates is a claim about
 the site that stops being true silently, which is the exact failure mode this repository's other
@@ -52,7 +52,7 @@ SITEMAP = REPO / "sitemap.xml"
 LIVE = "https://kanlerxz87-cyber.github.io/Zone2/"
 
 #: Directories whose HTML is never a published destination. See the module docstring.
-EXCLUDED_DIRS = ("tools", "tests", "content")
+EXCLUDED_DIRS = ("tools", "tests", "content", "_site", "node_modules")
 
 #: Files that exist in the tree but are not destinations, matched on the **basename** so that a
 #: nested error page is caught as well as the root one. `research-hub/404.html` is a "Page not found"
@@ -93,10 +93,18 @@ def url_for(rel: str) -> str:
     return LIVE + rel
 
 
+def indexed_pages() -> list[str]:
+    from publication_policy import INDEXED
+    published = set(published_pages())
+    if not INDEXED <= published:
+        raise ValueError(f"Index policy names missing pages: {INDEXED - published}")
+    return sorted(INDEXED)
+
+
 def render() -> str:
-    pages = published_pages()
+    pages = indexed_pages()
     if not pages:
-        raise SystemExit("no published pages found — refusing to write an empty sitemap")
+        raise SystemExit("no indexable pages found — refusing to write an empty sitemap")
     body = "".join(f"  <url><loc>{url_for(p)}</loc></url>\n" for p in pages)
     return HEADER + body + FOOTER
 
@@ -111,12 +119,12 @@ def main() -> int:
     if args.check:
         current = SITEMAP.read_text(encoding="utf-8") if SITEMAP.is_file() else ""
         if current == doc:
-            print(f"sitemap.xml is current ({len(published_pages())} URLs)")
+            print(f"sitemap.xml is current ({len(indexed_pages())} URLs)")
             return 0
         committed = current.count("<url>")
         expected = doc.count("<url>")
         print(
-            f"sitemap.xml drifted from the published tree: committed {committed} URLs, "
+            f"sitemap.xml drifted from the indexing policy: committed {committed} URLs, "
             f"a fresh derivation has {expected}.",
             file=sys.stderr,
         )
@@ -136,7 +144,7 @@ def main() -> int:
         return 1
 
     SITEMAP.write_text(doc, encoding="utf-8")
-    print(f"wrote sitemap.xml — {len(published_pages())} URLs")
+    print(f"wrote sitemap.xml — {len(indexed_pages())} URLs")
     return 0
 
 

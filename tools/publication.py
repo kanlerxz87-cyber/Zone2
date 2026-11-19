@@ -14,7 +14,7 @@ from xml.sax.saxutils import escape as xml_escape
 
 from head_meta import BASE, head_block
 from link_builder import ASSOCIATES_TAG, build_product_link
-from publication_shell import DISCLOSURE, OPERATOR_LINKS, depth_for, footer, masthead
+from publication_shell import DISCLOSURE, OPERATOR_LINKS, depth_for, footer, masthead, render_icons
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads((ROOT / 'docs/publication.json').read_text())
@@ -75,7 +75,7 @@ def page(rel, title, description, body, *, article=False):
 {schema(rel,title,description,article=article)}
 </head><body class="cn-publication"><a class="cn-skip" href="#main">Skip to content</a>
 {masthead(rel)}
-<main id="main">{body}</main>
+<main id="main">{render_icons(body)}</main>
 {footer(rel)}
 <script src="{root}assets/js/measurement-config.js" defer></script><script src="{root}assets/js/events.js" defer></script>
 <script src="{root}assets/js/publication.js" defer></script>

@@ -44,6 +44,15 @@ def depth_for(rel):
     return "../" * (len(PurePosixPath(rel).parts) - 1)
 
 
+def render_icons(document):
+    def svg(path):
+        return '<svg class="cn-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="'+path+'"/></svg>'
+    return (document.replace('↗', svg('M5 19 19 5M5 5h14v14'))
+            .replace('→', svg('M4 12h16m-6-6 6 6-6 6'))
+            .replace('←', svg('M20 12H4m6-6-6 6 6 6'))
+            .replace('✳', svg('M12 2v20M2 12h20M5 5l14 14M5 19 19 5')))
+
+
 def masthead(rel="index.html"):
     root = depth_for(rel)
     nav = [
@@ -57,7 +66,7 @@ def masthead(rel="index.html"):
     for href, label in nav:
         current = ' aria-current="page"' if rel == href else ""
         links += f'<a href="{root}{href}"{current}>{label}</a>'
-    return f'''<header class="cn-masthead" data-cn-shell="v1">
+    return render_icons(f'''<header class="cn-masthead" data-cn-shell="v1">
 <div class="cn-topline cn-wrap"><span>THE CONSIDERED KITCHEN</span><span>AN INDEPENDENT BUYING EDIT</span></div>
 <div class="cn-mast-row cn-wrap"><a class="cn-wordmark" href="{root}index.html" aria-label="Counter Notes home">counter<span>notes</span><b aria-hidden="true">✳</b></a>
 <span class="cn-brand-note">Fewer maybes.<br>Better kitchen decisions.</span>
@@ -66,20 +75,20 @@ def masthead(rel="index.html"):
 <details class="cn-workroom"><summary>Workroom <span aria-hidden="true">+</span></summary>
 <div><p>BEHIND THE PUBLICATION</p><a href="{root}workroom.html">Executive summary & all tools</a><a href="{root}suggestions.html">Review suggestions</a><a href="{root}questions.html">Questions & missing information</a><a href="{root}flagged.html">Flagged for Review</a></div></details>
 </nav></div></header>
-<aside class="cn-disclosure" data-disclosure-strip><p class="cn-wrap"><strong>Affiliate disclosure</strong> · {DISCLOSURE} We may earn a commission from links marked “paid link”. <a href="{root}about.html#affiliate">How this works</a></p></aside>'''
+<aside class="cn-disclosure" data-disclosure-strip><p class="cn-wrap"><strong>Affiliate disclosure</strong> · {DISCLOSURE} We may earn a commission from links marked “paid link”. <a href="{root}about.html#affiliate">How this works</a></p></aside>''')
 
 
 def footer(rel="index.html"):
     root = depth_for(rel)
     operator = "".join(f'<a href="{root}{href}">{esc(label)}</a>' for href, label in OPERATOR_LINKS)
-    return f'''<footer class="cn-footer"><div class="cn-wrap">
+    return render_icons(f'''<footer class="cn-footer"><div class="cn-wrap">
 <div class="cn-footer-grid"><div><a class="cn-wordmark" href="{root}index.html">counter<span>notes</span><b aria-hidden="true">✳</b></a><p>A little more considered.<br>A lot less kitchen guesswork.</p><p class="cn-muted">Independent, AI-assisted source research.<br>Not hands-on product testing.</p></div>
 <div><h2>Find your fit</h2><a href="{root}guides/basket-air-fryers.html">Air fryers</a><a href="{root}guides/air-fryer-ovens.html">Countertop ovens</a><a href="{root}guides/thermometers.html">Thermometers</a><a href="{root}guides/index.html">Buying guides</a></div>
 <div><h2>The publication</h2><a href="{root}about.html">Our approach & authorship</a><a href="{root}feed.xml">RSS · follow new guides</a><a href="{root}privacy.html">Privacy & measurement</a><a href="{root}workroom.html">Workroom · all dashboards</a></div>
 <div><h2>Review before changing</h2><a href="{root}suggestions.html">Suggestions & options</a><a href="{root}questions.html">Questions & information gaps</a><a href="{root}intent.html">Product-intent records</a><a href="{root}flagged.html">Flagged for Review</a></div></div>
 <details class="cn-operator-index"><summary>All operator tools & retained research <span aria-hidden="true">+</span></summary><nav aria-label="Operator tools">{operator}</nav></details>
 <div class="cn-footer-small"><p><strong>{DISCLOSURE}</strong> Product buttons are direct Amazon links marked sponsored. A configured tag is not an account-level attribution confirmation. Product-intent and reporting checks remain open.</p><p>No static prices, star ratings, invented test results or revenue forecasts. GitHub Pages production analytics is not connected; the self-hosted service is implemented. <a href="{root}privacy.html">Measurement status</a>.</p><p>© 2026 Counter Notes · Independent of Amazon · <a href="https://affiliate-program.amazon.com/help/operating/agreement">Operating Agreement</a> · <a href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers">FTC disclosure guidance</a></p></div>
-</div></footer>'''
+</div></footer>''')
 
 
 def apply_chrome(document: str, rel: str) -> str:

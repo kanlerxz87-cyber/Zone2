@@ -48,6 +48,7 @@ OUT = REPO / "brief"
 DATA = REPO / "brief" / "data"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from site_inventory import brief_measure
 from head_meta import head_block  # canonical + og:*, one definition for the whole site  # noqa: E402
 
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
@@ -72,6 +73,7 @@ def load(name: str) -> dict:
 # can be counted to produce is substituted rather than typed.
 TOKENS: dict[str, object] = {
     "gate_count": len(__import__("ci_replay").steps()),
+    **brief_measure(REPO),
 }
 
 
@@ -344,9 +346,7 @@ def page_index() -> str:
 <thead><tr><th>Measure</th><th>Value</th><th>Source</th></tr></thead>
 <tbody>{rows}</tbody>
 </table>
-<p class="note">Every value was produced by a command run in this working tree on {esc(AS_OF)}, or read off
-an official page fetched the same day. A row whose value could not be confirmed from an official source
-is empty and says so.</p>
+<p class="note">Original source review: {esc(AS_OF)}. Page/disclosure/tag/surface counts are re-derived from the source tree at build time, excluding private tooling and the deployment artifact. These are not new source verifications or analytics outcomes. See the <a href="../workroom.html">current executive summary</a>; the rest of this dated brief is retained history.</p>
 
 <h2>Decide these three first</h2>
 <div class="grid">{"".join(first)}</div>

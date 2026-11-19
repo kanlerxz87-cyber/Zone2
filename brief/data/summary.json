@@ -30,22 +30,22 @@
     },
     {
       "metric": "Published pages carrying an Associates tag",
-      "value": "7 of 168",
+      "value": "{{with_tag}} of {{published}}",
       "source_ids": [
         "BR-10"
       ],
-      "note": "Consequence: no click on this site can become a qualifying purchase, so the three-sales threshold before an application is reviewed cannot be approached."
+      "note": "Dynamic source-tree markup count, not proof of enrollment or attribution. The owner supplied shopnow047c-20; no authorized attribution report is available."
     },
     {
       "metric": "Published pages carrying the exact §5 disclosure sentence",
-      "value": "168 of 168",
+      "value": "{{with_disclosure}} of {{published}}",
       "source_ids": [
         "BR-05"
       ]
     },
     {
       "metric": "Published pages printing a product price",
-      "value": "0 of 168",
+      "value": "{{price_pages}} of {{published}}",
       "source_ids": [
         "BR-01"
       ],
@@ -59,7 +59,7 @@
     },
     {
       "metric": "Separate published surfaces a visitor could land on",
-      "value": 18,
+      "value": "{{surfaces}}",
       "source_ids": [
         "BR-15"
       ],
@@ -110,14 +110,14 @@
   },
   "what_is_settled": [
     "The three supplied links resolve, on four separate dates across four sessions, to the same three listings: a Chefman 6-quart dual basket, an Emeril Lagasse 26-quart French-door oven, and a Chefman 8-quart basket fryer (BR-19, BR-20, BR-21).",
-    "The evidence discipline holds at scale: 168 of 168 pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
+    "The evidence discipline holds at scale: {{with_disclosure}} of {{published}} pages carry the disclosure, no page prints a product price, and every specification row links to the page it was read from.",
     "The machinery is trustworthy: {{gate_count}} of {{gate_count}} workflow steps pass locally, and the counts that matter are derived from the tree rather than typed.",
     "The rules are known and quoted: what may be published, what may not, and where the disclosure has to sit."
   ],
   "what_is_not_settled": [
     "Whether the three listings are the products the brief meant. Nothing in any official document binds a supplied code to a product (BQ-18).",
     "Whether an Associates account exists at all, and if it does, its tag and marketplace (BQ-14, BQ-19).",
-    "Which of the 18 published surfaces is the site that would be declared (BQ-15).",
+    "Which of the {{surfaces}} published surfaces is the site that would be declared (BQ-15).",
     "Who writes it, under what name, and whether that name is public (BQ-16).",
     "What readers are searching for. There is no demand signal anywhere in the project, so no topic on the topics board can be ranked by expected volume (BQ-20)."
   ],
@@ -176,5 +176,6 @@
       "page": "verification.html",
       "what": "One row per check this session ran, with the method and the page it was checked against."
     }
-  ]
+  ],
+  "build_measurement_note": "T63 (2026-11-19) replaces typed dynamic counts with source-tree tokens. Original review text/dates remain historical, superseded by workroom.html; counts do not re-verify the old narrative."
 }

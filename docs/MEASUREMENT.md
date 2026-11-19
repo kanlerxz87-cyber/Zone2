@@ -7,13 +7,13 @@ The previous browser-local event queue has been removed; it never provided sitew
 
 ## Five defined events
 
-| ID | Event | Ingestion / evidence boundary | Production status |
-|---|---|---|---|
-| EV-01 | `page_view` | Public POST; allowlisted page, server UTC day | Implemented; not deployed |
-| EV-02 | `product_link_click` | Public POST; page + static P1–P5 key | Implemented; not deployed |
-| EV-03 | `disclosure_view` | Public POST; at least half the strip intersects viewport | Implemented; not deployed |
-| EV-04 | `conversion_import` | Local CLI; authorized Associates export, period/source/channel/hash | Implemented; no real export available |
-| EV-05 | `search_query_import` | Local CLI; authorized, personal-data-reviewed Search Console export | Implemented; no real export available |
+| ID | Event | Ingestion / evidence boundary | Production status | Official criterion (not proof of implementation) |
+|---|---|---|---|---|
+| EV-01 | `page_view` | Public POST; allowlisted page, server UTC day | Implemented; not deployed | [Amazon policies](https://affiliate-program.amazon.com/help/operating/policies) |
+| EV-02 | `product_link_click` | Public POST; page + static P1–P5 key | Implemented; not deployed | [Amazon policies](https://affiliate-program.amazon.com/help/operating/policies) |
+| EV-03 | `disclosure_view` | Public POST; at least half the strip intersects viewport | Implemented; not deployed | [Amazon policies](https://affiliate-program.amazon.com/help/operating/policies) |
+| EV-04 | `conversion_import` | Local CLI; authorized Associates export, period/source/channel/hash | Implemented; no real export available | [Amazon policies](https://affiliate-program.amazon.com/help/operating/policies) |
+| EV-05 | `search_query_import` | Local CLI; authorized, personal-data-reviewed Search Console export | Implemented; no real export available | [Search Console](https://support.google.com/webmasters/answer/7576553?hl=en) |
 
 Raw loads and clicks are **not unique people or eligible Amazon Sessions**. A visibility event does
 not establish reading or individual sequencing. No browser purchase/conversion event is accepted.

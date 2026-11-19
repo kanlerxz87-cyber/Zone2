@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import re
+from price_policy import context_units
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -516,7 +517,8 @@ def check_typed_counts(report: Report) -> None:
                 "(F-35). Update the label or the suite; never leave them inconsistent."
             )
     markers = [
-        ("index.html", ("flagCountHeading", "flagCount")),
+        # The buyer homepage no longer prints flag counts. Keep the markers on
+        # the actual flag register; check_published_counts still rejects typed drift.
         ("flagged.html", ("flagRegisterCount", "flagRegisterMax")),
     ]
     for name, ids in markers:
@@ -547,7 +549,7 @@ def check_no_product_prices(report: Report) -> None:
         text = path.read_text(encoding="utf-8", errors="ignore")
         # A row of a table, or a block of prose, is the unit of context: a bounty figure sits in a row
         # whose header says "Published rate", not in a product's price slot.
-        units = re.split(r"</tr>|</p>|</li>|<br\s*/?>", re.sub(r"<[^>]+>", " ", text))
+        units = context_units(text)
         for unit in units:
             for m in MONEY.finditer(unit):
                 if PRICE_CONTEXT.search(unit) and not PROGRAM_CONTEXT.search(unit):

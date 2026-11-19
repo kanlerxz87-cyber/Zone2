@@ -45,7 +45,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 # One source of truth for "what counts as a published page". If these ever diverge, this gate
 # would pass a sitemap that the generator considers incomplete — the exact drift it exists to stop.
-from build_sitemap import EXCLUDED_DIRS, EXCLUDED_FILES  # noqa: E402
+from build_sitemap import EXCLUDED_DIRS, EXCLUDED_FILES, indexed_pages  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
 LIVE = "https://kanlerxz87-cyber.github.io/Zone2/"
@@ -135,12 +135,12 @@ def main() -> int:
         if loc.startswith(LIVE.rstrip('/')) and loc not in page_urls:
             problems.append(f"D2 sitemap.xml: <loc> {loc!r} has no corresponding file")
 
-    missing = sorted(set(page_urls) - seen)
+    missing = sorted({LIVE if rel == "index.html" else LIVE + rel for rel in indexed_pages()} - seen)
     if missing:
         preview = ", ".join(m.replace(LIVE, "/") for m in missing[:6])
         more = f" (+{len(missing) - 6} more)" if len(missing) > 6 else ""
         problems.append(
-            f"D1 sitemap coverage: {len(missing)} of {len(page_urls)} published pages absent — {preview}{more}"
+            f"D1 sitemap coverage: {len(missing)} of {len(page_urls)} indexable publication pages absent — {preview}{more}"
         )
 
     # ---- D3: robots.txt --------------------------------------------------------------------

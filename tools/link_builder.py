@@ -34,8 +34,8 @@ DISCLOSURE_OK = (
 DISCLOSURE_BANNED = ("commissionable link", "affiliate stuff", "some links maybe pay")
 
 TAG_RE = re.compile(r"^[a-z0-9]+-\d{2}$")
-# R-08: a sub-tag must be a static campaign label, never something derived from the visitor.
-SUBTAG_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,47}$")
+# Approved tracking IDs must come from Amazon. Static first-party campaign labels
+# are not permission to synthesize Amazon sub-tags or identify an end user.
 
 # The owner-supplied Associates tracking ID (brief of 2026-11-17). Before this constant existed the
 # repository had none — ledger flag F-07 recorded "no Associates account, marketplace, tracking ID, or
@@ -117,21 +117,17 @@ def build_product_link(
         raise LinkPolicyError(
             "NO_TAG: an Associates ID was not supplied. Use preview_link() for a non-publishing placeholder."
         )
-    if subtag:
-        _require(
-            bool(SUBTAG_RE.match(subtag)),
-            "sub-tag must be a static lowercase campaign label (R-08); never a user/session/IP-derived value",
-        )
-        _require(
-            not any(tok in subtag for tok in ("user", "uid", "session", "ip", "visitor")),
-            "sub-tag looks user-derived, which the Participation Requirements forbid (R-08)",
-        )
-
+    _require(
+        not subtag,
+        "Do not synthesize a sub-tag. Use an entire approved tracking ID supplied by Associates Central; "
+        "keep static campaign labels in the first-party ledger (R-08).",
+    )
     params: dict[str, str] = {"tag": associates_tag}
-    if subtag:
-        params["linkCode"] = "sl1"
-        params["tag"] = f"{associates_tag}-{subtag}" if not associates_tag.endswith("-" + subtag) else associates_tag
     for key, val in (extra_params or {}).items():
+        _require(
+            key.lower() not in {"tag", "linkcode", "subtag"},
+            f"parameter {key!r} must not override the configured attribution identity",
+        )
         _require(
             key.lower() not in COMPETING_ATTRIBUTION_PARAMS,
             f"parameter {key!r} is a competing-network attribution field; combining attribution is prohibited (R-14)",
@@ -211,7 +207,7 @@ def parse_tag_from_href(href: str) -> dict[str, str]:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    print(build_product_link("B08N5WRWNW", "exampletag-20", link_text="See the listing on Amazon").to_html())
+    print(build_product_link("B08N5WRWNW", "exampletag-20", link_text="See the listing").to_html())
     print(preview_link("B08N5WRWNW", link_text="Preview only").warnings)
     for bad in [("B04G1MEwY", "invalid identifier"), ("B08N5WRWNW", "invented mark")]:
         try:
