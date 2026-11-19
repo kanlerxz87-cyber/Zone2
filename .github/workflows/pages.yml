@@ -493,7 +493,7 @@ jobs:
 
       - name: Front-of-house gate (per-row sourcing, blanks carry a reason, disclosure above
               the data, sponsored links, canonical, no prices, no invented metrics)
-        run: python3 tools/verify_front.py
+        run: python3 tools/verify_front.py && python3 tests/test_front_surfaces.py
 
       # T68 (session arena/5f7f77a4-zone2): the five product notes used to share roughly a third of
       # their text (worst pair 0.389 by 8-word shingle Jaccard). This gate measures the same property
