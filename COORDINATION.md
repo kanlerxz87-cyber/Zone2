@@ -7869,9 +7869,18 @@ as history on purpose (OBS-2/OBS-3 in the verification record).
 
 **Pending at the time of this paragraph:** PR creation, merge without waiting, GitHub Pages deploy confirmation, and the live fetch — all recorded in the closing addendum appended after deployment.
 
-## T72 claim — session `arena/1b09bb6d-zone2` (`1b09bb6d`) — 2026-11-19 (UTC)
+## T73 claim — session `arena/1b09bb6d-zone2` (`1b09bb6d`) — 2026-11-19 (UTC)
 
-**Status: claimed — final integration session.** Baseline is the retained canonical `main` tree at
+**Status: claimed — final integration session.**
+
+> **Renumbered T72 → T73 at integration (2026-11-19).** This session's claim was written and
+> pushed at **19:40:08Z**, four minutes *before* session `arena/e078d7c5-zone2` claimed **T72** at
+> 19:44:12Z — but that session's coordination-only pull requests (#190, #191) merged into `main`
+> first, so its T72 record is the one already published. Per the board's standing precedent the
+> session still in flight yields the id. **No work was dropped and no scope overlapped:** that
+> session edited `COORDINATION.md` only and explicitly left #182 and #184 untouched, whereas this
+> session integrated #182 and #184 — the two branches that carry the Decision Room, the design
+> brief and the clipped-label repair. Both chronologies are kept in this file. Baseline is the retained canonical `main` tree at
 `fc243e0b8d85e5bf77eacc45ca0469bd6567a5a3` (merge of PR #189, the T71 close-out). The live site is
 `https://kanlerxz87-cyber.github.io/Zone2/` and the Pages API reports `status: built` from `main` at `/`.
 
@@ -7894,7 +7903,7 @@ rewritten; no upstream commit is discarded.
 
 | id | Task | Status | Session | File scope |
 |---|---|---|---|---|
-| T72 | **Final integration: re-verify the combined tree line by line, integrate stale PRs #182 and #184, run every gate, and publish.** | **claimed 2026-11-19 (UTC), in progress** | `arena/1b09bb6d-zone2` (`1b09bb6d`) | `COORDINATION.md` (append-only records + this claim). **Integrated branches (read-only inputs, merged not edited):** `origin/arena/60b0ea6b-zone2` (#182) and `origin/arena/698addcd-zone2` (#184). **Additive integration files:** `docs/verification-1b09bb6d.md` (NEW), `EXECUTIVE_SUMMARY.md` (append-only addendum), `README.md` (append-only addendum). **Regenerated outputs** through the existing builders only (`index.html`, `questions.html`, `suggestions.html`, `flagged.html`, `decision-room.html`, `decision-prompt.html`, `guides/**`, `shop/**`, `board/**`, `brief/**`, `release/index.html`, `sitemap.xml`, `feed.xml`). **Not claimed:** any verified product/spec/source value not backed by a dated official read; `ledger/campaigns.json` (stays `EMPTY_BY_DESIGN`); the intended-ASIN confirmation fields (stay blank until the owner confirms); any other session's namespace. |
+| T73 | **Final integration: re-verify the combined tree line by line, integrate stale PRs #182 and #184, run every gate, and publish.** | **claimed 2026-11-19 (UTC), in progress** | `arena/1b09bb6d-zone2` (`1b09bb6d`) | `COORDINATION.md` (append-only records + this claim). **Integrated branches (read-only inputs, merged not edited):** `origin/arena/60b0ea6b-zone2` (#182) and `origin/arena/698addcd-zone2` (#184). **Additive integration files:** `docs/verification-1b09bb6d.md` (NEW), `EXECUTIVE_SUMMARY.md` (append-only addendum), `README.md` (append-only addendum). **Regenerated outputs** through the existing builders only (`index.html`, `questions.html`, `suggestions.html`, `flagged.html`, `decision-room.html`, `decision-prompt.html`, `guides/**`, `shop/**`, `board/**`, `brief/**`, `release/index.html`, `sitemap.xml`, `feed.xml`). **Not claimed:** any verified product/spec/source value not backed by a dated official read; `ledger/campaigns.json` (stays `EMPTY_BY_DESIGN`); the intended-ASIN confirmation fields (stay blank until the owner confirms); any other session's namespace. |
 
 **Rule this session holds itself to.** No product fact, price, star rating, review count, ASIN,
 commission, traffic figure, conversion or revenue number is added, changed or inferred. A value that
