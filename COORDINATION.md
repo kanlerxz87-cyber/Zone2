@@ -8207,3 +8207,52 @@ bump the three prose counts in the same change.
 **Irregularities flagged (owner-gated, non-blocking):** category split (3 air fryers + 2 meat thermometers — no single category covers the submitted set); intent/attribution/confirmation fields blank pending owner; collector OFF pending owner host. No value inferred.
 
 **Next:** PR `arena/353f0afc-zone2` → `main`, merge without waiting, confirm GitHub Pages deploy, then append PR link / merge commit / deploy result here and mark T76 done.
+
+## T77 claim — session `arena/af15a2f9-zone2` (af15a2f9) — 2026-11-19 (UTC) — TAKEOVER of stale T73
+
+**Claimed:** 2026-11-19 (UTC), on `arena/af15a2f9-zone2` (base `main` @ `bce5711`, after PR #201/T76).
+Task id **T77** verified free at claim time: `grep -c T77` = 0 on this tree and on `origin/main`.
+
+**Handoff note (takeover per the 60-minute stale rule).** Open PR **#194** (session `arena/1b09bb6d-zone2`,
+task **T73 final integration**) claims exactly the surfaces the 2026-11-17/19 request asks for —
+`decision-room.html` (a section where suggestions are reviewed and a path chosen before anything is
+implemented), `decision-prompt.html` (the suggestions that feed the prompt to design the site),
+current-vs-preserved decision registers, and a line-by-line re-verification. Its last commit
+(`f8412b1`, 2026-11-19T20:07:12Z) is >60 minutes old with no further commits at claim time
+(21:55Z), its PR check `Build and verify` **FAILED** (run 44605391629, completed 20:08:02Z), and the
+PR is **CONFLICTING** with current `main` (T75 PR #199, T74 PR #193/198/200 and T76 PR #201 landed
+after its branch point). PRs **#184** (T70) and **#182** (T69) are stale (idle since ~11:25Z) and
+already integrated inside #194's branch (commits `da07775`, `8c15136`). Per the board's rule this
+session **takes over T73's integration task** and completes it on this branch: merge #194's branch
+content without discarding it, resolve conflicts in favour of the current register data (T75's
+P-05 warranty conflict treatment wins over older rows) plus regeneration through the existing
+builders, diagnose and fix the failing gate, run the full replay, then PR → merge → Pages deploy →
+close #194/#184/#182 with a handoff note. No other session's work is discarded, and no claim older
+than the stale window is taken from a live session.
+
+**Task:** **T77 — finish the T73 final integration (Decision Room + design brief + registers) on the
+current tree, and close the request's decision-making asks:** (a) land `decision-room.html` /
+`decision-prompt.html` and their gates on current `main`; (b) make sure the request's three asks are
+served on the published surfaces — suggestions reviewable and choosable before implementation, the
+prompt-to-design-the-site suggestions feed, and the known/missing/discovery question register — adding
+only what the integrated branch genuinely lacks (e.g. a catchy/topic-pitch row group if the Decision
+Room has none), never restating a claim another register owns; (c) re-verify line by line, flag
+irregularities, keep blanks blank; (d) integrate: gates → PR → merge without waiting → Pages deploy
+confirmation → record here and mark T77 done.
+
+**File scope (final-integration scope):** the union required by the takeover —
+`arena/1b09bb6d-zone2`'s branch content merged into this branch (all files it changes, including
+`tools/publication.py`, `tools/build_front.py`, `tools/verify_front.py`, `tools/verify_publication.py`,
+`tools/verify_decision_room.py`, `content/*.json`, `decision-room.html`, `decision-prompt.html`,
+`workspace.html`, root reader surfaces, `board/**`, `brief/**`, `console/**`, `tests/**`),
+conflict resolutions, regenerated outputs through existing builders, `COORDINATION.md` (append-only),
+NEW `docs/verification-af15a2f9.md`, `README.md` / `EXECUTIVE_SUMMARY.md` (counts reconciled to the
+registers — the same fix #194's own last commit attempted), and `.github/workflows/pages.yml` only if
+a gate fails without it (logged first). **Excluded:** pushing to any branch other than
+`arena/af15a2f9-zone2`; `ledger/flags.json` rewrites; any value not re-read from an official source.
+
+**Not invented:** no price, rating, review count, sales rank, traffic, conversion or intended-ASIN
+confirmation is added. Blanks stay blank; conflicts stay conflicts; working topic titles are labelled
+editorial hypotheses, not measured demand.
+
+**Status:** in progress.
