@@ -1410,6 +1410,86 @@ The decision desk (`suggestions.html`, `board/suggestions.html`, `brief/suggesti
   - `tools/test_audit.py`: 11/11 injected defects fired.
   - `tests/test_pipeline.py`: 15/15 unit tests passed.
 - **Published Surface Count:** 180 published pages, 100% carrying the statutory disclosure, 0 pages publishing unauthorized prices, 100% internal links resolving cleanly.
+## Current-state addendum — 2026-11-19 (T63 integration)
+
+This section is the current status as of the date above. It supersedes earlier summaries that describe
+only the initial three-link set; it does not rewrite those dated verification records.
+
+### Five submissions: intent is still blank
+
+The current intake register contains five submitted short links. The submitted tokens are not recorded
+as intended ASINs. For each record, `intended_asin`, intended listing URL, confirmation date, and
+confirmation source remain blank; the observed redirect destination is stored separately and was last
+recorded on 2026-11-17. The five observations point to three air-fryer listings and two meat-thermometer
+listings, but that is not proof of what the submitter intended. The exact compliance status of the supplied
+short links remains unresolved in FLG-003; no claim is made that they are invalid. See
+[`intake/submissions.html`](intake/submissions.html), [`intake/flags.html`](intake/flags.html), and the
+[Amazon link-format help](https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC).
+
+### Publication and integration status
+
+The reader-facing summary is now generated at [`summary.html`](summary.html) from the five-record intent
+register. It keeps intended identity separate from observed destinations, leaves unknown values blank,
+and links readers to the questions, decision board, source register, and suggestions with explicit options
+and trade-offs. The earlier `summary.html` narrative mixed a three-link description with values from a later
+five-entry ledger; it has been replaced rather than represented as current. This Markdown file preserves
+the older dated narrative and its verification trail.
+
+The Pages workflow's two literal conflict blocks have been resolved while retaining both submitted-link
+intake gates (`build`, validator, negative tests) and decision-board gates (`build`, validator, negative
+tests). The generated publication uses reader-first primary navigation, one accessible “Project & tools”
+disclosure group, and footer links for the tool and dashboard routes. The suggestion count is derived from
+the decision register. Buyer-question topics are described as editorial hypotheses, not measured demand.
+
+The front-page disclosure accurately says that `shopnow047c-20` was supplied, while its account status and
+presence on every product destination have not been confirmed. Repository HTML inspection finds product
+destination links do not consistently carry the tag. **Correction to the T65 completion note above:** it
+calls the tag “verified and active”; this integration found no authorized account evidence that establishes
+that status or universal link coverage. Treat activation as unconfirmed until the owner validates it inside
+Associates Central and in an authorized report. The implementation does not claim that account activation,
+per-product Special-Link validation, server-side event collection, conversion attribution, or Search Console
+reporting is live. Amazon's [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement)
+requires properly tagged Special Links; Google's guidance says paid placements should use
+[`rel="sponsored"`](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links).
+
+### Measurement contract still needs reconciliation
+
+`assets/js/events.js` stores page-view, product-click and disclosure-view events in a bounded browser-local
+queue; without a configured endpoint, it transmits nothing and no counts are published. Conversion imports
+and Search Console query imports remain blocked on first-party reports and verified account access.
+There are two documentation discrepancies to resolve before enabling a backend: the intake tracking
+register calls the events proposed/not instrumented while `docs/measurement-t40.json` labels three events
+LIVE (client-side only), and the page-view code sends the referrer hostname under property `r` while the
+measurement schema names `referrer_host`. These were identified by repository inspection, not by a live
+endpoint test. GitHub Pages is documented as static hosting; no event sink was found in this repository.
+See [`docs/measurement-t40.json`](docs/measurement-t40.json), [`intake/tracking.html`](intake/tracking.html),
+[GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages),
+and the [FTC disclosure guidance](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers).
+
+### Verification in this integration
+
+- Python compilation, the front-page generator and freshness check, the summary freshness check, and the
+  front-page verifier passed; the verifier reports nine generated pages current.
+- The Pages workflow parses as YAML and retains the intake and decision-board build, validator and negative
+  test commands; conflict-marker scan is clean.
+- Regenerated the sitemap and dependent derived counts. `tools/ci_replay.py` passed all 49 steps, including
+  the intake/board gates, sitemap coverage, release-readiness checks, and front-page gate.
+- No product/source facts were changed and no live Amazon redirect was repeated in this integration pass.
+  The changed verification scope and commands are recorded in
+  [`docs/verification-cf98ff65.md`](docs/verification-cf98ff65.md).
+- PR #166 is open from `arena/cf98ff65-zone2` to `main`; no merge or GitHub Pages deployment is confirmed by this addendum.
+
+### Next evidence to collect
+
+1. Have the submitter confirm the intended ASIN and official listing URL for each of the five links; retain
+the confirmation date/source apart from redirect observations.
+2. Verify the Associates account and marketplace, then confirm each intended Special Link is tagged with
+`shopnow047c-20` and appears in the authorized account report.
+3. Reconcile the measurement definitions and field names before deploying an endpoint; record retention and
+bot-filtering choices before collecting events.
+4. Verify Search Console ownership and use actual query/page data before treating any topic as measured
+interest. Until then the guide subjects remain editorial hypotheses.
+
 
 ---
 
