@@ -294,8 +294,11 @@ class Application:
             return send("202 Accepted", {"accepted": len(events)})
         if method not in ("GET", "HEAD"):
             return send("405 Method Not Allowed", {"error": "method not allowed"})
-        if path == "/":
-            path = BASE_PATH
+        if path in ("/", BASE_PATH.rstrip("/")):
+            # Keep relative page/assets/API URLs under the same project prefix,
+            # including when a preview UI opens the bare port URL.
+            headers.append(("Location", BASE_PATH))
+            return send("302 Found", b"", "text/plain; charset=utf-8")
         if not path.startswith(BASE_PATH):
             return send("404 Not Found", {"error": "not found"})
         rel = unquote(path[len(BASE_PATH):])

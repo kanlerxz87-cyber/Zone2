@@ -118,6 +118,13 @@ class CollectorTests(unittest.TestCase):
         self.assertEqual(self.request("/Zone2/", method="HEAD")["body"], b"")
         self.assertNotIn(b"daily_counts", self.request("/healthz", method="GET")["body"])
 
+    def test_preview_root_redirect_preserves_relative_asset_base(self):
+        for path in ("/", "/Zone2"):
+            result = self.request(path, method="GET")
+            self.assertEqual(result["status"], 302)
+            self.assertEqual(result["headers"]["Location"], "/Zone2/")
+            self.assertEqual(result["body"], b"")
+
     def test_budget_is_global_not_ip_keyed(self):
         self.app.budget.tokens = 0
         self.assertEqual(self.request()["status"], 429)

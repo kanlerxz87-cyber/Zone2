@@ -214,3 +214,9 @@ an unauthorized settings write or claim a successful switch.
 This is **CN-08, open**: a qualified repository administrator must select GitHub Actions as the source
 for sole-publisher assurance on future pushes. Current artifact deployment and its live verification are
 separate from this administrative gate. No credentials or manual answer are solicited in the session.
+
+
+Preview entry-point regression added: bare `/` and `/Zone2` redirect to `/Zone2/`, so opening the live
+preview port cannot leave relative assets/API calls at the wrong root. Collector suite is now **25 tests**;
+the original 24-test results above remain dated records. A real browser root-redirect assertion is added
+before the existing viewport/behavior suite. This affects self-hosting/preview routing, not Pages settings.

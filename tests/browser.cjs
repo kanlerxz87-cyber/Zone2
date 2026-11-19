@@ -55,6 +55,9 @@ async function run() {
   page.on('pageerror',e=>errors.push(e.message));
   page.on('response',r=>{if(r.status()>=400 && new URL(r.url()).origin===new URL(base).origin)missing.push([r.status(),r.url()]);});
   page.on('request',r=>{if(r.url().endsWith('/api/events'))posts.push(JSON.parse(r.postData()));});
+  await page.goto(new URL('/',base).href,{waitUntil:'load'});
+  assert.equal(new URL(page.url()).pathname,'/Zone2/');
+  summary.behavior_checks.push('bare preview URL redirects to the correct relative-asset base');
   const current=JSON.parse(python("import sys,json;sys.path.insert(0,'tools');import publication as p;print(json.dumps(sorted(p.indexable_paths()|set(p.extra_pages())|{'suggestions.html','questions.html'})))"));
   for(const viewport of [{width:1440,height:1000},{width:390,height:844}]){
     await page.setViewportSize(viewport);
