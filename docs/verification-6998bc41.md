@@ -194,3 +194,12 @@ suggestion/question "last updated" byline fix, new `verify_front` G11) and PR #1
 Sources for every claim above are the live reads in section 1 and the repositories' own registers
 (`ledger/flags.json`, `ledger/questions.json`, `ledger/sources.json` S61/S62/S63). Anything this
 session could not confirm is stated as unconfirmed rather than filled in.
+
+
+## 9. Final integration result (2026-11-19, UTC)
+
+- **Parallel closure reconciled:** session `9ffe2d83` (T68) merged the same CR-7..CR-10 scope via PR #185 while this branch was in flight. Union resolution (merge commit `3565356`): their published F-54 row/notes, board data (`og_full`-based RQ-05) and EXEC addendum are canonical; this session's same-origin `SITE_PREFIX` check was added to their all-pages loop; this session's F-54 wording was superseded in favour of the already-published row; `assets/js/data.js` (missing F-54 on `main`) was regenerated from the merged register. Full account in `COORDINATION.md` (T71 session record, "Reconciliation" paragraph).
+- **PR:** [#188](https://github.com/kanlerxz87-cyber/Zone2/pull/188) — merged **2026-11-19T11:49:50Z**, merge commit `e2a295c612e6e14f88c90b1804aa851e52bb9418`. PR check run 44517901154 passed (2m7s); main run 44518297322 success (build + verify + deploy, including the workflow's live-publication check); Pages build run 44518296339 success.
+- **Live fetches after deploy:** landing page (five supplied links tagged `shopnow047c-20`, `rel="sponsored"`, disclosure above content, FSIS citation) ✓; `flagged.html` shows F-54 in the canonical wording beside F-53 with S62 links ✓; `board/requirements.html` shows the ported S-09 row fully derived (97/219 JSON-LD, 165/219 full og- metadata, 152/219 og:image, 0/219 SC tags) ✓.
+- **Gates on the merged tree:** `ci_replay` 62/62 · `verify_marketing` 27 pages/0 failures (+ four controls) · `validate_board` pass · `audit_site` 7/7 (228 pages) · `validate_data` clean · `validate_brief` pass · `package_site` 228/16 · `verify_publication` ok (1453 sponsored anchors, 144 factual rows) · no `53 flags` anywhere.
+- **Still open (as logged):** CR-14 (`ledger/products.json` P-05 divergence), #162's `desk/` port request, S-20/RQ-16, and all prior blanks/open items.
