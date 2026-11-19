@@ -40,6 +40,7 @@ live, deliverables audit green, gates 35/35, T52 marked done.
 | `arena/672f9c4c-zone2` (`672f9c4c`, **this session**) | `arena/672f9c4c-zone2` | **T73 (claimed as T72; renumbered when session `e078d7c5`'s T72/PR #190/#191 landed on `main` during this branch's flight) — close the last unfinished P1 row (S-04 / RQ-01: give every page its own title and meta description), measured not asserted.** `board/requirements.json` RQ-01 currently reads `overstated`, and this session re-measured the tree: **7 pages carry no `meta description` at all** (the 404 page and all six `revalidation/` pages), **4 titles are duplicated** (two `pages/categories/` bands share a title, `guides/meat-thermometers.html` and `marketing/thermometers/index.html` share one, and `pages/niches.html` shares one with `pages/modules/m-11-niche-discovery.html`), and **3 description strings are shared by more than one page** (`pages/` 39 pages on one string, `decisions/` 4 pages on one string, plus the 7 blanks). Fixed at each generator (`tools/build_site.py`, `tools/build_decisions.py`, `revalidation/scripts/build.py`), plus `404.html`; then a **new mechanical gate** so the property cannot regress. | claimed 2026-11-19 (UTC), in progress |
 | `arena/6998bc41-zone2` (`6998bc41`, **this session**) | `arena/6998bc41-zone2` | **T71 (claimed as T69; renumbered when `56aa1fac`'s T69/PR #180 and `5f7f77a4`'s T70/PR #183 landed) — close the open change requests CR-8, CR-9 and CR-10; port the surviving data corrections from stale PR #163; triage stalled PRs #162/#163/#172; final integration (gates → PR → merge → confirm Pages deploy → record).** | **done 2026-11-19** — PR [#188](https://github.com/kanlerxz87-cyber/Zone2/pull/188) merged 11:49:50Z (merge commit `e2a295c`); main run 44518297322 success incl. Pages deploy; live fetches verified |
 | `arena/9a72588c-zone2` (`9a72588c`, **this session**) | `arena/9a72588c-zone2` | **T74 (claimed as T72; renumbered at rebase when 672f9c4c's T72 landed via PR #192 and e078d7c5's T72 record landed with it; 672f9c4c's close-out holds T73) — wave 2 of the review board (`docs/review-board.json`): the 2026-11-19 brief's suggestion wave.** Adds the design-prompt suggestions (polished marketing presentation, catchy spec-backed article concepts, an organic-traffic measurement loop, an explicit anti-generated-slop voice gate), the decision-process suggestions (a decision cadence and the no-implementation-without-a-recorded-decision pipeline), new questions that name what must be known before any of it is decidable, fresh measurements taken on the committed tree today, and the live official-source reads everything rests on; derives the counts the renderer had hard-coded (they had drifted: guide count, the other registers' question counts); regenerates the five review pages; fresh dated verification; gates; PR -> merge -> confirm Pages deploy -> record. Does NOT touch any file in the two unregistered open PRs (#182 `60b0ea6b`, #184 `698addcd`). | claimed 2026-11-19 (UTC), in progress | `docs/review-board.json`, `tools/build_review_board.py`, `tools/validate_review_board.py` (allowlist line only), `tools/test_review_board.py` (only if a count assertion forces it), regenerated `review.html` / `review-questions.html` / `review-trace.html` / `review-ideas.html` / `review-decide.html`, NEW `docs/verification-9a72588c.md`, append-only `COORDINATION.md` (this row + claim + close-out). **Excluded:** `.github/**`, `tools/build_front.py`, `tools/publication.py`, `index.html`, `questions.html`, `suggestions.html`, `decision-*`, `guides/**`, `board/**`, `ledger/**`, `brief/**`, `marketing/**` (all outside this claim; several are in open PRs #182/#184). |
+| `arena/4c81759e-zone2` (`4c81759e`, **this session**) | `arena/4c81759e-zone2` | **T75 — close CR-14: the P-05 Warranty row.** The ledger publishes only the two-year figure as `verified` while the same Amazon listing's Item details states `Warranty Description: 3 Year` (both statements re-read live 2026-11-19). Aligns the row with the battery-row conflict treatment (both statements, `status: conflict`, reason), mirrors the fix in `shop/data/catalog.json` (the shop also publishes the row as verified, although F-54 already claims the shop treats it as a conflict), regenerates every derived surface through its existing builders, records a dated verification row, runs all gates, PR -> merge -> confirm Pages deploy -> record. | claimed 2026-11-19 (UTC), in progress | `ledger/products.json` (P-05 `resolved.specs` Warranty row only), `shop/data/catalog.json` (P-05 Warranty row only), `ledger/verification.json` (append V-109), regenerated outputs through their existing builders only: `assets/js/data.js` (`build_root_data`), `pages/products.html` (`build_site`), `shop/*.html` (`build_shop`), `guides/meat-thermometers.html` + `guides/instant-read-or-wireless-thermometer.html` + any other byte-drifting `build_front` output, `verification.html` (`build_root_views`), NEW `docs/verification-4c81759e.md`, append-only `COORDINATION.md`. **Excluded:** `.github/**`, `tools/build_front.py` (run, never edited), `tools/publication.py`, `EXECUTIVE_SUMMARY.md`, `README.md`, `console/**`, `board/**`, `content/**`, root `index/flagged/questions/suggestions/shop/summary/compare/intent/measurement.html` (expected byte-identical; any drift on a file also open in PR #194 resolves at merge by regeneration), `marketing/**` (the desk already publishes the conflict), every other session's branch, and any value not re-read live today. |
 
 
 | `arena/f786c0d7-zone2` (`s-f786c0d7`) | PR #10 | Compliance control ledger, platform engine (`tools/`), `pages/` subpages, `ledger/` dataset, verification log | merged (PR #10) |
@@ -8097,3 +8098,79 @@ listed above, which appears in neither PR's file list).
   owner; the two unregistered open PRs (#182 `60b0ea6b`, #184 `698addcd`) remain untouched and are recorded
   in PI-08; PW-07's underlying task (S-20/RQ-16, the mobile-first pass) remains unclaimed and is now the
   board's recommended next build session.
+
+## T75 claim — session `arena/4c81759e-zone2` (4c81759e) — 2026-11-19 (UTC)
+
+**Claimed:** 2026-11-19 (UTC), on `arena/4c81759e-zone2` (base `fc243e0`, merged with `main` at
+`d019bcc` and `1000f40` before this claim). Task id **T75** verified free at claim time:
+`grep -c T75` = 0 on this tree, on `origin/main`, and on open PR #194's branch
+(`arena/1b09bb6d-zone2`, fetched via the API). Open PRs at claim time: **#194** (session
+`1b09bb6d`, T73 final integration — its body states "CR-14 stays open — this session does not
+choose between the CHEF iQ warranty figures"; updated 2026-11-19T20:07Z, well under the 60-minute
+stale rule, so it is not taken over), **#184** and **#182** (superseded by #194's takeover, not
+touched). PR #193 (`aecb287a`, S-04/S-24/S-20-partial) merged at 20:17:34Z and is already in this
+branch. CR-14 was raised by T71 (`6998bc41`) and has been left open by every session since.
+
+**Task:** close **CR-14** — `ledger/products.json`'s P-05 "Warranty" row publishes only
+"Two-year assurance provided by CHEF iQ" as `verified`, while the same official listing's Item
+details table states `Warranty Description: 3 Year`. Both statements were re-read live today on
+https://www.amazon.com/dp/B0DZFD6R9Z (About this item bullet: "RESOURCES: Built for long-lasting
+durability with a two-year assurance provided by CHEF iQ."; Item details row: "Warranty
+Description | 3 Year"). The battery row on the same entry already carries the correct treatment
+(`status: "conflict"`, both figures in `value`, a `source_label` that quotes both readings, and a
+`why_blank` that says neither is chosen); the Warranty row is aligned to that exact pattern. No
+term is chosen, nothing is inferred, and the row keeps source S62. The same divergence exists in
+`shop/data/catalog.json` (P-05 rows[8]: `verified`, "Two-year assurance from CHEF iQ") and is
+fixed there too, in the shop namespace's own conflict style (`same_page: true`, both readings
+quoted in `value`, mirroring that file's Battery row) so that F-54's published claim — "the
+thermometer desk and the shop publish the warranty row as a conflict" — becomes true on every
+surface.
+
+**Surfaces regenerated through their existing builders after the data edit** (no builder source
+is edited): `tools/build_root_data.py` → `assets/js/data.js`; `tools/build_site.py` →
+`pages/products.html`; `tools/build_shop.py` → `shop/*.html`; `tools/build_front.py` →
+`guides/meat-thermometers.html`, `guides/instant-read-or-wireless-thermometer.html` and any other
+front page whose bytes shift (the guides read P-05 specs through `tools/front_t63.py::
+load_thermometers()`, which mirrors ledger statuses including `conflict`); `tools/build_root_views.py`
+→ `verification.html` after appending **V-109** to `ledger/verification.json`. The marketing desk
+(`marketing/data/thermometers.json`, `marketing/thermometers/chef-iq-sense-wireless.html`) already
+publishes the conflict and is expected to regenerate byte-identical; `tools/build_console.py`,
+`tools/build_thermometers.py`, `tools/build_marketing.py`, `tools/build_board.py` and
+`tools/verify_publication.py` are run in `--check`/gate mode only and are expected not to drift.
+
+**Overlap handling:** `guides/meat-thermometers.html`, `guides/instant-read-or-wireless-thermometer.html`
+and (if it drifts at all) root front pages are also in PR #194's file list. They are regenerated
+here, never hand-edited; if #194 merges first this branch re-merges `origin/main` and regenerates
+again from the combined tree before opening its PR, and if this PR merges first, #194 regenerates
+on top. `tools/build_front.py` itself is in #194's list and is **run but never edited** in this
+scope. `EXECUTIVE_SUMMARY.md` and `README.md` (in #194) are not edited: CR-14's closure is
+recorded here and in `docs/verification-4c81759e.md` only. `ledger/flags.json` (F-54 stays open —
+the listing still disagrees with itself; only our row's treatment changes) and
+`ledger/questions.json` (Q-22 stays open) are not edited.
+
+**Gates planned:** `python3 tools/ci_replay.py` (full workflow replay), `tools/validate_data.py`,
+`tools/audit_site.py`, `tools/validate_shop.py`, `tools/validate_board.py`, every affected
+builder's `--check`, `tools/verify_publication.py`, `tools/front_t63` freshness via
+`build_front --check`, `tests/test_pipeline.py`. Then PR → merge without waiting → confirm GitHub
+Pages deploy → append the close-out (PR link, merge commit, deploy result) and mark CR-14
+**Closed** in the CR table.
+
+| id | Task | Status | Session | File scope |
+|---|---|---|---|---|
+| T75 | **Close CR-14 — the P-05 Warranty row.** Re-read both warranty statements live on the official listing (2026-11-19); align `ledger/products.json`'s P-05 Warranty row with the battery row's conflict treatment (both statements, `status: conflict`, `source_label` quoting both readings, `why_blank` saying neither is chosen — no term selected); mirror the fix in `shop/data/catalog.json` in that file's `same_page` conflict style; append verification row V-109; regenerate every derived surface through its existing builders; run all gates; PR → merge without waiting → confirm Pages deploy → record. Blanks stay blank; no value is inferred; F-54 and Q-22 stay open (the listing conflict itself is an owner question). | **claimed 2026-11-19 (UTC), in progress** | `arena/4c81759e-zone2` (4c81759e) | `ledger/products.json` (P-05 Warranty row only), `shop/data/catalog.json` (P-05 Warranty row only), `ledger/verification.json` (append V-109), regenerated-through-builders-only: `assets/js/data.js`, `pages/products.html`, `shop/*.html`, `guides/meat-thermometers.html`, `guides/instant-read-or-wireless-thermometer.html`, any other byte-drifting `build_front` output, `verification.html`, NEW `docs/verification-4c81759e.md`, append-only `COORDINATION.md` (this claim + CR-14 status + close-out). **Excluded:** `.github/**`, `tools/build_front.py` (run, never edited), `tools/publication.py`, `tools/verify_publication.py`, `EXECUTIVE_SUMMARY.md`, `README.md`, `console/**`, `board/**`, `content/**`, root `index/flagged/questions/suggestions/shop/summary/compare/intent/measurement.html` (regenerated only if a builder reports drift; expected byte-identical), `marketing/**` (desk already correct), `ledger/flags.json`, `ledger/questions.json`, every other session's branch, and any statement this session does not re-read live. |
+
+**Amendment (2026-11-19, same session): V-109 dropped — scope stays 108 register rows.**
+The V-109 append was executed, then reverted before commit, after `tools/audit_site.py`
+failed `prose_counts` (exit 1): `check_counts` pins the "108 checks" prose in `README.md`
+(line 291) and `EXECUTIVE_SUMMARY.md` (lines 857, 1041) to `len(verification.json rows)`,
+and both files are in the claimed file scope of active PR #194 (session `1b09bb6d`, who
+explicitly declined CR-14). Bumping their count lines would be a cross-scope edit of
+another session's files — the protocol says log instead of edit. Resolution: keep the
+register at 108 (`git checkout -- ledger/verification.json`), leave README/EXEC untouched,
+and preserve the 2026-11-19 re-read evidence where it already lives canonically — flag
+**F-54** ("Re-read live on 2026-11-19 by session 9ffe2d83…", both statements verbatim),
+question **Q-22** (both statements quoted, owner question), **V-108** (P-05 spec sourcing),
+plus the new dated record `docs/verification-4c81759e.md`. After the revert, `audit_site`
+and `validate_data` pass (108 rows, 0 errors) and `build_site --check` shows no drift.
+If a future session with claim on README/EXEC wants the register grown, re-append V-109 and
+bump the three prose counts in the same change.

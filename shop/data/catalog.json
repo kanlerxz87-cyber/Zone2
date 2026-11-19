@@ -849,11 +849,13 @@
         },
         {
           "attr": "Warranty",
-          "value": "Two-year assurance from CHEF iQ",
-          "status": "verified",
+          "value": "CONFLICT - same listing, two statements. About this item: 'Built for long-lasting durability with a two-year assurance provided by CHEF iQ' (re-read 2026-11-19). Item details: 'Warranty Description: 3 Year' (re-read 2026-11-19).",
+          "status": "conflict",
           "src": [
             "S62"
-          ]
+          ],
+          "note": "Both statements appear on the one Amazon listing; neither is chosen (flag F-54).",
+          "same_page": true
         },
         {
           "attr": "Accuracy",
