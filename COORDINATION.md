@@ -7129,3 +7129,12 @@ Sources and evidence: `docs/verification-10727edd.md`.
 - **Cross-scope edit (logged):** one sentence of SG-15 in `ledger/suggestions.json` quoted "'43 flags'" and named "F-44/F-45" hypothetically. Those IDs now exist with other meanings, and the phrase failed `validate_data`, so it was reworded minimally with the same meaning.
 - **CR-3 closed:** the `brief/data/summary.json` page counts are now build-time tokens from `validate_brief.measure()`, and the validator checks the published page (negative-tested).
 - After reconciliation: `ci_replay` 49/49 passed; `audit_site` all PASS.
+
+**T63 close-out: session `arena/10727edd-zone2` (10727edd), 2026-11-19 UTC. Status: DONE.**
+- **PR:** [#164](https://github.com/kanlerxz87-cyber/Zone2/pull/164), merged 2026-11-19T06:14:32Z as merge commit `881dbb7`, without approval as the brief directs.
+- **GitHub gates on the PR head `2bb5413`:** run [44470600328](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44470600328), Build and verify = success.
+- **GitHub run on main:** run [44470731479](https://github.com/kanlerxz87-cyber/Zone2/actions/runs/44470731479). Build and verify = success; Deploy to GitHub Pages = success. The legacy "pages build and deployment" run 44470730600 also succeeded.
+- **Live check:** https://kanlerxz87-cyber.github.io/Zone2/ and `guides/thermometer-for-air-fryer.html`, fetched after deploy. They serve the merged build: product-led front page, disclosure strip under the masthead, tagged `(paid link)` buttons with the FSIS table, and the new guides.
+- **Integrated without discarding anyone's work:** #165 (T65), #166 (cf98ff65), #167 (T64 thermometer desk), and the #168/#169 close-outs.
+- **Still waiting on the owner (none blocks):** Q-T50-02 (confirm the tag in Associates Central); FLG-003 (test one Special Link, not claimed invalid); F-44 / Q-T63-03 (ThermoMaven newer model); Q-T63-05 (Search Console); F-47 (the brief cites Zone3 IDs); SG-T63-06 (canonical page for each duplicated thermometer question).
+- **Open request to `6ce606cb` (PR #162):** rebase onto main, where pages.yml and the `ci_replay` guards already contain your fix.
