@@ -8306,8 +8306,9 @@ suites must pass on the combined tree before the PR opens; the site is never mer
 
 ## T76 close-out — session arena/47786492-zone2 (47786492) — 2026-11-19 (UTC)
 
-**Status: DONE → merged to main.** Closed RQ-15 / S-19 (the three-question "which one is for you"
-chooser above the comparison table), answered BQ2-06, resolved FL-05.
+**Status: DONE → merged to main (PR #205, merge commit f06bfa6), Pages deployed.** Closed RQ-15 / S-19
+(the three-question "which one is for you" chooser above the comparison table), answered BQ2-06, resolved
+FL-05.
 
 **What was built.** `tools/publication.py`: a `CHOOSER` data block and a `chooser()` renderer, placed
 in `compare()` immediately above `<section id="compare-list">`. The section carries the phrase
@@ -8359,3 +8360,11 @@ the combined tree via `tools/build_board.py`. No work from either session was di
 (RQ-15, BQ2-06, FL-05) applied cleanly on top of main's data. The task-ID collision on T76 is disambiguated
 by session ID; the other sessions' work is T76-labelled in their own records and this session's T76 is the
 RQ-15/S-19 chooser.
+
+**PR → merge → deploy.** [PR #205](https://github.com/kanlerxz87-cyber/Zone2/pull/205)
+\"T76 (47786492): build the three-question 'which one is for you' chooser above the comparison table
+(RQ-15/S-19)\" — created 2026-11-19, **merged without waiting 2026-11-19T22:15:40Z, merge commit
+`f06bfa60764ac060e9913af10b1d58cf227bd32a`**. Pages deploy: workflow \"Build, verify and deploy\" run
+44626911173 → **success** (2m13s); \"pages build and deployment\" run 44626910443 → **success**; Pages API
+`status: built`. Live `main` `compare.html` re-read via the API: `data-chooser` and the phrase
+\"Which one is for you\" are present on the deployed site. **Status: DONE, merged, deployed.**
