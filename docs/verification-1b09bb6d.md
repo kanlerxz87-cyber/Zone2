@@ -7,6 +7,12 @@ This record covers the final integration session: the two stale open pull reques
 and integrated, the combined tree was re-verified line by line against official sources read **today**,
 every repository gate was re-run, and the release was published.
 
+**Current-artifact supersession note — T76 (2026-11-19).** This is a dated T72 record, not the
+current measurement for later packaged outputs. The current robots/sitemap, feed, Workspace-link,
+paid-link-target, table-label, and product-page comparisons were remeasured against `_site/` in
+[`docs/verification-t76.md`](verification-t76.md). In particular, the current artifact has 18
+indexable and 212 noindex pages; the older 68-link and 142×18 paid-link figures are not current.
+
 ---
 
 ## 1. What this session did, in order

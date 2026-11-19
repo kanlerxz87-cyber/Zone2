@@ -45,13 +45,12 @@
 Constraints that are not negotiable: the Associates disclosure sentence appears above the fold and again in the footer on every page; every product link is sponsored-tagged; no price is printed; no number is invented.
 
 Open decisions this brief depends on (each must be answered before the matching change):
-  - DR-01 (Findability): Two different shop home pages are live. Which one should exist? Recommendation: option A — shop/index.html is the page 52 pages already point at, and the page whose children (categories, per-product pages, shop-local guides) form a coherent section. Making the sitemap advertise the page nobody links to is backwards.
+  - DR-01 (Findability): Two different shop home pages are live. Which one should exist? Recommendation: option A — Outside repeated chrome, 17 main-content pages point to shop/index.html versus 2 to shop.html, and the shop-local categories and product pages sit under shop/index.html. Keeping it is the least disruptive recommendation; the canonical URL remains an owner decision.
   - DR-02 (Findability): The deepest verified content on this site is invisible to search engines. Should it be indexed? Recommendation: option A — The noindex boundary was drawn to keep operator dashboards out of search, and it does that. But it also swept up the most substantive reader pages, which is the opposite of the intent. The sourcing gates already exist and run over shop/**.
-  - DR-03 (Findability): Three feeds are live, and all five questions in the root feed are repeated in the shop feed at different URLs. Which feed is the site&#x27;s feed? Recommendation: option A — A reader who subscribes to the site&#x27;s feed should not receive the same question twice under different URLs. One feed and one URL per guide is the version that survives contact with a search engine.
+  - DR-03 (Findability): The packaged site exposes three RSS URLs, each serving the same five root-guide items. Which endpoint should it advertise, or should each endpoint carry distinct content? Recommendation: option A — The package currently publishes the same five-item document at three URLs. One advertised root feed is the simplest recommendation; if the owner wants section feeds, the build should generate genuinely distinct item sets. No endpoint is removed by this record.
   - DR-04 (Craft): Two chrome systems are live on one site. Should the shop pages look like the publication? Recommendation: option A — The root publication chrome is the better of the two and is what the brief asked for when it said the site should read like a publication. Two systems is the most expensive option over time, and it is already producing visible inconsistency between neighbouring pages.
-  - DR-05 (Findability): Four shop guides repeat four root guides at different URLs. Which one survives for each pair? Recommendation: option A — For basket-or-oven the root guide is longer and better sourced. For the capacity checklist the shop version carries the row-level table. Measuring pair by pair is cheap; guessing is not.
-  - DR-06 (Craft): Every reader page ships 68 internal dashboard links in the menu and again in the footer. How many does a reader need? Recommendation: option A — The brief&#x27;s own requirement is that dashboards stay reachable from the footer and a single navigation group. A 68-item disclosure in the masthead satisfies the letter and defeats the purpose.
-  - DR-07 (Craft): The link that earns money is an 18-pixel-tall text link on a phone. Should it be a button? Recommendation: option B — The site already passes the success criterion, so this is craft rather than compliance. Padding to 44px costs one declaration and makes the money link easy to hit.
+  - DR-05 (Findability): Four shop guides repeat four root guides at different URLs. Which one survives for each pair? Recommendation: option A — A one-URL-per-question rule avoids maintaining overlapping entry points, but the longer page is not automatically the better one. Compare the sourced evidence and reader task pair by pair before selecting the retained page and redirecting its counterpart; this recommendation does not apply any redirect.
+  - DR-06 (Craft): Each current publication page places 70 Workspace links in the masthead group and repeats the same 70 in the footer. How many does a reader need? Recommendation: option A — The brief asks that dashboards remain reachable from the footer and a simple navigation group. A 70-link disclosure in the masthead satisfies literal reachability but overwhelms the reader-facing navigation.
   - DR-08 (Findability): Which buyer questions bring readers? Nobody can answer that yet. Recommendation: option A — The brief asks that the next topic be chosen from measured queries rather than instinct. Without a verified property there is nothing to choose from, and no honest way to report progress.
   - DR-09 (Trust): The site writes confidently about five products nobody has confirmed were the ones the brief meant. Recommendation: option A — This is the highest-value five minutes available to the project. Every product page currently rests on an observation, and the site says so on every one of them.
   - DR-10 (Trust): The site carefully says it has not tested anything. Is that permanently true? Recommendation: option C — Buying five products before the site has a single measured visitor is the wrong order. Staying source-led is honest and already disclosed; the question is whether it is a strategy or a stopgap, and that should be written down.
@@ -78,14 +77,14 @@ Open decisions this brief depends on (each must be answered before the matching 
       <td><a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Consolidate duplicate URLs (canonical) ↗</a></td>
     </tr><tr id="DR-02">
       <th scope="row"><code>DR-02</code></th>
-      <td>Index the product and buying-guide pages that currently answer nothing to search</td>
+      <td>Decide which product and buying-guide URLs should be indexable</td>
       <td>The deepest verified content on this site is invisible to search engines. Should it be indexed?</td>
       <td>A</td>
       <td><a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Build and submit a sitemap ↗</a></td>
     </tr><tr id="DR-03">
       <th scope="row"><code>DR-03</code></th>
-      <td>Pick one feed, and stop publishing the same five questions at ten URLs</td>
-      <td>Three feeds are live, and all five questions in the root feed are repeated in the shop feed at different URLs. Which feed is the site&#x27;s feed?</td>
+      <td>Choose one feed endpoint or make the three feeds distinct</td>
+      <td>The packaged site exposes three RSS URLs, each serving the same five root-guide items. Which endpoint should it advertise, or should each endpoint carry distinct content?</td>
       <td>A</td>
       <td><a class="pb-src" href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Consolidate duplicate URLs (canonical) ↗</a></td>
     </tr><tr id="DR-04">
@@ -96,22 +95,16 @@ Open decisions this brief depends on (each must be answered before the matching 
       <td><a class="pb-src" href="https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" target="_blank" rel="nofollow noopener noreferrer">FTC — Disclosures 101 for Social Media Influencers ↗</a></td>
     </tr><tr id="DR-05">
       <th scope="row"><code>DR-05</code></th>
-      <td>Keep the duplicate shop-local guides only where they beat the root guide</td>
+      <td>Decide which URL should answer each overlapping guide question</td>
       <td>Four shop guides repeat four root guides at different URLs. Which one survives for each pair?</td>
       <td>A</td>
-      <td><a class="pb-src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Helpful, reliable, people-first content ↗</a></td>
+      <td><a class="pb-src" href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Spam policies: thin affiliation ↗</a></td>
     </tr><tr id="DR-06">
       <th scope="row"><code>DR-06</code></th>
-      <td>Cut per-page dashboard link count from 68 to a footer-only list</td>
-      <td>Every reader page ships 68 internal dashboard links in the menu and again in the footer. How many does a reader need?</td>
+      <td>Cut the per-page Workspace link count from 70 to a footer-only list</td>
+      <td>Each current publication page places 70 Workspace links in the masthead group and repeats the same 70 in the footer. How many does a reader need?</td>
       <td>A</td>
       <td><a class="pb-src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Helpful, reliable, people-first content ↗</a></td>
-    </tr><tr id="DR-07">
-      <th scope="row"><code>DR-07</code></th>
-      <td>Give the paid-link button a real tap target</td>
-      <td>The link that earns money is an 18-pixel-tall text link on a phone. Should it be a button?</td>
-      <td>B</td>
-      <td><a class="pb-src" href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank" rel="nofollow noopener noreferrer">W3C — Understanding SC 2.5.8 Target Size (Minimum), Level AA ↗</a></td>
     </tr><tr id="DR-08">
       <th scope="row"><code>DR-08</code></th>
       <td>Verify the site in Search Console before choosing another topic</td>
@@ -141,7 +134,7 @@ Open decisions this brief depends on (each must be answered before the matching 
       <td>Let the header navigation wrap instead of hiding &#x27;Our approach&#x27; on phones</td>
       <td>One of four reader links disappears below 550px. Should all four fit?</td>
       <td>C</td>
-      <td><a class="pb-src" href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank" rel="nofollow noopener noreferrer">W3C — Understanding SC 2.5.8 Target Size (Minimum), Level AA ↗</a></td>
+      <td><a class="pb-src" href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank" rel="nofollow noopener noreferrer">Google Search Central — Helpful, reliable, people-first content ↗</a></td>
     </tr></tbody>
   </table></div>
   <p><a class="cn-text-link" href="decision-room.html">Read the full decision room with the evidence for each row <span aria-hidden="true">→</span></a></p>

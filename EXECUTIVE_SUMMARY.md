@@ -1855,14 +1855,28 @@ that Food is Safe"; "Check Manufacturer's Instructions"). Every link is on the
 [sources page](https://kanlerxz87-cyber.github.io/Zone2/sources.html); the method and the raw counts
 are in [`docs/verification-1b09bb6d.md`](docs/verification-1b09bb6d.md).
 
-**Still open, and published for review.** Six decisions from the Decision Room remain open or
-advisory: two shop front doors; 18 indexable pages against 212 noindex, with the product pages that
-carry the sourced specification rows among the noindex set; three feeds publishing the same five
-question guides at ten URLs; 68 dashboard links repeated twice per page; the 142×18 px paid-link
-control on a phone (which *passes* SC 2.5.8 on the spacing exception and is recorded as craft, not
-compliance); and the unresolved compliance status of the five supplied short links. All six carry the
-official source that establishes them, sit on
-[Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/flagged.html), and **block nothing**.
-The intended-ASIN confirmations for all five links stay **blank**; the observed redirect targets stay
-in a **separate field**; no price, rating, review count, search-volume, popularity, conversion or
-revenue figure is printed anywhere.
+**Current status after the T76 integration remeasurement.** The Decision Room has **9 open, 2
+blocked on an owner account or record, and 2 fixed and re-verified**, with 24 registered sources. The packaged artifact has 18
+indexable pages and 212 noindex pages. Its three RSS endpoints serve byte-identical five-item feeds;
+the source-tree feed files have 5, 6 and 16 items before packaging. Five overlapping guide topics
+remain at two HTML URLs apiece. The Workspace menu and footer each contain the same 70 links on the
+37 current reader pages (200 homepage anchors in Chromium at 390×844). All 29 paid-link controls
+measured across eight packaged pages are 141.546875×44 CSS px with a 44px minimum; SC 2.5.8's
+spacing exception is not needed for these targets. These decisions, with source and method links,
+remain on [Flagged for Review](https://kanlerxz87-cyber.github.io/Zone2/flagged.html); two owner-only
+items remain blocked. The 14-page table-label recheck found 173 body row headers and no clipping,
+uppercase body labels or `nowrap`. The current packaged publication contract checks 1,463 product
+anchors and 172 factual rows; these supersede T72's then-current totals. Full methods and page-pair counts are in
+[`docs/verification-t76.md`](docs/verification-t76.md). The intended-ASIN confirmations for all five
+links stay **blank**; observed redirect targets remain in a **separate field**; no price, rating,
+review count, search-volume, popularity, conversion or revenue figure is inferred.
+
+## Addendum — 2026-11-19 (session `arena/ed2307a8-zone2`, T76): polished-marketing decision pack
+
+**What changed.** The decision board gained a polished-marketing pack, published as proposals only. Six new suggestions (SG-T76-01..06) cover: a reusable polished-marketing design prompt for the reader pages; a trendy-article calendar that never calls a topic trending without evidence; a findability plan (one indexable reader site, sitemap and feed, Search Console verification); decision aids (chooser, comparison and trade-off tables from verified specs); an anti-slop voice, authorship and imagery standard; and a missing-information discovery sprint. Six new questions (Q-T76-01..06) state what is known, what is missing, and the single action that would close each gap: design approval, measured demand, Search Console verification, intended-product confirmation, accountable editor, and discovery order. Every new row reads Proposed — awaiting owner decision and Implemented No. No verified value changed; no suggestion was implemented from this pack.
+
+**Current executive summary.** Counter Notes is a product-led kitchen publication: five supplied links resolve to three air-fryer listings and two thermometer listings, each with source-linked specifications, question-shaped guides, a format comparison, and a chooser. Disclosure sits above the fold on every page and repeats in the footer; every product link is marked sponsored and carries the owner-supplied tag. No current prices, star ratings, popularity claims, tested rankings or sales forecasts are published. Guide topics are editorial hypotheses until measured query data exists. The AI-powered platform behind the publication automates deterministic builds, source and intent gates, and aggregate measurement, but account actions, first-party reports and product-intent confirmation still require evidence the repository does not hold.
+
+**What remains unknown.** Intended-product confirmation for all five links; enrolled Associates workflow and report validation for the supplied tag; Search Console verification and query export; a permanent authorized measurement host; a named editor and corrections contact; and a jurisdictional privacy determination. Observed redirect targets remain separate from intent. The exact compliance status of the supplied short links remains unresolved; a missing tag in a fetched redirect proves neither invalidity nor attribution.
+
+**Evidence.** `docs/verification-ed2307a8.md` holds the sources re-read on 2026-11-19, the line-by-line checks, the gate results, and the irregularities left open. Review the pack on the [suggestions board](https://kanlerxz87-cyber.github.io/Zone2/suggestions.html) and the [questions register](https://kanlerxz87-cyber.github.io/Zone2/questions.html) before choosing a path.

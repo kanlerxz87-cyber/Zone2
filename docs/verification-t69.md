@@ -10,6 +10,13 @@ Every claim on `decision-room.html` links back to one of the anchors below. Each
 the method, the exact counts, and how to reproduce the measurement, so none of the numbers on
 that page has to be taken on trust.
 
+**Supersession note — T76 remeasurement (2026-11-19).** The current packaged artifact was rebuilt
+and checked again after later changes reached `main`. The 18-indexable / 212-noindex count is
+reconfirmed. T69-era figures about shop-content links, RSS output, Workspace links and paid-link
+height are historical measurements, not current release values; the current results are in
+[`docs/verification-t76.md`](verification-t76.md) (M2–M5). The table-label repair is also rechecked
+there (M1). Current Decision Room and Flagged-for-Review rows cite the T76 record for those claims.
+
 ---
 
 ## M1 — the legacy table rules were clipping publication row labels

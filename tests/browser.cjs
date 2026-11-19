@@ -47,7 +47,16 @@ async function run() {
     service=spawn('python3',['-m','measurement.collector','--db',db,'serve','--preview','--port','8765'],{cwd:root,env:process.env,stdio:['ignore','pipe','pipe']});
     await ready(service);
   }
-  browser=await playwright.launch({executablePath,headless:true,args:chromium.args.filter(a=>!a.includes('disable-web-security')&&!a.includes('allow-running-insecure-content')&&a!=='--single-process'),env:{...process.env,LD_LIBRARY_PATH:path.join(lib,'lib')+(process.env.LD_LIBRARY_PATH?':'+process.env.LD_LIBRARY_PATH:'')}});
+  const launchOptions={executablePath,headless:true,args:chromium.args.filter(a=>!a.includes('disable-web-security')&&!a.includes('allow-running-insecure-content')&&a!=='--single-process'),env:{...process.env,LD_LIBRARY_PATH:path.join(lib,'lib')+(process.env.LD_LIBRARY_PATH?':'+process.env.LD_LIBRARY_PATH:'')}};
+  for(let attempt=1;attempt<=3;attempt++){
+    try{browser=await playwright.launch(launchOptions);break;}
+    catch(err){
+      // The packaged headless binary can sporadically SIGSEGV before Chromium starts in this
+      // minimal sandbox. Retry startup only; once the browser is up, every test failure is fatal.
+      if(!/SIGSEGV/.test(String(err))||attempt===3)throw err;
+      process.stderr.write('Chromium startup SIGSEGV; retrying launch ('+attempt+'/2)\n');
+    }
+  }
   summary.browser_version=browser.version();
   const c=await context({viewport:{width:1440,height:1000}});
   const page=await c.newPage();
@@ -83,6 +92,16 @@ async function run() {
           accessibility.push(rel+' axe violations: '+axe.violations.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(',')).join('; '));
         }
         summary.accessibility_pages++;
+        const retailerTargets=await page.locator('a.cn-retailer-link').evaluateAll(as=>as.map(a=>{
+          const r=a.getBoundingClientRect();
+          return {w:r.width,h:r.height,minHeight:getComputedStyle(a).minHeight,sponsored:a.relList.contains('sponsored')};
+        }));
+        assert(retailerTargets.every(x=>x.w>=44&&x.h>=44&&x.minHeight==='44px'&&x.sponsored),rel+' paid-link target below the T76 44px rule');
+        const tableLabels=await page.locator('.cn-table tbody th').evaluateAll(xs=>xs.map(x=>{
+          const s=getComputedStyle(x);
+          return {clipped:x.scrollWidth>x.clientWidth+1||x.scrollHeight>x.clientHeight+1,upper:s.textTransform==='uppercase',nowrap:s.whiteSpace==='nowrap'};
+        }));
+        assert(tableLabels.every(x=>!x.clipped&&!x.upper&&!x.nowrap),rel+' publication table body row label is clipped or incorrectly transformed');
       }
       if(rel==='index.html')await page.screenshot({path:path.join(scratch,'home-'+viewport.width+'.png'),fullPage:true});
     }
@@ -101,10 +120,29 @@ async function run() {
     assert(visible,rel+' archive disclosure not above-fold/visible');
     const unqualified=await page.evaluate(()=>Array.from(document.querySelectorAll('a[href]')).filter(a=>/^(?:www\.)?amazon\.com$|^link\.amazon$|^amzn\.to$/.test(new URL(a.href).hostname)&&!a.relList.contains('sponsored')).map(a=>a.href));
     assert.deepEqual(unqualified,[],rel+' runtime product links not sponsored');
+    const tableLabels=await page.locator('.cn-table tbody th').evaluateAll(xs=>xs.map(x=>{
+      const s=getComputedStyle(x);
+      return {clipped:x.scrollWidth>x.clientWidth+1||x.scrollHeight>x.clientHeight+1,upper:s.textTransform==='uppercase',nowrap:s.whiteSpace==='nowrap'};
+    }));
+    assert(tableLabels.every(x=>!x.clipped&&!x.upper&&!x.nowrap),rel+' archived publication table body row label is clipped or incorrectly transformed');
     summary.viewport_checks++;
   }
   await page.setViewportSize({width:390,height:844});
   await page.goto(base,{waitUntil:'load'});
+  const homeMeasurements=await page.evaluate(()=>{
+    const hrefs=s=>Array.from(document.querySelectorAll(s+' a[href]')).map(a=>a.getAttribute('href'));
+    const menu=hrefs('.cn-menu-links'),footer=hrefs('.cn-footer-tool-grid');
+    const menuSet=new Set(menu),footerSet=new Set(footer);
+    const intersection=[...menuSet].filter(h=>footerSet.has(h)).length;
+    const links=Array.from(document.querySelectorAll('a.cn-retailer-link')).map(a=>{
+      const r=a.getBoundingClientRect();
+      return {w:r.width,h:r.height,minHeight:getComputedStyle(a).minHeight,sponsored:a.relList.contains('sponsored')};
+    });
+    return {menu:menu.length,menuUnique:menuSet.size,footer:footer.length,footerUnique:footerSet.size,intersection,anchors:document.querySelectorAll('a[href]').length,links};
+  });
+  assert.deepEqual({menu:homeMeasurements.menu,menuUnique:homeMeasurements.menuUnique,footer:homeMeasurements.footer,footerUnique:homeMeasurements.footerUnique,intersection:homeMeasurements.intersection,anchors:homeMeasurements.anchors},{menu:70,menuUnique:70,footer:70,footerUnique:70,intersection:70,anchors:200},'T76 packaged navigation counts at 390px');
+  assert(homeMeasurements.links.every(x=>x.w>=44&&x.h>=44&&x.minHeight==='44px'&&x.sponsored),'T76 mobile retailer controls retain 44px targets and sponsored rel');
+  summary.behavior_checks.push('Workspace links and mobile paid-link targets match the packaged T76 measurements');
   await page.keyboard.press('Tab');
   assert.equal(await page.locator(':focus').textContent(),'Skip to content');
   await page.keyboard.press('Enter');

@@ -73,7 +73,7 @@ def cite(data: dict, sid: str) -> str:
 
 STATUS_LABEL = {
     "open": ("Open — waiting on the owner", "is-open"),
-    "fixed": ("Fixed in this session", "is-fixed"),
+    "fixed": ("Fixed — re-verified", "is-fixed"),
     "blocked": ("Blocked on something this session cannot obtain", "is-blocked"),
 }
 
@@ -142,7 +142,7 @@ def build_room(data: dict) -> str:
         for c in clusters
     )
     q_ref = {"DRQ-01": "GOOG-CANON", "DRQ-02": "GOOG-SITEMAP", "DRQ-03": "GOOG-CANON",
-             "DRQ-04": "FTC-101", "DRQ-05": "GOOG-HELPFUL", "DRQ-06": "W3C-258",
+             "DRQ-04": "FTC-101", "DRQ-05": "GOOG-HELPFUL", "DRQ-06": "GOOG-HELPFUL",
              "DRQ-07": "GOOG-GSC", "DRQ-08": "AMZ-POLICIES", "DRQ-09": "GOOG-HELPFUL",
              "DRQ-10": "AMZ-AGREEMENT"}
     by_id = {d["id"]: d for d in rows}
@@ -161,31 +161,31 @@ def build_room(data: dict) -> str:
     fixed_rows = [d for d in rows if d["status"] == "fixed"]
     fixed_summary = " ".join(
         f"<strong>{e(d['id'])}</strong> — {e(d.get('fixed_note', 'fixed'))}" for d in fixed_rows
-    ) or "No defect was repaired in this session."
+    ) or "No fixed items are recorded."
     words = {1:"One",2:"Two",3:"Three",4:"Four",5:"Five",6:"Six",7:"Seven",8:"Eight",9:"Nine",10:"Ten",
              11:"Eleven",12:"Twelve",13:"Thirteen",14:"Fourteen",15:"Fifteen",16:"Sixteen"}
     numword = words.get(len(rows), str(len(rows)))
     body = f'''<section class="cn-page-intro cn-wrap">
   <p class="cn-eyebrow">DECISION ROOM · {e(data["as_of"])}</p>
   <h1>{numword} choices, each with its evidence in the same box.</h1>
-  <p class="cn-deck">Everything below was measured on the live site or read from an official
-  document before it was written here. Each row shows what the measurement shows, what every
-  option costs, what it gives up, and the one answer that moves it. Nothing on this page applies
-  itself.</p>
+  <p class="cn-deck">Everything below is either measured from the packaged site artifact or read
+  from an official document. Each row links to the relevant measurement or source and shows what
+  every option costs, what it gives up, and the one answer that moves it. Nothing on this page
+  applies itself.</p>
 </section>
 <section class="cn-wrap cn-section cn-section-tight">
   <div class="dr-tally">
     <div><strong>{counts["open"]}</strong><span>waiting on you</span></div>
-    <div><strong>{counts["fixed"]}</strong><span>fixed this session</span></div>
+    <div><strong>{counts["fixed"]}</strong><span>fixed and re-verified</span></div>
     <div><strong>{counts["blocked"]}</strong><span>blocked on an account or record</span></div>
     <div><strong>{len(data["owner_questions"])}</strong><span>questions to answer</span></div>
   </div>
   <h2 class="cn-table-title">How to read this page</h2>
   <ul class="dr-how">{how}</ul>
   <p class="cn-fineprint">Every claim in an evidence list links to its source. Where the source is
-  a measurement this session took, the link is to the dated verification record, which states the
-  method and the raw counts. Where the source is an official document, it is the document itself.
-  Nothing here converts either into a claim about demand, popularity or revenue.</p>
+  a measurement, the link is to the dated verification record, which states the method and raw
+  counts. Where the source is an official document, it is the document itself. Nothing here
+  converts either into a claim about demand, popularity or revenue.</p>
 </section>
 {grouped}
 <section class="cn-wrap cn-section" id="owner-questions">
@@ -204,7 +204,7 @@ def build_room(data: dict) -> str:
   <h2 class="cn-table-title">Answers nobody has to give — the build can work these out</h2>
   <ul class="dr-how">{discoverable}</ul>
   <div class="cn-note">
-    <h2>What this session actually changed</h2>
+    <h2>What is already fixed and re-verified</h2>
     <p>{fixed_summary} Everything else on this page is a proposal awaiting a decision, and says so.</p>
     <p><a class="cn-text-link" href="decision-prompt.html">Read the design brief these decisions feed <span aria-hidden="true">→</span></a></p>
   </div>

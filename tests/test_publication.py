@@ -86,6 +86,17 @@ class ArtifactTests(unittest.TestCase):
         self.assertEqual(stats['indexable_pages'],18)
         self.assertGreater(stats['html_pages'],180)
 
+    def test_publication_table_label_reset_survives_packaging(self):
+        css=(ROOT/'_site'/'assets'/'css'/'publication.css').read_text(encoding='utf-8')
+        self.assertIn(
+            '.cn-table th,.cn-table td{white-space:normal!important;text-transform:none;letter-spacing:normal;overflow-wrap:anywhere}',
+            css,
+        )
+        self.assertIn(
+            '.cn-table thead th{text-transform:uppercase;letter-spacing:.6px;white-space:normal!important}',
+            css,
+        )
+
     def mutate(self,rel,change,expected):
         path=ROOT/'_site'/rel;original=path.read_text()
         try:
